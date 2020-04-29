@@ -92,7 +92,7 @@ struct cbi {
 
       u32 buyfill;
       u32 itemfill;
-      u32 postgamefill;
+      u32 settingsfill;
    } st;
 
    u32 theme;

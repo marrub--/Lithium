@@ -6,256 +6,232 @@
 ##
 ## ---------------------------------------------------------------------------|
 
-== \#ST_PFX_Percent | %
-== \#ST_PFX_Times   | x
-== \#ST_PFX_Minutes | min
-== \#ST_PFX_Of255   | /255
-== \#ST_PFX_Pixels  | px
-== \#ST_PFX_Seconds | s
-== \#ST_PFX_Units   | mu
-== \#ST_PFX_Ticks   | /35th s
+== \#st_suff_perc | %
+== \#st_suff_mult | x
+== \#st_suff_minu | min
+== \#st_suff_byte | /255
+== \#st_suff_pxls | px
+== \#st_suff_secs | s
+== \#st_suff_unit | mu
+== \#st_suff_tick | /35th s
 
-== \#ST_NAME_Unknown | Unknown
+== \#st_name_unknown | Unknown
 
-== \#ST_NAME_LvSys_0 | Auto
-== \#ST_NAME_LvSys_1 | Hybrid
-== \#ST_NAME_LvSys_2 | Manual
+== \#st_name_lvsys_0 | Auto
+== \#st_name_lvsys_1 | Hybrid
+== \#st_name_lvsys_2 | Manual
 
-== \#ST_NAME_ExpBar_0  | None
-== \#ST_NAME_ExpBar_1  | Default Red
-== \#ST_NAME_ExpBar_2  | Tangy
-== \#ST_NAME_ExpBar_3  | Lemonade
-== \#ST_NAME_ExpBar_4  | Chartreuse
-== \#ST_NAME_ExpBar_5  | Forest
-== \#ST_NAME_ExpBar_6  | Mint
-== \#ST_NAME_ExpBar_7  | Sky
-== \#ST_NAME_ExpBar_8  | Comp
-== \#ST_NAME_ExpBar_9  | Deep Purple
-== \#ST_NAME_ExpBar_10 | Fallen Fox
-== \#ST_NAME_ExpBar_11 | Pink
-== \#ST_NAME_ExpBar_12 | More Pink
+== \#st_name_expbar_0  | None
+== \#st_name_expbar_1  | Default Red
+== \#st_name_expbar_2  | Tangy
+== \#st_name_expbar_3  | Lemonade
+== \#st_name_expbar_4  | Chartreuse
+== \#st_name_expbar_5  | Forest
+== \#st_name_expbar_6  | Mint
+== \#st_name_expbar_7  | Sky
+== \#st_name_expbar_8  | Comp
+== \#st_name_expbar_9  | Deep Purple
+== \#st_name_expbar_10 | Fallen Fox
+== \#st_name_expbar_11 | Pink
+== \#st_name_expbar_12 | More Pink
 
-== \#ST_NAME_Color_97  | Brick
-== \#ST_NAME_Color_98  | Tan
-== \#ST_NAME_Color_99  | Grey
-== \#ST_NAME_Color_100 | Green
-== \#ST_NAME_Color_101 | Brown
-== \#ST_NAME_Color_102 | Gold
-== \#ST_NAME_Color_103 | Red
-== \#ST_NAME_Color_104 | Blue
-== \#ST_NAME_Color_105 | Orange
-== \#ST_NAME_Color_106 | White
-== \#ST_NAME_Color_107 | Yellow
-== \#ST_NAME_Color_108 | Default
-== \#ST_NAME_Color_109 | Black
-== \#ST_NAME_Color_110 | Light Blue
-== \#ST_NAME_Color_111 | Cream
-== \#ST_NAME_Color_112 | Olive
-== \#ST_NAME_Color_113 | Dark Green
-== \#ST_NAME_Color_114 | Dark Red
-== \#ST_NAME_Color_115 | Dark Brown
-== \#ST_NAME_Color_116 | Purple
-== \#ST_NAME_Color_117 | Dark Grey
-== \#ST_NAME_Color_118 | Cyan
-== \#ST_NAME_Color_119 | Ice
-== \#ST_NAME_Color_120 | Fire
-== \#ST_NAME_Color_121 | Sapphire
-== \#ST_NAME_Color_122 | Teal
-== \#ST_NAME_Color_123 | $\#CLASS_DARKLORD
-== \#ST_NAME_Color_124 | $\#CLASS_MARINE
-== \#ST_NAME_Color_125 | $\#CLASS_THOTH
-== \#ST_NAME_Color_126 | $\#CLASS_ASSASSIN
-== \#ST_NAME_Color_127 | $\#CLASS_INFORMANT
-== \#ST_NAME_Color_128 | $\#CLASS_CYBERMAGE
-== \#ST_NAME_Color_129 | $\#CLASS_WANDERER
-== \#ST_NAME_Color_130 | Lane Red
-== \#ST_NAME_Color_131 | Lane D. Orange
-== \#ST_NAME_Color_132 | Lane Orange
-== \#ST_NAME_Color_133 | Lane Yellow
-== \#ST_NAME_Color_134 | Lane Y-Green
-== \#ST_NAME_Color_135 | Lane Green
-== \#ST_NAME_Color_136 | Lane Cyan
-== \#ST_NAME_Color_137 | Lane Blue
-== \#ST_NAME_Color_138 | Lane Indigo
-== \#ST_NAME_Color_139 | Lane Purple
-== \#ST_NAME_Color_140 | Lane Lavendar
-== \#ST_NAME_Color_141 | Lane Pink
-== \#ST_NAME_Color_142 | Lane Hot Pink
+== \#st_name_color_97  | Brick
+== \#st_name_color_98  | Tan
+== \#st_name_color_99  | Grey
+== \#st_name_color_100 | Green
+== \#st_name_color_101 | Brown
+== \#st_name_color_102 | Gold
+== \#st_name_color_103 | Red
+== \#st_name_color_104 | Blue
+== \#st_name_color_105 | Orange
+== \#st_name_color_106 | White
+== \#st_name_color_107 | Yellow
+== \#st_name_color_108 | Default
+== \#st_name_color_109 | Black
+== \#st_name_color_110 | Light Blue
+== \#st_name_color_111 | Cream
+== \#st_name_color_112 | Olive
+== \#st_name_color_113 | Dark Green
+== \#st_name_color_114 | Dark Red
+== \#st_name_color_115 | Dark Brown
+== \#st_name_color_116 | Purple
+== \#st_name_color_117 | Dark Grey
+== \#st_name_color_118 | Cyan
+== \#st_name_color_119 | Ice
+== \#st_name_color_120 | Fire
+== \#st_name_color_121 | Sapphire
+== \#st_name_color_122 | Teal
+== \#st_name_color_123 | $\#CLASS_DARKLORD
+== \#st_name_color_124 | $\#CLASS_MARINE
+== \#st_name_color_125 | $\#CLASS_THOTH
+== \#st_name_color_126 | $\#CLASS_ASSASSIN
+== \#st_name_color_127 | $\#CLASS_INFORMANT
+== \#st_name_color_128 | $\#CLASS_CYBERMAGE
+== \#st_name_color_129 | $\#CLASS_WANDERER
+== \#st_name_color_130 | Lane Red
+== \#st_name_color_131 | Lane D. Orange
+== \#st_name_color_132 | Lane Orange
+== \#st_name_color_133 | Lane Yellow
+== \#st_name_color_134 | Lane Y-Green
+== \#st_name_color_135 | Lane Green
+== \#st_name_color_136 | Lane Cyan
+== \#st_name_color_137 | Lane Blue
+== \#st_name_color_138 | Lane Indigo
+== \#st_name_color_139 | Lane Purple
+== \#st_name_color_140 | Lane Lavendar
+== \#st_name_color_141 | Lane Pink
+== \#st_name_color_142 | Lane Hot Pink
 
-== \#ST_NAME_Cursor_0 | Green
-== \#ST_NAME_Cursor_1 | Pink
-== \#ST_NAME_Cursor_2 | Blue
-== \#ST_NAME_Cursor_3 | Orange
-== \#ST_NAME_Cursor_4 | Red
-== \#ST_NAME_Cursor_5 | White
-== \#ST_NAME_Cursor_6 | Outline
-== \#ST_NAME_Cursor_7 | Outline (Tail)
-== \#ST_NAME_Cursor_8 | Inv. Outline
-== \#ST_NAME_Cursor_9 | Inv. Outline (Tail)
+== \#st_name_cursor_0 | Green
+== \#st_name_cursor_1 | Pink
+== \#st_name_cursor_2 | Blue
+== \#st_name_cursor_3 | Orange
+== \#st_name_cursor_4 | Red
+== \#st_name_cursor_5 | White
+== \#st_name_cursor_6 | Outline
+== \#st_name_cursor_7 | Outline (Tail)
+== \#st_name_cursor_8 | Inv. Outline
+== \#st_name_cursor_9 | Inv. Outline (Tail)
 
-== \#ST_NAME_XHair_0 | Cross
-== \#ST_NAME_XHair_1 | Circle
-== \#ST_NAME_XHair_2 | Delta
-== \#ST_NAME_XHair_3 | Oval
-== \#ST_NAME_XHair_4 | Basic
-== \#ST_NAME_XHair_5 | Delear
-== \#ST_NAME_XHair_6 | Finirentur
-== \#ST_NAME_XHair_7 | Angle
-== \#ST_NAME_XHair_8 | Dot
-== \#ST_NAME_XHair_9 | X+
+== \#st_name_xhair_0 | Cross
+== \#st_name_xhair_1 | Circle
+== \#st_name_xhair_2 | Delta
+== \#st_name_xhair_3 | Oval
+== \#st_name_xhair_4 | Basic
+== \#st_name_xhair_5 | Delear
+== \#st_name_xhair_6 | Finirentur
+== \#st_name_xhair_7 | Angle
+== \#st_name_xhair_8 | Dot
+== \#st_name_xhair_9 | X+
 
-== \#ST_NAME_JpFont_0 | Misaki Gothic
-== \#ST_NAME_JpFont_1 | Misaki Mincho
-== \#ST_NAME_JpFont_2 | k6x8
-== \#ST_NAME_JpFont_3 | jiskan16
+== \#st_name_jpfont_0 | Misaki Gothic
+== \#st_name_jpfont_1 | Misaki Mincho
+== \#st_name_jpfont_2 | k6x8
+== \#st_name_jpfont_3 | jiskan16
 
-== \#ST_NAME_Theme_0 | Green
-== \#ST_NAME_Theme_1 | Rose Pink
-== \#ST_NAME_Theme_2 | Umi Blue
-== \#ST_NAME_Theme_3 | Ender Red
-== \#ST_NAME_Theme_4 | Orange
-== \#ST_NAME_Theme_5 | Grey
-== \#ST_NAME_Theme_6 | Basilissa
-== \#ST_NAME_Theme_7 | Ghost
-== \#ST_NAME_Theme_8 | Windows XP
-== \#ST_NAME_Theme_9 | DONKEY KONG
+== \#st_name_theme_0 | Green
+== \#st_name_theme_1 | Rose Pink
+== \#st_name_theme_2 | Umi Blue
+== \#st_name_theme_3 | Ender Red
+== \#st_name_theme_4 | Orange
+== \#st_name_theme_5 | Grey
+== \#st_name_theme_6 | Basilissa
+== \#st_name_theme_7 | Ghost
+== \#st_name_theme_8 | Windows XP
+== \#st_name_theme_9 | DONKEY KONG
 
-== \#stx_gameplay | Gameplay
+== \#st_labl_gui | GUI
+== \#st_labl_hud | HUD
+== \#st_labl_itm | Items
+== \#st_labl_lit | Flashlight
+== \#st_labl_log | Log
+== \#st_labl_pgm | Post-game
+== \#st_labl_ply | Player
+== \#st_labl_wep | Weapons
+== \#st_labl_wld | World
 
-== \#player_lvsys    | Level-up system
-== \#sv_difficulty   | Difficulty base
-== \#sv_scoremul     | Score multiplier
-== \#sv_revenge      | Explode on death
-== \#sv_autosave     | Autosave interval
-== \#sv_nofullammo   | Don't pick up ammo when full
-== \#sv_noscoreammo  | Don't give score when picking up ammo
-== \#sv_wepdrop      | Drop weapons from zombies
-== \#sv_nobosses     | No phantoms
-== \#sv_nobossdrop   | Start with phantom rewards
-== \#sv_minhealth    | Minimum health on map start
+== \#st_labl_boss_1 | If you are sensitive to suggestion or otherwise
+== \#st_labl_boss_2 | made uncomfortable by threats, please disable
+== \#st_labl_boss_3 | boss dialogues!
 
-== \#stx_autogroups | Auto-groups
+== \#st_labl_postgame_1 | \cgWarning:\c- Post-game content can
+== \#st_labl_postgame_2 | cause saves to be effectively deleted,
+== \#st_labl_postgame_3 | and will have \cipermanent repercussions\c-.
+== \#st_labl_postgame_4 | Only enable it if you really want more.
 
-== \#stx_autobuy_1 | Automatically buy \caSet 1
-== \#stx_autobuy_2 | Automatically buy \cnSet 2
-== \#stx_autobuy_3 | Automatically buy \cdSet 3
-== \#stx_autobuy_4 | Automatically buy \cfSet 4
+== \#st_labl_jp_1 | To use Japanese text,
+== \#st_labl_jp_2 | type "language jp" into the console
+== \#st_labl_jp_3 | and restart the game.
 
-== \#stx_gui | GUI
-
-== \#gui_xmul      | Horizontal cursor speed
-== \#gui_ymul      | Vertical cursor speed
-== \#gui_theme     | Interface theme
-== \#gui_cursor    | Cursor
-== \#gui_defcr     | Default text color
-== \#gui_buyfiller | Click protection for buying items
-== \#gui_jpfont    | Japanese font
-
-== \#stx_jp_0 |
-== \#stx_jp_1 | To use Japanese text,
-== \#stx_jp_2 | type "language jp" into the console
-== \#stx_jp_3 | and restart the game.
-
-== \#stx_player | Player
-
-== \#player_damagebobmul | Damage bob multiplier
-== \#player_damagebob    | Bob view when damaged
-== \#player_footstepvol  | Footstep volume
-== \#player_viewtilt     | View tilt when strafing
-== \#player_scorelog     | Log score gained
-== \#player_scoresound   | Play a sound when score is gained
-== \#player_resultssound | Play sounds on the results screen
-== \#player_invertmouse  | Invert mouse in network games
-== \#player_rainshader   | Enable rain shader
-== \#player_altinvuln    | Alternate invulnerability palette
-== \#player_bosstexts    | Enable boss dialogues
-== \#stx_done_intro      | Don't play intro on next game start
-
-== \#stx_boss_0 |
-== \#stx_boss_1 | If you are sensitive to suggestion or otherwise
-== \#stx_boss_2 | made uncomfortable by threats, please disable
-== \#stx_boss_3 | boss dialogues!
-
-== \#stx_light | Flashlight
-
-== \#light_battery | Battery
-== \#light_regen   | Battery regeneration
-== \#light_r       | Red intensity
-== \#light_g       | Green intensity
-== \#light_b       | Blue intensity
-== \#light_radius  | Radius
-
-== \#stx_items | Items
-
-== \#player_teleshop      | Teleport in bought items and upgrades
-== \#player_stupidpickups | Silly pickup messages
-== \#player_ammolog       | Log ammo pickups
-== \#player_brightweps    | Bright weapon pickups
-== \#player_noitemfx      | No item effects
-
-== \#stx_weapons | Weapons
-
-== \#weapons_zoomfactor     | Scope zoom factor
-== \#weapons_scopealpha     | Scope opacity
+== \#gui_buyfiller          | Click protection for buying items
+== \#gui_cursor             | Cursor
+== \#gui_defcr              | Default text color
+== \#gui_jpfont             | Japanese font
+== \#gui_theme              | Interface theme
+== \#gui_xmul               | Horizontal cursor speed
+== \#gui_ymul               | Vertical cursor speed
+== \#hud_expbar             | Show experience bar
+== \#hud_logfromtop         | Show log at the top of the screen
+== \#hud_logsize            | Log size
+== \#hud_showarmorind       | Show reactive armor indicator
+== \#hud_showdamage         | Show damage numbers
+== \#hud_showlog            | Show log
+== \#hud_showlvl            | Show level
+== \#hud_showscore          | Show score
+== \#hud_showweapons        | Show weapons
+== \#light_b                | Blue intensity
+== \#light_battery          | Battery
+== \#light_g                | Green intensity
+== \#light_r                | Red intensity
+== \#light_radius           | Radius
+== \#light_regen            | Battery regeneration
+== \#player_altinvuln       | Alternate invulnerability palette
+== \#player_ammolog         | Log ammo pickups
+== \#player_bosstexts       | Enable boss dialogues
+== \#player_brightweps      | Bright weapon pickups
+== \#player_damagebob       | Bob view when damaged
+== \#player_damagebobmul    | Damage bob multiplier
+== \#player_footstepvol     | Footstep volume
+== \#player_invertmouse     | Invert mouse in network games
+== \#player_lvsys           | Level-up system
+== \#player_noitemfx        | No item effects
+== \#player_rainshader      | Enable rain shader
+== \#player_resultssound    | Play sounds on the results screen
+== \#player_scorelog        | Log score gained
+== \#player_scoresound      | Play a sound when score is gained
+== \#player_stupidpickups   | Silly pickup messages
+== \#player_teleshop        | Teleport in bought items and upgrades
+== \#player_viewtilt        | View tilt when strafing
+== \#scanner_altfont        | V. Scan. Alternate font
+== \#scanner_bar            | V. Scan. Health bar
+== \#scanner_color          | V. Scan. Color
+== \#scanner_slide          | V. Scan. Slide to target
+== \#scanner_xoffs          | V. Scan. Horizontal offset
+== \#scanner_yoffs          | V. Scan. Vertical offset
+== \#st_autobuy_1           | Automatically buy \caSet 1
+== \#st_autobuy_2           | Automatically buy \cnSet 2
+== \#st_autobuy_3           | Automatically buy \cdSet 3
+== \#st_autobuy_4           | Automatically buy \cfSet 4
+== \#st_done_intro          | Don't play intro on next game start
+== \#sv_autosave            | Autosave interval
+== \#sv_difficulty          | Difficulty base
+== \#sv_lessparticles       | Less particles
+== \#sv_minhealth           | Minimum health on map start
+== \#sv_nobossdrop          | Start with phantom rewards
+== \#sv_nobosses            | No phantoms
+== \#sv_nofullammo          | Don't pick up ammo when full
+== \#sv_noscoreammo         | Don't give score when picking up ammo
+== \#sv_postgame            | Enable post-game content
+== \#sv_rain                | Rain in outside areas
+== \#sv_revenge             | Explode on death
+== \#sv_scoremul            | Score multiplier
+== \#sv_sky                 | Replace skies
+== \#sv_wepdrop             | Drop weapons from zombies
 == \#weapons_alpha          | Weapon opacity
-== \#weapons_recoil         | Visual recoil amount
-== \#weapons_reloadbob      | Reload bobbing amount
-== \#weapons_slot3ammo      | Slot 3 weapons take ammo
-== \#weapons_reducedsg      | Reduced shotgun sound
-== \#weapons_riflescope     | Modal Rifle scope
-== \#weapons_riflemodeclear | Clear rifle mode on switch
-== \#weapons_magicselanims  | Magic selection animations
-== \#weapons_ricochetvol    | Ricochet volume
-== \#weapons_casings        | Emit casings from weapons which use them
-== \#weapons_magdrops       | Drop magazines from weapons
 == \#weapons_casingfadeout  | Casings fade out
+== \#weapons_casings        | Emit casings from weapons which use them
+== \#weapons_fastlazshot    | Better laser shotgun performance
+== \#weapons_magdrops       | Drop magazines from weapons
 == \#weapons_magfadeout     | Magazines fade out
-== \#weapons_reloadempty    | Reload weapons automatically
+== \#weapons_magicselanims  | Magic selection animations
 == \#weapons_nofirebob      | No mid-fire bobbing
 == \#weapons_rainbowlaser   | Rainbow lasers
-== \#weapons_fastlazshot    | Better laser shotgun performance
-
-== \#stx_hud | Heads Up Display
-
-== \#hud_showscore      | Show score
-== \#hud_showlvl        | Show level
-== \#hud_showweapons    | Show weapons
-== \#hud_showlog        | Show log
-== \#hud_logfromtop     | Draw log at the top of the screen
-== \#hud_logsize        | Log size
-== \#hud_showarmorind   | Draw reactive armor indicator
-== \#hud_expbar         | Show experience bar
-== \#xhair_r            | Dynamic crosshair red
-== \#xhair_g            | Dynamic crosshair green
-== \#xhair_b            | Dynamic crosshair blue
-== \#xhair_a            | Dynamic crosshair alpha
-== \#xhair_style        | Dynamic crosshair style
-== \#xhair_enable       | Dynamic crosshair enabled
-== \#xhair_enablejuicer | Dynamic crosshair juicer enabled
-
-== \#stx_vscan | Vital Scanner
-
-== \#scanner_xoffs   | Horizontal offset
-== \#scanner_yoffs   | Vertical offset
-== \#scanner_color   | Color
-== \#scanner_slide   | Slide to target
-== \#scanner_bar     | Health bar
-== \#scanner_altfont | Alternate font
-
-== \#stx_world | World
-
-== \#sv_rain          | Rain in outside areas
-== \#sv_sky           | Replace skies
-== \#sv_lessparticles | Less particles
-
-== \#stx_postgame | Post-game
-
-== \#sv_postgame | Enable post-game content
-
-== \#stx_postgame_0 |
-== \#stx_postgame_1 | \cgWarning:\c- Post-game content can
-== \#stx_postgame_2 | cause saves to be effectively deleted,
-== \#stx_postgame_3 | and will have \cipermanent repercussions\c-.
-== \#stx_postgame_4 | Only enable it if you really want more.
+== \#weapons_recoil         | Visual recoil amount
+== \#weapons_reducedsg      | Reduced shotgun sound
+== \#weapons_reloadbob      | Reload bobbing amount
+== \#weapons_reloadempty    | Reload weapons automatically
+== \#weapons_ricochetvol    | Ricochet volume
+== \#weapons_riflemodeclear | Clear rifle mode on switch
+== \#weapons_riflescope     | Modal Rifle scope
+== \#weapons_scopealpha     | Scope opacity
+== \#weapons_slot3ammo      | Slot 3 weapons take ammo
+== \#weapons_zoomfactor     | Scope zoom factor
+== \#xhair_a                | Dynamic crosshair alpha
+== \#xhair_b                | Dynamic crosshair blue
+== \#xhair_enable           | Dynamic crosshair enabled
+== \#xhair_enablejuicer     | Dynamic crosshair juicer enabled
+== \#xhair_g                | Dynamic crosshair green
+== \#xhair_r                | Dynamic crosshair red
+== \#xhair_style            | Dynamic crosshair style
 
 ## EOF

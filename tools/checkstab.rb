@@ -30,11 +30,7 @@ Dir.glob("source/**/*.{c,h}").each do |f|
    next if f == "source/include/m_stab.h"
    s = open(f).read
    for name in names
-      if name =~ /sc_(.+)/
-         used.add name if s =~ /#{$~[1]}\b/
-      else
-         used.add name if s =~ /\b#{name}\b/
-      end
+      used.add name if s =~ /\b#{name}\b/
    end
 end
 

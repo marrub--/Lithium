@@ -63,7 +63,7 @@ void G_UpdateState(struct gui_state *g, struct player *p)
    g->old = g->cur;
 
    k32 xmul = p->getCVarK(sc_gui_xmul);
-   k32 ymul = p->getCVarK(sc_gui_xmul);
+   k32 ymul = p->getCVarK(sc_gui_ymul);
 
                 g->cx -= p->yawv   * (800.0lk * xmul);
    if(inverted) g->cy += p->pitchv * (800.0lk * ymul);

@@ -28,6 +28,9 @@
 #define l_strndup(s, n) (ACS_BeginPrint(), PrintChars(s, n), ACS_EndStrParam())
 #define l_strdup(s)     (ACS_BeginPrint(), PrintChrSt(s),    ACS_EndStrParam())
 
+#define l_strcpy2(s1, s2) \
+   (ACS_BeginPrint(), PrintChrSt(s1), PrintChrSt(s2), ACS_EndStrParam())
+
 #define fastmemset(p, s, c, ...) \
    for(i32 _i = 0; _i < (c); _i++) ((byte __VA_ARGS__ *)(p))[_i] = s;
 
