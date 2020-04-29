@@ -85,7 +85,7 @@ void P_CBI_TabStatus(struct gui_state *g, struct player *p)
    StatusInfo(g, y += 10, L(hp), StrParam("%i/%i", p->health, p->maxhealth));
 
    if(p->pclass & pcl_magicuser)
-      StatusInfo(g, y += 10, mp, StrParam("%i/%i", p->mana, p->manamax));
+      StatusInfo(g, y += 10, L(mp), StrParam("%i/%i", p->mana, p->manamax));
 
    StatusInfo(g, y += 10, L(exp),  StrParam("%u", p->attr.exp));
    StatusInfo(g, y += 10, L(next), StrParam("%u", p->attr.expnext));
