@@ -28,7 +28,7 @@ static int GetSpawnHealth(Actor mo) {
 }
 
 static void SurgeOfDestiny(Actor mo) {
-   mo.A_GiveInventory("Lith_SurgeProtector");
+   mo.GiveInventory("Lith_SurgeProtector", 1);
    mo.A_Explode(128, 192, 0);
    mo.A_StartSound("weapons/dark/fire", lch_body);
    mo.A_SpawnItemEx("Lith_StarBarrier", 24,0,32, 2,0,2,  50, SXF_NOCHECKPOSITION);

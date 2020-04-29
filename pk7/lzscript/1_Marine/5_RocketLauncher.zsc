@@ -96,7 +96,7 @@ int m_Mode;
 action(Weapon) void Lith_A_FireRocket()
 {
    A_AlertMonsters();
-   A_TakeInventory("Lith_RocketAmmo", 1, TIF_NOTAKEINFINITE);
+   self.TakeInventory("Lith_RocketAmmo", 1, notakeinfinite: true);
    A_StartSound("weapons/rocket/fire", lch_weapon);
    A_FireProjectile("Lith_Rocket");
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
@@ -105,7 +105,7 @@ action(Weapon) void Lith_A_FireRocket()
 action(Weapon) void Lith_A_FireGrenade()
 {
    A_AlertMonsters();
-   A_TakeInventory("Lith_RocketAmmo", 1, TIF_NOTAKEINFINITE);
+   self.TakeInventory("Lith_RocketAmmo", 1, notakeinfinite: true);
    A_StartSound("weapons/rocket/grenade", lch_weapon);
    A_FireProjectile("Lith_RifleGrenade");
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
@@ -114,7 +114,7 @@ action(Weapon) void Lith_A_FireGrenade()
 action(Weapon) void Lith_A_FireHomingRocket()
 {
    A_AlertMonsters();
-   A_TakeInventory("Lith_RocketAmmo", 1, TIF_NOTAKEINFINITE);
+   self.TakeInventory("Lith_RocketAmmo", 1, notakeinfinite: true);
    A_StartSound("weapons/rocket/fire", lch_weapon);
    A_FireProjectile("Lith_HomingRocket");
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
@@ -192,7 +192,7 @@ FireHoming:
 FireUnreal:
    GRLG A 0 {
       ++invoker.m_Loaded;
-      A_TakeInventory("Lith_RocketAmmo", 1, TIF_NOTAKEINFINITE);
+      self.TakeInventory("Lith_RocketAmmo", 1, notakeinfinite: true);
    }
 FireUnrealRefire:
    GRLG A 2;
@@ -204,7 +204,7 @@ FireUnrealLoad:
    GRLR A 1 {
       ++invoker.m_Loaded;
       A_StartSound("weapons/rocket/lock", lch_weapon2);
-      A_TakeInventory("Lith_RocketAmmo", 1, TIF_NOTAKEINFINITE);
+      self.TakeInventory("Lith_RocketAmmo", 1, notakeinfinite: true);
    }
    GRLR BC 2;
    GRLR D 4 A_GunFlash("AltModeChanger", GFF_NOEXTCHANGE);

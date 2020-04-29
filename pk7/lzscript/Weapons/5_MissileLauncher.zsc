@@ -31,7 +31,7 @@ action(Weapon) State Lith_A_FireMissile()
    Lith_A_MagIncr();
    A_AlertMonsters();
    A_StartSound("weapons/missile/fire", lch_weapon);
-   A_TakeInventory("Lith_RocketAmmo", 1, TIF_NOTAKEINFINITE);
+   self.TakeInventory("Lith_RocketAmmo", 1, notakeinfinite: true);
    for(int i = 0; i < 3; i++)
       A_FireProjectile("Lith_MiniMissile", FRandom(-7, 7), false, FRandom(-2, 2), FRandom(-2, 2), FPF_NOAUTOAIM, FRandom(-5, 5));
    A_FireProjectile("Lith_LightProjectileRedShort", 0);

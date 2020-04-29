@@ -171,7 +171,7 @@ action(Weapon) void Lith_A_ReloadFinish() {
 
 action(Weapon) void Lith_A_TakeSlot3OptAmmo(int amt = 1) {
    if(ACS_ExecuteWithResult(lsc_pdata, pdata_slot3ammo)) {
-      A_TakeInventory("Lith_ShellAmmo", amt, TIF_NOTAKEINFINITE);
+      self.TakeInventory("Lith_ShellAmmo", amt, notakeinfinite: true);
    }
 }
 
@@ -205,7 +205,7 @@ action(Weapon) void Lith_A_ReloadBobDn(double amt) {
 
 action(Weapon) void Lith_A_ScopeIn() {
    if(!CountInv("Lith_WeaponScopedToken")) {
-      A_GiveInventory("Lith_WeaponScopedToken", 1);
+      self.GiveInventory("Lith_WeaponScopedToken", 1);
       A_ZoomFactor((1+ACS_ExecuteWithResult(lsc_pdata, pdata_weaponzoom)/FIX)*invoker.m_scopeZoom);
       A_StartSound(invoker.m_scopeInSnd, lch_scope);
    }
@@ -213,7 +213,7 @@ action(Weapon) void Lith_A_ScopeIn() {
 
 action(Weapon) void Lith_A_ScopeOut() {
    if(CountInv("Lith_WeaponScopedToken")) {
-      A_TakeInventory("Lith_WeaponScopedToken", 1);
+      self.TakeInventory("Lith_WeaponScopedToken", 1);
       A_ZoomFactor(1.0, ZOOM_INSTANT);
       A_StartSound(invoker.m_scopeOutSnd, lch_scope);
    }

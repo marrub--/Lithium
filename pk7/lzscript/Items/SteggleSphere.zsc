@@ -58,8 +58,8 @@ class Lith_Steggles : MBFHelperDog
    Energize:
       DOGS A 0 {
          if(target) {
-            target.A_GiveInventory("Lith_Dogs", 1);
-            target.A_GiveInventory("HealthBonus", 1);
+            target.GiveInventory("Lith_Dogs", 1);
+            target.GiveInventory("HealthBonus", 1);
             Lith_HERMES.Log(target, msg_both, 1, "_Dogs");
          }
       }

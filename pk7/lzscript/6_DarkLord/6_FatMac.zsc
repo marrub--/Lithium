@@ -65,7 +65,7 @@ default
 
 action(Weapon) void Lith_A_FireFatMac()
 {
-   A_TakeInventory("Lith_PlasmaAmmo", 1000);
+   self.TakeInventory("Lith_PlasmaAmmo", 1000, notakeinfinite: true);
    A_GunFlash("DummyFlash");
    A_SetBlend("White", 0.6, 10);
    Lith_FireBullets(0, 0, 8, 200, FBF_NORANDOM, "Lith_700Bullet");

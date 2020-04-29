@@ -365,7 +365,7 @@ Fire:
    SDSG ABBCCDDEFG 1 bright offset(0, 33);
    SDSG HADEFHBCGH 1 bright offset(0, 34);
    SDSG A 1 bright {
-      A_TakeInventory("Lith_CannonAmmo", 5, TIF_NOTAKEINFINITE);
+      self.TakeInventory("Lith_CannonAmmo", 5, notakeinfinite: true);
       A_AlertMonsters();
    }
    SDSG A 1 bright offset(-1, 33);

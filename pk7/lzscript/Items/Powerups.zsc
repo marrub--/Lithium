@@ -22,7 +22,7 @@ class Lith_AllMap : Inventory replaces Allmap
    override bool tryPickup(in out Actor mo) {
       Lith_HERMES.Log(mo, msg_both, 5, "_AllMap");
       Lith_HERMES.UnlockBip(mo, "AllMap");
-      mo.A_GiveInventory("MapRevealer");
+      mo.GiveInventory("MapRevealer", 1);
       goAwayAndDie();
       return true;
    }
@@ -50,7 +50,7 @@ class Lith_Berserk : Inventory replaces Berserk
    override bool tryPickup(in out Actor mo) {
       Lith_HERMES.Log(mo, msg_both, 5, "_Berserk");
       Lith_HERMES.UnlockBip(mo, "Berserk");
-      mo.A_GiveInventory("PowerStrength");
+      mo.GiveInventory("PowerStrength", 1);
       if(mo.health < 100) {
          mo.health = 100;
       }
@@ -92,7 +92,7 @@ class Lith_Infrared : Inventory replaces Infrared
    override bool tryPickup(in out Actor mo) {
       Lith_HERMES.Log(mo, msg_both, 5, "_Infrared");
       Lith_HERMES.UnlockBip(mo, "Infrared");
-      mo.A_GiveInventory("Lith_PowerLightAmp");
+      mo.GiveInventory("Lith_PowerLightAmp", 1);
       goAwayAndDie();
       return true;
    }
@@ -139,7 +139,7 @@ class Lith_Megasphere : Inventory replaces Megasphere
    override bool tryPickup(in out Actor mo) {
       Lith_HERMES.Log(mo, msg_both, 4, "_Megasphere");
       Lith_HERMES.UnlockBip(mo, "Taochyan");
-      mo.A_GiveInventory("Lith_MegaProtection", 100);
+      mo.GiveInventory("Lith_MegaProtection", 100);
       mo.ACS_ScriptCall("Lith_GiveHealthBonus", 200);
       goAwayAndDie();
       return true;
@@ -169,7 +169,7 @@ class Lith_RadSuit : Inventory replaces RadSuit
    override bool tryPickup(in out Actor mo) {
       Lith_HERMES.Log(mo, msg_both, 5, "_RadSuit");
       Lith_HERMES.UnlockBip(mo, "RadSuit");
-      mo.A_GiveInventory("Lith_PowerIronFeet");
+      mo.GiveInventory("Lith_PowerIronFeet", 1);
       goAwayAndDie();
       return true;
    }
@@ -234,7 +234,7 @@ class Lith_ArtiFly : Inventory replaces ArtiFly
 
    override bool tryPickup(in out Actor mo) {
       Lith_HERMES.Log(mo, msg_both, 5, "_ArtiFly");
-      mo.A_GiveInventory("PowerFlight");
+      mo.GiveInventory("PowerFlight", 1);
       goAwayAndDie();
       return true;
    }
@@ -277,13 +277,13 @@ class Lith_ArtiTeleport : Inventory replaces ArtiTeleport
 }
 
 class Lith_PowerLightAmp : PowerLightAmp
-   {override void Tick() {if(!owner || !owner.isFrozen()) Super.Tick();}}
+   {override void Tick() {if(!level.isFrozen()) Super.Tick();}}
 
 class Lith_PowerInvulnerable : PowerInvulnerable
-   {override void Tick() {if(!owner || !owner.isFrozen()) Super.Tick();}}
+   {override void Tick() {if(!level.isFrozen()) Super.Tick();}}
 
 class Lith_PowerIronFeet : PowerIronFeet
-   {override void Tick() {if(!owner || !owner.isFrozen()) Super.Tick();}}
+   {override void Tick() {if(!level.isFrozen()) Super.Tick();}}
 
 /* this is a rather terrible hack, but there's actually no other way to give */
 /* the player the special inverted screen color map in the engine... */
@@ -320,9 +320,9 @@ class Lith_InvulnerabilitySphere : Inventory replaces InvulnerabilitySphere
       Lith_HERMES.Log(mo, msg_both, 6, "_Invuln");
       Lith_HERMES.UnlockBip(mo, "Invulnerability");
       if(CVar.GetCVar('lith_player_altinvuln', mo.player).GetBool())
-         A_GiveInventory("Lith_PowerInvulnerableGiver2");
+         mo.giveInventory("Lith_PowerInvulnerableGiver2", 1);
       else
-         A_GiveInventory("Lith_PowerInvulnerableGiver");
+         mo.giveInventory("Lith_PowerInvulnerableGiver", 1);
       goAwayAndDie();
       return true;
    }
@@ -350,18 +350,13 @@ class Lith_Backpack : Lith_ScoreItem replaces Backpack
       +COUNTITEM
    }
 
-   override void PostBeginPlay()
-   {
-      Super.PostBeginPlay();
-      A_GiveInventory("Lith_BulletAmmo", AmmoAmt_BulletBackpk);
-      A_GiveInventory("Lith_ShellAmmo",  AmmoAmt_ShellBackpk);
-      A_GiveInventory("Lith_RocketAmmo", AmmoAmt_RocketBackpk);
-      A_GiveInventory("Lith_PlasmaAmmo", AmmoAmt_CellBackpk);
-      A_GiveInventory("Lith_CannonAmmo", AmmoAmt_CannonBackpk);
-   }
-
    override void Lith_OnPickup(Actor mo)
    {
+      mo.GiveInventory("Lith_BulletAmmo", AmmoAmt_BulletBackpk);
+      mo.GiveInventory("Lith_ShellAmmo",  AmmoAmt_ShellBackpk);
+      mo.GiveInventory("Lith_RocketAmmo", AmmoAmt_RocketBackpk);
+      mo.GiveInventory("Lith_PlasmaAmmo", AmmoAmt_CellBackpk);
+      mo.GiveInventory("Lith_CannonAmmo", AmmoAmt_CannonBackpk);
       mo.ACS_ScriptCall("Lith_Discount");
       Super.Lith_OnPickup(mo);
    }

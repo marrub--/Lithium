@@ -126,7 +126,7 @@ default {
 }
 
 action(Weapon) void Lith_A_FireFortune() {
-   A_TakeInventory("Lith_CannonAmmo", 1);
+   self.TakeInventory("Lith_CannonAmmo", 1, notakeinfinite: true);
    A_StartSound("weapons/fortune/fire", lch_weapon, attenuation: 0.5, pitch: frandom(0.9, 1.05));
    A_GunFlash("DummyFlash");
    A_Recoil(4);

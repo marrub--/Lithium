@@ -19,7 +19,7 @@ class Lith_RedCard : Lith_BasicPickup replaces RedCard
    override void PostBeginPlay()
    {
       Super.PostBeginPlay();
-      A_GiveInventory("RedCard");
+      self.GiveInventory("RedCard", 1);
    }
 
    states
@@ -43,7 +43,7 @@ class Lith_BlueCard : Lith_BasicPickup replaces BlueCard
    override void PostBeginPlay()
    {
       Super.PostBeginPlay();
-      A_GiveInventory("BlueCard");
+      self.GiveInventory("BlueCard", 1);
    }
 
    states
@@ -67,7 +67,7 @@ class Lith_YellowCard : Lith_BasicPickup replaces YellowCard
    override void PostBeginPlay()
    {
       Super.PostBeginPlay();
-      A_GiveInventory("YellowCard");
+      self.GiveInventory("YellowCard", 1);
    }
 
    states
@@ -91,7 +91,7 @@ class Lith_RedSkull : Lith_BasicPickup replaces RedSkull
    override void PostBeginPlay()
    {
       Super.PostBeginPlay();
-      A_GiveInventory("RedSkull");
+      self.GiveInventory("RedSkull", 1);
    }
 
    states
@@ -115,7 +115,7 @@ class Lith_BlueSkull : Lith_BasicPickup replaces BlueSkull
    override void PostBeginPlay()
    {
       Super.PostBeginPlay();
-      A_GiveInventory("BlueSkull");
+      self.GiveInventory("BlueSkull", 1);
    }
 
    states
@@ -139,7 +139,7 @@ class Lith_YellowSkull : Lith_BasicPickup replaces YellowSkull
    override void PostBeginPlay()
    {
       Super.PostBeginPlay();
-      A_GiveInventory("YellowSkull");
+      self.GiveInventory("YellowSkull", 1);
    }
 
    states

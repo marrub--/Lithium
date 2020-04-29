@@ -459,7 +459,7 @@ class Lith_Radio : Lith_ScoreItem
    override void PostBeginPlay()
    {
       Super.PostBeginPlay();
-      A_GiveInventory("Lith_BulletAmmo", AmmoAmt_Bullet);
+      self.GiveInventory("Lith_BulletAmmo", AmmoAmt_Bullet);
    }
 
    states
@@ -482,7 +482,7 @@ class Lith_BoxOfAmmo : Lith_ScoreItem
    override void PostBeginPlay()
    {
       Super.PostBeginPlay();
-      A_GiveInventory("Lith_BulletAmmo", AmmoAmt_BulletBox);
+      self.GiveInventory("Lith_BulletAmmo", AmmoAmt_BulletBox);
    }
 
    states

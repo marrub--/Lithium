@@ -41,7 +41,7 @@ default {
 action(Weapon) void Lith_A_FireRocket(class<Actor> cl, double xofs) {
    A_GunFlash("DummyFlash");
    A_FireProjectile(cl, 0, true, xofs, -2);
-   A_TakeInventory("Lith_RocketAmmo", 2);
+   self.TakeInventory("Lith_RocketAmmo", 2, notakeinfinite: true);
    Lith_A_RecoilUp(1.2);
 }
 

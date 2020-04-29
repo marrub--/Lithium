@@ -21,7 +21,7 @@ default {
 }
 
 action(Weapon) void Lith_A_FireRedRifle() {
-   A_TakeInventory("Lith_Mana", _ammo_used, TIF_NOTAKEINFINITE);
+   self.TakeInventory("Lith_Mana", _ammo_used, notakeinfinite: true);
    A_GunFlash("DummyFlash");
    Lith_FireBullets(0, 0, -1, 300, FBF_NORANDOM);
    Lith_A_GunSmoke();

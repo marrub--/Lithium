@@ -128,7 +128,7 @@ action(Weapon) void Lith_A_FireFeuer(bool left)
 {
    CallACS("Lith_Feuer", left, true);
    A_AlertMonsters();
-   A_TakeInventory("Lith_Mana", 15);
+   self.TakeInventory("Lith_Mana", 15, notakeinfinite: true);
    A_StartSound("weapons/feuer/fire", lch_weapon);
 }
 

@@ -22,7 +22,7 @@ action(Weapon) void Lith_A_Fire4Bore()
 {
    Lith_A_MagIncr();
    A_AlertMonsters();
-   A_TakeInventory("Lith_ShellAmmo", 1, TIF_NOTAKEINFINITE);
+   self.TakeInventory("Lith_ShellAmmo", 1, notakeinfinite: true);
    A_SetBlend("White", 0.2, 6);
    A_GunFlash("DummyFlash");
    Lith_FireBullets(4, 2, 4, 30, FBF_NORANDOM, "Lith_700Bullet");

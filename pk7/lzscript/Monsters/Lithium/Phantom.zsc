@@ -129,7 +129,7 @@ override void Tick() {
 override void PostBeginPlay()
 {
    Super.PostBeginPlay();
-   A_GiveInventory("Lith_IsPhantom", 1);
+   GiveInventory("Lith_IsPhantom", 1);
    m_Step = 1;
    Lith_PostInit();
 }

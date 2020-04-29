@@ -108,7 +108,7 @@ default
 
 action(Weapon) State Lith_A_FireSPAS()
 {
-   A_TakeInventory("Lith_ShellAmmo", 1, TIF_NOTAKEINFINITE);
+   self.TakeInventory("Lith_ShellAmmo", 1, notakeinfinite: true);
    Lith_A_Casing("Lith_CasShellHot", 30, 6, 20, FRandom(3,4), FRandom(7,8), FRandom(7,9));
    if(!ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_SPAS_B))
       Lith_A_MagIncr();

@@ -133,7 +133,7 @@ action(Weapon) void Lith_SubMinFire() {
 }
 
 action(Weapon) void Lith_Sprint() {
-   A_GiveInventory("Lith_DarkLordSprint", 1);
+   self.GiveInventory("Lith_DarkLordSprint", 1);
 }
 
 action(Weapon) state Lith_JumpIfSprint() {

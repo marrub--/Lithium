@@ -68,7 +68,7 @@ SelectLoop:
 Fire:
    TNT1 A 0 A_JumpIf(CountInv("Lith_Mana") < 10, "ReadySelector");
    TNT1 A 5 {
-      A_TakeInventory("Lith_Mana", 10);
+      self.TakeInventory("Lith_Mana", 10, notakeinfinite: true);
       CallACS("Lith_Rend", false, random(0, 3));
       A_StartSound("weapons/rend/slash", lch_weapon);
       A_FireProjectile("Lith_BladeLightProjectile", 0);

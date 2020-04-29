@@ -184,13 +184,21 @@ class Lith_ShockPuff : Lith_BulletPuff
       TNT1 A 0 A_SpawnItemEx("Lith_ShockEffect2", flags: SXF_TRANSFERPOINTERS|SXF_NOCHECKPOSITION);
       stop;
    Binding:
-      TNT1 A 0 A_GiveInventory("Lith_ShockHitCount", 1, AAPTR_TRACER);
-      TNT1 A 0 A_JumpIfInventory("Lith_ShockHitCount", 0, "Explode", AAPTR_TRACER);
+      TNT1 A 0 {
+         if(self.tracer) {
+            self.tracer.GiveInventory("Lith_ShockHitCount", 1);
+            if(self.tracer.countInv("Lith_ShockHitCount") > 5)
+               return ResolveState("Explode");
+         }
+         return state(null);
+      }
       TNT1 AAA 3 Lith_A_Shock;
       stop;
    Explode:
       TNT1 A 0 {
-         A_TakeInventory("Lith_ShockHitCount", 999, 0, AAPTR_TRACER);
+         if(self.tracer) {
+            self.tracer.TakeInventory("Lith_ShockHitCount", 6);
+         }
          A_SpawnItemEx("Lith_SuperShockEffect");
          A_StartSound("weapons/erifle/shock", lch_body);
          A_Explode(64, 512, 0);

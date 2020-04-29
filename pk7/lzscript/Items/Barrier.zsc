@@ -71,8 +71,8 @@ default
 override bool tryPickup(in out Actor mo) {
    Lith_HERMES.Log(mo, msg_both, 5, "_BlurSphere");
    Lith_HERMES.UnlockBip(mo, "Fragma");
-   mo.A_TakeInventory("Lith_HasBarrier", 1);
-   mo.A_GiveInventory("Lith_HasBarrier", 1);
+   mo.TakeInventory("Lith_HasBarrier", 1);
+   mo.GiveInventory("Lith_HasBarrier", 1);
    goAwayAndDie();
    return true;
 }

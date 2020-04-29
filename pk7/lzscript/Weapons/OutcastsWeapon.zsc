@@ -57,17 +57,17 @@ _KnifeEnd2:
 _KnifeEnd:
    TNT1 A 7;
    TNT1 A 0 A_JumpIfInventory("Lith_Knif", 1, "_KnifeDone");
-   TNT1 A 0 A_GiveInventory("Lith_Knif", 1);
+   TNT1 A 0 {self.GiveInventory("Lith_Knif", 1);}
    TNT1 A 0 ResolveState("_KnifeEnd_1");
    stop;
 _KnifeEnd_1:
    TNT1 AAAAA 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_NOSWITCH|WRF_ALLOWUSER4);
 _KnifeEnd_2:
-   TNT1 A 0 A_TakeInventory("Lith_Knif", 1);
+   TNT1 A 0 {self.TakeInventory("Lith_Knif", 1);}
    TNT1 A 0 ResolveState("_KnifeFinish");
    stop;
 _KnifeDone:
-   TNT1 A 0 A_TakeInventory("Lith_Knif", 1);
+   TNT1 A 0 {self.TakeInventory("Lith_Knif", 1);}
    TNT1 A 0 ResolveState("_KnifeDone_1");
    stop;
 _KnifeDone_1:

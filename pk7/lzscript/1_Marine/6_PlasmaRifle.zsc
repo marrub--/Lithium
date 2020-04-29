@@ -59,7 +59,7 @@ default
 
 action(Weapon) void Lith_A_FirePlasma()
 {
-   A_TakeInventory("Lith_PlasmaAmmo", 35, TIF_NOTAKEINFINITE);
+   self.TakeInventory("Lith_PlasmaAmmo", 35, notakeinfinite: true);
    A_GunFlash("DummyFlash");
    A_StartSound("weapons/plasma/fire", lch_weapon);
    for(int i = 0; i < 4; i++)
@@ -69,7 +69,7 @@ action(Weapon) void Lith_A_FirePlasma()
 
 action(Weapon) void Lith_A_FireLaser()
 {
-   A_TakeInventory("Lith_PlasmaAmmo", 10, TIF_NOTAKEINFINITE);
+   self.TakeInventory("Lith_PlasmaAmmo", 10, notakeinfinite: true);
    A_AlertMonsters();
    A_FireBullets(0, 0, 1, 0, "Lith_PlasmaHit", FBF_NORANDOMPUFFZ);
    A_RailAttack(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_TorgueMode) ? 1 : 12, 0, false, "", "Red", RGF_SILENT|RGF_FULLBRIGHT|RGF_NOPIERCING, 0, "Lith_Dummy", 0, 0, 0, 1, 3, 0, "Lith_PlasmaLaze");
@@ -80,7 +80,7 @@ action(Weapon) void Lith_A_FireRail()
 {
    Lith_A_MagIncr();
    A_AlertMonsters();
-   A_TakeInventory("Lith_PlasmaAmmo", 200, TIF_NOTAKEINFINITE);
+   self.TakeInventory("Lith_PlasmaAmmo", 200, notakeinfinite: true);
    A_StartSound("weapons/plasma/part/fire", lch_weapon);
    A_RailAttack(400, 0, false, "", "Blue", RGF_SILENT|RGF_FULLBRIGHT, 0, "Lith_ParticleBeamPuff", 0, 0, 0, 0, 16, 0, "Lith_ParticleBeam", -8);
    A_FireProjectile("Lith_LightProjectileSkyLong", 0);
@@ -88,7 +88,7 @@ action(Weapon) void Lith_A_FireRail()
 
 action(Weapon) void Lith_A_FireAltPlasma()
 {
-   A_TakeInventory("Lith_PlasmaAmmo", 90, TIF_NOTAKEINFINITE);
+   self.TakeInventory("Lith_PlasmaAmmo", 90, notakeinfinite: true);
    A_GunFlash("DummyFlash");
    A_FireProjectile("Lith_PenetratingPlasmaBolt", 0, false, 0, -9);
    A_FireProjectile("Lith_PenetratingPlasmaBolt", frandom(-2.7, -1.9), false, 0, -9);

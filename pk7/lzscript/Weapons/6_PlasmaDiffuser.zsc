@@ -57,7 +57,7 @@ default
 
 action(Weapon) void Lith_A_FirePlasmaDiff()
 {
-   A_TakeInventory("Lith_PlasmaAmmo", 60, TIF_NOTAKEINFINITE);
+   self.TakeInventory("Lith_PlasmaAmmo", 60, notakeinfinite: true);
    A_GunFlash("DummyFlash");
    A_StartSound("weapons/plasdiff/fire", lch_weapon);
    A_FireProjectile("Lith_DiffPlasma", 0, false, 0, -9);
