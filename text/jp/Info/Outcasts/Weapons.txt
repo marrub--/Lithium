@@ -36,7 +36,7 @@ X-400が発射するミニチュアミサイルは普通の
 装填することができる。
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_PlasmaDiffuser | プラズマディフューザー
+== \#INFO_SHORT_PlasmaDiffuser | ﾌﾟﾗｽﾞﾏﾃﾞｨﾌｭｰｻﾞｰ
 == \#INFO_TITLE_PlasmaDiffuser | SYM4.3 D.640 プラズマディフューザー
 @@ \#INFO_DESCR_PlasmaDiffuser
 68-nプラズマライフルと似た働きをするが、
