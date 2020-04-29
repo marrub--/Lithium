@@ -70,6 +70,7 @@ user bool  lith_hud_showlvl      = false;
 user bool  lith_hud_showweapons  = true;
 user bool  lith_hud_showlog      = true;
 user bool  lith_hud_showarmorind = true;
+user bool  lith_hud_showdamage   = true;
 user bool  lith_hud_logfromtop   = false;
 user float lith_hud_logsize      = 1.0;
 user int   lith_hud_expbar       = 0;

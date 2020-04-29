@@ -291,9 +291,13 @@ override void WorldThingDamaged(WorldEvent ev)
       mo.A_StartSound("body/bullethit", lch_body, volume: vol * frandom(0.5, 1.1));
    }
 
-   if(!src) return;
+   if(!src || src == dst) return;
 
-   if(src != dst && src.CountInv("Lith_MonsterID") && (dst.bCOUNTKILL || dst.Player))
+   let player = Lith_Player(src);
+
+   if(player)
+      player.Lith_AddDamageNum(pos, dst.radius/2, ev.damage);
+   else if(src.CountInv("Lith_MonsterID") && (dst.bCOUNTKILL || dst.Player))
       src.ACS_ScriptCall("Lith_GiveMonsterEXP", int(ev.Damage * 3.77));
 }
 

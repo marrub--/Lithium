@@ -65,7 +65,7 @@ const Y_MASK = 0x1FFFFFFF;
 
 /* Members ----------------------------------------------------------------- */
 
-transient play DrawData[700] m_D;
+transient play DrawData[2000] m_D;
 transient play uint m_DPtr;
 transient play FadeMsg[256] m_FadeMsg;
 transient play vector2 m_VirtualSize;

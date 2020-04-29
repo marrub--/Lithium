@@ -682,6 +682,27 @@ void Sc_DrawPlayerIcon(i32 num, i32 x, i32 y) {
    }
 }
 
+script ext("ACS") addr(lsc_drawdmgnum)
+void Sc_DrawDmgNum(i32 which_alpha, i32 damage, i32 x, i32 y) {
+   i32 which =  which_alpha & 0x003;
+   i32 alpha = (which_alpha & 0x3FC) >> 2;
+
+   i32 cr;
+   str font;
+
+   k32 a = alpha / 255.0k;
+
+   switch(which) {
+   case _dnum_smol: font = s_smallfnt; cr = CR_GREY;  break;
+   case _dnum_norm: font = s_lmidfont; cr = CR_WHITE; break;
+   case _dnum_crit: font = s_lhudfont; cr = CR_GOLD;  break;
+   }
+
+   ACS_BeginPrint();
+   ACS_PrintInt(damage);
+   PrintTextA(font, cr, x,0, y,0, a);
+}
+
 script_str type("net") ext("ACS") addr(OBJ "KeyBuyAutoGroup")
 void Sc_KeyBuyAutoGroup(i32 grp) {
    Str(snd_bought,  s"player/cbi/auto/buy");

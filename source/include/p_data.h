@@ -48,6 +48,13 @@ enum /* SubweaponType */ {
    _subw_max,
 };
 
+enum /* DamageNumType */ {
+   _dnum_smol,
+   _dnum_norm,
+   _dnum_crit,
+   _dnum_max,
+};
+
 enum /* PClass */ {
    pcl_unknown,
 

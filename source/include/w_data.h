@@ -97,6 +97,7 @@ enum /* ScriptNum */
    lsc_monsterinfo,
    lsc_raindropspawn,
    lsc_monstertype,
+   lsc_drawdmgnum,
 };
 
 enum /* BossType */

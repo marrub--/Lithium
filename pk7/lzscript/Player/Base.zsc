@@ -232,8 +232,12 @@ void Lith_PostTick() {
 
    Lith_URANUS.LZ(self, 320, 240);
 
+   for(int i = 0; i < _dnum_max; i++) {
+      Lith_ShowDamageNums(i);
+   }
+
    if(health > 0 && CVar.GetCVar('lith_xhair_enable', player).getBool())
-      Lith_Crosshair();
+      Lith_ShowCrosshair();
 
    if(!deathmatch) for(int i = 0; i < MAXPLAYERS; i++)
       if(playeringame[i] && players[i] != player && players[i].mo)
