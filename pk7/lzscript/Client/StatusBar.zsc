@@ -67,8 +67,6 @@ override void flashItem(class<Inventory> itemtype) {}
 
 override void drawPowerups() {}
 
-override bool processNotify(EPrintLevel level, string text) {return true;}
-
 override bool processMidPrint(Font fnt, string text, bool bold) {
    let msg   = m_midPrint;
    msg.text  = text;

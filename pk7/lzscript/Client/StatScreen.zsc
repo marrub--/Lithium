@@ -163,7 +163,9 @@ override void DrawShowNextLoc()
    bg.drawBackground(CurState, true, snl_pointeron);
 
    if(bcnt % 20 < 10) Lith_DrawCent(160, 70, "(Enter-Area)");
-   DrawName(110 * CleanYFac, wbs.lname1, lnametexts[1]);
+   textureid nothing;
+   nothing.setInvalid();
+   DrawName(110 * CleanYFac, nothing, lnametexts[1]);
 }
 
 /* EOF */
