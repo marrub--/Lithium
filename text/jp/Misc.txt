@@ -50,7 +50,7 @@ Lithiumの雨が宇宙から降り注ぐか。
 %% \#DIV_SIGIL_WARNING
 === 警告 ===
 このアイテムは計り知れないほど危険だ
-世界が費用に使え
+代償は己の未来だ
 
 == SECRETMESSAGE | \cnシークレットを解き明かした!
 
@@ -114,7 +114,7 @@ Lithiumの雨が宇宙から降り注ぐか。
 == DIFF_EASY    | 手伝ってくれ。
 == DIFF_NORMAL  | 存分にやってくれ。
 == DIFF_HARD    | ｳﾙﾄﾗﾊﾞｲｵﾚﾝｽ!
-== DIFF_XHARD   | おれを死ぬの見れよ!
+== DIFF_XHARD   | 我が生き様を見よ!
 == DIFF_NMARE   | 狂乱悪夢!
 
 == PLYRMNU_PRESSSPACE | \cjスペースキー\c-で
@@ -134,13 +134,13 @@ Lithiumの雨が宇宙から降り注ぐか。
 
 == CNTRLMNU_ALTATTACK    | セカンダリ・ズーム
 == CNTRLMNU_RELOAD       | リロード
-== CNTRLMNU_RUN          | 脱出・走る
+== CNTRLMNU_RUN          | 走る・回避
 == CNTRLMNU_USER1        | ウェポンアクション
 == CNTRLMNU_USER4        | スペシャルアクション
-== CNTRLMNU_SAY          | 申す
-== CNTRLMNU_TEAMSAY      | チームに申す
+== CNTRLMNU_SAY          | チャット
+== CNTRLMNU_TEAMSAY      | チームチャット
 == CNTRLMNU_AUTOMAP      | オートマップ
-== CNTRLMNU_CHASECAM     | はた
+== CNTRLMNU_CHASECAM     | 三人称視点
 == CNTRLMNU_COOPSPY      | 他者視点
 == CNTRLMNU_CONSOLE      | コンソールを開く
 == CNTRLMNU_ZOOM         | \cm[不用]ズーム
@@ -148,27 +148,27 @@ Lithiumの雨が宇宙から降り注ぐか。
 == CNTRLMNU_USER2        | \cm[不用]アクション２
 == CNTRLMNU_USER3        | \cm[不用]アクション３
 == CNTRLMNU_USEITEM      | \cm[不用]アイテムを使用
-== CNTRLMNU_USEALLITEMS  | \cm[不用]すべてのアイテムを使用
+== CNTRLMNU_USEALLITEMS  | \cm[不用]すべてのアイテム使用
 == CNTRLMNU_NEXTITEM     | \cm[不用]次のアイテム
 == CNTRLMNU_PREVIOUSITEM | \cm[不用]前のアイテム
-== CNTRLMNU_DROPITEM     | \cm[不用]アイテムを捨てて
+== CNTRLMNU_DROPITEM     | \cm[不用]アイテムを捨てる
 == CNTRLMNU_QUERYITEM    | \cm[不用]アイテムを表示
-== CNTRLMNU_DROPWEAPON   | \cm[不用]武器を捨てて
+== CNTRLMNU_DROPWEAPON   | \cm[不用]武器を捨てる
 == CNTRLMNU_MISSION      | \cm[不用]クエスト
 == CNTRLMNU_KEYS         | \cm[不用]キーリスト
 == CNTRLMNU_STATS        | \cm[不用]状態
 
 %% \#SKILL_TOURIST
-本気か?このスキルが
-面白さそうぞ。
+やる気か?このスキルは
+楽しめるだろう。
 
 %% \#SKILL_EXTRAHARD
-よいか?これが
-エクストラハードだよ。
+本気か?これこそが
+修羅の道よ。
 
 %% \#SKILL_NIGHTMARE
-よいか?これ以上、
-正気がなくなる。
+正気か?あなたは
+人を捨てると。
 
 == DOSY     | (Yで終了。)
 == PRESSYN  | YかNで押してください。
