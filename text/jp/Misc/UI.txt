@@ -73,25 +73,25 @@
 == \#CBI_CPU4 | ＡＯＦ５９００００１ Ｒｅｖ７ ＣＰＵ
 
 ## BIP -----------------------------------------------------------------------|
-== \#BIP_NAME_Search      | 検索
-== \#BIP_NAME_Weapons     | 武器
-== \#BIP_NAME_Adversaries | 敵
-== \#BIP_NAME_Items       | アイテム
-== \#BIP_NAME_Yourself    | 自分
-== \#BIP_NAME_Upgrades    | アップグレード
-== \#BIP_NAME_Locations   | 場所
-== \#BIP_NAME_Companies   | 会社
-== \#BIP_NAME_Mail        | メール
+== \#BIP_NAME_CORPORATIONS | 会社
+== \#BIP_NAME_ENEMIES      | 敵
+== \#BIP_NAME_ITEMS        | アイテム
+== \#BIP_NAME_MAIL         | メール
+== \#BIP_NAME_PLACES       | 場所
+== \#BIP_NAME_SEARCH       | 検索
+== \#BIP_NAME_UPGRADES     | アップグレード
+== \#BIP_NAME_WEAPONS      | 武器
+== \#BIP_NAME_YOURSELF     | 自分
 
-== \#BIP_HELP_Search      | 全種類をテキスト検索する。
-== \#BIP_HELP_Weapons     | 武器と武器のアップグレード。
-== \#BIP_HELP_Adversaries | 敵とボス。
-== \#BIP_HELP_Items       | アーマーや掘り出し物など。
-== \#BIP_HELP_Yourself    | 自分の属性、能力、歴史。
-== \#BIP_HELP_Upgrades    | 素体のアップグレード。
-== \#BIP_HELP_Locations   | 銀河系周辺の名所。
-== \#BIP_HELP_Companies   | 歴史的かつ現在の、重要な会社。
-== \#BIP_HELP_Mail        | 受信したメール。
+== \#BIP_HELP_CORPORATIONS | 歴史的かつ現在の、重要な会社。
+== \#BIP_HELP_ENEMIES      | 敵とボス。
+== \#BIP_HELP_ITEMS        | アーマーや掘り出し物など。
+== \#BIP_HELP_MAIL         | 受信したメール。
+== \#BIP_HELP_PLACES       | 銀河系周辺の名所。
+== \#BIP_HELP_SEARCH       | 全種類をテキスト検索する。
+== \#BIP_HELP_UPGRADES     | 素体のアップグレード。
+== \#BIP_HELP_WEAPONS      | 武器と武器のアップグレード。
+== \#BIP_HELP_YOURSELF     | 自分の属性、能力、歴史。
 
 ## Statistics ----------------------------------------------------------------|
 == \#STAT_ScoreMul   | スコア倍率
