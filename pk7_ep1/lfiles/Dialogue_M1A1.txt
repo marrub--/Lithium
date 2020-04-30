@@ -39,7 +39,7 @@ unfinished {
 
    logon "LogonData" text DATA
 
-   info text PAGE_M1A1_02_01
+   info text M1A1_02_01
 
    logoff "LogonData" text DATA
 
