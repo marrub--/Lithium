@@ -19,47 +19,42 @@
 static void HUD_Ammo(struct player *p) {
    struct invweapon const *wep = p->weapon.cur;
 
-   i32 type = 0;
-
    str typegfx = snil;
 
-   if(wep->ammotype & AT_NMag) type |= 1;
-   if(wep->ammotype & AT_Ammo && !get_bit(wep->info->flags, wf_magic)) type |= 2;
+   if(wep->ammotype & AT_AMag)
+      PrintSprite(sp_HUD_D_AmmoBack, 320,2, 239,2);
 
-   if(type) PrintSprite(sp_HUD_D_AmmoBack, 320,2, 238,2);
-
-   if(type & 1) {
+   if(wep->ammotype & AT_NMag) {
       typegfx = sp_HUD_D_MAG;
 
       char txt[16];
-      if(type & 2 && !wep->ammocur)
+      if(wep->ammotype & AT_Ammo && !wep->ammocur)
          strcpy(txt, "OUT");
       else
          sprintf(txt, "%i/%i", wep->magmax - wep->magcur, wep->magmax);
       PrintTextChS(txt);
-      PrintTextX(s_bigupper, Cr(blue), 242,1, 227,0, ptf_no_utf);
+      PrintTextX(s_bigupper, Cr(blue), 242,1, 228,0, ptf_no_utf);
    }
 
-   if(type & 2) {
+   if(wep->ammotype & AT_Ammo) {
       typegfx = sp_HUD_D_AMM;
 
       i32 x = 0;
 
-      if(type & 1) {
-         PrintSprite(sp_HUD_D_Ammo2Back, 240,2, 238,2);
+      if(wep->ammotype & AT_NMag) {
+         PrintSprite(sp_HUD_D_Ammo2Back, 240,2, 239,2);
          x = -58;
       }
 
       ACS_BeginPrint();
       ACS_PrintInt(wep->ammocur);
-      PrintTextX(s_bigupper, Cr(blue), x+242,1, 227,0, ptf_no_utf);
+      PrintTextX(s_bigupper, Cr(blue), x+242,1, 228,0, ptf_no_utf);
    }
 
-   if(typegfx) PrintSprite(typegfx, 318,2, 232,2);
+   if(typegfx) PrintSprite(typegfx, 318,2, 233,2);
 }
 
-static void HUD_Health(struct player *p)
-{
+static void HUD_Health(struct player *p) {
    StrAry(ws, s":HUD:H_D27", s":HUD:H_D28", s":HUD:H_D24", s":HUD:H_D23",
               s":HUD:H_D22", s":HUD:H_D21", s":HUD:H_D25", s":HUD:H_D26");
 
@@ -71,8 +66,7 @@ static void HUD_Health(struct player *p)
 
    i32 x = (8 + p->ticks) % 40;
 
-   for(i32 i = 0; i < 20; i++)
-   {
+   for(i32 i = 0; i < 20; i++) {
       i32 xx = x - i;
       if(xx < 0) xx += 40;
 
@@ -82,8 +76,7 @@ static void HUD_Health(struct player *p)
 
 /* Extern Functions -------------------------------------------------------- */
 
-void Upgr_HeadsUpDisD_Render(struct player *p, struct upgrade *upgr)
-{
+void Upgr_HeadsUpDisD_Render(struct player *p, struct upgrade *upgr) {
    if(!p->hudenabled) return;
 
    HUD_Log(p, Cr(blue), 0, -10);
@@ -91,9 +84,9 @@ void Upgr_HeadsUpDisD_Render(struct player *p, struct upgrade *upgr)
    HUD_Score(p, "%s\Cnscr", p->score, s_smallfnt, Cr(blue), 160,0);
 
    if(p->getCVarI(sc_hud_showweapons))
-      PrintSprite(sp_HUD_D_WepBack, 320,2, 219,2);
+      PrintSprite(sp_HUD_D_WepBack, 320,2, 218,2);
 
-   HUD_WeaponSlots(p, Cr(wseld1), Cr(wseld2), Cr(wseld3), Cr(wselds), 323, 217);
+   HUD_WeaponSlots(p, Cr(wseld1), Cr(wseld2), Cr(wseld3), Cr(wselds), 323, 216);
 
    /* Status */
    HUD_Ammo(p);
