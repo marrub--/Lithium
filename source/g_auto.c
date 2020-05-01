@@ -27,8 +27,8 @@ void G_Auto(struct gui_state *g, u32 id, i32 x, i32 y, i32 w, i32 h, bool slide)
    y += g->oy;
 
    /* check clip versus cursor (if clipping), then check control versus cursor */
-   if(!g->useclip || aabb(g->clpxS, g->clpyS, g->clpxE, g->clpyE, g->cx, g->cy))
-      if(aabb(x, y, x + w, y + h, g->cx, g->cy))
+   if(!g->useclip || aabb_point(g->clpxS, g->clpyS, g->clpxE, g->clpyE, g->cx, g->cy))
+      if(aabb_point(x, y, w, h, g->cx, g->cy))
    {
       g->hot = id;
 
@@ -121,8 +121,8 @@ void G_End(struct gui_state *g, enum cursor curs)
 void G_Clip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, i32 ww)
 {
    g->useclip = true;
-   g->clpxE = x + w;
-   g->clpyE = y + h;
+   g->clpxE = w;
+   g->clpyE = h;
 
    if(ww == 0) ww = w;
    SetClipW(g->clpxS = x, g->clpyS = y, w, h, ww);

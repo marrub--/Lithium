@@ -55,23 +55,16 @@ static bool ItemCanPlace(struct container *cont, struct item *item, i32 x, i32 y
    if(x < 0 || y < 0)
       return false;
 
-   i32 x2 = x + item->w;
-   i32 y2 = y + item->h;
-
-   if(x2 > cont->w || y2 > cont->h)
+   if(x + item->w > cont->w || y + item->h > cont->h)
       return false;
 
-   i32 z = x + item->w;
-   i32 w = y + item->h;
-
    for_item(*cont) if(it != item) {
-      i32 const u = it->x;
-      i32 const v = it->y;
-      i32 const s = u + it->w;
-      i32 const t = v + it->h;
+      i32 const ox = it->x;
+      i32 const oy = it->y;
+      i32 const oxw = ox + it->w;
+      i32 const oxh = oy + it->h;
 
-      if(aabb(u, v, s, t, x, y) || aabb(u, v, s, t, z - 1, w - 1) ||
-         aabb(x, y, z, w, u, v) || aabb(x, y, z, w, s - 1, t - 1))
+      if(aabb_aabb(it->x, it->y, it->w, it->h, x, y, item->w, item->h))
          return false;
    }
 
@@ -133,7 +126,7 @@ static void Container(struct gui_state *g, struct container *cont, i32 sx, i32 s
       PrintSpriteA(bg, sx+x,1, sy+y,1, 0.8);
 
    if(p && p->movitem && g->clicklft &&
-      aabb(sx, sy, sx+w, sy+h, g->cx, g->cy) &&
+      aabb_point(sx, sy, w, h, g->cx, g->cy) &&
       (P_Inv_Place(cont, p->selitem, (g->cx - sx) / 8, (g->cy - sy) / 8) ||
        P_Inv_PlaceFirst(cont, p->selitem))) {
       p->movitem = false;
@@ -143,20 +136,23 @@ static void Container(struct gui_state *g, struct container *cont, i32 sx, i32 s
    for_item(*cont) {
       i32 x = sx + it->x * 8;
       i32 y = sy + it->y * 8;
-      i32 ex = x + it->w * 8;
-      i32 ey = y + it->h * 8;
+      i32 ex = it->w * 8;
+      i32 ey = it->h * 8;
 
       PrintSprite(it->spr, x,1, y,1);
 
       if(!p || p->movitem) continue;
 
-      if(p->selitem != it && g->clicklft && aabb(x, y, ex, ey, g->cx, g->cy)) {
+      if(p->selitem != it && g->clicklft && aabb_point(x, y, ex, ey, g->cx, g->cy)) {
          p->selitem = it;
          ACS_LocalAmbientSound(ss_player_cbi_invcur, 127);
       }
 
       if(p->selitem == it) {
          k32 a = (ACS_Sin(ACS_Timer() / 105.0) * 0.5 + 1.2) / 4;
+
+         ex = ex + x;
+         ey = ey + y;
 
          for(i32 xx = x; y < ey; y += 8) for(x = xx; x < ex; x += 8)
             PrintSpriteA(sp_UI_InvSel, x,1, y,1, a);

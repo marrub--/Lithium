@@ -87,11 +87,12 @@ static void ShowBarrier(dmon_t const *m, k32 alpha)
    bool anyplayer = false;
 
    /* Optimization: Check for players nearby first. */
-   i32 const xw1 = m->x - 192, xw2 = m->x + 192;
-   i32 const yw1 = m->y - 192, yw2 = m->y + 192;
-
-   for_player() if(aabb(xw1, yw1, xw2, yw2, p->x, p->y))
-      {anyplayer = true; break;}
+   for_player() {
+      if(aabb_point(m->x - 192, m->y - 192, 384, 384, p->x, p->y)) {
+         anyplayer = true;
+         break;
+      }
+   }
 
    if(!anyplayer)
       return;

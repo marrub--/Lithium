@@ -167,9 +167,21 @@ void lerplli_init(struct interp_data_lli *data, i96 value, i96 timer)
    data->timer_max_cap = 2;
 }
 
-bool aabb(i32 x, i32 y, i32 z, i32 w, i32 x2, i32 y2)
+bool aabb_aabb(i32 x1, i32 y1, i32 w1, i32 h1, i32 x2, i32 y2, i32 w2, i32 h2)
 {
-   return x2 >= x && y2 >= y && x2 < z && y2 < w;
+   return
+      x1 < x2 + h2 &&
+      x1 + w1 > x2 &&
+      y1 < y2 + h2 &&
+      y1 + h1 > y2;
+}
+
+bool aabb_point(i32 x1, i32 y1, i32 w1, i32 h1, i32 x2, i32 y2) {
+   return
+      x2 >= x1 &&
+      y2 >= y1 &&
+      x2 <= x1 + w1 &&
+      y2 <= y1 + h1;
 }
 
 i32 ceilk(k32 n)
