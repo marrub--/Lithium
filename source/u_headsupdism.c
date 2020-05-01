@@ -16,6 +16,13 @@
 
 #define UData p->upgrdata.headsupdism
 
+Str(sp_HUD_M_Bar,          s":HUD_M:Bar");
+Str(sp_HUD_M_BarBig,       s":HUD_M:BarBig");
+Str(sp_HUD_M_SplitBack,    s":HUD_M:SplitBack");
+Str(sp_HUD_M_SplitBackRed, s":HUD_M:SplitBackRed");
+Str(sp_HUD_M_SplitFront,   s":HUD_M:SplitFront");
+Str(sp_HUD_M_SplitRight,   s":HUD_M:SplitRight");
+
 /* Static Functions -------------------------------------------------------- */
 
 static void HUD_Ammo(struct player *p) {
@@ -24,18 +31,18 @@ static void HUD_Ammo(struct player *p) {
    str typebg;
    i32 y;
 
-   if(p->getCVarI(sc_hud_showweapons)) {y = 13; typebg = sp_HUD_SplitRight;}
-   else                                {y = 0;  typebg = sp_HUD_SplitFront;}
+   if(p->getCVarI(sc_hud_showweapons)) {y = 13; typebg = sp_HUD_M_SplitRight;}
+   else                                {y = 0;  typebg = sp_HUD_M_SplitFront;}
 
    if(wep->ammotype & AT_NMag || wep->ammotype & AT_Ammo) {
-      PrintSprite(sp_HUD_BarBig, 278,2, 239-y,2);
+      PrintSprite(sp_HUD_M_BarBig, 278,2, 239-y,2);
       PrintSprite(typebg, 319,2, 239,2);
    }
 
-   str typegfx = snil;
+   cstr type = nil;
 
    if(wep->ammotype & AT_NMag) {
-      typegfx = sp_HUD_MAG;
+      type = "MAG";
 
       char txt[16];
       if(wep->ammotype & AT_Ammo && !wep->ammocur)
@@ -47,12 +54,12 @@ static void HUD_Ammo(struct player *p) {
    }
 
    if(wep->ammotype & AT_Ammo) {
-      typegfx = sp_HUD_AMMO;
+      type = "AMMO";
 
       i32 x = 0;
 
       if(wep->ammotype & AT_NMag) {
-         PrintSprite(sp_HUD_BarBig, 214,2, 239-y,2);
+         PrintSprite(sp_HUD_M_BarBig, 214,2, 239-y,2);
          x = 64;
       }
 
@@ -61,8 +68,10 @@ static void HUD_Ammo(struct player *p) {
       PrintTextX(s_bigupper, Cr(green), 217-x,1, 238-y,2, ptf_no_utf);
    }
 
-   if(typegfx)
-      PrintSprite(typegfx, 281,1, 238,2);
+   if(type) {
+      PrintTextChS(type);
+      PrintTextX(s_bigupper, Cr(green), 281,1, 238,2, ptf_no_utf);
+   }
 
    if(P_Wep_CurType(p) == weapon_rifle && ServCallI(sm_GetRifleGrenade))
       PrintSprite(sp_HUD_H_D44, 280,1, 237,1);
@@ -74,9 +83,10 @@ static void HUD_Health(struct player *p, struct upgrade *upgr) {
    StrAry(ws, s":HUD:H_D27", s":HUD:H_D28", s":HUD:H_D24", s":HUD:H_D23",
               s":HUD:H_D22", s":HUD:H_D21", s":HUD:H_D25", s":HUD:H_D26");
 
-   PrintSprite(InvNum(power_strength) ? sp_HUD_SplitBackRed : sp_HUD_SplitBack, 0,1, 240,2);
+   PrintSprite(InvNum(power_strength) ? sp_HUD_M_SplitBackRed : sp_HUD_M_SplitBack, 0,1, 240,2);
 
-   PrintSprite(sp_HUD_VIT, 2,1, 238,2);
+   PrintTextChr("VIT", 3);
+   PrintTextX(s_bigupper, Cr(green), 2,1, 238,2, ptf_no_utf);
 
    k32 ft = 0;
 
@@ -119,7 +129,7 @@ void Upgr_HeadsUpDisM_Render(struct player *p, struct upgrade *upgr) {
    HUD_Score(p, "%s\Cnscr", p->score, s_smallfnt, CR_WHITE, 320,2);
 
    if(p->getCVarI(sc_hud_showweapons))
-      PrintSprite(sp_HUD_Bar, 278,2, 239,2);
+      PrintSprite(sp_HUD_M_Bar, 278,2, 239,2);
 
    HUD_WeaponSlots(p, Cr(wselm1), Cr(wselm2), Cr(wselm3), Cr(wselms), 281, 238);
 

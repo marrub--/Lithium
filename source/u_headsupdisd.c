@@ -14,6 +14,13 @@
 #include "u_common.h"
 #include "p_hud.h"
 
+Str(sp_HUD_D_AMM,       s":HUD_D:AMM");
+Str(sp_HUD_D_Ammo2Back, s":HUD_D:Ammo2Back");
+Str(sp_HUD_D_AmmoBack,  s":HUD_D:AmmoBack");
+Str(sp_HUD_D_HPBack,    s":HUD_D:HPBack");
+Str(sp_HUD_D_MAG,       s":HUD_D:MAG");
+Str(sp_HUD_D_WepBack,   s":HUD_D:WepBack");
+
 /* Static Functions -------------------------------------------------------- */
 
 static void HUD_Ammo(struct player *p) {

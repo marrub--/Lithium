@@ -175,11 +175,13 @@ void Upgr_VitalScan_Render(struct player *p, struct upgrade *upgr) {
 
    /* Health bar */
    if(p->getCVarI(sc_scanner_bar)) {
-      StrAry(bs, s":UI:HealthBar1",  s":UI:HealthBar2",  s":UI:HealthBar3",
-                 s":UI:HealthBar4",  s":UI:HealthBar5",  s":UI:HealthBar6",
-                 s":UI:HealthBar7",  s":UI:HealthBar8",  s":UI:HealthBar9",
-                 s":UI:HealthBar10", s":UI:HealthBar11", s":UI:HealthBar12",
-                 s":UI:HealthBar13", s":UI:HealthBar14");
+      StrAry(bs, s":Bars:HealthBar1",  s":Bars:HealthBar2",
+                 s":Bars:HealthBar3",  s":Bars:HealthBar4",
+                 s":Bars:HealthBar5",  s":Bars:HealthBar6",
+                 s":Bars:HealthBar7",  s":Bars:HealthBar8",
+                 s":Bars:HealthBar9",  s":Bars:HealthBar10",
+                 s":Bars:HealthBar11", s":Bars:HealthBar12",
+                 s":Bars:HealthBar13", s":Bars:HealthBar14");
 
       i32 x = 120 + ox;
       i32 y = (afnt ? 201 : 205) + oy;
@@ -191,7 +193,7 @@ void Upgr_VitalScan_Render(struct player *p, struct upgrade *upgr) {
       PrintSprite(bs[UData.split], x,1, y,1);
       ClearClip();
 
-      Str(exp_bar_1, s":UI:ExpBar1");
+      Str(exp_bar_1, s":Bars:ExpBar1");
       SetClip(x, y+3, 24 * UData.exp, 2);
       PrintSprite(exp_bar_1, x,1, y+3,1);
       ClearClip();

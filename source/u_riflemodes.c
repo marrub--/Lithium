@@ -22,6 +22,8 @@ void Upgr_RifleModes_Deactivate(struct player *p, struct upgrade *upgr)
 
 void Upgr_RifleModes_Render(struct player *p, struct upgrade *upgr)
 {
+   Str(rifle_scope, s":HUD:RifleScope");
+
    if(P_Wep_CurType(p) != weapon_rifle) return;
 
    if(p->getCVarI(sc_weapons_riflescope) &&
@@ -32,7 +34,7 @@ void Upgr_RifleModes_Render(struct player *p, struct upgrade *upgr)
       ACS_SetCameraToTexture(p->cameratid, s_LITHCAM1, 34);
       PrintSprite(s_LITHCAM1, 0,1, 128,0);
 
-      PrintSprite(sp_RifleScope, 40,1, 108,1);
+      PrintSprite(rifle_scope, 40,1, 108,1);
 
       ClearClip();
    }

@@ -60,9 +60,11 @@ void Upgr_ReactArmor_Deactivate(struct player *p, struct upgrade *upgr)
 
 void Upgr_ReactArmor_Render(struct player *p, struct upgrade *upgr)
 {
+   Str(sp_HUD_M_SplitLeft, s":HUD_M:SplitLeft");
+
    if(UData.activearmor && p->getCVarI(sc_hud_showarmorind))
    {
-      PrintSprite(sp_HUD_SplitLeft, 12,1, 226,2);
+      PrintSprite(sp_HUD_M_SplitLeft, 12,1, 226,2);
 
       PrintTextChr(ArmorNames[UData.activearmor - 1].abbr, 3);
       PrintTextX(s_bigupper, CR_LIGHTBLUE, 32,1, 217,0, ptf_no_utf);

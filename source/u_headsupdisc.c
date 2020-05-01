@@ -14,6 +14,15 @@
 #include "u_common.h"
 #include "p_hud.h"
 
+Str(sp_HUD_C_AMMO,       s":HUD_C:AMMO");
+Str(sp_HUD_C_Back,       s":HUD_C:Back");
+Str(sp_HUD_C_Bar,        s":HUD_C:Bar");
+Str(sp_HUD_C_HeatBar,    s":HUD_C:HeatBar");
+Str(sp_HUD_C_MAG,        s":HUD_C:MAG");
+Str(sp_HUD_C_SplitBack,  s":HUD_C:SplitBack");
+Str(sp_HUD_C_SplitFront, s":HUD_C:SplitFront");
+Str(sp_HUD_C_VIT,        s":HUD_C:VIT");
+
 /* Static Functions -------------------------------------------------------- */
 
 static void HUD_Ammo(struct player *p)

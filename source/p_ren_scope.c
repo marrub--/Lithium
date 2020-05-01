@@ -90,6 +90,8 @@ static void ScopeC(struct player *p) {
 }
 
 static void ScopeI(struct player *p) {
+   Str(sp_HUD_I_ScopeOverlay, s":HUD_I:ScopeOverlay");
+
    k32 a = (1 + ACS_Sin(ACS_Timer() / 70.0)) * 0.25 + 0.5;
    SetSize(320, 200);
    PrintSpriteAP(sp_HUD_I_ScopeOverlay, 160,0, 100,0, a);

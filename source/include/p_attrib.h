@@ -18,16 +18,14 @@
 #define ATTR_VIS_MAX 50
 #define ATTR_VIS_DIFF (ATTR_BAS_MAX - ATTR_VIS_MAX)
 
-enum
-{
+enum {
    atsys_auto,
    atsys_hybrid,
    atsys_manual,
    atsys_max,
 };
 
-struct player_attributes
-{
+struct player_attributes {
    u32 expprev, exp, expnext;
    u32 level;
    u32 points;

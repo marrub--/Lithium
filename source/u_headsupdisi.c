@@ -16,6 +16,12 @@
 
 #define UData p->upgrdata.headsupdisi
 
+Str(sp_HUD_I_AMMO,         s":HUD_I:AMMO");
+Str(sp_HUD_I_AmmoExtend,   s":HUD_I:AmmoExtend");
+Str(sp_HUD_I_AmmoWepsBack, s":HUD_I:AmmoWepsBack");
+Str(sp_HUD_I_HPAPBack,     s":HUD_I:HPAPBack");
+Str(sp_HUD_I_MAG,          s":HUD_I:MAG");
+
 /* Static Functions -------------------------------------------------------- */
 
 static void HUDI_Ammo(struct player *p, struct upgrade *upgr) {

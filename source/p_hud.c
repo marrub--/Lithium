@@ -88,18 +88,18 @@ void HUD_Score(struct player *p, cstr fmt, i96 scrn, str font, i32 cr, i32 x, i3
 
    i32 expbar = p->getCVarI(sc_hud_expbar);
    if(expbar > 0) {
-      Str(exp_bar_0, s":UI:ExpBar0");
+      Str(exp_bar_0, s":Bars:ExpBar0");
       PrintSprite(exp_bar_0, x,xa, 24,1);
       i32 xx = x;
-      k32 fr =
-         (p->attr.exp - p->attr.expprev) /
-         (k32)(p->attr.expnext - p->attr.expprev);
+      u32 fr =
+         ((u64)(p->attr.exp     - p->attr.expprev) * 24) /
+          (u64)(p->attr.expnext - p->attr.expprev);
       switch(xa) {
          case 0: xx -= 12; break;
          case 2: xx -= 24; break;
       }
-      SetClip(xx, 24, 24 * fr, 2);
-      PrintSprite(StrParam(":UI:ExpBar%i", expbar), xx,1, 24,1);
+      SetClip(xx, 24, fr, 2);
+      PrintSprite(StrParam(":Bars:ExpBar%i", expbar), xx,1, 24,1);
       ClearClip();
    }
 }
