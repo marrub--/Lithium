@@ -39,12 +39,12 @@ And code help from:
 @@
 
 All of my thanks to:
-\cnDavidPH\cj, for making this project possible.
 @@
+\cnDavidPH\cj, for making this project possible.
+
 \cnKate\cj, \cnKyle873\cj, \cnSe7enytes\cj and \cnXaser\cj, for being
 an inspiration.
-@@
-@@
+
 \cnMarisa\cj, \cnYholl\cj, and \cnZombie\cj, for tons of help dealing
 with ZDoom.
 @@

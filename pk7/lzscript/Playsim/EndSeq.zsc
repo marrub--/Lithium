@@ -7,8 +7,7 @@
  * ---------------------------------------------------------------------------|
  */
 
-struct Lith_EndSeqNode
-{
+struct Lith_EndSeqNode {
    name   Type;
    uint   Tics;
    string Text;
@@ -16,8 +15,7 @@ struct Lith_EndSeqNode
 
 extend class Lith_HERMES;
 
-enum Lith_EndSeqState
-{
+enum Lith_EndSeqState {
    ESEQ_HALT,
 
    ESEQ_RUN,
@@ -43,8 +41,7 @@ private ui string m_Text;
 private ui textureid m_BgImg;
 private ui int m_Time, m_Tics, m_Skip;
 
-ui int LoadEnding(string fname, int start)
-{
+ui int LoadEnding(string fname, int start) {
    let lmp = Lith_HERMES.ReadLump(Lith_HERMES.FindLump(fname));
 
    array<string> lns, arg;
@@ -113,8 +110,7 @@ ui int LoadEnding(string fname, int start)
    return which;
 }
 
-ui void DrawEndSequence(RenderEvent evt)
-{
+ui void DrawEndSequence(RenderEvent evt) {
    Screen.Dim(m_BgColo, 1, 0, 0, Screen.GetWidth(), Screen.GetHeight());
 
    if(m_BgImg)
@@ -122,15 +118,20 @@ ui void DrawEndSequence(RenderEvent evt)
 
    string txt = m_Text;
 
-   if(m_ESeq == ESEQ_WRITEOUT)
-   {
+   if(m_ESeq == ESEQ_WRITEOUT) {
       uint len = m_Text.length();
       uint prc = m_Time*IFIX / m_Tics; /* divide (k/i) */
       uint amt = len * prc / IFIX; /* multiply (i*k) and remove decimal */
       txt = m_Text.left(amt);
    }
 
-   if(txt != "") Screen.DrawText(smallfont, Font.CR_WHITE, 10, 10, txt, DTA_VirtualWidth, 320, DTA_VirtualHeight, 240);
+   if(txt != "") {
+      let lns = smallfont.breakLines(txt, 310);
+      for(int i = 0, n = lns.count(); i < n; i++) {
+         int y = i * smallfont.getHeight() + 10;
+         Screen.DrawText(smallfont, Font.CR_WHITE, 10, y, lns.stringAt(i), DTA_VirtualWidth, 320, DTA_VirtualHeight, 240);
+      }
+   }
 
    switch(m_ESeq) {
       case ESEQ_FADEMUS:
@@ -149,54 +150,42 @@ ui void DrawEndSequence(RenderEvent evt)
       Screen.DrawText(smallfont, Font.CR_WHITE, 5, 0, String.Format("Skip: %u", 1 + m_Skip / 10), DTA_VirtualWidth, 320, DTA_VirtualHeight, 240);
 }
 
-ui void RunEndSequence()
-{
+ui void RunEndSequence() {
    PlayerInfo p = Players[ConsolePlayer];
    let btn = p.Cmd.Buttons;
    let old = p.OldButtons;
 
-   if(m_ESeq >= ESEQ_WAIT)
-   {
-      if(btn & BT_ALTATTACK)
-      {
-         if(m_Skip)
-         {
+   if(m_ESeq >= ESEQ_WAIT) {
+      if(btn & BT_ALTATTACK) {
+         if(m_Skip) {
             if(--m_Skip == 0) {
                m_ESeq = ESEQ_RUN;
                m_P++;
             }
-         }
-         else
+         } else {
             m_Skip = 25;
-      }
-      else if(m_Time < m_Tics)
-      {
+         }
+      } else if(m_Time < m_Tics) {
          m_Skip = 0;
 
          if(btn & BT_USE && m_Time > 12) m_Time += 3;
          else                            m_Time++;
 
          if(m_Time > m_Tics) m_Time = m_Tics;
-      }
-      else
-      {
+      } else {
          m_Skip = 0;
 
          m_ESeq = ESEQ_RUN;
          m_P++;
       }
-   }
-   else if(m_ESeq == ESEQ_STOP)
-   {
-      if(btn & BT_ALTATTACK || (btn ^ old && (btn & old) == p.OldButtons && p.Bot == null))
-      {
+   } else if(m_ESeq == ESEQ_STOP) {
+      if(btn & BT_ALTATTACK || (btn ^ old && (btn & old) == p.OldButtons && p.Bot == null)) {
          m_ESeq = ESEQ_RUN;
          m_P++;
       }
    }
 
-   while(m_ESeq == ESEQ_RUN)
-   {
+   while(m_ESeq == ESEQ_RUN) {
       switch(m_Node[m_P].Type) {
       case 'mus':
          S_ChangeMusic(m_Node[m_P++].Text);
