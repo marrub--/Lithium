@@ -14,11 +14,9 @@
 #include "u_common.h"
 #include "p_hud.h"
 
-Str(sp_HUD_D_AMM,       s":HUD_D:AMM");
 Str(sp_HUD_D_Ammo2Back, s":HUD_D:Ammo2Back");
 Str(sp_HUD_D_AmmoBack,  s":HUD_D:AmmoBack");
 Str(sp_HUD_D_HPBack,    s":HUD_D:HPBack");
-Str(sp_HUD_D_MAG,       s":HUD_D:MAG");
 Str(sp_HUD_D_WepBack,   s":HUD_D:WepBack");
 
 /* Static Functions -------------------------------------------------------- */
@@ -26,13 +24,13 @@ Str(sp_HUD_D_WepBack,   s":HUD_D:WepBack");
 static void HUD_Ammo(struct player *p) {
    struct invweapon const *wep = p->weapon.cur;
 
-   str typegfx = snil;
+   cstr type = nil;
 
    if(wep->ammotype & AT_AMag)
       PrintSprite(sp_HUD_D_AmmoBack, 320,2, 239,2);
 
    if(wep->ammotype & AT_NMag) {
-      typegfx = sp_HUD_D_MAG;
+      type = "MG";
 
       char txt[16];
       if(wep->ammotype & AT_Ammo && !wep->ammocur)
@@ -40,25 +38,28 @@ static void HUD_Ammo(struct player *p) {
       else
          sprintf(txt, "%i/%i", wep->magmax - wep->magcur, wep->magmax);
       PrintTextChS(txt);
-      PrintTextX(s_bigupper, Cr(blue), 242,1, 228,0, ptf_no_utf);
+      PrintTextX(s_bigupper, Cr(blue), 232,1, 228,0, ptf_no_utf);
    }
 
    if(wep->ammotype & AT_Ammo) {
-      typegfx = sp_HUD_D_AMM;
+      type = "AM";
 
       i32 x = 0;
 
       if(wep->ammotype & AT_NMag) {
-         PrintSprite(sp_HUD_D_Ammo2Back, 240,2, 239,2);
-         x = -58;
+         PrintSprite(sp_HUD_D_Ammo2Back, 230,2, 239,2);
+         x = 62;
       }
 
       ACS_BeginPrint();
       ACS_PrintInt(wep->ammocur);
-      PrintTextX(s_bigupper, Cr(blue), x+242,1, 228,0, ptf_no_utf);
+      PrintTextX(s_bigupper, Cr(blue), 232-x,1, 228,0, ptf_no_utf);
    }
 
-   if(typegfx) PrintSprite(typegfx, 318,2, 233,2);
+   if(type) {
+      PrintTextChr(type, 2);
+      PrintTextX(s_lmidfont, Cr(blue), 310,4, 233,2, ptf_no_utf);
+   }
 }
 
 static void HUD_Health(struct player *p) {
