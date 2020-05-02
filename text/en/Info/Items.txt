@@ -242,11 +242,14 @@ Next to the drawing is a message written in blue paint reading "I miss you."
 == \#INFO_SHORT_ArmMidori | Midori
 == \#INFO_TITLE_ArmMidori | $\#INFO_SHORT_ArmMidori
 @@ \#INFO_DESCR_ArmMidori
-An artifact from the Reverse Ace dimension. A dark, matte green suit with
-various religious and spiritual symbols hanging from it. Despite being placed
-on the armor mainly with beaded strings, the objects don't seem to come off
-no matter how hard you pull on them. This armor, through an unknown magic
-layer, is the only known object capable of resisting fire magic.
+An artifact from the Reverse Ace dimension. A dark, matte green suit
+with various religious and spiritual symbols hanging from it. Despite
+being placed on the armor mainly with beaded strings, the objects
+don't seem to come off no matter how hard you pull on them. This
+armor, through an unknown magic layer, is the only known object
+capable of resisting fire magic. For some reason, as you put it on,
+unpleasant memories you never had come rushing in. Despite this, they
+feel pleasant, and make you want to cry.
 
 ## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_WeapnInter | Weapon Interface
