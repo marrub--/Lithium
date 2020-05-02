@@ -44,6 +44,7 @@ i32 lstrcmp_str(cstr s1, astr s2);
 i32 faststrcmp(cstr s1, cstr s2);
 i32 faststrcasecmp(cstr s1, cstr s2);
 cstr scoresep(i96 num);
+cstr alientext(i32 num);
 str LanguageV(str name);
 char *LanguageVC(char *out, cstr name);
 char *LanguageCV(char *out, cstr name, ...);

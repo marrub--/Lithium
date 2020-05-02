@@ -110,8 +110,7 @@ i32 faststrcasecmp(cstr s1, cstr s2)
    return res;
 }
 
-cstr scoresep(i96 num)
-{
+cstr scoresep(i96 num) {
    static char out[48];
 
    if(!num) {
@@ -123,8 +122,7 @@ cstr scoresep(i96 num)
    char *outp = out + countof(out) - 1;
    i32 cnum = 0;
 
-   while(num)
-   {
+   while(num) {
       lldiv_t div = __div(num, 10LL);
       *--outp = div.rem + '0';
       num = div.quot;
@@ -136,6 +134,37 @@ cstr scoresep(i96 num)
    }
 
    if(!cnum) outp++;
+
+   return outp;
+}
+
+cstr alientext(i32 num) {
+   static char out[80];
+
+   if(!num) {
+      strcpy(out, u8"");
+      return out;
+   }
+
+   char *outp = out + countof(out) - 1;
+   i32 cnum = 0;
+
+   while(num) {
+      div_t div = __div(num, 10);
+      *--outp = 0x80 + div.rem;
+      *--outp = 0x80;
+      *--outp = 0xee;
+      num = div.quot;
+
+      if(++cnum == 4) {
+         *--outp = 0x8a;
+         *--outp = 0x80;
+         *--outp = 0xee;
+         cnum = 0;
+      }
+   }
+
+   if(!cnum) outp += 3;
 
    return outp;
 }

@@ -78,8 +78,8 @@ script void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr) {
          UData.tagstr = RandomName(freak ? 0 : id);
 
          if(p->getCVarI(sc_scanner_bar)) {
-            UData.oldhealth = UData.health = ACS_Random(0, 666666);
-            UData.maxhealth = ACS_Random(0, 666666);
+            UData.oldhealth = UData.health = ACS_Random(0, 666666666);
+            UData.maxhealth = ACS_Random(0, 666666666);
             healthset = true;
          }
       } else {
@@ -169,9 +169,19 @@ void Upgr_VitalScan_Render(struct player *p, struct upgrade *upgr) {
 
    PrintText_str(UData.tagstr, font, cr, 160+ox,4, 216+oy,2);
 
-   if(UData.maxhealth) PrintTextFmt("%u/%u", UData.health, UData.maxhealth);
-   else                PrintTextFmt("%uhp",  UData.health);
-   PrintTextX(UData.freak ? s_alienfont : font, CR_WHITE, 160+ox,4, 225+oy,2, ptf_no_utf);
+   if(UData.maxhealth) {
+      if(UData.freak) {
+         ACS_BeginPrint();
+         PrintChrSt(alientext(UData.health));
+         ACS_PrintChar('/');
+         PrintChrSt(alientext(UData.maxhealth));
+      } else {
+         PrintTextFmt("%u/%u", UData.health, UData.maxhealth);
+      }
+   } else {
+      PrintTextFmt("%uhp", UData.health);
+   }
+   PrintTextX(font, CR_WHITE, 160+ox,4, 225+oy,2, ptf_no_utf);
 
    /* Health bar */
    if(p->getCVarI(sc_scanner_bar)) {
