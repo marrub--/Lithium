@@ -42,17 +42,9 @@ script void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr) {
       Str(nodamage_s, s"NODAMAGE");
       Str(shadow_s,   s"SHADOW");
 
-      Str(legendary_monster_token,       s"LDLegendaryMonsterToken");
       Str(legendary_monster_transformed, s"LDLegendaryMonsterTransformed");
 
-      bool legendary = legendoom && InvNum(legendary_monster_token);
-      bool henshin   = legendoom && InvNum(legendary_monster_transformed);
-
-      bool phantom = InvNum(so_IsPhantom);
-
-      bool freak  = ACS_CheckFlag(0, invuln_s) || ACS_CheckFlag(0, nodamage_s);
-      bool boss   = ACS_CheckFlag(0, boss_s);
-      bool shadow = ACS_CheckFlag(0, shadow_s);
+      bool freak = ACS_CheckFlag(0, invuln_s) || ACS_CheckFlag(0, nodamage_s);
 
       i32 chp = GetMembI(0, sm_Health);
       i32 shp = ServCallI(sm_GetSpawnHealth);
@@ -72,7 +64,21 @@ script void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr) {
 
       bool healthset = false;
 
-      if((freak || boss) && !phantom) {
+      if(m) {
+         UData.rank = m->rank;
+         UData.exp  = m->exp / (k32)_monster_level_exp;
+      } else {
+         UData.rank = 0;
+         UData.exp  = 1.0;
+      }
+
+      UData.freak = true;
+
+      if(UData.rank == 6) {
+         UData.tagstr = StrParam("\C[Lith_Dark]%tS\C-", 0);
+      } else if(UData.rank == 7) {
+         UData.tagstr = StrParam("\C[Lith_Angelic]%tS\C-", 0);
+      } else if(freak || ACS_CheckFlag(0, boss_s)) {
          extern str RandomName(i32 id);
 
          UData.tagstr = RandomName(freak ? 0 : id);
@@ -82,14 +88,16 @@ script void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr) {
             UData.maxhealth = ACS_Random(0, 666666666);
             healthset = true;
          }
-      } else {
+      } else if(six) {
          Str(six_tag, s"\Cg6");
-
-         /**/ if(six)     UData.tagstr = six_tag;
-         else if(henshin) UData.tagstr = StrParam("\CgLegendary\C- %tS\C-", 0);
-         else if(phantom) UData.tagstr = StrParam("\Cg%tS\C-", 0);
-         else             UData.tagstr = StrParam("%tS\C-", 0);
+         UData.tagstr = six_tag;
+      } else {
+         UData.tagstr = StrParam("%tS\C-", 0);
+         UData.freak = false;
       }
+
+      if(legendoom && InvNum(legendary_monster_transformed))
+         UData.tagstr = StrParam("\CgLegendary\C- %tS\C-", 0);
 
       if(!healthset) {
          UData.oldhealth = UData.health;
@@ -98,13 +106,11 @@ script void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr) {
       }
 
       if(m) {
-         i32 level    = shadow ? m->level - ACS_Random(-5, 5) : m->level;
+         i32 level =
+            ACS_CheckFlag(0, shadow_s) ?
+            m->level - ACS_Random(-5, 5) :
+            m->level;
          UData.tagstr = StrParam("%S lv.%i", UData.tagstr, level);
-         UData.rank   = m->rank;
-         UData.exp    = m->exp / (k32)_monster_level_exp;
-      } else {
-         UData.rank = 0;
-         UData.exp  = 1.0;
       }
 
       if(shp) {
@@ -117,7 +123,6 @@ script void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr) {
          UData.split     = 0;
       }
 
-      UData.freak  = six || freak || phantom || boss;
       UData.cangle = ACS_VectorAngle(p->x - GetX(0), p->y - GetY(0)) * tau;
 
       /* Hit indicator */

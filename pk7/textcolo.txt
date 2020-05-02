@@ -15,6 +15,16 @@ Lith_Purple {#301875 #8c3bf8}
 Lith_Red    {#1f1f1f #bf0f4a}
 Lith_Yellow {#000000 #ffd023}
 
+Lith_Dark {
+   #1d0202 #363636 0   127
+   #363636 #655e5e 128 255
+}
+
+Lith_Angelic {
+   #434022 #9b9879 0   127
+   #9b9879 #ffffff 128 255
+}
+
 Lith_RRed {#000000 #f54f4c}
 Lith_RDOr {#000000 #f2754b}
 Lith_ROra {#000000 #f7a54d}

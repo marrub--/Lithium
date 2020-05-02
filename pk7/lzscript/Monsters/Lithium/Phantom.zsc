@@ -7,8 +7,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_IsPhantom : Inventory {default {Inventory.MaxAmount 1;}}
-
 class Lith_PhantomTeleportFX : Actor {
    default {
       Alpha        0.8;
@@ -107,7 +105,7 @@ override void Tick() {
          for(let it = BlockThingsIterator.Create(self, 1024); it.next();) {
             let mo = it.thing;
             if(mo && (mo.bISMONSTER && mo.bCOUNTKILL || mo.player) &&
-               !mo.countInv("Lith_IsPhantom") && checkSight(mo))
+               !(mo is "Lith_Phantom") && checkSight(mo))
             {
                target = it.thing;
                SetState(ResolveState("See"));
@@ -129,7 +127,6 @@ override void Tick() {
 override void PostBeginPlay()
 {
    Super.PostBeginPlay();
-   GiveInventory("Lith_IsPhantom", 1);
    m_Step = 1;
    Lith_PostInit();
 }
