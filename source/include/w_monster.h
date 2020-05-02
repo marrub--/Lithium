@@ -19,7 +19,7 @@
 #include "m_list.h"
 
 enum {
-   _monster_level_exp = 500,
+   _monster_level_exp = 777,
 };
 
 enum dmgtype {

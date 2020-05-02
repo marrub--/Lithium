@@ -298,7 +298,7 @@ override void WorldThingDamaged(WorldEvent ev)
    if(player)
       player.Lith_AddDamageNum(pos, dst.radius/2, ev.damage);
    else if(src.CountInv("Lith_MonsterID") && (dst.bCOUNTKILL || dst.Player))
-      src.ACS_ScriptCall("Lith_GiveMonsterEXP", int(ev.Damage * 3.77));
+      src.ACS_ScriptCall("Lith_GiveMonsterEXP", ev.Damage);
 }
 
 override void WorldThingDied(WorldEvent ev)
