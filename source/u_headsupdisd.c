@@ -30,7 +30,7 @@ static void HUD_Ammo(struct player *p) {
       PrintSprite(sp_HUD_D_AmmoBack, 320,2, 239,2);
 
    if(wep->ammotype & AT_NMag) {
-      type = "MG";
+      type = u8"\n";
 
       char txt[16];
       if(wep->ammotype & AT_Ammo && !wep->ammocur)
@@ -42,7 +42,7 @@ static void HUD_Ammo(struct player *p) {
    }
 
    if(wep->ammotype & AT_Ammo) {
-      type = "AM";
+      type = u8"\n";
 
       i32 x = 0;
 
@@ -57,8 +57,8 @@ static void HUD_Ammo(struct player *p) {
    }
 
    if(type) {
-      PrintTextChr(type, 2);
-      PrintTextX(s_lmidfont, Cr(blue), 310,4, 233,2, ptf_no_utf);
+      PrintTextChS(type);
+      PrintTextX(s_lmidfont, Cr(blue), 309,4, 230,0, ptf_no_utf);
    }
 }
 
@@ -67,6 +67,9 @@ static void HUD_Health(struct player *p) {
               s":HUD:H_D22", s":HUD:H_D21", s":HUD:H_D25", s":HUD:H_D26");
 
    PrintSprite(sp_HUD_D_HPBack, 0,1, 239,2);
+
+   PrintTextChS(u8"");
+   PrintTextX(s_lmidfont, Cr(blue), 8,4, 229,0, ptf_no_utf);
 
    HUD_DrawHealth(p, p->health, 18, 228, Cr(blue), 0);
 
