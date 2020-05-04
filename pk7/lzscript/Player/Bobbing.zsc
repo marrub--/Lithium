@@ -9,6 +9,15 @@
 
 extend class Lith_Player;
 
+enum Lith_BobDir {
+   _up,
+   _down,
+};
+
+int m_mbobprv;
+int m_mbobpos;
+int m_mbobdir;
+
 void Lith_BobWeapon() {
    double mang = atan2(vel.y, vel.x) - angle;
    double mvel = vel.xy.length();
@@ -40,6 +49,19 @@ void Lith_BobWeapon() {
 
    m_LastVZVel = m_VZVel;
    m_VZVel = Lith_UTIL.Lerp(m_VZVel, m_ZVel, 0.42);
+
+   if(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_7777777)) {
+      m_mbobprv = m_mbobpos;
+      if(!(vel.length() < 4 ||
+           !player.readyweapon ||
+           player.readyweapon.bDONTBOB) ||
+         m_mbobpos != 0)
+      {
+         if(m_mbobdir == _up) m_mbobpos++; else m_mbobpos--;
+      }
+      /**/ if(m_mbobpos < -10) {m_mbobdir = _up;   m_mbobpos = -10;}
+      else if(m_mbobpos >  10) {m_mbobdir = _down; m_mbobpos =  10;}
+   }
 }
 
 override vector2 BobWeapon(double ticfrac) {
@@ -47,6 +69,10 @@ override vector2 BobWeapon(double ticfrac) {
 
    let wep = Player.ReadyWeapon;
    if(!wep) return (0, 0);
+
+   if(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_7777777)) {
+      return (0, (m_mbobpos - m_mbobprv) * ticfrac + m_mbobpos + 5 + clamp(20 - 20 * (pitch + 90) / 180.0, 5, 15));
+   }
 
    vector2 p[2];
    p[0] = (0, 0);
