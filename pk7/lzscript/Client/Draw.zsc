@@ -144,7 +144,7 @@ static int LY(Actor mo, int num)
               255.0);
 }
 
-static void LL(Actor mo, int x, int y, int z, int w, string c = "")
+static void LL(Actor mo, int x, int y, int z, int w, color c = 0)
 {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
    if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return;

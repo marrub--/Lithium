@@ -50,6 +50,9 @@ GlobalCrH(wselm1) GlobalCrH(wselm2) GlobalCrH(wselm3) GlobalCrH(wselms)
    DrawCallI(sm_LR, PrintRectArgs0(x, y), PrintRectArgs1(w, h), \
              PrintRectArgs2(c, a))
 
+#define PrintLine(x, y, z, w, c) \
+   DrawCallI(sm_LL, x, y, z, w, c)
+
 #define PrintSpriteArgs0(x,      xa) XBitArg(x, xa)
 #define PrintSpriteArgs1(y,      ya) YBitArg(y, ya)
 #define PrintSpriteArgs2(alpha, flg) (BitArg(alpha, 0xff, 0) | (u32)(flg))
