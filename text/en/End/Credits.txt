@@ -8,45 +8,49 @@
 
 %% \#ENDING_Credits
 \cd>>>>>                             [[[[ Lithium ]]]]
-\cd>>>>>                         Project Golan, Xevv 2
+\cd>>>>>                    [[[[ Project Golan, Xevv 2 ]]]]
 
 \cdOriginal music\cj for ending sequences by \cn_sink\cj
 Intermission music - \cdThe Alchemist\cj by \cnSkaven\cj
 Title music - \cdShredder\cj by \cn505\cj
 Fonts by \cnJimmy\cj
 
-Sprites by:
+\cd>>>>>                         [[[[ Graphics By ]]]]
 @@
-\cnAnthony Cole\cj, \cnBloax\cj, \cnCage\cj, \cnCaptain J\cj,
-\cnGAA1992\cj, \cnHorrorMovieGuy\cj, \cnKate Fox\cj, \cnMarlboro
-Mike\cj, \cnMarrub\cj, \cnMike12\cj, \cnMinigunner\cj,
-\cnMrEnchanter\cj, \cnScuba Steve\cj, \cnSeryder\cj, \cnSgt.
-Shivers\cj, \cnSlax\cj, \cnSolo Spaghetti\cj, \cnTheRailgunner\cj,
-\cnTurbo\cj, \cnwildweasel\cj, \cntorridGristle\cj, \cnzrrion the
-insect\cj, and others...
+\cna1337spy\cj, \cnabbuw\cj, \cnAnthony Cole\cj, \cnBloax\cj,
+\cnCage\cj, \cnCaptain J\cj, \cnChronoTeeth\cj, \cnCombine_Kegan\cj,
+\cnDynamo\cj, \cnGAA1992\cj, \cnHorrorMovieGuy\cj, \cnJetPlane\cj,
+\cnKate \cnFox\cj, \cnKurashiki\cj, \cnMarlboro Mike\cj, \cnMarphy
+\cnBlack\cj, \cnMarrub\cj, \cnMike12\cj, \cnMinigunner\cj,
+\cnmonkeybtm6\cj, \cnMrEnchanter\cj, \cnRyan \cnCordell\cj, \cnScuba
+\cnSteve\cj, \cnSeryder\cj, \cnSgt. \cnShivers\cj, \cnSiFi \cn270\cj,
+\cnSkelegant\cj, \cnSlax\cj, \cnSolo \cnSpaghetti\cj,
+\cnTheRailgunner\cj, \cnTurbo\cj, \cnvikingbro\cj, \cnVriskaSerket\cj,
+\cnTerminusEst13\cj, \cnwildweasel\cj, \cntorridGristle\cj,
+\cnXaser\cj, \cnYholl\cj, \cnZombie\cj, and \cnzrrion\cj
 @@
 
-With sound help from:
+\cd>>>>>                        [[[[ Audio Help From ]]]]
 @@
 \cna1337spy\cj, \cnKyle873\cj, \cnShadowlink226\cj,
-\cnTerminusEst13\cj, \cnwildweasel\cj, and others...
+\cnTerminusEst13\cj, and \cnwildweasel\cj
 @@
 
-And code help from:
+\cd>>>>>                         [[[[ Code Help From ]]]]
 @@
-\cnDavidPH\cj, \cnGutawer\cj, \cnInsanityBringer\cj, \cnKate Fox\cj,
-\cnMarisa Kirisame\cj, \cnYholl\cj, \cnZombie\cj
+\cnDavidPH\cj, \cnGutawer\cj, \cnInsanityBringer\cj, \cnJimmy\cj,
+\cnKate Fox\cj, \cnMarisa Kirisame\cj, \cnXaser\cj, \cnYholl\cj,
+and \cnZombie\cj
 @@
 
-All of my thanks to:
+\cd>>>>>                          [[[[ Thank You ]]]]
 @@
 \cnDavidPH\cj, for making this project possible.
 
 \cnKate\cj, \cnKyle873\cj, \cnSe7enytes\cj and \cnXaser\cj, for being
 an inspiration.
 
-\cnMarisa\cj, \cnYholl\cj, and \cnZombie\cj, for tons of help dealing
-with ZDoom.
+\cnMarisa\cj, \cnYholl\cj, and \cnZombie\cj, for tons of help.
 @@
 
 ## EOF

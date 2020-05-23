@@ -149,6 +149,7 @@ skill nightmare {
 }
 
 map TITLEMAP "Lithium Title" {
+   LevelNum = 18883001
    Sky1 = "LITHSKRD", 0.05
    Sky2 = "LITHSKS1"
    DoubleSky

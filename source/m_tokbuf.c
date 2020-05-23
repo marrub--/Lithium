@@ -14,7 +14,13 @@
 #include "m_tokbuf.h"
 #include "m_str.h"
 
+#include <ACS_ZDoom.h>
 #include <string.h>
+
+enum {
+   _bbeg = 14,
+   _bend = 28,
+};
 
 /* Extern Functions -------------------------------------------------------- */
 
@@ -39,26 +45,26 @@ i32 TBufProcL(struct token *tok) {
 
 void TBufCtor(struct tokbuf *tb) {
    tb->orig.line = 1;
-   tb->toks = Calloc(tb->bend, sizeof *tb->toks);
 
    if(!tb->tokProcess) tb->tokProcess = TBufProc;
 }
 
 void TBufDtor(struct tokbuf *tb) {
-   if(tb->toks) for(i32 i = 0; i < tb->bend; i++) tb->toks[i].textC = 0;
-
-   Dalloc(tb->toks);
+   for(i32 i = 0; i < _bend; i++) {
+      tb->toks[i].type = 0;
+      tb->toks[i].textC = 0;
+   }
 }
 
 struct token *TBufGet(struct tokbuf *tb) {
    if(++tb->tpos < tb->tend) return &tb->toks[tb->tpos];
 
    /* free beginning of buffer */
-   for(i32 i = 0; i < tb->bbeg; i++) tb->toks[i].textC = 0;
+   for(i32 i = 0; i < _bbeg; i++) tb->toks[i].textC = 0;
 
    /* move end of buffer to beginning */
    if(tb->tend) {
-      i32 s = tb->tend - tb->bbeg;
+      i32 s = tb->tend - _bbeg;
 
       for(i32 i = s, j = 0; i < tb->tend; i++, j++)
          tb->toks[j] = tb->toks[i];
@@ -67,7 +73,7 @@ struct token *TBufGet(struct tokbuf *tb) {
    }
 
    /* get new tokens */
-   for(tb->tpos = tb->tend = tb->bbeg; tb->tend < tb->bend; tb->tend++) {
+   for(tb->tpos = tb->tend = _bbeg; tb->tend < _bend; tb->tend++) {
    skip:
       TokParse(tb->fp, &tb->toks[tb->tend], &tb->orig);
 
@@ -105,6 +111,61 @@ bool TBufDrop(struct tokbuf *tb, i32 t) {
       return false;
    } else {
       return true;
+   }
+}
+
+void TBufErr(struct tokbuf *tb, cstr fmt, ...) {
+   va_list vl;
+
+   ACS_BeginPrint();
+   va_start(vl, fmt);
+   __vnprintf(fmt, vl);
+   va_end(vl);
+   ACS_EndLog();
+
+   longjmp(tb->env, 1);
+}
+
+void TBufErrTk(struct tokbuf *tb, struct token *tok, cstr fmt, ...) {
+   va_list vl;
+
+   ACS_BeginPrint();
+   TokPrint(tok);
+   ACS_PrintChar(' ');
+   va_start(vl, fmt);
+   __vnprintf(fmt, vl);
+   va_end(vl);
+   ACS_EndLog();
+
+   longjmp(tb->env, 1);
+}
+
+struct token *TBufExpc(struct tokbuf *tb, struct token *tok, i32 t1) {
+   if(tok->type != t1) {
+      tb->errtk(tok, "expected %s", TokType(t1));
+   }
+   return tok;
+}
+
+struct token *TBufExpc2(struct tokbuf *tb, struct token *tok, i32 t1, i32 t2) {
+   if(tok->type != t1 && tok->type != t2) {
+      tb->errtk(tok, "expected %s or %s", TokType(t1), TokType(t2));
+   }
+   return tok;
+}
+
+struct token *TBufExpc3(struct tokbuf *tb, struct token *tok, i32 t1, i32 t2, i32 t3) {
+   if(tok->type != t1 && tok->type != t2 && tok->type != t3) {
+      tb->errtk(tok, "expected %s, %s, or %s", TokType(t1),
+                TokType(t2), TokType(t3));
+   }
+   return tok;
+}
+
+void TBufExpDr(struct tokbuf *tb, i32 t) {
+   if(!tb->drop(t)) {
+      struct token *tok = tb->reget();
+      tb->errtk(tok, "expected %s", TokType(t));
    }
 }
 

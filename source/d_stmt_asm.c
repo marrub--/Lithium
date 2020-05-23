@@ -28,7 +28,7 @@ static i32 CodeABS(struct compiler *d, cstr reg)
          } else if(d->tb.drop(tok_comma)) {
             tok = d->tb.get();
 
-            if(CheckKw(tok, reg)) return n;
+            if(TokIsKw(tok, reg)) return n;
 
             d->tb.unget();
          }
@@ -53,7 +53,7 @@ static i32 CodeZPG(struct compiler *d, cstr reg)
          } else if(d->tb.drop(tok_comma)) {
             tok = d->tb.get();
 
-            if(CheckKw(tok, reg)) return n;
+            if(TokIsKw(tok, reg)) return n;
 
             d->tb.unget();
          }
@@ -130,7 +130,7 @@ static bool CodeIX(struct compiler *d, u32 code)
          if(n <= 0xFF && d->tb.drop(tok_comma)) {
             tok = d->tb.get();
 
-            if(CheckKw(tok, "X") && d->tb.drop(tok_parenc)) {
+            if(TokIsKw(tok, "X") && d->tb.drop(tok_parenc)) {
                Dlg_PushB1(d, code);
                Dlg_PushB1(d, n);
                return true;
@@ -157,7 +157,7 @@ static bool CodeIY(struct compiler *d, u32 code)
          if(n <= 0xFF && d->tb.drop(tok_parenc) && d->tb.drop(tok_comma)) {
             tok = d->tb.get();
 
-            if(CheckKw(tok, "Y")) {
+            if(TokIsKw(tok, "Y")) {
                Dlg_PushB1(d, code);
                Dlg_PushB1(d, n);
                return true;
@@ -243,7 +243,7 @@ void Dlg_GetStmt_Asm(struct compiler *d)
    #include "d_vm.h"
 
    tok = d->tb.reget();
-   ErrT(d, tok, "no function found with this syntax");
+   d->tb.errtk(tok, "no function found with this syntax");
 }
 
 /* EOF */

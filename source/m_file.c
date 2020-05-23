@@ -11,7 +11,8 @@
  * ---------------------------------------------------------------------------|
  */
 
-#define _GNU_SOURCE /* Needed for fopencookie. See: man 7 feature_test_macros */
+/* Needed for fopencookie. See: man 7 feature_test_macros */
+#define _GNU_SOURCE
 
 #include "common.h"
 #include "m_file.h"
@@ -23,15 +24,13 @@
 
 /* Type Definitions -------------------------------------------------------- */
 
-struct memfile
-{
+struct memfile {
    byte  *mem;
    size_t len;
    size_t pos;
 };
 
-struct netfile
-{
+struct netfile {
    anonymous struct memfile memfile;
    str pcvar;
    i32 pnum;
@@ -39,10 +38,10 @@ struct netfile
 
 /* Static Functions -------------------------------------------------------- */
 
-/* fclose for netfiles. */
-/* Output to the CVar with a Base64 representation of the output buffer. */
-static i32 NetClose(void *nfdata)
-{
+/* fclose for netfiles.
+ * Output to the CVar with a Base64 representation of the output buffer.
+ */
+static i32 NetClose(void *nfdata) {
    struct netfile *nf = nfdata;
 
    /* If debugging, print out information about the buffer being written. */
@@ -89,8 +88,7 @@ static i32 NetClose(void *nfdata)
    return 0;
 }
 
-static ssize_t MemRead(void *memdata, char *buf, size_t size)
-{
+static ssize_t MemRead(void *memdata, char *buf, size_t size) {
    struct memfile *mem   = memdata;
    size_t     avail = mem->len - mem->pos;
 
@@ -102,13 +100,11 @@ static ssize_t MemRead(void *memdata, char *buf, size_t size)
    return size;
 }
 
-static ssize_t MemWrite(void *memdata, cstr buf, size_t size)
-{
+static ssize_t MemWrite(void *memdata, cstr buf, size_t size) {
    struct memfile *mem = memdata;
    size_t avail = mem->len - mem->pos;
 
-   if(size >= avail)
-   {
+   if(size >= avail) {
       size_t len = mem->len + mem->len / 2 + size + 1;
       void  *newmem = Ralloc(mem->mem, len);
 
@@ -124,8 +120,7 @@ static ssize_t MemWrite(void *memdata, cstr buf, size_t size)
    return size;
 }
 
-static i32 MemSeek(void *memdata, off_t *offset, i32 whence)
-{
+static i32 MemSeek(void *memdata, off_t *offset, i32 whence) {
    struct memfile *mem = memdata;
    size_t     pos;
 
@@ -143,34 +138,31 @@ static i32 MemSeek(void *memdata, off_t *offset, i32 whence)
    return 0;
 }
 
-static i32 MemClose(void *memdata)
-{
+static i32 MemClose(void *memdata) {
    struct memfile *mem = memdata;
    Dalloc(mem->mem);
    Dalloc(mem);
-
    return 0;
 }
 
 /* Extern Functions -------------------------------------------------------- */
 
-FILE *W_Open(str fname, cstr rw)
-{
+FILE *W_Open(str fname, cstr rw) {
    str f;
-   ifw(i32 lmp = W_Find(fname), lmp == -1)
+
+   ifw(i32 lmp = ServCallI(sm_FindLump, fname), lmp == -1)
       return nil;
    else
-      f = W_Read(lmp);
+      f = ServCallS(sm_ReadLump, lmp);
+
    return __fmemopen_str(f, ACS_StrLen(f), rw);
 }
 
 /* fopen() equivalent for netfiles. */
-FILE *NFOpen(i32 pnum, str pcvar, char rw)
-{
+FILE *NFOpen(i32 pnum, str pcvar, char rw) {
    FILE *fp = nil;
 
-   if(rw == 'w')
-   {
+   if(rw == 'w') {
       struct netfile *nf = Salloc(struct netfile);
 
       nf->pcvar = pcvar;
@@ -180,31 +172,27 @@ FILE *NFOpen(i32 pnum, str pcvar, char rw)
          .write = MemWrite,
          .close = NetClose
       });
-   }
-   else if(rw == 'r')
-   {
+   } else if(rw == 'r') {
       /* Get inputs from all possible CVars. */
       char  *input   = nil;
       size_t inputsz = 0;
 
-      for(i32 cvarnum;; cvarnum++)
-      {
-         str  cvar  = ACS_GetUserCVarString(pnum, StrParam("%S_%i", pcvar, cvarnum));
+      for(i32 cvarnum;; cvarnum++) {
+         str cvar =
+            ACS_GetUserCVarString(pnum, StrParam("%S_%i", pcvar, cvarnum));
          size_t inlen = ACS_StrLen(cvar);
 
-         if(inlen)
-         {
+         if(inlen) {
             input = Ralloc(input, inputsz + inlen + 1);
             lstrcpy_str(input + inputsz, cvar);
 
             inputsz += inlen;
-         }
-         else
+         } else {
             break;
+         }
       }
 
-      if(input)
-      {
+      if(input) {
          /* Decode the base64 input. */
          size_t size;
          byte *data = base64_decode((void *)input, inputsz, &size);
@@ -212,8 +200,7 @@ FILE *NFOpen(i32 pnum, str pcvar, char rw)
          Dalloc(input);
 
          /* If debugging, print out information about the buffer being read. */
-         if(get_bit(dbgflag, dbgf_save))
-         {
+         if(get_bit(dbgflag, dbgf_save)) {
             ACS_BeginLog();
             __nprintf("NFOpen: Opening memfile \"%S\" (%zub)\nData follows\n",
                       pcvar, size);
@@ -221,8 +208,7 @@ FILE *NFOpen(i32 pnum, str pcvar, char rw)
             ACS_EndLog();
          }
 
-         if(data)
-         {
+         if(data) {
             struct memfile *mem = Salloc(struct memfile);
 
             mem->mem = data;
@@ -241,12 +227,10 @@ FILE *NFOpen(i32 pnum, str pcvar, char rw)
 }
 
 /* Unpacks integers into a file stream. */
-size_t FWrite32(void const *restrict ptr, size_t count, size_t bytes, FILE *restrict fp)
-{
+size_t FWrite32(void const *restrict ptr, size_t count, size_t bytes, FILE *restrict fp) {
    size_t res = 0;
 
-   for(byte const *itr = ptr; count--; res += bytes)
-   {
+   for(byte const *itr = ptr; count--; res += bytes) {
       u32 c = *itr++;
       for(i32 i = 0; i < bytes; i++)
          if(fputc((c & (0xFF << (i * 8))) >> (i * 8), fp) == EOF)
@@ -257,8 +241,7 @@ size_t FWrite32(void const *restrict ptr, size_t count, size_t bytes, FILE *rest
 }
 
 /* Basic write function for bytes in a string. */
-size_t FWriteStr(void const __str_ars *restrict ptr, size_t count, FILE *restrict fp)
-{
+size_t FWriteStr(void const __str_ars *restrict ptr, size_t count, FILE *restrict fp) {
    size_t res = 0;
 
    for(astr itr = ptr; count--; res++)
@@ -268,18 +251,14 @@ size_t FWriteStr(void const __str_ars *restrict ptr, size_t count, FILE *restric
 }
 
 /* Reads packed integers from a file stream. */
-size_t FRead32(void *restrict buf, size_t count, size_t bytes, FILE *restrict fp)
-{
+size_t FRead32(void *restrict buf, size_t count, size_t bytes, FILE *restrict fp) {
    size_t res = 0;
 
-   for(char *itr = buf; count--;)
-   {
+   for(char *itr = buf; count--;) {
       i32 c = 0, t;
 
-      for(i32 i = 0; i < bytes; i++, res++)
-      {
-         if((t = fgetc(fp)) == EOF)
-         {
+      for(i32 i = 0; i < bytes; i++, res++) {
+         if((t = fgetc(fp)) == EOF) {
             *itr = c;
             return res;
          }

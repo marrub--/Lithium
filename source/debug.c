@@ -189,4 +189,20 @@ void Sc_PrintMonsterInfo(void) {
    PrintMonsterInfo();
 }
 
+script_str ext("ACS") addr(OBJ "TriggerEnding")
+void Sc_TriggerEnding(i32 num) {
+   cstr which;
+   switch(num) {
+   default:
+   case 0: which = "Division";    break;
+   case 1: which = "Other";       break;
+   case 2: which = "Normal";      break;
+   case 3: which = "Barons";      break;
+   case 4: which = "CyberDemon";  break;
+   case 5: which = "SpiderDemon"; break;
+   case 6: which = "IconOfSin";   break;
+   }
+   F_Start(which);
+}
+
 /* EOF */

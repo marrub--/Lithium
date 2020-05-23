@@ -21,49 +21,12 @@
 #include "m_file.h"
 #include "m_tokbuf.h"
 
-#include <setjmp.h>
-
-#define Error(d) longjmp((d)->env, 1)
-
-#define ErrF(d, fmt, ...) \
-   (Log("%s: " fmt, __func__, __VA_ARGS__), Error(d))
-
-#define Err(d, fmt) \
-   (Log("%s: " fmt, __func__), Error(d))
-
-#define ErrT(d, tok, s) \
-   (Log("(%i:%i) %s: " s " (%i:'%s')", tok->orig.line, tok->orig.colu, \
-        __func__, tok->type, tok->textV ? tok->textV : "<no string>"), \
-    Error(d))
-
-#define Expect(d, tok, typ) \
-   if(tok->type != typ) ErrT(d, tok, "expected " #typ)
-
-#define Expect2(d, tok, typ1, typ2) \
-   if(tok->type != typ1 && tok->type != typ2) \
-      ErrT(d, tok, "expected " #typ1 " or " #typ2)
-
-#define Expect3(d, tok, typ1, typ2, typ3) \
-   if(tok->type != typ1 && tok->type != typ2 && tok->type != typ3) \
-      ErrT(d, tok, "expected " #typ1 ", " #typ2 " or " #typ3)
-
-#define ExpectDrop(d, typ) \
-   if(!d->tb.drop(typ)) {\
-      struct token *_tok = d->tb.reget(); \
-      ErrT(d, _tok, "expected " #typ); \
-   }
-
-#define CheckKw(tok, kw) \
-   (tok->type == tok_identi && faststrcmp(tok->textV, kw) == 0)
-
 /* Types ------------------------------------------------------------------- */
 
 struct compiler {
    struct tokbuf  tb;
    struct dlg_def def;
    u32            num;
-   jmp_buf        env;
-   bool           ok;
 };
 
 /* Extern Functions -------------------------------------------------------- */

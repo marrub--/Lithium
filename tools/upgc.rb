@@ -161,9 +161,9 @@ res
 StrEntOFF
 
 i32 Upgr_StrToEnum(cstr s) {
-   u32 fst = FourCC(s[0], s[1], s[ 2], s[ 3]);
-   u32 snd = FourCC(s[4], s[5], s[ 6], s[ 7]);
-   u32 thd = FourCC(s[8], s[9], s[10], s[11]);
+   u32 fst = FourCCPtr(s + 0);
+   u32 snd = FourCCPtr(s + 4);
+   u32 thd = FourCCPtr(s + 8);
 #{generate_strhasher upgrades.keys, "UPGR_"}
    return UPGR_MAX;
 }

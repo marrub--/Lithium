@@ -6,6 +6,34 @@
 ##
 ## ---------------------------------------------------------------------------|
 
+%% \#ENDING_DivisionSigil
+\cgYou have made
+
+
+
+       a dire
+
+
+
+
+          mistake.
+
+
+ I will not
+
+
+
+
+forgive you
+
+
+
+nor will you
+
+
+
+be forgiven
+
 %% \#BOSS_DIV_1
 Wait.
 

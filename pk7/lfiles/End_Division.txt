@@ -6,20 +6,15 @@
  *
  * ---------------------------------------------------------------------------|
  *
- * Ending for non-vanilla games.
+ * Ending for the Division Sigil.
  *
  * ---------------------------------------------------------------------------|
  */
 
-0
-   musi "lmusic/lithambientwip3.ogg";
-   imge ":End:Stan:Normal";
-   fade 50;
-   text "Normal_Stan" 400 -1 100;
-   next;
-1
-   musi "lmusic/tmary7.ogg";
-   imge ":End:Jem:Normal";
-   fade 50;
-   text "Normal_Jem" 400 -1 100;
+0 next;
+1 next;
+14
+   imge "";
+   musi "lmusic/siarani.ogg";
+   text "DivisionSigil" 900 35 100;
    next;

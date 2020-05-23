@@ -24,34 +24,89 @@ private array<Actor> m_bossBabies;
 private int m_bossDeathInit;
 bool m_wasFinal;
 
-static void SetEnding(string ending)
-   {if(__lith_end == "") CVar.FindCVar('__lith_end').SetString(ending);}
-
 static int GetBossLevel() {return Instance().m_bossLevel;}
 
 override void WorldLoaded(WorldEvent ev)
 {
-   /* TODO: hashes for doom.wad (1.9, BFG), doom1.wad (1.9), doom2.wad (BFG),
-            hashes for community maps, etc */
-   static const string BOSS_E1[] = {
-      "058fb092ea1b70da1e3cbf501c4a91a1" /* doom.wad (1.9ud) E1M8 */
+   static const string BH_BARONS[] = {
+      "ED26C05D1B179D373E839AC7CCFB07AE", // 2002ado.wad e1m8
+      "769CEC2DD419996D43D23AEBBE11DF45", // deathless.wad e1m8
+      "058FB092EA1B70DA1E3CBF501C4A91A1", // doom_v1_9ud.wad e1m8
+      "FAF0015E874A7106098B290D8B2E6160", // dtwid-le.wad e1m8
+      "454BD1AD5A8137AEBAC184A527321D12", // dtwid-le.wad e6m1
+      "D8811A9FA512F8118701E6E9F2F81545", // dtwid-le.wad e6m2
+      "5C81C1FB5F41CB2B1B963C20E9ABE8B4", // dtwid.wad e1m8
+      "A1F105211112747EE50BA520462A471E", // e1m8b.wad e1m8
+      "1DD919F39F45E0EA70E45EF7814144D9", // killed.wad e1m8
+      "C5E8223F29F1FB6E28D29B057DE35B99", // neis.wad e1m8
+      "0D458EA6A1610FB350560631074E944E"  // sgnsym.wad e1m8
    };
 
-   static const string BOSS_E2[] = {
-      "effe91df41ad41f6973c06f0ad67ddb9" /* doom.wad (1.9ud) E2M8 */
+   static const string BH_CYBERDEMON[] = {
+      "C6DCCA7A718274FB49DC51B91737A96A", // 2002ado.wad e2m8
+      "DAE486C710EAB555BC2B2655F758F574", // bgcomp.wad e2m8
+      "C770E40696DB5AF106FFE678F50EB5F5", // deathless.wad e2m8
+      "EFFE91DF41AD41F6973C06F0AD67DDB9", // doom_v1_9ud.wad e2m8
+      "7BD08EE245649C097B197C4EEFBE61F7", // dtwid-le.wad e2m8
+      "5A6CF03980A3522CEB05F9EA561A28B0", // dtwid-le.wad e5m8
+      "3BE0A3EE53EA321D1340A0F567DD95F5", // dtwid-le.wad e6m3
+      "616B18EDBE0492DD6B46A59B1B540A05", // dtwid-le.wad e6m4
+      "477B746A819700AE28007B51E0F2E43D", // dtwid.wad e2m8
+      "8BB67F9A2DAAA92BDDD36DD5177D5D77", // neis.wad e2m8
+      "675864248BC8E4DBDBECB04F5219E1C2"  // nihility.wad e2m8
    };
 
-   static const string BOSS_E3[] = {
-      "ef128313112110ed6c1549af96af26c9" /* doom.wad (1.9ud) E3M8 */
+   static const string BH_SPIDERDEMON[] = {
+      "2800B7E9E11BE12E1932517F12C7B293", // 2002ado.wad e3m8
+      "9667D55631A4BEC379B64B5F3305CEDA", // bgcomp.wad e1m8
+      "4D413260D32605CBFC17FCA019D03E1C", // deathless.wad e3m8
+      "EF128313112110ED6C1549AF96AF26C9", // doom_v1_9ud.wad e3m8
+      "18D8403D0F206F756BAF316DA105E316", // dtwid-le.wad e3m8
+      "511B8D96025725ACDF0C231B8B76BD83", // dtwid-le.wad e6m5
+      "E1753AB1297DA9733620D870B127D248", // dtwid-le.wad e6m6
+      "B443AC8D4A8EAA592F32C12C7789CE33", // dtwid-le.wad e6m7
+      "F9C74E08846B6CF879B31ED888EDFBF2", // dtwid-le.wad e6m8
+      "122DE53472FF547DE3BDB5FF879F653B", // dtwid.wad e3m8
+      "B5795436228DEEB3492275F4432E9FC1", // griefless.wad e4m8
+      "5978E4815FC2E78B3B6BBEBC44B3953F"  // neis.wad e3m8
    };
 
-   static const string BOSS_E4[] = {
-      "2dc939e508ab8eb68af79d5b60568711" /* doom.wad (1.9ud) E4M8 */
+   static const string BH_OTHER[] = {
+      "96A77422246EB76ACFF80821890FA274", // 2002ado.wad e4m8
+      "9A4D38004A4E37B3018755E08E755228", // aa_e1.wad e1m8
+      "A9795AAC7F2BFAE05F4930243841DC0C", // bgcomp.wad e3m8
+      "FAD19FE85C24AC6CC60C62A96AE77D21", // dbimpact.wad e1m8
+      "588032F3E53414C157AA5B879A4FABA8", // deathless.wad e4m8
+      "2DC939E508AB8EB68AF79D5B60568711", // doom_v1_9ud.wad e4m8
+      "7C0C749E664F27E16E3BEFE85E7BF7E7", // draftex.wad e4m8
+      "DDF5419C201C05009ABF962F1BE06D88", // dtwid-le.wad e4m8
+      "5C5E5C08AF3572F31CF27318679F2B4E", // eviternity.wad map30
+      "252872EE2E97646C8EE1491368B3E204", // hadrone2.wad e2m8
+      "D9FADBA97FA5E52EE74D5822C911574C", // hadronf.wad e1m8
+      "987A8EB619CA9399EB549FBA9C4D1BD4", // hr2final.wad map30
+      "159C6507BA6881FC25DE7E2AA8E9E09D", // icarus.wad map30
+      "CC9DA2427DFCC5116D56D163F0AEF394", // jenesis.wad map30
+      "16252665DEB8F3D44973A13C332C94D3", // neis.wad e4m8
+      "6EAD80DA1F30B4B3546FA294EEF9F87C", // sigil_v1_21.wad e5m8
+      "75AD07EB0B915DE49DABCC3B9158161D"  // udtwid.wad e4m8
    };
 
-   static const string BOSS_D2[] = {
-      "5eecd88f4491f516d590ce4bbf45f532", /* doom2.wad (1.9) MAP30 */
-      "b304ac2e0c15b97fe9e2dcd5cff9066c"  /* freedoom2.wad (0.12.1) MAP30 */
+   static const string BH_ICONOFSIN[] = {
+      "3052920C1E7FB5373F79AC27B38FC503", // d2ino.wad map30
+      "A39B7038C999778EF574A83D95EDD55D", // d2twid.wad map30
+      "5EECD88F4491F516D590CE4BBF45F532", // doom2_v1_9.wad map30
+      "B304AC2E0C15B97FE9E2DCD5CFF9066C", // freedoom2_v0_12_1.wad map30
+      "B45AA2A2147A6A5D1E2739691AD21710", // hr.wad map30
+      "58365647EA55B9E159B362D19824440D", // jpcp.wad map30
+      "546B625814773AC1396C363540304E12", // mm.wad map30
+      "A928B525B91D1CF2259686064AA4AB08", // mm2.wad map30
+      "B35281F3758CE6ACAA3B79C3A107DC3B", // pl2.wad map30
+      "279BB50468FE9F5B36C6D821E4902369", // plutonia.wad map30
+      "683FC120CCB157549FDC447CFFFAFC29", // reverie.wad map30
+      "FCB39D9C3DD5182D467E9E84EA6CC69F", // scythe.wad map30
+      "3494B0A09D14B8DBB3386BBD42B23A3A", // scythe2.wad map30
+      "42B68B84FF8E55F264C31E6F4CFEA82D", // tnt.wad map30
+      "DA38541C021A24295986E4CC1FF65D68"  // urania.wad map30
    };
 
    m_bossLevel = boss_none;
@@ -59,16 +114,21 @@ override void WorldLoaded(WorldEvent ev)
    m_bossBabies.clear();
 
    let sum = Level.GetChecksum();
-   for(int i = 0; i < BOSS_E1.Size(); i++)
-      if(sum == BOSS_E1[i]) {m_bossLevel = boss_barons;      break;}
-   for(int i = 0; i < BOSS_E2.Size(); i++)
-      if(sum == BOSS_E2[i]) {m_bossLevel = boss_cyberdemon;  break;}
-   for(int i = 0; i < BOSS_E3.Size(); i++)
-      if(sum == BOSS_E3[i]) {m_bossLevel = boss_spiderdemon; break;}
-   for(int i = 0; i < BOSS_E4.Size(); i++)
-      if(sum == BOSS_E4[i]) {m_bossLevel = boss_other;       break;}
-   for(int i = 0; i < BOSS_D2.Size(); i++) {
-      if(sum == BOSS_D2[i]) {
+
+   for(int i = 0; i < BH_BARONS.Size(); i++)
+      if(sum ~== BH_BARONS[i]) {m_bossLevel = boss_barons; break;}
+
+   for(int i = 0; i < BH_CYBERDEMON.Size(); i++)
+      if(sum ~== BH_CYBERDEMON[i]) {m_bossLevel = boss_cyberdemon; break;}
+
+   for(int i = 0; i < BH_SPIDERDEMON.Size(); i++)
+      if(sum ~== BH_SPIDERDEMON[i]) {m_bossLevel = boss_spiderdemon; break;}
+
+   for(int i = 0; i < BH_OTHER.Size(); i++)
+      if(sum ~== BH_OTHER[i]) {m_bossLevel = boss_other; break;}
+
+   for(int i = 0; i < BH_ICONOFSIN.Size(); i++) {
+      if(sum ~== BH_ICONOFSIN[i]) {
          m_bossLevel = boss_iconofsin;
          if(__lith_fun & lfun_final) m_wasFinal = true;
          break;
@@ -160,16 +220,6 @@ override void UiTick()
 {
    if(GameState == GS_FINALE && (!Level.NextMap || Level.NextMap.Left(6) == "enDSeQ"))
       CallACS("Lith_Finale");
-
-   if(m_ESeq == ESEQ_HALT && __lith_end != "")
-   {
-      int which =
-         LoadEnding(String.Format("lfiles/End_%s.txt", __lith_end), 0);
-      LoadEnding("lfiles/End_Common.txt", which);
-      CVar.FindCVar('__lith_end').SetString("");
-   }
-   else if(m_ESeq >= ESEQ_RUN)
-      RunEndSequence();
 }
 
 override void WorldThingSpawned(WorldEvent ev)
@@ -453,9 +503,6 @@ override void RenderOverlay(RenderEvent evt) {
          Shader.SetUniform1f(player, "Lith_End", "lith_t", ftic - 15.0);
       }
    }
-
-   if(m_ESeq >= ESEQ_RUN)
-      DrawEndSequence(evt);
 }
 
 /* EOF */

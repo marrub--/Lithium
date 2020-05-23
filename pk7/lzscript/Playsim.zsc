@@ -10,7 +10,6 @@
 #include "lzscript/Playsim/Server.zsc"
 
 #include "lzscript/Playsim/Cyberspace.zsc"
-#include "lzscript/Playsim/EndSeq.zsc"
 #include "lzscript/Playsim/Events.zsc"
 #include "lzscript/Playsim/Files.zsc"
 #include "lzscript/Playsim/Monsters.zsc"

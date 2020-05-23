@@ -17,7 +17,6 @@
 #include "m_list.h"
 #include "w_world.h"
 #include "m_file.h"
-#include "m_tokbuf.h"
 
 /* Static Functions -------------------------------------------------------- */
 
@@ -76,8 +75,8 @@ static u32 NameToNum(cstr discrim, cstr name) {
    for(u32 i = 0; i < BIP_MAX; i++) {
       bip_name_t tag;
       lstrcpy2(tag, name, discrim);
-      if(!faststrcmp(bipinfo[i].name, tag) ||
-         !faststrcmp(bipinfo[i].name, name)) {
+      if(faststrcmp(bipinfo[i].name, tag)  == 0 ||
+         faststrcmp(bipinfo[i].name, name) == 0) {
          return i;
       }
    }

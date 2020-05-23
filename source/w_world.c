@@ -48,8 +48,6 @@ bool lmvar player_init;
 
 /* Static Objects ---------------------------------------------------------- */
 
-Str(lithend, s"LITHEND");
-
 static bool reopen;
 
 static i32 lmvar mapid;
@@ -326,6 +324,11 @@ begin:
       return;
    } else if(MapNum == 1911777) {
       ACS_SetPlayerProperty(true, true, PROP_TOTALLYFROZEN);
+      F_Load();
+      for_player() {
+         p->setActivator();
+         F_Run(p);
+      }
       return;
    }
 
@@ -391,9 +394,7 @@ begin:
       }
 
       if(ticks > ACS_GetCVar(sc_sv_failtime) * 35 * 60 * 60 && !islithmap) {
-         Str(timeout, s"TimeOut");
-         ServCallI(sm_SetEnding, timeout);
-         ACS_ChangeLevel(lithend, 0, CHANGELEVEL_NOINTERMISSION, -1);
+         F_Start("TimeOut");
          return;
       }
 
@@ -458,28 +459,6 @@ static void Sc_WorldUnload(void)
       P_GUI_Close(p);
       P_Dat_PTickPst(p);
    }
-}
-
-script_str ext("ACS") addr(OBJ "Finale")
-void Sc_Finale(void)
-{
-   Str(normal,      s"Normal");
-   Str(barons,      s"Barons");
-   Str(cyberdemon,  s"CyberDemon");
-   Str(spiderdemon, s"SpiderDemon");
-   Str(iconofsin,   s"IconOfSin");
-   i32 boss = ServCallI(sm_GetBossLevel);
-   str which;
-   switch(boss) {
-      case boss_none:
-      case boss_other:       which = normal;      break;
-      case boss_barons:      which = barons;      break;
-      case boss_cyberdemon:  which = cyberdemon;  break;
-      case boss_spiderdemon: which = spiderdemon; break;
-      case boss_iconofsin:   which = iconofsin;   break;
-   }
-   ServCallI(sm_SetEnding, which);
-   ACS_ChangeLevel(lithend, 0, CHANGELEVEL_NOINTERMISSION|CHANGELEVEL_PRERAISEWEAPON, -1);
 }
 
 /* EOF */

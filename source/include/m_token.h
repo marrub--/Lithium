@@ -34,11 +34,6 @@ enum {
    tok_quote,  /* Quote */
    tok_cmment, /* Comment */
 
-   /* Special (post-process) */
-   tok_keywrd, /* Keyword */
-   tok_numint, /* Integer Literal */
-   tok_numflt, /* Float Literal */
-
    /* Single characters */
    tok_lnend,  /* \n */
    tok_semico, /* ; */
@@ -120,5 +115,8 @@ struct token {
 /* Extern Functions -------------------------------------------------------- */
 
 void TokParse(FILE *fp, struct token *tok, struct origin *orig);
+void TokPrint(struct token *tok);
+bool TokIsKw(struct token *tok, cstr kw);
+cstr TokType(i32 type);
 
 #endif

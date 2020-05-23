@@ -1,13 +1,24 @@
-   mus lmusic/asdfn2.ogg
-   bg black
-   fade 10,#061102
-   bg #061102
-   70 $LITH_ENDING_TimeOut_1
-   stop
-   70 $LITH_ENDING_TimeOut_2
-   stop
-   35 You turn off your communications device.
-   wait 70
-   fade 100,black
-   bg black
-   0
+/* -*-Agw-LithEnd-*-----------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison G. Watson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Ending for non-vanilla games.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
+0 next;
+1 next;
+
+14
+   musi "lmusic/asdfn2.ogg";
+   imge ":End:TimeOut";
+   fade 10;
+   text "TimeOut_1" 70 -1 0;
+   text "TimeOut_2" 70 -1 100;
+   fmus 70;
+   next;

@@ -9,6 +9,13 @@
 
 extend class Lith_HERMES;
 
+ui static void ActuallyEndTheGame() {
+   // HERE IT IS
+   // THE WORST HACK IN THE MOD BABEY
+   Menu.SetMenu('EndGameMenu');
+   MessageBoxMenu(Menu.GetCurrentMenu()).HandleResult(true);
+}
+
 static int FindFontColor(name cr) {
    return Font.FindFontColor(cr);
 }

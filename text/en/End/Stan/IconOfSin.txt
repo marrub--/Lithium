@@ -6,7 +6,184 @@
 ##
 ## ---------------------------------------------------------------------------|
 
-%% \#ENDING_IconOfSin_Stan
+%% \#ENDING_IconOfSin_1_Stan
+It feels like nothing's changed.
+
+
+Those moods still take you.
+
+
+All the time.
+
+
+@@
+You hoped one day you would be happy. That day never came. It's just a
+fantasy at this point. A fantasy in the sea of a dream.
+@@
+
+
+                       "Why am I like this?"
+
+
+I don't know.
+
+
+                     "Will I ever be saved?"
+
+
+Again, all you can bring yourself to answer,
+
+
+
+                         "I don't know."
+
+%% \#ENDING_IconOfSin_2_Stan
+With an ocean of depressive thoughts, you considered all alternatives.
+
+
+
+
+                       "Why don't I just kill myself?"
+
+
+
+
+                           "Would anyone care?"
+
+
+
+
+      No, they wouldn't.
+
+
+
+
+                  "...Did anyone care in the first place?"
+
+
+
+
+              No,
+                        they didn't.
+
+%% \#ENDING_IconOfSin_3_Stan
+  ...
+
+
+                      "Please, just let this end for me."
+
+
+......
+
+
+
+                        "At least tell me why I'm alive..."
+
+
+
+.........
+
+
+
+"Please..."
+
+
+
+
+             Drowning in the middle of a miserable dream,
+                                  the dream is fading away.
+
+@@ \#ENDING_IconOfSin_4_Stan
+It's all you can think about. The need to get away from this life.
+From this accursed world. Nothing is worth it. No matter how hard you
+try in life,
+@@
+
+
+
+
+
+
+            you are simply ignored.
+
+
+
+
+
+
+End it.
+
+
+
+
+
+
+         "\cgEnd this miserable existence.\c-"
+
+%% \#ENDING_IconOfSin_5_Stan
+...
+
+      ...
+
+              ...
+
+                    «Why?»
+
+         "Why what?"
+
+                    «You can't give up yet.»
+
+         "Why bother?"
+
+                    «You said it yourself.»
+                    «You need to consider all of the alternatives.»
+
+         "\cgI have.\c-"
+
+                    «You considered some.»
+                    «Those which give you no hope.»
+
+         "\cgWhat point is there in having hope?\c-"
+         "\cmThere isn't anything left.\c-"
+
+                    «...»
+
+         "\cgJust like I thought.\c-"
+         "\cgYou're just a fucking idiot.\c-"
+
+%% \#ENDING_IconOfSin_6_Stan
+...
+
+                    «Bring yourself to hope.»
+                    «For just one moment.»
+
+
+...
+
+
+
+        ...
+
+
+
+
+ ...
+
+
+
+     ......
+
+
+                    «It doesn't have to end like this.»
+
+
+
+      ...
+
+
+ "I can do it..."
+
+%% \#ENDING_IconOfSin_7_Stan
 \cdYou awaken in a hospital bed, cybernetics turned off,
 \cdbody aching all over. It's over. The fight against
 \cdHell has been won.

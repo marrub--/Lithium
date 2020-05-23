@@ -6,7 +6,7 @@
 ##
 ## ---------------------------------------------------------------------------|
 
-%% \#ENDING_TimeOut2
+%% \#ENDING_TimeOut_2
 >>>>>[[[[REDELIVERING MESSAGE]]]]
 
 > Remotes: <hidden>@<hidden>.mailserv, <hidden>@corp.<hidden>

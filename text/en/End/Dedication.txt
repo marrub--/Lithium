@@ -12,4 +12,7 @@ Dedicated to the loving memory of Kaitlyn Anne Fox.
 
                    Goodnight.
 
+%% \#ENDING_Finished
+The end.
+
 ## EOF

@@ -116,5 +116,8 @@ k32 AddAngle(i32 x, i32 y);
 optargs(1) void FreezeTime(bool players_ok);
 optargs(1) void UnfreezeTime(bool players_ok);
 script void CBI_Install(i32 num);
+script void F_Run(struct player *p);
+void F_Load(void);
+void F_Start(cstr which);
 
 #endif

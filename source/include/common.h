@@ -52,6 +52,7 @@
 #define TickerT(t, on, off) ((ACS_Timer() % 35) < (t) ? (on) : (off))
 #define Ticker(on, off) (TickerT(17, on, off))
 
+#define FourCCPtr(s) FourCC((s)[0], (s)[1], (s)[2], (s)[3])
 #define FourCC(a, b, c, d) ((d << 24) | (c << 16) | (b << 8) | (a << 0))
 
 #define SCallI ACS_ScriptCall

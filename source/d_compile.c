@@ -90,11 +90,10 @@ static bool Dlg_GetItem(struct compiler *d, u32 act)
    struct token *tok = d->tb.get();
 
    if(faststrcmp(tok->textV, "page") == 0) {
-      tok = d->tb.get();
-      Expect(d, tok, tok_number);
+      tok = d->tb.expc(d->tb.get(), tok_number);
 
       u32 num = strtoi(tok->textV, nil, 0);
-      if(num > DPAGE_NORMAL_MAX) Err(d, "bad page index");
+      if(num > DPAGE_NORMAL_MAX) d->tb.err("bad page index");
 
       Dlg_GetItem_Page(d, num, act);
       return true;
@@ -117,13 +116,12 @@ static bool Dlg_GetItem(struct compiler *d, u32 act)
 
 static void Dlg_GetTop_Prog(struct compiler *d, u32 act, u32 beg, u32 end)
 {
-   struct token *tok = d->tb.get();
-   Expect(d, tok, tok_number);
+   struct token *tok = d->tb.expc(d->tb.get(), tok_number);
 
    u32 num = beg + strtoi(tok->textV, nil, 0);
-   if(num > end) ErrF(d, "invalid dialogue number %u", num);
+   if(num > end) d->tb.err("invalid dialogue number %u", num);
 
-   ExpectDrop(d, tok_semico);
+   d->tb.expdr(tok_semico);
 
    FinishDef(d);
    d->num = num;
@@ -218,21 +216,21 @@ void Dlg_MInit(void)
 
    FILE *fp =
       W_Open(StrParam("lfiles/Dialogue_%tS.txt", PRINTNAME_LEVEL), "r");
+
    if(fp) {
-      struct compiler d = {{.bbeg = 14, .bend = 28, .fp = fp}, .ok = true};
+      static struct compiler d = {};
+
+      d.tb.fp = fp;
 
       TBufCtor(&d.tb);
 
-      if(setjmp(d.env)) {
-         d.ok = false;
+      if(setjmp(d.tb.env)) {
          goto done;
       }
 
       for(;;) {
-         struct token *tok = d.tb.get();
+         struct token *tok = d.tb.expc2(d.tb.get(), tok_identi, tok_eof);
          if(tok->type == tok_eof) break;
-
-         Expect(&d, tok, tok_identi);
 
          if(faststrcmp(tok->textV, "program") == 0)
             Dlg_GetTop_Prog(&d, ACT_NONE, DNUM_PRG_BEG, DNUM_PRG_END);
@@ -241,7 +239,7 @@ void Dlg_MInit(void)
          else if(faststrcmp(tok->textV, "terminal") == 0)
             Dlg_GetTop_Prog(&d, ACT_TRM_WAIT, DNUM_TRM_BEG, DNUM_TRM_END);
          else
-            ErrF(&d, "invalid toplevel item '%s'", tok->textV);
+            d.tb.err("invalid toplevel item '%s'", tok->textV);
       }
 
 

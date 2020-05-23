@@ -21,23 +21,23 @@
 /* Ver. 7:  Initial version. */
 /* Ver. 14: Rewrite of save system. */
 /* Ver. 15: Chunk format change. */
-#define Ident_Lith FourCC('L', 'i', 't', 'h')
+#define Ident_Lith FourCCPtr("Lith")
 #define SaveV_Lith 15
 
 /* Lend: Optional. Last valid chunk in save file. */
-#define Ident_Lend FourCC('L', 'e', 'n', 'd')
+#define Ident_Lend FourCCPtr("Lend")
 #define SaveV_Lend 0
 
 /* note: Notes. */
-#define Ident_note FourCC('n', 'o', 't', 'e')
+#define Ident_note FourCCPtr("note")
 #define SaveV_note 0
 
 /* agrp: Auto-groups. */
-#define Ident_agrp FourCC('a', 'g', 'r', 'p')
+#define Ident_agrp FourCCPtr("agrp")
 #define SaveV_agrp 0
 
 /* intr: Intros. */
-#define Ident_intr FourCC('i', 'n', 't', 'r')
+#define Ident_intr FourCCPtr("intr")
 #define SaveV_intr 0
 
 #define Save_VersMask 0x000000FF

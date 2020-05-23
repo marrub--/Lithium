@@ -16,9 +16,6 @@
 
 #include <stdio.h>
 
-#define W_Find(name) ServCallI(sm_FindLump, name)
-#define W_Read(lmp)  ServCallS(sm_ReadLump, lmp)
-
 #define FEOF(fp) ((fp)->_flag & _FILEFLAG_EOF)
 
 FILE *W_Open(str fname, cstr rw);

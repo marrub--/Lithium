@@ -19,14 +19,14 @@ void Dlg_PushB1(struct compiler *d, u32 b)
 {
    size_t pc = d->def.codeP++;
 
-   if(pc + 1 > PRG_END - PRG_BEG) Err(d, "PRG segment overflow");
+   if(pc + 1 > PRG_END - PRG_BEG) d->tb.err("PRG segment overflow");
 
    if(pc + 1 > d->def.codeC * 4) {
       Vec_Grow(d->def.code, 1);
       d->def.codeC++;
    }
 
-   if(b > 0xFF) ErrF(d, "byte error (overflow) %u", b);
+   if(b > 0xFF) d->tb.err("byte error (overflow) %u", b);
 
    Cps_SetC(d->def.codeV, pc, b);
 }
@@ -66,7 +66,7 @@ struct ptr2 Dlg_PushLdAdr(struct compiler *d, u32 at, u32 set)
 
 void Dlg_SetB1(struct compiler *d, u32 ptr, u32 b)
 {
-   if(b > 0xFF) ErrF(d, "byte error (overflow) %u", b);
+   if(b > 0xFF) d->tb.err("byte error (overflow) %u", b);
 
    Cps_SetC(d->def.codeV, ptr, b);
 }
@@ -82,7 +82,7 @@ u32 Dlg_PushStr(struct compiler *d, cstr s, u32 l)
    u32  p = d->def.stabP;
    u32 vl = Cps_Adjust(p + l) - d->def.stabC;
 
-   if(p + l > STR_END - STR_BEG) Err(d, "STR segment overflow");
+   if(p + l > STR_END - STR_BEG) d->tb.err("STR segment overflow");
 
    Dbg_Log(log_dlg, "%s: (%3u %3u) '%s'", __func__, l, vl, s);
 

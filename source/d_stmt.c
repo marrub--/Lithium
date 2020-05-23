@@ -17,14 +17,12 @@
 
 void Dlg_GetStmt_Cond(struct compiler *d)
 {
-   struct token *tok = d->tb.get();
-   Expect(d, tok, tok_identi);
+   struct token *tok = d->tb.expc(d->tb.get(), tok_identi);
 
    bool bne = true;
 
    if(faststrcmp(tok->textV, "item") == 0) {
-      tok = d->tb.get();
-      Expect(d, tok, tok_string);
+      tok = d->tb.expc(d->tb.get(), tok_string);
 
       bne = false;
 
@@ -32,8 +30,7 @@ void Dlg_GetStmt_Cond(struct compiler *d)
 
       Dlg_PushLdVA(d, ACT_LD_ITEM);
    } else if(faststrcmp(tok->textV, "class") == 0) {
-      tok = d->tb.get();
-      Expect(d, tok, tok_identi);
+      tok = d->tb.expc(d->tb.get(), tok_identi);
 
       Dlg_PushB1(d, DCD_LDA_AI);
       Dlg_PushB2(d, VAR_PCLASS);
@@ -42,9 +39,9 @@ void Dlg_GetStmt_Cond(struct compiler *d)
       #define PCL(shr, lng) \
          if(faststrcmp(tok->textV, #shr) == 0) {Dlg_PushB1(d, shr); goto ok;}
       #include "p_player.h"
-      ErrT(d, tok, "invalid playerclass type");
+      d->tb.errtk(tok, "invalid playerclass type");
    } else {
-      ErrT(d, tok, "invalid conditional type");
+      d->tb.errtk(tok, "invalid conditional type");
    }
 
 ok:
@@ -61,7 +58,7 @@ ok:
    u32  else_ptr;
 
    tok = d->tb.get();
-   if(CheckKw(tok, "else")) {
+   if(TokIsKw(tok, "else")) {
       Dlg_PushB1(d, DCD_JMP_AI);
       Dlg_PushB2(d, 0);
       else_ptr = d->def.codeP;
@@ -98,8 +95,7 @@ void Dlg_GetStmt_Option(struct compiler *d)
 {
    struct ptr2 adr;
 
-   struct token *tok = d->tb.get();
-   Expect2(d, tok, tok_identi, tok_string);
+   struct token *tok = d->tb.expc2(d->tb.get(), tok_identi, tok_string);
 
    Dlg_PushLdAdr(d, VAR_ADRL, Dlg_PushStr(d, tok->textV, tok->textC));
    adr = Dlg_PushLdAdr(d, VAR_RADRL, 0); /* placeholder */
@@ -122,24 +118,23 @@ void Dlg_GetStmt_Option(struct compiler *d)
 
 void Dlg_GetStmt_Page(struct compiler *d)
 {
-   struct token *tok = d->tb.get();
-   Expect(d, tok, tok_number);
+   struct token *tok = d->tb.expc(d->tb.get(), tok_number);
    Dlg_PushB1(d, DCD_JPG_VI);
    Dlg_PushB1(d, strtoi(tok->textV, nil, 0));
 }
 
 void Dlg_GetStmt_Str(struct compiler *d, u32 adr)
 {
-   struct token *tok = d->tb.get();
-   Expect3(d, tok, tok_identi, tok_string, tok_number);
+   struct token *tok =
+      d->tb.expc3(d->tb.get(), tok_identi, tok_string, tok_number);
    Dlg_PushLdAdr(d, adr, Dlg_PushStr(d, tok->textV, tok->textC));
 }
 
 void Dlg_GetStmt_Terminal(struct compiler *d, bool use_s, u32 act)
 {
    if(use_s) {
-      struct token *tok = d->tb.get();
-      Expect3(d, tok, tok_identi, tok_string, tok_number);
+      struct token *tok =
+         d->tb.expc3(d->tb.get(), tok_identi, tok_string, tok_number);
       Dlg_PushLdAdr(d, VAR_PICTL, Dlg_PushStr(d, tok->textV, tok->textC));
    }
 
@@ -156,8 +151,7 @@ void Dlg_GetStmt_Terminal(struct compiler *d, bool use_s, u32 act)
 
 void Dlg_GetStmt_Num(struct compiler *d, u32 act)
 {
-   struct token *tok = d->tb.get();
-   Expect(d, tok, tok_number);
+   struct token *tok = d->tb.expc(d->tb.get(), tok_number);
 
    Dlg_PushLdAdr(d, VAR_ADRL, strtoi(tok->textV, nil, 0) & 0xFFFF);
    Dlg_PushLdVA(d, act);
@@ -165,8 +159,7 @@ void Dlg_GetStmt_Num(struct compiler *d, u32 act)
 
 void Dlg_GetStmt_Script(struct compiler *d)
 {
-   struct token *tok = d->tb.get();
-   Expect2(d, tok, tok_string, tok_number);
+   struct token *tok = d->tb.expc2(d->tb.get(), tok_string, tok_number);
 
    u32 act;
 
@@ -186,8 +179,7 @@ void Dlg_GetStmt_Script(struct compiler *d)
    }
 
    for(u32 i = 0; i < 4 && d->tb.drop(tok_comma); i++) {
-      tok = d->tb.get();
-      Expect(d, tok, tok_number);
+      tok = d->tb.expc(d->tb.get(), tok_number);
 
       u32 prm = strtoi(tok->textV, nil, 0);
 
@@ -250,14 +242,14 @@ script void Dlg_GetStmt(struct compiler *d)
 
          break;
       case tok_lt:
-         while((tok = d->tb.get())->type != tok_gt) {
-            Expect(d, tok, tok_number);
+         while((tok = d->tb.expc2(d->tb.get(), tok_number, tok_gt))->type !=
+               tok_gt) {
             Dlg_PushB1(d, strtoi(tok->textV, nil, 0));
          }
       case tok_semico:
          break;
       default:
-         ErrT(d, tok, "invalid token in statement");
+         d->tb.errtk(tok, "invalid token in statement");
          break;
    }
 }

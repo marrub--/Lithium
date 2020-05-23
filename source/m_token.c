@@ -15,6 +15,7 @@
 #include "m_vec.h"
 #include "m_char.h"
 #include "m_file.h"
+#include "m_str.h"
 
 #define textNext() tok->textV[tok->textC++]
 
@@ -123,7 +124,6 @@ begin:;
             }
 
             advLine();
-            textNext() = ch;
          }
 
          unget();
@@ -181,6 +181,86 @@ begin:;
       textNext() = ch;
       textNext() = '\0';
    }
+}
+
+void TokPrint(struct token *tok) {
+   __nprintf("[%i:%i](%s (%i) '%.*s')", tok->orig.line,
+             tok->orig.colu, TokType(tok->type), tok->type,
+             tok->textC, tok->textV);
+}
+
+bool TokIsKw(struct token *tok, cstr kw) {
+   return tok->type == tok_identi && faststrcmp(tok->textV, kw) == 0;
+}
+
+cstr TokType(i32 type) {
+   switch(type) {
+   case tok_null:   return "null-token";
+   case tok_chrseq: return "character-sequence";
+   case tok_identi: return "identifier";
+   case tok_number: return "number";
+   case tok_string: return "string-double";
+   case tok_charac: return "string-single";
+   case tok_quote:  return "string-quote";
+   case tok_cmment: return "comment";
+   case tok_lnend:  return "new-line";
+   case tok_semico: return "`;'";
+   case tok_comma:  return "`,'";
+   case tok_hash:   return "`#'";
+   case tok_bracko: return "`['";
+   case tok_brackc: return "`]'";
+   case tok_braceo: return "`{'";
+   case tok_bracec: return "`}'";
+   case tok_pareno: return "`('";
+   case tok_parenc: return "`)'";
+   case tok_eq:     return "`='";
+   case tok_eq2:    return "`=='";
+   case tok_tern:   return "`?'";
+   case tok_terneq: return "`?='";
+   case tok_div:    return "`/'";
+   case tok_diveq:  return "`/='";
+   case tok_not:    return "`!'";
+   case tok_neq:    return "`!='";
+   case tok_bnot:   return "`~'";
+   case tok_bneq:   return "`~='";
+   case tok_mul:    return "`*'";
+   case tok_muleq:  return "`*='";
+   case tok_at:     return "`@'";
+   case tok_at2:    return "`@@'";
+   case tok_lt:     return "`<'";
+   case tok_lt2:    return "`<<'";
+   case tok_le:     return "`<='";
+   case tok_gt:     return "`>'";
+   case tok_gt2:    return "`>>'";
+   case tok_ge:     return "`>='";
+   case tok_or:     return "`|'";
+   case tok_or2:    return "`||'";
+   case tok_oreq:   return "`|='";
+   case tok_and:    return "`&'";
+   case tok_and2:   return "`&&'";
+   case tok_andeq:  return "`&='";
+   case tok_add:    return "`+'";
+   case tok_add2:   return "`++'";
+   case tok_addeq:  return "`+='";
+   case tok_sub:    return "`-'";
+   case tok_sub2:   return "`--'";
+   case tok_subeq:  return "`-='";
+   case tok_mod:    return "`%'";
+   case tok_mod2:   return "`%%'";
+   case tok_modeq:  return "`%='";
+   case tok_xor:    return "`^'";
+   case tok_xor2:   return "`^^'";
+   case tok_xoreq:  return "`^='";
+   case tok_col:    return "`:'";
+   case tok_col2:   return "`::'";
+   case tok_coleq:  return "`:='";
+   case tok_dot:    return "`.'";
+   case tok_dot2:   return "`..'";
+   case tok_dot3:   return "`...'";
+   case tok_rarrow: return "`->'";
+   case tok_eof:    return "end-of-file";
+   }
+   return "invalid-token";
 }
 
 /* EOF */
