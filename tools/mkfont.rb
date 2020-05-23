@@ -22,12 +22,18 @@ def gen_map areas
    end
 end
 
-Font = Struct.new :pt, :name, :cmap, :body
+def label ch
+   "label:\\" + ch + ""
+end
 
-cmap_asc = gen_map [("!".."#"), ["%"], ("'".."?"), ("A".."}")]
-cmap_ext = gen_map [("!".."~"), ("¡".."£"), ("¥".."¬"), ("®".."´"),
-                    ("¶".."ÿ"), ("‒".."‧"), ("‰".."‽"), ("⁂".."⁏"),
-                    ("⁑".."⁓"), ("⁕".."⁞"), "Ё", ("А".."я"), "ё"]
+Font = Struct.new :pt, :name, :cmap, :body, :outdir
+
+cmap_asc = gen_map [("!".."#"), "%", ("'".."?"), ("A".."}")]
+cmap_pnc = gen_map [("¡".."£"), ("¥".."¬"), ("®".."´"), ("¶".."¿"),
+                    "×", "÷", ("‒".."‧"), ("‰".."‽"), ("⁂".."⁏"),
+                    ("⁑".."⁓"), ("⁕".."⁞")]
+cmap_let = gen_map [("À".."ÿ"), "Ё", ("А".."я"), "ё"]
+cmap_ext = gen_map [("!".."~"), *cmap_pnc, *cmap_let]
 
 cmap_all = Set[]
 
@@ -39,7 +45,9 @@ end
 
 cmap_all.delete " "
 cmap_all.delete "\n"
+cmap_all.delete "\r"
 cmap_all.delete "\u{5c}"
+cmap_all.delete_if do |c| cmap_let.include? c end
 
 cmap_all = cmap_all.to_a.sort
 
@@ -49,42 +57,55 @@ fonts.push Font.new 8,  "MisakiM",   cmap_all
 fonts.push Font.new 8,  "k6x8",      cmap_all
 fonts.push Font.new 16, "jiskan16",  cmap_all
 fonts.push Font.new(8,  "ljtrmfont", cmap_all, lambda do |words, ch|
-                       words.push *%W"-stroke black -strokewidth 1 label:#{ch}
-                                      -stroke none                 label:#{ch}
-                                      -composite"
+                       words.push "-stroke",      "black",
+                                  "-strokewidth", "1",    label(ch),
+                                  "-stroke",      "none", label(ch),
+                                  "-composite"
                     end)
 fonts.push Font.new(30, "AreaName", cmap_asc, lambda do |words, ch|
-                       words.push *%W"-stroke black -strokewidth 5 label:#{ch}
-                                      -stroke none                 label:#{ch}
-                                      -composite"
+                       words.push "-stroke",      "black",
+                                  "-strokewidth", "5",    label(ch),
+                                  "-stroke",      "none", label(ch),
+                                  "-composite"
                     end)
 fonts.push Font.new(11, "ltrmfont", cmap_ext, lambda do |words, ch|
-                       words.push *%W"-stroke black -strokewidth 1 label:#{ch}
-                                      -stroke none                 label:#{ch}
-                                      -composite -extent 7x13"
+                       words.push "-stroke",      "black",
+                                  "-strokewidth", "1",    label(ch),
+                                  "-stroke",      "none", label(ch),
+                                  "-composite",
+                                  "-extent", "7x13"
                     end)
 
 optipng_in  = []
 pngquant_in = []
 advpng_in   = []
 
-for fnt in fonts
-   ttf = "bin/#{fnt.name}.ttf"
+fonts.each do |fnt|
+   fnt.outdir = "pk7/fonts/#{fnt.name.downcase}"
+   fnt.ttf    = "bin/#{fnt.name}.ttf"
+end
 
+fonts.each do |fnt|
+   system "rm", "-f", *Dir.glob("#{fnt.outdir}/*.png")
+end
+
+fonts.each do |fnt|
    unless FileTest.exist? ttf
-      system *%W"wget http://mab.greyserv.net/f/#{fnt.name}.ttf -O #{ttf}"
+      system "wget",
+             "http://mab.greyserv.net/f/#{fnt.name}.ttf",
+             "-O", fnt.ttf
    end
 
-   outdir = "pk7/fonts/#{fnt.name.downcase}"
-
-   system *%W"rm -f".push(*Dir.glob("#{outdir}/*.png"))
-
-   words = %W"convert -depth 1 -font #{ttf} -pointsize #{fnt.pt}
-              -background none -fill white"
+   words = ["convert",
+            "-depth",      "1",
+            "-font",       fnt.ttf,
+            "-pointsize",  fnt.pt,
+            "-background", "none",
+            "-fill",       "white"]
 
    for ch in fnt.cmap
       num = sprintf "%08X", ch.ord
-      f = "#{outdir}/#{num}.png"
+      f = "#{fnt.outdir}/#{num}.png"
       if fnt.body
          optipng_in.push f
       else
@@ -92,20 +113,32 @@ for fnt in fonts
       end
       advpng_in.push f
       words.push "("
-      ch = "\\" + ch if %w"\\ ( ) -".include? ch
       if fnt.body
          fnt.body.call words, ch
       else
-         words.push "label:#{ch}"
+         words.push label(ch)
       end
-      words.push *%W"-write #{f} )"
+      words.push "-write", f, ")"
    end
+
+   words.push "null:"
 
    system *words
 end
 
-system *%w"optipng -strip all -preserve -clobber -o 2".push(*optipng_in)
-system *%w"pngquant --ext .png -f 8 -s 1".push(*pngquant_in)
-system *%w"advpng -z4".push(*advpng_in)
+system "optipng",
+       "-strip", "all",
+       "-preserve",
+       "-clobber",
+       "-o", "2",
+       *optipng_in
+system "pngquant",
+       "--ext", ".png",
+       "-f", "8",
+       "-s", "1",
+       *pngquant_in
+system "advpng",
+       "-z4",
+       *advpng_in
 
 ## EOF
