@@ -23,10 +23,11 @@ def gen_map areas
 end
 
 def label ch
-   "label:\\" + ch + ""
+   ch = "\\" + ch if %w"\\ ( ) -".include? ch
+   "label:" + ch
 end
 
-Font = Struct.new :pt, :name, :cmap, :body, :outdir
+Font = Struct.new :pt, :name, :cmap, :body, :outdir, :ttf
 
 cmap_asc = gen_map [("!".."#"), "%", ("'".."?"), ("A".."}")]
 cmap_pnc = gen_map [("¡".."£"), ("¥".."¬"), ("®".."´"), ("¶".."¿"),
@@ -46,7 +47,6 @@ end
 cmap_all.delete " "
 cmap_all.delete "\n"
 cmap_all.delete "\r"
-cmap_all.delete "\u{5c}"
 cmap_all.delete_if do |c| cmap_let.include? c end
 
 cmap_all = cmap_all.to_a.sort
@@ -90,7 +90,7 @@ fonts.each do |fnt|
 end
 
 fonts.each do |fnt|
-   unless FileTest.exist? ttf
+   unless FileTest.exist? fnt.ttf
       system "wget",
              "http://mab.greyserv.net/f/#{fnt.name}.ttf",
              "-O", fnt.ttf
@@ -99,7 +99,7 @@ fonts.each do |fnt|
    words = ["convert",
             "-depth",      "1",
             "-font",       fnt.ttf,
-            "-pointsize",  fnt.pt,
+            "-pointsize",  fnt.pt.to_s,
             "-background", "none",
             "-fill",       "white"]
 
