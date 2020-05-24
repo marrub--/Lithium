@@ -122,12 +122,11 @@ res
 }
 };
 
-StrEntON
 static struct monster_info const monsterinfo[] = {
 #{
 res = String.new
 for mon in monsters
-   res.concat %(   {#{mon[:exp]}, #{mon[:scr]}, mtype_#{mon[:mtype]}, "#{mon[:match]}")
+   res.concat %(   {#{mon[:exp]}, #{mon[:scr]}, mtype_#{mon[:mtype]}, s"#{mon[:match]}")
    unless mon[:flags].empty?
       res.concat ", " + mon[:flags].join("|")
    end
@@ -136,7 +135,6 @@ end
 res
 }
 };
-StrEntOFF
 
 /* EOF */
 _end_

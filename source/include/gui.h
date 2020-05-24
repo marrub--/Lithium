@@ -19,25 +19,30 @@
 #define Pre(name) .preset = &gui_p.name
 
 /* Fixed ID */
-#define G_Button_FId(g, id, ...)      G_Button_Impl     (g, id, &(struct gui_arg_btn const){__VA_ARGS__})
-#define G_Checkbox_FId(g, id, ...)    G_Checkbox_Impl   (g, id, &(struct gui_arg_cbx const){__VA_ARGS__})
-#define G_ScrollBegin_FId(g, id, ...) G_ScrollBegin_Impl(g, id, &(struct gui_arg_scr const){__VA_ARGS__})
-#define G_Slider_FId(g, id, ...)      G_Slider_Impl     (g, id, &(struct gui_arg_sld const){__VA_ARGS__})
-#define G_TextBox_FId(g, id, ...)     G_TextBox_Impl    (g, id, &(struct gui_arg_txt const){__VA_ARGS__})
+#define G_Args(ty, ...) &(struct gui_arg_##ty const){__VA_ARGS__}
+#define G_Button_FId(g, id, ...) G_Button_Imp(g, id, G_Args(btn, __VA_ARGS__))
+#define G_ChkBox_FId(g, id, ...) G_ChkBox_Imp(g, id, G_Args(cbx, __VA_ARGS__))
+#define G_ScrBeg_FId(g, id, ...) G_ScrBeg_Imp(g, id, G_Args(scr, __VA_ARGS__))
+#define G_Slider_FId(g, id, ...) G_Slider_Imp(g, id, G_Args(sld, __VA_ARGS__))
+#define G_TxtBox_FId(g, id, ...) G_TxtBox_Imp(g, id, G_Args(txt, __VA_ARGS__))
+#define G_WinBeg_FId(g, id, ...) G_WinBeg_Imp(g, id, G_Args(win, __VA_ARGS__))
 
-/* Dynamic ID */
-#define G_Button_Id(g, id, ...)      G_Button_FId     (g, id + LineHash, __VA_ARGS__)
-#define G_Checkbox_Id(g, id, ...)    G_Checkbox_FId   (g, id + LineHash, __VA_ARGS__)
-#define G_ScrollBegin_Id(g, id, ...) G_ScrollBegin_FId(g, id + LineHash, __VA_ARGS__)
-#define G_Slider_Id(g, id, ...)      G_Slider_FId     (g, id + LineHash, __VA_ARGS__)
-#define G_TextBox_Id(g, id, ...)     G_TextBox_FId    (g, id + LineHash, __VA_ARGS__)
+/* Hashed ID */
+#define G_HId(id) (id) + LineHash
+#define G_Button_HId(g, id, ...) G_Button_FId(g, G_HId(id), __VA_ARGS__)
+#define G_ChkBox_HId(g, id, ...) G_ChkBox_FId(g, G_HId(id), __VA_ARGS__)
+#define G_ScrBeg_HId(g, id, ...) G_ScrBeg_FId(g, G_HId(id), __VA_ARGS__)
+#define G_Slider_HId(g, id, ...) G_Slider_FId(g, G_HId(id), __VA_ARGS__)
+#define G_TxtBox_HId(g, id, ...) G_TxtBox_FId(g, G_HId(id), __VA_ARGS__)
+#define G_WinBeg_HId(g, id, ...) G_WinBeg_FId(g, G_HId(id), __VA_ARGS__)
 
-/* Dynamic */
-#define G_Button(g, ...)             G_Button_Id     (g, 0, __VA_ARGS__)
-#define G_Checkbox(g, ...)           G_Checkbox_Id   (g, 0, __VA_ARGS__)
-#define G_ScrollBegin(g, ...)        G_ScrollBegin_Id(g, 0, __VA_ARGS__)
-#define G_Slider(g, ...)             G_Slider_Id     (g, 0, __VA_ARGS__)
-#define G_TextBox(g, ...)            G_TextBox_Id    (g, 0, __VA_ARGS__)
+/* Hashed */
+#define G_Button(g, ...) G_Button_HId(g, 0, __VA_ARGS__)
+#define G_ChkBox(g, ...) G_ChkBox_HId(g, 0, __VA_ARGS__)
+#define G_ScrBeg(g, ...) G_ScrBeg_HId(g, 0, __VA_ARGS__)
+#define G_Slider(g, ...) G_Slider_HId(g, 0, __VA_ARGS__)
+#define G_TxtBox(g, ...) G_TxtBox_HId(g, 0, __VA_ARGS__)
+#define G_WinBeg(g, ...) G_WinBeg_HId(g, 0, __VA_ARGS__)
 
 #define G_GenPreset(type, def) \
    type pre; \
@@ -54,12 +59,12 @@
 #define G_ScrollReset(g, st) \
    (*(st) = (struct gui_scr){})
 
-#define G_TextBox_Reset(st) ((st)->tbptr = 0)
+#define G_TxtBoxRes(st) ((st)->tbptr = 0)
 
-#define G_TextBox_OnTextEntered(st) \
+#define G_TxtBoxEvt(st) \
    __with(cstr txt_buf = Cps_Expand(st->txtbuf, 0, st->tbptr);) \
       ifauto(cstr, _c, strchr(txt_buf, '\n')) \
-         __with(size_t txt_len = _c - txt_buf; G_TextBox_Reset(st);)
+         __with(size_t txt_len = _c - txt_buf; G_TxtBoxRes(st);)
 
 /* Types ------------------------------------------------------------------- */
 
@@ -284,9 +289,6 @@ optargs(1)
 void G_Clip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, i32 ww);
 void G_ClipRelease(struct gui_state *g);
 
-cstr RemoveTextColors_str(astr s, i32 size);
-cstr RemoveTextColors    (cstr s, i32 size);
-
 void G_TypeOn(struct gui_state *g, struct gui_typ *typeon, str text);
 struct gui_typ const *G_TypeOnUpdate(struct gui_state *g, struct gui_typ *typeon);
 
@@ -295,14 +297,18 @@ bool G_Filler(i32 x, i32 y, u32 *fill, u32 tics, bool held);
 i32 G_Tabs(struct gui_state *g, u32 *st, char const (*names)[20], size_t num,
            i32 x, i32 y, i32 yp);
 
-void G_ScrollEnd(struct gui_state *g, struct gui_scr *scr);
+void G_ScrEnd(struct gui_state *g, struct gui_scr *scr);
 optargs(1)
-bool G_ScrollOcclude(struct gui_state *g, struct gui_scr const *scr, i32 y, i32 h);
+bool G_ScrOcc(struct gui_state *g, struct gui_scr const *scr, i32 y, i32 h);
 
-bool            G_Button_Impl     (struct gui_state *g, u32 id, struct gui_arg_btn const *a);
-bool            G_Checkbox_Impl   (struct gui_state *g, u32 id, struct gui_arg_cbx const *a);
-void            G_ScrollBegin_Impl(struct gui_state *g, u32 id, struct gui_arg_scr const *a);
-k64             G_Slider_Impl     (struct gui_state *g, u32 id, struct gui_arg_sld const *a);
-struct gui_txt *G_TextBox_Impl    (struct gui_state *g, u32 id, struct gui_arg_txt const *a);
+#define G_ImpArgs(ty) struct gui_state *g, u32 id, struct gui_arg_##ty const *a
+bool            G_Button_Imp(G_ImpArgs(btn));
+bool            G_ChkBox_Imp(G_ImpArgs(cbx));
+void            G_ScrBeg_Imp(G_ImpArgs(scr));
+k64             G_Slider_Imp(G_ImpArgs(sld));
+struct gui_txt *G_TxtBox_Imp(G_ImpArgs(txt));
+#if 0
+void            G_WinBeg_Imp(G_ImpArgs(win));
+#endif
 
 #endif

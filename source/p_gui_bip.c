@@ -84,8 +84,8 @@ static void DrawPage(struct gui_state *g, struct player *p, struct page *page) {
    i32 oy = 0;
 
    if(height) {
-      G_ScrollBegin(g, &CBIState(g)->bipinfoscr, 100, 40, 200, 180,
-                    height * 8 + 20, 184);
+      G_ScrBeg(g, &CBIState(g)->bipinfoscr, 100, 40, 200, 180,
+               height * 8 + 20, 184);
       oy = g->oy - 40;
    } else {
       SetClipW(110, 40, 201, 180, 185);
@@ -126,8 +126,8 @@ static void DrawPage(struct gui_state *g, struct player *p, struct page *page) {
    __nprintf("%.*S", typeon->pos, typeon->txt);
    DrawText(ACS_EndStrParam(), g->defcr, 111, 60);
 
-   if(height) G_ScrollEnd(g, &CBIState(g)->bipinfoscr);
-   else             ClearClip();
+   if(height) G_ScrEnd(g, &CBIState(g)->bipinfoscr);
+   else       ClearClip();
 }
 
 static void MainUI(struct gui_state *g, struct player *p) {
@@ -144,7 +144,7 @@ static void MainUI(struct gui_state *g, struct player *p) {
       PrintTextChS(s); \
       PrintTextA(s_smallfnt, g->defcr, 105,1, 85+n,1, 0.7); \
       s = LanguageC(LANG "BIP_NAME_%s", P_BIP_CategoryToName(name)); \
-      if(G_Button_Id(g, name, s, 45, 85 + n, Pre(btnbipmain))) { \
+      if(G_Button_HId(g, name, s, 45, 85 + n, Pre(btnbipmain))) { \
          p->bip.curcategory = name; \
          p->bip.curpage     = nil; \
       } \
@@ -161,7 +161,7 @@ static void CategoryUI(struct gui_state *g, struct player *p) {
 
    if(categ == BIPC_EXTRA) goto draw;
 
-   G_ScrollBegin(g, &CBIState(g)->bipscr, 15, 50, gui_p.btnlist.w, 170, gui_p.btnlist.h * n);
+   G_ScrBeg(g, &CBIState(g)->bipscr, 15, 50, gui_p.btnlist.w, 170, gui_p.btnlist.h * n);
 
    u32 i = 0;
    for_page() {
@@ -171,7 +171,7 @@ static void CategoryUI(struct gui_state *g, struct player *p) {
 
       i32 y = gui_p.btnlist.h * i++;
 
-      if(G_ScrollOcclude(g, &CBIState(g)->bipscr, y, gui_p.btnlist.h))
+      if(G_ScrOcc(g, &CBIState(g)->bipscr, y, gui_p.btnlist.h))
          continue;
 
       bool lock = !get_bit(page->flags, _page_unlocked) || p->bip.curpage == page;
@@ -179,11 +179,11 @@ static void CategoryUI(struct gui_state *g, struct player *p) {
       char name[128] = "\Ci";
       strcpy(p->bip.curpage == page ? &name[2] : name, GetShortName(page));
 
-      if(G_Button_Id(g, i, name, 0, y, lock, Pre(btnlist)))
+      if(G_Button_HId(g, i, name, 0, y, lock, Pre(btnlist)))
          SetCurPage(g, p, page);
    }
 
-   G_ScrollEnd(g, &CBIState(g)->bipscr);
+   G_ScrEnd(g, &CBIState(g)->bipscr);
 
 draw:
    if(p->bip.curpage) DrawPage(g, p, p->bip.curpage);
@@ -210,11 +210,11 @@ i32 SearchPage(struct player *p, struct page *page, cstr query) {
 }
 
 static void SearchUI(struct gui_state *g, struct player *p) {
-   struct gui_txt *st = G_TextBox(g, &CBIState(g)->bipsearch, 23, 65, p);
+   struct gui_txt *st = G_TxtBox(g, &CBIState(g)->bipsearch, 23, 65, p);
 
    p->bip.lastcategory = BIPC_MAIN;
 
-   G_TextBox_OnTextEntered(st) {
+   G_TxtBoxEvt(st) {
       /* That's a lot of numbers... */
       struct extraname {
          u64 crc;
@@ -259,7 +259,7 @@ static void SearchUI(struct gui_state *g, struct player *p) {
          struct page *page = p->bip.result[i];
          cstr flname = GetFullName(page);
 
-         if(G_Button_Id(g, i, flname, 70, 95 + (i * 10), Pre(btnbipmain))) {
+         if(G_Button_HId(g, i, flname, 70, 95 + (i * 10), Pre(btnbipmain))) {
             p->bip.lastcategory = p->bip.curcategory;
             p->bip.curcategory  = page->info->category;
             SetCurPage(g, p, page);

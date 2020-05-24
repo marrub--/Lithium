@@ -120,9 +120,9 @@ void S_boole(struct set_parm const *sp) {
 
    S_label(sp);
 
-   if(G_Button_Id(sp->g, sp->y, v ? LC(LANG "ON") : LC(LANG "OFF"),
-                  _rght - gui_p.btnlist.w, sp->y, Pre(btnlist),
-                  .fill = {&CBIState(sp->g)->settingsfill, sp->st->fill})) {
+   if(G_Button_HId(sp->g, sp->y, v ? LC(LANG "ON") : LC(LANG "OFF"),
+                   _rght - gui_p.btnlist.w, sp->y, Pre(btnlist),
+                   .fill = {&CBIState(sp->g)->settingsfill, sp->st->fill})) {
       v = !v;
       sp->st->cb_g.b(sp, &v);
    }
@@ -135,9 +135,9 @@ void S_integ(struct set_parm const *sp) {
 
    S_label(sp);
 
-   if((diff = G_Slider_Id(sp->g, sp->y, _rght - gui_p.slddef.w, sp->y,
-                          sp->st->bnd.i.min, sp->st->bnd.i.max, v, true,
-                          .suf = LC(suff)))) {
+   if((diff = G_Slider_HId(sp->g, sp->y, _rght - gui_p.slddef.w, sp->y,
+                           sp->st->bnd.i.min, sp->st->bnd.i.max, v, true,
+                           .suf = LC(suff)))) {
       v += diff;
       sp->st->cb_g.i(sp, &v);
    }
@@ -150,9 +150,9 @@ void S_fixed(struct set_parm const *sp) {
 
    S_label(sp);
 
-   if((diff = G_Slider_Id(sp->g, sp->y, _rght - gui_p.slddef.w, sp->y,
-                          sp->st->bnd.k.min, sp->st->bnd.k.max, v,
-                          .suf = LC(suff)))) {
+   if((diff = G_Slider_HId(sp->g, sp->y, _rght - gui_p.slddef.w, sp->y,
+                           sp->st->bnd.k.min, sp->st->bnd.k.max, v,
+                           .suf = LC(suff)))) {
       v = (i32)((v + diff) * 100) / 100.0k;
       sp->st->cb_g.k(sp, &v);
    }
@@ -167,14 +167,14 @@ void S_enume(struct set_parm const *sp) {
 
    S_label(sp);
 
-   if(G_Button_Id(sp->g, sp->y, .x = _rght - btw * 2, sp->y, v <= min,
-                  Pre(btnprevs))) {
+   if(G_Button_HId(sp->g, sp->y, .x = _rght - btw * 2, sp->y, v <= min,
+                   Pre(btnprevs))) {
       v--;
       sp->st->cb_g.i(sp, &v);
    }
 
-   if(G_Button_Id(sp->g, sp->y, .x = _rght - btw, sp->y, v >= max,
-                  Pre(btnnexts))) {
+   if(G_Button_HId(sp->g, sp->y, .x = _rght - btw, sp->y, v >= max,
+                   Pre(btnnexts))) {
       v++;
       sp->st->cb_g.i(sp, &v);
    }
@@ -395,8 +395,8 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p) {
       if(S_isEnabled(&set[i], p))
          set_num++;
 
-   G_ScrollBegin(g, &CBIState(g)->settingscr, 15, 30 + yp, _rght,
-                 192 - yp, set_num * 10);
+   G_ScrBeg(g, &CBIState(g)->settingscr, 15, 30 + yp, _rght, 192 - yp,
+            set_num * 10);
 
    struct set_parm sp = {p, g, 0, 0};
 
@@ -404,14 +404,14 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p) {
       sp.st = &set[i];
 
       if(S_isEnabled(sp.st, p)) {
-         if(!G_ScrollOcclude(g, &CBIState(g)->settingscr, sp.y, 10))
+         if(!G_ScrOcc(g, &CBIState(g)->settingscr, sp.y, 10))
             sp.st->cb(&sp);
 
          sp.y += 10;
       }
    }
 
-   G_ScrollEnd(g, &CBIState(g)->settingscr);
+   G_ScrEnd(g, &CBIState(g)->settingscr);
 }
 
 /* EOF */

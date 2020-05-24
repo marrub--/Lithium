@@ -14,10 +14,10 @@
 #include "common.h"
 #include "p_player.h"
 
-/* This function is excessively commented in case I need to change it. */
-/* Reading this function will cause a 5x1d20 hit to your SAN stat. Beware! */
-void G_ScrollBegin_Impl(struct gui_state *g, u32 id, struct gui_arg_scr const *a)
-{
+/* This function is excessively commented in case I need to change it.
+ * Reading this function will cause a 5x1d20 hit to your SAN stat. Beware!
+ */
+void G_ScrBeg_Imp(struct gui_state *g, u32 id, struct gui_arg_scr const *a) {
    struct gui_pre_scr const *pre = a->preset ? a->preset : &gui_p.scrdef;
    struct gui_scr *scr = a->st;
 
@@ -157,7 +157,7 @@ void G_ScrollBegin_Impl(struct gui_state *g, u32 id, struct gui_arg_scr const *a
    G_Clip(g, x, ory, a->w, realh, a->ww);
 }
 
-void G_ScrollEnd(struct gui_state *g, struct gui_scr *scr)
+void G_ScrEnd(struct gui_state *g, struct gui_scr *scr)
 {
    /* reset offsets */
    g->ox -= scr->ox;
@@ -167,7 +167,7 @@ void G_ScrollEnd(struct gui_state *g, struct gui_scr *scr)
    G_ClipRelease(g);
 }
 
-bool G_ScrollOcclude(struct gui_state *g, struct gui_scr const *scr, i32 y, i32 h)
+bool G_ScrOcc(struct gui_state *g, struct gui_scr const *scr, i32 y, i32 h)
 {
    return y > scr->occludeE || (h && (y + h) - scr->occludeS < 0);
 }

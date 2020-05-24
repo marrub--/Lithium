@@ -289,7 +289,7 @@ static void MonsterMain(dmon_t *m)
       }
 
       if(HasResistances(m) && m->level >= 20)
-         ShowBarrier(m, m->level / 100.);
+         ShowBarrier(m, m->level / 100.0);
 
       if(InvNum(so_Ionized) && tic % 5 == 0)
          ServCallI(sm_IonizeFX);

@@ -146,18 +146,18 @@ void P_CBI_TabLog(struct gui_state *g, struct player *p) {
 
    PrintText_str(lm->name, s_lmidfont, g->defcr, 28+gui_p.btnprev.w+gui_p.btnnext.w,1, 40,1);
 
-   G_ScrollBegin(g, &CBIState(g)->logscr, 15, 50, 280, 175, lm->dataC * ht);
+   G_ScrBeg(g, &CBIState(g)->logscr, 15, 50, 280, 175, lm->dataC * ht);
 
    for(i32 i = 0; i < lm->dataC; i++) {
       i32 const y = ht * i;
 
-      if(G_ScrollOcclude(g, &CBIState(g)->logscr, y, ht)) continue;
+      if(G_ScrOcc(g, &CBIState(g)->logscr, y, ht)) continue;
 
       PrintSprite(sp_UI_LogList, g->ox,1, y + g->oy,1);
       PrintText_str(lm->dataV[i].inf, s_smallfnt, CR_GREEN, g->ox + 2,1, y + g->oy + 1,1);
    }
 
-   G_ScrollEnd(g, &CBIState(g)->logscr);
+   G_ScrEnd(g, &CBIState(g)->logscr);
 }
 
 script void HUD_Log(struct player *p, i32 cr, i32 x, i32 yy) {

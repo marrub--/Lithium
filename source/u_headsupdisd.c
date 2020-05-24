@@ -81,7 +81,7 @@ static void HUD_Health(struct player *p) {
       i32 xx = x - i;
       if(xx < 0) xx += 40;
 
-      PrintSpriteA(gfx, 21+xx,1, 220,1, (20 - i) / 20.);
+      PrintSpriteA(gfx, 21+xx,1, 220,1, (20 - i) / 20.0);
    }
 }
 

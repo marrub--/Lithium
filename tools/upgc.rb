@@ -73,7 +73,7 @@ common_main do
          una = tok.text
 
          tok = tks.next.expect_after tok, :identi
-         inf = if tok.text == "N/A" then "0" else '"' + tok.text + '"' end
+         inf = if tok.text == "N/A" then "snil" else 's"' + tok.text + '"' end
 
          scr = tks.peek_or :number, "0"
 
@@ -146,19 +146,15 @@ _end_h_
 
 /* Extern Objects ---------------------------------------------------------- */
 
-StrEntON
-
 struct upgradeinfo upgrinfo[UPGR_MAX] = {
 #{
 res = String.new
 for una, upg in upgrades
-   res.concat %(   {{"#{una}", #{upg[:inf]}, #{upg[:scr]}}, #{upg[:pcl]}, #{upg[:cat]}, #{upg[:prf]}, #{upg[:grp]}, #{upg[:req]}, #{upg[:mul]}, UPGR_#{una}},\n)
+   res.concat %(   {{s"#{una}", #{upg[:inf]}, #{upg[:scr]}}, #{upg[:pcl]}, #{upg[:cat]}, #{upg[:prf]}, #{upg[:grp]}, #{upg[:req]}, #{upg[:mul]}, UPGR_#{una}},\n)
 end
 res
 }
 };
-
-StrEntOFF
 
 i32 Upgr_StrToEnum(cstr s) {
    u32 fst = FourCCPtr(s + 0);

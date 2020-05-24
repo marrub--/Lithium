@@ -14,8 +14,7 @@
 #include "common.h"
 #include "p_player.h"
 
-k64 G_Slider_Impl(struct gui_state *g, u32 id, struct gui_arg_sld const *a)
-{
+k64 G_Slider_Imp(struct gui_state *g, u32 id, struct gui_arg_sld const *a) {
    struct gui_pre_sld const *pre = a->preset ? a->preset : &gui_p.slddef;
 
    k64 w = pre->w - (pre->pad * 2);
@@ -75,7 +74,7 @@ k64 G_Slider_Impl(struct gui_state *g, u32 id, struct gui_arg_sld const *a)
    if(pre->font)
    {
       cstr suf = a->suf ? a->suf : "";
-      k64  amt = roundlk(norm * 100.lk, 10) / 100.lk;
+      k64  amt = roundlk(norm * 100.0lk, 10) / 100.0lk;
       if(a->integ) PrintTextFmt("%i%s",     (i32)amt, suf);
       else         PrintTextFmt("%.1k%s", (k32)amt, suf);
 

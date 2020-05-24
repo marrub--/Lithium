@@ -273,8 +273,8 @@ script static void TerminalGUI(struct player *p, u32 tact) {
       /* text */
       twidth  = 640, theigh = 480,
       tright  = twidth,
-      ttop    = theigh*.08,
-      tbottom = theigh*.75,
+      ttop    = theigh*0.08,
+      tbottom = theigh*0.75,
       tleft   = twidth/2 - 10,
 
       tmidx = tright/2, tmidy = tbottom/2,
@@ -408,7 +408,7 @@ script static void DialogueGUI(struct player *p) {
          u32  adr = MemB2_G(StructOfs(OPT, NAML, i));
          cstr txt = LanguageC(LANG "OPT_%s", MemSC_G(adr));
 
-         if(G_Button_Id(&gst, i, txt, 45, y, Pre(btndlgsel))) {
+         if(G_Button_HId(&gst, i, txt, 45, y, Pre(btndlgsel))) {
             MemB1_S(VAR_UACT, UACT_SELOPTION);
             MemB1_S(VAR_OPT_SEL, i);
          }

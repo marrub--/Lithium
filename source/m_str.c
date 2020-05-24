@@ -29,10 +29,8 @@
    for(; *s; s++) ret = *s + 101 * ret; \
    return ret
 
-StrEntON
-#define X(n, s) str const n = s;
+#define X(n, s) str const n = Spf s;
 #include "m_stab.h"
-StrEntOFF
 
 str l_strupper(str in)
 {
@@ -226,6 +224,37 @@ str LanguageNull(cstr fmt, ...)
    str alias = LanguageV(name);
 
    return name == alias ? snil : alias;
+}
+
+noinit static char tcbuf[4096];
+
+#define RemoveTextColorsImpl() \
+   i32 j = 0; \
+   \
+   if(size > countof(tcbuf)) return nil; \
+   \
+   for(i32 i = 0; i < size; i++) { \
+      if(s[i] == '\C') { \
+         i++; \
+         if(s[i] == '[') while(s[i] && s[i++] != ']'); \
+         else            i++; \
+      } \
+      \
+      if(i >= size || j >= size || !s[i]) break; \
+      \
+      tcbuf[j++] = s[i]; \
+   } \
+   \
+   tcbuf[j++] = '\0'; \
+   \
+   return tcbuf;
+
+cstr RemoveTextColors_str(astr s, i32 size) {
+   RemoveTextColorsImpl();
+}
+
+cstr RemoveTextColors(cstr s, i32 size) {
+   RemoveTextColorsImpl();
 }
 
 /* EOF */

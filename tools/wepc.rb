@@ -123,17 +123,15 @@ _end_h_
 
 /* Extern Objects ---------------------------------------------------------- */
 
-StrEntON
-
-#define Placeholder1 "MMMMHMHMMMHMMM"
-#define Placeholder2 "YOUSONOFABITCH"
-#define A(a) OBJ a "Ammo"
-#define O(a) OBJ a
-#define P(a) "weapons/" a "/pickup"
-#define N(a) .classname = OBJ a, .name = a
+#define Placeholder1 s"MMMMHMHMMMHMMM"
+#define Placeholder2 s"YOUSONOFABITCH"
+#define A(a) sOBJ a "Ammo"
+#define O(a) sOBJ a
+#define P(a) s"weapons/" a "/pickup"
+#define N(a) .classname = sOBJ a, .name = Spf a
 #define F(...) .flags = __VA_ARGS__
 struct weaponinfo const weaponinfo[weapon_max] = {
-   {0, pcl_any, snil, "MMMMHMHMMMHMMM"},
+   {0, pcl_any, snil, Placeholder1},
 #{
 res = String.new
 weps.each do |wep|
@@ -142,8 +140,6 @@ end
 res
 }
 };
-
-StrEntOFF
 
 /* Extern Functions -------------------------------------------------------- */
 

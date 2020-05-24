@@ -128,7 +128,6 @@ static void SetMagicUI(struct player *p, bool on)
 script
 void Upgr_Magic_Update(struct player *p, struct upgrade *upgr)
 {
-   StrEntON
    k32 manaperc = p->mana / (k32)p->manamax;
 
    if(UData.manaperc < 1 && manaperc == 1)

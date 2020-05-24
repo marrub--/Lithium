@@ -198,7 +198,7 @@ void P_Wep_PTick(struct player *p)
       ServCallI(sm_DelearSprite);
       break;
    case weapon_cfist:
-      __with(k64 charge = 5 + InvNum(so_FistCharge) / 10.lk;)
+      __with(k64 charge = 5 + InvNum(so_FistCharge) / 10.0lk;)
       {
          PrintTextFmt(LC(LANG "CHARGE_FMT"), charge);
          PrintText(s_smallfnt, CR_LIGHTBLUE, 270,2, 200,2);
@@ -389,7 +389,7 @@ void Sc_PoisonFXTicker(void)
 script_str ext("ACS") addr(OBJ "RecoilUp")
 void Sc_RecoilUp(k32 amount)
 {
-   with_player(LocalPlayer) p->extrpitch += amount / 180.lk;
+   with_player(LocalPlayer) p->extrpitch += amount / 180.0lk;
 }
 
 /* EOF */

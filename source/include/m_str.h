@@ -68,5 +68,7 @@ str LanguageV(str name);
 char *LanguageVC(char *out, cstr name);
 char *LanguageCV(char *out, cstr name, ...);
 str LanguageNull(cstr fmt, ...);
+cstr RemoveTextColors_str(astr s, i32 size);
+cstr RemoveTextColors    (cstr s, i32 size);
 
 /* EOF */

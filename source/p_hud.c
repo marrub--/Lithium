@@ -22,8 +22,8 @@ void HUD_WeaponSlots(struct player *p, i32 cr_one, i32 cr_two, i32 cr_many, i32 
       for(i32 i = 1; i < SLOT_MAX; i++)
          ifauto(i32, slot, p->weapon.slot[i])
    {
-      k32 x = _x+.2 - 8 * (SLOT_MAX - i);
-      k32 y = _y+.2;
+      k32 x = _x+0.2 - 8 * (SLOT_MAX - i);
+      k32 y = _y+0.2;
       i32 cr;
       switch(slot) {
       case 1:  cr = cr_one;  break;

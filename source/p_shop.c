@@ -27,24 +27,22 @@ struct shopitem
 
 /* Static Objects ---------------------------------------------------------- */
 
-StrEntON
 static struct shopitem shopitems[] = {
 /* {{"Name-----------", "BIP------------", Cost---}, Class, Cnt-, "Class---------------", [Flags]}, */
-   {{"RocketAmmo", snil, 9000},  gA, 5,    OBJ "RocketAmmo"},
-   {{"PlasmaAmmo", snil, 75750}, gA, 1000, OBJ "PlasmaAmmo"},
+   {{s"RocketAmmo", snil, 9000},  gA, 5,    sOBJ "RocketAmmo"},
+   {{s"PlasmaAmmo", snil, 75750}, gA, 1000, sOBJ "PlasmaAmmo"},
 
-   {{"ChargeFist",      "ChargeFist",       100000}, pM, 1, OBJ "ChargeFist",      true},
-   {{"Revolver",        "Revolver",         500000}, pM, 1, OBJ "Revolver",        true},
-   {{"LazShotgun",      "LazShotgun",      1800000}, pM, 1, OBJ "LazShotgun",      true},
-   {{"SniperRifle",     "SniperRifle",     1800000}, pM, 1, OBJ "SniperRifle",     true},
-   {{"MissileLauncher", "MissileLauncher", 2500000}, gO, 1, OBJ "MissileLauncher", true},
-   {{"PlasmaDiffuser",  "PlasmaDiffuser",  2500000}, gO, 1, OBJ "PlasmaDiffuser",  true},
+   {{s"ChargeFist",      s"ChargeFist",       100000}, pM, 1, sOBJ "ChargeFist",      true},
+   {{s"Revolver",        s"Revolver",         500000}, pM, 1, sOBJ "Revolver",        true},
+   {{s"LazShotgun",      s"LazShotgun",      1800000}, pM, 1, sOBJ "LazShotgun",      true},
+   {{s"SniperRifle",     s"SniperRifle",     1800000}, pM, 1, sOBJ "SniperRifle",     true},
+   {{s"MissileLauncher", s"MissileLauncher", 2500000}, gO, 1, sOBJ "MissileLauncher", true},
+   {{s"PlasmaDiffuser",  s"PlasmaDiffuser",  2500000}, gO, 1, sOBJ "PlasmaDiffuser",  true},
 
-   {{"Allmap",   snil, 100000}, gA, 1, "Allmap"},
-   {{"Infrared", snil, 70000},  gA, 1, "Infrared"},
-   {{"RadSuit",  snil, 100000}, gA, 1, "RadSuit"},
+   {{s"Allmap",   snil, 100000}, gA, 1, s"Allmap"},
+   {{s"Infrared", snil, 70000},  gA, 1, s"Infrared"},
+   {{s"RadSuit",  snil, 100000}, gA, 1, s"RadSuit"},
 };
-StrEntOFF
 
 /* Static Functions -------------------------------------------------------- */
 
@@ -97,23 +95,23 @@ void P_CBI_TabShop(struct gui_state *g, struct player *p)
          nitems++;
    }
 
-   G_ScrollBegin(g, &CBIState(g)->shopscr, 15, 36, gui_p.btnlist.w, 186, gui_p.btnlist.h * nitems);
+   G_ScrBeg(g, &CBIState(g)->shopscr, 15, 36, gui_p.btnlist.w, 186, gui_p.btnlist.h * nitems);
 
    for(i32 i = 0, y = 0; i < countof(shopitems); i++)
    {
-      if(G_ScrollOcclude(g, &CBIState(g)->shopscr, y, gui_p.btnlistsel.h) || !(shopitems[i].pclass & p->pclass))
+      if(G_ScrOcc(g, &CBIState(g)->shopscr, y, gui_p.btnlistsel.h) || !(shopitems[i].pclass & p->pclass))
          continue;
 
       cstr name = LanguageC(LANG "SHOP_TITLE_%S", shopitems[i].name);
 
       i32 *shopsel = &CBIState(g)->shopsel;
-      if(G_Button_Id(g, i, name, 0, y, i == *shopsel, Pre(btnlistsel)))
+      if(G_Button_HId(g, i, name, 0, y, i == *shopsel, Pre(btnlistsel)))
          *shopsel = i;
 
       y += gui_p.btnlistsel.h;
    }
 
-   G_ScrollEnd(g, &CBIState(g)->shopscr);
+   G_ScrEnd(g, &CBIState(g)->shopscr);
 
    struct shopitem *item = &shopitems[CBIState(g)->shopsel];
 

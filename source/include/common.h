@@ -113,9 +113,6 @@
 #define InvNum  ACS_CheckInventory
 #define InvTake ACS_TakeInventory
 
-#define StrEntON  _Pragma("GDCC STRENT_LITERAL ON")
-#define StrEntOFF _Pragma("GDCC STRENT_LITERAL OFF")
-
 /* Types ------------------------------------------------------------------- */
 
 enum {

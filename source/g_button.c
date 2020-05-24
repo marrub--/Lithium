@@ -14,7 +14,7 @@
 #include "common.h"
 #include "p_player.h"
 
-bool G_Button_Impl(struct gui_state *g, u32 id, struct gui_arg_btn const *a) {
+bool G_Button_Imp(struct gui_state *g, u32 id, struct gui_arg_btn const *a) {
    struct gui_pre_btn const *pre = a->preset ? a->preset : &gui_p.btndef;
 
    if(!a->disabled)

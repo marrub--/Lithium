@@ -17,8 +17,7 @@
 #include "m_cps.h"
 #include "m_char.h"
 
-struct gui_txt *G_TextBox_Impl(struct gui_state *g, u32 id, struct gui_arg_txt const *a)
-{
+struct gui_txt *G_TxtBox_Imp(struct gui_state *g, u32 id, struct gui_arg_txt const *a) {
    struct gui_txt *st = a->st;
 
    G_Auto(g, id, a->x, a->y, 260, 10);

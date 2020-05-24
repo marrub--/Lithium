@@ -31,7 +31,7 @@ static void DrawAttr(struct gui_state *g, i32 x, i32 y, struct player *p, i32 at
    k32  helptrns = 0.5;
 
    if(p->attr.points)
-      if(G_Button_Id(g, at, .x = x-42 + gui_p.btnnext.w, y-2, Pre(btnnext), .slide = true))
+      if(G_Button_HId(g, at, .x = x-42 + gui_p.btnnext.w, y-2, Pre(btnnext), .slide = true))
    {
       p->attr.points--;
       p->attr.attrs[at]++;

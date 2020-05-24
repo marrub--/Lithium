@@ -15,21 +15,19 @@
 #include "p_player.h"
 #include "w_world.h"
 
-/* Static Objects ---------------------------------------------------------- */
-
-noinit static char tcbuf[4096];
-
 /* Extern Functions -------------------------------------------------------- */
 
-void G_Auto(struct gui_state *g, u32 id, i32 x, i32 y, i32 w, i32 h, bool slide)
-{
+void G_Auto(struct gui_state *g, u32 id, i32 x, i32 y, i32 w, i32 h,
+            bool slide) {
    x += g->ox;
    y += g->oy;
 
-   /* check clip versus cursor (if clipping), then check control versus cursor */
-   if(!g->useclip || aabb_point(g->clpxS, g->clpyS, g->clpxE, g->clpyE, g->cx, g->cy))
-      if(aabb_point(x, y, w, h, g->cx, g->cy))
-   {
+   /* check clip versus cursor (if clipping), then check control
+    * versus cursor
+    */
+   if((!g->useclip ||
+       aabb_point(g->clpxS, g->clpyS, g->clpxE, g->clpyE, g->cx, g->cy)) &&
+      aabb_point(x, y, w, h, g->cx, g->cy)) {
       g->hot = id;
 
       if(g->active == 0 && g->clicklft)
@@ -44,19 +42,18 @@ void G_Auto(struct gui_state *g, u32 id, i32 x, i32 y, i32 w, i32 h, bool slide)
    }
 }
 
-void G_Init(struct gui_state *g, void *state)
-{
+void G_Init(struct gui_state *g, void *state) {
    g->state = state;
-   g->gfxprefix = c":UI:";
+   g->gfxprefix = ":UI:";
 }
 
-void G_UpdateState(struct gui_state *g, struct player *p)
-{
+void G_UpdateState(struct gui_state *g, struct player *p) {
+   /* Due to ZDoom being ZDoom, GetUserCVar with invertmouse does
+    * nothing. This breaks network sync so we can only do it in
+    * single-player.
+    */
    bool inverted = p->getCVarI(sc_player_invertmouse);
 
-   /* Due to ZDoom being ZDoom, GetUserCVar with invertmouse does nothing.
-    * This breaks network sync so we can only do it in single-player.
-    */
    Str(invertmouse, s"invertmouse");
    if(singleplayer) inverted |= ACS_GetCVar(invertmouse);
 
@@ -84,8 +81,7 @@ void G_UpdateState(struct gui_state *g, struct player *p)
       g->slidetime++;
 }
 
-void G_Begin(struct gui_state *g, i32 w, i32 h)
-{
+void G_Begin(struct gui_state *g, i32 w, i32 h) {
    if(!w) w = 320;
    if(!h) h = 200;
 
@@ -94,8 +90,7 @@ void G_Begin(struct gui_state *g, i32 w, i32 h)
    SetSize(g->w = w, g->h = h);
 }
 
-void G_End(struct gui_state *g, enum cursor curs)
-{
+void G_End(struct gui_state *g, enum cursor curs) {
    str cgfx;
 
    switch(curs) {
@@ -118,8 +113,7 @@ void G_End(struct gui_state *g, enum cursor curs)
       g->active = 0;
 }
 
-void G_Clip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, i32 ww)
-{
+void G_Clip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, i32 ww) {
    g->useclip = true;
    g->clpxE = w;
    g->clpyE = h;
@@ -128,57 +122,19 @@ void G_Clip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, i32 ww)
    SetClipW(g->clpxS = x, g->clpyS = y, w, h, ww);
 }
 
-void G_ClipRelease(struct gui_state *g)
-{
+void G_ClipRelease(struct gui_state *g) {
    g->useclip = g->clpxS = g->clpyS = g->clpxE = g->clpyE = 0;
    ClearClip();
 }
 
-void G_TypeOn(struct gui_state *g, struct gui_typ *typeon, str text)
-{
+void G_TypeOn(struct gui_state *g, struct gui_typ *typeon, str text) {
    typeon->txt = text;
    typeon->len = ACS_StrLen(text);
    typeon->pos = 0;
 }
 
-#define RemoveTextColorsImpl() \
-   i32 j = 0; \
-   \
-   if(size > countof(tcbuf)) return nil; \
-   \
-   for(i32 i = 0; i < size; i++) \
-   { \
-      if(s[i] == '\C') \
-      { \
-         i++; \
-         if(s[i] == '[') \
-            while(s[i] && s[i++] != ']'); \
-         else \
-            i++; \
-      } \
-      \
-      if(i >= size || j >= size || !s[i]) \
-         break; \
-      \
-      tcbuf[j++] = s[i]; \
-   } \
-   \
-   tcbuf[j++] = '\0'; \
-   \
-   return tcbuf;
-
-cstr RemoveTextColors_str(astr s, i32 size)
-{
-   RemoveTextColorsImpl();
-}
-
-cstr RemoveTextColors(cstr s, i32 size)
-{
-   RemoveTextColorsImpl();
-}
-
-struct gui_typ const *G_TypeOnUpdate(struct gui_state *g, struct gui_typ *typeon)
-{
+struct gui_typ const *G_TypeOnUpdate(struct gui_state *g,
+                                     struct gui_typ *typeon) {
    i32 num = ACS_Random(2, 15);
 
    if((typeon->pos += num) > typeon->len)
@@ -209,8 +165,8 @@ i32 G_Tabs(struct gui_state *g, u32 *st, char const (*names)[20], size_t num,
    i32 xp = 0;
 
    for(i32 i = 0; i < num; i++) {
-      if(G_Button_Id(g, xp + yp * 6, names[i], gui_p.btntab.w * xp + x,
-         gui_p.btntab.h * yp + y, i == *st, .preset = &gui_p.btntab)) {
+      if(G_Button_HId(g, xp + yp * 6, names[i], gui_p.btntab.w * xp + x,
+                      gui_p.btntab.h * yp + y, i == *st, Pre(btntab))) {
          *st = i;
       }
 

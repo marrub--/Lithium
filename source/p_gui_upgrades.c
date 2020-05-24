@@ -53,7 +53,7 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p) {
    PrintTextFmt(LC(LANG "CAT_FILTER"), filter_name);
    PrintText(s_smallfnt, g->defcr, 15,1, 215,1);
 
-   G_ScrollBegin(g, &CBIState(g)->upgrscr, 15, 36, gui_p.btnlist.w, 178, gui_p.btnlist.h * numbtns);
+   G_ScrBeg(g, &CBIState(g)->upgrscr, 15, 36, gui_p.btnlist.w, 178, gui_p.btnlist.h * numbtns);
 
    i32 curcategory = -1;
 
@@ -70,7 +70,7 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p) {
 
       y += gui_p.btnlist.h;
 
-      if(G_ScrollOcclude(g, &CBIState(g)->upgrscr, y, gui_p.btnlist.h))
+      if(G_ScrOcc(g, &CBIState(g)->upgrscr, y, gui_p.btnlist.h))
          continue;
 
       cstr color;
@@ -92,7 +92,7 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p) {
       char *name = LanguageC(LANG "UPGRADE_TITLE_%S", upgr->info->name);
 
       i32 *upgrsel = &CBIState(g)->upgrsel;
-      if(G_Button_Id(g, _i, name, 0, y, _i == *upgrsel, .color = color, .preset = pre))
+      if(G_Button_HId(g, _i, name, 0, y, _i == *upgrsel, .color = color, .preset = pre))
          *upgrsel = _i;
 
       for(i32 i = 0; i < 4; i++) {
@@ -104,7 +104,7 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p) {
       }
    }
 
-   G_ScrollEnd(g, &CBIState(g)->upgrscr);
+   G_ScrEnd(g, &CBIState(g)->upgrscr);
 }
 
 static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct upgrade *upgr) {
@@ -229,7 +229,7 @@ static void GUIUpgradeButtons(struct gui_state *g, struct player *p, struct upgr
       ACS_PrintChar('1' + i);
       PrintText(s_lmidfont, crs[i], 220 + i * 20,2, 215,1);
 
-      if(G_Checkbox_Id(g, i, get_bit(upgr->agroups, i), 221 + i * 20, 211)) {
+      if(G_ChkBox_HId(g, i, get_bit(upgr->agroups, i), 221 + i * 20, 211)) {
          tog_bit(upgr->agroups, i);
          P_Data_Save(p);
       }

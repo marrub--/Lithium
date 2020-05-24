@@ -81,8 +81,8 @@ sync void P_TeleportIn(struct player *p) {
 
    for(i32 i = 18, j = 18; i >= 1; i--) {
       ACS_Delay(1);
-      k32 w = 1 + (i / 18.lk / 3.lk * 50);
-      k32 h = 1 + (j / 18.lk / 8.lk * 10);
+      k32 w = 1 + (i / 18.0lk / 3.0lk * 50);
+      k32 h = 1 + (j / 18.0lk / 8.0lk * 10);
       SetSize(320, 200);
       PrintSprite(sp_Terminal_Teleport, 160,0, 100,0);
       SetSize(640 / w, 480 * h);
@@ -97,8 +97,8 @@ sync void P_TeleportOut(struct player *p) {
 
    for(i32 i = 1, j = 1; i <= 18; i++) {
       ACS_Delay(1);
-      k32 w = 1 + (i / 18.lk / 3.lk * 50);
-      k32 h = 1 + (j / 18.lk / 8.lk * 10);
+      k32 w = 1 + (i / 18.0lk / 3.0lk * 50);
+      k32 h = 1 + (j / 18.0lk / 8.0lk * 10);
       SetSize(320, 200);
       PrintSprite(sp_Terminal_Teleport, 160,0, 100,0);
       SetSize(640 / w, 480 * h);
