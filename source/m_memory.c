@@ -20,11 +20,6 @@
 
 #define _pls_siz 67108864
 
-enum {
-   _tag_free,
-   _tag_static,
-};
-
 struct mem_blk {
    struct mem_blk *prv, *nxt;
    size_t siz;
@@ -51,12 +46,29 @@ void AllocInit(void) {
    mem_top = (void *)mem_dat;
 
    mem_top->beg.prv = mem_top->beg.nxt = mem_top->cur = (void *)mem_top->dat;
-   mem_top->beg.tag = _tag_static;
+   mem_top->beg.tag = _tag_head;
    mem_top->beg.idn = _mem_beg;
 
    mem_top->cur->prv = mem_top->cur->nxt = &mem_top->beg;
    mem_top->cur->tag = _tag_free;
    mem_top->cur->siz = sizeof(mem_dat) - sizeof(struct mem_top);
+}
+
+stkcall static
+cstr TagName(u32 tag) {
+   switch(tag) {
+   case _tag_cybr: return "cyberspace";
+   case _tag_dlgs: return "dialogue";
+   case _tag_file: return "file";
+   case _tag_free: return "free";
+   case _tag_head: return "list-head";
+   case _tag_huds: return "hud";
+   case _tag_item: return "item";
+   case _tag_libc: return "libc";
+   case _tag_logs: return "log";
+   case _tag_plyr: return "player";
+   }
+   return "unknown";
 }
 
 stkcall static
@@ -141,8 +153,7 @@ void Dalloc(register void *p) {
 }
 
 stkcall
-void *Malloc(register size_t rs) {
-   /* TODO: tagging */
+void *Malloc(register size_t rs, register u32 tag) {
    register struct mem_blk *cur, *blk, *end;
    register size_t s = rs + sizeof(struct mem_blk);
 
@@ -188,7 +199,7 @@ void *Malloc(register size_t rs) {
       blk->siz = s;
    }
 
-   blk->tag = _tag_static; /* TODO */
+   blk->tag = tag;
    blk->idn = _mem_idn;
    fastmemset(blk->dat, 0, rs);
 
@@ -198,17 +209,17 @@ void *Malloc(register size_t rs) {
 }
 
 stkcall
-void *Ralloc(register void *p, register size_t s) {
+void *Ralloc(register void *p, register size_t s, register u32 tag) {
    register size_t os;
    register char  *nxt;
 
    if(!p) {
-      return Malloc(s);
+      return Malloc(s, tag);
    }
 
    os = CheckUsedBlock(GetBlock(p), __func__)->siz - sizeof(struct mem_blk);
 
-   nxt = Malloc(s);
+   nxt = Malloc(s, tag);
 
    if(!nxt) {
       return nil;
@@ -227,18 +238,19 @@ void *Ralloc(register void *p, register size_t s) {
 stkcall
 void __sta *__GDCC__alloc(register void __sta *p, register size_t s) {
    if(!p) {
-      return Malloc(s);
+      return Malloc(s, _tag_libc);
    } else if(s == 0) {
       Dalloc(p);
       return 0;
    } else {
-      return Ralloc(p, s);
+      return Ralloc(p, s, _tag_libc);
    }
 }
 
 stkcall
 void __GDCC__alloc_dump(void) {
    struct mem_blk *blk = mem_top->cur;
+   size_t tagsizes[_tag_max] = {};
 
    do {
       ACS_BeginPrint();
@@ -251,13 +263,27 @@ void __GDCC__alloc_dump(void) {
       PrintChars(" siz:", 5);
       ACS_PrintHex(blk->siz);
       PrintChars(" tag:", 5);
+      PrintChrSt(TagName(blk->tag));
+      ACS_PrintChar('(');
       ACS_PrintInt(blk->tag);
+      ACS_PrintChar(')');
       PrintChars(" idn:", 5);
       ACS_PrintHex(blk->idn);
       ACS_EndLog();
 
+      tagsizes[blk->tag] += blk->siz;
       blk = blk->nxt;
    } while(blk != mem_top->cur);
+
+   ACS_BeginPrint();
+   PrintChars("total sizes\n", 12);
+   for(u32 i = 0; i < _tag_max; i++) {
+      PrintChrSt(TagName(i));
+      PrintChars(":\t\t", 3);
+      ACS_PrintInt(tagsizes[i]);
+      ACS_PrintChar('\n');
+   }
+   ACS_EndLog();
 }
 
 stkcall

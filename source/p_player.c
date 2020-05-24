@@ -426,7 +426,7 @@ void P_doIntro(struct player *p) {
    FreezeTime(false);
    ACS_FadeTo(0, 0, 0, 1.0, 0.0);
 
-   char *text = Malloc(8192);
+   char *text = Malloc(8192, _tag_plyr);
 
    char *lines[_nlines];
    u32   linec[_nlines];

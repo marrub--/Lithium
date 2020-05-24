@@ -30,7 +30,7 @@ void Save_WriteChunk(struct savefile *save, u32 iden, u32 vers, size_t size)
 
 struct savefile *Save_BeginSave(struct player *p)
 {
-   struct savefile *save = Salloc(struct savefile);
+   struct savefile *save = Salloc(struct savefile, _tag_file);
 
    if((save->fp = NFOpen(p->num, sc_psave, 'w')))
    {
@@ -90,7 +90,7 @@ i32 Save_ReadChunk(struct savefile *save, u32 iden, u32 vers, loadchunker_t chun
 script
 struct savefile *Save_BeginLoad(struct player *p)
 {
-   struct savefile *save = Salloc(struct savefile);
+   struct savefile *save = Salloc(struct savefile, _tag_file);
 
    if((save->fp = NFOpen(p->num, sc_psave, 'r')))
    {

@@ -27,19 +27,19 @@
    __VA_ARGS__ type  *name##V; \
    __VA_ARGS__ size_t name##C, name##S
 
-#define Vec_GrowV(vec, n) \
+#define Vec_GrowV(vec, n, tag) \
    ((vec##S) += (n), \
-    (vec##V) = Ralloc((vec##V), sizeof(*(vec##V)) * (vec##S)))
+    (vec##V) = Ralloc((vec##V), sizeof(*(vec##V)) * (vec##S), (tag)))
 
-#define Vec_GrowN(vec, n, g) \
+#define Vec_GrowN(vec, n, g, tag) \
    ((vec##C) + (n) > (vec##S) ? \
-    Vec_GrowV(vec, (n) + (g)) : \
+    Vec_GrowV(vec, (n) + (g), tag) : \
     (void *)0)
 
-#define Vec_Grow(vec, n) Vec_GrowN(vec, n, 8)
+#define Vec_Grow(vec, n, tag) Vec_GrowN(vec, n, 8, tag)
 
-#define Vec_Resize(vec, n) \
-   ((vec##C) = n, (vec##S) >= (vec##C) ? (void)0 : (void)Vec_GrowV(vec, n - (vec##S)))
+#define Vec_Resize(vec, n, tag) \
+   ((vec##C) = n, (vec##S) >= (vec##C) ? (void)0 : (void)Vec_GrowV(vec, n - (vec##S), tag))
 
 #define Vec_Next(vec) ((vec##V)[(vec##C)++])
 

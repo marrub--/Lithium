@@ -68,7 +68,7 @@ byte *base64_encode(const byte *src, size_t len, size_t *out_len)
    olen++; /* nul termination */
    if (olen < len)
       return nil; /* integer overflow */
-   out = Malloc(olen);
+   out = Malloc(olen, _tag_file);
    if (out == nil)
       return nil;
 
@@ -141,7 +141,7 @@ byte *base64_decode(const byte *src, size_t len, size_t *out_len)
       return nil;
 
    olen = count / 4 * 3;
-   pos = out = Malloc(olen);
+   pos = out = Malloc(olen, _tag_file);
    if (out == nil)
       return nil;
 
@@ -178,4 +178,3 @@ byte *base64_decode(const byte *src, size_t len, size_t *out_len)
    *out_len = pos - out;
    return out;
 }
-

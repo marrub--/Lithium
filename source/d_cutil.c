@@ -22,7 +22,7 @@ void Dlg_PushB1(struct compiler *d, u32 b)
    if(pc + 1 > PRG_END - PRG_BEG) d->tb.err("PRG segment overflow");
 
    if(pc + 1 > d->def.codeC * 4) {
-      Vec_Grow(d->def.code, 1);
+      Vec_Grow(d->def.code, 1, _tag_dlgs);
       d->def.codeC++;
    }
 
@@ -86,7 +86,7 @@ u32 Dlg_PushStr(struct compiler *d, cstr s, u32 l)
 
    Dbg_Log(log_dlg, "%s: (%3u %3u) '%s'", __func__, l, vl, s);
 
-   Vec_Grow(d->def.stab, vl);
+   Vec_Grow(d->def.stab, vl, _tag_dlgs);
    d->def.stabC += vl;
    d->def.stabP += l;
 

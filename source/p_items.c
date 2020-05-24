@@ -213,7 +213,7 @@ void P_Item_Init(struct item *item, struct itemdata const *data)
 
 struct item *P_Item_New(struct itemdata const *data)
 {
-   struct item *item = Salloc(struct item);
+   struct item *item = Salloc(struct item, _tag_item);
 
    P_Item_Init(item, data);
 
@@ -263,7 +263,7 @@ void P_Item_Unlink(struct item *item)
 
 struct bagitem *P_BagItem_New(i32 w, i32 h, i32 type, struct itemdata const *data)
 {
-   struct bagitem *item = Salloc(struct bagitem);
+   struct bagitem *item = Salloc(struct bagitem, _tag_item);
 
    P_Item_Init(&item->item, data);
 

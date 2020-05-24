@@ -44,7 +44,7 @@ static void LogH(struct player *p, struct logdat *ld) {
 }
 
 static void LogF(struct player *p, struct logfdt *lf) {
-   Vec_GrowN(p->log.curmap->data, 1, 8);
+   Vec_GrowN(p->log.curmap->data, 1, 8, _tag_logs);
    Vec_Next(p->log.curmap->data) = *lf;
 }
 
@@ -105,7 +105,7 @@ void P_Log_Entry(struct player *p) {
 
    if(!lm)
    {
-      Vec_GrowN(p->log.maps, 1, 32);
+      Vec_GrowN(p->log.maps, 1, 32, _tag_logs);
       lm = &Vec_Next(p->log.maps);
       lm->name = (ACS_BeginPrint(), ACS_PrintName(PRINTNAME_LEVELNAME), ACS_EndStrParam());
       lm->lnum = lnum;

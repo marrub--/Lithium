@@ -15,7 +15,7 @@ static void StringStack(struct player *p) {
    struct hudstr {str s; list link;};
 
    if(ACS_Timer() % 3 == 0) {
-      struct hudstr *hudstr = Salloc(struct hudstr);
+      struct hudstr *hudstr = Salloc(struct hudstr, _tag_huds);
       ListCtor(&hudstr->link, hudstr);
       hudstr->s = StrParam("%.8X", ACS_Random(INT32_MIN + 1, INT32_MAX));
 

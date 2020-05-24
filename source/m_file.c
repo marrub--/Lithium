@@ -106,7 +106,7 @@ static ssize_t MemWrite(void *memdata, cstr buf, size_t size) {
 
    if(size >= avail) {
       size_t len = mem->len + mem->len / 2 + size + 1;
-      void  *newmem = Ralloc(mem->mem, len);
+      void  *newmem = Ralloc(mem->mem, len, _tag_file);
 
       if(!mem)
          return 0;
@@ -163,7 +163,7 @@ FILE *NFOpen(i32 pnum, str pcvar, char rw) {
    FILE *fp = nil;
 
    if(rw == 'w') {
-      struct netfile *nf = Salloc(struct netfile);
+      struct netfile *nf = Salloc(struct netfile, _tag_file);
 
       nf->pcvar = pcvar;
       nf->pnum  = pnum;
@@ -183,7 +183,7 @@ FILE *NFOpen(i32 pnum, str pcvar, char rw) {
          size_t inlen = ACS_StrLen(cvar);
 
          if(inlen) {
-            input = Ralloc(input, inputsz + inlen + 1);
+            input = Ralloc(input, inputsz + inlen + 1, _tag_file);
             lstrcpy_str(input + inputsz, cvar);
 
             inputsz += inlen;
@@ -209,7 +209,7 @@ FILE *NFOpen(i32 pnum, str pcvar, char rw) {
          }
 
          if(data) {
-            struct memfile *mem = Salloc(struct memfile);
+            struct memfile *mem = Salloc(struct memfile, _tag_file);
 
             mem->mem = data;
             mem->len = size;

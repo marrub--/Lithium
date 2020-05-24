@@ -26,7 +26,7 @@ void Sc_CSLoadMap(void)
 
    fscanf(fp, "%i %i", &w, &h);
 
-   map = Malloc(sizeof *map * w * h);
+   map = Malloc(sizeof *map * w * h, _tag_cybr);
 
    for(i32 y = 0; y < h; y++) for(i32 x = 0; x < w; x++)
       fscanf(fp, "%i ", &map[x + y * w]);
