@@ -97,7 +97,7 @@ _end_h_
 
 /* Extern Objects ---------------------------------------------------------- */
 
-struct pageinfo bipinfo[BIP_MAX] = {
+struct pageinfo const bipinfo[BIP_MAX] = {
 #{
 res = String.new
 for cna, cda in cat

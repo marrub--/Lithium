@@ -29,7 +29,7 @@ script static void MailNotify(struct player *p, cstr name) {
 
    ACS_Delay(20);
 
-   char remote[64];
+   char remote[128];
    strcpy(remote, LanguageC(LANG "INFO_REMOT_%s", name));
 
    p->logB(1, LC(LANG "LOG_MailRecv"), remote);
@@ -44,7 +44,7 @@ script static void MailNotify(struct player *p, cstr name) {
 
 script static void UnlockPage(struct player *p, struct page *page) {
    if(!get_bit(page->flags, _page_available)) {
-      Dbg_Log(log_bip, "page '%s' not available", page->info->name);
+      Dbg_Log(log_bip, "ERROR page '%s' not available", page->info->name);
       return;
    }
 
@@ -98,7 +98,9 @@ script void P_BIP_PInit(struct player *p) {
    for_page() {
       page->info  = &bipinfo[pagen];
       page->flags = 0;
+   }
 
+   for_page() {
       bool avail = page->info->pclass & p->pclass;
 
       if(avail) {
@@ -106,10 +108,13 @@ script void P_BIP_PInit(struct player *p) {
 
          p->bip.pagemax++;
          p->bip.categorymax[page->info->category]++;
+      }
+   }
 
-         if(get_bit(dbgflag, dbgf_bip) || page->info->aut) {
-            UnlockPage(p, page);
-         }
+   for_page() {
+      if(get_bit(page->flags, _page_available) &&
+         (get_bit(dbgflag, dbgf_bip) || page->info->aut)) {
+         UnlockPage(p, page);
       }
    }
 
@@ -120,7 +125,7 @@ void P_BIP_Unlock(struct player *p, cstr name) {
    u32 num = NameToNum(p->discrim, name);
 
    if(num == BIP_MAX) {
-      Dbg_Log(log_bip, "no page '%s' found", name);
+      Dbg_Log(log_bip, "ERROR no page '%s' found", name);
       return;
    }
 

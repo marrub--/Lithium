@@ -82,7 +82,7 @@ script void P_CBI_PTick(struct player *p) {
 
    if(p->cbi.theme != p->cbi.oldtheme) {
       #define X(n) ":UI_" n ":"
-      static cstr names[] = {
+      static cstr const names[] = {
          X("Green"),
          X("Rose"),
          X("Umi"),

@@ -19,7 +19,7 @@
 
 /* Static Objects ---------------------------------------------------------- */
 
-static cstr syll[] = {
+static cstr const syll[] = {
    "ka",  "k'",   "khi", "kaz", "kr",
    "ga",  "go",   "gor", "got", "gn", "gl",
    "sha", "sk",   "shu", "shi", "si",
@@ -36,7 +36,7 @@ static cstr syll[] = {
    "ver", "xel'", "xe",
 };
 
-static cstr lulz[] = {
+static cstr const lulz[] = {
    "explod",
    "fuck",
    "help",
@@ -46,7 +46,7 @@ static cstr lulz[] = {
    "why",
 };
 
-static cstr name[] = {
+static cstr const name[] = {
    "Alevot",
    "Arafonad",
    "Araxidak",
@@ -158,7 +158,7 @@ static cstr name[] = {
    "Yar'udab",
 };
 
-static cstr suff[] = {
+static cstr const suff[] = {
    "Agent of Damnation",
    "Alpha and Omega",
    "Betrayer of All",

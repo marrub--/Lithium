@@ -76,7 +76,7 @@ struct bip {
 
 /* Extern Objects ---------------------------------------------------------- */
 
-extern struct pageinfo bipinfo[BIP_MAX];
+extern struct pageinfo const bipinfo[BIP_MAX];
 
 /* Extern Functions -------------------------------------------------------- */
 

@@ -27,7 +27,7 @@ static void EncryptedBody(struct page *p, char *bodytext) {
 }
 
 static void MailBody(struct page *p, char *bodytext) {
-   char remote[64];
+   char remote[128];
    strcpy(remote, LanguageC(LANG "INFO_REMOT_%s", p->info->name));
 
    cstr sent = CanonTime(ct_full, p->flags & _page_time);
