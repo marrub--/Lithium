@@ -172,7 +172,7 @@ void P_Dat_PTickPre(struct player *p)
 }
 
 script
-static void LevelUp(struct player *p, u32 attr[at_max])
+static void LevelUp(struct player *p, u32 *attr)
 {
    u32 level = p->attr.level;
 
@@ -205,13 +205,14 @@ static void LevelUp(struct player *p, u32 attr[at_max])
    }
 
    p->attr.lvupstr[0] = '\0';
+   Dalloc(attr);
 }
 
 void P_Lv_GiveEXP(struct player *p, u64 amt)
 {
    struct player_attributes *a = &p->attr;
 
-   u32 attr[at_max] = {};
+   u32 *attr = Malloc(sizeof(u32) * at_max, _tag_huds);
    i32 levelup = 0;
 
    while(a->exp + amt >= a->expnext)
