@@ -61,12 +61,13 @@ cstr TagName(u32 tag) {
    case _tag_dlgs: return "dialogue";
    case _tag_file: return "file";
    case _tag_free: return "free";
-   case _tag_head: return "list-head";
+   case _tag_head: return "listhead";
    case _tag_huds: return "hud";
    case _tag_item: return "item";
    case _tag_libc: return "libc";
    case _tag_logs: return "log";
    case _tag_plyr: return "player";
+   case _tag_ttle: return "title";
    }
    return "unknown";
 }
