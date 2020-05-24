@@ -237,6 +237,23 @@ void *Ralloc(register void *p, register size_t s, register u32 tag) {
 }
 
 stkcall
+void Xalloc(u32 tag) {
+   struct mem_blk *cur, *end;
+
+   cur = (end = mem_top->cur)->nxt;
+
+   while(cur != end) {
+      struct mem_blk *nxt = cur->nxt;
+
+      if(cur->tag == tag) {
+         Dalloc(cur->dat);
+      }
+
+      cur = nxt;
+   }
+}
+
+stkcall
 void __sta *__GDCC__alloc(register void __sta *p, register size_t s) {
    if(!p) {
       return Malloc(s, _tag_libc);

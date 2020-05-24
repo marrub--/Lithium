@@ -40,5 +40,6 @@ enum {
 stkcall void  Dalloc(void *p);
 stkcall void *Malloc(size_t s, u32 tag);
 stkcall void *Ralloc(void *p, size_t s, u32 tag);
+stkcall void  Xalloc(u32 tag);
 
 #endif

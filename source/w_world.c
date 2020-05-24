@@ -361,6 +361,12 @@ begin:
    /* Let the map do... whatever. */
    ACS_Delay(1);
 
+   /* Now, initialize everything.
+    * Start by deallocating temporary tags.
+    */
+
+   Xalloc(_tag_huds);
+
    if(!modinit) MInitPre();
    if(!gblinit) GInit();
    if(!modinit) MInit();
