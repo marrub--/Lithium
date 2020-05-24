@@ -138,7 +138,6 @@ override void WorldLoaded(WorldEvent ev)
    if(ev.isReopen) {
       CallACS("Lith_WorldReopen");
    } else {
-      CallACS("lithlib@gsinit");
       CallACS("lithmain@gsinit");
       CallACS("Lith_PreInit");
    }

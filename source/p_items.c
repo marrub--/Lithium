@@ -177,7 +177,7 @@ void P_Inv_PInit(struct player *p)
       [_inv_legs]        = {2,  3, "Legs",     _cont_body},
    };
 
-   memmove(p->inv, baseinv, sizeof baseinv);
+   fastmemmove(p->inv, baseinv, sizeof baseinv);
 
    for(i32 i = 0; i < _inv_num; i++) {
       ListCtor(&p->inv[i].items);

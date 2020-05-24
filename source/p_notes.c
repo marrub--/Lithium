@@ -46,8 +46,8 @@ void P_CBI_TabNotes(struct gui_state *g, struct player *p)
          cstr s = Cps_Expand(CBIState(g)->notebox.txtbuf, 0, l);
 
          Dalloc(p->notes[i]);
-         p->notes[i] = Nalloc(l + 1);
-         memmove(p->notes[i], s, l);
+         p->notes[i] = Malloc(l + 1);
+         fastmemmove(p->notes[i], s, l);
 
          P_Data_Save(p);
       }

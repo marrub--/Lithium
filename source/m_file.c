@@ -95,7 +95,7 @@ static ssize_t MemRead(void *memdata, char *buf, size_t size) {
    if(size > avail)
       size = avail;
 
-   memmove(buf, mem->mem + mem->pos, size);
+   fastmemmove(buf, mem->mem + mem->pos, size);
    mem->pos += size;
    return size;
 }
@@ -115,7 +115,7 @@ static ssize_t MemWrite(void *memdata, cstr buf, size_t size) {
       mem->mem = newmem;
    }
 
-   memmove(mem->mem + mem->pos, buf, size);
+   fastmemmove(mem->mem + mem->pos, buf, size);
    mem->mem[mem->pos += size] = '\0';
    return size;
 }

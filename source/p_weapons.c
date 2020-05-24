@@ -257,8 +257,8 @@ bool Sc_WeaponPickup(i32 name)
 script_str ext("ACS") addr(OBJ "CircleSpread")
 k32 Sc_CircleSpread(k32 mdx, k32 mdy, bool getpitch)
 {
-   static k32 A;
-   static k32 P;
+   noinit static k32 A;
+   noinit static k32 P;
 
    if(!getpitch)
    {

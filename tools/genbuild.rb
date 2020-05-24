@@ -150,8 +150,6 @@ build #{INFCHO.join " "}: infc #{INFCIN.join " "} | tools/infc.rb
 
 build $#{IR}/libc.ir: makelib
  #{TYPE} = libc
-build $#{IR}/libGDCC.ir: makelib
- #{TYPE} = libGDCC
 _end_
 
 inputs_lithium = []
@@ -166,16 +164,12 @@ for f in SRCS
 end
 
 fp << <<_end_
-build pk7/acs/lithmain.bin: ld #{inputs_lithium.join " "}
- #{LFLAGS} = $#{LFLAGS} -llithlib $#{INITSC} "lithmain@gsinit"
- #{STA   } = 1400000
- #{NUMOUT} = $#{IR}/lithmain_ld.txt
-build pk7/acs/lithlib.bin: ld $#{IR}/libc.ir $#{IR}/libGDCC.ir
- #{LFLAGS} = $#{LFLAGS} $#{INITSC} "lithlib@gsinit"
+build pk7/acs/lithmain.bin: ld #{inputs_lithium.join " "} $#{IR}/libc.ir
+ #{LFLAGS} = $#{LFLAGS} $#{INITSC} "lithmain@gsinit"
  #{STA   } = 70000
- #{NUMOUT} = $#{IR}/lithlib_ld.txt
+ #{NUMOUT} = $#{IR}/lithmain_ld.txt
 
-build lithium: phony _dec _snd _text _fs pk7/acs/lithmain.bin pk7/acs/lithlib.bin
+build lithium: phony _dec _snd _text _fs pk7/acs/lithmain.bin
 
 default lithium
 _end_

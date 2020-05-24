@@ -14,6 +14,9 @@
 #include <GDCC.h>
 #include <stdio.h>
 
+#define Stringify(s) #s
+#define XStringify(s) Stringify(s)
+
 #define L(name) LanguageV(name)
 #define LC(name) LanguageVC(nil, name)
 
@@ -32,7 +35,23 @@
    (ACS_BeginPrint(), PrintChrSt(s1), PrintChrSt(s2), ACS_EndStrParam())
 
 #define fastmemset(p, s, c, ...) \
-   for(i32 _i = 0; _i < (c); _i++) ((byte __VA_ARGS__ *)(p))[_i] = s;
+   for(register i32 _i = 0; _i < (c); _i++) ((byte __VA_ARGS__ *)(p))[_i] = s
+
+#define fastmemmove(lhs, rhs, s) \
+   do { \
+      register char       *_lhs = (void *)(lhs); \
+      register char const *_rhs = (void *)(rhs); \
+      register size_t      _s   = (s); \
+      if(_lhs < _rhs) { \
+         while(_s--) \
+            *_lhs++ = *_rhs++; \
+      } else { \
+         _lhs += _s; \
+         _rhs += _s; \
+         while(_s--) \
+            *--_lhs = *--_rhs; \
+      } \
+   } while(0)
 
 str l_strupper(str in);
 u32 l_strhash(astr s);

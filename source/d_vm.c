@@ -66,9 +66,9 @@ struct dcd_info const dcdinfo[0xFF] = {
 noinit static Cps_Decl(memory, 0xFFFF);
 
 /* VM state */
-static struct gui_state gst;
+noinit static struct gui_state gst;
 
-static u32 r1, r2;
+noinit static u32 r1, r2;
 
 static cstr const action_names[] = {
    #define ACT(name) #name,

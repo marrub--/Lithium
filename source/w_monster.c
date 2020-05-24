@@ -376,7 +376,7 @@ void Sc_MonsterInfo(void)
       }
    }
 
-   Dbg_Log(log_dmon, "no monster %S", cname);
+   Dbg_Log(log_dmon, "ERROR no monster %S", cname);
 
    /* If the monster failed all checks, give them this so we don't
       need to recheck every tick.

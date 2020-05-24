@@ -28,11 +28,9 @@ void Sc_Obituary(void)
    Str(ob_slime,      s"(slime)");
    Str(ob_suicide,    s"(suicide)");
 
-   struct pronoun {
+   static struct {
       cstr sub, obj, psd, psi, act;
-   };
-
-   static struct pronoun pronoun[pro_max] = {
+   } const pronoun[pro_max] = {
       {"they", "them", "their", "theirs", "they're"},
       {"she",  "her",  "her",   "hers",   "she's"  },
       {"he",   "him",  "his",   "his",    "he's"   },

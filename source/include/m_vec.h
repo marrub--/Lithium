@@ -46,6 +46,6 @@
 #define Vec_Clear(vec) \
    (Dalloc((vec##V)), (vec##V) = nil, (vec##C) = (vec##S) = 0)
 
-#define Vec_MoveEnd(vec, i, l) (memmove(&(vec##V)[(vec##C)], i, l), (vec##C) += (l))
+#define Vec_MoveEnd(vec, i, l) (fastmemmove(&(vec##V)[(vec##C)], i, l), (vec##C) += (l))
 
 #endif

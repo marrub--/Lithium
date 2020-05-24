@@ -31,7 +31,7 @@ static void LogV(i32 levl) {
 
 static void LogPop(struct player *p) {
    p->log.hudC--;
-   memmove(&p->log.hudV[0], &p->log.hudV[1], sizeof p->log.hudV[0] * p->log.hudC);
+   fastmemmove(&p->log.hudV[0], &p->log.hudV[1], sizeof p->log.hudV[0] * p->log.hudC);
 }
 
 static void LogH(struct player *p, struct logdat *ld) {

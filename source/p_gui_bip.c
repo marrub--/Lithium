@@ -232,7 +232,7 @@ static void SearchUI(struct gui_state *g, struct player *p) {
       u64 crc = crc64(txt_buf, txt_len);
 
       char query[128];
-      memmove(query, txt_buf, txt_len);
+      fastmemmove(query, txt_buf, txt_len);
       query[txt_len] = '\0';
 
       p->bip.resnum = p->bip.rescur = 0;

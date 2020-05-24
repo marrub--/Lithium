@@ -74,15 +74,14 @@ u64 crc64_str(void  __str_ars const *data, size_t len, u64 result)
 
 i32 fastabs(i32 n)
 {
-   __asm(
-      "BAnd     W 1(Stk() LocReg(Lit(:n)) Lit(0x80000000_s31.0))"
-      "Jcnd_Tru W 1(Stk() Lit(:\"neg\"))"
-      "Retn     W 1(LocReg(Lit(:n)))"
+   [[return]] __asm(
+      "BAnd    (Stk() LocReg(Lit(:n)) Lit(0x80000000_s31.0))"
+      "Jcnd_Tru(Stk() Lit(:\"neg\"))"
+      "Retn    (LocReg(Lit(:n)))"
    ":\"neg\""
-      "Neg:I    W 1(Stk() LocReg(Lit(:n)))"
-      "Retn     W 1(Stk())"
+      "Neg:I   (Stk() LocReg(Lit(:n)))"
+      "Retn    (Stk())"
    );
-   return 0; /* shh... */
 }
 
 k64 powlk(k64 x, i32 y)

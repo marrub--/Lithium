@@ -43,7 +43,7 @@ script static void Load_note(struct savefile *save, struct savechunk *chunk) {
       if(!len) continue;
 
       Dalloc(save->p->notes[i]);
-      char *n = save->p->notes[i] = Nalloc(len + 1);
+      char *n = save->p->notes[i] = Malloc(len + 1);
       for(i32 j = 0; j < len; j++) n[j] = fgetc(save->fp) & 0xFF;
    }
 }

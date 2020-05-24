@@ -31,7 +31,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 */                                                                           \*
 * See <licenses/GDCC-libc.txt> for licensing of GDCC libc, as is included in  *
-* linked binary form in <acs/lithlib.bin>.                                    *
+* linked binary form in <acs/lithmain.bin>.                                   *
 *                                                                             *
 * See <licenses/base64.txt> for licensing of Base64 Decoding/Encoding, as is  *
 * included in linked binary form in <acs/lithmain.bin>.                       *

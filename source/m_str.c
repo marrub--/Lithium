@@ -78,7 +78,7 @@ char *lstrcpy3(char *out, cstr s1, cstr s2, cstr s3)
 
 i32 lstrcmp_str(cstr s1, astr s2)
 {
-   register i32 res;
+   i32 res;
 
    while((res = *s1 - *s2++) == 0)
       if(*s1++ == '\0') break;
@@ -90,7 +90,7 @@ i32 faststrcmp(cstr s1, cstr s2)
 {
    if(s1 == s2) return 0;
 
-   register i32 res;
+   i32 res;
 
    while((res = *s1 - *s2++) == 0)
       if(*s1++ == '\0') break;
@@ -102,7 +102,7 @@ i32 faststrcasecmp(cstr s1, cstr s2)
 {
    if(s1 == s2) return 0;
 
-   register i32 res;
+   i32 res;
 
    while((res = ToUpper(*s1) - ToUpper(*s2++)) == 0)
       if(*s1++ == '\0') break;
@@ -111,7 +111,7 @@ i32 faststrcasecmp(cstr s1, cstr s2)
 }
 
 cstr scoresep(i96 num) {
-   static char out[48];
+   noinit static char out[48];
 
    if(!num) {
       out[0] = '0';
@@ -139,7 +139,7 @@ cstr scoresep(i96 num) {
 }
 
 cstr alientext(i32 num) {
-   static char out[80];
+   noinit static char out[80];
 
    if(!num) {
       strcpy(out, u8"");

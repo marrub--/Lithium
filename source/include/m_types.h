@@ -26,6 +26,7 @@
 
 #define script     [[__call("ScriptI")]]
 #define script_str [[__call("ScriptS")]]
+#define stkcall    [[__call("StkCall")]]
 #define sync       [[__call("SScriptI")]]
 #define sync_str   [[__call("SScriptS")]]
 #define optargs(x) [[__optional_args(x)]]
