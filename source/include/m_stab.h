@@ -28,13 +28,6 @@ X(s_ltrmfont,      "ltrmfont")
 X(s_smallfnt,      "smallfnt")
 
 /* Console Variables */
-X(sc_debug_all,              DCVAR "debug_all")
-X(sc_debug_bip,              DCVAR "debug_bip")
-X(sc_debug_items,            DCVAR "debug_items")
-X(sc_debug_level,            DCVAR "debug_level")
-X(sc_debug_save,             DCVAR "debug_save")
-X(sc_debug_score,            DCVAR "debug_score")
-X(sc_debug_upgrades,         DCVAR "debug_upgrades")
 X(sc_fun,                    DCVAR "fun")
 X(sc_gui_buyfiller,          CVAR "gui_buyfiller")
 X(sc_gui_cursor,             CVAR "gui_cursor")

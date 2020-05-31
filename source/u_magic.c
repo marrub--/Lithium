@@ -88,7 +88,7 @@ static void UpdateMagicUI(struct player *p, struct upgrade *upgr)
    G_End(g, gui_curs_outline);
 }
 
-script
+alloc_aut(0) script
 static void GivePlayerZ(i32 tid, struct player *p)
 {
    while(ACS_ThingCount(T_NONE, tid)) {

@@ -19,8 +19,8 @@
 
 static void AttrBar(struct gui_state *g, i32 x, i32 y, i32 w, str gfx)
 {
-   G_Clip(g, x, y, w * 4, 8);
-   PrintSprite(gfx, x,1, y,1);
+   G_Clip(g, g->ox+x, g->oy+y, w * 4, 8);
+   PrintSprite(gfx, g->ox+x,1, g->oy+y,1);
    G_ClipRelease(g);
 }
 
@@ -30,17 +30,18 @@ static void DrawAttr(struct gui_state *g, i32 x, i32 y, struct player *p, i32 at
    cstr name = p->attr.names[at];
    k32  helptrns = 0.5;
 
-   if(p->attr.points)
-      if(G_Button_HId(g, at, .x = x-42 + gui_p.btnnext.w, y-2, Pre(btnnext), .slide = true))
+   if(p->attr.points &&
+      G_Button_HId(g, at, .x = x-42 + gui_p.btnnext.w, y-2, Pre(btnnext),
+                   .slide = true))
    {
       p->attr.points--;
       p->attr.attrs[at]++;
    }
 
    PrintTextChr(name, 3);
-   PrintText(s_lmidfont, g->defcr, x-24,1, y,1);
+   PrintText(s_lmidfont, g->defcr, g->ox+x-24,1, g->oy+y,1);
 
-   PrintSprite(sp_UI_AttrBar1, x,1, y,1);
+   PrintSprite(sp_UI_AttrBar1, g->ox+x,1, g->oy+y,1);
 
    AttrBar(g, x, y, attr, sp_UI_AttrBar2);
 
@@ -51,16 +52,16 @@ static void DrawAttr(struct gui_state *g, i32 x, i32 y, struct player *p, i32 at
       helptrns += 0.3;
    }
 
-   PrintTextA_str(Language(LANG "ATTR_HELP_%.3s", name), s_smallfnt, g->defcr, x+1,1, y,1, helptrns);
+   PrintTextA_str(Language(LANG "ATTR_HELP_%.3s", name), s_smallfnt, g->defcr, g->ox+x+1,1, g->oy+y,1, helptrns);
 
    PrintTextFmt("%u/%i", attr, ATTR_VIS_MAX);
-   PrintText(s_lmidfont, g->defcr, x+202,1, y,1);
+   PrintText(s_lmidfont, g->defcr, g->ox+x+202,1, g->oy+y,1);
 }
 
 static void StatusInfo(struct gui_state *g, i32 y, str left, str right)
 {
-   PrintText_str(left,  s_lmidfont, g->defcr,  30,1, y,1);
-   PrintText_str(right, s_smallfnt, g->defcr, 280,2, y,1);
+   PrintText_str(left,  s_lmidfont, g->defcr, g->ox+ 17,1, g->oy+y,1);
+   PrintText_str(right, s_smallfnt, g->defcr, g->ox+267,2, g->oy+y,1);
 }
 
 /* Extern Functions -------------------------------------------------------- */
@@ -74,33 +75,40 @@ void P_CBI_TabStatus(struct gui_state *g, struct player *p)
    Str(next,  sLANG "STATUS_NX");
    Str(class, sLANG "STATUS_CL");
 
-   i32 y = 40;
+   i32 y = 27;
 
-   PrintText_str(p->name, s_lmidfont, g->defcr, 30,1, y,1);
+   PrintText_str(p->name, s_lmidfont, g->defcr, g->ox+17,1, g->oy+y,1);
    y += 10;
 
-   StatusInfo(g, y += 10, L(class), p->classname);
+   StatusInfo(g, y, L(class), p->classname);
+   y += 10;
 
-   StatusInfo(g, y += 10, L(lv), StrParam("%u", p->attr.level));
-   StatusInfo(g, y += 10, L(hp), StrParam("%i/%i", p->health, p->maxhealth));
+   StatusInfo(g, y, L(lv), StrParam("%u", p->attr.level));
+   y += 10;
+   StatusInfo(g, y, L(hp), StrParam("%i/%i", p->health, p->maxhealth));
+   y += 10;
 
-   if(p->pclass & pcl_magicuser)
-      StatusInfo(g, y += 10, L(mp), StrParam("%i/%i", p->mana, p->manamax));
+   if(p->pclass & pcl_magicuser) {
+      StatusInfo(g, y, L(mp), StrParam("%i/%i", p->mana, p->manamax));
+      y += 10;
+   }
 
-   StatusInfo(g, y += 10, L(exp),  StrParam("%u", p->attr.exp));
-   StatusInfo(g, y += 10, L(next), StrParam("%u", p->attr.expnext));
+   StatusInfo(g, y, L(exp),  StrParam("%u", p->attr.exp));
+   y += 10;
+   StatusInfo(g, y, L(next), StrParam("%u", p->attr.expnext));
+   y += 10;
 
    y += p->pclass & pcl_magicuser ? 20 : 30;
 
    if(p->attr.points) {
       PrintTextFmt(LC(LANG "STATUS_LEVELUP"), p->attr.points);
-      PrintText(s_smallfnt, g->defcr, 20,1, y,1);
+      PrintText(s_smallfnt, g->defcr, g->ox+7,1, g->oy+y,1);
    }
 
    y += 10;
 
    for(i32 i = 0; i < at_max; i++, y += 10)
-      DrawAttr(g, 53, y, p, i);
+      DrawAttr(g, 40, y, p, i);
 }
 
 /* EOF */

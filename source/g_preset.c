@@ -303,6 +303,15 @@ struct gui_presets const gui_p = {
       .w        = 80,
       .h        = 7
    },
+
+   .windef = {
+      .bg = "Background",
+      .w = 300,
+      .h = 219,
+      .a = 0.7k,
+      .bx = 3,
+      .by = 3,
+   },
 };
 
 /* EOF */

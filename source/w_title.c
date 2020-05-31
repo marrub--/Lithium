@@ -36,7 +36,7 @@ static void Blinker(cstr bgn) {
 
 /* Extern Functions -------------------------------------------------------- */
 
-script
+dynam_aut script
 void W_Title(void) {
    DrawCallI(sm_ForceDraw, true);
 

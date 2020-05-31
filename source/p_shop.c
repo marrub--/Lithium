@@ -95,7 +95,7 @@ void P_CBI_TabShop(struct gui_state *g, struct player *p)
          nitems++;
    }
 
-   G_ScrBeg(g, &CBIState(g)->shopscr, 15, 36, gui_p.btnlist.w, 186, gui_p.btnlist.h * nitems);
+   G_ScrBeg(g, &CBIState(g)->shopscr, 2, 23, gui_p.btnlist.w, 186, gui_p.btnlist.h * nitems);
 
    for(i32 i = 0, y = 0; i < countof(shopitems); i++)
    {
@@ -115,16 +115,16 @@ void P_CBI_TabShop(struct gui_state *g, struct player *p)
 
    struct shopitem *item = &shopitems[CBIState(g)->shopsel];
 
-   SetClipW(111, 30, 184, 150, 184);
+   G_Clip(g, g->ox+98, g->oy+17, 190, 170, 184);
 
-   PrintTextFmt("%s %s\Cnscr", LC(LANG "COST"), scoresep(P_Shop_Cost(p, &item->shopdef)));
-   PrintText(s_smallfnt, g->defcr, 111,1, 30,1);
+   PrintTextFmt("%s\Cnscr", scoresep(P_Shop_Cost(p, &item->shopdef)));
+   PrintText(s_smallfnt, g->defcr, g->ox+98,1, g->oy+17,1);
 
-   PrintText_str(Language(LANG "SHOP_DESCR_%S", item->name), s_smallfnt, g->defcr, 111,1, 40,1);
+   PrintText_str(Language(LANG "SHOP_DESCR_%S", item->name), s_smallfnt, g->defcr, g->ox+98,1, g->oy+27,1);
 
-   ClearClip();
+   G_ClipRelease(g);
 
-   if(G_Button(g, LC(LANG "BUY"), 259, 170, !P_Shop_CanBuy(p, &item->shopdef, item), .fill = {&CBIState(g)->buyfill, p->getCVarI(sc_gui_buyfiller)}))
+   if(G_Button(g, LC(LANG "BUY"), 98, 192, !P_Shop_CanBuy(p, &item->shopdef, item), .fill = {&CBIState(g)->buyfill, p->getCVarI(sc_gui_buyfiller)}))
       P_Shop_Buy(p, &item->shopdef, item, LANG "SHOP_TITLE_%S", false);
 }
 

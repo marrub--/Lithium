@@ -170,7 +170,7 @@ void F_drawFade(k32 amount) {
    PrintRectA(0, 0, 320, 240, 0x000000, 255 * amount);
 }
 
-sync static
+alloc_aut(0) sync static
 void F_fade(struct finale_state *st) {
    u32 fade = st->prg++->u;
 
@@ -182,7 +182,7 @@ void F_fade(struct finale_state *st) {
    }
 }
 
-sync static
+static
 void F_next(struct finale_state *st) {
    if(st->prg > fcode[14]) {
       st->prg = nil;
@@ -191,7 +191,7 @@ void F_next(struct finale_state *st) {
    }
 }
 
-sync static
+alloc_aut(0) sync static
 void F_fmus(struct finale_state *st) {
    u32 fade = st->prg++->u;
 
@@ -203,19 +203,19 @@ void F_fmus(struct finale_state *st) {
    }
 }
 
-sync static
+static
 void F_imge(struct finale_state *st) {
    str name = st->prg++->s;
    st->bgnd = name;
 }
 
-sync static
+static
 void F_musi(struct finale_state *st) {
    str name = st->prg++->s;
    ACS_SetMusic(name);
 }
 
-sync static
+alloc_aut(0) sync static
 void F_text(struct finale_state *st) {
    str name = st->prg++->s;
    u32 time = st->prg++->u;
@@ -271,7 +271,7 @@ void F_text(struct finale_state *st) {
    }
 }
 
-sync static
+alloc_aut(0) sync static
 void F_wait(struct finale_state *st) {
    u32 hold = st->prg++->u;
 
@@ -291,7 +291,7 @@ void F_Start(cstr which) {
                    CHANGELEVEL_PRERAISEWEAPON, -1);
 }
 
-script
+_Noreturn dynam_aut script
 void F_Run(struct player *p) {
    Str(actually_end_the_game, s"ActuallyEndTheGame");
 

@@ -20,6 +20,7 @@
 == \#MAIL_NOTITLE  | <title omitted>
 
 ## ---------------------------------------------------------------------------|
+== \#INFO_TITLE_MJamesDefeated | the end?
 == \#INFO_REMOT_MJamesDefeated | jam0s@g0n0j0t00.1025
 @@ \#INFO_DESCR_MJamesDefeated
 \ccI woke in a \cudark place\cc, unsure of my fate; if my life was
@@ -37,6 +38,7 @@ the lone sinner.
 \cgThank you for putting this to an end.
 
 ## ---------------------------------------------------------------------------|
+== \#INFO_TITLE_MMakarovDefeated | On Manifestations
 == \#INFO_REMOT_MMakarovDefeated | mak666v@org.r\.\\\-
 @@ \#INFO_DESCR_MMakarovDefeated
 There aren't many like you who can take such a being down. Maybe I
@@ -51,6 +53,7 @@ No, there is no need. What your victories have done is enough.
 Maybe you don't need such advice.
 
 ## ---------------------------------------------------------------------------|
+== \#INFO_TITLE_MIsaacDefeated | Gift
 == \#INFO_REMOT_MIsaacDefeated | isaac@syn.400khz
 %% \#INFO_DESCR_MIsaacDefeated
 \caOne shan't care what he shoots, but one may take care in where he treads.

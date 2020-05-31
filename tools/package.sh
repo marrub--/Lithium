@@ -11,11 +11,11 @@
 ##
 ## ---------------------------------------------------------------------------|
 
-(env CC_FLAGS=-DNDEBUG tools/genbuild.rb &&
+(rm -rf master Lithium.pk3 &&
+
+ env CC_FLAGS=-DNDEBUG tools/genbuild.rb &&
  ninja -t clean &&
  ninja &&
-
- rm -rf master Lithium.pk3 &&
 
  mkdir master &&
  cd master &&
@@ -26,6 +26,7 @@
  cp -r --archive ../licenses licenses &&
  cp    --archive ../credits.txt . &&
  cp    --archive ../bin/lithmain_ld.txt . &&
- zip -r ../Lithium.pk3 ./* -x '*.gitignore' '*.bat' '*.dbs' '*.wad.b*' '*.swp')
+ zip -r ../Lithium.pk3 ./* \
+     -x '*.gitignore' '*.bat' '*.dbs' '*.wad.b*' '*.swp') 2>&1 > /tmp/lbuild
 
 tools/genbuild.rb

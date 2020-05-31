@@ -53,8 +53,6 @@ static void WeaponGrab(struct player *p, struct weaponinfo const *info)
 
 static void PickupScore(struct player *p, i32 parm)
 {
-   extern void P_Log_SellWeapon(struct player *p, struct weaponinfo const *info, i96 score);
-
    struct weaponinfo const *info = &weaponinfo[parm];
 
    i96 score = 4000 * info->slot;
@@ -212,9 +210,6 @@ void P_Wep_PTick(struct player *p)
 script_str ext("ACS") addr(OBJ "WeaponPickup")
 bool Sc_WeaponPickup(i32 name)
 {
-   extern void P_Log_Weapon(struct player *p, struct weaponinfo const *info);
-   extern i32 P_Wep_FromName(struct player *p, i32 name);
-
    struct player *p = LocalPlayer;
    if(P_None(p)) return false;
 
@@ -316,7 +311,7 @@ i32 Sc_GetFinalizerMaxHealth(void)
       return sh;
 }
 
-script_str ext("ACS") addr(OBJ "SurgeOfDestiny")
+alloc_aut(0) script_str ext("ACS") addr(OBJ "SurgeOfDestiny")
 void Sc_SurgeOfDestiny(void)
 {
    for(i32 i = 0; i < (35 * 17) / 2; i++) {
@@ -358,7 +353,7 @@ i32 Sc_GetWRF(void)
    return flags;
 }
 
-script_str ext("ACS") addr(OBJ "PoisonFXTicker")
+alloc_aut(0) script_str ext("ACS") addr(OBJ "PoisonFXTicker")
 void Sc_PoisonFXTicker(void)
 {
    for(i32 i = 0; i < 17; i++)

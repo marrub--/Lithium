@@ -11,6 +11,7 @@
  * ---------------------------------------------------------------------------|
  */
 
+#ifndef NDEBUG
 #include "common.h"
 #include "p_player.h"
 #include "w_monster.h"
@@ -80,7 +81,7 @@ void Dbg_PrintMemC(void const *data, size_t size)
       pos += 3;
    }
 
-   __nprintf("\nEOF\n");
+   PrintChrSt("\nEOF\n");
 }
 
 void Dbg_PrintMem(void const *data, size_t size)
@@ -100,7 +101,7 @@ void Dbg_PrintMem(void const *data, size_t size)
       pos += 3;
    }
 
-   __nprintf("\nEOF\n");
+   PrintChrSt("\nEOF\n");
 }
 
 void Log(cstr fmt, ...)
@@ -118,7 +119,7 @@ void Log(cstr fmt, ...)
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr(OBJ "FontTest")
+alloc_aut(0) script_str ext("ACS") addr(OBJ "FontTest")
 void Sc_FontTest(i32 fontnum) {
    static struct {cstr lhs, rhs;} const strings[] = {
       /*
@@ -190,7 +191,6 @@ void Sc_DbgDumpAlloc(void) {
 
 script_str ext("ACS") addr(OBJ "PrintMonsterInfo")
 void Sc_PrintMonsterInfo(void) {
-   extern void PrintMonsterInfo(void);
    PrintMonsterInfo();
 }
 
@@ -209,5 +209,6 @@ void Sc_TriggerEnding(i32 num) {
    }
    F_Start(which);
 }
+#endif
 
 /* EOF */

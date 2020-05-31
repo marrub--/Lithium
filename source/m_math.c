@@ -16,11 +16,17 @@
 #include <math.h>
 
 #define BezierImpl(type, ret, func) \
+   static ret r; \
    type xa = func(x1, x2, t); \
    type ya = func(y1, y2, t); \
    type xb = func(x2, x3, t); \
    type yb = func(y2, y3, t); \
-   return (ret){func(xa, xb, t), func(ya, yb, t)}
+   r.x = func(xa, xb, t); \
+   r.y = func(ya, yb, t); \
+   return r
+
+union ik32 ik32;
+union uk32 uk32;
 
 static u64 lmvar crctable[256]; /* NB: Don't try to hash >8bit data. */
 static bool lmvar crcinit;
@@ -72,6 +78,7 @@ u64 crc64_str(void  __str_ars const *data, size_t len, u64 result)
    return ~result;
 }
 
+alloc_aut(0) stkcall
 i32 fastabs(i32 n)
 {
    [[return]] __asm(
@@ -79,11 +86,43 @@ i32 fastabs(i32 n)
       "Jcnd_Tru(Stk() Lit(:\"neg\"))"
       "Retn    (LocReg(Lit(:n)))"
    ":\"neg\""
-      "Neg:I   (Stk() LocReg(Lit(:n)))"
-      "Retn    (Stk())"
+      "Neg:I(Stk() LocReg(Lit(:n)))"
+      "Retn (Stk())"
    );
 }
 
+alloc_aut(0) stkcall
+k32 fastabsk(k32 n)
+{
+   [[return]] __asm(
+      "BAnd    (Stk() LocReg(Lit(:n)) Lit(0x80000000_s31.0))"
+      "Jcnd_Tru(Stk() Lit(:\"neg\"))"
+      "Retn    (LocReg(Lit(:n)))"
+   ":\"neg\""
+      "Neg:I(Stk() LocReg(Lit(:n)))"
+      "Retn (Stk())"
+   );
+}
+
+alloc_aut(0) stkcall
+k32 fastroundk(k32 k, i32 n) {
+   i32 mask = ~(0xFFFF >> n);
+
+   ik32.k = k;
+
+   if(ik32.i & (((0xFFFF >> 1) + 1) >> n)) {
+      if((ik32.i & mask) == (mask & 0x7FFFFFFF))
+         return ACCUM_MAX;
+
+      ik32.i += (0xFFFF + 1) >> n;
+   }
+
+   ik32.i &= mask;
+
+   return ik32.k;
+}
+
+alloc_aut(0) stkcall
 k64 powlk(k64 x, i32 y)
 {
    k64 z = 1;
@@ -91,26 +130,30 @@ k64 powlk(k64 x, i32 y)
    return z;
 }
 
+alloc_aut(0) stkcall
 k64 mag2lk(k64 x, k64 y)
 {
    return ACS_FixedSqrt(x * x + y * y);
 }
 
+alloc_aut(0) stkcall
 k32 mag2k(k32 x, k32 y)
 {
    return ACS_FixedSqrt(x * x + y * y);
 }
 
+alloc_aut(0) stkcall
 i32 mag2i(i32 x, i32 y)
 {
    return ACS_Sqrt(x * x + y * y);
 }
 
+alloc_aut(0) stkcall
 k32 lerpk(k32 a, k32 b, k32 t)
 {
    k32 ret = (1.0k - t) * a + t * b;
 
-   if(roundk(ret, 15) == b)
+   if(fastroundk(ret, 15) == b)
       return b;
 
    return ret;
@@ -166,6 +209,7 @@ void lerplli_init(struct interp_data_lli *data, i96 value, i96 timer)
    data->timer_max_cap = 2;
 }
 
+alloc_aut(0) stkcall
 bool aabb_aabb(i32 x1, i32 y1, i32 w1, i32 h1, i32 x2, i32 y2, i32 w2, i32 h2)
 {
    return
@@ -175,6 +219,7 @@ bool aabb_aabb(i32 x1, i32 y1, i32 w1, i32 h1, i32 x2, i32 y2, i32 w2, i32 h2)
       y1 + h1 > y2;
 }
 
+alloc_aut(0) stkcall
 bool aabb_point(i32 x1, i32 y1, i32 w1, i32 h1, i32 x2, i32 y2) {
    return
       x2 >= x1 &&
@@ -183,18 +228,21 @@ bool aabb_point(i32 x1, i32 y1, i32 w1, i32 h1, i32 x2, i32 y2) {
       y2 <= y1 + h1;
 }
 
+alloc_aut(0) stkcall
 i32 ceilk(k32 n)
 {
-   union ik32 u = {.k = n};
-   if(u.i & 0xFFF1) return u.i &= 0xFFFF0000, u.k + 1;
-   else             return u.k;
+   ik32.k = n;
+   if(ik32.i & 0xFFF1) return ik32.i &= 0xFFFF0000, ik32.k + 1;
+   else                return ik32.k;
 }
 
+alloc_aut(0) stkcall
 k64 bzpolylk(k64 a, k64 b, k64 t)
 {
    return a + (b - a) * t;
 }
 
+alloc_aut(0) stkcall
 i32 bzpolyi(i32 a, i32 b, k64 t)
 {
    return a + (b - a) * t;
@@ -212,7 +260,10 @@ struct i32v2 qbezieri(i32 x1, i32 y1, i32 x2, i32 y2, i32 x3, i32 y3, k64 t)
 
 struct polar ctopol(k32 x, k32 y)
 {
-   return (struct polar){ACS_VectorAngle(x, y), mag2i(x, y)};
+   static struct polar pol;
+   pol.ang = ACS_VectorAngle(x, y);
+   pol.dst = mag2i(x, y);
+   return pol;
 }
 
 /* EOF */

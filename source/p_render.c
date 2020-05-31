@@ -15,15 +15,6 @@
 #include "p_player.h"
 #include "p_hudid.h"
 
-/* Extern Functions -------------------------------------------------------- */
-
-void P_Ren_Debug(struct player *p);
-void P_Ren_Infrared(struct player *p);
-void P_Ren_Magic(struct player *p);
-script void P_Ren_Step(struct player *p);
-void P_Ren_View(struct player *p);
-script void P_Ren_Scope(struct player *p);
-
 /* Static Functions -------------------------------------------------------- */
 
 static void P_Ren_Style(struct player *p) {
@@ -54,7 +45,7 @@ static void P_Ren_LevelUp(struct player *p) {
 
    if(p->attr.lvupstr[0]) {
       SetSize(320, 240);
-      PrintTextChS(p->attr.lvupstr);
+      PrintTextChr(p->attr.lvupstr, p->attr.lvupstrn);
       PrintText(s_smallfnt, CR_WHITE, 220,1, 75,1);
    }
 }
@@ -64,16 +55,18 @@ static void P_Ren_LevelUp(struct player *p) {
 void P_Ren_PTickPst(struct player *p) {
    P_Ren_Magic(p);
    P_Ren_Step(p);
-   P_Ren_Infrared(p);
    P_Ren_View(p);
    P_Ren_Scope(p);
    P_Ren_Style(p);
    P_Ren_Advice(p);
    P_Ren_LevelUp(p);
+   #ifndef NDEBUG
    P_Ren_Debug(p);
+   #endif
 }
 
-sync void P_TeleportIn(struct player *p) {
+alloc_aut(0) sync
+void P_TeleportIn(struct player *p) {
    p->teleportedout = false;
 
    ACS_AmbientSound(ss_misc_telein, 127);
@@ -91,12 +84,12 @@ sync void P_TeleportIn(struct player *p) {
    }
 }
 
-sync void P_TeleportOut(struct player *p) {
+alloc_aut(0) sync
+void P_TeleportOut(struct player *p) {
    ACS_AmbientSound(ss_misc_teleout, 127);
    ACS_SetCameraToTexture(p->tid, s_LITHCAM3, 90);
 
    for(i32 i = 1, j = 1; i <= 18; i++) {
-      ACS_Delay(1);
       k32 w = 1 + (i / 18.0lk / 3.0lk * 50);
       k32 h = 1 + (j / 18.0lk / 8.0lk * 10);
       SetSize(320, 200);
@@ -104,6 +97,7 @@ sync void P_TeleportOut(struct player *p) {
       SetSize(640 / w, 480 * h);
       PrintSprite(s_LITHCAM3, 320/w,0, 240*h,0);
       if(i & 3) j++;
+      ACS_Delay(1);
    }
 
    p->teleportedout = true;

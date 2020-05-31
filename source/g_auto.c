@@ -15,6 +15,27 @@
 #include "p_player.h"
 #include "w_world.h"
 
+/* Static Functions -------------------------------------------------------- */
+
+static
+void G_cutBox(struct gui_clip *other, i32 *x, i32 *y, i32 *w, i32 *h) {
+   *x = minmax(*x, other->x, other->x + other->w);
+   *y = minmax(*y, other->y, other->y + other->h);
+
+   *w = min(*x + *w, other->x + other->w) - *x;
+   *h = min(*y + *h, other->y + other->h) - *y;
+}
+
+static
+void G_setClip(struct gui_state *g) {
+   if(g->clip >= 0) {
+      struct gui_clip *clip = &g->clips[g->clip];
+      SetClipW(clip->x, clip->y, clip->w, clip->h, clip->ww);
+   } else {
+      ClearClip();
+   }
+}
+
 /* Extern Functions -------------------------------------------------------- */
 
 void G_Auto(struct gui_state *g, u32 id, i32 x, i32 y, i32 w, i32 h,
@@ -22,16 +43,16 @@ void G_Auto(struct gui_state *g, u32 id, i32 x, i32 y, i32 w, i32 h,
    x += g->ox;
    y += g->oy;
 
-   /* check clip versus cursor (if clipping), then check control
-    * versus cursor
-    */
-   if((!g->useclip ||
-       aabb_point(g->clpxS, g->clpyS, g->clpxE, g->clpyE, g->cx, g->cy)) &&
-      aabb_point(x, y, w, h, g->cx, g->cy)) {
+   if(g->clip >= 0) {
+      G_cutBox(&g->clips[g->clip], &x, &y, &w, &h);
+   }
+
+   if(aabb_point(x, y, w, h, g->cx, g->cy)) {
       g->hot = id;
 
-      if(g->active == 0 && g->clicklft)
+      if(g->active == 0 && g->clicklft) {
          g->active = id;
+      }
    }
 
    /* check slide state */
@@ -40,6 +61,16 @@ void G_Auto(struct gui_state *g, u32 id, i32 x, i32 y, i32 w, i32 h,
       g->slidetime  = 1;
       g->slidecount = 0;
    }
+
+   #ifndef NDEBUG
+   if(get_bit(dbgflags, dbgf_gui)) {
+      PrintLine(x, y, x + w, y + h, 0xFF0000);
+      PrintLine(x, y, x + w, y, 0xFF0000);
+      PrintLine(x, y, x, y + h, 0xFF0000);
+      PrintLine(x, y + h, x + w, y + h, 0xFF0000);
+      PrintLine(x + w, y, x + w, y + h, 0xFF0000);
+   }
+   #endif
 }
 
 void G_Init(struct gui_state *g, void *state) {
@@ -86,6 +117,7 @@ void G_Begin(struct gui_state *g, i32 w, i32 h) {
    if(!h) h = 200;
 
    g->hot = 0;
+   g->clip = -1;
 
    SetSize(g->w = w, g->h = h);
 }
@@ -114,17 +146,46 @@ void G_End(struct gui_state *g, enum cursor curs) {
 }
 
 void G_Clip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, i32 ww) {
-   g->useclip = true;
-   g->clpxE = w;
-   g->clpyE = h;
+   struct gui_clip *clip, *other;
 
-   if(ww == 0) ww = w;
-   SetClipW(g->clpxS = x, g->clpyS = y, w, h, ww);
+   if(g->clip >= 0) {
+      other = &g->clips[g->clip];
+   } else {
+      other = nil;
+   }
+
+   clip = &g->clips[++g->clip];
+
+   clip->x = x;
+   clip->y = y;
+   clip->w = w;
+   clip->h = h;
+
+   if(other) {
+      G_cutBox(other, &clip->x, &clip->y, &clip->w, &clip->h);
+   }
+
+   clip->ww = ww ? min(ww, clip->w) : clip->w;
+
+   G_setClip(g);
+
+   #ifndef NDEBUG
+   if(get_bit(dbgflags, dbgf_gui)) {
+      x = clip->x, y = clip->y, w = clip->w, h = clip->h;
+      PrintLine(x,     y,     x + w, y + h, 0x00FFFF);
+      PrintLine(x,     y,     x + w, y,     0x00FFFF);
+      PrintLine(x,     y + h, x + w, y + h, 0x00FFFF);
+      PrintLine(x + w, y,     x + w, y + h, 0x00FFFF);
+      PrintLine(x,     y,     x,     y + h, 0x00FFFF);
+
+      PrintLine(x, y + h / 2, x + clip->ww, y + h / 2, 0xFF00FF);
+   }
+   #endif
 }
 
 void G_ClipRelease(struct gui_state *g) {
-   g->useclip = g->clpxS = g->clpyS = g->clpxE = g->clpyE = 0;
-   ClearClip();
+   g->clip--;
+   G_setClip(g);
 }
 
 void G_TypeOn(struct gui_state *g, struct gui_typ *typeon, str text) {

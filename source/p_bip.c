@@ -20,12 +20,15 @@
 
 /* Static Functions -------------------------------------------------------- */
 
-script static void MailNotify(struct player *p, cstr name) {
+dynam_aut script static
+void MailNotify(struct player *p, cstr name) {
    p->setActivator();
 
    p->bip.mailreceived++;
 
-   if(get_bit(dbgflag, dbgf_bip)) return;
+   #ifndef NDEBUG
+   if(get_bit(dbgflags, dbgf_bip)) return;
+   #endif
 
    ACS_Delay(20);
 
@@ -87,7 +90,9 @@ static u32 NameToNum(cstr discrim, cstr name) {
 /* Extern Functions -------------------------------------------------------- */
 
 script void P_BIP_PInit(struct player *p) {
+   #ifndef NDEBUG
    if(dbglevel) p->logH(1, "There are %u info pages!", BIP_MAX);
+   #endif
 
    p->bip.pagemax = 0;
 
@@ -113,7 +118,13 @@ script void P_BIP_PInit(struct player *p) {
 
    for_page() {
       if(get_bit(page->flags, _page_available) &&
-         (get_bit(dbgflag, dbgf_bip) || page->info->aut)) {
+         (
+          #ifndef NDEBUG
+          get_bit(dbgflags, dbgf_bip)
+          #else
+          false
+          #endif
+          || page->info->aut)) {
          UnlockPage(p, page);
       }
    }

@@ -78,8 +78,8 @@ i32 UniqueID(i32 tid)
 
 /* Static Functions -------------------------------------------------------- */
 
-script
-static void Boss_HInit(void)
+alloc_aut(0) script static
+void Boss_HInit(void)
 {
    ACS_Delay(1); /* Delay another tic for monster spawners. */
 
@@ -141,15 +141,13 @@ static void UpdateGame(void)
 
 static void GetDebugInfo(void)
 {
-   bool all = ACS_GetCVar(sc_debug_all);
+   Str(sc_debug_level, sDCVAR "debug_level");
+   Str(sc_debug_flags, sDCVAR "debug_flags");
 
+   #ifndef NDEBUG
    dbglevel = ACS_GetCVar(sc_debug_level);
-
-   if(all || ACS_GetCVar(sc_debug_bip))        set_bit(dbgflag, dbgf_bip);
-   if(all || ACS_GetCVar(sc_debug_items))      set_bit(dbgflag, dbgf_items);
-   if(all || ACS_GetCVar(sc_debug_save))       set_bit(dbgflag, dbgf_save);
-   if(all || ACS_GetCVar(sc_debug_score))      set_bit(dbgflag, dbgf_score);
-   if(all || ACS_GetCVar(sc_debug_upgrades))   set_bit(dbgflag, dbgf_upgr);
+   dbgflags = ACS_GetCVar(sc_debug_flags);
+   #endif
 }
 
 static void MInitPre(void)
@@ -162,8 +160,6 @@ static void MInitPre(void)
 
 static void GInit(void)
 {
-   extern void Wep_GInit(void);
-
    Dbg_Log(log_dev, "%s", __func__);
 
    Wep_GInit();
@@ -177,8 +173,6 @@ static void GInit(void)
 
 static void MInitPst(void)
 {
-   script extern void W_DoRain();
-
    Dbg_Log(log_dev, "%s", __func__);
 
    payout.par = ACS_GetLevelInfo(LEVELINFO_PAR_TIME) * 35;
@@ -207,10 +201,6 @@ static void MInitPst(void)
 
 static void MInit(void)
 {
-   extern void Upgr_MInit(void);
-   extern void Shop_MInit(void);
-   extern void Dlg_MInit(void);
-
    Dbg_Log(log_dev, "%s", __func__);
 
    Dlg_MInit();
@@ -236,8 +226,6 @@ static void MInit(void)
 
 static void HInitPre(void)
 {
-   extern void DmonInit();
-
    Dbg_Log(log_dev, "%s", __func__);
 
    if(unloaded)
@@ -263,8 +251,6 @@ static void HInitPre(void)
 
 static void HInit(void)
 {
-   extern void Scr_HInit(void);
-
    Dbg_Log(log_dev, "%s", __func__);
 
    if(!ACS_GetCVar(sc_sv_nobosses))
@@ -283,8 +269,11 @@ static void HInit(void)
    }
 
    if(ACS_GetCVar(sc_sv_nobosses) ||
-      ACS_GetCVar(sc_sv_nobossdrop) ||
-      get_bit(dbgflag, dbgf_items))
+      ACS_GetCVar(sc_sv_nobossdrop)
+      #ifndef NDEBUG
+      || get_bit(dbgflags, dbgf_items)
+      #endif
+      )
    {
       for(i32 i = 0; i < cupg_max; i++)
          CBI_Install(i);
@@ -303,8 +292,8 @@ void Sc_PreInit(void)
    islithmap = (MapNum & LithMapMask) == LithMapMagic;
 }
 
-script type("open")
-static void Sc_World(void)
+_Noreturn dynam_aut script type("open") static
+void Sc_World(void)
 {
    Dbg_Log(log_dev, "%s", __func__);
 
@@ -314,12 +303,9 @@ begin:
     */
    if(hubinit && ACS_Timer() < 2) hubinit = false;
 
-   extern void Draw_Init(void);
-
    Draw_Init();
 
    if(ACS_GameType() == GAME_TITLE_MAP) {
-      script extern void W_Title(void);
       W_Title();
       return;
    } else if(MapNum == 1911777) {
@@ -332,6 +318,7 @@ begin:
       return;
    }
 
+   #ifndef NDEBUG
    if(ACS_GetCVar(sc_sv_failtime) == 0) for(;;) {
       Str(toggleconsole, s"toggleconsole");
       Log("\n=======\n"
@@ -357,6 +344,7 @@ begin:
    }
 
    dbgnotenum = 0;
+   #endif
 
    /* Let the map do... whatever. */
    ACS_Delay(1);
@@ -364,7 +352,6 @@ begin:
    /* Now, initialize everything.
     * Start by deallocating temporary tags.
     */
-
    Xalloc(_tag_huds);
 
    if(!modinit) MInitPre();
@@ -430,7 +417,9 @@ begin:
 
       ACS_Delay(1);
 
+      #ifndef NDEBUG
       dbgstatnum = 0;
+      #endif
       ticks++;
 
       i32 autosave = ACS_GetCVar(sc_sv_autosave);
@@ -453,7 +442,6 @@ void Sc_WorldReopen(void)
 script type("unloading")
 static void Sc_WorldUnload(void)
 {
-   extern void CBI_InstallSpawned(void);
    unloaded = true;
    Dbg_Log(log_dev, "%s", __func__);
 

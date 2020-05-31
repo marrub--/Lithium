@@ -11,27 +11,25 @@
  * ---------------------------------------------------------------------------|
  */
 
-local bool IsGraph(i32 c) {return c >  ' ' && c <= '~';}
-local bool IsPrint(i32 c) {return c >= ' ' && c <= '~';}
-local bool IsPunct(i32 c) {return c >= '!' && c <= '/' ||
-                                  c >= ':' && c <= '@' ||
-                                  c >= '[' && c <= '`' ||
-                                  c >= '{' && c <= '~';}
-local bool IsSpace(i32 c) {return c >=   9 && c <=  13 ||
-                                  c == ' ';}
-local bool IsBlank(i32 c) {return c == ' ' || c ==   9;}
-local bool IsDigit(i32 c) {return c >= '0' && c <= '9';}
-local bool IsXDigi(i32 c) {return c >= 'a' && c <= 'f' ||
-                                  c >= 'A' && c <= 'F' ||
-                                  IsDigit(c);}
-local bool IsLower(i32 c) {return c >= 'a' && c <= 'z';}
-local bool IsUpper(i32 c) {return c >= 'A' && c <= 'Z';}
-local bool IsAlpha(i32 c) {return IsLower(c) || IsUpper(c);}
-local bool IsAlNum(i32 c) {return IsAlpha(c) || IsDigit(c);}
-local bool IsIdent(i32 c) {return IsAlNum(c) || c == '_';}
-local bool IsNumId(i32 c) {return IsIdent(c) || c == '.';}
-local bool IsCntrl(i32 c) {return !IsPrint(c);}
-local i32  ToUpper(i32 c) {return IsLower(c) ? c - ('a' - 'A') : c;}
-local i32  ToLower(i32 c) {return IsUpper(c) ? c + ('a' - 'A') : c;}
+#ifndef m_char_h
+#define m_char_h
+#include "m_types.h"
 
-/* EOF */
+stkcall bool IsGraph(i32 c);
+stkcall bool IsPrint(i32 c);
+stkcall bool IsPunct(i32 c);
+stkcall bool IsSpace(i32 c);
+stkcall bool IsBlank(i32 c);
+stkcall bool IsDigit(i32 c);
+stkcall bool IsXDigi(i32 c);
+stkcall bool IsLower(i32 c);
+stkcall bool IsUpper(i32 c);
+stkcall bool IsAlpha(i32 c);
+stkcall bool IsAlNum(i32 c);
+stkcall bool IsIdent(i32 c);
+stkcall bool IsNumId(i32 c);
+stkcall bool IsCntrl(i32 c);
+stkcall i32  ToUpper(i32 c);
+stkcall i32  ToLower(i32 c);
+
+#endif

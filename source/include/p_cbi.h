@@ -69,6 +69,8 @@ struct cbi {
       u32 infotab;
       u32 settingstab;
 
+      struct gui_win mainwin;
+
       struct gui_typ biptypeon;
       struct gui_scr bipscr;
       struct gui_scr bipinfoscr;
@@ -101,6 +103,22 @@ struct cbi {
 };
 
 /* Extern Functions -------------------------------------------------------- */
+
+void CBI_InstallSpawned(void);
+
+void P_CBI_TabUpgrades(struct gui_state *g, struct player *p);
+void P_CBI_TabShop    (struct gui_state *g, struct player *p);
+
+void P_CBI_TabCBI       (struct gui_state *g, struct player *p);
+void P_CBI_TabStatus    (struct gui_state *g, struct player *p);
+void P_CBI_TabStatistics(struct gui_state *g, struct player *p);
+
+void P_CBI_TabBIP       (struct gui_state *g, struct player *p);
+void P_CBI_TabLog       (struct gui_state *g, struct player *p);
+void P_CBI_TabNotes     (struct gui_state *g, struct player *p);
+
+void P_CBI_TabItems   (struct gui_state *g, struct player *p);
+void P_CBI_TabSettings(struct gui_state *g, struct player *p);
 
 void P_CBI_PMinit(struct player *p);
 

@@ -136,17 +136,17 @@ script void P_Log_PTick(struct player *p) {
 void P_CBI_TabLog(struct gui_state *g, struct player *p) {
    static i32 const ht = 10;
 
-   if(G_Button(g, .x = 25, 38, Pre(btnprev)))
+   if(G_Button(g, .x = 12, 25, Pre(btnprev)))
       if(--CBIState(g)->logsel < 0) CBIState(g)->logsel = p->log.mapsC - 1;
 
-   if(G_Button(g, .x = 25 + gui_p.btnprev.w, 38, Pre(btnnext)))
+   if(G_Button(g, .x = 12 + gui_p.btnprev.w, 25, Pre(btnnext)))
       if(++CBIState(g)->logsel >= p->log.mapsC) CBIState(g)->logsel = 0;
 
    struct logmap *lm = &p->log.mapsV[CBIState(g)->logsel];
 
-   PrintText_str(lm->name, s_lmidfont, g->defcr, 28+gui_p.btnprev.w+gui_p.btnnext.w,1, 40,1);
+   PrintText_str(lm->name, s_lmidfont, g->defcr, g->ox+15+gui_p.btnprev.w+gui_p.btnnext.w,1, g->oy+27,1);
 
-   G_ScrBeg(g, &CBIState(g)->logscr, 15, 50, 280, 175, lm->dataC * ht);
+   G_ScrBeg(g, &CBIState(g)->logscr, 2, 37, 280, 175, lm->dataC * ht);
 
    for(i32 i = 0; i < lm->dataC; i++) {
       i32 const y = ht * i;

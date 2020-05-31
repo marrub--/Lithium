@@ -68,9 +68,13 @@
 
 /* Types ------------------------------------------------------------------- */
 
+struct gui_fil {
+   u32 *ptr;
+   u32  tic;
+};
+
 struct gui_scr {
-   i32  ox;
-   i32  oy;
+   i32  ox, oy;
    i32  occludeS;
    i32  occludeE;
    k64  y;
@@ -90,9 +94,11 @@ struct gui_txt {
    i32 tbptr;
 };
 
-struct gui_fil {
-   u32 *ptr;
-   u32  tic;
+struct gui_win {
+   bool init, grabbed;
+   i32 x, y;
+   i32 ox, oy;
+   i32 nextsnd;
 };
 
 struct gui_delta {
@@ -101,6 +107,10 @@ struct gui_delta {
    bool clicklft;
    bool clickrgt;
    bool clickany;
+};
+
+struct gui_clip {
+   i32 x, y, w, h, ww;
 };
 
 struct gui_state {
@@ -121,8 +131,8 @@ struct gui_state {
    u32 dbl;
    i32 dbltime;
 
-   bool useclip;
-   i32 clpxS, clpyS, clpxE, clpyE;
+   i32 clip;
+   struct gui_clip clips[16];
 
    void *state;
 
@@ -136,12 +146,12 @@ struct gui_pre_btn {
    cstr cact;
    cstr chot;
    cstr cdis;
-   str font;
-   str snd;
-   i32 ax;
-   i32 ay;
-   i32 w;
-   i32 h;
+   str  font;
+   str  snd;
+   i32  ax;
+   i32  ay;
+   i32  w;
+   i32  h;
    bool external;
 };
 
@@ -230,6 +240,21 @@ struct gui_arg_txt {
    struct player *p;
 };
 
+struct gui_pre_win {
+   cstr bg;
+   i32  w;
+   i32  h;
+   k32  a;
+   i32  bx;
+   i32  by;
+   bool external;
+};
+
+struct gui_arg_win {
+   struct gui_win *st;
+   struct gui_pre_win const *preset;
+};
+
 struct gui_presets {
    struct gui_pre_btn btndef;
    struct gui_pre_btn btntab;
@@ -251,6 +276,7 @@ struct gui_presets {
    struct gui_pre_cbx cbxsmall;
    struct gui_pre_scr scrdef;
    struct gui_pre_sld slddef;
+   struct gui_pre_win windef;
 };
 
 enum cursor {
@@ -301,14 +327,14 @@ void G_ScrEnd(struct gui_state *g, struct gui_scr *scr);
 optargs(1)
 bool G_ScrOcc(struct gui_state *g, struct gui_scr const *scr, i32 y, i32 h);
 
+void G_WinEnd(struct gui_state *g, struct gui_win *win);
+
 #define G_ImpArgs(ty) struct gui_state *g, u32 id, struct gui_arg_##ty const *a
 bool            G_Button_Imp(G_ImpArgs(btn));
 bool            G_ChkBox_Imp(G_ImpArgs(cbx));
 void            G_ScrBeg_Imp(G_ImpArgs(scr));
 k64             G_Slider_Imp(G_ImpArgs(sld));
 struct gui_txt *G_TxtBox_Imp(G_ImpArgs(txt));
-#if 0
 void            G_WinBeg_Imp(G_ImpArgs(win));
-#endif
 
 #endif

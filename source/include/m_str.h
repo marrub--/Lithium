@@ -35,12 +35,15 @@
    (ACS_BeginPrint(), PrintChrSt(s1), PrintChrSt(s2), ACS_EndStrParam())
 
 #define fastmemset(p, s, c, ...) \
-   for(register i32 _i = 0; _i < (c); _i++) ((byte __VA_ARGS__ *)(p))[_i] = s
+   __with(register byte *_p = (void *)(p), \
+                         _s = (s);) \
+      for(register i32 _i = 0, _c = (c); _i < _c; _i++) \
+         _p[_i] = _s
 
 #define fastmemmove(lhs, rhs, s) \
    do { \
-      register char       *_lhs = (void *)(lhs); \
-      register char const *_rhs = (void *)(rhs); \
+      register byte       *_lhs = (void *)(lhs); \
+      register byte const *_rhs = (void *)(rhs); \
       register size_t      _s   = (s); \
       if(_lhs < _rhs) { \
          while(_s--) \
@@ -53,22 +56,22 @@
       } \
    } while(0)
 
-str l_strupper(str in);
-u32 l_strhash(astr s);
-u32 lstrhash(cstr s);
-char *lstrcpy_str(char *dest, astr src);
-char *lstrcpy2(char *out, cstr s1, cstr s2);
-char *lstrcpy3(char *out, cstr s1, cstr s2, cstr s3);
-i32 lstrcmp_str(cstr s1, astr s2);
-i32 faststrcmp(cstr s1, cstr s2);
-i32 faststrcasecmp(cstr s1, cstr s2);
-cstr scoresep(i96 num);
-cstr alientext(i32 num);
+stkcall str l_strupper(str in);
+stkcall u32 l_strhash(astr s);
+stkcall u32 lstrhash(cstr s);
+stkcall char *lstrcpy_str(char *dest, astr src);
+stkcall char *lstrcpy2(char *out, cstr s1, cstr s2);
+stkcall char *lstrcpy3(char *out, cstr s1, cstr s2, cstr s3);
+stkcall i32 lstrcmp_str(cstr s1, astr s2);
+stkcall i32 faststrcmp(cstr s1, cstr s2);
+stkcall i32 faststrcasecmp(cstr s1, cstr s2);
+stkcall cstr scoresep(i96 num);
+stkcall cstr alientext(i32 num);
 str LanguageV(str name);
 char *LanguageVC(char *out, cstr name);
 char *LanguageCV(char *out, cstr name, ...);
 str LanguageNull(cstr fmt, ...);
-cstr RemoveTextColors_str(astr s, i32 size);
-cstr RemoveTextColors    (cstr s, i32 size);
+stkcall cstr RemoveTextColors_str(astr s, i32 size);
+stkcall cstr RemoveTextColors    (cstr s, i32 size);
 
 /* EOF */

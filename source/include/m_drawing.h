@@ -246,6 +246,8 @@ enum /* Channel */
 };
 
 /* decompat-cut */
+void Draw_Init(void);
+
 #endif
 /* decompat-end */
 

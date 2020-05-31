@@ -24,20 +24,19 @@
 #define snil ((__str_ent *)0)
 #define lnil ((__label *)0)
 
-#define script     [[__call("ScriptI")]]
-#define script_str [[__call("ScriptS")]]
-#define stkcall    [[__call("StkCall")]]
-#define sync       [[__call("SScriptI")]]
-#define sync_str   [[__call("SScriptS")]]
-#define optargs(x) [[__optional_args(x)]]
-#define noinit     [[__no_init]]
-#define anonymous  [[__anonymous]]
-#define ext(x)     [[__extern(x)]]
-#define stksize(x) [[__alloc_Aut(x)]]
-#define type(x)    [[__script(x)]]
-#define addr(x)    [[__address(x)]]
-
-#define local static inline
+#define script       [[__call("ScriptI")]]
+#define script_str   [[__call("ScriptS")]]
+#define stkcall      [[__call("StkCall")]]
+#define sync         [[__call("SScriptI")]]
+#define sync_str     [[__call("SScriptS")]]
+#define optargs(x)   [[__optional_args(x)]]
+#define noinit       [[__no_init]]
+#define anonymous    [[__anonymous]]
+#define ext(x)       [[__extern(x)]]
+#define alloc_aut(x) [[__alloc_Aut(x)]]
+#define dynam_aut    [[__alloc_Aut(0x80000000)]]
+#define type(x)      [[__script(x)]]
+#define addr(x)      [[__address(x)]]
 
 /* Types ------------------------------------------------------------------- */
 

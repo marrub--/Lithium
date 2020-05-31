@@ -46,7 +46,6 @@ void Scr_HInit(void) {
    }
 
    for_player() {
-      script extern void P_Scr_Payout(struct player *p);
       P_Scr_Payout(p);
    }
 

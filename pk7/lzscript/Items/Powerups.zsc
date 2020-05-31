@@ -276,8 +276,13 @@ class Lith_ArtiTeleport : Inventory replaces ArtiTeleport
    }
 }
 
-class Lith_PowerLightAmp : PowerLightAmp
-   {override void Tick() {if(!level.isFrozen()) Super.Tick();}}
+class Lith_PowerLightAmp : PowerLightAmp {
+   override void Tick() {if(!level.isFrozen()) Super.Tick();}
+   override void EndEffect() {
+      Super.EndEffect();
+      S_StartSound("player/infraredoff", lch_item, CHANF_UI);
+   }
+}
 
 class Lith_PowerInvulnerable : PowerInvulnerable
    {override void Tick() {if(!level.isFrozen()) Super.Tick();}}

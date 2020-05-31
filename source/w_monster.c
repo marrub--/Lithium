@@ -39,7 +39,8 @@ StrAry(dmgtype_names,
 
 /* Static Functions -------------------------------------------------------- */
 
-static void GetInfo(dmon_t *m) {
+alloc_aut(0) stkcall static
+void GetInfo(dmon_t *m) {
    m->x = GetX(0);
    m->y = GetY(0);
    m->z = GetZ(0);
@@ -50,7 +51,8 @@ static void GetInfo(dmon_t *m) {
    m->health = GetMembI(0, sm_Health);
 }
 
-static void ApplyLevels(dmon_t *m, i32 prev) {
+script static
+void ApplyLevels(dmon_t *m, i32 prev) {
    GetInfo(m);
 
    for(i32 i = prev + 1; i <= m->level; i++) {
@@ -80,10 +82,12 @@ static void ApplyLevels(dmon_t *m, i32 prev) {
          InvGive(StrParam(OBJ "M_%S%i", dmgtype_names[i], min(resist, _max_rank)), 1);
       }
    }
+
+   Dbg_Log(log_dmon, "monster %i leveled up (%i -> %i)", m->id, prev, m->level);
 }
 
-static void ShowBarrier(dmon_t const *m, k32 alpha)
-{
+script static
+void ShowBarrier(dmon_t const *m, k32 alpha) {
    bool anyplayer = false;
 
    /* Optimization: Check for players nearby first. */
@@ -115,7 +119,8 @@ static void ShowBarrier(dmon_t const *m, k32 alpha)
    }
 }
 
-static void BaseMonsterLevel(dmon_t *m)
+script static
+void BaseMonsterLevel(dmon_t *m)
 {
    k32 rlv = ACS_RandomFixed(1, _max_level);
    k32 bias;
@@ -155,12 +160,15 @@ static void BaseMonsterLevel(dmon_t *m)
       m->resist[ACS_Random(1, dmgtype_max) - 1] += 5;
 
    ApplyLevels(m, 0);
+
+   Dbg_Log(log_dmonV, "monster %-4i \Cdr%i \Cgl%-3i \C-running on %S",
+      m->id, m->rank, m->level, ACS_GetActorClass(0));
 }
 
 /* Spawn a Monster Soul and temporarily set the species of it until the
  * actor is no longer solid, so it won't explode immediately.
  */
-script
+alloc_aut(0) script
 static void SoulCleave(dmon_t *m, struct player *p)
 {
    Str(solid_s, s"SOLID");
@@ -237,9 +245,11 @@ static void OnFinalize(dmon_t *m) {
    m->finalized = true;
 }
 
-static void OnDeath(dmon_t *m)
+script static
+void OnDeath(dmon_t *m)
 {
    Dbg_Log(log_dmon, "monster %i is ded", m->id);
+
    m->wasdead = true;
 
    OnFinalize(m);
@@ -247,9 +257,15 @@ static void OnDeath(dmon_t *m)
    P_GiveAllScore(m->mi->score + m->rank * 500, false);
 }
 
-script
-static void MonsterMain(dmon_t *m)
-{
+script static
+void OnResurrect(dmon_t *m) {
+   Dbg_Log(log_dmon, "monster %i resurrected", m->id);
+
+   m->resurrect = false;
+}
+
+_Noreturn alloc_aut(0) script static
+void MonsterMain(dmon_t *m) {
    InvGive(so_MonsterID, m->id + 1);
 
    GetInfo(m);
@@ -257,25 +273,18 @@ static void MonsterMain(dmon_t *m)
 
    BaseMonsterLevel(m);
 
-   Dbg_Log(log_dmonV, "monster %-4i \Cdr%i \Cgl%-3i \C-running on %S",
-      m->id, m->rank, m->level, ACS_GetActorClass(0));
-
-   for(i32 tic = 0;; tic++)
-   {
+   for(i32 tic = 0;; tic++) {
       GetInfo(m);
 
-      if(m->health <= 0)
-      {
+      if(m->health <= 0) {
          OnDeath(m);
 
-         do {ACS_Delay(15);} while(!m->resurrect);
+         do ACS_Delay(15); while(!m->resurrect);
 
-         m->resurrect = false;
-         Dbg_Log(log_dmon, "monster %i resurrected", m->id);
+         OnResurrect(m);
       }
 
-      if(m->exp > _monster_level_exp)
-      {
+      if(m->exp > _monster_level_exp) {
          i32 prev = m->level;
 
          div_t d = __div(m->exp, _monster_level_exp);
@@ -284,15 +293,15 @@ static void MonsterMain(dmon_t *m)
 
          ACS_SpawnForced(so_MonsterLevelUp, m->x, m->y, m->z);
          ApplyLevels(m, prev);
-
-         Dbg_Log(log_dmon, "monster %i leveled up (%i -> %i)", m->id, prev, m->level);
       }
 
-      if(HasResistances(m) && m->level >= 20)
+      if(HasResistances(m) && m->level >= 20) {
          ShowBarrier(m, m->level / 100.0);
+      }
 
-      if(InvNum(so_Ionized) && tic % 5 == 0)
+      if(InvNum(so_Ionized) && tic % 5 == 0) {
          ServCallI(sm_IonizeFX);
+      }
 
       ACS_Delay(2);
    }
@@ -300,6 +309,7 @@ static void MonsterMain(dmon_t *m)
 
 /* Extern Functions -------------------------------------------------------- */
 
+#ifndef NDEBUG
 void PrintMonsterInfo(void)
 {
    ifauto(dmon_t *, m, DmonPtr(0, AAPTR_PLAYER_GETTARGET))
@@ -326,6 +336,7 @@ void PrintMonsterInfo(void)
    else
       Log("no active monster");
 }
+#endif
 
 /* Scripts ----------------------------------------------------------------- */
 
@@ -348,7 +359,7 @@ void Sc_ResurrectMonster(i32 amt)
    ifauto(dmon_t *, m, DmonSelf()) m->resurrect = true;
 }
 
-script ext("ACS") addr(lsc_monsterinfo)
+dynam_aut script ext("ACS") addr(lsc_monsterinfo)
 void Sc_MonsterInfo(void)
 {
    Str(rladaptive, s"RLAdaptive");

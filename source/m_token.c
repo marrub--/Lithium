@@ -54,7 +54,7 @@
 void TokParse(FILE *fp, struct token *tok, struct origin *orig) {
    if(!tok || !fp || !orig) return;
 
-begin:;
+begin:
    i32 ch;
 
    tok->textC = 0;

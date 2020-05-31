@@ -35,7 +35,7 @@ script void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr) {
       ACS_PlayerNumber() != -1;
 
    if(GetMembI(0, sm_Health) <= 0) {
-      UData = (struct upgr_data_VitalScan){};
+      fastmemset(&UData, 0, sizeof UData);
    } else if(validtarget) {
       Str(boss_s,     s"BOSS");
       Str(invuln_s,   s"INVULNERABLE");
@@ -79,8 +79,6 @@ script void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr) {
       } else if(UData.rank == 7) {
          UData.tagstr = StrParam("\C[Lith_Angelic]%tS\C-", 0);
       } else if(freak || ACS_CheckFlag(0, boss_s)) {
-         extern str RandomName(i32 id);
-
          UData.tagstr = RandomName(freak ? 0 : id);
 
          if(p->getCVarI(sc_scanner_bar)) {

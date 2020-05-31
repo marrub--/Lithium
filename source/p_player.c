@@ -32,20 +32,11 @@ script static void P_doIntro(struct player *p);
 
 /* Scripts ----------------------------------------------------------------- */
 
-script type("enter")
-static void Sc_PlayerEntry(void) {
-   script extern void P_Wep_PTickPre(struct player *p);
-          extern void P_Dat_PTickPre(struct player *p);
-          static void P_Scr_PTickPre(struct player *p);
-   script extern void P_CBI_PTick   (struct player *p);
-   script extern void P_Inv_PTick   (struct player *p);
-   script extern void P_Log_PTick   (struct player *p);
-   script extern void P_Upg_PTick   (struct player *p);
-   script extern void P_Wep_PTick   (struct player *p);
-          static void P_Atr_pTick   (struct player *p);
-   script extern void P_Upg_PTickPst(struct player *p);
-          extern void P_Ren_PTickPst(struct player *p);
-          static void P_Aug_PTick   (struct player *p);
+_Noreturn dynam_aut script type("enter") static
+void Sc_PlayerEntry(void) {
+   static void P_Scr_PTickPre(struct player *p);
+   static void P_Atr_pTick   (struct player *p);
+   static void P_Aug_PTick   (struct player *p);
 
    if(ACS_GameType() == GAME_TITLE_MAP) return;
 
@@ -136,8 +127,8 @@ reinit:
    }
 }
 
-script type("death")
-static void Sc_PlayerDeath(void) {
+dynam_aut script type("death") static
+void Sc_PlayerDeath(void) {
    i32 fun = GetFun();
 
    if(fun & lfun_final) SetFun(fun & ~lfun_final);
@@ -226,6 +217,7 @@ i32 P_Color(i32 pclass) {
    return CR_WHITE;
 }
 
+alloc_aut(0) stkcall
 struct player *P_PtrFind(i32 tid, i32 ptr) {
    i32 pnum = PtrPlayerNumber(tid, ptr);
    if(pnum >= 0) return &players[pnum];
@@ -334,14 +326,16 @@ script void P_GiveAllEXP(u64 amt) {
 
 /* Static Functions -------------------------------------------------------- */
 
-script static void P_bossWarning(struct player *p) {
+dynam_aut script static
+void P_bossWarning(struct player *p) {
    ACS_Delay(35 * 5);
 
    if(bossspawned)
       p->logB(1, LanguageC(LANG "LOG_BossWarn%s", p->discrim));
 }
 
-script static void P_bossText(struct player *p, i32 boss) {
+dynam_aut script static
+void P_bossText(struct player *p, i32 boss) {
    if(boss == boss_iconofsin && ServCallI(sm_IsRampancy)) {
       return;
    }
@@ -407,7 +401,7 @@ script static void P_bossText(struct player *p, i32 boss) {
    }
 }
 
-script static
+dynam_aut script static
 void P_doIntro(struct player *p) {
    enum {
       _nlines   = 26,
@@ -611,7 +605,7 @@ static void P_Aug_PTick(struct player *p) {
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr(OBJ "Markiplier")
+alloc_aut(0) script_str ext("ACS") addr(OBJ "Markiplier")
 void Sc_MapMarker(i32 tid) {
    enum {ticks = 35 * 2};
 
@@ -619,30 +613,25 @@ void Sc_MapMarker(i32 tid) {
 
    ACS_Delay(5);
 
-   with_player(LocalPlayer) {
-      for(i32 i = 0; i < ticks; i++) {
-         k32 alpha;
+   for(i32 i = 0; i < ticks; i++) {
+      k32 alpha;
 
-         /**/ if(i < 15)         alpha = i / 15.0;
-         else if(i > ticks - 15) alpha = (ticks - i) / 15.0;
-         else                    alpha = 1.0;
+      /**/ if(i < 15)         alpha = i / 15.0;
+      else if(i > ticks - 15) alpha = (ticks - i) / 15.0;
+      else                    alpha = 1.0;
 
-         i32 x = absk(ACS_Sin(i / (k32)ticks / 4.0)) / 4.0 * 800.0;
+      i32 x = fastabsk(ACS_Sin(i / (k32)ticks / 4.0)) / 4.0 * 800.0;
 
-         SetSize(640, 480);
-         PrintTextAX_str(text, s_areaname, CR_WHITE, x,4, 80,0, alpha, ptf_no_utf);
-
-         ACS_Delay(1);
-      }
+      SetSize(640, 480);
+      PrintTextAX_str(text, s_areaname, CR_WHITE, x,4, 80,0, alpha, ptf_no_utf);
+      ACS_Delay(1);
    }
 }
 
-script_str ext("ACS") addr(OBJ "SetAdviceMarker")
-void Sc_SetAdviceMarker(i32 tid) {
-   str text;
-
+alloc_aut(0) stkcall static
+str GetAdviceMarker(i32 tid) {
    if(tid) {
-      text = GetPropS(tid, APROP_NameTag);
+      str text = GetPropS(tid, APROP_NameTag);
 
       ACS_BeginPrint();
       for(i32 i = 0, n = ACS_StrLen(text); i < n; i++) {
@@ -655,23 +644,26 @@ void Sc_SetAdviceMarker(i32 tid) {
             ACS_PrintChar(text[i]);
          }
       }
-      text = ACS_EndStrParam();
+      return ACS_EndStrParam();
    } else {
-      text = snil;
+      return snil;
    }
+}
+
+alloc_aut(0) script_str ext("ACS") addr(OBJ "SetAdviceMarker")
+void Sc_SetAdviceMarker(i32 tid) {
+   str text = GetAdviceMarker(tid);
 
    ACS_Delay(5);
 
-   with_player(LocalPlayer) {
-      p->advice = text;
-      SetFade(fid_advice, 35 * 5, 12);
-   }
+   UnsafeLocalPlayer.advice = text;
+   SetFade(fid_advice, 35 * 5, 12);
 }
 
 script ext("ACS") addr(lsc_drawplayericon)
 void Sc_DrawPlayerIcon(i32 num, i32 x, i32 y) {
    with_player(&players[num]) {
-      k32 a = absk((x - 160) / 90.0);
+      k32 a = fastabsk((x - 160) / 90.0);
            if(a < 0.2) a = 0.2;
       else if(a > 1.0) a = 1.0;
 
@@ -766,7 +758,7 @@ void Sc_KeyToggleAutoGroup(i32 grp) {
    }
 }
 
-script_str type("net") ext("ACS") addr(OBJ "KeyGlare")
+alloc_aut(0) script_str type("net") ext("ACS") addr(OBJ "KeyGlare")
 void Sc_KeyGlare(void) {
    with_player(LocalPlayer) {
       Str(snd, s"player/glare");
@@ -785,7 +777,7 @@ void Sc_KeyGlare(void) {
    }
 }
 
-script_str ext("ACS") addr(OBJ "TimelineInconsistent")
+_Noreturn dynam_aut script_str ext("ACS") addr(OBJ "TimelineInconsistent")
 void Sc_TimelineInconsistent(void) {
    for(;;) {
       for_player() {

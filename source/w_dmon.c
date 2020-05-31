@@ -58,7 +58,9 @@ dmon_t *Dmon(i32 id)
 dmon_t *AllocDmon(void)
 {
    dmon_t *m = &dmonalloc[dmonid];
-   *m = (dmon_t){.active = true, .id = dmonid++};
+   fastmemset(m, 0, sizeof *m);
+   m->active = true;
+   m->id = dmonid++;
    return m;
 }
 

@@ -20,13 +20,10 @@
 /* Static Functions -------------------------------------------------------- */
 
 static void P_CBI_TabArsenal(struct gui_state *g, struct player *p) {
-   extern void P_CBI_TabUpgrades(struct gui_state *g, struct player *p);
-   extern void P_CBI_TabShop    (struct gui_state *g, struct player *p);
-
    char tn[2][20];
    LanguageVC(tn[0], LANG "TAB_UPGRADES");
    LanguageVC(tn[1], LANG "TAB_SHOP");
-   G_Tabs(g, &CBIState(g)->arsetab, tn, countof(tn), 13, 13, 1);
+   G_Tabs(g, &CBIState(g)->arsetab, tn, countof(tn), 0, 0, 1);
 
    switch(CBIState(g)->arsetab) {
    case cbi_tab_arsenal_upgrades: P_CBI_TabUpgrades(g, p); break;
@@ -35,15 +32,11 @@ static void P_CBI_TabArsenal(struct gui_state *g, struct player *p) {
 }
 
 static void P_CBI_TabStat(struct gui_state *g, struct player *p) {
-   extern void P_CBI_TabCBI       (struct gui_state *g, struct player *p);
-   extern void P_CBI_TabStatus    (struct gui_state *g, struct player *p);
-   extern void P_CBI_TabStatistics(struct gui_state *g, struct player *p);
-
    char tn[3][20];
    LanguageVC(tn[0], LANG "TAB_ATTRIBUTES");
    LanguageVC(tn[1], LANG "TAB_CBI");
    LanguageVC(tn[2], LANG "TAB_STATISTICS");
-   G_Tabs(g, &CBIState(g)->stattab, tn, countof(tn), 13, 13, 1);
+   G_Tabs(g, &CBIState(g)->stattab, tn, countof(tn), 0, 0, 1);
 
    switch(CBIState(g)->stattab) {
    case cbi_tab_stat_attr:       P_CBI_TabStatus    (g, p); break;
@@ -53,15 +46,11 @@ static void P_CBI_TabStat(struct gui_state *g, struct player *p) {
 }
 
 static void P_CBI_TabInfo(struct gui_state *g, struct player *p) {
-   extern void P_CBI_TabBIP       (struct gui_state *g, struct player *p);
-   extern void P_CBI_TabLog       (struct gui_state *g, struct player *p);
-   extern void P_CBI_TabNotes     (struct gui_state *g, struct player *p);
-
    char tn[3][20];
    LanguageVC(tn[0], LANG "TAB_BIP");
    LanguageVC(tn[1], LANG "TAB_LOG");
    LanguageVC(tn[2], LANG "TAB_NOTES");
-   G_Tabs(g, &CBIState(g)->infotab, tn, countof(tn), 13, 13, 1);
+   G_Tabs(g, &CBIState(g)->infotab, tn, countof(tn), 0, 0, 1);
 
    switch(CBIState(g)->infotab) {
    case cbi_tab_info_bip:   P_CBI_TabBIP  (g, p); break;
@@ -73,9 +62,6 @@ static void P_CBI_TabInfo(struct gui_state *g, struct player *p) {
 /* Extern Functions -------------------------------------------------------- */
 
 script void P_CBI_PTick(struct player *p) {
-   extern void P_CBI_TabItems   (struct gui_state *g, struct player *p);
-   extern void P_CBI_TabSettings(struct gui_state *g, struct player *p);
-
    struct gui_state *g = &p->cbi.guistate;
 
    p->cbi.theme = p->getCVarI(sc_gui_theme);
@@ -105,12 +91,9 @@ script void P_CBI_PTick(struct player *p) {
 
    if(!p->dlg.active) G_UpdateState(g, p);
 
-   ACS_BeginPrint();
-   PrintChrSt(g->gfxprefix);
-   PrintChrSt("Background");
-   PrintSpriteA(ACS_EndStrParam(), 0,1, 0,1, 0.7);
+   G_WinBeg(g, &CBIState(g)->mainwin);
 
-   if(G_Button(g, .x = 296, 13, Pre(btnexit))) P_GUI_Use(p);
+   if(G_Button(g, .x = 283, 0, Pre(btnexit))) P_GUI_Use(p);
 
    char tn[5][20];
    LanguageCV(tn[0], LANG "TAB_ARSENAL_%s", p->discrim);
@@ -118,7 +101,7 @@ script void P_CBI_PTick(struct player *p) {
    LanguageVC(tn[2], LANG "TAB_INVENTORY");
    LanguageVC(tn[3], LANG "TAB_INFO");
    LanguageVC(tn[4], LANG "TAB_SETTINGS");
-   G_Tabs(g, &CBIState(g)->maintab, tn, countof(tn), 13, 13, 0);
+   G_Tabs(g, &CBIState(g)->maintab, tn, countof(tn), 0, 0, 0);
 
    switch(CBIState(g)->maintab) {
    case cbi_tab_arsenal:  P_CBI_TabArsenal (g, p); break;
@@ -127,6 +110,8 @@ script void P_CBI_PTick(struct player *p) {
    case cbi_tab_info:     P_CBI_TabInfo    (g, p); break;
    case cbi_tab_settings: P_CBI_TabSettings(g, p); break;
    }
+
+   G_WinEnd(g, &CBIState(g)->mainwin);
 
    G_End(g, p->getCVarI(sc_gui_cursor));
 }

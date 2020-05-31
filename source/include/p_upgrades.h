@@ -35,12 +35,14 @@
 #define RequiresButDontHave_RDI RequiresButDontHave(UR_RDI, cbiupgr[cupg_rdistinter])
 #define RequiresButDontHave_RA  RequiresButDontHave(UR_RA,  get_bit(p->upgrades[UPGR_ReactArmor].flags, _ug_owned))
 
-/* Extern Functions -------------------------------------------------------- */
+extern struct upgradeinfo upgrinfo[UPGR_MAX];
 
 /* These are included here so the compiler may check the function signatures. */
 #define Fn_F(n, cb) void Upgr_##n##_##cb(struct player *p, struct upgrade *upgr);
 #define Fn_S(n, cb) script  void Upgr_##n##_##cb(struct player *p, struct upgrade *upgr);
 #include "u_func.h"
+
+void Upgr_MInit(void);
 
 script void P_Upg_PInit(struct player *p);
 void P_Upg_PQuit(struct player *p);

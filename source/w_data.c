@@ -15,10 +15,6 @@
 #include "p_player.h"
 #include "w_world.h"
 
-/* Extern Objects ---------------------------------------------------------- */
-
-extern bool dorain;
-
 /* Scripts ----------------------------------------------------------------- */
 
 script ext("ACS") addr(lsc_pdata)

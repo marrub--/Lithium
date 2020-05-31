@@ -41,7 +41,7 @@ script void P_Ren_Step(struct player *p) {
 
    if(p->nextstep) {p->nextstep--; return;}
 
-   k32 dstmul = absk(p->getVel()) / 24.0;
+   k32 dstmul = fastabsk(p->getVel()) / 24.0;
    k32 vol    = p->getCVarK(sc_player_footstepvol) * min(dstmul, 1);
 
    str floor = ACS_GetActorFloorTexture(0);

@@ -12,7 +12,7 @@
  */
 
 #if defined(Ret)
-   #define Case(n) Ret(n) case UPGR_##n:;
+   #define Case(n) Ret(n) case UPGR_##n:
    #define A(n) Fn_F(n, Activate)
    #define D(n) Fn_F(n, Deactivate)
    #define U(n) Fn_S(n, Update)

@@ -107,6 +107,9 @@ static void Container(struct gui_state *g, struct container *cont, i32 sx, i32 s
    Str(back_arms_l, s":UI:InvBackLowerArms");
    Str(back_body,   s":UI:InvBackBody");
 
+   sx += g->ox;
+   sy += g->oy;
+
    struct player *p = cont->user;
 
    str bg;
@@ -205,7 +208,9 @@ void P_Item_Init(struct item *item, struct itemdata const *data)
    ListCtor(&item->link, item);
 
    if(data) item->data = *data;
-   else     Log("invalid item, developer is an idiot");
+   #ifndef NDEBUG
+   else     Log("%s ERROR: invalid item");
+   #endif
 
    if(!item->Destroy) item->Destroy = P_Item_Destroy;
    if(!item->Place  ) item->Place   = P_Item_Place;
@@ -352,37 +357,37 @@ void P_Inv_PTick(struct player *p)
 void P_CBI_TabItems(struct gui_state *g, struct player *p)
 {
    static i32 const x[] = {
-      [_inv_backpack]    = 155+8*-14,
-      [_inv_arm_upper_l] = 155+8*  1,
-      [_inv_arm_upper_r] = 155+8*  8,
-      [_inv_arm_lower_l] = 155+8*  0,
-      [_inv_arm_lower_r] = 155+8*  9,
-      [_inv_belt]        = 155+8*  3,
-      [_inv_leg_l]       = 155+8*  1,
-      [_inv_leg_r]       = 155+8*  8,
-      [_inv_torso]       = 155+8*  3,
-      [_inv_legs]        = 155+8*  4,
+      [_inv_backpack]    = 142+8*-14,
+      [_inv_arm_upper_l] = 142+8*  1,
+      [_inv_arm_upper_r] = 142+8*  8,
+      [_inv_arm_lower_l] = 142+8*  0,
+      [_inv_arm_lower_r] = 142+8*  9,
+      [_inv_belt]        = 142+8*  3,
+      [_inv_leg_l]       = 142+8*  1,
+      [_inv_leg_r]       = 142+8*  8,
+      [_inv_torso]       = 142+8*  3,
+      [_inv_legs]        = 142+8*  4,
    };
 
    static i32 const y[] = {
-      [_inv_backpack]    = 80+8*-1,
-      [_inv_arm_upper_l] = 80+8*-2,
-      [_inv_arm_upper_r] = 80+8*-2,
-      [_inv_arm_lower_l] = 80+8* 3,
-      [_inv_arm_lower_r] = 80+8* 3,
-      [_inv_belt]        = 80+8* 5,
-      [_inv_leg_l]       = 80+8* 7,
-      [_inv_leg_r]       = 80+8* 7,
-      [_inv_torso]       = 80+8* 0,
-      [_inv_legs]        = 80+8*10,
+      [_inv_backpack]    = 67+8*-1,
+      [_inv_arm_upper_l] = 67+8*-2,
+      [_inv_arm_upper_r] = 67+8*-2,
+      [_inv_arm_lower_l] = 67+8* 3,
+      [_inv_arm_lower_r] = 67+8* 3,
+      [_inv_belt]        = 67+8* 5,
+      [_inv_leg_l]       = 67+8* 7,
+      [_inv_leg_r]       = 67+8* 7,
+      [_inv_torso]       = 67+8* 0,
+      [_inv_legs]        = 67+8*10,
    };
 
    Str(inv_hints, sLANG "INV_HINTS");
 
-   PrintSpriteA(sp_UI_Body, 151,1, 40,1, 0.6);
-   PrintSpriteA(sp_UI_Bag,  47 ,1, 44,1, 0.6);
+   PrintSpriteA(sp_UI_Body, g->ox+138,1, g->oy+27,1, 0.6);
+   PrintSpriteA(sp_UI_Bag,  g->ox+34 ,1, g->oy+31,1, 0.6);
 
-   PrintText_str(L(inv_hints), s_smallfnt, g->defcr, 15,1, 225,2);
+   PrintText_str(L(inv_hints), s_smallfnt, g->defcr, g->ox+2,1, g->oy+212,2);
 
    for(i32 i = 0; i < _inv_num; i++)
       Container(g, &p->inv[i], x[i], y[i]);
@@ -393,13 +398,13 @@ void P_CBI_TabItems(struct gui_state *g, struct player *p)
       i32 x_ = x[0];
       i32 y_ = y[0] + 60;
 
-      PrintText_str(Language(LANG "ITEM_TAG_%S", sel->name), s_smallfnt, g->defcr, x_,1, y_,1);
+      PrintText_str(Language(LANG "ITEM_TAG_%S", sel->name), s_smallfnt, g->defcr, g->ox+x_,1, g->oy+y_,1);
       y_ += 8;
 
       if(g->clickrgt && !g->old.clickrgt)
          p->movitem = !p->movitem;
 
-      PrintText_str(Language(LANG "ITEM_SHORT_%S", sel->name), s_smallfnt, g->defcr, x_,1, y_,1);
+      PrintText_str(Language(LANG "ITEM_SHORT_%S", sel->name), s_smallfnt, g->defcr, g->ox+x_,1, g->oy+y_,1);
       y_ += 16;
 
       if(G_Button(g, LC(LANG "MOVE"), x_, y_, .color = "n", Pre(btnclear)))
@@ -420,7 +425,7 @@ void P_CBI_TabItems(struct gui_state *g, struct player *p)
 
       if(sel->scr) {
          PrintTextFmt("(%s\Cnscr\C-)", scoresep(sel->scr));
-         PrintText(s_smallfnt, g->defcr, x_+18,1, y_,1);
+         PrintText(s_smallfnt, g->defcr, g->ox+x_+18,1, g->oy+y_,1);
       }
 
       if(G_Button(g, sel->scr ? LC(LANG "SELL") : LC(LANG "DISCARD"), x_, y_, .color = "g", .fill = {&CBIState(g)->itemfill, 26}, Pre(btnclear))) {

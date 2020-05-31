@@ -157,8 +157,7 @@ void G_ScrBeg_Imp(struct gui_state *g, u32 id, struct gui_arg_scr const *a) {
    G_Clip(g, x, ory, a->w, realh, a->ww);
 }
 
-void G_ScrEnd(struct gui_state *g, struct gui_scr *scr)
-{
+void G_ScrEnd(struct gui_state *g, struct gui_scr *scr) {
    /* reset offsets */
    g->ox -= scr->ox;
    g->oy -= scr->oy;
@@ -167,8 +166,7 @@ void G_ScrEnd(struct gui_state *g, struct gui_scr *scr)
    G_ClipRelease(g);
 }
 
-bool G_ScrOcc(struct gui_state *g, struct gui_scr const *scr, i32 y, i32 h)
-{
+bool G_ScrOcc(struct gui_state *g, struct gui_scr const *scr, i32 y, i32 h) {
    return y > scr->occludeE || (h && (y + h) - scr->occludeS < 0);
 }
 

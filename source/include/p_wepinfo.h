@@ -63,6 +63,9 @@ struct weapondata {
 };
 
 extern struct weaponinfo const weaponinfo[weapon_max];
+
+void Wep_GInit(void);
+
 cstr P_Wep_GetPickup(i32 n);
 
 #endif

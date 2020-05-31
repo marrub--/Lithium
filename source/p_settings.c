@@ -385,7 +385,7 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p) {
    for(i32 i = 0; i < countof(settings); i++)
       LanguageVC(tn[i], settings[i].nam);
 
-   i32 yp = G_Tabs(g, &CBIState(g)->settingstab, tn, countof(tn), 13, 13, 1);
+   i32 yp = G_Tabs(g, &CBIState(g)->settingstab, tn, countof(tn), 0, 0, 1);
    yp *= gui_p.btntab.h;
 
    struct setting const *set = settings[CBIState(g)->settingstab].set;
@@ -395,7 +395,7 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p) {
       if(S_isEnabled(&set[i], p))
          set_num++;
 
-   G_ScrBeg(g, &CBIState(g)->settingscr, 15, 30 + yp, _rght, 192 - yp,
+   G_ScrBeg(g, &CBIState(g)->settingscr, 2, 17 + yp, _rght, 192 - yp,
             set_num * 10);
 
    struct set_parm sp = {p, g, 0, 0};

@@ -14,10 +14,6 @@
 #include "u_common.h"
 #include "w_world.h"
 
-/* Extern Objects ---------------------------------------------------------- */
-
-extern struct upgradeinfo upgrinfo[UPGR_MAX];
-
 /* Static Functions -------------------------------------------------------- */
 
 static bool UpgrCanBuy(struct player *p, struct shopdef const *, void *upgr) {
@@ -86,7 +82,11 @@ script void P_Upg_PInit(struct player *p) {
    for_upgrade(upgr) {
       upgr->info = &upgrinfo[_i];
 
-      if(upgr->info->cost == 0 || get_bit(dbgflag, dbgf_upgr))
+      if(upgr->info->cost == 0
+         #ifndef NDEBUG
+         || get_bit(dbgflags, dbgf_upgr)
+         #endif
+         )
          P_Upg_Buy(p, upgr, true, true);
    }
 

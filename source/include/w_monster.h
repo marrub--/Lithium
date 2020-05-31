@@ -92,11 +92,14 @@ struct dmon {
 /* address space, and then I'd have to do a bunch of rewriting again */
 typedef struct dmon dmon_t;
 
+void DmonInit();
+
 script dmon_t *DmonPtr(i32 tid, i32 ptr);
 dmon_t *DmonSelf(void);
 dmon_t *Dmon(i32 id);
 dmon_t *AllocDmon(void);
 
+void PrintMonsterInfo(void);
 void PrintDmonAllocSize(struct player *p);
 
 #endif

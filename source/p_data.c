@@ -54,18 +54,18 @@ static void SetupAttributes(struct player *p)
 static void SetPClass(struct player *p)
 {
    __with(str cl = p->pcstr = ACS_GetActorClass(0);) {
-           if(cl == so_MarinePlayer   ) p->pclass = pcl_marine;
+      /**/ if(cl == so_MarinePlayer   ) p->pclass = pcl_marine;
       else if(cl == so_CyberMagePlayer) p->pclass = pcl_cybermage;
       else if(cl == so_InformantPlayer) p->pclass = pcl_informant;
       else if(cl == so_WandererPlayer ) p->pclass = pcl_wanderer;
       else if(cl == so_AssassinPlayer ) p->pclass = pcl_assassin;
       else if(cl == so_DarkLordPlayer ) p->pclass = pcl_darklord;
       else if(cl == so_ThothPlayer    ) p->pclass = pcl_thoth;
-      else for(;;)
-      {
+      #ifndef NDEBUG
+      else for(;;) {
          Log("Invalid player class detected, everything is going to explode!");
-         ACS_Delay(1);
       }
+      #endif
    }
 
    p->discrim = P_Discrim(p->pclass);
@@ -171,59 +171,45 @@ void P_Dat_PTickPre(struct player *p)
    }
 }
 
-script
-static void LevelUp(struct player *p, u32 *attr)
-{
+alloc_aut(0) script static
+void LevelUp(struct player *p, u32 *attr, char **attrptrs) {
    u32 level = p->attr.level;
 
-   for(i32 i = 0; i < at_max; i++) p->attr.attrs[i] += attr[i];
-
-   for(i32 i = 0; i < 35 * 5; i++)
-   {
-      if(level != p->attr.level) return; /* a new levelup started, so exit */
-
-      for(i32 j = 0; j < at_max; j++)
-         if(i > 35*2 / (k32)at_max * j)
-      {
-         char *sp = p->attr.lvupstr;
-
-         sp += sprintf(sp, "LEVEL %u", p->attr.level);
-         if(p->attr.points) sprintf(sp, " (%u points)", p->attr.points);
-         *sp++ = '\n';
-
-         for(i32 k = 0, l = 0; k <= j; k++, l++)
-         {
-            /* skip over any +0 attributes */
-            while(l < at_max && !attr[l]) l++;
-            if(l >= at_max) break;
-
-            sp += sprintf(sp, "%.3s +%u (%u)\n", p->attr.names[l], attr[l], p->attr.attrs[l]);
-         }
+   for(i32 i = 0; i < 35 * 5; i++) {
+      if(level != p->attr.level) {
+         /* a new levelup started, so exit */
+         goto done;
       }
+
+      char **ptr = &attrptrs[i / (35 * 5 / at_max)];
+      while(!*ptr) ptr++;
+      p->attr.lvupstrn = *ptr - p->attr.lvupstr;
 
       ACS_Delay(1);
    }
 
    p->attr.lvupstr[0] = '\0';
+done:
    Dalloc(attr);
+   Dalloc(attrptrs);
 }
 
-void P_Lv_GiveEXP(struct player *p, u64 amt)
-{
+void P_Lv_GiveEXP(struct player *p, u64 amt) {
    struct player_attributes *a = &p->attr;
 
    u32 *attr = Malloc(sizeof(u32) * at_max, _tag_huds);
    i32 levelup = 0;
 
-   while(a->exp + amt >= a->expnext)
-   {
+   while(a->exp + amt >= a->expnext) {
       a->level++;
       a->expprev = a->expnext;
-      a->expnext = 500 + (a->level * powlk(1.385, a->level * 0.2) * 340);
+      a->expnext = 500 + a->level * powlk(1.385, a->level * 0.2) * 340;
 
-      __with(i32 pts = 7;) switch(p->getCVarI(sc_player_lvsys))
-      {
-      case atsys_manual: a->points += 7; break;
+      i32 pts = 7;
+      switch(p->getCVarI(sc_player_lvsys)) {
+      case atsys_manual:
+         a->points += 7;
+         break;
       case atsys_hybrid:
          a->points += 2;
          pts       -= 2;
@@ -234,7 +220,31 @@ void P_Lv_GiveEXP(struct player *p, u64 amt)
       }
    }
 
-   if(levelup) LevelUp(p, attr);
+   if(levelup) {
+      char *sp = a->lvupstr;
+      char **attrptrs = Malloc(sizeof(char *) * at_max, _tag_huds);
+
+      sp += sprintf(sp, "LEVEL %u", a->level);
+
+      if(a->points) {
+         sp += sprintf(sp, " (%u points)", a->points);
+      }
+
+      *sp++ = '\n';
+
+      for(i32 i = 0; i < at_max; i++) {
+         a->attrs[i] += attr[i];
+         if(attr[i]) {
+            sp += sprintf(sp, "%.3s +%u (%u)\n",
+                          a->names[i], attr[i], a->attrs[i]);
+            attrptrs[i] = sp;
+         }
+      }
+
+      LevelUp(p, attr, attrptrs);
+   } else {
+      Dalloc(attr);
+   }
 
    a->exp += amt;
 }
@@ -279,7 +289,9 @@ script void P_Init(struct player *p) {
    ACS_SpawnForced(so_CameraHax, 0, 0, 0, p->cameratid  = ACS_UniqueTID());
    ACS_SpawnForced(so_CameraHax, 0, 0, 0, p->weathertid = ACS_UniqueTID());
 
-   if(get_bit(dbgflag, dbgf_score)) p->score = 0xFFFFFFFFFFFFFFFFll;
+   #ifndef NDEBUG
+   if(get_bit(dbgflags, dbgf_score)) p->score = 0xFFFFFFFFFFFFFFFFll;
+   #endif
 
    /* Any linked lists on the player need to be initialized here. */
    ListDtor(&p->hudstrlist, true);
@@ -327,13 +339,17 @@ script void P_Init(struct player *p) {
    if(!p->wasinit) {
       p->logB(1, Version " :: Compiled %s", __DATE__);
 
+      #ifndef NDEBUG
       if(dbglevel) {
          p->logH(1, "player is %u bytes long!", sizeof *p * 4);
          p->logH(1, "snil is \"%S\"", snil);
          PrintDmonAllocSize(p);
       } else {
+      #endif
          p->logH(1, LC(LANG "LOG_StartGame"), sc_k_opencbi);
+      #ifndef NDEBUG
       }
+      #endif
 
       if(GetFun() & lfun_division) {
          Str(divsigil, sOBJ "DivisionSigil");
@@ -352,13 +368,15 @@ script void P_Init(struct player *p) {
       p->health = minhealth;
    }
 
-   if(get_bit(dbgflag, dbgf_items)) {
+   #ifndef NDEBUG
+   if(get_bit(dbgflags, dbgf_items)) {
       for(i32 i = weapon_min; i < weapon_max; i++) {
          struct weaponinfo const *info = &weaponinfo[i];
          if(info->classname != snil && info->pclass & p->pclass && !get_bit(info->flags, wf_magic))
             InvGive(info->classname, 1);
       }
    }
+   #endif
 }
 
 void P_Dat_PTickPst(struct player *p)

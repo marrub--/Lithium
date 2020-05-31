@@ -37,7 +37,7 @@ void Sc_Rend(bool hit, i32 set)
    }
 }
 
-script_str ext("ACS") addr(OBJ "Feuer")
+dynam_aut script_str ext("ACS") addr(OBJ "Feuer")
 void Sc_Feuer(bool left, bool fire)
 {
    with_player(LocalPlayer)
@@ -80,7 +80,7 @@ void Sc_Feuer(bool left, bool fire)
    }
 }
 
-script_str ext("ACS") addr(OBJ "Cercle")
+dynam_aut script_str ext("ACS") addr(OBJ "Cercle")
 void Sc_Cercle(void)
 {
    with_player(LocalPlayer)
@@ -163,7 +163,7 @@ void Sc_Cercle(void)
    }
 }
 
-script_str ext("ACS") addr(OBJ "MagicSelect")
+dynam_aut script_str ext("ACS") addr(OBJ "MagicSelect")
 void Sc_MagicSelect(i32 num)
 {
    with_player(LocalPlayer)

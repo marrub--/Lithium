@@ -15,6 +15,7 @@
 
 /* Static Functions -------------------------------------------------------- */
 
+#ifndef NDEBUG
 script
 static void Disassemble(struct dlg_def const *def) {
    ACS_BeginLog();
@@ -34,7 +35,7 @@ static void Disassemble(struct dlg_def const *def) {
 script
 static void DumpCode(struct dlg_def *def) {
    ACS_BeginLog();
-   __nprintf("Dumping code...\n");
+   PrintChrSt("Dumping code...\n");
    Dbg_PrintMemC(def->codeV, def->codeC);
    ACS_EndLog();
 }
@@ -63,9 +64,10 @@ static void PrintDbg() {
    }
 
    ACS_BeginLog();
-   __nprintf("Done.");
+   PrintChrSt("Done.");
    ACS_EndLog();
 }
+#endif
 
 static void FinishDef(struct compiler *d)
 {
@@ -142,7 +144,7 @@ u32 Dlg_WriteCode(struct dlg_def const *def, u32 c, u32 i)
    __nprintf("%02X ", c);
 
    if(!inf->name[0]) {
-      __nprintf("       invalid opcode");
+      PrintChrSt("       invalid opcode");
       return i;
    }
 
@@ -250,7 +252,9 @@ void Dlg_MInit(void)
       fclose(d.tb.fp);
    }
 
+   #ifndef NDEBUG
    if(get_bit(dbglevel, log_dlg)) PrintDbg();
+   #endif
 }
 
 /* EOF */

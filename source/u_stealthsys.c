@@ -26,7 +26,7 @@ void Upgr_StealthSys_Deactivate(struct player *p, struct upgrade *upgr)
 script
 void Upgr_StealthSys_Update(struct player *p, struct upgrade *upgr)
 {
-   k32 vel = absk(p->getVel()) / 10.0;
+   k32 vel = fastabsk(p->getVel()) / 10.0;
    p->alpha = UData.mulvel = lerpk(UData.mulvel, vel, 0.02);
 
    i32 time = UData.mulvel * 20;

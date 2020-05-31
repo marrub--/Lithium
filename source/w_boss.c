@@ -86,13 +86,17 @@ static void TriggerBoss(void)
    if(!boss) return;
 
    if(boss->dead) {
-      Log("%s: %s is dead, invalid num", __func__, boss->name);
+      #ifndef NDEBUG
+      Log("%s ERROR: %s is dead, invalid num", __func__, boss->name);
+      #endif
       boss = nil;
       return;
    }
 
    if(boss->phase > boss->phasenum) {
-      Log("%s: invalid boss phase", __func__);
+      #ifndef NDEBUG
+      Log("%s ERROR: invalid boss phase", __func__);
+      #endif
       boss = nil;
       return;
    }
@@ -159,7 +163,7 @@ void Sc_PhantomSound(void)
    ACS_AmbientSound(ss_enemies_phantom_spawned, 127);
 }
 
-script_str ext("ACS") addr(OBJ "PhantomTeleport")
+alloc_aut(0) script_str ext("ACS") addr(OBJ "PhantomTeleport")
 void Sc_PhantomTeleport(void)
 {
    k32 ang = ACS_GetActorAngle(0);
@@ -172,7 +176,7 @@ void Sc_PhantomTeleport(void)
    }
 }
 
-script_str ext("ACS") addr(OBJ "PhantomDeath")
+dynam_aut script_str ext("ACS") addr(OBJ "PhantomDeath")
 void Sc_PhantomDeath(void)
 {
    ACS_StopSound(0, 7);

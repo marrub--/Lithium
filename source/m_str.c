@@ -32,6 +32,7 @@
 #define X(n, s) str const n = Spf s;
 #include "m_stab.h"
 
+alloc_aut(0) stkcall
 str l_strupper(str in)
 {
    ACS_BeginPrint();
@@ -39,22 +40,26 @@ str l_strupper(str in)
    return ACS_EndStrParam();
 }
 
+alloc_aut(0) stkcall
 u32 l_strhash(astr s)
 {
    StrHashImpl();
 }
 
+alloc_aut(0) stkcall
 u32 lstrhash(cstr s)
 {
    StrHashImpl();
 }
 
+alloc_aut(0) stkcall
 char *lstrcpy_str(char *dest, astr src)
 {
    for(char *i = dest; (*i = *src); ++i, ++src);
    return dest;
 }
 
+alloc_aut(0) stkcall
 char *lstrcpy2(char *out, cstr s1, cstr s2)
 {
    char *p = out;
@@ -64,6 +69,7 @@ char *lstrcpy2(char *out, cstr s1, cstr s2)
    return out;
 }
 
+alloc_aut(0) stkcall
 char *lstrcpy3(char *out, cstr s1, cstr s2, cstr s3)
 {
    char *p = out;
@@ -74,6 +80,7 @@ char *lstrcpy3(char *out, cstr s1, cstr s2, cstr s3)
    return out;
 }
 
+alloc_aut(0) stkcall
 i32 lstrcmp_str(cstr s1, astr s2)
 {
    i32 res;
@@ -84,6 +91,7 @@ i32 lstrcmp_str(cstr s1, astr s2)
    return res;
 }
 
+alloc_aut(0) stkcall
 i32 faststrcmp(cstr s1, cstr s2)
 {
    if(s1 == s2) return 0;
@@ -96,6 +104,7 @@ i32 faststrcmp(cstr s1, cstr s2)
    return res;
 }
 
+alloc_aut(0) stkcall
 i32 faststrcasecmp(cstr s1, cstr s2)
 {
    if(s1 == s2) return 0;
@@ -108,6 +117,7 @@ i32 faststrcasecmp(cstr s1, cstr s2)
    return res;
 }
 
+alloc_aut(0) stkcall
 cstr scoresep(i96 num) {
    noinit static char out[48];
 
@@ -136,11 +146,12 @@ cstr scoresep(i96 num) {
    return outp;
 }
 
+alloc_aut(0) stkcall
 cstr alientext(i32 num) {
    noinit static char out[80];
 
    if(!num) {
-      strcpy(out, u8"");
+      fastmemmove(out, u8"", sizeof u8"");
       return out;
    }
 
@@ -249,10 +260,12 @@ noinit static char tcbuf[4096];
    \
    return tcbuf;
 
+alloc_aut(0) stkcall
 cstr RemoveTextColors_str(astr s, i32 size) {
    RemoveTextColorsImpl();
 }
 
+alloc_aut(0) stkcall
 cstr RemoveTextColors(cstr s, i32 size) {
    RemoveTextColorsImpl();
 }

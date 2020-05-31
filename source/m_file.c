@@ -44,15 +44,16 @@ struct netfile {
 static i32 NetClose(void *nfdata) {
    struct netfile *nf = nfdata;
 
+   #ifndef NDEBUG
    /* If debugging, print out information about the buffer being written. */
-   if(get_bit(dbgflag, dbgf_save))
-   {
+   if(get_bit(dbglevel, log_save)) {
       ACS_BeginLog();
       __nprintf("NetClose: Writing netfile \"%S\" (%zub)\nData follows\n",
                 nf->pcvar, nf->pos);
       Dbg_PrintMem(nf->mem, nf->pos);
       ACS_EndLog();
    }
+   #endif
 
    /* Base64 encode the buffer. */
    size_t outsize;
@@ -199,14 +200,16 @@ FILE *NFOpen(i32 pnum, str pcvar, char rw) {
 
          Dalloc(input);
 
+         #ifndef NDEBUG
          /* If debugging, print out information about the buffer being read. */
-         if(get_bit(dbgflag, dbgf_save)) {
+         if(get_bit(dbglevel, log_save)) {
             ACS_BeginLog();
             __nprintf("NFOpen: Opening memfile \"%S\" (%zub)\nData follows\n",
                       pcvar, size);
             Dbg_PrintMem(data, size);
             ACS_EndLog();
          }
+         #endif
 
          if(data) {
             struct memfile *mem = Salloc(struct memfile, _tag_file);

@@ -18,7 +18,7 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-script
+dynam_aut script
 void P_Scr_Payout(struct player *p) {
    Str(sp_resultframe,        s":UI:ResultFrame");
    Str(ss_player_counter,     s"player/counter");

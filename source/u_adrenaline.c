@@ -16,36 +16,38 @@
 #define UData p->upgrdata.adrenaline
 #define CHARGE_MAX (35 * 30)
 
+/* Static Functions -------------------------------------------------------- */
+
+dynam_aut script static
+void DoAdrenaline(struct player *p, struct upgrade *upgr) {
+   UData.charge = UData.readied = 0;
+
+   p->logH(4, LC(LANG "LOG_AdrenalineUsed"));
+   StartSound(ss_player_adren_inj, lch_body2, CHANF_NOPAUSE|CHANF_MAYBE_LOCAL|CHANF_UI, 1.0, ATTN_STATIC);
+   FadeFlash(255, 255, 255, 0.4, 0.6);
+   FreezeTime(true);
+
+   ACS_Delay(44);
+
+   UnfreezeTime(true);
+}
+
 /* Extern Functions -------------------------------------------------------- */
 
 script
 void Upgr_Adrenaline_Update(struct player *p, struct upgrade *upgr)
 {
-   /* Charge */
-   if(UData.charge < CHARGE_MAX)
+   if(UData.charge < CHARGE_MAX) {
+      /* Charge */
       UData.charge++;
-
-   /* Prepare */
-   else if(!UData.readied)
-   {
+   } else if(!UData.readied) {
+      /* Prepare */
       StartSound(ss_player_adren_ready, lch_body2, CHANF_NOPAUSE|CHANF_MAYBE_LOCAL|CHANF_UI, 1.0, ATTN_STATIC);
       p->logH(1, LC(LANG "LOG_AdrenalineReady"));
       UData.readied = true;
-   }
-
-   /* Ready to use */
-   else if(ServCallI(sm_AdrenalineCheck))
-   {
-      UData.charge = UData.readied = 0;
-
-      p->logH(4, LC(LANG "LOG_AdrenalineUsed"));
-      StartSound(ss_player_adren_inj, lch_body2, CHANF_NOPAUSE|CHANF_MAYBE_LOCAL|CHANF_UI, 1.0, ATTN_STATIC);
-      FadeFlash(255, 255, 255, 0.4, 0.6);
-      FreezeTime(true);
-
-      ACS_Delay(44);
-
-      UnfreezeTime(true);
+   } else if(ServCallI(sm_AdrenalineCheck)) {
+      /* Ready to use */
+      DoAdrenaline(p, upgr);
    }
 }
 

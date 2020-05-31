@@ -33,6 +33,7 @@ struct player_attributes {
 
    char names[at_max][3];
    char lvupstr[130];
+   u32 lvupstrn;
 };
 
 #endif

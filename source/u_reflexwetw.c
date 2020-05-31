@@ -19,8 +19,8 @@
 
 /* Static Functions -------------------------------------------------------- */
 
-script
-static void DodgeView(struct player *p)
+alloc_aut(0) script static
+void DodgeView(struct player *p)
 {
    k32 vh = p->viewheight;
 

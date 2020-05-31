@@ -30,7 +30,7 @@ void Upgr_CyberLegs_Deactivate(struct player *p, struct upgrade *upgr)
 script
 void Upgr_CyberLegs_Update(struct player *p, struct upgrade *upgr)
 {
-   k32 absvel = absk(p->old.velz) * 10.0k;
+   k32 absvel = fastabsk(p->old.velz) * 10.0k;
 
    if(p->velz == 0 && absvel > 160)
    {

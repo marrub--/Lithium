@@ -102,11 +102,16 @@
 #define DrawCallK(...) SCallK(so_Draw, __VA_ARGS__)
 #define DrawCallS(...) SCallS(so_Draw, __VA_ARGS__)
 
+#ifndef NDEBUG
 #define Dbg_Stat(...) \
    (get_bit(dbglevel, log_devh) ? Dbg_Stat_Impl(__VA_ARGS__) : (void)0)
 
 #define Dbg_Note(...) \
    (get_bit(dbglevel, log_devh) ? Dbg_Note_Impl(__VA_ARGS__) : (void)0)
+#else
+#define Dbg_Stat(...)
+#define Dbg_Note(...)
+#endif
 
 #define InvGive ACS_GiveInventory
 #define InvMax(arg) ACS_GetMaxInventory(0, arg)
@@ -115,6 +120,7 @@
 
 /* Types ------------------------------------------------------------------- */
 
+#ifndef NDEBUG
 enum {
    log_none,
    log_dev,   /* general debug info */
@@ -126,15 +132,18 @@ enum {
    log_bip,   /* debug info for the BIP */
    log_sys,   /* meta debug info */
    log_sysV,  /* tick info */
+   log_dpl,   /* dynamic stack usage */
+   log_save,  /* save data */
 };
 
 enum {
    dbgf_bip,
+   dbgf_gui,
    dbgf_items,
-   dbgf_save,
    dbgf_score,
    dbgf_upgr,
 };
+#endif
 
 /* Extern Functions -------------------------------------------------------- */
 
@@ -147,18 +156,22 @@ i32  PtrInvNum(i32 tid, str item);
 void PtrInvGive(i32 tid, str item, i32 amount);
 void PtrInvTake(i32 tid, str item, i32 amount);
 void PtrInvSet (i32 tid, str item, i32 amount);
+#ifndef NDEBUG
 void Dbg_Stat_Impl(cstr fmt, ...);
 void Dbg_Note_Impl(cstr fmt, ...);
 void Dbg_PrintMem(void const *data, size_t size);
 void Dbg_PrintMemC(void const *data, size_t size);
 void Log(cstr fmt, ...);
+#endif
 
 /* Extern Objects ---------------------------------------------------------- */
 
+#ifndef NDEBUG
 extern str dbgstat[],  dbgnote[];
 extern i32 dbgstatnum, dbgnotenum;
 
 extern i32 lmvar dbglevel;
-extern i32 lmvar dbgflag;
+extern i32 lmvar dbgflags;
+#endif
 
 #endif

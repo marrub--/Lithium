@@ -96,7 +96,7 @@ fp << <<_end_
 #{TARGET} = --target-engine=ZDoom --target-format=ACSE --func-minimum ScriptI 17000
 #{WARN  } = --warn-all --no-warn-parentheses
 #{LFLAGS} = $#{TARGET} --bc-opt --bc-zdacs-init-delay #{LD_FLAGS}
-#{CFLAGS} = $#{TARGET} $#{WARN} -i$#{HDR} --alloc-Aut 4096 #{CC_FLAGS}
+#{CFLAGS} = $#{TARGET} $#{WARN} -i$#{HDR} --alloc-Aut 8192 #{CC_FLAGS}
 #{MFLAGS} = $#{TARGET} #{MAKELIB_FLAGS}
 #{INITSC} = --bc-zdacs-init-script-name
 

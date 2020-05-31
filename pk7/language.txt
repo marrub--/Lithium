@@ -616,10 +616,13 @@
 "LITH_MAIL_TEMPLATE" = "\cd>>>>>[[[[RELAYING MESSAGE]]]]\n\n\cd> Remote: <\cj%s\cd>\n\cd> Date: \cj%s";
 "LITH_MAIL_INTERNAL" = "<internal>";
 "LITH_MAIL_NOTITLE" = "<title omitted>";
+"LITH_INFO_TITLE_MJamesDefeated" = "the end?";
 "LITH_INFO_REMOT_MJamesDefeated" = "jam0s@g0n0j0t00.1025";
 "LITH_INFO_DESCR_MJamesDefeated" = "\ccI woke in a \cudark place\cc, unsure of my fate; if my life was renewed out of cruel retribution or of a final opportunity.\n\n\ccI wandered this hell, more real and yet more dream-like than I thought possible, seeking any sign of escape; any sign of pity from the monsters that inhabit this place.\n\n\ccNo, the fate of the damned is but this.\n\n\ccI can only guess that my family went to Heaven and that I was left the lone sinner.\n\n\cgThank you for putting this to an end.";
+"LITH_INFO_TITLE_MMakarovDefeated" = "On Manifestations";
 "LITH_INFO_REMOT_MMakarovDefeated" = "mak666v@org.r\\.\\\\\\-";
 "LITH_INFO_DESCR_MMakarovDefeated" = "There aren't many like you who can take such a being down. Maybe I should commend you for that, struggler.\n\nNo, there is no need. What your victories have done is enough.\n\n\cgMaybe I advise you turn back.\n\n\crI am not the strongest of these manifestations.\n\nMaybe you don't need such advice.";
+"LITH_INFO_TITLE_MIsaacDefeated" = "Gift";
 "LITH_INFO_REMOT_MIsaacDefeated" = "isaac@syn.400khz";
 "LITH_INFO_DESCR_MIsaacDefeated" = "\caOne shan't care what he shoots, but one may take care in where he treads.\n\n\ca     And I think that you've treaded\n\cr   a bit too far.\n\n\ca Perhaps just me.\n\ca    Or maybe you agree?\n\n\ca            Here is a gift.\n\n\ca  I won't tell you to use it wisely.";
 "LITH_INFO_SHORT_AetosVi" = "Aetos Vi";
@@ -1674,7 +1677,6 @@
 "LITH_xhair_g" = "Dynamic crosshair green";
 "LITH_xhair_r" = "Dynamic crosshair red";
 "LITH_xhair_style" = "Dynamic crosshair style";
-"LITH_COST" = "Cost:";
 "LITH_EFFECT" = "Effect:";
 "LITH_FREE" = "Free";
 "LITH_CATEGORY" = "Category";
@@ -2748,7 +2750,6 @@
 "LITH_ST_NAME_Theme_7" = "ゴースト";
 "LITH_ST_NAME_Theme_8" = "ウィンドウズXP";
 "LITH_ST_NAME_Theme_9" = "ドンキーコング";
-"LITH_COST" = "価格";
 "LITH_EFFECT" = "効果";
 "LITH_FREE" = "無料";
 "LITH_CATEGORY" = "種類";

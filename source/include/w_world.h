@@ -101,6 +101,7 @@ extern bool cbiupgr[cupg_max];
 extern bool legendoom;
 extern bool drlamonsters;
 extern enum mission_status lmvar mission;
+extern bool dorain;
 
 /* DECORATE data */
 extern i32 a_x, a_y;
@@ -109,6 +110,7 @@ extern i32 a_cur;
 
 /* Extern Functions -------------------------------------------------------- */
 
+void Scr_HInit(void);
 cstr CanonTime(i32 type, u64 time);
 optargs(1) i32 UniqueID(i32 tid);
 void BeginAngles(i32 x, i32 y);
@@ -116,8 +118,10 @@ k32 AddAngle(i32 x, i32 y);
 optargs(1) void FreezeTime(bool players_ok);
 optargs(1) void UnfreezeTime(bool players_ok);
 script void CBI_Install(i32 num);
+script void W_Title(void);
 script void F_Run(struct player *p);
 void F_Load(void);
 void F_Start(cstr which);
+script void W_DoRain();
 
 #endif

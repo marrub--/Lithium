@@ -81,20 +81,22 @@ static void DrawPage(struct gui_state *g, struct player *p, struct page *page) {
 
    struct gui_typ const *typeon = G_TypeOnUpdate(g, &CBIState(g)->biptypeon);
 
-   i32 oy = 0;
+   i32 const gw = 190;
+   i32 const gh = gui_p.scrdef.scrlh * 23;
 
    if(height) {
-      G_ScrBeg(g, &CBIState(g)->bipinfoscr, 100, 40, 200, 180,
-               height * 8 + 20, 184);
-      oy = g->oy - 40;
+      G_ScrBeg(g, &CBIState(g)->bipinfoscr, 97 - gui_p.scrdef.scrlw,
+               27, gw, gh, height * 8 + 20, 184);
    } else {
-      SetClipW(110, 40, 201, 180, 185);
+      G_Clip(g, g->ox+97, g->oy+27, gw, gh, 184);
+      g->ox += 97;
+      g->oy += 27;
    }
 
-   if(image) PrintSpriteA(image, 296,2, 180,2, 0.4);
+   if(image) PrintSpriteA(image, g->ox+186,2, g->oy+140,2, 0.4);
 
    PrintTextChS(GetFullName(page));
-   PrintText(s_lmidfont, CR_ORANGE, 111,1, 45 + oy,1);
+   PrintText(s_lmidfont, CR_ORANGE, g->ox+1,1, g->oy+5,1);
 
    Str(nl_bar, s"\n|");
 
@@ -105,29 +107,36 @@ static void DrawPage(struct gui_state *g, struct player *p, struct page *page) {
       } else { \
          ACS_PrintChar('|'); \
       } \
-      PrintText(s_smallfnt, cr, x,1, y+oy,1)
+      PrintText(s_smallfnt, cr, g->ox+x,1, g->oy+y,1)
 
    /* render an outline if the page has an image */
    if(image) {
       cstr txt = RemoveTextColors_str(typeon->txt, typeon->pos);
       str s = l_strdup(txt);
 
-      DrawText(s, CR_BLACK, 112, 61); DrawText(s, CR_BLACK, 110, 61);
-      DrawText(s, CR_BLACK, 112, 59); DrawText(s, CR_BLACK, 110, 59);
+      DrawText(s, CR_BLACK, 2, 21); DrawText(s, CR_BLACK, 0, 21);
+      DrawText(s, CR_BLACK, 2, 19); DrawText(s, CR_BLACK, 0, 19);
 
-      DrawText(s, CR_BLACK, 111, 59);
-      DrawText(s, CR_BLACK, 111, 61);
+      DrawText(s, CR_BLACK, 1, 19);
+      DrawText(s, CR_BLACK, 1, 21);
 
-      DrawText(s, CR_BLACK, 112, 60);
-      DrawText(s, CR_BLACK, 110, 60);
+      DrawText(s, CR_BLACK, 2, 20);
+      DrawText(s, CR_BLACK, 0, 20);
    }
 
    ACS_BeginPrint();
-   __nprintf("%.*S", typeon->pos, typeon->txt);
-   DrawText(ACS_EndStrParam(), g->defcr, 111, 60);
+   for(i32 i = 0; i < typeon->pos; i++) {
+      ACS_PrintChar(typeon->txt[i]);
+   }
+   DrawText(ACS_EndStrParam(), g->defcr, 1, 20);
 
-   if(height) G_ScrEnd(g, &CBIState(g)->bipinfoscr);
-   else       ClearClip();
+   if(height) {
+      G_ScrEnd(g, &CBIState(g)->bipinfoscr);
+   } else {
+      g->oy -= 27;
+      g->ox -= 97;
+      G_ClipRelease(g);
+   }
 }
 
 static void MainUI(struct gui_state *g, struct player *p) {
@@ -135,16 +144,16 @@ static void MainUI(struct gui_state *g, struct player *p) {
 
    i32 n = 0;
 
-   PrintText_str(L(bip_categs), s_smallfnt, CR_PURPLE, 40,1, 70,1);
+   PrintText_str(L(bip_categs), s_smallfnt, CR_PURPLE, g->ox+27,1, g->oy+57,1);
 
    p->bip.lastcategory = BIPC_MAIN;
 
    #define Categ(name) { \
       cstr s = LanguageC(LANG "BIP_HELP_%s", P_BIP_CategoryToName(name)); \
       PrintTextChS(s); \
-      PrintTextA(s_smallfnt, g->defcr, 105,1, 85+n,1, 0.7); \
+      PrintTextA(s_smallfnt, g->defcr, g->ox+92,1, g->oy+72+n,1, 0.7); \
       s = LanguageC(LANG "BIP_NAME_%s", P_BIP_CategoryToName(name)); \
-      if(G_Button_HId(g, name, s, 45, 85 + n, Pre(btnbipmain))) { \
+      if(G_Button_HId(g, name, s, 32, 72 + n, Pre(btnbipmain))) { \
          p->bip.curcategory = name; \
          p->bip.curpage     = nil; \
       } \
@@ -161,7 +170,7 @@ static void CategoryUI(struct gui_state *g, struct player *p) {
 
    if(categ == BIPC_EXTRA) goto draw;
 
-   G_ScrBeg(g, &CBIState(g)->bipscr, 15, 50, gui_p.btnlist.w, 170, gui_p.btnlist.h * n);
+   G_ScrBeg(g, &CBIState(g)->bipscr, 2, 37, gui_p.btnlist.w, 170, gui_p.btnlist.h * n);
 
    u32 i = 0;
    for_page() {
@@ -210,18 +219,16 @@ i32 SearchPage(struct player *p, struct page *page, cstr query) {
 }
 
 static void SearchUI(struct gui_state *g, struct player *p) {
-   struct gui_txt *st = G_TxtBox(g, &CBIState(g)->bipsearch, 23, 65, p);
+   struct gui_txt *st = G_TxtBox(g, &CBIState(g)->bipsearch, 10, 52, p);
 
    p->bip.lastcategory = BIPC_MAIN;
 
    G_TxtBoxEvt(st) {
       /* That's a lot of numbers... */
-      struct extraname {
+      struct {
          u64 crc;
          u32 num;
-      };
-
-      struct extraname const extranames[] = {
+      } const extranames[] = {
          {0x5F38B6C56F0A6D84L, BIP_EXTRA_Extra1},
          {0x90215131A36573D7L, BIP_EXTRA_Extra2},
          {0xC54EC0A7C6836A5BL, BIP_EXTRA_Extra3},
@@ -259,7 +266,7 @@ static void SearchUI(struct gui_state *g, struct player *p) {
          struct page *page = p->bip.result[i];
          cstr flname = GetFullName(page);
 
-         if(G_Button_HId(g, i, flname, 70, 95 + (i * 10), Pre(btnbipmain))) {
+         if(G_Button_HId(g, i, flname, 57, 82 + (i * 10), Pre(btnbipmain))) {
             p->bip.lastcategory = p->bip.curcategory;
             p->bip.curcategory  = page->info->category;
             SetCurPage(g, p, page);
@@ -276,7 +283,7 @@ static void SearchUI(struct gui_state *g, struct player *p) {
       }
    } else {
       Str(bip_no_results, sLANG "BIP_NO_RESULTS");
-      PrintText_str(L(bip_no_results), s_smallfnt, CR_DARKGREY, 70,0, 95,0);
+      PrintText_str(L(bip_no_results), s_smallfnt, CR_DARKGREY, g->ox+57,0, g->oy+82,0);
    }
 }
 
@@ -298,17 +305,17 @@ void P_CBI_TabBIP(struct gui_state *g, struct player *p) {
    }
 
    if(p->bip.curcategory != BIPC_MAIN) {
-      if(G_Button(g, LC(LANG "BIP_BACK"), 20, 38, false, Pre(btnbipback)))
+      if(G_Button(g, LC(LANG "BIP_BACK"), 7, 25, false, Pre(btnbipback)))
          p->bip.curcategory = p->bip.lastcategory;
    } else {
       Str(bip_header, sLANG "BIP_HEADER");
-      PrintSpriteA(sp_UI_bip, 20,1, 40,1, 0.1);
-      PrintText_str(L(bip_header), s_lmidfont, g->defcr, 35,1, 40,1);
+      PrintSpriteA(sp_UI_bip, g->ox+7,1, g->oy+27,1, 0.1);
+      PrintText_str(L(bip_header), s_lmidfont, g->defcr, g->ox+22,1, g->oy+27,1);
    }
 
    if(max) {
       PrintTextFmt(LC(LANG "BIP_AVAILABLE"), avail, max);
-      PrintText(s_smallfnt, g->defcr, 300,2, 30,1);
+      PrintText(s_smallfnt, g->defcr, g->ox+287,2, g->oy+17,1);
    }
 }
 

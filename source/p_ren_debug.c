@@ -7,6 +7,7 @@
  * ---------------------------------------------------------------------------|
  */
 
+#ifndef NDEBUG
 #include "common.h"
 #include "p_player.h"
 #include "p_hudid.h"
@@ -31,5 +32,6 @@ void P_Ren_Debug(struct player *p) {
       ACS_PrintString(dbgnote[i]);
    PrintTextA(s_smallfnt, CR_WHITE, 10,1, 20,1, 0.2);
 }
+#endif
 
 /* EOF */

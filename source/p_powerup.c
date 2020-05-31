@@ -19,7 +19,7 @@
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr(OBJ "DOGS")
+alloc_aut(0) script_str ext("ACS") addr(OBJ "DOGS")
 void Sc_DOGS(void)
 {
    with_player(LocalPlayer)
@@ -46,7 +46,7 @@ void Sc_DOGS(void)
    }
 }
 
-script_str ext("ACS") addr(OBJ "SteggleEnergy")
+alloc_aut(0) script_str ext("ACS") addr(OBJ "SteggleEnergy")
 void Sc_SteggleEnergy(void)
 {
    with_player(P_PtrFind(0, AAPTR_FRIENDPLAYER))
@@ -88,7 +88,7 @@ void Sc_BarrierBullets(void)
    }
 }
 
-script_str ext("ACS") addr(OBJ "GetSigil")
+dynam_aut script_str ext("ACS") addr(OBJ "GetSigil")
 void Sc_GetSigil(void)
 {
    with_player(LocalPlayer)
@@ -97,7 +97,9 @@ void Sc_GetSigil(void)
 
       p->sgacquired = true;
 
+      #ifndef NDEBUG
       if(dbglevel) return;
+      #endif
 
       FreezeTime();
 

@@ -14,7 +14,7 @@
 #include "u_common.h"
 #include "w_world.h"
 
-cstr upgrcateg[] = {
+static cstr const upgrcateg[] = {
    [UC_Body] = LANG "CAT_BODY",
    [UC_Weap] = LANG "CAT_WEAP",
    [UC_Extr] = LANG "CAT_EXTR",
@@ -22,11 +22,11 @@ cstr upgrcateg[] = {
 };
 
 static void GUIUpgradesList(struct gui_state *g, struct player *p) {
-   if(G_Button(g, .x = 90, 213, Pre(btnprev)))
+   if(G_Button(g, .x = 77, 200, Pre(btnprev)))
       if(CBIState(g)->upgrfilter-- <= 0)
          CBIState(g)->upgrfilter = UC_MAX;
 
-   if(G_Button(g, .x = 90 + gui_p.btnprev.w, 213, Pre(btnnext)))
+   if(G_Button(g, .x = 77 + gui_p.btnprev.w, 200, Pre(btnnext)))
       if(CBIState(g)->upgrfilter++ >= UC_MAX)
          CBIState(g)->upgrfilter = 0;
 
@@ -51,9 +51,9 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p) {
    }
 
    PrintTextFmt(LC(LANG "CAT_FILTER"), filter_name);
-   PrintText(s_smallfnt, g->defcr, 15,1, 215,1);
+   PrintText(s_smallfnt, g->defcr, g->ox+2,1, g->oy+202,1);
 
-   G_ScrBeg(g, &CBIState(g)->upgrscr, 15, 36, gui_p.btnlist.w, 178, gui_p.btnlist.h * numbtns);
+   G_ScrBeg(g, &CBIState(g)->upgrscr, 2, 23, gui_p.btnlist.w, 178, gui_p.btnlist.h * numbtns);
 
    i32 curcategory = -1;
 
@@ -115,7 +115,7 @@ static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct
       PrintChrSt(LC(LANG name)); \
       ACS_PrintChar(' '); \
       PrintChrSt(LC(LANG "REQUIRED")); \
-      PrintText(s_smallfnt, CR_RED, 111,1, 200 + y,2); \
+      PrintText(s_smallfnt, CR_RED, g->ox+98,1, g->oy+187 + y,2); \
       y -= 10; \
    }
 
@@ -138,7 +138,7 @@ static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct
       else
          PrintTextFmt(LC(LANG "SHOP_ACTIVATE_USES"), upgr->info->perf);
 
-      PrintText(s_smallfnt, g->defcr, 111,1, 200 + y,2);
+      PrintText(s_smallfnt, g->defcr, g->ox+98,1, g->oy+187 + y,2);
       y -= 10;
    }
 
@@ -161,7 +161,7 @@ static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct
       else    {cr = 'n'; perc = 100 + perc;}
 
       PrintTextFmt(op, cr, perc);
-      PrintText(s_smallfnt, g->defcr, 111,1, 200 + y,2);
+      PrintText(s_smallfnt, g->defcr, g->ox+98,1, g->oy+187 + y,2);
       y -= 10;
    }
 }
@@ -169,7 +169,7 @@ static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct
 static void GUIUpgradeDescription(struct gui_state *g, struct player *p, struct upgrade *upgr) {
    Str(free, sLANG "FREE");
 
-   SetClipW(111, 30, 190, 170, 184);
+   G_Clip(g, g->ox+98, g->oy+17, 190, 170, 184);
 
    /* Cost */
    cstr mark;
@@ -184,11 +184,11 @@ static void GUIUpgradeDescription(struct gui_state *g, struct player *p, struct 
    if(upgr->info->cost) cost = StrParam("%s%s", scoresep(P_Shop_Cost(p, &upgr->info->shopdef)), mark);
    else                 cost = L(free);
 
-   PrintText_str(cost, s_smallfnt, g->defcr, 111,1, 30,1);
+   PrintText_str(cost, s_smallfnt, g->defcr, g->ox+98,1, g->oy+17,1);
 
    /* Category */
    PrintTextChS(LC(upgrcateg[upgr->info->category]));
-   PrintText(s_smallfnt, g->defcr, 111,1, 40,1);
+   PrintText(s_smallfnt, g->defcr, g->ox+98,1, g->oy+27,1);
 
    /* Effect */
    ifauto(str, effect, LanguageNull(LANG "UPGRADE_EFFEC_%S", upgr->info->name))
@@ -203,33 +203,33 @@ static void GUIUpgradeDescription(struct gui_state *g, struct player *p, struct 
    if(upgr->info->key == UPGR_UNCEUNCE)
       cr = crs[ACS_Timer() / 4 % countof(crs)];
 
-   PrintText(s_smallfnt, cr, 111,1, 50,1);
+   PrintText(s_smallfnt, cr, g->ox+98,1, g->oy+37,1);
 
-   ClearClip();
+   G_ClipRelease(g);
 }
 
 static void GUIUpgradeButtons(struct gui_state *g, struct player *p, struct upgrade *upgr) {
    Str(autogroups, sLANG "AUTOGROUPS");
 
    /* Buy */
-   if(G_Button(g, LC(LANG "BUY"), 111, 205, !P_Shop_CanBuy(p, &upgr->info->shopdef, upgr), .fill = {&CBIState(g)->buyfill, p->getCVarI(sc_gui_buyfiller)}))
+   if(G_Button(g, LC(LANG "BUY"), 98, 192, !P_Shop_CanBuy(p, &upgr->info->shopdef, upgr), .fill = {&CBIState(g)->buyfill, p->getCVarI(sc_gui_buyfiller)}))
       P_Upg_Buy(p, upgr, false);
 
    /* Activate */
-   if(G_Button(g, get_bit(upgr->flags, _ug_active) ? LC(LANG "DEACTIVATE") : LC(LANG "ACTIVATE"), 111 + gui_p.btndef.w + 2, 205, !P_Upg_CanActivate(p, upgr)))
+   if(G_Button(g, get_bit(upgr->flags, _ug_active) ? LC(LANG "DEACTIVATE") : LC(LANG "ACTIVATE"), 98 + gui_p.btndef.w + 2, 192, !P_Upg_CanActivate(p, upgr)))
       P_Upg_Toggle(p, upgr);
 
    /* Groups */
-   PrintText_str(L(autogroups), s_smallfnt, g->defcr, 255,0, 205,0);
+   PrintText_str(L(autogroups), s_smallfnt, g->defcr, g->ox+242,0, g->oy+192,0);
 
    for(i32 i = 0; i < 4; i++) {
       static i32 const crs[] = {CR_BRICK, CR_GREEN, CR_LIGHTBLUE, CR_GOLD};
 
       ACS_BeginPrint();
       ACS_PrintChar('1' + i);
-      PrintText(s_lmidfont, crs[i], 220 + i * 20,2, 215,1);
+      PrintText(s_lmidfont, crs[i], g->ox+207 + i * 20,2, g->oy+202,1);
 
-      if(G_ChkBox_HId(g, i, get_bit(upgr->agroups, i), 221 + i * 20, 211)) {
+      if(G_ChkBox_HId(g, i, get_bit(upgr->agroups, i), 208 + i * 20, 198)) {
          tog_bit(upgr->agroups, i);
          P_Data_Save(p);
       }

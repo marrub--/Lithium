@@ -55,6 +55,7 @@ PCL(gR, pcl_robot)
 
 #define LocalPlayer \
    (ACS_PlayerNumber() >= 0 ? &players[ACS_PlayerNumber()] : (struct player *)nil)
+#define UnsafeLocalPlayer players[ACS_PlayerNumber()]
 #define P_Discount(n) (i96)((n) * p->discount)
 #define P_None(p) (!(p) || !(p)->active)
 #define with_player(ptr) \
@@ -80,12 +81,34 @@ void P_Lv_GiveEXP(struct player *p, u64 amt);
 cstr P_Discrim(i32 pclass);
 i32 P_Color(i32 pclass);
 void P_Dat_PTickPst(struct player *p);
-struct player *P_PtrFind(i32 tid, i32 ptr);
+stkcall struct player *P_PtrFind(i32 tid, i32 ptr);
+script extern void P_Scr_Payout(struct player *p);
+void P_Log_SellWeapon(struct player *p, struct weaponinfo const *info, i96 score);
+void P_Log_Weapon(struct player *p, struct weaponinfo const *info);
+i32 P_Wep_FromName(struct player *p, i32 name);
+
+script extern void P_Wep_PTickPre(struct player *p);
+       extern void P_Dat_PTickPre(struct player *p);
+script extern void P_CBI_PTick   (struct player *p);
+script extern void P_Inv_PTick   (struct player *p);
+script extern void P_Log_PTick   (struct player *p);
+script extern void P_Upg_PTick   (struct player *p);
+script extern void P_Wep_PTick   (struct player *p);
+script extern void P_Upg_PTickPst(struct player *p);
+       extern void P_Ren_PTickPst(struct player *p);
 
 sync void P_TeleportIn(struct player *p);
 sync void P_TeleportOut(struct player *p);
 script void P_TeleportInAsync(struct player *p);
 script void P_TeleportOutAsync(struct player *p);
+
+#ifndef NDEBUG
+void P_Ren_Debug(struct player *p);
+#endif
+void P_Ren_Magic(struct player *p);
+script void P_Ren_Step(struct player *p);
+void P_Ren_View(struct player *p);
+script void P_Ren_Scope(struct player *p);
 
 /* Types ------------------------------------------------------------------- */
 
@@ -245,8 +268,7 @@ struct player
 
    char *notes[16];
 
-   u32  nextstep;
-   bool hadinfrared;
+   u32 nextstep;
 
    bool teleportedout;
    u32  done_intro;

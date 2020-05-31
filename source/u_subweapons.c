@@ -75,8 +75,15 @@ void Upgr_Subweapons_Render(struct player *p, struct upgrade *upgr) {
 
 void Upgr_Subweapons_Enter(struct player *p, struct ugprade *upgr) {
    UData.shots = 2;
-   if(get_bit(dbgflag, dbgf_items)) UData.have = UINT32_MAX;
-   else                             set_bit(UData.have, _subw_gun);
+   #ifndef NDEBUG
+   if(get_bit(dbgflags, dbgf_items)) {
+      UData.have = UINT32_MAX;
+   } else {
+   #endif
+      set_bit(UData.have, _subw_gun);
+   #ifndef NDEBUG
+   }
+   #endif
 }
 
 /* Scripts ----------------------------------------------------------------- */

@@ -78,6 +78,8 @@ static cstr const action_names[] = {
 /* Static Functions -------------------------------------------------------- */
 
 /* utilities */
+#define local alloc_aut(0) stkcall static
+
 #define SignB1(v) get_bit(v,  7)
 #define SignB2(v) get_bit(v, 15)
 
@@ -139,19 +141,19 @@ local void ModSR_V(u32 ua, u32 ub, u32 ur)
 local void ModSR_ZN(u32 v) {ModSR_Z(v); ModSR_N(v);}
 
 /* direct memory access */
-local cstr MemSC_G(u32 p) {return Cps_ExpandNT(memory, p);}
-local str  MemSA_G(u32 p) {return Cps_ExpandNT_str(memory, p);}
-local u32  MemB1_G(u32 p) {return Cps_GetC(memory, p);}
-local u32  MemB2_G(u32 p) {return MemB1_G(p) | (MemB1_G(p + 1) << 8);}
-#define    MemC1_G()      (MemB1_G(GetPC()))
-#define    MemC2_G()      (MemB2_G(GetPC()))
-#define    MemI1_G()      (MemB1_G(IncPC(1)))
-#define    MemI2_G()      (MemB2_G(IncPC(2)))
-local u32  MemIZ_G(u32 p) {return WrapB1(MemI1_G() + p);}
-local u32  MemIA_G(u32 p) {return WrapB2(MemI2_G() + p);}
+static cstr MemSC_G(u32 p) {return Cps_ExpandNT(memory, p);}
+static str  MemSA_G(u32 p) {return Cps_ExpandNT_str(memory, p);}
+static u32  MemB1_G(u32 p) {return Cps_GetC(memory, p);}
+static u32  MemB2_G(u32 p) {return MemB1_G(p) | (MemB1_G(p + 1) << 8);}
+#define     MemC1_G()      (MemB1_G(GetPC()))
+#define     MemC2_G()      (MemB2_G(GetPC()))
+#define     MemI1_G()      (MemB1_G(IncPC(1)))
+#define     MemI2_G()      (MemB2_G(IncPC(2)))
+static u32  MemIZ_G(u32 p) {return WrapB1(MemI1_G() + p);}
+static u32  MemIA_G(u32 p) {return WrapB2(MemI2_G() + p);}
 
-local void MemB1_S(u32 p, u32 v) {Cps_SetC(memory, p, WrapB1(v));}
-local void MemB2_S(u32 p, u32 v) {MemB1_S(p, v); MemB1_S(p + 1, v >> 8);}
+static void MemB1_S(u32 p, u32 v) {Cps_SetC(memory, p, WrapB1(v));}
+static void MemB2_S(u32 p, u32 v) {MemB1_S(p, v); MemB1_S(p + 1, v >> 8);}
 
 /* addressed memory access */
 #define AdrAI_V() (MemI2_G())
@@ -166,7 +168,7 @@ local void MemB2_S(u32 p, u32 v) {MemB1_S(p, v); MemB1_S(p + 1, v >> 8);}
 #define AdrZX_V() (MemIZ_G(GetRX()))
 #define AdrZY_V() (MemIZ_G(GetRY()))
 
-local u32 AdrAC_G(u32 a, u32 b) {
+static u32 AdrAC_G(u32 a, u32 b) {
    if(b & 2) return GetAC();
    else      return MemB1_G(a);
 }
@@ -180,46 +182,55 @@ local u32 AdrAC_G(u32 a, u32 b) {
 #define AdrZX_G() (MemB1_G(AdrZX_V()))
 #define AdrZY_G() (MemB1_G(AdrZY_V()))
 
-local void AdrAC_S(u32 a, u32 b, u32 r) {
+static void AdrAC_S(u32 a, u32 b, u32 r) {
    if(b & 2) SetAC(r);
    else      MemB1_S(a, r);
 }
 
-local void AdrAI_S(u32 v) {MemB1_S(AdrAI_V(), v);}
-local void AdrAX_S(u32 v) {MemB1_S(AdrAX_V(), v);}
-local void AdrAY_S(u32 v) {MemB1_S(AdrAY_V(), v);}
-local void AdrIX_S(u32 v) {MemB1_S(AdrIX_V(), v);}
-local void AdrIY_S(u32 v) {MemB1_S(AdrIY_V(), v);}
-local void AdrZI_S(u32 v) {MemB1_S(AdrZI_V(), v);}
-local void AdrZX_S(u32 v) {MemB1_S(AdrZX_V(), v);}
-local void AdrZY_S(u32 v) {MemB1_S(AdrZY_V(), v);}
+static void AdrAI_S(u32 v) {MemB1_S(AdrAI_V(), v);}
+static void AdrAX_S(u32 v) {MemB1_S(AdrAX_V(), v);}
+static void AdrAY_S(u32 v) {MemB1_S(AdrAY_V(), v);}
+static void AdrIX_S(u32 v) {MemB1_S(AdrIX_V(), v);}
+static void AdrIY_S(u32 v) {MemB1_S(AdrIY_V(), v);}
+static void AdrZI_S(u32 v) {MemB1_S(AdrZI_V(), v);}
+static void AdrZX_S(u32 v) {MemB1_S(AdrZX_V(), v);}
+static void AdrZY_S(u32 v) {MemB1_S(AdrZY_V(), v);}
 
 /* stack */
 #define StaB1_G() (MemB1_G(STA_BEG + IncSP(1)))
 #define StaB2_G() (MemB2_G(STA_BEG + IncSP(2)))
 
-local void StaB1_S(u32 v) {MemB1_S(STA_BEG + DecSP(1),     v);}
-local void StaB2_S(u32 v) {MemB2_S(STA_BEG + DecSP(2) - 1, v);}
+static void StaB1_S(u32 v) {MemB1_S(STA_BEG + DecSP(1),     v);}
+static void StaB2_S(u32 v) {MemB2_S(STA_BEG + DecSP(2) - 1, v);}
 
 /* trace */
-local void TraceReg() {
+#ifndef NDEBUG
+static void TraceReg() {
    __nprintf("PC:%04X SP:%02X VA:%02X "
              "AC:%02X RX:%02X RY:%02X SR:%02X",
              GetPC(), GetSP(), GetVA(),
              GetAC(), GetRX(), GetRY(), GetSR());
 }
+#endif
 
 /* jumps */
+#ifndef NDEBUG
+#define JmpDbg() \
+   if(get_bit(dbglevel, log_dlg)) { \
+      ACS_BeginLog(); \
+      Dlg_WriteCode(def, next, GetPC() - PRG_BEG); \
+      ACS_PrintChar(' '); \
+      TraceReg(); \
+      ACS_EndLog(); \
+   }
+#else
+#define JmpDbg()
+#endif
+
 #define JmpVI { \
       /* jump next byte */ \
       u32 next = MemI1_G(); \
-      if(get_bit(dbglevel, log_dlg)) { \
-         ACS_BeginLog(); \
-         Dlg_WriteCode(def, next, GetPC() - PRG_BEG); \
-         ACS_PrintChar(' '); \
-         TraceReg(); \
-         ACS_EndLog(); \
-      } \
+      JmpDbg(); \
       goto *cases[next]; \
    }
 
@@ -235,7 +246,7 @@ enum {
    _from_lon,
 };
 
-local str GetText(i32 from) {
+static str GetText(i32 from) {
    u32  adr = MemB2_G(VAR_TEXTL);
    cstr pfx;
 
@@ -248,19 +259,19 @@ local str GetText(i32 from) {
    return adr ? LanguageNull(LANG "%s_%s", pfx, MemSC_G(adr)) : snil;
 }
 
-local str GetRemote() {
+static str GetRemote() {
    u32  adr = MemB2_G(VAR_REMOTEL);
    cstr nam = adr ? MemSC_G(adr) : "UNKNOWN";
    return Language(LANG "REMOTE_%s", nam);
 }
 
-local str GetName() {
+static str GetName() {
    u32  adr = MemB2_G(VAR_NAMEL);
    cstr nam = adr ? MemSC_G(adr) : "UNKNOWN";
    return Language(LANG "PNAME_%s", nam);
 }
 
-local void ConsoleLogText(i32 from) {
+static void ConsoleLogText(i32 from) {
    __with(str text = GetText(from);) if(text) ConsoleLog("%s", text);
 }
 
@@ -268,7 +279,8 @@ local void ConsoleLogText(i32 from) {
 #define ResetRemote() MemB2_S(VAR_REMOTEL, 0)
 #define ResetText()   MemB2_S(VAR_TEXTL,   0)
 
-script static void TerminalGUI(struct player *p, u32 tact) {
+static
+void TerminalGUI(struct player *p, u32 tact) {
    enum {
       /* text */
       twidth  = 640, theigh = 480,
@@ -276,14 +288,16 @@ script static void TerminalGUI(struct player *p, u32 tact) {
       ttop    = theigh*0.08,
       tbottom = theigh*0.75,
       tleft   = twidth/2 - 10,
+      ttwidth = twidth,
+      ttheigh = tbottom - ttop * 2,
 
       tmidx = tright/2, tmidy = tbottom/2,
    };
 
-   Str(term_disconnecting,     sLANG "TERM_DISCONNECTING");
-   Str(term_ip,                sLANG "TERM_IP");
-   Str(term_sgxline,           sLANG "TERM_SGXLINE");
-   Str(term_use_to_ack,        sLANG "TERM_USE_TO_ACK");
+   Str(term_disconnecting, sLANG "TERM_DISCONNECTING");
+   Str(term_ip,            sLANG "TERM_IP");
+   Str(term_sgxline,       sLANG "TERM_SGXLINE");
+   Str(term_use_to_ack,    sLANG "TERM_USE_TO_ACK");
 
    G_Begin(&gst, twidth, theigh);
    G_UpdateState(&gst, p);
@@ -318,9 +332,7 @@ script static void TerminalGUI(struct player *p, u32 tact) {
    PrintText_str(br, s_ltrmfont, CR_RED, tright,2, tbottom,2);
 
    /* Contents */
-   SetSize(gst.w, gst.h);
-
-   char pict[32] = ":Terminal:"; strcat(pict, MemSC_G(MemB2_G(VAR_PICTL)));
+   char pict[64] = ":Terminal:"; strcat(pict, MemSC_G(MemB2_G(VAR_PICTL)));
 
    switch(tact) {
       case TACT_LOGON:
@@ -341,25 +353,25 @@ script static void TerminalGUI(struct player *p, u32 tact) {
 
          PrintSprite(l_strdup(pict), tmidx/2,0, tmidy,0);
 
-         SetClipW(tleft, ttop, tright - tleft, tbottom, tright - tleft);
+         G_Clip(&gst, tleft, ttop, tmidx, ttheigh);
 
          if(text) {
             PrintText_str(text, s_ltrmfont, CR_WHITE, tleft,1, ttop,1);
          }
 
-         ClearClip();
+         G_ClipRelease(&gst);
          break;
       }
       case TACT_INFO: {
          str text = GetText(_from_trm);
 
-         SetClipW(0, ttop, twidth, tbottom, twidth);
+         G_Clip(&gst, 0, ttop, ttwidth, ttheigh);
 
          if(text) {
             PrintText_str(text, s_ltrmfont, CR_WHITE, 2,1, ttop+2,1);
          }
 
-         ClearClip();
+         G_ClipRelease(&gst);
          break;
       }
    }
@@ -372,7 +384,7 @@ script static void TerminalGUI(struct player *p, u32 tact) {
    }
 }
 
-script static void DialogueGUI(struct player *p) {
+static void DialogueGUI(struct player *p) {
    enum {left = 37, top = 75, texttop = top + 24};
 
    str snam = GetName();
@@ -389,7 +401,7 @@ script static void DialogueGUI(struct player *p) {
    PrintTextStr(snam);
    PrintText(s_bigupper, CR_GREEN, 30,1, 35,1);
 
-   SetClipW(left, top, 263, 157, 263);
+   G_Clip(&gst, left, top, 257, 150);
    PrintTextFmt("\Cd> Remote: %S\n\Cd> Date: %s", srem, CanonTime(ct_full, ticks));
    PrintText(s_lmidfont, CR_WHITE, left,1, top,1);
 
@@ -397,7 +409,7 @@ script static void DialogueGUI(struct player *p) {
       PrintText_str(text, s_smallfnt, CR_WHITE, left,1, texttop,1);
    }
 
-   ClearClip();
+   G_ClipRelease(&gst);
 
    u32 oc = MemB1_G(VAR_OPT_CNT);
 
@@ -418,6 +430,7 @@ script static void DialogueGUI(struct player *p) {
    G_End(&gst, gui_curs_outlineinv);
 }
 
+static
 void GuiAct(void) {
    u32 action = MemB1_G(VAR_UACT);
    MemB1_S(VAR_UACT, UACT_NONE);
@@ -443,7 +456,8 @@ void GuiAct(void) {
 }
 
 /* VM actions */
-sync static void ActDLG_WAIT(struct player *p) {
+alloc_aut(0) sync static
+void ActDLG_WAIT(struct player *p) {
    SetVA(ACT_NONE);
 
    ACS_LocalAmbientSound(ss_player_cbi_dlgopen, 127);
@@ -498,17 +512,17 @@ static void ActSCRIPT_S(struct player *p) {
    ModSR_ZN(SetAC(ACS_NamedExecuteWithResult(s0, s1, s2, s3, s4)));
 }
 
-sync static void ActTELEPORT_INTERLEVEL(struct player *p) {
+alloc_aut(0) sync static
+void ActTELEPORT_INTERLEVEL(struct player *p) {
    u32 tag = MemB2_G(VAR_ADRL);
 
    ACS_Delay(5);
    P_TeleportOut(p);
    ACS_Teleport_NewMap(tag | LithMapMagic, 0, 0);
-
-   SetVA(ACT_HALT);
 }
 
-sync static void ActTELEPORT_INTRALEVEL(struct player *p) {
+alloc_aut(0) sync static
+void ActTELEPORT_INTRALEVEL(struct player *p) {
    u32 tag = MemB2_G(VAR_ADRL);
 
    ACS_Delay(5);
@@ -517,7 +531,8 @@ sync static void ActTELEPORT_INTRALEVEL(struct player *p) {
    SetVA(ACT_HALT);
 }
 
-sync static void ActTRM_WAIT(struct player *p) {
+alloc_aut(0) sync static
+void ActTRM_WAIT(struct player *p) {
    SetVA(ACT_NONE);
 
    u32 tact = MemB1_G(VAR_TACT);
@@ -551,7 +566,8 @@ sync static void ActTRM_WAIT(struct player *p) {
 /* Extern Functions -------------------------------------------------------- */
 
 /* Main dialogue VM. */
-script void Dlg_Run(struct player *p, u32 num) {
+dynam_aut script
+void Dlg_Run(struct player *p, u32 num) {
    if(p->dead || p->dlg.active > 1)
       return;
 
@@ -561,7 +577,9 @@ script void Dlg_Run(struct player *p, u32 num) {
    p->dlg.active++;
 
    if(!def->codeV) {
-      Log("%s: dialogue %u has no code", __func__, num);
+      #ifndef NDEBUG
+      Log("%s ERROR: dialogue %u has no code", __func__, num);
+      #endif
       JmpHL;
    }
 
@@ -587,14 +605,16 @@ script void Dlg_Run(struct player *p, u32 num) {
    for(u32 i = 0; i < def->codeC; i++) memory[PRG_BEG_C + i] = def->codeV[i];
    for(u32 i = 0; i < def->stabC; i++) memory[STR_BEG_C + i] = def->stabV[i];
 
+   #ifndef NDEBUG
    if(get_bit(dbglevel, log_dlg)) {
       ACS_BeginLog();
-      __nprintf("Dumping segment PRG..");
+      PrintChrSt("Dumping segment PRG...\n");
       Dbg_PrintMemC(&memory[PRG_BEG_C], def->codeC);
-      __nprintf("Dumping segment STR..");
+      PrintChrSt("Dumping segment STR...\n");
       Dbg_PrintMemC(&memory[STR_BEG_C], def->stabC);
       ACS_EndLog();
    }
+   #endif
 
    /* copy some constants into memory */
    MemB1_S(VAR_PCLASS, p->pclass);
@@ -933,20 +953,26 @@ INY_NP: ModSR_ZN(SetRY(GetRY() + 1)); JmpVI;
 
 /* Trace */
 TRR_NP:
+   #ifndef NDEBUG
    ACS_BeginLog();
    TraceReg();
    ACS_EndLog();
    JmpVI;
+   #endif
 
 TRS_NP:
+   #ifndef NDEBUG
    for(u32 i = GetSP() + 1; i <= 0xFF; i++)
       Log("%02X: %02X", i, MemB1_G(STA_BEG + i));
    JmpVI;
+   #endif
 
 TRV_NP:
+   #ifndef NDEBUG
    for(u32 i = 0; i <= 0xFF; i++)
       Log("%02X: %02X", i, MemB1_G(VAR_BEG + i));
    JmpVI;
+   #endif
 
 halt:
    Dbg_Log(log_dlg, "%s: exited", __func__);

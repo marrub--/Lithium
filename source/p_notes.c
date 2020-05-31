@@ -20,16 +20,16 @@ void P_CBI_TabNotes(struct gui_state *g, struct player *p)
 {
    Str(edit, sLANG "EDIT");
 
-   struct gui_txt *st = G_TxtBox(g, &CBIState(g)->notebox, 48, 40, p);
+   struct gui_txt *st = G_TxtBox(g, &CBIState(g)->notebox, 35, 27, p);
 
-   PrintText_str(L(edit), s_smallfnt, g->defcr, 32,2, 41,0);
-   if(G_ChkBox(g, CBIState(g)->noteedit, 34, 37))
+   PrintText_str(L(edit), s_smallfnt, g->defcr, g->ox+19,2, g->oy+28,0);
+   if(G_ChkBox(g, CBIState(g)->noteedit, 21, 24))
       CBIState(g)->noteedit = !CBIState(g)->noteedit;
 
-   if(G_Button(g, LC(LANG "CLEAR"), 16, 50, Pre(btnclear)))
+   if(G_Button(g, LC(LANG "CLEAR"), 3, 37, Pre(btnclear)))
       G_TxtBoxRes(st);
 
-   G_ScrBeg(g, &CBIState(g)->notescr, 15, 63, 280, 160, 30 * countof(p->notes), 240);
+   G_ScrBeg(g, &CBIState(g)->notescr, 2, 50, 280, 160, 30 * countof(p->notes), 240);
 
    for(i32 i = 0; i < countof(p->notes); i++)
    {
@@ -46,9 +46,13 @@ void P_CBI_TabNotes(struct gui_state *g, struct player *p)
          i32  l = CBIState(g)->notebox.tbptr;
          cstr s = Cps_Expand(CBIState(g)->notebox.txtbuf, 0, l);
 
-         Dalloc(p->notes[i]);
-         p->notes[i] = Malloc(l + 1, _tag_plyr);
-         fastmemmove(p->notes[i], s, l);
+         if(l) {
+            p->notes[i] = Ralloc(p->notes[i], l + 1, _tag_plyr);
+            fastmemmove(p->notes[i], s, l);
+         } else {
+            Dalloc(p->notes[i]);
+            p->notes[i] = nil;
+         }
 
          P_Data_Save(p);
       }

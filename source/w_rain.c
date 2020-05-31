@@ -20,7 +20,7 @@ static k32  lmvar rain_px;
 static k32  lmvar rain_py;
 static i32  lmvar rain_dist;
 
-script
+dynam_aut script
 void W_DoRain(void)
 {
    struct player *p = &players[0];
