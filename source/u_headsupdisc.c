@@ -70,10 +70,10 @@ static void HUD_Ammo(struct player *p)
 
    if(P_Wep_CurType(p) == weapon_c_smg) {
       i32 y = p->getCVarI(sc_hud_showweapons) ? 0 : 14;
-      k32 heat = InvNum(so_SMGHeat)/500.0;
-      PrintSprite(sp_HUD_C_BarSmall, 320,2, 205+y,2);
-      SetClip(320-63, 205-9, heat * 63, 9);
-      PrintSprite(sp_HUD_C_HeatBar, 320,2, 205+y,2);
+      k32 heat = InvNum(so_SMGHeat)/500.0k;
+      PrintSprite(sp_HUD_C_BarSmall, 257,1, 196+y,1);
+      SetClip(257, 196+y, 63 * heat, 9);
+      PrintSprite(sp_HUD_C_HeatBar, 257,1, 196+y,1);
       ClearClip();
    }
 }
