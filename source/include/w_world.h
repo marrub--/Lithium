@@ -26,12 +26,11 @@
 #define Cluster ACS_GetLevelInfo(LEVELINFO_CLUSTERNUM)
 
 /* Line 1888300 is used as a control line for mod features.
- * Similarly, maps with a certain mask set in their map number are marked as
- * Lithium maps.
+ * Similarly, maps in a certain range are marked as Lithium maps.
  */
-#define LithMapLine  0x001CD02C
-#define LithMapMagic 0x01202000
-#define LithMapMask  0xFFFFFC00
+#define LithMapLine 0x001CD02C
+#define LithMapBeg  0x001CCF00
+#define LithMapEnd  0x001CD2E7
 
 #define GetFun()  ACS_GetCVar(sc_fun)
 #define SetFun(x) ACS_SetCVar(sc_fun, x)

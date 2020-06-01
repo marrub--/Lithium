@@ -289,7 +289,7 @@ void Sc_PreInit(void)
 {
    GetDebugInfo();
 
-   islithmap = (MapNum & LithMapMask) == LithMapMagic;
+   islithmap = (MapNum >= LithMapBeg && MapNum <= LithMapEnd);
 }
 
 _Noreturn dynam_aut script type("open") static

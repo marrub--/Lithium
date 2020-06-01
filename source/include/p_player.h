@@ -97,10 +97,8 @@ script extern void P_Wep_PTick   (struct player *p);
 script extern void P_Upg_PTickPst(struct player *p);
        extern void P_Ren_PTickPst(struct player *p);
 
-sync void P_TeleportIn(struct player *p);
-sync void P_TeleportOut(struct player *p);
-script void P_TeleportInAsync(struct player *p);
-script void P_TeleportOutAsync(struct player *p);
+script void P_TeleportIn (struct player *p);
+sync   void P_TeleportOut(struct player *p, i32 tag);
 
 #ifndef NDEBUG
 void P_Ren_Debug(struct player *p);

@@ -65,7 +65,7 @@ void P_Ren_PTickPst(struct player *p) {
    #endif
 }
 
-alloc_aut(0) sync
+alloc_aut(0) script
 void P_TeleportIn(struct player *p) {
    p->teleportedout = false;
 
@@ -85,30 +85,24 @@ void P_TeleportIn(struct player *p) {
 }
 
 alloc_aut(0) sync
-void P_TeleportOut(struct player *p) {
+void P_TeleportOut(struct player *p, i32 tag) {
    ACS_AmbientSound(ss_misc_teleout, 127);
    ACS_SetCameraToTexture(p->tid, s_LITHCAM3, 90);
 
-   for(i32 i = 1, j = 1; i <= 18; i++) {
-      k32 w = 1 + (i / 18.0lk / 3.0lk * 50);
-      k32 h = 1 + (j / 18.0lk / 8.0lk * 10);
+   for(i32 i = 1, j = 1; i <= 20; i++) {
+      ACS_Delay(1);
+      k32 w = 1 + i / 20.0lk / 3.0lk * 50;
+      k32 h = 1 + j / 20.0lk / 8.0lk * 10;
       SetSize(320, 200);
       PrintSprite(sp_Terminal_Teleport, 160,0, 100,0);
       SetSize(640 / w, 480 * h);
       PrintSprite(s_LITHCAM3, 320/w,0, 240*h,0);
       if(i & 3) j++;
-      ACS_Delay(1);
    }
 
    p->teleportedout = true;
-}
 
-script void P_TeleportInAsync(struct player *p) {
-   P_TeleportIn(p);
-}
-
-script void P_TeleportOutAsync(struct player *p) {
-   P_TeleportOut(p);
+   ACS_Teleport_NewMap(tag, 0, false);
 }
 
 /* EOF */

@@ -149,14 +149,14 @@ skill nightmare {
 }
 
 map TITLEMAP "Lithium Title" {
-   LevelNum = 18883001
+   LevelNum = 1888001
    Sky1 = "LITHSKRD", 0.05
    Sky2 = "LITHSKS1"
    DoubleSky
 }
 
 map TESTMAP "Test Map" {
-   LevelNum = 18883000
+   LevelNum = 1888000
    Music    = "lmusic/dandalins story.it"
    Next     = 1
    Sky1     = "LITHBGS4", 0.1

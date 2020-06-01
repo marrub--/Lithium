@@ -514,16 +514,17 @@ static void ActSCRIPT_S(struct player *p) {
 
 alloc_aut(0) sync static
 void ActTELEPORT_INTERLEVEL(struct player *p) {
-   u32 tag = MemB2_G(VAR_ADRL);
+   i32 tag = MemB2_G(VAR_ADRL);
 
    ACS_Delay(5);
-   P_TeleportOut(p);
-   ACS_Teleport_NewMap(tag | LithMapMagic, 0, 0);
+   P_TeleportOut(p, tag + LithMapBeg);
+
+   SetVA(ACT_HALT);
 }
 
 alloc_aut(0) sync static
 void ActTELEPORT_INTRALEVEL(struct player *p) {
-   u32 tag = MemB2_G(VAR_ADRL);
+   i32 tag = MemB2_G(VAR_ADRL);
 
    ACS_Delay(5);
    ACS_Teleport(0, tag, false);

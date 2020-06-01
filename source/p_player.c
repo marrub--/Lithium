@@ -56,7 +56,7 @@ reinit:
 
    P_bossText(p, ServCallI(sm_GetBossLevel));
 
-   if(p->teleportedout) P_TeleportInAsync(p);
+   if(p->teleportedout) P_TeleportIn(p);
 
    while(p->active)
    {
