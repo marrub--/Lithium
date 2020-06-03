@@ -191,7 +191,8 @@ void Sc_DbgDumpAlloc(void) {
 
 script_str ext("ACS") addr(OBJ "PrintMonsterInfo")
 void Sc_PrintMonsterInfo(void) {
-   PrintMonsterInfo();
+   ifauto(dmon_t *, m, DmonPtr(0, AAPTR_PLAYER_GETTARGET))
+      PrintMonsterInfo(m);
 }
 
 script_str ext("ACS") addr(OBJ "TriggerEnding")

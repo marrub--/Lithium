@@ -309,6 +309,28 @@ void MonsterMain(dmon_t *m) {
    }
 }
 
+alloc_aut(0) stkcall static
+bool faststrstr_str(str lhs, str rhs) {
+   i32 llen = ACS_StrLen(lhs);
+   i32 rlen = ACS_StrLen(rhs);
+   i32 i, j, k;
+
+   for(i = 0; i < llen; i++) {
+      for(j = 0, k = i; j < rlen; j++) {
+         if(lhs[i++] != rhs[j]) {
+            i = k;
+            break;
+         }
+      }
+
+      if(j == rlen) {
+         return true;
+      }
+   }
+
+   return false;
+}
+
 /* Extern Functions -------------------------------------------------------- */
 
 #ifndef NDEBUG
@@ -357,7 +379,14 @@ void Sc_ResurrectMonster(i32 amt)
    ifauto(dmon_t *, m, DmonSelf()) m->resurrect = true;
 }
 
-dynam_aut script ext("ACS") addr(lsc_monsterinfo)
+#ifndef NDEBUG
+script static
+void LogError(str cname) {
+   Dbg_Log(log_dmon, "ERROR no monster %S", cname);
+}
+#endif
+
+alloc_aut(0) script ext("ACS") addr(lsc_monsterinfo)
 void Sc_MonsterInfo(void)
 {
    Str(rladaptive, s"RLAdaptive");
@@ -365,7 +394,7 @@ void Sc_MonsterInfo(void)
 
    str cname = ACS_GetActorClass(0);
 
-   if(strstr_str(cname, rladaptive) || strstr_str(cname, rlhax))
+   if(faststrstr_str(cname, rladaptive) || faststrstr_str(cname, rlhax))
       return;
 
    for(i32 i = 0; i < countof(monsterinfo); i++) {
@@ -373,19 +402,25 @@ void Sc_MonsterInfo(void)
       bool init;
 
       if(get_bit(mi->flags, mif_full)) init = cname == mi->name;
-      else                             init = strstr_str(cname, mi->name);
+      else                             init = faststrstr_str(cname, mi->name);
 
       if(init) {
          ACS_Delay(1);
-         ifauto(dmon_t *, m, AllocDmon()) {
+
+         /* make sure it isn't already dead first */
+         if(GetMembI(0, sm_Health) > 0) {
+            dmon_t *m = AllocDmon();
             m->mi = mi;
             MonsterMain(m);
          }
+
          return;
       }
    }
 
-   Dbg_Log(log_dmon, "ERROR no monster %S", cname);
+   #ifndef NDEBUG
+   LogError(cname);
+   #endif
 
    /* If the monster failed all checks, give them this so we don't
       need to recheck every tick.

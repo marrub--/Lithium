@@ -84,7 +84,8 @@ enum /* DamageType */
 
 enum /* ScriptNum */
 {
-   lsc_getfontmetric = 17100,
+   lsc_gsinit = 17000,
+   lsc_getfontmetric,
    lsc_metr_xadv,
    lsc_metr_yofs,
    lsc_metr_tex,
@@ -98,6 +99,8 @@ enum /* ScriptNum */
    lsc_raindropspawn,
    lsc_monstertype,
    lsc_drawdmgnum,
+   lsc_preinit,
+   lsc_worldreopen,
 };
 
 enum /* BossType */

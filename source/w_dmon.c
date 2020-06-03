@@ -24,18 +24,14 @@
  */
 noinit
 static dmon_t dmonalloc[DMON_MAX];
-static i32    dmonid;
+
+static i32 lmvar dmonid;
 
 /* Extern Functions -------------------------------------------------------- */
 
 void PrintDmonAllocSize(struct player *p)
 {
    p->logH(1, "dmonalloc is %.2k megabytes!", sizeof dmonalloc * 4 / 1024 / 1024.0);
-}
-
-void DmonInit(void)
-{
-   dmonid = 0;
 }
 
 script
@@ -57,6 +53,7 @@ dmon_t *Dmon(i32 id)
    else                     return nil;
 }
 
+alloc_aut(0) stkcall
 dmon_t *AllocDmon(void)
 {
    dmon_t *m = &dmonalloc[dmonid];

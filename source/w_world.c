@@ -220,7 +220,6 @@ static void HInitPre(void)
    if(unloaded)
       mapscleared++;
 
-   DmonInit();
    bossspawned = false;
 
    if(ACS_GetCVar(sc_sv_sky) && !islithmap) {
