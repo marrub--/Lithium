@@ -136,10 +136,9 @@ override void WorldLoaded(WorldEvent ev)
    }
 
    if(ev.isReopen) {
-      CallACS("Lith_WorldReopen");
+      ACS_ExecuteWithResult(lsc_worldreopen);
    } else {
-      CallACS("lithmain@gsinit");
-      CallACS("Lith_PreInit");
+      ACS_ExecuteWithResult(lsc_preinit);
    }
 
    if(__lith_fun & lfun_ragnarok) Ragnarok();

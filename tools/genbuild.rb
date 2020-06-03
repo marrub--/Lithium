@@ -38,7 +38,6 @@ HASH   = "j"
 STA    = "k"
 TYPE   = "l"
 DLITH  = "m"
-INITSC = "o"
 NUMOUT = "p"
 MFLAGS = "q"
 TXT    = "r"
@@ -93,12 +92,11 @@ fp << <<_end_
 #{TXT   } = text
 #{IR    } = bin
 #{IRLITH} = $#{IR}/lithium
-#{TARGET} = --target-engine=ZDoom --target-format=ACSE --func-minimum ScriptI 17000
+#{TARGET} = --target-engine=ZDoom --target-format=ACSE --func-minimum ScriptI 17100
 #{WARN  } = --warn-all --no-warn-parentheses
-#{LFLAGS} = $#{TARGET} --bc-opt --bc-zdacs-init-delay #{LD_FLAGS}
+#{LFLAGS} = $#{TARGET} --bc-opt #{LD_FLAGS}
 #{CFLAGS} = $#{TARGET} $#{WARN} -i$#{HDR} --alloc-Aut 8192 #{CC_FLAGS}
 #{MFLAGS} = $#{TARGET} #{MAKELIB_FLAGS}
-#{INITSC} = --bc-zdacs-init-script-name
 
 rule cc
  command = gdcc-cc $#{CFLAGS} -DFileHash=$#{HASH} -c $in -o $out
@@ -165,7 +163,7 @@ end
 
 fp << <<_end_
 build pk7/acs/lithmain.bin: ld #{inputs_lithium.join " "} $#{IR}/libc.ir
- #{LFLAGS} = $#{LFLAGS} $#{INITSC} "lithmain@gsinit"
+ #{LFLAGS} = $#{LFLAGS} --no-bc-zdacs-init-script-named --bc-zdacs-init-script-number 17000
  #{STA   } = 70000
  #{NUMOUT} = $#{IR}/lithmain_ld.txt
 

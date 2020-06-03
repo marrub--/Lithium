@@ -19,7 +19,9 @@
 
 /* Static Objects ---------------------------------------------------------- */
 
-/* This is lazy-allocated. Don't touch or GDCC will break your computer's face. */
+/* This is lazy-allocated. Don't touch or GDCC will break your
+ * computer's face.
+ */
 noinit
 static dmon_t dmonalloc[DMON_MAX];
 static i32    dmonid;

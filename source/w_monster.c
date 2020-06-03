@@ -111,7 +111,7 @@ void ShowBarrier(dmon_t const *m, k32 alpha) {
       k32 dst = m->r / 2 + a->dst / 4;
       k32 x   = m->x + ACS_Cos(a->ang) * dst;
       k32 y   = m->y + ACS_Sin(a->ang) * dst;
-      i32   tid = ACS_UniqueTID();
+      i32 tid = ACS_UniqueTID();
       str bar = m->rank >= 5 ? so_MonsterHeptaura : so_MonsterBarrier;
 
       ACS_SpawnForced(bar, x, y, m->z + m->h / 2, tid);
@@ -163,6 +163,8 @@ void BaseMonsterLevel(dmon_t *m)
 
    Dbg_Log(log_dmonV, "monster %-4i \Cdr%i \Cgl%-3i \C-running on %S",
       m->id, m->rank, m->level, ACS_GetActorClass(0));
+
+   PrintMonsterInfo(m);
 }
 
 /* Spawn a Monster Soul and temporarily set the species of it until the
@@ -310,31 +312,27 @@ void MonsterMain(dmon_t *m) {
 /* Extern Functions -------------------------------------------------------- */
 
 #ifndef NDEBUG
-void PrintMonsterInfo(void)
+void PrintMonsterInfo(dmon_t *m)
 {
-   ifauto(dmon_t *, m, DmonPtr(0, AAPTR_PLAYER_GETTARGET))
-   {
-      Log("%p (%p) %S active: %u id: %.3u\n"
-          "wasdead: %u finalized: %u painwait: %i\n"
-          "level: %.3i rank: %i exp: %i\n"
-          "health: %i/%i\n"
-          "x: %k y: %k z: %k\n"
-          "r: %k h: %k\n"
-          "mi->exp: %lu mi->score: %lli\n"
-          "mi->flags: %i mi->type: %i",
-          m, m->mi, m->mi->name, m->active, m->id,
-          m->wasdead, m->finalized, m->painwait,
-          m->level, m->rank, m->exp,
-          m->health, m->maxhealth,
-          m->x, m->y, m->z,
-          m->r, m->h,
-          m->mi->exp, m->mi->score,
-          m->mi->flags, m->mi->type);
-      for(i32 i = 0; i < countof(m->resist); i++)
-         Log("resist %S: %i", dmgtype_names[i], m->resist[i]);
-   }
-   else
-      Log("no active monster");
+   Log("%p (%p) %S active: %u id: %.3u\n"
+       "wasdead: %u finalized: %u painwait: %i\n"
+       "level: %.3i rank: %i exp: %i\n"
+       "health: %i/%i\n"
+       "x: %k y: %k z: %k\n"
+       "r: %k h: %k\n"
+       "mi->exp: %lu mi->score: %lli\n"
+       "mi->flags: %i mi->type: %i",
+       m, m->mi, m->mi->name, m->active, m->id,
+       m->wasdead, m->finalized, m->painwait,
+       m->level, m->rank, m->exp,
+       m->health, m->maxhealth,
+       m->x, m->y, m->z,
+       m->r, m->h,
+       m->mi->exp, m->mi->score,
+       m->mi->flags, m->mi->type);
+
+   for(i32 i = 0; i < countof(m->resist); i++)
+      Log("resist %S: %i", dmgtype_names[i], m->resist[i]);
 }
 #endif
 

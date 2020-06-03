@@ -139,17 +139,6 @@ static void UpdateGame(void)
    #undef Update
 }
 
-static void GetDebugInfo(void)
-{
-   Str(sc_debug_level, sDCVAR "debug_level");
-   Str(sc_debug_flags, sDCVAR "debug_flags");
-
-   #ifndef NDEBUG
-   dbglevel = ACS_GetCVar(sc_debug_level);
-   dbgflags = ACS_GetCVar(sc_debug_flags);
-   #endif
-}
-
 static void MInitPre(void)
 {
    Dbg_Log(log_dev, "%s", __func__);
@@ -284,12 +273,33 @@ static void HInit(void)
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr(OBJ "PreInit")
-void Sc_PreInit(void)
-{
-   GetDebugInfo();
+#ifndef NDEBUG
+script static
+void PreInitLog() {
+   Dbg_Log(log_dev, "PreInit");
+}
+#endif
+
+alloc_aut(0) script ext("ACS") addr(lsc_preinit)
+void Sc_PreInit(void) {
+   script ext("ACS") addr(lsc_gsinit)
+   extern void GSInit(void);
+
+   Str(sc_debug_level, sDCVAR "debug_level");
+   Str(sc_debug_flags, sDCVAR "debug_flags");
+
+   GSInit();
+
+   #ifndef NDEBUG
+   dbglevel = ACS_GetCVar(sc_debug_level);
+   dbgflags = ACS_GetCVar(sc_debug_flags);
+   #endif
 
    islithmap = (MapNum >= LithMapBeg && MapNum <= LithMapEnd);
+
+   #ifndef NDEBUG
+   PreInitLog();
+   #endif
 }
 
 _Noreturn dynam_aut script type("open") static
@@ -433,9 +443,8 @@ script_str ext("ACS") addr(OBJ "SkyMap") i32 Sc_SkyMap(void) {
    return ACS_GetCVar(sc_sv_sky) && !islithmap;
 }
 
-script_str ext("ACS") addr(OBJ "WorldReopen")
-void Sc_WorldReopen(void)
-{
+alloc_aut(0) script ext("ACS") addr(lsc_worldreopen)
+void Sc_WorldReopen(void) {
    reopen = true;
 }
 
