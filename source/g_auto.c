@@ -73,11 +73,6 @@ void G_Auto(struct gui_state *g, u32 id, i32 x, i32 y, i32 w, i32 h,
    #endif
 }
 
-void G_Init(struct gui_state *g, void *state) {
-   g->state = state;
-   g->gfxprefix = ":UI:";
-}
-
 void G_UpdateState(struct gui_state *g, struct player *p) {
    /* Due to ZDoom being ZDoom, GetUserCVar with invertmouse does
     * nothing. This breaks network sync so we can only do it in
@@ -85,8 +80,8 @@ void G_UpdateState(struct gui_state *g, struct player *p) {
     */
    bool inverted = p->getCVarI(sc_player_invertmouse);
 
-   Str(invertmouse, s"invertmouse");
-   if(singleplayer) inverted |= ACS_GetCVar(invertmouse);
+   Str(sc_invertmouse, s"sc_invertmouse");
+   if(singleplayer) inverted |= ACS_GetCVar(sc_invertmouse);
 
    g->old = g->cur;
 

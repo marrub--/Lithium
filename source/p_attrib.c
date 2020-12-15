@@ -39,7 +39,7 @@ static void DrawAttr(struct gui_state *g, i32 x, i32 y, struct player *p, i32 at
    }
 
    PrintTextChr(name, 3);
-   PrintText(s_lmidfont, g->defcr, g->ox+x-24,1, g->oy+y,1);
+   PrintText(sf_lmidfont, g->defcr, g->ox+x-24,1, g->oy+y,1);
 
    PrintSprite(sp_UI_AttrBar1, g->ox+x,1, g->oy+y,1);
 
@@ -52,57 +52,57 @@ static void DrawAttr(struct gui_state *g, i32 x, i32 y, struct player *p, i32 at
       helptrns += 0.3;
    }
 
-   PrintTextA_str(Language(LANG "ATTR_HELP_%.3s", name), s_smallfnt, g->defcr, g->ox+x+1,1, g->oy+y,1, helptrns);
+   PrintTextA_str(Language(LANG "ATTR_HELP_%.3s", name), sf_smallfnt, g->defcr, g->ox+x+1,1, g->oy+y,1, helptrns);
 
    PrintTextFmt("%u/%i", attr, ATTR_VIS_MAX);
-   PrintText(s_lmidfont, g->defcr, g->ox+x+202,1, g->oy+y,1);
+   PrintText(sf_lmidfont, g->defcr, g->ox+x+202,1, g->oy+y,1);
 }
 
 static void StatusInfo(struct gui_state *g, i32 y, str left, str right)
 {
-   PrintText_str(left,  s_lmidfont, g->defcr, g->ox+ 17,1, g->oy+y,1);
-   PrintText_str(right, s_smallfnt, g->defcr, g->ox+267,2, g->oy+y,1);
+   PrintText_str(left,  sf_lmidfont, g->defcr, g->ox+ 17,1, g->oy+y,1);
+   PrintText_str(right, sf_smallfnt, g->defcr, g->ox+267,2, g->oy+y,1);
 }
 
 /* Extern Functions -------------------------------------------------------- */
 
 void P_CBI_TabStatus(struct gui_state *g, struct player *p)
 {
-   Str(exp,   sLANG "STATUS_XP");
-   Str(hp,    sLANG "STATUS_HP");
-   Str(lv,    sLANG "STATUS_LV");
-   Str(mp,    sLANG "STATUS_MP");
-   Str(next,  sLANG "STATUS_NX");
-   Str(class, sLANG "STATUS_CL");
+   Str(sl_exp,   sLANG "STATUS_XP");
+   Str(sl_hp,    sLANG "STATUS_HP");
+   Str(sl_lv,    sLANG "STATUS_LV");
+   Str(sl_mp,    sLANG "STATUS_MP");
+   Str(sl_next,  sLANG "STATUS_NX");
+   Str(sl_class, sLANG "STATUS_CL");
 
    i32 y = 27;
 
-   PrintText_str(p->name, s_lmidfont, g->defcr, g->ox+17,1, g->oy+y,1);
+   PrintText_str(p->name, sf_lmidfont, g->defcr, g->ox+17,1, g->oy+y,1);
    y += 10;
 
-   StatusInfo(g, y, L(class), p->classname);
+   StatusInfo(g, y, L(sl_class), p->classname);
    y += 10;
 
-   StatusInfo(g, y, L(lv), StrParam("%u", p->attr.level));
+   StatusInfo(g, y, L(sl_lv), StrParam("%u", p->attr.level));
    y += 10;
-   StatusInfo(g, y, L(hp), StrParam("%i/%i", p->health, p->maxhealth));
+   StatusInfo(g, y, L(sl_hp), StrParam("%i/%i", p->health, p->maxhealth));
    y += 10;
 
    if(p->pclass & pcl_magicuser) {
-      StatusInfo(g, y, L(mp), StrParam("%i/%i", p->mana, p->manamax));
+      StatusInfo(g, y, L(sl_mp), StrParam("%i/%i", p->mana, p->manamax));
       y += 10;
    }
 
-   StatusInfo(g, y, L(exp),  StrParam("%u", p->attr.exp));
+   StatusInfo(g, y, L(sl_exp),  StrParam("%u", p->attr.exp));
    y += 10;
-   StatusInfo(g, y, L(next), StrParam("%u", p->attr.expnext));
+   StatusInfo(g, y, L(sl_next), StrParam("%u", p->attr.expnext));
    y += 10;
 
    y += p->pclass & pcl_magicuser ? 20 : 30;
 
    if(p->attr.points) {
       PrintTextFmt(LC(LANG "STATUS_LEVELUP"), p->attr.points);
-      PrintText(s_smallfnt, g->defcr, g->ox+7,1, g->oy+y,1);
+      PrintText(sf_smallfnt, g->defcr, g->ox+7,1, g->oy+y,1);
    }
 
    y += 10;

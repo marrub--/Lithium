@@ -12,6 +12,28 @@ extend class Lith_HERMES;
 private play string m_LogName;
 private play string m_BipName;
 
+static double GetViewHeight(Actor mo) {
+   return Lith_Player(mo).player.viewz - mo.pos.z;
+}
+
+static double GetAttackHeight(Actor mo) {
+   return mo.height / 2 + mo.player.mo.attackZOffset * mo.player.crouchFactor;
+}
+
+static void Unproject(Actor mo, double x_, double y_, double z_, int px, int py, int pv) {
+   int x, y; bool v; [x, y, v] = Lith_Player(mo).Lith_Unproject((x_, y_, z_));
+   if(px) ACS_ExecuteWithResult(lsc_setptri32,  px, x);
+   if(py) ACS_ExecuteWithResult(lsc_setptri32,  py, y);
+   if(pv) ACS_ExecuteWithResult(lsc_setptrbool, pv, v);
+}
+
+static void TraceFrom(Actor mo, double yaw, double pitch, double dist, double offsetz, bool floor, int px, int py, int pz) {
+   vector3 v = Lith_UTIL.TraceFrom(mo, yaw * 360, pitch * 360, dist, offsetz, floor);
+   if(px) ACS_ExecuteWithResult(lsc_setptrk32, px, v.x * FIX);
+   if(py) ACS_ExecuteWithResult(lsc_setptrk32, py, v.y * FIX);
+   if(pz) ACS_ExecuteWithResult(lsc_setptrk32, pz, v.z * FIX);
+}
+
 static void PlayerInit(Actor mo_) {
    let mo = Lith_Player(mo_);
    /* mo.m_CS = Lith_Cyberspace.create(); */

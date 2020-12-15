@@ -11,12 +11,16 @@
  * ---------------------------------------------------------------------------|
  */
 
-#ifndef w_world_h
+#if defined(w_setptr_x)
+w_setptr_x(i32)
+w_setptr_x(k32)
+w_setptr_x(bool)
+#undef w_setptr_x
+#elif !defined(w_world_h)
 #define w_world_h
 
+#if !ZscOn
 #include <stdbool.h>
-
-#include "w_data.h"
 
 #define InSecret (Cluster == 9 || Cluster == 10)
 #define InHell   (Cluster >= 8)
@@ -34,9 +38,105 @@
 
 #define GetFun()  ACS_GetCVar(sc_fun)
 #define SetFun(x) ACS_SetCVar(sc_fun, x)
+#endif
 
 /* Types ------------------------------------------------------------------- */
 
+enum ZscName(WData) {
+   wdata_bossspawned,
+   wdata_soulsfreed,
+   wdata_dorain,
+   wdata_ptid,
+   wdata_pclass,
+};
+
+enum ZscName(Fun) {
+   lfun_ragnarok = 1 << 0,
+   lfun_bips     = 1 << 1,
+   lfun_final    = 1 << 2,
+   lfun_division = 1 << 3,
+};
+
+enum ZscName(CBIUpgradeM) {
+   cupg_weapninter,
+   cupg_hasupgr1,
+   cupg_armorinter,
+   cupg_hasupgr2,
+   cupg_weapninte2,
+   cupg_rdistinter,
+   cupg_max
+};
+
+enum ZscName(CBIUpgradeC) {
+   cupg_c_slot3spell,
+   cupg_c_slot4spell,
+   cupg_c_slot5spell,
+   cupg_c_slot6spell,
+   cupg_c_slot7spell,
+   cupg_c_rdistinter,
+};
+
+enum ZscName(RandomSpawnNum) {
+   lrsn_garmor,
+   lrsn_barmor,
+   lrsn_hbonus,
+   lrsn_abonus,
+   lrsn_clip,
+   lrsn_clipbx,
+};
+
+enum ZscName(MsgType) {
+   msg_ammo,
+   msg_huds,
+   msg_full,
+   msg_both
+};
+
+enum ZscName(DamageType) {
+   ldt_bullets,
+   ldt_energy,
+   ldt_fire,
+   ldt_firemagic,
+   ldt_magic,
+   ldt_melee,
+   ldt_shrapnel,
+   ldt_ice,
+   ldt_hazard,
+   ldt_none
+};
+
+enum ZscName(ScriptNum) {
+   lsc_gsinit = 17000,
+   lsc_getfontmetric,
+   lsc_metr_xadv,
+   lsc_metr_yofs,
+   lsc_metr_tex,
+   lsc_metr_w,
+   lsc_metr_h,
+   lsc_drawplayericon,
+   lsc_pdata,
+   lsc_wdata,
+   lsc_addangle,
+   lsc_monsterinfo,
+   lsc_raindropspawn,
+   lsc_monstertype,
+   lsc_drawdmgnum,
+   lsc_preinit,
+   lsc_worldreopen,
+   #define w_setptr_x(x) lsc_setptr##x,
+   #include "w_world.h"
+};
+
+enum ZscName(BossType) {
+   boss_none,
+   boss_barons,
+   boss_cyberdemon,
+   boss_spiderdemon,
+   boss_iconofsin,
+   boss_other,
+};
+
+#if !ZscOn
 enum {
    skill_tourist,
    skill_easy,
@@ -122,5 +222,6 @@ script void F_Run(struct player *p);
 void F_Load(void);
 void F_Start(cstr which);
 script void W_DoRain();
+#endif
 
 #endif

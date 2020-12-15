@@ -9,12 +9,12 @@
 
 #include "lzscript/Constants/items.zsc"
 #include "lzscript/Constants/m_drawing.zsc"
-#include "lzscript/Constants/p_data.zsc"
-#include "lzscript/Constants/p_weapons.zsc"
+#include "lzscript/Constants/p_player.zsc"
+#include "lzscript/Constants/p_weaponinfo.zsc"
 #include "lzscript/Constants/u_names.zsc"
-#include "lzscript/Constants/w_data.zsc"
 #include "lzscript/Constants/w_monster.zsc"
 #include "lzscript/Constants/w_scorenums.zsc"
+#include "lzscript/Constants/w_world.zsc"
 
 enum Lith_ASCII {
    Ch_NUL, /* null */

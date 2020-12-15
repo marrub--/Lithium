@@ -10,11 +10,10 @@
  *
  * ---------------------------------------------------------------------------|
  */
-/* decompat-out pk7/lzscript/Constants/w_monster.zsc */
-/* decompat-cut */
 #ifndef w_monster_h
 #define w_monster_h
 
+#if !ZscOn
 #include "common.h"
 #include "m_list.h"
 
@@ -31,9 +30,9 @@ enum dmgtype {
    dmgtype_shrapnel,
    dmgtype_max
 };
-/* decompat-end */
+#endif
 
-enum mtype /* MonsterType */ {
+enum ZscName(MonsterType, mtype) {
    mtype_unknown,
    mtype_zombie,
    mtype_zombiesg,
@@ -57,7 +56,7 @@ enum mtype /* MonsterType */ {
    mtype_max
 };
 
-/* decompat-cut */
+#if !ZscOn
 struct monster_info {
    u64        exp;
    i96        score;
@@ -99,6 +98,6 @@ stkcall dmon_t *AllocDmon(void);
 
 void PrintMonsterInfo(dmon_t *m);
 void PrintDmonAllocSize(struct player *p);
+#endif
 
 #endif
-/* decompat-end */

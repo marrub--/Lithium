@@ -43,17 +43,13 @@ void Sc_Feuer(bool left, bool fire)
    with_player(LocalPlayer)
    {
       str actor = fire ? so_FeuerExplosion : so_FeuerTest;
-      i32 pufftid;
-      ACS_LineAttack(0, p->yaw, p->pitch, 0, so_Dummy, so_NoDamage, 1024, FHF_NORANDOMPUFFZ|FHF_NOIMPACTDECAL, pufftid = ACS_UniqueTID());
+      struct k32v3 t = trace_from(p->yaw, p->pitch, 1024, p->attackheight);
 
       i32 sx = p->x;
       i32 sy = p->y;
       i32 sz = p->z + 32;
-      i32 ex = GetX(pufftid);
-      i32 ey = GetY(pufftid);
-      i32 ez = GetZ(pufftid);
 
-      struct polar cpp = ctopol(ex - sx, ey - sy);
+      struct polar cpp = ctopol(t.x - sx, t.y - sy);
       cpp.dst /= 4;
       if(left) cpp.ang += 0.07;
       else     cpp.ang -= 0.07;
@@ -63,9 +59,9 @@ void Sc_Feuer(bool left, bool fire)
       k32 max = fire ? 20 : 70;
 
       for(i32 i = 0; i < max; i++) {
-         struct i32v2 v = qbezieri(sx, sy, cx, cy, ex, ey, i / max);
+         struct i32v2 v = qbezieri(sx, sy, cx, cy, t.x, t.y, i / max);
          i32 tid;
-         ACS_SpawnForced(actor, v.x, v.y, lerpk(sz, ez, i / max), tid = ACS_UniqueTID());
+         ACS_SpawnForced(actor, v.x, v.y, lerpk(sz, t.z, i / max), tid = ACS_UniqueTID());
          if(fire) {
             PtrSet(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
             ACS_Delay(1);
@@ -74,7 +70,7 @@ void Sc_Feuer(bool left, bool fire)
 
       if(fire) {
          i32 tid;
-         ACS_SpawnForced(so_FeuerFinal, ex, ey, ez, tid = ACS_UniqueTID());
+         ACS_SpawnForced(so_FeuerFinal, t.x, t.y, t.z, tid = ACS_UniqueTID());
          PtrSet(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
       }
    }
@@ -85,17 +81,7 @@ void Sc_Cercle(void)
 {
    with_player(LocalPlayer)
    {
-      k32 ax, ay, az;
-
-      __with(i32 pufftid;)
-      {
-         ACS_LineAttack(0, p->yaw, p->pitch, 0, so_Dummy, so_NoDamage, 1024,
-            FHF_NORANDOMPUFFZ|FHF_NOIMPACTDECAL, pufftid = ACS_UniqueTID());
-
-         ax = GetX(pufftid);
-         ay = GetY(pufftid);
-         az = ACS_GetActorFloorZ(pufftid);
-      }
+      struct k32v3 v = trace_from(p->yaw, p->pitch, 1024, p->attackheight, true);
 
       FreezeTime();
       ACS_Delay(2); /* necessary so sounds may play */
@@ -109,7 +95,7 @@ void Sc_Cercle(void)
          k32 py = ACS_Sin(i / 100.0) * 77;
          i32 tid;
 
-         ACS_SpawnForced(so_CircleParticle, ax + px, ay + py, az + 7, tid = ACS_UniqueTID());
+         ACS_SpawnForced(so_CircleParticle, v.x + px, v.y + py, v.z + 7, tid = ACS_UniqueTID());
 
          ACS_SetActorAngle(tid, i / 100.0);
          PtrSet(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
@@ -141,7 +127,7 @@ void Sc_Cercle(void)
          k32 py = ACS_Sin(i / 3.0) * 60;
          i32 tid;
 
-         ACS_SpawnForced(so_CircleSpearThrower, ax + px, ay + py, az + 24, tid = ACS_UniqueTID());
+         ACS_SpawnForced(so_CircleSpearThrower, v.x + px, v.y + py, v.z + 24, tid = ACS_UniqueTID());
 
          ACS_SetActorAngle(tid, i / 3.0);
          PtrSet(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);

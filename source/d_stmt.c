@@ -36,8 +36,8 @@ void Dlg_GetStmt_Cond(struct compiler *d)
       Dlg_PushB2(d, VAR_PCLASS);
 
       Dlg_PushB1(d, DCD_CMP_VI);
-      #define PCL(shr, lng) \
-         if(faststrcmp(tok->textV, #shr) == 0) {Dlg_PushB1(d, shr); goto ok;}
+      #define pclass_x(shr, lng, eq) \
+         if(faststrcmp(tok->textV, #shr) == 0) {Dlg_PushB1(d, lng); goto ok;}
       #include "p_player.h"
       d->tb.errtk(tok, "invalid playerclass type");
    } else {

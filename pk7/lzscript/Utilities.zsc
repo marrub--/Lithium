@@ -61,12 +61,15 @@ struct Lith_UTIL
       return int(n * 1000) % 1000 < 500 ? int(n) : int(n+0.5);
    }
 
-   static play vector3 TraceFrom(Actor mo, double yaw, double dist, double pitch, double offsetz) {
+   static play vector3 TraceFrom(Actor mo, double yaw, double pitch, double dist, double offsetz, bool floor = false) {
       FLineTraceData ltd;
       mo.lineTrace(yaw, dist, pitch, 0, offsetz, 0, 0, ltd);
       let loc = ltd.hitlocation;
       let ofz = (mo.pos.xy, mo.pos.z + offsetz);
       loc = ofz + level.vec3Diff(ofz, loc);
+      if(floor) {
+         loc.z = ltd.hitSector.floorPlane.zAtPoint(loc.xy);
+      }
       return loc;
    }
 

@@ -1,19 +1,13 @@
-/* ---------------------------------------------------------------------------|
- *
- * Distributed under the CC0 public domain license.
- * By Alison G. Watson. Attribution is encouraged, though not required.
- * See licenses/cc0.txt for more information.
- *
- * ---------------------------------------------------------------------------|
- *
- * Exposed world data.
- *
- * ---------------------------------------------------------------------------|
- */
-/* decompat-out pk7/lzscript/Constants/w_data.zsc */
 
-enum /* WData */
-{
+
+
+
+
+
+
+
+
+enum Lith_WData {
    wdata_bossspawned,
    wdata_soulsfreed,
    wdata_dorain,
@@ -21,16 +15,14 @@ enum /* WData */
    wdata_pclass,
 };
 
-enum /* Fun */
-{
+enum Lith_Fun {
    lfun_ragnarok = 1 << 0,
    lfun_bips     = 1 << 1,
    lfun_final    = 1 << 2,
    lfun_division = 1 << 3,
 };
 
-enum /* CBIUpgradeM */
-{
+enum Lith_CBIUpgradeM {
    cupg_weapninter,
    cupg_hasupgr1,
    cupg_armorinter,
@@ -40,8 +32,7 @@ enum /* CBIUpgradeM */
    cupg_max
 };
 
-enum /* CBIUpgradeC */
-{
+enum Lith_CBIUpgradeC {
    cupg_c_slot3spell,
    cupg_c_slot4spell,
    cupg_c_slot5spell,
@@ -50,8 +41,7 @@ enum /* CBIUpgradeC */
    cupg_c_rdistinter,
 };
 
-enum /* RandomSpawnNum */
-{
+enum Lith_RandomSpawnNum {
    lrsn_garmor,
    lrsn_barmor,
    lrsn_hbonus,
@@ -60,16 +50,14 @@ enum /* RandomSpawnNum */
    lrsn_clipbx,
 };
 
-enum /* MsgType */
-{
+enum Lith_MsgType {
    msg_ammo,
    msg_huds,
    msg_full,
    msg_both
 };
 
-enum /* DamageType */
-{
+enum Lith_DamageType {
    ldt_bullets,
    ldt_energy,
    ldt_fire,
@@ -82,8 +70,7 @@ enum /* DamageType */
    ldt_none
 };
 
-enum /* ScriptNum */
-{
+enum Lith_ScriptNum {
    lsc_gsinit = 17000,
    lsc_getfontmetric,
    lsc_metr_xadv,
@@ -101,10 +88,19 @@ enum /* ScriptNum */
    lsc_drawdmgnum,
    lsc_preinit,
    lsc_worldreopen,
+   
+   
+
+
+
+lsc_setptri32,
+lsc_setptrk32,
+lsc_setptrbool,
+
+
 };
 
-enum /* BossType */
-{
+enum Lith_BossType {
    boss_none,
    boss_barons,
    boss_cyberdemon,
@@ -113,4 +109,7 @@ enum /* BossType */
    boss_other,
 };
 
-/* EOF */
+
+
+
+

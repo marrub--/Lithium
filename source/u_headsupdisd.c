@@ -38,7 +38,7 @@ static void HUD_Ammo(struct player *p) {
       else
          sprintf(txt, "%i/%i", wep->magmax - wep->magcur, wep->magmax);
       PrintTextChS(txt);
-      PrintTextX(s_bigupper, Cr(blue), 232,1, 228,0, ptf_no_utf);
+      PrintTextX(sf_bigupper, Cr(blue), 232,1, 228,0, ptf_no_utf);
    }
 
    if(wep->ammotype & AT_Ammo) {
@@ -53,12 +53,12 @@ static void HUD_Ammo(struct player *p) {
 
       ACS_BeginPrint();
       ACS_PrintInt(wep->ammocur);
-      PrintTextX(s_bigupper, Cr(blue), 232-x,1, 228,0, ptf_no_utf);
+      PrintTextX(sf_bigupper, Cr(blue), 232-x,1, 228,0, ptf_no_utf);
    }
 
    if(type) {
       PrintTextChS(type);
-      PrintTextX(s_lmidfont, Cr(blue), 309,4, 230,0, ptf_no_utf);
+      PrintTextX(sf_lmidfont, Cr(blue), 309,4, 230,0, ptf_no_utf);
    }
 }
 
@@ -69,7 +69,7 @@ static void HUD_Health(struct player *p) {
    PrintSprite(sp_HUD_D_HPBack, 0,1, 239,2);
 
    PrintTextChS(u8"");
-   PrintTextX(s_lmidfont, Cr(blue), 8,4, 229,0, ptf_no_utf);
+   PrintTextX(sf_lmidfont, Cr(blue), 8,4, 229,0, ptf_no_utf);
 
    HUD_DrawHealth(p, p->health, 18, 228, Cr(blue), 0);
 
@@ -92,7 +92,7 @@ void Upgr_HeadsUpDisD_Render(struct player *p, struct upgrade *upgr) {
 
    HUD_Log(p, Cr(blue), 0, -10);
    HUD_KeyInd(p, 180, 21, true, 0.8);
-   HUD_Score(p, "%s\Cnscr", p->score, s_smallfnt, Cr(blue), 160,0);
+   HUD_Score(p, "%s\Cnscr", p->score, sf_smallfnt, Cr(blue), 160,0);
 
    if(p->getCVarI(sc_hud_showweapons))
       PrintSprite(sp_HUD_D_WepBack, 320,2, 218,2);

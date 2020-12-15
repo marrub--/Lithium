@@ -10,10 +10,11 @@
  *
  * ---------------------------------------------------------------------------|
  */
-/* decompat-out pk7/lzscript/Constants/w_scorenums.zsc */
 
-enum /* ScoreNum */
-{
+#ifndef w_scorenums_h
+#define w_scorenums_h
+
+enum ZscName(ScoreNum) {
    /* Score values */
    Score_Clip      = 1000,
    Score_ClipBox   = 4000,
@@ -61,8 +62,7 @@ enum /* ScoreNum */
    Score_AIMainframe = Score_DSparil,
 };
 
-enum /* EXPNum */
-{
+enum ZscName(EXPNum) {
    /* Tier 1 */
    Exp_ZombieMan   = 5,
    Exp_ShotgunGuy  = 10,
@@ -99,4 +99,4 @@ enum /* EXPNum */
    Exp_AIMainframe = Exp_DSparil,
 };
 
-/* EOF */
+#endif

@@ -110,7 +110,7 @@ script static
 void S_label(struct set_parm const *sp) {
    char buf[64]; lstrcpy2(buf, LANG, sp->st->text);
    PrintTextChS(LC(buf));
-   PrintText(s_smallfnt, sp->g->defcr,
+   PrintText(sf_smallfnt, sp->g->defcr,
              sp->g->ox + _left,1, sp->g->oy + sp->y,1);
 }
 
@@ -186,7 +186,7 @@ void S_enume(struct set_parm const *sp) {
    else
       PrintTextChS(LanguageC(LANG "st_name_%s_%i", sp->st->suff, v));
 
-   PrintText(s_smallfnt, cr,
+   PrintText(sf_smallfnt, cr,
              sp->g->ox + _rght - btw * 2 - 1,2,
              sp->g->oy + sp->y,1);
 }

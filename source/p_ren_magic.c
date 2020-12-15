@@ -27,9 +27,9 @@ void P_Ren_Magic(struct player *p)
    }
 
    if(CheckFade(fid_blade)) {
-      Str(ns, s":Weapon:Blade");
-      Str(hs, s":Weapon:BladeHit");
-      PrintSpriteFP(p->bladehit ? hs : ns, 0,1, 0,1, fid_blade);
+      Str(sp_ns, s":Weapon:Blade");
+      Str(sp_hs, s":Weapon:BladeHit");
+      PrintSpriteFP(p->bladehit ? sp_hs : sp_ns, 0,1, 0,1, fid_blade);
    }
 }
 

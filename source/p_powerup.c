@@ -12,7 +12,6 @@
  */
 
 #include "common.h"
-#include "p_weapons.h"
 #include "p_player.h"
 #include "p_hudid.h"
 #include "w_world.h"
@@ -41,7 +40,7 @@ void Sc_DOGS(void)
 
       ACS_SetMusic(sp_lsounds_Silence);
 
-      SetPropI(tid, APROP_MasterTID, p->tid);
+      SetMasterTID(tid, p->tid);
       ACS_SetActorState(tid, sm_PureSteggleEnergy);
    }
 }
@@ -109,14 +108,14 @@ void Sc_GetSigil(void)
 
       SetFade(fid_divsigil, 44, 8);
       for(i32 i = 0;; i++) {
-         Str(div_get,     sLANG "DIV_SIGIL_GET");
-         Str(div_warning, sLANG "DIV_SIGIL_WARNING");
+         Str(sl_div_get,     sLANG "DIV_SIGIL_GET");
+         Str(sl_div_warning, sLANG "DIV_SIGIL_WARNING");
 
          if(!CheckFade(fid_divsigil)) break;
 
          SetSize(640, 480);
-         PrintTextF_str(L(div_get), s_bigupper, CR_ORANGE, 320,4, 240,2, fid_divsigil);
-         PrintTextF_str(L(div_warning), s_bigupper, CR_RED, 320,4, 240,1, fid_divsigil);
+         PrintTextF_str(L(sl_div_get), sf_bigupper, CR_ORANGE, 320,4, 240,2, fid_divsigil);
+         PrintTextF_str(L(sl_div_warning), sf_bigupper, CR_RED, 320,4, 240,1, fid_divsigil);
 
          ACS_Delay(1);
       }

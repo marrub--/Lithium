@@ -67,20 +67,10 @@ script void P_CBI_PTick(struct player *p) {
    p->cbi.theme = p->getCVarI(sc_gui_theme);
 
    if(p->cbi.theme != p->cbi.oldtheme) {
-      #define X(n) ":UI_" n ":"
       static cstr const names[] = {
-         X("Green"),
-         X("Rose"),
-         X("Umi"),
-         X("Ender"),
-         X("Orange"),
-         X("Grey"),
-         X("Basilissa"),
-         X("Ghost"),
-         X("WinXP"),
-         X("Trans"),
+         #define cbi_theme_x(x) ":UI_" #x ":",
+         #include "p_cbi.h"
       };
-      #undef X
 
       if(p->cbi.theme >= cbi_theme_max) p->cbi.theme = 0;
 
@@ -89,7 +79,7 @@ script void P_CBI_PTick(struct player *p) {
 
    G_Begin(g, 320, 240);
 
-   if(!p->dlg.active) G_UpdateState(g, p);
+   G_UpdateState(g, p);
 
    G_WinBeg(g, &CBIState(g)->mainwin);
 
@@ -120,7 +110,8 @@ void P_CBI_PMinit(struct player *p) {
    p->cbi.guistate.cx = 320 / 2;
    p->cbi.guistate.cy = 240 / 2;
 
-   G_Init(&p->cbi.guistate, &p->cbi.st);
+   p->cbi.guistate.gfxprefix = ":UI:";
+   p->cbi.guistate.state     = &p->cbi.st;
 
    p->cbi.st.upgrsel = UPGR_MAX;
 

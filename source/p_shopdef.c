@@ -48,16 +48,11 @@ bool P_Shop_Buy(struct player *p, struct shopdef const *def, void *obj, cstr nam
 
    if(!nodelivery && p->getCVarI(sc_player_teleshop))
    {
-      i32 pufftid;
       i32 tid;
 
-      ACS_LineAttack(0, p->yaw, p->pitch, 0, so_Dummy, so_NoDamage, 128.0, FHF_NORANDOMPUFFZ | FHF_NOIMPACTDECAL, pufftid = ACS_UniqueTID());
+      struct k32v3 v = trace_from(p->yaw, p->pitch, 128, p->viewheight);
 
-      k32 x = GetX(pufftid);
-      k32 y = GetY(pufftid);
-      k32 z = GetZ(pufftid);
-
-      if((x || y || z) && ACS_Spawn(so_BoughtItem, x, y, z, tid = ACS_UniqueTID()))
+      if(ACS_Spawn(so_BoughtItem, v.x, v.y, v.z, tid = ACS_UniqueTID()))
       {
          if(def->ShopGive(p, def, obj, tid))
             p->logH(1, LC(LANG "LOG_Delivered"));

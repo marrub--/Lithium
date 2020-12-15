@@ -127,9 +127,11 @@ common_main do
 
    open(ARGV.shift, "wt").puts <<_end_h_; open(ARGV.shift, "wt").puts <<_end_c_; open(ARGV.shift, "wt").puts <<_end_f_
 #{generated_header "upgc"}
-/* decompat-out pk7/lzscript/Constants/u_names.zsc */
 
-enum /* UpgradeName */ {
+#ifndef upgc_header
+#define upgc_header
+
+enum ZscName(UpgradeName) {
 #{
 res = String.new
 upgrades.each_key do |una| res.concat "   UPGR_#{una},\n" end
@@ -138,7 +140,7 @@ res
 }
 };
 
-/* EOF */
+#endif
 _end_h_
 #{generated_header "upgc"}
 

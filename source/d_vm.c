@@ -294,10 +294,10 @@ void TerminalGUI(struct player *p, u32 tact) {
       tmidx = tright/2, tmidy = tbottom/2,
    };
 
-   Str(term_disconnecting, sLANG "TERM_DISCONNECTING");
-   Str(term_ip,            sLANG "TERM_IP");
-   Str(term_sgxline,       sLANG "TERM_SGXLINE");
-   Str(term_use_to_ack,    sLANG "TERM_USE_TO_ACK");
+   Str(sl_term_disconnecting, sLANG "TERM_DISCONNECTING");
+   Str(sl_term_ip,            sLANG "TERM_IP");
+   Str(sl_term_sgxline,       sLANG "TERM_SGXLINE");
+   Str(sl_term_use_to_ack,    sLANG "TERM_USE_TO_ACK");
 
    G_Begin(&gst, twidth, theigh);
    G_UpdateState(&gst, p);
@@ -308,28 +308,28 @@ void TerminalGUI(struct player *p, u32 tact) {
    PrintRect(0, tbottom-12, twidth, 12,      0x44000C);
 
    /* Top-left text */
-   PrintText_str(L(term_sgxline), s_ltrmfont, CR_RED, 0,1, 0,1);
+   PrintText_str(L(sl_term_sgxline), sf_ltrmfont, CR_RED, 0,1, 0,1);
 
    /* Top-right text */
    str tr = GetRemote();
    switch(tact) {
       default:          tr = StrParam(LC(LANG "TERM_REMOTE"),       tr); break;
       case TACT_LOGON:  tr = StrParam(LC(LANG "TERM_OPEN_CONNECT"), tr); break;
-      case TACT_LOGOFF: tr = L(term_disconnecting);                      break;
+      case TACT_LOGOFF: tr = L(sl_term_disconnecting);                      break;
    }
-   PrintText_str(tr, s_ltrmfont, CR_RED, tright,2, 0,1);
+   PrintText_str(tr, sf_ltrmfont, CR_RED, tright,2, 0,1);
 
    /* Bottom-left text */
-   PrintText_str(L(term_ip), s_ltrmfont, CR_RED, 0,1, tbottom,2);
+   PrintText_str(L(sl_term_ip), sf_ltrmfont, CR_RED, 0,1, tbottom,2);
 
    /* Bottom-right text */
    str br;
    switch(tact) {
       case TACT_LOGON:
       case TACT_LOGOFF: br = l_strdup(CanonTime(ct_date, ticks)); break;
-      default:          br = L(term_use_to_ack);                  break;
+      default:          br = L(sl_term_use_to_ack);                  break;
    }
-   PrintText_str(br, s_ltrmfont, CR_RED, tright,2, tbottom,2);
+   PrintText_str(br, sf_ltrmfont, CR_RED, tright,2, tbottom,2);
 
    /* Contents */
    char pict[64] = ":Terminal:"; strcat(pict, MemSC_G(MemB2_G(VAR_PICTL)));
@@ -341,7 +341,7 @@ void TerminalGUI(struct player *p, u32 tact) {
          str text = GetText(_from_lon);
 
          if(text) {
-            PrintText_str(text, s_ltrmfont, CR_WHITE, tmidx,0, tmidy + 35,0);
+            PrintText_str(text, sf_ltrmfont, CR_WHITE, tmidx,0, tmidy + 35,0);
             y -= 10;
          }
 
@@ -356,7 +356,7 @@ void TerminalGUI(struct player *p, u32 tact) {
          G_Clip(&gst, tleft, ttop, tmidx, ttheigh);
 
          if(text) {
-            PrintText_str(text, s_ltrmfont, CR_WHITE, tleft,1, ttop,1);
+            PrintText_str(text, sf_ltrmfont, CR_WHITE, tleft,1, ttop,1);
          }
 
          G_ClipRelease(&gst);
@@ -368,7 +368,7 @@ void TerminalGUI(struct player *p, u32 tact) {
          G_Clip(&gst, 0, ttop, ttwidth, ttheigh);
 
          if(text) {
-            PrintText_str(text, s_ltrmfont, CR_WHITE, 2,1, ttop+2,1);
+            PrintText_str(text, sf_ltrmfont, CR_WHITE, 2,1, ttop+2,1);
          }
 
          G_ClipRelease(&gst);
@@ -378,7 +378,8 @@ void TerminalGUI(struct player *p, u32 tact) {
 
    G_End(&gst, gui_curs_outlineinv);
 
-   if(p->buttons & BT_USE && !(p->old.buttons & BT_USE) && p->old.dlg.active) {
+   if(p->buttons & BT_USE && !(p->old.buttons & BT_USE) &&
+      p->old.modal == _gui_dlg) {
       ACS_LocalAmbientSound(ss_player_trmswitch, 127);
       MemB1_S(VAR_UACT, UACT_ACKNOWLEDGE);
    }
@@ -399,14 +400,14 @@ static void DialogueGUI(struct player *p) {
    PrintSpriteA(l_strdup(icon),   0,1, 0,1, 0.7);
 
    PrintTextStr(snam);
-   PrintText(s_bigupper, CR_GREEN, 30,1, 35,1);
+   PrintText(sf_bigupper, CR_GREEN, 30,1, 35,1);
 
    G_Clip(&gst, left, top, 257, 150);
    PrintTextFmt("\Cd> Remote: %S\n\Cd> Date: %s", srem, CanonTime(ct_full, ticks));
-   PrintText(s_lmidfont, CR_WHITE, left,1, top,1);
+   PrintText(sf_lmidfont, CR_WHITE, left,1, top,1);
 
    if(text) {
-      PrintText_str(text, s_smallfnt, CR_WHITE, left,1, texttop,1);
+      PrintText_str(text, sf_smallfnt, CR_WHITE, left,1, texttop,1);
    }
 
    G_ClipRelease(&gst);
@@ -569,13 +570,11 @@ void ActTRM_WAIT(struct player *p) {
 /* Main dialogue VM. */
 dynam_aut script
 void Dlg_Run(struct player *p, u32 num) {
-   if(p->dead || p->dlg.active > 1)
+   if(p->dead || p->modal != _gui_dlg)
       return;
 
    /* get the dialogue by number */
    register struct dlg_def *def = &dlgdefs[num];
-
-   p->dlg.active++;
 
    if(!def->codeV) {
       #ifndef NDEBUG
@@ -589,7 +588,6 @@ void Dlg_Run(struct player *p, u32 num) {
    gst.cx = 320 / 2;
    gst.cy = 200 / 2;
    gst.gfxprefix = ":UI_Green:";
-   G_Init(&gst);
 
    /* VM state */
    register u32 ua, ub, ur;
@@ -978,7 +976,7 @@ TRV_NP:
 halt:
    Dbg_Log(log_dlg, "%s: exited", __func__);
 
-   p->dlg.active -= 2;
+   p->modal = _gui_none;
 }
 
 /* Scripts ----------------------------------------------------------------- */
@@ -986,9 +984,9 @@ halt:
 script_str ext("ACS") addr(OBJ "RunProgram")
 void Sc_RunProgram(i32 num) {
    with_player(LocalPlayer) {
-      if(!p->dlg.active) {
+      if(p->modal == _gui_none) {
          p->dlg.num = DNUM_PRG_BEG + num;
-         p->dlg.active++;
+         p->modal = _gui_dlg;
       }
    }
 }
@@ -996,10 +994,10 @@ void Sc_RunProgram(i32 num) {
 script_str ext("ACS") addr(OBJ "RunDialogue")
 void Sc_RunDialogue(i32 num) {
    with_player(LocalPlayer) {
-      if(!p->dlg.active) {
+      if(p->modal == _gui_none) {
          p->dlg.num = DNUM_DLG_BEG + num;
          p->dlg.page = 0;
-         p->dlg.active++;
+         p->modal = _gui_dlg;
       }
    }
 }
@@ -1007,7 +1005,7 @@ void Sc_RunDialogue(i32 num) {
 script_str ext("ACS") addr(OBJ "RunTerminal")
 void Sc_RunTerminal(i32 num) {
    with_player(LocalPlayer) {
-      if(!p->dlg.active) {
+      if(p->modal == _gui_none) {
          switch(mission) {
             case _unfinished: p->dlg.page = DPAGE_UNFINISHED; break;
             case _finished:   p->dlg.page = DPAGE_FINISHED;   break;
@@ -1015,7 +1013,7 @@ void Sc_RunTerminal(i32 num) {
          }
 
          p->dlg.num = DNUM_TRM_BEG + num;
-         p->dlg.active++;
+         p->modal = _gui_dlg;
       }
    }
 }

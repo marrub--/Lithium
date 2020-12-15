@@ -22,9 +22,9 @@ void P_CBI_TabStatistics(struct gui_state *g, struct player *p)
 
    #define Stat(name, f, x) \
       PrintTextChS(name); \
-      PrintText(s_lmidfont, g->defcr, g->ox+17,1,  g->oy+27 + 8*n,1); \
+      PrintText(sf_lmidfont, g->defcr, g->ox+17,1,  g->oy+27 + 8*n,1); \
       PrintTextFmt(f, x); \
-      PrintText(s_smallfnt, g->defcr, g->ox+267,2, g->oy+27 + 8*n,1); \
+      PrintText(sf_smallfnt, g->defcr, g->ox+267,2, g->oy+27 + 8*n,1); \
       n++
 
    Stat(LC(LANG "STAT_ScoreMul"),   "%i%%", ceilk(p->scoremul * 100.0));

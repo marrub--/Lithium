@@ -43,33 +43,33 @@ script void Upgr_Subweapons_Update(struct player *p, struct upgrade *upgr) {
 }
 
 void Upgr_Subweapons_Render(struct player *p, struct upgrade *upgr) {
-   Str(subwepback, s":HUD_D:SubWepBack");
-   Str(subwepbar1, s":HUD_D:SubWepBar1");
-   Str(subwepbar2, s":HUD_D:SubWepBar2");
+   Str(sp_SubWepBack, s":HUD_D:SubWepBack");
+   Str(sp_SubWepBar1, s":HUD_D:SubWepBar1");
+   Str(sp_SubWepBar2, s":HUD_D:SubWepBar2");
 
    if(!p->hudenabled) return;
 
-   PrintSprite(subwepback, 66,1, 239,2);
+   PrintSprite(sp_SubWepBack, 66,1, 239,2);
 
    u32 prc = 47 * UData.charge / (k32)100.0;
    if(UData.shots == 0) SetClip(72, 223, prc, 1);
-   /*                */ PrintSprite(subwepbar1, 72,1, 224,2);
+   /*                */ PrintSprite(sp_SubWepBar1, 72,1, 224,2);
    if(UData.shots == 1) SetClip(72, 223, prc, 1);
-   if(UData.shots != 0) PrintSprite(subwepbar2, 72,1, 224,2);
+   if(UData.shots != 0) PrintSprite(sp_SubWepBar2, 72,1, 224,2);
    if(UData.shots <  2) ClearClip();
 
    for(i32 i = 0; i < _subw_max; i++) {
       StrAry(subwepact,
              s":HUD_D:SubWep0", s":HUD_D:SubWep1", s":HUD_D:SubWep2",
              s":HUD_D:SubWep3", s":HUD_D:SubWep4", s":HUD_D:SubWep5");
-      Str(subwepuse, s":HUD_D:SubWepUse");
+      Str(sp_SubWepUse, s":HUD_D:SubWepUse");
 
       i32 x   = 68 + i * 9;
       i32 fid = fid_subwepS + i;
 
       if(get_bit(UData.have, i)) PrintSprite(subwepact[i], x,1, 238,2);
       if(UData.which == i)       SetFade(fid, 1, 6);
-      if(CheckFade(fid))         PrintSpriteF(subwepuse, x,1, 238,2, fid);
+      if(CheckFade(fid))         PrintSpriteF(sp_SubWepUse, x,1, 238,2, fid);
    }
 }
 

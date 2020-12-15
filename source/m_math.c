@@ -266,4 +266,18 @@ struct polar ctopol(k32 x, k32 y)
    return pol;
 }
 
+struct k32v3 trace_from(k32 yaw, k32 pitch, k32 dist, k32 offsetz, bool floor) {
+   struct k32v3 v;
+   ServCallI(sm_TraceFrom, yaw, pitch, dist, offsetz, floor,
+             (intptr_t)&v.x, (intptr_t)&v.y, (intptr_t)&v.z);
+   return v;
+}
+
+struct i32v2 unproject(k32 x, k32 y, k32 z, bool *visible) {
+   struct i32v2 v;
+   ServCallI(sm_Unproject, x, y, z,
+             (intptr_t)&v.x, (intptr_t)&v.y, (intptr_t)visible);
+   return v;
+}
+
 /* EOF */

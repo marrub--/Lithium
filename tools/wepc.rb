@@ -22,7 +22,6 @@ common_main do
    tks = tokenize ARGV.shift
 
    pcl  = "pcl_any"
-   wf   = []
    weps = []
    wepn = {}
 
@@ -33,14 +32,6 @@ common_main do
       when :colon
          tok = tks.next.expect_after tok, :identi
          pcl = "pcl_" + tok.text
-      when :modulo
-         wf = []
-         if tks.peek.type == :identi
-            tks.while_drop :bar do
-               tok = tks.next.expect_after tok, :identi
-               wf.push "dst_bit(" + tok.text + ")"
-            end
-         end
       when :plus
          res = []
          tok = tks.next.expect_after tok, :identi
@@ -62,7 +53,6 @@ common_main do
             tok = tks.next.expect_after orig, :string
             res.push typ + '("' + tok.text + '")'
          end
-         res.push "F(" + wf.join(" | ") + ")" unless wf.empty?
          weps.push({pcl: pcl, nam: nam, slt: slt, res: res})
       when :semico
          res = []
@@ -77,11 +67,12 @@ common_main do
    end
 
    open(ARGV.shift, "wt").puts <<_end_h_; open(ARGV.shift, "wt").puts <<_end_c_
-/* pk7/lzscript/Constants/p_weapons.zsc
- */
 #{generated_header "wepc"}
 
-enum /* WeaponNum */ {
+#ifndef wepc_header
+#define wepc_header
+
+enum ZscName(WeaponNum) {
    weapon_min = 1,
    weapon_unknown = 0,
 
@@ -93,7 +84,7 @@ res
    weapon_max
 };
 
-enum /* WeaponName */ {
+enum ZscName(WeaponName) {
    wepnam_fist,
    wepnam_chainsaw,
    wepnam_pistol,
@@ -107,14 +98,14 @@ enum /* WeaponName */ {
    wepnam_max,
 };
 
-enum /* RifleMode */ {
+enum ZscName(RifleMode) {
    rifle_firemode_auto,
    rifle_firemode_grenade,
    rifle_firemode_burst,
    rifle_firemode_max
 };
 
-/* EOF */
+#endif
 _end_h_
 #{generated_header "wepc"}
 
@@ -129,7 +120,6 @@ _end_h_
 #define O(a) sOBJ a
 #define P(a) s"weapons/" a "/pickup"
 #define N(a) .classname = sOBJ a, .name = Spf a
-#define F(...) .flags = __VA_ARGS__
 struct weaponinfo const weaponinfo[weapon_max] = {
    {0, pcl_any, snil, Placeholder1},
 #{

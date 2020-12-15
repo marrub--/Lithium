@@ -22,7 +22,7 @@ static void Blinker(cstr bgn) {
 
    if(t < time) {
       PrintTextChS(bgn);
-      PrintTextA(s_smallfnt, Cr(green), 160,0, 220,0, a);
+      PrintTextA(sf_smallfnt, Cr(green), 160,0, 220,0, a);
       a += 0.006;
    } else if(t >= time*2) {
       t = 0;
@@ -55,7 +55,7 @@ void W_Title(void) {
    for(i32 t = 0, pos = 0;;)
    {
       PrintTextChr(txt, pos);
-      PrintText(s_smallfnt, Cr(green), 7,1, 6,1);
+      PrintText(sf_smallfnt, Cr(green), 7,1, 6,1);
 
       if(t == 0)
       {
@@ -77,7 +77,7 @@ void W_Title(void) {
    for(i32 i = 0; i < 35 * 7; i++)
    {
       PrintTextChS(txt);
-      PrintText(s_smallfnt, Cr(green), 7,1, 6,1);
+      PrintText(sf_smallfnt, Cr(green), 7,1, 6,1);
       Blinker(bgn);
       ACS_Delay(1);
       DrawCallI(sm_LE);
@@ -86,7 +86,7 @@ void W_Title(void) {
    for(k32 a = 1; a > 0; a -= 0.01)
    {
       PrintTextChS(txt);
-      PrintTextA(s_smallfnt, Cr(green), 7,1, 6,1, a);
+      PrintTextA(sf_smallfnt, Cr(green), 7,1, 6,1, a);
       Blinker(bgn);
       ACS_Delay(1);
       DrawCallI(sm_LE);

@@ -33,7 +33,7 @@ void HUD_WeaponSlots(struct player *p, i32 cr_one, i32 cr_two, i32 cr_many, i32 
 
       ACS_BeginPrint();
       ACS_PrintInt(i);
-      PrintTextX(s_lhudfontsmall, cr, x,2, y,2, ptf_no_utf);
+      PrintTextX(sf_lhudfontsmall, cr, x,2, y,2, ptf_no_utf);
 
       if(p->weapon.cur->info->slot == i)
          SetFade(fid_slotnS + i, 1, 6);
@@ -41,7 +41,7 @@ void HUD_WeaponSlots(struct player *p, i32 cr_one, i32 cr_two, i32 cr_many, i32 
       if(CheckFade(fid_slotnS + i)) {
          ACS_BeginPrint();
          ACS_PrintInt(i);
-         PrintTextFX(s_lhudfontsmall, cr_cur, x,2, y,2, fid_slotnS + i, ptf_no_utf);
+         PrintTextFX(sf_lhudfontsmall, cr_cur, x,2, y,2, fid_slotnS + i, ptf_no_utf);
       }
    }
 }
@@ -88,8 +88,8 @@ void HUD_Score(struct player *p, cstr fmt, i96 scrn, str font, i32 cr, i32 x, i3
 
    i32 expbar = p->getCVarI(sc_hud_expbar);
    if(expbar > 0) {
-      Str(exp_bar_0, s":Bars:ExpBar0");
-      PrintSprite(exp_bar_0, x,xa, 24,1);
+      Str(sp_exp_bar_0, s":Bars:ExpBar0");
+      PrintSprite(sp_exp_bar_0, x,xa, 24,1);
       i32 xx = x;
       u32 fr =
          ((u64)(p->attr.exp     - p->attr.expprev) * 24) /
@@ -120,19 +120,19 @@ void HUD_DrawHealth(struct player *p, i32 health, i32 x, i32 y, i32 cr, i32 cr_f
 
    ACS_BeginPrint();
    ACS_PrintInt(health);
-   PrintTextX(s_bigupper, cr, x,1, y,0, ptf_no_utf);
+   PrintTextX(sf_bigupper, cr, x,1, y,0, ptf_no_utf);
 
    if(protect) {
       k32 amt = protect / 200.0;
       ACS_BeginPrint();
       ACS_PrintInt(health);
-      PrintTextAX(s_bigupper, CR_TAN, x,1, y,0, amt, ptf_no_utf);
+      PrintTextAX(sf_bigupper, CR_TAN, x,1, y,0, amt, ptf_no_utf);
    }
 
    if(CheckFade(fid_health)) {
       ACS_BeginPrint();
       ACS_PrintInt(health);
-      PrintTextFX(s_bigupper, cr_fade, x,1, y,0, fid_health, ptf_no_utf);
+      PrintTextFX(sf_bigupper, cr_fade, x,1, y,0, fid_health, ptf_no_utf);
    }
 }
 

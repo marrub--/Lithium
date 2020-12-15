@@ -17,16 +17,15 @@
 /* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr(OBJ "Obituary")
-void Sc_Obituary(void)
-{
-   Str(ob_crush,      s"(crush)");
-   Str(ob_default,    s"(default)");
-   Str(ob_drowning,   s"(drowning)");
-   Str(ob_exit,       s"(exit)");
-   Str(ob_falling,    s"(falling)");
-   Str(ob_fire,       s"(fire)");
-   Str(ob_slime,      s"(slime)");
-   Str(ob_suicide,    s"(suicide)");
+void Sc_Obituary(void) {
+   Str(st_ob_crush,      s"(crush)");
+   Str(st_ob_default,    s"(default)");
+   Str(st_ob_drowning,   s"(drowning)");
+   Str(st_ob_exit,       s"(exit)");
+   Str(st_ob_falling,    s"(falling)");
+   Str(st_ob_fire,       s"(fire)");
+   Str(st_ob_slime,      s"(slime)");
+   Str(st_ob_suicide,    s"(suicide)");
 
    static struct {
       cstr sub, obj, psd, psi, act;
@@ -40,18 +39,18 @@ void Sc_Obituary(void)
    struct player *p = LocalPlayer;
 
    str obit = ServCallS(sm_GetObituary);
-   if(obit == s_NIL) return;
+   if(obit == st_nil) return;
 
    i32 rn = ACS_Random(1, 5);
 
-   /**/ if(obit == ob_crush)    obit = Language(LANG "OB_Crush_%i",    rn);
-   else if(obit == ob_default)  obit = Language(LANG "OB_Default_%i",  rn);
-   else if(obit == ob_drowning) obit = Language(LANG "OB_Drowning_%i", rn);
-   else if(obit == ob_exit)     obit = Language(LANG "OB_Exit_%i",     rn);
-   else if(obit == ob_falling)  obit = Language(LANG "OB_Falling_%i",  rn);
-   else if(obit == ob_fire)     obit = Language(LANG "OB_Fire_%i",     rn);
-   else if(obit == ob_slime)    obit = Language(LANG "OB_Slime_%i",    rn);
-   else if(obit == ob_suicide)  obit = Language(LANG "OB_Suicide_%i",  rn);
+   /**/ if(obit == st_ob_crush)    obit = Language(LANG "OB_Crush_%i",    rn);
+   else if(obit == st_ob_default)  obit = Language(LANG "OB_Default_%i",  rn);
+   else if(obit == st_ob_drowning) obit = Language(LANG "OB_Drowning_%i", rn);
+   else if(obit == st_ob_exit)     obit = Language(LANG "OB_Exit_%i",     rn);
+   else if(obit == st_ob_falling)  obit = Language(LANG "OB_Falling_%i",  rn);
+   else if(obit == st_ob_fire)     obit = Language(LANG "OB_Fire_%i",     rn);
+   else if(obit == st_ob_slime)    obit = Language(LANG "OB_Slime_%i",    rn);
+   else if(obit == st_ob_suicide)  obit = Language(LANG "OB_Suicide_%i",  rn);
 
    noinit static char out[1024];
    char *pt = out;
@@ -77,7 +76,7 @@ void Sc_Obituary(void)
 
    *pt = '\0';
 
-   if(obit != s_NIL) {
+   if(obit != st_nil) {
       Dbg_Log(log_dev, "%s", out);
       for_player() p->logB(1, "%s", out);
    }

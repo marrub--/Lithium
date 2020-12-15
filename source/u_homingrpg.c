@@ -45,8 +45,9 @@ void Upgr_HomingRPG_Update(struct player *p, struct upgrade *upgr)
          }
       }
 
-      if(ACS_SetActivator(0, AAPTR_TRACER) && GetMembI(0, sm_Health) > 0)
-         ACS_SpawnForced(so_TargetMarker, GetX(0), GetY(0), GetZ(0) + (GetPropK(0, APROP_Height) / 2k));
+      if(ACS_SetActivator(0, AAPTR_TRACER) && GetHealth(0) > 0)
+         ACS_SpawnForced(so_TargetMarker,
+                         GetX(0), GetY(0), GetZ(0) + GetHeight(0) / 2k);
    }
 }
 

@@ -30,7 +30,7 @@ void P_Ren_Debug(struct player *p) {
       ACS_PrintString(dbgstat[i]);
    for(i32 i = 0; i < dbgnotenum; i++)
       ACS_PrintString(dbgnote[i]);
-   PrintTextA(s_smallfnt, CR_WHITE, 10,1, 20,1, 0.2);
+   PrintTextA(sf_smallfnt, CR_WHITE, 10,1, 20,1, 0.2);
 }
 #endif
 

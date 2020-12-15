@@ -32,9 +32,9 @@ void W_DoRain(void)
 
    k32 skydist, curskydist = 1;
    for(;;) {
-      Str(f_sky1, s"F_SKY1");
+      Str(sp_f_sky1, s"F_SKY1");
 
-      if((rain_chk = !ACS_CheckActorCeilingTexture(0, f_sky1))) {
+      if((rain_chk = !ACS_CheckActorCeilingTexture(0, sp_f_sky1))) {
          rain_dist = 1024;
          rain_px = p->x;
          rain_py = p->y;

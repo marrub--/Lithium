@@ -157,7 +157,7 @@ void F_Load(void) {
 static
 void F_drawBack(struct finale_state *st) {
    SetSize(320, 200);
-   if(st->bgnd == s_NIL) {
+   if(st->bgnd == st_nil) {
       PrintRect(0, 0, 320, 200, 0x000000);
    } else {
       PrintSprite(st->bgnd, 0,1, 0,1);
@@ -246,7 +246,7 @@ void F_text(struct finale_state *st) {
       SetClipW(10, 10, 300, h, 300);
       PrintRectA(0, 0, 320, 240, 0x000000, 127);
       PrintTextChr(txt, p);
-      PrintText(s_smallfnt, CR_WHITE, 10,1, 10,1);
+      PrintText(sf_smallfnt, CR_WHITE, 10,1, 10,1);
       ClearClip();
 
       if(i == fade) {
@@ -283,17 +283,17 @@ void F_wait(struct finale_state *st) {
 }
 
 void F_Start(cstr which) {
-   Str(lithend, s"LITHEND");
+   Str(st_lithend, s"LITHEND");
 
    finale = which;
 
-   ACS_ChangeLevel(lithend, 0, CHANGELEVEL_NOINTERMISSION |
+   ACS_ChangeLevel(st_lithend, 0, CHANGELEVEL_NOINTERMISSION |
                    CHANGELEVEL_PRERAISEWEAPON, -1);
 }
 
 _Noreturn dynam_aut script
 void F_Run(struct player *p) {
-   Str(actually_end_the_game, s"ActuallyEndTheGame");
+   Str(sm_actually_end_the_game, s"ActuallyEndTheGame");
 
    while(!finit) ACS_Delay(1);
 
@@ -325,7 +325,7 @@ void F_Run(struct player *p) {
       }
    }
 
-   ServCallI(actually_end_the_game);
+   ServCallI(sm_actually_end_the_game);
 }
 
 script_str ext("ACS") addr(OBJ "Finale")

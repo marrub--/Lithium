@@ -27,11 +27,11 @@ void DodgeView(struct player *p)
    for(i32 i = 0; i < 20; i++)
    {
       k32 mul = 1.0 - (ACS_Sin(i / 40.0) * 0.6);
-      SetPropK(0, APROP_ViewHeight, vh * mul);
+      SetViewHeight(0, vh * mul);
       ACS_Delay(1);
    }
 
-   SetPropK(0, APROP_ViewHeight, vh);
+   SetViewHeight(0, vh);
 }
 
 /* Extern Functions -------------------------------------------------------- */
@@ -76,8 +76,8 @@ void Upgr_ReflexWetw_Update(struct player *p, struct upgrade *upgr)
       }
    }
 
-   Str(power_flight, s"PowerFlight");
-   if(p->waterlevel == 0 && P_ButtonPressed(p, BT_JUMP) && !InvNum(power_flight) &&
+   Str(so_PowerFlight, s"PowerFlight");
+   if(p->waterlevel == 0 && P_ButtonPressed(p, BT_JUMP) && !InvNum(so_PowerFlight) &&
       !InvNum(so_RocketBooster) && !UData.leaped &&
       (!p->onground || UData.charge < CHARGE_MAX))
    {

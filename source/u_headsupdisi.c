@@ -29,30 +29,27 @@ static void HUDI_Ammo(struct player *p, struct upgrade *upgr) {
 
    str typegfx = snil;
 
-   bool has_ammo = (wep->ammotype & AT_Ammo && !get_bit(wep->info->flags, wf_magic));
-   bool has_nmag = wep->ammotype & AT_NMag;
-
-   if(has_ammo && has_nmag) {
+   if(wep->ammotype & AT_Ammo && wep->ammotype & AT_NMag) {
       PrintSprite(sp_HUD_I_AmmoExtend, 242,2, 227,2);
    }
 
    PrintSprite(sp_HUD_I_AmmoWepsBack, 320,2, 229,2);
 
-   if(has_ammo) {
+   if(wep->ammotype & AT_Ammo) {
       typegfx = sp_HUD_I_AMMO;
 
       i32 x = 0;
 
-      if(has_nmag) {
+      if(wep->ammotype & AT_NMag) {
          x = -58;
       }
 
       ACS_BeginPrint();
       ACS_PrintInt(wep->ammocur);
-      PrintTextX(s_bigupper, Cr(purple), x+242,1, 218,0, ptf_no_utf);
+      PrintTextX(sf_bigupper, Cr(purple), x+242,1, 218,0, ptf_no_utf);
    }
 
-   if(has_nmag) {
+   if(wep->ammotype & AT_NMag) {
       typegfx = sp_HUD_I_MAG;
 
       char txt[16];
@@ -61,7 +58,7 @@ static void HUDI_Ammo(struct player *p, struct upgrade *upgr) {
       else
          sprintf(txt, "%i/%i", wep->magmax - wep->magcur, wep->magmax);
       PrintTextChS(txt);
-      PrintTextX(s_bigupper, Cr(purple), 242,1, 218,0, ptf_no_utf);
+      PrintTextX(sf_bigupper, Cr(purple), 242,1, 218,0, ptf_no_utf);
    }
 
    if(typegfx) {
@@ -84,7 +81,7 @@ static void HUDI_HealthArmor(struct player *p, struct upgrade *upgr)
    lerplli(&UData.overdrive);
 
    PrintTextFmt("%lli", UData.overdrive.value_display);
-   PrintTextX(s_bigupper, Cr(purple), 21,1, 220,0, ptf_no_utf);
+   PrintTextX(sf_bigupper, Cr(purple), 21,1, 220,0, ptf_no_utf);
 }
 
 /* Extern Functions -------------------------------------------------------- */
@@ -107,7 +104,7 @@ void Upgr_HeadsUpDisI_Render(struct player *p, struct upgrade *upgr)
    UData.score.value = p->score;
    lerplli(&UData.score);
 
-   HUD_Score(p, "%s \CnScore", UData.score.value_display, s_lmidfont, Cr(purple), 2,1);
+   HUD_Score(p, "%s \CnScore", UData.score.value_display, sf_lmidfont, Cr(purple), 2,1);
 
    /* Status */
    HUDI_Ammo(p, upgr);

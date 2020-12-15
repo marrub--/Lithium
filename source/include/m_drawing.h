@@ -10,9 +10,7 @@
  *
  * ---------------------------------------------------------------------------|
  */
-/* decompat-out pk7/lzscript/Constants/m_drawing.zsc */
 
-/* decompat-cut */
 #if defined(GlobalCr)
 #if !defined(GlobalCrH)
 #define GlobalCrH GlobalCr
@@ -89,6 +87,12 @@ GlobalCrH(wselm1) GlobalCrH(wselm2) GlobalCrH(wselm3) GlobalCrH(wselms)
 
 #define PrintSpriteFP(name, x, xa, y, ya, num) \
    DrawCallI(sm_LS, name, PrintSpriteArgs_F(x, xa, y, ya, num, 0x100))
+
+#define PrintSpriteC(name, x, xa, y, ya, c) \
+   DrawCallI(sm_LS, name, PrintSpriteArgs_N(x, xa, y, ya, 0), c)
+
+#define PrintSpriteAC(name, x, xa, y, ya, alpha, c) \
+   DrawCallI(sm_LS, name, PrintSpriteArgs_A(x, xa, y, ya, alpha, 0), c)
 
 #define PrintTextFmt(...)  StrParamBegin(__VA_ARGS__)
 #define PrintTextStr(s)    (ACS_BeginPrint(), ACS_PrintString(s))
@@ -179,6 +183,7 @@ GlobalCrH(wselm1) GlobalCrH(wselm2) GlobalCrH(wselm3) GlobalCrH(wselms)
 #define StartSound(...) \
    DrawCallI(sm_StartSound, __VA_ARGS__)
 
+#if !ZscOn
 enum {
    CHANF_LISTENERZ   = 8,
    CHANF_MAYBE_LOCAL = 16,
@@ -210,10 +215,9 @@ enum {
 };
 
 i32 Draw_GetCr(i32 n);
-/* decompat-end */
+#endif
 
-enum /* FontNum */
-{
+enum ZscName(FontNum) {
    font_misaki_gothic,
    font_misaki_mincho,
    font_k6x8,
@@ -221,8 +225,7 @@ enum /* FontNum */
    font_num,
 };
 
-enum /* Channel */
-{
+enum ZscName(Channel) {
    lch_auto,
 
    lch_weapon,
@@ -245,10 +248,10 @@ enum /* Channel */
    lch_weapon3,
 };
 
-/* decompat-cut */
+#if !ZscOn
 void Draw_Init(void);
+#endif
 
 #endif
-/* decompat-end */
 
 /* EOF */

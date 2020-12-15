@@ -96,9 +96,9 @@ static void DrawPage(struct gui_state *g, struct player *p, struct page *page) {
    if(image) PrintSpriteA(image, g->ox+186,2, g->oy+140,2, 0.4);
 
    PrintTextChS(GetFullName(page));
-   PrintText(s_lmidfont, CR_ORANGE, g->ox+1,1, g->oy+5,1);
+   PrintText(sf_lmidfont, CR_ORANGE, g->ox+1,1, g->oy+5,1);
 
-   Str(nl_bar, s"\n|");
+   Str(st_nl_bar, s"\n|");
 
    #define DrawText(txt, cr, x, y) \
       PrintTextStr(txt); \
@@ -107,7 +107,7 @@ static void DrawPage(struct gui_state *g, struct player *p, struct page *page) {
       } else { \
          ACS_PrintChar('|'); \
       } \
-      PrintText(s_smallfnt, cr, g->ox+x,1, g->oy+y,1)
+      PrintText(sf_smallfnt, cr, g->ox+x,1, g->oy+y,1)
 
    /* render an outline if the page has an image */
    if(image) {
@@ -140,18 +140,18 @@ static void DrawPage(struct gui_state *g, struct player *p, struct page *page) {
 }
 
 static void MainUI(struct gui_state *g, struct player *p) {
-   Str(bip_categs, sLANG "BIP_CATEGS");
+   Str(sl_bip_categs, sLANG "BIP_CATEGS");
 
    i32 n = 0;
 
-   PrintText_str(L(bip_categs), s_smallfnt, CR_PURPLE, g->ox+27,1, g->oy+57,1);
+   PrintText_str(L(sl_bip_categs), sf_smallfnt, CR_PURPLE, g->ox+27,1, g->oy+57,1);
 
    p->bip.lastcategory = BIPC_MAIN;
 
    #define Categ(name) { \
       cstr s = LanguageC(LANG "BIP_HELP_%s", P_BIP_CategoryToName(name)); \
       PrintTextChS(s); \
-      PrintTextA(s_smallfnt, g->defcr, g->ox+92,1, g->oy+72+n,1, 0.7); \
+      PrintTextA(sf_smallfnt, g->defcr, g->ox+92,1, g->oy+72+n,1, 0.7); \
       s = LanguageC(LANG "BIP_NAME_%s", P_BIP_CategoryToName(name)); \
       if(G_Button_HId(g, name, s, 32, 72 + n, Pre(btnbipmain))) { \
          p->bip.curcategory = name; \
@@ -282,8 +282,8 @@ static void SearchUI(struct gui_state *g, struct player *p) {
          }
       }
    } else {
-      Str(bip_no_results, sLANG "BIP_NO_RESULTS");
-      PrintText_str(L(bip_no_results), s_smallfnt, CR_DARKGREY, g->ox+57,0, g->oy+82,0);
+      Str(sl_bip_no_results, sLANG "BIP_NO_RESULTS");
+      PrintText_str(L(sl_bip_no_results), sf_smallfnt, CR_DARKGREY, g->ox+57,0, g->oy+82,0);
    }
 }
 
@@ -308,14 +308,14 @@ void P_CBI_TabBIP(struct gui_state *g, struct player *p) {
       if(G_Button(g, LC(LANG "BIP_BACK"), 7, 25, false, Pre(btnbipback)))
          p->bip.curcategory = p->bip.lastcategory;
    } else {
-      Str(bip_header, sLANG "BIP_HEADER");
+      Str(sl_bip_header, sLANG "BIP_HEADER");
       PrintSpriteA(sp_UI_bip, g->ox+7,1, g->oy+27,1, 0.1);
-      PrintText_str(L(bip_header), s_lmidfont, g->defcr, g->ox+22,1, g->oy+27,1);
+      PrintText_str(L(sl_bip_header), sf_lmidfont, g->defcr, g->ox+22,1, g->oy+27,1);
    }
 
    if(max) {
       PrintTextFmt(LC(LANG "BIP_AVAILABLE"), avail, max);
-      PrintText(s_smallfnt, g->defcr, g->ox+287,2, g->oy+17,1);
+      PrintText(sf_smallfnt, g->defcr, g->ox+287,2, g->oy+17,1);
    }
 }
 

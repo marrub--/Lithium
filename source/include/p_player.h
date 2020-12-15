@@ -11,35 +11,92 @@
  * ---------------------------------------------------------------------------|
  */
 
-#if defined(PCL)
+#if defined(pclass_x)
 /* Shorthand and classes. For parsing and headers. */
-PCL(pM, pcl_marine)
-PCL(pC, pcl_cybermage)
-PCL(pI, pcl_informant)
-PCL(pW, pcl_wanderer)
-PCL(pA, pcl_assassin)
-PCL(pD, pcl_darklord)
-PCL(pT, pcl_thoth)
+/* Base Classes */
+pclass_x(pM, pcl_marine,    1 << 0)
+pclass_x(pC, pcl_cybermage, 1 << 1)
+pclass_x(pI, pcl_informant, 1 << 2)
+pclass_x(pW, pcl_wanderer,  1 << 3)
+pclass_x(pA, pcl_assassin,  1 << 4)
+pclass_x(pD, pcl_darklord,  1 << 5)
+pclass_x(pT, pcl_thoth,     1 << 6)
 
-PCL(gO, pcl_outcasts)
-PCL(gM, pcl_missioners)
-PCL(gI, pcl_intruders)
-PCL(gA, pcl_any)
-PCL(gH, pcl_human)
-PCL(gN, pcl_nonhuman)
-PCL(gR, pcl_robot)
-#undef PCL
+/* Groups */
+pclass_x(gO, pcl_outcasts,   pcl_marine    | pcl_cybermage)
+pclass_x(gM, pcl_missioners, pcl_informant | pcl_wanderer)
+pclass_x(gI, pcl_intruders,  pcl_assassin  | pcl_darklord | pcl_thoth)
+
+/* Lifeform Type */
+pclass_x(gH, pcl_human,    pcl_marine   | pcl_cybermage | pcl_assassin)
+pclass_x(gN, pcl_nonhuman, pcl_wanderer | pcl_darklord  | pcl_thoth)
+pclass_x(gR, pcl_robot,    pcl_informant)
+
+/* Misc. Abilities */
+pclass_x(gA, pcl_any,       pcl_human     | pcl_nonhuman | pcl_robot)
+pclass_x(gU, pcl_magicuser, pcl_cybermage | pcl_wanderer | pcl_thoth)
+#undef pclass_x
 #elif !defined(p_player_h)
 #define p_player_h
 
+enum ZscName(Attrib) {
+   at_acc,
+   at_def,
+   at_str,
+   at_vit,
+   at_stm,
+   at_luk,
+   at_spc,
+   at_max
+};
+
+enum ZscName(PData) {
+   pdata_weapon,
+   pdata_upgrade,
+   pdata_riflemode,
+   pdata_hassigil,
+   pdata_weaponzoom,
+   pdata_pclass,
+   pdata_semifrozen,
+   pdata_slot3ammo,
+   pdata_addp,
+   pdata_addy,
+   pdata_recoilp,
+   pdata_attr,
+};
+
+enum ZscName(SubweaponType) {
+   _subw_gun,
+   _subw_dagger,
+   _subw_grenade,
+   _subw_mine,
+   _subw_axe,
+   _subw_dart,
+   _subw_max,
+};
+
+enum ZscName(DamageNumType) {
+   _dnum_smol,
+   _dnum_norm,
+   _dnum_crit,
+   _dnum_max,
+};
+
+enum ZscName(PClass) {
+   pcl_unknown,
+
+   #define pclass_x(shr, lng, eq) lng = eq,
+   #include "p_player.h"
+};
+
+#if !ZscOn
 #include "common.h"
 #include "p_cbi.h"
 #include "p_upgrades.h"
-#include "p_data.h"
 #include "p_bip.h"
 #include "p_log.h"
 #include "m_list.h"
-#include "p_wepinfo.h"
+#include "p_weapons.h"
 #include "p_shopdef.h"
 #include "p_attrib.h"
 #include "p_sys.h"
@@ -114,14 +171,12 @@ enum {
    _max_players = 8,
 };
 
-enum
-{
-   #define PCL(l, r) l = r,
+enum {
+   #define pclass_x(shr, lng, eq) shr = lng,
    #include "p_player.h"
 };
 
-enum
-{
+enum {
    pro_nb,
    pro_female,
    pro_male,
@@ -129,9 +184,18 @@ enum
    pro_max,
 };
 
+enum {
+   _gui_none,
+   _gui_cbi,
+   _gui_waypoint,
+
+   _gui_disables_hud,
+   _gui_dlg = _gui_disables_hud,
+   _gui_intro,
+};
+
 /* Data that needs to be kept track of between frames. */
-struct player_delta
-{
+struct player_delta {
    /* Status */
    k32 alpha;
    i96 score;
@@ -156,6 +220,9 @@ struct player_delta
    u32  frozen;
    u32  semifrozen;
 
+   /* GUI */
+   i32 modal;
+
    /* Attributes */
    struct player_attributes attr;
 };
@@ -173,21 +240,20 @@ struct player_delta
  * edit 31-08-2017: m e r g e
  * edit 04-04-2020: WHY DID YOU MAKE IT THAT COMPLEX YOU BUNGUS
  */
-struct player
-{
+struct player {
    /* data */
    __prop megaProtect  {default: PtrInvNum(->tid, so_MegaProtection)}
    __prop mana         {default: PtrInvNum(->tid, so_Mana)}
    __prop manamax      {default: ACS_GetMaxInventory(->tid, so_Mana)}
-   __prop health       {default:   GetMembI(->tid, sm_Health),
-                        operator=: SetPropI(->tid, APROP_Health)}
+   __prop health       {default:   GetHealth(->tid),
+                        operator=: SetHealth(->tid, ...)}
    __prop setActivator {operator(): ACS_SetActivator(->tid)}
    __prop getVel       {operator(): mag2k(->velx, ->vely)}
    __prop grabInput    {default:   GetMembI(->tid, sm_GrabInput),
                         operator=: SetMembI(->tid, sm_GrabInput)}
    __prop onground     {default: GetMembI(->tid, sm_OnGround)}
-   __prop waterlevel   {default: GetPropI(->tid, APROP_Waterlevel)}
-   __prop classname    {default: GetPropS(->tid, APROP_NameTag)}
+   __prop waterlevel   {default: GetMembI(->tid, sm_WaterLevel)}
+   __prop classname    {default: GetNameTag(->tid)}
    __prop overdrive    {default: GetMembI(->tid, sm_Overdrive)}
 
    /* cvars */
@@ -270,7 +336,6 @@ struct player
 
    bool teleportedout;
    u32  done_intro;
-   bool doing_intro;
 
    /* Input */
    char txtbuf[8];
@@ -280,6 +345,7 @@ struct player
    u32 spawnhealth;
    k32 jumpheight;
    k32 viewheight;
+   k32 attackheight;
    str stepnoise;
 
    /* pitch/yaw in precalculated sane radian format */
@@ -304,7 +370,6 @@ struct player
    i32 weathertid;
 
    /* GUI */
-   bool cbion;
    struct cbi cbi;
 
    /* Statistics */
@@ -338,9 +403,12 @@ struct player
    /* 🌌 「÷」 0 */
    bool sgacquired;
 };
+#endif
 
 /* Extern Objects ---------------------------------------------------------- */
 
+#if !ZscOn
 extern struct player players[_max_players];
+#endif
 
 #endif

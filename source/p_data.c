@@ -101,18 +101,18 @@ void P_ValidateTID(struct player *p)
 /* Update all of the player's data. */
 void P_Dat_PTickPre(struct player *p)
 {
-   Str(c_card_b, s"ChexBlueCard");
-   Str(c_card_r, s"ChexRedCard");
-   Str(c_card_y, s"ChexYellowCard");
-   Str(d_card_b, s"BlueCard");
-   Str(d_card_r, s"RedCard");
-   Str(d_card_y, s"YellowCard");
-   Str(d_skul_b, s"BlueSkull");
-   Str(d_skul_r, s"RedSkull");
-   Str(d_skul_y, s"YellowSkull");
-   Str(htic_k_b, s"KeyBlue");
-   Str(htic_k_g, s"KeyGreen");
-   Str(htic_k_y, s"KeyYellow");
+   Str(so_c_card_b, s"ChexBlueCard");
+   Str(so_c_card_r, s"ChexRedCard");
+   Str(so_c_card_y, s"ChexYellowCard");
+   Str(so_d_card_b, s"BlueCard");
+   Str(so_d_card_r, s"RedCard");
+   Str(so_d_card_y, s"YellowCard");
+   Str(so_d_skul_b, s"BlueSkull");
+   Str(so_d_skul_r, s"RedSkull");
+   Str(so_d_skul_y, s"YellowSkull");
+   Str(so_htic_k_b, s"KeyBlue");
+   Str(so_htic_k_g, s"KeyGreen");
+   Str(so_htic_k_y, s"KeyYellow");
 
    enum {
       _warpflags = WARPF_NOCHECKPOSITION | WARPF_MOVEPTR |
@@ -154,12 +154,12 @@ void P_Dat_PTickPre(struct player *p)
 
    p->scopetoken = InvNum(so_WeaponScopedToken);
 
-   p->krc = InvNum(d_card_r) || InvNum(c_card_r) || InvNum(htic_k_g);
-   p->kyc = InvNum(d_card_y) || InvNum(c_card_y) || InvNum(htic_k_y);
-   p->kbc = InvNum(d_card_b) || InvNum(c_card_b) || InvNum(htic_k_b);
-   p->krs = InvNum(d_skul_r);
-   p->kys = InvNum(d_skul_y);
-   p->kbs = InvNum(d_skul_b);
+   p->krc = InvNum(so_d_card_r) || InvNum(so_c_card_r) || InvNum(so_htic_k_g);
+   p->kyc = InvNum(so_d_card_y) || InvNum(so_c_card_y) || InvNum(so_htic_k_y);
+   p->kbc = InvNum(so_d_card_b) || InvNum(so_c_card_b) || InvNum(so_htic_k_b);
+   p->krs = InvNum(so_d_skul_r);
+   p->kys = InvNum(so_d_skul_y);
+   p->kbs = InvNum(so_d_skul_b);
 
    if(ACS_Timer() > 4) {
       /**/ if(p->health < p->oldhealth) p->healthused += p->oldhealth - p->health;
@@ -260,13 +260,13 @@ script void P_Init(struct player *p) {
       SetPClass(p);
       SetupAttributes(p);
 
-      /* i cri tears of pain for APROP_SpawnHealth */
-      p->viewheight  = ACS_GetActorViewHeight(0);
-      p->jumpheight  = GetPropK(0, APROP_JumpZ);
-      p->spawnhealth = GetMembI(0, sm_Health);
-      p->maxhealth   = p->spawnhealth;
-      p->discount    = 1.0;
-      p->stepnoise   = StrParam("player/%S/step", p->classname);
+      p->viewheight   = GetViewHeight();
+      p->attackheight = GetAttackHeight();
+      p->jumpheight   = GetMembK(0, sm_JumpZ);
+      p->spawnhealth  = GetHealth(0);
+      p->maxhealth    = p->spawnhealth;
+      p->discount     = 1.0;
+      p->stepnoise    = StrParam("player/%S/step", p->classname);
 
       switch(ACS_GetPlayerInfo(p->num, PLAYERINFO_GENDER)) {
          case 0: p->pronoun = pro_male;   break;
@@ -299,7 +299,7 @@ script void P_Init(struct player *p) {
    /* pls not exit map with murder thingies out */
    /* is bad practice */
    ACS_SetPlayerProperty(0, false, PROP_INSTANTWEAPONSWITCH);
-   SetPropK(0, APROP_ViewHeight, p->viewheight);
+   SetViewHeight(0, p->viewheight);
    InvTake(so_WeaponScopedToken, INT32_MAX);
 
    P_CBI_PMinit(p);
@@ -352,12 +352,12 @@ script void P_Init(struct player *p) {
       #endif
 
       if(GetFun() & lfun_division) {
-         Str(divsigil, sOBJ "DivisionSigil");
+         Str(so_divsigil, sOBJ "DivisionSigil");
          k32 a = ACS_GetActorAngle(0);
          k32 x = GetX(0) + ACS_Cos(a) * 128.0;
          k32 y = GetY(0) + ACS_Sin(a) * 128.0;
          k32 z = GetZ(0);
-         ACS_SpawnForced(divsigil, x, y, z);
+         ACS_SpawnForced(so_divsigil, x, y, z);
       }
 
       p->wasinit = true;
@@ -372,7 +372,7 @@ script void P_Init(struct player *p) {
    if(get_bit(dbgflags, dbgf_items)) {
       for(i32 i = weapon_min; i < weapon_max; i++) {
          struct weaponinfo const *info = &weaponinfo[i];
-         if(info->classname != snil && info->pclass & p->pclass && !get_bit(info->flags, wf_magic))
+         if(info->classname != snil && info->pclass & p->pclass && !(info->defammotype & AT_Mana))
             InvGive(info->classname, 1);
       }
    }
@@ -387,10 +387,10 @@ void P_Dat_PTickPst(struct player *p)
       ACS_SetPlayerProperty(0, p->frozen > 0, PROP_TOTALLYFROZEN);
 
    if(p->speedmul != p->old.speedmul)
-      SetPropK(0, APROP_Speed, 0.7 + p->speedmul);
+      SetMembK(0, sm_Speed, 0.7 + p->speedmul);
 
    if(p->jumpboost != p->old.jumpboost)
-      SetPropK(0, APROP_JumpZ, p->jumpheight * boost);
+      SetMembK(0, sm_JumpZ, p->jumpheight * boost);
 }
 
 /* Scripts ----------------------------------------------------------------- */

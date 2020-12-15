@@ -20,6 +20,10 @@
 
 #include <limits.h>
 
+/* Static Objects ---------------------------------------------------------- */
+
+Str(ss_autobuy, s"player/cbi/auto/buy");
+
 /* Extern Objects ---------------------------------------------------------- */
 
 noinit struct player players[_max_players];
@@ -84,7 +88,7 @@ reinit:
       if(!p->dead) {
          P_Inv_PTick(p);
 
-         if(p->cbion) P_CBI_PTick(p);
+         if(p->modal == _gui_cbi) P_CBI_PTick(p);
 
          P_Aug_PTick(p);
 
@@ -142,8 +146,8 @@ void Sc_PlayerDeath(void) {
    /* unfortunately, we can't keep anything even when we want to */
    P_Inv_PQuit(p);
 
-   Str(sv_cooploseinventory, s"sv_cooploseinventory");
-   if(singleplayer || ACS_GetCVar(sv_cooploseinventory)) {
+   Str(sc_sv_cooploseinventory, s"sv_cooploseinventory");
+   if(singleplayer || ACS_GetCVar(sc_sv_cooploseinventory)) {
       P_Upg_PQuit(p);
       P_BIP_PQuit(p);
       p->score = p->scoreaccum = p->scoreaccumtime = 0;
@@ -225,31 +229,41 @@ struct player *P_PtrFind(i32 tid, i32 ptr) {
 }
 
 void P_GUI_Close(struct player *p) {
-   Str(guisnd_close, s"player/cbi/close");
+   Str(ss_gui_close, s"player/cbi/close");
 
-   if(p->cbion) {
-      if(singleplayer) UnfreezeTime();
-      ACS_LocalAmbientSound(guisnd_close, 127);
-      p->cbion = false;
+   if(p->modal == _gui_cbi) {
+      if(singleplayer) {
+         UnfreezeTime();
+      }
+
+      ACS_LocalAmbientSound(ss_gui_close, 127);
+      p->modal = _gui_none;
    }
 }
 
 void P_GUI_Use(struct player *p) {
-   Str(guisnd_open,  s"player/cbi/open");
-   Str(guisnd_win95, s"player/cbi/win95");
+   Str(ss_gui_open,  s"player/cbi/open");
+   Str(ss_gui_win95, s"player/cbi/win95");
 
    if(p->dead) return;
 
-   if(!p->cbion) {
-      if(singleplayer) FreezeTime();
-      if(ACS_Random(0, 10000) == 777) {
-         ACS_LocalAmbientSound(guisnd_win95, 127);
-      } else {
-         ACS_LocalAmbientSound(guisnd_open, 127);
-      }
-      p->cbion = true;
-   } else {
+   switch(p->modal) {
+   case _gui_cbi:
       P_GUI_Close(p);
+      break;
+   case _gui_none:
+      if(singleplayer) {
+         FreezeTime();
+      }
+
+      if(ACS_Random(0, 10000) == 777) {
+         ACS_LocalAmbientSound(ss_gui_win95, 127);
+      } else {
+         ACS_LocalAmbientSound(ss_gui_open, 127);
+      }
+
+      p->modal = _gui_cbi;
+      break;
    }
 }
 
@@ -394,7 +408,7 @@ void P_bossText(struct player *p, i32 boss) {
       SetSize(640, 400);
       SetClipW(0, 0, 640, 400, 640);
       PrintTextChS(text);
-      PrintTextF(s_bigupper, CR_WHITE, 320,4, 100,0, fid_bosstext);
+      PrintTextF(sf_bigupper, CR_WHITE, 320,4, 100,0, fid_bosstext);
       ClearClip();
 
       PausableTick();
@@ -408,14 +422,14 @@ void P_doIntro(struct player *p) {
       _out_tics = 35 * 2,
    };
 
-   Str(use,       s"+use");
-   Str(attack,    s"+attack");
-   Str(startgame, s"player/startgame");
-   Str(showtext,  s"player/showtext");
+   Str(sc_use,       s"+use");
+   Str(sc_attack,    s"+attack");
+   Str(ss_startgame, s"player/startgame");
+   Str(ss_showtext,  s"player/showtext");
 
    if(mapscleared != 0 || p->done_intro & p->pclass) return;
 
-   p->doing_intro = true;
+   p->modal = _gui_intro;
    ACS_SetMusic(sp_lsounds_Silence);
    FreezeTime(false);
    ACS_FadeTo(0, 0, 0, 1.0, 0.0);
@@ -442,7 +456,7 @@ void P_doIntro(struct player *p) {
             break;
          }
 
-         ACS_LocalAmbientSound(showtext, 127);
+         ACS_LocalAmbientSound(ss_showtext, 127);
 
          char *line = strtok(text, "\n");
          for(i32 i = 0; i < _nlines; i++) {
@@ -461,8 +475,8 @@ void P_doIntro(struct player *p) {
          }
       }
 
-      PrintTextFmt(LC(LANG "SKIP_INTRO"), use, attack);
-      PrintText(s_smallfnt, CR_WHITE, 275,6, 220,0);
+      PrintTextFmt(LC(LANG "SKIP_INTRO"), sc_use, sc_attack);
+      PrintText(sf_smallfnt, CR_WHITE, 275,6, 220,0);
 
       if(G_Filler(280, 220, &fill, 70, p->buttons & (BT_USE | BT_ATTACK))) {
          if(p->buttons & BT_ATTACK) {
@@ -482,7 +496,7 @@ void P_doIntro(struct player *p) {
 
          if(lines[i][0] != '~') {
             PrintTextChr(lines[i], linen[i]);
-            PrintText(s_smallfnt, p->color, 0,1, 8 * i,1);
+            PrintText(sf_smallfnt, p->color, 0,1, 8 * i,1);
          }
       }
 
@@ -491,7 +505,7 @@ void P_doIntro(struct player *p) {
 
    UnfreezeTime(false);
 
-   ACS_LocalAmbientSound(startgame, 127);
+   ACS_LocalAmbientSound(ss_startgame, 127);
    ACS_FadeTo(0, 0, 0, 0.0, 2.0);
 
    for(i32 j = 0; j < _out_tics; j++) {
@@ -504,7 +518,7 @@ void P_doIntro(struct player *p) {
 
          if(lines[i][0] != '~') {
             PrintTextChr(lines[i], linen[i]);
-            PrintTextA(s_smallfnt, p->color, 0,1, 8 * i,1, alpha);
+            PrintTextA(sf_smallfnt, p->color, 0,1, 8 * i,1, alpha);
          }
 
          for(i32 k = 0; k < linen[i]; k++) {
@@ -528,7 +542,7 @@ void P_doIntro(struct player *p) {
    p->done_intro |= p->pclass;
    P_Data_Save(p);
 
-   p->doing_intro = false;
+   p->modal = _gui_none;
 }
 
 static void P_attrRGE(struct player *p) {
@@ -564,9 +578,9 @@ static void P_Atr_pTick(struct player *p) {
    }
 
    p->maxhealth = p->spawnhealth + strn;
-   SetPropK(0, APROP_DamageMultiplier, 1.0 + acc + p->rage);
+   SetDamageMultiplier(0, 1.0 + acc + p->rage);
    SetMembI(0, sm_DmgFac, minmax(100 * def, 0, 100));
-   SetPropI(0, APROP_SpawnHealth, p->maxhealth);
+   SetSpawnHealth(0, p->maxhealth);
 
    if(p->health < stm+10 && (stmt < 2 || p->ticks % stmt == 0))
       p->health = p->health + 1;
@@ -596,8 +610,7 @@ static void P_Aug_PTick(struct player *p) {
       }
 
       if(total) {
-         Str(snd, s"player/cbi/auto/buy");
-         ACS_LocalAmbientSound(snd, 127);
+         ACS_LocalAmbientSound(ss_autobuy, 127);
          p->logH(1, LanguageC(LANG "LOG_AutoBuy%i", i + 1), total, total != 1 ? "s" : "");
       }
    }
@@ -609,7 +622,7 @@ alloc_aut(0) script_str ext("ACS") addr(OBJ "Markiplier")
 void Sc_MapMarker(i32 tid) {
    enum {ticks = 35 * 2};
 
-   str text = GetPropS(tid, APROP_NameTag);
+   str text = GetNameTag(tid);
 
    ACS_Delay(5);
 
@@ -623,7 +636,7 @@ void Sc_MapMarker(i32 tid) {
       i32 x = fastabsk(ACS_Sin(i / (k32)ticks / 4.0)) / 4.0 * 800.0;
 
       SetSize(640, 480);
-      PrintTextAX_str(text, s_areaname, CR_WHITE, x,4, 80,0, alpha, ptf_no_utf);
+      PrintTextAX_str(text, sf_areaname, CR_WHITE, x,4, 80,0, alpha, ptf_no_utf);
       ACS_Delay(1);
    }
 }
@@ -631,7 +644,7 @@ void Sc_MapMarker(i32 tid) {
 alloc_aut(0) stkcall static
 str GetAdviceMarker(i32 tid) {
    if(tid) {
-      str text = GetPropS(tid, APROP_NameTag);
+      str text = GetNameTag(tid);
 
       ACS_BeginPrint();
       for(i32 i = 0, n = ACS_StrLen(text); i < n; i++) {
@@ -670,7 +683,7 @@ void Sc_DrawPlayerIcon(i32 num, i32 x, i32 y) {
       PrintTextFmt("%S <%i>\n", p->name, p->num);
       __nprintf(p->health <= 0 ? "Dead\n" : "%iHP\n", p->health);
       if(p->pclass & pcl_magicuser) __nprintf("%iMP\n", p->mana);
-      PrintTextA(s_smallfnt, CR_WHITE, x-9,1, y-2,1, a);
+      PrintTextA(sf_smallfnt, CR_WHITE, x-9,1, y-2,1, a);
    }
 }
 
@@ -685,9 +698,9 @@ void Sc_DrawDmgNum(i32 which_alpha, i32 damage, i32 x, i32 y) {
    k32 a = alpha / 255.0k;
 
    switch(which) {
-   case _dnum_smol: font = s_smallfnt; cr = CR_GREY;  break;
-   case _dnum_norm: font = s_lmidfont; cr = CR_WHITE; break;
-   case _dnum_crit: font = s_bigupper; cr = CR_GOLD;  break;
+   case _dnum_smol: font = sf_smallfnt; cr = CR_GREY;  break;
+   case _dnum_norm: font = sf_lmidfont; cr = CR_WHITE; break;
+   case _dnum_crit: font = sf_bigupper; cr = CR_GOLD;  break;
    }
 
    ACS_BeginPrint();
@@ -697,9 +710,6 @@ void Sc_DrawDmgNum(i32 which_alpha, i32 damage, i32 x, i32 y) {
 
 script_str type("net") ext("ACS") addr(OBJ "KeyBuyAutoGroup")
 void Sc_KeyBuyAutoGroup(i32 grp) {
-   Str(snd_bought,  s"player/cbi/auto/buy");
-   Str(snd_invalid, s"player/cbi/auto/invalid");
-
    if(grp < 0 || grp >= 4) {
       return;
    }
@@ -721,9 +731,9 @@ void Sc_KeyBuyAutoGroup(i32 grp) {
       char cr;
       str  snd;
 
-      /**/ if(success ==     0) {cr = 'g'; snd = snd_invalid;}
-      else if(success != total) {cr = 'j'; snd = snd_bought;}
-      else                      {cr = 'q'; snd = snd_bought;}
+      /**/ if(success ==     0) {cr = 'g'; snd = ss_player_cbi_auto_invalid;}
+      else if(success != total) {cr = 'j'; snd = ss_autobuy;}
+      else                      {cr = 'q'; snd = ss_autobuy;}
 
       ACS_LocalAmbientSound(snd, 127);
 
@@ -735,7 +745,7 @@ void Sc_KeyBuyAutoGroup(i32 grp) {
 
 script_str type("net") ext("ACS") addr(OBJ "KeyToggleAutoGroup")
 void Sc_KeyToggleAutoGroup(i32 grp) {
-   Str(snd, s"player/cbi/auto/toggle");
+   Str(ss_autotoggle, s"player/cbi/auto/toggle");
 
    if(grp < 0 || grp >= 4) {
       return;
@@ -751,7 +761,7 @@ void Sc_KeyToggleAutoGroup(i32 grp) {
          }
       }
 
-      if(total) ACS_LocalAmbientSound(snd, 127);
+      if(total) ACS_LocalAmbientSound(ss_autotoggle, 127);
 
       i32 fmt = total ? grp + 1 : grp + 5;
       p->logH(1, LanguageC(LANG "LOG_GroupToggle%i", fmt));
@@ -760,13 +770,15 @@ void Sc_KeyToggleAutoGroup(i32 grp) {
 
 alloc_aut(0) script_str type("net") ext("ACS") addr(OBJ "KeyGlare")
 void Sc_KeyGlare(void) {
+   Str(st_none, s"None");
+
    with_player(LocalPlayer) {
-      Str(snd, s"player/glare");
+      Str(ss_glare, s"player/glare");
 
       ACS_FadeTo(255, 255, 255, 1.0, 0.0);
 
-      ACS_LocalAmbientSound(snd, 127);
-      ACS_LineAttack(0, p->yaw, p->pitch, 1, so_Dummy, s_None,
+      ACS_LocalAmbientSound(ss_glare, 127);
+      ACS_LineAttack(0, p->yaw, p->pitch, 1, so_Dummy, st_none,
          32767.0, FHF_NORANDOMPUFFZ | FHF_NOIMPACTDECAL);
 
       ACS_Delay(14);
@@ -781,11 +793,11 @@ _Noreturn dynam_aut script_str ext("ACS") addr(OBJ "TimelineInconsistent")
 void Sc_TimelineInconsistent(void) {
    for(;;) {
       for_player() {
-         Str(bad_timeline, sLANG "BADTIMELINE");
+         Str(sl_bad_timeline, sLANG "BADTIMELINE");
          p->setActivator();
          ACS_FadeTo(0, 0, 0, 1.0, 0.0);
          SetSize(320, 240);
-         PrintText_str(L(bad_timeline), s_bigupper, CR_WHITE, 160,4, 120,0);
+         PrintText_str(L(sl_bad_timeline), sf_bigupper, CR_WHITE, 160,4, 120,0);
          p->health = -1;
       }
       ACS_Delay(1);

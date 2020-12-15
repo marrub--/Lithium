@@ -78,6 +78,27 @@
 #define GetY ACS_GetActorY
 #define GetZ ACS_GetActorZ
 
+#define GetHealth(tid)       GetMembI(tid, sm_Health)
+#define GetHeight(tid)       GetMembK(tid, sm_Height)
+#define GetNameTag(tid)      GetPropS(tid, APROP_NameTag)
+#define GetRadius(tid)       GetMembK(tid, sm_Radius)
+#define GetSpecies(tid)      GetPropS(tid, APROP_Species)
+#define GetViewHeight(tid)   ServCallK(sm_GetViewHeight)
+#define GetAttackHeight(tid) ServCallK(sm_GetAttackHeight)
+
+#define SetAlpha(tid, x)            SetPropK(tid, APROP_Alpha,            x)
+#define SetDamage(tid, x)           SetPropI(tid, APROP_Damage,           x)
+#define SetDamageMultiplier(tid, x) SetPropK(tid, APROP_DamageMultiplier, x)
+#define SetFriction(tid, x)         SetPropK(tid, APROP_Friction,         x)
+#define SetGravity(tid, x)          SetPropK(tid, APROP_Gravity,          x)
+#define SetHealth(tid, x)           SetPropI(tid, APROP_Health,           x)
+#define SetMasterTID(tid, x)        SetPropK(tid, APROP_MasterTID,        x)
+#define SetNameTag(tid, x)          SetPropS(tid, APROP_NameTag,          x)
+#define SetRenderStyle(tid, x)      SetPropI(tid, APROP_RenderStyle,      x)
+#define SetSpawnHealth(tid, x)      SetPropI(tid, APROP_SpawnHealth,      x)
+#define SetSpecies(tid, x)          SetPropS(tid, APROP_Species,          x)
+#define SetViewHeight(tid, x)       SetPropK(tid, APROP_ViewHeight,       x)
+
 #define Paused ServCallI(sm_GetPaused)
 #define PausableTick() do ACS_Delay(1); while(Paused)
 #define WaitPause() while(Paused) ACS_Delay(1)

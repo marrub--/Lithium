@@ -23,20 +23,20 @@
 #define Info(...) \
    do { \
       PrintTextFmt(__VA_ARGS__); \
-      PrintText(s_smallfnt, g->defcr, g->ox+10,1, g->oy+y,1); \
+      PrintText(sf_smallfnt, g->defcr, g->ox+10,1, g->oy+y,1); \
       y += 10; \
    } while(0)
 
 #define Slot(name, x, y) \
    do { \
-      Str(path, s":UI:" name); \
-      PrintSprite(path, g->ox+287-x*48,2, g->oy+48*y-33,1); \
+      Str(st_path, s":UI:" name); \
+      PrintSprite(st_path, g->ox+287-x*48,2, g->oy+48*y-33,1); \
    } while(0)
 
 #define CPU(num) \
    do { \
-      Str(path, s":UI:CPU" #num); \
-      PrintSprite(path, g->ox-13,1, g->oy-13,1); \
+      Str(st_path, s":UI:CPU" #num); \
+      PrintSprite(st_path, g->ox-13,1, g->oy-13,1); \
    } while(0)
 
 /* Static Functions -------------------------------------------------------- */
@@ -51,7 +51,7 @@ static void CBITab_Marine(struct gui_state *g, struct player *p)
    else                {CPU(3); ram =  50; name = LC(LANG "CBI_CPU1");}
 
    PrintTextChS(name);
-   PrintText(s_smallfnt, g->defcr, g->ox+7,1, g->oy+47,1);
+   PrintText(sf_smallfnt, g->defcr, g->ox+7,1, g->oy+47,1);
 
    InfoStart;
 
@@ -79,7 +79,7 @@ static void CBITab_CyberMage(struct gui_state *g, struct player *p)
 
    CPU(2);
    PrintTextChS(name);
-   PrintText(s_smallfnt, g->defcr, g->ox+7,1, g->oy+47,1);
+   PrintText(sf_smallfnt, g->defcr, g->ox+7,1, g->oy+47,1);
 
    InfoStart;
 

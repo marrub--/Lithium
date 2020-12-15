@@ -62,8 +62,12 @@ typedef float  f32;
 typedef double f64;
 
 struct polar {k32 ang, dst;};
-struct k64v2 {k64 x, y;};
 struct i32v2 {i32 x, y;};
+struct k32v2 {k32 x, y;};
+struct k64v2 {k64 x, y;};
+struct i32v3 {i32 x, y, z;};
+struct k32v3 {k32 x, y, z;};
+struct k64v3 {k64 x, y, z;};
 struct ptr2  {u32 l, h;};
 
 union ik32 {i32 i; k32 k;};

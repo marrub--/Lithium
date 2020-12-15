@@ -16,9 +16,7 @@
 /* Update view bobbing when you get damaged. */
 script static void P_Ren_DamageBob(struct player *p)
 {
-   Str(power_strength, s"PowerStrength");
-
-   if(!InvNum(power_strength) && p->health < p->oldhealth) {
+   if(!InvNum(so_PowerStrength) && p->health < p->oldhealth) {
       k64 angle = (k64)ACS_RandomFixed(tau, -tau);
       k64 distance;
 

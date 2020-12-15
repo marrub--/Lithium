@@ -91,14 +91,14 @@ void Boss_HInit(void)
 
 static void CheckModCompat(void)
 {
-   Str(legendary_monster_marker, s"LDLegendaryMonsterMarker");
-   Str(drla_is_using_monsters,   s"DRLA_is_using_monsters");
+   Str(so_legendary_marker,       s"LDLegendaryMonsterMarker");
+   Str(sc_drla_is_using_monsters, s"DRLA_is_using_monsters");
 
    i32 tid;
 
-   if((legendoom = ACS_SpawnForced(legendary_monster_marker, 0, 0, 0, tid = ACS_UniqueTID(), 0))) ACS_Thing_Remove(tid);
+   if((legendoom = ACS_SpawnForced(so_legendary_marker, 0, 0, 0, tid = ACS_UniqueTID(), 0))) ACS_Thing_Remove(tid);
 
-   drlamonsters = ACS_GetCVar(drla_is_using_monsters);
+   drlamonsters = ACS_GetCVar(sc_drla_is_using_monsters);
 }
 
 static void UpdateGame(void)
@@ -223,16 +223,16 @@ static void HInitPre(void)
    bossspawned = false;
 
    if(ACS_GetCVar(sc_sv_sky) && !islithmap) {
-      Str(lithskde, s"LITHSKDE");
-      Str(lithskrd, s"LITHSKRD");
-      Str(lithsks1, s"LITHSKS1");
+      Str(sp_lithskde, s"LITHSKDE");
+      Str(sp_lithskrd, s"LITHSKRD");
+      Str(sp_lithsks1, s"LITHSKS1");
       if(InHell) {
-         ACS_ChangeSky(lithskrd, lithskrd);
+         ACS_ChangeSky(sp_lithskrd, sp_lithskrd);
          ACS_SetSkyScrollSpeed(1, 0.01);
       } else if(OnEarth) {
-         ACS_ChangeSky(lithskde, lithskde);
+         ACS_ChangeSky(sp_lithskde, sp_lithskde);
       } else {
-         ACS_ChangeSky(lithsks1, lithsks1);
+         ACS_ChangeSky(sp_lithsks1, sp_lithsks1);
       }
    }
 }
@@ -329,7 +329,7 @@ begin:
 
    #ifndef NDEBUG
    if(ACS_GetCVar(sc_sv_failtime) == 0) for(;;) {
-      Str(toggleconsole, s"toggleconsole");
+      Str(sc_toggleconsole, s"toggleconsole");
       Log("\n=======\n"
           "The configuration for this mod has been wiped, or you accidentally "
           "set '" CVAR "sv_failtime' to 0 manually. If you did the latter, "
@@ -348,7 +348,7 @@ begin:
           "\n\n\n\n\n\n"
           "Invalid settings detected. Please open the console"
           "(\"%jS\" or options menu) for more information.",
-          toggleconsole);
+          sc_toggleconsole);
       ACS_Delay(10);
    }
 

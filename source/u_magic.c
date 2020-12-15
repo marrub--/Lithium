@@ -109,8 +109,6 @@ static void SetMagicUI(struct player *p, bool on)
       UData.gst.gfxprefix = ":UI:";
       UData.gst.cx = 320/2;
       UData.gst.cy = 240/2;
-
-      G_Init(&UData.gst);
    }
    else if(!on && UData.ui)
    {
@@ -155,7 +153,7 @@ void Upgr_Magic_Update(struct player *p, struct upgrade *upgr)
       ACS_Spawn(so_ManaLeak, p->x + x, p->y + y, p->z + z, tid);
       SetMembI(tid, sm_UserX, x);
       SetMembI(tid, sm_UserY, y);
-      SetPropK(tid, APROP_Alpha, manaperc / 2);
+      SetAlpha(tid, manaperc / 2);
       PtrSet(tid, AAPTR_DEFAULT, AAPTR_MASTER, p->tid);
       GivePlayerZ(tid, p);
    }

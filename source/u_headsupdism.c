@@ -50,7 +50,7 @@ static void HUD_Ammo(struct player *p) {
       else
          sprintf(txt, "%i/%i", wep->magmax - wep->magcur, wep->magmax);
       PrintTextChS(txt);
-      PrintTextX(s_bigupper, Cr(green), 217,1, 238-y,2, ptf_no_utf);
+      PrintTextX(sf_bigupper, Cr(green), 217,1, 238-y,2, ptf_no_utf);
    }
 
    if(wep->ammotype & AT_Ammo) {
@@ -65,12 +65,12 @@ static void HUD_Ammo(struct player *p) {
 
       ACS_BeginPrint();
       ACS_PrintInt(wep->ammocur);
-      PrintTextX(s_bigupper, Cr(green), 217-x,1, 238-y,2, ptf_no_utf);
+      PrintTextX(sf_bigupper, Cr(green), 217-x,1, 238-y,2, ptf_no_utf);
    }
 
    if(type) {
       PrintTextChS(type);
-      PrintTextX(s_bigupper, Cr(green), 281,1, 238,2, ptf_no_utf);
+      PrintTextX(sf_bigupper, Cr(green), 281,1, 238,2, ptf_no_utf);
    }
 
    if(P_Wep_CurType(p) == weapon_rifle && ServCallI(sm_GetRifleGrenade))
@@ -78,15 +78,13 @@ static void HUD_Ammo(struct player *p) {
 }
 
 static void HUD_Health(struct player *p, struct upgrade *upgr) {
-   Str(power_strength, s"PowerStrength");
-
    StrAry(ws, s":HUD:H_D27", s":HUD:H_D28", s":HUD:H_D24", s":HUD:H_D23",
               s":HUD:H_D22", s":HUD:H_D21", s":HUD:H_D25", s":HUD:H_D26");
 
-   PrintSprite(InvNum(power_strength) ? sp_HUD_M_SplitBackRed : sp_HUD_M_SplitBack, 0,1, 240,2);
+   PrintSprite(InvNum(so_PowerStrength) ? sp_HUD_M_SplitBackRed : sp_HUD_M_SplitBack, 0,1, 240,2);
 
    PrintTextChr("VIT", 3);
-   PrintTextX(s_bigupper, Cr(green), 2,1, 238,2, ptf_no_utf);
+   PrintTextX(sf_bigupper, Cr(green), 2,1, 238,2, ptf_no_utf);
 
    k32 ft = 0;
 
@@ -126,7 +124,7 @@ void Upgr_HeadsUpDisM_Render(struct player *p, struct upgrade *upgr) {
    HUD_Log(p, Cr(green), 0, 0);
 
    HUD_KeyInd(p, 320, 20, true, 0.8);
-   HUD_Score(p, "%s\Cnscr", p->score, s_smallfnt, CR_WHITE, 320,2);
+   HUD_Score(p, "%s\Cnscr", p->score, sf_smallfnt, CR_WHITE, 320,2);
 
    if(p->getCVarI(sc_hud_showweapons))
       PrintSprite(sp_HUD_M_Bar, 278,2, 239,2);

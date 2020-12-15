@@ -78,7 +78,7 @@ static i32 NetClose(void *nfdata) {
          outsize -= itrsize;
       }
 
-      ACS_SetUserCVarString(nf->pnum, StrParam("%S_%i", nf->pcvar, cvarnum), s_NIL);
+      ACS_SetUserCVarString(nf->pnum, StrParam("%S_%i", nf->pcvar, cvarnum), st_nil);
 
       Dalloc(coded);
    }

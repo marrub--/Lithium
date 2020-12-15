@@ -16,8 +16,8 @@ require_relative "corinth.rb"
 
 require 'fileutils'
 
-for arg in ARGV
-   fname, pkdir, dir = arg.split ":"
+common_main do
+   fname, pkdir, dir = ARGV
    pdir  = "#{pkdir}#{dir}"
    re    = /#{Regexp.escape pdir}\/(.+)\.png/
    names = Dir.glob("#{pdir}/**/*.png").sort

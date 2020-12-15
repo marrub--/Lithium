@@ -102,10 +102,10 @@ static void EquipItem(struct player *p, struct item *sel) {
 
 static void Container(struct gui_state *g, struct container *cont, i32 sx, i32 sy)
 {
-   Str(back_store,  s":UI:InvBackStore");
-   Str(back_arms_u, s":UI:InvBackUpperArms");
-   Str(back_arms_l, s":UI:InvBackLowerArms");
-   Str(back_body,   s":UI:InvBackBody");
+   Str(sp_BackStore, s":UI:InvBackStore");
+   Str(sp_BackArmsU, s":UI:InvBackUpperArms");
+   Str(sp_BackArmsL, s":UI:InvBackLowerArms");
+   Str(sp_BackBody,  s":UI:InvBackBody");
 
    sx += g->ox;
    sy += g->oy;
@@ -114,16 +114,16 @@ static void Container(struct gui_state *g, struct container *cont, i32 sx, i32 s
 
    str bg;
    switch(cont->type) {
-      case _cont_store:  bg = back_store;  break;
-      case _cont_arms_u: bg = back_arms_u; break;
-      case _cont_arms_l: bg = back_arms_l; break;
-      case _cont_body:   bg = back_body;   break;
+      case _cont_store:  bg = sp_BackStore;  break;
+      case _cont_arms_u: bg = sp_BackArmsU; break;
+      case _cont_arms_l: bg = sp_BackArmsL; break;
+      case _cont_body:   bg = sp_BackBody;   break;
    }
 
    i32 h = cont->h * 8;
    i32 w = cont->w * 8;
 
-   PrintText_str(Language(LANG "CONTAINER_%s", cont->name), s_smallfnt, g->defcr, sx,1, sy,2);
+   PrintText_str(Language(LANG "CONTAINER_%s", cont->name), sf_smallfnt, g->defcr, sx,1, sy,2);
 
    for(i32 y = 0; y < h; y += 8) for(i32 x = 0; x < w; x += 8)
       PrintSpriteA(bg, sx+x,1, sy+y,1, 0.8);
@@ -382,12 +382,12 @@ void P_CBI_TabItems(struct gui_state *g, struct player *p)
       [_inv_legs]        = 67+8*10,
    };
 
-   Str(inv_hints, sLANG "INV_HINTS");
+   Str(sl_inv_hints, sLANG "INV_HINTS");
 
    PrintSpriteA(sp_UI_Body, g->ox+138,1, g->oy+27,1, 0.6);
    PrintSpriteA(sp_UI_Bag,  g->ox+34 ,1, g->oy+31,1, 0.6);
 
-   PrintText_str(L(inv_hints), s_smallfnt, g->defcr, g->ox+2,1, g->oy+212,2);
+   PrintText_str(L(sl_inv_hints), sf_smallfnt, g->defcr, g->ox+2,1, g->oy+212,2);
 
    for(i32 i = 0; i < _inv_num; i++)
       Container(g, &p->inv[i], x[i], y[i]);
@@ -398,13 +398,13 @@ void P_CBI_TabItems(struct gui_state *g, struct player *p)
       i32 x_ = x[0];
       i32 y_ = y[0] + 60;
 
-      PrintText_str(Language(LANG "ITEM_TAG_%S", sel->name), s_smallfnt, g->defcr, g->ox+x_,1, g->oy+y_,1);
+      PrintText_str(Language(LANG "ITEM_TAG_%S", sel->name), sf_smallfnt, g->defcr, g->ox+x_,1, g->oy+y_,1);
       y_ += 8;
 
       if(g->clickrgt && !g->old.clickrgt)
          p->movitem = !p->movitem;
 
-      PrintText_str(Language(LANG "ITEM_SHORT_%S", sel->name), s_smallfnt, g->defcr, g->ox+x_,1, g->oy+y_,1);
+      PrintText_str(Language(LANG "ITEM_SHORT_%S", sel->name), sf_smallfnt, g->defcr, g->ox+x_,1, g->oy+y_,1);
       y_ += 16;
 
       if(G_Button(g, LC(LANG "MOVE"), x_, y_, .color = "n", Pre(btnclear)))
@@ -425,7 +425,7 @@ void P_CBI_TabItems(struct gui_state *g, struct player *p)
 
       if(sel->scr) {
          PrintTextFmt("(%s\Cnscr\C-)", scoresep(sel->scr));
-         PrintText(s_smallfnt, g->defcr, g->ox+x_+18,1, g->oy+y_,1);
+         PrintText(sf_smallfnt, g->defcr, g->ox+x_+18,1, g->oy+y_,1);
       }
 
       if(G_Button(g, sel->scr ? LC(LANG "SELL") : LC(LANG "DISCARD"), x_, y_, .color = "g", .fill = {&CBIState(g)->itemfill, 26}, Pre(btnclear))) {

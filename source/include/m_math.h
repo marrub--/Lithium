@@ -11,6 +11,9 @@
  * ---------------------------------------------------------------------------|
  */
 
+#ifndef m_math_h
+#define m_math_h
+
 #define dst_bit(y)    (1 << (y))
 #define get_bit(x, y) ((x) &   dst_bit(y))
 #define set_bit(x, y) ((x) |=  dst_bit(y))
@@ -72,5 +75,7 @@ stkcall i32 bzpolyi(i32 a, i32 b, k64 t);
 struct i32v2 qbezieri(i32 x1, i32 y1, i32 x2, i32 y2, i32 x3, i32 y3, k64 t);
 struct k64v2 qbezierlk(k64 x1, k64 y1, k64 x2, k64 y2, k64 x3, k64 y3, k64 t);
 struct polar ctopol(k32 x, k32 y);
+optargs(1) struct k32v3 trace_from(k32 yaw, k32 pitch, k32 dist, k32 offsetz, bool floor);
+optargs(1) struct i32v2 unproject(k32 x, k32 y, k32 z, bool *visible);
 
-/* EOF */
+#endif

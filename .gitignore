@@ -1,6 +1,7 @@
 working/*
 bin/*
 master/*
+tools/.build-cfg.rb
 *.bat
 ?.sh
 *.kdev4

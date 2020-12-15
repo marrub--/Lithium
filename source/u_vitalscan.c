@@ -22,31 +22,31 @@
 /* Extern Functions -------------------------------------------------------- */
 
 script void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr) {
-   Str(devile_six,  s"RLDeVileSix");
-   Str(countkill_s, s"COUNTKILL");
+   Str(so_devile_six, s"RLDeVileSix");
+   Str(sm_countkill,  s"COUNTKILL");
 
    ACS_SetActivator(0, AAPTR_PLAYER_GETTARGET);
 
-   bool six = ACS_StrCmp(ACS_GetActorClass(0), devile_six, 11) == 0;
+   bool six = ACS_StrCmp(ACS_GetActorClass(0), so_devile_six, 11) == 0;
 
    bool validtarget =
       six ||
-      ACS_CheckFlag(0, countkill_s) ||
+      ACS_CheckFlag(0, sm_countkill) ||
       ACS_PlayerNumber() != -1;
 
-   if(GetMembI(0, sm_Health) <= 0) {
+   if(GetHealth(0) <= 0) {
       fastmemset(&UData, 0, sizeof UData);
    } else if(validtarget) {
-      Str(boss_s,     s"BOSS");
-      Str(invuln_s,   s"INVULNERABLE");
-      Str(nodamage_s, s"NODAMAGE");
-      Str(shadow_s,   s"SHADOW");
+      Str(sm_boss,     s"BOSS");
+      Str(sm_invuln,   s"INVULNERABLE");
+      Str(sm_nodamage, s"NODAMAGE");
+      Str(sm_shadow,   s"SHADOW");
 
-      Str(legendary_monster_transformed, s"LDLegendaryMonsterTransformed");
+      Str(so_legendary_transformed, s"LDLegendaryMonsterTransformed");
 
-      bool freak = ACS_CheckFlag(0, invuln_s) || ACS_CheckFlag(0, nodamage_s);
+      bool freak = ACS_CheckFlag(0, sm_invuln) || ACS_CheckFlag(0, sm_nodamage);
 
-      i32 chp = GetMembI(0, sm_Health);
+      i32 chp = GetHealth(0);
       i32 shp = ServCallI(sm_GetSpawnHealth);
 
       i32 id = UniqueID();
@@ -78,7 +78,7 @@ script void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr) {
          UData.tagstr = StrParam("\C[Lith_Dark]%tS\C-", 0);
       } else if(UData.rank == 7) {
          UData.tagstr = StrParam("\C[Lith_Angelic]%tS\C-", 0);
-      } else if(freak || ACS_CheckFlag(0, boss_s)) {
+      } else if(freak || ACS_CheckFlag(0, sm_boss)) {
          UData.tagstr = RandomName(freak ? 0 : id);
 
          if(p->getCVarI(sc_scanner_bar)) {
@@ -87,14 +87,14 @@ script void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr) {
             healthset = true;
          }
       } else if(six) {
-         Str(six_tag, s"\Cg6");
-         UData.tagstr = six_tag;
+         Str(st_six_tag, s"\Cg6");
+         UData.tagstr = st_six_tag;
       } else {
          UData.tagstr = StrParam("%tS\C-", 0);
          UData.freak = false;
       }
 
-      if(legendoom && InvNum(legendary_monster_transformed))
+      if(legendoom && InvNum(so_legendary_transformed))
          UData.tagstr = StrParam("\CgLegendary\C- %tS\C-", 0);
 
       if(!healthset) {
@@ -105,7 +105,7 @@ script void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr) {
 
       if(m) {
          i32 level =
-            ACS_CheckFlag(0, shadow_s) ?
+            ACS_CheckFlag(0, sm_shadow) ?
             m->level - ACS_Random(-5, 5) :
             m->level;
          UData.tagstr = StrParam("%S lv.%i", UData.tagstr, level);
@@ -161,12 +161,12 @@ void Upgr_VitalScan_Render(struct player *p, struct upgrade *upgr) {
    /* Hit indicator */
    if(UData.hdelta && CheckFade(fid_vscan)) {
       PrintTextFmt("-%i", UData.hdelta);
-      PrintTextF(s_smallfnt, CR_RED, 160+ox,4, 235+oy,2, fid_vscan);
+      PrintTextF(sf_smallfnt, CR_RED, 160+ox,4, 235+oy,2, fid_vscan);
    }
 
    /* Tag and health */
    bool afnt = p->getCVarI(sc_scanner_altfont);
-   str  font = afnt ? s_lmidfont : s_smallfnt;
+   str  font = afnt ? sf_lmidfont : sf_smallfnt;
 
    i32 cr = Draw_GetCr(p->getCVarI(sc_scanner_color));
 
@@ -206,9 +206,9 @@ void Upgr_VitalScan_Render(struct player *p, struct upgrade *upgr) {
       PrintSprite(bs[UData.split], x,1, y,1);
       ClearClip();
 
-      Str(exp_bar_1, s":Bars:ExpBar1");
+      Str(sp_exp_bar_1, s":Bars:ExpBar1");
       SetClip(x, y+3, 24 * UData.exp, 2);
-      PrintSprite(exp_bar_1, x,1, y+3,1);
+      PrintSprite(sp_exp_bar_1, x,1, y+3,1);
       ClearClip();
    }
 }

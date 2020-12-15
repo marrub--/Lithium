@@ -46,17 +46,18 @@ void Upgr_Zoom_Update(struct player *p, struct upgrade *upgr)
 
 void Upgr_Zoom_Render(struct player *p, struct upgrade *upgr)
 {
-   Str(vignette,     s":HUD:Vignette");
-   Str(zoom_overlay, s":HUD:ZoomOverlay");
+   Str(sp_vignette,     s":HUD:Vignette");
+   Str(sp_zoom_overlay, s":HUD:ZoomOverlay");
+   Str(sp_lithcam2,     s"LITHCAM2");
 
    if(UData.vzoom)
    {
-      PrintSpriteA(vignette, 160,0, 120,0, 0.3);
+      PrintSpriteA(sp_vignette, 160,0, 120,0, 0.3);
 
-      ACS_SetCameraToTexture(p->cameratid, s_LITHCAM2, 90 - UData.vzoom);
-      PrintSprite(s_LITHCAM2, 160,0, 120,0);
+      ACS_SetCameraToTexture(p->cameratid, sp_lithcam2, 90 - UData.vzoom);
+      PrintSprite(sp_lithcam2, 160,0, 120,0);
 
-      PrintSpriteA(zoom_overlay, 160,0, 120,0, 0.5);
+      PrintSpriteA(sp_zoom_overlay, 160,0, 120,0, 0.5);
 
       static char const points[] = "E SES SWW NWN NE";
 
@@ -67,7 +68,7 @@ void Upgr_Zoom_Render(struct player *p, struct upgrade *upgr)
          if(x < 0 || x > 320) continue;
 
          PrintTextChr(&points[i * 2], 2);
-         PrintText(s_smallfnt, CR_WHITE, x,1, 120,0);
+         PrintText(sf_smallfnt, CR_WHITE, x,1, 120,0);
       }
    }
 }

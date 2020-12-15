@@ -20,7 +20,7 @@
 
 dynam_aut script
 void P_Scr_Payout(struct player *p) {
-   Str(sp_resultframe,        s":UI:ResultFrame");
+   Str(sp_ResultFrame,        s":UI:ResultFrame");
    Str(ss_player_counter,     s"player/counter");
    Str(ss_player_counterdone, s"player/counterdone");
 
@@ -34,10 +34,10 @@ void P_Scr_Payout(struct player *p) {
    (PrintTextFmt(__VA_ARGS__), \
     PrintTextF(font, CR_WHITE, x,xa, y,1, fid_result))
 
-#define Fram()    PrintSpriteF(sp_resultframe, 14,1, y-1,1, fid_result)
-#define Left(...) Msg(16,  1, s_smallfnt, __VA_ARGS__)
-#define Rght(...) Msg(144, 6, s_smallfnt, __VA_ARGS__)
-#define Head(...) Msg(8,   1, s_bigupper, __VA_ARGS__)
+#define Fram()    PrintSpriteF(sp_ResultFrame, 14,1, y-1,1, fid_result)
+#define Left(...) Msg(16,  1, sf_smallfnt, __VA_ARGS__)
+#define Rght(...) Msg(144, 6, sf_smallfnt, __VA_ARGS__)
+#define Head(...) Msg(8,   1, sf_bigupper, __VA_ARGS__)
 
 #define CountScr(scr) \
    scoresep(i < _begin_total ? lerplk(0, scr, i / 34.0lk) : scr)
@@ -62,7 +62,7 @@ void P_Scr_Payout(struct player *p) {
 
       if(CheckFade(fid_result2)) {
          PrintTextChS(res);
-         PrintTextFX(s_bigupper, CR_WHITE, 8,1, y,1, fid_result2, ptf_add);
+         PrintTextFX(sf_bigupper, CR_WHITE, 8,1, y,1, fid_result2, ptf_add);
       }
 
       y += 16;

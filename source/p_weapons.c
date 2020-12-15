@@ -149,7 +149,7 @@ void P_Wep_PTickPre(struct player *p)
       }
 
       /* Auto-reload. */
-      if(p->autoreload && wep->ammotype & AT_NMag && !get_bit(info->flags, wf_magic))
+      if(p->autoreload && wep->ammotype & AT_NMag && !(wep->ammotype & AT_Mana))
       {
          if(wep->autoreload >= 35 * 3)
             ServCallI(sm_AutoReload, p->num, info->classname);
@@ -189,8 +189,8 @@ void P_Wep_PTick(struct player *p)
    switch(P_Wep_CurType(p))
    {
    case weapon_c_fist:
-      Str(mana_charge, sLANG "MANA_CHARGE");
-      PrintTextA_str(L(mana_charge), s_smallfnt, CR_BRICK, 160,0, 100,0, 0.5);
+      Str(sl_mana_charge, sLANG "MANA_CHARGE");
+      PrintTextA_str(L(sl_mana_charge), sf_smallfnt, CR_BRICK, 160,0, 100,0, 0.5);
       break;
    case weapon_c_delear:
       ServCallI(sm_DelearSprite);
@@ -199,7 +199,7 @@ void P_Wep_PTick(struct player *p)
       __with(k64 charge = 5 + InvNum(so_FistCharge) / 10.0lk;)
       {
          PrintTextFmt(LC(LANG "CHARGE_FMT"), charge);
-         PrintText(s_smallfnt, CR_LIGHTBLUE, 270,2, 200,2);
+         PrintText(sf_smallfnt, CR_LIGHTBLUE, 270,2, 200,2);
       }
       break;
    }
@@ -213,8 +213,8 @@ bool Sc_WeaponPickup(i32 name)
    struct player *p = LocalPlayer;
    if(P_None(p)) return false;
 
-   Str(sv_weaponstay, s"sv_weaponstay");
-   bool weaponstay = ACS_GetCVar(sv_weaponstay);
+   Str(sc_sv_weaponstay, s"sc_sv_weaponstay");
+   bool weaponstay = ACS_GetCVar(sc_sv_weaponstay);
    i32 parm = weapon_unknown;
 
    parm = P_Wep_FromName(p, name);
@@ -354,14 +354,11 @@ i32 Sc_GetWRF(void)
 }
 
 alloc_aut(0) script_str ext("ACS") addr(OBJ "PoisonFXTicker")
-void Sc_PoisonFXTicker(void)
-{
-   for(i32 i = 0; i < 17; i++)
-   {
+void Sc_PoisonFXTicker(void) {
+   for(i32 i = 0; i < 17; i++) {
       PausableTick();
 
-      if(InvNum(so_PoisonFXReset))
-      {
+      if(InvNum(so_PoisonFXReset)) {
          InvTake(so_PoisonFXReset, INT32_MAX);
          InvTake(so_PoisonFXTimer, INT32_MAX);
          ServCallI(sm_GivePoison);
@@ -369,13 +366,10 @@ void Sc_PoisonFXTicker(void)
       }
    }
 
-   if(GetMembI(0, sm_Health) <= 0)
-   {
+   if(GetHealth(0) <= 0) {
       InvTake(so_PoisonFXReset, INT32_MAX);
       InvTake(so_PoisonFXTimer, INT32_MAX);
-   }
-   else if(InvNum(so_PoisonFXTimer))
-   {
+   } else if(InvNum(so_PoisonFXTimer)) {
       ServCallI(sm_PoisonFX);
       InvTake(so_PoisonFXTimer, 1);
    }

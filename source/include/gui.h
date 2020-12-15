@@ -302,9 +302,6 @@ extern struct gui_presets const gui_p;
 optargs(1)
 void G_Auto(struct gui_state *g, u32 id, i32 x, i32 y, i32 w, i32 h, bool slide);
 
-optargs(1)
-void G_Init(struct gui_state *g, void *state);
-
 void G_UpdateState(struct gui_state *g, struct player *p);
 
 optargs(2)

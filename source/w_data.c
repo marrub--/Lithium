@@ -56,4 +56,11 @@ i32 Sc_LWData(i32 info)
    return 0;
 }
 
+#define w_setptr_x(t) \
+   script ext("ACS") addr(lsc_setptr##t) \
+      void Sc_SetPtr_##t(intptr_t p, t s) { \
+      *(t *)p = s; \
+   }
+#include "w_world.h"
+
 /* EOF */

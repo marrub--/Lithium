@@ -90,7 +90,7 @@ action(Weapon) void lith_fire700e() {
 
 vector3, vector3 lith_getLaserPos(double pit) {
    let ply = Lith_Player(owner);
-   let sz  = ply.lith_getViewHeight();
+   let sz  = ply.player.viewz - ply.pos.z - 3;
 
    let ps = sin(ply.pitch - pit - 90);
    let cz = cos(ply.pitch - pit - 90);
@@ -101,7 +101,7 @@ vector3, vector3 lith_getLaserPos(double pit) {
 
    let beg = (ply.pos.x      + cx * -16,
               ply.pos.y      + cy * -16,
-              ply.pos.z + sz + cz * -16 + 1);
+              ply.pos.z + sz + cz * -16);
 
    ys = sin(ply.angle);
    yc = cos(ply.angle);
@@ -137,12 +137,12 @@ void lith_spawnLaserTrace(double pit) {
    if(!owner) return;
 
    let ply = Lith_Player(owner);
-   let sz  = ply.lith_getViewHeight();
+   let sz  = ply.player.viewz - ply.pos.z;
 
-   let loc = Lith_UTIL.TraceFrom(ply, ply.m_iyaw, 2048, ply.m_ipitch - pit, sz);
+   let loc = Lith_UTIL.TraceFrom(ply, ply.m_iyaw, ply.m_ipitch - pit, 2048, sz);
    Spawn("Lith_700Laser", loc);
 
-   loc = Lith_UTIL.TraceFrom(ply, ply.angle, 2048, ply.pitch - pit, sz);
+   loc = Lith_UTIL.TraceFrom(ply, ply.angle, ply.pitch - pit, 2048, sz);
    Spawn("Lith_700Laser2", loc);
 
 }

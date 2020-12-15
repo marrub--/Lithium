@@ -11,7 +11,22 @@
  * ---------------------------------------------------------------------------|
  */
 
-#ifndef p_cbi_h
+#if defined(cbi_theme_x)
+
+cbi_theme_x(Green)
+cbi_theme_x(Rose)
+cbi_theme_x(Umi)
+cbi_theme_x(Ender)
+cbi_theme_x(Orange)
+cbi_theme_x(Grey)
+cbi_theme_x(Basilissa)
+cbi_theme_x(Ghost)
+cbi_theme_x(WinXP)
+cbi_theme_x(Trans)
+
+#undef cbi_theme_x
+
+#elif !defined(p_cbi_h)
 #define p_cbi_h
 
 #include "gui.h"
@@ -46,16 +61,8 @@ enum {
 };
 
 enum {
-   cbi_theme_green,
-   cbi_theme_rose,
-   cbi_theme_umi,
-   cbi_theme_ender,
-   cbi_theme_orange,
-   cbi_theme_grey,
-   cbi_theme_basilissa,
-   cbi_theme_ghost,
-   cbi_theme_winxp,
-   cbi_theme_trans,
+   #define cbi_theme_x(x) cbi_theme_##x,
+   #include "p_cbi.h"
    cbi_theme_max
 };
 

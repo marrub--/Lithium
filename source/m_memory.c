@@ -76,30 +76,30 @@ alloc_aut(0) stkcall static
 struct mem_blk *CheckUsedBlock(struct mem_blk *blk, cstr func) {
    if((void *)blk < (void *)mem_dat ||
       (void *)blk > (void *)(mem_dat + sizeof mem_dat)) {
-      Str(err, s" ERROR: out of bounds block ");
+      Str(st_err_oob, s" ERROR: out of bounds block ");
       ACS_BeginPrint();
       PrintChrSt(func);
-      ACS_PrintString(err);
+      ACS_PrintString(st_err_oob);
       ACS_PrintHex((intptr_t)blk);
       ACS_EndLog();
       return nil;
    }
 
    if(blk->idn != _mem_idn) {
-      Str(err, s" ERROR: invalid identifier for ");
+      Str(st_err_idn, s" ERROR: invalid identifier for ");
       ACS_BeginPrint();
       PrintChrSt(func);
-      ACS_PrintString(err);
+      ACS_PrintString(st_err_idn);
       ACS_PrintHex((intptr_t)blk);
       ACS_EndLog();
       return nil;
    }
 
    if(blk->tag == _tag_free) {
-      Str(err, s" ERROR: already freed ");
+      Str(st_err_tag, s" ERROR: already freed ");
       ACS_BeginPrint();
       PrintChrSt(func);
-      ACS_PrintString(err);
+      ACS_PrintString(st_err_tag);
       ACS_PrintHex((intptr_t)blk);
       ACS_EndLog();
       return nil;
@@ -146,10 +146,10 @@ void Dalloc(register void *p) {
    [[return]] __asm(":\"done\" Rjnk()");
 
    #ifndef NDEBUG
-   Str(err, s"Dalloc ERROR: memory not initialized but freeing pointer");
+   Str(st_err_ini, s"Dalloc ERROR: memory not initialized but freeing pointer");
 error:
    ACS_BeginPrint();
-   ACS_PrintString(err);
+   ACS_PrintString(st_err_ini);
    ACS_EndLog();
    #endif
 }
@@ -181,9 +181,9 @@ void *Malloc(register mem_size_t rs, register mem_tag_t tag) {
           * don't worry, this won't ever really happen, right?
           */
          #ifndef NDEBUG
-         Str(err, s"Malloc ERROR: out of memory - couldn't allocate ");
+         Str(st_err_oom, s"Malloc ERROR: out of memory - couldn't allocate ");
          ACS_BeginPrint();
-         ACS_PrintString(err);
+         ACS_PrintString(st_err_oom);
          ACS_PrintInt(s);
          ACS_EndLog();
          #endif
@@ -394,10 +394,10 @@ dyn:
    return (dpl_act = p)->dat;
 
    #ifndef NDEBUG
-   Str(err, s"Plsa ERROR: stack overflow ");
+   Str(st_err_sto, s"Plsa ERROR: stack overflow ");
 overflow:
    ACS_BeginPrint();
-   ACS_PrintString(err);
+   ACS_PrintString(st_err_sto);
    ACS_PrintHex((intptr_t)pls_stk);
    ACS_PrintChar(' ');
    ACS_PrintHex((intptr_t)pls_cur);
@@ -439,10 +439,10 @@ void __GDCC__Plsf(void *p) {
    );
 
    #ifndef NDEBUG
-   Str(err, s"Plsf ERROR: incorrect stack pointer ");
+   Str(st_err_stp, s"Plsf ERROR: incorrect stack pointer ");
 invalid:
    ACS_BeginPrint();
-   ACS_PrintString(err);
+   ACS_PrintString(st_err_stp);
    ACS_PrintHex((intptr_t)p);
    ACS_PrintChar(' ');
    ACS_PrintHex((intptr_t)pls_cur);

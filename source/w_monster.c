@@ -45,10 +45,10 @@ void GetInfo(dmon_t *m) {
    m->y = GetY(0);
    m->z = GetZ(0);
 
-   m->r = GetPropK(0, APROP_Radius);
-   m->h = GetPropK(0, APROP_Height);
+   m->r = GetRadius(0);
+   m->h = GetHeight(0);
 
-   m->health = GetMembI(0, sm_Health);
+   m->health = GetHealth(0);
 }
 
 script static
@@ -73,7 +73,7 @@ void ApplyLevels(dmon_t *m, i32 prev) {
       i96 hp10 = m->spawnhealth / 10;
       i32 newh = delt * hp10 * (i96)(ACS_RandomFixed(rn - 0.1, rn + 0.1) * 0xfff) / 0xfff;
       Dbg_Log(log_dmonV, "monster %i: newh %i", m->id, newh);
-      SetPropI(0, APROP_Health, m->health + newh);
+      SetHealth(0, m->health + newh);
       m->maxhealth += newh;
    }
 
@@ -115,7 +115,7 @@ void ShowBarrier(dmon_t const *m, k32 alpha) {
       str bar = m->rank >= 5 ? so_MonsterHeptaura : so_MonsterBarrier;
 
       ACS_SpawnForced(bar, x, y, m->z + m->h / 2, tid);
-      SetPropK(tid, APROP_Alpha, (1 - a->dst / (256 * (m->rank - 1))) * alpha);
+      SetAlpha(tid, (1 - a->dst / (256 * (m->rank - 1))) * alpha);
    }
 }
 
@@ -173,18 +173,18 @@ void BaseMonsterLevel(dmon_t *m)
 alloc_aut(0) script
 static void SoulCleave(dmon_t *m, struct player *p)
 {
-   Str(solid_s, s"SOLID");
+   Str(sm_solid, s"SOLID");
 
    i32 tid = ACS_UniqueTID();
    ACS_SpawnForced(so_MonsterSoul, m->x, m->y, m->z + 16, tid);
-   SetPropI(tid, APROP_Damage, m->level / 8 * 7);
+   SetDamage(tid, m->level / 8 * 7);
 
    PtrSet(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
-   SetPropS(tid, APROP_Species, GetPropS(0, APROP_Species));
+   SetSpecies(tid, GetSpecies(0));
 
-   for(i32 i = 0; ACS_CheckFlag(0, solid_s) && i < 15; i++) ACS_Delay(1);
+   for(i32 i = 0; ACS_CheckFlag(0, sm_solid) && i < 15; i++) ACS_Delay(1);
 
-   SetPropS(tid, APROP_Species, so_Player);
+   SetSpecies(tid, so_Player);
 }
 
 static void SpawnManaPickup(dmon_t *m, struct player *p)
@@ -218,18 +218,18 @@ static void OnFinalize(dmon_t *m) {
          }
 
          if(ACS_GetCVar(sc_sv_wepdrop)) {
-            Str(sgun, s"Shotgun");
-            Str(cgun, s"Chaingun");
+            Str(so_sgun, s"Shotgun");
+            Str(so_cgun, s"Chaingun");
             str sp = snil;
             switch(m->mi->type) {
-               case mtype_zombiesg: if(!p->weapon.slot[3]) sp = sgun; break;
-               case mtype_zombiecg: if(!p->weapon.slot[4]) sp = cgun; break;
+               case mtype_zombiesg: if(!p->weapon.slot[3]) sp = so_sgun; break;
+               case mtype_zombiecg: if(!p->weapon.slot[4]) sp = so_cgun; break;
             }
             if(sp) {
-               Str(dropped_s, s"DROPPED");
+               Str(sm_dropped, s"DROPPED");
                i32 tid = ACS_UniqueTID();
                ACS_SpawnForced(sp, m->x, m->y, m->z, tid);
-               ACS_SetActorFlag(tid, dropped_s, false);
+               ACS_SetActorFlag(tid, sm_dropped, false);
             }
          }
 
@@ -389,12 +389,12 @@ void LogError(str cname) {
 alloc_aut(0) script ext("ACS") addr(lsc_monsterinfo)
 void Sc_MonsterInfo(void)
 {
-   Str(rladaptive, s"RLAdaptive");
-   Str(rlhax,      s"RLCyberdemonMkII");
+   Str(so_rladaptive, s"RLAdaptive");
+   Str(so_rlhax,      s"RLCyberdemonMkII");
 
    str cname = ACS_GetActorClass(0);
 
-   if(faststrstr_str(cname, rladaptive) || faststrstr_str(cname, rlhax))
+   if(faststrstr_str(cname, so_rladaptive) || faststrstr_str(cname, so_rlhax))
       return;
 
    for(i32 i = 0; i < countof(monsterinfo); i++) {
@@ -408,7 +408,7 @@ void Sc_MonsterInfo(void)
          ACS_Delay(1);
 
          /* make sure it isn't already dead first */
-         if(GetMembI(0, sm_Health) > 0) {
+         if(GetHealth(0) > 0) {
             dmon_t *m = AllocDmon();
             m->mi = mi;
             MonsterMain(m);

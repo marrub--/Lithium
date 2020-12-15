@@ -136,10 +136,6 @@ private void Lith_ItemVacuum() {
    }
 }
 
-double lith_getViewHeight() {
-   return height / 2 + attackZOffset * player.crouchFactor;
-}
-
 int, int, bool Lith_Unproject(vector3 loc) {
    /* create (view-adjusted) normalized vector for where we're looking */
    vector3 la = pos - loc;
@@ -235,9 +231,6 @@ void Lith_PostTick() {
    for(int i = 0; i < _dnum_max; i++) {
       Lith_ShowDamageNums(i);
    }
-
-   if(health > 0 && CVar.GetCVar('lith_xhair_enable', player).getBool())
-      Lith_ShowCrosshair();
 
    if(!deathmatch) for(int i = 0; i < MAXPLAYERS; i++)
       if(playeringame[i] && players[i] != player && players[i].mo)

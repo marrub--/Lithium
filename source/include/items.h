@@ -10,14 +10,13 @@
  *
  * ---------------------------------------------------------------------------|
  */
-/* decompat-out pk7/lzscript/Constants/items.zsc */
 
-/* decompat-cut */
 #ifndef items_h
 #define items_h
 
 #define for_item(cont) for_list(struct item *it, (cont).items) if(it)
 
+#if !ZscOn
 enum {
    _inv_backpack,
    _inv_arm_upper_l,
@@ -31,16 +30,16 @@ enum {
    _inv_legs,
    _inv_num,
 };
-/* decompat-end */
+#endif
 
-enum /* Container */ {
+enum ZscName(Container) {
    _cont_store,
    _cont_arms_u,
    _cont_arms_l,
    _cont_body,
 };
 
-/* decompat-cut */
+#if !ZscOn
 struct itemdata {
    str name, spr;
    u32 w, h;
@@ -99,6 +98,6 @@ script bool P_Inv_PlaceFirst(struct container *cont, struct item *item);
 script bool P_Inv_SwapFirst(struct container *cont, struct item *lhs);
 bool P_Inv_Swap(struct item *lhs, struct item *rhs);
 bool P_Inv_Add(struct player *p, struct item *item);
+#endif
 
 #endif
-/* decompat-end */
