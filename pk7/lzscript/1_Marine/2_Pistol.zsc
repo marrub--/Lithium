@@ -137,9 +137,9 @@ action(Weapon) void Lith_A_FirePistol()
    }
 
    if(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_AutoPistol))
-      Lith_FixedBullets(1, 20);
+      Lith_FixedBullets(1, 24);
    else
-      Lith_FireBullets(0, 0, -1, 18, FBF_NORANDOM);
+      Lith_FireBullets(0, 0, -1, 24, FBF_NORANDOM);
 
    if(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_AutoPistol))
       A_StartSound("weapons/pistol/fireauto", lch_weapon);
