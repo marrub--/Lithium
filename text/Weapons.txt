@@ -69,6 +69,10 @@
 +i_flintlock 2 Flintlock Placeholder2 AMag A "Shell"
 ;fist fist i_flintlock fist fist fist fist fist fist
 
+:wanderer
++w_magnum 2 Magnum Placeholder2 NMag
+;fist fist w_magnum fist fist fist fist fist fist
+
 :assassin
 +a_dualpist 2 DualPistols Placeholder2 NMag
 +a_burstrif 4 BurstRifle  Placeholder2 NMag

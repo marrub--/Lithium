@@ -98,4 +98,19 @@ void Sc_DodgeView(void)
    with_player(LocalPlayer) DodgeView(p);
 }
 
+script_str ext("ACS") addr(OBJ "DodgeViewShadowWalk")
+void Sc_DodgeViewShadowWalk(void) {
+   with_player(LocalPlayer) {
+      k32 vh = p->viewheight;
+
+      for(i32 i = 0; i < 105; i++) {
+         k32 mul = 1.0k - (ACS_Sin(i / 105.0k / 2.0k) * 0.3k) - 0.1k;
+         SetViewHeight(0, vh * mul);
+         ACS_Delay(1);
+      }
+
+      SetViewHeight(0, vh);
+   }
+}
+
 /* EOF */

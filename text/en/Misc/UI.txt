@@ -46,6 +46,7 @@
 == \#TAB_ARSENAL_Stan | Arsenal
 == \#TAB_ARSENAL_Jem  | Directives
 == \#TAB_ARSENAL_Ari  | Gear
+== \#TAB_ARSENAL_Luke | Presages
 == \#TAB_ARSENAL_Mod  | $\#TAB_ARSENAL_Stan
 
 == \#TAB_STATUS    | Status

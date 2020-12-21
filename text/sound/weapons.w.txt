@@ -6,18 +6,13 @@
 ##
 ## ---------------------------------------------------------------------------|
 
-# Marine
-player {
-   $alias marine.step = step
-
-   # Upgrades
-   == lsounds/PlayerM
-   rarmor.mode   RArmor/ChangeMode # Halo 3
-   rarmor.damage RArmor/Damage     # Touhou 13
-
-   rocketboost RocketBoost       # ???
-   adren.inj   Adrenaline/Inject # Killing Floor
-   adren.ready Adrenaline/Ready  # //
+weapons {
+   magnum {
+      == lsounds/WeaponsW/Magnum
+      fire1 Fire  # Marathon 2
+      fire2 Fire2 # //
+      $random fire { fire1, fire2, }
+   }
 }
 
 # EOF

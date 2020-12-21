@@ -377,6 +377,7 @@ player/rarmor/damage lsounds/PlayerM/RArmor/Damage
 player/rocketboost lsounds/PlayerM/RocketBoost
 player/adren/inj lsounds/PlayerM/Adrenaline/Inject
 player/adren/ready lsounds/PlayerM/Adrenaline/Ready
+player/wanderer/shadowwalk lsounds/PlayerW/ShadowWalk
 marathon/pickup lsounds/Marathon/Pickup
 marathon/explode lsounds/Marathon/Explode
 marathon/hitsolid lsounds/Marathon/HitSolid
@@ -770,6 +771,9 @@ $random weapons/dark/impact { weapons/dark/impact1 weapons/dark/impact2 weapons/
 $limit weapons/dark/impact 0
 weapons/redrifle/fire lsounds/WeaponsT/RedRifle/Fire
 weapons/redrifle/bolt lsounds/WeaponsT/RedRifle/Bolt
+weapons/magnum/fire1 lsounds/WeaponsW/Magnum/Fire
+weapons/magnum/fire2 lsounds/WeaponsW/Magnum/Fire2
+$random weapons/magnum/fire { weapons/magnum/fire1 weapons/magnum/fire2 }
 weapons/cfist/pickup lsounds/Weapons/ChargeFist/Pickup
 weapons/cfist/fire1 lsounds/Weapons/ChargeFist/Fire1
 weapons/cfist/fire2 lsounds/Weapons/ChargeFist/Fire2

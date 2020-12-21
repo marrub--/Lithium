@@ -1711,6 +1711,7 @@
 "LITH_TAB_ARSENAL_Stan" = "Arsenal";
 "LITH_TAB_ARSENAL_Jem" = "Directives";
 "LITH_TAB_ARSENAL_Ari" = "Gear";
+"LITH_TAB_ARSENAL_Luke" = "Presages";
 "LITH_TAB_ARSENAL_Mod" = "$LITH_TAB_ARSENAL_Stan";
 "LITH_TAB_STATUS" = "Status";
 "LITH_TAB_INVENTORY" = "Inventory";

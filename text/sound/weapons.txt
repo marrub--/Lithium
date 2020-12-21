@@ -229,4 +229,12 @@ effects {
    }
 }
 
+$include "sound/weapons.a.txt"
+$include "sound/weapons.c.txt"
+$include "sound/weapons.d.txt"
+$include "sound/weapons.m.txt"
+$include "sound/weapons.t.txt"
+$include "sound/weapons.w.txt"
+$include "sound/weapons.go.txt"
+
 # EOF

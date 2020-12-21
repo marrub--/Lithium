@@ -1,0 +1,80 @@
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison G. Watson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
+class Lith_Magnum : Lith_WWeapon;
+
+default {
+   Lith_Weapon.SpawnType "Lith_PistolPickup";
+   Lith_Weapon.MagSize 7;
+   Tag "$LITH_INFO_SHORT_Magnum";
+   Weapon.SlotNumber 2;
+   Weapon.SlotPriority 1;
+   Weapon.UpSound "weapons/magnum/draw";
+
+   +WEAPON.NOAUTOFIRE;
+}
+
+action(Weapon) void lith_fireMagnum() {
+   A_GunFlash("DummyFlash");
+   A_Recoil(1.5);
+   A_Quake(2, 3, 0, 128);
+   Lith_FireBullets(0, 0, -1, 77, FBF_NORANDOM);
+   A_StartSound("weapons/magnum/fire", lch_weapon);
+}
+
+states(Weapon) {
+Ready:
+   MAGN A 1 Lith_A_Ready(WRF_ALLOWRELOAD);
+   loop;
+
+Deselect:
+   MAGN A 1 A_Lower(18);
+   wait;
+Select:
+   MAGN A 1 A_Raise(18);
+   wait;
+
+Fire:
+   #### # 0 Lith_A_JumpIfMagEmpty;
+   #### # 0 Lith_A_MagIncr;
+   MAGN A 1 offset(2, 32);
+   MAGN A 1 bright lith_fireMagnum();
+   MAGN A 1 bright offset(10, 28) Lith_A_RecoilUp(2);
+   MAGN AA 1 bright;
+   MAGN AA 1 offset(9, 28);
+   MAGN A 1 offset(7, 30);
+   MAGN A 1 offset(5, 31);
+   MAGN A 1 offset(4, 31);
+   MAGN A 1 offset(3, 32);
+   MAGN AAA 1 offset(2, 32);
+   MAGN AAA 1 offset(1, 32);
+   MAGN A 1;
+   MAGN A 1;
+   MAGN A 1 offset(0, 32);
+   MAGN A 1 offset(0, 32);
+   goto ReadySelector;
+
+FireEmpty:
+   MAGN A 1;
+   MAGN AA 1 offset(3, 38);
+   MAGN A 1 offset(7, 40);
+   MAGN A 1 offset(5, 37) A_StartSound("weapons/cshotgun/empty", lch_dryweapon);
+   MAGN A 1 offset(4, 34);
+   MAGN A 1 offset(2, 33);
+   MAGN AAAAA 1 offset(1, 32);
+   goto ReadySelector;
+
+Reload:
+   MAGN A 1 Lith_A_JumpIfMagFull;
+   MAGN A 1 offset(2, 31) A_StartSound("weapons/magnum/reload", lch_reload);
+   MAGN A 2 Lith_A_ReloadFinish;
+   goto ReadySelector;
+}
+
+/* EOF */

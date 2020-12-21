@@ -57,6 +57,7 @@ enum ZscName(WeaponNum) {
    weapon_d_fatmac,
    weapon_d_railgun,
    weapon_i_flintlock,
+   weapon_w_magnum,
    weapon_a_dualpist,
    weapon_a_burstrif,
    weapon_t_riotshot,

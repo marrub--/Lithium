@@ -24,45 +24,45 @@ class Lith_InformantPlayer : Lith_Player
       +NOBLOOD;
    }
 
-   private int m_DodgeDbc;
-   private int m_IFrames;
-   int m_Overdrive;
+   private int m_dodgeDbc;
+   private int m_iFrames;
+   int m_overdrive;
 
-   override void GiveDefaultInventory()
+   override void giveDefaultInventory()
    {
-      Super.GiveDefaultInventory();
-      Lith_GiveDefWeapon("Lith_Flintlock");
+      super.giveDefaultInventory();
+      lith_giveDefWeapon("Lith_Flintlock");
    }
 
-   override void Tick()
+   override void tick()
    {
-      if(m_IFrames) m_IFrames--;
+      if(m_iFrames) m_iFrames--;
 
       if(health > 0)
       {
-         if(m_DodgeDbc)
-            m_DodgeDbc--;
+         if(m_dodgeDbc)
+            m_dodgeDbc--;
          else if(player && player.buttons & BT_SPEED)
          {
             let a = angle - atan2(player.cmd.sidemove, player.cmd.forwardmove);
             let c = cos(a) * 32;
             let s = sin(a) * 32;
-            CallACS("Lith_DodgeView");
+            callACS("Lith_DodgeView");
             A_ChangeVelocity(c, s);
-            m_IFrames = 20;
-            m_DodgeDbc = TICRATE;
+            m_iFrames = 20;
+            m_dodgeDbc = TICRATE;
          }
       }
 
-      Super.Tick();
+      super.tick();
    }
 
-   override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int flags, double angle)
+   override int damageMobj(Actor inflictor, Actor source, int damage, name mod, int flags, double angle)
    {
-      if(m_IFrames)
+      if(m_iFrames)
          return 0;
       else
-         return Super.DamageMobj(inflictor, source, damage, mod, flags, angle);
+         return super.damageMobj(inflictor, source, damage, mod, flags, angle);
    }
 }
 
