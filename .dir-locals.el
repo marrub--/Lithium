@@ -1,2 +1,2 @@
-((nil . ((indent-tabs-mode . nil)
-         (tab-width        . 3))))
+((nil . ((agw-no-tabs       . t)
+         (agw-no-tabs-width . 3))))
