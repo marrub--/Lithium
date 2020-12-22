@@ -773,7 +773,10 @@ weapons/redrifle/fire lsounds/WeaponsT/RedRifle/Fire
 weapons/redrifle/bolt lsounds/WeaponsT/RedRifle/Bolt
 weapons/magnum/fire1 lsounds/WeaponsW/Magnum/Fire
 weapons/magnum/fire2 lsounds/WeaponsW/Magnum/Fire2
+weapons/magnum/reload lsounds/WeaponsW/Magnum/Reload
+weapons/magnum/pickup lsounds/WeaponsW/Magnum/Pickup
 $random weapons/magnum/fire { weapons/magnum/fire1 weapons/magnum/fire2 }
+$alias weapons/magnum/draw weapons/magnum/pickup
 weapons/cfist/pickup lsounds/Weapons/ChargeFist/Pickup
 weapons/cfist/fire1 lsounds/Weapons/ChargeFist/Fire1
 weapons/cfist/fire2 lsounds/Weapons/ChargeFist/Fire2

@@ -47,9 +47,9 @@ Fire:
    MAGN B 1 bright lith_fireMagnum();
    MAGN B 1 bright offset(10, 28) Lith_A_RecoilUp(1.7);
    MAGN BB 1 bright;
-   MAGN CC 1 offset(9, 28);
-   MAGN C 1 offset(7, 30);
-   MAGN C 1 offset(5, 31);
+   MAGN CC 1 bright offset(9, 28);
+   MAGN C 1 bright offset(7, 30);
+   MAGN C 1 bright offset(5, 31);
    MAGN D 1 offset(4, 31);
    MAGN D 1 offset(3, 32);
    MAGN DDE 1 offset(2, 32);
@@ -72,8 +72,15 @@ FireEmpty:
 
 Reload:
    MAGN A 1 Lith_A_JumpIfMagFull;
-   MAGN A 1 offset(2, 31) A_StartSound("weapons/magnum/reload", lch_reload);
-   MAGN A 2 Lith_A_ReloadFinish;
+   MAGN F 3 A_StartSound("weapons/magnum/reload", lch_reload);
+   MAGN F 4 offset(7, 32);
+   MAGN G 3 offset(1, 32);
+   MAGN G 4 offset(7, 32);
+   MAGN H 5 offset(1, 32);
+   MAGN H 5 offset(7, 32);
+   MAGN F 3 offset(7, 32);
+   MAGN F 4 offset(1, 32);
+   MAGN A 5 Lith_A_ReloadFinish;
    goto ReadySelector;
 }
 

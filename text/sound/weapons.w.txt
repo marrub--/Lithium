@@ -9,9 +9,13 @@
 weapons {
    magnum {
       == lsounds/WeaponsW/Magnum
-      fire1 Fire  # Marathon 2
-      fire2 Fire2 # //
+      fire1  Fire   # Marathon 2
+      fire2  Fire2  # //
+      reload Reload # //
+      pickup Pickup # Fallout 4
+
       $random fire { fire1, fire2, }
+      $alias draw = pickup
    }
 }
 

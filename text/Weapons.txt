@@ -70,7 +70,7 @@
 ;fist fist i_flintlock fist fist fist fist fist fist
 
 :wanderer
-+w_magnum 2 Magnum Placeholder2 NMag
++w_magnum 2 Magnum "magnum" NMag
 ;fist fist w_magnum fist fist fist fist fist fist
 
 :assassin
