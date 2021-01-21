@@ -137,6 +137,11 @@ private void Lith_ItemVacuum() {
 }
 
 int, int, bool Lith_Unproject(vector3 loc) {
+   if(!m_QY || !m_QP) {
+      /* not initialized, fuck off */
+      return -1000, -1000, false;
+   }
+
    /* create (view-adjusted) normalized vector for where we're looking */
    vector3 la = pos - loc;
    la.z = (player.viewz - loc.z) * level.pixelstretch;
