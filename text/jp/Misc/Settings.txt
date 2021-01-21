@@ -6,6 +6,18 @@
 ##
 ## ---------------------------------------------------------------------------|
 
+== \#st_name_lvsys_0 | おまかせ
+== \#st_name_lvsys_1 | 半分手動
+== \#st_name_lvsys_2 | 手動
+
+== \#st_name_expbar_5  | 森
+== \#st_name_expbar_6  | ミント
+== \#st_name_expbar_7  | 空色
+== \#st_name_expbar_8  | パソコン風
+== \#st_name_expbar_9  | 深紫
+== \#st_name_expbar_11 | ピンク
+== \#st_name_expbar_12 | もっとピンク
+
 == \#ST_NAME_Theme_0 | グリーン
 == \#ST_NAME_Theme_1 | ローズピーチ
 == \#ST_NAME_Theme_2 | シーブルー
@@ -16,5 +28,122 @@
 == \#ST_NAME_Theme_7 | ゴースト
 == \#ST_NAME_Theme_8 | ウィンドウズXP
 == \#ST_NAME_Theme_9 | ドンキーコング
+
+== \#st_name_color_97  | レンガ
+== \#st_name_color_99  | 灰色
+== \#st_name_color_100 | 緑
+== \#st_name_color_101 | 茶色
+== \#st_name_color_102 | 金ピカ
+== \#st_name_color_103 | 赤
+== \#st_name_color_104 | 青
+== \#st_name_color_105 | オレンジ
+== \#st_name_color_106 | 白
+== \#st_name_color_107 | 黄色
+== \#st_name_color_109 | 黒
+== \#st_name_color_110 | 淡い青
+== \#st_name_color_111 | クリーム
+== \#st_name_color_112 | オリーブ
+== \#st_name_color_113 | 深緑
+== \#st_name_color_114 | 濃い赤
+== \#st_name_color_115 | 濃い茶色
+== \#st_name_color_116 | 紫
+== \#st_name_color_117 | 濃い灰色
+== \#st_name_color_118 | 水色
+== \#st_name_color_119 | 氷色
+== \#st_name_color_120 | 炎
+== \#st_name_color_121 | サファイア
+
+== \#st_name_cursor_0 | 緑
+== \#st_name_cursor_1 | ピンク
+== \#st_name_cursor_2 | 青
+== \#st_name_cursor_3 | オレンジ
+== \#st_name_cursor_4 | 赤
+== \#st_name_cursor_5 | 白
+== \#st_name_cursor_6 | ふちどり
+== \#st_name_cursor_7 | ふちどり(尻尾付き)
+== \#st_name_cursor_8 | ふちどり反転
+== \#st_name_cursor_9 | ふちどり反転 (尻尾付き)
+
+== \#st_labl_gui | ディスプレイ
+== \#st_labl_hud | HUD
+== \#st_labl_itm | アイテム
+== \#st_labl_lit | 懐中電灯
+== \#st_labl_log | ログ
+== \#st_labl_pgm | NG+
+== \#st_labl_ply | プレイヤー
+== \#st_labl_wep | 武器
+== \#st_labl_wld | 環境
+
+== \#st_labl_postgame_1 | \cg警告:\c- NG+は
+== \#st_labl_postgame_2 | 現在のデータに上書きしてセーブされ、
+== \#st_labl_postgame_3 | \ci元に戻すことはできませんことがあります。\c-
+== \#st_labl_postgame_4 | 覚悟を決めたうえでこれを有効にしてください。
+
+== \#st_labl_jp_1 | 日本語化する場合、
+== \#st_labl_jp_2 | コンソールに "language jp" と入力し
+== \#st_labl_jp_3 | 新しくゲームを始めてください。
+
+== \#gui_buyfiller          | アイテムの購入確認
+== \#gui_cursor             | カーソル
+== \#gui_defcr              | テキストの色
+== \#gui_jpfont             | フォント
+== \#gui_theme              | インターフェースのテーマ変更
+== \#gui_xmul               | カーソルの平行感度
+== \#gui_ymul               | カーソルの垂直感度
+== \#hud_expbar             | 経験値バーの表示
+== \#hud_logfromtop         | ログをスクリーン上部に表示
+== \#hud_logsize            | ログの大きさ
+== \#hud_showarmorind       | リアクティブアーマーの表示
+== \#hud_showdamage         | ダメージ量の表示
+== \#hud_showlog            | ログの表示
+== \#hud_showlvl            | レベルの表示
+== \#hud_showscore          | スコアの表示
+== \#hud_showweapons        | 武器の表示
+== \#light_b                | 青みの強さ
+== \#light_battery          | 懐中電灯の電池
+== \#light_g                | 緑みの強さ
+== \#light_r                | 赤みの強さ
+== \#light_radius           | 明かりの強さ
+== \#light_regen            | 電池の自動回復
+== \#player_altinvuln       | 無敵時の画面変更
+== \#player_ammolog         | 弾獲得時にログ表示
+== \#player_bosstexts       | ボスのおしゃべり
+== \#player_brightweps      | 落ちてる武器のハイライト
+== \#player_damagebob       | 被弾時の画面揺れ
+== \#player_damagebobmul    | 画面揺れの激しさ
+== \#player_footstepvol     | 足音の大きさ
+== \#player_lvsys           | レベルアップ時のポイント振り分け
+== \#player_resultssound    | リザルト画面で音を鳴らす
+== \#player_scorelog        | スコア獲得量をログに表示
+== \#player_scoresound      | スコア獲得時に音を鳴らす
+== \#player_stupidpickups   | 変なアイテム獲得音
+== \#player_teleshop        | 買ったものがテレポートされてくる
+== \#player_viewtilt        | 横歩き時に画面を傾ける
+== \#st_done_intro          | 次のゲーム開始時にイントロを表示しない
+== \#sv_autosave            | オートセーブの頻度
+== \#sv_difficulty          | Lithiumの難易度
+== \#sv_lessparticles       | パーティクル少な目
+== \#sv_minhealth           | マップ開始時の体力
+== \#sv_nobossdrop          | シャドウ討伐報酬所持でスタート
+== \#sv_nobosses            | シャドウを出現させない
+== \#sv_nofullammo          | 弾薬満タン時に武器を拾わない
+== \#sv_noscoreammo         | 弾薬獲得時にスコアを入手しない
+== \#sv_postgame            | NG+を有効にする
+== \#sv_rain                | 外に雨を降らす
+== \#sv_revenge             | 神風
+== \#sv_scoremul            | スコア倍率
+== \#sv_wepdrop             | 敵が武器を落とす
+== \#weapons_alpha          | 武器の透明度
+== \#weapons_casingfadeout  | 薬莢の消える速さ
+== \#weapons_casings        | 薬莢の表示
+== \#weapons_magdrops       | リロード後のマガジン表示
+== \#weapons_magfadeout     | マガジンの消える速さ
+== \#weapons_rainbowlaser   | マスタースパーク
+== \#weapons_reloadempty    | 武器の自動リロード
+== \#weapons_riflemodeclear | 武器変更時にライフルのモードをリセット
+== \#weapons_riflescope     | ライフルスコープの有無
+== \#weapons_scopealpha     | スコープの透明度
+== \#weapons_slot3ammo      | スロット３の武器が弾を消費する
+== \#weapons_zoomfactor     | スコープの拡大率
 
 ## EOF

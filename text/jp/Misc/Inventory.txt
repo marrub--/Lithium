@@ -1,0 +1,152 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison G. Watson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
+%% \#INV_HINTS
+左クリックでもアイテムの移動ができます。
+アーマーを装備するにはアイテムを \cd該当する体の部位\c- に置くか \cn装備\c- ボタンを押してください。
+
+## Containers ----------------------------------------------------------------|
+
+== \#CONTAINER_Backpack | バックパック
+== \#CONTAINER_ArmUpL   | 左肩
+== \#CONTAINER_ArmUpR   | 右肩
+== \#CONTAINER_ArmLoL   | 左腕
+== \#CONTAINER_ArmLoR   | 右腕
+== \#CONTAINER_Belt     | ベルト
+== \#CONTAINER_LegL     | 左腿
+== \#CONTAINER_LegR     | 右腿
+== \#CONTAINER_Torso    | 胴体
+== \#CONTAINER_Legs     | 足
+
+## Tags ----------------------------------------------------------------------|
+
+== \#ITEM_TAG_ClawOfImp | インプの爪
+== \#ITEM_TAG_DivisionSigil | \cgわ\ciり\ckざ\cfん\cdの\cvい\cnん\chし\ctょ\caう
+
+== \#ITEM_TAG_ArmStandardUp    | 通常のアーマー
+== \#ITEM_TAG_ArmImprovedUp    | 改良されたアーマー
+== \#ITEM_TAG_ArmTeflonUp      | テフロン加工されたアーマー
+== \#ITEM_TAG_ArmDendriteUp    | 樹状突起のアーマー
+== \#ITEM_TAG_ArmAerodynamicUp | 空気抵抗を抑えたアーマー
+== \#ITEM_TAG_ArmHazMatUp      | 防護服
+## ありがとうよ
+== \#ITEM_TAG_ArmPinkSilverUp  | ピンクシルバーのアーマー
+== \#ITEM_TAG_ArmMidoriUp      | ミドリのアーマー
+
+== \#ITEM_TAG_ArmStandardLo    | 通常のレギンス
+== \#ITEM_TAG_ArmImprovedLo    | 改良されたレギンス
+== \#ITEM_TAG_ArmTeflonLo      | テフロン加工されたレギンス
+== \#ITEM_TAG_ArmDendriteLo    | 樹状突起のレギンス
+== \#ITEM_TAG_ArmAerodynamicLo | 空気抵抗を抑えたレギンス
+== \#ITEM_TAG_ArmHazMatLo      | 防護服
+== \#ITEM_TAG_ArmPinkSilverLo  | ピンクシルバーのレギンス
+== \#ITEM_TAG_ArmMidoriLo      | ミドリのレギンス
+
+## Descriptions --------------------------------------------------------------|
+
+%% \#ITEM_SHORT_DivisionSigil
+\cg世界最大の失敗。
+
+%% \#ITEM_SHORT_ClawOfImp
+割り算の中で使われた。
+
+%% \#ITEM_SHORT_ArmStandardUp
+\ca4の銃撃耐性を持ち、
+それ以外の属性には2の耐性を持つ。
+
+%% \#ITEM_SHORT_ArmImprovedUp
+\ca6の銃撃耐性を持ち、
+それ以外の属性には3の耐性を持つ。
+
+%% \#ITEM_SHORT_ArmTeflonUp
+\ca6の電撃耐性を持ち、
+それ以外の属性には3の耐性を持つ。
+
+%% \#ITEM_SHORT_ArmDendriteUp
+\ca6の火炎耐性を持ち、
+それ以外の属性には3の耐性を持つ。
+
+%% \#ITEM_SHORT_ArmAerodynamicUp
+\ca全ての攻撃に対し2の耐性を持つ。
+移動速度10％上昇。
+
+%% \#ITEM_SHORT_ArmHazMatUp
+\ca10の環境耐性を持ち、
+それ以外の属性には2の耐性を持つ。
+
+%% \#ITEM_SHORT_ArmPinkSilverUp
+\ca12の魔法耐性を持ち、
+それ以外の属性には6の耐性を持つ。
+
+%% \#ITEM_SHORT_ArmMidoriUp
+\ca12の業火の魔法耐性を持ち、
+それ以外の属性には6の耐性を持つ。
+
+%% \#ITEM_SHORT_ArmStandardLo
+\ca2の銃撃耐性を持ち、
+それ以外の属性には1の耐性を持つ。
+
+%% \#ITEM_SHORT_ArmImprovedLo
+\ca4の弾丸耐性を持ち、
+それ以外の属性には2の耐性を持つ。
+
+%% \#ITEM_SHORT_ArmTeflonLo
+\ca2の電撃耐性を持ち、
+それ以外の属性には1の耐性を持つ。
+
+%% \#ITEM_SHORT_ArmDendriteLo
+\ca2の火炎耐性を持ち、
+それ以外の属性には1の耐性を持つ。
+
+%% \#ITEM_SHORT_ArmAerodynamicLo
+\caすべての属性に2の耐性を持つ。
+移動速度10%上昇。
+
+%% \#ITEM_SHORT_ArmHazMatLo
+\ca10の環境耐性を持ち、
+それ以外の属性には1の耐性を持つ。
+
+%% \#ITEM_SHORT_ArmPinkSilverLo
+\ca8の魔法耐性を持ち、
+それ以外の属性には4の耐性を持つ。
+
+%% \#ITEM_SHORT_ArmMidoriLo
+\ca8の業火の魔法耐性を持ち、
+それ以外の属性には4の耐性を持つ。
+
+## Sprites -------------------------------------------------------------------|
+
+== :ItemSpr:ArmStandardUp    | ARM1A0
+== :ItemSpr:ArmImprovedUp    | ARM2A0
+== :ItemSpr:ArmTeflonUp      | ARM3A0
+== :ItemSpr:ArmDendriteUp    | ARM4A0
+== :ItemSpr:ArmAerodynamicUp | :Items:AeroArmor
+== :ItemSpr:ArmHazMatUp      | ARM6A0
+== :ItemSpr:ArmPinkSilverUp  | ARM7A0
+== :ItemSpr:ArmMidoriUp      | ARM8A0
+
+== :ItemSpr:ArmStandardLo    | ARM1C0
+== :ItemSpr:ArmImprovedLo    | ARM2C0
+== :ItemSpr:ArmTeflonLo      | ARM3C0
+== :ItemSpr:ArmDendriteLo    | ARM4C0
+== :ItemSpr:ArmAerodynamicLo | ARM5C0
+== :ItemSpr:ArmHazMatLo      | ARM6C0
+== :ItemSpr:ArmPinkSilverLo  | ARM7C0
+== :ItemSpr:ArmMidoriLo      | ARM8C0
+
+== :ItemSpr:ClawOfImp     | DITMA0
+== :ItemSpr:DivisionSigil | :Items:DivisionSigil
+
+== :HUD:H_KC1 | RKEYB0
+== :HUD:H_KC2 | YKEYB0
+== :HUD:H_KC3 | BKEYB0
+== :HUD:H_KS1 | RSKUB0
+== :HUD:H_KS2 | YSKUB0
+== :HUD:H_KS3 | BSKUB0
+
+## EOF
