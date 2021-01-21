@@ -61,12 +61,14 @@ class PosReader
    end
 end
 
-def read_until_from text, s = String.new
+def read_until_from text, s = ""
+   s = +s
    until yield c = text.next do s << c end
    -s
 end
 
-def read_while_from text, s = String.new
+def read_while_from text, s = ""
+   s = +s
    while yield text.peek do s << text.next end
    -s
 end

@@ -12,6 +12,12 @@
 ##
 ## ---------------------------------------------------------------------------|
 
+class Array
+   def tk_to_s
+      self.map do |sy| sy.tk_to_s end.join ", "
+   end
+end
+
 class Symbol
    def tk_to_s
       case self
@@ -33,6 +39,11 @@ class Symbol
       when :string then "string"
       else              "unknown token"
       end
+   end
+
+   def tk_is? other
+      other = [other] if other.is_a? Symbol
+      other.include? self
    end
 end
 
@@ -64,10 +75,8 @@ class Token
    end
 
    def expect_in nx
-      nx = [nx] if nx.is_a? Symbol
-      unless nx.include? @type
-         nx = nx.map do |sy| sy.tk_to_s end.join ", "
-         raise "#{@pos}: #{yield nx}"
+      unless @type.tk_is? nx
+         raise "#{@pos}: #{yield nx.tk_to_s}"
       end
       self
    end
@@ -95,13 +104,10 @@ def tokenize_from read
 
    tok_s = lambda do |p, type, text| tokens.push Token.new p, type, -text end
    tok_1 = lambda do |p, type|       tokens.push Token.new p, type        end
-
    tok_2 = lambda do |p, nx, type_a, type_b|
       c = data.peek
-      if c == nx then data.next
-         tok_1.(p, type_a)
-      else
-         tok_1.(p, type_b)
+      if c == nx then data.next; tok_1.(p, type_a)
+      else                       tok_1.(p, type_b)
       end
    end
 
@@ -125,13 +131,13 @@ def tokenize_from read
          s   = read_until_from data do |c| c == '"' end
          tok_s.(pos, :string, s)
       when Token::IDENS
-         c   = "" if c == "\\"
+         c   = data.next if c == "\\"
          pos = read.pos
-         s   = read_while_from data, +c do |c| c =~ Token::IDENC end
+         s   = read_while_from data, c do |c| c =~ Token::IDENC end
          tok_s.(pos, :identi, s)
       when Token::NUMRS
          pos = read.pos
-         s   = read_while_from data, +c do |c| c =~ Token::NUMRC end
+         s   = read_while_from data, c do |c| c =~ Token::NUMRC end
          tok_s.(pos, :number, s)
       else
          raise "#{read.pos}: invalid character `#{c}'"

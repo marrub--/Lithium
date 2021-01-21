@@ -60,17 +60,13 @@ class OutDbl < OutDir
    end
 end
 
-class ParseState
-   attr_reader   :out_file, :snds_dir, :file_dir, :base_dir, :path
-   attr_accessor :tks
+class SndParseState < ParseState
+   attr_reader :snds_dir, :file_dir, :path
 
-   def initialize base, tks
-      @tks      = tks
-      @out_file = String.new
+   def initialize filename
+      super
       @snds_dir = String.new
       @file_dir = String.new
-      @base_dir = base.dup
-      @out      = []
       @ignore   = []
       @path     = []
    end
@@ -83,29 +79,11 @@ class ParseState
       @ignore.include? s
    end
 
-   def with tks
-      new = self.clone
-      new.tks = tks
-      new
-   end
-
-   def write data
-      @out.append data
-   end
-
    def prepend_file_dir s
       if @file_dir.empty?
          s.dup
       else
          @file_dir + "/" + s
-      end
-   end
-
-   def each_out &block
-      if block_given?
-         @out.each &block
-      else
-         to_enum :each_out
       end
    end
 end
@@ -305,20 +283,16 @@ def parse_statement state
 end
 
 def parse state
-   loop do
-      parse_statement state
-   end
+   loop do parse_statement state end
 end
 
 common_main do
    for filename in ARGV
-      base_dir = File.dirname filename
-
-      state = ParseState.new base_dir, tokenize(filename)
+      state = SndParseState.new filename
       parse state
 
       fp = open state.out_file, "wt"
-      fp.puts generated_header "compilesnd"
+      fp.puts generated_header "sndc"
 
       for out in state.each_out
          if out.is_a? OutDef

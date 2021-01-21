@@ -14,9 +14,9 @@
 
 require_relative "corinth.rb"
 
-Alias      = Struct.new :name, :text
-Language   = Struct.new :name, :data
-ParseState = Struct.new :cwd, :out, :langs
+Alias         = Struct.new :name, :text
+Language      = Struct.new :name, :data
+TxtParseState = Struct.new :cwd, :out, :langs
 
 def escape text
    text.gsub(/((?<m>\\)(?!c))|(?<m>")/, "\\\\\\k<m>").gsub("\n", "\\n")
@@ -130,12 +130,12 @@ end
 
 for filename in ARGV
    filename = split_name filename
-   state    = ParseState.new [], nil, {}
+   state    = TxtParseState.new [], nil, {}
 
    parse_file state, filename, nil
 
    out = open state.out, "w"
-   out.puts generated_header "compilefs"
+   out.puts generated_header "txtc"
 
    sorted = state.langs.sort_by do |k, v| k end
    for lnam, lang in sorted

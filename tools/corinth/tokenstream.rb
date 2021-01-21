@@ -35,7 +35,7 @@ class TokenStream
    end
 
    def peek_or type, default = nil
-      if self.peek.type == type
+      if self.peek.type.tk_is? type
          tok = self.next
          if block_given?
             yield tok
@@ -48,7 +48,7 @@ class TokenStream
    end
 
    def drop type
-      if self.peek.type == type
+      if self.peek.type.tk_is? type
          self.next
       else
          nil
@@ -57,6 +57,17 @@ class TokenStream
 
    def drop? type
       drop(type) != nil
+   end
+
+   def while_is type
+      if block_given?
+         loop do
+            break unless self.peek.type.tk_is? type
+            yield self.next
+         end
+      else
+         to_enum :while_is, type
+      end
    end
 
    def while_drop type

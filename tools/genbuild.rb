@@ -178,21 +178,21 @@ ninja
    end
 end
 
-TextEnt = Struct.new :i
-TEXT = [
-   TextEnt.new("Text.txt"),
+TxtcEnt = Struct.new :i
+TXTC = [
+   TxtcEnt.new("Text.txt"),
 ]
-def proc_text ctx
+def proc_txtc ctx
    ctx.fp << <<ninja
-rule text
- command = $#{TOOLS}/compilefs.rb $in
- description = CompileFS
+rule txtc
+ command = $#{TOOLS}/txtc.rb $in
+ description = TxtC
 ninja
 
-   each_fake_dep ctx, TEXT, "text_" do |ent|
+   each_fake_dep ctx, TXTC, "txtc_" do |ent|
       i = txt ent.i
       o = i + "_"
-      ctx.fp << "build #{o}: text #{i} | $#{TOOLS}/compilefs.rb\n"
+      ctx.fp << "build #{o}: txtc #{i} | $#{TOOLS}/txtc.rb\n"
       o
    end
 end
@@ -207,11 +207,12 @@ def proc_hsfs ctx
 rule hsfs
  command = $#{TOOLS}/hashfs.rb $out $in $#{DIR}
  description = HashFS
+build _fake_: phony
 ninja
 
    each_fake_dep ctx, HSFS, "hsfs_" do |ent|
       ctx.fp << <<ninja
-build #{ent.o}: hsfs | $#{TOOLS}/hashfs.rb
+build #{ent.o}: hsfs | _fake_ $#{TOOLS}/hashfs.rb
  #{DIR} = #{ent.p} #{ent.d}
 ninja
 
@@ -219,21 +220,21 @@ ninja
    end
 end
 
-SndsEnt = Struct.new :i
-SNDS = [
-   SndsEnt.new("Sounds.txt"),
+SndcEnt = Struct.new :i
+SNDC = [
+   SndcEnt.new("Sounds.txt"),
 ]
-def proc_snds ctx
+def proc_sndc ctx
    ctx.fp << <<ninja
-rule snds
- command = $#{TOOLS}/compilesnd.rb $in
- description = CompileSnd
+rule sndc
+ command = $#{TOOLS}/sndc.rb $in
+ description = SndC
 ninja
 
-   each_fake_dep ctx, SNDS, "snds_" do |ent|
+   each_fake_dep ctx, SNDC, "sndc_" do |ent|
       i = txt ent.i
       o = i + "_"
-      ctx.fp << "build #{o}: snds #{i} | $#{TOOLS}/compilesnd.rb\n"
+      ctx.fp << "build #{o}: sndc #{i} | $#{TOOLS}/sndc.rb\n"
       o
    end
 end
@@ -486,9 +487,9 @@ proc_wepc ctx
 proc_monc ctx
 proc_infc ctx
 proc_zcpp ctx
-proc_text ctx
+proc_txtc ctx
 proc_hsfs ctx
-proc_snds ctx
+proc_sndc ctx
 proc_libr ctx
 proc_srcs ctx
 proc_link ctx
