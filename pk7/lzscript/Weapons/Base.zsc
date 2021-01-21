@@ -37,6 +37,12 @@ enum Lith_Oscillate {
    _oscillate,
 }
 
+enum Lith_TracerType {
+   _tr_normal,
+   _tr_slow,
+   _tr_none
+}
+
 default {
    Inventory.PickupMessage "";
    Inventory.PickupSound "";
@@ -255,15 +261,22 @@ action void Lith_A_Casing(class<Lith_CasingBase> cas, double px, double py, doub
    A_SpawnItemEx(cas, Cos(Pitch)*px, py, pz-Sin(Pitch)*px+vh, vx, vy, vz);
 }
 
-action(Weapon) void Lith_FixedBullets(int numbullets, int damage, int flags = 0, class<Actor> pufftype = "Lith_BulletPuff", double tracer_x = 0, double range = 8192) {
-   for(int i = 0; i < numbullets; i++) {
+action(Weapon) void Lith_FixedBullets(int numBullets, int damage, int flags = 0, class<Actor> puffType = "Lith_BulletPuff", double tracerX = 0, double range = 8192) {
+   for(int i = 0; i < numBullets; i++) {
       double p, y; [p, y] = invoker.GetFirePattern();
-      Lith_FireBullets(p, y, -1, damage, FBF_EXPLICITANGLE | FBF_NORANDOM | flags, pufftype, tracer_x, range);
+      Lith_FireBullets(p, y, -1, damage, FBF_EXPLICITANGLE | FBF_NORANDOM | flags, puffType, tracerX, range);
    }
 }
 
-action(Weapon) void Lith_FireBullets(double spread_horz, double spread_vert, int numbullets, int damage, int flags = 0, class<Actor> pufftype = "Lith_BulletPuff", double tracer_x = 0, double range = 8192) {
-   A_FireBullets(spread_horz, spread_vert, numbullets, damage, pufftype, flags, range, "Lith_BulletTracer", 7 + FRandom(-1, 0), tracer_x + FRandom(-0.7, 0.7));
+action(Weapon) void Lith_FireBullets(double spreadHorz, double spreadVert, int numBullets, int damage, int flags = 0, class<Actor> puffType = "Lith_BulletPuff", double tracerX = 0, double range = 8192, Lith_TracerType tracer = _tr_normal) {
+   class<Actor> tracerType;
+   switch(tracer) {
+   default:
+   case _tr_normal: tracerType = "Lith_BulletTracer";     break;
+   case _tr_slow:   tracerType = "Lith_BulletTracerSlow"; break;
+   case _tr_slow:   tracerType = null;                    break;
+   }
+   A_FireBullets(spreadHorz, spreadVert, numBullets, damage, puffType, flags, range, tracerType, 7 + FRandom(-1, 0), tracerX + FRandom(-0.7, 0.7));
 }
 
 states(Actor) {

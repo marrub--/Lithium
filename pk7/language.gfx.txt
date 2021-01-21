@@ -96,6 +96,9 @@ identifier,default
 :HUD:RifleScope,lgfx/HUD/RifleScope.png
 :HUD:Vignette,lgfx/HUD/Vignette.png
 :HUD:ZoomOverlay,lgfx/HUD/ZoomOverlay.png
+:HUD_A:LeftBack,lgfx/HUD_A/LeftBack.png
+:HUD_A:LeftBar,lgfx/HUD_A/LeftBar.png
+:HUD_A:RightBack,lgfx/HUD_A/RightBack.png
 :HUD_C:AMMO,lgfx/HUD_C/AMMO.png
 :HUD_C:ARM,lgfx/HUD_C/ARM.png
 :HUD_C:ARM_B,lgfx/HUD_C/ARM_B.png

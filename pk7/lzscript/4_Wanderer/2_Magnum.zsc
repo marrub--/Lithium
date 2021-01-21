@@ -20,32 +20,55 @@ default {
    +WEAPON.NOAUTOFIRE;
 }
 
+uint m_rampage;
+uint m_multiShot;
+uint m_buffCooldown;
+
 action(Weapon) void lith_fireMagnum() {
-   A_GunFlash("DummyFlash");
-   A_Recoil(1.5);
-   A_Quake(2, 3, 0, 128);
-   Lith_FireBullets(0, 0, -1, 77, FBF_NORANDOM);
-   A_StartSound("weapons/magnum/fire", lch_weapon);
+   a_gunFlash("DummyFlash");
+   a_recoil(1.5);
+   a_quake(2, 3, 0, 128);
+   uint rampage   = invoker.m_rampage;
+   uint multiShot = invoker.m_multiShot;
+   int dmg;
+   /**/ if(rampage)   dmg = int(21.39 * (float(rampage)   * 1.2 + 4.0));
+   else if(multiShot) dmg = int(21.39 * (float(multiShot) * 1.0 + 0.0));
+   else               dmg = 21;
+   lith_fireBullets(0, 0, -1, dmg, FBF_NORANDOM, tracer: _tr_slow);
+   a_startSound("weapons/magnum/fire", lch_weapon);
+   a_startSound("weapons/magnum/fireback", lch_weapon2);
+   lith_a_gunSmokeSmall();
+   a_fireProjectile("Lith_LightProjectileRedShort", 0);
+}
+
+override void tick() {
+   super.tick();
+   if(m_buffCooldown) {
+      m_buffCooldown--;
+   } else {
+      m_rampage   = 0;
+      m_multiShot = 0;
+   }
 }
 
 states(Weapon) {
 Ready:
-   MAGN A 1 Lith_A_Ready(WRF_ALLOWRELOAD);
+   MAGN A 1 lith_a_ready(WRF_ALLOWRELOAD);
    loop;
 
 Deselect:
-   MAGN A 1 A_Lower(18);
+   MAGN A 1 a_lower(18);
    wait;
 Select:
-   MAGN A 1 A_Raise(18);
+   MAGN A 1 a_raise(18);
    wait;
 
 Fire:
-   #### # 0 Lith_A_JumpIfMagEmpty;
-   #### # 0 Lith_A_MagIncr;
+   #### # 0 lith_a_jumpIfMagEmpty;
+   #### # 0 lith_a_magIncr;
    MAGN A 1 offset(2, 32);
    MAGN B 1 bright lith_fireMagnum();
-   MAGN B 1 bright offset(10, 28) Lith_A_RecoilUp(1.7);
+   MAGN B 1 bright offset(10, 28) lith_a_recoilUp(1.7);
    MAGN BB 1 bright;
    MAGN CC 1 bright offset(9, 28);
    MAGN C 1 bright offset(7, 30);
@@ -64,23 +87,26 @@ FireEmpty:
    MAGN A 1;
    MAGN AA 1 offset(3, 38);
    MAGN A 1 offset(7, 40);
-   MAGN A 1 offset(5, 37) A_StartSound("weapons/cshotgun/empty", lch_dryweapon);
+   MAGN A 1 offset(5, 37) a_startSound("weapons/cshotgun/empty", lch_dryweapon);
    MAGN A 1 offset(4, 34);
    MAGN A 1 offset(2, 33);
    MAGN AAAAA 1 offset(1, 32);
    goto ReadySelector;
 
 Reload:
-   MAGN A 1 Lith_A_JumpIfMagFull;
-   MAGN F 3 A_StartSound("weapons/magnum/reload", lch_reload);
+   MAGN A 1 lith_a_jumpIfMagFull;
+   MAGN F 3 {
+      a_startSound("weapons/magnum/reload", lch_reload);
+      lith_a_reloadBobDn(0.5);
+   }
    MAGN F 4 offset(7, 32);
    MAGN G 3 offset(1, 32);
    MAGN G 4 offset(7, 32);
-   MAGN H 5 offset(1, 32);
+   MAGN H 5 offset(1, 32) lith_a_reloadBobUp(0.3);
    MAGN H 5 offset(7, 32);
    MAGN F 3 offset(7, 32);
    MAGN F 4 offset(1, 32);
-   MAGN A 5 Lith_A_ReloadFinish;
+   MAGN A 5 lith_a_reloadFinish;
    goto ReadySelector;
 }
 

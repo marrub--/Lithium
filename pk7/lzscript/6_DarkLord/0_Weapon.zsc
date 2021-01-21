@@ -109,7 +109,7 @@ action(Weapon) void Lith_SubGunFire() {
    player.getPSprite(_psp_d_subweapon).frame = randomPick(0, 2);
    A_StartSound("weapons/subweapon/armgun", lch_altweapon);
    A_AlertMonsters();
-   Lith_FireBullets(1, 2, -1, 15, pufftype: "Lith_BulletPuffPainful", tracer_x: -6);
+   Lith_FireBullets(1, 2, -1, 15, puffType: "Lith_BulletPuffPainful", tracerX: -6);
 }
 
 action(Weapon) void Lith_SubDagFire() {

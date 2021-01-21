@@ -118,7 +118,7 @@ action(Weapon) void Lith_A_MinigunFire()
    A_AlertMonsters();
    A_StartSound("weapons/minigun/fire", lch_weapon);
    A_WeaponOffset(FRandom(3, 8), FRandom(34, 39), WOF_INTERPOLATE);
-   Lith_FireBullets(7, 1.7, 2, 7, tracer_x: 1);
+   Lith_FireBullets(7, 1.7, 2, 7, tracerX: 1);
    Lith_A_RecoilUp(0.15);
    A_Recoil(0.07);
 }

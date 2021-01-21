@@ -153,6 +153,12 @@ class Lith_BulletTracer : FastProjectile
    }
 }
 
+class Lith_BulletTracerSlow : Lith_BulletTracer {
+   default {
+      Speed 43;
+   }
+}
+
 class Lith_BulletRicochetSpark : Actor
 {
    default
