@@ -23,6 +23,7 @@ GlobalCr(rred) GlobalCr(rdor) GlobalCr(rora) GlobalCr(ryel) GlobalCr(rylg)
 GlobalCr(rgrn) GlobalCr(rcya) GlobalCr(rblu) GlobalCr(rind) GlobalCr(rpur)
 GlobalCr(rlav) GlobalCr(rpnk) GlobalCr(rhpn)
 
+GlobalCrH(wsela1) GlobalCrH(wsela2) GlobalCrH(wsela3) GlobalCrH(wselas)
 GlobalCrH(wselc1) GlobalCrH(wselc2) GlobalCrH(wselc3) GlobalCrH(wselcs)
 GlobalCrH(wseld1) GlobalCrH(wseld2) GlobalCrH(wseld3) GlobalCrH(wselds)
 GlobalCrH(wseli1) GlobalCrH(wseli2) GlobalCrH(wseli3) GlobalCrH(wselis)

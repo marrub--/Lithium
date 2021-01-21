@@ -39,6 +39,11 @@ Lith_RLav {#000000 #be66f9}
 Lith_RPnk {#000000 #eb42d4}
 Lith_RHPn {#000000 #f2416b}
 
+Lith_WSelA1 {#0f1e31 #0a97ac}
+Lith_WSelA2 {#114801 #2eba03}
+Lith_WSelA3 {#311026 #c111aa}
+Lith_WSelAS {#164b56 #0cc16d}
+
 Lith_WSelC1 {#1f1f1f #bf0f4a}
 Lith_WSelC2 {#313131 #d92375}
 Lith_WSelC3 {#424242 #ee3e99}
