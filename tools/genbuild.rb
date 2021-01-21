@@ -239,6 +239,25 @@ ninja
    end
 end
 
+MdlcEnt = Struct.new :i
+MDLC = [
+   MdlcEnt.new("Models.txt"),
+]
+def proc_mdlc ctx
+   ctx.fp << <<ninja
+rule mdlc
+ command = $#{TOOLS}/mdlc.rb $in
+ description = MdlC
+ninja
+
+   each_fake_dep ctx, MDLC, "mdlc_" do |ent|
+      i = txt ent.i
+      o = i + "_"
+      ctx.fp << "build #{o}: mdlc #{i} | $#{TOOLS}/mdlc.rb\n"
+      o
+   end
+end
+
 LibrEnt = Struct.new :l
 LIBR = [
    LibrEnt.new("libc"),
@@ -490,6 +509,7 @@ proc_zcpp ctx
 proc_txtc ctx
 proc_hsfs ctx
 proc_sndc ctx
+proc_mdlc ctx
 proc_libr ctx
 proc_srcs ctx
 proc_link ctx

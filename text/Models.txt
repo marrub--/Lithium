@@ -1,0 +1,71 @@
+## -*-Prog-*------------------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Zoe Elsie Watson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
+$output "pk7/modeldef.txt"
+
+All {
+   DontCullBackFaces;
+   UseActorRoll;
+
+   Path "lmodels";
+}
+
+Tracer {
+   PitchFromMomentum;
+
+   Scale 16.0 1.0 32.0;
+
+   Model 0 "square.obj";
+   Skin  0 "tracer.png";
+
+   FrameIndex "____" "A" 0 0;
+}
+
+Spark {
+   UseActorPitch;
+
+   Scale       1.0 27.0 27.0;
+   PitchOffset 45;
+
+   Model 0 "square.obj";
+}
+
+Blood {
+   UseActorPitch;
+
+   PitchOffset 45;
+
+   Model 0 "square.obj";
+
+   FrameIndex "____" "A" 0 0;
+}
+
+\#BulletTracer     : All Tracer {}
+\#BulletTracerSlow : All Tracer {}
+
+\#BulletRicochetSpark : All Spark
+   {Skin 0 "spark1.png"; FrameIndex "____" "A" 0 0;}
+   {Skin 0 "spark2.png"; FrameIndex "____" "B" 0 0;}
+   {Skin 0 "spark3.png"; FrameIndex "____" "C" 0 0;}
+   {Skin 0 "spark4.png"; FrameIndex "____" "D" 0 0;}
+
+\#BloodHitSpray : All Blood {Scale 1.0 30.0 30.0; Skin 0 "blood_drop.png";}
+\#BloodHitCore  : All Blood {Scale 1.0 27.0 27.0; Skin 0 "blood_core.png";}
+
+\#FortuneShotWind : All {
+   UseActorPitch;
+
+   Scale 128.0 8.0 1.0;
+
+   Model 0 "tapered.obj";
+   Skin  0 "air.png";
+
+   FrameIndex "____" "A" 0 0;
+}
+
+## EOF
