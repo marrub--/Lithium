@@ -16,8 +16,11 @@ $playersound    assassin male *pain50  Pain      # //
 $playersounddup assassin male *pain25  *pain50   # //
 $playersound    assassin male *grunt   Grunt     # //
 
-player {
-   $alias assassin.step = step
+player.assassin {
+   $alias step = .player.step
+
+   roll  Roll       # Dark Souls
+   djump DoubleJump # //
 }
 
 # EOF

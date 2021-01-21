@@ -334,6 +334,8 @@ $playersound assassin male *pain50 lsounds/PlayerA/Pain
 $playersounddup assassin male *pain25 *pain50
 $playersound assassin male *grunt lsounds/PlayerA/Grunt
 $alias player/assassin/step player/step
+player/assassin/roll lsounds/PlayerA/Roll
+player/assassin/djump lsounds/PlayerA/DoubleJump
 $playersound cybermage male *death lsounds/PlayerC/Death
 $playersound cybermage male *xdeath lsounds/PlayerC/XDeath
 $playersound cybermage male *pain100 lsounds/PlayerC/PainSmall

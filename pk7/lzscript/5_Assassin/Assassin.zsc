@@ -15,9 +15,39 @@ class Lith_AssassinPlayer : Lith_Player {
       Tag "Assassin";
    }
 
-   override void GiveDefaultInventory() {
-      Super.GiveDefaultInventory();
-      Lith_GiveDefWeapon("Lith_DualPistols");
+   private int m_dodgeDbc;
+
+   override void giveDefaultInventory() {
+      super.giveDefaultInventory();
+      lith_giveDefWeapon("Lith_DualPistols");
+   }
+
+   override void tick() {
+      if(health > 0) {
+         if(m_dodgeDbc) {
+            if(m_dodgeDbc < 20) {
+               vel.x *= 0.9;
+               vel.y *= 0.9;
+            }
+            m_dodgeDbc--;
+         } else if(player) {
+            if(player.buttons & BT_SPEED) {
+               let a = angle -
+                  atan2(player.cmd.sideMove, player.cmd.forwardMove);
+               let c = cos(a) * 20;
+               let s = sin(a) * 20;
+               a_changeVelocity(c, s);
+               a_startSound("player/assassin/roll", lch_body);
+               m_dodgeDbc = 40;
+            } else if(!(player.oldButtons & BT_JUMP) && player.buttons & BT_JUMP && !player.onGround) {
+               vel.z = 16.0;
+               a_startSound("player/assassin/djump", lch_body);
+               m_dodgeDbc = 40;
+            }
+         }
+      }
+
+      super.tick();
    }
 }
 
