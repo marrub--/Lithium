@@ -60,7 +60,6 @@ stkcall i32 fastabs(i32 n);
 stkcall k32 fastabsk(k32 n);
 stkcall k32 fastroundk(k32 k, i32 n);
 stkcall k64 powlk(k64 x, i32 y);
-stkcall k64 mag2lk(k64 x, k64 y);
 stkcall k32 mag2k(k32 x, k32 y);
 stkcall i32 mag2i(i32 x, i32 y);
 stkcall k32 lerpk(k32 a, k32 b, k32 t);

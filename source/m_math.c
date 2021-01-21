@@ -131,12 +131,6 @@ k64 powlk(k64 x, i32 y)
 }
 
 alloc_aut(0) stkcall
-k64 mag2lk(k64 x, k64 y)
-{
-   return ACS_FixedSqrt(x * x + y * y);
-}
-
-alloc_aut(0) stkcall
 k32 mag2k(k32 x, k32 y)
 {
    return ACS_FixedSqrt(x * x + y * y);

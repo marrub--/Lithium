@@ -23,7 +23,7 @@ script static void P_Ren_DamageBob(struct player *p)
       if(p->bobyaw + p->bobpitch > 0.05)
          angle = lerplk(angle, atan2f(p->bobpitch, p->bobyaw), 0.25lk);
 
-      distance  = mag2lk(p->bobyaw, p->bobpitch);
+      distance  = mag2k(p->bobyaw, p->bobpitch);
       distance += (p->oldhealth - p->health) / (k64)p->maxhealth;
       distance *= 0.2lk;
 
