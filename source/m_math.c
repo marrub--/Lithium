@@ -25,6 +25,11 @@
    r.y = func(ya, yb, t); \
    return r
 
+#define K32_LO 0x0000FFFFU
+#define K32_HI 0xFFFF0000U
+#define K64_LO 0x00000000FFFFFFFFUL
+#define K64_HI 0xFFFFFFFF00000000UL
+
 union ik32 ik32;
 union uk32 uk32;
 
@@ -105,21 +110,65 @@ k32 fastabsk(k32 n)
 }
 
 alloc_aut(0) stkcall
-k32 fastroundk(k32 k, i32 n) {
-   i32 mask = ~(0xFFFF >> n);
+i32 fastroundk(k32 k) {
+   uk32.k = k; uk32.u &= K32_LO;
+   k64 fr = uk32.k;
+   uk32.k = k; uk32.u &= K32_HI;
+   if(fr > 0.5k) return uk32.k + 1.0k;
+   else          return uk32.k;
+}
 
-   ik32.k = k;
+alloc_aut(0) stkcall
+k32 fastround1k(k32 k) {
+   uk32.k = k; uk32.u &= K32_LO;
+   k32 fr = uk32.k;
+   uk32.k = k; uk32.u &= K32_HI;
+   /**/ if(fr > 0.9k) return uk32.u += 65536,  uk32.k;
+   else if(fr > 0.8k) return uk32.u += 0xE667, uk32.k;
+   else if(fr > 0.7k) return uk32.u += 0xCCCD, uk32.k;
+   else if(fr > 0.6k) return uk32.u += 0xB334, uk32.k;
+   else if(fr > 0.5k) return uk32.u += 0x999A, uk32.k;
+   else if(fr > 0.4k) return uk32.u += 0x8001, uk32.k;
+   else if(fr > 0.3k) return uk32.u += 0x6667, uk32.k;
+   else if(fr > 0.2k) return uk32.u += 0x4CCD, uk32.k;
+   else if(fr > 0.1k) return uk32.u += 0x3334, uk32.k;
+   else if(fr > 0.0k) return uk32.u += 0x199A, uk32.k;
+   else               return uk32.k;
+}
 
-   if(ik32.i & (((0xFFFF >> 1) + 1) >> n)) {
-      if((ik32.i & mask) == (mask & 0x7FFFFFFF))
-         return ACCUM_MAX;
+alloc_aut(0) stkcall
+i32 fastroundlk(k64 k) {
+   uk64.k = k; uk64.u &= K64_LO;
+   k64 fr = uk64.k;
+   uk64.k = k; uk64.u &= K64_HI;
+   if(fr > 0.5lk) return uk64.k + 1.0lk;
+   else           return uk64.k;
+}
 
-      ik32.i += (0xFFFF + 1) >> n;
-   }
+alloc_aut(0) stkcall
+k64 fastround1lk(k64 k) {
+   uk64.k = k; uk64.u &= K64_LO;
+   k64 fr = uk64.k;
+   uk64.k = k; uk64.u &= K64_HI;
+   /**/ if(fr > 0.9lk) return uk64.u += 4294967296, uk64.k;
+   else if(fr > 0.8lk) return uk64.u += 0xE6666667, uk64.k;
+   else if(fr > 0.7lk) return uk64.u += 0xCCCCCCCD, uk64.k;
+   else if(fr > 0.6lk) return uk64.u += 0xB3333334, uk64.k;
+   else if(fr > 0.5lk) return uk64.u += 0x9999999A, uk64.k;
+   else if(fr > 0.4lk) return uk64.u += 0x80000001, uk64.k;
+   else if(fr > 0.3lk) return uk64.u += 0x66666667, uk64.k;
+   else if(fr > 0.2lk) return uk64.u += 0x4CCCCCCD, uk64.k;
+   else if(fr > 0.1lk) return uk64.u += 0x33333334, uk64.k;
+   else if(fr > 0.0lk) return uk64.u += 0x1999999A, uk64.k;
+   else                return uk64.k;
+}
 
-   ik32.i &= mask;
-
-   return ik32.k;
+alloc_aut(0) stkcall
+i32 ceilk(k32 n)
+{
+   uk32.k = n;
+   if(uk32.u & K32_LO) return uk32.u &= K32_HI, uk32.k + 1.0k;
+   else                return uk32.k;
 }
 
 alloc_aut(0) stkcall
@@ -145,22 +194,13 @@ i32 mag2i(i32 x, i32 y)
 alloc_aut(0) stkcall
 k32 lerpk(k32 a, k32 b, k32 t)
 {
-   k32 ret = (1.0k - t) * a + t * b;
-
-   if(fastroundk(ret, 15) == b)
-      return b;
-
-   return ret;
+   return (1.0k - t) * a + t * b;
 }
 
+alloc_aut(0) stkcall
 k64 lerplk(k64 a, k64 b, k64 t)
 {
-   k64 ret = (1.0lk - t) * a + t * b;
-
-   if(roundlk(ret, 15) == b)
-      return b;
-
-   return ret;
+   return (1.0lk - t) * a + t * b;
 }
 
 /* code by Kate, originally for Doom RPG. */
@@ -220,14 +260,6 @@ bool aabb_point(i32 x1, i32 y1, i32 w1, i32 h1, i32 x2, i32 y2) {
       y2 >= y1 &&
       x2 <= x1 + w1 &&
       y2 <= y1 + h1;
-}
-
-alloc_aut(0) stkcall
-i32 ceilk(k32 n)
-{
-   ik32.k = n;
-   if(ik32.i & 0xFFF1) return ik32.i &= 0xFFFF0000, ik32.k + 1;
-   else                return ik32.k;
 }
 
 alloc_aut(0) stkcall

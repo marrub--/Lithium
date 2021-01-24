@@ -200,7 +200,7 @@ static void MInit(void)
    mapseed = ACS_Random(0, INT32_MAX);
 
    /* Init global score multiplier per-map. */
-   scoremul = roundlk(ACS_GetCVarFixed(sc_sv_scoremul) * 10, 10) / 10;
+   scoremul = fastroundlk(ACS_GetCVarFixed(sc_sv_scoremul) * 10.0k) / 10.0k;
 
    /* Give players some extra score if they're playing on extra hard or above. */
    if(ACS_GameSkill() >= skill_extrahard)

@@ -14,10 +14,10 @@
 #include "common.h"
 #include "p_player.h"
 
-k64 G_Slider_Imp(struct gui_state *g, u32 id, struct gui_arg_sld const *a) {
+struct slide_ret G_Slider_Imp(struct gui_state *g, u32 id, struct gui_arg_sld const *a) {
    struct gui_pre_sld const *pre = a->preset ? a->preset : &gui_p.slddef;
 
-   k64 w = pre->w - (pre->pad * 2);
+   k32 w = pre->w - (pre->pad * 2);
 
    i32 x = a->x + pre->pad;
    i32 y = a->y;
@@ -27,65 +27,54 @@ k64 G_Slider_Imp(struct gui_state *g, u32 id, struct gui_arg_sld const *a) {
    x += g->ox;
    y += g->oy;
 
-   /* get a normalized value */
-   k64 aval;
+   k32  ret;
+   k32  notchpos;
+   bool big = a->maxima - a->minima > 2.0k;
 
-   aval = (a->val - a->minima) / (a->maxima - a->minima);
-   aval = minmax(aval, 0, 1);
-
-   k64 val;
-
-   /* move scroll notch */
-   if(g->active == id)
-   {
-      val  = g->cx - x;
-      val  = minmax(val, 0, w);
-      val /= w;
+   /* get scroll notch and handle inputs */
+   if(g->active == id) {
+      notchpos = g->cx - x;
+      notchpos = minmax(notchpos, 0, w) / w;
+      ret      = lerpk(a->minima, a->maxima, notchpos);
+      if(big) ret = fastround1k(ret);
+      else    ret = fastround1k(ret * 10.0k) / 10.0k;
 
       /* play sound */
       if(pre->snd && g->cx != g->old.cx && g->cx >= x && g->cx < x + w)
          ACS_LocalAmbientSound(pre->snd, 60);
+   } else {
+      notchpos = (a->val - a->minima) / a->maxima;
+      ret      = a->val;
    }
-   else
-      val = aval;
-
-   /* get result-normalized value */
-   k64 norm = val * (a->maxima - a->minima) + a->minima;
-
-   if(a->integ) norm = roundlk(norm, 10);
 
    /* draw graphic */
-   __with(char gfx[64];)
-   {
+   __with(char gfx[64];) {
       G_Prefix(g, gfx, pre, gfx);
       if(gfx[0]) PrintSprite(l_strdup(gfx), x - pre->pad,1, y + pre->h / 2,0);
    }
 
    /* draw notch */
-   __with(char gfx[64];)
-   {
+   __with(char gfx[64];) {
       if(g->hot == id || g->active == id) G_Prefix(g, gfx, pre, notchhot);
       else                                G_Prefix(g, gfx, pre, notch);
 
-      if(gfx[0]) PrintSprite(l_strdup(gfx), x + val * w - 1,1, y,1);
+      if(gfx[0]) PrintSprite(l_strdup(gfx), x + notchpos * w - 1,1, y,1);
    }
 
    /* draw value */
-   if(pre->font)
-   {
+   if(pre->font) {
       cstr suf = a->suf ? a->suf : "";
-      k64  amt = roundlk(norm * 100.0lk, 10) / 100.0lk;
-      if(a->integ) PrintTextFmt("%i%s",     (i32)amt, suf);
-      else         PrintTextFmt("%.1k%s", (k32)amt, suf);
+      if(a->integ) PrintTextFmt("%i%s",                (i32)ret, suf);
+      else         PrintTextFmt("%.*k%s", big ? 1 : 2, (k32)ret, suf);
 
       PrintText(pre->font, g->defcr, x + pre->w/2,4, y + pre->h/2,0);
    }
 
-   /* if we've moved it, we return a difference */
-   if(g->active == id && !g->clicklft && !CloseEnough(aval, val))
-      return norm - a->val;
-   else
-      return 0;
+   struct slide_ret sret = {
+      .different = g->active == id && !g->clicklft && ret != a->val,
+      .value     = ret,
+   };
+   return sret;
 }
 
 /* EOF */

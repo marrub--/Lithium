@@ -27,7 +27,7 @@ void P_CBI_TabStatistics(struct gui_state *g, struct player *p)
       PrintText(sf_smallfnt, g->defcr, g->ox+267,2, g->oy+27 + 8*n,1); \
       n++
 
-   Stat(LC(LANG "STAT_ScoreMul"),   "%i%%", ceilk(p->scoremul * 100.0));
+   Stat(LC(LANG "STAT_ScoreMul"),   "%i%%", ceilk(p->scoremul * 100.0k));
    Stat(LC(LANG "STAT_Weapons"),    "%i",   p->weaponsheld);
    Stat(LC(LANG "STAT_HealthUsed"), "%u",   p->healthused);
    Stat(LC(LANG "STAT_HealthSum"),  "%u",   p->healthsum);

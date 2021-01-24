@@ -156,7 +156,7 @@ static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct
          op = LC(LANG "SHOP_MUL_ENABLE");
       }
 
-      i32 perc = fastabs(ceilk(100.0 * upgr->info->scoreadd));
+      i32 perc = fastabs(ceilk(100.0k * upgr->info->scoreadd));
       if(chk) {cr = 'a'; perc = 100 - perc;}
       else    {cr = 'n'; perc = 100 + perc;}
 

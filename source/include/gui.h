@@ -279,6 +279,11 @@ struct gui_presets {
    struct gui_pre_win windef;
 };
 
+struct slide_ret {
+   bool different;
+   k32  value;
+};
+
 enum cursor {
    gui_curs_green,
    gui_curs_pink,
@@ -327,11 +332,11 @@ bool G_ScrOcc(struct gui_state *g, struct gui_scr const *scr, i32 y, i32 h);
 void G_WinEnd(struct gui_state *g, struct gui_win *win);
 
 #define G_ImpArgs(ty) struct gui_state *g, u32 id, struct gui_arg_##ty const *a
-bool            G_Button_Imp(G_ImpArgs(btn));
-bool            G_ChkBox_Imp(G_ImpArgs(cbx));
-void            G_ScrBeg_Imp(G_ImpArgs(scr));
-k64             G_Slider_Imp(G_ImpArgs(sld));
-struct gui_txt *G_TxtBox_Imp(G_ImpArgs(txt));
-void            G_WinBeg_Imp(G_ImpArgs(win));
+bool             G_Button_Imp(G_ImpArgs(btn));
+bool             G_ChkBox_Imp(G_ImpArgs(cbx));
+void             G_ScrBeg_Imp(G_ImpArgs(scr));
+struct slide_ret G_Slider_Imp(G_ImpArgs(sld));
+struct gui_txt  *G_TxtBox_Imp(G_ImpArgs(txt));
+void             G_WinBeg_Imp(G_ImpArgs(win));
 
 #endif

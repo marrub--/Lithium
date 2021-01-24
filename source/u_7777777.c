@@ -37,7 +37,7 @@ void Upgr_7777777_Update(struct player *p, struct upgrade *upgr) {
          UData.fyaw = p->yaw - ACS_VectorAngle(p->velx, p->vely);
       }
       k32 fyaw = UData.fyaw;
-      fyaw = (i32)(fyaw * 100) / 100.0k;
+      fyaw = floork(fyaw * 100.0k) / 100.0k;
       velx = ACS_Cos(p->yaw - fyaw) * UData.fvel;
       vely = ACS_Sin(p->yaw - fyaw) * UData.fvel;
    } else {

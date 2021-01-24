@@ -31,8 +31,13 @@
 
 #define k32_to_byte(n) ((k32_to_u32((k32)(n) * 255.0) >> 16) & 0xff)
 
+#define floork(n)  ((i32)(n))
+#define floorlk(n) ((i64)(n))
+
 extern union ik32 ik32;
+extern union ik64 ik64;
 extern union uk32 uk32;
+extern union uk64 uk64;
 
 /* To make pitch values down=0, up=1 */
 #define PITCH_BASE (-0.5)
@@ -58,17 +63,20 @@ optargs(1) u64 crc64(void const *data, size_t len, u64 result);
 optargs(1) u64 crc64_str(void __str_ars const *data, size_t len, u64 result);
 stkcall i32 fastabs(i32 n);
 stkcall k32 fastabsk(k32 n);
-stkcall k32 fastroundk(k32 k, i32 n);
+stkcall i32 fastroundk(k32 k);
+stkcall k32 fastround1k(k32 k);
+stkcall i32 fastroundlk(k64 lk);
+stkcall k64 fastround1lk(k64 lk);
+stkcall i32 ceilk(k32 n);
 stkcall k64 powlk(k64 x, i32 y);
 stkcall k32 mag2k(k32 x, k32 y);
 stkcall i32 mag2i(i32 x, i32 y);
 stkcall k32 lerpk(k32 a, k32 b, k32 t);
-k64 lerplk(k64 a, k64 b, k64 t);
+stkcall k64 lerplk(k64 a, k64 b, k64 t);
 void lerplli(struct interp_data_lli *data);
 void lerplli_init(struct interp_data_lli *data, i96 value, i96 timer);
 stkcall bool aabb_aabb(i32 x1, i32 y1, i32 w1, i32 h1, i32 x2, i32 y2, i32 w2, i32 h2);
 stkcall bool aabb_point(i32 x1, i32 y1, i32 w1, i32 h1, i32 x2, i32 y2);
-stkcall i32 ceilk(k32 n);
 stkcall k64 bzpolylk(k64 a, k64 b, k64 t);
 stkcall i32 bzpolyi(i32 a, i32 b, k64 t);
 struct i32v2 qbezieri(i32 x1, i32 y1, i32 x2, i32 y2, i32 x3, i32 y3, k64 t);

@@ -72,6 +72,8 @@ struct ptr2  {u32 l, h;};
 
 union ik32 {i32 i; k32 k;};
 union uk32 {u32 u; k32 k;};
+union ik64 {i64 i; k64 k;};
+union uk64 {u64 u; k64 k;};
 
 /* Address Space Definitions ----------------------------------------------- */
 

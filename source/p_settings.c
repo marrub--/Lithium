@@ -131,14 +131,16 @@ void S_boole(struct set_parm const *sp) {
 script static
 void S_integ(struct set_parm const *sp) {
    char suff[32]; lstrcpy2(suff, LANG "st_suff_", sp->st->suff);
-   i32 diff, v = sp->st->cb_g.i(sp, nil);
+   i32  v = sp->st->cb_g.i(sp, nil);
 
    S_label(sp);
 
-   if((diff = G_Slider_HId(sp->g, sp->y, _rght - gui_p.slddef.w, sp->y,
-                           sp->st->bnd.i.min, sp->st->bnd.i.max, v, true,
-                           .suf = LC(suff)))) {
-      v += diff;
+   struct slide_ret sret =
+      G_Slider_HId(sp->g, sp->y, _rght - gui_p.slddef.w, sp->y,
+                   sp->st->bnd.i.min, sp->st->bnd.i.max, v, true,
+                   .suf = LC(suff));
+   if(sret.different) {
+      v = sret.value;
       sp->st->cb_g.i(sp, &v);
    }
 }
@@ -146,14 +148,16 @@ void S_integ(struct set_parm const *sp) {
 script static
 void S_fixed(struct set_parm const *sp) {
    char suff[32]; lstrcpy2(suff, LANG "st_suff_", sp->st->suff);
-   k32 diff, v = sp->st->cb_g.k(sp, nil);
+   k32  v = sp->st->cb_g.k(sp, nil);
 
    S_label(sp);
 
-   if((diff = G_Slider_HId(sp->g, sp->y, _rght - gui_p.slddef.w, sp->y,
-                           sp->st->bnd.k.min, sp->st->bnd.k.max, v,
-                           .suf = LC(suff)))) {
-      v = (i32)((v + diff) * 100) / 100.0k;
+   struct slide_ret sret =
+      G_Slider_HId(sp->g, sp->y, _rght - gui_p.slddef.w, sp->y,
+                   sp->st->bnd.k.min, sp->st->bnd.k.max, v,
+                   .suf = LC(suff));
+   if(sret.different) {
+      v = sret.value;
       sp->st->cb_g.k(sp, &v);
    }
 }
