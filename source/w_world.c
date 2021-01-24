@@ -33,7 +33,6 @@ bool lmvar islithmap;
 i32 secretsfound;
 k64 scoremul;
 u64 ticks;
-k32 apiversion = APIVersion;
 i32 soulsfreed;
 bool bossspawned;
 i32 cbiperf;
@@ -101,42 +100,49 @@ static void CheckModCompat(void)
    drlamonsters = ACS_GetCVar(sc_drla_is_using_monsters);
 }
 
+static bool updateTo(k32 to) {
+   k32 cur = ACS_GetCVarFixed(sc_version);
+   if(cur < to) {
+      ACS_SetCVarFixed(sc_version, to);
+      return true;
+   } else {
+      return false;
+   }
+}
+
 static void UpdateGame(void)
 {
-   #define Update(n) \
-      if(ACS_GetCVarFixed(sc_version) < n) \
-         __with(ACS_SetCVarFixed(sc_version, n);)
-
-   Update(v1_5_1)
+   if(updateTo(Ver1_5_1)) {
       ACS_SetCVarFixed(sc_sv_scoremul, 1.25); /* 2.0 => 1.25 */
+   }
 
-   Update(v1_5_2)
+   if(updateTo(Ver1_5_2)) {
       ACS_SetCVar(sc_sv_difficulty, 10); /* 1 => 10 */
+   }
 
-   Update(v1_6_0) {
+   if(updateTo(Ver1_6_0)) {
       for_player() {
          p->setCVarK(sc_player_footstepvol, 0.2); /* 1.0 => 0.2 */
          p->setCVarI(sc_player_ammolog, true); /* false => true */
       }
    }
 
-   Update(v1_6_1) {
+   if(updateTo(Ver1_6_1)) {
       for_player() {
          p->setCVarK(sc_weapons_zoomfactor, 1.5); /* 3.0 => 1.5 */
       }
    }
 
-   /* unfortunate, but we forgot to add this for 1.6.3. so, we'll fix it in
-    * version 1.7 instead.
-    */
-   Update(v1_7_0) {
+   if(updateTo(Ver1_7_0)) {
+      /* unfortunate, but we forgot to add this for 1.6.3. so, we'll fix it in
+       * version 1.7 instead.
+       */
       for_player() {
          if(p->getCVarI(sc_xhair_style) >= 10) {
             p->setCVarI(sc_xhair_style, 0);
          }
       }
    }
-   #undef Update
 }
 
 static void MInitPre(void)

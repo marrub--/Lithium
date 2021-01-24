@@ -337,7 +337,7 @@ script void P_Init(struct player *p) {
    if(!p->invinit) P_Inv_PInit(p);
 
    if(!p->wasinit) {
-      p->logB(1, Version " :: Compiled %s", __DATE__);
+      p->logB(1, VersionName " :: Compiled " __DATE__);
 
       #ifndef NDEBUG
       if(dbglevel) {

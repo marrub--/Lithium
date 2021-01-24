@@ -192,7 +192,6 @@ extern bool lmvar islithmap;
 extern i32 secretsfound;
 extern k64 scoremul;
 extern u64 ticks;
-extern k32 apiversion;
 extern i32 soulsfreed;
 extern bool bossspawned;
 extern i32 cbiperf;
