@@ -142,6 +142,10 @@ static void UpdateGame(void)
             p->setCVarI(sc_xhair_style, 0);
          }
       }
+      /* accidentally set this to something the settings menu couldn't
+       * actually use
+       */
+      ACS_SetCVarFixed(sc_sv_scoremul, 1.2); /* 1.25 => 1.2 */
    }
 }
 
