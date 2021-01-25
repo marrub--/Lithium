@@ -45,9 +45,11 @@
 
 == \#TAB_ARSENAL_Stan | Arsenal
 == \#TAB_ARSENAL_Jem  | Directives
-== \#TAB_ARSENAL_Ari  | Gear
+== \#TAB_ARSENAL_Fulk | Rig
+== \#TAB_ARSENAL_Omi  | Gear
+== \#TAB_ARSENAL_Ari  | $\#TAB_ARSENAL_Omi
 == \#TAB_ARSENAL_Luke | Presages
-== \#TAB_ARSENAL_Mod  | $\#TAB_ARSENAL_Stan
+== \#TAB_ARSENAL_Kiri | Requests
 
 == \#TAB_STATUS    | Status
 == \#TAB_INVENTORY | Inventory

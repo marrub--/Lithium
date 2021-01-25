@@ -207,7 +207,7 @@ cstr P_Discrim(i32 pclass) {
    case pcl_darklord:  return "Ari";
    case pcl_thoth:     return "Kiri";
    }
-   return "Mod";
+   return "";
 }
 
 i32 P_Color(i32 pclass) {

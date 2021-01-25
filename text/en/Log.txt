@@ -81,8 +81,10 @@
 == \#LOG_LevelUpStan | You feel stronger, somehow.
 == \#LOG_LevelUpJem  | [INFO] Memory restored: %iKiB
 == \#LOG_LevelUpFulk | \cj<\cdVital\cj>\c- :: %i inodes reclaimed.
-== \#LOG_LevelUpAri  | You're having fun with this.
-== \#LOG_LevelUpMod  | $\#LOG_LevelUpStan
+== \#LOG_LevelUpOmi  | You're having fun with this.
+== \#LOG_LevelUpAri  | $\#LOG_LevelUpOmi
+== \#LOG_LevelUpLuke | Your senses grow sharper.
+== \#LOG_LevelUpKiri | You feel some of your power return to you.
 
 ## Boss Warnings -------------------------------------------------------------|
 %% \#LOG_BossWarnStan
@@ -94,10 +96,12 @@
 %% \#LOG_BossWarnFulk
 \cj<\ciWarning\cj>\c- :: High demonic energy levels. Seek and remove source.
 
-%% \#LOG_BossWarnAri
+%% \#LOG_BossWarnOmi
 \cgDetected high amounts of demonic energy in area.
 
-== \#LOG_BossWarnMod | $\#LOG_BossWarnStan
+== \#LOG_BossWarnAri  | $\#LOG_BossWarnOmi
+== \#LOG_BossWarnLuke | \cmThe area's aura surpresses you...
+== \#LOG_BossWarnKiri | \cjNeed to get rid of the entrapped soul here.
 
 == \#LOG_BossHear1 | \cgYou feel ringing in your ears...
 == \#LOG_BossHear2 | \cgSomething is calling out to you.

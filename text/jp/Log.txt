@@ -70,8 +70,6 @@
 %% \#LOG_BossWarnAri
 \cg付近に大量のデーモンエナジーを検出。
 
-== \#LOG_BossWarnMod | $\#LOG_BossWarnStan
-
 ## Misc ----------------------------------------------------------------------|
 == \#LOG_StartGame | ”%jS”でメニューを開く。
 == \#LOG_MailRecv  | ＜\cj%s\c-＞からメールを受信した。
