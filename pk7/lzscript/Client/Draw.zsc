@@ -182,7 +182,7 @@ static void LL(Actor mo, int x, int y, int z, int w, color c = 0)
    ---- ---- ---- ---- ---- ---1 ---- ----  8  1 - additive flag
    ---- ---- ---- ---- ---- ---- 1111 1111  0  8 - alpha OR fade num
 */
-static void LS(Actor mo, string tex, int arg0, int arg1, int arg2, string arg3 = "")
+static void LS(Actor mo, string tex, int arg0, int arg1, int arg2, int arg3 = 0)
 {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
    if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return;
@@ -217,7 +217,7 @@ static void LS(Actor mo, string tex, int arg0, int arg1, int arg2, string arg3 =
    else
       cl.m_D[p].Style = STYLE_Normal;
 
-   if(arg3 != "") {
+   if(arg3 != 0) {
       if(cl.m_D[p].Type == Type_SpriteAlpha)
          cl.m_D[p].Type = Type_SpriteStencilAlpha;
       else

@@ -54,8 +54,30 @@ static void P_Ren_LevelUp(struct player *p) {
    }
 }
 
-script static
+/* Extern Functions -------------------------------------------------------- */
+
+void P_Ren_PTickPst(struct player *p) {
+   P_Ren_Magic(p);
+   P_Ren_Step(p);
+   P_Ren_View(p);
+   P_Ren_Scope(p);
+   P_Ren_Style(p);
+   P_Ren_Advice(p);
+   P_Ren_LevelUp(p);
+   #ifndef NDEBUG
+   P_Ren_Debug(p);
+   #endif
+}
+
 void P_Ren_Crosshair(struct player *p) {
+   Str(sc_xhair_r,            sCVAR "xhair_r");
+   Str(sc_xhair_g,            sCVAR "xhair_g");
+   Str(sc_xhair_b,            sCVAR "xhair_b");
+   Str(sc_xhair_a,            sCVAR "xhair_a");
+   Str(sc_xhair_style,        sCVAR "xhair_style");
+   Str(sc_xhair_enable,       sCVAR "xhair_enable");
+   Str(sc_xhair_enablejuicer, sCVAR "xhair_enablejuicer");
+
    SetSize(320, 240);
 
    /* trace to where the crosshair should be in world space */
@@ -66,15 +88,14 @@ void P_Ren_Crosshair(struct player *p) {
    /* unproject */
    bool seen;
    struct i32v2 xh = unproject(loc.x, loc.y, loc.z, &seen);
-
    if(!seen) {
       return;
    }
 
    /* draw a tracer for the targeting system */
    if(P_Wep_CurType(p) == weapon_launcher &&
-      ACS_SetActivator(0, AAPTR_TRACER) && GetHealth(0) > 0) {
-
+      ACS_SetActivator(0, AAPTR_TRACER) &&
+      GetHealth(0) > 0) {
       k32 x = GetX(0);
       k32 y = GetY(0);
       k32 z = GetZ(0) + GetHeight(0) / 2;
@@ -89,52 +110,33 @@ void P_Ren_Crosshair(struct player *p) {
    p->setActivator();
 
    /* draw the crosshair */
-   Str(sc_xhair_r, sCVAR "xhair_r");
-   Str(sc_xhair_g, sCVAR "xhair_g");
-   Str(sc_xhair_b, sCVAR "xhair_b");
-   Str(sc_xhair_a, sCVAR "xhair_a");
-   Str(sc_xhair_style, sCVAR "xhair_style");
-   Str(sc_xhair_enablejuicer, sCVAR "xhair_enablejuicer");
+   u32 r = p->getCVarI(sc_xhair_r); if(r > 255) r = 255;
+   u32 g = p->getCVarI(sc_xhair_g); if(g > 255) g = 255;
+   u32 b = p->getCVarI(sc_xhair_b); if(b > 255) b = 255;
+   k32 a = p->getCVarI(sc_xhair_a); if(a > 255) a = 255; a /= 255.0k;
 
-   u32 r = p->getCVarI(sc_xhair_r); r = min(r, 255);
-   u32 g = p->getCVarI(sc_xhair_g); g = min(g, 255);
-   u32 b = p->getCVarI(sc_xhair_b); b = min(b, 255);
-   k32 a = p->getCVarI(sc_xhair_a); a = min(a, 255) / 255.0k;
-   u32 c = (r << 24) | (g << 16) | (b << 8);
+   if(p->getCVarI(sc_xhair_enable) && a > 0.0k) {
+      StrAry(xb, s":XHairs:circleb", s":XHairs:deltab",  s":XHairs:ovalb",
+                 s":XHairs:basicb",  s":XHairs:delearb", s":XHairs:finib",
+                 s":XHairs:angleb",  s":XHairs:dotb",    s":XHairs:xpb");
+      StrAry(xw, s":XHairs:circlew", s":XHairs:deltaw",  s":XHairs:ovalw",
+                 s":XHairs:basicw",  s":XHairs:delearw", s":XHairs:finiw",
+                 s":XHairs:anglew",  s":XHairs:dotw",    s":XHairs:xpw");
 
-   i32 style = p->getCVarI(sc_xhair_style);
+      u32 c     = (r << 16) | (g << 8) | (b << 0);
+      i32 style = p->getCVarI(sc_xhair_style);
+      PrintSpriteA (xb[style], xh.x,0, xh.y,0, a);
+      PrintSpriteAC(xw[style], xh.x,0, xh.y,0, a, c);
 
-   str gb = StrParam(":XHairs:%ib", style);
-   str gw = StrParam(":XHairs:%iw", style);
+      if(p->getCVarI(sc_xhair_enablejuicer)) {
+         Str(sp_xhairs_l, s":XHairs:L");
+         Str(sp_xhairs_r, s":XHairs:R");
 
-   PrintSpriteA (gb, xh.x,0, xh.y,0, a);
-   PrintSpriteAC(gb, xh.x,0, xh.y,0, a, c);
-
-   if(p->getCVarI(sc_xhair_enablejuicer)) {
-      Str(sp_xhairs_l, s":XHairs:L");
-      Str(sp_xhairs_r, s":XHairs:R");
-
-      i32 xp = ceilk(p->extrpitch * 500.0k) + 10;
-
-      PrintSpriteAC(sp_xhairs_l, xh.x - xp,0, xh.y,0, a, c);
-      PrintSpriteAC(sp_xhairs_r, xh.x + xp,0, xh.y,0, a, c);
+         i32 xp = ceilk(p->extrpitch * 500.0k) + 10;
+         PrintSpriteAC(sp_xhairs_l, xh.x - xp,0, xh.y,0, a, c);
+         PrintSpriteAC(sp_xhairs_r, xh.x + xp,0, xh.y,0, a, c);
+      }
    }
-}
-
-/* Extern Functions -------------------------------------------------------- */
-
-void P_Ren_PTickPst(struct player *p) {
-   P_Ren_Magic(p);
-   P_Ren_Step(p);
-   P_Ren_View(p);
-   P_Ren_Scope(p);
-   P_Ren_Style(p);
-   P_Ren_Advice(p);
-   P_Ren_LevelUp(p);
-   P_Ren_Crosshair(p);
-   #ifndef NDEBUG
-   P_Ren_Debug(p);
-   #endif
 }
 
 alloc_aut(0) script

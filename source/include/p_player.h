@@ -144,15 +144,16 @@ void P_Log_SellWeapon(struct player *p, struct weaponinfo const *info, i96 score
 void P_Log_Weapon(struct player *p, struct weaponinfo const *info);
 i32 P_Wep_FromName(struct player *p, i32 name);
 
-script extern void P_Wep_PTickPre(struct player *p);
-       extern void P_Dat_PTickPre(struct player *p);
-script extern void P_CBI_PTick   (struct player *p);
-script extern void P_Inv_PTick   (struct player *p);
-script extern void P_Log_PTick   (struct player *p);
-script extern void P_Upg_PTick   (struct player *p);
-script extern void P_Wep_PTick   (struct player *p);
-script extern void P_Upg_PTickPst(struct player *p);
-       extern void P_Ren_PTickPst(struct player *p);
+script void P_Wep_PTickPre (struct player *p);
+       void P_Dat_PTickPre (struct player *p);
+script void P_CBI_PTick    (struct player *p);
+script void P_Inv_PTick    (struct player *p);
+script void P_Log_PTick    (struct player *p);
+script void P_Upg_PTick    (struct player *p);
+script void P_Wep_PTick    (struct player *p);
+script void P_Upg_PTickPst (struct player *p);
+       void P_Ren_PTickPst (struct player *p);
+       void P_Ren_Crosshair(struct player *p);
 
 script void P_TeleportIn (struct player *p);
 sync   void P_TeleportOut(struct player *p, i32 tag);

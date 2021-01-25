@@ -82,6 +82,8 @@ reinit:
       P_Wep_PTickPre(p); /* Update weapon info */
       P_Scr_PTickPre(p); /* Update score */
 
+      P_Ren_Crosshair(p);
+
       if(!p->dead) P_Upg_PTick(p);
       P_Upg_PTickPst(p);
 

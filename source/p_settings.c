@@ -248,6 +248,7 @@ struct setting const st_hud[] = {
    {S_integ, "xhair_r", S_clInteg, S_bndi(0, 255), "byte"},
    {S_integ, "xhair_g", S_clInteg, S_bndi(0, 255), "byte"},
    {S_integ, "xhair_b", S_clInteg, S_bndi(0, 255), "byte"},
+   {S_integ, "xhair_a", S_clInteg, S_bndi(0, 255), "byte"},
    {S_empty},
    {S_integ, "scanner_xoffs", S_clInteg, S_bndi(-160, 160), "pxls"},
    {S_integ, "scanner_yoffs", S_clInteg, S_bndi(-160, 160), "pxls"},
