@@ -15,6 +15,16 @@ weapons {
       bolt  Bolt  # ???
       $random fire {fire1, fire2, fire3,}
    }
+
+   dualpistols {
+      == lsounds/WeaponsA/DualPistols
+      firel FireL       # ???
+      firer FireR       # ???
+      in    ReloadIn    # ???
+      out   ReloadOut   # ???
+      slide ReloadSlide # ???
+      draw  Draw        # ???
+   }
 }
 
 # EOF

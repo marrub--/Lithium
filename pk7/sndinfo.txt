@@ -492,6 +492,12 @@ weapons/burstrif/fire2 lsounds/WeaponsA/BurstRifle/Fire2
 weapons/burstrif/fire3 lsounds/WeaponsA/BurstRifle/Fire3
 weapons/burstrif/bolt lsounds/WeaponsA/BurstRifle/Bolt
 $random weapons/burstrif/fire { weapons/burstrif/fire1 weapons/burstrif/fire2 weapons/burstrif/fire3 }
+weapons/dualpistols/firel lsounds/WeaponsA/DualPistols/FireL
+weapons/dualpistols/firer lsounds/WeaponsA/DualPistols/FireR
+weapons/dualpistols/in lsounds/WeaponsA/DualPistols/ReloadIn
+weapons/dualpistols/out lsounds/WeaponsA/DualPistols/ReloadOut
+weapons/dualpistols/slide lsounds/WeaponsA/DualPistols/ReloadSlide
+weapons/dualpistols/draw lsounds/WeaponsA/DualPistols/Draw
 weapons/mateba/fire lsounds/WeaponsC/Mateba/Fire
 weapons/mateba/open lsounds/WeaponsC/Mateba/Open
 weapons/mateba/eject lsounds/WeaponsC/Mateba/Eject

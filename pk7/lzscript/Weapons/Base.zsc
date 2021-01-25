@@ -21,12 +21,6 @@ enum Lith_PSprite {
    _psp_flash = PSP_FLASH,
 }
 
-enum Lith_DoubleState {
-   _dst_fire,
-   _dst_fireempty,
-   _dst_reload,
-}
-
 enum Lith_Hand {
    _rhs,
    _lhs,
@@ -99,16 +93,9 @@ action(Weapon) void Lith_A_DoubleRaise() {
    A_OverlayFlags(_psp_double_rg, _psp_flags, true);
 }
 
-action(Weapon) void Lith_A_DoubleState(bool oscillate, int st) {
-   if(oscillate) invoker.m_side = !invoker.m_side;
-   // MAJOR HACK ALERT
-   statelabel lh, rh;
-   switch(st) {
-      case _dst_fire:      lh = "FireLH";      rh = "FireRH";      break;
-      case _dst_fireempty: lh = "FireEmptyLH"; rh = "FireEmptyRH"; break;
-      case _dst_reload:    lh = "ReloadLH";    rh = "ReloadRH";    break;
-   }
+action(Weapon) void Lith_A_DoubleState(bool oscillate, statelabel lh, statelabel rh) {
    if(oscillate) {
+      invoker.m_side = !invoker.m_side;
       if(invoker.m_side) A_Overlay(_psp_double_lg, lh);
       else               A_Overlay(_psp_double_rg, rh);
    } else {
