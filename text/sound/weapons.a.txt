@@ -13,6 +13,7 @@ weapons {
       fire2 Fire2 # //
       fire3 Fire3 # //
       bolt  Bolt  # ???
+      draw  Draw  # ???
       $random fire {fire1, fire2, fire3,}
    }
 

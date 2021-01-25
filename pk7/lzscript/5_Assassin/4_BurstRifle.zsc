@@ -15,6 +15,7 @@ default {
    Tag "$LITH_INFO_SHORT_BurstRifle";
    Weapon.SlotNumber 4;
    Weapon.SlotPriority 1;
+   Weapon.UpSound "weapons/burstrif/draw";
 }
 
 double m_lessen;
@@ -25,7 +26,7 @@ action(Weapon) void Lith_A_FireBurstRifle() {
    A_GunFlash();
    Lith_FireBullets(2, 1, -1, int(50 / invoker.m_lessen), FBF_NORANDOM);
    Lith_A_GunSmokeSmall();
-   Lith_A_RecoilUp(1.5);
+   Lith_A_RecoilUp(0.75);
    A_StartSound("weapons/burstrif/fire", lch_weapon, pitch: p);
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
    invoker.m_lessen += 0.43;

@@ -491,6 +491,7 @@ weapons/burstrif/fire1 lsounds/WeaponsA/BurstRifle/Fire
 weapons/burstrif/fire2 lsounds/WeaponsA/BurstRifle/Fire2
 weapons/burstrif/fire3 lsounds/WeaponsA/BurstRifle/Fire3
 weapons/burstrif/bolt lsounds/WeaponsA/BurstRifle/Bolt
+weapons/burstrif/draw lsounds/WeaponsA/BurstRifle/Draw
 $random weapons/burstrif/fire { weapons/burstrif/fire1 weapons/burstrif/fire2 weapons/burstrif/fire3 }
 weapons/dualpistols/firel lsounds/WeaponsA/DualPistols/FireL
 weapons/dualpistols/firer lsounds/WeaponsA/DualPistols/FireR
