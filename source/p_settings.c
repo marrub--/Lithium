@@ -357,6 +357,7 @@ struct setting const st_wld[] = {
    {S_boole, "sv_nobosses",       S_svBoole},
    {S_boole, "sv_rain",           S_svBoole},
    {S_boole, "sv_sky",            S_svBoole},
+   {S_fixed, "sv_skydarkening",   S_svFixed, S_bndk(0.0, 1.0),  "mult"},
    {S_fixed, "sv_scoremul",       S_svFixed, S_bndk(0.0, 10.0), "mult"},
    {S_integ, "sv_autosave",       S_svInteg, S_bndi(0,   30),   "minu"},
    {S_integ, "sv_difficulty",     S_svInteg, S_bndi(1,   100),  "perc"},

@@ -1650,6 +1650,7 @@
 "LITH_sv_revenge" = "Explode on death";
 "LITH_sv_scoremul" = "Score multiplier";
 "LITH_sv_sky" = "Replace skies";
+"LITH_sv_skydarkening" = "Sky darkening (for sky replacements)";
 "LITH_sv_wepdrop" = "Drop weapons from zombies";
 "LITH_weapons_alpha" = "Weapon opacity";
 "LITH_weapons_casingfadeout" = "Casings fade out";

@@ -206,6 +206,7 @@
 == \#sv_revenge             | Explode on death
 == \#sv_scoremul            | Score multiplier
 == \#sv_sky                 | Replace skies
+== \#sv_skydarkening        | Sky darkening (for sky replacements)
 == \#sv_wepdrop             | Drop weapons from zombies
 == \#weapons_alpha          | Weapon opacity
 == \#weapons_casingfadeout  | Casings fade out

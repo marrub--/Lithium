@@ -148,8 +148,8 @@ override void WorldLoaded(WorldEvent ev)
       for(int i = 0, j = level.sectors.size(); i < j; i++) {
          Sector sec = level.sectors[i];
          if(sec.getTexture(Sector.Ceiling) == skyflatnum) {
-            if(in_hell) sec.setColor("#440000");
-            else        sec.lightlevel = clamp(sec.lightlevel - 86, 0, 255);
+            if(in_hell) sec.setColor("#ff7777");
+            sec.lightlevel = clamp(sec.lightlevel * lith_sv_skydarkening, 64, 255);
          }
       }
    }
