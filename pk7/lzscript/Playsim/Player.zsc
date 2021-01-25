@@ -29,9 +29,9 @@ static void Unproject(Actor mo, double x_, double y_, double z_, int px, int py,
 
 static void TraceFrom(Actor mo, double yaw, double pitch, double dist, double offsetz, bool floor, int px, int py, int pz) {
    vector3 v = Lith_UTIL.TraceFrom(mo, yaw * 360, pitch * 360, dist, offsetz, floor);
-   if(px) ACS_ExecuteWithResult(lsc_setptrk32, px, v.x * FIX);
-   if(py) ACS_ExecuteWithResult(lsc_setptrk32, py, v.y * FIX);
-   if(pz) ACS_ExecuteWithResult(lsc_setptrk32, pz, v.z * FIX);
+   if(px) ACS_ExecuteWithResult(lsc_setptrk32, px, int(v.x * FIX));
+   if(py) ACS_ExecuteWithResult(lsc_setptrk32, py, int(v.y * FIX));
+   if(pz) ACS_ExecuteWithResult(lsc_setptrk32, pz, int(v.z * FIX));
 }
 
 static void PlayerInit(Actor mo_) {

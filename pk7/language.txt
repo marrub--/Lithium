@@ -1358,6 +1358,7 @@
 "LITH_MARKER_Unknown" = "Unknown";
 "LITH_MARKER_M1A1_EscapePod" = "Escape Pod 02C3";
 "LITH_MARKER_M1A1_Quarters" = "Personal Quarters";
+"LITH_MARKER_M1A1_Maintenance" = "Maintenance Area";
 "LITH_MARKER_M1A1_TeleportBay" = "Teleport Bay 1E14";
 "QUITMSG1" = "Hold it, your contract isn't complete yet!";
 "QUITMSG2" = "I got nothing.";

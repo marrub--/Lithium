@@ -149,7 +149,7 @@ override void WorldLoaded(WorldEvent ev)
          Sector sec = level.sectors[i];
          if(sec.getTexture(Sector.Ceiling) == skyflatnum) {
             if(in_hell) sec.setColor("#ff7777");
-            sec.lightlevel = clamp(sec.lightlevel * lith_sv_skydarkening, 64, 255);
+            sec.lightlevel = int(clamp(sec.lightlevel * lith_sv_skydarkening, 64.0, 255.0));
          }
       }
    }

@@ -33,6 +33,7 @@ Press {+crouch} to crouch into the vent.
 
 == \#MARKER_M1A1_EscapePod   | Escape Pod 02C3
 == \#MARKER_M1A1_Quarters    | Personal Quarters
+== \#MARKER_M1A1_Maintenance | Maintenance Area
 == \#MARKER_M1A1_TeleportBay | Teleport Bay 1E14
 
 ## EOF
