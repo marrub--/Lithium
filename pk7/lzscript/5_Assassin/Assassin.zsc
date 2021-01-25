@@ -15,7 +15,9 @@ class Lith_AssassinPlayer : Lith_Player {
       Tag "Assassin";
    }
 
-   private int m_dodgeDbc;
+   int  m_dodgeDbc;
+   bool m_isSprinting;
+   bool m_wasHorizontalDodge;
 
    override void giveDefaultInventory() {
       super.giveDefaultInventory();
@@ -30,8 +32,16 @@ class Lith_AssassinPlayer : Lith_Player {
                vel.y *= 0.9;
             }
             m_dodgeDbc--;
+            if(player && m_dodgeDbc == 15 && player.buttons & BT_SPEED &&
+               m_wasHorizontalDodge) {
+               m_isSprinting = true;
+            }
          } else if(player) {
-            if(player.buttons & BT_SPEED) {
+            if(m_isSprinting) {
+               if(!(player.buttons & BT_SPEED)) {
+                  m_isSprinting = false;
+               }
+            } else if(player.buttons & BT_SPEED) {
                let a = angle -
                   atan2(player.cmd.sideMove, player.cmd.forwardMove);
                let c = cos(a) * 20;
@@ -39,10 +49,13 @@ class Lith_AssassinPlayer : Lith_Player {
                a_changeVelocity(c, s);
                a_startSound("player/assassin/roll", lch_body);
                m_dodgeDbc = 40;
-            } else if(!(player.oldButtons & BT_JUMP) && player.buttons & BT_JUMP && !player.onGround) {
+               m_wasHorizontalDodge = true;
+            } else if(!(player.oldButtons & BT_JUMP) &&
+                      player.buttons & BT_JUMP && !player.onGround) {
                vel.z = 16.0;
                a_startSound("player/assassin/djump", lch_body);
                m_dodgeDbc = 40;
+               m_wasHorizontalDodge = false;
             }
          }
       }
@@ -51,18 +64,16 @@ class Lith_AssassinPlayer : Lith_Player {
    }
 }
 
-class Lith_ItemSpriteA : Lith_ItemSprite {
+class Lith_AssassinSprint : PowerSpeed {
    default {
-      VisibleToPlayerClass "Lith_AssassinPlayer";
+      Powerup.Duration 2;
+      Speed 1.5;
+
+      +POWERSPEED.NOTRAIL
    }
 }
 
-class Lith_AWeapon : Lith_Weapon {
-   default {
-      Inventory.RestrictedTo "Lith_AssassinPlayer";
-   }
-}
-
+#include "lzscript/5_Assassin/0_Weapon.zsc"
 #include "lzscript/5_Assassin/2_DualPistols.zsc"
 #include "lzscript/5_Assassin/4_BurstRifle.zsc"
 

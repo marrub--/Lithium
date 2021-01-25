@@ -1,0 +1,73 @@
+class Lith_AWeapon : Lith_Weapon;
+
+default {
+   Inventory.RestrictedTo "Lith_AssassinPlayer";
+}
+
+override state Lith_Ready(int flags) {
+   if(Lith_AssassinPlayer(owner).m_isSprinting) {
+      return resolveState("_Sprint");
+   } else {
+      return null;
+   }
+}
+
+action(Weapon) void Lith_Sprint() {
+   self.GiveInventory("Lith_AssassinSprint", 1);
+}
+
+action(Weapon) state Lith_JumpIfSprint() {
+   if(vel.xy.length() < 8)
+      player.getPSprite(PSP_WEAPON).frame = 99;
+
+   if(getPlayerInput(INPUT_BUTTONS) & BT_SPEED == 0)
+      return resolveState("_SprintDone");
+   else
+      return null;
+}
+
+states(Weapon) {
+_Sprint:
+   #### # 1 offset(1, 34);
+   #### # 1 offset(4, 40);
+   #### # 1 offset(10, 55);
+   #### # 1 offset(17, 70);
+   #### # 1 offset(21, 90);
+   #### # 1 offset(24, 120);
+   #### # 1 offset(25, 160) Lith_Sprint;
+   TNT1 A 1 offset(1, 32) {
+      Lith_Sprint();
+      A_Overlay(_psp_double_lg, "Null");
+      A_Overlay(_psp_double_rg, "Null");
+   }
+_SprintLoop:
+   ASPG A 0 Lith_JumpIfSprint;
+   ASPG # 1 offset(-18, 45) Lith_Sprint;
+   ASPG # 1 offset(-9, 35) Lith_Sprint;
+   ASPG # 1 offset(-2, 34) Lith_Sprint;
+   ASPG # 1 offset(-1, 33) Lith_Sprint;
+   ASPG # 1 offset(-1, 32) Lith_Sprint;
+   ASPG # 1 offset(1, 32) Lith_Sprint;
+   ASPG # 1 offset(3, 35) Lith_Sprint;
+   ASPG # 1 offset(7, 39) Lith_Sprint;
+   ASPG # 1 offset(14, 44) Lith_Sprint;
+   ASPG # 1 offset(20, 45) Lith_Sprint;
+   ASPG B 0 Lith_JumpIfSprint;
+   ASPG # 1 offset(18, 45) Lith_Sprint;
+   ASPG # 1 offset(9, 35) Lith_Sprint;
+   ASPG # 1 offset(2, 34) Lith_Sprint;
+   ASPG # 1 offset(1, 33) Lith_Sprint;
+   ASPG # 1 offset(1, 32) Lith_Sprint;
+   ASPG # 1 offset(-1, 32) Lith_Sprint;
+   ASPG # 1 offset(-3, 35) Lith_Sprint;
+   ASPG # 1 offset(-7, 39) Lith_Sprint;
+   ASPG # 1 offset(-14, 44) Lith_Sprint;
+   ASPG # 1 offset(-20, 45) Lith_Sprint;
+   loop;
+_SprintDone:
+   TNT1 A 1 offset(1, 32) A_Lower(60);
+   TNT1 A 0 resolveState("Select");
+   stop;
+}
+
+// EOF

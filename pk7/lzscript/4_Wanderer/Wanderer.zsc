@@ -59,12 +59,6 @@ class Lith_WandererPlayer : Lith_Player {
    }
 }
 
-class Lith_ItemSpriteW : Lith_ItemSprite {
-   default {
-      VisibleToPlayerClass "Lith_WandererPlayer";
-   }
-}
-
 class Lith_WWeapon : Lith_Weapon {
    default {
       Inventory.RestrictedTo "Lith_WandererPlayer";
