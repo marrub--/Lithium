@@ -51,6 +51,8 @@ double m_VZVel, m_LastVZVel;
 Lith_MapMarker    m_curMark;
 Lith_AdviceMarker m_curAdvice;
 
+int m_wasDamaged;
+
 property ViewBob: m_VBob;
 
 override void BeginPlay() {
@@ -185,6 +187,13 @@ int, int, bool Lith_Unproject(vector3 loc) {
 }
 
 void Lith_PreTick() {
+   if(m_wasDamaged) {
+      --m_wasDamaged;
+   } else if(Lith_UTIL.pData(self, pdata_pclass) & (pcl_wanderer | pcl_thoth) &&
+             health < Lith_UTIL.pData(self, pdata_oldhealth)) {
+      m_wasDamaged = 7;
+   }
+
    if(!m_wasFrozen && isFrozen()) {
       if(player.psprites) player.psprites.tics = -1;
       viewBob = 0;

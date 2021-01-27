@@ -124,6 +124,11 @@ action(Weapon) void lith_a_setupOverlays() {
       a_overlayFlags(psp, pspf_alpha|pspf_renderstyle, true);
       a_overlayRenderStyle(psp, style);
       a_overlayAlpha(psp, a);
+      if(Lith_Player(self).m_wasDamaged) {
+         a_overlayTranslation(psp, "Lith_FuckUp" .. random(1, 4));
+      } else {
+         a_overlayTranslation(psp, '');
+      }
    }
 }
 
