@@ -52,10 +52,10 @@ Ready:
    loop;
 
 Deselect:
-   MISG A 1 A_Lower(18);
+   MISG A 1 Lith_A_Lower(_raise_fast);
    loop;
 Select:
-   MISG A 1 A_Raise(18);
+   MISG A 1 Lith_A_Raise(_raise_fast);
    loop;
 
 Reload:

@@ -65,13 +65,13 @@ Ready:
    loop;
 
 Deselect:
-   TNT1 A 0 A_Lower;
+   TNT1 A 0 Lith_A_Lower(_raise_instant);
    loop;
 
 Select:
    TNT1 A 0 ACS_ScriptCall("Lith_MagicSelect", 6);
 SelectLoop:
-   TNT1 A 0 A_Raise;
+   TNT1 A 0 Lith_A_Raise(_raise_instant);
    loop;
 
 Fire:

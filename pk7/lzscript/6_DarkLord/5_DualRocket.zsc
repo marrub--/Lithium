@@ -51,12 +51,12 @@ ReadyLH: FRAN A 1 Lith_A_DoubleReady; wait;
 ReadyRH: SOPH A 1 Lith_A_DoubleReady; wait;
 
 Deselect:
-   TNT1 A 1 A_Lower(18);
+   TNT1 A 1 Lith_A_Lower(_raise_normal);
    loop;
 
 Select:
    TNT1 A 0 Lith_A_DoubleRaise;
-   TNT1 A 1 A_Raise(12);
+   TNT1 A 1 Lith_A_Raise(_raise_normal);
    wait;
 
 Fire:

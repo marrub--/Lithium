@@ -24,7 +24,7 @@ bool m_KnifeReFire;
 states(Weapon)
 {
 User4:
-   #### # 0 {return ACS_ExecuteWithResult(lsc_pdata, pdata_pclass) == pcl_marine ? null : ResolveState("ReadySelector");}
+   #### # 0 {return Lith_UTIL.pData(self, pdata_pclass) == pcl_marine ? null : ResolveState("ReadySelector");}
 _UseKnife:
    #### # 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, "ReadySelector");
    #### # 0 A_JumpIf(invoker.m_KnifeReFire, "_KnifeStart");
@@ -77,7 +77,7 @@ _KnifeDone_2:
    stop;
 _KnifeFinish:
    TNT1 A 0 {invoker.m_KnifeReFire = false;}
-   TNT1 A 1 A_Lower(54);
+   TNT1 A 1 A_Lower(60);
    TNT1 A 0 ResolveState("Select");
    stop;
 }

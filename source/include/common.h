@@ -94,7 +94,6 @@
 #define SetHealth(tid, x)           SetPropI(tid, APROP_Health,           x)
 #define SetMasterTID(tid, x)        SetPropK(tid, APROP_MasterTID,        x)
 #define SetNameTag(tid, x)          SetPropS(tid, APROP_NameTag,          x)
-#define SetRenderStyle(tid, x)      SetPropI(tid, APROP_RenderStyle,      x)
 #define SetSpawnHealth(tid, x)      SetPropI(tid, APROP_SpawnHealth,      x)
 #define SetSpecies(tid, x)          SetPropS(tid, APROP_Species,          x)
 #define SetViewHeight(tid, x)       SetPropK(tid, APROP_ViewHeight,       x)

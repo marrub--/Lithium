@@ -35,7 +35,7 @@ class Lith_DivisionSigil : Lith_ItemPickup {
 
    override bool canPickup(Actor mo) {
       if(super.canPickup(mo)) {
-         return !ACS_ExecuteWithResult(lsc_pdata, pdata_hassigil);
+         return !Lith_UTIL.pData(mo, pdata_hassigil);
       } else {
          return false;
       }

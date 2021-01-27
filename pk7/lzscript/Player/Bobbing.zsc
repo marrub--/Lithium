@@ -50,7 +50,7 @@ void Lith_BobWeapon() {
    m_LastVZVel = m_VZVel;
    m_VZVel = Lith_UTIL.Lerp(m_VZVel, m_ZVel, 0.42);
 
-   if(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_7777777)) {
+   if(Lith_UTIL.pData(self, pdata_upgrade, UPGR_7777777)) {
       m_mbobprv = m_mbobpos;
       if(!(vel.length() < 4 ||
            !player.readyweapon ||
@@ -70,7 +70,7 @@ override vector2 BobWeapon(double ticfrac) {
    let wep = Player.ReadyWeapon;
    if(!wep) return (0, 0);
 
-   if(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_7777777)) {
+   if(Lith_UTIL.pData(self, pdata_upgrade, UPGR_7777777)) {
       return (0, (m_mbobpos - m_mbobprv) * ticfrac + m_mbobpos + 5 + clamp(20 - 20 * (pitch + 90) / 180.0, 5, 15));
    }
 

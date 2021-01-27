@@ -8,7 +8,7 @@ override state Lith_Ready(int flags) {
    if(Lith_AssassinPlayer(owner).m_isSprinting) {
       return resolveState("_Sprint");
    } else {
-      return null;
+      return super.lith_ready(flags);
    }
 }
 
@@ -18,7 +18,7 @@ action(Weapon) void Lith_Sprint() {
 
 action(Weapon) state Lith_JumpIfSprint() {
    if(vel.xy.length() < 8)
-      player.getPSprite(PSP_WEAPON).frame = 99;
+      player.getPSprite(_psp_weapon).frame = 99;
 
    if(getPlayerInput(INPUT_BUTTONS) & BT_SPEED == 0)
       return resolveState("_SprintDone");

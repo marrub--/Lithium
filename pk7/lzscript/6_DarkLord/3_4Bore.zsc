@@ -37,10 +37,10 @@ Ready:
    loop;
 
 Deselect:
-   SHTG A 1 A_Lower(12);
+   SHTG A 1 Lith_A_Lower(_raise_normal);
    loop;
 Select:
-   SHTG A 1 A_Raise(12);
+   SHTG A 1 Lith_A_Raise(_raise_normal);
    loop;
 
 Fire:

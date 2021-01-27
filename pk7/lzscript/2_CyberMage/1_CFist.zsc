@@ -30,12 +30,12 @@ Ready:
 
 Deselect:
    TNT1 A 20 A_StartSound("weapons/delear/close", lch_weapon);
-   TNT1 A 0 A_Lower;
+   TNT1 A 0 Lith_A_Lower(_raise_instant);
    wait;
 
 Select:
    TNT1 A 20 A_StartSound("weapons/delear/open", lch_weapon);
-   TNT1 A 0 A_Raise;
+   TNT1 A 0 Lith_A_Raise(_raise_instant);
    wait;
 
 Fire:

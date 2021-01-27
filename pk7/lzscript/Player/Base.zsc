@@ -81,7 +81,7 @@ void Lith_GiveDefWeapon(class<Weapon> type) {
 override void PlayerThink() {
    if(level.levelnum == 1911777) return;
 
-   if(ACS_ExecuteWithResult(lsc_pdata, pdata_semifrozen)) {
+   if(Lith_UTIL.pData(self, pdata_semifrozen)) {
       UserCmd cmd = player.cmd;
       cmd.pitch = cmd.yaw = cmd.roll = 0;
       player.turnticks = 0;
@@ -204,7 +204,7 @@ void Lith_PreTick() {
    m_QY = Lith_Quaternion.Create(-   angle, 0, 0, 1);
 
    /* stupid hack to keep the view from moving around */
-   if(ACS_ExecuteWithResult(lsc_pdata, pdata_semifrozen)) {
+   if(Lith_UTIL.pData(self, pdata_semifrozen)) {
       angle -= 1;
       pitch -= 1;
       A_SetAngle(angle + 1, SPF_INTERPOLATE);
@@ -222,9 +222,7 @@ void Lith_PreTick() {
 }
 
 void Lith_PostTick() {
-   if(!player) return;
-
-   if(CVar.GetCVar('lith_player_rainshader', player).getBool())
+   if(CVar.getCVar('lith_player_rainshader', player).getBool())
       Lith_RainEffect();
    else
       Shader.SetEnabled(player, "Lith_Rain", false);

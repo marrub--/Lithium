@@ -12,13 +12,14 @@ class Lith_WeaponScopedToken : Inventory {default {Inventory.MaxAmount 1;}}
 class Lith_Weapon : Weapon;
 
 enum Lith_PSprite {
-   _psp_weapon = PSP_WEAPON,
+   _psp_weapon = psp_weapon,
    _psp_double_lg,
-   _psp_double_lf,
    _psp_double_rg,
+   _psp_wep_max,
+   _psp_flash = psp_flash,
+   _psp_double_lf,
    _psp_double_rf,
    _psp_d_subweapon,
-   _psp_flash = PSP_FLASH,
 }
 
 enum Lith_Hand {
@@ -35,6 +36,13 @@ enum Lith_TracerType {
    _tr_normal,
    _tr_slow,
    _tr_none
+}
+
+enum Lith_RaiseSpeed {
+   _raise_slow,
+   _raise_normal,
+   _raise_fast,
+   _raise_instant
 }
 
 default {
@@ -81,6 +89,108 @@ virtual state Lith_Ready(int flags) {
    return null;
 }
 
+int lith_getRaiseSpeed(Lith_RaiseSpeed speed) {
+   switch(speed) {
+   case _raise_slow:    return 10;
+   case _raise_normal:  return 12;
+   case _raise_fast:    return 18;
+   case _raise_instant: return 60;
+   default:             throwAbortException("invalid raise speed");
+   }
+   return 0;
+}
+
+action(Weapon) void lith_a_setupOverlays() {
+   float a;
+   int style;
+
+   if(countInv("Lith_WeaponScopedToken")) {
+      a = CVar.getCVar('lith_weapons_scopealpha', player).getFloat();
+      style = style_subtract;
+   } else {
+      a = CVar.getCVar('lith_weapons_alpha', player).getFloat();
+      style = style_translucent;
+   }
+
+   a *= Lith_UTIL.pData(self, pdata_alpha) / FIX;
+
+   for(int psp = _psp_weapon; psp < _psp_wep_max; ++psp) {
+      a_overlayFlags(psp, pspf_alpha|pspf_renderstyle, true);
+      a_overlayRenderStyle(psp, style);
+      a_overlayAlpha(psp, a);
+   }
+}
+
+action(Weapon) void Lith_A_Lower(Lith_RaiseSpeed speed) {
+   if(!player) {
+      return;
+   }
+
+   if(!player.readyWeapon) {
+      player.mo.bringUpWeapon();
+      return;
+   }
+
+   int lowerSpeed = invoker.lith_getRaiseSpeed(speed);
+   let psp = player.getPSprite(_psp_weapon);
+   if(psp) {
+      lith_a_setupOverlays();
+
+      if(player.morphTics || player.cheats & cf_instantweapswitch) {
+         psp.y = weaponBottom;
+      } else {
+         psp.y += lowerSpeed;
+      }
+
+      if(psp.y < weaponBottom) {
+         return;
+      }
+
+      resetPSprite(psp);
+      if(player.playerState == pst_dead) {
+         player.setPSprite(_psp_flash, null);
+         psp.setState(findState('DeadLowered'));
+         return;
+      }
+
+      player.setPSprite(_psp_flash, null);
+      player.mo.bringUpWeapon();
+   }
+}
+
+action(Weapon) void Lith_A_Raise(Lith_RaiseSpeed speed) {
+   if(!player) {
+      return;
+   }
+
+   if(player.pendingWeapon != WP_NOCHANGE) {
+      player.mo.dropWeapon();
+      return;
+   }
+
+   if(!player.readyWeapon) {
+      return;
+   }
+
+   int raiseSpeed = invoker.lith_getRaiseSpeed(speed);
+   let psp = player.getPSprite(_psp_weapon);
+   if(psp) {
+      lith_a_setupOverlays();
+
+      if(psp.y <= weaponBottom) {
+         resetPSprite(psp);
+      }
+
+      psp.y -= raiseSpeed;
+      if(psp.y > weaponTop) {
+         return;
+      }
+      psp.y = weaponTop;
+
+      psp.setState(invoker.getReadyState());
+   }
+}
+
 action(Weapon) state Lith_A_DoubleReady() {
    if(health < 1) return resolveState("Null");
    else           return null;
@@ -111,16 +221,18 @@ action(Weapon) void Lith_A_DoubleOffset(bool left, int x, int y) {
    }
 }
 
-action state Lith_A_Ready(int flags = 0) {
-   if(!CountInv("Lith_WeaponScopedToken")) {
-      A_ZoomFactor(1.0, ZOOM_INSTANT);
+action(Weapon) state Lith_A_Ready(int flags = 0) {
+   lith_a_setupOverlays();
+
+   if(!countInv("Lith_WeaponScopedToken")) {
+      a_zoomFactor(1.0, ZOOM_INSTANT);
    }
 
-   let st = invoker.Lith_Ready(flags);
+   let st = invoker.lith_ready(flags);
    if(st) {
       return st;
    } else {
-      A_WeaponReady(flags | CallACS("Lith_GetWRF"));
+      a_weaponReady(flags | callACS("Lith_GetWRF"));
       return null;
    }
 }
@@ -152,7 +264,7 @@ action(Weapon) state Lith_A_JumpIfMagFull(statelabel sn = "ReadySelector") {
 }
 
 action(Weapon) void Lith_A_MagIncr(int amt = 1) {
-   if(!ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_OneShot))
+   if(!Lith_UTIL.pData(self, pdata_upgrade, UPGR_OneShot))
       invoker.m_fired = min(invoker.m_fired + amt, invoker.m_max);
    else
       invoker.m_fired = invoker.m_max;
@@ -163,13 +275,13 @@ action(Weapon) void Lith_A_ReloadFinish() {
 }
 
 action(Weapon) void Lith_A_TakeSlot3OptAmmo(int amt = 1) {
-   if(ACS_ExecuteWithResult(lsc_pdata, pdata_slot3ammo)) {
+   if(Lith_UTIL.pData(self, pdata_slot3ammo)) {
       self.TakeInventory("Lith_ShellAmmo", amt, notakeinfinite: true);
    }
 }
 
 action(Weapon) state Lith_A_JumpIfNoSlot3OptAmmo(statelabel sn = "FireEmpty", int req = 1) {
-   if(!ACS_ExecuteWithResult(lsc_pdata, pdata_slot3ammo) || CountInv("Lith_ShellAmmo") >= req) {
+   if(!Lith_UTIL.pData(self, pdata_slot3ammo) || CountInv("Lith_ShellAmmo") >= req) {
       return null;
    } else {
       return ResolveState(sn);
@@ -199,7 +311,7 @@ action(Weapon) void Lith_A_ReloadBobDn(double amt) {
 action(Weapon) void Lith_A_ScopeIn() {
    if(!CountInv("Lith_WeaponScopedToken")) {
       self.GiveInventory("Lith_WeaponScopedToken", 1);
-      A_ZoomFactor((1+ACS_ExecuteWithResult(lsc_pdata, pdata_weaponzoom)/FIX)*invoker.m_scopeZoom);
+      A_ZoomFactor((1+Lith_UTIL.pData(self, pdata_weaponzoom)/FIX)*invoker.m_scopeZoom);
       A_StartSound(invoker.m_scopeInSnd, lch_scope);
    }
 }
@@ -218,7 +330,7 @@ action(Weapon) void Lith_A_ScopeToggle() {
 }
 
 action(Weapon) void Lith_A_ZoomFactorScoped(double amount) {
-   A_ZoomFactor((1+ACS_ExecuteWithResult(lsc_pdata, pdata_weaponzoom)/FIX) * amount * invoker.m_scopeZoom);
+   A_ZoomFactor((1+Lith_UTIL.pData(self, pdata_weaponzoom)/FIX) * amount * invoker.m_scopeZoom);
 }
 
 action(Weapon) void Lith_GunSmoke(class<Actor> type, double x, double y, bool ignoreCrouch) {
@@ -234,14 +346,14 @@ action(Weapon) void Lith_A_GunSmokeSmall(double x = 0, double y = 6, bool ignore
    Lith_GunSmoke("Lith_GunSmokeSpawnerSmall", x, y, ignoreCrouch);
 }
 
-action void Lith_A_DropMag(class<Lith_DroppedMagazine> mag1, class<Lith_DroppedMagazine> mag2, double px, double py, double pz, double vx, double vy, double vz) {
+action(Weapon) void Lith_A_DropMag(class<Lith_DroppedMagazine> mag1, class<Lith_DroppedMagazine> mag2, double px, double py, double pz, double vx, double vy, double vz) {
    double vh = Player.ViewZ - Player.MO.ViewHeight - Pos.Z;
    px += FRandom(-1, 1); py += FRandom(-1, 1); pz += FRandom(-1, 1);
    vx += FRandom(-1, 1); vy += FRandom(-1, 1); vz += FRandom(-1, 1);
    A_SpawnItemEx(invoker.Lith_MagEmpty() || !mag2 ? mag1 : mag2, px,py,pz+vh, vx,vy,vz);
 }
 
-action void Lith_A_Casing(class<Lith_CasingBase> cas, double px, double py, double pz, double vx, double vy, double vz) {
+action(Weapon) void Lith_A_Casing(class<Lith_CasingBase> cas, double px, double py, double pz, double vx, double vy, double vz) {
    double vh = Player.ViewZ - Player.MO.ViewHeight - Pos.Z;
    px += FRandom(-1, 1); py += FRandom(-1, 1); pz += FRandom(-1, 1);
    vx += FRandom(-1, 1); vy += FRandom(-1, 1); vz += FRandom(-1, 1);

@@ -18,10 +18,8 @@
 /* Scripts ----------------------------------------------------------------- */
 
 script ext("ACS") addr(lsc_pdata)
-i32 Sc_LPData(i32 info, i32 permutation, bool target)
+i32 Sc_LPData(i32 info, i32 permutation)
 {
-   if(target) ACS_SetActivatorToTarget(0);
-
    union ik32 u;
 
    with_player(LocalPlayer) switch(info) {
@@ -37,6 +35,7 @@ i32 Sc_LPData(i32 info, i32 permutation, bool target)
    case pdata_addy:       return u.k = p->addyaw,    u.i;
    case pdata_recoilp:    return u.k = p->extrpitch, u.i;
    case pdata_attr:       return p->attr.attrs[permutation];
+   case pdata_alpha:      return u.k = p->alpha, u.i;
    }
 
    return 0;

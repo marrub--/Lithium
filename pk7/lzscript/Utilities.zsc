@@ -12,21 +12,21 @@
 struct Lith_UTIL
 {
    /* fucking degrees system... */
-   static double ConstDeg(double x)
+   static double constDeg(double x)
    {
       x %= 360;
       if(x < 0) x += 360;
       return x;
    }
 
-   static double DiffDeg(double a, double b)
+   static double diffDeg(double a, double b)
    {
       double d = (b - a) % 360;
       if(d < 0) d += 360;
       return d;
    }
 
-   static double SDiffDeg(double a, double b)
+   static double sDiffDeg(double a, double b)
    {
       double d = b - a;
       if(d ~== 0) return 0;
@@ -34,34 +34,34 @@ struct Lith_UTIL
       return 2 * d % 360 - d;
    }
 
-   static double AngleLerp(double a, double b, double t)
+   static double angleLerp(double a, double b, double t)
    {
       return a + SDiffDeg(a, b) * t;
    }
 
-   static double Lerp(double a, double b, double t)
+   static double lerp(double a, double b, double t)
    {
       return (1 - t) * a + t * b;
    }
 
-   static vector2 Vec2Lerp(vector2 a, vector2 b, double t)
+   static vector2 vec2Lerp(vector2 a, vector2 b, double t)
    {
       let vec = (Lerp(a.x, b.x, t), Lerp(a.y, b.y, t));
       return vec;
    }
 
-   static vector3 Vec3Lerp(vector3 a, vector3 b, double t)
+   static vector3 vec3Lerp(vector3 a, vector3 b, double t)
    {
       let vec = (Lerp(a.x, b.x, t), Lerp(a.y, b.y, t), Lerp(a.z, b.z, t));
       return vec;
    }
 
-   static int Round(double n)
+   static int round(double n)
    {
       return int(n * 1000) % 1000 < 500 ? int(n) : int(n+0.5);
    }
 
-   static play vector3 TraceFrom(Actor mo, double yaw, double pitch, double dist, double offsetz, bool floor = false) {
+   static play vector3 traceFrom(Actor mo, double yaw, double pitch, double dist, double offsetz, bool floor = false) {
       FLineTraceData ltd;
       mo.lineTrace(yaw, dist, pitch, 0, offsetz, 0, 0, ltd);
       let loc = ltd.hitlocation;
@@ -73,9 +73,12 @@ struct Lith_UTIL
       return loc;
    }
 
-   static play int Exec(Actor mo, int scr, int arg0 = 0, int arg1 = 0, int arg2 = 0, int arg3 = 0)
-   {
+   static play int exec(Actor mo, int scr, int arg0 = 0, int arg1 = 0, int arg2 = 0, int arg3 = 0) {
       return Level.ExecuteSpecial(84, mo, null, false, scr, arg0, arg1, arg2, arg3);
+   }
+
+   static play int pData(Actor ply, int info, int permutation = 0) {
+      return Level.ExecuteSpecial(84, ply, null, false, lsc_pdata, info, permutation);
    }
 }
 

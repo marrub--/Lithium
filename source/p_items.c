@@ -17,46 +17,49 @@
 
 /* Static Functions -------------------------------------------------------- */
 
-script
-static void BagItem_Tick(struct item *_item)
-{
+script static
+void BagItem_Tick(struct item *_item) {
    struct bagitem *item = (struct bagitem *)_item;
 
-   for_item(item->content)
+   for_item(item->content) {
       if(it->Tick) it->Tick(it);
+   }
 }
 
-script
-static void BagItem_Place(struct item *_item, struct container *cont)
-{
+script static
+void BagItem_Place(struct item *_item, struct container *cont) {
    struct bagitem *item = (struct bagitem *)_item;
 
    P_Item_Place(&item->item, cont);
 
    item->content.user = item->user;
 
-   for_item(item->content)
-      if(it->Place) it->Place(it, &item->content);
+   for_item(item->content) {
+      if(it->Place) {
+         it->Place(it, &item->content);
+      }
+   }
 }
 
-script
-static void BagItem_Destroy(struct item *_item)
-{
+script static
+void BagItem_Destroy(struct item *_item) {
    struct bagitem *item = (struct bagitem *)_item;
 
-   for_item(item->content)
-      if(it->Destroy) it->Destroy(it);
+   for_item(item->content) {
+      if(it->Destroy) {
+         it->Destroy(it);
+      }
+   }
 
    P_Item_Destroy(&item->item);
 }
 
-static bool ItemCanPlace(struct container *cont, struct item *item, i32 x, i32 y)
-{
-   if(x < 0 || y < 0)
+static
+bool ItemCanPlace(struct container *cont, struct item *item, i32 x, i32 y) {
+   if(x < 0 || y < 0 ||
+      x + item->w > cont->w || y + item->h > cont->h) {
       return false;
-
-   if(x + item->w > cont->w || y + item->h > cont->h)
-      return false;
+   }
 
    for_item(*cont) if(it != item) {
       i32 const ox = it->x;
@@ -64,26 +67,32 @@ static bool ItemCanPlace(struct container *cont, struct item *item, i32 x, i32 y
       i32 const oxw = ox + it->w;
       i32 const oxh = oy + it->h;
 
-      if(aabb_aabb(it->x, it->y, it->w, it->h, x, y, item->w, item->h))
+      if(aabb_aabb(it->x, it->y, it->w, it->h, x, y, item->w, item->h)) {
          return false;
+      }
    }
 
    return true;
 }
 
-static bool ItemCanPlaceAny(struct container *cont, struct item *item)
-{
+static
+bool ItemCanPlaceAny(struct container *cont, struct item *item) {
    i32 xn = cont->w / item->w;
    i32 yn = cont->h / item->h;
 
-   for(i32 y = 0; y < yn; y++) for(i32 x = 0; x < xn; x++)
-      if(ItemCanPlace(cont, item, x * item->w, y * item->h))
-         return true;
+   for(i32 y = 0; y < yn; y++) {
+      for(i32 x = 0; x < xn; x++) {
+         if(ItemCanPlace(cont, item, x * item->w, y * item->h)) {
+            return true;
+         }
+      }
+   }
 
    return false;
 }
 
-static void EquipItem(struct player *p, struct item *sel) {
+static
+void EquipItem(struct player *p, struct item *sel) {
    bool ok = false;
 
    for(i32 i = 0; i < _inv_num; i++) {
@@ -96,12 +105,12 @@ static void EquipItem(struct player *p, struct item *sel) {
       }
    }
 
-   if(ok) ACS_LocalAmbientSound(ss_player_cbi_invmov,       127);
-   else   ACS_LocalAmbientSound(ss_player_cbi_auto_invalid, 127);
+   ACS_LocalAmbientSound(ok ? ss_player_cbi_invmov :
+                         ss_player_cbi_auto_invalid, 127);
 }
 
-static void Container(struct gui_state *g, struct container *cont, i32 sx, i32 sy)
-{
+static
+void Container(struct gui_state *g, struct container *cont, i32 sx, i32 sy) {
    Str(sp_BackStore, s":UI:InvBackStore");
    Str(sp_BackArmsU, s":UI:InvBackUpperArms");
    Str(sp_BackArmsL, s":UI:InvBackLowerArms");
@@ -125,8 +134,11 @@ static void Container(struct gui_state *g, struct container *cont, i32 sx, i32 s
 
    PrintText_str(Language(LANG "CONTAINER_%s", cont->name), sf_smallfnt, g->defcr, sx,1, sy,2);
 
-   for(i32 y = 0; y < h; y += 8) for(i32 x = 0; x < w; x += 8)
-      PrintSpriteA(bg, sx+x,1, sy+y,1, 0.8);
+   for(i32 y = 0; y < h; y += 8) {
+      for(i32 x = 0; x < w; x += 8) {
+         PrintSpriteA(bg, sx+x,1, sy+y,1, 0.8);
+      }
+   }
 
    if(p && p->movitem && g->clicklft &&
       aabb_point(sx, sy, w, h, g->cx, g->cy) &&
@@ -144,7 +156,9 @@ static void Container(struct gui_state *g, struct container *cont, i32 sx, i32 s
 
       PrintSprite(it->spr, x,1, y,1);
 
-      if(!p || p->movitem) continue;
+      if(!p || p->movitem) {
+         continue;
+      }
 
       if(p->selitem != it && g->clicklft && aabb_point(x, y, ex, ey, g->cx, g->cy)) {
          p->selitem = it;
@@ -165,8 +179,7 @@ static void Container(struct gui_state *g, struct container *cont, i32 sx, i32 s
 
 /* Extern Functions -------------------------------------------------------- */
 
-void P_Inv_PInit(struct player *p)
-{
+void P_Inv_PInit(struct player *p) {
    static struct container const baseinv[] = {
       [_inv_backpack]    = {11, 7, "Backpack", _cont_store},
       [_inv_arm_upper_l] = {1,  3, "ArmUpL",   _cont_arms_u},
@@ -190,8 +203,7 @@ void P_Inv_PInit(struct player *p)
    p->invinit = true;
 }
 
-void P_Inv_PQuit(struct player *p)
-{
+void P_Inv_PQuit(struct player *p) {
    for(i32 i = 0; i < _inv_num; i++) {
       for_item(p->inv[i]) if(it->Destroy) it->Destroy(it);
       p->inv[i].user = nil;
@@ -203,8 +215,7 @@ void P_Inv_PQuit(struct player *p)
    p->invinit = false;
 }
 
-void P_Item_Init(struct item *item, struct itemdata const *data)
-{
+void P_Item_Init(struct item *item, struct itemdata const *data) {
    ListCtor(&item->link, item);
 
    if(data) item->data = *data;
@@ -212,12 +223,11 @@ void P_Item_Init(struct item *item, struct itemdata const *data)
    else     Log("%s ERROR: invalid item");
    #endif
 
-   if(!item->Destroy) item->Destroy = P_Item_Destroy;
-   if(!item->Place  ) item->Place   = P_Item_Place;
+   if(!item->Destroy) { item->Destroy = P_Item_Destroy; }
+   if(!item->Place)   { item->Place   = P_Item_Place;   }
 }
 
-struct item *P_Item_New(struct itemdata const *data)
-{
+struct item *P_Item_New(struct itemdata const *data) {
    struct item *item = Salloc(struct item, _tag_item);
 
    P_Item_Init(item, data);
@@ -226,16 +236,14 @@ struct item *P_Item_New(struct itemdata const *data)
 }
 
 script
-void P_Item_Destroy(struct item *item)
-{
+void P_Item_Destroy(struct item *item) {
    Dbg_Log(log_dev, "P_Item_Destroy: destroying item %p", item);
 
    ServCallI(sm_DeleteItem, item);
 
-   with_player(item->user)
-   {
-      if(p->useitem == item) p->useitem = nil;
-      if(p->selitem == item) p->selitem = nil;
+   with_player(item->user) {
+      if(p->useitem == item) { p->useitem = nil; }
+      if(p->selitem == item) { p->selitem = nil; }
       p->movitem = false;
    }
 
@@ -244,30 +252,27 @@ void P_Item_Destroy(struct item *item)
 }
 
 script
-bool P_Item_Use(struct item *item)
-{
+bool P_Item_Use(struct item *item) {
    return ServCallI(sm_UseItem, item);
 }
 
 script
-void P_Item_Place(struct item *item, struct container *cont)
-{
+void P_Item_Place(struct item *item, struct container *cont) {
    P_Item_Unlink(item);
    item->link.link(&cont->items);
    item->container = cont;
    item->user = cont->user;
 }
 
-void P_Item_Unlink(struct item *item)
-{
+void P_Item_Unlink(struct item *item) {
    if(item->container) {
       item->link.unlink();
       item->container = nil;
    }
 }
 
-struct bagitem *P_BagItem_New(i32 w, i32 h, i32 type, struct itemdata const *data)
-{
+struct bagitem *P_BagItem_New(i32 w, i32 h, i32 type,
+                              struct itemdata const *data) {
    struct bagitem *item = Salloc(struct bagitem, _tag_item);
 
    P_Item_Init(&item->item, data);
@@ -285,11 +290,14 @@ struct bagitem *P_BagItem_New(i32 w, i32 h, i32 type, struct itemdata const *dat
    return item;
 }
 
-bool P_Inv_Place(struct container *cont, struct item *item, i32 x, i32 y)
-{
-   if(!ItemCanPlace(cont, item, x, y)) return false;
+bool P_Inv_Place(struct container *cont, struct item *item, i32 x, i32 y) {
+   if(!ItemCanPlace(cont, item, x, y)) {
+      return false;
+   }
 
-   if(item->Place) item->Place(item, cont);
+   if(item->Place) {
+      item->Place(item, cont);
+   }
 
    item->x = x;
    item->y = y;
@@ -297,16 +305,26 @@ bool P_Inv_Place(struct container *cont, struct item *item, i32 x, i32 y)
    return true;
 }
 
-script bool P_Inv_PlaceFirst(struct container *cont, struct item *item) {
-   for(i32 y = 0; y < cont->h; y++) for(i32 x = 0; x < cont->w; x++)
-      if(P_Inv_Place(cont, item, x, y))
-         return true;
+script
+bool P_Inv_PlaceFirst(struct container *cont, struct item *item) {
+   for(i32 y = 0; y < cont->h; y++) {
+      for(i32 x = 0; x < cont->w; x++) {
+         if(P_Inv_Place(cont, item, x, y)) {
+            return true;
+         }
+      }
+   }
 
    return false;
 }
 
-script bool P_Inv_SwapFirst(struct container *cont, struct item *lhs) {
-   for_item(*cont) if(P_Inv_Swap(lhs, it)) return true;
+script
+bool P_Inv_SwapFirst(struct container *cont, struct item *lhs) {
+   for_item(*cont) {
+      if(P_Inv_Swap(lhs, it)) {
+         return true;
+      }
+   }
    return false;
 }
 
@@ -327,35 +345,39 @@ bool P_Inv_Swap(struct item *lhs, struct item *rhs) {
    }
 }
 
-bool P_Inv_Add(struct player *p, struct item *item)
-{
-   for(i32 i = 0; i < _inv_num; i++)
-      if(P_Inv_PlaceFirst(&p->inv[i], item))
+bool P_Inv_Add(struct player *p, struct item *item) {
+   for(i32 i = 0; i < _inv_num; i++) {
+      if(P_Inv_PlaceFirst(&p->inv[i], item)) {
          return true;
+      }
+   }
 
    return false;
 }
 
 script
-void P_Inv_PTick(struct player *p)
-{
+void P_Inv_PTick(struct player *p) {
    if(p->useitem) {
       struct item *item = p->useitem;
 
       Dbg_Log(log_dev, "using %S (%p)", item->name, item);
-      if(item->Use && !item->Use(item))
+      if(item->Use && !item->Use(item)) {
          ACS_LocalAmbientSound(ss_player_cbi_auto_invalid, 127);
+      }
 
       p->useitem = nil;
    }
 
-   for(i32 i = 0; i < _inv_num; i++)
-      for_item(p->inv[i])
-         if(it->Tick) it->Tick(it);
+   for(i32 i = 0; i < _inv_num; i++) {
+      for_item(p->inv[i]) {
+         if(it->Tick) {
+            it->Tick(it);
+         }
+      }
+   }
 }
 
-void P_CBI_TabItems(struct gui_state *g, struct player *p)
-{
+void P_CBI_TabItems(struct gui_state *g, struct player *p) {
    static i32 const x[] = {
       [_inv_backpack]    = 142+8*-14,
       [_inv_arm_upper_l] = 142+8*  1,
@@ -387,10 +409,12 @@ void P_CBI_TabItems(struct gui_state *g, struct player *p)
    PrintSpriteA(sp_UI_Body, g->ox+138,1, g->oy+27,1, 0.6);
    PrintSpriteA(sp_UI_Bag,  g->ox+34 ,1, g->oy+31,1, 0.6);
 
-   PrintText_str(L(sl_inv_hints), sf_smallfnt, g->defcr, g->ox+2,1, g->oy+212,2);
+   PrintText_str(L(sl_inv_hints), sf_smallfnt, g->defcr, g->ox+2,1,
+                 g->oy+212,2);
 
-   for(i32 i = 0; i < _inv_num; i++)
+   for(i32 i = 0; i < _inv_num; i++) {
       Container(g, &p->inv[i], x[i], y[i]);
+   }
 
    struct item *sel = p->selitem;
 
@@ -398,28 +422,35 @@ void P_CBI_TabItems(struct gui_state *g, struct player *p)
       i32 x_ = x[0];
       i32 y_ = y[0] + 60;
 
-      PrintText_str(Language(LANG "ITEM_TAG_%S", sel->name), sf_smallfnt, g->defcr, g->ox+x_,1, g->oy+y_,1);
+      PrintText_str(Language(LANG "ITEM_TAG_%S", sel->name), sf_smallfnt,
+                    g->defcr, g->ox+x_,1, g->oy+y_,1);
       y_ += 8;
 
-      if(g->clickrgt && !g->old.clickrgt)
+      if(g->clickrgt && !g->old.clickrgt) {
          p->movitem = !p->movitem;
+      }
 
-      PrintText_str(Language(LANG "ITEM_SHORT_%S", sel->name), sf_smallfnt, g->defcr, g->ox+x_,1, g->oy+y_,1);
+      PrintText_str(Language(LANG "ITEM_SHORT_%S", sel->name), sf_smallfnt,
+                    g->defcr, g->ox+x_,1, g->oy+y_,1);
       y_ += 16;
 
-      if(G_Button(g, LC(LANG "MOVE"), x_, y_, .color = "n", Pre(btnclear)))
+      if(G_Button(g, LC(LANG "MOVE"), x_, y_, .color = "n", Pre(btnclear))) {
          p->movitem = !p->movitem;
+      }
       y_ += 8;
 
       if(sel->equip != _cont_store) {
-         if(G_Button(g, LC(LANG "EQUIP"), x_, y_, .color = "n", Pre(btnclear)))
+         if(G_Button(g, LC(LANG "EQUIP"), x_, y_, .color = "n",
+                     Pre(btnclear))) {
             EquipItem(p, sel);
+         }
          y_ += 8;
       }
 
       if(sel->Use) {
-         if(G_Button(g, LC(LANG "USE"), x_, y_, .color = "g", Pre(btnclear)))
+         if(G_Button(g, LC(LANG "USE"), x_, y_, .color = "g", Pre(btnclear))) {
             p->useitem = sel;
+         }
          y_ += 8;
       }
 
@@ -428,9 +459,15 @@ void P_CBI_TabItems(struct gui_state *g, struct player *p)
          PrintText(sf_smallfnt, g->defcr, g->ox+x_+18,1, g->oy+y_,1);
       }
 
-      if(G_Button(g, sel->scr ? LC(LANG "SELL") : LC(LANG "DISCARD"), x_, y_, .color = "g", .fill = {&CBIState(g)->itemfill, 26}, Pre(btnclear))) {
-         if(sel->scr) P_Scr_Give(p, sel->scr, true);
-         if(sel->Destroy) sel->Destroy(sel);
+      if(G_Button(g, sel->scr ? LC(LANG "SELL") : LC(LANG "DISCARD"), x_, y_,
+                  .color = "g", .fill = {&CBIState(g)->itemfill, 26},
+                  Pre(btnclear))) {
+         if(sel->scr) {
+            P_Scr_Give(p, sel->scr, true);
+         }
+         if(sel->Destroy) {
+            sel->Destroy(sel);
+         }
          ACS_LocalAmbientSound(ss_player_cbi_invrem, 127);
       }
    }
@@ -439,8 +476,7 @@ void P_CBI_TabItems(struct gui_state *g, struct player *p)
 /* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr(OBJ "ItemCreate")
-struct item *Sc_ItemCreate(u32 w, u32 h, u32 equip, u32 scr)
-{
+struct item *Sc_ItemCreate(u32 w, u32 h, u32 equip, u32 scr) {
    str name = GetMembS(0, sm_InvName);
    str spr  = StrParam(":ItemSpr:%S", name);
 
@@ -459,37 +495,40 @@ struct item *Sc_ItemCreate(u32 w, u32 h, u32 equip, u32 scr)
 }
 
 script_str ext("ACS") addr(OBJ "ItemAttach")
-bool Sc_ItemAttach(struct item *item)
-{
+bool Sc_ItemAttach(struct item *item) {
    Dbg_Log(log_dev, "%s: attaching item %p", __func__, item);
 
-   with_player(LocalPlayer) return P_Inv_Add(p, item);
+   with_player(LocalPlayer) {
+      return P_Inv_Add(p, item);
+   }
 
    return false;
 }
 
 script_str ext("ACS") addr(OBJ "ItemDetach")
-void Sc_ItemDetach(struct item *item)
-{
+void Sc_ItemDetach(struct item *item) {
    Dbg_Log(log_dev, "%s: detaching item %p", __func__, item);
 
-   if(item->Destroy) item->Destroy(item);
+   if(item->Destroy) {
+      item->Destroy(item);
+   }
 }
 
 script_str ext("ACS") addr(OBJ "ItemCanPlace")
-bool Sc_ItemCanPlace(struct item *item)
-{
-   with_player(LocalPlayer)
-      for(i32 i = 0; i < _inv_num; i++)
-         if(ItemCanPlaceAny(&p->inv[i], item))
+bool Sc_ItemCanPlace(struct item *item) {
+   with_player(LocalPlayer) {
+      for(i32 i = 0; i < _inv_num; i++) {
+         if(ItemCanPlaceAny(&p->inv[i], item)) {
             return true;
+         }
+      }
+   }
 
    return false;
 }
 
 script_str ext("ACS") addr(OBJ "ItemOnBody")
-bool Sc_ItemOnBody(struct item *item)
-{
+bool Sc_ItemOnBody(struct item *item) {
    return item->container && item->container->type == _cont_body;
 }
 

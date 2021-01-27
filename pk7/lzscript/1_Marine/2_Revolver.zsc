@@ -41,10 +41,10 @@ Ready:
    loop;
 
 Deselect:
-   REVO A 1 A_Lower(18);
+   REVO A 1 Lith_A_Lower(_raise_fast);
    loop;
 Select:
-   REVO A 1 A_Raise(18);
+   REVO A 1 Lith_A_Raise(_raise_fast);
    loop;
 
 Fire:

@@ -110,7 +110,7 @@ action(Weapon) State Lith_A_FireSPAS()
 {
    self.TakeInventory("Lith_ShellAmmo", 1, notakeinfinite: true);
    Lith_A_Casing("Lith_CasShellHot", 30, 6, 20, FRandom(3,4), FRandom(7,8), FRandom(7,9));
-   if(!ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_SPAS_B))
+   if(!Lith_UTIL.pData(self, pdata_upgrade, UPGR_SPAS_B))
       Lith_A_MagIncr();
    /* don't ask */
    if(Pos.Z - FloorZ >= 24) {
@@ -121,12 +121,12 @@ action(Weapon) State Lith_A_FireSPAS()
    A_Recoil(0.7);
    Lith_A_RecoilUp(0.4);
    A_Light(1);
-   if(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_SPAS_A))
+   if(Lith_UTIL.pData(self, pdata_upgrade, UPGR_SPAS_A))
       return ResolveState("FireVoid");
    Lith_FireBullets(10.5, 3.5, 12, 6);
    Lith_A_GunSmoke();
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
-   if(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_SPAS_B))
+   if(Lith_UTIL.pData(self, pdata_upgrade, UPGR_SPAS_B))
       return ResolveState("FireAuto");
    A_StartSound("weapons/cshotgun/fire", lch_weapon);
    return null;
@@ -153,11 +153,11 @@ Ready:
    loop;
 
 Deselect:
-   CSHG A 1 A_Lower(18);
+   CSHG A 1 Lith_A_Lower(_raise_fast);
    loop;
 
 Select:
-   CSHG A 1 A_Raise(18);
+   CSHG A 1 Lith_A_Raise(_raise_fast);
    loop;
 
 Fire:
@@ -205,7 +205,7 @@ FireEmpty:
    goto ReadySelector;
 
 Reload:
-   CSHG A 0 A_JumpIf(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_SPAS_B), "Ready");
+   CSHG A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_SPAS_B), "Ready");
    CSHG A 0 Lith_A_JumpIfMagFull;
    CSHR ABCDE 1;
    CSHR FG 2;

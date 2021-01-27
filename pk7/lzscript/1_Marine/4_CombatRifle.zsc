@@ -140,9 +140,9 @@ action(Weapon) void Lith_A_FireRifle()
    A_GunFlash("DummyFlash");
    Lith_A_RecoilUp(0.4);
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
-   if(!ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_LaserRCW))
+   if(!Lith_UTIL.pData(self, pdata_upgrade, UPGR_LaserRCW))
    {
-      if(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_7777777))
+      if(Lith_UTIL.pData(self, pdata_upgrade, UPGR_7777777))
          A_StartSound("marathon/rifle/fire", lch_weapon);
       else
       {
@@ -175,7 +175,7 @@ action(Weapon) void Lith_A_FireRifleBurst()
    A_GunFlash("DummyFlash");
    for(int i = 0; i < 2; i++)
    {
-      if(!ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_LaserRCW))
+      if(!Lith_UTIL.pData(self, pdata_upgrade, UPGR_LaserRCW))
       {
          A_StartSound("weapons/rifle/firesnipe", lch_weapon);
          Lith_FireBullets(0, 0, -3, 1, FBF_NORANDOM, "Lith_RifleBullet");
@@ -191,7 +191,7 @@ action(Weapon) void Lith_A_FireRifleBurst()
 action(Weapon) void Lith_A_FireRifleGrenade()
 {
    invoker.m_GrenFire = true;
-   if(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_7777777))
+   if(Lith_UTIL.pData(self, pdata_upgrade, UPGR_7777777))
       A_StartSound("marathon/rifle/grenade", lch_weapon);
    else
       A_StartSound("weapons/rifle/grenade", lch_weapon);
@@ -206,18 +206,18 @@ Ready:
    loop;
 
 Deselect:
-   CRFG A 1 A_Lower(18);
+   CRFG A 1 Lith_A_Lower(_raise_fast);
    loop;
 
 Select:
    CRFG A 0 ACS_ScriptCall("Lith_ResetRifleMode");
 SelectLoop:
-   CRFG A 1 A_Raise(18);
+   CRFG A 1 Lith_A_Raise(_raise_fast);
    loop;
 
 Fire:
-   CRFG A 0 A_JumpIf(ACS_ExecuteWithResult(lsc_pdata, pdata_riflemode) == rifle_firemode_burst,   "FireBurstStart");
-   CRFG A 0 A_JumpIf(ACS_ExecuteWithResult(lsc_pdata, pdata_riflemode) == rifle_firemode_grenade, "FireGrenade");
+   CRFG A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_riflemode) == rifle_firemode_burst,   "FireBurstStart");
+   CRFG A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_riflemode) == rifle_firemode_grenade, "FireGrenade");
    CRFG A 0 Lith_A_JumpIfMagEmpty;
    CRFG B 1 bright Lith_A_FireRifle;
    CRFG C 1 bright Lith_A_RecoilDn(0.35);
@@ -236,7 +236,7 @@ FireBurst:
    loop;
 FireBurstDone:
    CRFG A 4;
-   CRFG A 2 A_JumpIf(!ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_LaserRCW), 2);
+   CRFG A 2 A_JumpIf(!Lith_UTIL.pData(self, pdata_upgrade, UPGR_LaserRCW), 2);
    CRFG AAAAAA 1 A_Refire;
    goto ReadySelector;
 FireGrenade:
@@ -249,7 +249,7 @@ FireGrenade:
    goto ReadySelector;
 GrenadeReload:
    CRFG A 1 offset(1, 32) {
-      if(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_7777777))
+      if(Lith_UTIL.pData(self, pdata_upgrade, UPGR_7777777))
          A_StartSound("marathon/rifle/reload", lch_reload);
       else
          A_StartSound("weapons/rifle/rldmount", lch_reload);
@@ -299,7 +299,7 @@ FireEmpty:
    goto ReadySelector;
 
 AltFire:
-   #### # 0 A_JumpIf(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_RifleModes), "SwitchMode");
+   #### # 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_RifleModes), "SwitchMode");
    goto FireGrenade;
 SwitchMode:
    CRFG A 0 ACS_ScriptCall("Lith_SwitchRifleFiremode", 0);

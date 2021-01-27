@@ -114,7 +114,7 @@ class Lith_IonRifleExplosion : Actor
       TNT1 A 0;
       TNT1 A 1 A_Explode(96, 256, 0);
       TNT1 A 0 {
-         if(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_IonRifle_A, true))
+         if(Lith_UTIL.pData(target, pdata_upgrade, UPGR_IonRifle_A))
             A_RadiusGive("Lith_Ionized", 192, RGF_MONSTERS, 1);
          for(int i = 0; i < 26; i++)
          {
@@ -231,19 +231,19 @@ Ready:
 Deselect:
    IONG A 0 Lith_A_ScopeOut;
 DeselectLoop:
-   IONG A 1 A_Lower(18);
+   IONG A 1 Lith_A_Lower(_raise_fast);
    loop;
 
 Select:
    IONG A 0 Lith_A_ScopeOut;
-   IONG A 1 A_Raise(18);
+   IONG A 1 Lith_A_Raise(_raise_fast);
    wait;
 
 Fire:
    #### # 0 A_JumpIf(CountInv("Lith_RocketAmmo") == 0, "FireEmpty");
    #### # 0 Lith_A_JumpIfMagEmpty;
    #### # 0 {invoker.m_Charge = 1;}
-   #### # 0 A_JumpIf(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_IonRifle_B), 1);
+   #### # 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_IonRifle_B), 1);
    goto DoFire;
    #### # 2;
    #### # 1 A_ReFire(1);

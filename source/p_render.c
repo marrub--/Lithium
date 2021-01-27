@@ -21,16 +21,6 @@ Str(sp_lithcam3, s"LITHCAM3");
 
 /* Static Functions -------------------------------------------------------- */
 
-static void P_Ren_Style(struct player *p) {
-   if(p->scopetoken) {
-      SetRenderStyle(0, STYLE_Subtract);
-      SetAlpha(0, p->getCVarK(sc_weapons_scopealpha) * p->alpha);
-   } else {
-      SetRenderStyle(0, STYLE_Translucent);
-      SetAlpha(0, p->getCVarK(sc_weapons_alpha) * p->alpha);
-   }
-}
-
 static void P_Ren_Advice(struct player *p) {
    if(CheckFade(fid_advice)) {
       SetSize(640, 480);
@@ -61,7 +51,6 @@ void P_Ren_PTickPst(struct player *p) {
    P_Ren_Step(p);
    P_Ren_View(p);
    P_Ren_Scope(p);
-   P_Ren_Style(p);
    P_Ren_Advice(p);
    P_Ren_LevelUp(p);
    #ifndef NDEBUG

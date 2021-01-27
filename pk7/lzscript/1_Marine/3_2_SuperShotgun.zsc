@@ -65,11 +65,11 @@ Ready:
    loop;
 
 Deselect:
-   SSGG A 1 A_Lower(12);
+   SSGG A 1 Lith_A_Lower(_raise_normal);
    loop;
 
 Select:
-   SSGG A 1 A_Raise(12);
+   SSGG A 1 Lith_A_Raise(_raise_normal);
    loop;
 
 FireEmpty:

@@ -63,6 +63,7 @@ enum ZscName(PData) {
    pdata_addy,
    pdata_recoilp,
    pdata_attr,
+   pdata_alpha,
 };
 
 enum ZscName(SubweaponType) {

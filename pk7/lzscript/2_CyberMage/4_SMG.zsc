@@ -180,7 +180,7 @@ action(Weapon) void Lith_A_FireSMG()
       double spx = invoker.m_Recoil * FRandom(-5, 5);
       double spy = invoker.m_Recoil * FRandom(-1, 1);
 
-      if(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_SMG_B))
+      if(Lith_UTIL.pData(self, pdata_upgrade, UPGR_SMG_B))
          A_FireProjectile("Lith_SMGTracer3", spx, pitch: spy);
       else
          Lith_FireBullets(spx, spy, -1, 8, FBF_NORANDOM|FBF_EXPLICITANGLE);
@@ -194,8 +194,8 @@ states(Weapon)
 {
 Ready:
    CSMG A 0 {
-      if(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_SMG_A)) invoker.m_Max = 150;
-      else                                             invoker.m_Max = 50;
+      if(Lith_UTIL.pData(self, pdata_upgrade, UPGR_SMG_A)) invoker.m_Max = 150;
+      else                                                 invoker.m_Max = 50;
    }
    CSMG A 1 Lith_A_Ready(WRF_ALLOWRELOAD|WRF_ALLOWUSER1);
    loop;
@@ -203,22 +203,22 @@ Ready:
 Deselect:
    CSMG A 0 A_StopSound(lch_weapon);
 DeselectLoop:
-   CSMG A 1 A_Lower(18);
+   CSMG A 1 Lith_A_Lower(_raise_fast);
    loop;
 
 Select:
-   CSMG A 1 A_Raise(18);
+   CSMG A 1 Lith_A_Raise(_raise_fast);
    loop;
 
 Fire:
    CSMG A 0 A_JumpIfInventory("Lith_SMGHeat", 0, "ReloadHeat");
    CSMG A 0 {invoker.m_Recoil = 0.1;}
    CSMG A 0 Lith_A_JumpIfMagEmpty;
-   CSMG A 0 A_JumpIf(!ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_SMG_C), 2);
+   CSMG A 0 A_JumpIf(!Lith_UTIL.pData(self, pdata_upgrade, UPGR_SMG_C), 2);
    CSMG A 0 A_JumpIfInventory("Lith_SMGHeat", 450, "Ready");
    CSMG A 0 A_StartSound("weapons/smg/fire", lch_weapon, CHANF_LOOP);
 Fire1:
-   CSMG A 0 A_JumpIf(!ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_SMG_C), 2);
+   CSMG A 0 A_JumpIf(!Lith_UTIL.pData(self, pdata_upgrade, UPGR_SMG_C), 2);
    CSMG A 0 A_JumpIfInventory("Lith_SMGHeat", 450, "FireAnim1");
    CSMG A 0 {self.GiveInventory("Lith_SMGHeat", Random(14,27));}
    CSMG A 0 A_JumpIfInventory("Lith_SMGHeat", 0, "ReloadHeatFromFiring");
@@ -310,7 +310,7 @@ ReloadFromFiring:
    CSMG A 0 A_StartSound("weapons/smg/firedone", lch_weapon);
 Reload:
    CSMG A 0 Lith_A_JumpIfMagFull;
-   CSMG A 0 A_JumpIf(ACS_ExecuteWithResult(lsc_pdata, pdata_upgrade, UPGR_SMG_A), "ReloadLong");
+   CSMG A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_SMG_A), "ReloadLong");
    CSMG A 1 A_StartSound("weapons/smg/lift", lch_reload);
    CSMG D 1 offset(-2, 34);
    CSMG E 1 offset(-4, 37);
