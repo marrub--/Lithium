@@ -57,10 +57,10 @@ Ready:
    loop;
 
 Deselect:
-   MAGN A 1 a_lower(18);
+   MAGN A 1 Lith_A_Lower(_raise_fast);
    wait;
 Select:
-   MAGN A 1 a_raise(18);
+   MAGN A 1 Lith_A_Raise(_raise_fast);
    wait;
 
 Fire:

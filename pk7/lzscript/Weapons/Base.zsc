@@ -12,14 +12,18 @@ class Lith_WeaponScopedToken : Inventory {default {Inventory.MaxAmount 1;}}
 class Lith_Weapon : Weapon;
 
 enum Lith_PSprite {
+   _psp_overlay_hax = -2,
+
    _psp_weapon = psp_weapon,
    _psp_double_lg,
    _psp_double_rg,
    _psp_wep_max,
+
    _psp_flash = psp_flash,
    _psp_double_lf,
    _psp_double_rf,
    _psp_d_subweapon,
+   _psp_flash_max,
 }
 
 enum Lith_Hand {
@@ -106,7 +110,7 @@ action(Weapon) void lith_a_setInterpolation(bool on) {
    }
 }
 
-action(Weapon) void lith_a_setupOverlays() {
+action(Weapon) void lith_a_overlayTick() {
    float a;
    int style;
 
@@ -120,10 +124,17 @@ action(Weapon) void lith_a_setupOverlays() {
 
    a *= Lith_UTIL.pData(self, pdata_alpha) / FIX;
 
-   for(int psp = _psp_weapon; psp < _psp_wep_max; ++psp) {
+   for(int psp = _psp_weapon;; ++psp) {
+      if(psp == _psp_wep_max) {
+         psp = _psp_flash;
+      } else if(psp == _psp_flash_max) {
+         break;
+      }
+
       a_overlayFlags(psp, pspf_alpha|pspf_renderstyle, true);
       a_overlayRenderStyle(psp, style);
       a_overlayAlpha(psp, a);
+
       if(Lith_Player(self).m_wasDamaged) {
          a_overlayTranslation(psp, "Lith_FuckUp" .. random(1, 4));
       } else {
@@ -146,7 +157,6 @@ action(Weapon) void Lith_A_Lower(Lith_RaiseSpeed speed) {
    int lowerSpeed = invoker.lith_getRaiseSpeed(speed);
    let psp = player.getPSprite(_psp_weapon);
    if(psp) {
-      lith_a_setupOverlays();
       lith_a_setInterpolation(true);
 
       if(player.morphTics || player.cheats & cf_instantweapswitch) {
@@ -190,7 +200,7 @@ action(Weapon) void Lith_A_Raise(Lith_RaiseSpeed speed) {
    int raiseSpeed = invoker.lith_getRaiseSpeed(speed);
    let psp = player.getPSprite(_psp_weapon);
    if(psp) {
-      lith_a_setupOverlays();
+      A_Overlay(_psp_overlay_hax, "_MultithreadedFuckingOverlaysBecauseGodIsDeadAndGrafZahlKilledHim");
 
       if(psp.y <= weaponBottom) {
          resetPSprite(psp);
@@ -237,8 +247,6 @@ action(Weapon) void Lith_A_DoubleOffset(bool left, int x, int y) {
 }
 
 action(Weapon) state Lith_A_Ready(int flags = 0) {
-   lith_a_setupOverlays();
-
    if(!countInv("Lith_WeaponScopedToken")) {
       a_zoomFactor(1.0, ZOOM_INSTANT);
    }
@@ -426,6 +434,9 @@ Spawn:
 }
 
 states(Weapon) {
+_MultithreadedFuckingOverlaysBecauseGodIsDeadAndGrafZahlKilledHim:
+   TNT1 A 1 lith_a_overlayTick();
+   loop;
 ReadySelector:
    #### # 0 {
       lith_a_setInterpolation(false);
