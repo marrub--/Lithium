@@ -249,6 +249,7 @@ FireGrenade:
    goto ReadySelector;
 GrenadeReload:
    CRFG A 1 offset(1, 32) {
+      lith_a_setInterpolation(true);
       if(Lith_UTIL.pData(self, pdata_upgrade, UPGR_7777777))
          A_StartSound("marathon/rifle/reload", lch_reload);
       else
@@ -283,7 +284,7 @@ GrenadeReload:
    CRFG A 1 offset(8, 40);
    CRFG A 1 offset(5, 38);
    CRFG A 1 offset(2, 35);
-   CRFG A 8 offset(0, 32);
+   CRFG A 8 offset(0, 32) lith_a_setInterpolation(false);
    goto ReadySelector;
 
 FireEmpty:
@@ -310,7 +311,7 @@ SwitchMode:
 
 Reload:
    #### # 0 Lith_A_JumpIfMagFull;
-   CRFG K 1;
+   CRFG K 1 lith_a_setInterpolation(true);
    CRFG J 1 offset(-2, 34);
    CRFG J 1 offset(-4, 37);
    CRFG J 0 Lith_A_ReloadBobUp(0.1);
@@ -326,7 +327,10 @@ Reload:
    CRFG J 0 Lith_A_ReloadFinish;
    CRFG J 0 Lith_A_ReloadBobDn(0.1);
    CRFG J 2 offset(-13, 59) A_StartSound("weapons/rifle/reloadin", lch_reload2);
-   CRFG J 2 offset(-11, 49) Lith_A_ReloadBobDn(0.7);
+   CRFG J 2 offset(-11, 49) {
+      Lith_A_ReloadBobDn(0.7);
+      lith_a_setInterpolation(false);
+   }
    CRFG J 2 offset(-11, 47) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
    CRFG A 7 offset(-11, 45) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
    CRFG A 1 offset(-12, 49) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);

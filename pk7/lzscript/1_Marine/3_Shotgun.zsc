@@ -179,7 +179,10 @@ FireFinish_Rail_Unscoped:
    SHTG C 1 bright offset(0, 33) A_Light(2);
    SHTG D 2 offset(0, 32) {A_Light(0); Lith_A_RecoilDn(0.25);}
    SHTG A 4 Lith_A_RecoilDn(0.25);
-   SHTG F 3 Lith_A_RecoilDn(0.25);
+   SHTG F 3 {
+      Lith_A_RecoilDn(0.25);
+      lith_a_setInterpolation(true);
+   }
    SHTG G 3;
    SHTG H 2;
    SHTG I 1;
@@ -189,7 +192,7 @@ FireFinish_Rail_Unscoped:
    SHTG G 1 offset(-13, 32);
    SHTG G 1 offset(0, 32);
    SHTG F 1 offset(-9, 32);
-   SHTG F 1 offset(0, 32);
+   SHTG F 1 offset(0, 32) lith_a_setInterpolation(false);
    SHTG A 2 offset(1, 32);
    SHTG AAAAAAA 1 A_ReFire();
    goto ReadySelector;

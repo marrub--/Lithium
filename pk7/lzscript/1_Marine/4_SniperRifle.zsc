@@ -116,7 +116,10 @@ FireAnim_Scoped:
    SCOP A 1 {Lith_A_RecoilDn(0.25); Lith_A_ZoomFactorScoped(0.95);}
    SCOP A 3 {Lith_A_RecoilDn(0.25); Lith_A_ZoomFactorScoped(1.00);}
 BoltAnim:
-   #### # 1 offset(1, 32) Lith_A_RecoilDn(0.25);
+   #### # 1 offset(1, 32) {
+      Lith_A_RecoilDn(0.25);
+      lith_a_setInterpolation(true);
+   }
    #### # 1 offset(3, 32) Lith_A_RecoilDn(0.25);
    #### # 1 offset(4, 32) Lith_A_RecoilDn(0.25);
    #### # 1 offset(8, 38) Lith_A_RecoilDn(0.25);
@@ -147,7 +150,7 @@ BoltAnim:
    #### # 1 offset(8, 40);
    #### # 1 offset(5, 38);
    #### # 1 offset(2, 35);
-   #### # 5 offset(0, 32);
+   #### # 5 offset(0, 32) lith_a_setInterpolation(false);
    goto ReadySelector;
 FireEmpty:
    #### # 1;
@@ -169,7 +172,7 @@ AltFire:
 Reload:
    #### # 0 Lith_A_JumpIfMagFull;
    SNPG A 0 Lith_A_ScopeOut;
-   SNPG A 1;
+   SNPG A 1 lith_a_setInterpolation(true);
    SNPG A 1 offset(-2, 34);
    SNPG A 1 offset(-4, 37);
    SNPG A 0 Lith_A_ReloadBobUp(0.5);
@@ -185,7 +188,7 @@ Reload:
    SNPG A 2 offset(-13, 59) A_StartSound("weapons/sniper/magin", lch_reload2);
    SNPG A 2 offset(-11, 49);
    SNPG A 2 offset(-11, 47);
-   SNPG A 7 offset(-11, 45);
+   SNPG A 7 offset(-11, 45) lith_a_setInterpolation(false);
    SNPG A 1 offset(-12, 49) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
    SNPG A 1 offset(-8, 53) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
    SNPG A 1 offset(-1, 57) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);

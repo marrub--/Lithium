@@ -59,7 +59,7 @@ Fire:
    KM64 A 1 offset(0, 34);
    KM64 AAA 1 offset(0, 32) A_ReFire;
 LoadAnim:
-   #### D 1 offset(3, 32);
+   #### D 1 offset(3, 32) lith_a_setInterpolation(true);
    #### D 1 offset(8, 38);
    #### D 1 offset(12, 45);
    #### D 1 offset(19, 60);
@@ -82,7 +82,7 @@ LoadAnim:
    #### D 1 offset(10, 42);
    #### D 1 offset(8, 40);
    #### D 1 offset(5, 38);
-   #### D 1 offset(2, 35);
+   #### D 1 offset(2, 35) lith_a_setInterpolation(false);
    goto ReadySelector;
 FireEmpty:
    #### # 1;

@@ -168,7 +168,10 @@ Select:
 Fire:
    #### # 0 Lith_A_JumpIfMagEmpty;
    #### # 0 Lith_A_MagIncr;
-   700E A 1 offset(2, 32) lith_laser(0.0);
+   700E A 1 offset(2, 32) {
+      lith_laser(0.0);
+      lith_a_setInterpolation(true);
+   }
    700E Y 1 bright {
       lith_fire700e();
       lith_laser(22.0);
@@ -188,7 +191,10 @@ Fire:
    700E A 1 lith_laser(0.0);
    700E A 1 lith_laser(0.0);
    700E A 1 offset(0, 32) lith_laser(0.0);
-   700E A 1 offset(0, 32) lith_laser(0.0);
+   700E A 1 offset(0, 32) {
+      lith_laser(0.0);
+      lith_a_setInterpolation(false);
+   }
    goto ReadySelector;
 
 FireEmpty:
@@ -205,7 +211,8 @@ FireEmpty:
    goto ReadySelector;
 
 Reload:
-   700E B 1 Lith_A_JumpIfMagFull;
+   #### # 0 Lith_A_JumpIfMagFull;
+   700E B 1 lith_a_setInterpolation(true);
    700E B 1 offset(2, 31) A_StartSound("weapons/700e/move", lch_reload);
    700E C 1 offset(1, 32) Lith_A_ReloadBobUp(0.5);
    700E C 1 offset(3, 32) Lith_A_ReloadBobUp(0.5);
@@ -222,13 +229,14 @@ Reload:
       for(int i = 0; i < invoker.m_Fired; i++)
          Lith_A_Casing("Lith_Cas700e", 10, frandom(1,2), 32, frandom(1,2), frandom(1,3), 0);
    }
-   700E F 1 offset(-9, 68);
+   700E F 1 offset(-9, 68) lith_a_setInterpolation(false);
    TNT1 A 6 A_SetTics(invoker.m_Fired * 2);
    TNT1 A 2 Lith_A_ReloadFinish;
    700E C 1 offset(-35, 100);
    700E C 1 offset(-20, 90) {
       A_StartSound("weapons/700e/in", lch_reload2);
       Lith_A_ReloadBobUp(2);
+      lith_a_setInterpolation(true);
    }
    700E C 1 offset(-15, 70);
    700E C 1 offset(-10, 60);
@@ -236,7 +244,7 @@ Reload:
    700E C 2 offset(-5, 36);
    700E C 4 offset(-2, 34);
    700E B 2 offset(1, 32);
-   700E A 2;
+   700E A 2 lith_a_setInterpolation(false);
    goto ReadySelector;
 }
 

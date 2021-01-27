@@ -100,6 +100,12 @@ int lith_getRaiseSpeed(Lith_RaiseSpeed speed) {
    return 0;
 }
 
+action(Weapon) void lith_a_setInterpolation(bool on) {
+   for(int psp = _psp_weapon; psp < _psp_wep_max; ++psp) {
+      a_overlayFlags(psp, pspf_interpolate, on);
+   }
+}
+
 action(Weapon) void lith_a_setupOverlays() {
    float a;
    int style;
@@ -127,6 +133,7 @@ action(Weapon) void Lith_A_Lower(Lith_RaiseSpeed speed) {
    }
 
    if(!player.readyWeapon) {
+      lith_a_setInterpolation(false);
       player.mo.bringUpWeapon();
       return;
    }
@@ -135,6 +142,7 @@ action(Weapon) void Lith_A_Lower(Lith_RaiseSpeed speed) {
    let psp = player.getPSprite(_psp_weapon);
    if(psp) {
       lith_a_setupOverlays();
+      lith_a_setInterpolation(true);
 
       if(player.morphTics || player.cheats & cf_instantweapswitch) {
          psp.y = weaponBottom;
@@ -148,11 +156,13 @@ action(Weapon) void Lith_A_Lower(Lith_RaiseSpeed speed) {
 
       resetPSprite(psp);
       if(player.playerState == pst_dead) {
+         lith_a_setInterpolation(false);
          player.setPSprite(_psp_flash, null);
          psp.setState(findState('DeadLowered'));
          return;
       }
 
+      lith_a_setInterpolation(false);
       player.setPSprite(_psp_flash, null);
       player.mo.bringUpWeapon();
    }
@@ -251,12 +261,22 @@ virtual void Lith_ReloadFinish(bool isauto) {
 action(Weapon) state Lith_A_JumpIfMagEmpty(bool autoreload = true, statelabel rsn = "Reload", statelabel esn = "FireEmpty") {
    statelabel sn;
    if(autoreload) {
-      if(CVar.GetCVar('lith_weapons_reloadempty', Player).GetBool()) sn = rsn;
-      else                                                           sn = esn;
+      if(CVar.GetCVar('lith_weapons_reloadempty', Player).GetBool()) {
+         sn = rsn;
+      } else {
+         sn = esn;
+      }
    } else {
       sn = rsn;
    }
-   return invoker.Lith_MagEmpty() ? ResolveState(sn) : null;
+   if(invoker.lith_magEmpty()) {
+      if(sn == "FireEmpty") {
+         lith_a_setInterpolation(true);
+      }
+      return ResolveState(sn);
+   } else {
+      return null;
+   }
 }
 
 action(Weapon) state Lith_A_JumpIfMagFull(statelabel sn = "ReadySelector") {
@@ -284,6 +304,9 @@ action(Weapon) state Lith_A_JumpIfNoSlot3OptAmmo(statelabel sn = "FireEmpty", in
    if(!Lith_UTIL.pData(self, pdata_slot3ammo) || CountInv("Lith_ShellAmmo") >= req) {
       return null;
    } else {
+      if(sn == "FireEmpty") {
+         lith_a_setInterpolation(true);
+      }
       return ResolveState(sn);
    }
 }
@@ -400,6 +423,7 @@ Spawn:
 states(Weapon) {
 ReadySelector:
    #### # 0 {
+      lith_a_setInterpolation(false);
       return CountInv("Lith_WeaponScopedToken") ? ResolveState("AltReady")
                                                 : ResolveState("Ready");
    }

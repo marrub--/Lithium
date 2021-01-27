@@ -60,7 +60,7 @@ Select:
 
 Reload:
    MISG A 0 Lith_A_JumpIfMagFull;
-   MISG A 1;
+   MISG A 1 lith_a_setInterpolation(true);
    MISG A 1 offset(-2, 34);
    MISG A 1 offset(-4, 37);
    MISG A 1 offset(-9, 43) A_StartSound("weapons/missile/reloadout", lch_reload);
@@ -74,7 +74,10 @@ Reload:
       A_StartSound("weapons/missile/reloadin", lch_reload2);
       Lith_A_ReloadFinish();
    }
-   MISG A 2 offset(-11, 49) Lith_A_ReloadBobDn(0.4);
+   MISG A 2 offset(-11, 49) {
+      Lith_A_ReloadBobDn(0.4);
+      lith_a_setInterpolation(false);
+   }
    MISG A 2 offset(-11, 47) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
    MISG A 7 offset(-11, 45) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
    MISG A 1 offset(-12, 49) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);

@@ -71,7 +71,10 @@ FireEmpty:
 
 Reload:
    #### # 0 Lith_A_JumpIfMagFull;
-   REVO A 1 offset(0, 33) A_StartSound("weapons/revolver/reload", lch_reload);
+   REVO A 1 offset(0, 33) {
+      A_StartSound("weapons/revolver/reload", lch_reload);
+      lith_a_setInterpolation(true);
+   }
    REVO A 1 offset(0, 34);
    REVO A 1 offset(0, 35) Lith_A_ReloadBobDn(0.1);
    REVO A 1 offset(-1, 37) Lith_A_ReloadBobDn(0.1);
@@ -85,7 +88,7 @@ Reload:
    }
    REVO H 1 offset(-12, 55) Lith_A_ReloadBobDn(0.1);
    REVO I 1 offset(-13, 64);
-   REVO I 1 offset(-13, 69);
+   REVO I 1 offset(-13, 69) lith_a_setInterpolation(false);
    TNT1 A 16;
    TNT1 A 2 Lith_A_ReloadBobUp(0.5);
    TNT1 A 2 Lith_A_ReloadBobUp(0.5);
@@ -93,13 +96,16 @@ Reload:
       Lith_A_ReloadFinish();
       Lith_A_ReloadBobUp(0.3);
    }
-   REVO J 1 offset(2, 55) Lith_A_ReloadBobUp(0.2);
+   REVO J 1 offset(2, 55) {
+      Lith_A_ReloadBobUp(0.2);
+      lith_a_setInterpolation(true);
+   }
    REVO K 1 offset(2, 50);
    REVO K 1 offset(2, 45);
    REVO K 1 offset(1, 40);
    REVO A 1 offset(1, 35);
    REVO A 1 offset(1, 33);
-   REVO A 1 offset(1, 32);
+   REVO A 1 offset(1, 32) lith_a_setInterpolation(false);
    goto ReadySelector;
 }
 

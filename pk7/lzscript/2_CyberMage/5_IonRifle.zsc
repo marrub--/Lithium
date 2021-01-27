@@ -282,7 +282,7 @@ DoFire:
    TNT1 A 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, "FireAnim_Scoped");
 FireAnim_Unscoped:
    IONG CB 2 bright;
-   IONG D 1 bright;
+   IONG D 1 bright lith_a_setInterpolation(true);
    IONG E 1 bright;
    IONG FGA 1;
    goto ChillCheck;
@@ -347,7 +347,7 @@ BoltAnim:
    #### # 1 offset(8, 40);
    #### # 1 offset(5, 38);
    #### # 1 offset(2, 35);
-   #### # 5 offset(1, 32);
+   #### # 5 offset(1, 32) lith_a_setInterpolation(false);
    #### # 0 Lith_A_JumpIfMagEmpty(false);
    goto ReadySelector;
 
