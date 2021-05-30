@@ -44,14 +44,22 @@ static void Waves(struct player *p) {
    /* Sine (health) */
    for(i32 i = 0; i < 70; i++) {
       i32 pos = (10 + timer + i) % 160;
-      PrintSpriteA(fs[frame - 1], 300 + ACS_Sin(pos / 32.0) * 7.0,1, 25 + pos,1, i / 70.0k);
+      PrintSpriteA(fs[frame - 1], 300 + ACS_Sin(pos / 32.0) * 7,1, 25 + pos,1, i / 70.0k);
    }
 
    /* Square */
    for(i32 i = 0; i < 70; i++) {
+      const k32 frq = 1.0k / 40.0k;
+
       i32 pos = (7 + timer + i) % 160;
-      k32 a   = ACS_Cos(pos / 32.0);
-      PrintSpriteA(fastroundk(a) != 0.0 ? sp_HUD_H_D16 : sp_HUD_H_D46, 300 + (a >= 0) * 7.0,1, 25 + pos,1, i / 70.0k);
+      i32 a   =
+         2.0k * (2.0k * floork(frq * pos) - floork(2.0k * frq * pos)) + 1.0k;
+
+      if(pos % 20) {
+         PrintSpriteA(sp_HUD_H_D16, 300 + (a > 0) * 7,1, 25 + pos,1, i / 70.0k);
+      } else {
+         PrintSpriteA(sp_HUD_H_D46, 307,1, 25 + pos,1, i / 70.0k);
+      }
    }
 
    /* Triangle */

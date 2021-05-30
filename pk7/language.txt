@@ -1835,10 +1835,11 @@
 "LITH_ATTR_HELP_LUK" = "Score gained";
 "LITH_ATTR_HELP_RGE" = "Damage buff when hit";
 "LITH_ATTR_HELP_CON" = "Damage buff when gaining mana";
-"LITH_ATTR_HELP_ADR" = "Damage buff when gaining meter";
-"LITH_ATTR_HELP_AGI" = "Speed and damage mitigation when dodging";
+"LITH_ATTR_HELP_ADR" = "Damage resistance when gaining meter";
+"LITH_ATTR_HELP_AGI" = "Speed and damage resistance when dodging";
 "LITH_ATTR_HELP_RSH" = "Damage buff when gaining health";
 "LITH_ATTR_HELP_REF" = "Movement speed when hit";
+"LITH_ATTR_HELP_MNA" = "Chance to not get damaged";
 "LITH_INV_HINTS" = "You can right click to quickly move items.\nTo equip armor place it on your \cdbody\c- or press \cnEquip\c-.";
 "LITH_CONTAINER_Backpack" = "Backpack";
 "LITH_CONTAINER_ArmUpL" = "L Shoulder";

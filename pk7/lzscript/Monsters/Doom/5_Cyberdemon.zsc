@@ -33,6 +33,7 @@ class Lith_CyberRocket : Lith_Explosive
    Death:
       TNT1 A 0 A_Explode(96);
       TNT1 A 0 {if(target) target = target.target;}
+      TNT1 A 0 Lith_A_ExplodeSound;
       TNT1 A 0 Lith_A_DoExplosion;
       stop;
    }

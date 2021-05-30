@@ -188,16 +188,17 @@ FirePunct:
    goto LoadAnim;
 FirePunct_Scoped:
    SCOP A 3;
-   SCOP A 1 Lith_A_ZoomFactorScoped(0.80);
-   SCOP A 1 Lith_A_ZoomFactorScoped(0.85);
-   SCOP A 1 bright Lith_A_ZoomFactorScoped(0.90);
-   SCOP A 0 bright Lith_A_ZoomFactorScoped(0.95);
-   SCOP A 1 bright Lith_A_FirePunct;
-   SCOP A 1 bright Lith_A_ZoomFactorScoped(1.00);
-   SCOP A 1 bright;
-   SCOP A 1 bright;
-   SCOP A 1 bright;
-   SCOP AAAAAAAAAA 1 A_ReFire;
+   SCOP A 1 offset(0, 36) Lith_A_ZoomFactorScoped(0.80);
+   SCOP A 1 offset(0, 38) Lith_A_ZoomFactorScoped(0.85);
+   SCOP A 1 bright offset(0, 49) Lith_A_ZoomFactorScoped(0.90);
+   SCOP A 1 bright offset(0, 52) {
+      Lith_A_ZoomFactorScoped(0.95);
+      Lith_A_FirePunct();
+   }
+   SCOP A 1 bright offset(0, 37) Lith_A_ZoomFactorScoped(1.00);
+   SCOP A 1 bright offset(0, 36);
+   SCOP A 2 bright offset(0, 35);
+   SCOP AAAAAAAAAA 1 offset(0, 34) A_ReFire;
 LoadAnim:
    #### A 1 offset(1, 32);
    #### A 1 offset(3, 32);

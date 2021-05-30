@@ -400,6 +400,7 @@ identifier,default
 :UI_Ghost:Tab,lgfx/UI_Ghost/Tab.png
 :UI_Ghost:TabHot,lgfx/UI_Ghost/TabHot.png
 :UI_Green:Background,lgfx/UI_Green/Background.png
+:UI_Green:BackgroundSmall,lgfx/UI_Green/BackgroundSmall.png
 :UI_Green:BtnNext,lgfx/UI_Green/BtnNext.png
 :UI_Green:BtnNextHot,lgfx/UI_Green/BtnNextHot.png
 :UI_Green:BtnNextSmall,lgfx/UI_Green/BtnNextSmall.png

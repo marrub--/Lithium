@@ -12,8 +12,6 @@ class Lith_WeaponScopedToken : Inventory {default {Inventory.MaxAmount 1;}}
 class Lith_Weapon : Weapon;
 
 enum Lith_PSprite {
-   _psp_overlay_hax = -2,
-
    _psp_weapon = psp_weapon,
    _psp_double_lg,
    _psp_double_rg,
@@ -24,6 +22,9 @@ enum Lith_PSprite {
    _psp_double_rf,
    _psp_d_subweapon,
    _psp_flash_max,
+
+   _psp_overlay_hax = 69420,
+
 }
 
 enum Lith_Hand {

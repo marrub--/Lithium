@@ -64,6 +64,7 @@ Spawn:
    loop;
 Death:
    TNT1 A 0 A_Explode();
+   TNT1 A 0 Lith_A_ExplodeSound;
    TNT1 A 0 Lith_A_DoExplosion;
    stop;
 }

@@ -35,7 +35,7 @@ static void SetupAttributes(struct player *p)
    case pcl_wanderer:  fastmemmove(p->attr.names[at_spc], "AGI", 3); break;
    case pcl_assassin:  fastmemmove(p->attr.names[at_spc], "RSH", 3); break;
    case pcl_darklord:  fastmemmove(p->attr.names[at_spc], "REF", 3); break;
-   case pcl_thoth:     fastmemmove(p->attr.names[at_spc], "???", 3); break;
+   case pcl_thoth:     fastmemmove(p->attr.names[at_spc], "MNA", 3); break;
    }
 
    if(p->pclass & pcl_robot) {

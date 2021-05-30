@@ -203,9 +203,10 @@ CLOSED
 == \#ATTR_HELP_LUK | Score gained
 == \#ATTR_HELP_RGE | Damage buff when hit
 == \#ATTR_HELP_CON | Damage buff when gaining mana
-== \#ATTR_HELP_ADR | Damage buff when gaining meter
-== \#ATTR_HELP_AGI | Speed and damage mitigation when dodging
+== \#ATTR_HELP_ADR | Damage resistance when gaining meter
+== \#ATTR_HELP_AGI | Speed and damage resistance when dodging
 == \#ATTR_HELP_RSH | Damage buff when gaining health
 == \#ATTR_HELP_REF | Movement speed when hit
+== \#ATTR_HELP_MNA | Chance to not get damaged
 
 ## EOF

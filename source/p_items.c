@@ -62,13 +62,20 @@ bool ItemCanPlace(struct container *cont, struct item *item, i32 x, i32 y) {
    }
 
    for_item(*cont) if(it != item) {
-      i32 const ox = it->x;
-      i32 const oy = it->y;
-      i32 const oxw = ox + it->w;
-      i32 const oxh = oy + it->h;
-
-      if(aabb_aabb(it->x, it->y, it->w, it->h, x, y, item->w, item->h)) {
-         return false;
+      /* there is certainly a better way of doing this that still
+       * accounts for overlap but,
+       * damn do i not care
+       */
+      for(i32 ox = it->x; ox < it->x + it->w; ox++) {
+         for(i32 oy = it->y; oy < it->y + it->h; oy++) {
+            for(i32 ix = x; ix < x + item->w; ix++) {
+               for(i32 iy = y; iy < y + item->h; iy++) {
+                  if(ox == ix && oy == iy) {
+                     return false;
+                  }
+               }
+            }
+         }
       }
    }
 

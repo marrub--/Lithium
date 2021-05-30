@@ -37,7 +37,7 @@ class Lith_MiniMissile : Lith_Explosive
       wait;
    Death:
       TNT1 A 0 A_Explode(32, 42);
-      TNT1 A 0 Lith_A_JumpExplosion;
+      TNT1 A 0 Lith_A_DoExplosion(0.2);
       stop;
    }
 }
