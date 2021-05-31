@@ -10,13 +10,13 @@ body {
    # Body
    == lsounds/Monsters/Body
    bullethit1 Bullet1 # Half-Life
-   bullethit2 Bullet2 # //
+   bullethit2 Bullet2 # ^
 
    flesh1 Flesh1 # Half-Life 2 MMod
-   flesh2 Flesh2 # //
-   flesh3 Flesh3 # //
-   flesh4 Flesh4 # //
-   flesh5 Flesh5 # //
+   flesh2 Flesh2 # ^
+   flesh3 Flesh3 # ^
+   flesh4 Flesh4 # ^
+   flesh5 Flesh5 # ^
 
    $random bullethit {
       bullethit1,
@@ -47,10 +47,10 @@ enemies {
       == lsounds/Monsters/IoS
       crash Crash # Akzeriyyuth (Feryquitous song), mgamabile (FreeSound), connum (FreeSound)
       crack1 Crack1 # speedygonzo (FreeSound)
-      crack2 Crack2 # //
-      crack3 Crack3 # //
-      crack4 Crack4 # //
-      crack5 Crack5 # //
+      crack2 Crack2 # ^
+      crack3 Crack3 # ^
+      crack4 Crack4 # ^
+      crack5 Crack5 # ^
       $random crack {
          crack1,
          crack2,
@@ -63,7 +63,7 @@ enemies {
    boss {
       == lsounds/Monsters/Boss
       talk1 Talk  # Doom 3
-      talk2 Talk2 # //
+      talk2 Talk2 # ^
       $random talk {
          talk1,
          talk2,
@@ -89,9 +89,9 @@ enemies {
    chainguy {
       == lsounds/Monsters/ChaingunGuy
       fire  Fire        # Killing Floor
-      bolt  Bolt        # //
-      boltb BoltBack    # //
-      boltf BoltForward # //
+      bolt  Bolt        # ^
+      boltb BoltBack    # ^
+      boltf BoltForward # ^
       $attenuation fire 0.5
       $limit fire 0
    }
@@ -115,14 +115,14 @@ enemies {
       == lsounds/Monsters/SpiderMastermind
       ready    Arm      # ???
       fire     Fire     # FEAR
-      firestop FireStop # //
+      firestop FireStop # ^
    }
 
    cyberdemon {
       == lsounds/Monsters/Cyberdemon
       ready    Ready    # FEAR
-      fire     Fire     # //
-      firedone FireDone # //
+      fire     Fire     # ^
+      firedone FireDone # ^
       $attenuation ready 0.3
       $attenuation fire 0.25
       $attenuation firedone 0.25

@@ -10,19 +10,19 @@ weapons {
    cfist {
       == lsounds/Weapons/ChargeFist
       pickup    Pickup    # Halo 3
-      fire1     Fire1     # //
-      fire2     Fire2     # //
-      fire3     Fire3     # //
-      ready     Ready     # //
+      fire1     Fire1     # ^
+      fire2     Fire2     # ^
+      fire3     Fire3     # ^
+      ready     Ready     # ^
       charge    Charge    # Fallout 4, Halo 3
       chargeend ChargeEnd # Fallout 4
       hit1      HitFlesh1 # Shadow Complex
-      hit2      HitFlesh2 # //
-      hit3      HitFlesh3 # //
-      hitwall1  HitWall1  # //
-      hitwall2  HitWall2  # //
-      hitwall3  HitWall3  # //
-      hitwall4  HitWall4  # //
+      hit2      HitFlesh2 # ^
+      hit3      HitFlesh3 # ^
+      hitwall1  HitWall1  # ^
+      hitwall2  HitWall2  # ^
+      hitwall3  HitWall3  # ^
+      hitwall4  HitWall4  # ^
 
       $random hit {
          hit1,
@@ -51,9 +51,9 @@ weapons {
    missile {
       == lsounds/Weapons/MissileLauncher
       fire      Fire      # FEAR
-      empty     FireEmpty # //
-      reloadout ReloadOut # //
-      reloadin  ReloadIn  # //
+      empty     FireEmpty # ^
+      reloadout ReloadOut # ^
+      reloadin  ReloadIn  # ^
       draw      Draw      # Halo 3, Doom 3
       explode   Explode   # ???
       $limit explode 0
@@ -62,14 +62,14 @@ weapons {
    plasma {
       == lsounds/WeaponsM/PlasmaRifle
       fire    Fire      # Devil May Cry 3
-      altfire AltFire   # //
+      altfire AltFire   # ^
       pickup  Pickup    # Alliance of Valiant Arms
       empty   FireEmpty # Killing Floor
       draw    Draw      # FEAR
 
       explode1 Explode1 # Devil May Cry 3
-      explode2 Explode2 # //
-      explode3 Explode3 # //
+      explode2 Explode2 # ^
+      explode3 Explode3 # ^
 
       $random explode {
          explode1,
@@ -83,7 +83,7 @@ weapons {
       laser {
          == lsounds/WeaponsM/PlasmaRifle/Laser
          fire_start FireStart # Unreal Tournament '99
-         fire_hum   FireHum   # //
+         fire_hum   FireHum   # ^
          fire_loop  FireLoop  # Touhou 9: Phantasmagoria of Flower View
          fire_end   FireEnd   # Quake
          spark      Spark     # Fallout 4
@@ -95,7 +95,7 @@ weapons {
          charge    Charge    # Touhou 13
          fire      Fire      # FEAR, Halo 3
          reloadout ReloadOut # FEAR
-         reloadin  ReloadIn  # //
+         reloadin  ReloadIn  # ^
 
          $volume fire 0.7
       }
@@ -104,10 +104,10 @@ weapons {
    plasdiff {
       == lsounds/Weapons/PlasmaDiffuser
       fire1 Fire      # Halo 3
-      fire2 Fire2     # //
-      fire3 Fire3     # //
+      fire2 Fire2     # ^
+      fire3 Fire3     # ^
       draw  Draw      # Fallout 3, Halo 3
-      empty FireEmpty # //
+      empty FireEmpty # ^
 
       $alias explode = .weapons.plasmax
       $limit explode 0

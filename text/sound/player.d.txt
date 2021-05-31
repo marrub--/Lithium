@@ -9,12 +9,12 @@
 # Dark Lord
 == lsounds/PlayerD
 $playersound    darklord male *death   Death     # Phantasy Star: Nova
-$playersound    darklord male *xdeath  XDeath    # //
-$playersound    darklord male *pain100 PainSmall # //
-$playersound    darklord male *pain75  Pain      # //
-$playersounddup darklord male *pain50  *pain75   # //
-$playersounddup darklord male *pain25  *pain75   # //
-$playersound    darklord male *grunt   Grunt     # //
+$playersound    darklord male *xdeath  XDeath    # ^
+$playersound    darklord male *pain100 PainSmall # ^
+$playersound    darklord male *pain75  Pain      # ^
+$playersounddup darklord male *pain50  *pain75   # ^
+$playersounddup darklord male *pain25  *pain75   # ^
+$playersound    darklord male *grunt   Grunt     # ^
 $playersound    darklord male *land    Land      # Resident Evil 4, Slave Zero
 
 player.darklord.step Step # Resident Evil 4

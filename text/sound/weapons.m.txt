@@ -10,9 +10,9 @@ weapons {
    knife {
       == lsounds/WeaponsM/Knife
       swing1   Fire1   # Serious Sam: The First Encounter HD
-      swing2   Fire2   # //
+      swing2   Fire2   # ^
       hitflesh Hit     # Killing Floor
-      hitwall  HitWall # //
+      hitwall  HitWall # ^
 
       $limit hitflesh 0
       $limit hitwall 0
@@ -24,7 +24,7 @@ weapons {
       fireauto FireAuto # Killing Floor, ???
       reload   Reload   # Serious Sam: The First Encounter HD
       zoomin   ScopeIn  # Halo 3, EYE: Divine Cybermancy
-      zoomout  ScopeOut # //
+      zoomout  ScopeOut # ^
       pickup   Pickup   # Fallout 4
 
       $alias draw = pickup
@@ -39,23 +39,23 @@ weapons {
    revolver {
       == lsounds/WeaponsM/Revolver
       fire   Fire   # Killing Floor
-      draw   Draw   # //
-      pickup Pickup # //
+      draw   Draw   # ^
+      pickup Pickup # ^
       reload Reload # Serious Sam: The First Encounter HD
    }
 
    shotgun {
       == lsounds/WeaponsM/Shotgun
       fire    FireFull  # Killing Floor, General 6000
-      fire2   FireFull2 # //
+      fire2   FireFull2 # ^
       open    PumpOpen  # General 6000
-      close   PumpClose # //
+      close   PumpClose # ^
       zoomin  ScopeIn   # Halo 3, EYE: Divine Cybermancy
-      zoomout ScopeOut  # //
+      zoomout ScopeOut  # ^
       pickup  Pickup    # Halo 3, EYE: Divine Cybermancy, General 6000
       just1   Just1     # Halo 3
-      just2   Just2     # //
-      just3   Just3     # //
+      just2   Just2     # ^
+      just3   Just3     # ^
 
       $alias draw = open
 
@@ -68,12 +68,12 @@ weapons {
       gauss {
          == lsounds/WeaponsM/Shotgun/Gauss
          fire       ShootGunBang # Descent 2 XL
-         puff       Fire         # //
+         puff       Fire         # ^
          spark1     Spark1       # Fallout 4
-         spark2     Spark2       # //
-         spark3     Spark3       # //
+         spark2     Spark2       # ^
+         spark3     Spark3       # ^
          reloadout  ReloadOut    # General 6000
-         reloadin   ReloadIn     # //
+         reloadin   ReloadIn     # ^
 
          $random spark {
             spark1,
@@ -96,7 +96,7 @@ weapons {
       fire   Fire   # Per Kristian, General 6000
       pickup Pickup # General 6000, ???
       close  Close  # Killing Floor, ???
-      open   Open   # //
+      open   Open   # ^
       load   Load   # General 6000, ???
       empty  Empty  # General 6000
       draw   Draw   # General 6000, Killing Floor, ???
@@ -106,7 +106,7 @@ weapons {
       == lsounds/WeaponsM/LazShotgun
       fire  Fire  # Fallout: New Vegas
       open  Open  # Fallout: New Vegas, FEAR
-      close Close # //
+      close Close # ^
       draw  Draw  # Doom 3, Fallout: New Vegas
 
       $alias pickup = open
@@ -115,22 +115,22 @@ weapons {
    rifle {
       == lsounds/WeaponsM/CombatRifle
       fire1      Fire1       # Fallout 4, Killing Floor, Call of Duty: Modern Warfare 2
-      fire2      Fire2       # //
-      fire3      Fire3       # //
-      firesnipe1 FireSnipe1  # //
-      firesnipe2 FireSnipe2  # //
-      firesnipe3 FireSnipe3  # //
+      fire2      Fire2       # ^
+      fire3      Fire3       # ^
+      firesnipe1 FireSnipe1  # ^
+      firesnipe2 FireSnipe2  # ^
+      firesnipe3 FireSnipe3  # ^
       rldmount   ReloadMount # Fallout 4, Halo 3, Serious Sam: The First Encounter HD
       pickup     Pickup      # Halo 3
-      draw       Draw        # //
+      draw       Draw        # ^
       firemode   SetFiremode # Fallout: New Vegas, Deus Ex
       grenade    FireGrenade # Fallout: New Vegas
       reloadout  ReloadOut   # ???
       reloadin   ReloadIn    # ???
 
       grenadebounce1 GrenadeBounce1 # Halo 3
-      grenadebounce2 GrenadeBounce2 # //
-      grenadebounce3 GrenadeBounce3 # //
+      grenadebounce2 GrenadeBounce2 # ^
+      grenadebounce3 GrenadeBounce3 # ^
 
       $alias firero = .weapons.runout
 
@@ -156,7 +156,7 @@ weapons {
    rcw {
       == lsounds/WeaponsM/CombatRifle
       fire      FireLaz      # Fallout 4, Fallout: New Vegas
-      firesnipe FireLazSnipe # //
+      firesnipe FireLazSnipe # ^
 
       $volume fire 0.7
       $volume firesnipe 0.7
@@ -166,10 +166,10 @@ weapons {
       == lsounds/WeaponsM/SniperRifle
       fire        Fire        # Fallout: New Vegas, Firearms: Source
       boltback    BoltBack    # Fallout: New Vegas, FEAR, Firearms: Source
-      boltforward BoltForward # //
+      boltforward BoltForward # ^
       magout      MagOut      # Halo 3
-      magin       MagIn       # //
-      draw        Draw        # //
+      magin       MagIn       # ^
+      draw        Draw        # ^
 
       $alias zoomin  = .weapons.shotgun.zoomin
       $alias zoomout = .weapons.shotgun.zoomout
@@ -178,16 +178,16 @@ weapons {
    rocket {
       == lsounds/WeaponsM/GrenadeLauncher
       fire1   Fire        # FEAR
-      fire2   Fire1       # //
-      fire3   Fire2       # //
+      fire2   Fire1       # ^
+      fire3   Fire2       # ^
       empty   FireEmpty   # Killing Floor
       pickup  Pickup      # FEAR, Doom 3, Firearms: Source
       draw    Draw        # FEAR, Doom 3
-      load    Load        # //
+      load    Load        # ^
       lock    Lock        # Unreal Tournament '99
-      launch  Launch      # //
+      launch  Launch      # ^
       setalt  SetAlt      # Killing Floor
-      setalt1 SetAlt1     # //
+      setalt1 SetAlt1     # ^
       grenade FireGrenade # Quake, Quake 2
       mark    Mark        # Phantasy Star Nova
 
@@ -201,9 +201,9 @@ weapons {
    cannon {
       == lsounds/WeaponsM/OmegaCannon
       fire    Fire      # Serious Sam: The First Encounter HD, Halo 3
-      firebig FireBig   # //
+      firebig FireBig   # ^
       fired   FireDark  # Serious Sam: The First Encounter HD
-      prepare Prepare   # //
+      prepare Prepare   # ^
       explode Explode   # Serious Sam: The First Encounter HD, Half-Life 2
       empty   FireEmpty # Killing Floor
       pickup  Pickup    # Halo 3, Doom 3
@@ -224,7 +224,7 @@ weapons {
    punct {
       == lsounds/WeaponsM/OmegaCannon/Punctuator
       fire Fire # FEAR
-      load Load # //
+      load Load # ^
    }
 
    rail {
@@ -241,14 +241,14 @@ weapons {
       == lsounds/WeaponsM/DarkCannon
       wind    Wind    # Half-Life 2
       water1  Water   # Steam
-      water2  Water2  # //
-      water3  Water3  # //
+      water2  Water2  # ^
+      water3  Water3  # ^
       fire1   Fire    # Halo 3
-      fire2   Fire2   # //
-      fire3   Fire3   # //
-      impact1 Impact  # //
-      impact2 Impact2 # //
-      impact3 Impact3 # //
+      fire2   Fire2   # ^
+      fire3   Fire3   # ^
+      impact1 Impact  # ^
+      impact2 Impact2 # ^
+      impact3 Impact3 # ^
 
       $random water {
          water1,

@@ -11,29 +11,29 @@ $playersound player male *jump    Jump     # General 6000
 $playersound player male *usefail UseFail  # Self-made
 $playersound player male *land    Land     # Hexen
 $playersound player male *dive    SplashIn # Call of Duty: Modern Warfare 2
-$playersound player male *surface Splash   # //
+$playersound player male *surface Splash   # ^
 
 player {
    score1       Score1              # Self-made
-   score2       Score2              # //
-   score3       Score3              # //
+   score2       Score2              # ^
+   score3       Score3              # ^
    doublejump   DoubleJump          # DemonSteele/Smash Bros
-   slide        Slide               # //
+   slide        Slide               # ^
    getsigil     DivisionSigilPickup # Resident Evil 4, Fallout 4
    nuke         Nuke                # Touhou 13
-   barrier      Barrier             # //
-   death1       DeathCharge         # //
-   death2       Death               # //
+   barrier      Barrier             # ^
+   death1       DeathCharge         # ^
+   death2       Death               # ^
    zoomin       ZoomIn              # Halo 3
-   zoomout      ZoomOut             # //
+   zoomout      ZoomOut             # ^
    hitground    HitGround           # EYE: Divine Cybermancy
    infraredoff  InfraredOff         # Counter-Strike: Source
    levelup      LevelUp             # Phantasy Star Online
    glare        Glare               # Monster Girl Quest
    lighton      LightOn             # Phantasy Star Online
-   lightoff     LightOff            # //
-   startgame    StartGame           # //
-   showtext     ShowText            # //
+   lightoff     LightOff            # ^
+   startgame    StartGame           # ^
+   showtext     ShowText            # ^
 
    $volume death2 0.7
    $volume nuke 0.7
@@ -54,19 +54,19 @@ player {
    step4 Step4 # ???
 
    stepw1 Water1 # Black Mesa
-   stepw2 Water2 # //
-   stepw3 Water3 # //
-   stepw4 Water4 # //
+   stepw2 Water2 # ^
+   stepw3 Water3 # ^
+   stepw4 Water4 # ^
 
    stepl1 Lava1 # Insurgency
-   stepl2 Lava2 # //
-   stepl3 Lava3 # //
-   stepl4 Lava4 # //
+   stepl2 Lava2 # ^
+   stepl3 Lava3 # ^
+   stepl4 Lava4 # ^
 
    steps1 Slime1 # Battlefield 4
-   steps2 Slime2 # //
-   steps3 Slime3 # //
-   steps4 Slime4 # //
+   steps2 Slime2 # ^
+   steps3 Slime3 # ^
+   steps4 Slime4 # ^
 
    $random step {
       step1,
@@ -98,12 +98,12 @@ player {
 
    == lsounds/GUI
    counter     Payout/Counter     # Halo 3
-   counterdone Payout/CounterDone # //
+   counterdone Payout/CounterDone # ^
 
    YOUVEGOTMAIL Mail # AOL
 
    trmopen   Terminal/Open   # Marathon
-   trmswitch Terminal/Switch # //
+   trmswitch Terminal/Switch # ^
 
    == lsounds/Weapons
    wings Wings # Hexen

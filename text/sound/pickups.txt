@@ -11,38 +11,38 @@ player.pickup {
    upgrbody    UpgrBody    # Killing Floor, ???
    upgrextr    UpgrExtr    # Phantasy Star Nova
    upgrweap    UpgrWeap    # Halo 3
-   upgrcbi     CBIUpgrade  # //
+   upgrcbi     CBIUpgrade  # ^
    item        Item        # Firearms: Source
    barrier     Barrier     # Touhou 13
    infrared    Goggles     # ???
    redkey      RedKey      # ???
-   yellowkey   YellowKey   # //
-   bluekey     BlueKey     # //
+   yellowkey   YellowKey   # ^
+   bluekey     BlueKey     # ^
    redskull2   SKULL       # Deus Ex
    redskull1   RedSkull    # Halo 3
-   yellowskull YellowSkull # //
-   blueskull   BlueSkull   # //
+   yellowskull YellowSkull # ^
+   blueskull   BlueSkull   # ^
    evil        EvilItem    # Phantasy Star: Nova
    cells       CellSmall   # ???
-   cellb       CellPack    # //
-   shells      ShellSmall  # //
-   shellb      ShellPack   # //
+   cellb       CellPack    # ^
+   shells      ShellSmall  # ^
+   shellb      ShellPack   # ^
    rockets     RocketSmall # Halo 3
    rocketb     RocketBig   # Quake 2
    mana        Mana        # Devil May Cry 2
    scorebig    ScoreBig    # Self-made
-   scoresmall  ScoreSmall  # //
+   scoresmall  ScoreSmall  # ^
    stimpack    Stimpack    # Doom 3
    medikit     Medikit     # Fallout 4
    invuln      Invuln      # Star Wars: Jedi Academy
    mega        Mega        # Halo 3
-   super       Super       # //
+   super       Super       # ^
    allmap      AllMap      # Half-Life
    radsuit     Radsuit     # Call of Duty: Modern Warfare 2
-   berserk     Berserk     # //
+   berserk     Berserk     # ^
    armor       Armor       # E.Y.E: Divine Cybermancy
-   boots       Boots       # //
-   ring        Ring        # //
+   boots       Boots       # ^
+   ring        Ring        # ^
 
    armor {
       pink   ArmorPink   # ...
@@ -52,15 +52,15 @@ player.pickup {
    scorechip ScoreChip # Half-Life 2
 
    coin1 Coin1 # Sony Media 1001 Sound Effects
-   coin2 Coin2 # //
-   coin3 Coin3 # //
+   coin2 Coin2 # ^
+   coin3 Coin3 # ^
 
    gem Gem # Fallout 4
 
    material1 Material1 # Chronicles of Riddick
-   material2 Material2 # //
-   material3 Material3 # //
-   material4 Material4 # //
+   material2 Material2 # ^
+   material3 Material3 # ^
+   material4 Material4 # ^
 
    $random coin {
       coin1,

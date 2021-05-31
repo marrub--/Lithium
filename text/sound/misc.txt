@@ -15,7 +15,7 @@ $limit explosion 0
 $attenuation explosion 0.5
 
 == lsounds
-silence Silence # //
+silence Silence # Self-made
 
 MMMMHMHMMMHMMM MMMMHMHMMMHMMM # ?????
 YOUSONOFABITCH YOUSONOFABITCH # ???????????
@@ -29,11 +29,11 @@ misc {
 
    == lsounds/World/Teleport
    teleport  Teleport    # Self-made
-   teleport5 Teleport5   # //
-   teleport6 Teleport6   # //
-   teleport7 Teleport7   # //
+   teleport5 Teleport5   # ^
+   teleport6 Teleport6   # ^
+   teleport7 Teleport7   # ^
    teleout   TeleportOut # Touhou 13
-   telein    TeleportIn  # //
+   telein    TeleportIn  # ^
 }
 
 ghost {
@@ -47,7 +47,7 @@ intermission {
    tick      InterTick # Halo 3
    nextstage InterNext # Halo 3, Phantasy Star Online
    paststats InterPass # Phantasy Star Online
-   mid       InterMid  # //
+   mid       InterMid  # ^
 
    $pitchshift nextstage 0
    $pitchshift paststats 0
@@ -85,9 +85,9 @@ misc {
 menu {
    == lsounds/GUI/Menu
    backup   Back     # Phantasy Star Online
-   cursor   Move     # //
-   activate Activate # //
-   choose   Choose   # //
+   cursor   Move     # ^
+   activate Activate # ^
+   choose   Choose   # ^
 
    $alias invalid = .player.cbi.clickinvalid
    $alias change  = .player.cbi.slidertick

@@ -10,18 +10,18 @@ amb {
    == lsounds/World/Ambiance
    # Ambiance
    rain       Rain          # ???
-   wind       Wind          # //
-   rainout    RainOut       # //
-   windout    WindOut       # //
+   wind       Wind          # ^
+   rainout    RainOut       # ^
+   windout    WindOut       # ^
    bigcomp    BigComputer   # EYE: Divine Cybermancy
    alarmdist1 AlarmDistant  # Half-Life 2
-   alarmdist2 AlarmDistant2 # //
-   alarmdist3 AlarmDistant3 # //
-   alarmdist4 AlarmDistant4 # //
-   ship       Ship          # //
-   field      NoEntry       # //
-   vent       VentPump      # //
-   lightson   LightsOn      # //
+   alarmdist2 AlarmDistant2 # ^
+   alarmdist3 AlarmDistant3 # ^
+   alarmdist4 AlarmDistant4 # ^
+   ship       Ship          # ^
+   field      NoEntry       # ^
+   vent       VentPump      # ^
+   lightson   LightsOn      # ^
    computer   Computer      # Quake
 
    fire Fire # Hexen
@@ -54,9 +54,9 @@ amb {
    lamp1    LampTall     # ???
    lamp2    LampSmall    # ???
    shatter1 GlassBreak1  # Half-Life 2
-   shatter2 GlassBreak2  # //
-   metalx   MetalExplode # //
-   woodx    WoodExplode  # //
+   shatter2 GlassBreak2  # ^
+   metalx   MetalExplode # ^
+   woodx    WoodExplode  # ^
 
    $random shatter {
       shatter1,
@@ -86,10 +86,10 @@ world.splash {
    nukage Nukage # ???
 
    water1 Water1 # Call of Duty: Modern Warfare 2
-   water2 Water2 # //
-   water3 Water3 # //
-   water4 Water4 # //
-   water5 Water5 # //
+   water2 Water2 # ^
+   water3 Water3 # ^
+   water4 Water4 # ^
+   water5 Water5 # ^
 
    sludge1 Sludge1 # ???
    sludge2 Sludge2 # ???

@@ -12,7 +12,7 @@ weapons {
       fire     Fire     # ???
       open     Open     # ???
       eject    Eject    # Killing Floor
-      load     Load     # //
+      load     Load     # ^
       close    Close    # Half-Life 2, Fallout 4
       draw     Draw     # ???
       finalize Finalize # Monster Girl Quest
@@ -22,15 +22,15 @@ weapons {
    erifle {
       == lsounds/WeaponsC/ShockRifle
       pickup    Pickup    # Halo 3
-      draw      Draw      # //
+      draw      Draw      # ^
       fire      Fire      # Return to Castle Wolfenstein, Halo 3
       zap1      Zap1      # Half-Life 2
-      zap2      Zap2      # //
-      zap3      Zap3      # //
+      zap2      Zap2      # ^
+      zap3      Zap3      # ^
       reloadout ReloadOut # Return to Castle Wolfenstein
-      reloadin  ReloadIn  # //
+      reloadin  ReloadIn  # ^
       shock1    Shock1    # Half-Life 2
-      shock2    Shock2    # //
+      shock2    Shock2    # ^
 
       $random shock {
          shock1,
@@ -49,7 +49,7 @@ weapons {
    cshotgun {
       == lsounds/WeaponsC/SPAS
       fire   Fire      # FEAR, Dynamic Range
-      fire2  Fire2     # //
+      fire2  Fire2     # ^
       load   Load      # Halo 3
       pump   Pump      # Dynamic Range
       empty  FireEmpty # EYE: Divine Cybermancy
@@ -60,17 +60,17 @@ weapons {
    smg {
       == lsounds/WeaponsC/SMG
       fire     Fire         # FEAR
-      firedone FireDone     # //
+      firedone FireDone     # ^
       firehit  FireHit      # Half-Life 2 MMod
       eject    EjectRod     # Killing Floor
-      insert   InsertRod    # //
+      insert   InsertRod    # ^
       heat     HeatDisperse # Self-made
       lift     Lift         # Call of Duty: Modern Warfare 2
       open     TopOpen      # Half-Life 2
-      close    TopClose     # //
-      magin2   MagInLong    # //
+      close    TopClose     # ^
+      magin2   MagInLong    # ^
       magout   MagOut       # Call of Duty: Modern Warfare 2
-      magin    MagIn        # //
+      magin    MagIn        # ^
       draw     Draw         # Halo 3
       pickup   Pickup       # FEAR
    }
@@ -78,18 +78,18 @@ weapons {
    ionrifle {
       == lsounds/WeaponsC/IonRifle
       fire    Fire      # Fallout: New Vegas
-      fire2   Fire2     # //
+      fire2   Fire2     # ^
       eject   Eject     # Killing Floor
-      load    Load      # //
+      load    Load      # ^
       magout  MagOut    # Halo 3
-      magin   MagIn     # //
-      zoomout ZoomOut   # //
-      zoomin  ZoomIn    # //
+      magin   MagIn     # ^
+      zoomout ZoomOut   # ^
+      zoomin  ZoomIn    # ^
       empty   FireEmpty # Killing Floor
       draw    Draw      # Killing Floor, Fallout 3
       pickup  Pickup    # Killing Floor, Halo 3
       cfire1  Charged1  # Halo 3
-      cfire2  Charged2  # //
+      cfire2  Charged2  # ^
       charge  Charge    # Quake 2
 
       $random cfire {
@@ -103,7 +103,7 @@ weapons {
    shipgun {
       == lsounds/WeaponsC/StarDestroyer
       explode   Explode      # Halo 3
-      fire      Fire         # //
+      fire      Fire         # ^
       firesol   FireSolspear # Halo 3, Fallout 4
       prepare   Charge       # Halo 3, Devil May Cry 2
       empty     FireEmpty    # Counter-Strike: Source, Phantasy Star Online
@@ -119,7 +119,7 @@ weapons {
    blade {
       == lsounds/WeaponsC/Blade
       slash Slash # Monster Girl Quest
-      hit   Hit   # //
+      hit   Hit   # ^
    }
 
    delear {
@@ -134,7 +134,7 @@ weapons {
       == lsounds/WeaponsC/Feuer
       explode Explode # Monster Girl Quest
       fire    Fire    # Touhou 13
-      final   Final   # //
+      final   Final   # ^
 
       $limit explode 0
       $volume fire 0.9
@@ -146,7 +146,7 @@ weapons {
       slash2  Fire2   # ???
       slash3  Fire3   # ???
       end     End     # Phantasy Star Nova
-      reflect Reflect # //
+      reflect Reflect # ^
 
       $random slash {
          slash1,
@@ -176,7 +176,7 @@ weapons {
    cercle {
       == lsounds/WeaponsC/Cercle
       begin  Begin  # Phantasy Star Online
-      attack Attack # //
+      attack Attack # ^
    }
 }
 

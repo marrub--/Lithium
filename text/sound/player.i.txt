@@ -11,22 +11,22 @@
 $playeralias    informant male *land    player.informant.land
 $playeralias    informant male *grunt   silence
 $playersound    informant male *jump    Jump       # Self-made
-$playersound    informant male *death   Death      # //
-$playersound    informant male *xdeath  XDeath     # //
+$playersound    informant male *death   Death      # ^
+$playersound    informant male *xdeath  XDeath     # ^
 $playersound    informant male *pain100 PainSmall  # Doom
-$playersounddup informant male *pain75  *pain100   # //
-$playersound    informant male *pain50  Pain       # //
-$playersounddup informant male *pain25  *pain50    # //
+$playersounddup informant male *pain75  *pain100   # ^
+$playersound    informant male *pain50  Pain       # ^
+$playersounddup informant male *pain25  *pain50    # ^
 
 player.informant {
    land1 Land1 # Phantasy Star: Nova
-   land2 Land2 # //
-   land3 Land3 # //
+   land2 Land2 # ^
+   land3 Land3 # ^
 
    step1 Footsteps/Step1 # Fallout 4
-   step2 Footsteps/Step2 # //
-   step3 Footsteps/Step3 # //
-   step4 Footsteps/Step4 # //
+   step2 Footsteps/Step2 # ^
+   step3 Footsteps/Step3 # ^
+   step4 Footsteps/Step4 # ^
 
    dodge Dodge # Monster Girl Quest
 

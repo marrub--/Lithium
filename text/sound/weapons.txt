@@ -10,26 +10,26 @@ casings {
    == lsounds/Weapons/Effects/Casings
    bullet {
       bounce1  CaseBounce1  # ???
-      bounce2  CaseBounce2  # //
-      bounce3  CaseBounce3  # //
-      bounce4  CaseBounce4  # //
-      bounce5  CaseBounce5  # //
-      bounce6  CaseBounce6  # //
-      bounce7  CaseBounce7  # //
-      bounce8  CaseBounce8  # //
-      bounce9  CaseBounce9  # //
-      bounce10 CaseBounce10 # //
+      bounce2  CaseBounce2  # ^
+      bounce3  CaseBounce3  # ^
+      bounce4  CaseBounce4  # ^
+      bounce5  CaseBounce5  # ^
+      bounce6  CaseBounce6  # ^
+      bounce7  CaseBounce7  # ^
+      bounce8  CaseBounce8  # ^
+      bounce9  CaseBounce9  # ^
+      bounce10 CaseBounce10 # ^
 
       die1  CaseStop1  # ???
-      die2  CaseStop2  # //
-      die3  CaseStop3  # //
-      die4  CaseStop4  # //
-      die5  CaseStop5  # //
-      die6  CaseStop6  # //
-      die7  CaseStop7  # //
-      die8  CaseStop8  # //
-      die9  CaseStop9  # //
-      die10 CaseStop10 # //
+      die2  CaseStop2  # ^
+      die3  CaseStop3  # ^
+      die4  CaseStop4  # ^
+      die5  CaseStop5  # ^
+      die6  CaseStop6  # ^
+      die7  CaseStop7  # ^
+      die8  CaseStop8  # ^
+      die9  CaseStop9  # ^
+      die10 CaseStop10 # ^
 
       $random bounce {
          bounce1,
@@ -62,16 +62,16 @@ casings {
 
    shell {
       bounce1 ShellBounce1 # ???
-      bounce2 ShellBounce2 # //
-      bounce3 ShellBounce3 # //
-      bounce4 ShellBounce4 # //
-      bounce5 ShellBounce5 # //
+      bounce2 ShellBounce2 # ^
+      bounce3 ShellBounce3 # ^
+      bounce4 ShellBounce4 # ^
+      bounce5 ShellBounce5 # ^
 
       die1 ShellBounce1 # ???
-      die2 ShellBounce2 # //
-      die3 ShellBounce3 # //
-      die4 ShellBounce4 # //
-      die5 ShellBounce5 # //
+      die2 ShellBounce2 # ^
+      die3 ShellBounce3 # ^
+      die4 ShellBounce4 # ^
+      die5 ShellBounce5 # ^
 
       $random bounce {
          bounce1,
@@ -97,12 +97,12 @@ weapons {
    # Magazine
    == lsounds/Weapons/Effects/Magazine
    magbounce1 Drop1 # Halo 3
-   magbounce2 Drop2 # //
-   magbounce3 Drop3 # //
+   magbounce2 Drop2 # ^
+   magbounce3 Drop3 # ^
 
    magbouncef1 DropFull1 # Halo 3
-   magbouncef2 DropFull2 # //
-   magbouncef3 DropFull3 # //
+   magbouncef2 DropFull2 # ^
+   magbouncef3 DropFull3 # ^
 
    $random magbounce {
       magbounce1,
@@ -124,16 +124,16 @@ weapons {
       # sord
       == lsounds/Weapons/Sword
       chargeup Charge  # Touhou 9: Phantasmagoria of Flower View
-      attack   Charge1 # //
-      swing    Swing   # //
-      swing1   Swing1  # //
-      charge   Charge2 # //
+      attack   Charge1 # ^
+      swing    Swing   # ^
+      swing1   Swing1  # ^
+      charge   Charge2 # ^
 
       normal1 Swing2 # Ninja Gaiden Black
-      normal2 Swing3 # //
-      normal3 Swing4 # //
-      normal4 Swing5 # //
-      normal5 Swing6 # //
+      normal2 Swing3 # ^
+      normal3 Swing4 # ^
+      normal4 Swing5 # ^
+      normal5 Swing6 # ^
 
       $random normal {
          normal1,
@@ -144,10 +144,10 @@ weapons {
       }
 
       hit1 Hit1 # Ninja Gaiden Black
-      hit2 Hit2 # //
-      hit3 Hit3 # //
-      hit4 Hit4 # //
-      hit5 Hit5 # //
+      hit2 Hit2 # ^
+      hit3 Hit3 # ^
+      hit4 Hit4 # ^
+      hit5 Hit5 # ^
 
       $random hit {
          hit1,
@@ -167,19 +167,19 @@ effects {
    puff {
       == lsounds/Weapons/Effects/Ricochet
       ricochet1  Ric1  # Devil May Cry 2
-      ricochet2  Ric2  # //
-      ricochet3  Ric3  # //
-      ricochet4  Ric4  # //
+      ricochet2  Ric2  # ^
+      ricochet3  Ric3  # ^
+      ricochet4  Ric4  # ^
       ricochet5  Ric5  # Half-Life 2
-      ricochet6  Ric6  # //
-      ricochet7  Ric7  # //
-      ricochet8  Ric8  # //
-      ricochet9  Ric9  # //
+      ricochet6  Ric6  # ^
+      ricochet7  Ric7  # ^
+      ricochet8  Ric8  # ^
+      ricochet9  Ric9  # ^
       ricochet10 Ric10 # Half-Life 2 MMod
-      ricochet11 Ric11 # //
-      ricochet12 Ric12 # //
-      ricochet13 Ric13 # //
-      ricochet14 Ric14 # //
+      ricochet11 Ric11 # ^
+      ricochet12 Ric12 # ^
+      ricochet13 Ric13 # ^
+      ricochet14 Ric14 # ^
 
       $random ricochet {
          ricochet1,
@@ -203,16 +203,16 @@ effects {
 
    == lsounds/Weapons/Effects/GEExplosion
    geexplosion1  expl1  # GoldenEye 007
-   geexplosion2  expl2  # //
-   geexplosion3  expl3  # //
-   geexplosion4  expl4  # //
-   geexplosion5  expl5  # //
-   geexplosion6  expl6  # //
-   geexplosion7  expl7  # //
-   geexplosion8  expl8  # //
-   geexplosion9  expl9  # //
-   geexplosion10 expl10 # //
-   geexplosion11 expl11 # //
+   geexplosion2  expl2  # ^
+   geexplosion3  expl3  # ^
+   geexplosion4  expl4  # ^
+   geexplosion5  expl5  # ^
+   geexplosion6  expl6  # ^
+   geexplosion7  expl7  # ^
+   geexplosion8  expl8  # ^
+   geexplosion9  expl9  # ^
+   geexplosion10 expl10 # ^
+   geexplosion11 expl11 # ^
 
    $random geexplosion {
       geexplosion1,
