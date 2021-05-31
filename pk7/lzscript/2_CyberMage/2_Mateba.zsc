@@ -140,6 +140,7 @@ default
    Weapon.SlotNumber 2;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/mateba/draw";
+   Inventory.AltHudIcon "REVLA0";
 
    +WEAPON.NOAUTOFIRE
 }

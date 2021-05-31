@@ -54,6 +54,7 @@ default
    Weapon.SlotNumber 3;
    Weapon.SlotPriority 0.9;
    Weapon.UpSound "weapons/lshotgun/draw";
+   Inventory.AltHudIcon "LSHTZ0";
 
    +WEAPON.NOAUTOFIRE
 }

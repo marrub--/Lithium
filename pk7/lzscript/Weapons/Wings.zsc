@@ -33,6 +33,7 @@ default
 {
    Tag "Wings of Death";
    Weapon.SlotNumber 0;
+   Inventory.AltHudIcon "DWNGA0";
 
    +WEAPON.CHEATNOTWEAPON
 }

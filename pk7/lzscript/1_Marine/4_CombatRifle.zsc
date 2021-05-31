@@ -102,6 +102,7 @@ default
    Weapon.SlotNumber 4;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/rifle/draw";
+   Inventory.AltHudIcon "RIFLA0";
 
    +WEAPON.NOAUTOAIM
 }

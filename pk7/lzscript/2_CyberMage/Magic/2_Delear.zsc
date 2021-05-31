@@ -100,6 +100,7 @@ default
    Weapon.SlotNumber 0;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/delear/draw";
+   Inventory.AltHudIcon "SPELG0";
 
    +WEAPON.DONTBOB
    -WEAPON.NOAUTOFIRE

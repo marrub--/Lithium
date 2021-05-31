@@ -61,6 +61,7 @@ default
    Weapon.SlotNumber 4;
    Weapon.SlotPriority 0.9;
    Weapon.UpSound "weapons/sniper/draw";
+   Inventory.AltHudIcon "SNIPA0";
 
    +WEAPON.NOAUTOFIRE
 }

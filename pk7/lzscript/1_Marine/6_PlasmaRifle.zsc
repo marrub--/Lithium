@@ -55,6 +55,7 @@ default
    Weapon.SlotNumber 6;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/plasma/draw";
+   Inventory.AltHudIcon "PLASA0";
 }
 
 action(Weapon) void Lith_A_FirePlasma()

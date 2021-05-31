@@ -17,6 +17,7 @@ default
    Weapon.UpSound "weapons/minigun/draw";
    Weapon.SlotNumber 4;
    Weapon.SlotPriority 1;
+   Inventory.AltHudIcon "MNGGZ0";
 }
 
 double     m_windUp;

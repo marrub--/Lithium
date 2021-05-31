@@ -20,6 +20,7 @@ default
    Weapon.BobRangeY 1.1;
    Weapon.BobRangeX 0.9;
    Lith_Weapon.MagSize 10;
+   Inventory.AltHudIcon "MLAUA0";
 
    +WEAPON.CHEATNOTWEAPON
 }

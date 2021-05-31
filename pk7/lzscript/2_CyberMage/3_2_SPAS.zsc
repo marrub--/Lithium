@@ -102,6 +102,7 @@ default
    Weapon.SlotNumber 3;
    Weapon.SlotPriority 0.95;
    Weapon.UpSound "weapons/cshotgun/draw";
+   Inventory.AltHudIcon "CSHGZ0";
 
    +WEAPON.NOAUTOFIRE
 }

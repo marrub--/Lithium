@@ -19,6 +19,7 @@ default
    Weapon.BobRangeY 0.3;
    Weapon.UpSound "weapons/revolver/draw";
    Lith_Weapon.MagSize 6;
+   Inventory.AltHudIcon "REVLA0";
 
    +WEAPON.NOAUTOFIRE
 }

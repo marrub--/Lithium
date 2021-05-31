@@ -213,11 +213,12 @@ class Lith_ShockRifle : Lith_CWeapon;
 default
 {
    Lith_Weapon.SpawnType "Lith_ShotgunPickup";
+   Lith_Weapon.MagSize 7;
    Tag "$LITH_INFO_SHORT_ShockRifle";
    Weapon.UpSound "weapons/erifle/draw";
    Weapon.SlotNumber 3;
    Weapon.SlotPriority 1;
-   Lith_Weapon.MagSize 7;
+   Inventory.AltHudIcon "CSRGY0";
 
    +WEAPON.NOAUTOFIRE
 }

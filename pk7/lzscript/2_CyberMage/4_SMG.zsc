@@ -163,6 +163,7 @@ default
    Weapon.SlotNumber 4;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/smg/draw";
+   Inventory.AltHudIcon "CSMGZ0";
 }
 
 double m_Recoil;

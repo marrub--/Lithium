@@ -51,6 +51,7 @@ default
    Weapon.SlotNumber 6;
    Weapon.SlotPriority 0.9;
    Weapon.UpSound "weapons/plasdiff/draw";
+   Inventory.AltHudIcon "PDIFA0";
 
    +WEAPON.CHEATNOTWEAPON
 }

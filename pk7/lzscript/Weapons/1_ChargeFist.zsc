@@ -78,6 +78,7 @@ default
    Weapon.Kickback 100;
    Weapon.SlotNumber 1;
    Weapon.SlotPriority 1;
+   Inventory.AltHudIcon "CFISZ0";
 
    +WEAPON.CHEATNOTWEAPON
    +WEAPON.MELEEWEAPON

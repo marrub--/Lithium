@@ -258,6 +258,7 @@ default
    Weapon.SlotNumber 0;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/cercle/draw";
+   Inventory.AltHudIcon "SPELE0";
 
    +WEAPON.NOAUTOFIRE
 }
