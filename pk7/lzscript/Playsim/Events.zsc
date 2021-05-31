@@ -500,7 +500,7 @@ override bool InputProcess(InputEvent ev)
 
 override void NetworkProcess(ConsoleEvent ev)
 {
-   if(ev.Name == "Lith_Key") CallACS("Lith_KeyDown", ev.Player, ev.Args[0]);
+   if(ev.Name == "Lith_Key") CallACS("Lith_KeyDown", ev.Args[0]);
 }
 
 override void RenderOverlay(RenderEvent evt) {

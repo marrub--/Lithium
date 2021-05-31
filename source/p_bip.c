@@ -21,10 +21,10 @@
 /* Static Functions -------------------------------------------------------- */
 
 dynam_aut script static
-void MailNotify(struct player *p, cstr name) {
-   p->setActivator();
+void MailNotify(cstr name) {
+   pl.setActivator();
 
-   p->bip.mailreceived++;
+   pl.bip.mailreceived++;
 
    #ifndef NDEBUG
    if(get_bit(dbgflags, dbgf_bip)) return;
@@ -35,17 +35,17 @@ void MailNotify(struct player *p, cstr name) {
    char remote[128];
    strcpy(remote, LanguageC(LANG "INFO_REMOT_%s", name));
 
-   p->logB(1, LC(LANG "LOG_MailRecv"), remote);
+   pl.logB(1, LC(LANG "LOG_MailRecv"), remote);
 
    if(ACS_Random(1, 10000) == 1) {
-      p->bip.mailtrulyreceived++;
+      pl.bip.mailtrulyreceived++;
       ACS_LocalAmbientSound(ss_player_YOUVEGOTMAIL, 127);
    } else {
       ACS_LocalAmbientSound(ss_player_cbi_mail, 127);
    }
 }
 
-script static void UnlockPage(struct player *p, struct page *page) {
+script static void UnlockPage(struct page *page) {
    if(!get_bit(page->flags, _page_available)) {
       Dbg_Log(log_bip, "ERROR page '%s' not available", page->info->name);
       return;
@@ -55,19 +55,19 @@ script static void UnlockPage(struct player *p, struct page *page) {
       Dbg_Log(log_bip, "unlocking page '%s'", page->info->name);
 
       if(page->info->category == BIPC_MAIL && !page->info->aut) {
-         MailNotify(p, page->info->name);
+         MailNotify(page->info->name);
       }
 
       page->flags |= ticks;
       set_bit(page->flags, _page_unlocked);
 
-      p->bip.pageavail++;
-      p->bip.categoryavail[page->info->category]++;
+      pl.bip.pageavail++;
+      pl.bip.categoryavail[page->info->category]++;
 
       for(i32 i = 0;
           i < countof(page->info->unlocks) && page->info->unlocks[i][0];
           i++) {
-         P_BIP_Unlock(p, page->info->unlocks[i]);
+         P_BIP_Unlock(page->info->unlocks[i]);
       }
    } else {
       Dbg_Log(log_bip, "already unlocked page '%s'", page->info->name);
@@ -89,15 +89,15 @@ static u32 NameToNum(cstr discrim, cstr name) {
 
 /* Extern Functions -------------------------------------------------------- */
 
-script void P_BIP_PInit(struct player *p) {
+script void P_BIP_PInit() {
    #ifndef NDEBUG
-   if(dbglevel) p->logH(1, "There are %u info pages!", BIP_MAX);
+   if(dbglevel) pl.logH(1, "There are %u info pages!", BIP_MAX);
    #endif
 
-   p->bip.pagemax = 0;
+   pl.bip.pagemax = 0;
 
    for_category() {
-      p->bip.categorymax[categ] = 0;
+      pl.bip.categorymax[categ] = 0;
    }
 
    for_page() {
@@ -106,13 +106,13 @@ script void P_BIP_PInit(struct player *p) {
    }
 
    for_page() {
-      bool avail = page->info->pclass & p->pclass;
+      bool avail = page->info->pclass & pl.pclass;
 
       if(avail) {
          set_bit(page->flags, _page_available);
 
-         p->bip.pagemax++;
-         p->bip.categorymax[page->info->category]++;
+         pl.bip.pagemax++;
+         pl.bip.categorymax[page->info->category]++;
       }
    }
 
@@ -125,26 +125,26 @@ script void P_BIP_PInit(struct player *p) {
           false
           #endif
           || page->info->aut)) {
-         UnlockPage(p, page);
+         UnlockPage(page);
       }
    }
 
-   p->bip.init = true;
+   pl.bip.init = true;
 }
 
-void P_BIP_Unlock(struct player *p, cstr name) {
-   u32 num = NameToNum(p->discrim, name);
+void P_BIP_Unlock(cstr name) {
+   u32 num = NameToNum(pl.discrim, name);
 
    if(num == BIP_MAX) {
       Dbg_Log(log_bip, "ERROR no page '%s' found", name);
       return;
    }
 
-   UnlockPage(p, &p->bip.pages[num]);
+   UnlockPage(&pl.bip.pages[num]);
 }
 
-void P_BIP_PQuit(struct player *p) {
-   p->bip.init = false;
+void P_BIP_PQuit() {
+   pl.bip.init = false;
 }
 
 cstr P_BIP_CategoryToName(u32 category) {
@@ -160,9 +160,9 @@ cstr P_BIP_CategoryToName(u32 category) {
 
 script_str ext("ACS") addr(OBJ "BIPUnlock")
 void Sc_UnlockPage(void) {
-   with_player(LocalPlayer) {
+   if(!P_None()) {
       bip_name_t tag; lstrcpy_str(tag, ServCallS(sm_GetBipName));
-      P_BIP_Unlock(p, tag);
+      P_BIP_Unlock(tag);
    }
 }
 

@@ -21,8 +21,8 @@ Str(sp_HUD_D_WepBack,   s":HUD_D:WepBack");
 
 /* Static Functions -------------------------------------------------------- */
 
-static void HUD_Ammo(struct player *p) {
-   struct invweapon const *wep = p->weapon.cur;
+static void HUD_Ammo() {
+   struct invweapon const *wep = pl.weapon.cur;
 
    cstr type = nil;
 
@@ -62,7 +62,7 @@ static void HUD_Ammo(struct player *p) {
    }
 }
 
-static void HUD_Health(struct player *p) {
+static void HUD_Health() {
    StrAry(ws, s":HUD:H_D27", s":HUD:H_D28", s":HUD:H_D24", s":HUD:H_D23",
               s":HUD:H_D22", s":HUD:H_D21", s":HUD:H_D25", s":HUD:H_D26");
 
@@ -71,11 +71,11 @@ static void HUD_Health(struct player *p) {
    PrintTextChS(u8"");
    PrintTextX(sf_lmidfont, Cr(blue), 8,4, 229,0, ptf_no_utf);
 
-   HUD_DrawHealth(p, p->health, 18, 228, Cr(blue), 0);
+   HUD_DrawHealth(pl.health, 18, 228, Cr(blue), 0);
 
-   str gfx = ws[p->weapon.cur->info->slot];
+   str gfx = ws[pl.weapon.cur->info->slot];
 
-   i32 x = (8 + p->ticks) % 40;
+   i32 x = (8 + pl.ticks) % 40;
 
    for(i32 i = 0; i < 20; i++) {
       i32 xx = x - i;
@@ -87,21 +87,21 @@ static void HUD_Health(struct player *p) {
 
 /* Extern Functions -------------------------------------------------------- */
 
-void Upgr_HeadsUpDisD_Render(struct player *p, struct upgrade *upgr) {
-   if(!p->hudenabled) return;
+void Upgr_HeadsUpDisD_Render(struct upgrade *upgr) {
+   if(!pl.hudenabled) return;
 
-   HUD_Log(p, Cr(blue), 0, -10);
-   HUD_KeyInd(p, 180, 21, true, 0.8);
-   HUD_Score(p, "%s\Cnscr", p->score, sf_smallfnt, Cr(blue), 160,0);
+   HUD_Log(Cr(blue), 0, -10);
+   HUD_KeyInd(180, 21, true, 0.8);
+   HUD_Score("%s\Cnscr", pl.score, sf_smallfnt, Cr(blue), 160,0);
 
-   if(p->getCVarI(sc_hud_showweapons))
+   if(pl.getCVarI(sc_hud_showweapons))
       PrintSprite(sp_HUD_D_WepBack, 320,2, 218,2);
 
-   HUD_WeaponSlots(p, Cr(wseld1), Cr(wseld2), Cr(wseld3), Cr(wselds), 323, 216);
+   HUD_WeaponSlots(Cr(wseld1), Cr(wseld2), Cr(wseld3), Cr(wselds), 323, 216);
 
    /* Status */
-   HUD_Ammo(p);
-   HUD_Health(p);
+   HUD_Ammo();
+   HUD_Health();
 }
 
 /* EOF */

@@ -64,17 +64,14 @@ void CBI_Install(i32 num)
       case cupg_hasupgr2: cbiperf += 40; break;
    }
 
-   for_player()
-   {
-      p->setActivator();
+   pl.setActivator();
 
-      ifauto(struct cupgdef const *, c, GetCUpgr(p->pclass, num))
-         if(c->nam)
+   ifauto(struct cupgdef const *, c, GetCUpgr(pl.pclass, num))
+      if(c->nam)
       {
          bip_name_t tag; lstrcpy_str(tag, c->nam);
-         P_BIP_Unlock(p, tag);
+         P_BIP_Unlock(tag);
       }
-   }
 }
 
 void CBI_InstallSpawned(void)
@@ -94,13 +91,12 @@ void Sc_CBIItemWasSpawned(i32 num)
 script_str ext("ACS") addr(OBJ "PickupCBIItem")
 void Sc_PickupCBIItem(i32 num)
 {
-   with_player(LocalPlayer)
-      FadeFlash(0, 255, 0, 0.7, 0.5);
+   pl.setActivator();
+   FadeFlash(0, 255, 0, 0.7, 0.5);
 
-   for_player() {
-      ifauto(struct cupgdef const *, c, GetCUpgr(p->pclass, num))
-         if(c->msg) p->logB(1, LC(LANG "LOG_CBI"), Language(LANG "LOG_CBI_%S", c->msg));
-   }
+   ifauto(struct cupgdef const *, c, GetCUpgr(pl.pclass, num))
+      if(c->msg)
+         pl.logB(1, LC(LANG "LOG_CBI"), Language(LANG "LOG_CBI_%S", c->msg));
 
    CBI_Install(num);
 }

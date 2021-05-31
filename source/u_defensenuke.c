@@ -15,7 +15,7 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-void Upgr_DefenseNuke_Enter(struct player *p, struct upgrade *upgr)
+void Upgr_DefenseNuke_Enter(struct upgrade *upgr)
 {
    ServCallI(sm_Nuke);
 }

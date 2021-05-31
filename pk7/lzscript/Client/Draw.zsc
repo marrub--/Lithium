@@ -34,21 +34,21 @@ enum DrawType {
 }
 
 struct DrawData {
-   uint8 Type;
-   int16 X, Y, Z, W;
+   uint8 type;
 
-   textureid Tex;
-   color     C;
-   double    A;
+   uint8 cr;
+   uint8 lnY;
+   uint8 style;
 
-   uint8 Cr;
-   uint8 LnY;
-   uint8 Style;
+   int16 x, y, z, w;
 
-   Font          Fnt;
-   array<string> Txt;
-   array<int>    LnW;
-   array<int>    LnX;
+   color     c;
+   textureId tex;
+   double    a;
+
+   Font          fnt;
+   array<string> txt;
+   array<int>    lnX;
 }
 
 struct FadeMsg {
@@ -65,20 +65,20 @@ const Y_MASK = 0x1FFFFFFF;
 
 /* Members ----------------------------------------------------------------- */
 
-transient play DrawData[2000] m_D;
-transient play uint m_DPtr;
-transient play FadeMsg[256] m_FadeMsg;
-transient play vector2 m_VirtualSize;
-transient play int m_BreakWidth;
-transient play bool m_NoDraw;
-transient play bool m_ForceDraw;
+private transient play DrawData[8000] m_D;
+private transient play uint m_DPtr;
+private transient play FadeMsg[256] m_FadeMsg;
+private transient play vector2 m_VirtualSize;
+private transient play int m_BreakWidth;
+private transient play bool m_NoDraw;
+private transient play bool m_ForceDraw;
 
-transient Font m_UtfBigFont;
-transient Font m_UtfTrmFont;
+private transient Font m_UtfBigFont;
+private transient Font m_UtfTrmFont;
 transient Font m_UtfFont;
 
-Shape2DTransform m_RectXf;
-Shape2D m_Rect;
+private Shape2DTransform m_RectXf;
+private Shape2D m_Rect;
 
 bool m_English;
 
@@ -329,13 +329,14 @@ static void LT(Actor mo, string txt, string fnt, int arg0, int arg1, int arg2)
    lns = brl.Count();
 
    cl.m_D[p].Txt.Resize(lns);
-   cl.m_D[p].LnW.Resize(lns);
+   array<int> LnW;
+   LnW.Resize(lns);
 
    for(uint i = 0, w; i < lns; i++) {
       cl.m_D[p].Txt[i] = brl.StringAt(i);
-      cl.m_D[p].LnW[i] = brl.StringWidth(i);
+      LnW[i] = brl.StringWidth(i);
 
-      if(lnx < (w = cl.m_D[p].LnW[i])) lnx = w;
+      if(lnx < (w = LnW[i])) lnx = w;
    }
 
    switch(xa) {
@@ -359,9 +360,9 @@ static void LT(Actor mo, string txt, string fnt, int arg0, int arg1, int arg2)
    cl.m_D[p].LnX.Resize(lns);
 
    for(uint i = 0; i < lns; i++) {
-           if(xa == 3) cl.m_D[p].LnX[i] = cl.m_D[p].LnW[i];
+           if(xa == 3) cl.m_D[p].LnX[i] = LnW[i];
       else if(xa <  4) cl.m_D[p].LnX[i] = 0;
-      else             cl.m_D[p].LnX[i] = cl.m_D[p].LnW[i] / 2;
+      else             cl.m_D[p].LnX[i] = LnW[i] / 2;
    }
 
    cl.m_DPtr++;
@@ -498,10 +499,15 @@ override void WorldTick()
       m_UtfBigFont = "newconsolefont";
       m_UtfTrmFont = "ljtrmfont";
    }
+
+   projectSetRenderer();
 }
 
 override void RenderOverlay(RenderEvent evt)
 {
+   projectSetUp(evt);
+   callAcs("Lith_RenderCrosshair", consolePlayer);
+
    int scw = 320, sch = 240;
 
    if(!AutoMapActive) for(uint i = 0; i < m_DPtr; i++) switch(m_D[i].Type)

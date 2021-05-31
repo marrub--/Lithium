@@ -13,24 +13,24 @@
 
 #include "u_common.h"
 
-#define UData p->upgrdata.lolsords
+#define UData pl.upgrdata.lolsords
 
 /* Extern Functions -------------------------------------------------------- */
 
-void Upgr_lolsords_Activate(struct player *p, struct upgrade *upgr)
+void Upgr_lolsords_Activate(struct upgrade *upgr)
 {
-   UData.origweapon = p->weaponclass;
+   UData.origweapon = pl.weaponclass;
    InvGive(so_Sword, 1);
 }
 
-void Upgr_lolsords_Deactivate(struct player *p, struct upgrade *upgr)
+void Upgr_lolsords_Deactivate(struct upgrade *upgr)
 {
    InvTake(so_Sword, 1);
    ACS_SetWeapon(UData.origweapon);
 }
 
 script
-void Upgr_lolsords_Update(struct player *p, struct upgrade *upgr)
+void Upgr_lolsords_Update(struct upgrade *upgr)
 {
    ACS_SetWeapon(so_Sword);
 }

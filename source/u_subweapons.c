@@ -13,11 +13,11 @@
 
 #include "u_common.h"
 
-#define UData p->upgrdata.subweapons
+#define UData pl.upgrdata.subweapons
 
 /* Extern Functions -------------------------------------------------------- */
 
-script void Upgr_Subweapons_Update(struct player *p, struct upgrade *upgr) {
+script void Upgr_Subweapons_Update(struct upgrade *upgr) {
    if(UData.shots < 2) {
       if(UData.charge >= 100) {
          ACS_LocalAmbientSound(ss_weapons_subweapon_charge, 127);
@@ -28,7 +28,7 @@ script void Upgr_Subweapons_Update(struct player *p, struct upgrade *upgr) {
       }
    }
 
-   if(p->buttons & BT_USER4 && !(p->old.buttons & BT_USER4)) {
+   if(pl.buttons & BT_USER4 && !(pl.old.buttons & BT_USER4)) {
       for(u32 next = UData.which + 1;; next++) {
          if(next >= _subw_max) {
             next = 0;
@@ -42,12 +42,12 @@ script void Upgr_Subweapons_Update(struct player *p, struct upgrade *upgr) {
    }
 }
 
-void Upgr_Subweapons_Render(struct player *p, struct upgrade *upgr) {
+void Upgr_Subweapons_Render(struct upgrade *upgr) {
    Str(sp_SubWepBack, s":HUD_D:SubWepBack");
    Str(sp_SubWepBar1, s":HUD_D:SubWepBar1");
    Str(sp_SubWepBar2, s":HUD_D:SubWepBar2");
 
-   if(!p->hudenabled) return;
+   if(!pl.hudenabled) return;
 
    PrintSprite(sp_SubWepBack, 66,1, 239,2);
 
@@ -73,7 +73,7 @@ void Upgr_Subweapons_Render(struct player *p, struct upgrade *upgr) {
    }
 }
 
-void Upgr_Subweapons_Enter(struct player *p, struct ugprade *upgr) {
+void Upgr_Subweapons_Enter(struct ugprade *upgr) {
    UData.shots = 2;
    #ifndef NDEBUG
    if(get_bit(dbgflags, dbgf_items)) {
@@ -90,8 +90,8 @@ void Upgr_Subweapons_Enter(struct player *p, struct ugprade *upgr) {
 
 script_str ext("ACS") addr(OBJ "GetSubShots")
 i32 Sc_GetSubShots(void) {
-   with_player(LocalPlayer) {
-      if(get_bit(p->upgrades[UPGR_Subweapons].flags, _ug_active)) {
+   if(!P_None()) {
+      if(get_bit(pl.upgrades[UPGR_Subweapons].flags, _ug_active)) {
          return UData.shots;
       }
    }
@@ -101,8 +101,8 @@ i32 Sc_GetSubShots(void) {
 
 script_str ext("ACS") addr(OBJ "TakeSubShot")
 void Sc_TakeSubShot(void) {
-   with_player(LocalPlayer) {
-      if(get_bit(p->upgrades[UPGR_Subweapons].flags, _ug_active)) {
+   if(!P_None()) {
+      if(get_bit(pl.upgrades[UPGR_Subweapons].flags, _ug_active)) {
          UData.shots--;
       }
    }
@@ -110,7 +110,7 @@ void Sc_TakeSubShot(void) {
 
 script_str ext("ACS") addr(OBJ "GetSubType")
 i32 Sc_GetSubType(void) {
-   with_player(LocalPlayer) {
+   if(!P_None()) {
       return UData.which;
    }
    return 0;

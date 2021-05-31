@@ -50,9 +50,9 @@ struct loginfo
 
 str RandomName(i32 id);
 
-void P_Log_Both(struct player *p, i32 levl, cstr fmt, ...); /* log to HUD and full log */
-void P_Log_HUDs(struct player *p, i32 levl, cstr fmt, ...); /* log to HUD only */
-void P_Log_Full(struct player *p,           cstr fmt, ...); /* log to full log only */
-void P_Log_Entry(struct player *p);
+void P_Log_Both(i32 levl, cstr fmt, ...); /* log to HUD and full log */
+void P_Log_HUDs(i32 levl, cstr fmt, ...); /* log to HUD only */
+void P_Log_Full(          cstr fmt, ...); /* log to full log only */
+void P_Log_Entry();
 
 #endif

@@ -15,17 +15,17 @@
 
 #include <math.h>
 
-#define UData p->upgrdata.zoom
+#define UData pl.upgrdata.zoom
 
 /* Extern Functions -------------------------------------------------------- */
 
-void Upgr_Zoom_Deactivate(struct player *p, struct upgrade *upgr)
+void Upgr_Zoom_Deactivate(struct upgrade *upgr)
 {
    UData.zoom = UData.vzoom = 0;
 }
 
 script
-void Upgr_Zoom_Update(struct player *p, struct upgrade *upgr)
+void Upgr_Zoom_Update(struct upgrade *upgr)
 {
    if(UData.zoom == 0 && UData.vzoom == 0) return;
 
@@ -44,7 +44,7 @@ void Upgr_Zoom_Update(struct player *p, struct upgrade *upgr)
       UData.vzoom = UData.zoom;
 }
 
-void Upgr_Zoom_Render(struct player *p, struct upgrade *upgr)
+void Upgr_Zoom_Render(struct upgrade *upgr)
 {
    Str(sp_vignette,     s":HUD:Vignette");
    Str(sp_zoom_overlay, s":HUD:ZoomOverlay");
@@ -54,7 +54,7 @@ void Upgr_Zoom_Render(struct player *p, struct upgrade *upgr)
    {
       PrintSpriteA(sp_vignette, 160,0, 120,0, 0.3);
 
-      ACS_SetCameraToTexture(p->cameratid, sp_lithcam2, 90 - UData.vzoom);
+      ACS_SetCameraToTexture(pl.cameratid, sp_lithcam2, 90 - UData.vzoom);
       PrintSprite(sp_lithcam2, 160,0, 120,0);
 
       PrintSpriteA(sp_zoom_overlay, 160,0, 120,0, 0.5);
@@ -63,7 +63,7 @@ void Upgr_Zoom_Render(struct player *p, struct upgrade *upgr)
 
       for(i32 i = 0; i < 8; i++)
       {
-         k32 yaw = (p->yaw + i * 0.125 + 0.125) % 1.0;
+         k32 yaw = (pl.yaw + i * 0.125 + 0.125) % 1.0;
          i32 x = yaw * 320 * 4;
          if(x < 0 || x > 320) continue;
 
@@ -80,9 +80,9 @@ void Sc_KeyZoom(i32 amt)
 {
    if(ACS_Timer() < 10) return;
 
-   with_player(LocalPlayer)
+   if(!P_None())
    {
-      if(get_bit(p->upgrades[UPGR_Zoom].flags, _ug_active)) UData.zoom += amt;
+      if(get_bit(pl.upgrades[UPGR_Zoom].flags, _ug_active)) UData.zoom += amt;
       if(UData.zoom < 0)                                    UData.zoom  = 0;
       if(UData.zoom > 80)                                   UData.zoom  = 80;
    }

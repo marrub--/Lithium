@@ -110,7 +110,7 @@ static void TriggerBoss(void)
 
    if(firstboss) {
       firstboss = false;
-      for_player() P_BIP_Unlock(p, "MPhantom");
+      P_BIP_Unlock("MPhantom");
    }
 }
 
@@ -191,7 +191,7 @@ void Sc_PhantomDeath(void)
       ACS_Delay(25);
       bip_name_t tag;
       lstrcpy3(tag, "M", boss->name, "Defeated");
-      for_player() P_BIP_Unlock(p, tag);
+      P_BIP_Unlock(tag);
       boss->dead = true;
 
       if(difficulty != diff_any) difficulty++;

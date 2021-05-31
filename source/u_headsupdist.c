@@ -15,11 +15,11 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-void Upgr_HeadsUpDisT_Render(struct player *p, struct upgrade *upgr)
+void Upgr_HeadsUpDisT_Render(struct upgrade *upgr)
 {
-   Upgr_HeadsUpDisC_Render(p, upgr);
+   Upgr_HeadsUpDisC_Render(upgr);
 
-   k32 manaperc = p->mana / (k32)p->manamax;
+   k32 manaperc = pl.mana / (k32)pl.manamax;
 
    i32 hprc = ceilk(min(manaperc,        0.5k) * 2 * 62);
    i32 fprc = ceilk(max(manaperc - 0.5k, 0.0k) * 2 * 62);

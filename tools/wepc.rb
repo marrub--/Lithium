@@ -146,8 +146,8 @@ res
    return "unknown";
 }
 
-i32 P_Wep_FromName(struct player *p, i32 name) {
-   switch(p->pclass) {
+i32 P_Wep_FromName(i32 name) {
+   switch(pl.pclass) {
 #{
 res = String.new
 for pcl, wpns in wepn

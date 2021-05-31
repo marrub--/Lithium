@@ -119,6 +119,51 @@ void Log(cstr fmt, ...)
 
 /* Scripts ----------------------------------------------------------------- */
 
+dynam_aut script_str ext("ACS") addr(OBJ "Thingomamob")
+void Sc_Thimgomabjhdf(void) {
+   static struct gui_pre_win const pre = {
+      .bg = "Background",
+      .w = 80,
+      .h = 120,
+      .a = 0.7k,
+      .bx = 3,
+      .by = 3,
+   };
+
+   if(!P_None()) {
+      if(pl.modal != _gui_none) return;
+
+      pl.modal = _gui_waypoint;
+      FreezeTime();
+
+      struct gui_win win = {};
+
+      struct gui_state g = {
+         .cx = 320 / 2,
+         .cy = 240 / 2,
+         .gfxprefix = ":UI_Green:",
+      };
+
+      for(;;) {
+         if(pl.dead) break;
+
+         G_Begin(&g, 320, 240);
+
+         G_UpdateState(&g);
+
+         G_WinBeg(&g, &win, .preset = &pre);
+
+         G_WinEnd(&g, &win);
+
+         G_End(&g, gui_curs_outlineinv);
+
+         ACS_Delay(1);
+      }
+
+      UnfreezeTime();
+   }
+}
+
 alloc_aut(0) script_str ext("ACS") addr(OBJ "FontTest")
 void Sc_FontTest(i32 fontnum) {
    static struct {cstr lhs, rhs;} const strings[] = {
@@ -181,7 +226,7 @@ void Sc_GiveEXPToMonster(i32 amt) {
 
 script_str ext("ACS") addr(OBJ "GiveMeAllOfTheScore")
 void Sc_DbgGiveScore(void) {
-   with_player(LocalPlayer) P_Scr_Give(p, INT96_MAX, true);
+   if(!P_None()) P_Scr_Give(INT96_MAX, true);
 }
 
 script_str ext("ACS") addr(OBJ "DumpAlloc")

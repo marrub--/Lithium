@@ -22,21 +22,21 @@ i32 Sc_LPData(i32 info, i32 permutation)
 {
    union ik32 u;
 
-   with_player(LocalPlayer) switch(info) {
-   case pdata_weapon:     return P_Wep_CurType(p);
-   case pdata_upgrade:    return get_bit(p->upgrades[permutation].flags, _ug_active);
-   case pdata_riflemode:  return p->riflefiremode;
-   case pdata_hassigil:   return p->sgacquired;
-   case pdata_weaponzoom: return u.k = p->getCVarK(sc_weapons_zoomfactor), u.i;
-   case pdata_slot3ammo:  return p->getCVarI(sc_weapons_slot3ammo);
-   case pdata_pclass:     return p->pclass;
-   case pdata_semifrozen: return p->semifrozen > 0;
-   case pdata_addp:       return u.k = p->addpitch,  u.i;
-   case pdata_addy:       return u.k = p->addyaw,    u.i;
-   case pdata_recoilp:    return u.k = p->extrpitch, u.i;
-   case pdata_attr:       return p->attr.attrs[permutation];
-   case pdata_alpha:      return u.k = p->alpha, u.i;
-   case pdata_oldhealth:  return p->oldhealth;
+   if(!P_None()) switch(info) {
+   case pdata_weapon:     return P_Wep_CurType();
+   case pdata_upgrade:    return get_bit(pl.upgrades[permutation].flags, _ug_active);
+   case pdata_riflemode:  return pl.riflefiremode;
+   case pdata_hassigil:   return pl.sgacquired;
+   case pdata_weaponzoom: return u.k = pl.getCVarK(sc_weapons_zoomfactor), u.i;
+   case pdata_slot3ammo:  return pl.getCVarI(sc_weapons_slot3ammo);
+   case pdata_pclass:     return pl.pclass;
+   case pdata_semifrozen: return pl.semifrozen > 0;
+   case pdata_addp:       return u.k = pl.addpitch,  u.i;
+   case pdata_addy:       return u.k = pl.addyaw,    u.i;
+   case pdata_recoilp:    return u.k = pl.extrpitch, u.i;
+   case pdata_attr:       return pl.attr.attrs[permutation];
+   case pdata_alpha:      return u.k = pl.alpha, u.i;
+   case pdata_oldhealth:  return pl.oldhealth;
    }
 
    return 0;
@@ -49,8 +49,8 @@ i32 Sc_LWData(i32 info)
    case wdata_bossspawned: return bossspawned;
    case wdata_soulsfreed:  return soulsfreed;
    case wdata_dorain:      return dorain;
-   case wdata_ptid:   for_player() return p->tid;
-   case wdata_pclass: for_player() return p->pclass;
+   case wdata_ptid:        return pl.tid;
+   case wdata_pclass:      return pl.pclass;
    }
 
    return 0;

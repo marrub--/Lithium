@@ -20,35 +20,35 @@
 #include "p_shopdef.h"
 #include "m_list.h"
 
-#define P_Upg_Buy(p, upgr, ...) \
-   P_Shop_Buy(p, &(upgr)->info->shopdef, (upgr), LANG "UPGRADE_TITLE_%S", __VA_ARGS__)
+#define P_Upg_Buy(upgr, ...) \
+   P_Shop_Buy(&(upgr)->info->shopdef, (upgr), LANG "UPGRADE_TITLE_%S", __VA_ARGS__)
 
 #define for_upgrade(name) \
    for(i32 _i = 0; _i < UPGR_MAX; _i++) \
-      if(get_bit(p->upgrades[_i].flags, _ug_available)) \
-         __with(struct upgrade *name = &p->upgrades[_i];)
+      if(get_bit(pl.upgrades[_i].flags, _ug_available)) \
+         __with(struct upgrade *name = &pl.upgrades[_i];)
 
 #define RequiresButDontHave(a1, a2) (get_bit(upgr->info->requires, a1) && !(a2))
 #define RequiresButDontHave_AI  RequiresButDontHave(UR_AI,  cbiupgr[cupg_armorinter])
 #define RequiresButDontHave_WMD RequiresButDontHave(UR_WMD, cbiupgr[cupg_weapninter])
 #define RequiresButDontHave_WRD RequiresButDontHave(UR_WRD, cbiupgr[cupg_weapninte2])
 #define RequiresButDontHave_RDI RequiresButDontHave(UR_RDI, cbiupgr[cupg_rdistinter])
-#define RequiresButDontHave_RA  RequiresButDontHave(UR_RA,  get_bit(p->upgrades[UPGR_ReactArmor].flags, _ug_owned))
+#define RequiresButDontHave_RA  RequiresButDontHave(UR_RA,  get_bit(pl.upgrades[UPGR_ReactArmor].flags, _ug_owned))
 
 extern struct upgradeinfo upgrinfo[UPGR_MAX];
 
 /* These are included here so the compiler may check the function signatures. */
-#define Fn_F(n, cb) void Upgr_##n##_##cb(struct player *p, struct upgrade *upgr);
-#define Fn_S(n, cb) script  void Upgr_##n##_##cb(struct player *p, struct upgrade *upgr);
+#define Fn_F(n, cb) void Upgr_##n##_##cb(struct upgrade *upgr);
+#define Fn_S(n, cb) script  void Upgr_##n##_##cb(struct upgrade *upgr);
 #include "u_func.h"
 
 void Upgr_MInit(void);
 
-script void P_Upg_PInit(struct player *p);
-void P_Upg_PQuit(struct player *p);
-void P_Upg_PDeinit(struct player *p);
-void P_Upg_PMInit(struct player *p);
+script void P_Upg_PInit();
+void P_Upg_PQuit();
+void P_Upg_PDeinit();
+void P_Upg_PMInit();
 
-void P_Upg_Enter(struct player *p);
+void P_Upg_Enter();
 
 #endif

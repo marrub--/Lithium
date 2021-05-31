@@ -21,61 +21,60 @@
 
 /* Static Functions -------------------------------------------------------- */
 
-static void EncryptedBody(struct page *p, char *bodytext) {
-   char *s = LanguageCV(bodytext, LANG "INFO_DESCR_%s", p->info->name);
+static void EncryptedBody(struct page *page, char *bodytext) {
+   char *s = LanguageCV(bodytext, LANG "INFO_DESCR_%s", page->info->name);
    for(; *s; s++) *s = !IsPrint(*s) ? *s : *s ^ 7;
 }
 
-static void MailBody(struct page *p, char *bodytext) {
+static void MailBody(struct page *page, char *bodytext) {
    char remote[128];
-   strcpy(remote, LanguageC(LANG "INFO_REMOT_%s", p->info->name));
+   strcpy(remote, LanguageC(LANG "INFO_REMOT_%s", page->info->name));
 
-   cstr sent = CanonTime(ct_full, p->flags & _page_time);
+   cstr sent = CanonTime(ct_full, page->flags & _page_time);
 
    sprintf(bodytext, LanguageC(LANG "MAIL_TEMPLATE"), remote, sent);
    strcat(bodytext, "\n\n");
-   strcat(bodytext, LanguageC(LANG "INFO_DESCR_%s", p->info->name));
+   strcat(bodytext, LanguageC(LANG "INFO_DESCR_%s", page->info->name));
 }
 
-static cstr GetShortName(struct page *p) {
-   if(p->info->category == BIPC_MAIL) {
-      return CanonTime(ct_short, p->flags & _page_time);
+static cstr GetShortName(struct page *page) {
+   if(page->info->category == BIPC_MAIL) {
+      return CanonTime(ct_short, page->flags & _page_time);
    } else {
-      return LanguageC(LANG "INFO_SHORT_%s", p->info->name);
+      return LanguageC(LANG "INFO_SHORT_%s", page->info->name);
    }
 }
 
-static cstr GetFullName(struct page *p) {
-   return LanguageC(LANG "INFO_TITLE_%s", p->info->name);
+static cstr GetFullName(struct page *page) {
+   return LanguageC(LANG "INFO_TITLE_%s", page->info->name);
 }
 
-static cstr GetBody(struct page *p) {
-   noinit
-   static char bodytext[8192];
-   switch(p->info->category) {
+static cstr GetBody(struct page *page) {
+   noinit static char bodytext[8192];
+   switch(page->info->category) {
    case BIPC_EXTRA:
-      EncryptedBody(p, bodytext);
+      EncryptedBody(page, bodytext);
       break;
    case BIPC_MAIL:
-      MailBody(p, bodytext);
+      MailBody(page, bodytext);
       break;
    default:
-      LanguageCV(bodytext, LANG "INFO_DESCR_%s", p->info->name);
+      LanguageCV(bodytext, LANG "INFO_DESCR_%s", page->info->name);
       break;
    }
    return bodytext;
 }
 
-static void SetCurPage(struct gui_state *g, struct player *p, struct page *page) {
+static void SetCurPage(struct gui_state *g, struct page *page) {
    str body = l_strdup(GetBody(page));
 
-   p->bip.curpage = page;
+   pl.bip.curpage = page;
 
    G_TypeOn(g, &CBIState(g)->biptypeon, body);
    G_ScrollReset(g, &CBIState(g)->bipinfoscr);
 }
 
-static void DrawPage(struct gui_state *g, struct player *p, struct page *page) {
+static void DrawPage(struct gui_state *g, struct page *page) {
    str image  = LanguageNull(LANG "INFO_IMAGE_%s", page->info->name);
    i32 height = strtoi_str(Language(LANG "INFO_SSIZE_%s", page->info->name), nil, 10);
 
@@ -139,14 +138,14 @@ static void DrawPage(struct gui_state *g, struct player *p, struct page *page) {
    }
 }
 
-static void MainUI(struct gui_state *g, struct player *p) {
+static void MainUI(struct gui_state *g) {
    Str(sl_bip_categs, sLANG "BIP_CATEGS");
 
    i32 n = 0;
 
    PrintText_str(L(sl_bip_categs), sf_smallfnt, CR_PURPLE, g->ox+27,1, g->oy+57,1);
 
-   p->bip.lastcategory = BIPC_MAIN;
+   pl.bip.lastcategory = BIPC_MAIN;
 
    #define Categ(name) { \
       cstr s = LanguageC(LANG "BIP_HELP_%s", P_BIP_CategoryToName(name)); \
@@ -154,8 +153,8 @@ static void MainUI(struct gui_state *g, struct player *p) {
       PrintTextA(sf_smallfnt, g->defcr, g->ox+92,1, g->oy+72+n,1, 0.7); \
       s = LanguageC(LANG "BIP_NAME_%s", P_BIP_CategoryToName(name)); \
       if(G_Button_HId(g, name, s, 32, 72 + n, Pre(btnbipmain))) { \
-         p->bip.curcategory = name; \
-         p->bip.curpage     = nil; \
+         pl.bip.curcategory = name; \
+         pl.bip.curpage     = nil; \
       } \
       n += 10; \
    }
@@ -164,9 +163,9 @@ static void MainUI(struct gui_state *g, struct player *p) {
    #undef Categ
 }
 
-static void CategoryUI(struct gui_state *g, struct player *p) {
-   u32 categ = p->bip.curcategory;
-   u32 n = p->bip.categorymax[categ];
+static void CategoryUI(struct gui_state *g) {
+   u32 categ = pl.bip.curcategory;
+   u32 n = pl.bip.categorymax[categ];
 
    if(categ == BIPC_EXTRA) goto draw;
 
@@ -183,24 +182,24 @@ static void CategoryUI(struct gui_state *g, struct player *p) {
       if(G_ScrOcc(g, &CBIState(g)->bipscr, y, gui_p.btnlist.h))
          continue;
 
-      bool lock = !get_bit(page->flags, _page_unlocked) || p->bip.curpage == page;
+      bool lock = !get_bit(page->flags, _page_unlocked) || pl.bip.curpage == page;
 
       char name[128] = "\Ci";
-      strcpy(p->bip.curpage == page ? &name[2] : name, GetShortName(page));
+      strcpy(pl.bip.curpage == page ? &name[2] : name, GetShortName(page));
 
       if(G_Button_HId(g, i, name, 0, y, lock, Pre(btnlist)))
-         SetCurPage(g, p, page);
+         SetCurPage(g, page);
    }
 
    G_ScrEnd(g, &CBIState(g)->bipscr);
 
 draw:
-   if(p->bip.curpage) DrawPage(g, p, p->bip.curpage);
+   if(pl.bip.curpage) DrawPage(g, pl.bip.curpage);
 }
 
 script static
-i32 SearchPage(struct player *p, struct page *page, cstr query) {
-   if(p->bip.resnum >= countof(p->bip.result)) {
+i32 SearchPage(struct page *page, cstr query) {
+   if(pl.bip.resnum >= countof(pl.bip.result)) {
       return 0;
    }
 
@@ -212,16 +211,16 @@ i32 SearchPage(struct player *p, struct page *page, cstr query) {
    if(strcasestr(GetShortName(page), query) ||
       strcasestr(GetFullName(page),  query) ||
       strcasestr(GetBody(page),      query)) {
-      p->bip.result[p->bip.resnum++] = page;
+      pl.bip.result[pl.bip.resnum++] = page;
    }
 
    return 2;
 }
 
-static void SearchUI(struct gui_state *g, struct player *p) {
-   struct gui_txt *st = G_TxtBox(g, &CBIState(g)->bipsearch, 10, 52, p);
+static void SearchUI(struct gui_state *g) {
+   struct gui_txt *st = G_TxtBox(g, &CBIState(g)->bipsearch, 10, 52);
 
-   p->bip.lastcategory = BIPC_MAIN;
+   pl.bip.lastcategory = BIPC_MAIN;
 
    G_TxtBoxEvt(st) {
       /* That's a lot of numbers... */
@@ -242,40 +241,40 @@ static void SearchUI(struct gui_state *g, struct player *p) {
       fastmemmove(query, txt_buf, txt_len);
       query[txt_len] = '\0';
 
-      p->bip.resnum = p->bip.rescur = 0;
+      pl.bip.resnum = pl.bip.rescur = 0;
 
       for(i32 i = 0; i < countof(extranames); i++) {
          if(crc == extranames[i].crc) {
-            p->bip.result[p->bip.resnum++] = &p->bip.pages[extranames[i].num];
+            pl.bip.result[pl.bip.resnum++] = &pl.bip.pages[extranames[i].num];
          }
       }
 
       for_page() {
-         i32 res = SearchPage(p, page, query);
+         i32 res = SearchPage(page, query);
          /**/ if(res == 0) break;
          else if(res == 1) continue;
       }
 
-      if(p->bip.resnum == 0) {
+      if(pl.bip.resnum == 0) {
          ACS_LocalAmbientSound(ss_player_cbi_findfail, 127);
       }
    }
 
-   if(p->bip.resnum) {
-      for(i32 i = 0; i < p->bip.rescur; i++) {
-         struct page *page = p->bip.result[i];
+   if(pl.bip.resnum) {
+      for(i32 i = 0; i < pl.bip.rescur; i++) {
+         struct page *page = pl.bip.result[i];
          cstr flname = GetFullName(page);
 
          if(G_Button_HId(g, i, flname, 57, 82 + (i * 10), Pre(btnbipmain))) {
-            p->bip.lastcategory = p->bip.curcategory;
-            p->bip.curcategory  = page->info->category;
-            SetCurPage(g, p, page);
+            pl.bip.lastcategory = pl.bip.curcategory;
+            pl.bip.curcategory  = page->info->category;
+            SetCurPage(g, page);
          }
       }
 
       if((ACS_Timer() % ACS_Random(14, 18)) == 0 &&
-         p->bip.rescur != p->bip.resnum) {
-         if(++p->bip.rescur == p->bip.resnum) {
+         pl.bip.rescur != pl.bip.resnum) {
+         if(++pl.bip.rescur == pl.bip.resnum) {
             ACS_LocalAmbientSound(ss_player_cbi_finddone, 127);
          } else {
             ACS_LocalAmbientSound(ss_player_cbi_find, 127);
@@ -289,24 +288,24 @@ static void SearchUI(struct gui_state *g, struct player *p) {
 
 /* Extern Functions -------------------------------------------------------- */
 
-void P_CBI_TabBIP(struct gui_state *g, struct player *p) {
+void P_CBI_TabBIP(struct gui_state *g) {
    i32 avail, max = 0;
 
-   if(p->bip.curcategory == BIPC_MAIN) {
-      MainUI(g, p);
-      avail = p->bip.pageavail;
-      max   = p->bip.pagemax;
-   } else if(p->bip.curcategory == BIPC_SEARCH) {
-      SearchUI(g, p);
+   if(pl.bip.curcategory == BIPC_MAIN) {
+      MainUI(g);
+      avail = pl.bip.pageavail;
+      max   = pl.bip.pagemax;
+   } else if(pl.bip.curcategory == BIPC_SEARCH) {
+      SearchUI(g);
    } else {
-      CategoryUI(g, p);
-      avail = p->bip.categoryavail[p->bip.curcategory];
-      max   = p->bip.categorymax[p->bip.curcategory];
+      CategoryUI(g);
+      avail = pl.bip.categoryavail[pl.bip.curcategory];
+      max   = pl.bip.categorymax[pl.bip.curcategory];
    }
 
-   if(p->bip.curcategory != BIPC_MAIN) {
+   if(pl.bip.curcategory != BIPC_MAIN) {
       if(G_Button(g, LC(LANG "BIP_BACK"), 7, 25, false, Pre(btnbipback)))
-         p->bip.curcategory = p->bip.lastcategory;
+         pl.bip.curcategory = pl.bip.lastcategory;
    } else {
       Str(sl_bip_header, sLANG "BIP_HEADER");
       PrintSpriteA(sp_UI_bip, g->ox+7,1, g->oy+27,1, 0.1);

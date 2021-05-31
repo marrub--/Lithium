@@ -26,110 +26,106 @@ Str(ss_autobuy, s"player/cbi/auto/buy");
 
 /* Extern Objects ---------------------------------------------------------- */
 
-noinit struct player players[_max_players];
+noinit struct player player;
 
 /* Static Functions -------------------------------------------------------- */
 
-script static void P_bossWarning(struct player *p);
-script static void P_bossText(struct player *p, i32 boss);
-script static void P_doIntro(struct player *p);
+script static void P_bossWarning();
+script static void P_bossText(i32 boss);
+script static void P_doIntro();
 
 /* Scripts ----------------------------------------------------------------- */
 
 _Noreturn dynam_aut script type("enter") static
 void Sc_PlayerEntry(void) {
-   static void P_Scr_PTickPre(struct player *p);
-   static void P_Atr_pTick   (struct player *p);
-   static void P_Aug_PTick   (struct player *p);
+   static void P_Scr_PTickPre();
+   static void P_Atr_pTick   ();
+   static void P_Aug_PTick   ();
 
    if(ACS_GameType() == GAME_TITLE_MAP) return;
-
-   struct player *p = LocalPlayer;
 
 reinit:
    while(!player_init) ACS_Delay(1);
 
-   P_Init(p);
-   P_Log_Entry(p);
-   P_Upg_Enter(p);
-   P_Data_Load(p);
+   P_Init();
+   P_Log_Entry();
+   P_Upg_Enter();
+   P_Data_Load();
 
-   P_doIntro(p);
+   P_doIntro();
 
-   P_bossWarning(p);
+   P_bossWarning();
 
-   P_bossText(p, ServCallI(sm_GetBossLevel));
+   P_bossText(ServCallI(sm_GetBossLevel));
 
-   if(p->teleportedout) P_TeleportIn(p);
+   if(pl.teleportedout) P_TeleportIn();
 
-   while(p->active)
+   while(pl.active)
    {
-      if(p->reinit)
+      if(pl.reinit)
          goto reinit;
 
-      P_Dat_PTickPre(p);
+      P_Dat_PTickPre();
 
       /* Check for resurrect. */
-      if(p->health > 0 && p->dead)
-         p->reinit = true;
+      if(pl.health > 0 && pl.dead)
+         pl.reinit = true;
 
       /* These can be changed any time, so save them here. */
-      struct player_delta olddelta = p->cur;
-      i32 oldhealth = p->health;
-      i32 oldmana   = p->mana;
+      struct player_delta olddelta = pl.cur;
+      i32 oldhealth = pl.health;
+      i32 oldmana   = pl.mana;
 
       /* Tick all systems. */
-      P_Wep_PTickPre(p); /* Update weapon info */
-      P_Scr_PTickPre(p); /* Update score */
+      P_Wep_PTickPre(); /* Update weapon info */
+      P_Scr_PTickPre(); /* Update score */
 
-      P_Ren_Crosshair(p);
+      if(!pl.dead) P_Upg_PTick();
+      P_Upg_PTickPst();
 
-      if(!p->dead) P_Upg_PTick(p);
-      P_Upg_PTickPst(p);
+      if(!pl.dead) {
+         P_Inv_PTick();
 
-      if(!p->dead) {
-         P_Inv_PTick(p);
+         if(pl.modal == _gui_cbi) P_CBI_PTick();
 
-         if(p->modal == _gui_cbi) P_CBI_PTick(p);
+         P_Aug_PTick();
 
-         P_Aug_PTick(p);
+         P_Atr_pTick();
+         P_Wep_PTick();
+         P_Log_PTick();
 
-         P_Atr_pTick(p);
-         P_Wep_PTick(p);
-         P_Log_PTick(p);
-
-         P_Dat_PTickPst(p); /* Update engine info */
+         P_Dat_PTickPst(); /* Update engine info */
       }
 
-      P_Ren_PTickPst(p);
+      P_Ren_PTickPst();
 
       /* Update view (extra precision is required here to ensure accuracy) */
-      ACS_SetActorPitch(0, ACS_GetActorPitch(0) - (f32)p->addpitch);
-      ACS_SetActorAngle(0, ACS_GetActorAngle(0) - (f32)p->addyaw);
-      ACS_SetActorRoll (0, ACS_GetActorRoll (0) - (f32)p->addroll);
+      ACS_SetActorPitch(0, ACS_GetActorPitch(0) - (f32)pl.addpitch);
+      ACS_SetActorAngle(0, ACS_GetActorAngle(0) - (f32)pl.addyaw);
+      ACS_SetActorRoll (0, ACS_GetActorRoll (0) - (f32)pl.addroll);
 
       /* Tic passes */
       ACS_Delay(1);
 
-      if(p->dlg.num) {
-         Dlg_Run(p, p->dlg.num);
-         p->dlg.num = 0;
+      if(pl.dlg.num) {
+         Dlg_Run(pl.dlg.num);
+         pl.dlg.num = 0;
       }
 
       /* Update previous-tic values */
-      p->old       = olddelta;
-      p->oldhealth = oldhealth;
-      p->oldmana   = oldmana;
+      pl.old       = olddelta;
+      pl.oldhealth = oldhealth;
+      pl.oldmana   = oldmana;
 
       /* Reset view for next tic */
-      ACS_SetActorPitch(0, ACS_GetActorPitch(0) + (f32)p->addpitch);
-      ACS_SetActorAngle(0, ACS_GetActorAngle(0) + (f32)p->addyaw);
-      ACS_SetActorRoll (0, ACS_GetActorRoll (0) + (f32)p->addroll);
+      ACS_SetActorPitch(0, ACS_GetActorPitch(0) + (f32)pl.addpitch);
+      ACS_SetActorAngle(0, ACS_GetActorAngle(0) + (f32)pl.addyaw);
+      ACS_SetActorRoll (0, ACS_GetActorRoll (0) + (f32)pl.addroll);
 
       /* If the map changes this we need to make sure it's still correct. */
-      P_ValidateTID(p);
+      P_ValidateTID();
 
-      p->ticks++;
+      pl.ticks++;
    }
 }
 
@@ -139,20 +135,18 @@ void Sc_PlayerDeath(void) {
 
    if(fun & lfun_final) SetFun(fun & ~lfun_final);
 
-   struct player *p = LocalPlayer;
+   pl.dead = true;
 
-   p->dead = true;
-
-   P_Upg_PDeinit(p);
+   P_Upg_PDeinit();
 
    /* unfortunately, we can't keep anything even when we want to */
-   P_Inv_PQuit(p);
+   P_Inv_PQuit();
 
    Str(sc_sv_cooploseinventory, s"sv_cooploseinventory");
    if(singleplayer || ACS_GetCVar(sc_sv_cooploseinventory)) {
-      P_Upg_PQuit(p);
-      P_BIP_PQuit(p);
-      p->score = p->scoreaccum = p->scoreaccumtime = 0;
+      P_Upg_PQuit();
+      P_BIP_PQuit();
+      pl.score = pl.scoreaccum = pl.scoreaccumtime = 0;
    }
 
    if(singleplayer) {
@@ -165,7 +159,7 @@ void Sc_PlayerDeath(void) {
          ACS_Delay(25);
       }
 
-      while(p->dead) {
+      while(pl.dead) {
          ACS_Delay(35 * 5);
          ACS_BeginPrint();
          ACS_PrintString(Language(LANG "DEATHMSG_%.2i", ACS_Random(1, 20)));
@@ -176,23 +170,21 @@ void Sc_PlayerDeath(void) {
 
 script type("respawn")
 static void Sc_PlayerRespawn(void) {
-   LocalPlayer->reinit = true;
+   pl.reinit = true;
 }
 
 script type("return")
 static void Sc_PlayerReturn(void) {
-   LocalPlayer->reinit = true;
+   pl.reinit = true;
 }
 
 script type("disconnect")
 static void Sc_PlayerDisconnect(void) {
-   struct player *p = LocalPlayer;
+   P_BIP_PQuit();
 
-   P_BIP_PQuit(p);
+   ListDtor(&pl.hudstrlist, true);
 
-   ListDtor(&p->hudstrlist, true);
-
-   fastmemset(p, 0, sizeof *p);
+   fastmemset(&pl, 0, sizeof pl);
 }
 
 /* Extern Functions -------------------------------------------------------- */
@@ -223,35 +215,28 @@ i32 P_Color(i32 pclass) {
    return CR_WHITE;
 }
 
-alloc_aut(0) stkcall
-struct player *P_PtrFind(i32 tid, i32 ptr) {
-   i32 pnum = PtrPlayerNumber(tid, ptr);
-   if(pnum >= 0) return &players[pnum];
-   else          return nil;
-}
-
-void P_GUI_Close(struct player *p) {
+void P_GUI_Close() {
    Str(ss_gui_close, s"player/cbi/close");
 
-   if(p->modal == _gui_cbi) {
+   if(pl.modal == _gui_cbi) {
       if(singleplayer) {
          UnfreezeTime();
       }
 
       ACS_LocalAmbientSound(ss_gui_close, 127);
-      p->modal = _gui_none;
+      pl.modal = _gui_none;
    }
 }
 
-void P_GUI_Use(struct player *p) {
+void P_GUI_Use() {
    Str(ss_gui_open,  s"player/cbi/open");
    Str(ss_gui_win95, s"player/cbi/win95");
 
-   if(p->dead) return;
+   if(pl.dead) return;
 
-   switch(p->modal) {
+   switch(pl.modal) {
    case _gui_cbi:
-      P_GUI_Close(p);
+      P_GUI_Close();
       break;
    case _gui_none:
       if(singleplayer) {
@@ -264,19 +249,19 @@ void P_GUI_Use(struct player *p) {
          ACS_LocalAmbientSound(ss_gui_open, 127);
       }
 
-      p->modal = _gui_cbi;
+      pl.modal = _gui_cbi;
       break;
    }
 }
 
-i96 P_Scr_Give(struct player *p, i96 score, bool nomul) {
+i96 P_Scr_Give(i96 score, bool nomul) {
    /* Could cause division by zero */
    if(score == 0)
       return 0;
 
    if(!nomul) {
-      score *= p->scoremul;
-      score *= 1 + (k64)ACS_RandomFixed(0, p->attr.attrs[at_luk] / 77.7);
+      score *= pl.scoremul;
+      score *= 1 + (k64)ACS_RandomFixed(0, pl.attr.attrs[at_luk] / 77.7);
       score *= scoremul;
    }
 
@@ -286,81 +271,77 @@ i96 P_Scr_Give(struct player *p, i96 score, bool nomul) {
    k32 vol = 0.7lk * mul;
 
    /* Play a sound when we pick up score */
-   if(vol > 0.001k && p->getCVarI(sc_player_scoresound))
+   if(vol > 0.001k && pl.getCVarI(sc_player_scoresound))
       StartSound(ss_player_score, lch_item2, 0, vol, ATTN_STATIC);
 
    /* hue */
-   if(get_bit(p->upgrades[UPGR_CyberLegs].flags, _ug_active) && ACS_Random(0, 10000) == 0) {
-      p->brouzouf += score;
-      p->logB(1, "You gained brouzouf.");
+   if(get_bit(pl.upgrades[UPGR_CyberLegs].flags, _ug_active) && ACS_Random(0, 10000) == 0) {
+      pl.brouzouf += score;
+      pl.logB(1, "You gained brouzouf.");
    }
 
-   if(get_bit(p->upgrades[UPGR_TorgueMode].flags, _ug_active) && ACS_Random(0, 10) == 0) {
-      p->spuriousexplosions++;
-      ACS_SpawnForced(so_EXPLOOOSION, p->x, p->y, p->z);
+   if(get_bit(pl.upgrades[UPGR_TorgueMode].flags, _ug_active) && ACS_Random(0, 10) == 0) {
+      pl.spuriousexplosions++;
+      ACS_SpawnForced(so_EXPLOOOSION, pl.x, pl.y, pl.z);
    }
 
    /* Add score and set score accumulator */
-   p->score          += score;
-   p->scoresum       += score;
-   p->scoreaccum     += score;
-   p->scoreaccumtime += 20 * (mul * 2.0lk);
+   pl.score          += score;
+   pl.scoresum       += score;
+   pl.scoreaccum     += score;
+   pl.scoreaccumtime += 20 * (mul * 2.0lk);
 
    /* Log score */
-   if(p->getCVarI(sc_player_scorelog))
-      p->logH(1, "+\Cj%lli\Cnscr", score);
+   if(pl.getCVarI(sc_player_scorelog))
+      pl.logH(1, "+\Cj%lli\Cnscr", score);
 
    return score;
 }
 
-void P_Scr_Take(struct player *p, i96 score) {
-   if(p->score - score >= 0) {
-      p->scoreused += score;
-      p->score     -= score;
+void P_Scr_Take(i96 score) {
+   if(pl.score - score >= 0) {
+      pl.scoreused += score;
+      pl.score     -= score;
    } else {
-      p->scoreused += p->score;
-      p->score      = 0;
+      pl.scoreused += pl.score;
+      pl.score      = 0;
    }
 
-   p->scoreaccum     = 0;
-   p->scoreaccumtime = 0;
+   pl.scoreaccum     = 0;
+   pl.scoreaccumtime = 0;
 }
 
 script void P_GiveAllScore(i96 score, bool nomul) {
-   for_player() {
-      p->setActivator();
-      P_Scr_Give(p, score, nomul);
-   }
+   pl.setActivator();
+   P_Scr_Give(score, nomul);
 }
 
 script void P_GiveAllEXP(u64 amt) {
-   for_player() {
-      p->setActivator();
-      P_Lv_GiveEXP(p, amt);
-   }
+   pl.setActivator();
+   P_Lv_GiveEXP(amt);
 }
 
 /* Static Functions -------------------------------------------------------- */
 
 dynam_aut script static
-void P_bossWarning(struct player *p) {
+void P_bossWarning() {
    ACS_Delay(35 * 5);
 
    if(bossspawned)
-      p->logB(1, LanguageC(LANG "LOG_BossWarn%s", p->discrim));
+      pl.logB(1, LanguageC(LANG "LOG_BossWarn%s", pl.discrim));
 }
 
 dynam_aut script static
-void P_bossText(struct player *p, i32 boss) {
+void P_bossText(i32 boss) {
    if(boss == boss_iconofsin && ServCallI(sm_IsRampancy)) {
       return;
    }
 
    bool division = boss == boss_iconofsin && GetFun() & lfun_final;
 
-   if(division) p->logB(1, LC(LANG "LOG_BossHear3"));
+   if(division) pl.logB(1, LC(LANG "LOG_BossHear3"));
 
-   if(!p->getCVarI(sc_player_bosstexts)) return;
+   if(!pl.getCVarI(sc_player_bosstexts)) return;
 
    cstr fmt;
    switch(boss) {
@@ -376,8 +357,8 @@ void P_bossText(struct player *p, i32 boss) {
          break;
    }
 
-   p->logB(1, LC(LANG "LOG_BossHear1"));
-   p->logB(1, LC(LANG "LOG_BossHear2"));
+   pl.logB(1, LC(LANG "LOG_BossHear1"));
+   pl.logB(1, LC(LANG "LOG_BossHear2"));
 
    ACS_Delay(35 * 4);
 
@@ -394,8 +375,8 @@ void P_bossText(struct player *p, i32 boss) {
          k32 pt = ACS_RandomFixed(0.2, 1.1);
          k32 ys = ACS_Sin(ya), yc = ACS_Cos(ya);
 
-         p->bobyaw   += ys * di;
-         p->bobpitch += yc * di;
+         pl.bobyaw   += ys * di;
+         pl.bobpitch += yc * di;
 
          ACS_FadeTo(255, 0, 0, fa, 0.0);
          ACS_FadeTo(255, 0, 0, 0.0, ft);
@@ -403,7 +384,7 @@ void P_bossText(struct player *p, i32 boss) {
          StartSound(ss_enemies_boss_talk, lch_voice2, CHANF_LOCAL, 1.0, 1.0, pt);
 
          SetFade(fid_bosstext, 20, 1);
-         LanguageCV(text, fmt, j, p->discrim);
+         LanguageCV(text, fmt, j, pl.discrim);
          j++;
       }
 
@@ -418,7 +399,7 @@ void P_bossText(struct player *p, i32 boss) {
 }
 
 dynam_aut script static
-void P_doIntro(struct player *p) {
+void P_doIntro() {
    enum {
       _nlines   = 26,
       _out_tics = 35 * 2,
@@ -429,9 +410,9 @@ void P_doIntro(struct player *p) {
    Str(ss_startgame, s"player/startgame");
    Str(ss_showtext,  s"player/showtext");
 
-   if(mapscleared != 0 || p->done_intro & p->pclass) return;
+   if(mapscleared != 0 || pl.done_intro & pl.pclass) return;
 
-   p->modal = _gui_intro;
+   pl.modal = _gui_intro;
    ACS_SetMusic(sp_lsounds_Silence);
    FreezeTime(false);
    ACS_FadeTo(0, 0, 0, 1.0, 0.0);
@@ -452,7 +433,7 @@ void P_doIntro(struct player *p) {
          last = which;
 
          ifauto(str, texts,
-                LanguageNull(LANG "BEGINNING_%s_%u", p->discrim, which)) {
+                LanguageNull(LANG "BEGINNING_%s_%u", pl.discrim, which)) {
             lstrcpy_str(text, texts);
          } else {
             break;
@@ -480,8 +461,8 @@ void P_doIntro(struct player *p) {
       PrintTextFmt(LC(LANG "SKIP_INTRO"), sc_use, sc_attack);
       PrintText(sf_smallfnt, CR_WHITE, 275,6, 220,0);
 
-      if(G_Filler(280, 220, &fill, 70, p->buttons & (BT_USE | BT_ATTACK))) {
-         if(p->buttons & BT_ATTACK) {
+      if(G_Filler(280, 220, &fill, 70, pl.buttons & (BT_USE | BT_ATTACK))) {
+         if(pl.buttons & BT_ATTACK) {
             which++;
             continue;
          } else {
@@ -498,7 +479,7 @@ void P_doIntro(struct player *p) {
 
          if(lines[i][0] != '~') {
             PrintTextChr(lines[i], linen[i]);
-            PrintText(sf_smallfnt, p->color, 0,1, 8 * i,1);
+            PrintText(sf_smallfnt, pl.color, 0,1, 8 * i,1);
          }
       }
 
@@ -520,7 +501,7 @@ void P_doIntro(struct player *p) {
 
          if(lines[i][0] != '~') {
             PrintTextChr(lines[i], linen[i]);
-            PrintTextA(sf_smallfnt, p->color, 0,1, 8 * i,1, alpha);
+            PrintTextA(sf_smallfnt, pl.color, 0,1, 8 * i,1, alpha);
          }
 
          for(i32 k = 0; k < linen[i]; k++) {
@@ -541,79 +522,79 @@ void P_doIntro(struct player *p) {
 
    ACS_SetMusic(sp_star);
 
-   p->done_intro |= p->pclass;
-   P_Data_Save(p);
+   pl.done_intro |= pl.pclass;
+   P_Data_Save();
 
-   p->modal = _gui_none;
+   pl.modal = _gui_none;
 }
 
-static void P_attrRGE(struct player *p) {
-   i32 rge = p->attr.attrs[at_spc];
+static void P_attrRGE() {
+   i32 rge = pl.attr.attrs[at_spc];
 
-   if(p->health < p->oldhealth)
-      p->rage += rge * (p->oldhealth - p->health) / 1000.0;
+   if(pl.health < pl.oldhealth)
+      pl.rage += rge * (pl.oldhealth - pl.health) / 1000.0;
 
-   p->rage = lerpk(p->rage, 0, 0.02);
+   pl.rage = lerpk(pl.rage, 0, 0.02);
 }
 
-static void P_attrCON(struct player *p) {
-   i32 rge = p->attr.attrs[at_spc];
+static void P_attrCON() {
+   i32 rge = pl.attr.attrs[at_spc];
 
-   if(p->mana > p->oldmana)
-      p->rage += rge * (p->mana - p->oldmana) / 1100.0;
+   if(pl.mana > pl.oldmana)
+      pl.rage += rge * (pl.mana - pl.oldmana) / 1100.0;
 
-   p->rage = lerpk(p->rage, 0, 0.03);
+   pl.rage = lerpk(pl.rage, 0, 0.03);
 }
 
-static void P_Atr_pTick(struct player *p) {
+static void P_Atr_pTick() {
    if(Paused) return;
 
-   k32  acc = p->attr.attrs[at_acc] / 150.0;
-   k32  def = p->attr.attrs[at_def] / 170.0;
-   i32 strn = p->attr.attrs[at_str];
-   i32  stm = p->attr.attrs[at_stm];
+   k32  acc = pl.attr.attrs[at_acc] / 150.0;
+   k32  def = pl.attr.attrs[at_def] / 170.0;
+   i32 strn = pl.attr.attrs[at_str];
+   i32  stm = pl.attr.attrs[at_stm];
    i32 stmt = 75 - stm;
 
-   switch(p->pclass) {
-      case pcl_marine:    P_attrRGE(p); break;
-      case pcl_cybermage: P_attrCON(p); break;
+   switch(pl.pclass) {
+      case pcl_marine:    P_attrRGE(); break;
+      case pcl_cybermage: P_attrCON(); break;
    }
 
-   p->maxhealth = p->spawnhealth + strn;
-   SetDamageMultiplier(0, 1.0 + acc + p->rage);
+   pl.maxhealth = pl.spawnhealth + strn;
+   SetDamageMultiplier(0, 1.0 + acc + pl.rage);
    SetMembI(0, sm_DmgFac, minmax(100 * def, 0, 100));
-   SetSpawnHealth(0, p->maxhealth);
+   SetSpawnHealth(0, pl.maxhealth);
 
-   if(p->health < stm+10 && (stmt < 2 || p->ticks % stmt == 0))
-      p->health = p->health + 1;
+   if(pl.health < stm+10 && (stmt < 2 || pl.ticks % stmt == 0))
+      pl.health = pl.health + 1;
 }
 
-static void P_Scr_PTickPre(struct player *p) {
-   if(!p->scoreaccumtime || p->score < p->old.score) {
-      p->scoreaccum = 0;
-      p->scoreaccumtime = 0;
+static void P_Scr_PTickPre() {
+   if(!pl.scoreaccumtime || pl.score < pl.old.score) {
+      pl.scoreaccum = 0;
+      pl.scoreaccumtime = 0;
    }
 
-   /**/ if(p->scoreaccumtime > 0) p->scoreaccumtime--;
-   else if(p->scoreaccumtime < 0) p->scoreaccumtime++;
+   /**/ if(pl.scoreaccumtime > 0) pl.scoreaccumtime--;
+   else if(pl.scoreaccumtime < 0) pl.scoreaccumtime++;
 }
 
-static void P_Aug_PTick(struct player *p) {
+static void P_Aug_PTick() {
    for(i32 i = 0; i < 4; i++) {
       i32 total = 0;
 
       for_upgrade(upgr) {
-         if(get_bit(upgr->agroups, i) && get_bit(p->autobuy, i)) {
-            if(P_Upg_Buy(p, upgr, true)) {
+         if(get_bit(upgr->agroups, i) && get_bit(pl.autobuy, i)) {
+            if(P_Upg_Buy(upgr, true)) {
                total++;
-               P_Upg_Toggle(p, upgr);
+               P_Upg_Toggle(upgr);
             }
          }
       }
 
       if(total) {
          ACS_LocalAmbientSound(ss_autobuy, 127);
-         p->logH(1, LanguageC(LANG "LOG_AutoBuy%i", i + 1), total, total != 1 ? "s" : "");
+         pl.logH(1, LanguageC(LANG "LOG_AutoBuy%i", i + 1), total, total != 1 ? "s" : "");
       }
    }
 }
@@ -671,22 +652,8 @@ void Sc_SetAdviceMarker(i32 tid) {
 
    ACS_Delay(5);
 
-   UnsafeLocalPlayer.advice = text;
+   pl.advice = text;
    SetFade(fid_advice, 35 * 5, 12);
-}
-
-script ext("ACS") addr(lsc_drawplayericon)
-void Sc_DrawPlayerIcon(i32 num, i32 x, i32 y) {
-   with_player(&players[num]) {
-      k32 a = fastabsk((x - 160) / 90.0);
-           if(a < 0.2) a = 0.2;
-      else if(a > 1.0) a = 1.0;
-
-      PrintTextFmt("%S <%i>\n", p->name, p->num);
-      __nprintf(p->health <= 0 ? "Dead\n" : "%iHP\n", p->health);
-      if(p->pclass & pcl_magicuser) __nprintf("%iMP\n", p->mana);
-      PrintTextA(sf_smallfnt, CR_WHITE, x-9,1, y-2,1, a);
-   }
 }
 
 script ext("ACS") addr(lsc_drawdmgnum)
@@ -716,16 +683,16 @@ void Sc_KeyBuyAutoGroup(i32 grp) {
       return;
    }
 
-   with_player(LocalPlayer) {
+   if(!P_None()) {
       i32 total = 0, success = 0;
 
       for_upgrade(upgr) {
          if(!get_bit(upgr->flags, _ug_owned) && get_bit(upgr->agroups, grp)) {
             total++;
 
-            if(P_Upg_Buy(p, upgr, true)) {
+            if(P_Upg_Buy(upgr, true)) {
                success++;
-               P_Upg_Toggle(p, upgr);
+               P_Upg_Toggle(upgr);
             }
          }
       }
@@ -741,7 +708,7 @@ void Sc_KeyBuyAutoGroup(i32 grp) {
 
       i32 fmt = total ? grp + 1 : grp + 5;
 
-      p->logH(1, LanguageC(LANG "LOG_GroupBuy%i", fmt), cr, success, total, success != 1 ? "s" : "");
+      pl.logH(1, LanguageC(LANG "LOG_GroupBuy%i", fmt), cr, success, total, success != 1 ? "s" : "");
    }
 }
 
@@ -753,20 +720,20 @@ void Sc_KeyToggleAutoGroup(i32 grp) {
       return;
    }
 
-   with_player(LocalPlayer) {
+   if(!P_None()) {
       i32 total = 0;
 
       for_upgrade(upgr) {
          if(get_bit(upgr->flags, _ug_owned) && get_bit(upgr->agroups, grp)) {
             total++;
-            P_Upg_Toggle(p, upgr);
+            P_Upg_Toggle(upgr);
          }
       }
 
       if(total) ACS_LocalAmbientSound(ss_autotoggle, 127);
 
       i32 fmt = total ? grp + 1 : grp + 5;
-      p->logH(1, LanguageC(LANG "LOG_GroupToggle%i", fmt));
+      pl.logH(1, LanguageC(LANG "LOG_GroupToggle%i", fmt));
    }
 }
 
@@ -774,13 +741,13 @@ alloc_aut(0) script_str type("net") ext("ACS") addr(OBJ "KeyGlare")
 void Sc_KeyGlare(void) {
    Str(st_none, s"None");
 
-   with_player(LocalPlayer) {
+   if(!P_None()) {
       Str(ss_glare, s"player/glare");
 
       ACS_FadeTo(255, 255, 255, 1.0, 0.0);
 
       ACS_LocalAmbientSound(ss_glare, 127);
-      ACS_LineAttack(0, p->yaw, p->pitch, 1, so_Dummy, st_none,
+      ACS_LineAttack(0, pl.yaw, pl.pitch, 1, so_Dummy, st_none,
          32767.0, FHF_NORANDOMPUFFZ | FHF_NOIMPACTDECAL);
 
       ACS_Delay(14);
@@ -793,15 +760,13 @@ void Sc_KeyGlare(void) {
 
 _Noreturn dynam_aut script_str ext("ACS") addr(OBJ "TimelineInconsistent")
 void Sc_TimelineInconsistent(void) {
+   pl.setActivator();
    for(;;) {
-      for_player() {
-         Str(sl_bad_timeline, sLANG "BADTIMELINE");
-         p->setActivator();
-         ACS_FadeTo(0, 0, 0, 1.0, 0.0);
-         SetSize(320, 240);
-         PrintText_str(L(sl_bad_timeline), sf_bigupper, CR_WHITE, 160,4, 120,0);
-         p->health = -1;
-      }
+      Str(sl_bad_timeline, sLANG "BADTIMELINE");
+      ACS_FadeTo(0, 0, 0, 1.0, 0.0);
+      SetSize(320, 240);
+      PrintText_str(L(sl_bad_timeline), sf_bigupper, CR_WHITE, 160,4, 120,0);
+      pl.health = -1;
       ACS_Delay(1);
    }
 }

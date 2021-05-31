@@ -15,14 +15,14 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-void Upgr_AutoReload_Activate(struct player *p, struct upgrade *upgr)
+void Upgr_AutoReload_Activate(struct upgrade *upgr)
 {
-   p->autoreload = true;
+   pl.autoreload = true;
 }
 
-void Upgr_AutoReload_Deactivate(struct player *p, struct upgrade *upgr)
+void Upgr_AutoReload_Deactivate(struct upgrade *upgr)
 {
-   p->autoreload = false;
+   pl.autoreload = false;
 }
 
 /* EOF */

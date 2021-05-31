@@ -17,11 +17,11 @@ static double GetViewHeight(Actor mo) {
 }
 
 static double GetAttackHeight(Actor mo) {
-   return mo.height / 2 + mo.player.mo.attackZOffset * mo.player.crouchFactor;
+   return mo.height / 2.0 + mo.player.mo.attackZOffset * mo.player.crouchFactor;
 }
 
-static void Unproject(Actor mo, double x_, double y_, double z_, int px, int py, int pv) {
-   int x, y; bool v; [x, y, v] = Lith_Player(mo).Lith_Unproject((x_, y_, z_));
+static ui void Project(Actor mo, double x_, double y_, double z_, int px, int py, int pv) {
+   int x, y; bool v; [x, y, v] = Lith_URANUS.instance().project((x_, y_, z_));
    if(px) ACS_ExecuteWithResult(lsc_setptri32,  px, x);
    if(py) ACS_ExecuteWithResult(lsc_setptri32,  py, y);
    if(pv) ACS_ExecuteWithResult(lsc_setptrbool, pv, v);

@@ -25,9 +25,9 @@ Str(sp_HUD_C_VIT,        s":HUD_C:VIT");
 
 /* Static Functions -------------------------------------------------------- */
 
-static void HUD_Ammo(struct player *p)
+static void HUD_Ammo()
 {
-   struct invweapon const *wep = p->weapon.cur;
+   struct invweapon const *wep = pl.weapon.cur;
 
    str typegfx = snil;
 
@@ -64,8 +64,8 @@ static void HUD_Ammo(struct player *p)
    if(typegfx)
       PrintSprite(typegfx, 316,2, 235,2);
 
-   if(P_Wep_CurType(p) == weapon_c_smg) {
-      i32 y = p->getCVarI(sc_hud_showweapons) ? 0 : 14;
+   if(P_Wep_CurType() == weapon_c_smg) {
+      i32 y = pl.getCVarI(sc_hud_showweapons) ? 0 : 14;
       k32 heat = InvNum(so_SMGHeat)/500.0k;
       PrintSprite(sp_HUD_C_BarSmall, 257,1, 196+y,1);
       SetClip(257, 196+y, 63 * heat, 9);
@@ -74,35 +74,35 @@ static void HUD_Ammo(struct player *p)
    }
 }
 
-static void HUD_Health(struct player *p)
+static void HUD_Health()
 {
    PrintSprite(sp_HUD_C_SplitBack, 0,1, 239,2);
    PrintSprite(sp_HUD_C_VIT,       2,1, 237,2);
 
    ACS_BeginPrint();
-   ACS_PrintInt(p->health);
+   ACS_PrintInt(pl.health);
    PrintTextX(sf_bigupper, Cr(red), 21,1, 229,0, ptf_no_utf);
-   HUD_DrawHealth(p, p->health, 21, 229, Cr(red), 0);
+   HUD_DrawHealth(pl.health, 21, 229, Cr(red), 0);
 }
 
 /* Extern Functions -------------------------------------------------------- */
 
-void Upgr_HeadsUpDisC_Render(struct player *p, struct upgrade *upgr)
+void Upgr_HeadsUpDisC_Render(struct upgrade *upgr)
 {
-   if(!p->hudenabled) return;
+   if(!pl.hudenabled) return;
 
-   HUD_Log(p, Cr(red), 0, -10);
-   HUD_KeyInd(p, 180, 21, true, 0.8);
-   HUD_Score(p, "%s\Cnscr", p->score, sf_smallfnt, Cr(red), 160,0);
+   HUD_Log(Cr(red), 0, -10);
+   HUD_KeyInd(180, 21, true, 0.8);
+   HUD_Score("%s\Cnscr", pl.score, sf_smallfnt, Cr(red), 160,0);
 
-   if(p->getCVarI(sc_hud_showweapons))
+   if(pl.getCVarI(sc_hud_showweapons))
       PrintSprite(sp_HUD_C_Bar, 320,2, 220,2);
 
-   HUD_WeaponSlots(p, Cr(wselc1), Cr(wselc2), Cr(wselc3), Cr(wselcs), 323, 219);
+   HUD_WeaponSlots(Cr(wselc1), Cr(wselc2), Cr(wselc3), Cr(wselcs), 323, 219);
 
    /* Status */
-   HUD_Ammo(p);
-   HUD_Health(p);
+   HUD_Ammo();
+   HUD_Health();
 }
 
 /* EOF */

@@ -10,7 +10,6 @@ tools/.build-cfg.rb
 *.swp
 *.ninja*
 source/include/p_bipname.h
-source/include/p_weapons.h
 source/include/u_func.h
 source/include/u_names.h
 source/include/w_moninfo.h

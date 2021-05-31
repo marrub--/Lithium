@@ -19,7 +19,7 @@
 /* Extern Functions -------------------------------------------------------- */
 
 dynam_aut script
-void P_Scr_Payout(struct player *p) {
+void P_Scr_Payout() {
    Str(sp_ResultFrame,        s":UI:ResultFrame");
    Str(ss_player_counter,     s"player/counter");
    Str(ss_player_counterdone, s"player/counterdone");
@@ -44,7 +44,7 @@ void P_Scr_Payout(struct player *p) {
 
    struct payoutinfo pay = payout;
 
-   p->setActivator();
+   pl.setActivator();
    ACS_Delay(25);
 
    SetFade(fid_result,  35 * 3, 8);
@@ -122,7 +122,7 @@ void P_Scr_Payout(struct player *p) {
          Rght(LC(LANG "RES_CLOSED"), (i % 6) < 3 ? 'n' : '-');
       }
 
-      if(p->getCVarI(sc_player_resultssound)) {
+      if(pl.getCVarI(sc_player_resultssound)) {
          if(counting) {
             str snd = snil;
 
@@ -141,7 +141,7 @@ void P_Scr_Payout(struct player *p) {
 
    ACS_Delay(20);
 
-   P_Scr_Give(p, pay.total, true);
+   P_Scr_Give(pay.total, true);
 }
 
 /* EOF */

@@ -82,10 +82,7 @@ void Boss_HInit(void)
 {
    ACS_Delay(1); /* Delay another tic for monster spawners. */
 
-   for_player() {
-      SpawnBosses(p->scoresum, false);
-      break;
-   }
+   SpawnBosses(pl.scoresum, false);
 }
 
 static void CheckModCompat(void)
@@ -121,26 +118,20 @@ static void UpdateGame(void)
    }
 
    if(updateTo(Ver1_6_0)) {
-      for_player() {
-         p->setCVarK(sc_player_footstepvol, 0.2); /* 1.0 => 0.2 */
-         p->setCVarI(sc_player_ammolog, true); /* false => true */
-      }
+      pl.setCVarK(sc_player_footstepvol, 0.2); /* 1.0 => 0.2 */
+      pl.setCVarI(sc_player_ammolog, true); /* false => true */
    }
 
    if(updateTo(Ver1_6_1)) {
-      for_player() {
-         p->setCVarK(sc_weapons_zoomfactor, 1.5); /* 3.0 => 1.5 */
-      }
+      pl.setCVarK(sc_weapons_zoomfactor, 1.5); /* 3.0 => 1.5 */
    }
 
    if(updateTo(Ver1_7_0)) {
       /* unfortunate, but we forgot to add this for 1.6.3. so, we'll fix it in
        * version 1.7 instead.
        */
-      for_player() {
-         if(p->getCVarI(sc_xhair_style) >= 10) {
-            p->setCVarI(sc_xhair_style, 0);
-         }
+      if(pl.getCVarI(sc_xhair_style) >= 10) {
+         pl.setCVarI(sc_xhair_style, 0);
       }
       /* accidentally set this to something the settings menu couldn't
        * actually use
@@ -258,13 +249,11 @@ static void HInit(void)
    if(mapscleared != 0) Scr_HInit();
 
    /* Cluster messages. */
-   for_player() {
-      if(Cluster >=  6) P_BIP_Unlock(p, "MCluster1");
-      if(Cluster >=  7) P_BIP_Unlock(p, "MCluster2");
-      if(Cluster ==  8) P_BIP_Unlock(p, "MCluster3");
-      if(Cluster ==  9) P_BIP_Unlock(p, "MSecret1");
-      if(Cluster == 10) P_BIP_Unlock(p, "MSecret2");
-   }
+   if(Cluster >=  6) P_BIP_Unlock("MCluster1");
+   if(Cluster >=  7) P_BIP_Unlock("MCluster2");
+   if(Cluster ==  8) P_BIP_Unlock("MCluster3");
+   if(Cluster ==  9) P_BIP_Unlock("MSecret1");
+   if(Cluster == 10) P_BIP_Unlock("MSecret2");
 
    if(ACS_GetCVar(sc_sv_nobosses) ||
       ACS_GetCVar(sc_sv_nobossdrop)
@@ -330,10 +319,8 @@ begin:
    } else if(MapNum == 1911777) {
       ACS_SetPlayerProperty(true, true, PROP_TOTALLYFROZEN);
       F_Load();
-      for_player() {
-         p->setActivator();
-         F_Run(p);
-      }
+      pl.setActivator();
+      F_Run();
       return;
    }
 
@@ -465,12 +452,10 @@ static void Sc_WorldUnload(void)
 
    CBI_InstallSpawned();
 
-   for_player() {
-      p->setActivator();
-      P_Upg_PDeinit(p);
-      P_GUI_Close(p);
-      P_Dat_PTickPst(p);
-   }
+   pl.setActivator();
+   P_Upg_PDeinit();
+   P_GUI_Close();
+   P_Dat_PTickPst();
 }
 
 /* EOF */

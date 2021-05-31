@@ -29,9 +29,9 @@ static i32 lmvar dmonid;
 
 /* Extern Functions -------------------------------------------------------- */
 
-void PrintDmonAllocSize(struct player *p)
+void PrintDmonAllocSize()
 {
-   p->logH(1, "dmonalloc is %.2k megabytes!", sizeof dmonalloc * 4 / 1024 / 1024.0);
+   pl.logH(1, "dmonalloc is %.2k megabytes!", sizeof dmonalloc * 4 / 1024 / 1024.0);
 }
 
 script

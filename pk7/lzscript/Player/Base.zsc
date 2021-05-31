@@ -24,7 +24,6 @@ default {
 meta double m_VBob;
 
 private double m_RainLerp;
-private Lith_Quaternion m_QP, m_QY;
 
 Lith_Flashlight m_light;
 
@@ -138,54 +137,6 @@ private void Lith_ItemVacuum() {
    }
 }
 
-int, int, bool Lith_Unproject(vector3 loc) {
-   if(!m_QY || !m_QP) {
-      /* not initialized, fuck off */
-      return -1000, -1000, false;
-   }
-
-   /* create (view-adjusted) normalized vector for where we're looking */
-   vector3 la = pos - loc;
-   la.z = (player.viewz - loc.z) * level.pixelstretch;
-   la /= la.length();
-
-   /* get projection angles */
-   double pp = asin(la.z);
-   double py = atan2(la.y, la.x) - 180;
-
-   /* rotate to lookat vector */
-   let q  = Lith_Quaternion.CreateVector(1, 0, 0);
-   let qp = Lith_Quaternion.Create(pp, 0, 1, 0);
-   let qy = Lith_Quaternion.Create(py, 0, 0, 1);
-
-   q = qp.multiply(q).multiply(qp.makeConjugate());
-   q = qy.multiply(q).multiply(qy.makeConjugate());
-
-   /* unproject */
-   q = m_QY.multiply(q).multiply(m_QY.makeConjugate());
-   q = m_QP.multiply(q).multiply(m_QP.makeConjugate());
-
-   la = q.generateVector();
-   la /= la.length();
-
-   /* get screenspace position */
-   if(la.x > 0) {
-      /* adjust for FOV */
-      double fovmod = 1 / tan(player.fov / 2);
-
-      /* get NDC position */
-      double pv = -la.z / la.x * fovmod;
-      double ph = -la.y / la.x * fovmod;
-
-      /* convert to screenspace */
-      return Lith_UTIL.Round(ph            * 160 + 160),
-             Lith_UTIL.Round(pv * 1.333333 * 120 + 120), true;
-   } else {
-      /* not looking at it, return invalid position */
-      return -1000, -1000, false;
-   }
-}
-
 void Lith_PreTick() {
    if(m_wasDamaged) {
       --m_wasDamaged;
@@ -202,15 +153,6 @@ void Lith_PreTick() {
       viewBob = m_VBob;
    }
    m_wasFrozen = isFrozen();
-
-   /* create pitch and yaw quaternions for unprojection */
-   vector2 pvec = (cos(pitch), sin(pitch) * level.pixelstretch);
-   pvec /= pvec.length();
-
-   double newpitch = atan2(pvec.y, pvec.x);
-
-   m_QP = Lith_Quaternion.Create(-newpitch, 0, 1, 0);
-   m_QY = Lith_Quaternion.Create(-   angle, 0, 0, 1);
 
    /* stupid hack to keep the view from moving around */
    if(Lith_UTIL.pData(self, pdata_semifrozen)) {
@@ -243,10 +185,6 @@ void Lith_PostTick() {
    for(int i = 0; i < _dnum_max; i++) {
       Lith_ShowDamageNums(i);
    }
-
-   if(!deathmatch) for(int i = 0; i < MAXPLAYERS; i++)
-      if(playeringame[i] && players[i] != player && players[i].mo)
-         Lith_PlayerIndicator(players[i]);
 
    Lith_ShowMapMarker();
    Lith_ShowAdviceMarker();

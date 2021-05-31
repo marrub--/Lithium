@@ -15,9 +15,9 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-void Upgr_HeadsUpDisW_Render(struct player *p, struct upgrade *upgr)
+void Upgr_HeadsUpDisW_Render(struct upgrade *upgr)
 {
-   Upgr_HeadsUpDisM_Render(p, upgr);
+   Upgr_HeadsUpDisM_Render(upgr);
 }
 
 /* EOF */

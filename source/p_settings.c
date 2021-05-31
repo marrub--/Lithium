@@ -39,7 +39,7 @@ struct setting {
       script i32  (*i)(struct set_parm const *sp, i32  *v);
       script k32  (*k)(struct set_parm const *sp, k32  *v);
    } cb_g;
-   script bool (*cb_e)(struct setting const *st, struct player *p);
+   script bool (*cb_e)(struct setting const *st);
    /* used by any with a scalar */
    union {
       struct {i32 min, max;} i;
@@ -52,7 +52,6 @@ struct setting {
 };
 
 struct set_parm {
-   struct player    *p;
    struct gui_state *g;
    i32 x, y;
    struct setting const *st;
@@ -64,8 +63,8 @@ struct set_parm {
    script static \
    type SG_cl##name(struct set_parm const *sp, type *v) { \
       str cvar = l_strcpy2(CVAR, sp->st->text); \
-      if(v) {sp->p->set##suff(cvar, *v); return *v;} \
-      else  {return sp->p->get##suff(cvar);} \
+      if(v) {pl.set##suff(cvar, *v); return *v;} \
+      else  {return pl.get##suff(cvar);} \
    }
 
 #define SG_svBody(type, name, suff) \
@@ -87,19 +86,19 @@ SG_svBody(k32,  Fixed, CVarFixed)
 script static
 bool SG_autoBuy(struct set_parm const *sp, bool *v) {
    i32 which = sp->st->text[strlen(sp->st->text) - 1] - '1';
-   if(v) {tog_bit(sp->p->autobuy, which); P_Data_Save(sp->p);}
-   return get_bit(sp->p->autobuy, which);
+   if(v) {tog_bit(pl.autobuy, which); P_Data_Save();}
+   return get_bit(pl.autobuy, which);
 }
 
 script static
 bool SG_doneIntro(struct set_parm const *sp, bool *v) {
-   if(v) {sp->p->done_intro ^= sp->p->pclass; P_Data_Save(sp->p);}
-   return sp->p->done_intro &  sp->p->pclass;
+   if(v) {pl.done_intro ^= pl.pclass; P_Data_Save();}
+   return pl.done_intro &  pl.pclass;
 }
 
 script static
-bool SE_server(struct setting const *st, struct player *p) {
-   return p->num == 0;
+bool SE_server(struct setting const *st) {
+   return pl.num == 0;
 }
 
 script static
@@ -196,10 +195,10 @@ void S_enume(struct set_parm const *sp) {
 }
 
 static
-bool S_isEnabled(struct setting const *st, struct player *p) {
+bool S_isEnabled(struct setting const *st) {
    return
-      (!st->cb_e   || st->cb_e(st, p)) &&
-      (!st->pclass || p->pclass & st->pclass);
+      (!st->cb_e   || st->cb_e(st)) &&
+      (!st->pclass || pl.pclass & st->pclass);
 }
 
 /* Static Objects ---------------------------------------------------------- */
@@ -383,7 +382,7 @@ struct {
 
 /* Extern Functions -------------------------------------------------------- */
 
-void P_CBI_TabSettings(struct gui_state *g, struct player *p) {
+void P_CBI_TabSettings(struct gui_state *g) {
    i32 set_num = 0;
 
    char tn[countof(settings)][20];
@@ -398,18 +397,18 @@ void P_CBI_TabSettings(struct gui_state *g, struct player *p) {
    size_t                num = settings[CBIState(g)->settingstab].num;
 
    for(i32 i = 0; i < num; i++)
-      if(S_isEnabled(&set[i], p))
+      if(S_isEnabled(&set[i]))
          set_num++;
 
    G_ScrBeg(g, &CBIState(g)->settingscr, 2, 17 + yp, _rght, 192 - yp,
             set_num * 10);
 
-   struct set_parm sp = {p, g, 0, 0};
+   struct set_parm sp = {g, 0, 0};
 
    for(i32 i = 0; i < num; i++) {
       sp.st = &set[i];
 
-      if(S_isEnabled(sp.st, p)) {
+      if(S_isEnabled(sp.st)) {
          if(!G_ScrOcc(g, &CBIState(g)->settingscr, sp.y, 10))
             sp.st->cb(&sp);
 

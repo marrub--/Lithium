@@ -11,7 +11,7 @@
 #include "p_player.h"
 #include "p_hudid.h"
 
-script void P_Ren_Step(struct player *p) {
+script void P_Ren_Step() {
    static struct {str nam, snd; i32 nxt;} const stepsnd[] = {
       {s"FWATER1", s"player/stepw", 11},
       {s"FWATER2", s"player/stepw", 11},
@@ -39,22 +39,22 @@ script void P_Ren_Step(struct player *p) {
 
    if(Paused) return;
 
-   if(p->nextstep) {p->nextstep--; return;}
+   if(pl.nextstep) {pl.nextstep--; return;}
 
-   k32 dstmul = fastabsk(p->getVel()) / 24.0;
-   k32 vol    = p->getCVarK(sc_player_footstepvol) * min(dstmul, 1);
+   k32 dstmul = fastabsk(pl.getVel()) / 24.0;
+   k32 vol    = pl.getCVarK(sc_player_footstepvol) * min(dstmul, 1);
 
    str floor = ACS_GetActorFloorTexture(0);
-   str snd   = p->stepnoise;
+   str snd   = pl.stepnoise;
    i32 next  = 10;
 
-   if(vol && p->onground) {
+   if(vol && pl.onground) {
       for(i32 i = 0; i < countof(stepsnd); i++)
          if(floor == stepsnd[i].nam) {snd = stepsnd[i].snd; next = stepsnd[i].nxt; break;}
 
-      ACS_SetActivator(p->cameratid);
+      ACS_SetActivator(pl.cameratid);
       StartSound(snd, lch_body, 0, vol);
-      p->nextstep = next;
+      pl.nextstep = next;
    }
 }
 

@@ -54,10 +54,8 @@ void FreezeTime(bool players_ok) {
 
    bool players_ok_mask = !singleplayer;
 
-   for_player() {
-      if(!players_ok) p->frozen++;
-      if(!p->frozen)  players_ok_mask = true;
-   }
+   if(!players_ok) pl.frozen++;
+   if(!pl.frozen)  players_ok_mask = true;
 
    ServCallI(sm_SetFrozen, true, players_ok_mask);
 }
@@ -66,7 +64,7 @@ void UnfreezeTime(bool players_ok) {
    if(frozen < 1) return;
 
    frozen--;
-   for_player() {if(!players_ok) p->frozen--;}
+   if(!players_ok) pl.frozen--;
 
    if(frozen < 1) ServCallI(sm_SetFrozen, false, 0);
 }

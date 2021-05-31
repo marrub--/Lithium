@@ -73,33 +73,33 @@ void G_Auto(struct gui_state *g, u32 id, i32 x, i32 y, i32 w, i32 h,
    #endif
 }
 
-void G_UpdateState(struct gui_state *g, struct player *p) {
+void G_UpdateState(struct gui_state *g) {
    /* Due to ZDoom being ZDoom, GetUserCVar with invertmouse does
     * nothing. This breaks network sync so we can only do it in
     * single-player.
     */
-   bool inverted = p->getCVarI(sc_player_invertmouse);
+   bool inverted = pl.getCVarI(sc_player_invertmouse);
 
    Str(sc_invertmouse, s"sc_invertmouse");
    if(singleplayer) inverted |= ACS_GetCVar(sc_invertmouse);
 
    g->old = g->cur;
 
-   k32 xmul = p->getCVarK(sc_gui_xmul);
-   k32 ymul = p->getCVarK(sc_gui_ymul);
+   k32 xmul = pl.getCVarK(sc_gui_xmul);
+   k32 ymul = pl.getCVarK(sc_gui_ymul);
 
-                g->cx -= p->yawv   * (800.0lk * xmul);
-   if(inverted) g->cy += p->pitchv * (800.0lk * ymul);
-   else         g->cy -= p->pitchv * (800.0lk * ymul);
+                g->cx -= pl.yawv   * (800.0lk * xmul);
+   if(inverted) g->cy += pl.pitchv * (800.0lk * ymul);
+   else         g->cy -= pl.pitchv * (800.0lk * ymul);
 
    g->cx = minmax(g->cx, 0, g->w);
    g->cy = minmax(g->cy, 0, g->h);
 
-   g->clicklft = p->buttons & BT_ATTACK;
-   g->clickrgt = p->buttons & BT_ALTATTACK;
+   g->clicklft = pl.buttons & BT_ATTACK;
+   g->clickrgt = pl.buttons & BT_ALTATTACK;
    g->clickany = g->clicklft || g->clickrgt;
 
-   g->defcr = Draw_GetCr(p->getCVarI(sc_gui_defcr));
+   g->defcr = Draw_GetCr(pl.getCVarI(sc_gui_defcr));
 
    if(!g->clickany)
       g->slide = 0;

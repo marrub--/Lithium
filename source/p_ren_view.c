@@ -14,52 +14,52 @@
 #include <math.h>
 
 /* Update view bobbing when you get damaged. */
-script static void P_Ren_DamageBob(struct player *p)
+script static void P_Ren_DamageBob()
 {
-   if(!InvNum(so_PowerStrength) && p->health < p->oldhealth) {
+   if(!InvNum(so_PowerStrength) && pl.health < pl.oldhealth) {
       k64 angle = (k64)ACS_RandomFixed(tau, -tau);
       k64 distance;
 
-      if(p->bobyaw + p->bobpitch > 0.05)
-         angle = lerplk(angle, atan2f(p->bobpitch, p->bobyaw), 0.25lk);
+      if(pl.bobyaw + pl.bobpitch > 0.05)
+         angle = lerplk(angle, atan2f(pl.bobpitch, pl.bobyaw), 0.25lk);
 
-      distance  = mag2k(p->bobyaw, p->bobpitch);
-      distance += (p->oldhealth - p->health) / (k64)p->maxhealth;
+      distance  = mag2k(pl.bobyaw, pl.bobpitch);
+      distance += (pl.oldhealth - pl.health) / (k64)pl.maxhealth;
       distance *= 0.2lk;
 
       k64 ys = sinf(angle), yc = cosf(angle);
-      p->bobyaw   = ys * distance;
-      p->bobpitch = yc * distance;
+      pl.bobyaw   = ys * distance;
+      pl.bobpitch = yc * distance;
    }
 
-   if(p->bobpitch) p->bobpitch = lerplk(p->bobpitch, 0.0, 0.1);
-   if(p->bobyaw  ) p->bobyaw   = lerplk(p->bobyaw,   0.0, 0.1);
+   if(pl.bobpitch) pl.bobpitch = lerplk(pl.bobpitch, 0.0, 0.1);
+   if(pl.bobyaw  ) pl.bobyaw   = lerplk(pl.bobyaw,   0.0, 0.1);
 }
 
 /* Update additive view. */
-void P_Ren_View(struct player *p)
+void P_Ren_View()
 {
    if(Paused) return;
 
-   P_Ren_DamageBob(p);
+   P_Ren_DamageBob();
 
    k64 addp = 0, addy = 0;
 
-   if(p->getCVarI(sc_player_damagebob)) {
-      k64 bobmul = p->getCVarK(sc_player_damagebobmul);
-      addp += p->bobpitch * bobmul;
-      addy += p->bobyaw   * bobmul;
+   if(pl.getCVarI(sc_player_damagebob)) {
+      k64 bobmul = pl.getCVarK(sc_player_damagebobmul);
+      addp += pl.bobpitch * bobmul;
+      addy += pl.bobyaw   * bobmul;
    }
 
-   if(p->extrpitch) p->extrpitch = lerplk(p->extrpitch, 0.0lk, 0.1lk);
-   if(p->extryaw  ) p->extryaw   = lerplk(p->extryaw,   0.0lk, 0.1lk);
+   if(pl.extrpitch) pl.extrpitch = lerplk(pl.extrpitch, 0.0lk, 0.1lk);
+   if(pl.extryaw  ) pl.extryaw   = lerplk(pl.extryaw,   0.0lk, 0.1lk);
 
-   p->addpitch = addp + p->extrpitch;
-   p->addyaw   = addy + p->extryaw;
+   pl.addpitch = addp + pl.extrpitch;
+   pl.addyaw   = addy + pl.extryaw;
 
-   ifauto(k32, mul, p->getCVarK(sc_player_viewtilt) * 0.2) {
-      /**/ if(p->sidev  ) p->addroll = lerplk(p->addroll, -p->sidev * mul, 0.10);
-      else if(p->addroll) p->addroll = lerplk(p->addroll, 0,               0.14);
+   ifauto(k32, mul, pl.getCVarK(sc_player_viewtilt) * 0.2) {
+      /**/ if(pl.sidev  ) pl.addroll = lerplk(pl.addroll, -pl.sidev * mul, 0.10);
+      else if(pl.addroll) pl.addroll = lerplk(pl.addroll, 0,               0.14);
    }
 }
 

@@ -13,6 +13,12 @@
 #include "lzscript/Client/StatScreen.zsc"
 #include "lzscript/Client/StatusBar.zsc"
 #include "lzscript/Client/UpdateMenu.zsc"
+#include "lzscript/Client/Projection.zsc"
+
+#include "lzscript/libeye/projector.zsc"
+#include "lzscript/libeye/projectorGl.zsc"
+#include "lzscript/libeye/projectorPlanar.zsc"
+#include "lzscript/libeye/viewport.zsc"
 
 /* URANUS: Users Really Are Not UI Systems */
 class Lith_URANUS : EventHandler;

@@ -169,12 +169,12 @@ struct upgradeinfo {
 
    i32 key;
 
-   void (*Activate)(struct player *, struct upgrade *);
-   void (*Deactivate)(struct player *, struct upgrade *);
-   script void (*Update)(struct player *, struct upgrade *);
-   void (*Enter)(struct player *, struct upgrade *);
-   void (*Render)(struct player *, struct upgrade *);
-   void (*Init)(struct player *, struct upgrade *);
+   void (*Activate)(struct upgrade *upgr);
+   void (*Deactivate)(struct upgrade *upgr);
+   script void (*Update)(struct upgrade *upgr);
+   void (*Enter)(struct upgrade *upgr);
+   void (*Render)(struct upgrade *upgr);
+   void (*Init)(struct upgrade *upgr);
 };
 
 struct upgrade {
@@ -186,9 +186,9 @@ struct upgrade {
    u32 flags;
 };
 
-bool P_Upg_CanActivate(struct player *p, struct upgrade *upgr);
-bool P_Upg_Toggle(struct player *p, struct upgrade *upgr);
-void P_Upg_SetOwned(struct player *p, struct upgrade *upgr);
+bool P_Upg_CanActivate(struct upgrade *upgr);
+bool P_Upg_Toggle(struct upgrade *upgr);
+void P_Upg_SetOwned(struct upgrade *upgr);
 
 i32 Upgr_StrToEnum(cstr s);
 cstr Upgr_EnumToStr(i32 n);

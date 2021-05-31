@@ -19,48 +19,48 @@
 
 /* Static Functions -------------------------------------------------------- */
 
-static void SetupAttributes(struct player *p)
+static void SetupAttributes()
 {
-   fastmemmove(p->attr.names[at_acc], "ACC", 3);
-   fastmemmove(p->attr.names[at_def], "DEF", 3);
-   fastmemmove(p->attr.names[at_str], "STR", 3);
-   fastmemmove(p->attr.names[at_vit], "VIT", 3);
-   fastmemmove(p->attr.names[at_stm], "STM", 3);
-   fastmemmove(p->attr.names[at_luk], "LUK", 3);
+   fastmemmove(pl.attr.names[at_acc], "ACC", 3);
+   fastmemmove(pl.attr.names[at_def], "DEF", 3);
+   fastmemmove(pl.attr.names[at_str], "STR", 3);
+   fastmemmove(pl.attr.names[at_vit], "VIT", 3);
+   fastmemmove(pl.attr.names[at_stm], "STM", 3);
+   fastmemmove(pl.attr.names[at_luk], "LUK", 3);
 
-   switch(p->pclass) {
-   case pcl_marine:    fastmemmove(p->attr.names[at_spc], "RGE", 3); break;
-   case pcl_cybermage: fastmemmove(p->attr.names[at_spc], "CON", 3); break;
-   case pcl_informant: fastmemmove(p->attr.names[at_spc], "ADR", 3); break;
-   case pcl_wanderer:  fastmemmove(p->attr.names[at_spc], "AGI", 3); break;
-   case pcl_assassin:  fastmemmove(p->attr.names[at_spc], "RSH", 3); break;
-   case pcl_darklord:  fastmemmove(p->attr.names[at_spc], "REF", 3); break;
-   case pcl_thoth:     fastmemmove(p->attr.names[at_spc], "MNA", 3); break;
+   switch(pl.pclass) {
+   case pcl_marine:    fastmemmove(pl.attr.names[at_spc], "RGE", 3); break;
+   case pcl_cybermage: fastmemmove(pl.attr.names[at_spc], "CON", 3); break;
+   case pcl_informant: fastmemmove(pl.attr.names[at_spc], "ADR", 3); break;
+   case pcl_wanderer:  fastmemmove(pl.attr.names[at_spc], "AGI", 3); break;
+   case pcl_assassin:  fastmemmove(pl.attr.names[at_spc], "RSH", 3); break;
+   case pcl_darklord:  fastmemmove(pl.attr.names[at_spc], "REF", 3); break;
+   case pcl_thoth:     fastmemmove(pl.attr.names[at_spc], "MNA", 3); break;
    }
 
-   if(p->pclass & pcl_robot) {
-      fastmemmove(p->attr.names[at_vit], "POT", 3);
-      fastmemmove(p->attr.names[at_stm], "REP", 3);
-   } else if(p->pclass & pcl_nonhuman) {
-      fastmemmove(p->attr.names[at_vit], "POT", 3);
-      fastmemmove(p->attr.names[at_stm], "REG", 3);
+   if(pl.pclass & pcl_robot) {
+      fastmemmove(pl.attr.names[at_vit], "POT", 3);
+      fastmemmove(pl.attr.names[at_stm], "REP", 3);
+   } else if(pl.pclass & pcl_nonhuman) {
+      fastmemmove(pl.attr.names[at_vit], "POT", 3);
+      fastmemmove(pl.attr.names[at_stm], "REG", 3);
    }
 
-   p->attr.expprev = 0;
-   p->attr.expnext = 500;
-   p->attr.level = 1;
+   pl.attr.expprev = 0;
+   pl.attr.expnext = 500;
+   pl.attr.level = 1;
 }
 
-static void SetPClass(struct player *p)
+static void SetPClass()
 {
-   __with(str cl = p->pcstr = ACS_GetActorClass(0);) {
-      /**/ if(cl == so_MarinePlayer   ) p->pclass = pcl_marine;
-      else if(cl == so_CyberMagePlayer) p->pclass = pcl_cybermage;
-      else if(cl == so_InformantPlayer) p->pclass = pcl_informant;
-      else if(cl == so_WandererPlayer ) p->pclass = pcl_wanderer;
-      else if(cl == so_AssassinPlayer ) p->pclass = pcl_assassin;
-      else if(cl == so_DarkLordPlayer ) p->pclass = pcl_darklord;
-      else if(cl == so_ThothPlayer    ) p->pclass = pcl_thoth;
+   __with(str cl = pl.pcstr = ACS_GetActorClass(0);) {
+      /**/ if(cl == so_MarinePlayer   ) pl.pclass = pcl_marine;
+      else if(cl == so_CyberMagePlayer) pl.pclass = pcl_cybermage;
+      else if(cl == so_InformantPlayer) pl.pclass = pcl_informant;
+      else if(cl == so_WandererPlayer ) pl.pclass = pcl_wanderer;
+      else if(cl == so_AssassinPlayer ) pl.pclass = pcl_assassin;
+      else if(cl == so_DarkLordPlayer ) pl.pclass = pcl_darklord;
+      else if(cl == so_ThothPlayer    ) pl.pclass = pcl_thoth;
       #ifndef NDEBUG
       else for(;;) {
          Log("Invalid player class detected, everything is going to explode!");
@@ -68,38 +68,38 @@ static void SetPClass(struct player *p)
       #endif
    }
 
-   p->discrim = P_Discrim(p->pclass);
-   p->color   = P_Color(p->pclass);
+   pl.discrim = P_Discrim(pl.pclass);
+   pl.color   = P_Color(pl.pclass);
 }
 
 /* Extern Functions -------------------------------------------------------- */
 
-bool P_ButtonPressed(struct player *p, i32 bt)
+bool P_ButtonPressed(i32 bt)
 {
-   return p->buttons & bt && !(p->old.buttons & bt);
+   return pl.buttons & bt && !(pl.old.buttons & bt);
 }
 
-bool P_SetVel(struct player *p, k32 velx, k32 vely, k32 velz, bool add)
+bool P_SetVel(k32 velx, k32 vely, k32 velz, bool add)
 {
-   if(add) p->velx += velx, p->vely += vely, p->velz += velz;
-   else    p->velx  = velx, p->vely  = vely, p->velz  = velz;
+   if(add) pl.velx += velx, pl.vely += vely, pl.velz += velz;
+   else    pl.velx  = velx, pl.vely  = vely, pl.velz  = velz;
 
-   return ACS_SetActorVelocity(p->tid, velx, vely, velz, add, true);
+   return ACS_SetActorVelocity(pl.tid, velx, vely, velz, add, true);
 }
 
-void P_ValidateTID(struct player *p)
+void P_ValidateTID()
 {
    if(ACS_ActivatorTID() == 0) {
-      ACS_Thing_ChangeTID(0, p->tid = ACS_UniqueTID());
-      Dbg_Log(log_dev, "set ptid from 0 to %i", p->tid);
-   } else if(p->tid != ACS_ActivatorTID()) {
-      Dbg_Log(log_dev, "set ptid from %i to %i", p->tid, ACS_ActivatorTID());
-      p->tid = ACS_ActivatorTID();
+      ACS_Thing_ChangeTID(0, pl.tid = ACS_UniqueTID());
+      Dbg_Log(log_dev, "set ptid from 0 to %i", pl.tid);
+   } else if(pl.tid != ACS_ActivatorTID()) {
+      Dbg_Log(log_dev, "set ptid from %i to %i", pl.tid, ACS_ActivatorTID());
+      pl.tid = ACS_ActivatorTID();
    }
 }
 
 /* Update all of the player's data. */
-void P_Dat_PTickPre(struct player *p)
+void P_Dat_PTickPre()
 {
    Str(so_c_card_b, s"ChexBlueCard");
    Str(so_c_card_r, s"ChexRedCard");
@@ -120,82 +120,82 @@ void P_Dat_PTickPre(struct player *p)
                    WARPF_COPYPITCH
    };
 
-   p->grabInput = false;
+   pl.grabInput = false;
 
-   ACS_Warp(p->cameratid,  4, 0, ACS_GetActorViewHeight(0), 0, _warpflags);
-   ACS_Warp(p->weathertid, 4, 0, ACS_GetActorViewHeight(0), 0, _warpflags);
+   ACS_Warp(pl.cameratid,  4, 0, ACS_GetActorViewHeight(0), 0, _warpflags);
+   ACS_Warp(pl.weathertid, 4, 0, ACS_GetActorViewHeight(0), 0, _warpflags);
 
-   p->x = GetX(0);
-   p->y = GetY(0);
-   p->z = GetZ(0);
+   pl.x = GetX(0);
+   pl.y = GetY(0);
+   pl.z = GetZ(0);
 
-   p->velx = ACS_GetActorVelX(0);
-   p->vely = ACS_GetActorVelY(0);
-   p->velz = ACS_GetActorVelZ(0);
+   pl.velx = ACS_GetActorVelX(0);
+   pl.vely = ACS_GetActorVelY(0);
+   pl.velz = ACS_GetActorVelZ(0);
 
-   p->pitch = ACS_GetActorPitch(0) - p->addpitch;
-   p->yaw   = ACS_GetActorAngle(0) - p->addyaw;
-   p->roll  = ACS_GetActorRoll (0) - p->addroll;
+   pl.pitch = ACS_GetActorPitch(0) - pl.addpitch;
+   pl.yaw   = ACS_GetActorAngle(0) - pl.addyaw;
+   pl.roll  = ACS_GetActorRoll (0) - pl.addroll;
 
-   p->pitchf = (-p->pitch + 0.25) * 2 * pi;
-   p->yawf   = p->yaw * tau - pi;
+   pl.pitchf = (-pl.pitch + 0.25) * 2 * pi;
+   pl.yawf   = pl.yaw * tau - pi;
 
-   p->pitchv = ACS_GetPlayerInputFixed(-1, INPUT_PITCH);
-   p->yawv   = ACS_GetPlayerInputFixed(-1, INPUT_YAW);
+   pl.pitchv = ACS_GetPlayerInputFixed(-1, INPUT_PITCH);
+   pl.yawv   = ACS_GetPlayerInputFixed(-1, INPUT_YAW);
 
-   p->forwardv = ACS_GetPlayerInputFixed(-1, INPUT_FORWARDMOVE);
-   p->sidev    = ACS_GetPlayerInputFixed(-1, INPUT_SIDEMOVE);
-   p->upv      = ACS_GetPlayerInputFixed(-1, INPUT_UPMOVE);
+   pl.forwardv = ACS_GetPlayerInputFixed(-1, INPUT_FORWARDMOVE);
+   pl.sidev    = ACS_GetPlayerInputFixed(-1, INPUT_SIDEMOVE);
+   pl.upv      = ACS_GetPlayerInputFixed(-1, INPUT_UPMOVE);
 
-   p->buttons = ACS_GetPlayerInput(-1, INPUT_BUTTONS);
+   pl.buttons = ACS_GetPlayerInput(-1, INPUT_BUTTONS);
 
-   p->name        = (ACS_BeginPrint(), ACS_PrintName(p->num), ACS_EndStrParam());
-   p->weaponclass = ACS_GetWeapon();
+   pl.name        = (ACS_BeginPrint(), ACS_PrintName(pl.num), ACS_EndStrParam());
+   pl.weaponclass = ACS_GetWeapon();
 
-   p->scopetoken = InvNum(so_WeaponScopedToken);
+   pl.scopetoken = InvNum(so_WeaponScopedToken);
 
-   p->krc = InvNum(so_d_card_r) || InvNum(so_c_card_r) || InvNum(so_htic_k_g);
-   p->kyc = InvNum(so_d_card_y) || InvNum(so_c_card_y) || InvNum(so_htic_k_y);
-   p->kbc = InvNum(so_d_card_b) || InvNum(so_c_card_b) || InvNum(so_htic_k_b);
-   p->krs = InvNum(so_d_skul_r);
-   p->kys = InvNum(so_d_skul_y);
-   p->kbs = InvNum(so_d_skul_b);
+   pl.krc = InvNum(so_d_card_r) || InvNum(so_c_card_r) || InvNum(so_htic_k_g);
+   pl.kyc = InvNum(so_d_card_y) || InvNum(so_c_card_y) || InvNum(so_htic_k_y);
+   pl.kbc = InvNum(so_d_card_b) || InvNum(so_c_card_b) || InvNum(so_htic_k_b);
+   pl.krs = InvNum(so_d_skul_r);
+   pl.kys = InvNum(so_d_skul_y);
+   pl.kbs = InvNum(so_d_skul_b);
 
    if(ACS_Timer() > 4) {
-      /**/ if(p->health < p->oldhealth) p->healthused += p->oldhealth - p->health;
-      else if(p->health > p->oldhealth) p->healthsum  += p->health    - p->oldhealth;
+      /**/ if(pl.health < pl.oldhealth) pl.healthused += pl.oldhealth - pl.health;
+      else if(pl.health > pl.oldhealth) pl.healthsum  += pl.health    - pl.oldhealth;
 
-      if(p->x != p->old.x) p->unitstravelled += fastabs(p->x - p->old.x);
-      if(p->y != p->old.y) p->unitstravelled += fastabs(p->y - p->old.y);
-      if(p->z != p->old.z) p->unitstravelled += fastabs(p->z - p->old.z);
+      if(pl.x != pl.old.x) pl.unitstravelled += fastabs(pl.x - pl.old.x);
+      if(pl.y != pl.old.y) pl.unitstravelled += fastabs(pl.y - pl.old.y);
+      if(pl.z != pl.old.z) pl.unitstravelled += fastabs(pl.z - pl.old.z);
    }
 }
 
 alloc_aut(0) script static
-void LevelUp(struct player *p, u32 *attr, char **attrptrs) {
-   u32 level = p->attr.level;
+void LevelUp(u32 *attr, char **attrptrs) {
+   u32 level = pl.attr.level;
 
    for(i32 i = 0; i < 35 * 5; i++) {
-      if(level != p->attr.level) {
+      if(level != pl.attr.level) {
          /* a new levelup started, so exit */
          goto done;
       }
 
       char **ptr = &attrptrs[i / (35 * 5 / at_max)];
       while(!*ptr) ptr++;
-      p->attr.lvupstrn = *ptr - p->attr.lvupstr;
+      pl.attr.lvupstrn = *ptr - pl.attr.lvupstr;
 
       ACS_Delay(1);
    }
 
-   p->attr.lvupstr[0] = '\0';
+   pl.attr.lvupstr[0] = '\0';
 done:
    Dalloc(attr);
    Dalloc(attrptrs);
 }
 
-void P_Lv_GiveEXP(struct player *p, u64 amt) {
-   struct player_attributes *a = &p->attr;
+void P_Lv_GiveEXP(u64 amt) {
+   struct player_attributes *a = &pl.attr;
 
    u32 *attr = Malloc(sizeof(u32) * at_max, _tag_huds);
    i32 levelup = 0;
@@ -206,7 +206,7 @@ void P_Lv_GiveEXP(struct player *p, u64 amt) {
       a->expnext = 500 + a->level * powlk(1.385, a->level * 0.2) * 340;
 
       i32 pts = 7;
-      switch(p->getCVarI(sc_player_lvsys)) {
+      switch(pl.getCVarI(sc_player_lvsys)) {
       case atsys_manual:
          a->points += 7;
          break;
@@ -241,7 +241,7 @@ void P_Lv_GiveEXP(struct player *p, u64 amt) {
          }
       }
 
-      LevelUp(p, attr, attrptrs);
+      LevelUp(attr, attrptrs);
    } else {
       Dalloc(attr);
    }
@@ -250,103 +250,103 @@ void P_Lv_GiveEXP(struct player *p, u64 amt) {
 }
 
 /* Reset some things on the player when they spawn. */
-script void P_Init(struct player *p) {
-   if(!p->wasinit) {
-      fastmemset(p, 0, sizeof *p);
+script void P_Init() {
+   if(!pl.wasinit) {
+      fastmemset(&pl, 0, sizeof pl);
 
-      p->active = true;
-      p->num    = ACS_PlayerNumber();
+      pl.active = true;
+      pl.num    = ACS_PlayerNumber();
 
-      SetPClass(p);
-      SetupAttributes(p);
+      SetPClass();
+      SetupAttributes();
 
-      p->viewheight   = GetViewHeight();
-      p->attackheight = GetAttackHeight();
-      p->jumpheight   = GetMembK(0, sm_JumpZ);
-      p->spawnhealth  = GetHealth(0);
-      p->maxhealth    = p->spawnhealth;
-      p->discount     = 1.0;
-      p->stepnoise    = StrParam("player/%S/step", p->classname);
+      pl.viewheight   = GetViewHeight();
+      pl.attackheight = GetAttackHeight();
+      pl.jumpheight   = GetMembK(0, sm_JumpZ);
+      pl.spawnhealth  = GetHealth(0);
+      pl.maxhealth    = pl.spawnhealth;
+      pl.discount     = 1.0;
+      pl.stepnoise    = StrParam("player/%S/step", pl.classname);
 
-      switch(ACS_GetPlayerInfo(p->num, PLAYERINFO_GENDER)) {
-         case 0: p->pronoun = pro_male;   break;
-         case 1: p->pronoun = pro_female; break;
-         case 2: p->pronoun = pro_nb;     break;
-         case 3: p->pronoun = pro_object; break;
+      switch(ACS_GetPlayerInfo(pl.num, PLAYERINFO_GENDER)) {
+         case 0: pl.pronoun = pro_male;   break;
+         case 1: pl.pronoun = pro_female; break;
+         case 2: pl.pronoun = pro_nb;     break;
+         case 3: pl.pronoun = pro_object; break;
       }
    }
 
-   fastmemset(&p->old, 0, sizeof p->old);
+   fastmemset(&pl.old, 0, sizeof pl.old);
 
-   p->reinit = p->dead = false;
+   pl.reinit = pl.dead = false;
 
    /* If the map sets the TID early on, it could already be set here. */
-   p->tid = 0;
-   P_ValidateTID(p);
+   pl.tid = 0;
+   P_ValidateTID();
 
-   if(p->cameratid)  ACS_Thing_Remove(p->cameratid);
-   if(p->weathertid) ACS_Thing_Remove(p->weathertid);
-   ACS_SpawnForced(so_CameraHax, 0, 0, 0, p->cameratid  = ACS_UniqueTID());
-   ACS_SpawnForced(so_CameraHax, 0, 0, 0, p->weathertid = ACS_UniqueTID());
+   if(pl.cameratid)  ACS_Thing_Remove(pl.cameratid);
+   if(pl.weathertid) ACS_Thing_Remove(pl.weathertid);
+   ACS_SpawnForced(so_CameraHax, 0, 0, 0, pl.cameratid  = ACS_UniqueTID());
+   ACS_SpawnForced(so_CameraHax, 0, 0, 0, pl.weathertid = ACS_UniqueTID());
 
    #ifndef NDEBUG
-   if(get_bit(dbgflags, dbgf_score)) p->score = 0xFFFFFFFFFFFFFFFFll;
+   if(get_bit(dbgflags, dbgf_score)) pl.score = 0xFFFFFFFFFFFFFFFFll;
    #endif
 
    /* Any linked lists on the player need to be initialized here. */
-   ListDtor(&p->hudstrlist, true);
+   ListDtor(&pl.hudstrlist, true);
 
    /* pls not exit map with murder thingies out */
    /* is bad practice */
    ACS_SetPlayerProperty(0, false, PROP_INSTANTWEAPONSWITCH);
-   SetViewHeight(0, p->viewheight);
+   SetViewHeight(0, pl.viewheight);
    InvTake(so_WeaponScopedToken, INT32_MAX);
 
-   P_CBI_PMinit(p);
+   P_CBI_PMinit();
 
-   p->frozen     = 0;
-   p->semifrozen = 0;
+   pl.frozen     = 0;
+   pl.semifrozen = 0;
 
-   p->addpitch = 0;
-   p->addyaw   = 0;
-   p->addroll  = 0;
+   pl.addpitch = 0;
+   pl.addyaw   = 0;
+   pl.addroll  = 0;
 
-   p->bobpitch = 0;
-   p->bobyaw   = 0;
+   pl.bobpitch = 0;
+   pl.bobyaw   = 0;
 
-   p->extrpitch = 0;
-   p->extryaw   = 0;
+   pl.extrpitch = 0;
+   pl.extryaw   = 0;
 
-   p->scoreaccum     = 0;
-   p->scoreaccumtime = 0;
-   p->scoremul       = 1.3;
+   pl.scoreaccum     = 0;
+   pl.scoreaccumtime = 0;
+   pl.scoremul       = 1.3;
 
    ServCallI(sm_PlayerInit);
 
-   p->alpha = 1;
+   pl.alpha = 1;
 
-   p->advice = snil;
+   pl.advice = snil;
 
-   p->attr.lvupstr[0] = '\0';
+   pl.attr.lvupstr[0] = '\0';
 
-   if(!p->bip.init) P_BIP_PInit(p);
+   if(!pl.bip.init) P_BIP_PInit();
 
-   if(!p->upgrinit) P_Upg_PInit(p);
-   else             P_Upg_PMInit(p);
+   if(!pl.upgrinit) P_Upg_PInit();
+   else             P_Upg_PMInit();
 
-   if(!p->invinit) P_Inv_PInit(p);
+   if(!pl.invinit) P_Inv_PInit();
 
-   if(!p->wasinit) {
-      p->logB(1, VersionName " :: Compiled " __DATE__);
+   if(!pl.wasinit) {
+      pl.logB(1, VersionName " :: Compiled " __DATE__);
 
       #ifndef NDEBUG
       if(dbglevel) {
-         p->logH(1, "player is %u bytes long!", sizeof *p * 4);
-         p->logH(1, "snil is \"%S\"", snil);
-         PrintDmonAllocSize(p);
+         pl.logH(1, "player is %u bytes long!", sizeof pl * 4);
+         pl.logH(1, "snil is \"%S\"", snil);
+         PrintDmonAllocSize();
       } else {
       #endif
-         p->logH(1, LC(LANG "LOG_StartGame"), sc_k_opencbi);
+         pl.logH(1, LC(LANG "LOG_StartGame"), sc_k_opencbi);
       #ifndef NDEBUG
       }
       #endif
@@ -360,47 +360,47 @@ script void P_Init(struct player *p) {
          ACS_SpawnForced(so_divsigil, x, y, z);
       }
 
-      p->wasinit = true;
+      pl.wasinit = true;
    }
 
    i32 minhealth = ACS_GetCVar(sc_sv_minhealth);
-   if(p->health < minhealth) {
-      p->health = minhealth;
+   if(pl.health < minhealth) {
+      pl.health = minhealth;
    }
 
    #ifndef NDEBUG
    if(get_bit(dbgflags, dbgf_items)) {
       for(i32 i = weapon_min; i < weapon_max; i++) {
          struct weaponinfo const *info = &weaponinfo[i];
-         if(info->classname != snil && info->pclass & p->pclass && !(info->defammotype & AT_Mana))
+         if(info->classname != snil && info->pclass & pl.pclass && !(info->defammotype & AT_Mana))
             InvGive(info->classname, 1);
       }
    }
    #endif
 }
 
-void P_Dat_PTickPst(struct player *p)
+void P_Dat_PTickPst()
 {
-   k32 boost = 1 + p->jumpboost;
+   k32 boost = 1 + pl.jumpboost;
 
-   if(p->frozen != p->old.frozen)
-      ACS_SetPlayerProperty(0, p->frozen > 0, PROP_TOTALLYFROZEN);
+   if(pl.frozen != pl.old.frozen)
+      ACS_SetPlayerProperty(0, pl.frozen > 0, PROP_TOTALLYFROZEN);
 
-   if(p->speedmul != p->old.speedmul)
-      SetMembK(0, sm_Speed, 0.7 + p->speedmul);
+   if(pl.speedmul != pl.old.speedmul)
+      SetMembK(0, sm_Speed, 0.7 + pl.speedmul);
 
-   if(p->jumpboost != p->old.jumpboost)
-      SetMembK(0, sm_JumpZ, p->jumpheight * boost);
+   if(pl.jumpboost != pl.old.jumpboost)
+      SetMembK(0, sm_JumpZ, pl.jumpheight * boost);
 }
 
 /* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr(OBJ "KeyDown")
-void Sc_KeyDown(i32 pnum, i32 ch)
+void Sc_KeyDown(i32 ch)
 {
-   with_player(&players[pnum])
-      if(p->tbptr + 1 < countof(p->txtbuf))
-         p->txtbuf[p->tbptr++] = ch;
+   if(!P_None())
+      if(pl.tbptr + 1 < countof(pl.txtbuf))
+         pl.txtbuf[pl.tbptr++] = ch;
 }
 
 /* EOF */

@@ -46,7 +46,7 @@ static struct shopitem shopitems[] = {
 
 /* Static Functions -------------------------------------------------------- */
 
-static bool Shop_CanBuy(struct player *p, struct shopdef const *, void *item_)
+static bool Shop_CanBuy(struct shopdef const *, void *item_)
 {
    struct shopitem *item = item_;
    i32 cur = InvNum(item->classname);
@@ -54,19 +54,19 @@ static bool Shop_CanBuy(struct player *p, struct shopdef const *, void *item_)
    return max == 0 || cur < max;
 }
 
-static void Shop_Buy(struct player *p, struct shopdef const *, void *item_)
+static void Shop_Buy(struct shopdef const *, void *item_)
 {
    struct shopitem *item = item_;
-   p->itemsbought++;
+   pl.itemsbought++;
    InvGive(item->classname, item->count);
 }
 
-static bool Shop_Give(struct player *p, struct shopdef const *, void *item_, i32 tid)
+static bool Shop_Give(struct shopdef const *, void *item_, i32 tid)
 {
    struct shopitem *item = item_;
-   p->itemsbought++;
+   pl.itemsbought++;
    if(item->weapon) {
-      PtrInvGive(p->tid, item->classname, item->count);
+      PtrInvGive(pl.tid, item->classname, item->count);
       return false;
    } else {
       PtrInvGive(tid, item->classname, item->count);
@@ -87,11 +87,11 @@ void Shop_MInit(void)
    }
 }
 
-void P_CBI_TabShop(struct gui_state *g, struct player *p)
+void P_CBI_TabShop(struct gui_state *g)
 {
    i32 nitems = 0;
    for(i32 i = 0; i < countof(shopitems); i++) {
-      if(shopitems[i].pclass & p->pclass)
+      if(shopitems[i].pclass & pl.pclass)
          nitems++;
    }
 
@@ -99,7 +99,7 @@ void P_CBI_TabShop(struct gui_state *g, struct player *p)
 
    for(i32 i = 0, y = 0; i < countof(shopitems); i++)
    {
-      if(G_ScrOcc(g, &CBIState(g)->shopscr, y, gui_p.btnlistsel.h) || !(shopitems[i].pclass & p->pclass))
+      if(G_ScrOcc(g, &CBIState(g)->shopscr, y, gui_p.btnlistsel.h) || !(shopitems[i].pclass & pl.pclass))
          continue;
 
       cstr name = LanguageC(LANG "SHOP_TITLE_%S", shopitems[i].name);
@@ -117,15 +117,15 @@ void P_CBI_TabShop(struct gui_state *g, struct player *p)
 
    G_Clip(g, g->ox+98, g->oy+17, 190, 170, 184);
 
-   PrintTextFmt("%s\Cnscr", scoresep(P_Shop_Cost(p, &item->shopdef)));
+   PrintTextFmt("%s\Cnscr", scoresep(P_Shop_Cost(&item->shopdef)));
    PrintText(sf_smallfnt, g->defcr, g->ox+98,1, g->oy+17,1);
 
    PrintText_str(Language(LANG "SHOP_DESCR_%S", item->name), sf_smallfnt, g->defcr, g->ox+98,1, g->oy+27,1);
 
    G_ClipRelease(g);
 
-   if(G_Button(g, LC(LANG "BUY"), 98, 192, !P_Shop_CanBuy(p, &item->shopdef, item), .fill = {&CBIState(g)->buyfill, p->getCVarI(sc_gui_buyfiller)}))
-      P_Shop_Buy(p, &item->shopdef, item, LANG "SHOP_TITLE_%S", false);
+   if(G_Button(g, LC(LANG "BUY"), 98, 192, !P_Shop_CanBuy(&item->shopdef, item), .fill = {&CBIState(g)->buyfill, pl.getCVarI(sc_gui_buyfiller)}))
+      P_Shop_Buy(&item->shopdef, item, LANG "SHOP_TITLE_%S", false);
 }
 
 /* EOF */

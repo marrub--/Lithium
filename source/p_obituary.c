@@ -36,8 +36,6 @@ void Sc_Obituary(void) {
       {"it",   "it",   "its",   "its'",   "it's"   },
    };
 
-   struct player *p = LocalPlayer;
-
    str obit = ServCallS(sm_GetObituary);
    if(obit == st_nil) return;
 
@@ -61,12 +59,12 @@ void Sc_Obituary(void) {
       i32 len;
 
       if(s[0] == '%') switch(s[1]) {
-         case 'o': s += 2; st = p->name;                 goto print_s;
-         case 'g': s += 2; cs = pronoun[p->pronoun].sub; goto print;
-         case 'h': s += 2; cs = pronoun[p->pronoun].obj; goto print;
-         case 'p': s += 2; cs = pronoun[p->pronoun].psd; goto print;
-         case 's': s += 2; cs = pronoun[p->pronoun].psi; goto print;
-         case 'r': s += 2; cs = pronoun[p->pronoun].act; goto print;
+         case 'o': s += 2; st = pl.name;                 goto print_s;
+         case 'g': s += 2; cs = pronoun[pl.pronoun].sub; goto print;
+         case 'h': s += 2; cs = pronoun[pl.pronoun].obj; goto print;
+         case 'p': s += 2; cs = pronoun[pl.pronoun].psd; goto print;
+         case 's': s += 2; cs = pronoun[pl.pronoun].psi; goto print;
+         case 'r': s += 2; cs = pronoun[pl.pronoun].act; goto print;
       print:   len =     strlen(cs);      strcpy(pt, cs); pt += len; continue;
       print_s: len = ACS_StrLen(st); lstrcpy_str(pt, st); pt += len; continue;
       }
@@ -78,7 +76,7 @@ void Sc_Obituary(void) {
 
    if(obit != st_nil) {
       Dbg_Log(log_dev, "%s", out);
-      for_player() p->logB(1, "%s", out);
+      pl.logB(1, "%s", out);
    }
 }
 

@@ -24,7 +24,7 @@ static str get_name(i32 w) {
    return Language(LANG "PK_%s_%.3i", name, ACS_Random(0, num));
 }
 
-static void silly_pickup(struct player *p, i32 weapon)
+static void silly_pickup(i32 weapon)
 {
    i32 fmtnum = strtoi(LC(LANG "PK_GET_NUM"),       nil, 10);
    i32 uncnum = strtoi(LC(LANG "PK_UNCERTAIN_NUM"), nil, 10);
@@ -43,38 +43,38 @@ static void silly_pickup(struct player *p, i32 weapon)
    cstr fmt = LanguageC(LANG "PK_GET_%.3i", ifmt);
    str  unc = Language (LANG "PK_UNCERTAIN_%.3i", iunc);
 
-        if(flag & 1 && flag & 4) p->logB(1, fmt, nam, nam, unc);
-   else if(flag & 1            ) p->logB(1, fmt, nam, nam);
-   else if(            flag & 4) p->logB(1, fmt, nam, unc);
-   else                          p->logB(1, fmt, nam);
+        if(flag & 1 && flag & 4) pl.logB(1, fmt, nam, nam, unc);
+   else if(flag & 1            ) pl.logB(1, fmt, nam, nam);
+   else if(            flag & 4) pl.logB(1, fmt, nam, unc);
+   else                          pl.logB(1, fmt, nam);
 }
 
-void P_Log_Weapon(struct player *p, struct weaponinfo const *info)
+void P_Log_Weapon(struct weaponinfo const *info)
 {
-   if(p->getCVarI(sc_player_stupidpickups))
-      silly_pickup(p, info->type);
+   if(pl.getCVarI(sc_player_stupidpickups))
+      silly_pickup(info->type);
    else if(info->name)
-      p->logB(1, LC(LANG "PK_GET_000"), Language(LANG "INFO_SHORT_%S", info->name));
+      pl.logB(1, LC(LANG "PK_GET_000"), Language(LANG "INFO_SHORT_%S", info->name));
    else
-      p->logB(1, "Acquired impossible object");
+      pl.logB(1, "Acquired impossible object");
 }
 
-void P_Log_SellWeapon(struct player *p, struct weaponinfo const *info, i96 score)
+void P_Log_SellWeapon(struct weaponinfo const *info, i96 score)
 {
    i32 weapon = info->type;
    bool ord = strtoi(LC(LANG "LOG_SellOrder"), nil, 10) == 0;
 
    str nam;
 
-   if(p->getCVarI(sc_player_stupidpickups))
+   if(pl.getCVarI(sc_player_stupidpickups))
       nam = get_name(weapon);
    else
       nam = Language(LANG "INFO_SHORT_%S", info->name);
 
    cstr msg = LC(LANG "LOG_Sell");
 
-   if(ord) p->logB(1, msg, nam, score);
-   else    p->logB(1, msg, score, nam);
+   if(ord) pl.logB(1, msg, nam, score);
+   else    pl.logB(1, msg, score, nam);
 }
 
 /* EOF */

@@ -14,7 +14,7 @@
 #include "u_common.h"
 #include "w_world.h"
 
-#define UData p->upgrdata.magic
+#define UData pl.upgrdata.magic
 
 /* Types ------------------------------------------------------------------- */
 
@@ -45,12 +45,12 @@ static void GiveMagic(struct magic_info const *m)
 }
 
 script
-static void UpdateMagicUI(struct player *p, struct upgrade *upgr)
+static void UpdateMagicUI(struct upgrade *upgr)
 {
    struct gui_state *g = &UData.gst;
 
    G_Begin(g, 320, 240);
-   G_UpdateState(g, p);
+   G_UpdateState(g);
 
    PrintSprite(sp_UI_MagicSelectBack, 0,1, 0,1);
 
@@ -89,22 +89,22 @@ static void UpdateMagicUI(struct player *p, struct upgrade *upgr)
 }
 
 alloc_aut(0) script
-static void GivePlayerZ(i32 tid, struct player *p)
+static void GivePlayerZ(i32 tid)
 {
    while(ACS_ThingCount(T_NONE, tid)) {
-      SetMembI(tid, sm_UserZ, p->z);
+      SetMembI(tid, sm_UserZ, pl.z);
       ACS_Delay(1);
    }
 }
 
-static void SetMagicUI(struct player *p, bool on)
+static void SetMagicUI(bool on)
 {
-   if(p->dead) return;
+   if(pl.dead) return;
 
    if(on)
    {
       UData.ui = true;
-      p->semifrozen++;
+      pl.semifrozen++;
 
       UData.gst.gfxprefix = ":UI:";
       UData.gst.cx = 320/2;
@@ -115,7 +115,7 @@ static void SetMagicUI(struct player *p, bool on)
       if(UData.gst.hot) GiveMagic(&minf[UData.gst.hot - 1]);
 
       UData.ui = false;
-      p->semifrozen--;
+      pl.semifrozen--;
 
       fastmemset(&UData.gst, 0, sizeof UData.gst);
    }
@@ -124,22 +124,22 @@ static void SetMagicUI(struct player *p, bool on)
 /* Extern Functions -------------------------------------------------------- */
 
 script
-void Upgr_Magic_Update(struct player *p, struct upgrade *upgr)
+void Upgr_Magic_Update(struct upgrade *upgr)
 {
-   k32 manaperc = p->mana / (k32)p->manamax;
+   k32 manaperc = pl.mana / (k32)pl.manamax;
 
    if(UData.manaperc < 1 && manaperc == 1)
       ACS_LocalAmbientSound(ss_player_manafull, 127);
 
    UData.manaperc = manaperc;
 
-   if(p->buttons & BT_USER4 && !(p->old.buttons & BT_USER4))
-      SetMagicUI(p, true);
-   else if(!(p->buttons & BT_USER4) && p->old.buttons & BT_USER4)
-      SetMagicUI(p, false);
+   if(pl.buttons & BT_USER4 && !(pl.old.buttons & BT_USER4))
+      SetMagicUI(true);
+   else if(!(pl.buttons & BT_USER4) && pl.old.buttons & BT_USER4)
+      SetMagicUI(false);
 
    if(UData.ui)
-      UpdateMagicUI(p, upgr);
+      UpdateMagicUI(upgr);
 
    if(manaperc >= 0.7)
       for(i32 i = 0; i < 5 * manaperc; i++)
@@ -150,18 +150,18 @@ void Upgr_Magic_Update(struct player *p, struct upgrade *upgr)
       i32 x   = ACS_Cos(ang) * dst;
       i32 y   = ACS_Sin(ang) * dst;
       i32 z   = ACS_Random(8, 48);
-      ACS_Spawn(so_ManaLeak, p->x + x, p->y + y, p->z + z, tid);
+      ACS_Spawn(so_ManaLeak, pl.x + x, pl.y + y, pl.z + z, tid);
       SetMembI(tid, sm_UserX, x);
       SetMembI(tid, sm_UserY, y);
       SetAlpha(tid, manaperc / 2);
-      PtrSet(tid, AAPTR_DEFAULT, AAPTR_MASTER, p->tid);
-      GivePlayerZ(tid, p);
+      PtrSet(tid, AAPTR_DEFAULT, AAPTR_MASTER, pl.tid);
+      GivePlayerZ(tid);
    }
 }
 
-void Upgr_Magic_Render(struct player *p, struct upgrade *upgr)
+void Upgr_Magic_Render(struct upgrade *upgr)
 {
-   if(!p->hudenabled) return;
+   if(!pl.hudenabled) return;
 
    i32 hprc = ceilk(min(UData.manaperc,        0.5k) * 2 * 62);
    i32 fprc = ceilk(max(UData.manaperc - 0.5k, 0.0k) * 2 * 62);
@@ -183,7 +183,7 @@ void Upgr_Magic_Render(struct player *p, struct upgrade *upgr)
 script_str ext("ACS") addr(OBJ "SetMagicUI")
 void Sc_SetMagicUI(bool on)
 {
-   with_player(LocalPlayer) SetMagicUI(p, on);
+   if(!P_None()) SetMagicUI(on);
 }
 
 /* EOF */

@@ -75,7 +75,7 @@ private void Lith_ShowDamageNums(int which) {
          m_dmgNumAmount--;
       } else {
          int a = int((dnum.m_ticks < 15 ? dnum.m_ticks / 15.0 : 1.0) * 255);
-         int x, y; bool seen; [x, y, seen] = Lith_Unproject(dnum.m_origin);
+         int x, y; bool seen; [x, y, seen] = Lith_URANUS.instance().project(dnum.m_origin);
 
          if(seen) {
             ACS_ExecuteWithResult(lsc_drawdmgnum,
@@ -100,13 +100,6 @@ private void Lith_ShowDamageNums(int which) {
          dnum = dnum.m_next;
       }
    }
-}
-
-private void Lith_PlayerIndicator(PlayerInfo p) {
-   let mo = p.MO;
-
-   int x, y; bool seen; [x, y, seen] = Lith_Unproject(mo.pos + (0, 0, mo.height));
-   if(seen) ACS_ExecuteWithResult(lsc_drawplayericon, mo.PlayerNumber(), x, y);
 }
 
 /* EOF */

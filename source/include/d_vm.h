@@ -446,7 +446,7 @@ struct dcd_info {
 
 void Dlg_MInit(void);
 
-script void Dlg_Run(struct player *p, u32 num);
+script void Dlg_Run(u32 num);
 
 /* Extern Objects ---------------------------------------------------------- */
 

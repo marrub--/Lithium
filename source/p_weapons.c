@@ -34,9 +34,9 @@ static void GiveWeaponItem(i32 parm, i32 slot)
    }
 }
 
-static void WeaponGrab(struct player *p, struct weaponinfo const *info)
+static void WeaponGrab(struct weaponinfo const *info)
 {
-   if(!get_bit(p->upgrades[UPGR_7777777].flags, _ug_active))
+   if(!get_bit(pl.upgrades[UPGR_7777777].flags, _ug_active))
       ACS_LocalAmbientSound(info->pickupsound,  127);
    else
       ACS_LocalAmbientSound(ss_marathon_pickup, 127);
@@ -51,16 +51,16 @@ static void WeaponGrab(struct player *p, struct weaponinfo const *info)
    }
 }
 
-static void PickupScore(struct player *p, i32 parm)
+static void PickupScore(i32 parm)
 {
    struct weaponinfo const *info = &weaponinfo[parm];
 
    i96 score = 4000 * info->slot;
 
    GiveWeaponItem(parm, info->slot);
-   score = P_Scr_Give(p, score);
+   score = P_Scr_Give(score);
 
-   P_Log_SellWeapon(p, info, score);
+   P_Log_SellWeapon(info, score);
 }
 
 /* Extern Functions -------------------------------------------------------- */
@@ -76,9 +76,9 @@ void Wep_GInit(void)
 
 /* Update information on what weapons we have. */
 script
-void P_Wep_PTickPre(struct player *p)
+void P_Wep_PTickPre()
 {
-   struct weapondata *w = &p->weapon;
+   struct weapondata *w = &pl.weapon;
 
    w->prev = w->cur;
 
@@ -92,13 +92,13 @@ void P_Wep_PTickPre(struct player *p)
       struct weaponinfo const *info = &weaponinfo[i];
       struct invweapon *wep = &w->inv[i];
 
-      if(!(p->pclass & info->pclass) || !(wep->owned = InvNum(info->classname)))
+      if(!(pl.pclass & info->pclass) || !(wep->owned = InvNum(info->classname)))
          continue;
 
       w->slot[info->slot] += wep->owned;
 
       /* Check for currently held weapon. */
-      if(!w->cur && p->weaponclass == info->classname)
+      if(!w->cur && pl.weaponclass == info->classname)
          w->cur = wep;
 
       wep->info      = info;
@@ -108,15 +108,15 @@ void P_Wep_PTickPre(struct player *p)
       /* Special exceptions. */
       switch(i) {
       case weapon_shotgun:
-         if(get_bit(p->upgrades[UPGR_GaussShotty].flags, _ug_active))
+         if(get_bit(pl.upgrades[UPGR_GaussShotty].flags, _ug_active))
             wep->ammotype = AT_NMag;
          break;
       case weapon_c_spas:
-         if(get_bit(p->upgrades[UPGR_SPAS_B].flags, _ug_active))
+         if(get_bit(pl.upgrades[UPGR_SPAS_B].flags, _ug_active))
             wep->ammotype = AT_Ammo;
          break;
       case weapon_plasma:
-         if(get_bit(p->upgrades[UPGR_PartBeam].flags, _ug_active))
+         if(get_bit(pl.upgrades[UPGR_PartBeam].flags, _ug_active))
             wep->ammotype = AT_AMag;
          break;
       }
@@ -126,7 +126,7 @@ void P_Wep_PTickPre(struct player *p)
       /* For slot 3 weapons that don't take ammo, check if they should. */
       case weapon_shotgun:
       case weapon_c_rifle:
-         if(p->getCVarI(sc_weapons_slot3ammo)) {
+         if(pl.getCVarI(sc_weapons_slot3ammo)) {
             wep->ammotype |= AT_Ammo;
             wep->ammoclass = so_ShellAmmo;
          }
@@ -137,8 +137,8 @@ void P_Wep_PTickPre(struct player *p)
       {
          if(wep->ammotype & AT_NMag)
          {
-            wep->magmax = ServCallI(sm_GetMaxMag, p->num, wep->info->classname);
-            wep->magcur = ServCallI(sm_GetCurMag, p->num, wep->info->classname);
+            wep->magmax = ServCallI(sm_GetMaxMag, pl.num, wep->info->classname);
+            wep->magcur = ServCallI(sm_GetCurMag, pl.num, wep->info->classname);
          }
 
          if(wep->ammotype & AT_Ammo)
@@ -149,10 +149,10 @@ void P_Wep_PTickPre(struct player *p)
       }
 
       /* Auto-reload. */
-      if(p->autoreload && wep->ammotype & AT_NMag && !(wep->ammotype & AT_Mana))
+      if(pl.autoreload && wep->ammotype & AT_NMag && !(wep->ammotype & AT_Mana))
       {
          if(wep->autoreload >= 35 * 3)
-            ServCallI(sm_AutoReload, p->num, info->classname);
+            ServCallI(sm_AutoReload, pl.num, info->classname);
 
          if(w->cur != wep) wep->autoreload++;
          else              wep->autoreload = 0;
@@ -163,7 +163,7 @@ void P_Wep_PTickPre(struct player *p)
 }
 
 script
-void P_Wep_PTick(struct player *p)
+void P_Wep_PTick()
 {
    if(!Paused) {
       i32 heat = InvNum(so_SMGHeat);
@@ -174,7 +174,7 @@ void P_Wep_PTick(struct player *p)
       else                InvTake(so_SMGHeat, 1);
    }
 
-   if(p->pclass == pcl_cybermage) {
+   if(pl.pclass == pcl_cybermage) {
                                      InvGive(so_Blade,    1);
                                      InvGive(so_Delear,   1);
       if(cbiupgr[cupg_c_slot3spell]) InvGive(so_Feuer,    1);
@@ -186,7 +186,7 @@ void P_Wep_PTick(struct player *p)
 
    SetSize(320, 240);
 
-   switch(P_Wep_CurType(p))
+   switch(P_Wep_CurType())
    {
    case weapon_c_fist:
       Str(sl_mana_charge, sLANG "MANA_CHARGE");
@@ -210,39 +210,38 @@ void P_Wep_PTick(struct player *p)
 script_str ext("ACS") addr(OBJ "WeaponPickup")
 bool Sc_WeaponPickup(i32 name)
 {
-   struct player *p = LocalPlayer;
-   if(P_None(p)) return false;
+   if(P_None()) return false;
 
    Str(sc_sv_weaponstay, s"sc_sv_weaponstay");
    bool weaponstay = ACS_GetCVar(sc_sv_weaponstay);
    i32 parm = weapon_unknown;
 
-   parm = P_Wep_FromName(p, name);
+   parm = P_Wep_FromName(name);
 
    if(parm >= weapon_max || parm < weapon_min)
       return true;
 
    struct weaponinfo const *info = &weaponinfo[parm];
 
-   if(HasWeapon(p, parm))
+   if(HasWeapon(parm))
    {
       if(!weaponstay) {
-         WeaponGrab(p, info);
-         PickupScore(p, parm);
+         WeaponGrab(info);
+         PickupScore(parm);
       }
 
       return !weaponstay;
    }
    else
    {
-      WeaponGrab(p, info);
+      WeaponGrab(info);
 
-      p->weaponsheld++;
+      pl.weaponsheld++;
       bip_name_t tag; lstrcpy_str(tag, info->name);
-      P_BIP_Unlock(p, tag);
+      P_BIP_Unlock(tag);
 
       GiveWeaponItem(parm, info->slot);
-      P_Log_Weapon(p, info);
+      P_Log_Weapon(info);
       InvGive(info->classname, 1);
 
       return !weaponstay;
@@ -281,9 +280,9 @@ i32 Sc_ChargeFistDamage(void)
 script_str ext("ACS") addr(OBJ "AmmoRunOut")
 k32 Sc_AmmoRunOut(bool ro, k32 mul)
 {
-   with_player(LocalPlayer)
+   if(!P_None())
    {
-      struct invweapon const *wep = p->weapon.cur;
+      struct invweapon const *wep = pl.weapon.cur;
       k32 inv = wep->magcur / (k32)wep->magmax;
 
       mul = mul ? mul : 1.2;
@@ -341,12 +340,12 @@ i32 Sc_GetWRF(void)
 
    i32 flags = 0;
 
-   with_player(LocalPlayer)
+   if(!P_None())
    {
-      if(p->semifrozen)
+      if(pl.semifrozen)
          flags |= WRF_NOFIRE;
 
-      if(p->pclass & (pcl_marine | pcl_darklord))
+      if(pl.pclass & (pcl_marine | pcl_darklord))
          flags |= WRF_ALLOWUSER4;
    }
 
@@ -378,7 +377,7 @@ void Sc_PoisonFXTicker(void) {
 script_str ext("ACS") addr(OBJ "RecoilUp")
 void Sc_RecoilUp(k32 amount)
 {
-   with_player(LocalPlayer) p->extrpitch += amount / 180.0lk;
+   if(!P_None()) pl.extrpitch += amount / 180.0lk;
 }
 
 /* EOF */

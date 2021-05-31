@@ -97,7 +97,7 @@ dmon_t *Dmon(i32 id);
 stkcall dmon_t *AllocDmon(void);
 
 void PrintMonsterInfo(dmon_t *m);
-void PrintDmonAllocSize(struct player *p);
+void PrintDmonAllocSize();
 #endif
 
 #endif

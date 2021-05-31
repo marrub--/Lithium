@@ -62,7 +62,6 @@ struct item {
    u32 x, y;
 
    struct container *container;
-   struct player *user;
 
    list link;
 };
@@ -72,7 +71,6 @@ struct container {
    cstr name;
    i32  type;
    list items;
-   struct player *user;
 };
 
 struct bagitem {
@@ -90,14 +88,14 @@ script void P_Item_Place(struct item *item, struct container *cont);
 
 optargs(1) struct bagitem *P_BagItem_New(i32 w, i32 h, i32 type, struct itemdata const *data);
 
-void P_Inv_PInit(struct player *p);
-void P_Inv_PQuit(struct player *p);
+void P_Inv_PInit();
+void P_Inv_PQuit();
 
 bool P_Inv_Place(struct container *cont, struct item *item, i32 x, i32 y);
 script bool P_Inv_PlaceFirst(struct container *cont, struct item *item);
 script bool P_Inv_SwapFirst(struct container *cont, struct item *lhs);
 bool P_Inv_Swap(struct item *lhs, struct item *rhs);
-bool P_Inv_Add(struct player *p, struct item *item);
+bool P_Inv_Add(struct item *item);
 #endif
 
 #endif

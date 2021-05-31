@@ -24,11 +24,11 @@ struct gui_txt *G_TxtBox_Imp(struct gui_state *g, u32 id, struct gui_arg_txt con
 
    bool hot = g->hot == id;
 
-   if(hot) a->p->grabInput = true;
+   if(hot) pl.grabInput = true;
 
-   if(*a->p->txtbuf) ACS_LocalAmbientSound(ss_player_cbi_keypress, 30);
+   if(*pl.txtbuf) ACS_LocalAmbientSound(ss_player_cbi_keypress, 30);
 
-   for(char *c = a->p->txtbuf; *c; c++)
+   for(char *c = pl.txtbuf; *c; c++)
    {
       switch(*c)
       {
@@ -61,8 +61,8 @@ struct gui_txt *G_TxtBox_Imp(struct gui_state *g, u32 id, struct gui_arg_txt con
    PrintText(sf_smallfnt, g->defcr, a->x + g->ox,1, a->y + g->oy,1);
    ClearClip();
 
-   fastmemset(a->p->txtbuf, 0, sizeof a->p->txtbuf);
-   a->p->tbptr = 0;
+   fastmemset(pl.txtbuf, 0, sizeof pl.txtbuf);
+   pl.tbptr = 0;
 
    return st;
 }

@@ -147,9 +147,10 @@ void Sc_GiveScore(i32 score)
 script_str ext("ACS") addr(OBJ "BoughtItemPickup")
 void Sc_BoughtItemPickup(i32 id)
 {
-   with_player(LocalPlayer) if(id)
+   if(P_None()) return;
+   if(id)
    {
-      struct upgrade *upgr = &p->upgrades[id];
+      struct upgrade *upgr = &pl.upgrades[id];
 
       if(!get_bit(upgr->flags, _ug_owned))
       {
@@ -159,15 +160,15 @@ void Sc_BoughtItemPickup(i32 id)
          case UC_Extr: StartSound(ss_player_pickup_upgrextr, lch_item, CHANF_NOPAUSE, 1.0, ATTN_NONE); break;
          }
 
-         P_Upg_SetOwned(p, upgr);
-         P_Upg_Toggle(p, upgr);
+         P_Upg_SetOwned(upgr);
+         P_Upg_Toggle(upgr);
       }
    }
    else
    {
       StartSound(ss_player_pickup_item, lch_item, CHANF_NOPAUSE, 1.0, ATTN_NONE);
 
-      p->itemsbought++;
+      pl.itemsbought++;
    }
 }
 

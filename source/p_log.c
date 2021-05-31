@@ -29,28 +29,28 @@ static void LogV(i32 levl) {
    }
 }
 
-static void LogPop(struct player *p) {
-   p->log.hudC--;
-   fastmemmove(&p->log.hudV[0], &p->log.hudV[1], sizeof p->log.hudV[0] * p->log.hudC);
+static void LogPop() {
+   pl.log.hudC--;
+   fastmemmove(&pl.log.hudV[0], &pl.log.hudV[1], sizeof pl.log.hudV[0] * pl.log.hudC);
 }
 
-static void LogH(struct player *p, struct logdat *ld) {
+static void LogH(struct logdat *ld) {
    ld->ftim = 5;
-   ld->time = 140 - p->log.curtime;
-   p->log.curtime = 140;
+   ld->time = 140 - pl.log.curtime;
+   pl.log.curtime = 140;
 
-   if(p->log.hudC >= countof(p->log.hudV)) LogPop(p);
-   p->log.hudV[p->log.hudC++] = *ld;
+   if(pl.log.hudC >= countof(pl.log.hudV)) LogPop();
+   pl.log.hudV[pl.log.hudC++] = *ld;
 }
 
-static void LogF(struct player *p, struct logfdt *lf) {
-   Vec_GrowN(p->log.curmap->data, 1, 8, _tag_logs);
-   Vec_Next(p->log.curmap->data) = *lf;
+static void LogF(struct logfdt *lf) {
+   Vec_GrowN(pl.log.curmap->data, 1, 8, _tag_logs);
+   Vec_Next(pl.log.curmap->data) = *lf;
 }
 
 /* Extern Functions -------------------------------------------------------- */
 
-void P_Log_Both(struct player *p, i32 levl, cstr fmt, ...) {
+void P_Log_Both(i32 levl, cstr fmt, ...) {
    struct logdat ld = {};
 
    LogV(levl);
@@ -62,11 +62,11 @@ void P_Log_Both(struct player *p, i32 levl, cstr fmt, ...) {
 
    ld.inf = ACS_EndStrParam();
 
-   LogF(p, &ld.fdta);
-   LogH(p, &ld);
+   LogF(&ld.fdta);
+   LogH(&ld);
 }
 
-void P_Log_HUDs(struct player *p, i32 levl, cstr fmt, ...) {
+void P_Log_HUDs(i32 levl, cstr fmt, ...) {
    struct logdat ld = {};
 
    LogV(levl);
@@ -78,10 +78,10 @@ void P_Log_HUDs(struct player *p, i32 levl, cstr fmt, ...) {
 
    ld.inf = ACS_EndStrParam();
 
-   LogH(p, &ld);
+   LogH(&ld);
 }
 
-void P_Log_Full(struct player *p, cstr fmt, ...) {
+void P_Log_Full(cstr fmt, ...) {
    struct logfdt lf = {};
 
    ACS_BeginPrint();
@@ -93,56 +93,56 @@ void P_Log_Full(struct player *p, cstr fmt, ...) {
 
    lf.inf = ACS_EndStrParam();
 
-   LogF(p, &lf);
+   LogF(&lf);
 }
 
-void P_Log_Entry(struct player *p) {
+void P_Log_Entry() {
    struct logmap *lm = nil;
    i32 lnum = MapNum;
 
-   for(i32 i = 0; i < p->log.mapsC; i++)
-      if(p->log.mapsV[i].lnum == lnum) {lm = &p->log.mapsV[i]; break;}
+   for(i32 i = 0; i < pl.log.mapsC; i++)
+      if(pl.log.mapsV[i].lnum == lnum) {lm = &pl.log.mapsV[i]; break;}
 
    if(!lm)
    {
-      Vec_GrowN(p->log.maps, 1, 32, _tag_logs);
-      lm = &Vec_Next(p->log.maps);
+      Vec_GrowN(pl.log.maps, 1, 32, _tag_logs);
+      lm = &Vec_Next(pl.log.maps);
       lm->name = (ACS_BeginPrint(), ACS_PrintName(PRINTNAME_LEVELNAME), ACS_EndStrParam());
       lm->lnum = lnum;
    }
 
-   p->log.curmap = lm;
+   pl.log.curmap = lm;
 
-   p->logF(LC(LANG "ENTER_FMT"), lm->name, CanonTime(ct_full, ticks));
+   pl.logF(LC(LANG "ENTER_FMT"), lm->name, CanonTime(ct_full, ticks));
 }
 
-script void P_Log_PTick(struct player *p) {
-   if(p->log.curtime == 0) {
-      if(p->log.hudC) {
-         LogPop(p);
-         p->log.curtime = p->log.hudV[p->log.hudC - 1].time;
+script void P_Log_PTick() {
+   if(pl.log.curtime == 0) {
+      if(pl.log.hudC) {
+         LogPop();
+         pl.log.curtime = pl.log.hudV[pl.log.hudC - 1].time;
       }
    } else {
-      p->log.curtime--;
+      pl.log.curtime--;
    }
 
-   for(i32 i = 0; i < p->log.hudC; i++) {
-      if(p->log.hudV[i].ftim) {
-         p->log.hudV[i].ftim--;
+   for(i32 i = 0; i < pl.log.hudC; i++) {
+      if(pl.log.hudV[i].ftim) {
+         pl.log.hudV[i].ftim--;
       }
    }
 }
 
-void P_CBI_TabLog(struct gui_state *g, struct player *p) {
+void P_CBI_TabLog(struct gui_state *g) {
    static i32 const ht = 10;
 
    if(G_Button(g, .x = 12, 25, Pre(btnprev)))
-      if(--CBIState(g)->logsel < 0) CBIState(g)->logsel = p->log.mapsC - 1;
+      if(--CBIState(g)->logsel < 0) CBIState(g)->logsel = pl.log.mapsC - 1;
 
    if(G_Button(g, .x = 12 + gui_p.btnprev.w, 25, Pre(btnnext)))
-      if(++CBIState(g)->logsel >= p->log.mapsC) CBIState(g)->logsel = 0;
+      if(++CBIState(g)->logsel >= pl.log.mapsC) CBIState(g)->logsel = 0;
 
-   struct logmap *lm = &p->log.mapsV[CBIState(g)->logsel];
+   struct logmap *lm = &pl.log.mapsV[CBIState(g)->logsel];
 
    PrintText_str(lm->name, sf_lmidfont, g->defcr, g->ox+15+gui_p.btnprev.w+gui_p.btnnext.w,1, g->oy+27,1);
 
@@ -160,9 +160,9 @@ void P_CBI_TabLog(struct gui_state *g, struct player *p) {
    G_ScrEnd(g, &CBIState(g)->logscr);
 }
 
-script void HUD_Log(struct player *p, i32 cr, i32 x, i32 yy) {
-   if(p->getCVarI(sc_hud_showlog)) {
-      k32 scale = p->getCVarK(sc_hud_logsize);
+script void HUD_Log(i32 cr, i32 x, i32 yy) {
+   if(pl.getCVarI(sc_hud_showlog)) {
+      k32 scale = pl.getCVarK(sc_hud_logsize);
       i32 yo = 200 / scale;
       i32 xs = 320 / scale;
       i32 ys = 240 / scale;
@@ -171,13 +171,13 @@ script void HUD_Log(struct player *p, i32 cr, i32 x, i32 yy) {
       SetClipW(0, 0, xs, ys, xs);
 
       i32 i = 0;
-      for(i32 i = 0; i < p->log.hudC; i++) {
-         struct logdat const *const ld = &p->log.hudV[i];
+      for(i32 i = 0; i < pl.log.hudC; i++) {
+         struct logdat const *const ld = &pl.log.hudV[i];
 
          i32 y = 10 * i;
          i32 ya;
 
-         if(p->getCVarI(sc_hud_logfromtop)) {ya = 1; y = 20 + y;}
+         if(pl.getCVarI(sc_hud_logfromtop)) {ya = 1; y = 20 + y;}
          else                               {ya = 2; y = (yo - y) + yy;}
 
          PrintText_str(ld->inf, sf_lmidfont, cr, x,1, y,ya);
@@ -203,11 +203,11 @@ void Sc_Log(i32 levl, i32 type) {
 
    if(name[0] == '_') name = Language(LANG "LOG%S", name);
 
-   with_player(LocalPlayer) switch(type) {
-   case msg_ammo: if(p->getCVarI(sc_player_ammolog))
-   case msg_huds: p->logH(levl, "%S", name); break;
-   case msg_full: p->logF(      "%S", name); break;
-   case msg_both: p->logB(levl, "%S", name); break;
+   if(!P_None()) switch(type) {
+   case msg_ammo: if(pl.getCVarI(sc_player_ammolog))
+   case msg_huds: pl.logH(levl, "%S", name); break;
+   case msg_full: pl.logF(      "%S", name); break;
+   case msg_both: pl.logB(levl, "%S", name); break;
    }
 }
 

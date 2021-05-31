@@ -237,7 +237,6 @@ struct gui_arg_sld {
 struct gui_arg_txt {
    struct gui_txt *st;
    i32 x, y;
-   struct player *p;
 };
 
 struct gui_pre_win {
@@ -307,7 +306,7 @@ extern struct gui_presets const gui_p;
 optargs(1)
 void G_Auto(struct gui_state *g, u32 id, i32 x, i32 y, i32 w, i32 h, bool slide);
 
-void G_UpdateState(struct gui_state *g, struct player *p);
+void G_UpdateState(struct gui_state *g);
 
 optargs(2)
 void G_Begin(struct gui_state *g, i32 w, i32 h);

@@ -11,7 +11,7 @@
 #include "p_player.h"
 #include "p_hudid.h"
 
-static void StringStack(struct player *p) {
+static void StringStack() {
    struct hudstr {str s; list link;};
 
    if(ACS_Timer() % 3 == 0) {
@@ -19,23 +19,23 @@ static void StringStack(struct player *p) {
       ListCtor(&hudstr->link, hudstr);
       hudstr->s = StrParam("%.8X", ACS_Random(INT32_MIN + 1, INT32_MAX));
 
-      hudstr->link.link(&p->hudstrlist);
+      hudstr->link.link(&pl.hudstrlist);
 
-      if(p->hudstrlist.size() == 20) Dalloc(p->hudstrlist.next->unlink());
+      if(pl.hudstrlist.size() == 20) Dalloc(pl.hudstrlist.next->unlink());
    }
 
    SetSize(320, 200);
 
    size_t i = 0;
-   for_list_back_it(struct hudstr *hudstr, p->hudstrlist, i++)
+   for_list_back_it(struct hudstr *hudstr, pl.hudstrlist, i++)
       PrintTextA_str(hudstr->s, sf_ltrmfont, CR_RED, 300,2, 20+i*9,1, 0.5);
 }
 
-static void Waves(struct player *p) {
+static void Waves() {
    StrAry(fs, s":HUD:H_D11", s":HUD:H_D12", s":HUD:H_D13", s":HUD:H_D14",
               s":HUD:H_D15");
 
-   k32 health = p->health / (k32)p->maxhealth;
+   k32 health = pl.health / (k32)pl.maxhealth;
    i32 frame  = minmax(health * 4, 1, 5);
    i32 timer  = ACS_Timer();
 
@@ -69,10 +69,10 @@ static void Waves(struct player *p) {
    }
 }
 
-static void ScopeC(struct player *p) {
+static void ScopeC() {
    i32 which = ACS_Timer() % 16 / 4;
 
-   if(p->scopetoken) {
+   if(pl.scopetoken) {
       SetFadeA(fid_scopecoS + which, 1, 16, 0.5);
 
       for(i32 i = 0; i < 200; i++) {
@@ -97,7 +97,7 @@ static void ScopeC(struct player *p) {
    }
 }
 
-static void ScopeI(struct player *p) {
+static void ScopeI() {
    Str(sp_HUD_I_ScopeOverlay, s":HUD_I:ScopeOverlay");
 
    k32 a = (1 + ACS_Sin(ACS_Timer() / 70.0)) * 0.25 + 0.5;
@@ -105,19 +105,19 @@ static void ScopeI(struct player *p) {
    PrintSpriteAP(sp_HUD_I_ScopeOverlay, 160,0, 100,0, a);
 }
 
-static void ScopeM(struct player *p) {
-   Waves(p);
-   StringStack(p);
+static void ScopeM() {
+   Waves();
+   StringStack();
 }
 
-script void P_Ren_Scope(struct player *p) {
-   if(p->old.scopetoken && !p->scopetoken)
-      ListDtor(&p->hudstrlist, true);
+script void P_Ren_Scope() {
+   if(pl.old.scopetoken && !pl.scopetoken)
+      ListDtor(&pl.hudstrlist, true);
 
-   switch(p->pclass) {
-      case pcl_cybermage:                   ScopeC(p); break;
-      case pcl_informant: if(p->scopetoken) ScopeI(p); break;
-      case pcl_marine:    if(p->scopetoken) ScopeM(p); break;
+   switch(pl.pclass) {
+      case pcl_cybermage:                   ScopeC(); break;
+      case pcl_informant: if(pl.scopetoken) ScopeI(); break;
+      case pcl_marine:    if(pl.scopetoken) ScopeM(); break;
    }
 }
 

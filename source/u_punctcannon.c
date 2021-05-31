@@ -17,7 +17,7 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-void Upgr_PunctCannon_Deactivate(struct player *p, struct upgrade *upgr) {
+void Upgr_PunctCannon_Deactivate(struct upgrade *upgr) {
    InvGive(so_GTFO, 1);
 }
 
@@ -25,13 +25,13 @@ void Upgr_PunctCannon_Deactivate(struct player *p, struct upgrade *upgr) {
 
 script_str ext("ACS") addr(OBJ "PunctuatorFire")
 void Sc_PunctuatorFire(void) {
-   with_player(LocalPlayer) {
-      struct k32v3 v = trace_from(p->yaw, p->pitch, 2048, p->attackheight);
+   if(!P_None()) {
+      struct k32v3 v = trace_from(pl.yaw, pl.pitch, 2048, pl.attackheight);
       ACS_SpawnForced(so_PunctuatorPuff, v.x, v.y, v.z);
 
-      k64 yaw = atan2f(p->y - v.y, p->x - v.x);
+      k64 yaw = atan2f(pl.y - v.y, pl.x - v.x);
 
-      k64 ps = sinf(p->pitchf), cz = cosf(p->pitchf);
+      k64 ps = sinf(pl.pitchf), cz = cosf(pl.pitchf);
       k64 ys = sinf(yaw      ), yc = cosf(yaw      );
 
       k64 cx = ps * yc;
@@ -47,8 +47,8 @@ void Sc_PunctuatorFire(void) {
          ACS_SpawnForced(so_PunctuatorExplosion, sx, sy, sz, etid);
 
          ACS_SetActivator(etid);
-         ACS_SetPointer(AAPTR_TARGET, p->tid);
-         p->setActivator();
+         ACS_SetPointer(AAPTR_TARGET, pl.tid);
+         pl.setActivator();
       }
    }
 }

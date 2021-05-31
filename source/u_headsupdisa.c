@@ -19,8 +19,8 @@ Str(sp_HUD_A_LeftBack,  s":HUD_A:LeftBack");
 
 /* Static Functions -------------------------------------------------------- */
 
-static void HUD_Ammo(struct player *p) {
-   struct invweapon const *wep = p->weapon.cur;
+static void HUD_Ammo() {
+   struct invweapon const *wep = pl.weapon.cur;
 
    if(wep->ammotype & AT_AMag)
       PrintSprite(sp_HUD_A_RightBack, 320,2, 239,2);
@@ -44,19 +44,19 @@ static void HUD_Ammo(struct player *p) {
 
 /* Extern Functions -------------------------------------------------------- */
 
-void Upgr_HeadsUpDisA_Render(struct player *p, struct upgrade *upgr) {
-   if(!p->hudenabled) return;
+void Upgr_HeadsUpDisA_Render(struct upgrade *upgr) {
+   if(!pl.hudenabled) return;
 
-   HUD_Log(p, Cr(pink), 0, -5);
-   HUD_KeyInd(p, 320, 28, true, 0.8);
-   HUD_Score(p, "%s \CjSCR", p->score, sf_lmidfont, Cr(pink), 320,2);
+   HUD_Log(Cr(pink), 0, -5);
+   HUD_KeyInd(320, 28, true, 0.8);
+   HUD_Score("%s \CjSCR", pl.score, sf_lmidfont, Cr(pink), 320,2);
 
-   HUD_WeaponSlots(p, Cr(wsela1), Cr(wsela2), Cr(wsela3), Cr(wselas), 323, 220);
+   HUD_WeaponSlots(Cr(wsela1), Cr(wsela2), Cr(wsela3), Cr(wselas), 323, 220);
 
    /* Status */
-   HUD_Ammo(p);
+   HUD_Ammo();
    PrintSprite(sp_HUD_A_LeftBack, 0,1, 239,2);
-   HUD_DrawHealth(p, p->health, 4, 231, Cr(pink), 0);
+   HUD_DrawHealth(pl.health, 4, 231, Cr(pink), 0);
 }
 
 /* EOF */

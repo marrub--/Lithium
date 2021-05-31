@@ -113,7 +113,6 @@ enum ZscName(ScriptNum) {
    lsc_metr_tex,
    lsc_metr_w,
    lsc_metr_h,
-   lsc_drawplayericon,
    lsc_pdata,
    lsc_wdata,
    lsc_addangle,
@@ -217,7 +216,7 @@ optargs(1) void FreezeTime(bool players_ok);
 optargs(1) void UnfreezeTime(bool players_ok);
 script void CBI_Install(i32 num);
 script void W_Title(void);
-script void F_Run(struct player *p);
+script void F_Run();
 void F_Load(void);
 void F_Start(cstr which);
 script void W_DoRain();

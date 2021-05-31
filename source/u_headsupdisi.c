@@ -14,7 +14,7 @@
 #include "u_common.h"
 #include "p_hud.h"
 
-#define UData p->upgrdata.headsupdisi
+#define UData pl.upgrdata.headsupdisi
 
 Str(sp_HUD_I_AMMO,         s":HUD_I:AMMO");
 Str(sp_HUD_I_AmmoExtend,   s":HUD_I:AmmoExtend");
@@ -24,8 +24,8 @@ Str(sp_HUD_I_MAG,          s":HUD_I:MAG");
 
 /* Static Functions -------------------------------------------------------- */
 
-static void HUDI_Ammo(struct player *p, struct upgrade *upgr) {
-   struct invweapon const *wep = p->weapon.cur;
+static void HUDI_Ammo(struct upgrade *upgr) {
+   struct invweapon const *wep = pl.weapon.cur;
 
    str typegfx = snil;
 
@@ -65,19 +65,19 @@ static void HUDI_Ammo(struct player *p, struct upgrade *upgr) {
       PrintSprite(typegfx, 309,0, 219,0);
    }
 
-   HUD_WeaponSlots(p, Cr(wseli1), Cr(wseli2), Cr(wseli3), Cr(wselis), 323, 208);
+   HUD_WeaponSlots(Cr(wseli1), Cr(wseli2), Cr(wseli3), Cr(wselis), 323, 208);
 }
 
-static void HUDI_HealthArmor(struct player *p, struct upgrade *upgr)
+static void HUDI_HealthArmor(struct upgrade *upgr)
 {
    PrintSprite(sp_HUD_I_HPAPBack, 0,1, 230,2);
 
-   UData.health.value = p->health;
+   UData.health.value = pl.health;
    lerplli(&UData.health);
 
-   HUD_DrawHealth(p, UData.health.value_display, 21, 202, Cr(purple), 0);
+   HUD_DrawHealth(UData.health.value_display, 21, 202, Cr(purple), 0);
 
-   UData.overdrive.value = p->overdrive;
+   UData.overdrive.value = pl.overdrive;
    lerplli(&UData.overdrive);
 
    PrintTextFmt("%lli", UData.overdrive.value_display);
@@ -86,29 +86,29 @@ static void HUDI_HealthArmor(struct player *p, struct upgrade *upgr)
 
 /* Extern Functions -------------------------------------------------------- */
 
-void Upgr_HeadsUpDisI_Activate(struct player *p, struct upgrade *upgr)
+void Upgr_HeadsUpDisI_Activate(struct upgrade *upgr)
 {
-   lerplli_init(&UData.score,     p->score,     4);
-   lerplli_init(&UData.health,    p->health,    1);
-   lerplli_init(&UData.overdrive, p->overdrive, 1);
+   lerplli_init(&UData.score,     pl.score,     4);
+   lerplli_init(&UData.health,    pl.health,    1);
+   lerplli_init(&UData.overdrive, pl.overdrive, 1);
 }
 
-void Upgr_HeadsUpDisI_Render(struct player *p, struct upgrade *upgr)
+void Upgr_HeadsUpDisI_Render(struct upgrade *upgr)
 {
-   if(!p->hudenabled) return;
+   if(!pl.hudenabled) return;
 
-   HUD_Log(p, Cr(purple), 0, -15);
+   HUD_Log(Cr(purple), 0, -15);
 
-   HUD_KeyInd(p, 20, 20, false, 0.8);
+   HUD_KeyInd(20, 20, false, 0.8);
 
-   UData.score.value = p->score;
+   UData.score.value = pl.score;
    lerplli(&UData.score);
 
-   HUD_Score(p, "%s \CnScore", UData.score.value_display, sf_lmidfont, Cr(purple), 2,1);
+   HUD_Score("%s \CnScore", UData.score.value_display, sf_lmidfont, Cr(purple), 2,1);
 
    /* Status */
-   HUDI_Ammo(p, upgr);
-   HUDI_HealthArmor(p, upgr);
+   HUDI_Ammo(upgr);
+   HUDI_HealthArmor(upgr);
 }
 
 /* EOF */

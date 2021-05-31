@@ -23,12 +23,10 @@ static i32  lmvar rain_dist;
 dynam_aut script
 void W_DoRain(void)
 {
-   struct player *p = &players[0];
-
-   ACS_SetActivator(p->weathertid);
+   ACS_SetActivator(pl.weathertid);
    StartSound(ss_amb_wind, lch_body,  CHANF_LOOP, 0.001, ATTN_NONE);
    StartSound(ss_amb_rain, lch_voice, CHANF_LOOP, 0.001, ATTN_NONE);
-   p->setActivator();
+   pl.setActivator();
 
    k32 skydist, curskydist = 1;
    for(;;) {
@@ -36,8 +34,8 @@ void W_DoRain(void)
 
       if((rain_chk = !ACS_CheckActorCeilingTexture(0, sp_f_sky1))) {
          rain_dist = 1024;
-         rain_px = p->x;
-         rain_py = p->y;
+         rain_px = pl.x;
+         rain_py = pl.y;
       } else {
          InvTake(so_SMGHeat, 1);
       }
@@ -58,8 +56,8 @@ void W_DoRain(void)
          skydist = 0;
 
       curskydist = lerpk(curskydist, skydist, 0.035);
-      ACS_SoundVolume(p->weathertid, lch_body,  1 - curskydist);
-      ACS_SoundVolume(p->weathertid, lch_voice, 1 - curskydist);
+      ACS_SoundVolume(pl.weathertid, lch_body,  1 - curskydist);
+      ACS_SoundVolume(pl.weathertid, lch_voice, 1 - curskydist);
    }
 }
 

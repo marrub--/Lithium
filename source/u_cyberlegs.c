@@ -15,32 +15,32 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-void Upgr_CyberLegs_Activate(struct player *p, struct upgrade *upgr)
+void Upgr_CyberLegs_Activate(struct upgrade *upgr)
 {
-   p->speedmul += 0.2;
-   p->jumpboost += 0.5;
+   pl.speedmul += 0.2;
+   pl.jumpboost += 0.5;
 }
 
-void Upgr_CyberLegs_Deactivate(struct player *p, struct upgrade *upgr)
+void Upgr_CyberLegs_Deactivate(struct upgrade *upgr)
 {
-   p->speedmul -= 0.2;
-   p->jumpboost -= 0.5;
+   pl.speedmul -= 0.2;
+   pl.jumpboost -= 0.5;
 }
 
 script
-void Upgr_CyberLegs_Update(struct player *p, struct upgrade *upgr)
+void Upgr_CyberLegs_Update(struct upgrade *upgr)
 {
-   k32 absvel = fastabsk(p->old.velz) * 10.0k;
+   k32 absvel = fastabsk(pl.old.velz) * 10.0k;
 
-   if(p->velz == 0 && absvel > 160)
+   if(pl.velz == 0 && absvel > 160)
    {
       for(k32 i = absvel; i >= 100; i -= 100)
       {
          i32 tid;
-         ACS_SpawnForced(so_ExplodoBoots, p->x, p->y, p->z, tid = ACS_UniqueTID());
+         ACS_SpawnForced(so_ExplodoBoots, pl.x, pl.y, pl.z, tid = ACS_UniqueTID());
          ACS_SetActivator(tid);
-         ACS_SetPointer(AAPTR_TARGET, p->tid);
-         p->setActivator();
+         ACS_SetPointer(AAPTR_TARGET, pl.tid);
+         pl.setActivator();
       }
    }
 }

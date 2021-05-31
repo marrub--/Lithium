@@ -24,7 +24,8 @@
 | I don't want myself or anyone else who's given me stuff (directly or not)   |
 | to get pissed off because proper attribution or permission wasn't given.    |
 |                                                                             |
-| It is OK to use any code in this project, as it is all public domain.       |
+| It is OK to use any code not otherwise marked in this project, as it is all |
+| public domain.                                                              |
 |                                                                             |
 | Sound credits are all in the <ltext/sound> files as comments.               |
 |\                                                                           /|
@@ -116,7 +117,7 @@
                                * Code *
 
 * Gutawer         * Lots of help with ZScript
-* InsanityBringer * Quaternion and view unprojection code
+* KeksDose        * (De)projection code
 * Jimmy           * Made the original MENUDEF code
 * Kate Fox        * Integer interpolation function
 *                 * Cannon and plasma rifle code are based on Error: Doom
@@ -129,25 +130,26 @@
 
                                * Help *
 
-* Combine_Kegan * Ideas for stuff, shitposting
-* DavidPH       * Lots of help with a lot of things,
-*               * GDCC, and generally cool person
-* JetPlane      * Emotional support twink
-* Jimmy         * Really cool dude
-* Kate Fox      * My biggest inspiration.
-* Kyle873       * said a nice thing i think maybe. Also inspiration.
-* Marty Kirra   * Cool person
-* TerminusEst13 * Help with finding some sprites to work with
-* Wartorn       * Help with HUD design, emotional support
-* WildWeasel    * Help with making fonts, suggestions for HUD
-* Xaser Acheron * Help with code stuff
-* Yholl         * eviel gost
-*               * Ideas for a lot of stuff
-*               * Re-texturing the TITLEMAP for me
-*               * Marathon resources
-*               * Descriptions for some of the extra upgrades
-*               * Help with a bunch of stuff
-* Zombie        * Lots of help with ZScript
+* Combine_Kegan      * Ideas for stuff, shitposting
+* DavidPH            * Lots of help with a lot of things,
+*                    * GDCC, and generally cool person
+* JetPlane           * Emotional support twink
+* Ribonucleic Asshat * Emotional support twink (female)
+* Jimmy              * Really cool dude
+* Kate Fox           * My biggest inspiration.
+* Kyle873            * said a nice thing i think maybe. Also inspiration.
+* Marty Kirra        * Cool person
+* TerminusEst13      * Help with finding some sprites to work with
+* Wartorn            * Help with HUD design, emotional support
+* WildWeasel         * Help with making fonts, suggestions for HUD
+* Xaser Acheron      * Help with code stuff
+* Yholl              * eviel gost
+*                    * Ideas for a lot of stuff
+*                    * Re-texturing the TITLEMAP for me
+*                    * Marathon resources
+*                    * Descriptions for some of the extra upgrades
+*                    * Help with a bunch of stuff
+* Zombie             * Lots of help with ZScript
 
                              * Testing *
 

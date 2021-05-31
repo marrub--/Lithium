@@ -27,13 +27,12 @@ void Save_WriteChunk(struct savefile *save, u32 iden, u32 vers, size_t size)
    FWrite32(&chunk, sizeof chunk, 4, save->fp);
 }
 
-struct savefile *Save_BeginSave(struct player *p)
+struct savefile *Save_BeginSave()
 {
    struct savefile *save = Salloc(struct savefile, _tag_file);
 
-   if((save->fp = NFOpen(p->num, sc_psave, 'w')))
+   if((save->fp = NFOpen(pl.num, sc_psave, 'w')))
    {
-      save->p = p;
       Save_WriteChunk(save, Ident_Lith, SaveV_Lith, 0);
       return save;
    }
@@ -85,14 +84,12 @@ i32 Save_ReadChunk(struct savefile *save, u32 iden, u32 vers, loadchunker_t chun
 }
 
 script
-struct savefile *Save_BeginLoad(struct player *p)
+struct savefile *Save_BeginLoad()
 {
    struct savefile *save = Salloc(struct savefile, _tag_file);
 
-   if((save->fp = NFOpen(p->num, sc_psave, 'r')))
+   if((save->fp = NFOpen(pl.num, sc_psave, 'r')))
    {
-      save->p = p;
-
       /* The Lith chunk must always be the first valid chunk. */
       if(Save_ReadChunk(save, Ident_Lith, SaveV_Lith) != 0)
       {

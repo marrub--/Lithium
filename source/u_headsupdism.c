@@ -14,7 +14,7 @@
 #include "u_common.h"
 #include "p_hud.h"
 
-#define UData p->upgrdata.headsupdism
+#define UData pl.upgrdata.headsupdism
 
 Str(sp_HUD_M_Bar,          s":HUD_M:Bar");
 Str(sp_HUD_M_BarBig,       s":HUD_M:BarBig");
@@ -25,13 +25,13 @@ Str(sp_HUD_M_SplitRight,   s":HUD_M:SplitRight");
 
 /* Static Functions -------------------------------------------------------- */
 
-static void HUD_Ammo(struct player *p) {
-   struct invweapon const *wep = p->weapon.cur;
+static void HUD_Ammo() {
+   struct invweapon const *wep = pl.weapon.cur;
 
    str typebg;
    i32 y;
 
-   if(p->getCVarI(sc_hud_showweapons)) {y = 13; typebg = sp_HUD_M_SplitRight;}
+   if(pl.getCVarI(sc_hud_showweapons)) {y = 13; typebg = sp_HUD_M_SplitRight;}
    else                                {y = 0;  typebg = sp_HUD_M_SplitFront;}
 
    if(wep->ammotype & AT_NMag || wep->ammotype & AT_Ammo) {
@@ -73,11 +73,11 @@ static void HUD_Ammo(struct player *p) {
       PrintTextX(sf_bigupper, Cr(green), 281,1, 238,2, ptf_no_utf);
    }
 
-   if(P_Wep_CurType(p) == weapon_rifle && ServCallI(sm_GetRifleGrenade))
+   if(P_Wep_CurType() == weapon_rifle && ServCallI(sm_GetRifleGrenade))
       PrintSprite(sp_HUD_H_D44, 280,1, 237,1);
 }
 
-static void HUD_Health(struct player *p, struct upgrade *upgr) {
+static void HUD_Health(struct upgrade *upgr) {
    StrAry(ws, s":HUD:H_D27", s":HUD:H_D28", s":HUD:H_D24", s":HUD:H_D23",
               s":HUD:H_D22", s":HUD:H_D21", s":HUD:H_D25", s":HUD:H_D26");
 
@@ -88,22 +88,22 @@ static void HUD_Health(struct player *p, struct upgrade *upgr) {
 
    k32 ft = 0;
 
-   if(p->health < p->oldhealth) {
+   if(pl.health < pl.oldhealth) {
       UData.cr = CR_PURPLE;
-      ft = (p->oldhealth - p->health) / 300.0;
+      ft = (pl.oldhealth - pl.health) / 300.0;
       ft = minmax(ft, 0.1, 1.0);
-   } else if(p->health > p->oldhealth) {
+   } else if(pl.health > pl.oldhealth) {
       UData.cr = CR_YELLOW;
       ft = 0.1;
    }
 
    if(ft) SetFade(fid_health, 4, ft * 255);
 
-   HUD_DrawHealth(p, p->health, 34, 232, Cr(green), UData.cr);
+   HUD_DrawHealth(pl.health, 34, 232, Cr(green), UData.cr);
 
-   str gfx = ws[p->weapon.cur->info->slot];
+   str gfx = ws[pl.weapon.cur->info->slot];
 
-   i32 x = (8 + p->ticks) % 57;
+   i32 x = (8 + pl.ticks) % 57;
 
    for(i32 i = 0; i < 20; i++) {
       i32 xx = x - i;
@@ -118,22 +118,22 @@ static void HUD_Health(struct player *p, struct upgrade *upgr) {
 
 /* Extern Functions -------------------------------------------------------- */
 
-void Upgr_HeadsUpDisM_Render(struct player *p, struct upgrade *upgr) {
-   if(!p->hudenabled) return;
+void Upgr_HeadsUpDisM_Render(struct upgrade *upgr) {
+   if(!pl.hudenabled) return;
 
-   HUD_Log(p, Cr(green), 0, 0);
+   HUD_Log(Cr(green), 0, 0);
 
-   HUD_KeyInd(p, 320, 20, true, 0.8);
-   HUD_Score(p, "%s\Cnscr", p->score, sf_smallfnt, CR_WHITE, 320,2);
+   HUD_KeyInd(320, 20, true, 0.8);
+   HUD_Score("%s\Cnscr", pl.score, sf_smallfnt, CR_WHITE, 320,2);
 
-   if(p->getCVarI(sc_hud_showweapons))
+   if(pl.getCVarI(sc_hud_showweapons))
       PrintSprite(sp_HUD_M_Bar, 278,2, 239,2);
 
-   HUD_WeaponSlots(p, Cr(wselm1), Cr(wselm2), Cr(wselm3), Cr(wselms), 281, 238);
+   HUD_WeaponSlots(Cr(wselm1), Cr(wselm2), Cr(wselm3), Cr(wselms), 281, 238);
 
    /* Status */
-   HUD_Ammo(p);
-   HUD_Health(p, upgr);
+   HUD_Ammo();
+   HUD_Health(upgr);
 }
 
 /* EOF */

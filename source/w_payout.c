@@ -45,9 +45,7 @@ void Scr_HInit(void) {
       payout.total += *p;
    }
 
-   for_player() {
-      P_Scr_Payout(p);
-   }
+   P_Scr_Payout();
 
    fastmemset(&payout, 0, sizeof payout);
 }

@@ -22,7 +22,7 @@
 
 #define for_page() \
    for(i32 pagen = 0; pagen < BIP_MAX; pagen++) \
-      __with(struct page *page = &p->bip.pages[pagen];)
+      __with(struct page *page = &pl.bip.pages[pagen];)
 
 /* Types ------------------------------------------------------------------- */
 
@@ -80,9 +80,9 @@ extern struct pageinfo const bipinfo[BIP_MAX];
 
 /* Extern Functions -------------------------------------------------------- */
 
-script void P_BIP_PInit(struct player *p);
-void P_BIP_Unlock(struct player *p, cstr name);
-void P_BIP_PQuit(struct player *p);
+script void P_BIP_PInit();
+void P_BIP_Unlock(cstr name);
+void P_BIP_PQuit();
 
 cstr P_BIP_CategoryToName(u32 category);
 

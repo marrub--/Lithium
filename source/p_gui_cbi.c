@@ -41,7 +41,7 @@
 
 /* Static Functions -------------------------------------------------------- */
 
-static void CBITab_Marine(struct gui_state *g, struct player *p)
+static void CBITab_Marine(struct gui_state *g)
 {
    i32 ram;
    cstr name;
@@ -56,7 +56,7 @@ static void CBITab_Marine(struct gui_state *g, struct player *p)
    InfoStart;
 
    Info(LC(LANG "CBI_PERF"), cbiperf);
-   Info(LC(LANG "CBI_PUSE"), p->cbi.pruse);
+   Info(LC(LANG "CBI_PUSE"), pl.cbi.pruse);
    Info(LC(LANG "CBI_WRAM"), ram);
 
    InfoSep;
@@ -73,7 +73,7 @@ static void CBITab_Marine(struct gui_state *g, struct player *p)
    Upgr(rdistinter) Slot("RDistInter", 0, 4);
 }
 
-static void CBITab_CyberMage(struct gui_state *g, struct player *p)
+static void CBITab_CyberMage(struct gui_state *g)
 {
    cstr name = LC(LANG "CBI_CPU4");
 
@@ -84,7 +84,7 @@ static void CBITab_CyberMage(struct gui_state *g, struct player *p)
    InfoStart;
 
    Info(LC(LANG "CBI_PERF"), 34);
-   Info(LC(LANG "CBI_PUSE"), p->cbi.pruse);
+   Info(LC(LANG "CBI_PUSE"), pl.cbi.pruse);
    Info(LC(LANG "CBI_WRAM"), 19);
 
    InfoSep;
@@ -111,11 +111,11 @@ static void CBITab_CyberMage(struct gui_state *g, struct player *p)
 
 /* Extern Functions -------------------------------------------------------- */
 
-void P_CBI_TabCBI(struct gui_state *g, struct player *p)
+void P_CBI_TabCBI(struct gui_state *g)
 {
-   switch(p->pclass) {
-   case pcl_marine:    CBITab_Marine   (g, p); break;
-   case pcl_cybermage: CBITab_CyberMage(g, p); break;
+   switch(pl.pclass) {
+   case pcl_marine:    CBITab_Marine   (g); break;
+   case pcl_cybermage: CBITab_CyberMage(g); break;
    }
 }
 

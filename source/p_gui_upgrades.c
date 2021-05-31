@@ -21,7 +21,7 @@ static cstr const upgrcateg[] = {
    [UC_Down] = LANG "CAT_DOWN",
 };
 
-static void GUIUpgradesList(struct gui_state *g, struct player *p) {
+static void GUIUpgradesList(struct gui_state *g) {
    if(G_Button(g, .x = 77, 200, Pre(btnprev)))
       if(CBIState(g)->upgrfilter-- <= 0)
          CBIState(g)->upgrfilter = UC_MAX;
@@ -74,7 +74,7 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p) {
          continue;
 
       cstr color;
-      if(!get_bit(upgr->flags, _ug_owned) && !P_Shop_CanBuy(p, &upgr->info->shopdef, upgr)) {
+      if(!get_bit(upgr->flags, _ug_owned) && !P_Shop_CanBuy(&upgr->info->shopdef, upgr)) {
          color = "u";
       } else {
          switch(upgr->info->key) {
@@ -107,7 +107,7 @@ static void GUIUpgradesList(struct gui_state *g, struct player *p) {
    G_ScrEnd(g, &CBIState(g)->upgrscr);
 }
 
-static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct upgrade *upgr) {
+static void GUIUpgradeRequirements(struct gui_state *g, struct upgrade *upgr) {
    i32 y = 0;
 
    #define Req(name) { \
@@ -128,8 +128,8 @@ static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct
    #undef Req
 
    /* Performance rating */
-   if(upgr->info->perf && p->pclass != pcl_cybermage) {
-      bool over = upgr->info->perf + p->cbi.pruse > cbiperf;
+   if(upgr->info->perf && pl.pclass != pcl_cybermage) {
+      bool over = upgr->info->perf + pl.cbi.pruse > cbiperf;
 
       if(get_bit(upgr->flags, _ug_active))
          PrintTextFmt(LC(LANG "SHOP_DISABLE_SAVES"), upgr->info->perf);
@@ -166,7 +166,7 @@ static void GUIUpgradeRequirements(struct gui_state *g, struct player *p, struct
    }
 }
 
-static void GUIUpgradeDescription(struct gui_state *g, struct player *p, struct upgrade *upgr) {
+static void GUIUpgradeDescription(struct gui_state *g, struct upgrade *upgr) {
    Str(sl_free, sLANG "FREE");
 
    G_Clip(g, g->ox+98, g->oy+17, 190, 170, 184);
@@ -181,7 +181,7 @@ static void GUIUpgradeDescription(struct gui_state *g, struct player *p, struct 
    default:              mark = "\Cnscr";   break;
    }
 
-   if(upgr->info->cost) cost = StrParam("%s%s", scoresep(P_Shop_Cost(p, &upgr->info->shopdef)), mark);
+   if(upgr->info->cost) cost = StrParam("%s%s", scoresep(P_Shop_Cost(&upgr->info->shopdef)), mark);
    else                 cost = L(sl_free);
 
    PrintText_str(cost, sf_smallfnt, g->defcr, g->ox+98,1, g->oy+17,1);
@@ -208,16 +208,16 @@ static void GUIUpgradeDescription(struct gui_state *g, struct player *p, struct 
    G_ClipRelease(g);
 }
 
-static void GUIUpgradeButtons(struct gui_state *g, struct player *p, struct upgrade *upgr) {
+static void GUIUpgradeButtons(struct gui_state *g, struct upgrade *upgr) {
    Str(sl_autogroups, sLANG "AUTOGROUPS");
 
    /* Buy */
-   if(G_Button(g, LC(LANG "BUY"), 98, 192, !P_Shop_CanBuy(p, &upgr->info->shopdef, upgr), .fill = {&CBIState(g)->buyfill, p->getCVarI(sc_gui_buyfiller)}))
-      P_Upg_Buy(p, upgr, false);
+   if(G_Button(g, LC(LANG "BUY"), 98, 192, !P_Shop_CanBuy(&upgr->info->shopdef, upgr), .fill = {&CBIState(g)->buyfill, pl.getCVarI(sc_gui_buyfiller)}))
+      P_Upg_Buy(upgr, false);
 
    /* Activate */
-   if(G_Button(g, get_bit(upgr->flags, _ug_active) ? LC(LANG "DEACTIVATE") : LC(LANG "ACTIVATE"), 98 + gui_p.btndef.w + 2, 192, !P_Upg_CanActivate(p, upgr)))
-      P_Upg_Toggle(p, upgr);
+   if(G_Button(g, get_bit(upgr->flags, _ug_active) ? LC(LANG "DEACTIVATE") : LC(LANG "ACTIVATE"), 98 + gui_p.btndef.w + 2, 192, !P_Upg_CanActivate(upgr)))
+      P_Upg_Toggle(upgr);
 
    /* Groups */
    PrintText_str(L(sl_autogroups), sf_smallfnt, g->defcr, g->ox+242,0, g->oy+192,0);
@@ -231,13 +231,13 @@ static void GUIUpgradeButtons(struct gui_state *g, struct player *p, struct upgr
 
       if(G_ChkBox_HId(g, i, get_bit(upgr->agroups, i), 208 + i * 20, 198)) {
          tog_bit(upgr->agroups, i);
-         P_Data_Save(p);
+         P_Data_Save();
       }
    }
 }
 
-void P_CBI_TabUpgrades(struct gui_state *g, struct player *p) {
-   GUIUpgradesList(g, p);
+void P_CBI_TabUpgrades(struct gui_state *g) {
+   GUIUpgradesList(g);
 
    if(CBIState(g)->upgrsel == UPGR_MAX) {
       for_upgrade(upgr) {
@@ -248,11 +248,11 @@ void P_CBI_TabUpgrades(struct gui_state *g, struct player *p) {
       }
    }
 
-   struct upgrade *upgr = &p->upgrades[CBIState(g)->upgrsel];
+   struct upgrade *upgr = &pl.upgrades[CBIState(g)->upgrsel];
 
-   GUIUpgradeDescription (g, p, upgr);
-   GUIUpgradeButtons     (g, p, upgr);
-   GUIUpgradeRequirements(g, p, upgr);
+   GUIUpgradeDescription (g, upgr);
+   GUIUpgradeButtons     (g, upgr);
+   GUIUpgradeRequirements(g, upgr);
 }
 
 /* EOF */

@@ -292,7 +292,7 @@ void F_Start(cstr which) {
 }
 
 _Noreturn dynam_aut script
-void F_Run(struct player *p) {
+void F_Run() {
    Str(sm_actually_end_the_game, s"ActuallyEndTheGame");
 
    while(!finit) ACS_Delay(1);
@@ -300,7 +300,7 @@ void F_Run(struct player *p) {
    struct finale_state st = {};
    u32 prg;
 
-   switch(p->pclass) {
+   switch(pl.pclass) {
    case pcl_marine:    prg = 0; break;
    case pcl_cybermage: prg = 1; break;
    case pcl_informant: prg = 2; break;

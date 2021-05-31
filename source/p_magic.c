@@ -20,9 +20,9 @@
 script_str ext("ACS") addr(OBJ "Blade")
 void Sc_Blade(bool hit)
 {
-   with_player(LocalPlayer) {
-      if(!p->onground) P_SetVel(p, p->velx / 2, p->vely / 2, 0);
-      p->bladehit = hit;
+   if(!P_None()) {
+      if(!pl.onground) P_SetVel(pl.velx / 2, pl.vely / 2, 0);
+      pl.bladehit = hit;
       SetFade(fid_blade, 3, 24);
    }
 }
@@ -30,9 +30,9 @@ void Sc_Blade(bool hit)
 script_str ext("ACS") addr(OBJ "Rend")
 void Sc_Rend(bool hit, i32 set)
 {
-   with_player(LocalPlayer) {
-      if(!p->onground) P_SetVel(p, p->velx / 2, p->vely / 2, 0);
-      p->rendhit = hit;
+   if(!P_None()) {
+      if(!pl.onground) P_SetVel(pl.velx / 2, pl.vely / 2, 0);
+      pl.rendhit = hit;
       SetFade(fid_rendS + set, 3, 48);
    }
 }
@@ -40,14 +40,14 @@ void Sc_Rend(bool hit, i32 set)
 dynam_aut script_str ext("ACS") addr(OBJ "Feuer")
 void Sc_Feuer(bool left, bool fire)
 {
-   with_player(LocalPlayer)
+   if(!P_None())
    {
       str actor = fire ? so_FeuerExplosion : so_FeuerTest;
-      struct k32v3 t = trace_from(p->yaw, p->pitch, 1024, p->attackheight);
+      struct k32v3 t = trace_from(pl.yaw, pl.pitch, 1024, pl.attackheight);
 
-      i32 sx = p->x;
-      i32 sy = p->y;
-      i32 sz = p->z + 32;
+      i32 sx = pl.x;
+      i32 sy = pl.y;
+      i32 sz = pl.z + 32;
 
       struct polar cpp = ctopol(t.x - sx, t.y - sy);
       cpp.dst /= 4;
@@ -63,7 +63,7 @@ void Sc_Feuer(bool left, bool fire)
          i32 tid;
          ACS_SpawnForced(actor, v.x, v.y, lerpk(sz, t.z, i / max), tid = ACS_UniqueTID());
          if(fire) {
-            PtrSet(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
+            PtrSet(tid, AAPTR_DEFAULT, AAPTR_TARGET, pl.tid);
             ACS_Delay(1);
          }
       }
@@ -71,7 +71,7 @@ void Sc_Feuer(bool left, bool fire)
       if(fire) {
          i32 tid;
          ACS_SpawnForced(so_FeuerFinal, t.x, t.y, t.z, tid = ACS_UniqueTID());
-         PtrSet(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
+         PtrSet(tid, AAPTR_DEFAULT, AAPTR_TARGET, pl.tid);
       }
    }
 }
@@ -79,9 +79,9 @@ void Sc_Feuer(bool left, bool fire)
 dynam_aut script_str ext("ACS") addr(OBJ "Cercle")
 void Sc_Cercle(void)
 {
-   with_player(LocalPlayer)
+   if(!P_None())
    {
-      struct k32v3 v = trace_from(p->yaw, p->pitch, 1024, p->attackheight, true);
+      struct k32v3 v = trace_from(pl.yaw, pl.pitch, 1024, pl.attackheight, true);
 
       FreezeTime();
       ACS_Delay(2); /* necessary so sounds may play */
@@ -98,7 +98,7 @@ void Sc_Cercle(void)
          ACS_SpawnForced(so_CircleParticle, v.x + px, v.y + py, v.z + 7, tid = ACS_UniqueTID());
 
          ACS_SetActorAngle(tid, i / 100.0);
-         PtrSet(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
+         PtrSet(tid, AAPTR_DEFAULT, AAPTR_TARGET, pl.tid);
          ACS_Thing_ChangeTID(tid, fxtid);
 
          ACS_Delay(i % 2 * (i / 30.0));
@@ -130,7 +130,7 @@ void Sc_Cercle(void)
          ACS_SpawnForced(so_CircleSpearThrower, v.x + px, v.y + py, v.z + 24, tid = ACS_UniqueTID());
 
          ACS_SetActorAngle(tid, i / 3.0);
-         PtrSet(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
+         PtrSet(tid, AAPTR_DEFAULT, AAPTR_TARGET, pl.tid);
          ACS_Thing_ChangeTID(tid, fxtid3);
 
          ACS_Delay(7);
@@ -152,9 +152,9 @@ void Sc_Cercle(void)
 dynam_aut script_str ext("ACS") addr(OBJ "MagicSelect")
 void Sc_MagicSelect(i32 num)
 {
-   with_player(LocalPlayer)
+   if(!P_None())
    {
-      if(!p->getCVarI(sc_weapons_magicselanims)) return;
+      if(!pl.getCVarI(sc_weapons_magicselanims)) return;
 
       switch(num) {
       case 1: case 4: ACS_FadeTo(255, 255, 0, 0.3, 0.0); break;

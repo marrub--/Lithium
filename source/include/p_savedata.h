@@ -54,7 +54,6 @@ struct savechunk {
 
 struct savefile {
    FILE *fp;
-   struct player *p;
 };
 
 script typedef void (*loadchunker_t)(struct savefile *save, struct savechunk *chunk);
@@ -62,13 +61,13 @@ script typedef void (*loadchunker_t)(struct savefile *save, struct savechunk *ch
 /* Extern Functions -------------------------------------------------------- */
 
 void Save_WriteChunk(struct savefile *save, u32 iden, u32 vers, size_t size);
-struct savefile *Save_BeginSave(struct player *p);
+struct savefile *Save_BeginSave();
 script void Save_EndSave(struct savefile *save);
 
 optargs(1) script
 i32 Save_ReadChunk(struct savefile *save, u32 iden, u32 vers, loadchunker_t chunker);
 script
-struct savefile *Save_BeginLoad(struct player *p);
+struct savefile *Save_BeginLoad();
 script
 void Save_EndLoad(struct savefile *save);
 

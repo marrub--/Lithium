@@ -15,11 +15,11 @@
 
 #include <math.h>
 
-#define UData p->upgrdata.flashlight
+#define UData pl.upgrdata.flashlight
 
 /* Extern Functions -------------------------------------------------------- */
 
-void Upgr_Flashlight_Enter(struct player *p, struct upgrade *upgr) {
+void Upgr_Flashlight_Enter(struct upgrade *upgr) {
    UData.on        = false;
    UData.battery   = 0xffff;
    UData.intensity = 0.0;
@@ -27,16 +27,16 @@ void Upgr_Flashlight_Enter(struct player *p, struct upgrade *upgr) {
    UData.speed     = 1.0;
 }
 
-void Upgr_Flashlight_Deactivate(struct player *p, struct upgrade *upgr) {
+void Upgr_Flashlight_Deactivate(struct upgrade *upgr) {
    UData.on        = false;
    UData.intensity = 0.0;
    UData.target    = 0.0;
    UData.speed     = 1.0;
 }
 
-script void Upgr_Flashlight_Update(struct player *p, struct upgrade *upgr) {
-   i32 bat_life  = p->getCVarI(sc_light_battery) * 35;
-   i32 bat_regen = p->getCVarI(sc_light_regen);
+script void Upgr_Flashlight_Update(struct upgrade *upgr) {
+   i32 bat_life  = pl.getCVarI(sc_light_battery) * 35;
+   i32 bat_regen = pl.getCVarI(sc_light_regen);
 
    bool was_on = UData.on;
 
@@ -80,10 +80,10 @@ script void Upgr_Flashlight_Update(struct player *p, struct upgrade *upgr) {
             UData.target, UData.intensity, UData.speed, UData.battery);
 }
 
-void Upgr_Flashlight_Render(struct player *p, struct upgrade *upgr) {
-   if(!p->hudenabled) return;
+void Upgr_Flashlight_Render(struct upgrade *upgr) {
+   if(!pl.hudenabled) return;
 
-   i32 bat_life = p->getCVarI(sc_light_battery) * 35;
+   i32 bat_life = pl.getCVarI(sc_light_battery) * 35;
 
    if(bat_life > 0 && UData.battery < bat_life) {
       i32 y = UData.battery / (k32)bat_life * 8;
@@ -102,11 +102,11 @@ void Upgr_Flashlight_Render(struct player *p, struct upgrade *upgr) {
 
 script_str ext("ACS") addr(OBJ "GetFlashlightIntensity")
 k32 Sc_GetFlashlightIntensity(void) {
-   with_player(LocalPlayer) {return UData.intensity;}
+   if(!P_None()) {return UData.intensity;}
    return 0.0;
 }
 
 script_str type("net") ext("ACS") addr(OBJ "KeyLight")
-void Sc_KeyLight(void) {with_player(LocalPlayer) {UData.on = !UData.on;}}
+void Sc_KeyLight(void) {if(!P_None()) {UData.on = !UData.on;}}
 
 /* EOF */

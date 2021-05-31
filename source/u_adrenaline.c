@@ -13,16 +13,16 @@
 
 #include "u_common.h"
 
-#define UData p->upgrdata.adrenaline
+#define UData pl.upgrdata.adrenaline
 #define CHARGE_MAX (35 * 30)
 
 /* Static Functions -------------------------------------------------------- */
 
 dynam_aut script static
-void DoAdrenaline(struct player *p, struct upgrade *upgr) {
+void DoAdrenaline(struct upgrade *upgr) {
    UData.charge = UData.readied = 0;
 
-   p->logH(4, LC(LANG "LOG_AdrenalineUsed"));
+   pl.logH(4, LC(LANG "LOG_AdrenalineUsed"));
    StartSound(ss_player_adren_inj, lch_body2, CHANF_NOPAUSE|CHANF_MAYBE_LOCAL|CHANF_UI, 1.0, ATTN_STATIC);
    FadeFlash(255, 255, 255, 0.4, 0.6);
    FreezeTime(true);
@@ -35,7 +35,7 @@ void DoAdrenaline(struct player *p, struct upgrade *upgr) {
 /* Extern Functions -------------------------------------------------------- */
 
 script
-void Upgr_Adrenaline_Update(struct player *p, struct upgrade *upgr)
+void Upgr_Adrenaline_Update(struct upgrade *upgr)
 {
    if(UData.charge < CHARGE_MAX) {
       /* Charge */
@@ -43,24 +43,24 @@ void Upgr_Adrenaline_Update(struct player *p, struct upgrade *upgr)
    } else if(!UData.readied) {
       /* Prepare */
       StartSound(ss_player_adren_ready, lch_body2, CHANF_NOPAUSE|CHANF_MAYBE_LOCAL|CHANF_UI, 1.0, ATTN_STATIC);
-      p->logH(1, LC(LANG "LOG_AdrenalineReady"));
+      pl.logH(1, LC(LANG "LOG_AdrenalineReady"));
       UData.readied = true;
    } else if(ServCallI(sm_AdrenalineCheck)) {
       /* Ready to use */
-      DoAdrenaline(p, upgr);
+      DoAdrenaline(upgr);
    }
 }
 
-void Upgr_Adrenaline_Render(struct player *p, struct upgrade *upgr)
+void Upgr_Adrenaline_Render(struct upgrade *upgr)
 {
-   if(!get_bit(p->upgrades[UPGR_HeadsUpDisM].flags, _ug_active)) return;
+   if(!get_bit(pl.upgrades[UPGR_HeadsUpDisM].flags, _ug_active)) return;
 
    k64 amt = UData.charge / (k64)CHARGE_MAX;
 
    str gfx = UData.readied ? sp_HUD_H_D24 : sp_HUD_H_D21;
 
    for(i32 i = 0; i < 20; i++) {
-      i32 timemod = (p->ticks - i) % 46;
+      i32 timemod = (pl.ticks - i) % 46;
       PrintSpriteA(gfx, 77-timemod,1, 224,1, (20 - i) / 20.0);
    }
 }

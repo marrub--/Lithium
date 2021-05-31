@@ -14,12 +14,12 @@
 #include "u_common.h"
 #include "w_world.h"
 
-#define UData p->upgrdata.homingrpg
+#define UData pl.upgrdata.homingrpg
 
 /* Static Functions -------------------------------------------------------- */
 
 script
-static i32 CheckTarget(struct player *p)
+static i32 CheckTarget()
 {
    if(ACS_SetActivator(0, AAPTR_PLAYER_GETTARGET))
       return UniqueID(0);
@@ -30,14 +30,14 @@ static i32 CheckTarget(struct player *p)
 /* Extern Functions -------------------------------------------------------- */
 
 script
-void Upgr_HomingRPG_Update(struct player *p, struct upgrade *upgr)
+void Upgr_HomingRPG_Update(struct upgrade *upgr)
 {
-   if(P_Wep_CurType(p) == weapon_launcher)
+   if(P_Wep_CurType() == weapon_launcher)
    {
-      if(p->buttons & BT_ALTATTACK)
+      if(pl.buttons & BT_ALTATTACK)
       {
          i32 id;
-         if((id = CheckTarget(p)) && id != UData.id)
+         if((id = CheckTarget()) && id != UData.id)
          {
             ACS_LocalAmbientSound(ss_weapons_rocket_mark, 127);
             ACS_SetPointer(AAPTR_TRACER, 0, AAPTR_PLAYER_GETTARGET);
@@ -56,8 +56,8 @@ void Upgr_HomingRPG_Update(struct player *p, struct upgrade *upgr)
 script_str ext("ACS") addr(OBJ "HomingMissile")
 void Sc_HomingMissile(void)
 {
-   struct player *p = P_PtrFind(0, AAPTR_TARGET);
-   ACS_SetPointer(AAPTR_TRACER, p->tid, AAPTR_TRACER);
+   if(!P_None() && PtrPlayerNumber(0, AAPTR_TARGET) >= 0)
+      ACS_SetPointer(AAPTR_TRACER, pl.tid, AAPTR_TRACER);
 }
 
 /* EOF */

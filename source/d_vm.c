@@ -280,7 +280,7 @@ static void ConsoleLogText(i32 from) {
 #define ResetText()   MemB2_S(VAR_TEXTL,   0)
 
 static
-void TerminalGUI(struct player *p, u32 tact) {
+void TerminalGUI(u32 tact) {
    enum {
       /* text */
       twidth  = 640, theigh = 480,
@@ -300,7 +300,7 @@ void TerminalGUI(struct player *p, u32 tact) {
    Str(sl_term_use_to_ack,    sLANG "TERM_USE_TO_ACK");
 
    G_Begin(&gst, twidth, theigh);
-   G_UpdateState(&gst, p);
+   G_UpdateState(&gst);
 
    /* Background */
    PrintRect(0, 0,          twidth, tbottom, 0x000000);
@@ -378,14 +378,14 @@ void TerminalGUI(struct player *p, u32 tact) {
 
    G_End(&gst, gui_curs_outlineinv);
 
-   if(p->buttons & BT_USE && !(p->old.buttons & BT_USE) &&
-      p->old.modal == _gui_dlg) {
+   if(pl.buttons & BT_USE && !(pl.old.buttons & BT_USE) &&
+      pl.old.modal == _gui_dlg) {
       ACS_LocalAmbientSound(ss_player_trmswitch, 127);
       MemB1_S(VAR_UACT, UACT_ACKNOWLEDGE);
    }
 }
 
-static void DialogueGUI(struct player *p) {
+static void DialogueGUI() {
    enum {left = 37, top = 75, texttop = top + 24};
 
    str snam = GetName();
@@ -394,7 +394,7 @@ static void DialogueGUI(struct player *p) {
    char icon[32] = ":Dialogue:Icon"; strcat(icon, MemSC_G(MemB2_G(VAR_ICONL)));
 
    G_Begin(&gst, 320, 240);
-   G_UpdateState(&gst, p);
+   G_UpdateState(&gst);
 
    PrintSpriteA(sp_Dialogue_Back, 0,1, 0,1, 0.7);
    PrintSpriteA(l_strdup(icon),   0,1, 0,1, 0.7);
@@ -458,18 +458,18 @@ void GuiAct(void) {
 
 /* VM actions */
 alloc_aut(0) sync static
-void ActDLG_WAIT(struct player *p) {
+void ActDLG_WAIT() {
    SetVA(ACT_NONE);
 
    ACS_LocalAmbientSound(ss_player_cbi_dlgopen, 127);
 
    if(singleplayer) FreezeTime();
-   P_SetVel(p, 0, 0, 0);
+   P_SetVel(0, 0, 0);
 
    ConsoleLogText(_from_dlg);
 
    do {
-      DialogueGUI(p);
+      DialogueGUI();
       ACS_Delay(1);
    } while(MemB1_G(VAR_UACT) == UACT_NONE);
 
@@ -477,13 +477,13 @@ void ActDLG_WAIT(struct player *p) {
    GuiAct();
 }
 
-static void ActLD_ITEM(struct player *p) {
+static void ActLD_ITEM() {
    SetVA(ACT_NONE);
 
    ModSR_ZN(SetAC(InvNum(MemSA_G(MemB2_G(VAR_ADRL)))));
 }
 
-static void ActLD_OPT(struct player *p) {
+static void ActLD_OPT() {
    SetVA(ACT_NONE);
 
    u32 cnt = MemB1_G(VAR_OPT_CNT);
@@ -493,7 +493,7 @@ static void ActLD_OPT(struct player *p) {
    MemB2_S(StructOfs(OPT, PTRL, cnt), MemB2_G(VAR_RADRL));
 }
 
-static void ActSCRIPT_I(struct player *p) {
+static void ActSCRIPT_I() {
    SetVA(ACT_NONE);
 
    u32 s0 = MemB1_G(VAR_SCP0), s1 = MemB1_G(VAR_SCP1);
@@ -503,7 +503,7 @@ static void ActSCRIPT_I(struct player *p) {
    ModSR_ZN(SetAC(ACS_ExecuteWithResult(s0, s1, s2, s3, s4)));
 }
 
-static void ActSCRIPT_S(struct player *p) {
+static void ActSCRIPT_S() {
    SetVA(ACT_NONE);
 
    str s0 = MemSA_G(MemB2_G(VAR_ADRL));
@@ -514,17 +514,17 @@ static void ActSCRIPT_S(struct player *p) {
 }
 
 alloc_aut(0) sync static
-void ActTELEPORT_INTERLEVEL(struct player *p) {
+void ActTELEPORT_INTERLEVEL() {
    i32 tag = MemB2_G(VAR_ADRL);
 
    ACS_Delay(5);
-   P_TeleportOut(p, tag + LithMapBeg);
+   P_TeleportOut(tag + LithMapBeg);
 
    SetVA(ACT_HALT);
 }
 
 alloc_aut(0) sync static
-void ActTELEPORT_INTRALEVEL(struct player *p) {
+void ActTELEPORT_INTRALEVEL() {
    i32 tag = MemB2_G(VAR_ADRL);
 
    ACS_Delay(5);
@@ -534,7 +534,7 @@ void ActTELEPORT_INTRALEVEL(struct player *p) {
 }
 
 alloc_aut(0) sync static
-void ActTRM_WAIT(struct player *p) {
+void ActTRM_WAIT() {
    SetVA(ACT_NONE);
 
    u32 tact = MemB1_G(VAR_TACT);
@@ -553,10 +553,10 @@ void ActTRM_WAIT(struct player *p) {
       }
 
       if(singleplayer) FreezeTime();
-      P_SetVel(p, 0, 0, 0);
+      P_SetVel(0, 0, 0);
 
       do {
-         TerminalGUI(p, tact);
+         TerminalGUI(tact);
          ACS_Delay(1);
       } while(MemB1_G(VAR_UACT) == UACT_NONE && --timer >= 0);
 
@@ -569,8 +569,8 @@ void ActTRM_WAIT(struct player *p) {
 
 /* Main dialogue VM. */
 dynam_aut script
-void Dlg_Run(struct player *p, u32 num) {
-   if(p->dead || p->modal != _gui_dlg)
+void Dlg_Run(u32 num) {
+   if(pl.dead || pl.modal != _gui_dlg)
       return;
 
    /* get the dialogue by number */
@@ -616,7 +616,7 @@ void Dlg_Run(struct player *p, u32 num) {
    #endif
 
    /* copy some constants into memory */
-   MemB1_S(VAR_PCLASS, p->pclass);
+   MemB1_S(VAR_PCLASS, pl.pclass);
 
    static __label *const cases[0xFF] = {
       #define DCD(n, op, ty) [n] = &&op##_##ty,
@@ -624,14 +624,14 @@ void Dlg_Run(struct player *p, u32 num) {
    };
 
    /* all right, start the damn VM already! */
-   SetPC(PRG_BEG + def->pages[p->dlg.page]);
+   SetPC(PRG_BEG + def->pages[pl.dlg.page]);
    JmpVI;
 
 vmaction:
    while(ua = GetVA(), (ua != ACT_NONE && ua < ACT_MAX)) {
       Dbg_Log(log_dlg, "action %02X %s", ua, action_names[ua]);
       switch(ua) {
-         #define ACT(name) case ACT_##name: Act##name(p); break;
+         #define ACT(name) case ACT_##name: Act##name(); break;
          #include "d_vm.h"
          case ACT_HALT: JmpHL;
          case ACT_JUMP: JmpVI;
@@ -976,45 +976,39 @@ TRV_NP:
 halt:
    Dbg_Log(log_dlg, "%s: exited", __func__);
 
-   p->modal = _gui_none;
+   pl.modal = _gui_none;
 }
 
 /* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr(OBJ "RunProgram")
 void Sc_RunProgram(i32 num) {
-   with_player(LocalPlayer) {
-      if(p->modal == _gui_none) {
-         p->dlg.num = DNUM_PRG_BEG + num;
-         p->modal = _gui_dlg;
-      }
+   if(!P_None() && pl.modal == _gui_none) {
+      pl.dlg.num = DNUM_PRG_BEG + num;
+      pl.modal = _gui_dlg;
    }
 }
 
 script_str ext("ACS") addr(OBJ "RunDialogue")
 void Sc_RunDialogue(i32 num) {
-   with_player(LocalPlayer) {
-      if(p->modal == _gui_none) {
-         p->dlg.num = DNUM_DLG_BEG + num;
-         p->dlg.page = 0;
-         p->modal = _gui_dlg;
-      }
+   if(!P_None() && pl.modal == _gui_none) {
+      pl.dlg.num = DNUM_DLG_BEG + num;
+      pl.dlg.page = 0;
+      pl.modal = _gui_dlg;
    }
 }
 
 script_str ext("ACS") addr(OBJ "RunTerminal")
 void Sc_RunTerminal(i32 num) {
-   with_player(LocalPlayer) {
-      if(p->modal == _gui_none) {
-         switch(mission) {
-            case _unfinished: p->dlg.page = DPAGE_UNFINISHED; break;
-            case _finished:   p->dlg.page = DPAGE_FINISHED;   break;
-            case _failure:    p->dlg.page = DPAGE_FAILURE;    break;
-         }
-
-         p->dlg.num = DNUM_TRM_BEG + num;
-         p->modal = _gui_dlg;
+   if(!P_None() && pl.modal == _gui_none) {
+      switch(mission) {
+      case _unfinished: pl.dlg.page = DPAGE_UNFINISHED; break;
+      case _finished:   pl.dlg.page = DPAGE_FINISHED;   break;
+      case _failure:    pl.dlg.page = DPAGE_FAILURE;    break;
       }
+
+      pl.dlg.num = DNUM_TRM_BEG + num;
+      pl.modal = _gui_dlg;
    }
 }
 

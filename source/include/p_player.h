@@ -107,72 +107,55 @@ enum ZscName(PClass) {
 
 #include <GDCC/HashMap.h>
 
-#define for_player() \
-   for(i32 _piter = 0; _piter < _max_players; _piter++) \
-      __with(struct player *p = &players[_piter];) \
-         if(p->active)
-
-#define LocalPlayer \
-   (ACS_PlayerNumber() >= 0 ? &players[ACS_PlayerNumber()] : (struct player *)nil)
-#define UnsafeLocalPlayer players[ACS_PlayerNumber()]
-#define P_Discount(n) (i96)((n) * p->discount)
-#define P_None(p) (!(p) || !(p)->active)
-#define with_player(ptr) \
-   __with(struct player *p = (ptr);) \
-      if(!P_None(p))
-#define P_Wep_CurType(p) ((p)->weapon.cur->info->type)
+#define P_Discount(n) (i96)((n) * pl.discount)
+#define P_None() (!pl.active)
+#define P_Wep_CurType() (pl.weapon.cur->info->type)
 
 /* Extern Functions -------------------------------------------------------- */
 
-script void P_Init(struct player *p);
-script void P_Data_Load(struct player *p);
-script void P_Data_Save(struct player *p);
-bool P_ButtonPressed(struct player *p, i32 bt);
-optargs(1) bool P_SetVel(struct player *p, k32 velx, k32 vely, k32 velz, bool add);
-void P_ValidateTID(struct player *p);
-void P_GUI_Close(struct player *p);
-void P_GUI_Use(struct player *p);
-optargs(1) i96 P_Scr_Give(struct player *p, i96 score, bool nomul);
-void P_Scr_Take(struct player *p, i96 score);
+script void P_Init();
+script void P_Data_Load();
+script void P_Data_Save();
+bool P_ButtonPressed(i32 bt);
+optargs(1) bool P_SetVel(k32 velx, k32 vely, k32 velz, bool add);
+void P_ValidateTID();
+void P_GUI_Close();
+void P_GUI_Use();
+optargs(1) i96 P_Scr_Give(i96 score, bool nomul);
+void P_Scr_Take(i96 score);
 script void P_GiveAllScore(i96 score, bool nomul);
 script void P_GiveAllEXP(u64 amt);
-void P_Lv_GiveEXP(struct player *p, u64 amt);
+void P_Lv_GiveEXP(u64 amt);
 cstr P_Discrim(i32 pclass);
 i32 P_Color(i32 pclass);
-void P_Dat_PTickPst(struct player *p);
-stkcall struct player *P_PtrFind(i32 tid, i32 ptr);
-script extern void P_Scr_Payout(struct player *p);
-void P_Log_SellWeapon(struct player *p, struct weaponinfo const *info, i96 score);
-void P_Log_Weapon(struct player *p, struct weaponinfo const *info);
-i32 P_Wep_FromName(struct player *p, i32 name);
+void P_Dat_PTickPst();
+script extern void P_Scr_Payout();
+void P_Log_SellWeapon(struct weaponinfo const *info, i96 score);
+void P_Log_Weapon(struct weaponinfo const *info);
+i32 P_Wep_FromName(i32 name);
 
-script void P_Wep_PTickPre (struct player *p);
-       void P_Dat_PTickPre (struct player *p);
-script void P_CBI_PTick    (struct player *p);
-script void P_Inv_PTick    (struct player *p);
-script void P_Log_PTick    (struct player *p);
-script void P_Upg_PTick    (struct player *p);
-script void P_Wep_PTick    (struct player *p);
-script void P_Upg_PTickPst (struct player *p);
-       void P_Ren_PTickPst (struct player *p);
-       void P_Ren_Crosshair(struct player *p);
+script void P_Wep_PTickPre ();
+       void P_Dat_PTickPre ();
+script void P_CBI_PTick    ();
+script void P_Inv_PTick    ();
+script void P_Log_PTick    ();
+script void P_Upg_PTick    ();
+script void P_Wep_PTick    ();
+script void P_Upg_PTickPst ();
+       void P_Ren_PTickPst ();
 
-script void P_TeleportIn (struct player *p);
-sync   void P_TeleportOut(struct player *p, i32 tag);
+script void P_TeleportIn ();
+sync   void P_TeleportOut(i32 tag);
 
 #ifndef NDEBUG
-void P_Ren_Debug(struct player *p);
+void P_Ren_Debug();
 #endif
-void P_Ren_Magic(struct player *p);
-script void P_Ren_Step(struct player *p);
-void P_Ren_View(struct player *p);
-script void P_Ren_Scope(struct player *p);
+void P_Ren_Magic();
+script void P_Ren_Step();
+void P_Ren_View();
+script void P_Ren_Scope();
 
 /* Types ------------------------------------------------------------------- */
-
-enum {
-   _max_players = 8,
-};
 
 enum {
    #define pclass_x(shr, lng, eq) shr = lng,
@@ -268,9 +251,9 @@ struct player {
    __prop setCVarS {operator(): ACS_SetUserCVarString(->num)}
 
    /* log */
-   __prop logB {operator(): P_Log_Both(this)}
-   __prop logF {operator(): P_Log_Full(this)}
-   __prop logH {operator(): P_Log_HUDs(this)}
+   __prop logB {operator(): P_Log_Both()}
+   __prop logF {operator(): P_Log_Full()}
+   __prop logH {operator(): P_Log_HUDs()}
 
    /* Initialization */
    bool wasinit;
@@ -411,7 +394,7 @@ struct player {
 /* Extern Objects ---------------------------------------------------------- */
 
 #if !ZscOn
-extern struct player players[_max_players];
+extern struct player pl;
 #endif
 
 #endif

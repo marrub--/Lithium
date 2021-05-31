@@ -11,7 +11,7 @@
 #include "p_player.h"
 #include "p_hudid.h"
 
-void P_Ren_Magic(struct player *p)
+void P_Ren_Magic()
 {
    SetSize(800, 600);
 
@@ -23,13 +23,13 @@ void P_Ren_Magic(struct player *p)
 
       i32 fid = fid_rendS + i;
       if(CheckFade(fid))
-         PrintSpriteFP(p->rendhit ? hs[i] : ns[i], 0,1, 0,1, fid);
+         PrintSpriteFP(pl.rendhit ? hs[i] : ns[i], 0,1, 0,1, fid);
    }
 
    if(CheckFade(fid_blade)) {
       Str(sp_ns, s":Weapon:Blade");
       Str(sp_hs, s":Weapon:BladeHit");
-      PrintSpriteFP(p->bladehit ? sp_hs : sp_ns, 0,1, 0,1, fid_blade);
+      PrintSpriteFP(pl.bladehit ? sp_hs : sp_ns, 0,1, 0,1, fid_blade);
    }
 }
 

@@ -12,16 +12,16 @@
 #include "p_player.h"
 #include "p_hudid.h"
 
-void P_Ren_Debug(struct player *p) {
+void P_Ren_Debug() {
    if(!get_bit(dbglevel, log_devh)) return;
 
-   Dbg_Stat("exp: lv.%u %u/%u/%u\n", p->attr.level, p->attr.expprev, p->attr.exp, p->attr.expnext);
-   Dbg_Stat("x: %k\ny: %k\nz: %k\n", p->x, p->y, p->z);
-   Dbg_Stat("vx: %k\nvy: %k\nvz: %k\nvel: %k\n", p->velx, p->vely, p->velz, p->getVel());
-   Dbg_Stat("a.y: %k\na.p: %k\na.r: %k\n", p->yaw * 360, p->pitch * 360, p->roll * 360);
-   Dbg_Stat("ap.y: %lk\nap.p: %lk\nap.r: %lk\n", p->addyaw * 360, p->addpitch * 360, p->addroll * 360);
-   Dbg_Stat("rage: %k\n", p->rage);
-   Dbg_Stat("score: %lli\n", p->score);
+   Dbg_Stat("exp: lv.%u %u/%u/%u\n", pl.attr.level, pl.attr.expprev, pl.attr.exp, pl.attr.expnext);
+   Dbg_Stat("x: %k\ny: %k\nz: %k\n", pl.x, pl.y, pl.z);
+   Dbg_Stat("vx: %k\nvy: %k\nvz: %k\nvel: %k\n", pl.velx, pl.vely, pl.velz, pl.getVel());
+   Dbg_Stat("a.y: %k\na.p: %k\na.r: %k\n", pl.yaw * 360, pl.pitch * 360, pl.roll * 360);
+   Dbg_Stat("ap.y: %lk\nap.p: %lk\nap.r: %lk\n", pl.addyaw * 360, pl.addpitch * 360, pl.addroll * 360);
+   Dbg_Stat("rage: %k\n", pl.rage);
+   Dbg_Stat("score: %lli\n", pl.score);
 
    SetSize(320, 240);
 

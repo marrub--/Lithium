@@ -16,9 +16,9 @@
 /* Extern Functions -------------------------------------------------------- */
 
 script
-void Upgr_InstaDeath_Update(struct player *p, struct upgrade *upgr)
+void Upgr_InstaDeath_Update(struct upgrade *upgr)
 {
-   if(p->health < p->oldhealth)
+   if(pl.health < pl.oldhealth)
       ServCallI(sm_DieNow);
 }
 

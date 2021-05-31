@@ -91,11 +91,8 @@ void ShowBarrier(dmon_t const *m, k32 alpha) {
    bool anyplayer = false;
 
    /* Optimization: Check for players nearby first. */
-   for_player() {
-      if(aabb_point(m->x - 192, m->y - 192, 384, 384, p->x, p->y)) {
-         anyplayer = true;
-         break;
-      }
+   if(aabb_point(m->x - 192, m->y - 192, 384, 384, pl.x, pl.y)) {
+      anyplayer = true;
    }
 
    if(!anyplayer)
@@ -144,7 +141,7 @@ void BaseMonsterLevel(dmon_t *m)
    } else {
       k32 rrn = ACS_RandomFixed(1, _max_rank);
 
-      for_player() {rlv += p->attr.level / 2.0; break;}
+      rlv += pl.attr.level / 2.0;
 
       m->rank  = minmax(rrn * bias * 2, 1, _max_rank);
       m->level = minmax(rlv * bias    , 1, _max_level);
@@ -174,7 +171,7 @@ void BaseMonsterLevel(dmon_t *m)
  * actor is no longer solid, so it won't explode immediately.
  */
 alloc_aut(0) script
-static void SoulCleave(dmon_t *m, struct player *p)
+static void SoulCleave(dmon_t *m)
 {
    Str(sm_solid, s"SOLID");
 
@@ -182,7 +179,7 @@ static void SoulCleave(dmon_t *m, struct player *p)
    ACS_SpawnForced(so_MonsterSoul, m->x, m->y, m->z + 16, tid);
    SetDamage(tid, m->level / 8 * 7);
 
-   PtrSet(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
+   PtrSet(tid, AAPTR_DEFAULT, AAPTR_TARGET, pl.tid);
    SetSpecies(tid, GetSpecies(0));
 
    for(i32 i = 0; ACS_CheckFlag(0, sm_solid) && i < 15; i++) ACS_Delay(1);
@@ -190,7 +187,7 @@ static void SoulCleave(dmon_t *m, struct player *p)
    SetSpecies(tid, so_Player);
 }
 
-static void SpawnManaPickup(dmon_t *m, struct player *p)
+static void SpawnManaPickup(dmon_t *m)
 {
    i32 i = 0;
    do {
@@ -198,15 +195,15 @@ static void SpawnManaPickup(dmon_t *m, struct player *p)
       i32 x   = m->x + ACS_Random(-16, 16);
       i32 y   = m->y + ACS_Random(-16, 16);
       ACS_Spawn(so_ManaPickup, x, y, m->z + 4, tid);
-      PtrSet(tid, AAPTR_DEFAULT, AAPTR_TRACER, p->tid);
-      PtrSet(tid, AAPTR_DEFAULT, AAPTR_TARGET, p->tid);
+      PtrSet(tid, AAPTR_DEFAULT, AAPTR_TRACER, pl.tid);
+      PtrSet(tid, AAPTR_DEFAULT, AAPTR_TARGET, pl.tid);
       i += 150;
    } while(i < m->maxhealth);
 }
 
 static void OnFinalize(dmon_t *m) {
-   with_player(P_PtrFind(0, AAPTR_TARGET)) {
-      if(p->sgacquired) {
+   if(!P_None() && PtrPlayerNumber(0, AAPTR_TARGET) >= 0) {
+      if(pl.sgacquired) {
          bool high_level_imp =
             m->mi->type == mtype_imp && m->level >= 70 && m->rank >= 4;
          if(high_level_imp && ACS_Random(0, 100) < 4)
@@ -214,10 +211,10 @@ static void OnFinalize(dmon_t *m) {
       }
 
       if(!m->finalized) {
-         if(get_bit(p->upgrades[UPGR_Magic].flags, _ug_active) &&
-            p->mana != p->manamax &&
+         if(get_bit(pl.upgrades[UPGR_Magic].flags, _ug_active) &&
+            pl.mana != pl.manamax &&
             (m->mi->type != mtype_zombie || ACS_Random(0, 50) < 10)) {
-            SpawnManaPickup(m, p);
+            SpawnManaPickup(m);
          }
 
          if(ACS_GetCVar(sc_sv_wepdrop)) {
@@ -225,8 +222,8 @@ static void OnFinalize(dmon_t *m) {
             Str(so_cgun, s"Chaingun");
             str sp = snil;
             switch(m->mi->type) {
-               case mtype_zombiesg: if(!p->weapon.slot[3]) sp = so_sgun; break;
-               case mtype_zombiecg: if(!p->weapon.slot[4]) sp = so_cgun; break;
+               case mtype_zombiesg: if(!pl.weapon.slot[3]) sp = so_sgun; break;
+               case mtype_zombiecg: if(!pl.weapon.slot[4]) sp = so_cgun; break;
             }
             if(sp) {
                Str(sm_dropped, s"DROPPED");
@@ -236,13 +233,13 @@ static void OnFinalize(dmon_t *m) {
             }
          }
 
-         if(get_bit(p->upgrades[UPGR_SoulCleaver].flags, _ug_active))
-            SoulCleave(m, p);
+         if(get_bit(pl.upgrades[UPGR_SoulCleaver].flags, _ug_active))
+            SoulCleave(m);
       }
 
-           if(p->health <  5) P_Lv_GiveEXP(p, 50);
-      else if(p->health < 15) P_Lv_GiveEXP(p, 25);
-      else if(p->health < 25) P_Lv_GiveEXP(p, 10);
+           if(pl.health <  5) P_Lv_GiveEXP(50);
+      else if(pl.health < 15) P_Lv_GiveEXP(25);
+      else if(pl.health < 25) P_Lv_GiveEXP(10);
 
       P_GiveAllEXP(m->mi->exp + m->level + (m->rank - 1) * 10);
    }

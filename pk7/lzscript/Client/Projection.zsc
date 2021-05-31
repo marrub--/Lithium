@@ -1,0 +1,68 @@
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Zoe Elisabeth Watson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * This extends URANUS to new limits, allowing you to see insi-- okay
+ * nevermind sorry
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
+extend class Lith_URANUS;
+
+/* Members ----------------------------------------------------------------- */
+
+private transient Lith_Le_Viewport   viewport;
+private transient Lith_Le_ProjScreen proj;
+private transient Lith_Le_GlScreen   projGl;
+private transient Lith_Le_SwScreen   projSw;
+private transient CVar               cvarRenderer;
+
+/* Member Functions -------------------------------------------------------- */
+
+private void projectSetRenderer() {
+   let oldProj = proj;
+   switch(cvarRenderer.getInt()) {
+   default:        proj = projGl; break;
+   case 0: case 1: proj = projSw; break;
+   }
+   if(proj != oldProj) {
+      proj.projReady = false;
+   }
+}
+
+private ui void projectSetUp(RenderEvent evt) {
+   viewport.fromHud();
+   proj.cacheResolution();
+   proj.cacheFov(players[consolePlayer].fov);
+   proj.orientForRenderOverlay(evt);
+   proj.beginProjection();
+   proj.projReady = true;
+}
+
+clearScope int, int, bool project(vector3 v) {
+   if(!proj.projReady) {
+      return 0, 0, false;
+   }
+   proj.projectWorldPos(v);
+   let diff = Screen.getHeight() / 240.0;
+   let res  = (Screen.getWidth() / diff, Screen.getHeight() / diff);
+   let norm = proj.projectToNormal();
+   let scrn = viewport.sceneToCustom(norm, res);
+   bool vis = viewport.isInside(norm);
+   scrn.x -= (res.x - 320.0) / 2.0;
+   return int(scrn.x), int(scrn.y), vis;
+}
+
+override void onRegister() {
+   projGl = new("Lith_Le_GlScreen");
+   projSw = new("Lith_Le_SwScreen");
+   cvarRenderer = CVar.getCVar("vid_rendermode", players[consolePlayer]);
+   projectSetRenderer();
+}
+
+/* EOF */

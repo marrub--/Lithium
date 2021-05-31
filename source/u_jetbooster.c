@@ -13,45 +13,45 @@
 
 #include "u_common.h"
 
-#define UData p->upgrdata.jetbooster
+#define UData pl.upgrdata.jetbooster
 
 #define CHARGE_MAX (35 * 7)
 
 /* Extern Functions -------------------------------------------------------- */
 
-void Upgr_JetBooster_Activate(struct player *p, struct upgrade *upgr)
+void Upgr_JetBooster_Activate(struct upgrade *upgr)
 {
    UData.charge = CHARGE_MAX;
 }
 
 script
-void Upgr_JetBooster_Update(struct player *p, struct upgrade *upgr)
+void Upgr_JetBooster_Update(struct upgrade *upgr)
 {
    UData.discharged = UData.charge > 60 && UData.charge < CHARGE_MAX;
 
    if(UData.charge < CHARGE_MAX)
       UData.charge++;
 
-   if(p->frozen) return;
+   if(pl.frozen) return;
 
-   if(P_ButtonPressed(p, BT_SPEED) && !p->onground && UData.charge >= CHARGE_MAX)
+   if(P_ButtonPressed(BT_SPEED) && !pl.onground && UData.charge >= CHARGE_MAX)
    {
-      k32 angle = p->yaw - ACS_VectorAngle(p->forwardv, p->sidev);
+      k32 angle = pl.yaw - ACS_VectorAngle(pl.forwardv, pl.sidev);
 
       StartSound(ss_player_rocketboost, lch_auto, 0);
       InvGive(so_RocketBooster, 1);
-      P_SetVel(p, p->velx + (ACS_Cos(angle) * 16.0), p->vely + (ACS_Sin(angle) * 16.0), 10.0);
+      P_SetVel(pl.velx + (ACS_Cos(angle) * 16.0), pl.vely + (ACS_Sin(angle) * 16.0), 10.0);
 
       UData.charge = 0;
-      p->upgrdata.reflexwetw.leaped = 0;
+      pl.upgrdata.reflexwetw.leaped = 0;
    }
 }
 
-void Upgr_JetBooster_Render(struct player *p, struct upgrade *upgr)
+void Upgr_JetBooster_Render(struct upgrade *upgr)
 {
    Str(sl_jet, sLANG "JET");
 
-   if(!p->hudenabled) return;
+   if(!pl.hudenabled) return;
 
    if(UData.charge != CHARGE_MAX)
       SetFade(fid_jet, 1, 16);

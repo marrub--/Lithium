@@ -27,15 +27,15 @@ struct shopdef
    str bipunlock;
    i96 cost;
 
-   void (*ShopBuy)   (struct player *p, struct shopdef const *def, void *obj);
-   bool (*ShopCanBuy)(struct player *p, struct shopdef const *def, void *obj);
-   bool (*ShopGive)  (struct player *p, struct shopdef const *def, void *obj, i32 tid);
+   void (*ShopBuy)   (struct shopdef const *def, void *obj);
+   bool (*ShopCanBuy)(struct shopdef const *def, void *obj);
+   bool (*ShopGive)  (struct shopdef const *def, void *obj, i32 tid);
 };
 
 void Shop_MInit(void);
 
-i96 P_Shop_Cost(struct player *p, struct shopdef const *def);
-bool P_Shop_CanBuy(struct player *p, struct shopdef const *def, void *obj);
-optargs(1) bool P_Shop_Buy(struct player *p, struct shopdef const *def, void *obj, cstr namefmt, bool nodelivery, bool nolog);
+i96 P_Shop_Cost(struct shopdef const *def);
+bool P_Shop_CanBuy(struct shopdef const *def, void *obj);
+optargs(1) bool P_Shop_Buy(struct shopdef const *def, void *obj, cstr namefmt, bool nodelivery, bool nolog);
 
 #endif

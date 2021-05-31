@@ -16,15 +16,15 @@
 
 /* Static Functions -------------------------------------------------------- */
 
-static bool UpgrCanBuy(struct player *p, struct shopdef const *, void *upgr) {
+static bool UpgrCanBuy(struct shopdef const *, void *upgr) {
    return !get_bit(((struct upgrade *)upgr)->flags, _ug_owned);
 }
 
-static void UpgrShopBuy(struct player *p, struct shopdef const *, void *upgr) {
-   P_Upg_SetOwned(p, upgr);
+static void UpgrShopBuy(struct shopdef const *, void *upgr) {
+   P_Upg_SetOwned(upgr);
 }
 
-static bool UpgrGive(struct player *, struct shopdef const *, void *upgr_, i32 tid) {
+static bool UpgrGive(struct shopdef const *, void *upgr_, i32 tid) {
    struct upgrade const *upgr = upgr_;
 
    SetMembI(tid, sm_UpgradeId, upgr->info->key);
@@ -60,22 +60,22 @@ void Upgr_MInit(void) {
    }
 }
 
-void P_Upg_SetOwned(struct player *p, struct upgrade *upgr) {
+void P_Upg_SetOwned(struct upgrade *upgr) {
    if(get_bit(upgr->flags, _ug_owned)) return;
 
    set_bit(upgr->flags, _ug_owned);
-   p->upgradesowned++;
+   pl.upgradesowned++;
 
    if(upgr->info->category == UC_Body && upgr->info->cost == 0)
-      P_Upg_Toggle(p, upgr);
+      P_Upg_Toggle(upgr);
 }
 
-script void P_Upg_PInit(struct player *p) {
-   fastmemset(p->upgrades, 0, sizeof p->upgrades[0] * countof(p->upgrades));
+script void P_Upg_PInit() {
+   fastmemset(pl.upgrades, 0, sizeof pl.upgrades[0] * countof(pl.upgrades));
 
    for(i32 i = 0; i < UPGR_MAX; i++) {
-      if(upgrinfo[i].pclass & p->pclass) {
-         set_bit(p->upgrades[i].flags, _ug_available);
+      if(upgrinfo[i].pclass & pl.pclass) {
+         set_bit(pl.upgrades[i].flags, _ug_available);
       }
    }
 
@@ -87,45 +87,45 @@ script void P_Upg_PInit(struct player *p) {
          || get_bit(dbgflags, dbgf_upgr)
          #endif
          )
-         P_Upg_Buy(p, upgr, true, true);
+         P_Upg_Buy(upgr, true, true);
    }
 
-   p->upgrinit = true;
+   pl.upgrinit = true;
 }
 
-void P_Upg_PQuit(struct player *p) {
-   fastmemset(p->upgrades, 0, sizeof p->upgrades[0] * countof(p->upgrades));
+void P_Upg_PQuit() {
+   fastmemset(pl.upgrades, 0, sizeof pl.upgrades[0] * countof(pl.upgrades));
 
-   p->upgrinit = false;
+   pl.upgrinit = false;
 }
 
-void P_Upg_PDeinit(struct player *p) {
+void P_Upg_PDeinit() {
    for_upgrade(upgr) {
       if(get_bit(upgr->flags, _ug_active)) {
          set_bit(upgr->flags, _ug_wasactive);
-         P_Upg_Toggle(p, upgr);
+         P_Upg_Toggle(upgr);
       }
    }
 }
 
-void P_Upg_PMInit(struct player *p) {
+void P_Upg_PMInit() {
    for_upgrade(upgr) {
       if(get_bit(upgr->flags, _ug_wasactive)) {
          dis_bit(upgr->flags, _ug_wasactive);
-         P_Upg_Toggle(p, upgr);
+         P_Upg_Toggle(upgr);
       }
    }
 }
 
-script void P_Upg_PTick(struct player *p) {
-   if(p->modal >= _gui_disables_hud) {
-      p->hudenabled = false;
+script void P_Upg_PTick() {
+   if(pl.modal >= _gui_disables_hud) {
+      pl.hudenabled = false;
    } else {
-      p->hudenabled = false;
+      pl.hudenabled = false;
 
       for_upgrade(upgr) {
          if(get_bit(upgr->flags, _ug_active) && upgr->info->group == UG_HUD) {
-            p->hudenabled = true;
+            pl.hudenabled = true;
          }
       }
    }
@@ -135,63 +135,63 @@ script void P_Upg_PTick(struct player *p) {
 
    for_upgrade(upgr)
       if(get_bit(upgr->flags, _ug_active) && upgr->info->Update)
-         upgr->info->Update(p, upgr);
+         upgr->info->Update(upgr);
 }
 
-script void P_Upg_PTickPst(struct player *p) {
+script void P_Upg_PTickPst() {
    for_upgrade(upgr) {
       if(get_bit(upgr->flags, _ug_active) && upgr->info->Render) {
          SetSize(320, 240);
          ClearClip();
-         upgr->info->Render(p, upgr);
+         upgr->info->Render(upgr);
       }
    }
 }
 
-void P_Upg_Enter(struct player *p) {
+void P_Upg_Enter() {
    for_upgrade(upgr)
       if(get_bit(upgr->flags, _ug_active) && upgr->info->Enter)
-         upgr->info->Enter(p, upgr);
+         upgr->info->Enter(upgr);
 }
 
-bool P_Upg_CanActivate(struct player *p, struct upgrade *upgr) {
+bool P_Upg_CanActivate(struct upgrade *upgr) {
    return
       get_bit(upgr->flags, _ug_owned) &&
       (get_bit(upgr->flags, _ug_active) ||
-       p->pclass != pcl_marine ||
+       pl.pclass != pcl_marine ||
        (!RequiresButDontHave_AI  &&
         !RequiresButDontHave_WMD &&
         !RequiresButDontHave_WRD &&
         !RequiresButDontHave_RDI &&
         !RequiresButDontHave_RA  &&
-        p->cbi.pruse + upgr->info->perf <= cbiperf));
+        pl.cbi.pruse + upgr->info->perf <= cbiperf));
 }
 
-bool P_Upg_Toggle(struct player *p, struct upgrade *upgr) {
-   if(!P_Upg_CanActivate(p, upgr))
+bool P_Upg_Toggle(struct upgrade *upgr) {
+   if(!P_Upg_CanActivate(upgr))
       return false;
 
    tog_bit(upgr->flags, _ug_active);
    bool on = get_bit(upgr->flags, _ug_active);
 
-   if(on) p->cbi.pruse += upgr->info->perf;
-   else   p->cbi.pruse -= upgr->info->perf;
+   if(on) pl.cbi.pruse += upgr->info->perf;
+   else   pl.cbi.pruse -= upgr->info->perf;
 
    if(on && upgr->info->group)
       for_upgrade(other)
          if(other != upgr && get_bit(other->flags, _ug_active) && other->info->group == upgr->info->group)
-            P_Upg_Toggle(p, other);
+            P_Upg_Toggle(other);
 
    if(on) {
       if(upgr->info->Activate)
-         upgr->info->Activate(p, upgr);
+         upgr->info->Activate(upgr);
 
-      p->scoremul += upgr->info->scoreadd;
+      pl.scoremul += upgr->info->scoreadd;
    } else {
       if(upgr->info->Deactivate)
-         upgr->info->Deactivate(p, upgr);
+         upgr->info->Deactivate(upgr);
 
-      p->scoremul -= upgr->info->scoreadd;
+      pl.scoremul -= upgr->info->scoreadd;
    }
 
    return true;

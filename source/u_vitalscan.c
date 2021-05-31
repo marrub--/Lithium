@@ -17,11 +17,11 @@
 
 #include <math.h>
 
-#define UData p->upgrdata.vitalscan
+#define UData pl.upgrdata.vitalscan
 
 /* Extern Functions -------------------------------------------------------- */
 
-script void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr) {
+script void Upgr_VitalScan_Update(struct upgrade *upgr) {
    Str(so_devile_six, s"RLDeVileSix");
    Str(sm_countkill,  s"COUNTKILL");
 
@@ -81,7 +81,7 @@ script void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr) {
       } else if(freak || ACS_CheckFlag(0, sm_boss)) {
          UData.tagstr = RandomName(freak ? 0 : id);
 
-         if(p->getCVarI(sc_scanner_bar)) {
+         if(pl.getCVarI(sc_scanner_bar)) {
             UData.oldhealth = UData.health = ACS_Random(0, 666666666);
             UData.maxhealth = ACS_Random(0, 666666666);
             healthset = true;
@@ -121,7 +121,7 @@ script void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr) {
          UData.split     = 0;
       }
 
-      UData.cangle = ACS_VectorAngle(p->x - GetX(0), p->y - GetY(0)) * tau;
+      UData.cangle = ACS_VectorAngle(pl.x - GetX(0), pl.y - GetY(0)) * tau;
 
       /* Hit indicator */
       if(UData.hdtime != 0) UData.hdtime--;
@@ -134,16 +134,16 @@ script void Upgr_VitalScan_Update(struct player *p, struct upgrade *upgr) {
    }
 }
 
-void Upgr_VitalScan_Render(struct player *p, struct upgrade *upgr) {
-   if(!p->hudenabled || !UData.target) return;
+void Upgr_VitalScan_Render(struct upgrade *upgr) {
+   if(!pl.hudenabled || !UData.target) return;
 
    if(UData.hdtime == 30) SetFade(fid_vscan, 10, 12);
 
-   i32 ox = p->getCVarI(sc_scanner_xoffs);
-   i32 oy = p->getCVarI(sc_scanner_yoffs);
+   i32 ox = pl.getCVarI(sc_scanner_xoffs);
+   i32 oy = pl.getCVarI(sc_scanner_yoffs);
 
-   if(p->getCVarI(sc_scanner_slide)) {
-      k64 diff = p->yawf - (k64)UData.cangle;
+   if(pl.getCVarI(sc_scanner_slide)) {
+      k64 diff = pl.yawf - (k64)UData.cangle;
       k32 ds = ACS_Sin(diff / tau) * tau;
       k32 dc = ACS_Cos(diff / tau) * tau;
       UData.oangle = lerplk(UData.oangle, atan2f(ds, dc), 0.1);
@@ -165,10 +165,10 @@ void Upgr_VitalScan_Render(struct player *p, struct upgrade *upgr) {
    }
 
    /* Tag and health */
-   bool afnt = p->getCVarI(sc_scanner_altfont);
+   bool afnt = pl.getCVarI(sc_scanner_altfont);
    str  font = afnt ? sf_lmidfont : sf_smallfnt;
 
-   i32 cr = Draw_GetCr(p->getCVarI(sc_scanner_color));
+   i32 cr = Draw_GetCr(pl.getCVarI(sc_scanner_color));
 
    PrintText_str(UData.tagstr, font, cr, 160+ox,4, 216+oy,2);
 
@@ -187,7 +187,7 @@ void Upgr_VitalScan_Render(struct player *p, struct upgrade *upgr) {
    PrintTextX(font, CR_WHITE, 160+ox,4, 225+oy,2, ptf_no_utf);
 
    /* Health bar */
-   if(p->getCVarI(sc_scanner_bar)) {
+   if(pl.getCVarI(sc_scanner_bar)) {
       StrAry(bs, s":Bars:HealthBar1",  s":Bars:HealthBar2",
                  s":Bars:HealthBar3",  s":Bars:HealthBar4",
                  s":Bars:HealthBar5",  s":Bars:HealthBar6",
