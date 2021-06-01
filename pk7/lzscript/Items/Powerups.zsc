@@ -17,6 +17,7 @@ class Lith_AllMap : Inventory replaces Allmap
 
       +COUNTITEM
       +INVENTORY.FANCYPICKUPSOUND
+      +CastSpriteShadow
    }
 
    override bool tryPickup(in out Actor mo) {
@@ -45,6 +46,7 @@ class Lith_Berserk : Inventory replaces Berserk
 
       +COUNTITEM
       +INVENTORY.FANCYPICKUPSOUND
+      +CastSpriteShadow
    }
 
    override bool tryPickup(in out Actor mo) {
@@ -164,6 +166,7 @@ class Lith_RadSuit : Inventory replaces RadSuit
       Inventory.PickupSound "player/pickup/radsuit";
 
       +INVENTORY.FANCYPICKUPSOUND
+      +CastSpriteShadow
    }
 
    override bool tryPickup(in out Actor mo) {
@@ -230,6 +233,7 @@ class Lith_ArtiFly : Inventory replaces ArtiFly
 
       +COUNTITEM
       +INVENTORY.FANCYPICKUPSOUND
+      +CastSpriteShadow
    }
 
    override bool tryPickup(in out Actor mo) {
@@ -259,6 +263,7 @@ class Lith_ArtiTeleport : Inventory replaces ArtiTeleport
 
       +COUNTITEM
       +INVENTORY.FANCYPICKUPSOUND
+      +CastSpriteShadow
    }
 
    override bool tryPickup(in out Actor mo) {
@@ -277,6 +282,9 @@ class Lith_ArtiTeleport : Inventory replaces ArtiTeleport
 }
 
 class Lith_PowerLightAmp : PowerLightAmp {
+   default {
+      +CastSpriteShadow
+   }
    override void Tick() {if(!level.isFrozen()) Super.Tick();}
    override void EndEffect() {
       Super.EndEffect();
@@ -285,10 +293,10 @@ class Lith_PowerLightAmp : PowerLightAmp {
 }
 
 class Lith_PowerInvulnerable : PowerInvulnerable
-   {override void Tick() {if(!level.isFrozen()) Super.Tick();}}
+   {default {+CastSpriteShadow} override void Tick() {if(!level.isFrozen()) Super.Tick();}}
 
 class Lith_PowerIronFeet : PowerIronFeet
-   {override void Tick() {if(!level.isFrozen()) Super.Tick();}}
+   {default {+CastSpriteShadow} override void Tick() {if(!level.isFrozen()) Super.Tick();}}
 
 /* this is a rather terrible hack, but there's actually no other way to give */
 /* the player the special inverted screen color map in the engine... */
@@ -353,6 +361,7 @@ class Lith_Backpack : Lith_ScoreItem replaces Backpack
       Lith_ScoreItem.Score Score_Backpack;
 
       +COUNTITEM
+      +CastSpriteShadow
    }
 
    override void Lith_OnPickup(Actor mo)
@@ -379,6 +388,7 @@ class Lith_Shobon : Actor
    default
    {
       +NOINTERACTION
+      +CastSpriteShadow
    }
 
    vector2 m_DoruPos;

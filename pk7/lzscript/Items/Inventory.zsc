@@ -15,6 +15,7 @@ class Lith_InventoryItem : Inventory abstract {
 
       +INVENTORY.UNTOSSABLE
       +INVENTORY.UNDROPPABLE
+      +CastSpriteShadow
    }
 
    uint   m_invEquip;
@@ -114,6 +115,7 @@ class Lith_BasicPickup : Inventory {
       Inventory.PickupSound "";
       Lith_BasicPickup.LogType msg_both;
       +INVENTORY.TRANSFER
+      +CastSpriteShadow
    }
 
    private meta string m_LogName;

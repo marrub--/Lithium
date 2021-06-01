@@ -43,8 +43,9 @@ class Lith_ItemSprite : Actor;
 
 default
 {
-   +NOINTERACTION;
-   +NOTIMEFREEZE;
+   +NOINTERACTION
+   +NOTIMEFREEZE
+   +CastSpriteShadow
 }
 
 vector3 m_OrigPos;

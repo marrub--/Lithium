@@ -17,6 +17,7 @@ class Lith_SwitchableDecor : Actor
       +SOLID
       +USESPECIAL
       +FORCEYBILLBOARD
+      +CastSpriteShadow
    }
 
    private meta sound m_IdleNoise;

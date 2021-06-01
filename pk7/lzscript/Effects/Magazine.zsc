@@ -23,6 +23,7 @@ default
 
    +MISSILE /* damn it, zdoom */
    +THRUACTORS
+   +CastSpriteShadow
 }
 
 int user_side;
