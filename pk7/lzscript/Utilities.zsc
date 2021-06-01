@@ -82,4 +82,19 @@ struct Lith_UTIL
    }
 }
 
+/* UTILHACK: Urinary Tract Infection-Like Hack (Anal Cock King ed.) */
+class Lith_UTILHACK {
+   play vector3 traceFrom(Actor mo, double yaw, double pitch, double dist, double offsetZ, bool floor = false) const {
+      return Lith_UTIL.traceFrom(mo, yaw, pitch, dist, offsetZ, floor);
+   }
+
+   play int exec(Actor mo, int scr, int arg0 = 0, int arg1 = 0, int arg2 = 0, int arg3 = 0) const {
+      return Lith_UTIL.exec(mo, scr, arg0, arg1, arg2, arg3);
+   }
+
+   play int pData(Actor ply, int info, int permutation = 0) const {
+      return Lith_UTIL.pData(ply, info, permutation);
+   }
+}
+
 /* EOF */

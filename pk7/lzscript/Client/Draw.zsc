@@ -75,6 +75,17 @@ transient Font m_UtfFont;
 private Shape2DTransform m_RectXf;
 private Shape2D m_Rect;
 
+private Lith_UTILHACK m_Uh;
+
+private transient CVar m_CVarJpFont;
+private transient CVar m_CVarXHairR;
+private transient CVar m_CVarXHairG;
+private transient CVar m_CVarXHairB;
+private transient CVar m_CVarXHairA;
+private transient CVar m_CVarXHairEnable;
+private transient CVar m_CVarXHairStyle;
+private transient CVar m_CVarXHairEnableJuicer;
+
 bool m_English;
 
 /* Static Functions -------------------------------------------------------- */
@@ -105,7 +116,7 @@ static void LF(Actor mo, int fnum, int time, int speed, double alpha) {
 
    cl.m_FadeMsg[fnum].Time = time;
    cl.m_FadeMsg[fnum].FSub = speed;
-   cl.m_FadeMsg[fnum].Alph = alpha * 255.0;
+   cl.m_FadeMsg[fnum].Alph = uint(alpha * 255.0);
    cl.m_FadeMsg[fnum].Fade = 255;
 }
 
@@ -181,12 +192,7 @@ static void LS(Actor mo, string tex, int xx, int yy, double anum, int flags, col
       cl.m_D[p].C = cr;
    }
 
-   for(int i = 0; tex.byteAt(0) == Ch_Colon; i++) {
-      if(i > 5) {Console.printf("invalid texture: %s", tex); break;}
-      tex = StringTable.Localize(tex, false);
-   }
-
-   cl.m_D[p].Tex = TexMan.CheckForTexture(tex, TexMan.Type_Any);
+   cl.m_D[p].Tex = getTextureForName(tex);
 
    int sx, sy; [sx, sy] = TexMan.GetSize(cl.m_D[p].Tex);
 
@@ -363,6 +369,21 @@ static void LE()
 
 /* Member Functions -------------------------------------------------------- */
 
+override void onRegister() {
+   projectRegister();
+   m_Uh = null;
+
+   PlayerInfo pl = players[consolePlayer];
+   m_CVarJpFont = CVar.getCVar('lith_gui_jpfont', pl);
+   m_CVarXHairR = CVar.getCVar('lith_xhair_r', pl);
+   m_CVarXHairG = CVar.getCVar('lith_xhair_g', pl);
+   m_CVarXHairB = CVar.getCVar('lith_xhair_b', pl);
+   m_CVarXHairA = CVar.getCVar('lith_xhair_a', pl);
+   m_CVarXHairEnable = CVar.getCVar('lith_xhair_enable', pl);
+   m_CVarXHairStyle = CVar.getCVar('lith_xhair_style', pl);
+   m_CVarXHairEnableJuicer = CVar.getCVar('lith_xhair_enablejuicer', pl);
+}
+
 override void WorldLoaded(WorldEvent evt)
 {
    m_RectXf = new("Shape2DTransform");
@@ -382,7 +403,7 @@ override void WorldLoaded(WorldEvent evt)
 override void WorldTick()
 {
    if(!(m_English = StringTable.Localize("LITH_CHECK", false) == "Eng")) {
-      switch(CVar.GetCVar('lith_gui_jpfont', Players[ConsolePlayer]).GetInt()) {
+      switch(m_CVarJpFont.GetInt()) {
          default:
          case font_misaki_gothic: m_UtfFont = "MisakiG";  break;
          case font_misaki_mincho: m_UtfFont = "MisakiM";  break;
@@ -396,10 +417,99 @@ override void WorldTick()
    projectSetRenderer();
 }
 
-override void RenderOverlay(RenderEvent evt)
-{
+private ui void drawCrosshair(RenderEvent evt) {
+   let pl = evt.camera;
+
+   double  yaw   = evt.viewAngle + m_Uh.pData(pl, pdata_addy)/FIX;
+   double  pitch = evt.viewPitch + m_Uh.pData(pl, pdata_addp)/FIX;
+   vector3 loc   = m_Uh.traceFrom(pl, yaw, pitch, 2048, Lith_HERMES.getAttackHeight(pl), false);
+
+   vector2 xh;
+   bool seen;
+   [xh, seen] = projectF(loc);
+   if(!seen) {
+      return;
+   }
+
+   /* draw a tracer for the targeting system */
+   let tr = pl.tracer;
+   if(tr && tr.health > 0 &&
+      m_Uh.pData(pl, pdata_weapon) == weapon_launcher)
+   {
+      int tr1x, tr1y, tr2x, tr2y;
+      [tr1x, tr1y, seen] = project((tr.pos.xy, tr.pos.z + tr.height / 2.0));
+
+      if(seen) {
+         [tr1x, tr1y] = getScSized(tr1x, tr1y);
+         [tr2x, tr2y] = getScSized(xh.x, xh.y);
+         Screen.drawLine(tr1x, tr1y, tr2x, tr2y, "red");
+      }
+   }
+
+   /* draw the crosshair */
+   uint r = clamp(m_CVarXHairR.getInt(), 0, 255);
+   uint g = clamp(m_CVarXHairG.getInt(), 0, 255);
+   uint b = clamp(m_CVarXHairB.getInt(), 0, 255);
+   uint a = clamp(m_CVarXHairA.getInt(), 0, 255);
+
+   if(m_CVarXHairEnable.getBool() && a) {
+      static const string[] XB_GFX = {
+         ":XHairs:circleb", ":XHairs:deltab",  ":XHairs:ovalb",
+         ":XHairs:basicb",  ":XHairs:delearb", ":XHairs:finib",
+         ":XHairs:angleb",  ":XHairs:dotb",    ":XHairs:xpb"
+      };
+      static const string[] XW_GFX = {
+         ":XHairs:circlew", ":XHairs:deltaw",  ":XHairs:ovalw",
+         ":XHairs:basicw",  ":XHairs:delearw", ":XHairs:finiw",
+         ":XHairs:anglew",  ":XHairs:dotw",    ":XHairs:xpw"
+      };
+
+      int       style = m_CVarXHairStyle.getInt();
+      textureId xhb   = getTextureForName(XB_GFX[style]);
+      textureId xhw   = getTextureForName(XW_GFX[style]);
+      color     c     = (r << 16) | (g << 8) | (b << 0);
+
+      int bsx, bsy; [bsx, bsy] = TexMan.GetSize(xhb);
+      int wsx, wsy; [wsx, wsy] = TexMan.GetSize(xhw);
+
+      double xhx = xh.x - bsx/2.0;
+      double xhy = xh.y - bsy/2.0;
+
+      Screen.DrawTexture(xhb, false, xhx, xhy,
+                         DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                         DTA_TopOffset,0, DTA_LeftOffset,0,
+                         DTA_Alpha,a/255.0);
+
+      xhx = xh.x - wsx/2.0;
+      xhy = xh.y - wsy/2.0;
+
+      Screen.DrawTexture(xhw, false, xhx, xhy,
+                         DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                         DTA_TopOffset,0, DTA_LeftOffset,0,
+                         DTA_Alpha,a/255.0,DTA_FillColor,c);
+
+      if(m_CVarXHairEnableJuicer.getBool()) {
+         textureId xhl = getTextureForName(":XHairs:L");
+         textureId xhr = getTextureForName(":XHairs:R");
+
+         double xp = m_Uh.pData(pl, pdata_recoilp)/FIX * 500.0 + 10.0;
+
+         Screen.DrawTexture(xhl, false, xhx-xp, xhy,
+                            DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                            DTA_TopOffset,0, DTA_LeftOffset,0,
+                            DTA_Alpha,a/255.0,DTA_FillColor,c);
+         Screen.DrawTexture(xhr, false, xhx+xp, xhy,
+                            DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                            DTA_TopOffset,0, DTA_LeftOffset,0,
+                            DTA_Alpha,a/255.0,DTA_FillColor,c);
+      }
+   }
+}
+
+override void RenderOverlay(RenderEvent evt) {
    projectSetUp(evt);
-   callAcs("Lith_RenderCrosshair", consolePlayer);
+
+   drawCrosshair(evt);
 
    int scw = 320, sch = 240;
 
@@ -473,7 +583,7 @@ override void RenderOverlay(RenderEvent evt)
    if(p && p.m_Cs) p.m_Cs.Lith_Render();
 }
 
-int, int GetScSized(double x, double y, bool kludge = false)
+clearScope int, int getScSized(double x, double y, bool kludge = false)
 {
    double vw = m_VirtualSize.X;
    double vh = m_VirtualSize.Y;
@@ -487,6 +597,15 @@ int, int GetScSized(double x, double y, bool kludge = false)
    else       [xy, sc] = Screen.VirtualToRealCoords((x, y), (sw, sh), (vw, vh));
 
    return int(xy.X), int(xy.Y);
+}
+
+static clearScope textureId getTextureForName(string tex) {
+   for(int i = 0; tex.byteAt(0) == Ch_Colon; i++) {
+      if(i > 5) {Console.printf("invalid texture: %s", tex); break;}
+      tex = StringTable.Localize(tex, false);
+   }
+
+   return TexMan.CheckForTexture(tex, TexMan.Type_Any);
 }
 
 /* EOF */

@@ -12,11 +12,11 @@ extend class Lith_HERMES;
 private play string m_LogName;
 private play string m_BipName;
 
-static double GetViewHeight(Actor mo) {
+static clearScope double GetViewHeight(Actor mo) {
    return Lith_Player(mo).player.viewz - mo.pos.z;
 }
 
-static double GetAttackHeight(Actor mo) {
+static clearScope double GetAttackHeight(Actor mo) {
    return mo.height / 2.0 + mo.player.mo.attackZOffset * mo.player.crouchFactor;
 }
 

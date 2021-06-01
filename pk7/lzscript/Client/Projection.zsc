@@ -44,9 +44,9 @@ private ui void projectSetUp(RenderEvent evt) {
    proj.projReady = true;
 }
 
-clearScope int, int, bool project(vector3 v) {
+clearScope vector2, bool projectF(vector3 v) {
    if(!proj.projReady) {
-      return 0, 0, false;
+      return (0.0, 0.0), false;
    }
    proj.projectWorldPos(v);
    let diff = Screen.getHeight() / 240.0;
@@ -55,10 +55,17 @@ clearScope int, int, bool project(vector3 v) {
    let scrn = viewport.sceneToCustom(norm, res);
    bool vis = proj.isInFront() && proj.isInScreen();
    scrn.x -= (res.x - 320.0) / 2.0;
+   return scrn, vis;
+}
+
+clearScope int, int, bool project(vector3 v) {
+   vector2 scrn;
+   bool vis;
+   [scrn, vis] = projectF(v);
    return int(scrn.x), int(scrn.y), vis;
 }
 
-override void onRegister() {
+private void projectRegister() {
    projGl = new("Lith_Le_GlScreen");
    projSw = new("Lith_Le_SwScreen");
    cvarRenderer = CVar.getCVar("vid_rendermode", players[consolePlayer]);

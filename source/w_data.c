@@ -31,8 +31,8 @@ i32 Sc_LPData(i32 info, i32 permutation)
    case pdata_slot3ammo:  return pl.getCVarI(sc_weapons_slot3ammo);
    case pdata_pclass:     return pl.pclass;
    case pdata_semifrozen: return pl.semifrozen > 0;
-   case pdata_addp:       return u.k = pl.addpitch,  u.i;
-   case pdata_addy:       return u.k = pl.addyaw,    u.i;
+   case pdata_addp:       return u.k = pl.addpitch * 360.0, u.i;
+   case pdata_addy:       return u.k = pl.addyaw   * 360.0, u.i;
    case pdata_recoilp:    return u.k = pl.extrpitch, u.i;
    case pdata_attr:       return pl.attr.attrs[permutation];
    case pdata_alpha:      return u.k = pl.alpha, u.i;
