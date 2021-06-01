@@ -119,7 +119,6 @@ enum ZscName(ScriptNum) {
    lsc_monsterinfo,
    lsc_raindropspawn,
    lsc_monstertype,
-   lsc_drawdmgnum,
    lsc_preinit,
    lsc_worldreopen,
    #define w_setptr_x(x) lsc_setptr##x,

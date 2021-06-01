@@ -344,7 +344,7 @@ override void WorldThingDamaged(WorldEvent ev)
    let player = Lith_Player(src);
 
    if(player) {
-      player.Lith_AddDamageNum(pos, dst.radius/2, ev.damage);
+      Lith_URANUS.instance().addDamageNum(player.pos, pos, dst.radius/2, ev.damage);
 
       let magnum = Lith_Magnum(player.player.readyWeapon);
       if(magnum) {

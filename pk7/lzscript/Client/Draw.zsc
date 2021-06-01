@@ -15,16 +15,20 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_LineTracer : LineTracer {
-   Actor m_Ignore;
+enum Lith_DamageNumType {
+   _dnum_smol,
+   _dnum_norm,
+   _dnum_crit,
+   _dnum_max,
+}
 
-   override ETraceStatus traceCallback() {
-      if(results.hitActor == m_Ignore) {
-         return TRACE_Skip;
-      } else {
-         return TRACE_Stop;
-      }
-   }
+class Lith_DamageNum {
+   vector3        m_origin;
+   vector3        m_lastOrigin;
+   int            m_damage;
+   int            m_ticks;
+   int            m_origTick;
+   Lith_DamageNum m_next;
 }
 
 extend class Lith_URANUS;
@@ -32,17 +36,17 @@ extend class Lith_URANUS;
 /* Types ------------------------------------------------------------------- */
 
 enum DrawType {
-   Type_ClipSet,
-   Type_ClipClear,
-   Type_SetSize,
-   Type_Line,
-   Type_Sprite,
-   Type_SpriteAlpha,
-   Type_SpriteStencil,
-   Type_SpriteStencilAlpha,
-   Type_Text,
-   Type_TextAlpha,
-   Type_Rect,
+   _type_clipSet,
+   _type_clipClear,
+   _type_setSize,
+   _type_line,
+   _type_sprite,
+   _type_spriteAlpha,
+   _type_spriteStencil,
+   _type_spriteStencilAlpha,
+   _type_text,
+   _type_textAlpha,
+   _type_rect,
 }
 
 struct DrawData {
@@ -84,11 +88,10 @@ private transient Font m_UtfBigFont;
 private transient Font m_UtfTrmFont;
 transient Font m_UtfFont;
 
-private Shape2DTransform m_RectXf;
-private Shape2D m_Rect;
+private transient Shape2DTransform m_RectXf;
+private transient Shape2D m_Rect;
 
-private transient Lith_UTILHACK   m_Uh;
-private transient Lith_LineTracer m_Tracer;
+private transient Lith_UTILHACK m_Uh;
 
 private transient CVar m_CVarJpFont;
 private transient CVar m_CVarXHairR;
@@ -99,7 +102,11 @@ private transient CVar m_CVarXHairEnable;
 private transient CVar m_CVarXHairStyle;
 private transient CVar m_CVarXHairEnableJuicer;
 
-bool m_English;
+transient bool m_English;
+
+private transient bool m_dmgNumInit;
+private transient int m_dmgNumAmount;
+private transient Lith_DamageNum[_dnum_max] m_dmgNumHeads;
 
 /* Static Functions -------------------------------------------------------- */
 
@@ -113,7 +120,7 @@ static void LZ(Actor mo, int w, int h) {
 
    let p = cl.m_DPtr;
 
-   cl.m_D[p].Type = Type_SetSize;
+   cl.m_D[p].Type = _type_setSize;
 
    cl.m_D[p].X = w;
    cl.m_D[p].Y = h;
@@ -154,7 +161,7 @@ static void LL(Actor mo, int x, int y, int z, int w, color c = 0) {
    if(cl.m_NoDraw) return;
    let p = cl.m_DPtr;
 
-   cl.m_D[p].Type = Type_Line;
+   cl.m_D[p].Type = _type_line;
 
    [cl.m_D[p].X, cl.m_D[p].Y] = cl.GetScSized(x, y);
    [cl.m_D[p].Z, cl.m_D[p].W] = cl.GetScSized(z, w);
@@ -174,9 +181,6 @@ static void LS(Actor mo, string tex, int xx, int yy, double anum, int flags, col
    uint xa = xx & _xflag;
    uint ya = yy & _yflag;
 
-   //if(xx & 0x80000000) x -= _xmask + 1;
-   //if(yy & 0x80000000) y -= _ymask + 1;
-
    let p = cl.m_DPtr;
 
    if(flags & _u_fade) {
@@ -188,20 +192,20 @@ static void LS(Actor mo, string tex, int xx, int yy, double anum, int flags, col
       cl.m_D[p].A = 1.0;
    }
    if(cl.m_D[p].A < 0.001) return;
-   cl.m_D[p].Type = cl.m_D[p].A != 1.0 ? Type_SpriteAlpha : Type_Sprite;
+   cl.m_D[p].Type = cl.m_D[p].A != 1.0 ? _type_spriteAlpha : _type_sprite;
 
    if(flags & _u_add)
       cl.m_D[p].Style = STYLE_Add;
-   else if(cl.m_D[p].Type == Type_SpriteAlpha)
+   else if(cl.m_D[p].Type == _type_spriteAlpha)
       cl.m_D[p].Style = STYLE_Translucent;
    else
       cl.m_D[p].Style = STYLE_Normal;
 
    if(flags & _u_color) {
-      if(cl.m_D[p].Type == Type_SpriteAlpha)
-         cl.m_D[p].Type = Type_SpriteStencilAlpha;
+      if(cl.m_D[p].Type == _type_spriteAlpha)
+         cl.m_D[p].Type = _type_spriteStencilAlpha;
       else
-         cl.m_D[p].Type = Type_SpriteStencil;
+         cl.m_D[p].Type = _type_spriteStencil;
       cl.m_D[p].C = cr;
    }
 
@@ -236,9 +240,6 @@ static void LT(Actor mo, string txt, string fnt, int xx, int yy, double anum, in
    uint xa = xx & _xflag;
    uint ya = yy & _yflag;
 
-   //if(xx & 0x80000000) x -= _xmask + 1;
-   //if(yy & 0x80000000) y -= _ymask + 1;
-
    let p = cl.m_DPtr;
 
    if(flags & _u_fade) {
@@ -250,11 +251,11 @@ static void LT(Actor mo, string txt, string fnt, int xx, int yy, double anum, in
       cl.m_D[p].A = 1.0;
    }
    if(cl.m_D[p].A < 0.001) return;
-   cl.m_D[p].Type = cl.m_D[p].A != 1.0 ? Type_TextAlpha : Type_Text;
+   cl.m_D[p].Type = cl.m_D[p].A != 1.0 ? _type_textAlpha : _type_text;
 
    if(flags & _u_add)
       cl.m_D[p].Style = STYLE_Add;
-   else if(cl.m_D[p].Type == Type_TextAlpha)
+   else if(cl.m_D[p].Type == _type_textAlpha)
       cl.m_D[p].Style = STYLE_Translucent;
    else
       cl.m_D[p].Style = STYLE_Normal;
@@ -324,35 +325,31 @@ static void LC(Actor mo, int x = 0, int y = 0, int w = 0, int h = 0, int ww = 0)
 
    let p = cl.m_DPtr;
 
-   if(x || y || w || h)
-   {
+   if(x || y || w || h) {
       /* simple optimization (which also prevents division by zero) */
       if((cl.m_NoDraw = w <= 0 || h <= 0)) return;
 
-      cl.m_D[p].Type = Type_ClipSet;
+      cl.m_D[p].Type = _type_clipSet;
 
       [cl.m_D[p].X, cl.m_D[p].Y] = cl.GetScSized(x, y);
       [cl.m_D[p].Z, cl.m_D[p].W] = cl.GetScSized(w, h, true);
-   }
-   else
-   {
+   } else {
       cl.m_NoDraw = false;
-      cl.m_D[p].Type = Type_ClipClear;
+      cl.m_D[p].Type = _type_clipClear;
    }
 
    cl.m_BreakWidth = ww;
    cl.m_DPtr++;
 }
 
-static void LR(Actor mo, int x = 0, int y = 0, int w = 0, int h = 0, color cr = 0)
-{
+static void LR(Actor mo, int x = 0, int y = 0, int w = 0, int h = 0, color cr = 0) {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
    if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return;
 
    if(cl.m_NoDraw) return;
    let p = cl.m_DPtr;
 
-   cl.m_D[p].Type = Type_Rect;
+   cl.m_D[p].Type = _type_rect;
 
    [cl.m_D[p].X, cl.m_D[p].Y] = cl.GetScSized(x, y);
    [cl.m_D[p].Z, cl.m_D[p].W] = cl.GetScSized(w, h, true);
@@ -362,8 +359,7 @@ static void LR(Actor mo, int x = 0, int y = 0, int w = 0, int h = 0, color cr = 
    cl.m_DPtr++;
 }
 
-static void LE()
-{
+static void LE() {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
 
    cl.m_DPtr = 0;
@@ -380,11 +376,21 @@ static void LE()
    }
 }
 
+static clearScope textureId getTextureForName(string tex) {
+   for(int i = 0; tex.byteAt(0) == Ch_Colon; i++) {
+      if(i > 5) {Console.printf("invalid texture: %s", tex); break;}
+      tex = StringTable.Localize(tex, false);
+   }
+
+   return TexMan.CheckForTexture(tex, TexMan.Type_Any);
+}
+
 /* Member Functions -------------------------------------------------------- */
 
 override void onRegister() {
+   super.onRegister();
+
    projectRegister();
-   m_Tracer = new("Lith_LineTracer");
 
    PlayerInfo pl = players[consolePlayer];
    m_CVarJpFont = CVar.getCVar('lith_gui_jpfont', pl);
@@ -397,8 +403,7 @@ override void onRegister() {
    m_CVarXHairEnableJuicer = CVar.getCVar('lith_xhair_enablejuicer', pl);
 }
 
-override void WorldLoaded(WorldEvent evt)
-{
+override void worldLoaded(WorldEvent evt) {
    m_RectXf = new("Shape2DTransform");
    m_Rect = new("Shape2D");
    m_Rect.pushVertex((0, 0));
@@ -413,8 +418,7 @@ override void WorldLoaded(WorldEvent evt)
    m_Rect.pushTriangle(0, 2, 3);
 }
 
-override void WorldTick()
-{
+override void worldTick() {
    if(!(m_English = StringTable.Localize("LITH_CHECK", false) == "Eng")) {
       switch(m_CVarJpFont.GetInt()) {
          default:
@@ -428,20 +432,232 @@ override void WorldTick()
    }
 
    projectSetRenderer();
+   tickDmgNums();
+}
+
+override void renderOverlay(RenderEvent evt) {
+   projectSetUp(evt);
+
+   if(evt.camera && evt.camera.player) {
+      drawDmgNums(evt);
+      drawCrosshair(evt);
+   }
+
+   int scw = 320, sch = 240;
+
+   if(!AutoMapActive) for(uint i = 0; i < m_DPtr; i++) switch(m_D[i].Type)
+   {
+   case _type_clipSet:
+      Screen.SetClipRect(m_D[i].X, m_D[i].Y, m_D[i].Z, m_D[i].W);
+      break;
+   case _type_clipClear:
+      Screen.ClearClipRect();
+      break;
+   case _type_setSize:
+      scw = m_D[i].X;
+      sch = m_D[i].Y;
+      break;
+   case _type_line:
+      Screen.DrawLine(m_D[i].X, m_D[i].Y, m_D[i].Z, m_D[i].W, m_D[i].C);
+      break;
+   case _type_sprite:
+      Screen.DrawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
+                         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
+                         DTA_TopOffset,0, DTA_LeftOffset,0,
+                         DTA_LegacyRenderStyle,m_D[i].Style);
+      break;
+   case _type_spriteAlpha:
+      Screen.DrawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
+                         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
+                         DTA_TopOffset,0, DTA_LeftOffset,0,
+                         DTA_LegacyRenderStyle,m_D[i].Style,
+                         DTA_Alpha,m_D[i].A);
+      break;
+   case _type_spriteStencil:
+      Screen.DrawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
+                         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
+                         DTA_TopOffset,0, DTA_LeftOffset,0,
+                         DTA_FillColor,m_D[i].C);
+      break;
+   case _type_spriteStencilAlpha:
+      Screen.DrawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
+                         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
+                         DTA_TopOffset,0, DTA_LeftOffset,0,
+                         DTA_Alpha,m_D[i].A, DTA_FillColor,m_D[i].C);
+      break;
+   case _type_text:
+      for(uint ln = 0, lns = m_D[i].LnX.Size(); ln < lns; ln++)
+         Screen.DrawText(m_D[i].Fnt, m_D[i].Cr,
+                         m_D[i].X-m_D[i].LnX[ln], m_D[i].Y+m_D[i].LnY*ln,
+                         m_D[i].Txt[ln],
+                         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
+                         DTA_LegacyRenderStyle,m_D[i].Style);
+      break;
+   case _type_textAlpha:
+      for(uint ln = 0, lns = m_D[i].LnX.Size(); ln < lns; ln++)
+         Screen.DrawText(m_D[i].Fnt, m_D[i].Cr,
+                         m_D[i].X-m_D[i].LnX[ln], m_D[i].Y+m_D[i].LnY*ln,
+                         m_D[i].Txt[ln],
+                         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
+                         DTA_Alpha,m_D[i].A,
+                         DTA_LegacyRenderStyle,m_D[i].Style);
+      break;
+   case _type_rect:
+      m_RectXf.clear();
+      m_RectXf.scale((m_D[i].Z, m_D[i].W));
+      m_RectXf.translate((m_D[i].X, m_D[i].Y));
+      m_Rect.setTransform(m_RectXf);
+      Screen.DrawShape(skyflatnum, false, m_Rect, DTA_Alpha,m_D[i].C.a/255.0, DTA_FillColor,m_D[i].C);
+      break;
+   }
+
+   let p = Lith_Player(evt.camera);
+   if(p && p.m_Cs) p.m_Cs.Lith_Render();
+}
+
+clearScope int, int getScSized(double x, double y, bool kludge = false) {
+   double vw = m_VirtualSize.X;
+   double vh = m_VirtualSize.Y;
+
+   double sw = Screen.GetWidth();
+   double sh = Screen.GetHeight();
+
+   vector2 xy, sc;
+
+   if(kludge) [sc, xy] = Screen.VirtualToRealCoords((0, 0), ( x,  y), (vw, vh));
+   else       [xy, sc] = Screen.VirtualToRealCoords((x, y), (sw, sh), (vw, vh));
+
+   return int(xy.X), int(xy.Y);
+}
+
+void addDamageNum(vector3 pos, vector3 origin, double w, int damage) {
+   if(CVar.getCVar('lith_hud_showdamage', players[consolePlayer]).getBool()) {
+      if(!m_dmgNumInit) {
+         for(int i = 0; i < _dnum_max; i++) {
+            m_dmgNumHeads[i] = new("Lith_DamageNum");
+         }
+         m_dmgNumInit = true;
+         m_dmgNumAmount = 0;
+      }
+
+      if(m_dmgNumAmount >= 1500) {
+         return;
+      }
+
+      m_dmgNumAmount++;
+
+      Lith_DamageNum start;
+
+      if(damage >= 120) {
+         start = m_dmgNumHeads[_dnum_crit];
+      } else if(level.vec3Diff(pos, origin).length() > 1024) {
+         start = m_dmgNumHeads[_dnum_smol];
+      } else {
+         start = m_dmgNumHeads[_dnum_norm];
+      }
+
+      let dnum = new("Lith_DamageNum");
+
+      dnum.m_origin     = origin + (frandom(-w,w), frandom(-w,w), frandom(-9,9));
+      dnum.m_lastOrigin = dnum.m_origin;
+      dnum.m_damage     = damage;
+      dnum.m_ticks      = 35 + min(damage, 120) / 3;
+      dnum.m_origTick   = level.totalTime;
+      dnum.m_next       = start.m_next;
+
+      start.m_next = dnum;
+   }
+}
+
+private void tickDmgNums() {
+   for(Lith_DamageNumType ty = 0; ty < _dnum_max; ty++) {
+      Lith_DamageNum start = m_dmgNumHeads[ty];
+      if(!start) continue;
+
+      Lith_DamageNum dnum = start.m_next, prev = null;
+      while(dnum) {
+         if(!dnum.m_ticks) {
+            let next = dnum.m_next;
+            if(prev) prev.m_next = next;
+            dnum.destroy();
+            dnum = next;
+            m_dmgNumAmount--;
+         } else {
+            dnum.m_lastOrigin = dnum.m_origin;
+
+            int speed = dnum.m_ticks / 5;
+
+            if(speed != 0) {
+               if(speed < 4) {
+                  dnum.m_origin.z += 0.5;
+               } else if(speed < 6) {
+                  dnum.m_origin.z += 1.0;
+               } else {
+                  dnum.m_origin.z += 1.5;
+               }
+            }
+
+            dnum.m_ticks--;
+
+            prev = dnum;
+            dnum = dnum.m_next;
+         }
+      }
+   }
+}
+
+private ui void drawDmgNums(RenderEvent evt) {
+   for(Lith_DamageNumType ty = 0; ty < _dnum_max; ty++) {
+      Lith_DamageNum start = m_dmgNumHeads[ty];
+      if(!start) continue;
+
+      Lith_DamageNum dnum = start.m_next;
+      while(dnum) {
+         vector3 origin = Lith_UTIL.vec3Lerp(dnum.m_lastOrigin, dnum.m_origin, evt.fracTic);
+         int x, y; bool seen; [x, y, seen] = project(origin);
+
+         if(seen) {
+            int cr;
+            Font fnt;
+
+            switch(ty) {
+            case _dnum_smol: fnt = smallfont;  cr = Font.CR_GREY;  break;
+            case _dnum_norm: fnt = "lmidfont"; cr = Font.CR_WHITE; break;
+            case _dnum_crit: fnt = "bigupper"; cr = Font.CR_GOLD;  break;
+            }
+
+            let txt = string.format("%i", dnum.m_damage);
+
+            double xf = x - fnt.stringWidth(txt) / 2.0;
+            double yf = y - fnt.getHeight()      / 2.0;
+
+            double a;
+            if(dnum.m_ticks < 15) {
+               a = dnum.m_ticks / 15.0;
+               a -= (1.0 / 15.0) * evt.fracTic;
+            } else {
+               a = 1.0;
+            }
+
+            Screen.DrawText(fnt, cr, xf, yf, txt,
+                            DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                            DTA_Alpha,a,
+                            DTA_LegacyRenderStyle,STYLE_Translucent);
+         }
+
+         dnum = dnum.m_next;
+      }
+   }
 }
 
 private ui void drawCrosshair(RenderEvent evt) {
    let pl = evt.camera;
-   m_Tracer.m_Ignore = pl;
 
    vector3 viewPos = (evt.viewPos.xy, evt.viewPos.z - lith_hermes.getViewHeight(pl) + lith_hermes.getAttackHeight(pl));
 
    double yaw   = evt.viewAngle + m_Uh.pData(pl, pdata_addy)/FIX;
    double pitch = evt.viewPitch + m_Uh.pData(pl, pdata_addp)/FIX;
-   m_Tracer.trace(viewPos, pl.curSector, (pl.AngleToVector(yaw, cos(pitch)), -sin(pitch)), 2048, 0);
-   vector3 loc = m_Tracer.results.hitPos;
-
-   //vector3 loc   = m_Uh.traceFrom(pl, yaw, pitch, 2048, Lith_HERMES.getAttackHeight(pl), false);
+   let loc = Lith_UTIL.traceFromPos(pl.curSector, viewPos, yaw, pitch, 2048.0, ignore: pl);
 
    vector2 xh;
    bool seen;
@@ -533,110 +749,6 @@ private ui void drawCrosshair(RenderEvent evt) {
                             DTA_Alpha,a/255.0,DTA_FillColor,c);
       }
    }
-}
-
-override void RenderOverlay(RenderEvent evt) {
-   projectSetUp(evt);
-
-   if(evt.camera && evt.camera.player) {
-      drawCrosshair(evt);
-   }
-
-   int scw = 320, sch = 240;
-
-   if(!AutoMapActive) for(uint i = 0; i < m_DPtr; i++) switch(m_D[i].Type)
-   {
-   case Type_ClipSet:
-      Screen.SetClipRect(m_D[i].X, m_D[i].Y, m_D[i].Z, m_D[i].W);
-      break;
-   case Type_ClipClear:
-      Screen.ClearClipRect();
-      break;
-   case Type_SetSize:
-      scw = m_D[i].X;
-      sch = m_D[i].Y;
-      break;
-   case Type_Line:
-      Screen.DrawLine(m_D[i].X, m_D[i].Y, m_D[i].Z, m_D[i].W, m_D[i].C);
-      break;
-   case Type_Sprite:
-      Screen.DrawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
-                         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
-                         DTA_TopOffset,0, DTA_LeftOffset,0,
-                         DTA_LegacyRenderStyle,m_D[i].Style);
-      break;
-   case Type_SpriteAlpha:
-      Screen.DrawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
-                         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
-                         DTA_TopOffset,0, DTA_LeftOffset,0,
-                         DTA_LegacyRenderStyle,m_D[i].Style,
-                         DTA_Alpha,m_D[i].A);
-      break;
-   case Type_SpriteStencil:
-      Screen.DrawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
-                         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
-                         DTA_TopOffset,0, DTA_LeftOffset,0,
-                         DTA_FillColor,m_D[i].C);
-      break;
-   case Type_SpriteStencilAlpha:
-      Screen.DrawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
-                         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
-                         DTA_TopOffset,0, DTA_LeftOffset,0,
-                         DTA_Alpha,m_D[i].A, DTA_FillColor,m_D[i].C);
-      break;
-   case Type_Text:
-      for(uint ln = 0, lns = m_D[i].LnX.Size(); ln < lns; ln++)
-         Screen.DrawText(m_D[i].Fnt, m_D[i].Cr,
-                         m_D[i].X-m_D[i].LnX[ln], m_D[i].Y+m_D[i].LnY*ln,
-                         m_D[i].Txt[ln],
-                         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
-                         DTA_LegacyRenderStyle,m_D[i].Style);
-      break;
-   case Type_TextAlpha:
-      for(uint ln = 0, lns = m_D[i].LnX.Size(); ln < lns; ln++)
-         Screen.DrawText(m_D[i].Fnt, m_D[i].Cr,
-                         m_D[i].X-m_D[i].LnX[ln], m_D[i].Y+m_D[i].LnY*ln,
-                         m_D[i].Txt[ln],
-                         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
-                         DTA_Alpha,m_D[i].A,
-                         DTA_LegacyRenderStyle,m_D[i].Style);
-      break;
-   case Type_Rect:
-      m_RectXf.clear();
-      m_RectXf.scale((m_D[i].Z, m_D[i].W));
-      m_RectXf.translate((m_D[i].X, m_D[i].Y));
-      m_Rect.setTransform(m_RectXf);
-      Screen.DrawShape(skyflatnum, false, m_Rect, DTA_Alpha,m_D[i].C.a/255.0, DTA_FillColor,m_D[i].C);
-      break;
-   }
-
-   let p = Lith_Player(evt.camera);
-   if(p && p.m_Cs) p.m_Cs.Lith_Render();
-}
-
-clearScope int, int getScSized(double x, double y, bool kludge = false)
-{
-   double vw = m_VirtualSize.X;
-   double vh = m_VirtualSize.Y;
-
-   double sw = Screen.GetWidth();
-   double sh = Screen.GetHeight();
-
-   vector2 xy, sc;
-
-   if(kludge) [sc, xy] = Screen.VirtualToRealCoords((0, 0), ( x,  y), (vw, vh));
-   else       [xy, sc] = Screen.VirtualToRealCoords((x, y), (sw, sh), (vw, vh));
-
-   return int(xy.X), int(xy.Y);
-}
-
-static clearScope textureId getTextureForName(string tex) {
-   for(int i = 0; tex.byteAt(0) == Ch_Colon; i++) {
-      if(i > 5) {Console.printf("invalid texture: %s", tex); break;}
-      tex = StringTable.Localize(tex, false);
-   }
-
-   return TexMan.CheckForTexture(tex, TexMan.Type_Any);
 }
 
 /* EOF */

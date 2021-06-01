@@ -9,9 +9,27 @@
 
 extend class Lith_HERMES;
 
+clearScope vector3 traceFromPos(Sector sec, vector3 pos, double yaw, double pitch, double dist, Actor ignore, bool floor, bool portalAware, ETraceFlags flags) {
+   m_tracer.m_ignore = ignore;
+   let len = cos(pitch);
+   m_tracer.trace(pos, sec, ((cos(yaw), sin(yaw)) * len, -sin(pitch)), dist, flags);
+   let end = m_tracer.results.hitPos;
+   if(portalAware) {
+      end = pos + level.vec3Diff(pos, end);
+      if(floor) {
+         end.z = m_tracer.results.hitSector.floorPlane.zAtPoint(end.xy);
+      }
+   }
+   return end;
+}
+
+clearScope vector3 traceFromActor(Actor mo, double yaw, double pitch, double dist, double offsetZ, bool floor, bool portalAware, ETraceFlags flags) {
+   return traceFromPos(mo.curSector, mo.pos + (0.0, 0.0, offsetZ), yaw, pitch, dist, mo, floor, portalAware, flags);
+}
+
 ui static void ActuallyEndTheGame() {
-   // HERE IT IS
-   // THE WORST HACK IN THE MOD BABEY
+   /* HERE IT IS
+    * THE WORST HACK IN THE MOD BABEY */
    Menu.SetMenu('EndGameMenu');
    MessageBoxMenu(Menu.GetCurrentMenu()).HandleResult(true);
 }

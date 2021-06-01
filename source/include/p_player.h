@@ -77,13 +77,6 @@ enum ZscName(SubweaponType) {
    _subw_max,
 };
 
-enum ZscName(DamageNumType) {
-   _dnum_smol,
-   _dnum_norm,
-   _dnum_crit,
-   _dnum_max,
-};
-
 enum ZscName(PClass) {
    pcl_unknown,
 

@@ -41,13 +41,6 @@ enum Lith_SubweaponType {
    _subw_max,
 };
 
-enum Lith_DamageNumType {
-   _dnum_smol,
-   _dnum_norm,
-   _dnum_crit,
-   _dnum_max,
-};
-
 enum Lith_PClass {
    pcl_unknown,
 

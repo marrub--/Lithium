@@ -182,10 +182,6 @@ void Lith_PostTick() {
 
    Lith_URANUS.LZ(self, 320, 240);
 
-   for(int i = 0; i < _dnum_max; i++) {
-      Lith_ShowDamageNums(i);
-   }
-
    Lith_ShowMapMarker();
    Lith_ShowAdviceMarker();
    Lith_BobWeapon();

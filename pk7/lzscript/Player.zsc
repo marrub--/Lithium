@@ -11,7 +11,6 @@
 #include "lzscript/Player/Bobbing.zsc"
 #include "lzscript/Player/Damage.zsc"
 #include "lzscript/Player/Flashlight.zsc"
-#include "lzscript/Player/HUD.zsc"
 #include "lzscript/Player/Markers.zsc"
 
 #include "lzscript/1_Marine/Marine.zsc"

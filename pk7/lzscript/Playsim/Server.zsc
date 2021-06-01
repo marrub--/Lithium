@@ -14,6 +14,12 @@ play string m_Obituary;
 play name m_DmgType;
 play bool m_DmgWorld;
 play int m_BossLevel;
+private Lith_LineTracer m_tracer;
+
+override void onRegister() {
+   super.onRegister();
+   m_tracer = new("Lith_LineTracer");
+}
 
 static clearscope Lith_HERMES Instance()
    {return Lith_HERMES(Find("Lith_HERMES"));}

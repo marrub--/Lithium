@@ -61,16 +61,12 @@ struct Lith_UTIL
       return int(n * 1000) % 1000 < 500 ? int(n) : int(n+0.5);
    }
 
-   static play vector3 traceFrom(Actor mo, double yaw, double pitch, double dist, double offsetz, bool floor = false) {
-      FLineTraceData ltd;
-      mo.lineTrace(yaw, dist, pitch, 0, offsetz, 0, 0, ltd);
-      let loc = ltd.hitlocation;
-      let ofz = (mo.pos.xy, mo.pos.z + offsetz);
-      loc = ofz + level.vec3Diff(ofz, loc);
-      if(floor) {
-         loc.z = ltd.hitSector.floorPlane.zAtPoint(loc.xy);
-      }
-      return loc;
+   static vector3 traceFrom(Actor mo, double yaw, double pitch, double dist, double offsetz, bool floor = false, bool portalAware = true, ETraceFlags flags = 0) {
+      return Lith_HERMES.instance().traceFromActor(mo, yaw, pitch, dist, offsetZ, floor, portalAware, flags);
+   }
+
+   static vector3 traceFromPos(Sector sec, vector3 pos, double yaw, double pitch, double dist, Actor ignore = null, bool floor = false, bool portalAware = true, ETraceFlags flags = 0) {
+      return Lith_HERMES.instance().traceFromPos(sec, pos, yaw, pitch, dist, ignore, floor, portalAware, flags);
    }
 
    static play int exec(Actor mo, int scr, int arg0 = 0, int arg1 = 0, int arg2 = 0, int arg3 = 0) {
@@ -84,16 +80,24 @@ struct Lith_UTIL
 
 /* UTILHACK: Urinary Tract Infection-Like Hack (Anal Cock King ed.) */
 class Lith_UTILHACK {
-   play vector3 traceFrom(Actor mo, double yaw, double pitch, double dist, double offsetZ, bool floor = false) const {
-      return Lith_UTIL.traceFrom(mo, yaw, pitch, dist, offsetZ, floor);
-   }
-
    play int exec(Actor mo, int scr, int arg0 = 0, int arg1 = 0, int arg2 = 0, int arg3 = 0) const {
       return Lith_UTIL.exec(mo, scr, arg0, arg1, arg2, arg3);
    }
 
    play int pData(Actor ply, int info, int permutation = 0) const {
       return Lith_UTIL.pData(ply, info, permutation);
+   }
+}
+
+class Lith_LineTracer : LineTracer {
+   Actor m_Ignore;
+
+   override ETraceStatus traceCallback() {
+      if(results.hitActor == m_Ignore) {
+         return TRACE_Skip;
+      } else {
+         return TRACE_Stop;
+      }
    }
 }
 
