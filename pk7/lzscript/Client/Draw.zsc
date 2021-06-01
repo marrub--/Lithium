@@ -509,7 +509,9 @@ private ui void drawCrosshair(RenderEvent evt) {
 override void RenderOverlay(RenderEvent evt) {
    projectSetUp(evt);
 
-   drawCrosshair(evt);
+   if(evt.camera && evt.camera.player) {
+      drawCrosshair(evt);
+   }
 
    int scw = 320, sch = 240;
 

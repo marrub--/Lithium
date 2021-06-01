@@ -33,6 +33,6 @@ static clearscope Lith_URANUS Instance()
    {return Lith_URANUS(Find("Lith_URANUS"));}
 
 static clearscope void StartSound(Actor mo, sound snd, int slot, int flags, double volume = 1.0, double attenuation = 1.0, double pitch = 1.0)
-   {mo.A_StartSound(snd, slot, flags, volume, attenuation, pitch);}
+   {if(mo) mo.A_StartSound(snd, slot, flags, volume, attenuation, pitch);}
 
 /* EOF */
