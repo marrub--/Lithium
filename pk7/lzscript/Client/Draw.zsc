@@ -15,6 +15,18 @@
  * ---------------------------------------------------------------------------|
  */
 
+class Lith_LineTracer : LineTracer {
+   Actor m_Ignore;
+
+   override ETraceStatus traceCallback() {
+      if(results.hitActor == m_Ignore) {
+         return TRACE_Skip;
+      } else {
+         return TRACE_Stop;
+      }
+   }
+}
+
 extend class Lith_URANUS;
 
 /* Types ------------------------------------------------------------------- */
@@ -75,7 +87,8 @@ transient Font m_UtfFont;
 private Shape2DTransform m_RectXf;
 private Shape2D m_Rect;
 
-private Lith_UTILHACK m_Uh;
+private transient Lith_UTILHACK   m_Uh;
+private transient Lith_LineTracer m_Tracer;
 
 private transient CVar m_CVarJpFont;
 private transient CVar m_CVarXHairR;
@@ -371,7 +384,7 @@ static void LE()
 
 override void onRegister() {
    projectRegister();
-   m_Uh = null;
+   m_Tracer = new("Lith_LineTracer");
 
    PlayerInfo pl = players[consolePlayer];
    m_CVarJpFont = CVar.getCVar('lith_gui_jpfont', pl);
@@ -419,10 +432,16 @@ override void WorldTick()
 
 private ui void drawCrosshair(RenderEvent evt) {
    let pl = evt.camera;
+   m_Tracer.m_Ignore = pl;
 
-   double  yaw   = evt.viewAngle + m_Uh.pData(pl, pdata_addy)/FIX;
-   double  pitch = evt.viewPitch + m_Uh.pData(pl, pdata_addp)/FIX;
-   vector3 loc   = m_Uh.traceFrom(pl, yaw, pitch, 2048, Lith_HERMES.getAttackHeight(pl), false);
+   vector3 viewPos = (evt.viewPos.xy, evt.viewPos.z - lith_hermes.getViewHeight(pl) + lith_hermes.getAttackHeight(pl));
+
+   double yaw   = evt.viewAngle + m_Uh.pData(pl, pdata_addy)/FIX;
+   double pitch = evt.viewPitch + m_Uh.pData(pl, pdata_addp)/FIX;
+   m_Tracer.trace(viewPos, pl.curSector, (pl.AngleToVector(yaw, cos(pitch)), -sin(pitch)), 2048, 0);
+   vector3 loc = m_Tracer.results.hitPos;
+
+   //vector3 loc   = m_Uh.traceFrom(pl, yaw, pitch, 2048, Lith_HERMES.getAttackHeight(pl), false);
 
    vector2 xh;
    bool seen;
@@ -454,20 +473,26 @@ private ui void drawCrosshair(RenderEvent evt) {
 
    if(m_CVarXHairEnable.getBool() && a) {
       static const string[] XB_GFX = {
+         ":XHairs:crossb",
          ":XHairs:circleb", ":XHairs:deltab",  ":XHairs:ovalb",
          ":XHairs:basicb",  ":XHairs:delearb", ":XHairs:finib",
          ":XHairs:angleb",  ":XHairs:dotb",    ":XHairs:xpb"
       };
       static const string[] XW_GFX = {
+         ":XHairs:crossw",
          ":XHairs:circlew", ":XHairs:deltaw",  ":XHairs:ovalw",
          ":XHairs:basicw",  ":XHairs:delearw", ":XHairs:finiw",
          ":XHairs:anglew",  ":XHairs:dotw",    ":XHairs:xpw"
       };
 
-      int       style = m_CVarXHairStyle.getInt();
-      textureId xhb   = getTextureForName(XB_GFX[style]);
-      textureId xhw   = getTextureForName(XW_GFX[style]);
-      color     c     = (r << 16) | (g << 8) | (b << 0);
+      int style = m_CVarXHairStyle.getInt();
+      if(style >= XW_GFX.size()) {
+         style = 0;
+      }
+
+      textureId xhb = getTextureForName(XB_GFX[style]);
+      textureId xhw = getTextureForName(XW_GFX[style]);
+      color     c   = (r << 16) | (g << 8) | (b << 0);
 
       int bsx, bsy; [bsx, bsy] = TexMan.GetSize(xhb);
       int wsx, wsy; [wsx, wsy] = TexMan.GetSize(xhw);
@@ -491,6 +516,10 @@ private ui void drawCrosshair(RenderEvent evt) {
       if(m_CVarXHairEnableJuicer.getBool()) {
          textureId xhl = getTextureForName(":XHairs:L");
          textureId xhr = getTextureForName(":XHairs:R");
+
+         int esx, esy; [esx, esy] = TexMan.GetSize(xhl);
+         xhx = xh.x - esx/2.0;
+         xhy = xh.y - esy/2.0;
 
          double xp = m_Uh.pData(pl, pdata_recoilp)/FIX * 500.0 + 10.0;
 
