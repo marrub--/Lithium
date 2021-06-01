@@ -311,12 +311,12 @@ void P_Scr_Take(i96 score) {
    pl.scoreaccumtime = 0;
 }
 
-script void P_GiveAllScore(i96 score, bool nomul) {
+script void P_GiveScore(i96 score, bool nomul) {
    pl.setActivator();
    P_Scr_Give(score, nomul);
 }
 
-script void P_GiveAllEXP(u64 amt) {
+script void P_GiveEXP(u64 amt) {
    pl.setActivator();
    P_Lv_GiveEXP(amt);
 }
@@ -619,7 +619,7 @@ void Sc_MapMarker(i32 tid) {
       i32 x = fastabsk(ACS_Sin(i / (k32)ticks / 4.0)) / 4.0 * 800.0;
 
       SetSize(640, 480);
-      PrintTextAX_str(text, sf_areaname, CR_WHITE, x,4, 80,0, alpha, ptf_no_utf);
+      PrintTextAX_str(text, sf_areaname, CR_WHITE, x,4, 80,0, alpha, _u_no_unicode);
       ACS_Delay(1);
    }
 }

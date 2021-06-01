@@ -158,7 +158,7 @@ static
 void F_drawBack(struct finale_state *st) {
    SetSize(320, 200);
    if(st->bgnd == st_nil) {
-      PrintRect(0, 0, 320, 200, 0x000000);
+      PrintRect(0, 0, 320, 200, 0xFF000000);
    } else {
       PrintSprite(st->bgnd, 0,1, 0,1);
    }
@@ -167,7 +167,7 @@ void F_drawBack(struct finale_state *st) {
 
 static
 void F_drawFade(k32 amount) {
-   PrintRectA(0, 0, 320, 240, 0x000000, 255 * amount);
+   PrintRect(0, 0, 320, 240, 0x000000 | ((i32)(255.0k * amount) << 24));
 }
 
 alloc_aut(0) sync static
@@ -244,7 +244,7 @@ void F_text(struct finale_state *st) {
       }
 
       SetClipW(10, 10, 300, h, 300);
-      PrintRectA(0, 0, 320, 240, 0x000000, 127);
+      PrintRect(0, 0, 320, 240, 0x7F000000);
       PrintTextChr(txt, p);
       PrintText(sf_smallfnt, CR_WHITE, 10,1, 10,1);
       ClearClip();

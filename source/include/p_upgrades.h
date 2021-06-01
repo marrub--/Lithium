@@ -44,11 +44,11 @@ extern struct upgradeinfo upgrinfo[UPGR_MAX];
 
 void Upgr_MInit(void);
 
-script void P_Upg_PInit();
-void P_Upg_PQuit();
-void P_Upg_PDeinit();
-void P_Upg_PMInit();
+script void P_Upg_PInit(void);
+void P_Upg_PQuit(void);
+void P_Upg_PDeinit(void);
+void P_Upg_PMInit(void);
 
-void P_Upg_Enter();
+void P_Upg_Enter(void);
 
 #endif

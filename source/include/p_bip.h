@@ -80,9 +80,9 @@ extern struct pageinfo const bipinfo[BIP_MAX];
 
 /* Extern Functions -------------------------------------------------------- */
 
-script void P_BIP_PInit();
+script void P_BIP_PInit(void);
 void P_BIP_Unlock(cstr name);
-void P_BIP_PQuit();
+void P_BIP_PQuit(void);
 
 cstr P_BIP_CategoryToName(u32 category);
 

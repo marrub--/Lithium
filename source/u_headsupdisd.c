@@ -38,7 +38,7 @@ static void HUD_Ammo() {
       else
          sprintf(txt, "%i/%i", wep->magmax - wep->magcur, wep->magmax);
       PrintTextChS(txt);
-      PrintTextX(sf_bigupper, Cr(blue), 232,1, 228,0, ptf_no_utf);
+      PrintTextX(sf_bigupper, Cr(blue), 232,1, 228,0, _u_no_unicode);
    }
 
    if(wep->ammotype & AT_Ammo) {
@@ -53,12 +53,12 @@ static void HUD_Ammo() {
 
       ACS_BeginPrint();
       ACS_PrintInt(wep->ammocur);
-      PrintTextX(sf_bigupper, Cr(blue), 232-x,1, 228,0, ptf_no_utf);
+      PrintTextX(sf_bigupper, Cr(blue), 232-x,1, 228,0, _u_no_unicode);
    }
 
    if(type) {
       PrintTextChS(type);
-      PrintTextX(sf_lmidfont, Cr(blue), 309,4, 230,0, ptf_no_utf);
+      PrintTextX(sf_lmidfont, Cr(blue), 309,4, 230,0, _u_no_unicode);
    }
 }
 
@@ -69,7 +69,7 @@ static void HUD_Health() {
    PrintSprite(sp_HUD_D_HPBack, 0,1, 239,2);
 
    PrintTextChS(u8"");
-   PrintTextX(sf_lmidfont, Cr(blue), 8,4, 229,0, ptf_no_utf);
+   PrintTextX(sf_lmidfont, Cr(blue), 8,4, 229,0, _u_no_unicode);
 
    HUD_DrawHealth(pl.health, 18, 228, Cr(blue), 0);
 

@@ -7,10 +7,8 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_RainDrop : Actor
-{
-   default
-   {
+class Lith_RainDrop : Actor {
+   default {
       Alpha 0.25;
       Height 2;
       Radius 2;
@@ -30,8 +28,7 @@ class Lith_RainDrop : Actor
 
    bool m_Done;
 
-   override void PostBeginPlay()
-   {
+   override void PostBeginPlay() {
       Super.PostBeginPlay();
       ACS_ExecuteWithResult(lsc_raindropspawn);
       Vel     = (0, 0, FRandom(-12, -16));
@@ -39,20 +36,19 @@ class Lith_RainDrop : Actor
       m_Done  = false;
    }
 
-   override void Tick()
-   {
-      Super.Tick();
-
-      if(!m_Done && (WaterLevel > 0 || Pos.Z <= FloorZ))
-      {
+   override void Tick() {
+      if(m_Done) {
+         super.tick();
+      } else if((WaterLevel > 0 || Pos.Z <= FloorZ)) {
          SetOrigin((Pos.XY, FloorZ), false);
          SetState(ResolveState("Death"));
          m_Done = true;
+      } else {
+         SetOrigin((Pos.XY, Pos.Z - 16.0), true);
       }
    }
 
-   states
-   {
+   states {
    Spawn:
       RNDR A -1;
       stop;

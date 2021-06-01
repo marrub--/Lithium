@@ -184,7 +184,7 @@ void Upgr_VitalScan_Render(struct upgrade *upgr) {
    } else {
       PrintTextFmt("%uhp", UData.health);
    }
-   PrintTextX(font, CR_WHITE, 160+ox,4, 225+oy,2, ptf_no_utf);
+   PrintTextX(font, CR_WHITE, 160+ox,4, 225+oy,2, _u_no_unicode);
 
    /* Health bar */
    if(pl.getCVarI(sc_scanner_bar)) {

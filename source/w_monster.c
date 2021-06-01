@@ -241,7 +241,7 @@ static void OnFinalize(dmon_t *m) {
       else if(pl.health < 15) P_Lv_GiveEXP(25);
       else if(pl.health < 25) P_Lv_GiveEXP(10);
 
-      P_GiveAllEXP(m->mi->exp + m->level + (m->rank - 1) * 10);
+      P_GiveEXP(m->mi->exp + m->level + (m->rank - 1) * 10);
    }
 
    m->finalized = true;
@@ -256,7 +256,7 @@ void OnDeath(dmon_t *m)
 
    OnFinalize(m);
 
-   P_GiveAllScore(m->mi->score + m->rank * 500, false);
+   P_GiveScore(m->mi->score + m->rank * 500, false);
 }
 
 script static

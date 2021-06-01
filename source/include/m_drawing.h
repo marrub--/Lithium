@@ -31,115 +31,65 @@ GlobalCrH(wselm1) GlobalCrH(wselm2) GlobalCrH(wselm3) GlobalCrH(wselms)
 #undef GlobalCr
 #undef GlobalCrH
 #else
-#define BitArg(x, mask, shift) (((u32)(x) & mask) << shift)
-#define SignArg(x, mask) (((u32)(x) & mask) | ((u32)(x) & 0x80000000))
-
-#define XBitArg(x, xa) (SignArg(x, 0x0FFFFFFF) | BitArg(xa, 7, 28))
-#define YBitArg(y, ya) (SignArg(y, 0x1FFFFFFF) | BitArg(ya, 3, 29))
-
-#define PrintRectArgs0(x, y) (BitArg(x, 0xffff, 0) | BitArg(y, 0xffff, 16))
-#define PrintRectArgs1(w, h) PrintRectArgs0(w, h)
-#define PrintRectArgs2(c, a) ((c) | BitArg(a, 0xff, 24))
+#define XArg(x, xa) (((i32)(x) & _xmask) | ((i32)(xa) << 28))
+#define YArg(y, ya) (((i32)(y) & _ymask) | ((i32)(ya) << 29))
 
 #define PrintRect(x, y, w, h, c) \
-   DrawCallI(sm_LR, PrintRectArgs0(x, y), PrintRectArgs1(w, h), \
-             PrintRectArgs2(c, 0xff))
-
-#define PrintRectA(x, y, w, h, c, a) \
-   DrawCallI(sm_LR, PrintRectArgs0(x, y), PrintRectArgs1(w, h), \
-             PrintRectArgs2(c, a))
+   DrawCallI(sm_LR, (i32)(x), (i32)(y), (i32)(w), (i32)(h), \
+             (i32)(c))
 
 #define PrintLine(x, y, z, w, c) \
-   DrawCallI(sm_LL, x, y, z, w, c)
-
-#define PrintSpriteArgs0(x,      xa) XBitArg(x, xa)
-#define PrintSpriteArgs1(y,      ya) YBitArg(y, ya)
-#define PrintSpriteArgs2(alpha, flg) (BitArg(alpha, 0xff, 0) | (u32)(flg))
-
-#define PrintSpriteArgs_N(x, xa, y, ya, flg) \
-   PrintSpriteArgs0(x, xa), \
-   PrintSpriteArgs1(y, ya), \
-   PrintSpriteArgs2(0, flg)
-
-#define PrintSpriteArgs_A(x, xa, y, ya, alpha, flg) \
-   PrintSpriteArgs0(x, xa), \
-   PrintSpriteArgs1(y, ya), \
-   PrintSpriteArgs2(k32_to_byte(alpha), 0x400 | (flg))
-
-#define PrintSpriteArgs_F(x, xa, y, ya, num, flg) \
-   PrintSpriteArgs0(x, xa), \
-   PrintSpriteArgs1(y, ya), \
-   PrintSpriteArgs2(num, 0x200 | (flg))
+   DrawCallI(sm_LL, (i32)(x), (i32)(y), (i32)(z), (i32)(w), (i32)(c))
 
 #define PrintSprite(name, x, xa, y, ya) \
-   DrawCallI(sm_LS, name, PrintSpriteArgs_N(x, xa, y, ya, 0))
+   DrawCallI(sm_LS, name, XArg(x, xa), YArg(y, ya), 0.0k, 0)
 
 #define PrintSpriteA(name, x, xa, y, ya, alpha) \
-   DrawCallI(sm_LS, name, PrintSpriteArgs_A(x, xa, y, ya, alpha, 0))
+   DrawCallI(sm_LS, name, XArg(x, xa), YArg(y, ya), (k32)(alpha), _u_alpha)
 
 #define PrintSpriteF(name, x, xa, y, ya, num) \
-   DrawCallI(sm_LS, name, PrintSpriteArgs_F(x, xa, y, ya, num, 0))
+   DrawCallI(sm_LS, name, XArg(x, xa), YArg(y, ya), (k32)(num), _u_fade)
 
 #define PrintSpriteP(name, x, xa, y, ya) \
-   DrawCallI(sm_LS, name, PrintSpriteArgs_N(x, xa, y, ya, 0x100))
+   DrawCallI(sm_LS, name, XArg(x, xa), YArg(y, ya), 0.0k, _u_add)
 
 #define PrintSpriteAP(name, x, xa, y, ya, alpha) \
-   DrawCallI(sm_LS, name, PrintSpriteArgs_A(x, xa, y, ya, alpha, 0x100))
+   DrawCallI(sm_LS, name, XArg(x, xa), YArg(y, ya), (k32)(alpha), _u_add | _u_alpha)
 
 #define PrintSpriteFP(name, x, xa, y, ya, num) \
-   DrawCallI(sm_LS, name, PrintSpriteArgs_F(x, xa, y, ya, num, 0x100))
+   DrawCallI(sm_LS, name, XArg(x, xa), YArg(y, ya), (k32)(num), _u_add | _u_fade)
 
 #define PrintSpriteC(name, x, xa, y, ya, c) \
-   DrawCallI(sm_LS, name, PrintSpriteArgs_N(x, xa, y, ya, 0), c)
+   DrawCallI(sm_LS, name, XArg(x, xa), YArg(y, ya), 0.0k, _u_color, (i32)(c))
 
 #define PrintSpriteAC(name, x, xa, y, ya, alpha, c) \
-   DrawCallI(sm_LS, name, PrintSpriteArgs_A(x, xa, y, ya, alpha, 0), c)
+   DrawCallI(sm_LS, name, XArg(x, xa), YArg(y, ya), (k32)(alpha), \
+             _u_color|_u_alpha, (i32)(c))
 
 #define PrintTextFmt(...)  StrParamBegin(__VA_ARGS__)
 #define PrintTextStr(s)    (ACS_BeginPrint(), ACS_PrintString(s))
 #define PrintTextChr(s, n) (ACS_BeginPrint(), PrintChars(s, n))
 #define PrintTextChS(s)    (ACS_BeginPrint(), PrintChrSt(s))
+#define PrintTextEnd()     ACS_EndStrParam()
 
-#define PrintTextArgs0(x, xa)          XBitArg(x, xa)
-#define PrintTextArgs1(y, ya)          YBitArg(y, ya)
-#define PrintTextArgs2(cr, alpha, flg) (BitArg(cr,    0xff, 0) | \
-                                        BitArg(alpha, 0xff, 8) | \
-                                        (u32)(flg))
-
-#define PrintTextArgs_N(cr, flg, x, xa, y, ya) \
-   PrintTextArgs0(x, xa), \
-   PrintTextArgs1(y, ya), \
-   PrintTextArgs2(cr, 0, flg)
-
-#define PrintTextArgs_A(cr, flg, x, xa, y, ya, alpha) \
-   PrintTextArgs0(x, xa), \
-   PrintTextArgs1(y, ya), \
-   PrintTextArgs2(cr, k32_to_byte(alpha), (flg) | 0x20000)
-
-#define PrintTextArgs_F(cr, flg, x, xa, y, ya, num) \
-   PrintTextArgs0(x, xa), \
-   PrintTextArgs1(y, ya), \
-   PrintTextArgs2(cr, num, (flg) | 0x10000)
-
-#define PrintTextEnd() ACS_EndStrParam()
-
+// static void LT(Actor mo, string txt, string fnt, int xx, int yy, double anum, int cr, int flags) {
 #define PrintText_str(s, font, cr, x, xa, y, ya) \
-   DrawCallI(sm_LT, s, font, PrintTextArgs_N(cr, 0, x, xa, y, ya))
+   DrawCallI(sm_LT, s, font, XArg(x, xa), YArg(y, ya), 0.0k, cr, 0)
 
 #define PrintTextX_str(s, font, cr, x, xa, y, ya, flg) \
-   DrawCallI(sm_LT, s, font, PrintTextArgs_N(cr, flg, x, xa, y, ya))
+   DrawCallI(sm_LT, s, font, XArg(x, xa), YArg(y, ya), 0.0k, cr, flg)
 
 #define PrintTextA_str(s, font, cr, x, xa, y, ya, alpha) \
-   DrawCallI(sm_LT, s, font, PrintTextArgs_A(cr, 0, x, xa, y, ya, alpha))
+   DrawCallI(sm_LT, s, font, XArg(x, xa), YArg(y, ya), (k32)(alpha), cr, _u_alpha)
 
 #define PrintTextAX_str(s, font, cr, x, xa, y, ya, alpha, flg) \
-   DrawCallI(sm_LT, s, font, PrintTextArgs_A(cr, flg, x, xa, y, ya, alpha))
+   DrawCallI(sm_LT, s, font, XArg(x, xa), YArg(y, ya), (k32)(alpha), cr, _u_alpha|(i32)(flg))
 
 #define PrintTextF_str(s, font, cr, x, xa, y, ya, num) \
-   DrawCallI(sm_LT, s, font, PrintTextArgs_F(cr, 0, x, xa, y, ya, num))
+   DrawCallI(sm_LT, s, font, XArg(x, xa), YArg(y, ya), (k32)(num), cr, _u_fade)
 
 #define PrintTextFX_str(s, font, cr, x, xa, y, ya, num, flg) \
-   DrawCallI(sm_LT, s, font, PrintTextArgs_F(cr, flg, x, xa, y, ya, num))
+   DrawCallI(sm_LT, s, font, XArg(x, xa), YArg(y, ya), (k32)(num), cr, _u_fade|(i32)(flg))
 
 #define PrintText(...)   PrintText_str  (PrintTextEnd(), __VA_ARGS__)
 #define PrintTextX(...)  PrintTextX_str (PrintTextEnd(), __VA_ARGS__)
@@ -148,38 +98,27 @@ GlobalCrH(wselm1) GlobalCrH(wselm2) GlobalCrH(wselm3) GlobalCrH(wselms)
 #define PrintTextF(...)  PrintTextF_str (PrintTextEnd(), __VA_ARGS__)
 #define PrintTextFX(...) PrintTextFX_str(PrintTextEnd(), __VA_ARGS__)
 
-#define SetClipArgs0(x, y) (BitArg(x, 0xffff, 0) | BitArg(y, 0xffff, 16))
-#define SetClipArgs1(w, h) SetClipArgs0(w, h)
-
 #define SetClip(x, y, w, h) \
-   DrawCallI(sm_LC, SetClipArgs0(x, y), SetClipArgs1(w, h))
-
+   DrawCallI(sm_LC, (i32)(x), (i32)(y), (i32)(w), (i32)(h))
 #define SetClipW(x, y, w, h, ww) \
-   DrawCallI(sm_LC, SetClipArgs0(x, y), SetClipArgs1(w, h), (u32)(ww))
-
+   DrawCallI(sm_LC, (i32)(x), (i32)(y), (i32)(w), (i32)(h), (i32)(ww))
 #define ClearClip() \
    DrawCallI(sm_LC)
 
 #define SetSize(w, h) \
    DrawCallI(sm_LZ, (i32)(w), (i32)(h))
 
-#define SetFadeArgs(num, time, speed, alpha) \
-   (BitArg(num, 0xff, 0)  | \
-    BitArg(time, 0xff, 8)  | \
-    BitArg(speed, 0xff, 16) | \
-    BitArg(k32_to_byte(alpha), 0xff, 24))
-
 #define SetFade(n, time, speed) \
-   DrawCallI(sm_LF, SetFadeArgs(n, time, speed, 1.0))
+   DrawCallI(sm_LF, (i32)(n), (i32)(time), (i32)(speed), 1.0k)
 
 #define SetFadeA(n, time, speed, alpha) \
-   DrawCallI(sm_LF, SetFadeArgs(n, time, speed, alpha))
+   DrawCallI(sm_LF, (i32)(n), (i32)(time), (i32)(speed), (k32)(alpha))
 
 #define CheckFade(n) \
-   DrawCallI(sm_LX, n)
+   DrawCallI(sm_LX, (i32)(n))
 
 #define GetFade(n) \
-   DrawCallI(sm_LY, n)
+   DrawCallI(sm_LY, (i32)(n))
 
 #define StartSound(...) \
    DrawCallI(sm_StartSound, __VA_ARGS__)
@@ -194,11 +133,6 @@ enum {
    CHANF_NOSTOP      = 4096,
    CHANF_OVERLAP     = 8192,
    CHANF_LOCAL       = 16384,
-};
-
-enum {
-   ptf_no_utf = 0x40000,
-   ptf_add    = 0x80000,
 };
 
 #define Cr(name) globalcolors.name
@@ -247,6 +181,34 @@ enum ZscName(Channel) {
    lch_voice2,
    lch_weapon2,
    lch_weapon3,
+};
+
+enum ZscName(DrawFlags) {
+   _u_add        = 0x01,
+   _u_fade       = 0x02,
+   _u_alpha      = 0x04,
+   _u_no_unicode = 0x08,
+   _u_color      = 0x10,
+};
+
+enum ZscName(XAlign) {
+   _xc    = 0x00000000,
+   _xl    = 0x10000000,
+   _xr    = 0x20000000,
+   _x3    = 0x30000000,
+   _x4    = 0x40000000,
+   _x5    = 0x50000000,
+   _x6    = 0x60000000,
+   _xmask = 0x8FFFFFFF,
+   _xflag = 0x70000000,
+};
+
+enum ZscName(YAlign) {
+   _yc    = 0x00000000,
+   _yt    = 0x20000000,
+   _yb    = 0x40000000,
+   _ymask = 0x9FFFFFFF,
+   _yflag = 0x60000000,
 };
 
 #if !ZscOn

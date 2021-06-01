@@ -32,13 +32,13 @@ static void HUD_Ammo() {
       else
          sprintf(txt, "%i/%i", wep->magmax - wep->magcur, wep->magmax);
       PrintTextChS(txt);
-      PrintTextX(sf_lmidfont, Cr(pink), 268,1, 225,1, ptf_no_utf);
+      PrintTextX(sf_lmidfont, Cr(pink), 268,1, 225,1, _u_no_unicode);
    }
 
    if(wep->ammotype & AT_Ammo) {
       ACS_BeginPrint();
       ACS_PrintInt(wep->ammocur);
-      PrintTextX(sf_lmidfont, Cr(pink), 270,1, 232,1, ptf_no_utf);
+      PrintTextX(sf_lmidfont, Cr(pink), 270,1, 232,1, _u_no_unicode);
    }
 }
 

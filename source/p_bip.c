@@ -89,7 +89,7 @@ static u32 NameToNum(cstr discrim, cstr name) {
 
 /* Extern Functions -------------------------------------------------------- */
 
-script void P_BIP_PInit() {
+script void P_BIP_PInit(void) {
    #ifndef NDEBUG
    if(dbglevel) pl.logH(1, "There are %u info pages!", BIP_MAX);
    #endif
@@ -143,7 +143,7 @@ void P_BIP_Unlock(cstr name) {
    UnlockPage(&pl.bip.pages[num]);
 }
 
-void P_BIP_PQuit() {
+void P_BIP_PQuit(void) {
    pl.bip.init = false;
 }
 

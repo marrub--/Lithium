@@ -58,11 +58,6 @@ struct FadeMsg {
    uint8 Alph;
 }
 
-/* Constants --------------------------------------------------------------- */
-
-const X_MASK = 0x0FFFFFFF;
-const Y_MASK = 0x1FFFFFFF;
-
 /* Members ----------------------------------------------------------------- */
 
 private transient play DrawData[8000] m_D;
@@ -84,13 +79,11 @@ bool m_English;
 
 /* Static Functions -------------------------------------------------------- */
 
-static void ForceDraw(bool on)
-{
+static void ForceDraw(bool on) {
    Lith_URANUS(Find("Lith_URANUS")).m_ForceDraw = on;
 }
 
-static void LZ(Actor mo, int w, int h)
-{
+static void LZ(Actor mo, int w, int h) {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
    if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return;
 
@@ -106,37 +99,23 @@ static void LZ(Actor mo, int w, int h)
    cl.m_VirtualSize = (w, h);
 }
 
-/* BIT LAYOUT OF ARGUMENTS
-
-   0123 4567 8901 2345 6789 0123 4567 8901 OF SZ - DESCRIPTION
-
-                                      arg0
-   1111 1111 ---- ---- ---- ---- ---- ---- 24  8 - alpha
-   ---- ---- 1111 1111 ---- ---- ---- ---- 16  8 - speed
-   ---- ---- ---- ---- 1111 1111 ---- ----  8  8 - time
-   ---- ---- ---- ---- ---- ---- 1111 1111  0  8 - fade num
-*/
-static void LF(Actor mo, int arg0)
-{
+static void LF(Actor mo, int fnum, int time, int speed, double alpha) {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
    if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return;
 
-   uint num               = (arg0 >>  0) & 0xff;
-   cl.m_FadeMsg[num].Time = (arg0 >>  8) & 0xff;
-   cl.m_FadeMsg[num].FSub = (arg0 >> 16) & 0xff;
-   cl.m_FadeMsg[num].Alph = (arg0 >> 24) & 0xff;
-   cl.m_FadeMsg[num].Fade = 255;
+   cl.m_FadeMsg[fnum].Time = time;
+   cl.m_FadeMsg[fnum].FSub = speed;
+   cl.m_FadeMsg[fnum].Alph = alpha * 255.0;
+   cl.m_FadeMsg[fnum].Fade = 255;
 }
 
-static bool LX(Actor mo, int num)
-{
+static bool LX(Actor mo, int num) {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
    if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return false;
    return cl.m_FadeMsg[num].Fade > 0 && cl.m_FadeMsg[num].Alph > 0;
 }
 
-static int LY(Actor mo, int num)
-{
+static int LY(Actor mo, int num) {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
    if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return false;
    return int(cl.m_FadeMsg[num].Fade / 255.0 *
@@ -144,8 +123,7 @@ static int LY(Actor mo, int num)
               255.0);
 }
 
-static void LL(Actor mo, int x, int y, int z, int w, color c = 0)
-{
+static void LL(Actor mo, int x, int y, int z, int w, color c = 0) {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
    if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return;
 
@@ -162,67 +140,45 @@ static void LL(Actor mo, int x, int y, int z, int w, color c = 0)
    cl.m_DPtr++;
 }
 
-/* BIT LAYOUT OF ARGUMENTS
-
-   0123 4567 8901 2345 6789 0123 4567 8901 OF SZ - DESCRIPTION
-
-                                      arg0
-   1--- ---- ---- ---- ---- ---- ---- ---- 31  1 - X sign
-   -111 ---- ---- ---- ---- ---- ---- ---- 28  3 - X alignment
-   ---- 1111 1111 1111 1111 1111 1111 1111  0 28 - X position
-
-                                      arg1
-   1--- ---- ---- ---- ---- ---- ---- ---- 31  1 - Y sign
-   -11- ---- ---- ---- ---- ---- ---- ---- 29  2 - Y alignment
-   ---1 1111 1111 1111 1111 1111 1111 1111  0 29 - Y position
-
-                                      arg2
-   ---- ---- ---- ---- ---- -1-- ---- ---- 10  1 - alpha flag
-   ---- ---- ---- ---- ---- --1- ---- ----  9  1 - fade flag
-   ---- ---- ---- ---- ---- ---1 ---- ----  8  1 - additive flag
-   ---- ---- ---- ---- ---- ---- 1111 1111  0  8 - alpha OR fade num
-*/
-static void LS(Actor mo, string tex, int arg0, int arg1, int arg2, int arg3 = 0)
-{
+static void LS(Actor mo, string tex, int xx, int yy, double anum, int flags, color cr = 0) {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
    if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return;
    if(cl.m_NoDraw) return;
 
-   int  x  =  arg0        & X_MASK;
-   int  y  =  arg1        & Y_MASK;
-   uint xa = (arg0 >> 28) & 0x7;
-   uint ya = (arg1 >> 29) & 0x3;
-   uint af =  arg2        & 0xff;
+   int  x  = xx & _xmask;
+   int  y  = yy & _ymask;
+   uint xa = xx & _xflag;
+   uint ya = yy & _yflag;
 
-   if(arg0 & 0x80000000) x -= X_MASK + 1;
-   if(arg1 & 0x80000000) y -= Y_MASK + 1;
+   //if(xx & 0x80000000) x -= _xmask + 1;
+   //if(yy & 0x80000000) y -= _ymask + 1;
 
    let p = cl.m_DPtr;
 
-   if(arg2 & 0x200) {
-      cl.m_D[p].A  = cl.m_FadeMsg[af].Fade / 255.0;
-      cl.m_D[p].A *= cl.m_FadeMsg[af].Alph / 255.0;
-   } else if(arg2 & 0x400) {
-      cl.m_D[p].A = af / 255.0;
+   if(flags & _u_fade) {
+      cl.m_D[p].A  = cl.m_FadeMsg[uint(anum)].Fade / 255.0;
+      cl.m_D[p].A *= cl.m_FadeMsg[uint(anum)].Alph / 255.0;
+   } else if(flags & _u_alpha) {
+      cl.m_D[p].A = anum;
    } else {
       cl.m_D[p].A = 1.0;
    }
    if(cl.m_D[p].A < 0.001) return;
    cl.m_D[p].Type = cl.m_D[p].A != 1.0 ? Type_SpriteAlpha : Type_Sprite;
 
-   if(arg2 & 0x100)
+   if(flags & _u_add)
       cl.m_D[p].Style = STYLE_Add;
    else if(cl.m_D[p].Type == Type_SpriteAlpha)
       cl.m_D[p].Style = STYLE_Translucent;
    else
       cl.m_D[p].Style = STYLE_Normal;
 
-   if(arg3 != 0) {
+   if(flags & _u_color) {
       if(cl.m_D[p].Type == Type_SpriteAlpha)
          cl.m_D[p].Type = Type_SpriteStencilAlpha;
       else
          cl.m_D[p].Type = Type_SpriteStencil;
-      cl.m_D[p].C = arg3;
+      cl.m_D[p].C = cr;
    }
 
    for(int i = 0; tex.byteAt(0) == Ch_Colon; i++) {
@@ -236,73 +192,48 @@ static void LS(Actor mo, string tex, int arg0, int arg1, int arg2, int arg3 = 0)
 
    switch(xa) {
       default:
-      case 1: cl.m_D[p].X = x;          break;
-      case 0: cl.m_D[p].X = x - sx / 2; break;
-      case 2: cl.m_D[p].X = x - sx;     break;
+      case _xl: cl.m_D[p].X = x;          break;
+      case _xc: cl.m_D[p].X = x - sx / 2; break;
+      case _xr: cl.m_D[p].X = x - sx;     break;
    }
 
    switch(ya) {
       default:
-      case 1: cl.m_D[p].Y = y;          break;
-      case 0: cl.m_D[p].Y = y - sy / 2; break;
-      case 2: cl.m_D[p].Y = y - sy;     break;
+      case _yt: cl.m_D[p].Y = y;          break;
+      case _yc: cl.m_D[p].Y = y - sy / 2; break;
+      case _yb: cl.m_D[p].Y = y - sy;     break;
    }
 
    cl.m_DPtr++;
 }
 
-/* BIT LAYOUT OF ARGUMENTS
-
-   0123 4567 8901 2345 6789 0123 4567 8901 OF SZ - DESCRIPTION
-
-                                      arg0
-   1--- ---- ---- ---- ---- ---- ---- ---- 31  1 - X sign
-   -111 ---- ---- ---- ---- ---- ---- ---- 28  3 - X alignment
-   ---- 1111 1111 1111 1111 1111 1111 1111  0 28 - X position
-
-                                      arg1
-   1--- ---- ---- ---- ---- ---- ---- ---- 31  1 - Y sign
-   -11- ---- ---- ---- ---- ---- ---- ---- 29  2 - Y alignment
-   ---1 1111 1111 1111 1111 1111 1111 1111  0 29 - Y position
-
-                                      arg2
-   ---- ---- ---- 1--- ---- ---- ---- ---- 19  1 - additive flag
-   ---- ---- ---- -1-- ---- ---- ---- ---- 18  1 - "no unicode" flag
-   ---- ---- ---- --1- ---- ---- ---- ---- 17  1 - alpha flag
-   ---- ---- ---- ---1 ---- ---- ---- ---- 16  1 - fade flag
-   ---- ---- ---- ---- 1111 1111 ---- ----  8  8 - alpha OR fade num
-   ---- ---- ---- ---- ---- ---- 1111 1111  0  8 - color
-*/
-static void LT(Actor mo, string txt, string fnt, int arg0, int arg1, int arg2)
-{
+static void LT(Actor mo, string txt, string fnt, int xx, int yy, double anum, int cr, int flags) {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
    if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return;
    if(cl.m_NoDraw) return;
 
-   int  x  =  arg0        & X_MASK;
-   int  y  =  arg1        & Y_MASK;
-   uint xa = (arg0 >> 28) & 0x7;
-   uint ya = (arg1 >> 29) & 0x3;
-   uint af = (arg2 >>  8) & 0xff;
-   uint cr =  arg2        & 0xff;
+   int  x  = xx & _xmask;
+   int  y  = yy & _ymask;
+   uint xa = xx & _xflag;
+   uint ya = yy & _yflag;
 
-   if(arg0 & 0x80000000) x -= X_MASK + 1;
-   if(arg1 & 0x80000000) y -= Y_MASK + 1;
+   //if(xx & 0x80000000) x -= _xmask + 1;
+   //if(yy & 0x80000000) y -= _ymask + 1;
 
    let p = cl.m_DPtr;
 
-   if(arg2 & 0x10000) {
-      cl.m_D[p].A  = cl.m_FadeMsg[af].Fade / 255.0;
-      cl.m_D[p].A *= cl.m_FadeMsg[af].Alph / 255.0;
-   } else if(arg2 & 0x20000) {
-      cl.m_D[p].A = double(af) / 0xff;
+   if(flags & _u_fade) {
+      cl.m_D[p].A  = cl.m_FadeMsg[uint(anum)].Fade / 255.0;
+      cl.m_D[p].A *= cl.m_FadeMsg[uint(anum)].Alph / 255.0;
+   } else if(flags & _u_alpha) {
+      cl.m_D[p].A = anum;
    } else {
       cl.m_D[p].A = 1.0;
    }
    if(cl.m_D[p].A < 0.001) return;
    cl.m_D[p].Type = cl.m_D[p].A != 1.0 ? Type_TextAlpha : Type_Text;
 
-   if(arg2 & 0x80000)
+   if(flags & _u_add)
       cl.m_D[p].Style = STYLE_Add;
    else if(cl.m_D[p].Type == Type_TextAlpha)
       cl.m_D[p].Style = STYLE_Translucent;
@@ -313,7 +244,7 @@ static void LT(Actor mo, string txt, string fnt, int arg0, int arg1, int arg2)
 
    uint lns, lnx = 0;
 
-   if(arg2 & 0x40000 || cl.m_English) {
+   if(flags & _u_no_unicode || cl.m_English) {
       if(fnt == "smallfnt") cl.m_D[p].Fnt = smallfont;
       else                  cl.m_D[p].Fnt = Font.GetFont(fnt);
    } else {
@@ -341,62 +272,41 @@ static void LT(Actor mo, string txt, string fnt, int arg0, int arg1, int arg2)
 
    switch(xa) {
    default:
-   case 3:
-   case 4:
-   case 1: cl.m_D[p].X = x;           break;
-   case 5: cl.m_D[p].X = x + lnx / 2; break;
-   case 6:
-   case 0: cl.m_D[p].X = x - lnx / 2; break;
-   case 2: cl.m_D[p].X = x - lnx;     break;
+   case _x3:
+   case _x4:
+   case _xl: cl.m_D[p].X = x;           break;
+   case _x5: cl.m_D[p].X = x + lnx / 2; break;
+   case _x6:
+   case _xc: cl.m_D[p].X = x - lnx / 2; break;
+   case _xr: cl.m_D[p].X = x - lnx;     break;
    }
 
    switch(ya) {
    default:
-   case 1: cl.m_D[p].Y = y;                           break;
-   case 0: cl.m_D[p].Y = y - cl.m_D[p].LnY * lns / 2; break;
-   case 2: cl.m_D[p].Y = y - cl.m_D[p].LnY * lns;     break;
+   case _yt: cl.m_D[p].Y = y;                           break;
+   case _yc: cl.m_D[p].Y = y - cl.m_D[p].LnY * lns / 2; break;
+   case _yb: cl.m_D[p].Y = y - cl.m_D[p].LnY * lns;     break;
    }
 
    cl.m_D[p].LnX.Resize(lns);
 
    for(uint i = 0; i < lns; i++) {
-           if(xa == 3) cl.m_D[p].LnX[i] = LnW[i];
-      else if(xa <  4) cl.m_D[p].LnX[i] = 0;
-      else             cl.m_D[p].LnX[i] = LnW[i] / 2;
+           if(xa == _x3) cl.m_D[p].LnX[i] = LnW[i];
+      else if(xa <  _x4) cl.m_D[p].LnX[i] = 0;
+      else               cl.m_D[p].LnX[i] = LnW[i] / 2;
    }
 
    cl.m_DPtr++;
 }
 
-/* BIT LAYOUT OF ARGUMENTS
-
-   0123 4567 8901 2345 6789 0123 4567 8901 OF SZ - DESCRIPTION
-
-                                      arg0
-   1111 1111 1111 1111 ---- ---- ---- ---- 16 16 - Y position
-   ---- ---- ---- ---- 1111 1111 1111 1111  0 16 - X position
-
-                                      arg1
-   1111 1111 1111 1111 ---- ---- ---- ---- 16 16 - height
-   ---- ---- ---- ---- 1111 1111 1111 1111  0 16 - width
-
-                                      arg2
-   ---- ---- ---- ---- 1111 1111 1111 1111  0 16 - wrap width
-*/
-static void LC(Actor mo, int arg0 = 0, int arg1 = 0, int arg2 = 0)
-{
+static void LC(Actor mo, int x = 0, int y = 0, int w = 0, int h = 0, int ww = 0) {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
    if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return;
 
    let p = cl.m_DPtr;
 
-   if(arg0 || arg1)
+   if(x || y || w || h)
    {
-      uint x =  arg0        & 0xffff;
-      uint y = (arg0 >> 16) & 0xffff;
-      uint w =  arg1        & 0xffff;
-      uint h = (arg1 >> 16) & 0xffff;
-
       /* simple optimization (which also prevents division by zero) */
       if((cl.m_NoDraw = w <= 0 || h <= 0)) return;
 
@@ -411,23 +321,11 @@ static void LC(Actor mo, int arg0 = 0, int arg1 = 0, int arg2 = 0)
       cl.m_D[p].Type = Type_ClipClear;
    }
 
-   cl.m_BreakWidth = arg2;
+   cl.m_BreakWidth = ww;
    cl.m_DPtr++;
 }
 
-/* BIT LAYOUT OF ARGUMENTS
-
-   0123 4567 8901 2345 6789 0123 4567 8901 OF SZ - DESCRIPTION
-
-                                      arg0
-   1111 1111 1111 1111 ---- ---- ---- ---- 16 16 - Y position
-   ---- ---- ---- ---- 1111 1111 1111 1111  0 16 - X position
-
-                                      arg1
-   1111 1111 1111 1111 ---- ---- ---- ---- 16 16 - height
-   ---- ---- ---- ---- 1111 1111 1111 1111  0 16 - width
-*/
-static void LR(Actor mo, int arg0 = 0, int arg1 = 0, color arg2 = 0)
+static void LR(Actor mo, int x = 0, int y = 0, int w = 0, int h = 0, color cr = 0)
 {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
    if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return;
@@ -435,17 +333,12 @@ static void LR(Actor mo, int arg0 = 0, int arg1 = 0, color arg2 = 0)
    if(cl.m_NoDraw) return;
    let p = cl.m_DPtr;
 
-   uint x =  arg0        & 0xffff;
-   uint y = (arg0 >> 16) & 0xffff;
-   uint w =  arg1        & 0xffff;
-   uint h = (arg1 >> 16) & 0xffff;
-
    cl.m_D[p].Type = Type_Rect;
 
    [cl.m_D[p].X, cl.m_D[p].Y] = cl.GetScSized(x, y);
    [cl.m_D[p].Z, cl.m_D[p].W] = cl.GetScSized(w, h, true);
 
-   cl.m_D[p].C = arg2;
+   cl.m_D[p].C = cr;
 
    cl.m_DPtr++;
 }

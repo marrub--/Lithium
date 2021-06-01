@@ -113,47 +113,47 @@ enum ZscName(PClass) {
 
 /* Extern Functions -------------------------------------------------------- */
 
-script void P_Init();
-script void P_Data_Load();
-script void P_Data_Save();
+script void P_Init(void);
+script void P_Data_Load(void);
+script void P_Data_Save(void);
 bool P_ButtonPressed(i32 bt);
 optargs(1) bool P_SetVel(k32 velx, k32 vely, k32 velz, bool add);
-void P_ValidateTID();
-void P_GUI_Close();
-void P_GUI_Use();
+void P_ValidateTID(void);
+void P_GUI_Close(void);
+void P_GUI_Use(void);
 optargs(1) i96 P_Scr_Give(i96 score, bool nomul);
 void P_Scr_Take(i96 score);
-script void P_GiveAllScore(i96 score, bool nomul);
-script void P_GiveAllEXP(u64 amt);
+script void P_GiveScore(i96 score, bool nomul);
+script void P_GiveEXP(u64 amt);
 void P_Lv_GiveEXP(u64 amt);
 cstr P_Discrim(i32 pclass);
 i32 P_Color(i32 pclass);
-void P_Dat_PTickPst();
-script extern void P_Scr_Payout();
+void P_Dat_PTickPst(void);
+script extern void P_Scr_Payout(void);
 void P_Log_SellWeapon(struct weaponinfo const *info, i96 score);
 void P_Log_Weapon(struct weaponinfo const *info);
 i32 P_Wep_FromName(i32 name);
 
-script void P_Wep_PTickPre ();
-       void P_Dat_PTickPre ();
-script void P_CBI_PTick    ();
-script void P_Inv_PTick    ();
-script void P_Log_PTick    ();
-script void P_Upg_PTick    ();
-script void P_Wep_PTick    ();
-script void P_Upg_PTickPst ();
-       void P_Ren_PTickPst ();
+script void P_Wep_PTickPre (void);
+       void P_Dat_PTickPre (void);
+script void P_CBI_PTick    (void);
+script void P_Inv_PTick    (void);
+script void P_Log_PTick    (void);
+script void P_Upg_PTick    (void);
+script void P_Wep_PTick    (void);
+script void P_Upg_PTickPst (void);
+       void P_Ren_PTickPst (void);
 
-script void P_TeleportIn ();
+script void P_TeleportIn (void);
 sync   void P_TeleportOut(i32 tag);
 
 #ifndef NDEBUG
-void P_Ren_Debug();
+void P_Ren_Debug(void);
 #endif
-void P_Ren_Magic();
-script void P_Ren_Step();
-void P_Ren_View();
-script void P_Ren_Scope();
+void P_Ren_Magic(void);
+script void P_Ren_Step(void);
+void P_Ren_View(void);
+script void P_Ren_Scope(void);
 
 /* Types ------------------------------------------------------------------- */
 

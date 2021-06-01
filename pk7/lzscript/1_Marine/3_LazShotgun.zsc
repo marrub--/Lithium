@@ -18,19 +18,24 @@ class Lith_LazShotgunTrail : Actor
       +NOTIMEFREEZE
    }
 
+   override void postBeginPlay() {
+      super.postBeginPlay();
+      if(random(0, 255) < 10) {
+         SetState(ResolveState("Spawn2"));
+      }
+   }
+
+   override void tick() {
+      a_fadeOut(0.1);
+   }
+
    states
    {
    Spawn:
-      BLLT E 0 bright;
-      BLLT E 0 bright A_JumpIf(Random(0, 255) < 10, "Spawn2");
-   Spawn1:
-      BLLT E 4 bright;
-      goto Spawn3;
+      BLLT E -1 bright;
+      stop;
    Spawn2:
-      BLLT E 4 bright light("Lith_FinalizerLight");
-   Spawn3:
-      BLLT E 2 bright A_FadeOut(0.5);
-      BLLT E 1 bright A_FadeOut(0.2);
+      BLLT E -1 bright light("Lith_FinalizerLight");
       stop;
    }
 }

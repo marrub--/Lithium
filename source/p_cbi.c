@@ -106,7 +106,7 @@ script void P_CBI_PTick() {
    G_End(g, pl.getCVarI(sc_gui_cursor));
 }
 
-void P_CBI_PMinit() {
+void P_CBI_PMinit(void) {
    pl.cbi.guistate.cx = 320 / 2;
    pl.cbi.guistate.cy = 240 / 2;
 

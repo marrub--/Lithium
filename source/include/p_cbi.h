@@ -127,6 +127,6 @@ void P_CBI_TabNotes     (struct gui_state *g);
 void P_CBI_TabItems   (struct gui_state *g);
 void P_CBI_TabSettings(struct gui_state *g);
 
-void P_CBI_PMinit();
+void P_CBI_PMinit(void);
 
 #endif

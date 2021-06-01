@@ -50,7 +50,7 @@ static void HUD_Ammo() {
       else
          sprintf(txt, "%i/%i", wep->magmax - wep->magcur, wep->magmax);
       PrintTextChS(txt);
-      PrintTextX(sf_bigupper, Cr(green), 217,1, 238-y,2, ptf_no_utf);
+      PrintTextX(sf_bigupper, Cr(green), 217,1, 238-y,2, _u_no_unicode);
    }
 
    if(wep->ammotype & AT_Ammo) {
@@ -65,12 +65,12 @@ static void HUD_Ammo() {
 
       ACS_BeginPrint();
       ACS_PrintInt(wep->ammocur);
-      PrintTextX(sf_bigupper, Cr(green), 217-x,1, 238-y,2, ptf_no_utf);
+      PrintTextX(sf_bigupper, Cr(green), 217-x,1, 238-y,2, _u_no_unicode);
    }
 
    if(type) {
       PrintTextChS(type);
-      PrintTextX(sf_bigupper, Cr(green), 281,1, 238,2, ptf_no_utf);
+      PrintTextX(sf_bigupper, Cr(green), 281,1, 238,2, _u_no_unicode);
    }
 
    if(P_Wep_CurType() == weapon_rifle && ServCallI(sm_GetRifleGrenade))
@@ -84,7 +84,7 @@ static void HUD_Health(struct upgrade *upgr) {
    PrintSprite(InvNum(so_PowerStrength) ? sp_HUD_M_SplitBackRed : sp_HUD_M_SplitBack, 0,1, 240,2);
 
    PrintTextChr("VIT", 3);
-   PrintTextX(sf_bigupper, Cr(green), 2,1, 238,2, ptf_no_utf);
+   PrintTextX(sf_bigupper, Cr(green), 2,1, 238,2, _u_no_unicode);
 
    k32 ft = 0;
 

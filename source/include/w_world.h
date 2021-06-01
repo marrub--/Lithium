@@ -216,10 +216,10 @@ optargs(1) void FreezeTime(bool players_ok);
 optargs(1) void UnfreezeTime(bool players_ok);
 script void CBI_Install(i32 num);
 script void W_Title(void);
-script void F_Run();
+script void F_Run(void);
 void F_Load(void);
 void F_Start(cstr which);
-script void W_DoRain();
+script void W_DoRain(void);
 #endif
 
 #endif

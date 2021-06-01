@@ -206,14 +206,14 @@ void Sc_FontTest(i32 fontnum) {
          PrintLine(70, y, 320, y, 0x00FFFF);
          PrintLine(70, y, 70, y + _h, 0x00FFFF);
          PrintTextChS(strings[i].lhs);
-         PrintTextX(font, CR_WHITE, 0,1, y,1, ptf_no_utf);
+         PrintTextX(font, CR_WHITE, 0,1, y,1, _u_no_unicode);
          PrintTextChS(strings[i].rhs);
-         PrintTextX(font, CR_WHITE, 70,1, y,1, ptf_no_utf);
+         PrintTextX(font, CR_WHITE, 70,1, y,1, _u_no_unicode);
          y += _h;
       }
       SetClipW(0, 0, 320, 240, 320);
       PrintTextChS(pangrams[ticks / 35 % countof(pangrams)]);
-      PrintTextX(font, CR_WHITE, 0,1, y,1, ptf_no_utf);
+      PrintTextX(font, CR_WHITE, 0,1, y,1, _u_no_unicode);
       ClearClip();
       ACS_Delay(1);
    }

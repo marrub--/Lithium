@@ -53,7 +53,7 @@ clearScope int, int, bool project(vector3 v) {
    let res  = (Screen.getWidth() / diff, Screen.getHeight() / diff);
    let norm = proj.projectToNormal();
    let scrn = viewport.sceneToCustom(norm, res);
-   bool vis = viewport.isInside(norm);
+   bool vis = proj.isInFront() && proj.isInScreen();
    scrn.x -= (res.x - 320.0) / 2.0;
    return int(scrn.x), int(scrn.y), vis;
 }

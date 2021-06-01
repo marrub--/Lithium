@@ -187,7 +187,7 @@ script void HUD_Log(i32 cr, i32 x, i32 yy) {
          if(CheckFade(fid_logadS + i)) {
             cstr s = RemoveTextColors_str(ld->inf, ACS_StrLen(ld->inf));
             PrintTextChS(s);
-            PrintTextFX(sf_lmidfont, CR_WHITE, x,1, y,ya, fid_logadS + i, ptf_add);
+            PrintTextFX(sf_lmidfont, CR_WHITE, x,1, y,ya, fid_logadS + i, _u_add);
          }
       }
 

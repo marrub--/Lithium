@@ -67,7 +67,7 @@ void Upgr_ReactArmor_Render(struct upgrade *upgr)
       PrintSprite(sp_HUD_M_SplitLeft, 12,1, 226,2);
 
       PrintTextChr(ArmorNames[UData.activearmor - 1].abbr, 3);
-      PrintTextX(sf_bigupper, CR_LIGHTBLUE, 32,1, 217,0, ptf_no_utf);
+      PrintTextX(sf_bigupper, CR_LIGHTBLUE, 32,1, 217,0, _u_no_unicode);
    }
 }
 

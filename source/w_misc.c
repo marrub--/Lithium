@@ -135,13 +135,13 @@ void Sc_EmitScore(i32 amount)
 script_str ext("ACS") addr(OBJ "EmitEXP")
 void Sc_EmitEXP(i32 amount)
 {
-   P_GiveAllEXP(amount);
+   P_GiveEXP(amount);
 }
 
 script_str ext("ACS") addr(OBJ "GiveScore")
 void Sc_GiveScore(i32 score)
 {
-   P_GiveAllScore(score * (k64)ACS_RandomFixed(0.7, 1.2), false);
+   P_GiveScore(score * (k64)ACS_RandomFixed(0.7, 1.2), false);
 }
 
 script_str ext("ACS") addr(OBJ "BoughtItemPickup")

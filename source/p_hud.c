@@ -33,7 +33,7 @@ void HUD_WeaponSlots(i32 cr_one, i32 cr_two, i32 cr_many, i32 cr_cur, i32 _x, i3
 
       ACS_BeginPrint();
       ACS_PrintInt(i);
-      PrintTextX(sf_lhudfontsmall, cr, x,2, y,2, ptf_no_utf);
+      PrintTextX(sf_lhudfontsmall, cr, x,2, y,2, _u_no_unicode);
 
       if(pl.weapon.cur->info->slot == i)
          SetFade(fid_slotnS + i, 1, 6);
@@ -41,7 +41,7 @@ void HUD_WeaponSlots(i32 cr_one, i32 cr_two, i32 cr_many, i32 cr_cur, i32 _x, i3
       if(CheckFade(fid_slotnS + i)) {
          ACS_BeginPrint();
          ACS_PrintInt(i);
-         PrintTextFX(sf_lhudfontsmall, cr_cur, x,2, y,2, fid_slotnS + i, ptf_no_utf);
+         PrintTextFX(sf_lhudfontsmall, cr_cur, x,2, y,2, fid_slotnS + i, _u_no_unicode);
       }
    }
 }
@@ -52,7 +52,7 @@ void HUD_Score(cstr fmt, i96 scrn, str font, i32 cr, i32 x, i32 xa) {
       sprintf(scr, fmt, scoresep(scrn));
 
       PrintTextChS(scr);
-      PrintTextX(font, cr, x,xa, 3,1, ptf_no_utf);
+      PrintTextX(font, cr, x,xa, 3,1, _u_no_unicode);
 
       if(pl.score > pl.old.score) {
          SetFade(fid_schit1, 4, 12);
@@ -70,20 +70,20 @@ void HUD_Score(cstr fmt, i96 scrn, str font, i32 cr, i32 x, i32 xa) {
 
       if(CheckFade(fid_schit1)) {
          PrintTextChS(scr);
-         PrintTextFX(font, CR_ORANGE, x,xa, 3,1, fid_schit1, ptf_no_utf);
+         PrintTextFX(font, CR_ORANGE, x,xa, 3,1, fid_schit1, _u_no_unicode);
       } else if(CheckFade(fid_schit2)) {
          PrintTextChS(scr);
-         PrintTextFX(font, CR_PURPLE, x,xa, 3,1, fid_schit2, ptf_no_utf);
+         PrintTextFX(font, CR_PURPLE, x,xa, 3,1, fid_schit2, _u_no_unicode);
       }
 
       if(CheckFade(fid_scacum))
-         PrintTextFX_str(pl.scoreaccumstr, font, CR_WHITE, x,xa, 10,1, fid_scacum, ptf_no_utf);
+         PrintTextFX_str(pl.scoreaccumstr, font, CR_WHITE, x,xa, 10,1, fid_scacum, _u_no_unicode);
    }
 
    if(pl.getCVarI(sc_hud_showlvl)) {
       PrintTextFmt("Lv.%u", pl.attr.level);
       if(pl.attr.points) __nprintf(" (\Cn%u\C- pts)", pl.attr.points);
-      PrintTextX(font, cr, x,xa, 17,1, ptf_no_utf);
+      PrintTextX(font, cr, x,xa, 17,1, _u_no_unicode);
    }
 
    i32 expbar = pl.getCVarI(sc_hud_expbar);
@@ -120,19 +120,19 @@ void HUD_DrawHealth(i32 health, i32 x, i32 y, i32 cr, i32 cr_fade) {
 
    ACS_BeginPrint();
    ACS_PrintInt(health);
-   PrintTextX(sf_bigupper, cr, x,1, y,0, ptf_no_utf);
+   PrintTextX(sf_bigupper, cr, x,1, y,0, _u_no_unicode);
 
    if(protect) {
       k32 amt = protect / 200.0;
       ACS_BeginPrint();
       ACS_PrintInt(health);
-      PrintTextAX(sf_bigupper, CR_TAN, x,1, y,0, amt, ptf_no_utf);
+      PrintTextAX(sf_bigupper, CR_TAN, x,1, y,0, amt, _u_no_unicode);
    }
 
    if(CheckFade(fid_health)) {
       ACS_BeginPrint();
       ACS_PrintInt(health);
-      PrintTextFX(sf_bigupper, cr_fade, x,1, y,0, fid_health, ptf_no_utf);
+      PrintTextFX(sf_bigupper, cr_fade, x,1, y,0, fid_health, _u_no_unicode);
    }
 }
 

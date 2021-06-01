@@ -57,12 +57,12 @@ void P_Scr_Payout() {
 
       SetSize(320, 240);
 
-      PrintRectA(4, 16, 152, 208, 0x000000, GetFade(fid_result) / 2);
+      PrintRect(4, 16, 152, 208, 0x000000 | ((GetFade(fid_result) / 2) << 24));
       Head(res);
 
       if(CheckFade(fid_result2)) {
          PrintTextChS(res);
-         PrintTextFX(sf_bigupper, CR_WHITE, 8,1, y,1, fid_result2, ptf_add);
+         PrintTextFX(sf_bigupper, CR_WHITE, 8,1, y,1, fid_result2, _u_add);
       }
 
       y += 16;
