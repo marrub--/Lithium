@@ -61,7 +61,7 @@ class Lith_CombatRifleMagazine : Lith_DroppedMagazine
    states
    {
    Spawn1:
-      MGZR A -1;
+      MGZN J -1;
       stop;
    }
 }
@@ -77,7 +77,7 @@ class Lith_CombatRifleMagazine2 : Lith_CombatRifleMagazine
    states
    {
    Spawn1:
-      MGZR B -1;
+      MGZN K -1;
       stop;
    }
 }

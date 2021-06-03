@@ -96,7 +96,7 @@ class Lith_SMGMagazine : Lith_DroppedMagazine
    states
    {
    Spawn1:
-      MGZM A -1;
+      MGZN F -1;
       stop;
    }
 }
@@ -111,7 +111,7 @@ class Lith_SMGMagazine2 : Lith_SMGMagazine
    states
    {
    Spawn1:
-      MGZM B -1;
+      MGZN G -1;
       stop;
    }
 }
@@ -131,7 +131,7 @@ class Lith_SMGBarrel : Lith_DroppedMagazine
    states
    {
    Spawn1:
-      MGZB A 3 Lith_A_EmitSteam;
+      MGZN A 3 Lith_A_EmitSteam;
       loop;
    }
 }

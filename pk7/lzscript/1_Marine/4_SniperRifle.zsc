@@ -18,7 +18,7 @@ class Lith_SniperRifleMagazine : Lith_DroppedMagazine
    states
    {
    Spawn1:
-      MGZS A -1;
+      MGZN L -1;
       stop;
    }
 }
@@ -34,7 +34,7 @@ class Lith_SniperRifleMagazine2 : Lith_SniperRifleMagazine
    states
    {
    Spawn1:
-      MGZS B -1;
+      MGZN M -1;
       stop;
    }
 }

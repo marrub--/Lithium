@@ -7,6 +7,18 @@
  * ---------------------------------------------------------------------------|
  */
 
+class Lith_MinigunMagazine : Lith_DroppedMagazine {
+   default {
+      Mass 350;
+   }
+
+   states {
+   Spawn1:
+      MGZN N -1;
+      stop;
+   }
+}
+
 class Lith_Minigun : Lith_DWeapon;
 
 default
@@ -174,12 +186,14 @@ Fire3:
 
 Reload:
    MNGG # 1 Lith_A_JumpIfMagFull;
-   MNGG S 1 offset(2, 34) {invoker.m_reloading = true;}
+   MNGG S 1 offset(2, 34) {
+      invoker.m_reloading = true;
+   }
    MNGG T 1 offset(4, 37);
    MNGG U 1 offset(9, 37) A_StartSound("weapons/minigun/magout", lch_reload);
    MNGG G 1 offset(12, 37);
    MNGG H 1 offset(14, 42) Lith_A_ReloadBobDn(0.7);
-   MNGG I 2 offset(12, 45);
+   MNGG I 2 offset(12, 45) Lith_A_DropMag("Lith_MinigunMagazine", null, 4,-1,20, FRandom(0,2),FRandom(-1,1),0);
    MNGG J 3 offset(11, 47);
    MNGG K 9 offset(10, 50);
    MNGG L 19 offset(11, 50);
@@ -193,7 +207,7 @@ Reload:
    MNGG Q 4 offset(11, 35);
    MNGG Q 3 offset(12, 39);
    MNGG Q 2 offset(8, 43);
-   MNGG A 2 offset(1, 47);
+   MNGG A 2 offset(1, 47) lith_a_setInterpolation(true);
    MNGG A 1 offset(-3, 46);
    MNGG A 2 offset(-8, 42);
    MNGG A 2 offset(-10, 39);
@@ -203,7 +217,10 @@ Reload:
    MNGG A 3 offset(-1, 31);
    MNGG A 2 offset(-1, 32);
    MNGG A 1;
-   MNGG A 0 {invoker.m_reloading = false;}
+   MNGG A 0 {
+      invoker.m_reloading = false;
+      lith_a_setInterpolation(false);
+   }
    TNT1 A 0 ResolveState(invoker.m_lastState);
    stop;
 }

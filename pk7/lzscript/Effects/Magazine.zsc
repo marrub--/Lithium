@@ -32,6 +32,7 @@ private double m_rollSpeed;
 
 override void postBeginPlay() {
    super.postBeginPlay();
+   roll = fRandom(0.0, 360.0);
    m_rollSpeed = fRandom(10.0, 16.0);
    if(random(0, 1)) m_rollSpeed = -m_rollSpeed;
    if(random(0, 1)) scale = (-scale.x, scale.y);

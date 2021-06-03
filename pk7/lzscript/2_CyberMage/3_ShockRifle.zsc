@@ -18,7 +18,7 @@ class Lith_ShockRifleMagazine : Lith_DroppedMagazine
    states
    {
    Spawn1:
-      MGZE A -1;
+      MGZN B -1;
       stop;
    }
 }
@@ -34,7 +34,7 @@ class Lith_ShockRifleMagazine2 : Lith_ShockRifleMagazine
    states
    {
    Spawn1:
-      MGZE B -1;
+      MGZN C -1;
       stop;
    }
 }

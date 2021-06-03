@@ -65,7 +65,7 @@ class Lith_PistolMagazine : Lith_DroppedMagazine
    states
    {
    Spawn1:
-      MGZP A -1;
+      MGZN H -1;
       stop;
    }
 }
@@ -81,7 +81,7 @@ class Lith_PistolMagazine2 : Lith_PistolMagazine
    states
    {
    Spawn1:
-      MGZP B -1;
+      MGZN I -1;
       stop;
    }
 }

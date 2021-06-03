@@ -18,7 +18,7 @@ class Lith_GaussMagazine : Lith_DroppedMagazine
    states
    {
    Spawn1:
-      MGZG A -1;
+      MGZN D -1;
       stop;
    }
 }
@@ -34,7 +34,7 @@ class Lith_GaussMagazine2 : Lith_GaussMagazine
    states
    {
    Spawn1:
-      MGZG B -1;
+      MGZN E -1;
       stop;
    }
 }
