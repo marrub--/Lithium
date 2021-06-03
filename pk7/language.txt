@@ -1573,6 +1573,9 @@
 "LITH_st_name_theme_7" = "Ghost";
 "LITH_st_name_theme_8" = "Windows XP";
 "LITH_st_name_theme_9" = "DONKEY KONG";
+"LITH_st_name_slide_0" = "Fixed";
+"LITH_st_name_slide_1" = "Slide";
+"LITH_st_name_slide_2" = "Under target";
 "LITH_st_labl_gui" = "GUI";
 "LITH_st_labl_hud" = "HUD";
 "LITH_st_labl_itm" = "Items";

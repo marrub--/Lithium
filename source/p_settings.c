@@ -13,6 +13,7 @@
 
 #include "common.h"
 #include "p_player.h"
+#include "p_hud.h"
 #include "w_world.h"
 
 /* Types ------------------------------------------------------------------- */
@@ -254,7 +255,7 @@ struct setting const st_hud[] = {
    {S_empty},
    {S_boole, "scanner_altfont", S_clBoole},
    {S_boole, "scanner_bar",     S_clBoole},
-   {S_boole, "scanner_slide",   S_clBoole},
+   {S_enume, "scanner_slide",   S_clInteg, S_bndi(0, _ssld_max), "slide"},
    {S_enume, "scanner_color",   S_clInteg, S_color},
 };
 

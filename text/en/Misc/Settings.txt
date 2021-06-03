@@ -120,6 +120,10 @@
 == \#st_name_theme_8 | Windows XP
 == \#st_name_theme_9 | DONKEY KONG
 
+== \#st_name_slide_0 | Fixed
+== \#st_name_slide_1 | Slide
+== \#st_name_slide_2 | Under target
+
 == \#st_labl_gui | GUI
 == \#st_labl_hud | HUD
 == \#st_labl_itm | Items

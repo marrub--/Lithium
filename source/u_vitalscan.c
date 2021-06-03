@@ -14,6 +14,7 @@
 #include "u_common.h"
 #include "w_world.h"
 #include "w_monster.h"
+#include "p_hud.h"
 
 #include <math.h>
 
@@ -121,7 +122,9 @@ script void Upgr_VitalScan_Update(struct upgrade *upgr) {
          UData.split     = 0;
       }
 
-      UData.cangle = ACS_VectorAngle(pl.x - GetX(0), pl.y - GetY(0)) * tau;
+      UData.x = GetX(0);
+      UData.y = GetY(0);
+      UData.z = GetZ(0);
 
       /* Hit indicator */
       if(UData.hdtime != 0) UData.hdtime--;
@@ -142,26 +145,45 @@ void Upgr_VitalScan_Render(struct upgrade *upgr) {
    i32 ox = pl.getCVarI(sc_scanner_xoffs);
    i32 oy = pl.getCVarI(sc_scanner_yoffs);
 
-   if(pl.getCVarI(sc_scanner_slide)) {
-      k64 diff = pl.yawf - (k64)UData.cangle;
+   i32 x;
+   i32 y;
+
+   switch(pl.getCVarI(sc_scanner_slide)) {
+   case _ssld_slide: {
+      k32 cangle = ACS_VectorAngle(pl.x - UData.x, pl.y - UData.y) * tau;
+      k64 diff = pl.yawf - (k64)cangle;
       k32 ds = ACS_Sin(diff / tau) * tau;
       k32 dc = ACS_Cos(diff / tau) * tau;
       UData.oangle = lerplk(UData.oangle, atan2f(ds, dc), 0.1);
       ox += UData.oangle * 64;
+      // fall through
+   }
+   default:
+   case _ssld_fixed: {
+      x = 120 + ox;
+      y = 205 + oy;
+      break;
+   }
+   case _ssld_under: {
+      bool seen;
+      struct i32v2 pos = project(UData.x, UData.y, UData.z, &seen);
+      x = pos.x + ox - 39;
+      y = pos.y + oy + 8;
+      break;
+   }
    }
 
    /* Rank */
    if(UData.rank) for(i32 i = 0; i < UData.rank; i++) {
       StrAry(rs, s":UI:Rank1", s":UI:Rank2", s":UI:Rank3", s":UI:Rank4",
                  s":UI:Rank5", s":UI:Rank6", s":UI:Rank7");
-      i32 y = 216 + (i > 4 ? 8 : 0);
-      PrintSprite(rs[i], 106+ox + i%5*6,1, y+oy,1);
+      PrintSprite(rs[i], x - 14 + i%5*6,1, y + 11 + (i > 4 ? 8 : 0),1);
    }
 
    /* Hit indicator */
    if(UData.hdelta && CheckFade(fid_vscan)) {
       PrintTextFmt("-%i", UData.hdelta);
-      PrintTextF(sf_smallfnt, CR_RED, 160+ox,4, 235+oy,2, fid_vscan);
+      PrintTextF(sf_smallfnt, CR_RED, x+40,4, y+30,2, fid_vscan);
    }
 
    /* Tag and health */
@@ -170,7 +192,7 @@ void Upgr_VitalScan_Render(struct upgrade *upgr) {
 
    i32 cr = Draw_GetCr(pl.getCVarI(sc_scanner_color));
 
-   PrintText_str(UData.tagstr, font, cr, 160+ox,4, 216+oy,2);
+   PrintText_str(UData.tagstr, font, cr, x+40,4, y+11,2);
 
    if(UData.maxhealth) {
       if(UData.freak) {
@@ -184,7 +206,7 @@ void Upgr_VitalScan_Render(struct upgrade *upgr) {
    } else {
       PrintTextFmt("%uhp", UData.health);
    }
-   PrintTextX(font, CR_WHITE, 160+ox,4, 225+oy,2, _u_no_unicode);
+   PrintTextX(font, CR_WHITE, x+40,4, y+20,2, _u_no_unicode);
 
    /* Health bar */
    if(pl.getCVarI(sc_scanner_bar)) {
@@ -196,8 +218,6 @@ void Upgr_VitalScan_Render(struct upgrade *upgr) {
                  s":Bars:HealthBar11", s":Bars:HealthBar12",
                  s":Bars:HealthBar13", s":Bars:HealthBar14");
 
-      i32 x = 120 + ox;
-      i32 y = (afnt ? 201 : 205) + oy;
 
       if(UData.split > 0)
          PrintSprite(bs[UData.split - 1], x,1, y,1);

@@ -79,7 +79,7 @@ user int  lith_xhair_style = 1;
 user bool lith_xhair_enable = true;
 user bool lith_xhair_enablejuicer = true;
 
-user bool lith_scanner_slide   = true;
+user int  lith_scanner_slide   = 1;
 user bool lith_scanner_bar     = true;
 user int  lith_scanner_xoffs   = 0;
 user int  lith_scanner_yoffs   = 0;

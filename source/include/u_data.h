@@ -88,7 +88,7 @@ struct upgr_data_VitalScan {
    i32 maxhealth;
    u32 hdelta;
    u32 hdtime;
-   k64 cangle;
+   k32 x, y, z;
    k64 oangle;
    k64 splitfrac;
    u32 split;
