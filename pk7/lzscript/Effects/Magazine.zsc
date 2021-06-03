@@ -21,12 +21,26 @@ default
    Radius 3;
    Height 3;
 
-   +MISSILE /* damn it, zdoom */
-   +THRUACTORS
+   +Missile /* damn it, zdoom */
+   +ThruActors
    +CastSpriteShadow
+   +RollSprite
+   +RollCenter
 }
 
-int user_side;
+private double m_rollSpeed;
+
+override void postBeginPlay() {
+   super.postBeginPlay();
+   m_rollSpeed = fRandom(10.0, 16.0);
+   if(random(0, 1)) m_rollSpeed = -m_rollSpeed;
+   if(random(0, 1)) scale = (-scale.x, scale.y);
+}
+
+override void tick() {
+   super.tick();
+   a_setRoll(roll - m_rollSpeed, SPF_INTERPOLATE);
+}
 
 states
 {
@@ -35,8 +49,20 @@ Spawn:
    TNT1 A 0 A_JumpIf(!lith_weapons_magdrops, "Null");
    TNT1 A 0 ResolveState("Spawn1");
    stop;
-Done:
-   #### # 0 A_JumpIf(lith_weapons_magfadeout, "DoneFade");
+Death:
+   #### # 0 {
+      m_rollSpeed = 0.0;
+      double rollMod = roll % 360.0;
+      double rollEnd = 0.0;
+      /**/ if(rollMod < 45.0)  rollEnd =   0.0;
+      else if(rollMod < 135.0) rollEnd =  90.0;
+      else if(rollMod < 225.0) rollEnd = 180.0;
+      else if(rollMod < 315.0) rollEnd = 270.0;
+      else                     rollEnd =   0.0;
+      a_setRoll(rollEnd, SPF_INTERPOLATE);
+      if(lith_weapons_magFadeOut) return ResolveState("DoneFade");
+      else                        return State(null);
+   }
    #### # -1;
    stop;
 DoneFade:
