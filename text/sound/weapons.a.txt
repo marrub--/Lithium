@@ -9,11 +9,12 @@
 weapons {
    burstrif {
       == lsounds/WeaponsA/BurstRifle
-      fire1 Fire  # Killing Floor
-      fire2 Fire2 # ^
-      fire3 Fire3 # ^
-      bolt  Bolt  # ???
-      draw  Draw  # ???
+      fire1     Fire      # Killing Floor
+      fire2     Fire2     # ^
+      fire3     Fire3     # ^
+      firefirst FireFirst # Killing Floor, Half-Life 2
+      bolt      Bolt      # ???
+      draw      Draw      # ???
       $random fire {fire1, fire2, fire3,}
    }
 

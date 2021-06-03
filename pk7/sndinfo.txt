@@ -490,6 +490,7 @@ $random effects/geexplosion { effects/geexplosion1 effects/geexplosion2 effects/
 weapons/burstrif/fire1 lsounds/WeaponsA/BurstRifle/Fire
 weapons/burstrif/fire2 lsounds/WeaponsA/BurstRifle/Fire2
 weapons/burstrif/fire3 lsounds/WeaponsA/BurstRifle/Fire3
+weapons/burstrif/firefirst lsounds/WeaponsA/BurstRifle/FireFirst
 weapons/burstrif/bolt lsounds/WeaponsA/BurstRifle/Bolt
 weapons/burstrif/draw lsounds/WeaponsA/BurstRifle/Draw
 $random weapons/burstrif/fire { weapons/burstrif/fire1 weapons/burstrif/fire2 weapons/burstrif/fire3 }

@@ -24,12 +24,18 @@ action(Weapon) void Lith_A_FireBurstRifle() {
    double p = clamp(3 / invoker.m_lessen, 0.5, 1.0);
    Lith_A_MagIncr();
    A_GunFlash();
-   Lith_FireBullets(2, 1, -1, int(50 / invoker.m_lessen), FBF_NORANDOM);
+   Lith_FireBullets(2, 1, -1, int(60 / invoker.m_lessen), FBF_NORANDOM);
    Lith_A_GunSmokeSmall();
    Lith_A_RecoilUp(0.75);
+   if(invoker.m_lessen <= 1.5) {
+      double vol = 1.0 - invoker.m_lessen / 2.0;
+      if(invoker.m_lessen == 1.0) vol = 1.0;
+      A_SetBlend(0xBA8CC6, vol / 8.0, 7);
+      A_StartSound("weapons/burstrif/firefirst", lch_weapon2, volume: vol, pitch: p);
+   }
    A_StartSound("weapons/burstrif/fire", lch_weapon, pitch: p);
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
-   invoker.m_lessen += 0.43;
+   invoker.m_lessen += 0.17;
 }
 
 states(Weapon) {
