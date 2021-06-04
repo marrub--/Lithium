@@ -401,9 +401,7 @@ override void onRegister() {
    m_CVarXHairEnable = CVar.getCVar('lith_xhair_enable', pl);
    m_CVarXHairStyle = CVar.getCVar('lith_xhair_style', pl);
    m_CVarXHairEnableJuicer = CVar.getCVar('lith_xhair_enablejuicer', pl);
-}
 
-override void worldLoaded(WorldEvent evt) {
    m_RectXf = new("Shape2DTransform");
    m_Rect = new("Shape2D");
    m_Rect.pushVertex((0, 0));

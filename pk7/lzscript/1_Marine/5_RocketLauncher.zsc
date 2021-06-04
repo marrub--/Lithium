@@ -85,6 +85,7 @@ default
    Weapon.SlotNumber 5;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/rocket/draw";
+   Weapon.AmmoType "Lith_RocketAmmo";
    Inventory.AltHudIcon "LAUNA0";
 
    +WEAPON.NOAUTOFIRE
@@ -97,7 +98,7 @@ int m_Mode;
 action(Weapon) void Lith_A_FireRocket()
 {
    A_AlertMonsters();
-   self.TakeInventory("Lith_RocketAmmo", 1, notakeinfinite: true);
+   lith_takeAmmo();
    A_StartSound("weapons/rocket/fire", lch_weapon);
    A_FireProjectile("Lith_Rocket");
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
@@ -106,7 +107,7 @@ action(Weapon) void Lith_A_FireRocket()
 action(Weapon) void Lith_A_FireGrenade()
 {
    A_AlertMonsters();
-   self.TakeInventory("Lith_RocketAmmo", 1, notakeinfinite: true);
+   lith_takeAmmo();
    A_StartSound("weapons/rocket/grenade", lch_weapon);
    A_FireProjectile("Lith_RifleGrenade");
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
@@ -115,7 +116,7 @@ action(Weapon) void Lith_A_FireGrenade()
 action(Weapon) void Lith_A_FireHomingRocket()
 {
    A_AlertMonsters();
-   self.TakeInventory("Lith_RocketAmmo", 1, notakeinfinite: true);
+   lith_takeAmmo();
    A_StartSound("weapons/rocket/fire", lch_weapon);
    A_FireProjectile("Lith_HomingRocket");
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
@@ -136,7 +137,7 @@ Select:
 
 Fire:
    GRLG A 1;
-   GRLG A 0 A_JumpIf(CountInv("Lith_RocketAmmo") == 0, "FireEmpty");
+   GRLG A 0 lith_jumpNoAmmo;
    GRLG A 0 {
       invoker.m_Loaded = invoker.m_Iter = invoker.m_Mode = 0;
    }
@@ -180,7 +181,7 @@ Flash:
 AltFire:
    GRLG A 1;
    GRLG A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_HomingRPG), "Ready");
-   GRLG A 0 A_JumpIf(CountInv("Lith_RocketAmmo") == 0, "FireEmpty");
+   GRLG A 0 lith_jumpNoAmmo;
    GRLG A 0 {
       if(Lith_UTIL.pData(self, pdata_upgrade, UPGR_ChargeRPG)) Lith_A_FireRocket();
       else                                                     Lith_A_FireGrenade();
@@ -193,7 +194,7 @@ FireHoming:
 FireUnreal:
    GRLG A 0 {
       ++invoker.m_Loaded;
-      self.TakeInventory("Lith_RocketAmmo", 1, notakeinfinite: true);
+      lith_takeAmmo();
    }
 FireUnrealRefire:
    GRLG A 2;
@@ -201,11 +202,11 @@ FireUnrealRefire:
    GRLG A 0 A_JumpIf(invoker.m_Iter++, "FireUnrealLoad");
    goto FireUnrealCheckRefire;
 FireUnrealLoad:
-   #### # 0 A_JumpIf(CountInv("Lith_RocketAmmo") == 0, "FireUnrealReal");
+   #### # 0 lith_jumpNoAmmo(label: "FireUnrealReal");
    GRLR A 1 {
       ++invoker.m_Loaded;
       A_StartSound("weapons/rocket/lock", lch_weapon2);
-      self.TakeInventory("Lith_RocketAmmo", 1, notakeinfinite: true);
+      lith_takeAmmo();
    }
    GRLR BC 2;
    GRLR D 4 A_GunFlash("AltModeChanger", GFF_NOEXTCHANGE);

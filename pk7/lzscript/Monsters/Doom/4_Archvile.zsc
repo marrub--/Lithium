@@ -11,7 +11,7 @@ class Lith_ArchvileFire : ArchvileFire replaces ArchvileFire
 {
    default
    {
-      Translation "160:161=160:161", "162:163=164:165", "164:165=35:36", "166:167=42:43";
+      Translation "Lith_ArchvileFire";
       +FORCEYBILLBOARD
    }
 }
@@ -47,7 +47,7 @@ class Lith_ArchvileImmolatorBlast : Actor
    default
    {
       Mass int.Max;
-      Translation "192:199=160:167", "200:207=32:39", "240:247=40:47";
+      Translation "Lith_ArchvileImmolatorBlast";
 
       +FLOORHUGGER
       +FORCEYBILLBOARD

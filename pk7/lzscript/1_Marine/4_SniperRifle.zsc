@@ -90,7 +90,7 @@ SelectLoop:
 Fire:
    #### # 0 Lith_A_JumpIfMagEmpty;
    #### # 0 Lith_A_FireSniper;
-   #### # 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, "FireAnim_Scoped");
+   #### # 0 A_JumpIf(countInv("Lith_WeaponScopedToken"), "FireAnim_Scoped");
 FireAnim_Unscoped:
    SNPG B 1 bright;
    SNPG C 1 bright Lith_A_RecoilDn(0.25);

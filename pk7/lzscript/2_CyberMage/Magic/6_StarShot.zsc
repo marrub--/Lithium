@@ -54,6 +54,7 @@ default
    Weapon.SlotNumber 0;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/starshot/draw";
+   Weapon.AmmoType "Lith_Mana";
    Inventory.AltHudIcon "SPELD0";
 
    -WEAPON.NOAUTOFIRE
@@ -92,9 +93,9 @@ Fire:
    goto ReadySelector;
 
 Reload:
-   TNT1 A 0 A_JumpIf(CountInv("Lith_Mana") < 100, "ReadySelector");
+   TNT1 A 0 lith_jumpNoAmmo(100);
    TNT1 A 22 {
-      self.TakeInventory("Lith_Mana", 100, notakeinfinite: true);
+      lith_takeAmmo(100);
       A_StartSound("weapons/delear/open", lch_reload);
    }
    TNT1 A 10 A_StartSound("weapons/delear/charge", lch_reload2);

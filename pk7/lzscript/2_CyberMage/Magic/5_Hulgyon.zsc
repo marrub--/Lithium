@@ -75,6 +75,7 @@ default
    Weapon.SlotNumber 0;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/hulgyon/draw";
+   Weapon.AmmoType "Lith_Mana";
    Inventory.AltHudIcon "SPELC0";
 
    +WEAPON.DONTBOB
@@ -99,10 +100,10 @@ SelectLoop:
    loop;
 
 Fire:
-   TNT1 A 0 A_JumpIf(CountInv("Lith_Mana") < 50, "ReadySelector");
+   TNT1 A 0 lith_jumpNoAmmo(50);
    TNT1 A 10 {
       A_FireProjectile("Lith_HulgyonProjectile");
-      self.TakeInventory("Lith_Mana", 50, notakeinfinite: true);
+      lith_takeAmmo(50);
    }
    TNT1 AAAAAAAAAA 1 A_SpawnItemEx("Lith_HulgyonSprite2", Cos(Pitch)*32, 0, (Height-19)-(Sin(Pitch)*32), flags: SXF_NOCHECKPOSITION);
    goto ReadySelector;

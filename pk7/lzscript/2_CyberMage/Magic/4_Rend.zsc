@@ -45,6 +45,7 @@ default
    Weapon.SlotNumber 0;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/rend/draw";
+   Weapon.AmmoType "Lith_Mana";
    Inventory.AltHudIcon "SPELB0";
 
    +WEAPON.NOAUTOFIRE
@@ -67,9 +68,9 @@ SelectLoop:
    loop;
 
 Fire:
-   TNT1 A 0 A_JumpIf(CountInv("Lith_Mana") < 10, "ReadySelector");
+   TNT1 A 0 lith_jumpNoAmmo(10, "ReadySelector");
    TNT1 A 5 {
-      self.TakeInventory("Lith_Mana", 10, notakeinfinite: true);
+      lith_takeAmmo(10);
       CallACS("Lith_Rend", false, random(0, 3));
       A_StartSound("weapons/rend/slash", lch_weapon);
       A_FireProjectile("Lith_BladeLightProjectile", 0);

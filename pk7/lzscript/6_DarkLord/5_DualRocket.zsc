@@ -11,6 +11,7 @@ class Lith_Franca : Lith_Rocket {
    default {
       Speed 30;
       Damage 50;
+      Translation "Lith_Franca";
    }
 }
 
@@ -18,7 +19,8 @@ class Lith_Sophia : Lith_Rocket {
    default {
       Speed 30;
       Damage 30;
-      +SEEKERMISSILE
+      Translation "Lith_Sophia";
+      +SeekerMissile
    }
 
    states {
@@ -36,12 +38,13 @@ default {
    Tag "$LITH_INFO_SHORT_DualRocket";
    Weapon.SlotNumber 5;
    Weapon.SlotPriority 1;
+   Weapon.AmmoType "Lith_RocketAmmo";
 }
 
 action(Weapon) void Lith_A_FireRocket(class<Actor> cl, double xofs) {
    A_GunFlash("DummyFlash");
    A_FireProjectile(cl, 0, true, xofs, -2);
-   self.TakeInventory("Lith_RocketAmmo", 2, notakeinfinite: true);
+   lith_takeAmmo(2);
    Lith_A_RecoilUp(1.2);
 }
 
@@ -60,7 +63,7 @@ Select:
    wait;
 
 Fire:
-   TNT1 A 0 A_JumpIf(countInv("Lith_RocketAmmo") < 1, "FireEmpty");
+   TNT1 A 0 lith_jumpNoAmmo;
    TNT1 A 10 Lith_A_DoubleState(_oscillate, "FireLH", "FireRH");
    TNT1 A 0 A_ReFire;
    goto ReadySelector;

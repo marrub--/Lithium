@@ -133,7 +133,7 @@ Release2:
    #### A 1 A_StartSound("weapons/cfist/fire", lch_weapon2);
    #### B 1;
    #### A 0 A_CustomPunch(CallACS("Lith_ChargeFistDamage"), true, 0, "Lith_ChargeFistPuff", 128);
-   #### A 0 A_JumpIfInventory("Lith_FistHit", 1, "HitRecoil");
+   #### A 0 A_JumpIf(countInv("Lith_FistHit") >= 1, "HitRecoil");
    #### C 2 lith_a_setInterpolation(true); /* Missed, so you quickly bring your fist back */
    #### D 5;
    #### H 2;

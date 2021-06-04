@@ -59,13 +59,14 @@ default
    Tag "$LITH_INFO_SHORT_FatMac";
    Weapon.SlotNumber 6;
    Weapon.SlotPriority 1;
+   Weapon.AmmoType "Lith_PlasmaAmmo";
 
    +WEAPON.NOAUTOFIRE;
 }
 
 action(Weapon) void Lith_A_FireFatMac()
 {
-   self.TakeInventory("Lith_PlasmaAmmo", 1000, notakeinfinite: true);
+   lith_takeAmmo(1000);
    A_GunFlash("DummyFlash");
    A_SetBlend("White", 0.6, 10);
    Lith_FireBullets(0, 0, 8, 200, FBF_NORANDOM, "Lith_700Bullet");
@@ -109,7 +110,7 @@ FireEmpty:
    PISG A 5 offset(0, 32);
    goto ReadySelector;
 Fire:
-   TNT1 A 0 A_JumpIf(CountInv("Lith_PlasmaAmmo") < 700, "FireEmpty");
+   TNT1 A 0 lith_jumpNoAmmo(700);
    PISG A 1 bright offset(0, 50) Lith_A_FireFatMac;
    PISG A 1 bright offset(0, 46);
    PISG A 1 offset(0, 43);

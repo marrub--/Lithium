@@ -75,6 +75,8 @@ private meta class<Actor> m_spawnType;
 
 private bool m_side;
 
+private readOnly uint m_lithWeaponFlags;
+
 property MagSize: m_max;
 
 property ScopeOutSound: m_scopeOutSnd;
@@ -82,6 +84,8 @@ property ScopeInSound:  m_scopeInSnd;
 property ScopeZoom:     m_scopeZoom;
 
 property SpawnType: m_spawnType;
+
+flagDef Slot3OptAmmo: m_lithWeaponFlags, 0;
 
 const _psp_flags =
    PSPF_ADDWEAPON | PSPF_ADDBOB | PSPF_ALPHA | PSPF_RENDERSTYLE;
@@ -92,6 +96,24 @@ virtual double, double GetFirePattern() {
 
 virtual state Lith_Ready(int flags) {
    return null;
+}
+
+override void tick() {
+   super.tick();
+
+   if(bSlot3OptAmmo) {
+      if(Lith_UTIL.pData(owner, pdata_slot3Ammo)) {
+         if(!ammoType1) {
+            ammoType1 = "Lith_ShellAmmo";
+            ammo1     = addAmmo(owner, ammoType1, 0);
+         }
+      } else {
+         if(ammoType1) {
+            ammoType1 = null;
+            ammo1     = null;
+         }
+      }
+   }
 }
 
 int lith_getRaiseSpeed(Lith_RaiseSpeed speed) {
@@ -308,23 +330,6 @@ action(Weapon) void Lith_A_ReloadFinish() {
    invoker.Lith_ReloadFinish(false);
 }
 
-action(Weapon) void Lith_A_TakeSlot3OptAmmo(int amt = 1) {
-   if(Lith_UTIL.pData(self, pdata_slot3ammo)) {
-      self.TakeInventory("Lith_ShellAmmo", amt, notakeinfinite: true);
-   }
-}
-
-action(Weapon) state Lith_A_JumpIfNoSlot3OptAmmo(statelabel sn = "FireEmpty", int req = 1) {
-   if(!Lith_UTIL.pData(self, pdata_slot3ammo) || CountInv("Lith_ShellAmmo") >= req) {
-      return null;
-   } else {
-      if(sn == "FireEmpty") {
-         lith_a_setInterpolation(true);
-      }
-      return ResolveState(sn);
-   }
-}
-
 action(Weapon) void Lith_A_RecoilUp(double amt) {
    double v = CVar.GetCVar('lith_weapons_recoil', Player).GetFloat() * amt;
    CallACS("Lith_RecoilUp", int(v * FIX));
@@ -413,6 +418,38 @@ action(Weapon) void Lith_FireBullets(double spreadHorz, double spreadVert, int n
    case _tr_slow:   tracerType = null;                    break;
    }
    A_FireBullets(spreadHorz, spreadVert, numBullets, damage, puffType, flags, range, tracerType, 7 + FRandom(-1, 0), tracerX + FRandom(-0.7, 0.7));
+}
+
+action(Weapon) State lith_jumpNoAmmo(int minAmount = 1, stateLabel label = "FireEmpty") {
+   if(invoker.ammoType1 && self.countInv(invoker.ammoType1) < minAmount) {
+      if(label == "FireEmpty") {
+         lith_a_setInterpolation(true);
+      }
+      return resolveState(label);
+   } else {
+      return null;
+   }
+}
+
+action(Weapon) void lith_takeAmmo(int amount = 1) {
+   self.takeInventory(invoker.ammoType1, amount, noTakeInfinite: true);
+}
+
+action(Weapon) State lith_jumpAmmo(int maxAmount, stateLabel label) {
+   if(self.countInv(invoker.ammoType1) >= maxAmount) {
+      return resolveState(label);
+   } else {
+      return null;
+   }
+}
+
+action(Weapon) clearScope int lith_maxInv(class<Inventory> itemType) {
+   let item = findInventory(itemType);
+   if(item) {
+      return item.maxAmount;
+   } else {
+      return getDefaultByType(itemType).maxAmount;
+   }
 }
 
 states(Actor) {

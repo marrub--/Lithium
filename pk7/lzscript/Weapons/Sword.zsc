@@ -85,11 +85,11 @@ FireSR:
    goto FireDone;
 
 AltFire:
-   SORD A 0 A_JumpIfInventory("Lith_SwordCharge", 1, "AltFireSkipSound");
+   SORD A 0 A_JumpIf(countInv("Lith_SwordCharge"), "AltFireSkipSound");
    SORD A 0 A_StartSound("weapons/sword/charge", lch_weapon);
 AltFireSkipSound:
    SORD A 1;
-   SORD A 0 A_JumpIfInventory("Lith_SwordCharge", 0, "AltFireForReal");
+   SORD A 0 A_JumpIf(countInv("Lith_SwordCharge") == lith_maxInv("Lith_SwordCharge"), "AltFireForReal");
    SORD A 0 {self.GiveInventory("Lith_SwordCharge", 1);}
    SORD A 0 A_Refire;
    goto ReadySelector;

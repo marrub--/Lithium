@@ -21,6 +21,7 @@ default
    Weapon.SlotNumber 7;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/cannon/draw";
+   Weapon.AmmoType "Lith_CannonAmmo";
    Inventory.AltHudIcon "BFUGA0";
 
    +WEAPON.NOAUTOFIRE
@@ -40,7 +41,7 @@ action(Weapon) State Lith_A_GTFO()
 action(Weapon) void Lith_A_FirePunct()
 {
    A_AlertMonsters();
-   self.TakeInventory("Lith_CannonAmmo", 2, notakeinfinite: true);
+   lith_takeAmmo(2);
    A_GunFlash("DummyFlash");
    CallACS("Lith_PunctuatorFire", 0);
 }
@@ -48,7 +49,7 @@ action(Weapon) void Lith_A_FirePunct()
 action(Weapon) void Lith_A_FireCannonBig()
 {
    A_GunFlash("DummyFlash");
-   self.TakeInventory("Lith_CannonAmmo", 2, notakeinfinite: true);
+   lith_takeAmmo(2);
    A_StartSound("weapons/cannon/firebig", lch_weapon);
    A_Recoil(4);
    Lith_A_RecoilUp(4);
@@ -59,7 +60,7 @@ action(Weapon) void Lith_A_FireCannonBig()
 action(Weapon) void Lith_A_FireCannonSmall()
 {
    A_GunFlash("DummyFlash");
-   self.TakeInventory("Lith_CannonAmmo", 1, notakeinfinite: true);
+   lith_takeAmmo(1);
    A_StartSound("weapons/cannon/fire", lch_weapon);
    A_Recoil(2);
    Lith_A_RecoilUp(2);
@@ -76,7 +77,7 @@ action(Weapon) void Lith_A_FireDarkMatter()
 
 action(Weapon) void Lith_A_FireOmegaRail()
 {
-   self.TakeInventory("Lith_CannonAmmo", 2, notakeinfinite: true);
+   lith_takeAmmo(2);
    A_GunFlash("DummyFlash");
    A_RailAttack(500, 0, false, "", "", RGF_SILENT, 0, "Lith_OmegaRailDummy", 0, 0, 0, 0, 0.9, 0, "Lith_OmegaRailBeam", -19);
    A_FireProjectile("Lith_OmegaRailHax", 0, false, 0, -19);
@@ -115,7 +116,7 @@ Fire:
    #### A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_OmegaRail), "FireRail");
    #### A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_PunctCannon), "FirePunct");
    #### A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_DarkCannon), "FireDark");
-   #### A 0 A_JumpIf(CountInv("Lith_CannonAmmo") < 1, "FireEmpty");
+   #### A 0 lith_jumpNoAmmo;
    CNNG C 1 bright offset(0, 48);
    CNNG C 1 bright offset(0, 57) Lith_A_FireCannonSmall;
    CNNG C 1 bright offset(0, 55);
@@ -149,7 +150,7 @@ FireDark:
    DCNG KKKKLLLLLLLAAAAAAAAA 1 offset(0, 32) A_ReFire;
    goto ReadySelector;
 FireRail:
-   #### A 0 A_JumpIf(CountInv("Lith_CannonAmmo") < 2, "FireEmpty");
+   #### A 0 lith_jumpNoAmmo(2);
    CNNG A 5 offset(-1, 32) A_StartSound("weapons/rail/charge", lch_weapon2);
    CNNG A 5 offset(0, 32);
    CNNG A 5 offset(1, 32);
@@ -159,7 +160,7 @@ FireRail:
    CNNG A 5 offset(1, 33);
    CNNG A 5 offset(0, 33);
 FireRailLoop:
-   #### A 0 A_JumpIf(CountInv("Lith_CannonAmmo") < 2, "ReadySelector");
+   #### A 0 lith_jumpNoAmmo(2, "ReadySelector");
    CNNG A 1 offset(0, 34);
    CNNG A 1 offset(0, 35);
    CNNG A 1 bright offset(0, 45);
@@ -174,9 +175,9 @@ FireRailLoop:
    CNNG AAAAAA 1 offset(0, 32) A_ReFire("FireRailLoop");
    goto ReadySelector;
 FirePunct:
-   #### A 0 A_JumpIf(CountInv("Lith_CannonAmmo") < 2, "FireEmpty");
+   #### A 0 lith_jumpNoAmmo(2);
    #### # 0 A_StartSound("weapons/punct/fire", lch_weapon);
-   #### # 0 A_JumpIfInventory("Lith_WeaponScopedToken", 1, "FirePunct_Scoped");
+   #### # 0 A_JumpIf(countInv("Lith_WeaponScopedToken"), "FirePunct_Scoped");
    CNNG A 3;
    CNNG A 1 bright offset(0, 36);
    CNNG B 1 bright offset(0, 38);
@@ -237,7 +238,7 @@ AltFire:
    #### A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_OmegaRail), "Ready");
    #### A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_DarkCannon), "Ready");
    #### A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_PunctCannon), "ScopeToggle");
-   #### A 0 A_JumpIf(CountInv("Lith_CannonAmmo") < 2, "FireEmpty");
+   #### A 0 lith_jumpNoAmmo(2);
    CNNG A 10 A_StartSound("weapons/cannon/prepare", lch_weapon2);
    CNNG A 1 bright;
    CNNG A 1 bright offset(-1, 33);

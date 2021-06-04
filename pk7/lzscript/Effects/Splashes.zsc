@@ -73,7 +73,7 @@ class Lith_BloodSplashLarge : Lith_WaterSplashLarge
 {
    default
    {
-      Translation "200:207=184:191", "240:247=41:47" /*, "192:207=32:47" */;
+      Translation "Lith_BloodSplashLarge";
       Alpha 0.9;
    }
 
@@ -182,7 +182,7 @@ class Lith_SludgeSplashLarge : Lith_NukageSplashLarge
 {
    default
    {
-      Translation "112:127=64:79";
+      Translation "Lith_SludgeSplashLarge";
       Alpha 1.0;
    }
 

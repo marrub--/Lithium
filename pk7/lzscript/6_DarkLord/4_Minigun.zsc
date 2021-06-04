@@ -137,6 +137,7 @@ action(Weapon) void Lith_A_MinigunFire()
    Lith_FireBullets(7, 1.7, 2, 7, tracerX: 1);
    Lith_A_RecoilUp(0.15);
    A_Recoil(0.07);
+   Lith_A_Casing("Lith_CasBigHot", 9, 7, 20, frandom(3,5), frandom(1,5), frandom(10,12));
 }
 
 action(Weapon) void Lith_A_MinigunPostFire()
