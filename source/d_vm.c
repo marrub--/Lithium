@@ -304,8 +304,8 @@ void TerminalGUI(u32 tact) {
 
    /* Background */
    PrintRect(0, 0,          twidth, tbottom, 0xFF000000);
-   PrintRect(0, 0,          twidth, 12,      0xFF44000C);
-   PrintRect(0, tbottom-12, twidth, 12,      0xFF44000C);
+   PrintRect(0, 0,          twidth, 12,      0xFF0C0044);
+   PrintRect(0, tbottom-12, twidth, 12,      0xFF0C0044);
 
    /* Top-left text */
    PrintText_str(L(sl_term_sgxline), sf_ltrmfont, CR_RED, 0,1, 0,1);
