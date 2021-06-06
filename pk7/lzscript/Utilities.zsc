@@ -76,6 +76,12 @@ struct Lith_UTIL
    static play int pData(Actor ply, int info, int permutation = 0) {
       return Level.ExecuteSpecial(84, ply, null, false, lsc_pdata, info, permutation);
    }
+
+   static play void stateTick(Actor mo) {
+      if(mo.tics >= 0 && --mo.tics <= 0) {
+         mo.setState(mo.curState.nextState);
+      }
+   }
 }
 
 /* UTILHACK: Urinary Tract Infection-Like Hack (Anal Cock King ed.) */

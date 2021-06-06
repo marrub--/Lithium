@@ -446,7 +446,7 @@ class Lith_ShobonSphere : Inventory
    {
    Spawn:
       TNT1 A 0;
-      SHOB B 0 A_SpawnItemEx("Lith_ItemSprite", 0,0,0, 0,0,0, 0, SXF_SETMASTER|SXF_TRANSFERSPRITEFRAME);
+      SHOB B 0 A_SpawnItemEx("Lith_ItemSprite", flags: SXF_SETMASTER|SXF_TRANSFERSPRITEFRAME);
       TNT1 A 1;
       wait;
    }

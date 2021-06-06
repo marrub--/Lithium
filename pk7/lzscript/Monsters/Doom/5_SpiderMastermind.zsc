@@ -7,22 +7,13 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_SpiderMastermindBulletTrail : Actor
-{
-   default
-   {
-      Alpha       0.8;
-      RenderStyle "Add";
-      Scale       0.6;
-
-      +NOINTERACTION
+class Lith_SpiderMastermindBulletTrail : Lith_IsaacThompsonTrail {
+   default {
+      Scale 0.6;
    }
 
-   states
-   {
-   Spawn:
-      PUFF A 1 A_FadeOut(0.05);
-      wait;
+   override void tick() {
+      a_fadeOut(0.05);
    }
 }
 

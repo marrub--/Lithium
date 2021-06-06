@@ -10,6 +10,7 @@
 #include "lzscript/Effects/Blood.zsc"
 #include "lzscript/Effects/BulletPuff.zsc"
 #include "lzscript/Effects/Casings.zsc"
+#include "lzscript/Effects/Copy.zsc"
 #include "lzscript/Effects/Death.zsc"
 #include "lzscript/Effects/DynamicLights.zsc"
 #include "lzscript/Effects/GunSmoke.zsc"

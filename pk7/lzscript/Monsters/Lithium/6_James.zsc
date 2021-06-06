@@ -7,23 +7,8 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_JamesRevolverTrail : Actor
+class Lith_JamesRevolverTrail : Lith_IsaacThompsonTrail
 {
-   default
-   {
-      Alpha       0.8;
-      RenderStyle "Add";
-      Scale       0.7;
-
-      +NOINTERACTION
-   }
-
-   states
-   {
-   Spawn:
-      PUFF A 1 A_FadeOut;
-      wait;
-   }
 }
 
 class Lith_JamesRevolverBullet : FastProjectile

@@ -7,47 +7,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_FinalizerKill2 : Actor
-{
-   default
-   {
-      Alpha 0.9;
-      RenderStyle "AddStencil";
-      StencilColor "Red";
-
-      +NOINTERACTION
-   }
-
-   states
-   {
-   Spawn:
-      #### # 5;
-      #### # 1 A_FadeOut(0.05);
-      wait;
-   }
-}
-
-class Lith_FinalizerKill : Actor
-{
-   default
-   {
-      RenderStyle "Add";
-
-      +NOINTERACTION
-   }
-
-   states
-   {
-   Spawn:
-      #### # 10;
-      #### # 1 {
-         A_FadeOut(0.05);
-         A_SpawnItemEx("Lith_FinalizerKill2", flags: SXF_NOCHECKPOSITION|SXF_TRANSFERSPRITEFRAME|SXF_TRANSFERSCALE);
-      }
-      wait;
-   }
-}
-
 class Lith_FinalizerEffect : Actor
 {
    default
@@ -113,10 +72,10 @@ class Lith_FinalizerShot : FastProjectile
    Death:
       TNT1 A 0 {
          if(tracer) {
-            if(tracer.bBOSS || double(tracer.health) / tracer.ACS_ScriptCall("Lith_GetFinalizerMaxHealth") > 0.5) {
+            if(tracer.bBOSS || (double(tracer.health) / tracer.ACS_ScriptCall("Lith_GetFinalizerMaxHealth") > 0.5 && tracer.health - 50 > 0)) {
                tracer.A_DamageSelf(50);
             } else {
-               tracer.A_SpawnItemEx("Lith_FinalizerKill", flags: SXF_NOCHECKPOSITION|SXF_TRANSFERSPRITEFRAME|SXF_TRANSFERSCALE);
+               Lith_CopyEffect.create("Lith_FinalizerKill", tracer);
                tracer.ACS_ScriptCall("Lith_MonsterFinalized");
                if(tracer.bBOSSDEATH) tracer.A_BossDeath();
                tracer.destroy();

@@ -35,9 +35,8 @@ static bool GetRifleGrenade(Actor p)
    return !Lith_CombatRifle(p.FindInventory("Lith_CombatRifle")).m_GrenFire;
 }
 
-static void Lith_IonizeFX(Actor mo)
-{
-   mo.A_SpawnItemEx("Lith_IonizedFX", 0,0,0, 0,0,-1, 0, SXF_NOCHECKPOSITION|SXF_TRANSFERSPRITEFRAME|SXF_TRANSFERSCALE);
+static void Lith_IonizeFX(Actor mo) {
+   Lith_CopyEffect.create("Lith_IonizedFx", mo);
 }
 
 static void DelearSprite(Actor mo_)
@@ -81,7 +80,7 @@ static void PoisonFX(Actor mo)
    int dmg = trg ? Lith_UTIL.pData(trg, pdata_attr, at_acc) / 4 : 0;
    mo.A_DamageSelf(10 + dmg, "Poison");
    mo.A_StartSound("weapons/shotgun/poison/acid", lch_body3, attenuation: 0.5);
-   mo.A_SpawnItemEx("Lith_PoisonFX", 0,0,8, flags: SXF_NOCHECKPOSITION|SXF_TRANSFERSPRITEFRAME|SXF_TRANSFERSCALE);
+   Lith_CopyEffect.create("Lith_PoisonFx", mo);
    mo.ACS_ScriptCall("Lith_PoisonFXTicker");
 }
 

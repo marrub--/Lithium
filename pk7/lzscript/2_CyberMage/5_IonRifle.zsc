@@ -66,26 +66,6 @@ class Lith_IonRifleParticle2 : Lith_IonRifleFXBase
    }
 }
 
-class Lith_IonizedFX : Actor
-{
-   default
-   {
-      Alpha 0.8;
-      RenderStyle "AddStencil";
-      StencilColor "Red";
-
-      +NOINTERACTION
-   }
-
-   states
-   {
-   Spawn:
-      #### # 2;
-      #### # 1 A_FadeOut;
-      wait;
-   }
-}
-
 class Lith_Ionized : PowerProtection /* HAH NOT SO PROTECTED NOW ARE YOU */
 {
    default

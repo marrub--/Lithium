@@ -7,26 +7,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_HeavenlyImage : Actor
-{
-   default
-   {
-      Alpha 0.8;
-      RenderStyle "AddStencil";
-      StencilColor "White";
-
-      +NOINTERACTION
-   }
-
-   states
-   {
-   Spawn:
-      #### # 3 light("Lith_HeavenlyImage");
-      #### # 1 light("Lith_HeavenlyImage") A_FadeOut;
-      wait;
-   }
-}
-
 class Lith_WingsOfDeath : Lith_Weapon;
 
 default
@@ -44,8 +24,8 @@ Ready:
    TNT1 A 1 A_WeaponReady(WRF_NOFIRE);
    TNT1 A 0 {
       A_SetBlend("FF FF FF", 0.1, 5);
-      A_SpawnItemEx("Lith_HeavenlyImage", 0,-4,0, -5,-7,1, 0, SXF_TRANSFERSPRITEFRAME|SXF_NOCHECKPOSITION);
-      A_SpawnItemEx("Lith_HeavenlyImage", 0, 4,0, -5, 7,1, 0, SXF_TRANSFERSPRITEFRAME|SXF_NOCHECKPOSITION);
+      Lith_CopyEffect.create("Lith_HeavenlyImage", self, (-4,-4,0), (-5,-7,1));
+      Lith_CopyEffect.create("Lith_HeavenlyImage", self, (-4, 4,0), (-5, 7,1));
       self.GiveInventory("PowerFlight", 1);
       A_AlertMonsters();
       for(let it = BlockThingsIterator.create(self, 1024); it.next();) {

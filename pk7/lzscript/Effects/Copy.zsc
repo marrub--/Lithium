@@ -1,0 +1,204 @@
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison G. Watson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
+class Lith_CopyEffect : Actor abstract {
+   default {
+      +NoBlockmap
+      +NoInteraction
+      +Lith_CopyEffect.UpdatePos
+      +Lith_CopyEffect.UpdateStates
+   }
+
+   private readOnly uint m_flags;
+
+   flagDef UpdatePos:    m_flags, 0;
+   flagDef UpdateStates: m_flags, 1;
+
+   static Actor create(class<Lith_CopyEffect> ty, Actor mo, vector3 vel = (0.0, 0.0, 0.0), vector3 ofs = (0.0, 0.0, 0.0)) {
+      bool anyVel = vel.x || vel.y || vel.z;
+      bool anyOfs = ofs.x || ofs.y || ofs.z;
+
+      if(anyVel || anyOfs) {
+         double s = sin(mo.angle), c = cos(mo.angle);
+         if(anyVel) {
+            double vx = vel.x, vy = vel.y;
+            vel.x = vx * c + vy * s;
+            vel.y = vx * s - vy * c;
+         }
+         if(anyOfs) {
+            double ox = ofs.x, oy = ofs.y;
+            ofs.x = ox * c + oy * s;
+            ofs.y = ox * s - oy * c;
+         }
+      }
+
+      let newMo = Lith_CopyEffect(spawn(ty, mo.pos + ofs));
+      newMo.vel = vel;
+      newMo.master = mo;
+      newMo.lith_setToMaster();
+      return newMo;
+   }
+
+   protected void lith_setToMaster() {
+      if(!master) {
+         destroy();
+         return;
+      }
+
+      frame  = master.frame;
+      sprite = master.sprite;
+      scale  = master.scale;
+
+      warp(master, flags: WARPF_NOCHECKPOSITION | WARPF_INTERPOLATE);
+   }
+
+   override void tick() {
+      if(bUpdateStates) {
+         Lith_UTIL.stateTick(self);
+      }
+      if(bUpdatePos) {
+         lith_setToMaster();
+      } else if(vel.x || vel.y || vel.z) {
+         setOrigin(pos + vel, true);
+      }
+   }
+
+   states {
+   Spawn:
+      #### # -1;
+      stop;
+   }
+}
+
+class Lith_StaticEffect : Lith_CopyEffect {
+   default {
+      Alpha       1.0;
+      RenderStyle "Fuzzy";
+      +Bright
+      -Lith_CopyEffect.UpdateStates
+   }
+}
+
+class Lith_ShockFx : Lith_CopyEffect {
+   default {
+      Alpha        0.7;
+      RenderStyle  "AddStencil";
+      StencilColor "LightBlue";
+      +Bright
+      -Lith_CopyEffect.UpdatePos
+   }
+
+   states {
+   Spawn:
+      #### # 1;
+      #### # 1 a_fadeOut;
+      wait;
+   }
+}
+
+class Lith_FinalizerKill : Lith_CopyEffect {
+   default {
+      RenderStyle "Add";
+      -Lith_CopyEffect.UpdatePos
+   }
+
+   states {
+   Spawn:
+      #### # 10;
+      #### # 1 {
+         Lith_CopyEffect.create("Lith_FinalizerKill2", self);
+         a_fadeOut(0.05);
+      }
+      wait;
+   }
+}
+
+class Lith_FinalizerKill2 : Lith_FinalizerKill {
+   default {
+      Alpha        0.9;
+      RenderStyle  "AddStencil";
+      StencilColor "Red";
+   }
+
+   states {
+   Spawn:
+      #### # 5;
+      #### # 1 a_fadeOut(0.05);
+      wait;
+   }
+}
+
+class Lith_IonizedFx : Lith_CopyEffect {
+   default {
+      Alpha        0.8;
+      RenderStyle  "AddStencil";
+      StencilColor "Red";
+   }
+
+   states {
+   Spawn:
+      #### # 2;
+      #### # 1 a_fadeOut;
+      wait;
+   }
+}
+
+class Lith_PoisonFx : Lith_CopyEffect {
+   default {
+      Alpha        0.8;
+      RenderStyle  "AddStencil";
+      StencilColor "Green";
+   }
+
+   states {
+   Spawn:
+      #### # 2;
+      #### # 1 a_fadeOut;
+      wait;
+   }
+}
+
+class Lith_HeavenlyImage : Lith_CopyEffect {
+   default {
+      Alpha        0.8;
+      RenderStyle  "AddStencil";
+      StencilColor "White";
+      -Lith_CopyEffect.UpdatePos
+   }
+
+   override void postBeginPlay() {
+      super.postBeginPlay();
+      Lith_CopyEffect.create("Lith_StaticEffect", self);
+   }
+
+   states {
+   Spawn:
+      #### # 3 light("Lith_HeavenlyImage");
+      #### # 1 light("Lith_HeavenlyImage") a_fadeOut;
+      wait;
+   }
+}
+
+class Lith_PhantomTeleportFx : Lith_CopyEffect {
+   default {
+      Alpha        0.8;
+      RenderStyle  "Stencil";
+      StencilColor "Black";
+      -Lith_CopyEffect.UpdatePos
+   }
+
+   states {
+   Spawn:
+      #### # 3;
+      #### # 1 a_fadeOut;
+      wait;
+   }
+}
+
+/* EOF */

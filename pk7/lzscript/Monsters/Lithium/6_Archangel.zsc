@@ -7,48 +7,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_StaticEffect : Actor
-{
-   default
-   {
-      Alpha       1;
-      RenderStyle "Fuzzy";
-
-      +NOBLOCKMAP
-      +NOINTERACTION
-   }
-
-   static void Create(Actor mo)
-   {
-      Spawn("Lith_StaticEffect", mo.Pos).Master = mo;
-   }
-
-   void Lith_SetStuff()
-   {
-      if(!Master) {Destroy(); return;}
-
-      Frame  = Master.Frame;
-      Sprite = Master.Sprite;
-      Scale  = Master.Scale;
-
-      Warp(Master, flags: WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE);
-   }
-
-   override void PostBeginPlay()
-   {
-      Super.PostBeginPlay();
-      Lith_SetStuff();
-   }
-
-   override void Tick()
-   {
-      Super.Tick();
-      Lith_SetStuff();
-   }
-
-   states {Spawn: #### # -1 bright; stop;}
-}
-
 class Lith_ArchangelStaticBall : Actor
 {
    default
@@ -71,7 +29,7 @@ class Lith_ArchangelStaticBall : Actor
          Angle = FRandom(0, 359);
          Vel.Z = 1;
       }
-      Lith_StaticEffect.Create(self);
+      Lith_CopyEffect.create("Lith_StaticEffect", self);
    }
 
    override void Tick()
@@ -128,7 +86,7 @@ default
 override void PostBeginPlay()
 {
    Super.PostBeginPlay();
-   Lith_StaticEffect.Create(self);
+   Lith_CopyEffect.create("Lith_StaticEffect", self);
 }
 
 override void Tick()
@@ -138,8 +96,8 @@ override void Tick()
    {
       if(Level.TotalTime % 6 == 0)
          Spawn("Lith_ArchangelStaticBall", Pos + (FRandom(-64, 64), FRandom(-64, 64), FRandom(0, 16)));
-      A_SpawnItemEx("Lith_HeavenlyImage", 0,-4,0, -5,-7,1, 0, SXF_TRANSFERSPRITEFRAME|SXF_NOCHECKPOSITION);
-      A_SpawnItemEx("Lith_HeavenlyImage", 0, 4,0, -5, 7,1, 0, SXF_TRANSFERSPRITEFRAME|SXF_NOCHECKPOSITION);
+      Lith_CopyEffect.create("Lith_HeavenlyImage", self, (-4,-4,0), (-5,-7,1));
+      Lith_CopyEffect.create("Lith_HeavenlyImage", self, (-4, 4,0), (-5, 7,1));
    }
 }
 

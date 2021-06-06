@@ -7,26 +7,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_PoisonFX : Actor
-{
-   default
-   {
-      Alpha 0.8;
-      RenderStyle "AddStencil";
-      StencilColor "Green";
-
-      +NOINTERACTION
-   }
-
-   states
-   {
-   Spawn:
-      #### # 2;
-      #### # 1 A_FadeOut;
-      wait;
-   }
-}
-
 class Lith_PoisonFXTimer : Inventory {default {Inventory.MaxAmount 20;}}
 class Lith_PoisonFXReset : Inventory {default {Inventory.MaxAmount 1;}}
 

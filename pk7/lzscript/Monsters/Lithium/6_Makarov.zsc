@@ -7,23 +7,8 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_MakarovShotgunTrail : Actor
+class Lith_MakarovShotgunTrail : Lith_IsaacThompsonTrail
 {
-   default
-   {
-      Alpha       0.5;
-      RenderStyle "Add";
-      Scale       0.5;
-
-      +NOINTERACTION
-   }
-
-   states
-   {
-   Spawn:
-      PUFF A 1 A_FadeOut;
-      wait;
-   }
 }
 
 class Lith_MakarovShotgunBullet : FastProjectile

@@ -7,10 +7,8 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_IsaacThompsonTrail : Actor
-{
-   default
-   {
+class Lith_IsaacThompsonTrail : Actor {
+   default {
       Alpha       0.8;
       RenderStyle "Add";
       Scale       0.8;
@@ -18,11 +16,14 @@ class Lith_IsaacThompsonTrail : Actor
       +NOINTERACTION
    }
 
-   states
-   {
+   override void tick() {
+      a_fadeOut();
+   }
+
+   states {
    Spawn:
-      PUFF A 1 A_FadeOut;
-      wait;
+      PUFF A -1;
+      stop;
    }
 }
 

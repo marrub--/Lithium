@@ -64,7 +64,7 @@ static void PhantomOut(Actor mo) {
 }
 
 static void PhantomTeleport(Actor mo) {
-   mo.A_SpawnItemEx("Lith_PhantomTeleportFX", 0,0,0, 0,0,0.5, 0, SXF_TRANSFERSPRITEFRAME);
+   Lith_CopyEffect.create("Lith_PhantomTeleportFx", mo, vel: (0.0, 0.0, 0.5));
 }
 
 static void PrepareForRagnarok(Actor mo)

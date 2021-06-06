@@ -7,27 +7,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_ShockFX : Actor
-{
-   default
-   {
-      Alpha 0.5;
-      RenderStyle "AddStencil";
-      StencilColor "LightBlue";
-
-      +BRIGHT
-      +NOINTERACTION
-   }
-
-   states
-   {
-   Spawn:
-      #### # 1;
-      #### # 1 A_FadeOut;
-      wait;
-   }
-}
-
 class Lith_ShockEffectPuff : Lith_Dummy
 {
    default
@@ -114,7 +93,7 @@ class Lith_ShockPuff : Lith_BulletPuff
 
    void Lith_A_Shock() {
       tracer.A_DamageSelf(5, "Electric", 0, "None", src: AAPTR_TARGET);
-      tracer.A_SpawnItemEx("Lith_ShockFX", flags: SXF_NOCHECKPOSITION|SXF_TRANSFERSPRITEFRAME|SXF_TRANSFERSCALE);
+      Lith_CopyEffect.create("Lith_ShockFx", tracer);
    }
 
    states
