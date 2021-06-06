@@ -133,12 +133,13 @@
 * Combine_Kegan      * Ideas for stuff, shitposting
 * DavidPH            * Lots of help with a lot of things,
 *                    * GDCC, and generally cool person
+* Dr Cosmobyte       * Sprite finding
 * JetPlane           * Emotional support twink
-* Ribonucleic Asshat * Emotional support twink (female)
 * Jimmy              * Really cool dude
 * Kate Fox           * My biggest inspiration.
 * Kyle873            * said a nice thing i think maybe. Also inspiration.
 * Marty Kirra        * Cool person
+* Ribonucleic Asshat * Emotional support twink (female)
 * TerminusEst13      * Help with finding some sprites to work with
 * Wartorn            * Help with HUD design, emotional support
 * WildWeasel         * Help with making fonts, suggestions for HUD
@@ -153,18 +154,21 @@
 
                              * Testing *
 
-* Ancient Chaos Wizard * General testing
-* Ikazu-san            * General testing
-* MENTHA               * General testing
-* Sgt. Shivers         * General testing
-* Sledge               * General testing
-* Yholl                * General testing
-* Zombie               * General testing
-* a1337spy             * General testing
-* anomalouslymandatory * Bug reports, play-testing
-* nax                  * General testing
-* silentw              * General testing
-* wildweasel           * General testing
+* Ancient Chaos Wizard
+* Ikazu-san
+* MENTHA
+* RiboNucleic Asshat
+* Sgt. Shivers
+* Sledge
+* Yholl
+* Zombie
+* a1337spy
+* anomalouslymandatory
+* nax
+* silentw
+* wildweasel
+
+Thanks so much to all of you!
 
                           * Cannon sprites *
 
@@ -186,15 +190,6 @@
 * torridGristle * Assault rifle sprite
 * Marrub        * Redraw
 
-                              * Fonts *
-
-* IBM         * bigupper
-* Jimmy       * lmidfont and smallfont
-* littlelimit * 美咲ゴシックと明朝 https://littlelimit.net/misaki.htm
-*             * k6x8 https://littlelimit.net/k6x8.htm
-* 小山壽久    * jiskan16
-* 作者です    * areaname
-
                       * Laser Shotgun sprites *
 
 * Mike12                      * Vented shotgun
@@ -212,10 +207,27 @@
 * Captain J & Turbo * Whole sprite
 * Sgt. Shivers      * Animation
 
+                      * 4-Bore Shotgun sprites *
+
+* JoeyTD  * Center frame base
+* Batandy * Reload animation base
+
+                              * Fonts *
+
+* IBM         * bigupper
+* Jimmy       * lmidfont and smallfont
+* littlelimit * 美咲ゴシックと明朝 https://littlelimit.net/misaki.htm
+*             * k6x8 https://littlelimit.net/k6x8.htm
+* 小山壽久    * jiskan16
+* 作者です    * areaname
+
                       ** LOOKING FOR CREDITS **
 
 * Barrel explosion sprites
 * ljtrmfont source, apparently by 橘浩志 and 今村俊幸 but I don't know
   where to find it (the font is JF Dot K12 Bold)
+  ljtrmfontの元：外れに橘浩志さんと今村俊幸さんの名前がありますけど、
+  起源がよくわからないでして、見つかりませんです。（JFドットK12から渡
+  した）
 
 EOF

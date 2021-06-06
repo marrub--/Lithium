@@ -7,18 +7,15 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_LampSpark : Actor
-{
-   default
-   {
+class Lith_LampSpark : Actor {
+   default {
       Radius 6;
       Height 6;
       RenderStyle "Add";
-      +NOINTERACTION
+      +NoInteraction
    }
 
-   States
-   {
+   states {
    Spawn:
       SPRK A 0;
       SPRK A 0 {scale.x *= randompick(-1, 1);}

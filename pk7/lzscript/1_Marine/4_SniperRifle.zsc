@@ -7,38 +7,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_SniperRifleMagazine : Lith_DroppedMagazine
-{
-   default
-   {
-      Scale 0.7;
-      Mass 150;
-   }
-
-   states
-   {
-   Spawn1:
-      MGZN L -1;
-      stop;
-   }
-}
-
-class Lith_SniperRifleMagazine2 : Lith_SniperRifleMagazine
-{
-   default
-   {
-      BounceSound "weapons/magbouncef";
-      Mass 155;
-   }
-
-   states
-   {
-   Spawn1:
-      MGZN M -1;
-      stop;
-   }
-}
-
 class Lith_SniperRifle : Lith_MWeapon;
 
 default

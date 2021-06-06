@@ -7,18 +7,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_MinigunMagazine : Lith_DroppedMagazine {
-   default {
-      Mass 350;
-   }
-
-   states {
-   Spawn1:
-      MGZN N -1;
-      stop;
-   }
-}
-
 class Lith_Minigun : Lith_DWeapon;
 
 default
@@ -112,7 +100,7 @@ action(Weapon) state Lith_A_MinigunReady(statelabel lb, statelabel l)
       else
       {
          A_StartSound("weapons/minigun/empty", lch_dryweapon);
-         A_WeaponOffset(FRandom(2, 3), FRandom(32, 34), WOF_INTERPOLATE);
+         A_OverlayOffset(_psp_weapon, FRandom(2, 3), FRandom(32, 34), WOF_INTERPOLATE);
          return null;
       }
    }
@@ -130,7 +118,7 @@ action(Weapon) void Lith_A_MinigunFire()
    Lith_A_MagIncr();
    A_AlertMonsters();
    A_StartSound("weapons/minigun/fire", lch_weapon);
-   A_WeaponOffset(FRandom(3, 8), FRandom(34, 39), WOF_INTERPOLATE);
+   A_OverlayOffset(_psp_weapon, FRandom(3, 8), FRandom(34, 39), WOF_INTERPOLATE);
    A_GunFlash("DummyFlash");
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
    Lith_A_GunSmokeSmall(1.9);

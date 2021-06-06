@@ -55,37 +55,6 @@ class Lith_PlasmaPistolShot : Actor
    }
 }
 
-class Lith_PistolMagazine : Lith_DroppedMagazine
-{
-   default
-   {
-      Scale 0.7;
-   }
-
-   states
-   {
-   Spawn1:
-      MGZN H -1;
-      stop;
-   }
-}
-
-class Lith_PistolMagazine2 : Lith_PistolMagazine
-{
-   default
-   {
-      BounceSound "weapons/magbouncef";
-      Mass 145;
-   }
-
-   states
-   {
-   Spawn1:
-      MGZN I -1;
-      stop;
-   }
-}
-
 class Lith_Pistol : Lith_MWeapon;
 
 default

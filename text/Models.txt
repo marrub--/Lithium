@@ -18,12 +18,18 @@ All {
 Tracer {
    PitchFromMomentum;
 
-   Scale 16.0 1.0 32.0;
-
    Model 0 "square.obj";
    Skin  0 "tracer.png";
 
    FrameIndex "____" "A" 0 0;
+}
+
+TracerSizeNrm {
+   Scale 16.0 1.0 32.0;
+}
+
+TracerSizeBig {
+   Scale 24.0 1.0 40.0;
 }
 
 Spark {
@@ -45,8 +51,9 @@ Blood {
    FrameIndex "____" "A" 0 0;
 }
 
-\#BulletTracer     : All Tracer {}
-\#BulletTracerSlow : All Tracer {}
+\#BulletTracer     : All TracerSizeNrm Tracer {}
+\#BulletTracerSlow : All TracerSizeNrm Tracer {}
+\#BulletTracerBig  : All TracerSizeBig Tracer {}
 
 \#BulletRicochetSpark : All Spark
    {Skin 0 "spark1.png"; FrameIndex "____" "A" 0 0;}

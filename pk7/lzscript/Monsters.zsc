@@ -103,49 +103,47 @@ class Lith_M_Magic5   :Lith_MResist{default{DamageFactor "Magic",    0.1;}}
 class Lith_M_Melee5   :Lith_MResist{default{DamageFactor "Melee",    0.1;}}
 class Lith_M_Shrapnel5:Lith_MResist{default{DamageFactor "Shrapnel", 0.1; DamageFactor "Explosion", 0.1;}}
 
-class Lith_MonsterBarrier : Actor
-{
-   default
-   {
+class Lith_MonsterBarrier : Actor {
+   default {
       RenderStyle "Add";
       XScale 0.3;
       YScale 0.6;
-      VSpeed 2;
 
-      +NOTIMEFREEZE
-      +NOINTERACTION
+      +NoTimeFreeze
+      +NoInteraction
    }
 
-   states
-   {
+   void lith_moveUp() {
+      setOrigin((pos.xy, pos.z + 2.0), true);
+   }
+
+   override void tick() {
+      a_fadeOut();
+      lith_moveUp();
+   }
+
+   states {
    Spawn:
-      LBAR A 1;
-   SpawnLoop:
-      LBAR A 1 A_FadeOut;
-      loop;
+      LBAR A -1;
+      stop;
    }
 }
 
-class Lith_MonsterHeptaura : Actor
-{
-   default
-   {
-      RenderStyle "Add";
+class Lith_MonsterHeptaura : Lith_MonsterBarrier {
+   default {
       XScale 0.2;
       YScale 0.4;
-      VSpeed 2;
-
-      +NOTIMEFREEZE
-      +NOINTERACTION
    }
 
-   states
-   {
+   override void tick() {
+      a_fadeOut(fRandom(0.06, 0.08));
+      lith_moveUp();
+   }
+
+   states {
    Spawn:
-      LBAR B 1;
-   SpawnLoop:
-      LBAR B 1 A_FadeOut(frandom(0.06, 0.08));
-      loop;
+      LBAR B -1;
+      stop;
    }
 }
 

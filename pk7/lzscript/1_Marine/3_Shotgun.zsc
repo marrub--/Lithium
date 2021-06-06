@@ -7,38 +7,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_GaussMagazine : Lith_DroppedMagazine
-{
-   default
-   {
-      Mass 150;
-      Scale 0.7;
-   }
-
-   states
-   {
-   Spawn1:
-      MGZN D -1;
-      stop;
-   }
-}
-
-class Lith_GaussMagazine2 : Lith_GaussMagazine
-{
-   default
-   {
-      BounceSound "weapons/magbouncef";
-      Mass 155;
-   }
-
-   states
-   {
-   Spawn1:
-      MGZN E -1;
-      stop;
-   }
-}
-
 class Lith_ShotgunRailPuff : Actor
 {
    default

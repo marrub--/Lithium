@@ -159,6 +159,9 @@ class Lith_BulletTracerSlow : Lith_BulletTracer {
    }
 }
 
+class Lith_BulletTracerBig : Lith_BulletTracerSlow {
+}
+
 class Lith_BulletRicochetSpark : Actor
 {
    default

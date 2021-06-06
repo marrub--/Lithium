@@ -40,6 +40,7 @@ enum Lith_Oscillate {
 enum Lith_TracerType {
    _tr_normal,
    _tr_slow,
+   _tr_big,
    _tr_none
 }
 
@@ -412,10 +413,10 @@ action(Weapon) void Lith_FixedBullets(int numBullets, int damage, int flags = 0,
 action(Weapon) void Lith_FireBullets(double spreadHorz, double spreadVert, int numBullets, int damage, int flags = 0, class<Actor> puffType = "Lith_BulletPuff", double tracerX = 0, double range = 8192, Lith_TracerType tracer = _tr_normal) {
    class<Actor> tracerType;
    switch(tracer) {
-   default:
    case _tr_normal: tracerType = "Lith_BulletTracer";     break;
    case _tr_slow:   tracerType = "Lith_BulletTracerSlow"; break;
-   case _tr_slow:   tracerType = null;                    break;
+   case _tr_big:    tracerType = "Lith_BulletTracerBig";  break;
+   case _tr_none:   tracerType = null;                    break;
    }
    A_FireBullets(spreadHorz, spreadVert, numBullets, damage, puffType, flags, range, tracerType, 7 + FRandom(-1, 0), tracerX + FRandom(-0.7, 0.7));
 }

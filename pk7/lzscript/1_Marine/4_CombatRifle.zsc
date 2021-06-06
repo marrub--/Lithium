@@ -51,37 +51,6 @@ class Lith_LaserRiflePuff : Actor
    }
 }
 
-class Lith_CombatRifleMagazine : Lith_DroppedMagazine
-{
-   default
-   {
-      Scale 0.7;
-   }
-
-   states
-   {
-   Spawn1:
-      MGZN J -1;
-      stop;
-   }
-}
-
-class Lith_CombatRifleMagazine2 : Lith_CombatRifleMagazine
-{
-   default
-   {
-      BounceSound "weapons/magbouncef";
-      Mass 145;
-   }
-
-   states
-   {
-   Spawn1:
-      MGZN K -1;
-      stop;
-   }
-}
-
 class Lith_CombatRifle : Lith_MWeapon;
 
 default

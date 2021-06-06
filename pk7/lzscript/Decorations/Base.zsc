@@ -7,10 +7,8 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_SwitchableDecor : Actor
-{
-   default
-   {
+class Lith_SwitchableDecor : Actor {
+   default {
       Mass int.max;
       Activation THINGSPEC_Default | THINGSPEC_NoDeathSpecial | THINGSPEC_Switch | THINGSPEC_Deactivate;
       Lith_SwitchableDecor.Volume 1;
@@ -26,29 +24,27 @@ class Lith_SwitchableDecor : Actor
    property Noise: m_IdleNoise;
    property Volume: m_Volume;
 
-   virtual void Lith_Active()
-   {
+   virtual void Lith_Active() {
       if(m_IdleNoise)
          A_StartSound(m_IdleNoise, lch_body, CHANF_LOOP, m_Volume, ATTN_STATIC);
    }
 
-   virtual void Lith_Inactive() {A_StopSound(lch_body);}
+   virtual void Lith_Inactive() {
+      A_StopSound(lch_body);
+   }
 
-   override void PostBeginPlay()
-   {
+   override void PostBeginPlay() {
       Super.PostBeginPlay();
       Lith_Active();
    }
 
-   override void Die(Actor source, Actor inflictor, int dmgflags)
-   {
+   override void Die(Actor source, Actor inflictor, int dmgflags) {
       Super.Die(source, inflictor, dmgflags);
       bUSESPECIAL = false;
       Lith_Inactive();
    }
 
-   override void Activate(Actor mo)
-   {
+   override void Activate(Actor mo) {
       if(health > 0) {
          Lith_Active();
          A_StartSound("amb/turnon", lch_body2);
@@ -56,8 +52,7 @@ class Lith_SwitchableDecor : Actor
       }
    }
 
-   override void Deactivate(Actor mo)
-   {
+   override void Deactivate(Actor mo) {
       if(health > 0) {
          Lith_Inactive();
          A_StartSound("amb/turnoff", lch_body2);
@@ -66,60 +61,50 @@ class Lith_SwitchableDecor : Actor
    }
 }
 
-class Lith_DestructableSwitchDecor : Lith_SwitchableDecor
-{
-   default
-   {
+class Lith_DestructableSwitchDecor : Lith_SwitchableDecor {
+   default {
       +SHOOTABLE
       +NOBLOOD
       +NOTAUTOAIMED
    }
 }
 
-class Lith_FlareDecor : Lith_DestructableSwitchDecor
-{
+class Lith_FlareDecor : Lith_DestructableSwitchDecor {
    private meta class<Actor> m_Type;
    private Actor m_Flare;
 
    property Type: m_Type;
 
-   override void Lith_Active()
-   {
+   override void Lith_Active() {
       Super.Lith_Active();
       m_Flare = Spawn(m_Type, pos);
       m_Flare.master = self;
    }
 
-   override void Lith_Inactive()
-   {
+   override void Lith_Inactive() {
       Super.Lith_Inactive();
       if(m_Flare) m_Flare.destroy();
    }
 }
 
-class Lith_DecorFlare : Actor
-{
-   default
-   {
+class Lith_DecorFlare : Actor {
+   default {
       Radius 2;
       Renderstyle "Add";
       Alpha 0.5;
-      +NOTONAUTOMAP
-      +NOINTERACTION
-      +FORCEXYBILLBOARD
+      +NotOnAutoMap
+      +NoInteraction
+      +ForceXyBillboard
    }
 
-   states
-   {
-   SpawnLoop:
-      #### # 1 A_Warp(AAPTR_MASTER, 0, 0, height, 0, WARPF_COPYINTERPOLATION | WARPF_NOCHECKPOSITION);
-      wait;
+   override void tick() {
+      a_warp(AAPTR_MASTER, 0, 0, height, 0, WARPF_COPYINTERPOLATION | WARPF_NOCHECKPOSITION);
    }
 }
 
-class Lith_DecorFlareB : Lith_DecorFlare {states {Spawn: BLGL A 0; goto SpawnLoop;}}
-class Lith_DecorFlareG : Lith_DecorFlare {states {Spawn: GRGL A 0; goto SpawnLoop;}}
-class Lith_DecorFlareR : Lith_DecorFlare {states {Spawn: RDGL A 0; goto SpawnLoop;}}
-class Lith_DecorFlareY : Lith_DecorFlare {states {Spawn: YLGL A 0; goto SpawnLoop;}}
+class Lith_DecorFlareB : Lith_DecorFlare {states {Spawn: BLGL A -1; stop;}}
+class Lith_DecorFlareG : Lith_DecorFlare {states {Spawn: GRGL A -1; stop;}}
+class Lith_DecorFlareR : Lith_DecorFlare {states {Spawn: RDGL A -1; stop;}}
+class Lith_DecorFlareY : Lith_DecorFlare {states {Spawn: YLGL A -1; stop;}}
 
 /* EOF */

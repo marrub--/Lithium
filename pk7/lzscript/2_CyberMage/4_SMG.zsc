@@ -86,56 +86,6 @@ class Lith_SMGTracer3 : Actor
    }
 }
 
-class Lith_SMGMagazine : Lith_DroppedMagazine
-{
-   default
-   {
-      Scale 0.7;
-   }
-
-   states
-   {
-   Spawn1:
-      MGZN F -1;
-      stop;
-   }
-}
-
-class Lith_SMGMagazine2 : Lith_SMGMagazine
-{
-   default
-   {
-      BounceSound "weapons/magbouncef";
-   }
-
-   states
-   {
-   Spawn1:
-      MGZN G -1;
-      stop;
-   }
-}
-
-class Lith_SMGBarrel : Lith_DroppedMagazine
-{
-   default
-   {
-      BounceSound "weapons/rifle/grenadebounce";
-   }
-
-   void Lith_A_EmitSteam()
-   {
-      A_SpawnItemEx("Lith_RifleGrenadeSmoke", flags: SXF_TRANSFERPOINTERS);
-   }
-
-   states
-   {
-   Spawn1:
-      MGZN A 3 Lith_A_EmitSteam;
-      loop;
-   }
-}
-
 class Lith_SMGHeat : Inventory {default {Inventory.MaxAmount 500;}}
 
 class Lith_SMG : Lith_CWeapon;

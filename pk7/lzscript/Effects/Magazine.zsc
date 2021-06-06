@@ -7,10 +7,136 @@
  * ---------------------------------------------------------------------------|
  */
 
+class Lith_PistolMagazine : Lith_DroppedMagazine {
+   default {
+      Scale 0.7;
+   }
+
+   states {Spawn1: MGZN H -1; stop;}
+}
+
+class Lith_PistolMagazine2 : Lith_PistolMagazine {
+   default {
+      BounceSound "weapons/magbouncef";
+      Mass 145;
+   }
+
+   states {Spawn1: MGZN I -1; stop;}
+}
+
+class Lith_CombatRifleMagazine : Lith_DroppedMagazine {
+   default {
+      Scale 0.7;
+   }
+
+   states {Spawn1: MGZN J -1; stop;}
+}
+
+class Lith_CombatRifleMagazine2 : Lith_CombatRifleMagazine {
+   default {
+      BounceSound "weapons/magbouncef";
+      Mass 145;
+   }
+
+   states {Spawn1: MGZN K -1; stop;}
+}
+
+class Lith_GaussMagazine : Lith_DroppedMagazine {
+   default {
+      Mass 150;
+      Scale 0.7;
+   }
+
+   states {Spawn1: MGZN D -1; stop;}
+}
+
+class Lith_GaussMagazine2 : Lith_GaussMagazine {
+   default {
+      BounceSound "weapons/magbouncef";
+      Mass 155;
+   }
+
+   states {Spawn1: MGZN E -1; stop;}
+}
+
+class Lith_MinigunMagazine : Lith_DroppedMagazine {
+   default {
+      BounceSound "weapons/magbouncef";
+      Mass 350;
+   }
+
+   states {Spawn1: MGZN N -1; stop;}
+}
+
+class Lith_SniperRifleMagazine : Lith_DroppedMagazine {
+   default {
+      Scale 0.7;
+      Mass 150;
+   }
+
+   states {Spawn1: MGZN L -1; stop;}
+}
+
+class Lith_SniperRifleMagazine2 : Lith_SniperRifleMagazine {
+   default {
+      BounceSound "weapons/magbouncef";
+      Mass 155;
+   }
+
+   states {Spawn1: MGZN M -1; stop;}
+}
+
+class Lith_SMGMagazine : Lith_DroppedMagazine {
+   default {
+      Scale 0.7;
+   }
+
+   states {Spawn1: MGZN F -1; stop;}
+}
+
+class Lith_SMGMagazine2 : Lith_SMGMagazine {
+   default {
+      BounceSound "weapons/magbouncef";
+      Mass 145;
+   }
+
+   states {Spawn1: MGZN G -1; stop;}
+}
+
+class Lith_SMGBarrel : Lith_DroppedMagazine {
+   default {
+      BounceSound "weapons/rifle/grenadebounce";
+      Mass 160;
+   }
+
+   void lith_emitSteam() {
+      a_spawnItemEx("Lith_RifleGrenadeSmoke", flags: SXF_TRANSFERPOINTERS);
+   }
+
+   states {Spawn1: MGZN A 3 lith_emitSteam; loop;}
+}
+
+class Lith_ShockRifleMagazine : Lith_DroppedMagazine {
+   default {
+      Scale 0.7;
+      Mass 150;
+   }
+
+   states {Spawn1: MGZN B -1; stop;}
+}
+
+class Lith_ShockRifleMagazine2 : Lith_ShockRifleMagazine {
+   default {
+      BounceSound "weapons/magbouncef";
+      Mass 155;
+   }
+
+   states {Spawn1: MGZN C -1; stop;}
+}
+
 class Lith_DroppedMagazine : Actor;
 
-default
-{
+default {
    BounceType "Doom";
    BounceCount 3;
    BounceSound "weapons/magbounce";
@@ -43,8 +169,7 @@ override void tick() {
    a_setRoll(roll - m_rollSpeed, SPF_INTERPOLATE);
 }
 
-states
-{
+states {
 Spawn:
    TNT1 A 0;
    TNT1 A 0 A_JumpIf(!lith_weapons_magdrops, "Null");
