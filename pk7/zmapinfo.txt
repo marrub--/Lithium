@@ -9,7 +9,6 @@
 
 gameinfo {
    AdvisoryTime        = 0
-   DimAmount           = 0.25
    DrawReadThis        = false
    IntermissionCounter = true
    NoRandomPlayerClass = true
@@ -30,6 +29,7 @@ gameinfo {
    QuitMessages = "HACK HACK THIS IS A HACK WOW WHAT A HACK"
 
    DimColor                = "Black"
+   DimAmount               = 0
    PickupColor             = "#A0F3A0"
    MenuFontColor_Action    = "White"
    MenuFontColor_Header    = "Green"

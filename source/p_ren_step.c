@@ -42,7 +42,7 @@ script void P_Ren_Step() {
    if(pl.nextstep) {pl.nextstep--; return;}
 
    k32 dstmul = fastabsk(pl.getVel()) / 24.0;
-   k32 vol    = pl.getCVarK(sc_player_footstepvol) * min(dstmul, 1);
+   k32 vol    = CVarGetK(sc_player_footstepvol) * min(dstmul, 1);
 
    str floor = ACS_GetActorFloorTexture(0);
    str snd   = pl.stepnoise;

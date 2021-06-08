@@ -65,7 +65,7 @@ static void HUD_Ammo()
       PrintSprite(typegfx, 316,2, 235,2);
 
    if(P_Wep_CurType() == weapon_c_smg) {
-      i32 y = pl.getCVarI(sc_hud_showweapons) ? 0 : 14;
+      i32 y = CVarGetI(sc_hud_showweapons) ? 0 : 14;
       k32 heat = InvNum(so_SMGHeat)/500.0k;
       PrintSprite(sp_HUD_C_BarSmall, 257,1, 196+y,1);
       SetClip(257, 196+y, 63 * heat, 9);
@@ -95,7 +95,7 @@ void Upgr_HeadsUpDisC_Render(struct upgrade *upgr)
    HUD_KeyInd(180, 21, true, 0.8);
    HUD_Score("%s\Cnscr", pl.score, sf_smallfnt, Cr(red), 160,0);
 
-   if(pl.getCVarI(sc_hud_showweapons))
+   if(CVarGetI(sc_hud_showweapons))
       PrintSprite(sp_HUD_C_Bar, 320,2, 220,2);
 
    HUD_WeaponSlots(Cr(wselc1), Cr(wselc2), Cr(wselc3), Cr(wselcs), 323, 219);

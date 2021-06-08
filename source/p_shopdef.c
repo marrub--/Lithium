@@ -46,7 +46,7 @@ bool P_Shop_Buy(struct shopdef const *def, void *obj, cstr namefmt, bool nodeliv
 
    bool delivered = false;
 
-   if(!nodelivery && pl.getCVarI(sc_player_teleshop))
+   if(!nodelivery && CVarGetI(sc_player_teleshop))
    {
       i32 tid;
 

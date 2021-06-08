@@ -126,7 +126,7 @@ void BaseMonsterLevel(dmon_t *m)
 
    bias *= bias;
    bias += ACS_GameSkill() / (k32)skill_nightmare * 0.1;
-   bias += ACS_GetCVar(sc_sv_difficulty) / 100.0;
+   bias += CVarGetI(sc_sv_difficulty) / 100.0;
    bias *= ACS_RandomFixed(1, 1.5);
 
    if(get_bit(m->mi->flags, mif_angelic)) {
@@ -217,7 +217,7 @@ static void OnFinalize(dmon_t *m) {
             SpawnManaPickup(m);
          }
 
-         if(ACS_GetCVar(sc_sv_wepdrop)) {
+         if(CVarGetI(sc_sv_wepdrop)) {
             Str(so_sgun, s"Shotgun");
             Str(so_cgun, s"Chaingun");
             str sp = snil;

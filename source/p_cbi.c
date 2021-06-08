@@ -64,7 +64,7 @@ static void P_CBI_TabInfo(struct gui_state *g) {
 script void P_CBI_PTick() {
    struct gui_state *g = &pl.cbi.guistate;
 
-   pl.cbi.theme = pl.getCVarI(sc_gui_theme);
+   pl.cbi.theme = CVarGetI(sc_gui_theme);
 
    if(pl.cbi.theme != pl.cbi.oldtheme) {
       static cstr const names[] = {
@@ -103,7 +103,7 @@ script void P_CBI_PTick() {
 
    G_WinEnd(g, &CBIState(g)->mainwin);
 
-   G_End(g, pl.getCVarI(sc_gui_cursor));
+   G_End(g, CVarGetI(sc_gui_cursor));
 }
 
 void P_CBI_PMinit(void) {

@@ -16,12 +16,12 @@
 X(st_nil, "")
 
 /* Font Names */
-X(sf_areaname,      "areaname")
-X(sf_bigupper,      "bigupper")
-X(sf_lhudfontsmall, "lhudfontsmall")
-X(sf_lmidfont,      "lmidfont")
-X(sf_ltrmfont,      "ltrmfont")
-X(sf_smallfnt,      "smallfnt")
+X(sf_areaname, "areaname")
+X(sf_bigupper, "bigupper")
+X(sf_lsmlhfnt, "lsmlhfnt")
+X(sf_lmidfont, "lmidfont")
+X(sf_ltrmfont, "ltrmfont")
+X(sf_smallfnt, "smallfnt")
 
 /* Console Variables */
 X(sc_fun,                    DCVAR "fun")

@@ -16,35 +16,37 @@ class Lith_RainDrop : Actor {
       XScale 0.5;
       YScale 2.0;
 
-      +DONTSPLASH
-      +DROPOFF
-      +FORCEYBILLBOARD
-      +NOBLOCKMAP
-      +NOINTERACTION
-      +NOTELEPORT
-      +NOTIMEFREEZE
-      +NOTRIGGER
+      +DontSplash
+      +DropOff
+      +ForceYBillboard
+      +NoBlockmap
+      +NoInteraction
+      +NoTeleport
+      +NoTimeFreeze
+      +NoTrigger
    }
 
-   bool m_Done;
+   bool m_done;
 
-   override void PostBeginPlay() {
-      Super.PostBeginPlay();
-      ACS_ExecuteWithResult(lsc_raindropspawn);
-      Vel     = (0, 0, FRandom(-12, -16));
-      Scale.Y = FRandom(1.5, 3.5);
-      m_Done  = false;
+   override void postBeginPlay() {
+      super.postBeginPlay();
+      acs_executeWithResult(lsc_raindropspawn);
+      vel     = (0, 0, fRandom(-12, -16));
+      scale.y = fRandom(1.5, 3.5);
+      m_done  = false;
    }
 
    override void Tick() {
-      if(m_Done) {
-         super.tick();
-      } else if((WaterLevel > 0 || Pos.Z <= FloorZ)) {
-         SetOrigin((Pos.XY, FloorZ), false);
-         SetState(ResolveState("Death"));
-         m_Done = true;
+      if(m_done) {
+         Lith_UTIL.stateTick(self);
+         a_fadeOut(0.25 / 21.0);
+      } else if((waterLevel > 0 || pos.z <= floorZ)) {
+         setOrigin((pos.xy, floorZ), false);
+         scale = (1, 1);
+         m_done = true;
+         setState(resolveState("Death"));
       } else {
-         SetOrigin((Pos.XY, Pos.Z - 16.0), true);
+         setOrigin(pos + vel, true);
       }
    }
 
@@ -53,8 +55,7 @@ class Lith_RainDrop : Actor {
       RNDR A -1;
       stop;
    Death:
-      RNDR A 0 {Vel = (0, 0, 0); Scale = (1, 1);}
-      RNDR BCDEFGH 3 A_FadeOut(1/16./3.);
+      RNDR BCDEFGH 3;
       stop;
    }
 }

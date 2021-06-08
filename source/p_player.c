@@ -143,14 +143,14 @@ void Sc_PlayerDeath(void) {
    P_Inv_PQuit();
 
    Str(sc_sv_cooploseinventory, s"sv_cooploseinventory");
-   if(singleplayer || ACS_GetCVar(sc_sv_cooploseinventory)) {
+   if(singleplayer || CVarGetI(sc_sv_cooploseinventory)) {
       P_Upg_PQuit();
       P_BIP_PQuit();
       pl.score = pl.scoreaccum = pl.scoreaccumtime = 0;
    }
 
    if(singleplayer) {
-      if(ACS_GetCVar(sc_sv_revenge)) {
+      if(CVarGetI(sc_sv_revenge)) {
          ACS_LocalAmbientSound(ss_player_death1, 127);
          ACS_Delay(35);
          ServCallI(sm_PlayerDeath);
@@ -271,7 +271,7 @@ i96 P_Scr_Give(i96 score, bool nomul) {
    k32 vol = 0.7lk * mul;
 
    /* Play a sound when we pick up score */
-   if(vol > 0.001k && pl.getCVarI(sc_player_scoresound))
+   if(vol > 0.001k && CVarGetI(sc_player_scoresound))
       StartSound(ss_player_score, lch_item2, 0, vol, ATTN_STATIC);
 
    /* hue */
@@ -292,7 +292,7 @@ i96 P_Scr_Give(i96 score, bool nomul) {
    pl.scoreaccumtime += 20 * (mul * 2.0lk);
 
    /* Log score */
-   if(pl.getCVarI(sc_player_scorelog))
+   if(CVarGetI(sc_player_scorelog))
       pl.logH(1, "+\Cj%lli\Cnscr", score);
 
    return score;
@@ -341,7 +341,7 @@ void P_bossText(i32 boss) {
 
    if(division) pl.logB(1, LC(LANG "LOG_BossHear3"));
 
-   if(!pl.getCVarI(sc_player_bosstexts)) return;
+   if(!CVarGetI(sc_player_bosstexts)) return;
 
    cstr fmt;
    switch(boss) {

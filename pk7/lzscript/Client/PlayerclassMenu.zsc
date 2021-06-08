@@ -25,12 +25,8 @@ override void Drawer()
       let dsc = StringTable.localize(String.format("%s_Dsc", sel.mText));
       let txt = StringTable.localize(sel.mText);
       let cr  = Font.FindFontColor(col);
-      Font bigf = "bigupper";
-      Font smlf = "ltrmfont";
-      if(StringTable.Localize("LITH_CHECK", false) != "Eng") {
-         bigf = "newconsolefont";
-         smlf = "ljtrmfont";
-      }
+      Font bigf = menuDelegate.pickFont("bigupper");
+      Font smlf = menuDelegate.pickFont("ltrmfont");
       Screen.DrawText(bigf, cr, 168, 59,  txt, DTA_Clean, true);
       Screen.DrawText(smlf, cr, 168, 73,  nam, DTA_Clean, true);
       Screen.DrawText(smlf, cr, 104, 108, dsc, DTA_Clean, true);

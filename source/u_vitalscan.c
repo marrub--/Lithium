@@ -82,7 +82,7 @@ script void Upgr_VitalScan_Update(struct upgrade *upgr) {
       } else if(freak || ACS_CheckFlag(0, sm_boss)) {
          UData.tagstr = RandomName(freak ? 0 : id);
 
-         if(pl.getCVarI(sc_scanner_bar)) {
+         if(CVarGetI(sc_scanner_bar)) {
             UData.oldhealth = UData.health = ACS_Random(0, 666666666);
             UData.maxhealth = ACS_Random(0, 666666666);
             healthset = true;
@@ -142,13 +142,13 @@ void Upgr_VitalScan_Render(struct upgrade *upgr) {
 
    if(UData.hdtime == 30) SetFade(fid_vscan, 10, 12);
 
-   i32 ox = pl.getCVarI(sc_scanner_xoffs);
-   i32 oy = pl.getCVarI(sc_scanner_yoffs);
+   i32 ox = CVarGetI(sc_scanner_xoffs);
+   i32 oy = CVarGetI(sc_scanner_yoffs);
 
    i32 x;
    i32 y;
 
-   switch(pl.getCVarI(sc_scanner_slide)) {
+   switch(CVarGetI(sc_scanner_slide)) {
    case _ssld_slide: {
       k32 cangle = ACS_VectorAngle(pl.x - UData.x, pl.y - UData.y) * tau;
       k64 diff = pl.yawf - (k64)cangle;
@@ -187,10 +187,10 @@ void Upgr_VitalScan_Render(struct upgrade *upgr) {
    }
 
    /* Tag and health */
-   bool afnt = pl.getCVarI(sc_scanner_altfont);
+   bool afnt = CVarGetI(sc_scanner_altfont);
    str  font = afnt ? sf_lmidfont : sf_smallfnt;
 
-   i32 cr = Draw_GetCr(pl.getCVarI(sc_scanner_color));
+   i32 cr = Draw_GetCr(CVarGetI(sc_scanner_color));
 
    PrintText_str(UData.tagstr, font, cr, x+40,4, y+11,2);
 
@@ -209,7 +209,7 @@ void Upgr_VitalScan_Render(struct upgrade *upgr) {
    PrintTextX(font, CR_WHITE, x+40,4, y+20,2, _u_no_unicode);
 
    /* Health bar */
-   if(pl.getCVarI(sc_scanner_bar)) {
+   if(CVarGetI(sc_scanner_bar)) {
       StrAry(bs, s":Bars:HealthBar1",  s":Bars:HealthBar2",
                  s":Bars:HealthBar3",  s":Bars:HealthBar4",
                  s":Bars:HealthBar5",  s":Bars:HealthBar6",

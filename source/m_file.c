@@ -33,7 +33,6 @@ struct memfile {
 struct netfile {
    anonymous struct memfile memfile;
    str pcvar;
-   i32 pnum;
 };
 
 /* Static Functions -------------------------------------------------------- */
@@ -72,13 +71,13 @@ static i32 NetClose(void *nfdata) {
          else
             itrsize = SAVE_BLOCK_SIZE;
 
-         ACS_SetUserCVarString(nf->pnum, StrParam("%S_%i", nf->pcvar, cvarnum), l_strndup(itr, itrsize));
+         CVarSetS(StrParam("%S_%i", nf->pcvar, cvarnum), l_strndup(itr, itrsize));
 
          itr     += itrsize;
          outsize -= itrsize;
       }
 
-      ACS_SetUserCVarString(nf->pnum, StrParam("%S_%i", nf->pcvar, cvarnum), st_nil);
+      CVarSetS(StrParam("%S_%i", nf->pcvar, cvarnum), st_nil);
 
       Dalloc(coded);
    }
@@ -160,14 +159,13 @@ FILE *W_Open(str fname, cstr rw) {
 }
 
 /* fopen() equivalent for netfiles. */
-FILE *NFOpen(i32 pnum, str pcvar, char rw) {
+FILE *NFOpen(str pcvar, char rw) {
    FILE *fp = nil;
 
    if(rw == 'w') {
       struct netfile *nf = Salloc(struct netfile, _tag_file);
 
       nf->pcvar = pcvar;
-      nf->pnum  = pnum;
 
       fp = fopencookie(nf, "w", (cookie_io_functions_t){
          .write = MemWrite,
@@ -179,8 +177,7 @@ FILE *NFOpen(i32 pnum, str pcvar, char rw) {
       size_t inputsz = 0;
 
       for(i32 cvarnum;; cvarnum++) {
-         str cvar =
-            ACS_GetUserCVarString(pnum, StrParam("%S_%i", pcvar, cvarnum));
+         str cvar = CVarGetS(StrParam("%S_%i", pcvar, cvarnum));
          size_t inlen = ACS_StrLen(cvar);
 
          if(inlen) {

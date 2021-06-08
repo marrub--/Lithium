@@ -36,11 +36,11 @@ override void tick() {
 
    double intn = m_p.acs_scriptCall("Lith_GetFlashlightIntensity") / FIX;
 
-   int r = clamp(CVar.getCVar('lith_light_r', m_p.player).getInt(), 0, 255);
-   int g = clamp(CVar.getCVar('lith_light_g', m_p.player).getInt(), 0, 255);
-   int b = clamp(CVar.getCVar('lith_light_b', m_p.player).getInt(), 0, 255);
+   int r = clamp(lith_light_r, 0, 255);
+   int g = clamp(lith_light_g, 0, 255);
+   int b = clamp(lith_light_b, 0, 255);
 
-   int ri = int(CVar.getCVar('lith_light_radius', m_p.player).getInt() * intn);
+   int ri = int(lith_light_radius * intn);
    int ro = ri / 2;
 
    m_light[0].args[DynamicLight.LIGHT_RED]       = r;

@@ -126,7 +126,7 @@ void P_Wep_PTickPre()
       /* For slot 3 weapons that don't take ammo, check if they should. */
       case weapon_shotgun:
       case weapon_c_rifle:
-         if(pl.getCVarI(sc_weapons_slot3ammo)) {
+         if(CVarGetI(sc_weapons_slot3ammo)) {
             wep->ammotype |= AT_Ammo;
             wep->ammoclass = so_ShellAmmo;
          }
@@ -213,7 +213,7 @@ bool Sc_WeaponPickup(i32 name)
    if(P_None()) return false;
 
    Str(sc_sv_weaponstay, s"sc_sv_weaponstay");
-   bool weaponstay = ACS_GetCVar(sc_sv_weaponstay);
+   bool weaponstay = CVarGetI(sc_sv_weaponstay);
    i32 parm = weapon_unknown;
 
    parm = P_Wep_FromName(name);

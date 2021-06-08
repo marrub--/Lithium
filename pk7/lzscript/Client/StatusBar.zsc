@@ -23,14 +23,7 @@ class Lith_HudMessage ui {
 
    void lith_draw() {
       if(alpha > 0.01) {
-         Font fnt = "lmidfont";
-         let cl = Lith_URANUS(EventHandler.Find("Lith_URANUS"));
-         if(cl && !cl.m_english) {
-            fnt = cl.m_utfFont;
-         }
-         if(!fnt) {
-            return;
-         }
+         Font fnt = Lith_URANUS.instance().fntMid();
          Screen.DrawText(fnt, Font.CR_GOLD, x, y, text,
                          DTA_VirtualWidth,320, DTA_VirtualHeight,240,
                          DTA_Alpha,alpha);

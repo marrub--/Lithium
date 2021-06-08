@@ -45,8 +45,8 @@ void P_Ren_View()
 
    k64 addp = 0, addy = 0;
 
-   if(pl.getCVarI(sc_player_damagebob)) {
-      k64 bobmul = pl.getCVarK(sc_player_damagebobmul);
+   if(CVarGetI(sc_player_damagebob)) {
+      k64 bobmul = CVarGetK(sc_player_damagebobmul);
       addp += pl.bobpitch * bobmul;
       addy += pl.bobyaw   * bobmul;
    }
@@ -57,7 +57,7 @@ void P_Ren_View()
    pl.addpitch = addp + pl.extrpitch;
    pl.addyaw   = addy + pl.extryaw;
 
-   ifauto(k32, mul, pl.getCVarK(sc_player_viewtilt) * 0.2) {
+   ifauto(k32, mul, CVarGetK(sc_player_viewtilt) * 0.2) {
       /**/ if(pl.sidev  ) pl.addroll = lerplk(pl.addroll, -pl.sidev * mul, 0.10);
       else if(pl.addroll) pl.addroll = lerplk(pl.addroll, 0,               0.14);
    }

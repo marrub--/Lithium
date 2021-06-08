@@ -35,8 +35,8 @@ void Upgr_Flashlight_Deactivate(struct upgrade *upgr) {
 }
 
 script void Upgr_Flashlight_Update(struct upgrade *upgr) {
-   i32 bat_life  = pl.getCVarI(sc_light_battery) * 35;
-   i32 bat_regen = pl.getCVarI(sc_light_regen);
+   i32 bat_life  = CVarGetI(sc_light_battery) * 35;
+   i32 bat_regen = CVarGetI(sc_light_regen);
 
    bool was_on = UData.on;
 
@@ -83,7 +83,7 @@ script void Upgr_Flashlight_Update(struct upgrade *upgr) {
 void Upgr_Flashlight_Render(struct upgrade *upgr) {
    if(!pl.hudenabled) return;
 
-   i32 bat_life = pl.getCVarI(sc_light_battery) * 35;
+   i32 bat_life = CVarGetI(sc_light_battery) * 35;
 
    if(bat_life > 0 && UData.battery < bat_life) {
       i32 y = UData.battery / (k32)bat_life * 8;

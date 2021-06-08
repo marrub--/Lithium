@@ -173,7 +173,7 @@ void Lith_PreTick() {
 }
 
 void Lith_PostTick() {
-   if(CVar.getCVar('lith_player_rainshader', player).getBool())
+   if(lith_player_rainshader)
       Lith_RainEffect();
    else
       Shader.SetEnabled(player, "Lith_Rain", false);

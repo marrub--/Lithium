@@ -3209,10 +3209,10 @@
 "LITH_CTRL_ZOOMIN" = "ズームイン";
 "LITH_CTRL_ZOOMOUT" = "ズームアウト";
 "LITH_CTRL_GLARE" = "睨み";
-"LITH_CLASS_MARINE" = "ﾏﾘｰﾝ";
-"LITH_CLASS_CYBERMAGE" = "ｻｲﾊﾞﾒｲｼﾞ";
-"LITH_CLASS_INFORMANT" = "ｲﾝﾌｫｰﾏﾝﾄ";
-"LITH_CLASS_ASSASSIN" = "ｱｻｼﾝ";
-"LITH_CLASS_DARKLORD" = "ﾀﾞｰｸﾛｰﾄﾞ";
-"LITH_CLASS_WANDERER" = "ﾜﾝﾀﾞﾗｰ";
-"LITH_CLASS_THOTH" = "ﾄｰﾄ";
+"LITH_CLASS_MARINE" = "マリーン";
+"LITH_CLASS_CYBERMAGE" = "サイバメージ";
+"LITH_CLASS_INFORMANT" = "インフォーマント";
+"LITH_CLASS_ASSASSIN" = "アサシン";
+"LITH_CLASS_DARKLORD" = "ダークロード";
+"LITH_CLASS_WANDERER" = "ワンダラー";
+"LITH_CLASS_THOTH" = "トート";

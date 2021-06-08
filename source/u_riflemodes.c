@@ -27,7 +27,7 @@ void Upgr_RifleModes_Render(struct upgrade *upgr)
 
    if(P_Wep_CurType() != weapon_rifle) return;
 
-   if(pl.getCVarI(sc_weapons_riflescope) &&
+   if(CVarGetI(sc_weapons_riflescope) &&
       pl.riflefiremode == rifle_firemode_burst)
    {
       SetClip(40, 108, 240, 40);
@@ -62,7 +62,7 @@ script_str ext("ACS") addr(OBJ "ResetRifleMode")
 void Sc_ResetRifleMode(void)
 {
    if(!P_None())
-      if(pl.getCVarI(sc_weapons_riflemodeclear))
+      if(CVarGetI(sc_weapons_riflemodeclear))
          pl.riflefiremode = 0;
 }
 

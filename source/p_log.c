@@ -161,8 +161,8 @@ void P_CBI_TabLog(struct gui_state *g) {
 }
 
 script void HUD_Log(i32 cr, i32 x, i32 yy) {
-   if(pl.getCVarI(sc_hud_showlog)) {
-      k32 scale = pl.getCVarK(sc_hud_logsize);
+   if(CVarGetI(sc_hud_showlog)) {
+      k32 scale = CVarGetK(sc_hud_logsize);
       i32 yo = 200 / scale;
       i32 xs = 320 / scale;
       i32 ys = 240 / scale;
@@ -177,8 +177,8 @@ script void HUD_Log(i32 cr, i32 x, i32 yy) {
          i32 y = 10 * i;
          i32 ya;
 
-         if(pl.getCVarI(sc_hud_logfromtop)) {ya = 1; y = 20 + y;}
-         else                               {ya = 2; y = (yo - y) + yy;}
+         if(CVarGetI(sc_hud_logfromtop)) {ya = 1; y = 20 + y;}
+         else                            {ya = 2; y = (yo - y) + yy;}
 
          PrintText_str(ld->inf, sf_lmidfont, cr, x,1, y,ya);
 
@@ -204,7 +204,7 @@ void Sc_Log(i32 levl, i32 type) {
    if(name[0] == '_') name = Language(LANG "LOG%S", name);
 
    if(!P_None()) switch(type) {
-   case msg_ammo: if(pl.getCVarI(sc_player_ammolog))
+   case msg_ammo: if(CVarGetI(sc_player_ammolog))
    case msg_huds: pl.logH(levl, "%S", name); break;
    case msg_full: pl.logF(      "%S", name); break;
    case msg_both: pl.logB(levl, "%S", name); break;

@@ -206,7 +206,7 @@ void P_Lv_GiveEXP(u64 amt) {
       a->expnext = 500 + a->level * powlk(1.385, a->level * 0.2) * 340;
 
       i32 pts = 7;
-      switch(pl.getCVarI(sc_player_lvsys)) {
+      switch(CVarGetI(sc_player_lvsys)) {
       case atsys_manual:
          a->points += 7;
          break;
@@ -363,7 +363,7 @@ script void P_Init() {
       pl.wasinit = true;
    }
 
-   i32 minhealth = ACS_GetCVar(sc_sv_minhealth);
+   i32 minhealth = CVarGetI(sc_sv_minhealth);
    if(pl.health < minhealth) {
       pl.health = minhealth;
    }

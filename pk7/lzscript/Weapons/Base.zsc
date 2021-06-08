@@ -139,10 +139,10 @@ action(Weapon) void lith_a_overlayTick() {
    int style;
 
    if(countInv("Lith_WeaponScopedToken")) {
-      a = CVar.getCVar('lith_weapons_scopealpha', player).getFloat();
+      a = lith_weapons_scopealpha;
       style = style_subtract;
    } else {
-      a = CVar.getCVar('lith_weapons_alpha', player).getFloat();
+      a = lith_weapons_alpha;
       style = style_translucent;
    }
 
@@ -298,7 +298,7 @@ virtual void Lith_ReloadFinish(bool isauto) {
 action(Weapon) state Lith_A_JumpIfMagEmpty(bool autoreload = true, statelabel rsn = "Reload", statelabel esn = "FireEmpty") {
    statelabel sn;
    if(autoreload) {
-      if(CVar.GetCVar('lith_weapons_reloadempty', Player).GetBool()) {
+      if(lith_weapons_reloadempty) {
          sn = rsn;
       } else {
          sn = esn;
@@ -332,22 +332,22 @@ action(Weapon) void Lith_A_ReloadFinish() {
 }
 
 action(Weapon) void Lith_A_RecoilUp(double amt) {
-   double v = CVar.GetCVar('lith_weapons_recoil', Player).GetFloat() * amt;
+   double v = lith_weapons_recoil * amt;
    CallACS("Lith_RecoilUp", int(v * FIX));
 }
 
 action(Weapon) void Lith_A_RecoilDn(double amt) {
-   double v = CVar.GetCVar('lith_weapons_recoil', Player).GetFloat() * (-amt/4);
+   double v = lith_weapons_recoil * (-amt/4);
    CallACS("Lith_RecoilUp", int(v * FIX));
 }
 
 action(Weapon) void Lith_A_ReloadBobUp(double amt) {
-   double v = CVar.GetCVar('lith_weapons_reloadbob', Player).GetFloat() * amt;
+   double v = lith_weapons_reloadbob * amt;
    CallACS("Lith_RecoilUp", int(v * FIX));
 }
 
 action(Weapon) void Lith_A_ReloadBobDn(double amt) {
-   double v = CVar.GetCVar('lith_weapons_reloadbob', Player).GetFloat() * -amt;
+   double v = lith_weapons_reloadbob * -amt;
    CallACS("Lith_RecoilUp", int(v * FIX));
 }
 

@@ -185,12 +185,12 @@ Lithiumの雨が宇宙から降り注ぐか。
 == \#CTRL_ZOOMOUT | ズームアウト
 == \#CTRL_GLARE   | 睨み
 
-== \#CLASS_MARINE    | ﾏﾘｰﾝ
-== \#CLASS_CYBERMAGE | ｻｲﾊﾞﾒｲｼﾞ
-== \#CLASS_INFORMANT | ｲﾝﾌｫｰﾏﾝﾄ
-== \#CLASS_ASSASSIN  | ｱｻｼﾝ
-== \#CLASS_DARKLORD  | ﾀﾞｰｸﾛｰﾄﾞ
-== \#CLASS_WANDERER  | ﾜﾝﾀﾞﾗｰ
-== \#CLASS_THOTH     | ﾄｰﾄ
+== \#CLASS_MARINE    | マリーン
+== \#CLASS_CYBERMAGE | サイバメージ
+== \#CLASS_INFORMANT | インフォーマント
+== \#CLASS_ASSASSIN  | アサシン
+== \#CLASS_DARKLORD  | ダークロード
+== \#CLASS_WANDERER  | ワンダラー
+== \#CLASS_THOTH     | トート
 
 ## EOF

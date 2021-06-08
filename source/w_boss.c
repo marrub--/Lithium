@@ -206,7 +206,7 @@ void Sc_PhantomDeath(void)
 
    Dbg_Log(log_boss, "%s: %s phase %i defeated", __func__, boss->name, boss->phase);
 
-   if(!ACS_GetCVar(sc_sv_nobossdrop))
+   if(!CVarGetI(sc_sv_nobossdrop))
       SpawnBossReward();
 
    soulsfreed++;

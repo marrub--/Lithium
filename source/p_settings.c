@@ -60,29 +60,17 @@ struct set_parm {
 
 /* Static Functions -------------------------------------------------------- */
 
-#define SG_clBody(type, name, suff) \
+#define SG_cvBody(type, name, suff) \
    script static \
-   type SG_cl##name(struct set_parm const *sp, type *v) { \
+   type SG_cv##name(struct set_parm const *sp, type *v) { \
       str cvar = l_strcpy2(CVAR, sp->st->text); \
-      if(v) {pl.set##suff(cvar, *v); return *v;} \
-      else  {return pl.get##suff(cvar);} \
+      if(v) {CVarSet##suff(cvar, *v); return *v;} \
+      else  {return CVarGet##suff(cvar);} \
    }
 
-#define SG_svBody(type, name, suff) \
-   script static \
-   type SG_sv##name(struct set_parm const *sp, type *v) { \
-      str cvar = l_strcpy2(CVAR, sp->st->text); \
-      if(v) {ACS_Set##suff(cvar, *v); return *v;} \
-      else  {return ACS_Get##suff(cvar);} \
-   }
-
-SG_clBody(bool, Boole, CVarI)
-SG_clBody(i32,  Integ, CVarI)
-SG_clBody(k32,  Fixed, CVarK)
-
-SG_svBody(bool, Boole, CVar)
-SG_svBody(i32,  Integ, CVar)
-SG_svBody(k32,  Fixed, CVarFixed)
+SG_cvBody(bool, Boole, I)
+SG_cvBody(i32,  Integ, I)
+SG_cvBody(k32,  Fixed, K)
 
 script static
 bool SG_autoBuy(struct set_parm const *sp, bool *v) {
@@ -209,24 +197,20 @@ bool S_isEnabled(struct setting const *st) {
 
 #define S_color S_bndi('a', 'z' + _gcr_max), "color"
 
-#define S_clBoole .cb_g = {.b = SG_clBoole}
-#define S_clInteg .cb_g = {.i = SG_clInteg}
-#define S_clFixed .cb_g = {.k = SG_clFixed}
-
-#define S_svEnabl .cb_e = SE_server
-#define S_svBoole S_svEnabl, .cb_g = {.b = SG_svBoole}
-#define S_svInteg S_svEnabl, .cb_g = {.i = SG_svInteg}
-#define S_svFixed S_svEnabl, .cb_g = {.k = SG_svFixed}
+#define S_cvEnabl .cb_e = SE_server
+#define S_cvBoole S_cvEnabl, .cb_g = {.b = SG_cvBoole}
+#define S_cvInteg S_cvEnabl, .cb_g = {.i = SG_cvInteg}
+#define S_cvFixed S_cvEnabl, .cb_g = {.k = SG_cvFixed}
 
 struct setting const st_gui[] = {
-   {S_enume, "gui_cursor",    S_clInteg, S_bndi(0, gui_curs_max), "cursor"},
-   {S_enume, "gui_defcr",     S_clInteg, S_color},
-   {S_enume, "gui_theme",     S_clInteg, S_bndi(0, cbi_theme_max), "theme"},
-   {S_fixed, "gui_xmul",      S_clFixed, S_bndk(0.1, 2.0), "mult"},
-   {S_fixed, "gui_ymul",      S_clFixed, S_bndk(0.1, 2.0), "mult"},
-   {S_integ, "gui_buyfiller", S_clInteg, S_bndi(0, 70),  "tick"},
+   {S_enume, "gui_cursor",    S_cvInteg, S_bndi(0, gui_curs_max), "cursor"},
+   {S_enume, "gui_defcr",     S_cvInteg, S_color},
+   {S_enume, "gui_theme",     S_cvInteg, S_bndi(0, cbi_theme_max), "theme"},
+   {S_fixed, "gui_xmul",      S_cvFixed, S_bndk(0.1, 2.0), "mult"},
+   {S_fixed, "gui_ymul",      S_cvFixed, S_bndk(0.1, 2.0), "mult"},
+   {S_integ, "gui_buyfiller", S_cvInteg, S_bndi(0, 70),  "tick"},
    {S_empty},
-   {S_enume, "gui_jpfont", S_clInteg, S_bndi(0, font_num), "jpfont"},
+   {S_enume, "gui_jpfont", S_cvInteg, S_bndi(0, font_num), "jpfont"},
    {S_empty},
    {S_label, "st_labl_jp_1"},
    {S_label, "st_labl_jp_2"},
@@ -234,65 +218,65 @@ struct setting const st_gui[] = {
 };
 
 struct setting const st_hud[] = {
-   {S_boole, "hud_showarmorind", S_clBoole},
-   {S_boole, "hud_showdamage",   S_clBoole},
-   {S_boole, "hud_showlvl",      S_clBoole},
-   {S_boole, "hud_showscore",    S_clBoole},
-   {S_boole, "hud_showweapons",  S_clBoole},
-   {S_enume, "hud_expbar",       S_clInteg, S_bndi(0, lxb_max), "expbar"},
+   {S_boole, "hud_showarmorind", S_cvBoole},
+   {S_boole, "hud_showdamage",   S_cvBoole},
+   {S_boole, "hud_showlvl",      S_cvBoole},
+   {S_boole, "hud_showscore",    S_cvBoole},
+   {S_boole, "hud_showweapons",  S_cvBoole},
+   {S_enume, "hud_expbar",       S_cvInteg, S_bndi(0, lxb_max), "expbar"},
    {S_empty},
-   {S_boole, "xhair_enable",       S_clBoole},
-   {S_boole, "xhair_enablejuicer", S_clBoole},
-   {S_enume, "xhair_style",        S_clInteg, S_bndi(0, lxh_max), "xhair"},
+   {S_boole, "xhair_enable",       S_cvBoole},
+   {S_boole, "xhair_enablejuicer", S_cvBoole},
+   {S_enume, "xhair_style",        S_cvInteg, S_bndi(0, lxh_max), "xhair"},
    {S_empty},
-   {S_integ, "xhair_r", S_clInteg, S_bndi(0, 255), "byte"},
-   {S_integ, "xhair_g", S_clInteg, S_bndi(0, 255), "byte"},
-   {S_integ, "xhair_b", S_clInteg, S_bndi(0, 255), "byte"},
-   {S_integ, "xhair_a", S_clInteg, S_bndi(0, 255), "byte"},
+   {S_integ, "xhair_r", S_cvInteg, S_bndi(0, 255), "byte"},
+   {S_integ, "xhair_g", S_cvInteg, S_bndi(0, 255), "byte"},
+   {S_integ, "xhair_b", S_cvInteg, S_bndi(0, 255), "byte"},
+   {S_integ, "xhair_a", S_cvInteg, S_bndi(0, 255), "byte"},
    {S_empty},
-   {S_integ, "scanner_xoffs", S_clInteg, S_bndi(-160, 160), "pxls"},
-   {S_integ, "scanner_yoffs", S_clInteg, S_bndi(-160, 160), "pxls"},
+   {S_integ, "scanner_xoffs", S_cvInteg, S_bndi(-160, 160), "pxls"},
+   {S_integ, "scanner_yoffs", S_cvInteg, S_bndi(-160, 160), "pxls"},
    {S_empty},
-   {S_boole, "scanner_altfont", S_clBoole},
-   {S_boole, "scanner_bar",     S_clBoole},
-   {S_enume, "scanner_slide",   S_clInteg, S_bndi(0, _ssld_max), "slide"},
-   {S_enume, "scanner_color",   S_clInteg, S_color},
+   {S_boole, "scanner_altfont", S_cvBoole},
+   {S_boole, "scanner_bar",     S_cvBoole},
+   {S_enume, "scanner_slide",   S_cvInteg, S_bndi(0, _ssld_max), "slide"},
+   {S_enume, "scanner_color",   S_cvInteg, S_color},
 };
 
 struct setting const st_itm[] = {
-   {S_boole, "player_altinvuln",  S_clBoole},
-   {S_boole, "player_brightweps", S_svBoole},
-   {S_boole, "player_noitemfx",   S_svBoole},
-   {S_boole, "player_scoresound", S_clBoole},
-   {S_boole, "player_teleshop",   S_clBoole},
-   {S_boole, "sv_nobossdrop",     S_svBoole},
-   {S_boole, "sv_nofullammo",     S_svBoole},
-   {S_boole, "sv_noscoreammo",    S_svBoole},
-   {S_boole, "sv_wepdrop",        S_svBoole},
+   {S_boole, "player_altinvuln",  S_cvBoole},
+   {S_boole, "player_brightweps", S_cvBoole},
+   {S_boole, "player_noitemfx",   S_cvBoole},
+   {S_boole, "player_scoresound", S_cvBoole},
+   {S_boole, "player_teleshop",   S_cvBoole},
+   {S_boole, "sv_nobossdrop",     S_cvBoole},
+   {S_boole, "sv_nofullammo",     S_cvBoole},
+   {S_boole, "sv_noscoreammo",    S_cvBoole},
+   {S_boole, "sv_wepdrop",        S_cvBoole},
 };
 
 struct setting const st_lit[] = {
-   {S_integ, "light_battery", S_clInteg, S_bndi(0, 60), "secs"},
-   {S_integ, "light_regen",   S_clInteg, S_bndi(1, 10), "mult"},
+   {S_integ, "light_battery", S_cvInteg, S_bndi(0, 60), "secs"},
+   {S_integ, "light_regen",   S_cvInteg, S_bndi(1, 10), "mult"},
    {S_empty},
-   {S_integ, "light_r", S_clInteg, S_bndi(0, 255), "byte"},
-   {S_integ, "light_g", S_clInteg, S_bndi(0, 255), "byte"},
-   {S_integ, "light_b", S_clInteg, S_bndi(0, 255), "byte"},
+   {S_integ, "light_r", S_cvInteg, S_bndi(0, 255), "byte"},
+   {S_integ, "light_g", S_cvInteg, S_bndi(0, 255), "byte"},
+   {S_integ, "light_b", S_cvInteg, S_bndi(0, 255), "byte"},
    {S_empty},
-   {S_integ, "light_radius", S_clInteg, S_bndi(100, 1000), "unit"},
+   {S_integ, "light_radius", S_cvInteg, S_bndi(100, 1000), "unit"},
 };
 
 struct setting const st_log[] = {
-   {S_boole, "hud_logfromtop",       S_clBoole},
-   {S_boole, "hud_showlog",          S_clBoole},
-   {S_boole, "player_ammolog",       S_clBoole},
-   {S_boole, "player_scorelog",      S_clBoole},
-   {S_boole, "player_stupidpickups", S_clBoole},
-   {S_fixed, "hud_logsize",          S_clFixed, S_bndk(0.2, 1.0), "mult"},
+   {S_boole, "hud_logfromtop",       S_cvBoole},
+   {S_boole, "hud_showlog",          S_cvBoole},
+   {S_boole, "player_ammolog",       S_cvBoole},
+   {S_boole, "player_scorelog",      S_cvBoole},
+   {S_boole, "player_stupidpickups", S_cvBoole},
+   {S_fixed, "hud_logsize",          S_cvFixed, S_bndk(0.2, 1.0), "mult"},
 };
 
 struct setting const st_pgm[] = {
-   {S_boole, "sv_postgame", S_svBoole, .fill = 35 * 5},
+   {S_boole, "sv_postgame", S_cvBoole, .fill = 35 * 5},
    {S_empty},
    {S_label, "st_labl_postgame_1"},
    {S_label, "st_labl_postgame_2"},
@@ -305,20 +289,20 @@ struct setting const st_ply[] = {
    {S_boole, "st_autobuy_2", .cb_g = {.b = SG_autoBuy}},
    {S_boole, "st_autobuy_3", .cb_g = {.b = SG_autoBuy}},
    {S_boole, "st_autobuy_4", .cb_g = {.b = SG_autoBuy}},
-   {S_boole, "sv_revenge",   S_svBoole},
-   {S_integ, "sv_minhealth", S_svInteg, S_bndi(0,       200), "perc"},
-   {S_enume, "player_lvsys", S_svInteg, S_bndi(0, atsys_max), "lvsys"},
+   {S_boole, "sv_revenge",   S_cvBoole},
+   {S_integ, "sv_minhealth", S_cvInteg, S_bndi(0,       200), "perc"},
+   {S_enume, "player_lvsys", S_cvInteg, S_bndi(0, atsys_max), "lvsys"},
    {S_empty},
-   {S_boole, "player_damagebob",    S_clBoole},
-   {S_fixed, "player_damagebobmul", S_clFixed, S_bndk(0.0, 1.0), "mult"},
+   {S_boole, "player_damagebob",    S_cvBoole},
+   {S_fixed, "player_damagebobmul", S_cvFixed, S_bndk(0.0, 1.0), "mult"},
    {S_empty},
-   {S_boole, "player_invertmouse",  S_clBoole},
-   {S_boole, "player_resultssound", S_clBoole},
+   {S_boole, "player_invertmouse",  S_cvBoole},
+   {S_boole, "player_resultssound", S_cvBoole},
    {S_boole, "st_done_intro",       .cb_g = {.b = SG_doneIntro}},
-   {S_fixed, "player_footstepvol",  S_clFixed, S_bndk(0.0, 1.0), "mult"},
-   {S_fixed, "player_viewtilt",     S_clFixed, S_bndk(0.0, 1.0), "mult"},
+   {S_fixed, "player_footstepvol",  S_cvFixed, S_bndk(0.0, 1.0), "mult"},
+   {S_fixed, "player_viewtilt",     S_cvFixed, S_bndk(0.0, 1.0), "mult"},
    {S_empty},
-   {S_boole, "player_bosstexts", S_clBoole},
+   {S_boole, "player_bosstexts", S_cvBoole},
    {S_empty},
    {S_label, "st_labl_boss_1"},
    {S_label, "st_labl_boss_2"},
@@ -326,41 +310,41 @@ struct setting const st_ply[] = {
 };
 
 struct setting const st_wep[] = {
-   {S_boole, "weapons_magicselanims", S_clBoole, .pclass = pC},
+   {S_boole, "weapons_magicselanims", S_cvBoole, .pclass = pC},
    {S_empty,                                     .pclass = pC},
 
-   {S_boole, "weapons_fastlazshot",    S_svBoole, .pclass = pM},
-   {S_boole, "weapons_rainbowlaser",   S_svBoole, .pclass = pM},
-   {S_boole, "weapons_reducedsg",      S_clBoole, .pclass = pM},
-   {S_boole, "weapons_riflemodeclear", S_clBoole, .pclass = pM},
-   {S_boole, "weapons_riflescope",     S_clBoole, .pclass = pM},
+   {S_boole, "weapons_fastlazshot",    S_cvBoole, .pclass = pM},
+   {S_boole, "weapons_rainbowlaser",   S_cvBoole, .pclass = pM},
+   {S_boole, "weapons_reducedsg",      S_cvBoole, .pclass = pM},
+   {S_boole, "weapons_riflemodeclear", S_cvBoole, .pclass = pM},
+   {S_boole, "weapons_riflescope",     S_cvBoole, .pclass = pM},
    {S_empty,                                      .pclass = pM},
 
-   {S_boole, "weapons_casingfadeout", S_svBoole},
-   {S_boole, "weapons_casings",       S_svBoole},
-   {S_boole, "weapons_magdrops",      S_svBoole},
-   {S_boole, "weapons_magfadeout",    S_svBoole},
-   {S_boole, "weapons_nofirebob",     S_svBoole},
-   {S_boole, "weapons_reloadempty",   S_svBoole},
-   {S_boole, "weapons_slot3ammo",     S_clBoole},
-   {S_fixed, "weapons_alpha",         S_clFixed, S_bndk(0.0,  1.0), "mult"},
-   {S_fixed, "weapons_recoil",        S_clFixed, S_bndk(0.0,  1.0), "mult"},
-   {S_fixed, "weapons_reloadbob",     S_clFixed, S_bndk(0.0,  1.0), "mult"},
-   {S_fixed, "weapons_ricochetvol",   S_svFixed, S_bndk(0.0,  1.0), "mult"},
-   {S_fixed, "weapons_scopealpha",    S_clFixed, S_bndk(0.0,  1.0), "mult"},
-   {S_fixed, "weapons_zoomfactor",    S_clFixed, S_bndk(1.0, 10.0), "mult"},
+   {S_boole, "weapons_casingfadeout", S_cvBoole},
+   {S_boole, "weapons_casings",       S_cvBoole},
+   {S_boole, "weapons_magdrops",      S_cvBoole},
+   {S_boole, "weapons_magfadeout",    S_cvBoole},
+   {S_boole, "weapons_nofirebob",     S_cvBoole},
+   {S_boole, "weapons_reloadempty",   S_cvBoole},
+   {S_boole, "weapons_slot3ammo",     S_cvBoole},
+   {S_fixed, "weapons_alpha",         S_cvFixed, S_bndk(0.0,  1.0), "mult"},
+   {S_fixed, "weapons_recoil",        S_cvFixed, S_bndk(0.0,  1.0), "mult"},
+   {S_fixed, "weapons_reloadbob",     S_cvFixed, S_bndk(0.0,  1.0), "mult"},
+   {S_fixed, "weapons_ricochetvol",   S_cvFixed, S_bndk(0.0,  1.0), "mult"},
+   {S_fixed, "weapons_scopealpha",    S_cvFixed, S_bndk(0.0,  1.0), "mult"},
+   {S_fixed, "weapons_zoomfactor",    S_cvFixed, S_bndk(1.0, 10.0), "mult"},
 };
 
 struct setting const st_wld[] = {
-   {S_boole, "player_rainshader", S_clBoole},
-   {S_boole, "sv_lessparticles",  S_svBoole},
-   {S_boole, "sv_nobosses",       S_svBoole},
-   {S_boole, "sv_rain",           S_svBoole},
-   {S_boole, "sv_sky",            S_svBoole},
-   {S_fixed, "sv_skydarkening",   S_svFixed, S_bndk(0.0, 1.0),  "mult"},
-   {S_fixed, "sv_scoremul",       S_svFixed, S_bndk(0.0, 10.0), "mult"},
-   {S_integ, "sv_autosave",       S_svInteg, S_bndi(0,   30),   "minu"},
-   {S_integ, "sv_difficulty",     S_svInteg, S_bndi(1,   100),  "perc"},
+   {S_boole, "player_rainshader", S_cvBoole},
+   {S_boole, "sv_lessparticles",  S_cvBoole},
+   {S_boole, "sv_nobosses",       S_cvBoole},
+   {S_boole, "sv_rain",           S_cvBoole},
+   {S_boole, "sv_sky",            S_cvBoole},
+   {S_fixed, "sv_skydarkening",   S_cvFixed, S_bndk(0.0, 1.0),  "mult"},
+   {S_fixed, "sv_scoremul",       S_cvFixed, S_bndk(0.0, 10.0), "mult"},
+   {S_integ, "sv_autosave",       S_cvInteg, S_bndi(0,   30),   "minu"},
+   {S_integ, "sv_difficulty",     S_cvInteg, S_bndi(1,   100),  "perc"},
 };
 
 struct {

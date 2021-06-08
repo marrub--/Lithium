@@ -332,7 +332,7 @@ class Lith_InvulnerabilitySphere : Inventory replaces InvulnerabilitySphere
    override bool tryPickup(in out Actor mo) {
       Lith_HERMES.Log(mo, msg_both, 6, "_Invuln");
       Lith_HERMES.UnlockBip(mo, "Invulnerability");
-      if(CVar.GetCVar('lith_player_altinvuln', mo.player).GetBool())
+      if(lith_player_altinvuln)
          mo.giveInventory("Lith_PowerInvulnerableGiver2", 1);
       else
          mo.giveInventory("Lith_PowerInvulnerableGiver", 1);

@@ -31,7 +31,7 @@ struct savefile *Save_BeginSave()
 {
    struct savefile *save = Salloc(struct savefile, _tag_file);
 
-   if((save->fp = NFOpen(pl.num, sc_psave, 'w')))
+   if((save->fp = NFOpen(sc_psave, 'w')))
    {
       Save_WriteChunk(save, Ident_Lith, SaveV_Lith, 0);
       return save;
@@ -88,7 +88,7 @@ struct savefile *Save_BeginLoad()
 {
    struct savefile *save = Salloc(struct savefile, _tag_file);
 
-   if((save->fp = NFOpen(pl.num, sc_psave, 'r')))
+   if((save->fp = NFOpen(sc_psave, 'r')))
    {
       /* The Lith chunk must always be the first valid chunk. */
       if(Save_ReadChunk(save, Ident_Lith, SaveV_Lith) != 0)

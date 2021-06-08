@@ -94,7 +94,7 @@ void Upgr_HeadsUpDisD_Render(struct upgrade *upgr) {
    HUD_KeyInd(180, 21, true, 0.8);
    HUD_Score("%s\Cnscr", pl.score, sf_smallfnt, Cr(blue), 160,0);
 
-   if(pl.getCVarI(sc_hud_showweapons))
+   if(CVarGetI(sc_hud_showweapons))
       PrintSprite(sp_HUD_D_WepBack, 320,2, 218,2);
 
    HUD_WeaponSlots(Cr(wseld1), Cr(wseld2), Cr(wseld3), Cr(wselds), 323, 216);

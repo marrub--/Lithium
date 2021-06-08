@@ -212,7 +212,7 @@ static void GUIUpgradeButtons(struct gui_state *g, struct upgrade *upgr) {
    Str(sl_autogroups, sLANG "AUTOGROUPS");
 
    /* Buy */
-   if(G_Button(g, LC(LANG "BUY"), 98, 192, !P_Shop_CanBuy(&upgr->info->shopdef, upgr), .fill = {&CBIState(g)->buyfill, pl.getCVarI(sc_gui_buyfiller)}))
+   if(G_Button(g, LC(LANG "BUY"), 98, 192, !P_Shop_CanBuy(&upgr->info->shopdef, upgr), .fill = {&CBIState(g)->buyfill, CVarGetI(sc_gui_buyfiller)}))
       P_Upg_Buy(upgr, false);
 
    /* Activate */

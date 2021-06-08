@@ -51,7 +51,7 @@ static void silly_pickup(i32 weapon)
 
 void P_Log_Weapon(struct weaponinfo const *info)
 {
-   if(pl.getCVarI(sc_player_stupidpickups))
+   if(CVarGetI(sc_player_stupidpickups))
       silly_pickup(info->type);
    else if(info->name)
       pl.logB(1, LC(LANG "PK_GET_000"), Language(LANG "INFO_SHORT_%S", info->name));
@@ -66,7 +66,7 @@ void P_Log_SellWeapon(struct weaponinfo const *info, i96 score)
 
    str nam;
 
-   if(pl.getCVarI(sc_player_stupidpickups))
+   if(CVarGetI(sc_player_stupidpickups))
       nam = get_name(weapon);
    else
       nam = Language(LANG "INFO_SHORT_%S", info->name);

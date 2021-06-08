@@ -94,13 +94,13 @@ static void CheckModCompat(void)
 
    if((legendoom = ACS_SpawnForced(so_legendary_marker, 0, 0, 0, tid = ACS_UniqueTID(), 0))) ACS_Thing_Remove(tid);
 
-   drlamonsters = ACS_GetCVar(sc_drla_is_using_monsters);
+   drlamonsters = CVarGetI(sc_drla_is_using_monsters);
 }
 
 static bool updateTo(k32 to) {
-   k32 cur = ACS_GetCVarFixed(sc_version);
+   k32 cur = CVarGetK(sc_version);
    if(cur < to) {
-      ACS_SetCVarFixed(sc_version, to);
+      CVarSetK(sc_version, to);
       return true;
    } else {
       return false;
@@ -110,33 +110,33 @@ static bool updateTo(k32 to) {
 static void UpdateGame(void)
 {
    if(updateTo(Ver1_5_1)) {
-      ACS_SetCVarFixed(sc_sv_scoremul, 1.25); /* 2.0 => 1.25 */
+      CVarSetK(sc_sv_scoremul, 1.25); /* 2.0 => 1.25 */
    }
 
    if(updateTo(Ver1_5_2)) {
-      ACS_SetCVar(sc_sv_difficulty, 10); /* 1 => 10 */
+      CVarSetI(sc_sv_difficulty, 10); /* 1 => 10 */
    }
 
    if(updateTo(Ver1_6_0)) {
-      pl.setCVarK(sc_player_footstepvol, 0.2); /* 1.0 => 0.2 */
-      pl.setCVarI(sc_player_ammolog, true); /* false => true */
+      CVarSetK(sc_player_footstepvol, 0.2); /* 1.0 => 0.2 */
+      CVarSetI(sc_player_ammolog, true); /* false => true */
    }
 
    if(updateTo(Ver1_6_1)) {
-      pl.setCVarK(sc_weapons_zoomfactor, 1.5); /* 3.0 => 1.5 */
+      CVarSetK(sc_weapons_zoomfactor, 1.5); /* 3.0 => 1.5 */
    }
 
    if(updateTo(Ver1_7_0)) {
       /* unfortunate, but we forgot to add this for 1.6.3. so, we'll fix it in
        * version 1.7 instead.
        */
-      if(pl.getCVarI(sc_xhair_style) >= 10) {
-         pl.setCVarI(sc_xhair_style, 0);
+      if(CVarGetI(sc_xhair_style) >= 10) {
+         CVarSetI(sc_xhair_style, 0);
       }
       /* accidentally set this to something the settings menu couldn't
        * actually use
        */
-      ACS_SetCVarFixed(sc_sv_scoremul, 1.2); /* 1.25 => 1.2 */
+      CVarSetK(sc_sv_scoremul, 1.2); /* 1.25 => 1.2 */
    }
 }
 
@@ -179,7 +179,7 @@ static void MInitPst(void)
     */
    bool multi_player  = ACS_PlayerCount() > 1;
    bool never_rain    = ACS_GetLineUDMFInt(LithMapLine, sm_MapNoRain);
-   bool use_rain_user = ACS_GetCVar(sc_sv_rain);
+   bool use_rain_user = CVarGetI(sc_sv_rain);
    bool use_rain_map  = ACS_GetLineUDMFInt(LithMapLine, sm_MapUseRain);
    if(!multi_player && !never_rain && (use_rain_user || use_rain_map)) {
       dorain = true;
@@ -201,7 +201,7 @@ static void MInit(void)
    mapseed = ACS_Random(0, INT32_MAX);
 
    /* Init global score multiplier per-map. */
-   scoremul = fastroundlk(ACS_GetCVarFixed(sc_sv_scoremul) * 10.0k) / 10.0k;
+   scoremul = fastroundlk(CVarGetK(sc_sv_scoremul) * 10.0k) / 10.0k;
 
    /* Give players some extra score if they're playing on extra hard or above. */
    if(ACS_GameSkill() >= skill_extrahard)
@@ -223,7 +223,7 @@ static void HInitPre(void)
 
    bossspawned = false;
 
-   if(ACS_GetCVar(sc_sv_sky) && !islithmap) {
+   if(CVarGetI(sc_sv_sky) && !islithmap) {
       Str(sp_lithskde, s"LITHSKDE");
       Str(sp_lithskrd, s"LITHSKRD");
       Str(sp_lithsks1, s"LITHSKS1");
@@ -242,7 +242,7 @@ static void HInit(void)
 {
    Dbg_Log(log_dev, "%s", __func__);
 
-   if(!ACS_GetCVar(sc_sv_nobosses))
+   if(!CVarGetI(sc_sv_nobosses))
       Boss_HInit();
 
    /* Payout, which is not done on the first map. */
@@ -255,8 +255,8 @@ static void HInit(void)
    if(Cluster ==  9) P_BIP_Unlock("MSecret1");
    if(Cluster == 10) P_BIP_Unlock("MSecret2");
 
-   if(ACS_GetCVar(sc_sv_nobosses) ||
-      ACS_GetCVar(sc_sv_nobossdrop)
+   if(CVarGetI(sc_sv_nobosses) ||
+      CVarGetI(sc_sv_nobossdrop)
       #ifndef NDEBUG
       || get_bit(dbgflags, dbgf_items)
       #endif
@@ -289,8 +289,8 @@ void Sc_PreInit(void) {
    GSInit();
 
    #ifndef NDEBUG
-   dbglevel = ACS_GetCVar(sc_debug_level);
-   dbgflags = ACS_GetCVar(sc_debug_flags);
+   dbglevel = CVarGetI(sc_debug_level);
+   dbgflags = CVarGetI(sc_debug_flags);
    #endif
 
    islithmap = (MapNum >= LithMapBeg && MapNum <= LithMapEnd);
@@ -325,7 +325,7 @@ begin:
    }
 
    #ifndef NDEBUG
-   if(ACS_GetCVar(sc_sv_failtime) == 0) for(;;) {
+   if(CVarGetI(sc_sv_failtime) == 0) for(;;) {
       Str(sc_toggleconsole, s"toggleconsole");
       Log("\n=======\n"
           "The configuration for this mod has been wiped, or you accidentally "
@@ -392,7 +392,7 @@ begin:
          goto begin;
       }
 
-      if(ticks > ACS_GetCVar(sc_sv_failtime) * 35 * 60 * 60 && !islithmap) {
+      if(ticks > CVarGetI(sc_sv_failtime) * 35 * 60 * 60 && !islithmap) {
          F_Start("TimeOut");
          return;
       }
@@ -428,7 +428,7 @@ begin:
       #endif
       ticks++;
 
-      i32 autosave = ACS_GetCVar(sc_sv_autosave);
+      i32 autosave = CVarGetI(sc_sv_autosave);
       if(autosave && ticks % (35 * 60 * autosave) == 0) ACS_Autosave();
    }
 }
@@ -436,7 +436,7 @@ begin:
 script_str ext("ACS") addr(OBJ "InHell") i32 Sc_InHell(void) {return InHell;}
 
 script_str ext("ACS") addr(OBJ "SkyMap") i32 Sc_SkyMap(void) {
-   return ACS_GetCVar(sc_sv_sky) && !islithmap;
+   return CVarGetI(sc_sv_sky) && !islithmap;
 }
 
 alloc_aut(0) script ext("ACS") addr(lsc_worldreopen)

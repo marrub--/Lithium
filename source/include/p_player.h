@@ -235,14 +235,6 @@ struct player {
    __prop classname    {default: GetNameTag(->tid)}
    __prop overdrive    {default: GetMembI(->tid, sm_Overdrive)}
 
-   /* cvars */
-   __prop getCVarI {operator(): ACS_GetUserCVar      (->num)}
-   __prop getCVarK {operator(): ACS_GetUserCVarFixed (->num)}
-   __prop getCVarS {operator(): ACS_GetUserCVarString(->num)}
-   __prop setCVarI {operator(): ACS_SetUserCVar      (->num)}
-   __prop setCVarK {operator(): ACS_SetUserCVarFixed (->num)}
-   __prop setCVarS {operator(): ACS_SetUserCVarString(->num)}
-
    /* log */
    __prop logB {operator(): P_Log_Both()}
    __prop logF {operator(): P_Log_Full()}

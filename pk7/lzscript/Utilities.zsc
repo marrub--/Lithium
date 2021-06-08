@@ -46,14 +46,23 @@ struct Lith_UTIL
 
    static vector2 vec2Lerp(vector2 a, vector2 b, double t)
    {
-      let vec = (Lerp(a.x, b.x, t), Lerp(a.y, b.y, t));
+      let vec = (lerp(a.x, b.x, t), lerp(a.y, b.y, t));
       return vec;
    }
 
    static vector3 vec3Lerp(vector3 a, vector3 b, double t)
    {
-      let vec = (Lerp(a.x, b.x, t), Lerp(a.y, b.y, t), Lerp(a.z, b.z, t));
+      let vec = (lerp(a.x, b.x, t), lerp(a.y, b.y, t), lerp(a.z, b.z, t));
       return vec;
+   }
+
+   static color colorLerp(color a, color b, double t)
+   {
+      uint rd = uint(lerp(a.r, b.r, t));
+      uint gr = uint(lerp(a.g, b.g, t));
+      uint bl = uint(lerp(a.b, b.b, t));
+      uint al = uint(lerp(a.a, b.a, t));
+      return (al << 24) | (rd << 16) | (gr << 8) | bl;
    }
 
    static int round(double n)

@@ -36,8 +36,8 @@ w_setptr_x(bool)
 #define LithMapBeg  0x001CCF00
 #define LithMapEnd  0x001CD2E7
 
-#define GetFun()  ACS_GetCVar(sc_fun)
-#define SetFun(x) ACS_SetCVar(sc_fun, x)
+#define GetFun()  CVarGetI(sc_fun)
+#define SetFun(x) CVarSetI(sc_fun, x)
 #endif
 
 /* Types ------------------------------------------------------------------- */

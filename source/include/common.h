@@ -74,6 +74,13 @@
 #define SetPropK ACS_SetActorPropertyFixed
 #define SetPropS ACS_SetActorPropertyString
 
+#define CVarGetI ACS_GetCVar
+#define CVarGetK ACS_GetCVarFixed
+#define CVarGetS ACS_GetCVarString
+#define CVarSetI ACS_SetCVar
+#define CVarSetK ACS_SetCVarFixed
+#define CVarSetS ACS_SetCVarString
+
 #define GetX ACS_GetActorX
 #define GetY ACS_GetActorY
 #define GetZ ACS_GetActorZ

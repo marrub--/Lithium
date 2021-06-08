@@ -82,7 +82,7 @@ override vector2 BobWeapon(double ticfrac) {
       double ang = wep.BobSpeed * 128 * Player.GetWBobSpeed() * (Level.Time - 1 + i) * 0.044;
       double bobtarget = Player.Bob;
 
-      if(CVar.GetCVar('lith_weapons_nofirebob', Player).GetBool() && !(Player.WeaponState & WF_WEAPONBOBBING)) {
+      if(lith_weapons_nofirebob && !(Player.WeaponState & WF_WEAPONBOBBING)) {
          bobtarget = 0;
       }
 

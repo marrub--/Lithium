@@ -78,15 +78,15 @@ void G_UpdateState(struct gui_state *g) {
     * nothing. This breaks network sync so we can only do it in
     * single-player.
     */
-   bool inverted = pl.getCVarI(sc_player_invertmouse);
+   bool inverted = CVarGetI(sc_player_invertmouse);
 
    Str(sc_invertmouse, s"sc_invertmouse");
-   if(singleplayer) inverted |= ACS_GetCVar(sc_invertmouse);
+   if(singleplayer) inverted |= CVarGetI(sc_invertmouse);
 
    g->old = g->cur;
 
-   k32 xmul = pl.getCVarK(sc_gui_xmul);
-   k32 ymul = pl.getCVarK(sc_gui_ymul);
+   k32 xmul = CVarGetK(sc_gui_xmul);
+   k32 ymul = CVarGetK(sc_gui_ymul);
 
                 g->cx -= pl.yawv   * (800.0lk * xmul);
    if(inverted) g->cy += pl.pitchv * (800.0lk * ymul);
@@ -99,7 +99,7 @@ void G_UpdateState(struct gui_state *g) {
    g->clickrgt = pl.buttons & BT_ALTATTACK;
    g->clickany = g->clicklft || g->clickrgt;
 
-   g->defcr = Draw_GetCr(pl.getCVarI(sc_gui_defcr));
+   g->defcr = Draw_GetCr(CVarGetI(sc_gui_defcr));
 
    if(!g->clickany)
       g->slide = 0;

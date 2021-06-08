@@ -18,7 +18,7 @@
 /* Extern Functions -------------------------------------------------------- */
 
 void HUD_WeaponSlots(i32 cr_one, i32 cr_two, i32 cr_many, i32 cr_cur, i32 _x, i32 _y) {
-   if(pl.getCVarI(sc_hud_showweapons))
+   if(CVarGetI(sc_hud_showweapons))
       for(i32 i = 1; i < SLOT_MAX; i++)
          ifauto(i32, slot, pl.weapon.slot[i])
    {
@@ -33,7 +33,7 @@ void HUD_WeaponSlots(i32 cr_one, i32 cr_two, i32 cr_many, i32 cr_cur, i32 _x, i3
 
       ACS_BeginPrint();
       ACS_PrintInt(i);
-      PrintTextX(sf_lhudfontsmall, cr, x,2, y,2, _u_no_unicode);
+      PrintTextX(sf_lsmlhfnt, cr, x,2, y,2, _u_no_unicode);
 
       if(pl.weapon.cur->info->slot == i)
          SetFade(fid_slotnS + i, 1, 6);
@@ -41,13 +41,13 @@ void HUD_WeaponSlots(i32 cr_one, i32 cr_two, i32 cr_many, i32 cr_cur, i32 _x, i3
       if(CheckFade(fid_slotnS + i)) {
          ACS_BeginPrint();
          ACS_PrintInt(i);
-         PrintTextFX(sf_lhudfontsmall, cr_cur, x,2, y,2, fid_slotnS + i, _u_no_unicode);
+         PrintTextFX(sf_lsmlhfnt, cr_cur, x,2, y,2, fid_slotnS + i, _u_no_unicode);
       }
    }
 }
 
 void HUD_Score(cstr fmt, i96 scrn, str font, i32 cr, i32 x, i32 xa) {
-   if(pl.getCVarI(sc_hud_showscore)) {
+   if(CVarGetI(sc_hud_showscore)) {
       char scr[64];
       sprintf(scr, fmt, scoresep(scrn));
 
@@ -80,13 +80,13 @@ void HUD_Score(cstr fmt, i96 scrn, str font, i32 cr, i32 x, i32 xa) {
          PrintTextFX_str(pl.scoreaccumstr, font, CR_WHITE, x,xa, 10,1, fid_scacum, _u_no_unicode);
    }
 
-   if(pl.getCVarI(sc_hud_showlvl)) {
+   if(CVarGetI(sc_hud_showlvl)) {
       PrintTextFmt("Lv.%u", pl.attr.level);
       if(pl.attr.points) __nprintf(" (\Cn%u\C- pts)", pl.attr.points);
       PrintTextX(font, cr, x,xa, 17,1, _u_no_unicode);
    }
 
-   i32 expbar = pl.getCVarI(sc_hud_expbar);
+   i32 expbar = CVarGetI(sc_hud_expbar);
    if(expbar > 0) {
       Str(sp_exp_bar_0, s":Bars:ExpBar0");
       PrintSprite(sp_exp_bar_0, x,xa, 24,1);

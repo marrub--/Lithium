@@ -21,13 +21,7 @@
 #include "lzscript/libeye/viewport.zsc"
 
 /* URANUS: Users Really Are Not UI Systems */
-class Lith_URANUS : EventHandler;
-
-struct PlayerData clearscope {
-   bool ShiftDown;
-}
-
-transient ui PlayerData m_PData[MAXPLAYERS];
+class Lith_URANUS : StaticEventHandler;
 
 static clearscope Lith_URANUS Instance()
    {return Lith_URANUS(Find("Lith_URANUS"));}

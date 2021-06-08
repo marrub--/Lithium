@@ -122,7 +122,7 @@ void P_Scr_Payout() {
          Rght(LC(LANG "RES_CLOSED"), (i % 6) < 3 ? 'n' : '-');
       }
 
-      if(pl.getCVarI(sc_player_resultssound)) {
+      if(CVarGetI(sc_player_resultssound)) {
          if(counting) {
             str snd = snil;
 

@@ -154,7 +154,7 @@ void Sc_MagicSelect(i32 num)
 {
    if(!P_None())
    {
-      if(!pl.getCVarI(sc_weapons_magicselanims)) return;
+      if(!CVarGetI(sc_weapons_magicselanims)) return;
 
       switch(num) {
       case 1: case 4: ACS_FadeTo(255, 255, 0, 0.3, 0.0); break;

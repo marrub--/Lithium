@@ -20,6 +20,12 @@ class Lith_FINAL : StaticEventHandler {
 
 extend class Lith_HERMES;
 
+struct PlayerData clearscope {
+   bool ShiftDown;
+}
+
+transient ui PlayerData m_PData;
+
 private array<Actor> m_bossBabies;
 private int m_bossDeathInit;
 bool m_wasFinal;
@@ -214,12 +220,6 @@ override void WorldUnloaded(WorldEvent ev)
       if(!mo.owner) mo.Lith_Destroy();
 }
 
-override void UiTick()
-{
-   if(GameState == GS_FINALE && (!Level.NextMap || Level.NextMap.Left(6) == "enDSeQ"))
-      CallACS("Lith_Finale");
-}
-
 override void WorldThingSpawned(WorldEvent ev)
 {
    let th = ev.Thing;
@@ -329,9 +329,12 @@ override void WorldThingDamaged(WorldEvent ev)
 {
    let src = ev.damageSource;
    let dst = ev.thing;
-   let pos = dst.pos + (0, 0, dst.height / 2);
 
    if(!dst) return;
+
+   let pos = dst.pos + (0, 0, dst.height / 2);
+
+   Lith_URANUS.instance().addDamageNum(pos, dst.radius/2, ev.damage);
 
    if(ev.damageType == 'Bullet' && ev.damage >= 8 && !dst.bNOBLOOD) {
       double vol = clamp(ev.damage / 10.0, 0, 1);
@@ -344,7 +347,6 @@ override void WorldThingDamaged(WorldEvent ev)
    let player = Lith_Player(src);
 
    if(player) {
-      Lith_URANUS.instance().addDamageNum(player.pos, pos, dst.radius/2, ev.damage);
 
       let magnum = Lith_Magnum(player.player.readyWeapon);
       if(magnum) {
@@ -472,15 +474,13 @@ override void CheckReplacement(ReplaceEvent ev)
 
 override bool InputProcess(InputEvent ev)
 {
-   let cl = Lith_URANUS.Instance();
-
-   if(!cl || !PlayerInGame[ConsolePlayer] || !Lith_Player(Players[ConsolePlayer].MO))
+   if(!PlayerInGame[ConsolePlayer] || !Lith_Player(Players[ConsolePlayer].MO))
       return false;
 
    if((ev.Type    == InputEvent.Type_KeyDown || ev.Type    == InputEvent.Type_KeyUp) &&
       (ev.KeyScan == InputEvent.Key_LShift   || ev.KeyScan == InputEvent.Key_RShift))
    {
-      cl.m_PData[ConsolePlayer].ShiftDown = ev.Type == InputEvent.Type_KeyDown;
+      m_PData.ShiftDown = ev.Type == InputEvent.Type_KeyDown;
       return false;
    }
    else if(Lith_Player(Players[ConsolePlayer].MO).m_GrabInput &&
@@ -488,7 +488,7 @@ override bool InputProcess(InputEvent ev)
    {
       int ch = ev.KeyChar;
 
-      if(cl.m_PData[ConsolePlayer].ShiftDown && ch >= Ch_L_A && ch <= Ch_L_Z)
+      if(m_PData.ShiftDown && ch >= Ch_L_A && ch <= Ch_L_Z)
          ch -= 32;
 
       EventHandler.SendNetworkEvent("Lith_Key", ch);

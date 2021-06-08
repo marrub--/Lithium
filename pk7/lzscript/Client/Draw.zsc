@@ -31,6 +31,61 @@ class Lith_DamageNum {
    Lith_DamageNum m_next;
 }
 
+class Lith_MenuDelegate : MenuDelegateBase {
+   override void playSound(name sndName) {
+      string sndStr = sndName;
+      sound  snd    = sndStr;
+      S_StartSound(snd, lch_body, CHANF_UI, snd_menuVolume);
+   }
+
+   override bool drawSelector(ListMenuDescriptor desc) {
+      if(desc.mSelectedItem >= 0) {
+         let sel = ListMenuItemSelectable(desc.mItems[desc.mSelectedItem]);
+         if(sel) {
+            double x = sel.getX() - 8.0;
+            double y = sel.getY() + sel.mHeight / 4.0;
+            int dw = desc.displayWidth();
+            int dh = desc.displayHeight();
+            textureId tex = Lith_URANUS.getTextureForName(":XHairs:xpw");
+            double a = (sin(gameTic * 5.0) + 1.0) / 2.0;
+            color  c = Lith_URANUS.xhairColor();
+            if(dw == ListMenuDescriptor.CleanScale) {
+               Screen.DrawTexture(tex, false, x, y,
+                                  DTA_Clean,true,
+                                  DTA_KeepRatio,true,
+                                  DTA_FillColor,c,
+                                  DTA_Alpha,a);
+            } else {
+               Screen.DrawTexture(tex, false, x, y,
+                                  DTA_VirtualWidth,dw,
+                                  DTA_VirtualHeight,dh,
+                                  DTA_KeepRatio,true,
+                                  DTA_FillColor,c,
+                                  DTA_Alpha,a);
+            }
+         }
+      }
+      return true;
+   }
+
+   override Font pickFont(Font fnt) {
+      Font bigupper = "bigupper";
+      Font lmidfont = "lmidfont";
+      Font ltrmfont = "ltrmfont";
+      if(fnt == smallFont) {
+         return Lith_URANUS.instance().fntSml();
+      } else if(fnt == lmidfont) {
+         return Lith_URANUS.instance().fntMid();
+      } else if(fnt == ltrmfont) {
+         return Lith_URANUS.instance().fntTrm();
+      } else if(fnt == bigFont || fnt == bigupper) {
+         return Lith_URANUS.instance().fntBig();
+      } else {
+         return fnt;
+      }
+   }
+}
+
 extend class Lith_URANUS;
 
 /* Types ------------------------------------------------------------------- */
@@ -84,25 +139,16 @@ private transient play int m_BreakWidth;
 private transient play bool m_NoDraw;
 private transient play bool m_ForceDraw;
 
-private transient Font m_UtfBigFont;
-private transient Font m_UtfTrmFont;
-transient Font m_UtfFont;
+private transient Font m_UFntSml;
 
 private transient Shape2DTransform m_RectXf;
 private transient Shape2D m_Rect;
 
 private transient Lith_UTILHACK m_Uh;
 
-private transient CVar m_CVarJpFont;
-private transient CVar m_CVarXHairR;
-private transient CVar m_CVarXHairG;
-private transient CVar m_CVarXHairB;
-private transient CVar m_CVarXHairA;
-private transient CVar m_CVarXHairEnable;
-private transient CVar m_CVarXHairStyle;
-private transient CVar m_CVarXHairEnableJuicer;
+private transient bool m_English;
 
-transient bool m_English;
+private transient ui double m_ScreenDim;
 
 private transient bool m_dmgNumInit;
 private transient int m_dmgNumAmount;
@@ -263,16 +309,10 @@ static void LT(Actor mo, string txt, string fnt, int xx, int yy, double anum, in
    cl.m_D[p].Cr = cr;
 
    uint lns, lnx = 0;
+   int yOfs;
 
-   if(flags & _u_no_unicode || cl.m_English) {
-      if(fnt == "smallfnt") cl.m_D[p].Fnt = smallfont;
-      else                  cl.m_D[p].Fnt = Font.GetFont(fnt);
-   } else {
-      /**/ if(fnt == "bigupper") cl.m_D[p].Fnt = cl.m_UtfBigFont;
-      else if(fnt == "ltrmfont") cl.m_D[p].Fnt = cl.m_UtfTrmFont;
-      else                       cl.m_D[p].Fnt = cl.m_UtfFont;
-      y += 2;
-   }
+   [cl.m_D[p].Fnt, yOfs] = cl.fntAny(fnt, flags & _u_no_unicode);
+   y += yOfs;
 
    cl.m_D[p].LnY = cl.m_D[p].Fnt.GetHeight();
    let       brl = cl.m_D[p].Fnt.BreakLines(txt, cl.m_BreakWidth ? cl.m_BreakWidth : 0x7fff);
@@ -388,19 +428,9 @@ static clearScope textureId getTextureForName(string tex) {
 /* Member Functions -------------------------------------------------------- */
 
 override void onRegister() {
-   super.onRegister();
-
    projectRegister();
 
    PlayerInfo pl = players[consolePlayer];
-   m_CVarJpFont = CVar.getCVar('lith_gui_jpfont', pl);
-   m_CVarXHairR = CVar.getCVar('lith_xhair_r', pl);
-   m_CVarXHairG = CVar.getCVar('lith_xhair_g', pl);
-   m_CVarXHairB = CVar.getCVar('lith_xhair_b', pl);
-   m_CVarXHairA = CVar.getCVar('lith_xhair_a', pl);
-   m_CVarXHairEnable = CVar.getCVar('lith_xhair_enable', pl);
-   m_CVarXHairStyle = CVar.getCVar('lith_xhair_style', pl);
-   m_CVarXHairEnableJuicer = CVar.getCVar('lith_xhair_enablejuicer', pl);
 
    m_RectXf = new("Shape2DTransform");
    m_Rect = new("Shape2D");
@@ -417,20 +447,29 @@ override void onRegister() {
 }
 
 override void worldTick() {
-   if(!(m_English = StringTable.Localize("LITH_CHECK", false) == "Eng")) {
-      switch(m_CVarJpFont.GetInt()) {
-         default:
-         case font_misaki_gothic: m_UtfFont = "MisakiG";  break;
-         case font_misaki_mincho: m_UtfFont = "MisakiM";  break;
-         case font_k6x8:          m_UtfFont = "k6x8";     break;
-         case font_jiskan16:      m_UtfFont = "jiskan16"; break;
-      }
-      m_UtfBigFont = "newconsolefont";
-      m_UtfTrmFont = "ljtrmfont";
+   m_English = StringTable.Localize("LITH_CHECK", false) == "Eng";
+
+   switch(lith_gui_jpfont) {
+   default:
+   case font_misaki_gothic: m_UFntSml = "MisakiG";  break;
+   case font_misaki_mincho: m_UFntSml = "MisakiM";  break;
+   case font_k6x8:          m_UFntSml = "k6x8";     break;
+   case font_jiskan16:      m_UFntSml = "jiskan16"; break;
    }
 
    projectSetRenderer();
    tickDmgNums();
+}
+
+override void uiTick() {
+   /* warning: this entire function is hacks. */
+   if(gameState == GS_FINALE && (!level.nextMap || level.nextMap.left(6) == "enDSeQ"))
+      callACS("Lith_Finale");
+
+   if(!(menuDelegate is "Lith_MenuDelegate")) {
+      menuDelegate.destroy();
+      menuDelegate = new("Lith_MenuDelegate");
+   }
 }
 
 override void renderOverlay(RenderEvent evt) {
@@ -511,6 +550,14 @@ override void renderOverlay(RenderEvent evt) {
 
    let p = Lith_Player(evt.camera);
    if(p && p.m_Cs) p.m_Cs.Lith_Render();
+
+   if(menuActive) {
+      m_ScreenDim = Lith_UTIL.lerp(m_ScreenDim, 0.75, 0.3);
+   } else {
+      m_ScreenDim = Lith_UTIL.lerp(m_ScreenDim, 0.0, 0.1);
+   }
+
+   Screen.dim("black", m_ScreenDim, 0, 0, Screen.getWidth(), Screen.getHeight());
 }
 
 clearScope int, int getScSized(double x, double y, bool kludge = false) {
@@ -528,8 +575,8 @@ clearScope int, int getScSized(double x, double y, bool kludge = false) {
    return int(xy.X), int(xy.Y);
 }
 
-void addDamageNum(vector3 pos, vector3 origin, double w, int damage) {
-   if(CVar.getCVar('lith_hud_showdamage', players[consolePlayer]).getBool()) {
+void addDamageNum(vector3 origin, double w, int damage) {
+   if(lith_hud_showdamage) {
       if(!m_dmgNumInit) {
          for(int i = 0; i < _dnum_max; i++) {
             m_dmgNumHeads[i] = new("Lith_DamageNum");
@@ -546,10 +593,10 @@ void addDamageNum(vector3 pos, vector3 origin, double w, int damage) {
 
       Lith_DamageNum start;
 
-      if(damage >= 120) {
-         start = m_dmgNumHeads[_dnum_crit];
-      } else if(level.vec3Diff(pos, origin).length() > 1024) {
+      if(level.vec3Diff(players[consolePlayer].mo.pos, origin).length() > 1024) {
          start = m_dmgNumHeads[_dnum_smol];
+      } else if(damage >= 120) {
+         start = m_dmgNumHeads[_dnum_crit];
       } else {
          start = m_dmgNumHeads[_dnum_norm];
       }
@@ -619,9 +666,9 @@ private ui void drawDmgNums(RenderEvent evt) {
             Font fnt;
 
             switch(ty) {
-            case _dnum_smol: fnt = smallfont;  cr = Font.CR_GREY;  break;
-            case _dnum_norm: fnt = "lmidfont"; cr = Font.CR_WHITE; break;
-            case _dnum_crit: fnt = "bigupper"; cr = Font.CR_GOLD;  break;
+            case _dnum_smol: fnt = fntSml(true); cr = Font.CR_GREY;  break;
+            case _dnum_norm: fnt = fntMid(true); cr = Font.CR_WHITE; break;
+            case _dnum_crit: fnt = fntBig(true); cr = Font.CR_GOLD;  break;
             }
 
             let txt = string.format("%i", dnum.m_damage);
@@ -680,12 +727,9 @@ private ui void drawCrosshair(RenderEvent evt) {
    }
 
    /* draw the crosshair */
-   uint r = clamp(m_CVarXHairR.getInt(), 0, 255);
-   uint g = clamp(m_CVarXHairG.getInt(), 0, 255);
-   uint b = clamp(m_CVarXHairB.getInt(), 0, 255);
-   uint a = clamp(m_CVarXHairA.getInt(), 0, 255);
+   uint a = clamp(lith_xhair_a, 0, 255);
 
-   if(m_CVarXHairEnable.getBool() && a) {
+   if(lith_xhair_enable && a) {
       static const string[] XB_GFX = {
          ":XHairs:crossb",
          ":XHairs:circleb", ":XHairs:deltab",  ":XHairs:ovalb",
@@ -699,14 +743,14 @@ private ui void drawCrosshair(RenderEvent evt) {
          ":XHairs:anglew",  ":XHairs:dotw",    ":XHairs:xpw"
       };
 
-      int style = m_CVarXHairStyle.getInt();
+      int style = lith_xhair_style;
       if(style >= XW_GFX.size()) {
          style = 0;
       }
 
       textureId xhb = getTextureForName(XB_GFX[style]);
       textureId xhw = getTextureForName(XW_GFX[style]);
-      color     c   = (r << 16) | (g << 8) | (b << 0);
+      color     c   = xhairColor();
 
       int bsx, bsy; [bsx, bsy] = TexMan.GetSize(xhb);
       int wsx, wsy; [wsx, wsy] = TexMan.GetSize(xhw);
@@ -727,7 +771,7 @@ private ui void drawCrosshair(RenderEvent evt) {
                          DTA_TopOffset,0, DTA_LeftOffset,0,
                          DTA_Alpha,a/255.0,DTA_FillColor,c);
 
-      if(m_CVarXHairEnableJuicer.getBool()) {
+      if(lith_xhair_enablejuicer) {
          textureId xhl = getTextureForName(":XHairs:L");
          textureId xhr = getTextureForName(":XHairs:R");
 
@@ -747,6 +791,57 @@ private ui void drawCrosshair(RenderEvent evt) {
                             DTA_Alpha,a/255.0,DTA_FillColor,c);
       }
    }
+}
+
+Font, int fntSml(bool noUnicode = false) const {
+   if(noUnicode || m_English) {
+      return smallFont, 0;
+   } else {
+      return m_UFntSml, 2;
+   }
+}
+
+Font, int fntMid(bool noUnicode = false) const {
+   if(noUnicode || m_English) {
+      return "lmidfont", 0;
+   } else {
+      return m_UFntSml, 2;
+   }
+}
+
+Font, int fntBig(bool noUnicode = false) const {
+   if(noUnicode || m_English) {
+      return "lbigfont", 0;
+   } else {
+      return "newconsolefont", 0;
+   }
+}
+
+Font, int fntTrm(bool noUnicode = false) const {
+   if(noUnicode || m_English) {
+      return "ltrmfont", 0;
+   } else {
+      return "ljtrmfont", 0;
+   }
+}
+
+Font, int fntAny(string name, bool noUnicode = false) const {
+   Font ret = null;
+   int yOfs = 0;
+   /**/ if(name == "smallfnt") [ret, yOfs] = fntSml(noUnicode);
+   else if(name == "lmidfont") [ret, yOfs] = fntMid(noUnicode);
+   else if(name == "ltrmfont") [ret, yOfs] = fntTrm(noUnicode);
+   else if(name == "bigupper") [ret, yOfs] = fntBig(noUnicode);
+   else if(name == "areaname") ret = "areaname";
+   else if(name == "lsmlhfnt") ret = "lsmlhfnt";
+   return ret, yOfs;
+}
+
+static clearScope color xhairColor() {
+   uint r = clamp(lith_xhair_r, 0, 255);
+   uint g = clamp(lith_xhair_g, 0, 255);
+   uint b = clamp(lith_xhair_b, 0, 255);
+   return (r << 16) | (g << 8) | (b << 0);
 }
 
 /* EOF */

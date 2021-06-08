@@ -31,8 +31,8 @@ static void HUD_Ammo() {
    str typebg;
    i32 y;
 
-   if(pl.getCVarI(sc_hud_showweapons)) {y = 13; typebg = sp_HUD_M_SplitRight;}
-   else                                {y = 0;  typebg = sp_HUD_M_SplitFront;}
+   if(CVarGetI(sc_hud_showweapons)) {y = 13; typebg = sp_HUD_M_SplitRight;}
+   else                             {y = 0;  typebg = sp_HUD_M_SplitFront;}
 
    if(wep->ammotype & AT_NMag || wep->ammotype & AT_Ammo) {
       PrintSprite(sp_HUD_M_BarBig, 278,2, 239-y,2);
@@ -126,7 +126,7 @@ void Upgr_HeadsUpDisM_Render(struct upgrade *upgr) {
    HUD_KeyInd(320, 20, true, 0.8);
    HUD_Score("%s\Cnscr", pl.score, sf_smallfnt, CR_WHITE, 320,2);
 
-   if(pl.getCVarI(sc_hud_showweapons))
+   if(CVarGetI(sc_hud_showweapons))
       PrintSprite(sp_HUD_M_Bar, 278,2, 239,2);
 
    HUD_WeaponSlots(Cr(wselm1), Cr(wselm2), Cr(wselm3), Cr(wselms), 281, 238);

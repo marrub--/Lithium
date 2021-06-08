@@ -62,7 +62,7 @@ void Upgr_ReactArmor_Render(struct upgrade *upgr)
 {
    Str(sp_HUD_M_SplitLeft, s":HUD_M:SplitLeft");
 
-   if(UData.activearmor && pl.getCVarI(sc_hud_showarmorind))
+   if(UData.activearmor && CVarGetI(sc_hud_showarmorind))
    {
       PrintSprite(sp_HUD_M_SplitLeft, 12,1, 226,2);
 
