@@ -135,6 +135,8 @@
 
 #define Dbg_Note(...) \
    (get_bit(dbglevel, log_devh) ? Dbg_Note_Impl(__VA_ARGS__) : (void)0)
+
+#define Dbg_Trace(n) (ACS_BeginLog(), PrintChrSt(__func__), ACS_PrintInt(n), ACS_EndLog())
 #else
 #define Dbg_Stat(...)
 #define Dbg_Note(...)

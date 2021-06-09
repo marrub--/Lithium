@@ -76,30 +76,27 @@ alloc_aut(0) stkcall static
 struct mem_blk *CheckUsedBlock(struct mem_blk *blk, cstr func) {
    if((void *)blk < (void *)mem_dat ||
       (void *)blk > (void *)(mem_dat + sizeof mem_dat)) {
-      Str(st_err_oob, s" ERROR: out of bounds block ");
       ACS_BeginPrint();
       PrintChrSt(func);
-      ACS_PrintString(st_err_oob);
+      PrintChrSt(" ERROR: out of bounds block ");
       ACS_PrintHex((intptr_t)blk);
       ACS_EndLog();
       return nil;
    }
 
    if(blk->idn != _mem_idn) {
-      Str(st_err_idn, s" ERROR: invalid identifier for ");
       ACS_BeginPrint();
       PrintChrSt(func);
-      ACS_PrintString(st_err_idn);
+      PrintChrSt(" ERROR: invalid identifier for ");
       ACS_PrintHex((intptr_t)blk);
       ACS_EndLog();
       return nil;
    }
 
    if(blk->tag == _tag_free) {
-      Str(st_err_tag, s" ERROR: already freed ");
       ACS_BeginPrint();
       PrintChrSt(func);
-      ACS_PrintString(st_err_tag);
+      PrintChrSt(" ERROR: already freed ");
       ACS_PrintHex((intptr_t)blk);
       ACS_EndLog();
       return nil;
@@ -146,10 +143,9 @@ void Dalloc(register void *p) {
    [[return]] __asm(":\"done\" Rjnk()");
 
    #ifndef NDEBUG
-   Str(st_err_ini, s"Dalloc ERROR: memory not initialized but freeing pointer");
 error:
    ACS_BeginPrint();
-   ACS_PrintString(st_err_ini);
+   PrintChrSt("Dalloc ERROR: memory not initialized but freeing pointer");
    ACS_EndLog();
    #endif
 }
@@ -181,9 +177,8 @@ void *Malloc(register mem_size_t rs, register mem_tag_t tag) {
           * don't worry, this won't ever really happen, right?
           */
          #ifndef NDEBUG
-         Str(st_err_oom, s"Malloc ERROR: out of memory - couldn't allocate ");
          ACS_BeginPrint();
-         ACS_PrintString(st_err_oom);
+         PrintChrSt("Malloc ERROR: out of memory - couldn't allocate ");
          ACS_PrintInt(s);
          ACS_EndLog();
          #endif
@@ -394,10 +389,9 @@ dyn:
    return (dpl_act = p)->dat;
 
    #ifndef NDEBUG
-   Str(st_err_sto, s"Plsa ERROR: stack overflow ");
 overflow:
    ACS_BeginPrint();
-   ACS_PrintString(st_err_sto);
+   PrintChrSt("Plsa ERROR: stack overflow ");
    ACS_PrintHex((intptr_t)pls_stk);
    ACS_PrintChar(' ');
    ACS_PrintHex((intptr_t)pls_cur);
@@ -439,10 +433,9 @@ void __GDCC__Plsf(void *p) {
    );
 
    #ifndef NDEBUG
-   Str(st_err_stp, s"Plsf ERROR: incorrect stack pointer ");
 invalid:
    ACS_BeginPrint();
-   ACS_PrintString(st_err_stp);
+   PrintChrSt("Plsf ERROR: incorrect stack pointer ");
    ACS_PrintHex((intptr_t)p);
    ACS_PrintChar(' ');
    ACS_PrintHex((intptr_t)pls_cur);

@@ -60,6 +60,7 @@ ListMenu "EpisodeMenu"
    StaticTextCentered 160, 30, "$MENU_WHICHEPISODE"
    StaticPatch 42, 48, "lgfx/Menu/EpisodeBack.png"
    Position 48, 63
+   Font "bigupper", "DarkGreen", "Green"
 }
 
 ListMenu "SkillMenu"

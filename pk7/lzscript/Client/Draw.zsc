@@ -25,7 +25,7 @@ enum Lith_DamageNumType {
 class Lith_DamageNum {
    vector3        m_origin;
    vector3        m_lastOrigin;
-   int            m_damage;
+   string         m_damage;
    int            m_ticks;
    int            m_origTick;
    Lith_DamageNum m_next;
@@ -430,8 +430,6 @@ static clearScope textureId getTextureForName(string tex) {
 override void onRegister() {
    projectRegister();
 
-   PlayerInfo pl = players[consolePlayer];
-
    m_RectXf = new("Shape2DTransform");
    m_Rect = new("Shape2D");
    m_Rect.pushVertex((0, 0));
@@ -444,6 +442,11 @@ override void onRegister() {
    m_Rect.pushCoord((1, 1));
    m_Rect.pushTriangle(0, 3, 1);
    m_Rect.pushTriangle(0, 2, 3);
+}
+
+override void worldUnloaded(WorldEvent evt) {
+   m_DPtr = 0;
+   m_dmgNumInit = false;
 }
 
 override void worldTick() {
@@ -605,7 +608,7 @@ void addDamageNum(vector3 origin, double w, int damage) {
 
       dnum.m_origin     = origin + (frandom(-w,w), frandom(-w,w), frandom(-9,9));
       dnum.m_lastOrigin = dnum.m_origin;
-      dnum.m_damage     = damage;
+      dnum.m_damage     = damage >= 1000000 ? "∞" : string.format("%i", damage);
       dnum.m_ticks      = 35 + min(damage, 120) / 3;
       dnum.m_origTick   = level.totalTime;
       dnum.m_next       = start.m_next;
@@ -671,7 +674,7 @@ private ui void drawDmgNums(RenderEvent evt) {
             case _dnum_crit: fnt = fntBig(true); cr = Font.CR_GOLD;  break;
             }
 
-            let txt = string.format("%i", dnum.m_damage);
+            let txt = dnum.m_damage;
 
             double xf = x - fnt.stringWidth(txt) / 2.0;
             double yf = y - fnt.getHeight()      / 2.0;

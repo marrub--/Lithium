@@ -197,18 +197,24 @@ FILE *NFOpen(str pcvar, char rw) {
 
          Dalloc(input);
 
-         #ifndef NDEBUG
-         /* If debugging, print out information about the buffer being read. */
-         if(get_bit(dbglevel, log_save)) {
-            ACS_BeginLog();
-            __nprintf("NFOpen: Opening memfile \"%S\" (%zub)\nData follows\n",
-                      pcvar, size);
-            Dbg_PrintMem(data, size);
-            ACS_EndLog();
-         }
-         #endif
-
          if(data) {
+#ifndef NDEBUG
+            /* If debugging, print out information about the buffer
+             * being read. */
+            if(get_bit(dbglevel, log_save)) {
+               ACS_BeginLog();
+               PrintChrSt("NFOpen: Opening memfile \"");
+               ACS_PrintString(pcvar);
+               PrintChrSt("\" (");
+               ACS_PrintInt(size);
+               PrintChrSt(" bytes)\nData follows");
+               ACS_EndLog();
+               ACS_BeginLog();
+               Dbg_PrintMem(data, size);
+               ACS_EndLog();
+            }
+#endif
+
             struct memfile *mem = Salloc(struct memfile, _tag_file);
 
             mem->mem = data;

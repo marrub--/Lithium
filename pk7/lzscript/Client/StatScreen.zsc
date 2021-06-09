@@ -10,14 +10,15 @@
 /* STATUS: Super Totally Awesome Totally Useful Statistics */
 class Lith_STATUS : DoomStatusScreen;
 
+Font m_Font;
+
 int m_Souls;
 bool m_Ready;
 
 private void Lith_DrawSetq(int x, int y, string text)
 {
-   let font = Font.GetFont("bigupper");
-   int lh = font.getHeight() * 3 / 2;
-   Screen.DrawText(font, Font.CR_GREEN, x, 60+lh*y, text, DTA_Clean, true);
+   int lh = m_Font.getHeight() * 3 / 2;
+   Screen.DrawText(m_Font, Font.CR_GREEN, x, 60+lh*y, text, DTA_Clean, true);
 }
 
 private void Lith_DrawPrct(int y, string text, int n, int m)
@@ -33,12 +34,12 @@ private void Lith_DrawPrct(int y, string text, int n, int m)
 
 private void Lith_DrawCent(int x, int y, string text)
 {
-   let font = Font.GetFont("bigupper");
-   Screen.DrawText(font, Font.CR_GREEN, x - font.stringWidth(text) / 2, y, text, DTA_Clean, true);
+   Screen.DrawText(m_Font, Font.CR_GREEN, x - m_Font.stringWidth(text) / 2, y, text, DTA_Clean, true);
 }
 
 override void Start(wbstartstruct wbss)
 {
+   m_Font = Lith_URANUS.instance().fntBig();
    m_Souls = random(400, 700);
    S_StartSound("intermission/mid", lch_body, CHANF_UI | CHANF_LOOP, 0.43, ATTN_NONE);
    Super.Start(wbss);
@@ -145,14 +146,14 @@ override void DrawStats()
    DrawName(40 * CleanYFac, nothing, lnametexts[0]);
 
    if(cnt_time >= 0) {
-      Screen.DrawText("bigupper", Font.CR_GREEN, SP_TIMEX, SP_TIMEY, "(time)", DTA_Clean, true);
-      DrawTimeFont("bigupper", 160 - SP_TIMEX, SP_TIMEY, cnt_time, Font.CR_GREEN);
-      DrawTimeFont("bigupper", 160 - SP_TIMEX, SP_TIMEY + 12, cnt_total_time, Font.CR_GREEN);
+      Screen.DrawText(m_Font, Font.CR_GREEN, SP_TIMEX, SP_TIMEY, "(time)", DTA_Clean, true);
+      DrawTimeFont(m_Font, 160 - SP_TIMEX, SP_TIMEY, cnt_time, Font.CR_GREEN);
+      DrawTimeFont(m_Font, 160 - SP_TIMEX, SP_TIMEY + 12, cnt_total_time, Font.CR_GREEN);
    }
 
    if(wbs.partime && cnt_par >= 0) {
-      Screen.DrawText("bigupper", Font.CR_GREEN, 160 + SP_TIMEX, SP_TIMEY, "(par)", DTA_Clean, true);
-      DrawTimeFont("bigupper", 320 - SP_TIMEX, SP_TIMEY, cnt_par, Font.CR_GREEN);
+      Screen.DrawText(m_Font, Font.CR_GREEN, 160 + SP_TIMEX, SP_TIMEY, "(par)", DTA_Clean, true);
+      DrawTimeFont(m_Font, 320 - SP_TIMEX, SP_TIMEY, cnt_par, Font.CR_GREEN);
    }
 
    Screen.DrawText(smallfont, Font.CR_GREEN, 5, 0, "Hold Use to speed up\nHold Alt-Fire to skip", DTA_VirtualWidth, 320, DTA_VirtualHeight, 240);

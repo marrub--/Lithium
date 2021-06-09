@@ -76,7 +76,17 @@ void Dbg_PrintMemC(void const *data, size_t size)
 
       byte c = Cps_GetC(d, i);
 
-      __nprintf(IsPrint(c) ? "%c  " : c"%.2X ", c);
+      if(IsPrint(c)) {
+         ACS_PrintChar(c);
+         ACS_PrintChar(' ');
+         ACS_PrintChar(' ');
+      } else {
+         if(c < 0x10) {
+            ACS_PrintChar('0');
+         }
+         ACS_PrintHex(c);
+         ACS_PrintChar(' ');
+      }
 
       pos += 3;
    }
@@ -96,7 +106,17 @@ void Dbg_PrintMem(void const *data, size_t size)
          pos = 0;
       }
 
-      __nprintf(IsPrint(d[i]) ? "%c  " : c"%.2X ", d[i]);
+      if(IsPrint(d[i])) {
+         ACS_PrintChar(d[i]);
+         ACS_PrintChar(' ');
+         ACS_PrintChar(' ');
+      } else {
+         if(d[i] < 0x10) {
+            ACS_PrintChar('0');
+         }
+         ACS_PrintHex(d[i]);
+         ACS_PrintChar(' ');
+      }
 
       pos += 3;
    }
