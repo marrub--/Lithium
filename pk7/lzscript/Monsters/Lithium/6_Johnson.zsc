@@ -7,7 +7,11 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_IsaacThompsonBullet2 : Lith_IsaacThompsonBullet {default {Damage 1;}}
+class Lith_IsaacThompsonBullet2 : Lith_IsaacThompsonBullet {
+   default {
+      Damage 1;
+   }
+}
 
 class Lith_Boss_Johnson : Lith_BasicPhantom;
 

@@ -32,7 +32,7 @@ class Lith_IsaacThompsonBullet : FastProjectile
    default
    {
       Alpha          0.9;
-      DamageFunction 4 * Random(1, 4);
+      DamageFunction 3 * Random(1, 4);
       DamageType     "Bullet";
       Height         4;
       MissileType    "Lith_IsaacThompsonTrail";

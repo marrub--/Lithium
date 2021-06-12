@@ -16,11 +16,11 @@ class Lith_MakarovShotgunBullet : FastProjectile
    default
    {
       Alpha 0.9;
-      DamageFunction 3 * Random(1, 5);
+      DamageFunction 3 * Random(1, 4);
       DamageType "Bullet";
       Height 20;
       MissileType "Lith_MakarovShotgunTrail";
-      Radius 24;
+      Radius 8;
       RenderStyle "Translucent";
       Scale 0.5;
       Speed 96;
@@ -43,14 +43,21 @@ class Lith_MakarovShotgunBullet : FastProjectile
    }
 }
 
-class Lith_MakarovGrenade : Lith_RifleGrenade
-{
-   default
-   {
+class Lith_MakarovGrenade : Lith_RifleGrenade {
+   default {
+      DamageFunction 5 * random(1, 8);
       Species "Lith_Phantom";
       Speed   30;
 
       +DONTHARMSPECIES
+   }
+
+   states {
+   Death:
+      TNT1 A 0 A_Explode(32, 64);
+      TNT1 A 0 Lith_A_ExplodeSound;
+      TNT1 A 0 Lith_A_DoExplosion;
+      stop;
    }
 }
 
