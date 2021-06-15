@@ -76,7 +76,8 @@
    statement({ \
       register cstr  _src  = src; \
       register char *_dest = dest; \
-      for(; *_dest || (*_dest = *_src); ++_dest, ++_src); \
+      register bool  _end  = false; \
+      for(; *_src; ++_dest) if((_end = _end || !*_dest)) *_dest = *_src++; \
    })
 
 #define faststrcat2(dest, src1, src2) \
@@ -84,7 +85,8 @@
       register cstr  _src1 = src1; \
       register cstr  _src2 = src2; \
       register char *_dest = dest; \
-      for(; *_dest || (*_dest = *_src1); ++_dest, ++_src1); \
+      register bool  _end  = false; \
+      for(; *_src1; ++_dest) if((_end = _end || !*_dest)) *_dest = *_src1++; \
       for(; (*_dest = *_src2); ++_dest, ++_src2); \
    })
 
@@ -126,6 +128,7 @@
    })
 
 stkcall i32 radix(char c);
+stkcall i32 faststrtoi32_str(astr p);
 stkcall i32 faststrtoi32(cstr p);
 stkcall i64 faststrtoi64(cstr p);
 stkcall i96 faststrtoi96(cstr p);
@@ -141,6 +144,8 @@ stkcall u32 faststrhash(cstr s);
 stkcall i32 faststrcmp_str(cstr s1, astr s2);
 stkcall i32 faststrcmp(cstr s1, cstr s2);
 stkcall i32 faststrcasecmp(cstr s1, cstr s2);
+stkcall char *faststrchr(cstr s, char c);
+stkcall char *faststrtok(char *s, char c);
 stkcall cstr scoresep(i96 num);
 stkcall cstr alientext(i32 num);
 str LanguageV(str name);

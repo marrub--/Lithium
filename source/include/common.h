@@ -19,7 +19,6 @@
 #include <ACS_ZDoom.h>
 #include <stdarg.h>
 #include <stdlib.h>
-#include <string.h>
 
 #include "m_types.h"
 #include "m_memory.h"

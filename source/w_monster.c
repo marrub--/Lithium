@@ -455,7 +455,7 @@ void MonInfo_Monster(struct tokbuf *tb, struct tbuf_err *res, i32 flags) {
             }
          #include "w_monster.h"
       } else if(faststrcmp(k, "hacks") == 0) {
-         for(char *hack = strtok(v, " "); hack; hack = strtok(nil, " ")) {
+         for(char *hack = faststrtok(v, ' '); hack; hack = faststrtok(nil, ' ')) {
             if(faststrcmp(hack, "ch") == 0) {
                MonInfo_ColorfulHellHack(mi);
                finished = true;

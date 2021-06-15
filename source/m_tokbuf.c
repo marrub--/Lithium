@@ -15,7 +15,6 @@
 #include "m_str.h"
 
 #include <ACS_ZDoom.h>
-#include <string.h>
 
 enum {
    _bbeg = 14,

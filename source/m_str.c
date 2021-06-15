@@ -108,6 +108,13 @@ i32 radix(char c) {
 }
 
 alloc_aut(0) stkcall
+i32 faststrtoi32_str(astr p) {
+   #define strto_impl_sign 1
+   #define strto_impl_type i32
+   #include "m_str.c"
+}
+
+alloc_aut(0) stkcall
 i32 faststrtoi32(cstr p) {
    #define strto_impl_sign 1
    #define strto_impl_type i32
@@ -240,6 +247,26 @@ i32 faststrcasecmp(cstr s1, cstr s2) {
    i32 res;
    while((res = ToUpper(*s1) - ToUpper(*s2++)) == 0 && *s1++ != '\0');
    return res;
+}
+
+alloc_aut(0) stkcall
+char *faststrchr(cstr s, char c) {
+   do if(*s == c) return (char *)s; while(*s++);
+   return nil;
+}
+
+alloc_aut(0) stkcall
+char *faststrtok(char *s, char c) {
+   static char *next;
+   if(s) next = s;
+   if(!next) return nil;
+   while(*next == c) ++next;
+   if(!*next) return nil;
+   char *curr = next;
+   while(*next && *next != c) ++next;
+   if(!*next) {next = nil; return curr;}
+   *next++ = '\0';
+   return curr;
 }
 
 alloc_aut(0) stkcall

@@ -65,7 +65,7 @@
 
 #define G_TxtBoxEvt(st) \
    __with(cstr txt_buf = Cps_Expand(st->txtbuf, 0, st->tbptr);) \
-      ifauto(cstr, _c, strchr(txt_buf, '\n')) \
+      ifauto(cstr, _c, faststrchr(txt_buf, '\n')) \
          __with(mem_size_t txt_len = _c - txt_buf; G_TxtBoxRes(st);)
 
 /* Types ------------------------------------------------------------------- */

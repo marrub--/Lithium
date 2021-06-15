@@ -41,7 +41,6 @@
 #include "m_str.h"
 
 #include <stdlib.h>
-#include <string.h>
 
 static byte const base64_table[65] =
    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";

@@ -171,7 +171,7 @@ void S_enume(struct set_parm const *sp) {
       sp->st->cb_g.i(sp, &v);
    }
 
-   i32 cr = !strcmp(sp->st->suff, "color") ? Draw_GetCr(v) : sp->g->defcr;
+   i32 cr = faststrcmp(sp->st->suff, "color") == 0 ? Draw_GetCr(v) : sp->g->defcr;
 
    if(v < min || v > max)
       PrintTextChS(LC(LANG "st_name_unknown"));

@@ -11,8 +11,6 @@
  * ---------------------------------------------------------------------------|
  */
 
-#define _GNU_SOURCE /* Needed for strcasestr. See: man 7 feature_test_macros */
-
 #include "common.h"
 #include "p_player.h"
 #include "p_bip.h"
@@ -76,7 +74,7 @@ static void SetCurPage(struct gui_state *g, struct page *page) {
 
 static void DrawPage(struct gui_state *g, struct page *page) {
    str image  = LanguageNull(LANG "INFO_IMAGE_%s", page->info->name);
-   i32 height = strtoi_str(Language(LANG "INFO_SSIZE_%s", page->info->name), nil, 10);
+   i32 height = faststrtoi32_str(Language(LANG "INFO_SSIZE_%s", page->info->name));
 
    struct gui_typ const *typeon = G_TypeOnUpdate(g, &CBIState(g)->biptypeon);
 
@@ -208,9 +206,9 @@ i32 SearchPage(struct page *page, cstr query) {
       return 1;
    }
 
-   if(strcasestr(GetShortName(page), query) ||
-      strcasestr(GetFullName(page),  query) ||
-      strcasestr(GetBody(page),      query)) {
+   if(faststrcasestr(GetShortName(page), query) ||
+      faststrcasestr(GetFullName(page),  query) ||
+      faststrcasestr(GetBody(page),      query)) {
       pl.bip.result[pl.bip.resnum++] = page;
    }
 

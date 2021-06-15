@@ -441,7 +441,7 @@ void P_doIntro() {
 
          ACS_LocalAmbientSound(ss_showtext, 127);
 
-         char *line = strtok(text, "\n");
+         char *line = faststrtok(text, '\n');
          for(i32 i = 0; i < _nlines; i++) {
             lines[i] = nil;
             linec[i] = 0;
@@ -453,7 +453,7 @@ void P_doIntro() {
                   linec[i] = faststrlen(line);
                }
 
-               line = strtok(nil, "\n");
+               line = faststrtok(nil, '\n');
             }
          }
       }

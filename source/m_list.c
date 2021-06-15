@@ -13,7 +13,6 @@
 
 #include "m_list.h"
 #include <stdlib.h>
-#include <string.h>
 #include <stdio.h>
 
 /* Extern Functions -------------------------------------------------------- */
