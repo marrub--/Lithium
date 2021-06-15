@@ -335,7 +335,7 @@ override void WorldThingDamaged(WorldEvent ev)
 
    let pos = dst.pos + (0, 0, dst.height / 2);
 
-   Lith_URANUS.instance().addDamageNum(pos, dst.radius/2, ev.damage);
+   Lith_URANUS.instance().addDamageNum(pos, dst.radius/2, ev.damage, ev.thing);
 
    if(ev.damageType == 'Bullet' && ev.damage >= 8 && !dst.bNOBLOOD) {
       double vol = clamp(ev.damage / 10.0, 0, 1);

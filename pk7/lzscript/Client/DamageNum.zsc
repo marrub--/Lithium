@@ -20,6 +20,7 @@ class Lith_DamageNum {
    string         m_damage;
    int            m_ticks;
    int            m_origTick;
+   int            m_cr;
    Lith_DamageNum m_next;
 }
 
@@ -29,7 +30,7 @@ private transient Lith_DamageNum[_dnum_max] m_dmgNumHeads;
 private transient bool m_dmgNumInit;
 private transient int m_dmgNumAmount;
 
-void addDamageNum(vector3 origin, double w, int damage) {
+void addDamageNum(vector3 origin, double w, int damage, Actor receiver) {
    if(lith_hud_showdamage) {
       if(!m_dmgNumInit) {
          for(int i = 0; i < _dnum_max; i++) {
@@ -63,6 +64,18 @@ void addDamageNum(vector3 origin, double w, int damage) {
       dnum.m_ticks      = 35 + min(damage, 120) / 3;
       dnum.m_origTick   = level.totalTime;
       dnum.m_next       = start.m_next;
+
+      if(receiver.player) {
+         dnum.m_cr = Font.CR_RED;
+      } else if(damage > 1000) {
+         dnum.m_cr = Font.CR_LIGHTBLUE;
+      } else if(damage > 100) {
+         dnum.m_cr = Font.CR_GOLD;
+      } else if(damage > 10) {
+         dnum.m_cr = Font.CR_WHITE;
+      } else {
+         dnum.m_cr = Font.CR_GREY;
+      }
 
       start.m_next = dnum;
    }
@@ -116,13 +129,12 @@ private ui void drawDmgNums(RenderEvent evt) {
          int x, y; bool seen; [x, y, seen] = project(origin);
 
          if(seen) {
-            int cr;
             Font fnt;
 
             switch(ty) {
-            case _dnum_smol: fnt = fntSml(true); cr = Font.CR_GREY;  break;
-            case _dnum_norm: fnt = fntMid(true); cr = Font.CR_WHITE; break;
-            case _dnum_crit: fnt = fntBig(true); cr = Font.CR_GOLD;  break;
+            case _dnum_smol: fnt = fntSml(true); break;
+            case _dnum_norm: fnt = fntMid(true); break;
+            case _dnum_crit: fnt = fntBig(true); break;
             }
 
             let txt = dnum.m_damage;
@@ -138,7 +150,7 @@ private ui void drawDmgNums(RenderEvent evt) {
                a = 1.0;
             }
 
-            Screen.DrawText(fnt, cr, xf, yf, txt,
+            Screen.DrawText(fnt, dnum.m_cr, xf, yf, txt,
                             DTA_VirtualWidth,320, DTA_VirtualHeight,240,
                             DTA_Alpha,a,
                             DTA_LegacyRenderStyle,STYLE_Translucent);
