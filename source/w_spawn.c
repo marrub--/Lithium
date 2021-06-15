@@ -116,7 +116,7 @@ void Sc_RandomSpawn(i32 rsn)
    default: return;
    }
 
-   SCallI(so_RandomSpawn, sm_Set, l_strdup(item));
+   SCallI(so_RandomSpawn, sm_Set, fast_strdup(item));
 }
 
 /* EOF */

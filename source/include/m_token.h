@@ -18,7 +18,7 @@
 
 #include <stdio.h>
 
-#define TokStr(tok) l_strndup((tok)->textV, (tok)->textC)
+#define TokStr(tok) fast_strndup((tok)->textV, (tok)->textC)
 
 /* Types ------------------------------------------------------------------- */
 
@@ -108,14 +108,14 @@ struct origin {
 struct token {
    i32 type;
    struct origin orig;
-   char textV[128];
-   size_t textC;
+   char textV[256];
+   mem_size_t textC;
 };
 
 /* Extern Functions -------------------------------------------------------- */
 
 void TokParse(FILE *fp, struct token *tok, struct origin *orig);
-void TokPrint(struct token *tok);
+cstr TokPrint(struct token *tok);
 bool TokIsKw(struct token *tok, cstr kw);
 cstr TokType(i32 type);
 

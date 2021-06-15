@@ -28,20 +28,30 @@
 #include "m_str.h"
 #include "m_stab.h"
 
+#define unwrap_do(e, stmt) statement(if((e)->some) stmt)
+#define unwrap(e) unwrap_do(e, [[return]] __asm("Rjnk()");)
+
+#define unwrap_print(e) \
+   unwrap_do(e, { \
+      ACS_BeginLog(); \
+      PrintChrSt((e)->err); \
+      ACS_EndLog(); \
+   })
+
 #define LineHash ((u32)__LINE__ * FileHash)
 
 #define ifw(decl, ...) __with(decl;) if(__VA_ARGS__)
 #define ifauto(type, name, ...) ifw(type name = (__VA_ARGS__), name)
 
 #define countof(a) (sizeof(a) / sizeof(*(a)))
-#define swap(t, a, b) do {t _tmp = a; a = b; b = _tmp;} while(0)
+#define swap(t, a, b) statement({ t _tmp = a; a = b; b = _tmp; })
 
 #define IsSmallNumber(x) ((x) > -0.001 && (x) < 0.001)
 #define CloseEnough(x, y) (IsSmallNumber(x - y))
 
 #ifndef NDEBUG
 #define Dbg_Log(level, ...) \
-   do if(get_bit(dbglevel, level)) Log(c"" #level ": " __VA_ARGS__); while(0)
+   statement(if(get_bit(dbglevel, level)) Log(c"" #level ": " __VA_ARGS__);)
 #else
 #define Dbg_Log(...)
 #endif
@@ -188,8 +198,8 @@ void PtrInvSet (i32 tid, str item, i32 amount);
 #ifndef NDEBUG
 void Dbg_Stat_Impl(cstr fmt, ...);
 void Dbg_Note_Impl(cstr fmt, ...);
-void Dbg_PrintMem(void const *data, size_t size);
-void Dbg_PrintMemC(void const *data, size_t size);
+void Dbg_PrintMem(void const *data, mem_size_t size);
+void Dbg_PrintMemC(void const *data, mem_size_t size);
 void Log(cstr fmt, ...);
 #endif
 

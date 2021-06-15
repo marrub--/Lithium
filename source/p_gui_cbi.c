@@ -21,23 +21,23 @@
 #define InfoSep       y += 20
 
 #define Info(...) \
-   do { \
+   statement({ \
       PrintTextFmt(__VA_ARGS__); \
       PrintText(sf_smallfnt, g->defcr, g->ox+10,1, g->oy+y,1); \
       y += 10; \
-   } while(0)
+   })
 
 #define Slot(name, x, y) \
-   do { \
+   statement({ \
       Str(st_path, s":UI:" name); \
       PrintSprite(st_path, g->ox+287-x*48,2, g->oy+48*y-33,1); \
-   } while(0)
+   })
 
 #define CPU(num) \
-   do { \
+   statement({ \
       Str(st_path, s":UI:CPU" #num); \
       PrintSprite(st_path, g->ox-13,1, g->oy-13,1); \
-   } while(0)
+   })
 
 /* Static Functions -------------------------------------------------------- */
 

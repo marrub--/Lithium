@@ -16,18 +16,18 @@
 #include "m_char.h"
 #include "m_file.h"
 #include "m_str.h"
+#include <ACS_ZDoom.h>
 
 #define textNext() tok->textV[tok->textC++]
 
 #define tokText(fn) \
-   do { \
+   statement({ \
       for(i32 pc = 0; fn(ch); pc = ch, getch()) { \
          advLine(); \
          textNext() = ch; \
       } \
-      textNext() = '\0'; \
       unget(); \
-   } while(0)
+   })
 
 #define untilEOL(ch) ((ch) != '\n' && !FEOF(fp))
 
@@ -63,41 +63,41 @@ begin:
    if(FEOF(fp) || ch == EOF) {
       unget();
       tok1(tok_eof);
-      return;
+      goto done;
    }
 
    switch(ch) {
    /* Whitespace */
-   case '\r': case '\n': tok1(tok_lnend); advLine(); return;
+   case '\r': case '\n': tok1(tok_lnend); advLine(); goto done;
 
    /* 1-op tokens */
-   case ';': tok1(tok_semico); return;
-   case ',': tok1(tok_comma ); return;
-   case '#': tok1(tok_hash  ); return;
-   case '[': tok1(tok_bracko); return;
-   case ']': tok1(tok_brackc); return;
-   case '{': tok1(tok_braceo); return;
-   case '}': tok1(tok_bracec); return;
-   case '(': tok1(tok_pareno); return;
-   case ')': tok1(tok_parenc); return;
+   case ';': tok1(tok_semico); goto done;
+   case ',': tok1(tok_comma ); goto done;
+   case '#': tok1(tok_hash  ); goto done;
+   case '[': tok1(tok_bracko); goto done;
+   case ']': tok1(tok_brackc); goto done;
+   case '{': tok1(tok_braceo); goto done;
+   case '}': tok1(tok_bracec); goto done;
+   case '(': tok1(tok_pareno); goto done;
+   case ')': tok1(tok_parenc); goto done;
 
    /* 2-op tokens */
-   case '=': tok2('=', tok_eq,   tok_eq2   ); return;
-   case '?': tok2('=', tok_tern, tok_terneq); return;
-   case '!': tok2('=', tok_not,  tok_neq   ); return;
-   case '~': tok2('=', tok_bnot, tok_bneq  ); return;
-   case '*': tok2('=', tok_mul,  tok_muleq ); return;
-   case '@': tok2('@', tok_at,   tok_at2   ); return;
+   case '=': tok2('=', tok_eq,   tok_eq2   ); goto done;
+   case '?': tok2('=', tok_tern, tok_terneq); goto done;
+   case '!': tok2('=', tok_not,  tok_neq   ); goto done;
+   case '~': tok2('=', tok_bnot, tok_bneq  ); goto done;
+   case '*': tok2('=', tok_mul,  tok_muleq ); goto done;
+   case '@': tok2('@', tok_at,   tok_at2   ); goto done;
 
    /* 3-op tokens */
-   case '<': tok3('<', '=', tok_lt,  tok_lt2,  tok_le   ); return;
-   case '>': tok3('>', '=', tok_gt,  tok_gt2,  tok_ge   ); return;
-   case '|': tok3('|', '=', tok_or,  tok_or2,  tok_oreq ); return;
-   case '&': tok3('&', '=', tok_and, tok_and2, tok_andeq); return;
-   case '+': tok3('+', '=', tok_add, tok_add2, tok_addeq); return;
-   case '%': tok3('%', '=', tok_mod, tok_mod2, tok_modeq); return;
-   case '^': tok3('^', '=', tok_xor, tok_xor2, tok_xoreq); return;
-   case ':': tok3(':', '=', tok_col, tok_col2, tok_coleq); return;
+   case '<': tok3('<', '=', tok_lt,  tok_lt2,  tok_le   ); goto done;
+   case '>': tok3('>', '=', tok_gt,  tok_gt2,  tok_ge   ); goto done;
+   case '|': tok3('|', '=', tok_or,  tok_or2,  tok_oreq ); goto done;
+   case '&': tok3('&', '=', tok_and, tok_and2, tok_andeq); goto done;
+   case '+': tok3('+', '=', tok_add, tok_add2, tok_addeq); goto done;
+   case '%': tok3('%', '=', tok_mod, tok_mod2, tok_modeq); goto done;
+   case '^': tok3('^', '=', tok_xor, tok_xor2, tok_xoreq); goto done;
+   case ':': tok3(':', '=', tok_col, tok_col2, tok_coleq); goto done;
 
    case '-':
            if(getch() == '-') tok1(tok_sub2);
@@ -105,7 +105,7 @@ begin:
       else if(ch == '>')      tok1(tok_rarrow);
       else if(IsDigit(ch))    {unget(); ch = '-'; break;}
       else                    {unget(); tok1(tok_sub);}
-      return;
+      goto done;
 
    case '/':
       if(getch() == '=') {
@@ -131,7 +131,7 @@ begin:
          unget();
          tok1(tok_div);
       }
-      return;
+      goto done;
 
    case '.':
       if(getch() == '.')
@@ -140,21 +140,20 @@ begin:
          {unget(); break;}
       else
          {unget(); tok1(tok_dot);}
-      return;
+      goto done;
 
    case '`':
       getch();
       tokText(untilEOL);
       tok1(tok_quote);
-      return;
+      goto done;
 
    case '\'': tok1(tok_charac); goto string;
    case '"':  tok1(tok_string); goto string;
    string:
       for(i32 i = 0, beg = ch; getch() != beg && !FEOF(fp);)
          textNext() = ch;
-      textNext() = '\0';
-      return;
+      goto done;
    }
 
    if(IsBlank(ch)) {
@@ -179,14 +178,18 @@ begin:
    } else {
       tok1(tok_chrseq);
       textNext() = ch;
-      textNext() = '\0';
    }
+
+done:
+   textNext() = '\0';
 }
 
-void TokPrint(struct token *tok) {
-   __nprintf("[%i:%i](%s (%i) '%.*s')", tok->orig.line,
-             tok->orig.colu, TokType(tok->type), tok->type,
-             tok->textC, tok->textV);
+cstr TokPrint(struct token *tok) {
+   static char pbuf[256];
+   snprintf(pbuf, sizeof pbuf, "[%i:%i](%s/%i '%.*s':%i:%p)",
+            tok->orig.line, tok->orig.colu, TokType(tok->type), tok->type,
+            tok->textC, tok->textV, tok->textC, tok->textV);
+   return pbuf;
 }
 
 bool TokIsKw(struct token *tok, cstr kw) {

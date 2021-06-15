@@ -38,7 +38,7 @@ static void HUD_Ammo()
 
       char txt[16];
       if(wep->ammotype & AT_Ammo && !wep->ammocur)
-         strcpy(txt, "OUT");
+         faststrcpy(txt, "OUT");
       else
          sprintf(txt, "%i/%i", wep->magmax - wep->magcur, wep->magmax);
 

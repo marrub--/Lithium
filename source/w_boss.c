@@ -190,7 +190,7 @@ void Sc_PhantomDeath(void)
       ServCallI(sm_PlayerDeathNuke);
       ACS_Delay(25);
       bip_name_t tag;
-      lstrcpy3(tag, "M", boss->name, "Defeated");
+      faststrcpy3(tag, "M", boss->name, "Defeated");
       P_BIP_Unlock(tag);
       boss->dead = true;
 

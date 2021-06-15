@@ -24,9 +24,10 @@
 /* Types ------------------------------------------------------------------- */
 
 struct compiler {
-   struct tokbuf  tb;
-   struct dlg_def def;
-   u32            num;
+   struct tokbuf   tb;
+   struct dlg_def  def;
+   struct tbuf_err res;
+   u32             num;
 };
 
 /* Extern Functions -------------------------------------------------------- */

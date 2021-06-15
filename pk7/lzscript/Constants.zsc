@@ -13,8 +13,19 @@
 #include "lzscript/Constants/p_weaponinfo.zsc"
 #include "lzscript/Constants/u_names.zsc"
 #include "lzscript/Constants/w_monster.zsc"
-#include "lzscript/Constants/w_scorenums.zsc"
 #include "lzscript/Constants/w_world.zsc"
+
+enum Lith_ScoreNum {
+   Score_Clip      = 1000,
+   Score_ClipBox   = 4000,
+   Score_Shell     = 2000,
+   Score_ShellBox  = 5000,
+   Score_Rocket    = 3000,
+   Score_RocketBox = 6000,
+   Score_Cell      = 4000,
+   Score_CellPack  = 7000,
+   Score_Backpack  = 10000,
+}
 
 enum Lith_ASCII {
    Ch_NUL, /* null */

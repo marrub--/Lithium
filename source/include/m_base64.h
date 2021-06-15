@@ -41,7 +41,7 @@
 #include <stddef.h>
 #include "m_types.h"
 
-byte *base64_encode(byte const *src, size_t len, size_t *out_len);
-byte *base64_decode(byte const *src, size_t len, size_t *out_len);
+byte *base64_encode(byte const *src, mem_size_t len, mem_size_t *out_len);
+byte *base64_decode(byte const *src, mem_size_t len, mem_size_t *out_len);
 
 #endif

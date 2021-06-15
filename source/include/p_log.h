@@ -40,7 +40,7 @@ struct logdat
 struct loginfo
 {
    struct logdat hudV[7];
-   size_t        hudC;
+   mem_size_t    hudC;
 
    Vec_Decl(struct logmap, maps);
 

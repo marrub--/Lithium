@@ -20,12 +20,12 @@
 #include <stdlib.h>
 
 #define Vec_Defn(type, name, ...) \
-   __VA_ARGS__ type  *name##V = nil; \
-   __VA_ARGS__ size_t name##C = 0, name##S = 0
+   __VA_ARGS__ type      *name##V = nil; \
+   __VA_ARGS__ mem_size_t name##C = 0, name##S = 0
 
 #define Vec_Decl(type, name, ...) \
-   __VA_ARGS__ type  *name##V; \
-   __VA_ARGS__ size_t name##C, name##S
+   __VA_ARGS__ type      *name##V; \
+   __VA_ARGS__ mem_size_t name##C, name##S
 
 #define Vec_GrowV(vec, n, tag) \
    ((vec##S) += (n), \

@@ -50,7 +50,7 @@ struct slide_ret G_Slider_Imp(struct gui_state *g, u32 id, struct gui_arg_sld co
    /* draw graphic */
    __with(char gfx[64];) {
       G_Prefix(g, gfx, pre, gfx);
-      if(gfx[0]) PrintSprite(l_strdup(gfx), x - pre->pad,1, y + pre->h / 2,0);
+      if(gfx[0]) PrintSprite(fast_strdup(gfx), x - pre->pad,1, y + pre->h / 2,0);
    }
 
    /* draw notch */
@@ -58,7 +58,7 @@ struct slide_ret G_Slider_Imp(struct gui_state *g, u32 id, struct gui_arg_sld co
       if(g->hot == id || g->active == id) G_Prefix(g, gfx, pre, notchhot);
       else                                G_Prefix(g, gfx, pre, notch);
 
-      if(gfx[0]) PrintSprite(l_strdup(gfx), x + notchpos * w - 1,1, y,1);
+      if(gfx[0]) PrintSprite(fast_strdup(gfx), x + notchpos * w - 1,1, y,1);
    }
 
    /* draw value */

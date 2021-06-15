@@ -59,8 +59,8 @@ struct interp_data_lli {
    i96 timer_max_cap;
 };
 
-optargs(1) u64 crc64(void const *data, size_t len, u64 result);
-optargs(1) u64 crc64_str(void __str_ars const *data, size_t len, u64 result);
+optargs(1) u64 crc64(void const *data, mem_size_t len, u64 result);
+optargs(1) u64 crc64_str(void __str_ars const *data, mem_size_t len, u64 result);
 stkcall i32 fastabs(i32 n);
 stkcall k32 fastabsk(k32 n);
 stkcall i32 fastroundk(k32 k);

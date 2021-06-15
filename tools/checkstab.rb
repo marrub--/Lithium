@@ -22,7 +22,7 @@ def line_no match
    match.string[0..match.begin(0)].count("\n") + 1
 end
 
-open(STAB_H).read.scan /^X\((\w+),\s*s?(.+)\)/ do |_|
+open(STAB_H).read.scan /^stab_x\((\w+),\s*s?(.+)\)/ do |_|
    strings[$~[1]] = {line: line_no($~), file: STAB_H, text: $~[2], uses: 0, stab: true}
 end
 

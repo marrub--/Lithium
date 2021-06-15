@@ -1,0 +1,86 @@
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison G. Watson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
+class Lith_MenuDelegate : MenuDelegateBase {
+   override void playSound(name sndName) {
+      string sndStr = sndName;
+      sound  snd    = sndStr;
+      S_StartSound(snd, lch_body, CHANF_UI, snd_menuVolume);
+   }
+
+   override bool drawSelector(ListMenuDescriptor desc) {
+      if(desc.mSelectedItem >= 0) {
+         let sel = ListMenuItemSelectable(desc.mItems[desc.mSelectedItem]);
+         if(sel) {
+            double x = sel.getX() - 8.0;
+            double y = sel.getY() + sel.mHeight / 4.0;
+            int dw = desc.displayWidth();
+            int dh = desc.displayHeight();
+            textureId tex = Lith_URANUS.getTextureForName(":XHairs:xpw");
+            double a = (sin(gameTic * 5.0) + 1.0) / 2.0;
+            color  c = Lith_URANUS.xhairColor();
+            if(dw == ListMenuDescriptor.CleanScale) {
+               Screen.DrawTexture(tex, false, x, y,
+                                  DTA_Clean,true,
+                                  DTA_KeepRatio,true,
+                                  DTA_FillColor,c,
+                                  DTA_Alpha,a);
+            } else {
+               Screen.DrawTexture(tex, false, x, y,
+                                  DTA_VirtualWidth,dw,
+                                  DTA_VirtualHeight,dh,
+                                  DTA_KeepRatio,true,
+                                  DTA_FillColor,c,
+                                  DTA_Alpha,a);
+            }
+         }
+      }
+      return true;
+   }
+
+   override Font pickFont(Font fnt) {
+      Font bigupper = "bigupper";
+      Font lmidfont = "lmidfont";
+      Font ltrmfont = "ltrmfont";
+      if(fnt == smallFont) {
+         return Lith_URANUS.instance().fntSml();
+      } else if(fnt == lmidfont) {
+         return Lith_URANUS.instance().fntMid();
+      } else if(fnt == ltrmfont) {
+         return Lith_URANUS.instance().fntTrm();
+      } else if(fnt == bigFont || fnt == bigupper) {
+         return Lith_URANUS.instance().fntBig();
+      } else {
+         return fnt;
+      }
+   }
+}
+
+extend class Lith_URANUS;
+
+private transient ui double m_ScreenDim;
+
+private ui void tickMenu() {
+   if(!(menuDelegate is "Lith_MenuDelegate")) {
+      menuDelegate.destroy();
+      menuDelegate = new("Lith_MenuDelegate");
+   }
+}
+
+private ui void drawMenu() {
+   if(menuActive) {
+      m_ScreenDim = Lith_UTIL.lerp(m_ScreenDim, 0.75, 0.3);
+   } else {
+      m_ScreenDim = Lith_UTIL.lerp(m_ScreenDim, 0.0, 0.1);
+   }
+
+   Screen.dim("black", m_ScreenDim, 0, 0, Screen.getWidth(), Screen.getHeight());
+}
+
+/* EOF */

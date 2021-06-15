@@ -54,7 +54,7 @@ static void HUDI_Ammo(struct upgrade *upgr) {
 
       char txt[16];
       if(wep->ammotype & AT_Ammo && !wep->ammocur)
-         strcpy(txt, "OUT");
+         faststrcpy(txt, "OUT");
       else
          sprintf(txt, "%i/%i", wep->magmax - wep->magcur, wep->magmax);
       PrintTextChS(txt);

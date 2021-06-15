@@ -72,7 +72,6 @@ GlobalCrH(wselm1) GlobalCrH(wselm2) GlobalCrH(wselm3) GlobalCrH(wselms)
 #define PrintTextChS(s)    (ACS_BeginPrint(), PrintChrSt(s))
 #define PrintTextEnd()     ACS_EndStrParam()
 
-// static void LT(Actor mo, string txt, string fnt, int xx, int yy, double anum, int cr, int flags) {
 #define PrintText_str(s, font, cr, x, xa, y, ya) \
    DrawCallI(sm_LT, s, font, XArg(x, xa), YArg(y, ya), 0.0k, cr, 0)
 

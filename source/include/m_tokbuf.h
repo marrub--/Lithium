@@ -18,14 +18,11 @@
 #include "m_types.h"
 
 #include <stdbool.h>
-#include <setjmp.h>
 #include <stdarg.h>
-
-/* Extern Functions -------------------------------------------------------- */
 
 i32           TBufProc (struct token *tok);
 i32           TBufProcL(struct token *tok);
-void          TBufCtor (struct tokbuf *tb);
+void          TBufCtor (struct tokbuf *tb, FILE *fp);
 void          TBufDtor (struct tokbuf *tb);
 struct token *TBufGet  (struct tokbuf *tb);
 struct token *TBufPeek (struct tokbuf *tb);
@@ -33,19 +30,21 @@ struct token *TBufUnGet(struct tokbuf *tb);
 struct token *TBufReGet(struct tokbuf *tb);
 struct token *TBufBack (struct tokbuf *tb, i32 n);
 bool          TBufDrop (struct tokbuf *tb, i32 t);
-void          TBufErr  (struct tokbuf *tb, cstr fmt, ...);
-void          TBufErrTk(struct tokbuf *tb, struct token *tok, cstr fmt, ...);
-struct token *TBufExpc (struct tokbuf *tb, struct token *tok, i32 t1);
-struct token *TBufExpc2(struct tokbuf *tb, struct token *tok, i32 t1, i32 t2);
-struct token *TBufExpc3(struct tokbuf *tb, struct token *tok, i32 t1, i32 t2, i32 t3);
-void          TBufExpDr(struct tokbuf *tb, i32 t);
-
-/* Types ------------------------------------------------------------------- */
+void          TBufErr  (struct tokbuf *tb, struct tbuf_err *res, cstr fmt, ...);
+struct token *TBufExpc (struct tokbuf *tb, struct tbuf_err *res, struct token *tok, i32 t1);
+struct token *TBufExpc2(struct tokbuf *tb, struct tbuf_err *res, struct token *tok, i32 t1, i32 t2);
+struct token *TBufExpc3(struct tokbuf *tb, struct tbuf_err *res, struct token *tok, i32 t1, i32 t2, i32 t3);
+void          TBufExpDr(struct tokbuf *tb, struct tbuf_err *res, i32 t);
 
 enum {
    tokproc_next,
    tokproc_done,
    tokproc_skip
+};
+
+struct tbuf_err {
+   bool some;
+   cstr err;
 };
 
 struct tokbuf {
@@ -56,7 +55,6 @@ struct tokbuf {
    __prop back  {operator(): TBufBack (this)}
    __prop drop  {operator(): TBufDrop (this)}
    __prop err   {operator(): TBufErr  (this)}
-   __prop errtk {operator(): TBufErrTk(this)}
    __prop expc  {operator(): TBufExpc (this)}
    __prop expc2 {operator(): TBufExpc2(this)}
    __prop expc3 {operator(): TBufExpc3(this)}
@@ -69,8 +67,6 @@ struct tokbuf {
    struct token toks[32];
 
    i32 tpos, tend;
-
-   jmp_buf env;
 
    i32 (*tokProcess)(struct token *tok);
 };

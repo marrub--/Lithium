@@ -434,7 +434,7 @@ void P_doIntro() {
 
          ifauto(str, texts,
                 LanguageNull(LANG "BEGINNING_%s_%u", pl.discrim, which)) {
-            lstrcpy_str(text, texts);
+            faststrcpy_str(text, texts);
          } else {
             break;
          }
@@ -450,7 +450,7 @@ void P_doIntro() {
             if(text) {
                if(*text) {
                   lines[i] = line;
-                  linec[i] = strlen(line);
+                  linec[i] = faststrlen(line);
                }
 
                line = strtok(nil, "\n");

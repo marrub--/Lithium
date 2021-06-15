@@ -50,7 +50,7 @@ void W_Title(void) {
    LanguageCV(txt, LANG "OPENER");
    LanguageCV(bgn, LANG "BEGIN");
 
-   i32 len = strlen(txt);
+   i32 len = faststrlen(txt);
 
    for(i32 t = 0, pos = 0;;)
    {

@@ -1,0 +1,361 @@
+/* -*-C-*---------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison G. Watson. Attribution is encouraged though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * This file describes the monsters and monster presets available to
+ * this mod. You can write your own and it will add on to these
+ * definitions as long as it's named "lithmons" and in the root of
+ * your project.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
+/* Presets -------------------------------------------------------------------|
+ *
+ * Keys:
+ * - name :: The name of the preset. This will be used in monster definitions.
+ * - scr  :: The amount of score to make the monster give upon death. Scales
+ *           off various factors like luck and the global multiplier option.
+ * - exp  :: The amount of EXP to make the monster give upon death. Scales
+ *           off various factors like rank and level.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
+presets {
+   /* Tier 1 */
+   name: ZombieMan   scr: 1000 exp: 5;  /* Bullets */
+   name: ShotgunGuy  scr: 2000 exp: 10; /* Bullets */
+   name: ChaingunGuy scr: 2000 exp: 15; /* Bullets */
+   name: Imp         scr: 2000 exp: 5;  /* Fire */
+   name: DRLACaptain scr: 2000 exp: 30; /* Bullets */
+
+   /* Tier 2 */
+   name: Demon      scr: 5000 exp: 10; /* Melee */
+   name: Spectre    scr: 7500 exp: 10; /* Melee */
+   name: LostSoul   scr: 500  exp: 5;  /* Melee */
+   name: Nitrogolem scr: 4000 exp: 20; /* Melee, FireMagic */
+
+   /* Tier 3 */
+   name: HellKnight  scr: 7000 exp: 80;  /* Melee, Magic */
+   name: Revenant    scr: 7000 exp: 80;  /* Melee, Shrapnel */
+   name: Cacodemon   scr: 7000 exp: 50;  /* Melee, Energy */
+   name: Arachnotron scr: 7000 exp: 80;  /* Energy */
+   name: Mancubus    scr: 7000 exp: 50;  /* Fire */
+   name: BaronOfHell scr: 8000 exp: 100; /* Melee, Magic */
+   name: Ophidian    scr: 7000 exp: 50;  /* Ice, Fire */
+
+   /* Tier 4 */
+   name: PainElemental scr: 20000 exp: 100; /* None */
+   name: Archvile      scr: 40000 exp: 200; /* FireMagic */
+
+   /* Tier 5 */
+   name: SpiderDemon scr: 700000  exp: 3000; /* Bullets */
+   name: CyberDemon  scr: 1500000 exp: 4000; /* Shrapnel */
+   name: Maulotaur   scr: 7000000 exp: 1000; /* Melee, Fire */
+
+   /* Tier 6 */
+   name: DSparil     scr: 10000000 exp: 9000; /* Energy */
+   name: AIMainframe scr: 10000000 exp: 9000;
+}
+
+/* Monster Definitions -------------------------------------------------------|
+ *
+ * Monster definitions are the main purpose of this file. They describe a
+ * small, but vital, set of information about each monster that may exist.
+ *
+ * Note that earlier definitions will always override later ones. For
+ * instance, if the class name contains "Zombieman", then a definition made
+ * later, perhaps in another file, with the filter "Zombieman2" will *not*
+ * be used at all.
+ *
+ * Each monster definition block is preceded with parentheses which have flags
+ * in them. You can put as many flags in there as you want, or none.
+ *
+ * Flags:
+ * - full    :: The class name (actor name in DECORATE) must *entirely* match
+ *              the filter, not just partially. Useful for mod compatibility.
+ * - dark    :: Dark enemies are corrupted by Hell. Can you save them? Either
+ *              way, they'll have six stars, and higher level scaling. Not
+ *              recommended to be used by other mods, but it will work.
+ * - angelic :: Angelic enemies are beyond saving and only serve their own
+ *              will, the will of ultimate consumption. They have seven stars,
+ *              and extreme level scaling. Not recommended to be used by other
+ *              mods, but it will work.
+ *
+ * The right-most value will always override anything to the left. For
+ * instance, if you have a monster using a preset, and then set the
+ * =scr= key, it will use the scr value you provided instead of the
+ * preset's.
+ *
+ * Example: =pre: ZombieMan scr: 500 type: zombie filter: "WeakZombie";=
+ *
+ * Keys:
+ * - filter :: The filter, the most important part. This is a case-sensitive
+ *             string that will be matched against each monster that spawns.
+ *             If the monster's class name (actor name in DECORATE) contains
+ *             this string, in full, then it will be considered to be the
+ *             monster just defined, and will have all of its properties.
+ * - type   :: The archetype of monster this falls under. This is used by some
+ *             of the more subtle systems of Lithium; for instance, the
+ *             post-game content, and boss maps. A list of archetypes are
+ *             available below.
+ * - pre    :: A preset, by name, to import values from into this filter.
+ * - scr    :: Same as the key on presets.
+ * - exp    :: Ditto.
+ *
+ * These are the archetypes of enemy, as described earlier.
+ *
+ * Types:
+ * - zombie        :: A basic-bitch zombie. Might have a rifle or a pistol.
+ * - zombiesg      :: A zombie with a shotgun. Watch out!
+ * - zombiecg      :: A zombie with a chaingun. Oh shit.
+ * - imp           :: An imp of some kind. Really, any small hell creature.
+ * - demon         :: A sergeant of hell. Melee kinda enemy. Bitey, maybe.
+ * - lostsoul      :: The soul of a demon ready to possess someone.
+ * - mancubus      :: A big fucker with flamethrowers or something similar.
+ * - arachnotron   :: Some kind of arachnid that might shoot plasma.
+ * - cacodemon     :: A floating ball of adorable anger. Might hurt a lot.
+ * - hellknight    :: A knight of hell. Likes to throw fire at you.
+ * - baron         :: One step up from a knight of hell, some kind of landlord.
+ *                    This is a boss. It must mark Baron replacements.
+ * - revenant      :: An extremely angry skeleton. Loves to scream at you.
+ * - painelemental :: A floating meatball of pure fear. Spawns enemies.
+ * - archvile      :: Some asshole who revives enemies and might make you mad.
+ * - mastermind    :: Absolutely huge fucking beast that goes rat-a-tat-tat.
+ *                    This is a boss. It must mark Mastermind replacements.
+ * - cyberdemon    :: Huge rocket-flinging oaf. Might stomp you. (Oh my.)
+ *                    This is a boss. It must mark Cyberdemon replacements.
+ * - phantom       :: A phantom. Do not use this in other mods please! It will
+ *                    probably break something.
+ * - angel         :: An angelic enemy. Not actually related to Heaven, just
+ *                    milky dark energy boys. Be prepared for death if you use
+ *                    this in another mod. (It probably won't break.)
+ * - darkone       :: A being of pure dark energy. Harbingers of Ragnarok.
+ *                    Be prepared for your dreams to become corrupted if you
+ *                    use this in another mod. (It probably won't break.)
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
+/* Base Games -------------------------------------------------------------- */
+() {
+   /* Doom */
+   pre: ZombieMan     type: zombie        filter: "ZombieMan";
+   pre: ZombieMan     type: zombie        filter: "Zombieman";
+   pre: ShotgunGuy    type: zombiesg      filter: "ShotgunGuy";
+   pre: ShotgunGuy    type: zombiesg      filter: "Shotgunguy";
+   pre: ChaingunGuy   type: zombiecg      filter: "ChaingunGuy";
+   pre: ChaingunGuy   type: zombiecg      filter: "Chaingunguy";
+   pre: Imp           type: imp           filter: "Imp";
+   pre: Demon         type: demon         filter: "Demon";
+   pre: Spectre       type: demon         filter: "Spectre";
+   pre: LostSoul      type: lostsoul      filter: "LostSoul";
+   pre: Mancubus      type: mancubus      filter: "Fatso";
+   pre: Mancubus      type: mancubus      filter: "Mancubus";
+   pre: Arachnotron   type: arachnotron   filter: "Arachnotron";
+   pre: Cacodemon     type: cacodemon     filter: "Cacodemon";
+   pre: HellKnight    type: hellknight    filter: "Knight";
+   pre: BaronOfHell   type: baron         filter: "Baron";
+   pre: Revenant      type: revenant      filter: "Revenant";
+   pre: PainElemental type: painelemental filter: "PainElemental";
+   pre: Archvile      type: archvile      filter: "Archvile";
+   pre: SpiderDemon   type: mastermind    filter: "SpiderMastermind";
+   pre: CyberDemon    type: cyberdemon    filter: "Cyberdemon";
+
+   /* Chex Quest */
+   pre: Imp         type: imp        filter: "FlemoidusBipedicus";
+   pre: Imp         type: imp        filter: "Quadrumpus";
+   pre: LostSoul    type: lostsoul   filter: "ChexSoul";
+   pre: LostSoul    type: lostsoul   filter: "FlemMine";
+   pre: BaronOfHell type: baron      filter: "Flembrane";
+   pre: BaronOfHell type: baron      filter: "FlemoidusMaximus";
+   pre: ZombieMan   type: zombie     filter: "FlemoidusCommonus";
+   pre: Spectre     type: demon      filter: "FlemoidusCycloptisCommonus";
+   pre: Demon       type: demon      filter: "FlemoidusStridicus";
+   pre: Demon       type: demon      filter: "Larva";
+   pre: Cacodemon   type: cacodemon  filter: "SuperCycloptis";
+   pre: SpiderDemon type: mastermind filter: "Flembomination";
+   pre: CyberDemon  type: cyberdemon filter: "Snotfolus";
+
+   /* Heretic */
+   pre: Imp         type: imp         filter: "Gargoyle";
+   pre: Demon       type: demon       filter: "Golem";
+   pre: Nitrogolem  type: demon       filter: "Nitrogolem";
+   pre: Spectre     type: demon       filter: "Sabreclaw";
+   pre: Cacodemon   type: mancubus    filter: "Disciple";
+   pre: Ophidian    type: arachnotron filter: "Ophidian";
+   pre: HellKnight  type: hellknight  filter: "UndeadWarrior";
+   pre: HellKnight  type: hellknight  filter: "SpectralWarrior";
+   pre: BaronOfHell type: cacodemon   filter: "IronLich";
+   pre: Maulotaur   type: mastermind  filter: "Maulotaur";
+   pre: DSparil     type: cyberdemon  filter: "DSparil";
+}
+
+/* Lithium ----------------------------------------------------------------- */
+(full dark) {
+   scr: 1000 exp: 0 type: phantom filter: "Lith_Boss_James";
+   scr: 2000 exp: 0 type: phantom filter: "Lith_Boss_Makarov";
+   scr: 3000 exp: 0 type: phantom filter: "Lith_Boss_Isaac";
+}
+
+(full angelic) {
+   pre: CyberDemon type: angel filter: "Lith_Archangel";
+}
+
+(full) {
+   scr: 0 exp: 0 type: cyberdemon filter: "Lith_Steggles";
+}
+
+/* Map Compatibility ------------------------------------------------------- */
+(full) {
+   /* ed4_rfo1.wad */
+   pre: DRLACaptain   type: zombie        filter: "BazookaZombie";
+   pre: Imp           type: imp           filter: "BatFamiliar";
+   pre: Imp           type: imp           filter: "DragonFamiliar";
+   pre: Arachnotron   type: arachnotron   filter: "Arachnophyte";
+   pre: Arachnotron   type: arachnotron   filter: "RailSpider";
+   pre: CyberDemon    type: cacodemon     filter: "RealAbstractPain";
+   pre: PainElemental type: painelemental filter: "EDPE";
+
+   /* dop.pk3 */
+   pre: LostSoul type: lostsoul filter: "LostGhoul";
+
+   /* Cheogsh.wad */
+   pre: Spectre     type: demon      filter: "KDiZDNightmare";
+   pre: Imp         type: imp        filter: "Howler";
+   pre: Imp         type: imp        filter: "SoulHarvester";
+   pre: BaronOfHell type: baron      filter: "HellWarrior";
+   pre: CyberDemon  type: cyberdemon filter: "Cheogsh";
+}
+
+/* Mod Compatibility ------------------------------------------------------- */
+
+/* Rampancy */
+(full) {
+   pre: ZombieMan     type: zombie        filter: "Robot_SentryBot";
+   pre: ShotgunGuy    type: zombiesg      filter: "Robot_DefenderBot";
+   pre: ChaingunGuy   type: zombiecg      filter: "Robot_SecurityBotSmall";
+   pre: Imp           type: imp           filter: "Robot_SoldierBot";
+   pre: Demon         type: demon         filter: "Robot_SpiderBotSmall";
+   pre: Spectre       type: demon         filter: "Robot_StealthDroid";
+   pre: LostSoul      type: lostsoul      filter: "Robot_ScoutDrone";
+   pre: Cacodemon     type: cacodemon     filter: "Robot_AssaultDrone";
+   pre: HellKnight    type: hellknight    filter: "Robot_SecurityBot";
+   pre: BaronOfHell   type: baron         filter: "Robot_DreadnoughtBot";
+   pre: Arachnotron   type: arachnotron   filter: "Robot_SpiderBot";
+   pre: PainElemental type: painelemental filter: "Robot_FabricationNode";
+   pre: Revenant      type: revenant      filter: "Robot_RollerDroid";
+   pre: Mancubus      type: mancubus      filter: "Robot_MaintenanceBot";
+   pre: Archvile      type: archvile      filter: "Robot_RepairBot";
+   pre: CyberDemon    type: cyberdemon    filter: "Robot_MilitaryBot";
+   pre: SpiderDemon   type: mastermind    filter: "Robot_LoaderBot";
+   pre: AIMainframe   type: mastermind    filter: "Robot_BossEye";
+   pre: ChaingunGuy   type: zombie        filter: "Robot_GunTurret";
+}
+
+() {
+   /* Shut Up and Lithium */
+   pre: ZombieMan     type: imp         filter: "Remnant";
+   pre: ZombieMan     type: imp         filter: "Roach";
+   pre: Imp           type: imp         filter: "Turmoil";
+   pre: ShotgunGuy    type: imp         filter: "Pitkis";
+   pre: ChaingunGuy   type: imp         filter: "Helliate";
+   pre: Demon         type: demon       filter: "Satyr";
+   pre: Spectre       type: demon       filter: "Mush";
+   pre: LostSoul      type: lostsoul    filter: "Gsoul";
+   pre: Cacodemon     type: cacodemon   filter: "Accuser";
+   pre: Revenant      type: revenant    filter: "Famine";
+   pre: PainElemental type: arachnotron filter: "Writhe";
+   pre: HellKnight    type: hellknight  filter: "Sonnelion";
+   pre: LostSoul      type: lostsoul    filter: "Eotu";
+   pre: Arachnotron   type: arachnotron filter: "Lolth";
+   pre: Mancubus      type: mancubus    filter: "Malbouge";
+   pre: BaronOfHell   type: baron       filter: "Abaddon";
+   pre: Archvile      type: archvile    filter: "Pestilence";
+   pre: SpiderDemon   type: mastermind  filter: "Granfalloon";
+   pre: CyberDemon    type: cyberdemon  filter: "SoF";
+   pre: LostSoul      type: lostsoul    filter: "Karkass";
+   pre: HellKnight    type: imp         filter: "Doorman";
+   pre: LostSoul      type: lostsoul    filter: "UnbodiedFury";
+   pre: ShotgunGuy    type: imp         filter: "Bloodfiend";
+   pre: Demon         type: demon       filter: "Mortuus";
+   pre: Demon         type: demon       filter: "Phantasm";
+   pre: ChaingunGuy   type: imp         filter: "Malum";
+   pre: ShotgunGuy    type: imp         filter: "Phasma";
+   pre: Spectre       type: demon       filter: "Licho";
+   pre: Cacodemon     type: cacodemon   filter: "Hierophant";
+   pre: Cacodemon     type: cacodemon   filter: "Mandingo";
+   pre: CyberDemon    type: cyberdemon  filter: "Burrower";
+   pre: Archvile      type: arachnotron filter: "Aranearum";
+   pre: Cacodemon     type: cacodemon   filter: "Lividus";
+   pre: HellKnight    type: hellknight  filter: "Deepone";
+   pre: BaronOfHell   type: baron       filter: "Deeptwo";
+
+   /* Western Patch */
+   pre: ZombieMan  type: zombie   filter: "Westman";
+   pre: ZombieMan  type: zombie   filter: "WildGunmanGuy";
+   pre: ShotgunGuy type: zombiesg filter: "TheOutsider";
+
+   /* Combined Harms */
+   pre: ZombieMan     type: zombie        filter: "ZombieGunner";
+   pre: ShotgunGuy    type: zombiesg      filter: "ShotGunner";
+   pre: ChaingunGuy   type: zombiecg      filter: "ChainGunner";
+   pre: Demon         type: demon         filter: "Pinky";
+   pre: Spectre       type: demon         filter: "sneakypinky";
+   pre: Cacodemon     type: cacodemon     filter: "bigmouthedhissything";
+   pre: LostSoul      type: lostsoul      filter: "skullhead";
+   pre: PainElemental type: painelemental filter: "meatball";
+   pre: BaronOfHell   type: baron         filter: "bruiserbro";
+   pre: HellKnight    type: hellknight    filter: "KnellHight";
+   pre: Revenant      type: revenant      filter: "agitator";
+   pre: Mancubus      type: mancubus      filter: "fatty";
+   pre: Arachnotron   type: arachnotron   filter: "lilspider";
+   pre: Archvile      type: archvile      filter: "martianbastard";
+   pre: SpiderDemon   type: mastermind    filter: "bigspider";
+   pre: CyberDemon    type: cyberdemon    filter: "angrycow";
+}
+
+/* Cyberpack */
+() {
+   pre: ZombieMan type: zombie filter: "ZSec";
+}
+
+(full) {
+   pre: ZombieMan     type: zombie        filter: "DuneWarrior";
+   pre: ShotgunGuy    type: zombiesg      filter: "NailBorg";
+   pre: ShotgunGuy    type: zombiesg      filter: "QuadShotgunZombie";
+   pre: ChaingunGuy   type: zombiecg      filter: "ZSpecOpsMachinegun";
+   pre: LostSoul      type: lostsoul      filter: "MiniSentinel";
+   pre: LostSoul      type: lostsoul      filter: "Railbot";
+   pre: Demon         type: demon         filter: "CyberFiend";
+   pre: Revenant      type: revenant      filter: "RevGhoul";
+   pre: HellKnight    type: hellknight    filter: "Paladin";
+   pre: Mancubus      type: mancubus      filter: "Hectebus";
+   pre: Cacodemon     type: cacodemon     filter: "Facebot";
+   pre: PainElemental type: painelemental filter: "ZombieMissileTank";
+   pre: Arachnotron   type: arachnotron   filter: "FusionSpider";
+   pre: Arachnotron   type: arachnotron   filter: "CGunSpider";
+   pre: CyberDemon    type: cyberdemon    filter: "Annihilator";
+   pre: CyberDemon    type: cyberdemon    filter: "Terminator";
+   pre: CyberDemon    type: cyberdemon    filter: "Thamuz";
+   pre: CyberDemon    type: cyberdemon    filter: "PaladinTitan";
+   pre: SpiderDemon   type: mastermind    filter: "Demolisher";
+   pre: SpiderDemon   type: mastermind    filter: "Overlord";
+   pre: SpiderDemon   type: mastermind    filter: "UACBot";
+   pre: SpiderDemon   type: mastermind    filter: "Maephisto";
+}
+
+/* DoomRL Arsenal Monsters */
+() {
+   pre: ZombieMan   type: zombie   filter: "FormerHuman";
+   pre: ShotgunGuy  type: zombiesg filter: "FormerSergeant";
+   pre: ChaingunGuy type: zombiecg filter: "FormerCommando";
+   pre: DRLACaptain type: zombie   filter: "FormerCaptain";
+}
+
+/* EOF */

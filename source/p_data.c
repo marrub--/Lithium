@@ -21,29 +21,29 @@
 
 static void SetupAttributes()
 {
-   fastmemmove(pl.attr.names[at_acc], "ACC", 3);
-   fastmemmove(pl.attr.names[at_def], "DEF", 3);
-   fastmemmove(pl.attr.names[at_str], "STR", 3);
-   fastmemmove(pl.attr.names[at_vit], "VIT", 3);
-   fastmemmove(pl.attr.names[at_stm], "STM", 3);
-   fastmemmove(pl.attr.names[at_luk], "LUK", 3);
+   fastmemcpy(pl.attr.names[at_acc], "ACC", 3);
+   fastmemcpy(pl.attr.names[at_def], "DEF", 3);
+   fastmemcpy(pl.attr.names[at_str], "STR", 3);
+   fastmemcpy(pl.attr.names[at_vit], "VIT", 3);
+   fastmemcpy(pl.attr.names[at_stm], "STM", 3);
+   fastmemcpy(pl.attr.names[at_luk], "LUK", 3);
 
    switch(pl.pclass) {
-   case pcl_marine:    fastmemmove(pl.attr.names[at_spc], "RGE", 3); break;
-   case pcl_cybermage: fastmemmove(pl.attr.names[at_spc], "CON", 3); break;
-   case pcl_informant: fastmemmove(pl.attr.names[at_spc], "ADR", 3); break;
-   case pcl_wanderer:  fastmemmove(pl.attr.names[at_spc], "AGI", 3); break;
-   case pcl_assassin:  fastmemmove(pl.attr.names[at_spc], "RSH", 3); break;
-   case pcl_darklord:  fastmemmove(pl.attr.names[at_spc], "REF", 3); break;
-   case pcl_thoth:     fastmemmove(pl.attr.names[at_spc], "MNA", 3); break;
+   case pcl_marine:    fastmemcpy(pl.attr.names[at_spc], "RGE", 3); break;
+   case pcl_cybermage: fastmemcpy(pl.attr.names[at_spc], "CON", 3); break;
+   case pcl_informant: fastmemcpy(pl.attr.names[at_spc], "ADR", 3); break;
+   case pcl_wanderer:  fastmemcpy(pl.attr.names[at_spc], "AGI", 3); break;
+   case pcl_assassin:  fastmemcpy(pl.attr.names[at_spc], "RSH", 3); break;
+   case pcl_darklord:  fastmemcpy(pl.attr.names[at_spc], "REF", 3); break;
+   case pcl_thoth:     fastmemcpy(pl.attr.names[at_spc], "MNA", 3); break;
    }
 
    if(pl.pclass & pcl_robot) {
-      fastmemmove(pl.attr.names[at_vit], "POT", 3);
-      fastmemmove(pl.attr.names[at_stm], "REP", 3);
+      fastmemcpy(pl.attr.names[at_vit], "POT", 3);
+      fastmemcpy(pl.attr.names[at_stm], "REP", 3);
    } else if(pl.pclass & pcl_nonhuman) {
-      fastmemmove(pl.attr.names[at_vit], "POT", 3);
-      fastmemmove(pl.attr.names[at_stm], "REG", 3);
+      fastmemcpy(pl.attr.names[at_vit], "POT", 3);
+      fastmemcpy(pl.attr.names[at_stm], "REG", 3);
    }
 
    pl.attr.expprev = 0;
@@ -337,7 +337,7 @@ script void P_Init() {
    if(!pl.invinit) P_Inv_PInit();
 
    if(!pl.wasinit) {
-      pl.logB(1, VersionName " :: Compiled " __DATE__);
+      pl.logH(1, LC(LANG "LOG_Version"), VersionName, __DATE__);
 
       #ifndef NDEBUG
       if(dbglevel) {

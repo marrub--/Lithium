@@ -54,9 +54,9 @@ void *ListUnlink(list *ls)
    return ls->object;
 }
 
-size_t ListSize(list *head)
+mem_size_t ListSize(list *head)
 {
-   size_t count = 0;
+   mem_size_t count = 0;
    for_list_none(*head) count++;
    return count;
 }

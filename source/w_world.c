@@ -295,6 +295,8 @@ void Sc_PreInit(void) {
 
    islithmap = (MapNum >= LithMapBeg && MapNum <= LithMapEnd);
 
+   Mon_Init();
+
    #ifndef NDEBUG
    PreInitLog();
    #endif

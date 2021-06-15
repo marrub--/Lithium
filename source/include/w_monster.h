@@ -10,7 +10,33 @@
  *
  * ---------------------------------------------------------------------------|
  */
-#ifndef w_monster_h
+#if defined(monster_flag_x)
+monster_flag_x(full)
+monster_flag_x(angelic)
+monster_flag_x(dark)
+#undef monster_flag_x
+#elif defined(monster_type_x)
+monster_type_x(zombie)
+monster_type_x(zombiesg)
+monster_type_x(zombiecg)
+monster_type_x(imp)
+monster_type_x(demon)
+monster_type_x(lostsoul)
+monster_type_x(mancubus)
+monster_type_x(arachnotron)
+monster_type_x(cacodemon)
+monster_type_x(hellknight)
+monster_type_x(baron)
+monster_type_x(revenant)
+monster_type_x(painelemental)
+monster_type_x(archvile)
+monster_type_x(mastermind)
+monster_type_x(cyberdemon)
+monster_type_x(phantom)
+monster_type_x(angel)
+monster_type_x(darkone)
+#undef monster_type_x
+#elif !defined(w_monster_h)
 #define w_monster_h
 
 #if !ZscOn
@@ -29,40 +55,6 @@ enum dmgtype {
    dmgtype_melee,
    dmgtype_shrapnel,
    dmgtype_max
-};
-#endif
-
-enum ZscName(MonsterType, mtype) {
-   mtype_unknown,
-   mtype_zombie,
-   mtype_zombiesg,
-   mtype_zombiecg,
-   mtype_imp,
-   mtype_demon,
-   mtype_lostsoul,
-   mtype_mancubus,
-   mtype_arachnotron,
-   mtype_cacodemon,
-   mtype_hellknight,
-   mtype_baron,
-   mtype_revenant,
-   mtype_painelemental,
-   mtype_archvile,
-   mtype_mastermind,
-   mtype_cyberdemon,
-   mtype_phantom,
-   mtype_angel,
-   mtype_darkone,
-   mtype_max
-};
-
-#if !ZscOn
-struct monster_info {
-   u64        exp;
-   i96        score;
-   enum mtype type;
-   str        name;
-   i32        flags;
 };
 
 struct dmon {
@@ -98,6 +90,15 @@ stkcall dmon_t *AllocDmon(void);
 
 void PrintMonsterInfo(dmon_t *m);
 void PrintDmonAllocSize(void);
+
+script void Mon_Init(void);
 #endif
+
+enum ZscName(MonsterType, mtype) {
+   mtype_unknown,
+   #define monster_type_x(name) mtype_##name,
+   #include "w_monster.h"
+   mtype_max
+};
 
 #endif

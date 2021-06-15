@@ -18,10 +18,11 @@
 
 #define FEOF(fp) ((fp)->_flag & _FILEFLAG_EOF)
 
-FILE *W_Open(str fname, cstr rw);
+FILE *W_Open(str fname, char rw);
+FILE *W_OpenIter(str fname, char rw, i32 *prev);
 FILE *NFOpen(str pcvar, char rw);
-size_t FWrite32(void const *restrict ptr, size_t count, size_t bytes, FILE *restrict fp);
-size_t FWriteStr(void const __str_ars *restrict ptr, size_t count, FILE *restrict fp);
-size_t FRead32(void *restrict buf, size_t count, size_t bytes, FILE *restrict fp);
+mem_size_t FWrite32(void const *restrict ptr, mem_size_t count, mem_size_t bytes, FILE *restrict fp);
+mem_size_t FWriteStr(void const __str_ars *restrict ptr, mem_size_t count, FILE *restrict fp);
+mem_size_t FRead32(void *restrict buf, mem_size_t count, mem_size_t bytes, FILE *restrict fp);
 
 #endif

@@ -33,7 +33,7 @@ void MailNotify(cstr name) {
    ACS_Delay(20);
 
    char remote[128];
-   strcpy(remote, LanguageC(LANG "INFO_REMOT_%s", name));
+   faststrcpy(remote, LanguageC(LANG "INFO_REMOT_%s", name));
 
    pl.logB(1, LC(LANG "LOG_MailRecv"), remote);
 
@@ -74,10 +74,10 @@ script static void UnlockPage(struct page *page) {
    }
 }
 
-static u32 NameToNum(cstr discrim, cstr name) {
-   for(u32 i = 0; i < BIP_MAX; i++) {
+static i32 NameToNum(cstr discrim, cstr name) {
+   for(i32 i = 0; i < BIP_MAX; i++) {
       bip_name_t tag;
-      lstrcpy2(tag, name, discrim);
+      faststrcpy2(tag, name, discrim);
       if(faststrcmp(bipinfo[i].name, tag)  == 0 ||
          faststrcmp(bipinfo[i].name, name) == 0) {
          return i;
@@ -133,7 +133,7 @@ script void P_BIP_PInit(void) {
 }
 
 void P_BIP_Unlock(cstr name) {
-   u32 num = NameToNum(pl.discrim, name);
+   i32 num = NameToNum(pl.discrim, name);
 
    if(num == BIP_MAX) {
       Dbg_Log(log_bip, "ERROR no page '%s' found", name);
@@ -161,7 +161,7 @@ cstr P_BIP_CategoryToName(u32 category) {
 script_str ext("ACS") addr(OBJ "BIPUnlock")
 void Sc_UnlockPage(void) {
    if(!P_None()) {
-      bip_name_t tag; lstrcpy_str(tag, ServCallS(sm_GetBipName));
+      bip_name_t tag; faststrcpy_str(tag, ServCallS(sm_GetBipName));
       P_BIP_Unlock(tag);
    }
 }

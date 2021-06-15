@@ -105,27 +105,6 @@ ninja
    end
 end
 
-MoncEnt = Struct.new :i, :h
-MONC = [
-   MoncEnt.new("Monsters.txt", "w_moninfo.h"),
-]
-def proc_monc ctx
-   ctx.fp << <<ninja
-rule monc
- command = $#{TOOLS}/monc.rb $in $out
- description = MonC
-ninja
-
-   for ent in MONC
-      i = txt ent.i
-      h = hdr ent.h
-
-      ctx.fp << "build #{h}: monc #{i} | $#{TOOLS}/monc.rb\n"
-
-      ctx.deps.push h
-   end
-end
-
 InfcEnt = Struct.new :i, :c, :h
 INFC = [
    InfcEnt.new("Info.txt", "p_bipinfo.c", "p_bipname.h"),
@@ -158,7 +137,6 @@ ZCPP = [
    ZcppEnt.new("p_weaponinfo.h", "p_weaponinfo.zsc"),
    ZcppEnt.new("u_names.h",      "u_names.zsc"),
    ZcppEnt.new("w_monster.h",    "w_monster.zsc"),
-   ZcppEnt.new("w_scorenums.h",  "w_scorenums.zsc"),
    ZcppEnt.new("w_world.h",      "w_world.zsc"),
 ]
 def proc_zcpp ctx
@@ -474,9 +452,7 @@ ctx.deps = [
    hdr("u_func_beg.h"),
    hdr("u_func_end.h"),
    hdr("u_names.h"),
-   hdr("w_moninfo.h"),
    hdr("w_monster.h"),
-   hdr("w_scorenums.h"),
    hdr("w_world.h"),
 ]
 
@@ -503,7 +479,6 @@ ninja
 
 proc_upgc ctx
 proc_wepc ctx
-proc_monc ctx
 proc_infc ctx
 proc_zcpp ctx
 proc_txtc ctx

@@ -18,7 +18,7 @@
 
 /* Chunk "note" ------------------------------------------------------------ */
 
-#define note_len(s) i32 len = s ? strlen(s) : 0; len = min(len, 255)
+#define note_len(s) i32 len = s ? faststrlen(s) : 0; len = min(len, 255)
 
 script static void Save_note(struct savefile *save) {
    u32 chunklen = 0;

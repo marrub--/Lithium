@@ -19,7 +19,7 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-void Save_WriteChunk(struct savefile *save, u32 iden, u32 vers, size_t size)
+void Save_WriteChunk(struct savefile *save, u32 iden, u32 vers, mem_size_t size)
 {
    Dbg_Log(log_save, "Save_WriteChunk: writing %u version %u size %zu", iden, vers, size);
 

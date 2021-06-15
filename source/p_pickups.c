@@ -16,26 +16,26 @@
 
 static str get_name(i32 w) {
    char name[20];
-   strcpy(name, P_Wep_GetPickup(w));
+   faststrcpy(name, P_Wep_GetPickup(w));
    ifauto(str, alias, LanguageNull(LANG "PK_%s_ALI", name))
-      lstrcpy_str(name, alias);
+      faststrcpy_str(name, alias);
 
-   i32 num = strtoi(LanguageC(LANG "PK_%s_NUM", name), nil, 10);
+   i32 num = faststrtoi32(LanguageC(LANG "PK_%s_NUM", name));
    return Language(LANG "PK_%s_%.3i", name, ACS_Random(0, num));
 }
 
 static void silly_pickup(i32 weapon)
 {
-   i32 fmtnum = strtoi(LC(LANG "PK_GET_NUM"),       nil, 10);
-   i32 uncnum = strtoi(LC(LANG "PK_UNCERTAIN_NUM"), nil, 10);
+   i32 fmtnum = faststrtoi32(LC(LANG "PK_GET_NUM"));
+   i32 uncnum = faststrtoi32(LC(LANG "PK_UNCERTAIN_NUM"));
 
    i32 iunc  = ACS_Random(0, uncnum);
    i32 ifmt  = ACS_Random(0, fmtnum);
-   i32 flag  = strtoi(LanguageC(LANG "PK_GET_%.3i_FLAGS", ifmt), nil, 0);
+   i32 flag  = faststrtoi32(LanguageC(LANG "PK_GET_%.3i_FLAGS", ifmt));
 
    if(flag & 2) {
       ifmt = ACS_Random(0, fmtnum);
-      flag = strtoi(LanguageC(LANG "PK_GET_%.3i_FLAGS", ifmt), nil, 0);
+      flag = faststrtoi32(LanguageC(LANG "PK_GET_%.3i_FLAGS", ifmt));
    }
 
    str nam = get_name(weapon);
@@ -62,7 +62,7 @@ void P_Log_Weapon(struct weaponinfo const *info)
 void P_Log_SellWeapon(struct weaponinfo const *info, i96 score)
 {
    i32 weapon = info->type;
-   bool ord = strtoi(LC(LANG "LOG_SellOrder"), nil, 10) == 0;
+   bool ord = faststrtoi32(LC(LANG "LOG_SellOrder")) == 0;
 
    str nam;
 

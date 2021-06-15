@@ -58,11 +58,11 @@ static byte const base64_table[65] =
  * nul terminated to make it easier to use as a C string. The nul terminator is
  * not included in out_len.
  */
-byte *base64_encode(const byte *src, size_t len, size_t *out_len)
+byte *base64_encode(const byte *src, mem_size_t len, mem_size_t *out_len)
 {
    byte *out, *pos;
    const byte *end, *in;
-   size_t olen;
+   mem_size_t olen;
 
    olen = len * 4 / 3 + 4; /* 3-byte blocks to 4-byte */
    olen++; /* nul termination */
@@ -112,14 +112,14 @@ byte *base64_encode(const byte *src, size_t len, size_t *out_len)
  *
  * Caller is responsible for freeing the returned buffer.
  */
-byte *base64_decode(const byte *src, size_t len, size_t *out_len)
+byte *base64_decode(const byte *src, mem_size_t len, mem_size_t *out_len)
 {
    noinit
    static byte dtable[256];
    static bool dtable_init;
 
    byte *out, *pos, block[4], tmp;
-   size_t i, count, olen;
+   mem_size_t i, count, olen;
    i32 pad = 0;
 
    if(!dtable_init)

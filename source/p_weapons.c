@@ -237,7 +237,7 @@ bool Sc_WeaponPickup(i32 name)
       WeaponGrab(info);
 
       pl.weaponsheld++;
-      bip_name_t tag; lstrcpy_str(tag, info->name);
+      bip_name_t tag; faststrcpy_str(tag, info->name);
       P_BIP_Unlock(tag);
 
       GiveWeaponItem(parm, info->slot);

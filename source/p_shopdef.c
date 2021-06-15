@@ -38,7 +38,7 @@ bool P_Shop_Buy(struct shopdef const *def, void *obj, cstr namefmt, bool nodeliv
 
    if(def->bipunlock)
    {
-      bip_name_t tag; lstrcpy_str(tag, def->bipunlock);
+      bip_name_t tag; faststrcpy_str(tag, def->bipunlock);
       P_BIP_Unlock(tag);
    }
 

@@ -26,7 +26,7 @@ static void StringStack() {
 
    SetSize(320, 200);
 
-   size_t i = 0;
+   mem_size_t i = 0;
    for_list_back_it(struct hudstr *hudstr, pl.hudstrlist, i++)
       PrintTextA_str(hudstr->s, sf_ltrmfont, CR_RED, 300,2, 20+i*9,1, 0.5);
 }

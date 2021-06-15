@@ -11,109 +11,205 @@
  * ---------------------------------------------------------------------------|
  */
 
+#if defined(str_hash_impl)
+   u32 ret = 0;
+   for(; *s; s++) ret = *s + 101 * ret;
+   return ret;
+
+#undef str_hash_impl
+#elif defined(remove_text_color_impl)
+   i32 j = 0;
+
+   if(size > countof(tcbuf)) return nil;
+
+   for(i32 i = 0; i < size; i++) {
+      if(s[i] == '\C') {
+         i++;
+         if(s[i] == '[') {
+            while(s[i] && s[i++] != ']');
+         } else {
+            i++;
+         }
+      }
+
+      if(i >= size || j >= size || !s[i]) {
+         break;
+      }
+
+      tcbuf[j++] = s[i];
+   }
+
+   tcbuf[j++] = '\0';
+
+   return tcbuf;
+
+#undef remove_text_color_impl
+#elif defined(strto_impl_type)
+   while(IsSpace(*p)) ++p;
+
+   #if strto_impl_sign
+   bool sign;
+   switch(*p) {
+   case '-': sign = true;  ++p; break;
+   case '+': sign = false; ++p; break;
+   default:  sign = false;      break;
+   }
+   #else
+   if(*p == '+') ++p;
+   #endif
+
+   strto_impl_type base;
+   if(*p == '0') {
+      ++p;
+      if(*p == 'x' || *p == 'X') {
+         ++p;
+         base = 16;
+      } else {
+         base = 8;
+      }
+   } else {
+      base = 10;
+   }
+
+   strto_impl_type ret = 0;
+   for(i32 digit; (digit = radix(*p)) < base; ++p) {
+      ret = ret * base + digit;
+   }
+   #if strto_impl_sign
+   return sign ? -ret : ret;
+   #else
+   return ret;
+   #endif
+
+#undef strto_impl_sign
+#undef strto_impl_type
+#else
 #include "common.h"
 #include "m_char.h"
 
 #include <stdio.h>
 
-#define CpyStrLocal(out, st) \
-   do { \
-      ACS_BeginPrint(); \
-      ACS_PrintLocalized(st); \
-      str s = ACS_EndStrParam(); \
-      for(i32 i = 0, l = ACS_StrLen(s); i <= l; i++) out[i] = s[i]; \
-   } while(0)
-
-#define StrHashImpl() \
-   u32 ret = 0; \
-   for(; *s; s++) ret = *s + 101 * ret; \
-   return ret
-
-#define X(n, s) str const n = Spf s;
+#define stab_x(n, s) str const lmvar n = Spf s;
 #include "m_stab.h"
 
 alloc_aut(0) stkcall
-str l_strupper(str in)
-{
+i32 radix(char c) {
+   /**/ if(c >= 'a' && c <= 'z') return c - 'a';
+   else if(c >= 'A' && c <= 'Z') return c - 'A';
+   else if(c >= '0' && c <= '9') return c - '0';
+   else                          return INT_MAX;
+}
+
+alloc_aut(0) stkcall
+i32 faststrtoi32(cstr p) {
+   #define strto_impl_sign 1
+   #define strto_impl_type i32
+   #include "m_str.c"
+}
+
+alloc_aut(0) stkcall
+i64 faststrtoi64(cstr p) {
+   #define strto_impl_sign 1
+   #define strto_impl_type i64
+   #include "m_str.c"
+}
+
+alloc_aut(0) stkcall
+i96 faststrtoi96(cstr p) {
+   #define strto_impl_sign 1
+   #define strto_impl_type i96
+   #include "m_str.c"
+}
+
+alloc_aut(0) stkcall
+u32 faststrtou32(cstr p) {
+   #define strto_impl_sign 0
+   #define strto_impl_type u32
+   #include "m_str.c"
+}
+
+alloc_aut(0) stkcall
+u64 faststrtou64(cstr p) {
+   #define strto_impl_sign 0
+   #define strto_impl_type u64
+   #include "m_str.c"
+}
+
+alloc_aut(0) stkcall
+u96 faststrtou96(cstr p) {
+   #define strto_impl_sign 0
+   #define strto_impl_type u96
+   #include "m_str.c"
+}
+
+alloc_aut(0) stkcall
+bool faststrstr(cstr lhs, cstr rhs) {
+   mem_size_t llen = faststrlen(lhs);
+   mem_size_t rlen = faststrlen(rhs);
+   mem_size_t i, j, k;
+
+   for(i = 0; i < llen; i++) {
+      for(j = 0, k = i; j < rlen; j++) {
+         if(lhs[i++] != rhs[j]) {
+            i = k;
+            break;
+         }
+      }
+
+      if(j == rlen) {
+         return true;
+      }
+   }
+
+   return false;
+}
+
+alloc_aut(0) stkcall
+mem_size_t faststrlen(cstr in) {
+   mem_size_t len;
+   for(len = 0; *in; ++len, ++in);
+   return len;
+}
+
+alloc_aut(0) stkcall
+str fast_strupper(str in) {
    ACS_BeginPrint();
    for(astr c = in; *c; c++) ACS_PrintChar(ToUpper(*c));
    return ACS_EndStrParam();
 }
 
 alloc_aut(0) stkcall
-u32 l_strhash(astr s)
-{
-   StrHashImpl();
+u32 fast_strhash(astr s) {
+   #define str_hash_impl
+   #include "m_str.c"
 }
 
 alloc_aut(0) stkcall
-u32 lstrhash(cstr s)
-{
-   StrHashImpl();
+u32 faststrhash(cstr s) {
+   #define str_hash_impl
+   #include "m_str.c"
 }
 
 alloc_aut(0) stkcall
-char *lstrcpy_str(char *dest, astr src)
-{
-   for(char *i = dest; (*i = *src); ++i, ++src);
-   return dest;
-}
-
-alloc_aut(0) stkcall
-char *lstrcpy2(char *out, cstr s1, cstr s2)
-{
-   char *p = out;
-   for(; *s1; s1++) *p++ = *s1;
-   for(; *s2; s2++) *p++ = *s2;
-   *p++ = '\0';
-   return out;
-}
-
-alloc_aut(0) stkcall
-char *lstrcpy3(char *out, cstr s1, cstr s2, cstr s3)
-{
-   char *p = out;
-   for(; *s1; s1++) *p++ = *s1;
-   for(; *s2; s2++) *p++ = *s2;
-   for(; *s3; s3++) *p++ = *s3;
-   *p++ = '\0';
-   return out;
-}
-
-alloc_aut(0) stkcall
-i32 lstrcmp_str(cstr s1, astr s2)
-{
+i32 faststrcmp_str(cstr s1, astr s2) {
    i32 res;
-
-   while((res = *s1 - *s2++) == 0)
-      if(*s1++ == '\0') break;
-
+   while((res = *s1 - *s2++) == 0 && *s1++ != '\0');
    return res;
 }
 
 alloc_aut(0) stkcall
-i32 faststrcmp(cstr s1, cstr s2)
-{
+i32 faststrcmp(cstr s1, cstr s2) {
    if(s1 == s2) return 0;
-
    i32 res;
-
-   while((res = *s1 - *s2++) == 0)
-      if(*s1++ == '\0') break;
-
+   while((res = *s1 - *s2++) == 0 && *s1++ != '\0');
    return res;
 }
 
 alloc_aut(0) stkcall
-i32 faststrcasecmp(cstr s1, cstr s2)
-{
+i32 faststrcasecmp(cstr s1, cstr s2) {
    if(s1 == s2) return 0;
-
    i32 res;
-
-   while((res = ToUpper(*s1) - ToUpper(*s2++)) == 0)
-      if(*s1++ == '\0') break;
-
+   while((res = ToUpper(*s1) - ToUpper(*s2++)) == 0 && *s1++ != '\0');
    return res;
 }
 
@@ -151,7 +247,7 @@ cstr alientext(i32 num) {
    noinit static char out[80];
 
    if(!num) {
-      fastmemmove(out, u8"", sizeof u8"");
+      fastmemcpy(out, u8"", sizeof u8"");
       return out;
    }
 
@@ -178,14 +274,12 @@ cstr alientext(i32 num) {
    return outp;
 }
 
-str LanguageV(str name)
-{
+str LanguageV(str name) {
    ACS_BeginPrint();
    ACS_PrintLocalized(name);
    str ret = ACS_EndStrParam();
 
-   while(ret[0] == '$')
-   {
+   while(ret[0] == '$') {
       str sub = ACS_StrMid(ret, 1, INT32_MAX);
       ACS_BeginPrint();
       ACS_PrintLocalized(sub);
@@ -197,20 +291,18 @@ str LanguageV(str name)
    return ret;
 }
 
-char *LanguageVC(char *out, cstr name)
-{
+char *LanguageVC(char *out, cstr name) {
    noinit static char sbuf[8192];
 
    if(!out) out = sbuf;
-   CpyStrLocal(out, l_strdup(name));
+   CpyStrLocal(out, fast_strdup(name));
 
-   while(out[0] == '$') CpyStrLocal(out, l_strdup(&out[1]));
+   while(out[0] == '$') CpyStrLocal(out, fast_strdup(&out[1]));
 
    return out;
 }
 
-char *LanguageCV(char *out, cstr fmt, ...)
-{
+char *LanguageCV(char *out, cstr fmt, ...) {
    noinit static char nbuf[256];
    va_list vl;
 
@@ -221,8 +313,7 @@ char *LanguageCV(char *out, cstr fmt, ...)
    return LanguageVC(out, nbuf);
 }
 
-str LanguageNull(cstr fmt, ...)
-{
+str LanguageNull(cstr fmt, ...) {
    va_list vl;
 
    ACS_BeginPrint();
@@ -239,35 +330,15 @@ str LanguageNull(cstr fmt, ...)
 
 noinit static char tcbuf[4096];
 
-#define RemoveTextColorsImpl() \
-   i32 j = 0; \
-   \
-   if(size > countof(tcbuf)) return nil; \
-   \
-   for(i32 i = 0; i < size; i++) { \
-      if(s[i] == '\C') { \
-         i++; \
-         if(s[i] == '[') while(s[i] && s[i++] != ']'); \
-         else            i++; \
-      } \
-      \
-      if(i >= size || j >= size || !s[i]) break; \
-      \
-      tcbuf[j++] = s[i]; \
-   } \
-   \
-   tcbuf[j++] = '\0'; \
-   \
-   return tcbuf;
-
 alloc_aut(0) stkcall
 cstr RemoveTextColors_str(astr s, i32 size) {
-   RemoveTextColorsImpl();
+   #define remove_text_color_impl
+   #include "m_str.c"
 }
 
 alloc_aut(0) stkcall
 cstr RemoveTextColors(cstr s, i32 size) {
-   RemoveTextColorsImpl();
+   #define remove_text_color_impl
+   #include "m_str.c"
 }
-
-/* EOF */
+#endif

@@ -24,7 +24,7 @@ bool G_Button_Imp(struct gui_state *g, u32 id, struct gui_arg_btn const *a) {
       if(g->hot == id && pre->hot) G_Prefix(g, graphic, pre, hot);
       else                         G_Prefix(g, graphic, pre, gfx);
 
-      if(graphic[0]) PrintSprite(l_strdup(graphic), a->x + g->ox,1, a->y + g->oy,1);
+      if(graphic[0]) PrintSprite(fast_strdup(graphic), a->x + g->ox,1, a->y + g->oy,1);
    }
 
    if(a->label && pre->font) {

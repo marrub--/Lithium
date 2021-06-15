@@ -55,10 +55,10 @@ struct finale_state {
 
 struct finale_compiler {
    struct tokbuf tb;
+   struct tbuf_err res;
    u32 fptr, fnum;
    u32 fnarg;
    cstr farg;
-   bool ok;
 };
 
 static cstr finale;
@@ -67,18 +67,23 @@ static bool finit;
 
 script static
 void F_parseArgs(struct finale_compiler *c) {
+   struct token *tok;
    for(i32 i = 0; i < c->fnarg; i++) {
       switch(c->farg[i]) {
       case 'i':
-         NextCode(c).i =
-            strtoi(c->tb.expc(c->tb.get(), tok_number)->textV, nil, 0);
+         tok = c->tb.expc(&c->res, c->tb.get(), tok_number);
+         unwrap(&c->res);
+         NextCode(c).i = faststrtoi32(tok->textV);
          break;
       case 'u':
-         NextCode(c).u =
-            strtoui(c->tb.expc(c->tb.get(), tok_number)->textV, nil, 0);
+         tok = c->tb.expc(&c->res, c->tb.get(), tok_number);
+         unwrap(&c->res);
+         NextCode(c).u = faststrtou32(tok->textV);
          break;
       case 's':
-         NextCode(c).s = l_strdup(c->tb.expc(c->tb.get(), tok_string)->textV);
+         tok = c->tb.expc(&c->res, c->tb.get(), tok_string);
+         unwrap(&c->res);
+         NextCode(c).s = fast_strdup(tok->textV);
          break;
       }
    }
@@ -86,8 +91,10 @@ void F_parseArgs(struct finale_compiler *c) {
 
 script static
 void F_parseFunc(struct finale_compiler *c, struct token *tok) {
-   if(tok->textC != 5)
-      c->tb.err("invalid function name '%s'", tok->textV);
+   if(tok->textC != 5) {
+      c->tb.err(&c->res, "invalid function name '%s'", tok->textV);
+      unwrap(&c->res);
+   }
 
    switch(FourCCPtr(tok->textV)) {
    #define finale_code(name, c1, c2, c3, c4, narg, arg) \
@@ -98,17 +105,19 @@ void F_parseFunc(struct finale_compiler *c, struct token *tok) {
       break;
    #include "w_finale.c"
    default:
-      c->tb.err("no function named '%s'", tok->textV);
+      c->tb.err(&c->res, "no function named '%s'", tok->textV);
+      unwrap(&c->res);
    }
 
-   F_parseArgs(c);
+   F_parseArgs(c); unwrap(&c->res);
 
-   c->tb.expc(c->tb.get(), tok_semico);
+   c->tb.expc(&c->res, c->tb.get(), tok_semico);
+   unwrap(&c->res);
 }
 
 script static
 void F_parseLabel(struct finale_compiler *c, struct token *tok) {
-   c->fnum = strtoi(tok->textV, nil, 0);
+   c->fnum = faststrtoi32(tok->textV);
    c->fptr = 0;
 }
 
@@ -116,22 +125,14 @@ static
 bool F_loadFile(cstr which) {
    static struct finale_compiler c = {};
 
-   c.ok = true;
-
    Dbg_Log(log_dev, "%s: loading %s", __func__, which);
 
-   c.tb.fp = W_Open(StrParam("lfiles/End_%s.txt", which), "r");
-
-   TBufCtor(&c.tb);
-
-   if(setjmp(c.tb.env)) {
-      c.ok = false;
-      goto done;
-   }
+   TBufCtor(&c.tb, W_Open(StrParam("lfiles/End_%s.txt", which), 't'));
 
    for(;;) {
       struct token *tok =
-         c.tb.expc3(c.tb.get(), tok_eof, tok_identi, tok_number);
+         c.tb.expc3(&c.res, c.tb.get(), tok_eof, tok_identi, tok_number);
+      unwrap_do(&c.res, { goto done; });
 
       if(tok->type == tok_eof) {
          break;
@@ -140,13 +141,16 @@ bool F_loadFile(cstr which) {
       } else if(tok->type == tok_number) {
          F_parseLabel(&c, tok);
       }
+      unwrap_do(&c.res, { goto done; });
    }
 
 done:
+   unwrap_print(&c.res);
+
    TBufDtor(&c.tb);
    fclose(c.tb.fp);
 
-   return c.ok;
+   return !c.res.some;
 }
 
 void F_Load(void) {
@@ -223,7 +227,7 @@ void F_text(struct finale_state *st) {
    u32 fade = st->prg++->u;
 
    cstr txt = LanguageC(LANG "ENDING_%S", name);
-   u32  len = strlen(txt);
+   u32  len = faststrlen(txt);
 
    u32 fill     = hold == -1 ? 0 : hold;
    u32 skipfill = 0;

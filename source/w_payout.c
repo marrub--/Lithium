@@ -19,10 +19,10 @@ void Scr_HInit(void) {
    k64 taxpct = ACS_RandomFixed(0, 4 / 100.0);
 
 #define GenPay(name, mul) \
-   if(payout.name##max) { \
+   statement(if(payout.name##max) { \
       payout.name##pct = (payout.name##num / (k64)payout.name##max) * 100; \
       payout.name##scr = payout.name##pct * mul; \
-   }
+   })
 
    GenPay(kill, 500);
    GenPay(item, 400);

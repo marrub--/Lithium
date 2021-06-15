@@ -21,11 +21,13 @@ void P_CBI_TabStatistics(struct gui_state *g)
    i32 n = 0;
 
    #define Stat(name, f, x) \
+   statement({ \
       PrintTextChS(name); \
       PrintText(sf_lmidfont, g->defcr, g->ox+17,1,  g->oy+27 + 8*n,1); \
       PrintTextFmt(f, x); \
       PrintText(sf_smallfnt, g->defcr, g->ox+267,2, g->oy+27 + 8*n,1); \
-      n++
+      n++; \
+   })
 
    Stat(LC(LANG "STAT_ScoreMul"),   "%i%%", ceilk(pl.scoremul * 100.0k));
    Stat(LC(LANG "STAT_Weapons"),    "%i",   pl.weaponsheld);

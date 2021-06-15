@@ -14,7 +14,8 @@
 #include "w_monster.h"
 #include "p_player.h"
 #include "w_world.h"
-#include "w_scorenums.h"
+#include "m_file.h"
+#include "m_tokbuf.h"
 
 #define HasResistances(m) ((m)->rank >= 2)
 
@@ -25,9 +26,29 @@ enum {
    _max_level = 150,
 };
 
+enum {
+   #define monster_flag_x(flg) _mif_##flg,
+   #include "w_monster.h"
+};
+
+struct monster_preset {
+   char prename[64];
+   u64  exp;
+   i96  score;
+};
+
+struct monster_info {
+   anonymous struct monster_preset pre;
+   enum mtype type;
+   char       name[64];
+   i32        flags;
+};
+
 /* Static Objects ---------------------------------------------------------- */
 
-#include "w_moninfo.h"
+noinit static struct monster_preset monsterpreset[128];
+noinit static struct monster_info   monsterinfo[256];
+noinit static mem_size_t monsterpresetnum, monsterinfonum;
 
 StrAry(dmgtype_names,
        s"Bullets",
@@ -117,8 +138,7 @@ void ShowBarrier(dmon_t const *m, k32 alpha) {
 }
 
 script static
-void BaseMonsterLevel(dmon_t *m)
-{
+void BaseMonsterLevel(dmon_t *m) {
    k32 rlv = ACS_RandomFixed(1, _max_level);
    k32 bias;
 
@@ -129,10 +149,10 @@ void BaseMonsterLevel(dmon_t *m)
    bias += CVarGetI(sc_sv_difficulty) / 100.0;
    bias *= ACS_RandomFixed(1, 1.5);
 
-   if(get_bit(m->mi->flags, mif_angelic)) {
+   if(get_bit(m->mi->flags, _mif_angelic)) {
       m->rank  = 7;
       m->level = 7 + rlv * bias;
-   } else if(get_bit(m->mi->flags, mif_dark)) {
+   } else if(get_bit(m->mi->flags, _mif_dark)) {
       m->rank  = 6;
       m->level = 6 + rlv * bias;
    } else if(GetFun() & lfun_ragnarok) {
@@ -170,9 +190,8 @@ void BaseMonsterLevel(dmon_t *m)
 /* Spawn a Monster Soul and temporarily set the species of it until the
  * actor is no longer solid, so it won't explode immediately.
  */
-alloc_aut(0) script
-static void SoulCleave(dmon_t *m)
-{
+alloc_aut(0) script static
+void SoulCleave(dmon_t *m) {
    Str(sm_solid, s"SOLID");
 
    i32 tid = ACS_UniqueTID();
@@ -187,8 +206,8 @@ static void SoulCleave(dmon_t *m)
    SetSpecies(tid, so_Player);
 }
 
-static void SpawnManaPickup(dmon_t *m)
-{
+static
+void SpawnManaPickup(dmon_t *m) {
    i32 i = 0;
    do {
       i32 tid = ACS_UniqueTID();
@@ -201,7 +220,8 @@ static void SpawnManaPickup(dmon_t *m)
    } while(i < m->maxhealth);
 }
 
-static void OnFinalize(dmon_t *m) {
+static
+void OnFinalize(dmon_t *m) {
    if(!P_None() && PtrPlayerNumber(0, AAPTR_TARGET) >= 0) {
       if(pl.sgacquired) {
          bool high_level_imp =
@@ -248,8 +268,7 @@ static void OnFinalize(dmon_t *m) {
 }
 
 script static
-void OnDeath(dmon_t *m)
-{
+void OnDeath(dmon_t *m) {
    Dbg_Log(log_dmon, "monster %i is ded", m->id);
 
    m->wasdead = true;
@@ -309,34 +328,11 @@ void MonsterMain(dmon_t *m) {
    }
 }
 
-alloc_aut(0) stkcall static
-bool faststrstr_str(str lhs, str rhs) {
-   i32 llen = ACS_StrLen(lhs);
-   i32 rlen = ACS_StrLen(rhs);
-   i32 i, j, k;
-
-   for(i = 0; i < llen; i++) {
-      for(j = 0, k = i; j < rlen; j++) {
-         if(lhs[i++] != rhs[j]) {
-            i = k;
-            break;
-         }
-      }
-
-      if(j == rlen) {
-         return true;
-      }
-   }
-
-   return false;
-}
-
 /* Extern Functions -------------------------------------------------------- */
 
 #ifndef NDEBUG
-void PrintMonsterInfo(dmon_t *m)
-{
-   Log("%p (%p) %S active: %u id: %.3u\n"
+void PrintMonsterInfo(dmon_t *m) {
+   Log("%p (%p) %s active: %u id: %.3u\n"
        "wasdead: %u finalized: %u painwait: %i\n"
        "level: %.3i rank: %i exp: %i\n"
        "health: %i/%i\n"
@@ -358,51 +354,221 @@ void PrintMonsterInfo(dmon_t *m)
 }
 #endif
 
+bool MonInfo_Kv(struct tokbuf *tb, struct tbuf_err *res, cstr *kp, cstr *vp) {
+   noinit
+   static char k[64], v[64];
+   struct token *tok = tb->expc2(res, tb->get(), tok_semico, tok_identi);
+   unwrap(res);
+   if(tok->type == tok_semico) {
+      return false;
+   } else {
+      faststrcpy(k, tok->textV);
+      tb->expdr(res, tok_col);
+      unwrap(res);
+      tok = tb->expc3(res, tb->get(), tok_identi, tok_number, tok_string);
+      unwrap(res);
+      faststrcpy(v, tok->textV);
+      *kp = k;
+      *vp = v;
+      return true;
+   }
+}
+
+script
+void MonInfo_Preset(struct tokbuf *tb, struct tbuf_err *res) {
+   struct monster_preset *pre = &monsterpreset[monsterpresetnum++];
+   cstr k = nil, v = nil;
+
+   while(MonInfo_Kv(tb, res, &k, &v)) {
+      unwrap(res);
+      if(faststrcmp(k, "name") == 0) {
+         faststrcpy(pre->prename, v);
+      } else if(faststrcmp(k, "exp") == 0) {
+         pre->exp = faststrtou64(v);
+      } else if(faststrcmp(k, "scr") == 0) {
+         pre->score = faststrtoi96(v);
+      } else {
+         tb->err(res, "%s MonInfo_Preset: invalid key '%s'", TokPrint(tb->reget()), k);
+         unwrap(res);
+      }
+   }
+   unwrap(res);
+
+   Dbg_Log(log_dmonV, "preset %s added: exp = %lu, score = %lli",
+           pre->prename, pre->exp, pre->score);
+}
+
+script
+void MonInfo_Monster(struct tokbuf *tb, struct tbuf_err *res, i32 flags) {
+   struct monster_info *mi = &monsterinfo[monsterinfonum++];
+   cstr k = nil, v = nil;
+
+   mi->flags = flags;
+
+   while(MonInfo_Kv(tb, res, &k, &v)) {
+      unwrap(res);
+      if(faststrcmp(k, "filter") == 0) {
+         faststrcpy(mi->name, v);
+      } else if(faststrcmp(k, "exp") == 0) {
+         mi->exp = faststrtou64(v);
+      } else if(faststrcmp(k, "scr") == 0) {
+         mi->score = faststrtoi96(v);
+      } else if(faststrcmp(k, "pre") == 0) {
+         for(struct monster_preset *pre = monsterpreset;; ++pre) {
+            if(faststrcmp(pre->prename, v) == 0) {
+               mi->pre = *pre;
+               break;
+            }
+         }
+      } else if(faststrcmp(k, "type") == 0) {
+         #define monster_type_x(name) \
+            if(faststrcmp(v, #name) == 0) { \
+               mi->type = mtype_##name; \
+               continue; \
+            }
+         #include "w_monster.h"
+      } else {
+         tb->err(res, "%s MonInfo_Monster: invalid key '%s'", TokPrint(tb->reget()), k);
+         unwrap(res);
+      }
+   }
+   unwrap(res);
+
+   Dbg_Log(log_dmonV, "monster %s added: type = %i, flags = %i",
+           mi->name, mi->type, mi->flags);
+}
+
+i32 MonInfo_Flags(struct tokbuf *tb, struct tbuf_err *res) {
+   i32 flags = 0;
+
+   for(;;) {
+      struct token *tok = tb->expc2(res, tb->get(), tok_identi, tok_parenc);
+      unwrap(res);
+
+      if(tok->type == tok_parenc) {
+         break;
+      }
+      #define monster_flag_x(name) \
+      else if(faststrcmp(tok->textV, #name) == 0) {\
+         set_bit(flags, _mif_##name); \
+      }
+      #include "w_monster.h"
+      else {
+         tb->err(res, "%s MonInfo_Flags: invalid flag; expected "
+                 #define monster_flag_x(name) #name ", "
+                 #include "w_monster.h"
+                 "or `)'",
+                 TokPrint(tok));
+         unwrap(res);
+      }
+   }
+
+   return flags;
+}
+
+script
+void MonInfo_Compile(struct tokbuf *tb, struct tbuf_err *res) {
+   for(;;) {
+      struct token *tok =
+         tb->expc3(res, tb->get(), tok_pareno, tok_identi, tok_eof);
+      unwrap(res);
+
+      switch(tok->type) {
+      case tok_eof:
+         return;
+      case tok_pareno: {
+         i32 flags = MonInfo_Flags(tb, res);
+         unwrap(res);
+         tb->expdr(res, tok_braceo);
+         unwrap(res);
+         while(!tb->drop(tok_bracec)) {
+            MonInfo_Monster(tb, res, flags);
+            unwrap(res);
+         }
+         break;
+      }
+      case tok_identi:
+         if(faststrcmp(tok->textV, "presets") == 0) {
+            tb->expdr(res, tok_braceo);
+            unwrap(res);
+            while(!tb->drop(tok_bracec)) {
+               MonInfo_Preset(tb, res);
+               unwrap(res);
+            }
+         } else {
+            tb->err(res, "%s MonInfo_Compile: invalid toplevel identifier", TokPrint(tok));
+            unwrap(res);
+         }
+         break;
+      }
+   }
+}
+
+script
+void Mon_Init(void) {
+   Str(sp_LITHMONS, s"LITHMONS");
+
+   FILE *fp;
+   i32 prev = 0;
+
+   monsterpresetnum = 0;
+   monsterinfonum   = 0;
+
+   while((fp = W_OpenIter(sp_LITHMONS, 't', &prev))) {
+      struct tokbuf tb;
+      TBufCtor(&tb, fp);
+
+      struct tbuf_err res;
+      MonInfo_Compile(&tb, &res);
+      unwrap_print(&res);
+
+      TBufDtor(&tb);
+      fclose(fp);
+   }
+}
+
 /* Scripts ----------------------------------------------------------------- */
 
 script ext("ACS") addr(lsc_monstertype)
-i32 Sc_GetMonsterType()
-{
+i32 Sc_GetMonsterType() {
    ifauto(dmon_t *, m, DmonSelf()) return m->mi->type;
    else                            return mtype_unknown;
 }
 
 script_str ext("ACS") addr(OBJ "GiveMonsterEXP")
-void Sc_GiveMonsterEXP(i32 amt)
-{
+void Sc_GiveMonsterEXP(i32 amt) {
    ifauto(dmon_t *, m, DmonSelf()) m->exp += amt;
 }
 
 script_str ext("ACS") addr(OBJ "ResurrectMonster")
-void Sc_ResurrectMonster(i32 amt)
-{
+void Sc_ResurrectMonster(i32 amt) {
    ifauto(dmon_t *, m, DmonSelf()) m->resurrect = true;
 }
 
 #ifndef NDEBUG
 script static
-void LogError(str cname) {
-   Dbg_Log(log_dmon, "ERROR no monster %S", cname);
+void LogError(cstr cname) {
+   Dbg_Log(log_dmon, "ERROR no monster %s", cname);
 }
 #endif
 
 alloc_aut(0) script ext("ACS") addr(lsc_monsterinfo)
-void Sc_MonsterInfo(void)
-{
-   Str(so_rladaptive, s"RLAdaptive");
-   Str(so_rlhax,      s"RLCyberdemonMkII");
+void Sc_MonsterInfo(void) {
+   static char cname[64];
+   faststrcpy_str(cname, ACS_GetActorClass(0));
 
-   str cname = ACS_GetActorClass(0);
-
-   if(faststrstr_str(cname, so_rladaptive) || faststrstr_str(cname, so_rlhax))
+   if(faststrstr(cname, "RLAdaptive") || faststrstr(cname, "RLCyberdemonMkII"))
       return;
 
-   for(i32 i = 0; i < countof(monsterinfo); i++) {
+   for(i32 i = 0; i < monsterinfonum; i++) {
       struct monster_info const *mi = &monsterinfo[i];
       bool init;
 
-      if(get_bit(mi->flags, mif_full)) init = cname == mi->name;
-      else                             init = faststrstr_str(cname, mi->name);
+      if(get_bit(mi->flags, _mif_full)) {
+         init = faststrcmp(cname, mi->name) == 0;
+      } else {
+         init = faststrstr(cname, mi->name);
+      }
 
       if(init) {
          ACS_Delay(1);
@@ -421,16 +587,10 @@ void Sc_MonsterInfo(void)
    #ifndef NDEBUG
    LogError(cname);
    #endif
-
-   /* If the monster failed all checks, give them this so we don't
-      need to recheck every tick.
-      Edit: This isn't necessary anymore, but what the hell, keep it. */
-   InvGive(so_MonsterInvalid, 1);
 }
 
 script_str ext("ACS") addr(OBJ "MonsterFinalized")
-void Sc_MonsterFinalized(void)
-{
+void Sc_MonsterFinalized(void) {
    ifauto(dmon_t *, m, DmonSelf())
       OnFinalize(m);
 }

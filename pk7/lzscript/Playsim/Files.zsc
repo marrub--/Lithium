@@ -9,15 +9,17 @@
 
 extend class Lith_HERMES;
 
-static clearscope int FindLump(string name)
-{
-   return Wads.CheckNumForFullName(name);
+static clearScope int findLump(string name, int startLump) {
+   return Wads.findLump(name, startLump, Wads.globalNamespace);
 }
 
-static clearscope string ReadLump(int lump)
-{
-   let s = Wads.ReadLump(lump);
-   s.Replace("\\c", "\c");
+static clearScope int checkLump(string name) {
+   return Wads.checkNumForFullName(name);
+}
+
+static clearScope string readLump(int lump) {
+   let s = Wads.readLump(lump);
+   s.replace("\\c", "\c");
    return s;
 }
 

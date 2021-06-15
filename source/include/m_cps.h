@@ -21,8 +21,8 @@
 #define Cps_Defn(name, len) u32 (name)[Cps_Adjust(len)] = {}
 #define Cps_Decl(name, len) u32 (name)[Cps_Adjust(len)]
 
-#define Cps_Expand_str(cps, s)   l_strdup(Cps_Expand(cps, s))
-#define Cps_ExpandNT_str(cps, s) l_strdup(Cps_ExpandNT(cps, s))
+#define Cps_Expand_str(cps, s)   fast_strdup(Cps_Expand(cps, s))
+#define Cps_ExpandNT_str(cps, s) fast_strdup(Cps_ExpandNT(cps, s))
 
 void Cps_SetC(u32 *cps, u32 p, u32 c);
 byte Cps_GetC(u32 const *cps, u32 p);

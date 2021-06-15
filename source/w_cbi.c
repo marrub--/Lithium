@@ -69,7 +69,7 @@ void CBI_Install(i32 num)
    ifauto(struct cupgdef const *, c, GetCUpgr(pl.pclass, num))
       if(c->nam)
       {
-         bip_name_t tag; lstrcpy_str(tag, c->nam);
+         bip_name_t tag; faststrcpy_str(tag, c->nam);
          P_BIP_Unlock(tag);
       }
 }

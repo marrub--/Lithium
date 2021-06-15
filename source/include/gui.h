@@ -45,16 +45,18 @@
 #define G_WinBeg(g, ...) G_WinBeg_HId(g, 0, __VA_ARGS__)
 
 #define G_GenPreset(type, def) \
-   type pre; \
-   if(a->preset) pre = *a->preset; \
-   else          pre = def
+   statement({ \
+      type pre; \
+      if(a->preset) pre = *a->preset; \
+      else          pre = def; \
+   })
 
 #define G_Prefix(g, gfx, pre, mem) \
-   do { \
+   statement({ \
            if(!(pre)->mem)     (gfx)[0] = '\0'; \
-      else if((pre)->external) strcpy(gfx, (pre)->mem); \
-      else                     lstrcpy2(gfx, (g)->gfxprefix, (pre)->mem); \
-   } while(0)
+      else if((pre)->external) faststrcpy(gfx, (pre)->mem); \
+      else                     faststrcpy2(gfx, (g)->gfxprefix, (pre)->mem); \
+   })
 
 #define G_ScrollReset(g, st) \
    (*(st) = (struct gui_scr){})
@@ -64,7 +66,7 @@
 #define G_TxtBoxEvt(st) \
    __with(cstr txt_buf = Cps_Expand(st->txtbuf, 0, st->tbptr);) \
       ifauto(cstr, _c, strchr(txt_buf, '\n')) \
-         __with(size_t txt_len = _c - txt_buf; G_TxtBoxRes(st);)
+         __with(mem_size_t txt_len = _c - txt_buf; G_TxtBoxRes(st);)
 
 /* Types ------------------------------------------------------------------- */
 
@@ -321,8 +323,8 @@ struct gui_typ const *G_TypeOnUpdate(struct gui_state *g, struct gui_typ *typeon
 
 bool G_Filler(i32 x, i32 y, u32 *fill, u32 tics, bool held);
 
-i32 G_Tabs(struct gui_state *g, u32 *st, char const (*names)[20], size_t num,
-           i32 x, i32 y, i32 yp);
+i32 G_Tabs(struct gui_state *g, u32 *st, char const (*names)[20],
+           mem_size_t num, i32 x, i32 y, i32 yp);
 
 void G_ScrEnd(struct gui_state *g, struct gui_scr *scr);
 optargs(1)

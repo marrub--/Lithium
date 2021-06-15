@@ -60,7 +60,7 @@ script typedef void (*loadchunker_t)(struct savefile *save, struct savechunk *ch
 
 /* Extern Functions -------------------------------------------------------- */
 
-void Save_WriteChunk(struct savefile *save, u32 iden, u32 vers, size_t size);
+void Save_WriteChunk(struct savefile *save, u32 iden, u32 vers, mem_size_t size);
 struct savefile *Save_BeginSave(void);
 script void Save_EndSave(struct savefile *save);
 

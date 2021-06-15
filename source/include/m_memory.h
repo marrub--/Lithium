@@ -35,9 +35,6 @@ enum {
    _tag_max
 };
 
-typedef i32 mem_tag_t;
-typedef i32 mem_size_t;
-
 #define Salloc(t, tag) Malloc(sizeof(t), tag)
 
 stkcall void  Dalloc(void *p);

@@ -64,8 +64,6 @@ class Lith_MonsterID : Inventory
    }
 }
 
-class Lith_MonsterInvalid : Inventory {default {Inventory.MaxAmount 1;}}
-
 class Lith_MResist : PowerProtection {default {Powerup.Duration 0x7FFFFFFF;}}
 
 class Lith_M_Bullets1 :Lith_MResist{default{DamageFactor "Bullet",   0.8;}}

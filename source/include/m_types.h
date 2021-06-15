@@ -20,6 +20,8 @@
 #include <stdfix.h>
 #include <stdint.h>
 
+#define statement(body) do body while(0)
+
 #define nil  ((void *)0)
 #define snil ((__str_ent *)0)
 #define lnil ((__label *)0)
@@ -47,6 +49,9 @@ typedef int96_t i96;
 typedef uint32_t u32;
 typedef uint64_t u64;
 typedef uint96_t u96;
+
+typedef i32 mem_tag_t;
+typedef i32 mem_size_t;
 
 typedef unsigned char byte;
 

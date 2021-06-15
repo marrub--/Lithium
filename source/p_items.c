@@ -196,7 +196,7 @@ void P_Inv_PInit() {
       [_inv_legs]        = {2,  3, "Legs",     _cont_body},
    };
 
-   fastmemmove(pl.inv, baseinv, sizeof baseinv);
+   fastmemcpy(pl.inv, baseinv, sizeof baseinv);
 
    for(i32 i = 0; i < _inv_num; i++) {
       ListCtor(&pl.inv[i].items);

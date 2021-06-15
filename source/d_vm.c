@@ -99,9 +99,12 @@ local i32 SignExtendB2(u32 v) {return SignB2(v) ? (v) | 0xFFFF0000 : (v);}
 #define GetSR() ((r2 & R2_M_SR) >> R2_S_SR)
 
 #define Set(reg, msk, bit) \
-   reg &= ~msk; \
-   reg |= v << bit & msk; \
-   return (reg & msk) >> bit
+   statement({ \
+      reg &= ~msk; \
+      reg |= v << bit & msk; \
+      return (reg & msk) >> bit; \
+   })
+
 local u32 SetPC(u32 v) {Set(r1, R1_M_PC, R1_S_PC);}
 local u32 SetSP(u32 v) {Set(r1, R1_M_SP, R1_S_SP);}
 local u32 SetVA(u32 v) {Set(r1, R1_M_VA, R1_S_VA);}
@@ -216,28 +219,24 @@ static void TraceReg() {
 /* jumps */
 #ifndef NDEBUG
 #define JmpDbg() \
-   if(get_bit(dbglevel, log_dlg)) { \
+   statement(if(get_bit(dbglevel, log_dlg)) { \
       ACS_BeginLog(); \
       Dlg_WriteCode(def, next, GetPC() - PRG_BEG); \
       ACS_PrintChar(' '); \
       TraceReg(); \
       ACS_EndLog(); \
-   }
+   })
 #else
-#define JmpDbg()
+#define JmpDbg() statement(;)
 #endif
 
-#define JmpVI { \
-      /* jump next byte */ \
+/* jump next byte */
+#define JmpVI() \
+   statement({ \
       u32 next = MemI1_G(); \
       JmpDbg(); \
       goto *cases[next]; \
-   }
-
-#define JmpHL { \
-      /* jump halt */ \
-      goto halt; \
-   }
+   })
 
 /* VM action auxiliary */
 enum {
@@ -326,7 +325,7 @@ void TerminalGUI(u32 tact) {
    str br;
    switch(tact) {
       case TACT_LOGON:
-      case TACT_LOGOFF: br = l_strdup(CanonTime(ct_date, ticks)); break;
+      case TACT_LOGOFF: br = fast_strdup(CanonTime(ct_date, ticks)); break;
       default:          br = L(sl_term_use_to_ack);                  break;
    }
    PrintText_str(br, sf_ltrmfont, CR_RED, tright,2, tbottom,2);
@@ -345,13 +344,13 @@ void TerminalGUI(u32 tact) {
             y -= 10;
          }
 
-         PrintSprite(l_strdup(pict), tmidx,0, y,0);
+         PrintSprite(fast_strdup(pict), tmidx,0, y,0);
          break;
       }
       case TACT_PICT: {
          str text = GetText(_from_trm);
 
-         PrintSprite(l_strdup(pict), tmidx/2,0, tmidy,0);
+         PrintSprite(fast_strdup(pict), tmidx/2,0, tmidy,0);
 
          G_Clip(&gst, tleft, ttop, tmidx, ttheigh);
 
@@ -396,8 +395,8 @@ static void DialogueGUI() {
    G_Begin(&gst, 320, 240);
    G_UpdateState(&gst);
 
-   PrintSpriteA(sp_Dialogue_Back, 0,1, 0,1, 0.7);
-   PrintSpriteA(l_strdup(icon),   0,1, 0,1, 0.7);
+   PrintSpriteA(sp_Dialogue_Back,  0,1, 0,1, 0.7);
+   PrintSpriteA(fast_strdup(icon), 0,1, 0,1, 0.7);
 
    PrintTextStr(snam);
    PrintText(sf_bigupper, CR_GREEN, 30,1, 35,1);
@@ -580,7 +579,7 @@ void Dlg_Run(u32 num) {
       #ifndef NDEBUG
       Log("%s ERROR: dialogue %u has no code", __func__, num);
       #endif
-      JmpHL;
+      goto halt;
    }
 
    /* GUI state */
@@ -625,7 +624,7 @@ void Dlg_Run(u32 num) {
 
    /* all right, start the damn VM already! */
    SetPC(PRG_BEG + def->pages[pl.dlg.page]);
-   JmpVI;
+   JmpVI();
 
 vmaction:
    while(ua = GetVA(), (ua != ACT_NONE && ua < ACT_MAX)) {
@@ -633,52 +632,52 @@ vmaction:
       switch(ua) {
          #define ACT(name) case ACT_##name: Act##name(); break;
          #include "d_vm.h"
-         case ACT_HALT: JmpHL;
-         case ACT_JUMP: JmpVI;
+         case ACT_HALT: goto halt;
+         case ACT_JUMP: JmpVI();
       }
    }
-   JmpVI;
+   JmpVI();
 
 /* No-op */
 NOP_NP:
-   JmpVI;
+   JmpVI();
 
 /* Jumps */
 branch:
    if(ub) {
       SetPC(GetPC() + sa);
-      JmpVI;
+      JmpVI();
    }
-   JmpVI;
+   JmpVI();
 
 BRK_NP:
-   JmpHL;
+   goto halt;
 
 JSR_AI:
    StaB2_S(GetPC());
    SetPC(AdrAI_V());
-   JmpVI;
+   JmpVI();
 
 JMP_AI:
    SetPC(AdrAI_V());
-   JmpVI;
+   JmpVI();
 
 JMP_II:
    SetPC(AdrII_V());
-   JmpVI;
+   JmpVI();
 
 JPG_VI:
    SetPC(PRG_BEG + def->pages[AdrVI_V()]);
-   JmpVI;
+   JmpVI();
 
 RTI_NP:
    SetSR(StaB1_G());
    SetPC(StaB2_G());
-   JmpVI;
+   JmpVI();
 
 RTS_NP:
    SetPC(StaB2_G());
-   JmpVI;
+   JmpVI();
 
 BCS_RI: sa = AdrRI_V(), ub = GetSR_C() != 0; goto branch;
 BCC_RI: sa = AdrRI_V(), ub = GetSR_C() == 0; goto branch;
@@ -694,13 +693,13 @@ compare:
    ur = ua - ub;
    SetSR_C(ur & 0x100);
    ModSR_ZN(ur);
-   JmpVI;
+   JmpVI();
 bit:
    ua = GetAC();
    ModSR_Z(ua & ub);
    SetSR_V(ub & 0x40);
    SetSR_N(ub & 0x80);
-   JmpVI;
+   JmpVI();
 
 BIT_AI: ub = AdrAI_G(); goto bit;
 BIT_ZI: ub = AdrZI_G(); goto bit;
@@ -723,41 +722,41 @@ CPY_VI: ua = GetRY(), ub = AdrVI_V(); goto compare;
 CPY_ZI: ua = GetRY(), ub = AdrZI_G(); goto compare;
 
 /* Stack */
-PHA_NP: StaB1_S(GetAC());           JmpVI;
-PHP_NP: StaB1_S(GetSR());           JmpVI;
-PLA_NP: ModSR_ZN(SetAC(StaB1_G())); JmpVI;
-PLP_NP: SetSR(StaB1_G());           JmpVI;
+PHA_NP: StaB1_S(GetAC());           JmpVI();
+PHP_NP: StaB1_S(GetSR());           JmpVI();
+PLA_NP: ModSR_ZN(SetAC(StaB1_G())); JmpVI();
+PLP_NP: SetSR(StaB1_G());           JmpVI();
 
 /* Flags */
-CLC_NP: SetSR_C(0); JmpVI;
-CLD_NP: SetSR_D(0); JmpVI;
-CLI_NP: SetSR_I(0); JmpVI;
-CLV_NP: SetSR_V(0); JmpVI;
-SEC_NP: SetSR_C(1); JmpVI;
-SED_NP: SetSR_D(1); JmpVI;
-SEI_NP: SetSR_I(1); JmpVI;
+CLC_NP: SetSR_C(0); JmpVI();
+CLD_NP: SetSR_D(0); JmpVI();
+CLI_NP: SetSR_I(0); JmpVI();
+CLV_NP: SetSR_V(0); JmpVI();
+SEC_NP: SetSR_C(1); JmpVI();
+SED_NP: SetSR_D(1); JmpVI();
+SEI_NP: SetSR_I(1); JmpVI();
 
 /* Load */
-LDA_AI: ModSR_ZN(SetAC(AdrAI_G())); JmpVI;
-LDA_AX: ModSR_ZN(SetRY(AdrAX_G())); JmpVI;
-LDA_AY: ModSR_ZN(SetRY(AdrAY_G())); JmpVI;
-LDA_IX: ModSR_ZN(SetRY(AdrIX_G())); JmpVI;
-LDA_IY: ModSR_ZN(SetRY(AdrIY_G())); JmpVI;
-LDA_VI: ModSR_ZN(SetAC(AdrVI_V())); JmpVI;
-LDA_ZI: ModSR_ZN(SetAC(AdrZI_G())); JmpVI;
-LDA_ZX: ModSR_ZN(SetAC(AdrZX_G())); JmpVI;
+LDA_AI: ModSR_ZN(SetAC(AdrAI_G())); JmpVI();
+LDA_AX: ModSR_ZN(SetRY(AdrAX_G())); JmpVI();
+LDA_AY: ModSR_ZN(SetRY(AdrAY_G())); JmpVI();
+LDA_IX: ModSR_ZN(SetRY(AdrIX_G())); JmpVI();
+LDA_IY: ModSR_ZN(SetRY(AdrIY_G())); JmpVI();
+LDA_VI: ModSR_ZN(SetAC(AdrVI_V())); JmpVI();
+LDA_ZI: ModSR_ZN(SetAC(AdrZI_G())); JmpVI();
+LDA_ZX: ModSR_ZN(SetAC(AdrZX_G())); JmpVI();
 
-LDX_AI: ModSR_ZN(SetRX(AdrAI_G())); JmpVI;
-LDX_AY: ModSR_ZN(SetRY(AdrAX_G())); JmpVI;
-LDX_VI: ModSR_ZN(SetRX(AdrVI_V())); JmpVI;
-LDX_ZI: ModSR_ZN(SetRX(AdrZI_G())); JmpVI;
-LDX_ZY: ModSR_ZN(SetRX(AdrZY_G())); JmpVI;
+LDX_AI: ModSR_ZN(SetRX(AdrAI_G())); JmpVI();
+LDX_AY: ModSR_ZN(SetRY(AdrAX_G())); JmpVI();
+LDX_VI: ModSR_ZN(SetRX(AdrVI_V())); JmpVI();
+LDX_ZI: ModSR_ZN(SetRX(AdrZI_G())); JmpVI();
+LDX_ZY: ModSR_ZN(SetRX(AdrZY_G())); JmpVI();
 
-LDY_AI: ModSR_ZN(SetRY(AdrAI_G())); JmpVI;
-LDY_AX: ModSR_ZN(SetRY(AdrAX_G())); JmpVI;
-LDY_VI: ModSR_ZN(SetRY(AdrVI_V())); JmpVI;
-LDY_ZI: ModSR_ZN(SetRY(AdrZI_G())); JmpVI;
-LDY_ZX: ModSR_ZN(SetRY(AdrZX_G())); JmpVI;
+LDY_AI: ModSR_ZN(SetRY(AdrAI_G())); JmpVI();
+LDY_AX: ModSR_ZN(SetRY(AdrAX_G())); JmpVI();
+LDY_VI: ModSR_ZN(SetRY(AdrVI_V())); JmpVI();
+LDY_ZI: ModSR_ZN(SetRY(AdrZI_G())); JmpVI();
+LDY_ZX: ModSR_ZN(SetRY(AdrZX_G())); JmpVI();
 
 LDV_AI: SetVA(AdrAI_G()); goto vmaction;
 LDV_AX: SetVA(AdrAX_G()); goto vmaction;
@@ -766,29 +765,29 @@ LDV_ZI: SetVA(AdrZI_G()); goto vmaction;
 LDV_ZX: SetVA(AdrZX_G()); goto vmaction;
 
 /* Transfer */
-TAX_NP: ModSR_ZN(SetRX(GetAC())); JmpVI;
-TAY_NP: ModSR_ZN(SetRY(GetAC())); JmpVI;
-TSX_NP: ModSR_ZN(SetRX(GetSP())); JmpVI;
-TXA_NP: ModSR_ZN(SetAC(GetRX())); JmpVI;
-TXS_NP:          SetSP(GetRX());  JmpVI;
-TYA_NP: ModSR_ZN(SetAC(GetRY())); JmpVI;
+TAX_NP: ModSR_ZN(SetRX(GetAC())); JmpVI();
+TAY_NP: ModSR_ZN(SetRY(GetAC())); JmpVI();
+TSX_NP: ModSR_ZN(SetRX(GetSP())); JmpVI();
+TXA_NP: ModSR_ZN(SetAC(GetRX())); JmpVI();
+TXS_NP:          SetSP(GetRX());  JmpVI();
+TYA_NP: ModSR_ZN(SetAC(GetRY())); JmpVI();
 
 /* Store */
-STA_AI: AdrAI_S(GetAC()); JmpVI;
-STA_AX: AdrAX_S(GetAC()); JmpVI;
-STA_AY: AdrAY_S(GetAC()); JmpVI;
-STA_IX: AdrIX_S(GetAC()); JmpVI;
-STA_IY: AdrIY_S(GetAC()); JmpVI;
-STA_ZI: AdrZI_S(GetAC()); JmpVI;
-STA_ZX: AdrZX_S(GetAC()); JmpVI;
+STA_AI: AdrAI_S(GetAC()); JmpVI();
+STA_AX: AdrAX_S(GetAC()); JmpVI();
+STA_AY: AdrAY_S(GetAC()); JmpVI();
+STA_IX: AdrIX_S(GetAC()); JmpVI();
+STA_IY: AdrIY_S(GetAC()); JmpVI();
+STA_ZI: AdrZI_S(GetAC()); JmpVI();
+STA_ZX: AdrZX_S(GetAC()); JmpVI();
 
-STX_AI: AdrAI_S(GetRX()); JmpVI;
-STX_ZI: AdrZI_S(GetRX()); JmpVI;
-STX_ZY: AdrZY_S(GetRX()); JmpVI;
+STX_AI: AdrAI_S(GetRX()); JmpVI();
+STX_ZI: AdrZI_S(GetRX()); JmpVI();
+STX_ZY: AdrZY_S(GetRX()); JmpVI();
 
-STY_AI: AdrAI_S(GetRY()); JmpVI;
-STY_ZI: AdrZI_S(GetRY()); JmpVI;
-STY_ZX: AdrZX_S(GetRY()); JmpVI;
+STY_AI: AdrAI_S(GetRY()); JmpVI();
+STY_ZI: AdrZI_S(GetRY()); JmpVI();
+STY_ZX: AdrZX_S(GetRY()); JmpVI();
 
 /* Arithmetic */
 adc:
@@ -797,18 +796,18 @@ adc:
    SetSR_C(ur & 0x100);
    ModSR_V(ua, ub, ur);
    ModSR_ZN(SetAC(ur));
-   JmpVI;
+   JmpVI();
 sbc:
    ua = GetAC();
    ur = ua - ub - GetSR_C();
    SetSR_C(!(ub & 0x100));
    ModSR_V(ua, ub, ur);
    ModSR_ZN(SetAC(ur));
-   JmpVI;
+   JmpVI();
 
-and: ModSR_ZN(SetAC(GetAC() & ub)); JmpVI;
-eor: ModSR_ZN(SetAC(GetAC() ^ ub)); JmpVI;
-ora: ModSR_ZN(SetAC(GetAC() | ub)); JmpVI;
+and: ModSR_ZN(SetAC(GetAC() & ub)); JmpVI();
+eor: ModSR_ZN(SetAC(GetAC() ^ ub)); JmpVI();
+ora: ModSR_ZN(SetAC(GetAC() | ub)); JmpVI();
 
 asl:
    ur = AdrAC_G(ua, ub);
@@ -818,7 +817,7 @@ asl:
 
    AdrAC_S(ua, ub, ur);
    ModSR_ZN(ur);
-   JmpVI;
+   JmpVI();
 lsr:
    ur = AdrAC_G(ua, ub);
 
@@ -827,7 +826,7 @@ lsr:
 
    AdrAC_S(ua, ub, ur);
    ModSR_ZN(ur);
-   JmpVI;
+   JmpVI();
 rol:
    ur = AdrAC_G(ua, ub);
 
@@ -838,7 +837,7 @@ rol:
 
    AdrAC_S(ua, ub, ur);
    ModSR_ZN(ur);
-   JmpVI;
+   JmpVI();
 ror:
    ur = AdrAC_G(ua, ub);
 
@@ -849,19 +848,19 @@ ror:
 
    AdrAC_S(ua, ub, ur);
    ModSR_ZN(ur);
-   JmpVI;
+   JmpVI();
 dec:
    ub = MemB1_G(ua) - 1;
 
    MemB1_S(ua, ub);
    ModSR_ZN(ub);
-   JmpVI;
+   JmpVI();
 inc:
    ub = MemB1_G(ua) + 1;
 
    MemB1_S(ua, ub);
    ModSR_ZN(ub);
-   JmpVI;
+   JmpVI();
 
 ADC_AI: ub = AdrAI_G(); goto adc;
 ADC_AX: ub = AdrAX_G(); goto adc;
@@ -942,13 +941,13 @@ INC_AX: ua = AdrAX_V(); goto inc;
 INC_ZI: ua = AdrZI_V(); goto inc;
 INC_ZX: ua = AdrZX_V(); goto inc;
 
-DEX_NP: ModSR_ZN(SetRX(GetRX() - 1)); JmpVI;
+DEX_NP: ModSR_ZN(SetRX(GetRX() - 1)); JmpVI();
 
-DEY_NP: ModSR_ZN(SetRY(GetRY() - 1)); JmpVI;
+DEY_NP: ModSR_ZN(SetRY(GetRY() - 1)); JmpVI();
 
-INX_NP: ModSR_ZN(SetRX(GetRX() + 1)); JmpVI;
+INX_NP: ModSR_ZN(SetRX(GetRX() + 1)); JmpVI();
 
-INY_NP: ModSR_ZN(SetRY(GetRY() + 1)); JmpVI;
+INY_NP: ModSR_ZN(SetRY(GetRY() + 1)); JmpVI();
 
 /* Trace */
 TRR_NP:
@@ -956,21 +955,21 @@ TRR_NP:
    ACS_BeginLog();
    TraceReg();
    ACS_EndLog();
-   JmpVI;
+   JmpVI();
    #endif
 
 TRS_NP:
    #ifndef NDEBUG
    for(u32 i = GetSP() + 1; i <= 0xFF; i++)
       Log("%02X: %02X", i, MemB1_G(STA_BEG + i));
-   JmpVI;
+   JmpVI();
    #endif
 
 TRV_NP:
    #ifndef NDEBUG
    for(u32 i = 0; i <= 0xFF; i++)
       Log("%02X: %02X", i, MemB1_G(VAR_BEG + i));
-   JmpVI;
+   JmpVI();
    #endif
 
 halt:

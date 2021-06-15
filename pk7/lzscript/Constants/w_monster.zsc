@@ -6,29 +6,33 @@
 
 enum Lith_MonsterType {
    mtype_unknown,
-   mtype_zombie,
-   mtype_zombiesg,
-   mtype_zombiecg,
-   mtype_imp,
-   mtype_demon,
-   mtype_lostsoul,
-   mtype_mancubus,
-   mtype_arachnotron,
-   mtype_cacodemon,
-   mtype_hellknight,
-   mtype_baron,
-   mtype_revenant,
-   mtype_painelemental,
-   mtype_archvile,
-   mtype_mastermind,
-   mtype_cyberdemon,
-   mtype_phantom,
-   mtype_angel,
-   mtype_darkone,
+   
+   
+
+
+mtype_zombie,
+mtype_zombiesg,
+mtype_zombiecg,
+mtype_imp,
+mtype_demon,
+mtype_lostsoul,
+mtype_mancubus,
+mtype_arachnotron,
+mtype_cacodemon,
+mtype_hellknight,
+mtype_baron,
+mtype_revenant,
+mtype_painelemental,
+mtype_archvile,
+mtype_mastermind,
+mtype_cyberdemon,
+mtype_phantom,
+mtype_angel,
+mtype_darkone,
+
+
    mtype_max
 };
-
-
 
 
 

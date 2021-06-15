@@ -28,23 +28,32 @@
 #define PrintChars(s, n) ACS_PrintGlobalCharRange((i32)s, __GDCC__Sta, 0, n)
 #define PrintChrSt(s)    ACS_PrintGlobalCharArray((i32)s, __GDCC__Sta)
 
-#define l_strndup(s, n) (ACS_BeginPrint(), PrintChars(s, n), ACS_EndStrParam())
-#define l_strdup(s)     (ACS_BeginPrint(), PrintChrSt(s),    ACS_EndStrParam())
+#define fast_strndup(s, n) (ACS_BeginPrint(), PrintChars(s, n), ACS_EndStrParam())
+#define fast_strdup(s)     (ACS_BeginPrint(), PrintChrSt(s),    ACS_EndStrParam())
 
-#define l_strcpy2(s1, s2) \
+#define fast_strcpy2(s1, s2) \
    (ACS_BeginPrint(), PrintChrSt(s1), PrintChrSt(s2), ACS_EndStrParam())
 
 #define fastmemset(p, s, c, ...) \
-   __with(register byte *_p = (void *)(p), \
+   statement(__with(register byte *_p = (void *)(p), \
                          _s = (s);) \
       for(register i32 _i = 0, _c = (c); _i < _c; _i++) \
-         _p[_i] = _s
+         _p[_i] = _s; \
+   )
 
-#define fastmemmove(lhs, rhs, s) \
-   do { \
+#define fastmemcpy(lhs, rhs, s) \
+   statement({ \
       register byte       *_lhs = (void *)(lhs); \
       register byte const *_rhs = (void *)(rhs); \
-      register size_t      _s   = (s); \
+      register mem_size_t  _s   = (s); \
+      while(_s--) *_lhs++ = *_rhs++; \
+   })
+
+#define fastmemmove(lhs, rhs, s) \
+   statement({ \
+      register byte       *_lhs = (void *)(lhs); \
+      register byte const *_rhs = (void *)(rhs); \
+      register mem_size_t  _s   = (s); \
       if(_lhs < _rhs) { \
          while(_s--) \
             *_lhs++ = *_rhs++; \
@@ -54,15 +63,65 @@
          while(_s--) \
             *--_lhs = *--_rhs; \
       } \
-   } while(0)
+   })
 
-stkcall str l_strupper(str in);
-stkcall u32 l_strhash(astr s);
-stkcall u32 lstrhash(cstr s);
-stkcall char *lstrcpy_str(char *dest, astr src);
-stkcall char *lstrcpy2(char *out, cstr s1, cstr s2);
-stkcall char *lstrcpy3(char *out, cstr s1, cstr s2, cstr s3);
-stkcall i32 lstrcmp_str(cstr s1, astr s2);
+#define faststrcpy(dest, src) \
+   statement({ \
+      register cstr  _src  = src; \
+      register char *_dest = dest; \
+      for(; (*_dest = *_src); ++_dest, ++_src); \
+   })
+
+#define faststrcpy_str(dest, src) \
+   statement({ \
+      register astr  _src  = src; \
+      register char *_dest = dest; \
+      for(; (*_dest = *_src); ++_dest, ++_src); \
+   })
+
+#define faststrcpy2(dest, src1, src2) \
+   statement({ \
+      register cstr  _src1 = src1; \
+      register cstr  _src2 = src2; \
+      register char *_dest = dest; \
+      for(; *_src1; ++_src1) *_dest++ = *_src1; \
+      for(; *_src2; ++_src2) *_dest++ = *_src2; \
+      *_dest++ = '\0'; \
+   })
+
+#define faststrcpy3(dest, src1, src2, src3) \
+   statement({ \
+      register cstr  _src1 = src1; \
+      register cstr  _src2 = src2; \
+      register cstr  _src3 = src3; \
+      register char *_dest = dest; \
+      for(; *_src1; ++_src1) *_dest++ = *_src1; \
+      for(; *_src2; ++_src2) *_dest++ = *_src2; \
+      for(; *_src3; ++_src3) *_dest++ = *_src3; \
+      *_dest++ = '\0'; \
+   })
+
+#define CpyStrLocal(out, st) \
+   statement({ \
+      ACS_BeginPrint(); \
+      ACS_PrintLocalized(st); \
+      str s = ACS_EndStrParam(); \
+      for(i32 i = 0, l = ACS_StrLen(s); i <= l; i++) out[i] = s[i]; \
+   })
+
+stkcall i32 radix(char c);
+stkcall i32 faststrtoi32(cstr p);
+stkcall i64 faststrtoi64(cstr p);
+stkcall i96 faststrtoi96(cstr p);
+stkcall u32 faststrtou32(cstr p);
+stkcall u64 faststrtou64(cstr p);
+stkcall u96 faststrtou96(cstr p);
+stkcall bool faststrstr(cstr lhs, cstr rhs);
+stkcall mem_size_t faststrlen(cstr in);
+stkcall str fast_strupper(str in);
+stkcall u32 fast_strhash(astr s);
+stkcall u32 faststrhash(cstr s);
+stkcall i32 faststrcmp_str(cstr s1, astr s2);
 stkcall i32 faststrcmp(cstr s1, cstr s2);
 stkcall i32 faststrcasecmp(cstr s1, cstr s2);
 stkcall cstr scoresep(i96 num);

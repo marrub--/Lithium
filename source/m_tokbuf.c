@@ -22,7 +22,8 @@ enum {
    _bend = 28,
 };
 
-/* Extern Functions -------------------------------------------------------- */
+noinit
+static char errbuf[1024];
 
 i32 TBufProc(struct token *tok) {
    switch(tok->type) {
@@ -43,7 +44,10 @@ i32 TBufProcL(struct token *tok) {
    return tokproc_next;
 }
 
-void TBufCtor(struct tokbuf *tb) {
+void TBufCtor(struct tokbuf *tb, FILE *fp) {
+   fastmemset(tb, 0, sizeof *tb);
+
+   tb->fp        = fp;
    tb->orig.line = 1;
 
    if(!tb->tokProcess) tb->tokProcess = TBufProc;
@@ -114,58 +118,43 @@ bool TBufDrop(struct tokbuf *tb, i32 t) {
    }
 }
 
-void TBufErr(struct tokbuf *tb, cstr fmt, ...) {
+void TBufErr(struct tokbuf *tb, struct tbuf_err *res, cstr fmt, ...) {
    va_list vl;
 
-   ACS_BeginPrint();
    va_start(vl, fmt);
-   __vnprintf(fmt, vl);
+   vsnprintf(errbuf, sizeof errbuf, fmt, vl);
    va_end(vl);
-   ACS_EndLog();
 
-   longjmp(tb->env, 1);
+   res->some = true;
+   res->err  = errbuf;
 }
 
-void TBufErrTk(struct tokbuf *tb, struct token *tok, cstr fmt, ...) {
-   va_list vl;
-
-   ACS_BeginPrint();
-   TokPrint(tok);
-   ACS_PrintChar(' ');
-   va_start(vl, fmt);
-   __vnprintf(fmt, vl);
-   va_end(vl);
-   ACS_EndLog();
-
-   longjmp(tb->env, 1);
-}
-
-struct token *TBufExpc(struct tokbuf *tb, struct token *tok, i32 t1) {
+struct token *TBufExpc(struct tokbuf *tb, struct tbuf_err *res, struct token *tok, i32 t1) {
    if(tok->type != t1) {
-      tb->errtk(tok, "expected %s", TokType(t1));
+      tb->err(res, "%s expected %s", TokPrint(tok), TokType(t1));
    }
    return tok;
 }
 
-struct token *TBufExpc2(struct tokbuf *tb, struct token *tok, i32 t1, i32 t2) {
+struct token *TBufExpc2(struct tokbuf *tb, struct tbuf_err *res, struct token *tok, i32 t1, i32 t2) {
    if(tok->type != t1 && tok->type != t2) {
-      tb->errtk(tok, "expected %s or %s", TokType(t1), TokType(t2));
+      tb->err(res, "%s expected %s or %s", TokPrint(tok), TokType(t1), TokType(t2));
    }
    return tok;
 }
 
-struct token *TBufExpc3(struct tokbuf *tb, struct token *tok, i32 t1, i32 t2, i32 t3) {
+struct token *TBufExpc3(struct tokbuf *tb, struct tbuf_err *res, struct token *tok, i32 t1, i32 t2, i32 t3) {
    if(tok->type != t1 && tok->type != t2 && tok->type != t3) {
-      tb->errtk(tok, "expected %s, %s, or %s", TokType(t1),
-                TokType(t2), TokType(t3));
+      tb->err(res, "%s expected %s, %s, or %s", TokPrint(tok), TokType(t1),
+              TokType(t2), TokType(t3));
    }
    return tok;
 }
 
-void TBufExpDr(struct tokbuf *tb, i32 t) {
+void TBufExpDr(struct tokbuf *tb, struct tbuf_err *res, i32 t) {
    if(!tb->drop(t)) {
       struct token *tok = tb->reget();
-      tb->errtk(tok, "expected %s", TokType(t));
+      tb->err(res, "%s expected %s", TokPrint(tok), TokType(t));
    }
 }
 

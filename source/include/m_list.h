@@ -43,7 +43,7 @@ optargs(1) void ListCtor(struct list *list, void *object);
 optargs(1) void ListDtor(struct list *head, bool dofree);
 void ListLink(struct list *head, struct list *list);
 void *ListUnlink(struct list *list);
-size_t ListSize(struct list *head);
+mem_size_t ListSize(struct list *head);
 
 /* Type Definitions -------------------------------------------------------- */
 

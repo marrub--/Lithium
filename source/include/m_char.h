@@ -15,6 +15,8 @@
 #define m_char_h
 #include "m_types.h"
 
+#define IsCntrl(c) (!IsPrint(c))
+
 stkcall bool IsGraph(i32 c);
 stkcall bool IsPrint(i32 c);
 stkcall bool IsPunct(i32 c);
@@ -28,7 +30,6 @@ stkcall bool IsAlpha(i32 c);
 stkcall bool IsAlNum(i32 c);
 stkcall bool IsIdent(i32 c);
 stkcall bool IsNumId(i32 c);
-stkcall bool IsCntrl(i32 c);
 stkcall i32  ToUpper(i32 c);
 stkcall i32  ToLower(i32 c);
 

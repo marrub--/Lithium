@@ -109,7 +109,7 @@ void G_ScrBeg_Imp(struct gui_state *g, u32 id, struct gui_arg_scr const *a) {
    __with(char cap[64];)
    {
       G_Prefix(g, cap, pre, capS);
-      PrintSprite(l_strdup(cap), x,2, y,1);
+      PrintSprite(fast_strdup(cap), x,2, y,1);
    }
    y += caph;
 
@@ -117,7 +117,7 @@ void G_ScrBeg_Imp(struct gui_state *g, u32 id, struct gui_arg_scr const *a) {
    __with(char scrl[64];)
    {
       G_Prefix(g, scrl, pre, scrl);
-      str scrls = l_strdup(scrl);
+      str scrls = fast_strdup(scrl);
       for(i32 i = 0; i < blocks; i++)
       {
          PrintSprite(scrls, x,2, y,1);
@@ -129,7 +129,7 @@ void G_ScrBeg_Imp(struct gui_state *g, u32 id, struct gui_arg_scr const *a) {
    __with(char cap[64];)
    {
       G_Prefix(g, cap, pre, capE);
-      if(cap[0]) PrintSprite(l_strdup(cap), x,2, y,1);
+      if(cap[0]) PrintSprite(fast_strdup(cap), x,2, y,1);
    }
 
    /* get base Y */
@@ -141,7 +141,7 @@ void G_ScrBeg_Imp(struct gui_state *g, u32 id, struct gui_arg_scr const *a) {
       if(g->hot == id || g->active == id) G_Prefix(g, gfx, pre, notchhot);
       else                                G_Prefix(g, gfx, pre, notchgfx);
 
-      str gfxs = l_strdup(gfx);
+      str gfxs = fast_strdup(gfx);
       for(i32 i = 0; i < notches; i++)
       {
          i32 const npos = roundlk(caph + h * scr->y + caph * i, 10);

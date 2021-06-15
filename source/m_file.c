@@ -25,9 +25,9 @@
 /* Type Definitions -------------------------------------------------------- */
 
 struct memfile {
-   byte  *mem;
-   size_t len;
-   size_t pos;
+   byte      *mem;
+   mem_size_t len;
+   mem_size_t pos;
 };
 
 struct netfile {
@@ -55,7 +55,7 @@ static i32 NetClose(void *nfdata) {
    #endif
 
    /* Base64 encode the buffer. */
-   size_t outsize;
+   mem_size_t outsize;
    byte *coded = base64_encode((void *)nf->mem, nf->pos, &outsize);
 
    if(coded)
@@ -64,14 +64,14 @@ static i32 NetClose(void *nfdata) {
 
       for(byte const *itr = coded; outsize; cvarnum++)
       {
-         size_t itrsize;
+         mem_size_t itrsize;
 
          if(outsize <= SAVE_BLOCK_SIZE)
             itrsize = outsize;
          else
             itrsize = SAVE_BLOCK_SIZE;
 
-         CVarSetS(StrParam("%S_%i", nf->pcvar, cvarnum), l_strndup(itr, itrsize));
+         CVarSetS(StrParam("%S_%i", nf->pcvar, cvarnum), fast_strndup(itr, itrsize));
 
          itr     += itrsize;
          outsize -= itrsize;
@@ -90,7 +90,7 @@ static i32 NetClose(void *nfdata) {
 
 static ssize_t MemRead(void *memdata, char *buf, size_t size) {
    struct memfile *mem   = memdata;
-   size_t     avail = mem->len - mem->pos;
+   mem_size_t      avail = mem->len - mem->pos;
 
    if(size > avail)
       size = avail;
@@ -101,12 +101,12 @@ static ssize_t MemRead(void *memdata, char *buf, size_t size) {
 }
 
 static ssize_t MemWrite(void *memdata, cstr buf, size_t size) {
-   struct memfile *mem = memdata;
-   size_t avail = mem->len - mem->pos;
+   struct memfile *mem   = memdata;
+   mem_size_t      avail = mem->len - mem->pos;
 
    if(size >= avail) {
-      size_t len = mem->len + mem->len / 2 + size + 1;
-      void  *newmem = Ralloc(mem->mem, len, _tag_file);
+      mem_size_t len    = mem->len + mem->len / 2 + size + 1;
+      void      *newmem = Ralloc(mem->mem, len, _tag_file);
 
       if(!mem)
          return 0;
@@ -122,7 +122,7 @@ static ssize_t MemWrite(void *memdata, cstr buf, size_t size) {
 
 static i32 MemSeek(void *memdata, off_t *offset, i32 whence) {
    struct memfile *mem = memdata;
-   size_t     pos;
+   mem_size_t      pos;
 
    switch(whence) {
    case SEEK_SET: pos = *offset;            break;
@@ -147,15 +147,27 @@ static i32 MemClose(void *memdata) {
 
 /* Extern Functions -------------------------------------------------------- */
 
-FILE *W_Open(str fname, cstr rw) {
-   str f;
-
-   ifw(i32 lmp = ServCallI(sm_FindLump, fname), lmp == -1)
+FILE *W_Open(str fname, char rw) {
+   char rwStr[3] = {'r', rw == 't' ? '\0' : rw, '\0'};
+   i32 lmp = ServCallI(sm_CheckLump, fname);
+   if(lmp == -1) {
       return nil;
-   else
-      f = ServCallS(sm_ReadLump, lmp);
+   } else {
+      str f = ServCallS(sm_ReadLump, lmp);
+      return __fmemopen_str(f, ACS_StrLen(f), rwStr);
+   }
+}
 
-   return __fmemopen_str(f, ACS_StrLen(f), rw);
+FILE *W_OpenIter(str fname, char rw, i32 *prev) {
+   char rwStr[3] = {'r', rw == 't' ? '\0' : rw, '\0'};
+   i32 lmp = ServCallI(sm_FindLump, fname, *prev);
+   if(lmp == -1 || *prev == lmp) {
+      return nil;
+   } else {
+      *prev = lmp;
+      str f = ServCallS(sm_ReadLump, lmp);
+      return __fmemopen_str(f, ACS_StrLen(f), rwStr);
+   }
 }
 
 /* fopen() equivalent for netfiles. */
@@ -173,16 +185,16 @@ FILE *NFOpen(str pcvar, char rw) {
       });
    } else if(rw == 'r') {
       /* Get inputs from all possible CVars. */
-      char  *input   = nil;
-      size_t inputsz = 0;
+      char      *input   = nil;
+      mem_size_t inputsz = 0;
 
       for(i32 cvarnum;; cvarnum++) {
-         str cvar = CVarGetS(StrParam("%S_%i", pcvar, cvarnum));
-         size_t inlen = ACS_StrLen(cvar);
+         str        cvar  = CVarGetS(StrParam("%S_%i", pcvar, cvarnum));
+         mem_size_t inlen = ACS_StrLen(cvar);
 
          if(inlen) {
             input = Ralloc(input, inputsz + inlen + 1, _tag_file);
-            lstrcpy_str(input + inputsz, cvar);
+            faststrcpy_str(input + inputsz, cvar);
 
             inputsz += inlen;
          } else {
@@ -192,7 +204,7 @@ FILE *NFOpen(str pcvar, char rw) {
 
       if(input) {
          /* Decode the base64 input. */
-         size_t size;
+         mem_size_t size;
          byte *data = base64_decode((void *)input, inputsz, &size);
 
          Dalloc(input);
@@ -233,8 +245,8 @@ FILE *NFOpen(str pcvar, char rw) {
 }
 
 /* Unpacks integers into a file stream. */
-size_t FWrite32(void const *restrict ptr, size_t count, size_t bytes, FILE *restrict fp) {
-   size_t res = 0;
+mem_size_t FWrite32(void const *restrict ptr, mem_size_t count, mem_size_t bytes, FILE *restrict fp) {
+   mem_size_t res = 0;
 
    for(byte const *itr = ptr; count--; res += bytes) {
       u32 c = *itr++;
@@ -247,8 +259,8 @@ size_t FWrite32(void const *restrict ptr, size_t count, size_t bytes, FILE *rest
 }
 
 /* Basic write function for bytes in a string. */
-size_t FWriteStr(void const __str_ars *restrict ptr, size_t count, FILE *restrict fp) {
-   size_t res = 0;
+mem_size_t FWriteStr(void const __str_ars *restrict ptr, mem_size_t count, FILE *restrict fp) {
+   mem_size_t res = 0;
 
    for(astr itr = ptr; count--; res++)
       if(fputc(*itr++, fp) == EOF) return res;
@@ -257,8 +269,8 @@ size_t FWriteStr(void const __str_ars *restrict ptr, size_t count, FILE *restric
 }
 
 /* Reads packed integers from a file stream. */
-size_t FRead32(void *restrict buf, size_t count, size_t bytes, FILE *restrict fp) {
-   size_t res = 0;
+mem_size_t FRead32(void *restrict buf, mem_size_t count, mem_size_t bytes, FILE *restrict fp) {
+   mem_size_t res = 0;
 
    for(char *itr = buf; count--;) {
       i32 c = 0, t;

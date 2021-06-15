@@ -426,7 +426,7 @@ enum {
 
 struct dlg_def {
    u32 pages[DPAGE_MAX];
-   size_t codeP, stabP;
+   mem_size_t codeP, stabP;
    Vec_Decl(u32, code);
    Vec_Decl(u32, stab);
 };

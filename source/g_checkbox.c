@@ -33,8 +33,8 @@ bool G_ChkBox_Imp(struct gui_state *g, u32 id, struct gui_arg_cbx const *a) {
       i32 cbx = a->x + pre->cx;
       i32 cby = a->y + pre->cy;
 
-      if(bgfx[0]) PrintSprite(l_strdup(bgfx), a->x + g->ox,1, a->y + g->oy,1);
-      if(cgfx[0]) PrintSprite(l_strdup(cgfx),  cbx + g->ox,1,  cby + g->oy,1);
+      if(bgfx[0]) PrintSprite(fast_strdup(bgfx), a->x + g->ox,1, a->y + g->oy,1);
+      if(cgfx[0]) PrintSprite(fast_strdup(cgfx),  cbx + g->ox,1,  cby + g->oy,1);
    }
 
    if(g->hot == id && g->active == id && !g->clicklft) {

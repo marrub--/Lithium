@@ -1293,6 +1293,7 @@
 "LITH_LOG_GroupToggle6" = "No items to toggle in \cnSet 2\c-.";
 "LITH_LOG_GroupToggle7" = "No items to toggle in \cdSet 3\c-.";
 "LITH_LOG_GroupToggle8" = "No items to toggle in \cfSet 4\c-.";
+"LITH_LOG_Version" = "Lithium %s :: Compiled %s";
 "LITH_LOG_StartGame" = "Press \"%jS\" to open the menu.";
 "LITH_LOG_MailRecv" = "Mail received from <\cj%s\c->.";
 "LITH_LOG_SellOrder" = "0";

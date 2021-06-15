@@ -81,10 +81,10 @@ static void Dlg_GetItem_Page(struct compiler *d, u32 num, u32 act)
 
    Dbg_Log(log_dlg, "--- page %u (%u)", num, d->def.codeP);
 
-   Dlg_GetStmt(d);
+   Dlg_GetStmt(d); unwrap(&d->res);
 
-   if(act != ACT_NONE) Dlg_PushLdVA(d, act);
-   Dlg_PushB1(d, DCD_BRK_NP);
+   if(act != ACT_NONE) {Dlg_PushLdVA(d, act); unwrap(&d->res);}
+   Dlg_PushB1(d, DCD_BRK_NP); unwrap(&d->res);
 }
 
 static bool Dlg_GetItem(struct compiler *d, u32 act)
@@ -92,22 +92,30 @@ static bool Dlg_GetItem(struct compiler *d, u32 act)
    struct token *tok = d->tb.get();
 
    if(faststrcmp(tok->textV, "page") == 0) {
-      tok = d->tb.expc(d->tb.get(), tok_number);
+      tok = d->tb.expc(&d->res, d->tb.get(), tok_number);
+      unwrap(&d->res);
 
-      u32 num = strtoi(tok->textV, nil, 0);
-      if(num > DPAGE_NORMAL_MAX) d->tb.err("bad page index");
+      u32 num = faststrtou32(tok->textV);
+      if(num > DPAGE_NORMAL_MAX) {
+         d->tb.err(&d->res, "bad page index");
+         unwrap(&d->res);
+      }
 
       Dlg_GetItem_Page(d, num, act);
+      unwrap(&d->res);
       return true;
    } else if(act == ACT_TRM_WAIT) {
       if(faststrcmp(tok->textV, "failure") == 0) {
          Dlg_GetItem_Page(d, DPAGE_FAILURE, act);
+         unwrap(&d->res);
          return true;
       } else if(faststrcmp(tok->textV, "finished") == 0) {
          Dlg_GetItem_Page(d, DPAGE_FINISHED, act);
+         unwrap(&d->res);
          return true;
       } else if(faststrcmp(tok->textV, "unfinished") == 0) {
          Dlg_GetItem_Page(d, DPAGE_UNFINISHED, act);
+         unwrap(&d->res);
          return true;
       }
    }
@@ -118,19 +126,27 @@ static bool Dlg_GetItem(struct compiler *d, u32 act)
 
 static void Dlg_GetTop_Prog(struct compiler *d, u32 act, u32 beg, u32 end)
 {
-   struct token *tok = d->tb.expc(d->tb.get(), tok_number);
+   struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_number);
+   unwrap(&d->res);
 
-   u32 num = beg + strtoi(tok->textV, nil, 0);
-   if(num > end) d->tb.err("invalid dialogue number %u", num);
+   u32 num = beg + faststrtou32(tok->textV);
+   if(num > end) {
+      d->tb.err(&d->res, "invalid dialogue number %u", num);
+      unwrap(&d->res);
+   }
 
-   d->tb.expdr(tok_semico);
+   d->tb.expdr(&d->res, tok_semico);
+   unwrap(&d->res);
 
    FinishDef(d);
    d->num = num;
 
    Dbg_Log(log_dlg, "\n---\nheading %u\n---", num);
 
-   while(Dlg_GetItem(d, act));
+   while(Dlg_GetItem(d, act)) {
+      unwrap(&d->res);
+   }
+   unwrap(&d->res);
 }
 
 /* Extern Functions -------------------------------------------------------- */
@@ -217,37 +233,35 @@ void Dlg_MInit(void)
    }
 
    FILE *fp =
-      W_Open(StrParam("lfiles/Dialogue_%tS.txt", PRINTNAME_LEVEL), "r");
+      W_Open(StrParam("lfiles/Dialogue_%tS.txt", PRINTNAME_LEVEL), 't');
 
    if(fp) {
       static struct compiler d = {};
 
-      d.tb.fp = fp;
-
-      TBufCtor(&d.tb);
-
-      if(setjmp(d.tb.env)) {
-         goto done;
-      }
+      TBufCtor(&d.tb, fp);
 
       for(;;) {
-         struct token *tok = d.tb.expc2(d.tb.get(), tok_identi, tok_eof);
+         struct token *tok = d.tb.expc2(&d.res, d.tb.get(), tok_identi, tok_eof);
+         unwrap_do(&d.res, { goto done; });
          if(tok->type == tok_eof) break;
 
-         if(faststrcmp(tok->textV, "program") == 0)
+         if(faststrcmp(tok->textV, "program") == 0) {
             Dlg_GetTop_Prog(&d, ACT_NONE, DNUM_PRG_BEG, DNUM_PRG_END);
-         else if(faststrcmp(tok->textV, "dialogue") == 0)
+         } else if(faststrcmp(tok->textV, "dialogue") == 0) {
             Dlg_GetTop_Prog(&d, ACT_DLG_WAIT, DNUM_DLG_BEG, DNUM_DLG_END);
-         else if(faststrcmp(tok->textV, "terminal") == 0)
+         } else if(faststrcmp(tok->textV, "terminal") == 0) {
             Dlg_GetTop_Prog(&d, ACT_TRM_WAIT, DNUM_TRM_BEG, DNUM_TRM_END);
-         else
-            d.tb.err("invalid toplevel item '%s'", tok->textV);
+         } else {
+            d.tb.err(&d.res, "invalid toplevel item '%s'", tok->textV);
+         }
+         unwrap_do(&d.res, { goto done; });
       }
-
 
       FinishDef(&d);
 
    done:
+      unwrap_print(&d.res);
+
       TBufDtor(&d.tb);
       fclose(d.tb.fp);
    }

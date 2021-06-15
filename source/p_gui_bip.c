@@ -28,7 +28,7 @@ static void EncryptedBody(struct page *page, char *bodytext) {
 
 static void MailBody(struct page *page, char *bodytext) {
    char remote[128];
-   strcpy(remote, LanguageC(LANG "INFO_REMOT_%s", page->info->name));
+   faststrcpy(remote, LanguageC(LANG "INFO_REMOT_%s", page->info->name));
 
    cstr sent = CanonTime(ct_full, page->flags & _page_time);
 
@@ -66,7 +66,7 @@ static cstr GetBody(struct page *page) {
 }
 
 static void SetCurPage(struct gui_state *g, struct page *page) {
-   str body = l_strdup(GetBody(page));
+   str body = fast_strdup(GetBody(page));
 
    pl.bip.curpage = page;
 
@@ -111,7 +111,7 @@ static void DrawPage(struct gui_state *g, struct page *page) {
    /* render an outline if the page has an image */
    if(image) {
       cstr txt = RemoveTextColors_str(typeon->txt, typeon->pos);
-      str s = l_strdup(txt);
+      str s = fast_strdup(txt);
 
       DrawText(s, CR_BLACK, 2, 21); DrawText(s, CR_BLACK, 0, 21);
       DrawText(s, CR_BLACK, 2, 19); DrawText(s, CR_BLACK, 0, 19);
@@ -185,7 +185,7 @@ static void CategoryUI(struct gui_state *g) {
       bool lock = !get_bit(page->flags, _page_unlocked) || pl.bip.curpage == page;
 
       char name[128] = "\Ci";
-      strcpy(pl.bip.curpage == page ? &name[2] : name, GetShortName(page));
+      faststrcpy(pl.bip.curpage == page ? &name[2] : name, GetShortName(page));
 
       if(G_Button_HId(g, i, name, 0, y, lock, Pre(btnlist)))
          SetCurPage(g, page);

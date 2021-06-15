@@ -63,7 +63,7 @@ struct set_parm {
 #define SG_cvBody(type, name, suff) \
    script static \
    type SG_cv##name(struct set_parm const *sp, type *v) { \
-      str cvar = l_strcpy2(CVAR, sp->st->text); \
+      str cvar = fast_strcpy2(CVAR, sp->st->text); \
       if(v) {CVarSet##suff(cvar, *v); return *v;} \
       else  {return CVarGet##suff(cvar);} \
    }
@@ -74,7 +74,7 @@ SG_cvBody(k32,  Fixed, K)
 
 script static
 bool SG_autoBuy(struct set_parm const *sp, bool *v) {
-   i32 which = sp->st->text[strlen(sp->st->text) - 1] - '1';
+   i32 which = sp->st->text[faststrlen(sp->st->text) - 1] - '1';
    if(v) {tog_bit(pl.autobuy, which); P_Data_Save();}
    return get_bit(pl.autobuy, which);
 }
@@ -96,7 +96,7 @@ void S_empty(struct set_parm const *sp) {
 
 script static
 void S_label(struct set_parm const *sp) {
-   char buf[64]; lstrcpy2(buf, LANG, sp->st->text);
+   char buf[64]; faststrcpy2(buf, LANG, sp->st->text);
    PrintTextChS(LC(buf));
    PrintText(sf_smallfnt, sp->g->defcr,
              sp->g->ox + _left,1, sp->g->oy + sp->y,1);
@@ -118,7 +118,7 @@ void S_boole(struct set_parm const *sp) {
 
 script static
 void S_integ(struct set_parm const *sp) {
-   char suff[32]; lstrcpy2(suff, LANG "st_suff_", sp->st->suff);
+   char suff[32]; faststrcpy2(suff, LANG "st_suff_", sp->st->suff);
    i32  v = sp->st->cb_g.i(sp, nil);
 
    S_label(sp);
@@ -135,7 +135,7 @@ void S_integ(struct set_parm const *sp) {
 
 script static
 void S_fixed(struct set_parm const *sp) {
-   char suff[32]; lstrcpy2(suff, LANG "st_suff_", sp->st->suff);
+   char suff[32]; faststrcpy2(suff, LANG "st_suff_", sp->st->suff);
    k32  v = sp->st->cb_g.k(sp, nil);
 
    S_label(sp);
@@ -350,7 +350,7 @@ struct setting const st_wld[] = {
 struct {
    cstr                  nam;
    struct setting const *set;
-   size_t                num;
+   mem_size_t            num;
 } const settings[] = {
 #define Typ(name) {LANG "st_labl_" #name, st_##name, countof(st_##name)}
    Typ(gui),
@@ -379,7 +379,7 @@ void P_CBI_TabSettings(struct gui_state *g) {
    yp *= gui_p.btntab.h;
 
    struct setting const *set = settings[CBIState(g)->settingstab].set;
-   size_t                num = settings[CBIState(g)->settingstab].num;
+   mem_size_t            num = settings[CBIState(g)->settingstab].num;
 
    for(i32 i = 0; i < num; i++)
       if(S_isEnabled(&set[i]))

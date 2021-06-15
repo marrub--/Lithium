@@ -56,7 +56,7 @@ void Sc_Obituary(void) {
    for(astr s = obit; *s;) {
       cstr cs;
       str st;
-      i32 len;
+      i32 ln;
 
       if(s[0] == '%') switch(s[1]) {
          case 'o': s += 2; st = pl.name;                 goto print_s;
@@ -65,8 +65,8 @@ void Sc_Obituary(void) {
          case 'p': s += 2; cs = pronoun[pl.pronoun].psd; goto print;
          case 's': s += 2; cs = pronoun[pl.pronoun].psi; goto print;
          case 'r': s += 2; cs = pronoun[pl.pronoun].act; goto print;
-      print:   len =     strlen(cs);      strcpy(pt, cs); pt += len; continue;
-      print_s: len = ACS_StrLen(st); lstrcpy_str(pt, st); pt += len; continue;
+      print:   ln = faststrlen(cs);     faststrcpy(pt, cs); pt += ln; continue;
+      print_s: ln = ACS_StrLen(st); faststrcpy_str(pt, st); pt += ln; continue;
       }
 
       *pt++ = *s++;
