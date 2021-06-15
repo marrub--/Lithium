@@ -72,6 +72,22 @@
       for(; (*_dest = *_src); ++_dest, ++_src); \
    })
 
+#define faststrcat(dest, src) \
+   statement({ \
+      register cstr  _src  = src; \
+      register char *_dest = dest; \
+      for(; *_dest || (*_dest = *_src); ++_dest, ++_src); \
+   })
+
+#define faststrcat2(dest, src1, src2) \
+   statement({ \
+      register cstr  _src1 = src1; \
+      register cstr  _src2 = src2; \
+      register char *_dest = dest; \
+      for(; *_dest || (*_dest = *_src1); ++_dest, ++_src1); \
+      for(; (*_dest = *_src2); ++_dest, ++_src2); \
+   })
+
 #define faststrcpy_str(dest, src) \
    statement({ \
       register astr  _src  = src; \

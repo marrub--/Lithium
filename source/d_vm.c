@@ -331,7 +331,7 @@ void TerminalGUI(u32 tact) {
    PrintText_str(br, sf_ltrmfont, CR_RED, tright,2, tbottom,2);
 
    /* Contents */
-   char pict[64] = ":Terminal:"; strcat(pict, MemSC_G(MemB2_G(VAR_PICTL)));
+   char pict[64] = ":Terminal:"; faststrcat(pict, MemSC_G(MemB2_G(VAR_PICTL)));
 
    switch(tact) {
       case TACT_LOGON:
@@ -390,7 +390,7 @@ static void DialogueGUI() {
    str snam = GetName();
    str srem = GetRemote();
    str text = GetText(_from_dlg);
-   char icon[32] = ":Dialogue:Icon"; strcat(icon, MemSC_G(MemB2_G(VAR_ICONL)));
+   char icon[32] = ":Dialogue:Icon"; faststrcat(icon, MemSC_G(MemB2_G(VAR_ICONL)));
 
    G_Begin(&gst, 320, 240);
    G_UpdateState(&gst);

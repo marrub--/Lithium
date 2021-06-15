@@ -33,8 +33,8 @@ static void MailBody(struct page *page, char *bodytext) {
    cstr sent = CanonTime(ct_full, page->flags & _page_time);
 
    sprintf(bodytext, LanguageC(LANG "MAIL_TEMPLATE"), remote, sent);
-   strcat(bodytext, "\n\n");
-   strcat(bodytext, LanguageC(LANG "INFO_DESCR_%s", page->info->name));
+   faststrcat2(bodytext, "\n\n",
+               LanguageC(LANG "INFO_DESCR_%s", page->info->name));
 }
 
 static cstr GetShortName(struct page *page) {

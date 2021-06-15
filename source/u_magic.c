@@ -62,8 +62,8 @@ static void UpdateMagicUI(struct upgrade *upgr)
 
       if(m->st != -1 && !cbiupgr[m->st]) continue;
 
-      char gfx[32] = ":UI:"; strcat(gfx, m->name);
-      char hot[32] = ":UI:"; strcat(hot, m->name); strcat(hot, "Sel");
+      char gfx[32] = ":UI:"; faststrcat (gfx, m->name);
+      char hot[32] = ":UI:"; faststrcat2(hot, m->name, "Sel");
 
       struct gui_pre_btn pre = {
          .gfx      = gfx,
