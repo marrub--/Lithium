@@ -166,6 +166,7 @@ presets {
    pre: Archvile      type: archvile      filter: "Archvile";
    pre: SpiderDemon   type: mastermind    filter: "SpiderMastermind";
    pre: CyberDemon    type: cyberdemon    filter: "Cyberdemon";
+   pre: CyberDemon    type: cyberdemon    filter: "CyberDemon";
 
    /* Chex Quest */
    pre: Imp         type: imp        filter: "FlemoidusBipedicus";

@@ -86,11 +86,18 @@
 #else
 #include "common.h"
 #include "m_char.h"
+#include "w_world.h"
 
 #include <stdio.h>
 
-#define stab_x(n, s) str const lmvar n = Spf s;
+#define stab_x(n, s) noinit str n;
 #include "m_stab.h"
+
+alloc_aut(0) script ext("ACS") addr(lsc_strinit)
+void StrInit() {
+   #define stab_x(n, s) n = Spf s;
+   #include "m_stab.h"
+}
 
 alloc_aut(0) stkcall
 i32 radix(char c) {

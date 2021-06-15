@@ -53,20 +53,21 @@ static void SetupAttributes()
 
 static void SetPClass()
 {
-   __with(str cl = pl.pcstr = ACS_GetActorClass(0);) {
-      /**/ if(cl == so_MarinePlayer   ) pl.pclass = pcl_marine;
-      else if(cl == so_CyberMagePlayer) pl.pclass = pcl_cybermage;
-      else if(cl == so_InformantPlayer) pl.pclass = pcl_informant;
-      else if(cl == so_WandererPlayer ) pl.pclass = pcl_wanderer;
-      else if(cl == so_AssassinPlayer ) pl.pclass = pcl_assassin;
-      else if(cl == so_DarkLordPlayer ) pl.pclass = pcl_darklord;
-      else if(cl == so_ThothPlayer    ) pl.pclass = pcl_thoth;
-      #ifndef NDEBUG
-      else for(;;) {
-         Log("Invalid player class detected, everything is going to explode!");
-      }
-      #endif
+   pl.pcstr = ACS_GetActorClass(0);
+
+   /**/ if(pl.pcstr == so_MarinePlayer   ) pl.pclass = pcl_marine;
+   else if(pl.pcstr == so_CyberMagePlayer) pl.pclass = pcl_cybermage;
+   else if(pl.pcstr == so_InformantPlayer) pl.pclass = pcl_informant;
+   else if(pl.pcstr == so_WandererPlayer ) pl.pclass = pcl_wanderer;
+   else if(pl.pcstr == so_AssassinPlayer ) pl.pclass = pcl_assassin;
+   else if(pl.pcstr == so_DarkLordPlayer ) pl.pclass = pcl_darklord;
+   else if(pl.pcstr == so_ThothPlayer    ) pl.pclass = pcl_thoth;
+   #ifndef NDEBUG
+   else {
+      Log("Invalid player class detected (%S (%p)), "
+          "everything is going to explode!", pl.pcstr, pl.pcstr);
    }
+   #endif
 
    pl.discrim = P_Discrim(pl.pclass);
    pl.color   = P_Color(pl.pclass);

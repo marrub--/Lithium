@@ -22,7 +22,6 @@
 __addrdef __mod_arr lmvar;
 __addrdef __hub_arr lhvar;
 
-bool lmvar player_init;
 struct payoutinfo payout;
 bool singleplayer;
 i32 mapscleared;
@@ -45,22 +44,19 @@ bool dorain;
 
 bool lmvar player_init;
 
-/* Static Objects ---------------------------------------------------------- */
+bool reopen;
 
-static bool reopen;
+i32 lmvar mapid;
 
-static i32 lmvar mapid;
-
-static bool lmvar modinit;
-static bool lhvar hubinit;
-static bool       gblinit;
+bool lmvar modinit;
+bool lhvar hubinit;
+bool       gblinit;
 
 /* Extern Functions -------------------------------------------------------- */
 
 script void SpawnBosses(i96 sum, bool force);
 
-i32 UniqueID(i32 tid)
-{
+i32 UniqueID(i32 tid) {
    i32 pn;
 
    /* Negative values are for players. */
@@ -78,15 +74,13 @@ i32 UniqueID(i32 tid)
 /* Static Functions -------------------------------------------------------- */
 
 alloc_aut(0) script static
-void Boss_HInit(void)
-{
+void Boss_HInit(void) {
    ACS_Delay(1); /* Delay another tic for monster spawners. */
 
    SpawnBosses(pl.scoresum, false);
 }
 
-static void CheckModCompat(void)
-{
+static void CheckModCompat(void) {
    Str(so_legendary_marker,       s"LDLegendaryMonsterMarker");
    Str(sc_drla_is_using_monsters, s"DRLA_is_using_monsters");
 
@@ -107,8 +101,7 @@ static bool updateTo(k32 to) {
    }
 }
 
-static void UpdateGame(void)
-{
+static void UpdateGame(void) {
    if(updateTo(Ver1_5_1)) {
       CVarSetK(sc_sv_scoremul, 1.25); /* 2.0 => 1.25 */
    }
@@ -140,29 +133,29 @@ static void UpdateGame(void)
    }
 }
 
-static void MInitPre(void)
-{
+static void MInitPre(void) {
    Dbg_Log(log_dev, "%s", __func__);
 
    CheckModCompat();
    UpdateGame();
 }
 
-static void GInit(void)
-{
+static void GInit(void) {
    Dbg_Log(log_dev, "%s", __func__);
-
-   Wep_GInit();
 
    singleplayer = ACS_GameType() == GAME_SINGLE_PLAYER;
 
    cbiperf = 10;
 
+   islithmap = (MapNum >= LithMapBeg && MapNum <= LithMapEnd);
+
+   Mon_Init();
+   Wep_GInit();
+
    gblinit = true;
 }
 
-static void MInitPst(void)
-{
+static void MInitPst(void) {
    Dbg_Log(log_dev, "%s", __func__);
 
    payout.par = ACS_GetLevelInfo(LEVELINFO_PAR_TIME) * 35;
@@ -189,8 +182,7 @@ static void MInitPst(void)
    modinit = true;
 }
 
-static void MInit(void)
-{
+static void MInit(void) {
    Dbg_Log(log_dev, "%s", __func__);
 
    Dlg_MInit();
@@ -214,8 +206,7 @@ static void MInit(void)
    Shop_MInit();
 }
 
-static void HInitPre(void)
-{
+static void HInitPre(void) {
    Dbg_Log(log_dev, "%s", __func__);
 
    if(unloaded)
@@ -238,8 +229,7 @@ static void HInitPre(void)
    }
 }
 
-static void HInit(void)
-{
+static void HInit(void) {
    Dbg_Log(log_dev, "%s", __func__);
 
    if(!CVarGetI(sc_sv_nobosses))
@@ -271,40 +261,8 @@ static void HInit(void)
 
 /* Scripts ----------------------------------------------------------------- */
 
-#ifndef NDEBUG
-script static
-void PreInitLog() {
-   Dbg_Log(log_dev, "PreInit");
-}
-#endif
-
-alloc_aut(0) script ext("ACS") addr(lsc_preinit)
-void Sc_PreInit(void) {
-   script ext("ACS") addr(lsc_gsinit)
-   extern void GSInit(void);
-
-   Str(sc_debug_level, sDCVAR "debug_level");
-   Str(sc_debug_flags, sDCVAR "debug_flags");
-
-   GSInit();
-
-   #ifndef NDEBUG
-   dbglevel = CVarGetI(sc_debug_level);
-   dbgflags = CVarGetI(sc_debug_flags);
-   #endif
-
-   islithmap = (MapNum >= LithMapBeg && MapNum <= LithMapEnd);
-
-   Mon_Init();
-
-   #ifndef NDEBUG
-   PreInitLog();
-   #endif
-}
-
 _Noreturn dynam_aut script type("open") static
-void Sc_World(void)
-{
+void Sc_World(void) {
    Dbg_Log(log_dev, "%s", __func__);
 
 begin:
@@ -353,9 +311,6 @@ begin:
 
    dbgnotenum = 0;
    #endif
-
-   /* Let the map do... whatever. */
-   ACS_Delay(1);
 
    /* Now, initialize everything.
     * Start by deallocating temporary tags.
@@ -412,8 +367,7 @@ begin:
       prevkills = kills;
       previtems = items;
 
-      if(ACS_Timer() % 5 == 0 && missionkill < kills)
-      {
+      if(ACS_Timer() % 5 == 0 && missionkill < kills) {
          if(++missionprc >= 150) {
             SpawnBosses(0, true);
             missionprc = 0;
@@ -446,9 +400,8 @@ void Sc_WorldReopen(void) {
    reopen = true;
 }
 
-script type("unloading")
-static void Sc_WorldUnload(void)
-{
+script type("unloading") static
+void Sc_WorldUnload(void) {
    unloaded = true;
    Dbg_Log(log_dev, "%s", __func__);
 

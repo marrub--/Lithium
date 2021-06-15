@@ -209,8 +209,8 @@ void Log(cstr fmt, ...);
 extern str dbgstat[],  dbgnote[];
 extern i32 dbgstatnum, dbgnotenum;
 
-extern i32 lmvar dbglevel;
-extern i32 lmvar dbgflags;
+#define dbglevel CVarGetI(sc_debug_level)
+#define dbgflags CVarGetI(sc_debug_flags)
 #endif
 
 #endif

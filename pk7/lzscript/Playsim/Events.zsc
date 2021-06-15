@@ -144,7 +144,8 @@ override void WorldLoaded(WorldEvent ev)
    if(ev.isReopen) {
       ACS_ExecuteWithResult(lsc_worldreopen);
    } else {
-      ACS_ExecuteWithResult(lsc_preinit);
+      ACS_ExecuteWithResult(lsc_gsinit);
+      ACS_ExecuteWithResult(lsc_strinit);
    }
 
    if(__lith_fun & lfun_ragnarok) Ragnarok();

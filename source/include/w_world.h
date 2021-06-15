@@ -107,6 +107,7 @@ enum ZscName(DamageType) {
 
 enum ZscName(ScriptNum) {
    lsc_gsinit = 17000,
+   lsc_strinit,
    lsc_getfontmetric,
    lsc_metr_xadv,
    lsc_metr_yofs,
@@ -119,7 +120,6 @@ enum ZscName(ScriptNum) {
    lsc_monsterinfo,
    lsc_raindropspawn,
    lsc_monstertype,
-   lsc_preinit,
    lsc_worldreopen,
    #define w_setptr_x(x) lsc_setptr##x,
    #include "w_world.h"
@@ -198,6 +198,11 @@ extern bool legendoom;
 extern bool drlamonsters;
 extern enum mission_status lmvar mission;
 extern bool dorain;
+extern bool reopen;
+extern i32 lmvar mapid;
+extern bool lmvar modinit;
+extern bool lhvar hubinit;
+extern bool       gblinit;
 
 /* DECORATE data */
 extern i32 a_x, a_y;

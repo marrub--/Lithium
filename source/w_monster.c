@@ -438,6 +438,7 @@ void MonInfo_Monster(struct tokbuf *tb, struct tbuf_err *res, i32 flags) {
            mi->name, mi->type, mi->flags);
 }
 
+script
 i32 MonInfo_Flags(struct tokbuf *tb, struct tbuf_err *res) {
    i32 flags = 0;
 
@@ -474,6 +475,7 @@ void MonInfo_Compile(struct tokbuf *tb, struct tbuf_err *res) {
       unwrap(res);
 
       switch(tok->type) {
+      default:
       case tok_eof:
          return;
       case tok_pareno: {
@@ -508,6 +510,8 @@ script
 void Mon_Init(void) {
    Str(sp_LITHMONS, s"LITHMONS");
 
+   Dbg_Log(log_dev, "Mon_Init");
+
    FILE *fp;
    i32 prev = 0;
 
@@ -518,7 +522,7 @@ void Mon_Init(void) {
       struct tokbuf tb;
       TBufCtor(&tb, fp);
 
-      struct tbuf_err res;
+      struct tbuf_err res = {};
       MonInfo_Compile(&tb, &res);
       unwrap_print(&res);
 
@@ -554,6 +558,10 @@ void LogError(cstr cname) {
 
 alloc_aut(0) script ext("ACS") addr(lsc_monsterinfo)
 void Sc_MonsterInfo(void) {
+   if(!gblinit) {
+      ACS_Delay(2);
+   }
+
    static char cname[64];
    faststrcpy_str(cname, ACS_GetActorClass(0));
 

@@ -24,6 +24,8 @@ stab_x(sf_ltrmfont, "ltrmfont")
 stab_x(sf_smallfnt, "smallfnt")
 
 /* Console Variables */
+stab_x(sc_debug_level,            DCVAR "debug_level")
+stab_x(sc_debug_flags,            DCVAR "debug_flags")
 stab_x(sc_fun,                    DCVAR "fun")
 stab_x(sc_gui_buyfiller,          CVAR "gui_buyfiller")
 stab_x(sc_gui_cursor,             CVAR "gui_cursor")
@@ -336,10 +338,10 @@ stab_x(ss_weapons_subweapon_charge, "weapons/subweapon/charge")
 #elif !defined(m_stab_h)
 #define m_stab_h
 
-#define stab_x(n, s) extern str const lmvar n;
+#define stab_x(n, s) extern str n;
 #include "m_stab.h"
 
-#define Str(n, s) static str const lmvar n = s
+#define Str(n, s) static str const n = s
 #define StrAry(n, ...) static str const n[] = {__VA_ARGS__}
 
 #endif
