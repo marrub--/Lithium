@@ -50,6 +50,7 @@ class Lith_GaussPuff : Actor
       +FORCEXYBILLBOARD
       +MTHRUSPECIES
       +NOTELEPORT
+      +WALLSPRITE
       -ALLOWPARTICLES
    }
 
