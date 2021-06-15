@@ -46,8 +46,8 @@ struct monster_info {
 
 /* Static Objects ---------------------------------------------------------- */
 
-noinit static struct monster_preset monsterpreset[128];
-noinit static struct monster_info   monsterinfo[256];
+noinit static struct monster_preset monsterpreset[1024];
+noinit static struct monster_info   monsterinfo[1024];
 noinit static mem_size_t monsterpresetnum, monsterinfonum;
 
 StrAry(dmgtype_names,
@@ -354,7 +354,7 @@ void PrintMonsterInfo(dmon_t *m) {
 }
 #endif
 
-bool MonInfo_Kv(struct tokbuf *tb, struct tbuf_err *res, cstr *kp, cstr *vp) {
+bool MonInfo_Kv(struct tokbuf *tb, struct tbuf_err *res, char **kp, char **vp) {
    noinit
    static char k[64], v[64];
    struct token *tok = tb->expc2(res, tb->get(), tok_semico, tok_identi);
@@ -377,7 +377,7 @@ bool MonInfo_Kv(struct tokbuf *tb, struct tbuf_err *res, cstr *kp, cstr *vp) {
 script
 void MonInfo_Preset(struct tokbuf *tb, struct tbuf_err *res) {
    struct monster_preset *pre = &monsterpreset[monsterpresetnum++];
-   cstr k = nil, v = nil;
+   char *k = nil, *v = nil;
 
    while(MonInfo_Kv(tb, res, &k, &v)) {
       unwrap(res);
@@ -398,10 +398,37 @@ void MonInfo_Preset(struct tokbuf *tb, struct tbuf_err *res) {
            pre->prename, pre->exp, pre->score);
 }
 
+struct monster_info *MonInfo_BeginDef(void) {
+   return &monsterinfo[monsterinfonum];
+}
+
+void MonInfo_FinishDef(struct monster_info *mi) {
+   ++monsterinfonum;
+   Dbg_Log(log_dmonV, "monster %s added: type = %i, flags = %i",
+           mi->name, mi->type, mi->flags);
+}
+
+void MonInfo_ColorfulHellHack(struct monster_info *mi) {
+   static cstr const colors[] = {
+      "Common", "Green", "Blue", "Cyan", "Purple", "Yellow", "FireBlu",
+      "Red", "Gray", "Abyss", "Black", "White", "Special"
+   };
+
+   struct monster_info original = *mi;
+
+   for(mem_size_t i = 0; i < countof(colors); ++i) {
+      *mi = original;
+      faststrcpy2(mi->name, colors[i], original.name);
+      MonInfo_FinishDef(mi);
+      mi = MonInfo_BeginDef();
+   }
+}
+
 script
 void MonInfo_Monster(struct tokbuf *tb, struct tbuf_err *res, i32 flags) {
-   struct monster_info *mi = &monsterinfo[monsterinfonum++];
-   cstr k = nil, v = nil;
+   struct monster_info *mi = MonInfo_BeginDef();
+   char *k = nil, *v = nil;
+   bool finished = false;
 
    mi->flags = flags;
 
@@ -427,6 +454,16 @@ void MonInfo_Monster(struct tokbuf *tb, struct tbuf_err *res, i32 flags) {
                continue; \
             }
          #include "w_monster.h"
+      } else if(faststrcmp(k, "hacks") == 0) {
+         for(char *hack = strtok(v, " "); hack; hack = strtok(nil, " ")) {
+            if(faststrcmp(hack, "ch") == 0) {
+               MonInfo_ColorfulHellHack(mi);
+               finished = true;
+            } else {
+               tb->err(res, "%s MonInfo_Monster: invalid hack '%s'", TokPrint(tb->reget()), hack);
+               unwrap(res);
+            }
+         }
       } else {
          tb->err(res, "%s MonInfo_Monster: invalid key '%s'", TokPrint(tb->reget()), k);
          unwrap(res);
@@ -434,11 +471,11 @@ void MonInfo_Monster(struct tokbuf *tb, struct tbuf_err *res, i32 flags) {
    }
    unwrap(res);
 
-   Dbg_Log(log_dmonV, "monster %s added: type = %i, flags = %i",
-           mi->name, mi->type, mi->flags);
+   if(!finished) {
+      MonInfo_FinishDef(mi);
+   }
 }
 
-script
 i32 MonInfo_Flags(struct tokbuf *tb, struct tbuf_err *res) {
    i32 flags = 0;
 
@@ -468,6 +505,31 @@ i32 MonInfo_Flags(struct tokbuf *tb, struct tbuf_err *res) {
 }
 
 script
+void MonInfo_Monsters(struct tokbuf *tb, struct tbuf_err *res) {
+   i32 flags = MonInfo_Flags(tb, res);
+   unwrap(res);
+
+   tb->expdr(res, tok_braceo);
+   unwrap(res);
+
+   while(!tb->drop(tok_bracec)) {
+      MonInfo_Monster(tb, res, flags);
+      unwrap(res);
+   }
+}
+
+script
+void MonInfo_Presets(struct tokbuf *tb, struct tbuf_err *res) {
+   tb->expdr(res, tok_braceo);
+   unwrap(res);
+
+   while(!tb->drop(tok_bracec)) {
+      MonInfo_Preset(tb, res);
+      unwrap(res);
+   }
+}
+
+script
 void MonInfo_Compile(struct tokbuf *tb, struct tbuf_err *res) {
    for(;;) {
       struct token *tok =
@@ -475,28 +537,16 @@ void MonInfo_Compile(struct tokbuf *tb, struct tbuf_err *res) {
       unwrap(res);
 
       switch(tok->type) {
-      default:
       case tok_eof:
          return;
-      case tok_pareno: {
-         i32 flags = MonInfo_Flags(tb, res);
+      case tok_pareno:
+         MonInfo_Monsters(tb, res);
          unwrap(res);
-         tb->expdr(res, tok_braceo);
-         unwrap(res);
-         while(!tb->drop(tok_bracec)) {
-            MonInfo_Monster(tb, res, flags);
-            unwrap(res);
-         }
          break;
-      }
       case tok_identi:
          if(faststrcmp(tok->textV, "presets") == 0) {
-            tb->expdr(res, tok_braceo);
+            MonInfo_Presets(tb, res);
             unwrap(res);
-            while(!tb->drop(tok_bracec)) {
-               MonInfo_Preset(tb, res);
-               unwrap(res);
-            }
          } else {
             tb->err(res, "%s MonInfo_Compile: invalid toplevel identifier", TokPrint(tok));
             unwrap(res);
@@ -558,8 +608,8 @@ void LogError(cstr cname) {
 
 alloc_aut(0) script ext("ACS") addr(lsc_monsterinfo)
 void Sc_MonsterInfo(void) {
-   if(!gblinit) {
-      ACS_Delay(2);
+   while(!gblinit) {
+      ACS_Delay(1);
    }
 
    static char cname[64];
@@ -573,9 +623,17 @@ void Sc_MonsterInfo(void) {
       bool init;
 
       if(get_bit(mi->flags, _mif_full)) {
-         init = faststrcmp(cname, mi->name) == 0;
+         if(get_bit(mi->flags, _mif_nocase)) {
+            init = faststrcasecmp(cname, mi->name) == 0;
+         } else {
+            init = faststrcmp(cname, mi->name) == 0;
+         }
       } else {
-         init = faststrstr(cname, mi->name);
+         if(get_bit(mi->flags, _mif_nocase)) {
+            init = faststrcasestr(cname, mi->name);
+         } else {
+            init = faststrstr(cname, mi->name);
+         }
       }
 
       if(init) {

@@ -12,6 +12,7 @@
  */
 #if defined(monster_flag_x)
 monster_flag_x(full)
+monster_flag_x(nocase)
 monster_flag_x(angelic)
 monster_flag_x(dark)
 #undef monster_flag_x

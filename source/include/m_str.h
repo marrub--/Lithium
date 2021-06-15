@@ -117,6 +117,7 @@ stkcall u32 faststrtou32(cstr p);
 stkcall u64 faststrtou64(cstr p);
 stkcall u96 faststrtou96(cstr p);
 stkcall bool faststrstr(cstr lhs, cstr rhs);
+stkcall bool faststrcasestr(cstr lhs, cstr rhs);
 stkcall mem_size_t faststrlen(cstr in);
 stkcall str fast_strupper(str in);
 stkcall u32 fast_strhash(astr s);

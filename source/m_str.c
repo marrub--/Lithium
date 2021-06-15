@@ -172,6 +172,28 @@ bool faststrstr(cstr lhs, cstr rhs) {
 }
 
 alloc_aut(0) stkcall
+bool faststrcasestr(cstr lhs, cstr rhs) {
+   mem_size_t llen = faststrlen(lhs);
+   mem_size_t rlen = faststrlen(rhs);
+   mem_size_t i, j, k;
+
+   for(i = 0; i < llen; i++) {
+      for(j = 0, k = i; j < rlen; j++) {
+         if(ToUpper(lhs[i++]) != ToUpper(rhs[j])) {
+            i = k;
+            break;
+         }
+      }
+
+      if(j == rlen) {
+         return true;
+      }
+   }
+
+   return false;
+}
+
+alloc_aut(0) stkcall
 mem_size_t faststrlen(cstr in) {
    mem_size_t len;
    for(len = 0; *in; ++len, ++in);

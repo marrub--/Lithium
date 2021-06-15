@@ -79,6 +79,7 @@ presets {
  * Flags:
  * - full    :: The class name (actor name in DECORATE) must *entirely* match
  *              the filter, not just partially. Useful for mod compatibility.
+ * - nocase  :: The filter will be case insensitive.
  * - dark    :: Dark enemies are corrupted by Hell. Can you save them? Either
  *              way, they'll have six stars, and higher level scaling. Not
  *              recommended to be used by other mods, but it will work.
@@ -107,6 +108,7 @@ presets {
  * - pre    :: A preset, by name, to import values from into this filter.
  * - scr    :: Same as the key on presets.
  * - exp    :: Ditto.
+ * - hacks  :: Hacks. Do not use this in mods. Intentionally undocumented.
  *
  * These are the archetypes of enemy, as described earlier.
  *
@@ -143,6 +145,7 @@ presets {
  */
 
 /* Base Games -------------------------------------------------------------- */
+
 () {
    /* Doom */
    pre: ZombieMan     type: zombie        filter: "ZombieMan";
@@ -198,6 +201,7 @@ presets {
 }
 
 /* Lithium ----------------------------------------------------------------- */
+
 (full dark) {
    scr: 1000 exp: 0 type: phantom filter: "Lith_Boss_James";
    scr: 2000 exp: 0 type: phantom filter: "Lith_Boss_Makarov";
@@ -213,6 +217,7 @@ presets {
 }
 
 /* Map Compatibility ------------------------------------------------------- */
+
 (full) {
    /* ed4_rfo1.wad */
    pre: DRLACaptain   type: zombie        filter: "BazookaZombie";
@@ -357,6 +362,41 @@ presets {
    pre: ShotgunGuy  type: zombiesg filter: "FormerSergeant";
    pre: ChaingunGuy type: zombiecg filter: "FormerCommando";
    pre: DRLACaptain type: zombie   filter: "FormerCaptain";
+}
+
+/* Colorful Hell */
+(nocase) {
+   pre: ZombieMan     type: zombie        filter: "Zombie" hacks: "ch";
+   pre: ShotgunGuy    type: zombiesg      filter: "SG"     hacks: "ch";
+   pre: ChaingunGuy   type: zombiecg      filter: "CGuy"   hacks: "ch";
+   pre: ChaingunGuy   type: zombiecg      filter: "Cguy"   hacks: "ch";
+   pre: Cacodemon     type: cacodemon     filter: "Caco"   hacks: "ch";
+   pre: HellKnight    type: hellknight    filter: "HK"     hacks: "ch";
+   pre: Arachnotron   type: arachnotron   filter: "SP"     hacks: "ch";
+   pre: Mancubus      type: mancubus      filter: "Fatso"  hacks: "ch";
+   pre: Archvile      type: archvile      filter: "Arch"   hacks: "ch";
+   pre: Archvile      type: archvile      filter: "Vile"   hacks: "ch";
+   pre: LostSoul      type: lostsoul      filter: "LSoul"  hacks: "ch";
+   pre: Revenant      type: revenant      filter: "Rev"    hacks: "ch";
+   pre: PainElemental type: painelemental filter: "PE"     hacks: "ch";
+   pre: CyberDemon    type: cyberdemon    filter: "Cybie"  hacks: "ch";
+   pre: SpiderDemon   type: mastermind    filter: "Mind"   hacks: "ch";
+
+   pre: ShotgunGuy    type: zombiesg      filter: "ShotgunPunish";
+   pre: Revenant      type: revenant      filter: "MrBones";
+   pre: ShotgunGuy    type: zombiesg      filter: "ShotgunShrine";
+   pre: Demon         type: demon         filter: "WHOLETTHEDOGSOUT";
+   pre: Demon         type: demon         filter: "Wakawaka";
+   pre: ChaingunGuy   type: zombiecg      filter: "SlimyWorm";
+   pre: Cacodemon     type: cacodemon     filter: "VolativeCaco";
+   pre: Cacodemon     type: cacodemon     filter: "BabyCaco";
+   pre: Cacodemon     type: cacodemon     filter: "RedSpikeCacoEX";
+   pre: Arachnotron   type: arachnotron   filter: "MiniSP";
+   pre: Archvile      type: archvile      filter: "AbyssPortalVile";
+   pre: Archvile      type: archvile      filter: "ROCKDROPVILE";
+   pre: PainElemental type: painelemental filter: "MiniSentinelPE";
+   pre: CyberDemon    type: cyberdemon    filter: "MolochWraith";
+   pre: Arachnotron   type: arachnotron   filter: "SpecialSpider";
 }
 
 /* EOF */
