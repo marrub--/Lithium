@@ -232,11 +232,8 @@ static void LT(Actor mo, string txt, string fnt, int xx, int yy, double anum, in
    cl.m_D[p].Cr = cr;
 
    uint lns, lnx = 0;
-   int yOfs;
 
-   [cl.m_D[p].Fnt, yOfs] = cl.fntAny(fnt, flags & _u_no_unicode);
-   y += yOfs;
-
+   cl.m_D[p].Fnt = cl.fntAny(fnt, flags & _u_no_unicode);
    cl.m_D[p].LnY = cl.m_D[p].Fnt.GetHeight();
    let       brl = cl.m_D[p].Fnt.BreakLines(txt, cl.m_BreakWidth ? cl.m_BreakWidth : 0x7fff);
 
@@ -590,48 +587,46 @@ private ui void drawCrosshair(RenderEvent evt) {
    }
 }
 
-Font, int fntSml(bool noUnicode = false) const {
+Font fntSml(bool noUnicode = false) const {
    if(noUnicode || m_English) {
-      return smallFont, 0;
+      return smallFont;
    } else {
-      return m_UFntSml, 2;
+      return m_UFntSml;
    }
 }
 
-Font, int fntMid(bool noUnicode = false) const {
+Font fntMid(bool noUnicode = false) const {
    if(noUnicode || m_English) {
-      return "lmidfont", 0;
+      return "lmidfont";
    } else {
-      return m_UFntSml, 2;
+      return m_UFntSml;
    }
 }
 
-Font, int fntBig(bool noUnicode = false) const {
+Font fntBig(bool noUnicode = false) const {
    if(noUnicode || m_English) {
-      return "lbigfont", 0;
+      return "lbigfont";
    } else {
-      return "newconsolefont", 0;
+      return "newconsolefont";
    }
 }
 
-Font, int fntTrm(bool noUnicode = false) const {
+Font fntTrm(bool noUnicode = false) const {
    if(noUnicode || m_English) {
-      return "ltrmfont", 0;
+      return "ltrmfont";
    } else {
-      return "ljtrmfont", 0;
+      return "ljtrmfont";
    }
 }
 
-Font, int fntAny(string name, bool noUnicode = false) const {
-   Font ret = null;
-   int yOfs = 0;
-   /**/ if(name == "smallfnt") [ret, yOfs] = fntSml(noUnicode);
-   else if(name == "lmidfont") [ret, yOfs] = fntMid(noUnicode);
-   else if(name == "ltrmfont") [ret, yOfs] = fntTrm(noUnicode);
-   else if(name == "bigupper") [ret, yOfs] = fntBig(noUnicode);
-   else if(name == "areaname") ret = "areaname";
-   else if(name == "lsmlhfnt") ret = "lsmlhfnt";
-   return ret, yOfs;
+Font fntAny(string name, bool noUnicode = false) const {
+   /**/ if(name == "smallfnt") return fntSml(noUnicode);
+   else if(name == "lmidfont") return fntMid(noUnicode);
+   else if(name == "ltrmfont") return fntTrm(noUnicode);
+   else if(name == "bigupper") return fntBig(noUnicode);
+   else if(name == "areaname") return "areaname";
+   else if(name == "lsmlhfnt") return "lsmlhfnt";
+   else                        return null;
 }
 
 static clearScope color xhairColor() {

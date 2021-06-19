@@ -39,10 +39,10 @@ gameinfo {
    MenuFontColor_Title     = "Green"
    MenuFontColor_Value     = "Purple"
 
-   StatScreen_MapNameFont  = "BigUpper", "White"
-   StatScreen_FinishedFont = "BigUpper", "Green"
-   StatScreen_EnteringFont = "BigUpper", "Green"
-   StatScreen_ContentFont  = "BigUpper", "Green"
+   StatScreen_MapNameFont  = "bigupper", "White"
+   StatScreen_FinishedFont = "bigupper", "Green"
+   StatScreen_EnteringFont = "bigupper", "Green"
+   StatScreen_ContentFont  = "bigupper", "Green"
 
    InfoPage       = "HELP"
    BorderFlat     = "lgfx/Menu/Black.png"
@@ -53,9 +53,9 @@ gameinfo {
 automap {
    Base                 = "Doom"
    Background           = "#000000"
-   CeilingDiffWallColor = "#008800"
-   FloorDiffWallColor   = "#008800"
-   GridColor            = "#FF0000"
+   CeilingDiffWallColor = "#007700"
+   FloorDiffWallColor   = "#005500"
+   GridColor            = "#AA0000"
    ShowLocks            = true
    SpecialWallColor     = "#FF00FF"
    WallColor            = "#00FF00"
@@ -67,7 +67,6 @@ clearskills
 
 skill tourist {
    ACSReturn     = 0
-   ArmorFactor   = 2
    DamageFactor  = 0.1
    HealthFactor  = 2
    Key           = "t"
@@ -136,9 +135,7 @@ skill extrahard {
 
 skill nightmare {
    ACSReturn     = 5
-   ArmorFactor   = 2
    DamageFactor  = 2
-   HealthFactor  = 2
    Key           = "t"
    MonsterHealth = 0.5
    MustConfirm   = "$LITH_SKILL_NIGHTMARE"
@@ -193,11 +190,6 @@ spawnnums {
    22421 = Lith_TitleCyberdemon
    22422 = Lith_TitleHellKnight
    22423 = Lith_TitleImp
-}
-
-damagetype Lith_NoDamage {
-   Factor = 0
-   ReplaceFactor
 }
 
 intermission Inter_Bunny       {}

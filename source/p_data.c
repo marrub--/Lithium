@@ -294,9 +294,6 @@ script void P_Init() {
    if(get_bit(dbgflags, dbgf_score)) pl.score = 0xFFFFFFFFFFFFFFFFll;
    #endif
 
-   /* Any linked lists on the player need to be initialized here. */
-   ListDtor(&pl.hudstrlist, true);
-
    /* pls not exit map with murder thingies out */
    /* is bad practice */
    ACS_SetPlayerProperty(0, false, PROP_INSTANTWEAPONSWITCH);

@@ -18,10 +18,10 @@ class Lith_InventoryItem : Inventory abstract {
       +CastSpriteShadow
    }
 
-   uint   m_invEquip;
+   int    m_invEquip;
    string m_invName;
-   uint   m_invSell;
-   uint   m_invItem;
+   int    m_invSell;
+   int    m_invItem;
 
    string m_infoPage;
 
@@ -48,8 +48,8 @@ class Lith_InventoryItem : Inventory abstract {
       }
    }
 
-   private void Lith_CreateItem() {
-      m_invItem = CallACS("Lith_ItemCreate", m_w, m_h, m_invEquip, m_invSell);
+   protected virtual void Lith_CreateItem() {
+      m_invItem = CallACS("Lith_ItemCreate");
    }
 
    string Lith_GetName() {
@@ -60,13 +60,12 @@ class Lith_InventoryItem : Inventory abstract {
       let copy = Lith_InventoryItem(Super.CreateCopy(mo));
 
       if(copy != self) {
+         copy.setTag(Lith_GetName());
          copy.m_invName  = m_invName;
          copy.m_invSell  = m_invSell;
          copy.m_w        = m_w;
          copy.m_h        = m_h;
          copy.m_infoPage = m_infoPage;
-
-         copy.setTag(Lith_GetName());
          copy.Lith_CreateItem();
       }
 
@@ -106,6 +105,18 @@ class Lith_InventoryItem : Inventory abstract {
       } else {
          return false;
       }
+   }
+}
+
+class Lith_BagItem : Lith_InventoryItem {
+   int m_invType;
+   int m_invW, m_invH;
+
+   property InvType: m_invType;
+   property InvSize: m_invW, m_invH;
+
+   override void Lith_CreateItem() {
+      m_invItem = CallACS("Lith_BagItemCreate");
    }
 }
 

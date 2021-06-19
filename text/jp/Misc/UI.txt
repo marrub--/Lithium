@@ -16,6 +16,14 @@
 == \#ACTIVATE   | 起動
 == \#EDIT       | 編集
 == \#CLEAR      | クリア
+== \#MOVE       | 動く
+== \#USE        | 使う
+== \#SELL       | 売る
+== \#DISCARD    | 捨てる
+== \#REQUIRED   | 必要
+== \#EQUIP      | 装備
+== \#OPEN       | 開ける
+== \#CLOSE      | 閉じる
 == \#EMPTY      | 空
 == \#NOTE_FMT   | \cm%iつのノート
 

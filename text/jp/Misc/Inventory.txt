@@ -6,9 +6,7 @@
 ##
 ## ---------------------------------------------------------------------------|
 
-%% \#INV_HINTS
-左クリックでもアイテムの移動ができます。
-アーマーを装備するにはアイテムを \cd該当する体の部位\c- に置くか \cn装備\c- ボタンを押してください。
+== \#INV_HINTS | 左クリックでもアイテムの移動ができます。アーマーを装備するにはアイテムを\cd該当する体の部位\c-に置くか\cn装備\c-ボタンを押してください。
 
 ## Containers ----------------------------------------------------------------|
 
@@ -22,11 +20,12 @@
 == \#CONTAINER_LegR     | 右腿
 == \#CONTAINER_Torso    | 胴体
 == \#CONTAINER_Legs     | 足
+== \#CONTAINER_Item     | アイテム
 
 ## Tags ----------------------------------------------------------------------|
 
 == \#ITEM_TAG_ClawOfImp | インプの爪
-== \#ITEM_TAG_DivisionSigil | \cgわ\ciり\ckざ\cfん\cdの\cvい\cnん\chし\ctょ\caう
+== \#ITEM_TAG_DivisionSigil | \c[Lith_RRed]わ\c[Lith_ROra]り\c[Lith_RYel]ざ\c[Lith_RYlg]ん\c[Lith_RGrn]の\c[Lith_RCya]い\c[Lith_RBlu]ん\c[Lith_RPur]し\c[Lith_RPnk]ょ\c[Lith_RHPn]う
 
 == \#ITEM_TAG_ArmStandardUp    | 通常のアーマー
 == \#ITEM_TAG_ArmImprovedUp    | 改良されたアーマー

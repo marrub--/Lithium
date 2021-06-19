@@ -281,6 +281,7 @@ struct player {
 
    struct item *useitem;
    struct item *selitem;
+   struct item *opnitem;
    bool         movitem;
    bool         invinit;
 

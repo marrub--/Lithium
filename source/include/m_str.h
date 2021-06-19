@@ -145,7 +145,7 @@ stkcall i32 faststrcmp_str(cstr s1, astr s2);
 stkcall i32 faststrcmp(cstr s1, cstr s2);
 stkcall i32 faststrcasecmp(cstr s1, cstr s2);
 stkcall char *faststrchr(cstr s, char c);
-stkcall char *faststrtok(char *s, char c);
+stkcall char *faststrtok(char *s, char **next, char c);
 stkcall cstr scoresep(i96 num);
 stkcall cstr alientext(i32 num);
 str LanguageV(str name);

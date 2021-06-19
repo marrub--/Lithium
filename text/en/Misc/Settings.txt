@@ -193,8 +193,8 @@
 == \#scanner_xoffs          | V. Scan. Horizontal offset
 == \#scanner_yoffs          | V. Scan. Vertical offset
 == \#st_autobuy_1           | Automatically buy \caSet 1
-== \#st_autobuy_2           | Automatically buy \cnSet 2
-== \#st_autobuy_3           | Automatically buy \cdSet 3
+== \#st_autobuy_2           | Automatically buy \cdSet 2
+== \#st_autobuy_3           | Automatically buy \cnSet 3
 == \#st_autobuy_4           | Automatically buy \cfSet 4
 == \#st_done_intro          | Don't play intro on next game start
 == \#sv_autosave            | Autosave interval

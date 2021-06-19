@@ -20,12 +20,14 @@ class Lith_DivisionSigilSprite : Lith_AnimItemSprite {
    }
 }
 
-class Lith_DivisionSigil : Lith_ItemPickup {
+class Lith_DivisionSigil : Lith_BagItemPickup {
    default {
       Tag "Division Sigil";
       Lith_InventoryItem.InvName "DivisionSigil";
       Lith_InventoryItem.Size 3, 3;
-      +LITH_ITEMPICKUP.PKUP_NOSPRITE
+      Lith_BagItem.InvType _cont_store;
+      Lith_BagItem.InvSize 7, 7;
+      +LITH_BAGITEMPICKUP.PKUP_NOSPRITE
    }
 
    override void postBeginPlay() {
@@ -48,35 +50,48 @@ class Lith_DivisionSigil : Lith_ItemPickup {
    }
 }
 
-class Lith_ClawOfImp : Lith_ItemPickup {
+class Lith_ClawOfImp : Lith_InventoryItemPickup {
    default {
       Tag "Claw of Imp";
       Lith_InventoryItem.InvName "ClawOfImp";
       Lith_InventoryItem.Size 4, 2;
       Lith_InventoryItem.InvSell 2000;
-      Lith_ItemPickup.Sprite "DITMA";
-      +LITH_ITEMPICKUP.PKUP_GENERIC
+      Lith_InventoryItemPickup.Sprite "DITMA";
+      +LITH_INVENTORYITEMPICKUP.PKUP_GENERIC
    }
 }
 
-class Lith_ItemPickup : Lith_InventoryItem abstract;
-
-mixin Lith_Pickup;
-
-default {
-   Inventory.PickupSound "player/pickup/evil";
-   Lith_InventoryItem.InvEquip _cont_store;
-   Lith_ItemPickup.Glow "Lith_ItemGlow";
+class Lith_InventoryItemPickup : Lith_InventoryItem {
+   mixin Lith_Pickup;
+   mixin Lith_ItemPickup;
+   default {
+      Lith_InventoryItemPickup.Glow "Lith_ItemGlow";
+   }
 }
 
-override void postBeginPlay() {
-   super.postBeginPlay();
-   Lith_PickupPostBeginPlay();
+class Lith_BagItemPickup : Lith_BagItem {
+   mixin Lith_Pickup;
+   mixin Lith_ItemPickup;
+   default {
+      Lith_BagItemPickup.Glow "Lith_ItemGlow";
+   }
 }
 
-override void tick() {
-   super.tick();
-   Lith_PickupTick();
+mixin class Lith_ItemPickup {
+   default {
+      Inventory.PickupSound "player/pickup/evil";
+      Lith_InventoryItem.InvEquip _cont_store;
+   }
+
+   override void postBeginPlay() {
+      super.postBeginPlay();
+      Lith_PickupPostBeginPlay();
+   }
+
+   override void tick() {
+      super.tick();
+      Lith_PickupTick();
+   }
 }
 
 /* EOF */

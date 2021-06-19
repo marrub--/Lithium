@@ -17,38 +17,99 @@
 
 /* Static Functions -------------------------------------------------------- */
 
+static
+void Container(struct gui_state *g, struct container *cont, i32 sx, i32 sy) {
+   Str(sp_BackStore, s":UI:InvBackStore");
+   Str(sp_BackArmsU, s":UI:InvBackUpperArms");
+   Str(sp_BackArmsL, s":UI:InvBackLowerArms");
+   Str(sp_BackBody,  s":UI:InvBackBody");
+
+   sx += g->ox;
+   sy += g->oy;
+
+   str bg;
+   switch(cont->type) {
+      case _cont_store:  bg = sp_BackStore;  break;
+      case _cont_arms_u: bg = sp_BackArmsU; break;
+      case _cont_arms_l: bg = sp_BackArmsL; break;
+      case _cont_body:   bg = sp_BackBody;   break;
+   }
+
+   i32 h = cont->h * 8;
+   i32 w = cont->w * 8;
+
+   PrintText_str(Language(LANG "CONTAINER_%s", cont->name), sf_smallfnt, g->defcr, sx,1, sy,2);
+
+   for(i32 y = 0; y < h; y += 8) {
+      for(i32 x = 0; x < w; x += 8) {
+         PrintSpriteA(bg, sx+x,1, sy+y,1, 0.8);
+      }
+   }
+
+   if(pl.movitem && g->clicklft &&
+      aabb_point(sx, sy, w, h, g->cx, g->cy) &&
+      (P_Inv_Place(cont, pl.selitem, (g->cx - sx) / 8, (g->cy - sy) / 8) ||
+       P_Inv_PlaceFirst(cont, pl.selitem))) {
+      pl.movitem = false;
+      ACS_LocalAmbientSound(ss_player_cbi_invmov, 127);
+   }
+
+   bool didresel = false; /* Basic bitch hack. -Ten */
+
+   for_item(cont) {
+      Log("%p %p %p", _head, _rover, _rover->next);
+      i32 x = sx + it->x * 8;
+      i32 y = sy + it->y * 8;
+      i32 ex = it->w * 8 - 1;
+      i32 ey = it->h * 8 - 1;
+
+      PrintSprite(it->spr, x,1, y,1);
+
+      if(pl.movitem) {
+         continue;
+      }
+
+      if(!didresel && pl.selitem != it && g->clicklft && aabb_point(x, y, ex, ey, g->cx, g->cy)) {
+         didresel = true;
+         pl.selitem = it;
+         ACS_LocalAmbientSound(ss_player_cbi_invcur, 127);
+      }
+
+      if(pl.selitem == it) {
+         k32 a = (ACS_Sin(ACS_Timer() / 105.0k) * 0.5k + 1.2k) / 4.0k;
+         PrintRect(x, y, ex + 1, ey + 1, 0x58E6F0 | (i32)(a * 255.0k) << 24);
+      }
+   }
+}
+
 script static
 void BagItem_Tick(struct item *_item) {
    struct bagitem *item = (struct bagitem *)_item;
+   for_item(&item->content) if(it->Tick) it->Tick(it);
+}
 
-   for_item(item->content) {
-      if(it->Tick) it->Tick(it);
-   }
+script static
+void BagItem_Show(struct item *_item, struct gui_state *g) {
+   struct bagitem *item = (struct bagitem *)_item;
+   Log("%s", __func__);
+   Container(g, &item->content, 8, 136);
 }
 
 script static
 void BagItem_Place(struct item *_item, struct container *cont) {
    struct bagitem *item = (struct bagitem *)_item;
-
+   if(cont == &item->content) return;
    P_Item_Place(&item->item, cont);
-
-   for_item(item->content) {
-      if(it->Place) {
-         it->Place(it, &item->content);
-      }
-   }
+   for_item(&item->content) it->Place(it, &item->content);
 }
 
 script static
 void BagItem_Destroy(struct item *_item) {
    struct bagitem *item = (struct bagitem *)_item;
-
-   for_item(item->content) {
-      if(it->Destroy) {
-         it->Destroy(it);
-      }
-   }
-
+   ListDtor(&item->content.items, {
+     struct item *it = _rover->object;
+     if(it) it->Destroy(it);
+   });
    P_Item_Destroy(&item->item);
 }
 
@@ -59,10 +120,10 @@ bool ItemCanPlace(struct container *cont, struct item *item, i32 x, i32 y) {
       return false;
    }
 
-   for_item(*cont) if(it != item) {
+   for_item(cont) if(it != item) {
       /* there is certainly a better way of doing this that still
        * accounts for overlap but,
-       * damn do i not care
+       * damn do i not care -fira
        */
       for(i32 ox = it->x; ox < it->x + it->w; ox++) {
          for(i32 oy = it->y; oy < it->y + it->h; oy++) {
@@ -114,72 +175,6 @@ void EquipItem(struct item *sel) {
                          ss_player_cbi_auto_invalid, 127);
 }
 
-static
-void Container(struct gui_state *g, struct container *cont, i32 sx, i32 sy) {
-   Str(sp_BackStore, s":UI:InvBackStore");
-   Str(sp_BackArmsU, s":UI:InvBackUpperArms");
-   Str(sp_BackArmsL, s":UI:InvBackLowerArms");
-   Str(sp_BackBody,  s":UI:InvBackBody");
-
-   sx += g->ox;
-   sy += g->oy;
-
-   str bg;
-   switch(cont->type) {
-      case _cont_store:  bg = sp_BackStore;  break;
-      case _cont_arms_u: bg = sp_BackArmsU; break;
-      case _cont_arms_l: bg = sp_BackArmsL; break;
-      case _cont_body:   bg = sp_BackBody;   break;
-   }
-
-   i32 h = cont->h * 8;
-   i32 w = cont->w * 8;
-
-   PrintText_str(Language(LANG "CONTAINER_%s", cont->name), sf_smallfnt, g->defcr, sx,1, sy,2);
-
-   for(i32 y = 0; y < h; y += 8) {
-      for(i32 x = 0; x < w; x += 8) {
-         PrintSpriteA(bg, sx+x,1, sy+y,1, 0.8);
-      }
-   }
-
-   if(pl.movitem && g->clicklft &&
-      aabb_point(sx, sy, w, h, g->cx, g->cy) &&
-      (P_Inv_Place(cont, pl.selitem, (g->cx - sx) / 8, (g->cy - sy) / 8) ||
-       P_Inv_PlaceFirst(cont, pl.selitem))) {
-      pl.movitem = false;
-      ACS_LocalAmbientSound(ss_player_cbi_invmov, 127);
-   }
-
-   for_item(*cont) {
-      i32 x = sx + it->x * 8;
-      i32 y = sy + it->y * 8;
-      i32 ex = it->w * 8;
-      i32 ey = it->h * 8;
-
-      PrintSprite(it->spr, x,1, y,1);
-
-      if(pl.movitem) {
-         continue;
-      }
-
-      if(pl.selitem != it && g->clicklft && aabb_point(x, y, ex, ey, g->cx, g->cy)) {
-         pl.selitem = it;
-         ACS_LocalAmbientSound(ss_player_cbi_invcur, 127);
-      }
-
-      if(pl.selitem == it) {
-         k32 a = (ACS_Sin(ACS_Timer() / 105.0) * 0.5 + 1.2) / 4;
-
-         ex = ex + x;
-         ey = ey + y;
-
-         for(i32 xx = x; y < ey; y += 8) for(x = xx; x < ex; x += 8)
-            PrintSpriteA(sp_UI_InvSel, x,1, y,1, a);
-      }
-   }
-}
-
 /* Extern Functions -------------------------------------------------------- */
 
 void P_Inv_PInit() {
@@ -199,7 +194,7 @@ void P_Inv_PInit() {
    fastmemcpy(pl.inv, baseinv, sizeof baseinv);
 
    for(i32 i = 0; i < _inv_num; i++) {
-      ListCtor(&pl.inv[i].items);
+      ListCtor(&pl.inv[i].items, nil);
    }
 
    pl.invinit = true;
@@ -207,7 +202,10 @@ void P_Inv_PInit() {
 
 void P_Inv_PQuit() {
    for(i32 i = 0; i < _inv_num; i++) {
-      for_item(pl.inv[i]) if(it->Destroy) it->Destroy(it);
+      ListDtor(&pl.inv[i].items, {
+         struct item *it = _rover->object;
+         if(it) it->Destroy(it);
+      });
    }
 
    pl.useitem = pl.selitem = nil;
@@ -218,14 +216,10 @@ void P_Inv_PQuit() {
 
 void P_Item_Init(struct item *item, struct itemdata const *data) {
    ListCtor(&item->link, item);
+   item->data = *data;
 
-   if(data) item->data = *data;
-   #ifndef NDEBUG
-   else     Log("%s ERROR: invalid item");
-   #endif
-
-   if(!item->Destroy) { item->Destroy = P_Item_Destroy; }
-   if(!item->Place)   { item->Place   = P_Item_Place;   }
+   if(!item->Destroy) item->Destroy = P_Item_Destroy;
+   if(!item->Place)   item->Place   = P_Item_Place;
 }
 
 struct item *P_Item_New(struct itemdata const *data) {
@@ -243,8 +237,8 @@ void P_Item_Destroy(struct item *item) {
    ServCallI(sm_DeleteItem, item);
 
    if(!P_None()) {
-      if(pl.useitem == item) { pl.useitem = nil; }
-      if(pl.selitem == item) { pl.selitem = nil; }
+      if(pl.useitem == item) pl.useitem = nil;
+      if(pl.selitem == item) pl.selitem = nil;
       pl.movitem = false;
    }
 
@@ -260,13 +254,12 @@ bool P_Item_Use(struct item *item) {
 script
 void P_Item_Place(struct item *item, struct container *cont) {
    P_Item_Unlink(item);
-   item->link.link(&cont->items);
+   ListLink(&cont->items, &item->link);
    item->container = cont;
 }
 
 void P_Item_Unlink(struct item *item) {
    if(item->container) {
-      item->link.unlink();
       item->container = nil;
    }
 }
@@ -281,9 +274,12 @@ struct bagitem *P_BagItem_New(i32 w, i32 h, i32 type,
 
    item->content.w    = w;
    item->content.h    = h;
+   item->content.name = "Item";
    item->content.type = type;
+   ListCtor(&item->content.items, nil);
 
    item->Tick    = BagItem_Tick;
+   item->Show    = BagItem_Show;
    item->Destroy = BagItem_Destroy;
    item->Place   = BagItem_Place;
 
@@ -295,9 +291,7 @@ bool P_Inv_Place(struct container *cont, struct item *item, i32 x, i32 y) {
       return false;
    }
 
-   if(item->Place) {
-      item->Place(item, cont);
-   }
+   item->Place(item, cont);
 
    item->x = x;
    item->y = y;
@@ -320,7 +314,7 @@ bool P_Inv_PlaceFirst(struct container *cont, struct item *item) {
 
 script
 bool P_Inv_SwapFirst(struct container *cont, struct item *lhs) {
-   for_item(*cont) {
+   for_item(cont) {
       if(P_Inv_Swap(lhs, it)) {
          return true;
       }
@@ -369,7 +363,7 @@ void P_Inv_PTick() {
    }
 
    for(i32 i = 0; i < _inv_num; i++) {
-      for_item(pl.inv[i]) {
+      for_item(&pl.inv[i]) {
          if(it->Tick) {
             it->Tick(it);
          }
@@ -379,35 +373,35 @@ void P_Inv_PTick() {
 
 void P_CBI_TabItems(struct gui_state *g) {
    static i32 const x[] = {
-      [_inv_backpack]    = 142+8*-14,
-      [_inv_arm_upper_l] = 142+8*  1,
-      [_inv_arm_upper_r] = 142+8*  8,
-      [_inv_arm_lower_l] = 142+8*  0,
-      [_inv_arm_lower_r] = 142+8*  9,
-      [_inv_belt]        = 142+8*  3,
-      [_inv_leg_l]       = 142+8*  1,
-      [_inv_leg_r]       = 142+8*  8,
-      [_inv_torso]       = 142+8*  3,
-      [_inv_legs]        = 142+8*  4,
+      [_inv_backpack]    =        8*1,
+      [_inv_arm_upper_l] = 294-48-8*8,
+      [_inv_arm_upper_r] = 294-48-8*1,
+      [_inv_arm_lower_l] = 294-48-8*9,
+      [_inv_arm_lower_r] = 294-48-8*0,
+      [_inv_belt]        = 294-48-8*6,
+      [_inv_leg_l]       = 294-48-8*8,
+      [_inv_leg_r]       = 294-48-8*1,
+      [_inv_torso]       = 294-48-8*6,
+      [_inv_legs]        = 294-48-8*5,
    };
 
    static i32 const y[] = {
-      [_inv_backpack]    = 67+8*-1,
-      [_inv_arm_upper_l] = 67+8*-2,
-      [_inv_arm_upper_r] = 67+8*-2,
-      [_inv_arm_lower_l] = 67+8* 3,
-      [_inv_arm_lower_r] = 67+8* 3,
-      [_inv_belt]        = 67+8* 5,
-      [_inv_leg_l]       = 67+8* 7,
-      [_inv_leg_r]       = 67+8* 7,
-      [_inv_torso]       = 67+8* 0,
-      [_inv_legs]        = 67+8*10,
+      [_inv_backpack]    = 64+8*-5,
+      [_inv_arm_upper_l] = 64+8*-2,
+      [_inv_arm_upper_r] = 64+8*-2,
+      [_inv_arm_lower_l] = 64+8* 3,
+      [_inv_arm_lower_r] = 64+8* 3,
+      [_inv_belt]        = 64+8* 5,
+      [_inv_leg_l]       = 64+8* 7,
+      [_inv_leg_r]       = 64+8* 7,
+      [_inv_torso]       = 64+8* 0,
+      [_inv_legs]        = 64+8*10,
    };
 
    Str(sl_inv_hints, sLANG "INV_HINTS");
 
-   PrintSpriteA(sp_UI_Body, g->ox+138,1, g->oy+27,1, 0.6);
-   PrintSpriteA(sp_UI_Bag,  g->ox+34 ,1, g->oy+31,1, 0.6);
+   PrintSpriteA(sp_UI_Body, g->ox+294-122,1, g->oy+24,1, 0.6);
+   PrintSpriteA(sp_UI_Bag,  g->ox+     16,1, g->oy+16,1, 0.6);
 
    PrintText_str(L(sl_inv_hints), sf_smallfnt, g->defcr, g->ox+2,1,
                  g->oy+212,2);
@@ -419,16 +413,23 @@ void P_CBI_TabItems(struct gui_state *g) {
    struct item *sel = pl.selitem;
 
    if(sel) {
+      #define incrPos() \
+         if(x_ > x[0] + 128) { \
+            x_ = x[0]; \
+            y_ += 8; \
+         } else { \
+            x_ += 32; \
+         }
       i32 x_ = x[0];
       i32 y_ = y[0] + 60;
-
-      PrintText_str(Language(LANG "ITEM_TAG_%S", sel->name), sf_smallfnt,
-                    g->defcr, g->ox+x_,1, g->oy+y_,1);
-      y_ += 8;
 
       if(g->clickrgt && !g->old.clickrgt) {
          pl.movitem = !pl.movitem;
       }
+
+      PrintText_str(Language(LANG "ITEM_TAG_%S", sel->name), sf_smallfnt,
+                    g->defcr, g->ox+x_,1, g->oy+y_,1);
+      y_ += 8;
 
       PrintText_str(Language(LANG "ITEM_SHORT_%S", sel->name), sf_smallfnt,
                     g->defcr, g->ox+x_,1, g->oy+y_,1);
@@ -437,21 +438,31 @@ void P_CBI_TabItems(struct gui_state *g) {
       if(G_Button(g, LC(LANG "MOVE"), x_, y_, .color = "n", Pre(btnclear))) {
          pl.movitem = !pl.movitem;
       }
-      y_ += 8;
+      incrPos();
 
-      if(sel->equip != _cont_store) {
+      if(get_bit(sel->flags, _if_equippable)) {
          if(G_Button(g, LC(LANG "EQUIP"), x_, y_, .color = "n",
                      Pre(btnclear))) {
             EquipItem(sel);
          }
-         y_ += 8;
+         incrPos();
+      }
+
+      if(get_bit(sel->flags, _if_openable)) {
+         if(G_Button(g, pl.opnitem == sel ? LC(LANG "CLOSE") :
+                     LC(LANG "OPEN"), x_, y_, .color = "n",
+                     Pre(btnclear)))
+         {
+            pl.opnitem = pl.opnitem == sel ? nil : sel;
+         }
+         incrPos();
       }
 
       if(sel->Use) {
          if(G_Button(g, LC(LANG "USE"), x_, y_, .color = "g", Pre(btnclear))) {
             pl.useitem = sel;
          }
-         y_ += 8;
+         incrPos();
       }
 
       if(sel->scr) {
@@ -465,33 +476,51 @@ void P_CBI_TabItems(struct gui_state *g) {
          if(sel->scr) {
             P_Scr_Give(sel->scr, true);
          }
-         if(sel->Destroy) {
-            sel->Destroy(sel);
-         }
+         sel->Destroy(sel);
          ACS_LocalAmbientSound(ss_player_cbi_invrem, 127);
+         incrPos();
+      }
+
+      if(pl.opnitem && pl.opnitem->Show) {
+         pl.opnitem->Show(sel, g);
       }
    }
 }
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr(OBJ "ItemCreate")
-struct item *Sc_ItemCreate(u32 w, u32 h, u32 equip, u32 scr) {
-   str name = GetMembS(0, sm_InvName);
-   str spr  = StrParam(":ItemSpr:%S", name);
-
-   Dbg_Log(log_dev, "%s: creating %S", __func__, name);
-
-   struct itemdata const data = {
-      .w     = w,
-      .h     = h,
-      .equip = equip,
-      .scr   = scr,
-      .spr   = spr,
-      .name  = name,
+static
+struct itemdata ItemData() {
+   struct itemdata data = {
+      .w     = GetMembI(0, sm_W),
+      .h     = GetMembI(0, sm_H),
+      .equip = GetMembI(0, sm_InvEquip),
+      .scr   = GetMembI(0, sm_InvSell),
+      .name  = GetMembS(0, sm_InvName),
    };
+   data.spr = StrParam(":ItemSpr:%S", data.name);
+   if(data.equip != _cont_store) set_bit(data.flags, _if_equippable);
+   return data;
+}
 
+script_str ext("ACS") addr(OBJ "ItemCreate")
+struct item *Sc_ItemCreate() {
+   struct itemdata data = ItemData();
+   Dbg_Log(log_dev, "%s: creating %S", __func__, data.name);
    return P_Item_New(&data);
+}
+
+script_str ext("ACS") addr(OBJ "BagItemCreate")
+struct item *Sc_BagItemCreate() {
+   struct itemdata data = ItemData();
+   set_bit(data.flags, _if_openable);
+   Dbg_Log(log_dev, "%s: creating %S", __func__, data.name);
+   return &P_BagItem_New(
+      GetMembI(0, sm_InvW),
+      GetMembI(0, sm_InvH),
+      GetMembI(0, sm_InvType),
+      &data
+   )->item;
 }
 
 script_str ext("ACS") addr(OBJ "ItemAttach")
@@ -509,9 +538,7 @@ script_str ext("ACS") addr(OBJ "ItemDetach")
 void Sc_ItemDetach(struct item *item) {
    Dbg_Log(log_dev, "%s: detaching item %p", __func__, item);
 
-   if(item->Destroy) {
-      item->Destroy(item);
-   }
+   item->Destroy(item);
 }
 
 script_str ext("ACS") addr(OBJ "ItemCanPlace")

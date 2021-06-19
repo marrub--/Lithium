@@ -6,9 +6,7 @@
 ##
 ## ---------------------------------------------------------------------------|
 
-%% \#INV_HINTS
-You can right click to quickly move items.
-To equip armor place it on your \cdbody\c- or press \cnEquip\c-.
+== \#INV_HINTS | You can right click to quickly move items. To equip armor place it on your \cdbody\c- or press \cnEquip\c-.
 
 ## Containers ----------------------------------------------------------------|
 
@@ -22,12 +20,12 @@ To equip armor place it on your \cdbody\c- or press \cnEquip\c-.
 == \#CONTAINER_LegR     | R Thigh
 == \#CONTAINER_Torso    | Torso
 == \#CONTAINER_Legs     | Legs
+== \#CONTAINER_Item     | Item
 
 ## Tags ----------------------------------------------------------------------|
 
 == \#ITEM_TAG_ClawOfImp | Claw of Imp
-@@ \#ITEM_TAG_DivisionSigil
-\cgD\cii\ckv\cfi\cds\cvi\cno\chn \ctS\cai\cgg\cii\ckl
+== \#ITEM_TAG_DivisionSigil | \c[Lith_RRed]D\c[Lith_ROra]i\c[Lith_RYel]v\c[Lith_RYlg]i\c[Lith_RGrn]s\c[Lith_RCya]i\c[Lith_RBlu]o\c[Lith_RPur]n \c[Lith_RPnk]S\c[Lith_RHPn]i\c[Lith_RRed]g\c[Lith_ROra]i\c[Lith_RYel]l
 
 == \#ITEM_TAG_ArmStandardUp    | Standard Armor
 == \#ITEM_TAG_ArmImprovedUp    | Improved Armor

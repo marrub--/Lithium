@@ -57,7 +57,7 @@ void P_Scr_Payout() {
 
       SetSize(320, 240);
 
-      PrintRect(4, 16, 152, 208, 0x000000 | ((GetFade(fid_result) / 2) << 24));
+      PrintRect(4, 16, 152, 208, (GetFade(fid_result) / 2) << 24);
       Head(res);
 
       if(CheckFade(fid_result2)) {

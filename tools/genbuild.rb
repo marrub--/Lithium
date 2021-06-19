@@ -325,7 +325,6 @@ ctx.srcs = [
    SrcsEnt.from("m_cps.c"),
    SrcsEnt.from("m_drawing.c"),
    SrcsEnt.from("m_file.c"),
-   SrcsEnt.from("m_list.c"),
    SrcsEnt.from("m_math.c"),
    SrcsEnt.from("m_memory.c"),
    SrcsEnt.from("m_namegen.c"),

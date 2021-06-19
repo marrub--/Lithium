@@ -182,8 +182,6 @@ script type("disconnect")
 static void Sc_PlayerDisconnect(void) {
    P_BIP_PQuit();
 
-   ListDtor(&pl.hudstrlist, true);
-
    fastmemset(&pl, 0, sizeof pl);
 }
 
@@ -441,7 +439,7 @@ void P_doIntro() {
 
          ACS_LocalAmbientSound(ss_showtext, 127);
 
-         char *line = faststrtok(text, '\n');
+         char *next, *line = faststrtok(text, &next, '\n');
          for(i32 i = 0; i < _nlines; i++) {
             lines[i] = nil;
             linec[i] = 0;
@@ -453,7 +451,7 @@ void P_doIntro() {
                   linec[i] = faststrlen(line);
                }
 
-               line = faststrtok(nil, '\n');
+               line = faststrtok(nil, &next, '\n');
             }
          }
       }

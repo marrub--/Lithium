@@ -24,8 +24,6 @@ struct boss
 
    i32  phase;
    bool dead;
-
-   list link;
 };
 
 enum

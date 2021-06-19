@@ -11,24 +11,25 @@
 #include "p_player.h"
 #include "p_hudid.h"
 
+static str        hudstrs[20];
+static mem_size_t hudstrnum;
+
 static void StringStack() {
-   struct hudstr {str s; list link;};
-
    if(ACS_Timer() % 3 == 0) {
-      struct hudstr *hudstr = Salloc(struct hudstr, _tag_huds);
-      ListCtor(&hudstr->link, hudstr);
-      hudstr->s = StrParam("%.8X", ACS_Random(INT32_MIN + 1, INT32_MAX));
-
-      hudstr->link.link(&pl.hudstrlist);
-
-      if(pl.hudstrlist.size() == 20) Dalloc(pl.hudstrlist.next->unlink());
+      str s = StrParam("%.8X", ACS_Random(INT32_MIN + 1, INT32_MAX));
+      if(hudstrnum == 20) {
+         fastmemmove(&hudstrs[0], &hudstrs[1], sizeof(str) * 19);
+         hudstrs[19] = s;
+      } else {
+         hudstrs[hudstrnum++] = s;
+      }
    }
 
    SetSize(320, 200);
 
-   mem_size_t i = 0;
-   for_list_back_it(struct hudstr *hudstr, pl.hudstrlist, i++)
-      PrintTextA_str(hudstr->s, sf_ltrmfont, CR_RED, 300,2, 20+i*9,1, 0.5);
+   for(mem_size_t i = 0; i < hudstrnum; ++i) {
+      PrintTextA_str(hudstrs[i], sf_ltrmfont, CR_RED, 300,2, 20+i*9,1, 0.5);
+   }
 }
 
 static void Waves() {
@@ -112,7 +113,7 @@ static void ScopeM() {
 
 script void P_Ren_Scope() {
    if(pl.old.scopetoken && !pl.scopetoken)
-      ListDtor(&pl.hudstrlist, true);
+      hudstrnum = 0;
 
    switch(pl.pclass) {
       case pcl_cybermage:                   ScopeC(); break;

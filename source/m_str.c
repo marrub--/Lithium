@@ -20,15 +20,16 @@
 #elif defined(remove_text_color_impl)
    i32 j = 0;
 
-   if(size > countof(tcbuf)) return nil;
+   if(size > sizeof tcbuf) return nil;
 
    for(i32 i = 0; i < size; i++) {
       if(s[i] == '\C') {
-         i++;
+         ++i;
          if(s[i] == '[') {
-            while(s[i] && s[i++] != ']');
+            while(s[i] && s[i] != ']') ++i;
+            ++i;
          } else {
-            i++;
+            ++i;
          }
       }
 
@@ -256,16 +257,15 @@ char *faststrchr(cstr s, char c) {
 }
 
 alloc_aut(0) stkcall
-char *faststrtok(char *s, char c) {
-   static char *next;
-   if(s) next = s;
-   if(!next) return nil;
-   while(*next == c) ++next;
+char *faststrtok(char *s, char **next, char c) {
+   if(s) *next = s;
    if(!*next) return nil;
-   char *curr = next;
-   while(*next && *next != c) ++next;
-   if(!*next) {next = nil; return curr;}
-   *next++ = '\0';
+   while(**next == c) ++(*next);
+   if(!**next) return nil;
+   char *curr = *next;
+   while(**next && **next != c) ++(*next);
+   if(!**next) {*next = nil; return curr;}
+   *(*next)++ = '\0';
    return curr;
 }
 

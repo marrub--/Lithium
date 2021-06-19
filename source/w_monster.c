@@ -388,7 +388,8 @@ void MonInfo_Preset(struct tokbuf *tb, struct tbuf_err *res) {
       } else if(faststrcmp(k, "scr") == 0) {
          pre->score = faststrtoi96(v);
       } else {
-         tb->err(res, "%s MonInfo_Preset: invalid key '%s'", TokPrint(tb->reget()), k);
+         tb->err(res, "%s MonInfo_Preset: invalid key '%s'",
+                 TokPrint(tb->reget()), k);
          unwrap(res);
       }
    }
@@ -455,17 +456,21 @@ void MonInfo_Monster(struct tokbuf *tb, struct tbuf_err *res, i32 flags) {
             }
          #include "w_monster.h"
       } else if(faststrcmp(k, "hacks") == 0) {
-         for(char *hack = faststrtok(v, ' '); hack; hack = faststrtok(nil, ' ')) {
+         for(char *next, *hack = faststrtok(v, &next, ' '); hack;
+             hack = faststrtok(nil, &next, ' '))
+         {
             if(faststrcmp(hack, "ch") == 0) {
                MonInfo_ColorfulHellHack(mi);
                finished = true;
             } else {
-               tb->err(res, "%s MonInfo_Monster: invalid hack '%s'", TokPrint(tb->reget()), hack);
+               tb->err(res, "%s MonInfo_Monster: invalid hack '%s'",
+                       TokPrint(tb->reget()), hack);
                unwrap(res);
             }
          }
       } else {
-         tb->err(res, "%s MonInfo_Monster: invalid key '%s'", TokPrint(tb->reget()), k);
+         tb->err(res, "%s MonInfo_Monster: invalid key '%s'",
+                 TokPrint(tb->reget()), k);
          unwrap(res);
       }
    }

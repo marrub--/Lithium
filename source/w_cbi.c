@@ -20,26 +20,26 @@ static i32 lmvar cbispawniter;
 
 struct cupgdef
 {
-   i32 pclass;
-   i32 key;
-   str msg;
-   str nam;
+   i32        pclass;
+   i32        key;
+   cstr       msg;
+   bip_name_t nam;
 };
 
 static struct cupgdef const cdefs[] = {
-   {pM, cupg_weapninter, s"MWeapnInter", s"WeapnInter"},
-   {pM, cupg_weapninte2, s"MWeapnInte2", s"WeapnInte2"},
-   {pM, cupg_armorinter, s"MArmorInter", s"ArmorInter"},
-   {pM, cupg_hasupgr1,   s"MUpgr1",      s"CBIUpgr1"  },
-   {pM, cupg_hasupgr2,   s"MUpgr2",      s"CBIUpgr2"  },
-   {pM, cupg_rdistinter, s"MRDistInter"               },
+   {pM, cupg_weapninter, "MWeapnInter", "WeapnInter"},
+   {pM, cupg_weapninte2, "MWeapnInte2", "WeapnInte2"},
+   {pM, cupg_armorinter, "MArmorInter", "ArmorInter"},
+   {pM, cupg_hasupgr1,   "MUpgr1",      "CBIUpgr1"  },
+   {pM, cupg_hasupgr2,   "MUpgr2",      "CBIUpgr2"  },
+   {pM, cupg_rdistinter, "MRDistInter"              },
 
-   {pC, cupg_c_slot3spell, s"CSlot3Spell", s"Feuer"   },
-   {pC, cupg_c_slot4spell, s"CSlot4Spell", s"Rend"    },
-   {pC, cupg_c_slot5spell, s"CSlot5Spell", s"Hulgyon" },
-   {pC, cupg_c_slot6spell, s"CSlot6Spell", s"StarShot"},
-   {pC, cupg_c_slot7spell, s"CSlot7Spell", s"Cercle"  },
-   {pC, cupg_c_rdistinter, s"CRDistInter"             },
+   {pC, cupg_c_slot3spell, "CSlot3Spell", "Feuer"   },
+   {pC, cupg_c_slot4spell, "CSlot4Spell", "Rend"    },
+   {pC, cupg_c_slot5spell, "CSlot5Spell", "Hulgyon" },
+   {pC, cupg_c_slot6spell, "CSlot6Spell", "StarShot"},
+   {pC, cupg_c_slot7spell, "CSlot7Spell", "Cercle"  },
+   {pC, cupg_c_rdistinter, "CRDistInter"            },
 };
 
 struct cupgdef const *GetCUpgr(i32 pclass, i32 num)
@@ -66,12 +66,11 @@ void CBI_Install(i32 num)
 
    pl.setActivator();
 
-   ifauto(struct cupgdef const *, c, GetCUpgr(pl.pclass, num))
-      if(c->nam)
-      {
-         bip_name_t tag; faststrcpy_str(tag, c->nam);
-         P_BIP_Unlock(tag);
+   ifauto(struct cupgdef const *, c, GetCUpgr(pl.pclass, num)) {
+      if(c->nam[0]) {
+         P_BIP_Unlock(c->nam);
       }
+   }
 }
 
 void CBI_InstallSpawned(void)
@@ -96,7 +95,7 @@ void Sc_PickupCBIItem(i32 num)
 
    ifauto(struct cupgdef const *, c, GetCUpgr(pl.pclass, num))
       if(c->msg)
-         pl.logB(1, LC(LANG "LOG_CBI"), Language(LANG "LOG_CBI_%S", c->msg));
+         pl.logB(1, LC(LANG "LOG_CBI"), Language(LANG "LOG_CBI_%s", c->msg));
 
    CBI_Install(num);
 }

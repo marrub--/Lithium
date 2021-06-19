@@ -156,15 +156,15 @@ void P_Upg_Enter() {
 
 bool P_Upg_CanActivate(struct upgrade *upgr) {
    return
-      get_bit(upgr->flags, _ug_owned) &&
-      (get_bit(upgr->flags, _ug_active) ||
-       pl.pclass != pcl_marine ||
-       (!RequiresButDontHave_AI  &&
-        !RequiresButDontHave_WMD &&
-        !RequiresButDontHave_WRD &&
-        !RequiresButDontHave_RDI &&
-        !RequiresButDontHave_RA  &&
-        pl.cbi.pruse + upgr->info->perf <= cbiperf));
+      !RequiresButDontHave_AI  &&
+      !RequiresButDontHave_WMD &&
+      !RequiresButDontHave_WRD &&
+      !RequiresButDontHave_RDI &&
+      !RequiresButDontHave_RA  &&
+      (get_bit(upgr->flags, _ug_owned) ||
+       get_bit(upgr->flags, _ug_active)) &&
+      (pl.pclass != pcl_marine ||
+       pl.cbi.pruse + upgr->info->perf <= cbiperf);
 }
 
 bool P_Upg_Toggle(struct upgrade *upgr) {
