@@ -141,7 +141,8 @@ void Log(cstr fmt, ...)
 
 dynam_aut script_str ext("ACS") addr(OBJ "Thingomamob")
 void Sc_Thimgomabjhdf(void) {
-   static struct gui_pre_win const pre = {
+   static
+   struct gui_pre_win const pre = {
       .bg = "Background",
       .w = 80,
       .h = 120,
@@ -186,7 +187,8 @@ void Sc_Thimgomabjhdf(void) {
 
 alloc_aut(0) script_str ext("ACS") addr(OBJ "FontTest")
 void Sc_FontTest(i32 fontnum) {
-   static struct {cstr lhs, rhs;} const strings[] = {
+   static
+   struct {cstr lhs, rhs;} const strings[] = {
       /*
       "WidTest", u8"0123456789ABCDEFGHIJKLMNOPQ",
       */
@@ -207,7 +209,8 @@ void Sc_FontTest(i32 fontnum) {
       "SceNum",  u8"",
    };
 
-   static cstr const pangrams[] = {
+   static
+   cstr const pangrams[] = {
       u8"Falsches Üben von Xylophonmusik quält jeden größeren Zwerg",
       u8"The quick brown fox jumps over the lazy dog",
       u8"Jovencillo emponzoñado de whisky: ¡qué figurota exhibe!",

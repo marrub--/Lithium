@@ -12,7 +12,8 @@
 #include "p_hudid.h"
 
 script void P_Ren_Step() {
-   static struct {str nam, snd; i32 nxt;} const stepsnd[] = {
+   static
+   struct {str nam, snd; i32 nxt;} const stepsnd[] = {
       {s"FWATER1", s"player/stepw", 11},
       {s"FWATER2", s"player/stepw", 11},
       {s"FWATER3", s"player/stepw", 11},

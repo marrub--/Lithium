@@ -61,9 +61,14 @@ struct finale_compiler {
    cstr farg;
 };
 
-static cstr finale;
-static union finale_code fcode[16][64];
-static bool finit;
+noinit static
+cstr finale;
+
+noinit static
+union finale_code fcode[16][64];
+
+noinit static
+bool finit;
 
 script static
 void F_parseArgs(struct finale_compiler *c) {
@@ -123,7 +128,7 @@ void F_parseLabel(struct finale_compiler *c, struct token *tok) {
 
 static
 bool F_loadFile(cstr which) {
-   static struct finale_compiler c = {};
+   struct finale_compiler c = {};
 
    Dbg_Log(log_dev, "%s: loading %s", __func__, which);
 

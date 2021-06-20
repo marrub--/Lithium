@@ -15,8 +15,8 @@
 #include "w_world.h"
 #include "p_player.h"
 
-static i32 lmvar cbispawn[cupg_max];
-static i32 lmvar cbispawniter;
+static
+i32 lmvar cbispawn[cupg_max], cbispawniter;
 
 struct cupgdef
 {
@@ -26,7 +26,8 @@ struct cupgdef
    bip_name_t nam;
 };
 
-static struct cupgdef const cdefs[] = {
+static
+struct cupgdef const cdefs[] = {
    {pM, cupg_weapninter, "MWeapnInter", "WeapnInter"},
    {pM, cupg_weapninte2, "MWeapnInte2", "WeapnInte2"},
    {pM, cupg_armorinter, "MArmorInter", "ArmorInter"},

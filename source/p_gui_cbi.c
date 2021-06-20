@@ -41,7 +41,8 @@
 
 /* Static Functions -------------------------------------------------------- */
 
-static void CBITab_Marine(struct gui_state *g)
+static
+void CBITab_Marine(struct gui_state *g)
 {
    i32 ram;
    cstr name;
@@ -73,7 +74,8 @@ static void CBITab_Marine(struct gui_state *g)
    Upgr(rdistinter) Slot("RDistInter", 0, 4);
 }
 
-static void CBITab_CyberMage(struct gui_state *g)
+static
+void CBITab_CyberMage(struct gui_state *g)
 {
    cstr name = LC(LANG "CBI_CPU4");
 

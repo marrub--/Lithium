@@ -17,14 +17,16 @@
 
 /* Static Functions -------------------------------------------------------- */
 
-static void SetInventory(str item, i32 amount)
+static
+void SetInventory(str item, i32 amount)
 {
    i32 s = InvNum(item) - amount;
         if(s < 0) InvTake(item, -s);
    else if(s > 0) InvGive(item,  s);
 }
 
-static void SetActorInventory(i32 tid, str item, i32 amount)
+static
+void SetActorInventory(i32 tid, str item, i32 amount)
 {
    i32 s = ACS_CheckActorInventory(tid, item) - amount;
         if(s < 0) ACS_TakeActorInventory(tid, item, -s);

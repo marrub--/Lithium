@@ -27,7 +27,8 @@ void Sc_Obituary(void) {
    Str(st_ob_slime,      s"(slime)");
    Str(st_ob_suicide,    s"(suicide)");
 
-   static struct {
+   static
+   struct {
       cstr sub, obj, psd, psi, act;
    } const pronoun[pro_max] = {
       {"they", "them", "their", "theirs", "they're"},
@@ -50,7 +51,9 @@ void Sc_Obituary(void) {
    else if(obit == st_ob_slime)    obit = Language(LANG "OB_Slime_%i",    rn);
    else if(obit == st_ob_suicide)  obit = Language(LANG "OB_Suicide_%i",  rn);
 
-   noinit static char out[1024];
+   noinit static
+   char out[1024];
+
    char *pt = out;
 
    for(astr s = obit; *s;) {

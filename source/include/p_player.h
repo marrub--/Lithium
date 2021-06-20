@@ -288,8 +288,6 @@ struct player {
    /* HUD */
    bool hudenabled;
 
-   list hudstrlist;
-
    struct loginfo log;
 
    /* Score */

@@ -25,7 +25,8 @@ Str(sp_HUD_C_VIT,        s":HUD_C:VIT");
 
 /* Static Functions -------------------------------------------------------- */
 
-static void HUD_Ammo()
+static
+void HUD_Ammo()
 {
    struct invweapon const *wep = pl.weapon.cur;
 
@@ -74,7 +75,8 @@ static void HUD_Ammo()
    }
 }
 
-static void HUD_Health()
+static
+void HUD_Health()
 {
    PrintSprite(sp_HUD_C_SplitBack, 0,1, 239,2);
    PrintSprite(sp_HUD_C_VIT,       2,1, 237,2);

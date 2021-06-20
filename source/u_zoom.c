@@ -59,7 +59,8 @@ void Upgr_Zoom_Render(struct upgrade *upgr)
 
       PrintSpriteA(sp_zoom_overlay, 160,0, 120,0, 0.5);
 
-      static char const points[] = "E SES SWW NWN NE";
+      static
+      char const points[] = "E SES SWW NWN NE";
 
       for(i32 i = 0; i < 8; i++)
       {

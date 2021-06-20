@@ -21,7 +21,8 @@ Str(sp_lithcam3, s"LITHCAM3");
 
 /* Static Functions -------------------------------------------------------- */
 
-static void P_Ren_Advice() {
+static
+void P_Ren_Advice() {
    if(CheckFade(fid_advice)) {
       SetSize(640, 480);
 
@@ -31,7 +32,8 @@ static void P_Ren_Advice() {
    }
 }
 
-static void P_Ren_LevelUp() {
+static
+void P_Ren_LevelUp() {
    if(pl.old.attr.level && pl.old.attr.level < pl.attr.level) {
       ACS_LocalAmbientSound(ss_player_levelup, 127);
       pl.logH(1, LanguageC(LANG "LOG_LevelUp%s", pl.discrim), ACS_Random(1000, 9000));

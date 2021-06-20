@@ -36,7 +36,8 @@
 
 #undef crc64_impl_type
 #elif defined(bezier_impl_retn)
-   static bezier_impl_retn r;
+   noinit static
+   bezier_impl_retn r;
    bezier_impl_type xa = bezier_impl_func(x1, x2, t);
    bezier_impl_type ya = bezier_impl_func(y1, y2, t);
    bezier_impl_type xb = bezier_impl_func(x2, x3, t);
@@ -61,10 +62,14 @@
 union ik32 ik32;
 union uk32 uk32;
 
-static u64 lmvar crctable[256]; /* NB: Don't try to hash >8bit data. */
-static bool lmvar crcinit;
+noinit static
+u64 crctable[256]; /* NB: Don't try to hash >8bit data. */
 
-static void InitCRC64(void) {
+noinit static
+bool crcinit;
+
+static
+void InitCRC64(void) {
    u64 const polynomial = 0xC96C5795D7870F42; /* ECMA 182 */
 
    for(u64 i = 0; i < 256; i++) {
@@ -272,9 +277,12 @@ struct i32v2 qbezieri(i32 x1, i32 y1, i32 x2, i32 y2, i32 x3, i32 y3, k64 t) {
 }
 
 struct polar ctopol(k32 x, k32 y) {
-   static struct polar pol;
+   noinit static
+   struct polar pol;
+
    pol.ang = ACS_VectorAngle(x, y);
    pol.dst = mag2i(x, y);
+
    return pol;
 }
 

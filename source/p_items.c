@@ -57,7 +57,6 @@ void Container(struct gui_state *g, struct container *cont, i32 sx, i32 sy) {
    bool didresel = false; /* Basic bitch hack. -Ten */
 
    for_item(cont) {
-      Log("%p %p %p", _head, _rover, _rover->next);
       i32 x = sx + it->x * 8;
       i32 y = sy + it->y * 8;
       i32 ex = it->w * 8 - 1;
@@ -89,10 +88,9 @@ void BagItem_Tick(struct item *_item) {
 }
 
 script static
-void BagItem_Show(struct item *_item, struct gui_state *g) {
+void BagItem_Show(struct item *_item, struct gui_state *g, i32 y) {
    struct bagitem *item = (struct bagitem *)_item;
-   Log("%s", __func__);
-   Container(g, &item->content, 8, 136);
+   Container(g, &item->content, 8, y);
 }
 
 script static
@@ -100,15 +98,14 @@ void BagItem_Place(struct item *_item, struct container *cont) {
    struct bagitem *item = (struct bagitem *)_item;
    if(cont == &item->content) return;
    P_Item_Place(&item->item, cont);
-   for_item(&item->content) it->Place(it, &item->content);
 }
 
 script static
 void BagItem_Destroy(struct item *_item) {
    struct bagitem *item = (struct bagitem *)_item;
-   ListDtor(&item->content.items, {
-     struct item *it = _rover->object;
-     if(it) it->Destroy(it);
+   ListDestroy(&item->content.head, {
+     struct item *it = _obj;
+     it->Destroy(it);
    });
    P_Item_Destroy(&item->item);
 }
@@ -178,7 +175,8 @@ void EquipItem(struct item *sel) {
 /* Extern Functions -------------------------------------------------------- */
 
 void P_Inv_PInit() {
-   static struct container const baseinv[] = {
+   static
+   struct container const baseinv[] = {
       [_inv_backpack]    = {11, 7, "Backpack", _cont_store},
       [_inv_arm_upper_l] = {1,  3, "ArmUpL",   _cont_arms_u},
       [_inv_arm_upper_r] = {1,  3, "ArmUpR",   _cont_arms_u},
@@ -194,7 +192,7 @@ void P_Inv_PInit() {
    fastmemcpy(pl.inv, baseinv, sizeof baseinv);
 
    for(i32 i = 0; i < _inv_num; i++) {
-      ListCtor(&pl.inv[i].items, nil);
+      pl.inv[i].head = nil;
    }
 
    pl.invinit = true;
@@ -202,30 +200,24 @@ void P_Inv_PInit() {
 
 void P_Inv_PQuit() {
    for(i32 i = 0; i < _inv_num; i++) {
-      ListDtor(&pl.inv[i].items, {
-         struct item *it = _rover->object;
-         if(it) it->Destroy(it);
+      ListDestroy(&pl.inv[i].head, {
+         struct item *it = _obj;
+         it->Destroy(it);
       });
    }
 
-   pl.useitem = pl.selitem = nil;
+   pl.useitem = pl.selitem = pl.opnitem = nil;
    pl.movitem = false;
 
    pl.invinit = false;
 }
 
-void P_Item_Init(struct item *item, struct itemdata const *data) {
-   ListCtor(&item->link, item);
-   item->data = *data;
-
-   if(!item->Destroy) item->Destroy = P_Item_Destroy;
-   if(!item->Place)   item->Place   = P_Item_Place;
-}
-
 struct item *P_Item_New(struct itemdata const *data) {
    struct item *item = Salloc(struct item, _tag_item);
 
-   P_Item_Init(item, data);
+   item->data    = *data;
+   item->Destroy = P_Item_Destroy;
+   item->Place   = P_Item_Place;
 
    return item;
 }
@@ -239,6 +231,7 @@ void P_Item_Destroy(struct item *item) {
    if(!P_None()) {
       if(pl.useitem == item) pl.useitem = nil;
       if(pl.selitem == item) pl.selitem = nil;
+      if(pl.opnitem == item) pl.opnitem = nil;
       pl.movitem = false;
    }
 
@@ -254,11 +247,12 @@ bool P_Item_Use(struct item *item) {
 script
 void P_Item_Place(struct item *item, struct container *cont) {
    P_Item_Unlink(item);
-   ListLink(&cont->items, &item->link);
+   ListInsert(&cont->head, &item->link, item);
    item->container = cont;
 }
 
 void P_Item_Unlink(struct item *item) {
+   ListRemove(&item->link);
    if(item->container) {
       item->container = nil;
    }
@@ -268,16 +262,13 @@ struct bagitem *P_BagItem_New(i32 w, i32 h, i32 type,
                               struct itemdata const *data) {
    struct bagitem *item = Salloc(struct bagitem, _tag_item);
 
-   P_Item_Init(&item->item, data);
-
-   ListCtor(&item->link, item);
-
    item->content.w    = w;
    item->content.h    = h;
    item->content.name = "Item";
    item->content.type = type;
-   ListCtor(&item->content.items, nil);
+   item->content.head = nil;
 
+   item->data    = *data;
    item->Tick    = BagItem_Tick;
    item->Show    = BagItem_Show;
    item->Destroy = BagItem_Destroy;
@@ -371,8 +362,26 @@ void P_Inv_PTick() {
    }
 }
 
+#define incY(amt) \
+   statement({ \
+      ny += amt; \
+      nx  = xs[_inv_backpack]; \
+      n   = 0; \
+   })
+#define incPos() \
+   statement({ \
+      if(++n == 3) incY(8); \
+      else         nx += 32; \
+   })
+#define setPos() \
+   statement({ \
+      x = nx; \
+      y = ny; \
+   })
+
 void P_CBI_TabItems(struct gui_state *g) {
-   static i32 const x[] = {
+   static
+   i32 const xs[] = {
       [_inv_backpack]    =        8*1,
       [_inv_arm_upper_l] = 294-48-8*8,
       [_inv_arm_upper_r] = 294-48-8*1,
@@ -385,7 +394,8 @@ void P_CBI_TabItems(struct gui_state *g) {
       [_inv_legs]        = 294-48-8*5,
    };
 
-   static i32 const y[] = {
+   static
+   i32 const ys[] = {
       [_inv_backpack]    = 64+8*-5,
       [_inv_arm_upper_l] = 64+8*-2,
       [_inv_arm_upper_r] = 64+8*-2,
@@ -407,70 +417,71 @@ void P_CBI_TabItems(struct gui_state *g) {
                  g->oy+212,2);
 
    for(i32 i = 0; i < _inv_num; i++) {
-      Container(g, &pl.inv[i], x[i], y[i]);
+      Container(g, &pl.inv[i], xs[i], ys[i]);
    }
 
    struct item *sel = pl.selitem;
 
    if(sel) {
-      #define incrPos() \
-         if(x_ > x[0] + 128) { \
-            x_ = x[0]; \
-            y_ += 8; \
-         } else { \
-            x_ += 32; \
-         }
-      i32 x_ = x[0];
-      i32 y_ = y[0] + 60;
+      i32 n = 0, x, y;
+      i32 nx = xs[_inv_backpack];
+      i32 ny = ys[_inv_backpack] + 60;
 
       if(g->clickrgt && !g->old.clickrgt) {
          pl.movitem = !pl.movitem;
       }
 
+      setPos();
       PrintText_str(Language(LANG "ITEM_TAG_%S", sel->name), sf_smallfnt,
-                    g->defcr, g->ox+x_,1, g->oy+y_,1);
-      y_ += 8;
+                    g->defcr, g->ox+x,1, g->oy+y,1);
+      incY(8);
 
+      setPos();
       PrintText_str(Language(LANG "ITEM_SHORT_%S", sel->name), sf_smallfnt,
-                    g->defcr, g->ox+x_,1, g->oy+y_,1);
-      y_ += 16;
+                    g->defcr, g->ox+x,1, g->oy+y,1);
+      incY(16);
 
-      if(G_Button(g, LC(LANG "MOVE"), x_, y_, .color = "n", Pre(btnclear))) {
+      setPos();
+      if(G_Button(g, LC(LANG "MOVE"), x, y, .color = "n", Pre(btnclear))) {
          pl.movitem = !pl.movitem;
       }
-      incrPos();
+      incPos();
 
       if(get_bit(sel->flags, _if_equippable)) {
-         if(G_Button(g, LC(LANG "EQUIP"), x_, y_, .color = "n",
+         setPos();
+         if(G_Button(g, LC(LANG "EQUIP"), x, y, .color = "n",
                      Pre(btnclear))) {
             EquipItem(sel);
          }
-         incrPos();
+         incPos();
       }
 
       if(get_bit(sel->flags, _if_openable)) {
+         setPos();
          if(G_Button(g, pl.opnitem == sel ? LC(LANG "CLOSE") :
-                     LC(LANG "OPEN"), x_, y_, .color = "n",
+                     LC(LANG "OPEN"), x, y, .color = "n",
                      Pre(btnclear)))
          {
             pl.opnitem = pl.opnitem == sel ? nil : sel;
          }
-         incrPos();
+         incPos();
       }
 
       if(sel->Use) {
-         if(G_Button(g, LC(LANG "USE"), x_, y_, .color = "g", Pre(btnclear))) {
+         setPos();
+         if(G_Button(g, LC(LANG "USE"), x, y, .color = "g", Pre(btnclear))) {
             pl.useitem = sel;
          }
-         incrPos();
+         incPos();
       }
 
+      setPos();
       if(sel->scr) {
          PrintTextFmt("(%s\Cnscr\C-)", scoresep(sel->scr));
-         PrintText(sf_smallfnt, g->defcr, g->ox+x_+18,1, g->oy+y_,1);
+         PrintText(sf_smallfnt, g->defcr, g->ox+x+18,1, g->oy+y,1);
       }
 
-      if(G_Button(g, sel->scr ? LC(LANG "SELL") : LC(LANG "DISCARD"), x_, y_,
+      if(G_Button(g, sel->scr ? LC(LANG "SELL") : LC(LANG "DISCARD"), x, y,
                   .color = "g", .fill = {&CBIState(g)->itemfill, 26},
                   Pre(btnclear))) {
          if(sel->scr) {
@@ -478,11 +489,14 @@ void P_CBI_TabItems(struct gui_state *g) {
          }
          sel->Destroy(sel);
          ACS_LocalAmbientSound(ss_player_cbi_invrem, 127);
-         incrPos();
+         incPos();
       }
 
+      ny = y;
+      incY(16);
+      setPos();
       if(pl.opnitem && pl.opnitem->Show) {
-         pl.opnitem->Show(sel, g);
+         pl.opnitem->Show(pl.opnitem, g, y);
       }
    }
 }

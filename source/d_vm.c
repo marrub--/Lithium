@@ -63,14 +63,18 @@ struct dcd_info const dcdinfo[0xFF] = {
 
 /* Static Objects ---------------------------------------------------------- */
 
-noinit static Cps_Decl(memory, 0xFFFF);
+noinit static
+Cps_Decl(memory, 0xFFFF);
 
 /* VM state */
-noinit static struct gui_state gst;
+noinit static
+struct gui_state gst;
 
-noinit static u32 r1, r2;
+noinit static
+u32 r1, r2;
 
-static cstr const action_names[] = {
+static
+cstr const action_names[] = {
    #define ACT(name) #name,
    #include "d_vm.h"
 };
@@ -171,7 +175,8 @@ static void MemB2_S(u32 p, u32 v) {MemB1_S(p, v); MemB1_S(p + 1, v >> 8);}
 #define AdrZX_V() (MemIZ_G(GetRX()))
 #define AdrZY_V() (MemIZ_G(GetRY()))
 
-static u32 AdrAC_G(u32 a, u32 b) {
+static
+u32 AdrAC_G(u32 a, u32 b) {
    if(b & 2) return GetAC();
    else      return MemB1_G(a);
 }
@@ -185,7 +190,8 @@ static u32 AdrAC_G(u32 a, u32 b) {
 #define AdrZX_G() (MemB1_G(AdrZX_V()))
 #define AdrZY_G() (MemB1_G(AdrZY_V()))
 
-static void AdrAC_S(u32 a, u32 b, u32 r) {
+static
+void AdrAC_S(u32 a, u32 b, u32 r) {
    if(b & 2) SetAC(r);
    else      MemB1_S(a, r);
 }
@@ -208,7 +214,8 @@ static void StaB2_S(u32 v) {MemB2_S(STA_BEG + DecSP(2) - 1, v);}
 
 /* trace */
 #ifndef NDEBUG
-static void TraceReg() {
+static
+void TraceReg() {
    __nprintf("PC:%04X SP:%02X VA:%02X "
              "AC:%02X RX:%02X RY:%02X SR:%02X",
              GetPC(), GetSP(), GetVA(),
@@ -245,7 +252,8 @@ enum {
    _from_lon,
 };
 
-static str GetText(i32 from) {
+static
+str GetText(i32 from) {
    u32  adr = MemB2_G(VAR_TEXTL);
    cstr pfx;
 
@@ -258,19 +266,22 @@ static str GetText(i32 from) {
    return adr ? LanguageNull(LANG "%s_%s", pfx, MemSC_G(adr)) : snil;
 }
 
-static str GetRemote() {
+static
+str GetRemote() {
    u32  adr = MemB2_G(VAR_REMOTEL);
    cstr nam = adr ? MemSC_G(adr) : "UNKNOWN";
    return Language(LANG "REMOTE_%s", nam);
 }
 
-static str GetName() {
+static
+str GetName() {
    u32  adr = MemB2_G(VAR_NAMEL);
    cstr nam = adr ? MemSC_G(adr) : "UNKNOWN";
    return Language(LANG "PNAME_%s", nam);
 }
 
-static void ConsoleLogText(i32 from) {
+static
+void ConsoleLogText(i32 from) {
    __with(str text = GetText(from);) if(text) ConsoleLog("%s", text);
 }
 
@@ -384,7 +395,8 @@ void TerminalGUI(u32 tact) {
    }
 }
 
-static void DialogueGUI() {
+static
+void DialogueGUI() {
    enum {left = 37, top = 75, texttop = top + 24};
 
    str snam = GetName();
@@ -476,13 +488,15 @@ void ActDLG_WAIT() {
    GuiAct();
 }
 
-static void ActLD_ITEM() {
+static
+void ActLD_ITEM() {
    SetVA(ACT_NONE);
 
    ModSR_ZN(SetAC(InvNum(MemSA_G(MemB2_G(VAR_ADRL)))));
 }
 
-static void ActLD_OPT() {
+static
+void ActLD_OPT() {
    SetVA(ACT_NONE);
 
    u32 cnt = MemB1_G(VAR_OPT_CNT);
@@ -492,7 +506,8 @@ static void ActLD_OPT() {
    MemB2_S(StructOfs(OPT, PTRL, cnt), MemB2_G(VAR_RADRL));
 }
 
-static void ActSCRIPT_I() {
+static
+void ActSCRIPT_I() {
    SetVA(ACT_NONE);
 
    u32 s0 = MemB1_G(VAR_SCP0), s1 = MemB1_G(VAR_SCP1);
@@ -502,7 +517,8 @@ static void ActSCRIPT_I() {
    ModSR_ZN(SetAC(ACS_ExecuteWithResult(s0, s1, s2, s3, s4)));
 }
 
-static void ActSCRIPT_S() {
+static
+void ActSCRIPT_S() {
    SetVA(ACT_NONE);
 
    str s0 = MemSA_G(MemB2_G(VAR_ADRL));
@@ -617,7 +633,8 @@ void Dlg_Run(u32 num) {
    /* copy some constants into memory */
    MemB1_S(VAR_PCLASS, pl.pclass);
 
-   static __label *const cases[0xFF] = {
+   static
+   __label *const cases[0xFF] = {
       #define DCD(n, op, ty) [n] = &&op##_##ty,
       #include "d_vm.h"
    };

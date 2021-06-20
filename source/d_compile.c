@@ -16,8 +16,8 @@
 /* Static Functions -------------------------------------------------------- */
 
 #ifndef NDEBUG
-script
-static void Disassemble(struct dlg_def const *def) {
+script static
+void Disassemble(struct dlg_def const *def) {
    ACS_BeginLog();
    __nprintf("Disassembling(%p,%u,%u)...\n", def->codeV, def->codeC,
              def->codeP);
@@ -32,16 +32,16 @@ static void Disassemble(struct dlg_def const *def) {
    ACS_EndLog();
 }
 
-script
-static void DumpCode(struct dlg_def *def) {
+script static
+void DumpCode(struct dlg_def *def) {
    ACS_BeginLog();
    PrintChrSt("Dumping code...\n");
    Dbg_PrintMemC(def->codeV, def->codeC);
    ACS_EndLog();
 }
 
-script
-static void DumpStringTable(struct dlg_def *def) {
+script static
+void DumpStringTable(struct dlg_def *def) {
    ACS_BeginLog();
    __nprintf("Dumping string table(%p,%u,%u)...\n", def->stabV, def->stabC,
              def->stabP);
@@ -49,7 +49,8 @@ static void DumpStringTable(struct dlg_def *def) {
    ACS_EndLog();
 }
 
-static void PrintDbg() {
+static
+void PrintDbg() {
    for(u32 i = 0; i < countof(dlgdefs); i++) {
       struct dlg_def *def = &dlgdefs[i];
 
@@ -69,13 +70,15 @@ static void PrintDbg() {
 }
 #endif
 
-static void FinishDef(struct compiler *d)
+static
+void FinishDef(struct compiler *d)
 {
    if(d->def.codeV) dlgdefs[d->num] = d->def;
    fastmemset(&d->def, 0, sizeof d->def);
 }
 
-static void Dlg_GetItem_Page(struct compiler *d, u32 num, u32 act)
+static
+void Dlg_GetItem_Page(struct compiler *d, u32 num, u32 act)
 {
    d->def.pages[num] = d->def.codeP;
 
@@ -87,7 +90,8 @@ static void Dlg_GetItem_Page(struct compiler *d, u32 num, u32 act)
    Dlg_PushB1(d, DCD_BRK_NP); unwrap(&d->res);
 }
 
-static bool Dlg_GetItem(struct compiler *d, u32 act)
+static
+bool Dlg_GetItem(struct compiler *d, u32 act)
 {
    struct token *tok = d->tb.get();
 
@@ -124,7 +128,8 @@ static bool Dlg_GetItem(struct compiler *d, u32 act)
    return false;
 }
 
-static void Dlg_GetTop_Prog(struct compiler *d, u32 act, u32 beg, u32 end)
+static
+void Dlg_GetTop_Prog(struct compiler *d, u32 act, u32 beg, u32 end)
 {
    struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_number);
    unwrap(&d->res);
@@ -232,12 +237,12 @@ void Dlg_MInit(void)
       fastmemset(def, 0, sizeof *def);
    }
 
+   struct compiler d = {};
+
    FILE *fp =
       W_Open(StrParam("lfiles/Dialogue_%tS.txt", PRINTNAME_LEVEL), 't');
 
    if(fp) {
-      static struct compiler d = {};
-
       TBufCtor(&d.tb, fp);
 
       for(;;) {

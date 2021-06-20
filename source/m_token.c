@@ -185,7 +185,8 @@ done:
 }
 
 cstr TokPrint(struct token *tok) {
-   static char pbuf[256];
+   noinit static
+   char pbuf[256];
    snprintf(pbuf, sizeof pbuf, "[%i:%i](%s/%i '%.*s':%i:%p)",
             tok->orig.line, tok->orig.colu, TokType(tok->type), tok->type,
             tok->textC, tok->textV, tok->textC, tok->textV);

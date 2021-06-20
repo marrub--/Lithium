@@ -20,7 +20,8 @@
 
 #define note_len(s) i32 len = s ? faststrlen(s) : 0; len = min(len, 255)
 
-script static void Save_note(struct savefile *save) {
+script static
+void Save_note(struct savefile *save) {
    u32 chunklen = 0;
 
    for(i32 i = 0; i < countof(pl.notes); i++) {
@@ -37,7 +38,8 @@ script static void Save_note(struct savefile *save) {
    }
 }
 
-script static void Load_note(struct savefile *save, struct savechunk *chunk) {
+script static
+void Load_note(struct savefile *save, struct savechunk *chunk) {
    for(i32 i = 0; i < countof(pl.notes); i++) {
       u32 len = fgetc(save->fp);
       if(!len) continue;
@@ -50,7 +52,8 @@ script static void Load_note(struct savefile *save, struct savechunk *chunk) {
 
 /* Chunk "agrp" ------------------------------------------------------------ */
 
-script static void Save_agrp(struct savefile *save) {
+script static
+void Save_agrp(struct savefile *save) {
    u32 groupnum = 0;
 
    for(i32 i = 0; i < UPGR_MAX; i++) {
@@ -73,7 +76,8 @@ script static void Save_agrp(struct savefile *save) {
    }
 }
 
-script static void Load_agrp(struct savefile *save, struct savechunk *chunk) {
+script static
+void Load_agrp(struct savefile *save, struct savechunk *chunk) {
    pl.autobuy   = fgetc(save->fp);
    u32 groupnum = fgetc(save->fp);
 
@@ -93,13 +97,15 @@ script static void Load_agrp(struct savefile *save, struct savechunk *chunk) {
 
 /* Chunk "intr" ------------------------------------------------------------ */
 
-script static void Save_intr(struct savefile *save) {
+script static
+void Save_intr(struct savefile *save) {
    Save_WriteChunk(save, Ident_intr, SaveV_intr, 2);
    fputc(pl.done_intro      & 0xFF, save->fp);
    fputc(pl.done_intro >> 8 & 0xFF, save->fp);
 }
 
-script static void Load_intr(struct savefile *save, struct savechunk *chunk) {
+script static
+void Load_intr(struct savefile *save, struct savechunk *chunk) {
    i32 n0 = fgetc(save->fp);
    i32 n1 = fgetc(save->fp);
    pl.done_intro = n0 | n1 << 8;

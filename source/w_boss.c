@@ -37,31 +37,43 @@ enum
 
 /* Static Objects ---------------------------------------------------------- */
 
-static struct boss bosses_easy[] = {
+static
+struct boss bosses_easy[] = {
    {"James", 2},
 };
 
-static struct boss bosses_medi[] = {
+static
+struct boss bosses_medi[] = {
    {"Makarov", 3},
 };
 
-static struct boss bosses_hard[] = {
+static
+struct boss bosses_hard[] = {
    {"Isaac", 3},
 };
 
-static struct boss *lmvar boss;
-static i32          lmvar bosstid;
+static
+struct boss *lmvar boss;
 
-static bool alldead[diff_max];
+static
+i32 lmvar bosstid;
 
-static i32 rewardnum;
-static i32 difficulty;
-static struct boss *lastboss;
-static i96 scorethreshold = 1000000;
+static
+bool alldead[diff_max];
+
+static
+i32 rewardnum, difficulty;
+
+static
+struct boss *lastboss;
+
+static
+i96 scorethreshold = 1000000;
 
 /* Static Functions -------------------------------------------------------- */
 
-static void SpawnBossReward(void)
+static
+void SpawnBossReward(void)
 {
    k32 x = GetX(0);
    k32 y = GetY(0);
@@ -77,9 +89,11 @@ static void SpawnBossReward(void)
    }
 }
 
-static void TriggerBoss(void)
+static
+void TriggerBoss(void)
 {
-   static bool firstboss = true;
+   static
+   bool firstboss = true;
 
    if(!boss) return;
 
@@ -112,7 +126,8 @@ static void TriggerBoss(void)
    }
 }
 
-static bool CheckDead(struct boss *b, i32 num)
+static
+bool CheckDead(struct boss *b, i32 num)
 {
    for(i32 i = 0; i < num; i++)
       if(!b[i].dead) return false;

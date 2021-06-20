@@ -27,7 +27,8 @@ struct shopitem
 
 /* Static Objects ---------------------------------------------------------- */
 
-static struct shopitem shopitems[] = {
+static
+struct shopitem shopitems[] = {
 /* {{"Name-----------", "BIP------------", Cost---}, Class, Cnt-, "Class---------------", [Flags]}, */
    {{s"RocketAmmo", snil, 9000},  gA, 5,    sOBJ "RocketAmmo"},
    {{s"PlasmaAmmo", snil, 75750}, gA, 1000, sOBJ "PlasmaAmmo"},
@@ -46,7 +47,8 @@ static struct shopitem shopitems[] = {
 
 /* Static Functions -------------------------------------------------------- */
 
-static bool Shop_CanBuy(struct shopdef const *, void *item_)
+static
+bool Shop_CanBuy(struct shopdef const *, void *item_)
 {
    struct shopitem *item = item_;
    i32 cur = InvNum(item->classname);
@@ -54,14 +56,16 @@ static bool Shop_CanBuy(struct shopdef const *, void *item_)
    return max == 0 || cur < max;
 }
 
-static void Shop_Buy(struct shopdef const *, void *item_)
+static
+void Shop_Buy(struct shopdef const *, void *item_)
 {
    struct shopitem *item = item_;
    pl.itemsbought++;
    InvGive(item->classname, item->count);
 }
 
-static bool Shop_Give(struct shopdef const *, void *item_, i32 tid)
+static
+bool Shop_Give(struct shopdef const *, void *item_, i32 tid)
 {
    struct shopitem *item = item_;
    pl.itemsbought++;

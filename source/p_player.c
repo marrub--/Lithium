@@ -30,17 +30,27 @@ noinit struct player player;
 
 /* Static Functions -------------------------------------------------------- */
 
-script static void P_bossWarning();
-script static void P_bossText(i32 boss);
-script static void P_doIntro();
+script static
+void P_bossWarning();
+
+script static
+void P_bossText(i32 boss);
+
+script static
+void P_doIntro();
 
 /* Scripts ----------------------------------------------------------------- */
 
 _Noreturn dynam_aut script type("enter") static
 void Sc_PlayerEntry(void) {
-   static void P_Scr_PTickPre();
-   static void P_Atr_pTick   ();
-   static void P_Aug_PTick   ();
+   static
+   void P_Scr_PTickPre();
+
+   static
+   void P_Atr_pTick();
+
+   static
+   void P_Aug_PTick();
 
    if(ACS_GameType() == GAME_TITLE_MAP) return;
 
@@ -168,18 +178,18 @@ void Sc_PlayerDeath(void) {
    }
 }
 
-script type("respawn")
-static void Sc_PlayerRespawn(void) {
+script type("respawn") static
+void Sc_PlayerRespawn(void) {
    pl.reinit = true;
 }
 
-script type("return")
-static void Sc_PlayerReturn(void) {
+script type("return") static
+void Sc_PlayerReturn(void) {
    pl.reinit = true;
 }
 
-script type("disconnect")
-static void Sc_PlayerDisconnect(void) {
+script type("disconnect") static
+void Sc_PlayerDisconnect(void) {
    P_BIP_PQuit();
 
    fastmemset(&pl, 0, sizeof pl);
@@ -526,7 +536,8 @@ void P_doIntro() {
    pl.modal = _gui_none;
 }
 
-static void P_attrRGE() {
+static
+void P_attrRGE() {
    i32 rge = pl.attr.attrs[at_spc];
 
    if(pl.health < pl.oldhealth)
@@ -535,7 +546,8 @@ static void P_attrRGE() {
    pl.rage = lerpk(pl.rage, 0, 0.02);
 }
 
-static void P_attrCON() {
+static
+void P_attrCON() {
    i32 rge = pl.attr.attrs[at_spc];
 
    if(pl.mana > pl.oldmana)
@@ -544,7 +556,8 @@ static void P_attrCON() {
    pl.rage = lerpk(pl.rage, 0, 0.03);
 }
 
-static void P_Atr_pTick() {
+static
+void P_Atr_pTick() {
    if(Paused) return;
 
    k32  acc = pl.attr.attrs[at_acc] / 150.0;
@@ -567,7 +580,8 @@ static void P_Atr_pTick() {
       pl.health = pl.health + 1;
 }
 
-static void P_Scr_PTickPre() {
+static
+void P_Scr_PTickPre() {
    if(!pl.scoreaccumtime || pl.score < pl.old.score) {
       pl.scoreaccum = 0;
       pl.scoreaccumtime = 0;
@@ -577,7 +591,8 @@ static void P_Scr_PTickPre() {
    else if(pl.scoreaccumtime < 0) pl.scoreaccumtime++;
 }
 
-static void P_Aug_PTick() {
+static
+void P_Aug_PTick() {
    for(i32 i = 0; i < 4; i++) {
       i32 total = 0;
 

@@ -24,7 +24,8 @@ Str(sp_HUD_I_MAG,          s":HUD_I:MAG");
 
 /* Static Functions -------------------------------------------------------- */
 
-static void HUDI_Ammo(struct upgrade *upgr) {
+static
+void HUDI_Ammo(struct upgrade *upgr) {
    struct invweapon const *wep = pl.weapon.cur;
 
    str typegfx = snil;
@@ -68,7 +69,8 @@ static void HUDI_Ammo(struct upgrade *upgr) {
    HUD_WeaponSlots(Cr(wseli1), Cr(wseli2), Cr(wseli3), Cr(wselis), 323, 208);
 }
 
-static void HUDI_HealthArmor(struct upgrade *upgr)
+static
+void HUDI_HealthArmor(struct upgrade *upgr)
 {
    PrintSprite(sp_HUD_I_HPAPBack, 0,1, 230,2);
 

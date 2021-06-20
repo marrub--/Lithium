@@ -15,10 +15,16 @@
 
 /* Static Functions -------------------------------------------------------- */
 
-static void Blinker(cstr bgn) {
-   static i32 const time = 20;
-   static k32 a;
-   static i32 t;
+static
+void Blinker(cstr bgn) {
+   static
+   i32 const time = 20;
+
+   noinit static
+   k32 a;
+
+   noinit static
+   i32 t;
 
    if(t < time) {
       PrintTextChS(bgn);

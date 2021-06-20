@@ -21,8 +21,8 @@ enum {
    _bend = 28,
 };
 
-noinit
-static char errbuf[1024];
+noinit static
+char errbuf[1024];
 
 i32 TBufProc(struct token *tok) {
    switch(tok->type) {

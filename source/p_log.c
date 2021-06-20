@@ -20,7 +20,8 @@
 
 /* Static Functions -------------------------------------------------------- */
 
-static void LogV(i32 levl) {
+static
+void LogV(i32 levl) {
    ACS_BeginPrint();
 
    if(levl) {
@@ -29,12 +30,14 @@ static void LogV(i32 levl) {
    }
 }
 
-static void LogPop() {
+static
+void LogPop() {
    pl.log.hudC--;
    fastmemmove(&pl.log.hudV[0], &pl.log.hudV[1], sizeof pl.log.hudV[0] * pl.log.hudC);
 }
 
-static void LogH(struct logdat *ld) {
+static
+void LogH(struct logdat *ld) {
    ld->ftim = 5;
    ld->time = 140 - pl.log.curtime;
    pl.log.curtime = 140;
@@ -43,7 +46,8 @@ static void LogH(struct logdat *ld) {
    pl.log.hudV[pl.log.hudC++] = *ld;
 }
 
-static void LogF(struct logfdt *lf) {
+static
+void LogF(struct logfdt *lf) {
    Vec_GrowN(pl.log.curmap->data, 1, 8, _tag_logs);
    Vec_Next(pl.log.curmap->data) = *lf;
 }
@@ -134,7 +138,8 @@ script void P_Log_PTick() {
 }
 
 void P_CBI_TabLog(struct gui_state *g) {
-   static i32 const ht = 10;
+   static
+   i32 const ht = 10;
 
    if(G_Button(g, .x = 12, 25, Pre(btnprev)))
       if(--CBIState(g)->logsel < 0) CBIState(g)->logsel = pl.log.mapsC - 1;

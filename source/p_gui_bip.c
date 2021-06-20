@@ -19,12 +19,14 @@
 
 /* Static Functions -------------------------------------------------------- */
 
-static void EncryptedBody(struct page *page, char *bodytext) {
+static
+void EncryptedBody(struct page *page, char *bodytext) {
    char *s = LanguageCV(bodytext, LANG "INFO_DESCR_%s", page->info->name);
    for(; *s; s++) *s = !IsPrint(*s) ? *s : *s ^ 7;
 }
 
-static void MailBody(struct page *page, char *bodytext) {
+static
+void MailBody(struct page *page, char *bodytext) {
    char remote[128];
    faststrcpy(remote, LanguageC(LANG "INFO_REMOT_%s", page->info->name));
 
@@ -35,7 +37,8 @@ static void MailBody(struct page *page, char *bodytext) {
                LanguageC(LANG "INFO_DESCR_%s", page->info->name));
 }
 
-static cstr GetShortName(struct page *page) {
+static
+cstr GetShortName(struct page *page) {
    if(page->info->category == BIPC_MAIL) {
       return CanonTime(ct_short, page->flags & _page_time);
    } else {
@@ -43,12 +46,15 @@ static cstr GetShortName(struct page *page) {
    }
 }
 
-static cstr GetFullName(struct page *page) {
+static
+cstr GetFullName(struct page *page) {
    return LanguageC(LANG "INFO_TITLE_%s", page->info->name);
 }
 
-static cstr GetBody(struct page *page) {
-   noinit static char bodytext[8192];
+static
+cstr GetBody(struct page *page) {
+   noinit static
+   char bodytext[8192];
    switch(page->info->category) {
    case BIPC_EXTRA:
       EncryptedBody(page, bodytext);
@@ -63,7 +69,8 @@ static cstr GetBody(struct page *page) {
    return bodytext;
 }
 
-static void SetCurPage(struct gui_state *g, struct page *page) {
+static
+void SetCurPage(struct gui_state *g, struct page *page) {
    str body = fast_strdup(GetBody(page));
 
    pl.bip.curpage = page;
@@ -72,7 +79,8 @@ static void SetCurPage(struct gui_state *g, struct page *page) {
    G_ScrollReset(g, &CBIState(g)->bipinfoscr);
 }
 
-static void DrawPage(struct gui_state *g, struct page *page) {
+static
+void DrawPage(struct gui_state *g, struct page *page) {
    str image  = LanguageNull(LANG "INFO_IMAGE_%s", page->info->name);
    i32 height = faststrtoi32_str(Language(LANG "INFO_SSIZE_%s", page->info->name));
 
@@ -136,7 +144,8 @@ static void DrawPage(struct gui_state *g, struct page *page) {
    }
 }
 
-static void MainUI(struct gui_state *g) {
+static
+void MainUI(struct gui_state *g) {
    Str(sl_bip_categs, sLANG "BIP_CATEGS");
 
    i32 n = 0;
@@ -161,7 +170,8 @@ static void MainUI(struct gui_state *g) {
    #undef Categ
 }
 
-static void CategoryUI(struct gui_state *g) {
+static
+void CategoryUI(struct gui_state *g) {
    u32 categ = pl.bip.curcategory;
    u32 n = pl.bip.categorymax[categ];
 
@@ -215,7 +225,8 @@ i32 SearchPage(struct page *page, cstr query) {
    return 2;
 }
 
-static void SearchUI(struct gui_state *g) {
+static
+void SearchUI(struct gui_state *g) {
    struct gui_txt *st = G_TxtBox(g, &CBIState(g)->bipsearch, 10, 52);
 
    pl.bip.lastcategory = BIPC_MAIN;

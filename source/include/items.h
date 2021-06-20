@@ -22,7 +22,7 @@ enum ZscName(Container) {
 };
 
 #if !ZscOn
-#define for_item(cont) for_list(struct item *it, &(cont)->items) if(it)
+#define for_item(cont) for_list(struct item *it, (cont)->head)
 
 enum {
    _inv_backpack,
@@ -56,7 +56,7 @@ struct itemdata {
     */
    script bool (*Use)(struct item *);
    script void (*Tick)(struct item *);
-   script void (*Show)(struct item *, struct gui_state *);
+   script void (*Show)(struct item *, struct gui_state *, i32);
    script void (*Destroy)(struct item *);
    script void (*Place)(struct item *, struct container *);
 };
@@ -72,10 +72,10 @@ struct item {
 };
 
 struct container {
-   u32         w, h;
-   cstr        name;
-   i32         type;
-   struct list items;
+   u32          w, h;
+   cstr         name;
+   i32          type;
+   struct list *head;
 };
 
 struct bagitem {
@@ -83,7 +83,6 @@ struct bagitem {
    struct container content;
 };
 
-optargs(1) void P_Item_Init(struct item *item, struct itemdata const *data);
 optargs(1) struct item *P_Item_New(struct itemdata const *data);
 void P_Item_Unlink(struct item *item);
 

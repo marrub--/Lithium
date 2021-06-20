@@ -19,7 +19,8 @@
 
 /* Static Functions -------------------------------------------------------- */
 
-static void SetupAttributes()
+static
+void SetupAttributes()
 {
    fastmemcpy(pl.attr.names[at_acc], "ACC", 3);
    fastmemcpy(pl.attr.names[at_def], "DEF", 3);
@@ -51,7 +52,8 @@ static void SetupAttributes()
    pl.attr.level = 1;
 }
 
-static void SetPClass()
+static
+void SetPClass()
 {
    pl.pcstr = ACS_GetActorClass(0);
 

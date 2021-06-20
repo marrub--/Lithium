@@ -17,12 +17,14 @@
 
 /* Static Objects ---------------------------------------------------------- */
 
-static i32 lmvar frozen;
+static
+i32 lmvar frozen;
 
 /* Extern Functions -------------------------------------------------------- */
 
 cstr CanonTime(i32 type, u64 time) {
-   noinit static char ft[64], st[64], dt[64], lf[256];
+   noinit static
+   char ft[64], st[64], dt[64], lf[256];
 
    i32 t = time;
    i32 s = 53 + t / 35;

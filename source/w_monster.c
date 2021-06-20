@@ -31,24 +31,31 @@ enum {
    #include "w_monster.h"
 };
 
+typedef char mon_name_t[64];
+
 struct monster_preset {
-   char prename[64];
-   u64  exp;
-   i96  score;
+   mon_name_t prename;
+   u64        exp;
+   i96        score;
 };
 
 struct monster_info {
    anonymous struct monster_preset pre;
    enum mtype type;
-   char       name[64];
+   mon_name_t name;
    i32        flags;
 };
 
 /* Static Objects ---------------------------------------------------------- */
 
-noinit static struct monster_preset monsterpreset[1024];
-noinit static struct monster_info   monsterinfo[1024];
-noinit static mem_size_t monsterpresetnum, monsterinfonum;
+noinit static
+struct monster_preset monsterpreset[1024];
+
+noinit static
+struct monster_info monsterinfo[1024];
+
+noinit static
+mem_size_t monsterpresetnum, monsterinfonum;
 
 StrAry(dmgtype_names,
        s"Bullets",
@@ -355,10 +362,12 @@ void PrintMonsterInfo(dmon_t *m) {
 #endif
 
 bool MonInfo_Kv(struct tokbuf *tb, struct tbuf_err *res, char **kp, char **vp) {
-   noinit
-   static char k[64], v[64];
+   noinit static
+   mon_name_t k, v;
+
    struct token *tok = tb->expc2(res, tb->get(), tok_semico, tok_identi);
    unwrap(res);
+
    if(tok->type == tok_semico) {
       return false;
    } else {
@@ -410,7 +419,8 @@ void MonInfo_FinishDef(struct monster_info *mi) {
 }
 
 void MonInfo_ColorfulHellHack(struct monster_info *mi) {
-   static cstr const colors[] = {
+   static
+   cstr const colors[] = {
       "Common", "Green", "Blue", "Cyan", "Purple", "Yellow", "FireBlu",
       "Red", "Gray", "Abyss", "Black", "White", "Special"
    };
@@ -617,7 +627,8 @@ void Sc_MonsterInfo(void) {
       ACS_Delay(1);
    }
 
-   static char cname[64];
+   noinit static
+   mon_name_t cname;
    faststrcpy_str(cname, ACS_GetActorClass(0));
 
    if(faststrstr(cname, "RLAdaptive") || faststrstr(cname, "RLCyberdemonMkII"))

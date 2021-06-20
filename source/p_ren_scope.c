@@ -11,10 +11,14 @@
 #include "p_player.h"
 #include "p_hudid.h"
 
-static str        hudstrs[20];
-static mem_size_t hudstrnum;
+noinit static
+str hudstrs[20];
 
-static void StringStack() {
+noinit static
+mem_size_t hudstrnum;
+
+static
+void StringStack() {
    if(ACS_Timer() % 3 == 0) {
       str s = StrParam("%.8X", ACS_Random(INT32_MIN + 1, INT32_MAX));
       if(hudstrnum == 20) {
@@ -32,7 +36,8 @@ static void StringStack() {
    }
 }
 
-static void Waves() {
+static
+void Waves() {
    StrAry(fs, s":HUD:H_D11", s":HUD:H_D12", s":HUD:H_D13", s":HUD:H_D14",
               s":HUD:H_D15");
 
@@ -70,7 +75,8 @@ static void Waves() {
    }
 }
 
-static void ScopeC() {
+static
+void ScopeC() {
    i32 which = ACS_Timer() % 16 / 4;
 
    if(pl.scopetoken) {
@@ -98,7 +104,8 @@ static void ScopeC() {
    }
 }
 
-static void ScopeI() {
+static
+void ScopeI() {
    Str(sp_HUD_I_ScopeOverlay, s":HUD_I:ScopeOverlay");
 
    k32 a = (1 + ACS_Sin(ACS_Timer() / 70.0)) * 0.25 + 0.5;
@@ -106,7 +113,8 @@ static void ScopeI() {
    PrintSpriteAP(sp_HUD_I_ScopeOverlay, 160,0, 100,0, a);
 }
 
-static void ScopeM() {
+static
+void ScopeM() {
    Waves();
    StringStack();
 }

@@ -15,10 +15,12 @@
 #include "p_player.h"
 #include "w_world.h"
 
-static bool lmvar rain_chk;
-static k32  lmvar rain_px;
-static k32  lmvar rain_py;
-static i32  lmvar rain_dist;
+static
+bool lmvar rain_chk;
+static
+k32  lmvar rain_px, rain_py;
+static
+i32  lmvar rain_dist;
 
 dynam_aut script
 void W_DoRain(void)

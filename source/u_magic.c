@@ -26,7 +26,8 @@ struct magic_info {
 
 /* Static Objects ---------------------------------------------------------- */
 
-static struct magic_info const minf[] = {
+static
+struct magic_info const minf[] = {
    {-1,                130, 180, "Blade"   },
    {-1,                 60, 140, "Delear"  },
    {cupg_c_slot3spell,  60,  60, "Feuer"   },
@@ -38,14 +39,14 @@ static struct magic_info const minf[] = {
 
 /* Static Functions -------------------------------------------------------- */
 
-script
-static void GiveMagic(struct magic_info const *m)
+script static
+void GiveMagic(struct magic_info const *m)
 {
    ACS_SetWeapon(StrParam(OBJ "%s", m->name));
 }
 
-script
-static void UpdateMagicUI(struct upgrade *upgr)
+script static
+void UpdateMagicUI(struct upgrade *upgr)
 {
    struct gui_state *g = &UData.gst;
 
@@ -88,8 +89,8 @@ static void UpdateMagicUI(struct upgrade *upgr)
    G_End(g, gui_curs_outline);
 }
 
-alloc_aut(0) script
-static void GivePlayerZ(i32 tid)
+alloc_aut(0) script static
+void GivePlayerZ(i32 tid)
 {
    while(ACS_ThingCount(T_NONE, tid)) {
       SetMembI(tid, sm_UserZ, pl.z);
@@ -97,7 +98,8 @@ static void GivePlayerZ(i32 tid)
    }
 }
 
-static void SetMagicUI(bool on)
+static
+void SetMagicUI(bool on)
 {
    if(pl.dead) return;
 

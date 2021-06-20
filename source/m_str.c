@@ -271,7 +271,8 @@ char *faststrtok(char *s, char **next, char c) {
 
 alloc_aut(0) stkcall
 cstr scoresep(i96 num) {
-   noinit static char out[48];
+   noinit static
+   char out[48];
 
    if(!num) {
       out[0] = '0';
@@ -300,7 +301,8 @@ cstr scoresep(i96 num) {
 
 alloc_aut(0) stkcall
 cstr alientext(i32 num) {
-   noinit static char out[80];
+   noinit static
+   char out[80];
 
    if(!num) {
       fastmemcpy(out, u8"", sizeof u8"");
@@ -348,7 +350,8 @@ str LanguageV(str name) {
 }
 
 char *LanguageVC(char *out, cstr name) {
-   noinit static char sbuf[8192];
+   noinit static
+   char sbuf[8192];
 
    if(!out) out = sbuf;
    CpyStrLocal(out, fast_strdup(name));
@@ -359,7 +362,8 @@ char *LanguageVC(char *out, cstr name) {
 }
 
 char *LanguageCV(char *out, cstr fmt, ...) {
-   noinit static char nbuf[256];
+   noinit static
+   char nbuf[256];
    va_list vl;
 
    va_start(vl, fmt);
@@ -384,7 +388,8 @@ str LanguageNull(cstr fmt, ...) {
    return name == alias ? snil : alias;
 }
 
-noinit static char tcbuf[4096];
+noinit static
+char tcbuf[4096];
 
 alloc_aut(0) stkcall
 cstr RemoveTextColors_str(astr s, i32 size) {

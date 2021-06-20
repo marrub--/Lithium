@@ -18,8 +18,8 @@
 
 /* Static Functions -------------------------------------------------------- */
 
-script
-static i32 CheckTarget()
+script static
+i32 CheckTarget()
 {
    if(ACS_SetActivator(0, AAPTR_PLAYER_GETTARGET))
       return UniqueID(0);

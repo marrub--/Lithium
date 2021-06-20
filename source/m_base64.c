@@ -42,7 +42,8 @@
 
 #include <stdlib.h>
 
-static byte const base64_table[65] =
+static
+byte const base64_table[65] =
    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 /**
@@ -113,9 +114,10 @@ byte *base64_encode(const byte *src, mem_size_t len, mem_size_t *out_len)
  */
 byte *base64_decode(const byte *src, mem_size_t len, mem_size_t *out_len)
 {
-   noinit
-   static byte dtable[256];
-   static bool dtable_init;
+   noinit static
+   byte dtable[256];
+   noinit static
+   bool dtable_init;
 
    byte *out, *pos, block[4], tmp;
    mem_size_t i, count, olen;

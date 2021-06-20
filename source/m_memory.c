@@ -44,7 +44,7 @@ struct dpl_blk {
 noinit static
 char mem_dat[_mem_siz];
 
-static
+noinit static
 struct mem_top *mem_top;
 
 noinit static
@@ -288,8 +288,10 @@ void PrintDplBlks(struct dpl_blk *cur) {
 
 alloc_aut(0) stkcall
 void __GDCC__alloc_dump(void) {
+   static
+   mem_size_t tagsizes[_tag_max];
+
    struct mem_blk *blk = mem_top->cur;
-   static mem_size_t tagsizes[_tag_max];
 
    for(mem_tag_t i = 0; i < _tag_max; i++) {
       tagsizes[i] = 0;

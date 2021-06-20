@@ -24,7 +24,8 @@ struct witem
 
 /* Static Objects ---------------------------------------------------------- */
 
-static struct witem const garmor[] = {
+static
+struct witem const garmor[] = {
    {1000, OBJ "Armor_Standard_Upper"},
    {2000, OBJ "Armor_Standard_Lower"},
    {2500, OBJ "Armor_Teflon_Upper"},
@@ -33,7 +34,8 @@ static struct witem const garmor[] = {
    {3400, OBJ "Armor_Aerodynamic_Lower"},
 };
 
-static struct witem const barmor[] = {
+static
+struct witem const barmor[] = {
    { 3000, OBJ "Armor_Improved_Upper"},
    { 6000, OBJ "Armor_Improved_Lower"},
    { 7000, OBJ "Armor_Teflon_Upper"},
@@ -67,30 +69,35 @@ static struct witem const barmor[] = {
    {base+5000, OBJ "Emerald2"}, \
    BonusItemsBig(5000)
 
-static struct witem const hbonus[] = {
+static
+struct witem const hbonus[] = {
    {2000, OBJ "HealthBonus1"},
    {4000, OBJ "HealthBonus2"},
    BonusItems(6000),
 };
 
-static struct witem const abonus[] = {
+static
+struct witem const abonus[] = {
    BonusItems(1000),
 };
 
-static struct witem const clip[] = {
+static
+struct witem const clip[] = {
    {2000, OBJ "Radio1"},
    {4000, OBJ "Radio2"},
    BonusItems(6000),
 };
 
-static struct witem const clipbx[] = {
+static
+struct witem const clipbx[] = {
    {4000, OBJ "BoxOfAmmo1"},
    BonusItemsBig(4000),
 };
 
 /* Static Functions -------------------------------------------------------- */
 
-static cstr RandomWeighted(struct witem const *l, i32 c)
+static
+cstr RandomWeighted(struct witem const *l, i32 c)
 {
    i32 sel = ACS_Random(1, l[c - 1].weight);
 

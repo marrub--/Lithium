@@ -45,7 +45,8 @@ void MailNotify(cstr name) {
    }
 }
 
-script static void UnlockPage(struct page *page) {
+script static
+void UnlockPage(struct page *page) {
    if(!get_bit(page->flags, _page_available)) {
       Dbg_Log(log_bip, "ERROR page '%s' not available", page->info->name);
       return;
@@ -74,7 +75,8 @@ script static void UnlockPage(struct page *page) {
    }
 }
 
-static i32 NameToNum(cstr discrim, cstr name) {
+static
+i32 NameToNum(cstr discrim, cstr name) {
    for(i32 i = 0; i < BIP_MAX; i++) {
       bip_name_t tag;
       faststrcpy2(tag, name, discrim);

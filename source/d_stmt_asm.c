@@ -15,7 +15,8 @@
 
 /* Static Functions -------------------------------------------------------- */
 
-static i32 CodeABS(struct compiler *d, cstr reg)
+static
+i32 CodeABS(struct compiler *d, cstr reg)
 {
    struct token *tok = d->tb.get();
 
@@ -40,7 +41,8 @@ static i32 CodeABS(struct compiler *d, cstr reg)
    return false;
 }
 
-static i32 CodeZPG(struct compiler *d, cstr reg)
+static
+i32 CodeZPG(struct compiler *d, cstr reg)
 {
    struct token *tok = d->tb.get();
 
@@ -65,7 +67,8 @@ static i32 CodeZPG(struct compiler *d, cstr reg)
    return -1;
 }
 
-static bool CodeAI(struct compiler *d, u32 code)
+static
+bool CodeAI(struct compiler *d, u32 code)
 {
    ifw(i32 n = CodeABS(d, nil), n > 0) {
       Dlg_PushB1(d, code); unwrap(&d->res);
@@ -76,7 +79,8 @@ static bool CodeAI(struct compiler *d, u32 code)
    return false;
 }
 
-static bool CodeAX(struct compiler *d, u32 code)
+static
+bool CodeAX(struct compiler *d, u32 code)
 {
    ifw(i32 n = CodeABS(d, "X"), n > 0) {
       Dlg_PushB1(d, code); unwrap(&d->res);
@@ -87,7 +91,8 @@ static bool CodeAX(struct compiler *d, u32 code)
    return false;
 }
 
-static bool CodeAY(struct compiler *d, u32 code)
+static
+bool CodeAY(struct compiler *d, u32 code)
 {
    ifw(i32 n = CodeABS(d, "Y"), n > 0) {
       Dlg_PushB1(d, code); unwrap(&d->res);
@@ -98,7 +103,8 @@ static bool CodeAY(struct compiler *d, u32 code)
    return false;
 }
 
-static bool CodeII(struct compiler *d, u32 code)
+static
+bool CodeII(struct compiler *d, u32 code)
 {
    if(d->tb.drop(tok_pareno)) {
       struct token *tok = d->tb.get();
@@ -119,7 +125,8 @@ static bool CodeII(struct compiler *d, u32 code)
    return false;
 }
 
-static bool CodeIX(struct compiler *d, u32 code)
+static
+bool CodeIX(struct compiler *d, u32 code)
 {
    if(d->tb.drop(tok_pareno)) {
       struct token *tok = d->tb.get();
@@ -146,7 +153,8 @@ static bool CodeIX(struct compiler *d, u32 code)
    return false;
 }
 
-static bool CodeIY(struct compiler *d, u32 code)
+static
+bool CodeIY(struct compiler *d, u32 code)
 {
    if(d->tb.drop(tok_pareno)) {
       struct token *tok = d->tb.get();
@@ -173,14 +181,16 @@ static bool CodeIY(struct compiler *d, u32 code)
    return false;
 }
 
-static bool CodeNP(struct compiler *d, u32 code) {
+static
+bool CodeNP(struct compiler *d, u32 code) {
    Dlg_PushB1(d, code); unwrap(&d->res);
    return true;
 }
 
 #define CodeRI CodeZI
 
-static bool CodeVI(struct compiler *d, u32 code)
+static
+bool CodeVI(struct compiler *d, u32 code)
 {
    if(d->tb.drop(tok_hash)) {
       struct token *tok = d->tb.get();
@@ -201,7 +211,8 @@ static bool CodeVI(struct compiler *d, u32 code)
    return false;
 }
 
-static bool CodeZI(struct compiler *d, u32 code)
+static
+bool CodeZI(struct compiler *d, u32 code)
 {
    ifw(i32 n = CodeZPG(d, nil), n > 0) {
       Dlg_PushB1(d, code); unwrap(&d->res);
@@ -212,7 +223,8 @@ static bool CodeZI(struct compiler *d, u32 code)
    return false;
 }
 
-static bool CodeZX(struct compiler *d, u32 code)
+static
+bool CodeZX(struct compiler *d, u32 code)
 {
    ifw(i32 n = CodeZPG(d, "X"), n > 0) {
       Dlg_PushB1(d, code); unwrap(&d->res);
@@ -223,7 +235,8 @@ static bool CodeZX(struct compiler *d, u32 code)
    return false;
 }
 
-static bool CodeZY(struct compiler *d, u32 code)
+static
+bool CodeZY(struct compiler *d, u32 code)
 {
    ifw(i32 n = CodeZPG(d, "Y"), n > 0) {
       Dlg_PushB1(d, code); unwrap(&d->res);

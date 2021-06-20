@@ -23,7 +23,7 @@
 noinit static
 dmon_t dmonalloc[0x7FFF];
 
-static
+noinit static
 i32 lmvar dmonid;
 
 /* Extern Functions -------------------------------------------------------- */

@@ -19,7 +19,8 @@ Str(sp_HUD_A_LeftBack,  s":HUD_A:LeftBack");
 
 /* Static Functions -------------------------------------------------------- */
 
-static void HUD_Ammo() {
+static
+void HUD_Ammo() {
    struct invweapon const *wep = pl.weapon.cur;
 
    if(wep->ammotype & AT_AMag)

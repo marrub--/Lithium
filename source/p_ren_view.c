@@ -14,7 +14,8 @@
 #include <math.h>
 
 /* Update view bobbing when you get damaged. */
-script static void P_Ren_DamageBob()
+script static
+void P_Ren_DamageBob()
 {
    if(!InvNum(so_PowerStrength) && pl.health < pl.oldhealth) {
       k64 angle = (k64)ACS_RandomFixed(tau, -tau);

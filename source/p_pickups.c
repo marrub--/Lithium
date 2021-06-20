@@ -14,7 +14,8 @@
 #include "common.h"
 #include "p_player.h"
 
-static str get_name(i32 w) {
+static
+str get_name(i32 w) {
    char name[20];
    faststrcpy(name, P_Wep_GetPickup(w));
    ifauto(str, alias, LanguageNull(LANG "PK_%s_ALI", name))
@@ -24,8 +25,8 @@ static str get_name(i32 w) {
    return Language(LANG "PK_%s_%.3i", name, ACS_Random(0, num));
 }
 
-static void silly_pickup(i32 weapon)
-{
+static
+void silly_pickup(i32 weapon) {
    i32 fmtnum = faststrtoi32(LC(LANG "PK_GET_NUM"));
    i32 uncnum = faststrtoi32(LC(LANG "PK_UNCERTAIN_NUM"));
 
@@ -49,8 +50,7 @@ static void silly_pickup(i32 weapon)
    else                          pl.logB(1, fmt, nam);
 }
 
-void P_Log_Weapon(struct weaponinfo const *info)
-{
+void P_Log_Weapon(struct weaponinfo const *info) {
    if(CVarGetI(sc_player_stupidpickups))
       silly_pickup(info->type);
    else if(info->name)
@@ -59,8 +59,7 @@ void P_Log_Weapon(struct weaponinfo const *info)
       pl.logB(1, "Acquired impossible object");
 }
 
-void P_Log_SellWeapon(struct weaponinfo const *info, i96 score)
-{
+void P_Log_SellWeapon(struct weaponinfo const *info, i96 score) {
    i32 weapon = info->type;
    bool ord = faststrtoi32(LC(LANG "LOG_SellOrder")) == 0;
 

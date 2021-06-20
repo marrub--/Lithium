@@ -14,14 +14,16 @@
 #include "u_common.h"
 #include "w_world.h"
 
-static cstr const upgrcateg[] = {
+static
+cstr const upgrcateg[] = {
    [UC_Body] = LANG "CAT_BODY",
    [UC_Weap] = LANG "CAT_WEAP",
    [UC_Extr] = LANG "CAT_EXTR",
    [UC_Down] = LANG "CAT_DOWN",
 };
 
-static void GUIUpgradesList(struct gui_state *g) {
+static
+void GUIUpgradesList(struct gui_state *g) {
    if(G_Button(g, .x = 77, 200, Pre(btnprev)))
       if(CBIState(g)->upgrfilter-- <= 0)
          CBIState(g)->upgrfilter = UC_MAX;
@@ -107,7 +109,8 @@ static void GUIUpgradesList(struct gui_state *g) {
    G_ScrEnd(g, &CBIState(g)->upgrscr);
 }
 
-static void GUIUpgradeRequirements(struct gui_state *g, struct upgrade *upgr) {
+static
+void GUIUpgradeRequirements(struct gui_state *g, struct upgrade *upgr) {
    i32 y = 0;
 
    #define Req(name) { \
@@ -166,7 +169,8 @@ static void GUIUpgradeRequirements(struct gui_state *g, struct upgrade *upgr) {
    }
 }
 
-static void GUIUpgradeDescription(struct gui_state *g, struct upgrade *upgr) {
+static
+void GUIUpgradeDescription(struct gui_state *g, struct upgrade *upgr) {
    Str(sl_free, sLANG "FREE");
 
    G_Clip(g, g->ox+98, g->oy+17, 190, 170, 184);
@@ -194,7 +198,8 @@ static void GUIUpgradeDescription(struct gui_state *g, struct upgrade *upgr) {
    ifauto(str, effect, LanguageNull(LANG "UPGRADE_EFFEC_%S", upgr->info->name))
       PrintTextFmt("%s %S", LC(LANG "EFFECT"), effect);
 
-   static i32 const crs[] = {
+   static
+   i32 const crs[] = {
       CR_RED, CR_ORANGE, CR_YELLOW, CR_GREEN, CR_BLUE, CR_PURPLE, CR_DARKRED
    };
 
@@ -208,7 +213,8 @@ static void GUIUpgradeDescription(struct gui_state *g, struct upgrade *upgr) {
    G_ClipRelease(g);
 }
 
-static void GUIUpgradeButtons(struct gui_state *g, struct upgrade *upgr) {
+static
+void GUIUpgradeButtons(struct gui_state *g, struct upgrade *upgr) {
    Str(sl_autogroups, sLANG "AUTOGROUPS");
 
    /* Buy */
@@ -223,7 +229,8 @@ static void GUIUpgradeButtons(struct gui_state *g, struct upgrade *upgr) {
    PrintText_str(L(sl_autogroups), sf_smallfnt, g->defcr, g->ox+242,0, g->oy+192,0);
 
    for(i32 i = 0; i < 4; i++) {
-      static i32 const crs[] = {CR_BRICK, CR_GREEN, CR_LIGHTBLUE, CR_GOLD};
+      static
+      i32 const crs[] = {CR_BRICK, CR_GREEN, CR_LIGHTBLUE, CR_GOLD};
 
       ACS_BeginPrint();
       ACS_PrintChar('1' + i);

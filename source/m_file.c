@@ -40,7 +40,8 @@ struct netfile {
 /* fclose for netfiles.
  * Output to the CVar with a Base64 representation of the output buffer.
  */
-static i32 NetClose(void *nfdata) {
+static
+i32 NetClose(void *nfdata) {
    struct netfile *nf = nfdata;
 
    #ifndef NDEBUG
@@ -88,7 +89,8 @@ static i32 NetClose(void *nfdata) {
    return 0;
 }
 
-static ssize_t MemRead(void *memdata, char *buf, size_t size) {
+static
+ssize_t MemRead(void *memdata, char *buf, size_t size) {
    struct memfile *mem   = memdata;
    mem_size_t      avail = mem->len - mem->pos;
 
@@ -100,7 +102,8 @@ static ssize_t MemRead(void *memdata, char *buf, size_t size) {
    return size;
 }
 
-static ssize_t MemWrite(void *memdata, cstr buf, size_t size) {
+static
+ssize_t MemWrite(void *memdata, cstr buf, size_t size) {
    struct memfile *mem   = memdata;
    mem_size_t      avail = mem->len - mem->pos;
 
@@ -120,7 +123,8 @@ static ssize_t MemWrite(void *memdata, cstr buf, size_t size) {
    return size;
 }
 
-static i32 MemSeek(void *memdata, off_t *offset, i32 whence) {
+static
+i32 MemSeek(void *memdata, off_t *offset, i32 whence) {
    struct memfile *mem = memdata;
    mem_size_t      pos;
 
@@ -138,7 +142,8 @@ static i32 MemSeek(void *memdata, off_t *offset, i32 whence) {
    return 0;
 }
 
-static i32 MemClose(void *memdata) {
+static
+i32 MemClose(void *memdata) {
    struct memfile *mem = memdata;
    Dalloc(mem->mem);
    Dalloc(mem);

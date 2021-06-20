@@ -16,15 +16,18 @@
 
 /* Static Functions -------------------------------------------------------- */
 
-static bool UpgrCanBuy(struct shopdef const *, void *upgr) {
+static
+bool UpgrCanBuy(struct shopdef const *, void *upgr) {
    return !get_bit(((struct upgrade *)upgr)->flags, _ug_owned);
 }
 
-static void UpgrShopBuy(struct shopdef const *, void *upgr) {
+static
+void UpgrShopBuy(struct shopdef const *, void *upgr) {
    P_Upg_SetOwned(upgr);
 }
 
-static bool UpgrGive(struct shopdef const *, void *upgr_, i32 tid) {
+static
+bool UpgrGive(struct shopdef const *, void *upgr_, i32 tid) {
    struct upgrade const *upgr = upgr_;
 
    SetMembI(tid, sm_UpgradeId, upgr->info->key);

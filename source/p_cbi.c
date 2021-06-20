@@ -19,7 +19,8 @@
 
 /* Static Functions -------------------------------------------------------- */
 
-static void P_CBI_TabArsenal(struct gui_state *g) {
+static
+void P_CBI_TabArsenal(struct gui_state *g) {
    char tn[2][20];
    LanguageVC(tn[0], LANG "TAB_UPGRADES");
    LanguageVC(tn[1], LANG "TAB_SHOP");
@@ -31,7 +32,8 @@ static void P_CBI_TabArsenal(struct gui_state *g) {
    }
 }
 
-static void P_CBI_TabStat(struct gui_state *g) {
+static
+void P_CBI_TabStat(struct gui_state *g) {
    char tn[3][20];
    LanguageVC(tn[0], LANG "TAB_ATTRIBUTES");
    LanguageVC(tn[1], LANG "TAB_CBI");
@@ -45,7 +47,8 @@ static void P_CBI_TabStat(struct gui_state *g) {
    }
 }
 
-static void P_CBI_TabInfo(struct gui_state *g) {
+static
+void P_CBI_TabInfo(struct gui_state *g) {
    char tn[3][20];
    LanguageVC(tn[0], LANG "TAB_BIP");
    LanguageVC(tn[1], LANG "TAB_LOG");
@@ -67,7 +70,8 @@ script void P_CBI_PTick() {
    pl.cbi.theme = CVarGetI(sc_gui_theme);
 
    if(pl.cbi.theme != pl.cbi.oldtheme) {
-      static cstr const names[] = {
+      static
+      cstr const names[] = {
          #define cbi_theme_x(x) ":UI_" #x ":",
          #include "p_cbi.h"
       };

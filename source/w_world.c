@@ -80,7 +80,8 @@ void Boss_HInit(void) {
    SpawnBosses(pl.scoresum, false);
 }
 
-static void CheckModCompat(void) {
+static
+void CheckModCompat(void) {
    Str(so_legendary_marker,       s"LDLegendaryMonsterMarker");
    Str(sc_drla_is_using_monsters, s"DRLA_is_using_monsters");
 
@@ -91,7 +92,8 @@ static void CheckModCompat(void) {
    drlamonsters = CVarGetI(sc_drla_is_using_monsters);
 }
 
-static bool updateTo(k32 to) {
+static
+bool updateTo(k32 to) {
    k32 cur = CVarGetK(sc_version);
    if(cur < to) {
       CVarSetK(sc_version, to);
@@ -101,7 +103,8 @@ static bool updateTo(k32 to) {
    }
 }
 
-static void UpdateGame(void) {
+static
+void UpdateGame(void) {
    if(updateTo(Ver1_5_1)) {
       CVarSetK(sc_sv_scoremul, 1.25); /* 2.0 => 1.25 */
    }
@@ -133,14 +136,16 @@ static void UpdateGame(void) {
    }
 }
 
-static void MInitPre(void) {
+static
+void MInitPre(void) {
    Dbg_Log(log_dev, "%s", __func__);
 
    CheckModCompat();
    UpdateGame();
 }
 
-static void GInit(void) {
+static
+void GInit(void) {
    Dbg_Log(log_dev, "%s", __func__);
 
    singleplayer = ACS_GameType() == GAME_SINGLE_PLAYER;
@@ -155,7 +160,8 @@ static void GInit(void) {
    gblinit = true;
 }
 
-static void MInitPst(void) {
+static
+void MInitPst(void) {
    Dbg_Log(log_dev, "%s", __func__);
 
    payout.par = ACS_GetLevelInfo(LEVELINFO_PAR_TIME) * 35;
@@ -182,7 +188,8 @@ static void MInitPst(void) {
    modinit = true;
 }
 
-static void MInit(void) {
+static
+void MInit(void) {
    Dbg_Log(log_dev, "%s", __func__);
 
    Dlg_MInit();
@@ -206,7 +213,8 @@ static void MInit(void) {
    Shop_MInit();
 }
 
-static void HInitPre(void) {
+static
+void HInitPre(void) {
    Dbg_Log(log_dev, "%s", __func__);
 
    if(unloaded)
@@ -229,7 +237,8 @@ static void HInitPre(void) {
    }
 }
 
-static void HInit(void) {
+static
+void HInit(void) {
    Dbg_Log(log_dev, "%s", __func__);
 
    if(!CVarGetI(sc_sv_nobosses))

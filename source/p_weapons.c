@@ -18,7 +18,8 @@
 
 /* Static Functions -------------------------------------------------------- */
 
-static void GiveWeaponItem(i32 parm, i32 slot)
+static
+void GiveWeaponItem(i32 parm, i32 slot)
 {
    switch(parm) {
    case weapon_c_fist:
@@ -34,7 +35,8 @@ static void GiveWeaponItem(i32 parm, i32 slot)
    }
 }
 
-static void WeaponGrab(struct weaponinfo const *info)
+static
+void WeaponGrab(struct weaponinfo const *info)
 {
    if(!get_bit(pl.upgrades[UPGR_7777777].flags, _ug_active))
       ACS_LocalAmbientSound(info->pickupsound,  127);
@@ -51,7 +53,8 @@ static void WeaponGrab(struct weaponinfo const *info)
    }
 }
 
-static void PickupScore(i32 parm)
+static
+void PickupScore(i32 parm)
 {
    struct weaponinfo const *info = &weaponinfo[parm];
 
@@ -251,8 +254,8 @@ bool Sc_WeaponPickup(i32 name)
 script_str ext("ACS") addr(OBJ "CircleSpread")
 k32 Sc_CircleSpread(k32 mdx, k32 mdy, bool getpitch)
 {
-   noinit static k32 A;
-   noinit static k32 P;
+   noinit static
+   k32 y, p;
 
    if(!getpitch)
    {
@@ -260,13 +263,13 @@ k32 Sc_CircleSpread(k32 mdx, k32 mdy, bool getpitch)
       k32 dy = ACS_RandomFixed(mdy,  0.0);
       k32 a  = ACS_RandomFixed(1.0, -1.0);
 
-      A = ACS_Sin(a) * dx;
-      P = ACS_Cos(a) * dy;
+      y = ACS_Sin(a) * dx;
+      p = ACS_Cos(a) * dy;
 
-      return A;
+      return y;
    }
    else
-      return P;
+      return p;
 }
 
 script_str ext("ACS") addr(OBJ "ChargeFistDamage")

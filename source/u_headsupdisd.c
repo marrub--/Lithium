@@ -21,7 +21,8 @@ Str(sp_HUD_D_WepBack,   s":HUD_D:WepBack");
 
 /* Static Functions -------------------------------------------------------- */
 
-static void HUD_Ammo() {
+static
+void HUD_Ammo() {
    struct invweapon const *wep = pl.weapon.cur;
 
    cstr type = nil;
@@ -62,7 +63,8 @@ static void HUD_Ammo() {
    }
 }
 
-static void HUD_Health() {
+static
+void HUD_Health() {
    StrAry(ws, s":HUD:H_D27", s":HUD:H_D28", s":HUD:H_D24", s":HUD:H_D23",
               s":HUD:H_D22", s":HUD:H_D21", s":HUD:H_D25", s":HUD:H_D26");
 
