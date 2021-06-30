@@ -17,13 +17,13 @@
 
 void Dlg_GetStmt_Cond(struct compiler *d)
 {
-   struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_identi);
+   struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, 0);
    unwrap(&d->res);
 
    bool bne = true;
 
-   if(faststrcmp(tok->textV, "item") == 0) {
-      tok = d->tb.expc(&d->res, d->tb.get(), tok_string);
+   if(faststrchk(tok->textV, "item")) {
+      tok = d->tb.expc(&d->res, d->tb.get(), tok_string, 0);
       unwrap(&d->res);
 
       bne = false;
@@ -31,8 +31,8 @@ void Dlg_GetStmt_Cond(struct compiler *d)
       u32 s = Dlg_PushStr(d, tok->textV, tok->textC); unwrap(&d->res);
       Dlg_PushLdAdr(d, VAR_ADRL, s); unwrap(&d->res);
       Dlg_PushLdVA(d, ACT_LD_ITEM); unwrap(&d->res);
-   } else if(faststrcmp(tok->textV, "class") == 0) {
-      tok = d->tb.expc(&d->res, d->tb.get(), tok_identi);
+   } else if(faststrchk(tok->textV, "class")) {
+      tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, 0);
       unwrap(&d->res);
 
       Dlg_PushB1(d, DCD_LDA_AI); unwrap(&d->res);
@@ -40,7 +40,7 @@ void Dlg_GetStmt_Cond(struct compiler *d)
 
       Dlg_PushB1(d, DCD_CMP_VI); unwrap(&d->res);
       #define pclass_x(shr, lng, eq) \
-         if(faststrcmp(tok->textV, #shr) == 0) { \
+         if(faststrchk(tok->textV, #shr)) { \
             Dlg_PushB1(d, lng); \
             unwrap(&d->res); \
             goto ok; \
@@ -105,7 +105,7 @@ void Dlg_GetStmt_Option(struct compiler *d)
 {
    struct ptr2 adr;
 
-   struct token *tok = d->tb.expc2(&d->res, d->tb.get(), tok_identi, tok_string);
+   struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, tok_string, 0);
    unwrap(&d->res);
 
    u32 s = Dlg_PushStr(d, tok->textV, tok->textC);
@@ -131,7 +131,7 @@ void Dlg_GetStmt_Option(struct compiler *d)
 
 void Dlg_GetStmt_Page(struct compiler *d)
 {
-   struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_number);
+   struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_number, 0);
    unwrap(&d->res);
    Dlg_PushB1(d, DCD_JPG_VI); unwrap(&d->res);
    Dlg_PushB1(d, faststrtoi32(tok->textV)); unwrap(&d->res);
@@ -140,7 +140,7 @@ void Dlg_GetStmt_Page(struct compiler *d)
 void Dlg_GetStmt_Str(struct compiler *d, u32 adr)
 {
    struct token *tok =
-      d->tb.expc3(&d->res, d->tb.get(), tok_identi, tok_string, tok_number);
+      d->tb.expc(&d->res, d->tb.get(), tok_identi, tok_string, tok_number, 0);
    unwrap(&d->res);
    u32 s = Dlg_PushStr(d, tok->textV, tok->textC);
    unwrap(&d->res);
@@ -151,7 +151,7 @@ void Dlg_GetStmt_Terminal(struct compiler *d, u32 act)
 {
    if(act != TACT_INFO) {
       struct token *tok =
-         d->tb.expc3(&d->res, d->tb.get(), tok_identi, tok_string, tok_number);
+         d->tb.expc(&d->res, d->tb.get(), tok_identi, tok_string, tok_number, 0);
       u32 s = Dlg_PushStr(d, tok->textV, tok->textC);
       unwrap(&d->res);
       Dlg_PushLdAdr(d, VAR_PICTL, s); unwrap(&d->res);
@@ -170,7 +170,7 @@ void Dlg_GetStmt_Terminal(struct compiler *d, u32 act)
 
 void Dlg_GetStmt_Num(struct compiler *d, u32 act)
 {
-   struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_number);
+   struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_number, 0);
    unwrap(&d->res);
 
    Dlg_PushLdAdr(d, VAR_ADRL, faststrtoi32(tok->textV) & 0xFFFF); unwrap(&d->res);
@@ -179,7 +179,7 @@ void Dlg_GetStmt_Num(struct compiler *d, u32 act)
 
 void Dlg_GetStmt_Script(struct compiler *d)
 {
-   struct token *tok = d->tb.expc2(&d->res, d->tb.get(), tok_string, tok_number);
+   struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_string, tok_number, 0);
    unwrap(&d->res);
 
    u32 act;
@@ -202,7 +202,7 @@ void Dlg_GetStmt_Script(struct compiler *d)
    }
 
    for(u32 i = 0; i < 4 && d->tb.drop(tok_comma); i++) {
-      tok = d->tb.expc(&d->res, d->tb.get(), tok_number);
+      tok = d->tb.expc(&d->res, d->tb.get(), tok_number, 0);
       unwrap(&d->res);
 
       u32 prm = faststrtoi32(tok->textV);
@@ -236,33 +236,33 @@ script void Dlg_GetStmt(struct compiler *d)
       case tok_identi:
          Dbg_Log(log_dlg, "%s: %s", __func__, tok->textV);
 
-         if(faststrcmp(tok->textV, "if") == 0)
+         if(faststrchk(tok->textV, "if"))
             Dlg_GetStmt_Cond(d);
-         else if(faststrcmp(tok->textV, "option") == 0)
+         else if(faststrchk(tok->textV, "option"))
             Dlg_GetStmt_Option(d);
-         else if(faststrcmp(tok->textV, "page") == 0)
+         else if(faststrchk(tok->textV, "page"))
             Dlg_GetStmt_Page(d);
-         else if(faststrcmp(tok->textV, "name") == 0)
+         else if(faststrchk(tok->textV, "name"))
             Dlg_GetStmt_Str(d, VAR_NAMEL);
-         else if(faststrcmp(tok->textV, "icon") == 0)
+         else if(faststrchk(tok->textV, "icon"))
             Dlg_GetStmt_Str(d, VAR_ICONL);
-         else if(faststrcmp(tok->textV, "remote") == 0)
+         else if(faststrchk(tok->textV, "remote"))
             Dlg_GetStmt_Str(d, VAR_REMOTEL);
-         else if(faststrcmp(tok->textV, "text") == 0)
+         else if(faststrchk(tok->textV, "text"))
             Dlg_GetStmt_Str(d, VAR_TEXTL);
-         else if(faststrcmp(tok->textV, "teleport_interlevel") == 0)
+         else if(faststrchk(tok->textV, "teleport_interlevel"))
             Dlg_GetStmt_Num(d, ACT_TELEPORT_INTERLEVEL);
-         else if(faststrcmp(tok->textV, "teleport_intralevel") == 0)
+         else if(faststrchk(tok->textV, "teleport_intralevel"))
             Dlg_GetStmt_Num(d, ACT_TELEPORT_INTRALEVEL);
-         else if(faststrcmp(tok->textV, "script") == 0)
+         else if(faststrchk(tok->textV, "script"))
             Dlg_GetStmt_Script(d);
-         else if(faststrcmp(tok->textV, "logon") == 0)
+         else if(faststrchk(tok->textV, "logon"))
             Dlg_GetStmt_Terminal(d, TACT_LOGON);
-         else if(faststrcmp(tok->textV, "logoff") == 0)
+         else if(faststrchk(tok->textV, "logoff"))
             Dlg_GetStmt_Terminal(d, TACT_LOGOFF);
-         else if(faststrcmp(tok->textV, "pict") == 0)
+         else if(faststrchk(tok->textV, "pict"))
             Dlg_GetStmt_Terminal(d, TACT_PICT);
-         else if(faststrcmp(tok->textV, "info") == 0)
+         else if(faststrchk(tok->textV, "info"))
             Dlg_GetStmt_Terminal(d, TACT_INFO);
          else
             Dlg_GetStmt_Asm(d);
@@ -270,7 +270,7 @@ script void Dlg_GetStmt(struct compiler *d)
 
          break;
       case tok_lt:
-         while((tok = d->tb.expc2(&d->res, d->tb.get(), tok_number, tok_gt))->type != tok_gt) {
+         while((tok = d->tb.expc(&d->res, d->tb.get(), tok_number, tok_gt, 0))->type != tok_gt) {
             unwrap(&d->res);
             Dlg_PushB1(d, faststrtoi32(tok->textV)); unwrap(&d->res);
          }

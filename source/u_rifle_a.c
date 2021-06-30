@@ -6,7 +6,7 @@
  *
  * ---------------------------------------------------------------------------|
  *
- * RifleModes upgrade.
+ * Rifle_A upgrade.
  *
  * ---------------------------------------------------------------------------|
  */
@@ -15,12 +15,12 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-void Upgr_RifleModes_Deactivate(struct upgrade *upgr)
+void Upgr_Rifle_A_Deactivate(struct upgrade *upgr)
 {
    pl.riflefiremode = 0;
 }
 
-void Upgr_RifleModes_Render(struct upgrade *upgr)
+void Upgr_Rifle_A_Render(struct upgrade *upgr)
 {
    Str(sp_rifle_scope, s":HUD:RifleScope");
    Str(sp_lithcam1,    s"LITHCAM1");

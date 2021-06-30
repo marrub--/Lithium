@@ -425,7 +425,9 @@ void P_doIntro() {
    FreezeTime(false);
    ACS_FadeTo(0, 0, 0, 1.0, 0.0);
 
-   char *text = Malloc(8192, _tag_plyr);
+   static noinit
+   char text[8192];
+   text[0] = '\0';
 
    char *lines[_nlines];
    u32   linec[_nlines];
@@ -525,8 +527,6 @@ void P_doIntro() {
 
       ACS_Delay(1);
    }
-
-   Dalloc(text);
 
    ACS_SetMusic(sp_star);
 

@@ -76,17 +76,17 @@ void F_parseArgs(struct finale_compiler *c) {
    for(i32 i = 0; i < c->fnarg; i++) {
       switch(c->farg[i]) {
       case 'i':
-         tok = c->tb.expc(&c->res, c->tb.get(), tok_number);
+         tok = c->tb.expc(&c->res, c->tb.get(), tok_number, 0);
          unwrap(&c->res);
          NextCode(c).i = faststrtoi32(tok->textV);
          break;
       case 'u':
-         tok = c->tb.expc(&c->res, c->tb.get(), tok_number);
+         tok = c->tb.expc(&c->res, c->tb.get(), tok_number, 0);
          unwrap(&c->res);
          NextCode(c).u = faststrtou32(tok->textV);
          break;
       case 's':
-         tok = c->tb.expc(&c->res, c->tb.get(), tok_string);
+         tok = c->tb.expc(&c->res, c->tb.get(), tok_string, 0);
          unwrap(&c->res);
          NextCode(c).s = fast_strdup(tok->textV);
          break;
@@ -116,7 +116,7 @@ void F_parseFunc(struct finale_compiler *c, struct token *tok) {
 
    F_parseArgs(c); unwrap(&c->res);
 
-   c->tb.expc(&c->res, c->tb.get(), tok_semico);
+   c->tb.expc(&c->res, c->tb.get(), tok_semico, 0);
    unwrap(&c->res);
 }
 
@@ -132,12 +132,13 @@ bool F_loadFile(cstr which) {
 
    Dbg_Log(log_dev, "%s: loading %s", __func__, which);
 
-   TBufCtor(&c.tb, W_Open(StrParam("lfiles/End_%s.txt", which), 't'));
+   TBufCtor(&c.tb, W_Open(StrParam("lfiles/End_%s.txt", which), 't'),
+            "End file");
 
    for(;;) {
       struct token *tok =
-         c.tb.expc3(&c.res, c.tb.get(), tok_eof, tok_identi, tok_number);
-      unwrap_do(&c.res, { goto done; });
+         c.tb.expc(&c.res, c.tb.get(), tok_eof, tok_identi, tok_number, 0);
+      unwrap_do(&c.res, goto done;);
 
       if(tok->type == tok_eof) {
          break;
@@ -146,7 +147,7 @@ bool F_loadFile(cstr which) {
       } else if(tok->type == tok_number) {
          F_parseLabel(&c, tok);
       }
-      unwrap_do(&c.res, { goto done; });
+      unwrap_do(&c.res, goto done;);
    }
 
 done:

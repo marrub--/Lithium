@@ -14,9 +14,6 @@
 #include <GDCC.h>
 #include <stdio.h>
 
-#define Stringify(s) #s
-#define XStringify(s) Stringify(s)
-
 #define L(name) LanguageV(name)
 #define LC(name) LanguageVC(nil, name)
 
@@ -144,6 +141,8 @@ stkcall u32 faststrhash(cstr s);
 stkcall i32 faststrcmp_str(cstr s1, astr s2);
 stkcall i32 faststrcmp(cstr s1, cstr s2);
 stkcall i32 faststrcasecmp(cstr s1, cstr s2);
+stkcall bool faststrchk(cstr s1, cstr s2);
+stkcall bool faststrcasechk(cstr s1, cstr s2);
 stkcall char *faststrchr(cstr s, char c);
 stkcall char *faststrtok(char *s, char **next, char c);
 stkcall cstr scoresep(i96 num);

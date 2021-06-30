@@ -25,18 +25,6 @@ enum {
 };
 
 enum {
-   UG_None,
-   UG_Pistol,
-   UG_Shotgun,
-   UG_SSG,
-   UG_Rifle,
-   UG_Launcher,
-   UG_Plasma,
-   UG_BFG,
-   UG_HUD,
-};
-
-enum {
    UR_AI,
    UR_WMD,
    UR_WRD,
@@ -51,7 +39,7 @@ enum {
    _ug_wasactive, /* for reinitializing on map load */
 };
 
-struct upgr_data_7777777 {
+struct upgr_data_Seven7s {
    k32  fvel, fyaw;
    bool in_air;
 };
@@ -108,7 +96,7 @@ struct upgr_data_Flashlight {
    k64 intensity, target, speed;
 };
 
-struct upgr_data_HomingRPG {
+struct upgr_data_RPG_B {
    i32 id;
 };
 
@@ -140,12 +128,12 @@ struct upgr_data_HeadsUpDisI {
 };
 
 struct upgr_data {
-   struct upgr_data_7777777     seven7;
+   struct upgr_data_Seven7s     seven7s;
    struct upgr_data_Adrenaline  adrenaline;
    struct upgr_data_Flashlight  flashlight;
    struct upgr_data_HeadsUpDisI headsupdisi;
    struct upgr_data_HeadsUpDisM headsupdism;
-   struct upgr_data_HomingRPG   homingrpg;
+   struct upgr_data_RPG_B       rpg_b;
    struct upgr_data_JetBooster  jetbooster;
    struct upgr_data_Magic       magic;
    struct upgr_data_ReactArmor  reactarmor;

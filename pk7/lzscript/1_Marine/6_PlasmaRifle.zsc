@@ -121,8 +121,8 @@ Select:
    loop;
 
 Fire:
-   PLSG A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_PlasLaser), "FireLaser");
-   PLSG A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_PartBeam),  "FireParticleBeam");
+   PLSG A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_Plasma_A), "FireLaser");
+   PLSG A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_Plasma_B), "FireParticleBeam");
 FireReal:
    PLSG A 0 lith_jumpNoAmmo;
    PLSJ A 1 offset(0, 37) bright Lith_A_FirePlasma;
@@ -196,8 +196,8 @@ FireEmpty:
    goto ReadySelector;
 
 AltFire:
-   PLSG A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_PlasLaser), "FireReal");
-   PLSG A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_PartBeam), "FireReal");
+   PLSG A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_Plasma_A), "FireReal");
+   PLSG A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_Plasma_B), "FireReal");
    #### # 0 lith_jumpNoAmmo;
    PLSK A 1 offset(0, 37) bright Lith_A_FireAltPlasma;
    PLSK C 1 offset(0, 36) bright;

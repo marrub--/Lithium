@@ -41,9 +41,9 @@ alloc_aut(0) stkcall bool IsNumId(i32 c) {return c >= 'a' && c <= 'z' ||
                                                  c >= 'A' && c <= 'Z' ||
                                                  c >= '0' && c <= '9' ||
                                                  c == '_' || c == '.';}
-alloc_aut(0) stkcall i32  ToUpper(i32 c) {return IsLower(c) ?
+alloc_aut(0) stkcall i32  ToUpper(i32 c) {return c >= 'a' && c <= 'z' ?
                                                  c - ('a' - 'A') : c;}
-alloc_aut(0) stkcall i32  ToLower(i32 c) {return IsUpper(c) ?
+alloc_aut(0) stkcall i32  ToLower(i32 c) {return c >= 'A' && c <= 'Z' ?
                                                  c + ('a' - 'A') : c;}
 
 /* EOF */

@@ -6,7 +6,7 @@
  *
  * ---------------------------------------------------------------------------|
  *
- * HomingRPG upgrade.
+ * RPG_B upgrade.
  *
  * ---------------------------------------------------------------------------|
  */
@@ -14,7 +14,7 @@
 #include "u_common.h"
 #include "w_world.h"
 
-#define UData pl.upgrdata.homingrpg
+#define UData pl.upgrdata.rpg_b
 
 /* Static Functions -------------------------------------------------------- */
 
@@ -30,7 +30,7 @@ i32 CheckTarget()
 /* Extern Functions -------------------------------------------------------- */
 
 script
-void Upgr_HomingRPG_Update(struct upgrade *upgr)
+void Upgr_RPG_B_Update(struct upgrade *upgr)
 {
    if(P_Wep_CurType() == weapon_launcher)
    {

@@ -11,6 +11,7 @@ class Lith_Coin : Lith_ScoreItem
 {
    default
    {
+      Tag "$LITH_LOG_Coin";
       Lith_ScoreItem.Score 50;
       Lith_BasicPickup.LogName "Coin", 2;
       Inventory.PickupSound "player/pickup/coin";
@@ -32,6 +33,7 @@ class Lith_ScoreChip : Lith_ScoreItem
 {
    default
    {
+      Tag "$LITH_LOG_ScoreChip";
       Lith_ScoreItem.Score 200;
       Lith_BasicPickup.LogName "ScoreChip", 2;
       Lith_BasicPickup.InfoPage "ScoreChip";
@@ -54,6 +56,7 @@ class Lith_Ruby : Lith_ScoreItem
 {
    default
    {
+      Tag "$LITH_LOG_Ruby";
       Lith_ScoreItem.Score 300;
       Lith_BasicPickup.LogName "Ruby", 2;
       Inventory.PickupSound "player/pickup/gem";
@@ -75,6 +78,7 @@ class Lith_Sapphire : Lith_ScoreItem
 {
    default
    {
+      Tag "$LITH_LOG_Sapphire";
       Lith_ScoreItem.Score 300;
       Lith_BasicPickup.LogName "Sapphire", 2;
       Inventory.PickupSound "player/pickup/gem";
@@ -96,6 +100,7 @@ class Lith_Amethyst : Lith_ScoreItem
 {
    default
    {
+      Tag "$LITH_LOG_Amethyst";
       Lith_ScoreItem.Score 200;
       Lith_BasicPickup.LogName "Amethyst", 2;
       Inventory.PickupSound "player/pickup/gem";
@@ -117,6 +122,7 @@ class Lith_Diamond : Lith_ScoreItem
 {
    default
    {
+      Tag "$LITH_LOG_Diamond";
       Lith_ScoreItem.Score 1000;
       Lith_BasicPickup.LogName "Diamond", 2;
       Inventory.PickupSound "player/pickup/gem";
@@ -138,6 +144,7 @@ class Lith_Emerald : Lith_ScoreItem
 {
    default
    {
+      Tag "$LITH_LOG_Emerald";
       Lith_ScoreItem.Score 400;
       Lith_BasicPickup.LogName "Emerald", 2;
       Inventory.PickupSound "player/pickup/gem";
@@ -159,6 +166,7 @@ class Lith_Scheelite : Lith_ScoreItem
 {
    default
    {
+      Tag "$LITH_LOG_Scheelite";
       Lith_ScoreItem.Score 15000;
       Lith_BasicPickup.LogName "Scheelite", 2;
       Inventory.PickupSound "player/pickup/material";
@@ -180,6 +188,7 @@ class Lith_Nambulite : Lith_ScoreItem
 {
    default
    {
+      Tag "$LITH_LOG_Nambulite";
       Lith_ScoreItem.Score 15000;
       Lith_BasicPickup.LogName "Nambulite", 2;
       Inventory.PickupSound "player/pickup/material";
@@ -201,6 +210,7 @@ class Lith_Lepidolite : Lith_ScoreItem
 {
    default
    {
+      Tag "$LITH_LOG_Lepidolite";
       Lith_ScoreItem.Score 30000;
       Lith_BasicPickup.LogName "Lepidolite", 2;
       Inventory.PickupSound "player/pickup/material";
@@ -222,6 +232,7 @@ class Lith_Petalite : Lith_ScoreItem
 {
    default
    {
+      Tag "$LITH_LOG_Petalite";
       Lith_ScoreItem.Score 30000;
       Lith_BasicPickup.LogName "Petalite", 2;
       Inventory.PickupSound "player/pickup/material";
@@ -243,6 +254,7 @@ class Lith_Tourmaline : Lith_ScoreItem
 {
    default
    {
+      Tag "$LITH_LOG_Tourmaline";
       Lith_ScoreItem.Score 30000;
       Lith_BasicPickup.LogName "Tourmaline", 2;
       Inventory.PickupSound "player/pickup/material";
@@ -421,7 +433,7 @@ class Lith_HealthBonusVial : Lith_BasicPickup
 {
    default
    {
-      Tag "Health Bonus";
+      Tag "$LITH_LOG_HealthBonus";
       Inventory.PickupSound "items/healthbonus";
       Lith_BasicPickup.LogName "HealthBonus", 3;
       Lith_BasicPickup.LogType msg_huds;
@@ -449,6 +461,7 @@ class Lith_Radio : Lith_ScoreItem
 {
    default
    {
+      Tag "$LITH_LOG_Radio";
       Lith_ScoreItem.Score Score_Clip;
       Lith_BasicPickup.LogName "Clip", 2;
       Inventory.PickupSound "player/pickup/scoresmall";
@@ -474,6 +487,7 @@ class Lith_BoxOfAmmo : Lith_ScoreItem
 {
    default
    {
+      Tag "$LITH_LOG_ClipBox";
       Lith_ScoreItem.Score Score_ClipBox;
       Lith_BasicPickup.LogName "ClipBox", 2;
       Inventory.PickupSound "player/pickup/scorebig";

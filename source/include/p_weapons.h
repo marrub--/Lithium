@@ -30,14 +30,14 @@ enum {
 };
 
 struct weaponinfo {
-   i32 slot;
-   i32 pclass;
-   str name;
-   str pickupsound;
-   i32 defammotype;
-   str defammoclass;
-   str classname;
-   i32 type;
+   i32  slot;
+   i32  pclass;
+   cstr name;
+   str  pickupsound;
+   i32  defammotype;
+   str  defammoclass;
+   str  classname;
+   i32  type;
 };
 
 struct invweapon {

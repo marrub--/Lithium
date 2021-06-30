@@ -229,7 +229,7 @@ u32 faststrhash(cstr s) {
 
 alloc_aut(0) stkcall
 i32 faststrcmp_str(cstr s1, astr s2) {
-   i32 res;
+   register i32 res;
    while((res = *s1 - *s2++) == 0 && *s1++ != '\0');
    return res;
 }
@@ -237,7 +237,7 @@ i32 faststrcmp_str(cstr s1, astr s2) {
 alloc_aut(0) stkcall
 i32 faststrcmp(cstr s1, cstr s2) {
    if(s1 == s2) return 0;
-   i32 res;
+   register i32 res;
    while((res = *s1 - *s2++) == 0 && *s1++ != '\0');
    return res;
 }
@@ -248,6 +248,20 @@ i32 faststrcasecmp(cstr s1, cstr s2) {
    i32 res;
    while((res = ToUpper(*s1) - ToUpper(*s2++)) == 0 && *s1++ != '\0');
    return res;
+}
+
+alloc_aut(0) stkcall
+bool faststrchk(cstr s1, cstr s2) {
+   if(s1 == s2) return 0;
+   while(*s1 && *s1 == *s2) ++s1, ++s2;
+   return *s1 == *s2;
+}
+
+alloc_aut(0) stkcall
+bool faststrcasechk(cstr s1, cstr s2) {
+   if(s1 == s2) return 0;
+   while(*s1 && ToUpper(*s1) == ToUpper(*s2)) ++s1, ++s2;
+   return ToUpper(*s1) == ToUpper(*s2);
 }
 
 alloc_aut(0) stkcall

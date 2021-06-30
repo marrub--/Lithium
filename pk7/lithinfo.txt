@@ -1,0 +1,271 @@
+/* -*-C-*---------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison G. Watson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
+"enemies auto" {
+   cl: gA tag: ZombieMan;
+   cl: gA tag: ShotgunGuy;
+   cl: gA tag: ChaingunGuy;
+
+   cl: gA tag: Imp;
+   cl: gA tag: Demon;
+   cl: gA tag: Spectre;
+
+   cl: gA tag: LostSoul;
+   cl: gA tag: Mancubus;
+   cl: gA tag: Arachnotron;
+   cl: gA tag: Cacodemon;
+
+   cl: gA tag: HellKnight;
+   cl: gA tag: BaronOfHell;
+   cl: gA tag: Revenant;
+
+   cl: gA tag: PainElemental;
+   cl: gA tag: Archvile;
+   cl: gA tag: SpiderMastermind;
+   cl: gA tag: Cyberdemon;
+
+   cl: gA tag: Phantom;
+   cl: gA tag: IconOfSin;
+}
+
+"items" {
+   cl: gA tag: ScoreChip;
+   cl: gA tag: HealthBonus;
+
+   cl: gA tag: AllMap;
+   cl: pM tag: BackpackStan;
+   cl: pC tag: BackpackJem;
+   cl: gA tag: Berserk  unl: "JAQTen";
+   cl: gA tag: Infrared unl: "SYM43";
+   cl: gA tag: RadSuit  unl: "SYM43";
+
+   cl: gA tag: Medikit  unl: "JJJ";
+   cl: gA tag: Stimpack unl: "JJJ";
+
+   cl: gA tag: KeyDisk  unl: "Hell";
+   cl: gA tag: KeySkull;
+
+   cl: gA tag: Fragma;
+   cl: gA tag: Heart;
+   cl: gA tag: Invulnerability;
+   cl: gA tag: Taochyan;
+
+   cl: gA tag: ArmStandard    unl: "Earth";
+   cl: gA tag: ArmImproved    unl: "SYM43";
+   cl: gA tag: ArmTeflon      unl: "ShekaKaff";
+   cl: gA tag: ArmDendrite    unl: "ShekaKaff";
+   cl: gA tag: ArmAerodynamic unl: "Yigan";
+   cl: gA tag: ArmHazMat      unl: "Yigan";
+   cl: gA tag: ArmPinkSilver;
+   cl: gA tag: ArmMidori      unl: "ReverseAce";
+
+   cl: pM tag: WeapnInter unl: "OFMD AllPoint";
+   cl: pM tag: WeapnInte2;
+   cl: pM tag: ArmorInter;
+   cl: pM tag: CBIUpgr1   unl: "KSKK";
+   cl: pM tag: CBIUpgr2   unl: "KSKK";
+}
+
+"yourself auto" {
+   cl: pM tag: P114;
+   cl: pC tag: OPD2;
+   cl: pC tag: Info400;
+   cl: pC tag: Info402;
+   cl: pC tag: HackInfo;
+
+   cl: gA tag: BIP;
+   cl: pM tag: CBIStan;
+   cl: pC tag: CBIJem;
+   cl: pD tag: CBIAri;
+
+   cl: gA tag: AttrACC;
+   cl: gA tag: AttrDEF;
+   cl: gH tag: AttrSTRHuman;
+   cl: gR tag: AttrSTRRobot;
+   cl: gN tag: AttrSTRNonHuman;
+   cl: gH tag: AttrVIT;
+   cl: gN tag: AttrPOTNonHuman;
+   cl: gR tag: AttrPOTRobot;
+   cl: gH tag: AttrSTM;
+   cl: gR tag: AttrREP;
+   cl: gN tag: AttrREG;
+   cl: gA tag: AttrLUK;
+   cl: pM tag: AttrRGE;
+   cl: pC tag: AttrCON;
+   cl: pI tag: AttrADR;
+   cl: pW tag: AttrAGI;
+   cl: pA tag: AttrRSH;
+   cl: pD tag: AttrREF;
+}
+
+"upgrades" {
+   cl: pM tag: HeadsUpDisp unl: "OFMD";
+   cl: pM tag: JetBooster  unl: "OFMD";
+   cl: pM tag: ReflexWetw  unl: "OFMD";
+   cl: pM tag: CyberLegs   unl: "OFMD";
+   cl: pM tag: Yh0         unl: "DurlaPrime";
+   cl: pM tag: DefenseNuke unl: "OFMD";
+   cl: pM tag: Adrenaline  unl: "KSKK";
+
+   cl: pC tag: HeadsUpDispJem unl: "AOF";
+   cl: pC tag: ReflexWetwJem  unl: "AOF";
+   cl: pC tag: Magic;
+   cl: pC tag: SoulCleaver;
+   cl: pC tag: StealthSys;
+
+   cl: gO tag: VitalScanner unl: "KSKK";
+   cl: gO tag: AutoReload   unl: "KSKK";
+}
+
+"places" {
+   cl: gO tag: AetosVi;
+   cl: pC tag: Algidistari;
+   cl: gO tag: ChAri          unl: "AetosVi";
+   cl: pM tag: DurlaPrime     unl: "Earth AetosVi";
+   cl: gO tag: Earth;
+   cl: pC tag: Heaven;
+   cl: gA tag: Hell           unl: "Earth";
+   cl: gO tag: Mars           unl: "Earth OFMD";
+   cl: gO tag: OmicronXevv;
+   cl: gA tag: ReverseAce;
+   cl: pM tag: SuperDimension unl: "BFG9000";
+   cl: gA tag: Tsukama;
+}
+
+"corporations" {
+   cl: gO tag: AllPoint;
+   cl: pM tag: AOF;
+   cl: pC tag: AOFJem;
+   cl: pM tag: Cid        unl: "SuperDimension Earth";
+   cl: pM tag: Facer;
+   cl: gA tag: JAQTen     unl: "Tsukama";
+   cl: gA tag: JJJ;
+   cl: pM tag: KSKK       unl: "Earth";
+   cl: pC tag: KSKKJem    unl: "Earth";
+   cl: gO tag: MDDO       unl: "Mars OFMD";
+   cl: pC tag: Newvec     unl: "Earth";
+   cl: pM tag: OFMD;
+   cl: pC tag: OFMDJem;
+   cl: gO tag: Omakeda    unl: "Earth";
+   cl: gO tag: Semaphore  unl: "OmicronXevv";
+   cl: gA tag: ShekaKaff  unl: "Tsukama";
+   cl: gO tag: SYM43      unl: "AetosVi";
+   cl: pM tag: UnrealArms unl: "AetosVi";
+   cl: gA tag: Yigan;
+}
+
+"weapons auto" {
+   cl: pM tag: Pistol unl: "Omakeda";
+   cl: pC tag: Mateba unl: "AOF";
+   cl: pC tag: Blade;
+   cl: pC tag: Delear unl: "Earth";
+}
+
+"weapons" {
+   cl: gO tag: ChargeFist unl: "KSKK";
+
+   cl: pM tag: Revolver        unl: "Earth";
+   cl: pM tag: Shotgun         unl: "Omakeda";
+   cl: pM tag: Shotgun_A       unl: "Shotgun AOF DurlaPrime";
+   cl: pM tag: Shotgun_B       unl: "Shotgun";
+   cl: pM tag: LazShotgun      unl: "Earth";
+   cl: pM tag: SuperShotgun    unl: "ChAri";
+   cl: pM tag: CombatRifle     unl: "AllPoint";
+   cl: pM tag: Rifle_A         unl: "CombatRifle";
+   cl: pM tag: Rifle_B         unl: "CombatRifle Semaphore";
+   cl: pM tag: SniperRifle     unl: "Facer";
+   cl: pM tag: GrenadeLauncher unl: "SYM43";
+   cl: pM tag: RPG_A           unl: "GrenadeLauncher UnrealArms";
+   cl: pM tag: RPG_B           unl: "GrenadeLauncher SYM43";
+   cl: pM tag: PlasmaRifle     unl: "AllPoint MDDO";
+   cl: pM tag: Plasma_A        unl: "PlasmaRifle";
+   cl: pM tag: Plasma_B        unl: "PlasmaRifle Semaphore";
+   cl: pM tag: BFG9000         unl: "Cid";
+   cl: pM tag: Cannon_A        unl: "BFG9000 SuperDimension";
+   cl: pM tag: Cannon_B        unl: "BFG9000";
+
+   cl: pC tag: Mateba_A      unl: "Mateba AOF Algidistari";
+   cl: pC tag: ShockRifle    unl: "ChAri";
+   cl: pC tag: ShockRif_A    unl: "ShockRifle";
+   cl: pC tag: ShockRif_B    unl: "ShockRifle";
+   cl: pC tag: SPAS          unl: "AOF Newvec";
+   cl: pC tag: SPAS_A        unl: "SPAS";
+   cl: pC tag: SPAS_B        unl: "SPAS Newvec";
+   cl: pC tag: SMG           unl: "Omakeda SYM43";
+   cl: pC tag: SMG_A         unl: "SMG AOF SYM43";
+   cl: pC tag: SMG_B         unl: "SMG AOF";
+   cl: pC tag: SMG_C         unl: "SMG SYM43";
+   cl: pC tag: IonRifle      unl: "KSKK";
+   cl: pC tag: IonRifle_A    unl: "IonRifle KSKK";
+   cl: pC tag: IonRifle_B    unl: "IonRifle KSKK";
+   cl: pC tag: CPlasmaRifle  unl: "AllPoint MDDO";
+   cl: pC tag: CPlasma_A     unl: "CPlasmaRifle MDDO";
+   cl: pC tag: StarDestroyer unl: "Hell";
+   cl: pC tag: ShipGun_A     unl: "StarDestroyer";
+   cl: pC tag: ShipGun_A     unl: "StarDestroyer";
+
+   cl: gO tag: MissileLauncher;
+   cl: gO tag: PlasmaDiffuser unl: "SYM43 MDDO Semaphore";
+
+   cl: pC tag: Feuer;
+   cl: pC tag: Rend;
+   cl: pC tag: Hulgyon  unl: "Heaven";
+   cl: pC tag: StarShot unl: "AOF";
+   cl: pC tag: Cercle   unl: "Earth";
+
+   cl: pD tag: "700Express";
+   cl: pD tag: "4Bore";
+   cl: pD tag: ShrapnelGun;
+   cl: pD tag: Minigun;
+   cl: pD tag: DualRocket;
+   cl: pD tag: FatMac;
+   cl: pD tag: FortuneGun;
+
+   cl: pD tag: Subweapon0;
+   cl: pD tag: Subweapon1;
+   cl: pD tag: Subweapon2;
+   cl: pD tag: Subweapon3;
+   cl: pD tag: Subweapon4;
+   cl: pD tag: Subweapon5;
+}
+
+"extra auto" {
+   cl: gA tag: Extra1;
+   cl: gA tag: Extra2;
+   cl: gA tag: Extra3;
+   cl: gA tag: Extra4;
+   cl: gA tag: Extra5;
+}
+
+"mail auto" {
+   cl: pM tag: MIntroStan;
+   cl: pC tag: MIntroJem;
+}
+
+"mail" {
+   cl: gA tag: MJamesDefeated;
+   cl: gA tag: MMakarovDefeated;
+   cl: gA tag: MIsaacDefeated;
+
+   cl: pM tag: MCluster1Stan;
+   cl: pM tag: MCluster2Stan;
+   cl: pM tag: MCluster3Stan;
+   cl: pM tag: MPhantomStan;
+   cl: pM tag: MSecret1Stan;
+   cl: pM tag: MSecret2Stan;
+
+   cl: pC tag: MCluster1Jem;
+   cl: pC tag: MCluster2Jem;
+   cl: pC tag: MCluster3Jem;
+   cl: pC tag: MPhantomJem;
+   cl: pC tag: MSecret1Jem;
+   cl: pC tag: MSecret2Jem;
+}
+
+/* EOF */

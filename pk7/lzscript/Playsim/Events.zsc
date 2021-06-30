@@ -11,7 +11,7 @@
 class Lith_FINAL : StaticEventHandler {
    override void worldLoaded(WorldEvent ev) {
       if(ev.isSaveGame) {
-         if(!(__lith_fun & lfun_final) && Lith_HERMES.instance().m_wasFinal) {
+         if(__lith_fun != Lith_HERMES.instance().m_latchFun) {
             CallACS("Lith_TimelineInconsistent");
          }
       }
@@ -28,12 +28,16 @@ transient ui PlayerData m_PData;
 
 private array<Actor> m_bossBabies;
 private int m_bossDeathInit;
-bool m_wasFinal;
+int m_latchFun;
 
 static int GetBossLevel() {return Instance().m_bossLevel;}
 
 override void WorldLoaded(WorldEvent ev)
 {
+   if(!ev.isSaveGame) {
+      m_latchFun = __lith_fun;
+   }
+
    static const string BH_BARONS[] = {
       "ED26C05D1B179D373E839AC7CCFB07AE", // 2002ado.wad e1m8
       "769CEC2DD419996D43D23AEBBE11DF45", // deathless.wad e1m8
@@ -136,7 +140,6 @@ override void WorldLoaded(WorldEvent ev)
    for(int i = 0; i < BH_ICONOFSIN.Size(); i++) {
       if(sum ~== BH_ICONOFSIN[i]) {
          m_bossLevel = boss_iconofsin;
-         if(__lith_fun & lfun_final) m_wasFinal = true;
          break;
       }
    }

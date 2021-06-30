@@ -36,10 +36,8 @@ bool P_Shop_Buy(struct shopdef const *def, void *obj, cstr namefmt, bool nodeliv
 
    if(!nolog) pl.logF(LC(LANG "LOG_Bought"), LanguageC(namefmt, def->name));
 
-   if(def->bipunlock)
-   {
-      bip_name_t tag; faststrcpy_str(tag, def->bipunlock);
-      P_BIP_Unlock(tag);
+   if(def->bipunlock) {
+      P_BIP_Unlock(def->bipunlock);
    }
 
    P_Scr_Take(P_Shop_Cost(def));

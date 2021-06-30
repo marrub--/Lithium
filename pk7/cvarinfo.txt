@@ -67,6 +67,7 @@ server bool  lith_hud_showweapons  = true;
 server bool  lith_hud_showlog      = true;
 server bool  lith_hud_showarmorind = true;
 server bool  lith_hud_showdamage   = true;
+server bool  lith_hud_showitems    = true;
 server bool  lith_hud_logfromtop   = false;
 server float lith_hud_logsize      = 1.0;
 server int   lith_hud_expbar       = 0;

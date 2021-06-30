@@ -9,11 +9,8 @@ tools/.build-cfg.rb
 *.wad.b*
 *.swp
 *.ninja*
-source/include/p_bipname.h
 source/include/u_func.h
 source/include/u_names.h
-source/include/w_moninfo.h
-source/p_bipinfo.c
 source/p_upgrinfo.c
 source/p_weaponinfo.c
 gzdoom-crash.log

@@ -44,9 +44,9 @@ the firing mechanism.
 Most military models come with a CB-Scope.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_ShotgunUpgr | $\#UPGRADE_TITLE_GaussShotty
-== \#INFO_TITLE_ShotgunUpgr | Hiku Mk.2 Shotgun Gauss Mod
-@@ \#INFO_DESCR_ShotgunUpgr
+== \#INFO_SHORT_Shotgun_A | $\#UPGRADE_TITLE_Shotgun_A
+== \#INFO_TITLE_Shotgun_A | Hiku Mk.2 Shotgun Gauss Mod
+@@ \#INFO_DESCR_Shotgun_A
 During the short Avian-Sapiens war of
 1401 NE, A.O.F Inc. ran a line of modified Hiku Mk.2 shotguns that removed the
 shell firing mechanism and replaced it with a high-power photon condenser.
@@ -55,9 +55,9 @@ This both removes the need to chamber rounds and gives a nice boost in fire
 rate. The gun is, essentially, completely different in use.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_ShotgunUpg2 | $\#UPGRADE_TITLE_PoisonShot
-== \#INFO_TITLE_ShotgunUpg2 | Hiku Mk.2 Shotgun Poison Mod
-@@ \#INFO_DESCR_ShotgunUpg2
+== \#INFO_SHORT_Shotgun_B | $\#UPGRADE_TITLE_Shotgun_B
+== \#INFO_TITLE_Shotgun_B | Hiku Mk.2 Shotgun Poison Mod
+@@ \#INFO_DESCR_Shotgun_B
 A modification for the Hiku Mk.1 shotgun made by A.O.F Inc. for research
 purposes. Uses a rather small container of poison that refills itself
 automatically, contained in the loading mechanism, to infect enemies with
@@ -111,9 +111,9 @@ Comes with an inbuilt undermount-like grenade launcher. Holds only one grenade
 at a time, but packs a great punch.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_RifleUpgr | $\#UPGRADE_TITLE_RifleModes
-== \#INFO_TITLE_RifleUpgr | AllPoint 75-c Modal Trigger
-@@ \#INFO_DESCR_RifleUpgr
+== \#INFO_SHORT_Rifle_A | $\#UPGRADE_TITLE_Rifle_A
+== \#INFO_TITLE_Rifle_A | AllPoint 75-c Modal Trigger
+@@ \#INFO_DESCR_Rifle_A
 Looking at the design failures in the 75-b, AllPoint sought to make an
 improvement by way of a modification. Thus, they gathered, they could take
 parts from their 80-g Sniper Rifle and fit them snugly into a combat rifle.
@@ -123,9 +123,9 @@ bursts are fired sequentially. Using this mode also enables a partial
 CB-Scope, which unfortunately does little more than obstruct your view.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_RifleUpg2 | $\#UPGRADE_TITLE_LaserRCW
-== \#INFO_TITLE_RifleUpg2 | SF-209 Laser Rifle
-@@ \#INFO_DESCR_RifleUpg2
+== \#INFO_SHORT_Rifle_B | $\#UPGRADE_TITLE_LaserRCW
+== \#INFO_TITLE_Rifle_B | SF-209 Laser Rifle
+@@ \#INFO_DESCR_Rifle_B
 This modification does little more than replace the firing system with one
 much more similar to a photon rifle. The combat effectiveness of the rifle is
 increased quite a lot, as it now fires 4tW penetrating beams capable of
@@ -158,9 +158,9 @@ after they've been ignited and left the barrel; thus causing a small lag
 before the rocket takes off fully.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_LauncherUpgr | $\#UPGRADE_TITLE_ChargeRPG
-== \#INFO_TITLE_LauncherUpgr | UE-1 "Eight-Ball" Revolving Launcher
-@@ \#INFO_DESCR_LauncherUpgr
+== \#INFO_SHORT_RPG_A | $\#UPGRADE_TITLE_RPG_A
+== \#INFO_TITLE_RPG_A | UE-1 "Eight-Ball" Revolving Launcher
+@@ \#INFO_DESCR_RPG_A
 Explosives are fun, as we all know, and Unreal Arms agreed with the sentiment.
 Eight high-yield rocket-propelled grenades are loaded one at a time into the
 launcher until finally the load is unleashed.
@@ -171,9 +171,9 @@ rockets in a spiral pattern for maximum damage on one area, and the third and
 final mode hurls all of the grenades out of their rocket casings.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_LauncherUpg2 | $\#UPGRADE_TITLE_HomingRPG
-== \#INFO_TITLE_LauncherUpg2 | SYM4.3 D.788 HOMING ROCKET SYSTEM
-@@ \#INFO_DESCR_LauncherUpg2
+== \#INFO_SHORT_RPG_B | $\#UPGRADE_TITLE_RPG_B
+== \#INFO_TITLE_RPG_B | SYM4.3 D.788 HOMING ROCKET SYSTEM
+@@ \#INFO_DESCR_RPG_B
 This is a modification that adds an extra nanomachine dispenser to the gun's
 PCI bus, which attaches several hundred thousand nanobots to the grenade when
 it is fired that push it to angle toward the enemy.
@@ -198,9 +198,9 @@ minute, and the secondary emits 1,260 30.96tW penetrating bolts per minute.
 This thing will make Swiss cheese out of anything in its path.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_PlasmaUpgr | $\#UPGRADE_TITLE_PlasLaser
-== \#INFO_TITLE_PlasmaUpgr | AllPoint 68-o Plasmatic Laser
-@@ \#INFO_DESCR_PlasmaUpgr
+== \#INFO_SHORT_Plasma_A | $\#UPGRADE_TITLE_Plasma_A
+== \#INFO_TITLE_Plasma_A | AllPoint 68-o Plasmatic Laser
+@@ \#INFO_DESCR_Plasma_A
 Having their second best-seller also be complete trash at aiming pissed
 AllPoint staff off so much that they completely redesigned the weapon's
 internals to boast a 37.96tW high-speed ion condenser that fires pure death
@@ -214,9 +214,9 @@ private investors for quite some time now, but thankfully, your employer is
 one of them.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_PlasmaUpg2 | $\#UPGRADE_TITLE_PartBeam
-== \#INFO_TITLE_PlasmaUpg2 | SF-2012 Ion Acceleration Cannon
-@@ \#INFO_DESCR_PlasmaUpg2
+== \#INFO_SHORT_Plasma_B | $\#UPGRADE_TITLE_Plasma_B
+== \#INFO_TITLE_Plasma_B | SF-2012 Ion Acceleration Cannon
+@@ \#INFO_DESCR_Plasma_B
 The SF-2012 IAC is quite ubiquitous among Semaphore's arsenal, being one of
 their few hand-held weapons, and one of their very few modifications. The IAC
 focuses a ray of ions, gathers energy in the rifle, and then fires an charge
@@ -242,9 +242,9 @@ This weapon was acquired by your employers via the black market group "Cid"
 for a hefty price. Take care of it.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_CannonUpgr | $\#UPGRADE_TITLE_PunctCannon
-== \#INFO_TITLE_CannonUpgr | Omega Cannon: Punctuator Buffer
-@@ \#INFO_DESCR_CannonUpgr
+== \#INFO_SHORT_Cannon_A | $\#UPGRADE_TITLE_Cannon_A
+== \#INFO_TITLE_Cannon_A | Omega Cannon: Punctuator Buffer
+@@ \#INFO_DESCR_Cannon_A
 A pattern buffer for the Omega Cannon which emits an explosive bolt that does
 damage by penetrating walls with explosives, via magic.
 
@@ -258,9 +258,9 @@ and wanted whoever attained it to be all-powerful.
 Also, the CB-Scope works again, somehow.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_CannonUpg2 | $\#UPGRADE_TITLE_OmegaRail
-== \#INFO_TITLE_CannonUpg2 | Omega Cannon: Railgun
-@@ \#INFO_DESCR_CannonUpg2
+== \#INFO_SHORT_Cannon_B | $\#UPGRADE_TITLE_Cannon_B
+== \#INFO_TITLE_Cannon_B | Omega Cannon: Railgun
+@@ \#INFO_DESCR_Cannon_B
 With years of reverse engineering research put into the Omega Cannon by
 several groups, a photon accelerator was developed which could use the Omega
 Cannon's pattern buffer system to create abhorrent amounts of energy.

@@ -17,10 +17,11 @@
 #include <stdio.h>
 #include <stdint.h>
 
-/* Lith: First valid chunk in save file. */
-/* Ver. 7:  Initial version. */
-/* Ver. 14: Rewrite of save system. */
-/* Ver. 15: Chunk format change. */
+/* Lith: First valid chunk in save file.
+ * Ver. 7:  Initial version.
+ * Ver. 14: Rewrite of save system.
+ * Ver. 15: Chunk format change.
+ */
 #define Ident_Lith FourCCPtr("Lith")
 #define SaveV_Lith 15
 
@@ -32,13 +33,19 @@
 #define Ident_note FourCCPtr("note")
 #define SaveV_note 0
 
-/* agrp: Auto-groups. */
+/* agrp: Auto-groups.
+ * Ver. 1: Updated internal names.
+ */
 #define Ident_agrp FourCCPtr("agrp")
-#define SaveV_agrp 0
+#define SaveV_agrp 1
 
 /* intr: Intros. */
 #define Ident_intr FourCCPtr("intr")
 #define SaveV_intr 0
+
+/* bipu: BIP unlocks. */
+#define Ident_bipu FourCCPtr("bipu")
+#define SaveV_bipu 0
 
 #define Save_VersMask 0x000000FF
 #define Save_FlagMask 0xFFFFFF00

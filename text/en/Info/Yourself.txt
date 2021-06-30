@@ -227,12 +227,23 @@ only stronger, but heal quicker and are less likely to break down.
 
 Leveling up in vitality will increase health pickup gains.
 
-== \#INFO_SHORT_AttrPOT | Potency
-== \#INFO_TITLE_AttrPOT | \cdPotency\c- (POT)
-@@ \#INFO_DESCR_AttrPOT
-Potency is your reaction to and ability to apply medicine, the strength of your
-vessels and nerves, and the ability to stay alive. Your innards are not only
-stronger, but can be healed more quickly and are more likely to stay working.
+== \#INFO_SHORT_AttrPOTNonHuman | Potency
+== \#INFO_TITLE_AttrPOTNonHuman | \cdPotency\c- (POT)
+@@ \#INFO_DESCR_AttrPOTNonHuman
+Potency is your reaction to and ability to apply medicine, the
+strength of your vessels and nerves, and the ability to stay alive.
+Your innards are not only stronger, but can be healed more quickly and
+are more likely to stay working.
+
+Leveling up in potency will increase health pickup gains.
+
+== \#INFO_SHORT_AttrPOTRobot | $\#INFO_SHORT_AttrPOTNonHuman
+== \#INFO_TITLE_AttrPOTRobot | $\#INFO_TITLE_AttrPOTNonHuman
+@@ \#INFO_DESCR_AttrPOTRobot
+Potency is your ability to absorb medicine through your machinery, the
+strength of your vessels and nodes, and the ability to stay alive.
+Your internals are not only stronger, but can be repaired more quickly
+and are more likely to stay working.
 
 Leveling up in potency will increase health pickup gains.
 

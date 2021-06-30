@@ -22,7 +22,7 @@
 
 i32           TBufProc (struct token *tok);
 i32           TBufProcL(struct token *tok);
-void          TBufCtor (struct tokbuf *tb, FILE *fp);
+void          TBufCtor (struct tokbuf *tb, FILE *fp, cstr fname);
 void          TBufDtor (struct tokbuf *tb);
 struct token *TBufGet  (struct tokbuf *tb);
 struct token *TBufPeek (struct tokbuf *tb);
@@ -31,10 +31,9 @@ struct token *TBufReGet(struct tokbuf *tb);
 struct token *TBufBack (struct tokbuf *tb, i32 n);
 bool          TBufDrop (struct tokbuf *tb, i32 t);
 void          TBufErr  (struct tokbuf *tb, struct tbuf_err *res, cstr fmt, ...);
-struct token *TBufExpc (struct tokbuf *tb, struct tbuf_err *res, struct token *tok, i32 t1);
-struct token *TBufExpc2(struct tokbuf *tb, struct tbuf_err *res, struct token *tok, i32 t1, i32 t2);
-struct token *TBufExpc3(struct tokbuf *tb, struct tbuf_err *res, struct token *tok, i32 t1, i32 t2, i32 t3);
+struct token *TBufExpc (struct tokbuf *tb, struct tbuf_err *res, struct token *tok, ...);
 void          TBufExpDr(struct tokbuf *tb, struct tbuf_err *res, i32 t);
+bool          TBufKv   (struct tokbuf *tb, struct tbuf_err *res, char *k, char *v);
 
 enum {
    tokproc_next,
@@ -56,13 +55,13 @@ struct tokbuf {
    __prop drop  {operator(): TBufDrop (this)}
    __prop err   {operator(): TBufErr  (this)}
    __prop expc  {operator(): TBufExpc (this)}
-   __prop expc2 {operator(): TBufExpc2(this)}
-   __prop expc3 {operator(): TBufExpc3(this)}
    __prop expdr {operator(): TBufExpDr(this)}
+   __prop kv    {operator(): TBufKv   (this)}
 
    struct origin orig;
 
    FILE *fp;
+   cstr  fname;
 
    struct token toks[32];
 

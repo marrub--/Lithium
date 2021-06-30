@@ -476,12 +476,13 @@ void P_CBI_TabItems(struct gui_state *g) {
       }
 
       setPos();
-      if(sel->scr) {
+      if(sel->scr > 0) {
          PrintTextFmt("(%s\Cnscr\C-)", scoresep(sel->scr));
          PrintText(sf_smallfnt, g->defcr, g->ox+x+18,1, g->oy+y,1);
       }
 
-      if(G_Button(g, sel->scr ? LC(LANG "SELL") : LC(LANG "DISCARD"), x, y,
+      if(sel->scr >= 0 &&
+         G_Button(g, sel->scr > 0 ? LC(LANG "SELL") : LC(LANG "DISCARD"), x, y,
                   .color = "g", .fill = {&CBIState(g)->itemfill, 26},
                   Pre(btnclear))) {
          if(sel->scr) {

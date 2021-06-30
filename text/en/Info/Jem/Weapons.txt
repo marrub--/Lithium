@@ -26,9 +26,9 @@ accuracy deficiencies, but nonetheless has the classic look and feel of the
 original gun. Produced by A.O.F Inc. for knight-class units.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_MatebaUpgr | $\#UPGRADE_TITLE_Mateba_A
-== \#INFO_TITLE_MatebaUpgr | \cdFinirentur\c-, \cgRussorum\c- 19
-@@ \#INFO_DESCR_MatebaUpgr
+== \#INFO_SHORT_Mateba_A | $\#UPGRADE_TITLE_Mateba_A
+== \#INFO_TITLE_Mateba_A | \cdFinirentur\c-, \cgRussorum\c- 19
+@@ \#INFO_DESCR_Mateba_A
 The 19th method of the \cgRussum\c- mode, Finirentur, known as the Finalizer,
 is a very powerful red magic that creates a sigil in front of the user which
 then fires out a projectile at fairly high speed. This projectile is capable
@@ -57,17 +57,17 @@ While the weapon only has a 7-round magazine, it fires extremely deadly
 well-manufactured, likely under the care of a very skilled Kiri craftsman.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_ShockRifUpgr | $\#UPGRADE_TITLE_ShockRif_A
-== \#INFO_TITLE_ShockRifUpgr | Shock Charge
-@@ \#INFO_DESCR_ShockRifUpgr
+== \#INFO_SHORT_ShockRif_A | $\#UPGRADE_TITLE_ShockRif_A
+== \#INFO_TITLE_ShockRif_A | Shock Charge
+@@ \#INFO_DESCR_ShockRif_A
 A simple modification to the barrel that wraps an explosive sigil around the
 bullet as it leaves the gun, causing it to explode into electricity upon
 impact.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_ShockRifUpg2 | $\#UPGRADE_TITLE_ShockRif_B
-== \#INFO_TITLE_ShockRifUpg2 | Electric Binding
-@@ \#INFO_DESCR_ShockRifUpg2
+== \#INFO_SHORT_ShockRif_B | $\#UPGRADE_TITLE_ShockRif_B
+== \#INFO_TITLE_ShockRif_B | Electric Binding
+@@ \#INFO_DESCR_ShockRif_B
 A modification for your Shock Rifle, crafted as an experiment: a bit of
 extremely heated liquid crystal is extruded onto the bullet upon receiving, and
 then super-charged.
@@ -89,9 +89,9 @@ design is extremely simple, but it does not overheat or jam often, is cheap to
 produce, and is very, very powerful.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_SPASUpgr | $\#UPGRADE_TITLE_SPAS_A
-== \#INFO_TITLE_SPASUpgr | \cdInvalidassero\c-, \cgRussorum\c- 14
-@@ \#INFO_DESCR_SPASUpgr
+== \#INFO_SHORT_SPAS_A | $\#UPGRADE_TITLE_SPAS_A
+== \#INFO_TITLE_SPAS_A | \cdInvalidassero\c-, \cgRussorum\c- 14
+@@ \#INFO_DESCR_SPAS_A
 The 14th method of the \cgRussum\c- mode, Invalidassero is a fairly potent,
 purple-ish colored magic substance that sticks to projectiles such as buckshot.
 
@@ -100,9 +100,9 @@ projectiles to both go off-target and do loads of damage, as well as explode
 on impact. The origin of this method is unknown.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_SPASUpg2 | $\#UPGRADE_TITLE_SPAS_B
-== \#INFO_TITLE_SPASUpg2 | NV48-1 Shell Auto-loader
-@@ \#INFO_DESCR_SPASUpg2
+== \#INFO_SHORT_SPAS_B | $\#UPGRADE_TITLE_SPAS_B
+== \#INFO_TITLE_SPAS_B | NV48-1 Shell Auto-loader
+@@ \#INFO_DESCR_SPAS_B
 An upgrade for the NV48 which uses a small magic buffer to automatically load
 shells from a four-dimensional area. A rather simple, yet effective solution,
 which also is used to accelerate shots slightly more, causing more damaging
@@ -129,9 +129,9 @@ bullpup. It has since been re-branded by SYM4.3, who now produce it for
 Omakeda with royalties.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_SMGUpgr | $\#UPGRADE_TITLE_SMG_A
-== \#INFO_TITLE_SMGUpgr | Arms Annex F474
-@@ \#INFO_DESCR_SMGUpgr
+== \#INFO_SHORT_SMG_A | $\#UPGRADE_TITLE_SMG_A
+== \#INFO_TITLE_SMG_A | Arms Annex F474
+@@ \#INFO_DESCR_SMG_A
 The AA/F474 is an extension to the SYM4.3 D.22 MODEL M SUBMACHINE GUN which
 attaches a magic buffer into the magazine upon insertion, causing it to
 over-load another two magazines worth of ammunition while firing.
@@ -142,9 +142,9 @@ suddenly and cause the buffer to rip. If this did occur, the weapon would
 displode, and bullets would fly out constantly.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_SMGUpg2 | $\#UPGRADE_TITLE_SMG_B
-== \#INFO_TITLE_SMGUpg2 | Arms Annex 138D5
-@@ \#INFO_DESCR_SMGUpg2
+== \#INFO_SHORT_SMG_B | $\#UPGRADE_TITLE_SMG_B
+== \#INFO_TITLE_SMG_B | Arms Annex 138D5
+@@ \#INFO_DESCR_SMG_B
 The AA/138D5 is an extension to the SYM4.3 D.22 MODEL M SUBMACHINE GUN which
 places a Blue-type FFC Magic Extruder into the barrel.
 
@@ -153,9 +153,9 @@ homing capabilities. The bullets may not only lean toward enemies you aim at,
 but also enemies nearby given a good enough range.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_SMGUpg3 | $\#UPGRADE_TITLE_SMG_C
-== \#INFO_TITLE_SMGUpg3 | SYM4.3 D.24 MODEL M SAFE TRIGGER
-@@ \#INFO_DESCR_SMGUpg3
+== \#INFO_SHORT_SMG_C | $\#UPGRADE_TITLE_SMG_C
+== \#INFO_TITLE_SMG_C | SYM4.3 D.24 MODEL M SAFE TRIGGER
+@@ \#INFO_DESCR_SMG_C
 Complaints from users of the Model M SMG were not many for SYM4.3, but despite
 this, they were actually the most abundant of complaints the company had ever
 received on any weapon.
@@ -185,9 +185,9 @@ opening the weapon prematurely after firing, and the complexity that would be
 needed to have a fully automatic round cycling system.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_IonRifleUpgr | $\#UPGRADE_TITLE_IonRifle_A
-== \#INFO_TITLE_IonRifleUpgr | KDA-[Radiator] M11 Radioactive Ionizer
-@@ \#INFO_DESCR_IonRifleUpgr
+== \#INFO_SHORT_IonRifle_A | $\#UPGRADE_TITLE_IonRifle_A
+== \#INFO_TITLE_IonRifle_A | KDA-[Radiator] M11 Radioactive Ionizer
+@@ \#INFO_DESCR_IonRifle_A
 An odd upgrade for the Model 11 Ion Rifle by Kazami Defense Arms that modifies
 the internal barrel to not only superheat projectiles, but irradiate them with
 a small amount of radioactive isotope.
@@ -199,9 +199,9 @@ torn apart from the inside.
 Don't you just want to buy 5 of 'em?
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_IonRifleUpg2 | $\#UPGRADE_TITLE_IonRifle_B
-== \#INFO_TITLE_IonRifleUpg2 | KDA-[Overloader] M11 Overload Charger
-@@ \#INFO_DESCR_IonRifleUpg2
+== \#INFO_SHORT_IonRifle_B | $\#UPGRADE_TITLE_IonRifle_B
+== \#INFO_TITLE_IonRifle_B | KDA-[Overloader] M11 Overload Charger
+@@ \#INFO_DESCR_IonRifle_B
 The Overloader is a modification for the Model 11 Ion Rifle by Kazami Defense
 Arms. It removes the heat charging cap, allowing the weapon to over-charge to
 just over twice the normal amount of heat, allowing the projectile to be
@@ -217,9 +217,9 @@ by air exposure for a few moments after firing.
 == \#INFO_DESCR_CPlasmaRifle | $\#INFO_DESCR_PlasmaRifle
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_CPlasmaUpgr | $\#UPGRADE_TITLE_CPlasma_A
-== \#INFO_TITLE_CPlasmaUpgr | MD 47.65.69.73.74 Pulse Charger
-@@ \#INFO_DESCR_CPlasmaUpgr
+== \#INFO_SHORT_CPlasma_A | $\#UPGRADE_TITLE_CPlasma_A
+== \#INFO_TITLE_CPlasma_A | MD 47.65.69.73.74 Pulse Charger
+@@ \#INFO_DESCR_CPlasma_A
 When MDDO was designing the Plasma Rifle, they were mostly experimenting with
 weapons manufacturing and attempting to make sense of mass production. One of
 the results of this internal testing was the Pulse Charger: An oscillating
@@ -244,9 +244,9 @@ causing hundreds of smaller projectiles to come out as it rips through
 anything in its path.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_ShipGunUpgr | $\#UPGRADE_TITLE_ShipGun_A
-== \#INFO_TITLE_ShipGunUpgr | The Forsaken Longinus Solspear
-@@ \#INFO_DESCR_ShipGunUpgr
+== \#INFO_SHORT_ShipGun_A | $\#UPGRADE_TITLE_ShipGun_A
+== \#INFO_TITLE_ShipGun_A | The Forsaken Longinus Solspear
+@@ \#INFO_DESCR_ShipGun_A
 The first of the three ancient bolts of the Star Destroyer, the Longinus
 Solspear. The bolt modifies the projectile to focus all of its power on moving
 forward; like a spear piercing through all in its path. Crushingly powerful,
@@ -257,9 +257,9 @@ This bolt appears to think on its own, though this is possibly just local
 distortion caused by the high amount of condensed demonic energy.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_ShipGunUpg2 | $\#UPGRADE_TITLE_ShipGun_B
-== \#INFO_TITLE_ShipGunUpg2 | The Galliant Surge of Destiny
-@@ \#INFO_DESCR_ShipGunUpg2
+== \#INFO_SHORT_ShipGun_B | $\#UPGRADE_TITLE_ShipGun_B
+== \#INFO_TITLE_ShipGun_B | The Galliant Surge of Destiny
+@@ \#INFO_DESCR_ShipGun_B
 The second of the three ancient bolts of the Star Destroyer, the Surge of
 Destiny does not fire a projectile at all -- instead, it surrounds the user in
 a bright, vibrant aura of protection while unloading tons of smaller

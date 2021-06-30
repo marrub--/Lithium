@@ -9,15 +9,12 @@
 
 class Lith_Cyberspace : Thinker;
 
-/* pixel texture */
-textureid m_PTex;
-
 /* pixel buffer – do not read unless in UI context */
 const RW = 64;
 const RH = 48;
 
-uint8 m_DBuf[RW * RH];
-double m_CamX[RW];
+color  m_dBuf[RW * RH];
+double m_camX[RW];
 
 /* map (TODO: make dynamic) */
 const MW = 8;
@@ -35,111 +32,103 @@ static const uint8[] CMAP = {
 };
 
 /* camera normal */
-double m_NX;
-double m_NY;
+double m_nx;
+double m_ny;
 
 /* camera plane */
-double m_PX;
-double m_PY;
+double m_px;
+double m_py;
 
 /* view pos */
-int m_VX;
-int m_VY;
+int m_vx;
+int m_vy;
 
-static Lith_Cyberspace CreateDerived(class<Lith_Cyberspace> type)
-{
-   let cs = Lith_Cyberspace(new(type));
+static Lith_Cyberspace create() {
+   let cs = new("Lith_Cyberspace");
 
-   cs.m_PTex = TexMan.CheckForTexture("PIXEL", 0);
+   cs.m_nx = -1.0;
+   cs.m_ny =  0.0;
 
-   cs.m_NX = -1.0;
-   cs.m_NY =  0.0;
+   cs.m_px = 0.0;
+   cs.m_py = 0.66;
 
-   cs.m_PX = 0.0;
-   cs.m_PY = 0.66;
+   cs.m_vx = 4;
+   cs.m_vy = 4;
 
-   cs.m_VX = 4;
-   cs.m_VY = 4;
-
-   for(int x = 0; x < cs.RW; x++)
-      cs.m_CamX[x] = x / double(cs.RW) * 2 - 1;
+   for(int x = 0; x < RW; x++)
+      cs.m_camX[x] = x / double(RW) * 2 - 1;
 
    cs.changeStatNum(_stat_cyberspace);
 
-   CallACS("Lith_CSLoadMap");
+   callAcs("Lith_CSLoadMap");
 
    return cs;
 }
 
-static Lith_Cyberspace Create()
-{
-   return CreateDerived("Lith_Cyberspace");
+override void tick() {
+   lith_rotateView(2.0);
 }
 
-void Lith_RotateView(double rel)
-{
-   double o_nx = m_NX;
-   double o_px = m_PX;
+void lith_rotateView(double rel) {
+   double o_nx = m_nx;
+   double o_px = m_px;
 
    /* rotate normal and plane with a simple matrix */
-   /* TODO: calculate this in drawframe instead and use a euler angle */
-   m_NX = m_NX * Cos(rel) - m_NY * Sin(rel);
-   m_NY = o_nx * Sin(rel) + m_NY * Cos(rel);
-   m_PX = m_PX * Cos(rel) - m_PY * Sin(rel);
-   m_PY = o_px * Sin(rel) + m_PY * Cos(rel);
+   m_nx = m_nx * cos(rel) - m_ny * sin(rel);
+   m_ny = o_nx * sin(rel) + m_ny * cos(rel);
+   m_px = m_px * cos(rel) - m_py * sin(rel);
+   m_py = o_px * sin(rel) + m_py * cos(rel);
 }
 
-void Lith_DrawFrame()
-{
-   for(int x = 0; x < RW; x++)
-   {
+void lith_drawFrame() {
+   for(int x = 0; x < RW; x++) {
       /* camera x coordinate */
-      double ndc = m_CamX[x];
+      double ndc = m_camX[x];
       if(ndc == 0) ndc = 0.001; /* hack to prevent sigfpe when facing 0° */
 
       /* ray normal */
-      double rnx = m_NX + m_PX * ndc;
-      double rny = m_NY + m_PY * ndc;
+      double rnx = m_nx + m_px * ndc;
+      double rny = m_ny + m_py * ndc;
 
       /* direction delta */
-      double ddx = Sqrt(1 + (rny * rny) / (rnx * rnx));
-      double ddy = Sqrt(1 + (rnx * rnx) / (rny * rny));
+      double ddx = sqrt(1 + (rny * rny) / (rnx * rnx));
+      double ddy = sqrt(1 + (rnx * rnx) / (rny * rny));
 
       /* distance to side */
-      double sidedx;
-      double sidedy;
+      double sideDx;
+      double sideDy;
 
       /* step sign */
-      int stepx;
-      int stepy;
+      int stepX;
+      int stepY;
 
       /* get direction for ray normal */
-      if(rnx < 0) {stepx = -1; sidedx = 0;}
-      else        {stepx =  1; sidedx = ddx;}
-      if(rny < 0) {stepy = -1; sidedy = 0;}
-      else        {stepy =  1; sidedy = ddy;}
+      if(rnx < 0) {stepX = -1; sideDx = 0;}
+      else        {stepX =  1; sideDx = ddx;}
+      if(rny < 0) {stepY = -1; sideDy = 0;}
+      else        {stepY =  1; sideDy = ddy;}
 
       /* dda raycast */
-      int mapx = m_VX;
-      int mapy = m_VY;
+      int mapX = m_VX;
+      int mapY = m_VY;
 
       bool side = false;
 
       do {
-         if(sidedx < sidedy) {sidedx += ddx; mapx += stepx; side = false;}
-         else                {sidedy += ddy; mapy += stepy; side = true; }
-      } while(!CMAP[mapx + mapy * MW]);
+         if(sideDx < sideDy) {sideDx += ddx; mapX += stepX; side = false;}
+         else                {sideDy += ddy; mapY += stepY; side = true; }
+      } while(!CMAP[mapX + mapY * MW]);
 
       /* get perspective distance */
-      double pwdst;
-      if(side) pwdst = (mapy - m_VY + (1 - stepy) / 2) / rny;
-      else     pwdst = (mapx - m_VX + (1 - stepx) / 2) / rnx;
+      double pwDst;
+      if(side) pwDst = (mapY - m_VY + (1 - stepY) / 2) / rny;
+      else     pwDst = (mapX - m_VX + (1 - stepX) / 2) / rnx;
 
       /* get line draw properties */
-      int lineh = int(RH / pwdst);
+      int lineH = int(RH / pwDst);
 
-      int ds = -lineh / 2 + RH / 2;
-      int de =  lineh / 2 + RH / 2;
+      int ds = -lineH / 2 + RH / 2;
+      int de =  lineH / 2 + RH / 2;
 
       if(ds <   0) ds = 0;
       if(de >= RH) de = RH - 1;
@@ -147,26 +136,24 @@ void Lith_DrawFrame()
       if(ds == de) continue;
 
       /* get light amount for line */
-      int light = 0xFF - int(pwdst * 32);
+      int light = 0xFF - int(pwDst * 32);
       if(side) light /= 2;
-      light = Clamp(light, 32, 135);
+      light = clamp(light, 32, 135);
 
       /* clear and draw line */
-      for(int y =  0; y <  RH; y++) m_DBuf[x + y * RW] = 0;
-      for(int y = ds; y <= de; y++) m_DBuf[x + y * RW] = light;
+      for(int y =  0; y <  RH; y++) m_dBuf[x + y * RW] = 0;
+      for(int y = ds; y <= de; y++) m_dBuf[x + y * RW] = light | 0xFF000000;
    }
 }
 
-ui void Lith_Render() const
-{
-   Screen.Dim("Black", 1, 0, 0, Screen.GetWidth(), Screen.GetHeight());
-
+ui void lith_render() const {
+   let cl = Lith_URANUS.instance();
    /* draw scene from pixel buffer */
-   for(int y = 0; y < RH; y++) for(int x = 0; x < RW; x++)
-      Screen.DrawTexture(m_PTex, false, x, y,
-         DTA_VirtualWidth,  RW,
-         DTA_VirtualHeight, RH,
-         DTA_FillColor,     m_DBuf[x + y * RW]);
+   for(int y = 0; y < RH; y++) {
+      for(int x = 0; x < RW; x++) {
+         cl.drawRect((1, 1), (x, y), m_dBuf[x + y * RW]);
+      }
+   }
 }
 
 /* EOF */

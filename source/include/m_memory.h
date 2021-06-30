@@ -23,14 +23,12 @@ enum {
    _tag_head,
    _tag_libc,
 
-   _tag_cybr,
    _tag_dlgs,
    _tag_file,
-   _tag_huds,
    _tag_item,
    _tag_logs,
    _tag_plyr,
-   _tag_ttle,
+   _tag_temp,
 
    _tag_max
 };

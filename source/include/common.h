@@ -27,17 +27,14 @@
 #include "m_str.h"
 #include "m_stab.h"
 
-#define unwrap_do(e, stmt) statement(if((e)->some) stmt)
-#define unwrap(e) unwrap_do(e, [[return]] __asm("Rjnk()");)
+#define Stringify(s)  #s
+#define XStringify(s) Stringify(s)
 
-#define unwrap_print(e) \
-   unwrap_do(e, { \
-      ACS_BeginLog(); \
-      PrintChrSt((e)->err); \
-      ACS_EndLog(); \
-   })
-
-#define LineHash ((u32)__LINE__ * FileHash)
+#define LineHash    (__LINE__ * FileHash)
+#define LineHashStr XStringify(__LINE__) "_" XStringify(FileHash)
+#define LineHashIdent_( ln, fh) ln ## _ ## fh
+#define LineHashIdent__(ln, fh) LineHashIdent_(ln, fh)
+#define LineHashIdent           LineHashIdent__(__LINE__, FileHash)
 
 #define ifw(decl, ...) __with(decl;) if(__VA_ARGS__)
 #define ifauto(type, name, ...) ifw(type name = (__VA_ARGS__), name)
@@ -160,7 +157,6 @@
 
 #ifndef NDEBUG
 enum {
-   log_none,
    log_dev,   /* general debug info */
    log_devh,  /* prints live stats to the HUD (position, angles, etc) */
    log_boss,  /* debug info for the boss system */

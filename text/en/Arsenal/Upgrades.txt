@@ -138,8 +138,8 @@ Weapons in your inventory automatically reload after 5 seconds.
 Automated reloading system for your backpack.
 
 ## ---------------------------------------------------------------------------|
-== \#UPGRADE_TITLE_AutoPistol | Auto Pistol
-@@ \#UPGRADE_EFFEC_AutoPistol
+== \#UPGRADE_TITLE_Pistol_A | Auto Pistol
+@@ \#UPGRADE_EFFEC_Pistol_A
 Makes your pistol fire in full auto.
 
 Simply changes the trigger mechanism a bit to make the pistol fire
@@ -148,8 +148,8 @@ automatically.
 \cdCompatible with Plasma Pistol.
 
 ## ---------------------------------------------------------------------------|
-== \#UPGRADE_TITLE_PlasPistol | Plasma Pistol
-@@ \#UPGRADE_EFFEC_PlasPistol
+== \#UPGRADE_TITLE_Pistol_B | Plasma Pistol
+@@ \#UPGRADE_EFFEC_Pistol_B
 Makes your pistol fire strong plasma.
 
 Changes the internal mechanisms of the gun to fire charged plasma.
@@ -157,24 +157,24 @@ Changes the internal mechanisms of the gun to fire charged plasma.
 \cdCompatible with Auto Pistol.
 
 ## ---------------------------------------------------------------------------|
-== \#UPGRADE_TITLE_PoisonShot | Poison Shot
-@@ \#UPGRADE_EFFEC_PoisonShot
+== \#UPGRADE_TITLE_Shotgun_B | Poison Shot
+@@ \#UPGRADE_EFFEC_Shotgun_B
 Makes your shotgun fire poison pellets that do 10 damage every half-second
 after hitting a target.
 
 Installs a poison injector into the shell loading mechanism.
 
 ## ---------------------------------------------------------------------------|
-== \#UPGRADE_TITLE_GaussShotty | Gauss Rifle
-@@ \#UPGRADE_EFFEC_GaussShotty
+== \#UPGRADE_TITLE_Shotgun_A | Gauss Rifle
+@@ \#UPGRADE_EFFEC_Shotgun_A
 Turns your shotgun into a gauss rifle.
 
 Re-build the internal mechanisms to turn the railgun part of your shotgun
 into a new one, removing the shell loader entirely.
 
 ## ---------------------------------------------------------------------------|
-== \#UPGRADE_TITLE_RifleModes | Modal Rifle
-@@ \#UPGRADE_EFFEC_RifleModes
+== \#UPGRADE_TITLE_Rifle_A | Modal Rifle
+@@ \#UPGRADE_EFFEC_Rifle_A
 Gives your rifle a sniper firing mode.
 
 A complete replacement for the trigger mechanism which adds a third mode,
@@ -183,8 +183,8 @@ allowing you to burst-fire accurate, painful shots.
 \cdCompatible with Laser Rifle.
 
 ## ---------------------------------------------------------------------------|
-== \#UPGRADE_TITLE_LaserRCW | Laser Rifle
-@@ \#UPGRADE_EFFEC_LaserRCW
+== \#UPGRADE_TITLE_Rifle_B | Laser Rifle
+@@ \#UPGRADE_EFFEC_Rifle_B
 Makes your rifle fire penetrating lasers.
 
 Modal Rifle may be used with this upgrade.
@@ -194,8 +194,8 @@ Uses a standard photon accelerator to fire lasers out of your rifle.
 \cdCompatible with Modal Rifle.
 
 ## ---------------------------------------------------------------------------|
-== \#UPGRADE_TITLE_HomingRPG | Homing Rocket
-@@ \#UPGRADE_EFFEC_HomingRPG
+== \#UPGRADE_TITLE_RPG_B | Homing Rocket
+@@ \#UPGRADE_EFFEC_RPG_B
 Pressing alt-fire with the rocket launcher selects a target to be traced by
 any rockets you fire afterwards.
 
@@ -203,8 +203,8 @@ Disperses extra nanomachines out of the rifle that push the rocket toward the
 enemy with extreme accuracy.
 
 ## ---------------------------------------------------------------------------|
-== \#UPGRADE_TITLE_ChargeRPG | C. Launcher
-@@ \#UPGRADE_EFFEC_ChargeRPG
+== \#UPGRADE_TITLE_RPG_A | C. Launcher
+@@ \#UPGRADE_EFFEC_RPG_A
 Lets you hold "fire" to queue extra grenades in your grenade launcher.
 
 Can fire rockets in a line, spiral, or grenade dump.
@@ -216,32 +216,32 @@ Hold fire to load more grenades, and then hold alt-fire to change the firing
 mode.
 
 ## ---------------------------------------------------------------------------|
-== \#UPGRADE_TITLE_PlasLaser | Plasmatic Las.
-@@ \#UPGRADE_EFFEC_PlasLaser
+== \#UPGRADE_TITLE_Plasma_A | Plasmatic Las.
+@@ \#UPGRADE_EFFEC_Plasma_A
 Makes your plasma rifle emit red-hot laser beams.
 
 Switches out the ion emitter with an ion condenser, that can fire out laser
 beams strong enough to cut clean through Adamantium.
 
 ## ---------------------------------------------------------------------------|
-== \#UPGRADE_TITLE_PartBeam | Particle Beam
-@@ \#UPGRADE_EFFEC_PartBeam
+== \#UPGRADE_TITLE_Plasma_B | Particle Beam
+@@ \#UPGRADE_EFFEC_Plasma_B
 Makes your plasma rifle fire a deadly long-range particle beam.
 
 Replaces the weapon's ion emitter with an ion accelerator, that fires bursts
 of ions that are then super-charged.
 
 ## ---------------------------------------------------------------------------|
-== \#UPGRADE_TITLE_PunctCannon | Punct. Cannon
-@@ \#UPGRADE_EFFEC_PunctCannon
+== \#UPGRADE_TITLE_Cannon_A | Punct. Cannon
+@@ \#UPGRADE_EFFEC_Cannon_A
 Your cannon now shoots explosive bolts that send huge shocks through walls.
 
 By adding new magic translation buffers to your weapon, it can create
 extreme-yield explosive bolts from the same charge as the cannon type does.
 
 ## ---------------------------------------------------------------------------|
-== \#UPGRADE_TITLE_OmegaRail | Omega Railgun
-@@ \#UPGRADE_EFFEC_OmegaRail
+== \#UPGRADE_TITLE_Cannon_B | Omega Railgun
+@@ \#UPGRADE_EFFEC_Cannon_B
 Your cannon fires highly deadly, pinpoint accurate plasma death.
 
 Implements a plasma charger in your cannon, made with reverse-engineered
@@ -333,8 +333,8 @@ The Star Destroyer will emit an aura of protection while firing out projectiles
 from all directions.
 
 ## ---------------------------------------------------------------------------|
-== \#UPGRADE_TITLE_DarkCannon | ????????
-@@ \#UPGRADE_EFFEC_DarkCannon
+== \#UPGRADE_TITLE_Cannon_C | ????????
+@@ \#UPGRADE_EFFEC_Cannon_C
 What the !@#$% is this!?
 
 ## Extras --------------------------------------------------------------------|
@@ -348,8 +348,8 @@ CHARGE IN FACT I'LL DO IT ANYWAY OK ACTUALLY BRB I JUST BROKE MY HAND SWINGING
 IT AROUND LIKE THIS I'LL BE BACK WITH A GUITAR MADE OF BANDAGES LATER
 
 ## ---------------------------------------------------------------------------|
-== \#UPGRADE_TITLE_7777777 | 7777777 Mode
-@@ \#UPGRADE_EFFEC_7777777
+== \#UPGRADE_TITLE_Seven7s | 7777777 Mode
+@@ \#UPGRADE_EFFEC_Seven7s
 Instates cosmic horror and spurious time travel into your very being, causing
 you to instantly implode upon activation. (not really)
 

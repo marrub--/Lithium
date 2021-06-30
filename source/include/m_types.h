@@ -40,7 +40,33 @@
 #define type(x)      [[__script(x)]]
 #define addr(x)      [[__address(x)]]
 
-/* Types ------------------------------------------------------------------- */
+#define unwrap_do(e, stmt) statement(if((e)->some) statement(stmt);)
+
+#define unwrap_cb() [[return]] __asm("Rjnk()")
+
+#define unwrap(e) \
+   unwrap_do(e, { \
+      unwrap_cb(); \
+   })
+#define unwrap_print(e) \
+   unwrap_do(e, { \
+      ACS_BeginLog(); \
+      PrintChrSt((e)->err); \
+      ACS_EndLog(); \
+   })
+
+#define gosubEnable() lbl _gsret = lnil
+
+#define gosub_(label, lh) \
+   statement({ \
+      _gsret = &&_l##lh; \
+      goto label; \
+   _l##lh:; \
+   })
+#define gosub__(label, lh) gosub_ (label, lh)
+#define gosub(label)       gosub__(label, LineHashIdent)
+
+#define gosubRet() goto *_gsret
 
 typedef int32_t i32;
 typedef int64_t i64;
@@ -55,7 +81,8 @@ typedef i32 mem_size_t;
 
 typedef unsigned char byte;
 
-typedef __str str;
+typedef __label   *lbl;
+typedef __str_ent *str;
 
 typedef char __str_ars const *astr;
 typedef char           const *cstr;
@@ -79,8 +106,6 @@ union ik32 {i32 i; k32 k;};
 union uk32 {u32 u; k32 k;};
 union ik64 {i64 i; k64 k;};
 union uk64 {u64 u; k64 k;};
-
-/* Address Space Definitions ----------------------------------------------- */
 
 __addrdef extern __mod_arr lmvar;
 __addrdef extern __hub_arr lhvar;

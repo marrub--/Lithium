@@ -51,8 +51,11 @@ void W_Title(void) {
    SetSize(320, 240);
    SetClipW(0, 0, 320, 240, 310);
 
-   char *txt = Malloc(4096, _tag_ttle);
-   char *bgn = Malloc(128,  _tag_ttle);
+   noinit static
+   char txt[4096], bgn[128];
+   txt[0] = '\0';
+   bgn[0] = '\0';
+
    LanguageCV(txt, LANG "OPENER");
    LanguageCV(bgn, LANG "BEGIN");
 

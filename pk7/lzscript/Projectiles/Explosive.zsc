@@ -16,7 +16,7 @@ class Lith_ExplosionAfterSmoke : Lith_BulletAfterSmoke {
 class Lith_Explosive : Actor;
 
 bool CheckMarathon(bool isTarget = true) {
-   return Lith_UTIL.pData(isTarget ? target : Actor(self), pdata_upgrade, UPGR_7777777);
+   return Lith_UTIL.pData(isTarget ? target : Actor(self), pdata_upgrade, UPGR_Seven7s);
 }
 
 void Lith_A_ExplodeSound(int chan = lch_body2, bool target = true) {

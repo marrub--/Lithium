@@ -13,115 +13,62 @@
 ## ---------------------------------------------------------------------------|
 
 require_relative "corinth.rb"
+require "yaml"
 
 def zstr s
    s.gsub "\0", "\\\\0"
 end
 
-def generate_strhash_switch kvp, ind = 1, it = 0
-   res = String.new
-   itx = "   "
-   res.concat "#{itx*ind}switch(#{%w"fst snd thd"[it]}) {\n"
-   for key, nxt in kvp
-      ind += 1
-      z0 = zstr key[0]
-      z1 = zstr key[1]
-      z2 = zstr key[2]
-      z3 = zstr key[3]
-      res.concat "#{itx*ind}case FourCC('#{z0}', '#{z1}', '#{z2}', '#{z3}'):\n"
-      ind += 1
-      if nxt.is_a? String
-         res.concat "#{itx*ind}return #{nxt};\n"
-      else
-         res.concat generate_strhash_switch nxt, ind, it + 1
-         res.concat "#{itx*ind}break;\n"
-      end
-      ind -= 2
-   end
-   res.concat "#{itx*ind}}\n"
-   res
-end
-
-def generate_strhasher keys, pfx
-   sorted_keys = {}
-   for key in keys
-      fst = key[0... 4].to_s.ljust 4, "\0"
-      snd = key[4... 8].to_s.ljust 4, "\0"
-      thd = key[8...12].to_s.ljust 4, "\0"
-      sorted_keys[fst]           = {}        unless sorted_keys[fst]
-      sorted_keys[fst][snd]      = {}        unless sorted_keys[fst][snd]
-      sorted_keys[fst][snd][thd] = pfx + key unless sorted_keys[fst][snd][thd]
-   end
-   generate_strhash_switch sorted_keys
-end
-
 common_main do
-   tks = tokenize ARGV.shift
+   hsh      = YAML.load(IO.read(ARGV.shift), symbolize_names: true)
+   upgrades = []
 
-   upgrades = {}
-   category = ""
-
-   loop do
-      tok = tks.next.expect_in_top [:colon, :plus, :eof]
-
-      case tok.type
-      when :colon
-         tok = tks.next.expect_after tok, :identi
-         category = "UC_" + tok.text
-      when :plus
-         tok = tks.next.expect_after tok, :identi
-         una = tok.text
-
-         tok = tks.next.expect_after tok, :identi
-         inf = if tok.text == "N/A" then "snil" else 's"' + tok.text + '"' end
-
-         scr = tks.peek_or :number, "0"
-
-         pcl = []
-         tks.while_drop :bar do
-            tok = tks.next.expect_after tok, :identi
-            pcl.push tok.text
+   for category, cupgs in hsh
+      catname = category.to_s.prepend "UC_"
+      for name, hupg in cupgs
+         name = name.to_s
+         reqs = (hupg[:req] || "").split
+         for req in reqs
+            req.prepend "dst_bit(UR_"
+            req.concat  ")"
          end
-         pcl = pcl.join " | "
-
-         flg = []
-         tok = tks.next.expect_after tok, :identi
-         for c, i in tok.text.chars.each_with_index
-               if c == "-"           then next
-            elsif c == "A" && i == 0 then flg.push c
-            elsif c == "D" && i == 1 then flg.push c
-            elsif c == "U" && i == 2 then flg.push c
-            elsif c == "R" && i == 3 then flg.push c
-            elsif c == "E" && i == 4 then flg.push c
-            else                          tok.raise_kw "funcs" end
+         if reqs.empty?
+            reqs = ["0"]
          end
-
-         prf = tks.peek_or :number, "0"
-
-         mul = tks.peek_or :period, "0" do |orig|
-            tok = tks.next.expect_after orig, :number
-            tok.text
+         pg = hupg[:pg] || name
+         if pg == "N/A"
+            pg = "nil"
+         else
+            pg = '"' + pg + '"'
          end
-
-         grp = tks.peek_or :assign, "0" do |orig|
-            tok = tks.next.expect_after orig, :identi
-            "UG_" + tok.text
-         end
-
-         req = tks.peek_or :modulo, "0" do |orig|
-            req = []
-            tok = orig
-            tks.while_drop :bar do
-               tok = tks.next.expect_after tok, :identi
-               req.push "dst_bit(UR_" + tok.text + ")"
+         mul = hupg[:mul] || 0
+         flg = "Case(" + name + ")\n"
+         for c, i in (hupg[:f] || "-----").chars.each_with_index
+            if c == "-"
+               next
+            elsif (c == "A" && i == 0) ||
+                  (c == "D" && i == 1) ||
+                  (c == "U" && i == 2) ||
+                  (c == "R" && i == 3) ||
+                  (c == "E" && i == 4)
+               flg.concat "   #{c}(#{name})\n"
+            else
+               raise "functions failed to parse for #{name}"
             end
-            req.join " | "
          end
 
-         upgrades[una] = {inf: inf, scr: scr, pcl: pcl, prf: prf, grp: grp,
-                          req: req, mul: mul, flg: flg, cat: category}
-      when :eof
-         break
+         upg = {}
+         upg[:nam] = name
+         upg[:inf] = pg
+         upg[:scr] = hupg[:scr] || 0
+         upg[:pcl] = hupg[:cl]  || "gA"
+         upg[:cat] = catname
+         upg[:prf] = hupg[:pr]  || 0
+         upg[:grp] = hupg[:grp] || 0
+         upg[:req] = reqs.join "|"
+         upg[:mul] = mul / 100.0
+         upg[:flg] = flg
+         upgrades.push upg
       end
    end
 
@@ -134,7 +81,7 @@ common_main do
 enum ZscName(UpgradeName) {
 #{
 res = String.new
-upgrades.each_key do |una| res.concat "   UPGR_#{una},\n" end
+for upg in upgrades do res.concat "   UPGR_#{upg[:nam]},\n" end
 res.concat "   UPGR_MAX"
 res
 }
@@ -151,18 +98,13 @@ _end_h_
 struct upgradeinfo upgrinfo[UPGR_MAX] = {
 #{
 res = String.new
-for una, upg in upgrades
-   res.concat %(   {{s"#{una}", #{upg[:inf]}, #{upg[:scr]}}, #{upg[:pcl]}, #{upg[:cat]}, #{upg[:prf]}, #{upg[:grp]}, #{upg[:req]}, #{upg[:mul]}, UPGR_#{una}},\n)
-end
+for upg in upgrades do res.concat %(   {{"#{upg[:nam]}", #{upg[:inf]}, #{upg[:scr]}}, #{upg[:pcl]}, #{upg[:cat]}, #{upg[:prf]}, #{upg[:grp]}, #{upg[:req]}, #{upg[:mul]}, UPGR_#{upg[:nam]}},\n) end
 res
 }
 };
 
 i32 Upgr_StrToEnum(cstr s) {
-   u32 fst = FourCCPtr(s + 0);
-   u32 snd = FourCCPtr(s + 4);
-   u32 thd = FourCCPtr(s + 8);
-#{generate_strhasher upgrades.keys, "UPGR_"}
+   /* TODO */
    return UPGR_MAX;
 }
 
@@ -170,7 +112,7 @@ cstr Upgr_EnumToStr(i32 n) {
    switch(n) {
 #{
 res = String.new
-upgrades.each_key do |una| res.concat "      case UPGR_#{una}: return \"#{zstr una.ljust 12, "\0"}\";\n" end
+for upg in upgrades do res.concat "      case UPGR_#{upg[:nam]}: return \"#{zstr upg[:nam].ljust 12, "\0"}\";\n" end
 res
 }
    }
@@ -185,15 +127,9 @@ _end_c_
 
 #{
 res = String.new
-for una, upg in upgrades
-   unless upg[:flg].empty?
-      flg = upg[:flg].map do |a| "   #{a}(#{una})\n" end.join
-      res.concat "Case(" + una +")\n" + flg
-   end
-end
+for upg in upgrades do res.concat upg[:flg] end
 res
 }
-
 #include "u_func_end.h"
 
 /* EOF */

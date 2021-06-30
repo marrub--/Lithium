@@ -119,9 +119,9 @@ _end_h_
 #define A(a) sOBJ a "Ammo"
 #define O(a) sOBJ a
 #define P(a) s"weapons/" a "/pickup"
-#define N(a) .classname = sOBJ a, .name = Spf a
+#define N(a) .classname = sOBJ a, .name = a
 struct weaponinfo const weaponinfo[weapon_max] = {
-   {0, pcl_any, snil, Placeholder1},
+   {0, pcl_any, nil, Placeholder1},
 #{
 res = String.new
 weps.each do |wep|

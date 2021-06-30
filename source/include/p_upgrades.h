@@ -21,7 +21,7 @@
 #include "m_list.h"
 
 #define P_Upg_Buy(upgr, ...) \
-   P_Shop_Buy(&(upgr)->info->shopdef, (upgr), LANG "UPGRADE_TITLE_%S", __VA_ARGS__)
+   P_Shop_Buy(&(upgr)->info->shopdef, (upgr), LANG "UPGRADE_TITLE_%s", __VA_ARGS__)
 
 #define for_upgrade(name) \
    for(i32 _i = 0; _i < UPGR_MAX; _i++) \
@@ -39,7 +39,7 @@ extern struct upgradeinfo upgrinfo[UPGR_MAX];
 
 /* These are included here so the compiler may check the function signatures. */
 #define Fn_F(n, cb) void Upgr_##n##_##cb(struct upgrade *upgr);
-#define Fn_S(n, cb) script  void Upgr_##n##_##cb(struct upgrade *upgr);
+#define Fn_S(n, cb) script void Upgr_##n##_##cb(struct upgrade *upgr);
 #include "u_func.h"
 
 void Upgr_MInit(void);

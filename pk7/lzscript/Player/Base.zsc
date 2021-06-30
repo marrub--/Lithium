@@ -27,7 +27,7 @@ private double m_RainLerp;
 
 Lith_Flashlight m_light;
 
-Lith_Cyberspace m_CS;
+Lith_Cyberspace m_cs;
 
 bool m_grabInput;
 bool m_onGround;
@@ -162,12 +162,9 @@ void Lith_PreTick() {
       A_SetPitch(pitch + 1, SPF_INTERPOLATE);
    }
 
-   /* update cyberspace */
-   if(m_CS) m_CS.Lith_RotateView(2);
-
    /* draw stuff if we're the camera */
-   if(players[consoleplayer].camera == self) {
-      if(m_CS) m_CS.Lith_DrawFrame();
+   if(players[consolePlayer].camera == self) {
+      if(m_cs) m_cs.lith_drawFrame();
       Lith_URANUS.LE();
    }
 }

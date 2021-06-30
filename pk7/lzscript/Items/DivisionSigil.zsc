@@ -10,7 +10,7 @@
 class Lith_DivisionSigilSprite : Lith_AnimItemSprite {
    default {
       Lith_AnimItemSprite.Phases 23;
-      +BRIGHT
+      +Bright
    }
 
    states(Actor) {
@@ -20,14 +20,16 @@ class Lith_DivisionSigilSprite : Lith_AnimItemSprite {
    }
 }
 
-class Lith_DivisionSigil : Lith_BagItemPickup {
+class Lith_DivisionSigil : Lith_DivisionItem {
    default {
       Tag "Division Sigil";
       Lith_InventoryItem.InvName "DivisionSigil";
       Lith_InventoryItem.Size 3, 3;
-      Lith_BagItem.InvType _cont_store;
-      Lith_BagItem.InvSize 7, 7;
-      +LITH_BAGITEMPICKUP.PKUP_NOSPRITE
+      Lith_InventoryItem.InvType _cont_store;
+      Lith_InventoryItem.InvSize 7, 7;
+      Lith_InventoryItem.InvSell -1;
+      Lith_InventoryItem.ItemType _itemt_bagitem;
+      +Lith_DivisionItem.Pkup_NoSprite
    }
 
    override void postBeginPlay() {
@@ -50,48 +52,51 @@ class Lith_DivisionSigil : Lith_BagItemPickup {
    }
 }
 
-class Lith_ClawOfImp : Lith_InventoryItemPickup {
+class Lith_ClawOfImp : Lith_DivisionItem {
    default {
       Tag "Claw of Imp";
       Lith_InventoryItem.InvName "ClawOfImp";
       Lith_InventoryItem.Size 4, 2;
-      Lith_InventoryItem.InvSell 2000;
-      Lith_InventoryItemPickup.Sprite "DITMA";
-      +LITH_INVENTORYITEMPICKUP.PKUP_GENERIC
+      Lith_DivisionItem.Sprite "DITMA";
    }
 }
 
-class Lith_InventoryItemPickup : Lith_InventoryItem {
-   mixin Lith_Pickup;
-   mixin Lith_ItemPickup;
+class Lith_AndSigil : Lith_DivisionItem {
    default {
-      Lith_InventoryItemPickup.Glow "Lith_ItemGlow";
+      Tag "Binarist 'And' Sigil";
+      Lith_InventoryItem.InvName "AndSigil";
+      Lith_InventoryItem.Size 3, 3;
+      Lith_DivisionItem.Sprite "DITMB";
    }
 }
 
-class Lith_BagItemPickup : Lith_BagItem {
-   mixin Lith_Pickup;
-   mixin Lith_ItemPickup;
+class Lith_OrSigil : Lith_DivisionItem {
    default {
-      Lith_BagItemPickup.Glow "Lith_ItemGlow";
+      Tag "Binarist 'Or' Sigil";
+      Lith_InventoryItem.InvName "OrSigil";
+      Lith_InventoryItem.Size 3, 3;
+      Lith_DivisionItem.Sprite "DITMC";
    }
 }
 
-mixin class Lith_ItemPickup {
-   default {
-      Inventory.PickupSound "player/pickup/evil";
-      Lith_InventoryItem.InvEquip _cont_store;
-   }
+class Lith_DivisionItem : Lith_InventoryItem;
 
-   override void postBeginPlay() {
-      super.postBeginPlay();
-      Lith_PickupPostBeginPlay();
-   }
+mixin Lith_Pickup;
 
-   override void tick() {
-      super.tick();
-      Lith_PickupTick();
-   }
+default {
+   Lith_DivisionItem.Glow "Lith_ItemGlow";
+   Inventory.PickupSound "player/pickup/evil";
+   +Lith_DivisionItem.Pkup_Generic
+}
+
+override void postBeginPlay() {
+   super.postBeginPlay();
+   Lith_PickupPostBeginPlay();
+}
+
+override void tick() {
+   super.tick();
+   Lith_PickupTick();
 }
 
 /* EOF */

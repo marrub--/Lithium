@@ -58,7 +58,7 @@ Context = Struct.new :fp, :srcs, :deps, :link
 
 UpgcEnt = Struct.new :i, :c, :h, :f
 UPGC = [
-   UpgcEnt.new("Upgrades.txt", "p_upgrinfo.c", "u_names.h", "u_func.h"),
+   UpgcEnt.new("Upgrades.yaml", "p_upgrinfo.c", "u_names.h", "u_func.h"),
 ]
 def proc_upgc ctx
    ctx.fp << <<ninja
@@ -105,28 +105,14 @@ ninja
    end
 end
 
-InfcEnt = Struct.new :i, :c, :h
-INFC = [
-   InfcEnt.new("Info.txt", "p_bipinfo.c", "p_bipname.h"),
-]
-def proc_infc ctx
+TrieEnt = Struct.new :d
+def proc_trie ctx
    ctx.fp << <<ninja
-rule infc
- command = $#{TOOLS}/infc.rb $in $out
- description = InfC
+rule trie
+ command = gdcc-cpp $in -o - | tools/trie.rb $out
+ description = TRIE
+build $#{SRC}/m_trie.c: trie $#{HDR}/m_trie.h | $#{TOOLS}/trie.rb
 ninja
-
-   for ent in INFC
-      i = txt ent.i
-      o = bin ent.c
-      c = src ent.c
-      h = hdr ent.h
-
-      ctx.fp << "build #{h} #{c}: infc #{i} | $#{TOOLS}/infc.rb\n"
-
-      ctx.srcs.push SrcsEnt.new o, c
-      ctx.deps.push h
-   end
 end
 
 ZcppEnt = Struct.new :i, :z
@@ -333,7 +319,6 @@ ctx.srcs = [
    SrcsEnt.from("m_token.c"),
    SrcsEnt.from("p_attrib.c"),
    SrcsEnt.from("p_bip.c"),
-   SrcsEnt.from("p_bipinfo.c"),
    SrcsEnt.from("p_cbi.c"),
    SrcsEnt.from("p_data.c"),
    SrcsEnt.from("p_gui_bip.c"),
@@ -366,9 +351,9 @@ ctx.srcs = [
    SrcsEnt.from("p_upgrinfo.c"),
    SrcsEnt.from("p_weaponinfo.c"),
    SrcsEnt.from("p_weapons.c"),
-   SrcsEnt.from("u_7777777.c"),
    SrcsEnt.from("u_adrenaline.c"),
    SrcsEnt.from("u_autoreload.c"),
+   SrcsEnt.from("u_cannon_a.c"),
    SrcsEnt.from("u_cyberlegs.c"),
    SrcsEnt.from("u_defensenuke.c"),
    SrcsEnt.from("u_flashlight.c"),
@@ -380,15 +365,15 @@ ctx.srcs = [
    SrcsEnt.from("u_headsupdism.c"),
    SrcsEnt.from("u_headsupdist.c"),
    SrcsEnt.from("u_headsupdisw.c"),
-   SrcsEnt.from("u_homingrpg.c"),
    SrcsEnt.from("u_instadeath.c"),
    SrcsEnt.from("u_jetbooster.c"),
    SrcsEnt.from("u_lolsords.c"),
    SrcsEnt.from("u_magic.c"),
-   SrcsEnt.from("u_punctcannon.c"),
    SrcsEnt.from("u_reactarmor.c"),
    SrcsEnt.from("u_reflexwetw.c"),
-   SrcsEnt.from("u_riflemodes.c"),
+   SrcsEnt.from("u_rifle_a.c"),
+   SrcsEnt.from("u_rpg_b.c"),
+   SrcsEnt.from("u_seven7s.c"),
    SrcsEnt.from("u_stealthsys.c"),
    SrcsEnt.from("u_subweapons.c"),
    SrcsEnt.from("u_unceunce.c"),
@@ -433,7 +418,6 @@ ctx.deps = [
    hdr("m_version.h"),
    hdr("p_attrib.h"),
    hdr("p_bip.h"),
-   hdr("p_bipname.h"),
    hdr("p_cbi.h"),
    hdr("p_hud.h"),
    hdr("p_hudid.h"),
@@ -441,7 +425,6 @@ ctx.deps = [
    hdr("p_player.h"),
    hdr("p_savedata.h"),
    hdr("p_shopdef.h"),
-   hdr("p_sys.h"),
    hdr("p_upgrades.h"),
    hdr("p_weaponinfo.h"),
    hdr("p_weapons.h"),
@@ -478,7 +461,7 @@ ninja
 
 proc_upgc ctx
 proc_wepc ctx
-proc_infc ctx
+proc_trie ctx
 proc_zcpp ctx
 proc_txtc ctx
 proc_hsfs ctx

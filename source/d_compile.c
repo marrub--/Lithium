@@ -95,8 +95,8 @@ bool Dlg_GetItem(struct compiler *d, u32 act)
 {
    struct token *tok = d->tb.get();
 
-   if(faststrcmp(tok->textV, "page") == 0) {
-      tok = d->tb.expc(&d->res, d->tb.get(), tok_number);
+   if(faststrchk(tok->textV, "page")) {
+      tok = d->tb.expc(&d->res, d->tb.get(), tok_number, 0);
       unwrap(&d->res);
 
       u32 num = faststrtou32(tok->textV);
@@ -109,15 +109,15 @@ bool Dlg_GetItem(struct compiler *d, u32 act)
       unwrap(&d->res);
       return true;
    } else if(act == ACT_TRM_WAIT) {
-      if(faststrcmp(tok->textV, "failure") == 0) {
+      if(faststrchk(tok->textV, "failure")) {
          Dlg_GetItem_Page(d, DPAGE_FAILURE, act);
          unwrap(&d->res);
          return true;
-      } else if(faststrcmp(tok->textV, "finished") == 0) {
+      } else if(faststrchk(tok->textV, "finished")) {
          Dlg_GetItem_Page(d, DPAGE_FINISHED, act);
          unwrap(&d->res);
          return true;
-      } else if(faststrcmp(tok->textV, "unfinished") == 0) {
+      } else if(faststrchk(tok->textV, "unfinished")) {
          Dlg_GetItem_Page(d, DPAGE_UNFINISHED, act);
          unwrap(&d->res);
          return true;
@@ -131,7 +131,7 @@ bool Dlg_GetItem(struct compiler *d, u32 act)
 static
 void Dlg_GetTop_Prog(struct compiler *d, u32 act, u32 beg, u32 end)
 {
-   struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_number);
+   struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_number, 0);
    unwrap(&d->res);
 
    u32 num = beg + faststrtou32(tok->textV);
@@ -243,23 +243,23 @@ void Dlg_MInit(void)
       W_Open(StrParam("lfiles/Dialogue_%tS.txt", PRINTNAME_LEVEL), 't');
 
    if(fp) {
-      TBufCtor(&d.tb, fp);
+      TBufCtor(&d.tb, fp, "Dialogue file");
 
       for(;;) {
-         struct token *tok = d.tb.expc2(&d.res, d.tb.get(), tok_identi, tok_eof);
-         unwrap_do(&d.res, { goto done; });
+         struct token *tok = d.tb.expc(&d.res, d.tb.get(), tok_identi, tok_eof, 0);
+         unwrap_do(&d.res, goto done;);
          if(tok->type == tok_eof) break;
 
-         if(faststrcmp(tok->textV, "program") == 0) {
+         if(faststrchk(tok->textV, "program")) {
             Dlg_GetTop_Prog(&d, ACT_NONE, DNUM_PRG_BEG, DNUM_PRG_END);
-         } else if(faststrcmp(tok->textV, "dialogue") == 0) {
+         } else if(faststrchk(tok->textV, "dialogue")) {
             Dlg_GetTop_Prog(&d, ACT_DLG_WAIT, DNUM_DLG_BEG, DNUM_DLG_END);
-         } else if(faststrcmp(tok->textV, "terminal") == 0) {
+         } else if(faststrchk(tok->textV, "terminal")) {
             Dlg_GetTop_Prog(&d, ACT_TRM_WAIT, DNUM_TRM_BEG, DNUM_TRM_END);
          } else {
             d.tb.err(&d.res, "invalid toplevel item '%s'", tok->textV);
          }
-         unwrap_do(&d.res, { goto done; });
+         unwrap_do(&d.res, goto done;);
       }
 
       FinishDef(&d);

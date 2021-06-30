@@ -324,7 +324,7 @@ begin:
    /* Now, initialize everything.
     * Start by deallocating temporary tags.
     */
-   Xalloc(_tag_huds);
+   Xalloc(_tag_temp);
 
    if(!modinit) MInitPre();
    if(!gblinit) GInit();

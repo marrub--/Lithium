@@ -81,7 +81,7 @@ void GUIUpgradesList(struct gui_state *g) {
       } else {
          switch(upgr->info->key) {
             case UPGR_TorgueMode: color = "g"; break;
-            case UPGR_DarkCannon: color = "m"; break;
+            case UPGR_Cannon_C:   color = "m"; break;
             default:              color = nil; break;
          }
       }
@@ -91,7 +91,7 @@ void GUIUpgradesList(struct gui_state *g) {
       else if(get_bit(upgr->flags, _ug_owned )) pre = &gui_p.btnlistactive;
       else                                      pre = &gui_p.btnlistsel;
 
-      char *name = LanguageC(LANG "UPGRADE_TITLE_%S", upgr->info->name);
+      char *name = LanguageC(LANG "UPGRADE_TITLE_%s", upgr->info->name);
 
       i32 *upgrsel = &CBIState(g)->upgrsel;
       if(G_Button_HId(g, _i, name, 0, y, _i == *upgrsel, .color = color, .preset = pre))
@@ -195,7 +195,7 @@ void GUIUpgradeDescription(struct gui_state *g, struct upgrade *upgr) {
    PrintText(sf_smallfnt, g->defcr, g->ox+98,1, g->oy+27,1);
 
    /* Effect */
-   ifauto(str, effect, LanguageNull(LANG "UPGRADE_EFFEC_%S", upgr->info->name))
+   ifauto(str, effect, LanguageNull(LANG "UPGRADE_EFFEC_%s", upgr->info->name))
       PrintTextFmt("%s %S", LC(LANG "EFFECT"), effect);
 
    static

@@ -1,0 +1,95 @@
+## -*-YAML-*------------------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison G. Watson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+##
+## Upgrades to be processed into C files.
+##
+## ---------------------------------------------------------------------------|
+
+Body:
+ ## HUDs
+ HeadsUpDisA: {pg: HeadsUpDisp, cl: pA, f: ---R-, pr: 1, mul: -5, grp: 10}
+ HeadsUpDisC: {pg: HeadsUpDisp, cl: pC, f: ---R-, pr: 1, mul: -5, grp: 10}
+ HeadsUpDisD: {pg: HeadsUpDisp, cl: pD, f: ---R-, pr: 1, mul: -5, grp: 10}
+ HeadsUpDisI: {pg: HeadsUpDisp, cl: pI, f: A--R-, pr: 1, mul: -5, grp: 10}
+ HeadsUpDisM: {pg: HeadsUpDisp, cl: pM, f: ---R-, pr: 1, mul: -5, grp: 10}
+ HeadsUpDisT: {pg: HeadsUpDisp, cl: pT, f: ---R-, pr: 1, mul: -5, grp: 10}
+ HeadsUpDisW: {pg: HeadsUpDisp, cl: pW, f: ---R-, pr: 1, mul: -5, grp: 10}
+
+ ## All classes
+ Flashlight: {pg: N/A,          f: -DURE}
+ Zoom:       {pg: N/A,          f: -DUR-}
+ VitalScan:  {pg: VitalScanner, f: --UR-, pr: 2}
+
+ ## Outcasts
+ ReflexWetw: {cl: gO, f: ADU--, pr: 5, mul: -5}
+
+ ## Marine
+ JetBooster:  {cl: pM,               f: A-UR-, mul: -5}
+ CyberLegs:   {cl: pM, scr: 1220000, f: ADU--, pr:  4}
+ ReactArmor:  {cl: pM, scr: 3500200, f: -D-R-, pr: 20, req: AI   }
+ ReactArmor2: {cl: pM, scr: 2990200, f: -----, pr: 10, req: AI RA}
+ DefenseNuke: {cl: pM, scr:  580030, f: ----E,         req: AI   }
+ Adrenaline:  {cl: pM, scr: 1801000, f: --UR-, pr: 10}
+
+ ## Cyber-Mage
+ Magic:       {cl: pC,               f: --UR-}
+ SoulCleaver: {cl: pC, scr: 1100000, f: -----}
+ StealthSys:  {cl: pC, scr: 1800450, f: -DU--}
+
+ ## Dark Lord
+ Subweapons: {cl: pD, f: --URE}
+
+Weap:
+ ## Outcasts
+ AutoReload: {cl: gO, scr: 950050, f: AD---, pr: 2}
+
+ ## Marine
+ Pistol_A:  {cl: pM, scr:  140940, f: -----}
+ Pistol_B:  {cl: pM, scr:  340000, f: -----,                req: WMD}
+ Shotgun_A: {cl: pM, scr: 1079430, f: -----, pr: 1, grp: 1, req: WMD}
+ Shotgun_B: {cl: pM, scr: 1010420, f: -----,        grp: 1, req: WMD}
+ Rifle_A:   {cl: pM, scr:  340100, f: -D-R-}
+ Rifle_B:   {cl: pM, scr: 1008080, f: -----, pr: 1,         req: WMD    }
+ RPG_A:     {cl: pM, scr: 1550000, f: -----,        grp: 2, req: WMD WRD}
+ RPG_B:     {cl: pM, scr: 2505010, f: --U--, pr: 1, grp: 2, req: WMD    }
+ Plasma_A:  {cl: pM, scr: 2250000, f: -----,        grp: 3, req: WMD    }
+ Plasma_B:  {cl: pM, scr: 2500000, f: -----, pr: 1, grp: 3, req: WMD WRD}
+ Cannon_A:  {cl: pM, scr: 5100700, f: -D---,        grp: 4, req: WMD    }
+ Cannon_B:  {cl: pM, scr: 5800100, f: -----, pr: 5, grp: 4, req: WMD WRD}
+
+ ## Cyber-Mage
+ Mateba_A:   {cl: pC, scr:  614100, grp: 1}
+ ShockRif_A: {cl: pC, scr: 1519590, grp: 2}
+ ShockRif_B: {cl: pC, scr: 1911590, grp: 2}
+ SPAS_A:     {cl: pC, scr: 2140400, grp: 3}
+ SPAS_B:     {cl: pC, scr: 1511100, grp: 3}
+ SMG_A:      {cl: pC, scr: 2055000}
+ SMG_B:      {cl: pC, scr: 2888000}
+ SMG_C:      {cl: pC, scr:  998900}
+ IonRifle_A: {cl: pC, scr: 1977000}
+ IonRifle_B: {cl: pC, scr: 2855050}
+ CPlasma_A:  {cl: pC, scr: 2230500, grp: 4}
+ ShipGun_A:  {cl: pC, scr: 6988800, grp: 5}
+ ShipGun_B:  {cl: pC, scr: 7767700, grp: 5}
+
+Extr:
+ ## All classes
+ TorgueMode: {pg: N/A, scr: 8000000,                    pr: 8, req: RDI}
+ Seven7s:    {pg: N/A, scr: 8235430, f: ADU--, mul: 10, pr: 7, req: RDI}
+ lolsords:   {pg: N/A, scr: 1000000, f: ADU--, mul: 20,        req: RDI}
+ Goldeneye:  {pg: N/A, scr:   70000, f: --U--, mul:  7,        req: RDI}
+
+ ## Marine
+ Cannon_C: {pg: N/A, cl: pM, scr: 1500000, grp: 4, req: WMD WRD RDI}
+
+Down:
+ UNCEUNCE:   {pg: N/A, f: ADU--, mul: 30}
+ InstaDeath: {pg: N/A, f: --U--, mul: 50}
+ OneShot:    {pg: N/A,           mul: 50}
+
+## EOF

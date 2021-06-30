@@ -23,9 +23,9 @@ enum
 
 struct shopdef
 {
-   str name;
-   str bipunlock;
-   i96 cost;
+   cstr name;
+   cstr bipunlock;
+   i96  cost;
 
    void (*ShopBuy)   (struct shopdef const *def, void *obj);
    bool (*ShopCanBuy)(struct shopdef const *def, void *obj);

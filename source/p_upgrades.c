@@ -127,7 +127,7 @@ script void P_Upg_PTick() {
       pl.hudenabled = false;
 
       for_upgrade(upgr) {
-         if(get_bit(upgr->flags, _ug_active) && upgr->info->group == UG_HUD) {
+         if(get_bit(upgr->flags, _ug_active) && upgr->info->group == 10) {
             pl.hudenabled = true;
          }
       }

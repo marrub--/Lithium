@@ -25,6 +25,8 @@
 ## Tags ----------------------------------------------------------------------|
 
 == \#ITEM_TAG_ClawOfImp | Claw of Imp
+== \#ITEM_TAG_AndSigil | Binarist 'And' Sigil
+== \#ITEM_TAG_OrSigil | Binarist 'Or' Sigil
 == \#ITEM_TAG_DivisionSigil | \c[Lith_RRed]D\c[Lith_ROra]i\c[Lith_RYel]v\c[Lith_RYlg]i\c[Lith_RGrn]s\c[Lith_RCya]i\c[Lith_RBlu]o\c[Lith_RPur]n \c[Lith_RPnk]S\c[Lith_RHPn]i\c[Lith_RRed]g\c[Lith_ROra]i\c[Lith_RYel]l
 
 == \#ITEM_TAG_ArmStandardUp    | Standard Armor
@@ -50,6 +52,14 @@
 
 %% \#ITEM_SHORT_DivisionSigil
 \cgA mistake of the universe.
+
+%% \#ITEM_SHORT_AndSigil
+\cvSigil of the Binarists.
+Notifier of infinite energy.
+
+%% \#ITEM_SHORT_OrSigil
+\cvSigil of the Binarists.
+Notifier of additive energy.
 
 %% \#ITEM_SHORT_ClawOfImp
 Used in division.
@@ -139,6 +149,8 @@ Used in division.
 == :ItemSpr:ArmMidoriLo      | ARM8C0
 
 == :ItemSpr:ClawOfImp     | DITMA0
+== :ItemSpr:AndSigil      | :Items:AndSigil
+== :ItemSpr:OrSigil       | :Items:OrSigil
 == :ItemSpr:DivisionSigil | :Items:DivisionSigil
 
 == :HUD:H_KC1 | RKEYB0

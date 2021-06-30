@@ -171,7 +171,7 @@ void S_enume(struct set_parm const *sp) {
       sp->st->cb_g.i(sp, &v);
    }
 
-   i32 cr = faststrcmp(sp->st->suff, "color") == 0 ? Draw_GetCr(v) : sp->g->defcr;
+   i32 cr = faststrchk(sp->st->suff, "color") ? Draw_GetCr(v) : sp->g->defcr;
 
    if(v < min || v > max)
       PrintTextChS(LC(LANG "st_name_unknown"));
@@ -220,6 +220,7 @@ struct setting const st_gui[] = {
 struct setting const st_hud[] = {
    {S_boole, "hud_showarmorind", S_cvBoole},
    {S_boole, "hud_showdamage",   S_cvBoole},
+   {S_boole, "hud_showitems",    S_cvBoole},
    {S_boole, "hud_showlvl",      S_cvBoole},
    {S_boole, "hud_showscore",    S_cvBoole},
    {S_boole, "hud_showweapons",  S_cvBoole},

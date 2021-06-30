@@ -6,27 +6,27 @@
  *
  * ---------------------------------------------------------------------------|
  *
- * 7777777 upgrade.
+ * Seven7s upgrade.
  *
  * ---------------------------------------------------------------------------|
  */
 
 #include "u_common.h"
 
-#define UData pl.upgrdata.seven7
+#define UData pl.upgrdata.seven7s
 
 /* Extern Functions -------------------------------------------------------- */
 
-void Upgr_7777777_Activate(struct upgrade *upgr) {
+void Upgr_Seven7s_Activate(struct upgrade *upgr) {
    SetGravity(0, 0.0);
 }
 
-void Upgr_7777777_Deactivate(struct upgrade *upgr) {
+void Upgr_Seven7s_Deactivate(struct upgrade *upgr) {
    SetGravity(0, 1.0);
 }
 
 script
-void Upgr_7777777_Update(struct upgrade *upgr) {
+void Upgr_Seven7s_Update(struct upgrade *upgr) {
    k32 velx, vely, velz = pl.velz > 0 ? pl.velz : -2;
 
    if(pl.velz != 0) {

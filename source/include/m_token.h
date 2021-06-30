@@ -116,7 +116,7 @@ struct token {
 
 void TokParse(FILE *fp, struct token *tok, struct origin *orig);
 cstr TokPrint(struct token *tok);
-bool TokIsKw(struct token *tok, cstr kw);
-cstr TokType(i32 type);
+stkcall bool TokIsKw(struct token *tok, cstr kw);
+stkcall cstr TokType(i32 type);
 
 #endif

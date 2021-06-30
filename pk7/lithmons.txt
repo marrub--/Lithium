@@ -146,7 +146,7 @@ presets {
 
 /* Base Games -------------------------------------------------------------- */
 
-() {
+"" {
    /* Doom */
    pre: ZombieMan     type: zombie        filter: "ZombieMan";
    pre: ZombieMan     type: zombie        filter: "Zombieman";
@@ -202,23 +202,23 @@ presets {
 
 /* Lithium ----------------------------------------------------------------- */
 
-(full dark) {
+"full dark" {
    scr: 1000 exp: 0 type: phantom filter: "Lith_Boss_James";
    scr: 2000 exp: 0 type: phantom filter: "Lith_Boss_Makarov";
    scr: 3000 exp: 0 type: phantom filter: "Lith_Boss_Isaac";
 }
 
-(full angelic) {
+"full angelic" {
    pre: CyberDemon type: angel filter: "Lith_Archangel";
 }
 
-(full) {
+"full" {
    scr: 0 exp: 0 type: cyberdemon filter: "Lith_Steggles";
 }
 
 /* Map Compatibility ------------------------------------------------------- */
 
-(full) {
+"full" {
    /* ed4_rfo1.wad */
    pre: DRLACaptain   type: zombie        filter: "BazookaZombie";
    pre: Imp           type: imp           filter: "BatFamiliar";
@@ -242,7 +242,7 @@ presets {
 /* Mod Compatibility ------------------------------------------------------- */
 
 /* Rampancy */
-(full) {
+"full" {
    pre: ZombieMan     type: zombie        filter: "Robot_SentryBot";
    pre: ShotgunGuy    type: zombiesg      filter: "Robot_DefenderBot";
    pre: ChaingunGuy   type: zombiecg      filter: "Robot_SecurityBotSmall";
@@ -264,7 +264,7 @@ presets {
    pre: ChaingunGuy   type: zombie        filter: "Robot_GunTurret";
 }
 
-() {
+"" {
    /* Shut Up and Lithium */
    pre: ZombieMan     type: imp         filter: "Remnant";
    pre: ZombieMan     type: imp         filter: "Roach";
@@ -327,11 +327,11 @@ presets {
 }
 
 /* Cyberpack */
-() {
+"" {
    pre: ZombieMan type: zombie filter: "ZSec";
 }
 
-(full) {
+"full" {
    pre: ZombieMan     type: zombie        filter: "DuneWarrior";
    pre: ShotgunGuy    type: zombiesg      filter: "NailBorg";
    pre: ShotgunGuy    type: zombiesg      filter: "QuadShotgunZombie";
@@ -357,7 +357,7 @@ presets {
 }
 
 /* DoomRL Arsenal Monsters */
-() {
+"" {
    pre: ZombieMan   type: zombie   filter: "FormerHuman";
    pre: ShotgunGuy  type: zombiesg filter: "FormerSergeant";
    pre: ChaingunGuy type: zombiecg filter: "FormerCommando";
@@ -365,7 +365,7 @@ presets {
 }
 
 /* Colorful Hell */
-(nocase) {
+"nocase" {
    pre: ZombieMan     type: zombie        filter: "Zombie" hacks: "ch";
    pre: ShotgunGuy    type: zombiesg      filter: "SG"     hacks: "ch";
    pre: ChaingunGuy   type: zombiecg      filter: "CGuy"   hacks: "ch";

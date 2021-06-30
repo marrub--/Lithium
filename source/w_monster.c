@@ -361,45 +361,28 @@ void PrintMonsterInfo(dmon_t *m) {
 }
 #endif
 
-bool MonInfo_Kv(struct tokbuf *tb, struct tbuf_err *res, char **kp, char **vp) {
+script
+void MonInfo_Preset(struct tokbuf *tb, struct tbuf_err *res) {
    noinit static
    mon_name_t k, v;
 
-   struct token *tok = tb->expc2(res, tb->get(), tok_semico, tok_identi);
-   unwrap(res);
-
-   if(tok->type == tok_semico) {
-      return false;
-   } else {
-      faststrcpy(k, tok->textV);
-      tb->expdr(res, tok_col);
-      unwrap(res);
-      tok = tb->expc3(res, tb->get(), tok_identi, tok_number, tok_string);
-      unwrap(res);
-      faststrcpy(v, tok->textV);
-      *kp = k;
-      *vp = v;
-      return true;
-   }
-}
-
-script
-void MonInfo_Preset(struct tokbuf *tb, struct tbuf_err *res) {
    struct monster_preset *pre = &monsterpreset[monsterpresetnum++];
-   char *k = nil, *v = nil;
 
-   while(MonInfo_Kv(tb, res, &k, &v)) {
+   while(tb->kv(res, k, v)) {
       unwrap(res);
-      if(faststrcmp(k, "name") == 0) {
+      if(faststrchk(k, "name")) {
          faststrcpy(pre->prename, v);
-      } else if(faststrcmp(k, "exp") == 0) {
+      } else if(faststrchk(k, "exp")) {
          pre->exp = faststrtou64(v);
-      } else if(faststrcmp(k, "scr") == 0) {
+      } else if(faststrchk(k, "scr")) {
          pre->score = faststrtoi96(v);
       } else {
-         tb->err(res, "%s MonInfo_Preset: invalid key '%s'",
+         tb->err(res, "%s MonInfo_Preset: invalid key %s; expected "
+                 "name, "
+                 "exp, "
+                 "or scr",
                  TokPrint(tb->reget()), k);
-         unwrap(res);
+         unwrap_cb();
       }
    }
    unwrap(res);
@@ -435,53 +418,63 @@ void MonInfo_ColorfulHellHack(struct monster_info *mi) {
    }
 }
 
-script
+script static
 void MonInfo_Monster(struct tokbuf *tb, struct tbuf_err *res, i32 flags) {
+   noinit static
+   mon_name_t k, v;
+
+   struct monster_preset *pre = &monsterpreset[monsterpresetnum++];
    struct monster_info *mi = MonInfo_BeginDef();
-   char *k = nil, *v = nil;
    bool finished = false;
 
    mi->flags = flags;
 
-   while(MonInfo_Kv(tb, res, &k, &v)) {
+   while(tb->kv(res, k, v)) {
       unwrap(res);
-      if(faststrcmp(k, "filter") == 0) {
+      if(faststrchk(k, "filter")) {
          faststrcpy(mi->name, v);
-      } else if(faststrcmp(k, "exp") == 0) {
+      } else if(faststrchk(k, "exp")) {
          mi->exp = faststrtou64(v);
-      } else if(faststrcmp(k, "scr") == 0) {
+      } else if(faststrchk(k, "scr")) {
          mi->score = faststrtoi96(v);
-      } else if(faststrcmp(k, "pre") == 0) {
+      } else if(faststrchk(k, "pre")) {
          for(struct monster_preset *pre = monsterpreset;; ++pre) {
-            if(faststrcmp(pre->prename, v) == 0) {
+            if(faststrchk(pre->prename, v)) {
                mi->pre = *pre;
                break;
             }
          }
-      } else if(faststrcmp(k, "type") == 0) {
+      } else if(faststrchk(k, "type")) {
          #define monster_type_x(name) \
-            if(faststrcmp(v, #name) == 0) { \
+            if(faststrchk(v, #name)) { \
                mi->type = mtype_##name; \
                continue; \
             }
          #include "w_monster.h"
-      } else if(faststrcmp(k, "hacks") == 0) {
+      } else if(faststrchk(k, "hacks")) {
          for(char *next, *hack = faststrtok(v, &next, ' '); hack;
              hack = faststrtok(nil, &next, ' '))
          {
-            if(faststrcmp(hack, "ch") == 0) {
+            if(faststrchk(hack, "ch")) {
                MonInfo_ColorfulHellHack(mi);
                finished = true;
             } else {
-               tb->err(res, "%s MonInfo_Monster: invalid hack '%s'",
+               tb->err(res, "%s MonInfo_Monster: invalid hack '%s'; expected "
+                       "ch",
                        TokPrint(tb->reget()), hack);
-               unwrap(res);
+               unwrap_cb();
             }
          }
       } else {
-         tb->err(res, "%s MonInfo_Monster: invalid key '%s'",
+         tb->err(res, "%s MonInfo_Monster: invalid key %s; expected "
+                 "filter, "
+                 "exp, "
+                 "scr, "
+                 "pre, "
+                 "type, "
+                 "or hacks",
                  TokPrint(tb->reget()), k);
-         unwrap(res);
+         unwrap_cb();
       }
    }
    unwrap(res);
@@ -491,35 +484,61 @@ void MonInfo_Monster(struct tokbuf *tb, struct tbuf_err *res, i32 flags) {
    }
 }
 
+static
 i32 MonInfo_Flags(struct tokbuf *tb, struct tbuf_err *res) {
-   i32 flags = 0;
+   gosubEnable();
 
-   for(;;) {
-      struct token *tok = tb->expc2(res, tb->get(), tok_identi, tok_parenc);
-      unwrap(res);
+   char         *flag, *next, c;
+   i32           flags = 0;
+   struct token *tok   = tb->reget();
 
-      if(tok->type == tok_parenc) {
-         break;
+   /* this supports two syntaxes since we originally implemented this
+    * with a more complex syntax but realized it was pointless later,
+    * however the previous syntax will still be supported since there
+    * are a few mods that likely won't change with this, and maybe
+    * someone just likes how it looks (it's trivial to maintain, w/e)
+    * -Ten+Alison
+    */
+   if(tok->type == tok_string) {
+      for(c    = '"',
+          next = nil,
+          flag = faststrtok(tok->textV, &next, ' ');
+          flag;
+          flag = faststrtok(nil, &next, ' '))
+      {
+         gosub(sflag);
       }
-      #define monster_flag_x(name) \
-      else if(faststrcmp(tok->textV, #name) == 0) {\
-         set_bit(flags, _mif_##name); \
-      }
-      #include "w_monster.h"
-      else {
-         tb->err(res, "%s MonInfo_Flags: invalid flag; expected "
-                 #define monster_flag_x(name) #name ", "
-                 #include "w_monster.h"
-                 "or `)'",
-                 TokPrint(tok));
+   } else {
+      for(c = ')';;) {
+         tok = tb->expc(res, tb->get(), tok_identi, tok_parenc, 0);
          unwrap(res);
+
+         if(tok->type == tok_parenc) {
+            break;
+         } else {
+            flag = tok->textV;
+            gosub(sflag);
+         }
       }
    }
-
    return flags;
+
+sflag:
+   #define monster_flag_x(name) \
+   if(faststrchk(flag, #name)) { \
+      set_bit(flags, _mif_##name); \
+      gosubRet(); \
+   }
+   #include "w_monster.h"
+   tb->err(res, "%s MonInfo_Flags: invalid flag %s; expected "
+           #define monster_flag_x(name) #name ", "
+           #include "w_monster.h"
+           "or `%c'",
+           TokPrint(tok), flag, c);
+   unwrap_cb();
 }
 
-script
+script static
 void MonInfo_Monsters(struct tokbuf *tb, struct tbuf_err *res) {
    i32 flags = MonInfo_Flags(tb, res);
    unwrap(res);
@@ -533,7 +552,7 @@ void MonInfo_Monsters(struct tokbuf *tb, struct tbuf_err *res) {
    }
 }
 
-script
+script static
 void MonInfo_Presets(struct tokbuf *tb, struct tbuf_err *res) {
    tb->expdr(res, tok_braceo);
    unwrap(res);
@@ -544,27 +563,29 @@ void MonInfo_Presets(struct tokbuf *tb, struct tbuf_err *res) {
    }
 }
 
-script
+script static
 void MonInfo_Compile(struct tokbuf *tb, struct tbuf_err *res) {
    for(;;) {
       struct token *tok =
-         tb->expc3(res, tb->get(), tok_pareno, tok_identi, tok_eof);
+         tb->expc(res, tb->get(), tok_pareno, tok_string, tok_identi,
+                  tok_eof, 0);
       unwrap(res);
 
       switch(tok->type) {
       case tok_eof:
          return;
+      case tok_string:
       case tok_pareno:
          MonInfo_Monsters(tb, res);
          unwrap(res);
          break;
       case tok_identi:
-         if(faststrcmp(tok->textV, "presets") == 0) {
+         if(faststrchk(tok->textV, "presets")) {
             MonInfo_Presets(tb, res);
             unwrap(res);
          } else {
             tb->err(res, "%s MonInfo_Compile: invalid toplevel identifier", TokPrint(tok));
-            unwrap(res);
+            unwrap_cb();
          }
          break;
       }
@@ -585,7 +606,7 @@ void Mon_Init(void) {
 
    while((fp = W_OpenIter(sp_LITHMONS, 't', &prev))) {
       struct tokbuf tb;
-      TBufCtor(&tb, fp);
+      TBufCtor(&tb, fp, "LITHMONS");
 
       struct tbuf_err res = {};
       MonInfo_Compile(&tb, &res);
@@ -623,6 +644,8 @@ void LogError(cstr cname) {
 
 alloc_aut(0) script ext("ACS") addr(lsc_monsterinfo)
 void Sc_MonsterInfo(void) {
+   static bool piss = true;
+
    while(!gblinit) {
       ACS_Delay(1);
    }
@@ -640,9 +663,9 @@ void Sc_MonsterInfo(void) {
 
       if(get_bit(mi->flags, _mif_full)) {
          if(get_bit(mi->flags, _mif_nocase)) {
-            init = faststrcasecmp(cname, mi->name) == 0;
+            init = faststrcasechk(cname, mi->name);
          } else {
-            init = faststrcmp(cname, mi->name) == 0;
+            init = faststrchk(cname, mi->name);
          }
       } else {
          if(get_bit(mi->flags, _mif_nocase)) {

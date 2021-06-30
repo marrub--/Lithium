@@ -56,17 +56,16 @@ struct dpl_blk dpl_dat[_dpl_siz], *dpl_ina, *dpl_act;
 alloc_aut(0) stkcall static
 cstr TagName(mem_tag_t tag) {
    switch(tag) {
-   case _tag_cybr: return "cyberspace";
-   case _tag_dlgs: return "dialogue";
-   case _tag_file: return "file";
    case _tag_free: return "free";
    case _tag_head: return "listhead";
-   case _tag_huds: return "hud";
-   case _tag_item: return "item";
    case _tag_libc: return "libc";
+
+   case _tag_dlgs: return "dialogue";
+   case _tag_file: return "file";
+   case _tag_item: return "item";
    case _tag_logs: return "log";
    case _tag_plyr: return "player";
-   case _tag_ttle: return "title";
+   case _tag_temp: return "temporary";
    }
    return "unknown";
 }

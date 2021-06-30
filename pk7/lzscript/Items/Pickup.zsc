@@ -123,7 +123,7 @@ mixin class Lith_Pickup {
       if(m_PkSprTf) m_PkSprT.Get(m_PkSprTf);
       if(m_PkSprWf) m_PkSprW.Get(m_PkSprWf);
 
-      if(!bPKUP_NOSPRITE) {
+      if(!bPkup_NoSprite) {
          m_PkSpr = Spawn("Lith_ItemSprite", Pos);
          m_PkSpr.Master = self;
       } else {
@@ -134,7 +134,7 @@ mixin class Lith_Pickup {
    void Lith_PickupTick() {
       if(!m_PkSpr) return;
 
-      if(bPKUP_GENERIC) {
+      if(bPkup_Generic) {
          Lith_SetSpr(m_PkSprG);
          return;
       }

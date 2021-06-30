@@ -94,7 +94,6 @@ enum ZscName(PClass) {
 #include "p_weapons.h"
 #include "p_shopdef.h"
 #include "p_attrib.h"
-#include "p_sys.h"
 #include "items.h"
 #include "d_vm.h"
 
@@ -264,9 +263,6 @@ struct player {
    struct player_delta old;
    i32 oldhealth;
    i32 oldmana;
-
-   /* BIP */
-   struct bip bip;
 
    /* Upgrades */
    struct upgr_data upgrdata;

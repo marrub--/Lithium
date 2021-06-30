@@ -38,7 +38,7 @@ void GiveWeaponItem(i32 parm, i32 slot)
 static
 void WeaponGrab(struct weaponinfo const *info)
 {
-   if(!get_bit(pl.upgrades[UPGR_7777777].flags, _ug_active))
+   if(!get_bit(pl.upgrades[UPGR_Seven7s].flags, _ug_active))
       ACS_LocalAmbientSound(info->pickupsound,  127);
    else
       ACS_LocalAmbientSound(ss_marathon_pickup, 127);
@@ -111,7 +111,7 @@ void P_Wep_PTickPre()
       /* Special exceptions. */
       switch(i) {
       case weapon_shotgun:
-         if(get_bit(pl.upgrades[UPGR_GaussShotty].flags, _ug_active))
+         if(get_bit(pl.upgrades[UPGR_Shotgun_A].flags, _ug_active))
             wep->ammotype = AT_NMag;
          break;
       case weapon_c_spas:
@@ -119,7 +119,7 @@ void P_Wep_PTickPre()
             wep->ammotype = AT_Ammo;
          break;
       case weapon_plasma:
-         if(get_bit(pl.upgrades[UPGR_PartBeam].flags, _ug_active))
+         if(get_bit(pl.upgrades[UPGR_Plasma_B].flags, _ug_active))
             wep->ammotype = AT_AMag;
          break;
       }
@@ -240,8 +240,7 @@ bool Sc_WeaponPickup(i32 name)
       WeaponGrab(info);
 
       pl.weaponsheld++;
-      bip_name_t tag; faststrcpy_str(tag, info->name);
-      P_BIP_Unlock(tag);
+      P_BIP_Unlock(info->name);
 
       GiveWeaponItem(parm, info->slot);
       P_Log_Weapon(info);

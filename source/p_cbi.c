@@ -121,8 +121,8 @@ void P_CBI_PMinit(void) {
 
    pl.cbi.oldtheme = -1;
 
-   pl.bip.curcategory = BIPC_MAIN;
-   pl.bip.curpage = nil;
+   bip.curcategory = _bipc_main;
+   bip.curpage = nil;
 }
 
 /* Scripts ----------------------------------------------------------------- */

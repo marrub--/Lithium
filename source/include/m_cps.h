@@ -24,10 +24,9 @@
 #define Cps_Expand_str(cps, s)   fast_strdup(Cps_Expand(cps, s))
 #define Cps_ExpandNT_str(cps, s) fast_strdup(Cps_ExpandNT(cps, s))
 
-void Cps_SetC(u32 *cps, u32 p, u32 c);
-byte Cps_GetC(u32 const *cps, u32 p);
-
-cstr Cps_Expand(u32 *cps, u32 s, u32 l);
-cstr Cps_ExpandNT(u32 *cps, u32 s);
+stkcall void Cps_SetC(u32 *cps, u32 p, u32 c);
+stkcall byte Cps_GetC(u32 const *cps, u32 p);
+stkcall cstr Cps_Expand(u32 *cps, u32 s, u32 l);
+stkcall cstr Cps_ExpandNT(u32 *cps, u32 s);
 
 #endif

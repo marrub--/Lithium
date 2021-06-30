@@ -255,7 +255,7 @@ void Dlg_GetStmt_Asm(struct compiler *d)
 
    #define DCD(n, op, ty) \
       tok = d->tb.reget(); \
-      if(faststrcasecmp(tok->textV, #op) == 0) { \
+      if(faststrcasechk(tok->textV, #op)) { \
          bool ret = Code##ty(d, DCD_##op##_##ty); \
          unwrap(&d->res); \
          if(ret) return; \

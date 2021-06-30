@@ -149,7 +149,9 @@ identifier,default
 :HUD_M:SplitLeft,lgfx/HUD_M/SplitLeft.png
 :HUD_M:SplitRight,lgfx/HUD_M/SplitRight.png
 :Items:AeroArmor,lgfx/Items/AeroArmor.png
+:Items:AndSigil,lgfx/Items/AndSigil.png
 :Items:DivisionSigil,lgfx/Items/DivisionSigil.png
+:Items:OrSigil,lgfx/Items/OrSigil.png
 :Items:T1,lgfx/Items/T1.png
 :Items:T2,lgfx/Items/T2.png
 :Items:T3,lgfx/Items/T3.png

@@ -17,14 +17,24 @@
 #include "m_list.h"
 #include "w_world.h"
 #include "m_file.h"
+#include "m_tokbuf.h"
 
-/* Static Functions -------------------------------------------------------- */
+noinit
+struct bip bip;
+
+noinit
+char       bipstring[0x7FFF];
+mem_size_t bipstrptr;
+
+noinit
+struct page bippages[512];
+mem_size_t  bippagenum;
 
 dynam_aut script static
 void MailNotify(cstr name) {
    pl.setActivator();
 
-   pl.bip.mailreceived++;
+   bip.mailreceived++;
 
    #ifndef NDEBUG
    if(get_bit(dbgflags, dbgf_bip)) return;
@@ -38,132 +48,269 @@ void MailNotify(cstr name) {
    pl.logB(1, LC(LANG "LOG_MailRecv"), remote);
 
    if(ACS_Random(1, 10000) == 1) {
-      pl.bip.mailtrulyreceived++;
+      bip.mailtrulyreceived++;
       ACS_LocalAmbientSound(ss_player_YOUVEGOTMAIL, 127);
    } else {
       ACS_LocalAmbientSound(ss_player_cbi_mail, 127);
    }
 }
 
+script
+cstr BipStr(cstr in) {
+   cstr       out = &bipstring[bipstrptr];
+   mem_size_t len = faststrlen(in) + 1;
+   fastmemcpy(out, in, len);
+   bipstrptr += len;
+   return out;
+}
+
 script static
 void UnlockPage(struct page *page) {
    if(!get_bit(page->flags, _page_available)) {
-      Dbg_Log(log_bip, "ERROR page '%s' not available", page->info->name);
+      Dbg_Log(log_bip, "ERROR page '%s' not available", page->name);
       return;
    }
 
    if(!get_bit(page->flags, _page_unlocked)) {
-      Dbg_Log(log_bip, "unlocking page '%s'", page->info->name);
+      Dbg_Log(log_bip, "unlocking page '%s'", page->name);
 
-      if(page->info->category == BIPC_MAIL && !page->info->aut) {
-         MailNotify(page->info->name);
+      if(page->category == _bipc_mail && !get_bit(page->flags, _page_auto)) {
+         MailNotify(page->name);
       }
 
-      page->flags |= ticks;
+      page->time = ticks;
       set_bit(page->flags, _page_unlocked);
 
-      pl.bip.pageavail++;
-      pl.bip.categoryavail[page->info->category]++;
+      bip.pageavail++;
+      bip.categoryavail[page->category]++;
 
       for(i32 i = 0;
-          i < countof(page->info->unlocks) && page->info->unlocks[i][0];
+          i < countof(page->unlocks) && page->unlocks[i];
           i++) {
-         P_BIP_Unlock(page->info->unlocks[i]);
+         P_BIP_Unlock(page->unlocks[i]);
       }
    } else {
-      Dbg_Log(log_bip, "already unlocked page '%s'", page->info->name);
+      Dbg_Log(log_bip, "already unlocked page '%s'", page->name);
    }
+}
+
+script static
+void BipInfo_Page(struct tokbuf *tb, struct tbuf_err *res, struct page const *template) {
+   noinit static
+   char k[64], v[64];
+
+   cstr st;
+
+   struct page *page = &bippages[bippagenum++];
+   fastmemcpy(page, template, sizeof *page);
+
+   while(tb->kv(res, k, v)) {
+      unwrap(res);
+      if(faststrchk(k, "cl")) {
+         #define pclass_x(shr, lng, eq) \
+         if(faststrchk(v, #shr)) { \
+            page->pclass = lng; \
+            continue; \
+         }
+         #include "p_player.h"
+         tb->err(res, "%s BipInfo_Page: invalid pclass %s",
+                 TokPrint(tb->reget()), v);
+         unwrap_cb();
+      } else if(faststrchk(k, "tag")) {
+         page->name = BipStr(v);
+      } else if(faststrchk(k, "unl")) {
+         i32 i = 0;
+         for(char *next = nil,
+                  *word = faststrtok(v, &next, ' ');
+             word;
+             word = faststrtok(nil, &next, ' ')
+         ) {
+            page->unlocks[i++] = BipStr(word);
+         }
+      } else {
+         tb->err(res, "%s BipInfo_Page: invalid key %s; expected "
+                 "cl, "
+                 "tag, "
+                 "or unl",
+                 TokPrint(tb->reget()), k);
+         unwrap_cb();
+      }
+   }
+   unwrap(res);
+   return;
 }
 
 static
-i32 NameToNum(cstr discrim, cstr name) {
-   for(i32 i = 0; i < BIP_MAX; i++) {
-      bip_name_t tag;
-      faststrcpy2(tag, name, discrim);
-      if(faststrcmp(bipinfo[i].name, tag)  == 0 ||
-         faststrcmp(bipinfo[i].name, name) == 0) {
-         return i;
-      }
-   }
+struct page BipInfo_Template(struct tokbuf *tb, struct tbuf_err *res) {
+   struct token *tok = tb->reget();
+   struct page template = {};
 
-   return BIP_MAX;
+   for(char *next = nil,
+            *word = faststrtok(tok->textV, &next, ' ');
+       word;
+       word = faststrtok(nil, &next, ' ')
+   ) {
+      /* TODO: there should be some kind of trie generator function
+       * and definitely a function to generate proper lists for error
+       * msgs probably a good idea to make the trie function generate
+       * a static list and then take an error callback along with that
+       * list (probably a structure for all this)
+       */
+      #define bip_category_x(name) \
+      if(faststrchk(word, #name)) { \
+         template.category = _bipc_##name; \
+         continue; \
+      }
+      #include "p_bip.h"
+      if(faststrchk(word, "auto")) {
+         set_bit(template.flags, _page_auto);
+         continue;
+      }
+      tb->err(res, "%s BipInfo_Template: invalid word %s; expected "
+              #define bip_category_x(name) #name ", "
+              #include "p_bip.h"
+              "or `\"'",
+              TokPrint(tok), word);
+      unwrap_cb();
+   }
+   return template;
 }
 
-/* Extern Functions -------------------------------------------------------- */
+script static
+void BipInfo_Pages(struct tokbuf *tb, struct tbuf_err *res) {
+   struct page const template = BipInfo_Template(tb, res);
+   unwrap(res);
 
-script void P_BIP_PInit(void) {
+   tb->expdr(res, tok_braceo);
+   unwrap(res);
+
+   while(!tb->drop(tok_bracec)) {
+      BipInfo_Page(tb, res, &template);
+      unwrap(res);
+   }
+}
+
+script static
+void BipInfo_Compile(struct tokbuf *tb, struct tbuf_err *res) {
+   for(;;) {
+      struct token *tok = tb->expc(res, tb->get(), tok_string, tok_eof, 0);
+      unwrap(res);
+
+      if(tok->type == tok_eof) {
+         return;
+      } else {
+         BipInfo_Pages(tb, res);
+         unwrap(res);
+      }
+   }
+}
+
+script static
+void P_BIP_InitInfo(void) {
+   Str(sp_LITHINFO, s"LITHINFO");
+
+   Dbg_Log(log_dev, "P_BIP_InitInfo");
+
+   FILE *fp;
+   i32 prev = 0;
+
+   bippagenum = 0;
+
+   while((fp = W_OpenIter(sp_LITHINFO, 't', &prev))) {
+      struct tokbuf tb;
+      TBufCtor(&tb, fp, "LITHINFO");
+
+      struct tbuf_err res = {};
+      BipInfo_Compile(&tb, &res);
+      unwrap_print(&res);
+
+      TBufDtor(&tb);
+      fclose(fp);
+   }
+}
+
+script
+void P_BIP_PInit(void) {
+   if(!bippagenum) P_BIP_InitInfo();
+
    #ifndef NDEBUG
-   if(dbglevel) pl.logH(1, "There are %u info pages!", BIP_MAX);
+   if(dbglevel) pl.logH(1, "There are %u info pages!", bippagenum);
    #endif
 
-   pl.bip.pagemax = 0;
+   bip.pagemax = 0;
 
    for_category() {
-      pl.bip.categorymax[categ] = 0;
+      bip.categorymax[categ] = 0;
    }
 
    for_page() {
-      page->info  = &bipinfo[pagen];
-      page->flags = 0;
-   }
-
-   for_page() {
-      bool avail = page->info->pclass & pl.pclass;
+      bool avail = page->pclass & pl.pclass;
 
       if(avail) {
          set_bit(page->flags, _page_available);
 
-         pl.bip.pagemax++;
-         pl.bip.categorymax[page->info->category]++;
+         bip.pagemax++;
+         bip.categorymax[page->category]++;
       }
    }
 
    for_page() {
-      if(get_bit(page->flags, _page_available) &&
-         (
-          #ifndef NDEBUG
-          get_bit(dbgflags, dbgf_bip)
-          #else
-          false
-          #endif
-          || page->info->aut)) {
+      if(get_bit(page->flags, _page_available) && (
+         #ifndef NDEBUG
+         get_bit(dbgflags, dbgf_bip) ||
+         #endif
+         get_bit(page->flags, _page_auto)))
+      {
          UnlockPage(page);
       }
    }
 
-   pl.bip.init = true;
+   bip.init = true;
 }
 
 void P_BIP_Unlock(cstr name) {
-   i32 num = NameToNum(pl.discrim, name);
+   i32 num = P_BIP_NameToNum(name);
 
-   if(num == BIP_MAX) {
+   if(num == bippagenum) {
       Dbg_Log(log_bip, "ERROR no page '%s' found", name);
       return;
    }
 
-   UnlockPage(&pl.bip.pages[num]);
+   UnlockPage(&bippages[num]);
 }
 
 void P_BIP_PQuit(void) {
-   pl.bip.init = false;
+   bip.init = false;
 }
 
-cstr P_BIP_CategoryToName(u32 category) {
+cstr P_BIP_CategoryToName(i32 category) {
    switch(category) {
-      #define Categ(name) case BIPC_##name: return #name;
-      Categ(SEARCH);
-      #include "p_bipname.h"
+      #define bip_category_x(c) case _bipc_##c: return #c;
+      bip_category_x(search);
+      #include "p_bip.h"
    }
    return nil;
 }
 
-/* Scripts ----------------------------------------------------------------- */
+i32 P_BIP_NameToNum(cstr name) {
+   noinit static
+   char discrim[32];
+   faststrcpy2(discrim, name, pl.discrim);
+   for_page() {
+      if(faststrchk(page->name, discrim) ||
+         faststrchk(page->name, name)) {
+         return pagen;
+      }
+   }
+   return bippagenum;
+}
 
 script_str ext("ACS") addr(OBJ "BIPUnlock")
 void Sc_UnlockPage(void) {
    if(!P_None()) {
-      bip_name_t tag; faststrcpy_str(tag, ServCallS(sm_GetBipName));
+      noinit static
+      char tag[32];
+      faststrcpy_str(tag, ServCallS(sm_GetBipName));
       P_BIP_Unlock(tag);
    }
 }

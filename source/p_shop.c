@@ -30,19 +30,19 @@ struct shopitem
 static
 struct shopitem shopitems[] = {
 /* {{"Name-----------", "BIP------------", Cost---}, Class, Cnt-, "Class---------------", [Flags]}, */
-   {{s"RocketAmmo", snil, 9000},  gA, 5,    sOBJ "RocketAmmo"},
-   {{s"PlasmaAmmo", snil, 75750}, gA, 1000, sOBJ "PlasmaAmmo"},
+   {{"RocketAmmo", nil, 9000},  gA, 5,    sOBJ "RocketAmmo"},
+   {{"PlasmaAmmo", nil, 75750}, gA, 1000, sOBJ "PlasmaAmmo"},
 
-   {{s"ChargeFist",      s"ChargeFist",       100000}, pM, 1, sOBJ "ChargeFist",      true},
-   {{s"Revolver",        s"Revolver",         500000}, pM, 1, sOBJ "Revolver",        true},
-   {{s"LazShotgun",      s"LazShotgun",      1800000}, pM, 1, sOBJ "LazShotgun",      true},
-   {{s"SniperRifle",     s"SniperRifle",     1800000}, pM, 1, sOBJ "SniperRifle",     true},
-   {{s"MissileLauncher", s"MissileLauncher", 2500000}, gO, 1, sOBJ "MissileLauncher", true},
-   {{s"PlasmaDiffuser",  s"PlasmaDiffuser",  2500000}, gO, 1, sOBJ "PlasmaDiffuser",  true},
+   {{"ChargeFist",      "ChargeFist",       100000}, pM, 1, sOBJ "ChargeFist",      true},
+   {{"Revolver",        "Revolver",         500000}, pM, 1, sOBJ "Revolver",        true},
+   {{"LazShotgun",      "LazShotgun",      1800000}, pM, 1, sOBJ "LazShotgun",      true},
+   {{"SniperRifle",     "SniperRifle",     1800000}, pM, 1, sOBJ "SniperRifle",     true},
+   {{"MissileLauncher", "MissileLauncher", 2500000}, gO, 1, sOBJ "MissileLauncher", true},
+   {{"PlasmaDiffuser",  "PlasmaDiffuser",  2500000}, gO, 1, sOBJ "PlasmaDiffuser",  true},
 
-   {{s"Allmap",   snil, 100000}, gA, 1, s"Allmap"},
-   {{s"Infrared", snil, 70000},  gA, 1, s"Infrared"},
-   {{s"RadSuit",  snil, 100000}, gA, 1, s"RadSuit"},
+   {{"Allmap",   nil, 100000}, gA, 1, s"Allmap"},
+   {{"Infrared", nil, 70000},  gA, 1, s"Infrared"},
+   {{"RadSuit",  nil, 100000}, gA, 1, s"RadSuit"},
 };
 
 /* Static Functions -------------------------------------------------------- */
@@ -124,12 +124,12 @@ void P_CBI_TabShop(struct gui_state *g)
    PrintTextFmt("%s\Cnscr", scoresep(P_Shop_Cost(&item->shopdef)));
    PrintText(sf_smallfnt, g->defcr, g->ox+98,1, g->oy+17,1);
 
-   PrintText_str(Language(LANG "SHOP_DESCR_%S", item->name), sf_smallfnt, g->defcr, g->ox+98,1, g->oy+27,1);
+   PrintText_str(Language(LANG "SHOP_DESCR_%s", item->name), sf_smallfnt, g->defcr, g->ox+98,1, g->oy+27,1);
 
    G_ClipRelease(g);
 
    if(G_Button(g, LC(LANG "BUY"), 98, 192, !P_Shop_CanBuy(&item->shopdef, item), .fill = {&CBIState(g)->buyfill, CVarGetI(sc_gui_buyfiller)}))
-      P_Shop_Buy(&item->shopdef, item, LANG "SHOP_TITLE_%S", false);
+      P_Shop_Buy(&item->shopdef, item, LANG "SHOP_TITLE_%s", false);
 }
 
 /* EOF */

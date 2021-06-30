@@ -16,6 +16,16 @@
 #include "p_savedata.h"
 #include "m_file.h"
 
+/* Chunk "bipu" ------------------------------------------------------------ */
+
+script static
+void Save_bipu(struct savefile *save) {
+}
+
+script static
+void Load_bipu(struct savefile *save, struct savechunk *chunk) {
+}
+
 /* Chunk "note" ------------------------------------------------------------ */
 
 #define note_len(s) i32 len = s ? faststrlen(s) : 0; len = min(len, 255)
@@ -117,6 +127,7 @@ script void P_Data_Save() {
    struct savefile *save;
 
    if((save = Save_BeginSave())) {
+      /*Save_bipu(save);*/
       Save_note(save);
       Save_agrp(save);
       Save_intr(save);
@@ -128,6 +139,7 @@ script void P_Data_Load() {
    struct savefile *save;
 
    if((save = Save_BeginLoad())) {
+      /*Save_ReadChunk(save, Ident_bipu, SaveV_bipu, Load_bipu);*/
       Save_ReadChunk(save, Ident_note, SaveV_note, Load_note);
       Save_ReadChunk(save, Ident_agrp, SaveV_agrp, Load_agrp);
       Save_ReadChunk(save, Ident_intr, SaveV_intr, Load_intr);

@@ -6,7 +6,7 @@
  *
  * ---------------------------------------------------------------------------|
  *
- * PunctCannon upgrade.
+ * Cannon_A upgrade.
  *
  * ---------------------------------------------------------------------------|
  */
@@ -17,7 +17,7 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-void Upgr_PunctCannon_Deactivate(struct upgrade *upgr) {
+void Upgr_Cannon_A_Deactivate(struct upgrade *upgr) {
    InvGive(so_GTFO, 1);
 }
 

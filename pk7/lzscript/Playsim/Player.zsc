@@ -36,7 +36,7 @@ static void TraceFrom(Actor mo, double yaw, double pitch, double dist, double of
 
 static void PlayerInit(Actor mo_) {
    let mo = Lith_Player(mo_);
-   /* mo.m_CS = Lith_Cyberspace.create(); */
+   /* mo.m_cs = Lith_Cyberspace.create(); */
    mo.m_light = Lith_Flashlight.create(mo);
 }
 

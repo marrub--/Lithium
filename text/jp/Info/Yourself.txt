@@ -173,9 +173,9 @@ Vitalityとは、薬に対する反応や治癒能力、血管や神経の強さ
 
 生命力がレベルアップすると、ヘルス取得時の効果が増加する。
 
-== \#INFO_SHORT_AttrPOT | PotencyPotency
-== \#INFO_TITLE_AttrPOT | \cdPotency\c- (POT)
-@@ \#INFO_DESCR_AttrPOT
+== \#INFO_SHORT_AttrPOTNonHuman | Potency
+== \#INFO_TITLE_AttrPOTNonHuman | \cdPotency\c- (POT)
+@@ \#INFO_DESCR_AttrPOTNonHuman
 Potencyとは、薬に対する反応や薬を塗る能力、血管や神経の強さ、生存能力のことです。
 内臓が丈夫になるだけでなく、治りも早く働き続ける可能性も高くなります。
 

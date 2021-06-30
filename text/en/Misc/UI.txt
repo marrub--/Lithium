@@ -89,9 +89,16 @@ It will not show up again.
 Hold %jS to continue.
 
 %% \#BADTIMELINE
-This timeline is irreparable,
-and cannot continue.
-You must start anew.
+This timeline is
+
+
+           irreparable,
+
+ and cannot continue.
+
+You must start
+
+\cganew.
 
 == \#BEGIN | [Press any key to begin]
 

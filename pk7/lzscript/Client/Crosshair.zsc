@@ -1,0 +1,114 @@
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison G. Watson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ *
+ * Crosshair drawing.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
+extend class Lith_URANUS;
+
+private ui void drawCrosshair(RenderEvent evt) {
+   let pl = evt.camera;
+
+   vector3 viewPos = (evt.viewPos.xy, evt.viewPos.z - lith_hermes.getViewHeight(pl) + lith_hermes.getAttackHeight(pl));
+
+   double yaw   = evt.viewAngle + m_Uh.pData(pl, pdata_addy)/FIX;
+   double pitch = evt.viewPitch + m_Uh.pData(pl, pdata_addp)/FIX;
+   let loc = Lith_UTIL.traceFromPos(pl.curSector, viewPos, yaw, pitch, 2048.0, ignore: pl);
+
+   vector2 xh;
+   bool seen;
+   [xh, seen] = projectF(loc);
+   if(!seen) {
+      return;
+   }
+
+   /* draw a tracer for the targeting system */
+   let tr = pl.tracer;
+   if(tr && tr.health > 0 &&
+      m_Uh.pData(pl, pdata_weapon) == weapon_launcher)
+   {
+      int tr1x, tr1y, tr2x, tr2y;
+      [tr1x, tr1y, seen] = project((tr.pos.xy, tr.pos.z + tr.height / 2.0));
+
+      if(seen) {
+         [tr1x, tr1y] = getScSized(tr1x, tr1y);
+         [tr2x, tr2y] = getScSized(xh.x, xh.y);
+         Screen.drawLine(tr1x, tr1y, tr2x, tr2y, "red");
+      }
+   }
+
+   /* draw the crosshair */
+   uint a = clamp(lith_xhair_a, 0, 255);
+
+   if(lith_xhair_enable && a) {
+      static const string[] XB_GFX = {
+         ":XHairs:crossb",
+         ":XHairs:circleb", ":XHairs:deltab",  ":XHairs:ovalb",
+         ":XHairs:basicb",  ":XHairs:delearb", ":XHairs:finib",
+         ":XHairs:angleb",  ":XHairs:dotb",    ":XHairs:xpb"
+      };
+      static const string[] XW_GFX = {
+         ":XHairs:crossw",
+         ":XHairs:circlew", ":XHairs:deltaw",  ":XHairs:ovalw",
+         ":XHairs:basicw",  ":XHairs:delearw", ":XHairs:finiw",
+         ":XHairs:anglew",  ":XHairs:dotw",    ":XHairs:xpw"
+      };
+
+      int style = lith_xhair_style;
+      if(style >= XW_GFX.size()) {
+         style = 0;
+      }
+
+      textureId xhb = getTextureForName(XB_GFX[style]);
+      textureId xhw = getTextureForName(XW_GFX[style]);
+      color     c   = xhairColor();
+
+      int bsx, bsy; [bsx, bsy] = TexMan.GetSize(xhb);
+      int wsx, wsy; [wsx, wsy] = TexMan.GetSize(xhw);
+
+      double xhx = xh.x - bsx/2.0;
+      double xhy = xh.y - bsy/2.0;
+
+      Screen.DrawTexture(xhb, false, xhx, xhy,
+                         DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                         DTA_TopOffset,0, DTA_LeftOffset,0,
+                         DTA_Alpha,a/255.0);
+
+      xhx = xh.x - wsx/2.0;
+      xhy = xh.y - wsy/2.0;
+
+      Screen.DrawTexture(xhw, false, xhx, xhy,
+                         DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                         DTA_TopOffset,0, DTA_LeftOffset,0,
+                         DTA_Alpha,a/255.0,DTA_FillColor,c);
+
+      if(lith_xhair_enablejuicer) {
+         textureId xhl = getTextureForName(":XHairs:L");
+         textureId xhr = getTextureForName(":XHairs:R");
+
+         int esx, esy; [esx, esy] = TexMan.GetSize(xhl);
+         xhx = xh.x - esx/2.0;
+         xhy = xh.y - esy/2.0;
+
+         double xp = m_Uh.pData(pl, pdata_recoilp)/FIX * 500.0 + 10.0;
+
+         Screen.DrawTexture(xhl, false, xhx-xp, xhy,
+                            DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                            DTA_TopOffset,0, DTA_LeftOffset,0,
+                            DTA_Alpha,a/255.0,DTA_FillColor,c);
+         Screen.DrawTexture(xhr, false, xhx+xp, xhy,
+                            DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                            DTA_TopOffset,0, DTA_LeftOffset,0,
+                            DTA_Alpha,a/255.0,DTA_FillColor,c);
+      }
+   }
+}
+
+/* EOF */

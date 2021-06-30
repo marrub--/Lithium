@@ -181,7 +181,7 @@ void LevelUp(u32 *attr, char **attrptrs) {
    for(i32 i = 0; i < 35 * 5; i++) {
       if(level != pl.attr.level) {
          /* a new levelup started, so exit */
-         goto done;
+         return;
       }
 
       char **ptr = &attrptrs[i / (35 * 5 / at_max)];
@@ -192,15 +192,15 @@ void LevelUp(u32 *attr, char **attrptrs) {
    }
 
    pl.attr.lvupstr[0] = '\0';
-done:
-   Dalloc(attr);
-   Dalloc(attrptrs);
 }
 
 void P_Lv_GiveEXP(u64 amt) {
    struct player_attributes *a = &pl.attr;
 
-   u32 *attr = Malloc(sizeof(u32) * at_max, _tag_huds);
+   static noinit
+   u32 attr[at_max];
+   fastmemset(attr, 0, sizeof attr);
+
    i32 levelup = 0;
 
    while(a->exp + amt >= a->expnext) {
@@ -225,7 +225,10 @@ void P_Lv_GiveEXP(u64 amt) {
 
    if(levelup) {
       char *sp = a->lvupstr;
-      char **attrptrs = Malloc(sizeof(char *) * at_max, _tag_huds);
+
+      static noinit
+      char *attrptrs[at_max];
+      fastmemset(attrptrs, 0, sizeof attrptrs);
 
       sp += sprintf(sp, "LEVEL %u", a->level);
 
@@ -245,8 +248,6 @@ void P_Lv_GiveEXP(u64 amt) {
       }
 
       LevelUp(attr, attrptrs);
-   } else {
-      Dalloc(attr);
    }
 
    a->exp += amt;
@@ -329,7 +330,7 @@ script void P_Init() {
 
    pl.attr.lvupstr[0] = '\0';
 
-   if(!pl.bip.init) P_BIP_PInit();
+   if(!bip.init) P_BIP_PInit();
 
    if(!pl.upgrinit) P_Upg_PInit();
    else             P_Upg_PMInit();

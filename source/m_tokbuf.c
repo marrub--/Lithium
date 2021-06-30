@@ -21,9 +21,6 @@ enum {
    _bend = 28,
 };
 
-noinit static
-char errbuf[1024];
-
 i32 TBufProc(struct token *tok) {
    switch(tok->type) {
       case tok_eof:    return tokproc_done;
@@ -43,10 +40,11 @@ i32 TBufProcL(struct token *tok) {
    return tokproc_next;
 }
 
-void TBufCtor(struct tokbuf *tb, FILE *fp) {
+void TBufCtor(struct tokbuf *tb, FILE *fp, cstr fname) {
    fastmemset(tb, 0, sizeof *tb);
 
    tb->fp        = fp;
+   tb->fname     = fname;
    tb->orig.line = 1;
 
    if(!tb->tokProcess) tb->tokProcess = TBufProc;
@@ -118,42 +116,82 @@ bool TBufDrop(struct tokbuf *tb, i32 t) {
 }
 
 void TBufErr(struct tokbuf *tb, struct tbuf_err *res, cstr fmt, ...) {
+   noinit static
+   char errbuf[1024];
+
    va_list vl;
+   mem_size_t len = faststrlen(tb->fname);
+
+   errbuf[0] = '(';
+   fastmemcpy(errbuf, tb->fname, len + 1);
+   errbuf[len] = ')';
 
    va_start(vl, fmt);
-   vsnprintf(errbuf, sizeof errbuf, fmt, vl);
+   vsprintf(&errbuf[len + 1], fmt, vl);
    va_end(vl);
 
    res->some = true;
    res->err  = errbuf;
 }
 
-struct token *TBufExpc(struct tokbuf *tb, struct tbuf_err *res, struct token *tok, i32 t1) {
-   if(tok->type != t1) {
-      tb->err(res, "%s expected %s", TokPrint(tok), TokType(t1));
-   }
-   return tok;
-}
+struct token *TBufExpc(struct tokbuf *tb, struct tbuf_err *res, struct token *tok, ...) {
+   noinit static
+   i32 tt[8];
+   noinit static
+   char ttstr[128];
 
-struct token *TBufExpc2(struct tokbuf *tb, struct tbuf_err *res, struct token *tok, i32 t1, i32 t2) {
-   if(tok->type != t1 && tok->type != t2) {
-      tb->err(res, "%s expected %s or %s", TokPrint(tok), TokType(t1), TokType(t2));
-   }
-   return tok;
-}
+   mem_size_t ttnum;
+   va_list    args;
 
-struct token *TBufExpc3(struct tokbuf *tb, struct tbuf_err *res, struct token *tok, i32 t1, i32 t2, i32 t3) {
-   if(tok->type != t1 && tok->type != t2 && tok->type != t3) {
-      tb->err(res, "%s expected %s, %s, or %s", TokPrint(tok), TokType(t1),
-              TokType(t2), TokType(t3));
+   va_start(args, tok);
+   for(ttnum = 0; (tt[ttnum] = va_arg(args, i32)); ++ttnum) {
+      if(tok->type == tt[ttnum]) {
+         return tok;
+      }
    }
-   return tok;
+   va_end(args);
+
+   mem_size_t i = 0;
+   ttstr[0] = '\0';
+
+   faststrcat(ttstr, TokType(tt[i++]));
+   if(ttnum > 1) {
+      while(i < ttnum - 1) {
+         faststrcat(ttstr, ", ");
+         faststrcat(ttstr, TokType(tt[i++]));
+      }
+      if(ttnum > 2) {
+         faststrcat(ttstr, ",");
+      }
+      faststrcat(ttstr, " or ");
+      faststrcat(ttstr, TokType(tt[i++]));
+   }
+   tb->err(res, "%s expected %s", TokPrint(tok), ttstr);
+   unwrap_cb();
 }
 
 void TBufExpDr(struct tokbuf *tb, struct tbuf_err *res, i32 t) {
    if(!tb->drop(t)) {
       struct token *tok = tb->reget();
       tb->err(res, "%s expected %s", TokPrint(tok), TokType(t));
+   }
+}
+
+bool TBufKv(struct tokbuf *tb, struct tbuf_err *res, char *k, char *v) {
+   struct token *tok = tb->expc(res, tb->get(), tok_semico, tok_identi, 0);
+   unwrap(res);
+
+   if(tok->type == tok_semico) {
+      k[0] = v[0] = '\0';
+      return false;
+   } else {
+      faststrcpy(k, tok->textV);
+      tb->expdr(res, tok_col);
+      unwrap(res);
+      tok = tb->expc(res, tb->get(), tok_identi, tok_number, tok_string, 0);
+      unwrap(res);
+      faststrcpy(v, tok->textV);
+      return true;
    }
 }
 

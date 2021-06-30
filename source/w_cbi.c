@@ -20,10 +20,10 @@ i32 lmvar cbispawn[cupg_max], cbispawniter;
 
 struct cupgdef
 {
-   i32        pclass;
-   i32        key;
-   cstr       msg;
-   bip_name_t nam;
+   i32  pclass;
+   i32  key;
+   cstr msg;
+   cstr nam;
 };
 
 static
@@ -68,7 +68,7 @@ void CBI_Install(i32 num)
    pl.setActivator();
 
    ifauto(struct cupgdef const *, c, GetCUpgr(pl.pclass, num)) {
-      if(c->nam[0]) {
+      if(c->nam) {
          P_BIP_Unlock(c->nam);
       }
    }

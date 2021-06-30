@@ -8,39 +8,59 @@
  */
 
 class Lith_InventoryItem : Inventory abstract {
+   enum Lith_InventoryItemType {
+      _itemt_item,
+      _itemt_bagitem,
+   }
+
    default {
       Inventory.PickupMessage "";
       Inventory.PickupSound "";
       Lith_InventoryItem.InvEquip _cont_store;
+      Lith_InventoryItem.ItemType _itemt_item;
 
-      +INVENTORY.UNTOSSABLE
-      +INVENTORY.UNDROPPABLE
+      +Inventory.Untossable
+      +Inventory.Undroppable
       +CastSpriteShadow
    }
 
+   int    m_itemType;
    int    m_invEquip;
    string m_invName;
    int    m_invSell;
    int    m_invItem;
+   int    m_invType;
+   int    m_invW, m_invH;
 
    string m_infoPage;
 
    int m_w, m_h;
 
+   property ItemType: m_itemType;
+   property InvType:  m_invType;
+   property InvSize:  m_invW, m_invH;
    property InvEquip: m_invEquip;
    property InvName:  m_invName;
    property InvSell:  m_invSell;
    property Size:     m_w, m_h;
    property InfoPage: m_infoPage;
 
-   bool Lith_OnBody() {return CallACS("Lith_ItemOnBody", m_invItem);}
+   private void Lith_OnAttach(Actor mo) {
+   }
 
-   void Lith_Detach() {if(!self) return; m_invItem = 0; Destroy();}
+   bool Lith_OnBody() {
+      return CallACS("Lith_ItemOnBody", m_invItem);
+   }
 
-   virtual bool Lith_UseItem(Actor mo) {return false;}
-   virtual void Lith_OnAttach(Actor mo) {}
+   void Lith_Detach() {
+      if(!self) return; m_invItem = 0; Destroy();
+   }
 
-   virtual void Lith_Destroy() {
+   bool Lith_UseItem(Actor mo) {
+      return false;
+   }
+
+   void Lith_Destroy() {
       if(m_invItem) {
          uint ip = m_invItem;
          m_invItem = 0;
@@ -48,11 +68,14 @@ class Lith_InventoryItem : Inventory abstract {
       }
    }
 
-   protected virtual void Lith_CreateItem() {
-      m_invItem = CallACS("Lith_ItemCreate");
+   private void Lith_CreateItem() {
+      switch(m_itemType) {
+      case _itemt_item:    m_invItem = CallACS("Lith_ItemCreate");    break;
+      case _itemt_bagitem: m_invItem = CallACS("Lith_BagItemCreate"); break;
+      }
    }
 
-   string Lith_GetName() {
+   private string Lith_GetName() {
       return StringTable.Localize("LITH_ITEM_TAG_" .. m_invName, false);
    }
 
@@ -108,18 +131,6 @@ class Lith_InventoryItem : Inventory abstract {
    }
 }
 
-class Lith_BagItem : Lith_InventoryItem {
-   int m_invType;
-   int m_invW, m_invH;
-
-   property InvType: m_invType;
-   property InvSize: m_invW, m_invH;
-
-   override void Lith_CreateItem() {
-      m_invItem = CallACS("Lith_BagItemCreate");
-   }
-}
-
 class Lith_BasicPickup : Inventory {
    default {
       Inventory.PickupMessage "";
@@ -161,9 +172,9 @@ class Lith_BasicPickup : Inventory {
 class Lith_IDOL : Inventory;
 
 default {
-   +INVENTORY.KEEPDEPLETED
-   +INVENTORY.UNTOSSABLE
-   +INVENTORY.UNDROPPABLE
+   +Inventory.KeepDepleted
+   +Inventory.Untossable
+   +Inventory.Undroppable
 }
 
 Lith_InventoryItem Lith_Find(uint ip) {
@@ -178,11 +189,13 @@ Lith_InventoryItem Lith_Find(uint ip) {
    return null;
 }
 
-bool Lith_Attach(uint ip)
-   {return owner && owner.ACS_ScriptCall("Lith_ItemAttach", ip);}
+bool Lith_Attach(uint ip) {
+   return owner && owner.ACS_ScriptCall("Lith_ItemAttach", ip);
+}
 
-bool Lith_SpaceFree(uint ip)
-   {return owner && owner.ACS_ScriptCall("Lith_ItemCanPlace", ip);}
+bool Lith_SpaceFree(uint ip) {
+   return owner && owner.ACS_ScriptCall("Lith_ItemCanPlace", ip);
+}
 
 void Lith_Remove(uint ip) {
    let it = Lith_Find(ip);

@@ -1,4 +1,4 @@
-/* ---------------------------------------------------------------------------|
+/* -*-JSON-*------------------------------------------------------------------|
  *
  * Distributed under the CC0 public domain license.
  * By Alison G. Watson. Attribution is encouraged, though not required.
@@ -6,12 +6,16 @@
  *
  * ---------------------------------------------------------------------------|
  *
- * Player modules.
+ * Trie arrays. This file is post-processed.
  *
  * ---------------------------------------------------------------------------|
  */
 
-#ifndef p_sys_h
-#define p_sys_h
-
-#endif
+{
+   prefix: "_bip_template_",
+   words: [
+      #define bip_category_x(name) #name,
+      #include "p_bip.h"
+      "auto",
+   ],
+}

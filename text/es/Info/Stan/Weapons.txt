@@ -6,7 +6,7 @@
 ##
 ## ---------------------------------------------------------------------------|
 
-@@ \#INFO_DESCR_PlasmaUpgr
+@@ \#INFO_DESCR_Plasma_A
 El que su segundo best-seller también fuese una bazofia total apuntando
 cabreó tanto al personal de AllPoint que rediseñaron las partes internas
 del arma, equipándola de un condensador de iones de alta velocidad de
