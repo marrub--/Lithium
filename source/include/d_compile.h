@@ -20,6 +20,7 @@
 #include "d_vm.h"
 #include "m_file.h"
 #include "m_tokbuf.h"
+#include "m_trie.h"
 
 /* Types ------------------------------------------------------------------- */
 

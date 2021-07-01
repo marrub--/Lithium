@@ -12,6 +12,7 @@
  */
 
 #include "d_compile.h"
+#include "m_trie.h"
 
 /* Static Functions -------------------------------------------------------- */
 
@@ -91,12 +92,10 @@ void Dlg_GetItem_Page(struct compiler *d, u32 num, u32 act)
 }
 
 static
-bool Dlg_GetItem(struct compiler *d, u32 act)
-{
-   struct token *tok = d->tb.get();
-
-   if(faststrchk(tok->textV, "page")) {
-      tok = d->tb.expc(&d->res, d->tb.get(), tok_number, 0);
+bool Dlg_GetItem(struct compiler *d, u32 act) {
+   switch(Dlg_ItemName(d->tb.get()->textV)) {
+   case _dlg_item_page: {
+      struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_number, 0);
       unwrap(&d->res);
 
       u32 num = faststrtou32(tok->textV);
@@ -108,22 +107,20 @@ bool Dlg_GetItem(struct compiler *d, u32 act)
       Dlg_GetItem_Page(d, num, act);
       unwrap(&d->res);
       return true;
-   } else if(act == ACT_TRM_WAIT) {
-      if(faststrchk(tok->textV, "failure")) {
-         Dlg_GetItem_Page(d, DPAGE_FAILURE, act);
-         unwrap(&d->res);
-         return true;
-      } else if(faststrchk(tok->textV, "finished")) {
-         Dlg_GetItem_Page(d, DPAGE_FINISHED, act);
-         unwrap(&d->res);
-         return true;
-      } else if(faststrchk(tok->textV, "unfinished")) {
-         Dlg_GetItem_Page(d, DPAGE_UNFINISHED, act);
-         unwrap(&d->res);
-         return true;
-      }
    }
-
+   case _dlg_item_failure:
+      Dlg_GetItem_Page(d, DPAGE_FAILURE, act);
+      unwrap(&d->res);
+      return true;
+   case _dlg_item_finished:
+      Dlg_GetItem_Page(d, DPAGE_FINISHED, act);
+      unwrap(&d->res);
+      return true;
+   case _dlg_item_unfinished:
+      Dlg_GetItem_Page(d, DPAGE_UNFINISHED, act);
+      unwrap(&d->res);
+      return true;
+   }
    d->tb.unget();
    return false;
 }
@@ -250,13 +247,17 @@ void Dlg_MInit(void)
          unwrap_do(&d.res, goto done;);
          if(tok->type == tok_eof) break;
 
-         if(faststrchk(tok->textV, "program")) {
+         switch(Dlg_TopLevelName(tok->textV)) {
+         case _dlg_toplevel_program:
             Dlg_GetTop_Prog(&d, ACT_NONE, DNUM_PRG_BEG, DNUM_PRG_END);
-         } else if(faststrchk(tok->textV, "dialogue")) {
+            break;
+         case _dlg_toplevel_dialogue:
             Dlg_GetTop_Prog(&d, ACT_DLG_WAIT, DNUM_DLG_BEG, DNUM_DLG_END);
-         } else if(faststrchk(tok->textV, "terminal")) {
+            break;
+         case _dlg_toplevel_terminal:
             Dlg_GetTop_Prog(&d, ACT_TRM_WAIT, DNUM_TRM_BEG, DNUM_TRM_END);
-         } else {
+            break;
+         default:
             d.tb.err(&d.res, "invalid toplevel item '%s'", tok->textV);
          }
          unwrap_do(&d.res, goto done;);

@@ -46,6 +46,13 @@ monster_type_x(darkone)
 
 enum {
    _monster_level_exp = 777,
+   _max_rank  = 5,
+   _max_level = 150,
+};
+
+enum {
+   #define monster_flag_x(flg) _mif_##flg,
+   #include "w_monster.h"
 };
 
 enum dmgtype {

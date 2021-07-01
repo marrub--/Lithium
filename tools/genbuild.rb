@@ -24,11 +24,12 @@ def hash s
    s.each_codepoint.reduce do |res, ch| (res * 101 + ch) & 0x7FFFFFFF end
 end
 
-def bin(s) "$" + BIN + "/" + s + ".ir" end
-def hdr(s) "$" + HDR + "/" + s         end
-def src(s) "$" + SRC + "/" + s         end
-def txt(s) "$" + TXT + "/" + s         end
-def zsc(s) "$" + ZSC + "/" + s         end
+def  bin(s) "$" +   BIN + "/" + s + ".ir" end
+def  hdr(s) "$" +   HDR + "/" + s         end
+def  src(s) "$" +   SRC + "/" + s         end
+def  txt(s) "$" +   TXT + "/" + s         end
+def  zsc(s) "$" +   ZSC + "/" + s         end
+def tool(s) "$" + TOOLS + "/" + s         end
 
 def each_fake_dep ctx, ents, name
    deps = []
@@ -52,7 +53,7 @@ LD_ARG   = if s = @cfg[:ld_arg]   then s + " " else "" end + ALL_ARG
 BIN, DIR, HASH, HDR, SRC, TARGET, TOOLS, TXT, TYPE, ZSC = ("a".."z").entries
 
 BUILD_FILES =
-   %(#{"$#{TOOLS}/.build-cfg.rb " unless @cfg.empty?}$#{TOOLS}/genbuild.rb)
+   %(#{tool ".build-cfg.rb" unless @cfg.empty?} #{tool "genbuild.rb"})
 
 Context = Struct.new :fp, :srcs, :deps, :link
 
@@ -63,7 +64,7 @@ UPGC = [
 def proc_upgc ctx
    ctx.fp << <<ninja
 rule upgc
- command = $#{TOOLS}/upgc.rb $in $out
+ command = #{tool "upgc.rb"} $in $out
  description = UpgC
 ninja
 
@@ -74,7 +75,7 @@ ninja
       h = hdr ent.h
       f = hdr ent.f
 
-      ctx.fp << "build #{h} #{c} #{f}: upgc #{i} | $#{TOOLS}/upgc.rb\n"
+      ctx.fp << "build #{h} #{c} #{f}: upgc #{i} | #{tool "upgc.rb"}\n"
 
       ctx.srcs.push SrcsEnt.new o, c
       ctx.deps.push h, f
@@ -88,7 +89,7 @@ WEPC = [
 def proc_wepc ctx
    ctx.fp << <<ninja
 rule wepc
- command = $#{TOOLS}/wepc.rb $in $out
+ command = #{tool "wepc.rb"} $in $out
  description = WepC
 ninja
 
@@ -98,20 +99,19 @@ ninja
       c = src ent.c
       h = hdr ent.h
 
-      ctx.fp << "build #{h} #{c}: wepc #{i} | $#{TOOLS}/wepc.rb\n"
+      ctx.fp << "build #{h} #{c}: wepc #{i} | #{tool "wepc.rb"}\n"
 
       ctx.srcs.push SrcsEnt.new o, c
       ctx.deps.push h
    end
 end
 
-TrieEnt = Struct.new :d
 def proc_trie ctx
    ctx.fp << <<ninja
 rule trie
- command = gdcc-cpp $in -o - | tools/trie.rb $out
+ command = gdcc-cpp $in -o - | #{tool "trie.rb"} $out
  description = TRIE
-build $#{SRC}/m_trie.c: trie $#{HDR}/m_trie.h | $#{TOOLS}/trie.rb
+build #{hdr "m_trie.h"} #{src "m_trie.c"}: trie #{txt "Trie.yaml"} | #{tool "trie.rb"}
 ninja
 end
 
@@ -149,14 +149,14 @@ TXTC = [
 def proc_txtc ctx
    ctx.fp << <<ninja
 rule txtc
- command = $#{TOOLS}/txtc.rb $in
+ command = #{tool "txtc.rb"} $in
  description = TxtC
 ninja
 
    each_fake_dep ctx, TXTC, "txtc_" do |ent|
       i = txt ent.i
       o = i + "_"
-      ctx.fp << "build #{o}: txtc #{i} | $#{TOOLS}/txtc.rb\n"
+      ctx.fp << "build #{o}: txtc #{i} | #{tool "txtc.rb"}\n"
       o
    end
 end
@@ -169,14 +169,14 @@ HSFS = [
 def proc_hsfs ctx
    ctx.fp << <<ninja
 rule hsfs
- command = $#{TOOLS}/hashfs.rb $out $in $#{DIR}
+ command = #{tool "hashfs.rb"} $out $in $#{DIR}
  description = HashFS
 build _fake_: phony
 ninja
 
    each_fake_dep ctx, HSFS, "hsfs_" do |ent|
       ctx.fp << <<ninja
-build #{ent.o}: hsfs | _fake_ $#{TOOLS}/hashfs.rb
+build #{ent.o}: hsfs | _fake_ #{tool "hashfs.rb"}
  #{DIR} = #{ent.p} #{ent.d}
 ninja
 
@@ -191,14 +191,14 @@ SNDC = [
 def proc_sndc ctx
    ctx.fp << <<ninja
 rule sndc
- command = $#{TOOLS}/sndc.rb $in
+ command = #{tool "sndc.rb"} $in
  description = SndC
 ninja
 
    each_fake_dep ctx, SNDC, "sndc_" do |ent|
       i = txt ent.i
       o = i + "_"
-      ctx.fp << "build #{o}: sndc #{i} | $#{TOOLS}/sndc.rb\n"
+      ctx.fp << "build #{o}: sndc #{i} | #{tool "sndc.rb"}\n"
       o
    end
 end
@@ -210,14 +210,14 @@ MDLC = [
 def proc_mdlc ctx
    ctx.fp << <<ninja
 rule mdlc
- command = $#{TOOLS}/mdlc.rb $in
+ command = #{tool "mdlc.rb"} $in
  description = MdlC
 ninja
 
    each_fake_dep ctx, MDLC, "mdlc_" do |ent|
       i = txt ent.i
       o = i + "_"
-      ctx.fp << "build #{o}: mdlc #{i} | $#{TOOLS}/mdlc.rb\n"
+      ctx.fp << "build #{o}: mdlc #{i} | #{tool "mdlc.rb"}\n"
       o
    end
 end
@@ -280,9 +280,9 @@ def proc_link ctx
 
    ctx.fp << <<ninja
 rule ld
- command = gdcc-ld $#{TARGET} --bc-opt #{LD_ARG} --alloc-min Sta "" 70000 --no-bc-zdacs-init-script-named --bc-zdacs-init-script-number 17000 $in -o $out --bc-zdacs-dump-ScriptI $#{BIN}/lithmain_ld.txt
+ command = gdcc-ld $#{TARGET} --bc-opt #{LD_ARG} --alloc-min Sta "" 70000 --no-bc-zdacs-init-script-named --bc-zdacs-init-script-number 17000 $in -o $out --bc-zdacs-dump-ScriptI #{bin "lithmain_ld.txt"}
  description = LD $out
-build pk7/acs/lithmain.bin | $#{BIN}/lithmain_ld.txt: ld #{ctx.link.join " "}
+build pk7/acs/lithmain.bin | #{bin "lithmain_ld.txt"}: ld #{ctx.link.join " "}
 default pk7/acs/lithmain.bin
 ninja
 end
@@ -317,6 +317,7 @@ ctx.srcs = [
    SrcsEnt.from("m_str.c"),
    SrcsEnt.from("m_tokbuf.c"),
    SrcsEnt.from("m_token.c"),
+   SrcsEnt.from("m_trie.c"),
    SrcsEnt.from("p_attrib.c"),
    SrcsEnt.from("p_bip.c"),
    SrcsEnt.from("p_cbi.c"),
@@ -449,11 +450,11 @@ ctx.fp << <<ninja
 #{TXT   } = text
 #{ZSC   } = pk7/lzscript/Constants
 rule font
- command = $#{TOOLS}/mkfont.rb
+ command = #{tool "mkfont.rb"}
  description = MkFont
 build font_: font
 rule genbuild
- command = $#{TOOLS}/genbuild.rb
+ command = #{tool "genbuild.rb"}
  generator = 1
  description = GenBuild
 build build.ninja: genbuild | #{BUILD_FILES}

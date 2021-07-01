@@ -18,6 +18,7 @@
 #include "w_world.h"
 #include "m_file.h"
 #include "m_tokbuf.h"
+#include "m_trie.h"
 
 noinit
 struct bip bip;
@@ -106,19 +107,22 @@ void BipInfo_Page(struct tokbuf *tb, struct tbuf_err *res, struct page const *te
 
    while(tb->kv(res, k, v)) {
       unwrap(res);
-      if(faststrchk(k, "cl")) {
-         #define pclass_x(shr, lng, eq) \
-         if(faststrchk(v, #shr)) { \
-            page->pclass = lng; \
-            continue; \
+      switch(BipInfo_Page_Name(k)) {
+      case _bipinfo_page_cl: {
+         i32 pcl = P_ClassToInt(v);
+         if(pcl != -1) {
+            page->pclass = pcl;
+         } else {
+            tb->err(res, "%s BipInfo_Page: invalid pclass %s",
+                    TokPrint(tb->reget()), v);
+            unwrap_cb();
          }
-         #include "p_player.h"
-         tb->err(res, "%s BipInfo_Page: invalid pclass %s",
-                 TokPrint(tb->reget()), v);
-         unwrap_cb();
-      } else if(faststrchk(k, "tag")) {
+         break;
+      }
+      case _bipinfo_page_tag:
          page->name = BipStr(v);
-      } else if(faststrchk(k, "unl")) {
+         break;
+      case _bipinfo_page_unl: {
          i32 i = 0;
          for(char *next = nil,
                   *word = faststrtok(v, &next, ' ');
@@ -127,7 +131,9 @@ void BipInfo_Page(struct tokbuf *tb, struct tbuf_err *res, struct page const *te
          ) {
             page->unlocks[i++] = BipStr(word);
          }
-      } else {
+         break;
+      }
+      default:
          tb->err(res, "%s BipInfo_Page: invalid key %s; expected "
                  "cl, "
                  "tag, "
@@ -150,28 +156,25 @@ struct page BipInfo_Template(struct tokbuf *tb, struct tbuf_err *res) {
        word;
        word = faststrtok(nil, &next, ' ')
    ) {
-      /* TODO: there should be some kind of trie generator function
-       * and definitely a function to generate proper lists for error
-       * msgs probably a good idea to make the trie function generate
-       * a static list and then take an error callback along with that
-       * list (probably a structure for all this)
-       */
+      switch(BipInfo_Template_Name(word)) {
       #define bip_category_x(name) \
-      if(faststrchk(word, #name)) { \
+      case _bipinfo_template_##name: \
          template.category = _bipc_##name; \
-         continue; \
-      }
+         break;
       #include "p_bip.h"
-      if(faststrchk(word, "auto")) {
+      case _bipinfo_template_auto:
          set_bit(template.flags, _page_auto);
-         continue;
+         break;
+      default:
+         /* TODO: make a function for generating proper lists */
+         tb->err(res, "%s BipInfo_Template: invalid word %s; expected "
+                 #define bip_category_x(name) #name ", "
+                 #include "p_bip.h"
+                 "auto, "
+                 "or `\"'",
+                 TokPrint(tok), word);
+         unwrap_cb();
       }
-      tb->err(res, "%s BipInfo_Template: invalid word %s; expected "
-              #define bip_category_x(name) #name ", "
-              #include "p_bip.h"
-              "or `\"'",
-              TokPrint(tok), word);
-      unwrap_cb();
    }
    return template;
 }

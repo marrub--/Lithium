@@ -1,0 +1,100 @@
+## ---------------------------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison G. Watson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+##
+## Trie arrays. This file is preprocessed.
+##
+## ---------------------------------------------------------------------------|
+
+BipInfo_Page_Name:
+   prefix: _bipinfo_page_
+   words:
+      - cl
+      - tag
+      - unl
+BipInfo_Template_Name:
+   prefix: _bipinfo_template_
+   words: [
+      auto,
+      #define bip_category_x(name) name,
+      #include "../source/include/p_bip.h"
+   ]
+Dlg_TopLevelName:
+   prefix: _dlg_toplevel_
+   words:
+      - dialogue
+      - program
+      - terminal
+Dlg_CondName:
+   prefix: _dlg_cond_
+   words:
+      - class
+      - item
+Dlg_StmtName:
+   prefix: _dlg_stmt_
+   words:
+      - icon
+      - if
+      - info
+      - logoff
+      - logon
+      - name
+      - option
+      - page
+      - pict
+      - remote
+      - script
+      - teleport_interlevel
+      - teleport_intralevel
+      - text
+Dlg_ItemName:
+   prefix: _dlg_item_
+   words:
+      - failure
+      - finished
+      - page
+      - unfinished
+P_ClassToInt:
+   words: [
+      #define pclass_x(shr, lng, eq) shr, lng,
+      #include "../source/include/p_player.h"
+   ]
+MonInfo_Preset_Name:
+   prefix: _moninfo_preset_
+   words:
+      - exp
+      - name
+      - scr
+MonInfo_Monster_Name:
+   prefix: _moninfo_monster_
+   words:
+      - exp
+      - filter
+      - hacks
+      - pre
+      - scr
+      - type
+MonInfo_Monster_TypeName:
+   enum: mtype_
+   words: [
+      #define monster_type_x(name) name,
+      #include "../source/include/w_monster.h"
+   ]
+MonInfo_Monster_HackName:
+   prefix: _moninfo_hack_
+   words:
+      - ch
+MonInfo_Flag_Name:
+   enum: _mif_
+   words: [
+      #define monster_flag_x(name) name,
+      #include "../source/include/w_monster.h"
+   ]
+MonInfo_TopLevelName:
+   prefix: _moninfo_toplevel_
+   words:
+      - presets

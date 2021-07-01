@@ -22,7 +22,8 @@ void Dlg_GetStmt_Cond(struct compiler *d)
 
    bool bne = true;
 
-   if(faststrchk(tok->textV, "item")) {
+   switch(Dlg_CondName(tok->textV)) {
+   case _dlg_cond_item:
       tok = d->tb.expc(&d->res, d->tb.get(), tok_string, 0);
       unwrap(&d->res);
 
@@ -31,7 +32,8 @@ void Dlg_GetStmt_Cond(struct compiler *d)
       u32 s = Dlg_PushStr(d, tok->textV, tok->textC); unwrap(&d->res);
       Dlg_PushLdAdr(d, VAR_ADRL, s); unwrap(&d->res);
       Dlg_PushLdVA(d, ACT_LD_ITEM); unwrap(&d->res);
-   } else if(faststrchk(tok->textV, "class")) {
+      break;
+   case _dlg_cond_class:
       tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, 0);
       unwrap(&d->res);
 
@@ -39,21 +41,20 @@ void Dlg_GetStmt_Cond(struct compiler *d)
       Dlg_PushB2(d, VAR_PCLASS); unwrap(&d->res);
 
       Dlg_PushB1(d, DCD_CMP_VI); unwrap(&d->res);
-      #define pclass_x(shr, lng, eq) \
-         if(faststrchk(tok->textV, #shr)) { \
-            Dlg_PushB1(d, lng); \
-            unwrap(&d->res); \
-            goto ok; \
-         }
-      #include "p_player.h"
-      d->tb.err(&d->res, "%s invalid playerclass type", TokPrint(tok));
-      unwrap(&d->res);
-   } else {
+      i32 pcl = P_ClassToInt(tok->textV);
+      if(pcl != -1) {
+         Dlg_PushB1(d, pcl);
+         unwrap(&d->res);
+      } else {
+         d->tb.err(&d->res, "%s invalid playerclass type", TokPrint(tok));
+         unwrap(&d->res);
+      }
+      break;
+   default:
       d->tb.err(&d->res, "invalid conditional type", TokPrint(tok));
       unwrap(&d->res);
    }
 
-ok:
    Dlg_PushB1(d, 0); unwrap(&d->res); /* placeholder */
    Dlg_PushB1(d, 0); unwrap(&d->res); /* placeholder */
    u32 ptr = d->def.codeP;
@@ -236,36 +237,28 @@ script void Dlg_GetStmt(struct compiler *d)
       case tok_identi:
          Dbg_Log(log_dlg, "%s: %s", __func__, tok->textV);
 
-         if(faststrchk(tok->textV, "if"))
-            Dlg_GetStmt_Cond(d);
-         else if(faststrchk(tok->textV, "option"))
-            Dlg_GetStmt_Option(d);
-         else if(faststrchk(tok->textV, "page"))
-            Dlg_GetStmt_Page(d);
-         else if(faststrchk(tok->textV, "name"))
-            Dlg_GetStmt_Str(d, VAR_NAMEL);
-         else if(faststrchk(tok->textV, "icon"))
-            Dlg_GetStmt_Str(d, VAR_ICONL);
-         else if(faststrchk(tok->textV, "remote"))
-            Dlg_GetStmt_Str(d, VAR_REMOTEL);
-         else if(faststrchk(tok->textV, "text"))
-            Dlg_GetStmt_Str(d, VAR_TEXTL);
-         else if(faststrchk(tok->textV, "teleport_interlevel"))
+         switch(Dlg_StmtName(tok->textV)) {
+         case _dlg_stmt_if:     Dlg_GetStmt_Cond(d);                  break;
+         case _dlg_stmt_option: Dlg_GetStmt_Option(d);                break;
+         case _dlg_stmt_page:   Dlg_GetStmt_Page(d);                  break;
+         case _dlg_stmt_name:   Dlg_GetStmt_Str(d, VAR_NAMEL);        break;
+         case _dlg_stmt_icon:   Dlg_GetStmt_Str(d, VAR_ICONL);        break;
+         case _dlg_stmt_remote: Dlg_GetStmt_Str(d, VAR_REMOTEL);      break;
+         case _dlg_stmt_text:   Dlg_GetStmt_Str(d, VAR_TEXTL);        break;
+         case _dlg_stmt_script: Dlg_GetStmt_Script(d);                break;
+         case _dlg_stmt_logon:  Dlg_GetStmt_Terminal(d, TACT_LOGON);  break;
+         case _dlg_stmt_logoff: Dlg_GetStmt_Terminal(d, TACT_LOGOFF); break;
+         case _dlg_stmt_pict:   Dlg_GetStmt_Terminal(d, TACT_PICT);   break;
+         case _dlg_stmt_info:   Dlg_GetStmt_Terminal(d, TACT_INFO);   break;
+         case _dlg_stmt_teleport_interlevel:
             Dlg_GetStmt_Num(d, ACT_TELEPORT_INTERLEVEL);
-         else if(faststrchk(tok->textV, "teleport_intralevel"))
+            break;
+         case _dlg_stmt_teleport_intralevel:
             Dlg_GetStmt_Num(d, ACT_TELEPORT_INTRALEVEL);
-         else if(faststrchk(tok->textV, "script"))
-            Dlg_GetStmt_Script(d);
-         else if(faststrchk(tok->textV, "logon"))
-            Dlg_GetStmt_Terminal(d, TACT_LOGON);
-         else if(faststrchk(tok->textV, "logoff"))
-            Dlg_GetStmt_Terminal(d, TACT_LOGOFF);
-         else if(faststrchk(tok->textV, "pict"))
-            Dlg_GetStmt_Terminal(d, TACT_PICT);
-         else if(faststrchk(tok->textV, "info"))
-            Dlg_GetStmt_Terminal(d, TACT_INFO);
-         else
-            Dlg_GetStmt_Asm(d);
+            break;
+         default:
+            Dlg_GetStmt_Asm(d); break;
+         }
          unwrap(&d->res);
 
          break;

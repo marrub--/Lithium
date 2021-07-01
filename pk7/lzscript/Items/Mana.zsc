@@ -38,7 +38,7 @@ default
    Scale 0.8;
    Inventory.PickupSound "player/pickup/mana";
    Inventory.PickupMessage "";
-   Tag "";
+   Tag "$LITH_STATUS_MP";
 
    +INVENTORY.ALWAYSPICKUP
    +INVENTORY.TRANSFER

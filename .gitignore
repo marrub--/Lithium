@@ -12,6 +12,8 @@ tools/.build-cfg.rb
 source/include/u_func.h
 source/include/u_names.h
 source/include/p_weaponinfo.h
+source/include/m_trie.h
 source/p_upgrinfo.c
 source/p_weaponinfo.c
+source/m_trie.c
 gzdoom-crash.log
