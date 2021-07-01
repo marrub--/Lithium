@@ -15,6 +15,7 @@
 #include "p_player.h"
 #include "p_savedata.h"
 #include "m_file.h"
+#include "m_trie.h"
 
 /* Chunk "bipu" ------------------------------------------------------------ */
 
@@ -98,8 +99,8 @@ void Load_agrp(struct savefile *save, struct savechunk *chunk) {
       fread(name, 1, 12, save->fp);
       groups = fgetc(save->fp);
 
-      u32 num = Upgr_StrToEnum(name);
-      if(num < UPGR_MAX && groups != EOF) {
+      i32 num = Upgr_StrToEnum(name);
+      if(num != -1 && groups != EOF) {
          pl.upgrades[num].agroups = groups;
       }
    }

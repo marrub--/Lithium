@@ -111,7 +111,7 @@ def proc_trie ctx
 rule trie
  command = gdcc-cpp $in -o - | #{tool "trie.rb"} $out
  description = TRIE
-build #{hdr "m_trie.h"} #{src "m_trie.c"}: trie #{txt "Trie.yaml"} | #{tool "trie.rb"}
+build #{hdr "m_trie.h"} #{src "m_trie.c"}: trie #{txt "Trie.yaml"} | #{tool "trie.rb"} #{hdr "u_names.h"}
 ninja
 end
 

@@ -178,7 +178,6 @@ bool P_Upg_CanActivate(struct upgrade *upgr);
 bool P_Upg_Toggle(struct upgrade *upgr);
 void P_Upg_SetOwned(struct upgrade *upgr);
 
-i32 Upgr_StrToEnum(cstr s);
 cstr Upgr_EnumToStr(i32 n);
 
 #endif

@@ -63,6 +63,14 @@ void Upgr_MInit(void) {
    }
 }
 
+cstr Upgr_EnumToStr(i32 n) {
+   switch(n) {
+      #define upgrade_x(name) case UPGR_##name: return #name;
+      #include "u_names.h"
+   }
+   return nil;
+}
+
 void P_Upg_SetOwned(struct upgrade *upgr) {
    if(get_bit(upgr->flags, _ug_owned)) return;
 

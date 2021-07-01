@@ -15,12 +15,17 @@
 require_relative "corinth.rb"
 require "yaml"
 
+INPUT = ARGV.shift
+OUT_H = ARGV.shift
+OUT_C = ARGV.shift
+OUT_F = ARGV.shift
+
 def zstr s
    s.gsub "\0", "\\\\0"
 end
 
 common_main do
-   hsh      = YAML.load(IO.read(ARGV.shift), symbolize_names: true)
+   hsh      = YAML.load(IO.read(INPUT), symbolize_names: true)
    upgrades = []
 
    for category, cupgs in hsh
@@ -72,19 +77,23 @@ common_main do
       end
    end
 
-   open(ARGV.shift, "wt").puts <<_end_h_; open(ARGV.shift, "wt").puts <<_end_c_; open(ARGV.shift, "wt").puts <<_end_f_
+   open(OUT_H, "wt").puts <<_end_h_; open(OUT_C, "wt").puts <<_end_c_; open(OUT_F, "wt").puts <<_end_f_
 #{generated_header "upgc"}
 
-#ifndef upgc_header
+#if defined(upgrade_x)
+#{
+res = String.new
+for upg in upgrades do res.concat "upgrade_x(#{upg[:nam]})\n" end
+res
+}
+#undef upgrade_x
+#elif !defined(upgc_header)
 #define upgc_header
 
 enum ZscName(UpgradeName) {
-#{
-res = String.new
-for upg in upgrades do res.concat "   UPGR_#{upg[:nam]},\n" end
-res.concat "   UPGR_MAX"
-res
-}
+   #define upgrade_x(name) UPGR_##name,
+   #include "#{File.basename OUT_H}"
+   UPGR_MAX
 };
 
 #endif
@@ -95,29 +104,13 @@ _end_h_
 
 /* Extern Objects ---------------------------------------------------------- */
 
-struct upgradeinfo upgrinfo[UPGR_MAX] = {
+struct upgradeinfo upgrinfo[] = {
 #{
 res = String.new
 for upg in upgrades do res.concat %(   {{"#{upg[:nam]}", #{upg[:inf]}, #{upg[:scr]}}, #{upg[:pcl]}, #{upg[:cat]}, #{upg[:prf]}, #{upg[:grp]}, #{upg[:req]}, #{upg[:mul]}, UPGR_#{upg[:nam]}},\n) end
 res
 }
 };
-
-i32 Upgr_StrToEnum(cstr s) {
-   /* TODO */
-   return UPGR_MAX;
-}
-
-cstr Upgr_EnumToStr(i32 n) {
-   switch(n) {
-#{
-res = String.new
-for upg in upgrades do res.concat "      case UPGR_#{upg[:nam]}: return \"#{zstr upg[:nam].ljust 12, "\0"}\";\n" end
-res
-}
-   }
-   return nil;
-}
 
 /* EOF */
 _end_c_

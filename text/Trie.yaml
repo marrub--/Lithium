@@ -98,3 +98,9 @@ MonInfo_TopLevelName:
    prefix: _moninfo_toplevel_
    words:
       - presets
+Upgr_StrToEnum:
+   enum: UPGR_
+   words: [
+      #define upgrade_x(name) name,
+      #include "../source/include/u_names.h"
+   ]
