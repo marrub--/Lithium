@@ -38,6 +38,7 @@ struct weaponinfo {
    str  defammoclass;
    str  classname;
    i32  type;
+   cstr typename;
 };
 
 struct invweapon {
@@ -62,7 +63,6 @@ struct weapondata {
 extern struct weaponinfo const weaponinfo[weapon_max];
 
 void Wep_GInit(void);
-
-cstr P_Wep_GetPickup(i32 n);
+i32 Wep_FromName(i32 name);
 
 #endif

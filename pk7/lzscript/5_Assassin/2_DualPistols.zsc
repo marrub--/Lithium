@@ -90,7 +90,7 @@ FireEmptyRH:
    goto ReadyRH;
 FireEmpty:
    #### # 6 Lith_A_DoubleState(_oscillate, "FireEmptyLH", "FireEmptyRH");
-   #### # 9 A_StartSound("weapons/cshotgun/empty", lch_dryweapon);
+   #### # 9 A_StartSound("weapons/spas/empty", lch_dryweapon);
    #### #### 1 A_ReFire;
    goto ReadySelector;
 

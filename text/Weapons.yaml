@@ -1,0 +1,153 @@
+## ---------------------------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison G. Watson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+##
+## Weapons to be processed into C files.
+##
+## ---------------------------------------------------------------------------|
+
+gA:
+   unknown: [0, UnknownWeapon, None]
+   wings:   [0, WingsOfDeath,  None]
+
+gO:
+   o_cfist:      [1, ChargeFist,      None       ]
+   o_missile:    [5, MissileLauncher, AMag Rocket]
+   o_plasmadiff: [6, PlasmaDiffuser,  Ammo Plasma]
+
+pM:
+   m_fist:     [1, Fist,            None       ]
+   m_pistol:   [2, Pistol,          NMag       ]
+   m_revolver: [2, Revolver,        NMag       ]
+   m_shotgun:  [3, Shotgun,         None       ]
+   m_lshotgun: [3, LazShotgun,      None       ]
+   m_ssg:      [3, SuperShotgun,    Ammo Shell ]
+   m_rifle:    [4, CombatRifle,     NMag       ]
+   m_sniper:   [4, SniperRifle,     NMag       ]
+   m_rocket:   [5, GrenadeLauncher, Ammo Rocket]
+   m_plasma:   [6, PlasmaRifle,     Ammo Plasma]
+   m_cannon:   [7, BFG9000,         Ammo Cannon]
+
+   pickups:
+      fist:           m_fist
+      chainsaw:       o_cfist
+      pistol:         m_pistol
+      shotgun:        m_shotgun
+      supershotgun:   m_ssg
+      chaingun:       m_rifle
+      rocketlauncher: m_rocket
+      plasmarifle:    m_plasma
+      bfg9000:        m_cannon
+
+pC:
+   c_fist:     [1, CFist,         None       ]
+   c_mateba:   [2, Mateba,        NMag       ]
+   c_erifle:   [3, ShockRifle,    NMag       ]
+   c_spas:     [3, SPAS,          AMag Shell ]
+   c_smg:      [4, SMG,           NMag       ]
+   c_ionrifle: [5, IonRifle,      AMag Rocket]
+   c_plasma:   [6, CPlasmaRifle,  Ammo Plasma]
+   c_shipgun:  [7, StarDestroyer, Ammo Cannon]
+
+   c_blade:    [0, Blade,    Mana Mana]
+   c_delear:   [0, Delear,   MMag Mana]
+   c_fire:     [0, Feuer,    Mana Mana]
+   c_rend:     [0, Rend,     Mana Mana]
+   c_hulgyon:  [0, Hulgyon,  Mana Mana]
+   c_starshot: [0, StarShot, MMag Mana]
+   c_cercle:   [0, Cercle,   Mana Mana]
+
+   pickups:
+      fist:           c_fist
+      chainsaw:       o_cfist
+      pistol:         c_mateba
+      shotgun:        c_erifle
+      supershotgun:   c_spas
+      chaingun:       c_smg
+      rocketlauncher: c_ionrifle
+      plasmarifle:    c_plasma
+      bfg9000:        c_shipgun
+
+pD:
+   d_700e:     [2, 700Express,  NMag       ]
+   d_4bore:    [3, 4Bore,       AMag Shell ]
+   d_shrapnel: [3, ShrapnelGun, Ammo Shell ]
+   d_minigun:  [4, Minigun,     NMag       ]
+   d_drocket:  [5, DualRocket,  Ammo Rocket]
+   d_fatmac:   [6, FatMac,      Ammo Plasma]
+   d_fortune:  [7, FortuneGun,  AMag Cannon]
+
+   pickups:
+      fist:           m_fist
+      chainsaw:       m_fist
+      pistol:         d_700e
+      shotgun:        d_4bore
+      supershotgun:   d_shrapnel
+      chaingun:       d_minigun
+      rocketlauncher: d_drocket
+      plasmarifle:    d_fatmac
+      bfg9000:        d_fortune
+
+pI:
+   i_flintlock: [2, Flintlock, AMag Shell]
+
+   pickups:
+      fist:           m_fist
+      chainsaw:       m_fist
+      pistol:         i_flintlock
+      shotgun:        m_fist
+      supershotgun:   m_fist
+      chaingun:       m_fist
+      rocketlauncher: m_fist
+      plasmarifle:    m_fist
+      bfg9000:        m_fist
+
+pW:
+   w_magnum: [2, Magnum, NMag]
+
+   pickups:
+      fist:           m_fist
+      chainsaw:       m_fist
+      pistol:         w_magnum
+      shotgun:        m_fist
+      supershotgun:   m_fist
+      chaingun:       m_fist
+      rocketlauncher: m_fist
+      plasmarifle:    m_fist
+      bfg9000:        m_fist
+
+pA:
+   a_dualpist: [2, DualPistols, NMag]
+   a_burstrif: [4, BurstRifle,  NMag]
+
+   pickups:
+      fist:           m_fist
+      chainsaw:       m_fist
+      pistol:         a_dualpist
+      shotgun:        m_fist
+      supershotgun:   m_fist
+      chaingun:       a_burstrif
+      rocketlauncher: m_fist
+      plasmarifle:    m_fist
+      bfg9000:        m_fist
+
+pT:
+   t_riotshot: [3, RiotShotgun, Ammo Mana]
+   t_redrifle: [5, RedRifle,    Ammo Mana]
+
+   pickups:
+      fist:           m_fist
+      chainsaw:       m_fist
+      pistol:         m_fist
+      shotgun:        m_fist
+      supershotgun:   m_fist
+      chaingun:       m_fist
+      rocketlauncher: m_fist
+      plasmarifle:    m_fist
+      bfg9000:        m_fist
+
+## EOF

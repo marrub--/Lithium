@@ -101,7 +101,7 @@ default
    Tag "$LITH_INFO_SHORT_SPAS";
    Weapon.SlotNumber 3;
    Weapon.SlotPriority 0.95;
-   Weapon.UpSound "weapons/cshotgun/draw";
+   Weapon.UpSound "weapons/spas/draw";
    Weapon.AmmoType "Lith_ShellAmmo";
    Inventory.AltHudIcon "CSHGZ0";
 
@@ -130,7 +130,7 @@ action(Weapon) State Lith_A_FireSPAS()
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
    if(Lith_UTIL.pData(self, pdata_upgrade, UPGR_SPAS_B))
       return ResolveState("FireAuto");
-   A_StartSound("weapons/cshotgun/fire", lch_weapon);
+   A_StartSound("weapons/spas/fire", lch_weapon);
    return null;
 }
 
@@ -138,14 +138,14 @@ action(Weapon) void Lith_A_FireVoid()
 {
    for(int i = 0; i < 6; i++)
       A_FireProjectile("Lith_VoidShot", FRandom(-5,5), false, 0, 0, FPF_NOAUTOAIM, -FRandom(-2,2));
-   A_StartSound("weapons/cshotgun/fire", lch_weapon);
+   A_StartSound("weapons/spas/fire", lch_weapon);
 }
 
 action(Weapon) void Lith_A_FireSPASAuto()
 {
    Lith_FireBullets(11, 5, 2, 2);
    Lith_A_GunSmoke();
-   A_StartSound("weapons/cshotgun/fire2", lch_weapon);
+   A_StartSound("weapons/spas/fire2", lch_weapon);
 }
 
 states(Weapon)
@@ -200,7 +200,7 @@ FireEmpty:
    CSHG A 1;
    CSHG A 2 offset(0, 38);
    CSHG A 1 offset(0, 40);
-   CSHG A 1 offset(0, 37) A_StartSound("weapons/cshotgun/empty", lch_dryweapon);
+   CSHG A 1 offset(0, 37) A_StartSound("weapons/spas/empty", lch_dryweapon);
    CSHG A 1 offset(0, 34);
    CSHG A 1 offset(0, 33);
    CSHG A 5 offset(0, 32);
@@ -211,10 +211,10 @@ Reload:
    CSHG A 0 Lith_A_JumpIfMagFull;
    CSHR ABCDE 1;
    CSHR FG 2;
-   CSHR H 2 A_StartSound("weapons/cshotgun/load", lch_reload);
+   CSHR H 2 A_StartSound("weapons/spas/load", lch_reload);
    CSHR IJKLMNOPQR 2;
    CSHR S 2 {
-      A_StartSound("weapons/cshotgun/pump", lch_reload2);
+      A_StartSound("weapons/spas/pump", lch_reload2);
       Lith_A_ReloadFinish();
       Lith_A_ReloadBobDn(1.5);
    }

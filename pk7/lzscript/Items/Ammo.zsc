@@ -7,7 +7,7 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_Mana       : Ammo {default {Inventory.MaxAmount 1000;}}
+class Lith_ManaAmmo   : Ammo {default {Inventory.MaxAmount 1000;}}
 class Lith_BulletAmmo : Ammo {default {Inventory.MaxAmount 500;}}
 class Lith_ShellAmmo  : Ammo {default {Inventory.MaxAmount 60;}}
 class Lith_RocketAmmo : Ammo {default {Inventory.MaxAmount 200;}}

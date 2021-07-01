@@ -124,7 +124,6 @@ void P_Dat_PTickPst(void);
 script extern void P_Scr_Payout(void);
 void P_Log_SellWeapon(struct weaponinfo const *info, i96 score);
 void P_Log_Weapon(struct weaponinfo const *info);
-i32 P_Wep_FromName(i32 name);
 
 script void P_Wep_PTickPre (void);
        void P_Dat_PTickPre (void);
@@ -221,8 +220,8 @@ struct player_delta {
 struct player {
    /* data */
    __prop megaProtect  {default: PtrInvNum(->tid, so_MegaProtection)}
-   __prop mana         {default: PtrInvNum(->tid, so_Mana)}
-   __prop manamax      {default: ACS_GetMaxInventory(->tid, so_Mana)}
+   __prop mana         {default: PtrInvNum(->tid, so_ManaAmmo)}
+   __prop manamax      {default: ACS_GetMaxInventory(->tid, so_ManaAmmo)}
    __prop health       {default:   GetHealth(->tid),
                         operator=: SetHealth(->tid, ...)}
    __prop setActivator {operator(): ACS_SetActivator(->tid)}

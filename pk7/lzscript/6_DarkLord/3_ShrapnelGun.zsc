@@ -69,7 +69,7 @@ Fire:
 FireEmpty:
    PISG A 2 offset(0, 42);
    PISG A 2 offset(0, 38);
-   PISG A 2 offset(0, 35) A_StartSound("weapons/cshotgun/empty", lch_dryweapon);
+   PISG A 2 offset(0, 35) A_StartSound("weapons/spas/empty", lch_dryweapon);
    PISG A 1 offset(0, 34);
    PISG A 1 offset(0, 33);
    PISG A 1 offset(0, 32);

@@ -23,15 +23,15 @@ void GiveWeaponItem(i32 parm, i32 slot)
 {
    switch(parm) {
    case weapon_c_fist:
-   case weapon_fist:      ServCallI(sm_DieMonster);     break;
-   case weapon_c_spas:    InvGive(so_ShellAmmo,  8);    break;
-   case weapon_ssg:       InvGive(so_ShellAmmo,  4);    break;
-   case weapon_c_sniper:  InvGive(so_RocketAmmo, 6);    break;
-   case weapon_launcher:  InvGive(so_RocketAmmo, 2);    break;
+   case weapon_m_fist:     ServCallI(sm_DieMonster);     break;
+   case weapon_c_spas:     InvGive(so_ShellAmmo,  8);    break;
+   case weapon_m_ssg:      InvGive(so_ShellAmmo,  4);    break;
+   case weapon_c_ionrifle: InvGive(so_RocketAmmo, 6);    break;
+   case weapon_m_rocket:   InvGive(so_RocketAmmo, 2);    break;
    case weapon_c_plasma:
-   case weapon_plasma:    InvGive(so_PlasmaAmmo, 1500); break;
-   case weapon_c_shipgun: InvGive(so_CannonAmmo, 5);    break;
-   case weapon_bfg:       InvGive(so_CannonAmmo, 4);    break;
+   case weapon_m_plasma:   InvGive(so_PlasmaAmmo, 1500); break;
+   case weapon_c_shipgun:  InvGive(so_CannonAmmo, 5);    break;
+   case weapon_m_cannon:   InvGive(so_CannonAmmo, 4);    break;
    }
 }
 
@@ -110,7 +110,7 @@ void P_Wep_PTickPre()
 
       /* Special exceptions. */
       switch(i) {
-      case weapon_shotgun:
+      case weapon_m_shotgun:
          if(get_bit(pl.upgrades[UPGR_Shotgun_A].flags, _ug_active))
             wep->ammotype = AT_NMag;
          break;
@@ -118,7 +118,7 @@ void P_Wep_PTickPre()
          if(get_bit(pl.upgrades[UPGR_SPAS_B].flags, _ug_active))
             wep->ammotype = AT_Ammo;
          break;
-      case weapon_plasma:
+      case weapon_m_plasma:
          if(get_bit(pl.upgrades[UPGR_Plasma_B].flags, _ug_active))
             wep->ammotype = AT_AMag;
          break;
@@ -127,8 +127,8 @@ void P_Wep_PTickPre()
       switch(i)
       {
       /* For slot 3 weapons that don't take ammo, check if they should. */
-      case weapon_shotgun:
-      case weapon_c_rifle:
+      case weapon_m_shotgun:
+      case weapon_c_erifle:
          if(CVarGetI(sc_weapons_slot3ammo)) {
             wep->ammotype |= AT_Ammo;
             wep->ammoclass = so_ShellAmmo;
@@ -198,7 +198,7 @@ void P_Wep_PTick()
    case weapon_c_delear:
       ServCallI(sm_DelearSprite);
       break;
-   case weapon_cfist:
+   case weapon_o_cfist:
       __with(k64 charge = 5 + InvNum(so_FistCharge) / 10.0lk;)
       {
          PrintTextFmt(LC(LANG "CHARGE_FMT"), charge);
@@ -219,7 +219,7 @@ bool Sc_WeaponPickup(i32 name)
    bool weaponstay = CVarGetI(sc_sv_weaponstay);
    i32 parm = weapon_unknown;
 
-   parm = P_Wep_FromName(name);
+   parm = Wep_FromName(name);
 
    if(parm >= weapon_max || parm < weapon_min)
       return true;

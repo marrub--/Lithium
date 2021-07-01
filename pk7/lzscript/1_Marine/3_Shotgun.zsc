@@ -190,7 +190,7 @@ FireEmpty:
    #### # 1;
    #### # 2 offset(0, 38);
    #### # 1 offset(0, 40);
-   #### # 1 offset(0, 37) A_StartSound("weapons/cshotgun/empty", lch_dryweapon);
+   #### # 1 offset(0, 37) A_StartSound("weapons/spas/empty", lch_dryweapon);
    #### # 1 offset(0, 34);
    #### # 1 offset(0, 33);
    #### # 5 offset(0, 32);

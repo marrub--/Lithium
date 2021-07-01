@@ -258,7 +258,7 @@ default
    Weapon.SlotNumber 0;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/cercle/draw";
-   Weapon.AmmoType "Lith_Mana";
+   Weapon.AmmoType "Lith_ManaAmmo";
    Inventory.AltHudIcon "SPELE0";
 
    +WEAPON.NOAUTOFIRE
@@ -281,7 +281,7 @@ SelectLoop:
    loop;
 
 Fire:
-   TNT1 A 0 A_JumpIf(countInv("Lith_Mana") == lith_maxInv("Lith_Mana"), 1);
+   TNT1 A 0 A_JumpIf(countInv("Lith_ManaAmmo") == lith_maxInv("Lith_ManaAmmo"), 1);
    goto ReadySelector;
    TNT1 A 10 {
       lith_takeAmmo(0x7FFFFFFF);

@@ -106,7 +106,7 @@ void P_CBI_TabShop(struct gui_state *g)
       if(G_ScrOcc(g, &CBIState(g)->shopscr, y, gui_p.btnlistsel.h) || !(shopitems[i].pclass & pl.pclass))
          continue;
 
-      cstr name = LanguageC(LANG "SHOP_TITLE_%S", shopitems[i].name);
+      cstr name = LanguageC(LANG "SHOP_TITLE_%s", shopitems[i].name);
 
       i32 *shopsel = &CBIState(g)->shopsel;
       if(G_Button_HId(g, i, name, 0, y, i == *shopsel, Pre(btnlistsel)))

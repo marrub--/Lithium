@@ -25,7 +25,7 @@ void Upgr_Rifle_A_Render(struct upgrade *upgr)
    Str(sp_rifle_scope, s":HUD:RifleScope");
    Str(sp_lithcam1,    s"LITHCAM1");
 
-   if(P_Wep_CurType() != weapon_rifle) return;
+   if(P_Wep_CurType() != weapon_m_rifle) return;
 
    if(CVarGetI(sc_weapons_riflescope) &&
       pl.riflefiremode == rifle_firemode_burst)

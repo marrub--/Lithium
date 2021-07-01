@@ -7,6 +7,9 @@
 ## ---------------------------------------------------------------------------|
 
 weapons {
+   $alias unknown.pickup = .YOUSONOFABITCH
+   $alias    fist.pickup = .MMMMHMHMMMHMMM
+
    knife {
       == lsounds/WeaponsM/Knife
       swing1   Fire1   # Serious Sam: The First Encounter HD

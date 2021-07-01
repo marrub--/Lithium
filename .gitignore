@@ -11,6 +11,7 @@ tools/.build-cfg.rb
 *.ninja*
 source/include/u_func.h
 source/include/u_names.h
+source/include/p_weaponinfo.h
 source/p_upgrinfo.c
 source/p_weaponinfo.c
 gzdoom-crash.log

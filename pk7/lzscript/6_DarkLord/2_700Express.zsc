@@ -202,7 +202,7 @@ FireEmpty:
    700E AA 1 offset(3, 38) lith_laser(0.0);
    700E A 1 offset(7, 40) lith_laser(0.0);
    700E A 1 offset(5, 37) {
-      A_StartSound("weapons/cshotgun/empty", lch_dryweapon);
+      A_StartSound("weapons/spas/empty", lch_dryweapon);
       lith_laser(0.0);
    }
    700E A 1 offset(4, 34) lith_laser(0.0);

@@ -32,7 +32,7 @@ i32 CheckTarget()
 script
 void Upgr_RPG_B_Update(struct upgrade *upgr)
 {
-   if(P_Wep_CurType() == weapon_launcher)
+   if(P_Wep_CurType() == weapon_m_rocket)
    {
       if(pl.buttons & BT_ALTATTACK)
       {

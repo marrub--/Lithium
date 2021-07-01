@@ -120,8 +120,8 @@ private bool lith_ammoNotFull(Actor mo) {
    let a2 = m_amount2;
 
    if(mo is "Lith_ThothPlayer") {
-      if(t1) {t1 = "Lith_Mana"; a1 *= 7;}
-      if(t2) {t2 = "Lith_Mana"; a2 *= 7;}
+      if(t1) {t1 = "Lith_ManaAmmo"; a1 *= 7;}
+      if(t2) {t2 = "Lith_ManaAmmo"; a2 *= 7;}
    }
 
    let i1 = mo.findInventory(t1);
@@ -141,7 +141,7 @@ override bool canPickup(Actor mo) {
 private void lith_absorbAmmo(Actor mo, class<Inventory> typ, in out int amt) {
    if(!typ) return;
 
-   if(mo is "Lith_ThothPlayer") {typ = "Lith_Mana"; amt *= 7;}
+   if(mo is "Lith_ThothPlayer") {typ = "Lith_ManaAmmo"; amt *= 7;}
 
    let it = mo.findInventory(typ);
    if(!it) {it = Inventory(spawn(typ)); it.amount = 0; it.callTryPickup(mo);}

@@ -83,7 +83,7 @@ end
 
 WepcEnt = Struct.new :i, :c, :h
 WEPC = [
-   WepcEnt.new("Weapons.txt", "p_weaponinfo.c", "p_weaponinfo.h"),
+   WepcEnt.new("Weapons.yaml", "p_weaponinfo.c", "p_weaponinfo.h"),
 ]
 def proc_wepc ctx
    ctx.fp << <<ninja

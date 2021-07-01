@@ -521,13 +521,13 @@ weapons/erifle/shock2 lsounds/WeaponsC/ShockRifle/Shock2
 $random weapons/erifle/shock { weapons/erifle/shock1 weapons/erifle/shock2 }
 $random weapons/erifle/zap { weapons/erifle/zap1 weapons/erifle/zap2 weapons/erifle/zap3 }
 $volume weapons/erifle/zap 0.15
-weapons/cshotgun/fire lsounds/WeaponsC/SPAS/Fire
-weapons/cshotgun/fire2 lsounds/WeaponsC/SPAS/Fire2
-weapons/cshotgun/load lsounds/WeaponsC/SPAS/Load
-weapons/cshotgun/pump lsounds/WeaponsC/SPAS/Pump
-weapons/cshotgun/empty lsounds/WeaponsC/SPAS/FireEmpty
-weapons/cshotgun/pickup lsounds/WeaponsC/SPAS/Pickup
-weapons/cshotgun/draw lsounds/WeaponsC/SPAS/Draw
+weapons/spas/fire lsounds/WeaponsC/SPAS/Fire
+weapons/spas/fire2 lsounds/WeaponsC/SPAS/Fire2
+weapons/spas/load lsounds/WeaponsC/SPAS/Load
+weapons/spas/pump lsounds/WeaponsC/SPAS/Pump
+weapons/spas/empty lsounds/WeaponsC/SPAS/FireEmpty
+weapons/spas/pickup lsounds/WeaponsC/SPAS/Pickup
+weapons/spas/draw lsounds/WeaponsC/SPAS/Draw
 weapons/smg/fire lsounds/WeaponsC/SMG/Fire
 weapons/smg/firedone lsounds/WeaponsC/SMG/FireDone
 weapons/smg/firehit lsounds/WeaponsC/SMG/FireHit
@@ -633,7 +633,7 @@ weapons/dualrocket/firer3 lsounds/WeaponsD/DualRocket/FireRight3
 $random weapons/dualrocket/firel { weapons/dualrocket/firel1 weapons/dualrocket/firel2 weapons/dualrocket/firel3 }
 $random weapons/dualrocket/firer { weapons/dualrocket/firer1 weapons/dualrocket/firer2 weapons/dualrocket/firer3 }
 weapons/fatmac/fire lsounds/WeaponsD/FatMac/Fire
-$alias weapons/fatmac/empty weapons/cshotgun/empty
+$alias weapons/fatmac/empty weapons/spas/empty
 $alias weapons/fatmac/boltback weapons/sniper/boltback
 $alias weapons/fatmac/boltforward weapons/sniper/boltforward
 weapons/fortune/fire lsounds/WeaponsD/FortuneGun/Fire
@@ -642,6 +642,8 @@ weapons/fortune/hit lsounds/WeaponsD/FortuneGun/Hit
 weapons/fortune/spark lsounds/WeaponsD/FortuneGun/Spark
 $limit weapons/fortune/hit 0
 $limit weapons/fortune/spark 0
+$alias weapons/unknown/pickup YOUSONOFABITCH
+$alias weapons/fist/pickup MMMMHMHMMMHMMM
 weapons/knife/swing1 lsounds/WeaponsM/Knife/Fire1
 weapons/knife/swing2 lsounds/WeaponsM/Knife/Fire2
 weapons/knife/hitflesh lsounds/WeaponsM/Knife/Hit

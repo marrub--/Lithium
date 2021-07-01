@@ -46,7 +46,7 @@ weapons {
       $volume zap 0.15
    }
 
-   cshotgun {
+   spas {
       == lsounds/WeaponsC/SPAS
       fire   Fire      # FEAR, Dynamic Range
       fire2  Fire2     # ^

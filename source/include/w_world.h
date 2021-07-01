@@ -134,6 +134,26 @@ enum ZscName(BossType) {
    boss_other,
 };
 
+enum ZscName(WeaponName) {
+   wepnam_fist,
+   wepnam_chainsaw,
+   wepnam_pistol,
+   wepnam_shotgun,
+   wepnam_supershotgun,
+   wepnam_chaingun,
+   wepnam_rocketlauncher,
+   wepnam_plasmarifle,
+   wepnam_bfg9000,
+   wepnam_max,
+};
+
+enum ZscName(RifleMode) {
+   rifle_firemode_auto,
+   rifle_firemode_grenade,
+   rifle_firemode_burst,
+   rifle_firemode_max
+};
+
 #if !ZscOn
 enum {
    skill_tourist,

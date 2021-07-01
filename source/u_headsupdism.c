@@ -74,7 +74,7 @@ void HUD_Ammo() {
       PrintTextX(sf_bigupper, Cr(green), 281,1, 238,2, _u_no_unicode);
    }
 
-   if(P_Wep_CurType() == weapon_rifle && ServCallI(sm_GetRifleGrenade))
+   if(P_Wep_CurType() == weapon_m_rifle && ServCallI(sm_GetRifleGrenade))
       PrintSprite(sp_HUD_H_D44, 280,1, 237,1);
 }
 

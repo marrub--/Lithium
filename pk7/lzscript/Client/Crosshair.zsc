@@ -32,7 +32,7 @@ private ui void drawCrosshair(RenderEvent evt) {
    /* draw a tracer for the targeting system */
    let tr = pl.tracer;
    if(tr && tr.health > 0 &&
-      m_Uh.pData(pl, pdata_weapon) == weapon_launcher)
+      m_Uh.pData(pl, pdata_weapon) == weapon_m_rocket)
    {
       int tr1x, tr1y, tr2x, tr2y;
       [tr1x, tr1y, seen] = project((tr.pos.xy, tr.pos.z + tr.height / 2.0));

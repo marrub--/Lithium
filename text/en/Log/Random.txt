@@ -181,80 +181,80 @@ perced to the rooten.
 == \#PK_c_spas_ALI   | shotgun
 == \#PK_c_plasma_ALI | plasma
 
-== \#PK_cfist_NUM | 5
-== \#PK_cfist_000 | Chaaji Fisuto
-== \#PK_cfist_001 | Charred Fist
-== \#PK_cfist_002 | Charged Mr. Fisto
-== \#PK_cfist_003 | Chargle Fargle
-== \#PK_cfist_004 | Yūgi no Ken
-== \#PK_cfist_005 | Baron Smasher
+== \#PK_o_cfist_NUM | 5
+== \#PK_o_cfist_000 | Chaaji Fisuto
+== \#PK_o_cfist_001 | Charred Fist
+== \#PK_o_cfist_002 | Charged Mr. Fisto
+== \#PK_o_cfist_003 | Chargle Fargle
+== \#PK_o_cfist_004 | Yūgi no Ken
+== \#PK_o_cfist_005 | Baron Smasher
 
-== \#PK_pistol_NUM | 11
-== \#PK_pistol_000 | Postil
-== \#PK_pistol_001 | Peestol
-== \#PK_pistol_002 | Pinstool
-== \#PK_pistol_003 | Peetool
-== \#PK_pistol_004 | Pistell
-== \#PK_pistol_005 | Pistuh
-== \#PK_pistol_006 | Listep
-== \#PK_pistol_007 | hurty peestal
-== \#PK_pistol_008 | Pete Stool
-== \#PK_pistol_009 | Bandity Pistal
-== \#PK_pistol_010 | Piston
-== \#PK_pistol_011 | Pispy Peashooter
+== \#PK_m_pistol_NUM | 11
+== \#PK_m_pistol_000 | Postil
+== \#PK_m_pistol_001 | Peestol
+== \#PK_m_pistol_002 | Pinstool
+== \#PK_m_pistol_003 | Peetool
+== \#PK_m_pistol_004 | Pistell
+== \#PK_m_pistol_005 | Pistuh
+== \#PK_m_pistol_006 | Listep
+== \#PK_m_pistol_007 | hurty peestal
+== \#PK_m_pistol_008 | Pete Stool
+== \#PK_m_pistol_009 | Bandity Pistal
+== \#PK_m_pistol_010 | Piston
+== \#PK_m_pistol_011 | Pispy Peashooter
 
-== \#PK_revolver_NUM | 3
-== \#PK_revolver_000 | Rvleolr
-== \#PK_revolver_001 | Revolrvo
-== \#PK_revolver_002 | Volvo
-== \#PK_revolver_003 | Rebolber :=DD
+== \#PK_m_revolver_NUM | 3
+== \#PK_m_revolver_000 | Rvleolr
+== \#PK_m_revolver_001 | Revolrvo
+== \#PK_m_revolver_002 | Volvo
+== \#PK_m_revolver_003 | Rebolber :=DD
 
-== \#PK_shotgun_NUM | 5
-== \#PK_shotgun_000 | Shtegnu
-== \#PK_shotgun_001 | Shartgun
-== \#PK_shotgun_002 | Shitgun
-== \#PK_shotgun_003 | Shtognu
-== \#PK_shotgun_004 | Shetgun
-== \#PK_shotgun_005 | Sug Glug
+== \#PK_m_shotgun_NUM | 5
+== \#PK_m_shotgun_000 | Shtegnu
+== \#PK_m_shotgun_001 | Shartgun
+== \#PK_m_shotgun_002 | Shitgun
+== \#PK_m_shotgun_003 | Shtognu
+== \#PK_m_shotgun_004 | Shetgun
+== \#PK_m_shotgun_005 | Sug Glug
 
-== \#PK_ssg_NUM | 6
-== \#PK_ssg_000 | Sbepru Shtetgun
-== \#PK_ssg_001 | Suber Shodgub
-== \#PK_ssg_002 | Soer Shotgan
-== \#PK_ssg_003 | Suupaa Shottogan
-== \#PK_ssg_004 | Susser Sarsaparilla
-== \#PK_ssg_005 | Shovel Subbutt
-== \#PK_ssg_006 | Suggle Kruggle
+== \#PK_m_ssg_NUM | 6
+== \#PK_m_ssg_000 | Sbepru Shtetgun
+== \#PK_m_ssg_001 | Suber Shodgub
+== \#PK_m_ssg_002 | Soer Shotgan
+== \#PK_m_ssg_003 | Suupaa Shottogan
+== \#PK_m_ssg_004 | Susser Sarsaparilla
+== \#PK_m_ssg_005 | Shovel Subbutt
+== \#PK_m_ssg_006 | Suggle Kruggle
 
-== \#PK_rifle_NUM | 4
-== \#PK_rifle_000 | Cmobta Riffel
-== \#PK_rifle_001 | Combit Raffle
-== \#PK_rifle_002 | Combat Rifl
-== \#PK_rifle_003 | Rifcom Litbl
-== \#PK_rifle_004 | Bltbm Liffem
+== \#PK_m_rifle_NUM | 4
+== \#PK_m_rifle_000 | Cmobta Riffel
+== \#PK_m_rifle_001 | Combit Raffle
+== \#PK_m_rifle_002 | Combat Rifl
+== \#PK_m_rifle_003 | Rifcom Litbl
+== \#PK_m_rifle_004 | Bltbm Liffem
 
-== \#PK_launcher_NUM | 3
-== \#PK_launcher_000 | Ruckebt Laurence
-== \#PK_launcher_001 | Rawket Lawnchair
-== \#PK_launcher_002 | Rokkit Luncher
-== \#PK_launcher_003 | Pocket Lunchbox
+== \#PK_m_rocket_NUM | 3
+== \#PK_m_rocket_000 | Ruckebt Laurence
+== \#PK_m_rocket_001 | Rawket Lawnchair
+== \#PK_m_rocket_002 | Rokkit Luncher
+== \#PK_m_rocket_003 | Pocket Lunchbox
 
-== \#PK_plasma_NUM | 6
-== \#PK_plasma_000 | Spalmo Rinfer
-== \#PK_plasma_001 | Layzuh Beem
-== \#PK_plasma_002 | Shooty-pew-pew Gun
-== \#PK_plasma_003 | Elfir Amsalp
-== \#PK_plasma_004 | Pulsmer Rifram
-== \#PK_plasma_005 | Plisplam Fimfam
-== \#PK_plasma_006 | Plastic Hamdonk
+== \#PK_m_plasma_NUM | 6
+== \#PK_m_plasma_000 | Spalmo Rinfer
+== \#PK_m_plasma_001 | Layzuh Beem
+== \#PK_m_plasma_002 | Shooty-pew-pew Gun
+== \#PK_m_plasma_003 | Elfir Amsalp
+== \#PK_m_plasma_004 | Pulsmer Rifram
+== \#PK_m_plasma_005 | Plisplam Fimfam
+== \#PK_m_plasma_006 | Plastic Hamdonk
 
-== \#PK_bfg_NUM | 5
-== \#PK_bfg_000 | Biffgee Nintendo
-== \#PK_bfg_001 | BFG 8000
-== \#PK_bfg_002 | Biffug 9999
-== \#PK_bfg_003 | Bilmap Frignarp Gnu 9
-== \#PK_bfg_004 | Frosty Balga Gams
-== \#PK_bfg_005 | SBC Cannon
+== \#PK_m_cannon_NUM | 5
+== \#PK_m_cannon_000 | Biffgee Nintendo
+== \#PK_m_cannon_001 | BFG 8000
+== \#PK_m_cannon_002 | Biffug 9999
+== \#PK_m_cannon_003 | Bilmap Frignarp Gnu 9
+== \#PK_m_cannon_004 | Frosty Balga Gams
+== \#PK_m_cannon_005 | SBC Cannon
 
 == \#PK_c_mateba_NUM | 11
 == \#PK_c_mateba_000 | Metabolism
@@ -270,12 +270,12 @@ perced to the rooten.
 == \#PK_c_mateba_010 | Metabe
 == \#PK_c_mateba_011 | Mercury Poisoning
 
-== \#PK_c_rifle_NUM | 4
-== \#PK_c_rifle_000 | Sock Rifle
-== \#PK_c_rifle_001 | Shock Stifle
-== \#PK_c_rifle_002 | Stock Knifle
-== \#PK_c_rifle_003 | ShohS RifiR
-== \#PK_c_rifle_004 | Cock Waffle
+== \#PK_c_erifle_NUM | 4
+== \#PK_c_erifle_000 | Sock Rifle
+== \#PK_c_erifle_001 | Shock Stifle
+== \#PK_c_erifle_002 | Stock Knifle
+== \#PK_c_erifle_003 | ShohS RifiR
+== \#PK_c_erifle_004 | Cock Waffle
 
 == \#PK_c_smg_NUM | 10
 == \#PK_c_smg_000 | Chug Smug
@@ -290,21 +290,21 @@ perced to the rooten.
 == \#PK_c_smg_009 | Adolescent Assault Rifle
 == \#PK_c_smg_010 | Smig
 
-== \#PK_c_sniper_NUM | 13
-== \#PK_c_sniper_000 | Iron Raffle
-== \#PK_c_sniper_001 | Eye on Rustle
-== \#PK_c_sniper_002 | Onion Riffraff
-== \#PK_c_sniper_003 | Plasmagun's Lazy Cousin
-== \#PK_c_sniper_004 | Homemade Pringle Cannon
-== \#PK_c_sniper_005 | Idle Riffraff
-== \#PK_c_sniper_006 | Ionic Breeze
-== \#PK_c_sniper_007 | Ix Rix
-== \#PK_c_sniper_008 | Io Rofl
-== \#PK_c_sniper_009 | 100% Ion
-== \#PK_c_sniper_010 | Ions of Ion
-== \#PK_c_sniper_011 | Slight Chance of Ions Today
-== \#PK_c_sniper_012 | Illegal Rat
-== \#PK_c_sniper_013 | Ion Juicer
+== \#PK_c_ionrifle_NUM | 13
+== \#PK_c_ionrifle_000 | Iron Raffle
+== \#PK_c_ionrifle_001 | Eye on Rustle
+== \#PK_c_ionrifle_002 | Onion Riffraff
+== \#PK_c_ionrifle_003 | Plasmagun's Lazy Cousin
+== \#PK_c_ionrifle_004 | Homemade Pringle Cannon
+== \#PK_c_ionrifle_005 | Idle Riffraff
+== \#PK_c_ionrifle_006 | Ionic Breeze
+== \#PK_c_ionrifle_007 | Ix Rix
+== \#PK_c_ionrifle_008 | Io Rofl
+== \#PK_c_ionrifle_009 | 100% Ion
+== \#PK_c_ionrifle_010 | Ions of Ion
+== \#PK_c_ionrifle_011 | Slight Chance of Ions Today
+== \#PK_c_ionrifle_012 | Illegal Rat
+== \#PK_c_ionrifle_013 | Ion Juicer
 
 == \#PK_c_shipgun_NUM | 13
 == \#PK_c_shipgun_000 | Stahp Blastroyer

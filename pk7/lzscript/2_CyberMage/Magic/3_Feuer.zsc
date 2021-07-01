@@ -120,7 +120,7 @@ default
    Weapon.SlotNumber 0;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/feuer/draw";
-   Weapon.AmmoType "Lith_Mana";
+   Weapon.AmmoType "Lith_ManaAmmo";
    Inventory.AltHudIcon "SPELA0";
 
    -WEAPON.NOAUTOFIRE

@@ -87,7 +87,7 @@ FireEmpty:
    MAGN A 1;
    MAGN AA 1 offset(3, 38);
    MAGN A 1 offset(7, 40);
-   MAGN A 1 offset(5, 37) a_startSound("weapons/cshotgun/empty", lch_dryweapon);
+   MAGN A 1 offset(5, 37) a_startSound("weapons/spas/empty", lch_dryweapon);
    MAGN A 1 offset(4, 34);
    MAGN A 1 offset(2, 33);
    MAGN AAAAA 1 offset(1, 32);

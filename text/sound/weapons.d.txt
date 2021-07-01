@@ -72,7 +72,7 @@ weapons {
       == lsounds/WeaponsD/FatMac
       fire Fire # Halo 3, Half-Life 2
 
-      $alias empty       = .weapons.cshotgun.empty
+      $alias empty       = .weapons.spas.empty
       $alias boltback    = .weapons.sniper.boltback
       $alias boltforward = .weapons.sniper.boltforward
    }

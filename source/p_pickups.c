@@ -16,8 +16,10 @@
 
 static
 str get_name(i32 w) {
-   char name[20];
-   faststrcpy(name, P_Wep_GetPickup(w));
+   static noinit
+   char name[16];
+
+   faststrcpy(name, weaponinfo[w].typename);
    ifauto(str, alias, LanguageNull(LANG "PK_%s_ALI", name))
       faststrcpy_str(name, alias);
 
@@ -54,7 +56,7 @@ void P_Log_Weapon(struct weaponinfo const *info) {
    if(CVarGetI(sc_player_stupidpickups))
       silly_pickup(info->type);
    else if(info->name)
-      pl.logB(1, LC(LANG "PK_GET_000"), Language(LANG "INFO_SHORT_%S", info->name));
+      pl.logB(1, LC(LANG "PK_GET_000"), Language(LANG "INFO_SHORT_%s", info->name));
    else
       pl.logB(1, "Acquired impossible object");
 }
@@ -68,7 +70,7 @@ void P_Log_SellWeapon(struct weaponinfo const *info, i96 score) {
    if(CVarGetI(sc_player_stupidpickups))
       nam = get_name(weapon);
    else
-      nam = Language(LANG "INFO_SHORT_%S", info->name);
+      nam = Language(LANG "INFO_SHORT_%s", info->name);
 
    cstr msg = LC(LANG "LOG_Sell");
 
