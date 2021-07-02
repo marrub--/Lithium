@@ -65,8 +65,8 @@ cstr BipStr(cstr in) {
    return out;
 }
 
-script static
-void UnlockPage(struct page *page) {
+script optargs(1) static
+void UnlockPage(struct page *page, bool from_load) {
    if(!get_bit(page->flags, _page_available)) {
       Dbg_Log(log_bip, "ERROR page '%s' not available", page->name);
       return;
@@ -90,6 +90,15 @@ void UnlockPage(struct page *page) {
           i++) {
          P_BIP_Unlock(page->unlocks[i]);
       }
+
+      /*
+      if(!from_load &&
+         !get_bit(page->flags, _page_auto) &&
+         page->category <= _bipc_last_normal)
+      {
+         P_Data_Save();
+      }
+      */
    } else {
       Dbg_Log(log_bip, "already unlocked page '%s'", page->name);
    }
@@ -264,14 +273,14 @@ void P_BIP_PInit(void) {
          #endif
          get_bit(page->flags, _page_auto)))
       {
-         UnlockPage(page);
+         UnlockPage(page, false);
       }
    }
 
    bip.init = true;
 }
 
-void P_BIP_Unlock(cstr name) {
+void P_BIP_Unlock(cstr name, bool from_load) {
    i32 num = P_BIP_NameToNum(name);
 
    if(num == bippagenum) {
@@ -279,7 +288,7 @@ void P_BIP_Unlock(cstr name) {
       return;
    }
 
-   UnlockPage(&bippages[num]);
+   UnlockPage(&bippages[num], from_load);
 }
 
 void P_BIP_PQuit(void) {
@@ -314,7 +323,7 @@ void Sc_UnlockPage(void) {
       noinit static
       char tag[32];
       faststrcpy_str(tag, ServCallS(sm_GetBipName));
-      P_BIP_Unlock(tag);
+      P_BIP_Unlock(tag, false);
    }
 }
 

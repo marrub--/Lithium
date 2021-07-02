@@ -112,38 +112,6 @@ server int   lith_player_lvsys         = 1;
 server bool  lith_player_altinvuln     = false;
 server bool  lith_player_bosstexts     = true;
 
-/* These are 200 bytes of storage per, so overall we have around 6kb available.
- * If this isn't enough more of these can be added trivially (ACS doesn't
- * assume the amount of available storage) */
-server string lith_psave_0  = "";
-server string lith_psave_1  = "";
-server string lith_psave_2  = "";
-server string lith_psave_3  = "";
-server string lith_psave_4  = "";
-server string lith_psave_5  = "";
-server string lith_psave_6  = "";
-server string lith_psave_7  = "";
-server string lith_psave_8  = "";
-server string lith_psave_9  = "";
-server string lith_psave_10 = "";
-server string lith_psave_11 = "";
-server string lith_psave_12 = "";
-server string lith_psave_13 = "";
-server string lith_psave_14 = "";
-server string lith_psave_15 = "";
-server string lith_psave_16 = "";
-server string lith_psave_17 = "";
-server string lith_psave_18 = "";
-server string lith_psave_19 = "";
-server string lith_psave_20 = "";
-server string lith_psave_21 = "";
-server string lith_psave_22 = "";
-server string lith_psave_23 = "";
-server string lith_psave_24 = "";
-server string lith_psave_25 = "";
-server string lith_psave_26 = "";
-server string lith_psave_27 = "";
-server string lith_psave_28 = "";
-server string lith_psave_29 = "";
+server string lith_psave = "";
 
 /* EOF */

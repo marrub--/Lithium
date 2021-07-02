@@ -420,22 +420,23 @@ void P_doIntro() {
 
    if(mapscleared != 0 || pl.done_intro & pl.pclass) return;
 
+   Dbg_Log(log_dev, "P_doIntro");
+
    pl.modal = _gui_intro;
    ACS_SetMusic(sp_lsounds_Silence);
    FreezeTime(false);
    ACS_FadeTo(0, 0, 0, 1.0, 0.0);
 
-   static noinit
-   char text[8192];
-   text[0] = '\0';
-
-   char *lines[_nlines];
-   u32   linec[_nlines];
-   u32   linen[_nlines];
+   noinit static char  text [8192];
+   noinit static char *lines[_nlines];
+   noinit static u32   linec[_nlines];
+   noinit static u32   linen[_nlines];
 
    u32 which = 1;
    u32 last  = 0;
    u32 fill  = 0;
+
+   text[0] = '\0';
 
    for(;;) {
       SetSize(320, 240);

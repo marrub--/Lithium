@@ -54,7 +54,12 @@ i32 Save_ReadChunk(struct savefile *save, u32 iden, u32 vers, loadchunker_t chun
 {
    rewind(save->fp);
 
-   Dbg_Log(log_save, "Save_ReadChunk: Finding chunk %.4X ver%u", iden, vers);
+   Dbg_Log(log_save, "Save_ReadChunk: Finding chunk %c%c%c%c ver%u",
+           (iden >>  0) & 0xFF,
+           (iden >>  8) & 0xFF,
+           (iden >> 16) & 0xFF,
+           (iden >> 24) & 0xFF,
+           vers);
 
    for(i32 i = 0;; i++)
    {

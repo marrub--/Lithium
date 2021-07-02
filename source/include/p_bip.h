@@ -43,6 +43,7 @@ enum {
    _bipc_max,
    _bipc_main = _bipc_max,
    _bipc_search,
+   _bipc_last_normal = _bipc_weapons,
 };
 
 enum {
@@ -93,7 +94,7 @@ extern mem_size_t  bippagenum;
 /* Extern Functions -------------------------------------------------------- */
 
 script void P_BIP_PInit(void);
-void P_BIP_Unlock(cstr name);
+optargs(1) void P_BIP_Unlock(cstr name, bool from_load);
 void P_BIP_PQuit(void);
 
 cstr P_BIP_CategoryToName(i32 category);

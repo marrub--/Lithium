@@ -20,8 +20,6 @@
 
 #include "m_base64.h"
 
-#define SAVE_BLOCK_SIZE 230
-
 /* Type Definitions -------------------------------------------------------- */
 
 struct memfile {
@@ -61,25 +59,7 @@ i32 NetClose(void *nfdata) {
 
    if(coded)
    {
-      i32 cvarnum = 0;
-
-      for(byte const *itr = coded; outsize; cvarnum++)
-      {
-         mem_size_t itrsize;
-
-         if(outsize <= SAVE_BLOCK_SIZE)
-            itrsize = outsize;
-         else
-            itrsize = SAVE_BLOCK_SIZE;
-
-         CVarSetS(StrParam("%S_%i", nf->pcvar, cvarnum), fast_strndup(itr, itrsize));
-
-         itr     += itrsize;
-         outsize -= itrsize;
-      }
-
-      CVarSetS(StrParam("%S_%i", nf->pcvar, cvarnum), st_nil);
-
+      CVarSetS(nf->pcvar, fast_strdup(coded));
       Dalloc(coded);
    }
 
@@ -190,27 +170,19 @@ FILE *NFOpen(str pcvar, char rw) {
       });
    } else if(rw == 'r') {
       /* Get inputs from all possible CVars. */
-      char      *input   = nil;
-      mem_size_t inputsz = 0;
+      char      *input = nil;
+      str        cvar  = CVarGetS(pcvar);
+      mem_size_t inlen = ACS_StrLen(cvar);
 
-      for(i32 cvarnum;; cvarnum++) {
-         str        cvar  = CVarGetS(StrParam("%S_%i", pcvar, cvarnum));
-         mem_size_t inlen = ACS_StrLen(cvar);
-
-         if(inlen) {
-            input = Ralloc(input, inputsz + inlen + 1, _tag_file);
-            faststrcpy_str(input + inputsz, cvar);
-
-            inputsz += inlen;
-         } else {
-            break;
-         }
+      if(inlen) {
+         input = Ralloc(input, inlen + 1, _tag_file);
+         faststrcpy_str(input, cvar);
       }
 
       if(input) {
          /* Decode the base64 input. */
          mem_size_t size;
-         byte *data = base64_decode((void *)input, inputsz, &size);
+         byte *data = base64_decode((void *)input, inlen, &size);
 
          Dalloc(input);
 

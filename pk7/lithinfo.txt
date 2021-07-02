@@ -208,7 +208,7 @@
    cl: pC tag: CPlasma_A     unl: "CPlasmaRifle MDDO";
    cl: pC tag: StarDestroyer unl: "Hell";
    cl: pC tag: ShipGun_A     unl: "StarDestroyer";
-   cl: pC tag: ShipGun_A     unl: "StarDestroyer";
+   cl: pC tag: ShipGun_B     unl: "StarDestroyer";
 
    cl: gO tag: MissileLauncher;
    cl: gO tag: PlasmaDiffuser unl: "SYM43 MDDO Semaphore";

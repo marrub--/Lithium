@@ -19,12 +19,42 @@
 
 /* Chunk "bipu" ------------------------------------------------------------ */
 
+#define if_page_normal() \
+   if(get_bit(page->flags, _page_unlocked) && \
+      !get_bit(page->flags, _page_auto) && \
+      page->category <= _bipc_last_normal) \
+      __with(mem_size_t len = faststrlen(page->name) + 1;)
+
 script static
 void Save_bipu(struct savefile *save) {
+   mem_size_t total = 1;
+
+   for_page() {
+      if_page_normal() {
+         total += len + 1;
+      }
+   }
+
+   Save_WriteChunk(save, Ident_bipu, SaveV_bipu, total);
+
+   for_page() {
+      if_page_normal() {
+         fputc(len & 0xFF, save->fp);
+         fwrite(page->name, 1, len, save->fp);
+      }
+   }
+
+   fputc(0, save->fp);
 }
 
 script static
 void Load_bipu(struct savefile *save, struct savechunk *chunk) {
+   noinit static
+   char name[32];
+   for(mem_size_t len; (len = fgetc(save->fp)) && len < 32;) {
+      fread(name, 1, len, save->fp);
+      P_BIP_Unlock(name, true);
+   }
 }
 
 /* Chunk "note" ------------------------------------------------------------ */
@@ -128,7 +158,7 @@ script void P_Data_Save() {
    struct savefile *save;
 
    if((save = Save_BeginSave())) {
-      /*Save_bipu(save);*/
+      Save_bipu(save);
       Save_note(save);
       Save_agrp(save);
       Save_intr(save);
@@ -140,7 +170,7 @@ script void P_Data_Load() {
    struct savefile *save;
 
    if((save = Save_BeginLoad())) {
-      /*Save_ReadChunk(save, Ident_bipu, SaveV_bipu, Load_bipu);*/
+      Save_ReadChunk(save, Ident_bipu, SaveV_bipu, Load_bipu);
       Save_ReadChunk(save, Ident_note, SaveV_note, Load_note);
       Save_ReadChunk(save, Ident_agrp, SaveV_agrp, Load_agrp);
       Save_ReadChunk(save, Ident_intr, SaveV_intr, Load_intr);
