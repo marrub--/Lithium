@@ -22,7 +22,7 @@
 static
 void EncryptedBody(struct page *page, char *bodytext) {
    faststrcpy_str(bodytext,
-                  ns(language_fmt(LANG "INFO_DESCR_%s", page->name)));
+                  ns(lang_fmt(LANG "INFO_DESCR_%s", page->name)));
    for(char *p = bodytext; *p; p++) {
       *p = !IsPrint(*p) ? *p : *p ^ 7;
    }
@@ -34,15 +34,15 @@ void MailBody(struct page *page, char *bodytext) {
    char remote[128];
    cstr sent;
 
-   faststrcpy_str(remote, ns(language_fmt(LANG "INFO_REMOT_%s", page->name)));
+   faststrcpy_str(remote, ns(lang_fmt(LANG "INFO_REMOT_%s", page->name)));
    sent = CanonTime(ct_full, page->time);
 
    mem_size_t end =
-      sprintf(bodytext, tmpstr(language(sl_mail_template)), remote, sent);
+      sprintf(bodytext, tmpstr(lang(sl_mail_template)), remote, sent);
    bodytext[end++] = '\n';
    bodytext[end++] = '\n';
    faststrcpy_str(&bodytext[end],
-                  ns(language_fmt(LANG "INFO_DESCR_%s", page->name)));
+                  ns(lang_fmt(LANG "INFO_DESCR_%s", page->name)));
 }
 
 static
@@ -50,13 +50,13 @@ cstr GetShortName(struct page *page) {
    if(page->category == _bipc_mail) {
       return CanonTime(ct_short, page->time);
    } else {
-      return tmpstr(language_fmt(LANG "INFO_SHORT_%s", page->name));
+      return tmpstr(lang_fmt(LANG "INFO_SHORT_%s", page->name));
    }
 }
 
 static
 cstr GetFullName(struct page *page) {
-   return tmpstr(language_fmt(LANG "INFO_TITLE_%s", page->name));
+   return tmpstr(lang_fmt(LANG "INFO_TITLE_%s", page->name));
 }
 
 static
@@ -72,7 +72,7 @@ cstr GetBody(struct page *page) {
       break;
    default:
       faststrcpy_str(bodytext,
-                     ns(language_fmt(LANG "INFO_DESCR_%s", page->name)));
+                     ns(lang_fmt(LANG "INFO_DESCR_%s", page->name)));
       break;
    }
    return bodytext;
@@ -98,9 +98,9 @@ static
 void DrawPage(struct gui_state *g, struct page *page) {
    gosub_enable();
 
-   str image  = language_fmt(LANG "INFO_IMAGE_%s", page->name);
+   str image  = lang_fmt(LANG "INFO_IMAGE_%s", page->name);
    i32 height =
-      faststrtoi32_str(ns(language_fmt(LANG "INFO_SSIZE_%s", page->name)));
+      faststrtoi32_str(ns(lang_fmt(LANG "INFO_SSIZE_%s", page->name)));
 
    i32 cr, x, y;
 
@@ -172,7 +172,7 @@ void MainUI(struct gui_state *g) {
    i32 n = 0;
    i32 cat;
 
-   PrintText_str(ns(language(sl_bip_categs)), sf_smallfnt, CR_PURPLE, g->ox+27,1, g->oy+57,1);
+   PrintText_str(ns(lang(sl_bip_categs)), sf_smallfnt, CR_PURPLE, g->ox+27,1, g->oy+57,1);
 
    bip.lastcategory = _bipc_main;
 
@@ -185,11 +185,10 @@ void MainUI(struct gui_state *g) {
    return;
 
 doCateg:
-   PrintTextA_str(ns(language_fmt(LANG "BIP_HELP_%s",
-                                  P_BIP_CategoryToName(cat))),
+   PrintTextA_str(ns(lang_fmt(LANG "BIP_HELP_%s", P_BIP_CategoryToName(cat))),
                   sf_smallfnt, g->defcr, g->ox+92,1, g->oy+72+n,1, 0.7);
-   if(G_Button_HId(g, cat, tmpstr(ns(language_fmt(LANG "BIP_NAME_%s",
-                                                  P_BIP_CategoryToName(cat)))),
+   if(G_Button_HId(g, cat, tmpstr(ns(lang_fmt(LANG "BIP_NAME_%s",
+                                              P_BIP_CategoryToName(cat)))),
                    32, 72 + n, Pre(btnbipmain)))
    {
       bip.curcategory = cat;
@@ -327,7 +326,7 @@ void SearchUI(struct gui_state *g) {
          }
       }
    } else {
-      PrintText_str(ns(language(sl_bip_no_results)), sf_smallfnt, CR_DARKGREY, g->ox+57,0, g->oy+82,0);
+      PrintText_str(ns(lang(sl_bip_no_results)), sf_smallfnt, CR_DARKGREY, g->ox+57,0, g->oy+82,0);
    }
 }
 
@@ -349,19 +348,19 @@ void P_CBI_TabBIP(struct gui_state *g) {
    }
 
    if(bip.curcategory != _bipc_main) {
-      if(G_Button(g, tmpstr(language(sl_bip_back)), 7, 25, false,
+      if(G_Button(g, tmpstr(lang(sl_bip_back)), 7, 25, false,
                   Pre(btnbipback)))
       {
          bip.curcategory = bip.lastcategory;
       }
    } else {
       PrintSpriteA(sp_UI_bip, g->ox+7,1, g->oy+27,1, 0.1);
-      PrintText_str(ns(language(sl_bip_header)), sf_lmidfont, g->defcr,
+      PrintText_str(ns(lang(sl_bip_header)), sf_lmidfont, g->defcr,
                     g->ox+22,1, g->oy+27,1);
    }
 
    if(max) {
-      PrintTextFmt(tmpstr(language(sl_bip_available)), avail, max);
+      PrintTextFmt(tmpstr(lang(sl_bip_available)), avail, max);
       PrintText(sf_smallfnt, g->defcr, g->ox+287,2, g->oy+17,1);
    }
 }

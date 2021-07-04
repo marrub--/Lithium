@@ -37,26 +37,26 @@ void CBITab_Marine(struct gui_state *g) {
    i32 ram;
    str name;
 
-        Upgr(hasupgr2) {CPU(1); ram = 150; name = ns(language(sl_cbi_cpu3));}
-   else Upgr(hasupgr1) {CPU(2); ram = 100; name = ns(language(sl_cbi_cpu2));}
-   else                {CPU(3); ram =  50; name = ns(language(sl_cbi_cpu1));}
+        Upgr(hasupgr2) {CPU(1); ram = 150; name = ns(lang(sl_cbi_cpu3));}
+   else Upgr(hasupgr1) {CPU(2); ram = 100; name = ns(lang(sl_cbi_cpu2));}
+   else                {CPU(3); ram =  50; name = ns(lang(sl_cbi_cpu1));}
 
    PrintTextChS(name);
    PrintText_str(name, sf_smallfnt, g->defcr, g->ox+7,1, g->oy+47,1);
 
    InfoStart;
 
-   Info(tmpstr(language(sl_cbi_perf)), cbiperf);
-   Info(tmpstr(language(sl_cbi_puse)), pl.cbi.pruse);
-   Info(tmpstr(language(sl_cbi_wram)), ram);
+   Info(tmpstr(lang(sl_cbi_perf)), cbiperf);
+   Info(tmpstr(lang(sl_cbi_puse)), pl.cbi.pruse);
+   Info(tmpstr(lang(sl_cbi_wram)), ram);
 
    InfoSep;
 
-   Info(tmpstr(language(sl_cbi_interfaces)));
-   Upgr(armorinter) Info("> %S", ns(language(sl_cbi_armorinter)));
-   Upgr(weapninter) Info("> %S", ns(language(sl_cbi_weapninter)));
-   Upgr(weapninte2) Info("> %S", ns(language(sl_cbi_weapninte2)));
-   Upgr(rdistinter) Info("> %S", ns(language(sl_cbi_rdistinter)));
+   Info(tmpstr(lang(sl_cbi_interfaces)));
+   Upgr(armorinter) Info("> %S", ns(lang(sl_cbi_armorinter)));
+   Upgr(weapninter) Info("> %S", ns(lang(sl_cbi_weapninter)));
+   Upgr(weapninte2) Info("> %S", ns(lang(sl_cbi_weapninte2)));
+   Upgr(rdistinter) Info("> %S", ns(lang(sl_cbi_rdistinter)));
 
    Upgr(armorinter) Slot(sp_UI_ArmorInter, 0, 1);
    Upgr(weapninter) Slot(sp_UI_WeapnInter, 0, 2);
@@ -68,25 +68,25 @@ static
 void CBITab_CyberMage(struct gui_state *g)
 {
    CPU(2);
-   PrintText_str(ns(language(sl_cbi_cpu4)), sf_smallfnt, g->defcr, g->ox+7,1, g->oy+47,1);
+   PrintText_str(ns(lang(sl_cbi_cpu4)), sf_smallfnt, g->defcr, g->ox+7,1, g->oy+47,1);
 
    InfoStart;
 
-   Info(tmpstr(language(sl_cbi_perf)), 34);
-   Info(tmpstr(language(sl_cbi_puse)), pl.cbi.pruse);
-   Info(tmpstr(language(sl_cbi_wram)), 19);
+   Info(tmpstr(lang(sl_cbi_perf)), 34);
+   Info(tmpstr(lang(sl_cbi_puse)), pl.cbi.pruse);
+   Info(tmpstr(lang(sl_cbi_wram)), 19);
 
    InfoSep;
 
-   Info(tmpstr(language(sl_cbi_interfaces)));
-                      Info("> %S", ns(language(sl_cbi_slot1spell)));
-                      Info("> %S", ns(language(sl_cbi_slot2spell)));
-   Upgr(c_slot3spell) Info("> %S", ns(language(sl_cbi_slot3spell)));
-   Upgr(c_slot4spell) Info("> %S", ns(language(sl_cbi_slot4spell)));
-   Upgr(c_slot5spell) Info("> %S", ns(language(sl_cbi_slot5spell)));
-   Upgr(c_slot6spell) Info("> %S", ns(language(sl_cbi_slot6spell)));
-   Upgr(c_slot7spell) Info("> %S", ns(language(sl_cbi_slot7spell)));
-   Upgr(c_rdistinter) Info("> %S", ns(language(sl_cbi_rdistinter)));
+   Info(tmpstr(lang(sl_cbi_interfaces)));
+                      Info("> %S", ns(lang(sl_cbi_slot1spell)));
+                      Info("> %S", ns(lang(sl_cbi_slot2spell)));
+   Upgr(c_slot3spell) Info("> %S", ns(lang(sl_cbi_slot3spell)));
+   Upgr(c_slot4spell) Info("> %S", ns(lang(sl_cbi_slot4spell)));
+   Upgr(c_slot5spell) Info("> %S", ns(lang(sl_cbi_slot5spell)));
+   Upgr(c_slot6spell) Info("> %S", ns(lang(sl_cbi_slot6spell)));
+   Upgr(c_slot7spell) Info("> %S", ns(lang(sl_cbi_slot7spell)));
+   Upgr(c_rdistinter) Info("> %S", ns(lang(sl_cbi_rdistinter)));
 
                       Slot(sp_UI_Slot1Spell, 0, 1);
                       Slot(sp_UI_Slot2Spell, 0, 2);

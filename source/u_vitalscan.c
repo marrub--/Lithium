@@ -164,9 +164,7 @@ void Upgr_VitalScan_Render(struct upgrade *upgr) {
 
    /* Rank */
    if(UData.rank) for(i32 i = 0; i < UData.rank; i++) {
-      StrAry(rs, s":UI:Rank1", s":UI:Rank2", s":UI:Rank3", s":UI:Rank4",
-                 s":UI:Rank5", s":UI:Rank6", s":UI:Rank7");
-      PrintSprite(rs[i], x - 14 + i%5*6,1, y + 11 + (i > 4 ? 8 : 0),1);
+      PrintSprite(sa_ranks[i], x - 14 + i%5*6,1, y + 11 + (i > 4 ? 8 : 0),1);
    }
 
    /* Hit indicator */
@@ -199,20 +197,11 @@ void Upgr_VitalScan_Render(struct upgrade *upgr) {
 
    /* Health bar */
    if(CVarGetI(sc_scanner_bar)) {
-      StrAry(bs, s":Bars:HealthBar1",  s":Bars:HealthBar2",
-                 s":Bars:HealthBar3",  s":Bars:HealthBar4",
-                 s":Bars:HealthBar5",  s":Bars:HealthBar6",
-                 s":Bars:HealthBar7",  s":Bars:HealthBar8",
-                 s":Bars:HealthBar9",  s":Bars:HealthBar10",
-                 s":Bars:HealthBar11", s":Bars:HealthBar12",
-                 s":Bars:HealthBar13", s":Bars:HealthBar14");
-
-
       if(UData.split > 0)
-         PrintSprite(bs[UData.split - 1], x,1, y,1);
+         PrintSprite(sa_healthbars[UData.split - 1], x,1, y,1);
 
       SetClip(x, y, 80 * UData.splitfrac, 2);
-      PrintSprite(bs[UData.split], x,1, y,1);
+      PrintSprite(sa_healthbars[UData.split], x,1, y,1);
       ClearClip();
 
       SetClip(x, y+3, 24 * UData.exp, 2);

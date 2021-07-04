@@ -22,8 +22,8 @@ gtab_t tn[5];
 
 static
 void P_CBI_TabArsenal(struct gui_state *g) {
-   faststrcpy_str(tn[0], ns(language(sl_tab_upgrades)));
-   faststrcpy_str(tn[1], ns(language(sl_tab_shop)));
+   faststrcpy_str(tn[0], ns(lang(sl_tab_upgrades)));
+   faststrcpy_str(tn[1], ns(lang(sl_tab_shop)));
 
    G_Tabs(g, &CBIState(g)->arsetab, tn, 2, 0, 0, 1);
 
@@ -35,9 +35,9 @@ void P_CBI_TabArsenal(struct gui_state *g) {
 
 static
 void P_CBI_TabStat(struct gui_state *g) {
-   faststrcpy_str(tn[0], ns(language(sl_tab_attributes)));
-   faststrcpy_str(tn[1], ns(language(sl_tab_cbi)));
-   faststrcpy_str(tn[2], ns(language(sl_tab_statistics)));
+   faststrcpy_str(tn[0], ns(lang(sl_tab_attributes)));
+   faststrcpy_str(tn[1], ns(lang(sl_tab_cbi)));
+   faststrcpy_str(tn[2], ns(lang(sl_tab_statistics)));
 
    G_Tabs(g, &CBIState(g)->stattab, tn, 3, 0, 0, 1);
 
@@ -50,9 +50,9 @@ void P_CBI_TabStat(struct gui_state *g) {
 
 static
 void P_CBI_TabInfo(struct gui_state *g) {
-   faststrcpy_str(tn[0], ns(language(sl_tab_bip)));
-   faststrcpy_str(tn[1], ns(language(sl_tab_log)));
-   faststrcpy_str(tn[2], ns(language(sl_tab_notes)));
+   faststrcpy_str(tn[0], ns(lang(sl_tab_bip)));
+   faststrcpy_str(tn[1], ns(lang(sl_tab_log)));
+   faststrcpy_str(tn[2], ns(lang(sl_tab_notes)));
 
    G_Tabs(g, &CBIState(g)->infotab, tn, 3, 0, 0, 1);
 
@@ -88,11 +88,11 @@ script void P_CBI_PTick() {
 
    if(G_Button(g, .x = 283, 0, Pre(btnexit))) P_GUI_Use();
 
-   faststrcpy_str(tn[0], ns(language_fmt(LANG "TAB_ARSENAL_%s", pl.discrim)));
-   faststrcpy_str(tn[1], ns(language(sl_tab_status)));
-   faststrcpy_str(tn[2], ns(language(sl_tab_inventory)));
-   faststrcpy_str(tn[3], ns(language(sl_tab_info)));
-   faststrcpy_str(tn[4], ns(language(sl_tab_settings)));
+   faststrcpy_str(tn[0], ns(lang_fmt(LANG "TAB_ARSENAL_%s", pl.discrim)));
+   faststrcpy_str(tn[1], ns(lang(sl_tab_status)));
+   faststrcpy_str(tn[2], ns(lang(sl_tab_inventory)));
+   faststrcpy_str(tn[3], ns(lang(sl_tab_info)));
+   faststrcpy_str(tn[4], ns(lang(sl_tab_settings)));
 
    G_Tabs(g, &CBIState(g)->maintab, tn, 5, 0, 0, 0);
 

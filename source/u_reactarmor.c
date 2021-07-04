@@ -92,7 +92,7 @@ void Sc_GiveRA(i32 num)
 
          ACS_LocalAmbientSound(ss_player_rarmor_mode, 127);
 
-         pl.logH(3, tmpstr(language(sl_log_activearmor)), name);
+         pl.logH(3, tmpstr(lang(sl_log_activearmor)), name);
 
          if(get_bit(pl.upgrades[UPGR_ReactArmor2].flags, _ug_active))
             RA_Give(name, 2);

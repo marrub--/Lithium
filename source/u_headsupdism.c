@@ -73,9 +73,6 @@ void HUD_Ammo() {
 
 static
 void HUD_Health(struct upgrade *upgr) {
-   StrAry(ws, s":HUD:H_D27", s":HUD:H_D28", s":HUD:H_D24", s":HUD:H_D23",
-              s":HUD:H_D22", s":HUD:H_D21", s":HUD:H_D25", s":HUD:H_D26");
-
    PrintSprite(InvNum(so_PowerStrength) ? sp_HUD_M_SplitBackRed : sp_HUD_M_SplitBack, 0,1, 240,2);
 
    PrintTextChr("VIT", 3);
@@ -96,7 +93,7 @@ void HUD_Health(struct upgrade *upgr) {
 
    HUD_DrawHealth(pl.health, 34, 232, Cr(green), UData.cr);
 
-   str gfx = ws[pl.weapon.cur->info->slot];
+   str gfx = sa_wgfx[pl.weapon.cur->info->slot];
 
    i32 x = (8 + pl.ticks) % 57;
 

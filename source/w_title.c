@@ -50,8 +50,8 @@ void W_Title(void) {
    SetSize(320, 240);
    SetClipW(0, 0, 320, 240, 310);
 
-   str txt = ns(language(sl_opener));
-   str bgn = ns(language(sl_begin));
+   str txt = ns(lang(sl_opener));
+   str bgn = ns(lang(sl_begin));
 
    i32 len = ACS_StrLen(txt);
 

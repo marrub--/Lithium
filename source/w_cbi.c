@@ -96,7 +96,7 @@ void Sc_PickupCBIItem(i32 num)
 
    ifauto(struct cupgdef const *, c, GetCUpgr(pl.pclass, num))
       if(c->msg)
-         pl.logB(1, tmpstr(language(sl_log_cbi)), ns(language_fmt(LANG "LOG_CBI_%s", c->msg)));
+         pl.logB(1, tmpstr(lang(sl_log_cbi)), ns(lang_fmt(LANG "LOG_CBI_%s", c->msg)));
 
    CBI_Install(num);
 }

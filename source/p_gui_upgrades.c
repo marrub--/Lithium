@@ -39,7 +39,7 @@ void GUIUpgradesList(struct gui_state *g) {
    str filter_name;
 
    if(filter != -1) {
-      filter_name = ns(language(upgrcateg[filter]));
+      filter_name = ns(lang(upgrcateg[filter]));
 
       for_upgrade(upgr) {
          if(upgr->info->category == filter) {
@@ -47,7 +47,7 @@ void GUIUpgradesList(struct gui_state *g) {
          }
       }
    } else {
-      filter_name = ns(language(sl_cat_all));
+      filter_name = ns(lang(sl_cat_all));
 
       for_upgrade(upgr) {
          numbtns++;
@@ -56,7 +56,7 @@ void GUIUpgradesList(struct gui_state *g) {
       numbtns += UC_MAX;
    }
 
-   PrintTextFmt(tmpstr(language(sl_cat_filter)), filter_name);
+   PrintTextFmt(tmpstr(lang(sl_cat_filter)), filter_name);
    PrintText(sf_smallfnt, g->defcr, g->ox+2,1, g->oy+202,1);
 
    G_ScrBeg(g, &CBIState(g)->upgrscr, 2, 23, gui_p.btnlist.w, 178, gui_p.btnlist.h * numbtns);
@@ -70,7 +70,7 @@ void GUIUpgradesList(struct gui_state *g) {
       } else if(upgr->info->category != curcategory) {
          curcategory = upgr->info->category;
          y += gui_p.btnlist.h;
-         PrintText_str(ns(language(upgrcateg[curcategory])), sf_lmidfont, g->defcr, g->ox + 40,4, y + g->oy + 1,1);
+         PrintText_str(ns(lang(upgrcateg[curcategory])), sf_lmidfont, g->defcr, g->ox + 40,4, y + g->oy + 1,1);
       }
 
       y += gui_p.btnlist.h;
@@ -95,16 +95,14 @@ void GUIUpgradesList(struct gui_state *g) {
       else                                      pre = &gui_p.btnlistsel;
 
       i32 *upgrsel = &CBIState(g)->upgrsel;
-      if(G_Button_HId(g, _i, tmpstr(language_fmt(LANG "UPGRADE_TITLE_%s",
-                                                 upgr->info->name)),
+      if(G_Button_HId(g, _i, tmpstr(lang_fmt(LANG "UPGRADE_TITLE_%s",
+                                             upgr->info->name)),
                       0, y, _i == *upgrsel, .color = color, .preset = pre))
          *upgrsel = _i;
 
       for(i32 i = 0; i < 4; i++) {
-         StrAry(gfxs,
-                s":UI:Group1", s":UI:Group2", s":UI:Group3", s":UI:Group4");
          if(get_bit(upgr->agroups, i)) {
-            PrintSprite(gfxs[i], g->ox + pre->w - 9,1, g->oy + y + 1,1);
+            PrintSprite(sa_groups[i], g->ox + pre->w - 9,1, g->oy + y + 1,1);
          }
       }
    }
@@ -118,9 +116,9 @@ void GUIUpgradeRequirements(struct gui_state *g, struct upgrade *upgr) {
 
    #define Req(name) statement({ \
       ACS_BeginPrint(); \
-      ACS_PrintString(ns(language(name))); \
+      ACS_PrintString(ns(lang(name))); \
       ACS_PrintChar(' '); \
-      ACS_PrintString(ns(language(sl_required))); \
+      ACS_PrintString(ns(lang(sl_required))); \
       PrintText(sf_smallfnt, CR_RED, g->ox+98,1, g->oy+187 + y,2); \
       y -= 10; \
    })
@@ -139,11 +137,11 @@ void GUIUpgradeRequirements(struct gui_state *g, struct upgrade *upgr) {
       cstr fmt;
 
       if(get_bit(upgr->flags, _ug_active))
-         fmt = tmpstr(language(sl_shop_disable_saves));
+         fmt = tmpstr(lang(sl_shop_disable_saves));
       else if(over)
-         fmt = tmpstr(language(sl_shop_cant_activate));
+         fmt = tmpstr(lang(sl_shop_cant_activate));
       else
-         fmt = tmpstr(language(sl_shop_activate_uses));
+         fmt = tmpstr(lang(sl_shop_activate_uses));
 
       PrintTextFmt(fmt, upgr->info->perf);
       PrintText(sf_smallfnt, g->defcr, g->ox+98,1, g->oy+187 + y,2);
@@ -158,10 +156,10 @@ void GUIUpgradeRequirements(struct gui_state *g, struct upgrade *upgr) {
 
       if(get_bit(upgr->flags, _ug_active)) {
          chk = upgr->info->scoreadd > 0;
-         op  = tmpstr(language(sl_shop_mul_disable));
+         op  = tmpstr(lang(sl_shop_mul_disable));
       } else {
          chk = upgr->info->scoreadd < 0;
-         op  = tmpstr(language(sl_shop_mul_enable));
+         op  = tmpstr(lang(sl_shop_mul_enable));
       }
 
       i32 perc = fastabs(ceilk(100.0k * upgr->info->scoreadd));
@@ -189,16 +187,16 @@ void GUIUpgradeDescription(struct gui_state *g, struct upgrade *upgr) {
    }
 
    if(upgr->info->cost) cost = StrParam("%s%s", scoresep(P_Shop_Cost(&upgr->info->shopdef)), mark);
-   else                 cost = ns(language(sl_free));
+   else                 cost = ns(lang(sl_free));
 
    PrintText_str(cost, sf_smallfnt, g->defcr, g->ox+98,1, g->oy+17,1);
 
    /* Category */
-   PrintText_str(ns(language(upgrcateg[upgr->info->category])), sf_smallfnt, g->defcr, g->ox+98,1, g->oy+27,1);
+   PrintText_str(ns(lang(upgrcateg[upgr->info->category])), sf_smallfnt, g->defcr, g->ox+98,1, g->oy+27,1);
 
    /* Effect */
-   ifauto(str, effect, language_fmt(LANG "UPGRADE_EFFEC_%s", upgr->info->name))
-      PrintTextFmt("%S %S", ns(language(sl_effect)), effect);
+   ifauto(str, effect, lang_fmt(LANG "UPGRADE_EFFEC_%s", upgr->info->name))
+      PrintTextFmt("%S %S", ns(lang(sl_effect)), effect);
 
    static
    i32 const crs[] = {
@@ -218,18 +216,18 @@ void GUIUpgradeDescription(struct gui_state *g, struct upgrade *upgr) {
 static
 void GUIUpgradeButtons(struct gui_state *g, struct upgrade *upgr) {
    /* Buy */
-   if(G_Button(g, tmpstr(language(sl_buy)), 98, 192, !P_Shop_CanBuy(&upgr->info->shopdef, upgr), .fill = {&CBIState(g)->buyfill, CVarGetI(sc_gui_buyfiller)}))
+   if(G_Button(g, tmpstr(lang(sl_buy)), 98, 192, !P_Shop_CanBuy(&upgr->info->shopdef, upgr), .fill = {&CBIState(g)->buyfill, CVarGetI(sc_gui_buyfiller)}))
       P_Upg_Buy(upgr, false);
 
    /* Activate */
    if(G_Button(g, tmpstr(get_bit(upgr->flags, _ug_active) ?
-                         language(sl_deactivate) :
-                         language(sl_activate)),
+                         lang(sl_deactivate) :
+                         lang(sl_activate)),
                98 + gui_p.btndef.w + 2, 192, !P_Upg_CanActivate(upgr)))
       P_Upg_Toggle(upgr);
 
    /* Groups */
-   PrintText_str(ns(language(sl_autogroups)), sf_smallfnt, g->defcr, g->ox+242,0, g->oy+192,0);
+   PrintText_str(ns(lang(sl_autogroups)), sf_smallfnt, g->defcr, g->ox+242,0, g->oy+192,0);
 
    for(i32 i = 0; i < 4; i++) {
       static

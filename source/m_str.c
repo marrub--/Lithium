@@ -91,11 +91,19 @@
 
 #include <stdio.h>
 
+#define stab_ary_bgn_x(name) noinit str name[0
+#define stab_ary_ent_x(strn) + 1
+#define stab_ary_end_x() ];
 #define stab_x(n, s) noinit str n;
 #include "m_stab.h"
 
 alloc_aut(0) script ext("ACS") addr(lsc_strinit)
 void StrInit() {
+   str *ary;
+   i32 i;
+   #define stab_ary_bgn_x(name) i = 0, ary = name;
+   #define stab_ary_ent_x(strn) ary[i++] = Spf strn;
+   #define stab_ary_end_x()
    #define stab_x(n, s) n = Spf s;
    #include "m_stab.h"
 }
@@ -347,7 +355,7 @@ cstr alientext(i32 num) {
 }
 
 alloc_aut(0) stkcall
-str language(str name) {
+str lang(str name) {
    str ret, sub, nex;
 
    ACS_BeginPrint();

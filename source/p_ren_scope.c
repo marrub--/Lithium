@@ -38,9 +38,6 @@ void StringStack() {
 
 static
 void Waves() {
-   StrAry(fs, s":HUD:H_D11", s":HUD:H_D12", s":HUD:H_D13", s":HUD:H_D14",
-              s":HUD:H_D15");
-
    k32 health = pl.health / (k32)pl.maxhealth;
    i32 frame  = minmax(health * 4, 1, 5);
    i32 timer  = ACS_Timer();
@@ -50,7 +47,7 @@ void Waves() {
    /* Sine (health) */
    for(i32 i = 0; i < 70; i++) {
       i32 pos = (10 + timer + i) % 160;
-      PrintSpriteA(fs[frame - 1], 300 + ACS_Sin(pos / 32.0) * 7,1, 25 + pos,1, i / 70.0k);
+      PrintSpriteA(sa_fgfx[frame - 1], 300 + ACS_Sin(pos / 32.0) * 7,1, 25 + pos,1, i / 70.0k);
    }
 
    /* Square */
@@ -88,14 +85,11 @@ void ScopeC() {
       }
    }
 
-   StrAry(os, s":HUD_C:ScopeOverlay1", s":HUD_C:ScopeOverlay2",
-              s":HUD_C:ScopeOverlay3", s":HUD_C:ScopeOverlay4");
-
    SetSize(320, 200);
 
    for(u32 i = 0; i < 4; i++) {
       u32 fid = fid_scopecoS + i;
-      if(CheckFade(fid)) PrintSpriteFP(os[i], 0,1, 0,1, fid);
+      if(CheckFade(fid)) PrintSpriteFP(sa_scopes[i], 0,1, 0,1, fid);
    }
 
    for(u32 i = 0; i < 200; i++) {

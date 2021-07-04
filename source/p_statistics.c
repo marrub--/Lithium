@@ -22,7 +22,7 @@ void P_CBI_TabStatistics(struct gui_state *g)
 
    #define Stat(name, f, x) \
    statement({ \
-      PrintText_str(ns(language(name)), sf_lmidfont, g->defcr, g->ox+17,1,  g->oy+27 + 8*n,1); \
+      PrintText_str(ns(lang(name)), sf_lmidfont, g->defcr, g->ox+17,1,  g->oy+27 + 8*n,1); \
       PrintTextFmt(f, x); \
       PrintText(sf_smallfnt, g->defcr, g->ox+267,2, g->oy+27 + 8*n,1); \
       n++; \

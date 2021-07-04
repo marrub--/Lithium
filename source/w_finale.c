@@ -232,7 +232,7 @@ void F_text(struct finale_state *st) {
    i32 hold = st->prg++->i;
    u32 fade = st->prg++->u;
 
-   str txt = ns(language_fmt(LANG "ENDING_%S", name));
+   str txt = ns(lang_fmt(LANG "ENDING_%S", name));
    i32 len = ACS_StrLen(txt);
 
    i32 fill     = hold == -1 ? 0 : hold;

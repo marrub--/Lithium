@@ -20,12 +20,6 @@
 #include <stdio.h>
 #include <GDCC.h>
 
-/* Static Objects ---------------------------------------------------------- */
-
-StrAry(fonts,
-       s"areaname", s"bigupper", s"jiskan16", s"k6x8", s"ljtrmfont",
-       s"lmidfont", s"ltrmfont", s"misakig", s"misakim", s"smallfnt");
-
 /* Extern Objects ---------------------------------------------------------- */
 
 str dbgstat[64], dbgnote[64];
@@ -220,7 +214,7 @@ void Sc_FontTest(i32 fontnum) {
 
    for(;;) {
       enum {_h = 12};
-      str font = fonts[fontnum];
+      str font = sa_dbg_fonts[fontnum];
       SetSize(320, 240);
       i32 y = 0;
       for(i32 i = 0; i < countof(strings); i++) {

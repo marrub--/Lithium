@@ -167,7 +167,7 @@ void Sc_PlayerDeath(void) {
       while(pl.dead) {
          ACS_Delay(35 * 5);
          ACS_BeginPrint();
-         ACS_PrintString(ns(language_fmt(LANG "DEATHMSG_%.2i", ACS_Random(1, 20))));
+         ACS_PrintString(ns(lang_fmt(LANG "DEATHMSG_%.2i", ACS_Random(1, 20))));
          ACS_EndLog();
       }
    }
@@ -326,7 +326,7 @@ void P_bossWarning() {
    ACS_Delay(35 * 5);
 
    if(bossspawned)
-      pl.logB(1, tmpstr(language_fmt(LANG "LOG_BossWarn%s", pl.discrim)));
+      pl.logB(1, tmpstr(lang_fmt(LANG "LOG_BossWarn%s", pl.discrim)));
 }
 
 dynam_aut script static
@@ -337,7 +337,7 @@ void P_bossText(i32 boss) {
 
    bool division = boss == boss_iconofsin && GetFun() & lfun_final;
 
-   if(division) pl.logB(1, tmpstr(language(sl_log_bosshear3)));
+   if(division) pl.logB(1, tmpstr(lang(sl_log_bosshear3)));
 
    if(!CVarGetI(sc_player_bosstexts)) return;
 
@@ -355,8 +355,8 @@ void P_bossText(i32 boss) {
          break;
    }
 
-   pl.logB(1, tmpstr(language(sl_log_bosshear1)));
-   pl.logB(1, tmpstr(language(sl_log_bosshear2)));
+   pl.logB(1, tmpstr(lang(sl_log_bosshear1)));
+   pl.logB(1, tmpstr(lang(sl_log_bosshear2)));
 
    ACS_Delay(35 * 4);
 
@@ -382,7 +382,7 @@ void P_bossText(i32 boss) {
          StartSound(ss_enemies_boss_talk, lch_voice2, CHANF_LOCAL, 1.0, 1.0, pt);
 
          SetFade(fid_bosstext, 20, 1);
-         text = ns(language_fmt(fmt, j, pl.discrim));
+         text = ns(lang_fmt(fmt, j, pl.discrim));
          j++;
       }
 
@@ -430,7 +430,7 @@ void P_doIntro() {
          last = which;
 
          ifauto(str, texts,
-                language_fmt(LANG "BEGINNING_%s_%i", pl.discrim, which)) {
+                lang_fmt(LANG "BEGINNING_%s_%i", pl.discrim, which)) {
             faststrcpy_str(text, texts);
          } else {
             Dbg_Log(log_dev, "P_doIntro: intro ending due to finishing");
@@ -456,7 +456,7 @@ void P_doIntro() {
          }
       }
 
-      PrintTextFmt(tmpstr(language(sl_skip_intro)), sc_use, sc_attack);
+      PrintTextFmt(tmpstr(lang(sl_skip_intro)), sc_use, sc_attack);
       PrintText(sf_smallfnt, CR_WHITE, 275,6, 220,0);
 
       if(G_Filler(280, 220, &fil, pl.buttons & (BT_USE | BT_ATTACK))) {
@@ -596,7 +596,7 @@ void P_Aug_PTick() {
 
       if(total) {
          ACS_LocalAmbientSound(ss_player_cbi_auto_buy, 127);
-         pl.logH(1, tmpstr(language_fmt(LANG "LOG_AutoBuy%i", i + 1)), total, total != 1 ? "s" : "");
+         pl.logH(1, tmpstr(lang_fmt(LANG "LOG_AutoBuy%i", i + 1)), total, total != 1 ? "s" : "");
       }
    }
 }
@@ -689,7 +689,7 @@ void Sc_KeyBuyAutoGroup(i32 grp) {
 
       i32 fmt = total ? grp + 1 : grp + 5;
 
-      pl.logH(1, tmpstr(language_fmt(LANG "LOG_GroupBuy%i", fmt)), cr, success, total, success != 1 ? "s" : "");
+      pl.logH(1, tmpstr(lang_fmt(LANG "LOG_GroupBuy%i", fmt)), cr, success, total, success != 1 ? "s" : "");
    }
 }
 
@@ -712,7 +712,7 @@ void Sc_KeyToggleAutoGroup(i32 grp) {
       if(total) ACS_LocalAmbientSound(ss_player_cbi_auto_toggle, 127);
 
       i32 fmt = total ? grp + 1 : grp + 5;
-      pl.logH(1, tmpstr(language_fmt(LANG "LOG_GroupToggle%i", fmt)));
+      pl.logH(1, tmpstr(lang_fmt(LANG "LOG_GroupToggle%i", fmt)));
    }
 }
 
@@ -739,7 +739,7 @@ void Sc_TimelineInconsistent(void) {
    for(;;) {
       ACS_FadeTo(0, 0, 0, 1.0, 0.0);
       SetSize(320, 240);
-      PrintText_str(ns(language(sl_bad_timeline)), sf_bigupper, CR_WHITE, 160,4, 120,0);
+      PrintText_str(ns(lang(sl_bad_timeline)), sf_bigupper, CR_WHITE, 160,4, 120,0);
       pl.health = -1;
       ACS_Delay(1);
    }

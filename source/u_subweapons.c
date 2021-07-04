@@ -55,14 +55,10 @@ void Upgr_Subweapons_Render(struct upgrade *upgr) {
    if(UData.shots <  2) ClearClip();
 
    for(i32 i = 0; i < _subw_max; i++) {
-      StrAry(subwepact,
-             s":HUD_D:SubWep0", s":HUD_D:SubWep1", s":HUD_D:SubWep2",
-             s":HUD_D:SubWep3", s":HUD_D:SubWep4", s":HUD_D:SubWep5");
-
       i32 x   = 68 + i * 9;
       i32 fid = fid_subwepS + i;
 
-      if(get_bit(UData.have, i)) PrintSprite(subwepact[i], x,1, 238,2);
+      if(get_bit(UData.have, i)) PrintSprite(sa_subwep_act[i], x,1, 238,2);
       if(UData.which == i)       SetFade(fid, 1, 6);
       if(CheckFade(fid))         PrintSpriteF(sp_SubWepUse, x,1, 238,2, fid);
    }

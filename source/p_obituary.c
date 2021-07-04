@@ -33,14 +33,14 @@ void Sc_Obituary(void) {
 
    i32 rn = ACS_Random(1, 5);
 
-   /**/ if(obit == st_ob_crush)    obit = language_fmt(LANG "OB_Crush_%i",    rn);
-   else if(obit == st_ob_default)  obit = language_fmt(LANG "OB_Default_%i",  rn);
-   else if(obit == st_ob_drowning) obit = language_fmt(LANG "OB_Drowning_%i", rn);
-   else if(obit == st_ob_exit)     obit = language_fmt(LANG "OB_Exit_%i",     rn);
-   else if(obit == st_ob_falling)  obit = language_fmt(LANG "OB_Falling_%i",  rn);
-   else if(obit == st_ob_fire)     obit = language_fmt(LANG "OB_Fire_%i",     rn);
-   else if(obit == st_ob_slime)    obit = language_fmt(LANG "OB_Slime_%i",    rn);
-   else if(obit == st_ob_suicide)  obit = language_fmt(LANG "OB_Suicide_%i",  rn);
+   /**/ if(obit == st_ob_crush)    obit = lang_fmt(LANG "OB_Crush_%i",    rn);
+   else if(obit == st_ob_default)  obit = lang_fmt(LANG "OB_Default_%i",  rn);
+   else if(obit == st_ob_drowning) obit = lang_fmt(LANG "OB_Drowning_%i", rn);
+   else if(obit == st_ob_exit)     obit = lang_fmt(LANG "OB_Exit_%i",     rn);
+   else if(obit == st_ob_falling)  obit = lang_fmt(LANG "OB_Falling_%i",  rn);
+   else if(obit == st_ob_fire)     obit = lang_fmt(LANG "OB_Fire_%i",     rn);
+   else if(obit == st_ob_slime)    obit = lang_fmt(LANG "OB_Slime_%i",    rn);
+   else if(obit == st_ob_suicide)  obit = lang_fmt(LANG "OB_Suicide_%i",  rn);
 
    noinit static
    char out[1024];

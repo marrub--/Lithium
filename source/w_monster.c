@@ -48,14 +48,6 @@ struct monster_info monsterinfo[1024];
 noinit static
 mem_size_t monsterpresetnum, monsterinfonum;
 
-StrAry(dmgtype_names,
-       s"Bullets",
-       s"Energy",
-       s"Fire",
-       s"Magic",
-       s"Melee",
-       s"Shrapnel");
-
 /* Static Functions -------------------------------------------------------- */
 
 alloc_aut(0) stkcall static
@@ -98,7 +90,7 @@ void ApplyLevels(dmon_t *m, i32 prev) {
 
    for(i32 i = 0; i < dmgtype_max; i++) {
       ifauto(i32, resist, m->resist[i] / 15.0) {
-         InvGive(StrParam(OBJ "M_%S%i", dmgtype_names[i], min(resist, _max_rank)), 1);
+         InvGive(StrParam(OBJ "M_%S%i", sa_dmgtype_names[i], min(resist, _max_rank)), 1);
       }
    }
 
@@ -351,7 +343,7 @@ void PrintMonsterInfo(dmon_t *m) {
        m->mi->flags, m->mi->type);
 
    for(i32 i = 0; i < countof(m->resist); i++)
-      Log("resist %S: %i", dmgtype_names[i], m->resist[i]);
+      Log("resist %S: %i", sa_dmgtype_names[i], m->resist[i]);
 }
 #endif
 

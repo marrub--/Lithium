@@ -44,9 +44,9 @@ void MailNotify(cstr name) {
    ACS_Delay(20);
 
    char remote[128];
-   faststrcpy_str(remote, ns(language_fmt(LANG "INFO_REMOT_%s", name)));
+   faststrcpy_str(remote, ns(lang_fmt(LANG "INFO_REMOT_%s", name)));
 
-   pl.logB(1, tmpstr(language(sl_log_mailrecv)), remote);
+   pl.logB(1, tmpstr(lang(sl_log_mailrecv)), remote);
 
    if(ACS_Random(1, 10000) == 1) {
       bip.mailtrulyreceived++;

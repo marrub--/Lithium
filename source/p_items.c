@@ -33,7 +33,7 @@ void Container(struct gui_state *g, struct container *cont, i32 sx, i32 sy) {
    i32 h = cont->h * 8;
    i32 w = cont->w * 8;
 
-   PrintText_str(ns(language_fmt(LANG "CONTAINER_%s", cont->cname)),
+   PrintText_str(ns(lang_fmt(LANG "CONTAINER_%s", cont->cname)),
                  sf_smallfnt, g->defcr, sx,1, sy,2);
 
    for(i32 y = 0; y < h; y += 8) {
@@ -407,7 +407,7 @@ void P_CBI_TabItems(struct gui_state *g) {
    PrintSpriteA(sp_UI_Body, g->ox+294-122,1, g->oy+24,1, 0.6);
    PrintSpriteA(sp_UI_Bag,  g->ox+     16,1, g->oy+16,1, 0.6);
 
-   PrintText_str(ns(language(sl_inv_hints)),
+   PrintText_str(ns(lang(sl_inv_hints)),
                  sf_smallfnt, g->defcr, g->ox+2,1, g->oy+212,2);
 
    for(i32 i = 0; i < _inv_num; i++) {
@@ -426,24 +426,24 @@ void P_CBI_TabItems(struct gui_state *g) {
       }
 
       setPos();
-      PrintText_str(ns(language_fmt(LANG "ITEM_TAG_%S", sel->name)),
+      PrintText_str(ns(lang_fmt(LANG "ITEM_TAG_%S", sel->name)),
                     sf_smallfnt, g->defcr, g->ox+x,1, g->oy+y,1);
       incY(8);
 
       setPos();
-      PrintText_str(ns(language_fmt(LANG "ITEM_SHORT_%S", sel->name)),
+      PrintText_str(ns(lang_fmt(LANG "ITEM_SHORT_%S", sel->name)),
                     sf_smallfnt, g->defcr, g->ox+x,1, g->oy+y,1);
       incY(16);
 
       setPos();
-      if(G_Button(g, tmpstr(language(sl_move)), x, y, .color = "n", Pre(btnclear))) {
+      if(G_Button(g, tmpstr(lang(sl_move)), x, y, .color = "n", Pre(btnclear))) {
          pl.movitem = !pl.movitem;
       }
       incPos();
 
       if(get_bit(sel->flags, _if_equippable)) {
          setPos();
-         if(G_Button(g, tmpstr(language(sl_equip)), x, y, .color = "n",
+         if(G_Button(g, tmpstr(lang(sl_equip)), x, y, .color = "n",
                      Pre(btnclear))) {
             EquipItem(sel);
          }
@@ -453,8 +453,8 @@ void P_CBI_TabItems(struct gui_state *g) {
       if(get_bit(sel->flags, _if_openable)) {
          setPos();
          if(G_Button(g, tmpstr(pl.opnitem == sel ?
-                               language(sl_close) :
-                               language(sl_open)),
+                               lang(sl_close) :
+                               lang(sl_open)),
                      x, y, .color = "n", Pre(btnclear)))
          {
             pl.opnitem = pl.opnitem == sel ? nil : sel;
@@ -464,7 +464,7 @@ void P_CBI_TabItems(struct gui_state *g) {
 
       if(sel->Use) {
          setPos();
-         if(G_Button(g, tmpstr(language(sl_use)), x, y, .color = "g", Pre(btnclear))) {
+         if(G_Button(g, tmpstr(lang(sl_use)), x, y, .color = "g", Pre(btnclear))) {
             pl.useitem = sel;
          }
          incPos();
@@ -478,8 +478,8 @@ void P_CBI_TabItems(struct gui_state *g) {
 
       if(sel->scr >= 0 &&
          G_Button(g, tmpstr(sel->scr > 0 ?
-                            language(sl_sell) :
-                            language(sl_discard)),
+                            lang(sl_sell) :
+                            lang(sl_discard)),
                   x, y, .color = "g", .fill = {&CBIState(g)->itemfill, 26},
                   Pre(btnclear))) {
          if(sel->scr) {

@@ -14,9 +14,7 @@
 #if defined(stab_x)
 stab_x(st_nil,  "")
 stab_x(st_null, "(null)")
-
-stab_x(st_nl_bar, "\n|")
-stab_x(st_none,   "None")
+stab_x(st_none, "None")
 
 stab_x(st_ob_crush,    "(crush)")
 stab_x(st_ob_default,  "(default)")
@@ -627,13 +625,97 @@ stab_x(ss_weapons_cercle_begin,     "weapons/cercle/begin")
 stab_x(ss_weapons_rifle_firemode,   "weapons/rifle/firemode")
 stab_x(ss_weapons_rocket_mark,      "weapons/rocket/mark")
 stab_x(ss_weapons_subweapon_charge, "weapons/subweapon/charge")
+
+/* Arrays */
+stab_ary_bgn_x(sa_ranks)
+stab_ary_ent_x(":UI:Rank1") stab_ary_ent_x(":UI:Rank2")
+stab_ary_ent_x(":UI:Rank3") stab_ary_ent_x(":UI:Rank4")
+stab_ary_ent_x(":UI:Rank5") stab_ary_ent_x(":UI:Rank6")
+stab_ary_ent_x(":UI:Rank7")
+stab_ary_end_x()
+
+stab_ary_bgn_x(sa_healthbars)
+stab_ary_ent_x(":Bars:HealthBar1")  stab_ary_ent_x(":Bars:HealthBar2")
+stab_ary_ent_x(":Bars:HealthBar3")  stab_ary_ent_x(":Bars:HealthBar4")
+stab_ary_ent_x(":Bars:HealthBar5")  stab_ary_ent_x(":Bars:HealthBar6")
+stab_ary_ent_x(":Bars:HealthBar7")  stab_ary_ent_x(":Bars:HealthBar8")
+stab_ary_ent_x(":Bars:HealthBar9")  stab_ary_ent_x(":Bars:HealthBar10")
+stab_ary_ent_x(":Bars:HealthBar11") stab_ary_ent_x(":Bars:HealthBar12")
+stab_ary_ent_x(":Bars:HealthBar13") stab_ary_ent_x(":Bars:HealthBar14")
+stab_ary_end_x()
+
+stab_ary_bgn_x(sa_wgfx)
+stab_ary_ent_x(":HUD:H_D27") stab_ary_ent_x(":HUD:H_D28")
+stab_ary_ent_x(":HUD:H_D24") stab_ary_ent_x(":HUD:H_D23")
+stab_ary_ent_x(":HUD:H_D22") stab_ary_ent_x(":HUD:H_D21")
+stab_ary_ent_x(":HUD:H_D25") stab_ary_ent_x(":HUD:H_D26")
+stab_ary_end_x()
+
+stab_ary_bgn_x(sa_fgfx)
+stab_ary_ent_x(":HUD:H_D11") stab_ary_ent_x(":HUD:H_D12")
+stab_ary_ent_x(":HUD:H_D13") stab_ary_ent_x(":HUD:H_D14")
+stab_ary_ent_x(":HUD:H_D15")
+stab_ary_end_x()
+
+stab_ary_bgn_x(sa_scopes)
+stab_ary_ent_x(":HUD_C:ScopeOverlay1") stab_ary_ent_x(":HUD_C:ScopeOverlay2")
+stab_ary_ent_x(":HUD_C:ScopeOverlay3") stab_ary_ent_x(":HUD_C:ScopeOverlay4")
+stab_ary_end_x()
+
+stab_ary_bgn_x(sa_rifle_modes)
+stab_ary_ent_x(":HUD:H_W4") stab_ary_ent_x(":HUD:H_W5")
+stab_ary_ent_x(":HUD:H_W6")
+stab_ary_end_x()
+
+stab_ary_bgn_x(sa_rend_nh)
+stab_ary_ent_x(":Weapon:Rend1") stab_ary_ent_x(":Weapon:Rend2")
+stab_ary_ent_x(":Weapon:Rend3") stab_ary_ent_x(":Weapon:Rend4")
+stab_ary_end_x()
+
+stab_ary_bgn_x(sa_rend_ht)
+stab_ary_ent_x(":Weapon:RendHit1") stab_ary_ent_x(":Weapon:RendHit2")
+stab_ary_ent_x(":Weapon:RendHit3") stab_ary_ent_x(":Weapon:RendHit4")
+stab_ary_end_x()
+
+stab_ary_bgn_x(sa_groups)
+stab_ary_ent_x(":UI:Group1") stab_ary_ent_x(":UI:Group2")
+stab_ary_ent_x(":UI:Group3") stab_ary_ent_x(":UI:Group4")
+stab_ary_end_x()
+
+stab_ary_bgn_x(sa_dmgtype_names)
+stab_ary_ent_x("Bullets")
+stab_ary_ent_x("Energy")
+stab_ary_ent_x("Fire")
+stab_ary_ent_x("Magic")
+stab_ary_ent_x("Melee")
+stab_ary_ent_x("Shrapnel")
+stab_ary_end_x()
+
+stab_ary_bgn_x(sa_subwep_act)
+stab_ary_ent_x(":HUD_D:SubWep0") stab_ary_ent_x(":HUD_D:SubWep1")
+stab_ary_ent_x(":HUD_D:SubWep2") stab_ary_ent_x(":HUD_D:SubWep3")
+stab_ary_ent_x(":HUD_D:SubWep4") stab_ary_ent_x(":HUD_D:SubWep5")
+stab_ary_end_x()
+
+stab_ary_bgn_x(sa_dbg_fonts)
+stab_ary_ent_x("areaname")  stab_ary_ent_x("bigupper")
+stab_ary_ent_x("jiskan16")  stab_ary_ent_x("k6x8")
+stab_ary_ent_x("ljtrmfont") stab_ary_ent_x("lmidfont")
+stab_ary_ent_x("ltrmfont")  stab_ary_ent_x("misakig")
+stab_ary_ent_x("misakim")   stab_ary_ent_x("smallfnt")
+stab_ary_end_x()
+
+#undef stab_ary_bgn_x
+#undef stab_ary_ent_x
+#undef stab_ary_end_x
 #undef stab_x
 #elif !defined(m_stab_h)
 #define m_stab_h
 
+#define stab_ary_bgn_x(name) noinit str name[0
+#define stab_ary_ent_x(strn) + 1
+#define stab_ary_end_x()     ];
 #define stab_x(n, s) extern str n;
 #include "m_stab.h"
-
-#define StrAry(n, ...) static str const n[] = {__VA_ARGS__}
 
 #endif

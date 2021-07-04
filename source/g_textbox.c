@@ -57,7 +57,7 @@ struct gui_txt *G_TxtBox_Imp(struct gui_state *g, gid_t id, struct gui_arg_txt c
       PrintTextFmt("%s%s", Cps_Expand(st->txtbuf, 0, st->tbptr),
                            hot ? Ticker("|", "") : "");
    } else {
-      PrintTextFmt("\C%c%S", hot ? 'c' : 'm', ns(language(sl_gui_textbox)));
+      PrintTextFmt("\C%c%S", hot ? 'c' : 'm', ns(lang(sl_gui_textbox)));
    }
    PrintText(sf_smallfnt, g->defcr, a->x + g->ox,1, a->y + g->oy,1);
    ClearClip();

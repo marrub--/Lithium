@@ -49,7 +49,7 @@ void P_Scr_Payout() {
    for(i32 i = 0; CheckFade(fid_result); i++) {
       i32 y = 20;
       bool counting = false;
-      cstr res = tmpstr(language(sl_res_results));
+      cstr res = tmpstr(lang(sl_res_results));
 
       SetSize(320, 240);
 
@@ -66,7 +66,7 @@ void P_Scr_Payout() {
 #define Pay(name) \
    if(pay.name##max) { \
       Fram(); \
-      Left(tmpstr(language(sl_res_##name)), pay.name##pct); \
+      Left(tmpstr(lang(sl_res_##name)), pay.name##pct); \
       Rght("%s\Cnscr", CountScr(pay.name##scr)); \
       counting |= pay.name##num; \
       y += 9; \
@@ -79,7 +79,7 @@ void P_Scr_Payout() {
 #define Activity(name) \
    if(pay.activities.name) { \
       Fram(); \
-      Left(tmpstr(language(sl_res_##name))); \
+      Left(tmpstr(lang(sl_res_##name))); \
       Rght("%s\Cnscr", CountScr(pay.activities.name)); \
       counting = true; \
       y += 9; \
@@ -93,29 +93,29 @@ void P_Scr_Payout() {
 
       if(i > _begin_total) {
          y += 7;
-         Head(tmpstr(language(sl_res_total)));
+         Head(tmpstr(lang(sl_res_total)));
          y += 16;
       }
 
       if(i > _begin_tax) {
          Fram();
-         Left(tmpstr(language(sl_res_tax)));
+         Left(tmpstr(lang(sl_res_tax)));
          Rght("%s\Cnscr", scoresep(pay.tax));
          y += 9;
       }
 
       if(i > _begin_grandtotal) {
          Fram();
-         Left(tmpstr(language(sl_res_subtotal)));
+         Left(tmpstr(lang(sl_res_subtotal)));
          Rght("%s\Cnscr", scoresep(pay.total));
          y += 16;
 
-         Head(tmpstr(language(sl_res_payment)));
+         Head(tmpstr(lang(sl_res_payment)));
          y += 16;
 
          Fram();
-         Left(tmpstr(language(sl_res_account)));
-         Rght(tmpstr(language(sl_res_closed)), (i % 6) < 3 ? 'n' : '-');
+         Left(tmpstr(lang(sl_res_account)));
+         Rght(tmpstr(lang(sl_res_closed)), (i % 6) < 3 ? 'n' : '-');
       }
 
       if(CVarGetI(sc_player_resultssound)) {

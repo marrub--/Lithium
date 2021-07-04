@@ -44,15 +44,15 @@ cstr CanonTime(i32 type, u64 time) {
 
    switch(type) {
    case ct_full:
-      faststrcpy_str(fmt, ns(language(sl_time_fmt_long)));
+      faststrcpy_str(fmt, ns(lang(sl_time_fmt_long)));
       sprintf(ft, fmt, h, m, s, d, M, Y);
       return ft;
    case ct_short:
-      faststrcpy_str(fmt, ns(language(sl_time_fmt_short)));
+      faststrcpy_str(fmt, ns(lang(sl_time_fmt_short)));
       sprintf(st, fmt, h, m, d, M, Y);
       return st;
    case ct_date:
-      faststrcpy_str(fmt, ns(language(sl_time_fmt_date)));
+      faststrcpy_str(fmt, ns(lang(sl_time_fmt_date)));
       sprintf(dt, fmt, d, M, Y);
       return dt;
    }

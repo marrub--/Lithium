@@ -111,8 +111,8 @@ void Sc_GetSigil(void)
          if(!CheckFade(fid_divsigil)) break;
 
          SetSize(640, 480);
-         PrintTextF_str(ns(language(sl_div_get)), sf_bigupper, CR_ORANGE, 320,4, 240,2, fid_divsigil);
-         PrintTextF_str(ns(language(sl_div_warning)), sf_bigupper, CR_RED, 320,4, 240,1, fid_divsigil);
+         PrintTextF_str(ns(lang(sl_div_get)), sf_bigupper, CR_ORANGE, 320,4, 240,2, fid_divsigil);
+         PrintTextF_str(ns(lang(sl_div_warning)), sf_bigupper, CR_RED, 320,4, 240,1, fid_divsigil);
 
          ACS_Delay(1);
       }

@@ -96,7 +96,7 @@ void S_empty(struct set_parm const *sp) {
 
 script static
 void S_label(struct set_parm const *sp) {
-   PrintText_str(ns(language_fmt(LANG "%s", sp->st->text)),
+   PrintText_str(ns(lang_fmt(LANG "%s", sp->st->text)),
                  sf_smallfnt, sp->g->defcr, sp->g->ox + _left,1,
                  sp->g->oy + sp->y,1);
 }
@@ -108,8 +108,8 @@ void S_boole(struct set_parm const *sp) {
    S_label(sp);
 
    if(G_Button_HId(sp->g, sp->y, tmpstr(v ?
-                                        language(sl_on) :
-                                        language(sl_off)),
+                                        lang(sl_on) :
+                                        lang(sl_off)),
                    _rght - gui_p.btnlist.w, sp->y, Pre(btnlist),
                    .fill = {&CBIState(sp->g)->settingsfill, sp->st->fill})) {
       v = !v;
@@ -126,8 +126,7 @@ void S_integ(struct set_parm const *sp) {
    struct slide_ret sret =
       G_Slider_HId(sp->g, sp->y, _rght - gui_p.slddef.w, sp->y,
                    sp->st->bnd.i.min, sp->st->bnd.i.max, v, true,
-                   .suf = tmpstr(language_fmt(LANG "st_suff_%s",
-                                              sp->st->suff)));
+                   .suf = tmpstr(lang_fmt(LANG "st_suff_%s", sp->st->suff)));
    if(sret.different) {
       v = sret.value;
       sp->st->cb_g.i(sp, &v);
@@ -143,8 +142,7 @@ void S_fixed(struct set_parm const *sp) {
    struct slide_ret sret =
       G_Slider_HId(sp->g, sp->y, _rght - gui_p.slddef.w, sp->y,
                    sp->st->bnd.k.min, sp->st->bnd.k.max, v,
-                   .suf = tmpstr(language_fmt(LANG "st_suff_%s",
-                                              sp->st->suff)));
+                   .suf = tmpstr(lang_fmt(LANG "st_suff_%s", sp->st->suff)));
    if(sret.different) {
       v = sret.value;
       sp->st->cb_g.k(sp, &v);
@@ -175,8 +173,8 @@ void S_enume(struct set_parm const *sp) {
    i32 cr = faststrchk(sp->st->suff, "color") ? Draw_GetCr(v) : sp->g->defcr;
 
    PrintText_str(ns(v < min || v > max ?
-                    language(sl_st_name_unknown) :
-                    language_fmt(LANG "st_name_%s_%i", sp->st->suff, v)),
+                    lang(sl_st_name_unknown) :
+                    lang_fmt(LANG "st_name_%s_%i", sp->st->suff, v)),
                  sf_smallfnt, cr,
                  sp->g->ox + _rght - btw * 2 - 1,2,
                  sp->g->oy + sp->y,1);
@@ -374,7 +372,7 @@ void P_CBI_TabSettings(struct gui_state *g) {
    gtab_t tn[countof(settings)];
 
    for(i32 i = 0; i < countof(settings); i++)
-      faststrcpy_str(tn[i], ns(language(settings[i].nam)));
+      faststrcpy_str(tn[i], ns(lang(settings[i].nam)));
 
    i32 yp = G_Tabs(g, &CBIState(g)->settingstab, tn, countof(tn), 0, 0, 1);
    yp *= gui_p.btntab.h;

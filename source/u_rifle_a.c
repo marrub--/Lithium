@@ -37,10 +37,8 @@ void Upgr_Rifle_A_Render(struct upgrade *upgr)
       ClearClip();
    }
 
-   StrAry(ws, s":HUD:H_W4", s":HUD:H_W5", s":HUD:H_W6");
-
    PrintSprite(sp_HUD_H_W3, 215,2, 240,2);
-   PrintSprite(ws[rifle_firemode_max - pl.riflefiremode - 1], 215,2, 208 + (pl.riflefiremode * 16),2);
+   PrintSprite(sa_rifle_modes[rifle_firemode_max - pl.riflefiremode - 1], 215,2, 208 + (pl.riflefiremode * 16),2);
 }
 
 /* Scripts ----------------------------------------------------------------- */

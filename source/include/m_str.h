@@ -14,7 +14,7 @@
 #include <GDCC.h>
 #include <stdio.h>
 
-#define language_fmt(...) (StrParamBegin(__VA_ARGS__), language(ACS_EndStrParam()))
+#define lang_fmt(...) (StrParamBegin(__VA_ARGS__), lang(ACS_EndStrParam()))
 
 #define StrParamBegin(...) (ACS_BeginPrint(), __nprintf(__VA_ARGS__))
 #define StrParam(...) (StrParamBegin(__VA_ARGS__), ACS_EndStrParam())
@@ -136,7 +136,7 @@ stkcall char *faststrchr(cstr s, char c);
 stkcall char *faststrtok(char *s, char **next, char c);
 stkcall cstr scoresep(i96 num);
 stkcall cstr alientext(i32 num);
-stkcall str language(str name);
+stkcall str lang(str name);
 stkcall str ns(str s);
 stkcall cstr tmpstr(str s);
 stkcall cstr RemoveTextColors_str(astr s, i32 size);

@@ -325,7 +325,7 @@ script void P_Init() {
    if(!pl.invinit) P_Inv_PInit();
 
    if(!pl.wasinit) {
-      pl.logH(1, tmpstr(language(sl_log_version)), VersionName, __DATE__);
+      pl.logH(1, tmpstr(lang(sl_log_version)), VersionName, __DATE__);
 
       #ifndef NDEBUG
       if(dbglevel) {
@@ -334,7 +334,7 @@ script void P_Init() {
          PrintDmonAllocSize();
       } else {
       #endif
-         pl.logH(1, tmpstr(language(sl_log_startgame)), sc_k_opencbi);
+         pl.logH(1, tmpstr(lang(sl_log_startgame)), sc_k_opencbi);
       #ifndef NDEBUG
       }
       #endif

@@ -20,11 +20,11 @@ void P_CBI_TabNotes(struct gui_state *g)
 {
    struct gui_txt *st = G_TxtBox(g, &CBIState(g)->notebox, 35, 27);
 
-   PrintText_str(ns(language(sl_edit)), sf_smallfnt, g->defcr, g->ox+19,2, g->oy+28,0);
+   PrintText_str(ns(lang(sl_edit)), sf_smallfnt, g->defcr, g->ox+19,2, g->oy+28,0);
    if(G_ChkBox(g, CBIState(g)->noteedit, 21, 24))
       CBIState(g)->noteedit = !CBIState(g)->noteedit;
 
-   if(G_Button(g, tmpstr(language(sl_clear)), 3, 37, Pre(btnclear)))
+   if(G_Button(g, tmpstr(lang(sl_clear)), 3, 37, Pre(btnclear)))
       G_TxtBoxRes(st);
 
    G_ScrBeg(g, &CBIState(g)->notescr, 2, 50, 280, 160, 30 * countof(pl.notes), 240);
@@ -34,12 +34,12 @@ void P_CBI_TabNotes(struct gui_state *g)
       if(G_ScrOcc(g, &CBIState(g)->notescr, i * 30, 30))
          continue;
 
-      PrintTextFmt(tmpstr(language(sl_note_fmt)), i + 1);
+      PrintTextFmt(tmpstr(lang(sl_note_fmt)), i + 1);
       PrintText(sf_lmidfont, g->defcr, g->ox+2,1, i * 30 + g->oy,1);
 
       if(G_Button_HId(g, i, (pl.notes[i] ?
                              pl.notes[i] :
-                             tmpstr(language(sl_empty))),
+                             tmpstr(lang(sl_empty))),
                       44, i * 30, .disabled = !CBIState(g)->noteedit,
                       Pre(btnnote)))
       {
