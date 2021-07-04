@@ -19,11 +19,14 @@
 
 /* Chunk "bipu" ------------------------------------------------------------ */
 
+enum {
+   _bipu_new,
+};
+
 #define if_page_normal() \
    if(get_bit(page->flags, _page_unlocked) && \
-      !get_bit(page->flags, _page_auto) && \
       page->category <= _bipc_last_normal) \
-      __with(mem_size_t len = faststrlen(page->name) + 1;)
+      __with(mem_size_t len = faststrlen(page->name);)
 
 script static
 void Save_bipu(struct savefile *save) {
@@ -31,7 +34,7 @@ void Save_bipu(struct savefile *save) {
 
    for_page() {
       if_page_normal() {
-         total += len + 1;
+         total += len + 2;
       }
    }
 
@@ -39,7 +42,10 @@ void Save_bipu(struct savefile *save) {
 
    for_page() {
       if_page_normal() {
+         i32 flg = 0;
+         if(get_bit(page->flags, _page_new)) set_bit(flg, _bipu_new);
          fputc(len & 0xFF, save->fp);
+         fputc(flg,        save->fp);
          fwrite(page->name, 1, len, save->fp);
       }
    }
@@ -52,8 +58,13 @@ void Load_bipu(struct savefile *save, struct savechunk *chunk) {
    noinit static
    char name[32];
    for(mem_size_t len; (len = fgetc(save->fp)) && len < 32;) {
+      i32 flg = fgetc(save->fp);
       fread(name, 1, len, save->fp);
-      P_BIP_Unlock(name, true);
+      name[len] = '\0';
+      struct page *page = P_BIP_NameToPage(name);
+      P_BIP_Unlock(page, true);
+      if(get_bit(flg, _bipu_new)) set_bit(page->flags, _page_new);
+      else                        dis_bit(page->flags, _page_new);
    }
 }
 

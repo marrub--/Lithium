@@ -18,15 +18,6 @@
 
 script_str ext("ACS") addr(OBJ "Obituary")
 void Sc_Obituary(void) {
-   Str(st_ob_crush,      s"(crush)");
-   Str(st_ob_default,    s"(default)");
-   Str(st_ob_drowning,   s"(drowning)");
-   Str(st_ob_exit,       s"(exit)");
-   Str(st_ob_falling,    s"(falling)");
-   Str(st_ob_fire,       s"(fire)");
-   Str(st_ob_slime,      s"(slime)");
-   Str(st_ob_suicide,    s"(suicide)");
-
    static
    struct {
       cstr sub, obj, psd, psi, act;
@@ -42,21 +33,21 @@ void Sc_Obituary(void) {
 
    i32 rn = ACS_Random(1, 5);
 
-   /**/ if(obit == st_ob_crush)    obit = Language(LANG "OB_Crush_%i",    rn);
-   else if(obit == st_ob_default)  obit = Language(LANG "OB_Default_%i",  rn);
-   else if(obit == st_ob_drowning) obit = Language(LANG "OB_Drowning_%i", rn);
-   else if(obit == st_ob_exit)     obit = Language(LANG "OB_Exit_%i",     rn);
-   else if(obit == st_ob_falling)  obit = Language(LANG "OB_Falling_%i",  rn);
-   else if(obit == st_ob_fire)     obit = Language(LANG "OB_Fire_%i",     rn);
-   else if(obit == st_ob_slime)    obit = Language(LANG "OB_Slime_%i",    rn);
-   else if(obit == st_ob_suicide)  obit = Language(LANG "OB_Suicide_%i",  rn);
+   /**/ if(obit == st_ob_crush)    obit = language_fmt(LANG "OB_Crush_%i",    rn);
+   else if(obit == st_ob_default)  obit = language_fmt(LANG "OB_Default_%i",  rn);
+   else if(obit == st_ob_drowning) obit = language_fmt(LANG "OB_Drowning_%i", rn);
+   else if(obit == st_ob_exit)     obit = language_fmt(LANG "OB_Exit_%i",     rn);
+   else if(obit == st_ob_falling)  obit = language_fmt(LANG "OB_Falling_%i",  rn);
+   else if(obit == st_ob_fire)     obit = language_fmt(LANG "OB_Fire_%i",     rn);
+   else if(obit == st_ob_slime)    obit = language_fmt(LANG "OB_Slime_%i",    rn);
+   else if(obit == st_ob_suicide)  obit = language_fmt(LANG "OB_Suicide_%i",  rn);
 
    noinit static
    char out[1024];
 
    char *pt = out;
 
-   for(astr s = obit; *s;) {
+   for(astr s = ns(obit); *s;) {
       cstr cs;
       str st;
       i32 ln;

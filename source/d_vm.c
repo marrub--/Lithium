@@ -263,21 +263,21 @@ str GetText(i32 from) {
    case _from_lon: pfx = "LOGON"; break;
    }
 
-   return adr ? LanguageNull(LANG "%s_%s", pfx, MemSC_G(adr)) : snil;
+   return adr ? language_fmt(LANG "%s_%s", pfx, MemSC_G(adr)) : snil;
 }
 
 static
 str GetRemote() {
    u32  adr = MemB2_G(VAR_REMOTEL);
    cstr nam = adr ? MemSC_G(adr) : "UNKNOWN";
-   return Language(LANG "REMOTE_%s", nam);
+   return ns(language_fmt(LANG "REMOTE_%s", nam));
 }
 
 static
 str GetName() {
    u32  adr = MemB2_G(VAR_NAMEL);
    cstr nam = adr ? MemSC_G(adr) : "UNKNOWN";
-   return Language(LANG "PNAME_%s", nam);
+   return ns(language_fmt(LANG "PNAME_%s", nam));
 }
 
 static
@@ -304,11 +304,6 @@ void TerminalGUI(u32 tact) {
       tmidx = tright/2, tmidy = tbottom/2,
    };
 
-   Str(sl_term_disconnecting, sLANG "TERM_DISCONNECTING");
-   Str(sl_term_ip,            sLANG "TERM_IP");
-   Str(sl_term_sgxline,       sLANG "TERM_SGXLINE");
-   Str(sl_term_use_to_ack,    sLANG "TERM_USE_TO_ACK");
-
    G_Begin(&gst, twidth, theigh);
    G_UpdateState(&gst);
 
@@ -318,26 +313,32 @@ void TerminalGUI(u32 tact) {
    PrintRect(0, tbottom-12, twidth, 12,      0xFF0C0044);
 
    /* Top-left text */
-   PrintText_str(L(sl_term_sgxline), sf_ltrmfont, CR_RED, 0,1, 0,1);
+   PrintText_str(ns(language(sl_term_sgxline)), sf_ltrmfont, CR_RED, 0,1, 0,1);
 
    /* Top-right text */
+   str lng;
    str tr = GetRemote();
    switch(tact) {
-      default:          tr = StrParam(LC(LANG "TERM_REMOTE"),       tr); break;
-      case TACT_LOGON:  tr = StrParam(LC(LANG "TERM_OPEN_CONNECT"), tr); break;
-      case TACT_LOGOFF: tr = L(sl_term_disconnecting);                      break;
+   default:         lng = sl_term_remote; goto trmtxt;
+   case TACT_LOGON: lng = sl_term_open_connect;
+   trmtxt:
+      tr = StrParam(tmpstr(language(lng)), tr);
+      break;
+   case TACT_LOGOFF:
+      tr = ns(language(sl_term_disconnecting));
+      break;
    }
    PrintText_str(tr, sf_ltrmfont, CR_RED, tright,2, 0,1);
 
    /* Bottom-left text */
-   PrintText_str(L(sl_term_ip), sf_ltrmfont, CR_RED, 0,1, tbottom,2);
+   PrintText_str(ns(language(sl_term_ip)), sf_ltrmfont, CR_RED, 0,1, tbottom,2);
 
    /* Bottom-right text */
    str br;
    switch(tact) {
       case TACT_LOGON:
       case TACT_LOGOFF: br = fast_strdup(CanonTime(ct_date, ticks)); break;
-      default:          br = L(sl_term_use_to_ack);                  break;
+      default:          br = ns(language(sl_term_use_to_ack));       break;
    }
    PrintText_str(br, sf_ltrmfont, CR_RED, tright,2, tbottom,2);
 
@@ -410,8 +411,7 @@ void DialogueGUI() {
    PrintSpriteA(sp_Dialogue_Back,  0,1, 0,1, 0.7);
    PrintSpriteA(fast_strdup(icon), 0,1, 0,1, 0.7);
 
-   PrintTextStr(snam);
-   PrintText(sf_bigupper, CR_GREEN, 30,1, 35,1);
+   PrintText_str(snam, sf_bigupper, CR_GREEN, 30,1, 35,1);
 
    G_Clip(&gst, left, top, 257, 150);
    PrintTextFmt("\Cd> Remote: %S\n\Cd> Date: %s", srem, CanonTime(ct_full, ticks));
@@ -430,7 +430,7 @@ void DialogueGUI() {
 
       for(i32 i = 0; i < oc; i++, y += 14) {
          u32  adr = MemB2_G(StructOfs(OPT, NAML, i));
-         cstr txt = LanguageC(LANG "OPT_%s", MemSC_G(adr));
+         cstr txt = tmpstr(language_fmt(LANG "OPT_%s", MemSC_G(adr)));
 
          if(G_Button_HId(&gst, i, txt, 45, y, Pre(btndlgsel))) {
             MemB1_S(VAR_UACT, UACT_SELOPTION);

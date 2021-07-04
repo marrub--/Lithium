@@ -55,7 +55,7 @@
       ACS_EndLog(); \
    })
 
-#define gosubEnable() lbl _gsret = lnil
+#define gosub_enable() lbl _gsret = lnil
 
 #define gosub_(label, lh) \
    statement({ \
@@ -63,10 +63,11 @@
       goto label; \
    _l##lh:; \
    })
-#define gosub__(label, lh) gosub_ (label, lh)
-#define gosub(label)       gosub__(label, LineHashIdent)
+#define gosub__(label, lh)  gosub_ (label, lh)
+#define gosub___(label)     gosub__(label, LineHashIdent)
+#define gosub(label, ...) __with((__VA_ARGS__);) gosub___(label)
 
-#define gosubRet() goto *_gsret
+#define gosub_ret() goto *_gsret
 
 typedef int32_t i32;
 typedef int64_t i64;

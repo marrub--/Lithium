@@ -12,9 +12,9 @@
 ##
 ## ---------------------------------------------------------------------------|
 
-require_relative "corinth.rb"
+require "set"
 
-require 'set'
+require_relative "corinth.rb"
 
 def gen_map areas
    areas.flat_map do |area|

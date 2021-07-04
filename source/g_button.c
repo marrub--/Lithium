@@ -14,7 +14,7 @@
 #include "common.h"
 #include "p_player.h"
 
-bool G_Button_Imp(struct gui_state *g, u32 id, struct gui_arg_btn const *a) {
+bool G_Button_Imp(struct gui_state *g, gid_t id, struct gui_arg_btn const *a) {
    struct gui_pre_btn const *pre = a->preset ? a->preset : &gui_p.btndef;
 
    if(!a->disabled)
@@ -53,8 +53,7 @@ bool G_Button_Imp(struct gui_state *g, u32 id, struct gui_arg_btn const *a) {
 
       if(a->fill.ptr && a->fill.tic) {
          if(g->hot == id && g->active == id) {
-            click =
-               G_Filler(g->cx + 8, g->cy, a->fill.ptr, a->fill.tic, click);
+            click = G_Filler(g->cx + 8, g->cy, &a->fill, click);
          } else {
             if(g->active != id) {
                *a->fill.ptr = 0;

@@ -21,7 +21,12 @@
 
 void Save_WriteChunk(struct savefile *save, u32 iden, u32 vers, mem_size_t size)
 {
-   Dbg_Log(log_save, "Save_WriteChunk: writing %u version %u size %zu", iden, vers, size);
+   Dbg_Log(log_save, "Save_WriteChunk: writing %c%c%c%c version %u size %zu",
+           (iden >>  0) & 0xFF,
+           (iden >>  8) & 0xFF,
+           (iden >> 16) & 0xFF,
+           (iden >> 24) & 0xFF,
+           vers, size);
 
    struct savechunk chunk = {iden, vers & Save_VersMask, size};
    FWrite32(&chunk, sizeof chunk, 4, save->fp);
@@ -69,7 +74,7 @@ i32 Save_ReadChunk(struct savefile *save, u32 iden, u32 vers, loadchunker_t chun
       /* End of file reached, or we reached the EOF chunk. */
       /* Otherwise, if the chunk description matches, process it. */
       /* Or, the chunk is not correct, and we skip the data. */
-      if(chunk.iden == Ident_Lend || feof(save->fp))
+      if(chunk.iden == Ident_Lend || FEOF(save->fp))
          break;
       else if(chunk.iden == iden && (chunk.vrfl & Save_VersMask) == vers)
       {

@@ -192,8 +192,7 @@ void P_Wep_PTick()
    switch(P_Wep_CurType())
    {
    case weapon_c_fist:
-      Str(sl_mana_charge, sLANG "MANA_CHARGE");
-      PrintTextA_str(L(sl_mana_charge), sf_smallfnt, CR_BRICK, 160,0, 100,0, 0.5);
+      PrintTextA_str(ns(language(sl_mana_charge)), sf_smallfnt, CR_BRICK, 160,0, 100,0, 0.5);
       break;
    case weapon_c_delear:
       ServCallI(sm_DelearSprite);
@@ -201,7 +200,7 @@ void P_Wep_PTick()
    case weapon_o_cfist:
       __with(k64 charge = 5 + InvNum(so_FistCharge) / 10.0lk;)
       {
-         PrintTextFmt(LC(LANG "CHARGE_FMT"), charge);
+         PrintTextFmt(tmpstr(language(sl_charge_fmt)), charge);
          PrintText(sf_smallfnt, CR_LIGHTBLUE, 270,2, 200,2);
       }
       break;
@@ -215,7 +214,6 @@ bool Sc_WeaponPickup(i32 name)
 {
    if(P_None()) return false;
 
-   Str(sc_sv_weaponstay, s"sc_sv_weaponstay");
    bool weaponstay = CVarGetI(sc_sv_weaponstay);
    i32 parm = weapon_unknown;
 
@@ -240,7 +238,7 @@ bool Sc_WeaponPickup(i32 name)
       WeaponGrab(info);
 
       pl.weaponsheld++;
-      P_BIP_Unlock(info->name);
+      P_BIP_Unlock(P_BIP_NameToPage(info->name), false);
 
       GiveWeaponItem(parm, info->slot);
       P_Log_Weapon(info);

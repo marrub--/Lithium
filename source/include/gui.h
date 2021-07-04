@@ -58,8 +58,7 @@
       else                     faststrcpy2(gfx, (g)->gfxprefix, (pre)->mem); \
    })
 
-#define G_ScrollReset(g, st) \
-   (*(st) = (struct gui_scr){})
+#define G_ScrollReset(g, st) fastmemset(st, 0, sizeof(struct gui_scr))
 
 #define G_TxtBoxRes(st) ((st)->tbptr = 0)
 
@@ -68,11 +67,12 @@
       ifauto(cstr, _c, faststrchr(txt_buf, '\n')) \
          __with(mem_size_t txt_len = _c - txt_buf; G_TxtBoxRes(st);)
 
-/* Types ------------------------------------------------------------------- */
+typedef i32  gid_t;
+typedef char gtab_t[32];
 
 struct gui_fil {
-   u32 *ptr;
-   u32  tic;
+   i32 *ptr;
+   i32  tic;
 };
 
 struct gui_scr {
@@ -83,12 +83,6 @@ struct gui_scr {
    k64  grabpos;
    bool grabbed;
    i32  nextsnd;
-};
-
-struct gui_typ {
-   str txt;
-   i32 len;
-   i32 pos;
 };
 
 struct gui_txt {
@@ -125,13 +119,10 @@ struct gui_state {
    i32 ox, oy;
    i32 w, h;
 
-   u32 active, hot;
+   gid_t active, hot;
 
-   u32 slide;
+   gid_t slide;
    i32 slidecount, slidetime;
-
-   u32 dbl;
-   i32 dbltime;
 
    i32 clip;
    struct gui_clip clips[16];
@@ -299,14 +290,10 @@ enum cursor {
    gui_curs_max,
 };
 
-/* Extern Objects ---------------------------------------------------------- */
-
 extern struct gui_presets const gui_p;
 
-/* Extern Functions -------------------------------------------------------- */
-
 optargs(1)
-void G_Auto(struct gui_state *g, u32 id, i32 x, i32 y, i32 w, i32 h, bool slide);
+void G_Auto(struct gui_state *g, gid_t id, i32 x, i32 y, i32 w, i32 h, bool slide);
 
 void G_UpdateState(struct gui_state *g);
 
@@ -318,12 +305,9 @@ optargs(1)
 void G_Clip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, i32 ww);
 void G_ClipRelease(struct gui_state *g);
 
-void G_TypeOn(struct gui_state *g, struct gui_typ *typeon, str text);
-struct gui_typ const *G_TypeOnUpdate(struct gui_state *g, struct gui_typ *typeon);
+bool G_Filler(i32 x, i32 y, struct gui_fil const *fil, bool held);
 
-bool G_Filler(i32 x, i32 y, u32 *fill, u32 tics, bool held);
-
-i32 G_Tabs(struct gui_state *g, u32 *st, char const (*names)[20],
+i32 G_Tabs(struct gui_state *g, mem_size_t *st, gtab_t const *names,
            mem_size_t num, i32 x, i32 y, i32 yp);
 
 void G_ScrEnd(struct gui_state *g, struct gui_scr *scr);
@@ -332,7 +316,7 @@ bool G_ScrOcc(struct gui_state *g, struct gui_scr const *scr, i32 y, i32 h);
 
 void G_WinEnd(struct gui_state *g, struct gui_win *win);
 
-#define G_ImpArgs(ty) struct gui_state *g, u32 id, struct gui_arg_##ty const *a
+#define G_ImpArgs(ty) struct gui_state *g, gid_t id, struct gui_arg_##ty const *a
 bool             G_Button_Imp(G_ImpArgs(btn));
 bool             G_ChkBox_Imp(G_ImpArgs(cbx));
 void             G_ScrBeg_Imp(G_ImpArgs(scr));

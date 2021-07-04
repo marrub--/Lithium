@@ -80,10 +80,12 @@ void UpdateMagicUI(struct upgrade *upgr)
          .h        = 64
       };
 
-      char name[128]; LanguageCV(name, LANG "INFO_SHORT_%s", m->name);
-
-      if(G_Button_FId(g, i + 1, name, m->x, m->y, .preset = &pre))
+      if(G_Button_FId(g, i + 1, tmpstr(language_fmt(LANG "INFO_SHORT_%s",
+                                                    m->name)),
+                      m->x, m->y, .preset = &pre))
+      {
          GiveMagic(m);
+      }
    }
 
    G_End(g, gui_curs_outline);

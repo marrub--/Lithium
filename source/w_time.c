@@ -24,7 +24,7 @@ i32 lmvar frozen;
 
 cstr CanonTime(i32 type, u64 time) {
    noinit static
-   char ft[64], st[64], dt[64], lf[256];
+   char ft[64], st[64], dt[64], fmt[64];
 
    i32 t = time;
    i32 s = 53 + t / 35;
@@ -43,9 +43,18 @@ cstr CanonTime(i32 type, u64 time) {
    Y = Y      + 1;
 
    switch(type) {
-      case ct_full:  sprintf(ft, LanguageVC(lf, LANG "TIME_FMT_LONG"),  h, m, s, d, M, Y); return ft;
-      case ct_short: sprintf(st, LanguageVC(lf, LANG "TIME_FMT_SHORT"), h, m,    d, M, Y); return st;
-      case ct_date:  sprintf(dt, LanguageVC(lf, LANG "TIME_FMT_DATE"),           d, M, Y); return dt;
+   case ct_full:
+      faststrcpy_str(fmt, ns(language(sl_time_fmt_long)));
+      sprintf(ft, fmt, h, m, s, d, M, Y);
+      return ft;
+   case ct_short:
+      faststrcpy_str(fmt, ns(language(sl_time_fmt_short)));
+      sprintf(st, fmt, h, m, d, M, Y);
+      return st;
+   case ct_date:
+      faststrcpy_str(fmt, ns(language(sl_time_fmt_date)));
+      sprintf(dt, fmt, d, M, Y);
+      return dt;
    }
 
    return nil;

@@ -6,8 +6,6 @@
 ##
 ## ---------------------------------------------------------------------------|
 
-$output "pk7/modeldef.txt"
-
 All {
    DontCullBackFaces;
    UseActorRoll;

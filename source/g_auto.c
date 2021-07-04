@@ -38,7 +38,7 @@ void G_setClip(struct gui_state *g) {
 
 /* Extern Functions -------------------------------------------------------- */
 
-void G_Auto(struct gui_state *g, u32 id, i32 x, i32 y, i32 w, i32 h,
+void G_Auto(struct gui_state *g, gid_t id, i32 x, i32 y, i32 w, i32 h,
             bool slide) {
    x += g->ox;
    y += g->oy;
@@ -79,8 +79,6 @@ void G_UpdateState(struct gui_state *g) {
     * single-player.
     */
    bool inverted = CVarGetI(sc_player_invertmouse);
-
-   Str(sc_invertmouse, s"sc_invertmouse");
    if(singleplayer) inverted |= CVarGetI(sc_invertmouse);
 
    g->old = g->cur;
@@ -183,44 +181,28 @@ void G_ClipRelease(struct gui_state *g) {
    G_setClip(g);
 }
 
-void G_TypeOn(struct gui_state *g, struct gui_typ *typeon, str text) {
-   typeon->txt = text;
-   typeon->len = ACS_StrLen(text);
-   typeon->pos = 0;
-}
-
-struct gui_typ const *G_TypeOnUpdate(struct gui_state *g,
-                                     struct gui_typ *typeon) {
-   i32 num = ACS_Random(2, 15);
-
-   if((typeon->pos += num) > typeon->len)
-      typeon->pos = typeon->len;
-
-   return typeon;
-}
-
-bool G_Filler(i32 x, i32 y, u32 *fill, u32 tics, bool held) {
-   if(*fill > tics) {
-      *fill = 0;
+bool G_Filler(i32 x, i32 y, struct gui_fil const *fil, bool held) {
+   if(*fil->ptr > fil->tic) {
+      *fil->ptr = 0;
       return true;
    }
 
    if(held) {
-      *fill += 1;
-   } else if(*fill && ticks % 4 == 0) {
-      *fill -= 1;
+      *fil->ptr += 1;
+   } else if(*fil->ptr && ticks % 4 == 0) {
+      *fil->ptr -= 1;
    }
 
-   PrintSprite(StrParam(":UI:Filler%i", (*fill * 8) / tics), x,1, y,0);
+   PrintSprite(StrParam(":UI:Filler%i", (*fil->ptr * 8) / fil->tic), x,1, y,0);
 
    return false;
 }
 
-i32 G_Tabs(struct gui_state *g, u32 *st, char const (*names)[20],
+i32 G_Tabs(struct gui_state *g, mem_size_t *st, gtab_t const *names,
            mem_size_t num, i32 x, i32 y, i32 yp) {
    i32 xp = 0;
 
-   for(i32 i = 0; i < num; i++) {
+   for(mem_size_t i = 0; i < num; i++) {
       if(G_Button_HId(g, xp + yp * 6, names[i], gui_p.btntab.w * xp + x,
                       gui_p.btntab.h * yp + y, i == *st, Pre(btntab))) {
          *st = i;

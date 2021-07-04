@@ -43,10 +43,6 @@ script void Upgr_Subweapons_Update(struct upgrade *upgr) {
 }
 
 void Upgr_Subweapons_Render(struct upgrade *upgr) {
-   Str(sp_SubWepBack, s":HUD_D:SubWepBack");
-   Str(sp_SubWepBar1, s":HUD_D:SubWepBar1");
-   Str(sp_SubWepBar2, s":HUD_D:SubWepBar2");
-
    if(!pl.hudenabled) return;
 
    PrintSprite(sp_SubWepBack, 66,1, 239,2);
@@ -62,7 +58,6 @@ void Upgr_Subweapons_Render(struct upgrade *upgr) {
       StrAry(subwepact,
              s":HUD_D:SubWep0", s":HUD_D:SubWep1", s":HUD_D:SubWep2",
              s":HUD_D:SubWep3", s":HUD_D:SubWep4", s":HUD_D:SubWep5");
-      Str(sp_SubWepUse, s":HUD_D:SubWepUse");
 
       i32 x   = 68 + i * 9;
       i32 fid = fid_subwepS + i;

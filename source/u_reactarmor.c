@@ -63,8 +63,6 @@ void Upgr_ReactArmor_Deactivate(struct upgrade *upgr)
 
 void Upgr_ReactArmor_Render(struct upgrade *upgr)
 {
-   Str(sp_HUD_M_SplitLeft, s":HUD_M:SplitLeft");
-
    if(UData.activearmor && CVarGetI(sc_hud_showarmorind))
    {
       PrintSprite(sp_HUD_M_SplitLeft, 12,1, 226,2);
@@ -94,7 +92,7 @@ void Sc_GiveRA(i32 num)
 
          ACS_LocalAmbientSound(ss_player_rarmor_mode, 127);
 
-         pl.logH(3, LC(LANG "LOG_ActiveArmor"), name);
+         pl.logH(3, tmpstr(language(sl_log_activearmor)), name);
 
          if(get_bit(pl.upgrades[UPGR_ReactArmor2].flags, _ug_active))
             RA_Give(name, 2);

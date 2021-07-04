@@ -23,12 +23,9 @@
 /* Extern Functions -------------------------------------------------------- */
 
 script void Upgr_VitalScan_Update(struct upgrade *upgr) {
-   Str(so_devile_six, s"RLDeVileSix");
-   Str(sm_countkill,  s"COUNTKILL");
-
    ACS_SetActivator(0, AAPTR_PLAYER_GETTARGET);
 
-   bool six = ACS_StrCmp(ACS_GetActorClass(0), so_devile_six, 11) == 0;
+   bool six = ACS_StrCmp(ACS_GetActorClass(0), so_RLDeVileSix, 11) == 0;
 
    bool validtarget =
       six ||
@@ -38,13 +35,6 @@ script void Upgr_VitalScan_Update(struct upgrade *upgr) {
    if(GetHealth(0) <= 0) {
       fastmemset(&UData, 0, sizeof UData);
    } else if(validtarget) {
-      Str(sm_boss,     s"BOSS");
-      Str(sm_invuln,   s"INVULNERABLE");
-      Str(sm_nodamage, s"NODAMAGE");
-      Str(sm_shadow,   s"SHADOW");
-
-      Str(so_legendary_transformed, s"LDLegendaryMonsterTransformed");
-
       bool freak = ACS_CheckFlag(0, sm_invuln) || ACS_CheckFlag(0, sm_nodamage);
 
       i32 chp = GetHealth(0);
@@ -88,14 +78,13 @@ script void Upgr_VitalScan_Update(struct upgrade *upgr) {
             healthset = true;
          }
       } else if(six) {
-         Str(st_six_tag, s"\Cg6");
          UData.tagstr = st_six_tag;
       } else {
          UData.tagstr = StrParam("%tS\C-", 0);
          UData.freak = false;
       }
 
-      if(legendoom && InvNum(so_legendary_transformed))
+      if(legendoom && InvNum(so_LDLegendaryMonsterTransformed))
          UData.tagstr = StrParam("\CgLegendary\C- %tS\C-", 0);
 
       if(!healthset) {
@@ -226,9 +215,8 @@ void Upgr_VitalScan_Render(struct upgrade *upgr) {
       PrintSprite(bs[UData.split], x,1, y,1);
       ClearClip();
 
-      Str(sp_exp_bar_1, s":Bars:ExpBar1");
       SetClip(x, y+3, 24 * UData.exp, 2);
-      PrintSprite(sp_exp_bar_1, x,1, y+3,1);
+      PrintSprite(sp_Bars_ExpBar1, x,1, y+3,1);
       ClearClip();
    }
 }

@@ -16,7 +16,7 @@
 /* Static Functions -------------------------------------------------------- */
 
 static
-void Blinker(cstr bgn) {
+void Blinker(str bgn) {
    static
    i32 const time = 20;
 
@@ -27,8 +27,7 @@ void Blinker(cstr bgn) {
    i32 t;
 
    if(t < time) {
-      PrintTextChS(bgn);
-      PrintTextA(sf_smallfnt, Cr(green), 160,0, 220,0, a);
+      PrintTextA_str(bgn, sf_smallfnt, Cr(green), 160,0, 220,0, a);
       a += 0.006;
    } else if(t >= time*2) {
       t = 0;
@@ -51,20 +50,14 @@ void W_Title(void) {
    SetSize(320, 240);
    SetClipW(0, 0, 320, 240, 310);
 
-   noinit static
-   char txt[4096], bgn[128];
-   txt[0] = '\0';
-   bgn[0] = '\0';
+   str txt = ns(language(sl_opener));
+   str bgn = ns(language(sl_begin));
 
-   LanguageCV(txt, LANG "OPENER");
-   LanguageCV(bgn, LANG "BEGIN");
-
-   i32 len = faststrlen(txt);
+   i32 len = ACS_StrLen(txt);
 
    for(i32 t = 0, pos = 0;;)
    {
-      PrintTextChr(txt, pos);
-      PrintText(sf_smallfnt, Cr(green), 7,1, 6,1);
+      PrintText_str(ACS_StrMid(txt, 0, pos), sf_smallfnt, Cr(green), 7,1, 6,1);
 
       if(t == 0)
       {
@@ -85,8 +78,7 @@ void W_Title(void) {
 
    for(i32 i = 0; i < 35 * 7; i++)
    {
-      PrintTextChS(txt);
-      PrintText(sf_smallfnt, Cr(green), 7,1, 6,1);
+      PrintText_str(txt, sf_smallfnt, Cr(green), 7,1, 6,1);
       Blinker(bgn);
       ACS_Delay(1);
       DrawCallI(sm_LE);
@@ -94,8 +86,7 @@ void W_Title(void) {
 
    for(k32 a = 1; a > 0; a -= 0.01)
    {
-      PrintTextChS(txt);
-      PrintTextA(sf_smallfnt, Cr(green), 7,1, 6,1, a);
+      PrintTextA_str(txt, sf_smallfnt, Cr(green), 7,1, 6,1, a);
       Blinker(bgn);
       ACS_Delay(1);
       DrawCallI(sm_LE);

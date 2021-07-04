@@ -251,6 +251,7 @@ identifier,default
 :UI:InvSel,lgfx/UI/InvSel.png
 :UI:LogList,lgfx/UI/LogList.png
 :UI:MagicSelectBack,lgfx/UI/MagicSelectBack.png
+:UI:New,lgfx/UI/New.png
 :UI:RDistInter,lgfx/UI/RDistInter.png
 :UI:Rank1,lgfx/UI/Rank1.png
 :UI:Rank2,lgfx/UI/Rank2.png

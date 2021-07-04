@@ -14,7 +14,7 @@
 #include "common.h"
 #include "p_player.h"
 
-bool G_ChkBox_Imp(struct gui_state *g, u32 id, struct gui_arg_cbx const *a) {
+bool G_ChkBox_Imp(struct gui_state *g, gid_t id, struct gui_arg_cbx const *a) {
    struct gui_pre_cbx const *pre = a->preset ? a->preset : &gui_p.cbxdef;
 
    if(!a->disabled)

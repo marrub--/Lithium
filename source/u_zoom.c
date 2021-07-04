@@ -46,18 +46,14 @@ void Upgr_Zoom_Update(struct upgrade *upgr)
 
 void Upgr_Zoom_Render(struct upgrade *upgr)
 {
-   Str(sp_vignette,     s":HUD:Vignette");
-   Str(sp_zoom_overlay, s":HUD:ZoomOverlay");
-   Str(sp_lithcam2,     s"LITHCAM2");
-
    if(UData.vzoom)
    {
-      PrintSpriteA(sp_vignette, 160,0, 120,0, 0.3);
+      PrintSpriteA(sp_HUD_Vignette, 160,0, 120,0, 0.3);
 
-      ACS_SetCameraToTexture(pl.cameratid, sp_lithcam2, 90 - UData.vzoom);
-      PrintSprite(sp_lithcam2, 160,0, 120,0);
+      ACS_SetCameraToTexture(pl.cameratid, sp_LITHCAM2, 90 - UData.vzoom);
+      PrintSprite(sp_LITHCAM2, 160,0, 120,0);
 
-      PrintSpriteA(sp_zoom_overlay, 160,0, 120,0, 0.5);
+      PrintSpriteA(sp_HUD_ZoomOverlay, 160,0, 120,0, 0.5);
 
       static
       char const points[] = "E SES SWW NWN NE";

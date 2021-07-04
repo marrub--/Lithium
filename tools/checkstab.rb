@@ -21,18 +21,17 @@ strings = {}
 def line_no match
    match.string[0..match.begin(0)].count("\n") + 1
 end
+def preprocessed file
+   `gdcc-cpp -o - #{ARGV.join " "} "#{file}"`
+end
 
-open(STAB_H).read.scan /^stab_x\((\w+),\s*s?(.+)\)/ do |_|
-   strings[$~[1]] = {line: line_no($~), file: STAB_H, text: $~[2], uses: 0, stab: true}
+preprocessed(STAB_H).scan /^stab_x\((\w+),\s*s?(.+)\)/ do |_|
+   strings[$~[1]] = {line: line_no($~), file: STAB_H, text: $~[2], uses: 0}
 end
 
 Dir.glob("source/**/*.{c,h}").each do |f|
    next if f == STAB_H
-   s = open(f).read
-
-   s.scan /\bStr\((\w+),\s*s?(.+)\);/ do |_|
-      strings[$~[1]] = {line: line_no($~), file: f, text: $~[2], uses: 0, stab: false}
-   end
+   s = preprocessed(f)
 
    for name, nd in strings
       if s =~ /\b#{name}\b/
@@ -47,15 +46,9 @@ end
 
 puts "checking for uses in stab.h..."
 for name, nd in strings
-   next unless nd[:stab]
-
-   stat = case nd[:uses]
-          when 0 then "\e[31munused\e[0m"
-          when 1 then "\e[33mone use\e[0m"
-          else        "\e[32mok\e[0m"
-          end
-
-   printf "%27s: %3i %s\n", name, nd[:uses], stat
+   if nd[:uses] == 0 then
+      printf "%32s: %3i \e[31munused\e[0m\n", name, nd[:uses]
+   end
 end
 
 groups = {}
@@ -83,15 +76,13 @@ for group, nums in groups
    for name, num in nums
       stat = if num != 1
                 "\e[31mduplicated\e[0ms"
-             elsif name =~ /[A-Z]/
-                "\e[33mirregular name\e[0m"
              else
                 nil
              end
 
       next unless stat
 
-      printf "%27s: %3i %s", name, num, stat
+      printf "%32s: %3i %s", name, num, stat
       print "\n       "
    end
 
@@ -115,12 +106,5 @@ for name1, nd1 in strings
       end
    end
 end
-
-=begin
-puts "results:"
-for name, nd in strings
-   puts "#{nd[:file]}:#{nd[:line]}: `#{name}' => `#{nd[:text]}'"
-end
-=end
 
 ## EOF

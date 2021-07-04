@@ -122,7 +122,7 @@ void TriggerBoss(void)
 
    if(firstboss) {
       firstboss = false;
-      P_BIP_Unlock("MPhantom");
+      P_BIP_Unlock(P_BIP_NameToPage("MPhantom"), false);
    }
 }
 
@@ -205,7 +205,7 @@ void Sc_PhantomDeath(void)
       noinit static
       char tag[20];
       faststrcpy3(tag, "M", boss->name, "Defeated");
-      P_BIP_Unlock(tag);
+      P_BIP_Unlock(P_BIP_NameToPage(tag), false);
       boss->dead = true;
 
       if(difficulty != diff_any) difficulty++;

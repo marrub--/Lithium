@@ -22,28 +22,27 @@ void P_CBI_TabStatistics(struct gui_state *g)
 
    #define Stat(name, f, x) \
    statement({ \
-      PrintTextChS(name); \
-      PrintText(sf_lmidfont, g->defcr, g->ox+17,1,  g->oy+27 + 8*n,1); \
+      PrintText_str(ns(language(name)), sf_lmidfont, g->defcr, g->ox+17,1,  g->oy+27 + 8*n,1); \
       PrintTextFmt(f, x); \
       PrintText(sf_smallfnt, g->defcr, g->ox+267,2, g->oy+27 + 8*n,1); \
       n++; \
    })
 
-   Stat(LC(LANG "STAT_ScoreMul"),   "%i%%", ceilk(pl.scoremul * 100.0k));
-   Stat(LC(LANG "STAT_Weapons"),    "%i",   pl.weaponsheld);
-   Stat(LC(LANG "STAT_HealthUsed"), "%u",   pl.healthused);
-   Stat(LC(LANG "STAT_HealthSum"),  "%u",   pl.healthsum);
-   Stat(LC(LANG "STAT_ScoreUsed"),  "%lli", pl.scoreused);
-   Stat(LC(LANG "STAT_ScoreSum"),   "%lli", pl.scoresum);
-   Stat(LC(LANG "STAT_Secrets"),    "%i",   secretsfound);
-   Stat(LC(LANG "STAT_Units"),      "%imu", pl.unitstravelled);
-   Stat(LC(LANG "STAT_Upgrades"),   "%i",   pl.upgradesowned);
-   Stat(LC(LANG "STAT_Items"),      "%i",   pl.itemsbought);
-   Stat(LC(LANG "STAT_Mail"),       "%i",   bip.mailreceived);
-   Stat(LC(LANG "STAT_Time"),       "%li",  pl.ticks / 35L);
-   Stat(LC(LANG "STAT_Boom"),       "%i",   pl.spuriousexplosions);
-   Stat(LC(LANG "STAT_Brouzouf"),   "%i",   pl.brouzouf);
-   Stat(LC(LANG "STAT_TrueMail"),   "%i",   bip.mailtrulyreceived);
+   Stat(sl_stat_scoremul,   "%i%%", ceilk(pl.scoremul * 100.0k));
+   Stat(sl_stat_weapons,    "%i",   pl.weaponsheld);
+   Stat(sl_stat_healthused, "%u",   pl.healthused);
+   Stat(sl_stat_healthsum,  "%u",   pl.healthsum);
+   Stat(sl_stat_scoreused,  "%lli", pl.scoreused);
+   Stat(sl_stat_scoresum,   "%lli", pl.scoresum);
+   Stat(sl_stat_secrets,    "%i",   secretsfound);
+   Stat(sl_stat_units,      "%imu", pl.unitstravelled);
+   Stat(sl_stat_upgrades,   "%i",   pl.upgradesowned);
+   Stat(sl_stat_items,      "%i",   pl.itemsbought);
+   Stat(sl_stat_mail,       "%i",   bip.mailreceived);
+   Stat(sl_stat_time,       "%li",  pl.ticks / 35L);
+   Stat(sl_stat_boom,       "%i",   pl.spuriousexplosions);
+   Stat(sl_stat_brouzouf,   "%i",   pl.brouzouf);
+   Stat(sl_stat_truemail,   "%i",   bip.mailtrulyreceived);
 }
 
 /* EOF */

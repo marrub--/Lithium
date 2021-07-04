@@ -186,9 +186,6 @@ def parse_directive state
       tok = tks.next.expect_after tok, :string
       filename = state.base_dir + "/" + tok.text
       parse state.with tokenize filename
-   when "output"
-      tok = tks.next.expect_after tok, :string
-      state.out_file.replace tok.text
    when "sounds"
       tok = tks.next.expect_after tok, :string
       state.snds_dir.replace tok.text
@@ -287,22 +284,22 @@ def parse state
 end
 
 common_main do
-   for filename in ARGV
-      state = SndParseState.new filename
-      parse state
+   filename = ARGV.shift
+   fp       = open ARGV.shift, "wt"
 
-      fp = open state.out_file, "wt"
-      fp.puts generated_header "sndc"
+   state = SndParseState.new filename
+   parse state
 
-      for out in state.each_out
-         if out.is_a? OutDef
-            file = state.snds_dir + "/" + out.file
-            unless state.ignore?(out.file) || File.exist?(file)
-               raise %(file "#{file}" doesn't exist in the filesystem)
-            end
+   fp.puts generated_header "sndc"
+
+   for out in state.each_out
+      if out.is_a? OutDef
+         file = state.snds_dir + "/" + out.file
+         unless state.ignore?(out.file) || File.exist?(file)
+            raise %(file "#{file}" doesn't exist in the filesystem)
          end
-         fp.puts out
       end
+      fp.puts out
    end
 end
 

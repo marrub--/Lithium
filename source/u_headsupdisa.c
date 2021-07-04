@@ -14,9 +14,6 @@
 #include "u_common.h"
 #include "p_hud.h"
 
-Str(sp_HUD_A_RightBack, s":HUD_A:RightBack");
-Str(sp_HUD_A_LeftBack,  s":HUD_A:LeftBack");
-
 /* Static Functions -------------------------------------------------------- */
 
 static

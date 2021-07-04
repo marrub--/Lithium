@@ -14,11 +14,6 @@
 #include "u_common.h"
 #include "p_hud.h"
 
-Str(sp_HUD_D_Ammo2Back, s":HUD_D:Ammo2Back");
-Str(sp_HUD_D_AmmoBack,  s":HUD_D:AmmoBack");
-Str(sp_HUD_D_HPBack,    s":HUD_D:HPBack");
-Str(sp_HUD_D_WepBack,   s":HUD_D:WepBack");
-
 /* Static Functions -------------------------------------------------------- */
 
 static

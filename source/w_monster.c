@@ -190,8 +190,6 @@ void BaseMonsterLevel(dmon_t *m) {
  */
 alloc_aut(0) script static
 void SoulCleave(dmon_t *m) {
-   Str(sm_solid, s"SOLID");
-
    i32 tid = ACS_UniqueTID();
    ACS_SpawnForced(so_MonsterSoul, m->x, m->y, m->z + 16, tid);
    SetDamage(tid, m->level / 8 * 7);
@@ -236,15 +234,20 @@ void OnFinalize(dmon_t *m) {
          }
 
          if(CVarGetI(sc_sv_wepdrop)) {
-            Str(so_sgun, s"Shotgun");
-            Str(so_cgun, s"Chaingun");
             str sp = snil;
             switch(m->mi->type) {
-               case mtype_zombiesg: if(!pl.weapon.slot[3]) sp = so_sgun; break;
-               case mtype_zombiecg: if(!pl.weapon.slot[4]) sp = so_cgun; break;
+               case mtype_zombiesg:
+                  if(!pl.weapon.slot[3]) {
+                     sp = so_Shotgun;
+                  }
+                  break;
+               case mtype_zombiecg:
+                  if(!pl.weapon.slot[4]) {
+                     sp = so_Chaingun;
+                  }
+                  break;
             }
             if(sp) {
-               Str(sm_dropped, s"DROPPED");
                i32 tid = ACS_UniqueTID();
                ACS_SpawnForced(sp, m->x, m->y, m->z, tid);
                ACS_SetActorFlag(tid, sm_dropped, false);
@@ -477,7 +480,7 @@ void MonInfo_Monster(struct tokbuf *tb, struct tbuf_err *res, i32 flags) {
 
 static
 i32 MonInfo_Flags(struct tokbuf *tb, struct tbuf_err *res) {
-   gosubEnable();
+   gosub_enable();
 
    char         *flag, *next, c;
    i32           flags, flgn;
@@ -500,7 +503,7 @@ i32 MonInfo_Flags(struct tokbuf *tb, struct tbuf_err *res) {
           flag;
           flag = faststrtok(nil, &next, ' '))
       {
-         gosub(sflag);
+         gosub(sflag, flag);
       }
    } else {
       for(c = ')';;) {
@@ -510,8 +513,7 @@ i32 MonInfo_Flags(struct tokbuf *tb, struct tbuf_err *res) {
          if(tok->type == tok_parenc) {
             break;
          } else {
-            flag = tok->textV;
-            gosub(sflag);
+            gosub(sflag, flag = tok->textV);
          }
       }
    }
@@ -521,7 +523,7 @@ sflag:
    flgn = MonInfo_Flag_Name(flag);
    if(flgn != -1) {
       set_bit(flags, flgn);
-      gosubRet();
+      gosub_ret();
    } else {
       tb->err(res, "%s MonInfo_Flags: invalid flag %s; expected "
               #define monster_flag_x(name) #name ", "
@@ -591,8 +593,6 @@ void MonInfo_Compile(struct tokbuf *tb, struct tbuf_err *res) {
 
 script
 void Mon_Init(void) {
-   Str(sp_LITHMONS, s"LITHMONS");
-
    Dbg_Log(log_dev, "Mon_Init");
 
    FILE *fp;

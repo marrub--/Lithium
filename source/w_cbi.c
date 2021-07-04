@@ -69,7 +69,7 @@ void CBI_Install(i32 num)
 
    ifauto(struct cupgdef const *, c, GetCUpgr(pl.pclass, num)) {
       if(c->nam) {
-         P_BIP_Unlock(c->nam);
+         P_BIP_Unlock(P_BIP_NameToPage(c->nam), false);
       }
    }
 }
@@ -96,7 +96,7 @@ void Sc_PickupCBIItem(i32 num)
 
    ifauto(struct cupgdef const *, c, GetCUpgr(pl.pclass, num))
       if(c->msg)
-         pl.logB(1, LC(LANG "LOG_CBI"), Language(LANG "LOG_CBI_%s", c->msg));
+         pl.logB(1, tmpstr(language(sl_log_cbi)), ns(language_fmt(LANG "LOG_CBI_%s", c->msg)));
 
    CBI_Install(num);
 }

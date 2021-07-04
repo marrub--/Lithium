@@ -82,12 +82,9 @@ void Boss_HInit(void) {
 
 static
 void CheckModCompat(void) {
-   Str(so_legendary_marker,       s"LDLegendaryMonsterMarker");
-   Str(sc_drla_is_using_monsters, s"DRLA_is_using_monsters");
-
    i32 tid;
 
-   if((legendoom = ACS_SpawnForced(so_legendary_marker, 0, 0, 0, tid = ACS_UniqueTID(), 0))) ACS_Thing_Remove(tid);
+   if((legendoom = ACS_SpawnForced(so_LDLegendaryMonsterMarker, 0, 0, 0, tid = ACS_UniqueTID(), 0))) ACS_Thing_Remove(tid);
 
    drlamonsters = CVarGetI(sc_drla_is_using_monsters);
 }
@@ -223,16 +220,13 @@ void HInitPre(void) {
    bossspawned = false;
 
    if(CVarGetI(sc_sv_sky) && !islithmap) {
-      Str(sp_lithskde, s"LITHSKDE");
-      Str(sp_lithskrd, s"LITHSKRD");
-      Str(sp_lithsks1, s"LITHSKS1");
       if(InHell) {
-         ACS_ChangeSky(sp_lithskrd, sp_lithskrd);
+         ACS_ChangeSky(sp_LITHSKRD, sp_LITHSKRD);
          ACS_SetSkyScrollSpeed(1, 0.01);
       } else if(OnEarth) {
-         ACS_ChangeSky(sp_lithskde, sp_lithskde);
+         ACS_ChangeSky(sp_LITHSKDE, sp_LITHSKDE);
       } else {
-         ACS_ChangeSky(sp_lithsks1, sp_lithsks1);
+         ACS_ChangeSky(sp_LITHSKS1, sp_LITHSKS1);
       }
    }
 }
@@ -248,11 +242,11 @@ void HInit(void) {
    if(mapscleared != 0) Scr_HInit();
 
    /* Cluster messages. */
-   if(Cluster >=  6) P_BIP_Unlock("MCluster1");
-   if(Cluster >=  7) P_BIP_Unlock("MCluster2");
-   if(Cluster ==  8) P_BIP_Unlock("MCluster3");
-   if(Cluster ==  9) P_BIP_Unlock("MSecret1");
-   if(Cluster == 10) P_BIP_Unlock("MSecret2");
+   if(Cluster >=  6) P_BIP_Unlock(P_BIP_NameToPage("MCluster1"), false);
+   if(Cluster >=  7) P_BIP_Unlock(P_BIP_NameToPage("MCluster2"), false);
+   if(Cluster ==  8) P_BIP_Unlock(P_BIP_NameToPage("MCluster3"), false);
+   if(Cluster ==  9) P_BIP_Unlock(P_BIP_NameToPage("MSecret1"),  false);
+   if(Cluster == 10) P_BIP_Unlock(P_BIP_NameToPage("MSecret2"),  false);
 
    if(CVarGetI(sc_sv_nobosses) ||
       CVarGetI(sc_sv_nobossdrop)
@@ -295,7 +289,6 @@ begin:
 
    #ifndef NDEBUG
    if(CVarGetI(sc_sv_failtime) == 0) for(;;) {
-      Str(sc_toggleconsole, s"toggleconsole");
       Log("\n=======\n"
           "The configuration for this mod has been wiped, or you accidentally "
           "set '" CVAR "sv_failtime' to 0 manually. If you did the latter, "

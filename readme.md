@@ -30,7 +30,7 @@ Build requirements:
 - [rambling-tree](https://rubygems.org/gems/rambling-trie)
 - [GDCC](https://github.com/DavidPH/GDCC)
 
-Requirements for `font` target:
+Requirements for `tools/mkfont.rb`:
 
 - wget
 - ImageMagick

@@ -12,9 +12,9 @@
 ##
 ## ---------------------------------------------------------------------------|
 
-require_relative "corinth.rb"
+require "fileutils"
 
-require 'fileutils'
+require_relative "corinth.rb"
 
 common_main do
    fname, pkdir, dir = ARGV

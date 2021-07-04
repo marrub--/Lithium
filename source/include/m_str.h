@@ -14,16 +14,13 @@
 #include <GDCC.h>
 #include <stdio.h>
 
-#define L(name) LanguageV(name)
-#define LC(name) LanguageVC(nil, name)
+#define language_fmt(...) (StrParamBegin(__VA_ARGS__), language(ACS_EndStrParam()))
 
 #define StrParamBegin(...) (ACS_BeginPrint(), __nprintf(__VA_ARGS__))
 #define StrParam(...) (StrParamBegin(__VA_ARGS__), ACS_EndStrParam())
-#define Language(...) (StrParamBegin(__VA_ARGS__), LanguageV(ACS_EndStrParam()))
-#define LanguageC(...) LanguageCV(nil, __VA_ARGS__)
 
-#define PrintChars(s, n) ACS_PrintGlobalCharRange((i32)s, __GDCC__Sta, 0, n)
-#define PrintChrSt(s)    ACS_PrintGlobalCharArray((i32)s, __GDCC__Sta)
+#define PrintChars(s, n) ACS_PrintGlobalCharRange((i32)(s), __GDCC__Sta, 0, n)
+#define PrintChrSt(s)    ACS_PrintGlobalCharArray((i32)(s), __GDCC__Sta)
 
 #define fast_strndup(s, n) (ACS_BeginPrint(), PrintChars(s, n), ACS_EndStrParam())
 #define fast_strdup(s)     (ACS_BeginPrint(), PrintChrSt(s),    ACS_EndStrParam())
@@ -32,11 +29,11 @@
    (ACS_BeginPrint(), PrintChrSt(s1), PrintChrSt(s2), ACS_EndStrParam())
 
 #define fastmemset(p, s, c, ...) \
-   statement(__with(register byte *_p = (void *)(p), \
-                         _s = (s);) \
-      for(register i32 _i = 0, _c = (c); _i < _c; _i++) \
-         _p[_i] = _s; \
-   )
+   statement({ \
+      register byte *_p = (void *)(p); \
+      register byte  _s = (s); \
+      for(register i32 _i = 0, _c = (c); _i < _c; ++_i) _p[_i] = _s; \
+   })
 
 #define fastmemcpy(lhs, rhs, s) \
    statement({ \
@@ -116,14 +113,6 @@
       *_dest++ = '\0'; \
    })
 
-#define CpyStrLocal(out, st) \
-   statement({ \
-      ACS_BeginPrint(); \
-      ACS_PrintLocalized(st); \
-      str s = ACS_EndStrParam(); \
-      for(i32 i = 0, l = ACS_StrLen(s); i <= l; i++) out[i] = s[i]; \
-   })
-
 stkcall i32 radix(char c);
 stkcall i32 faststrtoi32_str(astr p);
 stkcall i32 faststrtoi32(cstr p);
@@ -147,10 +136,9 @@ stkcall char *faststrchr(cstr s, char c);
 stkcall char *faststrtok(char *s, char **next, char c);
 stkcall cstr scoresep(i96 num);
 stkcall cstr alientext(i32 num);
-str LanguageV(str name);
-char *LanguageVC(char *out, cstr name);
-char *LanguageCV(char *out, cstr name, ...);
-str LanguageNull(cstr fmt, ...);
+stkcall str language(str name);
+stkcall str ns(str s);
+stkcall cstr tmpstr(str s);
 stkcall cstr RemoveTextColors_str(astr s, i32 size);
 stkcall cstr RemoveTextColors    (cstr s, i32 size);
 

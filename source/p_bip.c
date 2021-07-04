@@ -44,9 +44,9 @@ void MailNotify(cstr name) {
    ACS_Delay(20);
 
    char remote[128];
-   faststrcpy(remote, LanguageC(LANG "INFO_REMOT_%s", name));
+   faststrcpy_str(remote, ns(language_fmt(LANG "INFO_REMOT_%s", name)));
 
-   pl.logB(1, LC(LANG "LOG_MailRecv"), remote);
+   pl.logB(1, tmpstr(language(sl_log_mailrecv)), remote);
 
    if(ACS_Random(1, 10000) == 1) {
       bip.mailtrulyreceived++;
@@ -63,45 +63,6 @@ cstr BipStr(cstr in) {
    fastmemcpy(out, in, len);
    bipstrptr += len;
    return out;
-}
-
-script optargs(1) static
-void UnlockPage(struct page *page, bool from_load) {
-   if(!get_bit(page->flags, _page_available)) {
-      Dbg_Log(log_bip, "ERROR page '%s' not available", page->name);
-      return;
-   }
-
-   if(!get_bit(page->flags, _page_unlocked)) {
-      Dbg_Log(log_bip, "unlocking page '%s'", page->name);
-
-      if(page->category == _bipc_mail && !get_bit(page->flags, _page_auto)) {
-         MailNotify(page->name);
-      }
-
-      page->time = ticks;
-      set_bit(page->flags, _page_unlocked);
-
-      bip.pageavail++;
-      bip.categoryavail[page->category]++;
-
-      for(i32 i = 0;
-          i < countof(page->unlocks) && page->unlocks[i];
-          i++) {
-         P_BIP_Unlock(page->unlocks[i]);
-      }
-
-      /*
-      if(!from_load &&
-         !get_bit(page->flags, _page_auto) &&
-         page->category <= _bipc_last_normal)
-      {
-         P_Data_Save();
-      }
-      */
-   } else {
-      Dbg_Log(log_bip, "already unlocked page '%s'", page->name);
-   }
 }
 
 script static
@@ -219,8 +180,6 @@ void BipInfo_Compile(struct tokbuf *tb, struct tbuf_err *res) {
 
 script static
 void P_BIP_InitInfo(void) {
-   Str(sp_LITHINFO, s"LITHINFO");
-
    Dbg_Log(log_dev, "P_BIP_InitInfo");
 
    FILE *fp;
@@ -273,28 +232,59 @@ void P_BIP_PInit(void) {
          #endif
          get_bit(page->flags, _page_auto)))
       {
-         UnlockPage(page, false);
+         P_BIP_Unlock(page, false);
       }
    }
 
    bip.init = true;
 }
 
-void P_BIP_Unlock(cstr name, bool from_load) {
-   i32 num = P_BIP_NameToNum(name);
-
-   if(num == bippagenum) {
-      Dbg_Log(log_bip, "ERROR no page '%s' found", name);
+script
+void P_BIP_Unlock(struct page *page, bool from_load) {
+   if(!page) {
+      Dbg_Log(log_bip, "ERROR page was null");
       return;
    }
 
-   UnlockPage(&bippages[num], from_load);
+   if(!get_bit(page->flags, _page_available)) {
+      Dbg_Log(log_bip, "ERROR page '%s' not available", page->name);
+      return;
+   }
+
+   if(!get_bit(page->flags, _page_unlocked)) {
+      Dbg_Log(log_bip, "unlocking page '%s'", page->name);
+
+      bip.pageavail++;
+      bip.categoryavail[page->category]++;
+
+      if(page->category == _bipc_mail && !get_bit(page->flags, _page_auto)) {
+         MailNotify(page->name);
+      }
+
+      page->time = ticks;
+      set_bit(page->flags, _page_unlocked);
+
+      if(!from_load && page->category <= _bipc_last_normal) {
+         set_bit(page->flags, _page_new);
+         if(!get_bit(page->flags, _page_auto) && ticks > 3) {
+            P_Data_Save();
+         }
+      }
+
+      for(i32 i = 0; i < countof(page->unlocks) && page->unlocks[i]; i++) {
+         P_BIP_Unlock(P_BIP_NameToPage(page->unlocks[i]), from_load);
+      }
+   } else {
+      Dbg_Log(log_bip, "already unlocked page '%s'", page->name);
+   }
 }
 
+alloc_aut(0) stkcall
 void P_BIP_PQuit(void) {
    bip.init = false;
 }
 
+alloc_aut(0) stkcall
 cstr P_BIP_CategoryToName(i32 category) {
    switch(category) {
       #define bip_category_x(c) case _bipc_##c: return #c;
@@ -304,17 +294,24 @@ cstr P_BIP_CategoryToName(i32 category) {
    return nil;
 }
 
-i32 P_BIP_NameToNum(cstr name) {
+script static
+void BipNameErr(cstr name, cstr discrim) {
+   Dbg_Log(log_bip, "ERROR couldn't find page %s or %s");
+}
+
+alloc_aut(0) stkcall
+struct page *P_BIP_NameToPage(cstr name) {
    noinit static
    char discrim[32];
    faststrcpy2(discrim, name, pl.discrim);
    for_page() {
       if(faststrchk(page->name, discrim) ||
          faststrchk(page->name, name)) {
-         return pagen;
+         return page;
       }
    }
-   return bippagenum;
+   BipNameErr(name, discrim);
+   return nil;
 }
 
 script_str ext("ACS") addr(OBJ "BIPUnlock")
@@ -323,7 +320,7 @@ void Sc_UnlockPage(void) {
       noinit static
       char tag[32];
       faststrcpy_str(tag, ServCallS(sm_GetBipName));
-      P_BIP_Unlock(tag, false);
+      P_BIP_Unlock(P_BIP_NameToPage(tag), false);
    }
 }
 

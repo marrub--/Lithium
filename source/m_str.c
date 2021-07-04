@@ -346,64 +346,42 @@ cstr alientext(i32 num) {
    return outp;
 }
 
-str LanguageV(str name) {
+alloc_aut(0) stkcall
+str language(str name) {
+   str ret, sub, nex;
+
    ACS_BeginPrint();
    ACS_PrintLocalized(name);
-   str ret = ACS_EndStrParam();
 
-   while(ret[0] == '$') {
-      str sub = ACS_StrMid(ret, 1, INT32_MAX);
+   for(ret = ACS_EndStrParam(); ret[0] == '$';) {
+      sub = ACS_StrMid(ret, 1, INT32_MAX);
       ACS_BeginPrint();
       ACS_PrintLocalized(sub);
-      str nex = ACS_EndStrParam();
+      nex = ACS_EndStrParam();
       if(sub != nex) ret = nex;
       else           break;
    }
 
-   return ret;
+   return ret == name ? snil : ret;
 }
 
-char *LanguageVC(char *out, cstr name) {
-   noinit static
-   char sbuf[8192];
-
-   if(!out) out = sbuf;
-   CpyStrLocal(out, fast_strdup(name));
-
-   while(out[0] == '$') CpyStrLocal(out, fast_strdup(&out[1]));
-
-   return out;
-}
-
-char *LanguageCV(char *out, cstr fmt, ...) {
-   noinit static
-   char nbuf[256];
-   va_list vl;
-
-   va_start(vl, fmt);
-   vsprintf(nbuf, fmt, vl);
-   va_end(vl);
-
-   return LanguageVC(out, nbuf);
-}
-
-str LanguageNull(cstr fmt, ...) {
-   va_list vl;
-
-   ACS_BeginPrint();
-
-   va_start(vl, fmt);
-   __vnprintf(fmt, vl);
-   va_end(vl);
-
-   str name = ACS_EndStrParam();
-   str alias = LanguageV(name);
-
-   return name == alias ? snil : alias;
+stkcall
+str ns(str s) {
+   return s != snil ? s : st_null;
 }
 
 noinit static
 char tcbuf[4096];
+
+alloc_aut(0) stkcall
+cstr tmpstr(str s) {
+   if(s == snil) {
+      return "(null)";
+   } else {
+      faststrcpy_str(tcbuf, s);
+      return tcbuf;
+   }
+}
 
 alloc_aut(0) stkcall
 cstr RemoveTextColors_str(astr s, i32 size) {

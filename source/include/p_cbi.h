@@ -70,15 +70,14 @@ struct cbi {
    struct gui_state guistate;
 
    struct cbistate {
-      u32 maintab;
-      u32 stattab;
-      u32 arsetab;
-      u32 infotab;
-      u32 settingstab;
+      mem_size_t maintab;
+      mem_size_t stattab;
+      mem_size_t arsetab;
+      mem_size_t infotab;
+      mem_size_t settingstab;
 
       struct gui_win mainwin;
 
-      struct gui_typ biptypeon;
       struct gui_scr bipscr;
       struct gui_scr bipinfoscr;
       struct gui_txt bipsearch;
@@ -99,9 +98,9 @@ struct cbi {
       struct gui_scr notescr;
       struct gui_txt notebox;
 
-      u32 buyfill;
-      u32 itemfill;
-      u32 settingsfill;
+      i32 buyfill;
+      i32 itemfill;
+      i32 settingsfill;
    } st;
 
    u32 theme;

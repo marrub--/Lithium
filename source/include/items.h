@@ -73,7 +73,7 @@ struct item {
 
 struct container {
    u32          w, h;
-   cstr         name;
+   cstr         cname;
    i32          type;
    struct list *head;
 };

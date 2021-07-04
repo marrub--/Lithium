@@ -88,8 +88,7 @@ void HUD_Score(cstr fmt, i96 scrn, str font, i32 cr, i32 x, i32 xa) {
 
    i32 expbar = CVarGetI(sc_hud_expbar);
    if(expbar > 0) {
-      Str(sp_exp_bar_0, s":Bars:ExpBar0");
-      PrintSprite(sp_exp_bar_0, x,xa, 24,1);
+      PrintSprite(sp_Bars_ExpBar0, x,xa, 24,1);
       i32 xx = x;
       u32 fr =
          ((u64)(pl.attr.exp     - pl.attr.expprev) * 24) /

@@ -75,10 +75,6 @@ def parse_file state, filename, language
          name      = m[1].strip
          buf       = String.new
          in_concat = true
-      when /^!!output (.+)$/
-         m = $~
-         do_close_buf.call
-         state.out = m[1].strip
       when /^!!lang (.+)\|(.+)$/
          m = $~
          do_close_buf.call
@@ -128,13 +124,13 @@ def parse_file state, filename, language
    state.cwd.pop dirname.size
 end
 
-for filename in ARGV
-   filename = split_name filename
+common_main do
+   filename = split_name ARGV.shift
+   out      = open ARGV.shift, "w"
    state    = TxtParseState.new [], nil, {}
 
    parse_file state, filename, nil
 
-   out = open state.out, "w"
    out.puts generated_header "txtc"
 
    sorted = state.langs.sort_by do |k, v| k end

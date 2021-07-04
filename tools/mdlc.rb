@@ -108,17 +108,9 @@ end
 
 def parse_definition state
    tks = state.tks
-   tok = tks.next.expect_in_top [:identi, :dollar, :eof]
+   tok = tks.next.expect_in_top [:identi, :eof]
 
    case tok.type
-   when :dollar
-      tok = tks.next.expect_after tok, :identi
-      case tok.text
-      when "output"
-         state.out_file.replace tks.next.expect_after(tok, :string).text
-      else
-         tok.raise_kw "directive"
-      end
    when :identi
       name = tok.text
       tok  = tks.next.expect_after tok, [:colon, :brac2o]
@@ -136,15 +128,15 @@ def parse state
 end
 
 common_main do
-   for filename in ARGV
-      state = MdlParseState.new filename
-      parse state
+   filename = ARGV.shift
+   fp       = open ARGV.shift, "wt"
 
-      fp = open state.out_file, "wt"
-      fp.puts generated_header "mdlc"
+   state = MdlParseState.new filename
+   parse state
 
-      state.each_out do |out| fp.puts out end
-   end
+   fp.puts generated_header "mdlc"
+
+   state.each_out do |out| fp.puts out end
 end
 
 ## EOF

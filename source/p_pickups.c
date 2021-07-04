@@ -16,35 +16,36 @@
 
 static
 str get_name(i32 w) {
-   static noinit
+   noinit static
    char name[16];
 
    faststrcpy(name, weaponinfo[w].typename);
-   ifauto(str, alias, LanguageNull(LANG "PK_%s_ALI", name))
+   ifauto(str, alias, language_fmt(LANG "PK_%s_ALI", name)) {
       faststrcpy_str(name, alias);
+   }
 
-   i32 num = faststrtoi32(LanguageC(LANG "PK_%s_NUM", name));
-   return Language(LANG "PK_%s_%.3i", name, ACS_Random(0, num));
+   i32 num = faststrtoi32_str(ns(language_fmt(LANG "PK_%s_NUM", name)));
+   return language_fmt(LANG "PK_%s_%.3i", name, ACS_Random(0, num));
 }
 
 static
 void silly_pickup(i32 weapon) {
-   i32 fmtnum = faststrtoi32(LC(LANG "PK_GET_NUM"));
-   i32 uncnum = faststrtoi32(LC(LANG "PK_UNCERTAIN_NUM"));
+   i32 fmtnum = faststrtoi32_str(ns(language(sl_pk_get_num)));
+   i32 uncnum = faststrtoi32_str(ns(language(sl_pk_uncertain_num)));
 
    i32 iunc  = ACS_Random(0, uncnum);
    i32 ifmt  = ACS_Random(0, fmtnum);
-   i32 flag  = faststrtoi32(LanguageC(LANG "PK_GET_%.3i_FLAGS", ifmt));
+   i32 flag  = faststrtoi32_str(ns(language_fmt(LANG "PK_GET_%.3i_FLAGS", ifmt)));
 
    if(flag & 2) {
       ifmt = ACS_Random(0, fmtnum);
-      flag = faststrtoi32(LanguageC(LANG "PK_GET_%.3i_FLAGS", ifmt));
+      flag = faststrtoi32_str(ns(language_fmt(LANG "PK_GET_%.3i_FLAGS", ifmt)));
    }
 
-   str nam = get_name(weapon);
+   str nam = ns(get_name(weapon));
 
-   cstr fmt = LanguageC(LANG "PK_GET_%.3i", ifmt);
-   str  unc = Language (LANG "PK_UNCERTAIN_%.3i", iunc);
+   cstr fmt = tmpstr(language_fmt(LANG "PK_GET_%.3i", ifmt));
+   str  unc =     ns(language_fmt(LANG "PK_UNCERTAIN_%.3i", iunc));
 
         if(flag & 1 && flag & 4) pl.logB(1, fmt, nam, nam, unc);
    else if(flag & 1            ) pl.logB(1, fmt, nam, nam);
@@ -56,23 +57,24 @@ void P_Log_Weapon(struct weaponinfo const *info) {
    if(CVarGetI(sc_player_stupidpickups))
       silly_pickup(info->type);
    else if(info->name)
-      pl.logB(1, LC(LANG "PK_GET_000"), Language(LANG "INFO_SHORT_%s", info->name));
+      pl.logB(1, tmpstr(language(sl_pk_get_000)), ns(language_fmt(LANG "INFO_SHORT_%s", info->name)));
    else
       pl.logB(1, "Acquired impossible object");
 }
 
 void P_Log_SellWeapon(struct weaponinfo const *info, i96 score) {
    i32 weapon = info->type;
-   bool ord = faststrtoi32(LC(LANG "LOG_SellOrder")) == 0;
+   bool ord = faststrtoi32_str(ns(language(sl_log_sellorder))) == 0;
 
    str nam;
 
    if(CVarGetI(sc_player_stupidpickups))
       nam = get_name(weapon);
    else
-      nam = Language(LANG "INFO_SHORT_%s", info->name);
+      nam = language_fmt(LANG "INFO_SHORT_%s", info->name);
+   nam = ns(nam);
 
-   cstr msg = LC(LANG "LOG_Sell");
+   cstr msg = tmpstr(language(sl_log_sell));
 
    if(ord) pl.logB(1, msg, nam, score);
    else    pl.logB(1, msg, score, nam);

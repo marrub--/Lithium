@@ -15,10 +15,6 @@
 #include "p_player.h"
 #include "p_hudid.h"
 
-/* Static Objects ---------------------------------------------------------- */
-
-Str(sp_lithcam3, s"LITHCAM3");
-
 /* Static Functions -------------------------------------------------------- */
 
 static
@@ -36,7 +32,7 @@ static
 void P_Ren_LevelUp() {
    if(pl.old.attr.level && pl.old.attr.level < pl.attr.level) {
       ACS_LocalAmbientSound(ss_player_levelup, 127);
-      pl.logH(1, LanguageC(LANG "LOG_LevelUp%s", pl.discrim), ACS_Random(1000, 9000));
+      pl.logH(1, tmpstr(language_fmt(LANG "LOG_LevelUp%s", pl.discrim)), ACS_Random(1000, 9000));
    }
 
    if(pl.attr.lvupstr[0]) {
@@ -65,7 +61,7 @@ void P_TeleportIn() {
    pl.teleportedout = false;
 
    ACS_AmbientSound(ss_misc_telein, 127);
-   ACS_SetCameraToTexture(pl.tid, sp_lithcam3, 90);
+   ACS_SetCameraToTexture(pl.tid, sp_LITHCAM3, 90);
 
    for(i32 i = 18, j = 18; i >= 1; i--) {
       ACS_Delay(1);
@@ -74,7 +70,7 @@ void P_TeleportIn() {
       SetSize(320, 200);
       PrintSprite(sp_Terminal_Teleport, 160,0, 100,0);
       SetSize(640 / w, 480 * h);
-      PrintSprite(sp_lithcam3, 320/w,0, 240*h,0);
+      PrintSprite(sp_LITHCAM3, 320/w,0, 240*h,0);
       if(i & 3) j--;
    }
 }
@@ -82,7 +78,7 @@ void P_TeleportIn() {
 alloc_aut(0) sync
 void P_TeleportOut(i32 tag) {
    ACS_AmbientSound(ss_misc_teleout, 127);
-   ACS_SetCameraToTexture(pl.tid, sp_lithcam3, 90);
+   ACS_SetCameraToTexture(pl.tid, sp_LITHCAM3, 90);
 
    for(i32 i = 1, j = 1; i <= 20; i++) {
       ACS_Delay(1);
@@ -91,7 +87,7 @@ void P_TeleportOut(i32 tag) {
       SetSize(320, 200);
       PrintSprite(sp_Terminal_Teleport, 160,0, 100,0);
       SetSize(640 / w, 480 * h);
-      PrintSprite(sp_lithcam3, 320/w,0, 240*h,0);
+      PrintSprite(sp_LITHCAM3, 320/w,0, 240*h,0);
       if(i & 3) j++;
    }
 

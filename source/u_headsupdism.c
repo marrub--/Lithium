@@ -16,13 +16,6 @@
 
 #define UData pl.upgrdata.headsupdism
 
-Str(sp_HUD_M_Bar,          s":HUD_M:Bar");
-Str(sp_HUD_M_BarBig,       s":HUD_M:BarBig");
-Str(sp_HUD_M_SplitBack,    s":HUD_M:SplitBack");
-Str(sp_HUD_M_SplitBackRed, s":HUD_M:SplitBackRed");
-Str(sp_HUD_M_SplitFront,   s":HUD_M:SplitFront");
-Str(sp_HUD_M_SplitRight,   s":HUD_M:SplitRight");
-
 /* Static Functions -------------------------------------------------------- */
 
 static

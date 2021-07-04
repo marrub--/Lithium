@@ -22,7 +22,7 @@ dynam_aut script static
 void DoAdrenaline(struct upgrade *upgr) {
    UData.charge = UData.readied = 0;
 
-   pl.logH(4, LC(LANG "LOG_AdrenalineUsed"));
+   pl.logH(4, tmpstr(language(sl_log_adrenalineused)));
    StartSound(ss_player_adren_inj, lch_body2, CHANF_NOPAUSE|CHANF_MAYBE_LOCAL|CHANF_UI, 1.0, ATTN_STATIC);
    FadeFlash(255, 255, 255, 0.4, 0.6);
    FreezeTime(true);
@@ -43,7 +43,7 @@ void Upgr_Adrenaline_Update(struct upgrade *upgr)
    } else if(!UData.readied) {
       /* Prepare */
       StartSound(ss_player_adren_ready, lch_body2, CHANF_NOPAUSE|CHANF_MAYBE_LOCAL|CHANF_UI, 1.0, ATTN_STATIC);
-      pl.logH(1, LC(LANG "LOG_AdrenalineReady"));
+      pl.logH(1, tmpstr(language(sl_log_adrenalineready)));
       UData.readied = true;
    } else if(ServCallI(sm_AdrenalineCheck)) {
       /* Ready to use */

@@ -22,9 +22,6 @@ void Upgr_Rifle_A_Deactivate(struct upgrade *upgr)
 
 void Upgr_Rifle_A_Render(struct upgrade *upgr)
 {
-   Str(sp_rifle_scope, s":HUD:RifleScope");
-   Str(sp_lithcam1,    s"LITHCAM1");
-
    if(P_Wep_CurType() != weapon_m_rifle) return;
 
    if(CVarGetI(sc_weapons_riflescope) &&
@@ -32,10 +29,10 @@ void Upgr_Rifle_A_Render(struct upgrade *upgr)
    {
       SetClip(40, 108, 240, 40);
 
-      ACS_SetCameraToTexture(pl.cameratid, sp_lithcam1, 34);
-      PrintSprite(sp_lithcam1, 0,1, 128,0);
+      ACS_SetCameraToTexture(pl.cameratid, sp_LITHCAM1, 34);
+      PrintSprite(sp_LITHCAM1, 0,1, 128,0);
 
-      PrintSprite(sp_rifle_scope, 40,1, 108,1);
+      PrintSprite(sp_HUD_RifleScope, 40,1, 108,1);
 
       ClearClip();
    }

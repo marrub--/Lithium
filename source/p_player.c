@@ -20,10 +20,6 @@
 
 #include <limits.h>
 
-/* Static Objects ---------------------------------------------------------- */
-
-Str(ss_autobuy, s"player/cbi/auto/buy");
-
 /* Extern Objects ---------------------------------------------------------- */
 
 noinit struct player player;
@@ -152,7 +148,6 @@ void Sc_PlayerDeath(void) {
    /* unfortunately, we can't keep anything even when we want to */
    P_Inv_PQuit();
 
-   Str(sc_sv_cooploseinventory, s"sv_cooploseinventory");
    if(singleplayer || CVarGetI(sc_sv_cooploseinventory)) {
       P_Upg_PQuit();
       P_BIP_PQuit();
@@ -172,7 +167,7 @@ void Sc_PlayerDeath(void) {
       while(pl.dead) {
          ACS_Delay(35 * 5);
          ACS_BeginPrint();
-         ACS_PrintString(Language(LANG "DEATHMSG_%.2i", ACS_Random(1, 20)));
+         ACS_PrintString(ns(language_fmt(LANG "DEATHMSG_%.2i", ACS_Random(1, 20))));
          ACS_EndLog();
       }
    }
@@ -224,22 +219,17 @@ i32 P_Color(i32 pclass) {
 }
 
 void P_GUI_Close() {
-   Str(ss_gui_close, s"player/cbi/close");
-
    if(pl.modal == _gui_cbi) {
       if(singleplayer) {
          UnfreezeTime();
       }
 
-      ACS_LocalAmbientSound(ss_gui_close, 127);
+      ACS_LocalAmbientSound(ss_player_cbi_close, 127);
       pl.modal = _gui_none;
    }
 }
 
 void P_GUI_Use() {
-   Str(ss_gui_open,  s"player/cbi/open");
-   Str(ss_gui_win95, s"player/cbi/win95");
-
    if(pl.dead) return;
 
    switch(pl.modal) {
@@ -252,9 +242,9 @@ void P_GUI_Use() {
       }
 
       if(ACS_Random(0, 10000) == 777) {
-         ACS_LocalAmbientSound(ss_gui_win95, 127);
+         ACS_LocalAmbientSound(ss_player_cbi_win95, 127);
       } else {
-         ACS_LocalAmbientSound(ss_gui_open, 127);
+         ACS_LocalAmbientSound(ss_player_cbi_open, 127);
       }
 
       pl.modal = _gui_cbi;
@@ -336,7 +326,7 @@ void P_bossWarning() {
    ACS_Delay(35 * 5);
 
    if(bossspawned)
-      pl.logB(1, LanguageC(LANG "LOG_BossWarn%s", pl.discrim));
+      pl.logB(1, tmpstr(language_fmt(LANG "LOG_BossWarn%s", pl.discrim)));
 }
 
 dynam_aut script static
@@ -347,7 +337,7 @@ void P_bossText(i32 boss) {
 
    bool division = boss == boss_iconofsin && GetFun() & lfun_final;
 
-   if(division) pl.logB(1, LC(LANG "LOG_BossHear3"));
+   if(division) pl.logB(1, tmpstr(language(sl_log_bosshear3)));
 
    if(!CVarGetI(sc_player_bosstexts)) return;
 
@@ -365,15 +355,15 @@ void P_bossText(i32 boss) {
          break;
    }
 
-   pl.logB(1, LC(LANG "LOG_BossHear1"));
-   pl.logB(1, LC(LANG "LOG_BossHear2"));
+   pl.logB(1, tmpstr(language(sl_log_bosshear1)));
+   pl.logB(1, tmpstr(language(sl_log_bosshear2)));
 
    ACS_Delay(35 * 4);
 
    WaitPause();
 
    i32 t = 35 * 5 * (division ? 8 : 10);
-   char text[1024];
+   str text;
    for(i32 i = 0, j = 1; i < t; i++) {
       if(i % (35 * 5) == 0) {
          k32 di = ACS_RandomFixed(0.1, 0.2);
@@ -392,14 +382,13 @@ void P_bossText(i32 boss) {
          StartSound(ss_enemies_boss_talk, lch_voice2, CHANF_LOCAL, 1.0, 1.0, pt);
 
          SetFade(fid_bosstext, 20, 1);
-         LanguageCV(text, fmt, j, pl.discrim);
+         text = ns(language_fmt(fmt, j, pl.discrim));
          j++;
       }
 
       SetSize(640, 400);
       SetClipW(0, 0, 640, 400, 640);
-      PrintTextChS(text);
-      PrintTextF(sf_bigupper, CR_WHITE, 320,4, 100,0, fid_bosstext);
+      PrintTextF_str(text, sf_bigupper, CR_WHITE, 320,4, 100,0, fid_bosstext);
       ClearClip();
 
       PausableTick();
@@ -412,11 +401,6 @@ void P_doIntro() {
       _nlines   = 26,
       _out_tics = 35 * 2,
    };
-
-   Str(sc_use,       s"+use");
-   Str(sc_attack,    s"+attack");
-   Str(ss_startgame, s"player/startgame");
-   Str(ss_showtext,  s"player/showtext");
 
    if(mapscleared != 0 || pl.done_intro & pl.pclass) return;
 
@@ -432,9 +416,11 @@ void P_doIntro() {
    noinit static u32   linec[_nlines];
    noinit static u32   linen[_nlines];
 
-   u32 which = 1;
-   u32 last  = 0;
-   u32 fill  = 0;
+   i32 which = 1;
+   i32 last  = 0;
+   i32 fill  = 0;
+
+   struct gui_fil fil = {&fill, 70};
 
    text[0] = '\0';
 
@@ -444,13 +430,14 @@ void P_doIntro() {
          last = which;
 
          ifauto(str, texts,
-                LanguageNull(LANG "BEGINNING_%s_%u", pl.discrim, which)) {
+                language_fmt(LANG "BEGINNING_%s_%i", pl.discrim, which)) {
             faststrcpy_str(text, texts);
          } else {
+            Dbg_Log(log_dev, "P_doIntro: intro ending due to finishing");
             break;
          }
 
-         ACS_LocalAmbientSound(ss_showtext, 127);
+         ACS_LocalAmbientSound(ss_player_showtext, 127);
 
          char *next, *line = faststrtok(text, &next, '\n');
          for(i32 i = 0; i < _nlines; i++) {
@@ -469,14 +456,15 @@ void P_doIntro() {
          }
       }
 
-      PrintTextFmt(LC(LANG "SKIP_INTRO"), sc_use, sc_attack);
+      PrintTextFmt(tmpstr(language(sl_skip_intro)), sc_use, sc_attack);
       PrintText(sf_smallfnt, CR_WHITE, 275,6, 220,0);
 
-      if(G_Filler(280, 220, &fill, 70, pl.buttons & (BT_USE | BT_ATTACK))) {
+      if(G_Filler(280, 220, &fil, pl.buttons & (BT_USE | BT_ATTACK))) {
          if(pl.buttons & BT_ATTACK) {
             which++;
             continue;
          } else {
+            Dbg_Log(log_dev, "P_doIntro: intro ending due to skipping");
             break;
          }
       }
@@ -499,7 +487,7 @@ void P_doIntro() {
 
    UnfreezeTime(false);
 
-   ACS_LocalAmbientSound(ss_startgame, 127);
+   ACS_LocalAmbientSound(ss_player_startgame, 127);
    ACS_FadeTo(0, 0, 0, 0.0, 2.0);
 
    for(i32 j = 0; j < _out_tics; j++) {
@@ -607,8 +595,8 @@ void P_Aug_PTick() {
       }
 
       if(total) {
-         ACS_LocalAmbientSound(ss_autobuy, 127);
-         pl.logH(1, LanguageC(LANG "LOG_AutoBuy%i", i + 1), total, total != 1 ? "s" : "");
+         ACS_LocalAmbientSound(ss_player_cbi_auto_buy, 127);
+         pl.logH(1, tmpstr(language_fmt(LANG "LOG_AutoBuy%i", i + 1)), total, total != 1 ? "s" : "");
       }
    }
 }
@@ -694,21 +682,19 @@ void Sc_KeyBuyAutoGroup(i32 grp) {
       str  snd;
 
       /**/ if(success ==     0) {cr = 'g'; snd = ss_player_cbi_auto_invalid;}
-      else if(success != total) {cr = 'j'; snd = ss_autobuy;}
-      else                      {cr = 'q'; snd = ss_autobuy;}
+      else if(success != total) {cr = 'j'; snd = ss_player_cbi_auto_buy;}
+      else                      {cr = 'q'; snd = ss_player_cbi_auto_buy;}
 
       ACS_LocalAmbientSound(snd, 127);
 
       i32 fmt = total ? grp + 1 : grp + 5;
 
-      pl.logH(1, LanguageC(LANG "LOG_GroupBuy%i", fmt), cr, success, total, success != 1 ? "s" : "");
+      pl.logH(1, tmpstr(language_fmt(LANG "LOG_GroupBuy%i", fmt)), cr, success, total, success != 1 ? "s" : "");
    }
 }
 
 script_str type("net") ext("ACS") addr(OBJ "KeyToggleAutoGroup")
 void Sc_KeyToggleAutoGroup(i32 grp) {
-   Str(ss_autotoggle, s"player/cbi/auto/toggle");
-
    if(grp < 0 || grp >= 4) {
       return;
    }
@@ -723,23 +709,19 @@ void Sc_KeyToggleAutoGroup(i32 grp) {
          }
       }
 
-      if(total) ACS_LocalAmbientSound(ss_autotoggle, 127);
+      if(total) ACS_LocalAmbientSound(ss_player_cbi_auto_toggle, 127);
 
       i32 fmt = total ? grp + 1 : grp + 5;
-      pl.logH(1, LanguageC(LANG "LOG_GroupToggle%i", fmt));
+      pl.logH(1, tmpstr(language_fmt(LANG "LOG_GroupToggle%i", fmt)));
    }
 }
 
 alloc_aut(0) script_str type("net") ext("ACS") addr(OBJ "KeyGlare")
 void Sc_KeyGlare(void) {
-   Str(st_none, s"None");
-
    if(!P_None()) {
-      Str(ss_glare, s"player/glare");
-
       ACS_FadeTo(255, 255, 255, 1.0, 0.0);
 
-      ACS_LocalAmbientSound(ss_glare, 127);
+      ACS_LocalAmbientSound(ss_player_glare, 127);
       ACS_LineAttack(0, pl.yaw, pl.pitch, 1, so_Dummy, st_none,
          32767.0, FHF_NORANDOMPUFFZ | FHF_NOIMPACTDECAL);
 
@@ -755,10 +737,9 @@ _Noreturn dynam_aut script_str ext("ACS") addr(OBJ "TimelineInconsistent")
 void Sc_TimelineInconsistent(void) {
    pl.setActivator();
    for(;;) {
-      Str(sl_bad_timeline, sLANG "BADTIMELINE");
       ACS_FadeTo(0, 0, 0, 1.0, 0.0);
       SetSize(320, 240);
-      PrintText_str(L(sl_bad_timeline), sf_bigupper, CR_WHITE, 160,4, 120,0);
+      PrintText_str(ns(language(sl_bad_timeline)), sf_bigupper, CR_WHITE, 160,4, 120,0);
       pl.health = -1;
       ACS_Delay(1);
    }

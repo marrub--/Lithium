@@ -20,10 +20,6 @@
 
 dynam_aut script
 void P_Scr_Payout() {
-   Str(sp_ResultFrame,        s":UI:ResultFrame");
-   Str(ss_player_counter,     s"player/counter");
-   Str(ss_player_counterdone, s"player/counterdone");
-
    enum {
       _begin_total      = 35,
       _begin_tax        = 44,
@@ -34,7 +30,7 @@ void P_Scr_Payout() {
    (PrintTextFmt(__VA_ARGS__), \
     PrintTextF(font, CR_WHITE, x,xa, y,1, fid_result))
 
-#define Fram()    PrintSpriteF(sp_ResultFrame, 14,1, y-1,1, fid_result)
+#define Fram()    PrintSpriteF(sp_UI_ResultFrame, 14,1, y-1,1, fid_result)
 #define Left(...) Msg(16,  1, sf_smallfnt, __VA_ARGS__)
 #define Rght(...) Msg(144, 6, sf_smallfnt, __VA_ARGS__)
 #define Head(...) Msg(8,   1, sf_bigupper, __VA_ARGS__)
@@ -53,7 +49,7 @@ void P_Scr_Payout() {
    for(i32 i = 0; CheckFade(fid_result); i++) {
       i32 y = 20;
       bool counting = false;
-      cstr res = LC(LANG "RES_RESULTS");
+      cstr res = tmpstr(language(sl_res_results));
 
       SetSize(320, 240);
 
@@ -70,7 +66,7 @@ void P_Scr_Payout() {
 #define Pay(name) \
    if(pay.name##max) { \
       Fram(); \
-      Left(LC(LANG "RES_" #name), pay.name##pct); \
+      Left(tmpstr(language(sl_res_##name)), pay.name##pct); \
       Rght("%s\Cnscr", CountScr(pay.name##scr)); \
       counting |= pay.name##num; \
       y += 9; \
@@ -83,7 +79,7 @@ void P_Scr_Payout() {
 #define Activity(name) \
    if(pay.activities.name) { \
       Fram(); \
-      Left(LC(LANG "RES_" #name)); \
+      Left(tmpstr(language(sl_res_##name))); \
       Rght("%s\Cnscr", CountScr(pay.activities.name)); \
       counting = true; \
       y += 9; \
@@ -97,29 +93,29 @@ void P_Scr_Payout() {
 
       if(i > _begin_total) {
          y += 7;
-         Head(LC(LANG "RES_TOTAL"));
+         Head(tmpstr(language(sl_res_total)));
          y += 16;
       }
 
       if(i > _begin_tax) {
          Fram();
-         Left(LC(LANG "RES_TAX"));
+         Left(tmpstr(language(sl_res_tax)));
          Rght("%s\Cnscr", scoresep(pay.tax));
          y += 9;
       }
 
       if(i > _begin_grandtotal) {
          Fram();
-         Left(LC(LANG "RES_SUBTOTAL"));
+         Left(tmpstr(language(sl_res_subtotal)));
          Rght("%s\Cnscr", scoresep(pay.total));
          y += 16;
 
-         Head(LC(LANG "RES_PAYMENT"));
+         Head(tmpstr(language(sl_res_payment)));
          y += 16;
 
          Fram();
-         Left(LC(LANG "RES_ACCOUNT"));
-         Rght(LC(LANG "RES_CLOSED"), (i % 6) < 3 ? 'n' : '-');
+         Left(tmpstr(language(sl_res_account)));
+         Rght(tmpstr(language(sl_res_closed)), (i % 6) < 3 ? 'n' : '-');
       }
 
       if(CVarGetI(sc_player_resultssound)) {

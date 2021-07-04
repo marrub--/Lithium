@@ -48,8 +48,6 @@
 ##
 ## ---------------------------------------------------------------------------|
 
-!!output pk7/language.txt
-
 !!lang en | en enu default
 !!lang es | es
 !!lang jp | jp

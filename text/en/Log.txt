@@ -100,7 +100,7 @@
 \cgDetected high amounts of demonic energy in area.
 
 == \#LOG_BossWarnAri  | $\#LOG_BossWarnOmi
-== \#LOG_BossWarnLuke | \cmThe area's aura surpresses you...
+== \#LOG_BossWarnLuke | \cmThe area's aura suppresses you...
 == \#LOG_BossWarnKiri | \cjNeed to get rid of the entrapped soul here.
 
 == \#LOG_BossHear1 | \cgYou feel ringing in your ears...
@@ -147,7 +147,7 @@
 == \#LOG_AdrenalineReady | Adrenaline injector ready.
 == \#LOG_AdrenalineUsed  | Adrenaline administered.
 
-== \#LOG_Bought    | Bought %s
+== \#LOG_Bought    | Bought %S
 == \#LOG_Delivered | \cjItem delivered.
 @@ \#LOG_NoDeliver
 \cgCouldn't deliver item\c-, placing directly in inventory.

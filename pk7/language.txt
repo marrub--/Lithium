@@ -836,7 +836,7 @@
 "LITH_INFO_SHORT_Rifle_A" = "$LITH_UPGRADE_TITLE_Rifle_A";
 "LITH_INFO_TITLE_Rifle_A" = "AllPoint 75-c Modal Trigger";
 "LITH_INFO_DESCR_Rifle_A" = "Looking at the design failures in the 75-b, AllPoint sought to make an improvement by way of a modification. Thus, they gathered, they could take parts from their 80-g Sniper Rifle and fit them snugly into a combat rifle.\n\nThe 75-c Modal Trigger enables a third firing mode in which four two-round bursts are fired sequentially. Using this mode also enables a partial CB-Scope, which unfortunately does little more than obstruct your view.";
-"LITH_INFO_SHORT_Rifle_B" = "$LITH_UPGRADE_TITLE_LaserRCW";
+"LITH_INFO_SHORT_Rifle_B" = "$LITH_UPGRADE_TITLE_Rifle_B";
 "LITH_INFO_TITLE_Rifle_B" = "SF-209 Laser Rifle";
 "LITH_INFO_DESCR_Rifle_B" = "This modification does little more than replace the firing system with one much more similar to a photon rifle. The combat effectiveness of the rifle is increased quite a lot, as it now fires 4tW penetrating beams capable of ripping into most unarmored vehicles.";
 "LITH_INFO_SHORT_SniperRifle" = "Sniper Rifle";
@@ -1271,7 +1271,7 @@
 "LITH_LOG_BossWarnFulk" = "\cj<\ciWarning\cj>\c- :: High demonic energy levels. Seek and remove source.";
 "LITH_LOG_BossWarnOmi" = "\cgDetected high amounts of demonic energy in area.";
 "LITH_LOG_BossWarnAri" = "$LITH_LOG_BossWarnOmi";
-"LITH_LOG_BossWarnLuke" = "\cmThe area's aura surpresses you...";
+"LITH_LOG_BossWarnLuke" = "\cmThe area's aura suppresses you...";
 "LITH_LOG_BossWarnKiri" = "\cjNeed to get rid of the entrapped soul here.";
 "LITH_LOG_BossHear1" = "\cgYou feel ringing in your ears...";
 "LITH_LOG_BossHear2" = "\cgSomething is calling out to you.";
@@ -1305,7 +1305,7 @@
 "LITH_LOG_ActiveArmor" = "Activating Armor->%s()";
 "LITH_LOG_AdrenalineReady" = "Adrenaline injector ready.";
 "LITH_LOG_AdrenalineUsed" = "Adrenaline administered.";
-"LITH_LOG_Bought" = "Bought %s";
+"LITH_LOG_Bought" = "Bought %S";
 "LITH_LOG_Delivered" = "\cjItem delivered.";
 "LITH_LOG_NoDeliver" = "\cgCouldn't deliver item\c-, placing directly in inventory.";
 "LITH_BEGINNING_Stan_1" = "During the 17th century of the New Era, our country began drafting the\nyouth into the military again. Most people couldn't understand why,\neven though it was pretty obvious if you looked at our current\nrelations with other nations.\n~\nI wasn't particularly young, but they decided to draft me anyway -\napparently they were short on people to steal away for their\ninscrutable purposes. When my term was up, though, I stayed, unlike\nthe rest of my motley crew. Sometimes I wish I'd just packed my bags\nand left with them, but that thought is always followed with that,\nperhaps, this is just where I belong.\n~\nWhere I belong and where I want to be could perhaps be different\nplaces entirely, but as fate has it, I'm going to be in the former, no\nmatter what. \"Oh well,\" I sigh. \"Where in the world are we going?\"\n~\nThe scientist responds, \"Not *in* the world. Out of it. While your\ndeploy location is still technically -\" I cut him off. \"I don't give a\ndamn. Just tell me where it is.\"\n~\nThe egghead pauses for a minute. While he doesn't look disturbed by\nthe question, he seems to not know how to phrase the answer. \"Hell.\nThat's where you're going.\"";
@@ -1715,7 +1715,7 @@
 "LITH_CAT_EXTR" = "\cfExtra";
 "LITH_CAT_DOWN" = "\ctDowngrade";
 "LITH_CAT_ALL" = "All";
-"LITH_CAT_FILTER" = "Filter: %s";
+"LITH_CAT_FILTER" = "Filter: %S";
 "LITH_TERM_DISCONNECTING" = "Disconnecting...";
 "LITH_TERM_IP" = "<55.883.115.7>";
 "LITH_TERM_SGXLINE" = "SGXLine r4205";
@@ -1753,7 +1753,7 @@
 "LITH_ON" = "On";
 "LITH_OFF" = "Off";
 "LITH_SKIP_INTRO" = "Hold %jS to skip this intro.\nIt will not show up again.\nHold %jS to continue.";
-"LITH_BADTIMELINE" = "This timeline is\n\n\n           irreparable,\n\n and cannot continue.\n\nYou must start\n\n\cganew.";
+"LITH_BAD_TIMELINE" = "This timeline is\n\n\n           irreparable,\n\n and cannot continue.\n\nYou must start\n\n\cganew.";
 "LITH_BEGIN" = "[Press any key to begin]";
 "LITH_BIP_AVAILABLE" = "%i/%i AVAILABLE";
 "LITH_BIP_BACK" = "<BACK";
@@ -3003,7 +3003,7 @@
 "LITH_CAT_EXTR" = "\cfおまけ";
 "LITH_CAT_DOWN" = "\ct格下げ";
 "LITH_CAT_ALL" = "全て";
-"LITH_CAT_FILTER" = "ﾌｨﾙﾀｰ: %s";
+"LITH_CAT_FILTER" = "ﾌｨﾙﾀｰ: %S";
 "LITH_TERM_DISCONNECTING" = "切断中...";
 "LITH_TERM_IP" = "<55.883.115.7>";
 "LITH_TERM_SGXLINE" = "SGXLine r4205";
@@ -3036,7 +3036,7 @@
 "LITH_ON" = "On";
 "LITH_OFF" = "Off";
 "LITH_SKIP_INTRO" = "%jSを長押しするとイントロをスキップできます。\nこのメッセージはこれ以降表示されません。\n%jSを長押しして続ける";
-"LITH_BADTIMELINE" = "この時間軸は修復、または継続不可能な状態に陥りました。\n時間を「始まる」必要があります。";
+"LITH_BAD_TIMELINE" = "このタイムラインは\n\n\n           治し方がナイ\n\n ので、続けぬ。\n\n始まりからの\n\n\cgハジメルベシ。";
 "LITH_BEGIN" = "[どれかのキーを押して始める]";
 "LITH_BIP_AVAILABLE" = "%i/%i 使用可能";
 "LITH_BIP_BACK" = "<戻る";

@@ -232,11 +232,14 @@ void F_text(struct finale_state *st) {
    i32 hold = st->prg++->i;
    u32 fade = st->prg++->u;
 
-   cstr txt = LanguageC(LANG "ENDING_%S", name);
-   u32  len = faststrlen(txt);
+   str txt = ns(language_fmt(LANG "ENDING_%S", name));
+   i32 len = ACS_StrLen(txt);
 
-   u32 fill     = hold == -1 ? 0 : hold;
-   u32 skipfill = 0;
+   i32 fill     = hold == -1 ? 0 : hold;
+   i32 skipfill = 0;
+
+   struct gui_fil fil_fill     = {&fill,     87};
+   struct gui_fil fil_skipfill = {&skipfill, 175};
 
    for(i32 i = time + fade; i >= 0; i--) {
       F_drawBack(st);
@@ -255,13 +258,12 @@ void F_text(struct finale_state *st) {
 
       SetClipW(10, 10, 300, h, 300);
       PrintRect(0, 0, 320, 240, 0x7F000000);
-      PrintTextChr(txt, p);
-      PrintText(sf_smallfnt, CR_WHITE, 10,1, 10,1);
+      PrintText_str(ACS_StrMid(txt, 0, p), sf_smallfnt, CR_WHITE, 10,1, 10,1);
       ClearClip();
 
       if(i == fade) {
          if(hold == -1) {
-            if(!G_Filler(_fill_x, _fill_y, &fill, 87,
+            if(!G_Filler(_fill_x, _fill_y, &fil_fill,
                          buttons & (BT_USE | BT_ATTACK))) {
                i++;
             }
@@ -271,7 +273,7 @@ void F_text(struct finale_state *st) {
       } else if(i < fade) {
          F_drawFade(1.0 - i / (k32)fade);
       } else if(time > 100 &&
-                G_Filler(_fill_x, _fill_y, &skipfill, 175,
+                G_Filler(_fill_x, _fill_y, &fil_skipfill,
                          buttons & (BT_USE | BT_ATTACK))) {
          break;
       }
@@ -293,18 +295,14 @@ void F_wait(struct finale_state *st) {
 }
 
 void F_Start(cstr which) {
-   Str(st_lithend, s"LITHEND");
-
    finale = which;
 
-   ACS_ChangeLevel(st_lithend, 0, CHANGELEVEL_NOINTERMISSION |
+   ACS_ChangeLevel(sp_LITHEND, 0, CHANGELEVEL_NOINTERMISSION |
                    CHANGELEVEL_PRERAISEWEAPON, -1);
 }
 
 _Noreturn dynam_aut script
 void F_Run() {
-   Str(sm_actually_end_the_game, s"ActuallyEndTheGame");
-
    while(!finit) ACS_Delay(1);
 
    struct finale_state st = {};
@@ -335,7 +333,7 @@ void F_Run() {
       }
    }
 
-   ServCallI(sm_actually_end_the_game);
+   ServCallI(sm_ActuallyEndTheGame);
 }
 
 script_str ext("ACS") addr(OBJ "Finale")

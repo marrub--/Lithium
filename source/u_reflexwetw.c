@@ -76,7 +76,6 @@ void Upgr_ReflexWetw_Update(struct upgrade *upgr)
       }
    }
 
-   Str(so_PowerFlight, s"PowerFlight");
    if(pl.waterlevel == 0 && P_ButtonPressed(BT_JUMP) && !InvNum(so_PowerFlight) &&
       !InvNum(so_RocketBooster) && !UData.leaped &&
       (!pl.onground || UData.charge < CHARGE_MAX))

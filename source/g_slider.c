@@ -14,7 +14,7 @@
 #include "common.h"
 #include "p_player.h"
 
-struct slide_ret G_Slider_Imp(struct gui_state *g, u32 id, struct gui_arg_sld const *a) {
+struct slide_ret G_Slider_Imp(struct gui_state *g, gid_t id, struct gui_arg_sld const *a) {
    struct gui_pre_sld const *pre = a->preset ? a->preset : &gui_p.slddef;
 
    k32 w = pre->w - (pre->pad * 2);

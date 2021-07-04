@@ -104,19 +104,6 @@ void P_ValidateTID()
 /* Update all of the player's data. */
 void P_Dat_PTickPre()
 {
-   Str(so_c_card_b, s"ChexBlueCard");
-   Str(so_c_card_r, s"ChexRedCard");
-   Str(so_c_card_y, s"ChexYellowCard");
-   Str(so_d_card_b, s"BlueCard");
-   Str(so_d_card_r, s"RedCard");
-   Str(so_d_card_y, s"YellowCard");
-   Str(so_d_skul_b, s"BlueSkull");
-   Str(so_d_skul_r, s"RedSkull");
-   Str(so_d_skul_y, s"YellowSkull");
-   Str(so_htic_k_b, s"KeyBlue");
-   Str(so_htic_k_g, s"KeyGreen");
-   Str(so_htic_k_y, s"KeyYellow");
-
    enum {
       _warpflags = WARPF_NOCHECKPOSITION | WARPF_MOVEPTR |
                    WARPF_WARPINTERPOLATION | WARPF_COPYINTERPOLATION |
@@ -197,7 +184,7 @@ void LevelUp(u32 *attr, char **attrptrs) {
 void P_Lv_GiveEXP(u64 amt) {
    struct player_attributes *a = &pl.attr;
 
-   static noinit
+   noinit static
    u32 attr[at_max];
    fastmemset(attr, 0, sizeof attr);
 
@@ -226,7 +213,7 @@ void P_Lv_GiveEXP(u64 amt) {
    if(levelup) {
       char *sp = a->lvupstr;
 
-      static noinit
+      noinit static
       char *attrptrs[at_max];
       fastmemset(attrptrs, 0, sizeof attrptrs);
 
@@ -338,7 +325,7 @@ script void P_Init() {
    if(!pl.invinit) P_Inv_PInit();
 
    if(!pl.wasinit) {
-      pl.logH(1, LC(LANG "LOG_Version"), VersionName, __DATE__);
+      pl.logH(1, tmpstr(language(sl_log_version)), VersionName, __DATE__);
 
       #ifndef NDEBUG
       if(dbglevel) {
@@ -347,18 +334,17 @@ script void P_Init() {
          PrintDmonAllocSize();
       } else {
       #endif
-         pl.logH(1, LC(LANG "LOG_StartGame"), sc_k_opencbi);
+         pl.logH(1, tmpstr(language(sl_log_startgame)), sc_k_opencbi);
       #ifndef NDEBUG
       }
       #endif
 
       if(GetFun() & lfun_division) {
-         Str(so_divsigil, sOBJ "DivisionSigil");
          k32 a = ACS_GetActorAngle(0);
          k32 x = GetX(0) + ACS_Cos(a) * 128.0;
          k32 y = GetY(0) + ACS_Sin(a) * 128.0;
          k32 z = GetZ(0);
-         ACS_SpawnForced(so_divsigil, x, y, z);
+         ACS_SpawnForced(so_DivisionSigil, x, y, z);
       }
 
       pl.wasinit = true;

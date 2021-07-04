@@ -117,7 +117,7 @@ void P_Log_Entry() {
 
    pl.log.curmap = lm;
 
-   pl.logF(LC(LANG "ENTER_FMT"), lm->name, CanonTime(ct_full, ticks));
+   pl.logF(tmpstr(language(sl_enter_fmt)), lm->name, CanonTime(ct_full, ticks));
 }
 
 script void P_Log_PTick() {
@@ -206,13 +206,13 @@ script_str ext("ACS") addr(OBJ "LogS")
 void Sc_Log(i32 levl, i32 type) {
    str name = ServCallS(sm_GetLogName);
 
-   if(name[0] == '_') name = Language(LANG "LOG%S", name);
+   if(name[0] == '_') name = language_fmt(LANG "LOG%S", name);
 
    if(!P_None()) switch(type) {
    case msg_ammo: if(CVarGetI(sc_player_ammolog))
-   case msg_huds: pl.logH(levl, "%S", name); break;
-   case msg_full: pl.logF(      "%S", name); break;
-   case msg_both: pl.logB(levl, "%S", name); break;
+   case msg_huds: pl.logH(levl, tmpstr(name)); break;
+   case msg_full: pl.logF(      tmpstr(name)); break;
+   case msg_both: pl.logB(levl, tmpstr(name)); break;
    }
 }
 

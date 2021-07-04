@@ -123,7 +123,7 @@ bursts are fired sequentially. Using this mode also enables a partial
 CB-Scope, which unfortunately does little more than obstruct your view.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_Rifle_B | $\#UPGRADE_TITLE_LaserRCW
+== \#INFO_SHORT_Rifle_B | $\#UPGRADE_TITLE_Rifle_B
 == \#INFO_TITLE_Rifle_B | SF-209 Laser Rifle
 @@ \#INFO_DESCR_Rifle_B
 This modification does little more than replace the firing system with one

@@ -50,6 +50,7 @@ enum {
    _page_available,
    _page_unlocked,
    _page_auto,
+   _page_new,
 };
 
 struct page {
@@ -64,21 +65,24 @@ struct page {
 
 struct bip {
    /* Stats */
-   u32 categoryavail[_bipc_max];
-   u32 categorymax[_bipc_max];
+   i32 categoryavail[_bipc_max];
+   i32 categorymax[_bipc_max];
 
-   u32 pageavail;
-   u32 pagemax;
+   i32 pageavail;
+   i32 pagemax;
 
-   u32 mailreceived;
-   u32 mailtrulyreceived;
+   i32 mailreceived;
+   i32 mailtrulyreceived;
 
    /* State */
    bool init;
 
    struct page *curpage;
-   u32 curcategory;
-   u32 lastcategory;
+   cstr         pagebody;
+   i32          pagebodypos;
+   mem_size_t   pagebodylen;
+   i32          curcategory;
+   i32          lastcategory;
 
    struct page *result[8];
    u32 resnum;
@@ -94,10 +98,10 @@ extern mem_size_t  bippagenum;
 /* Extern Functions -------------------------------------------------------- */
 
 script void P_BIP_PInit(void);
-optargs(1) void P_BIP_Unlock(cstr name, bool from_load);
-void P_BIP_PQuit(void);
+stkcall void P_BIP_PQuit(void);
 
-cstr P_BIP_CategoryToName(i32 category);
-i32 P_BIP_NameToNum(cstr name);
+script void P_BIP_Unlock(struct page *page, bool from_load);
+stkcall struct page *P_BIP_NameToPage(cstr name);
+stkcall cstr P_BIP_CategoryToName(i32 category);
 
 #endif

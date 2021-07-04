@@ -106,11 +106,13 @@ void P_CBI_TabShop(struct gui_state *g)
       if(G_ScrOcc(g, &CBIState(g)->shopscr, y, gui_p.btnlistsel.h) || !(shopitems[i].pclass & pl.pclass))
          continue;
 
-      cstr name = LanguageC(LANG "SHOP_TITLE_%s", shopitems[i].name);
-
       i32 *shopsel = &CBIState(g)->shopsel;
-      if(G_Button_HId(g, i, name, 0, y, i == *shopsel, Pre(btnlistsel)))
+      if(G_Button_HId(g, i, tmpstr(language_fmt(LANG "SHOP_TITLE_%s",
+                                                shopitems[i].name)),
+                      0, y, i == *shopsel, Pre(btnlistsel)))
+      {
          *shopsel = i;
+      }
 
       y += gui_p.btnlistsel.h;
    }
@@ -124,11 +126,11 @@ void P_CBI_TabShop(struct gui_state *g)
    PrintTextFmt("%s\Cnscr", scoresep(P_Shop_Cost(&item->shopdef)));
    PrintText(sf_smallfnt, g->defcr, g->ox+98,1, g->oy+17,1);
 
-   PrintText_str(Language(LANG "SHOP_DESCR_%s", item->name), sf_smallfnt, g->defcr, g->ox+98,1, g->oy+27,1);
+   PrintText_str(ns(language_fmt(LANG "SHOP_DESCR_%s", item->name)), sf_smallfnt, g->defcr, g->ox+98,1, g->oy+27,1);
 
    G_ClipRelease(g);
 
-   if(G_Button(g, LC(LANG "BUY"), 98, 192, !P_Shop_CanBuy(&item->shopdef, item), .fill = {&CBIState(g)->buyfill, CVarGetI(sc_gui_buyfiller)}))
+   if(G_Button(g, tmpstr(language(sl_buy)), 98, 192, !P_Shop_CanBuy(&item->shopdef, item), .fill = {&CBIState(g)->buyfill, CVarGetI(sc_gui_buyfiller)}))
       P_Shop_Buy(&item->shopdef, item, LANG "SHOP_TITLE_%s", false);
 }
 

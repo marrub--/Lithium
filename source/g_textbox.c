@@ -17,7 +17,7 @@
 #include "m_cps.h"
 #include "m_char.h"
 
-struct gui_txt *G_TxtBox_Imp(struct gui_state *g, u32 id, struct gui_arg_txt const *a) {
+struct gui_txt *G_TxtBox_Imp(struct gui_state *g, gid_t id, struct gui_arg_txt const *a) {
    struct gui_txt *st = a->st;
 
    G_Auto(g, id, a->x, a->y, 260, 10);
@@ -53,11 +53,12 @@ struct gui_txt *G_TxtBox_Imp(struct gui_state *g, u32 id, struct gui_arg_txt con
    PrintSprite(sp_UI_TextBoxBack, a->x-3 + g->ox,1, a->y-3 + g->oy,1);
 
    SetClipW(a->x + g->ox, a->y + g->oy, 260, 200, 260);
-   if(st->tbptr)
+   if(st->tbptr) {
       PrintTextFmt("%s%s", Cps_Expand(st->txtbuf, 0, st->tbptr),
                            hot ? Ticker("|", "") : "");
-   else
-      PrintTextFmt("\C%c%s", hot ? 'c' : 'm', LC(LANG "GUI_TEXTBOX"));
+   } else {
+      PrintTextFmt("\C%c%S", hot ? 'c' : 'm', ns(language(sl_gui_textbox)));
+   }
    PrintText(sf_smallfnt, g->defcr, a->x + g->ox,1, a->y + g->oy,1);
    ClearClip();
 

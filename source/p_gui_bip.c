@@ -21,20 +21,28 @@
 
 static
 void EncryptedBody(struct page *page, char *bodytext) {
-   char *s = LanguageCV(bodytext, LANG "INFO_DESCR_%s", page->name);
-   for(; *s; s++) *s = !IsPrint(*s) ? *s : *s ^ 7;
+   faststrcpy_str(bodytext,
+                  ns(language_fmt(LANG "INFO_DESCR_%s", page->name)));
+   for(char *p = bodytext; *p; p++) {
+      *p = !IsPrint(*p) ? *p : *p ^ 7;
+   }
 }
 
 static
 void MailBody(struct page *page, char *bodytext) {
+   noinit static
    char remote[128];
-   faststrcpy(remote, LanguageC(LANG "INFO_REMOT_%s", page->name));
+   cstr sent;
 
-   cstr sent = CanonTime(ct_full, page->time);
+   faststrcpy_str(remote, ns(language_fmt(LANG "INFO_REMOT_%s", page->name)));
+   sent = CanonTime(ct_full, page->time);
 
-   sprintf(bodytext, LanguageC(LANG "MAIL_TEMPLATE"), remote, sent);
-   faststrcat2(bodytext, "\n\n",
-               LanguageC(LANG "INFO_DESCR_%s", page->name));
+   mem_size_t end =
+      sprintf(bodytext, tmpstr(language(sl_mail_template)), remote, sent);
+   bodytext[end++] = '\n';
+   bodytext[end++] = '\n';
+   faststrcpy_str(&bodytext[end],
+                  ns(language_fmt(LANG "INFO_DESCR_%s", page->name)));
 }
 
 static
@@ -42,13 +50,13 @@ cstr GetShortName(struct page *page) {
    if(page->category == _bipc_mail) {
       return CanonTime(ct_short, page->time);
    } else {
-      return LanguageC(LANG "INFO_SHORT_%s", page->name);
+      return tmpstr(language_fmt(LANG "INFO_SHORT_%s", page->name));
    }
 }
 
 static
 cstr GetFullName(struct page *page) {
-   return LanguageC(LANG "INFO_TITLE_%s", page->name);
+   return tmpstr(language_fmt(LANG "INFO_TITLE_%s", page->name));
 }
 
 static
@@ -63,7 +71,8 @@ cstr GetBody(struct page *page) {
       MailBody(page, bodytext);
       break;
    default:
-      LanguageCV(bodytext, LANG "INFO_DESCR_%s", page->name);
+      faststrcpy_str(bodytext,
+                     ns(language_fmt(LANG "INFO_DESCR_%s", page->name)));
       break;
    }
    return bodytext;
@@ -71,20 +80,34 @@ cstr GetBody(struct page *page) {
 
 static
 void SetCurPage(struct gui_state *g, struct page *page) {
-   str body = fast_strdup(GetBody(page));
+   i32 oldf = page->flags;
+   dis_bit(page->flags, _page_new);
+   if(page->flags != oldf) {
+      P_Data_Save();
+   }
 
-   bip.curpage = page;
+   bip.curpage     = page;
+   bip.pagebody    = GetBody(page);
+   bip.pagebodypos = 0;
+   bip.pagebodylen = faststrlen(bip.pagebody);
 
-   G_TypeOn(g, &CBIState(g)->biptypeon, body);
    G_ScrollReset(g, &CBIState(g)->bipinfoscr);
 }
 
 static
 void DrawPage(struct gui_state *g, struct page *page) {
-   str image  = LanguageNull(LANG "INFO_IMAGE_%s", page->name);
-   i32 height = faststrtoi32_str(Language(LANG "INFO_SSIZE_%s", page->name));
+   gosub_enable();
 
-   struct gui_typ const *typeon = G_TypeOnUpdate(g, &CBIState(g)->biptypeon);
+   str image  = language_fmt(LANG "INFO_IMAGE_%s", page->name);
+   i32 height =
+      faststrtoi32_str(ns(language_fmt(LANG "INFO_SSIZE_%s", page->name)));
+
+   i32 cr, x, y;
+
+   bip.pagebodypos += 14;
+   if(bip.pagebodypos > bip.pagebodylen) {
+      bip.pagebodypos = bip.pagebodylen;
+   }
 
    i32 const gw = 190;
    i32 const gh = gui_p.scrdef.scrlh * 23;
@@ -103,37 +126,22 @@ void DrawPage(struct gui_state *g, struct page *page) {
    PrintTextChS(GetFullName(page));
    PrintText(sf_lmidfont, CR_ORANGE, g->ox+1,1, g->oy+5,1);
 
-   Str(st_nl_bar, s"\n|");
-
-   #define DrawText(txt, cr, x, y) \
-      PrintTextStr(txt); \
-      if(typeon->pos == typeon->len) { \
-         if(Ticker(true, false)) {ACS_PrintChar('\n'); ACS_PrintChar('|');} \
-      } else { \
-         ACS_PrintChar('|'); \
-      } \
-      PrintText(sf_smallfnt, cr, g->ox+x,1, g->oy+y,1)
-
    /* render an outline if the page has an image */
    if(image) {
-      cstr txt = RemoveTextColors_str(typeon->txt, typeon->pos);
-      str s = fast_strdup(txt);
+      static
+      i32 xs[8] = { 2,  0,  2,  0,  1,  1,  2,  0},
+          ys[8] = {21, 21, 19, 19, 19, 21, 20, 20};
 
-      DrawText(s, CR_BLACK, 2, 21); DrawText(s, CR_BLACK, 0, 21);
-      DrawText(s, CR_BLACK, 2, 19); DrawText(s, CR_BLACK, 0, 19);
+      cstr txt = RemoveTextColors(bip.pagebody, bip.pagebodypos);
 
-      DrawText(s, CR_BLACK, 1, 19);
-      DrawText(s, CR_BLACK, 1, 21);
-
-      DrawText(s, CR_BLACK, 2, 20);
-      DrawText(s, CR_BLACK, 0, 20);
+      for(mem_size_t i = 0; i < 8; ++i) {
+         gosub(drawText, PrintTextChS(txt),
+               cr = CR_BLACK, x = xs[i], y = ys[i]);
+      }
    }
 
-   ACS_BeginPrint();
-   for(i32 i = 0; i < typeon->pos; i++) {
-      ACS_PrintChar(typeon->txt[i]);
-   }
-   DrawText(ACS_EndStrParam(), g->defcr, 1, 20);
+   gosub(drawText, PrintTextChr(bip.pagebody, bip.pagebodypos),
+         cr = g->defcr, x = 1, y = 20);
 
    if(height) {
       G_ScrEnd(g, &CBIState(g)->bipinfoscr);
@@ -142,32 +150,53 @@ void DrawPage(struct gui_state *g, struct page *page) {
       g->ox -= 97;
       G_ClipRelease(g);
    }
+   return;
+
+drawText:
+   if(bip.pagebodypos == bip.pagebodylen) {
+      if(Ticker(true, false)) {
+         ACS_PrintChar('\n');
+         ACS_PrintChar('|');
+      }
+   } else {
+      ACS_PrintChar('|');
+   }
+   PrintText(sf_smallfnt, cr, g->ox+x,1, g->oy+y,1);
+   gosub_ret();
 }
 
 static
 void MainUI(struct gui_state *g) {
-   Str(sl_bip_categs, sLANG "BIP_CATEGS");
+   gosub_enable();
 
    i32 n = 0;
+   i32 cat;
 
-   PrintText_str(L(sl_bip_categs), sf_smallfnt, CR_PURPLE, g->ox+27,1, g->oy+57,1);
+   PrintText_str(ns(language(sl_bip_categs)), sf_smallfnt, CR_PURPLE, g->ox+27,1, g->oy+57,1);
 
    bip.lastcategory = _bipc_main;
 
-   #define Categ(name) { \
-      cstr s = LanguageC(LANG "BIP_HELP_%s", P_BIP_CategoryToName(name)); \
-      PrintTextChS(s); \
-      PrintTextA(sf_smallfnt, g->defcr, g->ox+92,1, g->oy+72+n,1, 0.7); \
-      s = LanguageC(LANG "BIP_NAME_%s", P_BIP_CategoryToName(name)); \
-      if(G_Button_HId(g, name, s, 32, 72 + n, Pre(btnbipmain))) { \
-         bip.curcategory = name; \
-         bip.curpage     = nil; \
-      } \
-      n += 10; \
+   gosub(doCateg, cat = _bipc_search);
+   for_category() {
+      if(categ != _bipc_extra) {
+         gosub(doCateg, cat = categ);
+      }
    }
-   Categ(_bipc_search);
-   for_category() if(categ != _bipc_extra) Categ(categ);
-   #undef Categ
+   return;
+
+doCateg:
+   PrintTextA_str(ns(language_fmt(LANG "BIP_HELP_%s",
+                                  P_BIP_CategoryToName(cat))),
+                  sf_smallfnt, g->defcr, g->ox+92,1, g->oy+72+n,1, 0.7);
+   if(G_Button_HId(g, cat, tmpstr(ns(language_fmt(LANG "BIP_NAME_%s",
+                                                  P_BIP_CategoryToName(cat)))),
+                   32, 72 + n, Pre(btnbipmain)))
+   {
+      bip.curcategory = cat;
+      bip.curpage     = nil;
+   }
+   n += 10;
+   gosub_ret();
 }
 
 static
@@ -183,20 +212,28 @@ void CategoryUI(struct gui_state *g) {
    for_page() {
       if(page->category != categ || !get_bit(page->flags, _page_available) ||
          (categ == _bipc_mail && !get_bit(page->flags, _page_unlocked)))
+      {
          continue;
+      }
 
       i32 y = gui_p.btnlist.h * i++;
 
-      if(G_ScrOcc(g, &CBIState(g)->bipscr, y, gui_p.btnlist.h))
+      if(G_ScrOcc(g, &CBIState(g)->bipscr, y, gui_p.btnlist.h)) {
          continue;
+      }
 
       bool lock = !get_bit(page->flags, _page_unlocked) || bip.curpage == page;
 
       char name[128] = "\Ci";
       faststrcpy(bip.curpage == page ? &name[2] : name, GetShortName(page));
 
-      if(G_Button_HId(g, i, name, 0, y, lock, Pre(btnlist)))
+      if(G_Button_HId(g, i, name, 0, y, lock, Pre(btnlist))) {
          SetCurPage(g, page);
+      }
+
+      if(get_bit(page->flags, _page_new)) {
+         PrintSpriteAP(sp_UI_New, g->ox+gui_p.btnlist.w,2, g->oy+y+gui_p.btnlist.h,2, 0.4);
+      }
    }
 
    G_ScrEnd(g, &CBIState(g)->bipscr);
@@ -254,8 +291,7 @@ void SearchUI(struct gui_state *g) {
 
       for(i32 i = 0; i < countof(extranames); i++) {
          if(crc == extranames[i].crc) {
-            i32 num = P_BIP_NameToNum(extranames[i].which);
-            bip.result[bip.resnum++] = &bippages[num];
+            bip.result[bip.resnum++] = P_BIP_NameToPage(extranames[i].which);
          }
       }
 
@@ -291,8 +327,7 @@ void SearchUI(struct gui_state *g) {
          }
       }
    } else {
-      Str(sl_bip_no_results, sLANG "BIP_NO_RESULTS");
-      PrintText_str(L(sl_bip_no_results), sf_smallfnt, CR_DARKGREY, g->ox+57,0, g->oy+82,0);
+      PrintText_str(ns(language(sl_bip_no_results)), sf_smallfnt, CR_DARKGREY, g->ox+57,0, g->oy+82,0);
    }
 }
 
@@ -314,16 +349,19 @@ void P_CBI_TabBIP(struct gui_state *g) {
    }
 
    if(bip.curcategory != _bipc_main) {
-      if(G_Button(g, LC(LANG "BIP_BACK"), 7, 25, false, Pre(btnbipback)))
+      if(G_Button(g, tmpstr(language(sl_bip_back)), 7, 25, false,
+                  Pre(btnbipback)))
+      {
          bip.curcategory = bip.lastcategory;
+      }
    } else {
-      Str(sl_bip_header, sLANG "BIP_HEADER");
       PrintSpriteA(sp_UI_bip, g->ox+7,1, g->oy+27,1, 0.1);
-      PrintText_str(L(sl_bip_header), sf_lmidfont, g->defcr, g->ox+22,1, g->oy+27,1);
+      PrintText_str(ns(language(sl_bip_header)), sf_lmidfont, g->defcr,
+                    g->ox+22,1, g->oy+27,1);
    }
 
    if(max) {
-      PrintTextFmt(LC(LANG "BIP_AVAILABLE"), avail, max);
+      PrintTextFmt(tmpstr(language(sl_bip_available)), avail, max);
       PrintText(sf_smallfnt, g->defcr, g->ox+287,2, g->oy+17,1);
    }
 }

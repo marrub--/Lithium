@@ -41,10 +41,8 @@ script void Upgr_Flashlight_Update(struct upgrade *upgr) {
    bool was_on = UData.on;
 
    if(UData.was_on != UData.on) {
-      Str(ss_snd_off, s"player/lightoff");
-      Str(ss_snd_on,  s"player/lighton");
-
-      ACS_LocalAmbientSound(UData.on ? ss_snd_on : ss_snd_off, 127);
+      ACS_LocalAmbientSound(UData.on ? ss_player_lighton : ss_player_lightoff,
+                            127);
 
       if(UData.was_on) {
          UData.target = 0.0;
@@ -88,12 +86,9 @@ void Upgr_Flashlight_Render(struct upgrade *upgr) {
    if(bat_life > 0 && UData.battery < bat_life) {
       i32 y = UData.battery / (k32)bat_life * 8;
 
-      Str(sp_bar,  s":HUD:Battery");
-      Str(sp_back, s":HUD:BatteryOutline");
-
-      PrintSprite(sp_back, 0,1, 240,2);
+      PrintSprite(sp_HUD_BatteryOutline, 0,1, 240,2);
       SetClip(2, 238 - y, 2, 8);
-      PrintSprite(sp_bar, 2,1, 238,2);
+      PrintSprite(sp_HUD_Battery, 2,1, 238,2);
       ClearClip();
    }
 }
