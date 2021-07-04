@@ -522,7 +522,16 @@ stab_x(sl_shop_disable_saves,  LANG "SHOP_DISABLE_SAVES")
 stab_x(sl_shop_mul_disable,    LANG "SHOP_MUL_DISABLE")
 stab_x(sl_shop_mul_enable,     LANG "SHOP_MUL_ENABLE")
 stab_x(sl_skip_intro,          LANG "SKIP_INTRO")
-stab_x(sl_st_name_unknown,     LANG "st_name_unknoqn")
+stab_x(sl_st_labl_gui,         LANG "st_labl_gui")
+stab_x(sl_st_labl_hud,         LANG "st_labl_hud")
+stab_x(sl_st_labl_itm,         LANG "st_labl_itm")
+stab_x(sl_st_labl_lit,         LANG "st_labl_lit")
+stab_x(sl_st_labl_log,         LANG "st_labl_log")
+stab_x(sl_st_labl_pgm,         LANG "st_labl_pgm")
+stab_x(sl_st_labl_ply,         LANG "st_labl_ply")
+stab_x(sl_st_labl_wep,         LANG "st_labl_wep")
+stab_x(sl_st_labl_wld,         LANG "st_labl_wld")
+stab_x(sl_st_name_unknown,     LANG "st_name_unknown")
 stab_x(sl_stat_boom,           LANG "STAT_Boom")
 stab_x(sl_stat_brouzouf,       LANG "STAT_Brouzouf")
 stab_x(sl_stat_healthsum,      LANG "STAT_HealthSum")
@@ -705,6 +714,11 @@ stab_ary_ent_x("ltrmfont")  stab_ary_ent_x("misakig")
 stab_ary_ent_x("misakim")   stab_ary_ent_x("smallfnt")
 stab_ary_end_x()
 
+stab_ary_bgn_x(sa_upgr_categ)
+#define upgr_category_x(name) stab_ary_ent_x(LANG "CAT_" #name)
+#include "u_data.h"
+stab_ary_end_x()
+
 #undef stab_ary_bgn_x
 #undef stab_ary_ent_x
 #undef stab_ary_end_x
@@ -712,7 +726,7 @@ stab_ary_end_x()
 #elif !defined(m_stab_h)
 #define m_stab_h
 
-#define stab_ary_bgn_x(name) noinit str name[0
+#define stab_ary_bgn_x(name) extern str name[0
 #define stab_ary_ent_x(strn) + 1
 #define stab_ary_end_x()     ];
 #define stab_x(n, s) extern str n;

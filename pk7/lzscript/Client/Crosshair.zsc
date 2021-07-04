@@ -20,6 +20,7 @@ private ui void drawCrosshair(RenderEvent evt) {
 
    double yaw   = evt.viewAngle + m_Uh.pData(pl, pdata_addy)/FIX;
    double pitch = evt.viewPitch + m_Uh.pData(pl, pdata_addp)/FIX;
+
    let loc = Lith_UTIL.traceFromPos(pl.curSector, viewPos, yaw, pitch, 2048.0, ignore: pl);
 
    vector2 xh;
@@ -31,9 +32,7 @@ private ui void drawCrosshair(RenderEvent evt) {
 
    /* draw a tracer for the targeting system */
    let tr = pl.tracer;
-   if(tr && tr.health > 0 &&
-      m_Uh.pData(pl, pdata_weapon) == weapon_m_rocket)
-   {
+   if(tr && tr.health > 0 && m_Uh.pData(pl, pdata_weapon) == weapon_m_rocket) {
       int tr1x, tr1y, tr2x, tr2y;
       [tr1x, tr1y, seen] = project((tr.pos.xy, tr.pos.z + tr.height / 2.0));
 

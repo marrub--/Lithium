@@ -29,7 +29,7 @@ common_main do
    upgrades = []
 
    for category, cupgs in hsh
-      catname = category.to_s.prepend "UC_"
+      catname = category.to_s
       for name, hupg in cupgs
          name = name.to_s
          reqs = (hupg[:req] || "").split

@@ -11,17 +11,21 @@
  * ---------------------------------------------------------------------------|
  */
 
-#ifndef u_data_h
+#if defined(upgr_category_x)
+upgr_category_x(body)
+upgr_category_x(weap)
+upgr_category_x(extr)
+upgr_category_x(down)
+#undef upgr_category_x
+#elif !defined(u_data_h)
 #define u_data_h
 
 #include "p_shopdef.h"
 
 enum {
-   UC_Body,
-   UC_Weap,
-   UC_Extr,
-   UC_Down,
-   UC_MAX
+   #define upgr_category_x(name) _uc_##name,
+   #include "u_data.h"
+   _uc_max,
 };
 
 enum {

@@ -14,23 +14,14 @@
 #include "u_common.h"
 #include "w_world.h"
 
-/* FIXME */
-static
-str const upgrcateg[] = {
-   [UC_Body] = sLANG "CAT_BODY",
-   [UC_Weap] = sLANG "CAT_WEAP",
-   [UC_Extr] = sLANG "CAT_EXTR",
-   [UC_Down] = sLANG "CAT_DOWN",
-};
-
 static
 void GUIUpgradesList(struct gui_state *g) {
    if(G_Button(g, .x = 77, 200, Pre(btnprev)))
       if(CBIState(g)->upgrfilter-- <= 0)
-         CBIState(g)->upgrfilter = UC_MAX;
+         CBIState(g)->upgrfilter = _uc_max;
 
    if(G_Button(g, .x = 77 + gui_p.btnprev.w, 200, Pre(btnnext)))
-      if(CBIState(g)->upgrfilter++ >= UC_MAX)
+      if(CBIState(g)->upgrfilter++ >= _uc_max)
          CBIState(g)->upgrfilter = 0;
 
    i32 numbtns = 0;
@@ -39,7 +30,7 @@ void GUIUpgradesList(struct gui_state *g) {
    str filter_name;
 
    if(filter != -1) {
-      filter_name = ns(lang(upgrcateg[filter]));
+      filter_name = ns(lang(sa_upgr_categ[filter]));
 
       for_upgrade(upgr) {
          if(upgr->info->category == filter) {
@@ -53,7 +44,7 @@ void GUIUpgradesList(struct gui_state *g) {
          numbtns++;
       }
 
-      numbtns += UC_MAX;
+      numbtns += _uc_max;
    }
 
    PrintTextFmt(tmpstr(lang(sl_cat_filter)), filter_name);
@@ -70,7 +61,7 @@ void GUIUpgradesList(struct gui_state *g) {
       } else if(upgr->info->category != curcategory) {
          curcategory = upgr->info->category;
          y += gui_p.btnlist.h;
-         PrintText_str(ns(lang(upgrcateg[curcategory])), sf_lmidfont, g->defcr, g->ox + 40,4, y + g->oy + 1,1);
+         PrintText_str(ns(lang(sa_upgr_categ[curcategory])), sf_lmidfont, g->defcr, g->ox + 40,4, y + g->oy + 1,1);
       }
 
       y += gui_p.btnlist.h;
@@ -192,7 +183,7 @@ void GUIUpgradeDescription(struct gui_state *g, struct upgrade *upgr) {
    PrintText_str(cost, sf_smallfnt, g->defcr, g->ox+98,1, g->oy+17,1);
 
    /* Category */
-   PrintText_str(ns(lang(upgrcateg[upgr->info->category])), sf_smallfnt, g->defcr, g->ox+98,1, g->oy+27,1);
+   PrintText_str(ns(lang(sa_upgr_categ[upgr->info->category])), sf_smallfnt, g->defcr, g->ox+98,1, g->oy+27,1);
 
    /* Effect */
    ifauto(str, effect, lang_fmt(LANG "UPGRADE_EFFEC_%s", upgr->info->name))

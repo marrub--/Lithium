@@ -346,12 +346,11 @@ struct setting const st_wld[] = {
 };
 
 struct {
-   str                   nam;
+   str                  *nam;
    struct setting const *set;
    mem_size_t            num;
 } const settings[] = {
-   /* FIXME */
-#define Typ(name) {sLANG "st_labl_" #name, st_##name, countof(st_##name)}
+#define Typ(name) {&sl_st_labl_##name, st_##name, countof(st_##name)}
    Typ(gui),
    Typ(hud),
    Typ(itm),
@@ -372,7 +371,7 @@ void P_CBI_TabSettings(struct gui_state *g) {
    gtab_t tn[countof(settings)];
 
    for(i32 i = 0; i < countof(settings); i++)
-      faststrcpy_str(tn[i], ns(lang(settings[i].nam)));
+      faststrcpy_str(tn[i], ns(lang(*settings[i].nam)));
 
    i32 yp = G_Tabs(g, &CBIState(g)->settingstab, tn, countof(tn), 0, 0, 1);
    yp *= gui_p.btntab.h;

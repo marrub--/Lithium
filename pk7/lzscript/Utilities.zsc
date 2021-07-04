@@ -70,12 +70,12 @@ struct Lith_UTIL
       return int(n * 1000) % 1000 < 500 ? int(n) : int(n+0.5);
    }
 
-   static vector3 traceFrom(Actor mo, double yaw, double pitch, double dist, double offsetz, bool floor = false, bool portalAware = true, ETraceFlags flags = 0) {
-      return Lith_HERMES.instance().traceFromActor(mo, yaw, pitch, dist, offsetZ, floor, portalAware, flags);
+   static vector3 traceFrom(Actor mo, double yaw, double pitch, double dist, double offsetz, bool floor = false, ETraceFlags flags = 0) {
+      return Lith_HERMES.instance().traceFromActor(mo, yaw, pitch, dist, offsetZ, floor, flags);
    }
 
-   static vector3 traceFromPos(Sector sec, vector3 pos, double yaw, double pitch, double dist, Actor ignore = null, bool floor = false, bool portalAware = true, ETraceFlags flags = 0) {
-      return Lith_HERMES.instance().traceFromPos(sec, pos, yaw, pitch, dist, ignore, floor, portalAware, flags);
+   static vector3 traceFromPos(Sector sec, vector3 pos, double yaw, double pitch, double dist, Actor ignore = null, bool floor = false, ETraceFlags flags = 0) {
+      return Lith_HERMES.instance().traceFromPos(sec, pos, yaw, pitch, dist, ignore, floor, flags);
    }
 
    static play int exec(Actor mo, int scr, int arg0 = 0, int arg1 = 0, int arg2 = 0, int arg3 = 0) {
@@ -105,14 +105,31 @@ class Lith_UTILHACK {
 }
 
 class Lith_LineTracer : LineTracer {
-   Actor m_Ignore;
+   Actor m_ignore;
 
    override ETraceStatus traceCallback() {
-      if(results.hitActor == m_Ignore) {
-         return TRACE_Skip;
-      } else {
-         return TRACE_Stop;
+      let mo = results.hitActor;
+      let ln = results.hitLine;
+      bool tomare;
+      switch(results.hitType) {
+      case TRACE_HITACTOR:
+         tomare = mo != m_ignore && mo.bShootable && mo.bSolid;
+         break;
+      case TRACE_HITWALL:
+         tomare =
+            ln.flags & (Line.ML_BLOCKEVERYTHING |
+                        Line.ML_BLOCKHITSCAN |
+                        Line.ML_BLOCKING |
+                        Line.ML_BLOCKPROJECTILE |
+                        Line.ML_BLOCK_PLAYERS) ||
+            results.tier != TIER_MIDDLE;
+         break;
+      default:
+         /* get hit, bitch */
+         tomare = true;
+         break;
       }
+      return tomare ? TRACE_STOP : TRACE_SKIP;
    }
 }
 

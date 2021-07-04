@@ -9,22 +9,21 @@
 
 extend class Lith_HERMES;
 
-clearScope vector3 traceFromPos(Sector sec, vector3 pos, double yaw, double pitch, double dist, Actor ignore, bool floor, bool portalAware, ETraceFlags flags) {
-   m_tracer.m_ignore = ignore;
+clearScope vector3 traceFromPos(Sector sec, vector3 pos, double yaw, double pitch, double dist, Actor ignore, bool floor, ETraceFlags flags) {
+   yaw   = Lith_UTIL.constDeg(yaw);
+   pitch = Lith_UTIL.constDeg(pitch);
+
    let len = cos(pitch);
-   m_tracer.trace(pos, sec, ((cos(yaw), sin(yaw)) * len, -sin(pitch)), dist, flags);
-   let end = m_tracer.results.hitPos;
-   if(portalAware) {
-      end = pos + level.vec3Diff(pos, end);
-      if(floor) {
-         end.z = m_tracer.results.hitSector.floorPlane.zAtPoint(end.xy);
-      }
-   }
-   return end;
+   let dir = (len * cos(yaw), len * sin(yaw), -sin(pitch));
+
+   m_tracer.m_ignore = ignore;
+   m_tracer.trace(pos, sec, dir, dist, flags);
+
+   return m_tracer.results.hitPos;
 }
 
-clearScope vector3 traceFromActor(Actor mo, double yaw, double pitch, double dist, double offsetZ, bool floor, bool portalAware, ETraceFlags flags) {
-   return traceFromPos(mo.curSector, mo.pos + (0.0, 0.0, offsetZ), yaw, pitch, dist, mo, floor, portalAware, flags);
+clearScope vector3 traceFromActor(Actor mo, double yaw, double pitch, double dist, double offsetZ, bool floor, ETraceFlags flags) {
+   return traceFromPos(mo.curSector, mo.pos + (0.0, 0.0, offsetZ), yaw, pitch, dist, mo, floor, flags);
 }
 
 ui static void ActuallyEndTheGame() {

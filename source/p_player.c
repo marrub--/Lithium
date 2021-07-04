@@ -709,7 +709,8 @@ void Sc_KeyToggleAutoGroup(i32 grp) {
          }
       }
 
-      if(total) ACS_LocalAmbientSound(ss_player_cbi_auto_toggle, 127);
+      if(total) ACS_LocalAmbientSound(ss_player_cbi_auto_toggle,  127);
+      else      ACS_LocalAmbientSound(ss_player_cbi_auto_invalid, 127);
 
       i32 fmt = total ? grp + 1 : grp + 5;
       pl.logH(1, tmpstr(lang_fmt(LANG "LOG_GroupToggle%i", fmt)));

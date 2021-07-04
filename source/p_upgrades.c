@@ -33,9 +33,9 @@ bool UpgrGive(struct shopdef const *, void *upgr_, i32 tid) {
    SetMembI(tid, sm_UpgradeId, upgr->info->key);
 
    switch(upgr->info->category) {
-   case UC_Body: SetMembI(tid, sm_UpgradeBody, true); break;
-   case UC_Weap: SetMembI(tid, sm_UpgradeWeap, true); break;
-   default:      SetMembI(tid, sm_UpgradeExtr, true); break;
+   case _uc_body: SetMembI(tid, sm_UpgradeBody, true); break;
+   case _uc_weap: SetMembI(tid, sm_UpgradeWeap, true); break;
+   default:       SetMembI(tid, sm_UpgradeExtr, true); break;
    }
 
    return true;
@@ -77,7 +77,7 @@ void P_Upg_SetOwned(struct upgrade *upgr) {
    set_bit(upgr->flags, _ug_owned);
    pl.upgradesowned++;
 
-   if(upgr->info->category == UC_Body && upgr->info->cost == 0)
+   if(upgr->info->category == _uc_body && upgr->info->cost == 0)
       P_Upg_Toggle(upgr);
 }
 
