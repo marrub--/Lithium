@@ -7,25 +7,28 @@
 ## ---------------------------------------------------------------------------|
 
 ## UI ------------------------------------------------------------------------|
-== \#EFFECT     | 効果
-== \#FREE       | 無料
-== \#CATEGORY   | 種類
-== \#SCOREMULT  | スコア倍率
-== \#BUY        | 買う
-== \#DEACTIVATE | 解除
 == \#ACTIVATE   | 起動
-== \#EDIT       | 編集
+== \#AUTOGROUPS | アクティブオートグループ
+== \#BUY        | 買う
+== \#CATEGORY   | 種類
 == \#CLEAR      | クリア
-== \#MOVE       | 動く
-== \#USE        | 使う
-== \#SELL       | 売る
-== \#DISCARD    | 捨てる
-== \#REQUIRED   | 必要
-== \#EQUIP      | 装備
-== \#OPEN       | 開ける
 == \#CLOSE      | 閉じる
+== \#DEACTIVATE | 解除
+== \#DISCARD    | 捨てる
+== \#DOWN       | 下へ
+== \#EDIT       | 編集
+== \#EFFECT     | 効果
 == \#EMPTY      | 空
+== \#EQUIP      | 装備
+== \#FREE       | 無料
+== \#MOVE       | 動く
 == \#NOTE_FMT   | \cm%iつのノート
+== \#OPEN       | 開ける
+== \#REQUIRED   | 必要
+== \#SCOREMULT  | スコア倍率
+== \#SELL       | 売る
+== \#UP         | 上へ
+== \#USE        | 使う
 
 == \#CAT_BODY | \cn素体
 == \#CAT_WEAP | \ca武器

@@ -74,12 +74,7 @@ void G_Auto(struct gui_state *g, gid_t id, i32 x, i32 y, i32 w, i32 h,
 }
 
 void G_UpdateState(struct gui_state *g) {
-   /* Due to ZDoom being ZDoom, GetUserCVar with invertmouse does
-    * nothing. This breaks network sync so we can only do it in
-    * single-player.
-    */
-   bool inverted = CVarGetI(sc_player_invertmouse);
-   if(singleplayer) inverted |= CVarGetI(sc_invertmouse);
+   bool inverted = CVarGetI(sc_invertmouse);
 
    g->old = g->cur;
 

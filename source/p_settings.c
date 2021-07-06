@@ -192,7 +192,7 @@ bool S_isEnabled(struct setting const *st) {
 #define S_bndi(min, max) .bnd = {.i = {min, max}}
 #define S_bndk(min, max) .bnd = {.k = {min, max}}
 
-#define S_color S_bndi('a', 'z' + _gcr_max), "color"
+#define S_color S_bndi(_gcr_first, _gcr_max), "color"
 
 #define S_cvEnabl .cb_e = SE_server
 #define S_cvBoole S_cvEnabl, .cb_g = {.b = SG_cvBoole}
@@ -205,7 +205,7 @@ struct setting const st_gui[] = {
    {S_enume, "gui_theme",     S_cvInteg, S_bndi(0, cbi_theme_max), "theme"},
    {S_fixed, "gui_xmul",      S_cvFixed, S_bndk(0.1, 2.0), "mult"},
    {S_fixed, "gui_ymul",      S_cvFixed, S_bndk(0.1, 2.0), "mult"},
-   {S_integ, "gui_buyfiller", S_cvInteg, S_bndi(0, 70),  "tick"},
+   {S_integ, "gui_buyfiller", S_cvInteg, S_bndi(0, 70), "tick"},
    {S_empty},
    {S_enume, "gui_jpfont", S_cvInteg, S_bndi(0, font_num), "jpfont"},
    {S_empty},
@@ -218,6 +218,7 @@ struct setting const st_hud[] = {
    {S_boole, "hud_showarmorind", S_cvBoole},
    {S_boole, "hud_showdamage",   S_cvBoole},
    {S_boole, "hud_showitems",    S_cvBoole},
+   {S_enume, "hud_itemcolor",    S_cvInteg, S_color},
    {S_boole, "hud_showlvl",      S_cvBoole},
    {S_boole, "hud_showscore",    S_cvBoole},
    {S_boole, "hud_showweapons",  S_cvBoole},
@@ -294,7 +295,6 @@ struct setting const st_ply[] = {
    {S_boole, "player_damagebob",    S_cvBoole},
    {S_fixed, "player_damagebobmul", S_cvFixed, S_bndk(0.0, 1.0), "mult"},
    {S_empty},
-   {S_boole, "player_invertmouse",  S_cvBoole},
    {S_boole, "player_resultssound", S_cvBoole},
    {S_boole, "st_done_intro",       .cb_g = {.b = SG_doneIntro}},
    {S_fixed, "player_footstepvol",  S_cvFixed, S_bndk(0.0, 1.0), "mult"},

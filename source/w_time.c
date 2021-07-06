@@ -62,21 +62,14 @@ cstr CanonTime(i32 type, u64 time) {
 
 void FreezeTime(bool players_ok) {
    frozen++;
-
-   bool players_ok_mask = !singleplayer;
-
    if(!players_ok) pl.frozen++;
-   if(!pl.frozen)  players_ok_mask = true;
-
-   ServCallI(sm_SetFrozen, true, players_ok_mask);
+   ServCallI(sm_SetFrozen, true, !pl.frozen);
 }
 
 void UnfreezeTime(bool players_ok) {
    if(frozen < 1) return;
-
    frozen--;
    if(!players_ok) pl.frozen--;
-
    if(frozen < 1) ServCallI(sm_SetFrozen, false, 0);
 }
 

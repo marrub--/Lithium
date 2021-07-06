@@ -12,7 +12,7 @@ class Lith_WandererPlayer : Lith_Player {
       Player.DisplayName "$LITH_CLASS_WANDERER";
       Player.SoundClass "wanderer";
       Player.Portrait "lgfx/Portraits/Wanderer.png";
-      Tag "Wanderer";
+      Tag "$LITH_CLASS_WANDERER";
       Health 50;
    }
 

@@ -188,7 +188,7 @@ void F_fade(struct finale_state *st) {
       F_drawBack(st);
       F_drawFade(i / (k32)fade);
       ACS_Delay(1);
-      DrawCallI(sm_LE);
+      EndDrawing();
    }
 }
 
@@ -209,7 +209,7 @@ void F_fmus(struct finale_state *st) {
       F_drawBack(st);
       ACS_SetMusicVolume(i / (k32)fade);
       ACS_Delay(1);
-      DrawCallI(sm_LE);
+      EndDrawing();
    }
 }
 
@@ -279,7 +279,7 @@ void F_text(struct finale_state *st) {
       }
 
       ACS_Delay(1);
-      DrawCallI(sm_LE);
+      EndDrawing();
    }
 }
 
@@ -290,7 +290,7 @@ void F_wait(struct finale_state *st) {
    for(i32 i = hold; i >= 0; i--) {
       F_drawBack(st);
       ACS_Delay(1);
-      DrawCallI(sm_LE);
+      EndDrawing();
    }
 }
 

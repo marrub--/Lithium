@@ -9,9 +9,9 @@
 
 class Lith_FistPickup : Lith_WeaponPickup replaces Fist {
    default {
+      Tag "$LITH_TAG_Weapon0";
       Lith_WeaponPickup.WepName wepnam_fist;
       Lith_WeaponPickup.Sprite "FISTA";
-      Tag "Fist Pickup";
 
       +LITH_WEAPONPICKUP.PKUP_GENERIC
    }
@@ -19,90 +19,82 @@ class Lith_FistPickup : Lith_WeaponPickup replaces Fist {
 
 class Lith_ChainsawPickup : Lith_WeaponPickup replaces Chainsaw {
    default {
+      Tag "$LITH_TAG_Weapon1";
       Lith_WeaponPickup.WepName wepnam_chainsaw;
       Lith_WeaponPickup.Sprite  "LWEPA";
       Lith_WeaponPickup.SpriteM "CFISZ";
       Lith_WeaponPickup.SpriteC "CFISY";
-
-      Tag "Chainsaw Pickup";
    }
 }
 
 class Lith_PistolPickup : Lith_WeaponPickup replaces Pistol {
    default {
+      Tag "$LITH_TAG_Weapon2";
       Lith_WeaponPickup.WepName wepnam_pistol;
       Lith_WeaponPickup.Sprite  "LWEPB";
       Lith_WeaponPickup.SpriteM "PISTA";
       Lith_WeaponPickup.SpriteC "REVLA";
-
-      Tag "Pistol Pickup";
    }
 }
 
 class Lith_ShotgunPickup : Lith_WeaponPickup replaces Shotgun {
    default {
+      Tag "$LITH_TAG_Weapon3";
       Lith_WeaponPickup.WepName wepnam_shotgun;
       Lith_WeaponPickup.Sprite  "LWEPC";
       Lith_WeaponPickup.SpriteM "SHOTA";
       Lith_WeaponPickup.SpriteC "CSRGZ";
-
-      Tag "Shotgun Pickup";
    }
 }
 
 class Lith_SuperShotgunPickup : Lith_WeaponPickup replaces SuperShotgun {
    default {
+      Tag "$LITH_TAG_Weapon4";
       Lith_WeaponPickup.WepName wepnam_supershotgun;
       Lith_WeaponPickup.Sprite  "LWEPC";
       Lith_WeaponPickup.SpriteM "SSGGX";
       Lith_WeaponPickup.SpriteC "CSHGY";
-
-      Tag "Super Shotgun Pickup";
    }
 }
 
 class Lith_ChaingunPickup : Lith_WeaponPickup replaces Chaingun {
    default {
+      Tag "$LITH_TAG_Weapon5";
       Lith_WeaponPickup.WepName wepnam_chaingun;
       Lith_WeaponPickup.Sprite  "LWEPD";
       Lith_WeaponPickup.SpriteM "RIFLA";
       Lith_WeaponPickup.SpriteC "CSMGY";
       Lith_WeaponPickup.SpriteD "MNGGZ";
-
-      Tag "Chaingun Pickup";
    }
 }
 
 class Lith_RocketLauncherPickup : Lith_WeaponPickup replaces RocketLauncher {
    default {
+      Tag "$LITH_TAG_Weapon6";
       Lith_WeaponPickup.WepName wepnam_rocketlauncher;
       Lith_WeaponPickup.Sprite  "LWEPE";
       Lith_WeaponPickup.SpriteM "LAUNA";
       Lith_WeaponPickup.SpriteC "IONGZ";
-
-      Tag "Rocket Launcher Pickup";
    }
 }
 
 class Lith_PlasmaRiflePickup : Lith_WeaponPickup replaces PlasmaRifle {
    default {
+      Tag "$LITH_TAG_Weapon7";
       Lith_WeaponPickup.WepName wepnam_plasmarifle;
       Lith_WeaponPickup.Sprite  "LWEPF";
       Lith_WeaponPickup.SpriteM "PLASA";
       Lith_WeaponPickup.SpriteC "CPLGZ";
-
-      Tag "Plasma Rifle Pickup";
    }
 }
 
 class Lith_BFG9000Pickup : Lith_WeaponPickup replaces BFG9000 {
    default {
+      Tag "$LITH_TAG_Weapon8";
       Lith_WeaponPickup.WepName wepnam_bfg9000;
       Lith_WeaponPickup.Sprite  "LWEPG";
       Lith_WeaponPickup.SpriteM "BFUGA";
       Lith_WeaponPickup.SpriteC "SDSGZ";
-
-      Tag "BFG9000 Pickup";
    }
 }
 

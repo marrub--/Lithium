@@ -19,7 +19,7 @@ class Lith_InformantPlayer : Lith_Player
       Player.ViewHeight 44;
       Player.AttackZOffset 11;
       Player.JumpZ 14;
-      Tag "Informant";
+      Tag "$LITH_CLASS_INFORMANT";
 
       +NOBLOOD;
    }

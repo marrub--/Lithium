@@ -258,13 +258,6 @@ script void P_Init() {
       pl.maxhealth    = pl.spawnhealth;
       pl.discount     = 1.0;
       pl.stepnoise    = StrParam("player/%S/step", pl.classname);
-
-      switch(ACS_GetPlayerInfo(pl.num, PLAYERINFO_GENDER)) {
-         case 0: pl.pronoun = pro_male;   break;
-         case 1: pl.pronoun = pro_female; break;
-         case 2: pl.pronoun = pro_nb;     break;
-         case 3: pl.pronoun = pro_object; break;
-      }
    }
 
    fastmemset(&pl.old, 0, sizeof pl.old);
@@ -301,6 +294,7 @@ script void P_Init() {
 
    pl.bobpitch = 0;
    pl.bobyaw   = 0;
+   pl.bobroll  = 0;
 
    pl.extrpitch = 0;
    pl.extryaw   = 0;

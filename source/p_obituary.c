@@ -14,19 +14,57 @@
 #include "common.h"
 #include "p_player.h"
 
-/* Scripts ----------------------------------------------------------------- */
+enum {
+   _pn_sub,
+   _pn_obj,
+   _pn_psd,
+   _pn_psi,
+   _pn_act,
+   _pn_max
+};
+
+typedef cstr pronoun_set[_pn_max];
 
 script_str ext("ACS") addr(OBJ "Obituary")
 void Sc_Obituary(void) {
    static
-   struct {
-      cstr sub, obj, psd, psi, act;
-   } const pronoun[pro_max] = {
-      {"they", "them", "their", "theirs", "they're"},
-      {"she",  "her",  "her",   "hers",   "she's"  },
+   pronoun_set const defaultpronoun[] = {
       {"he",   "him",  "his",   "his",    "he's"   },
+      {"she",  "her",  "her",   "hers",   "she's"  },
+      {"they", "them", "their", "theirs", "they're"},
       {"it",   "it",   "its",   "its'",   "it's"   },
    };
+
+   noinit static
+   char pbuf[64];
+
+   noinit static
+   pronoun_set set;
+
+   ifw(str pset = CVarGetS(sc_player_pronouns), pset == st_nil) {
+      fastmemcpy(set,
+                 &defaultpronoun[ACS_GetPlayerInfo(pl.num, PLAYERINFO_GENDER)],
+                 sizeof(pronoun_set));
+   } else {
+      faststrcpy_str(pbuf, pset);
+
+      i32 i = 0;
+      for(char *next = nil,
+               *word = faststrtok(pbuf, &next, '/');
+          word && i < _pn_max;
+          word = faststrtok(nil, &next, '/')
+      ) {
+         set[i++] = word;
+      }
+
+      switch(i) {
+      case _pn_obj: set[i++] = set[_pn_sub];
+      case _pn_psd: set[i++] = set[_pn_psd];
+      case _pn_psi: set[i++] = set[_pn_psi];
+      case _pn_act: set[i++] = set[_pn_act];
+      case _pn_max: set[i++] = set[_pn_sub];
+      }
+   }
 
    str obit = ServCallS(sm_GetObituary);
    if(obit == st_nil) return;
@@ -52,15 +90,19 @@ void Sc_Obituary(void) {
       str st;
       i32 ln;
 
-      if(s[0] == '%') switch(s[1]) {
-         case 'o': s += 2; st = pl.name;                 goto print_s;
-         case 'g': s += 2; cs = pronoun[pl.pronoun].sub; goto print;
-         case 'h': s += 2; cs = pronoun[pl.pronoun].obj; goto print;
-         case 'p': s += 2; cs = pronoun[pl.pronoun].psd; goto print;
-         case 's': s += 2; cs = pronoun[pl.pronoun].psi; goto print;
-         case 'r': s += 2; cs = pronoun[pl.pronoun].act; goto print;
-      print:   ln = faststrlen(cs);     faststrcpy(pt, cs); pt += ln; continue;
-      print_s: ln = ACS_StrLen(st); faststrcpy_str(pt, st); pt += ln; continue;
+      if(*s == '%') {
+         switch(*++s) {
+         case 'o': st = pl.name;      goto print_s;
+         case 'g': cs = set[_pn_sub]; goto print;
+         case 'h': cs = set[_pn_obj]; goto print;
+         case 'p': cs = set[_pn_psd]; goto print;
+         case 's': cs = set[_pn_psi]; goto print;
+         case 'r': cs = set[_pn_act]; goto print;
+         print:   ln = faststrlen(cs);     faststrcpy(pt, cs); pt += ln; break;
+         print_s: ln = ACS_StrLen(st); faststrcpy_str(pt, st); pt += ln; break;
+         }
+         ++s;
+         continue;
       }
 
       *pt++ = *s++;
@@ -68,9 +110,10 @@ void Sc_Obituary(void) {
 
    *pt = '\0';
 
-   if(obit != st_nil) {
+   if(out[0]) {
+      i32 time = 0;
       Dbg_Log(log_dev, "%s", out);
-      pl.logB(1, "%s", out);
+      pl.obit = out;
    }
 }
 

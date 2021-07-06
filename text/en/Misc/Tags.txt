@@ -1,0 +1,55 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison G. Watson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
+## Tags ----------------------------------------------------------------------|
+
+== \#TAG_BlurSphere    | Fragma
+== \#TAG_GreyHam       | Grey Ham
+== \#TAG_Megasphere    | Tao'chyan
+== \#TAG_SoulSphere    | Heart
+== \#TAG_SteggleSphere | Steggle Sphere
+== \#TAG_ShobonSphere  | Shobon Sphere
+
+== \#TAG_Weapon0 | Slot 1 Weapon (Basic)
+== \#TAG_Weapon1 | Slot 1 Weapon (Adv.)
+== \#TAG_Weapon2 | Slot 2 Weapon
+== \#TAG_Weapon3 | Slot 3 Weapon (Basic)
+== \#TAG_Weapon4 | Slot 3 Weapon (Adv.)
+== \#TAG_Weapon5 | Slot 4 Weapon
+== \#TAG_Weapon6 | Slot 5 Weapon
+== \#TAG_Weapon7 | Slot 6 Weapon
+== \#TAG_Weapon8 | Slot 7 Weapon
+
+== \#TAG_Upgrade1 | CBI Upgrade #1
+== \#TAG_Upgrade2 | CBI Upgrade #2
+== \#TAG_Upgrade3 | CBI Upgrade #3
+== \#TAG_Upgrade4 | CBI Upgrade #4
+== \#TAG_Upgrade5 | CBI Upgrade #5
+== \#TAG_Upgrade6 | CBI Upgrade #6
+
+== \#TAG_Sword        | sord
+== \#TAG_WingsOfDeath | Wings of Death
+
+== \#TAG_DSparil         | D'Sparil
+== \#TAG_Disciple        | Disciple of D'Sparil
+== \#TAG_Gargoyle        | Gargoyle
+== \#TAG_GargoyleFire    | Fire Gargoyle
+== \#TAG_Golem           | Golem
+== \#TAG_GolemGhost      | Ethereal Golem
+== \#TAG_IronLich        | Iron Lich
+== \#TAG_Maulotaur       | Maulotaur
+== \#TAG_Nitrogolem      | Nitrogolem
+== \#TAG_NitrogolemGhost | Ethereal Nitrogolem
+== \#TAG_Ophidian        | Ophidian
+== \#TAG_Sabreclaw       | Sabreclaw
+== \#TAG_SpectralWarrior | Spectral Warrior
+== \#TAG_Steggles        | steggles
+== \#TAG_UndeadWarrior   | Undead Warrior
+== \#TAG_Weredragon      | Weredragon
+
+## EOF

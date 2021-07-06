@@ -66,7 +66,6 @@ private transient play FadeMsg[256] m_FadeMsg;
 private transient play vector2 m_VirtualSize;
 private transient play int m_BreakWidth;
 private transient play bool m_NoDraw;
-private transient play bool m_ForceDraw;
 
 private transient Font m_UFntSml;
 
@@ -79,13 +78,8 @@ private transient bool m_English;
 
 /* Static Functions -------------------------------------------------------- */
 
-static void ForceDraw(bool on) {
-   Lith_URANUS(Find("Lith_URANUS")).m_ForceDraw = on;
-}
-
-static void LZ(Actor mo, int w, int h) {
+static void LZ(int w, int h) {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
-   if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return;
 
    let p = cl.m_DPtr;
 
@@ -99,9 +93,8 @@ static void LZ(Actor mo, int w, int h) {
    cl.m_VirtualSize = (w, h);
 }
 
-static void LF(Actor mo, int fnum, int time, int speed, double alpha) {
+static void LF(int fnum, int time, int speed, double alpha) {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
-   if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return;
 
    cl.m_FadeMsg[fnum].Time = time;
    cl.m_FadeMsg[fnum].FSub = speed;
@@ -109,23 +102,20 @@ static void LF(Actor mo, int fnum, int time, int speed, double alpha) {
    cl.m_FadeMsg[fnum].Fade = 255;
 }
 
-static bool LX(Actor mo, int num) {
+static bool LX(int num) {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
-   if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return false;
    return cl.m_FadeMsg[num].Fade > 0 && cl.m_FadeMsg[num].Alph > 0;
 }
 
-static int LY(Actor mo, int num) {
+static int LY(int num) {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
-   if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return false;
    return int(cl.m_FadeMsg[num].Fade / 255.0 *
               cl.m_FadeMsg[num].Alph / 255.0 *
               255.0);
 }
 
-static void LL(Actor mo, int x, int y, int z, int w, color c = 0) {
+static void LL(int x, int y, int z, int w, color c = 0) {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
-   if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return;
 
    if(cl.m_NoDraw) return;
    let p = cl.m_DPtr;
@@ -140,9 +130,8 @@ static void LL(Actor mo, int x, int y, int z, int w, color c = 0) {
    cl.m_DPtr++;
 }
 
-static void LS(Actor mo, string tex, int xx, int yy, double anum, int flags, color cr = 0) {
+static void LS(string tex, int xx, int yy, double anum, int flags, color cr = 0) {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
-   if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return;
    if(cl.m_NoDraw) return;
 
    int  x  = xx & _xmask;
@@ -199,9 +188,8 @@ static void LS(Actor mo, string tex, int xx, int yy, double anum, int flags, col
    cl.m_DPtr++;
 }
 
-static void LT(Actor mo, string txt, string fnt, int xx, int yy, double anum, int cr, int flags) {
+static void LT(string txt, string fnt, int xx, int yy, double anum, int cr, int flags) {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
-   if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return;
    if(cl.m_NoDraw) return;
 
    int  x  = xx & _xmask;
@@ -279,9 +267,8 @@ static void LT(Actor mo, string txt, string fnt, int xx, int yy, double anum, in
    cl.m_DPtr++;
 }
 
-static void LC(Actor mo, int x = 0, int y = 0, int w = 0, int h = 0, int ww = 0) {
+static void LC(int x = 0, int y = 0, int w = 0, int h = 0, int ww = 0) {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
-   if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return;
 
    let p = cl.m_DPtr;
 
@@ -302,9 +289,8 @@ static void LC(Actor mo, int x = 0, int y = 0, int w = 0, int h = 0, int ww = 0)
    cl.m_DPtr++;
 }
 
-static void LR(Actor mo, int x = 0, int y = 0, int w = 0, int h = 0, color cr = 0) {
+static void LR(int x = 0, int y = 0, int w = 0, int h = 0, color cr = 0) {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
-   if(!cl.m_ForceDraw && mo != Players[ConsolePlayer].Camera) return;
 
    if(cl.m_NoDraw) return;
    let p = cl.m_DPtr;
@@ -509,8 +495,8 @@ private ui void drawNearbyItems(RenderEvent evt) {
             double dist  = mo.distance3D(evt.camera);
             double alpha = 1.0 - clamp(dist / 256.0, 0.0, 1.0);
             int    sw    = fnt.stringWidth(tag);
-            Screen.DrawText(fnt, Font.CR_WHITE, px - sw / 2, py, tag,
-                            DTA_Alpha,alpha,
+            int    cr    = ACS_ExecuteWithResult(lsc_drawcr, lith_hud_itemcolor);
+            Screen.DrawText(fnt, cr, px - sw / 2, py, tag, DTA_Alpha,alpha,
                             DTA_VirtualWidth,320, DTA_VirtualHeight,240);
          }
       }

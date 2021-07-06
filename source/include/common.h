@@ -105,7 +105,6 @@
 #define SetFriction(tid, x)         SetPropK(tid, APROP_Friction,         x)
 #define SetGravity(tid, x)          SetPropK(tid, APROP_Gravity,          x)
 #define SetHealth(tid, x)           SetPropI(tid, APROP_Health,           x)
-#define SetMasterTID(tid, x)        SetPropK(tid, APROP_MasterTID,        x)
 #define SetNameTag(tid, x)          SetPropS(tid, APROP_NameTag,          x)
 #define SetSpawnHealth(tid, x)      SetPropI(tid, APROP_SpawnHealth,      x)
 #define SetSpecies(tid, x)          SetPropS(tid, APROP_Species,          x)
@@ -194,7 +193,6 @@ void PtrInvSet (i32 tid, str item, i32 amount);
 void Dbg_Stat_Impl(cstr fmt, ...);
 void Dbg_Note_Impl(cstr fmt, ...);
 void Dbg_PrintMem(void const *data, mem_size_t size);
-void Dbg_PrintMemC(void const *data, mem_size_t size);
 void Log(cstr fmt, ...);
 #endif
 

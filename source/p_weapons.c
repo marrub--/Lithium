@@ -140,8 +140,8 @@ void P_Wep_PTickPre()
       {
          if(wep->ammotype & AT_NMag)
          {
-            wep->magmax = ServCallI(sm_GetMaxMag, pl.num, wep->info->classname);
-            wep->magcur = ServCallI(sm_GetCurMag, pl.num, wep->info->classname);
+            wep->magmax = ServCallI(sm_GetMaxMag, wep->info->classname);
+            wep->magcur = ServCallI(sm_GetCurMag, wep->info->classname);
          }
 
          if(wep->ammotype & AT_Ammo)
@@ -155,7 +155,7 @@ void P_Wep_PTickPre()
       if(pl.autoreload && wep->ammotype & AT_NMag && !(wep->ammotype & AT_Mana))
       {
          if(wep->autoreload >= 35 * 3)
-            ServCallI(sm_AutoReload, pl.num, info->classname);
+            ServCallI(sm_AutoReload, info->classname);
 
          if(w->cur != wep) wep->autoreload++;
          else              wep->autoreload = 0;

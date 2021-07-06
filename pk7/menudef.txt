@@ -68,6 +68,7 @@ ListMenu "SkillMenu"
    StaticTextCentered 160, 30, "$MENU_CHOOSESKILL"
    StaticPatch 42, 48, "lgfx/Menu/SkillBack.png"
    Position 48, 63
+   Font "bigupper", "DarkGreen", "Green"
 }
 
 ListMenu "UpdateMenu"
@@ -79,8 +80,8 @@ ListMenu "UpdateMenu"
    LineSpacing 10
    Position 20, 0
 
-   Lith_UpdateScroll "Up",   "u", 1
-   Lith_UpdateScroll "Down", "d", 0
+   Lith_UpdateScroll "$LITH_UP",   "u", 1
+   Lith_UpdateScroll "$LITH_DOWN", "d", 0
 }
 
 /* EOF */

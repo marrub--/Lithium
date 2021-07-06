@@ -58,7 +58,7 @@ class Lith_BlurSphere : Inventory;
 
 default
 {
-   Tag "Fragma";
+   Tag "$LITH_TAG_BlurSphere";
    Inventory.PickupMessage "";
    Inventory.PickupSound "player/pickup/barrier";
 

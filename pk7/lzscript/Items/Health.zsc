@@ -27,7 +27,7 @@ class Lith_Stimpack : Lith_HealthItem replaces Stimpack
 {
    default
    {
-      Tag "Stimpack";
+      Tag "$LITH_INFO_SHORT_Stimpack";
       Lith_HealthItem.Amount 10;
       Lith_BasicPickup.LogName "Stimpack", 3;
       Lith_BasicPickup.InfoPage "Stimpack";
@@ -46,7 +46,7 @@ class Lith_Medikit : Lith_HealthItem replaces Medikit
 {
    default
    {
-      Tag "Medikit";
+      Tag "$LITH_INFO_SHORT_Medikit";
       Lith_HealthItem.Amount 25;
       Lith_BasicPickup.LogName "Medikit", 3;
       Lith_BasicPickup.InfoPage "Medikit";

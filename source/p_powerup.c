@@ -19,55 +19,23 @@
 /* Scripts ----------------------------------------------------------------- */
 
 alloc_aut(0) script_str ext("ACS") addr(OBJ "DOGS")
-void Sc_DOGS(void)
-{
-   if(!P_None())
+void Sc_DOGS(void) {
+   i32 tid = ACS_UniqueTID();
+
+   ACS_SetMusic(sp_lmusic_DOGS);
+
+   for(i32 i = 0; i < (35 * 30) / 10; i++)
    {
-      i32 tid = ACS_UniqueTID();
-
-      ACS_SetMusic(sp_lmusic_DOGS);
-
-      for(i32 i = 0; i < (35 * 30) / 10; i++)
-      {
-         k32 ang = ACS_RandomFixed(0, 1);
-         k32 dst = ACS_RandomFixed(0, 64);
-         ACS_SpawnForced(so_Steggles, pl.x + ACS_Cos(ang) * dst, pl.y + ACS_Sin(ang) * dst, pl.z + 8, tid);
-         ServCallI(sm_AlertMonsters);
-         ACS_Delay(10);
-      }
-
-      ACS_Delay(35);
-
-      ACS_SetMusic(sp_lsounds_Silence);
-
-      SetMasterTID(tid, pl.tid);
-      ACS_SetActorState(tid, sm_PureSteggleEnergy);
+      k32 ang = ACS_RandomFixed(0, 1);
+      k32 dst = ACS_RandomFixed(0, 64);
+      ACS_SpawnForced(so_Steggles, pl.x + ACS_Cos(ang) * dst, pl.y + ACS_Sin(ang) * dst, pl.z + 8, tid);
+      ServCallI(sm_AlertMonsters);
+      ACS_Delay(10);
    }
-}
 
-alloc_aut(0) script_str ext("ACS") addr(OBJ "SteggleEnergy")
-void Sc_SteggleEnergy(void)
-{
-   if(!P_None() && PtrPlayerNumber(0, AAPTR_FRIENDPLAYER) >= 0)
-   {
-      ACS_SetPointer(AAPTR_TARGET, 0, AAPTR_FRIENDPLAYER);
-
-      for(;;)
-      {
-         k32 x = GetX(0);
-         k32 y = GetY(0);
-         k32 z = GetZ(0);
-
-         k32 nx = lerpk(x, pl.x, 0.01);
-         k32 ny = lerpk(y, pl.y, 0.01);
-         k32 nz = lerpk(z, pl.z, 0.01);
-
-         ACS_Warp(0, nx, ny, nz, 0, WARPF_ABSOLUTEPOSITION|WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE);
-         ACS_SetActorAngle(0, ACS_VectorAngle(pl.x - x, pl.y - y));
-
-         ACS_Delay(1);
-      }
-   }
+   ACS_Delay(35);
+   ACS_SetMusic(sp_lsounds_Silence);
+   ACS_SetActorState(tid, sm_PureSteggleEnergy);
 }
 
 script_str ext("ACS") addr(OBJ "BarrierBullets")

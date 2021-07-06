@@ -7,26 +7,28 @@
 ## ---------------------------------------------------------------------------|
 
 ## UI ------------------------------------------------------------------------|
-== \#EFFECT     | Effect:
-== \#FREE       | Free
-== \#CATEGORY   | Category
-== \#SCOREMULT  | Score Multiplier
-== \#BUY        | Buy
-== \#DEACTIVATE | Deactivate
 == \#ACTIVATE   | Activate
-== \#EDIT       | Edit
-== \#CLEAR      | Clear
-== \#MOVE       | Move
-== \#USE        | Use
-== \#SELL       | Sell
-== \#DISCARD    | Discard
-== \#REQUIRED   | Required
-== \#EQUIP      | Equip
-== \#OPEN       | Open
-== \#CLOSE      | Close
-== \#EMPTY      | <empty>
-== \#NOTE_FMT   | \cmNote %i
 == \#AUTOGROUPS | Active Auto-groups
+== \#BUY        | Buy
+== \#CATEGORY   | Category
+== \#CLEAR      | Clear
+== \#CLOSE      | Close
+== \#DEACTIVATE | Deactivate
+== \#DISCARD    | Discard
+== \#DOWN       | Down
+== \#EDIT       | Edit
+== \#EFFECT     | Effect:
+== \#EMPTY      | <empty>
+== \#EQUIP      | Equip
+== \#FREE       | Free
+== \#MOVE       | Move
+== \#NOTE_FMT   | \cmNote %i
+== \#OPEN       | Open
+== \#REQUIRED   | Required
+== \#SCOREMULT  | Score Multiplier
+== \#SELL       | Sell
+== \#UP         | Up
+== \#USE        | Use
 
 == \#CAT_BODY | \cnBody
 == \#CAT_WEAP | \caWeapon

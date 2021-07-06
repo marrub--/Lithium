@@ -9,72 +9,66 @@
 
 extend class Lith_HERMES;
 
-static int GetMaxMag(int pnum, string cname)
-{
-   PlayerInfo p = Players[pnum];
-   let wep = p && p.MO ? Lith_Weapon(p.MO.FindInventory(cname)) : null;
-   return wep ? wep.m_Max : -1;
+static int GetMaxMag(string cname) {
+   let p   = players[consolePlayer].mo;
+   let wep = p ? Lith_Weapon(p.findInventory(cname)) : null;
+   return wep ? wep.m_max : -1;
 }
 
-static int GetCurMag(int pnum, string cname)
-{
-   PlayerInfo p = Players[pnum];
-   let wep = p && p.MO ? Lith_Weapon(p.MO.FindInventory(cname)) : null;
-   return wep ? wep.m_Fired : -1;
+static int GetCurMag(string cname) {
+   let p   = players[consolePlayer].mo;
+   let wep = p ? Lith_Weapon(p.findInventory(cname)) : null;
+   return wep ? wep.m_fired : -1;
 }
 
-static void AutoReload(int pnum, string cname)
-{
-   PlayerInfo p = Players[pnum];
-   let wep = p && p.MO ? Lith_Weapon(p.MO.FindInventory(cname)) : null;
-   if(wep) wep.Lith_ReloadFinish(true);
+static void AutoReload(string cname) {
+   let p   = players[consolePlayer].mo;
+   let wep = p ? Lith_Weapon(p.findInventory(cname)) : null;
+   if(wep) wep.lith_reloadFinish(true);
 }
 
-static bool GetRifleGrenade(Actor p)
-{
-   return !Lith_CombatRifle(p.FindInventory("Lith_CombatRifle")).m_GrenFire;
+static bool GetRifleGrenade(Actor p) {
+   return !Lith_CombatRifle(p.findInventory("Lith_CombatRifle")).m_grenFire;
 }
 
-static void Lith_IonizeFX(Actor mo) {
+static void IonizeFX(Actor mo) {
    Lith_CopyEffect.create("Lith_IonizedFx", mo);
 }
 
-static void DelearSprite(Actor mo_)
-{
+static void DelearSprite_(Actor mo, double cp, double sp, double a, int x, int y) {
+   mo.a_spawnItemEx("Lith_DelearSprite", cp, x,(mo.height - 19)+y-sp,mo.vel.x,mo.vel.y,mo.vel.z,a,SXF_ISMASTER|SXF_NOCHECKPOSITION|SXF_ABSOLUTEVELOCITY|SXF_ABSOLUTEANGLE);
+}
+
+static void DelearSprite(Actor mo_) {
    let mo = Lith_Player(mo_);
-   let w = Lith_Delear(mo.FindInventory("Lith_Delear"));
+   let w  = Lith_Delear(mo.FindInventory("Lith_Delear"));
    if(!w) return;
-   int sf = w.m_Fired;
-   int flags = SXF_ISMASTER|SXF_NOCHECKPOSITION|SXF_ABSOLUTEVELOCITY|SXF_ABSOLUTEANGLE;
-   double a = mo.m_IYaw;
+
+   double a  = mo.m_IYaw;
    double cp = Cos(mo.m_IPitch) * 32;
    double sp = Sin(mo.m_IPitch) * 32;
-   double h = mo.Height - 19;
-   double vx = mo.Vel.X;
-   double vy = mo.Vel.Y;
-   double vz = mo.Vel.Z;
-   switch(sf) {
-   case  0: mo.A_SpawnItemEx("Lith_DelearSprite", cp, -8,h+18-sp,vx,vy,vz,a,flags);
-   case  1: mo.A_SpawnItemEx("Lith_DelearSprite", cp,-12,h+16-sp,vx,vy,vz,a,flags);
-   case  2: mo.A_SpawnItemEx("Lith_DelearSprite", cp,-16,h+14-sp,vx,vy,vz,a,flags);
-   case  3: mo.A_SpawnItemEx("Lith_DelearSprite", cp,-20,h+12-sp,vx,vy,vz,a,flags);
-   case  4: mo.A_SpawnItemEx("Lith_DelearSprite", cp, -8,h+8 -sp,vx,vy,vz,a,flags);
-   case  5: mo.A_SpawnItemEx("Lith_DelearSprite", cp,-12,h+6 -sp,vx,vy,vz,a,flags);
-   case  6: mo.A_SpawnItemEx("Lith_DelearSprite", cp,-16,h+4 -sp,vx,vy,vz,a,flags);
-   case  7: mo.A_SpawnItemEx("Lith_DelearSprite", cp,-20,h+2 -sp,vx,vy,vz,a,flags);
-   case  8: mo.A_SpawnItemEx("Lith_DelearSprite", cp,  8,h+18-sp,vx,vy,vz,a,flags);
-   case  9: mo.A_SpawnItemEx("Lith_DelearSprite", cp, 12,h+16-sp,vx,vy,vz,a,flags);
-   case 10: mo.A_SpawnItemEx("Lith_DelearSprite", cp, 16,h+14-sp,vx,vy,vz,a,flags);
-   case 11: mo.A_SpawnItemEx("Lith_DelearSprite", cp, 20,h+12-sp,vx,vy,vz,a,flags);
-   case 12: mo.A_SpawnItemEx("Lith_DelearSprite", cp,  8,h+8 -sp,vx,vy,vz,a,flags);
-   case 13: mo.A_SpawnItemEx("Lith_DelearSprite", cp, 12,h+6 -sp,vx,vy,vz,a,flags);
-   case 14: mo.A_SpawnItemEx("Lith_DelearSprite", cp, 16,h+4 -sp,vx,vy,vz,a,flags);
-   case 15: mo.A_SpawnItemEx("Lith_DelearSprite", cp, 20,h+2 -sp,vx,vy,vz,a,flags);
+
+   switch(w.m_Fired) {
+   case  0: DelearSprite_(mo, cp, sp, a,  -8, 18);
+   case  1: DelearSprite_(mo, cp, sp, a, -12, 16);
+   case  2: DelearSprite_(mo, cp, sp, a, -16, 14);
+   case  3: DelearSprite_(mo, cp, sp, a, -20, 12);
+   case  4: DelearSprite_(mo, cp, sp, a,  -8,  8);
+   case  5: DelearSprite_(mo, cp, sp, a, -12,  6);
+   case  6: DelearSprite_(mo, cp, sp, a, -16,  4);
+   case  7: DelearSprite_(mo, cp, sp, a, -20,  2);
+   case  8: DelearSprite_(mo, cp, sp, a,   8, 18);
+   case  9: DelearSprite_(mo, cp, sp, a,  12, 16);
+   case 10: DelearSprite_(mo, cp, sp, a,  16, 14);
+   case 11: DelearSprite_(mo, cp, sp, a,  20, 12);
+   case 12: DelearSprite_(mo, cp, sp, a,   8,  8);
+   case 13: DelearSprite_(mo, cp, sp, a,  12,  6);
+   case 14: DelearSprite_(mo, cp, sp, a,  16,  4);
+   case 15: DelearSprite_(mo, cp, sp, a,  20,  2);
    }
 }
 
-static void PoisonFX(Actor mo)
-{
+static void PoisonFX(Actor mo) {
    /* removed weird ass bullshit... */
    let trg = Lith_Player(mo.Target);
    int dmg = trg ? Lith_UTIL.pData(trg, pdata_attr, at_acc) / 4 : 0;
@@ -84,12 +78,10 @@ static void PoisonFX(Actor mo)
    mo.ACS_ScriptCall("Lith_PoisonFXTicker");
 }
 
-static void GivePoison(Actor mo)
-{
-   if(mo.CountInv("Lith_PoisonFXTimer"))
+static void GivePoison(Actor mo) {
+   if(mo.CountInv("Lith_PoisonFXTimer")) {
       mo.GiveInventory("Lith_PoisonFXReset", 1);
-   else
-   {
+   } else {
       mo.GiveInventory("Lith_PoisonFXTimer", 20);
       PoisonFX(mo);
    }

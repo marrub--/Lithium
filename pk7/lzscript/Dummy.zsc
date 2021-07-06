@@ -32,7 +32,7 @@ class Lith_GreyHam : HealthBonus
 {
    default
    {
-      Tag "Grey Ham";
+      Tag "$LITH_TAG_GreyHam";
       Inventory.PickupMessage "Picked up a grey ham.";
    }
 

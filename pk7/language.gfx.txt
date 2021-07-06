@@ -272,7 +272,6 @@ identifier,default
 :UI:Slot7Spell,lgfx/UI/Slot7Spell.png
 :UI:StarShot,lgfx/UI/StarShot.png
 :UI:StarShotSel,lgfx/UI/StarShotSel.png
-:UI:TextBoxBack,lgfx/UI/TextBoxBack.png
 :UI:WeapnInte2,lgfx/UI/WeapnInte2.png
 :UI:WeapnInter,lgfx/UI/WeapnInter.png
 :UI:bip,lgfx/UI/bip.png

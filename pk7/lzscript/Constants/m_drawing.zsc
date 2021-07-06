@@ -3,69 +3,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 enum Lith_FontNum {
    font_misaki_gothic,
    font_misaki_mincho,
@@ -124,8 +61,6 @@ enum Lith_YAlign {
    _ymask = 0x9FFFFFFF,
    _yflag = 0x60000000,
 };
-
-
 
 
 

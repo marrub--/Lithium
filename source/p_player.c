@@ -135,6 +135,18 @@ reinit:
    }
 }
 
+alloc_aut(0) script static
+void revenge(void) {
+   if(CVarGetI(sc_sv_revenge)) {
+      ACS_LocalAmbientSound(ss_player_death1, 127);
+      ACS_Delay(35);
+      ServCallI(sm_PlayerDeath);
+      ACS_Delay(25);
+      ServCallI(sm_PlayerDeathNuke);
+      ACS_Delay(25);
+   }
+}
+
 dynam_aut script type("death") static
 void Sc_PlayerDeath(void) {
    i32 fun = GetFun();
@@ -147,30 +159,43 @@ void Sc_PlayerDeath(void) {
 
    /* unfortunately, we can't keep anything even when we want to */
    P_Inv_PQuit();
+   P_Upg_PQuit();
+   P_BIP_PQuit();
+   pl.score = pl.scoreaccum = pl.scoreaccumtime = 0;
 
-   if(singleplayer || CVarGetI(sc_sv_cooploseinventory)) {
-      P_Upg_PQuit();
-      P_BIP_PQuit();
-      pl.score = pl.scoreaccum = pl.scoreaccumtime = 0;
-   }
+   revenge();
 
-   if(singleplayer) {
-      if(CVarGetI(sc_sv_revenge)) {
-         ACS_LocalAmbientSound(ss_player_death1, 127);
-         ACS_Delay(35);
-         ServCallI(sm_PlayerDeath);
-         ACS_Delay(25);
-         ServCallI(sm_PlayerDeathNuke);
-         ACS_Delay(25);
+   str deathmsg = snil;
+   for(i32 time = 0; pl.dead; ++time) {
+      if(time != 0 && time % (35 * 5) == 0) {
+         deathmsg = ns(lang_fmt(LANG "DEATHMSG_%.2i", ACS_Random(1, 20)));
+         SetFade(fid_deathmsg, 35 * 4, 24);
       }
 
-      while(pl.dead) {
-         ACS_Delay(35 * 5);
+      if(CheckFade(fid_deathmsg)) {
+         PrintTextF_str(deathmsg, sf_lmidfont, CR_WHITE, 320/2,4, 0,1,
+                        fid_deathmsg);
+      }
+
+      if(pl.obit) {
+         SetSize(320, 240);
+         SetClipW(0, 0, 320, 240, 320);
          ACS_BeginPrint();
-         ACS_PrintString(ns(lang_fmt(LANG "DEATHMSG_%.2i", ACS_Random(1, 20))));
-         ACS_EndLog();
+         ACS_PrintChar('>');
+         ACS_PrintChar(' ');
+         PrintChrSt(pl.obit);
+         ACS_PrintChar(' ');
+         ACS_PrintChar('<');
+         PrintText(sf_lmidfont, CR_WHITE, 320/2,4, 240,2);
+         ClearClip();
       }
+
+      ACS_Delay(1);
+
+      EndDrawing();
    }
+
+   pl.obit = nil;
 }
 
 script type("respawn") static
@@ -205,6 +230,7 @@ cstr P_Discrim(i32 pclass) {
    return "";
 }
 
+alloc_aut(0) stkcall
 i32 P_Color(i32 pclass) {
    switch(pclass) {
    case pcl_marine:    return Cr(green);
@@ -220,9 +246,7 @@ i32 P_Color(i32 pclass) {
 
 void P_GUI_Close() {
    if(pl.modal == _gui_cbi) {
-      if(singleplayer) {
-         UnfreezeTime();
-      }
+      UnfreezeTime();
 
       ACS_LocalAmbientSound(ss_player_cbi_close, 127);
       pl.modal = _gui_none;
@@ -237,9 +261,7 @@ void P_GUI_Use() {
       P_GUI_Close();
       break;
    case _gui_none:
-      if(singleplayer) {
-         FreezeTime();
-      }
+      FreezeTime();
 
       if(ACS_Random(0, 10000) == 777) {
          ACS_LocalAmbientSound(ss_player_cbi_win95, 127);

@@ -28,10 +28,8 @@ struct gui_txt *G_TxtBox_Imp(struct gui_state *g, gid_t id, struct gui_arg_txt c
 
    if(*pl.txtbuf) ACS_LocalAmbientSound(ss_player_cbi_keypress, 30);
 
-   for(char *c = pl.txtbuf; *c; c++)
-   {
-      switch(*c)
-      {
+   for(char *c = pl.txtbuf; *c; c++) {
+      switch(*c) {
       case '\b':
          if(st->tbptr - 1 >= 0)
             st->tbptr--;
@@ -39,8 +37,7 @@ struct gui_txt *G_TxtBox_Imp(struct gui_state *g, gid_t id, struct gui_arg_txt c
       case '\r':
          *c = '\n';
       default:
-         if(st->tbptr + 1 < Cps_CountOf(st->txtbuf) && (IsPrint(*c) || IsSpace(*c)))
-         {
+         if(st->tbptr + 1 < Cps_CountOf(st->txtbuf) && (IsPrint(*c) || IsSpace(*c))) {
             Cps_SetC(st->txtbuf, st->tbptr, *c);
             st->tbptr++;
          }
@@ -50,7 +47,7 @@ struct gui_txt *G_TxtBox_Imp(struct gui_state *g, gid_t id, struct gui_arg_txt c
 
    Cps_SetC(st->txtbuf, st->tbptr, '\0');
 
-   PrintSprite(sp_UI_TextBoxBack, a->x-3 + g->ox,1, a->y-3 + g->oy,1);
+   PrintSprite(sp_UI_ResultFrame, a->x-3 + g->ox,1, a->y-3 + g->oy,1);
 
    SetClipW(a->x + g->ox, a->y + g->oy, 260, 200, 260);
    if(st->tbptr) {

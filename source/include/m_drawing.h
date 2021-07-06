@@ -31,6 +31,7 @@ GlobalCrH(wselm1) GlobalCrH(wselm2) GlobalCrH(wselm3) GlobalCrH(wselms)
 #undef GlobalCr
 #undef GlobalCrH
 #else
+#if !ZscOn
 #define XArg(x, xa) (((i32)(x) & _xmask) | ((i32)(xa) << 28))
 #define YArg(y, ya) (((i32)(y) & _ymask) | ((i32)(ya) << 29))
 
@@ -121,7 +122,9 @@ GlobalCrH(wselm1) GlobalCrH(wselm2) GlobalCrH(wselm3) GlobalCrH(wselms)
 #define StartSound(...) \
    DrawCallI(sm_StartSound, __VA_ARGS__)
 
-#if !ZscOn
+#define EndDrawing() \
+   DrawCallI(sm_LE)
+
 enum {
    CHANF_LISTENERZ   = 8,
    CHANF_MAYBE_LOCAL = 16,
@@ -135,19 +138,25 @@ enum {
 
 #define Cr(name) globalcolors.name
 
-extern struct globalcolors {
+struct globalcolors {
    #define GlobalCr(name) i32 name;
    #include "m_drawing.h"
-} globalcolors;
+};
+
+extern struct globalcolors globalcolors;
 
 enum {
+   _gcr_first = 'a',
+   _gcr_last = 0x7a,
+   _gcr_class,
    #define GlobalCr(name) _gcr_##name,
    #define GlobalCrH(name)
    #include "m_drawing.h"
    _gcr_max,
 };
 
-i32 Draw_GetCr(i32 n);
+stkcall void Draw_Init(void);
+stkcall i32 Draw_GetCr(i32 n);
 #endif
 
 enum ZscName(FontNum) {
@@ -208,10 +217,6 @@ enum ZscName(YAlign) {
    _ymask = 0x9FFFFFFF,
    _yflag = 0x60000000,
 };
-
-#if !ZscOn
-void Draw_Init(void);
-#endif
 
 #endif
 

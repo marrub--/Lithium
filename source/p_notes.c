@@ -43,8 +43,8 @@ void P_CBI_TabNotes(struct gui_state *g)
                       44, i * 30, .disabled = !CBIState(g)->noteedit,
                       Pre(btnnote)))
       {
-         i32  l = CBIState(g)->notebox.tbptr;
-         cstr s = Cps_Expand(CBIState(g)->notebox.txtbuf, 0, l);
+         mem_size_t l = CBIState(g)->notebox.tbptr;
+         cstr       s = Cps_Expand(CBIState(g)->notebox.txtbuf, 0, l);
 
          if(l) {
             pl.notes[i] = Ralloc(pl.notes[i], l + 1, _tag_plyr);

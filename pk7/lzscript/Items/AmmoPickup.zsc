@@ -9,6 +9,7 @@
 
 class Lith_Shell : Lith_AmmoItem replaces Shell {
    default {
+      Tag "$LITH_LOG_Shell";
       Inventory.PickupSound "player/pickup/shells";
       Lith_BasicPickup.LogName "Shell", 2;
       Lith_ScoreItem.Score Score_Shell;
@@ -24,6 +25,7 @@ class Lith_Shell : Lith_AmmoItem replaces Shell {
 
 class Lith_ShellBox : Lith_AmmoItem replaces ShellBox {
    default {
+      Tag "$LITH_LOG_ShellBox";
       Inventory.PickupSound "player/pickup/shellb";
       Lith_BasicPickup.LogName "ShellBox", 2;
       Lith_ScoreItem.Score Score_ShellBox;
@@ -39,6 +41,7 @@ class Lith_ShellBox : Lith_AmmoItem replaces ShellBox {
 
 class Lith_RocketAmmoPickup : Lith_AmmoItem replaces RocketAmmo {
    default {
+      Tag "$LITH_LOG_Rocket";
       Inventory.PickupSound "player/pickup/rockets";
       Lith_BasicPickup.LogName "Rocket", 2;
       Lith_ScoreItem.Score Score_Rocket;
@@ -54,6 +57,7 @@ class Lith_RocketAmmoPickup : Lith_AmmoItem replaces RocketAmmo {
 
 class Lith_RocketBox : Lith_AmmoItem replaces RocketBox {
    default {
+      Tag "$LITH_LOG_RocketBox";
       Inventory.PickupSound "player/pickup/rocketb";
       Lith_BasicPickup.LogName "RocketBox", 2;
       Lith_ScoreItem.Score Score_RocketBox;
@@ -69,6 +73,7 @@ class Lith_RocketBox : Lith_AmmoItem replaces RocketBox {
 
 class Lith_Cell : Lith_AmmoItem replaces Cell {
    default {
+      Tag "$LITH_LOG_Cell";
       Inventory.PickupSound "player/pickup/cells";
       Lith_BasicPickup.LogName "Cell", 2;
       Lith_ScoreItem.Score Score_Cell;
@@ -84,6 +89,7 @@ class Lith_Cell : Lith_AmmoItem replaces Cell {
 
 class Lith_CellPack : Lith_AmmoItem replaces CellPack {
    default {
+      Tag "$LITH_LOG_CellBox";
       Inventory.PickupSound "player/pickup/cellb";
       Lith_BasicPickup.LogName "CellBox", 2;
       Lith_ScoreItem.Score Score_CellPack;

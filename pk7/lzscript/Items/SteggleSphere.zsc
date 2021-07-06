@@ -41,38 +41,37 @@ class Lith_Dogs : Inventory {
    }
 }
 
-class Lith_Steggles : MBFHelperDog
-{
-   default
-   {
+class Lith_Steggles : MBFHelperDog {
+   default {
       Health 10000000;
       PainChance 0;
-      Tag "Steggles";
+      Tag "$LITH_TAG_Steggles";
 
       +THRUACTORS
       +FRIENDLY
    }
 
-   states
-   {
+   states {
    Energize:
       DOGS A 0 {
-         if(target) {
-            target.GiveInventory("Lith_Dogs", 1);
-            target.GiveInventory("HealthBonus", 1);
-            Lith_HERMES.Log(target, msg_both, 1, "_Dogs");
-         }
+         target.GiveInventory("Lith_Dogs", 1);
+         target.GiveInventory("HealthBonus", 1);
+         Lith_HERMES.Log(target, msg_both, 1, "_Dogs");
       }
       stop;
    PureSteggleEnergy:
       DOGS A 0 {
-      bNOCLIP = true;
-      bNOGRAVITY = true;
-      A_ChangeLinkFlags(1);
+         target = players[consolePlayer].mo;
+         bNOCLIP = true;
+         bNOGRAVITY = true;
+         A_ChangeLinkFlags(1);
       }
       DOGS A 0 A_SetTranslucent(0.8, 1);
-      DOGS A 0 ACS_NamedExecuteAlways("Lith_SteggleEnergy", 0);
-      DOGS A 1 A_JumpIfCloser(radius, "Energize");
+      DOGS A 1 {
+         setOrigin(Lith_UTIL.vec3Lerp(pos, target.pos, 0.01), true);
+         a_faceTarget();
+         return A_JumpIfCloser(radius, "Energize");
+      }
       wait;
    }
 }
@@ -87,7 +86,7 @@ class Lith_SteggleSphere : Inventory;
 
 default
 {
-   Tag "Steggle Sphere";
+   Tag "$LITH_TAG_SteggleSphere";
    Inventory.PickupMessage "";
    Inventory.PickupSound "misc/p_pkup";
 

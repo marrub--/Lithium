@@ -14,7 +14,7 @@ class Lith_MarinePlayer : Lith_Player {
       Player.Portrait "lgfx/Portraits/Marine.png";
       Player.SoundClass "marine";
       Player.ViewHeight 48;
-      Tag "Marine";
+      Tag "$LITH_CLASS_MARINE";
    }
 
    override void GiveDefaultInventory() {

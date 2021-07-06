@@ -17,7 +17,7 @@ class Lith_CyberMagePlayer : Lith_Player
       Player.Portrait "lgfx/Portraits/CyberMage.png";
       Player.SoundClass "cybermage";
       Player.ViewHeight 45;
-      Tag "Cyber-Mage";
+      Tag "$LITH_CLASS_CYBERMAGE";
    }
 
    override void GiveDefaultInventory()

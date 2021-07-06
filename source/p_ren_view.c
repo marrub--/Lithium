@@ -29,12 +29,14 @@ void P_Ren_DamageBob()
       distance *= 0.2lk;
 
       k64 ys = sinf(angle), yc = cosf(angle);
-      pl.bobyaw   = ys * distance;
       pl.bobpitch = yc * distance;
+      pl.bobyaw   = ys * distance;
+      pl.bobroll  = (k64)ACS_Random(-1, 1) * distance * (k64)ACS_RandomFixed(0.5, 0.7);
    }
 
    if(pl.bobpitch) pl.bobpitch = lerplk(pl.bobpitch, 0.0, 0.1);
    if(pl.bobyaw  ) pl.bobyaw   = lerplk(pl.bobyaw,   0.0, 0.1);
+   if(pl.bobroll ) pl.bobroll  = lerplk(pl.bobroll,  0.0, 0.1);
 }
 
 /* Update additive view. */
@@ -44,24 +46,27 @@ void P_Ren_View()
 
    P_Ren_DamageBob();
 
-   k64 addp = 0, addy = 0;
+   k64 addp = 0, addy = 0, addr = 0;
 
    if(CVarGetI(sc_player_damagebob)) {
       k64 bobmul = CVarGetK(sc_player_damagebobmul);
       addp += pl.bobpitch * bobmul;
       addy += pl.bobyaw   * bobmul;
+      addr += pl.bobroll  * bobmul;
+   }
+
+   k32 sidemul = CVarGetK(sc_player_viewtilt) * 0.2k;
+   if(sidemul && pl.sidev) {
+      pl.extrroll = lerplk(pl.extrroll, -pl.sidev * sidemul, 0.10lk);
    }
 
    if(pl.extrpitch) pl.extrpitch = lerplk(pl.extrpitch, 0.0lk, 0.1lk);
    if(pl.extryaw  ) pl.extryaw   = lerplk(pl.extryaw,   0.0lk, 0.1lk);
+   if(pl.extrroll ) pl.extrroll  = lerplk(pl.extrroll,  0.0lk, 0.1lk);
 
    pl.addpitch = addp + pl.extrpitch;
    pl.addyaw   = addy + pl.extryaw;
-
-   ifauto(k32, mul, CVarGetK(sc_player_viewtilt) * 0.2) {
-      /**/ if(pl.sidev  ) pl.addroll = lerplk(pl.addroll, -pl.sidev * mul, 0.10);
-      else if(pl.addroll) pl.addroll = lerplk(pl.addroll, 0,               0.14);
-   }
+   pl.addroll  = addr + pl.extrroll;
 }
 
 /* EOF */

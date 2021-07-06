@@ -7,10 +7,10 @@
 ## ---------------------------------------------------------------------------|
 
 All {
+   Path "lmodels";
+
    DontCullBackFaces;
    UseActorRoll;
-
-   Path "lmodels";
 }
 
 Tracer {
@@ -45,8 +45,6 @@ Blood {
    PitchOffset 45;
 
    Model 0 "square.obj";
-
-   FrameIndex "____" "A" 0 0;
 }
 
 \#BulletTracer     : All TracerSizeNrm Tracer {}
@@ -59,8 +57,10 @@ Blood {
    {Skin 0 "spark3.png"; FrameIndex "____" "C" 0 0;}
    {Skin 0 "spark4.png"; FrameIndex "____" "D" 0 0;}
 
-\#BloodHitSpray : All Blood {Scale 1.0 30.0 30.0; Skin 0 "blood_drop.png";}
-\#BloodHitCore  : All Blood {Scale 1.0 27.0 27.0; Skin 0 "blood_core.png";}
+\#BloodHitSpray : All Blood
+   {Scale 1.0 30.0 30.0; Skin 0 "blood_drop.png"; FrameIndex "____" "A" 0 0;}
+\#BloodHitCore  : All Blood
+   {Scale 1.0 27.0 27.0; Skin 0 "blood_core.png"; FrameIndex "____" "A" 0 0;}
 
 \#FortuneShotWind : All {
    UseActorPitch;

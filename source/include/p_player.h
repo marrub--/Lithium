@@ -119,7 +119,7 @@ script void P_GiveScore(i96 score, bool nomul);
 script void P_GiveEXP(u64 amt);
 void P_Lv_GiveEXP(u64 amt);
 cstr P_Discrim(i32 pclass);
-i32 P_Color(i32 pclass);
+stkcall i32 P_Color(i32 pclass);
 void P_Dat_PTickPst(void);
 script extern void P_Scr_Payout(void);
 void P_Log_SellWeapon(struct weaponinfo const *info, i96 score);
@@ -151,14 +151,6 @@ script void P_Ren_Scope(void);
 enum {
    #define pclass_x(shr, lng, eq) shr = lng,
    #include "p_player.h"
-};
-
-enum {
-   pro_nb,
-   pro_female,
-   pro_male,
-   pro_object,
-   pro_max,
 };
 
 enum {
@@ -245,16 +237,16 @@ struct player {
    bool reinit;
 
    /* Info */
-   i32 tid;
-   i32 num;
-   u64 ticks;
-   str name;
-   i32 pclass;
-   str pcstr;
-   i32 pronoun;
+   i32  tid;
+   i32  num;
+   u64  ticks;
+   str  name;
+   i32  pclass;
+   str  pcstr;
    cstr discrim;
-   i32 color;
-   str advice;
+   i32  color;
+   str  advice;
+   cstr obit;
 
    /* Deltas */
    anonymous
@@ -303,8 +295,8 @@ struct player {
    u32  done_intro;
 
    /* Input */
-   char txtbuf[8];
-   u32  tbptr;
+   char       txtbuf[8];
+   mem_size_t tbptr;
 
    /* Static data */
    u32 spawnhealth;
@@ -325,10 +317,12 @@ struct player {
    /* Damage bob angles */
    k64 bobpitch;
    k64 bobyaw;
+   k64 bobroll;
 
    /* Extra angles */
    k64 extrpitch;
    k64 extryaw;
+   k64 extrroll; /* throw em to the dogs -suwy */
 
    /* View TIDs */
    i32 cameratid;

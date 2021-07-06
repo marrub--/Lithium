@@ -89,7 +89,7 @@ void Dlg_SetB2(struct compiler *d, u32 ptr, u32 word)
 u32 Dlg_PushStr(struct compiler *d, cstr s, u32 l)
 {
    u32  p = d->def.stabP;
-   u32 vl = Cps_Adjust(p + l) - d->def.stabC;
+   u32 vl = Cps_Size(p + l) - d->def.stabC;
 
    if(p + l > STR_END - STR_BEG) {
       d->tb.err(&d->res, "STR segment overflow");

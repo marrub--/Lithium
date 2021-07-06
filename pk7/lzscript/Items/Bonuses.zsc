@@ -461,7 +461,7 @@ class Lith_Radio : Lith_ScoreItem
 {
    default
    {
-      Tag "$LITH_LOG_Radio";
+      Tag "$LITH_LOG_Clip";
       Lith_ScoreItem.Score Score_Clip;
       Lith_BasicPickup.LogName "Clip", 2;
       Inventory.PickupSound "player/pickup/scoresmall";

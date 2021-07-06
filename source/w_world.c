@@ -23,7 +23,6 @@ __addrdef __mod_arr lmvar;
 __addrdef __hub_arr lhvar;
 
 struct payoutinfo payout;
-bool singleplayer;
 i32 mapscleared;
 i32 prevcluster;
 i32 mapseed;
@@ -144,8 +143,6 @@ void MInitPre(void) {
 static
 void GInit(void) {
    Dbg_Log(log_dev, "%s", __func__);
-
-   singleplayer = ACS_GameType() == GAME_SINGLE_PLAYER;
 
    cbiperf = 10;
 

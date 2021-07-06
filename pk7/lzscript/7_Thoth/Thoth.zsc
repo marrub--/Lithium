@@ -12,7 +12,7 @@ class Lith_ThothPlayer : Lith_Player {
       Player.DisplayName "$LITH_CLASS_THOTH";
       Player.SoundClass "thoth";
       Player.Portrait "lgfx/Portraits/Thoth.png";
-      Tag "Thoth";
+      Tag "$LITH_CLASS_THOTH";
    }
 }
 

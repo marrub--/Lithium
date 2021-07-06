@@ -43,8 +43,6 @@ void Blinker(str bgn) {
 
 dynam_aut script
 void W_Title(void) {
-   DrawCallI(sm_ForceDraw, true);
-
    ACS_Delay(35*5);
 
    SetSize(320, 240);
@@ -73,7 +71,7 @@ void W_Title(void) {
 
       Blinker(bgn);
       ACS_Delay(1);
-      DrawCallI(sm_LE);
+      EndDrawing();
    }
 
    for(i32 i = 0; i < 35 * 7; i++)
@@ -81,7 +79,7 @@ void W_Title(void) {
       PrintText_str(txt, sf_smallfnt, Cr(green), 7,1, 6,1);
       Blinker(bgn);
       ACS_Delay(1);
-      DrawCallI(sm_LE);
+      EndDrawing();
    }
 
    for(k32 a = 1; a > 0; a -= 0.01)
@@ -89,14 +87,14 @@ void W_Title(void) {
       PrintTextA_str(txt, sf_smallfnt, Cr(green), 7,1, 6,1, a);
       Blinker(bgn);
       ACS_Delay(1);
-      DrawCallI(sm_LE);
+      EndDrawing();
    }
 
    for(;;)
    {
       Blinker(bgn);
       ACS_Delay(1);
-      DrawCallI(sm_LE);
+      EndDrawing();
    }
 }
 

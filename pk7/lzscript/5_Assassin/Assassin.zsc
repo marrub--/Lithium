@@ -12,7 +12,7 @@ class Lith_AssassinPlayer : Lith_Player {
       Player.DisplayName "$LITH_CLASS_ASSASSIN";
       Player.SoundClass "assassin";
       Player.Portrait "lgfx/Portraits/Assassin.png";
-      Tag "Assassin";
+      Tag "$LITH_CLASS_ASSASSIN";
    }
 
    int  m_dodgeDbc;

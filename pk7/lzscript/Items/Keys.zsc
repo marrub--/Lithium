@@ -11,6 +11,7 @@ class Lith_RedCard : Lith_BasicPickup replaces RedCard
 {
    default
    {
+      Tag "$LITH_LOG_RedCard";
       Inventory.PickupSound "player/pickup/redkey";
       Lith_BasicPickup.LogName "RedCard", 5;
       Lith_BasicPickup.InfoPage "KeyDisk";
@@ -35,6 +36,7 @@ class Lith_BlueCard : Lith_BasicPickup replaces BlueCard
 {
    default
    {
+      Tag "$LITH_LOG_BlueCard";
       Inventory.PickupSound "player/pickup/bluekey";
       Lith_BasicPickup.LogName "BlueCard", 5;
       Lith_BasicPickup.InfoPage "KeyDisk";
@@ -59,6 +61,7 @@ class Lith_YellowCard : Lith_BasicPickup replaces YellowCard
 {
    default
    {
+      Tag "$LITH_LOG_YellowCard";
       Inventory.PickupSound "player/pickup/yellowkey";
       Lith_BasicPickup.LogName "YellowCard", 5;
       Lith_BasicPickup.InfoPage "KeyDisk";
@@ -83,6 +86,7 @@ class Lith_RedSkull : Lith_BasicPickup replaces RedSkull
 {
    default
    {
+      Tag "$LITH_LOG_RedSkull";
       Inventory.PickupSound "player/pickup/redskull";
       Lith_BasicPickup.LogName "RedSkull", 5;
       Lith_BasicPickup.InfoPage "KeySkull";
@@ -107,6 +111,7 @@ class Lith_BlueSkull : Lith_BasicPickup replaces BlueSkull
 {
    default
    {
+      Tag "$LITH_LOG_BlueSkull";
       Inventory.PickupSound "player/pickup/blueskull";
       Lith_BasicPickup.LogName "BlueSkull", 5;
       Lith_BasicPickup.InfoPage "KeySkull";
@@ -131,6 +136,7 @@ class Lith_YellowSkull : Lith_BasicPickup replaces YellowSkull
 {
    default
    {
+      Tag "$LITH_LOG_YellowSkull";
       Inventory.PickupSound "player/pickup/yellowskull";
       Lith_BasicPickup.LogName "YellowSkull", 5;
       Lith_BasicPickup.InfoPage "KeySkull";

@@ -64,7 +64,7 @@ struct dcd_info const dcdinfo[0xFF] = {
 /* Static Objects ---------------------------------------------------------- */
 
 noinit static
-Cps_Decl(memory, 0xFFFF);
+cps_t memory[Cps_Size(0xFFFF)];
 
 /* VM state */
 noinit static
@@ -474,7 +474,7 @@ void ActDLG_WAIT() {
 
    ACS_LocalAmbientSound(ss_player_cbi_dlgopen, 127);
 
-   if(singleplayer) FreezeTime();
+   FreezeTime();
    P_SetVel(0, 0, 0);
 
    ConsoleLogText(_from_dlg);
@@ -484,7 +484,7 @@ void ActDLG_WAIT() {
       ACS_Delay(1);
    } while(MemB1_G(VAR_UACT) == UACT_NONE);
 
-   if(singleplayer) UnfreezeTime();
+   UnfreezeTime();
    GuiAct();
 }
 
@@ -567,7 +567,7 @@ void ActTRM_WAIT() {
          ConsoleLogText(_from_trm);
       }
 
-      if(singleplayer) FreezeTime();
+      FreezeTime();
       P_SetVel(0, 0, 0);
 
       do {
@@ -575,7 +575,7 @@ void ActTRM_WAIT() {
          ACS_Delay(1);
       } while(MemB1_G(VAR_UACT) == UACT_NONE && --timer >= 0);
 
-      if(singleplayer) UnfreezeTime();
+      UnfreezeTime();
       GuiAct();
    }
 }

@@ -9,7 +9,7 @@
 
 class Lith_Person_Jacques : Lith_BasePerson {
    default {
-      Tag "Jacques";
+      Tag "$LITH_PNAME_JACQUES";
       Radius 16;
       Height 56;
       Translation 0;
@@ -24,7 +24,7 @@ class Lith_Person_Jacques : Lith_BasePerson {
 
 class Lith_Person_Maxie : Lith_BasePerson {
    default {
-      Tag "Maxie";
+      Tag "$LITH_PNAME_MAXIE";
       Radius 16;
       Height 16;
    }

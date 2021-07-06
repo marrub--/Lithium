@@ -61,26 +61,27 @@
 == \#st_name_color_120 | Fire
 == \#st_name_color_121 | Sapphire
 == \#st_name_color_122 | Teal
-== \#st_name_color_123 | $\#CLASS_DARKLORD
-== \#st_name_color_124 | $\#CLASS_MARINE
-== \#st_name_color_125 | $\#CLASS_THOTH
-== \#st_name_color_126 | $\#CLASS_ASSASSIN
-== \#st_name_color_127 | $\#CLASS_INFORMANT
-== \#st_name_color_128 | $\#CLASS_CYBERMAGE
-== \#st_name_color_129 | $\#CLASS_WANDERER
-== \#st_name_color_130 | Lane Red
-== \#st_name_color_131 | Lane D. Orange
-== \#st_name_color_132 | Lane Orange
-== \#st_name_color_133 | Lane Yellow
-== \#st_name_color_134 | Lane Y-Green
-== \#st_name_color_135 | Lane Green
-== \#st_name_color_136 | Lane Cyan
-== \#st_name_color_137 | Lane Blue
-== \#st_name_color_138 | Lane Indigo
-== \#st_name_color_139 | Lane Purple
-== \#st_name_color_140 | Lane Lavendar
-== \#st_name_color_141 | Lane Pink
-== \#st_name_color_142 | Lane Hot Pink
+== \#st_name_color_123 | Class' Color
+== \#st_name_color_124 | $\#CLASS_DARKLORD
+== \#st_name_color_125 | $\#CLASS_MARINE
+== \#st_name_color_126 | $\#CLASS_THOTH
+== \#st_name_color_127 | $\#CLASS_ASSASSIN
+== \#st_name_color_128 | $\#CLASS_INFORMANT
+== \#st_name_color_129 | $\#CLASS_CYBERMAGE
+== \#st_name_color_130 | $\#CLASS_WANDERER
+== \#st_name_color_131 | Lane Red
+== \#st_name_color_132 | Lane D. Orange
+== \#st_name_color_133 | Lane Orange
+== \#st_name_color_134 | Lane Yellow
+== \#st_name_color_135 | Lane Y-Green
+== \#st_name_color_136 | Lane Green
+== \#st_name_color_137 | Lane Cyan
+== \#st_name_color_138 | Lane Blue
+== \#st_name_color_139 | Lane Indigo
+== \#st_name_color_140 | Lane Purple
+== \#st_name_color_141 | Lane Lavendar
+== \#st_name_color_142 | Lane Pink
+== \#st_name_color_143 | Lane Hot Pink
 
 == \#st_name_cursor_0 | Green
 == \#st_name_cursor_1 | Pink
@@ -176,7 +177,6 @@
 == \#player_damagebob       | Bob view when damaged
 == \#player_damagebobmul    | Damage bob multiplier
 == \#player_footstepvol     | Footstep volume
-== \#player_invertmouse     | Invert mouse in network games
 == \#player_lvsys           | Level-up system
 == \#player_noitemfx        | No item effects
 == \#player_rainshader      | Enable rain shader

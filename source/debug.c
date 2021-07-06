@@ -57,9 +57,7 @@ void Dbg_Note_Impl(cstr fmt, ...)
    dbgnote[dbgnotenum++] = ACS_EndStrParam();
 }
 
-void Dbg_PrintMemC(void const *data, mem_size_t size)
-{
-   u32 const *d = data;
+void Dbg_PrintMemC(cps_t const *d, mem_size_t size) {
    i32 pos = 0;
 
    for(mem_size_t i = 0; i < size * 4; i++) {
@@ -88,13 +86,11 @@ void Dbg_PrintMemC(void const *data, mem_size_t size)
    PrintChrSt("\nEOF\n");
 }
 
-void Dbg_PrintMem(void const *data, mem_size_t size)
-{
+void Dbg_PrintMem(void const *data, mem_size_t size) {
    byte const *d = data;
    i32 pos = 0;
 
-   for(mem_size_t i = 0; i < size; i++)
-   {
+   for(mem_size_t i = 0; i < size; i++) {
       if(pos + 3 > 79) {
          ACS_PrintChar('\n');
          pos = 0;

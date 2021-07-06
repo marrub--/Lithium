@@ -121,6 +121,7 @@ enum ZscName(ScriptNum) {
    lsc_raindropspawn,
    lsc_monstertype,
    lsc_worldreopen,
+   lsc_drawcr,
    #define w_setptr_x(x) lsc_setptr##x,
    #include "w_world.h"
 };
@@ -201,7 +202,6 @@ enum mission_status {
 
 extern bool lmvar player_init;
 extern struct payoutinfo payout;
-extern bool singleplayer;
 extern i32 mapscleared;
 extern i32 prevcluster;
 extern i32 mapseed;

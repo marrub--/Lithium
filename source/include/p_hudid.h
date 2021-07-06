@@ -16,6 +16,7 @@
 
 enum
 {
+   fid_deathmsg,
    fid_health,
    fid_vscan,
    fid_schit1,

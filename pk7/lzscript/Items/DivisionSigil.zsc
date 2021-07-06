@@ -22,7 +22,7 @@ class Lith_DivisionSigilSprite : Lith_AnimItemSprite {
 
 class Lith_DivisionSigil : Lith_DivisionItem {
    default {
-      Tag "Division Sigil";
+      Tag "$LITH_ITEM_TAG_DivisionSigil";
       Lith_InventoryItem.InvName "DivisionSigil";
       Lith_InventoryItem.Size 3, 3;
       Lith_InventoryItem.InvType _cont_store;
@@ -54,7 +54,7 @@ class Lith_DivisionSigil : Lith_DivisionItem {
 
 class Lith_ClawOfImp : Lith_DivisionItem {
    default {
-      Tag "Claw of Imp";
+      Tag "$LITH_ITEM_TAG_ClawOfImp";
       Lith_InventoryItem.InvName "ClawOfImp";
       Lith_InventoryItem.Size 4, 2;
       Lith_DivisionItem.Sprite "DITMA";
@@ -63,7 +63,7 @@ class Lith_ClawOfImp : Lith_DivisionItem {
 
 class Lith_AndSigil : Lith_DivisionItem {
    default {
-      Tag "Binarist 'And' Sigil";
+      Tag "$LITH_ITEM_TAG_AndSigil";
       Lith_InventoryItem.InvName "AndSigil";
       Lith_InventoryItem.Size 3, 3;
       Lith_DivisionItem.Sprite "DITMB";
@@ -72,7 +72,7 @@ class Lith_AndSigil : Lith_DivisionItem {
 
 class Lith_OrSigil : Lith_DivisionItem {
    default {
-      Tag "Binarist 'Or' Sigil";
+      Tag "$LITH_ITEM_TAG_OrSigil";
       Lith_InventoryItem.InvName "OrSigil";
       Lith_InventoryItem.Size 3, 3;
       Lith_DivisionItem.Sprite "DITMC";

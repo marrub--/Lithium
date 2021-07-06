@@ -11,7 +11,7 @@ class Lith_WingsOfDeath : Lith_Weapon;
 
 default
 {
-   Tag "Wings of Death";
+   Tag "$LITH_TAG_WingsOfDeath";
    Weapon.SlotNumber 0;
    Inventory.AltHudIcon "DWNGA0";
 

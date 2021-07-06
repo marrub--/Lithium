@@ -1,0 +1,54 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison G. Watson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
+## Tags ----------------------------------------------------------------------|
+
+== \#TAG_BlurSphere    | フラグマ
+== \#TAG_GreyHam       | ぐれー　はむ
+== \#TAG_Megasphere    | タオッチアン
+== \#TAG_SoulSphere    | ハート
+== \#TAG_SteggleSphere | steggleスフィア
+== \#TAG_ShobonSphere  | しょぼんスフィア
+
+== \#TAG_Weapon0 | スロット1武器(下)
+== \#TAG_Weapon1 | スロット1武器(上)
+== \#TAG_Weapon2 | スロット2武器
+== \#TAG_Weapon3 | スロット3武器(下)
+== \#TAG_Weapon4 | スロット3武器(上)
+== \#TAG_Weapon5 | スロット4武器
+== \#TAG_Weapon6 | スロット5武器
+== \#TAG_Weapon7 | スロット6武器
+== \#TAG_Weapon8 | スロット7武器
+
+== \#TAG_Upgrade1 | CBIアップグレード#1
+== \#TAG_Upgrade2 | CBIアップグレード#2
+== \#TAG_Upgrade3 | CBIアップグレード#3
+== \#TAG_Upgrade4 | CBIアップグレード#4
+== \#TAG_Upgrade5 | CBIアップグレード#5
+== \#TAG_Upgrade6 | CBIアップグレード#6
+
+== \#TAG_Sword        | かなた
+== \#TAG_WingsOfDeath | 死の翼
+
+== \#TAG_DSparil         | ディ・スペイル
+== \#TAG_Disciple        | ディ・スペイルの使徒
+== \#TAG_Gargoyle        | ガーゴイル
+== \#TAG_GargoyleFire    | ファイヤガーゴイル
+== \#TAG_Golem           | ゴーレム
+== \#TAG_GolemGhost      | 幽ゴーレム
+== \#TAG_IronLich        | アイロン　リッチ
+== \#TAG_Maulotaur       | マウロター
+== \#TAG_Nitrogolem      | ナイトロゴーレム
+== \#TAG_NitrogolemGhost | 幽ナイトロゴーレム
+== \#TAG_Ophidian        | オフィディアン
+== \#TAG_Sabreclaw       | セーバーツバ
+== \#TAG_SpectralWarrior | スペクトル武士
+== \#TAG_UndeadWarrior   | アンデッド武士
+== \#TAG_Weredragon      | ウェアドラゴン
+
+## EOF

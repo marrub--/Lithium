@@ -9,7 +9,7 @@
 
 class Lith_BossReward1 : Lith_CBIItem {
    default {
-      Tag "Upgrade #1";
+      Tag "$LITH_TAG_Upgrade1";
       Lith_CBIItem.UpgrName cupg_weapninter;
       Lith_CBIItem.SpriteM "WUPGA";
       Lith_CBIItem.SpriteC "SPELA";
@@ -18,7 +18,7 @@ class Lith_BossReward1 : Lith_CBIItem {
 
 class Lith_BossReward2 : Lith_CBIItem {
    default {
-      Tag "Upgrade #2";
+      Tag "$LITH_TAG_Upgrade2";
       Lith_CBIItem.UpgrName cupg_hasupgr1;
       Lith_CBIItem.SpriteM "CUPGA";
       Lith_CBIItem.SpriteC "SPELB";
@@ -27,7 +27,7 @@ class Lith_BossReward2 : Lith_CBIItem {
 
 class Lith_BossReward3 : Lith_CBIItem {
    default {
-      Tag "Upgrade #3";
+      Tag "$LITH_TAG_Upgrade3";
       Lith_CBIItem.UpgrName cupg_armorinter;
       Lith_CBIItem.SpriteM "ARM1Z";
       Lith_CBIItem.SpriteC "SPELC";
@@ -36,7 +36,7 @@ class Lith_BossReward3 : Lith_CBIItem {
 
 class Lith_BossReward4 : Lith_CBIItem {
    default {
-      Tag "Upgrade #4";
+      Tag "$LITH_TAG_Upgrade4";
       Lith_CBIItem.UpgrName cupg_hasupgr2;
       Lith_CBIItem.SpriteM "CUPGB";
       Lith_CBIItem.SpriteC "SPELD";
@@ -45,7 +45,7 @@ class Lith_BossReward4 : Lith_CBIItem {
 
 class Lith_BossReward5 : Lith_CBIItem {
    default {
-      Tag "Upgrade #5";
+      Tag "$LITH_TAG_Upgrade5";
       Lith_CBIItem.UpgrName cupg_weapninte2;
       Lith_CBIItem.SpriteM "WRDPA";
       Lith_CBIItem.SpriteC "SPELE";
@@ -54,7 +54,7 @@ class Lith_BossReward5 : Lith_CBIItem {
 
 class Lith_BossReward6 : Lith_CBIItem {
    default {
-      Tag "Upgrade #6";
+      Tag "$LITH_TAG_Upgrade6";
       Lith_CBIItem.UpgrName cupg_rdistinter;
       Lith_CBIItem.Sprite "IOBJC";
 

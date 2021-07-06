@@ -8,11 +8,12 @@
 
 !!include Misc/Beginning.txt
 !!include Misc/Changes.txt
+!!include Misc/Inventory.txt
 !!include Misc/Markers.txt
 !!include Misc/QuitMessages.txt
 !!include Misc/Settings.txt
+!!include Misc/Tags.txt
 !!include Misc/UI.txt
-!!include Misc/Inventory.txt
 
 @@ \#OPENER
 1626, New Era.
@@ -69,6 +70,27 @@ Use at the expense of your world.
 ## Obituaries ----------------------------------------------------------------|
 == OB_DEFAULT |
 
+== OB_BABY      | %o got a face full of plasma. Toasty!
+== OB_BARON     | Don't come back here Baron, %g'll be long gone.
+== OB_BARONHIT  | Incredible, it seems like %g got in a fist-fight with a projectile spammer!
+== OB_CACO      | %o likes caco.
+== OB_CACOHIT   | %o tried to pet the caco. Sorry it didn't work out for you, bud.
+== OB_CHAINGUY  | %o danced the chaingun cha-cha. Hey, %r pretty good at it!
+== OB_CYBORG    | Ouch, that rocket really didn't agree with %h at all.
+== OB_DEMONHIT  | %o didn't dodge, like, 5 inches to the back. Sucks for %h!
+== OB_FATSO     | %o isn't the best at dodging those slow projectiles.
+== OB_IMP       | Target priority isn't %p specialty, really.
+== OB_IMPHIT    | To be honest, there's not much recovery from those claws, %o.
+== OB_KNIGHT    | %o is a bonafide genius, walking %hself right into that projectile spear.
+== OB_KNIGHTHIT | Oooh! Wait, do you ever think about how the knights in Destiny are the exact same as the ones in Doom? Weird.
+== OB_SHOTGUY   | %o got %p face filled with delicious lead.
+== OB_SKULL     | %o hates lost souls.
+== OB_SPIDER    | %g didn't like the spider's minigun after all. Too many bullets.
+== OB_UNDEAD    | %o loves the taste of homing rockets.
+== OB_UNDEADHIT | It seems like %r really enjoying that punch sound.
+== OB_VILE      | %o had %p ass burned up. Oh, %r crispy!
+== OB_ZOMBIE    | %o got plinked to death.
+
 == \#OB_S_FatMac    | %o's shoulders fell off their mounts.
 == \#OB_S_Explosion | %o made %hself go boom.
 
@@ -102,7 +124,7 @@ Use at the expense of your world.
 == \#OB_Slime_5 | %o became goop.
 
 == \#OB_Fire_1 | %o fried to death.
-== \#OB_Fire_2 | %o is burning with passion. Er, fire. %r dead.
+== \#OB_Fire_2 | %o is burning with passion. Er, fire. %a dead.
 == \#OB_Fire_3 | It'll be hard to tell if %o's corpse is %s.
 == \#OB_Fire_4 | %o went up in flames.
 == \#OB_Fire_5 | Smells like... %o.

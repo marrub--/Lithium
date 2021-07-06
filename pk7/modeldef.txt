@@ -12,9 +12,9 @@
  * ---------------------------------------------------------------------------|
  */
 model "Lith_BulletTracer" {
+   Path "lmodels"
    DontCullBackFaces 
    UseActorRoll 
-   Path "lmodels"
    Scale 16.0 1.0 32.0
    PitchFromMomentum 
    Model 0 "square.obj"
@@ -22,9 +22,9 @@ model "Lith_BulletTracer" {
    FrameIndex "____" "A" 0 0
 }
 model "Lith_BulletTracerSlow" {
+   Path "lmodels"
    DontCullBackFaces 
    UseActorRoll 
-   Path "lmodels"
    Scale 16.0 1.0 32.0
    PitchFromMomentum 
    Model 0 "square.obj"
@@ -32,9 +32,9 @@ model "Lith_BulletTracerSlow" {
    FrameIndex "____" "A" 0 0
 }
 model "Lith_BulletTracerBig" {
+   Path "lmodels"
    DontCullBackFaces 
    UseActorRoll 
-   Path "lmodels"
    Scale 24.0 1.0 40.0
    PitchFromMomentum 
    Model 0 "square.obj"
@@ -42,9 +42,9 @@ model "Lith_BulletTracerBig" {
    FrameIndex "____" "A" 0 0
 }
 model "Lith_BulletRicochetSpark" {
+   Path "lmodels"
    DontCullBackFaces 
    UseActorRoll 
-   Path "lmodels"
    UseActorPitch 
    Scale 1.0 27.0 27.0
    PitchOffset 45
@@ -53,9 +53,9 @@ model "Lith_BulletRicochetSpark" {
    FrameIndex "____" "A" 0 0
 }
 model "Lith_BulletRicochetSpark" {
+   Path "lmodels"
    DontCullBackFaces 
    UseActorRoll 
-   Path "lmodels"
    UseActorPitch 
    Scale 1.0 27.0 27.0
    PitchOffset 45
@@ -64,9 +64,9 @@ model "Lith_BulletRicochetSpark" {
    FrameIndex "____" "B" 0 0
 }
 model "Lith_BulletRicochetSpark" {
+   Path "lmodels"
    DontCullBackFaces 
    UseActorRoll 
-   Path "lmodels"
    UseActorPitch 
    Scale 1.0 27.0 27.0
    PitchOffset 45
@@ -75,9 +75,9 @@ model "Lith_BulletRicochetSpark" {
    FrameIndex "____" "C" 0 0
 }
 model "Lith_BulletRicochetSpark" {
+   Path "lmodels"
    DontCullBackFaces 
    UseActorRoll 
-   Path "lmodels"
    UseActorPitch 
    Scale 1.0 27.0 27.0
    PitchOffset 45
@@ -86,31 +86,31 @@ model "Lith_BulletRicochetSpark" {
    FrameIndex "____" "D" 0 0
 }
 model "Lith_BloodHitSpray" {
+   Path "lmodels"
    DontCullBackFaces 
    UseActorRoll 
-   Path "lmodels"
    UseActorPitch 
    PitchOffset 45
    Model 0 "square.obj"
-   FrameIndex "____" "A" 0 0
    Scale 1.0 30.0 30.0
    Skin 0 "blood_drop.png"
+   FrameIndex "____" "A" 0 0
 }
 model "Lith_BloodHitCore" {
+   Path "lmodels"
    DontCullBackFaces 
    UseActorRoll 
-   Path "lmodels"
    UseActorPitch 
    PitchOffset 45
    Model 0 "square.obj"
-   FrameIndex "____" "A" 0 0
    Scale 1.0 27.0 27.0
    Skin 0 "blood_core.png"
+   FrameIndex "____" "A" 0 0
 }
 model "Lith_FortuneShotWind" {
+   Path "lmodels"
    DontCullBackFaces 
    UseActorRoll 
-   Path "lmodels"
    UseActorPitch 
    Scale 128.0 8.0 1.0
    Model 0 "tapered.obj"

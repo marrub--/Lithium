@@ -163,10 +163,8 @@ void Lith_PreTick() {
    }
 
    /* draw stuff if we're the camera */
-   if(players[consolePlayer].camera == self) {
-      if(m_cs) m_cs.lith_drawFrame();
-      Lith_URANUS.LE();
-   }
+   if(m_cs) m_cs.lith_drawFrame();
+   Lith_URANUS.LE();
 }
 
 void Lith_PostTick() {
@@ -177,7 +175,7 @@ void Lith_PostTick() {
 
    Lith_ItemVacuum();
 
-   Lith_URANUS.LZ(self, 320, 240);
+   Lith_URANUS.LZ(320, 240);
 
    Lith_ShowMapMarker();
    Lith_ShowAdviceMarker();
