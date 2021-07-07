@@ -43,7 +43,7 @@ void Sc_Obituary(void) {
 
    ifw(str pset = CVarGetS(sc_player_pronouns), pset == st_nil) {
       fastmemcpy(set,
-                 &defaultpronoun[ACS_GetPlayerInfo(pl.num, PLAYERINFO_GENDER)],
+                 &defaultpronoun[ACS_GetPlayerInfo(-1, PLAYERINFO_GENDER)],
                  sizeof(pronoun_set));
    } else {
       faststrcpy_str(pbuf, pset);

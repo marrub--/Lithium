@@ -548,9 +548,10 @@ bool Sc_ItemAttach(struct item *item) {
 
 script_str ext("ACS") addr(OBJ "ItemDetach")
 void Sc_ItemDetach(struct item *item) {
-   Dbg_Log(log_dev, "%s: detaching item %p", __func__, item);
-
-   item->Destroy(item);
+   if(item->Destroy) {
+      Dbg_Log(log_dev, "%s: detaching item %p", __func__, item);
+      item->Destroy(item);
+   }
 }
 
 script_str ext("ACS") addr(OBJ "ItemCanPlace")

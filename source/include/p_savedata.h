@@ -63,7 +63,7 @@ struct savefile {
    FILE *fp;
 };
 
-script typedef void (*loadchunker_t)(struct savefile *save, struct savechunk *chunk);
+script funcdef void (*loadchunker_t)(struct savefile *save, struct savechunk *chunk);
 
 /* Extern Functions -------------------------------------------------------- */
 

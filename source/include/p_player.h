@@ -102,6 +102,7 @@ enum ZscName(PClass) {
 #define P_Discount(n) (i96)((n) * pl.discount)
 #define P_None() (!pl.active)
 #define P_Wep_CurType() (pl.weapon.cur->info->type)
+#define GrabInput(s) ServCallI(sm_GrabInput, s)
 
 /* Extern Functions -------------------------------------------------------- */
 
@@ -218,8 +219,6 @@ struct player {
                         operator=: SetHealth(->tid, ...)}
    __prop setActivator {operator(): ACS_SetActivator(->tid)}
    __prop getVel       {operator(): mag2k(->velx, ->vely)}
-   __prop grabInput    {default:   GetMembI(->tid, sm_GrabInput),
-                        operator=: SetMembI(->tid, sm_GrabInput)}
    __prop onground     {default: GetMembI(->tid, sm_OnGround)}
    __prop waterlevel   {default: GetMembI(->tid, sm_WaterLevel)}
    __prop classname    {default: GetNameTag(->tid)}
@@ -295,8 +294,7 @@ struct player {
    u32  done_intro;
 
    /* Input */
-   char       txtbuf[8];
-   mem_size_t tbptr;
+   struct gui_txt tb;
 
    /* Static data */
    u32 spawnhealth;

@@ -159,7 +159,7 @@ static u32  MemB2_G(u32 p) {return MemB1_G(p) | (MemB1_G(p + 1) << 8);}
 static u32  MemIZ_G(u32 p) {return WrapB1(MemI1_G() + p);}
 static u32  MemIA_G(u32 p) {return WrapB2(MemI2_G() + p);}
 
-static void MemB1_S(u32 p, u32 v) {Cps_SetC(memory, p, WrapB1(v));}
+#define     MemB1_S(p, v)         Cps_SetC(memory, p, WrapB1(v))
 static void MemB2_S(u32 p, u32 v) {MemB1_S(p, v); MemB1_S(p + 1, v >> 8);}
 
 /* addressed memory access */

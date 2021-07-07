@@ -62,11 +62,6 @@
 
 #define G_TxtBoxRes(st) ((st)->tbptr = 0)
 
-#define G_TxtBoxEvt(st) \
-   __with(cstr txt_buf = Cps_Expand(st->txtbuf, 0, st->tbptr);) \
-      ifauto(cstr, _c, faststrchr(txt_buf, '\n')) \
-         __with(mem_size_t txt_len = _c - txt_buf; G_TxtBoxRes(st);)
-
 typedef i32  gid_t;
 typedef char gtab_t[32];
 
@@ -321,7 +316,7 @@ bool             G_Button_Imp(G_ImpArgs(btn));
 bool             G_ChkBox_Imp(G_ImpArgs(cbx));
 void             G_ScrBeg_Imp(G_ImpArgs(scr));
 struct slide_ret G_Slider_Imp(G_ImpArgs(sld));
-struct gui_txt  *G_TxtBox_Imp(G_ImpArgs(txt));
+bool             G_TxtBox_Imp(G_ImpArgs(txt));
 void             G_WinBeg_Imp(G_ImpArgs(win));
 
 #endif

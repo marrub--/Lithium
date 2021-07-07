@@ -45,7 +45,7 @@
 == \#TERM_OPEN_CONNECT  | Opening Connection to %S
 == \#TERM_REMOTE        | Remote: %S
 
-== \#GUI_TEXTBOX | Put your cursor here to input text.
+== \#GUI_TEXTBOX | [Click to insert text]
 
 == \#TAB_ARSENAL_Stan | Arsenal
 == \#TAB_ARSENAL_Jem  | Directives

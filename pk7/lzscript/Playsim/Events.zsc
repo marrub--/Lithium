@@ -20,12 +20,6 @@ class Lith_FINAL : StaticEventHandler {
 
 extend class Lith_HERMES;
 
-struct PlayerData clearscope {
-   bool ShiftDown;
-}
-
-transient ui PlayerData m_PData;
-
 private array<Actor> m_bossBabies;
 private int m_bossDeathInit;
 int m_latchFun;
@@ -474,37 +468,6 @@ override void CheckReplacement(ReplaceEvent ev)
    case 'SlimeProofSuit':      ev.Replacement = "RadSuit";               break;
    default: ev.IsFinal = isfinal; break;
    }
-}
-
-override bool InputProcess(InputEvent ev)
-{
-   if(!PlayerInGame[ConsolePlayer] || !Lith_Player(Players[ConsolePlayer].MO))
-      return false;
-
-   if((ev.Type    == InputEvent.Type_KeyDown || ev.Type    == InputEvent.Type_KeyUp) &&
-      (ev.KeyScan == InputEvent.Key_LShift   || ev.KeyScan == InputEvent.Key_RShift))
-   {
-      m_PData.ShiftDown = ev.Type == InputEvent.Type_KeyDown;
-      return false;
-   }
-   else if(Lith_Player(Players[ConsolePlayer].MO).m_GrabInput &&
-      ev.Type == InputEvent.Type_KeyDown && ev.KeyString)
-   {
-      int ch = ev.KeyChar;
-
-      if(m_PData.ShiftDown && ch >= Ch_L_A && ch <= Ch_L_Z)
-         ch -= 32;
-
-      EventHandler.SendNetworkEvent("Lith_Key", ch);
-      return true;
-   }
-
-   return false;
-}
-
-override void NetworkProcess(ConsoleEvent ev)
-{
-   if(ev.Name == "Lith_Key") CallACS("Lith_KeyDown", ev.Args[0]);
 }
 
 override void RenderOverlay(RenderEvent evt) {

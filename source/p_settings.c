@@ -28,19 +28,25 @@ enum {
    lxb_max = 13,
 };
 
+script funcdef void (*  scb_t)(struct set_parm const *sp);
+script funcdef bool (*scb_b_t)(struct set_parm const *sp, bool *v);
+script funcdef i32  (*scb_i_t)(struct set_parm const *sp, i32  *v);
+script funcdef k32  (*scb_k_t)(struct set_parm const *sp, k32  *v);
+script funcdef str  (*scb_s_t)(struct set_parm const *sp, str  *v);
+
 /* all members are ordered by how many types use them */
 struct setting {
    /* used by all */
-   script void (*cb)(struct set_parm const *sp);
+   scb_t cb;
    /* used by any with text */
    cstr text;
    /* used by any with a variable */
    union {
-      script bool (*b)(struct set_parm const *sp, bool *v);
-      script i32  (*i)(struct set_parm const *sp, i32  *v);
-      script k32  (*k)(struct set_parm const *sp, k32  *v);
+      scb_b_t b;
+      scb_i_t i;
+      scb_k_t k;
+      scb_s_t s;
    } cb_g;
-   script bool (*cb_e)(struct setting const *st);
    /* used by any with a scalar */
    union {
       struct {i32 min, max;} i;
@@ -71,6 +77,7 @@ struct set_parm {
 SG_cvBody(bool, Boole, I)
 SG_cvBody(i32,  Integ, I)
 SG_cvBody(k32,  Fixed, K)
+SG_cvBody(str,  Strng, S)
 
 script static
 bool SG_autoBuy(struct set_parm const *sp, bool *v) {
@@ -83,11 +90,6 @@ script static
 bool SG_doneIntro(struct set_parm const *sp, bool *v) {
    if(v) {pl.done_intro ^= pl.pclass; P_Data_Save();}
    return pl.done_intro &  pl.pclass;
-}
-
-script static
-bool SE_server(struct setting const *st) {
-   return pl.num == 0;
 }
 
 script static
@@ -180,11 +182,26 @@ void S_enume(struct set_parm const *sp) {
                  sp->g->oy + sp->y,1);
 }
 
+script static
+void S_strng(struct set_parm const *sp) {
+   str        v   = sp->st->cb_g.s(sp, nil);
+   mem_size_t len = ACS_StrLen(v);
+
+   S_label(sp);
+
+   struct gui_txt st;
+   st.tbptr = len;
+   for(mem_size_t i = 0; i < len; i++) Cps_SetC(st.txtbuf, i, v[i]);
+
+   if(G_TxtBox_HId(sp->g, sp->y, &st, _rght - 132, sp->y)) {
+      v = Cps_Expand_str(st.txtbuf, 0, st.tbptr);
+      sp->st->cb_g.s(sp, &v);
+   }
+}
+
 static
 bool S_isEnabled(struct setting const *st) {
-   return
-      (!st->cb_e   || st->cb_e(st)) &&
-      (!st->pclass || pl.pclass & st->pclass);
+   return !st->pclass || pl.pclass & st->pclass;
 }
 
 /* Static Objects ---------------------------------------------------------- */
@@ -194,10 +211,10 @@ bool S_isEnabled(struct setting const *st) {
 
 #define S_color S_bndi(_gcr_first, _gcr_max), "color"
 
-#define S_cvEnabl .cb_e = SE_server
-#define S_cvBoole S_cvEnabl, .cb_g = {.b = SG_cvBoole}
-#define S_cvInteg S_cvEnabl, .cb_g = {.i = SG_cvInteg}
-#define S_cvFixed S_cvEnabl, .cb_g = {.k = SG_cvFixed}
+#define S_cvBoole .cb_g = {.b = SG_cvBoole}
+#define S_cvInteg .cb_g = {.i = SG_cvInteg}
+#define S_cvFixed .cb_g = {.k = SG_cvFixed}
+#define S_cvStrng .cb_g = {.s = SG_cvStrng}
 
 struct setting const st_gui[] = {
    {S_enume, "gui_cursor",    S_cvInteg, S_bndi(0, gui_curs_max), "cursor"},
@@ -299,6 +316,14 @@ struct setting const st_ply[] = {
    {S_boole, "st_done_intro",       .cb_g = {.b = SG_doneIntro}},
    {S_fixed, "player_footstepvol",  S_cvFixed, S_bndk(0.0, 1.0), "mult"},
    {S_fixed, "player_viewtilt",     S_cvFixed, S_bndk(0.0, 1.0), "mult"},
+   {S_empty},
+   {S_strng, "player_pronouns", S_cvStrng},
+   {S_empty},
+   {S_label, "st_labl_pro_1"},
+   {S_label, "st_labl_pro_2"},
+   {S_label, "st_labl_pro_3"},
+   {S_label, "st_labl_pro_4"},
+   {S_label, "st_labl_pro_5"},
    {S_empty},
    {S_boole, "player_bosstexts", S_cvBoole},
    {S_empty},

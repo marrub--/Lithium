@@ -43,6 +43,12 @@ enum {
    _if_openable,
 };
 
+script funcdef bool (*item_use_t    )(struct item *item);
+script funcdef void (*item_tick_t   )(struct item *item);
+script funcdef void (*item_show_t   )(struct item *item, struct gui_state *g, i32 y);
+script funcdef void (*item_destroy_t)(struct item *item);
+script funcdef void (*item_place_t  )(struct item *item, struct container *cont);
+
 struct itemdata {
    str name, spr;
    u32 w, h;
@@ -50,15 +56,11 @@ struct itemdata {
    i96 scr;
    u32 flags;
 
-   /* these need to be scripts or they'll disappear on map load
-    * (we shouldn't use a MInit callback because it would cause too much
-    * recursion for the VM to handle)
-    */
-   script bool (*Use)(struct item *);
-   script void (*Tick)(struct item *);
-   script void (*Show)(struct item *, struct gui_state *, i32);
-   script void (*Destroy)(struct item *);
-   script void (*Place)(struct item *, struct container *);
+   item_use_t     Use;
+   item_tick_t    Tick;
+   item_show_t    Show;
+   item_destroy_t Destroy;
+   item_place_t   Place;
 };
 
 struct item {

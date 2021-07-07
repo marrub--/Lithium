@@ -29,7 +29,6 @@ Lith_Flashlight m_light;
 
 Lith_Cyberspace m_cs;
 
-bool m_grabInput;
 bool m_onGround;
 bool m_wasFrozen;
 

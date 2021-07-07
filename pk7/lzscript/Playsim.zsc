@@ -12,6 +12,7 @@
 #include "lzscript/Playsim/Cyberspace.zsc"
 #include "lzscript/Playsim/Events.zsc"
 #include "lzscript/Playsim/Files.zsc"
+#include "lzscript/Playsim/Input.zsc"
 #include "lzscript/Playsim/Monsters.zsc"
 #include "lzscript/Playsim/Pause.zsc"
 #include "lzscript/Playsim/Player.zsc"

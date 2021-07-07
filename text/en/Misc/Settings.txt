@@ -135,6 +135,12 @@
 == \#st_labl_wep | Weapons
 == \#st_labl_wld | World
 
+== \#st_labl_pro_1 | If this box is empty, then the default pronouns
+== \#st_labl_pro_2 | for your player gender will be used. Otherwise,
+== \#st_labl_pro_3 | provide them in this format:
+== \#st_labl_pro_4 | subject/object/possessive determiner/possessive/action
+== \#st_labl_pro_5 | For example: they/them/their/theirs/they're
+
 == \#st_labl_boss_1 | If you are sensitive to suggestion or otherwise
 == \#st_labl_boss_2 | made uncomfortable by threats, please disable
 == \#st_labl_boss_3 | boss dialogues!
@@ -179,6 +185,7 @@
 == \#player_footstepvol     | Footstep volume
 == \#player_lvsys           | Level-up system
 == \#player_noitemfx        | No item effects
+== \#player_pronouns        | Pronouns
 == \#player_rainshader      | Enable rain shader
 == \#player_resultssound    | Play sounds on the results screen
 == \#player_scorelog        | Log score gained

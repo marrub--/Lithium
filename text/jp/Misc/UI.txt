@@ -45,7 +45,7 @@
 == \#TERM_OPEN_CONNECT  | Opening Connection to %S
 == \#TERM_REMOTE        | 遠隔: %S
 
-== \#GUI_TEXTBOX | ここにカーソルを置いて入力。
+== \#GUI_TEXTBOX | [ここにクリックして入力開始]
 
 == \#TAB_ARSENAL_Stan | 兵器
 == \#TAB_ARSENAL_Jem  | 指令

@@ -149,6 +149,13 @@ struct upgr_data {
    struct upgr_data_lolsords    lolsords;
 };
 
+       funcdef void (*upgr_activate_t  )(struct upgrade *upgr);
+       funcdef void (*upgr_deactivate_t)(struct upgrade *upgr);
+script funcdef void (*upgr_update_t    )(struct upgrade *upgr);
+       funcdef void (*upgr_enter_t     )(struct upgrade *upgr);
+       funcdef void (*upgr_render_t    )(struct upgrade *upgr);
+       funcdef void (*upgr_init_t      )(struct upgrade *upgr);
+
 struct upgradeinfo {
    anonymous struct shopdef shopdef;
 
@@ -161,12 +168,12 @@ struct upgradeinfo {
 
    i32 key;
 
-   void (*Activate)(struct upgrade *upgr);
-   void (*Deactivate)(struct upgrade *upgr);
-   script void (*Update)(struct upgrade *upgr);
-   void (*Enter)(struct upgrade *upgr);
-   void (*Render)(struct upgrade *upgr);
-   void (*Init)(struct upgrade *upgr);
+   upgr_activate_t   Activate;
+   upgr_deactivate_t Deactivate;
+   upgr_update_t     Update;
+   upgr_enter_t      Enter;
+   upgr_render_t     Render;
+   upgr_init_t       Init;
 };
 
 struct upgrade {

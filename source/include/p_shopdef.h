@@ -21,15 +21,19 @@ enum
    shoptype_max
 };
 
+funcdef void (*shop_buy_t   )(struct shopdef const *def, void *obj);
+funcdef bool (*shop_canbuy_t)(struct shopdef const *def, void *obj);
+funcdef bool (*shop_give_t  )(struct shopdef const *def, void *obj, i32 tid);
+
 struct shopdef
 {
    cstr name;
    cstr bipunlock;
    i96  cost;
 
-   void (*ShopBuy)   (struct shopdef const *def, void *obj);
-   bool (*ShopCanBuy)(struct shopdef const *def, void *obj);
-   bool (*ShopGive)  (struct shopdef const *def, void *obj, i32 tid);
+   shop_buy_t    ShopBuy;
+   shop_canbuy_t ShopCanBuy;
+   shop_give_t   ShopGive;
 };
 
 void Shop_MInit(void);

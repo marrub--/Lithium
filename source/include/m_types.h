@@ -40,6 +40,9 @@
 #define type(x)      [[__script(x)]]
 #define addr(x)      [[__address(x)]]
 
+/* makes it easier to find function typedefs -zoe */
+#define funcdef typedef
+
 #define unwrap_do(e, stmt) statement(if((e)->some) statement(stmt);)
 
 #define unwrap_cb() [[return]] __asm("Rjnk()")

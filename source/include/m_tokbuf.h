@@ -46,6 +46,8 @@ struct tbuf_err {
    cstr err;
 };
 
+funcdef i32 (*tbuf_process_t)(struct token *tok);
+
 struct tokbuf {
    __prop get   {operator(): TBufGet  (this)}
    __prop peek  {operator(): TBufPeek (this)}
@@ -67,7 +69,7 @@ struct tokbuf {
 
    i32 tpos, tend;
 
-   i32 (*tokProcess)(struct token *tok);
+   tbuf_process_t tokProcess;
 };
 
 #endif

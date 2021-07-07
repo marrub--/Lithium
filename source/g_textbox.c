@@ -17,35 +17,24 @@
 #include "m_cps.h"
 #include "m_char.h"
 
-struct gui_txt *G_TxtBox_Imp(struct gui_state *g, gid_t id, struct gui_arg_txt const *a) {
+bool G_TxtBox_Imp(struct gui_state *g, gid_t id, struct gui_arg_txt const *a) {
    struct gui_txt *st = a->st;
 
    G_Auto(g, id, a->x, a->y, 260, 10);
 
    bool hot = g->hot == id;
+   bool ret = false;
 
-   if(hot) pl.grabInput = true;
-
-   if(*pl.txtbuf) ACS_LocalAmbientSound(ss_player_cbi_keypress, 30);
-
-   for(char *c = pl.txtbuf; *c; c++) {
-      switch(*c) {
-      case '\b':
-         if(st->tbptr - 1 >= 0)
-            st->tbptr--;
-         break;
-      case '\r':
-         *c = '\n';
-      default:
-         if(st->tbptr + 1 < Cps_CountOf(st->txtbuf) && (IsPrint(*c) || IsSpace(*c))) {
-            Cps_SetC(st->txtbuf, st->tbptr, *c);
-            st->tbptr++;
-         }
-         break;
-      }
+   if(hot && g->clicklft && !g->old.clicklft) {
+      GrabInput(Cps_Expand_str(st->txtbuf, 0, st->tbptr));
    }
 
-   Cps_SetC(st->txtbuf, st->tbptr, '\0');
+   if(pl.tb.txtbuf[0]) {
+      fastmemcpy(st,     &pl.tb, sizeof pl.tb);
+      fastmemset(&pl.tb, 0,      sizeof pl.tb);
+      Cps_SetC(st->txtbuf, st->tbptr, '\0');
+      ret = true;
+   }
 
    PrintSprite(sp_UI_ResultFrame, a->x-3 + g->ox,1, a->y-3 + g->oy,1);
 
@@ -59,10 +48,7 @@ struct gui_txt *G_TxtBox_Imp(struct gui_state *g, gid_t id, struct gui_arg_txt c
    PrintText(sf_smallfnt, g->defcr, a->x + g->ox,1, a->y + g->oy,1);
    ClearClip();
 
-   fastmemset(pl.txtbuf, 0, sizeof pl.txtbuf);
-   pl.tbptr = 0;
-
-   return st;
+   return ret;
 }
 
 /* EOF */

@@ -1668,6 +1668,11 @@
 "LITH_st_labl_ply" = "Player";
 "LITH_st_labl_wep" = "Weapons";
 "LITH_st_labl_wld" = "World";
+"LITH_st_labl_pro_1" = "If this box is empty, then the default pronouns";
+"LITH_st_labl_pro_2" = "for your player gender will be used. Otherwise,";
+"LITH_st_labl_pro_3" = "provide them in this format:";
+"LITH_st_labl_pro_4" = "subject/object/possessive determiner/possessive/action";
+"LITH_st_labl_pro_5" = "For example: they/them/their/theirs/they're";
 "LITH_st_labl_boss_1" = "If you are sensitive to suggestion or otherwise";
 "LITH_st_labl_boss_2" = "made uncomfortable by threats, please disable";
 "LITH_st_labl_boss_3" = "boss dialogues!";
@@ -1709,6 +1714,7 @@
 "LITH_player_footstepvol" = "Footstep volume";
 "LITH_player_lvsys" = "Level-up system";
 "LITH_player_noitemfx" = "No item effects";
+"LITH_player_pronouns" = "Pronouns";
 "LITH_player_rainshader" = "Enable rain shader";
 "LITH_player_resultssound" = "Play sounds on the results screen";
 "LITH_player_scorelog" = "Log score gained";
@@ -1841,7 +1847,7 @@
 "LITH_TERM_USE_TO_ACK" = "Use To Acknowledge";
 "LITH_TERM_OPEN_CONNECT" = "Opening Connection to %S";
 "LITH_TERM_REMOTE" = "Remote: %S";
-"LITH_GUI_TEXTBOX" = "Put your cursor here to input text.";
+"LITH_GUI_TEXTBOX" = "[Click to insert text]";
 "LITH_TAB_ARSENAL_Stan" = "Arsenal";
 "LITH_TAB_ARSENAL_Jem" = "Directives";
 "LITH_TAB_ARSENAL_Fulk" = "Rig";
@@ -3129,7 +3135,7 @@
 "LITH_TERM_USE_TO_ACK" = "Use To Acknowledge";
 "LITH_TERM_OPEN_CONNECT" = "Opening Connection to %S";
 "LITH_TERM_REMOTE" = "遠隔: %S";
-"LITH_GUI_TEXTBOX" = "ここにカーソルを置いて入力。";
+"LITH_GUI_TEXTBOX" = "[ここにクリックして入力開始]";
 "LITH_TAB_ARSENAL_Stan" = "兵器";
 "LITH_TAB_ARSENAL_Jem" = "指令";
 "LITH_TAB_ARSENAL_Ari" = "機体";

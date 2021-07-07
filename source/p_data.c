@@ -110,8 +110,6 @@ void P_Dat_PTickPre()
                    WARPF_COPYPITCH
    };
 
-   pl.grabInput = false;
-
    ACS_Warp(pl.cameratid,  4, 0, ACS_GetActorViewHeight(0), 0, _warpflags);
    ACS_Warp(pl.weathertid, 4, 0, ACS_GetActorViewHeight(0), 0, _warpflags);
 
@@ -139,7 +137,7 @@ void P_Dat_PTickPre()
 
    pl.buttons = ACS_GetPlayerInput(-1, INPUT_BUTTONS);
 
-   pl.name        = (ACS_BeginPrint(), ACS_PrintName(pl.num), ACS_EndStrParam());
+   pl.name        = (ACS_BeginPrint(), ACS_PrintName(-1), ACS_EndStrParam());
    pl.weaponclass = ACS_GetWeapon();
 
    pl.scopetoken = InvNum(so_WeaponScopedToken);
@@ -246,7 +244,6 @@ script void P_Init() {
       fastmemset(&pl, 0, sizeof pl);
 
       pl.active = true;
-      pl.num    = ACS_PlayerNumber();
 
       SetPClass();
       SetupAttributes();
@@ -377,11 +374,8 @@ void P_Dat_PTickPst()
 /* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr(OBJ "KeyDown")
-void Sc_KeyDown(i32 ch)
-{
-   if(!P_None())
-      if(pl.tbptr + 1 < countof(pl.txtbuf))
-         pl.txtbuf[pl.tbptr++] = ch;
+void Sc_KeyDown(i32 ch) {
+   if(!P_None()) Cps_SetC(pl.tb.txtbuf, pl.tb.tbptr++, ch);
 }
 
 /* EOF */

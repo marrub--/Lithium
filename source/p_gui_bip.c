@@ -263,16 +263,19 @@ i32 SearchPage(struct page *page, cstr query) {
 
 static
 void SearchUI(struct gui_state *g) {
-   struct gui_txt *st = G_TxtBox(g, &CBIState(g)->bipsearch, 10, 52);
+   struct gui_txt *st = &CBIState(g)->bipsearch;
 
    bip.lastcategory = _bipc_main;
 
-   G_TxtBoxEvt(st) {
-      /* That's a lot of numbers... */
-      struct {
+   if(G_TxtBox(g, &CBIState(g)->bipsearch, 10, 52)) {
+      struct extraname {
          u64  crc;
          cstr which;
-      } const extranames[] = {
+      };
+
+      static
+      struct extraname const extranames[] = {
+         /* That's a lot of numbers... */
          {0x5F38B6C56F0A6D84L, "Extra1"},
          {0x90215131A36573D7L, "Extra2"},
          {0xC54EC0A7C6836A5BL, "Extra3"},
@@ -280,14 +283,14 @@ void SearchUI(struct gui_state *g) {
          {0x9FD558A2C8C8D163L, "Extra5"},
       };
 
-      u64 crc = crc64(txt_buf, txt_len);
-
+      noinit static
       char query[128];
-      fastmemmove(query, txt_buf, txt_len);
-      query[txt_len] = '\0';
+      fastmemcpy(query, Cps_Expand(st->txtbuf, 0, st->tbptr), st->tbptr);
+      query[st->tbptr] = '\0';
 
       bip.resnum = bip.rescur = 0;
 
+      u64 crc = crc64(query, st->tbptr);
       for(i32 i = 0; i < countof(extranames); i++) {
          if(crc == extranames[i].crc) {
             bip.result[bip.resnum++] = P_BIP_NameToPage(extranames[i].which);

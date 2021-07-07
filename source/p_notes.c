@@ -18,7 +18,8 @@
 
 void P_CBI_TabNotes(struct gui_state *g)
 {
-   struct gui_txt *st = G_TxtBox(g, &CBIState(g)->notebox, 35, 27);
+   struct gui_txt *st = &CBIState(g)->notebox;
+   G_TxtBox(g, st, 35, 27);
 
    PrintText_str(ns(lang(sl_edit)), sf_smallfnt, g->defcr, g->ox+19,2, g->oy+28,0);
    if(G_ChkBox(g, CBIState(g)->noteedit, 21, 24))

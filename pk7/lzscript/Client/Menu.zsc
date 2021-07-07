@@ -74,7 +74,7 @@ private ui void tickMenu() {
 }
 
 private ui void drawMenu() {
-   if(menuActive) {
+   if(menuActive && !Menu.getCurrentMenu().dontDim) {
       m_ScreenDim = Lith_UTIL.lerp(m_ScreenDim, 0.75, 0.3);
    } else {
       m_ScreenDim = Lith_UTIL.lerp(m_ScreenDim, 0.0, 0.1);

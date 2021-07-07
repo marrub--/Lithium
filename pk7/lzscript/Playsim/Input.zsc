@@ -1,0 +1,71 @@
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison G. Watson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
+class Lith_TextInputMenu : Menu {
+   TextEnterMenu m_inputMenu;
+
+   void init(string initial) {
+      dontDim  = true;
+      dontBlur = true;
+      m_inputMenu = TextEnterMenu.OpenTextEnter(self, Menu.optionFont(),
+                                                initial, 128 * 8, true, true);
+      m_inputMenu.activateMenu();
+   }
+
+   override void drawer() {
+      super.drawer();
+
+      Font   fnt = Lith_URANUS.instance().fntSml();
+      int    lny = fnt.getHeight();
+      string txt = m_inputMenu.getText() .. fnt.GetCursor();
+
+      let brl = fnt.breakLines(txt, 320);
+
+      for(uint i = 0, lns = brl.count(); i < lns; i++) {
+         string s = brl.stringAt(i);
+         Screen.drawText(fnt, Font.CR_WHITE, 0, 60 + lny * i, s,
+                         DTA_VirtualWidth, 320, DTA_VirtualHeight, 240);
+      }
+   }
+
+   override bool menuEvent(int mkey, bool fromController) {
+      if(super.menuEvent(mkey, fromController)) {
+         return true;
+      }
+      switch(mkey) {
+      case MKEY_INPUT: {
+         string s = m_inputMenu.getText();
+         for(int i = 0, len = s.length(); i < len; ++i) {
+            CallACS("Lith_KeyDown", s.byteAt(i));
+         }
+         m_inputMenu = null;
+         destroy();
+         break;
+      }
+      case MKEY_ABORT:
+         m_inputMenu = null;
+         destroy();
+         break;
+      }
+      return false;
+   }
+}
+
+extend class Lith_HERMES;
+
+transient ui Lith_TextInputMenu m_textMenu;
+
+ui static void GrabInput(string initial) {
+   let sv = Instance();
+   sv.m_textMenu = new("Lith_TextInputMenu");
+   sv.m_textMenu.activateMenu();
+   sv.m_textMenu.init(initial);
+}
+
+/* EOF */
