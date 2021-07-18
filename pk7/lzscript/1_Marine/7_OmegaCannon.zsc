@@ -21,7 +21,7 @@ default
    Weapon.SlotNumber 7;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/cannon/draw";
-   Weapon.AmmoType "Lith_CannonAmmo";
+   Lith_Weapon.AmmoType "Lith_CannonAmmo";
    Inventory.AltHudIcon "BFUGA0";
 
    +WEAPON.NOAUTOFIRE

@@ -13,7 +13,7 @@
 #include "p_hudid.h"
 
 void P_Ren_Debug() {
-   if(!get_bit(dbglevel, log_devh)) return;
+   if(!dbglevel(log_devh)) return;
 
    Dbg_Stat("exp: lv.%u %u/%u/%u\n", pl.attr.level, pl.attr.expprev, pl.attr.exp, pl.attr.expnext);
    Dbg_Stat("x: %k\ny: %k\nz: %k\n", pl.x, pl.y, pl.z);

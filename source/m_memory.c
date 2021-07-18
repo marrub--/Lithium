@@ -377,7 +377,7 @@ dyn:
    }
 
    #ifndef NDEBUG
-   if(get_bit(dbglevel, log_dpl)) {
+   if(dbglevel(log_dpl)) {
       ACS_BeginPrint();
       PrintChars("Plsa: alloc ", 12);
       ACS_PrintHex((intptr_t)dpl_ina);
@@ -409,7 +409,7 @@ void __GDCC__Plsf(void *p) {
       struct dpl_blk *blk = GetDplBlk(p);
 
       #ifndef NDEBUG
-      if(get_bit(dbglevel, log_dpl)) {
+      if(dbglevel(log_dpl)) {
          ACS_BeginPrint();
          PrintChars("Plsf: dealloc ", 14);
          ACS_PrintHex((intptr_t)blk);

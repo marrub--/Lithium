@@ -54,7 +54,7 @@ default
    Weapon.SlotNumber 0;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/starshot/draw";
-   Weapon.AmmoType "Lith_ManaAmmo";
+   Lith_Weapon.AmmoType "Lith_ManaAmmo";
    Inventory.AltHudIcon "SPELD0";
 
    -WEAPON.NOAUTOFIRE

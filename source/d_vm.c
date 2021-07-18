@@ -226,7 +226,7 @@ void TraceReg() {
 /* jumps */
 #ifndef NDEBUG
 #define JmpDbg() \
-   statement(if(get_bit(dbglevel, log_dlg)) { \
+   statement(if(dbglevel(log_dlg)) { \
       ACS_BeginLog(); \
       Dlg_WriteCode(def, next, GetPC() - PRG_BEG); \
       ACS_PrintChar(' '); \
@@ -620,7 +620,7 @@ void Dlg_Run(u32 num) {
    for(u32 i = 0; i < def->stabC; i++) memory[STR_BEG_C + i] = def->stabV[i];
 
    #ifndef NDEBUG
-   if(get_bit(dbglevel, log_dlg)) {
+   if(dbglevel(log_dlg)) {
       ACS_BeginLog();
       PrintChrSt("Dumping segment PRG...\n");
       Dbg_PrintMemC(&memory[PRG_BEG_C], def->codeC);

@@ -533,8 +533,8 @@ void P_ItemPopup(str tag, k32 x, k32 y, k32 z) {
    bool seen;
    struct i32v2 vp = project(x, y, z, &seen);
    if(!seen) {
-      vp.x = 320/2;
-      vp.y = 240/2;
+      vp.x = 320/2 + ACS_Random(-64, 64);
+      vp.y = 240/2 + ACS_Random(-48, 48);
    }
    DrawCallI(sm_AddScoreNum, vp.x, vp.y, tag);
 }

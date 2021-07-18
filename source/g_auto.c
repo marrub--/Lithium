@@ -63,7 +63,7 @@ void G_Auto(struct gui_state *g, gid_t id, i32 x, i32 y, i32 w, i32 h,
    }
 
    #ifndef NDEBUG
-   if(get_bit(dbgflags, dbgf_gui)) {
+   if(dbgflags(dbgf_gui)) {
       PrintLine(x, y, x + w, y + h, 0xFF0000);
       PrintLine(x, y, x + w, y, 0xFF0000);
       PrintLine(x, y, x, y + h, 0xFF0000);
@@ -158,7 +158,7 @@ void G_Clip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, i32 ww) {
    G_setClip(g);
 
    #ifndef NDEBUG
-   if(get_bit(dbgflags, dbgf_gui)) {
+   if(dbgflags(dbgf_gui)) {
       x = clip->x, y = clip->y, w = clip->w, h = clip->h;
       PrintLine(x,     y,     x + w, y + h, 0x00FFFF);
       PrintLine(x,     y,     x + w, y,     0x00FFFF);

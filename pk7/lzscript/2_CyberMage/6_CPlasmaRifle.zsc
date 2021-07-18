@@ -71,7 +71,7 @@ default
    Weapon.SlotNumber 6;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/plasma/draw";
-   Weapon.AmmoType "Lith_PlasmaAmmo";
+   Lith_Weapon.AmmoType "Lith_PlasmaAmmo";
    Inventory.AltHudIcon "PLASA0";
 }
 

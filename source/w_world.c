@@ -247,7 +247,7 @@ void HInit(void) {
    if(CVarGetI(sc_sv_nobosses) ||
       CVarGetI(sc_sv_nobossdrop)
       #ifndef NDEBUG
-      || get_bit(dbgflags, dbgf_items)
+      || dbgflags(dbgf_items)
       #endif
       )
    {

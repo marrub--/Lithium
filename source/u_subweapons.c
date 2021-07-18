@@ -67,7 +67,7 @@ void Upgr_Subweapons_Render(struct upgrade *upgr) {
 void Upgr_Subweapons_Enter(struct ugprade *upgr) {
    UData.shots = 2;
    #ifndef NDEBUG
-   if(get_bit(dbgflags, dbgf_items)) {
+   if(dbgflags(dbgf_items)) {
       UData.have = UINT32_MAX;
    } else {
    #endif

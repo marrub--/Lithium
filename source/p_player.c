@@ -278,8 +278,8 @@ i96 P_Scr_Give(k32 x, k32 y, k32 z, i96 score, bool nomul) {
    bool seen;
    struct i32v2 vp = project(x, y, z, &seen);
    if(!seen) {
-      vp.x = 320/2;
-      vp.y = 240/2;
+      vp.x = 320/2 + ACS_Random(-64, 64);
+      vp.y = 240/2 + ACS_Random(-48, 48);
    }
    return P_Scr_GivePos(vp.x, vp.y, score, nomul);
 }

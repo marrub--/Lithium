@@ -273,7 +273,7 @@ void Dlg_MInit(void)
    }
 
    #ifndef NDEBUG
-   if(get_bit(dbglevel, log_dlg)) PrintDbg();
+   if(dbglevel(log_dlg)) PrintDbg();
    #endif
 }
 

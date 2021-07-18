@@ -163,7 +163,7 @@ alloc_aut(0) script static
 void LevelUp(u32 *attr, char **attrptrs) {
    u32 level = pl.attr.level;
 
-   for(i32 i = 0; i < 35 * 5; i++) {
+   for(i32 i = 0; i < 35 * 5; ++i) {
       if(level != pl.attr.level) {
          /* a new levelup started, so exit */
          return;
@@ -202,7 +202,7 @@ void P_Lv_GiveEXP(u64 amt) {
          a->points += 2;
          pts       -= 2;
       case atsys_auto:
-         for(i32 i = 0; i < pts; i++) attr[ACS_Random(0, 100) % at_max]++;
+         for(i32 i = 0; i < pts; ++i) attr[ACS_Random(0, 100) % at_max]++;
          levelup++;
          break;
       }
@@ -223,7 +223,7 @@ void P_Lv_GiveEXP(u64 amt) {
 
       *sp++ = '\n';
 
-      for(i32 i = 0; i < at_max; i++) {
+      for(i32 i = 0; i < at_max; ++i) {
          a->attrs[i] += attr[i];
          if(attr[i]) {
             sp += sprintf(sp, "%.3s +%u (%u)\n",
@@ -271,7 +271,7 @@ script void P_Init() {
    ACS_SpawnForced(so_CameraHax, 0, 0, 0, pl.weathertid = ACS_UniqueTID());
 
    #ifndef NDEBUG
-   if(get_bit(dbgflags, dbgf_score)) pl.score = 0xFFFFFFFFFFFFFFFFll;
+   if(dbgflags(dbgf_score)) pl.score = 0xFFFFFFFFFFFFFFFFll;
    #endif
 
    /* pls not exit map with murder thingies out */
@@ -319,7 +319,7 @@ script void P_Init() {
       pl.logH(1, tmpstr(lang(sl_log_version)), VersionName, __DATE__);
 
       #ifndef NDEBUG
-      if(dbglevel) {
+      if(dbglevel_any()) {
          pl.logH(1, "player is %u bytes long!", sizeof pl * 4);
          pl.logH(1, "snil is \"%S\"", snil);
          PrintDmonAllocSize();
@@ -347,11 +347,20 @@ script void P_Init() {
    }
 
    #ifndef NDEBUG
-   if(get_bit(dbgflags, dbgf_items)) {
-      for(i32 i = weapon_min; i < weapon_max; i++) {
+   if(dbgflags(dbgf_ammo)) {
+      for(i32 i = 0; i < countof(sa_ammo_types); ++i) {
+         InvGive(sa_ammo_types[i], 0x7FFFFFFF);
+      }
+   }
+
+   if(dbgflags(dbgf_items)) {
+      for(i32 i = weapon_min; i < weapon_max; ++i) {
          struct weaponinfo const *info = &weaponinfo[i];
-         if(info->classname != snil && info->pclass & pl.pclass && !(info->defammotype & AT_Mana))
+         if(info->classname != snil && info->pclass & pl.pclass &&
+            !(info->defammotype & AT_Mana))
+         {
             InvGive(info->classname, 1);
+         }
       }
    }
    #endif

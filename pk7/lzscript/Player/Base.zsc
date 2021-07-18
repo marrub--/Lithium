@@ -60,22 +60,23 @@ override void BeginPlay() {
 }
 
 override void GiveDefaultInventory() {
-   GiveInventoryType("Lith_IDOL");
+   lith_giveDefItem("Lith_IDOL", 0);
+   lith_giveDefItem("Lith_ManaAmmo", 0);
+   lith_giveDefItem("Lith_BulletAmmo", 0);
+   lith_giveDefItem("Lith_ShellAmmo", 0);
+   lith_giveDefItem("Lith_RocketAmmo", 0);
+   lith_giveDefItem("Lith_PlasmaAmmo", 0);
+   lith_giveDefItem("Lith_CannonAmmo", 0);
 }
 
-void Lith_GiveDefItem(class<Inventory> type, int amount) {
-   let item = Inventory(Spawn(type));
-   item.bIGNORESKILL = true;
-   item.Amount = amount;
-   item.CallTryPickup(self);
+void lith_giveDefItem(class<Inventory> type, int amount) {
+   giveInventoryType(type).amount = amount;
 }
 
 void Lith_GiveDefWeapon(class<Weapon> type) {
-   let wep = Weapon(Spawn(type));
-   wep.bIGNORESKILL = true;
-   wep.Amount = 1;
-   wep.CallTryPickup(self);
-   Player.ReadyWeapon = Player.PendingWeapon = wep;
+   let wep = Weapon(giveInventoryType(type));
+   wep.amount = 1;
+   player.readyWeapon = player.pendingWeapon = wep;
 }
 
 override void PlayerThink() {

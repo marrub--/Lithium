@@ -16,7 +16,7 @@ default
    Tag "$LITH_INFO_SHORT_4Bore";
    Weapon.SlotNumber 3;
    Weapon.SlotPriority 1;
-   Weapon.AmmoType "Lith_ShellAmmo";
+   Lith_Weapon.AmmoType "Lith_ShellAmmo";
 }
 
 action(Weapon) void Lith_A_Fire4Bore()

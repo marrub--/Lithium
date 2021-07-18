@@ -45,7 +45,7 @@ default
    Weapon.SlotNumber 0;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/rend/draw";
-   Weapon.AmmoType "Lith_ManaAmmo";
+   Lith_Weapon.AmmoType "Lith_ManaAmmo";
    Inventory.AltHudIcon "SPELB0";
 
    +WEAPON.NOAUTOFIRE

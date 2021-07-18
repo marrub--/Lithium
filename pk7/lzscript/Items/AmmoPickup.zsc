@@ -142,7 +142,7 @@ private void lith_absorbAmmo(Actor mo, class<Lith_Ammo> ty, in out int amt) {
 
    if(mo is "Lith_ThothPlayer") {ty = "Lith_ManaAmmo"; amt *= 7;}
 
-   Lith_Ammo.findOrCreate(ty, mo).absorbAmount(getTag(), pos, amt);
+   Lith_Ammo(mo.findInventory(ty)).lith_absorbAmount(getTag(), pos, amt);
 }
 
 override bool tryPickup(in out Actor mo) {

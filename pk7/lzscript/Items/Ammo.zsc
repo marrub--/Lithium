@@ -7,23 +7,15 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_Ammo : Ammo {
-   string m_ammoText;
-   string m_logText;
-
-   static Lith_Ammo create(class<Lith_Ammo> ty, Actor curOwner) {
-      let mo = Lith_Ammo(spawn(ty));
-      mo.amount = 0;
-      mo.callTryPickup(curOwner);
-      return mo;
+class Lith_Ammo : Inventory abstract {
+   default {
+      +Inventory.KeepDepleted
    }
 
-   static Lith_Ammo findOrCreate(class<Lith_Ammo> ty, Actor curOwner) {
-      let mo = Lith_Ammo(curOwner.findInventory(ty));
-      return mo ? mo : create(ty, curOwner);
-   }
+   private transient string m_ammoText;
+   private transient string m_logText;
 
-   void absorbAmount(string logText, vector3 p, in out int amt) {
+   void lith_absorbAmount(string logText, vector3 p, in out int amt) {
       int originalAmt = amt;
       if((amount + amt - maxAmount) <= 0) {
          /* less than or equals max, absorb the whole item */
@@ -36,8 +28,8 @@ class Lith_Ammo : Ammo {
       }
       m_ammoText = "\cj+\cd" .. (originalAmt - amt) .. " \c-" .. getTag();
       m_logText  = logText .. ": " .. m_ammoText;
-      p.x += frandom(-4.0, 4.0);
-      p.y += frandom(-4.0, 4.0);
+      p.x += fRandom(-8.0, 8.0);
+      p.y += fRandom(-8.0, 8.0);
       callAcs("Lith_ItemPopupAmmo", int(p.x*FIX), int(p.y*FIX), int(p.z*FIX));
    }
 }

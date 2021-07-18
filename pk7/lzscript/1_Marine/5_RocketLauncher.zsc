@@ -85,7 +85,7 @@ default
    Weapon.SlotNumber 5;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/rocket/draw";
-   Weapon.AmmoType "Lith_RocketAmmo";
+   Lith_Weapon.AmmoType "Lith_RocketAmmo";
    Inventory.AltHudIcon "LAUNA0";
 
    +WEAPON.NOAUTOFIRE

@@ -47,7 +47,7 @@
 
 #ifndef NDEBUG
 #define Dbg_Log(level, ...) \
-   statement(if(get_bit(dbglevel, level)) Log(c"" #level ": " __VA_ARGS__);)
+   statement(if(dbglevel(level)) Log(c"" #level ": " __VA_ARGS__);)
 #else
 #define Dbg_Log(...)
 #endif
@@ -136,10 +136,10 @@
 
 #ifndef NDEBUG
 #define Dbg_Stat(...) \
-   (get_bit(dbglevel, log_devh) ? Dbg_Stat_Impl(__VA_ARGS__) : (void)0)
+   (dbglevel(log_devh) ? Dbg_Stat_Impl(__VA_ARGS__) : (void)0)
 
 #define Dbg_Note(...) \
-   (get_bit(dbglevel, log_devh) ? Dbg_Note_Impl(__VA_ARGS__) : (void)0)
+   (dbglevel(log_devh) ? Dbg_Note_Impl(__VA_ARGS__) : (void)0)
 
 #define Dbg_Trace(n) (ACS_BeginLog(), PrintChrSt(__func__), ACS_PrintInt(n), ACS_EndLog())
 #else
@@ -170,6 +170,7 @@ enum {
 };
 
 enum {
+   dbgf_ammo,
    dbgf_bip,
    dbgf_gui,
    dbgf_items,
@@ -202,8 +203,10 @@ void Log(cstr fmt, ...);
 extern str dbgstat[],  dbgnote[];
 extern i32 dbgstatnum, dbgnotenum;
 
-#define dbglevel CVarGetI(sc_debug_level)
-#define dbgflags CVarGetI(sc_debug_flags)
+#define dbglevel(level) get_bit(CVarGetI(sc_debug_level), level)
+#define dbgflags(flags) get_bit(CVarGetI(sc_debug_flags), flags)
+#define dbglevel_any()  !!CVarGetI(sc_debug_level)
+#define dbgflags_any()  !!CVarGetI(sc_debug_flags)
 #endif
 
 #endif

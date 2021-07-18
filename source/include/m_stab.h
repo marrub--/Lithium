@@ -729,6 +729,15 @@ stab_ary_bgn_x(sa_upgr_categ)
 #include "u_data.h"
 stab_ary_end_x()
 
+stab_ary_bgn_x(sa_ammo_types)
+stab_ary_ent_x(OBJ "ManaAmmo")
+stab_ary_ent_x(OBJ "BulletAmmo")
+stab_ary_ent_x(OBJ "ShellAmmo")
+stab_ary_ent_x(OBJ "RocketAmmo")
+stab_ary_ent_x(OBJ "PlasmaAmmo")
+stab_ary_ent_x(OBJ "CannonAmmo")
+stab_ary_end_x()
+
 #undef stab_ary_bgn_x
 #undef stab_ary_ent_x
 #undef stab_ary_end_x

@@ -65,7 +65,7 @@ void Sc_GetSigil(void)
       pl.sgacquired = true;
 
       #ifndef NDEBUG
-      if(dbglevel) return;
+      if(dbglevel_any()) return;
       #endif
 
       FreezeTime();

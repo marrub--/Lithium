@@ -78,7 +78,10 @@ private bool m_side;
 
 private readOnly uint m_lithWeaponFlags;
 
-property MagSize: m_max;
+private class<Lith_Ammo> m_ammoType;
+
+property AmmoType: m_ammoType;
+property MagSize:  m_max;
 
 property ScopeOutSound: m_scopeOutSnd;
 property ScopeInSound:  m_scopeInSnd;
@@ -104,15 +107,11 @@ override void tick() {
 
    if(bSlot3OptAmmo) {
       if(Lith_UTIL.pData(pdata_slot3Ammo)) {
-         if(!ammoType1) {
-            ammoType1 = "Lith_ShellAmmo";
-            ammo1     = addAmmo(owner, ammoType1, 0);
+         if(!m_ammoType) {
+            m_ammoType = "Lith_ShellAmmo";
          }
-      } else {
-         if(ammoType1) {
-            ammoType1 = null;
-            ammo1     = null;
-         }
+      } else if(m_ammoType) {
+         m_ammoType = null;
       }
    }
 }
@@ -422,7 +421,7 @@ action(Weapon) void Lith_FireBullets(double spreadHorz, double spreadVert, int n
 }
 
 action(Weapon) State lith_jumpNoAmmo(int minAmount = 1, stateLabel label = "FireEmpty") {
-   if(invoker.ammoType1 && self.countInv(invoker.ammoType1) < minAmount) {
+   if(invoker.m_ammoType && self.countInv(invoker.m_ammoType) < minAmount) {
       if(label == "FireEmpty") {
          lith_a_setInterpolation(true);
       }
@@ -433,11 +432,11 @@ action(Weapon) State lith_jumpNoAmmo(int minAmount = 1, stateLabel label = "Fire
 }
 
 action(Weapon) void lith_takeAmmo(int amount = 1) {
-   self.takeInventory(invoker.ammoType1, amount, noTakeInfinite: true);
+   self.takeInventory(invoker.m_ammoType, amount, noTakeInfinite: true);
 }
 
 action(Weapon) State lith_jumpAmmo(int maxAmount, stateLabel label) {
-   if(self.countInv(invoker.ammoType1) >= maxAmount) {
+   if(self.countInv(invoker.m_ammoType) >= maxAmount) {
       return resolveState(label);
    } else {
       return null;

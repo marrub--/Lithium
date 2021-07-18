@@ -29,7 +29,7 @@ i32 dbgstatnum,  dbgnotenum;
 
 void Dbg_Stat_Impl(cstr fmt, ...)
 {
-   if(!get_bit(dbglevel, log_devh)) return;
+   if(!dbglevel(log_devh)) return;
 
    va_list vl;
 
@@ -44,7 +44,7 @@ void Dbg_Stat_Impl(cstr fmt, ...)
 
 void Dbg_Note_Impl(cstr fmt, ...)
 {
-   if(!get_bit(dbglevel, log_devh)) return;
+   if(!dbglevel(log_devh)) return;
 
    va_list vl;
 

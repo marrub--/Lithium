@@ -59,7 +59,7 @@ default
    Tag "$LITH_INFO_SHORT_FatMac";
    Weapon.SlotNumber 6;
    Weapon.SlotPriority 1;
-   Weapon.AmmoType "Lith_PlasmaAmmo";
+   Lith_Weapon.AmmoType "Lith_PlasmaAmmo";
 
    +WEAPON.NOAUTOFIRE;
 }

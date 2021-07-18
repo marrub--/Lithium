@@ -171,7 +171,7 @@ default
    Weapon.SlotNumber 5;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/ionrifle/draw";
-   Weapon.AmmoType "Lith_RocketAmmo";
+   Lith_Weapon.AmmoType "Lith_RocketAmmo";
    Inventory.AltHudIcon "IONGY0";
 
    +WEAPON.NOAUTOFIRE

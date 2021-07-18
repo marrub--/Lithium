@@ -172,7 +172,7 @@ void BaseMonsterLevel(dmon_t *m) {
       m->id, m->rank, m->level, ACS_GetActorClass(0));
 
    #ifndef NDEBUG
-   if(get_bit(dbglevel, log_dmonV))
+   if(dbglevel(log_dmonV))
       PrintMonsterInfo(m);
    #endif
 }

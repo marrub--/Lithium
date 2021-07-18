@@ -123,7 +123,7 @@ default {
    Tag "$LITH_INFO_SHORT_FortuneGun";
    Weapon.SlotNumber 7;
    Weapon.SlotPriority 1;
-   Weapon.AmmoType "Lith_CannonAmmo";
+   Lith_Weapon.AmmoType "Lith_CannonAmmo";
 
    +WEAPON.NOAUTOFIRE;
 }

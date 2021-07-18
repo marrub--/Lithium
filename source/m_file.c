@@ -44,7 +44,7 @@ i32 NetClose(void *nfdata) {
 
    #ifndef NDEBUG
    /* If debugging, print out information about the buffer being written. */
-   if(get_bit(dbglevel, log_save)) {
+   if(dbglevel(log_save)) {
       ACS_BeginLog();
       __nprintf("NetClose: Writing netfile \"%S\" (%zub)\nData follows\n",
                 nf->pcvar, nf->pos);
@@ -190,7 +190,7 @@ FILE *NFOpen(str pcvar, char rw) {
 #ifndef NDEBUG
             /* If debugging, print out information about the buffer
              * being read. */
-            if(get_bit(dbglevel, log_save)) {
+            if(dbglevel(log_save)) {
                ACS_BeginLog();
                PrintChrSt("NFOpen: Opening memfile \"");
                ACS_PrintString(pcvar);

@@ -95,7 +95,7 @@ script void P_Upg_PInit() {
 
       if(upgr->info->cost == 0
          #ifndef NDEBUG
-         || get_bit(dbgflags, dbgf_upgr)
+         || dbgflags(dbgf_upgr)
          #endif
          )
          P_Upg_Buy(upgr, true, true);

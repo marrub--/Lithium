@@ -38,7 +38,7 @@ void MailNotify(cstr name) {
    bip.mailreceived++;
 
    #ifndef NDEBUG
-   if(get_bit(dbgflags, dbgf_bip)) return;
+   if(dbgflags(dbgf_bip)) return;
    #endif
 
    ACS_Delay(20);
@@ -205,7 +205,7 @@ void P_BIP_PInit(void) {
    if(!bippagenum) P_BIP_InitInfo();
 
    #ifndef NDEBUG
-   if(dbglevel) pl.logH(1, "There are %u info pages!", bippagenum);
+   if(dbglevel_any()) pl.logH(1, "There are %u info pages!", bippagenum);
    #endif
 
    bip.pagemax = 0;
@@ -228,7 +228,7 @@ void P_BIP_PInit(void) {
    for_page() {
       if(get_bit(page->flags, _page_available) && (
          #ifndef NDEBUG
-         get_bit(dbgflags, dbgf_bip) ||
+         dbgflags(dbgf_bip) ||
          #endif
          get_bit(page->flags, _page_auto)))
       {
