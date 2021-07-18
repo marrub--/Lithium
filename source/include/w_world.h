@@ -86,10 +86,10 @@ enum ZscName(RandomSpawnNum) {
 };
 
 enum ZscName(MsgType) {
-   msg_ammo,
    msg_huds,
    msg_full,
-   msg_both
+   msg_item,
+   msg_scri,
 };
 
 enum ZscName(DamageType) {

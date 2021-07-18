@@ -20,9 +20,9 @@ override void Drawer()
    if(mDesc.mSelectedItem < 0) return;
    let sel = ListMenuItemTextItem(mDesc.mItems[mDesc.mSelectedItem]);
    if(sel) {
-      let col = StringTable.localize(String.format("%s_Col", sel.mText));
-      let nam = StringTable.localize(String.format("%s_Nam", sel.mText));
-      let dsc = StringTable.localize(String.format("%s_Dsc", sel.mText));
+      let col = StringTable.localize(sel.mText .. "_Col");
+      let nam = StringTable.localize(sel.mText .. "_Nam");
+      let dsc = StringTable.localize(sel.mText .. "_Dsc");
       let txt = StringTable.localize(sel.mText);
       let cr  = Font.FindFontColor(col);
       Font bigf = menuDelegate.pickFont("bigupper");

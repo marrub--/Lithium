@@ -61,9 +61,11 @@ void PickupScore(i32 parm)
    i96 score = 4000 * info->slot;
 
    GiveWeaponItem(parm, info->slot);
-   score = P_Scr_Give(score);
+   score = P_Scr_Give(GetX(0), GetY(0), GetZ(0), score, false);
 
-   P_Log_SellWeapon(info, score);
+   if(CVarGetI(sc_player_itemdisp) & _itm_disp_log) {
+      P_Log_SellWeapon(info, score);
+   }
 }
 
 /* Extern Functions -------------------------------------------------------- */

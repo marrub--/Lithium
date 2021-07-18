@@ -239,7 +239,7 @@ void Sc_GiveEXPToMonster(i32 amt) {
 
 script_str ext("ACS") addr(OBJ "GiveMeAllOfTheScore")
 void Sc_DbgGiveScore(void) {
-   if(!P_None()) P_Scr_Give(INT96_MAX, true);
+   if(!P_None()) P_Scr_GivePos(0, 0, INT96_MAX, true);
 }
 
 script_str ext("ACS") addr(OBJ "DumpAlloc")

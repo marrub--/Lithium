@@ -23,17 +23,17 @@ bool G_TxtBox_Imp(struct gui_state *g, gid_t id, struct gui_arg_txt const *a) {
    G_Auto(g, id, a->x, a->y, 260, 10);
 
    bool hot = g->hot == id;
-   bool ret = false;
 
    if(hot && g->clicklft && !g->old.clicklft) {
-      GrabInput(Cps_Expand_str(st->txtbuf, 0, st->tbptr));
+      ServCallI(sm_GrabInput, Cps_Expand_str(st->txtbuf, 0, st->tbptr));
    }
 
-   if(pl.tb.txtbuf[0]) {
-      fastmemcpy(st,     &pl.tb, sizeof pl.tb);
-      fastmemset(&pl.tb, 0,      sizeof pl.tb);
+   if(pl.tb.changed) {
+      fastmemcpy(st,     &pl.tb, sizeof(struct gui_txt));
+      fastmemset(&pl.tb, 0,      sizeof(struct gui_txt));
       Cps_SetC(st->txtbuf, st->tbptr, '\0');
-      ret = true;
+   } else {
+      st->changed = false;
    }
 
    PrintSprite(sp_UI_ResultFrame, a->x-3 + g->ox,1, a->y-3 + g->oy,1);
@@ -48,7 +48,7 @@ bool G_TxtBox_Imp(struct gui_state *g, gid_t id, struct gui_arg_txt const *a) {
    PrintText(sf_smallfnt, g->defcr, a->x + g->ox,1, a->y + g->oy,1);
    ClearClip();
 
-   return ret;
+   return st->changed;
 }
 
 /* EOF */

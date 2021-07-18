@@ -274,7 +274,17 @@ void P_GUI_Use() {
    }
 }
 
-i96 P_Scr_Give(i96 score, bool nomul) {
+i96 P_Scr_Give(k32 x, k32 y, k32 z, i96 score, bool nomul) {
+   bool seen;
+   struct i32v2 vp = project(x, y, z, &seen);
+   if(!seen) {
+      vp.x = 320/2;
+      vp.y = 240/2;
+   }
+   return P_Scr_GivePos(vp.x, vp.y, score, nomul);
+}
+
+i96 P_Scr_GivePos(i32 x, i32 y, i96 score, bool nomul) {
    /* Could cause division by zero */
    if(score == 0)
       return 0;
@@ -311,9 +321,14 @@ i96 P_Scr_Give(i96 score, bool nomul) {
    pl.scoreaccum     += score;
    pl.scoreaccumtime += 20 * (mul * 2.0lk);
 
-   /* Log score */
-   if(CVarGetI(sc_player_scorelog))
+   /* display score */
+   i32 scoredisp = CVarGetI(sc_player_scoredisp);
+   if(scoredisp & _itm_disp_log) {
       pl.logH(1, "+\Cj%lli\Cnscr", score);
+   }
+   if(scoredisp & _itm_disp_pop) {
+      DrawCallI(sm_AddScoreNum, x, y, StrParam("%lli\Cnscr", score));
+   }
 
    return score;
 }
@@ -329,16 +344,6 @@ void P_Scr_Take(i96 score) {
 
    pl.scoreaccum     = 0;
    pl.scoreaccumtime = 0;
-}
-
-script void P_GiveScore(i96 score, bool nomul) {
-   pl.setActivator();
-   P_Scr_Give(score, nomul);
-}
-
-script void P_GiveEXP(u64 amt) {
-   pl.setActivator();
-   P_Lv_GiveEXP(amt);
 }
 
 /* Static Functions -------------------------------------------------------- */

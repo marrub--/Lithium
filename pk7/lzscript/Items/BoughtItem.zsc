@@ -29,6 +29,7 @@ class Lith_BoughtItem : Inventory
 {
    default
    {
+      Tag "$LITH_TAB_UPGRADES";
       Inventory.PickupMessage "";
       Inventory.PickupSound "";
 
@@ -44,6 +45,7 @@ class Lith_BoughtItem : Inventory
 
    override bool tryPickup(in out Actor mo) {
       mo.acs_scriptCall("Lith_BoughtItemPickup", m_upgradeId);
+      callAcs("Lith_ItemPopupTag");
       goAwayAndDie();
       return true;
    }
@@ -53,7 +55,7 @@ class Lith_BoughtItem : Inventory
    Spawn:
       TNT1 A 0;
       TNT1 A random(1, 7);
-      TNT1 A 0 A_SpawnItemEx("Lith_TeleFog");
+      TNT1 A 0 Spawn("Lith_TeleFog", pos);
       UCAN A 0 A_JumpIf(m_upgradeBody, "Animate");
       WUPG A 0 A_JumpIf(m_upgradeWeap, "Animate");
       BPAK A 0 A_JumpIf(m_upgradeExtr, "Extra");

@@ -29,6 +29,8 @@ enum Lith_PData {
    pdata_attr,
    pdata_alpha,
    pdata_oldhealth,
+   pdata_scrx,
+   pdata_scry,
 };
 
 enum Lith_SubweaponType {

@@ -91,12 +91,20 @@ void Sc_CBIItemWasSpawned(i32 num)
 script_str ext("ACS") addr(OBJ "PickupCBIItem")
 void Sc_PickupCBIItem(i32 num)
 {
-   pl.setActivator();
    FadeFlash(0, 255, 0, 0.7, 0.5);
 
-   ifauto(struct cupgdef const *, c, GetCUpgr(pl.pclass, num))
-      if(c->msg)
-         pl.logB(1, tmpstr(lang(sl_log_cbi)), ns(lang_fmt(LANG "LOG_CBI_%s", c->msg)));
+   ifauto(struct cupgdef const *, c, GetCUpgr(pl.pclass, num)) {
+      if(c->msg) {
+         str nam = ns(lang_fmt(LANG "LOG_CBI_%s", c->msg));
+         i32 itemdisp = CVarGetI(sc_player_itemdisp);
+         if(itemdisp & _itm_disp_pop) {
+            P_ItemPopup(nam, GetX(0), GetY(0), GetZ(0));
+         }
+         if(itemdisp & _itm_disp_log) {
+            pl.logB(1, tmpstr(lang(sl_log_cbi)), nam);
+         }
+      }
+   }
 
    CBI_Install(num);
 }

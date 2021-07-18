@@ -125,11 +125,15 @@
 == \#st_name_slide_1 | Slide
 == \#st_name_slide_2 | Under target
 
+== \#st_name_itmdisp_0 | None
+== \#st_name_itmdisp_1 | Log
+== \#st_name_itmdisp_2 | Projected
+== \#st_name_itmdisp_3 | Log + Projected
+
 == \#st_labl_gui | GUI
 == \#st_labl_hud | HUD
 == \#st_labl_itm | Items
 == \#st_labl_lit | Flashlight
-== \#st_labl_log | Log
 == \#st_labl_pgm | Post-game
 == \#st_labl_ply | Player
 == \#st_labl_wep | Weapons
@@ -177,18 +181,20 @@
 == \#light_radius           | Radius
 == \#light_regen            | Battery regeneration
 == \#player_altinvuln       | Alternate invulnerability palette
-== \#player_ammolog         | Log ammo pickups
+== \#player_ammodisp        | Display picked up ammo
 == \#player_bosstexts       | Enable boss dialogues
 == \#player_brightweps      | Bright weapon pickups
 == \#player_damagebob       | Bob view when damaged
 == \#player_damagebobmul    | Damage bob multiplier
 == \#player_footstepvol     | Footstep volume
+== \#player_itemdisp        | Display picked up item
+== \#player_itemdispalpha   | "Projected" option alpha
 == \#player_lvsys           | Level-up system
 == \#player_noitemfx        | No item effects
 == \#player_pronouns        | Pronouns
 == \#player_rainshader      | Enable rain shader
 == \#player_resultssound    | Play sounds on the results screen
-== \#player_scorelog        | Log score gained
+== \#player_scoredisp       | Display score gained
 == \#player_scoresound      | Play a sound when score is gained
 == \#player_stupidpickups   | Silly pickup messages
 == \#player_teleshop        | Teleport in bought items and upgrades

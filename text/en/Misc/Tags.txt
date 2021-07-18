@@ -7,13 +7,19 @@
 ## ---------------------------------------------------------------------------|
 
 ## Tags ----------------------------------------------------------------------|
-
 == \#TAG_BlurSphere    | Fragma
 == \#TAG_GreyHam       | Grey Ham
 == \#TAG_Megasphere    | Tao'chyan
 == \#TAG_SoulSphere    | Heart
 == \#TAG_SteggleSphere | Steggle Sphere
 == \#TAG_ShobonSphere  | Shobon Sphere
+
+== \#TAG_ManaAmmo   | Mana
+== \#TAG_BulletAmmo | Bullets
+== \#TAG_ShellAmmo  | Shells
+== \#TAG_RocketAmmo | Rockets
+== \#TAG_PlasmaAmmo | Energy
+== \#TAG_CannonAmmo | Dark Energy
 
 == \#TAG_Weapon0 | Slot 1 Weapon (Basic)
 == \#TAG_Weapon1 | Slot 1 Weapon (Adv.)

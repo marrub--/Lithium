@@ -7,11 +7,52 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_ManaAmmo   : Ammo {default {Inventory.MaxAmount 1000;}}
-class Lith_BulletAmmo : Ammo {default {Inventory.MaxAmount 500;}}
-class Lith_ShellAmmo  : Ammo {default {Inventory.MaxAmount 60;}}
-class Lith_RocketAmmo : Ammo {default {Inventory.MaxAmount 200;}}
-class Lith_PlasmaAmmo : Ammo {default {Inventory.MaxAmount 14000;}}
-class Lith_CannonAmmo : Ammo {default {Inventory.MaxAmount 40;}}
+class Lith_Ammo : Ammo {
+   string m_ammoText;
+   string m_logText;
+
+   static Lith_Ammo create(class<Lith_Ammo> ty, Actor curOwner) {
+      let mo = Lith_Ammo(spawn(ty));
+      mo.amount = 0;
+      mo.callTryPickup(curOwner);
+      return mo;
+   }
+
+   static Lith_Ammo findOrCreate(class<Lith_Ammo> ty, Actor curOwner) {
+      let mo = Lith_Ammo(curOwner.findInventory(ty));
+      return mo ? mo : create(ty, curOwner);
+   }
+
+   void absorbAmount(string logText, vector3 p, in out int amt) {
+      int originalAmt = amt;
+      if((amount + amt - maxAmount) <= 0) {
+         /* less than or equals max, absorb the whole item */
+         amount += amt;
+         amt     = 0;
+      } else {
+         /* more than max, absorb some of the item */
+         amt   -= maxAmount - amount;
+         amount = maxAmount;
+      }
+      m_ammoText = "\cj+\cd" .. (originalAmt - amt) .. " \c-" .. getTag();
+      m_logText  = logText .. ": " .. m_ammoText;
+      p.x += frandom(-4.0, 4.0);
+      p.y += frandom(-4.0, 4.0);
+      callAcs("Lith_ItemPopupAmmo", int(p.x*FIX), int(p.y*FIX), int(p.z*FIX));
+   }
+}
+
+class Lith_ManaAmmo : Lith_Ammo
+   {default {Tag "$LITH_TAG_ManaAmmo";   Inventory.MaxAmount 1000;}}
+class Lith_BulletAmmo : Lith_Ammo
+   {default {Tag "$LITH_TAG_BulletAmmo"; Inventory.MaxAmount 500;}}
+class Lith_ShellAmmo : Lith_Ammo
+   {default {Tag "$LITH_TAG_ShellAmmo";  Inventory.MaxAmount 60;}}
+class Lith_RocketAmmo : Lith_Ammo
+   {default {Tag "$LITH_TAG_RocketAmmo"; Inventory.MaxAmount 200;}}
+class Lith_PlasmaAmmo : Lith_Ammo
+   {default {Tag "$LITH_TAG_PlasmaAmmo"; Inventory.MaxAmount 14000;}}
+class Lith_CannonAmmo : Lith_Ammo
+   {default {Tag "$LITH_TAG_CannonAmmo"; Inventory.MaxAmount 40;}}
 
 /* EOF */

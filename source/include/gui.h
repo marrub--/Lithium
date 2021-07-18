@@ -82,7 +82,8 @@ struct gui_scr {
 
 struct gui_txt {
    cps_t txtbuf[Cps_Size(128)];
-   i32 tbptr;
+   i32   tbptr;
+   bool  changed;
 };
 
 struct gui_win {

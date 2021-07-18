@@ -92,13 +92,13 @@ AltReady:
    loop;
 Ready:
    CNNG A 0 {self.TakeInventory("Lith_GTFO", 999);}
-   DCNG A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_Cannon_C), 2);
+   DCNG A 0 A_JumpIf(Lith_UTIL.pData(pdata_upgrade, UPGR_Cannon_C), 2);
    CNNG A 0;
    #### A 1 Lith_A_Ready;
    loop;
 
 Deselect:
-   DCNG A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_Cannon_C), 2);
+   DCNG A 0 A_JumpIf(Lith_UTIL.pData(pdata_upgrade, UPGR_Cannon_C), 2);
    CNNG A 0;
    #### A 0 Lith_A_ScopeOut;
 DeselectLoop:
@@ -106,16 +106,16 @@ DeselectLoop:
    loop;
 
 Select:
-   DCNG A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_Cannon_C), 2);
+   DCNG A 0 A_JumpIf(Lith_UTIL.pData(pdata_upgrade, UPGR_Cannon_C), 2);
    CNNG A 0;
    #### A 0 Lith_A_ScopeOut;
    #### A 1 Lith_A_Raise(_raise_slow);
    wait;
 
 Fire:
-   #### A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_Cannon_A), "FirePunct");
-   #### A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_Cannon_B), "FireRail");
-   #### A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_Cannon_C), "FireDark");
+   #### A 0 A_JumpIf(Lith_UTIL.pData(pdata_upgrade, UPGR_Cannon_A), "FirePunct");
+   #### A 0 A_JumpIf(Lith_UTIL.pData(pdata_upgrade, UPGR_Cannon_B), "FireRail");
+   #### A 0 A_JumpIf(Lith_UTIL.pData(pdata_upgrade, UPGR_Cannon_C), "FireDark");
    #### A 0 lith_jumpNoAmmo;
    CNNG C 1 bright offset(0, 48);
    CNNG C 1 bright offset(0, 57) Lith_A_FireCannonSmall;
@@ -235,9 +235,9 @@ LoadAnim:
    goto ReadySelector;
 
 AltFire:
-   #### A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_Cannon_B), "Ready");
-   #### A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_Cannon_C), "Ready");
-   #### A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_Cannon_A), "ScopeToggle");
+   #### A 0 A_JumpIf(Lith_UTIL.pData(pdata_upgrade, UPGR_Cannon_B), "Ready");
+   #### A 0 A_JumpIf(Lith_UTIL.pData(pdata_upgrade, UPGR_Cannon_C), "Ready");
+   #### A 0 A_JumpIf(Lith_UTIL.pData(pdata_upgrade, UPGR_Cannon_A), "ScopeToggle");
    #### A 0 lith_jumpNoAmmo(2);
    CNNG A 10 A_StartSound("weapons/cannon/prepare", lch_weapon2);
    CNNG A 1 bright;

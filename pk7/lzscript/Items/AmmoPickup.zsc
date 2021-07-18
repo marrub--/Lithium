@@ -11,7 +11,6 @@ class Lith_Shell : Lith_AmmoItem replaces Shell {
    default {
       Tag "$LITH_LOG_Shell";
       Inventory.PickupSound "player/pickup/shells";
-      Lith_BasicPickup.LogName "Shell", 2;
       Lith_ScoreItem.Score Score_Shell;
       Lith_AmmoItem.Give "Lith_ShellAmmo", AmmoAmt_Shell;
    }
@@ -27,7 +26,6 @@ class Lith_ShellBox : Lith_AmmoItem replaces ShellBox {
    default {
       Tag "$LITH_LOG_ShellBox";
       Inventory.PickupSound "player/pickup/shellb";
-      Lith_BasicPickup.LogName "ShellBox", 2;
       Lith_ScoreItem.Score Score_ShellBox;
       Lith_AmmoItem.Give "Lith_ShellAmmo", AmmoAmt_ShellBox;
    }
@@ -43,7 +41,6 @@ class Lith_RocketAmmoPickup : Lith_AmmoItem replaces RocketAmmo {
    default {
       Tag "$LITH_LOG_Rocket";
       Inventory.PickupSound "player/pickup/rockets";
-      Lith_BasicPickup.LogName "Rocket", 2;
       Lith_ScoreItem.Score Score_Rocket;
       Lith_AmmoItem.Give "Lith_RocketAmmo", AmmoAmt_Rocket;
    }
@@ -59,7 +56,6 @@ class Lith_RocketBox : Lith_AmmoItem replaces RocketBox {
    default {
       Tag "$LITH_LOG_RocketBox";
       Inventory.PickupSound "player/pickup/rocketb";
-      Lith_BasicPickup.LogName "RocketBox", 2;
       Lith_ScoreItem.Score Score_RocketBox;
       Lith_AmmoItem.Give "Lith_RocketAmmo", AmmoAmt_RocketBox;
    }
@@ -75,7 +71,6 @@ class Lith_Cell : Lith_AmmoItem replaces Cell {
    default {
       Tag "$LITH_LOG_Cell";
       Inventory.PickupSound "player/pickup/cells";
-      Lith_BasicPickup.LogName "Cell", 2;
       Lith_ScoreItem.Score Score_Cell;
       Lith_AmmoItem.Give "Lith_PlasmaAmmo", AmmoAmt_Cell;
    }
@@ -91,7 +86,6 @@ class Lith_CellPack : Lith_AmmoItem replaces CellPack {
    default {
       Tag "$LITH_LOG_CellBox";
       Inventory.PickupSound "player/pickup/cellb";
-      Lith_BasicPickup.LogName "CellBox", 2;
       Lith_ScoreItem.Score Score_CellPack;
       Lith_AmmoItem.Give  "Lith_PlasmaAmmo", AmmoAmt_CellPack;
       Lith_AmmoItem.Give2 "Lith_CannonAmmo", AmmoAmt_CannonPack;
@@ -107,11 +101,10 @@ class Lith_CellPack : Lith_AmmoItem replaces CellPack {
 class Lith_AmmoItem : Lith_ScoreItem abstract;
 
 default {
-   Lith_BasicPickup.LogType msg_ammo;
    +CastSpriteShadow
 }
 
-private meta class<Inventory> m_type, m_type2;
+private meta class<Lith_Ammo> m_type, m_type2;
 private int m_amount, m_amount2;
 
 property Give:  m_type,  m_amount;
@@ -144,23 +137,12 @@ override bool canPickup(Actor mo) {
    }
 }
 
-private void lith_absorbAmmo(Actor mo, class<Inventory> typ, in out int amt) {
-   if(!typ) return;
+private void lith_absorbAmmo(Actor mo, class<Lith_Ammo> ty, in out int amt) {
+   if(!ty) return;
 
-   if(mo is "Lith_ThothPlayer") {typ = "Lith_ManaAmmo"; amt *= 7;}
+   if(mo is "Lith_ThothPlayer") {ty = "Lith_ManaAmmo"; amt *= 7;}
 
-   let it = mo.findInventory(typ);
-   if(!it) {it = Inventory(spawn(typ)); it.amount = 0; it.callTryPickup(mo);}
-
-   if((it.amount + amt - it.maxAmount) <= 0) {
-      /* less than or equals max, absorb the whole item */
-      it.amount += amt;
-      amt        = 0;
-   } else {
-      /* more than max, absorb some of the item */
-      amt      -= it.maxAmount - it.amount;
-      it.amount = it.maxAmount;
-   }
+   Lith_Ammo.findOrCreate(ty, mo).absorbAmount(getTag(), pos, amt);
 }
 
 override bool tryPickup(in out Actor mo) {

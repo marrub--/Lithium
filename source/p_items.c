@@ -15,8 +15,6 @@
 #include "p_player.h"
 #include "w_world.h"
 
-/* Static Functions -------------------------------------------------------- */
-
 static
 void Container(struct gui_state *g, struct container *cont, i32 sx, i32 sy) {
    sx += g->ox;
@@ -167,8 +165,6 @@ void EquipItem(struct item *sel) {
    ACS_LocalAmbientSound(ok ? ss_player_cbi_invmov :
                          ss_player_cbi_auto_invalid, 127);
 }
-
-/* Extern Functions -------------------------------------------------------- */
 
 void P_Inv_PInit() {
    static
@@ -483,7 +479,7 @@ void P_CBI_TabItems(struct gui_state *g) {
                   x, y, .color = "g", .fill = {&CBIState(g)->itemfill, 26},
                   Pre(btnclear))) {
          if(sel->scr) {
-            P_Scr_Give(sel->scr, true);
+            P_Scr_GivePos(x, y, sel->scr, true);
          }
          sel->Destroy(sel);
          ACS_LocalAmbientSound(ss_player_cbi_invrem, 127);
@@ -498,8 +494,6 @@ void P_CBI_TabItems(struct gui_state *g) {
       }
    }
 }
-
-/* Scripts ----------------------------------------------------------------- */
 
 static
 struct itemdata ItemData() {
@@ -535,12 +529,45 @@ struct item *Sc_BagItemCreate() {
    )->item;
 }
 
+void P_ItemPopup(str tag, k32 x, k32 y, k32 z) {
+   bool seen;
+   struct i32v2 vp = project(x, y, z, &seen);
+   if(!seen) {
+      vp.x = 320/2;
+      vp.y = 240/2;
+   }
+   DrawCallI(sm_AddScoreNum, vp.x, vp.y, tag);
+}
+
+script_str ext("ACS") addr(OBJ "ItemPopupAmmo")
+void Sc_ItemPopupAmmo(k32 x, k32 y, k32 z) {
+   i32 ammodisp = CVarGetI(sc_player_ammodisp);
+   if(ammodisp & _itm_disp_log) {
+      pl.logH(1, "%S", GetMembS(0, sm_LogText));
+   }
+   if(ammodisp & _itm_disp_pop) {
+      P_ItemPopup(GetMembS(0, sm_AmmoText), x, y, z);
+   }
+}
+
+script_str ext("ACS") addr(OBJ "ItemPopupTag")
+void Sc_ItemPopupTag(void) {
+   if(CVarGetI(sc_player_itemdisp) & _itm_disp_pop) {
+      P_ItemPopup(GetNameTag(0), GetX(0), GetY(0), GetZ(0));
+   }
+}
+
 script_str ext("ACS") addr(OBJ "ItemAttach")
 bool Sc_ItemAttach(struct item *item) {
    Dbg_Log(log_dev, "%s: attaching item %p", __func__, item);
 
    if(!P_None()) {
-      return P_Inv_Add(item);
+      if(P_Inv_Add(item)) {
+         Sc_ItemPopupTag();
+         return true;
+      } else {
+         return false;
+      }
    }
 
    return false;

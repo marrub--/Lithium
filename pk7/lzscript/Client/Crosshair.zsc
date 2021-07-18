@@ -18,8 +18,8 @@ private ui void drawCrosshair(RenderEvent evt) {
 
    vector3 viewPos = (evt.viewPos.xy, evt.viewPos.z - lith_hermes.getViewHeight(pl) + lith_hermes.getAttackHeight(pl));
 
-   double yaw   = evt.viewAngle + m_Uh.pData(pl, pdata_addy)/FIX;
-   double pitch = evt.viewPitch + m_Uh.pData(pl, pdata_addp)/FIX;
+   double yaw   = evt.viewAngle + Lith_UTIL.pData(pdata_addy)/FIX;
+   double pitch = evt.viewPitch + Lith_UTIL.pData(pdata_addp)/FIX;
 
    let loc = Lith_UTIL.traceFromPos(pl.curSector, viewPos, yaw, pitch, 2048.0, ignore: pl);
 
@@ -32,7 +32,7 @@ private ui void drawCrosshair(RenderEvent evt) {
 
    /* draw a tracer for the targeting system */
    let tr = pl.tracer;
-   if(tr && tr.health > 0 && m_Uh.pData(pl, pdata_weapon) == weapon_m_rocket) {
+   if(tr && tr.health > 0 && Lith_UTIL.pData(pdata_weapon) == weapon_m_rocket) {
       int tr1x, tr1y, tr2x, tr2y;
       [tr1x, tr1y, seen] = project((tr.pos.xy, tr.pos.z + tr.height / 2.0));
 
@@ -96,7 +96,7 @@ private ui void drawCrosshair(RenderEvent evt) {
          xhx = xh.x - esx/2.0;
          xhy = xh.y - esy/2.0;
 
-         double xp = m_Uh.pData(pl, pdata_recoilp)/FIX * 500.0 + 10.0;
+         double xp = Lith_UTIL.pData(pdata_recoilp)/FIX * 500.0 + 10.0;
 
          Screen.DrawTexture(xhl, false, xhx-xp, xhy,
                             DTA_VirtualWidth,320, DTA_VirtualHeight,240,

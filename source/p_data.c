@@ -137,7 +137,7 @@ void P_Dat_PTickPre()
 
    pl.buttons = ACS_GetPlayerInput(-1, INPUT_BUTTONS);
 
-   pl.name        = (ACS_BeginPrint(), ACS_PrintName(-1), ACS_EndStrParam());
+   pl.name        = (ACS_BeginPrint(), ACS_PrintName(0), ACS_EndStrParam());
    pl.weaponclass = ACS_GetWeapon();
 
    pl.scopetoken = InvNum(so_WeaponScopedToken);
@@ -373,9 +373,14 @@ void P_Dat_PTickPst()
 
 /* Scripts ----------------------------------------------------------------- */
 
-script_str ext("ACS") addr(OBJ "KeyDown")
-void Sc_KeyDown(i32 ch) {
+script_str ext("ACS") addr(OBJ "InputChar")
+void Sc_InputChar(i32 ch) {
    if(!P_None()) Cps_SetC(pl.tb.txtbuf, pl.tb.tbptr++, ch);
+}
+
+script_str ext("ACS") addr(OBJ "InputEnd")
+void Sc_InputEnd(i32 ch) {
+   if(!P_None()) pl.tb.changed = true;
 }
 
 /* EOF */

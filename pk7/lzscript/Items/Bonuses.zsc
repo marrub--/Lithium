@@ -436,7 +436,7 @@ class Lith_HealthBonusVial : Lith_BasicPickup
       Tag "$LITH_LOG_HealthBonus";
       Inventory.PickupSound "items/healthbonus";
       Lith_BasicPickup.LogName "HealthBonus", 3;
-      Lith_BasicPickup.LogType msg_huds;
+      Lith_BasicPickup.LogType msg_item;
       Lith_BasicPickup.InfoPage "HealthBonus";
       Scale 0.7;
 

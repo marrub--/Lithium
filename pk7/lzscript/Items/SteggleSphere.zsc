@@ -56,7 +56,8 @@ class Lith_Steggles : MBFHelperDog {
       DOGS A 0 {
          target.GiveInventory("Lith_Dogs", 1);
          target.GiveInventory("HealthBonus", 1);
-         Lith_HERMES.Log(target, msg_both, 1, "_Dogs");
+         callAcs("Lith_ItemPopupTag");
+         Lith_HERMES.Log(target, msg_item, 1, "_Dogs");
       }
       stop;
    PureSteggleEnergy:
@@ -102,7 +103,8 @@ override void postBeginPlay() {
 
 override bool tryPickup(in out Actor mo) {
    mo.ACS_ScriptCall("Lith_DOGS");
-   Lith_HERMES.Log(mo, msg_both, 5, "_DoggoSphere");
+   callAcs("Lith_ItemPopupTag");
+   Lith_HERMES.Log(mo, msg_item, 5, "_DoggoSphere");
    goAwayAndDie();
    return true;
 }

@@ -240,7 +240,7 @@ override void postBeginPlay()
    super.postBeginPlay();
    Lith_A_SmokeFX();
    Lith_A_RicochetFX();
-   if(Lith_UTIL.pData(target, pdata_upgrade, UPGR_TorgueMode))
+   if(Lith_UTIL.pData(pdata_upgrade, UPGR_TorgueMode))
       A_SpawnItemEx("Lith_EXPLOOOSION", flags: SXF_TRANSFERPOINTERS|SXF_NOCHECKPOSITION);
 }
 

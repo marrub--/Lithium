@@ -9,55 +9,55 @@
  */
 
 /* UTIL: Utilities and Tools Interpserse Languages */
-struct Lith_UTIL
-{
+struct Lith_UTIL {
    /* fucking degrees system... */
-   static double constDeg(double x)
-   {
+   static double constDeg(double x) {
       x %= 360;
       if(x < 0) x += 360;
       return x;
    }
 
-   static double diffDeg(double a, double b)
-   {
+   static double diffDeg(double a, double b) {
       double d = (b - a) % 360;
       if(d < 0) d += 360;
       return d;
    }
 
-   static double sDiffDeg(double a, double b)
-   {
+   static double sDiffDeg(double a, double b) {
       double d = b - a;
       if(d ~== 0) return 0;
       d %= 360;
       return 2 * d % 360 - d;
    }
 
-   static double angleLerp(double a, double b, double t)
-   {
-      return a + SDiffDeg(a, b) * t;
+   static double angleLerp(double a, double b, double t) {
+      return a + sDiffDeg(a, b) * t;
    }
 
-   static double lerp(double a, double b, double t)
-   {
+   static double lerp(double a, double b, double t) {
       return (1 - t) * a + t * b;
    }
 
-   static vector2 vec2Lerp(vector2 a, vector2 b, double t)
-   {
+   static double easeInOutQuad(double t) {
+      if(t < 0.5) {
+         return 2.0 * t * t;
+      } else {
+         double tt = -2.0 * t + 2.0;
+         return 1.0 - tt * tt / 2.0;
+      }
+   }
+
+   static vector2 vec2Lerp(vector2 a, vector2 b, double t) {
       let vec = (lerp(a.x, b.x, t), lerp(a.y, b.y, t));
       return vec;
    }
 
-   static vector3 vec3Lerp(vector3 a, vector3 b, double t)
-   {
+   static vector3 vec3Lerp(vector3 a, vector3 b, double t) {
       let vec = (lerp(a.x, b.x, t), lerp(a.y, b.y, t), lerp(a.z, b.z, t));
       return vec;
    }
 
-   static color colorLerp(color a, color b, double t)
-   {
+   static color colorLerp(color a, color b, double t) {
       uint rd = uint(lerp(a.r, b.r, t));
       uint gr = uint(lerp(a.g, b.g, t));
       uint bl = uint(lerp(a.b, b.b, t));
@@ -65,8 +65,7 @@ struct Lith_UTIL
       return (al << 24) | (rd << 16) | (gr << 8) | bl;
    }
 
-   static int round(double n)
-   {
+   static int round(double n) {
       return int(n * 1000) % 1000 < 500 ? int(n) : int(n+0.5);
    }
 
@@ -82,25 +81,14 @@ struct Lith_UTIL
       return Level.ExecuteSpecial(84, mo, null, false, scr, arg0, arg1, arg2, arg3);
    }
 
-   static play int pData(Actor ply, int info, int permutation = 0) {
-      return Level.ExecuteSpecial(84, ply, null, false, lsc_pdata, info, permutation);
+   static int pData(int info, int permutation = 0) {
+      return acs_executeWithResult(lsc_pdata, info, permutation);
    }
 
    static play void stateTick(Actor mo) {
       if(mo.tics >= 0 && --mo.tics <= 0) {
          mo.setState(mo.curState.nextState);
       }
-   }
-}
-
-/* UTILHACK: Urinary Tract Infection-Like Hack (Anal Cock King ed.) */
-class Lith_UTILHACK {
-   play int exec(Actor mo, int scr, int arg0 = 0, int arg1 = 0, int arg2 = 0, int arg3 = 0) const {
-      return Lith_UTIL.exec(mo, scr, arg0, arg1, arg2, arg3);
-   }
-
-   play int pData(Actor ply, int info, int permutation = 0) const {
-      return Lith_UTIL.pData(ply, info, permutation);
    }
 }
 

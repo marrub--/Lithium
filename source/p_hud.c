@@ -47,6 +47,9 @@ void HUD_WeaponSlots(i32 cr_one, i32 cr_two, i32 cr_many, i32 cr_cur, i32 _x, i3
 }
 
 void HUD_Score(cstr fmt, i96 scrn, str font, i32 cr, i32 x, i32 xa) {
+   pl.scrx = x;
+   pl.scry = 3;
+
    if(CVarGetI(sc_hud_showscore)) {
       char scr[64];
       sprintf(scr, fmt, scoresep(scrn));

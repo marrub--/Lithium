@@ -38,6 +38,7 @@ void P_Scr_Payout() {
 #define CountScr(scr) \
    scoresep(i < _begin_total ? lerplk(0, scr, i / 34.0lk) : scr)
 
+   i32 amounty;
    struct payoutinfo pay = payout;
 
    pl.setActivator();
@@ -107,6 +108,7 @@ void P_Scr_Payout() {
       if(i > _begin_grandtotal) {
          Fram();
          Left(tmpstr(lang(sl_res_subtotal)));
+         amounty = y;
          Rght("%s\Cnscr", scoresep(pay.total));
          y += 16;
 
@@ -137,7 +139,9 @@ void P_Scr_Payout() {
 
    ACS_Delay(20);
 
-   P_Scr_Give(pay.total, true);
+   if(pay.total) {
+      P_Scr_GivePos(16, amounty, pay.total, true);
+   }
 }
 
 /* EOF */

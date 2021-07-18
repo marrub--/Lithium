@@ -102,6 +102,8 @@ script bool P_Inv_PlaceFirst(struct container *cont, struct item *item);
 script bool P_Inv_SwapFirst(struct container *cont, struct item *lhs);
 bool P_Inv_Swap(struct item *lhs, struct item *rhs);
 bool P_Inv_Add(struct item *item);
+
+void P_ItemPopup(str tag, k32 x, k32 y, k32 z);
 #endif
 
 #endif

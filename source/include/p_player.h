@@ -65,6 +65,8 @@ enum ZscName(PData) {
    pdata_attr,
    pdata_alpha,
    pdata_oldhealth,
+   pdata_scrx,
+   pdata_scry,
 };
 
 enum ZscName(SubweaponType) {
@@ -102,7 +104,6 @@ enum ZscName(PClass) {
 #define P_Discount(n) (i96)((n) * pl.discount)
 #define P_None() (!pl.active)
 #define P_Wep_CurType() (pl.weapon.cur->info->type)
-#define GrabInput(s) ServCallI(sm_GrabInput, s)
 
 /* Extern Functions -------------------------------------------------------- */
 
@@ -114,10 +115,9 @@ optargs(1) bool P_SetVel(k32 velx, k32 vely, k32 velz, bool add);
 void P_ValidateTID(void);
 void P_GUI_Close(void);
 void P_GUI_Use(void);
-optargs(1) i96 P_Scr_Give(i96 score, bool nomul);
+i96 P_Scr_Give(k32 x, k32 y, k32 z, i96 score, bool nomul);
+i96 P_Scr_GivePos(i32 x, i32 y, i96 score, bool nomul);
 void P_Scr_Take(i96 score);
-script void P_GiveScore(i96 score, bool nomul);
-script void P_GiveEXP(u64 amt);
 void P_Lv_GiveEXP(u64 amt);
 cstr P_Discrim(i32 pclass);
 stkcall i32 P_Color(i32 pclass);
@@ -162,6 +162,14 @@ enum {
    _gui_disables_hud,
    _gui_dlg = _gui_disables_hud,
    _gui_intro,
+};
+
+enum {
+   _itm_disp_none,
+   _itm_disp_log,
+   _itm_disp_pop,
+   _itm_disp_both,
+   _itm_disp_max
 };
 
 /* Data that needs to be kept track of between frames. */
@@ -273,6 +281,8 @@ struct player {
 
    /* HUD */
    bool hudenabled;
+   i32  scrx;
+   i32  scry;
 
    struct loginfo log;
 

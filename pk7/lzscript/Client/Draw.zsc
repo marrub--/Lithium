@@ -72,8 +72,6 @@ private transient Font m_UFntSml;
 private transient Shape2DTransform m_RectXf;
 private transient Shape2D m_Rect;
 
-private transient Lith_UTILHACK m_Uh;
-
 private transient bool m_English;
 
 /* Static Functions -------------------------------------------------------- */
@@ -376,6 +374,7 @@ override void worldTick() {
 
    projectSetRenderer();
    tickDmgNums();
+   tickScrNums();
 }
 
 override void uiTick() {
@@ -461,6 +460,10 @@ override void renderOverlay(RenderEvent evt) {
 
    let p = Lith_Player(evt.camera);
    if(p && p.m_cs) p.m_cs.lith_render();
+
+   if(evt.camera && evt.camera.player && !automapActive) {
+      drawScrNums(evt);
+   }
 
    drawMenu();
 }

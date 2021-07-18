@@ -19,8 +19,9 @@ class Lith_AllMap : Inventory replaces Allmap {
    }
 
    override bool tryPickup(in out Actor mo) {
-      Lith_HERMES.Log(mo, msg_both, 5, "_AllMap");
+      Lith_HERMES.Log(mo, msg_item, 5, "_AllMap");
       Lith_HERMES.UnlockBip(mo, "AllMap");
+      callAcs("Lith_ItemPopupTag");
       mo.GiveInventory("MapRevealer", 1);
       goAwayAndDie();
       return true;
@@ -45,9 +46,10 @@ class Lith_Berserk : Inventory replaces Berserk {
    }
 
    override bool tryPickup(in out Actor mo) {
-      Lith_HERMES.Log(mo, msg_both, 5, "_Berserk");
+      Lith_HERMES.Log(mo, msg_item, 5, "_Berserk");
       Lith_HERMES.UnlockBip(mo, "Berserk");
       mo.GiveInventory("PowerStrength", 1);
+      callAcs("Lith_ItemPopupTag");
       if(mo.health < 100) {
          mo.health = 100;
       }
@@ -81,9 +83,10 @@ class Lith_Infrared : Inventory replaces Infrared {
    }
 
    override bool tryPickup(in out Actor mo) {
-      Lith_HERMES.Log(mo, msg_both, 5, "_Infrared");
+      Lith_HERMES.Log(mo, msg_item, 5, "_Infrared");
       Lith_HERMES.UnlockBip(mo, "Infrared");
       mo.GiveInventory("Lith_PowerLightAmp", 1);
+      callAcs("Lith_ItemPopupTag");
       goAwayAndDie();
       return true;
    }
@@ -122,10 +125,11 @@ class Lith_Megasphere : Inventory replaces Megasphere {
    }
 
    override bool tryPickup(in out Actor mo) {
-      Lith_HERMES.Log(mo, msg_both, 4, "_Megasphere");
+      Lith_HERMES.Log(mo, msg_item, 4, "_Megasphere");
       Lith_HERMES.UnlockBip(mo, "Taochyan");
       mo.GiveInventory("Lith_MegaProtection", 100);
       mo.ACS_ScriptCall("Lith_GiveHealthBonus", 200);
+      callAcs("Lith_ItemPopupTag");
       goAwayAndDie();
       return true;
    }
@@ -150,9 +154,10 @@ class Lith_RadSuit : Inventory replaces RadSuit {
    }
 
    override bool tryPickup(in out Actor mo) {
-      Lith_HERMES.Log(mo, msg_both, 5, "_RadSuit");
+      Lith_HERMES.Log(mo, msg_item, 5, "_RadSuit");
       Lith_HERMES.UnlockBip(mo, "RadSuit");
       mo.GiveInventory("Lith_PowerIronFeet", 1);
+      callAcs("Lith_ItemPopupTag");
       goAwayAndDie();
       return true;
    }
@@ -180,9 +185,10 @@ class Lith_SoulSphere : Inventory replaces SoulSphere {
    }
 
    override bool tryPickup(in out Actor mo) {
-      Lith_HERMES.Log(mo, msg_both, 4, "_Soulsphere");
+      Lith_HERMES.Log(mo, msg_item, 4, "_Soulsphere");
       Lith_HERMES.UnlockBip(mo, "Heart");
       mo.ACS_ScriptCall("Lith_GiveHealthBonus", 100);
+      callAcs("Lith_ItemPopupTag");
       goAwayAndDie();
       return true;
    }
@@ -210,8 +216,9 @@ class Lith_ArtiFly : Inventory replaces ArtiFly {
    }
 
    override bool tryPickup(in out Actor mo) {
-      Lith_HERMES.Log(mo, msg_both, 5, "_ArtiFly");
+      Lith_HERMES.Log(mo, msg_item, 5, "_ArtiFly");
       mo.GiveInventory("PowerFlight", 1);
+      callAcs("Lith_ItemPopupTag");
       goAwayAndDie();
       return true;
    }
@@ -237,8 +244,9 @@ class Lith_ArtiTeleport : Inventory replaces ArtiTeleport {
    }
 
    override bool tryPickup(in out Actor mo) {
-      Lith_HERMES.Log(mo, msg_both, 5, "_ArtiTeleport");
+      Lith_HERMES.Log(mo, msg_item, 5, "_ArtiTeleport");
       mo.useInventory(mo.giveInventoryType("ArtiTeleport"));
+      callAcs("Lith_ItemPopupTag");
       goAwayAndDie();
       return true;
    }
@@ -300,12 +308,13 @@ class Lith_InvulnerabilitySphere : Inventory replaces InvulnerabilitySphere {
    }
 
    override bool tryPickup(in out Actor mo) {
-      Lith_HERMES.Log(mo, msg_both, 6, "_Invuln");
+      Lith_HERMES.Log(mo, msg_item, 6, "_Invuln");
       Lith_HERMES.UnlockBip(mo, "Invulnerability");
       if(lith_player_altinvuln)
          mo.giveInventory("Lith_PowerInvulnerableGiver2", 1);
       else
          mo.giveInventory("Lith_PowerInvulnerableGiver", 1);
+      callAcs("Lith_ItemPopupTag");
       goAwayAndDie();
       return true;
    }
@@ -406,8 +415,9 @@ class Lith_ShobonSphere : Inventory
    }
 
    override bool tryPickup(in out Actor mo) {
-      Lith_HERMES.Log(mo, msg_both, 5, "_ShobonSphere");
+      Lith_HERMES.Log(mo, msg_item, 5, "_ShobonSphere");
       spawn("Lith_Shobon", mo.pos).master = mo;
+      callAcs("Lith_ItemPopupTag");
       goAwayAndDie();
       return true;
    }

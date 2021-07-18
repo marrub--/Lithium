@@ -15,19 +15,19 @@ class Lith_ExplosionAfterSmoke : Lith_BulletAfterSmoke {
 
 class Lith_Explosive : Actor;
 
-bool CheckMarathon(bool isTarget = true) {
-   return Lith_UTIL.pData(isTarget ? target : Actor(self), pdata_upgrade, UPGR_Seven7s);
+bool CheckMarathon() {
+   return Lith_UTIL.pData(pdata_upgrade, UPGR_Seven7s);
 }
 
-void Lith_A_ExplodeSound(int chan = lch_body2, bool target = true) {
+void Lith_A_ExplodeSound(int chan = lch_body2) {
    double p = FRandom(0.9, 1.1);
-   if(CheckMarathon(target)) A_StartSound("marathon/explode", chan, pitch: p);
-   else                      A_StartSound("explosion",        chan, pitch: p);
+   if(CheckMarathon()) A_StartSound("marathon/explode", chan, pitch: p);
+   else                A_StartSound("explosion",        chan, pitch: p);
 }
 
-state Lith_A_JumpExplosion(bool target = true) {
-   if(CheckMarathon(target)) return ResolveState("ExplodeMarathon");
-   else                      return ResolveState("Explode");
+state Lith_A_JumpExplosion() {
+   if(CheckMarathon()) return ResolveState("ExplodeMarathon");
+   else                return ResolveState("Explode");
 }
 
 state Lith_A_DoExplosion(float fxAmount = 1.0) {

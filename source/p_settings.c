@@ -234,6 +234,7 @@ struct setting const st_gui[] = {
 struct setting const st_hud[] = {
    {S_boole, "hud_showarmorind", S_cvBoole},
    {S_boole, "hud_showdamage",   S_cvBoole},
+   {S_fixed, "hud_damagealpha",  S_cvFixed, S_bndk(0.0, 1.0), "mult"},
    {S_boole, "hud_showitems",    S_cvBoole},
    {S_enume, "hud_itemcolor",    S_cvInteg, S_color},
    {S_boole, "hud_showlvl",      S_cvBoole},
@@ -257,18 +258,29 @@ struct setting const st_hud[] = {
    {S_boole, "scanner_bar",     S_cvBoole},
    {S_enume, "scanner_slide",   S_cvInteg, S_bndi(0, _ssld_max), "slide"},
    {S_enume, "scanner_color",   S_cvInteg, S_color},
+   {S_empty},
+   {S_boole, "hud_logfromtop",       S_cvBoole},
+   {S_boole, "hud_showlog",          S_cvBoole},
+   {S_boole, "player_stupidpickups", S_cvBoole},
+   {S_fixed, "hud_logsize",          S_cvFixed, S_bndk(0.2, 1.0), "mult"},
 };
 
 struct setting const st_itm[] = {
-   {S_boole, "player_altinvuln",  S_cvBoole},
-   {S_boole, "player_brightweps", S_cvBoole},
-   {S_boole, "player_noitemfx",   S_cvBoole},
-   {S_boole, "player_scoresound", S_cvBoole},
-   {S_boole, "player_teleshop",   S_cvBoole},
-   {S_boole, "sv_nobossdrop",     S_cvBoole},
-   {S_boole, "sv_nofullammo",     S_cvBoole},
-   {S_boole, "sv_noscoreammo",    S_cvBoole},
-   {S_boole, "sv_wepdrop",        S_cvBoole},
+   {S_boole, "player_altinvuln",     S_cvBoole},
+   {S_boole, "player_brightweps",    S_cvBoole},
+   {S_boole, "player_noitemfx",      S_cvBoole},
+   {S_boole, "player_scoresound",    S_cvBoole},
+   {S_empty},
+   {S_boole, "player_teleshop",      S_cvBoole},
+   {S_boole, "sv_nobossdrop",        S_cvBoole},
+   {S_boole, "sv_nofullammo",        S_cvBoole},
+   {S_boole, "sv_noscoreammo",       S_cvBoole},
+   {S_boole, "sv_wepdrop",           S_cvBoole},
+   {S_empty},
+   {S_enume, "player_scoredisp",     S_cvInteg, S_bndi(_itm_disp_none, _itm_disp_max), "itmdisp"},
+   {S_enume, "player_itemdisp",      S_cvInteg, S_bndi(_itm_disp_none, _itm_disp_max), "itmdisp"},
+   {S_enume, "player_ammodisp",      S_cvInteg, S_bndi(_itm_disp_none, _itm_disp_max), "itmdisp"},
+   {S_fixed, "player_itemdispalpha", S_cvFixed, S_bndk(0.0, 1.0), "mult"},
 };
 
 struct setting const st_lit[] = {
@@ -280,15 +292,6 @@ struct setting const st_lit[] = {
    {S_integ, "light_b", S_cvInteg, S_bndi(0, 255), "byte"},
    {S_empty},
    {S_integ, "light_radius", S_cvInteg, S_bndi(100, 1000), "unit"},
-};
-
-struct setting const st_log[] = {
-   {S_boole, "hud_logfromtop",       S_cvBoole},
-   {S_boole, "hud_showlog",          S_cvBoole},
-   {S_boole, "player_ammolog",       S_cvBoole},
-   {S_boole, "player_scorelog",      S_cvBoole},
-   {S_boole, "player_stupidpickups", S_cvBoole},
-   {S_fixed, "hud_logsize",          S_cvFixed, S_bndk(0.2, 1.0), "mult"},
 };
 
 struct setting const st_pgm[] = {
@@ -380,7 +383,6 @@ struct {
    Typ(hud),
    Typ(itm),
    Typ(lit),
-   Typ(log),
    Typ(pgm),
    Typ(ply),
    Typ(wep),

@@ -15,14 +15,15 @@ property Score: m_Score;
 
 default
 {
-   Lith_BasicPickup.LogType msg_huds;
+   -Lith_BasicPickup.DrawPopup
+   Lith_BasicPickup.LogType msg_scri;
 }
 
 virtual bool Lith_CanGiveScore() {return true;}
 
 override void Lith_OnPickup(Actor mo)
 {
-   if(Lith_CanGiveScore()) mo.ACS_ScriptCall("Lith_GiveScore", m_Score);
+   if(Lith_CanGiveScore()) CallACS("Lith_GiveScore", m_Score);
    Super.Lith_OnPickup(mo);
 }
 

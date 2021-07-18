@@ -24,11 +24,37 @@ class Lith_DamageNum {
    Lith_DamageNum m_next;
 }
 
+class Lith_ScoreNum {
+   vector2       m_pos;
+   string        m_amount;
+   int           m_ticks;
+   Lith_ScoreNum m_next;
+}
+
 extend class Lith_URANUS;
 
+private transient Lith_ScoreNum             m_scrNumHead;
 private transient Lith_DamageNum[_dnum_max] m_dmgNumHeads;
-private transient bool m_dmgNumInit;
-private transient int m_dmgNumAmount;
+private transient bool                      m_dmgNumInit;
+private transient int                       m_dmgNumAmount;
+
+static void addScoreNum(int x, int y, string amount) {
+   let cl = instance();
+   if(!cl) return;
+
+   if(!cl.m_scrNumHead) {
+      cl.m_scrNumHead = new("Lith_ScoreNum");
+   }
+
+   let snum = new("Lith_ScoreNum");
+
+   snum.m_pos    = (x, y);
+   snum.m_amount = amount;
+   snum.m_ticks  = 45;
+   snum.m_next   = cl.m_scrNumHead.m_next;
+
+   cl.m_scrNumHead.m_next = snum;
+}
 
 void addDamageNum(vector3 origin, double w, int damage, Actor receiver) {
    if(lith_hud_showdamage) {
@@ -86,8 +112,7 @@ private void tickDmgNums() {
       Lith_DamageNum start = m_dmgNumHeads[ty];
       if(!start) continue;
 
-      Lith_DamageNum dnum = start.m_next, prev = null;
-      while(dnum) {
+      for(Lith_DamageNum dnum = start.m_next, prev = null; dnum;) {
          if(!dnum.m_ticks) {
             let next = dnum.m_next;
             if(prev) prev.m_next = next;
@@ -118,13 +143,29 @@ private void tickDmgNums() {
    }
 }
 
+private void tickScrNums() {
+   if(m_scrNumHead) {
+      for(Lith_ScoreNum snum = m_scrNumHead.m_next, prev = null; snum;) {
+         if(!snum.m_ticks) {
+            let next = snum.m_next;
+            if(prev) prev.m_next = next;
+            snum.destroy();
+            snum = next;
+         } else {
+            snum.m_ticks--;
+            prev = snum;
+            snum = snum.m_next;
+         }
+      }
+   }
+}
+
 private ui void drawDmgNums(RenderEvent evt) {
    for(Lith_DamageNumType ty = 0; ty < _dnum_max; ty++) {
       Lith_DamageNum start = m_dmgNumHeads[ty];
       if(!start) continue;
 
-      Lith_DamageNum dnum = start.m_next;
-      while(dnum) {
+      for(Lith_DamageNum dnum = start.m_next; dnum;) {
          vector3 origin = Lith_UTIL.vec3Lerp(dnum.m_lastOrigin, dnum.m_origin, evt.fracTic);
          int x, y; bool seen; [x, y, seen] = project(origin);
 
@@ -151,12 +192,61 @@ private ui void drawDmgNums(RenderEvent evt) {
             }
 
             Screen.DrawText(fnt, dnum.m_cr, xf, yf, txt,
-                            DTA_VirtualWidth,320, DTA_VirtualHeight,240,
-                            DTA_Alpha,a,
-                            DTA_LegacyRenderStyle,STYLE_Translucent);
+                            DTA_VIRTUALWIDTH,320, DTA_VIRTUALHEIGHT,240,
+                            DTA_ALPHA,a*lith_hud_damagealpha,
+                            DTA_LEGACYRENDERSTYLE,STYLE_TRANSLUCENT);
          }
 
          dnum = dnum.m_next;
+      }
+   }
+}
+
+private ui void drawScrNums(RenderEvent evt) {
+   Font    fnt    = fntSml(true);
+   int     h      = fnt.getHeight();
+   vector2 endPos = (Lith_UTIL.pData(pdata_scrx), Lith_UTIL.pData(pdata_scry));
+
+   if(m_scrNumHead) {
+      for(Lith_ScoreNum snum = m_scrNumHead.m_next; snum;) {
+         vector2 pos = snum.m_pos;
+         double a;
+         double aa = 1.0;
+
+         if(snum.m_ticks < 20) {
+            double t = (snum.m_ticks - evt.fracTic) / 20.0;
+            a   = 0.0;
+            pos = Lith_UTIL.vec2Lerp(endPos, pos, Lith_UTIL.easeInOutQuad(t));
+            if(snum.m_ticks < 5) {
+               aa  = snum.m_ticks / 5.0;
+               aa -= (1.0 / 5.0) * evt.fracTic;
+            }
+         } else if(snum.m_ticks < 35) {
+            a  = (snum.m_ticks - 15) / 15.0;
+            a -= (1.0 / 15.0) * evt.fracTic;
+         } else {
+            a = 1.0;
+         }
+
+         int w = fnt.stringWidth(snum.m_amount);
+         pos.x -= w / 2.0;
+         pos.y -= h / 2.0;
+
+         if(aa > 0.0) {
+            Screen.DrawText(fnt, Font.CR_WHITE, pos.x, pos.y, snum.m_amount,
+                            DTA_VIRTUALWIDTH,320, DTA_VIRTUALHEIGHT,240,
+                            DTA_ALPHA,aa*lith_player_itemdispalpha,
+                            DTA_LEGACYRENDERSTYLE,STYLE_TRANSLUCENT);
+         }
+
+         if(a > 0.0) {
+            Screen.DrawText(fnt, Font.CR_GOLD, pos.x, pos.y, snum.m_amount,
+                            DTA_VIRTUALWIDTH,320, DTA_VIRTUALHEIGHT,240,
+                            DTA_ALPHA,a*lith_player_itemdispalpha,
+                            DTA_LEGACYRENDERSTYLE,STYLE_TRANSLUCENT);
+         }
+
+         snum = snum.m_next;
       }
    }
 }

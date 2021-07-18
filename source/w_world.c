@@ -111,7 +111,6 @@ void UpdateGame(void) {
 
    if(updateTo(Ver1_6_0)) {
       CVarSetK(sc_player_footstepvol, 0.2); /* 1.0 => 0.2 */
-      CVarSetI(sc_player_ammolog, true); /* false => true */
    }
 
    if(updateTo(Ver1_6_1)) {

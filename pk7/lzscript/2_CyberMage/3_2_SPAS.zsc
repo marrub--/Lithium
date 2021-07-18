@@ -112,7 +112,7 @@ action(Weapon) State Lith_A_FireSPAS()
 {
    lith_takeAmmo();
    Lith_A_Casing("Lith_CasShellHot", 30, 6, 20, FRandom(3,4), FRandom(7,8), FRandom(7,9));
-   if(!Lith_UTIL.pData(self, pdata_upgrade, UPGR_SPAS_B))
+   if(!Lith_UTIL.pData(pdata_upgrade, UPGR_SPAS_B))
       Lith_A_MagIncr();
    /* don't ask */
    if(Pos.Z - FloorZ >= 24) {
@@ -123,12 +123,12 @@ action(Weapon) State Lith_A_FireSPAS()
    A_Recoil(0.7);
    Lith_A_RecoilUp(0.4);
    A_Light(1);
-   if(Lith_UTIL.pData(self, pdata_upgrade, UPGR_SPAS_A))
+   if(Lith_UTIL.pData(pdata_upgrade, UPGR_SPAS_A))
       return ResolveState("FireVoid");
    Lith_FireBullets(10.5, 3.5, 12, 6);
    Lith_A_GunSmoke();
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
-   if(Lith_UTIL.pData(self, pdata_upgrade, UPGR_SPAS_B))
+   if(Lith_UTIL.pData(pdata_upgrade, UPGR_SPAS_B))
       return ResolveState("FireAuto");
    A_StartSound("weapons/spas/fire", lch_weapon);
    return null;
@@ -207,7 +207,7 @@ FireEmpty:
    goto ReadySelector;
 
 Reload:
-   CSHG A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_SPAS_B), "Ready");
+   CSHG A 0 A_JumpIf(Lith_UTIL.pData(pdata_upgrade, UPGR_SPAS_B), "Ready");
    CSHG A 0 Lith_A_JumpIfMagFull;
    CSHR ABCDE 1;
    CSHR FG 2;

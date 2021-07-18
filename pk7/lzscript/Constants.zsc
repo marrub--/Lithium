@@ -15,7 +15,7 @@
 #include "lzscript/Constants/w_monster.zsc"
 #include "lzscript/Constants/w_world.zsc"
 
-enum Lith_ScoreNum {
+enum Lith_ScoreNums {
    Score_Clip      = 1000,
    Score_ClipBox   = 4000,
    Score_Shell     = 2000,

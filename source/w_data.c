@@ -18,11 +18,11 @@
 /* Scripts ----------------------------------------------------------------- */
 
 script ext("ACS") addr(lsc_pdata)
-i32 Sc_LPData(i32 info, i32 permutation)
-{
-   union ik32 u;
+i32 Sc_LPData(i32 info, i32 permutation) {
+   if(P_None()) return 0;
 
-   if(!P_None()) switch(info) {
+   union ik32 u;
+   switch(info) {
    case pdata_weapon:     return P_Wep_CurType();
    case pdata_upgrade:    return get_bit(pl.upgrades[permutation].flags, _ug_active);
    case pdata_riflemode:  return pl.riflefiremode;
@@ -37,8 +37,9 @@ i32 Sc_LPData(i32 info, i32 permutation)
    case pdata_attr:       return pl.attr.attrs[permutation];
    case pdata_alpha:      return u.k = pl.alpha, u.i;
    case pdata_oldhealth:  return pl.oldhealth;
+   case pdata_scrx:       return pl.scrx;
+   case pdata_scry:       return pl.scry;
    }
-
    return 0;
 }
 

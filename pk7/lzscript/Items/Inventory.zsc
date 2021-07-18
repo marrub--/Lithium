@@ -105,7 +105,7 @@ class Lith_InventoryItem : Inventory abstract {
 
    override void AttachToOwner(Actor mo) {
       let id = Lith_IDOL(mo.FindInventory("Lith_IDOL"));
-      if(id.Lith_Attach(m_invItem)) {
+      if(CallACS("Lith_ItemAttach", m_invItem)) {
          if(m_infoPage) Lith_HERMES.UnlockBip(mo, m_infoPage);
          Lith_OnAttach(mo);
       }
@@ -115,7 +115,7 @@ class Lith_InventoryItem : Inventory abstract {
    override bool CanPickup(Actor mo) {
       if(Super.CanPickup(mo)) {
          let id = Lith_IDOL(mo.FindInventory("Lith_IDOL"));
-         return m_invItem && id && id.Lith_SpaceFree(m_invItem);
+         return m_invItem && id && CallACS("Lith_ItemCanPlace", m_invItem);
       } else {
          return false;
       }
@@ -123,7 +123,7 @@ class Lith_InventoryItem : Inventory abstract {
 
    override bool TryPickup(in out Actor mo) {
       if(Super.TryPickup(mo)) {
-         Lith_HERMES.Log(mo, msg_both, 3, Lith_GetName());
+         Lith_HERMES.Log(mo, msg_item, 3, Lith_GetName());
          return true;
       } else {
          return false;
@@ -135,8 +135,9 @@ class Lith_BasicPickup : Inventory {
    default {
       Inventory.PickupMessage "";
       Inventory.PickupSound "";
-      Lith_BasicPickup.LogType msg_both;
-      +INVENTORY.TRANSFER
+      Lith_BasicPickup.LogType msg_item;
+      +Lith_BasicPickup.DrawPopup
+      +Inventory.Transfer
       +CastSpriteShadow
    }
 
@@ -152,7 +153,8 @@ class Lith_BasicPickup : Inventory {
    property  LogType: m_LogType;
    property InfoPage: m_InfoPage;
 
-   flagdef Vacuum: m_Flags, 0;
+   flagdef Vacuum:    m_Flags, 0;
+   flagdef DrawPopup: m_Flags, 1;
 
    virtual void Lith_OnPickup(Actor mo) {
       if(m_LogName)
@@ -163,6 +165,9 @@ class Lith_BasicPickup : Inventory {
 
    override bool TryPickup(in out Actor mo) {
       Lith_OnPickup(mo);
+      if(bDrawPopup) {
+         callAcs("Lith_ItemPopupTag");
+      }
       GoAwayAndDie();
       return true;
    }
@@ -187,14 +192,6 @@ Lith_InventoryItem Lith_Find(uint ip) {
    }
 
    return null;
-}
-
-bool Lith_Attach(uint ip) {
-   return owner && owner.ACS_ScriptCall("Lith_ItemAttach", ip);
-}
-
-bool Lith_SpaceFree(uint ip) {
-   return owner && owner.ACS_ScriptCall("Lith_ItemCanPlace", ip);
 }
 
 void Lith_Remove(uint ip) {

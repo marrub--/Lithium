@@ -81,7 +81,7 @@ void Lith_GiveDefWeapon(class<Weapon> type) {
 override void PlayerThink() {
    if(level.levelnum == 1911777) return;
 
-   if(Lith_UTIL.pData(self, pdata_semifrozen)) {
+   if(Lith_UTIL.pData(pdata_semifrozen)) {
       UserCmd cmd = player.cmd;
       cmd.pitch = cmd.yaw = cmd.roll = 0;
       player.turnticks = 0;
@@ -139,8 +139,8 @@ private void Lith_ItemVacuum() {
 void Lith_PreTick() {
    if(m_wasDamaged) {
       --m_wasDamaged;
-   } else if(Lith_UTIL.pData(self, pdata_pclass) & (pcl_wanderer | pcl_thoth) &&
-             health < Lith_UTIL.pData(self, pdata_oldhealth)) {
+   } else if(Lith_UTIL.pData(pdata_pclass) & (pcl_wanderer | pcl_thoth) &&
+             health < Lith_UTIL.pData(pdata_oldhealth)) {
       m_wasDamaged = 7;
    }
 
@@ -154,7 +154,7 @@ void Lith_PreTick() {
    m_wasFrozen = isFrozen();
 
    /* stupid hack to keep the view from moving around */
-   if(Lith_UTIL.pData(self, pdata_semifrozen)) {
+   if(Lith_UTIL.pData(pdata_semifrozen)) {
       angle -= 1;
       pitch -= 1;
       A_SetAngle(angle + 1, SPF_INTERPOLATE);

@@ -107,8 +107,7 @@ void P_Log_Entry() {
    for(i32 i = 0; i < pl.log.mapsC; i++)
       if(pl.log.mapsV[i].lnum == lnum) {lm = &pl.log.mapsV[i]; break;}
 
-   if(!lm)
-   {
+   if(!lm) {
       Vec_GrowN(pl.log.maps, 1, 32, _tag_logs);
       lm = &Vec_Next(pl.log.maps);
       lm->name = (ACS_BeginPrint(), ACS_PrintName(PRINTNAME_LEVELNAME), ACS_EndStrParam());
@@ -204,15 +203,26 @@ script void HUD_Log(i32 cr, i32 x, i32 yy) {
 
 script_str ext("ACS") addr(OBJ "LogS")
 void Sc_Log(i32 levl, i32 type) {
+   if(P_None()) return;
+
    str name = ServCallS(sm_GetLogName);
 
    if(name[0] == '_') name = lang_fmt(LANG "LOG%S", name);
 
-   if(!P_None()) switch(type) {
-   case msg_ammo: if(CVarGetI(sc_player_ammolog))
-   case msg_huds: pl.logH(levl, tmpstr(name)); break;
-   case msg_full: pl.logF(      tmpstr(name)); break;
-   case msg_both: pl.logB(levl, tmpstr(name)); break;
+   switch(type) {
+   case msg_scri:
+      if(CVarGetI(sc_player_itemdisp) & _itm_disp_log) {
+      case msg_huds:
+         pl.logH(levl, tmpstr(name));
+      }
+      break;
+   case msg_full:
+      pl.logF(tmpstr(name));
+      break;
+   case msg_item:
+      if(CVarGetI(sc_player_itemdisp) & _itm_disp_log)
+         pl.logB(levl, tmpstr(name));
+      break;
    }
 }
 

@@ -103,7 +103,7 @@ override void tick() {
    super.tick();
 
    if(bSlot3OptAmmo) {
-      if(Lith_UTIL.pData(owner, pdata_slot3Ammo)) {
+      if(Lith_UTIL.pData(pdata_slot3Ammo)) {
          if(!ammoType1) {
             ammoType1 = "Lith_ShellAmmo";
             ammo1     = addAmmo(owner, ammoType1, 0);
@@ -146,7 +146,7 @@ action(Weapon) void lith_a_overlayTick() {
       style = style_translucent;
    }
 
-   a *= Lith_UTIL.pData(self, pdata_alpha) / FIX;
+   a *= Lith_UTIL.pData(pdata_alpha) / FIX;
 
    for(int psp = _psp_weapon;; ++psp) {
       if(psp == _psp_wep_max) {
@@ -321,7 +321,7 @@ action(Weapon) state Lith_A_JumpIfMagFull(statelabel sn = "ReadySelector") {
 }
 
 action(Weapon) void Lith_A_MagIncr(int amt = 1) {
-   if(!Lith_UTIL.pData(self, pdata_upgrade, UPGR_OneShot))
+   if(!Lith_UTIL.pData(pdata_upgrade, UPGR_OneShot))
       invoker.m_fired = min(invoker.m_fired + amt, invoker.m_max);
    else
       invoker.m_fired = invoker.m_max;
@@ -354,7 +354,7 @@ action(Weapon) void Lith_A_ReloadBobDn(double amt) {
 action(Weapon) void Lith_A_ScopeIn() {
    if(!CountInv("Lith_WeaponScopedToken")) {
       self.GiveInventory("Lith_WeaponScopedToken", 1);
-      A_ZoomFactor((1+Lith_UTIL.pData(self, pdata_weaponzoom)/FIX)*invoker.m_scopeZoom);
+      A_ZoomFactor((1+Lith_UTIL.pData(pdata_weaponzoom)/FIX)*invoker.m_scopeZoom);
       A_StartSound(invoker.m_scopeInSnd, lch_scope);
    }
 }
@@ -373,7 +373,7 @@ action(Weapon) void Lith_A_ScopeToggle() {
 }
 
 action(Weapon) void Lith_A_ZoomFactorScoped(double amount) {
-   A_ZoomFactor((1+Lith_UTIL.pData(self, pdata_weaponzoom)/FIX) * amount * invoker.m_scopeZoom);
+   A_ZoomFactor((1+Lith_UTIL.pData(pdata_weaponzoom)/FIX) * amount * invoker.m_scopeZoom);
 }
 
 action(Weapon) void Lith_GunSmoke(class<Actor> type, double x, double y, bool ignoreCrouch) {

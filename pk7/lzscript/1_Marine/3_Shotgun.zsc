@@ -71,7 +71,7 @@ action(Weapon) void Lith_A_FireShotgun()
    Lith_A_GunSmoke();
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
 
-   if(Lith_UTIL.pData(self, pdata_upgrade, UPGR_Shotgun_B))
+   if(Lith_UTIL.pData(pdata_upgrade, UPGR_Shotgun_B))
    {
       Lith_FixedBullets(8, 10, pufftype: "Lith_PoisonBullet");
       A_StartSound("weapons/shotgun/poison/fire", lch_weapon);
@@ -108,7 +108,7 @@ AltReady:
    loop;
 Ready:
    SHTG A 0 {if(invoker.m_Just) invoker.m_Just--;}
-   SHTG A 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_Shotgun_A), "ReadyGauss");
+   SHTG A 0 A_JumpIf(Lith_UTIL.pData(pdata_upgrade, UPGR_Shotgun_A), "ReadyGauss");
    SHTG A 1 Lith_A_Ready(WRF_ALLOWRELOAD);
    loop;
 ReadyGauss:
@@ -129,7 +129,7 @@ Select:
 
 Fire:
    #### # 0 lith_jumpNoAmmo;
-   #### # 0 A_JumpIf(Lith_UTIL.pData(self, pdata_upgrade, UPGR_Shotgun_A), "FireGauss");
+   #### # 0 A_JumpIf(Lith_UTIL.pData(pdata_upgrade, UPGR_Shotgun_A), "FireGauss");
    #### # 0 Lith_A_FireShotgun;
    #### # 0 A_JumpIf(countInv("Lith_WeaponScopedToken"), "FireFinish_Rail_Scoped");
 FireFinish_Rail_Unscoped:
@@ -202,7 +202,7 @@ AltFire:
    goto ReadySelector;
 
 Reload:
-   #### # 0 A_JumpIf(!Lith_UTIL.pData(self, pdata_upgrade, UPGR_Shotgun_A), "ReadySelector");
+   #### # 0 A_JumpIf(!Lith_UTIL.pData(pdata_upgrade, UPGR_Shotgun_A), "ReadySelector");
    #### # 0 Lith_A_JumpIfMagFull;
    SHTG N 2 Lith_A_ScopeOut;
    SHTG F 0 Lith_A_ReloadBobUp(0.2);
