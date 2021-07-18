@@ -103,7 +103,7 @@ override void Ticker()
       if(cnt_par        > pt ) cnt_par        = pt;
       if(cnt_total_time > ttt) cnt_total_time = ttt;
 
-      if(p.cmd.buttons & BT_ALTATTACK && sp_state < 7)
+      if(p.cmd.buttons & BT_ALTATTACK)
       {
          switch(sp_state++) {
          case 2: cnt_kills [0] = plrs[me].skills;  break;
