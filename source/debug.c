@@ -304,8 +304,8 @@ bool chtf_end_game(cheat_params_t const params) {
    return true;
 }
 
-struct cheat cht_give_exp_to = cheat_s("pgdonation",   2, chtf_give_exp_to);
-struct cheat cht_give_score  = cheat_s("pgcapitalism", 0, chtf_give_score);
-struct cheat cht_end_game    = cheat_s("pgbedone",     1, chtf_end_game);
+struct cheat cht_give_exp_to = cheat_s("pgdonation", 2, chtf_give_exp_to);
+struct cheat cht_give_score  = cheat_s("pgbezos",    0, chtf_give_score);
+struct cheat cht_end_game    = cheat_s("pgbedone",   1, chtf_end_game);
 
 /* EOF */
