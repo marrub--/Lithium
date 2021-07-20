@@ -41,9 +41,9 @@ void Sc_Obituary(void) {
    noinit static
    pronoun_set set;
 
-   ifw(str pset = CVarGetS(sc_player_pronouns), pset == st_nil) {
-      fastmemcpy(set,
-                 &defaultpronoun[ACS_GetPlayerInfo(-1, PLAYERINFO_GENDER)],
+   ifw(str pset = CVarGetS(sc_player_pronouns), !pset[0]) {
+      fastmemcpy(set, &defaultpronoun[ACS_GetPlayerInfo(ACS_PlayerNumber(),
+                                                        PLAYERINFO_GENDER)],
                  sizeof(pronoun_set));
    } else {
       faststrcpy_str(pbuf, pset);
@@ -56,18 +56,10 @@ void Sc_Obituary(void) {
       ) {
          set[i++] = word;
       }
-
-      switch(i) {
-      case _pn_obj: set[i++] = set[_pn_sub];
-      case _pn_psd: set[i++] = set[_pn_psd];
-      case _pn_psi: set[i++] = set[_pn_psi];
-      case _pn_act: set[i++] = set[_pn_act];
-      case _pn_max: set[i++] = set[_pn_sub];
-      }
    }
 
    str obit = ServCallS(sm_GetObituary);
-   if(obit == st_nil) return;
+   if(!obit[0]) return;
 
    i32 rn = ACS_Random(1, 5);
 

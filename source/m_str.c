@@ -86,7 +86,6 @@
 #undef strto_impl_type
 #else
 #include "common.h"
-#include "m_char.h"
 #include "w_world.h"
 
 #include <stdio.h>

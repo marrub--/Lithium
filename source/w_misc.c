@@ -15,51 +15,41 @@
 #include "p_player.h"
 #include "w_world.h"
 
-/* Static Functions -------------------------------------------------------- */
-
 static
-void SetInventory(str item, i32 amount)
-{
+void SetInventory(str item, i32 amount) {
    i32 s = InvNum(item) - amount;
         if(s < 0) InvTake(item, -s);
    else if(s > 0) InvGive(item,  s);
 }
 
 static
-void SetActorInventory(i32 tid, str item, i32 amount)
-{
+void SetActorInventory(i32 tid, str item, i32 amount) {
    i32 s = ACS_CheckActorInventory(tid, item) - amount;
         if(s < 0) ACS_TakeActorInventory(tid, item, -s);
    else if(s > 0) ACS_GiveActorInventory(tid, item,  s);
 }
 
-/* Extern Functions -------------------------------------------------------- */
-
-void FadeFlash(i32 r, i32 g, i32 b, k32 amount, k32 seconds)
-{
+void FadeFlash(i32 r, i32 g, i32 b, k32 amount, k32 seconds) {
    ACS_FadeTo(r, g, b, amount, 0.0);
    ACS_FadeTo(r, g, b, 0.0, seconds);
 }
 
 script
-i32 PtrTID(i32 tid, i32 ptr)
-{
+i32 PtrTID(i32 tid, i32 ptr) {
    if(tid || ptr)
       ACS_SetActivator(tid, ptr);
    return ACS_ActivatorTID();
 }
 
 script
-i32 PtrPlayerNumber(i32 tid, i32 ptr)
-{
+i32 PtrPlayerNumber(i32 tid, i32 ptr) {
    if(tid || ptr)
       ACS_SetActivator(tid, ptr);
    return ACS_PlayerNumber();
 }
 
 script
-bool PtrValid(i32 tid, i32 ptr)
-{
+bool PtrValid(i32 tid, i32 ptr) {
    if(tid || ptr)
       return ACS_SetActivator(tid, ptr);
    else
@@ -67,42 +57,35 @@ bool PtrValid(i32 tid, i32 ptr)
 }
 
 script
-bool PtrSet(i32 tid, i32 ptr, i32 assign, i32 tid2, i32 ptr2, i32 flags)
-{
+bool PtrSet(i32 tid, i32 ptr, i32 assign, i32 tid2, i32 ptr2, i32 flags) {
    if(tid || ptr)
       ACS_SetActivator(tid, ptr);
    return ACS_SetPointer(assign, tid2, ptr2, flags);
 }
 
-i32 PtrInvNum(i32 tid, str item)
-{
+i32 PtrInvNum(i32 tid, str item) {
    if(tid == 0) return InvNum(item);
    else         return ACS_CheckActorInventory(tid, item);
 }
 
-void PtrInvGive(i32 tid, str item, i32 amount)
-{
+void PtrInvGive(i32 tid, str item, i32 amount) {
    if(tid == 0) InvGive(item, amount);
    else         ACS_GiveActorInventory(tid, item, amount);
 }
 
-void PtrInvTake(i32 tid, str item, i32 amount)
-{
+void PtrInvTake(i32 tid, str item, i32 amount) {
    if(tid == 0) InvTake(item, amount);
    else         ACS_TakeActorInventory(tid, item, amount);
 }
 
-void PtrInvSet(i32 tid, str item, i32 amount)
-{
+void PtrInvSet(i32 tid, str item, i32 amount) {
    if(tid == 0) SetInventory(item, amount);
    else         SetActorInventory(tid, item, amount);
 }
 
-void BeginAngles(i32 x, i32 y)
-{
+void BeginAngles(i32 x, i32 y) {
    a_cur = 0;
-   for(i32 i = 0; i < countof(a_angles); i++)
-   {
+   for(i32 i = 0; i < countof(a_angles); i++) {
       a_angles[i].ang = 0;
       a_angles[i].dst = 0;
    }
@@ -110,54 +93,58 @@ void BeginAngles(i32 x, i32 y)
    a_y = y;
 }
 
-k32 AddAngle(i32 x, i32 y)
-{
-   if(a_cur >= countof(a_angles))
+k32 AddAngle(i32 x, i32 y) {
+   if(a_cur >= countof(a_angles)) {
       return 0;
+   }
 
    struct polar *p = &a_angles[a_cur++];
    *p = ctopol(x - a_x, y - a_y);
    return p->ang;
 }
 
-/* Scripts ----------------------------------------------------------------- */
-
 script ext("ACS") addr(lsc_addangle)
-void Sc_AddAngle(i32 x, i32 y)
-{
+void Sc_AddAngle(i32 x, i32 y) {
    AddAngle(x, y);
 }
 
 script_str ext("ACS") addr(OBJ "EmitScore")
-void Sc_EmitScore(i32 amount)
-{
+void Sc_EmitScore(i32 amount) {
    /* dummied out */
 }
 
 script_str ext("ACS") addr(OBJ "EmitEXP")
-void Sc_EmitEXP(i32 amount)
-{
+void Sc_EmitEXP(i32 amount) {
    P_Lv_GiveEXP(amount);
 }
 
+script static
+bool chtf_give_exp(cheat_params_t const params) {
+   if(!IsDigit(params[0]) || !IsDigit(params[1]) || !IsDigit(params[2])) {
+      return false;
+   }
+   P_Lv_GiveEXP((params[0] - '0') * 10000 +
+                (params[1] - '0') * 1000 +
+                (params[2] - '0') * 100);
+   return true;
+}
+
+struct cheat cht_give_exp = cheat_s("pgtuition", 3, chtf_give_exp);
+
 script_str ext("ACS") addr(OBJ "GiveScore")
-void Sc_GiveScore(i32 score)
-{
+void Sc_GiveScore(i32 score) {
    P_Scr_Give(GetX(0), GetY(0), GetZ(0),
               score * (k64)ACS_RandomFixed(0.7, 1.2),
               false);
 }
 
 script_str ext("ACS") addr(OBJ "BoughtItemPickup")
-void Sc_BoughtItemPickup(i32 id)
-{
+void Sc_BoughtItemPickup(i32 id) {
    if(P_None()) return;
-   if(id)
-   {
+   if(id) {
       struct upgrade *upgr = &pl.upgrades[id];
 
-      if(!get_bit(upgr->flags, _ug_owned))
-      {
+      if(!get_bit(upgr->flags, _ug_owned)) {
          switch(upgr->info->category) {
          case _uc_body: StartSound(ss_player_pickup_upgrbody, lch_item, CHANF_NOPAUSE, 1.0, ATTN_NONE); break;
          case _uc_weap: StartSound(ss_player_pickup_upgrweap, lch_item, CHANF_NOPAUSE, 1.0, ATTN_NONE); break;
@@ -167,9 +154,7 @@ void Sc_BoughtItemPickup(i32 id)
          P_Upg_SetOwned(upgr);
          P_Upg_Toggle(upgr);
       }
-   }
-   else
-   {
+   } else {
       StartSound(ss_player_pickup_item, lch_item, CHANF_NOPAUSE, 1.0, ATTN_NONE);
 
       pl.itemsbought++;

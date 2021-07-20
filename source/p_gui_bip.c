@@ -15,7 +15,6 @@
 #include "p_player.h"
 #include "p_bip.h"
 #include "m_list.h"
-#include "m_char.h"
 
 /* Static Functions -------------------------------------------------------- */
 

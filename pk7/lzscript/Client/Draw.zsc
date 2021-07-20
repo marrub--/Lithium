@@ -321,7 +321,7 @@ static void LE() {
 }
 
 static clearScope textureId getTextureForName(string tex) {
-   for(int i = 0; tex.byteAt(0) == Ch_Colon; i++) {
+   for(int i = 0; tex.byteAt(0) == CH_COLON; i++) {
       if(i > 5) {Console.printf("invalid texture: %s", tex); break;}
       tex = StringTable.Localize(tex, false);
    }
@@ -516,7 +516,7 @@ Font fntSml(bool noUnicode = false) const {
 
 Font fntMid(bool noUnicode = false) const {
    if(noUnicode || m_English) {
-      return "lmidfont";
+      return 'lmidfont';
    } else {
       return m_UFntSml;
    }
@@ -524,28 +524,26 @@ Font fntMid(bool noUnicode = false) const {
 
 Font fntBig(bool noUnicode = false) const {
    if(noUnicode || m_English) {
-      return "lbigfont";
+      return 'lbigfont';
    } else {
-      return "newconsolefont";
+      return 'newconsolefont';
    }
 }
 
 Font fntTrm(bool noUnicode = false) const {
    if(noUnicode || m_English) {
-      return "ltrmfont";
+      return 'ltrmfont';
    } else {
-      return "ljtrmfont";
+      return 'ljtrmfont';
    }
 }
 
-Font fntAny(string name, bool noUnicode = false) const {
-   /**/ if(name == "smallfnt") return fntSml(noUnicode);
-   else if(name == "lmidfont") return fntMid(noUnicode);
-   else if(name == "ltrmfont") return fntTrm(noUnicode);
-   else if(name == "bigupper") return fntBig(noUnicode);
-   else if(name == "areaname") return "areaname";
-   else if(name == "lsmlhfnt") return "lsmlhfnt";
-   else                        return null;
+Font fntAny(name name, bool noUnicode = false) const {
+   /**/ if(name == 'smallfnt') return fntSml(noUnicode);
+   else if(name == 'lmidfont') return fntMid(noUnicode);
+   else if(name == 'ltrmfont') return fntTrm(noUnicode);
+   else if(name == 'bigupper') return fntBig(noUnicode);
+   else                        return Font.getFont(name);
 }
 
 static clearScope color xhairColor() {

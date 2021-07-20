@@ -15,7 +15,6 @@
 
 #include "common.h"
 #include "w_world.h"
-#include "m_char.h"
 
 /* Static Objects ---------------------------------------------------------- */
 

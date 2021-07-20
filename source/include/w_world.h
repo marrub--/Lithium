@@ -108,12 +108,6 @@ enum ZscName(DamageType) {
 enum ZscName(ScriptNum) {
    lsc_gsinit = 17000,
    lsc_strinit,
-   lsc_getfontmetric,
-   lsc_metr_xadv,
-   lsc_metr_yofs,
-   lsc_metr_tex,
-   lsc_metr_w,
-   lsc_metr_h,
    lsc_pdata,
    lsc_wdata,
    lsc_addangle,
@@ -122,6 +116,7 @@ enum ZscName(ScriptNum) {
    lsc_monstertype,
    lsc_worldreopen,
    lsc_drawcr,
+   lsc_cheatinput,
    #define w_setptr_x(x) lsc_setptr##x,
    #include "w_world.h"
 };

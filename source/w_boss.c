@@ -250,19 +250,34 @@ void Sc_SpawnBoss(void)
    bossspawned = true;
 }
 
-script_str ext("ACS") addr(OBJ "TriggerBoss") optargs(1)
-void Sc_TriggerBoss(i32 diff, i32 num, i32 phase)
-{
-   switch(diff) {
+script static
+bool chtf_summon_boss(cheat_params_t const params) {
+   i32 diff  = params[0] - '0';
+   i32 num   = params[1] - '0';
+   i32 phase = params[2] - '0';
+
+   if(diff < 0 || diff >= diff_any ||
+      num < 0 || num > 9 ||
+      phase < 0 || phase > 9)
+   {
+      return false;
+   }
+
+   switch(params[0] - '0') {
    case diff_easy: boss = &bosses_easy[num]; break;
    case diff_medi: boss = &bosses_medi[num]; break;
    case diff_hard: boss = &bosses_hard[num]; break;
    }
 
-   if(phase)
-      {boss->dead = false; boss->phase = phase;}
+   if(phase) {
+      boss->dead = false;
+      boss->phase = phase;
+   }
 
    TriggerBoss();
+   return true;
 }
+
+struct cheat cht_summon_boss = cheat_s("pghauntme", 3, chtf_summon_boss);
 
 /* EOF */

@@ -12,6 +12,7 @@
  */
 
 #include "common.h"
+#include <GDCC.h>
 
 #define _mem_idn 0xC0FFEE69
 #define _mem_beg 0xADEADBED

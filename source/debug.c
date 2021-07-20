@@ -11,24 +11,18 @@
  * ---------------------------------------------------------------------------|
  */
 
-#ifndef NDEBUG
 #include "common.h"
 #include "p_player.h"
 #include "w_monster.h"
-#include "m_char.h"
 
 #include <stdio.h>
 #include <GDCC.h>
 
-/* Extern Objects ---------------------------------------------------------- */
-
+#ifndef NDEBUG
 str dbgstat[64], dbgnote[64];
 i32 dbgstatnum,  dbgnotenum;
 
-/* Extern Functions -------------------------------------------------------- */
-
-void Dbg_Stat_Impl(cstr fmt, ...)
-{
+void Dbg_Stat_Impl(cstr fmt, ...) {
    if(!dbglevel(log_devh)) return;
 
    va_list vl;
@@ -42,8 +36,7 @@ void Dbg_Stat_Impl(cstr fmt, ...)
    dbgstat[dbgstatnum++] = ACS_EndStrParam();
 }
 
-void Dbg_Note_Impl(cstr fmt, ...)
-{
+void Dbg_Note_Impl(cstr fmt, ...) {
    if(!dbglevel(log_devh)) return;
 
    va_list vl;
@@ -114,8 +107,7 @@ void Dbg_PrintMem(void const *data, mem_size_t size) {
    PrintChrSt("\nEOF\n");
 }
 
-void Log(cstr fmt, ...)
-{
+void Log(cstr fmt, ...) {
    va_list vl;
 
    ACS_BeginPrint();
@@ -126,8 +118,6 @@ void Log(cstr fmt, ...)
 
    ACS_EndLog();
 }
-
-/* Scripts ----------------------------------------------------------------- */
 
 dynam_aut script_str ext("ACS") addr(OBJ "Thingomamob")
 void Sc_Thimgomabjhdf(void) {
@@ -175,8 +165,8 @@ void Sc_Thimgomabjhdf(void) {
    }
 }
 
-alloc_aut(0) script_str ext("ACS") addr(OBJ "FontTest")
-void Sc_FontTest(i32 fontnum) {
+script static
+void dbg_font_test(str font) {
    static
    struct {cstr lhs, rhs;} const strings[] = {
       /*
@@ -195,8 +185,10 @@ void Sc_FontTest(i32 fontnum) {
       "CyrMj2",  u8"ЪЫЬЭЮЯ",
       "CyrMi1",  u8"абвгдеёжзийклмнопрстуфхцчшщ",
       "CyrMi2",  u8"ъыьэюя",
-      "Serv",    u8"",
-      "SceNum",  u8"",
+      "Nums",    u8"0123456789",
+      "AlphaU",  u8"ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      "AlphaL",  u8"abcdefghijklmnopqrstuvwxyz",
+      "Extra",   u8"",
    };
 
    static
@@ -210,7 +202,6 @@ void Sc_FontTest(i32 fontnum) {
 
    for(;;) {
       enum {_h = 12};
-      str font = sa_dbg_fonts[fontnum];
       SetSize(320, 240);
       i32 y = 0;
       for(i32 i = 0; i < countof(strings); i++) {
@@ -232,42 +223,89 @@ void Sc_FontTest(i32 fontnum) {
    }
 }
 
-script_str ext("ACS") addr(OBJ "GiveEXPToMonster")
-void Sc_GiveEXPToMonster(i32 amt) {
-   ifauto(dmon_t *, m, DmonPtr(0, AAPTR_PLAYER_GETTARGET)) m->exp += amt;
-}
-
-script_str ext("ACS") addr(OBJ "GiveMeAllOfTheScore")
-void Sc_DbgGiveScore(void) {
-   if(!P_None()) P_Scr_GivePos(0, 0, INT96_MAX, true);
-}
-
-script_str ext("ACS") addr(OBJ "DumpAlloc")
-void Sc_DbgDumpAlloc(void) {
-   __GDCC__alloc_dump();
-}
-
-script_str ext("ACS") addr(OBJ "PrintMonsterInfo")
-void Sc_PrintMonsterInfo(void) {
-   ifauto(dmon_t *, m, DmonPtr(0, AAPTR_PLAYER_GETTARGET))
-      PrintMonsterInfo(m);
-}
-
-script_str ext("ACS") addr(OBJ "TriggerEnding")
-void Sc_TriggerEnding(i32 num) {
-   cstr which;
-   switch(num) {
+script static
+bool chtf_dbg_font_test(cheat_params_t const params) {
+   str font;
+   switch(FourCC(params[0], params[1], 0, 0)) {
+   case FourCC('a', 'n', 0, 0): font = sf_areaname;  break;
+   case FourCC('b', 'u', 0, 0): font = sf_bigupper;  break;
+   case FourCC('i', 't', 0, 0): font = sf_italic;    break;
+   case FourCC('j', 'k', 0, 0): font = sf_jiskan16;  break;
+   case FourCC('k', '6', 0, 0): font = sf_k6x8;      break;
+   case FourCC('l', 'j', 0, 0): font = sf_ljtrmfont; break;
+   case FourCC('l', 'm', 0, 0): font = sf_lmidfont;  break;
+   case FourCC('l', 's', 0, 0): font = sf_lsmlhfnt;  break;
+   case FourCC('l', 't', 0, 0): font = sf_ltrmfont;  break;
+   case FourCC('m', 'g', 0, 0): font = sf_misakig;   break;
+   case FourCC('m', 'm', 0, 0): font = sf_misakim;   break;
+   case FourCC('s', 'f', 0, 0): font = sf_smallfnt;  break;
    default:
-   case 0: which = "Division";    break;
-   case 1: which = "Other";       break;
-   case 2: which = "Normal";      break;
-   case 3: which = "Barons";      break;
-   case 4: which = "CyberDemon";  break;
-   case 5: which = "SpiderDemon"; break;
-   case 6: which = "IconOfSin";   break;
+      return false;
+   }
+   dbg_font_test(font);
+   return true;
+}
+
+script static
+bool chtf_dbg_dump_alloc(cheat_params_t const params) {
+   __GDCC__alloc_dump();
+   return true;
+}
+
+script static
+bool chtf_dbg_mons_info(cheat_params_t const params) {
+   pl.setActivator();
+   ACS_SetActivator(0, AAPTR_PLAYER_GETTARGET);
+   dmon_t *m = DmonSelf();
+   if(m) PrintMonsterInfo(m);
+   return true;
+}
+
+struct cheat cht_dbg_dump_alloc = cheat_s("pgsegv",    0, chtf_dbg_dump_alloc);
+struct cheat cht_dbg_font_test  = cheat_s("pgfontdbg", 2, chtf_dbg_font_test);
+struct cheat cht_dbg_mons_info  = cheat_s("pginfo",    0, chtf_dbg_mons_info);
+#endif
+
+script static
+bool chtf_give_exp_to(cheat_params_t const params) {
+   if(!IsDigit(params[0]) || !IsDigit(params[1])) {
+      return false;
+   }
+
+   pl.setActivator();
+   ACS_SetActivator(0, AAPTR_PLAYER_GETTARGET);
+   dmon_t *m = DmonSelf();
+   if(m) m->exp += (params[0] - '0') * 1000 + (params[1] - '0') * 100;
+   return true;
+}
+
+script static
+bool chtf_give_score(cheat_params_t const params) {
+   pl.setActivator();
+   P_Scr_GivePos(0, 0, INT96_MAX, true);
+   return true;
+}
+
+script static
+bool chtf_end_game(cheat_params_t const params) {
+   cstr which;
+   switch(params[0]) {
+   case 'd': which = "Division";    break;
+   case 'o': which = "Other";       break;
+   case 'n': which = "Normal";      break;
+   case 'b': which = "Barons";      break;
+   case 'c': which = "CyberDemon";  break;
+   case 's': which = "SpiderDemon"; break;
+   case 'i': which = "IconOfSin";   break;
+   default:
+      return false;
    }
    F_Start(which);
+   return true;
 }
-#endif
+
+struct cheat cht_give_exp_to = cheat_s("pgdonation",   2, chtf_give_exp_to);
+struct cheat cht_give_score  = cheat_s("pgcapitalism", 0, chtf_give_score);
+struct cheat cht_end_game    = cheat_s("pgbedone",     1, chtf_end_game);
 
 /* EOF */

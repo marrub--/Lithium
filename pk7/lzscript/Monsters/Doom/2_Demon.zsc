@@ -29,8 +29,8 @@ default
    PainSound   "demon/pain";
    SeeSound    "demon/sight";
 
-   Obituary "$OB_DEMONHIT";
-   Tag      "$LITH_INFO_SHORT_Demon";
+   HitObituary "$OB_DEMONHIT";
+   Tag         "$LITH_INFO_SHORT_Demon";
 
    +FLOORCLIP
 }

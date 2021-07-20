@@ -70,4 +70,14 @@ ui static void GrabInput(string initial) {
    sv.m_textMenu.init(initial);
 }
 
+override bool inputProcess(InputEvent evt) {
+   if(evt.type == InputEvent.TYPE_KEYDOWN &&
+      ((evt.keyChar >= CH_L_A && evt.keyChar <= CH_L_Z) ||
+       (evt.keyChar >= CH_0   && evt.keyChar <= CH_9)))
+   {
+      return acs_executeWithResult(lsc_cheatinput, evt.keyChar);
+   }
+   return false;
+}
+
 /* EOF */

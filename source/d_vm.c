@@ -1028,4 +1028,41 @@ void Sc_RunTerminal(i32 num) {
    }
 }
 
+script static
+bool chtf_run_prg(cheat_params_t const params) {
+   if(!IsDigit(params[0]) || !IsDigit(params[1])) {
+      return false;
+   }
+   i32 p0 = params[0] - '0';
+   i32 p1 = params[1] - '0';
+   Sc_RunProgram(p0 * 10 + p1);
+   return true;
+}
+
+script static
+bool chtf_run_dlg(cheat_params_t const params) {
+   if(!IsDigit(params[0]) || !IsDigit(params[1])) {
+      return false;
+   }
+   i32 p0 = params[0] - '0';
+   i32 p1 = params[1] - '0';
+   Sc_RunDialogue(p0 * 10 + p1);
+   return true;
+}
+
+script static
+bool chtf_run_trm(cheat_params_t const params) {
+   if(!IsDigit(params[0]) || !IsDigit(params[1])) {
+      return false;
+   }
+   i32 p0 = params[0] - '0';
+   i32 p1 = params[1] - '0';
+   Sc_RunTerminal(p0 * 10 + p1);
+   return true;
+}
+
+struct cheat cht_run_prg = cheat_s("pgrprg", 2, chtf_run_prg);
+struct cheat cht_run_dlg = cheat_s("pgrdlg", 2, chtf_run_dlg);
+struct cheat cht_run_trm = cheat_s("pgrtrm", 2, chtf_run_trm);
+
 /* EOF */

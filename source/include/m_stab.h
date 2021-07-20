@@ -12,7 +12,6 @@
  */
 
 #if defined(stab_x)
-stab_x(st_nil,  "")
 stab_x(st_null, "(null)")
 stab_x(st_none, "None")
 
@@ -27,12 +26,18 @@ stab_x(st_ob_suicide,  "(suicide)")
 stab_x(st_six_tag,     "\Cg6")
 
 /* Font Names */
-stab_x(sf_areaname, "areaname")
-stab_x(sf_bigupper, "bigupper")
-stab_x(sf_lsmlhfnt, "lsmlhfnt")
-stab_x(sf_lmidfont, "lmidfont")
-stab_x(sf_ltrmfont, "ltrmfont")
-stab_x(sf_smallfnt, "smallfnt")
+stab_x(sf_areaname,  "areaname")
+stab_x(sf_bigupper,  "bigupper")
+stab_x(sf_italic,    "italic")
+stab_x(sf_jiskan16,  "jiskan16")
+stab_x(sf_k6x8,      "k6x8")
+stab_x(sf_ljtrmfont, "ljtrmfont")
+stab_x(sf_lmidfont,  "lmidfont")
+stab_x(sf_lsmlhfnt,  "lsmlhfnt")
+stab_x(sf_ltrmfont,  "ltrmfont")
+stab_x(sf_misakig,   "misakig")
+stab_x(sf_misakim,   "misakim")
+stab_x(sf_smallfnt,  "smallfnt")
 
 /* Console Variables */
 stab_x(sc_debug_flags, DCVAR "debug_flags")
@@ -714,14 +719,6 @@ stab_ary_bgn_x(sa_subwep_act)
 stab_ary_ent_x(":HUD_D:SubWep0") stab_ary_ent_x(":HUD_D:SubWep1")
 stab_ary_ent_x(":HUD_D:SubWep2") stab_ary_ent_x(":HUD_D:SubWep3")
 stab_ary_ent_x(":HUD_D:SubWep4") stab_ary_ent_x(":HUD_D:SubWep5")
-stab_ary_end_x()
-
-stab_ary_bgn_x(sa_dbg_fonts)
-stab_ary_ent_x("areaname")  stab_ary_ent_x("bigupper")
-stab_ary_ent_x("jiskan16")  stab_ary_ent_x("k6x8")
-stab_ary_ent_x("ljtrmfont") stab_ary_ent_x("lmidfont")
-stab_ary_ent_x("ltrmfont")  stab_ary_ent_x("misakig")
-stab_ary_ent_x("misakim")   stab_ary_ent_x("smallfnt")
 stab_ary_end_x()
 
 stab_ary_bgn_x(sa_upgr_categ)

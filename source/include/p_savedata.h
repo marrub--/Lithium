@@ -22,29 +22,29 @@
  * Ver. 14: Rewrite of save system.
  * Ver. 15: Chunk format change.
  */
-#define Ident_Lith FourCCPtr("Lith")
+#define Ident_Lith FourCC('L', 'i', 't', 'h')
 #define SaveV_Lith 15
 
 /* Lend: Optional. Last valid chunk in save file. */
-#define Ident_Lend FourCCPtr("Lend")
+#define Ident_Lend FourCC('L', 'e', 'n', 'd')
 #define SaveV_Lend 0
 
 /* note: Notes. */
-#define Ident_note FourCCPtr("note")
+#define Ident_note FourCC('n', 'o', 't', 'e')
 #define SaveV_note 0
 
 /* agrp: Auto-groups.
  * Ver. 1: Updated internal names.
  */
-#define Ident_agrp FourCCPtr("agrp")
+#define Ident_agrp FourCC('a', 'g', 'r', 'p')
 #define SaveV_agrp 1
 
 /* intr: Intros. */
-#define Ident_intr FourCCPtr("intr")
+#define Ident_intr FourCC('i', 'n', 't', 'r')
 #define SaveV_intr 0
 
 /* bipu: BIP unlocks. */
-#define Ident_bipu FourCCPtr("bipu")
+#define Ident_bipu FourCC('b', 'i', 'p', 'u')
 #define SaveV_bipu 0
 
 #define Save_VersMask 0x000000FF

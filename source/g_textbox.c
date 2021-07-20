@@ -15,7 +15,6 @@
 #include "p_player.h"
 #include "w_world.h"
 #include "m_cps.h"
-#include "m_char.h"
 
 bool G_TxtBox_Imp(struct gui_state *g, gid_t id, struct gui_arg_txt const *a) {
    struct gui_txt *st = a->st;

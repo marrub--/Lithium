@@ -181,9 +181,9 @@ Crash:
       LinkToWorld(ctx);
       m_WaitTics = lith_sv_bloodtime;
       switch(m_Lev) {
-      case 1: Frame = Ch_A - Ch_A; break;
-      case 2: Frame = Ch_B - Ch_A; break;
-      case 3: Frame = Ch_C - Ch_A; break;
+      case 1: Frame = CH_U_A - CH_U_A; break;
+      case 2: Frame = CH_U_B - CH_U_A; break;
+      case 3: Frame = CH_U_C - CH_U_A; break;
       }
    }
    BLSP # 0 {

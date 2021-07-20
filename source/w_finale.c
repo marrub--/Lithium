@@ -101,7 +101,7 @@ void F_parseFunc(struct finale_compiler *c, struct token *tok) {
       unwrap(&c->res);
    }
 
-   switch(FourCCPtr(tok->textV)) {
+   switch(FourCC(tok->textV[0], tok->textV[1], tok->textV[2], tok->textV[3])) {
    #define finale_code(name, c1, c2, c3, c4, narg, arg) \
    case FourCC(c1, c2, c3, c4): \
       NextCode(c).u = _fcd_##name; \
@@ -167,7 +167,7 @@ void F_Load(void) {
 static
 void F_drawBack(struct finale_state *st) {
    SetSize(320, 200);
-   if(st->bgnd == st_nil) {
+   if(!st->bgnd[0]) {
       PrintRect(0, 0, 320, 200, 0xFF000000);
    } else {
       PrintSprite(st->bgnd, 0,1, 0,1);

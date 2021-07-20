@@ -24,8 +24,7 @@ void Sc_DOGS(void) {
 
    ACS_SetMusic(sp_lmusic_DOGS);
 
-   for(i32 i = 0; i < (35 * 30) / 10; i++)
-   {
+   for(i32 i = 0; i < (35 * 30) / 10; i++) {
       k32 ang = ACS_RandomFixed(0, 1);
       k32 dst = ACS_RandomFixed(0, 64);
       ACS_SpawnForced(so_Steggles, pl.x + ACS_Cos(ang) * dst, pl.y + ACS_Sin(ang) * dst, pl.z + 8, tid);
@@ -39,10 +38,8 @@ void Sc_DOGS(void) {
 }
 
 script_str ext("ACS") addr(OBJ "BarrierBullets")
-void Sc_BarrierBullets(void)
-{
-   if(!P_None() && PtrPlayerNumber(0, AAPTR_TARGET) >= 0)
-   {
+void Sc_BarrierBullets(void) {
+   if(!P_None() && PtrPlayerNumber(0, AAPTR_TARGET) >= 0) {
       k32 ang   = ACS_VectorAngle(GetX(0) - pl.x, GetY(0) - pl.y);
       k32 xang  = ACS_VectorAngle(pl.x - GetX(0), pl.y - GetY(0));
       k32 zdiff = pl.z - GetZ(0);
@@ -56,10 +53,8 @@ void Sc_BarrierBullets(void)
 }
 
 dynam_aut script_str ext("ACS") addr(OBJ "GetSigil")
-void Sc_GetSigil(void)
-{
-   if(!P_None())
-   {
+void Sc_GetSigil(void) {
+   if(!P_None()) {
       P_GUI_Close();
 
       pl.sgacquired = true;
@@ -103,10 +98,8 @@ void Sc_GiveHealthBonus(i32 amount)
 }
 
 script_str ext("ACS") addr(OBJ "GiveHealth")
-void Sc_GiveHealth(i32 amount)
-{
-   if(!P_None())
-   {
+void Sc_GiveHealth(i32 amount) {
+   if(!P_None()) {
       amount += pl.health;
       amount *= 1 + pl.attr.attrs[at_vit] / 80.0;
       if(amount > pl.maxhealth) amount = pl.maxhealth;
@@ -115,16 +108,24 @@ void Sc_GiveHealth(i32 amount)
 }
 
 script_str ext("ACS") addr(OBJ "CheckHealth")
-bool Sc_CheckHealth(void)
-{
+bool Sc_CheckHealth(void) {
    if(!P_None()) return pl.health < pl.maxhealth;
    return 0;
 }
 
+#define set_discount() pl.discount = 0.9
+
 script_str ext("ACS") addr(OBJ "Discount")
-void Sc_Discount(void)
-{
-   if(!P_None()) pl.discount = 0.9;
+void Sc_Discount(void) {
+   set_discount();
 }
+
+script static
+bool chtf_discount(cheat_params_t const params) {
+   set_discount();
+   return true;
+}
+
+struct cheat cht_discount = cheat_s("pgtaxevasion", 0, chtf_discount);
 
 /* EOF */

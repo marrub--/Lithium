@@ -25,13 +25,13 @@ class Lith_ItemGlow : Actor {
 
       switch(ACS_ExecuteWithResult(lsc_wdata, wdata_pclass))
       {
-      case pcl_marine:    frame = Ch_M - Ch_A; break;
-      case pcl_cybermage: frame = Ch_C - Ch_A; break;
-      case pcl_informant: frame = Ch_I - Ch_A; break;
-      case pcl_wanderer:  frame = Ch_W - Ch_A; break;
-      case pcl_assassin:  frame = Ch_A - Ch_A; break;
-      case pcl_darklord:  frame = Ch_D - Ch_A; break;
-      case pcl_thoth:     frame = Ch_T - Ch_A; break;
+      case pcl_marine:    frame = CH_U_M - CH_U_A; break;
+      case pcl_cybermage: frame = CH_U_C - CH_U_A; break;
+      case pcl_informant: frame = CH_U_I - CH_U_A; break;
+      case pcl_wanderer:  frame = CH_U_W - CH_U_A; break;
+      case pcl_assassin:  frame = CH_U_A - CH_U_A; break;
+      case pcl_darklord:  frame = CH_U_D - CH_U_A; break;
+      case pcl_thoth:     frame = CH_U_T - CH_U_A; break;
       default:
          sprite = Actor.GetSpriteIndex("UNKN");
          break;
