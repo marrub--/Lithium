@@ -18,7 +18,39 @@
 #include "p_hudid.h"
 #include "w_world.h"
 
-/* Static Functions -------------------------------------------------------- */
+struct logfdt
+{
+   str inf;
+};
+
+struct logmap
+{
+   str name;
+   i32 lnum;
+
+   Vec_Decl(struct logfdt, data);
+};
+
+struct logdat
+{
+   struct logfdt fdta;
+   i32           time;
+   i32           ftim;
+};
+
+struct loginfo
+{
+   struct logdat hudV[7];
+   mem_size_t    hudC;
+
+   Vec_Decl(struct logmap, maps);
+
+   struct logmap *curmap;
+   i32            curtime;
+};
+
+static
+struct loginfo log;
 
 static
 void LogV(i32 levl) {
@@ -32,27 +64,25 @@ void LogV(i32 levl) {
 
 static
 void LogPop() {
-   pl.log.hudC--;
-   fastmemmove(&pl.log.hudV[0], &pl.log.hudV[1], sizeof pl.log.hudV[0] * pl.log.hudC);
+   log.hudC--;
+   fastmemmove(&log.hudV[0], &log.hudV[1], sizeof log.hudV[0] * log.hudC);
 }
 
 static
 void LogH(struct logdat *ld) {
    ld->ftim = 5;
-   ld->time = 140 - pl.log.curtime;
-   pl.log.curtime = 140;
+   ld->time = 140 - log.curtime;
+   log.curtime = 140;
 
-   if(pl.log.hudC >= countof(pl.log.hudV)) LogPop();
-   pl.log.hudV[pl.log.hudC++] = *ld;
+   if(log.hudC >= countof(log.hudV)) LogPop();
+   log.hudV[log.hudC++] = *ld;
 }
 
 static
 void LogF(struct logfdt *lf) {
-   Vec_GrowN(pl.log.curmap->data, 1, 8, _tag_logs);
-   Vec_Next(pl.log.curmap->data) = *lf;
+   Vec_GrowN(log.curmap->data, 1, 8, _tag_logs);
+   Vec_Next(log.curmap->data) = *lf;
 }
-
-/* Extern Functions -------------------------------------------------------- */
 
 void P_Log_Both(i32 levl, cstr fmt, ...) {
    struct logdat ld = {};
@@ -64,7 +94,7 @@ void P_Log_Both(i32 levl, cstr fmt, ...) {
    __vnprintf(fmt, vl);
    va_end(vl);
 
-   ld.inf = ACS_EndStrParam();
+   ld.fdta.inf = ACS_EndStrParam();
 
    LogF(&ld.fdta);
    LogH(&ld);
@@ -80,7 +110,7 @@ void P_Log_HUDs(i32 levl, cstr fmt, ...) {
    __vnprintf(fmt, vl);
    va_end(vl);
 
-   ld.inf = ACS_EndStrParam();
+   ld.fdta.inf = ACS_EndStrParam();
 
    LogH(&ld);
 }
@@ -104,35 +134,33 @@ void P_Log_Entry() {
    struct logmap *lm = nil;
    i32 lnum = MapNum;
 
-   for(i32 i = 0; i < pl.log.mapsC; i++)
-      if(pl.log.mapsV[i].lnum == lnum) {lm = &pl.log.mapsV[i]; break;}
+   for(i32 i = 0; i < log.mapsC; i++)
+      if(log.mapsV[i].lnum == lnum) {lm = &log.mapsV[i]; break;}
 
    if(!lm) {
-      Vec_GrowN(pl.log.maps, 1, 32, _tag_logs);
-      lm = &Vec_Next(pl.log.maps);
+      Vec_GrowN(log.maps, 1, 32, _tag_logs);
+      lm = &Vec_Next(log.maps);
       lm->name = (ACS_BeginPrint(), ACS_PrintName(PRINTNAME_LEVELNAME), ACS_EndStrParam());
       lm->lnum = lnum;
    }
 
-   pl.log.curmap = lm;
+   log.curmap = lm;
 
    pl.logF(tmpstr(lang(sl_enter_fmt)), lm->name, CanonTime(ct_full, ticks));
 }
 
 script void P_Log_PTick() {
-   if(pl.log.curtime == 0) {
-      if(pl.log.hudC) {
+   if(log.curtime == 0) {
+      if(log.hudC) {
          LogPop();
-         pl.log.curtime = pl.log.hudV[pl.log.hudC - 1].time;
+         log.curtime = log.hudV[log.hudC - 1].time;
       }
    } else {
-      pl.log.curtime--;
+      log.curtime--;
    }
 
-   for(i32 i = 0; i < pl.log.hudC; i++) {
-      if(pl.log.hudV[i].ftim) {
-         pl.log.hudV[i].ftim--;
-      }
+   for(i32 i = 0; i < log.hudC; i++) {
+      log.hudV[i].ftim--;
    }
 }
 
@@ -141,12 +169,12 @@ void P_CBI_TabLog(struct gui_state *g) {
    i32 const ht = 10;
 
    if(G_Button(g, .x = 12, 25, Pre(btnprev)))
-      if(--CBIState(g)->logsel < 0) CBIState(g)->logsel = pl.log.mapsC - 1;
+      if(--CBIState(g)->logsel < 0) CBIState(g)->logsel = log.mapsC - 1;
 
    if(G_Button(g, .x = 12 + gui_p.btnprev.w, 25, Pre(btnnext)))
-      if(++CBIState(g)->logsel >= pl.log.mapsC) CBIState(g)->logsel = 0;
+      if(++CBIState(g)->logsel >= log.mapsC) CBIState(g)->logsel = 0;
 
-   struct logmap *lm = &pl.log.mapsV[CBIState(g)->logsel];
+   struct logmap *lm = &log.mapsV[CBIState(g)->logsel];
 
    PrintText_str(lm->name, sf_lmidfont, g->defcr, g->ox+15+gui_p.btnprev.w+gui_p.btnnext.w,1, g->oy+27,1);
 
@@ -175,8 +203,8 @@ script void HUD_Log(i32 cr, i32 x, i32 yy) {
       SetClipW(0, 0, xs, ys, xs);
 
       i32 i = 0;
-      for(i32 i = 0; i < pl.log.hudC; i++) {
-         struct logdat const *const ld = &pl.log.hudV[i];
+      for(i32 i = 0; i < log.hudC; i++) {
+         struct logdat const *const ld = &log.hudV[i];
 
          i32 y = 10 * i;
          i32 ya;
@@ -184,12 +212,17 @@ script void HUD_Log(i32 cr, i32 x, i32 yy) {
          if(CVarGetI(sc_hud_logfromtop)) {ya = 1; y = 20 + y;}
          else                            {ya = 2; y = (yo - y) + yy;}
 
-         PrintText_str(ld->inf, sf_lmidfont, cr, x,1, y,ya);
+         k32 a = 1.0;
+         if(ld->ftim > 0) {
+            SetFade(fid_logadS + i, 1, 8);
+         } else if(ld->ftim < -129) {
+            a = (ld->ftim + 129) / 10.0 + 1.0;
+         }
 
-         if(ld->ftim) SetFade(fid_logadS + i, 1, 8);
+         PrintTextA_str(ld->fdta.inf, sf_lmidfont, cr, x,1, y,ya, a);
 
          if(CheckFade(fid_logadS + i)) {
-            cstr s = RemoveTextColors_str(ld->inf, ACS_StrLen(ld->inf));
+            cstr s = RemoveTextColors_str(ld->fdta.inf, ACS_StrLen(ld->fdta.inf));
             PrintTextChS(s);
             PrintTextFX(sf_lmidfont, CR_WHITE, x,1, y,ya, fid_logadS + i, _u_add);
          }

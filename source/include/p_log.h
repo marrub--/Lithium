@@ -16,38 +16,6 @@
 
 #include "m_vec.h"
 
-struct logmap
-{
-   str name;
-   i32 lnum;
-
-   Vec_Decl(struct logfdt, data);
-};
-
-struct logfdt
-{
-   str inf;
-};
-
-struct logdat
-{
-   anonymous
-   struct logfdt fdta;
-   u32           time;
-   u32           ftim;
-};
-
-struct loginfo
-{
-   struct logdat hudV[7];
-   mem_size_t    hudC;
-
-   Vec_Decl(struct logmap, maps);
-
-   struct logmap *curmap;
-   u32            curtime;
-};
-
 str RandomName(i32 id);
 
 void P_Log_Both(i32 levl, cstr fmt, ...); /* log to HUD and full log */
