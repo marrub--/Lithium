@@ -30,19 +30,12 @@ struct shopitem
 static
 struct shopitem shopitems[] = {
 /* {{"Name-----------", "BIP------------", Cost---}, Class, Cnt-, "Class---------------", [Flags]}, */
-   {{"RocketAmmo", nil, 9000},  gA, 5,    sOBJ "RocketAmmo"},
-   {{"PlasmaAmmo", nil, 75750}, gA, 1000, sOBJ "PlasmaAmmo"},
-
-   {{"ChargeFist",      "ChargeFist",       100000}, pM, 1, sOBJ "ChargeFist",      true},
+   {{"ChargeFist",      "ChargeFist",       100000}, gO, 1, sOBJ "ChargeFist",      true},
    {{"Revolver",        "Revolver",         500000}, pM, 1, sOBJ "Revolver",        true},
    {{"LazShotgun",      "LazShotgun",      1800000}, pM, 1, sOBJ "LazShotgun",      true},
    {{"SniperRifle",     "SniperRifle",     1800000}, pM, 1, sOBJ "SniperRifle",     true},
    {{"MissileLauncher", "MissileLauncher", 2500000}, gO, 1, sOBJ "MissileLauncher", true},
    {{"PlasmaDiffuser",  "PlasmaDiffuser",  2500000}, gO, 1, sOBJ "PlasmaDiffuser",  true},
-
-   {{"Allmap",   nil, 100000}, gA, 1, s"Allmap"},
-   {{"Infrared", nil, 70000},  gA, 1, s"Infrared"},
-   {{"RadSuit",  nil, 100000}, gA, 1, s"RadSuit"},
 };
 
 /* Static Functions -------------------------------------------------------- */
