@@ -74,13 +74,13 @@ void G_ScrBeg_Imp(struct gui_state *g, gid_t id, struct gui_arg_scr const *a) {
 
          if(g->cy != g->old.cy && scr->nextsnd == 0)
          {
-            ACS_LocalAmbientSound(ss_player_cbi_scroll, 127);
+            AmbientSound(ss_player_cbi_scroll, 1.0);
             scr->nextsnd = 7;
          }
       }
       else if(scr->grabbed)
       {
-         ACS_LocalAmbientSound(ss_player_cbi_scrollend, 127);
+         AmbientSound(ss_player_cbi_scrollend, 1.0);
          scr->grabbed = false;
          scr->nextsnd = 0;
       }

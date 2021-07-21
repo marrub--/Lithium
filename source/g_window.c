@@ -55,12 +55,12 @@ void G_WinBeg_Imp(struct gui_state *g, gid_t id, struct gui_arg_win const *a) {
       oy = g->oy + win->y;
 
       if(g->cy != g->old.cy && win->nextsnd == 0) {
-         ACS_LocalAmbientSound(ss_player_cbi_scroll, 127);
+         AmbientSound(ss_player_cbi_scroll, 1.0);
          win->grabbed = true;
          win->nextsnd = 7;
       }
    } else if(win->grabbed) {
-      ACS_LocalAmbientSound(ss_player_cbi_scrollend, 127);
+      AmbientSound(ss_player_cbi_scrollend, 1.0);
       win->grabbed = false;
    }
 

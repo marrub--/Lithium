@@ -26,11 +26,13 @@ class Lith_Ammo : Inventory abstract {
          amt   -= maxAmount - amount;
          amount = maxAmount;
       }
-      m_ammoText = "\cj+\cd" .. (originalAmt - amt) .. " \c-" .. getTag();
-      m_logText  = logText .. ": " .. m_ammoText;
-      p.x += fRandom(-8.0, 8.0);
-      p.y += fRandom(-8.0, 8.0);
-      callAcs("Lith_ItemPopupAmmo", int(p.x*FIX), int(p.y*FIX), int(p.z*FIX));
+      if(originalAmt - amt > 0) {
+         m_ammoText = "\cj+\cd" .. (originalAmt - amt) .. " \c-" .. getTag();
+         m_logText  = logText .. ": " .. m_ammoText;
+         p.x += fRandom(-8.0, 8.0);
+         p.y += fRandom(-8.0, 8.0);
+         callAcs("Lith_ItemPopupAmmo", int(p.x*FIX), int(p.y*FIX), int(p.z*FIX));
+      }
    }
 }
 

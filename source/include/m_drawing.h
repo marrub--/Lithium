@@ -122,6 +122,9 @@ GlobalCrH(wselm1) GlobalCrH(wselm2) GlobalCrH(wselm3) GlobalCrH(wselms)
 #define StartSound(...) \
    DrawCallI(sm_StartSound, __VA_ARGS__)
 
+#define AmbientSound(snd, vol) \
+   StartSound(snd, lch_auto, 0, vol, ATTN_STATIC)
+
 #define EndDrawing() \
    DrawCallI(sm_LE)
 

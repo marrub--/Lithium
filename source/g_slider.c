@@ -41,7 +41,7 @@ struct slide_ret G_Slider_Imp(struct gui_state *g, gid_t id, struct gui_arg_sld 
 
       /* play sound */
       if(pre->snd && g->cx != g->old.cx && g->cx >= x && g->cx < x + w)
-         ACS_LocalAmbientSound(pre->snd, 60);
+         AmbientSound(pre->snd, 0.47);
    } else {
       notchpos = (a->val - a->minima) / a->maxima;
       ret      = a->val;

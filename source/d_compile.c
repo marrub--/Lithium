@@ -18,57 +18,44 @@
 
 #ifndef NDEBUG
 script static
-void Disassemble(struct dlg_def const *def) {
-   ACS_BeginLog();
-   __nprintf("Disassembling(%p,%u,%u)...\n", def->codeV, def->codeC,
-             def->codeP);
-
-   for(u32 i = 0; i < def->codeP;) {
-      __nprintf("%04X ", PRG_BEG + i);
-
-      u32 c = Cps_GetC(def->codeV, i++);
-      i = Dlg_WriteCode(def, c, i);
-      ACS_PrintChar('\n');
+bool chtf_dbg_dlg(cheat_params_t const params) {
+   if(!IsDigit(params[0]) || !IsDigit(params[1])) {
+      return false;
    }
-   ACS_EndLog();
-}
 
-script static
-void DumpCode(struct dlg_def *def) {
-   ACS_BeginLog();
-   PrintChrSt("Dumping code...\n");
-   Dbg_PrintMemC(def->codeV, def->codeC);
-   ACS_EndLog();
-}
+   i32 p0 = params[0] - '0';
+   i32 p1 = params[1] - '0';
+   i32 n  = p0 * 10 + p1;
 
-script static
-void DumpStringTable(struct dlg_def *def) {
-   ACS_BeginLog();
-   __nprintf("Dumping string table(%p,%u,%u)...\n", def->stabV, def->stabC,
-             def->stabP);
-   Dbg_PrintMemC(def->stabV, def->stabC);
-   ACS_EndLog();
-}
+   struct dlg_def *def = &dlgdefs[n];
 
-static
-void PrintDbg() {
-   for(u32 i = 0; i < countof(dlgdefs); i++) {
-      struct dlg_def *def = &dlgdefs[i];
+   if(def->codeV) {
+      ACS_BeginLog();
+      __nprintf("--- Script %u ---\n", n);
+      __nprintf("Disassembling(%p,%u,%u)...\n", def->codeV, def->codeC,
+                def->codeP);
 
-      if(def->codeV) {
-         ACS_BeginLog();
-         __nprintf("--- Script %u ---\n", i);
-         ACS_EndLog();
-         Disassemble(def);
-         DumpCode(def);
-         DumpStringTable(def);
+      for(u32 i = 0; i < def->codeP;) {
+         __nprintf("%04X ", PRG_BEG + i);
+
+         u32 c = Cps_GetC(def->codeV, i++);
+         i = Dlg_WriteCode(def, c, i);
+         ACS_PrintChar('\n');
       }
+      PrintChrSt("Dumping code...\n");
+      Dbg_PrintMemC(def->codeV, def->codeC);
+      __nprintf("Dumping string table(%p,%u,%u)...\n", def->stabV, def->stabC,
+                def->stabP);
+      Dbg_PrintMemC(def->stabV, def->stabC);
+      ACS_EndLog();
+   } else {
+      Log("dialogue %u has no code", n);
    }
 
-   ACS_BeginLog();
-   PrintChrSt("Done.");
-   ACS_EndLog();
+   return true;
 }
+
+struct cheat cht_dbg_dlg = cheat_s("pgdoki", 2, chtf_dbg_dlg);
 #endif
 
 static
@@ -271,10 +258,6 @@ void Dlg_MInit(void)
       TBufDtor(&d.tb);
       fclose(d.tb.fp);
    }
-
-   #ifndef NDEBUG
-   if(dbglevel(log_dlg)) PrintDbg();
-   #endif
 }
 
 /* EOF */

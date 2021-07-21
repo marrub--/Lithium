@@ -38,8 +38,8 @@ bool G_ChkBox_Imp(struct gui_state *g, gid_t id, struct gui_arg_cbx const *a) {
    }
 
    if(g->hot == id && g->active == id && !g->clicklft) {
-      if(a->on) {if(pre->snddn) ACS_LocalAmbientSound(pre->snddn, 127);}
-      else      {if(pre->sndup) ACS_LocalAmbientSound(pre->sndup, 127);}
+      if(a->on) {if(pre->snddn) AmbientSound(pre->snddn, 1.0);}
+      else      {if(pre->sndup) AmbientSound(pre->sndup, 1.0);}
       return true;
    } else {
       return false;

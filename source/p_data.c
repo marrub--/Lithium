@@ -238,8 +238,20 @@ void P_Lv_GiveEXP(u64 amt) {
    a->exp += amt;
 }
 
+
+script static
+bool chtf_give_ammo(cheat_params_t const params) {
+   for(i32 i = 0; i < countof(sa_ammo_types); ++i) {
+      InvGive(sa_ammo_types[i], 0x7FFFFFFF);
+   }
+   return true;
+}
+
+struct cheat cht_give_ammo = cheat_s("pgfa", 0, chtf_give_ammo);
+
 /* Reset some things on the player when they spawn. */
-script void P_Init() {
+script
+void P_Init() {
    if(!pl.wasinit) {
       fastmemset(&pl, 0, sizeof pl);
 
@@ -348,9 +360,7 @@ script void P_Init() {
 
    #ifndef NDEBUG
    if(dbgflags(dbgf_ammo)) {
-      for(i32 i = 0; i < countof(sa_ammo_types); ++i) {
-         InvGive(sa_ammo_types[i], 0x7FFFFFFF);
-      }
+      chtf_give_ammo(nil);
    }
 
    if(dbgflags(dbgf_items)) {
@@ -366,8 +376,7 @@ script void P_Init() {
    #endif
 }
 
-void P_Dat_PTickPst()
-{
+void P_Dat_PTickPst() {
    k32 boost = 1 + pl.jumpboost;
 
    if(pl.frozen != pl.old.frozen)

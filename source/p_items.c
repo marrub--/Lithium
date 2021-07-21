@@ -45,7 +45,7 @@ void Container(struct gui_state *g, struct container *cont, i32 sx, i32 sy) {
       (P_Inv_Place(cont, pl.selitem, (g->cx - sx) / 8, (g->cy - sy) / 8) ||
        P_Inv_PlaceFirst(cont, pl.selitem))) {
       pl.movitem = false;
-      ACS_LocalAmbientSound(ss_player_cbi_invmov, 127);
+      AmbientSound(ss_player_cbi_invmov, 1.0);
    }
 
    bool didresel = false; /* Basic bitch hack. -Ten */
@@ -65,7 +65,7 @@ void Container(struct gui_state *g, struct container *cont, i32 sx, i32 sy) {
       if(!didresel && pl.selitem != it && g->clicklft && aabb_point(x, y, ex, ey, g->cx, g->cy)) {
          didresel = true;
          pl.selitem = it;
-         ACS_LocalAmbientSound(ss_player_cbi_invcur, 127);
+         AmbientSound(ss_player_cbi_invcur, 1.0);
       }
 
       if(pl.selitem == it) {
@@ -162,8 +162,9 @@ void EquipItem(struct item *sel) {
       }
    }
 
-   ACS_LocalAmbientSound(ok ? ss_player_cbi_invmov :
-                         ss_player_cbi_auto_invalid, 127);
+   AmbientSound(ok ?
+                ss_player_cbi_invmov :
+                ss_player_cbi_auto_invalid, 1.0);
 }
 
 void P_Inv_PInit() {
@@ -339,7 +340,7 @@ void P_Inv_PTick() {
 
       Dbg_Log(log_dev, "using %S (%p)", item->name, item);
       if(item->Use && !item->Use(item)) {
-         ACS_LocalAmbientSound(ss_player_cbi_auto_invalid, 127);
+         AmbientSound(ss_player_cbi_auto_invalid, 1.0);
       }
 
       pl.useitem = nil;
@@ -482,7 +483,7 @@ void P_CBI_TabItems(struct gui_state *g) {
             P_Scr_GivePos(x, y, sel->scr, true);
          }
          sel->Destroy(sel);
-         ACS_LocalAmbientSound(ss_player_cbi_invrem, 127);
+         AmbientSound(ss_player_cbi_invrem, 1.0);
          incPos();
       }
 

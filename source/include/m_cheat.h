@@ -14,6 +14,7 @@
 #if defined(cheat_x)
 cheat_x(cht_discount)
 cheat_x(cht_end_game)
+cheat_x(cht_give_ammo)
 cheat_x(cht_give_exp)
 cheat_x(cht_give_exp_to)
 cheat_x(cht_give_score)
@@ -23,6 +24,7 @@ cheat_x(cht_run_trm)
 cheat_x(cht_summon_boss)
 
 #ifndef NDEBUG
+cheat_x(cht_dbg_dlg)
 cheat_x(cht_dbg_dump_alloc)
 cheat_x(cht_dbg_font_test)
 cheat_x(cht_dbg_mons_info)

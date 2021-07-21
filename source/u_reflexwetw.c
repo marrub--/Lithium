@@ -67,7 +67,7 @@ void Upgr_ReflexWetw_Update(struct upgrade *upgr)
       {
          k32 angle = pl.yaw - ACS_VectorAngle(pl.forwardv, pl.sidev);
 
-         ACS_LocalAmbientSound(ss_player_slide, 127);
+         AmbientSound(ss_player_slide, 1.0);
          P_SetVel(pl.velx + (ACS_Cos(angle) * 32.0), pl.vely + (ACS_Sin(angle) * 32.0), 0);
 
          DodgeView();
@@ -82,7 +82,7 @@ void Upgr_ReflexWetw_Update(struct upgrade *upgr)
    {
       k32 angle = pl.yaw - ACS_VectorAngle(pl.forwardv, pl.sidev);
 
-      ACS_LocalAmbientSound(ss_player_doublejump, 127);
+      AmbientSound(ss_player_doublejump, 1.0);
       P_SetVel(pl.velx + (ACS_Cos(angle) * 4.0), pl.vely + (ACS_Sin(angle) * 4.0), 12.0);
 
       UData.leaped = 1;

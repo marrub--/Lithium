@@ -37,8 +37,8 @@ void Upgr_Zoom_Update(struct upgrade *upgr)
    k32 diff = UData.vzoom - UData.zoom;
    if(diff > 0.5 || diff < -0.5)
    {
-      if(UData.vzoom < UData.zoom) ACS_LocalAmbientSound(ss_player_zoomin,  30);
-      else                         ACS_LocalAmbientSound(ss_player_zoomout, 30);
+      if(UData.vzoom < UData.zoom) AmbientSound(ss_player_zoomin,  0.23);
+      else                         AmbientSound(ss_player_zoomout, 0.23);
    }
    else
       UData.vzoom = UData.zoom;

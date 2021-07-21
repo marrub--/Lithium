@@ -90,7 +90,7 @@ void Sc_GiveRA(i32 num)
          RA_Take(1);
          RA_Take(2);
 
-         ACS_LocalAmbientSound(ss_player_rarmor_mode, 127);
+         AmbientSound(ss_player_rarmor_mode, 1.0);
 
          pl.logH(3, tmpstr(lang(sl_log_activearmor)), name);
 

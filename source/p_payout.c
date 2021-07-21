@@ -127,11 +127,11 @@ void P_Scr_Payout() {
             /**/ if(i <  _begin_total) snd = ss_player_counter;
             else if(i == _begin_total) snd = ss_player_counterdone;
 
-            if(snd != snil) ACS_LocalAmbientSound(snd, 80);
+            if(snd != snil) AmbientSound(snd, 0.62);
          }
 
          if(i == _begin_tax || i == _begin_grandtotal)
-            ACS_LocalAmbientSound(ss_player_counterdone, 80);
+            AmbientSound(ss_player_counterdone, 0.62);
       }
 
       ACS_Delay(1);

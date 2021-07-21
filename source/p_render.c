@@ -31,7 +31,7 @@ void P_Ren_Advice() {
 static
 void P_Ren_LevelUp() {
    if(pl.old.attr.level && pl.old.attr.level < pl.attr.level) {
-      ACS_LocalAmbientSound(ss_player_levelup, 127);
+      AmbientSound(ss_player_levelup, 1.0);
       pl.logH(1, tmpstr(lang_fmt(LANG "LOG_LevelUp%s", pl.discrim)), ACS_Random(1000, 9000));
    }
 

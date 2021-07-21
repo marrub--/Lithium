@@ -133,7 +133,7 @@ void Upgr_Magic_Update(struct upgrade *upgr)
    k32 manaperc = pl.mana / (k32)pl.manamax;
 
    if(UData.manaperc < 1 && manaperc == 1)
-      ACS_LocalAmbientSound(ss_player_manafull, 127);
+      AmbientSound(ss_player_manafull, 1.0);
 
    UData.manaperc = manaperc;
 

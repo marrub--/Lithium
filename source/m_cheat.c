@@ -13,6 +13,7 @@
 
 #include "common.h"
 #include "w_world.h"
+#include "p_player.h"
 
 stkcall alloc_aut(0) static
 i32 check_cheat(struct cheat *cht, i32 ch) {
@@ -42,6 +43,7 @@ i32 check_cheat(struct cheat *cht, i32 ch) {
 
 alloc_aut(0) script ext("ACS") addr(lsc_cheatinput)
 bool Sc_CheatInput(i32 ch) {
+   if(P_None()) return false;
    i32  res;
    bool grab = false;
 #define cheat_x(name) \

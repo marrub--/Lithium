@@ -41,8 +41,7 @@ script void Upgr_Flashlight_Update(struct upgrade *upgr) {
    bool was_on = UData.on;
 
    if(UData.was_on != UData.on) {
-      ACS_LocalAmbientSound(UData.on ? ss_player_lighton : ss_player_lightoff,
-                            127);
+      AmbientSound(UData.on ? ss_player_lighton : ss_player_lightoff, 1.0);
 
       if(UData.was_on) {
          UData.target = 0.0;

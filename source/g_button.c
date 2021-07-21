@@ -74,7 +74,7 @@ bool G_Button_Imp(struct gui_state *g, gid_t id, struct gui_arg_btn const *a) {
 
       if(click) {
          if(g->slide == id) g->slidecount++;
-         if(pre->snd) ACS_LocalAmbientSound(pre->snd, 127);
+         if(pre->snd) AmbientSound(pre->snd, 1.0);
          return true;
       }
    }

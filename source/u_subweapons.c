@@ -20,7 +20,7 @@
 script void Upgr_Subweapons_Update(struct upgrade *upgr) {
    if(UData.shots < 2) {
       if(UData.charge >= 100) {
-         ACS_LocalAmbientSound(ss_weapons_subweapon_charge, 127);
+         AmbientSound(ss_weapons_subweapon_charge, 1.0);
          UData.shots++;
          UData.charge = 0;
       } else {

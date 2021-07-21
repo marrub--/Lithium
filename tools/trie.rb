@@ -23,33 +23,41 @@ def ind indent
    "   " * indent
 end
 
-def func_hdr func
-   "i32 #{func[0]}(register cstr s)"
-end
-
 def mk_trie_code defs, node, idx = 0, indent = 1, res = String.new, word = String.new
+   switch = node.each.all? do |child|
+      !child.terminal? && child.letter.length == 1
+   end
    pfx  = defs[:prefix] || defs[:enum]
    node = node.sort do |a, b| a.letter <=> b.letter end
 
-   for child in node
-      ltr = child.letter.to_s
+   if switch
+      res.concat "#{ind indent}switch(s[#{idx}]) {\n"
+      idx += 1
+   end
 
+   for child in node
       orig_idx  = idx
       orig_word = word.clone
+
+      ltr = child.letter.to_s
       word.concat ltr
 
-      ltr = ltr.each_char.collect do |c| c end
-      ltr.push '\0' if child.terminal?
+      if switch
+         res.concat "#{ind indent}case '#{child.letter}':\n"
+      else
+         ltr = ltr.each_char.collect do |c| c end
+         ltr.push '\0' if child.terminal?
 
-      res.concat "#{ind indent}if("
-      chrs = ltr.each_with_index.map do |c, i|
-         s = "s[#{idx}] == '#{c}'"
-         idx += 1
-         s
+         res.concat "#{ind indent}if("
+         chrs = ltr.each_with_index.map do |c, i|
+            s = "s[#{idx}] == '#{c}'"
+            idx += 1
+            s
+         end
+         chrs = chrs.join " &&\n#{ind indent + 1}"
+         res.concat chrs
+         res.concat ") {\n"
       end
-      chrs = chrs.join " &&\n#{ind indent + 1}"
-      res.concat chrs
-      res.concat ") {\n"
 
       if child.terminal?
          en = word.clone
@@ -64,11 +72,17 @@ def mk_trie_code defs, node, idx = 0, indent = 1, res = String.new, word = Strin
          mk_trie_code defs, child.children, idx, indent + 1, res, word
       end
 
-      res.concat "#{ind indent}}\n"
+      res.concat "#{ind indent}}\n" unless switch
 
       word.replace orig_word
       idx = orig_idx
    end
+
+   if switch
+      res.concat "#{ind indent}}\n"
+      idx -= 1
+   end
+
    res
 end
 
@@ -80,6 +94,7 @@ common_main do
       trie.concat defs[:words]
       trie.compress!
       code = mk_trie_code defs, trie.children
+      func = "stkcall\ni32 #{func}(register cstr s)"
       FUNCS.push [func, code]
    end
 
@@ -93,8 +108,7 @@ enum {
 #{
 res = String.new
 for func in FUNCS
-   res.concat "stkcall "
-   res.concat func_hdr func
+   res.concat func[0]
    res.concat ";\n"
 end
 res
@@ -110,8 +124,8 @@ _end_h_
 #{
 res = String.new
 for func in FUNCS
-   res.concat "alloc_aut(0) stkcall "
-   res.concat func_hdr func
+   res.concat "alloc_aut(0) "
+   res.concat func[0]
    res.concat " {\n"
    res.concat func[1]
    res.concat "   return -1;\n"

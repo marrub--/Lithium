@@ -138,7 +138,7 @@ reinit:
 alloc_aut(0) script static
 void revenge(void) {
    if(CVarGetI(sc_sv_revenge)) {
-      ACS_LocalAmbientSound(ss_player_death1, 127);
+      AmbientSound(ss_player_death1, 1.0);
       ACS_Delay(35);
       ServCallI(sm_PlayerDeath);
       ACS_Delay(25);
@@ -248,7 +248,7 @@ void P_GUI_Close() {
    if(pl.modal == _gui_cbi) {
       UnfreezeTime();
 
-      ACS_LocalAmbientSound(ss_player_cbi_close, 127);
+      AmbientSound(ss_player_cbi_close, 1.0);
       pl.modal = _gui_none;
    }
 }
@@ -264,9 +264,9 @@ void P_GUI_Use() {
       FreezeTime();
 
       if(ACS_Random(0, 10000) == 777) {
-         ACS_LocalAmbientSound(ss_player_cbi_win95, 127);
+         AmbientSound(ss_player_cbi_win95, 1.0);
       } else {
-         ACS_LocalAmbientSound(ss_player_cbi_open, 127);
+         AmbientSound(ss_player_cbi_open, 1.0);
       }
 
       pl.modal = _gui_cbi;
@@ -464,7 +464,7 @@ void P_doIntro() {
             break;
          }
 
-         ACS_LocalAmbientSound(ss_player_showtext, 127);
+         AmbientSound(ss_player_showtext, 1.0);
 
          char *next, *line = faststrtok(text, &next, '\n');
          for(i32 i = 0; i < _nlines; i++) {
@@ -514,7 +514,7 @@ void P_doIntro() {
 
    UnfreezeTime(false);
 
-   ACS_LocalAmbientSound(ss_player_startgame, 127);
+   AmbientSound(ss_player_startgame, 1.0);
    ACS_FadeTo(0, 0, 0, 0.0, 2.0);
 
    for(i32 j = 0; j < _out_tics; j++) {
@@ -622,7 +622,7 @@ void P_Aug_PTick() {
       }
 
       if(total) {
-         ACS_LocalAmbientSound(ss_player_cbi_auto_buy, 127);
+         AmbientSound(ss_player_cbi_auto_buy, 1.0);
          pl.logH(1, tmpstr(lang_fmt(LANG "LOG_AutoBuy%i", i + 1)), total, total != 1 ? "s" : "");
       }
    }
@@ -712,7 +712,7 @@ void Sc_KeyBuyAutoGroup(i32 grp) {
       else if(success != total) {cr = 'j'; snd = ss_player_cbi_auto_buy;}
       else                      {cr = 'q'; snd = ss_player_cbi_auto_buy;}
 
-      ACS_LocalAmbientSound(snd, 127);
+      AmbientSound(snd, 1.0);
 
       i32 fmt = total ? grp + 1 : grp + 5;
 
@@ -736,8 +736,8 @@ void Sc_KeyToggleAutoGroup(i32 grp) {
          }
       }
 
-      if(total) ACS_LocalAmbientSound(ss_player_cbi_auto_toggle,  127);
-      else      ACS_LocalAmbientSound(ss_player_cbi_auto_invalid, 127);
+      if(total) AmbientSound(ss_player_cbi_auto_toggle,  1.0);
+      else      AmbientSound(ss_player_cbi_auto_invalid, 1.0);
 
       i32 fmt = total ? grp + 1 : grp + 5;
       pl.logH(1, tmpstr(lang_fmt(LANG "LOG_GroupToggle%i", fmt)));
@@ -749,7 +749,7 @@ void Sc_KeyGlare(void) {
    if(!P_None()) {
       ACS_FadeTo(255, 255, 255, 1.0, 0.0);
 
-      ACS_LocalAmbientSound(ss_player_glare, 127);
+      AmbientSound(ss_player_glare, 1.0);
       ACS_LineAttack(0, pl.yaw, pl.pitch, 1, so_Dummy, st_none,
          32767.0, FHF_NORANDOMPUFFZ | FHF_NOIMPACTDECAL);
 

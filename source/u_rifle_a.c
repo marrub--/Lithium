@@ -49,7 +49,7 @@ void Sc_SwitchRifleFiremode(void)
    if(!P_None())
    {
       pl.riflefiremode = ++pl.riflefiremode % rifle_firemode_max;
-      ACS_LocalAmbientSound(ss_weapons_rifle_firemode, 127);
+      AmbientSound(ss_weapons_rifle_firemode, 1.0);
    }
 }
 

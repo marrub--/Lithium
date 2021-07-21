@@ -50,9 +50,9 @@ void MailNotify(cstr name) {
 
    if(ACS_Random(1, 10000) == 1) {
       bip.mailtrulyreceived++;
-      ACS_LocalAmbientSound(ss_player_YOUVEGOTMAIL, 127);
+      AmbientSound(ss_player_YOUVEGOTMAIL, 1.0);
    } else {
-      ACS_LocalAmbientSound(ss_player_cbi_mail, 127);
+      AmbientSound(ss_player_cbi_mail, 1.0);
    }
 }
 

@@ -391,7 +391,7 @@ void TerminalGUI(u32 tact) {
 
    if(pl.buttons & BT_USE && !(pl.old.buttons & BT_USE) &&
       pl.old.modal == _gui_dlg) {
-      ACS_LocalAmbientSound(ss_player_trmswitch, 127);
+      AmbientSound(ss_player_trmswitch, 1.0);
       MemB1_S(VAR_UACT, UACT_ACKNOWLEDGE);
    }
 }
@@ -472,7 +472,7 @@ alloc_aut(0) sync static
 void ActDLG_WAIT() {
    SetVA(ACT_NONE);
 
-   ACS_LocalAmbientSound(ss_player_cbi_dlgopen, 127);
+   AmbientSound(ss_player_cbi_dlgopen, 1.0);
 
    FreezeTime();
    P_SetVel(0, 0, 0);
@@ -559,7 +559,7 @@ void ActTRM_WAIT() {
       i32 timer;
 
       if(tact == TACT_LOGON || tact == TACT_LOGOFF) {
-         ACS_LocalAmbientSound(ss_player_trmopen, 127);
+         AmbientSound(ss_player_trmopen, 1.0);
          timer = 45;
          ConsoleLogText(_from_lon);
       } else {
@@ -622,6 +622,7 @@ void Dlg_Run(u32 num) {
    #ifndef NDEBUG
    if(dbglevel(log_dlg)) {
       ACS_BeginLog();
+      __nprintf("--- begin dialogue %u ---\n", num);
       PrintChrSt("Dumping segment PRG...\n");
       Dbg_PrintMemC(&memory[PRG_BEG_C], def->codeC);
       PrintChrSt("Dumping segment STR...\n");

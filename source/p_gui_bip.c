@@ -303,7 +303,7 @@ void SearchUI(struct gui_state *g) {
       }
 
       if(bip.resnum == 0) {
-         ACS_LocalAmbientSound(ss_player_cbi_findfail, 127);
+         AmbientSound(ss_player_cbi_findfail, 1.0);
       }
    }
 
@@ -319,13 +319,11 @@ void SearchUI(struct gui_state *g) {
          }
       }
 
-      if((ACS_Timer() % ACS_Random(14, 18)) == 0 &&
-         bip.rescur != bip.resnum) {
-         if(++bip.rescur == bip.resnum) {
-            ACS_LocalAmbientSound(ss_player_cbi_finddone, 127);
-         } else {
-            ACS_LocalAmbientSound(ss_player_cbi_find, 127);
-         }
+      if((ACS_Timer() % ACS_Random(14, 18)) == 0 && bip.rescur != bip.resnum) {
+         AmbientSound(++bip.rescur == bip.resnum ?
+                      ss_player_cbi_finddone :
+                      ss_player_cbi_find,
+                      1.0);
       }
    } else {
       PrintText_str(ns(lang(sl_bip_no_results)), sf_smallfnt, CR_DARKGREY, g->ox+57,0, g->oy+82,0);

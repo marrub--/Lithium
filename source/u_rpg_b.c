@@ -39,7 +39,7 @@ void Upgr_RPG_B_Update(struct upgrade *upgr)
          i32 id;
          if((id = CheckTarget()) && id != UData.id)
          {
-            ACS_LocalAmbientSound(ss_weapons_rocket_mark, 127);
+            AmbientSound(ss_weapons_rocket_mark, 1.0);
             ACS_SetPointer(AAPTR_TRACER, 0, AAPTR_PLAYER_GETTARGET);
             UData.id = id;
          }
