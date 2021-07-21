@@ -284,8 +284,6 @@ struct player {
    i32  scrx;
    i32  scry;
 
-   struct loginfo log;
-
    /* Score */
    i96 scoreaccum;
    str scoreaccumstr;

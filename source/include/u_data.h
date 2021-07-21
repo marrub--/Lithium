@@ -67,8 +67,8 @@ struct upgr_data_ReactArmor {
 };
 
 struct upgr_data_ReflexWetw {
-   u32  charge;
-   bool leaped;
+   i32 charge;
+   i32 leaped;
 };
 
 struct upgr_data_VitalScan {

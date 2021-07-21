@@ -51,20 +51,19 @@ void Upgr_ReflexWetw_Deactivate(struct upgrade *upgr)
 script
 void Upgr_ReflexWetw_Update(struct upgrade *upgr)
 {
+   if(UData.leaped == 1) {
+      UData.leaped = 2;
+   }
+
    if(UData.charge < CHARGE_MAX)
       UData.charge++;
 
    if(pl.frozen) return;
 
-   if(UData.charge >= CHARGE_MAX)
-   {
+   if(UData.charge >= CHARGE_MAX) {
       if(pl.onground) UData.leaped = 0;
 
-      if(pl.buttons & BT_SPEED &&
-         (pl.onground ||
-          !get_bit(pl.upgrades[UPGR_JetBooster].flags, _ug_active) ||
-         pl.upgrdata.jetbooster.discharged))
-      {
+      if(pl.buttons & BT_SPEED) {
          k32 angle = pl.yaw - ACS_VectorAngle(pl.forwardv, pl.sidev);
 
          AmbientSound(ss_player_slide, 1.0);

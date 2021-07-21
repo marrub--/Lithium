@@ -34,16 +34,18 @@ void Upgr_JetBooster_Update(struct upgrade *upgr)
 
    if(pl.frozen) return;
 
-   if(P_ButtonPressed(BT_SPEED) && !pl.onground && UData.charge >= CHARGE_MAX)
+   if(P_ButtonPressed(BT_JUMP) && !pl.onground &&
+      (!get_bit(pl.upgrades[UPGR_ReflexWetw].flags, _ug_active) ||
+       pl.upgrdata.reflexwetw.leaped == 2) &&
+      UData.charge >= CHARGE_MAX)
    {
       k32 angle = pl.yaw - ACS_VectorAngle(pl.forwardv, pl.sidev);
 
       StartSound(ss_player_rocketboost, lch_auto, 0);
       InvGive(so_RocketBooster, 1);
-      P_SetVel(pl.velx + (ACS_Cos(angle) * 16.0), pl.vely + (ACS_Sin(angle) * 16.0), 10.0);
+      P_SetVel(pl.velx + ACS_Cos(angle) * 16.0, pl.vely + ACS_Sin(angle) * 16.0, 10.0);
 
       UData.charge = 0;
-      pl.upgrdata.reflexwetw.leaped = 0;
    }
 }
 
