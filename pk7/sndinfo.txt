@@ -24,6 +24,7 @@ MMMMHMHMMMHMMM lsounds/MMMMHMHMMMHMMM
 YOUSONOFABITCH lsounds/YOUSONOFABITCH
 AAAAAAAAAAAAAA lsounds/AAAAAAAAAAAAAA
 misc/pop lsounds/pop
+misc/secret lsounds/Secret
 misc/booom lsounds/World/boom
 misc/teleport lsounds/World/Teleport/Teleport
 misc/teleport5 lsounds/World/Teleport/Teleport5
