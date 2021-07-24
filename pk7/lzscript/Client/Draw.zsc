@@ -389,10 +389,13 @@ override void renderOverlay(RenderEvent evt) {
    projectSetUp(evt);
 
    if(evt.camera && evt.camera.player && !automapActive) {
-      drawNearbyItems(evt);
-      drawDmgNums(evt);
-      drawCrosshair(evt);
-      drawInventory(evt);
+      bool hud_enabled = Lith_UTIL.pData(pdata_hudenabled);
+      if(hud_enabled) {
+         drawNearbyItems(evt);
+         drawDmgNums(evt);
+         drawCrosshair(evt);
+         drawInventory(evt);
+      }
 
       int scw = 320, sch = 240;
       for(uint i = 0; i < m_DPtr; i++) {
@@ -461,7 +464,9 @@ override void renderOverlay(RenderEvent evt) {
       let p = Lith_Player(evt.camera);
       if(p && p.m_cs) p.m_cs.lith_render();
 
-      drawScrNums(evt);
+      if(hud_enabled) {
+         drawScrNums(evt);
+      }
    }
 
    drawMenu();

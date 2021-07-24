@@ -36,6 +36,7 @@ i32 Sc_LPData(i32 info, i32 permutation) {
    case pdata_attr:       return pl.attr.attrs[permutation];
    case pdata_alpha:      return u.k = pl.alpha, u.i;
    case pdata_oldhealth:  return pl.oldhealth;
+   case pdata_hudenabled: return pl.hudenabled;
    }
    return 0;
 }

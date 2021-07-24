@@ -64,6 +64,7 @@ enum ZscName(PData) {
    pdata_attr,
    pdata_alpha,
    pdata_oldhealth,
+   pdata_hudenabled,
 };
 
 enum ZscName(SubweaponType) {
