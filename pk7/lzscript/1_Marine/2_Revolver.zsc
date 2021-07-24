@@ -19,6 +19,7 @@ default
    Weapon.BobRangeY 0.3;
    Weapon.UpSound "weapons/revolver/draw";
    Lith_Weapon.MagSize 6;
+   Lith_Weapon.AmmoType "Lith_BulletAmmo";
    Inventory.AltHudIcon "REVLA0";
 
    +WEAPON.NOAUTOFIRE
@@ -26,6 +27,7 @@ default
 
 action(Weapon) void Lith_A_FireRevolver()
 {
+   lith_takeAmmo(2);
    Lith_A_MagIncr();
    A_GunFlash("DummyFlash");
    Lith_FireBullets(0, 0, -1, 45);
@@ -49,6 +51,7 @@ Select:
    loop;
 
 Fire:
+   REVO A 0 Lith_JumpNoAmmo(2);
    REVO A 0 Lith_A_JumpIfMagEmpty;
    REVO B 1 bright Lith_A_FireRevolver;
    REVO C 1 bright Lith_A_RecoilDn(0.25);

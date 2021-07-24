@@ -22,7 +22,7 @@ gO:
 pM:
    m_fist:     [1, Fist,            None       ]
    m_pistol:   [2, Pistol,          NMag       ]
-   m_revolver: [2, Revolver,        NMag       ]
+   m_revolver: [2, Revolver,        AMag Bullet]
    m_shotgun:  [3, Shotgun,         Ammo Shell ]
    m_lshotgun: [3, LazShotgun,      None       ]
    m_ssg:      [3, SuperShotgun,    Ammo Shell ]
