@@ -51,11 +51,6 @@ struct witem const barmor[] = {
 };
 
 #define BonusItemsBig(base) \
-   {base+200, OBJ "Scheelite1"}, \
-   {base+400, OBJ "Nambulite1"}, \
-   {base+500, OBJ "Lepidolite1"}, \
-   {base+600, OBJ "Petalite1"}, \
-   {base+700, OBJ "Tourmaline1"}
 
 #define BonusItems(base) \
    {base+   0, OBJ "Coin2"}, \
@@ -67,7 +62,11 @@ struct witem const barmor[] = {
    {base+4200, OBJ "Amethyst6"}, \
    {base+4600, OBJ "Diamond1"}, \
    {base+5000, OBJ "Emerald2"}, \
-   BonusItemsBig(5000)
+   {base+5200, OBJ "Scheelite1"}, \
+   {base+5400, OBJ "Nambulite1"}, \
+   {base+5500, OBJ "Lepidolite1"}, \
+   {base+5600, OBJ "Petalite1"}, \
+   {base+5700, OBJ "Tourmaline1"}
 
 static
 struct witem const hbonus[] = {
@@ -79,19 +78,6 @@ struct witem const hbonus[] = {
 static
 struct witem const abonus[] = {
    BonusItems(1000),
-};
-
-static
-struct witem const clip[] = {
-   {2000, OBJ "Radio1"},
-   {4000, OBJ "Radio2"},
-   BonusItems(6000),
-};
-
-static
-struct witem const clipbx[] = {
-   {4000, OBJ "BoxOfAmmo1"},
-   BonusItemsBig(4000),
 };
 
 /* Static Functions -------------------------------------------------------- */
@@ -118,8 +104,6 @@ void Sc_RandomSpawn(i32 rsn)
    case lrsn_barmor: item = RandomWeighted(barmor, countof(barmor)); break;
    case lrsn_hbonus: item = RandomWeighted(hbonus, countof(hbonus)); break;
    case lrsn_abonus: item = RandomWeighted(abonus, countof(abonus)); break;
-   case lrsn_clip:   item = RandomWeighted(clip,   countof(clip  )); break;
-   case lrsn_clipbx: item = RandomWeighted(clipbx, countof(clipbx)); break;
    default: return;
    }
 

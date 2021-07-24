@@ -81,8 +81,6 @@ enum ZscName(RandomSpawnNum) {
    lrsn_barmor,
    lrsn_hbonus,
    lrsn_abonus,
-   lrsn_clip,
-   lrsn_clipbx,
 };
 
 enum ZscName(MsgType) {

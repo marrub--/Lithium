@@ -178,8 +178,8 @@ perced to the rooten.
 == \#PK_fist_ALI   | unknown
 == \#PK_c_fist_ALI | unknown
 
-== \#PK_c_spas_ALI   | shotgun
-== \#PK_c_plasma_ALI | plasma
+== \#PK_c_spas_ALI   | m_shotgun
+== \#PK_c_plasma_ALI | m_plasma
 
 == \#PK_o_cfist_NUM | 5
 == \#PK_o_cfist_000 | Chaaji Fisuto

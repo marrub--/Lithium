@@ -58,15 +58,12 @@ enum ZscName(PData) {
    pdata_weaponzoom,
    pdata_pclass,
    pdata_semifrozen,
-   pdata_slot3ammo,
    pdata_addp,
    pdata_addy,
    pdata_recoilp,
    pdata_attr,
    pdata_alpha,
    pdata_oldhealth,
-   pdata_scrx,
-   pdata_scry,
 };
 
 enum ZscName(SubweaponType) {
@@ -281,8 +278,6 @@ struct player {
 
    /* HUD */
    bool hudenabled;
-   i32  scrx;
-   i32  scry;
 
    /* Score */
    i96 scoreaccum;
@@ -330,10 +325,6 @@ struct player {
    k64 extryaw;
    k64 extrroll; /* throw em to the dogs -suwy */
 
-   /* View TIDs */
-   i32 cameratid;
-   i32 weathertid;
-
    /* GUI */
    struct cbi cbi;
 
@@ -360,10 +351,6 @@ struct player {
    i32  riflefiremode;
    bool autoreload;
    bool bladehit, rendhit;
-
-   /* Keys */
-   bool krc, kyc, kbc;
-   bool krs, kys, kbs;
 
    /* 🌌 「÷」 0 */
    bool sgacquired;

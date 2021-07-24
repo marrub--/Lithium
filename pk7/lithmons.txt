@@ -28,38 +28,38 @@
 
 presets {
    /* Tier 1 */
-   name: ZombieMan   scr: 1000 exp: 5;  /* Bullets */
-   name: ShotgunGuy  scr: 2000 exp: 10; /* Bullets */
-   name: ChaingunGuy scr: 2000 exp: 15; /* Bullets */
-   name: Imp         scr: 2000 exp: 5;  /* Fire */
-   name: DRLACaptain scr: 2000 exp: 30; /* Bullets */
+   name: ZombieMan   scr: 1000 exp: 5;
+   name: ShotgunGuy  scr: 1200 exp: 10;
+   name: ChaingunGuy scr: 1400 exp: 15;
+   name: Imp         scr: 1200 exp: 5;
+   name: DRLACaptain scr: 1500 exp: 15;
 
    /* Tier 2 */
-   name: Demon      scr: 5000 exp: 10; /* Melee */
-   name: Spectre    scr: 7500 exp: 10; /* Melee */
-   name: LostSoul   scr: 500  exp: 5;  /* Melee */
-   name: Nitrogolem scr: 4000 exp: 20; /* Melee, FireMagic */
+   name: Demon      scr: 2000 exp: 10;
+   name: Spectre    scr: 2100 exp: 10;
+   name: LostSoul   scr: 500  exp: 5;
+   name: Nitrogolem scr: 2200 exp: 15;
 
    /* Tier 3 */
-   name: HellKnight  scr: 7000 exp: 80;  /* Melee, Magic */
-   name: Revenant    scr: 7000 exp: 80;  /* Melee, Shrapnel */
-   name: Cacodemon   scr: 7000 exp: 50;  /* Melee, Energy */
-   name: Arachnotron scr: 7000 exp: 80;  /* Energy */
-   name: Mancubus    scr: 7000 exp: 50;  /* Fire */
-   name: BaronOfHell scr: 8000 exp: 100; /* Melee, Magic */
-   name: Ophidian    scr: 7000 exp: 50;  /* Ice, Fire */
+   name: HellKnight  scr: 4100 exp: 40;
+   name: Revenant    scr: 4000 exp: 40;
+   name: Cacodemon   scr: 4000 exp: 40;
+   name: Arachnotron scr: 4300 exp: 40;
+   name: Mancubus    scr: 4400 exp: 40;
+   name: BaronOfHell scr: 7000 exp: 80;
+   name: Ophidian    scr: 7000 exp: 40;
 
    /* Tier 4 */
-   name: PainElemental scr: 20000 exp: 100; /* None */
-   name: Archvile      scr: 40000 exp: 200; /* FireMagic */
+   name: PainElemental scr: 7000 exp: 140;
+   name: Archvile      scr: 9000 exp: 170;
 
    /* Tier 5 */
-   name: SpiderDemon scr: 700000  exp: 3000; /* Bullets */
-   name: CyberDemon  scr: 1500000 exp: 4000; /* Shrapnel */
-   name: Maulotaur   scr: 7000000 exp: 1000; /* Melee, Fire */
+   name: SpiderDemon scr: 28000 exp: 560;
+   name: CyberDemon  scr: 30000 exp: 570;
+   name: Maulotaur   scr: 40000 exp: 580;
 
    /* Tier 6 */
-   name: DSparil     scr: 10000000 exp: 9000; /* Energy */
+   name: DSparil     scr: 10000000 exp: 9000;
    name: AIMainframe scr: 10000000 exp: 9000;
 }
 

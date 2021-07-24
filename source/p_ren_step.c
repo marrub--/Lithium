@@ -53,8 +53,7 @@ script void P_Ren_Step() {
       for(i32 i = 0; i < countof(stepsnd); i++)
          if(floor == stepsnd[i].nam) {snd = stepsnd[i].snd; next = stepsnd[i].nxt; break;}
 
-      ACS_SetActivator(pl.cameratid);
-      StartSound(snd, lch_body, 0, vol);
+      StartSound(snd, lch_step, 0, vol);
       pl.nextstep = next;
    }
 }

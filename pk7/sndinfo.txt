@@ -219,6 +219,8 @@ player/pickup/redskull1 lsounds/Items/RedSkull
 player/pickup/yellowskull lsounds/Items/YellowSkull
 player/pickup/blueskull lsounds/Items/BlueSkull
 player/pickup/evil lsounds/Items/EvilItem
+player/pickup/clips lsounds/Items/BulletSmall
+player/pickup/clipb lsounds/Items/BulletPack
 player/pickup/cells lsounds/Items/CellSmall
 player/pickup/cellb lsounds/Items/CellPack
 player/pickup/shells lsounds/Items/ShellSmall
@@ -226,7 +228,6 @@ player/pickup/shellb lsounds/Items/ShellPack
 player/pickup/rockets lsounds/Items/RocketSmall
 player/pickup/rocketb lsounds/Items/RocketBig
 player/pickup/mana lsounds/Items/Mana
-player/pickup/scorebig lsounds/Items/ScoreBig
 player/pickup/scoresmall lsounds/Items/ScoreSmall
 player/pickup/stimpack lsounds/Items/Stimpack
 player/pickup/medikit lsounds/Items/Medikit

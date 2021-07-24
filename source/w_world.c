@@ -101,10 +101,6 @@ bool updateTo(k32 to) {
 
 static
 void UpdateGame(void) {
-   if(updateTo(Ver1_5_1)) {
-      CVarSetK(sc_sv_scoremul, 1.25); /* 2.0 => 1.25 */
-   }
-
    if(updateTo(Ver1_5_2)) {
       CVarSetI(sc_sv_difficulty, 10); /* 1 => 10 */
    }
@@ -124,10 +120,7 @@ void UpdateGame(void) {
       if(CVarGetI(sc_xhair_style) >= 10) {
          CVarSetI(sc_xhair_style, 0);
       }
-      /* accidentally set this to something the settings menu couldn't
-       * actually use
-       */
-      CVarSetK(sc_sv_scoremul, 1.2); /* 1.25 => 1.2 */
+      CVarSetK(sc_sv_scoremul, 1.0); /* 1.25 => 1.0 */
    }
 }
 
@@ -195,7 +188,6 @@ void MInit(void) {
    /* Init global score multiplier per-map. */
    scoremul = fastroundlk(CVarGetK(sc_sv_scoremul) * 10.0k) / 10.0k;
 
-   /* Give players some extra score if they're playing on extra hard or above. */
    if(ACS_GameSkill() >= skill_extrahard)
       scoremul += 0.15;
 

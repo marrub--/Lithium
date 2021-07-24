@@ -23,14 +23,15 @@ player.pickup {
    yellowskull YellowSkull # ^
    blueskull   BlueSkull   # ^
    evil        EvilItem    # Phantasy Star: Nova
-   cells       CellSmall   # ???
+   clips       BulletSmall # ???
+   clipb       BulletPack  # ^
+   cells       CellSmall   # ^
    cellb       CellPack    # ^
    shells      ShellSmall  # ^
    shellb      ShellPack   # ^
    rockets     RocketSmall # Halo 3
    rocketb     RocketBig   # Quake 2
    mana        Mana        # Devil May Cry 2
-   scorebig    ScoreBig    # Self-made
    scoresmall  ScoreSmall  # ^
    stimpack    Stimpack    # Doom 3
    medikit     Medikit     # Fallout 4

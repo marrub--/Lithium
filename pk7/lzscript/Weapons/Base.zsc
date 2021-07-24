@@ -76,8 +76,6 @@ private meta class<Actor> m_spawnType;
 
 private bool m_side;
 
-private readOnly uint m_lithWeaponFlags;
-
 private class<Lith_Ammo> m_ammoType;
 
 property AmmoType: m_ammoType;
@@ -88,8 +86,6 @@ property ScopeInSound:  m_scopeInSnd;
 property ScopeZoom:     m_scopeZoom;
 
 property SpawnType: m_spawnType;
-
-flagDef Slot3OptAmmo: m_lithWeaponFlags, 0;
 
 const _psp_flags =
    PSPF_ADDWEAPON | PSPF_ADDBOB | PSPF_ALPHA | PSPF_RENDERSTYLE;
@@ -104,16 +100,6 @@ virtual state Lith_Ready(int flags) {
 
 override void tick() {
    super.tick();
-
-   if(bSlot3OptAmmo) {
-      if(Lith_UTIL.pData(pdata_slot3Ammo)) {
-         if(!m_ammoType) {
-            m_ammoType = "Lith_ShellAmmo";
-         }
-      } else if(m_ammoType) {
-         m_ammoType = null;
-      }
-   }
 }
 
 int lith_getRaiseSpeed(Lith_RaiseSpeed speed) {

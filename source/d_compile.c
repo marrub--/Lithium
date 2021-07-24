@@ -55,7 +55,7 @@ bool chtf_dbg_dlg(cheat_params_t const params) {
    return true;
 }
 
-struct cheat cht_dbg_dlg = cheat_s("pgdoki", 2, chtf_dbg_dlg);
+struct cheat cht_dbg_dlg = cheat_s("pgdoki", 2, chtf_dbg_dlg, "Doki Doki Dialogue Club initialized. \CgJust Mab");
 #endif
 
 static

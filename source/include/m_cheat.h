@@ -34,7 +34,7 @@ cheat_x(cht_dbg_mons_info)
 #elif !defined(m_cheat_h)
 #define m_cheat_h
 
-#define cheat_s(seq, par, cb) {seq, sizeof(seq) - 1, par, cb}
+#define cheat_s(seq, par, cb, msg) {seq, sizeof(seq) - 1, par, cb, msg}
 
 typedef char cheat_params_t[8];
 
@@ -45,6 +45,7 @@ struct cheat {
    mem_size_t len;
    mem_size_t par;
    cheat_cb_t fun;
+   cstr       msg;
 
    struct {
       mem_size_t     chrnum;

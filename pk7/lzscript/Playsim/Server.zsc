@@ -21,7 +21,7 @@ override void onRegister() {
    m_tracer = new("Lith_LineTracer");
 }
 
-static clearscope Lith_HERMES Instance()
+static clearScope Lith_HERMES Instance()
    {return Lith_HERMES(Find("Lith_HERMES"));}
 
 /* EOF */

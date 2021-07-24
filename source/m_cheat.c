@@ -15,6 +15,11 @@
 #include "w_world.h"
 #include "p_player.h"
 
+script static
+void print_cheat_msg(cstr msg) {
+   pl.logH(1, "%s", msg);
+}
+
 stkcall alloc_aut(0) static
 i32 check_cheat(struct cheat *cht, i32 ch) {
    if(cht->state.chrnum < cht->len) {
@@ -30,6 +35,7 @@ i32 check_cheat(struct cheat *cht, i32 ch) {
       cht->state.chrnum = 0;
       cht->state.parnum = 0;
       if(cht->fun(cht->state.params)) {
+         print_cheat_msg(cht->msg);
          return 1;
       } else {
          return 0;

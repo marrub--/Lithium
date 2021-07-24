@@ -38,14 +38,14 @@
 == \#LOG_ArtiTeleport | Chaos Device
 
 ## Ammo ----------------------------------------------------------------------|
-== \#LOG_Clip      | Radio
-== \#LOG_ClipBox   | Nonspecific Box of Ammunition
+== \#LOG_Clip      | Bullets
+== \#LOG_ClipBox   | Box of Bullets
 == \#LOG_Shell     | Shells
 == \#LOG_ShellBox  | Box of Shells
 == \#LOG_Rocket    | Rocket
 == \#LOG_RocketBox | Box of Rockets
 == \#LOG_Cell      | Energy Charge
-== \#LOG_CellBox   | Demonic Energy Pack
+== \#LOG_CellBox   | Tainted Energy Pack
 
 ## Bonuses -------------------------------------------------------------------|
 == \#LOG_Coin       | Coin

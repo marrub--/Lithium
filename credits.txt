@@ -74,7 +74,6 @@
 *                * Intermission text and background
 * Kurashiki      * Basilissa art
 * Marlboro Mike  * Score item sprites
-*                * Backpack pickup
 *                * Rocket Box pickup
 * Marphy Black   * Doom 2 Minor Sprite Fixes sprites are included in the mod
 * Minigunner     * Smooth explosion sprites

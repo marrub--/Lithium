@@ -156,15 +156,15 @@ default
    Weapon.SlotNumber 3;
    Weapon.SlotPriority 1;
    Inventory.AltHudIcon "CSRGY0";
+   Lith_Weapon.AmmoType "Lith_BulletAmmo";
 
    +Weapon.NoAutoFire
-   +Lith_Weapon.Slot3OptAmmo
 }
 
 action(Weapon) void Lith_A_FireShock()
 {
    Lith_A_MagIncr();
-   lith_takeAmmo();
+   lith_takeAmmo(4);
    A_Light(1);
    Lith_A_RecoilUp(0.5);
    A_Recoil(0.1);
@@ -190,7 +190,7 @@ Select:
    loop;
 
 Fire:
-   CSRG A 0 lith_jumpNoAmmo;
+   CSRG A 0 lith_jumpNoAmmo(2);
    CSRG A 0 Lith_A_JumpIfMagEmpty;
    CSRG A 1;
    CSRG B 1 bright offset(0, 40) Lith_A_FireShock;

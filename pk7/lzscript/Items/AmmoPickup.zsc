@@ -7,12 +7,39 @@
  * ---------------------------------------------------------------------------|
  */
 
+class Lith_Clip : Lith_AmmoItem replaces Clip {
+   default {
+      Tag "$LITH_LOG_Clip";
+      Inventory.PickupSound "player/pickup/clips";
+      Lith_AmmoItem.Give "Lith_BulletAmmo", 10;
+   }
+
+   states {
+   Spawn:
+      CLIP A -1;
+      stop;
+   }
+}
+
+class Lith_ClipBox : Lith_AmmoItem replaces ClipBox {
+   default {
+      Tag "$LITH_LOG_ClipBox";
+      Inventory.PickupSound "player/pickup/clipb";
+      Lith_AmmoItem.Give "Lith_BulletAmmo", 50;
+   }
+
+   states {
+   Spawn:
+      AMMO A -1;
+      stop;
+   }
+}
+
 class Lith_Shell : Lith_AmmoItem replaces Shell {
    default {
       Tag "$LITH_LOG_Shell";
       Inventory.PickupSound "player/pickup/shells";
-      Lith_ScoreItem.Score Score_Shell;
-      Lith_AmmoItem.Give "Lith_ShellAmmo", AmmoAmt_Shell;
+      Lith_AmmoItem.Give "Lith_ShellAmmo", 4;
    }
 
    states {
@@ -26,8 +53,7 @@ class Lith_ShellBox : Lith_AmmoItem replaces ShellBox {
    default {
       Tag "$LITH_LOG_ShellBox";
       Inventory.PickupSound "player/pickup/shellb";
-      Lith_ScoreItem.Score Score_ShellBox;
-      Lith_AmmoItem.Give "Lith_ShellAmmo", AmmoAmt_ShellBox;
+      Lith_AmmoItem.Give "Lith_ShellAmmo", 20;
    }
 
    states {
@@ -41,8 +67,7 @@ class Lith_RocketAmmoPickup : Lith_AmmoItem replaces RocketAmmo {
    default {
       Tag "$LITH_LOG_Rocket";
       Inventory.PickupSound "player/pickup/rockets";
-      Lith_ScoreItem.Score Score_Rocket;
-      Lith_AmmoItem.Give "Lith_RocketAmmo", AmmoAmt_Rocket;
+      Lith_AmmoItem.Give "Lith_RocketAmmo", 1;
    }
 
    states {
@@ -56,8 +81,7 @@ class Lith_RocketBox : Lith_AmmoItem replaces RocketBox {
    default {
       Tag "$LITH_LOG_RocketBox";
       Inventory.PickupSound "player/pickup/rocketb";
-      Lith_ScoreItem.Score Score_RocketBox;
-      Lith_AmmoItem.Give "Lith_RocketAmmo", AmmoAmt_RocketBox;
+      Lith_AmmoItem.Give "Lith_RocketAmmo", 5;
    }
 
    states {
@@ -71,8 +95,7 @@ class Lith_Cell : Lith_AmmoItem replaces Cell {
    default {
       Tag "$LITH_LOG_Cell";
       Inventory.PickupSound "player/pickup/cells";
-      Lith_ScoreItem.Score Score_Cell;
-      Lith_AmmoItem.Give "Lith_PlasmaAmmo", AmmoAmt_Cell;
+      Lith_AmmoItem.Give "Lith_PlasmaAmmo", 500;
    }
 
    states {
@@ -86,9 +109,8 @@ class Lith_CellPack : Lith_AmmoItem replaces CellPack {
    default {
       Tag "$LITH_LOG_CellBox";
       Inventory.PickupSound "player/pickup/cellb";
-      Lith_ScoreItem.Score Score_CellPack;
-      Lith_AmmoItem.Give  "Lith_PlasmaAmmo", AmmoAmt_CellPack;
-      Lith_AmmoItem.Give2 "Lith_CannonAmmo", AmmoAmt_CannonPack;
+      Lith_AmmoItem.Give  "Lith_PlasmaAmmo", 1500;
+      Lith_AmmoItem.Give2 "Lith_CannonAmmo", 4;
    }
 
    states {
@@ -98,9 +120,10 @@ class Lith_CellPack : Lith_AmmoItem replaces CellPack {
    }
 }
 
-class Lith_AmmoItem : Lith_ScoreItem abstract;
+class Lith_AmmoItem : Lith_BasicPickup abstract;
 
 default {
+   -Lith_BasicPickup.DrawPopup
    +CastSpriteShadow
 }
 
@@ -109,8 +132,6 @@ private int m_amount, m_amount2;
 
 property Give:  m_type,  m_amount;
 property Give2: m_type2, m_amount2;
-
-override bool lith_canGiveScore() {return !lith_sv_noscoreammo;}
 
 private bool lith_ammoNotFull(Actor mo) {
    let t1 = m_type;
@@ -148,16 +169,7 @@ private void lith_absorbAmmo(Actor mo, class<Lith_Ammo> ty, in out int amt) {
 override bool tryPickup(in out Actor mo) {
    lith_absorbAmmo(mo, m_type,  m_amount);
    lith_absorbAmmo(mo, m_type2, m_amount2);
-
-   if(lith_sv_noscoreammo && lith_sv_nofullammo) {
-      if(m_amount == 0 && m_amount2 == 0) {
-         return super.tryPickup(mo);
-      } else {
-         return true;
-      }
-   } else {
-      return super.tryPickup(mo);
-   }
+   return super.tryPickup(mo);
 }
 
 /* EOF */

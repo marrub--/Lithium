@@ -28,7 +28,6 @@ i32 Sc_LPData(i32 info, i32 permutation) {
    case pdata_riflemode:  return pl.riflefiremode;
    case pdata_hassigil:   return pl.sgacquired;
    case pdata_weaponzoom: return u.k = CVarGetK(sc_weapons_zoomfactor), u.i;
-   case pdata_slot3ammo:  return CVarGetI(sc_weapons_slot3ammo);
    case pdata_pclass:     return pl.pclass;
    case pdata_semifrozen: return pl.semifrozen > 0;
    case pdata_addp:       return u.k = pl.addpitch * 360.0, u.i;
@@ -37,8 +36,6 @@ i32 Sc_LPData(i32 info, i32 permutation) {
    case pdata_attr:       return pl.attr.attrs[permutation];
    case pdata_alpha:      return u.k = pl.alpha, u.i;
    case pdata_oldhealth:  return pl.oldhealth;
-   case pdata_scrx:       return pl.scrx;
-   case pdata_scry:       return pl.scry;
    }
    return 0;
 }

@@ -7,10 +7,22 @@
  * ---------------------------------------------------------------------------|
  */
 
+struct Lith_HermesData {
+   string logName;
+   string bipName;
+}
+
 extend class Lith_HERMES;
 
-private play string m_LogName;
-private play string m_BipName;
+private Lith_HermesData m_data;
+
+static void addStatusEffect(Actor mo, string which) {
+   let newStat = Lith_StatusEffect(new(which));
+   let pl      = Lith_Player(mo);
+   newStat.init();
+   newStat.next = pl.m_statFx;
+   pl.m_statFx  = newStat;
+}
 
 static clearScope double GetViewHeight(Actor mo) {
    return Lith_Player(mo).player.viewz - mo.pos.z;
@@ -81,33 +93,26 @@ static bool UseItem(Actor mo, int item)
    else   return false;
 }
 
-static string GetLogName()
-{
-   let sv = Instance();
-   return sv ? sv.m_LogName : "";
+static string GetLogName() {
+   return instance().m_data.logName;
 }
 
-static void Log(Actor mo, int type, int levl, string name)
-{
-   let sv = Instance();
-   if(sv && mo.Player)
-   {
-      sv.m_LogName = name;
-      mo.ACS_ScriptCall("Lith_LogS", levl, type);
+static clearScope void Log(int type, int levl, string name) {
+   let sv = instance();
+   if(sv) {
+      sv.m_data.logName = name;
+      callAcs("Lith_LogS", levl, type);
    }
 }
 
-static string GetBipName()
-{
-   let sv = Instance();
-   return sv ? sv.m_BipName : "";
+static string GetBipName() {
+   return instance().m_data.bipName;
 }
 
-static void UnlockBip(Actor mo, string name)
-{
+static void UnlockBip(Actor mo, string name) {
    let sv = Instance();
    if(sv && mo.Player) {
-      sv.m_BipName = name;
+      sv.m_data.bipName = name;
       mo.ACS_ScriptCall("Lith_BIPUnlock");
    }
 }

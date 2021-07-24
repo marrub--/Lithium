@@ -11,7 +11,6 @@ version "4.6.0"
 
 #include "lzscript/Constants.zsc"
 #include "lzscript/Utilities.zsc"
-#include "lzscript/Hacks.zsc"
 #include "lzscript/Sprites.zsc"
 #include "lzscript/Client.zsc"
 #include "lzscript/Playsim.zsc"

@@ -191,6 +191,10 @@ enum ZscName(Channel) {
    lch_voice2,
    lch_weapon2,
    lch_weapon3,
+
+   lch_step,
+   lch_weather1,
+   lch_weather2,
 };
 
 enum ZscName(DrawFlags) {

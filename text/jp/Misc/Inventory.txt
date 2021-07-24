@@ -118,34 +118,4 @@
 \ca8の業火の魔法耐性を持ち、
 それ以外の属性には4の耐性を持つ。
 
-## Sprites -------------------------------------------------------------------|
-
-== :ItemSpr:ArmStandardUp    | ARM1A0
-== :ItemSpr:ArmImprovedUp    | ARM2A0
-== :ItemSpr:ArmTeflonUp      | ARM3A0
-== :ItemSpr:ArmDendriteUp    | ARM4A0
-== :ItemSpr:ArmAerodynamicUp | :Items:AeroArmor
-== :ItemSpr:ArmHazMatUp      | ARM6A0
-== :ItemSpr:ArmPinkSilverUp  | ARM7A0
-== :ItemSpr:ArmMidoriUp      | ARM8A0
-
-== :ItemSpr:ArmStandardLo    | ARM1C0
-== :ItemSpr:ArmImprovedLo    | ARM2C0
-== :ItemSpr:ArmTeflonLo      | ARM3C0
-== :ItemSpr:ArmDendriteLo    | ARM4C0
-== :ItemSpr:ArmAerodynamicLo | ARM5C0
-== :ItemSpr:ArmHazMatLo      | ARM6C0
-== :ItemSpr:ArmPinkSilverLo  | ARM7C0
-== :ItemSpr:ArmMidoriLo      | ARM8C0
-
-== :ItemSpr:ClawOfImp     | DITMA0
-== :ItemSpr:DivisionSigil | :Items:DivisionSigil
-
-== :HUD:H_KC1 | RKEYB0
-== :HUD:H_KC2 | YKEYB0
-== :HUD:H_KC3 | BKEYB0
-== :HUD:H_KS1 | RSKUB0
-== :HUD:H_KS2 | YSKUB0
-== :HUD:H_KS3 | BSKUB0
-
 ## EOF

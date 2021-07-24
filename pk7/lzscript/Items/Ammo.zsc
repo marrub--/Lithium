@@ -39,14 +39,14 @@ class Lith_Ammo : Inventory abstract {
 class Lith_ManaAmmo : Lith_Ammo
    {default {Tag "$LITH_TAG_ManaAmmo";   Inventory.MaxAmount 1000;}}
 class Lith_BulletAmmo : Lith_Ammo
-   {default {Tag "$LITH_TAG_BulletAmmo"; Inventory.MaxAmount 500;}}
+   {default {Tag "$LITH_TAG_BulletAmmo"; Inventory.MaxAmount 200;}}
 class Lith_ShellAmmo : Lith_Ammo
-   {default {Tag "$LITH_TAG_ShellAmmo";  Inventory.MaxAmount 60;}}
+   {default {Tag "$LITH_TAG_ShellAmmo";  Inventory.MaxAmount 40;}}
 class Lith_RocketAmmo : Lith_Ammo
-   {default {Tag "$LITH_TAG_RocketAmmo"; Inventory.MaxAmount 200;}}
+   {default {Tag "$LITH_TAG_RocketAmmo"; Inventory.MaxAmount 50;}}
 class Lith_PlasmaAmmo : Lith_Ammo
-   {default {Tag "$LITH_TAG_PlasmaAmmo"; Inventory.MaxAmount 14000;}}
+   {default {Tag "$LITH_TAG_PlasmaAmmo"; Inventory.MaxAmount 7000;}}
 class Lith_CannonAmmo : Lith_Ammo
-   {default {Tag "$LITH_TAG_CannonAmmo"; Inventory.MaxAmount 40;}}
+   {default {Tag "$LITH_TAG_CannonAmmo"; Inventory.MaxAmount 20;}}
 
 /* EOF */

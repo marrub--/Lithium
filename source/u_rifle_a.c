@@ -29,7 +29,7 @@ void Upgr_Rifle_A_Render(struct upgrade *upgr)
    {
       SetClip(40, 108, 240, 40);
 
-      ACS_SetCameraToTexture(pl.cameratid, sp_LITHCAM1, 34);
+      ACS_SetCameraToTexture(0, sp_LITHCAM1, 34);
       PrintSprite(sp_LITHCAM1, 0,1, 128,0);
 
       PrintSprite(sp_HUD_RifleScope, 40,1, 108,1);

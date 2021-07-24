@@ -57,6 +57,7 @@ void Sc_GetSigil(void) {
    if(!P_None()) {
       P_GUI_Close();
 
+      pl.logF("*** WARNING - CAUSAL SHIFT DETECTED IN WETWARE ***");
       pl.sgacquired = true;
 
       #ifndef NDEBUG
@@ -126,6 +127,6 @@ bool chtf_discount(cheat_params_t const params) {
    return true;
 }
 
-struct cheat cht_discount = cheat_s("pgtaxevasion", 0, chtf_discount);
+struct cheat cht_discount = cheat_s("pgtaxevasion", 0, chtf_discount, "Dutch Sandwich initiated");
 
 /* EOF */

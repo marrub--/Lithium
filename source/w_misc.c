@@ -129,7 +129,7 @@ bool chtf_give_exp(cheat_params_t const params) {
    return true;
 }
 
-struct cheat cht_give_exp = cheat_s("pgtuition", 3, chtf_give_exp);
+struct cheat cht_give_exp = cheat_s("pgtuition", 3, chtf_give_exp, "Tuition granted");
 
 script_str ext("ACS") addr(OBJ "GiveScore")
 void Sc_GiveScore(i32 score) {

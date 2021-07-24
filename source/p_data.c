@@ -110,9 +110,6 @@ void P_Dat_PTickPre()
                    WARPF_COPYPITCH
    };
 
-   ACS_Warp(pl.cameratid,  4, 0, ACS_GetActorViewHeight(0), 0, _warpflags);
-   ACS_Warp(pl.weathertid, 4, 0, ACS_GetActorViewHeight(0), 0, _warpflags);
-
    pl.x = GetX(0);
    pl.y = GetY(0);
    pl.z = GetZ(0);
@@ -141,13 +138,6 @@ void P_Dat_PTickPre()
    pl.weaponclass = ACS_GetWeapon();
 
    pl.scopetoken = InvNum(so_WeaponScopedToken);
-
-   pl.krc = InvNum(so_d_card_r) || InvNum(so_c_card_r) || InvNum(so_htic_k_g);
-   pl.kyc = InvNum(so_d_card_y) || InvNum(so_c_card_y) || InvNum(so_htic_k_y);
-   pl.kbc = InvNum(so_d_card_b) || InvNum(so_c_card_b) || InvNum(so_htic_k_b);
-   pl.krs = InvNum(so_d_skul_r);
-   pl.kys = InvNum(so_d_skul_y);
-   pl.kbs = InvNum(so_d_skul_b);
 
    if(ACS_Timer() > 4) {
       /**/ if(pl.health < pl.oldhealth) pl.healthused += pl.oldhealth - pl.health;
@@ -247,7 +237,7 @@ bool chtf_give_ammo(cheat_params_t const params) {
    return true;
 }
 
-struct cheat cht_give_ammo = cheat_s("pgfa", 0, chtf_give_ammo);
+struct cheat cht_give_ammo = cheat_s("pgfa", 0, chtf_give_ammo, "Fully ammunized");
 
 /* Reset some things on the player when they spawn. */
 script
@@ -277,11 +267,6 @@ void P_Init() {
    pl.tid = 0;
    P_ValidateTID();
 
-   if(pl.cameratid)  ACS_Thing_Remove(pl.cameratid);
-   if(pl.weathertid) ACS_Thing_Remove(pl.weathertid);
-   ACS_SpawnForced(so_CameraHax, 0, 0, 0, pl.cameratid  = ACS_UniqueTID());
-   ACS_SpawnForced(so_CameraHax, 0, 0, 0, pl.weathertid = ACS_UniqueTID());
-
    #ifndef NDEBUG
    if(dbgflags(dbgf_score)) pl.score = 0xFFFFFFFFFFFFFFFFll;
    #endif
@@ -310,7 +295,7 @@ void P_Init() {
 
    pl.scoreaccum     = 0;
    pl.scoreaccumtime = 0;
-   pl.scoremul       = 1.3;
+   pl.scoremul       = 1.1;
 
    ServCallI(sm_PlayerInit);
 

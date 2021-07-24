@@ -537,7 +537,7 @@ void P_ItemPopup(str tag, k32 x, k32 y, k32 z) {
       vp.x = 320/2 + ACS_Random(-64, 64);
       vp.y = 240/2 + ACS_Random(-48, 48);
    }
-   DrawCallI(sm_AddScoreNum, vp.x, vp.y, tag);
+   DrawCallI(sm_AddItemPop, vp.x, vp.y, tag);
 }
 
 script_str ext("ACS") addr(OBJ "ItemPopupAmmo")

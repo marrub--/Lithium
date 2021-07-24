@@ -46,16 +46,15 @@ void HUD_WeaponSlots(i32 cr_one, i32 cr_two, i32 cr_many, i32 cr_cur, i32 _x, i3
    }
 }
 
-void HUD_Score(cstr fmt, i96 scrn, str font, i32 cr, i32 x, i32 xa) {
-   pl.scrx = x;
-   pl.scry = 3;
+void HUD_Score(cstr fmt, i96 scrn, str font, i32 cr) {
+   i32 y = 3;
 
    if(CVarGetI(sc_hud_showscore)) {
       char scr[64];
       sprintf(scr, fmt, scoresep(scrn));
 
       PrintTextChS(scr);
-      PrintTextX(font, cr, x,xa, 3,1, _u_no_unicode);
+      PrintTextX(font, cr, 320,2, y,1, _u_no_unicode);
 
       if(pl.score > pl.old.score) {
          SetFade(fid_schit1, 4, 12);
@@ -66,55 +65,45 @@ void HUD_Score(cstr fmt, i96 scrn, str font, i32 cr, i32 x, i32 xa) {
          SetFade(fid_schit2, minmax(tics, 1, 35), mmx >> 8);
       }
 
+      if(CheckFade(fid_schit1)) {
+         PrintTextChS(scr);
+         PrintTextFX(font, CR_ORANGE, 320,2, 3,1, fid_schit1, _u_no_unicode);
+      } else if(CheckFade(fid_schit2)) {
+         PrintTextChS(scr);
+         PrintTextFX(font, CR_PURPLE, 320,2, 3,1, fid_schit2, _u_no_unicode);
+      }
+
+      y += 7;
+
       if(pl.scoreaccumtime > 0) {
          SetFade(fid_scacum, 5, 12);
          pl.scoreaccumstr = StrParam("%c%s", pl.scoreaccum >= 0 ? '+' : ' ', scoresep(pl.scoreaccum));
       }
 
-      if(CheckFade(fid_schit1)) {
-         PrintTextChS(scr);
-         PrintTextFX(font, CR_ORANGE, x,xa, 3,1, fid_schit1, _u_no_unicode);
-      } else if(CheckFade(fid_schit2)) {
-         PrintTextChS(scr);
-         PrintTextFX(font, CR_PURPLE, x,xa, 3,1, fid_schit2, _u_no_unicode);
-      }
-
       if(CheckFade(fid_scacum))
-         PrintTextFX_str(pl.scoreaccumstr, font, CR_WHITE, x,xa, 10,1, fid_scacum, _u_no_unicode);
+         PrintTextFX_str(pl.scoreaccumstr, font, CR_WHITE, 320,2, y,1, fid_scacum, _u_no_unicode);
+
+      y += 7;
    }
 
    if(CVarGetI(sc_hud_showlvl)) {
       PrintTextFmt("Lv.%u", pl.attr.level);
       if(pl.attr.points) __nprintf(" (\Cn%u\C- pts)", pl.attr.points);
-      PrintTextX(font, cr, x,xa, 17,1, _u_no_unicode);
+      PrintTextX(font, cr, 320,2, y,1, _u_no_unicode);
+      y += 7;
    }
 
    i32 expbar = CVarGetI(sc_hud_expbar);
    if(expbar > 0) {
-      PrintSprite(sp_Bars_ExpBar0, x,xa, 24,1);
-      i32 xx = x;
+      PrintSprite(sp_Bars_ExpBar0, 320,2, y,1);
       u32 fr =
          ((u64)(pl.attr.exp     - pl.attr.expprev) * 24) /
           (u64)(pl.attr.expnext - pl.attr.expprev);
-      switch(xa) {
-         case 0: xx -= 12; break;
-         case 2: xx -= 24; break;
-      }
-      SetClip(xx, 24, fr, 2);
-      PrintSprite(StrParam(":Bars:ExpBar%i", expbar), xx,1, 24,1);
+      SetClip(296, y, fr, 2);
+      PrintSprite(StrParam(":Bars:ExpBar%i", expbar), 296,1, y,1);
       ClearClip();
+      y += 3;
    }
-}
-
-void HUD_KeyInd(i32 x, i32 y, bool horz, k32 a) {
-   #define Inc (horz ? (x -= 10) : (y += 10))
-   if(pl.krs) PrintSpriteA(sp_HUD_H_KS1, x,2, y,1, a), Inc;
-   if(pl.kys) PrintSpriteA(sp_HUD_H_KS2, x,2, y,1, a), Inc;
-   if(pl.kbs) PrintSpriteA(sp_HUD_H_KS3, x,2, y,1, a), Inc;
-   if(pl.krc) PrintSpriteA(sp_HUD_H_KC1, x,2, y,1, a), Inc;
-   if(pl.kyc) PrintSpriteA(sp_HUD_H_KC2, x,2, y,1, a), Inc;
-   if(pl.kbc) PrintSpriteA(sp_HUD_H_KC3, x,2, y,1, a), Inc;
-   #undef Inc
 }
 
 void HUD_DrawHealth(i32 health, i32 x, i32 y, i32 cr, i32 cr_fade) {

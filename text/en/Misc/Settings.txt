@@ -217,7 +217,6 @@
 == \#sv_nobossdrop          | Start with phantom rewards
 == \#sv_nobosses            | No phantoms
 == \#sv_nofullammo          | Don't pick up ammo when full
-== \#sv_noscoreammo         | Don't give score when picking up ammo
 == \#sv_postgame            | Enable post-game content
 == \#sv_rain                | Rain in outside areas
 == \#sv_revenge             | Explode on death
@@ -242,7 +241,6 @@
 == \#weapons_riflemodeclear | Clear rifle mode on switch
 == \#weapons_riflescope     | Modal Rifle scope
 == \#weapons_scopealpha     | Scope opacity
-== \#weapons_slot3ammo      | Slot 3 weapons take ammo
 == \#weapons_zoomfactor     | Scope zoom factor
 == \#xhair_a                | Dynamic crosshair alpha
 == \#xhair_b                | Dynamic crosshair blue

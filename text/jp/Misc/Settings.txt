@@ -144,7 +144,6 @@
 == \#sv_nobossdrop          | シャドウ討伐報酬所持でスタート
 == \#sv_nobosses            | シャドウを出現させない
 == \#sv_nofullammo          | 弾薬満タン時に武器を拾わない
-== \#sv_noscoreammo         | 弾薬獲得時にスコアを入手しない
 == \#sv_postgame            | NG+を有効にする
 == \#sv_rain                | 外に雨を降らす
 == \#sv_revenge             | 神風
@@ -160,7 +159,6 @@
 == \#weapons_riflemodeclear | 武器変更時にライフルのモードをリセット
 == \#weapons_riflescope     | ライフルスコープの有無
 == \#weapons_scopealpha     | スコープの透明度
-== \#weapons_slot3ammo      | スロット３の武器が弾を消費する
 == \#weapons_zoomfactor     | スコープの拡大率
 
 ## EOF

@@ -26,6 +26,7 @@ class Lith_DamageNum {
 
 class Lith_ScoreNum {
    vector2       m_pos;
+   vector2       m_end;
    string        m_amount;
    int           m_ticks;
    Lith_ScoreNum m_next;
@@ -38,22 +39,34 @@ private transient Lith_DamageNum[_dnum_max] m_dmgNumHeads;
 private transient bool                      m_dmgNumInit;
 private transient int                       m_dmgNumAmount;
 
-static void addScoreNum(int x, int y, string amount) {
-   let cl = instance();
-   if(!cl) return;
-
-   if(!cl.m_scrNumHead) {
-      cl.m_scrNumHead = new("Lith_ScoreNum");
+private void addScoreNumImpl(int x, int y, string amount, vector2 end) {
+   if(!m_scrNumHead) {
+      m_scrNumHead = new("Lith_ScoreNum");
    }
 
    let snum = new("Lith_ScoreNum");
 
    snum.m_pos    = (x, y);
+   snum.m_end    = end;
    snum.m_amount = amount;
    snum.m_ticks  = 45;
-   snum.m_next   = cl.m_scrNumHead.m_next;
+   snum.m_next   = m_scrNumHead.m_next;
 
-   cl.m_scrNumHead.m_next = snum;
+   m_scrNumHead.m_next = snum;
+}
+
+static void addItemPop(int x, int y, string amount) {
+   let cl = instance();
+   if(!cl) return;
+
+   cl.addScoreNumImpl(x, y, amount, (0.0, 0.0));
+}
+
+static void addScoreNum(int x, int y, string amount) {
+   let cl = instance();
+   if(!cl) return;
+
+   cl.addScoreNumImpl(x, y, amount, (320.0, 0.0));
 }
 
 void addDamageNum(vector3 origin, double w, int damage, Actor receiver) {
@@ -203,9 +216,8 @@ private ui void drawDmgNums(RenderEvent evt) {
 }
 
 private ui void drawScrNums(RenderEvent evt) {
-   Font    fnt    = fntSml(true);
-   int     h      = fnt.getHeight();
-   vector2 endPos = (Lith_UTIL.pData(pdata_scrx), Lith_UTIL.pData(pdata_scry));
+   Font fnt = fntSml(true);
+   int  h   = fnt.getHeight();
 
    if(m_scrNumHead) {
       for(Lith_ScoreNum snum = m_scrNumHead.m_next; snum;) {
@@ -216,7 +228,8 @@ private ui void drawScrNums(RenderEvent evt) {
          if(snum.m_ticks < 20) {
             double t = (snum.m_ticks - evt.fracTic) / 20.0;
             a   = 0.0;
-            pos = Lith_UTIL.vec2Lerp(endPos, pos, Lith_UTIL.easeInOutQuad(t));
+            pos = Lith_UTIL.vec2Lerp(snum.m_end, pos,
+                                     Lith_UTIL.easeInOutQuad(t));
             if(snum.m_ticks < 5) {
                aa  = snum.m_ticks / 5.0;
                aa -= (1.0 / 5.0) * evt.fracTic;

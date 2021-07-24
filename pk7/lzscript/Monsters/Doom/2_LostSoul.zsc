@@ -52,11 +52,11 @@ Spawn:
    loop;
 GoInvisible:
    SKUL AABBAABBAA 1 bright A_FadeTo(0.08);
-   SKUL A 0 {m_Invisible = true;}
+   SKUL A 0 {bCastSpriteShadow = false; m_Invisible = true;}
    goto See;
 StopBeingInvisibleBaka:
    SKUL AABBAABBAA 1 bright A_FadeTo(0.7);
-   SKUL A 0 {m_Invisible = false;}
+   SKUL A 0 {bCastSpriteShadow = true; m_Invisible = false;}
    goto Missile;
 
 See:

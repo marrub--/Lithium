@@ -261,9 +261,9 @@ bool chtf_dbg_mons_info(cheat_params_t const params) {
    return true;
 }
 
-struct cheat cht_dbg_dump_alloc = cheat_s("pgsegv",    0, chtf_dbg_dump_alloc);
-struct cheat cht_dbg_font_test  = cheat_s("pgfontdbg", 2, chtf_dbg_font_test);
-struct cheat cht_dbg_mons_info  = cheat_s("pginfo",    0, chtf_dbg_mons_info);
+struct cheat cht_dbg_dump_alloc = cheat_s("pgsegv",    0, chtf_dbg_dump_alloc, "Segfault triggered");
+struct cheat cht_dbg_font_test  = cheat_s("pgfontdbg", 2, chtf_dbg_font_test, "Player baptized");
+struct cheat cht_dbg_mons_info  = cheat_s("pginfo",    0, chtf_dbg_mons_info, "Monster doxxed");
 #endif
 
 script static
@@ -304,8 +304,8 @@ bool chtf_end_game(cheat_params_t const params) {
    return true;
 }
 
-struct cheat cht_give_exp_to = cheat_s("pgdonation", 2, chtf_give_exp_to);
-struct cheat cht_give_score  = cheat_s("pgbezos",    0, chtf_give_score);
-struct cheat cht_end_game    = cheat_s("pgbedone",   1, chtf_end_game);
+struct cheat cht_give_exp_to = cheat_s("pgdonation", 2, chtf_give_exp_to, "Tuition donated to monster");
+struct cheat cht_give_score  = cheat_s("pgbezos",    0, chtf_give_score, "Player transmuted into Jeff Bezos");
+struct cheat cht_end_game    = cheat_s("pgbedone",   1, chtf_end_game, "...Be Done");
 
 /* EOF */

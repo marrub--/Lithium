@@ -19,7 +19,7 @@ class Lith_AllMap : Inventory replaces Allmap {
    }
 
    override bool tryPickup(in out Actor mo) {
-      Lith_HERMES.Log(mo, msg_item, 5, "_AllMap");
+      Lith_HERMES.Log(msg_item, 5, "_AllMap");
       Lith_HERMES.UnlockBip(mo, "AllMap");
       callAcs("Lith_ItemPopupTag");
       mo.GiveInventory("MapRevealer", 1);
@@ -46,7 +46,7 @@ class Lith_Berserk : Inventory replaces Berserk {
    }
 
    override bool tryPickup(in out Actor mo) {
-      Lith_HERMES.Log(mo, msg_item, 5, "_Berserk");
+      Lith_HERMES.Log(msg_item, 5, "_Berserk");
       Lith_HERMES.UnlockBip(mo, "Berserk");
       mo.GiveInventory("PowerStrength", 1);
       callAcs("Lith_ItemPopupTag");
@@ -83,7 +83,7 @@ class Lith_Infrared : Inventory replaces Infrared {
    }
 
    override bool tryPickup(in out Actor mo) {
-      Lith_HERMES.Log(mo, msg_item, 5, "_Infrared");
+      Lith_HERMES.Log(msg_item, 5, "_Infrared");
       Lith_HERMES.UnlockBip(mo, "Infrared");
       mo.GiveInventory("Lith_PowerLightAmp", 1);
       callAcs("Lith_ItemPopupTag");
@@ -125,7 +125,7 @@ class Lith_Megasphere : Inventory replaces Megasphere {
    }
 
    override bool tryPickup(in out Actor mo) {
-      Lith_HERMES.Log(mo, msg_item, 4, "_Megasphere");
+      Lith_HERMES.Log(msg_item, 4, "_Megasphere");
       Lith_HERMES.UnlockBip(mo, "Taochyan");
       mo.GiveInventory("Lith_MegaProtection", 100);
       mo.ACS_ScriptCall("Lith_GiveHealthBonus", 200);
@@ -154,7 +154,7 @@ class Lith_RadSuit : Inventory replaces RadSuit {
    }
 
    override bool tryPickup(in out Actor mo) {
-      Lith_HERMES.Log(mo, msg_item, 5, "_RadSuit");
+      Lith_HERMES.Log(msg_item, 5, "_RadSuit");
       Lith_HERMES.UnlockBip(mo, "RadSuit");
       mo.GiveInventory("Lith_PowerIronFeet", 1);
       callAcs("Lith_ItemPopupTag");
@@ -185,7 +185,7 @@ class Lith_SoulSphere : Inventory replaces SoulSphere {
    }
 
    override bool tryPickup(in out Actor mo) {
-      Lith_HERMES.Log(mo, msg_item, 4, "_Soulsphere");
+      Lith_HERMES.Log(msg_item, 4, "_Soulsphere");
       Lith_HERMES.UnlockBip(mo, "Heart");
       mo.ACS_ScriptCall("Lith_GiveHealthBonus", 100);
       callAcs("Lith_ItemPopupTag");
@@ -216,7 +216,7 @@ class Lith_ArtiFly : Inventory replaces ArtiFly {
    }
 
    override bool tryPickup(in out Actor mo) {
-      Lith_HERMES.Log(mo, msg_item, 5, "_ArtiFly");
+      Lith_HERMES.Log(msg_item, 5, "_ArtiFly");
       mo.GiveInventory("PowerFlight", 1);
       callAcs("Lith_ItemPopupTag");
       goAwayAndDie();
@@ -244,7 +244,7 @@ class Lith_ArtiTeleport : Inventory replaces ArtiTeleport {
    }
 
    override bool tryPickup(in out Actor mo) {
-      Lith_HERMES.Log(mo, msg_item, 5, "_ArtiTeleport");
+      Lith_HERMES.Log(msg_item, 5, "_ArtiTeleport");
       mo.useInventory(mo.giveInventoryType("ArtiTeleport"));
       callAcs("Lith_ItemPopupTag");
       goAwayAndDie();
@@ -308,7 +308,7 @@ class Lith_InvulnerabilitySphere : Inventory replaces InvulnerabilitySphere {
    }
 
    override bool tryPickup(in out Actor mo) {
-      Lith_HERMES.Log(mo, msg_item, 6, "_Invuln");
+      Lith_HERMES.Log(msg_item, 6, "_Invuln");
       Lith_HERMES.UnlockBip(mo, "Invulnerability");
       if(lith_player_altinvuln)
          mo.giveInventory("Lith_PowerInvulnerableGiver2", 1);
@@ -337,7 +337,7 @@ class Lith_Backpack : Lith_ScoreItem replaces Backpack
       Inventory.PickupSound "player/pickup/item";
       Lith_BasicPickup.LogName "Backpack", 5;
       Lith_BasicPickup.InfoPage "Backpack";
-      Lith_ScoreItem.Score Score_Backpack;
+      Lith_ScoreItem.Score 10000;
 
       +COUNTITEM
       +CastSpriteShadow
@@ -345,11 +345,11 @@ class Lith_Backpack : Lith_ScoreItem replaces Backpack
 
    override void Lith_OnPickup(Actor mo)
    {
-      mo.GiveInventory("Lith_BulletAmmo", AmmoAmt_BulletBackpk);
-      mo.GiveInventory("Lith_ShellAmmo",  AmmoAmt_ShellBackpk);
-      mo.GiveInventory("Lith_RocketAmmo", AmmoAmt_RocketBackpk);
-      mo.GiveInventory("Lith_PlasmaAmmo", AmmoAmt_CellBackpk);
-      mo.GiveInventory("Lith_CannonAmmo", AmmoAmt_CannonBackpk);
+      mo.GiveInventory("Lith_BulletAmmo", 10);
+      mo.GiveInventory("Lith_ShellAmmo",  4);
+      mo.GiveInventory("Lith_RocketAmmo", 1);
+      mo.GiveInventory("Lith_PlasmaAmmo", 1500);
+      mo.GiveInventory("Lith_CannonAmmo", 4);
       mo.ACS_ScriptCall("Lith_Discount");
       Super.Lith_OnPickup(mo);
    }
@@ -415,7 +415,7 @@ class Lith_ShobonSphere : Inventory
    }
 
    override bool tryPickup(in out Actor mo) {
-      Lith_HERMES.Log(mo, msg_item, 5, "_ShobonSphere");
+      Lith_HERMES.Log(msg_item, 5, "_ShobonSphere");
       spawn("Lith_Shobon", mo.pos).master = mo;
       callAcs("Lith_ItemPopupTag");
       goAwayAndDie();

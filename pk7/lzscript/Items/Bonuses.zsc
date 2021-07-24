@@ -321,30 +321,6 @@ class Lith_ScoreChip2 : Lith_ScoreChip1
    }
 }
 
-class Lith_Radio1 : Lith_MultiSpawner
-{
-   default
-   {
-      Lith_MultiSpawner.Type "Lith_Radio";
-   }
-}
-
-class Lith_Radio2 : Lith_Radio1
-{
-   default
-   {
-      Lith_MultiSpawner.Amount 2;
-   }
-}
-
-class Lith_BoxOfAmmo1 : Lith_MultiSpawner
-{
-   default
-   {
-      Lith_MultiSpawner.Type "Lith_BoxOfAmmo";
-   }
-}
-
 class Lith_Ruby4 : Lith_MultiSpawner
 {
    default
@@ -457,56 +433,6 @@ class Lith_HealthBonusVial : Lith_BasicPickup
    }
 }
 
-class Lith_Radio : Lith_ScoreItem
-{
-   default
-   {
-      Tag "$LITH_LOG_Clip";
-      Lith_ScoreItem.Score Score_Clip;
-      Lith_BasicPickup.LogName "Clip", 2;
-      Inventory.PickupSound "player/pickup/scoresmall";
-
-      +LITH_BASICPICKUP.VACUUM
-   }
-
-   override void PostBeginPlay()
-   {
-      Super.PostBeginPlay();
-      self.GiveInventory("Lith_BulletAmmo", AmmoAmt_Bullet);
-   }
-
-   states
-   {
-   Spawn:
-      SCOR A -1 bright;
-      stop;
-   }
-}
-
-class Lith_BoxOfAmmo : Lith_ScoreItem
-{
-   default
-   {
-      Tag "$LITH_LOG_ClipBox";
-      Lith_ScoreItem.Score Score_ClipBox;
-      Lith_BasicPickup.LogName "ClipBox", 2;
-      Inventory.PickupSound "player/pickup/scorebig";
-   }
-
-   override void PostBeginPlay()
-   {
-      Super.PostBeginPlay();
-      self.GiveInventory("Lith_BulletAmmo", AmmoAmt_BulletBox);
-   }
-
-   states
-   {
-   Spawn:
-      SCOR B -1 bright;
-      stop;
-   }
-}
-
 class Lith_HealthBonus : Lith_RandomSpawn replaces HealthBonus
 {
    default
@@ -524,22 +450,6 @@ class Lith_ArmorBonus : Lith_RandomSpawn replaces ArmorBonus
       Lith_RandomSpawn.SpawnNum lrsn_abonus;
 
       +COUNTITEM
-   }
-}
-
-class Lith_Clip : Lith_RandomSpawn replaces Clip
-{
-   default
-   {
-      Lith_RandomSpawn.SpawnNum lrsn_clip;
-   }
-}
-
-class Lith_ClipBox : Lith_RandomSpawn replaces ClipBox
-{
-   default
-   {
-      Lith_RandomSpawn.SpawnNum lrsn_clipbx;
    }
 }
 

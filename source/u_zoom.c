@@ -50,7 +50,7 @@ void Upgr_Zoom_Render(struct upgrade *upgr)
    {
       PrintSpriteA(sp_HUD_Vignette, 160,0, 120,0, 0.3);
 
-      ACS_SetCameraToTexture(pl.cameratid, sp_LITHCAM2, 90 - UData.vzoom);
+      ACS_SetCameraToTexture(0, sp_LITHCAM2, 90 - UData.vzoom);
       PrintSprite(sp_LITHCAM2, 160,0, 120,0);
 
       PrintSpriteA(sp_HUD_ZoomOverlay, 160,0, 120,0, 0.5);

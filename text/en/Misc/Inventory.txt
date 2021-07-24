@@ -153,11 +153,4 @@ Used in division.
 == :ItemSpr:OrSigil       | :Items:OrSigil
 == :ItemSpr:DivisionSigil | :Items:DivisionSigil
 
-== :HUD:H_KC1 | RKEYB0
-== :HUD:H_KC2 | YKEYB0
-== :HUD:H_KC3 | BKEYB0
-== :HUD:H_KS1 | RSKUB0
-== :HUD:H_KS2 | YSKUB0
-== :HUD:H_KS3 | BSKUB0
-
 ## EOF

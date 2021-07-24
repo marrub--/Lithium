@@ -7,76 +7,15 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_HudMessage ui {
-   string text;
-   double alpha;
-   int    timer;
-   int    x, y;
-
-   void lith_tick() {
-      if(timer) {
-         timer--;
-      } else if(alpha > 0.01) {
-         alpha = Lith_UTIL.Lerp(alpha, 0, 0.1);
-      }
-   }
-
-   void lith_draw() {
-      if(alpha > 0.01) {
-         Font fnt = Lith_URANUS.instance().fntMid();
-         Screen.DrawText(fnt, Font.CR_GOLD, x, y, text,
-                         DTA_VirtualWidth,320, DTA_VirtualHeight,240,
-                         DTA_Alpha,alpha);
-      }
-   }
-}
-
 /* STATUSBAR: Seriously, This Acronym Trite Usurps Serious, Butt-free Acronym
               Readings */
 class Lith_STATUSBAR : BaseStatusBar;
 
-Lith_HudMessage m_chatMsg, m_midPrint;
-
-override void init() {
-   super.init();
-   setSize(0, 320, 240);
-   m_chatMsg  = new("Lith_HudMessage");
-   m_midPrint = new("Lith_HudMessage");
-}
-
-override void tick() {
-   super.tick();
-   m_chatMsg.lith_tick();
-   m_midPrint.lith_tick();
-}
-
-override void draw(int state, double ticFrac) {
-   super.draw(state, ticFrac);
-   m_chatMsg.lith_draw();
-   m_midPrint.lith_draw();
-}
-
 override void flashItem(class<Inventory> itemtype) {}
-
 override void drawPowerups() {}
 
 override bool processMidPrint(Font fnt, string text, bool bold) {
-   let msg   = m_midPrint;
-   msg.text  = text;
-   msg.timer = 35;
-   msg.alpha = 1.0;
-   msg.x     = 0;
-   msg.y     = 40;
-   return true;
-}
-
-override bool drawChat(string text) {
-   let msg   = m_chatMsg;
-   msg.text  = text;
-   msg.alpha = 1.0;
-   msg.timer = 35;
-   msg.x     = 0;
-   msg.y     = 48;
+   Lith_HERMES.log(msg_huds, 1, text);
    return true;
 }
 

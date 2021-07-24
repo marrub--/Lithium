@@ -74,16 +74,18 @@ static Lith_DamageType nameToDT(name type) {
    }
 }
 
-static void SpawnRain(Actor mo, string type) {
+static void SpawnRain(Actor mo, string type_) {
+   class<Actor> type = type_;
+
    for(int i = 0; i < 27; i++) {
-      Actor a[2];
-      bool _;
-
-      [_, a[0]] = mo.A_SpawnItemEx(type, frandom(16, 1024), 0, frandom(256,512), 0, 0, 0, frandom(0, 360), 128);
-      [_, a[1]] = mo.A_SpawnItemEx(type, frandom(512, 1536), 0, frandom(256,512), 0, 0, 0, frandom(-90, 90), 128);
-
-      for(int j = 0; j < 2; j++)
-         if(a[j] && a[j].ceilingpic != skyflatnum) a[j].destroy();
+      float   ang  = frandom(-180, 180);
+      float   dist = frandom(16, 1024);
+      vector3 pos  = (mo.pos.xy + (cos(ang) * dist, sin(ang) * dist),
+                      mo.pos.z + frandom(256, 512));
+      let sec = level.pointInSector(pos.xy);
+      if(sec && sec.getTexture(Sector.CEILING) == skyFlatNum) {
+         Actor.spawn(type, pos);
+      }
    }
 }
 

@@ -29,9 +29,9 @@ default
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/shotgun/draw";
    Inventory.AltHudIcon "SHOTA0";
+   Lith_Weapon.AmmoType "Lith_ShellAmmo";
 
    +Weapon.NoAutoFire
-   +Lith_Weapon.Slot3OptAmmo
 }
 
 int m_Just;
@@ -90,7 +90,6 @@ action(Weapon) void Lith_A_FireShotgun()
 action(Weapon) void Lith_A_FireGauss()
 {
    Lith_A_MagIncr();
-   lith_takeAmmo();
    Lith_A_JustAttack();
    A_AlertMonsters();
    A_FireBullets(0, 0, 1, 28, pufftype: "Lith_GaussPuff", flags: FBF_NORANDOM);
@@ -128,8 +127,8 @@ Select:
    wait;
 
 Fire:
-   #### # 0 lith_jumpNoAmmo;
    #### # 0 A_JumpIf(Lith_UTIL.pData(pdata_upgrade, UPGR_Shotgun_A), "FireGauss");
+   #### # 0 lith_jumpNoAmmo;
    #### # 0 Lith_A_FireShotgun;
    #### # 0 A_JumpIf(countInv("Lith_WeaponScopedToken"), "FireFinish_Rail_Scoped");
 FireFinish_Rail_Unscoped:

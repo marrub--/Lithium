@@ -40,6 +40,7 @@ default
    Inventory.PickupMessage "";
    Tag "$LITH_STATUS_MP";
 
+   -Lith_BasicPickup.DrawPopup
    +INVENTORY.ALWAYSPICKUP
    +INVENTORY.TRANSFER
    +INVENTORY.NOSCREENFLASH

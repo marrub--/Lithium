@@ -278,6 +278,6 @@ bool chtf_summon_boss(cheat_params_t const params) {
    return true;
 }
 
-struct cheat cht_summon_boss = cheat_s("pghauntme", 3, chtf_summon_boss);
+struct cheat cht_summon_boss = cheat_s("pghauntme", 3, chtf_summon_boss, "Haunted house initiated");
 
 /* EOF */

@@ -29,14 +29,14 @@
 == \#LOG_ShobonSphere | (´・ω・｀）
 
 ## Ammo ----------------------------------------------------------------------|
-== \#LOG_Clip      | ラジオ
-== \#LOG_ClipBox   | 非特異性弾箱
+== \#LOG_Clip      | 弾
+== \#LOG_ClipBox   | 弾箱
 == \#LOG_Shell     | シェル
 == \#LOG_ShellBox  | シェル箱
 == \#LOG_Rocket    | ロケット
 == \#LOG_RocketBox | ロケット箱
 == \#LOG_Cell      | エナジーチャージ
-== \#LOG_CellBox   | デーモンエナジーパック
+== \#LOG_CellBox   | 染まったエナジーパック
 
 ## Bonuses -------------------------------------------------------------------|
 == \#LOG_Coin       | コイン

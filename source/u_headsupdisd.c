@@ -85,8 +85,7 @@ void Upgr_HeadsUpDisD_Render(struct upgrade *upgr) {
    if(!pl.hudenabled) return;
 
    HUD_Log(Cr(blue), 0, -10);
-   HUD_KeyInd(180, 21, true, 0.8);
-   HUD_Score("%s\Cnscr", pl.score, sf_smallfnt, Cr(blue), 160,0);
+   HUD_Score("%s\Cnscr", pl.score, sf_smallfnt, Cr(blue));
 
    if(CVarGetI(sc_hud_showweapons))
       PrintSprite(sp_HUD_D_WepBack, 320,2, 218,2);

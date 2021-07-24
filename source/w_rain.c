@@ -18,17 +18,15 @@
 static
 bool lmvar rain_chk;
 static
-k32  lmvar rain_px, rain_py;
+k32 lmvar rain_px, rain_py;
 static
-i32  lmvar rain_dist;
+i32 lmvar rain_dist;
 
 dynam_aut script
-void W_DoRain(void)
-{
-   ACS_SetActivator(pl.weathertid);
-   StartSound(ss_amb_wind, lch_body,  CHANF_LOOP, 0.001, ATTN_NONE);
-   StartSound(ss_amb_rain, lch_voice, CHANF_LOOP, 0.001, ATTN_NONE);
+void W_DoRain(void) {
    pl.setActivator();
+   StartSound(ss_amb_wind, lch_weather1, CHANF_LOOP, 0.001, ATTN_NONE);
+   StartSound(ss_amb_rain, lch_weather2, CHANF_LOOP, 0.001, ATTN_NONE);
 
    k32 skydist, curskydist = 1;
    for(;;) {
@@ -40,34 +38,32 @@ void W_DoRain(void)
          InvTake(so_SMGHeat, 1);
       }
 
-      if((InHell || InSecret) && !islithmap)
+      if((InHell || InSecret) && !islithmap) {
          ServCallI(sm_SpawnRain, so_BloodRainDrop);
-      else
+      } else {
          ServCallI(sm_SpawnRain, so_RainDrop);
+      }
 
       ACS_Delay(1);
 
-      if(rain_chk)
-      {
+      if(rain_chk) {
          skydist = rain_dist / 1024.0;
          skydist = minmax(skydist, 0, 1);
-      }
-      else
+      } else {
          skydist = 0;
+      }
 
       curskydist = lerpk(curskydist, skydist, 0.035);
-      ACS_SoundVolume(pl.weathertid, lch_body,  1 - curskydist);
-      ACS_SoundVolume(pl.weathertid, lch_voice, 1 - curskydist);
+      ACS_SoundVolume(0, lch_weather1, 1 - curskydist);
+      ACS_SoundVolume(0, lch_weather2, 1 - curskydist);
    }
 }
 
 /* Scripts ----------------------------------------------------------------- */
 
 script ext("ACS") addr(lsc_raindropspawn)
-void Sc_RainDropSpawn(void)
-{
-   if(rain_chk)
-   {
+void Sc_RainDropSpawn(void) {
+   if(rain_chk) {
       i32 dist = mag2i(GetX(0) - rain_px, GetY(0) - rain_py);
       if(dist < rain_dist) rain_dist = dist;
    }

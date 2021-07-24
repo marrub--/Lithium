@@ -22,13 +22,14 @@ static
 void GiveWeaponItem(i32 parm, i32 slot)
 {
    switch(parm) {
-   case weapon_c_fist:
-   case weapon_m_fist:     ServCallI(sm_DieMonster);     break;
    case weapon_c_spas:     InvGive(so_ShellAmmo,  8);    break;
+   case weapon_m_shotgun:  InvGive(so_ShellAmmo,  2);    break;
    case weapon_m_ssg:      InvGive(so_ShellAmmo,  4);    break;
    case weapon_c_ionrifle: InvGive(so_RocketAmmo, 6);    break;
+   case weapon_c_erifle:   InvGive(so_BulletAmmo, 7);    break;
+   case weapon_m_rifle:    InvGive(so_BulletAmmo, 50);   break;
    case weapon_m_rocket:   InvGive(so_RocketAmmo, 2);    break;
-   case weapon_c_plasma:
+   case weapon_c_plasma:   InvGive(so_PlasmaAmmo, 750);  break;
    case weapon_m_plasma:   InvGive(so_PlasmaAmmo, 1500); break;
    case weapon_c_shipgun:  InvGive(so_CannonAmmo, 5);    break;
    case weapon_m_cannon:   InvGive(so_CannonAmmo, 4);    break;
@@ -124,17 +125,6 @@ void P_Wep_PTickPre()
          if(get_bit(pl.upgrades[UPGR_Plasma_B].flags, _ug_active))
             wep->ammotype = AT_AMag;
          break;
-      }
-
-      switch(i)
-      {
-      /* For slot 3 weapons that don't take ammo, check if they should. */
-      case weapon_m_shotgun:
-      case weapon_c_erifle:
-         if(CVarGetI(sc_weapons_slot3ammo)) {
-            wep->ammotype |= AT_Ammo;
-            wep->ammoclass = so_ShellAmmo;
-         }
       }
 
       /* Set magazine and ammo counts. */

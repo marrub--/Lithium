@@ -392,76 +392,75 @@ override void renderOverlay(RenderEvent evt) {
       drawNearbyItems(evt);
       drawDmgNums(evt);
       drawCrosshair(evt);
-   }
+      drawInventory(evt);
 
-   int scw = 320, sch = 240;
+      int scw = 320, sch = 240;
+      for(uint i = 0; i < m_DPtr; i++) {
+         switch(m_D[i].Type) {
+         case _type_clipSet:
+            Screen.setClipRect(m_D[i].X, m_D[i].Y, m_D[i].Z, m_D[i].W);
+            break;
+         case _type_clipClear:
+            Screen.clearClipRect();
+            break;
+         case _type_setSize:
+            scw = m_D[i].X;
+            sch = m_D[i].Y;
+            break;
+         case _type_line:
+            Screen.drawLine(m_D[i].X, m_D[i].Y, m_D[i].Z, m_D[i].W, m_D[i].C);
+            break;
+         case _type_sprite:
+            Screen.drawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
+                               DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
+                               DTA_TopOffset,0, DTA_LeftOffset,0,
+                               DTA_LegacyRenderStyle,m_D[i].Style);
+            break;
+         case _type_spriteAlpha:
+            Screen.drawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
+                               DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
+                               DTA_TopOffset,0, DTA_LeftOffset,0,
+                               DTA_LegacyRenderStyle,m_D[i].Style,
+                               DTA_Alpha,m_D[i].A);
+            break;
+         case _type_spriteStencil:
+            Screen.drawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
+                               DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
+                               DTA_TopOffset,0, DTA_LeftOffset,0,
+                               DTA_FillColor,m_D[i].C);
+            break;
+         case _type_spriteStencilAlpha:
+            Screen.drawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
+                               DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
+                               DTA_TopOffset,0, DTA_LeftOffset,0,
+                               DTA_Alpha,m_D[i].A, DTA_FillColor,m_D[i].C);
+            break;
+         case _type_text:
+            for(uint ln = 0, lns = m_D[i].LnX.Size(); ln < lns; ln++)
+               Screen.drawText(m_D[i].Fnt, m_D[i].Cr,
+                               m_D[i].X-m_D[i].LnX[ln], m_D[i].Y+m_D[i].LnY*ln,
+                               m_D[i].Txt[ln],
+                               DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
+                               DTA_LegacyRenderStyle,m_D[i].Style);
+            break;
+         case _type_textAlpha:
+            for(uint ln = 0, lns = m_D[i].LnX.Size(); ln < lns; ln++)
+               Screen.drawText(m_D[i].Fnt, m_D[i].Cr,
+                               m_D[i].X-m_D[i].LnX[ln], m_D[i].Y+m_D[i].LnY*ln,
+                               m_D[i].Txt[ln],
+                               DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
+                               DTA_Alpha,m_D[i].A,
+                               DTA_LegacyRenderStyle,m_D[i].Style);
+            break;
+         case _type_rect:
+            drawRect((m_D[i].Z, m_D[i].W), (m_D[i].X, m_D[i].Y), m_D[i].C);
+            break;
+         }
+      }
 
-   if(!AutoMapActive) for(uint i = 0; i < m_DPtr; i++) switch(m_D[i].Type)
-   {
-   case _type_clipSet:
-      Screen.SetClipRect(m_D[i].X, m_D[i].Y, m_D[i].Z, m_D[i].W);
-      break;
-   case _type_clipClear:
-      Screen.ClearClipRect();
-      break;
-   case _type_setSize:
-      scw = m_D[i].X;
-      sch = m_D[i].Y;
-      break;
-   case _type_line:
-      Screen.DrawLine(m_D[i].X, m_D[i].Y, m_D[i].Z, m_D[i].W, m_D[i].C);
-      break;
-   case _type_sprite:
-      Screen.DrawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
-                         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
-                         DTA_TopOffset,0, DTA_LeftOffset,0,
-                         DTA_LegacyRenderStyle,m_D[i].Style);
-      break;
-   case _type_spriteAlpha:
-      Screen.DrawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
-                         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
-                         DTA_TopOffset,0, DTA_LeftOffset,0,
-                         DTA_LegacyRenderStyle,m_D[i].Style,
-                         DTA_Alpha,m_D[i].A);
-      break;
-   case _type_spriteStencil:
-      Screen.DrawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
-                         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
-                         DTA_TopOffset,0, DTA_LeftOffset,0,
-                         DTA_FillColor,m_D[i].C);
-      break;
-   case _type_spriteStencilAlpha:
-      Screen.DrawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
-                         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
-                         DTA_TopOffset,0, DTA_LeftOffset,0,
-                         DTA_Alpha,m_D[i].A, DTA_FillColor,m_D[i].C);
-      break;
-   case _type_text:
-      for(uint ln = 0, lns = m_D[i].LnX.Size(); ln < lns; ln++)
-         Screen.DrawText(m_D[i].Fnt, m_D[i].Cr,
-                         m_D[i].X-m_D[i].LnX[ln], m_D[i].Y+m_D[i].LnY*ln,
-                         m_D[i].Txt[ln],
-                         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
-                         DTA_LegacyRenderStyle,m_D[i].Style);
-      break;
-   case _type_textAlpha:
-      for(uint ln = 0, lns = m_D[i].LnX.Size(); ln < lns; ln++)
-         Screen.DrawText(m_D[i].Fnt, m_D[i].Cr,
-                         m_D[i].X-m_D[i].LnX[ln], m_D[i].Y+m_D[i].LnY*ln,
-                         m_D[i].Txt[ln],
-                         DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
-                         DTA_Alpha,m_D[i].A,
-                         DTA_LegacyRenderStyle,m_D[i].Style);
-      break;
-   case _type_rect:
-      drawRect((m_D[i].Z, m_D[i].W), (m_D[i].X, m_D[i].Y), m_D[i].C);
-      break;
-   }
+      let p = Lith_Player(evt.camera);
+      if(p && p.m_cs) p.m_cs.lith_render();
 
-   let p = Lith_Player(evt.camera);
-   if(p && p.m_cs) p.m_cs.lith_render();
-
-   if(evt.camera && evt.camera.player && !automapActive) {
       drawScrNums(evt);
    }
 
@@ -498,44 +497,73 @@ private ui void drawNearbyItems(RenderEvent evt) {
             double dist  = mo.distance3D(evt.camera);
             double alpha = 1.0 - clamp(dist / 256.0, 0.0, 1.0);
             int    sw    = fnt.stringWidth(tag);
-            int    cr    = ACS_ExecuteWithResult(lsc_drawcr, lith_hud_itemcolor);
-            Screen.DrawText(fnt, cr, px - sw / 2, py, tag, DTA_Alpha,alpha,
+            int    cr    = acs_executeWithResult(lsc_drawcr, lith_hud_itemcolor);
+            Screen.drawText(fnt, cr, px - sw / 2, py, tag, DTA_Alpha,alpha,
                             DTA_VirtualWidth,320, DTA_VirtualHeight,240);
          }
       }
    }
 }
 
-Font fntSml(bool noUnicode = false) const {
-   if(noUnicode || m_English) {
-      return smallFont;
-   } else {
-      return m_UFntSml;
+static const string keyClasses[] = {
+   "BlueCard",  "RedCard",  "YellowCard",
+   "BlueSkull", "RedSkull", "YellowSkull",
+
+   "ChexBlueCard", "ChexRedCard", "ChexYellowCard",
+
+   "KeyBlue", "KeyGreen", "KeyYellow"
+};
+
+static const string keyText[] = {
+   "\cn", "\ca", "\cf",
+   "\cn", "\ca", "\cf",
+
+   "\cn", "\ca", "\cf",
+
+   "\cn", "\cd", "\cf"
+};
+
+private ui void drawInventory(RenderEvent evt) {
+   let mo = evt.camera;
+
+   string inv_text = "";
+
+   inv_text.appendFormat(" %i\n %i\n %i\n %i\n %i\n",
+                         mo.countInv("Lith_BulletAmmo"),
+                         mo.countInv("Lith_ShellAmmo"),
+                         mo.countInv("Lith_RocketAmmo"),
+                         mo.countInv("Lith_PlasmaAmmo"),
+                         mo.countInv("Lith_CannonAmmo"));
+
+   for(int i = 0; i < keyClasses.size(); ++i) {
+      class<Key> kt = keyClasses[i];
+      if(kt && mo.countInv(kt)) {
+         inv_text = inv_text .. keyText[i];
+      }
    }
+
+   Screen.drawText(smallFont, Font.CR_WHITE, 0, 0, inv_text,
+                   DTA_VirtualWidth,320, DTA_VirtualHeight,240);
+}
+
+Font fntSml(bool noUnicode = false) const {
+   if(noUnicode || m_English) return smallFont;
+   else                       return m_UFntSml;
 }
 
 Font fntMid(bool noUnicode = false) const {
-   if(noUnicode || m_English) {
-      return 'lmidfont';
-   } else {
-      return m_UFntSml;
-   }
+   if(noUnicode || m_English) return 'lmidfont';
+   else                       return m_UFntSml;
 }
 
 Font fntBig(bool noUnicode = false) const {
-   if(noUnicode || m_English) {
-      return 'lbigfont';
-   } else {
-      return 'newconsolefont';
-   }
+   if(noUnicode || m_English) return 'lbigfont';
+   else                       return 'newconsolefont';
 }
 
 Font fntTrm(bool noUnicode = false) const {
-   if(noUnicode || m_English) {
-      return 'ltrmfont';
-   } else {
-      return 'ljtrmfont';
-   }
+   if(noUnicode || m_English) return 'ltrmfont';
+   else                       return 'ljtrmfont';
 }
 
 Font fntAny(name name, bool noUnicode = false) const {

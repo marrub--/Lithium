@@ -95,12 +95,10 @@ void Upgr_HeadsUpDisI_Render(struct upgrade *upgr)
 
    HUD_Log(Cr(purple), 0, -15);
 
-   HUD_KeyInd(20, 20, false, 0.8);
-
    UData.score.value = pl.score;
    lerplli(&UData.score);
 
-   HUD_Score("%s \CnScore", UData.score.value_display, sf_lmidfont, Cr(purple), 2,1);
+   HUD_Score("%s \CnScore", UData.score.value_display, sf_lmidfont, Cr(purple));
 
    /* Status */
    HUDI_Ammo(upgr);
