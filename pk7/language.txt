@@ -2000,7 +2000,7 @@
 "OB_BARONHIT" = "Incredible, it seems like %g got in a fist-fight with a projectile spammer!";
 "OB_CACO" = "%o likes caco.";
 "OB_CACOHIT" = "%o tried to pet the caco. Sorry it didn't work out for you, bud.";
-"OB_CHAINGUY" = "%o danced the chaingun cha-cha. Hey, %r pretty good at it!";
+"OB_CHAINGUY" = "%o danced the chaingun cha-cha. And %r pretty good at it!";
 "OB_CYBORG" = "Ouch, that rocket really didn't agree with %h at all.";
 "OB_DEMONHIT" = "%o didn't dodge, like, 5 inches to the back. Sucks for %h!";
 "OB_FATSO" = "%o isn't the best at dodging those slow projectiles.";

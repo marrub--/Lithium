@@ -52,6 +52,7 @@ default
    Weapon.SlotPriority 0.9;
    Weapon.UpSound "weapons/plasdiff/draw";
    Inventory.AltHudIcon "PDIFA0";
+   Lith_Weapon.AmmoType "Lith_PlasmaAmmo";
 
    +WEAPON.CHEATNOTWEAPON
 }
