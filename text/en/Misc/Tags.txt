@@ -58,4 +58,7 @@
 == \#TAG_UndeadWarrior   | Undead Warrior
 == \#TAG_Weredragon      | Weredragon
 
+## Status Effects ------------------------------------------------------------|
+== \#STAT_JET | Booster Cooldown
+
 ## EOF

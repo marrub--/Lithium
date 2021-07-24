@@ -16,6 +16,7 @@
 #include "lzscript/Playsim/Monsters.zsc"
 #include "lzscript/Playsim/Pause.zsc"
 #include "lzscript/Playsim/Player.zsc"
+#include "lzscript/Playsim/StatusEffects.zsc"
 #include "lzscript/Playsim/Weapons.zsc"
 #include "lzscript/Playsim/World.zsc"
 

@@ -37,9 +37,9 @@ private ui void drawCrosshair(RenderEvent evt) {
       [tr1x, tr1y, seen] = project((tr.pos.xy, tr.pos.z + tr.height / 2.0));
 
       if(seen) {
-         [tr1x, tr1y] = getScSized(tr1x, tr1y);
-         [tr2x, tr2y] = getScSized(xh.x, xh.y);
-         Screen.drawLine(tr1x, tr1y, tr2x, tr2y, "red");
+         vector2 tr1 = getScSized(tr1x, tr1y);
+         vector2 tr2 = getScSized(xh.x, xh.y);
+         Screen.drawLine(int(tr1.x), int(tr1.y), int(tr2.x), int(tr2.y), "red");
       }
    }
 

@@ -12,6 +12,7 @@ DefaultListMenu
    Font "lbigfont", "DarkGreen", "Green"
    Selector "-", -20, 2
    LineSpacing 16
+   Size Clean
 }
 
 DefaultOptionMenu

@@ -21,7 +21,7 @@ _uc_body:
  HeadsUpDisW: {pg: HeadsUpDisp, cl: pW, f: ---R-, pr: 1, mul: -5, grp: 10}
 
  ## All classes
- Flashlight: {pg: N/A,          f: -DURE}
+ Flashlight: {pg: N/A,          f: -DU-E}
  Zoom:       {pg: N/A,          f: -DUR-}
  VitalScan:  {pg: VitalScanner, f: --UR-, pr: 2}
 

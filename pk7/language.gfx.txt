@@ -200,6 +200,7 @@ identifier,default
 :Portraits:Thoth,lgfx/Portraits/Thoth.png
 :Portraits:Wanderer,lgfx/Portraits/Wanderer.png
 :Stat:ACC,lgfx/Stat/ACC.png
+:Stat:JET,lgfx/Stat/JET.png
 :Stat:MKM,lgfx/Stat/MKM.png
 :Terminal:01602,lgfx/Terminal/01602.png
 :Terminal:Teleport,lgfx/Terminal/Teleport.png

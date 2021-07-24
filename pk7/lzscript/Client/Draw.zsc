@@ -120,8 +120,12 @@ static void LL(int x, int y, int z, int w, color c = 0) {
 
    cl.m_D[p].Type = _type_line;
 
-   [cl.m_D[p].X, cl.m_D[p].Y] = cl.GetScSized(x, y);
-   [cl.m_D[p].Z, cl.m_D[p].W] = cl.GetScSized(z, w);
+   vector2 xy = cl.getScSized(x, y);
+   vector2 zw = cl.getScSized(z, w);
+   cl.m_D[p].X = int(xy.x);
+   cl.m_D[p].Y = int(xy.y);
+   cl.m_D[p].Z = int(zw.x);
+   cl.m_D[p].W = int(zw.y);
 
    cl.m_D[p].C = c;
 
@@ -276,8 +280,12 @@ static void LC(int x = 0, int y = 0, int w = 0, int h = 0, int ww = 0) {
 
       cl.m_D[p].Type = _type_clipSet;
 
-      [cl.m_D[p].X, cl.m_D[p].Y] = cl.GetScSized(x, y);
-      [cl.m_D[p].Z, cl.m_D[p].W] = cl.GetScSized(w, h, true);
+      vector2 xy = cl.getScSized(x, y);
+      vector2 zw = cl.getScSized(w, h, true);
+      cl.m_D[p].X = int(xy.x);
+      cl.m_D[p].Y = int(xy.y);
+      cl.m_D[p].Z = int(zw.x);
+      cl.m_D[p].W = int(zw.y);
    } else {
       cl.m_NoDraw = false;
       cl.m_D[p].Type = _type_clipClear;
@@ -295,8 +303,12 @@ static void LR(int x = 0, int y = 0, int w = 0, int h = 0, color cr = 0) {
 
    cl.m_D[p].Type = _type_rect;
 
-   [cl.m_D[p].X, cl.m_D[p].Y] = cl.GetScSized(x, y);
-   [cl.m_D[p].Z, cl.m_D[p].W] = cl.GetScSized(w, h, true);
+   vector2 xy = cl.getScSized(x, y);
+   vector2 zw = cl.getScSized(w, h, true);
+   cl.m_D[p].X = int(xy.x);
+   cl.m_D[p].Y = int(xy.y);
+   cl.m_D[p].Z = int(zw.x);
+   cl.m_D[p].W = int(zw.y);
 
    cl.m_D[p].C = cr;
 
@@ -472,19 +484,19 @@ override void renderOverlay(RenderEvent evt) {
    drawMenu();
 }
 
-clearScope int, int getScSized(double x, double y, bool kludge = false) {
-   double vw = m_VirtualSize.X;
-   double vh = m_VirtualSize.Y;
-
+clearScope vector2 getScSized(double x, double y, bool kludge = false, vector2 vsz = (0.0, 0.0)) {
+   if(!vsz.x || !vsz.y) {
+      vsz = m_virtualSize;
+   }
    double sw = Screen.GetWidth();
    double sh = Screen.GetHeight();
 
    vector2 xy, sc;
 
-   if(kludge) [sc, xy] = Screen.VirtualToRealCoords((0, 0), ( x,  y), (vw, vh));
-   else       [xy, sc] = Screen.VirtualToRealCoords((x, y), (sw, sh), (vw, vh));
+   if(kludge) [sc, xy] = Screen.VirtualToRealCoords((0, 0), ( x,  y), vsz);
+   else       [xy, sc] = Screen.VirtualToRealCoords((x, y), (sw, sh), vsz);
 
-   return int(xy.X), int(xy.Y);
+   return xy;
 }
 
 private ui void drawNearbyItems(RenderEvent evt) {
@@ -528,7 +540,17 @@ static const string keyText[] = {
    "\cn", "\cd", "\cf"
 };
 
+private transient ui textureId m_texBatteryOutline;
+private transient ui textureId m_texBattery;
+
 private ui void drawInventory(RenderEvent evt) {
+   if(m_texBatteryOutline.isNull()) {
+      m_texBatteryOutline = getTextureForName(":HUD:BatteryOutline");
+   }
+   if(m_texBattery.isNull()) {
+      m_texBattery = getTextureForName(":HUD:Battery");
+   }
+
    let mo = evt.camera;
 
    string inv_text = "";
@@ -549,6 +571,24 @@ private ui void drawInventory(RenderEvent evt) {
 
    Screen.drawText(smallFont, Font.CR_WHITE, 0, 0, inv_text,
                    DTA_VirtualWidth,320, DTA_VirtualHeight,240);
+
+   int battery  = Lith_UTIL.pData(pdata_flashbattery);
+   int bat_life = lith_light_battery * 35;
+
+   if(bat_life > 0 && battery < bat_life) {
+      double y = battery / double(bat_life) * 8.0;
+
+      Screen.drawTexture(m_texBatteryOutline, false, 0, 0,
+                         DTA_VirtualWidth,320, DTA_VirtualHeight,240);
+
+      vector2 cb, cs;
+      cb = getScSized(2, 2, vsz: (320, 240));
+      cs = getScSized(2, y, vsz: (320, 240));
+      Screen.setClipRect(int(cb.x), int(cb.y), int(cs.x), int(cs.y));
+      Screen.drawTexture(m_texBattery, false, 2, 2,
+                         DTA_VirtualWidth,320, DTA_VirtualHeight,240);
+      Screen.clearClipRect();
+   }
 }
 
 Font fntSml(bool noUnicode = false) const {

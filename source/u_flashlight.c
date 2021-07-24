@@ -77,21 +77,6 @@ script void Upgr_Flashlight_Update(struct upgrade *upgr) {
             UData.target, UData.intensity, UData.speed, UData.battery);
 }
 
-void Upgr_Flashlight_Render(struct upgrade *upgr) {
-   if(!pl.hudenabled) return;
-
-   i32 bat_life = CVarGetI(sc_light_battery) * 35;
-
-   if(bat_life > 0 && UData.battery < bat_life) {
-      i32 y = UData.battery / (k32)bat_life * 8;
-
-      PrintSprite(sp_HUD_BatteryOutline, 0,1, 240,2);
-      SetClip(2, 238 - y, 2, 8);
-      PrintSprite(sp_HUD_Battery, 2,1, 238,2);
-      ClearClip();
-   }
-}
-
 /* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr(OBJ "GetFlashlightIntensity")

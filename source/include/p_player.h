@@ -65,6 +65,7 @@ enum ZscName(PData) {
    pdata_alpha,
    pdata_oldhealth,
    pdata_hudenabled,
+   pdata_flashbattery,
 };
 
 enum ZscName(SubweaponType) {

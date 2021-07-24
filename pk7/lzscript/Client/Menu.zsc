@@ -35,7 +35,6 @@ class Lith_MenuDelegate : MenuDelegateBase {
                Screen.DrawTexture(tex, false, x, y,
                                   DTA_VirtualWidth,dw,
                                   DTA_VirtualHeight,dh,
-                                  DTA_KeepRatio,true,
                                   DTA_FillColor,c,
                                   DTA_Alpha,a);
             }

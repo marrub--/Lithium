@@ -1816,6 +1816,7 @@
 "LITH_TAG_Steggles" = "steggles";
 "LITH_TAG_UndeadWarrior" = "Undead Warrior";
 "LITH_TAG_Weredragon" = "Weredragon";
+"LITH_STAT_JET" = "Booster Cooldown";
 "LITH_ACTIVATE" = "Activate";
 "LITH_AUTOGROUPS" = "Active Auto-groups";
 "LITH_BUY" = "Buy";

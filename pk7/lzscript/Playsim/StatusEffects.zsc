@@ -1,0 +1,38 @@
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison G. Watson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
+class Lith_StatusEffect : Thinker abstract {
+   Lith_StatusEffect next;
+   string            snam;
+   string            fnam;
+   textureId         icon;
+   uint              tics;
+
+   void init() {
+      initCb();
+      fnam = "$LITH_STAT_" .. snam;
+      icon = Lith_URANUS.getTextureForName(":Stat:" .. snam);
+   }
+
+   override void tick() {
+      tickCb();
+      if(tics) {
+         --tics;
+      }
+   }
+
+   virtual void initCb() {}
+   virtual void tickCb() {}
+}
+
+class Lith_StatJetBooster : Lith_StatusEffect {
+   override void initCb() {snam = "JET"; tics = 35 * 7;}
+}
+
+/* EOF */

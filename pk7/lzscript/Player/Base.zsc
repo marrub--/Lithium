@@ -51,6 +51,8 @@ Lith_AdviceMarker m_curAdvice;
 
 int m_wasDamaged;
 
+Lith_StatusEffect m_statFx;
+
 property ViewBob: m_VBob;
 
 override void BeginPlay() {
