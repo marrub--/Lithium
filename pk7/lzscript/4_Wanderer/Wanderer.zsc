@@ -7,6 +7,28 @@
  * ---------------------------------------------------------------------------|
  */
 
+class Lith_StatShadowWalker : Lith_StatFx {
+   override void initCb() {basic("SWR", 105);}
+   override void doneCb() {addStatFx("Lith_StatShadowWalked");}
+   override void tickCb() {
+      let a = plyr.angle - atan2(plyr.player.cmd.sidemove,
+                                 plyr.player.cmd.forwardmove);
+      let c = cos(a) * 0.7;
+      let s = sin(a) * 0.7;
+      plyr.a_changeVelocity(c, s);
+      for(int i = 0; i < 4; ++i) {
+         Actor
+            .spawn("Lith_ShadowWalkEffect",
+                   plyr.pos + (frandom(-1,1),frandom(-1,1),frandom(-1,1)))
+            .vel = (frandom(-0.8,0.8),frandom(-0.8,0.8),frandom(-0.4,0.4));
+      }
+   }
+}
+
+class Lith_StatShadowWalked : Lith_StatFx {
+   override void initCb() {basic("SWD", 525);}
+}
+
 class Lith_WandererPlayer : Lith_Player {
    default {
       Player.DisplayName "$LITH_CLASS_WANDERER";
@@ -16,35 +38,20 @@ class Lith_WandererPlayer : Lith_Player {
       Health 50;
    }
 
-   int m_dodgeDbc;
-   int m_iFrames;
-
    override void giveDefaultInventory() {
       super.giveDefaultInventory();
       lith_giveDefWeapon("Lith_Magnum");
    }
 
    override void tick() {
-      if(m_iFrames) m_iFrames--;
-
       if(health > 0) {
-         if(m_dodgeDbc) {
-            m_dodgeDbc--;
-         } else if(player && player.buttons & BT_SPEED) {
+         if(!Lith_StatFx.getInPool("Lith_StatShadowWalker") &&
+            !Lith_StatFx.getInPool("Lith_StatShadowWalked") &&
+            player && player.buttons & BT_SPEED)
+         {
             A_StartSound("player/wanderer/shadowwalk", lch_voice);
-            m_iFrames = 105;
-            m_dodgeDbc = 525;
+            Lith_StatFx.addToPool(self, "Lith_StatShadowWalker");
             callACS("Lith_DodgeViewShadowWalk");
-         }
-
-         if(m_iFrames) {
-            let a = angle - atan2(player.cmd.sidemove, player.cmd.forwardmove);
-            let c = cos(a) * 0.7;
-            let s = sin(a) * 0.7;
-            A_ChangeVelocity(c, s);
-            for(int i = 0; i < 4; ++i) {
-               A_SpawnItemEx("Lith_ShadowWalkEffect", frandom(-1,1),frandom(-1,1),frandom(-1,1), frandom(-0.8,0.8),frandom(-0.8,0.8),frandom(-0.4,0.4));
-            }
          }
       }
 
@@ -52,7 +59,7 @@ class Lith_WandererPlayer : Lith_Player {
    }
 
    override int damageMobj(Actor inflictor, Actor source, int damage, name mod, int flags, double angle) {
-      if(m_iFrames)
+      if(Lith_StatFx.getInPool("Lith_StatShadowWalker"))
          return 0;
       else
          return super.damageMobj(inflictor, source, damage, mod, flags, angle);
@@ -65,7 +72,7 @@ class Lith_WWeapon : Lith_Weapon {
    }
 
    override state lith_ready(int flags) {
-      if(Lith_WandererPlayer(owner).m_iFrames != 0)
+      if(Lith_StatFx.getInPool("Lith_StatShadowWalker"))
          return resolveState("_ShadowWalk");
       else
          return null;
@@ -80,7 +87,7 @@ class Lith_WWeapon : Lith_Weapon {
       #### # 1 offset(25, 160);
       TNT1 A 1 offset(1, 32);
    _ShadowWalkLoop:
-      TNT1 A 1 A_JumpIf(Lith_WandererPlayer(invoker.owner).m_iFrames == 0, "_ShadowWalkDone");
+      TNT1 A 1 A_JumpIf(!Lith_StatFx.getInPool("Lith_StatShadowWalker"), "_ShadowWalkDone");
       loop;
    _ShadowWalkDone:
       TNT1 A 1 offset(1, 32) A_Lower(60);

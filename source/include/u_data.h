@@ -48,16 +48,6 @@ struct upgr_data_Seven7s {
    bool in_air;
 };
 
-struct upgr_data_Adrenaline {
-   i32  charge;
-   bool readied;
-};
-
-struct upgr_data_JetBooster {
-   i32  charge;
-   bool discharged;
-};
-
 struct upgr_data_lolsords {
    str origweapon;
 };
@@ -133,12 +123,10 @@ struct upgr_data_HeadsUpDisI {
 
 struct upgr_data {
    struct upgr_data_Seven7s     seven7s;
-   struct upgr_data_Adrenaline  adrenaline;
    struct upgr_data_Flashlight  flashlight;
    struct upgr_data_HeadsUpDisI headsupdisi;
    struct upgr_data_HeadsUpDisM headsupdism;
    struct upgr_data_RPG_B       rpg_b;
-   struct upgr_data_JetBooster  jetbooster;
    struct upgr_data_Magic       magic;
    struct upgr_data_ReactArmor  reactarmor;
    struct upgr_data_ReflexWetw  reflexwetw;

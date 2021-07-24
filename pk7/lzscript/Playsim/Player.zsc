@@ -7,22 +7,14 @@
  * ---------------------------------------------------------------------------|
  */
 
-struct Lith_HermesData {
+extend class Lith_HERMES;
+
+struct HermesData clearScope {
    string logName;
    string bipName;
 }
 
-extend class Lith_HERMES;
-
-private Lith_HermesData m_data;
-
-static void addStatusEffect(Actor mo, string which) {
-   let newStat = Lith_StatusEffect(new(which));
-   let pl      = Lith_Player(mo);
-   newStat.init();
-   newStat.next = pl.m_statFx;
-   pl.m_statFx  = newStat;
-}
+private HermesData m_data;
 
 static clearScope double GetViewHeight(Actor mo) {
    return Lith_Player(mo).player.viewz - mo.pos.z;

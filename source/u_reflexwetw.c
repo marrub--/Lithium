@@ -76,7 +76,7 @@ void Upgr_ReflexWetw_Update(struct upgrade *upgr)
    }
 
    if(pl.waterlevel == 0 && P_ButtonPressed(BT_JUMP) && !InvNum(so_PowerFlight) &&
-      !InvNum(so_RocketBooster) && !UData.leaped &&
+      !has_status(so_StatJetBooster) && !UData.leaped &&
       (!pl.onground || UData.charge < CHARGE_MAX))
    {
       k32 angle = pl.yaw - ACS_VectorAngle(pl.forwardv, pl.sidev);

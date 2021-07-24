@@ -24,12 +24,35 @@ class Lith_MarinePlayer : Lith_Player {
    }
 }
 
-class Lith_RocketBooster : PowerFlight {
-   default {
-      Powerup.Duration 60;
+class Lith_StatJetLag : Lith_StatFx {
+   override void initCb() {basic("LAG", 185);}
+}
 
-      -INVENTORY.HUBPOWER
+class Lith_StatJetBooster : Lith_StatFx {
+   override void initCb() {basic("JET", 60); give("PowerFlight");}
+   override void doneCb() {take("PowerFlight"); addStatFx("Lith_StatJetLag");}
+}
+
+class Lith_StatAdrenalineCharged : Lith_StatFx {
+   override void initCb() {basic("ACD", -1);}
+}
+
+class Lith_StatAdrenalineCharging : Lith_StatFx {
+   override void initCb() {basic("ACH", 35 * 30);}
+   override void doneCb() {
+      S_StartSound("player/adren/ready", lch_body2,
+                   CHANF_NOPAUSE|CHANF_MAYBE_LOCAL|CHANF_UI, 1.0, ATTN_STATIC);
+      Lith_HERMES.log(msg_huds, 1, "_AdrenalineReady");
+      addStatFx("Lith_StatAdrenalineCharged");
    }
+}
+
+class Lith_StatAdrenaline : Lith_StatFx {
+   override void initCb() {
+      basic("ADR", 0);
+      deleteFromPool("Lith_StatAdrenalineCharged");
+   }
+   override void doneCb() {addStatFx("Lith_StatAdrenalineCharging");}
 }
 
 class Lith_MWeapon : Lith_OutcastsWeapon {

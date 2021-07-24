@@ -29,12 +29,12 @@ _uc_body:
  ReflexWetw: {cl: gO, f: ADU--, pr: 5, mul: -5}
 
  ## Marine
- JetBooster:  {cl: pM,               f: A-UR-, mul: -5}
+ JetBooster:  {cl: pM,               f: --U--, mul: -5}
  CyberLegs:   {cl: pM, scr: 1220000, f: ADU--, pr:  4}
  ReactArmor:  {cl: pM, scr: 3500200, f: -D-R-, pr: 20, req: AI   }
  ReactArmor2: {cl: pM, scr: 2990200, f: -----, pr: 10, req: AI RA}
  DefenseNuke: {cl: pM, scr:  580030, f: ----E,         req: AI   }
- Adrenaline:  {cl: pM, scr: 1801000, f: --UR-, pr: 10}
+ Adrenaline:  {cl: pM, scr: 1801000, f: --U--, pr: 10}
 
  ## Cyber-Mage
  Magic:       {cl: pC,               f: --UR-}

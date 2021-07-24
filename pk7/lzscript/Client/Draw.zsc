@@ -546,6 +546,7 @@ private ui void drawInventory(RenderEvent evt) {
    let mo = evt.camera;
 
    string inv_text = "";
+   int y = 0;
 
    inv_text.appendFormat(" %i\n %i\n %i\n %i\n %i\n",
                          mo.countInv("Lith_BulletAmmo"),
@@ -553,33 +554,43 @@ private ui void drawInventory(RenderEvent evt) {
                          mo.countInv("Lith_RocketAmmo"),
                          mo.countInv("Lith_PlasmaAmmo"),
                          mo.countInv("Lith_CannonAmmo"));
+   y += 5 * 8;
 
+   bool any_key = false;
    for(int i = 0; i < keyClasses.size(); ++i) {
       class<Key> kt = keyClasses[i];
       if(kt && mo.countInv(kt)) {
          inv_text = inv_text .. keyText[i];
+         any_key  = true;
       }
    }
+   if(any_key) y += 8;
 
    Screen.drawText(smallFont, Font.CR_WHITE, 0, 0, inv_text,
                    DTA_VirtualWidth,320, DTA_VirtualHeight,240);
+
+   y = drawStatFx(evt, y);
 
    int battery  = Lith_UTIL.pData(pdata_flashbattery);
    int bat_life = lith_light_battery * 35;
 
    if(bat_life > 0 && battery < bat_life) {
-      double y = battery / double(bat_life) * 8.0;
+      double s = battery / double(bat_life) * 8.0;
 
-      Screen.drawTexture(m_texBatteryOutline, false, 0, 0,
+      Screen.drawTexture(m_texBatteryOutline, false, 0, y,
                          DTA_VirtualWidth,320, DTA_VirtualHeight,240);
+
+      y += 2;
 
       vector2 cb, cs;
-      cb = getScSized(2, 2, vsz: (320, 240));
-      cs = getScSized(2, y, vsz: (320, 240));
+      cb = getScSized(2, y, vsz: (320, 240));
+      cs = getScSized(2, s, vsz: (320, 240));
       Screen.setClipRect(int(cb.x), int(cb.y), int(cs.x), int(cs.y));
-      Screen.drawTexture(m_texBattery, false, 2, 2,
+      Screen.drawTexture(m_texBattery, false, 2, y,
                          DTA_VirtualWidth,320, DTA_VirtualHeight,240);
       Screen.clearClipRect();
+
+      y += 10;
    }
 }
 

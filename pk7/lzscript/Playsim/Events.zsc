@@ -345,17 +345,12 @@ override void WorldThingDamaged(WorldEvent ev)
    let player = Lith_Player(src);
 
    if(player) {
-
       let magnum = Lith_Magnum(player.player.readyWeapon);
       if(magnum) {
-         uint rampage = magnum.m_rampage;
          if(dst.health <= 0) {
-            magnum.m_rampage      = min(rampage + 1, 3);
-            magnum.m_multiShot    = 0;
-            magnum.m_buffCooldown = 35 * 4;
-         } else if(rampage == 0) {
-            magnum.m_multiShot    = min(magnum.m_multiShot + 1, 4);
-            magnum.m_buffCooldown = 35 * 2;
+            magnum.lith_addMarksman();
+         } else {
+            magnum.lith_addAccurate();
          }
       }
    } else if(src.CountInv("Lith_MonsterID") && (dst.bCOUNTKILL || dst.Player)) {

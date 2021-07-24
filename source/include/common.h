@@ -115,6 +115,9 @@
 #define PausableTick() do ACS_Delay(1); while(Paused)
 #define WaitPause() while(Paused) ACS_Delay(1)
 
+#define has_status(fx) ServCallI(sm_HasStatFx, fx)
+#define add_status(fx) ServCallI(sm_AddStatFx, fx)
+
 #define Spf s""
 
 #define CVAR  "lith_"

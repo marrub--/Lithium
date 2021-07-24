@@ -51,8 +51,6 @@ Lith_AdviceMarker m_curAdvice;
 
 int m_wasDamaged;
 
-Lith_StatusEffect m_statFx;
-
 property ViewBob: m_VBob;
 
 override void BeginPlay() {
@@ -175,13 +173,17 @@ void Lith_PostTick() {
    else
       Shader.SetEnabled(player, "Lith_Rain", false);
 
-   Lith_ItemVacuum();
+   if(!isFrozen()) {
+      Lith_ItemVacuum();
+   }
 
    Lith_URANUS.LZ(320, 240);
 
-   Lith_ShowMapMarker();
-   Lith_ShowAdviceMarker();
-   Lith_BobWeapon();
+   if(!isFrozen()) {
+      Lith_ShowMapMarker();
+      Lith_ShowAdviceMarker();
+      Lith_BobWeapon();
+   }
 }
 
 override void Tick()

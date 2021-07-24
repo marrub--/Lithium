@@ -406,8 +406,12 @@ action(Weapon) void Lith_FireBullets(double spreadHorz, double spreadVert, int n
    A_FireBullets(spreadHorz, spreadVert, numBullets, damage, puffType, flags, range, tracerType, 7 + FRandom(-1, 0), tracerX + FRandom(-0.7, 0.7));
 }
 
+bool lith_noAmmo(int minAmount = 1) const {
+   return m_ammoType && owner.countInv(m_ammoType) < minAmount;
+}
+
 action(Weapon) State lith_jumpNoAmmo(int minAmount = 1, stateLabel label = "FireEmpty") {
-   if(invoker.m_ammoType && self.countInv(invoker.m_ammoType) < minAmount) {
+   if(invoker.lith_noAmmo(minAmount)) {
       if(label == "FireEmpty") {
          lith_a_setInterpolation(true);
       }

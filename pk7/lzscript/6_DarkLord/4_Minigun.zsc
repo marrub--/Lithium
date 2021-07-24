@@ -12,7 +12,8 @@ class Lith_Minigun : Lith_DWeapon;
 default
 {
    Lith_Weapon.SpawnType "Lith_ChaingunPickup";
-   Lith_Weapon.MagSize 200;
+   Lith_Weapon.MagSize 100;
+   Lith_Weapon.AmmoType "Lith_BulletAmmo";
    Tag "$LITH_INFO_SHORT_Minigun";
    Weapon.UpSound "weapons/minigun/draw";
    Weapon.SlotNumber 4;
@@ -95,7 +96,7 @@ action(Weapon) state Lith_A_MinigunReady(statelabel lb, statelabel l)
 
    if(player.buttons & BT_ATTACK)
    {
-      if(!invoker.Lith_MagEmpty())
+      if(!invoker.lith_noAmmo() && !invoker.lith_magEmpty())
          return ResolveState(l);
       else
       {
@@ -115,6 +116,7 @@ action(Weapon) state Lith_A_MinigunPostReady(statelabel l)
 
 action(Weapon) void Lith_A_MinigunFire()
 {
+   lith_takeAmmo(1);
    Lith_A_MagIncr();
    A_AlertMonsters();
    A_StartSound("weapons/minigun/fire", lch_weapon);

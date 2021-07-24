@@ -200,8 +200,14 @@ identifier,default
 :Portraits:Thoth,lgfx/Portraits/Thoth.png
 :Portraits:Wanderer,lgfx/Portraits/Wanderer.png
 :Stat:ACC,lgfx/Stat/ACC.png
+:Stat:ACD,lgfx/Stat/ACD.png
+:Stat:ACH,lgfx/Stat/ACH.png
+:Stat:ADR,lgfx/Stat/ADR.png
 :Stat:JET,lgfx/Stat/JET.png
+:Stat:LAG,lgfx/Stat/LAG.png
 :Stat:MKM,lgfx/Stat/MKM.png
+:Stat:SWD,lgfx/Stat/SWD.png
+:Stat:SWR,lgfx/Stat/SWR.png
 :Terminal:01602,lgfx/Terminal/01602.png
 :Terminal:Teleport,lgfx/Terminal/Teleport.png
 :UI:ArmorInter,lgfx/UI/ArmorInter.png

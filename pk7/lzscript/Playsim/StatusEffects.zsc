@@ -7,32 +7,147 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_StatusEffect : Thinker abstract {
-   Lith_StatusEffect next;
-   string            snam;
-   string            fnam;
-   textureId         icon;
-   uint              tics;
-
-   void init() {
-      initCb();
-      fnam = "$LITH_STAT_" .. snam;
-      icon = Lith_URANUS.getTextureForName(":Stat:" .. snam);
+extend class Lith_HERMES {
+   static void addStatFx(Actor mo, string which) {
+      Lith_StatFx.addToPool(Lith_Player(mo), which);
    }
 
-   override void tick() {
-      tickCb();
-      if(tics) {
-         --tics;
+   static bool hasStatFx(string which) {
+      return Lith_StatFx.getInPool(which) != null;
+   }
+}
+
+extend class Lith_URANUS {
+   private ui int drawStatFx(RenderEvent evt, int y) {
+      Lith_StatFx stat;
+      for(let it = ThinkerIterator.create("Lith_StatFx", _stat_statfx);
+          (stat = Lith_StatFx(it.next()));)
+      {
+         let fnt = fntSml();
+         let s = StringTable.localize(stat.fnam);
+         let a = (sin((gameTic + evt.fracTic) * 7.0) + 1.5) / 3.0;
+         int x = 0;
+
+         Screen.drawTexture(stat.icon, false, 0, y,
+                            DTA_VirtualWidth,320, DTA_VirtualHeight,240);
+         x += 12;
+         y += 2;
+
+         Screen.drawText(fnt, Font.CR_WHITE, x, y, s,
+                         DTA_VirtualWidth,320, DTA_VirtualHeight,240);
+         x += smallFont.stringWidth(s) + 4;
+
+         if(stat.cnt0 != 0) {
+            let m = "x" .. stat.cnt0;
+            Screen.drawText(fnt, Font.CR_WHITE, x, y, m,
+                            DTA_VirtualWidth,320, DTA_VirtualHeight,240);
+            x += smallFont.stringWidth(m) + 4;
+         }
+
+         if(stat.tics >= 0) {
+            let mins = stat.tics / 35 / 60;
+            let secs = stat.tics / 35.0 % 60.0;
+            let t = string.format("%i:%04.1f", mins, secs);
+            Screen.drawText(fnt, Font.CR_SAPPHIRE, x, y, t,
+                            DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                            DTA_LegacyRenderStyle,STYLE_TRANSLUCENT,
+                            DTA_Alpha,a);
+         }
+         y += 9;
+      }
+      return y;
+   }
+}
+
+class Lith_StatFx : Thinker abstract;
+
+string      snam;
+string      fnam;
+textureId   icon;
+uint        tics;
+int         cnt0;
+Lith_Player plyr;
+
+static Lith_StatFx addToPool(Lith_Player plyr, class<Lith_StatFx> which) {
+   Lith_StatFx stat;
+   for(let it = ThinkerIterator.create("Lith_StatFx", _stat_statfx);
+       (stat = Lith_StatFx(it.next()));)
+   {
+      if(stat is which) {
+         stat.init(stat.plyr);
+         return stat;
       }
    }
-
-   virtual void initCb() {}
-   virtual void tickCb() {}
+   stat = Lith_StatFx(new(which));
+   stat.init(plyr);
+   return stat;
 }
 
-class Lith_StatJetBooster : Lith_StatusEffect {
-   override void initCb() {snam = "JET"; tics = 35 * 7;}
+static Lith_StatFx getInPool(class<Lith_StatFx> which) {
+   Lith_StatFx stat;
+   for(let it = ThinkerIterator.create("Lith_StatFx", _stat_statfx);
+       (stat = Lith_StatFx(it.next()));)
+   {
+      if(stat is which) {
+         return stat;
+      }
+   }
+   return null;
 }
+
+static void deleteFromPool(class<Lith_StatFx> which) {
+   Lith_StatFx stat;
+   for(let it = ThinkerIterator.create("Lith_StatFx", _stat_statfx);
+       (stat = Lith_StatFx(it.next()));)
+   {
+      if(stat is which) {
+         stat.destroy();
+         return;
+      }
+   }
+}
+
+void basic(string snam_, uint tics_) {
+   snam = snam_;
+   tics = tics_;
+}
+
+void give(class<Inventory> which, int n = 1) {
+   plyr.giveInventory(which, n);
+}
+
+void take(class<Inventory> which, int n = int.MAX) {
+   plyr.takeInventory(which, n);
+}
+
+void addStatFx(class<Lith_StatFx> which) {
+   addToPool(plyr, which);
+}
+
+void init(Lith_Player plyr_) {
+   changeStatNum(_stat_statfx);
+   plyr = plyr_;
+   initCb();
+   fnam = "$LITH_STAT_" .. snam;
+   icon = Lith_URANUS.getTextureForName(":Stat:" .. snam);
+}
+
+override void tick() {
+   if(level.isFrozen()) return;
+   tickCb();
+   if(tics > 0) {
+      --tics;
+   } else if(tics == 0) {
+      destroy();
+   }
+}
+
+override void onDestroy() {
+   doneCb();
+}
+
+virtual void initCb() {}
+virtual void tickCb() {}
+virtual void doneCb() {}
 
 /* EOF */

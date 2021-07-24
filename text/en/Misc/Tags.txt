@@ -59,6 +59,14 @@
 == \#TAG_Weredragon      | Weredragon
 
 ## Status Effects ------------------------------------------------------------|
-== \#STAT_JET | Booster Cooldown
+== \#STAT_JET | Jet Booster
+== \#STAT_LAG | Jetlagged
+== \#STAT_MKM | Marksman
+== \#STAT_ACC | Accurate
+== \#STAT_SWR | Shadow-walker
+== \#STAT_SWD | Silence of Shadows
+== \#STAT_ACD | Adrenaline Ready
+== \#STAT_ACH | Adrenaline Charging
+== \#STAT_ADR | Adrenaline Active
 
 ## EOF

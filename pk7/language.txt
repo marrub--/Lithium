@@ -1816,7 +1816,15 @@
 "LITH_TAG_Steggles" = "steggles";
 "LITH_TAG_UndeadWarrior" = "Undead Warrior";
 "LITH_TAG_Weredragon" = "Weredragon";
-"LITH_STAT_JET" = "Booster Cooldown";
+"LITH_STAT_JET" = "Jet Booster";
+"LITH_STAT_LAG" = "Jetlagged";
+"LITH_STAT_MKM" = "Marksman";
+"LITH_STAT_ACC" = "Accurate";
+"LITH_STAT_SWR" = "Shadow-walker";
+"LITH_STAT_SWD" = "Silence of Shadows";
+"LITH_STAT_ACD" = "Adrenaline Ready";
+"LITH_STAT_ACH" = "Adrenaline Charging";
+"LITH_STAT_ADR" = "Adrenaline Active";
 "LITH_ACTIVATE" = "Activate";
 "LITH_AUTOGROUPS" = "Active Auto-groups";
 "LITH_BUY" = "Buy";

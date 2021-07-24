@@ -76,7 +76,7 @@ pD:
    d_700e:     [2, 700Express,  NMag       ]
    d_4bore:    [3, 4Bore,       AMag Shell ]
    d_shrapnel: [3, ShrapnelGun, Ammo Shell ]
-   d_minigun:  [4, Minigun,     NMag       ]
+   d_minigun:  [4, Minigun,     AMag Bullet]
    d_drocket:  [5, DualRocket,  Ammo Rocket]
    d_fatmac:   [6, FatMac,      Ammo Plasma]
    d_fortune:  [7, FortuneGun,  AMag Cannon]
