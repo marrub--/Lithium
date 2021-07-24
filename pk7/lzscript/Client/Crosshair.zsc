@@ -13,6 +13,33 @@
 
 extend class Lith_URANUS;
 
+static clearScope color xhairColor() {
+   uint r = clamp(lith_xhair_r, 0, 255);
+   uint g = clamp(lith_xhair_g, 0, 255);
+   uint b = clamp(lith_xhair_b, 0, 255);
+   return (r << 16) | (g << 8) | (b << 0);
+}
+
+static clearScope textureId xhairB() {
+   static const string[] XB_GFX = {
+      ":XHairs:crossb",
+      ":XHairs:circleb", ":XHairs:deltab",  ":XHairs:ovalb",
+      ":XHairs:basicb",  ":XHairs:delearb", ":XHairs:finib",
+      ":XHairs:angleb",  ":XHairs:dotb",    ":XHairs:xpb"
+   };
+   return getTextureForName(XB_GFX[clamp(lith_xhair_style, 0, XB_GFX.size())]);
+}
+
+static clearScope textureId xhairW() {
+   static const string[] XW_GFX = {
+      ":XHairs:crossw",
+      ":XHairs:circlew", ":XHairs:deltaw",  ":XHairs:ovalw",
+      ":XHairs:basicw",  ":XHairs:delearw", ":XHairs:finiw",
+      ":XHairs:anglew",  ":XHairs:dotw",    ":XHairs:xpw"
+   };
+   return getTextureForName(XW_GFX[clamp(lith_xhair_style, 0, XW_GFX.size())]);
+}
+
 private ui void drawCrosshair(RenderEvent evt) {
    let pl = evt.camera;
 
@@ -47,30 +74,12 @@ private ui void drawCrosshair(RenderEvent evt) {
    uint a = clamp(lith_xhair_a, 0, 255);
 
    if(lith_xhair_enable && a) {
-      static const string[] XB_GFX = {
-         ":XHairs:crossb",
-         ":XHairs:circleb", ":XHairs:deltab",  ":XHairs:ovalb",
-         ":XHairs:basicb",  ":XHairs:delearb", ":XHairs:finib",
-         ":XHairs:angleb",  ":XHairs:dotb",    ":XHairs:xpb"
-      };
-      static const string[] XW_GFX = {
-         ":XHairs:crossw",
-         ":XHairs:circlew", ":XHairs:deltaw",  ":XHairs:ovalw",
-         ":XHairs:basicw",  ":XHairs:delearw", ":XHairs:finiw",
-         ":XHairs:anglew",  ":XHairs:dotw",    ":XHairs:xpw"
-      };
-
-      int style = lith_xhair_style;
-      if(style >= XW_GFX.size()) {
-         style = 0;
-      }
-
-      textureId xhb = getTextureForName(XB_GFX[style]);
-      textureId xhw = getTextureForName(XW_GFX[style]);
+      textureId xhb = xhairB();
+      textureId xhw = xhairW();
       color     c   = xhairColor();
 
-      int bsx, bsy; [bsx, bsy] = TexMan.GetSize(xhb);
-      int wsx, wsy; [wsx, wsy] = TexMan.GetSize(xhw);
+      int bsx, bsy; [bsx, bsy] = TexMan.getSize(xhb);
+      int wsx, wsy; [wsx, wsy] = TexMan.getSize(xhw);
 
       double xhx = xh.x - bsx/2.0;
       double xhy = xh.y - bsy/2.0;

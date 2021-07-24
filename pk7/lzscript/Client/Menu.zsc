@@ -8,38 +8,64 @@
  */
 
 class Lith_MenuDelegate : MenuDelegateBase {
+   private ui ListMenuDescriptor     m_lastDesc;
+   private ui ListMenuItemSelectable m_lastSel;
+   private ui vector2                m_selPos;
+
+   private ui static vector2 getSelPos(ListMenuItemSelectable sel) {
+      return sel ? (sel.getX() - 8.0, sel.getY() + sel.mHeight / 4.0) : (0, 0);
+   }
+
+   private ui static ListMenuItemSelectable getSelItem(ListMenuDescriptor desc, int which) {
+      return which >= 0 && which < desc.mItems.size() ?
+         ListMenuItemSelectable(desc.mItems[which]) :
+         null;
+   }
+
    override void playSound(name sndName) {
+      if(sndName == 'menu/cursor') {
+         return;
+      }
       string sndStr = sndName;
       sound  snd    = sndStr;
       S_StartSound(snd, lch_body, CHANF_UI, snd_menuVolume);
    }
 
    override bool drawSelector(ListMenuDescriptor desc) {
-      if(desc.mSelectedItem >= 0) {
-         let sel = ListMenuItemSelectable(desc.mItems[desc.mSelectedItem]);
-         if(sel) {
-            double x = sel.getX() - 8.0;
-            double y = sel.getY() + sel.mHeight / 4.0;
-            int dw = desc.displayWidth();
-            int dh = desc.displayHeight();
-            textureId tex = Lith_URANUS.getTextureForName(":XHairs:xpw");
-            double a = (sin(gameTic * 5.0) + 1.0) / 2.0;
-            color  c = Lith_URANUS.xhairColor();
-            if(dw == ListMenuDescriptor.CleanScale) {
-               Screen.DrawTexture(tex, false, x, y,
-                                  DTA_Clean,true,
-                                  DTA_KeepRatio,true,
-                                  DTA_FillColor,c,
-                                  DTA_Alpha,a);
-            } else {
-               Screen.DrawTexture(tex, false, x, y,
-                                  DTA_VirtualWidth,dw,
-                                  DTA_VirtualHeight,dh,
-                                  DTA_FillColor,c,
-                                  DTA_Alpha,a);
-            }
+      let num = desc.mSelectedItem;
+      let sel = getSelItem(desc, num);
+
+      if(m_lastDesc != desc) {
+         m_selPos   = (0, 0);
+         m_lastDesc = desc;
+      } else if(sel != m_lastSel) {
+         S_StartSound("menu/cursor", lch_body, CHANF_UI, snd_menuVolume);
+      }
+      m_lastSel = sel;
+
+      if(sel) {
+         let pos  = getSelPos(sel);
+         m_selPos = Lith_UTIL.vec2Lerp(m_selPos, pos, 0.25);
+         let dw   = desc.displayWidth();
+         let dh   = desc.displayHeight();
+         let a    = (sin(gameTic * 10.0) + 1.0) / 2.0;
+         let c    = Lith_URANUS.xhairColor();
+         let tex  = Lith_URANUS.xhairW();
+         if(dw == ListMenuDescriptor.CleanScale) {
+            Screen.drawTexture(tex, false, m_selPos.x, m_selPos.y,
+                               DTA_Clean,true,
+                               DTA_KeepRatio,true,
+                               DTA_FillColor,c,
+                               DTA_Alpha,a);
+         } else {
+            Screen.drawTexture(tex, false, m_selPos.x, m_selPos.y,
+                               DTA_VirtualWidth,dw,
+                               DTA_VirtualHeight,dh,
+                               DTA_FillColor,c,
+                               DTA_Alpha,a);
          }
       }
+
       return true;
    }
 
@@ -63,7 +89,7 @@ class Lith_MenuDelegate : MenuDelegateBase {
 
 extend class Lith_URANUS;
 
-private transient ui double m_ScreenDim;
+private transient ui double m_screenDim;
 
 private ui void tickMenu() {
    if(!(menuDelegate is "Lith_MenuDelegate")) {
@@ -72,14 +98,14 @@ private ui void tickMenu() {
    }
 }
 
-private ui void drawMenu() {
+private ui void drawMenu(RenderEvent evt) {
    if(menuActive && !Menu.getCurrentMenu().dontDim) {
-      m_ScreenDim = Lith_UTIL.lerp(m_ScreenDim, 0.75, 0.3);
+      m_screenDim = Lith_UTIL.lerp(m_screenDim, 0.75, 0.3);
    } else {
-      m_ScreenDim = Lith_UTIL.lerp(m_ScreenDim, 0.0, 0.1);
+      m_screenDim = Lith_UTIL.lerp(m_screenDim, 0.0, 0.1);
    }
 
-   Screen.dim("black", m_ScreenDim, 0, 0, Screen.getWidth(), Screen.getHeight());
+   Screen.dim("black", m_screenDim, 0, 0, Screen.getWidth(), Screen.getHeight());
 }
 
 /* EOF */

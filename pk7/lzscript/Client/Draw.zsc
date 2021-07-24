@@ -17,8 +17,6 @@
 
 extend class Lith_URANUS;
 
-/* Types ------------------------------------------------------------------- */
-
 enum DrawType {
    _type_clipSet,
    _type_clipClear,
@@ -58,8 +56,6 @@ struct FadeMsg {
    uint8 Alph;
 }
 
-/* Members ----------------------------------------------------------------- */
-
 private transient play DrawData[8000] m_D;
 private transient play uint m_DPtr;
 private transient play FadeMsg[256] m_FadeMsg;
@@ -73,8 +69,6 @@ private transient Shape2DTransform m_RectXf;
 private transient Shape2D m_Rect;
 
 private transient bool m_English;
-
-/* Static Functions -------------------------------------------------------- */
 
 static void LZ(int w, int h) {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
@@ -341,8 +335,6 @@ static clearScope textureId getTextureForName(string tex) {
    return TexMan.CheckForTexture(tex, TexMan.Type_Any);
 }
 
-/* Member Functions -------------------------------------------------------- */
-
 override void onRegister() {
    projectRegister();
 
@@ -481,7 +473,7 @@ override void renderOverlay(RenderEvent evt) {
       }
    }
 
-   drawMenu();
+   drawMenu(evt);
 }
 
 clearScope vector2 getScSized(double x, double y, bool kludge = false, vector2 vsz = (0.0, 0.0)) {
@@ -522,28 +514,28 @@ private ui void drawNearbyItems(RenderEvent evt) {
    }
 }
 
-static const string keyClasses[] = {
-   "BlueCard",  "RedCard",  "YellowCard",
-   "BlueSkull", "RedSkull", "YellowSkull",
-
-   "ChexBlueCard", "ChexRedCard", "ChexYellowCard",
-
-   "KeyBlue", "KeyGreen", "KeyYellow"
-};
-
-static const string keyText[] = {
-   "\cn", "\ca", "\cf",
-   "\cn", "\ca", "\cf",
-
-   "\cn", "\ca", "\cf",
-
-   "\cn", "\cd", "\cf"
-};
-
 private transient ui textureId m_texBatteryOutline;
 private transient ui textureId m_texBattery;
 
 private ui void drawInventory(RenderEvent evt) {
+   static const string keyClasses[] = {
+      "BlueCard",  "RedCard",  "YellowCard",
+      "BlueSkull", "RedSkull", "YellowSkull",
+
+      "ChexBlueCard", "ChexRedCard", "ChexYellowCard",
+
+      "KeyBlue", "KeyGreen", "KeyYellow"
+   };
+
+   static const string keyText[] = {
+      "\cn", "\ca", "\cf",
+      "\cn", "\ca", "\cf",
+
+      "\cn", "\ca", "\cf",
+
+      "\cn", "\cd", "\cf"
+   };
+
    if(m_texBatteryOutline.isNull()) {
       m_texBatteryOutline = getTextureForName(":HUD:BatteryOutline");
    }
@@ -617,13 +609,6 @@ Font fntAny(name name, bool noUnicode = false) const {
    else if(name == 'ltrmfont') return fntTrm(noUnicode);
    else if(name == 'bigupper') return fntBig(noUnicode);
    else                        return Font.getFont(name);
-}
-
-static clearScope color xhairColor() {
-   uint r = clamp(lith_xhair_r, 0, 255);
-   uint g = clamp(lith_xhair_g, 0, 255);
-   uint b = clamp(lith_xhair_b, 0, 255);
-   return (r << 16) | (g << 8) | (b << 0);
 }
 
 /* EOF */

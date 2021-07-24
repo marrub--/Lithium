@@ -204,7 +204,7 @@ private ui void drawDmgNums(RenderEvent evt) {
                a = 1.0;
             }
 
-            Screen.DrawText(fnt, dnum.m_cr, xf, yf, txt,
+            Screen.drawText(fnt, dnum.m_cr, xf, yf, txt,
                             DTA_VIRTUALWIDTH,320, DTA_VIRTUALHEIGHT,240,
                             DTA_ALPHA,a*lith_hud_damagealpha,
                             DTA_LEGACYRENDERSTYLE,STYLE_TRANSLUCENT);
