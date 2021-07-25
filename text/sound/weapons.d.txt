@@ -41,6 +41,9 @@ weapons {
    == lsounds/WeaponsD/4Bore
    \4bore.fire Fire # a1337spy
 
+   == lsounds/WeaponsD/ShrapnelGun
+   shrapnel.fire Fire # EYE: Divine Cybermancy
+
    minigun {
       == lsounds/WeaponsD/Minigun
       fire   Fire        # Serious Sam: The First Encounter HD

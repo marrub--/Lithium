@@ -60,11 +60,28 @@ Select:
 
 Fire:
    #### # 0 lith_jumpNoAmmo(4);
-   #### # 0 lith_takeAmmo(4);
-   PISG A 3 {for(int i = 0; i < 6; i++) Lith_A_FireShrapnel();}
-   PISG A 3 {for(int i = 0; i < 4; i++) Lith_A_FireShrapnel();}
-   PISG A 3 {for(int i = 0; i < 2; i++) Lith_A_FireShrapnel();}
-   PISG A 34;
+   PISG A 0 {
+      lith_takeAmmo(4);
+      A_StartSound("weapons/shrapnel/fire", lch_weapon);
+      A_AlertMonsters();
+      A_GunFlash("DummyFlash");
+      Lith_A_RecoilUp(8);
+      lith_a_setInterpolation(true);
+   }
+   PISG A 1 offset(0, 70) {for(int i = 0; i < 6; i++) Lith_A_FireShrapnel();}
+   PISG A 1 offset(0, 75);
+   PISG A 1 offset(0, 74);
+   PISG A 1 offset(0, 72) {for(int i = 0; i < 4; i++) Lith_A_FireShrapnel();}
+   PISG A 1 offset(0, 60);
+   PISG A 1 offset(0, 55);
+   PISG A 1 offset(0, 50) {for(int i = 0; i < 2; i++) Lith_A_FireShrapnel();}
+   PISG A 1 offset(0, 45);
+   PISG A 1 offset(0, 40);
+   PISG A 1 offset(0, 36);
+   PISG A 1 offset(0, 34);
+   PISG A 1 offset(0, 33);
+   PISG A 1 offset(0, 32);
+   PISG A 10 lith_a_setInterpolation(false);
    goto ReadySelector;
 FireEmpty:
    PISG A 2 offset(0, 42);
