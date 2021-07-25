@@ -13,6 +13,14 @@ brightmap sprite LSHTA0 {map "lglstuff/brightmaps/LSHTA0.png"}
 brightmap sprite MARPA0 {map "lglstuff/brightmaps/MARPA0.png"}
 brightmap sprite MARPB0 {map "lglstuff/brightmaps/MARPB0.png"}
 brightmap sprite MARPC0 {map "lglstuff/brightmaps/MARPC0.png"}
+brightmap sprite SDSGA0 {map "lglstuff/brightmaps/SDSGA0.png"}
+brightmap sprite SDSGB0 {map "lglstuff/brightmaps/SDSGB0.png"}
+brightmap sprite SDSGC0 {map "lglstuff/brightmaps/SDSGC0.png"}
+brightmap sprite SDSGD0 {map "lglstuff/brightmaps/SDSGD0.png"}
+brightmap sprite SDSGE0 {map "lglstuff/brightmaps/SDSGE0.png"}
+brightmap sprite SDSGF0 {map "lglstuff/brightmaps/SDSGF0.png"}
+brightmap sprite SDSGG0 {map "lglstuff/brightmaps/SDSGG0.png"}
+brightmap sprite SDSGH0 {map "lglstuff/brightmaps/SDSGH0.png"}
 brightmap sprite SHTGF0 {map "lglstuff/brightmaps/SHTGF0.png"}
 brightmap sprite SHTGG0 {map "lglstuff/brightmaps/SHTGG0.png"}
 brightmap sprite SHTGH0 {map "lglstuff/brightmaps/SHTGH0.png"}
