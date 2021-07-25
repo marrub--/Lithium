@@ -15,6 +15,10 @@ extend class Lith_HERMES {
    static bool hasStatFx(string which) {
       return Lith_StatFx.getInPool(which) != null;
    }
+
+   static void remStatFx(string which) {
+      Lith_StatFx.deleteFromPool(which);
+   }
 }
 
 extend class Lith_URANUS {

@@ -117,6 +117,7 @@
 
 #define has_status(fx) ServCallI(sm_HasStatFx, fx)
 #define add_status(fx) ServCallI(sm_AddStatFx, fx)
+#define rem_status(fx) ServCallI(sm_RemStatFx, fx)
 
 #define Spf s""
 

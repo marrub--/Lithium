@@ -34,7 +34,7 @@ _uc_body:
  ReactArmor:  {cl: pM, scr: 3500200, f: -D-R-, pr: 20, req: AI   }
  ReactArmor2: {cl: pM, scr: 2990200, f: -----, pr: 10, req: AI RA}
  DefenseNuke: {cl: pM, scr:  580030, f: ----E,         req: AI   }
- Adrenaline:  {cl: pM, scr: 1801000, f: --U--, pr: 10}
+ Adrenaline:  {cl: pM, scr: 1801000, f: -DU--, pr: 10}
 
  ## Cyber-Mage
  Magic:       {cl: pC,               f: --UR-}

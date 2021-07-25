@@ -40,4 +40,10 @@ void Upgr_Adrenaline_Update(struct upgrade *upgr) {
    }
 }
 
+void Upgr_Adrenaline_Deactivate(struct upgrade *upgr) {
+   rem_status(so_StatAdrenaline);
+   rem_status(so_StatAdrenalineCharging);
+   rem_status(so_StatAdrenalineCharged);
+}
+
 /* EOF */
