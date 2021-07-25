@@ -133,7 +133,6 @@
 == \#st_labl_gui | GUI
 == \#st_labl_hud | HUD
 == \#st_labl_itm | Items
-== \#st_labl_lit | Flashlight
 == \#st_labl_pgm | Post-game
 == \#st_labl_ply | Player
 == \#st_labl_wep | Weapons

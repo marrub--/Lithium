@@ -84,7 +84,6 @@
 == \#st_labl_gui | ディスプレイ
 == \#st_labl_hud | HUD
 == \#st_labl_itm | アイテム
-== \#st_labl_lit | 懐中電灯
 == \#st_labl_log | ログ
 == \#st_labl_pgm | NG+
 == \#st_labl_ply | プレイヤー

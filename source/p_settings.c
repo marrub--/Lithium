@@ -280,9 +280,7 @@ struct setting const st_itm[] = {
    {S_enume, "player_itemdisp",      S_cvInteg, S_bndi(_itm_disp_none, _itm_disp_max), "itmdisp"},
    {S_enume, "player_ammodisp",      S_cvInteg, S_bndi(_itm_disp_none, _itm_disp_max), "itmdisp"},
    {S_fixed, "player_itemdispalpha", S_cvFixed, S_bndk(0.0, 1.0), "mult"},
-};
-
-struct setting const st_lit[] = {
+   {S_empty},
    {S_integ, "light_battery", S_cvInteg, S_bndi(0, 60), "secs"},
    {S_integ, "light_regen",   S_cvInteg, S_bndi(1, 10), "mult"},
    {S_empty},
@@ -380,11 +378,11 @@ struct {
    Typ(gui),
    Typ(hud),
    Typ(itm),
-   Typ(lit),
-   Typ(pgm),
    Typ(ply),
    Typ(wep),
    Typ(wld),
+
+   Typ(pgm),
 #undef Typ
 };
 

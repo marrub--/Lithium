@@ -1660,7 +1660,6 @@
 "LITH_st_labl_gui" = "GUI";
 "LITH_st_labl_hud" = "HUD";
 "LITH_st_labl_itm" = "Items";
-"LITH_st_labl_lit" = "Flashlight";
 "LITH_st_labl_pgm" = "Post-game";
 "LITH_st_labl_ply" = "Player";
 "LITH_st_labl_wep" = "Weapons";
@@ -2976,7 +2975,6 @@
 "LITH_st_labl_gui" = "ディスプレイ";
 "LITH_st_labl_hud" = "HUD";
 "LITH_st_labl_itm" = "アイテム";
-"LITH_st_labl_lit" = "懐中電灯";
 "LITH_st_labl_log" = "ログ";
 "LITH_st_labl_pgm" = "NG+";
 "LITH_st_labl_ply" = "プレイヤー";
