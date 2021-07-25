@@ -119,7 +119,7 @@ class Lith_FortuneGun : Lith_DWeapon;
 
 default {
    Lith_Weapon.SpawnType "Lith_BFG9000Pickup";
-   Lith_Weapon.MagSize 3;
+   Lith_Weapon.MagSize 2;
    Tag "$LITH_INFO_SHORT_FortuneGun";
    Weapon.SlotNumber 7;
    Weapon.SlotPriority 1;
@@ -141,36 +141,36 @@ action(Weapon) void Lith_A_FireFortune() {
 
 states(Weapon) {
 Ready:
-   PISG A 1 Lith_A_Ready(WRF_ALLOWRELOAD);
+   FORT A 1 Lith_A_Ready(WRF_ALLOWRELOAD);
    loop;
 
 Deselect:
-   PISG A 1 Lith_A_Lower(_raise_slow);
+   FORT A 1 Lith_A_Lower(_raise_slow);
    loop;
 
 Select:
-   PISG A 1 Lith_A_Raise(_raise_slow);
+   FORT A 1 Lith_A_Raise(_raise_slow);
    loop;
 
 Fire:
    #### # 0 lith_jumpNoAmmo(4);
    #### # 0 Lith_A_JumpIfMagEmpty;
    #### # 0 Lith_A_MagIncr;
-   PISG A 25 Lith_A_FireFortune;
+   FORT A 25 Lith_A_FireFortune;
    goto ReadySelector;
 FireEmpty:
-   PISG A 2 offset(0, 42);
-   PISG A 2 offset(0, 38);
-   PISG A 2 offset(0, 35) A_StartSound("weapons/spas/empty", lch_dryweapon);
-   PISG A 1 offset(0, 34);
-   PISG A 1 offset(0, 33);
-   PISG A 1 offset(0, 32);
+   FORT A 2 offset(0, 42);
+   FORT A 2 offset(0, 38);
+   FORT A 2 offset(0, 35) A_StartSound("weapons/spas/empty", lch_dryweapon);
+   FORT A 1 offset(0, 34);
+   FORT A 1 offset(0, 33);
+   FORT A 1 offset(0, 32);
    goto ReadySelector;
 
 Reload:
-   PISG A 1 Lith_A_JumpIfMagFull;
-   PISG A 30 A_StartSound("weapons/fortune/charge", lch_weapon2);
-   PISG A 2 Lith_A_ReloadFinish;
+   FORT A 1 Lith_A_JumpIfMagFull;
+   FORT A 30 A_StartSound("weapons/fortune/charge", lch_weapon2);
+   FORT A 2 Lith_A_ReloadFinish;
    goto ReadySelector;
 }
 
