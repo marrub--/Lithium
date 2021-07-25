@@ -93,7 +93,7 @@ void Upgr_HeadsUpDisI_Render(struct upgrade *upgr)
 {
    if(!pl.hudenabled) return;
 
-   HUD_Log(Cr(purple), 0, -15);
+   HUD_Log(Cr(purple), 0, -10);
 
    UData.score.value = pl.score;
    lerplli(&UData.score);

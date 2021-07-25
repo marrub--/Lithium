@@ -45,7 +45,7 @@ void HUD_Ammo() {
 void Upgr_HeadsUpDisA_Render(struct upgrade *upgr) {
    if(!pl.hudenabled) return;
 
-   HUD_Log(Cr(pink), 0, -5);
+   HUD_Log(Cr(pink), 0, 5);
    HUD_Score("%s \CjSCR", pl.score, sf_lmidfont, Cr(pink));
 
    HUD_WeaponSlots(Cr(wsela1), Cr(wsela2), Cr(wsela3), Cr(wselas), 323, 220);

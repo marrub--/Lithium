@@ -84,7 +84,7 @@ void HUD_Health() {
 void Upgr_HeadsUpDisD_Render(struct upgrade *upgr) {
    if(!pl.hudenabled) return;
 
-   HUD_Log(Cr(blue), 0, -10);
+   HUD_Log(Cr(blue), 0, 0);
    HUD_Score("%s\Cnscr", pl.score, sf_smallfnt, Cr(blue));
 
    if(CVarGetI(sc_hud_showweapons))
