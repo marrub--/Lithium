@@ -199,10 +199,10 @@ Lithiumの雨が宇宙から降り注ぐか。
 
 == \#CLASS_MARINE    | マリーン
 == \#CLASS_CYBERMAGE | サイバメージ
-== \#CLASS_INFORMANT | インフォーマント
-== \#CLASS_ASSASSIN  | アサシン
+== \#CLASS_INFORMANT | \cmインフォーマント
+== \#CLASS_ASSASSIN  | \cmアサシン
 == \#CLASS_DARKLORD  | ダークロード
-== \#CLASS_WANDERER  | ワンダラー
-== \#CLASS_THOTH     | トート
+== \#CLASS_WANDERER  | \cmワンダラー
+== \#CLASS_THOTH     | \cmトート
 
 ## EOF
