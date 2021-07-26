@@ -7,72 +7,73 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_FeuerTest : Actor
-{
-   default
-   {
+class Lith_FeuerTest : Actor {
+   default {
       RenderStyle "Add";
       Scale 0.3;
-
-      +BRIGHT
-      +NOINTERACTION
+      +Bright
+      +NoInteraction
    }
 
-   states
-   {
+   states {
    Spawn:
       BLLT E -1;
       stop;
    }
 }
 
-class Lith_FeuerFX : Actor
-{
-   default
-   {
+class Lith_FeuerFX : Actor {
+   default {
       RenderStyle "Add";
       Scale 1.5;
-
-      +NOINTERACTION
+      +NoInteraction
    }
 
-   states
-   {
+   states {
    Spawn:
       BLLT R 0;
       BLLT R 0 {
-         switch(Random(0, 2)) {
-         case 0: Scale = (-Scale.X,  Scale.Y); break;
-         case 1: Scale = ( Scale.X, -Scale.Y); break;
-         case 2: Scale = (-Scale.X, -Scale.Y); break;
+         if(target) {
+            let dist = distance2D(target);
+            if(dist < 256) {
+               alpha *= dist / 256.0;
+            }
          }
-         Scale *= FRandom(0.5, 1);
+         switch(random(0, 2)) {
+         case 0: scale = (-scale.x,  scale.y); break;
+         case 1: scale = ( scale.x, -scale.y); break;
+         case 2: scale = (-scale.x, -scale.y); break;
+         }
+         scale *= fRandom(0.5, 1);
       }
       BLLT R 10;
-      BLLT R 1 A_FadeOut;
+      BLLT R 1 a_fadeOut;
       stop;
    }
 }
 
-class Lith_FeuerFinal : Actor
-{
-   default
-   {
+class Lith_FeuerFinal : Actor {
+   default {
       Damage 10;
       DamageType "Magic";
       RenderStyle "Add";
       Scale 0.3;
 
       Projectile;
-      +NOGRAVITY
+      +NoGravity
    }
 
-   states
-   {
+   states {
    Spawn:
       BLLT L 0;
    Death:
       BLLT L 5 {
+         if(target) {
+            let dist = distance2D(target);
+            if(dist < 256) {
+               alpha *= dist / 256.0;
+            }
+         }
          for(int i = 0; i < 15; i++)
             A_SpawnItemEx("Lith_FeuerFX", 0,0,0, FRandom(-4,4),FRandom(-4,4),FRandom(-2,2));
          A_StartSound("weapons/feuer/final", lch_body);
@@ -83,10 +84,8 @@ class Lith_FeuerFinal : Actor
    }
 }
 
-class Lith_FeuerExplosion : Actor
-{
-   default
-   {
+class Lith_FeuerExplosion : Actor {
+   default {
       DamageFunction 10;
       DamageType "Magic";
       RenderStyle "Add";
@@ -96,12 +95,17 @@ class Lith_FeuerExplosion : Actor
       +NOGRAVITY
    }
 
-   states
-   {
+   states {
    Spawn:
       BLLT L 1;
    Death:
       BLLT L 5 {
+         if(target) {
+            let dist = distance2D(target);
+            if(dist < 256) {
+               alpha *= dist / 256.0;
+            }
+         }
          for(int i = 0; i < 5; i++)
             A_SpawnItemEx("Lith_FeuerFX", 0,0,0, FRandom(-1,1),FRandom(-1,1),FRandom(-1,1));
          A_StartSound("weapons/feuer/explode", lch_body);
@@ -114,8 +118,7 @@ class Lith_FeuerExplosion : Actor
 
 class Lith_Feuer : Lith_CWeapon;
 
-default
-{
+default {
    Tag "$LITH_INFO_SHORT_Feuer";
    Weapon.SlotNumber 0;
    Weapon.SlotPriority 1;
@@ -123,19 +126,17 @@ default
    Lith_Weapon.AmmoType "Lith_ManaAmmo";
    Inventory.AltHudIcon "SPELA0";
 
-   -WEAPON.NOAUTOFIRE
+   -Weapon.NoAutofire
 }
 
-action(Weapon) void Lith_A_FireFeuer(bool left)
-{
+action(Weapon) void Lith_A_FireFeuer(bool left) {
    CallACS("Lith_Feuer", left, true);
    A_AlertMonsters();
    lith_takeAmmo(15);
    A_StartSound("weapons/feuer/fire", lch_weapon);
 }
 
-states(Weapon)
-{
+states(Weapon) {
 Ready:
    TNT1 A 1 bright Lith_A_Ready;
    loop;
@@ -151,11 +152,6 @@ SelectLoop:
    loop;
 
 Fire:
-   /*
-   TNT1 A 0 ACS_NamedExecuteWithResult("Lith_Feuer", true,  false);
-   TNT1 A 1 ACS_NamedExecuteWithResult("Lith_Feuer", false, false);
-   TNT1 A 1 A_ReFire;
-   */
    TNT1 A 0 lith_jumpNoAmmo(30);
    TNT1 A 15 Lith_A_FireFeuer(true);
    TNT1 A 20 Lith_A_FireFeuer(false);
