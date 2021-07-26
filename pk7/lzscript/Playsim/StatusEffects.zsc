@@ -39,13 +39,13 @@ extend class Lith_URANUS {
 
          Screen.drawText(fnt, Font.CR_WHITE, x, y, s,
                          DTA_VirtualWidth,320, DTA_VirtualHeight,240);
-         x += smallFont.stringWidth(s) + 4;
+         x += fnt.stringWidth(s) + 4;
 
          if(stat.cnt0 != 0) {
             let m = "x" .. stat.cnt0;
             Screen.drawText(fnt, Font.CR_WHITE, x, y, m,
                             DTA_VirtualWidth,320, DTA_VirtualHeight,240);
-            x += smallFont.stringWidth(m) + 4;
+            x += fnt.stringWidth(m) + 4;
          }
 
          if(stat.tics >= 0) {

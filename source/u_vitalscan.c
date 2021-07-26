@@ -170,7 +170,7 @@ void Upgr_VitalScan_Render(struct upgrade *upgr) {
    /* Hit indicator */
    if(UData.hdelta && CheckFade(fid_vscan)) {
       PrintTextFmt("-%i", UData.hdelta);
-      PrintTextF(sf_smallfnt, CR_RED, x+40,4, y+30,2, fid_vscan);
+      PrintTextFX(sf_smallfnt, CR_RED, x+40,4, y+30,2, fid_vscan, _u_no_unicode);
    }
 
    /* Tag and health */

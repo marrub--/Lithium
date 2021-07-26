@@ -7,13 +7,19 @@
 ## ---------------------------------------------------------------------------|
 
 ## Tags ----------------------------------------------------------------------|
-
 == \#TAG_BlurSphere    | フラグマ
 == \#TAG_GreyHam       | ぐれー　はむ
 == \#TAG_Megasphere    | タオッチアン
 == \#TAG_SoulSphere    | ハート
 == \#TAG_SteggleSphere | steggleスフィア
 == \#TAG_ShobonSphere  | しょぼんスフィア
+
+== \#TAG_ManaAmmo   | マナ
+== \#TAG_BulletAmmo | 弾
+== \#TAG_ShellAmmo  | シェル
+== \#TAG_RocketAmmo | ロケット
+== \#TAG_PlasmaAmmo | エナジー
+== \#TAG_CannonAmmo | ダークエナジー
 
 == \#TAG_Weapon0 | スロット1武器(下)
 == \#TAG_Weapon1 | スロット1武器(上)
@@ -50,5 +56,16 @@
 == \#TAG_SpectralWarrior | スペクトル武士
 == \#TAG_UndeadWarrior   | アンデッド武士
 == \#TAG_Weredragon      | ウェアドラゴン
+
+## Status Effects ------------------------------------------------------------|
+== \#STAT_JET | ジェットブースター
+== \#STAT_LAG | ジェットラグ
+== \#STAT_MKM | マークスマン
+== \#STAT_ACC | アキュレイト
+== \#STAT_SWR | シャドーウォーカー
+== \#STAT_SWD | サイレンスオブシャドー
+== \#STAT_ACD | アドレナリン可
+== \#STAT_ACH | アドレナリンチャージ中
+== \#STAT_ADR | アドレナリンアクティブ
 
 ## EOF

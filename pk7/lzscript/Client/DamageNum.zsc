@@ -216,7 +216,7 @@ private ui void drawDmgNums(RenderEvent evt) {
 }
 
 private ui void drawScrNums(RenderEvent evt) {
-   Font fnt = fntSml(true);
+   Font fnt = fntSml();
    int  h   = fnt.getHeight();
 
    if(m_scrNumHead) {
