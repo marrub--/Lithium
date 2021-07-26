@@ -78,6 +78,7 @@
 * Marphy Black   * Doom 2 Minor Sprite Fixes sprites are included in the mod
 * Minigunner     * Smooth explosion sprites
 *                * Missile Launcher sprite
+* Dr Cosmobyte   * Plasma Diffuser sprite
 * Ryan Cordell   * Green/blue armor pickups
 *                * XDeaths for the Cacodemon, Demon, Archvile, and Revenant
 *                * Archvile attack effects
