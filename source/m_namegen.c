@@ -2,7 +2,7 @@
  *
  * Distributed under the CC0 public domain license.
  * By Alison G. Watson. Attribution is encouraged, though not required.
- * Predefined names and suffixes mostly taken from Kyle873's Doom RPG.
+ * Predefined names and titles mostly taken from Kyle873's Doom RPG.
  * Used with permission.
  * See licenses/cc0.txt for more information.
  *
@@ -16,152 +16,104 @@
 #include "common.h"
 #include "w_world.h"
 
-/* Static Objects ---------------------------------------------------------- */
+enum {
+   _vty_bck,
+   _vty_fro,
+   _vty_max,
+};
+
+struct word_root {
+   i32  vty;
+   cstr root;
+};
+
+/*
+ * consonants:
+ * q [kʷ] k [k]
+ * v [v] s [ɕ] t [t]
+ * r [ɻ] l [l]
+ *
+ * vowels:
+ * u [u] o [o] ó [ɒ] (back)
+ * i [i] e [e] a [a] (front)
+ */
 
 static
-cstr const syll[] = {
-   "ka",  "k'",   "khi", "kaz", "kr",
-   "ga",  "go",   "gor", "got", "gn", "gl",
-   "sha", "sk",   "shu", "shi", "si",
-   "zk",  "zan",
-   "th",  "tch",  "ch",  "tt",  "t'", "tar", "cth",
-   "nil", "n'",
-   "do",  "dak'", "dax",
-   "fta", "h",    "ff",
-   "bur", "bel'",
-   "ma",  "mo",   "mar",
-   "rly", "l",    "r'",
-   "u",   "ul",
-   "eh",  "er",
-   "ver", "xel'", "xe",
+cstr const vowels[_vty_max][3] = {
+   {"u", "o", "ó"},
+   {"i", "e", "a"},
 };
 
 static
-cstr const lulz[] = {
-   "explod",
-   "fuck",
-   "help",
-   "kdizd",
-   "ohgodwhat",
-   "ohno",
-   "why",
+struct word_root const roots[] = {
+   {_vty_bck, "Kusu"},  /* i decay, i rot */
+   {_vty_bck, "Luqó"},  /* i debauch, i corrupt */
+   {_vty_bck, "Lós"},   /* i give, i destroy, i conquer */
+   {_vty_bck, "Qós"},   /* i remove, i delete, i purge */
+   {_vty_bck, "Rolv"},  /* i surrender, i stop, i discontinue */
+   {_vty_bck, "Sutk"},  /* i sink, i decline */
+   {_vty_bck, "Vók"},   /* i create */
+   {_vty_fro, "Aei"},   /* i anger, i defile */
+   {_vty_fro, "Iqti"},  /* i menace, i dismay */
+   {_vty_fro, "Kve"},   /* i transcend, i surpass */
+   {_vty_fro, "Mek"},   /* i desynthesize, i uncreate */
+   {_vty_fro, "Salek"}, /* i betray, i deceive */
+   {_vty_fro, "Silv"},  /* i skip, i proceed, i go ahead */
+   {_vty_fro, "Viqka"}, /* i envigor, i enhance, i rule */
 };
 
 static
-cstr const name[] = {
-   "Alevot",
-   "Arafonad",
-   "Araxidak",
-   "Atund",
-   "Axurador",
-   "Bagurar",
+cstr const adjectives[] = {
+   "k0q1", /* understated, scheming */
+   "k0r",  /* stagnant */
+   "k0r1", /* something that rushes to the top */
+   "k1t",  /* animated */
+   "k1t1", /* insane, over-powered */
+   "l0l0", /* slow */
+   "l0l2", /* swift */
+   "l0t2", /* cowardly */
+   "l1v1", /* the last alive of a group */
+   "l2q0", /* abnormal, weak */
+   "q0l",  /* writer */
+   "q2r0", /* brave */
+   "r1q1", /* raging, tyrannical, amazing */
+   "s1m0", /* warrior */
+   "s1v0", /* odd, strange */
+   "s2l",  /* normal, strong */
+   "t1v",  /* murderer */
+   "t2r",  /* something that slowly reaches a pinnacle point */
+};
+
+static
+cstr const inflections[] = {
+   "",  /* + past */
+   "e", /* - past */
+   "ó", /* + present */
+   "i", /* - present (der. var) */
+   "u", /* + future (der. Vók) */
+   "a", /* - future (der. vak) */
+   "o", /* gone from all time */
+};
+
+static
+cstr const amusing_name[] = {
    "Be'elzebubba",
-   "Caethind",
-   "Chaotica",
-   "Chattur'gha",
-   "Dak'shira",
-   "Dethul",
-   "Duri",
-   "Edorir",
-   "Eradicus",
-   "Erelak",
-   "Eroam",
-   "Errexioth",
-   "Faellat",
-   "Falau",
-   "Fauror",
-   "Fismit",
-   "G'ldethi",
-   "Ginavak",
-   "Gorgoth",
-   "Gowron",
-   "Haddrox",
-   "Helliox",
-   "Hethaeg",
-   "Hex'vorr",
-   "Hirthe",
-   "Horoxoloth",
-   "Ikhon",
-   "Inchindr",
    "Jerkules",
-   "K'banian",
-   "Kaelarmaul",
-   "Kafondam",
-   "Kantul",
-   "Kazgoroth",
-   "Kazidax",
-   "Keghas",
    "Killinger",
    "Killzor",
-   "Kofarutul",
-   "Koritu",
-   "Kormat",
-   "Korthaet",
-   "Laniaro",
-   "Legetto",
-   "Lortuc",
+   "Kökksukk",
    "M'Rub",
    "Makob",
    "Manslayer",
-   "Mantorok",
-   "Mar'khi",
-   "Mathanat",
-   "Mek'tethel",
-   "Melulind",
-   "Merdiklo",
-   "Modoch",
-   "Mogaltu",
-   "Morcatu",
-   "Morchaur",
-   "Mortarr",
    "Murdercles",
-   "N'hogura",
-   "Nakor",
-   "Ndur",
-   "Ngot",
-   "Ngugobal",
-   "Nilrin",
-   "Norvenica",
-   "Nudob",
-   "Obair",
-   "Olok",
    "P'Noon Ikl",
-   "Persecon",
-   "Pha'otho",
-   "Pox",
-   "Rilor",
-   "Rorgia",
-   "S'goth",
    "Satan Jr.",
-   "Saugur",
-   "Shabakauth",
-   "Shel",
-   "Shuldu",
-   "Sofolos",
-   "Sot-ilh",
    "Starface",
-   "Tarivror",
-   "Tarvo",
-   "Ubote",
-   "Ukam",
-   "Ulkal",
-   "Ulyaoth",
-   "Valdo",
-   "Vameth",
-   "Vathan",
-   "Veritt",
-   "Vex'genn",
-   "Vorbenix",
-   "Vup",
    "Warrdeth",
-   "Wendun",
-   "Xel'lotath",
-   "Xibavel",
-   "Yar'udab",
 };
 
 static
-cstr const suff[] = {
+cstr const titles[] = {
    "Agent of Damnation",
    "Alpha and Omega",
    "Betrayer of All",
@@ -197,7 +149,11 @@ cstr const suff[] = {
    "Walking Apocalypse",
 };
 
-/* Extern Functions -------------------------------------------------------- */
+void copy_name_str(char **p, cstr src) {
+   mem_size_t len = faststrlen(src);
+   fastmemcpy(*p, src, len);
+   *p += len;
+}
 
 str RandomName(i32 id) {
    srand(id ? mapseed + id : ACS_Random(0, INT32_MAX));
@@ -205,21 +161,52 @@ str RandomName(i32 id) {
    ACS_BeginPrint();
    PrintChars("\Cg", 2);
 
-   if(id && (rand() % 10) == 0) {
-      PrintChrSt(name[rand() % countof(name)]);
-   } else for(i32 i = 0, n = 3 + (rand() % 6); i < n; i++) {
-      cstr s = rand() % 101 == 0 ?
-               lulz[rand() % countof(lulz)] :
-               syll[rand() % countof(syll)];
-
-      if(i == 0) {ACS_PrintChar(ToUpper(*s)); s++;}
-
+   if(id && rand() % 1000 != 0) {
+      noinit static
+      char s[128];
+      char *p = s;
+      cstr last = nil;
+      cstr suf;
+      struct word_root const *root;
+      for(i32 i = 0, n = 3 + rand() % 4; i < n; i++) {
+         if(i == 0) {
+            /* root word */
+            root = &roots[rand() % countof(roots)];
+            copy_name_str(&p, root->root);
+         } else if(i == n - 1) {
+            /* (optional) inflection/voice */
+            suf = inflections[rand() % countof(inflections)];
+            /* duplicated terminals have a glottal stop between */
+            if(*(p - 1) == *suf || *(p - 1) == *(suf + 1)) {
+               *p++ = '\'';
+            }
+            copy_name_str(&p, suf);
+         } else {
+            /* never duplicate adjectives, repetition is okay */
+            cstr adj;
+            do {
+               adj = adjectives[rand() % countof(adjectives)];
+            } while(last == adj);
+            /* create vowel harmony */
+            for(cstr adjp = adj; *adjp; ++adjp) {
+               if(IsDigit(*adjp)) {
+                  copy_name_str(&p, vowels[root->vty][*adjp - '0']);
+               } else {
+                  *p++ = *adjp;
+               }
+            }
+            last = adj;
+         }
+      }
+      *p = '\0';
       PrintChrSt(s);
+   } else {
+      PrintChrSt(amusing_name[rand() % countof(amusing_name)]);
    }
 
    if(id) {
       PrintChars(", the ", 6);
-      PrintChrSt(suff[rand() % countof(suff)]);
+      PrintChrSt(titles[rand() % countof(titles)]);
    }
 
    return ACS_EndStrParam();
