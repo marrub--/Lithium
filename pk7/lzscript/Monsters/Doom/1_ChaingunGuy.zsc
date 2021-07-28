@@ -29,6 +29,8 @@ default
    Radius     20;
    Speed      9;
 
+   DropItem "Lith_ClipBox", 255, 20;
+
    ActiveSound "chainguy/active";
    DeathSound  "chainguy/death";
    PainSound   "chainguy/pain";

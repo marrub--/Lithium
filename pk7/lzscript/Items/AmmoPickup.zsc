@@ -123,6 +123,7 @@ class Lith_CellPack : Lith_AmmoItem replaces CellPack {
 class Lith_AmmoItem : Lith_BasicPickup abstract;
 
 default {
+   Inventory.Amount 0;
    -Lith_BasicPickup.DrawPopup
    +CastSpriteShadow
 }
@@ -170,6 +171,13 @@ override bool tryPickup(in out Actor mo) {
    lith_absorbAmmo(mo, m_type,  m_amount);
    lith_absorbAmmo(mo, m_type2, m_amount2);
    return super.tryPickup(mo);
+}
+
+override void postBeginPlay() {
+   super.postBeginPlay();
+   if(amount) {
+      m_amount = amount;
+   }
 }
 
 /* EOF */

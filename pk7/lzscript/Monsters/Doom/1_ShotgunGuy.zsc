@@ -33,6 +33,8 @@ default
    Radius           20;
    Speed            9;
 
+   DropItem "Lith_Shell", 255, 4;
+
    ActiveSound "shotguy/active";
    DeathSound  "shotguy/death";
    PainSound   "shotguy/pain";

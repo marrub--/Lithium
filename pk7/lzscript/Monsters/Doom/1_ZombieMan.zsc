@@ -35,6 +35,8 @@ default
    Radius           20;
    Speed            9;
 
+   DropItem "Lith_Clip", 255, 5;
+
    ActiveSound "grunt/active";
    DeathSound  "grunt/death";
    PainSound   "grunt/pain";
