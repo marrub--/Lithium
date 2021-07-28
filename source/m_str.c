@@ -355,20 +355,7 @@ cstr alientext(i32 num) {
 
 alloc_aut(0) stkcall
 str lang(str name) {
-   str ret, sub, nex;
-
-   ACS_BeginPrint();
-   ACS_PrintLocalized(name);
-
-   for(ret = ACS_EndStrParam(); ret[0] == '$';) {
-      sub = ACS_StrMid(ret, 1, INT32_MAX);
-      ACS_BeginPrint();
-      ACS_PrintLocalized(sub);
-      nex = ACS_EndStrParam();
-      if(sub != nex) ret = nex;
-      else           break;
-   }
-
+   str ret = ServCallS(sm_Localize, name);
    return ret == name ? snil : ret;
 }
 

@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 ## ---------------------------------------------------------------------------|
 ##
 ## Distributed under the CC0 public domain license.
@@ -13,7 +12,7 @@ check_uniq "order-dependencies", @ctx.deps
 
 @ctx.fp << <<ninja
 rule cc
- command = gdcc-cc #{TARGET} --warn-all --no-warn-parentheses #{CPP_ARG} --alloc-Aut 8192 #{CC_ARG} -D'ZscName(x, ...)=__VA_ARGS__' -DFileHash=$#{HASH} -c $in -o $out
+ command = gdcc-cc #{TARGET} --warn-all --no-warn-parentheses #{CPP_ARG} --alloc-Aut 8192 #{CC_ARG} -D'ZscName(x, ...)=__VA_ARGS__' -DFileHash=$fhash -c $in -o $out
  description = [gdcc-cc] Compile C $out
 ninja
 
@@ -23,7 +22,7 @@ ordr = @ctx.ordr.join " "
 for ent in @ctx.srcs
    @ctx.fp << <<ninja
 build #{ent.o}: cc #{ent.c} | #{deps} || #{ordr}
- #{HASH} = #{ent.hash}
+ fhash = #{ent.hash}
 ninja
 
    @ctx.link.push ent.o

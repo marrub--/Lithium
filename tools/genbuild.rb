@@ -1,5 +1,4 @@
-#!/usr/bin/env ruby
-# frozen_string_literal: true
+#!/usr/bin/env -S ruby --enable=frozen-string-literal -w
 ## ---------------------------------------------------------------------------|
 ##
 ## Distributed under the CC0 public domain license.
@@ -16,13 +15,6 @@ require "ostruct"
 
 require_relative "corinth.rb"
 
-BIN, DIR, HASH, HDR, SRC, TOOLS, TXT, TYPE, ZSC = ("a".."z").entries
-
-INC_PATH = "--include $#{HDR} "
-TARGET   = "--target-engine=ZDoom " +
-           "--target-format=ACSE " +
-           "--func-minimum ScriptI 17100 "
-
 class SrcsEnt
    attr_reader :o, :c
 
@@ -35,17 +27,15 @@ class SrcsEnt
       new bin(s), src(s)
    end
 
-   def hash
-      (hash_impl(self.o) * hash_impl(self.c)) & 0x7FFFFFFF
-   end
+   def hash = (hash_impl(self.o) * hash_impl(self.c)) & 0x7FFFFFFF
 end
 
-def  bin(s) "$" +   BIN + "/" + s + ".ir" end
-def  hdr(s) "$" +   HDR + "/" + s         end
-def  src(s) "$" +   SRC + "/" + s         end
-def  txt(s) "$" +   TXT + "/" + s         end
-def  zsc(s) "$" +   ZSC + "/" + s         end
-def tool(s) "$" + TOOLS + "/" + s         end
+def  bin(s) = "bin/"                    + s + ".ir"
+def  hdr(s) = "source/include/"         + s
+def  src(s) = "source/"                 + s
+def  txt(s) = "text/"                   + s
+def  zsc(s) = "pk7/lzscript/Constants/" + s
+def tool(s) = "tools/"                  + s
 
 def check_uniq name, ary
    res = ary.select do |e| ary.count(e) > 1 end
@@ -224,6 +214,11 @@ end
 @cfg = {}
 req_file(".build-cfg.rb") do end
 
+INC_PATH = "--include #{hdr ""} "
+TARGET   = "--target-engine=ZDoom " +
+           "--target-format=ACSE " +
+           "--func-minimum ScriptI 17100 "
+
 LIB_PATH = if s = @cfg[:lib_path] then "--lib-path='#{s}' " else "" end
 ALL_ARG  = if s = @cfg[:all_arg]  then s + " " else "" end
 MK_ARG   = if s = @cfg[:mk_arg]   then s + " " else "" end + ALL_ARG + LIB_PATH
@@ -232,12 +227,6 @@ CPP_ARG  = if s = @cfg[:cpp_arg]  then s + " " else "" end + ALL_ARG + INC_PATH
 LD_ARG   = if s = @cfg[:ld_arg]   then s + " " else "" end + ALL_ARG
 
 @ctx.fp << <<ninja
-#{HDR  } = source/include
-#{BIN  } = bin
-#{SRC  } = source
-#{TOOLS} = tools
-#{TXT  } = text
-#{ZSC  } = pk7/lzscript/Constants
 ninja
 
 # things that generate files to be built or linked
@@ -247,7 +236,6 @@ req_file "build/upgc.rb"
 req_file "build/wepc.rb"
 
 # things that generate stuff outside of the build system
-req_file "build/hsfs.rb"
 req_file "build/mdlc.rb"
 req_file "build/sndc.rb"
 req_file "build/txtc.rb"

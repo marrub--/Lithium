@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 ## ---------------------------------------------------------------------------|
 ##
 ## Distributed under the CC0 public domain license.
@@ -34,7 +33,7 @@ class ParseState
 
    def each_out &block
       if block_given?
-         @out.each &block
+         @out.each(&block)
       else
          to_enum :each_out
       end

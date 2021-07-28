@@ -18,7 +18,7 @@ default {
 
 override void beginPlay() {
    changeTid(level.findUniqueTid());
-   setTag(StringTable.localize(curSector.getUdmfString('user_marker')));
+   setTag(Lith_HERMES.localize(curSector.getUdmfString('user_marker')));
    changeStatNum(_stat_mapmark);
 }
 

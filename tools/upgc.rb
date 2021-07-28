@@ -1,5 +1,4 @@
-#!/usr/bin/env ruby
-# frozen_string_literal: true
+#!/usr/bin/env -S ruby --enable=frozen-string-literal -w
 ## ---------------------------------------------------------------------------|
 ##
 ## Distributed under the CC0 public domain license.

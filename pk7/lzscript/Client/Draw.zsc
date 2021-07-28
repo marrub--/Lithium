@@ -327,12 +327,11 @@ static void LE() {
 }
 
 static clearScope textureId getTextureForName(string tex) {
-   for(int i = 0; tex.byteAt(0) == CH_COLON; i++) {
-      if(i > 5) {Console.printf("invalid texture: %s", tex); break;}
-      tex = StringTable.Localize(tex, false);
+   if(tex.byteAt(0) == CH_COLON) {
+      tex.replace(":", "/");
+      tex = "lgfx" .. tex .. ".png";
    }
-
-   return TexMan.CheckForTexture(tex, TexMan.Type_Any);
+   return TexMan.checkForTexture(tex, TexMan.Type_Any);
 }
 
 override void onRegister() {
@@ -366,7 +365,7 @@ ui void drawRect(vector2 size, vector2 pos, color cr) {
 }
 
 override void worldTick() {
-   m_English = StringTable.Localize("LITH_CHECK", false) == "Eng";
+   m_English = Lith_HERMES.localize("LITH_CHECK") == "Eng";
 
    switch(lith_gui_jpfont) {
    default:

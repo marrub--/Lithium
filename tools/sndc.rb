@@ -1,5 +1,4 @@
-#!/usr/bin/env ruby
-# frozen_string_literal: true
+#!/usr/bin/env -S ruby --enable=frozen-string-literal -w
 ## ---------------------------------------------------------------------------|
 ##
 ## Distributed under the CC0 public domain license.
@@ -37,8 +36,9 @@ class OutDir
 
    def self.args_to_s args
       args.map do |arg|
-            if arg.is_a? Array  then arg.join("/")
-         elsif arg.is_a? String then arg           end
+         if    arg.is_a? Array  then arg.join("/")
+         elsif arg.is_a? String then arg
+         end
       end
    end
 

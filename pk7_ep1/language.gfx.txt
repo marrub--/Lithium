@@ -1,8 +1,0 @@
-identifier,default
-:Terminal:1,lgfx/Terminal/1.png
-:Terminal:2,lgfx/Terminal/2.png
-:Terminal:3,lgfx/Terminal/3.png
-:Terminal:AOF,lgfx/Terminal/AOF.png
-:Terminal:LogonAOF,lgfx/Terminal/LogonAOF.png
-:Terminal:LogonData,lgfx/Terminal/LogonData.png
-:Terminal:UAC,lgfx/Terminal/UAC.png

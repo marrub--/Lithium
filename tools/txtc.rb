@@ -1,5 +1,4 @@
-#!/usr/bin/env ruby
-# frozen_string_literal: true
+#!/usr/bin/env -S ruby --enable=frozen-string-literal -w
 ## ---------------------------------------------------------------------------|
 ##
 ## Distributed under the CC0 public domain license.
@@ -34,7 +33,7 @@ def parse_file state, filename, language
    readname = filename[-1]
    dirname  = filename[0..-2]
 
-   state.cwd.push *dirname
+   state.cwd.push(*dirname)
 
    lns = read_lines unsplit_name state, [readname]
    lan = state.langs[language]
@@ -134,7 +133,7 @@ common_main do
    out.puts generated_header "txtc"
 
    sorted = state.langs.sort_by do |k, v| k end
-   for lnam, lang in sorted
+   for _, lang in sorted
       out.puts "[" + lang.name + "]"
       for data in lang.data
          if data.is_a? Alias

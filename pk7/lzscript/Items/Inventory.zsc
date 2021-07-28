@@ -76,7 +76,7 @@ class Lith_InventoryItem : Inventory abstract {
    }
 
    private string Lith_GetName() {
-      return StringTable.Localize("LITH_ITEM_TAG_" .. m_invName, false);
+      return Lith_HERMES.localize("LITH_ITEM_TAG_" .. m_invName);
    }
 
    override Inventory CreateCopy(Actor mo) {

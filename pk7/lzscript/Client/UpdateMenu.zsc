@@ -82,7 +82,7 @@ void Lith_SetText()
    else
       s = String.Format("$LITH_%s", m_Clg[m_LogN].m_Name);
 
-   m_Text = StringTable.Localize(s);
+   m_Text = Lith_HERMES.localize(s);
 }
 
 bool Lith_PrevLog()

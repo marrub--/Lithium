@@ -28,7 +28,7 @@ extend class Lith_URANUS {
           (stat = Lith_StatFx(it.next()));)
       {
          let fnt = fntSml();
-         let s = StringTable.localize(stat.fnam);
+         let s = Lith_HERMES.localize(stat.fnam);
          let a = (sin((gameTic + evt.fracTic) * 7.0) + 1.5) / 3.0;
          int x = 0;
 

@@ -297,6 +297,7 @@ bool chtf_end_game(cheat_params_t const params) {
    case 'c': which = "CyberDemon";  break;
    case 's': which = "SpiderDemon"; break;
    case 'i': which = "IconOfSin";   break;
+   case 't': which = "TimeOut";     break;
    default:
       return false;
    }

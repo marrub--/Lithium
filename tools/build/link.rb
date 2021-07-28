@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 ## ---------------------------------------------------------------------------|
 ##
 ## Distributed under the CC0 public domain license.

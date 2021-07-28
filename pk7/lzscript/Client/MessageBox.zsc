@@ -14,9 +14,9 @@ class Lith_MESSAGEBOX : MessageBoxMenu;
 override void Init(Menu parent, string message, int message_mode, bool play_sound, name cmd, voidptr native_handler)
 {
    if(message == "HACK HACK THIS IS A HACK WOW WHAT A HACK") {
-      int num = StringTable.Localize("QUITMSGNUM", false).toInt(10);
+      int num = Lith_HERMES.localize("QUITMSGNUM").toInt(10);
       num = (gametic % num) + 1;
-      message = StringTable.Localize(string.Format("QUITMSG%i", num), false);
+      message = Lith_HERMES.localize(string.Format("QUITMSG%i", num));
    }
    super.Init(parent, message, message_mode, play_sound, cmd, native_handler);
 }

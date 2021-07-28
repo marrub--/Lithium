@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 ## ---------------------------------------------------------------------------|
 ##
 ## Distributed under the CC0 public domain license.
@@ -96,8 +95,6 @@ end
 
 def tokenize_from read
    data = read.each
-   colu = 1
-   line = 1
 
    tokens = []
 
