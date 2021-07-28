@@ -505,7 +505,7 @@ struct itemdata ItemData() {
       .scr   = GetMembI(0, sm_InvSell),
       .name  = GetMembS(0, sm_InvName),
    };
-   data.spr = StrParam(":ItemSpr:%S", data.name);
+   data.spr = ns(lang_fmt(LANG "Item_%S", data.name));
    if(data.equip != _cont_store) set_bit(data.flags, _if_equippable);
    return data;
 }

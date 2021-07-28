@@ -130,27 +130,27 @@ Used in division.
 
 ## Sprites -------------------------------------------------------------------|
 
-== :ItemSpr:ArmStandardUp    | ARM1A0
-== :ItemSpr:ArmImprovedUp    | ARM2A0
-== :ItemSpr:ArmTeflonUp      | ARM3A0
-== :ItemSpr:ArmDendriteUp    | ARM4A0
-== :ItemSpr:ArmAerodynamicUp | :Items:AeroArmor
-== :ItemSpr:ArmHazMatUp      | ARM6A0
-== :ItemSpr:ArmPinkSilverUp  | ARM7A0
-== :ItemSpr:ArmMidoriUp      | ARM8A0
+== \#Item_ArmStandardUp    | ARM1A0
+== \#Item_ArmImprovedUp    | ARM2A0
+== \#Item_ArmTeflonUp      | ARM3A0
+== \#Item_ArmDendriteUp    | ARM4A0
+== \#Item_ArmAerodynamicUp | :Items:AeroArmor
+== \#Item_ArmHazMatUp      | ARM6A0
+== \#Item_ArmPinkSilverUp  | ARM7A0
+== \#Item_ArmMidoriUp      | ARM8A0
 
-== :ItemSpr:ArmStandardLo    | ARM1C0
-== :ItemSpr:ArmImprovedLo    | ARM2C0
-== :ItemSpr:ArmTeflonLo      | ARM3C0
-== :ItemSpr:ArmDendriteLo    | ARM4C0
-== :ItemSpr:ArmAerodynamicLo | ARM5C0
-== :ItemSpr:ArmHazMatLo      | ARM6C0
-== :ItemSpr:ArmPinkSilverLo  | ARM7C0
-== :ItemSpr:ArmMidoriLo      | ARM8C0
+== \#Item_ArmStandardLo    | ARM1C0
+== \#Item_ArmImprovedLo    | ARM2C0
+== \#Item_ArmTeflonLo      | ARM3C0
+== \#Item_ArmDendriteLo    | ARM4C0
+== \#Item_ArmAerodynamicLo | ARM5C0
+== \#Item_ArmHazMatLo      | ARM6C0
+== \#Item_ArmPinkSilverLo  | ARM7C0
+== \#Item_ArmMidoriLo      | ARM8C0
 
-== :ItemSpr:ClawOfImp     | DITMA0
-== :ItemSpr:AndSigil      | :Items:AndSigil
-== :ItemSpr:OrSigil       | :Items:OrSigil
-== :ItemSpr:DivisionSigil | :Items:DivisionSigil
+== \#Item_ClawOfImp     | DITMA0
+== \#Item_AndSigil      | :Items:AndSigil
+== \#Item_OrSigil       | :Items:OrSigil
+== \#Item_DivisionSigil | :Items:DivisionSigil
 
 ## EOF
