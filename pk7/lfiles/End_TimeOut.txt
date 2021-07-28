@@ -16,9 +16,8 @@
 
 14
    musi "lmusic/asdfn2.ogg";
-   imge ":End:TimeOut";
+   imge "HELP";
    fade 10;
-   text "TimeOut_1" 70 -1 0;
-   text "TimeOut_2" 70 -1 100;
+   text "TimeOut_1" 900 -1 100;
    fmus 70;
    next;

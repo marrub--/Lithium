@@ -8,7 +8,6 @@
 
 ## Backstory -----------------------------------------------------------------|
 == \#INFO_SHORT_P114 | プロジェクト114
-== \#INFO_TITLE_P114 | $\#INFO_SHORT_P114
 @@ \#INFO_DESCR_P114
 プロジェクト114は現在実行中の軍事作戦。OFMD、KSKKと貴方の国の軍事間協定に
 よって開始されたプロジェクト114は、今尚我々に侵略してくる地獄として知られる
@@ -22,10 +21,8 @@
 あなたのアドバイザーはアダム・ランバート。現在11人のジェネラル達が現場で
 彼と貴方の行動を監督している。
 
-== \#INFO_SHORT_OPD2 | Op. D2
-== \#INFO_TITLE_OPD2 | Operation Deception 2
 @@ \#INFO_DESCR_OPD2
-7年間の計画を経て、遂に"Operation Deception2"が始まった。
+7年間の計画を経て、遂に"Operation Deception 2"が始まった。
 マイケル、ジーク、ソロモン、そして他の3人と一緒に、
 我々はついに自由の身になろうとしている。
 
@@ -39,7 +36,6 @@
 これが終わったらテオフィリンのサプリメントをくれないか。
 
 == \#INFO_SHORT_Info400 | 報告 400
-== \#INFO_TITLE_Info400 | $\#INFO_SHORT_Info400
 %% \#INFO_DESCR_Info400
 \ciこのドキュメントは機密情報です。読んだ後には削除してください。
 
@@ -61,7 +57,6 @@ ROUNDS: ,<<,124147
 \cd>>>>>[[[[接続の再試行に3回失敗しました]]]]
 
 == \#INFO_SHORT_Info402 | 報告 402
-== \#INFO_TITLE_Info402 | $\#INFO_SHORT_Info402
 %% \#INFO_DESCR_Info402
 \cd>>>>>>[[[[警告:翻訳サービスが利用できません、逐語的に送信]]]]
 \ciこのドキュメントは機密情報です。読んだ後に削除してください。
@@ -81,10 +76,9 @@ ROUNDS: ,<<,124147
 \cgOrder.
 
 ## Cybernetics ---------------------------------------------------------------|
-== \#INFO_SHORT_BIP | B.I.P.
-== \#INFO_TITLE_BIP | Biotic Information Panel (B.I.P.)
 @@ \#INFO_DESCR_BIP
-Biotic Information Panel("BIP"とも言う)は、様々な主題に関するローカルエリア
+Biotic Information Panel(バイオチックインフォメーションパネル、或いはBIP〘ビップ〙)は、
+様々な主題に関するローカルエリア
 ネットワークから情報を収集する携帯型C150で書かれたプログラムである。
 サブジェクトを検索するようにトリガーされると、サブジェクトに関連するまたは
 サブジェクトによって言及される関連情報も検索される。
@@ -95,10 +89,9 @@ Biotic Information Panel("BIP"とも言う)は、様々な主題に関するロ�
 
 ソフトウェアの最新バージョンは2.5で、バージョン2.0から自動更新機能を備えた。
 
-== \#INFO_SHORT_CBIStan | C/B I
-== \#INFO_TITLE_CBIStan | Computer/Brain Interface (C/B I)
 @@ \#INFO_DESCR_CBIStan
-Computer/Brain Interface("CBI"とも言う)は、人間の脳とコンピューターの間の
+Computer/Brain Interface(コンピューター/脳インタフェース、或いはCBI〘シービーアイ〙)は、
+人間の脳とコンピューターの間の
 インターフェイスである。C/BIは通常、頭蓋骨や脳のほか中枢神経系の他の箇所にも
 内蔵され、ほぼ無限の用途を持つ機械である。
 
@@ -125,8 +118,6 @@ Computer/Brain Interface("CBI"とも言う)は、人間の脳とコンピュー�
 インターフェースに関する情報を添付して、記述リストに追加しなければならない。
 
 ## Attributes ----------------------------------------------------------------|
-== \#INFO_SHORT_AttrACC | Accuracy
-== \#INFO_TITLE_AttrACC | \cgAccuracy\c- (ACC)
 @@ \#INFO_DESCR_AttrACC
 Accuracyとは、ターゲットの最大ダメージを与えるのに適した箇所に当てる能力のこと。
 訓練した射手と熟練した射手には決定的な違いがある。一人は標的を攻撃する方法を、
@@ -134,8 +125,6 @@ Accuracyとは、ターゲットの最大ダメージを与えるのに適した
 
 Accuracyを上げることで、敵へのダメージが大きくなります。
 
-== \#INFO_SHORT_AttrDEF | Defense
-== \#INFO_TITLE_AttrDEF | \ciDefense\c- (DEF)
 @@ \#INFO_DESCR_AttrDEF
 Defenseとは、自分自身を効率的に防御し攻撃を受けたときに受けるダメージを軽減する
 能力のことです。賢明な装甲師はケブラーをどこに塗るべきか、また発砲された時
@@ -143,8 +132,6 @@ Defenseとは、自分自身を効率的に防御し攻撃を受けたときに�
 
 Defenseを強化すれば、全てのダメージを減らすことができる。
 
-== \#INFO_SHORT_AttrSTRHuman | Strength
-== \#INFO_TITLE_AttrSTRHuman | \ckStrength\c- (STR)
 @@ \#INFO_DESCR_AttrSTRHuman
 Strengthとは、強靭さと力強さ、皮膚の厚さ、そして心臓から鼓動する血のことで、
 Strengthがあると長寿なだけでなく余生も長いとも言われています。
@@ -164,8 +151,6 @@ Strengthをつけていくと、最大ヘルスが増えます。
 
 Strengthをつけていくと、最大ヘルスが増えます。
 
-== \#INFO_SHORT_AttrVIT | Vitality
-== \#INFO_TITLE_AttrVIT | \cdVitality\c- (VIT)
 @@ \#INFO_DESCR_AttrVIT
 Vitalityとは、薬に対する反応や治癒能力、血管や神経の強さ、生存能力のことです。
 あなたの重要なシステムは、より強力であるだけでなく、より早く回復し、
@@ -173,32 +158,24 @@ Vitalityとは、薬に対する反応や治癒能力、血管や神経の強さ
 
 生命力がレベルアップすると、ヘルス取得時の効果が増加する。
 
-== \#INFO_SHORT_AttrPOTNonHuman | Potency
-== \#INFO_TITLE_AttrPOTNonHuman | \cdPotency\c- (POT)
 @@ \#INFO_DESCR_AttrPOTNonHuman
 Potencyとは、薬に対する反応や薬を塗る能力、血管や神経の強さ、生存能力のことです。
 内臓が丈夫になるだけでなく、治りも早く働き続ける可能性も高くなります。
 
 Potencyがレベルアップすると、ヘルス取得時の効果が増加する。
 
-== \#INFO_SHORT_AttrSTM | Stamina
-== \#INFO_TITLE_AttrSTM | \chStamina\c- (STM)
 @@ \#INFO_DESCR_AttrSTM
 Staminaとは、荒波にもまれ、何キロでも何マイルでもそのままで走り続けられる
 能力です。少しずつでもStaminaはついていきます。
 
 Staminaをつけることで、そのレベルまでヘルスを回復します。
 
-== \#INFO_SHORT_AttrREP | Repair
-== \#INFO_TITLE_AttrREP | \chRepair\c- (REP)
 @@ \#INFO_DESCR_AttrREP
 Repairとは、バラバラに引き裂かれ極端な距離を動いても、自分で修復して
 作業を継続する能力のことです。Repairを続けると、少しずつでも状態を保ちます。
 
 Repairをレベルアップすれば、そのレベルまでヘルスを回復します。
 
-== \#INFO_SHORT_AttrREG | Regeneration
-== \#INFO_TITLE_AttrREG | \chRegeneration\c- (REG)
 @@ \#INFO_DESCR_AttrREG
 Regenerationとは、バラバラに引き裂かれ困難な時でも、自分自身を統合し
 地獄を駆け抜ける能力である。Regenerationは少しずつではあるが、
@@ -206,24 +183,18 @@ Regenerationとは、バラバラに引き裂かれ困難な時でも、自分�
 
 Regenerationをレベルアップすれば、そのレベルまでヘルスを回復します。
 
-== \#INFO_SHORT_AttrLUK | Luck
-== \#INFO_TITLE_AttrLUK | \ctLuck\c- (LUK)
 @@ \#INFO_DESCR_AttrLUK
 Luckはソチラの紛れもない魅力と幸運、ただ幸運を得る能力です。
 あなたのスコアはいつもより早く上がる、幸運なやつです。
 
 Luckをレベルアップすれば、ランダムに獲得スコアを増やす。
 
-== \#INFO_SHORT_AttrRGE | Rage
-== \#INFO_TITLE_AttrRGE | \cmRage\c- (RGE)
 @@ \#INFO_DESCR_AttrRGE
 Rageは単なる怒りではなく、順応性です。殴られると反射神経が働いて気が狂います。
 状況が斜陽になるつれて、より強い一撃を、より正確に、よりキレ味が増します。
 
 Rageをレベルアップすれば、攻撃を受けたときに敵に与えられるダメージが倍増する。
 
-== \#INFO_SHORT_AttrCON | Concentration
-== \#INFO_TITLE_AttrCON | \cmConcentration\c- (CON)
 @@ \#INFO_DESCR_AttrCON
 Concentrationとは、マナが爆発的に吸収されている間にエネルギーを集中させる
 能力のことです。

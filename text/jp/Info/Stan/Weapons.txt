@@ -102,7 +102,6 @@ Hiku Mk.１ショットガンの改変版。
 
 ## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_SuperShotgun | ｽｰﾊﾟｰｼｮｯﾄｶﾞﾝ
-== \#INFO_TITLE_SuperShotgun | $\#INFO_SHORT_SuperShotgun
 @@ \#INFO_DESCR_SuperShotgun
 惑星Ch'ariの巨大獣を狩るために作られた
 ２x２ 4ga シェルを撃ち出す。

@@ -20,4 +20,7 @@
 
 !!include Info/Outcasts/Weapons.txt
 
+== \#SAVED_BUFFER  | 保存したバッファ
+== \#SAVED_MESSAGE | 保存したメッセージ
+
 ## EOF

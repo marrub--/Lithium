@@ -112,7 +112,6 @@
 注意せよ。
 
 == \#INFO_SHORT_LostSoul | ロストソール
-== \#INFO_TITLE_LostSoul | $\#INFO_SHORT_LostSoul
 %% \#INFO_DESCR_LostSoul
 階級:\cj居住者\c-
 脅威:\csD++\c-
@@ -129,7 +128,6 @@
 傾向がある。
 
 == \#INFO_SHORT_Mancubus | マンキュバス
-== \#INFO_TITLE_Mancubus | $\#INFO_SHORT_Mancubus
 %% \#INFO_DESCR_Mancubus
 階級:\cj居住者\c-
 脅威:\ckB\c-
@@ -144,7 +142,6 @@
 迅速に対処すれば問題ない。
 
 == \#INFO_SHORT_Arachnotron | アラクノトロン
-== \#INFO_TITLE_Arachnotron | $\#INFO_SHORT_Arachnotron
 %% \#INFO_DESCR_Arachnotron
 階級:\cj居住者\c-
 脅威:\ckB\c-
@@ -158,7 +155,6 @@
 銃弾や散弾には対応できない。
 
 == \#INFO_SHORT_Cacodemon | カコデーモン
-== \#INFO_TITLE_Cacodemon | $\#INFO_SHORT_Cacodemon
 %% \#INFO_DESCR_Cacodemon
 階級:\cj居住者\c-
 脅威:\ckB-\c-
@@ -170,7 +166,6 @@
 普通いない。
 
 == \#INFO_SHORT_HellKnight | ヘルナイト
-== \#INFO_TITLE_HellKnight | $\#INFO_SHORT_HellKnight
 %% \#INFO_DESCR_HellKnight
 階級:\cf貴族\c-
 脅威:\ckB\c-
@@ -182,7 +177,6 @@
 振り回す拳も馬鹿にはできない。
 
 == \#INFO_SHORT_BaronOfHell | バロンオブヘル
-== \#INFO_TITLE_BaronOfHell | $\#INFO_SHORT_BaronOfHell
 %% \#INFO_DESCR_BaronOfHell
 階級:\cf貴族\c-
 脅威:\ckB++\c-
@@ -196,7 +190,6 @@
 あらゆる場所に投げつける。
 
 == \#INFO_SHORT_Revenant | レブナント
-== \#INFO_TITLE_Revenant | $\#INFO_SHORT_Revenant
 %% \#INFO_DESCR_Revenant
 階級:\cf貴族\c-
 脅威:\ckB+\c-
@@ -214,7 +207,7 @@
 階級:\cg僭主\c-
 脅威:\cgA\c-
 
-邪神、離れて敵の苦痛を育む卑劣な悪魔; 
+邪神、離れて敵の苦痛を育む卑劣な悪魔;
 それ自体が戦うには弱すぎるので代わりに
 ロストソールを呼び出す。
 こいつは迷惑と同時に危険だ。
@@ -267,7 +260,6 @@
 暴れる。
 
 == \#INFO_SHORT_Phantom | ファントム
-== \#INFO_TITLE_Phantom | $\#INFO_SHORT_Phantom
 %% \#INFO_DESCR_Phantom
 階級:\cm???\c-
 脅威:\crE\c-

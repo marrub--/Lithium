@@ -29,11 +29,9 @@
 == \#LOG_ShobonSphere | (´・ω・｀）
 
 ## Ammo ----------------------------------------------------------------------|
-== \#LOG_Clip      | 弾
 == \#LOG_ClipBox   | 弾箱
-== \#LOG_Shell     | シェル
 == \#LOG_ShellBox  | シェル箱
-== \#LOG_Rocket    | ロケット
+== \#LOG_Rocket    | $\#TAG_RocketAmmo
 == \#LOG_RocketBox | ロケット箱
 == \#LOG_Cell      | エナジーチャージ
 == \#LOG_CellBox   | 染まったエナジーパック

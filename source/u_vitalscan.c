@@ -174,8 +174,12 @@ void Upgr_VitalScan_Render(struct upgrade *upgr) {
    }
 
    /* Tag and health */
-   bool afnt = CVarGetI(sc_scanner_altfont);
-   str  font = afnt ? sf_lmidfont : sf_smallfnt;
+   str font;
+   switch(CVarGetI(sc_scanner_font)) {
+   case _sfont_small:  font = sf_smallfnt; break;
+   case _sfont_mid:    font = sf_lmidfont; break;
+   case _sfont_italic: font = sf_italic;   break;
+   }
 
    i32 cr = Draw_GetCr(CVarGetI(sc_scanner_color));
 

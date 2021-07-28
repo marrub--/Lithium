@@ -61,7 +61,7 @@ arching to the single point of consciousness
 find yourself
 starting back
 
-== \#OPT_TESTMAP_01_07 | Thanks, bye!
+== \#OPT_TESTMAP_01_07 | $\#OPT_TESTMAP_01_02_03
 
 @@ \#DLOG_TESTMAP_01_10
  Already? Are you sure it isn't just ASIC bugs? I have trouble

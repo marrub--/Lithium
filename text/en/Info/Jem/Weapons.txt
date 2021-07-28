@@ -58,7 +58,7 @@ well-manufactured, likely under the care of a very skilled Kiri craftsman.
 
 ## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_ShockRif_A | $\#UPGRADE_TITLE_ShockRif_A
-== \#INFO_TITLE_ShockRif_A | Shock Charge
+== \#INFO_TITLE_ShockRif_A | $\#INFO_SHORT_ShockRif_A
 @@ \#INFO_DESCR_ShockRif_A
 A simple modification to the barrel that wraps an explosive sigil around the
 bullet as it leaves the gun, causing it to explode into electricity upon
@@ -66,7 +66,7 @@ impact.
 
 ## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_ShockRif_B | $\#UPGRADE_TITLE_ShockRif_B
-== \#INFO_TITLE_ShockRif_B | Electric Binding
+== \#INFO_TITLE_ShockRif_B | $\#INFO_SHORT_ShockRif_B
 @@ \#INFO_DESCR_ShockRif_B
 A modification for your Shock Rifle, crafted as an experiment: a bit of
 extremely heated liquid crystal is extruded onto the bullet upon receiving, and
@@ -77,7 +77,7 @@ when the projectiles get stuck in groups with this compound, the combined
 energy still remaining in them explodes violently.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_SPAS | Shotgun
+== \#INFO_SHORT_SPAS | $\#INFO_SHORT_Shotgun
 == \#INFO_TITLE_SPAS | NV48 12-Gauge Shotgun
 @@ \#INFO_DESCR_SPAS
 The first (and currently only) shotgun produced by Newvec corp, an extended
@@ -212,8 +212,8 @@ Due to the immense amount of heat in the chamber, the weapon must be cooled off
 by air exposure for a few moments after firing.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_CPlasmaRifle | Plasma Rifle
-== \#INFO_TITLE_CPlasmaRifle | $\#INFO_SHORT_PlasmaRifle
+== \#INFO_SHORT_CPlasmaRifle | $\#INFO_SHORT_PlasmaRifle
+== \#INFO_TITLE_CPlasmaRifle | $\#INFO_TITLE_PlasmaRifle
 == \#INFO_DESCR_CPlasmaRifle | $\#INFO_DESCR_PlasmaRifle
 
 ## ---------------------------------------------------------------------------|

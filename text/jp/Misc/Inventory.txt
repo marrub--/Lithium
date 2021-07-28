@@ -10,7 +10,6 @@
 
 ## Containers ----------------------------------------------------------------|
 
-== \#CONTAINER_Backpack | バックパック
 == \#CONTAINER_ArmUpL   | 左肩
 == \#CONTAINER_ArmUpR   | 右肩
 == \#CONTAINER_ArmLoL   | 左腕
@@ -20,7 +19,7 @@
 == \#CONTAINER_LegR     | 右腿
 == \#CONTAINER_Torso    | 胴体
 == \#CONTAINER_Legs     | 足
-== \#CONTAINER_Item     | アイテム
+== \#CONTAINER_Item     | $\#BIP_NAME_ITEMS
 
 ## Tags ----------------------------------------------------------------------|
 
@@ -32,7 +31,7 @@
 == \#ITEM_TAG_ArmTeflonUp      | テフロン加工されたアーマー
 == \#ITEM_TAG_ArmDendriteUp    | 樹状突起のアーマー
 == \#ITEM_TAG_ArmAerodynamicUp | 空気抵抗を抑えたアーマー
-== \#ITEM_TAG_ArmHazMatUp      | 防護服
+== \#ITEM_TAG_ArmHazMatUp      | 防護服アーマー
 ## ありがとうよ
 == \#ITEM_TAG_ArmPinkSilverUp  | ピンクシルバーのアーマー
 == \#ITEM_TAG_ArmMidoriUp      | ミドリのアーマー
@@ -42,7 +41,7 @@
 == \#ITEM_TAG_ArmTeflonLo      | テフロン加工されたレギンス
 == \#ITEM_TAG_ArmDendriteLo    | 樹状突起のレギンス
 == \#ITEM_TAG_ArmAerodynamicLo | 空気抵抗を抑えたレギンス
-== \#ITEM_TAG_ArmHazMatLo      | 防護服
+== \#ITEM_TAG_ArmHazMatLo      | 防護服のレギンス
 == \#ITEM_TAG_ArmPinkSilverLo  | ピンクシルバーのレギンス
 == \#ITEM_TAG_ArmMidoriLo      | ミドリのレギンス
 
@@ -89,10 +88,6 @@
 %% \#ITEM_SHORT_ArmStandardLo
 \ca2の銃撃耐性を持ち、
 それ以外の属性には1の耐性を持つ。
-
-%% \#ITEM_SHORT_ArmImprovedLo
-\ca4の弾丸耐性を持ち、
-それ以外の属性には2の耐性を持つ。
 
 %% \#ITEM_SHORT_ArmTeflonLo
 \ca2の電撃耐性を持ち、

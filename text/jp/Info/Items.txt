@@ -7,14 +7,6 @@
 ## ---------------------------------------------------------------------------|
 
 ## ---------------------------------------------------------------------------|
-== \#ITEM_TAG_ArmStandard    | Standard Armor
-== \#ITEM_TAG_ArmImproved    | Improved Armor
-== \#ITEM_TAG_ArmTeflon      | Teflon-weave Armor
-== \#ITEM_TAG_ArmDendrite    | Dendrite Armor
-== \#ITEM_TAG_ArmAerodynamic | Aerodynamic Armor
-== \#ITEM_TAG_ArmHazMat      | Haz-Mat Armor
-
-## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_ScoreChip | スコアチップ
 == \#INFO_TITLE_ScoreChip | GIC 781000スコアチップ
 @@ \#INFO_DESCR_ScoreChip
@@ -46,7 +38,7 @@ GIC7810XXには数十種類のデバイス、
 == \#INFO_TITLE_HealthBonus | エネルギーバイアル
 @@ \#INFO_DESCR_HealthBonus
 \ctフジアザミ\c-モードのほとんど不活性な
-マナの小さな瓶。 
+マナの小さな瓶。
 使用者にわずかなの回復エネルギーを付与。
 テストの結果、それが酸っぱいイチゴの味と
 分厚いシチューの一貫性があるとわかった。
@@ -57,7 +49,6 @@ GIC7810XXには数十種類のデバイス、
 
 ## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_AllMap | レベルマップ
-== \#INFO_TITLE_AllMap | $\#INFO_SHORT_AllMap
 @@ \#INFO_DESCR_AllMap
 現在のアクティブエリア全体のマップを含む
 モニタ。フレームに出力ポートがあり、
@@ -124,7 +115,6 @@ SYM4.3によって作成された放射線遮蔽スーツ
 
 ## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_Stimpack | スティムパック
-== \#INFO_TITLE_Stimpack | JJJ 111 Stim-pak(R)
 @@ \#INFO_DESCR_Stimpack
 JJJ株式会社が製造・販売している包帯や
 様々な覚せい剤の小さな箱。
@@ -141,7 +131,6 @@ Stim-pak(R)１１１シリーズは
 
 ## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_Medikit | メディキット
-== \#INFO_TITLE_Medikit | JJJ 444 Medi-kit(R)
 @@ \#INFO_DESCR_Medikit
 JJJ株式会社が製造・販売している覚せい剤
 抗ヒスタミン剤、接着剤などの救急用品が
@@ -164,7 +153,6 @@ MiCoが特許を取得した安全で耐久性のある
 
 ## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_KeySkull | スカルキー
-== \#INFO_TITLE_KeySkull | $\#INFO_SHORT_KeySkull
 @@ \#INFO_DESCR_KeySkull
 地獄の至る所で使われている奇妙な鍵。
 キーディスクと同じように見えるが、
@@ -316,7 +304,6 @@ MiCoが特許を取得した安全で耐久性のある
 
 ## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_WeapnInter | $\#CBI_WeapnInter
-== \#INFO_TITLE_WeapnInter | Weapon Interfacing Device Package
 @@ \#INFO_DESCR_WeapnInter
 Weapon Interfacing Device Package
 (または単に武器接合機器)は中に幾つか
@@ -333,14 +320,10 @@ Weapon Interfacing Device Package
 お互いに利益を共有するための相互契約に
 署名した。
 
-このデバイスの成功は、それがどんなに
-高価であるにもかかわらず
-その価格は"call us to get
-the numbers."によって禁止されていた。
+このデバイスの成功は、価格とは「見積もりを依頼してください」ということにも変わらず。
 
 ## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_WeapnInte2 | $\#CBI_WeapnInte2
-== \#INFO_TITLE_WeapnInte2 | $\#CBI_WeapnInte2
 @@ \#INFO_DESCR_WeapnInte2
 Weapon Interface Device Packageと
 似たアイデアにもかかわらず、
@@ -380,7 +363,6 @@ Weapon Refactoring Deviceは、
 
 ## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_CBIUpgr1 | 高級ＣＰＵ
-== \#INFO_TITLE_CBIUpgr1 | $\#CBI_CPU2
 @@ \#INFO_DESCR_CBIUpgr1
 小型のNodea541CPUから
 大きくアップグレードされたZ6808は、
@@ -402,7 +384,6 @@ Weapon Refactoring Deviceは、
 
 ## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_CBIUpgr2 | 超高級ＣＰＵ
-== \#INFO_TITLE_CBIUpgr2 | $\#CBI_CPU3
 @@ \#INFO_DESCR_CBIUpgr2
 BC-0265はモジュラーC/Bインターフェース
 技術の驚異で、標準的なCPUより大きくなく

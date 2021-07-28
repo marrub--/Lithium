@@ -14,6 +14,7 @@ Lith_Pink   {#611c47 #e873af}
 Lith_Purple {#301875 #8c3bf8}
 Lith_Red    {#1f1f1f #bf0f4a}
 Lith_Yellow {#000000 #ffd023}
+Lith_Kate   {#11021c #a231ee}
 
 Lith_Dark {
    #1d0202 #363636 0   127

@@ -15,7 +15,6 @@
 ヘッドアップ ディスプレイ プログラム。
 
 ## ---------------------------------------------------------------------------|
-== \#UPGRADE_TITLE_HeadsUpDisC | $\#UPGRADE_TITLE_HeadsUpDisM
 @@ \#UPGRADE_EFFEC_HeadsUpDisC
 生体情報を表示。
 

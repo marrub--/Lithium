@@ -25,7 +25,6 @@
 == \#NOTE_FMT   | \cmNote %i
 == \#OPEN       | Open
 == \#REQUIRED   | Required
-== \#SCOREMULT  | Score Multiplier
 == \#SELL       | Sell
 == \#UP         | Up
 == \#USE        | Use
@@ -68,15 +67,13 @@
 == \#TAB_STATISTICS | Statistics
 == \#TAB_NOTES      | Notes
 
-== \#TAB_UPGRADES | Upgrades
+== \#TAB_UPGRADES | $\#BIP_NAME_UPGRADES
 == \#TAB_SHOP     | Shop
-
-== \#JET | Jet
 
 == \#STATUS_XP | Experience
 == \#STATUS_HP | Health
 == \#STATUS_LV | Level
-== \#STATUS_MP | Mana
+== \#STATUS_MP | $\#TAG_Mana
 == \#STATUS_NX | Next
 == \#STATUS_CL | Class
 
@@ -186,21 +183,21 @@ CLOSED
 == \#BIP_HELP_YOURSELF     | Your attributes, abilities and history.
 
 ## Statistics ----------------------------------------------------------------|
-== \#STAT_ScoreMul   | Score Multiplier
-== \#STAT_Weapons    | Weapons Found
-== \#STAT_HealthUsed | Health Used
-== \#STAT_HealthSum  | Health Sum
-== \#STAT_ScoreUsed  | Score Used
-== \#STAT_ScoreSum   | Score Sum
-== \#STAT_Secrets    | Secrets Found
-== \#STAT_Units      | Units Traveled
-== \#STAT_Upgrades   | Upgrades Owned
-== \#STAT_Items      | Items Bought
-== \#STAT_Mail       | Mail Received
-== \#STAT_Time       | Seconds Elapsed
-== \#STAT_Boom       | Spurious Explosions
-== \#STAT_Brouzouf   | Brouzouf Gained
-== \#STAT_TrueMail   | Mail Truly Received
+== \#STAT_ScoreMul   | $\#sv_scoremul
+== \#STAT_Weapons    | Weapons found
+== \#STAT_HealthUsed | Health used
+== \#STAT_HealthSum  | Health sum
+== \#STAT_ScoreUsed  | Score used
+== \#STAT_ScoreSum   | Score sum
+== \#STAT_Secrets    | Secrets found
+== \#STAT_Units      | Units traveled
+== \#STAT_Upgrades   | Upgrades owned
+== \#STAT_Items      | Items bought
+== \#STAT_Mail       | Mail received
+== \#STAT_Time       | Seconds elapsed
+== \#STAT_Boom       | Spurious explosions
+== \#STAT_Brouzouf   | Brouzouf gained
+== \#STAT_TrueMail   | Mail truly received
 
 ## Attributes ----------------------------------------------------------------|
 == \#ATTR_HELP_ACC | Weapon damage

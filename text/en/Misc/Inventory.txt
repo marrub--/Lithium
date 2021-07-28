@@ -9,8 +9,7 @@
 == \#INV_HINTS | You can right click to quickly move items. To equip armor place it on your \cdbody\c- or press \cnEquip\c-.
 
 ## Containers ----------------------------------------------------------------|
-
-== \#CONTAINER_Backpack | Backpack
+== \#CONTAINER_Backpack | $\#INFO_SHORT_BackpackBase
 == \#CONTAINER_ArmUpL   | L Shoulder
 == \#CONTAINER_ArmUpR   | R Shoulder
 == \#CONTAINER_ArmLoL   | L Wrist
@@ -23,7 +22,6 @@
 == \#CONTAINER_Item     | Item
 
 ## Tags ----------------------------------------------------------------------|
-
 == \#ITEM_TAG_ClawOfImp | Claw of Imp
 == \#ITEM_TAG_AndSigil | Binarist 'And' Sigil
 == \#ITEM_TAG_OrSigil | Binarist 'Or' Sigil
@@ -49,7 +47,6 @@
 == \#ITEM_TAG_ArmMidoriLo      | Midori Leggings
 
 ## Descriptions --------------------------------------------------------------|
-
 %% \#ITEM_SHORT_DivisionSigil
 \cgA mistake of the universe.
 
@@ -100,9 +97,7 @@ Used in division.
 \ca2 DT to bullets.
 1 DT to other types.
 
-%% \#ITEM_SHORT_ArmImprovedLo
-\ca4 DT to bullets.
-2 DT to other types.
+== \#ITEM_SHORT_ArmImprovedLo | $\#ITEM_SHORT_ArmStandardUp
 
 %% \#ITEM_SHORT_ArmTeflonLo
 \ca2 DT to electricity.
@@ -129,7 +124,6 @@ Used in division.
 4 DT to other types.
 
 ## Sprites -------------------------------------------------------------------|
-
 == \#Item_ArmStandardUp    | ARM1A0
 == \#Item_ArmImprovedUp    | ARM2A0
 == \#Item_ArmTeflonUp      | ARM3A0

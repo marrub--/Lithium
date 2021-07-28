@@ -11,9 +11,8 @@
 ##
 ## ---------------------------------------------------------------------------|
 
-require "set"
-
 require_relative "corinth.rb"
+require "set"
 
 def gen_map areas
    areas.flat_map do |area|
@@ -122,7 +121,7 @@ fonts.each do |fnt|
 
    words.push "null:"
 
-   system *words
+   system(*words)
 end
 
 system "optipng",

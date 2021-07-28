@@ -51,7 +51,7 @@ Magnetically attached a %S to your body, crushing your every bone.
 == \#PK_GET_017 | DavidPH was here, nyu.
 == \#PK_GET_018 | %S-senpai still won't notice you.
 == \#PK_GET_019 | Grabbed a %S!
-== \#PK_GET_020 | Snatched up a %S!
+== \#PK_GET_020 | Scronched a %S!
 == \#PK_GET_021 | Embraced the %S carefully!
 @@ \#PK_GET_022
 There's a thing that looks like a %S here. You picked it up.
@@ -174,9 +174,6 @@ perced to the rooten.
 == \#PK_unknown_000 | Literally What The Fuck
 == \#PK_unknown_001 | How Even
 == \#PK_unknown_002 | Why Are You Doing This
-
-== \#PK_fist_ALI   | unknown
-== \#PK_c_fist_ALI | unknown
 
 == \#PK_c_spas_ALI   | m_shotgun
 == \#PK_c_plasma_ALI | m_plasma

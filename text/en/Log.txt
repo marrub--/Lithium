@@ -38,9 +38,9 @@
 == \#LOG_ArtiTeleport | Chaos Device
 
 ## Ammo ----------------------------------------------------------------------|
-== \#LOG_Clip      | Bullets
+== \#LOG_Clip      | $\#TAG_BulletAmmo
 == \#LOG_ClipBox   | Box of Bullets
-== \#LOG_Shell     | Shells
+== \#LOG_Shell     | $\#TAG_ShellAmmo
 == \#LOG_ShellBox  | Box of Shells
 == \#LOG_Rocket    | Rocket
 == \#LOG_RocketBox | Box of Rockets

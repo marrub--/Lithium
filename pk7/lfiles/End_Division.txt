@@ -16,5 +16,5 @@
 14
    imge "";
    musi "lmusic/siarani.ogg";
-   text "DivisionSigil" 900 35 100;
+   text "DivisionSigil" 2000 10 100;
    next;

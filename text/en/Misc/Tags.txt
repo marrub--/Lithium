@@ -59,7 +59,7 @@
 == \#TAG_Weredragon      | Weredragon
 
 ## Status Effects ------------------------------------------------------------|
-== \#STAT_JET | Jet Booster
+== \#STAT_JET | Jetboost
 == \#STAT_LAG | Jetlagged
 == \#STAT_MKM | Marksman
 == \#STAT_ACC | Accurate

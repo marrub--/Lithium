@@ -93,7 +93,7 @@ void G_ScrBeg_Imp(struct gui_state *g, gid_t id, struct gui_arg_scr const *a) {
    /* get offset of scroller */
    __with(i32 vofs = 0;) /* offset in pixels of the content */
    {
-      if(a->contenth > realh)
+      if(a->contenth > realh && maxy)
          vofs = roundlk((a->contenth - realh) * (scr->y / maxy), 10);
 
       /* set the scrollbar's offset */

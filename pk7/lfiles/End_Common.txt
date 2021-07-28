@@ -12,8 +12,9 @@
 
 14
    imge "TITLEPIC";
+   musi "lmusic/siarani.ogg";
    fade 70;
-   text "Credits" 700 -1 70;
+   text "Credits" 400 -1 70;
    imge "";
    wait 50;
    text "Dedication" 100 100 150;

@@ -1,0 +1,40 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison G. Watson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
+%% \#ENDING_TimeOut_1
+You feel a sense of \cgoverwhelming dread. Everything is over? You scream, but your body doesn't respond. \cmEverything is over now. \cjEver\cgyt\c[Lith_Green]h\c[Lith_Pink]i\c[Lith_Yellow]n\c[Lith_Red]g\c[Lith_Purple].\cr Your v\cgision melts. Your min\cmd\cg is \cngone\cr. Nothing makes sense. \cmEverything\cr makes sense.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\cgGOOD NIGHT
+
+
+
+
+
+
+
+...                           GOOD NIGHT ...
+27154175928871285582608745517002178602783852106501698717822300469657836
+
+## EOF

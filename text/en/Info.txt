@@ -16,4 +16,7 @@
 !!include Info/Weapons.txt
 !!include Info/Yourself.txt
 
+== \#SAVED_BUFFER  | Saved Buffer
+== \#SAVED_MESSAGE | Saved Message
+
 ## EOF

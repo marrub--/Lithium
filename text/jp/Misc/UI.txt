@@ -25,7 +25,6 @@
 == \#NOTE_FMT   | \cm%iつのノート
 == \#OPEN       | 開ける
 == \#REQUIRED   | 必要
-== \#SCOREMULT  | スコア倍率
 == \#SELL       | 売る
 == \#UP         | 上へ
 == \#USE        | 使う
@@ -39,10 +38,8 @@
 == \#CAT_FILTER | ﾌｨﾙﾀｰ: %S
 
 == \#TERM_DISCONNECTING | 切断中...
-== \#TERM_IP            | <55.883.115.7>
-== \#TERM_SGXLINE       | SGXLine r4205
-== \#TERM_USE_TO_ACK    | Use To Acknowledge
-== \#TERM_OPEN_CONNECT  | Opening Connection to %S
+== \#TERM_USE_TO_ACK    | 使うで確認します
+== \#TERM_OPEN_CONNECT  | %Sの接続を開きます
 == \#TERM_REMOTE        | 遠隔: %S
 
 == \#GUI_TEXTBOX | [ここにクリックして入力開始]
@@ -64,21 +61,17 @@
 == \#TAB_STATISTICS | 統計
 == \#TAB_NOTES      | ノート
 
-== \#TAB_UPGRADES | 機能改善
-== \#TAB_SHOP     | ショップ
-
-== \#JET | ジェット
+== \#TAB_SHOP | ショップ
 
 == \#STATUS_XP | 経験値
 == \#STATUS_HP | 体力
 == \#STATUS_LV | レベル
-== \#STATUS_MP | マナ
 == \#STATUS_NX | 次のレベルまで
 
 == \#STATUS_LEVELUP | 現在%uポイントをステータスに割り当てられます。
 
-== \#ON  | On
-== \#OFF | Off
+== \#ON  | オン
+== \#OFF | オフ
 
 %% \#SKIP_INTRO
 %jSを長押しするとイントロをスキップできます。
@@ -102,8 +95,6 @@
 ## BIP -----------------------------------------------------------------------|
 == \#BIP_AVAILABLE  | %i/%i 使用可能
 == \#BIP_BACK       | <戻る
-== \#BIP_CATEGS     | INFO CATEGORIES
-== \#BIP_HEADER     | BIOTIC INFORMATION PANEL ver2.5
 == \#BIP_NO_RESULTS | 該当なし
 
 ## Results -------------------------------------------------------------------|
@@ -177,7 +168,6 @@
 == \#BIP_HELP_YOURSELF     | 自分の属性、能力、歴史。
 
 ## Statistics ----------------------------------------------------------------|
-== \#STAT_ScoreMul   | スコア倍率
 == \#STAT_Weapons    | 手に入れた武器の量
 == \#STAT_HealthUsed | 捨てたＨＰ
 == \#STAT_HealthSum  | ＨＰ合計

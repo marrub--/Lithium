@@ -6,31 +6,6 @@
 ##
 ## ---------------------------------------------------------------------------|
 
-== \#SHOP_TITLE_RocketAmmo | Rocket Ammo
-@@ \#SHOP_DESCR_RocketAmmo
-Rocket propelled grenades produced by SYM4.3 for your launcher.
-
-Delicious high-yield explosives right at your fingertips.
-
-== \#SHOP_TITLE_PlasmaAmmo | Plasma Ammo
-@@ \#SHOP_DESCR_PlasmaAmmo
-Highly condensed energy cells used by your plasma rifle.
-
-Produced by A.O.F Inc.
-
-== \#SHOP_TITLE_AllMap | $\#INFO_SHORT_AllMap
-@@ \#SHOP_DESCR_AllMap
-A map of the area for your Automap. Reveals all locations you have and
-haven't seen.
-
-== \#SHOP_TITLE_Infrared | $\#INFO_SHORT_Infrared
-@@ \#SHOP_DESCR_Infrared
-Light amplifying goggles that let you see in the dark.
-
-== \#SHOP_TITLE_RadSuit | $\#INFO_SHORT_RadSuit
-@@ \#SHOP_DESCR_RadSuit
-A radiation shielding suit which lets you walk through hazardous materials.
-
 == \#SHOP_TITLE_ChargeFist | $\#INFO_SHORT_ChargeFist
 @@ \#SHOP_DESCR_ChargeFist
 A melee weapon that you can charge.

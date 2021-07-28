@@ -11,8 +11,7 @@
 !!include End/Credits.txt
 !!include End/Dedication.txt
 
-!!include End/TimeOut1.txt
-!!include End/TimeOut2.txt
+!!include End/TimeOut.txt
 
 !!include End/Stan/Barons.txt
 !!include End/Stan/CyberDemon.txt

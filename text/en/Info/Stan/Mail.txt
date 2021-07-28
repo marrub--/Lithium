@@ -6,9 +6,11 @@
 ##
 ## ---------------------------------------------------------------------------|
 
+== \#REMOTE_LAMBERT | ALambert@corp.OFMD
+
 ## ---------------------------------------------------------------------------|
-== \#INFO_TITLE_MIntroStan | Saved Message
-== \#INFO_REMOT_MIntroStan | ALambert@corp.OFMD
+== \#INFO_TITLE_MIntroStan | $\#SAVED_MESSAGE
+== \#INFO_REMOT_MIntroStan | $\#REMOTE_LAMBERT
 == \#INFO_SSIZE_MIntroStan | 77
 %% \#INFO_DESCR_MIntroStan
 @@
@@ -65,7 +67,7 @@ Lambert out.  Good luck, Blazkowicz.
 
 ## ---------------------------------------------------------------------------|
 == \#INFO_TITLE_MCluster1Stan | $\#MAIL_NOTITLE
-== \#INFO_REMOT_MCluster1Stan | ALambert@corp.OFMD
+== \#INFO_REMOT_MCluster1Stan | $\#REMOTE_LAMBERT
 @@ \#INFO_DESCR_MCluster1Stan
 An explosion of some sort just happened nearby, it seems that the
 demons are reconstructing the world around you. You would best be
@@ -80,7 +82,7 @@ Lambert out.
 
 ## ---------------------------------------------------------------------------|
 == \#INFO_TITLE_MCluster2Stan | $\#MAIL_NOTITLE
-== \#INFO_REMOT_MCluster2Stan | ALambert@corp.OFMD
+== \#INFO_REMOT_MCluster2Stan | $\#REMOTE_LAMBERT
 @@ \#INFO_DESCR_MCluster2Stan
 There has been a change of plans going down the whole chain of
 command.
@@ -95,7 +97,7 @@ city somewhere in Hell. Command will await afterwards.
 Lambert out.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_TITLE_MCluster3Stan | Saved Text 244
+== \#INFO_TITLE_MCluster3Stan | $\#SAVED_BUFFER
 == \#INFO_REMOT_MCluster3Stan | $\#MAIL_INTERNAL
 %% \#INFO_DESCR_MCluster3Stan
 Now that you have entered the city, you m\\r-3434[[
@@ -138,7 +140,7 @@ on guns.
 See you.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_TITLE_MSecret1Stan | Saved Buffer
+== \#INFO_TITLE_MSecret1Stan | $\#SAVED_BUFFER
 == \#INFO_REMOT_MSecret1Stan | $\#MAIL_INTERNAL
 @@ \#INFO_DESCR_MSecret1Stan
 This place stinks of rotten flesh! I wonder what's going on here,
@@ -147,7 +149,7 @@ these blue walls sure seem out of place for Hell...
 Perhaps some sinners are waiting to eat my rockets!
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_TITLE_MSecret2Stan | Saved Buffer
+== \#INFO_TITLE_MSecret2Stan | $\#SAVED_BUFFER
 == \#INFO_REMOT_MSecret2Stan | $\#MAIL_INTERNAL
 @@ \#INFO_DESCR_MSecret2Stan
 Now I've done it, this place just keeps going deeper and getting

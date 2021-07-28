@@ -24,7 +24,6 @@ server float lith_sv_scoremul      = 1.0;
 server int   lith_sv_autosave      = 0;
 server bool  lith_sv_nobossdrop    = false;
 server bool  lith_sv_nobosses      = false;
-server bool  lith_sv_nofullammo    = true;
 server int   lith_sv_failtime      = 67;
 server bool  lith_sv_wepdrop       = false;
 server int   lith_sv_bloodtime     = 2000;
@@ -85,7 +84,7 @@ server bool lith_scanner_bar     = true;
 server int  lith_scanner_xoffs   = 0;
 server int  lith_scanner_yoffs   = 0;
 server int  lith_scanner_color   = 106; /* 'j' */
-server bool lith_scanner_altfont = false;
+server int  lith_scanner_font    = 0;
 
 server int lith_light_battery = 7;
 server int lith_light_regen   = 2;

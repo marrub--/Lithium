@@ -47,7 +47,7 @@ void G_Auto(struct gui_state *g, gid_t id, i32 x, i32 y, i32 w, i32 h,
       G_cutBox(&g->clips[g->clip], &x, &y, &w, &h);
    }
 
-   if(aabb_point(x, y, w, h, g->cx, g->cy)) {
+   if(aabb_point(x, y, w - 1, h - 1, g->cx, g->cy)) {
       g->hot = id;
 
       if(g->active == 0 && g->clicklft) {
@@ -194,7 +194,8 @@ bool G_Filler(i32 x, i32 y, struct gui_fil const *fil, bool held) {
 }
 
 i32 G_Tabs(struct gui_state *g, mem_size_t *st, gtab_t const *names,
-           mem_size_t num, i32 x, i32 y, i32 yp) {
+           mem_size_t num, i32 x, i32 y, i32 yp)
+{
    i32 xp = 0;
 
    for(mem_size_t i = 0; i < num; i++) {
@@ -203,11 +204,13 @@ i32 G_Tabs(struct gui_state *g, mem_size_t *st, gtab_t const *names,
          *st = i;
       }
 
-      if(xp == 5) {
-         xp = 0;
-         yp++;
-      } else {
-         xp++;
+      if(i != num - 1) {
+         if(xp == 5) {
+            xp = 0;
+            yp++;
+         } else {
+            xp++;
+         }
       }
    }
 

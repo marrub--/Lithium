@@ -34,6 +34,10 @@
    cl: gA tag: IconOfSin;
 }
 
+"items auto" {
+   cl: pD tag: Rakz;
+}
+
 "items" {
    cl: gA tag: ScoreChip;
    cl: gA tag: HealthBonus;
@@ -70,6 +74,15 @@
    cl: pM tag: ArmorInter;
    cl: pM tag: CBIUpgr1   unl: "KSKK";
    cl: pM tag: CBIUpgr2   unl: "KSKK";
+
+   cl: pD tag: Ruzuk;
+   cl: pD tag: Zaruk;
+   cl: pD tag: Kawak;
+   cl: pD tag: Zakwu;
+   cl: pD tag: Zikr;
+   cl: pD tag: Rokuw;
+   cl: pD tag: Rowuk;
+   cl: pD tag: Zwew;
 }
 
 "yourself auto" {

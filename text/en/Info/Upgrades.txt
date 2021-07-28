@@ -162,7 +162,7 @@ Solomon, requires only an energy source.
 
 ## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_HeadsUpDispJem | $\#UPGRADE_TITLE_HeadsUpDisC
-== \#INFO_TITLE_HeadsUpDispJem | Heads Up Display
+== \#INFO_TITLE_HeadsUpDispJem | $\#INFO_TITLE_HeadsUpDisp
 @@ \#INFO_DESCR_HeadsUpDispJem
 This program is the 37th version of the standard issue heads-up display for
 AOF employees. The binary remains uncredited, and the decompiled code has no
@@ -170,7 +170,7 @@ authors listed in any of the files, though is well-commented.
 
 ## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_Magic | $\#UPGRADE_TITLE_Magic
-== \#INFO_TITLE_Magic | Mana Absorber
+== \#INFO_TITLE_Magic | $\#INFO_SHORT_Magic
 @@ \#INFO_DESCR_Magic
 A small device reminiscent of a landmine which attaches to a chestplate,
 pauldron or shoulder pad, which uses an unknown \ckFlavum\c- mode spell that

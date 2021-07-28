@@ -7,50 +7,32 @@
 ## ---------------------------------------------------------------------------|
 
 %% \#ENDING_Credits
-\cd>>>>>                             [[[[ Lithium ]]]]
-\cd>>>>>                    [[[[ Project Golan, Xevv 2 ]]]]
+\cd>>>>> [[[[ Lithium ]]]]
+\cd>>>>> [[[[ Project Golan, Xevv 2 ]]]]
 
-\cdOriginal music\cj for ending sequences by \cn_sink\cj
-Intermission music - \cdThe Alchemist\cj by \cnSkaven\cj
-Title music - \cdShredder\cj by \cn505\cj
-Fonts by \cnJimmy\cj
-
-\cd>>>>>                         [[[[ Graphics By ]]]]
 @@
-\cna1337spy\cj, \cnabbuw\cj, \cnAnthony Cole\cj, \cnBloax\cj,
-\cnCage\cj, \cnCaptain J\cj, \cnChronoTeeth\cj, \cnCombine_Kegan\cj,
-\cnDynamo\cj, \cnGAA1992\cj, \cnHorrorMovieGuy\cj, \cnJetPlane\cj,
-\cnKate \cnFox\cj, \cnKurashiki\cj, \cnMarlboro Mike\cj, \cnMarphy
-\cnBlack\cj, \cnMarrub\cj, \cnMike12\cj, \cnMinigunner\cj,
-\cnmonkeybtm6\cj, \cnMrEnchanter\cj, \cnRyan \cnCordell\cj, \cnScuba
-\cnSteve\cj, \cnSeryder\cj, \cnSgt. \cnShivers\cj, \cnSiFi \cn270\cj,
-\cnSkelegant\cj, \cnSlax\cj, \cnSolo \cnSpaghetti\cj,
-\cnTheRailgunner\cj, \cnTurbo\cj, \cnvikingbro\cj, \cnVriskaSerket\cj,
-\cnTerminusEst13\cj, \cnwildweasel\cj, \cntorridGristle\cj,
-\cnXaser\cj, \cnYholl\cj, \cnZombie\cj, and \cnzrrion\cj
+\cjby Alison Gray Watson.
+
+\cm[todo: put \cipatron\cm(s) list here at end of month]
 @@
 
-\cd>>>>>                        [[[[ Audio Help From ]]]]
-@@
-\cna1337spy\cj, \cnKyle873\cj, \cnShadowlink226\cj,
-\cnTerminusEst13\cj, and \cnwildweasel\cj
-@@
+\cd>>>>> [[[[ Thanks To ]]]]
 
-\cd>>>>>                         [[[[ Code Help From ]]]]
-@@
-\cnDavidPH\cj, \cnGutawer\cj, \cnInsanityBringer\cj, \cnJimmy\cj,
-\cnKate Fox\cj, \cnMarisa Kirisame\cj, \cnXaser\cj, \cnYholl\cj,
-and \cnZombie\cj
-@@
-
-\cd>>>>>                          [[[[ Thank You ]]]]
 @@
 \cnDavidPH\cj, for making this project possible.
 
-\cnKate\cj, \cnKyle873\cj, \cnSe7enytes\cj and \cnXaser\cj, for being
-an inspiration.
+\c[Lith_Kate]Kate\cj, \cnKyle873\cj, \cnSe7enytes\cj and \cnXaser\cj,
+for being an inspiration.
 
-\cnMarisa\cj, \cnYholl\cj, and \cnZombie\cj, for tons of help.
+\cnGutawer\cj, \cnMarisa\cj, \cnYholl\cj, and \cnZombie\cj, for tons
+of help.
+
+\czMost of all, my partner \ctRibonucleic Asshat\cz for keeping me afloat
+in the ocean of life.
+
+\cnYou\cj, for playing!
 @@
+
+\cv-\ca-\cj-\ca-\cv-\cf-\cj-\ct-\cm-
 
 ## EOF

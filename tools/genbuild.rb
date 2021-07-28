@@ -11,9 +11,8 @@
 ##
 ## ---------------------------------------------------------------------------|
 
-require "ostruct"
-
 require_relative "corinth.rb"
+require "ostruct"
 
 class SrcsEnt
    attr_reader :o, :c

@@ -181,7 +181,7 @@ in an absorbent mana pool form, somehow.
 Gives 200 health and defends against attack temporarily.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_ArmStandard | Standard Armor
+== \#INFO_SHORT_ArmStandard | $\#ITEM_TAG_ArmStandardUp
 == \#INFO_TITLE_ArmStandard | Standard Military Armor
 @@ \#INFO_DESCR_ArmStandard
 A standard plated ballistic vest able to absorb a bit of damage from bullets.
@@ -189,7 +189,7 @@ Attribution to the current design has been lost to time from the hundreds of
 revisions it has gone through, with parts of it dating back as far as 2082 CE.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_ArmImproved | Improved Armor
+== \#INFO_SHORT_ArmImproved | $\#ITEM_TAG_ArmImprovedUp
 == \#INFO_TITLE_ArmImproved | Improved Military Armor
 @@ \#INFO_DESCR_ArmImproved
 An improved, but more expensive, version of standard military armor. Has
@@ -198,8 +198,8 @@ with. Materials for this are mainly produced by SYM4.3, but the actual assembly
 is done by many others.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_ArmTeflon | Teflon Armor
-== \#INFO_TITLE_ArmTeflon | Teflon-weave Armor
+== \#INFO_SHORT_ArmTeflon | $\#ITEM_TAG_ArmTeflonUp
+== \#INFO_TITLE_ArmTeflon | $\#INFO_SHORT_ArmTeflon
 @@ \#INFO_DESCR_ArmTeflon
 An armor with a vest made of a synthetic material composed of
 Polytetrafluoroethylene (PTFE or brand name Teflon,) Kevlar, and others, made
@@ -208,14 +208,14 @@ well, a material similar to the Improved Military Armor's. Produced by Sheka
 Kaff, Inc.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_ArmDendrite | Dendrite Armor
+== \#INFO_SHORT_ArmDendrite | $\#ITEM_TAG_ArmDendriteUp
 == \#INFO_TITLE_ArmDendrite | $\#INFO_SHORT_ArmDendrite
 @@ \#INFO_DESCR_ArmDendrite
 An armor with a nickel dendritic micro-structure woven with tungsten and other
 materials for extreme heat resistance. Produced by Sheka Kaff, Inc.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_ArmAerodynamic | Aerodynamic Armor
+== \#INFO_SHORT_ArmAerodynamic | $\#ITEM_TAG_ArmAerodynamicUp
 == \#INFO_TITLE_ArmAerodynamic | $\#INFO_SHORT_ArmAerodynamic
 @@ \#INFO_DESCR_ArmAerodynamic
 Light wind-gliding armor with a blue finish that allows the wearer increased
