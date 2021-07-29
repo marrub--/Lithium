@@ -155,6 +155,7 @@ end
       SrcsEnt.from("w_data.c"),
       SrcsEnt.from("w_dmon.c"),
       SrcsEnt.from("w_finale.c"),
+      SrcsEnt.from("w_menu.c"),
       SrcsEnt.from("w_misc.c"),
       SrcsEnt.from("w_monster.c"),
       SrcsEnt.from("w_payout.c"),

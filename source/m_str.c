@@ -359,7 +359,7 @@ str lang(str name) {
    return ret == name ? snil : ret;
 }
 
-stkcall
+alloc_aut(0) stkcall
 str ns(str s) {
    return s != snil ? s : st_null;
 }

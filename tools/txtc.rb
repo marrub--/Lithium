@@ -85,14 +85,16 @@ def parse_file state, filename, language
          do_close_buf.call
          name = split_name m[1]
          for lnam in state.langs.each_key
-            lname = [lnam] + name
-            parse_file state, lname, lnam
+            unless lnam == "default"
+               lname = [lnam] + name
+               parse_file state, lname, lnam
+            end
          end
       when /^!!include (.+)$/
          m = $~
          do_close_buf.call
          name = split_name m[1]
-         parse_file state, name, language
+         parse_file(state, name, language || "default")
       else
          if buf
             if in_concat

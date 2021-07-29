@@ -1,233 +1,214 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%/                                                                         \%%
-%/          /7       //777777777777777777777777777  ///                      \%
-%          /:/7     //........................../  /::/ 77    777    777///   %
-%         /://               //77/     ///    /// /:7/77:7   /::/7 //77///    %
-%        /://    /777       //77=======::////::///:7/ /:7   //::::7:::://     %
-%       /://    /::/       //77/====7::::::::://:/7/ /:/   //::/777777//      %
-%      /://    /::/       //77/    /:://   /://:/7/ /:=/  /777/  7 /7//       %
-%     /:======/::/=======//77/    /:://   /://:/7/  7::::=77//    /::/        %
-%    /:::::://::/==========//    ===//   /://:/7/    7==/:7//    /::/         %
-%           /::/                        /://  ^^                //7/          %
-%           ^^^                         ^^^                     ^^^           %
-%                                                                             %
-%\                           Project Golan, Xevv 2                           /%
-%%\                                                                         /%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+## -*-Agw-LithTxt-*-
+%% \#CREDITS
+////----------------------------------------------------------------------\\\\
+%//                                                                        \\%
+%/         /7       //777777777777777777777777777  ///                      \%
+%         /:/7     //........................../  /::/ 77    777    777///   %
+%        /://               //77/     ///    /// /:7/77:7   /::/7 //77///    %
+%       /://    /777       //77=======::////::///:7/ /:7   //::::7:::://     %
+%      /://    /::/       //77/====7::::::::://:/7/ /:/   //::/777777//      %
+%     /://    /::/       //77/    /:://   /://:/7/ /:=/  /777/  7 /7//       %
+%    /:======/::/=======//77/    /:://   /://:/7/  7::::=77//    /::/        %
+%   /:::::://::/==========//    ===//   /://:/7/    7==/:7//    /::/         %
+%          /::/                        /://  ^^                //7/          %
+%          ^^^                         ^^^                     ^^^           %
+%                                                                            %
+%\                          Project Golan, Xevv 2                           /%
+%\\                                                                        //%
+\\\\______________________________________________________________________////
+~
+///%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\\\
 %/                                                                           \%
-% I have probably miscredited or forgotten to credit some people.             %
-% Please tell me if I did and I will correct it.                              %
+%  I have probably miscredited or forgotten to credit some people.            %
+%  Please tell me if I did and I will correct it.                             %
+%                                                                             %
+%  If you wanna use something from this mod, *please* ask me (Marrub) first.  %
+%  I don't want myself or anyone else who's given me stuff (directly or not)  %
+%  to get pissed off because proper attribution or permission wasn't given.   %
+%                                                                             %
+%  Sound credits are all in the <ltext/sound> files as comments.              %
+%                                                                             %
+%  See <licenses/GDCC-libc.txt> for licensing of GDCC libc, as is included    %
+%  in linked binary form in <acs/lithmain.bin>.                               %
+%                                                                             %
+%  Sources for GDCC libc can be found at <https://github.com/DavidPH/GDCC>.   %
+%                                                                             %
+%  See <licenses/base64.txt> for licensing of Base64 Decoding/Encoding, as    %
+%  is included in linked binary form in <acs/lithmain.bin>.                   %
+%                                                                             %
+%  Base64 sources are included within Lithium's sources.                      %
+%                                                                             %
+%  Lithium's source can be found at <https://github.com/marrub--/Lithium>.    %
 %\                                                                           /%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-|/                                                                           \|
-| If you want to use something from this mod, *please* ask me (Marrub) first. |
-| I don't want myself or anyone else who's given me stuff (directly or not)   |
-| to get pissed off because proper attribution or permission wasn't given.    |
-|                                                                             |
-| It is OK to use any code not otherwise marked in this project, as it is all |
-| public domain.                                                              |
-|                                                                             |
-| Sound credits are all in the <ltext/sound> files as comments.               |
-|\                                                                           /|
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-*/                                                                           \*
-* See <licenses/GDCC-libc.txt> for licensing of GDCC libc, as is included in  *
-* linked binary form in <acs/lithmain.bin>.                                   *
-*                                                                             *
-* See <licenses/base64.txt> for licensing of Base64 Decoding/Encoding, as is  *
-* included in linked binary form in <acs/lithmain.bin>.                       *
-*                                                                             *
-* See <licenses/cc0.txt> for licensing of various text sources in Lithium.    *
-*                                                                             *
-* Sources for GDCC libc can be found at <https://github.com/DavidPH/GDCC>.    *
-*                                                                             *
-* Sources for Lithium can be found at <https://github.com/marrub--/Lithium>.  *
-*                                                                             *
-* Base64 sources are included within Lithium's sources.                       *
-*\                                                                           /*
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\\\%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%///
+~
                               * Audio *
 
-* 505           * Title music (hYmns - Shredder)
-* BouncyTEM     * Nanto Naku music (Perdition)
-* Green Den     * Test map music (Dandalins Story)
-* Kyle873       * Fallout 4 sound rip
-*               * Phantasy Star Nova sound rip
-* Shadowlink226 * Halo 3 sound rip
-* Skaven        * Intermission music (The Alchemist)
-* TerminusEst13 * A whole bunch of sound sources
-* WildWeasel    * Sound rip from Mac OS 9
-* _sink         * End of game music
-* a1337spy      * Various sounds
+@ 505           - Title music (hYmns - Shredder)
+@ BouncyTEM     - Nanto Naku music (Perdition)
+@ Green Den     - Test map music (Dandalins Story)
+@ Kyle873       \ Fallout 4 sound rip
+                | Phantasy Star Nova sound rip
+@ Shadowlink226 - Halo 3 sound rip
+@ Skaven        - Intermission music (The Alchemist)
+@ TerminusEst13 - A whole bunch of sound sources
+@ WildWeasel    - Sound rip from Mac OS 9
+@ _sink         - End of game music
+@ a1337spy      - Various sounds
+~
+                             * Weapons *
 
+@ ChronoTeeth    - SPAS reload frames
+@ Dr Cosmobyte   - Plasma Diffuser sprite
+@ Dynamo         - Minigun rip from Target
+@ GAA1992        - Gauss Shotgun idle sprite
+@ JetPlane       - Image used as a base for the SMG sprite
+@ Minigunner     - Missile Launcher sprite
+@ Sgt. Shivers   \ Shotgun, knife, and revolver sprites
+                 | Mateba & SPAS reload animations
+@ VriskaSerket   - Image used as a base for the Star Destroyer sprite
+@ WildWeasel     - Sleeves for Cyber-Mage
+@ Yholl          - Made the Charge Fist not suck
+@ Zombie         - Image used as a base for the SPAS sprite
+@ vikingbro      - Image used as a base for the Shock Rifle sprite
+@ zrrion         - Sprites for the Grenade Launcher, Pistol and Plasma Rifle
+~
                              * Graphics *
 
-* Anthony Cole   * Test map marine sprites
-* ChronoTeeth    * SPAS reload frames
-* Combine_Kegan  * Shobon.
-* Dynamo         * Minigun (from Target originally)
-* GAA1992        * Gauss Shotgun idle sprite
-* HorrorMovieGuy * SteggleSphere sprites
-* JetPlane       * Image used as a base for the SMG sprite
-* Kate Fox       * Blank sphere used as a base for the the Blursphere
-*                * Intermission text and background
-* Kurashiki      * Basilissa art
-* Marlboro Mike  * Score item sprites
-*                * Rocket Box pickup
-* Marphy Black   * Doom 2 Minor Sprite Fixes sprites are included in the mod
-* Minigunner     * Smooth explosion sprites
-*                * Missile Launcher sprite
-* Dr Cosmobyte   * Plasma Diffuser sprite
-* Ryan Cordell   * Green/blue armor pickups
-*                * XDeaths for the Cacodemon, Demon, Archvile, and Revenant
-*                * Archvile attack effects
-*                * Arachnotron attack effects
-*                * Baron attack effects
-*                * Splash effects
-*                * Bullet puff sparks
-* Seryder        * Briefcase sprite (WUPGA0)
-* Sgt. Shivers   * Shotgun sprites
-*                * Revolver sprites (from Powerslave originally)
-*                * Knife sprites
-*                * Mateba reload animation
-*                * SPAS reload animation
-*                * Windows XP theme
-*                * Armor sprites
-*                * Basilissa GUI
-* SiFi 270       * Commander Keen sprites
-* Skelegant      * Shobon Sphere sprite
-* VriskaSerket   * Image used as a base for the Star Destroyer sprite
-* TerminusEst13  * SHKRA0/B0
-* WildWeasel     * Sleeves for Cyber-Mage
-* Xaser Acheron  * Bullet puffs, probably other things I took from Psychic
-* Yholl          * Made the Charge Fist not suck
-*                * Cardinal gem sprites
-* Zombie         * Image used as a base for the SPAS sprite
-* a1337spy       * Score chip sprite
-* abbuw          * Vent texture
-* monkeybtm6     * BLLTR0 sprite
-* vikingbro      * Image used as a base for the Shock Rifle sprite
-* zrrion         * Sprites for the Grenade Launcher, Pistol and Plasma Rifle
-*                * Skull keys
-*                * Health pickups
-*                * Cell Pack pickup
-*                * Health bonus pickup
-
+@ Anthony Cole   - Test map marine sprites
+@ Combine_Kegan  - Shobon.
+@ HorrorMovieGuy - SteggleSphere sprites
+@ Kate Fox       \ Blank sphere used as a base for the the Blursphere
+                 | Intermission text and background
+@ Kurashiki      - Basilissa art
+@ Marlboro Mike  \ Score item sprites
+                 | Rocket Box pickup
+@ Marphy Black   - Doom 2 Minor Sprite Fixes sprites are included in the mod
+@ Minigunner     - Smooth explosion sprites
+@ Ryan Cordell   \ Green/blue armor pickups
+                 | XDeaths for the Cacodemon, Demon, Archvile, and Revenant
+                 | Archvile, Arachnotron, and Baron attack effects
+                 | Splash and bullet puff spark effects
+@ Seryder        - Briefcase sprite (WUPGA0)
+@ Sgt. Shivers   \ Armor sprites
+                 | Windows XP and Basilissa themes
+@ SiFi 270       - Commander Keen sprites
+@ Skelegant      - Shobon Sphere sprite
+@ TerminusEst13  - SHKRA0/B0
+@ Xaser Acheron  - Bullet puffs, probably other things I took from Psychic
+@ Yholl          - Cardinal gem sprites
+@ a1337spy       - Score chip sprite
+@ abbuw          - Vent texture
+@ monkeybtm6     - BLLTR0 sprite
+@ vikingbro      - Image used as a base for the Shock Rifle sprite
+@ zrrion         - Skull key, health, cell pack, and health bonus pickups
+~
                                * Code *
 
-* Gutawer         * Lots of help with ZScript
-* KeksDose        * (De)projection code
-* Jimmy           * Made the original MENUDEF code
-* Kate Fox        * Integer interpolation function
-*                 * Cannon and plasma rifle code are based on Error: Doom
-*                 * This was originally a mod of Error: Doom!
-*                 * Prettied up the rain effects
-* Marisa Kirisame * Help with ZScript and fonts
-* Yholl           * Effects from LegenDoom
-*                 * Knife code
-*                 * Missile Launcher code
-
+@ Gutawer         - Lots of help with ZScript
+@ KeksDose        - (De)projection code
+@ Jimmy           - Made the original MENUDEF code
+@ Kate Fox        \ Integer interpolation function
+                  | Cannon and plasma rifle code are based on Error: Doom
+                  | This was originally a mod of Error: Doom!
+                  | Prettied up the rain effects
+@ Marisa Kirisame - Help with ZScript and fonts
+@ Yholl           \ Effects from LegenDoom
+                  | Knife code
+                  | Missile Launcher code
+~
                                * Help *
 
-* Combine_Kegan      * Ideas for stuff, shitposting
-* DavidPH            * Lots of help with a lot of things,
-*                    * GDCC, and generally cool person
-* Dr Cosmobyte       * Sprite finding
-* JetPlane           * Emotional support twink
-* Jimmy              * Really cool dude
-* Kate Fox           * My biggest inspiration.
-* Kyle873            * said a nice thing i think maybe. Also inspiration.
-* Marty Kirra        * Cool person
-* Ribonucleic Asshat * Emotional support twink (female)
-* TerminusEst13      * Help with finding some sprites to work with
-* Wartorn            * Help with HUD design, emotional support
-* WildWeasel         * Help with making fonts, suggestions for HUD
-* Xaser Acheron      * Help with code stuff
-* Yholl              * eviel gost
-*                    * Ideas for a lot of stuff
-*                    * Re-texturing the TITLEMAP for me
-*                    * Marathon resources
-*                    * Descriptions for some of the extra upgrades
-*                    * Help with a bunch of stuff
-* Zombie             * Lots of help with ZScript
-
+@ Combine_Kegan      - Ideas for stuff, shitposting
+@ DavidPH            \ Lots of help with a lot of things,
+                     | GDCC, and generally cool person
+@ Dr Cosmobyte       - Sprite finding
+@ JetPlane           - Emotional support twink
+@ Jimmy              - Really cool dude
+@ Kate Fox           - My biggest inspiration.
+@ Kyle873            - said a nice thing i think maybe. Also inspiration.
+@ Marty Kirra        - Cool person
+@ Ribonucleic Asshat - Emotional support twink (female)
+@ TerminusEst13      - Help with finding some sprites to work with
+@ Wartorn            - Help with HUD design, emotional support
+@ WildWeasel         - Help with making fonts, suggestions for HUD
+@ Xaser Acheron      - Help with code stuff
+@ Yholl              \ eviel gost
+                     | Ideas for a lot of stuff
+                     | Re-texturing the TITLEMAP for me
+                     | Marathon resources
+                     | Descriptions for some of the extra upgrades
+                     | Help with a bunch of stuff
+@ Zombie             - Lots of help with ZScript
+~
                              * Testing *
 
-* Ancient Chaos Wizard
-* Ikazu-san
-* MENTHA
-* RiboNucleic Asshat
-* Sgt. Shivers
-* Sledge
-* Yholl
-* Zombie
-* a1337spy
-* anomalouslymandatory
-* nax
-* silentw
-* wildweasel
+- Ancient Chaos Wizard
+- Ikazu-san
+- MENTHA
+- RiboNucleic Asshat
+- Sgt. Shivers
+- Sledge
+- Yholl
+- Zombie
+- a1337spy
+- anomalouslymandatory
+- nax
+- silentw
+- wildweasel
 
-Thanks so much to all of you!
+                    Thanks so much to all of you!
+~
+                           * Omega Cannon *
 
-                          * Cannon sprites *
+@ Minigunner                   - Centered DNF enforcer gun
+@ Solo Spaghetti, Bloax & Slax - Skull SSG
+@ Marrub                       - Redraw
 
-* Minigunner     * Centered DNF enforcer gun
-* Solo Spaghetti * Skull SSG
-* Bloax          * Edit of skull SSG with barrel
-* Slax           * Edit of skull SSG with scope
-* Marrub         * Redraw
+                           * Combat Rifle *
 
-                       * Combat Rifle sprites *
+@ Sgt. Shivers  - Model rip
+@ TheRailgunner - Edit of model rip
+@ Marrub        - Small edits
 
-* Sgt. Shivers  * Model rip
-* TheRailgunner * Edit of model rip
-* Marrub        * Small edits
+                            * Ion Rifle *
 
-                        * Ion Rifle sprites *
+@ monkeybtm6    - Weapon rip from Disruptor
+@ torridGristle - Assault rifle sprite
+@ Marrub        - Redraw
 
-* monkeybtm6    * Weapon rip from Disruptor
-* torridGristle * Assault rifle sprite
-* Marrub        * Redraw
+                          * Laser Shotgun *
 
-                      * Laser Shotgun sprites *
+@ Mike12                      - Vented shotgun
+@ GAA1992, Cage & Scuba Steve - Auto shotgun
+@ Marrub                      - Redraw of sights and design
 
-* Mike12                      * Vented shotgun
-* GAA1992, Cage & Scuba Steve * Auto shotgun
-* Marrub                      * Redraw of sights and design
+                           * Sniper Rifle *
 
-                       * Sniper Rifle sprites *
+@ MrEnchanter  - Sniper rifle sprite
+@ Marrub       - Redrawing and detailing, re-handing
+@ Sgt. Shivers - Firing animation
 
-* MrEnchanter  * Sniper rifle sprite
-* Marrub       * Redrawing and detailing, re-handing
-* Sgt. Shivers * Firing animation
+                          * Super Shotgun *
 
-                      * Super Shotgun sprites *
+@ Captain J & Turbo - Whole sprite
+@ Sgt. Shivers      - Animation
 
-* Captain J & Turbo * Whole sprite
-* Sgt. Shivers      * Animation
+                          * 4-Bore Shotgun *
 
-                      * 4-Bore Shotgun sprites *
-
-* JoeyTD  * Center frame base
-* Batandy * Reload animation base
-
+@ JoeyTD  - Center frame base
+@ Batandy - Reload animation base
+~
                               * Fonts *
 
-* IBM         * bigupper
-* Jimmy       * lmidfont and smallfont
-* littlelimit * 美咲ゴシックと明朝 https://littlelimit.net/misaki.htm
-*             * k6x8 https://littlelimit.net/k6x8.htm
-* 小山壽久    * jiskan16
-* 作者です    * areaname
+@ Hanataka Shinya   - jiskan16
+@ Hiroshi Tachibana - ljtrmfont
+@ IBM               - bigupper
+@ Jimmy             - lmidfont and smallfont
+@ The Author        - areaname
+@ Toshiyuki Imamura - jiskan16, ljtrmfont
+@ littlelimit       - Misaki and k6x8
+~
+                       * LOOKING FOR CREDITS *
 
-                      ** LOOKING FOR CREDITS **
-
-* Barrel explosion sprites
-* ljtrmfont source, apparently by 橘浩志 and 今村俊幸 but I don't know
-  where to find it (the font is JF Dot K12 Bold)
-  ljtrmfontの元：外れに橘浩志さんと今村俊幸さんの名前がありますけど、
-  起源がよくわからないでして、見つかりませんです。（JFドットK12から渡
-  した）
-
-EOF
+- Barrel explosion sprites

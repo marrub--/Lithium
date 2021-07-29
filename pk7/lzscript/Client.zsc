@@ -16,7 +16,6 @@
 #include "lzscript/Client/Projection.zsc"
 #include "lzscript/Client/StatScreen.zsc"
 #include "lzscript/Client/StatusBar.zsc"
-#include "lzscript/Client/UpdateMenu.zsc"
 
 #include "lzscript/libeye/projector.zsc"
 #include "lzscript/libeye/projectorGl.zsc"

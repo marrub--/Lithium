@@ -21,10 +21,12 @@
 == \#EMPTY      | <empty>
 == \#EQUIP      | Equip
 == \#FREE       | Free
+== \#LEFT       | Left
 == \#MOVE       | Move
 == \#NOTE_FMT   | \cmNote %i
 == \#OPEN       | Open
 == \#REQUIRED   | Required
+== \#RIGHT      | Right
 == \#SELL       | Sell
 == \#UP         | Up
 == \#USE        | Use

@@ -48,6 +48,7 @@
 ##
 ## ---------------------------------------------------------------------------|
 
+!!lang default | default
 !!lang en | en enu default
 !!lang es | es
 !!lang jp | jp
@@ -58,5 +59,7 @@
 !!inclang Info.txt
 !!inclang Log.txt
 !!inclang Misc.txt
+
+!!include ../credits.txt
 
 ## EOF

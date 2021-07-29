@@ -1,4 +1,4 @@
-/* ---------------------------------------------------------------------------|
+/* -*-C-*---------------------------------------------------------------------|
  *
  * Distributed under the CC0 public domain license.
  * By Alison G. Watson. Attribution is encouraged, though not required.
@@ -7,82 +7,67 @@
  * ---------------------------------------------------------------------------|
  */
 
-DefaultListMenu
-{
-   Font "lbigfont", "DarkGreen", "Green"
-   Selector "-", -20, 2
-   LineSpacing 16
-   Size Clean
+defaultListMenu {
+   font        "lbigfont", "DarkGreen", "Green"
+   lineSpacing 16
+   size        clean
 }
 
-DefaultOptionMenu
-{
-   Position -15
+defaultOptionMenu {
+   position -15
 }
 
-ListMenu "MainMenu"
-{
-   StaticPatch 190, -10, "lgfx/Menu/Title.png"
-   Position 30, 90
+listMenu "MainMenu" {
+   staticPatch 190, -10, "lgfx/Menu/Title.png"
+   position    30, 90
 
-   TextItem "$MENU_NGAME", "n", "PlayerclassMenu"
-   ifoption(SwapMenu)
-   {
-      TextItem "$MENU_LOADG",  "l", "LoadGameMenu"
-      TextItem "$MENU_SAVEG",  "s", "SaveGameMenu"
-      TextItem "$MENU_OPTION", "o", "OptionsMenu"
+   textItem "$MENU_NGAME", "n", "PlayerclassMenu"
+   ifOption(swapMenu) {
+      textItem "$MENU_LOADG",  "l", "LoadGameMenu"
+      textItem "$MENU_SAVEG",  "s", "SaveGameMenu"
+      textItem "$MENU_OPTION", "o", "OptionsMenu"
+   } else {
+      textItem "$MENU_OPTION", "o", "OptionsMenu"
+      textItem "$MENU_LOADG",  "l", "LoadGameMenu"
+      textItem "$MENU_SAVEG",  "s", "SaveGameMenu"
    }
-   else
-   {
-      TextItem "$MENU_OPTION", "o", "OptionsMenu"
-      TextItem "$MENU_LOADG",  "l", "LoadGameMenu"
-      TextItem "$MENU_SAVEG",  "s", "SaveGameMenu"
-   }
-   TextItem "$MENU_UPDAT", "u", "UpdateMenu"
-   TextItem "$MENU_QUITG", "q", "QuitMenu"
+   textItem "$MENU_CREDIT", "c", "CreditsMenu"
+   textItem "$MENU_QUITG",  "q", "QuitMenu"
 }
 
-ListMenu "PlayerclassMenu"
-{
-   Class "Lith_PlayerclassMenu"
+listMenu "PlayerclassMenu" {
+   class "Lith_PlayerclassMenu"
 
-   NetgameMessage "$NEWGAME"
-   StaticTextCentered 160, 30, "$MENU_CHOOSECLASS"
-   Position 14, 55
-   Font "ltrmfont"
-   StaticPatch 4, 48, "lgfx/Menu/ClassBack.png"
-   StaticPatch 100, 50, "lgfx/Menu/ClassDescBack.png"
-   PlayerDisplay 117, 65, "00 00 00", "00 FF 00"
+   staticTextCentered 160, 30, "$MENU_CHOOSECLASS"
+   position           14, 55
+   font               "ltrmfont"
+   staticPatch        4, 48, "lgfx/Menu/ClassBack.png"
+   staticPatch        100, 50, "lgfx/Menu/ClassDescBack.png"
+   playerDisplay      117, 65, "00 00 00", "00 FF 00"
 }
 
-ListMenu "EpisodeMenu"
-{
-   NetgameMessage "$NEWGAME"
-   StaticTextCentered 160, 30, "$MENU_WHICHEPISODE"
-   StaticPatch 42, 48, "lgfx/Menu/EpisodeBack.png"
-   Position 48, 63
-   Font "bigupper", "DarkGreen", "Green"
+listMenu "EpisodeMenu" {
+   staticTextCentered 160, 30, "$MENU_WHICHEPISODE"
+   staticPatch        42, 48, "lgfx/Menu/EpisodeBack.png"
+   position           48, 63
+   font               "bigupper", "DarkGreen", "Green"
 }
 
-ListMenu "SkillMenu"
-{
-   StaticTextCentered 160, 30, "$MENU_CHOOSESKILL"
-   StaticPatch 42, 48, "lgfx/Menu/SkillBack.png"
-   Position 48, 63
-   Font "bigupper", "DarkGreen", "Green"
+listMenu "SkillMenu" {
+   staticTextCentered 160, 30, "$MENU_CHOOSESKILL"
+   staticPatch        42, 48, "lgfx/Menu/SkillBack.png"
+   position           48, 63
+   font               "bigupper", "DarkGreen", "Green"
 }
 
-ListMenu "UpdateMenu"
-{
-   Class "Lith_UpdateMenu"
+listMenu "CreditsMenu" {
+   class    "Lith_CreditsMenu"
+   size     640, 480
+   position 48,  64
+   font     "ltrmfont", "DarkGreen", "Green"
 
-   Font "smallfont", "Green"
-   Selector "-", -10, 0
-   LineSpacing 10
-   Position 20, 0
-
-   Lith_UpdateScroll "$LITH_UP",   "u", 1
-   Lith_UpdateScroll "$LITH_DOWN", "d", 0
+   Lith_CreditsMenuScroll "$LITH_LEFT",  "l", 0
+   Lith_CreditsMenuScroll "$LITH_RIGHT", "r", 1
 }
 
 /* EOF */
