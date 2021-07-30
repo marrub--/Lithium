@@ -66,6 +66,9 @@ void P_CBI_TabInfo(struct gui_state *g) {
 script void P_CBI_PTick() {
    struct gui_state *g = &pl.cbi.guistate;
 
+   pl.cbi.st.buyfill.tic  = CVarGetI(sc_gui_buyfiller);
+   pl.cbi.st.itemfill.tic = 26;
+
    pl.cbi.theme = CVarGetI(sc_gui_theme);
 
    if(pl.cbi.theme != pl.cbi.oldtheme) {

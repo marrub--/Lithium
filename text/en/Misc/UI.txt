@@ -84,10 +84,12 @@
 == \#ON  | On
 == \#OFF | Off
 
-%% \#SKIP_INTRO
-Hold %jS to skip this intro.
+%% \#SKIP_INTRO_1
+: Skip intro
 It will not show up again.
-Hold %jS to continue.
+
+%% \#SKIP_INTRO_2
+: Continue to next page
 
 %% \#BAD_TIMELINE
 This timeline is

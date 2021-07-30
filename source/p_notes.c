@@ -21,10 +21,6 @@ void P_CBI_TabNotes(struct gui_state *g)
    struct gui_txt *st = &CBIState(g)->notebox;
    G_TxtBox(g, st, 35, 27);
 
-   PrintText_str(ns(lang(sl_edit)), sf_smallfnt, g->defcr, g->ox+19,2, g->oy+28,0);
-   if(G_ChkBox(g, CBIState(g)->noteedit, 21, 24))
-      CBIState(g)->noteedit = !CBIState(g)->noteedit;
-
    if(G_Button(g, tmpstr(lang(sl_clear)), 3, 37, Pre(btnclear)))
       G_TxtBoxRes(st);
 
@@ -41,8 +37,7 @@ void P_CBI_TabNotes(struct gui_state *g)
       if(G_Button_HId(g, i, (pl.notes[i] ?
                              pl.notes[i] :
                              tmpstr(lang(sl_empty))),
-                      44, i * 30, .disabled = !CBIState(g)->noteedit,
-                      Pre(btnnote)))
+                      44, i * 30, Pre(btnnote)))
       {
          mem_size_t l = CBIState(g)->notebox.tbptr;
          cstr       s = Cps_Expand(CBIState(g)->notebox.txtbuf, 0, l);

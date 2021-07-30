@@ -60,12 +60,14 @@ cstr CanonTime(i32 type, u64 time) {
    return nil;
 }
 
+alloc_aut(0) stkcall
 void FreezeTime(bool players_ok) {
    frozen++;
    if(!players_ok) pl.frozen++;
    ServCallI(sm_SetFrozen, true, !pl.frozen);
 }
 
+alloc_aut(0) stkcall
 void UnfreezeTime(bool players_ok) {
    if(frozen < 1) return;
    frozen--;

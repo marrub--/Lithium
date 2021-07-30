@@ -17,7 +17,7 @@
 /* This function is excessively commented in case I need to change it.
  * Reading this function will cause a 5x1d20 hit to your SAN stat. Beware!
  */
-void G_ScrBeg_Imp(struct gui_state *g, gid_t id, struct gui_arg_scr const *a) {
+void G_ScrBeg_Imp(struct gui_state *g, gid_t id, struct gui_arg_scr *a) {
    struct gui_pre_scr const *pre = a->preset ? a->preset : &gui_p.scrdef;
    struct gui_scr *scr = a->st;
 

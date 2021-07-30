@@ -239,13 +239,6 @@
    cl: pD tag: DualRocket;
    cl: pD tag: FatMac;
    cl: pD tag: FortuneGun;
-
-   cl: pD tag: Subweapon0;
-   cl: pD tag: Subweapon1;
-   cl: pD tag: Subweapon2;
-   cl: pD tag: Subweapon3;
-   cl: pD tag: Subweapon4;
-   cl: pD tag: Subweapon5;
 }
 
 "extra auto" {

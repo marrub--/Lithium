@@ -34,6 +34,8 @@
 #define floork(n)  ((i32)(n))
 #define floorlk(n) ((i64)(n))
 
+#define byte(n) ((n) & 0xFF)
+
 extern union ik32 ik32;
 extern union ik64 ik64;
 extern union uk32 uk32;

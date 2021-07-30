@@ -14,11 +14,11 @@
 == \#INFO_SHORT_FatMac      | .900 JDJ Rifle
 == \#INFO_SHORT_FortuneGun  | Fortiuty
 
-== \#INFO_SHORT_Subweapon0 | Sub-bullets
-== \#INFO_SHORT_Subweapon1 | Sub-daggers
-== \#INFO_SHORT_Subweapon2 | Sub-grenades
-== \#INFO_SHORT_Subweapon3 | Sub-mines
-== \#INFO_SHORT_Subweapon4 | Sub-stealers
-== \#INFO_SHORT_Subweapon5 | Sub-darts
+== \#INFO_SHORT_Rakz | Sub-bullets
+== \#INFO_SHORT_Ruzuk | Sub-daggers
+== \#INFO_SHORT_Zaruk | Sub-grenades
+== \#INFO_SHORT_Kawak | Sub-mines
+== \#INFO_SHORT_Zakuw | Sub-stealers
+== \#INFO_SHORT_Zikr | Sub-darts
 
 ## EOF

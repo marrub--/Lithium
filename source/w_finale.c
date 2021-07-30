@@ -235,11 +235,8 @@ void F_text(struct finale_state *st) {
    str txt = ns(lang_fmt(LANG "ENDING_%S", name));
    i32 len = ACS_StrLen(txt);
 
-   i32 fill     = hold == -1 ? 0 : hold;
-   i32 skipfill = 0;
-
-   struct gui_fil fil_fill     = {&fill,     87};
-   struct gui_fil fil_skipfill = {&skipfill, 175};
+   struct gui_fil fil_fill     = {hold == -1 ? 0 : hold, 87};
+   struct gui_fil fil_skipfill = {0,                     175};
 
    for(i32 i = time + fade; i >= 0; i--) {
       F_drawBack(st);
@@ -267,7 +264,7 @@ void F_text(struct finale_state *st) {
                          buttons & (BT_USE | BT_ATTACK))) {
                i++;
             }
-         } else if(--fill) {
+         } else if(--fil_fill.cur) {
             i++;
          }
       } else if(i < fade) {

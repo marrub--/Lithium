@@ -26,8 +26,8 @@ void Cps_SetC(cps_t *cps, mem_size_t p, char c) {
 }
 
 alloc_aut(0) stkcall
-byte Cps_GetC(cps_t const *cps, mem_size_t p) {
-   return (cps[p / 4] & (0xFF << (p % 4 * 8))) >> (p % 4 * 8);
+mem_byte_t Cps_GetC(cps_t const *cps, mem_size_t p) {
+   return byte((cps[p / 4] & (0xFF << (p % 4 * 8))) >> (p % 4 * 8));
 }
 
 alloc_aut(0) stkcall

@@ -242,16 +242,26 @@ void P_BIP_PInit(void) {
 script
 void P_BIP_Unlock(struct page *page, bool from_load) {
    if(!page) {
-      Dbg_Log(log_bip, "ERROR page was null");
+      #ifndef NDEBUG
+      Log("ERROR page was null");
+      #endif
       return;
    }
 
+   bool was_unlocked = get_bit(page->flags, _page_unlocked);
+   set_bit(page->flags, _page_unlocked);
+
+   /* don't do the rest of the unlock process if this page isn't available
+    * if this wasn't from a load, it's probably in error that it isn't
+    */
    if(!get_bit(page->flags, _page_available)) {
-      Dbg_Log(log_bip, "ERROR page '%s' not available", page->name);
+      if(!from_load) {
+         Dbg_Log(log_dev, "page '%s' not available", page->name);
+      }
       return;
    }
 
-   if(!get_bit(page->flags, _page_unlocked)) {
+   if(!was_unlocked) {
       Dbg_Log(log_bip, "unlocking page '%s'", page->name);
 
       bip.pageavail++;
@@ -262,7 +272,6 @@ void P_BIP_Unlock(struct page *page, bool from_load) {
       }
 
       page->time = ticks;
-      set_bit(page->flags, _page_unlocked);
 
       if(!from_load && page->category <= _bipc_last_normal) {
          set_bit(page->flags, _page_new);
@@ -296,7 +305,7 @@ cstr P_BIP_CategoryToName(i32 category) {
 
 script static
 void BipNameErr(cstr name, cstr discrim) {
-   Dbg_Log(log_bip, "ERROR couldn't find page %s or %s");
+   Dbg_Log(log_dev, "ERROR couldn't find page %s or %s");
 }
 
 alloc_aut(0) stkcall

@@ -59,7 +59,7 @@ void Dbg_PrintMemC(cps_t const *d, mem_size_t size) {
          pos = 0;
       }
 
-      byte c = Cps_GetC(d, i);
+      mem_byte_t c = Cps_GetC(d, i);
 
       if(IsPrint(c)) {
          ACS_PrintChar(c);
@@ -80,7 +80,7 @@ void Dbg_PrintMemC(cps_t const *d, mem_size_t size) {
 }
 
 void Dbg_PrintMem(void const *data, mem_size_t size) {
-   byte const *d = data;
+   mem_byte_t const *d = data;
    i32 pos = 0;
 
    for(mem_size_t i = 0; i < size; i++) {

@@ -33,11 +33,6 @@
 %                                                                             %
 %  Sources for GDCC libc can be found at <https://github.com/DavidPH/GDCC>.   %
 %                                                                             %
-%  See <licenses/base64.txt> for licensing of Base64 Decoding/Encoding, as    %
-%  is included in linked binary form in <acs/lithmain.bin>.                   %
-%                                                                             %
-%  Base64 sources are included within Lithium's sources.                      %
-%                                                                             %
 %  Lithium's source can be found at <https://github.com/marrub--/Lithium>.    %
 %\                                                                           /%
 \\\%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%///

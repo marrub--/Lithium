@@ -54,8 +54,8 @@ struct setting {
    } bnd;
    cstr suff;
    /* used in special cases */
-   u32 fill;
-   i32 pclass;
+   bool fill;
+   i32  pclass;
 };
 
 struct set_parm {
@@ -113,7 +113,8 @@ void S_boole(struct set_parm const *sp) {
                                         lang(sl_on) :
                                         lang(sl_off)),
                    _rght - gui_p.btnlist.w, sp->y, Pre(btnlist),
-                   .fill = {&CBIState(sp->g)->settingsfill, sp->st->fill})) {
+                   .fill = sp->st->fill ? &CBIState(sp->g)->settingsfill : nil))
+   {
       v = !v;
       sp->st->cb_g.b(sp, &v);
    }
@@ -338,7 +339,7 @@ struct setting const st_ply[] = {
    {S_label, "st_labl_boss_3"},
    {S_empty},
    {S_label, "st_labl_ply_postgame"},
-   {S_boole, "sv_postgame", S_cvBoole, .fill = 35 * 5},
+   {S_boole, "sv_postgame", S_cvBoole, .fill = true},
    {S_label, "st_labl_postgame_1"},
    {S_label, "st_labl_postgame_2"},
    {S_label, "st_labl_postgame_3"},

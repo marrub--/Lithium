@@ -13,180 +13,239 @@
 
 #include "common.h"
 #include "p_player.h"
-#include "p_savedata.h"
-#include "m_file.h"
 #include "m_trie.h"
 
-/* Chunk "bipu" ------------------------------------------------------------ */
+#define unwrap_eof(label) \
+   statement( \
+      if(*inp == '\0') goto label; \
+   )
+
+#define unwrap_end(chr, label) \
+   statement( \
+      if(*inp != '\0' && *inp != chr) goto label; \
+      else                            ++inp; \
+   )
+
+#define unwrap_delim(chr, label) \
+   statement( \
+      if(*inp != chr) goto label; \
+      else            ++inp; \
+   )
+
+#define chunk_ver(ver, label) \
+   statement(if(!check_version(chunk_name, version, ver)) goto label;)
+
+#define while_not_eoc() while(*inp && byte(*inp) != _eoc_1)
+
+#define for_until_eoc(init, cond, itr) \
+   for(init; *inp && byte(*inp) != _eoc_1 && cond; itr)
+
+enum {
+   _eoc_1 = 0xC2,
+   _eoc_2 = 0x91,
+};
 
 enum {
    _bipu_new,
 };
 
-#define if_page_normal() \
-   if(get_bit(page->flags, _page_unlocked) && \
-      page->category <= _bipc_last_normal) \
-      __with(mem_size_t len = faststrlen(page->name);)
-
-script static
-void Save_bipu(struct savefile *save) {
-   mem_size_t total = 1;
-
-   for_page() {
-      if_page_normal() {
-         total += len + 2;
-      }
-   }
-
-   Save_WriteChunk(save, Ident_bipu, SaveV_bipu, total);
-
-   for_page() {
-      if_page_normal() {
-         i32 flg = 0;
-         if(get_bit(page->flags, _page_new)) set_bit(flg, _bipu_new);
-         fputc(len & 0xFF, save->fp);
-         fputc(flg,        save->fp);
-         fwrite(page->name, 1, len, save->fp);
-      }
-   }
-
-   fputc(0, save->fp);
-}
-
-script static
-void Load_bipu(struct savefile *save, struct savechunk *chunk) {
+alloc_aut(0) stkcall static
+void num_out(i32 n) {
    noinit static
-   char name[32];
-   for(mem_size_t len; (len = fgetc(save->fp)) && len < 32;) {
-      i32 flg = fgetc(save->fp);
-      fread(name, 1, len, save->fp);
-      name[len] = '\0';
-      struct page *page = P_BIP_NameToPage(name);
-      P_BIP_Unlock(page, true);
-      if(get_bit(flg, _bipu_new)) set_bit(page->flags, _page_new);
-      else                        dis_bit(page->flags, _page_new);
+   char buf[64], *p;
+   p = buf + sizeof(buf) - 1;
+   while(n) {
+      register div_t div = __div(n, 93);
+      *--p = div.rem + '!';
+      n = div.quot;
+   }
+   PrintChrSt(p);
+}
+
+alloc_aut(0) stkcall static
+void chunk_out(cstr name, i32 version) {
+   ACS_PrintChar(_eoc_1);
+   ACS_PrintChar(_eoc_2);
+   PrintChrSt(name);
+   num_out(version);
+   ACS_PrintChar(' ');
+}
+
+alloc_aut(0) stkcall static
+i32 num_inp(astr *p) {
+   register i32 ret = 0, digit;
+   for(; **p && (digit = **p - '!') < 93 && digit > 0; ++*p) {
+      ret = ret * 93 + digit;
+   }
+   return ret;
+}
+
+alloc_aut(0) stkcall static
+void str_inp(astr *p, char *out, mem_size_t max_len, char delim) {
+   register i32 i;
+   --max_len;
+   for(i = 0; i < max_len && **p && byte(**p) != delim; ++i, ++*p) {
+      out[i] = **p;
+      out[i + 1] = '\0';
    }
 }
 
-/* Chunk "note" ------------------------------------------------------------ */
-
-#define note_len(s) i32 len = s ? faststrlen(s) : 0; len = min(len, 255)
-
-script static
-void Save_note(struct savefile *save) {
-   u32 chunklen = 0;
-
-   for(i32 i = 0; i < countof(pl.notes); i++) {
-      note_len(pl.notes[i]);
-      chunklen += len + 1;
-   }
-
-   Save_WriteChunk(save, Ident_note, SaveV_note, chunklen);
-
-   for(i32 i = 0; i < countof(pl.notes); i++) {
-      note_len(pl.notes[i]);
-      fputc(len, save->fp);
-      if(len) fwrite(pl.notes[i], 1, len, save->fp);
+static
+bool check_version(cstr name, i32 version, i32 expected) {
+   if(version != expected) {
+      Dbg_Log(log_dev, "version %i expected for chunk %s but got %i",
+              expected, name, version);
+      return false;
+   } else {
+      return true;
    }
 }
 
-script static
-void Load_note(struct savefile *save, struct savechunk *chunk) {
-   for(i32 i = 0; i < countof(pl.notes); i++) {
-      u32 len = fgetc(save->fp);
-      if(!len) continue;
+script
+void P_Data_Save() {
+   Dbg_Log(log_dev, "Saving data...");
 
-      Dalloc(pl.notes[i]);
-      char *n = pl.notes[i] = Malloc(len + 1, _tag_file);
-      for(i32 j = 0; j < len; j++) n[j] = fgetc(save->fp) & 0xFF;
-   }
-}
+   ACS_BeginPrint();
+   chunk_out("Lith", 7);
 
-/* Chunk "agrp" ------------------------------------------------------------ */
-
-script static
-void Save_agrp(struct savefile *save) {
-   u32 groupnum = 0;
-
-   for(i32 i = 0; i < UPGR_MAX; i++) {
-      if(pl.upgrades[i].agroups) {
-         groupnum++;
-      }
+   if(pl.done_intro) {
+      chunk_out("intr", 1);
+      num_out(pl.done_intro);
    }
 
-   Save_WriteChunk(save, Ident_agrp, SaveV_agrp, 2 + groupnum * 13);
-
-   fputc(pl.autobuy & 0xFF, save->fp);
-   fputc(groupnum         & 0xFF, save->fp);
-
-   for(i32 i = 0; i < UPGR_MAX; i++) {
+   chunk_out("agrp", 1);
+   for(i32 i = 0; i < UPGR_MAX; ++i) {
       u32 groups = pl.upgrades[i].agroups;
       if(groups) {
-         fwrite(Upgr_EnumToStr(i), 1, 12, save->fp);
-         fputc(groups & 0xFF, save->fp);
+         PrintChrSt(Upgr_EnumToStr(i));
+         ACS_PrintChar(' ');
+         num_out(groups);
+         ACS_PrintChar(' ');
       }
    }
-}
 
-script static
-void Load_agrp(struct savefile *save, struct savechunk *chunk) {
-   pl.autobuy   = fgetc(save->fp);
-   u32 groupnum = fgetc(save->fp);
+   chunk_out("note", 1);
+   for(i32 i = 0; i < countof(pl.notes); ++i) {
+      mem_size_t len = pl.notes[i] ? faststrlen(pl.notes[i]) : 0;
+      num_out(len);
+      ACS_PrintChar(' ');
+      PrintChars(pl.notes[i], len);
+   }
 
-   for(i32 i = 0; i < groupnum; i++) {
-      char name[12];
-      i32  groups;
+   chunk_out("bipu", 1);
+   for_page() {
+      if(get_bit(page->flags, _page_unlocked) &&
+         page->category <= _bipc_last_normal)
+      {
+         i32 flg = 0;
+         if(get_bit(page->flags, _page_new)) set_bit(flg, _bipu_new);
 
-      fread(name, 1, 12, save->fp);
-      groups = fgetc(save->fp);
-
-      i32 num = Upgr_StrToEnum(name);
-      if(num != -1 && groups != EOF) {
-         pl.upgrades[num].agroups = groups;
+         PrintChrSt(page->name);
+         ACS_PrintChar(' ');
+         num_out(flg);
+         ACS_PrintChar(' ');
       }
    }
+
+   CVarSetS(sc_psave, ACS_EndStrParam());
 }
 
-/* Chunk "intr" ------------------------------------------------------------ */
+script
+void P_Data_Load() {
+   noinit static
+   char chunk_name[5];
 
-script static
-void Save_intr(struct savefile *save) {
-   Save_WriteChunk(save, Ident_intr, SaveV_intr, 2);
-   fputc(pl.done_intro      & 0xFF, save->fp);
-   fputc(pl.done_intro >> 8 & 0xFF, save->fp);
-}
+   Dbg_Log(log_dev, "Loading data...");
 
-script static
-void Load_intr(struct savefile *save, struct savechunk *chunk) {
-   i32 n0 = fgetc(save->fp);
-   i32 n1 = fgetc(save->fp);
-   pl.done_intro = n0 | n1 << 8;
-}
+   astr inp = CVarGetS(sc_psave);
+   while(byte(*inp) == _eoc_1 && byte(inp[1]) == _eoc_2) {
+      inp += 2;
 
-/* Extern Functions -------------------------------------------------------- */
+      str_inp(&inp, chunk_name, 5, '\0');
+      unwrap_eof(error);
 
-script void P_Data_Save() {
-   struct savefile *save;
+      i32 version = num_inp(&inp);
+      unwrap_end(' ', error);
 
-   if((save = Save_BeginSave())) {
-      Save_bipu(save);
-      Save_note(save);
-      Save_agrp(save);
-      Save_intr(save);
-      Save_EndSave(save);
+      Dbg_Log(log_dev, "loading chunk %s version %i", chunk_name, version);
+
+      switch(P_SaveChunkName(chunk_name)) {
+      case _save_chunk_Lith:
+         chunk_ver(7, error);
+         break;
+      case _save_chunk_intr:
+         chunk_ver(1, skip);
+         pl.done_intro = num_inp(&inp);
+         break;
+      case _save_chunk_agrp:
+         chunk_ver(1, skip);
+         while_not_eoc() {
+            noinit static
+            char name[12];
+
+            str_inp(&inp, name, sizeof name, ' ');
+            unwrap_delim(' ', skip_err);
+
+            i32 agroups = num_inp(&inp);
+            unwrap_end(' ', skip_err);
+
+            i32 upgr = Upgr_StrToEnum(name);
+            if(upgr != -1) pl.upgrades[upgr].agroups = agroups;
+         }
+         break;
+      case _save_chunk_note:
+         chunk_ver(1, skip);
+         for_until_eoc(i32 i = 0, i < countof(pl.notes), ++i) {
+            mem_size_t len = num_inp(&inp);
+            unwrap_delim(' ', skip_err);
+
+            Dalloc(pl.notes[i]);
+            pl.notes[i] = nil;
+
+            if(len) {
+               pl.notes[i] = Malloc(len + 1, _tag_plyr);
+               str_inp(&inp, pl.notes[i], len + 1, '\0');
+               unwrap_eof(skip_err);
+            }
+         }
+         break;
+      case _save_chunk_bipu:
+         chunk_ver(1, skip);
+         while_not_eoc() {
+            noinit static
+            char name[32];
+
+            str_inp(&inp, name, sizeof name, ' ');
+            unwrap_delim(' ', skip_err);
+
+            i32 flg = num_inp(&inp);
+            unwrap_end(' ', skip_err);
+
+            struct page *page = P_BIP_NameToPage(name);
+            if(page) {
+               P_BIP_Unlock(page, true);
+               if(get_bit(flg, _bipu_new)) set_bit(page->flags, _page_new);
+               else                        dis_bit(page->flags, _page_new);
+            }
+         }
+         break;
+      skip_err:
+         Dbg_Log(log_dev, "chunk %s has errors -- skipping", chunk_name);
+         goto skip;
+      default:
+         Dbg_Log(log_dev, "unknown chunk %s -- skipping", chunk_name);
+      skip:
+         while(*inp && !(*inp == _eoc_1 && inp[1] == _eoc_2)) ++inp;
+         break;
+      }
    }
-}
 
-script void P_Data_Load() {
-   struct savefile *save;
-
-   if((save = Save_BeginLoad())) {
-      Save_ReadChunk(save, Ident_bipu, SaveV_bipu, Load_bipu);
-      Save_ReadChunk(save, Ident_note, SaveV_note, Load_note);
-      Save_ReadChunk(save, Ident_agrp, SaveV_agrp, Load_agrp);
-      Save_ReadChunk(save, Ident_intr, SaveV_intr, Load_intr);
-      Save_EndLoad(save);
+   if(!*inp) {
+      return;
    }
+
+error:
+   Dbg_Log(log_dev, "terminated early");
 }
 
 /* EOF */

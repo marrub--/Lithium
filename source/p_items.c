@@ -477,7 +477,7 @@ void P_CBI_TabItems(struct gui_state *g) {
          G_Button(g, tmpstr(sel->scr > 0 ?
                             lang(sl_sell) :
                             lang(sl_discard)),
-                  x, y, .color = "g", .fill = {&CBIState(g)->itemfill, 26},
+                  x, y, .color = "g", .fill = &CBIState(g)->itemfill,
                   Pre(btnclear))) {
          if(sel->scr) {
             P_Scr_GivePos(x, y, sel->scr, true);

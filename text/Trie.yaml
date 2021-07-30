@@ -10,6 +10,14 @@
 ##
 ## ---------------------------------------------------------------------------|
 
+P_SaveChunkName:
+   prefix: _save_chunk_
+   words:
+      - Lith
+      - agrp
+      - bipu
+      - intr
+      - note
 BipInfo_Page_Name:
    prefix: _bipinfo_page_
    words:

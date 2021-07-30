@@ -207,7 +207,7 @@ void GUIUpgradeDescription(struct gui_state *g, struct upgrade *upgr) {
 static
 void GUIUpgradeButtons(struct gui_state *g, struct upgrade *upgr) {
    /* Buy */
-   if(G_Button(g, tmpstr(lang(sl_buy)), 98, 192, !P_Shop_CanBuy(&upgr->info->shopdef, upgr), .fill = {&CBIState(g)->buyfill, CVarGetI(sc_gui_buyfiller)}))
+   if(G_Button(g, tmpstr(lang(sl_buy)), 98, 192, !P_Shop_CanBuy(&upgr->info->shopdef, upgr), .fill = &CBIState(g)->buyfill))
       P_Upg_Buy(upgr, false);
 
    /* Activate */

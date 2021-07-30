@@ -23,7 +23,7 @@
 typedef u32 cps_t;
 
 stkcall void Cps_SetC(cps_t *cps, mem_size_t p, char c);
-stkcall byte Cps_GetC(cps_t const *cps, mem_size_t p);
+stkcall mem_byte_t Cps_GetC(cps_t const *cps, mem_size_t p);
 stkcall cstr Cps_Expand(cps_t const *cps, mem_size_t s, mem_size_t l);
 stkcall cstr Cps_ExpandNT(cps_t const *cps, mem_size_t s);
 void Dbg_PrintMemC(cps_t const *data, mem_size_t size);

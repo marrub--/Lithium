@@ -422,32 +422,39 @@ void P_bossText(i32 boss) {
    }
 }
 
-dynam_aut script static
+script static
+str P_introText(i32 which) {
+   return ns(lang_fmt(LANG "BEGINNING_%s_%i", pl.discrim, which));
+}
+
+alloc_aut(0) stkcall script static
 void P_doIntro() {
    enum {
       _nlines   = 26,
       _out_tics = 35 * 2,
    };
 
-   if(mapscleared != 0 || pl.done_intro & pl.pclass) return;
+   noinit static
+   char text[8192], *lines[_nlines];
 
-   Dbg_Log(log_dev, "P_doIntro");
+   noinit static
+   u32 linec[_nlines], linen[_nlines];
+
+   if(mapscleared != 0 || pl.done_intro & pl.pclass) {
+      return;
+   }
 
    pl.modal = _gui_intro;
    ACS_SetMusic(sp_lsounds_Silence);
    FreezeTime(false);
    ACS_FadeTo(0, 0, 0, 1.0, 0.0);
 
-   noinit static char  text [8192];
-   noinit static char *lines[_nlines];
-   noinit static u32   linec[_nlines];
-   noinit static u32   linen[_nlines];
+   register i32 which = 1;
+   register i32 last  = 0;
 
-   i32 which = 1;
-   i32 last  = 0;
-   i32 fill  = 0;
-
-   struct gui_fil fil = {&fill, 70};
+   noinit static
+   struct gui_fil fil;
+   fil.tic = 70;
 
    text[0] = '\0';
 
@@ -456,17 +463,14 @@ void P_doIntro() {
       if(which != last) {
          last = which;
 
-         ifauto(str, texts,
-                lang_fmt(LANG "BEGINNING_%s_%i", pl.discrim, which)) {
-            faststrcpy_str(text, texts);
-         } else {
-            Dbg_Log(log_dev, "P_doIntro: intro ending due to finishing");
-            break;
-         }
+         faststrcpy_str(text, P_introText(which));
 
          AmbientSound(ss_player_showtext, 1.0);
 
-         char *next, *line = faststrtok(text, &next, '\n');
+         noinit static
+         char *next, *line;
+         next = nil;
+         line = faststrtok(text, &next, '\n');
          for(i32 i = 0; i < _nlines; i++) {
             lines[i] = nil;
             linec[i] = 0;
@@ -483,7 +487,12 @@ void P_doIntro() {
          }
       }
 
-      PrintTextFmt(tmpstr(lang(sl_skip_intro)), sc_use, sc_attack);
+      ACS_BeginPrint();
+      ACS_PrintBind(sc_use);
+      ACS_PrintString(ns(lang(sl_skip_intro_1)));
+      ACS_PrintChar('\n');
+      ACS_PrintBind(sc_attack);
+      ACS_PrintString(ns(lang(sl_skip_intro_2)));
       PrintText(sf_smallfnt, CR_WHITE, 275,6, 220,0);
 
       if(G_Filler(280, 220, &fil, pl.buttons & (BT_USE | BT_ATTACK))) {
@@ -491,7 +500,6 @@ void P_doIntro() {
             which++;
             continue;
          } else {
-            Dbg_Log(log_dev, "P_doIntro: intro ending due to skipping");
             break;
          }
       }

@@ -82,8 +82,7 @@ typedef uint96_t u96;
 
 typedef i32 mem_tag_t;
 typedef i32 mem_size_t;
-
-typedef unsigned char byte;
+typedef i32 mem_byte_t;
 
 typedef __label   *lbl;
 typedef __str_ent *str;

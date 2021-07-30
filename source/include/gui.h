@@ -19,7 +19,7 @@
 #define Pre(name) .preset = &gui_p.name
 
 /* Fixed ID */
-#define G_Args(ty, ...) &(struct gui_arg_##ty const){__VA_ARGS__}
+#define G_Args(ty, ...) &(struct gui_arg_##ty){__VA_ARGS__}
 #define G_Button_FId(g, id, ...) G_Button_Imp(g, id, G_Args(btn, __VA_ARGS__))
 #define G_ChkBox_FId(g, id, ...) G_ChkBox_Imp(g, id, G_Args(cbx, __VA_ARGS__))
 #define G_ScrBeg_FId(g, id, ...) G_ScrBeg_Imp(g, id, G_Args(scr, __VA_ARGS__))
@@ -66,8 +66,8 @@ typedef i32  gid_t;
 typedef char gtab_t[32];
 
 struct gui_fil {
-   i32 *ptr;
-   i32  tic;
+   i32 cur;
+   i32 tic;
 };
 
 struct gui_scr {
@@ -150,7 +150,7 @@ struct gui_arg_btn {
    bool disabled;
    cstr color;
    bool slide;
-   struct gui_fil const fill;
+   struct gui_fil *fill;
    struct gui_pre_btn const *preset;
 };
 
@@ -301,7 +301,8 @@ optargs(1)
 void G_Clip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, i32 ww);
 void G_ClipRelease(struct gui_state *g);
 
-bool G_Filler(i32 x, i32 y, struct gui_fil const *fil, bool held);
+stkcall
+bool G_Filler(i32 x, i32 y, struct gui_fil *fil, bool held);
 
 i32 G_Tabs(struct gui_state *g, mem_size_t *st, gtab_t const *names,
            mem_size_t num, i32 x, i32 y, i32 yp);
@@ -312,7 +313,7 @@ bool G_ScrOcc(struct gui_state *g, struct gui_scr const *scr, i32 y, i32 h);
 
 void G_WinEnd(struct gui_state *g, struct gui_win *win);
 
-#define G_ImpArgs(ty) struct gui_state *g, gid_t id, struct gui_arg_##ty const *a
+#define G_ImpArgs(ty) struct gui_state *g, gid_t id, struct gui_arg_##ty *a
 bool             G_Button_Imp(G_ImpArgs(btn));
 bool             G_ChkBox_Imp(G_ImpArgs(cbx));
 void             G_ScrBeg_Imp(G_ImpArgs(scr));

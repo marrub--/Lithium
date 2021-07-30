@@ -20,9 +20,5 @@
 
 FILE *W_Open(str fname, char rw);
 FILE *W_OpenIter(str fname, char rw, i32 *prev);
-FILE *NFOpen(str pcvar, char rw);
-mem_size_t FWrite32(void const *restrict ptr, mem_size_t count, mem_size_t bytes, FILE *restrict fp);
-mem_size_t FWriteStr(void const __str_ars *restrict ptr, mem_size_t count, FILE *restrict fp);
-mem_size_t FRead32(void *restrict buf, mem_size_t count, mem_size_t bytes, FILE *restrict fp);
 
 #endif

@@ -627,7 +627,7 @@ void Sc_ResurrectMonster(i32 amt) {
 #ifndef NDEBUG
 script static
 void LogError(cstr cname) {
-   Dbg_Log(log_dmon, "ERROR no monster %s", cname);
+   Dbg_Log(log_dev, "ERROR no monster %s", cname);
 }
 #endif
 

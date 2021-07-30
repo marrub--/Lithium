@@ -30,24 +30,24 @@
 
 #define fastmemset(p, s, c, ...) \
    statement({ \
-      register byte *_p = (void *)(p); \
-      register byte  _s = (s); \
+      register mem_byte_t *_p = (void *)(p); \
+      register mem_byte_t  _s = (s); \
       for(register i32 _i = 0, _c = (c); _i < _c; ++_i) _p[_i] = _s; \
    })
 
 #define fastmemcpy(lhs, rhs, s) \
    statement({ \
-      register byte       *_lhs = (void *)(lhs); \
-      register byte const *_rhs = (void *)(rhs); \
-      register mem_size_t  _s   = (s); \
+      register mem_byte_t       *_lhs = (void *)(lhs); \
+      register mem_byte_t const *_rhs = (void *)(rhs); \
+      register mem_size_t        _s   = (s); \
       while(_s--) *_lhs++ = *_rhs++; \
    })
 
 #define fastmemmove(lhs, rhs, s) \
    statement({ \
-      register byte       *_lhs = (void *)(lhs); \
-      register byte const *_rhs = (void *)(rhs); \
-      register mem_size_t  _s   = (s); \
+      register mem_byte_t       *_lhs = (void *)(lhs); \
+      register mem_byte_t const *_rhs = (void *)(rhs); \
+      register mem_size_t        _s   = (s); \
       if(_lhs < _rhs) { \
          while(_s--) \
             *_lhs++ = *_rhs++; \
@@ -84,13 +84,6 @@
       for(; (*_dest = *_src2); ++_dest, ++_src2); \
    })
 
-#define faststrcpy_str(dest, src) \
-   statement({ \
-      register astr  _src  = src; \
-      register char *_dest = dest; \
-      for(; (*_dest = *_src); ++_dest, ++_src); \
-   })
-
 #define faststrcpy2(dest, src1, src2) \
    statement({ \
       register cstr  _src1 = src1; \
@@ -111,6 +104,14 @@
       for(; *_src2; ++_src2) *_dest++ = *_src2; \
       for(; *_src3; ++_src3) *_dest++ = *_src3; \
       *_dest++ = '\0'; \
+   })
+
+#define faststrcpy_str(dest, src) \
+   statement({ \
+      register str   _src  = src; \
+      register char *_dest = dest; \
+      ACS_StrCpyToGlobalCharRange((i32)(_dest), __GDCC__Sta, 0, \
+                                  ACS_StrLen(_src) + 1, _src, 0); \
    })
 
 stkcall i32 radix(char c);

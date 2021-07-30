@@ -16,7 +16,7 @@
 #include "w_world.h"
 #include "m_cps.h"
 
-bool G_TxtBox_Imp(struct gui_state *g, gid_t id, struct gui_arg_txt const *a) {
+bool G_TxtBox_Imp(struct gui_state *g, gid_t id, struct gui_arg_txt *a) {
    struct gui_txt *st = a->st;
 
    G_Auto(g, id, a->x, a->y, 260, 10);

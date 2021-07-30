@@ -30,7 +30,7 @@
    result = ~result;
 
    for(mem_size_t i = 0; i < len; i++)
-      result = crctable[(result ^ ptr[i]) & 0xFF] ^ (result >> 8);
+      result = crctable[byte(result ^ ptr[i])] ^ (result >> 8);
 
    return ~result;
 
@@ -87,12 +87,12 @@ void InitCRC64(void) {
 }
 
 u64 crc64(void const *data, mem_size_t len, u64 result) {
-   #define crc64_impl_type byte
+   #define crc64_impl_type mem_byte_t
    #include "m_math.c"
 }
 
 u64 crc64_str(void  __str_ars const *data, mem_size_t len, u64 result) {
-   #define crc64_impl_type byte __str_ars
+   #define crc64_impl_type mem_byte_t __str_ars
    #include "m_math.c"
 }
 

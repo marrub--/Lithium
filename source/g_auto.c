@@ -176,19 +176,20 @@ void G_ClipRelease(struct gui_state *g) {
    G_setClip(g);
 }
 
-bool G_Filler(i32 x, i32 y, struct gui_fil const *fil, bool held) {
-   if(*fil->ptr > fil->tic) {
-      *fil->ptr = 0;
+alloc_aut(0) stkcall
+bool G_Filler(i32 x, i32 y, struct gui_fil *fil, bool held) {
+   if(fil->cur > fil->tic) {
+      fil->cur = 0;
       return true;
    }
 
    if(held) {
-      *fil->ptr += 1;
-   } else if(*fil->ptr && ticks % 4 == 0) {
-      *fil->ptr -= 1;
+      ++fil->cur;
+   } else if(fil->cur && ticks % 4 == 0) {
+      --fil->cur;
    }
 
-   PrintSprite(StrParam(":UI:Filler%i", (*fil->ptr * 8) / fil->tic), x,1, y,0);
+   PrintSprite(sa_filler[(fil->cur * 8) / fil->tic], x,1, y,0);
 
    return false;
 }

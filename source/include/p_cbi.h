@@ -94,13 +94,12 @@ struct cbi {
       i32            upgrfilter;
       struct gui_scr upgrscr;
 
-      bool           noteedit;
       struct gui_scr notescr;
       struct gui_txt notebox;
 
-      i32 buyfill;
-      i32 itemfill;
-      i32 settingsfill;
+      struct gui_fil buyfill;
+      struct gui_fil itemfill;
+      struct gui_fil settingsfill;
    } st;
 
    u32 theme;
