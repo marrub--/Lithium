@@ -1865,7 +1865,7 @@
 "LITH_STATUS_XP" = "Experience";
 "LITH_STATUS_HP" = "Health";
 "LITH_STATUS_LV" = "Level";
-"LITH_STATUS_MP" = "$LITH_TAG_Mana";
+"LITH_STATUS_MP" = "$LITH_TAG_ManaAmmo";
 "LITH_STATUS_NX" = "Next";
 "LITH_STATUS_CL" = "Class";
 "LITH_STATUS_LEVELUP" = "Divide %u points among your attributes.";

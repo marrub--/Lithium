@@ -75,7 +75,7 @@
 == \#STATUS_XP | Experience
 == \#STATUS_HP | Health
 == \#STATUS_LV | Level
-== \#STATUS_MP | $\#TAG_Mana
+== \#STATUS_MP | $\#TAG_ManaAmmo
 == \#STATUS_NX | Next
 == \#STATUS_CL | Class
 
