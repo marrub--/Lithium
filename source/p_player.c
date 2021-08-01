@@ -422,11 +422,6 @@ void P_bossText(i32 boss) {
    }
 }
 
-script static
-str P_introText(i32 which) {
-   return ns(lang_fmt(LANG "BEGINNING_%s_%i", pl.discrim, which));
-}
-
 alloc_aut(0) stkcall script static
 void P_doIntro() {
    enum {
@@ -463,7 +458,17 @@ void P_doIntro() {
       if(which != last) {
          last = which;
 
-         faststrcpy_str(text, P_introText(which));
+         ACS_BeginPrint();
+         PrintChrSt(LANG "BEGINNING_");
+         PrintChrSt(pl.discrim);
+         ACS_PrintChar('_');
+         ACS_PrintInt(which);
+         str next_text = lang(ACS_EndStrParam());
+         if(!next_text) {
+            break;
+         }
+
+         faststrcpy_str(text, next_text);
 
          AmbientSound(ss_player_showtext, 1.0);
 
