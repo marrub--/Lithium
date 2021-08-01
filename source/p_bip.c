@@ -281,7 +281,9 @@ void P_BIP_Unlock(struct page *page, bool from_load) {
       }
 
       for(i32 i = 0; i < countof(page->unlocks) && page->unlocks[i]; i++) {
-         P_BIP_Unlock(P_BIP_NameToPage(page->unlocks[i]), from_load);
+         if(page->unlocks[i]) {
+            P_BIP_Unlock(P_BIP_NameToPage(page->unlocks[i]), from_load);
+         }
       }
    } else {
       Dbg_Log(log_bip, "already unlocked page '%s'", page->name);
