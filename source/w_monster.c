@@ -170,11 +170,6 @@ void BaseMonsterLevel(dmon_t *m) {
 
    Dbg_Log(log_dmon, "monster %-4i \Cdr%i \Cgl%-3i \C-running on %S",
       m->id, m->rank, m->level, ACS_GetActorClass(0));
-
-   #ifndef NDEBUG
-   if(dbglevel(log_dmonV))
-      PrintMonsterInfo(m);
-   #endif
 }
 
 /* Spawn a Monster Soul and temporarily set the species of it until the
