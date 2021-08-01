@@ -47,7 +47,9 @@ Lithiumの雨が宇宙から降り注ぐか。
 == \#TIME_FMT_DATE  | %i日%i月新部%i年
 
 == \#ENTER_FMT  | %S に入った... 日付:%s
-== \#CHARGE_FMT | %.1lkkV\cjチャージ
+%% \#CHARGE_FMT
+%.1lkkV\cjチャージ
+(%i~%iダメージ)
 == \#MANA_CHARGE | [マナ補給中]
 
 %% \#DIV_SIGIL_WARNING

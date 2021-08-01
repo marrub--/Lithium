@@ -158,8 +158,7 @@ void P_Wep_PTickPre()
 }
 
 script
-void P_Wep_PTick()
-{
+void P_Wep_PTick() {
    if(!Paused) {
       i32 heat = InvNum(so_SMGHeat);
            if(heat < 100) InvTake(so_SMGHeat, 5);
@@ -181,21 +180,20 @@ void P_Wep_PTick()
 
    SetSize(320, 240);
 
-   switch(P_Wep_CurType())
-   {
+   switch(P_Wep_CurType()) {
    case weapon_c_fist:
       PrintTextA_str(ns(lang(sl_mana_charge)), sf_smallfnt, CR_BRICK, 160,0, 100,0, 0.5);
       break;
    case weapon_c_delear:
       ServCallI(sm_DelearSprite);
       break;
-   case weapon_o_cfist:
-      __with(k64 charge = 5 + InvNum(so_FistCharge) / 10.0lk;)
-      {
-         PrintTextFmt(tmpstr(lang(sl_charge_fmt)), charge);
-         PrintText(sf_smallfnt, CR_LIGHTBLUE, 270,2, 200,2);
-      }
+   case weapon_o_cfist: {
+      i32 fcharg = InvNum(so_FistCharge);
+      k64 charge = 5 + fcharg / 10.0lk;
+      PrintTextFmt(tmpstr(lang(sl_charge_fmt)), charge, fcharg, fcharg * 3);
+      PrintText(sf_smallfnt, CR_LIGHTBLUE, 270,3, 200,2);
       break;
+   }
    }
 }
 

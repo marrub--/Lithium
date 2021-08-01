@@ -1975,7 +1975,7 @@
 "LITH_TIME_FMT_SHORT" = "%0.2i:%0.2i %i-%i-%.02i";
 "LITH_TIME_FMT_DATE" = "%i-%i-16%0.2i";
 "LITH_ENTER_FMT" = "Entered %S at %s NE";
-"LITH_CHARGE_FMT" = "%.1lkkV \cjcharge";
+"LITH_CHARGE_FMT" = "%.1lkkV \cjcharge\n(%i~%i damage)";
 "LITH_MANA_CHARGE" = "[Siphoning Mana]";
 "LITH_DIV_SIGIL_GET" = "D I V I S I O N  S I G I L";
 "LITH_DIV_SIGIL_WARNING" = "=== Warning ===\nThis item is unfathomably dangerous.\nUse at the expense of your world.";
@@ -3102,7 +3102,7 @@
 "LITH_TIME_FMT_SHORT" = "%0.2i:%0.2i %i日%i月部%i年";
 "LITH_TIME_FMT_DATE" = "%i日%i月新部%i年";
 "LITH_ENTER_FMT" = "%S に入った... 日付:%s";
-"LITH_CHARGE_FMT" = "%.1lkkV\cjチャージ";
+"LITH_CHARGE_FMT" = "%.1lkkV\cjチャージ\n(%i~%iダメージ)";
 "LITH_MANA_CHARGE" = "[マナ補給中]";
 "LITH_DIV_SIGIL_WARNING" = "=== 警告 ===\nこのアイテムは計り知れないほど危険だ\n代償は己の未来だ";
 "SECRETMESSAGE" = "\cnシークレットを解き明かした!";
