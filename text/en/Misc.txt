@@ -195,7 +195,7 @@ Use at the expense of your world.
 == DIFF_NORMAL  | Hurt me plenty.
 == DIFF_HARD    | Ultra-Violence!
 == DIFF_XHARD   | Watch me die!
-== DIFF_NMARE   | Crazed Nightmare!
+== DIFF_NMARE   | Bewildered Nightmare!
 
 == PLYRMNU_PRESSSPACE | Press \cjSPACE
 == PLYRMNU_SEEFRONT   | to see the front.

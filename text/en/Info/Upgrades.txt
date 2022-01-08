@@ -107,14 +107,15 @@ area will also be alerted to your presence. Be careful with this thing!
 == \#INFO_SHORT_Adrenaline | $\#UPGRADE_TITLE_Adrenaline
 == \#INFO_TITLE_Adrenaline | Senxans Automatic Adrenaline Injector
 @@ \#INFO_DESCR_Adrenaline
-A rather brute upgrade that gathers wasted adrenaline from your body and
-injects it back into you all at once when you're in danger.
+A rather brute upgrade that gathers wasted adrenaline from your body
+and injects it back into you all at once when you're in danger.
 
-This gives the effect of time stopping for a moment as you move with extreme
-swiftness, triggered by proximity to projectiles and being targeted by enemies.
+This gives the effect of time stopping for a moment as you move with
+extreme swiftness, triggered by proximity to projectiles and being
+targeted by enemies.
 
-Using this without going insane or otherwise passing out requires intense
-training given only to military forces.
+Using this without losing your mind or otherwise passing out requires
+intense training given only to military forces.
 
 ## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_VitalScanner | $\#UPGRADE_TITLE_VitalScan

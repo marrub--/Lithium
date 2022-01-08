@@ -68,7 +68,7 @@ cstr const adjectives[] = {
    "k0r",  /* stagnant */
    "k0r1", /* something that rushes to the top */
    "k1t",  /* animated */
-   "k1t1", /* insane, over-powered */
+   "k1t1", /* absurd, over-powered */
    "l0l0", /* slow */
    "l0l2", /* swift */
    "l0t2", /* cowardly */

@@ -154,7 +154,7 @@ void Lith_PreTick() {
    }
    m_wasFrozen = isFrozen();
 
-   /* stupid hack to keep the view from moving around */
+   /* hack to keep the view from moving around */
    if(Lith_UTIL.pData(pdata_semifrozen)) {
       angle -= 1;
       pitch -= 1;

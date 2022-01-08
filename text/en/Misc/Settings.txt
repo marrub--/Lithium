@@ -147,9 +147,10 @@
 == \#st_labl_pro_4 | \cusubject/object/possessive determiner/possessive/action
 == \#st_labl_pro_5 | \cuFor example: they/them/their/theirs/they're
 
-== \#st_labl_boss_1 | \cuIf you are sensitive to suggestion or otherwise
-== \#st_labl_boss_2 | \cumade uncomfortable by threats, please disable
-== \#st_labl_boss_3 | \cuboss dialogues!
+== \#st_labl_boss_1 | \cgContent warning for boss dialogues:
+== \#st_labl_boss_2 | \cgSuicide, transphobia, ableism.
+== \#st_labl_boss_3 | \cgPlease disable this if you need to!
+== \#st_labl_boss_4 | \cgThese dialogues are \cjnot vital to gameplay.
 
 == \#st_labl_postgame_1 | \cgWarning:\cu Post-game content can
 == \#st_labl_postgame_2 | \cucause saves to be effectively deleted,
@@ -232,7 +233,7 @@
 == \#player_resultssound    | Play sounds
 == \#player_scoredisp       | Display score gained
 == \#player_scoresound      | Play a sound when score is gained
-== \#player_stupidpickups   | Silly pickup messages
+== \#player_sillypickups    | Silly pickup messages
 == \#player_teleshop        | Teleport in bought items and upgrades
 == \#player_viewtilt        | View tilt when strafing
 == \#scanner_font           | Font

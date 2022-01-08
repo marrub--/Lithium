@@ -46,7 +46,7 @@ DIE
 
 %% QUITMSG17
 The Omega Cannon was created in a swamp dimension by
-an insane lizard-man who lusted for murder.
+a strange lizard-man who lusted for murder.
 How it got here is a mystery.
 
 %% QUITMSG18

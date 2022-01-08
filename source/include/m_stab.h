@@ -75,7 +75,7 @@ stab_x(sc_player_pronouns,      CVAR "player_pronouns")
 stab_x(sc_player_resultssound,  CVAR "player_resultssound")
 stab_x(sc_player_scoredisp,     CVAR "player_scoredisp")
 stab_x(sc_player_scoresound,    CVAR "player_scoresound")
-stab_x(sc_player_stupidpickups, CVAR "player_stupidpickups")
+stab_x(sc_player_sillypickups,  CVAR "player_sillypickups")
 stab_x(sc_player_teleshop,      CVAR "player_teleshop")
 stab_x(sc_player_viewtilt,      CVAR "player_viewtilt")
 

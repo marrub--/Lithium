@@ -120,7 +120,7 @@ Lithiumの雨が宇宙から降り注ぐか。
 == DIFF_NORMAL  | 存分にやってくれ。
 == DIFF_HARD    | ｳﾙﾄﾗﾊﾞｲｵﾚﾝｽ!
 == DIFF_XHARD   | 我が生き様を見よ!
-== DIFF_NMARE   | 狂乱悪夢!
+== DIFF_NMARE   | 惑わった悪夢!
 
 == PLYRMNU_PRESSSPACE | \cjスペースキー\c-で
 == PLYRMNU_SEEFRONT   | で前面を表示。

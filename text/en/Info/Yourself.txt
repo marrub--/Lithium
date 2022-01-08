@@ -285,9 +285,9 @@ Leveling up in luck will multiply score gained randomly.
 == \#INFO_SHORT_AttrRGE | Rage
 == \#INFO_TITLE_AttrRGE | \cmRage\c- (RGE)
 @@ \#INFO_DESCR_AttrRGE
-Rage is not just your anger, but your adaptability. As you get hit, your
-reflexes kick in, and you go crazy. You become more accurate, hit harder and
-get angrier as your situation dims.
+Rage is not just your anger, but your adaptability. As you get hit,
+your reflexes kick in, and you go into a wild trance. You become more
+accurate, hit harder and get angrier as your situation dims.
 
 Leveling up in rage will multiply damage dealt to enemies when you're hit.
 
