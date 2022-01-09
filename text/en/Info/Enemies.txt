@@ -306,7 +306,7 @@ them they will only continue to chase you down.
 @@
 
 == \#INFO_SHORT_James | James
-== \#INFO_TITLE_James | James, Vanagloriam Est
+== \#INFO_TITLE_James | James, Vana-gloriam Est
 
 == \#INFO_SHORT_Makarov | Makarov
 == \#INFO_TITLE_Makarov | Makarov, Avarum Est

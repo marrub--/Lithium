@@ -121,16 +121,12 @@ have a secluded, free place to do research, surveillance and development.
 == \#INFO_SHORT_SuperDimension | Super Dimension
 == \#INFO_TITLE_SuperDimension | $\#INFO_SHORT_SuperDimension
 @@ \#INFO_DESCR_SuperDimension
-The first hyperdimension found through observation of cuts in the universe,
-which were also observed to be created intentionally by beings there.
+The first hyperdimension found through observation of cuts in the
+universe, which themselves were similarly observed to be created by
+beings there.
 
-Several artifacts have come from this dimension: The Omega Cannon, The
-Division Sigil, and The Cup of Blood.
-
-Of these artifacts, you can acquire two. The Omega Cannon, a weapon, and the
-Division Sigil, a strange artifact able to cause disruptions in space-time.
-
-The latter will only be allowed to you if you can't stop the Demons.
+Several Artifacts have come from this dimension, although many of them
+have been lost to time.
 
 ## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_Heaven | The God Cage
