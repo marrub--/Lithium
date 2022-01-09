@@ -256,7 +256,6 @@
 == \#sv_postgame            | Enable
 == \#sv_rain                | Enable
 == \#sv_revenge             | Explode on death
-== \#sv_scoremul            | Score multiplier
 == \#sv_sky                 | Replace skies
 == \#sv_skydarkening        | Outside sector darkening
 == \#sv_wepdrop             | Drop weapons from zombies

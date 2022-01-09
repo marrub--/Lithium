@@ -310,7 +310,6 @@ struct setting const st_itm[] = {
 
 struct setting const st_ply[] = {
    {S_label, "st_labl_ply_balance"},
-   {S_fixed, "sv_scoremul",   S_cvFixed, S_bndk(0.0, 10.0), "mult"},
    {S_integ, "sv_difficulty", S_cvInteg, S_bndi(1,   100),  "perc"},
    {S_integ, "sv_minhealth",  S_cvInteg, S_bndi(0,   200),  "perc"},
    {S_integ, "sv_autosave",   S_cvInteg, S_bndi(0,   30),   "minu"},

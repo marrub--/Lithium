@@ -141,7 +141,6 @@
 == \#sv_postgame            | NG+を有効にする
 == \#sv_rain                | 外に雨を降らす
 == \#sv_revenge             | 神風
-== \#sv_scoremul            | スコア倍率
 == \#sv_wepdrop             | 敵が武器を落とす
 == \#weapons_alpha          | 武器の透明度
 == \#weapons_casingfadeout  | 薬莢の消える速さ

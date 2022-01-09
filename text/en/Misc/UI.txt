@@ -187,7 +187,7 @@ CLOSED
 == \#BIP_HELP_YOURSELF     | Your attributes, abilities and history.
 
 ## Statistics ----------------------------------------------------------------|
-== \#STAT_ScoreMul   | $\#sv_scoremul
+== \#STAT_ScoreMul   | Score multiplier
 == \#STAT_Weapons    | Weapons found
 == \#STAT_HealthUsed | Health used
 == \#STAT_HealthSum  | Health sum

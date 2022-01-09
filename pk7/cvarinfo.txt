@@ -20,7 +20,6 @@ server bool  lith_sv_rain          = false;
 server bool  lith_sv_sky           = false;
 server float lith_sv_skydarkening  = 0.77;
 server bool  lith_sv_revenge       = true;
-server float lith_sv_scoremul      = 1.0;
 server int   lith_sv_autosave      = 0;
 server bool  lith_sv_nobossdrop    = false;
 server bool  lith_sv_nobosses      = false;

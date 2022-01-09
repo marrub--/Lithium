@@ -292,7 +292,6 @@ i96 P_Scr_GivePos(i32 x, i32 y, i96 score, bool nomul) {
    if(!nomul) {
       score *= pl.scoremul;
       score *= 1 + (k64)ACS_RandomFixed(0, pl.attr.attrs[at_luk] / 77.7);
-      score *= scoremul;
    }
 
    /* Get a multiplier for the score accumulator and sound volume */

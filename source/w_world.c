@@ -29,7 +29,6 @@ i32 mapseed;
 bool unloaded;
 bool lmvar islithmap;
 i32 secretsfound;
-k64 scoremul;
 u64 ticks;
 i32 soulsfreed;
 bool bossspawned;
@@ -120,7 +119,6 @@ void UpdateGame(void) {
       if(CVarGetI(sc_xhair_style) >= 10) {
          CVarSetI(sc_xhair_style, 0);
       }
-      CVarSetK(sc_sv_scoremul, 1.0); /* 1.25 => 1.0 */
    }
 }
 
@@ -184,12 +182,6 @@ void MInit(void) {
 
    /* Init a random seed from the map. */
    mapseed = ACS_Random(0, INT32_MAX);
-
-   /* Init global score multiplier per-map. */
-   scoremul = fastroundlk(CVarGetK(sc_sv_scoremul) * 10.0k) / 10.0k;
-
-   if(ACS_GameSkill() >= skill_extrahard)
-      scoremul += 0.15;
 
    /* Set the air control because ZDoom's default sucks. */
    ACS_SetAirControl(0.77);

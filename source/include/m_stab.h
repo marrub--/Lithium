@@ -96,7 +96,6 @@ stab_x(sc_sv_nobossdrop, CVAR "sv_nobossdrop")
 stab_x(sc_sv_nobosses,   CVAR "sv_nobosses")
 stab_x(sc_sv_rain,       CVAR "sv_rain")
 stab_x(sc_sv_revenge,    CVAR "sv_revenge")
-stab_x(sc_sv_scoremul,   CVAR "sv_scoremul")
 stab_x(sc_sv_sky,        CVAR "sv_sky")
 stab_x(sc_sv_wepdrop,    CVAR "sv_wepdrop")
 

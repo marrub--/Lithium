@@ -56,9 +56,6 @@ static
 struct boss *lmvar boss;
 
 static
-i32 lmvar bosstid;
-
-static
 bool alldead[diff_max];
 
 static
@@ -238,9 +235,6 @@ script_str ext("ACS") addr(OBJ "SpawnBoss")
 void Sc_SpawnBoss(void)
 {
    if(!boss) return;
-
-   bosstid = ACS_ActivatorTID();
-   bosstid = bosstid ? bosstid : ACS_UniqueTID();
 
    ServCallI(sm_SpawnBoss, StrParam(OBJ "Boss_%s", boss->name), boss->phase);
 

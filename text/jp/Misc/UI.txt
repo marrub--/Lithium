@@ -172,6 +172,7 @@
 == \#BIP_HELP_YOURSELF     | 自分の属性、能力、歴史。
 
 ## Statistics ----------------------------------------------------------------|
+== \#STAT_ScoreMul   | スコア倍率
 == \#STAT_Weapons    | 手に入れた武器の量
 == \#STAT_HealthUsed | 捨てたＨＰ
 == \#STAT_HealthSum  | ＨＰ合計

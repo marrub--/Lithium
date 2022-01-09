@@ -8,7 +8,7 @@
  * ---------------------------------------------------------------------------|
  */
 
-/* UTIL: Utilities and Tools Interpserse Languages */
+/* UTIL: Utilities and Tools Intersperse Languages */
 struct Lith_UTIL {
    /* fucking degrees system... */
    static double constDeg(double x) {
