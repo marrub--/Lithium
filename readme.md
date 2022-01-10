@@ -15,10 +15,10 @@ you would any other mod.
 
 # Code
 
-The C code in `source/` is compiled to ACS bytecode with GDCC. It can
-be rather terse at times, and is scarcely commented, but it is
-hopefully understandable on its own. All text sources are CC0 public
-domain unless otherwise specified.
+The C code in `source/` is compiled to ACS bytecode with a customized
+version of GDCC. It can be rather terse at times, and is scarcely
+commented, but it is hopefully understandable on its own. All text
+sources are CC0 public domain unless otherwise specified.
 
 To compile, generate a build file with `tools/genbuild.rb` and run
 `ninja`.
@@ -27,8 +27,8 @@ Build requirements:
 
 - Ninja
 - Ruby
-- [rambling-tree](https://rubygems.org/gems/rambling-trie)
-- [GDCC](https://github.com/DavidPH/GDCC)
+- [rambling-trie](https://rubygems.org/gems/rambling-trie)
+- [GDCC](https://github.com/marrub--/GDCC)
 
 Requirements for `tools/mkfont.rb`:
 
