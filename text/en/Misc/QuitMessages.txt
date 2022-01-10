@@ -288,7 +288,25 @@ Aw, dude. There's still so many demons to kill. Don't leave me here
 with them.
 
 == QUITMSG103 | Chase down the Willow?
+== QUITMSG104 | Kill kill kill kill! Kill!
 
-== QUITMSGNUM | 103
+%% QUITMSG105
+Been here before, couldn't say I liked it.
+But should you start writing all this down?
+
+== QUITMSG106 | Summon Majima?
+
+%% QUITMSG107
+What, were you expecting something funny?
+Get the hell outta here.
+
+== QUITMSG108 | Astolfo wouldn't press Y.
+== QUITMSG109 | Look inside, to see what's coming?
+== QUITMSG110 | Return to the Nexus?
+== QUITMSG111 | Return to the Hunter's Dream?
+== QUITMSG112 | o weka pona?
+== QUITMSG113 | .i lu do cliva li'u preti?
+
+== QUITMSGNUM | 113
 
 ## EOF
