@@ -111,11 +111,11 @@ struct upgr_data_Subweapons {
    u32 have;
 };
 
-struct upgr_data_HeadsUpDisM {
+struct upgr_data_HeadsUpDisp {
+   /* marine */
    i32 cr;
-};
 
-struct upgr_data_HeadsUpDisI {
+   /* informant */
    struct interp_data_lli score;
    struct interp_data_lli health;
    struct interp_data_lli overdrive;
@@ -124,8 +124,7 @@ struct upgr_data_HeadsUpDisI {
 struct upgr_data {
    struct upgr_data_Seven7s     seven7s;
    struct upgr_data_Flashlight  flashlight;
-   struct upgr_data_HeadsUpDisI headsupdisi;
-   struct upgr_data_HeadsUpDisM headsupdism;
+   struct upgr_data_HeadsUpDisp headsupdisp;
    struct upgr_data_RPG_B       rpg_b;
    struct upgr_data_Magic       magic;
    struct upgr_data_ReactArmor  reactarmor;

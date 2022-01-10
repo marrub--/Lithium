@@ -15,7 +15,7 @@
 #include "p_player.h"
 
 void G_WinBeg_Imp(struct gui_state *g, gid_t id, struct gui_arg_win *a) {
-   struct gui_pre_win const *pre = a->preset ? a->preset : &gui_p.windef;
+   struct gui_pre_win const *pre = a->preset |? &gui_p.windef;
    struct gui_win *win = a->st;
 
    if(!win->init) {

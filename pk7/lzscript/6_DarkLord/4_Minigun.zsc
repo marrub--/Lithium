@@ -120,6 +120,7 @@ action(Weapon) void Lith_A_MinigunFire()
    Lith_A_MagIncr();
    A_AlertMonsters();
    A_StartSound("weapons/minigun/fire", lch_weapon);
+   A_StartSound("weapons/rifle/firero", lch_dryweapon, volume: CallACS("Lith_AmmoRunOut", true, 0.5*FIX)/FIX);
    A_OverlayOffset(_psp_weapon, FRandom(3, 8), FRandom(34, 39), WOF_INTERPOLATE);
    A_GunFlash("DummyFlash");
    A_FireProjectile("Lith_LightProjectileRedShort", 0);

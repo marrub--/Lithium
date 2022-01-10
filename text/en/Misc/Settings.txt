@@ -83,6 +83,16 @@
 == \#st_name_color_142 | Lane Pink
 == \#st_name_color_143 | Lane Hot Pink
 
+== \#st_name_hudtype_0 | Default for class
+== \#st_name_hudtype_1 | $\#CLASS_MARINE
+== \#st_name_hudtype_2 | $\#CLASS_CYBERMAGE
+== \#st_name_hudtype_3 | $\#CLASS_INFORMANT
+== \#st_name_hudtype_4 | $\#CLASS_WANDERER
+== \#st_name_hudtype_5 | $\#CLASS_ASSASSIN
+== \#st_name_hudtype_6 | $\#CLASS_DARKLORD
+== \#st_name_hudtype_7 | $\#CLASS_THOTH
+== \#st_name_hudtype_8 | 1.0
+
 == \#st_name_cursor_0 | Green
 == \#st_name_cursor_1 | Pink
 == \#st_name_cursor_2 | Blue
@@ -199,9 +209,11 @@
 == \#gui_theme              | Interface theme
 == \#gui_xmul               | Horizontal cursor speed
 == \#gui_ymul               | Vertical cursor speed
+== \#hud_type               | Type
 == \#hud_expbar             | Show experience bar
 == \#hud_logfromtop         | Display at the top of the screen
 == \#hud_logsize            | Size
+== \#hud_logcolor           | Color
 == \#hud_showarmorind       | Show reactive armor indicator
 == \#hud_showdamage         | Display damage dealt
 == \#hud_showlog            | Show

@@ -198,8 +198,8 @@ with. Materials for this are mainly produced by SYM4.3, but the actual assembly
 is done by many others.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_ArmTeflon | $\#ITEM_TAG_ArmTeflonUp
-== \#INFO_TITLE_ArmTeflon | $\#INFO_SHORT_ArmTeflon
+== \#INFO_SHORT_ArmTeflon | Teflon Armor
+== \#INFO_TITLE_ArmTeflon | $\#ITEM_TAG_ArmTeflonUp
 @@ \#INFO_DESCR_ArmTeflon
 An armor with a vest made of a synthetic material composed of
 Polytetrafluoroethylene (PTFE or brand name Teflon,) Kevlar, and others, made
@@ -332,5 +332,28 @@ testing and many trials, and now you wield the result of those efforts.
 Despite only having 3 billion neurons, not much more than high-grade CPUs,
 the quality of each is much higher, being able to withstand much more precise
 data transfer through high density synapses and storage in each cell.
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_OrSigil | 'Or' Sigil
+== \#INFO_TITLE_OrSigil | \cjB\cui\c-narist 'Or' Sigil
+@@ \#INFO_DESCR_OrSigil
+A sigil created by the Binarists, a hive-mind of fuzzy little
+creatures. It is not presently known why they created this
+non-Artifact, as the Binarists' only response when asked has been the
+following:
+
+@@
+\cx/ \cjWE HAVE MADE A MISTAKE
+\cy/ \cuHAVE ENABLED THE END
+\cx/ \cjWE WISH TO FIX IT
+\cy/ \cuTHERE IS NO RECOMPENCE
+\cx/ \cjUNFORTUNATE CIRCUMSTANCES
+\cy/ \cuTHE ONLY POSSIBILITY
+\cx/ \cjUSE IT TO FIX
+\cy/ \cuDO NOT USE IT FOR EVIL\c-
+@@
+
+Presumably, this sigil was created by accident and should remain
+unused. Its effects may be erratic at best.
 
 ## EOF

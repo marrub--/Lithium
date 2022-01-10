@@ -15,7 +15,7 @@
 #include "p_player.h"
 
 bool G_Button_Imp(struct gui_state *g, gid_t id, struct gui_arg_btn *a) {
-   struct gui_pre_btn const *pre = a->preset ? a->preset : &gui_p.btndef;
+   struct gui_pre_btn const *pre = a->preset |? &gui_p.btndef;
 
    if(!a->disabled)
       G_Auto(g, id, a->x, a->y, pre->w, pre->h, a->slide);

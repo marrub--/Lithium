@@ -83,6 +83,8 @@
    cl: pD tag: Rokuw;
    cl: pD tag: Rowuk;
    cl: pD tag: Zwew;
+
+   cl: gA tag: OrSigil;
 }
 
 "yourself auto" {
@@ -155,6 +157,7 @@
    cl: gO tag: AllPoint;
    cl: pM tag: AOF;
    cl: pC tag: AOFJem;
+   cl: pD tag: AOFAri;
    cl: pM tag: Cid        unl: "SuperDimension Earth";
    cl: pM tag: Facer;
    cl: gA tag: JAQTen     unl: "Tsukama";
@@ -235,7 +238,7 @@
    cl: pD tag: "700Express";
    cl: pD tag: "4Bore";
    cl: pD tag: ShrapnelGun;
-   cl: pD tag: Minigun;
+   cl: pD tag: Minigun unl: "AOF";
    cl: pD tag: DualRocket;
    cl: pD tag: FatMac;
    cl: pD tag: FortuneGun;

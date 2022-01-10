@@ -352,7 +352,7 @@ void P_bossWarning() {
    ACS_Delay(35 * 5);
 
    if(bossspawned)
-      pl.logB(1, tmpstr(lang_fmt(LANG "LOG_BossWarn%s", pl.discrim)));
+      pl.logB(1, tmpstr(lang_fmt_discrim(LANG "LOG_BossWarn%s")));
 }
 
 dynam_aut script static
@@ -408,7 +408,7 @@ void P_bossText(i32 boss) {
          StartSound(ss_enemies_boss_talk, lch_voice2, CHANF_LOCAL, 1.0, 1.0, pt);
 
          SetFade(fid_bosstext, 20, 1);
-         text = ns(lang_fmt(fmt, j, pl.discrim));
+         text = ns(lang_fmt_discrim(fmt, j));
          j++;
       }
 

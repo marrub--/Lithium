@@ -53,6 +53,19 @@ A.O.F Inc. also mass produces ammunition for energy weapons, robotics and
 modifications for existing weapons.
 
 ## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_AOFAri | AOF
+== \#INFO_TITLE_AOFAri | $\#INFO_SHORT_AOF
+== \#INFO_IMAGE_AOFAri | :BIP:AOF
+@@ \#INFO_DESCR_AOFAri
+AOF is a company founded during the dark ages. Famously, they supplied
+both sides of the war, however neither side did win. On the inside,
+AOF were doing science experiments on humans, trying to create new
+life. We were created this way.
+
+By some strange cosmic coincidence, AOF appear to exist in this
+reality as well. I'm not sure what they're like here.
+
+## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_Cid | Cid
 == \#INFO_TITLE_Cid | $\#INFO_SHORT_Cid
 == \#INFO_IMAGE_Cid | :BIP:Cid

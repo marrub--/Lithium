@@ -14,7 +14,7 @@
 #include "u_common.h"
 #include "w_world.h"
 
-#define UData pl.upgrdata.magic
+#define udata pl.upgrdata.magic
 
 /* Types ------------------------------------------------------------------- */
 
@@ -48,7 +48,7 @@ void GiveMagic(struct magic_info const *m)
 script static
 void UpdateMagicUI(struct upgrade *upgr)
 {
-   struct gui_state *g = &UData.gst;
+   struct gui_state *g = &udata.gst;
 
    G_Begin(g, 320, 240);
    G_UpdateState(g);
@@ -107,21 +107,21 @@ void SetMagicUI(bool on)
 
    if(on)
    {
-      UData.ui = true;
+      udata.ui = true;
       pl.semifrozen++;
 
-      UData.gst.gfxprefix = ":UI:";
-      UData.gst.cx = 320/2;
-      UData.gst.cy = 240/2;
+      udata.gst.gfxprefix = ":UI:";
+      udata.gst.cx = 320/2;
+      udata.gst.cy = 240/2;
    }
-   else if(!on && UData.ui)
+   else if(!on && udata.ui)
    {
-      if(UData.gst.hot) GiveMagic(&minf[UData.gst.hot - 1]);
+      if(udata.gst.hot) GiveMagic(&minf[udata.gst.hot - 1]);
 
-      UData.ui = false;
+      udata.ui = false;
       pl.semifrozen--;
 
-      fastmemset(&UData.gst, 0, sizeof UData.gst);
+      fastmemset(&udata.gst, 0, sizeof udata.gst);
    }
 }
 
@@ -132,17 +132,17 @@ void Upgr_Magic_Update(struct upgrade *upgr)
 {
    k32 manaperc = pl.mana / (k32)pl.manamax;
 
-   if(UData.manaperc < 1 && manaperc == 1)
+   if(udata.manaperc < 1 && manaperc == 1)
       AmbientSound(ss_player_manafull, 1.0);
 
-   UData.manaperc = manaperc;
+   udata.manaperc = manaperc;
 
    if(pl.buttons & BT_USER4 && !(pl.old.buttons & BT_USER4))
       SetMagicUI(true);
    else if(!(pl.buttons & BT_USER4) && pl.old.buttons & BT_USER4)
       SetMagicUI(false);
 
-   if(UData.ui)
+   if(udata.ui)
       UpdateMagicUI(upgr);
 
    if(manaperc >= 0.7)
@@ -167,8 +167,8 @@ void Upgr_Magic_Render(struct upgrade *upgr)
 {
    if(!pl.hudenabled) return;
 
-   i32 hprc = ceilk(min(UData.manaperc,        0.5k) * 2 * 62);
-   i32 fprc = ceilk(max(UData.manaperc - 0.5k, 0.0k) * 2 * 62);
+   i32 hprc = ceilk(min(udata.manaperc,        0.5k) * 2 * 62);
+   i32 fprc = ceilk(max(udata.manaperc - 0.5k, 0.0k) * 2 * 62);
 
    PrintSprite(sp_HUD_C_MagicIcon, 1,1, 213,2);
    PrintSprite(sp_HUD_C_BarSmall2, 1,1, 220,2);

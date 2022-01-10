@@ -8,7 +8,7 @@
  */
 
 defaultListMenu {
-   font        "lbigfont", "DarkGreen", "Green"
+   font        "lbigfont", "Lith_Green", "White"
    lineSpacing 16
    size        clean
 }
@@ -50,21 +50,21 @@ listMenu "EpisodeMenu" {
    staticTextCentered 160, 30, "$MENU_WHICHEPISODE"
    staticPatch        42, 48, "lgfx/Menu/EpisodeBack.png"
    position           48, 63
-   font               "bigupper", "DarkGreen", "Green"
+   font               "bigupper", "Lith_Green", "White"
 }
 
 listMenu "SkillMenu" {
    staticTextCentered 160, 30, "$MENU_CHOOSESKILL"
-   staticPatch        42, 48, "lgfx/Menu/SkillBack.png"
+   staticPatch        42, 48, "lgfx/Menu/EpisodeBack.png"
    position           48, 63
-   font               "bigupper", "DarkGreen", "Green"
+   font               "bigupper", "Lith_Green", "White"
 }
 
 listMenu "CreditsMenu" {
    class    "Lith_CreditsMenu"
    size     640, 480
    position 48,  64
-   font     "ltrmfont", "DarkGreen", "Green"
+   font     "ltrmfont", "Lith_Green", "White"
 
    Lith_CreditsMenuScroll "$LITH_LEFT",  "l", 0
    Lith_CreditsMenuScroll "$LITH_RIGHT", "r", 1

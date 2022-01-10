@@ -67,7 +67,7 @@ class Lith_CPlasmaRifle : Lith_CWeapon;
 default
 {
    Lith_Weapon.SpawnType "Lith_PlasmaRiflePickup";
-   Tag "$LITH_INFO_SHORT_CPlasmaRifle";
+   Tag "$LITH_INFO_SHORT_PlasmaRifle";
    Weapon.SlotNumber 6;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/plasma/draw";

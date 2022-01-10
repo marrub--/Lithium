@@ -11,13 +11,7 @@ enum Lith_UpgradeName {
 
 
 
-UPGR_HeadsUpDisA,
-UPGR_HeadsUpDisC,
-UPGR_HeadsUpDisD,
-UPGR_HeadsUpDisI,
-UPGR_HeadsUpDisM,
-UPGR_HeadsUpDisT,
-UPGR_HeadsUpDisW,
+UPGR_HeadsUpDisp,
 UPGR_Flashlight,
 UPGR_Zoom,
 UPGR_VitalScan,

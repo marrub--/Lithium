@@ -13,7 +13,7 @@
 
 #include "u_common.h"
 
-#define UData pl.upgrdata.seven7s
+#define udata pl.upgrdata.seven7s
 
 /* Extern Functions -------------------------------------------------------- */
 
@@ -30,18 +30,18 @@ void Upgr_Seven7s_Update(struct upgrade *upgr) {
    k32 velx, vely, velz = pl.velz > 0 ? pl.velz : -2;
 
    if(pl.velz != 0) {
-      if(!UData.in_air) {
-         UData.in_air = true;
+      if(!udata.in_air) {
+         udata.in_air = true;
          SetFriction(0, 0.0);
-         UData.fvel = pl.getVel();
-         UData.fyaw = pl.yaw - ACS_VectorAngle(pl.velx, pl.vely);
+         udata.fvel = pl.getVel();
+         udata.fyaw = pl.yaw - ACS_VectorAngle(pl.velx, pl.vely);
       }
-      k32 fyaw = UData.fyaw;
+      k32 fyaw = udata.fyaw;
       fyaw = floork(fyaw * 100.0k) / 100.0k;
-      velx = ACS_Cos(pl.yaw - fyaw) * UData.fvel;
-      vely = ACS_Sin(pl.yaw - fyaw) * UData.fvel;
+      velx = ACS_Cos(pl.yaw - fyaw) * udata.fvel;
+      vely = ACS_Sin(pl.yaw - fyaw) * udata.fvel;
    } else {
-      UData.in_air = false;
+      udata.in_air = false;
       SetFriction(0, 1.0);
       velx = pl.velx;
       vely = pl.vely;

@@ -49,7 +49,7 @@
 
 #ifndef NDEBUG
 #define Dbg_Log(level, ...) \
-   statement(if(dbglevel(level)) Log(c"" #level ": " __VA_ARGS__);)
+   (dbglevel(level) ? Log(c"" #level ": " __VA_ARGS__) : (void)0)
 #else
 #define Dbg_Log(...)
 #endif

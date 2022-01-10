@@ -121,7 +121,7 @@ void give(class<Inventory> which, int n = 1) {
 }
 
 void take(class<Inventory> which, int n = int.MAX) {
-   plyr.takeInventory(which, n);
+   if(plyr) plyr.takeInventory(which, n);
 }
 
 void addStatFx(class<Lith_StatFx> which) {

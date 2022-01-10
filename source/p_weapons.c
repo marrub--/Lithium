@@ -168,7 +168,7 @@ void P_Wep_PTick() {
       else                InvTake(so_SMGHeat, 1);
    }
 
-   if(pl.pclass == pcl_cybermage) {
+   if(pl.pclass & pcl_cybermage) {
                                      InvGive(so_Blade,    1);
                                      InvGive(so_Delear,   1);
       if(cbiupgr[cupg_c_slot3spell]) InvGive(so_Feuer,    1);
@@ -275,7 +275,7 @@ k32 Sc_AmmoRunOut(bool ro, k32 mul)
       struct invweapon const *wep = pl.weapon.cur;
       k32 inv = wep->magcur / (k32)wep->magmax;
 
-      mul = mul ? mul : 1.2;
+      mul = mul |? 1.2k;
 
       if(ro) inv = inv * mul;
       else   inv = mul - inv * 0.4;

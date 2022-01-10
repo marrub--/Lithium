@@ -21,7 +21,7 @@
 #include "m_list.h"
 
 #define P_Upg_Buy(upgr, ...) \
-   P_Shop_Buy(&(upgr)->info->shopdef, (upgr), LANG "UPGRADE_TITLE_%s", __VA_ARGS__)
+   P_Shop_Buy(&(upgr)->info->shopdef, (upgr), LANG "UPGRADE_TITLE_%s%s", __VA_ARGS__)
 
 #define for_upgrade(name) \
    for(i32 _i = 0; _i < UPGR_MAX; _i++) \

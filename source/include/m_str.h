@@ -15,6 +15,7 @@
 #include <stdio.h>
 
 #define lang_fmt(...) (StrParamBegin(__VA_ARGS__), lang(ACS_EndStrParam()))
+#define lang_fmt_discrim(...) (lang_fmt(__VA_ARGS__, pl.discrim) |? lang_fmt(__VA_ARGS__, ""))
 
 #define StrParamBegin(...) (ACS_BeginPrint(), __nprintf(__VA_ARGS__))
 #define StrParam(...) (StrParamBegin(__VA_ARGS__), ACS_EndStrParam())

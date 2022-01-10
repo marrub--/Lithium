@@ -70,22 +70,31 @@ override vector2 BobWeapon(double ticfrac) {
    let wep = Player.ReadyWeapon;
    if(!wep) return (0, 0);
 
+   // marathon bobbing :P
    if(Lith_UTIL.pData(pdata_upgrade, UPGR_Seven7s)) {
       return (0, (m_mbobpos - m_mbobprv) * ticfrac + m_mbobpos + 5 + clamp(20 - 20 * (pitch + 90) / 180.0, 5, 15));
    }
 
+   // store two positions - one for the previous tick and one for this tick
+   // this way the position can be interpolated based on the tic fraction
    vector2 p[2];
    p[0] = (0, 0);
    p[1] = (0, 0);
 
+   // only initialize them if dontbob isn't true
    if(!wep.bDONTBOB) for(int i = 0; i < 2; i++) {
+      // create an angle based on the speed of the weapon bobbing and
+      // the current tic
       double ang = wep.BobSpeed * 128 * Player.GetWBobSpeed() * (Level.Time - 1 + i) * 0.044;
       double bobtarget = Player.Bob;
 
+      // don't bob when firing if the option is enabled
       if(lith_weapons_nofirebob && !(Player.WeaponState & WF_WEAPONBOBBING)) {
          bobtarget = 0;
       }
 
+      // if the weapon is snapping into place when firing,
+      // smooth it out
       if(Abs(bobtarget - CurBob) <= 1) {
          CurBob = bobtarget;
       } else {
@@ -97,27 +106,26 @@ override vector2 BobWeapon(double ticfrac) {
       double bobx = 0, boby = 0;
 
       if(CurBob != 0) {
-         bobx = Player.Bob * wep.BobRangeX * ViewBob;
-         boby = Player.Bob * wep.BobRangeY * ViewBob;
+         // set these to the multiplier for the x and y, which is the
+         // current bob strength (CurBob), the weapon's bob range, and
+         // the viewbob cvar all combined
+         bobx = CurBob * wep.BobRangeX * ViewBob;
+         boby = CurBob * wep.BobRangeY * ViewBob;
 
+         // do some simple trigonometry to swing the weapon about
+         // based on the angle and strength
          switch(wep.BobStyle) {
             case Bob_Smooth:
+            case Bob_Alpha:
             case Bob_Normal:
                bobx *= Cos(ang) + Sin(ang / 5) / 7;
                boby *= 0.5 * (1 + Sin(ang * 2));
                break;
             case Bob_InverseSmooth:
+            case Bob_InverseAlpha:
             case Bob_Inverse:
                bobx *= Cos(ang) + Sin(ang / 5) / 7;
                boby *= 0.5 * (1 - Sin(ang * 2));
-               break;
-            case Bob_Alpha:
-               bobx *= Sin(ang);
-               boby *= Abs(Sin(ang));
-               break;
-            case Bob_InverseAlpha:
-               bobx *= Sin(ang);
-               boby *= 1 - Abs(Sin(ang));
                break;
          }
       }
@@ -125,8 +133,10 @@ override vector2 BobWeapon(double ticfrac) {
       p[i] = (bobx, boby);
    }
 
-   vector2 interp = p[0] * (1 - ticfrac) + p[1] * ticfrac;
+   // interpolate the positions based on the tic fraction
+   vector2 interp = Lith_UTIL.vec2Lerp(p[0], p[1], ticfrac);
 
+   // extra factors such as view movement
    interp.x -= Lith_UTIL.Lerp(m_LastVYaw, m_VYaw, ticfrac) / 2;
    interp.y -= Lith_UTIL.Lerp(m_LastVPitch, m_VPitch, ticfrac) * 3;
    interp.y += Lith_UTIL.Lerp(m_LastVZVel, m_VZVel, ticfrac);

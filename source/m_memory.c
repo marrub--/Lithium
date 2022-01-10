@@ -371,7 +371,7 @@ dyn:
 
       p = nil;
       for(mem_size_t i = 0; i < _dpl_siz; i++) {
-         dpl_dat[i].nxt = (i == _dpl_siz - 1 ? nil : &dpl_dat[i + 1]);
+         dpl_dat[i].nxt = (i != _dpl_siz - 1 ? &dpl_dat[i + 1] : nil);
          dpl_dat[i].prv = p;
          p = &dpl_dat[i];
       }

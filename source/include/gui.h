@@ -44,13 +44,6 @@
 #define G_TxtBox(g, ...) G_TxtBox_HId(g, 0, __VA_ARGS__)
 #define G_WinBeg(g, ...) G_WinBeg_HId(g, 0, __VA_ARGS__)
 
-#define G_GenPreset(type, def) \
-   statement({ \
-      type pre; \
-      if(a->preset) pre = *a->preset; \
-      else          pre = def; \
-   })
-
 #define G_Prefix(g, gfx, pre, mem) \
    statement({ \
            if(!(pre)->mem)     (gfx)[0] = '\0'; \

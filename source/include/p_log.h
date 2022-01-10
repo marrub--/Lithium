@@ -23,4 +23,6 @@ void P_Log_HUDs(i32 levl, cstr fmt, ...); /* log to HUD only */
 void P_Log_Full(          cstr fmt, ...); /* log to full log only */
 void P_Log_Entry(void);
 
+script void P_Log(i32 cr, i32 x, i32 yy);
+
 #endif

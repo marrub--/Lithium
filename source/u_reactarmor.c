@@ -13,7 +13,7 @@
 
 #include "u_common.h"
 
-#define UData pl.upgrdata.reactarmor
+#define udata pl.upgrdata.reactarmor
 
 /* Static Objects ---------------------------------------------------------- */
 
@@ -55,7 +55,7 @@ void RA_Give(cstr name, i32 n)
 
 void Upgr_ReactArmor_Deactivate(struct upgrade *upgr)
 {
-   UData.activearmor = 0;
+   udata.activearmor = 0;
 
    RA_Take(1);
    RA_Take(2);
@@ -63,11 +63,11 @@ void Upgr_ReactArmor_Deactivate(struct upgrade *upgr)
 
 void Upgr_ReactArmor_Render(struct upgrade *upgr)
 {
-   if(UData.activearmor && CVarGetI(sc_hud_showarmorind))
+   if(udata.activearmor && CVarGetI(sc_hud_showarmorind))
    {
       PrintSprite(sp_HUD_M_SplitLeft, 12,1, 226,2);
 
-      PrintTextChr(ArmorNames[UData.activearmor - 1].abbr, 3);
+      PrintTextChr(ArmorNames[udata.activearmor - 1].abbr, 3);
       PrintTextX(sf_bigupper, CR_LIGHTBLUE, 32,1, 217,0, _u_no_unicode);
    }
 }
@@ -81,11 +81,11 @@ void Sc_GiveRA(i32 num)
    {
       if(!get_bit(pl.upgrades[UPGR_ReactArmor].flags, _ug_active)) return;
 
-      if(UData.activearmor != num + 1)
+      if(udata.activearmor != num + 1)
       {
          cstr name = ArmorNames[num].full;
 
-         UData.activearmor = num + 1;
+         udata.activearmor = num + 1;
 
          RA_Take(1);
          RA_Take(2);

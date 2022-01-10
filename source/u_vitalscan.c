@@ -14,11 +14,10 @@
 #include "u_common.h"
 #include "w_world.h"
 #include "w_monster.h"
-#include "p_hud.h"
 
 #include <math.h>
 
-#define UData pl.upgrdata.vitalscan
+#define udata pl.upgrdata.vitalscan
 
 /* Extern Functions -------------------------------------------------------- */
 
@@ -33,7 +32,7 @@ script void Upgr_VitalScan_Update(struct upgrade *upgr) {
       ACS_PlayerNumber() != -1;
 
    if(GetHealth(0) <= 0) {
-      fastmemset(&UData, 0, sizeof UData);
+      fastmemset(&udata, 0, sizeof udata);
    } else if(validtarget) {
       bool freak = ACS_CheckFlag(0, sm_invuln) || ACS_CheckFlag(0, sm_nodamage);
 
@@ -43,54 +42,54 @@ script void Upgr_VitalScan_Update(struct upgrade *upgr) {
       i32 id = UniqueID();
       dmon_t const *const m = DmonSelf();
 
-      i32 ot = UData.target;
+      i32 ot = udata.target;
 
-      if(UData.target != id) {
-         fastmemset(&UData, 0, sizeof UData);
-         UData.oldhealth = UData.health;
+      if(udata.target != id) {
+         fastmemset(&udata, 0, sizeof udata);
+         udata.oldhealth = udata.health;
       }
 
-      UData.oldtarget = ot;
-      UData.target    = id;
+      udata.oldtarget = ot;
+      udata.target    = id;
 
       bool healthset = false;
 
       if(m) {
-         UData.rank = m->rank;
-         UData.exp  = m->exp / (k32)_monster_level_exp;
+         udata.rank = m->rank;
+         udata.exp  = m->exp / (k32)_monster_level_exp;
       } else {
-         UData.rank = 0;
-         UData.exp  = 1.0;
+         udata.rank = 0;
+         udata.exp  = 1.0;
       }
 
-      UData.freak = true;
+      udata.freak = true;
 
-      if(UData.rank == 6) {
-         UData.tagstr = StrParam("\C[Lith_Dark]%tS\C-", 0);
-      } else if(UData.rank == 7) {
-         UData.tagstr = StrParam("\C[Lith_Angelic]%tS\C-", 0);
+      if(udata.rank == 6) {
+         udata.tagstr = StrParam("\C[Lith_Dark]%tS\C-", 0);
+      } else if(udata.rank == 7) {
+         udata.tagstr = StrParam("\C[Lith_Angelic]%tS\C-", 0);
       } else if(freak || ACS_CheckFlag(0, sm_boss)) {
-         UData.tagstr = RandomName(freak ? 0 : id);
+         udata.tagstr = RandomName(!freak &? id);
 
          if(CVarGetI(sc_scanner_bar)) {
-            UData.oldhealth = UData.health = ACS_Random(0, 666666666);
-            UData.maxhealth = ACS_Random(0, 666666666);
+            udata.oldhealth = udata.health = ACS_Random(0, 666666666);
+            udata.maxhealth = ACS_Random(0, 666666666);
             healthset = true;
          }
       } else if(six) {
-         UData.tagstr = st_six_tag;
+         udata.tagstr = st_six_tag;
       } else {
-         UData.tagstr = StrParam("%tS\C-", 0);
-         UData.freak = false;
+         udata.tagstr = StrParam("%tS\C-", 0);
+         udata.freak = false;
       }
 
       if(legendoom && InvNum(so_LDLegendaryMonsterTransformed))
-         UData.tagstr = StrParam("\CgLegendary\C- %tS\C-", 0);
+         udata.tagstr = StrParam("\CgLegendary\C- %tS\C-", 0);
 
       if(!healthset) {
-         UData.oldhealth = UData.health;
-         UData.health    = chp;
-         UData.maxhealth = m ? m->maxhealth : shp;
+         udata.oldhealth = udata.health;
+         udata.health    = chp;
+         udata.maxhealth = m ? m->maxhealth : shp;
       }
 
       if(m) {
@@ -98,38 +97,38 @@ script void Upgr_VitalScan_Update(struct upgrade *upgr) {
             ACS_CheckFlag(0, sm_shadow) ?
             m->level - ACS_Random(-5, 5) :
             m->level;
-         UData.tagstr = StrParam("%S lv.%i", UData.tagstr, level);
+         udata.tagstr = StrParam("%S lv.%i", udata.tagstr, level);
       }
 
       if(shp) {
          i32 splitr = chp % shp;
          i32 split  = chp / shp;
-         UData.splitfrac = splitr / (k32)shp;
-         UData.split     = minmax(split, 0, 13);
+         udata.splitfrac = splitr / (k32)shp;
+         udata.split     = minmax(split, 0, 13);
       } else {
-         UData.splitfrac = 0.0;
-         UData.split     = 0;
+         udata.splitfrac = 0.0;
+         udata.split     = 0;
       }
 
-      UData.x = GetX(0);
-      UData.y = GetY(0);
-      UData.z = GetZ(0);
+      udata.x = GetX(0);
+      udata.y = GetY(0);
+      udata.z = GetZ(0);
 
       /* Hit indicator */
-      if(UData.hdtime != 0) UData.hdtime--;
-      else                  UData.hdelta = 0;
+      if(udata.hdtime != 0) udata.hdtime--;
+      else                  udata.hdelta = 0;
 
-      if(UData.health < UData.oldhealth) {
-         UData.hdelta = UData.oldhealth - UData.health;
-         UData.hdtime = 30;
+      if(udata.health < udata.oldhealth) {
+         udata.hdelta = udata.oldhealth - udata.health;
+         udata.hdtime = 30;
       }
    }
 }
 
 void Upgr_VitalScan_Render(struct upgrade *upgr) {
-   if(!pl.hudenabled || !UData.target) return;
+   if(!pl.hudenabled || !udata.target) return;
 
-   if(UData.hdtime == 30) SetFade(fid_vscan, 10, 12);
+   if(udata.hdtime == 30) SetFade(fid_vscan, 10, 12);
 
    i32 ox = CVarGetI(sc_scanner_xoffs);
    i32 oy = CVarGetI(sc_scanner_yoffs);
@@ -139,12 +138,12 @@ void Upgr_VitalScan_Render(struct upgrade *upgr) {
 
    switch(CVarGetI(sc_scanner_slide)) {
    case _ssld_slide: {
-      k32 cangle = ACS_VectorAngle(pl.x - UData.x, pl.y - UData.y) * tau;
+      k32 cangle = ACS_VectorAngle(pl.x - udata.x, pl.y - udata.y) * tau;
       k64 diff = pl.yawf - (k64)cangle;
       k32 ds = ACS_Sin(diff / tau) * tau;
       k32 dc = ACS_Cos(diff / tau) * tau;
-      UData.oangle = lerplk(UData.oangle, atan2f(ds, dc), 0.1);
-      ox += UData.oangle * 64;
+      udata.oangle = lerplk(udata.oangle, atan2f(ds, dc), 0.1);
+      ox += udata.oangle * 64;
       // fall through
    }
    default:
@@ -155,7 +154,7 @@ void Upgr_VitalScan_Render(struct upgrade *upgr) {
    }
    case _ssld_under: {
       bool seen;
-      struct i32v2 pos = project(UData.x, UData.y, UData.z, &seen);
+      struct i32v2 pos = project(udata.x, udata.y, udata.z, &seen);
       x = pos.x + ox - 39;
       y = pos.y + oy + 8;
       break;
@@ -163,13 +162,13 @@ void Upgr_VitalScan_Render(struct upgrade *upgr) {
    }
 
    /* Rank */
-   if(UData.rank) for(i32 i = 0; i < UData.rank; i++) {
+   if(udata.rank) for(i32 i = 0; i < udata.rank; i++) {
       PrintSprite(sa_ranks[i], x - 14 + i%5*6,1, y + 11 + (i > 4 ? 8 : 0),1);
    }
 
    /* Hit indicator */
-   if(UData.hdelta && CheckFade(fid_vscan)) {
-      PrintTextFmt("-%i", UData.hdelta);
+   if(udata.hdelta && CheckFade(fid_vscan)) {
+      PrintTextFmt("-%i", udata.hdelta);
       PrintTextFX(sf_smallfnt, CR_RED, x+40,4, y+30,2, fid_vscan, _u_no_unicode);
    }
 
@@ -183,32 +182,32 @@ void Upgr_VitalScan_Render(struct upgrade *upgr) {
 
    i32 cr = Draw_GetCr(CVarGetI(sc_scanner_color));
 
-   PrintText_str(UData.tagstr, font, cr, x+40,4, y+11,2);
+   PrintText_str(udata.tagstr, font, cr, x+40,4, y+11,2);
 
-   if(UData.maxhealth) {
-      if(UData.freak) {
+   if(udata.maxhealth) {
+      if(udata.freak) {
          ACS_BeginPrint();
-         PrintChrSt(alientext(UData.health));
+         PrintChrSt(alientext(udata.health));
          ACS_PrintChar('/');
-         PrintChrSt(alientext(UData.maxhealth));
+         PrintChrSt(alientext(udata.maxhealth));
       } else {
-         PrintTextFmt("%u/%u", UData.health, UData.maxhealth);
+         PrintTextFmt("%u/%u", udata.health, udata.maxhealth);
       }
    } else {
-      PrintTextFmt("%uhp", UData.health);
+      PrintTextFmt("%uhp", udata.health);
    }
    PrintTextX(font, CR_WHITE, x+40,4, y+20,2, _u_no_unicode);
 
    /* Health bar */
    if(CVarGetI(sc_scanner_bar)) {
-      if(UData.split > 0)
-         PrintSprite(sa_healthbars[UData.split - 1], x,1, y,1);
+      if(udata.split > 0)
+         PrintSprite(sa_healthbars[udata.split - 1], x,1, y,1);
 
-      SetClip(x, y, 80 * UData.splitfrac, 2);
-      PrintSprite(sa_healthbars[UData.split], x,1, y,1);
+      SetClip(x, y, 80 * udata.splitfrac, 2);
+      PrintSprite(sa_healthbars[udata.split], x,1, y,1);
       ClearClip();
 
-      SetClip(x, y+3, 24 * UData.exp, 2);
+      SetClip(x, y+3, 24 * udata.exp, 2);
       PrintSprite(sp_Bars_ExpBar1, x,1, y+3,1);
       ClearClip();
    }

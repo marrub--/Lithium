@@ -15,7 +15,7 @@
 #include "p_player.h"
 
 bool G_ChkBox_Imp(struct gui_state *g, gid_t id, struct gui_arg_cbx *a) {
-   struct gui_pre_cbx const *pre = a->preset ? a->preset : &gui_p.cbxdef;
+   struct gui_pre_cbx const *pre = a->preset |? &gui_p.cbxdef;
 
    if(!a->disabled)
       G_Auto(g, id, a->x, a->y, pre->w, pre->h);

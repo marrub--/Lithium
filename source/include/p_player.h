@@ -12,20 +12,33 @@
  */
 
 #if defined(pclass_x)
-/* Shorthand and classes. For parsing and headers. */
+#ifndef pclass_bit_x
+#define pclass_bit_x(lng, eq)
+#endif
+
 /* Base Classes */
-pclass_x(pM, pcl_marine,    1 << 0)
-pclass_x(pC, pcl_cybermage, 1 << 1)
-pclass_x(pI, pcl_informant, 1 << 2)
-pclass_x(pW, pcl_wanderer,  1 << 3)
-pclass_x(pA, pcl_assassin,  1 << 4)
-pclass_x(pD, pcl_darklord,  1 << 5)
-pclass_x(pT, pcl_thoth,     1 << 6)
+pclass_bit_x(pcl_marine_b,    0)
+pclass_bit_x(pcl_cybermage_b, 1)
+pclass_bit_x(pcl_informant_b, 2)
+pclass_bit_x(pcl_wanderer_b,  3)
+pclass_bit_x(pcl_assassin_b,  4)
+pclass_bit_x(pcl_darklord_b,  5)
+pclass_bit_x(pcl_thoth_b,     6)
+pclass_bit_x(pcl_max_b,       7)
+
+pclass_x(pM, pcl_marine,    1 << pcl_marine_b)
+pclass_x(pC, pcl_cybermage, 1 << pcl_cybermage_b)
+pclass_x(pI, pcl_informant, 1 << pcl_informant_b)
+pclass_x(pW, pcl_wanderer,  1 << pcl_wanderer_b)
+pclass_x(pA, pcl_assassin,  1 << pcl_assassin_b)
+pclass_x(pD, pcl_darklord,  1 << pcl_darklord_b)
+pclass_x(pT, pcl_thoth,     1 << pcl_thoth_b)
 
 /* Groups */
 pclass_x(gO, pcl_outcasts,   pcl_marine    | pcl_cybermage)
 pclass_x(gM, pcl_missioners, pcl_informant | pcl_wanderer)
-pclass_x(gI, pcl_intruders,  pcl_assassin  | pcl_darklord | pcl_thoth)
+pclass_x(gI, pcl_intruders,  pcl_assassin  | pcl_darklord)
+pclass_x(gF, pcl_finalizer,  pcl_thoth)
 
 /* Lifeform Type */
 pclass_x(gH, pcl_human,    pcl_marine   | pcl_cybermage | pcl_assassin)
@@ -36,6 +49,7 @@ pclass_x(gR, pcl_robot,    pcl_informant)
 pclass_x(gA, pcl_any,       pcl_human     | pcl_nonhuman | pcl_robot)
 pclass_x(gU, pcl_magicuser, pcl_cybermage | pcl_wanderer | pcl_thoth)
 #undef pclass_x
+#undef pclass_bit_x
 #elif !defined(p_player_h)
 #define p_player_h
 
@@ -81,6 +95,7 @@ enum ZscName(SubweaponType) {
 enum ZscName(PClass) {
    pcl_unknown,
 
+   #define pclass_bit_x(lng, eq) lng = eq,
    #define pclass_x(shr, lng, eq) lng = eq,
    #include "p_player.h"
 };
@@ -171,6 +186,18 @@ enum {
    _itm_disp_max
 };
 
+enum {
+   _hud_marine,
+   _hud_cybermage,
+   _hud_informant,
+   _hud_wanderer,
+   _hud_assassin,
+   _hud_darklord,
+   _hud_thoth,
+   _hud_old,
+   _hud_max
+};
+
 /* Data that needs to be kept track of between frames. */
 struct player_delta {
    /* Status */
@@ -248,6 +275,7 @@ struct player {
    u64  ticks;
    str  name;
    i32  pclass;
+   i32  pclass_b;
    str  pcstr;
    cstr discrim;
    i32  color;

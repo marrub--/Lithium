@@ -356,7 +356,7 @@ cstr alientext(i32 num) {
 alloc_aut(0) stkcall
 str lang(str name) {
    str ret = ServCallS(sm_Localize, name);
-   return ret == name ? snil : ret;
+   return ret != name ? ret : snil;
 }
 
 alloc_aut(0) stkcall

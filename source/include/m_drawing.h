@@ -158,6 +158,20 @@ enum {
    _gcr_max,
 };
 
+enum {
+   _ssld_fixed,
+   _ssld_slide,
+   _ssld_under,
+   _ssld_max,
+};
+
+enum {
+   _sfont_small,
+   _sfont_mid,
+   _sfont_italic,
+   _sfont_max,
+};
+
 stkcall void Draw_Init(void);
 stkcall i32 Draw_GetCr(i32 n);
 #endif

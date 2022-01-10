@@ -21,11 +21,11 @@
 #define InfoSep       y += 20
 
 #define Info(...) \
-   statement({ \
-      PrintTextFmt(__VA_ARGS__); \
-      PrintText(sf_smallfnt, g->defcr, g->ox+10,1, g->oy+y,1); \
-      y += 10; \
-   })
+   ( \
+      PrintTextFmt(__VA_ARGS__), \
+      PrintText(sf_smallfnt, g->defcr, g->ox+10,1, g->oy+y,1), \
+      y += 10 \
+   )
 
 #define Slot(name, x, y) PrintSprite(name, g->ox+287-x*48,2, g->oy+48*y-33,1)
 #define CPU(num)         PrintSprite(sp_UI_CPU##num, g->ox-13,1, g->oy-13,1)

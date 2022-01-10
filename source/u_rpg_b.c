@@ -14,7 +14,7 @@
 #include "u_common.h"
 #include "w_world.h"
 
-#define UData pl.upgrdata.rpg_b
+#define udata pl.upgrdata.rpg_b
 
 /* Static Functions -------------------------------------------------------- */
 
@@ -37,11 +37,11 @@ void Upgr_RPG_B_Update(struct upgrade *upgr)
       if(pl.buttons & BT_ALTATTACK)
       {
          i32 id;
-         if((id = CheckTarget()) && id != UData.id)
+         if((id = CheckTarget()) && id != udata.id)
          {
             AmbientSound(ss_weapons_rocket_mark, 1.0);
             ACS_SetPointer(AAPTR_TRACER, 0, AAPTR_PLAYER_GETTARGET);
-            UData.id = id;
+            udata.id = id;
          }
       }
 

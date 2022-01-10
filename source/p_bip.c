@@ -316,8 +316,7 @@ struct page *P_BIP_NameToPage(cstr name) {
    char discrim[32];
    faststrcpy2(discrim, name, pl.discrim);
    for_page() {
-      if(faststrchk(page->name, discrim) ||
-         faststrchk(page->name, name)) {
+      if(faststrchk(page->name, discrim) || faststrchk(page->name, name)) {
          return page;
       }
    }

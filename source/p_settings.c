@@ -13,7 +13,6 @@
 
 #include "common.h"
 #include "p_player.h"
-#include "p_hud.h"
 #include "w_world.h"
 
 /* Types ------------------------------------------------------------------- */
@@ -240,6 +239,7 @@ struct setting const st_hud[] = {
    {S_enume, "hud_expbar",    S_cvInteg, S_bndi(0, lxb_max), "expbar"},
    {S_empty},
    {S_label, "st_labl_hud_hud"},
+   {S_enume, "hud_type",         S_cvInteg, S_bndi(0, _hud_max + 1), "hudtype"},
    {S_boole, "hud_showarmorind", S_cvBoole, .pclass = pM},
    {S_boole, "hud_showweapons",  S_cvBoole},
    {S_empty},
@@ -247,6 +247,7 @@ struct setting const st_hud[] = {
    {S_boole, "hud_showlog",         S_cvBoole},
    {S_fixed, "hud_logsize",         S_cvFixed, S_bndk(0.2, 1.0), "mult"},
    {S_boole, "hud_logfromtop",      S_cvBoole},
+   {S_enume, "hud_logcolor",        S_cvInteg, S_color},
    {S_boole, "player_sillypickups", S_cvBoole},
    {S_empty},
    {S_label, "st_labl_hud_pops"},

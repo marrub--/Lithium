@@ -13,7 +13,7 @@
 
 #include "u_common.h"
 
-#define UData pl.upgrdata.reflexwetw
+#define udata pl.upgrdata.reflexwetw
 
 #define CHARGE_MAX (35 * 0.8)
 
@@ -39,8 +39,8 @@ void DodgeView()
 void Upgr_ReflexWetw_Activate(struct upgrade *upgr)
 {
    pl.speedmul += 0.3;
-   UData.charge = CHARGE_MAX;
-   UData.leaped = 0;
+   udata.charge = CHARGE_MAX;
+   udata.leaped = 0;
 }
 
 void Upgr_ReflexWetw_Deactivate(struct upgrade *upgr)
@@ -51,17 +51,17 @@ void Upgr_ReflexWetw_Deactivate(struct upgrade *upgr)
 script
 void Upgr_ReflexWetw_Update(struct upgrade *upgr)
 {
-   if(UData.leaped == 1) {
-      UData.leaped = 2;
+   if(udata.leaped == 1) {
+      udata.leaped = 2;
    }
 
-   if(UData.charge < CHARGE_MAX)
-      UData.charge++;
+   if(udata.charge < CHARGE_MAX)
+      udata.charge++;
 
    if(pl.frozen) return;
 
-   if(UData.charge >= CHARGE_MAX) {
-      if(pl.onground) UData.leaped = 0;
+   if(udata.charge >= CHARGE_MAX) {
+      if(pl.onground) udata.leaped = 0;
 
       if(pl.buttons & BT_SPEED) {
          k32 angle = pl.yaw - ACS_VectorAngle(pl.forwardv, pl.sidev);
@@ -71,20 +71,20 @@ void Upgr_ReflexWetw_Update(struct upgrade *upgr)
 
          DodgeView();
 
-         UData.charge = 0;
+         udata.charge = 0;
       }
    }
 
    if(pl.waterlevel == 0 && P_ButtonPressed(BT_JUMP) && !InvNum(so_PowerFlight) &&
-      !has_status(so_StatJetBooster) && !UData.leaped &&
-      (!pl.onground || UData.charge < CHARGE_MAX))
+      !has_status(so_StatJetBooster) && !udata.leaped &&
+      (!pl.onground || udata.charge < CHARGE_MAX))
    {
       k32 angle = pl.yaw - ACS_VectorAngle(pl.forwardv, pl.sidev);
 
       AmbientSound(ss_player_doublejump, 1.0);
       P_SetVel(pl.velx + (ACS_Cos(angle) * 4.0), pl.vely + (ACS_Sin(angle) * 4.0), 12.0);
 
-      UData.leaped = 1;
+      udata.leaped = 1;
    }
 }
 

@@ -13,7 +13,7 @@
 
 #include "u_common.h"
 
-#define UData pl.upgrdata.stealthsys
+#define udata pl.upgrdata.stealthsys
 
 /* Extern Functions -------------------------------------------------------- */
 
@@ -27,9 +27,9 @@ script
 void Upgr_StealthSys_Update(struct upgrade *upgr)
 {
    k32 vel = fastabsk(pl.getVel()) / 10.0;
-   pl.alpha = UData.mulvel = lerpk(UData.mulvel, vel, 0.02);
+   pl.alpha = udata.mulvel = lerpk(udata.mulvel, vel, 0.02);
 
-   i32 time = UData.mulvel * 20;
+   i32 time = udata.mulvel * 20;
    if(!time || ACS_Timer() % time == 0) InvGive(so_StealthSystem, 1);
    else                                 InvTake(so_StealthSystem, 1);
 }

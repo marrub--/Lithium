@@ -7,15 +7,15 @@
 ## ---------------------------------------------------------------------------|
 
 ## Body ----------------------------------------------------------------------|
-== \#UPGRADE_TITLE_HeadsUpDisM | HUD
-@@ \#UPGRADE_EFFEC_HeadsUpDisM
+== \#UPGRADE_TITLE_HeadsUpDisp | HUD
+@@ \#UPGRADE_EFFEC_HeadsUpDisp
 重要な情報を表示。
 
 機械脳技術/コンピューターに組み込まれた
 ヘッドアップ ディスプレイ プログラム。
 
 ## ---------------------------------------------------------------------------|
-@@ \#UPGRADE_EFFEC_HeadsUpDisC
+@@ \#UPGRADE_EFFEC_HeadsUpDispJem
 生体情報を表示。
 
 HUDプログラムです。

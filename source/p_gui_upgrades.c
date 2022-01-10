@@ -186,7 +186,7 @@ void GUIUpgradeDescription(struct gui_state *g, struct upgrade *upgr) {
    PrintText_str(ns(lang(sa_upgr_categ[upgr->info->category])), sf_smallfnt, g->defcr, g->ox+98,1, g->oy+27,1);
 
    /* Effect */
-   ifauto(str, effect, lang_fmt(LANG "UPGRADE_EFFEC_%s", upgr->info->name))
+   ifauto(str, effect, lang_fmt_discrim(LANG "UPGRADE_EFFEC_%s%s", upgr->info->name))
       PrintTextFmt("%S %S", ns(lang(sl_effect)), effect);
 
    static

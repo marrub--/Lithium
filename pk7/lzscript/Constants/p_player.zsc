@@ -47,23 +47,35 @@ enum Lith_PClass {
 
    
    
+   
 
 
 
 
 
- pcl_marine =     1 << 0,
- pcl_cybermage =  1 << 1,
- pcl_informant =  1 << 2,
- pcl_wanderer =   1 << 3,
- pcl_assassin =   1 << 4,
- pcl_darklord =   1 << 5,
- pcl_thoth =      1 << 6,
+
+pcl_marine_b =     0,
+pcl_cybermage_b =  1,
+pcl_informant_b =  2,
+pcl_wanderer_b =   3,
+pcl_assassin_b =   4,
+pcl_darklord_b =   5,
+pcl_thoth_b =      6,
+pcl_max_b =        7,
+
+ pcl_marine =     1 << pcl_marine_b,
+ pcl_cybermage =  1 << pcl_cybermage_b,
+ pcl_informant =  1 << pcl_informant_b,
+ pcl_wanderer =   1 << pcl_wanderer_b,
+ pcl_assassin =   1 << pcl_assassin_b,
+ pcl_darklord =   1 << pcl_darklord_b,
+ pcl_thoth =      1 << pcl_thoth_b,
 
 
  pcl_outcasts =    pcl_marine    | pcl_cybermage,
  pcl_missioners =  pcl_informant | pcl_wanderer,
- pcl_intruders =   pcl_assassin  | pcl_darklord | pcl_thoth,
+ pcl_intruders =   pcl_assassin  | pcl_darklord,
+ pcl_finalizer =   pcl_thoth,
 
 
  pcl_human =     pcl_marine   | pcl_cybermage | pcl_assassin,
@@ -73,6 +85,7 @@ enum Lith_PClass {
 
  pcl_any =        pcl_human     | pcl_nonhuman | pcl_robot,
  pcl_magicuser =  pcl_cybermage | pcl_wanderer | pcl_thoth,
+
 
 
 };

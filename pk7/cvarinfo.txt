@@ -57,6 +57,7 @@ server int   lith_gui_cursor    = 0;
 server int   lith_gui_defcr     = 106; /* 'j' */
 server int   lith_gui_jpfont    = 0;
 
+server int   lith_hud_type         = 0;
 server bool  lith_hud_showscore    = true;
 server bool  lith_hud_showlvl      = false;
 server bool  lith_hud_showweapons  = true;
@@ -68,6 +69,7 @@ server bool  lith_hud_showitems    = true;
 server int   lith_hud_itemcolor    = 106; /* 'j' */
 server bool  lith_hud_logfromtop   = false;
 server float lith_hud_logsize      = 1.0;
+server int   lith_hud_logcolor     = 108; /* 'l' */
 server int   lith_hud_expbar       = 0;
 
 server int  lith_xhair_r = 255;

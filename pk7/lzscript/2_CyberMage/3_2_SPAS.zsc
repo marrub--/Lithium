@@ -98,7 +98,7 @@ default
 {
    Lith_Weapon.SpawnType "Lith_SuperShotgunPickup";
    Lith_Weapon.MagSize 8;
-   Tag "$LITH_INFO_SHORT_SPAS";
+   Tag "$LITH_INFO_SHORT_Shotgun";
    Weapon.SlotNumber 3;
    Weapon.SlotPriority 0.95;
    Weapon.UpSound "weapons/spas/draw";

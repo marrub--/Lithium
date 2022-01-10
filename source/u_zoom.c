@@ -15,42 +15,42 @@
 
 #include <math.h>
 
-#define UData pl.upgrdata.zoom
+#define udata pl.upgrdata.zoom
 
 /* Extern Functions -------------------------------------------------------- */
 
 void Upgr_Zoom_Deactivate(struct upgrade *upgr)
 {
-   UData.zoom = UData.vzoom = 0;
+   udata.zoom = udata.vzoom = 0;
 }
 
 script
 void Upgr_Zoom_Update(struct upgrade *upgr)
 {
-   if(UData.zoom == 0 && UData.vzoom == 0) return;
+   if(udata.zoom == 0 && udata.vzoom == 0) return;
 
-   if(UData.vzoom < UData.zoom)
-      UData.vzoom = lerplk(UData.vzoom, UData.zoom, 0.099);
+   if(udata.vzoom < udata.zoom)
+      udata.vzoom = lerplk(udata.vzoom, udata.zoom, 0.099);
    else
-      UData.vzoom = lerplk(UData.vzoom, UData.zoom, 0.2);
+      udata.vzoom = lerplk(udata.vzoom, udata.zoom, 0.2);
 
-   k32 diff = UData.vzoom - UData.zoom;
+   k32 diff = udata.vzoom - udata.zoom;
    if(diff > 0.5 || diff < -0.5)
    {
-      if(UData.vzoom < UData.zoom) AmbientSound(ss_player_zoomin,  0.23);
+      if(udata.vzoom < udata.zoom) AmbientSound(ss_player_zoomin,  0.23);
       else                         AmbientSound(ss_player_zoomout, 0.23);
    }
    else
-      UData.vzoom = UData.zoom;
+      udata.vzoom = udata.zoom;
 }
 
 void Upgr_Zoom_Render(struct upgrade *upgr)
 {
-   if(UData.vzoom)
+   if(udata.vzoom)
    {
       PrintSpriteA(sp_HUD_Vignette, 160,0, 120,0, 0.3);
 
-      ACS_SetCameraToTexture(0, sp_LITHCAM2, 90 - UData.vzoom);
+      ACS_SetCameraToTexture(0, sp_LITHCAM2, 90 - udata.vzoom);
       PrintSprite(sp_LITHCAM2, 160,0, 120,0);
 
       PrintSpriteA(sp_HUD_ZoomOverlay, 160,0, 120,0, 0.5);
@@ -79,9 +79,9 @@ void Sc_KeyZoom(i32 amt)
 
    if(!P_None())
    {
-      if(get_bit(pl.upgrades[UPGR_Zoom].flags, _ug_active)) UData.zoom += amt;
-      if(UData.zoom < 0)                                    UData.zoom  = 0;
-      if(UData.zoom > 80)                                   UData.zoom  = 80;
+      if(get_bit(pl.upgrades[UPGR_Zoom].flags, _ug_active)) udata.zoom += amt;
+      if(udata.zoom < 0)                                    udata.zoom  = 0;
+      if(udata.zoom > 80)                                   udata.zoom  = 80;
    }
 }
 

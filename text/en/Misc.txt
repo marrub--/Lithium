@@ -312,12 +312,12 @@ capable of using both
 firearms and spells to
 his advantage.
 
-== \#CLASS_INFORMANT     | \cmInformant
+== \#CLASS_INFORMANT     | Informant
 == \#CLASS_INFORMANT_Nam | Fulk 5
 == \#CLASS_INFORMANT_Col | Lith_Purple
 == \#CLASS_INFORMANT_Dsc | Not implemented
 
-== \#CLASS_ASSASSIN     | \cmAssassin
+== \#CLASS_ASSASSIN     | Assassin
 == \#CLASS_ASSASSIN_Nam | Omisielle Faulzaje
 == \#CLASS_ASSASSIN_Col | Lith_Pink
 == \#CLASS_ASSASSIN_Dsc | Not implemented
@@ -327,12 +327,12 @@ his advantage.
 == \#CLASS_DARKLORD_Col | Lith_Blue
 == \#CLASS_DARKLORD_Dsc | Sort of implemented
 
-== \#CLASS_WANDERER     | \cmWanderer
+== \#CLASS_WANDERER     | Wanderer
 == \#CLASS_WANDERER_Nam | Lucas Sánchez
 == \#CLASS_WANDERER_Col | Lith_Yellow
 == \#CLASS_WANDERER_Dsc | Not implemented
 
-== \#CLASS_THOTH     | \cmThoth
+== \#CLASS_THOTH     | Thoth
 == \#CLASS_THOTH_Nam | Kirihito Kosatohara
 == \#CLASS_THOTH_Col | Lith_Grey
 == \#CLASS_THOTH_Dsc | Not implemented

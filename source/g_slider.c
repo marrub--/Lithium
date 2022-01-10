@@ -15,7 +15,7 @@
 #include "p_player.h"
 
 struct slide_ret G_Slider_Imp(struct gui_state *g, gid_t id, struct gui_arg_sld *a) {
-   struct gui_pre_sld const *pre = a->preset ? a->preset : &gui_p.slddef;
+   struct gui_pre_sld const *pre = a->preset |? &gui_p.slddef;
 
    k32 w = pre->w - (pre->pad * 2);
 
@@ -63,7 +63,7 @@ struct slide_ret G_Slider_Imp(struct gui_state *g, gid_t id, struct gui_arg_sld 
 
    /* draw value */
    if(pre->font) {
-      cstr suf = a->suf ? a->suf : "";
+      cstr suf = a->suf |? "";
       if(a->integ) PrintTextFmt("%i%s",                (i32)ret, suf);
       else         PrintTextFmt("%.*k%s", big ? 1 : 2, (k32)ret, suf);
 

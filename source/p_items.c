@@ -162,9 +162,7 @@ void EquipItem(struct item *sel) {
       }
    }
 
-   AmbientSound(ok ?
-                ss_player_cbi_invmov :
-                ss_player_cbi_auto_invalid, 1.0);
+   AmbientSound(ok ? ss_player_cbi_invmov : ss_player_cbi_auto_invalid, 1.0);
 }
 
 void P_Inv_PInit() {
@@ -454,7 +452,7 @@ void P_CBI_TabItems(struct gui_state *g) {
                                lang(sl_open)),
                      x, y, .color = "n", Pre(btnclear)))
          {
-            pl.opnitem = pl.opnitem == sel ? nil : sel;
+            pl.opnitem = pl.opnitem != sel ? sel : nil;
          }
          incPos();
       }
@@ -474,9 +472,7 @@ void P_CBI_TabItems(struct gui_state *g) {
       }
 
       if(sel->scr >= 0 &&
-         G_Button(g, tmpstr(sel->scr > 0 ?
-                            lang(sl_sell) :
-                            lang(sl_discard)),
+         G_Button(g, tmpstr(sel->scr > 0 ? lang(sl_sell) : lang(sl_discard)),
                   x, y, .color = "g", .fill = &CBIState(g)->itemfill,
                   Pre(btnclear))) {
          if(sel->scr) {

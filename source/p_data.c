@@ -57,13 +57,14 @@ void SetPClass()
 {
    pl.pcstr = ACS_GetActorClass(0);
 
-   /**/ if(pl.pcstr == so_MarinePlayer   ) pl.pclass = pcl_marine;
-   else if(pl.pcstr == so_CyberMagePlayer) pl.pclass = pcl_cybermage;
-   else if(pl.pcstr == so_InformantPlayer) pl.pclass = pcl_informant;
-   else if(pl.pcstr == so_WandererPlayer ) pl.pclass = pcl_wanderer;
-   else if(pl.pcstr == so_AssassinPlayer ) pl.pclass = pcl_assassin;
-   else if(pl.pcstr == so_DarkLordPlayer ) pl.pclass = pcl_darklord;
-   else if(pl.pcstr == so_ThothPlayer    ) pl.pclass = pcl_thoth;
+   #define set_pcl(name) pl.pclass = pcl_##name, pl.pclass_b = pcl_##name##_b
+   /**/ if(pl.pcstr == so_MarinePlayer   ) set_pcl(marine);
+   else if(pl.pcstr == so_CyberMagePlayer) set_pcl(cybermage);
+   else if(pl.pcstr == so_InformantPlayer) set_pcl(informant);
+   else if(pl.pcstr == so_WandererPlayer ) set_pcl(wanderer);
+   else if(pl.pcstr == so_AssassinPlayer ) set_pcl(assassin);
+   else if(pl.pcstr == so_DarkLordPlayer ) set_pcl(darklord);
+   else if(pl.pcstr == so_ThothPlayer    ) set_pcl(thoth);
    #ifndef NDEBUG
    else {
       Log("Invalid player class detected (%S (%p)), "

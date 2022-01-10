@@ -35,7 +35,8 @@ bool P_Shop_Buy(struct shopdef const *def, void *obj, cstr namefmt, bool nodeliv
       return false;
 
    if(!nolog) {
-      pl.logF(tmpstr(lang(sl_log_bought)), ns(lang_fmt(namefmt, def->name)));
+      pl.logF(tmpstr(lang(sl_log_bought)),
+              ns(lang_fmt_discrim(namefmt, def->name)));
    }
 
    if(def->bipunlock) {

@@ -12,13 +12,7 @@
 
 _uc_body:
  ## HUDs
- HeadsUpDisA: {pg: HeadsUpDisp, cl: pA, f: ---R-, pr: 1, mul: -5, grp: 10}
- HeadsUpDisC: {pg: HeadsUpDisp, cl: pC, f: ---R-, pr: 1, mul: -5, grp: 10}
- HeadsUpDisD: {pg: HeadsUpDisp, cl: pD, f: ---R-, pr: 1, mul: -5, grp: 10}
- HeadsUpDisI: {pg: HeadsUpDisp, cl: pI, f: A--R-, pr: 1, mul: -5, grp: 10}
- HeadsUpDisM: {pg: HeadsUpDisp, cl: pM, f: ---R-, pr: 1, mul: -5, grp: 10}
- HeadsUpDisT: {pg: HeadsUpDisp, cl: pT, f: ---R-, pr: 1, mul: -5, grp: 10}
- HeadsUpDisW: {pg: HeadsUpDisp, cl: pW, f: ---R-, pr: 1, mul: -5, grp: 10}
+ HeadsUpDisp: {pg: HeadsUpDisp, f: A--R-, pr: 1, mul: -5, grp: 10}
 
  ## All classes
  Flashlight: {pg: N/A,          f: -DU-E}

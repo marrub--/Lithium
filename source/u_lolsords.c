@@ -13,20 +13,20 @@
 
 #include "u_common.h"
 
-#define UData pl.upgrdata.lolsords
+#define udata pl.upgrdata.lolsords
 
 /* Extern Functions -------------------------------------------------------- */
 
 void Upgr_lolsords_Activate(struct upgrade *upgr)
 {
-   UData.origweapon = pl.weaponclass;
+   udata.origweapon = pl.weaponclass;
    InvGive(so_Sword, 1);
 }
 
 void Upgr_lolsords_Deactivate(struct upgrade *upgr)
 {
    InvTake(so_Sword, 1);
-   ACS_SetWeapon(UData.origweapon);
+   ACS_SetWeapon(udata.origweapon);
 }
 
 script

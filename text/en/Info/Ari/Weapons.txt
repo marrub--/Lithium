@@ -9,7 +9,6 @@
 == \#INFO_SHORT_700Express  | .700 Express
 == \#INFO_SHORT_4Bore       | 4 ga. Shotgun
 == \#INFO_SHORT_ShrapnelGun | Shrapnel Gun
-== \#INFO_SHORT_Minigun     | Minigun
 == \#INFO_SHORT_DualRocket  | Franca & Sophia
 == \#INFO_SHORT_FatMac      | .900 JDJ Rifle
 == \#INFO_SHORT_FortuneGun  | Fortiuty
@@ -20,5 +19,14 @@
 == \#INFO_SHORT_Kawak | Sub-mines
 == \#INFO_SHORT_Zakuw | Sub-stealers
 == \#INFO_SHORT_Zikr | Sub-darts
+
+## ---------------------------------------------------------------------------|
+== \#INFO_SHORT_Minigun | Minigun
+== \#INFO_TITLE_Minigun | How's Bout Them Revenants
+@@ \#INFO_DESCR_Minigun
+An ancient weapon developed during the dark ages, immensely powerful,
+but quite simple. Uses revolving barrels to create a better fire-rate.
+However, it only uses .50 rounds, and can only create minimal amounts
+of damage. I stole this from a long-abandoned AOF supply depot.
 
 ## EOF

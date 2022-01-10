@@ -7,15 +7,15 @@
 ## ---------------------------------------------------------------------------|
 
 ## Body ----------------------------------------------------------------------|
-== \#UPGRADE_TITLE_HeadsUpDisM | Heads Up Disp.
-@@ \#UPGRADE_EFFEC_HeadsUpDisM
+== \#UPGRADE_TITLE_HeadsUpDisp | Heads Up Disp.
+@@ \#UPGRADE_EFFEC_HeadsUpDisp
 Shows vital information.
 
 A Heads Up Display program built into your Computer/Brain Interface.
 
 ## ---------------------------------------------------------------------------|
-== \#UPGRADE_TITLE_HeadsUpDisC | $\#UPGRADE_TITLE_HeadsUpDisM
-@@ \#UPGRADE_EFFEC_HeadsUpDisC
+== \#UPGRADE_TITLE_HeadsUpDispJem | $\#UPGRADE_TITLE_HeadsUpDisp
+@@ \#UPGRADE_EFFEC_HeadsUpDispJem
 Shows vital information.
 
 A Heads Up Display program.
