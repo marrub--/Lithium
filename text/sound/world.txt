@@ -6,6 +6,20 @@
 ##
 ## ---------------------------------------------------------------------------|
 
+doors {
+   == lsounds/World/Ambiance
+   dr1_open DoorOpen      # Doom 3
+   dr1_clos DoorClose     # ^
+   dr2_open DoorOpenFast  # ^
+   dr2_clos DoorCloseFast # ^
+}
+
+plats {
+   == lsounds/World/Ambiance
+   pt1_strt PlatformStart # Doom 3
+   pt1_stop PlatformStop  # ^
+}
+
 amb {
    == lsounds/World/Ambiance
    # Ambiance

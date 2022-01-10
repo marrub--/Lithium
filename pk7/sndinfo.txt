@@ -852,6 +852,12 @@ weapons/plasdiff/empty lsounds/Weapons/PlasmaDiffuser/FireEmpty
 $alias weapons/plasdiff/explode weapons/plasmax
 $limit weapons/plasdiff/explode 0
 $random weapons/plasdiff/fire { weapons/plasdiff/fire1 weapons/plasdiff/fire2 weapons/plasdiff/fire3 }
+doors/dr1_open lsounds/World/Ambiance/DoorOpen
+doors/dr1_clos lsounds/World/Ambiance/DoorClose
+doors/dr2_open lsounds/World/Ambiance/DoorOpenFast
+doors/dr2_clos lsounds/World/Ambiance/DoorCloseFast
+plats/pt1_strt lsounds/World/Ambiance/PlatformStart
+plats/pt1_stop lsounds/World/Ambiance/PlatformStop
 amb/rain lsounds/World/Ambiance/Rain
 amb/wind lsounds/World/Ambiance/Wind
 amb/rainout lsounds/World/Ambiance/RainOut
