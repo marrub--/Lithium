@@ -45,8 +45,23 @@ class Lith_FeuerFX : Actor {
          case 2: scale = (-scale.x, -scale.y); break;
          }
          scale *= fRandom(0.5, 1);
+         return resolveState("Done");
       }
+   Done:
       BLLT R 10;
+      BLLT R 1 a_fadeOut;
+      stop;
+   }
+}
+
+class Lith_FeuerFX2 : Lith_FeuerFX {
+   default {
+      Scale 0.5;
+   }
+
+   states {
+   Done:
+      BLLT R 2;
       BLLT R 1 a_fadeOut;
       stop;
    }
@@ -139,6 +154,12 @@ action(Weapon) void Lith_A_FireFeuer(bool left) {
 states(Weapon) {
 Ready:
    TNT1 A 1 bright Lith_A_Ready;
+   TNT1 A 0 {
+      for(int i = 0; i < 15; i++)
+         A_SpawnItemEx("Lith_FeuerFX2", 32,16,32, FRandom(-1,1),FRandom(-1,1),FRandom(-1,1));
+      for(int i = 0; i < 15; i++)
+         A_SpawnItemEx("Lith_FeuerFX2", 32,-16,32, FRandom(-1,1),FRandom(-1,1),FRandom(-1,1));
+   }
    loop;
 
 Deselect:

@@ -166,6 +166,8 @@ void Sc_MagicSelect(i32 num)
 
       for(i32 i = 0; i < 4; i++) {
          for(i32 j = 0; j < 3; j++) {
+            SetSize(320, 240);
+            PrintSprite(sp_MagicSel_BG, 160,0, 120,0);
             SetSize(64, 64);
             PrintSpriteA(StrParam(":MagicSel:Slot%i_%i", num, i + 1), 0,1, 0,1, 0.5);
             ACS_Delay(1);

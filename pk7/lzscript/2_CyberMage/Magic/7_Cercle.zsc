@@ -250,6 +250,30 @@ class Lith_CircleParticle : Actor
    }
 }
 
+class Lith_CircleSprite : Actor {
+   default {
+      RenderStyle "Add";
+      FloatBobStrength 2.0;
+
+      +BRIGHT
+      +NOINTERACTION
+      +NOTIMEFREEZE
+      +FLOATBOB
+   }
+
+   double m_ofs;
+
+   states {
+   Spawn:
+      BLLT W 1;
+      BLLT W 1 {
+         A_Warp(AAPTR_PLAYER1, 64,0,32, (CallACS("Lith_Timer")+m_ofs)*1.7%180.0-90.0, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE);
+         return Lith_UTIL.pData(pdata_weapon) != weapon_c_cercle ? ResolveState("Null") : state(null);
+      }
+      wait;
+   }
+}
+
 class Lith_Cercle : Lith_CWeapon;
 
 default
@@ -276,6 +300,11 @@ Deselect:
 
 Select:
    TNT1 A 0 ACS_ScriptCall("Lith_MagicSelect", 7);
+   TNT1 A 0 {
+      for(int i = 0; i < 5; ++i) {
+         Lith_CircleSprite(Spawn("Lith_CircleSprite", pos)).m_ofs = 45.0 * i;
+      }
+   }
 SelectLoop:
    TNT1 A 0 Lith_A_Raise(_raise_instant);
    loop;

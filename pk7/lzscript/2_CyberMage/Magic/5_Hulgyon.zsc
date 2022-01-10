@@ -39,16 +39,18 @@ class Lith_HulgyonSprite : Actor
 
       +NOINTERACTION
       +NOTIMEFREEZE
+      +FORCEXYBILLBOARD
    }
 
    states
    {
    Spawn:
-      BLLT T 0;
-      BLLT T 0 A_Warp(AAPTR_MASTER, Pos.X,Pos.Y,Pos.Z, 0, WARPF_NOCHECKPOSITION|WARPF_ABSOLUTEOFFSET|WARPF_COPYINTERPOLATION);
-   Spawn1:
       BLLT T 1 bright;
-      stop;
+      BLLT T 1 bright {
+         A_Warp(AAPTR_PLAYER1, 32,0,32, 0, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE);
+         return Lith_UTIL.pData(pdata_weapon) != weapon_c_hulgyon ? ResolveState("Null") : state(null);
+      }
+      wait;
    }
 }
 
@@ -86,7 +88,6 @@ states(Weapon)
 {
 Ready:
    TNT1 A 1 bright Lith_A_Ready;
-   TNT1 A 0 A_SpawnItemEx("Lith_HulgyonSprite", Cos(Pitch)*32, 0, (Height-19)-(Sin(Pitch)*32),Vel.X,Vel.Y,Vel.Z,0,SXF_ISMASTER|SXF_NOCHECKPOSITION|SXF_ABSOLUTEVELOCITY);
    loop;
 
 Deselect:
@@ -95,6 +96,7 @@ Deselect:
 
 Select:
    TNT1 A 0 ACS_ScriptCall("Lith_MagicSelect", 5);
+   TNT1 A 0 Spawn("Lith_HulgyonSprite", pos);
 SelectLoop:
    TNT1 A 0 Lith_A_Raise(_raise_instant);
    loop;
