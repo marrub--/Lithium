@@ -31,7 +31,7 @@ up is canceled out.
 Powered with a small energy cell about the size of your Calcaneus that can
 stay stable mid-air for approximately 7 months without fail.
 
-Press "run" while mid-air to activate.
+Press "jump" after a double-jump to activate.
 
 ## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_ReflexWetw | $\#UPGRADE_TITLE_ReflexWetw

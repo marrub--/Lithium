@@ -23,7 +23,8 @@ A Heads Up Display program.
 ## ---------------------------------------------------------------------------|
 == \#UPGRADE_TITLE_JetBooster | Jet Booster
 @@ \#UPGRADE_EFFEC_JetBooster
-Lets you press the "run" key while in the air to fly for a short time.
+Lets you press the "jump" key after a double-jump to fly for a short
+time.
 
 Jet boosters built into your boots.
 

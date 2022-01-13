@@ -283,7 +283,7 @@
 == \#weapons_recoil         | Visual recoil amount
 == \#weapons_reducedsg      | Reduced shotgun sound
 == \#weapons_reloadbob      | Reload bobbing amount
-== \#weapons_reloadempty    | Reload the weapon when its magazine is empty
+== \#weapons_reloadempty    | Reload the weapon upon magazine emptying
 == \#weapons_ricochetvol    | Ricochet volume
 == \#weapons_riflemodeclear | Clear rifle mode on switch
 == \#weapons_riflescope     | Modal Rifle scope
