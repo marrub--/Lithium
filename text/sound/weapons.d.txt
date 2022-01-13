@@ -71,21 +71,14 @@ weapons {
       $random firer {firer1, firer2, firer3,}
    }
 
-   fatmac {
-      == lsounds/WeaponsD/FatMac
-      fire Fire # Halo 3, Half-Life 2
-
-      $alias empty       = .weapons.spas.empty
-      $alias boltback    = .weapons.sniper.boltback
-      $alias boltforward = .weapons.sniper.boltforward
-   }
-
    fortune {
       == lsounds/WeaponsD/FortuneGun
-      fire   Fire   # Metal Gear Solid 2
-      charge Charge # ^
-      hit    Hit    # ^
-      spark  Spark  # ^
+      fire      Fire      # Metal Gear Solid 2
+      hit       Hit       # ^
+      charge    Charge    # ^
+      spark     Spark     # ^
+      reloadout ReloadOut # A mishmash of old sounds without credits, sorry
+      reloadin  ReloadIn  # ^
       $limit hit 0
       $limit spark 0
    }

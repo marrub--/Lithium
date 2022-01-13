@@ -240,7 +240,6 @@
    cl: pD tag: ShrapnelGun;
    cl: pD tag: Minigun unl: "AOF";
    cl: pD tag: DualRocket;
-   cl: pD tag: FatMac;
    cl: pD tag: FortuneGun;
 }
 

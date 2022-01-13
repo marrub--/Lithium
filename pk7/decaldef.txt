@@ -263,6 +263,14 @@ decal Lith_ChargeFistScorch2
    randomflipy
 }
 
+decal Lith_RailHit
+{
+   pic "BAL7C0"
+   shade "black"
+   randomflipx
+   randomflipy
+}
+
 decal Lith_DoomPoster1 {pic "LITHFDPS"}
 decal Lith_DoomPoster2 {pic "LITH64PS"}
 decal Lith_DoomPoster3 {pic "LITHD2PS"}
@@ -350,5 +358,6 @@ generator Lith_BladeHit2             Lith_Blade
 generator Lith_RendHit               Lith_Rend
 generator Lith_RendHit2              Lith_Rend
 generator Lith_ChargeFistPuff        Lith_ChargeFistScorch
+generator Lith_FortuneShot           Lith_RailHit
 
 /* EOF */

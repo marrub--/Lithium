@@ -92,7 +92,6 @@ Use at the expense of your world.
 == OB_VILE      | %o had %p ass burned up. Oh, %r crispy!
 == OB_ZOMBIE    | %o got plinked to death.
 
-== \#OB_S_FatMac    | %o's shoulders fell off their mounts.
 == \#OB_S_Explosion | %o made %hself go boom.
 
 == \#OB_Falling_1 | %o took a long walk off a short floor.

@@ -635,14 +635,12 @@ weapons/dualrocket/firer2 lsounds/WeaponsD/DualRocket/FireRight2
 weapons/dualrocket/firer3 lsounds/WeaponsD/DualRocket/FireRight3
 $random weapons/dualrocket/firel { weapons/dualrocket/firel1 weapons/dualrocket/firel2 weapons/dualrocket/firel3 }
 $random weapons/dualrocket/firer { weapons/dualrocket/firer1 weapons/dualrocket/firer2 weapons/dualrocket/firer3 }
-weapons/fatmac/fire lsounds/WeaponsD/FatMac/Fire
-$alias weapons/fatmac/empty weapons/spas/empty
-$alias weapons/fatmac/boltback weapons/sniper/boltback
-$alias weapons/fatmac/boltforward weapons/sniper/boltforward
 weapons/fortune/fire lsounds/WeaponsD/FortuneGun/Fire
-weapons/fortune/charge lsounds/WeaponsD/FortuneGun/Charge
 weapons/fortune/hit lsounds/WeaponsD/FortuneGun/Hit
+weapons/fortune/charge lsounds/WeaponsD/FortuneGun/Charge
 weapons/fortune/spark lsounds/WeaponsD/FortuneGun/Spark
+weapons/fortune/reloadout lsounds/WeaponsD/FortuneGun/ReloadOut
+weapons/fortune/reloadin lsounds/WeaponsD/FortuneGun/ReloadIn
 $limit weapons/fortune/hit 0
 $limit weapons/fortune/spark 0
 $alias weapons/unknown/pickup YOUSONOFABITCH

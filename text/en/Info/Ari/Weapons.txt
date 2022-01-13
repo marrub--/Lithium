@@ -10,7 +10,6 @@
 == \#INFO_SHORT_4Bore       | 4 ga. Shotgun
 == \#INFO_SHORT_ShrapnelGun | Shrapnel Gun
 == \#INFO_SHORT_DualRocket  | Franca & Sophia
-== \#INFO_SHORT_FatMac      | .900 JDJ Rifle
 == \#INFO_SHORT_FortuneGun  | Fortiuty
 
 == \#INFO_SHORT_Rakz | Sub-bullets

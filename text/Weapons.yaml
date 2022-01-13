@@ -78,8 +78,7 @@ pD:
    d_shrapnel: [3, ShrapnelGun, Ammo Shell ]
    d_minigun:  [4, Minigun,     AMag Bullet]
    d_drocket:  [5, DualRocket,  Ammo Rocket]
-   d_fatmac:   [6, FatMac,      Ammo Plasma]
-   d_fortune:  [7, FortuneGun,  AMag Cannon]
+   d_fortune:  [6, FortuneGun,  AMag Plasma]
 
    pickups:
       fist:           m_fist
@@ -89,8 +88,8 @@ pD:
       supershotgun:   d_shrapnel
       chaingun:       d_minigun
       rocketlauncher: d_drocket
-      plasmarifle:    d_fatmac
-      bfg9000:        d_fortune
+      plasmarifle:    d_fortune
+      bfg9000:        m_fist
 
 pI:
    i_flintlock: [2, Flintlock, AMag Shell]
