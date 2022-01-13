@@ -126,6 +126,7 @@ default {
    Inventory.Amount 0;
    -Lith_BasicPickup.DrawPopup
    +CastSpriteShadow
+   +Inventory.Quiet
 }
 
 private meta class<Lith_Ammo> m_type, m_type2;
@@ -165,12 +166,13 @@ private void lith_absorbAmmo(Actor mo, class<Lith_Ammo> ty, in out int amt) {
    if(mo is "Lith_ThothPlayer") {ty = "Lith_ManaAmmo"; amt *= 7;}
 
    Lith_Ammo(mo.findInventory(ty)).lith_absorbAmount(getTag(), pos, amt);
+   playPickupSound(mo);
 }
 
 override bool tryPickup(in out Actor mo) {
    lith_absorbAmmo(mo, m_type,  m_amount);
    lith_absorbAmmo(mo, m_type2, m_amount2);
-   return super.tryPickup(mo);
+   return !m_amount && !m_amount2 && super.tryPickup(mo);
 }
 
 override void postBeginPlay() {

@@ -36,7 +36,7 @@ static void IonizeFX(Actor mo) {
 }
 
 static void DelearSprite_(Actor mo, double cp, double sp, double a, int x, int y) {
-   mo.a_spawnItemEx("Lith_DelearSprite", cp, x,(mo.height - 19)+y-sp,mo.vel.x,mo.vel.y,mo.vel.z,a,SXF_ISMASTER|SXF_NOCHECKPOSITION|SXF_ABSOLUTEVELOCITY|SXF_ABSOLUTEANGLE);
+   mo.a_spawnItemEx("Lith_DelearSprite", cp, x,(mo.height - 19)+y-sp,mo.vel.x,mo.vel.y,mo.vel.z,a,SXF_NOCHECKPOSITION|SXF_ABSOLUTEVELOCITY|SXF_ABSOLUTEANGLE);
 }
 
 static void DelearSprite(Actor mo_) {
