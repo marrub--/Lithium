@@ -7,6 +7,22 @@
  * ---------------------------------------------------------------------------|
  */
 
+class Lith_ShrapnelProjectileFX : Actor {
+   default {
+      RenderStyle "Add";
+      Scale 1.5;
+
+      +BRIGHT
+      +NOINTERACTION
+   }
+
+   states {
+   Spawn:
+      BLLT U 1 A_Warp(AAPTR_MASTER, flags: WARPF_INTERPOLATE);
+      loop;
+   }
+}
+
 class Lith_ShrapnelProjectile : Actor {
    default {
       BounceType "Doom";
@@ -17,6 +33,7 @@ class Lith_ShrapnelProjectile : Actor {
       Radius 8;
       Species "Lith_Player";
       Speed 25;
+      Scale 0.26;
 
       Projectile;
       +EXPLODEONWATER
@@ -26,7 +43,12 @@ class Lith_ShrapnelProjectile : Actor {
 
    states {
    Spawn:
-      SGRN A 1;
+      TNT1 A 0;
+      TNT1 A 0 A_SpawnItemEx("Lith_ShrapnelProjectileFX", flags: SXF_SETMASTER);
+      SBRK ABCDEFGHIJKLMN 0 A_Jump(16, "Spawn2");
+      BLLT I 0 A_SetScale(1.0);
+   Spawn2:
+      #### # 1 A_SpawnItemEx("Lith_CasingSmoke", 0,0,3, frandom(-0.2,0),frandom(-0.2,0));
       wait;
    }
 }
@@ -47,20 +69,20 @@ action(Weapon) void Lith_A_FireShrapnel() {
 
 states(Weapon) {
 Ready:
-   PISG A 1 Lith_A_Ready;
+   SCRP A 1 Lith_A_Ready;
    loop;
 
 Deselect:
-   PISG A 1 Lith_A_Lower(_raise_fast);
+   SCRP A 1 Lith_A_Lower(_raise_fast);
    loop;
 
 Select:
-   PISG A 1 Lith_A_Raise(_raise_fast);
+   SCRP A 1 Lith_A_Raise(_raise_fast);
    loop;
 
 Fire:
    #### # 0 lith_jumpNoAmmo(4);
-   PISG A 0 {
+   SCRP A 0 {
       lith_takeAmmo(4);
       A_StartSound("weapons/shrapnel/fire", lch_weapon);
       A_AlertMonsters();
@@ -68,28 +90,28 @@ Fire:
       Lith_A_RecoilUp(8);
       lith_a_setInterpolation(true);
    }
-   PISG A 1 offset(0, 70) {for(int i = 0; i < 6; i++) Lith_A_FireShrapnel();}
-   PISG A 1 offset(0, 75);
-   PISG A 1 offset(0, 74);
-   PISG A 1 offset(0, 72) {for(int i = 0; i < 4; i++) Lith_A_FireShrapnel();}
-   PISG A 1 offset(0, 60);
-   PISG A 1 offset(0, 55);
-   PISG A 1 offset(0, 50) {for(int i = 0; i < 2; i++) Lith_A_FireShrapnel();}
-   PISG A 1 offset(0, 45);
-   PISG A 1 offset(0, 40);
-   PISG A 1 offset(0, 36);
-   PISG A 1 offset(0, 34);
-   PISG A 1 offset(0, 33);
-   PISG A 1 offset(0, 32);
-   PISG A 10 lith_a_setInterpolation(false);
+   SCRP B 1 {for(int i = 0; i < 6; i++) Lith_A_FireShrapnel();}
+   SCRP B 1;
+   SCRP B 1;
+   SCRP B 1 {for(int i = 0; i < 4; i++) Lith_A_FireShrapnel();}
+   SCRP C 1;
+   SCRP C 1;
+   SCRP C 1 {for(int i = 0; i < 2; i++) Lith_A_FireShrapnel();}
+   SCRP C 1;
+   SCRP C 1;
+   SCRP C 1;
+   SCRP A 1;
+   SCRP A 1;
+   SCRP A 1;
+   SCRP A 10 lith_a_setInterpolation(false);
    goto ReadySelector;
 FireEmpty:
-   PISG A 2 offset(0, 42);
-   PISG A 2 offset(0, 38);
-   PISG A 2 offset(0, 35) A_StartSound("weapons/spas/empty", lch_dryweapon);
-   PISG A 1 offset(0, 34);
-   PISG A 1 offset(0, 33);
-   PISG A 1 offset(0, 32);
+   SCRP A 2 offset(0, 42);
+   SCRP A 2 offset(0, 38);
+   SCRP A 2 offset(0, 35) A_StartSound("weapons/spas/empty", lch_dryweapon);
+   SCRP A 1 offset(0, 34);
+   SCRP A 1 offset(0, 33);
+   SCRP A 1 offset(0, 32);
    goto ReadySelector;
 }
 

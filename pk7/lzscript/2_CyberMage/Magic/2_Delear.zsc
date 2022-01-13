@@ -41,8 +41,6 @@ class Lith_DelearSprite : Lith_DelearDotTrail
    {
    Spawn:
       BLLT J 0;
-      BLLT J 0 A_Warp(AAPTR_MASTER, pos.x,pos.y,pos.z, 0, WARPF_NOCHECKPOSITION|WARPF_ABSOLUTEOFFSET|WARPF_COPYINTERPOLATION);
-   Spawn1:
       BLLT J 1 bright;
       stop;
    }
