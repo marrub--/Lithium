@@ -159,6 +159,7 @@ default {
    Tag "$LITH_INFO_SHORT_FortuneGun";
    Weapon.SlotNumber 6;
    Weapon.SlotPriority 1;
+   Weapon.UpSound "weapons/fortune/draw";
    Lith_Weapon.AmmoType "Lith_PlasmaAmmo";
 
    +WEAPON.NOAUTOFIRE;

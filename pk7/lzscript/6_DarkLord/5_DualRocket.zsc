@@ -38,6 +38,7 @@ default {
    Tag "$LITH_INFO_SHORT_DualRocket";
    Weapon.SlotNumber 5;
    Weapon.SlotPriority 1;
+   Weapon.UpSound "weapons/dualrocket/draw";
    Lith_Weapon.AmmoType "Lith_RocketAmmo";
 }
 

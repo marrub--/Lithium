@@ -616,6 +616,9 @@ weapons/700e/cout lsounds/WeaponsD/700Express/CasingsOut
 $random weapons/700e/fire { weapons/700e/fire1 weapons/700e/fire2 weapons/700e/fire3 }
 weapons/4bore/fire lsounds/WeaponsD/4Bore/Fire
 weapons/shrapnel/fire lsounds/WeaponsD/ShrapnelGun/Fire
+weapons/shrapnel/draw lsounds/WeaponsD/ShrapnelGun/Draw
+weapons/shrapnel/bounce lsounds/WeaponsD/ShrapnelGun/Bounce
+weapons/shrapnel/hit lsounds/WeaponsD/ShrapnelGun/Hit
 weapons/minigun/fire lsounds/WeaponsD/Minigun/Fire
 weapons/minigun/rotate lsounds/WeaponsD/Minigun/Rotate
 weapons/minigun/up lsounds/WeaponsD/Minigun/RotateUp
@@ -633,6 +636,7 @@ weapons/dualrocket/firel3 lsounds/WeaponsD/DualRocket/FireLeft3
 weapons/dualrocket/firer1 lsounds/WeaponsD/DualRocket/FireRight
 weapons/dualrocket/firer2 lsounds/WeaponsD/DualRocket/FireRight2
 weapons/dualrocket/firer3 lsounds/WeaponsD/DualRocket/FireRight3
+weapons/dualrocket/draw lsounds/WeaponsD/DualRocket/Draw
 $random weapons/dualrocket/firel { weapons/dualrocket/firel1 weapons/dualrocket/firel2 weapons/dualrocket/firel3 }
 $random weapons/dualrocket/firer { weapons/dualrocket/firer1 weapons/dualrocket/firer2 weapons/dualrocket/firer3 }
 weapons/fortune/fire lsounds/WeaponsD/FortuneGun/Fire
@@ -641,6 +645,7 @@ weapons/fortune/charge lsounds/WeaponsD/FortuneGun/Charge
 weapons/fortune/spark lsounds/WeaponsD/FortuneGun/Spark
 weapons/fortune/reloadout lsounds/WeaponsD/FortuneGun/ReloadOut
 weapons/fortune/reloadin lsounds/WeaponsD/FortuneGun/ReloadIn
+weapons/fortune/draw lsounds/WeaponsD/FortuneGun/Draw
 $limit weapons/fortune/hit 0
 $limit weapons/fortune/spark 0
 $alias weapons/unknown/pickup YOUSONOFABITCH

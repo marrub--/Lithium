@@ -11,11 +11,11 @@ class Lith_4Bore : Lith_DWeapon;
 
 default
 {
-   Lith_Weapon.SpawnType "Lith_ShotgunPickup";
+   Lith_Weapon.SpawnType "Lith_SuperShotgunPickup";
    Lith_Weapon.MagSize 2;
    Tag "$LITH_INFO_SHORT_4Bore";
    Weapon.SlotNumber 3;
-   Weapon.SlotPriority 1;
+   Weapon.SlotPriority 0.9;
    Lith_Weapon.AmmoType "Lith_ShellAmmo";
 }
 

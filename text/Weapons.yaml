@@ -84,8 +84,8 @@ pD:
       fist:           m_fist
       chainsaw:       m_fist
       pistol:         d_700e
-      shotgun:        d_4bore
-      supershotgun:   d_shrapnel
+      shotgun:        d_shrapnel
+      supershotgun:   d_4bore
       chaingun:       d_minigun
       rocketlauncher: d_drocket
       plasmarifle:    d_fortune
