@@ -12,8 +12,6 @@
 
 @@
 \cjby Alison Gray Watson.
-
-\cm[todo: put \cipatron\cm(s) list here at end of month]
 @@
 
 \cd>>>>> [[[[ Thanks To ]]]]

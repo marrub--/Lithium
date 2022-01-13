@@ -70,6 +70,7 @@
 ~
                              * Graphics *
 
+@ Amuscaria      - XDeaths for the Hell Knight and Baron of Hell
 @ Anthony Cole   - Test map marine sprites
 @ Combine_Kegan  - Shobon.
 @ HorrorMovieGuy - SteggleSphere sprites

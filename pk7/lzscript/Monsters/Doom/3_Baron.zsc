@@ -154,6 +154,13 @@ Crash:
    BOSS JKLMN 8;
    BOSS O -1 A_BossDeath;
    stop;
+Death.Extreme:
+   BOSS P -1;
+Crash.Extreme:
+   BOSS P 5 Lith_A_XDie;
+   BOSS QRSTUVW 5;
+   BOSS X -1;
+   stop;
 
 Raise:
    BOSS ONMLKJI 8;

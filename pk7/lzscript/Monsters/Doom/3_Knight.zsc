@@ -119,6 +119,13 @@ Crash:
    BOS2 JKLMN 8;
    BOS2 O -1;
    stop;
+Death.Extreme:
+   BOS2 P -1;
+Crash.Extreme:
+   BOS2 P 5 Lith_A_XDie;
+   BOS2 QRSTUVW 5;
+   BOS2 X -1;
+   stop;
 
 Raise:
    BOS2 ONMLKJI 8;
