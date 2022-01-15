@@ -16,7 +16,7 @@
     minor *   10000 + \
     patch *     100 + \
     build)
-#define VersionName "1.7 (Yttrium Oxide)"
+#define VersionName "1.7.0 (Yttrium Oxide)"
 #define Ver1_0_0   10.0k  /* Lithium */
 #define Ver1_1_0   11.0k  /* Lithium Chloride */
 #define Ver1_2_0   12.0k  /* Lithium Carbonate */

@@ -33,6 +33,9 @@ listMenu "MainMenu" {
    }
    textItem "$MENU_CREDIT", "c", "CreditsMenu"
    textItem "$MENU_QUITG",  "q", "QuitMenu"
+
+   font "smallfont", "Black", "Black"
+   staticText 285, 57, "1.7.0"
 }
 
 listMenu "PlayerclassMenu" {
@@ -47,17 +50,19 @@ listMenu "PlayerclassMenu" {
 }
 
 listMenu "EpisodeMenu" {
-   staticTextCentered 160, 30, "$MENU_WHICHEPISODE"
-   staticPatch        42, 48, "lgfx/Menu/EpisodeBack.png"
-   position           48, 63
-   font               "bigupper", "Lith_Green", "White"
+   class "Lith_SkillEpMenu"
+   staticTextCentered  160, 30, "$MENU_WHICHEPISODE"
+   staticPatchCentered 42, 48, "lgfx/Menu/EpisodeBack.png"
+   position            48, 63
+   font                "bigupper", "Lith_Green", "White"
 }
 
 listMenu "SkillMenu" {
-   staticTextCentered 160, 30, "$MENU_CHOOSESKILL"
-   staticPatch        42, 48, "lgfx/Menu/EpisodeBack.png"
-   position           48, 63
-   font               "bigupper", "Lith_Green", "White"
+   class "Lith_SkillEpMenu"
+   staticTextCentered  160, 30, "$MENU_CHOOSESKILL"
+   staticPatchCentered 42, 48, "lgfx/Menu/EpisodeBack.png"
+   position            48, 63
+   font                "bigupper", "Lith_Green", "White"
 }
 
 listMenu "CreditsMenu" {

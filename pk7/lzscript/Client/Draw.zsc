@@ -391,8 +391,12 @@ override void uiTick() {
 override void renderOverlay(RenderEvent evt) {
    projectSetUp(evt);
 
-   if(evt.camera && evt.camera.player && !automapActive) {
-      bool hud_enabled = Lith_UTIL.pData(pdata_hudenabled);
+   if(evt.camera && !automapActive) {
+      bool hud_enabled = false;
+      if(evt.camera.player) {
+         hud_enabled = Lith_UTIL.pData(pdata_hudenabled);
+      }
+
       if(hud_enabled) {
          drawNearbyItems(evt);
          drawDmgNums(evt);

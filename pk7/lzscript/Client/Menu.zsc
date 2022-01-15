@@ -155,25 +155,67 @@ class Lith_CreditsMenu : ListMenu {
    }
 }
 
+class Lith_SkillEpMenu : ListMenu {
+   override void init(Menu parent, ListMenuDescriptor desc) {
+      super.init(parent, desc);
+      for(int i = 0, s = mDesc.mItems.size(); i < s; ++i) {
+         mDesc.mItems[i].setX(160 - mDesc.mItems[i].getWidth() / 2);
+      }
+   }
+}
+
 extend class Lith_URANUS;
 
-private transient ui double m_screenDim;
+private transient ui double           m_screenDim;
+private transient ui Shape2DTransform m_menuRectXf;
+private transient ui Shape2D          m_menuRect;
 
 private ui void tickMenu() {
    if(!(menuDelegate is "Lith_MenuDelegate")) {
       menuDelegate.destroy();
       menuDelegate = new("Lith_MenuDelegate");
    }
+   if(!m_menuRectXf) {
+      m_menuRectXf = new("Shape2DTransform");
+      m_menuRect   = new("Shape2D");
+   }
+
+   if(menuActive && !Menu.getCurrentMenu().dontDim) {
+      m_screenDim = Lith_UTIL.lerp(m_screenDim, 0.5, 0.2);
+   } else {
+      m_screenDim = Lith_UTIL.lerp(m_screenDim, 0.0, 0.15);
+   }
+
+   if(m_screenDim > 0.01) {
+      m_menuRect.clear();
+      m_menuRect.pushVertex((0, 0));
+      m_menuRect.pushVertex((0.5 + m_screenDim, 0.5 - m_screenDim));
+      m_menuRect.pushVertex((0.5 - m_screenDim, 0.5 + m_screenDim));
+      m_menuRect.pushVertex((1, 1));
+      m_menuRect.pushCoord((0, 0));
+      m_menuRect.pushCoord((1, 0));
+      m_menuRect.pushCoord((0, 1));
+      m_menuRect.pushCoord((1, 1));
+      m_menuRect.pushTriangle(0, 3, 1);
+      m_menuRect.pushTriangle(0, 2, 3);
+   }
 }
 
 private ui void drawMenu(RenderEvent evt) {
-   if(menuActive && !Menu.getCurrentMenu().dontDim) {
-      m_screenDim = Lith_UTIL.lerp(m_screenDim, 0.75, 0.3);
-   } else {
-      m_screenDim = Lith_UTIL.lerp(m_screenDim, 0.0, 0.1);
+   if(m_screenDim > 0.01) {
+      int size = Screen.getHeight() / 14;
+      int w = Screen.getWidth()  / size;
+      int h = Screen.getHeight() / size;
+      for(int y = 0; y <= h; ++y) {
+         for(int x = 0; x <= w; ++x) {
+            m_menuRectXf.clear();
+            m_menuRectXf.scale((size, size));
+            m_menuRectXf.translate((x * size, y * size));
+            m_menuRect.setTransform(m_menuRectXf);
+            Screen.DrawShape(skyflatnum, false, m_menuRect, DTA_Alpha,0.5, DTA_FillColor,0);
+         }
+      }
    }
-
-   Screen.dim("black", m_screenDim, 0, 0, Screen.getWidth(), Screen.getHeight());
 }
 
 /* EOF */
