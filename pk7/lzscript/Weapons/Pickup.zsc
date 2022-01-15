@@ -85,6 +85,7 @@ class Lith_PlasmaRiflePickup : Lith_WeaponPickup replaces PlasmaRifle {
       Lith_WeaponPickup.Sprite  "LWEPF";
       Lith_WeaponPickup.SpriteM "PLASA";
       Lith_WeaponPickup.SpriteC "CPLGZ";
+      Lith_WeaponPickup.SpriteD "FORTZ";
    }
 }
 
