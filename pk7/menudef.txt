@@ -53,7 +53,7 @@ listMenu "EpisodeMenu" {
    class "Lith_SkillEpMenu"
    staticTextCentered  160, 30, "$MENU_WHICHEPISODE"
    staticPatchCentered 42, 48, "lgfx/Menu/EpisodeBack.png"
-   position            48, 63
+   position            48, 53
    font                "bigupper", "Lith_Green", "White"
 }
 
@@ -61,7 +61,7 @@ listMenu "SkillMenu" {
    class "Lith_SkillEpMenu"
    staticTextCentered  160, 30, "$MENU_CHOOSESKILL"
    staticPatchCentered 42, 48, "lgfx/Menu/EpisodeBack.png"
-   position            48, 63
+   position            48, 53
    font                "bigupper", "Lith_Green", "White"
 }
 
