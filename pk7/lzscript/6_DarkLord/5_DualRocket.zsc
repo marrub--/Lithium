@@ -47,6 +47,7 @@ action(Weapon) void Lith_A_FireRocket(class<Actor> cl, double xofs) {
    A_FireProjectile(cl, 0, true, xofs, -2);
    lith_takeAmmo(2);
    Lith_A_RecoilUp(1.2);
+   A_FireProjectile("Lith_LightProjectileRedLong", 0);
 }
 
 states(Weapon) {

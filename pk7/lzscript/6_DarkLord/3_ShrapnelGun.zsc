@@ -97,12 +97,12 @@ Fire:
    SCRP A 10 lith_a_setInterpolation(false);
    goto ReadySelector;
 FireEmpty:
-   SCRP A 2 offset(0, 42);
-   SCRP A 2 offset(0, 38);
-   SCRP A 2 offset(0, 35) A_StartSound("weapons/spas/empty", lch_dryweapon);
-   SCRP A 1 offset(0, 34);
-   SCRP A 1 offset(0, 33);
-   SCRP A 1 offset(0, 32);
+   SCRP A 2 offset(3, 38);
+   SCRP A 1 offset(7, 40);
+   SCRP A 1 offset(5, 37) A_StartSound("weapons/spas/empty", lch_dryweapon);
+   SCRP A 1 offset(4, 34);
+   SCRP A 1 offset(2, 33);
+   SCRP A 5 offset(1, 32);
    goto ReadySelector;
 }
 

@@ -83,6 +83,7 @@ action(Weapon) void lith_fire700e() {
    A_Recoil(1.5);
    A_Quake(2, 3, 0, 128);
    Lith_FireBullets(0, 0, -1, int(60*frandom(1,1.7)), FBF_NORANDOM, "Lith_700Bullet", 4, tracer: _tr_slow);
+   A_FireProjectile("Lith_LightProjectileRedShort", 0);
    for(int i = 1; i <= 3; i++)
       Lith_A_GunSmoke(7, 3 * i);
    A_StartSound("weapons/700e/fire", lch_weapon, pitch: FRandom(0.9, 1.0));
