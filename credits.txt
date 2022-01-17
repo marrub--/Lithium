@@ -126,6 +126,7 @@
 @ Marty Kirra        - Cool person
 @ Ribonucleic Asshat - Emotional support twink (female)
 @ TerminusEst13      - Help with finding some sprites to work with
+@ Theshooter7        - Making Danimator, which I used for a lot of animations
 @ Wartorn            - Help with HUD design, emotional support
 @ WildWeasel         - Help with making fonts, suggestions for HUD
 @ Xaser Acheron      - Help with code stuff
