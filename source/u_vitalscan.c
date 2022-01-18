@@ -66,6 +66,8 @@ script void Upgr_VitalScan_Update(struct upgrade *upgr) {
          udata.tagstr = StrParam("\C[Lith_Dark]%tS\C-", 0);
       } else if(udata.rank == 7) {
          udata.tagstr = StrParam("\C[Lith_Angelic]%tS\C-", 0);
+      } else if(udata.rank == 8) {
+         udata.tagstr = StrParam("\C[Lith_Dark]%tS\C-", 0);
       } else if(freak || ACS_CheckFlag(0, sm_boss)) {
          udata.tagstr = RandomName(!freak &? id);
       } else if(six) {

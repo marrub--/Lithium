@@ -2,8 +2,6 @@
 
 
 
-
-
 enum Lith_MonsterType {
    mtype_unknown,
    
@@ -33,6 +31,21 @@ mtype_darkone,
 
    mtype_max
 };
+
+enum Lith_LicariGender {
+   _lic_ocean,
+   _lic_earth,
+   _lic_sky,
+};
+
+enum Lith_ServGender {
+   _srv_mortal,
+   _srv_unmoving,
+   _srv_structured,
+   _srv_destructured,
+};
+
+
 
 
 

@@ -20,23 +20,6 @@
 
 #define HasResistances(m) ((m)->rank >= 2)
 
-/* Types ------------------------------------------------------------------- */
-
-typedef char mon_name_t[64];
-
-struct monster_preset {
-   mon_name_t prename;
-   u64        exp;
-   i96        score;
-};
-
-struct monster_info {
-   anonymous struct monster_preset pre;
-   enum mtype type;
-   mon_name_t name;
-   i32        flags;
-};
-
 /* Static Objects ---------------------------------------------------------- */
 
 noinit static
@@ -121,9 +104,10 @@ void ShowBarrier(dmon_t const *m, k32 alpha) {
       k32 y   = m->y + ACS_Sin(a->ang) * dst;
       i32 tid = ACS_UniqueTID();
       str bar = m->rank >= 5 ? so_MonsterHeptaura : so_MonsterBarrier;
+      k32 alp = (1 - a->dst / (256 * (m->rank - 1))) * alpha;
 
       ACS_SpawnForced(bar, x, y, m->z + m->h / 2, tid);
-      SetAlpha(tid, (1 - a->dst / (256 * (m->rank - 1))) * alpha);
+      SetAlpha(tid, minmax(alp, 0.0, 1.0));
    }
 }
 
@@ -139,7 +123,10 @@ void BaseMonsterLevel(dmon_t *m) {
    bias += CVarGetI(sc_sv_difficulty) / 100.0;
    bias *= ACS_RandomFixed(1, 1.5);
 
-   if(get_bit(m->mi->flags, _mif_angelic)) {
+   if(m->mi->type == mtype_darkone) {
+      m->rank  = 8;
+      m->level = _max_level + rlv + rlv * bias;
+   } else if(get_bit(m->mi->flags, _mif_angelic)) {
       m->rank  = 7;
       m->level = 7 + rlv * bias;
    } else if(get_bit(m->mi->flags, _mif_dark)) {

@@ -660,7 +660,7 @@ stab_ary_bgn_x(sa_ranks)
 stab_ary_ent_x(":UI:Rank1") stab_ary_ent_x(":UI:Rank2")
 stab_ary_ent_x(":UI:Rank3") stab_ary_ent_x(":UI:Rank4")
 stab_ary_ent_x(":UI:Rank5") stab_ary_ent_x(":UI:Rank6")
-stab_ary_ent_x(":UI:Rank7")
+stab_ary_ent_x(":UI:Rank7") stab_ary_ent_x(":UI:Rank8")
 stab_ary_end_x()
 
 stab_ary_bgn_x(sa_healthbars)

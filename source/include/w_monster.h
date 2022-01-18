@@ -40,6 +40,26 @@ monster_type_x(darkone)
 #elif !defined(w_monster_h)
 #define w_monster_h
 
+enum ZscName(MonsterType, mtype) {
+   mtype_unknown,
+   #define monster_type_x(name) mtype_##name,
+   #include "w_monster.h"
+   mtype_max
+};
+
+enum ZscName(LicariGender, lic_gender) {
+   _lic_ocean,
+   _lic_earth,
+   _lic_sky,
+};
+
+enum ZscName(ServGender, srv_gender) {
+   _srv_mortal,
+   _srv_unmoving,
+   _srv_structured,
+   _srv_destructured,
+};
+
 #if !ZscOn
 #include "common.h"
 #include "m_list.h"
@@ -63,6 +83,21 @@ enum dmgtype {
    dmgtype_melee,
    dmgtype_shrapnel,
    dmgtype_max
+};
+
+typedef char mon_name_t[64];
+
+struct monster_preset {
+   mon_name_t prename;
+   u64        exp;
+   i96        score;
+};
+
+struct monster_info {
+   anonymous struct monster_preset pre;
+   enum mtype type;
+   mon_name_t name;
+   i32        flags;
 };
 
 struct dmon {
@@ -100,12 +135,5 @@ void PrintDmonAllocSize(void);
 
 script void Mon_Init(void);
 #endif
-
-enum ZscName(MonsterType, mtype) {
-   mtype_unknown,
-   #define monster_type_x(name) mtype_##name,
-   #include "w_monster.h"
-   mtype_max
-};
 
 #endif
