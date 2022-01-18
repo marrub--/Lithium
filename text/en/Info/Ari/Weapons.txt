@@ -21,11 +21,12 @@
 
 ## ---------------------------------------------------------------------------|
 == \#INFO_SHORT_Minigun | Minigun
-== \#INFO_TITLE_Minigun | How's Bout Them Revenants
+== \#INFO_TITLE_Minigun | HBTR-33 Minigun
 @@ \#INFO_DESCR_Minigun
 An ancient weapon developed during the dark ages, immensely powerful,
 but quite simple. Uses revolving barrels to create a better fire-rate.
 However, it only uses .50 rounds, and can only create minimal amounts
-of damage. I stole this from a long-abandoned AOF supply depot.
+of damage. \c[Lith_Pink]I stole this from a long-abandoned AOF supply
+depot.
 
 ## EOF
