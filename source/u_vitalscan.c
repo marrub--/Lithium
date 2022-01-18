@@ -52,8 +52,6 @@ script void Upgr_VitalScan_Update(struct upgrade *upgr) {
       udata.oldtarget = ot;
       udata.target    = id;
 
-      bool healthset = false;
-
       if(m) {
          udata.rank = m->rank;
          udata.exp  = m->exp / (k32)_monster_level_exp;
@@ -70,12 +68,6 @@ script void Upgr_VitalScan_Update(struct upgrade *upgr) {
          udata.tagstr = StrParam("\C[Lith_Angelic]%tS\C-", 0);
       } else if(freak || ACS_CheckFlag(0, sm_boss)) {
          udata.tagstr = RandomName(!freak &? id);
-
-         if(CVarGetI(sc_scanner_bar)) {
-            udata.oldhealth = udata.health = ACS_Random(0, 666666666);
-            udata.maxhealth = ACS_Random(0, 666666666);
-            healthset = true;
-         }
       } else if(six) {
          udata.tagstr = st_six_tag;
       } else {
@@ -86,11 +78,9 @@ script void Upgr_VitalScan_Update(struct upgrade *upgr) {
       if(legendoom && InvNum(so_LDLegendaryMonsterTransformed))
          udata.tagstr = StrParam("\CgLegendary\C- %tS\C-", 0);
 
-      if(!healthset) {
-         udata.oldhealth = udata.health;
-         udata.health    = chp;
-         udata.maxhealth = m ? m->maxhealth : shp;
-      }
+      udata.oldhealth = udata.health;
+      udata.health    = chp;
+      udata.maxhealth = m ? m->maxhealth : shp;
 
       if(m) {
          i32 level =
@@ -104,7 +94,7 @@ script void Upgr_VitalScan_Update(struct upgrade *upgr) {
          i32 splitr = chp % shp;
          i32 split  = chp / shp;
          udata.splitfrac = splitr / (k32)shp;
-         udata.split     = minmax(split, 0, 13);
+         udata.split     = split;
       } else {
          udata.splitfrac = 0.0;
          udata.split     = 0;
@@ -201,10 +191,10 @@ void Upgr_VitalScan_Render(struct upgrade *upgr) {
    /* Health bar */
    if(CVarGetI(sc_scanner_bar)) {
       if(udata.split > 0)
-         PrintSprite(sa_healthbars[udata.split - 1], x,1, y,1);
+         PrintSprite(sa_healthbars[(udata.split - 1) % countof(sa_healthbars)], x,1, y,1);
 
       SetClip(x, y, 80 * udata.splitfrac, 2);
-      PrintSprite(sa_healthbars[udata.split], x,1, y,1);
+      PrintSprite(sa_healthbars[udata.split % countof(sa_healthbars)], x,1, y,1);
       ClearClip();
 
       SetClip(x, y+3, 24 * udata.exp, 2);
