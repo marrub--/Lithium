@@ -7,7 +7,7 @@
 ## ---------------------------------------------------------------------------|
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_HeadsUpDisp | $\#UPGRADE_TITLE_HeadsUpDisM
+== \#INFO_SHORT_HeadsUpDisp | $\#UPGRADE_TITLE_HeadsUpDisp
 == \#INFO_TITLE_HeadsUpDisp | Heads Up Display
 @@ \#INFO_DESCR_HeadsUpDisp
 This is a military issue Heads Up Display program, which tracks vital signs,
@@ -162,7 +162,7 @@ natives could easily do so,) this version, which was developed by Deceiver
 Solomon, requires only an energy source.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_HeadsUpDispJem | $\#UPGRADE_TITLE_HeadsUpDisC
+== \#INFO_SHORT_HeadsUpDispJem | $\#UPGRADE_TITLE_HeadsUpDisp
 == \#INFO_TITLE_HeadsUpDispJem | $\#INFO_TITLE_HeadsUpDisp
 @@ \#INFO_DESCR_HeadsUpDispJem
 This program is the 37th version of the standard issue heads-up display for

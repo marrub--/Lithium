@@ -215,8 +215,8 @@ An armor with a nickel dendritic micro-structure woven with tungsten and other
 materials for extreme heat resistance. Produced by Sheka Kaff, Inc.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_ArmAerodynamic | $\#ITEM_TAG_ArmAerodynamicUp
-== \#INFO_TITLE_ArmAerodynamic | $\#INFO_SHORT_ArmAerodynamic
+== \#INFO_SHORT_ArmAerodynamic | Aero. Armor
+== \#INFO_TITLE_ArmAerodynamic | $\#ITEM_TAG_ArmAerodynamicUp
 @@ \#INFO_DESCR_ArmAerodynamic
 Light wind-gliding armor with a blue finish that allows the wearer increased
 speed by wind resistance. Produced by Yigan.

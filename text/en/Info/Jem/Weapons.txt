@@ -244,7 +244,7 @@ causing hundreds of smaller projectiles to come out as it rips through
 anything in its path.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_ShipGun_A | $\#UPGRADE_TITLE_ShipGun_A
+== \#INFO_SHORT_ShipGun_A | Longinus Sols.
 == \#INFO_TITLE_ShipGun_A | The Forsaken Longinus Solspear
 @@ \#INFO_DESCR_ShipGun_A
 The first of the three ancient bolts of the Star Destroyer, the Longinus

@@ -533,8 +533,8 @@
 "LITH_INFO_SHORT_ArmDendrite" = "$LITH_ITEM_TAG_ArmDendriteUp";
 "LITH_INFO_TITLE_ArmDendrite" = "$LITH_INFO_SHORT_ArmDendrite";
 "LITH_INFO_DESCR_ArmDendrite" = "An armor with a nickel dendritic micro-structure woven with tungsten and other materials for extreme heat resistance. Produced by Sheka Kaff, Inc.";
-"LITH_INFO_SHORT_ArmAerodynamic" = "$LITH_ITEM_TAG_ArmAerodynamicUp";
-"LITH_INFO_TITLE_ArmAerodynamic" = "$LITH_INFO_SHORT_ArmAerodynamic";
+"LITH_INFO_SHORT_ArmAerodynamic" = "Aero. Armor";
+"LITH_INFO_TITLE_ArmAerodynamic" = "$LITH_ITEM_TAG_ArmAerodynamicUp";
 "LITH_INFO_DESCR_ArmAerodynamic" = "Light wind-gliding armor with a blue finish that allows the wearer increased speed by wind resistance. Produced by Yigan.";
 "LITH_INFO_SHORT_ArmHazMat" = "Haz-mat Armor";
 "LITH_INFO_TITLE_ArmHazMat" = "Hazardous Materials Armor";
@@ -660,7 +660,7 @@
 "LITH_INFO_SHORT_Tsukama" = "Tsukama";
 "LITH_INFO_TITLE_Tsukama" = "$LITH_INFO_SHORT_Tsukama";
 "LITH_INFO_DESCR_Tsukama" = "A system about 45 lightyears from Earth, not far from Algidistari. The system is composed of 14 planets and one star, which emits slightly more heat than the Sun, making the planets here extremely temperate during solar cycles.\n\nThree of the planets, Eta, Ni and Keta, are desert planets capable of inhabiting human life, although have few native inhabitants, none sentient. Seven of the planets are completely barren, although house valuable minerals which make the system a large trading place. The other three planets are gas giants and have not been surface inspected yet.";
-"LITH_INFO_SHORT_HeadsUpDisp" = "$LITH_UPGRADE_TITLE_HeadsUpDisM";
+"LITH_INFO_SHORT_HeadsUpDisp" = "$LITH_UPGRADE_TITLE_HeadsUpDisp";
 "LITH_INFO_TITLE_HeadsUpDisp" = "Heads Up Display";
 "LITH_INFO_DESCR_HeadsUpDisp" = "This is a military issue Heads Up Display program, which tracks vital signs, munitions, armor status, and more with numeric signifiers.\n\nOriginally designed by a former video game designer, a great amount of effort had to be put into fine-tuning this program to tell you exactly when you're about to die, your armor is about to break and get you killed, or you're about to run out of ammunition, and then die.";
 "LITH_INFO_SHORT_JetBooster" = "$LITH_UPGRADE_TITLE_JetBooster";
@@ -696,7 +696,7 @@
 "LITH_INFO_SHORT_StealthSys" = "$LITH_UPGRADE_TITLE_StealthSys";
 "LITH_INFO_TITLE_StealthSys" = "Unnamed Stealth System";
 "LITH_INFO_DESCR_StealthSys" = "An active light reflection system, using advanced camouflage developed years ago in \cm[redacted]\c- by the inhabitants of the planet. While the original version required a link with \cm[redacted]\c- in order to function (as the natives could easily do so,) this version, which was developed by Deceiver Solomon, requires only an energy source.";
-"LITH_INFO_SHORT_HeadsUpDispJem" = "$LITH_UPGRADE_TITLE_HeadsUpDisC";
+"LITH_INFO_SHORT_HeadsUpDispJem" = "$LITH_UPGRADE_TITLE_HeadsUpDisp";
 "LITH_INFO_TITLE_HeadsUpDispJem" = "$LITH_INFO_TITLE_HeadsUpDisp";
 "LITH_INFO_DESCR_HeadsUpDispJem" = "This program is the 37th version of the standard issue heads-up display for AOF employees. The binary remains uncredited, and the decompiled code has no authors listed in any of the files, though is well-commented.";
 "LITH_INFO_SHORT_Magic" = "$LITH_UPGRADE_TITLE_Magic";
@@ -771,7 +771,7 @@
 "LITH_INFO_SHORT_StarDestroyer" = "Star Destroyer";
 "LITH_INFO_TITLE_StarDestroyer" = "The Star Destroyer";
 "LITH_INFO_DESCR_StarDestroyer" = "An atrocious weapon supposedly made from the life research of seven magi of Hell, the Star Destroyer was made with the sole purpose of destroying whatever created it so hard that it would never, ever come back again.\n\nThe weapon's inner workings still elude many, but what is known is that it condenses demonic energy far more than any other known artifact; the weapon then takes this hyper-condensed energy and emits it into a very small, circular disc buffer on the top of the weapon.\n\nThe resulting projectile grows in size as it disperses energy in front of it, causing hundreds of smaller projectiles to come out as it rips through anything in its path.";
-"LITH_INFO_SHORT_ShipGun_A" = "$LITH_UPGRADE_TITLE_ShipGun_A";
+"LITH_INFO_SHORT_ShipGun_A" = "Longinus Sols.";
 "LITH_INFO_TITLE_ShipGun_A" = "The Forsaken Longinus Solspear";
 "LITH_INFO_DESCR_ShipGun_A" = "The first of the three ancient bolts of the Star Destroyer, the Longinus Solspear. The bolt modifies the projectile to focus all of its power on moving forward; like a spear piercing through all in its path. Crushingly powerful, the projectile not only pierces through almost any substance, but bounces off of things that it can't kill, such as walls.\n\nThis bolt appears to think on its own, though this is possibly just local distortion caused by the high amount of condensed demonic energy.";
 "LITH_INFO_SHORT_ShipGun_B" = "$LITH_UPGRADE_TITLE_ShipGun_B";
