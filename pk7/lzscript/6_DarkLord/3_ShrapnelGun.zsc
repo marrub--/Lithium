@@ -12,13 +12,13 @@ class Lith_ShrapnelProjectile : Actor {
       BounceType "Doom";
       BounceSound "weapons/shrapnel/bounce";
       RipSound "weapons/shrapnel/hit";
-      DamageFunction (4);
+      DamageFunction (8);
       DamageType "Shrapnel";
       Gravity 0.5;
       Height 8;
       Radius 8;
       Species "Lith_Player";
-      Speed 25;
+      Speed 40;
       Scale 0.26;
 
       Projectile;
@@ -55,7 +55,15 @@ default {
 }
 
 action(Weapon) void Lith_A_FireShrapnel() {
-   A_FireProjectile("Lith_ShrapnelProjectile", frandom(-5, 5), false, frandom(-5, 5), frandom(-7, 7), FPF_NOAUTOAIM);
+   lith_takeAmmo();
+   A_StartSound("weapons/shrapnel/fire", lch_weapon);
+   A_AlertMonsters();
+   A_GunFlash("DummyFlash");
+   Lith_A_RecoilUp(5);
+   lith_a_setInterpolation(true);
+   for(int i = 0; i < 12; ++i) {
+      A_FireProjectile("Lith_ShrapnelProjectile", frandom(-5, 5), false, frandom(5, 10), frandom(-7, 7), FPF_NOAUTOAIM);
+   }
 }
 
 states(Weapon) {
@@ -73,28 +81,19 @@ Select:
 
 Fire:
    #### # 0 lith_jumpNoAmmo;
-   SCRP A 0 {
-      lith_takeAmmo();
-      A_StartSound("weapons/shrapnel/fire", lch_weapon);
-      A_AlertMonsters();
-      A_GunFlash("DummyFlash");
-      Lith_A_RecoilUp(8);
-      lith_a_setInterpolation(true);
-   }
-   SCRP B 1 {for(int i = 0; i < 6; i++) Lith_A_FireShrapnel();}
-   SCRP B 1;
-   SCRP B 1;
-   SCRP B 1 {for(int i = 0; i < 4; i++) Lith_A_FireShrapnel();}
-   SCRP C 1;
-   SCRP C 1;
-   SCRP C 1 {for(int i = 0; i < 2; i++) Lith_A_FireShrapnel();}
-   SCRP C 1;
-   SCRP C 1;
-   SCRP C 1;
+   #### # 0 lith_a_setInterpolation(true);
    SCRP A 1;
-   SCRP A 1;
-   SCRP A 1;
-   SCRP A 10 lith_a_setInterpolation(false);
+   SCRP A 1 offset(2, 33);
+   SCRP C 1 offset(164, 109) Lith_A_FireShrapnel();
+   SCRP B 1 offset(173, 117);
+   SCRP B 1 offset(180, 121);
+   SCRP B 1 offset(183, 123);
+   SCRP B 1 offset(178, 120);
+   SCRP B 1 offset(169, 114);
+   SCRP C 1 offset(165, 108);
+   SCRP C 1 offset(152, 104);
+   #### # 0 lith_a_setInterpolation(false);
+   SCRP A 1 offset(1, 32);
    goto ReadySelector;
 FireEmpty:
    SCRP A 2 offset(3, 38);

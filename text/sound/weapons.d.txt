@@ -38,8 +38,11 @@ weapons {
       }
    }
 
-   == lsounds/WeaponsD/4Bore
-   \4bore.fire Fire # a1337spy
+   \4bore {
+      == lsounds/WeaponsD/4Bore
+      fire Fire # a1337spy
+      draw Draw # Sound Ideas Series 6000
+   }
 
    shrapnel {
       == lsounds/WeaponsD/ShrapnelGun

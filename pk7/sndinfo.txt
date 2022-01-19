@@ -615,6 +615,7 @@ weapons/700e/bin lsounds/WeaponsD/700Express/BulletIn
 weapons/700e/cout lsounds/WeaponsD/700Express/CasingsOut
 $random weapons/700e/fire { weapons/700e/fire1 weapons/700e/fire2 weapons/700e/fire3 }
 weapons/4bore/fire lsounds/WeaponsD/4Bore/Fire
+weapons/4bore/draw lsounds/WeaponsD/4Bore/Draw
 weapons/shrapnel/fire lsounds/WeaponsD/ShrapnelGun/Fire
 weapons/shrapnel/draw lsounds/WeaponsD/ShrapnelGun/Draw
 weapons/shrapnel/bounce lsounds/WeaponsD/ShrapnelGun/Bounce
