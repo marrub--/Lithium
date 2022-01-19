@@ -243,7 +243,20 @@ void HUD_BottomRight() {
          ACS_PrintChar('U');
          ACS_PrintChar('T');
       } else {
-         ACS_PrintInt(wep->magmax - wep->magcur);
+         if(!(wep->ammotype & AT_Ammo)) {
+            PrintChrSt(u8"∞");
+         }
+         i32 magcur = wep->magmax - wep->magcur;
+         if(wep->magmax >= 1000 && magcur < 1000) {
+            ACS_PrintChar(' ');
+         }
+         if(wep->magmax >= 100 && magcur < 100) {
+            ACS_PrintChar(' ');
+         }
+         if(wep->magmax >= 10 && magcur < 10) {
+            ACS_PrintChar(' ');
+         }
+         ACS_PrintInt(magcur);
          ACS_PrintChar('/');
          ACS_PrintInt(wep->magmax);
       }
