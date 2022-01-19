@@ -40,6 +40,7 @@ enum Lith_WeaponNum {
    weapon_d_4bore,
    weapon_d_shrapnel,
    weapon_d_minigun,
+   weapon_d_motra,
    weapon_d_drocket,
    weapon_d_fortune,
    weapon_i_flintlock,

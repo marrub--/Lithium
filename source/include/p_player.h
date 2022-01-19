@@ -86,7 +86,6 @@ enum ZscName(SubweaponType) {
    _subw_gun,
    _subw_dagger,
    _subw_grenade,
-   _subw_mine,
    _subw_axe,
    _subw_dart,
    _subw_max,

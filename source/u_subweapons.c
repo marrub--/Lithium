@@ -47,10 +47,10 @@ void Upgr_Subweapons_Render(struct upgrade *upgr) {
 
    PrintSprite(sp_SubWepBack, 66,1, 239,2);
 
-   u32 prc = 47 * udata.charge / (k32)100.0;
-   if(udata.shots == 0) SetClip(72, 223, prc, 1);
+   u32 prc = 38 * udata.charge / (k32)100.0;
+   if(udata.shots == 0) SetClip(72, 223, prc, 2);
    /*                */ PrintSprite(sp_SubWepBar1, 72,1, 224,2);
-   if(udata.shots == 1) SetClip(72, 223, prc, 1);
+   if(udata.shots == 1) SetClip(72, 223, prc, 2);
    if(udata.shots != 0) PrintSprite(sp_SubWepBar2, 72,1, 224,2);
    if(udata.shots <  2) ClearClip();
 

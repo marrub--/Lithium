@@ -620,6 +620,13 @@ weapons/shrapnel/fire lsounds/WeaponsD/ShrapnelGun/Fire
 weapons/shrapnel/draw lsounds/WeaponsD/ShrapnelGun/Draw
 weapons/shrapnel/bounce lsounds/WeaponsD/ShrapnelGun/Bounce
 weapons/shrapnel/hit lsounds/WeaponsD/ShrapnelGun/Hit
+weapons/motra/fire1 lsounds/WeaponsD/Motra/Fire1
+weapons/motra/fire2 lsounds/WeaponsD/Motra/Fire2
+weapons/motra/fire3 lsounds/WeaponsD/Motra/Fire3
+weapons/motra/out lsounds/WeaponsD/Motra/ReloadOut
+weapons/motra/in lsounds/WeaponsD/Motra/ReloadIn
+weapons/motra/draw lsounds/WeaponsD/Motra/Draw
+$random weapons/motra/fire { weapons/motra/fire1 weapons/motra/fire2 weapons/motra/fire3 }
 weapons/minigun/fire lsounds/WeaponsD/Minigun/Fire
 weapons/minigun/rotate lsounds/WeaponsD/Minigun/Rotate
 weapons/minigun/up lsounds/WeaponsD/Minigun/RotateUp

@@ -42,6 +42,7 @@ class Lith_DarkLordSprint : PowerSpeed {
 #include "lzscript/6_DarkLord/3_4Bore.zsc"
 #include "lzscript/6_DarkLord/3_ShrapnelGun.zsc"
 #include "lzscript/6_DarkLord/4_Minigun.zsc"
+#include "lzscript/6_DarkLord/4_Motra.zsc"
 #include "lzscript/6_DarkLord/5_DualRocket.zsc"
 #include "lzscript/6_DarkLord/6_FortuneGun.zsc"
 

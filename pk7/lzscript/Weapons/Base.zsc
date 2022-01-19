@@ -76,6 +76,8 @@ private meta class<Actor> m_spawnType;
 
 private bool m_side;
 
+protected bool m_ads;
+
 private class<Lith_Ammo> m_ammoType;
 
 property AmmoType: m_ammoType;
@@ -256,7 +258,7 @@ action(Weapon) void Lith_A_DoubleOffset(bool left, int x, int y) {
 }
 
 action(Weapon) state Lith_A_Ready(int flags = 0) {
-   if(!countInv("Lith_WeaponScopedToken")) {
+   if(!countInv("Lith_WeaponScopedToken") && !invoker.m_ads) {
       a_zoomFactor(1.0, ZOOM_INSTANT);
    }
 
@@ -344,10 +346,15 @@ action(Weapon) void Lith_A_ScopeIn() {
    }
 }
 
+action(Weapon) void Lith_A_CancelScope() {
+   invoker.m_ads = false;
+   self.TakeInventory("Lith_WeaponScopedToken", 1);
+   A_ZoomFactor(1.0, ZOOM_INSTANT);
+}
+
 action(Weapon) void Lith_A_ScopeOut() {
    if(CountInv("Lith_WeaponScopedToken")) {
-      self.TakeInventory("Lith_WeaponScopedToken", 1);
-      A_ZoomFactor(1.0, ZOOM_INSTANT);
+      Lith_A_CancelScope();
       A_StartSound(invoker.m_scopeOutSnd, lch_scope);
    }
 }
@@ -469,8 +476,9 @@ FireEmpty:
 ReadySelector:
    #### # 0 {
       lith_a_setInterpolation(false);
-      return CountInv("Lith_WeaponScopedToken") ? ResolveState("AltReady")
-                                                : ResolveState("Ready");
+      return CountInv("Lith_WeaponScopedToken") || invoker.m_ads
+         ? ResolveState("AltReady")
+         : ResolveState("Ready");
    }
    stop;
 DummyFlash:
