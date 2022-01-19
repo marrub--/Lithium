@@ -17,6 +17,7 @@ default
    Weapon.SlotPriority 0.9;
    Weapon.UpSound "weapons/4bore/draw";
    Lith_Weapon.AmmoType "Lith_ShellAmmo";
+   Inventory.AltHudIcon "4BORZ0";
 }
 
 action(Weapon) void Lith_A_Fire4Bore()

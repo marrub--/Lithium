@@ -54,6 +54,7 @@ class Lith_SuperShotgunPickup : Lith_WeaponPickup replaces SuperShotgun {
       Lith_WeaponPickup.Sprite  "LWEPC";
       Lith_WeaponPickup.SpriteM "SSGGX";
       Lith_WeaponPickup.SpriteC "CSHGY";
+      Lith_WeaponPickup.SpriteD "4BORZ";
    }
 }
 
@@ -75,6 +76,7 @@ class Lith_RocketLauncherPickup : Lith_WeaponPickup replaces RocketLauncher {
       Lith_WeaponPickup.Sprite  "LWEPE";
       Lith_WeaponPickup.SpriteM "LAUNA";
       Lith_WeaponPickup.SpriteC "IONGZ";
+      Lith_WeaponPickup.SpriteD "FRANZ";
    }
 }
 
