@@ -77,8 +77,6 @@ weapons {
       down   RotateDown  # E.Y.E: Divine Cybermancy
       place  RotatePlace # Quake 2
       empty  Empty       # Halo 3
-      magout MagOut      # E.Y.E: Divine Cybermancy
-      magin  MagIn       # ^
       pickup Pickup      # Doom 3
       draw   Draw        # ^
    }
@@ -102,8 +100,6 @@ weapons {
       hit       Hit       # ^
       charge    Charge    # ^
       spark     Spark     # ^
-      reloadout ReloadOut # A mishmash of old sounds without credits, sorry
-      reloadin  ReloadIn  # ^
       draw      Draw      # Halo 3, Counter-Strike: Source
       $limit hit 0
       $limit spark 0
