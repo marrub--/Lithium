@@ -303,6 +303,8 @@ decalgroup Lith_ChargeFistScorch
 generator Lith_GaussPuff             Lith_GaussScorch
 generator Lith_PlasmaHit             Lith_PlasmaLaserScorch
 generator Lith_BulletPuff            BulletChip
+generator Lith_BulletPuffPainless    BulletChip
+generator Lith_BulletPuffPainful     BulletChip
 generator Lith_RifleBullet           BulletChip
 generator Lith_RifleBulletPainless   BulletChip
 generator Lith_SniperBullet          BulletChip
