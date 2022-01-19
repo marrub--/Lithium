@@ -155,7 +155,6 @@ class Lith_FortuneGun : Lith_DWeapon;
 
 default {
    Lith_Weapon.SpawnType "Lith_PlasmaRiflePickup";
-   Lith_Weapon.MagSize 4;
    Tag "$LITH_INFO_SHORT_FortuneGun";
    Weapon.SlotNumber 6;
    Weapon.SlotPriority 1;
@@ -180,7 +179,7 @@ action(Weapon) void Lith_A_FireFortune() {
 
 states(Weapon) {
 Ready:
-   FORT A 1 Lith_A_Ready(WRF_ALLOWRELOAD);
+   FORT A 1 Lith_A_Ready;
    FORT A 0 {
       if(random(0, 77) == 0 || CallACS("Lith_Timer") % 50 == 0) {
          A_StartSound("weapons/fortune/spark", lch_weapon3, pitch: frandom(0.9, 1.2));
@@ -200,8 +199,6 @@ Select:
 
 Fire:
    #### # 0 lith_jumpNoAmmo(875);
-   #### # 0 Lith_A_JumpIfMagEmpty;
-   #### # 0 Lith_A_MagIncr;
    FORT A 1 offset(-2, 34) A_StartSound("weapons/fortune/charge", lch_weapon2);
    FORT A 1 offset(2, 32) {
       A_SpawnItemEx("Lith_FortuneSpark2", flags: SXF_SETMASTER|SXF_NOCHECKPOSITION);
@@ -262,11 +259,11 @@ Fire:
    FORT A 1 offset(7, 40);
    FORT A 1 offset(6, 38);
    FORT A 1 offset(5, 37) A_ReFire;
-   FORT A 1 offset(4, 36) A_WeaponReady(WRF_ALLOWRELOAD);
-   FORT A 1 offset(3, 35) A_WeaponReady(WRF_ALLOWRELOAD);
-   FORT A 1 offset(2, 34) A_WeaponReady(WRF_ALLOWRELOAD);
-   FORT A 1 offset(1, 33) A_WeaponReady(WRF_ALLOWRELOAD);
-   FORT A 1 offset(1, 32) A_WeaponReady(WRF_ALLOWRELOAD);
+   FORT A 1 offset(4, 36) A_WeaponReady;
+   FORT A 1 offset(3, 35) A_WeaponReady;
+   FORT A 1 offset(2, 34) A_WeaponReady;
+   FORT A 1 offset(1, 33) A_WeaponReady;
+   FORT A 1 offset(1, 32) A_WeaponReady;
    goto ReadySelector;
 FireEmpty:
    FORT A 2 offset(3, 38);
@@ -275,41 +272,6 @@ FireEmpty:
    FORT A 1 offset(4, 34);
    FORT A 1 offset(2, 33);
    FORT A 5 offset(1, 32);
-   goto ReadySelector;
-
-Reload:
-   FORT A 1 Lith_A_JumpIfMagFull;
-   FORT A 1 lith_a_setInterpolation(true);
-   FORT A 1 offset(-2, 34) A_StartSound("weapons/fortune/reloadout", lch_reload);
-   FORT A 1 offset(-4, 37);
-   FORT A 0 Lith_A_ReloadBobUp(0.5);
-   FORT A 1 offset(-9, 43);
-   FORT A 2 offset(-12, 47);
-   FORT A 3 offset(-14, 52);
-   FORT A 4 offset(-12, 55) Lith_A_DropMag("Lith_SniperRifleMagazine", "Lith_SniperRifleMagazine2", 8,-1,20, frandom(0,1),frandom(-1,-2),0);
-   FORT A 5 offset(-11, 57);
-   FORT A 9 offset(-10, 60);
-   FORT A 10 offset(-11, 60);
-   FORT A 0 Lith_A_ReloadFinish;
-   FORT A 0 Lith_A_ReloadBobDn(1.5);
-   FORT A 2 offset(-13, 59) A_StartSound("weapons/fortune/reloadin", lch_reload2);
-   FORT A 2 offset(-11, 49);
-   FORT A 2 offset(-11, 47);
-   FORT A 8 offset(-11, 45) lith_a_setInterpolation(false);
-   FORT A 1 offset(-12, 49) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
-   FORT A 1 offset(-8, 53) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
-   FORT A 1 offset(-1, 57) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
-   FORT A 1 offset(3, 56) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
-   FORT A 1 offset(8, 52) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
-   FORT A 1 offset(10, 49) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
-   FORT A 1 offset(8, 47) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
-   FORT A 1 offset(7, 45) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
-   FORT A 2 offset(5, 43) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
-   FORT A 2 offset(3, 40) A_WeaponReady(WRF_NOBOB|WRF_NOSECONDARY);
-   FORT A 3 offset(2, 39) A_WeaponReady(WRF_NOBOB|WRF_NOSECONDARY);
-   FORT A 3 offset(1, 37) A_WeaponReady(WRF_NOBOB|WRF_NOSECONDARY);
-   FORT A 4 offset(1, 34) A_WeaponReady(WRF_NOBOB|WRF_NOSECONDARY);
-   FORT A 4 A_WeaponReady(WRF_NOBOB);
    goto ReadySelector;
 }
 

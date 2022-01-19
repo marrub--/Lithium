@@ -76,10 +76,10 @@ pD:
    d_700e:     [2, 700Express,  NMag       ]
    d_4bore:    [3, 4Bore,       Ammo Shell ]
    d_shrapnel: [3, ShrapnelGun, Ammo Shell ]
-   d_minigun:  [4, Minigun,     AMag Bullet]
+   d_minigun:  [4, Minigun,     Ammo Bullet]
    d_motra:    [4, Motra,       NMag       ]
    d_drocket:  [5, DualRocket,  Ammo Rocket]
-   d_fortune:  [6, FortuneGun,  AMag Plasma]
+   d_fortune:  [6, FortuneGun,  Ammo Plasma]
 
    pickups:
       fist:           m_fist
