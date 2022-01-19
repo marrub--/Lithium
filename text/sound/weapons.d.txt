@@ -96,11 +96,11 @@ weapons {
 
    fortune {
       == lsounds/WeaponsD/FortuneGun
-      fire      Fire      # Metal Gear Solid 2
-      hit       Hit       # ^
-      charge    Charge    # ^
-      spark     Spark     # ^
-      draw      Draw      # Halo 3, Counter-Strike: Source
+      fire   Fire      # Metal Gear Solid 2
+      hit    Hit       # ^
+      spark  Spark     # ^
+      charge Charge    # Self-made
+      draw   Draw      # Halo 3, Counter-Strike: Source
       $limit hit 0
       $limit spark 0
    }

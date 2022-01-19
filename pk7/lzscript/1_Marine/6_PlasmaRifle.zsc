@@ -134,7 +134,7 @@ FireLaser:
    PLSG A 0 lith_jumpNoAmmo;
    PLSK A 0 {
       A_StartSound("weapons/plasma/laser/fire_start", lch_weapon);
-      A_StartSound("weapons/plasma/laser/fire_loop", lch_weapon2, CHANF_LOOP, 0.4);
+      A_StartSound("weapons/plasma/laser/fire_loop", lch_weapon2, CHANF_LOOP);
       A_StartSound("weapons/plasma/laser/fire_hum",  lch_weapon3, CHANF_LOOP, 0.4);
       Lith_A_FireLaser();
    }

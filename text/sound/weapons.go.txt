@@ -84,7 +84,7 @@ weapons {
          == lsounds/WeaponsM/PlasmaRifle/Laser
          fire_start FireStart # Unreal Tournament '99
          fire_hum   FireHum   # ^
-         fire_loop  FireLoop  # Touhou 9: Phantasmagoria of Flower View
+         fire_loop  FireLoop  # Self-made
          fire_end   FireEnd   # Quake
          spark      Spark     # Fallout 4
          $limit spark 0
