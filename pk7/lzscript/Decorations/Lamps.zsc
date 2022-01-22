@@ -17,13 +17,13 @@ class Lith_LampSpark : Actor {
 
    states {
    Spawn:
-      SPRK A 0;
-      SPRK A 0 {scale.x *= randompick(-1, 1);}
-      SPRK A 1 bright;
-      SPRK B 1 bright A_StartSound("amb/spark", lch_body, attenuation: ATTN_NORM);
-      SPRK CD 2 bright;
-      SPRK EF 3;
-      SPRK GH 4 A_FadeOut;
+      LSPR A 0;
+      LSPR A 0 {scale.x *= randompick(-1, 1);}
+      LSPR A 1 bright;
+      LSPR B 1 bright A_StartSound("amb/spark", lch_body, attenuation: ATTN_NORM);
+      LSPR CD 2 bright;
+      LSPR EF 3;
+      LSPR GH 4 A_FadeOut;
       stop;
    }
 }

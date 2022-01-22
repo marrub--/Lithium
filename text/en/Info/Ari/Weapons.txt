@@ -15,7 +15,6 @@
 == \#INFO_SHORT_Rakz | Sub-bullets
 == \#INFO_SHORT_Ruzuk | Sub-daggers
 == \#INFO_SHORT_Zaruk | Sub-grenades
-== \#INFO_SHORT_Kawak | Sub-mines
 == \#INFO_SHORT_Zakuw | Sub-stealers
 == \#INFO_SHORT_Zikr | Sub-darts
 

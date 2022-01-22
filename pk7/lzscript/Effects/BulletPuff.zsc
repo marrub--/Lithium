@@ -7,35 +7,29 @@
  * ---------------------------------------------------------------------------|
  */
 
-
-class Lith_PuffSmoke : Actor
-{
-   default
-   {
+class Lith_PuffSmoke : Actor {
+   default {
       Radius 1;
       Height 1;
       RenderStyle "Add";
       Alpha 0.3;
       Scale 0.4;
 
-      +NOINTERACTION
-      +FLOORCLIP
-      +FORCEXYBILLBOARD
-      +DONTSPLASH
+      +NoInteraction
+      +FloorClip
+      +ForceXyBillboard
+      +DontSplash
    }
 
-   states
-   {
+   states {
    Spawn:
       SMK5 ABCDEFGHIJKLMNOP 1;
       stop;
    }
 }
 
-class Lith_HotEmber : Actor
-{
-   default
-   {
+class Lith_HotEmber : Actor {
+   default {
       Radius 2;
       Height 2;
       Mass 8;
@@ -43,36 +37,34 @@ class Lith_HotEmber : Actor
       Renderstyle "Translucent";
       Alpha 0.9;
       Scale 0.3;
-      +NOBLOCKMAP
-      +DONTSPLASH
-      -NOGRAVITY
+
+      +NoBlockmap
+      +DontSplash
+      -NoGravity
    }
 
-   states
-   {
+   states {
    Spawn:
       EPUF A 1 bright light("Lith_BulletPuff1");
-      EPUF BBCC 4 bright light("Lith_BulletPuff2") A_SpawnItemEx("Lith_HotEmberTrail", FRandom(0, 0.5), FRandom(-0.5, 0.5), FRandom(-0.5, 0.5), FRandom(0, 0.5), FRandom(-0.5, 0.5), FRandom(-0.5, 0.5));
+      EPUF BBCC 4 bright light("Lith_BulletPuff2") a_spawnItemEx("Lith_HotEmberTrail", fRandom(0, 0.5), fRandom(-0.5, 0.5), fRandom(-0.5, 0.5), fRandom(0, 0.5), fRandom(-0.5, 0.5), fRandom(-0.5, 0.5));
       EPUF DEFG 4 bright light("Lith_BulletPuff3");
       stop;
    }
 }
 
-class Lith_HotEmberTrail : Actor
-{
-   default
-   {
+class Lith_HotEmberTrail : Actor {
+   default {
       Radius 2;
       Height 2;
       Renderstyle "Translucent";
       Alpha 0.9;
       Scale 0.3;
-      +DONTSPLASH
-      +NOINTERACTION
+
+      +DontSplash
+      +NoInteraction
    }
 
-   states
-   {
+   states {
    Spawn:
       EPUF EFG 5 light("Lith_BulletPuff3");
       stop;
@@ -89,19 +81,19 @@ class Lith_BulletAfterSmoke : Actor {
       Scale 0.3;
 
       Projectile;
-      +THRUACTORS
-      +FORCEXYBILLBOARD
-      +DONTSPLASH
+      +ThruActors
+      +ForceXyBillboard
+      +DontSplash
    }
 
    double m_sx, m_sy;
 
    override void postBeginPlay() {
       super.postBeginPlay();
-      scale.x *= FRandom(2, 6);
-      scale.y *= FRandom(0.4, 1.5);
-      m_sx = FRandom(0.005, 0.01);
-      m_sy = FRandom(0.001, 0.005);
+      scale.x *= fRandom(2, 6);
+      scale.y *= fRandom(0.4, 1.5);
+      m_sx = fRandom(0.005, 0.01);
+      m_sy = fRandom(0.001, 0.005);
    }
 
    override void tick() {
@@ -113,40 +105,35 @@ class Lith_BulletAfterSmoke : Actor {
       }
    }
 
-   states
-   {
+   states {
    Spawn:
       TNT1 A 0;
-      SMOK AAAAAAAAAABBBBBBBBBBCCCCCCCCCC 1 A_FadeIn(FRandom(0.001, 0.005));
+      SMOK AAAAAAAAAABBBBBBBBBBCCCCCCCCCC 1 a_fadeIn(fRandom(0.001, 0.005));
       SMOK DEFG random(14, 56);
-      SMOK HHHHHHHHHIIIIIIIIIJJJJJJJJJJJJJJKKKKKKKKK 1 A_FadeOut(0.005);
+      SMOK HHHHHHHHHIIIIIIIIIJJJJJJJJJJJJJJKKKKKKKKK 1 a_fadeOut(0.005);
       stop;
    }
 }
 
-class Lith_BulletTracer : FastProjectile
-{
-   default
-   {
+class Lith_BulletTracer : FastProjectile {
+   default {
       Damage 0;
       Radius 2;
       Height 2;
       Speed 67;
       RenderStyle "Add";
 
-      +NODAMAGE
-      +DONTSPLASH
+      +NoDamage
+      +DontSplash
    }
 
-   override void postBeginPlay()
-   {
+   override void postBeginPlay() {
       super.postBeginPlay();
-      int n = RandomPick(45, -45);
-      Roll = FRandom(n - 2, n + 2);
+      int n = randomPick(45, -45);
+      roll = fRandom(n - 2, n + 2);
    }
 
-   states
-   {
+   states {
    Spawn:
       ____ A -1 bright light("Lith_BulletPuff1");
       stop;
@@ -162,30 +149,28 @@ class Lith_BulletTracerSlow : Lith_BulletTracer {
 class Lith_BulletTracerBig : Lith_BulletTracerSlow {
 }
 
-class Lith_BulletRicochetSpark : Actor
-{
-   default
-   {
+class Lith_BulletRicochetSpark : Actor {
+   default {
       RenderStyle "Add";
 
-      +NOINTERACTION
-      +DONTSPLASH
+      +NoInteraction
+      +DontSplash
+      +FlatSprite
+      +RollSprite
    }
 
-   override void postBeginPlay()
-   {
+   override void postBeginPlay() {
       super.postBeginPlay();
-      Roll = FRandom(0, 359);
-      Pitch = FRandom(-5, 5);
-      double sc = FRandom(.5, 1);
+      roll  = fRandom(0, 359);
+      pitch = fRandom(-5, 5) + 45;
+      double sc = fRandom(0.05, 0.2);
       scale = (sc, sc);
    }
 
-   states
-   {
+   states {
    Spawn:
       TNT1 A 0;
-      ____ ABCD 0 A_Jump(51, "Spawn1");
+      SPRK ABCD 0 a_jump(51, "Spawn1");
    Spawn1:
       #### # random(1, 2) bright light("Lith_BulletPuff1");
       stop;
@@ -197,62 +182,57 @@ class Lith_BulletPuffPainful  : Lith_BulletPuff {default {+FORCEPAIN}}
 
 class Lith_BulletPuff : Actor replaces BulletPuff;
 
-default
-{
+default {
    RenderStyle "Add";
    DamageType "Bullet";
    Species "Lith_Player";
    Alpha 0.9;
 
-   +DONTHARMSPECIES
-   +NOGRAVITY
-   +NOBLOCKMAP
-   +FLOORCLIP
-   +FORCEXYBILLBOARD
-   +PUFFGETSOWNER
-   +MTHRUSPECIES
-   -ALLOWPARTICLES
+   +DontHarmSpecies
+   +NoGravity
+   +NoBlockmap
+   +FloorClip
+   +ForceXyBillboard
+   +PuffGetsOwner
+   +MThruSpecies
+   -AllowParticles
 }
 
-void Lith_A_SmokeFX()
-{
+void lith_a_smokeFX() {
    for(int i = 0, m = random(0, 2); i < m; i++)
-      A_SpawnItemEx("Lith_BulletAfterSmoke", FRandom(-1,1), FRandom(-1,1), FRandom(-2,2),
-         FRandom(-0.5,0.5), FRandom(-0.5,0.5), FRandom(-0.2,0.2));
+      a_spawnItemEx("Lith_BulletAfterSmoke", fRandom(-1,1), fRandom(-1,1), fRandom(-2,2),
+         fRandom(-0.5,0.5), fRandom(-0.5,0.5), fRandom(-0.2,0.2));
 }
 
-void Lith_A_RicochetFX()
-{
+void lith_a_ricochetFX() {
    if(random() < 32) return;
 
    for(int i = 0, m = random(0, 3); i < m; i++)
-      A_SpawnItemEx("Lith_HotEmber", FRandom(-1, 1), FRandom(-1, 1), FRandom(0, 1), FRandom(-4, 4), FRandom(-4, 4), FRandom(2, 5), 0, SXF_NOCHECKPOSITION);
+      a_spawnItemEx("Lith_HotEmber", fRandom(-1, 1), fRandom(-1, 1), fRandom(0, 1), fRandom(-4, 4), fRandom(-4, 4), fRandom(2, 5), 0, SXF_NOCHECKPOSITION);
 
-   A_SpawnParticle("FFFFFF", SPF_FULLBRIGHT | SPF_RELATIVE, 25, 4, 0,
-      FRandom(-8,8), FRandom(-8,8), FRandom(-2,2),
-      FRandom( 0,1), FRandom(-5,5), FRandom( 5,10),
-      0, 0, FRandom(-0.5, -3),
+   a_spawnParticle("FFFFFF", SPF_FULLBRIGHT | SPF_RELATIVE, 25, 4, 0,
+      fRandom(-8,8), fRandom(-8,8), fRandom(-2,2),
+      fRandom( 0,1), fRandom(-5,5), fRandom( 5,10),
+      0, 0, fRandom(-0.5, -3),
       1.0, -1);
 }
 
-override void postBeginPlay()
-{
+override void postBeginPlay() {
    super.postBeginPlay();
-   Lith_A_SmokeFX();
-   Lith_A_RicochetFX();
+   lith_a_smokeFX();
+   lith_a_ricochetFX();
    if(Lith_UTIL.pData(pdata_upgrade, UPGR_TorgueMode))
-      A_SpawnItemEx("Lith_EXPLOOOSION", flags: SXF_TRANSFERPOINTERS|SXF_NOCHECKPOSITION);
+      a_spawnItemEx("Lith_EXPLOOOSION", flags: SXF_TRANSFERPOINTERS|SXF_NOCHECKPOSITION);
 }
 
-states
-{
+states {
 Spawn:
    XPUF Q 0;
-   XPUF Q 0 A_SpawnItemEx("Lith_BulletRicochetSpark");
-   XPUF Q 0 A_SpawnItemEx("Lith_PuffSmoke", 0, 0, 4.0 + 0.1 * random(-10, 10));
-   XPUF Q 0 A_Jump(256, "PuffNormal", "PuffMirrored");
+   XPUF Q 0 a_spawnItemEx("Lith_BulletRicochetSpark");
+   XPUF Q 0 a_spawnItemEx("Lith_PuffSmoke", 0, 0, 4.0 + 0.1 * random(-10, 10));
+   XPUF Q 0 a_jump(256, "PuffNormal", "PuffMirrored");
 PuffNormal:
-   XPUF Q 0 A_Jump(32, "PuffNormalAlt");
+   XPUF Q 0 a_jump(32, "PuffNormalAlt");
    XPUF QR 1 bright light("Lith_BulletPuff1");
    XPUF STU 1 bright light("Lith_BulletPuff2");
 PuffNormalEnd:
@@ -260,12 +240,12 @@ PuffNormalEnd:
    XPUF H 1 bright;
    stop;
 PuffNormalAlt:
-   XPUF A 0 A_StartSound("effects/puff/ricochet", lch_body, volume: lith_weapons_ricochetvol);
+   XPUF A 0 a_startSound("effects/puff/ricochet", lch_body, volume: lith_weapons_ricochetvol);
    XPUF AB 1 bright;
    XPUF CDE 1 bright light("Lith_BulletPuff2");
    goto PuffNormalEnd;
 PuffMirrored:
-   XPUF V 0 A_Jump(32, "PuffMirroredAlt");
+   XPUF V 0 a_jump(32, "PuffMirroredAlt");
    XPUF VW 1 bright light("Lith_BulletPuff1");
    XPUF XYZ 1 bright light("Lith_BulletPuff2");
 PuffMirroredEnd:
@@ -273,7 +253,7 @@ PuffMirroredEnd:
    XPUF P 1 bright;
    stop;
 PuffMirroredAlt:
-   XPUF I 0 A_StartSound("effects/puff/ricochet", lch_body, volume: lith_weapons_ricochetvol);
+   XPUF I 0 a_startSound("effects/puff/ricochet", lch_body, volume: lith_weapons_ricochetvol);
    XPUF IJ 1 bright;
    XPUF KLM 1 bright light("Lith_BulletPuff2");
    goto PuffMirroredEnd;

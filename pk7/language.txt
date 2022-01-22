@@ -710,7 +710,6 @@
 "LITH_INFO_SHORT_Rakz" = "Sub-bullets";
 "LITH_INFO_SHORT_Ruzuk" = "Sub-daggers";
 "LITH_INFO_SHORT_Zaruk" = "Sub-grenades";
-"LITH_INFO_SHORT_Kawak" = "Sub-mines";
 "LITH_INFO_SHORT_Zakuw" = "Sub-stealers";
 "LITH_INFO_SHORT_Zikr" = "Sub-darts";
 "LITH_INFO_SHORT_Minigun" = "Minigun";
