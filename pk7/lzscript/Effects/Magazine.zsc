@@ -59,15 +59,6 @@ class Lith_GaussMagazine2 : Lith_GaussMagazine {
    states {Spawn1: MGZN E -1; stop;}
 }
 
-class Lith_MinigunMagazine : Lith_DroppedMagazine {
-   default {
-      BounceSound "weapons/magbouncef";
-      Mass 350;
-   }
-
-   states {Spawn1: MGZN N -1; stop;}
-}
-
 class Lith_SniperRifleMagazine : Lith_DroppedMagazine {
    default {
       Scale 0.7;
@@ -101,6 +92,23 @@ class Lith_SMGMagazine2 : Lith_SMGMagazine {
    }
 
    states {Spawn1: MGZN G -1; stop;}
+}
+
+class Lith_MotraMagazine : Lith_DroppedMagazine {
+   default {
+      Scale 0.7;
+   }
+
+   states {Spawn1: MGZN N -1; stop;}
+}
+
+class Lith_MotraMagazine2 : Lith_MotraMagazine {
+   default {
+      BounceSound "weapons/magbouncef";
+      Mass 145;
+   }
+
+   states {Spawn1: MGZN O -1; stop;}
 }
 
 class Lith_SMGBarrel : Lith_DroppedMagazine {
