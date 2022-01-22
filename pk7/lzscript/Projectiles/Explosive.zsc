@@ -15,23 +15,23 @@ class Lith_ExplosionAfterSmoke : Lith_BulletAfterSmoke {
 
 class Lith_Explosive : Actor;
 
-bool CheckMarathon() {
+bool checkMarathon() {
    return Lith_UTIL.pData(pdata_upgrade, UPGR_Seven7s);
 }
 
-void Lith_A_ExplodeSound(int chan = lch_body2) {
-   double p = FRandom(0.9, 1.1);
-   if(CheckMarathon()) A_StartSound("marathon/explode", chan, pitch: p);
-   else                A_StartSound("explosion",        chan, pitch: p);
+void lith_a_explodeSound(int chan = lch_body2) {
+   double p = fRandom(0.9, 1.1);
+   if(checkMarathon()) a_startSound("marathon/explode", chan, pitch: p);
+   else                a_startSound("explosion",        chan, pitch: p);
 }
 
-state Lith_A_JumpExplosion() {
-   if(CheckMarathon()) return ResolveState("ExplodeMarathon");
-   else                return ResolveState("Explode");
+state lith_a_jumpExplosion() {
+   if(checkMarathon()) return resolveState("ExplodeMarathon");
+   else                return resolveState("Explode");
 }
 
-state Lith_A_DoExplosion(float fxAmount = 1.0) {
-   int numEmbers    = int(frandom(10.0, 20.0) * fxAmount);
+state lith_a_doExplosion(float fxAmount = 1.0) {
+   int numEmbers    = int(fRandom(10.0, 20.0) * fxAmount);
    int numParticles = int(50.0 * fxAmount);
 
    if(fxAmount < 1.0) {
@@ -39,62 +39,66 @@ state Lith_A_DoExplosion(float fxAmount = 1.0) {
    }
 
    for(int i = 0; i < numEmbers; i++) {
-      A_SpawnItemEx("Lith_HotEmber",
-                    FRandom(-4, 4) * fxAmount,
-                    FRandom(-4, 4) * fxAmount,
-                    FRandom(-4, 4) * fxAmount,
+      a_spawnItemEx("Lith_HotEmber",
+                    fRandom(-4, 4) * fxAmount,
+                    fRandom(-4, 4) * fxAmount,
+                    fRandom(-4, 4) * fxAmount,
 
-                    FRandom(-8, 8)  * fxAmount,
-                    FRandom(-8, 8)  * fxAmount,
-                    FRandom(-4, 14) * fxAmount,
+                    fRandom(-8, 8)  * fxAmount,
+                    fRandom(-8, 8)  * fxAmount,
+                    fRandom(-4, 14) * fxAmount,
 
                     0, SXF_NOCHECKPOSITION);
    }
 
    for(int i = 0; i < numParticles; i++) {
-      A_SpawnParticle("FFFF00", SPF_FULLBRIGHT | SPF_RELATIVE, 25, 4, 0,
-                      FRandom(-8,8) * fxAmount,
-                      FRandom(-8,8) * fxAmount,
-                      FRandom(-2,2) * fxAmount,
+      a_spawnParticle("FFFF00", SPF_FULLBRIGHT | SPF_RELATIVE, 25, 4, 0,
+                      fRandom(-8,8) * fxAmount,
+                      fRandom(-8,8) * fxAmount,
+                      fRandom(-2,2) * fxAmount,
 
-                      FRandom( 0,1)  * fxAmount,
-                      FRandom(-5,5)  * fxAmount,
-                      FRandom( 5,10) * fxAmount,
+                      fRandom( 0,1)  * fxAmount,
+                      fRandom(-5,5)  * fxAmount,
+                      fRandom( 5,10) * fxAmount,
 
-                      0, 0, FRandom(-0.5, -3),
+                      0, 0, fRandom(-0.5, -3),
                       1.0, -1);
 
-      A_SpawnParticle("444444", SPF_FULLBRIGHT | SPF_RELATIVE, 25, 4, 0,
-                      FRandom(-8,8) * fxAmount,
-                      FRandom(-8,8) * fxAmount,
-                      FRandom(-2,2) * fxAmount,
+      a_spawnParticle("444444", SPF_FULLBRIGHT | SPF_RELATIVE, 25, 4, 0,
+                      fRandom(-8,8) * fxAmount,
+                      fRandom(-8,8) * fxAmount,
+                      fRandom(-2,2) * fxAmount,
 
-                      FRandom( 0,1)  * fxAmount,
-                      FRandom(-5,5)  * fxAmount,
-                      FRandom( 5,10) * fxAmount,
+                      fRandom( 0,1)  * fxAmount,
+                      fRandom(-5,5)  * fxAmount,
+                      fRandom( 5,10) * fxAmount,
 
-                      0, 0, FRandom(-0.5, -3),
+                      0, 0, fRandom(-0.5, -3),
                       1.0, -1);
    }
 
-   A_SpawnItemEx("Lith_ExplosionAfterSmoke",
-                 FRandom(-1,1) * fxAmount,
-                 FRandom(-1,1) * fxAmount,
-                 FRandom(-2,2) * fxAmount,
+   a_spawnItemEx("Lith_ExplosionAfterSmoke",
+                 fRandom(-1,1) * fxAmount,
+                 fRandom(-1,1) * fxAmount,
+                 fRandom(-2,2) * fxAmount,
 
-                 FRandom(-0.5,0.5) * fxAmount,
-                 FRandom(-0.5,0.5) * fxAmount,
-                 FRandom(-0.2,0.2) * fxAmount);
+                 fRandom(-0.5,0.5) * fxAmount,
+                 fRandom(-0.5,0.5) * fxAmount,
+                 fRandom(-0.2,0.2) * fxAmount);
 
-   bNOGRAVITY = true;
-   return Lith_A_JumpExplosion();
+   bNoGravity = true;
+   return lith_a_jumpExplosion();
+}
+
+void lith_a_scaleExplosion() {
+   scale *= 1.03;
 }
 
 states {
 Explode:
-   MEXP AB 1 bright light("Lith_Explode1");
-   MEXP CD 2 bright light("Lith_Explode2");
-   MEXP EF 3 bright light("Lith_Explode3");
+   MEXP AB 1 bright light("Lith_Explode1") lith_a_scaleExplosion;
+   MEXP CCDD 1 bright light("Lith_Explode2") lith_a_scaleExplosion;
+   MEXP EEEFFF 1 bright light("Lith_Explode3") lith_a_scaleExplosion;
    stop;
 ExplodeMarathon:
    MA7G BC 4 bright light("Lith_Explode1");

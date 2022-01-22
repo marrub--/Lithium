@@ -36,8 +36,7 @@ class Lith_BossDamageEffect : Actor {
    }
 
    override void tick() {
-      scale.x *= 0.95;
-      scale.y *= 0.95;
+      scale *= 0.95;
       a_fadeOut(0.01);
    }
 
