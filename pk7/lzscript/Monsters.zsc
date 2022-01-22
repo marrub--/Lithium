@@ -145,4 +145,32 @@ class Lith_MonsterHeptaura : Lith_MonsterBarrier {
    }
 }
 
+class Lith_MonsterSkotosaura : Lith_MonsterBarrier {
+   default {
+      RenderStyle "Normal";
+   }
+
+   states {
+   Spawn:
+      LBAR C -1;
+      stop;
+   }
+}
+
+class Lith_MonsterFosaura : Lith_MonsterHeptaura {
+   states {
+   Spawn:
+      LBAR D -1;
+      stop;
+   }
+}
+
+class Lith_MonsterFavlosaura : Lith_MonsterHeptaura {
+   states {
+   Spawn:
+      LBAR E -1;
+      stop;
+   }
+}
+
 /* EOF */

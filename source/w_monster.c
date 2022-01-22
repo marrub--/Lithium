@@ -95,16 +95,23 @@ void ShowBarrier(dmon_t const *m, k32 alpha) {
    BeginAngles(m->x, m->y);
    ServCallI(sm_MonsterBarrierLook);
 
-   for(i32 i = 0; i < a_cur; i++)
-   {
+   for(i32 i = 0; i < a_cur; i++) {
       struct polar *a = &a_angles[i];
 
       k32 dst = m->r / 2 + a->dst / 4;
       k32 x   = m->x + ACS_Cos(a->ang) * dst;
       k32 y   = m->y + ACS_Sin(a->ang) * dst;
       i32 tid = ACS_UniqueTID();
-      str bar = m->rank >= 5 ? so_MonsterHeptaura : so_MonsterBarrier;
       k32 alp = (1 - a->dst / (256 * (m->rank - 1))) * alpha;
+      str bar;
+
+      switch(m->rank) {
+      case 8:  bar = so_MonsterFavlosaura; break;
+      case 7:  bar = so_MonsterFosaura;    break;
+      case 6:  bar = so_MonsterSkotosaura; break;
+      case 5:  bar = so_MonsterHeptaura;   break;
+      default: bar = so_MonsterBarrier;    break;
+      }
 
       ACS_SpawnForced(bar, x, y, m->z + m->h / 2, tid);
       SetAlpha(tid, minmax(alp, 0.0, 1.0));
