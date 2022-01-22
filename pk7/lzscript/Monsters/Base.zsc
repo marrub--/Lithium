@@ -35,6 +35,7 @@ default
 {
    Monster;
    +CastSpriteShadow
+   +InterpolateAngles
 }
 
 void Lith_A_Die()
