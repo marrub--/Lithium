@@ -195,11 +195,11 @@ void Upgr_VitalScan_Render(struct upgrade *upgr) {
       if(udata.split > 0)
          PrintSprite(sa_healthbars[(udata.split - 1) % countof(sa_healthbars)], x,1, y,1);
 
-      SetClip(x, y, 80 * udata.splitfrac, 2);
+      SetClip(x, y, 80 * udata.splitfrac, 3);
       PrintSprite(sa_healthbars[udata.split % countof(sa_healthbars)], x,1, y,1);
       ClearClip();
 
-      SetClip(x, y+3, 24 * udata.exp, 2);
+      SetClip(x, y+3, 24 * udata.exp, 3);
       PrintSprite(sp_Bars_ExpBar1, x,1, y+3,1);
       ClearClip();
    }
