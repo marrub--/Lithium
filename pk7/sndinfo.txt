@@ -647,8 +647,8 @@ $random weapons/dualrocket/firel { weapons/dualrocket/firel1 weapons/dualrocket/
 $random weapons/dualrocket/firer { weapons/dualrocket/firer1 weapons/dualrocket/firer2 weapons/dualrocket/firer3 }
 weapons/fortune/fire lsounds/WeaponsD/FortuneGun/Fire
 weapons/fortune/hit lsounds/WeaponsD/FortuneGun/Hit
-weapons/fortune/charge lsounds/WeaponsD/FortuneGun/Charge
 weapons/fortune/spark lsounds/WeaponsD/FortuneGun/Spark
+weapons/fortune/charge lsounds/WeaponsD/FortuneGun/Charge
 weapons/fortune/draw lsounds/WeaponsD/FortuneGun/Draw
 $limit weapons/fortune/hit 0
 $limit weapons/fortune/spark 0

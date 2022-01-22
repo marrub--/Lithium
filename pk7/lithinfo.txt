@@ -238,7 +238,6 @@
 
    cl: pD tag: Ruzuk;
    cl: pD tag: Zaruk;
-   cl: pD tag: Kawak;
    cl: pD tag: Zakwu;
    cl: pD tag: Zikr;
    cl: pD tag: Rokuw;
