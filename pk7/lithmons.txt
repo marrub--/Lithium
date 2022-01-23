@@ -399,4 +399,44 @@ presets {
    pre: Arachnotron   type: arachnotron   filter: "SpecialSpider";
 }
 
+   /* Angelic Aviary */
+"" {
+   pre: ZombieMan     type: zombie        filter: "RevolverDoll";
+   pre: ShotgunGuy    type: zombiesg      filter: "ShotgunDuo";  
+   pre: ChaingunGuy   type: zombiecg      filter: "Snowball";
+   pre: Imp           type: imp           filter: "Cherub";
+   pre: Demon         type: demon         filter: "Cardinal";
+   pre: Spectre       type: demon         filter: "Blackbird";
+   pre: LostSoul      type: lostsoul      filter: "Putto";
+   pre: Mancubus      type: mancubus      filter: "Principality";
+   pre: Arachnotron   type: arachnotron   filter: "Ophanim";
+   pre: Cacodemon     type: cacodemon     filter: "Kiss";
+   pre: HellKnight    type: hellknight    filter: "Authority";
+   pre: BaronOfHell   type: baron         filter: "Virtue_Virgin";
+   pre: Revenant      type: revenant      filter: "Aspect_of_Iris";
+   pre: PainElemental type: painelemental filter: "JoyElemental";
+   pre: Archvile      type: archvile      filter: "Dollmaykr";
+   pre: SpiderDemon   type: mastermind    filter: "SeraphClone";
+   pre: CyberDemon    type: cyberdemon    filter: "Seraph";
+   pre: CyberDemon    type: angel    	  filter: "Great_Seraph";
+   pre: CyberDemon    type: angel   	  filter: "Great_Seraph2";
+   pre: CyberDemon    type: angel    	  filter: "Queen_of_Queens";
+
+   pre: ZombieMan     type: zombie        filter: "KnifeDoll";
+   pre: ZombieMan     type: zombie        filter: "TurboDoll";
+   pre: ZombieMan     type: zombie        filter: "TurboRevolverDoll";
+   pre: ZombieMan     type: zombie        filter: "TurboKnifeDoll";
+   pre: BaronOfHell   type: baron         filter: "RedEgg";
+   pre: BaronOfHell   type: baron         filter: "RedEgg2";
+   pre: BaronOfHell   type: baron         filter: "RedEgg3";
+
+   pre: ChaingunGuy   type: zombiecg      filter: "SnowFlake";
+   pre: Imp           type: imp           filter: "EliteCherub";
+   pre: Cacodemon     type: cacodemon     filter: "Aphrodites_Kiss";
+   pre: Cacodemon     type: cacodemon     filter: "Aphrodites_Kiss2";
+   pre: Cacodemon     type: archvile      filter: "Elite_Aphrodites_Kiss";
+   pre: HellKnight    type: hellknight    filter: "Jay";
+   pre: HellKnight    type: hellknight    filter: "Jay2";
+}
+
 /* EOF */
