@@ -1,0 +1,39 @@
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison G. Watson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
+class Lith_Kampilan : Lith_DWeapon;
+
+default {
+   Lith_Weapon.SpawnType "Lith_FistPickup";
+   Tag "$LITH_INFO_SHORT_Kampilan";
+   Weapon.SlotNumber 1;
+   Weapon.SlotPriority 1;
+   Weapon.UpSound "weapons/kampilan/draw";
+
+   +Weapon.NoAutoFire
+}
+
+states(Weapon) {
+Ready:
+   KAMP A 1 Lith_A_Ready;
+   loop;
+
+Deselect:
+   KAMP A 1 Lith_A_Lower(_raise_slow);
+   loop;
+
+Select:
+   KAMP A 1 Lith_A_Raise(_raise_slow);
+   loop;
+
+Fire:
+   goto ReadySelector;
+}
+
+/* EOF */

@@ -38,6 +38,7 @@ class Lith_DarkLordSprint : PowerSpeed {
 }
 
 #include "lzscript/6_DarkLord/0_Weapon.zsc"
+#include "lzscript/6_DarkLord/1_Kampilan.zsc"
 #include "lzscript/6_DarkLord/2_700Express.zsc"
 #include "lzscript/6_DarkLord/3_4Bore.zsc"
 #include "lzscript/6_DarkLord/3_ShrapnelGun.zsc"

@@ -399,10 +399,10 @@ presets {
    pre: Arachnotron   type: arachnotron   filter: "SpecialSpider";
 }
 
-   /* Angelic Aviary */
+/* Angelic Aviary */
 "" {
    pre: ZombieMan     type: zombie        filter: "RevolverDoll";
-   pre: ShotgunGuy    type: zombiesg      filter: "ShotgunDuo";  
+   pre: ShotgunGuy    type: zombiesg      filter: "ShotgunDuo";
    pre: ChaingunGuy   type: zombiecg      filter: "Snowball";
    pre: Imp           type: imp           filter: "Cherub";
    pre: Demon         type: demon         filter: "Cardinal";
@@ -418,9 +418,9 @@ presets {
    pre: Archvile      type: archvile      filter: "Dollmaykr";
    pre: SpiderDemon   type: mastermind    filter: "SeraphClone";
    pre: CyberDemon    type: cyberdemon    filter: "Seraph";
-   pre: CyberDemon    type: angel    	  filter: "Great_Seraph";
-   pre: CyberDemon    type: angel   	  filter: "Great_Seraph2";
-   pre: CyberDemon    type: angel    	  filter: "Queen_of_Queens";
+   pre: CyberDemon    type: angel         filter: "Great_Seraph";
+   pre: CyberDemon    type: angel         filter: "Great_Seraph2";
+   pre: CyberDemon    type: angel         filter: "Queen_of_Queens";
 
    pre: ZombieMan     type: zombie        filter: "KnifeDoll";
    pre: ZombieMan     type: zombie        filter: "TurboDoll";

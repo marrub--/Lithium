@@ -73,6 +73,7 @@ pC:
       bfg9000:        c_shipgun
 
 pD:
+   d_kampilan: [1, Kampilan,    None       ]
    d_700e:     [2, 700Express,  NMag       ]
    d_4bore:    [3, 4Bore,       Ammo Shell ]
    d_shrapnel: [3, ShrapnelGun, Ammo Shell ]
