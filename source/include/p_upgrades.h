@@ -28,13 +28,6 @@
       if(get_bit(pl.upgrades[_i].flags, _ug_available)) \
          __with(struct upgrade *name = &pl.upgrades[_i];)
 
-#define RequiresButDontHave(a1, a2) (get_bit(upgr->info->requires, a1) && !(a2))
-#define RequiresButDontHave_AI  RequiresButDontHave(UR_AI,  cbiupgr[cupg_armorinter])
-#define RequiresButDontHave_WMD RequiresButDontHave(UR_WMD, cbiupgr[cupg_weapninter])
-#define RequiresButDontHave_WRD RequiresButDontHave(UR_WRD, cbiupgr[cupg_weapninte2])
-#define RequiresButDontHave_RDI RequiresButDontHave(UR_RDI, cbiupgr[cupg_rdistinter])
-#define RequiresButDontHave_RA  RequiresButDontHave(UR_RA,  get_bit(pl.upgrades[UPGR_ReactArmor].flags, _ug_owned))
-
 extern struct upgradeinfo upgrinfo[UPGR_MAX];
 
 /* These are included here so the compiler may check the function signatures. */

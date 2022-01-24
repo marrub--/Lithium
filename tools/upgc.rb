@@ -33,7 +33,7 @@ common_main do
          name = name.to_s
          reqs = (hupg[:req] || "").split
          for req in reqs
-            req.prepend "dst_bit(UR_"
+            req.prepend "dst_bit(_ur_"
             req.concat  ")"
          end
          if reqs.empty?

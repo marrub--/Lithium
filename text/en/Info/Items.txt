@@ -303,9 +303,9 @@ configuration with) methods of damage mitigation, such as secreting
 flame-retardant liquid when fire damage is detected.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_CBIUpgr1 | High-Grade CPU
-== \#INFO_TITLE_CBIUpgr1 | $\#CBI_CPU2
-@@ \#INFO_DESCR_CBIUpgr1
+== \#INFO_SHORT_CPU1 | High-Grade CPU
+== \#INFO_TITLE_CPU1 | $\#CBI_CPU2
+@@ \#INFO_DESCR_CPU1
 A huge upgrade from your dinky Nodea 541 CPU, the Z6808 is capable of up to
 30Pr (when overclocked) and has 100TiB of RAM. In most cases, it's completely
 overly sufficient for any mathematician or cybernetics junkie.
@@ -318,9 +318,9 @@ The unit houses 2048 physical cores and two billion hybrid synapses, giving
 it a very solid feel and plenty of physical working memory.
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_CBIUpgr2 | S. High-Grade CPU
-== \#INFO_TITLE_CBIUpgr2 | $\#CBI_CPU3
-@@ \#INFO_DESCR_CBIUpgr2
+== \#INFO_SHORT_CPU2 | S. High-Grade CPU
+== \#INFO_TITLE_CPU2 | $\#CBI_CPU3
+@@ \#INFO_DESCR_CPU2
 The BC-0265 is a marvel of modular C/B Interface technology, not bigger than
 any standard CPU and capable of so, so much more. It comes equipped with
 150TiB of RAM, 70Pr without any dangerous overclocking, and 4906 physical

@@ -110,7 +110,7 @@ mixin class Lith_Pickup {
    flagdef Pkup_Generic:  m_PkFlags, 0;
    flagdef Pkup_NoSprite: m_PkFlags, 1;
 
-   void Lith_PickupPostBeginPlay() {
+   void lith_pickupPostBeginPlay() {
       if(m_PkSprGf) m_PkSprG.Get(m_PkSprGf);
 
       if(m_PkSprAf) m_PkSprA.Get(m_PkSprAf);
@@ -129,11 +129,11 @@ mixin class Lith_Pickup {
       }
    }
 
-   void Lith_PickupTick() {
+   void lith_pickupTick() {
       if(!m_PkSpr) return;
 
       if(bPkup_Generic) {
-         Lith_SetSpr(m_PkSprG);
+         lith_setSpr(m_PkSprG);
          return;
       }
 
@@ -141,22 +141,22 @@ mixin class Lith_Pickup {
          return;
 
       let p = players[consolePlayer].camera;
-      /**/ if(m_PkSprAf && p is "Lith_AssassinPlayer")  Lith_SetSpr(m_PkSprA);
-      else if(m_PkSprCf && p is "Lith_CyberMagePlayer") Lith_SetSpr(m_PkSprC);
-      else if(m_PkSprDf && p is "Lith_DarkLordPlayer")  Lith_SetSpr(m_PkSprD);
-      else if(m_PkSprIf && p is "Lith_InformantPlayer") Lith_SetSpr(m_PkSprI);
-      else if(m_PkSprMf && p is "Lith_MarinePlayer")    Lith_SetSpr(m_PkSprM);
-      else if(m_PkSprTf && p is "Lith_ThothPlayer")     Lith_SetSpr(m_PkSprT);
-      else if(m_PkSprWf && p is "Lith_WandererPlayer")  Lith_SetSpr(m_PkSprW);
-      else if(m_PkSprGf)                                Lith_SetSpr(m_PkSprG);
+      /**/ if(m_PkSprAf && p is "Lith_AssassinPlayer")  lith_setSpr(m_PkSprA);
+      else if(m_PkSprCf && p is "Lith_CyberMagePlayer") lith_setSpr(m_PkSprC);
+      else if(m_PkSprDf && p is "Lith_DarkLordPlayer")  lith_setSpr(m_PkSprD);
+      else if(m_PkSprIf && p is "Lith_InformantPlayer") lith_setSpr(m_PkSprI);
+      else if(m_PkSprMf && p is "Lith_MarinePlayer")    lith_setSpr(m_PkSprM);
+      else if(m_PkSprTf && p is "Lith_ThothPlayer")     lith_setSpr(m_PkSprT);
+      else if(m_PkSprWf && p is "Lith_WandererPlayer")  lith_setSpr(m_PkSprW);
+      else if(m_PkSprGf)                                lith_setSpr(m_PkSprG);
    }
 
-   void Lith_SetSpr(Lith_Sprite s) {
+   void lith_setSpr(Lith_Sprite s) {
       m_PkSpr.Sprite = s.Spr;
       m_PkSpr.Frame  = s.Frm;
    }
 
-   void Lith_ItemGlow() {
+   void lith_itemGlow() {
       m_PkGlA = (m_PkGlA + 5) % 360;
       m_PkGlZ = (m_PkGlZ + 2) % 360;
 
@@ -179,7 +179,7 @@ mixin class Lith_Pickup {
       }
    }
 
-   states(Actor) {Spawn: TNT1 A 1 Lith_ItemGlow(); loop;}
+   states(Actor) {Spawn: TNT1 A 1 lith_itemGlow(); loop;}
 }
 
 /* EOF */

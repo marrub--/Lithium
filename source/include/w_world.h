@@ -57,23 +57,14 @@ enum ZscName(Fun) {
    lfun_division = 1 << 3,
 };
 
-enum ZscName(CBIUpgradeM) {
-   cupg_weapninter,
-   cupg_hasupgr1,
-   cupg_armorinter,
-   cupg_hasupgr2,
-   cupg_weapninte2,
-   cupg_rdistinter,
-   cupg_max
-};
-
-enum ZscName(CBIUpgradeC) {
-   cupg_c_slot3spell,
-   cupg_c_slot4spell,
-   cupg_c_slot5spell,
-   cupg_c_slot6spell,
-   cupg_c_slot7spell,
-   cupg_c_rdistinter,
+enum ZscName(BossRewardNum) {
+   bossreward_easy_1,
+   bossreward_easy_2,
+   bossreward_med_1,
+   bossreward_med_2,
+   bossreward_med_3,
+   bossreward_hard_1,
+   bossreward_max,
 };
 
 enum ZscName(RandomSpawnNum) {
@@ -150,6 +141,20 @@ enum ZscName(RifleMode) {
 
 #if !ZscOn
 enum {
+   cupg_rdistinter,
+   cupg_m_weapninter,
+   cupg_m_cpu1,
+   cupg_m_armorinter,
+   cupg_m_cpu2,
+   cupg_m_weapninte2,
+   cupg_c_slot3spell,
+   cupg_c_slot4spell,
+   cupg_c_slot5spell,
+   cupg_c_slot6spell,
+   cupg_c_slot7spell,
+};
+
+enum {
    skill_tourist,
    skill_easy,
    skill_normal,
@@ -205,7 +210,7 @@ extern u64 ticks;
 extern i32 soulsfreed;
 extern bool bossspawned;
 extern i32 cbiperf;
-extern bool cbiupgr[cupg_max];
+extern i64 cbiupgr;
 extern bool legendoom;
 extern bool drlamonsters;
 extern enum mission_status lmvar mission;

@@ -68,8 +68,8 @@
    cl: pM tag: WeapnInter unl: "OFMD AllPoint";
    cl: pM tag: WeapnInte2;
    cl: pM tag: ArmorInter;
-   cl: pM tag: CBIUpgr1   unl: "KSKK";
-   cl: pM tag: CBIUpgr2   unl: "KSKK";
+   cl: pM tag: CPU1       unl: "KSKK";
+   cl: pM tag: CPU2       unl: "KSKK";
 
    cl: gA tag: OrSigil;
 }

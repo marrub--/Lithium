@@ -29,11 +29,12 @@ enum {
 };
 
 enum {
-   UR_AI,
-   UR_WMD,
-   UR_WRD,
-   UR_RDI,
-   UR_RA,
+   _ur_ai,
+   _ur_wmd,
+   _ur_wrd,
+   _ur_rdi,
+   _ur_ra,
+   _ur_max,
 };
 
 enum {
@@ -175,6 +176,7 @@ struct upgrade {
 bool P_Upg_CanActivate(struct upgrade *upgr);
 bool P_Upg_Toggle(struct upgrade *upgr);
 void P_Upg_SetOwned(struct upgrade *upgr);
+i32 P_Upg_CheckReqs(struct upgrade *upgr);
 
 cstr Upgr_EnumToStr(i32 n);
 

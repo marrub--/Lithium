@@ -25,9 +25,9 @@ _uc_body:
  ## Marine
  JetBooster:  {cl: pM,               f: --U--, mul: -5}
  CyberLegs:   {cl: pM, scr: 1220000, f: ADU--, pr:  4}
- ReactArmor:  {cl: pM, scr: 3500200, f: -D-R-, pr: 20, req: AI   }
- ReactArmor2: {cl: pM, scr: 2990200, f: -----, pr: 10, req: AI RA}
- DefenseNuke: {cl: pM, scr:  580030, f: ----E,         req: AI   }
+ ReactArmor:  {cl: pM, scr: 3500200, f: -D-R-, pr: 20, req: ai   }
+ ReactArmor2: {cl: pM, scr: 2990200, f: -----, pr: 10, req: ai ra}
+ DefenseNuke: {cl: pM, scr:  580030, f: ----E,         req: ai   }
  Adrenaline:  {cl: pM, scr: 1801000, f: -DU--, pr: 10}
 
  ## Cyber-Mage
@@ -44,17 +44,17 @@ _uc_weap:
 
  ## Marine
  Pistol_A:  {cl: pM, scr:  140940, f: -----}
- Pistol_B:  {cl: pM, scr:  340000, f: -----,                req: WMD}
- Shotgun_A: {cl: pM, scr: 1079430, f: -----, pr: 1, grp: 1, req: WMD}
- Shotgun_B: {cl: pM, scr: 1010420, f: -----,        grp: 1, req: WMD}
+ Pistol_B:  {cl: pM, scr:  340000, f: -----,                req: wmd}
+ Shotgun_A: {cl: pM, scr: 1079430, f: -----, pr: 1, grp: 1, req: wmd}
+ Shotgun_B: {cl: pM, scr: 1010420, f: -----,        grp: 1, req: wmd}
  Rifle_A:   {cl: pM, scr:  340100, f: -D-R-}
- Rifle_B:   {cl: pM, scr: 1008080, f: -----, pr: 1,         req: WMD    }
- RPG_A:     {cl: pM, scr: 1550000, f: -----,        grp: 2, req: WMD WRD}
- RPG_B:     {cl: pM, scr: 2505010, f: --U--, pr: 1, grp: 2, req: WMD    }
- Plasma_A:  {cl: pM, scr: 2250000, f: -----,        grp: 3, req: WMD    }
- Plasma_B:  {cl: pM, scr: 2500000, f: -----, pr: 1, grp: 3, req: WMD WRD}
- Cannon_A:  {cl: pM, scr: 5100700, f: -D---,        grp: 4, req: WMD    }
- Cannon_B:  {cl: pM, scr: 5800100, f: -----, pr: 5, grp: 4, req: WMD WRD}
+ Rifle_B:   {cl: pM, scr: 1008080, f: -----, pr: 1,         req: wmd    }
+ RPG_A:     {cl: pM, scr: 1550000, f: -----,        grp: 2, req: wmd wrd}
+ RPG_B:     {cl: pM, scr: 2505010, f: --U--, pr: 1, grp: 2, req: wmd    }
+ Plasma_A:  {cl: pM, scr: 2250000, f: -----,        grp: 3, req: wmd    }
+ Plasma_B:  {cl: pM, scr: 2500000, f: -----, pr: 1, grp: 3, req: wmd wrd}
+ Cannon_A:  {cl: pM, scr: 5100700, f: -D---,        grp: 4, req: wmd    }
+ Cannon_B:  {cl: pM, scr: 5800100, f: -----, pr: 5, grp: 4, req: wmd wrd}
 
  ## Cyber-Mage
  Mateba_A:   {cl: pC, scr:  614100, grp: 1}
@@ -73,13 +73,13 @@ _uc_weap:
 
 _uc_extr:
  ## All classes
- TorgueMode: {pg: N/A, scr: 8000000,                    pr: 8, req: RDI}
- Seven7s:    {pg: N/A, scr: 8235430, f: ADU--, mul: 10, pr: 7, req: RDI}
- lolsords:   {pg: N/A, scr: 1000000, f: ADU--, mul: 20,        req: RDI}
- Goldeneye:  {pg: N/A, scr:   70000, f: --U--, mul:  7,        req: RDI}
+ TorgueMode: {pg: N/A, scr: 8000000,                    pr: 8, req: rdi}
+ Seven7s:    {pg: N/A, scr: 8235430, f: ADU--, mul: 10, pr: 7, req: rdi}
+ lolsords:   {pg: N/A, scr: 1000000, f: ADU--, mul: 20,        req: rdi}
+ Goldeneye:  {pg: N/A, scr:   70000, f: --U--, mul:  7,        req: rdi}
 
  ## Marine
- Cannon_C: {pg: N/A, cl: pM, scr: 1500000, grp: 4, req: WMD WRD RDI}
+ Cannon_C: {pg: N/A, cl: pM, scr: 1500000, grp: 4, req: wmd wrd rdi}
 
 _uc_down:
  UNCEUNCE:   {pg: N/A, f: ADU--, mul: 30}

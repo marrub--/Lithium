@@ -15,7 +15,7 @@
 #include "p_player.h"
 #include "w_world.h"
 
-#define Upgr(name) if(cbiupgr[cupg_##name])
+#define Upgr(name) if(get_bit(cbiupgr, name))
 
 #define InfoStart i32 y  = 57
 #define InfoSep       y += 20
@@ -37,9 +37,9 @@ void CBITab_Marine(struct gui_state *g) {
    i32 ram;
    str name;
 
-        Upgr(hasupgr2) {CPU(1); ram = 150; name = ns(lang(sl_cbi_cpu3));}
-   else Upgr(hasupgr1) {CPU(2); ram = 100; name = ns(lang(sl_cbi_cpu2));}
-   else                {CPU(3); ram =  50; name = ns(lang(sl_cbi_cpu1));}
+        Upgr(cupg_m_cpu2) {CPU(1); ram = 150; name = ns(lang(sl_cbi_cpu3));}
+   else Upgr(cupg_m_cpu1) {CPU(2); ram = 100; name = ns(lang(sl_cbi_cpu2));}
+   else                   {CPU(3); ram =  50; name = ns(lang(sl_cbi_cpu1));}
 
    PrintTextChS(name);
    PrintText_str(name, sf_smallfnt, g->defcr, g->ox+7,1, g->oy+47,1);
@@ -53,15 +53,15 @@ void CBITab_Marine(struct gui_state *g) {
    InfoSep;
 
    Info(tmpstr(lang(sl_cbi_interfaces)));
-   Upgr(armorinter) Info("> %S", ns(lang(sl_cbi_armorinter)));
-   Upgr(weapninter) Info("> %S", ns(lang(sl_cbi_weapninter)));
-   Upgr(weapninte2) Info("> %S", ns(lang(sl_cbi_weapninte2)));
-   Upgr(rdistinter) Info("> %S", ns(lang(sl_cbi_rdistinter)));
+   Upgr(cupg_m_armorinter) Info("> %S", ns(lang(sl_cbi_armorinter)));
+   Upgr(cupg_m_weapninter) Info("> %S", ns(lang(sl_cbi_weapninter)));
+   Upgr(cupg_m_weapninte2) Info("> %S", ns(lang(sl_cbi_weapninte2)));
+   Upgr(cupg_rdistinter)   Info("> %S", ns(lang(sl_cbi_rdistinter)));
 
-   Upgr(armorinter) Slot(sp_UI_ArmorInter, 0, 1);
-   Upgr(weapninter) Slot(sp_UI_WeapnInter, 0, 2);
-   Upgr(weapninte2) Slot(sp_UI_WeapnInte2, 0, 3);
-   Upgr(rdistinter) Slot(sp_UI_RDistInter, 0, 4);
+   Upgr(cupg_m_armorinter) Slot(sp_UI_ArmorInter, 0, 1);
+   Upgr(cupg_m_weapninter) Slot(sp_UI_WeapnInter, 0, 2);
+   Upgr(cupg_m_weapninte2) Slot(sp_UI_WeapnInte2, 0, 3);
+   Upgr(cupg_rdistinter)   Slot(sp_UI_RDistInter, 0, 4);
 }
 
 static
@@ -79,23 +79,23 @@ void CBITab_CyberMage(struct gui_state *g)
    InfoSep;
 
    Info(tmpstr(lang(sl_cbi_interfaces)));
-                      Info("> %S", ns(lang(sl_cbi_slot1spell)));
-                      Info("> %S", ns(lang(sl_cbi_slot2spell)));
-   Upgr(c_slot3spell) Info("> %S", ns(lang(sl_cbi_slot3spell)));
-   Upgr(c_slot4spell) Info("> %S", ns(lang(sl_cbi_slot4spell)));
-   Upgr(c_slot5spell) Info("> %S", ns(lang(sl_cbi_slot5spell)));
-   Upgr(c_slot6spell) Info("> %S", ns(lang(sl_cbi_slot6spell)));
-   Upgr(c_slot7spell) Info("> %S", ns(lang(sl_cbi_slot7spell)));
-   Upgr(c_rdistinter) Info("> %S", ns(lang(sl_cbi_rdistinter)));
+                           Info("> %S", ns(lang(sl_cbi_slot1spell)));
+                           Info("> %S", ns(lang(sl_cbi_slot2spell)));
+   Upgr(cupg_c_slot3spell) Info("> %S", ns(lang(sl_cbi_slot3spell)));
+   Upgr(cupg_c_slot4spell) Info("> %S", ns(lang(sl_cbi_slot4spell)));
+   Upgr(cupg_c_slot5spell) Info("> %S", ns(lang(sl_cbi_slot5spell)));
+   Upgr(cupg_c_slot6spell) Info("> %S", ns(lang(sl_cbi_slot6spell)));
+   Upgr(cupg_c_slot7spell) Info("> %S", ns(lang(sl_cbi_slot7spell)));
+   Upgr(cupg_rdistinter)   Info("> %S", ns(lang(sl_cbi_rdistinter)));
 
-                      Slot(sp_UI_Slot1Spell, 0, 1);
-                      Slot(sp_UI_Slot2Spell, 0, 2);
-   Upgr(c_slot3spell) Slot(sp_UI_Slot3Spell, 0, 3);
-   Upgr(c_slot4spell) Slot(sp_UI_Slot4Spell, 0, 4);
-   Upgr(c_slot5spell) Slot(sp_UI_Slot5Spell, 1, 1);
-   Upgr(c_slot6spell) Slot(sp_UI_Slot6Spell, 1, 2);
-   Upgr(c_slot7spell) Slot(sp_UI_Slot7Spell, 1, 3);
-   Upgr(c_rdistinter) Slot(sp_UI_RDistInter, 1, 4);
+                           Slot(sp_UI_Slot1Spell, 0, 1);
+                           Slot(sp_UI_Slot2Spell, 0, 2);
+   Upgr(cupg_c_slot3spell) Slot(sp_UI_Slot3Spell, 0, 3);
+   Upgr(cupg_c_slot4spell) Slot(sp_UI_Slot4Spell, 0, 4);
+   Upgr(cupg_c_slot5spell) Slot(sp_UI_Slot5Spell, 1, 1);
+   Upgr(cupg_c_slot6spell) Slot(sp_UI_Slot6Spell, 1, 2);
+   Upgr(cupg_c_slot7spell) Slot(sp_UI_Slot7Spell, 1, 3);
+   Upgr(cupg_rdistinter)   Slot(sp_UI_RDistInter, 1, 4);
 }
 
 /* Extern Functions -------------------------------------------------------- */

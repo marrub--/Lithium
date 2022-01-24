@@ -114,11 +114,12 @@ void GUIUpgradeRequirements(struct gui_state *g, struct upgrade *upgr) {
       y -= 10; \
    })
 
-   if(RequiresButDontHave_AI)  Req(sl_cbi_armorinter);
-   if(RequiresButDontHave_WMD) Req(sl_cbi_weapninter);
-   if(RequiresButDontHave_WRD) Req(sl_cbi_weapninte2);
-   if(RequiresButDontHave_RDI) Req(sl_cbi_rdistinter);
-   if(RequiresButDontHave_RA)  Req(sl_cbi_reactarmor);
+   i32 req = P_Upg_CheckReqs(upgr);
+   if(get_bit(req, _ur_ai))  Req(sl_cbi_armorinter);
+   if(get_bit(req, _ur_wmd)) Req(sl_cbi_weapninter);
+   if(get_bit(req, _ur_wrd)) Req(sl_cbi_weapninte2);
+   if(get_bit(req, _ur_rdi)) Req(sl_cbi_rdistinter);
+   if(get_bit(req, _ur_ra))  Req(sl_cbi_reactarmor);
 
    #undef Req
 

@@ -362,8 +362,8 @@ Weapon Refactoring Deviceは、
 インストールされていない)
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_CBIUpgr1 | 高級ＣＰＵ
-@@ \#INFO_DESCR_CBIUpgr1
+== \#INFO_SHORT_CPU1 | 高級ＣＰＵ
+@@ \#INFO_DESCR_CPU1
 小型のNodea541CPUから
 大きくアップグレードされたZ6808は、
 30Pr(オーバークロック時)まで対応する
@@ -383,8 +383,8 @@ Weapon Refactoring Deviceは、
 豊富な物理作業メモリを提供する。
 
 ## ---------------------------------------------------------------------------|
-== \#INFO_SHORT_CBIUpgr2 | 超高級ＣＰＵ
-@@ \#INFO_DESCR_CBIUpgr2
+== \#INFO_SHORT_CPU2 | 超高級ＣＰＵ
+@@ \#INFO_DESCR_CPU2
 BC-0265はモジュラーC/Bインターフェース
 技術の驚異で、標準的なCPUより大きくなく
 それ以上の能力を持つ。150TiBのRAM、

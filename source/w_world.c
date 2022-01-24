@@ -33,7 +33,7 @@ u64 ticks;
 i32 soulsfreed;
 bool bossspawned;
 i32 cbiperf;
-bool cbiupgr[cupg_max];
+i64 cbiupgr;
 bool legendoom;
 bool drlamonsters;
 enum mission_status lmvar mission = _unfinished;
@@ -235,7 +235,7 @@ void HInit(void) {
       #endif
       )
    {
-      for(i32 i = 0; i < cupg_max; i++)
+      for(i32 i = 0; i < bossreward_max; i++)
          CBI_Install(i);
    }
 

@@ -90,7 +90,7 @@ end
 fonts.each do |fnt|
    unless FileTest.exist? fnt.ttf
       system "wget",
-             "http://mab.greyserv.net/f/#{fnt.name}.ttf",
+             "https://mab.greyserv.net/f/#{fnt.name}.ttf",
              "-O", fnt.ttf
    end
 

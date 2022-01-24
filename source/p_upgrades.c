@@ -165,13 +165,26 @@ void P_Upg_Enter() {
          upgr->info->Enter(upgr);
 }
 
+i32 P_Upg_CheckReqs(struct upgrade *upgr) {
+   i32 ret = 0;
+   for(i32 ureq = 0; ureq < _ur_max; ++ureq) {
+      if(get_bit(upgr->info->requires, ureq)) {
+         switch(ureq) {
+         #define Req(r, cond) case r: if(!(cond)) {ret |= ureq;} break
+         Req(_ur_ai,  get_bit(cbiupgr, cupg_m_armorinter));
+         Req(_ur_wmd, get_bit(cbiupgr, cupg_m_weapninter));
+         Req(_ur_wrd, get_bit(cbiupgr, cupg_m_weapninte2));
+         Req(_ur_rdi, get_bit(cbiupgr, cupg_rdistinter));
+         Req(_ur_ra,  get_bit(pl.upgrades[UPGR_ReactArmor].flags, _ug_owned));
+         }
+      }
+   }
+   return ret;
+}
+
 bool P_Upg_CanActivate(struct upgrade *upgr) {
    return
-      !RequiresButDontHave_AI  &&
-      !RequiresButDontHave_WMD &&
-      !RequiresButDontHave_WRD &&
-      !RequiresButDontHave_RDI &&
-      !RequiresButDontHave_RA  &&
+      !P_Upg_CheckReqs(upgr) &&
       (get_bit(upgr->flags, _ug_owned) ||
        get_bit(upgr->flags, _ug_active)) &&
       (pl.pclass != pcl_marine ||
