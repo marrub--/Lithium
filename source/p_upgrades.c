@@ -170,7 +170,7 @@ i32 P_Upg_CheckReqs(struct upgrade *upgr) {
    for(i32 ureq = 0; ureq < _ur_max; ++ureq) {
       if(get_bit(upgr->info->requires, ureq)) {
          switch(ureq) {
-         #define Req(r, cond) case r: if(!(cond)) {ret |= ureq;} break
+         #define Req(r, cond) case r: if(!(cond)) {set_bit(ret, ureq);} break
          Req(_ur_ai,  get_bit(cbiupgr, cupg_m_armorinter));
          Req(_ur_wmd, get_bit(cbiupgr, cupg_m_weapninter));
          Req(_ur_wrd, get_bit(cbiupgr, cupg_m_weapninte2));

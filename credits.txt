@@ -152,6 +152,7 @@
 - a1337spy
 - anomalouslymandatory
 - nax
+- rd
 - silentw
 - wildweasel
 
