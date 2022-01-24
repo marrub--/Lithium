@@ -129,7 +129,7 @@ private void Lith_ItemVacuum() {
             let t = clamp((140 - dst) / 1000., 0., 1.);
 
             if(t) {
-               let newp = inv.pos * (1 - t) + pos * t;
+               let newp = Lith_UTIL.vec3Lerp(inv.pos, pos, t);
                inv.tryMove(newp.xy, 20);
             }
          }

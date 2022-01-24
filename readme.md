@@ -1,9 +1,4 @@
-![Lithium](http://mab.greyserv.net/f/Lithium_logo.png)
-
-# Overview
-
-A mod in which you shoot things until they die. See the ZDoom forums
-thread linked above for more details.
+![Lithium](https://mab.greyserv.net/f/Lithium_logo.png)
 
 # Running
 
