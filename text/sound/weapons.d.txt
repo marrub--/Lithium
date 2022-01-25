@@ -19,6 +19,20 @@ weapons {
       $alias mine    = .weapons.rifle.grenade
    }
 
+   kampilan {
+      == lsounds/WeaponsD/Kampilan
+      draw     Draw     # Metal Gear Solid 2
+      bonk     Bonk     # ^
+      hit      Hit      # ^
+      hitflesh HitFlesh # ^
+      ready1   Ready    # ^
+      ready2   Ready2   # ^
+      swing1   Swing    # ^
+      swing2   Swing2   # ^
+      $random ready {ready1, ready2,}
+      $random swing {swing1, swing2,}
+   }
+
    \700e {
       == lsounds/WeaponsD/700Express
       fire1 Fire1      # E.Y.E: Divine Cybermancy
@@ -60,12 +74,7 @@ weapons {
       out   ReloadOut # ^
       in    ReloadIn  # ^
       draw  Draw      # ^
-
-      $random fire {
-         fire1,
-         fire2,
-         fire3,
-      }
+      $random fire {fire1, fire2, fire3,}
    }
 
    minigun {

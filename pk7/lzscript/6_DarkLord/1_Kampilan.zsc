@@ -7,6 +7,100 @@
  * ---------------------------------------------------------------------------|
  */
 
+class Lith_KampilanPuff : Actor {
+   default {
+      Mass 5;
+      +HitTracer
+      +MThruSpecies
+      +NoInteraction
+      +PuffOnActors
+      +PuffGetsOwner
+      +ThruGhost
+      -AllowParticles
+   }
+
+   states
+   {
+   Spawn:
+   XDeath:
+      TNT1 A 0;
+      TNT1 A 0 a_jumpif(tracer ? tracer.bNoBlood : true, "Crash");
+      TNT1 A 0 {
+         for(int i = 0; i < 10; ++i) {
+            a_startSound("body/flesh", lch_auto);
+         }
+         if(target) {
+            target.a_startSound("weapons/kampilan/hitflesh", lch_weapon2);
+         }
+      }
+      stop;
+   Melee:
+   Crash:
+      TNT1 A 0 {
+         if(target) {
+            target.a_startSound("weapons/kampilan/hit", lch_weapon2);
+         }
+      }
+      stop;
+   }
+}
+
+class Lith_KampilanPuff2 : Lith_KampilanPuff {}
+
+class Lith_KampilanBonkPuff : Actor {
+   default {
+      Mass 5;
+      +ForcePain
+      +HitTracer
+      +MThruSpecies
+      +NoInteraction
+      +PuffOnActors
+      +PuffGetsOwner
+      +ThruGhost
+      -AllowParticles
+   }
+
+   action void lith_a_setPain() {
+      if(tracer && tracer.health > 0) {
+         let st = tracer.resolveState("Pain");
+         if(st) {
+            tracer.setState(st);
+         }
+      }
+   }
+
+   states
+   {
+   Spawn:
+   XDeath:
+      TNT1 A 0;
+      TNT1 A 0 a_jumpif(tracer ? tracer.bNoBlood : true, "Crash");
+      TNT1 A 0 {
+         for(int i = 0; i < 5; ++i) {
+            a_startSound("body/flesh", lch_auto);
+         }
+         if(target) {
+            target.a_startSound("weapons/kampilan/bonk", lch_weapon2);
+         }
+         return resolveState("DoPain");
+      }
+   DoPain:
+      TNT1 AAAAAA 3 lith_a_setPain;
+      stop;
+   Melee:
+   Crash:
+      stop;
+   }
+}
+
+class Lith_KampilanBonkPuff2 : Lith_KampilanBonkPuff {
+   states {
+   DoPain:
+      TNT1 AAAAAAAAAAAA 3 lith_a_setPain;
+      stop;
+   }
+}
+
 class Lith_Kampilan : Lith_DWeapon;
 
 default {
@@ -19,21 +113,146 @@ default {
    +Weapon.NoAutoFire
 }
 
+action(Weapon) void lith_a_kampilanSwing() {
+   class<Lith_KampilanPuff> puffType;
+   if(invoker.m_swingSide) {
+      puffType = "Lith_KampilanPuff2";
+   } else {
+      puffType = "Lith_KampilanPuff";
+   }
+   a_recoil(-1.5);
+   a_quake(2, 3, 0, 128);
+   a_customPunch((countInv("PowerStrength") ? 300 : 150) * random(1, 2), true, CPF_PULLIN, puffType, 132);
+   lith_a_recoilDn(10);
+}
+
+action(Weapon) void lith_a_kampilanBonk() {
+   class<Lith_KampilanBonkPuff> puffType;
+   if(invoker.m_swingSide) {
+      puffType = "Lith_KampilanBonkPuff2";
+   } else {
+      puffType = "Lith_KampilanBonkPuff";
+   }
+   a_recoil(-1.5);
+   a_quake(3, 3, 0, 128);
+   a_customPunch((countInv("PowerStrength") ? 100 : 50) * random(1, 2), true, CPF_PULLIN, puffType, 132);
+   lith_a_recoilDn(10);
+}
+
+bool m_swingSide;
+
 states(Weapon) {
-Ready:
-   KAMP A 1 Lith_A_Ready;
-   loop;
+Ready: TNT1 A 0 a_jumpIf(invoker.m_swingSide, "ReadyLeft");
+ReadyRight: KAMR A 1 lith_a_ready(WRF_ALLOWRELOAD); wait;
+ReadyLeft:  KAML A 1 lith_a_ready(WRF_ALLOWRELOAD); wait;
 
-Deselect:
-   KAMP A 1 Lith_A_Lower(_raise_slow);
-   loop;
+Deselect: TNT1 A 0 a_jumpIf(invoker.m_swingSide, "DeselectLeft");
+DeselectRight: KAMR A 1 lith_a_lower(_raise_fast); wait;
+DeselectLeft:  KAML A 1 lith_a_lower(_raise_fast); wait;
 
-Select:
-   KAMP A 1 Lith_A_Raise(_raise_slow);
-   loop;
+Select: TNT1 A 0 a_jumpIf(invoker.m_swingSide, "SelectLeft");
+SelectRight: KAMR A 1 lith_a_raise(_raise_fast); loop;
+SelectLeft:  KAML A 1 lith_a_raise(_raise_fast); loop;
 
-Fire:
-   goto ReadySelector;
+Fire: TNT1 A 0 a_jumpIf(invoker.m_swingSide, "SwingLeft");
+SwingRight:
+   KAMR B 1 offset(212, 70);
+   KAMR B 1 offset(213, 69);
+   KAMR C 1 offset(196, 56);
+   KAMR C 1 offset(204, 51);
+   KAMR D 1 offset(200, 42);
+   KAMR E 2 offset(196, 36);
+   KAMR F 2 offset(194, 35);
+   KAMR G 3 offset(198, 36);
+   KAMR H 1 offset(176, 49) a_startSound("weapons/kampilan/swing", lch_weapon);
+   KAMR J 1 offset(207, 95);
+   KAMR K 1 offset(233, 78);
+   KAMR L 1 offset(223, -17) lith_a_kampilanSwing;
+   KAMR L 1 offset(132, -15);
+   #### # 0 lith_a_setInterpolation(true);
+   KAMR M 1 offset(133, 61);
+   KAMR M 1 offset(76, 141);
+   KAMR M 1 offset(22, 203);
+   TNT1 A 5;
+   KAML H 1 offset(-2, 197);
+   KAML H 1 offset(-20, 193);
+   KAML I 1 offset(-37, 182);
+   KAML I 1 offset(-68, 172);
+   KAML J 1 offset(-86, 133) a_startSound("weapons/kampilan/ready", lch_weapon3);
+   KAML K 1 offset(-86, 103);
+   KAML L 1 offset(-94, 80);
+   KAML M 1 offset(-99, 67);
+   KAML A 1 offset(1, 32);
+   #### # 0 lith_a_setInterpolation(false);
+   #### # 0 {invoker.m_swingSide = !invoker.m_swingSide;}
+   #### # 0 a_reFire;
+   goto Ready;
+SwingLeft:
+   #### # 0 lith_a_setInterpolation(true);
+   KAML A 1 offset(-11, 33);
+   KAML A 1 offset(-19, 36);
+   KAML A 1 offset(-22, 37);
+   KAML A 2 offset(-24, 39);
+   KAML A 3 offset(-25, 40);
+   KAML B 2 offset(-117, 55);
+   KAML B 1 offset(-104, 50);
+   KAML C 1 offset(41, 38) a_startSound("weapons/kampilan/swing", lch_weapon);
+   KAML C 1 offset(41, 38);
+   KAML D 1 offset(135, 88);
+   KAML E 1 offset(182, 110) lith_a_kampilanSwing;
+   KAML F 1 offset(231, 141);
+   KAML G 1 offset(272, 167);
+   TNT1 A 5;
+   KAMR N 1 offset(232, 8);
+   KAMR N 1 offset(242, -11);
+   KAMR N 1 offset(254, -34) a_startSound("weapons/kampilan/ready", lch_weapon3);
+   #### # 0 lith_a_setInterpolation(false);
+   KAMR P 1 offset(263, 27);
+   KAMR Q 2 offset(236, 73);
+   KAMR R 2 offset(222, 86);
+   KAMR S 3 offset(219, 78);
+   KAMR A 1 offset(1, 32);
+   #### # 0 {invoker.m_swingSide = !invoker.m_swingSide;}
+   #### # 0 a_reFire;
+   goto Ready;
+Reload: TNT1 A 0 a_jumpIf(invoker.m_swingSide, "BonkLeft");
+BonkRight:
+   #### # 0 lith_a_setInterpolation(true);
+   KAMR T 1 offset(225, 70);
+   KAMR T 1 offset(229, 70);
+   KAMR U 2 offset(250, 43);
+   KAMR V 3 offset(281, 57);
+   KAMR W 1 offset(271, 60) a_startSound("weapons/kampilan/swing", lch_weapon);
+   KAMR X 1 offset(214, 24) lith_a_kampilanBonk;
+   KAMR Y 2 offset(191, -29);
+   KAMR Y 3 offset(197, -27);
+   KAMR Y 2 offset(184, -27);
+   KAMR Y 3 offset(187, -26);
+   #### # 0 lith_a_setInterpolation(false);
+   KAMR X 1 offset(218, 27);
+   KAMR T 2 offset(215, 72);
+   KAMR A 1 offset(1, 32);
+   goto Ready;
+BonkLeft:
+   #### # 0 lith_a_setInterpolation(true);
+   KAML N 1 offset(-114, 65);
+   KAML N 2 offset(-117, 67);
+   KAML N 3 offset(-118, 68);
+   KAML O 1 offset(-119, 84);
+   KAML O 2 offset(-110, 84);
+   KAML P 3 offset(-113, 66) a_startSound("weapons/kampilan/swing", lch_weapon);
+   KAML Q 1 offset(-93, 55);
+   KAML R 1 offset(-11, 72) lith_a_kampilanBonk;
+   KAML S 3 offset(84, 136);
+   KAML S 2 offset(93, 136);
+   KAML S 3 offset(88, 139);
+   KAML S 2 offset(88, 136);
+   KAML R 1 offset(16, 101);
+   KAML O 2 offset(-58, 113);
+   KAML M 3 offset(-92, 76);
+   #### # 0 lith_a_setInterpolation(false);
+   KAML A 1 offset(1, 32);
+   goto Ready;
 }
 
 /* EOF */

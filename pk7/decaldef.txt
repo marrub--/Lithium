@@ -243,6 +243,23 @@ decal Lith_Rend
    randomflipy
 }
 
+decal Lith_KampilanSlash
+{
+   pic "SHKRB0"
+   shade "black"
+   x-scale 0.1
+   y-scale 0.1
+}
+
+decal Lith_KampilanSlash2
+{
+   pic "SHKRB0"
+   shade "black"
+   x-scale 0.1
+   y-scale 0.1
+   flipx
+}
+
 decal Lith_ChargeFistScorch1
 {
    pic "BFGSCRC1"
@@ -355,6 +372,10 @@ generator Lith_LaserRiflePuff        Lith_LaserRifleScorch
 generator Lith_LazShotgunPuff        Lith_LaserRifleScorch
 generator Lith_KnifPuf1              Lith_ShankH
 generator Lith_KnifPuf2              Lith_ShankV
+generator Lith_KampilanPuff          Lith_KampilanSlash
+generator Lith_KampilanPuff2         Lith_KampilanSlash2
+generator Lith_KampilanBonkPuff      Lith_ChargeFistScorch
+generator Lith_KampilanBonkPuff2     Lith_ChargeFistScorch
 generator Lith_BladeHit              Lith_Blade
 generator Lith_BladeHit2             Lith_Blade
 generator Lith_RendHit               Lith_Rend

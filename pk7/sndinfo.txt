@@ -604,6 +604,16 @@ weapons/subweapon/armed lsounds/WeaponsD/Subweapons/Armed
 $alias weapons/subweapon/dagger weapons/rend/end
 $alias weapons/subweapon/grenade weapons/rifle/grenade
 $alias weapons/subweapon/mine weapons/rifle/grenade
+weapons/kampilan/draw lsounds/WeaponsD/Kampilan/Draw
+weapons/kampilan/bonk lsounds/WeaponsD/Kampilan/Bonk
+weapons/kampilan/hit lsounds/WeaponsD/Kampilan/Hit
+weapons/kampilan/hitflesh lsounds/WeaponsD/Kampilan/HitFlesh
+weapons/kampilan/ready1 lsounds/WeaponsD/Kampilan/Ready
+weapons/kampilan/ready2 lsounds/WeaponsD/Kampilan/Ready2
+weapons/kampilan/swing1 lsounds/WeaponsD/Kampilan/Swing
+weapons/kampilan/swing2 lsounds/WeaponsD/Kampilan/Swing2
+$random weapons/kampilan/ready { weapons/kampilan/ready1 weapons/kampilan/ready2 }
+$random weapons/kampilan/swing { weapons/kampilan/swing1 weapons/kampilan/swing2 }
 weapons/700e/fire1 lsounds/WeaponsD/700Express/Fire1
 weapons/700e/fire2 lsounds/WeaponsD/700Express/Fire2
 weapons/700e/fire3 lsounds/WeaponsD/700Express/Fire3

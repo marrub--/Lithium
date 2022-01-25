@@ -23,7 +23,7 @@ void Lith_BobWeapon() {
    double mvel = vel.xy.length();
 
    m_LastVXVel = m_VXVel;
-   m_VXVel = clamp(sin(mang) * mvel, -8.0, 8.0);
+   m_VXVel = clamp(sin(mang) * mvel, -4.0, 4.0);
 
    m_LastVYVel = m_VYVel;
    m_VYVel = clamp(cos(mang) * mvel, 0.0, 4.0);
@@ -38,6 +38,7 @@ void Lith_BobWeapon() {
    m_IYaw = Lith_UTIL.AngleLerp(m_IYaw, Angle, 0.377);
    if(m_IYaw - m_LastIYaw ~== 0) {m_VYaw = 0;}
    else                          {m_VYaw = m_IYaw - m_LastIYaw;}
+   m_VYaw = clamp(m_VYaw, -20, 20);
 
    if(Vel.Z - m_LastZVel > double.Epsilon) {
       if(m_LastZVel >= 0) {m_ZVel += Vel.Z;}

@@ -53,20 +53,21 @@
 ~
                              * Weapons *
 
-@ ChronoTeeth    - SPAS reload frames
-@ Dr Cosmobyte   - Plasma Diffuser sprite
-@ Dynamo         - Minigun rip from Target
-@ GAA1992        - Gauss Shotgun idle sprite
-@ JetPlane       - Image used as a base for the SMG sprite
-@ Minigunner     - Missile Launcher sprite
-@ Sgt. Shivers   \ Shotgun, knife, and revolver sprites
-                 | Mateba & SPAS reload animations
-@ VriskaSerket   - Image used as a base for the Star Destroyer sprite
-@ WildWeasel     - Sleeves for Cyber-Mage
-@ Yholl          - Made the Charge Fist not suck
-@ Zombie         - Image used as a base for the SPAS sprite
-@ vikingbro      - Image used as a base for the Shock Rifle sprite
-@ zrrion         - Sprites for the Grenade Launcher, Pistol and Plasma Rifle
+@ ChronoTeeth     - SPAS reload frames
+@ Dr Cosmobyte    - Plasma Diffuser sprite
+@ Dynamo          - Minigun rip from Target
+@ GAA1992         - Gauss Shotgun idle sprite
+@ JetPlane        - Image used as a base for the SMG sprite
+@ Minigunner      - Missile Launcher sprite
+@ Pablomarcellana - Kampilan model (CC-BY-4.0; https://skfb.ly/6RnBM)
+@ Sgt. Shivers    \ Shotgun, knife, and revolver sprites
+                  | Mateba & SPAS reload animations
+@ VriskaSerket    - Image used as a base for the Star Destroyer sprite
+@ WildWeasel      - Sleeves for Cyber-Mage
+@ Yholl           - Made the Charge Fist not suck
+@ Zombie          - Image used as a base for the SPAS sprite
+@ vikingbro       - Image used as a base for the Shock Rifle sprite
+@ zrrion          - Sprites for the Grenade Launcher, Pistol and Plasma Rifle
 ~
                              * Graphics *
 
