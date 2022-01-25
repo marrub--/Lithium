@@ -168,6 +168,10 @@ void Lith_PreTick() {
 }
 
 void Lith_PostTick() {
+   viewPitch = -(Lith_UTIL.pData(pdata_addp)/FIX);
+   viewAngle = -(Lith_UTIL.pData(pdata_addy)/FIX);
+   viewRoll  = -(Lith_UTIL.pData(pdata_addr)/FIX);
+
    if(lith_player_rainshader)
       Lith_RainEffect();
    else

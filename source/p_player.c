@@ -105,11 +105,6 @@ reinit:
 
       P_Ren_PTickPst();
 
-      /* Update view (extra precision is required here to ensure accuracy) */
-      ACS_SetActorPitch(0, ACS_GetActorPitch(0) - (f32)pl.addpitch);
-      ACS_SetActorAngle(0, ACS_GetActorAngle(0) - (f32)pl.addyaw);
-      ACS_SetActorRoll (0, ACS_GetActorRoll (0) - (f32)pl.addroll);
-
       /* Tic passes */
       ACS_Delay(1);
 
@@ -122,11 +117,6 @@ reinit:
       pl.old       = olddelta;
       pl.oldhealth = oldhealth;
       pl.oldmana   = oldmana;
-
-      /* Reset view for next tic */
-      ACS_SetActorPitch(0, ACS_GetActorPitch(0) + (f32)pl.addpitch);
-      ACS_SetActorAngle(0, ACS_GetActorAngle(0) + (f32)pl.addyaw);
-      ACS_SetActorRoll (0, ACS_GetActorRoll (0) + (f32)pl.addroll);
 
       /* If the map changes this we need to make sure it's still correct. */
       P_ValidateTID();

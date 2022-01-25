@@ -74,6 +74,7 @@ enum ZscName(PData) {
    pdata_semifrozen,
    pdata_addp,
    pdata_addy,
+   pdata_addr,
    pdata_recoilp,
    pdata_attr,
    pdata_alpha,

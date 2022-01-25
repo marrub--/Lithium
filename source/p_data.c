@@ -119,9 +119,9 @@ void P_Dat_PTickPre()
    pl.vely = ACS_GetActorVelY(0);
    pl.velz = ACS_GetActorVelZ(0);
 
-   pl.pitch = ACS_GetActorPitch(0) - pl.addpitch;
-   pl.yaw   = ACS_GetActorAngle(0) - pl.addyaw;
-   pl.roll  = ACS_GetActorRoll (0) - pl.addroll;
+   pl.pitch = ACS_GetActorPitch(0);
+   pl.yaw   = ACS_GetActorAngle(0);
+   pl.roll  = ACS_GetActorRoll (0);
 
    pl.pitchf = (-pl.pitch + 0.25) * 2 * pi;
    pl.yawf   = pl.yaw * tau - pi;

@@ -31,6 +31,7 @@ i32 Sc_LPData(i32 info, i32 permutation) {
    case pdata_semifrozen:   return pl.semifrozen > 0;
    case pdata_addp:         return k32_to_i32(pl.addpitch * 360.0);
    case pdata_addy:         return k32_to_i32(pl.addyaw   * 360.0);
+   case pdata_addr:         return k32_to_i32(pl.addroll  * 360.0);
    case pdata_recoilp:      return k32_to_i32(pl.extrpitch);
    case pdata_attr:         return pl.attr.attrs[permutation];
    case pdata_alpha:        return k32_to_i32(pl.alpha);
