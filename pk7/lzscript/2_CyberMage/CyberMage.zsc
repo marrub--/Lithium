@@ -7,10 +7,8 @@
  * ---------------------------------------------------------------------------|
  */
 
-class Lith_CyberMagePlayer : Lith_Player
-{
-   default
-   {
+class Lith_CyberMagePlayer : Lith_Player {
+   default {
       Player.AttackZOffset 12;
       Player.DisplayName "$LITH_CLASS_CYBERMAGE";
       Player.JumpZ 9;
@@ -20,8 +18,7 @@ class Lith_CyberMagePlayer : Lith_Player
       Tag "$LITH_CLASS_CYBERMAGE";
    }
 
-   override void GiveDefaultInventory()
-   {
+   override void GiveDefaultInventory() {
       Super.GiveDefaultInventory();
       Lith_GiveDefItem("Lith_CFist", 1);
       Lith_GiveDefItem("Lith_Delear", 1);
@@ -30,19 +27,15 @@ class Lith_CyberMagePlayer : Lith_Player
    }
 }
 
-class Lith_StealthSystem : PowerInvisibility
-{
-   default
-   {
+class Lith_StealthSystem : PowerInvisibility {
+   default {
       Powerup.Duration int.max;
       Powerup.Mode "Opaque";
    }
 }
 
-class Lith_CWeapon : Lith_OutcastsWeapon
-{
-   default
-   {
+class Lith_CWeapon : Lith_OutcastsWeapon {
+   default {
       Inventory.RestrictedTo "Lith_CyberMagePlayer";
    }
 }

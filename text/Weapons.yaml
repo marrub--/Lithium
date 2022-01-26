@@ -84,8 +84,8 @@ pD:
    d_fortune:  [6, FortuneGun,  Ammo Plasma]
 
    pickups:
-      fist:           m_fist
-      chainsaw:       m_fist
+      fist:           d_khanda
+      chainsaw:       d_kampilan
       pistol:         d_700e
       shotgun:        d_shrapnel
       supershotgun:   d_4bore

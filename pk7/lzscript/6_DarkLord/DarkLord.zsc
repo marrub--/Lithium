@@ -24,6 +24,7 @@ class Lith_DarkLordPlayer : Lith_Player {
 
    override void GiveDefaultInventory() {
       Super.GiveDefaultInventory();
+      Lith_GiveDefWeapon("Lith_Khanda");
       Lith_GiveDefWeapon("Lith_700Express");
    }
 }
