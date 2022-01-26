@@ -12,19 +12,19 @@ class Lith_RedDagger : Actor {
       Damage 0;
       DamageType "Magic";
       RenderStyle "ColorAdd";
-      Speed 40;
+      Speed 7;
 
       Projectile;
-      +BRIGHT
-      +RIPPER
-      +PAINLESS
+      +Bright
+      +Ripper
+      +ForcePain
    }
 
    override int specialMissileHit(Actor th) {
-      if(target != th && tracer != th && th.bSHOOTABLE) {
+      if(target != th && tracer != th && th.bShootable) {
          double ang = target ? target.angleTo(self) : 0;
          tracer = th;
-         th.damageMobj(self, target, 15, 'Magic');
+         th.damageMobj(self, target, 5, 'Magic');
          th.spawnLineAttackBlood(target, pos, ang, 15, 15);
       }
       return 1;
@@ -63,15 +63,11 @@ action(Weapon) void Lith_SubGunFire() {
    player.getPSprite(_psp_d_subweapon).frame = randomPick(0, 2);
    A_StartSound("weapons/subweapon/armgun", lch_altweapon);
    A_AlertMonsters();
-   Lith_FireBullets(1, 2, -1, 15, puffType: "Lith_BulletPuffPainful", tracerX: -6);
+   Lith_FireBullets(1, 2, -1, 15 * random(2, 4), flags: FBF_NORANDOM, tracerX: -6);
 }
 
 action(Weapon) void Lith_SubDagFire() {
-   A_StartSound("weapons/subweapon/dagger", lch_altweapon);
-   A_AlertMonsters();
-   for(int i = 0; i < 3; i++) {
-      A_FireProjectile("Lith_RedDagger", 0, false, frandom(-8,8), frandom(-8,8));
-   }
+   A_FireProjectile("Lith_RedDagger", 0, false, frandom(-8,8), frandom(-8,8));
 }
 
 action(Weapon) void Lith_SubGrnFire() {
@@ -179,14 +175,15 @@ _SubGun:
    TNT1 A 4;
    stop;
 _SubDag:
-   ADAG D 1 bright Lith_SubDagFire;
-   ADAG D 1 bright;
-   ADAG C 1 bright Lith_SubDagFire;
-   ADAG C 1 bright;
-   ADAG B 1 bright Lith_SubDagFire;
-   ADAG B 1 bright;
-   ADAG A 1 bright;
-   ADAG A 1 bright;
+   #### # 0 A_AlertMonsters();
+   #### # 0 A_StartSound("weapons/subweapon/dagger", lch_altweapon);
+   ADAG DD 2 bright Lith_SubDagFire;
+   #### # 0 A_StartSound("weapons/subweapon/dagger", lch_altweapon);
+   ADAG CC 2 bright Lith_SubDagFire;
+   #### # 0 A_StartSound("weapons/subweapon/dagger", lch_altweapon);
+   ADAG BB 2 bright Lith_SubDagFire;
+   #### # 0 A_StartSound("weapons/subweapon/dagger", lch_altweapon);
+   ADAG AA 2 bright Lith_SubDagFire;
    TNT1 A 10;
    stop;
 _SubGrn:
