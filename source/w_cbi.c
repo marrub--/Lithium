@@ -51,12 +51,19 @@ void CBI_Install(i32 num) {
       return;
    }
 
+   pl.setActivator();
+
    ifauto(struct cupgdef const *, c, GetCUpgr(pl.pclass_b, num)) {
       set_bit(cbiupgr, c->key);
 
       switch(c->key) {
-      case cupg_m_cpu1: cbiperf += 20; break;
-      case cupg_m_cpu2: cbiperf += 40; break;
+      case cupg_m_cpu1:       cbiperf += 20;           break;
+      case cupg_m_cpu2:       cbiperf += 40;           break;
+      case cupg_c_slot3spell: InvGive(so_Feuer,    1); break;
+      case cupg_c_slot4spell: InvGive(so_Rend,     1); break;
+      case cupg_c_slot5spell: InvGive(so_Hulgyon,  1); break;
+      case cupg_c_slot6spell: InvGive(so_StarShot, 1); break;
+      case cupg_c_slot7spell: InvGive(so_Cercle,   1); break;
       }
 
       if(c->nam) {

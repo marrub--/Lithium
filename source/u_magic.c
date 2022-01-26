@@ -57,11 +57,10 @@ void UpdateMagicUI(struct upgrade *upgr)
 
    bool any = false;
 
-   for(i32 i = 0; i < countof(minf); i++)
-   {
+   for(i32 i = 0; i < countof(minf); i++) {
       struct magic_info const *m = &minf[i];
 
-      if(m->st != -1 && get_bit(cbiupgr, m->st)) continue;
+      if(m->st != -1 && !get_bit(cbiupgr, m->st)) continue;
 
       char gfx[32] = ":UI:"; faststrcat (gfx, m->name);
       char hot[32] = ":UI:"; faststrcat2(hot, m->name, "Sel");

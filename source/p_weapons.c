@@ -168,16 +168,6 @@ void P_Wep_PTick() {
       else                InvTake(so_SMGHeat, 1);
    }
 
-   if(pl.pclass & pcl_cybermage) {
-                                              InvGive(so_Blade,    1);
-                                              InvGive(so_Delear,   1);
-      if(get_bit(cbiupgr, cupg_c_slot3spell)) InvGive(so_Feuer,    1);
-      if(get_bit(cbiupgr, cupg_c_slot4spell)) InvGive(so_Rend,     1);
-      if(get_bit(cbiupgr, cupg_c_slot5spell)) InvGive(so_Hulgyon,  1);
-      if(get_bit(cbiupgr, cupg_c_slot6spell)) InvGive(so_StarShot, 1);
-      if(get_bit(cbiupgr, cupg_c_slot7spell)) InvGive(so_Cercle,   1);
-   }
-
    SetSize(320, 240);
 
    switch(P_Wep_CurType()) {

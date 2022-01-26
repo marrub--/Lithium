@@ -352,9 +352,7 @@ void P_Init() {
    if(dbgflags(dbgf_items)) {
       for(i32 i = weapon_min; i < weapon_max; ++i) {
          struct weaponinfo const *info = &weaponinfo[i];
-         if(info->classname != snil && info->pclass & pl.pclass &&
-            !(info->defammotype & AT_Mana))
-         {
+         if(info->classname != snil && info->pclass & pl.pclass) {
             InvGive(info->classname, 1);
          }
       }
