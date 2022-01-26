@@ -54,6 +54,7 @@
                              * Weapons *
 
 @ ChronoTeeth     - SPAS reload frames
+@ DT7             - Khanda model (CC-BY-4.0; https://skfb.ly/66BHu)
 @ Dr Cosmobyte    - Plasma Diffuser sprite
 @ Dynamo          - Minigun rip from Target
 @ GAA1992         - Gauss Shotgun idle sprite

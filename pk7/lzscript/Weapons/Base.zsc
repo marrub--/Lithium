@@ -24,7 +24,6 @@ enum Lith_PSprite {
    _psp_flash_max,
 
    _psp_overlay_hax = 69420,
-
 }
 
 enum Lith_Hand {
@@ -49,6 +48,12 @@ enum Lith_RaiseSpeed {
    _raise_normal,
    _raise_fast,
    _raise_instant
+}
+
+enum Lith_MeleeFlags {
+   _mlf_pull_in,
+   _mlf_no_turn,
+   _mlf_damage_stepup,
 }
 
 default {
@@ -411,6 +416,43 @@ action(Weapon) void Lith_FireBullets(double spreadHorz, double spreadVert, int n
    case _tr_none:   tracerType = null;                    break;
    }
    A_FireBullets(spreadHorz, spreadVert, numBullets, damage, puffType, flags, range, tracerType, 7 + FRandom(-1, 0), tracerX + FRandom(-0.7, 0.7));
+}
+
+action(Weapon) void lith_a_fireMelee(int damage, double range, int flags = 0, class<Actor> puffType = "Lith_BulletPuff") {
+   if(!player) {
+      return;
+   }
+
+   FTranslatedLineTarget lt;
+
+   double y = angle + random2() * (5.625 / 256.0);
+   double p = aimLineAttack(y, range, lt, 0, ALF_CHECK3D);
+
+   if(lt.lineTarget) {
+      if(flags & _mlf_damage_stepup) {
+         double rad  = radius - lt.lineTarget.radius;
+         double dist = lt.lineTarget.distance2D(self) - rad;
+         double rnge = range - rad;
+         if(dist >= rnge) {
+            damage *= 2;
+         } else {
+            damage = int(double(damage) * (1.0 + dist / rnge));
+         }
+      }
+   }
+
+   Actor puff;
+   int doneDamage;
+   [puff, doneDamage] = lineAttack(y, range, p, damage, 'Melee', puffType, LAF_ISMELEEATTACK, lt);
+
+   if(lt.lineTarget) {
+      if(!(flags & _mlf_no_turn)) {
+         angle = lt.angleFromSource;
+      }
+      if(flags & _mlf_pull_in) {
+         bJustAttacked = true;
+      }
+   }
 }
 
 bool lith_noAmmo(int minAmount = 1) const {

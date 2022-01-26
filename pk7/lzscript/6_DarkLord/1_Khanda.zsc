@@ -1,0 +1,106 @@
+/* ---------------------------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison G. Watson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
+class Lith_KhandaPuff : Lith_BulletPuff {
+   default {
+      Mass 5;
+      +HitTracer
+      +MThruSpecies
+      +NoInteraction
+      +PuffOnActors
+      +PuffGetsOwner
+      +ThruGhost
+      -AllowParticles
+   }
+
+   states
+   {
+   Spawn:
+   XDeath:
+      TNT1 A 0;
+      TNT1 A 0 a_jumpif(tracer ? tracer.bNoBlood : true, "Crash");
+      TNT1 A 0 {
+         for(int i = 0; i < 5; ++i) {
+            a_startSound("body/flesh", lch_auto);
+         }
+         if(target) {
+            for(int i = 0; i < 2; ++i) {
+               target.a_startSound("weapons/sword/hit", lch_auto);
+            }
+         }
+      }
+      stop;
+   Melee:
+   Crash:
+      TNT1 A 0 {
+         if(target) {
+            target.a_startSound("weapons/sword/swing1", lch_auto);
+         }
+      }
+      stop;
+   }
+}
+
+class Lith_Khanda : Lith_DWeapon;
+
+default {
+   Lith_Weapon.SpawnType "Lith_FistPickup";
+   Tag "$LITH_INFO_SHORT_Khanda";
+   Weapon.SlotNumber 1;
+   Weapon.SlotPriority 0.9;
+   Weapon.UpSound "weapons/khanda/draw";
+
+   +Weapon.NoAutoFire
+}
+
+states(Weapon) {
+Ready:
+   KHAN A 1 lith_a_ready(WRF_ALLOWRELOAD);
+   wait;
+
+Deselect:
+   KHAN A 1 lith_a_lower(_raise_fast);
+   wait;
+
+Select:
+   KHAN A 1 lith_a_raise(_raise_fast);
+   wait;
+
+Fire:
+   #### # 0 lith_a_setInterpolation(true);
+   KHAN A 1 offset(-35, 32);
+   KHAN B 1 offset(-165, 137);
+   KHAN B 1 offset(-190, 134);
+   KHAN C 2 offset(-198, 124);
+   KHAN C 3 offset(-205, 126);
+Hold:
+   KHAN D 1 offset(-103, 143) a_startSound("weapons/kampilan/swing", lch_weapon);
+   #### # 0 lith_a_setInterpolation(true);
+   KHAN E 1 offset(163, 120) lith_a_fireMelee(countInv("PowerStrength") ? 30 : 20, 128);
+   KHAN E 1 offset(259, 175);
+   TNT1 A 5;
+   KHAN F 1 offset(148, 170) a_startSound("weapons/kampilan/swing", lch_weapon);
+   KHAN G 1 offset(80, 98);
+   KHAN H 1 offset(-25, 40) lith_a_fireMelee(countInv("PowerStrength") ? 30 : 20, 128, _mlf_pull_in|_mlf_no_turn|_mlf_damage_stepup, "Lith_KhandaPuff");
+   KHAN H 1 offset(-130, 12);
+   KHAN I 1 offset(-124, -21);
+   #### # 0 lith_a_setInterpolation(false);
+   #### # 0 a_reFire;
+   KHAN A 3 offset(-126, 71);
+   #### # 0 lith_a_setInterpolation(true);
+   KHAN A 1 offset(-88, 43);
+   KHAN A 1 offset(-50, 32);
+   KHAN A 1 offset(-15, 32);
+   KHAN A 1 offset(-4, 32);
+   KHAN A 1 offset(-1, 32);
+   #### # 0 lith_a_setInterpolation(false);
+   goto Ready;
+}
+
+/* EOF */

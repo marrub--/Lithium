@@ -122,7 +122,7 @@ action(Weapon) void lith_a_kampilanSwing() {
    }
    a_recoil(-1.5);
    a_quake(2, 3, 0, 128);
-   a_customPunch((countInv("PowerStrength") ? 300 : 150) * random(1, 2), true, CPF_PULLIN, puffType, 132);
+   lith_a_fireMelee(countInv("PowerStrength") ? 300 : 150, 132, _mlf_pull_in|_mlf_damage_stepup, puffType);
    lith_a_recoilDn(10);
 }
 
@@ -135,7 +135,7 @@ action(Weapon) void lith_a_kampilanBonk() {
    }
    a_recoil(-1.5);
    a_quake(3, 3, 0, 128);
-   a_customPunch((countInv("PowerStrength") ? 100 : 50) * random(1, 2), true, CPF_PULLIN, puffType, 132);
+   lith_a_fireMelee(countInv("PowerStrength") ? 100 : 50, 132, _mlf_pull_in|_mlf_damage_stepup, puffType);
    lith_a_recoilDn(10);
 }
 
@@ -151,8 +151,8 @@ DeselectRight: KAMR A 1 lith_a_lower(_raise_fast); wait;
 DeselectLeft:  KAML A 1 lith_a_lower(_raise_fast); wait;
 
 Select: TNT1 A 0 a_jumpIf(invoker.m_swingSide, "SelectLeft");
-SelectRight: KAMR A 1 lith_a_raise(_raise_fast); loop;
-SelectLeft:  KAML A 1 lith_a_raise(_raise_fast); loop;
+SelectRight: KAMR A 1 lith_a_raise(_raise_fast); wait;
+SelectLeft:  KAML A 1 lith_a_raise(_raise_fast); wait;
 
 Fire: TNT1 A 0 a_jumpIf(invoker.m_swingSide, "SwingLeft");
 SwingRight:

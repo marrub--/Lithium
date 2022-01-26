@@ -36,6 +36,7 @@ enum Lith_WeaponNum {
    weapon_c_hulgyon,
    weapon_c_starshot,
    weapon_c_cercle,
+   weapon_d_khanda,
    weapon_d_kampilan,
    weapon_d_700e,
    weapon_d_4bore,

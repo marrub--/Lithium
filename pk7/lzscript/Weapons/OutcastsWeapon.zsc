@@ -16,7 +16,7 @@ default
 
 action(Weapon) void Lith_A_HitKnife(class<Actor> puff)
 {
-   A_CustomPunch((CountInv("PowerStrength") ? 20 : 5) * random(1, 10), true, CPF_NOTURN, puff, 100);
+   lith_a_fireMelee((CountInv("PowerStrength") ? 20 : 5) * random(1, 10), 100, _mlf_no_turn, puff);
 }
 
 bool m_KnifeReFire;
