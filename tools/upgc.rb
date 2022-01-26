@@ -27,52 +27,54 @@ common_main do
    hsh      = YAML.load(IO.read(INPUT), symbolize_names: true)
    upgrades = []
 
-   for category, cupgs in hsh
+   for category, classes in hsh
       catname = category.to_s
-      for name, hupg in cupgs
-         name = name.to_s
-         reqs = (hupg[:req] || "").split
-         for req in reqs
-            req.prepend "dst_bit(_ur_"
-            req.concat  ")"
-         end
-         if reqs.empty?
-            reqs = ["0"]
-         end
-         pg = hupg[:pg] || name
-         if pg == "N/A"
-            pg = "nil"
-         else
-            pg = '"' + pg + '"'
-         end
-         mul = hupg[:mul] || 0
-         flg = "Case(" + name + ")\n"
-         for c, i in (hupg[:f] || "-----").chars.each_with_index
-            if c == "-"
-               next
-            elsif (c == "A" && i == 0) ||
-                  (c == "D" && i == 1) ||
-                  (c == "U" && i == 2) ||
-                  (c == "R" && i == 3) ||
-                  (c == "E" && i == 4)
-               flg.concat "   #{c}(#{name})\n"
-            else
-               raise "functions failed to parse for #{name}"
+      for clname, cupgs in classes
+         for name, hupg in cupgs
+            name = name.to_s
+            reqs = (hupg[:req] || "").split
+            for req in reqs
+               req.prepend "dst_bit(_ur_"
+               req.concat  ")"
             end
-         end
+            if reqs.empty?
+               reqs = ["0"]
+            end
+            pg = hupg[:pg] || name
+            if pg == "N/A"
+               pg = "nil"
+            else
+               pg = '"' + pg + '"'
+            end
+            mul = hupg[:mul] || 0
+            flg = "Case(" + name + ")\n"
+            for c, i in (hupg[:f] || "-----").chars.each_with_index
+               if c == "-"
+                  next
+               elsif (c == "A" && i == 0) ||
+                     (c == "D" && i == 1) ||
+                     (c == "U" && i == 2) ||
+                     (c == "R" && i == 3) ||
+                     (c == "E" && i == 4)
+                  flg.concat "   #{c}(#{name})\n"
+               else
+                  raise "functions failed to parse for #{name}"
+               end
+            end
 
-         upg = {}
-         upg[:nam] = name
-         upg[:inf] = pg
-         upg[:scr] = hupg[:scr] || 0
-         upg[:pcl] = hupg[:cl]  || "gA"
-         upg[:cat] = catname
-         upg[:prf] = hupg[:pr]  || 0
-         upg[:grp] = hupg[:grp] || 0
-         upg[:req] = reqs.join "|"
-         upg[:mul] = mul / 100.0
-         upg[:flg] = flg
-         upgrades.push upg
+            upg = {}
+            upg[:nam] = name
+            upg[:inf] = pg
+            upg[:scr] = hupg[:scr] || 0
+            upg[:pcl] = clname
+            upg[:cat] = catname
+            upg[:prf] = hupg[:pr]  || 0
+            upg[:grp] = hupg[:grp] || 0
+            upg[:req] = reqs.join "|"
+            upg[:mul] = mul / 100.0
+            upg[:flg] = flg
+            upgrades.push upg
+         end
       end
    end
 
