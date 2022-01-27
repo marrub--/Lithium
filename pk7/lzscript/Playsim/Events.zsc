@@ -395,73 +395,94 @@ override void WorldThingRevived(WorldEvent ev)
    ev.Thing.ACS_ScriptCall("Lith_ResurrectMonster");
 }
 
-override void CheckReplacement(ReplaceEvent ev)
-{
-   bool isfinal = ev.IsFinal;
+override void checkReplacement(ReplaceEvent ev) {
+   bool isFinal = ev.isFinal;
    ev.IsFinal = false;
+   if(lith_sv_extrahard) {
+      switch(ev.Replacee.GetClassName()) {
+      case 'ZombieMan':     ev.replacement = 'Lith_XH_ZombieMan';     return;
+      case 'ShotgunGuy':    ev.replacement = 'Lith_XH_ShotgunGuy';    return;
+      case 'ChaingunGuy':   ev.replacement = 'Lith_XH_ChaingunGuy';   return;
+      case 'DoomImp':       ev.replacement = 'Lith_XH_Imp';           return;
+      case 'Demon':         ev.replacement = 'Lith_XH_Demon';         return;
+      case 'Spectre':       ev.replacement = 'Lith_XH_Spectre';       return;
+      case 'LostSoul':      ev.replacement = 'Lith_XH_LostSoul';      return;
+      case 'Fatso':         ev.replacement = 'Lith_XH_Mancubus';      return;
+      case 'Arachnotron':   ev.replacement = 'Lith_XH_Arachnotron';   return;
+      case 'Cacodemon':     ev.replacement = 'Lith_XH_Cacodemon';     return;
+      case 'HellKnight':    ev.replacement = 'Lith_XH_HellKnight';    return;
+      case 'BaronOfHell':   ev.replacement = 'Lith_XH_BaronOfHell';   return;
+      case 'Revenant':      ev.replacement = 'Lith_XH_Revenant';      return;
+      case 'PainElemental': ev.replacement = 'Lith_XH_PainElemental'; return;
+      case 'Archvile':      ev.replacement = 'Lith_XH_Archvile';      return;
+      case 'Cyberdemon':    ev.replacement = 'Lith_XH_Cyberdemon';    return;
+      case 'SpiderMastermind':
+         ev.replacement = 'Lith_XH_SpiderMastermind'; return;
+      }
+   }
    switch(ev.Replacee.GetClassName()) {
    case 'MiniZorchRecharge':
    case 'BlasterAmmo':
    case 'GoldWandAmmo':
-   case 'MaceAmmo':            ev.Replacement = "Clip";                  break;
+   case 'MaceAmmo':            ev.replacement = "Clip";                  break;
    case 'MiniZorchPack':
    case 'BlasterHefty':
    case 'GoldWandHefty':
-   case 'MaceHefty':           ev.Replacement = "ClipBox";               break;
+   case 'MaceHefty':           ev.replacement = "ClipBox";               break;
    case 'LargeZorchRecharge':
-   case 'CrossbowAmmo':        ev.Replacement = "Shell";                 break;
+   case 'CrossbowAmmo':        ev.replacement = "Shell";                 break;
    case 'LargeZorchPack':
-   case 'CrossbowHefty':       ev.Replacement = "ShellBox";              break;
+   case 'CrossbowHefty':       ev.replacement = "ShellBox";              break;
    case 'PropulsorZorch':
-   case 'PhoenixRodAmmo':      ev.Replacement = "RocketAmmo";            break;
+   case 'PhoenixRodAmmo':      ev.replacement = "RocketAmmo";            break;
    case 'PropulsorZorchPack':
    case 'ArtiTimeBomb':
-   case 'PhoenixRodHefty':     ev.Replacement = "RocketBox";             break;
+   case 'PhoenixRodHefty':     ev.replacement = "RocketBox";             break;
    case 'PhasingZorch':
-   case 'SkullRodAmmo':        ev.Replacement = "Cell";                  break;
+   case 'SkullRodAmmo':        ev.replacement = "Cell";                  break;
    case 'PhasingZorchPack':
    case 'ArtiEgg':
-   case 'SkullRodHefty':       ev.Replacement = "CellPack";              break;
+   case 'SkullRodHefty':       ev.replacement = "CellPack";              break;
    case 'Bootspoon':
-   case 'Staff':               ev.Replacement = "Fist";                  break;
+   case 'Staff':               ev.replacement = "Fist";                  break;
    case 'SuperBootspork':
-   case 'Gauntlets':           ev.Replacement = "Chainsaw";              break;
+   case 'Gauntlets':           ev.replacement = "Chainsaw";              break;
    case 'MiniZorcher':
-   case 'GoldWand':            ev.Replacement = "Pistol";                break;
+   case 'GoldWand':            ev.replacement = "Pistol";                break;
    case 'LargeZorcher':
-   case 'Crossbow':            ev.Replacement = "Shotgun";               break;
-   case 'SuperLargeZorcher':   ev.Replacement = "SuperShotgun";          break;
+   case 'Crossbow':            ev.replacement = "Shotgun";               break;
+   case 'SuperLargeZorcher':   ev.replacement = "SuperShotgun";          break;
    case 'RapidZorcher':
-   case 'Blaster':             ev.Replacement = "Chaingun";              break;
+   case 'Blaster':             ev.replacement = "Chaingun";              break;
    case 'ZorchPropulsor':
-   case 'PhoenixRod':          ev.Replacement = "RocketLauncher";        break;
+   case 'PhoenixRod':          ev.replacement = "RocketLauncher";        break;
    case 'PhasingZorcher':
-   case 'Mace':                ev.Replacement = "PlasmaRifle";           break;
+   case 'Mace':                ev.replacement = "PlasmaRifle";           break;
    case 'LAZDevice':
-   case 'SkullRod':            ev.Replacement = "BFG9000";               break;
+   case 'SkullRod':            ev.replacement = "BFG9000";               break;
    case 'BowlOfVegetables':
-   case 'ArtiHealth':          ev.Replacement = "Medikit";               break;
-   case 'ArtiInvisibility':    ev.Replacement = "BlurSphere";            break;
-   case 'ArtiInvulnerability': ev.Replacement = "InvulnerabilitySphere"; break;
+   case 'ArtiHealth':          ev.replacement = "Medikit";               break;
+   case 'ArtiInvisibility':    ev.replacement = "BlurSphere";            break;
+   case 'ArtiInvulnerability': ev.replacement = "InvulnerabilitySphere"; break;
    case 'SuperchargeBreakfast':
-   case 'ArtiSuperHealth':     ev.Replacement = "SoulSphere";            break;
-   case 'ArtiTomeOfPower':     ev.Replacement = "Berserk";               break;
+   case 'ArtiSuperHealth':     ev.replacement = "SoulSphere";            break;
+   case 'ArtiTomeOfPower':     ev.replacement = "Berserk";               break;
    case 'UltraGoggles':
-   case 'ArtiTorch':           ev.Replacement = "Infrared";              break;
+   case 'ArtiTorch':           ev.replacement = "Infrared";              break;
    case 'Zorchpack':
-   case 'BagOfHolding':        ev.Replacement = "Backpack";              break;
+   case 'BagOfHolding':        ev.replacement = "Backpack";              break;
    case 'BowlOfFruit':
-   case 'CrystalVial':         ev.Replacement = "StimPack";              break;
+   case 'CrystalVial':         ev.replacement = "StimPack";              break;
    case 'SuperChexArmor':
-   case 'EnchantedShield':     ev.Replacement = "BlueArmor";             break;
+   case 'EnchantedShield':     ev.replacement = "BlueArmor";             break;
    case 'ChexArmor':
-   case 'SilverShield':        ev.Replacement = "GreenArmor";            break;
+   case 'SilverShield':        ev.replacement = "GreenArmor";            break;
    case 'ComputerAreaMap':
-   case 'SuperMap':            ev.Replacement = "AllMap";                break;
-   case 'GlassOfWater':        ev.Replacement = "HealthBonus";           break;
-   case 'SlimeRepellent':      ev.Replacement = "ArmorBonus";            break;
-   case 'SlimeProofSuit':      ev.Replacement = "RadSuit";               break;
-   default: ev.IsFinal = isfinal; break;
+   case 'SuperMap':            ev.replacement = "AllMap";                break;
+   case 'GlassOfWater':        ev.replacement = "HealthBonus";           break;
+   case 'SlimeRepellent':      ev.replacement = "ArmorBonus";            break;
+   case 'SlimeProofSuit':      ev.replacement = "RadSuit";               break;
+   default:                    ev.isFinal     = isFinal;                 break;
    }
 }
 

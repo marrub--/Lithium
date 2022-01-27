@@ -92,6 +92,7 @@ stab_x(sc_scanner_yoffs,   CVAR "scanner_yoffs")
 
 stab_x(sc_sv_autosave,   CVAR "sv_autosave")
 stab_x(sc_sv_difficulty, CVAR "sv_difficulty")
+stab_x(sc_sv_extrahard,  CVAR "sv_extrahard")
 stab_x(sc_sv_failtime,   CVAR "sv_failtime")
 stab_x(sc_sv_minhealth,  CVAR "sv_minhealth")
 stab_x(sc_sv_nobossdrop, CVAR "sv_nobossdrop")

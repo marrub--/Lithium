@@ -261,6 +261,7 @@
 == \#st_done_intro          | Don't play intro on next game start
 == \#sv_autosave            | Autosave interval
 == \#sv_difficulty          | Difficulty base
+== \#sv_extrahard           | Extra Hard
 == \#sv_lessparticles       | Less particles
 == \#sv_minhealth           | Minimum health on map start
 == \#sv_nobossdrop          | Start with phantom rewards

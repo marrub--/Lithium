@@ -161,12 +161,10 @@ enum {
 };
 
 enum {
-   skill_tourist,
-   skill_easy,
-   skill_normal,
-   skill_hard,
-   skill_extrahard,
-   skill_nightmare
+   _skill_normal,
+   _skill_hard,
+   _skill_tourist,
+   _skill_nightmare
 };
 
 enum {

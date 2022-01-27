@@ -315,6 +315,7 @@ struct setting const st_ply[] = {
    {S_integ, "sv_minhealth",  S_cvInteg, S_bndi(0,   200),  "perc"},
    {S_integ, "sv_autosave",   S_cvInteg, S_bndi(0,   30),   "minu"},
    {S_enume, "player_lvsys",  S_cvInteg, S_bndi(0, atsys_max), "lvsys"},
+   {S_boole, "sv_extrahard",  S_cvBoole},
    {S_empty},
    {S_label, "st_labl_ply_damage"},
    {S_boole, "sv_revenge",          S_cvBoole},

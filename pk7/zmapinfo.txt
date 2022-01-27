@@ -65,33 +65,8 @@ automap {
 
 clearskills
 
-skill tourist {
-   ACSReturn     = 0
-   DamageFactor  = 0.1
-   HealthFactor  = 2
-   Key           = "t"
-   MonsterHealth = 0.1
-   MustConfirm   = "$LITH_SKILL_TOURIST"
-   Name          = "$DIFF_TOURIST"
-   RespawnTime   = 0.5
-   SpawnFilter   = 5
-   EasyBossBrain
-   EasyKey
-   TotalInfighting
-}
-
-skill easy {
-   ACSReturn      = 1
-   Aggressiveness = -0.3
-   DamageFactor   = 0.9
-   Key            = "b"
-   MonsterHealth  = 0.9
-   Name           = "$DIFF_EASY"
-   SpawnFilter    = 2
-}
-
 skill normal {
-   ACSReturn   = 2
+   ACSReturn   = 0
    Key         = "h"
    Name        = "$DIFF_NORMAL"
    SpawnFilter = 3
@@ -99,42 +74,30 @@ skill normal {
 }
 
 skill hard {
-   ACSReturn   = 3
+   ACSReturn   = 1
    Key         = "u"
    Name        = "$DIFF_HARD"
    SpawnFilter = 4
 }
 
-skill extrahard {
-   ACSReturn      = 4
-   Aggressiveness = 0.1
-   DamageFactor   = 1.05
-   Key            = "p"
-   MustConfirm    = "$LITH_SKILL_EXTRAHARD"
-   Name           = "$DIFF_XHARD"
-   SpawnFilter    = 5
-
-   ReplaceActor = "ZombieMan",        "Lith_XH_ZombieMan"
-   ReplaceActor = "ShotgunGuy",       "Lith_XH_ShotgunGuy"
-   ReplaceActor = "ChaingunGuy",      "Lith_XH_ChaingunGuy"
-   ReplaceActor = "DoomImp",          "Lith_XH_Imp"
-   ReplaceActor = "Demon",            "Lith_XH_Demon"
-   ReplaceActor = "Spectre",          "Lith_XH_Spectre"
-   ReplaceActor = "LostSoul",         "Lith_XH_LostSoul"
-   ReplaceActor = "Fatso",            "Lith_XH_Mancubus"
-   ReplaceActor = "Arachnotron",      "Lith_XH_Arachnotron"
-   ReplaceActor = "Cacodemon",        "Lith_XH_Cacodemon"
-   ReplaceActor = "HellKnight",       "Lith_XH_HellKnight"
-   ReplaceActor = "BaronOfHell",      "Lith_XH_BaronOfHell"
-   ReplaceActor = "Revenant",         "Lith_XH_Revenant"
-   ReplaceActor = "PainElemental",    "Lith_XH_PainElemental"
-   ReplaceActor = "Archvile",         "Lith_XH_Archvile"
-   ReplaceActor = "SpiderMastermind", "Lith_XH_SpiderMastermind"
-   ReplaceActor = "Cyberdemon",       "Lith_XH_Cyberdemon"
+skill tourist {
+   ACSReturn      = 2
+   Aggressiveness = -0.3
+   DamageFactor   = 0.1
+   HealthFactor   = 2
+   Key            = "t"
+   MonsterHealth  = 0.1
+   MustConfirm    = "$LITH_SKILL_TOURIST"
+   Name           = "$DIFF_TOURIST"
+   RespawnTime    = 0.5
+   SpawnFilter    = 2
+   EasyBossBrain
+   EasyKey
+   TotalInfighting
 }
 
 skill nightmare {
-   ACSReturn     = 5
+   ACSReturn     = 3
    DamageFactor  = 2
    Key           = "t"
    MonsterHealth = 0.5

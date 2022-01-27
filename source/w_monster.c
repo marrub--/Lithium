@@ -126,7 +126,15 @@ void BaseMonsterLevel(dmon_t *m) {
    bias = mapscleared / 40.0;
 
    bias *= bias;
-   bias += ACS_GameSkill() / (k32)skill_nightmare * 0.1;
+   switch(ACS_GameSkill()) {
+   case _skill_normal:    bias += 0.3; break;
+   case _skill_hard:      bias += 0.4; break;
+   case _skill_tourist:   bias += 0.1; break;
+   case _skill_nightmare: bias += 0.5; break;
+   }
+   if(CVarGetI(sc_sv_extrahard)) {
+      bias += 0.1;
+   }
    bias += CVarGetI(sc_sv_difficulty) / 100.0;
    bias *= ACS_RandomFixed(1, 1.5);
 
