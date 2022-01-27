@@ -124,25 +124,25 @@ Used in division.
 4 DT to other types.
 
 ## Sprites -------------------------------------------------------------------|
-== \#Item_ArmStandardUp    | ARM1A0
-== \#Item_ArmImprovedUp    | ARM2A0
-== \#Item_ArmTeflonUp      | ARM3A0
-== \#Item_ArmDendriteUp    | ARM4A0
-== \#Item_ArmAerodynamicUp | :Items:AeroArmor
-== \#Item_ArmHazMatUp      | ARM6A0
-== \#Item_ArmPinkSilverUp  | ARM7A0
-== \#Item_ArmMidoriUp      | ARM8A0
+== \#Item_ArmStandardUp    | :Items:ArmStandardUp
+== \#Item_ArmImprovedUp    | :Items:ArmImprovedUp
+== \#Item_ArmTeflonUp      | :Items:ArmTeflonUp
+== \#Item_ArmDendriteUp    | :Items:ArmDendriteUp
+== \#Item_ArmAerodynamicUp | :Items:ArmAerodynamicUp
+== \#Item_ArmHazMatUp      | :Items:ArmHazMatUp
+== \#Item_ArmPinkSilverUp  | :Items:ArmPinkSilverUp
+== \#Item_ArmMidoriUp      | :Items:ArmMidoriUp
 
-== \#Item_ArmStandardLo    | ARM1C0
-== \#Item_ArmImprovedLo    | ARM2C0
-== \#Item_ArmTeflonLo      | ARM3C0
-== \#Item_ArmDendriteLo    | ARM4C0
-== \#Item_ArmAerodynamicLo | ARM5C0
-== \#Item_ArmHazMatLo      | ARM6C0
-== \#Item_ArmPinkSilverLo  | ARM7C0
-== \#Item_ArmMidoriLo      | ARM8C0
+== \#Item_ArmStandardLo    | :Items:ArmStandardLo
+== \#Item_ArmImprovedLo    | :Items:ArmImprovedLo
+== \#Item_ArmTeflonLo      | :Items:ArmTeflonLo
+== \#Item_ArmDendriteLo    | :Items:ArmDendriteLo
+== \#Item_ArmAerodynamicLo | :Items:ArmAerodynamicLo
+== \#Item_ArmHazMatLo      | :Items:ArmHazMatLo
+== \#Item_ArmPinkSilverLo  | :Items:ArmPinkSilverLo
+== \#Item_ArmMidoriLo      | :Items:ArmMidoriLo
 
-== \#Item_ClawOfImp     | DITMA0
+== \#Item_ClawOfImp     | :Items:ClawOfImp
 == \#Item_AndSigil      | :Items:AndSigil
 == \#Item_OrSigil       | :Items:OrSigil
 == \#Item_DivisionSigil | :Items:DivisionSigil
