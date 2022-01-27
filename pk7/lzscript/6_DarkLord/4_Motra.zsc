@@ -141,7 +141,7 @@ Reload2:
    MOTR F 1 offset(87, 127);
    MOTR G 4 offset(45, 138);
    MOTR G 1 offset(39, 133);
-   MOTR G 1 offset(35, 127);
+   MOTR G 1 offset(35, 127) lith_a_reloadBobUp(0.5);
    MOTR G 1 offset(30, 127) A_StartSound("weapons/motra/out", lch_reload);
    MOTR G 1 offset(-1, 118) Lith_A_DropMag("Lith_MotraMagazine", "Lith_MotraMagazine2", 0,10,24, 0,FRandom(0,4),0);
    MOTR G 1 offset(-33, 111);
@@ -151,7 +151,7 @@ Reload2:
    MOTR G 8 offset(-32, 110);
    MOTR G 5 offset(-33, 108);
    MOTR G 1 offset(-22, 117);
-   MOTR G 1 offset(-19, 127);
+   MOTR G 1 offset(-19, 127) lith_a_reloadBobDn(0.5);
    MOTR G 1 offset(-16, 139);
    MOTR G 3 offset(2, 161) A_StartSound("weapons/motra/in", lch_reload);
    MOTR G 1 offset(2, 155) Lith_A_ReloadFinish;

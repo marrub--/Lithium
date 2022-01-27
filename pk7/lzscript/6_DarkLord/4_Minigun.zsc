@@ -73,7 +73,7 @@ void lith_incrementWindup() {
 }
 
 bool lith_isMinigunFiring() {
-   return owner.player.buttons & (BT_ATTACK|BT_USER1);
+   return owner.player.buttons & (BT_ATTACK|BT_RELOAD);
 }
 
 action(Weapon) state Lith_A_MinigunReady(statelabel lb, statelabel l) {
