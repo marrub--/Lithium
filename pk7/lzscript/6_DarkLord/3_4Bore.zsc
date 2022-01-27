@@ -68,8 +68,8 @@ Fire:
    4BOR C 1 offset(-22, 143);
    4BOR D 1 offset(-28, 166) {
       A_StartSound("weapons/ssg/open", lch_reload);
-      Lith_A_Casing("Lith_CasShellHot", 15, -1, 40, FRandom(3,4), FRandom(7,8), FRandom(2,9));
-      Lith_A_Casing("Lith_CasShellHot", 15, -4, 40, FRandom(3,4), FRandom(7,8), FRandom(2,9));
+      Lith_A_Casing("Lith_Cas4Bore", 15, -1, 40, FRandom(3,4), FRandom(7,8), FRandom(2,9));
+      Lith_A_Casing("Lith_Cas4Bore", 15, -4, 40, FRandom(3,4), FRandom(7,8), FRandom(2,9));
    }
    4BOR D 1 offset(-41, 172);
    4BOR D 1 offset(-56, 186);
