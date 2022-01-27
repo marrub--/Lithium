@@ -1258,6 +1258,12 @@
 "LITH_LOG_CBI_CSlot6Spell" = "$LITH_CBI_Slot6Spell";
 "LITH_LOG_CBI_CSlot7Spell" = "$LITH_CBI_Slot7Spell";
 "LITH_LOG_CBI_CRDistInter" = "$LITH_CBI_RDistInter";
+"LITH_LOG_CBI_DRuzuk" = "Sub-Daggers & Motril";
+"LITH_LOG_CBI_DZaruk" = "Sub-Grenades";
+"LITH_LOG_CBI_DZakwu" = "Sub-Axe";
+"LITH_LOG_CBI_DZikr" = "Sub-Dart";
+"LITH_LOG_CBI_DShield" = "Shield";
+"LITH_LOG_CBI_DDimDriver" = "Dimension Driver";
 "LITH_LOG_LevelUpStan" = "You feel stronger, somehow.";
 "LITH_LOG_LevelUpJem" = "[INFO] Memory restored: %iKiB";
 "LITH_LOG_LevelUpFulk" = "\cj<\cdVital\cj>\c- :: %i inodes reclaimed.";

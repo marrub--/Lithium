@@ -77,6 +77,14 @@
 == \#LOG_CBI_CSlot7Spell | $\#CBI_Slot7Spell
 == \#LOG_CBI_CRDistInter | $\#CBI_RDistInter
 
+## CBI Upgrades (Dark Lord) --------------------------------------------------|
+== \#LOG_CBI_DRuzuk     | Sub-Daggers & Motril
+== \#LOG_CBI_DZaruk     | Sub-Grenades
+== \#LOG_CBI_DZakwu     | Sub-Axe
+== \#LOG_CBI_DZikr      | Sub-Dart
+== \#LOG_CBI_DShield    | Shield
+== \#LOG_CBI_DDimDriver | Dimension Driver
+
 ## Level Up ------------------------------------------------------------------|
 == \#LOG_LevelUpStan | You feel stronger, somehow.
 == \#LOG_LevelUpJem  | [INFO] Memory restored: %iKiB

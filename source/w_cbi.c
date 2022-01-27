@@ -40,6 +40,14 @@ struct cupgdef {
       {cupg_c_slot7spell, "CSlot7Spell", "Cercle"  },
       {cupg_rdistinter,   "CRDistInter"            },
    },
+   [pcl_darklord_b] = {
+      {cupg_d_ruzuk,     "DRuzuk",     "Ruzuk"    },
+      {cupg_d_zaruk,     "DZaruk",     "Zaruk"    },
+      {cupg_d_zakwu,     "DZakwu",     "Zakwu"    },
+      {cupg_d_zikr,      "DZikr",      "Zikr"     },
+      {cupg_d_shield,    "DShield",    "Shield"   },
+      {cupg_d_dimdriver, "DDimDriver", "DimDriver"},
+   },
 };
 
 #define GetCUpgr(pclass, num) \
@@ -57,13 +65,22 @@ void CBI_Install(i32 num) {
       set_bit(cbiupgr, c->key);
 
       switch(c->key) {
-      case cupg_m_cpu1:       cbiperf += 20;           break;
-      case cupg_m_cpu2:       cbiperf += 40;           break;
+      case cupg_m_cpu1: cbiperf += 20; break;
+      case cupg_m_cpu2: cbiperf += 40; break;
+
       case cupg_c_slot3spell: InvGive(so_Feuer,    1); break;
       case cupg_c_slot4spell: InvGive(so_Rend,     1); break;
       case cupg_c_slot5spell: InvGive(so_Hulgyon,  1); break;
       case cupg_c_slot6spell: InvGive(so_StarShot, 1); break;
       case cupg_c_slot7spell: InvGive(so_Cercle,   1); break;
+
+      #define GiveSubWeapon(bit) set_bit(pl.upgrdata.subweapons.have, bit)
+      case cupg_d_zikr:  GiveSubWeapon(_subw_dart);    break;
+      case cupg_d_zakwu: GiveSubWeapon(_subw_axe);     break;
+      case cupg_d_zaruk: GiveSubWeapon(_subw_grenade); break;
+      case cupg_d_ruzuk: GiveSubWeapon(_subw_dagger);
+                         InvGive(so_Motra, 1); break;
+      #undef GiveSubWeapon
       }
 
       if(c->nam) {

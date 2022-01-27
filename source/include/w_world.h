@@ -152,6 +152,12 @@ enum {
    cupg_c_slot5spell,
    cupg_c_slot6spell,
    cupg_c_slot7spell,
+   cupg_d_ruzuk,
+   cupg_d_zaruk,
+   cupg_d_zakwu,
+   cupg_d_zikr,
+   cupg_d_shield,
+   cupg_d_dimdriver,
 };
 
 enum {
