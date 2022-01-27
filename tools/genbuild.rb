@@ -119,7 +119,6 @@ end
       SrcsEnt.from("p_upgrades.c"),
       SrcsEnt.from("p_weapons.c"),
       SrcsEnt.from("u_adrenaline.c"),
-      SrcsEnt.from("u_autoreload.c"),
       SrcsEnt.from("u_cannon_a.c"),
       SrcsEnt.from("u_cyberlegs.c"),
       SrcsEnt.from("u_defensenuke.c"),

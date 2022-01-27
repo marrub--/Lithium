@@ -19,26 +19,31 @@
 /* Static Functions -------------------------------------------------------- */
 
 static
-void GiveWeaponItem(i32 parm, i32 slot)
-{
+void GiveWeaponItem(i32 parm, i32 slot) {
    switch(parm) {
-   case weapon_c_spas:     InvGive(so_ShellAmmo,  8);    break;
-   case weapon_m_shotgun:  InvGive(so_ShellAmmo,  2);    break;
-   case weapon_m_ssg:      InvGive(so_ShellAmmo,  4);    break;
-   case weapon_c_ionrifle: InvGive(so_RocketAmmo, 6);    break;
-   case weapon_c_erifle:   InvGive(so_BulletAmmo, 7);    break;
-   case weapon_m_rifle:    InvGive(so_BulletAmmo, 50);   break;
-   case weapon_m_rocket:   InvGive(so_RocketAmmo, 2);    break;
-   case weapon_c_plasma:   InvGive(so_PlasmaAmmo, 750);  break;
-   case weapon_m_plasma:   InvGive(so_PlasmaAmmo, 1500); break;
-   case weapon_c_shipgun:  InvGive(so_CannonAmmo, 5);    break;
-   case weapon_m_cannon:   InvGive(so_CannonAmmo, 4);    break;
+   case weapon_m_shotgun: InvGive(so_ShellAmmo,  2);    break;
+   case weapon_m_ssg:     InvGive(so_ShellAmmo,  4);    break;
+   case weapon_m_rifle:   InvGive(so_BulletAmmo, 50);   break;
+   case weapon_m_rocket:  InvGive(so_RocketAmmo, 2);    break;
+   case weapon_m_plasma:  InvGive(so_PlasmaAmmo, 1500); break;
+   case weapon_m_cannon:  InvGive(so_CannonAmmo, 4);    break;
+
+   case weapon_c_erifle:   InvGive(so_BulletAmmo, 7);   break;
+   case weapon_c_spas:     InvGive(so_ShellAmmo,  8);   break;
+   case weapon_c_ionrifle: InvGive(so_RocketAmmo, 6);   break;
+   case weapon_c_plasma:   InvGive(so_PlasmaAmmo, 750); break;
+   case weapon_c_shipgun:  InvGive(so_CannonAmmo, 5);   break;
+
+   case weapon_d_shrapnel: InvGive(so_ShellAmmo,  2);    break;
+   case weapon_d_4bore:    InvGive(so_ShellAmmo,  16);   break;
+   case weapon_d_minigun:  InvGive(so_BulletAmmo, 50);   break;
+   case weapon_d_drocket:  InvGive(so_RocketAmmo, 4);    break;
+   case weapon_d_fortune:  InvGive(so_PlasmaAmmo, 1750); break;
    }
 }
 
 static
-void WeaponGrab(struct weaponinfo const *info)
-{
+void WeaponGrab(struct weaponinfo const *info) {
    AmbientSound(!get_bit(pl.upgrades[UPGR_Seven7s].flags, _ug_active) ?
                 info->pickupsound :
                 ss_marathon_pickup,
@@ -55,8 +60,7 @@ void WeaponGrab(struct weaponinfo const *info)
 }
 
 static
-void PickupScore(i32 parm)
-{
+void PickupScore(i32 parm) {
    struct weaponinfo const *info = &weaponinfo[parm];
 
    i96 score = 4000 * info->slot;
@@ -71,10 +75,8 @@ void PickupScore(i32 parm)
 
 /* Extern Functions -------------------------------------------------------- */
 
-void Wep_GInit(void)
-{
-   for(i32 i = 0; i < weapon_max; i++)
-   {
+void Wep_GInit(void) {
+   for(i32 i = 0; i < weapon_max; i++) {
       struct weaponinfo *info = (struct weaponinfo *)&weaponinfo[i];
       info->type = i;
    }
@@ -82,8 +84,7 @@ void Wep_GInit(void)
 
 /* Update information on what weapons we have. */
 script
-void P_Wep_PTickPre()
-{
+void P_Wep_PTickPre() {
    struct weapondata *w = &pl.weapon;
 
    w->prev = w->cur;
@@ -93,12 +94,12 @@ void P_Wep_PTickPre()
    for(i32 i = 0; i < SLOT_MAX; i++) w->slot[i] = 0;
 
    /* Iterate over each weapon setting information on it. */
-   for(i32 i = weapon_min; i < weapon_max; i++)
-   {
+   for(i32 i = weapon_min; i < weapon_max; i++) {
       struct weaponinfo const *info = &weaponinfo[i];
       struct invweapon *wep = &w->inv[i];
 
-      if(!(pl.pclass & info->pclass) || !(wep->owned = InvNum(info->classname)))
+      if(!(pl.pclass & info->pclass) ||
+         !(wep->owned = InvNum(info->classname)))
          continue;
 
       w->slot[info->slot] += wep->owned;
@@ -128,33 +129,37 @@ void P_Wep_PTickPre()
       }
 
       /* Set magazine and ammo counts. */
-      if(w->cur == wep)
-      {
-         if(wep->ammotype & AT_NMag)
-         {
+      if(w->cur == wep) {
+         if(wep->ammotype & AT_NMag) {
             wep->magmax = ServCallI(sm_GetMaxMag, wep->info->classname);
             wep->magcur = ServCallI(sm_GetCurMag, wep->info->classname);
          }
 
-         if(wep->ammotype & AT_Ammo)
-         {
+         if(wep->ammotype & AT_Ammo) {
             wep->ammomax = InvMax(wep->ammoclass);
             wep->ammocur = InvNum(wep->ammoclass);
          }
       }
 
       /* Auto-reload. */
-      if(pl.autoreload && wep->ammotype & AT_NMag && !(wep->ammotype & AT_Mana))
+      if(get_bit(pl.upgrades[UPGR_AutoReload].flags, _ug_active) &&
+         wep->ammotype & AT_NMag && !(wep->ammotype & AT_Mana))
       {
-         if(wep->autoreload >= 35 * 3)
+         if(wep->autoreload >= 35 * 3) {
             ServCallI(sm_AutoReload, info->classname);
+         }
 
-         if(w->cur != wep) wep->autoreload++;
-         else              wep->autoreload = 0;
+         if(w->cur != wep) {
+            wep->autoreload++;
+         } else {
+            wep->autoreload = 0;
+         }
       }
    }
 
-   if(!w->cur) w->cur = &w->inv[weapon_unknown];
+   if(!w->cur) {
+      w->cur = &w->inv[weapon_unknown];
+   }
 }
 
 script
@@ -190,8 +195,7 @@ void P_Wep_PTick() {
 /* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr(OBJ "WeaponPickup")
-bool Sc_WeaponPickup(i32 name)
-{
+bool Sc_WeaponPickup(i32 name) {
    if(P_None()) return false;
 
    bool weaponstay = CVarGetI(sc_sv_weaponstay);
@@ -199,22 +203,20 @@ bool Sc_WeaponPickup(i32 name)
 
    parm = Wep_FromName(name);
 
-   if(parm >= weapon_max || parm < weapon_min)
+   if(parm >= weapon_max || parm < weapon_min) {
       return true;
+   }
 
    struct weaponinfo const *info = &weaponinfo[parm];
 
-   if(HasWeapon(parm))
-   {
+   if(HasWeapon(parm)) {
       if(!weaponstay) {
          WeaponGrab(info);
          PickupScore(parm);
       }
 
       return !weaponstay;
-   }
-   else
-   {
+   } else {
       WeaponGrab(info);
 
       pl.weaponsheld++;
@@ -229,13 +231,11 @@ bool Sc_WeaponPickup(i32 name)
 }
 
 script_str ext("ACS") addr(OBJ "CircleSpread")
-k32 Sc_CircleSpread(k32 mdx, k32 mdy, bool getpitch)
-{
+k32 Sc_CircleSpread(k32 mdx, k32 mdy, bool getpitch) {
    noinit static
    k32 y, p;
 
-   if(!getpitch)
-   {
+   if(!getpitch) {
       k32 dx = ACS_RandomFixed(mdx,  0.0);
       k32 dy = ACS_RandomFixed(mdy,  0.0);
       k32 a  = ACS_RandomFixed(1.0, -1.0);
@@ -244,24 +244,21 @@ k32 Sc_CircleSpread(k32 mdx, k32 mdy, bool getpitch)
       p = ACS_Cos(a) * dy;
 
       return y;
-   }
-   else
+   } else {
       return p;
+   }
 }
 
 script_str ext("ACS") addr(OBJ "ChargeFistDamage")
-i32 Sc_ChargeFistDamage(void)
-{
+i32 Sc_ChargeFistDamage(void) {
    i32 amount = InvNum(so_FistCharge);
    InvTake(so_FistCharge, INT32_MAX);
    return amount * ACS_Random(1, 3);
 }
 
 script_str ext("ACS") addr(OBJ "AmmoRunOut")
-k32 Sc_AmmoRunOut(bool ro, k32 mul)
-{
-   if(!P_None())
-   {
+k32 Sc_AmmoRunOut(bool ro, k32 mul) {
+   if(!P_None()) {
       struct invweapon const *wep = pl.weapon.cur;
       k32 inv = wep->magcur / (k32)wep->magmax;
 
@@ -280,19 +277,18 @@ k32 Sc_AmmoRunOut(bool ro, k32 mul)
 }
 
 script_str ext("ACS") addr(OBJ "GetFinalizerMaxHealth")
-i32 Sc_GetFinalizerMaxHealth(void)
-{
+i32 Sc_GetFinalizerMaxHealth(void) {
    i32 sh = ServCallI(sm_GetSpawnHealth);
 
-   ifauto(dmon_t *, m, DmonSelf())
+   ifauto(dmon_t *, m, DmonSelf()) {
       return sh + (m->maxhealth - sh) * 0.5;
-   else
+   } else {
       return sh;
+   }
 }
 
 alloc_aut(0) script_str ext("ACS") addr(OBJ "SurgeOfDestiny")
-void Sc_SurgeOfDestiny(void)
-{
+void Sc_SurgeOfDestiny(void) {
    for(i32 i = 0; i < (35 * 17) / 2; i++) {
       ServCallI(sm_SurgeOfDestiny);
       ACS_Delay(2);
@@ -300,10 +296,8 @@ void Sc_SurgeOfDestiny(void)
 }
 
 script_str ext("ACS") addr(OBJ "GetWRF")
-i32 Sc_GetWRF(void)
-{
-   enum
-   {
+i32 Sc_GetWRF(void) {
+   enum {
       WRF_NOBOB         = 1,
       WRF_NOSWITCH      = 2,
       WRF_NOPRIMARY     = 4,
@@ -320,13 +314,14 @@ i32 Sc_GetWRF(void)
 
    i32 flags = 0;
 
-   if(!P_None())
-   {
-      if(pl.semifrozen)
+   if(!P_None()) {
+      if(pl.semifrozen) {
          flags |= WRF_NOFIRE;
+      }
 
-      if(pl.pclass & (pcl_marine | pcl_darklord))
+      if(pl.pclass & (pcl_marine | pcl_darklord)) {
          flags |= WRF_ALLOWUSER4;
+      }
    }
 
    return flags;
@@ -355,9 +350,10 @@ void Sc_PoisonFXTicker(void) {
 }
 
 script_str ext("ACS") addr(OBJ "RecoilUp")
-void Sc_RecoilUp(k32 amount)
-{
-   if(!P_None()) pl.extrpitch += amount / 180.0lk;
+void Sc_RecoilUp(k32 amount) {
+   if(!P_None()) {
+      pl.extrpitch += amount / 180.0lk;
+   }
 }
 
 /* EOF */

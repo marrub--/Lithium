@@ -38,7 +38,7 @@ _uc_body:
 
 _uc_weap:
    gO:
-      AutoReload: {scr: 950050, f: AD---, pr: 2}
+      AutoReload: {scr: 950050, f: -----, pr: 2}
 
    pM:
       Pistol_A:  {scr:  140940, f: -----}
