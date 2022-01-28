@@ -15,7 +15,7 @@ override void flashItem(class<Inventory> itemtype) {}
 override void drawPowerups() {}
 
 override bool processMidPrint(Font fnt, string text, bool bold) {
-   Lith_HERMES.log(msg_huds, 1, text);
+   if(text && text.length()) Lith_HERMES.log(msg_huds, 1, text);
    return true;
 }
 
