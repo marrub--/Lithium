@@ -337,12 +337,16 @@ void P_Scr_Take(i96 score) {
 
 /* Static Functions -------------------------------------------------------- */
 
-dynam_aut script static
-void P_bossWarning() {
-   ACS_Delay(35 * 5);
-
+script static
+void P_bossWarningDone() {
    if(bossspawned)
       pl.logB(1, tmpstr(lang_fmt_discrim(LANG "LOG_BossWarn%s")));
+}
+
+alloc_aut(0) script static
+void P_bossWarning() {
+   ACS_Delay(35 * 5);
+   P_bossWarningDone();
 }
 
 dynam_aut script static

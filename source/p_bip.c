@@ -31,18 +31,8 @@ noinit
 struct page bippages[512];
 mem_size_t  bippagenum;
 
-dynam_aut script static
-void MailNotify(cstr name) {
-   pl.setActivator();
-
-   bip.mailreceived++;
-
-   #ifndef NDEBUG
-   if(dbgflags(dbgf_bip)) return;
-   #endif
-
-   ACS_Delay(20);
-
+script static
+void MailNotifyFinish(cstr name) {
    char remote[128];
    faststrcpy_str(remote, ns(lang_fmt(LANG "INFO_REMOT_%s", name)));
 
@@ -54,6 +44,21 @@ void MailNotify(cstr name) {
    } else {
       AmbientSound(ss_player_cbi_mail, 1.0);
    }
+}
+
+alloc_aut(0) script static
+void MailNotify(cstr name) {
+   pl.setActivator();
+
+   bip.mailreceived++;
+
+   #ifndef NDEBUG
+   if(dbgflags(dbgf_bip)) return;
+   #endif
+
+   ACS_Delay(20);
+
+   MailNotifyFinish(name);
 }
 
 script

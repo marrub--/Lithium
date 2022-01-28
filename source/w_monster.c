@@ -127,8 +127,8 @@ void BaseMonsterLevel(dmon_t *m) {
 
    bias *= bias;
    switch(ACS_GameSkill()) {
-   case _skill_normal:    bias += 0.3; break;
-   case _skill_hard:      bias += 0.4; break;
+   case _skill_normal:    bias += 0.2; break;
+   case _skill_hard:      bias += 0.3; break;
    case _skill_tourist:   bias += 0.1; break;
    case _skill_nightmare: bias += 0.5; break;
    }
