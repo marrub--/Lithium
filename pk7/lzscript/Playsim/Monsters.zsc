@@ -141,21 +141,22 @@ static void SpawnBoss(Actor a, string name, int phase)
    } else if(phase == 3) {
       b.DamageMultiply   = 2;
       b.ReactionTime     = 2;
-      b.Health           = int(b.Health * 2.0);
+      b.Health          *= 2;
       b.bMISSILEMORE     = true;
       b.bMISSILEEVENMORE = true;
    }
 }
 
-static void TriggerBoss()
-{
-   if(ACS_ExecuteWithResult(lsc_wdata, wdata_bossspawned)) return;
+static void triggerBoss() {
+   if(acs_executeWithResult(lsc_wdata, wdata_bossspawned)) return;
+
+   double minRadius = getDefaultByType('Lith_Phantom').radius;
+   double minHeight = getDefaultByType('Lith_Phantom').height;
 
    Actor mo;
-   for(let it = ThinkerIterator.Create(); (mo = Actor(it.Next()));)
-   {
-      if(mo.bISMONSTER && mo.Health >= 500) {
-         mo.ACS_ScriptCall("Lith_SpawnBoss", 0);
+   for(let it = ThinkerIterator.create(); (mo = Actor(it.next()));) {
+      if(mo.bIsMonster && mo.radius >= minRadius && mo.height >= minHeight) {
+         mo.acs_scriptCall("Lith_SpawnBoss", 0);
          break;
       }
    }
