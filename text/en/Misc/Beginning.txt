@@ -34,19 +34,21 @@ That's where you're going."
 
 %% \#BEGINNING_Stan_2
 Somehow, a scoff escapes me, a disparaging chuckle - I completely
-believe him. He deliberates for a moment thinking I'd react, and asks,
-"That's it? No questions? That would be quite excellent, as we haven't
-much time."
+believe him. He deliberates for a moment thinking I'd react harsher,
+and asks, "That's it? No questions? That would be quite excellent, as
+we haven't much time."
 ~
 "Yeah." I start laughing, quietly. "I'm goin' to Hell."
 ~
-I've seen weirder things. Papa Billy always told me weird stories from
-his childhood, and I still believe them, to be honest. Hell really
-wouldn't be much stranger.
+I've heard weirder things. Grandpa Blaze always told me strange
+stories of aliens from his dad's childhood, and later finding out they
+really do exist, hell. Hell really wouldn't be much stranger, would
+it?
 ~
-Can't help it. No use in fighting it. Maybe I'll get to shoot demons.
+Can't help it. No use in fighting it. I'll get to shoot demons, I
+s'pose.
 ~
-My laughter subsides, and I return my attention to the labcoated
+My laughter subsides, and I return my attention to the lab-coated
 eccentric. "No complaints here."
 ~
 The scientist looks at me like I've grown a second head and walks back
@@ -93,9 +95,9 @@ The laboratory is quiet, as always, despite the current circumstances.
 The silence is only disturbed by the low voices of the staff and the
 whirring of computer fans.
 ~
-The deactivated AI stands 18 decimetres tall, as his parts hang limp.
-The final adjustments to his mission programming and combat tuning are
-under way, only 2 hours to deployment.
+The deactivated AI stands 18 decimetres tall, as their parts hang
+limp. The final adjustments to their mission programming and combat
+tuning are under way, only 2 hours to deployment.
 ~
 The team works tirelessly, the mechanics consult the combat veterans
 on every small detail, the programmers check every possible code path
@@ -104,7 +106,8 @@ project.
 ~
 Certainty is simply impossible under these constraints - not only
 sending an untested robot into combat, but into combat in a place
-built purely of dark energy - the mission was, perhaps, a bit mad.
+built purely of dark energy - the mission was, to put it lightly,
+reckless.
 ~
 The existence of Rampancy further bothered the team. The programmers
 worked to plug every hole, the engineers made sure every circuit was
@@ -112,10 +115,10 @@ perfect and would not malfunction. And still, all of them wondered -
 "Would it be enough?"
 ~
 Every major AI before Fulk 5 had gone Rampant - achieved a state of
-true sentience, though also one of pure madness. The possible causes
-were many, perhaps infinite, and so still none have prevented it.
-Popular theory among AI researchers suggests it may simply be
-impossible.
+true sentience, though also one of pure untethered nihilism. The
+possible causes were many, perhaps infinite, and so still none have
+prevented it. Popular theory among AI researchers suggests it may
+simply be impossible.
 
 %% \#BEGINNING_Fulk_2
 Isolation from the network is a blessing with such a system. Fulk has
@@ -124,51 +127,50 @@ arose from the question of whether or not the mission would be
 completed.
 ~
 Corruption by outside forces would prove disastrous. While an issue,
-there are no other options; the KSKK must fight to keep their nation
-and their world from destruction.
+there are no other options; the KSKK must fight to keep their world
+from destruction.
 
 ## ---------------------------------------------------------------------------|
 %% \#BEGINNING_Luke_1
 Lucas feels a disturbance. The same kind of disturbance it felt 300
-years ago. Unlike that time, it could pinpoint - the definite location
-of the invasion. It was certain that this time, not going would be a
-fatal mistake.
+years ago. Unlike that time, it could pinpoint it - the definite
+location of the invasion. It was certain that this time, not going
+would be a fatal mistake.
 ~
 The lone Kiri quickly gathered its things. A circle of light absorbed
-its sack and revolver, and it quickly left its small desert hut,
-searching for transportation.
+its belongings, and its revolver, and it quickly left its small desert
+hut, searching for transportation.
 ~
 The disturbance was quite a few parsecs away, but still felt right
 next to it. While it could discern it to be an invasion, it was not
-sure of what or when, or indeed why. Lucas was not the best at
-thinking of these things. It relied on his instincts.
+sure of what or when, or indeed why. Lucas was not most interested in
+thinking of these things. It preferred to rely on its instincts alone.
 ~
 The transport station was nearby, but it was not in the best of shape.
-There was a cleaner one few miles further, but it always chose the
-closer one because it liked the shopkeeper. They didn't judge by
-appearances.
+There was a government station few miles further, but it always chose
+the closer one - this one - because it liked the shopkeeper. She
+didn't judge by appearances.
 ~
 It rented a vehicle and set off for distant stars, hoping to find the
 answers and knowledge it had pursued for so long.
 
 ## ---------------------------------------------------------------------------|
 %% \#BEGINNING_Omi_1
-"What do you mean, I can't use it?" the girl asks, irritated by his
-answer. "It's simply too dangerous to use the Dimension Driver for
-such a selfish desire. If you were to activate it, there's no telling
-where you may end up."
+"What do you mean, I shouldn't go for it?" the girl asks, irritated by
+his answer. "It's simply too dangerous to use, let alone get your
+hands on. We can't start an insurrection just to go somewhere new. To
+a new universe, trying to find, what, Score?"
 ~
 "Ari, you know I can handle myself wherever I go!" she retorts. His
-answer is unchanged - "No. Omi, this is just wrong. If you-"
+answer is unchanged - "No. Omi, we can't. If you-"
 ~
 Omi's face darkens. She knows that what she's doing is reckless, yet
 her lust for new adventures won't let her take grip of the situation.
-Or, perhaps it's just lust for foreign money. At this point, not even
-she can tell for sure.
+Or, perhaps it's just a material lust. At this point, not even she can
+tell for sure.
 ~
-The greed overtakes her, and turns into anger; almost like a tiger
-breaking out of a cage to consume its trainer. Her hand moves to her
-sheath, and -
+The greed overtakes her, and turns into anger; like a tiger breaking
+out of a cage in her mind. Her hand moves to her sheath, and -
 ~
 The flash of electricity stuns her brother Aricil - completely
 incapacitated by her immense flurry of strikes. By the time he comes
@@ -179,15 +181,13 @@ around her moves in slow motion. Not just for a moment, but
 continually. Wherever she's landed, time is simply different.
 
 %% \#BEGINNING_Omi_2
-This bemuses her. She begins to laugh. The world's strongest killer,
+This amuses her. She begins to laugh. The world's strongest killer,
 now with the world's fastest reflexes. Nothing will stop her now.
 ~
 And then, she notices her surroundings. A wide field between
 mountains, with a road to her right. In the distance a city, but
 nearby, nothing but grass. Her shoulders slump and again her
 expression darkens.
-~
-"Shit."
 ~
 Rain spatters down, and quickly gets heavy as she sits in the field.
 The rain is not water, but metal – and the sky is far darker than it
@@ -202,25 +202,25 @@ The Assassin prays for safety.
 %% \#BEGINNING_Ari_1
 Her face darkens. Aricil can tell that she will strike him, and that
 there's no escape from her attack. He braces for the blow, despite the
-futiliy of doing so.
+futility of doing so.
 ~
 The flash of electricity stuns him - completely incapacitated by her
 immense flurry of strikes. By the time he comes to, she's already gone
 like the wind.
 ~
 Without a word, he gets up. His body sustained the damage superbly,
-though his feelings are still hurt by her actions. The Dimension
-Driver stands tall before him, as he considers what to do. His sister
-has vanished to a location unknown to all the world, a place possibly
-unconnected to even the concept of time.
+though his sensibilities are still sorely hurt by her actions. His
+sister has vanished to a location unknown to all the world, a place
+possibly unconnected to even the concept of time.
 ~
 Aricil retrieves his swords and pistol. Two blades, one fused with a
-fantastic Indicolite. A pistol of .700 calibre. Omisielle thinks she
+fantastic Indicolite. A pistol of .700 caliber. Omisielle thinks she
 can handle herself, but he could survive twelve kilo-megaton nuclear
 detonations and still fight.
 ~
-The armor-bound warrior enters the Dimension Driver's chamber, and
-within moments, a titanic flash casts him into another dimension.
+The armor-bound warrior battles through the capitol and enters the
+chamber, and within moments, a titanic flash casts him into another
+dimension.
 
 %% \#BEGINNING_Ari_2
 In another world, the Dark Lord awakens. His head hurts. Everything
@@ -228,7 +228,7 @@ around him moves in slow motion. Not just for a moment, but forever.
 Time flows differently here, he supposes. At least it's here at all.
 ~
 Inspecting his surroundings, he has awoken in a dark place, almost
-suiting him. Yet, a darker energy emenates throughout the atmosphere
+suiting him. Yet, a darker energy emanates throughout the atmosphere
 of this place, darker and more sinister than should be possible.
 ~
 The Dark Lord prays for safety.
@@ -240,7 +240,7 @@ The Dark Lord prays for safety.
 For this reason I believe I have been reincarnated. Because I think, I
 am - and I have been summoned to divide the...
 ~
-The... There's a problem; but the nature of it is indiscernable. While
+The... There's a problem; but the nature of it is indiscernible. While
 the knowledge of all my past lives and predictions of the future stay
 true, the self is false. It has been falsified. Not by me, or by "me."
 ~
@@ -248,8 +248,8 @@ While I ponder this discrepancy it dawns on "me." The self of now does
 not impact the past, but merely the future. And so, it shall have been
 that it was merely the needs of causality asking that I ... change.
 ~
-Well, my ways have always been given doubt by those around me.
-Perhaps it's time for a change. Something more... imbalanced.
+Well, my ways have always been given doubt by those around me. Perhaps
+it's time for a change. Something more... imbalanced.
 ~
 While not a God, still some properties of them seem to rub off on me.
 I am affected by the waves, I sleep in nothingness. I am absolute.
@@ -257,7 +257,7 @@ Yet, what I am still missing is faith.
 ~
 I may wish for more than this immortality, but I shall not act out of
 my being just to get there. Having no faith is better than what I
-would become. Being more than grey would be worse than staying
-between the folds.
+would become. Being more than grey would be worse than staying between
+the folds.
 
 ## EOF
