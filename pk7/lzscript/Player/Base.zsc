@@ -70,7 +70,8 @@ override void GiveDefaultInventory() {
 }
 
 void lith_giveDefItem(class<Inventory> type, int amount) {
-   giveInventoryType(type).amount = amount;
+   let inv = giveInventoryType(type);
+   if(inv) inv.amount = amount;
 }
 
 void Lith_GiveDefWeapon(class<Weapon> type) {

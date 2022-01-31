@@ -91,7 +91,8 @@ default
    Lith_Weapon.AmmoType "Lith_ManaAmmo";
    Inventory.AltHudIcon "SPELD0";
 
-   -WEAPON.NOAUTOFIRE
+   -Weapon.NoAutoFire
+   +Inventory.Unclearable
 }
 
 states(Weapon)
