@@ -134,17 +134,21 @@ override vector2 BobWeapon(double ticfrac) {
       p[i] = (bobx, boby);
    }
 
-   // interpolate the positions based on the tic fraction
-   vector2 interp = Lith_UTIL.vec2Lerp(p[0], p[1], ticfrac);
+   if(!level.isFrozen()) {
+      // interpolate the positions based on the tic fraction
+      vector2 interp = Lith_UTIL.vec2Lerp(p[0], p[1], ticfrac);
 
-   // extra factors such as view movement
-   interp.x -= Lith_UTIL.Lerp(m_LastVYaw, m_VYaw, ticfrac) / 2;
-   interp.y -= Lith_UTIL.Lerp(m_LastVPitch, m_VPitch, ticfrac) * 3;
-   interp.y += Lith_UTIL.Lerp(m_LastVZVel, m_VZVel, ticfrac);
-   interp.x += Lith_UTIL.Lerp(m_LastVXVel, m_VXVel, ticfrac);
-   interp.y += Lith_UTIL.Lerp(m_LastVYVel, m_VYVel, ticfrac);
+      // extra factors such as view movement
+      interp.x -= Lith_UTIL.Lerp(m_LastVYaw, m_VYaw, ticfrac) / 2;
+      interp.y -= Lith_UTIL.Lerp(m_LastVPitch, m_VPitch, ticfrac) * 3;
+      interp.y += Lith_UTIL.Lerp(m_LastVZVel, m_VZVel, ticfrac);
+      interp.x += Lith_UTIL.Lerp(m_LastVXVel, m_VXVel, ticfrac);
+      interp.y += Lith_UTIL.Lerp(m_LastVYVel, m_VYVel, ticfrac);
 
-   return interp;
+      return interp;
+   } else {
+      return p[1];
+   }
 }
 
 /* EOF */
