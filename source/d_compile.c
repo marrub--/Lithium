@@ -59,15 +59,13 @@ struct cheat cht_dbg_dlg = cheat_s("pgdoki", 2, chtf_dbg_dlg, "Doki Doki Dialogu
 #endif
 
 static
-void FinishDef(struct compiler *d)
-{
+void FinishDef(struct compiler *d) {
    if(d->def.codeV) dlgdefs[d->num] = d->def;
    fastmemset(&d->def, 0, sizeof d->def);
 }
 
 static
-void Dlg_GetItem_Page(struct compiler *d, u32 num, u32 act)
-{
+void Dlg_GetItem_Page(struct compiler *d, u32 num, u32 act) {
    d->def.pages[num] = d->def.codeP;
 
    Dbg_Log(log_dlg, "--- page %u (%u)", num, d->def.codeP);
@@ -113,8 +111,7 @@ bool Dlg_GetItem(struct compiler *d, u32 act) {
 }
 
 static
-void Dlg_GetTop_Prog(struct compiler *d, u32 act, u32 beg, u32 end)
-{
+void Dlg_GetTop_Prog(struct compiler *d, u32 act, u32 beg, u32 end) {
    struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_number, 0);
    unwrap(&d->res);
 
@@ -140,8 +137,7 @@ void Dlg_GetTop_Prog(struct compiler *d, u32 act, u32 beg, u32 end)
 
 /* Extern Functions -------------------------------------------------------- */
 
-u32 Dlg_WriteCode(struct dlg_def const *def, u32 c, u32 i)
-{
+u32 Dlg_WriteCode(struct dlg_def const *def, u32 c, u32 i) {
    u32 c2, c3;
 
    struct dcd_info const *inf = &dcdinfo[c];
@@ -154,61 +150,60 @@ u32 Dlg_WriteCode(struct dlg_def const *def, u32 c, u32 i)
    }
 
    switch(inf->adrm) {
-      case ADRM_AI:
-         c2 = Cps_GetC(def->codeV, i++);
-         c3 = Cps_GetC(def->codeV, i++);
-         __nprintf("%02X %02X %s $%02X%02X  ", c2, c3, inf->name, c3, c2);
-         break;
-      case ADRM_AX:
-         c2 = Cps_GetC(def->codeV, i++);
-         c3 = Cps_GetC(def->codeV, i++);
-         __nprintf("%02X %02X %s $%02X%02X,X", c2, c3, inf->name, c3, c2);
-         break;
-      case ADRM_AY:
-         c2 = Cps_GetC(def->codeV, i++);
-         c3 = Cps_GetC(def->codeV, i++);
-         __nprintf("%02X %02X %s $%02X%02X,Y", c2, c3, inf->name, c3, c2);
-         break;
-      case ADRM_II:
-         c2 = Cps_GetC(def->codeV, i++);
-         c3 = Cps_GetC(def->codeV, i++);
-         __nprintf("%02X %02X %s ($%02X%02X)", c2, c3, inf->name, c3, c2);
-         break;
-      case ADRM_IX:
-         c2 = Cps_GetC(def->codeV, i++);
-         __nprintf("%02X    %s ($%02X,X) ", c2, inf->name, c2);
-         break;
-      case ADRM_IY:
-         c2 = Cps_GetC(def->codeV, i++);
-         __nprintf("%02X    %s ($%02X),Y", c2, inf->name, c2);
-         break;
-      case ADRM_NP:
-         __nprintf("      %s        ", inf->name);
-         break;
-      case ADRM_ZI:
-      case ADRM_RI:
-         c2 = Cps_GetC(def->codeV, i++);
-         __nprintf("%02X    %s $%02X    ", c2, inf->name, c2);
-         break;
-      case ADRM_VI:
-         c2 = Cps_GetC(def->codeV, i++);
-         __nprintf("%02X    %s #$%02X   ", c2, inf->name, c2);
-         break;
-      case ADRM_ZX:
-         c2 = Cps_GetC(def->codeV, i++);
-         __nprintf("%02X    %s $%02X,X  ", c2, inf->name, c2);
-         break;
-      case ADRM_ZY:
-         c2 = Cps_GetC(def->codeV, i++);
-         __nprintf("%02X    %s $%02X,Y  ", c2, inf->name, c2);
-         break;
+   case ADRM_AI:
+      c2 = Cps_GetC(def->codeV, i++);
+      c3 = Cps_GetC(def->codeV, i++);
+      __nprintf("%02X %02X %s $%02X%02X  ", c2, c3, inf->name, c3, c2);
+      break;
+   case ADRM_AX:
+      c2 = Cps_GetC(def->codeV, i++);
+      c3 = Cps_GetC(def->codeV, i++);
+      __nprintf("%02X %02X %s $%02X%02X,X", c2, c3, inf->name, c3, c2);
+      break;
+   case ADRM_AY:
+      c2 = Cps_GetC(def->codeV, i++);
+      c3 = Cps_GetC(def->codeV, i++);
+      __nprintf("%02X %02X %s $%02X%02X,Y", c2, c3, inf->name, c3, c2);
+      break;
+   case ADRM_II:
+      c2 = Cps_GetC(def->codeV, i++);
+      c3 = Cps_GetC(def->codeV, i++);
+      __nprintf("%02X %02X %s ($%02X%02X)", c2, c3, inf->name, c3, c2);
+      break;
+   case ADRM_IX:
+      c2 = Cps_GetC(def->codeV, i++);
+      __nprintf("%02X    %s ($%02X,X) ", c2, inf->name, c2);
+      break;
+   case ADRM_IY:
+      c2 = Cps_GetC(def->codeV, i++);
+      __nprintf("%02X    %s ($%02X),Y", c2, inf->name, c2);
+      break;
+   case ADRM_NP:
+      __nprintf("      %s        ", inf->name);
+      break;
+   case ADRM_ZI:
+   case ADRM_RI:
+      c2 = Cps_GetC(def->codeV, i++);
+      __nprintf("%02X    %s $%02X    ", c2, inf->name, c2);
+      break;
+   case ADRM_VI:
+      c2 = Cps_GetC(def->codeV, i++);
+      __nprintf("%02X    %s #$%02X   ", c2, inf->name, c2);
+      break;
+   case ADRM_ZX:
+      c2 = Cps_GetC(def->codeV, i++);
+      __nprintf("%02X    %s $%02X,X  ", c2, inf->name, c2);
+      break;
+   case ADRM_ZY:
+      c2 = Cps_GetC(def->codeV, i++);
+      __nprintf("%02X    %s $%02X,Y  ", c2, inf->name, c2);
+      break;
    }
 
    return i;
 }
 
-void Dlg_MInit(void)
-{
+void Dlg_MInit(void) {
    /* Free any previous dialogue definitions. */
    for(u32 i = 0; i < countof(dlgdefs); i++) {
       struct dlg_def *def = &dlgdefs[i];

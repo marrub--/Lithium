@@ -39,6 +39,9 @@ GlobalCrH(wselm1) GlobalCrH(wselm2) GlobalCrH(wselm3) GlobalCrH(wselms)
    DrawCallI(sm_LR, (i32)(x), (i32)(y), (i32)(w), (i32)(h), \
              (i32)(c))
 
+#define PrintFill(c) \
+   DrawCallI(sm_LW, (i32)(c))
+
 #define PrintLine(x, y, z, w, c) \
    DrawCallI(sm_LL, (i32)(x), (i32)(y), (i32)(z), (i32)(w), (i32)(c))
 

@@ -15,8 +15,7 @@
 
 /* Extern Functions -------------------------------------------------------- */
 
-void Dlg_GetStmt_Cond(struct compiler *d)
-{
+void Dlg_GetStmt_Cond(struct compiler *d) {
    struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, 0);
    unwrap(&d->res);
 
@@ -102,8 +101,7 @@ void Dlg_GetStmt_Cond(struct compiler *d)
    }
 }
 
-void Dlg_GetStmt_Option(struct compiler *d)
-{
+void Dlg_GetStmt_Option(struct compiler *d) {
    struct ptr2 adr;
 
    struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, tok_string, 0);
@@ -130,29 +128,33 @@ void Dlg_GetStmt_Option(struct compiler *d)
    Dlg_SetB2(d, ptr - 2, PRG_BEG + d->def.codeP); unwrap(&d->res);
 }
 
-void Dlg_GetStmt_Page(struct compiler *d)
-{
+void Dlg_GetStmt_Page(struct compiler *d) {
    struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_number, 0);
    unwrap(&d->res);
    Dlg_PushB1(d, DCD_JPG_VI); unwrap(&d->res);
    Dlg_PushB1(d, faststrtoi32(tok->textV)); unwrap(&d->res);
+
+   tok = d->tb.expc(&d->res, d->tb.get(), tok_semico, 0);
+   unwrap(&d->res);
 }
 
-void Dlg_GetStmt_Str(struct compiler *d, u32 adr)
-{
+void Dlg_GetStmt_Str(struct compiler *d, u32 adr) {
    struct token *tok =
       d->tb.expc(&d->res, d->tb.get(), tok_identi, tok_string, tok_number, 0);
    unwrap(&d->res);
    u32 s = Dlg_PushStr(d, tok->textV, tok->textC);
    unwrap(&d->res);
    Dlg_PushLdAdr(d, adr, s); unwrap(&d->res);
+
+   tok = d->tb.expc(&d->res, d->tb.get(), tok_semico, 0);
+   unwrap(&d->res);
 }
 
-void Dlg_GetStmt_Terminal(struct compiler *d, u32 act)
-{
+void Dlg_GetStmt_Terminal(struct compiler *d, u32 act) {
+   struct token *tok;
    if(act != TACT_INFO) {
-      struct token *tok =
-         d->tb.expc(&d->res, d->tb.get(), tok_identi, tok_string, tok_number, 0);
+      tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, tok_string, 0);
+      unwrap(&d->res);
       u32 s = Dlg_PushStr(d, tok->textV, tok->textC);
       unwrap(&d->res);
       Dlg_PushLdAdr(d, VAR_PICTL, s); unwrap(&d->res);
@@ -160,26 +162,46 @@ void Dlg_GetStmt_Terminal(struct compiler *d, u32 act)
 
    Dlg_GetStmt(d); unwrap(&d->res);
 
-   Dlg_PushB1(d, DCD_LDA_VI); unwrap(&d->res);
-   Dlg_PushB1(d, act & 0xFF); unwrap(&d->res);
-
-   Dlg_PushB1(d, DCD_STA_AI); unwrap(&d->res);
-   Dlg_PushB2(d, VAR_TACT); unwrap(&d->res);
-
+   Dlg_PushB1(d, DCD_LDA_VI);     unwrap(&d->res);
+   Dlg_PushB1(d, act & 0xFF);     unwrap(&d->res);
+   Dlg_PushB1(d, DCD_STA_AI);     unwrap(&d->res);
+   Dlg_PushB2(d, VAR_TACT);       unwrap(&d->res);
    Dlg_PushLdVA(d, ACT_TRM_WAIT); unwrap(&d->res);
 }
 
-void Dlg_GetStmt_Num(struct compiler *d, u32 act)
-{
+void Dlg_GetStmt_Finale(struct compiler *d, u32 act) {
+   struct token *tok;
+   if(act == FACT_CRAWL) {
+      tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, tok_string, 0);
+      unwrap(&d->res);
+      u32 s = Dlg_PushStr(d, tok->textV, tok->textC);
+      unwrap(&d->res);
+      Dlg_PushLdAdr(d, VAR_TEXTL, s); unwrap(&d->res);
+   }
+
+   tok = d->tb.expc(&d->res, d->tb.get(), tok_number, 0);
+   unwrap(&d->res);
+   Dlg_PushLdAdr(d, VAR_ADRL, faststrtoi32(tok->textV) & 0xFFFF); unwrap(&d->res);
+
+   Dlg_PushB1(d, DCD_LDA_VI);     unwrap(&d->res);
+   Dlg_PushB1(d, act & 0xFF);     unwrap(&d->res);
+   Dlg_PushB1(d, DCD_STA_AI);     unwrap(&d->res);
+   Dlg_PushB2(d, VAR_FACT);       unwrap(&d->res);
+   Dlg_PushLdVA(d, ACT_FIN_WAIT); unwrap(&d->res);
+}
+
+void Dlg_GetStmt_Num(struct compiler *d, u32 act) {
    struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_number, 0);
    unwrap(&d->res);
 
    Dlg_PushLdAdr(d, VAR_ADRL, faststrtoi32(tok->textV) & 0xFFFF); unwrap(&d->res);
    Dlg_PushLdVA(d, act); unwrap(&d->res);
+
+   tok = d->tb.expc(&d->res, d->tb.get(), tok_semico, 0);
+   unwrap(&d->res);
 }
 
-void Dlg_GetStmt_Script(struct compiler *d)
-{
+void Dlg_GetStmt_Script(struct compiler *d) {
    struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_string, tok_number, 0);
    unwrap(&d->res);
 
@@ -216,63 +238,82 @@ void Dlg_GetStmt_Script(struct compiler *d)
    }
 
    Dlg_PushLdVA(d, act); unwrap(&d->res);
+
+   tok = d->tb.expc(&d->res, d->tb.get(), tok_semico, 0);
+   unwrap(&d->res);
 }
 
-void Dlg_GetStmt_Block(struct compiler *d)
-{
+void Dlg_GetStmt_Block(struct compiler *d) {
    while(!d->tb.drop(tok_bracec)) {
       Dlg_GetStmt(d); unwrap(&d->res);
    }
 }
 
-script void Dlg_GetStmt(struct compiler *d)
-{
+script void Dlg_GetStmt(struct compiler *d) {
    struct token *tok = d->tb.get();
 
    switch(tok->type) {
-      case tok_braceo:
-         Dlg_GetStmt_Block(d);
-         unwrap(&d->res);
-         break;
-      case tok_identi:
-         Dbg_Log(log_dlg, "%s: %s", __func__, tok->textV);
+   case tok_braceo:
+      Dlg_GetStmt_Block(d);
+      unwrap(&d->res);
+      break;
+   case tok_identi: {
+      Dbg_Log(log_dlg, "%s: %s", __func__, tok->textV);
 
-         switch(Dlg_StmtName(tok->textV)) {
-         case _dlg_stmt_if:     Dlg_GetStmt_Cond(d);                  break;
-         case _dlg_stmt_option: Dlg_GetStmt_Option(d);                break;
-         case _dlg_stmt_page:   Dlg_GetStmt_Page(d);                  break;
-         case _dlg_stmt_name:   Dlg_GetStmt_Str(d, VAR_NAMEL);        break;
-         case _dlg_stmt_icon:   Dlg_GetStmt_Str(d, VAR_ICONL);        break;
-         case _dlg_stmt_remote: Dlg_GetStmt_Str(d, VAR_REMOTEL);      break;
-         case _dlg_stmt_text:   Dlg_GetStmt_Str(d, VAR_TEXTL);        break;
-         case _dlg_stmt_script: Dlg_GetStmt_Script(d);                break;
-         case _dlg_stmt_logon:  Dlg_GetStmt_Terminal(d, TACT_LOGON);  break;
-         case _dlg_stmt_logoff: Dlg_GetStmt_Terminal(d, TACT_LOGOFF); break;
-         case _dlg_stmt_pict:   Dlg_GetStmt_Terminal(d, TACT_PICT);   break;
-         case _dlg_stmt_info:   Dlg_GetStmt_Terminal(d, TACT_INFO);   break;
-         case _dlg_stmt_teleport_interlevel:
-            Dlg_GetStmt_Num(d, ACT_TELEPORT_INTERLEVEL);
-            break;
-         case _dlg_stmt_teleport_intralevel:
-            Dlg_GetStmt_Num(d, ACT_TELEPORT_INTRALEVEL);
-            break;
-         default:
-            Dlg_GetStmt_Asm(d); break;
-         }
-         unwrap(&d->res);
+      switch(Dlg_StmtName(tok->textV)) {
+      /* conditionals */
+      case _dlg_stmt_if:     Dlg_GetStmt_Cond(d);   break;
+      case _dlg_stmt_option: Dlg_GetStmt_Option(d); break;
 
+      /* terminals */
+      case _dlg_stmt_logon:  Dlg_GetStmt_Terminal(d, TACT_LOGON);  break;
+      case _dlg_stmt_logoff: Dlg_GetStmt_Terminal(d, TACT_LOGOFF); break;
+      case _dlg_stmt_pict:   Dlg_GetStmt_Terminal(d, TACT_PICT);   break;
+      case _dlg_stmt_info:   Dlg_GetStmt_Terminal(d, TACT_INFO);   break;
+
+      /* finales */
+      case _dlg_stmt_fade_in:  Dlg_GetStmt_Finale(d, FACT_FADE_IN);  break;
+      case _dlg_stmt_fade_out: Dlg_GetStmt_Finale(d, FACT_FADE_OUT); break;
+      case _dlg_stmt_wait:     Dlg_GetStmt_Finale(d, FACT_WAIT);     break;
+      case _dlg_stmt_mus_fade: Dlg_GetStmt_Finale(d, FACT_MUS_FADE); break;
+      case _dlg_stmt_crawl:    Dlg_GetStmt_Finale(d, FACT_CRAWL);    break;
+
+      /* general */
+      case _dlg_stmt_page:   Dlg_GetStmt_Page(d);   break;
+      case _dlg_stmt_script: Dlg_GetStmt_Script(d); break;
+      case _dlg_stmt_teleport_interlevel:
+         Dlg_GetStmt_Num(d, ACT_TELEPORT_INTERLEVEL);
          break;
-      case tok_lt:
-         while((tok = d->tb.expc(&d->res, d->tb.get(), tok_number, tok_gt, 0))->type != tok_gt) {
-            unwrap(&d->res);
-            Dlg_PushB1(d, faststrtoi32(tok->textV)); unwrap(&d->res);
-         }
-      case tok_semico:
+      case _dlg_stmt_teleport_intralevel:
+         Dlg_GetStmt_Num(d, ACT_TELEPORT_INTRALEVEL);
          break;
+
+      /* strings */
+      case _dlg_stmt_name:   Dlg_GetStmt_Str(d, VAR_NAMEL);   break;
+      case _dlg_stmt_icon:   Dlg_GetStmt_Str(d, VAR_ICONL);   break;
+      case _dlg_stmt_remote: Dlg_GetStmt_Str(d, VAR_REMOTEL); break;
+      case _dlg_stmt_text:   Dlg_GetStmt_Str(d, VAR_TEXTL);   break;
+      case _dlg_stmt_music:  Dlg_GetStmt_Str(d, VAR_MUSICL);  break;
+      case _dlg_stmt_image:  Dlg_GetStmt_Str(d, VAR_PICTL);   break;
+
       default:
-         d->tb.err(&d->res, "%s invalid token in statement", TokPrint(tok));
-         unwrap(&d->res);
+         Dlg_GetStmt_Asm(d);
          break;
+      }
+      unwrap(&d->res);
+      break;
+   }
+   case tok_lt:
+      while((tok = d->tb.expc(&d->res, d->tb.get(), tok_number, tok_gt, 0))->type != tok_gt) {
+         unwrap(&d->res);
+         Dlg_PushB1(d, faststrtoi32(tok->textV)); unwrap(&d->res);
+      }
+   case tok_semico:
+      break;
+   default:
+      d->tb.err(&d->res, "%s invalid token in statement", TokPrint(tok));
+      unwrap(&d->res);
+      break;
    }
 }
 

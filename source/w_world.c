@@ -261,8 +261,8 @@ begin:
       return;
    } else if(MapNum == 1911777) {
       ACS_SetPlayerProperty(true, true, PROP_TOTALLYFROZEN);
-      F_Load();
       pl.setActivator();
+      Dlg_MInit();
       F_Run();
       return;
    }
@@ -332,7 +332,7 @@ begin:
       }
 
       if(ticks > CVarGetI(sc_sv_failtime) * 35 * 60 * 60 && !islithmap) {
-         F_Start("TimeOut");
+         F_Start(_finale_time_out);
          return;
       }
 

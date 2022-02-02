@@ -11,23 +11,23 @@
 terminal 1;
 
 unfinished {
-   remote OCS
+   remote OCS;
 
    if class pC {
-      logon "LogonAOF" text AOF
+      logon "LogonAOF" text AOF;
 
-      pict 1 text M1A1_01_C_01
-      pict 2 text M1A1_01_C_02
-      pict 1 text M1A1_01_C_03
+      pict 1 text M1A1_01_C_01;
+      pict 2 text M1A1_01_C_02;
+      pict 1 text M1A1_01_C_03;
 
-      logoff "LogonAOF" text AOF
+      logoff "LogonAOF" text AOF;
    } else {
-      logon "UAC" text UAC
+      logon "UAC" text UAC;
 
-      pict 1 text M1A1_01_M_01
-      pict 2 text M1A1_01_M_02
+      pict 1 text M1A1_01_M_01;
+      pict 2 text M1A1_01_M_02;
 
-      logoff "UAC" text UAC
+      logoff "UAC" text UAC;
    }
 }
 
@@ -35,38 +35,38 @@ unfinished {
 terminal 2;
 
 unfinished {
-   remote DATA
+   remote DATA;
 
-   logon "LogonData" text DATA
+   logon "LogonData" text DATA;
 
-   info text M1A1_02_01
+   info text M1A1_02_01;
 
-   logoff "LogonData" text DATA
+   logoff "LogonData" text DATA;
 
-   teleport_intralevel 4
+   teleport_intralevel 4;
 }
 
 /* ------------------------------------------------------------------------- */
 terminal 3;
 
 unfinished {
-   remote OCS
+   remote OCS;
 
    if class pC {
-      logon "LogonAOF" text AOF
+      logon "LogonAOF" text AOF;
 
-      pict 3 text M1A1_03_C_01
+      pict 3 text M1A1_03_C_01;
 
-      logoff "LogonAOF" text AOF
+      logoff "LogonAOF" text AOF;
    } else {
-      logon "UAC" text UAC
+      logon "UAC" text UAC;
 
-      pict 1 text M1A1_03_M_01
+      pict 1 text M1A1_03_M_01;
 
-      logoff "UAC" text UAC
+      logoff "UAC" text UAC;
    }
 
-   teleport_interlevel 102
+   teleport_interlevel 102;
 }
 
 /* EOF */

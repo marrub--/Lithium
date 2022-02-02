@@ -288,16 +288,16 @@ bool chtf_give_score(cheat_params_t const params) {
 
 script static
 bool chtf_end_game(cheat_params_t const params) {
-   cstr which;
+   i32 which;
    switch(params[0]) {
-   case 'd': which = "Division";    break;
-   case 'o': which = "Other";       break;
-   case 'n': which = "Normal";      break;
-   case 'b': which = "Barons";      break;
-   case 'c': which = "CyberDemon";  break;
-   case 's': which = "SpiderDemon"; break;
-   case 'i': which = "IconOfSin";   break;
-   case 't': which = "TimeOut";     break;
+   case 'n': which = _finale_normal;      break;
+   case 'b': which = _finale_barons;      break;
+   case 'c': which = _finale_cyberdemon;  break;
+   case 's': which = _finale_spiderdemon; break;
+   case 'i': which = _finale_icon_of_sin; break;
+   case 't': which = _finale_time_out;    break;
+   case 'd': which = _finale_division;    break;
+   case 'o': which = _finale_other;       break;
    default:
       return false;
    }

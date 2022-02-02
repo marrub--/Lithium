@@ -11,93 +11,93 @@
 terminal 1;
 
 unfinished {
-   remote OCS
+   remote OCS;
 
    if class pC {
-      logon "LogonAOF" text AOF
+      logon "LogonAOF" text AOF;
 
-      pict 1 text M1A2_01_C_01
-      pict 1 text M1A2_01_C_02
+      pict 1 text M1A2_01_C_01;
+      pict 1 text M1A2_01_C_02;
 
-      logoff "LogonAOF" text AOF
+      logoff "LogonAOF" text AOF;
    } else {
-      logon "UAC" text UAC
+      logon "UAC" text UAC;
 
-      pict 3 text M1A2_01_M_01
+      pict 3 text M1A2_01_M_01;
 
-      logoff "UAC" text UAC
+      logoff "UAC" text UAC;
    }
 
-   script "Lith_UnlockVents"
+   script "Lith_UnlockVents";
 }
 
 /* ------------------------------------------------------------------------- */
 terminal 2;
 
 unfinished {
-   remote DATA
+   remote DATA;
 
-   logon "LogonData" text DATA
+   logon "LogonData" text DATA;
 
-   info text M1A2_02_01
-   info text M1A2_02_02
+   info text M1A2_02_01;
+   info text M1A2_02_02;
 
-   logoff "LogonData" text DATA
+   logoff "LogonData" text DATA;
 }
 
 terminal 3;
 
 unfinished {
-   remote DATA
+   remote DATA;
 
-   logon "LogonData" text DATA
+   logon "LogonData" text DATA;
 
-   info text M1A2_03_01
+   info text M1A2_03_01;
 
-   logoff "LogonData" text DATA
+   logoff "LogonData" text DATA;
 }
 
 /* ------------------------------------------------------------------------- */
 dialogue 1;
 
 page 0 {
-   icon   "Maxie"
-   remote HIDDEN
+   icon   "Maxie";
+   remote HIDDEN;
 
-   text M1A2_01_00
+   text M1A2_01_00;
 
-   option M1A2_01_00_01 page 1
-   option M1A2_01_00_02 page 2
-   option M1A2_01_00_03 brk
+   option M1A2_01_00_01 page 1;
+   option M1A2_01_00_02 page 2;
+   option M1A2_01_00_03 brk;
 }
 
 page 1 {
-   name   "Maxie"
-   remote MAXIE
+   name   "Maxie";
+   remote MAXIE;
 
-   text M1A2_01_01
+   text M1A2_01_01;
 
-   option M1A2_01_01_01 page 3
+   option M1A2_01_01_01 page 3;
 }
 
 page 2 {
-   text M1A2_01_02
+   text M1A2_01_02;
 
-   option M1A2_01_02_01 page 3
-   option M1A2_01_02_02 brk
+   option M1A2_01_02_01 page 3;
+   option M1A2_01_02_02 brk;
 }
 
 page 3 {
-   text M1A2_01_03
+   text M1A2_01_03;
 
-   option M1A2_01_03_01 page 4
-   option M1A2_01_03_02 brk
+   option M1A2_01_03_01 page 4;
+   option M1A2_01_03_02 brk;
 }
 
 page 4 {
-   text M1A2_01_04
+   text M1A2_01_04;
 
-   option M1A2_01_04_01 brk
+   option M1A2_01_04_01 brk;
 }
 
 /* EOF */

@@ -51,14 +51,16 @@
  */
 
 #if defined(ACT)
-ACT(DLG_WAIT)            /* (OP)                       -> VA<ret> OPT_SEL */
-ACT(LD_ITEM)             /* (ADRL(name))               -> AC<count>       */
-ACT(LD_OPT)              /* (ADRL<name> RADRL<ptr>)    -> OPT_CNT OPT     */
-ACT(SCRIPT_I)            /* (SCP0 SCP1 SCP2 SCP3 SCP4) -> AC<ret>         */
-ACT(SCRIPT_S)            /* (ADRL SCP1 SCP2 SCP3 SCP4) -> AC<ret>         */
-ACT(TELEPORT_INTERLEVEL) /* (ADRL<map>)                -> VA<halt>        */
-ACT(TELEPORT_INTRALEVEL) /* (ADRL<tag>)                -> VA<halt>        */
+ACT(END_GAME)
+ACT(LD_ITEM)
+ACT(LD_OPT)
+ACT(SCRIPT_I)
+ACT(SCRIPT_S)
+ACT(TELEPORT_INTERLEVEL)
+ACT(TELEPORT_INTRALEVEL)
+ACT(DLG_WAIT)
 ACT(TRM_WAIT)
+ACT(FIN_WAIT)
 
 #undef ACT
 #elif defined(DCD)
@@ -361,6 +363,7 @@ enum {
    /* interaction */
    VAR_UACT,
    VAR_TACT,
+   VAR_FACT,
 
    /* general address */
    VAR_ADRL,
@@ -386,6 +389,8 @@ enum {
    VAR_PICTH,
    VAR_TEXTL,
    VAR_TEXTH,
+   VAR_MUSICL,
+   VAR_MUSICH,
 
    /* options */
    VAR_OPT_CNT,
@@ -415,6 +420,15 @@ enum {
    TACT_LOGOFF,
    TACT_INFO,
    TACT_PICT,
+};
+
+enum {
+   FACT_NONE,
+   FACT_FADE_IN,
+   FACT_FADE_OUT,
+   FACT_WAIT,
+   FACT_MUS_FADE,
+   FACT_CRAWL,
 };
 
 enum {

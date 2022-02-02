@@ -45,11 +45,17 @@ Dlg_CondName:
 Dlg_StmtName:
    prefix: _dlg_stmt_
    words:
+      - crawl
+      - fade_in
+      - fade_out
       - icon
       - if
+      - image
       - info
       - logoff
       - logon
+      - music
+      - mus_fade
       - name
       - option
       - page
@@ -59,6 +65,7 @@ Dlg_StmtName:
       - teleport_interlevel
       - teleport_intralevel
       - text
+      - wait
 Dlg_ItemName:
    prefix: _dlg_item_
    words:

@@ -200,6 +200,17 @@ enum mission_status {
    _failure
 };
 
+enum finale_num {
+   _finale_normal,
+   _finale_barons,
+   _finale_cyberdemon,
+   _finale_spiderdemon,
+   _finale_icon_of_sin,
+   _finale_time_out,
+   _finale_division,
+   _finale_other,
+};
+
 /* Extern Objects ---------------------------------------------------------- */
 
 extern bool lmvar player_init;
@@ -243,7 +254,7 @@ script void CBI_Install(i32 num);
 script void W_Title(void);
 script void F_Run(void);
 void F_Load(void);
-void F_Start(cstr which);
+void F_Start(i32 which);
 script void W_DoRain(void);
 #endif
 

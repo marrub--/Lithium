@@ -29,6 +29,7 @@ enum DrawType {
    _type_text,
    _type_textAlpha,
    _type_rect,
+   _type_fill,
 }
 
 struct DrawData {
@@ -306,6 +307,18 @@ static void LR(int x = 0, int y = 0, int w = 0, int h = 0, color cr = 0) {
    cl.m_DPtr++;
 }
 
+static void LW(color cr = 0) {
+   let cl = Lith_URANUS(Find("Lith_URANUS"));
+
+   if(cl.m_NoDraw) return;
+   let p = cl.m_DPtr;
+
+   cl.m_D[p].Type = _type_fill;
+   cl.m_D[p].C = cr;
+
+   cl.m_DPtr++;
+}
+
 static void LE() {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
 
@@ -340,8 +353,8 @@ override void worldUnloaded(WorldEvent evt) {
    m_dmgNumInit = false;
 }
 
-ui void drawRect(vector2 size, vector2 pos, color cr) {
-   Screen.dim(cr, cr.a/255.0, int(pos.x), int(pos.y), int(size.x), int(size.y));
+static ui void drawRect(int sx, int sy, int px, int py, color cr) {
+   Screen.dim(cr, cr.a/255.0, px, py, sx, sy);
 }
 
 override void worldTick() {
@@ -445,7 +458,10 @@ override void renderOverlay(RenderEvent evt) {
             }
             break;
          case _type_rect:
-            drawRect((m_D[i].Z, m_D[i].W), (m_D[i].X, m_D[i].Y), m_D[i].C);
+            drawRect(m_D[i].Z, m_D[i].W, m_D[i].X, m_D[i].Y, m_D[i].C);
+            break;
+         case _type_fill:
+            drawRect(Screen.getWidth(), Screen.getHeight(), 0, 0, m_D[i].C);
             break;
          }
       }

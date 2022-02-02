@@ -16,8 +16,7 @@
 /* Static Functions -------------------------------------------------------- */
 
 static
-i32 CodeABS(struct compiler *d, cstr reg)
-{
+i32 CodeABS(struct compiler *d, cstr reg) {
    struct token *tok = d->tb.get();
 
    if(tok->type == tok_number) {
@@ -34,16 +33,33 @@ i32 CodeABS(struct compiler *d, cstr reg)
             d->tb.unget();
          }
       }
+   } else if(tok->type == tok_identi) {
+      i32 n = -1;
+      switch(Dlg_ItemName(tok->textV)) {
+      case _dlg_item_page:
+         tok = d->tb.get();
+         if(tok->type == tok_number) {
+            n = faststrtoi32(tok->textV);
+         } else {
+            d->tb.unget();
+         }
+         break;
+      case _dlg_item_failure:    n = DPAGE_FAILURE;    break;
+      case _dlg_item_finished:   n = DPAGE_FINISHED;   break;
+      case _dlg_item_unfinished: n = DPAGE_UNFINISHED; break;
+      }
+      if(n >= 0) {
+         return PRG_BEG + d->def.pages[n];
+      }
    }
 
    d->tb.unget();
 
-   return false;
+   return -1;
 }
 
 static
-i32 CodeZPG(struct compiler *d, cstr reg)
-{
+i32 CodeZPG(struct compiler *d, cstr reg) {
    struct token *tok = d->tb.get();
 
    if(tok->type == tok_number) {
@@ -68,9 +84,8 @@ i32 CodeZPG(struct compiler *d, cstr reg)
 }
 
 static
-bool CodeAI(struct compiler *d, u32 code)
-{
-   ifw(i32 n = CodeABS(d, nil), n > 0) {
+bool CodeAI(struct compiler *d, u32 code) {
+   ifw(i32 n = CodeABS(d, nil), n >= 0) {
       Dlg_PushB1(d, code); unwrap(&d->res);
       Dlg_PushB2(d, n); unwrap(&d->res);
       return true;
@@ -80,9 +95,8 @@ bool CodeAI(struct compiler *d, u32 code)
 }
 
 static
-bool CodeAX(struct compiler *d, u32 code)
-{
-   ifw(i32 n = CodeABS(d, "X"), n > 0) {
+bool CodeAX(struct compiler *d, u32 code) {
+   ifw(i32 n = CodeABS(d, "X"), n >= 0) {
       Dlg_PushB1(d, code); unwrap(&d->res);
       Dlg_PushB2(d, n); unwrap(&d->res);
       return true;
@@ -92,9 +106,8 @@ bool CodeAX(struct compiler *d, u32 code)
 }
 
 static
-bool CodeAY(struct compiler *d, u32 code)
-{
-   ifw(i32 n = CodeABS(d, "Y"), n > 0) {
+bool CodeAY(struct compiler *d, u32 code) {
+   ifw(i32 n = CodeABS(d, "Y"), n >= 0) {
       Dlg_PushB1(d, code); unwrap(&d->res);
       Dlg_PushB2(d, n); unwrap(&d->res);
       return true;
@@ -104,8 +117,7 @@ bool CodeAY(struct compiler *d, u32 code)
 }
 
 static
-bool CodeII(struct compiler *d, u32 code)
-{
+bool CodeII(struct compiler *d, u32 code) {
    if(d->tb.drop(tok_pareno)) {
       struct token *tok = d->tb.get();
 
@@ -126,8 +138,7 @@ bool CodeII(struct compiler *d, u32 code)
 }
 
 static
-bool CodeIX(struct compiler *d, u32 code)
-{
+bool CodeIX(struct compiler *d, u32 code) {
    if(d->tb.drop(tok_pareno)) {
       struct token *tok = d->tb.get();
 
@@ -154,8 +165,7 @@ bool CodeIX(struct compiler *d, u32 code)
 }
 
 static
-bool CodeIY(struct compiler *d, u32 code)
-{
+bool CodeIY(struct compiler *d, u32 code) {
    if(d->tb.drop(tok_pareno)) {
       struct token *tok = d->tb.get();
 
@@ -190,8 +200,7 @@ bool CodeNP(struct compiler *d, u32 code) {
 #define CodeRI CodeZI
 
 static
-bool CodeVI(struct compiler *d, u32 code)
-{
+bool CodeVI(struct compiler *d, u32 code) {
    if(d->tb.drop(tok_hash)) {
       struct token *tok = d->tb.get();
 
@@ -212,9 +221,8 @@ bool CodeVI(struct compiler *d, u32 code)
 }
 
 static
-bool CodeZI(struct compiler *d, u32 code)
-{
-   ifw(i32 n = CodeZPG(d, nil), n > 0) {
+bool CodeZI(struct compiler *d, u32 code) {
+   ifw(i32 n = CodeZPG(d, nil), n >= 0) {
       Dlg_PushB1(d, code); unwrap(&d->res);
       Dlg_PushB1(d, n); unwrap(&d->res);
       return true;
@@ -224,9 +232,8 @@ bool CodeZI(struct compiler *d, u32 code)
 }
 
 static
-bool CodeZX(struct compiler *d, u32 code)
-{
-   ifw(i32 n = CodeZPG(d, "X"), n > 0) {
+bool CodeZX(struct compiler *d, u32 code) {
+   ifw(i32 n = CodeZPG(d, "X"), n >= 0) {
       Dlg_PushB1(d, code); unwrap(&d->res);
       Dlg_PushB1(d, n); unwrap(&d->res);
       return true;
@@ -236,9 +243,8 @@ bool CodeZX(struct compiler *d, u32 code)
 }
 
 static
-bool CodeZY(struct compiler *d, u32 code)
-{
-   ifw(i32 n = CodeZPG(d, "Y"), n > 0) {
+bool CodeZY(struct compiler *d, u32 code) {
+   ifw(i32 n = CodeZPG(d, "Y"), n >= 0) {
       Dlg_PushB1(d, code); unwrap(&d->res);
       Dlg_PushB1(d, n); unwrap(&d->res);
       return true;
@@ -249,8 +255,7 @@ bool CodeZY(struct compiler *d, u32 code)
 
 /* Extern Functions -------------------------------------------------------- */
 
-void Dlg_GetStmt_Asm(struct compiler *d)
-{
+void Dlg_GetStmt_Asm(struct compiler *d) {
    struct token *tok;
 
    #define DCD(n, op, ty) \
@@ -258,7 +263,11 @@ void Dlg_GetStmt_Asm(struct compiler *d)
       if(faststrcasechk(tok->textV, #op)) { \
          bool ret = Code##ty(d, DCD_##op##_##ty); \
          unwrap(&d->res); \
-         if(ret) return; \
+         if(ret) { \
+            tok = d->tb.expc(&d->res, d->tb.get(), tok_semico, 0); \
+            unwrap(&d->res); \
+            return; \
+         } \
       }
    #include "d_vm.h"
 

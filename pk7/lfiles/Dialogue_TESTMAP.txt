@@ -11,15 +11,15 @@
 program 7;
 
 page 0 {
-   ldx #$FF
-   txs
-   lda #$1A
-   pha
-   pla
-   tay
-   lda #$AA
-   trs
-   trr
+   ldx #$FF;
+   txs;
+   lda #$1A;
+   pha;
+   pla;
+   tay;
+   lda #$AA;
+   trs;
+   trr;
    <$A9 $7F $00>
 }
 
@@ -27,112 +27,112 @@ page 0 {
 dialogue 1;
 
 page 0 {
-   name JACQUES
-   icon "AOF"
-   remote JACQUES
+   name JACQUES;
+   icon "AOF";
+   remote JACQUES;
 
-   if item "Lith_DivisionSigil" page 7
+   if item "Lith_DivisionSigil" page 7;
 
-   text TESTMAP_01_00
+   text TESTMAP_01_00;
 
-   option TESTMAP_01_00_01 page 2
-   option TESTMAP_01_00_02 brk
+   option TESTMAP_01_00_01 page 2;
+   option TESTMAP_01_00_02 brk;
 }
 
 page 2 {
-   if class pM text TESTMAP_01_02_M
-   if class pC text TESTMAP_01_02_C
+   if class pM text TESTMAP_01_02_M;
+   if class pC text TESTMAP_01_02_C;
 
    option TESTMAP_01_02_01 {
-      script 2
-      page 2
+      script 2;
+      page 2;
    }
 
-   option TESTMAP_01_02_02 page 3
-   option TESTMAP_01_02_03 brk
+   option TESTMAP_01_02_02 page 3;
+   option TESTMAP_01_02_03 brk;
 }
 
 page 3 {
    if class pC {
-      text TESTMAP_01_03_C
-      option TESTMAP_01_03_01_C page 10
-      option TESTMAP_01_03_02_C page 11
+      text TESTMAP_01_03_C;
+      option TESTMAP_01_03_01_C page 10;
+      option TESTMAP_01_03_02_C page 11;
    } else {
-      text TESTMAP_01_03_M
-      option TESTMAP_01_03_01_M page 4
+      text TESTMAP_01_03_M;
+      option TESTMAP_01_03_01_M page 4;
    }
 }
 
 page 10 {
-   text TESTMAP_01_10
+   text TESTMAP_01_10;
 
-   option TESTMAP_01_10_01 page 13
-   option TESTMAP_01_10_02 brk
+   option TESTMAP_01_10_01 page 13;
+   option TESTMAP_01_10_02 brk;
 }
 
 page 11 {
-   text TESTMAP_01_11
+   text TESTMAP_01_11;
 
-   option TESTMAP_01_11_01 page 12
+   option TESTMAP_01_11_01 page 12;
 }
 
 page 12 {
-   text TESTMAP_01_12
+   text TESTMAP_01_12;
 
-   option TESTMAP_01_12_01 page 10
+   option TESTMAP_01_12_01 page 10;
 }
 
 page 13 {
-   text TESTMAP_01_13
+   text TESTMAP_01_13;
 
-   option TESTMAP_01_13_01 page 14
+   option TESTMAP_01_13_01 page 14;
 }
 
 page 14 {
-   text TESTMAP_01_14
+   text TESTMAP_01_14;
 
-   option TESTMAP_01_14_01 page 15
+   option TESTMAP_01_14_01 page 15;
 }
 
 page 15 {
-   text TESTMAP_01_15
+   text TESTMAP_01_15;
 
-   option TESTMAP_01_15_01 page 16
+   option TESTMAP_01_15_01 page 16;
 }
 
 page 16 {
-   text TESTMAP_01_16
+   text TESTMAP_01_16;
 
-   option TESTMAP_01_16_01 brk
+   option TESTMAP_01_16_01 brk;
 }
 
 page 4 {
-   text TESTMAP_01_04
+   text TESTMAP_01_04;
 
-   option TESTMAP_01_04_01 brk
+   option TESTMAP_01_04_01 brk;
 }
 
 page 7 {
-   text TESTMAP_01_07
+   text TESTMAP_01_07;
 
-   option TESTMAP_01_07_01 brk
+   option TESTMAP_01_07_01 brk;
 }
 
 /* ------------------------------------------------------------------------- */
 terminal 1;
 
 unfinished {
-   remote TEST
+   remote TEST;
 
-   logon "01602" text TEST
+   logon "01602" text TEST;
 
-   info text TESTMAP_01_01
+   info text TESTMAP_01_01;
 
-   pict "AOF" text TESTMAP_01_02
+   pict "AOF" text TESTMAP_01_02;
 
-   logoff "01602" {}
+   logoff "01602";
 
-   script 2
+   script 2;
 }
 
 /* EOF */

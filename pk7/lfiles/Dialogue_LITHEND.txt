@@ -1,0 +1,157 @@
+/* -*-Agw-LithDlg-*-----------------------------------------------------------|
+ *
+ * Distributed under the CC0 public domain license.
+ * By Alison G. Watson. Attribution is encouraged, though not required.
+ * See licenses/cc0.txt for more information.
+ *
+ * ---------------------------------------------------------------------------|
+ */
+
+program 0;
+
+/* Music Subroutine */
+page 15 {
+   if class pM {
+      music "lmusic/lithambientwip3.ogg";
+   } else if class pC {
+      music "lmusic/tmary7.ogg";
+   }
+   rts;
+}
+
+/* Normal */
+page 0 {
+   jsr page 15;
+   if class pM {
+      image ":End:Stan:Normal";
+      fade_in 50;
+      crawl Normal_Stan 400;
+   } else if class pC {
+      image ":End:Jem:Normal";
+      fade_in 50;
+      crawl Normal_Jem 400;
+   }
+   page 14;
+}
+
+/* Barons */
+page 1 {
+   jsr page 15;
+   if class pM {
+      image ":End:Stan:Barons";
+      fade_in 50;
+      crawl Barons_Stan 400;
+   } else if class pC {
+      image ":End:Jem:Barons";
+      fade_in 50;
+      crawl Barons_Jem 400;
+   }
+   page 14;
+}
+
+/* Cyber-Demon */
+page 2 {
+   jsr page 15;
+   if class pM {
+      image ":End:Stan:CyberDemon";
+      fade_in 50;
+      crawl CyberDemon_Stan 400;
+   } else if class pC {
+      image ":End:Jem:CyberDemon";
+      fade_in 50;
+      crawl CyberDemon_Jem 400;
+   }
+   page 14;
+}
+
+/* Spider-Demon */
+page 3 {
+   jsr page 15;
+   if class pM {
+      image ":End:Stan:SpiderDemon";
+      fade_in 50;
+      crawl SpiderDemon_Stan 400;
+   } else if class pC {
+      image ":End:Jem:SpiderDemon";
+      fade_in 50;
+      crawl SpiderDemon_Jem 400;
+   }
+   page 14;
+}
+
+/* Icon of Sin */
+page 4 {
+   jsr page 15;
+   if class pM {
+      image ":End:Stan:IconOfSin";
+      fade_in 50;
+      crawl IconOfSin_1_Stan 900;
+      crawl IconOfSin_2_Stan 700;
+      crawl IconOfSin_3_Stan 700;
+      crawl IconOfSin_4_Stan 700;
+      crawl IconOfSin_5_Stan 700;
+      crawl IconOfSin_6_Stan 700;
+      crawl IconOfSin_7_Stan 400;
+   } else if class pC {
+      image ":End:Jem:IconOfSin";
+      fade_in 50;
+      crawl IconOfSin_1_Jem 600;
+      crawl IconOfSin_2_Jem 600;
+      crawl IconOfSin_3_Jem 600;
+      crawl IconOfSin_4_Jem 600;
+      crawl IconOfSin_5_Jem 600;
+      crawl IconOfSin_6_Jem 600;
+      crawl IconOfSin_7_Jem 600;
+      crawl IconOfSin_8_Jem 600;
+      crawl IconOfSin_9_Jem 400;
+   }
+   page 14;
+}
+
+/* Time-Out */
+page 5 {
+   music "lmusic/asdfn2.ogg";
+   image "HELP";
+   fade_in 10;
+   crawl TimeOut_1 900;
+   page 14;
+}
+
+/* Division */
+page 6 {
+   music "lmusic/siarani.ogg";
+   fade_in 10;
+   crawl DivisionSigil 900;
+   page 14;
+}
+
+/* Other */
+page 7 {
+   jsr page 15;
+   if class pM {
+      image ":End:Stan:Other";
+      fade_in 50;
+      crawl Other_Stan 400;
+   } else if class pC {
+      image ":End:Jem:Other";
+      fade_in 50;
+      crawl Other_Jem 400;
+   }
+   page 14;
+}
+
+/* Common */
+page 14 {
+   fade_out 100;
+   image "TITLEPIC";
+   music "lmusic/crucifying.opus";
+   fade_in 70;
+   crawl Credits 400;
+   fade_out 70;
+   image "";
+   wait 50;
+   crawl Dedication 100; wait 100; fade_out 150; wait 15;
+   crawl Finished   20;  wait 70;  fade_out 20;
+   mus_fade 300;
+   ldv #0;
+}
