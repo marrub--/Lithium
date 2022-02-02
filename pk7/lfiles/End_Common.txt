@@ -12,7 +12,7 @@
 
 14
    imge "TITLEPIC";
-   musi "lmusic/siarani.ogg";
+   musi "lmusic/crucifying.opus";
    fade 70;
    text "Credits" 400 -1 70;
    imge "";
