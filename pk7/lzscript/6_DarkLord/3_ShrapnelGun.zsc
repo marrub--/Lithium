@@ -19,8 +19,6 @@ class Lith_ShrapnelProjectile : Actor {
       Radius 8;
       Species "Lith_Player";
       Speed 40;
-      Scale 0.26;
-
       Projectile;
       +EXPLODEONWATER
       +MTHRUSPECIES
@@ -28,11 +26,18 @@ class Lith_ShrapnelProjectile : Actor {
       +RIPPER
    }
 
+   state lith_a_jumpScale(double scale) {
+      a_setScale(scale);
+      return a_jump(255/17, "Spawn2");
+   }
+
    states {
    Spawn:
       TNT1 A 0;
-      SBRK ABCDEFGHIJKLMN 0 A_Jump(16, "Spawn2");
-      BLLT I 0 A_SetScale(1.0);
+      SBRK ABCDEFGHIJKLMN 0 lith_a_jumpScale(0.26);
+      BLLT I 0 lith_a_jumpScale(1.0);
+      SCRP D 0 lith_a_jumpScale(0.4);
+      SCRP E 0 lith_a_jumpScale(0.3);
    Spawn2:
       #### # 1 A_SpawnItemEx("Lith_CasingSmoke", 0,0,3, frandom(-0.2,0),frandom(-0.2,0));
       loop;
