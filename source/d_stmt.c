@@ -153,7 +153,7 @@ void Dlg_GetStmt_Str(struct compiler *d, u32 adr) {
 void Dlg_GetStmt_Terminal(struct compiler *d, u32 act) {
    struct token *tok;
    if(act != TACT_INFO) {
-      tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, tok_string, 0);
+      tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, tok_string, tok_number, 0);
       unwrap(&d->res);
       u32 s = Dlg_PushStr(d, tok->textV, tok->textC);
       unwrap(&d->res);
