@@ -600,10 +600,10 @@ weapons/cercle/begin lsounds/WeaponsC/Cercle/Begin
 weapons/cercle/attack lsounds/WeaponsC/Cercle/Attack
 weapons/subweapon/charge lsounds/WeaponsD/Subweapons/Charge
 weapons/subweapon/armgun lsounds/WeaponsD/Subweapons/ArmGun
-weapons/subweapon/armed lsounds/WeaponsD/Subweapons/Armed
+weapons/subweapon/needle lsounds/WeaponsD/Subweapons/Needle
 $alias weapons/subweapon/dagger weapons/rend/end
+$alias weapons/subweapon/axe weapons/rend/slash
 $alias weapons/subweapon/grenade weapons/rifle/grenade
-$alias weapons/subweapon/mine weapons/rifle/grenade
 weapons/kampilan/draw lsounds/WeaponsD/Kampilan/Draw
 weapons/kampilan/bonk lsounds/WeaponsD/Kampilan/Bonk
 weapons/kampilan/hit lsounds/WeaponsD/Kampilan/Hit

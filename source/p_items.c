@@ -70,7 +70,7 @@ void Container(struct gui_state *g, struct container *cont, i32 sx, i32 sy) {
 
       if(pl.selitem == it) {
          k32 a = (ACS_Sin(ACS_Timer() / 105.0k) * 0.5k + 1.2k) / 4.0k;
-         PrintRect(x, y, ex + 1, ey + 1, 0x58E6F0 | (i32)(a * 255.0k) << 24);
+         PrintRect(x, y, ex + 1, ey + 1, 0xF0E658 | (i32)(a * 255.0k) << 24);
       }
    }
 }

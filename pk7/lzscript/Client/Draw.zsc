@@ -65,9 +65,6 @@ private transient play bool m_NoDraw;
 
 private transient Font m_UFntSml;
 
-private transient Shape2DTransform m_RectXf;
-private transient Shape2D m_Rect;
-
 private transient bool m_English;
 
 static void LZ(int w, int h) {
@@ -336,19 +333,6 @@ static clearScope textureId getTextureForName(string tex) {
 
 override void onRegister() {
    projectRegister();
-
-   m_RectXf = new("Shape2DTransform");
-   m_Rect = new("Shape2D");
-   m_Rect.pushVertex((0, 0));
-   m_Rect.pushVertex((1, 0));
-   m_Rect.pushVertex((0, 1));
-   m_Rect.pushVertex((1, 1));
-   m_Rect.pushCoord((0, 0));
-   m_Rect.pushCoord((1, 0));
-   m_Rect.pushCoord((0, 1));
-   m_Rect.pushCoord((1, 1));
-   m_Rect.pushTriangle(0, 3, 1);
-   m_Rect.pushTriangle(0, 2, 3);
 }
 
 override void worldUnloaded(WorldEvent evt) {
@@ -357,11 +341,7 @@ override void worldUnloaded(WorldEvent evt) {
 }
 
 ui void drawRect(vector2 size, vector2 pos, color cr) {
-   m_RectXf.clear();
-   m_RectXf.scale(size);
-   m_RectXf.translate(pos);
-   m_Rect.setTransform(m_RectXf);
-   Screen.DrawShape(skyflatnum, false, m_Rect, DTA_Alpha,cr.a/255.0, DTA_FillColor,cr);
+   Screen.dim(cr, cr.a/255.0, int(pos.x), int(pos.y), int(size.x), int(size.y));
 }
 
 override void worldTick() {
@@ -446,21 +426,23 @@ override void renderOverlay(RenderEvent evt) {
                                DTA_Alpha,m_D[i].A, DTA_FillColor,m_D[i].C);
             break;
          case _type_text:
-            for(uint ln = 0, lns = m_D[i].LnX.Size(); ln < lns; ln++)
+            for(uint ln = 0, lns = m_D[i].LnX.Size(); ln < lns; ln++) {
                Screen.drawText(m_D[i].Fnt, m_D[i].Cr,
                                m_D[i].X-m_D[i].LnX[ln], m_D[i].Y+m_D[i].LnY*ln,
                                m_D[i].Txt[ln],
                                DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
                                DTA_LegacyRenderStyle,m_D[i].Style);
+            }
             break;
          case _type_textAlpha:
-            for(uint ln = 0, lns = m_D[i].LnX.Size(); ln < lns; ln++)
+            for(uint ln = 0, lns = m_D[i].LnX.Size(); ln < lns; ln++) {
                Screen.drawText(m_D[i].Fnt, m_D[i].Cr,
                                m_D[i].X-m_D[i].LnX[ln], m_D[i].Y+m_D[i].LnY*ln,
                                m_D[i].Txt[ln],
                                DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
                                DTA_Alpha,m_D[i].A,
                                DTA_LegacyRenderStyle,m_D[i].Style);
+            }
             break;
          case _type_rect:
             drawRect((m_D[i].Z, m_D[i].W), (m_D[i].X, m_D[i].Y), m_D[i].C);
