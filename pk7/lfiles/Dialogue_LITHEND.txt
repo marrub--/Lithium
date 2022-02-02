@@ -15,6 +15,14 @@ page 15 {
       music "lmusic/lithambientwip3.ogg";
    } else if class pC {
       music "lmusic/tmary7.ogg";
+   } else if class pI {
+   } else if class pW {
+   } else if class pA {
+      music "lmusic/tpw.2.ogg";
+   } else if class pD {
+      music "lmusic/tpwrev.ogg";
+   } else if class pT {
+      music "lmusic/rg.ogg";
    }
    rts;
 }
