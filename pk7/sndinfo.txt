@@ -13,44 +13,44 @@
  */
 $rolloff * custom 0 2025
 $pitchshiftrange 2
-explosion1 lsounds/Explosion
-explosion2 lsounds/Explosion2
-explosion3 lsounds/Explosion3
+explosion1 lsnd/Explosion
+explosion2 lsnd/Explosion2
+explosion3 lsnd/Explosion3
 $random explosion { explosion1 explosion2 explosion3 }
 $limit explosion 0
 $attenuation explosion 0.5
-silence lsounds/Silence
-MMMMHMHMMMHMMM lsounds/MMMMHMHMMMHMMM
-YOUSONOFABITCH lsounds/YOUSONOFABITCH
-AAAAAAAAAAAAAA lsounds/AAAAAAAAAAAAAA
-misc/pop lsounds/pop
-misc/secret lsounds/Secret
-misc/booom lsounds/World/boom
-misc/teleport lsounds/World/Teleport/Teleport
-misc/teleport5 lsounds/World/Teleport/Teleport5
-misc/teleport6 lsounds/World/Teleport/Teleport6
-misc/teleport7 lsounds/World/Teleport/Teleport7
-misc/teleout lsounds/World/Teleport/TeleportOut
-misc/telein lsounds/World/Teleport/TeleportIn
-ghost/hit lsounds/Weapons/GhostHit
+silence lsnd/Silence
+MMMMHMHMMMHMMM lsnd/MMMMHMHMMMHMMM
+YOUSONOFABITCH lsnd/YOUSONOFABITCH
+AAAAAAAAAAAAAA lsnd/AAAAAAAAAAAAAA
+misc/pop lsnd/pop
+misc/secret lsnd/Secret
+misc/booom lsnd/World/boom
+misc/teleport lsnd/World/Teleport/Teleport
+misc/teleport5 lsnd/World/Teleport/Teleport5
+misc/teleport6 lsnd/World/Teleport/Teleport6
+misc/teleport7 lsnd/World/Teleport/Teleport7
+misc/teleout lsnd/World/Teleport/TeleportOut
+misc/telein lsnd/World/Teleport/TeleportIn
+ghost/hit lsnd/Weapons/GhostHit
 $alias ghost/spawn player/pickup/barrier
-intermission/tick lsounds/GUI/Menu/InterTick
-intermission/nextstage lsounds/GUI/Menu/InterNext
-intermission/paststats lsounds/GUI/Menu/InterPass
-intermission/mid lsounds/GUI/Menu/InterMid
+intermission/tick lsnd/GUI/Menu/InterTick
+intermission/nextstage lsnd/GUI/Menu/InterNext
+intermission/paststats lsnd/GUI/Menu/InterPass
+intermission/mid lsnd/GUI/Menu/InterMid
 $pitchshift intermission/nextstage 0
 $pitchshift intermission/paststats 0
 $pitchshift intermission/mid 0
-misc/chat lsounds/GUI/Chat
+misc/chat lsnd/GUI/Chat
 $alias misc/chat2 misc/chat
 $random misc/quitsound { enemies/zombie/ready enemies/shotguy/ready enemies/chainguy/bolt enemies/hellknight/throw enemies/cyberdemon/ready misc/teleport misc/chat player/barrier marathon/hitsolid weapons/revolver/pickup weapons/shotgun/pickup weapons/sniper/draw weapons/sword/hit }
 $pitchshift misc/chat 0
 $pitchshift misc/chat2 0
 $pitchshift misc/quitsound 0
-menu/backup lsounds/GUI/Menu/Back
-menu/cursor lsounds/GUI/Menu/Move
-menu/activate lsounds/GUI/Menu/Activate
-menu/choose lsounds/GUI/Menu/Choose
+menu/backup lsnd/GUI/Menu/Back
+menu/cursor lsnd/GUI/Menu/Move
+menu/activate lsnd/GUI/Menu/Activate
+menu/choose lsnd/GUI/Menu/Choose
 $alias menu/invalid player/cbi/clickinvalid
 $alias menu/change player/cbi/slidertick
 $alias menu/dismiss menu/backup
@@ -65,125 +65,125 @@ $pitchshift menu/change 0
 $pitchshift menu/dismiss 0
 $pitchshift menu/prompt 0
 $pitchshift menu/clear 0
-player/cbi/win95 lsounds/GUI/Startup
-player/cbi/open lsounds/GUI/Open
-player/cbi/close lsounds/GUI/Close
-player/cbi/buttoncurs lsounds/GUI/ButtonCursor
-player/cbi/buttonpress lsounds/GUI/ButtonPress
-player/cbi/slidertick lsounds/GUI/SliderTick
-player/cbi/find lsounds/GUI/Find
-player/cbi/finddone lsounds/GUI/FindDone
-player/cbi/findfail lsounds/GUI/FindFail
-player/cbi/invcur lsounds/GUI/InvCur
-player/cbi/invmov lsounds/GUI/InvMov
-player/cbi/key1 lsounds/GUI/Key1
-player/cbi/key2 lsounds/GUI/Key2
-player/cbi/key3 lsounds/GUI/Key3
-player/cbi/clickon lsounds/GUI/ClickOn
-player/cbi/clickoff lsounds/GUI/ClickOff
-player/cbi/clicklst lsounds/GUI/ClickList
-player/cbi/auto/toggle lsounds/GUI/AutoGroupToggle
-player/cbi/auto/buy lsounds/GUI/AutoGroupBuy
-player/cbi/auto/invalid lsounds/GUI/AutoGroupInvalid
-player/cbi/dlgopen lsounds/GUI/DialogueOpen
-player/cbi/dlgclick lsounds/GUI/DialogueClick
-player/cbi/clickinvalid lsounds/GUI/ClickInvalid
-player/cbi/mail lsounds/GUI/MailReceive
-player/cbi/tabswitch lsounds/GUI/TabSwitch
-player/cbi/scroll lsounds/GUI/Scroll
-player/cbi/scrollend lsounds/GUI/ScrollRelease
-player/cbi/left lsounds/GUI/Left
-player/cbi/right lsounds/GUI/Right
+player/cbi/win95 lsnd/GUI/Startup
+player/cbi/open lsnd/GUI/Open
+player/cbi/close lsnd/GUI/Close
+player/cbi/buttoncurs lsnd/GUI/ButtonCursor
+player/cbi/buttonpress lsnd/GUI/ButtonPress
+player/cbi/slidertick lsnd/GUI/SliderTick
+player/cbi/find lsnd/GUI/Find
+player/cbi/finddone lsnd/GUI/FindDone
+player/cbi/findfail lsnd/GUI/FindFail
+player/cbi/invcur lsnd/GUI/InvCur
+player/cbi/invmov lsnd/GUI/InvMov
+player/cbi/key1 lsnd/GUI/Key1
+player/cbi/key2 lsnd/GUI/Key2
+player/cbi/key3 lsnd/GUI/Key3
+player/cbi/clickon lsnd/GUI/ClickOn
+player/cbi/clickoff lsnd/GUI/ClickOff
+player/cbi/clicklst lsnd/GUI/ClickList
+player/cbi/auto/toggle lsnd/GUI/AutoGroupToggle
+player/cbi/auto/buy lsnd/GUI/AutoGroupBuy
+player/cbi/auto/invalid lsnd/GUI/AutoGroupInvalid
+player/cbi/dlgopen lsnd/GUI/DialogueOpen
+player/cbi/dlgclick lsnd/GUI/DialogueClick
+player/cbi/clickinvalid lsnd/GUI/ClickInvalid
+player/cbi/mail lsnd/GUI/MailReceive
+player/cbi/tabswitch lsnd/GUI/TabSwitch
+player/cbi/scroll lsnd/GUI/Scroll
+player/cbi/scrollend lsnd/GUI/ScrollRelease
+player/cbi/left lsnd/GUI/Left
+player/cbi/right lsnd/GUI/Right
 $alias player/cbi/invrem player/cbi/findfail
 $random player/cbi/keypress { player/cbi/key1 player/cbi/key2 player/cbi/key3 }
-body/bullethit1 lsounds/Monsters/Body/Bullet1
-body/bullethit2 lsounds/Monsters/Body/Bullet2
-body/flesh1 lsounds/Monsters/Body/Flesh1
-body/flesh2 lsounds/Monsters/Body/Flesh2
-body/flesh3 lsounds/Monsters/Body/Flesh3
-body/flesh4 lsounds/Monsters/Body/Flesh4
-body/flesh5 lsounds/Monsters/Body/Flesh5
+body/bullethit1 lsnd/Monsters/Body/Bullet1
+body/bullethit2 lsnd/Monsters/Body/Bullet2
+body/flesh1 lsnd/Monsters/Body/Flesh1
+body/flesh2 lsnd/Monsters/Body/Flesh2
+body/flesh3 lsnd/Monsters/Body/Flesh3
+body/flesh4 lsnd/Monsters/Body/Flesh4
+body/flesh5 lsnd/Monsters/Body/Flesh5
 $random body/bullethit { body/bullethit1 body/bullethit2 }
 $random body/flesh { body/flesh1 body/flesh2 body/flesh3 body/flesh4 body/flesh5 }
-enemies/levelup1 lsounds/Monsters/LevelUp1
-enemies/levelup2 lsounds/Monsters/LevelUp2
+enemies/levelup1 lsnd/Monsters/LevelUp1
+enemies/levelup2 lsnd/Monsters/LevelUp2
 $random enemies/levelup { enemies/levelup1 enemies/levelup2 }
-enemies/ios/crash lsounds/Monsters/IoS/Crash
-enemies/ios/crack1 lsounds/Monsters/IoS/Crack1
-enemies/ios/crack2 lsounds/Monsters/IoS/Crack2
-enemies/ios/crack3 lsounds/Monsters/IoS/Crack3
-enemies/ios/crack4 lsounds/Monsters/IoS/Crack4
-enemies/ios/crack5 lsounds/Monsters/IoS/Crack5
+enemies/ios/crash lsnd/Monsters/IoS/Crash
+enemies/ios/crack1 lsnd/Monsters/IoS/Crack1
+enemies/ios/crack2 lsnd/Monsters/IoS/Crack2
+enemies/ios/crack3 lsnd/Monsters/IoS/Crack3
+enemies/ios/crack4 lsnd/Monsters/IoS/Crack4
+enemies/ios/crack5 lsnd/Monsters/IoS/Crack5
 $random enemies/ios/crack { enemies/ios/crack1 enemies/ios/crack2 enemies/ios/crack3 enemies/ios/crack4 enemies/ios/crack5 }
-enemies/boss/talk1 lsounds/Monsters/Boss/Talk
-enemies/boss/talk2 lsounds/Monsters/Boss/Talk2
+enemies/boss/talk1 lsnd/Monsters/Boss/Talk
+enemies/boss/talk2 lsnd/Monsters/Boss/Talk2
 $random enemies/boss/talk { enemies/boss/talk1 enemies/boss/talk2 }
-enemies/zombie/ready lsounds/Monsters/ZombieMan/Ready
-enemies/zombie/fire lsounds/Monsters/ZombieMan/Fire
+enemies/zombie/ready lsnd/Monsters/ZombieMan/Ready
+enemies/zombie/fire lsnd/Monsters/ZombieMan/Fire
 $attenuation enemies/zombie/fire 0.5
 $limit enemies/zombie/fire 0
-enemies/shotguy/ready lsounds/Monsters/ShotGuy/Ready
-enemies/shotguy/fire lsounds/Monsters/ShotGuy/Fire
+enemies/shotguy/ready lsnd/Monsters/ShotGuy/Ready
+enemies/shotguy/fire lsnd/Monsters/ShotGuy/Fire
 $attenuation enemies/shotguy/fire 0.5
 $limit enemies/shotguy/fire 0
-enemies/chainguy/fire lsounds/Monsters/ChaingunGuy/Fire
-enemies/chainguy/bolt lsounds/Monsters/ChaingunGuy/Bolt
-enemies/chainguy/boltb lsounds/Monsters/ChaingunGuy/BoltBack
-enemies/chainguy/boltf lsounds/Monsters/ChaingunGuy/BoltForward
+enemies/chainguy/fire lsnd/Monsters/ChaingunGuy/Fire
+enemies/chainguy/bolt lsnd/Monsters/ChaingunGuy/Bolt
+enemies/chainguy/boltb lsnd/Monsters/ChaingunGuy/BoltBack
+enemies/chainguy/boltf lsnd/Monsters/ChaingunGuy/BoltForward
 $attenuation enemies/chainguy/fire 0.5
 $limit enemies/chainguy/fire 0
-enemies/mancubus/fire lsounds/Monsters/Mancubus/Fire
+enemies/mancubus/fire lsnd/Monsters/Mancubus/Fire
 $attenuation enemies/mancubus/fire 0.5
-enemies/hellknight/throw lsounds/Monsters/HellKnight/Throw
+enemies/hellknight/throw lsnd/Monsters/HellKnight/Throw
 $alias enemies/revenant/home weapons/rifle/firemode
-enemies/spiderdemon/ready lsounds/Monsters/SpiderMastermind/Arm
-enemies/spiderdemon/fire lsounds/Monsters/SpiderMastermind/Fire
-enemies/spiderdemon/firestop lsounds/Monsters/SpiderMastermind/FireStop
-enemies/cyberdemon/ready lsounds/Monsters/Cyberdemon/Ready
-enemies/cyberdemon/fire lsounds/Monsters/Cyberdemon/Fire
-enemies/cyberdemon/firedone lsounds/Monsters/Cyberdemon/FireDone
+enemies/spiderdemon/ready lsnd/Monsters/SpiderMastermind/Arm
+enemies/spiderdemon/fire lsnd/Monsters/SpiderMastermind/Fire
+enemies/spiderdemon/firestop lsnd/Monsters/SpiderMastermind/FireStop
+enemies/cyberdemon/ready lsnd/Monsters/Cyberdemon/Ready
+enemies/cyberdemon/fire lsnd/Monsters/Cyberdemon/Fire
+enemies/cyberdemon/firedone lsnd/Monsters/Cyberdemon/FireDone
 $attenuation enemies/cyberdemon/ready 0.3
 $attenuation enemies/cyberdemon/fire 0.25
 $attenuation enemies/cyberdemon/firedone 0.25
-enemies/ophidian/ice lsounds/Monsters/Ophidian/IceAttack
-enemies/ophidian/fire lsounds/Monsters/Mancubus/Fire
+enemies/ophidian/ice lsnd/Monsters/Ophidian/IceAttack
+enemies/ophidian/fire lsnd/Monsters/Mancubus/Fire
 $limit enemies/ophidian/ice 0
 $limit enemies/ophidian/fire 0
 $attenuation enemies/ophidian/ice 0.6
 $attenuation enemies/ophidian/fire 0.6
-enemies/phantom/spawn1 lsounds/Monsters/Phantoms/Spawn
-enemies/phantom/spawn2 lsounds/Monsters/Phantoms/Spawn2
-enemies/phantom/lunge1 lsounds/Monsters/Phantoms/Lunge
-enemies/phantom/lunge2 lsounds/Monsters/Phantoms/Lunge2
-enemies/phantom/lunge3 lsounds/Monsters/Phantoms/Lunge3
-enemies/phantom/aura lsounds/Monsters/Phantoms/Aura
-enemies/phantom/escape lsounds/Monsters/Phantoms/Escape
+enemies/phantom/spawn1 lsnd/Monsters/Phantoms/Spawn
+enemies/phantom/spawn2 lsnd/Monsters/Phantoms/Spawn2
+enemies/phantom/lunge1 lsnd/Monsters/Phantoms/Lunge
+enemies/phantom/lunge2 lsnd/Monsters/Phantoms/Lunge2
+enemies/phantom/lunge3 lsnd/Monsters/Phantoms/Lunge3
+enemies/phantom/aura lsnd/Monsters/Phantoms/Aura
+enemies/phantom/escape lsnd/Monsters/Phantoms/Escape
 $random enemies/phantom/lunge { enemies/phantom/lunge1 enemies/phantom/lunge2 enemies/phantom/lunge3 }
 $random enemies/phantom/spawned { enemies/phantom/spawn1 enemies/phantom/spawn2 }
-enemies/james/fire1 lsounds/Monsters/Phantoms/James/Fire
-enemies/james/fire2 lsounds/Monsters/Phantoms/James/Fire2
-enemies/james/fire3 lsounds/Monsters/Phantoms/James/Fire3
-enemies/james/knife1 lsounds/Monsters/Phantoms/James/Knife
-enemies/james/knife2 lsounds/Monsters/Phantoms/James/Knife2
-enemies/james/knife3 lsounds/Monsters/Phantoms/James/Knife3
+enemies/james/fire1 lsnd/Monsters/Phantoms/James/Fire
+enemies/james/fire2 lsnd/Monsters/Phantoms/James/Fire2
+enemies/james/fire3 lsnd/Monsters/Phantoms/James/Fire3
+enemies/james/knife1 lsnd/Monsters/Phantoms/James/Knife
+enemies/james/knife2 lsnd/Monsters/Phantoms/James/Knife2
+enemies/james/knife3 lsnd/Monsters/Phantoms/James/Knife3
 $alias enemies/james/knifehit weapons/knife/hitflesh
 $random enemies/james/knife { enemies/james/knife1 enemies/james/knife2 enemies/james/knife3 }
 $random enemies/james/fire { enemies/james/fire1 enemies/james/fire2 enemies/james/fire3 }
 $limit enemies/james/fire 0
 $attenuation enemies/james/fire 0.5
-enemies/makarov/fire1 lsounds/Monsters/Phantoms/Makarov/Fire
-enemies/makarov/fire2 lsounds/Monsters/Phantoms/Makarov/Fire2
-enemies/makarov/pump1 lsounds/Monsters/Phantoms/Makarov/Pump
-enemies/makarov/pump2 lsounds/Monsters/Phantoms/Makarov/Pump2
-enemies/makarov/chainthrow lsounds/Monsters/Phantoms/Makarov/ChainThrow
-enemies/makarov/chainhit lsounds/Monsters/Phantoms/Makarov/ChainHit
-enemies/makarov/throw1 lsounds/Monsters/Phantoms/Makarov/Throw
-enemies/makarov/throw2 lsounds/Monsters/Phantoms/Makarov/Throw2
-enemies/makarov/throw3 lsounds/Monsters/Phantoms/Makarov/Throw3
-enemies/makarov/scythe1 lsounds/Monsters/Phantoms/Makarov/ScytheSwing
-enemies/makarov/scythe2 lsounds/Monsters/Phantoms/Makarov/ScytheSwing2
-enemies/makarov/scythehit1 lsounds/Monsters/Phantoms/Makarov/ScytheHit
-enemies/makarov/scythehit2 lsounds/Monsters/Phantoms/Makarov/ScytheHit2
+enemies/makarov/fire1 lsnd/Monsters/Phantoms/Makarov/Fire
+enemies/makarov/fire2 lsnd/Monsters/Phantoms/Makarov/Fire2
+enemies/makarov/pump1 lsnd/Monsters/Phantoms/Makarov/Pump
+enemies/makarov/pump2 lsnd/Monsters/Phantoms/Makarov/Pump2
+enemies/makarov/chainthrow lsnd/Monsters/Phantoms/Makarov/ChainThrow
+enemies/makarov/chainhit lsnd/Monsters/Phantoms/Makarov/ChainHit
+enemies/makarov/throw1 lsnd/Monsters/Phantoms/Makarov/Throw
+enemies/makarov/throw2 lsnd/Monsters/Phantoms/Makarov/Throw2
+enemies/makarov/throw3 lsnd/Monsters/Phantoms/Makarov/Throw3
+enemies/makarov/scythe1 lsnd/Monsters/Phantoms/Makarov/ScytheSwing
+enemies/makarov/scythe2 lsnd/Monsters/Phantoms/Makarov/ScytheSwing2
+enemies/makarov/scythehit1 lsnd/Monsters/Phantoms/Makarov/ScytheHit
+enemies/makarov/scythehit2 lsnd/Monsters/Phantoms/Makarov/ScytheHit2
 $random enemies/makarov/scythe { enemies/makarov/scythe1 enemies/makarov/scythe2 }
 $random enemies/makarov/scythehit { enemies/makarov/scythehit1 enemies/makarov/scythehit2 }
 $random enemies/makarov/fire { enemies/makarov/fire1 enemies/makarov/fire2 }
@@ -192,704 +192,705 @@ $random enemies/makarov/throw { enemies/makarov/throw1 enemies/makarov/throw2 en
 $limit enemies/makarov/fire 0
 $attenuation enemies/makarov/fire 0.5
 $limit enemies/makarov/pump 0
-enemies/isaac/fire1 lsounds/Monsters/Phantoms/Isaac/Fire
-enemies/isaac/fire2 lsounds/Monsters/Phantoms/Isaac/Fire2
+enemies/isaac/fire1 lsnd/Monsters/Phantoms/Isaac/Fire
+enemies/isaac/fire2 lsnd/Monsters/Phantoms/Isaac/Fire2
 $random enemies/isaac/fire { enemies/isaac/fire1 enemies/isaac/fire2 }
 $limit enemies/isaac/fire 0
 $attenuation enemies/isaac/fire 0.5
-enemies/michael/swing1 lsounds/Monsters/Phantoms/Michael/Swing
-enemies/michael/swing2 lsounds/Monsters/Phantoms/Michael/Swing2
-enemies/michael/swing3 lsounds/Monsters/Phantoms/Michael/Swing3
-enemies/michael/hit1 lsounds/Monsters/Phantoms/Michael/Hit
-enemies/michael/hit2 lsounds/Monsters/Phantoms/Michael/Hit2
-enemies/michael/hit3 lsounds/Monsters/Phantoms/Michael/Hit3
+enemies/michael/swing1 lsnd/Monsters/Phantoms/Michael/Swing
+enemies/michael/swing2 lsnd/Monsters/Phantoms/Michael/Swing2
+enemies/michael/swing3 lsnd/Monsters/Phantoms/Michael/Swing3
+enemies/michael/hit1 lsnd/Monsters/Phantoms/Michael/Hit
+enemies/michael/hit2 lsnd/Monsters/Phantoms/Michael/Hit2
+enemies/michael/hit3 lsnd/Monsters/Phantoms/Michael/Hit3
 $random enemies/michael/swing { enemies/michael/swing1 enemies/michael/swing2 enemies/michael/swing3 }
 $random enemies/michael/hit { enemies/michael/hit1 enemies/michael/hit2 enemies/michael/hit3 }
-player/pickup/upgrbody lsounds/Items/UpgrBody
-player/pickup/upgrextr lsounds/Items/UpgrExtr
-player/pickup/upgrweap lsounds/Items/UpgrWeap
-player/pickup/upgrcbi lsounds/Items/CBIUpgrade
-player/pickup/item lsounds/Items/Item
-player/pickup/barrier lsounds/Items/Barrier
-player/pickup/infrared lsounds/Items/Goggles
-player/pickup/redkey lsounds/Items/RedKey
-player/pickup/yellowkey lsounds/Items/YellowKey
-player/pickup/bluekey lsounds/Items/BlueKey
-player/pickup/redskull2 lsounds/Items/SKULL
-player/pickup/redskull1 lsounds/Items/RedSkull
-player/pickup/yellowskull lsounds/Items/YellowSkull
-player/pickup/blueskull lsounds/Items/BlueSkull
-player/pickup/evil lsounds/Items/EvilItem
-player/pickup/clips lsounds/Items/BulletSmall
-player/pickup/clipb lsounds/Items/BulletPack
-player/pickup/cells lsounds/Items/CellSmall
-player/pickup/cellb lsounds/Items/CellPack
-player/pickup/shells lsounds/Items/ShellSmall
-player/pickup/shellb lsounds/Items/ShellPack
-player/pickup/rockets lsounds/Items/RocketSmall
-player/pickup/rocketb lsounds/Items/RocketBig
-player/pickup/mana lsounds/Items/Mana
-player/pickup/scoresmall lsounds/Items/ScoreSmall
-player/pickup/stimpack lsounds/Items/Stimpack
-player/pickup/medikit lsounds/Items/Medikit
-player/pickup/invuln lsounds/Items/Invuln
-player/pickup/mega lsounds/Items/Mega
-player/pickup/super lsounds/Items/Super
-player/pickup/allmap lsounds/Items/AllMap
-player/pickup/radsuit lsounds/Items/Radsuit
-player/pickup/berserk lsounds/Items/Berserk
-player/pickup/armor lsounds/Items/Armor
-player/pickup/boots lsounds/Items/Boots
-player/pickup/ring lsounds/Items/Ring
-player/pickup/armor/pink lsounds/Items/ArmorPink
-player/pickup/armor/midori lsounds/Items/ArmorMidori
-player/pickup/scorechip lsounds/Items/ScoreChip
-player/pickup/coin1 lsounds/Items/Coin1
-player/pickup/coin2 lsounds/Items/Coin2
-player/pickup/coin3 lsounds/Items/Coin3
-player/pickup/gem lsounds/Items/Gem
-player/pickup/material1 lsounds/Items/Material1
-player/pickup/material2 lsounds/Items/Material2
-player/pickup/material3 lsounds/Items/Material3
-player/pickup/material4 lsounds/Items/Material4
+player/pickup/upgrbody lsnd/Items/UpgrBody
+player/pickup/upgrextr lsnd/Items/UpgrExtr
+player/pickup/upgrweap lsnd/Items/UpgrWeap
+player/pickup/upgrcbi lsnd/Items/CBIUpgrade
+player/pickup/item lsnd/Items/Item
+player/pickup/barrier lsnd/Items/Barrier
+player/pickup/infrared lsnd/Items/Goggles
+player/pickup/redkey lsnd/Items/RedKey
+player/pickup/yellowkey lsnd/Items/YellowKey
+player/pickup/bluekey lsnd/Items/BlueKey
+player/pickup/redskull2 lsnd/Items/SKULL
+player/pickup/redskull1 lsnd/Items/RedSkull
+player/pickup/yellowskull lsnd/Items/YellowSkull
+player/pickup/blueskull lsnd/Items/BlueSkull
+player/pickup/evil lsnd/Items/EvilItem
+player/pickup/clips lsnd/Items/BulletSmall
+player/pickup/clipb lsnd/Items/BulletPack
+player/pickup/cells lsnd/Items/CellSmall
+player/pickup/cellb lsnd/Items/CellPack
+player/pickup/shells lsnd/Items/ShellSmall
+player/pickup/shellb lsnd/Items/ShellPack
+player/pickup/rockets lsnd/Items/RocketSmall
+player/pickup/rocketb lsnd/Items/RocketBig
+player/pickup/mana lsnd/Items/Mana
+player/pickup/scoresmall lsnd/Items/ScoreSmall
+player/pickup/stimpack lsnd/Items/Stimpack
+player/pickup/medikit lsnd/Items/Medikit
+player/pickup/invuln lsnd/Items/Invuln
+player/pickup/mega lsnd/Items/Mega
+player/pickup/super lsnd/Items/Super
+player/pickup/allmap lsnd/Items/AllMap
+player/pickup/radsuit lsnd/Items/Radsuit
+player/pickup/berserk lsnd/Items/Berserk
+player/pickup/armor lsnd/Items/Armor
+player/pickup/boots lsnd/Items/Boots
+player/pickup/ring lsnd/Items/Ring
+player/pickup/armor/pink lsnd/Items/ArmorPink
+player/pickup/armor/midori lsnd/Items/ArmorMidori
+player/pickup/scorechip lsnd/Items/ScoreChip
+player/pickup/coin1 lsnd/Items/Coin1
+player/pickup/coin2 lsnd/Items/Coin2
+player/pickup/coin3 lsnd/Items/Coin3
+player/pickup/gem lsnd/Items/Gem
+player/pickup/material1 lsnd/Items/Material1
+player/pickup/material2 lsnd/Items/Material2
+player/pickup/material3 lsnd/Items/Material3
+player/pickup/material4 lsnd/Items/Material4
 $random player/pickup/coin { player/pickup/coin1 player/pickup/coin2 player/pickup/coin3 }
 $random player/pickup/material { player/pickup/material1 player/pickup/material2 player/pickup/material3 player/pickup/material4 }
 $random player/pickup/redskull { player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull2 }
-items/healthbonus1 lsounds/Items/bdup/DSHBON1
-items/healthbonus2 lsounds/Items/bdup/DSHBON2
-items/healthbonus3 lsounds/Items/bdup/DSHBON3
-items/healthbonus4 lsounds/Items/bdup/DSHBON4
-items/healthbonus5 lsounds/Items/bdup/DSHBON5
-items/healthbonus6 lsounds/Items/bdup/DSHBON6
-items/healthbonus7 lsounds/Items/bdup/DSHBON7
-items/healthbonus8 lsounds/Items/bdup/DSHBON8
-items/healthbonus9 lsounds/Items/bdup/DSHBON9
-items/healthbonus10 lsounds/Items/bdup/DSHBON10
-items/healthbonus11 lsounds/Items/bdup/DSHBON11
-items/healthbonus12 lsounds/Items/bdup/DSHBON12
-items/healthbonus13 lsounds/Items/bdup/DSHBON13
-items/healthbonus14 lsounds/Items/bdup/DSHBON14
+items/healthbonus1 lsnd/Items/bdup/DSHBON1
+items/healthbonus2 lsnd/Items/bdup/DSHBON2
+items/healthbonus3 lsnd/Items/bdup/DSHBON3
+items/healthbonus4 lsnd/Items/bdup/DSHBON4
+items/healthbonus5 lsnd/Items/bdup/DSHBON5
+items/healthbonus6 lsnd/Items/bdup/DSHBON6
+items/healthbonus7 lsnd/Items/bdup/DSHBON7
+items/healthbonus8 lsnd/Items/bdup/DSHBON8
+items/healthbonus9 lsnd/Items/bdup/DSHBON9
+items/healthbonus10 lsnd/Items/bdup/DSHBON10
+items/healthbonus11 lsnd/Items/bdup/DSHBON11
+items/healthbonus12 lsnd/Items/bdup/DSHBON12
+items/healthbonus13 lsnd/Items/bdup/DSHBON13
+items/healthbonus14 lsnd/Items/bdup/DSHBON14
 $random items/healthbonusrandom { items/healthbonus1 items/healthbonus2 items/healthbonus3 items/healthbonus4 items/healthbonus5 items/healthbonus6 items/healthbonus7 items/healthbonus8 items/healthbonus9 items/healthbonus10 items/healthbonus11 items/healthbonus12 items/healthbonus13 items/healthbonus14 }
-items/vial lsounds/Items/HealthBonus
+items/vial lsnd/Items/HealthBonus
 $random items/healthbonus { items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/healthbonusrandom }
-$playersound player male *jump lsounds/Player/Jump
-$playersound player male *usefail lsounds/Player/UseFail
-$playersound player male *land lsounds/Player/Land
-$playersound player male *dive lsounds/Player/SplashIn
-$playersound player male *surface lsounds/Player/Splash
-player/score1 lsounds/Player/Score1
-player/score2 lsounds/Player/Score2
-player/score3 lsounds/Player/Score3
-player/doublejump lsounds/Player/DoubleJump
-player/slide lsounds/Player/Slide
-player/getsigil lsounds/Player/DivisionSigilPickup
-player/nuke lsounds/Player/Nuke
-player/barrier lsounds/Player/Barrier
-player/death1 lsounds/Player/DeathCharge
-player/death2 lsounds/Player/Death
-player/zoomin lsounds/Player/ZoomIn
-player/zoomout lsounds/Player/ZoomOut
-player/hitground lsounds/Player/HitGround
-player/infraredoff lsounds/Player/InfraredOff
-player/levelup lsounds/Player/LevelUp
-player/glare lsounds/Player/Glare
-player/lighton lsounds/Player/LightOn
-player/lightoff lsounds/Player/LightOff
-player/startgame lsounds/Player/StartGame
-player/showtext lsounds/Player/ShowText
+$playersound player male *jump lsnd/Player/Jump
+$playersound player male *usefail lsnd/Player/UseFail
+$playersound player male *land lsnd/Player/Land
+$playersound player male *dive lsnd/Player/SplashIn
+$playersound player male *surface lsnd/Player/Splash
+player/score1 lsnd/Player/Score1
+player/score2 lsnd/Player/Score2
+player/score3 lsnd/Player/Score3
+player/doublejump lsnd/Player/DoubleJump
+player/slide lsnd/Player/Slide
+player/getsigil lsnd/Player/DivisionSigilPickup
+player/nuke lsnd/Player/Nuke
+player/barrier lsnd/Player/Barrier
+player/death1 lsnd/Player/DeathCharge
+player/death2 lsnd/Player/Death
+player/zoomin lsnd/Player/ZoomIn
+player/zoomout lsnd/Player/ZoomOut
+player/hitground lsnd/Player/HitGround
+player/infraredoff lsnd/Player/InfraredOff
+player/levelup lsnd/Player/LevelUp
+player/glare lsnd/Player/Glare
+player/lighton lsnd/Player/LightOn
+player/lightoff lsnd/Player/LightOff
+player/startgame lsnd/Player/StartGame
+player/showtext lsnd/Player/ShowText
 $volume player/death2 0.7
 $volume player/nuke 0.7
 $volume player/doublejump 0.7
 $limit player/barrier 0
 $random player/score { player/score1 player/score2 player/score3 }
-player/step1 lsounds/Player/Footsteps/Step1
-player/step2 lsounds/Player/Footsteps/Step2
-player/step3 lsounds/Player/Footsteps/Step3
-player/step4 lsounds/Player/Footsteps/Step4
-player/stepw1 lsounds/Player/Footsteps/Water1
-player/stepw2 lsounds/Player/Footsteps/Water2
-player/stepw3 lsounds/Player/Footsteps/Water3
-player/stepw4 lsounds/Player/Footsteps/Water4
-player/stepl1 lsounds/Player/Footsteps/Lava1
-player/stepl2 lsounds/Player/Footsteps/Lava2
-player/stepl3 lsounds/Player/Footsteps/Lava3
-player/stepl4 lsounds/Player/Footsteps/Lava4
-player/steps1 lsounds/Player/Footsteps/Slime1
-player/steps2 lsounds/Player/Footsteps/Slime2
-player/steps3 lsounds/Player/Footsteps/Slime3
-player/steps4 lsounds/Player/Footsteps/Slime4
+player/step1 lsnd/Player/Footsteps/Step1
+player/step2 lsnd/Player/Footsteps/Step2
+player/step3 lsnd/Player/Footsteps/Step3
+player/step4 lsnd/Player/Footsteps/Step4
+player/stepw1 lsnd/Player/Footsteps/Water1
+player/stepw2 lsnd/Player/Footsteps/Water2
+player/stepw3 lsnd/Player/Footsteps/Water3
+player/stepw4 lsnd/Player/Footsteps/Water4
+player/stepl1 lsnd/Player/Footsteps/Lava1
+player/stepl2 lsnd/Player/Footsteps/Lava2
+player/stepl3 lsnd/Player/Footsteps/Lava3
+player/stepl4 lsnd/Player/Footsteps/Lava4
+player/steps1 lsnd/Player/Footsteps/Slime1
+player/steps2 lsnd/Player/Footsteps/Slime2
+player/steps3 lsnd/Player/Footsteps/Slime3
+player/steps4 lsnd/Player/Footsteps/Slime4
 $random player/step { player/step1 player/step2 player/step3 player/step4 }
 $random player/stepw { player/stepw1 player/stepw2 player/stepw3 player/stepw4 }
 $random player/stepl { player/stepl1 player/stepl2 player/stepl3 player/stepl4 }
 $random player/steps { player/steps1 player/steps2 player/steps3 player/steps4 }
-player/counter lsounds/GUI/Payout/Counter
-player/counterdone lsounds/GUI/Payout/CounterDone
-player/YOUVEGOTMAIL lsounds/GUI/Mail
-player/trmopen lsounds/GUI/Terminal/Open
-player/trmswitch lsounds/GUI/Terminal/Switch
-player/wings lsounds/Weapons/Wings
-$playersound assassin male *death lsounds/PlayerA/Death
-$playersound assassin male *xdeath lsounds/PlayerA/XDeath
-$playersound assassin male *pain100 lsounds/PlayerA/PainSmall
+player/counter lsnd/GUI/Payout/Counter
+player/counterdone lsnd/GUI/Payout/CounterDone
+player/YOUVEGOTMAIL lsnd/GUI/Mail
+player/trmopen lsnd/GUI/Terminal/Open
+player/trmswitch lsnd/GUI/Terminal/Switch
+player/wings lsnd/Weapons/Wings
+$playersound assassin male *death lsnd/PlayerA/Death
+$playersound assassin male *xdeath lsnd/PlayerA/XDeath
+$playersound assassin male *pain100 lsnd/PlayerA/PainSmall
 $playersounddup assassin male *pain75 *pain100
-$playersound assassin male *pain50 lsounds/PlayerA/Pain
+$playersound assassin male *pain50 lsnd/PlayerA/Pain
 $playersounddup assassin male *pain25 *pain50
-$playersound assassin male *grunt lsounds/PlayerA/Grunt
+$playersound assassin male *grunt lsnd/PlayerA/Grunt
 $alias player/assassin/step player/step
-player/assassin/roll lsounds/PlayerA/Roll
-player/assassin/djump lsounds/PlayerA/DoubleJump
-$playersound cybermage male *death lsounds/PlayerC/Death
-$playersound cybermage male *xdeath lsounds/PlayerC/XDeath
-$playersound cybermage male *pain100 lsounds/PlayerC/PainSmall
+player/assassin/roll lsnd/PlayerA/Roll
+player/assassin/djump lsnd/PlayerA/DoubleJump
+$playersound cybermage male *death lsnd/PlayerC/Death
+$playersound cybermage male *xdeath lsnd/PlayerC/XDeath
+$playersound cybermage male *pain100 lsnd/PlayerC/PainSmall
 $playersounddup cybermage male *pain75 *pain100
-$playersound cybermage male *pain50 lsounds/PlayerC/Pain
+$playersound cybermage male *pain50 lsnd/PlayerC/Pain
 $playersounddup cybermage male *pain25 *pain50
-$playersound cybermage male *grunt lsounds/PlayerC/Grunt
-player/manafull lsounds/PlayerC/FullCharge
+$playersound cybermage male *grunt lsnd/PlayerC/Grunt
+player/manafull lsnd/PlayerC/FullCharge
 $alias player/cyber-mage/step player/step
-$playersound darklord male *death lsounds/PlayerD/Death
-$playersound darklord male *xdeath lsounds/PlayerD/XDeath
-$playersound darklord male *pain100 lsounds/PlayerD/PainSmall
-$playersound darklord male *pain75 lsounds/PlayerD/Pain
+$playersound darklord male *death lsnd/PlayerD/Death
+$playersound darklord male *xdeath lsnd/PlayerD/XDeath
+$playersound darklord male *pain100 lsnd/PlayerD/PainSmall
+$playersound darklord male *pain75 lsnd/PlayerD/Pain
 $playersounddup darklord male *pain50 *pain75
 $playersounddup darklord male *pain25 *pain75
-$playersound darklord male *grunt lsounds/PlayerD/Grunt
-$playersound darklord male *land lsounds/PlayerD/Land
-player/darklord/step lsounds/PlayerD/Step
+$playersound darklord male *grunt lsnd/PlayerD/Grunt
+$playersound darklord male *land lsnd/PlayerD/Land
+player/darklord/step lsnd/PlayerD/Step
 $playeralias informant male *land player/informant/land
 $playeralias informant male *grunt silence
-$playersound informant male *jump lsounds/PlayerI/Jump
-$playersound informant male *death lsounds/PlayerI/Death
-$playersound informant male *xdeath lsounds/PlayerI/XDeath
-$playersound informant male *pain100 lsounds/PlayerI/PainSmall
+$playersound informant male *jump lsnd/PlayerI/Jump
+$playersound informant male *death lsnd/PlayerI/Death
+$playersound informant male *xdeath lsnd/PlayerI/XDeath
+$playersound informant male *pain100 lsnd/PlayerI/PainSmall
 $playersounddup informant male *pain75 *pain100
-$playersound informant male *pain50 lsounds/PlayerI/Pain
+$playersound informant male *pain50 lsnd/PlayerI/Pain
 $playersounddup informant male *pain25 *pain50
-player/informant/land1 lsounds/PlayerI/Land1
-player/informant/land2 lsounds/PlayerI/Land2
-player/informant/land3 lsounds/PlayerI/Land3
-player/informant/step1 lsounds/PlayerI/Footsteps/Step1
-player/informant/step2 lsounds/PlayerI/Footsteps/Step2
-player/informant/step3 lsounds/PlayerI/Footsteps/Step3
-player/informant/step4 lsounds/PlayerI/Footsteps/Step4
-player/informant/dodge lsounds/PlayerI/Dodge
+player/informant/land1 lsnd/PlayerI/Land1
+player/informant/land2 lsnd/PlayerI/Land2
+player/informant/land3 lsnd/PlayerI/Land3
+player/informant/step1 lsnd/PlayerI/Footsteps/Step1
+player/informant/step2 lsnd/PlayerI/Footsteps/Step2
+player/informant/step3 lsnd/PlayerI/Footsteps/Step3
+player/informant/step4 lsnd/PlayerI/Footsteps/Step4
+player/informant/dodge lsnd/PlayerI/Dodge
 $random player/informant/land { player/informant/land1 player/informant/land2 player/informant/land3 }
 $random player/informant/step { player/informant/step1 player/informant/step2 player/informant/step3 player/informant/step4 }
 $alias player/marine/step player/step
-player/rarmor/mode lsounds/PlayerM/RArmor/ChangeMode
-player/rarmor/damage lsounds/PlayerM/RArmor/Damage
-player/rocketboost lsounds/PlayerM/RocketBoost
-player/adren/inj lsounds/PlayerM/Adrenaline/Inject
-player/adren/ready lsounds/PlayerM/Adrenaline/Ready
-player/wanderer/shadowwalk lsounds/PlayerW/ShadowWalk
-marathon/pickup lsounds/Marathon/Pickup
-marathon/explode lsounds/Marathon/Explode
-marathon/hitsolid lsounds/Marathon/HitSolid
-marathon/rifle/fire lsounds/Marathon/RifleFire
-marathon/rifle/grenade lsounds/Marathon/GrenadeLaunch
-marathon/rifle/reload lsounds/Marathon/RifleReload
-marathon/hitwall1 lsounds/Marathon/HitWall1
-marathon/hitwall2 lsounds/Marathon/HitWall2
-marathon/hit1 lsounds/Marathon/Hit1
-marathon/hit2 lsounds/Marathon/Hit2
-marathon/hit3 lsounds/Marathon/Hit3
+player/rarmor/mode lsnd/PlayerM/RArmor/ChangeMode
+player/rarmor/damage lsnd/PlayerM/RArmor/Damage
+player/rocketboost lsnd/PlayerM/RocketBoost
+player/adren/inj lsnd/PlayerM/Adrenaline/Inject
+player/adren/ready lsnd/PlayerM/Adrenaline/Ready
+player/wanderer/shadowwalk lsnd/PlayerW/ShadowWalk
+marathon/pickup lsnd/Marathon/Pickup
+marathon/explode lsnd/Marathon/Explode
+marathon/hitsolid lsnd/Marathon/HitSolid
+marathon/rifle/fire lsnd/Marathon/RifleFire
+marathon/rifle/grenade lsnd/Marathon/GrenadeLaunch
+marathon/rifle/reload lsnd/Marathon/RifleReload
+marathon/hitwall1 lsnd/Marathon/HitWall1
+marathon/hitwall2 lsnd/Marathon/HitWall2
+marathon/hit1 lsnd/Marathon/Hit1
+marathon/hit2 lsnd/Marathon/Hit2
+marathon/hit3 lsnd/Marathon/Hit3
 $random marathon/hitwall { marathon/hitwall1 marathon/hitwall2 }
 $random marathon/hit { marathon/hit1 marathon/hit2 marathon/hit3 }
-casings/bullet/bounce1 lsounds/Weapons/Effects/Casings/CaseBounce1
-casings/bullet/bounce2 lsounds/Weapons/Effects/Casings/CaseBounce2
-casings/bullet/bounce3 lsounds/Weapons/Effects/Casings/CaseBounce3
-casings/bullet/bounce4 lsounds/Weapons/Effects/Casings/CaseBounce4
-casings/bullet/bounce5 lsounds/Weapons/Effects/Casings/CaseBounce5
-casings/bullet/bounce6 lsounds/Weapons/Effects/Casings/CaseBounce6
-casings/bullet/bounce7 lsounds/Weapons/Effects/Casings/CaseBounce7
-casings/bullet/bounce8 lsounds/Weapons/Effects/Casings/CaseBounce8
-casings/bullet/bounce9 lsounds/Weapons/Effects/Casings/CaseBounce9
-casings/bullet/bounce10 lsounds/Weapons/Effects/Casings/CaseBounce10
-casings/bullet/die1 lsounds/Weapons/Effects/Casings/CaseStop1
-casings/bullet/die2 lsounds/Weapons/Effects/Casings/CaseStop2
-casings/bullet/die3 lsounds/Weapons/Effects/Casings/CaseStop3
-casings/bullet/die4 lsounds/Weapons/Effects/Casings/CaseStop4
-casings/bullet/die5 lsounds/Weapons/Effects/Casings/CaseStop5
-casings/bullet/die6 lsounds/Weapons/Effects/Casings/CaseStop6
-casings/bullet/die7 lsounds/Weapons/Effects/Casings/CaseStop7
-casings/bullet/die8 lsounds/Weapons/Effects/Casings/CaseStop8
-casings/bullet/die9 lsounds/Weapons/Effects/Casings/CaseStop9
-casings/bullet/die10 lsounds/Weapons/Effects/Casings/CaseStop10
+casings/bullet/bounce1 lsnd/Weapons/Effects/Casings/CaseBounce1
+casings/bullet/bounce2 lsnd/Weapons/Effects/Casings/CaseBounce2
+casings/bullet/bounce3 lsnd/Weapons/Effects/Casings/CaseBounce3
+casings/bullet/bounce4 lsnd/Weapons/Effects/Casings/CaseBounce4
+casings/bullet/bounce5 lsnd/Weapons/Effects/Casings/CaseBounce5
+casings/bullet/bounce6 lsnd/Weapons/Effects/Casings/CaseBounce6
+casings/bullet/bounce7 lsnd/Weapons/Effects/Casings/CaseBounce7
+casings/bullet/bounce8 lsnd/Weapons/Effects/Casings/CaseBounce8
+casings/bullet/bounce9 lsnd/Weapons/Effects/Casings/CaseBounce9
+casings/bullet/bounce10 lsnd/Weapons/Effects/Casings/CaseBounce10
+casings/bullet/die1 lsnd/Weapons/Effects/Casings/CaseStop1
+casings/bullet/die2 lsnd/Weapons/Effects/Casings/CaseStop2
+casings/bullet/die3 lsnd/Weapons/Effects/Casings/CaseStop3
+casings/bullet/die4 lsnd/Weapons/Effects/Casings/CaseStop4
+casings/bullet/die5 lsnd/Weapons/Effects/Casings/CaseStop5
+casings/bullet/die6 lsnd/Weapons/Effects/Casings/CaseStop6
+casings/bullet/die7 lsnd/Weapons/Effects/Casings/CaseStop7
+casings/bullet/die8 lsnd/Weapons/Effects/Casings/CaseStop8
+casings/bullet/die9 lsnd/Weapons/Effects/Casings/CaseStop9
+casings/bullet/die10 lsnd/Weapons/Effects/Casings/CaseStop10
 $random casings/bullet/bounce { casings/bullet/bounce1 casings/bullet/bounce2 casings/bullet/bounce3 casings/bullet/bounce4 casings/bullet/bounce5 casings/bullet/bounce6 casings/bullet/bounce7 casings/bullet/bounce8 casings/bullet/bounce9 casings/bullet/bounce10 }
 $volume casings/bullet/bounce 0.4
 $random casings/bullet/die { casings/bullet/die1 casings/bullet/die2 casings/bullet/die3 casings/bullet/die4 casings/bullet/die5 casings/bullet/die6 casings/bullet/die7 casings/bullet/die8 casings/bullet/die9 casings/bullet/die10 }
 $volume casings/bullet/die 0.4
-casings/shell/bounce1 lsounds/Weapons/Effects/Casings/ShellBounce1
-casings/shell/bounce2 lsounds/Weapons/Effects/Casings/ShellBounce2
-casings/shell/bounce3 lsounds/Weapons/Effects/Casings/ShellBounce3
-casings/shell/bounce4 lsounds/Weapons/Effects/Casings/ShellBounce4
-casings/shell/bounce5 lsounds/Weapons/Effects/Casings/ShellBounce5
-casings/shell/die1 lsounds/Weapons/Effects/Casings/ShellBounce1
-casings/shell/die2 lsounds/Weapons/Effects/Casings/ShellBounce2
-casings/shell/die3 lsounds/Weapons/Effects/Casings/ShellBounce3
-casings/shell/die4 lsounds/Weapons/Effects/Casings/ShellBounce4
-casings/shell/die5 lsounds/Weapons/Effects/Casings/ShellBounce5
+casings/shell/bounce1 lsnd/Weapons/Effects/Casings/ShellBounce1
+casings/shell/bounce2 lsnd/Weapons/Effects/Casings/ShellBounce2
+casings/shell/bounce3 lsnd/Weapons/Effects/Casings/ShellBounce3
+casings/shell/bounce4 lsnd/Weapons/Effects/Casings/ShellBounce4
+casings/shell/bounce5 lsnd/Weapons/Effects/Casings/ShellBounce5
+casings/shell/die1 lsnd/Weapons/Effects/Casings/ShellBounce1
+casings/shell/die2 lsnd/Weapons/Effects/Casings/ShellBounce2
+casings/shell/die3 lsnd/Weapons/Effects/Casings/ShellBounce3
+casings/shell/die4 lsnd/Weapons/Effects/Casings/ShellBounce4
+casings/shell/die5 lsnd/Weapons/Effects/Casings/ShellBounce5
 $random casings/shell/bounce { casings/shell/bounce1 casings/shell/bounce2 casings/shell/bounce3 casings/shell/bounce4 casings/shell/bounce5 }
 $volume casings/shell/bounce 0.5
 $random casings/shell/die { casings/shell/die1 casings/shell/die2 casings/shell/die3 casings/shell/die4 casings/shell/die5 }
 $volume casings/shell/die 0.5
-weapons/magbounce1 lsounds/Weapons/Effects/Magazine/Drop1
-weapons/magbounce2 lsounds/Weapons/Effects/Magazine/Drop2
-weapons/magbounce3 lsounds/Weapons/Effects/Magazine/Drop3
-weapons/magbouncef1 lsounds/Weapons/Effects/Magazine/DropFull1
-weapons/magbouncef2 lsounds/Weapons/Effects/Magazine/DropFull2
-weapons/magbouncef3 lsounds/Weapons/Effects/Magazine/DropFull3
+weapons/magbounce1 lsnd/Weapons/Effects/Magazine/Drop1
+weapons/magbounce2 lsnd/Weapons/Effects/Magazine/Drop2
+weapons/magbounce3 lsnd/Weapons/Effects/Magazine/Drop3
+weapons/magbouncef1 lsnd/Weapons/Effects/Magazine/DropFull1
+weapons/magbouncef2 lsnd/Weapons/Effects/Magazine/DropFull2
+weapons/magbouncef3 lsnd/Weapons/Effects/Magazine/DropFull3
 $random weapons/magbounce { weapons/magbounce1 weapons/magbounce2 weapons/magbounce3 }
 $random weapons/magbouncef { weapons/magbouncef1 weapons/magbouncef2 weapons/magbouncef3 }
-weapons/empty lsounds/Weapons/Empty
-weapons/runout lsounds/Weapons/RunOut
-weapons/sword/chargeup lsounds/Weapons/Sword/Charge
-weapons/sword/attack lsounds/Weapons/Sword/Charge1
-weapons/sword/swing lsounds/Weapons/Sword/Swing
-weapons/sword/swing1 lsounds/Weapons/Sword/Swing1
-weapons/sword/charge lsounds/Weapons/Sword/Charge2
-weapons/sword/normal1 lsounds/Weapons/Sword/Swing2
-weapons/sword/normal2 lsounds/Weapons/Sword/Swing3
-weapons/sword/normal3 lsounds/Weapons/Sword/Swing4
-weapons/sword/normal4 lsounds/Weapons/Sword/Swing5
-weapons/sword/normal5 lsounds/Weapons/Sword/Swing6
+weapons/empty lsnd/Weapons/Empty
+weapons/runout lsnd/Weapons/RunOut
+weapons/sword/chargeup lsnd/Weapons/Sword/Charge
+weapons/sword/attack lsnd/Weapons/Sword/Charge1
+weapons/sword/swing lsnd/Weapons/Sword/Swing
+weapons/sword/swing1 lsnd/Weapons/Sword/Swing1
+weapons/sword/charge lsnd/Weapons/Sword/Charge2
+weapons/sword/normal1 lsnd/Weapons/Sword/Swing2
+weapons/sword/normal2 lsnd/Weapons/Sword/Swing3
+weapons/sword/normal3 lsnd/Weapons/Sword/Swing4
+weapons/sword/normal4 lsnd/Weapons/Sword/Swing5
+weapons/sword/normal5 lsnd/Weapons/Sword/Swing6
 $random weapons/sword/normal { weapons/sword/normal1 weapons/sword/normal2 weapons/sword/normal3 weapons/sword/normal4 weapons/sword/normal5 }
-weapons/sword/hit1 lsounds/Weapons/Sword/Hit1
-weapons/sword/hit2 lsounds/Weapons/Sword/Hit2
-weapons/sword/hit3 lsounds/Weapons/Sword/Hit3
-weapons/sword/hit4 lsounds/Weapons/Sword/Hit4
-weapons/sword/hit5 lsounds/Weapons/Sword/Hit5
+weapons/sword/hit1 lsnd/Weapons/Sword/Hit1
+weapons/sword/hit2 lsnd/Weapons/Sword/Hit2
+weapons/sword/hit3 lsnd/Weapons/Sword/Hit3
+weapons/sword/hit4 lsnd/Weapons/Sword/Hit4
+weapons/sword/hit5 lsnd/Weapons/Sword/Hit5
 $random weapons/sword/hit { weapons/sword/hit1 weapons/sword/hit2 weapons/sword/hit3 weapons/sword/hit4 weapons/sword/hit5 }
-effects/rocket/fly lsounds/WeaponsM/GrenadeLauncher/RocketFly
-effects/puff/ricochet1 lsounds/Weapons/Effects/Ricochet/Ric1
-effects/puff/ricochet2 lsounds/Weapons/Effects/Ricochet/Ric2
-effects/puff/ricochet3 lsounds/Weapons/Effects/Ricochet/Ric3
-effects/puff/ricochet4 lsounds/Weapons/Effects/Ricochet/Ric4
-effects/puff/ricochet5 lsounds/Weapons/Effects/Ricochet/Ric5
-effects/puff/ricochet6 lsounds/Weapons/Effects/Ricochet/Ric6
-effects/puff/ricochet7 lsounds/Weapons/Effects/Ricochet/Ric7
-effects/puff/ricochet8 lsounds/Weapons/Effects/Ricochet/Ric8
-effects/puff/ricochet9 lsounds/Weapons/Effects/Ricochet/Ric9
-effects/puff/ricochet10 lsounds/Weapons/Effects/Ricochet/Ric10
-effects/puff/ricochet11 lsounds/Weapons/Effects/Ricochet/Ric11
-effects/puff/ricochet12 lsounds/Weapons/Effects/Ricochet/Ric12
-effects/puff/ricochet13 lsounds/Weapons/Effects/Ricochet/Ric13
-effects/puff/ricochet14 lsounds/Weapons/Effects/Ricochet/Ric14
+effects/rocket/fly lsnd/WeaponsM/GrenadeLauncher/RocketFly
+effects/puff/ricochet1 lsnd/Weapons/Effects/Ricochet/Ric1
+effects/puff/ricochet2 lsnd/Weapons/Effects/Ricochet/Ric2
+effects/puff/ricochet3 lsnd/Weapons/Effects/Ricochet/Ric3
+effects/puff/ricochet4 lsnd/Weapons/Effects/Ricochet/Ric4
+effects/puff/ricochet5 lsnd/Weapons/Effects/Ricochet/Ric5
+effects/puff/ricochet6 lsnd/Weapons/Effects/Ricochet/Ric6
+effects/puff/ricochet7 lsnd/Weapons/Effects/Ricochet/Ric7
+effects/puff/ricochet8 lsnd/Weapons/Effects/Ricochet/Ric8
+effects/puff/ricochet9 lsnd/Weapons/Effects/Ricochet/Ric9
+effects/puff/ricochet10 lsnd/Weapons/Effects/Ricochet/Ric10
+effects/puff/ricochet11 lsnd/Weapons/Effects/Ricochet/Ric11
+effects/puff/ricochet12 lsnd/Weapons/Effects/Ricochet/Ric12
+effects/puff/ricochet13 lsnd/Weapons/Effects/Ricochet/Ric13
+effects/puff/ricochet14 lsnd/Weapons/Effects/Ricochet/Ric14
 $random effects/puff/ricochet { effects/puff/ricochet1 effects/puff/ricochet2 effects/puff/ricochet3 effects/puff/ricochet4 effects/puff/ricochet5 effects/puff/ricochet6 effects/puff/ricochet7 effects/puff/ricochet8 effects/puff/ricochet9 effects/puff/ricochet10 effects/puff/ricochet11 effects/puff/ricochet12 effects/puff/ricochet13 effects/puff/ricochet14 }
 $limit effects/puff/ricochet 0
-effects/geexplosion1 lsounds/Weapons/Effects/GEExplosion/expl1
-effects/geexplosion2 lsounds/Weapons/Effects/GEExplosion/expl2
-effects/geexplosion3 lsounds/Weapons/Effects/GEExplosion/expl3
-effects/geexplosion4 lsounds/Weapons/Effects/GEExplosion/expl4
-effects/geexplosion5 lsounds/Weapons/Effects/GEExplosion/expl5
-effects/geexplosion6 lsounds/Weapons/Effects/GEExplosion/expl6
-effects/geexplosion7 lsounds/Weapons/Effects/GEExplosion/expl7
-effects/geexplosion8 lsounds/Weapons/Effects/GEExplosion/expl8
-effects/geexplosion9 lsounds/Weapons/Effects/GEExplosion/expl9
-effects/geexplosion10 lsounds/Weapons/Effects/GEExplosion/expl10
-effects/geexplosion11 lsounds/Weapons/Effects/GEExplosion/expl11
+effects/geexplosion1 lsnd/Weapons/Effects/GEExplosion/expl1
+effects/geexplosion2 lsnd/Weapons/Effects/GEExplosion/expl2
+effects/geexplosion3 lsnd/Weapons/Effects/GEExplosion/expl3
+effects/geexplosion4 lsnd/Weapons/Effects/GEExplosion/expl4
+effects/geexplosion5 lsnd/Weapons/Effects/GEExplosion/expl5
+effects/geexplosion6 lsnd/Weapons/Effects/GEExplosion/expl6
+effects/geexplosion7 lsnd/Weapons/Effects/GEExplosion/expl7
+effects/geexplosion8 lsnd/Weapons/Effects/GEExplosion/expl8
+effects/geexplosion9 lsnd/Weapons/Effects/GEExplosion/expl9
+effects/geexplosion10 lsnd/Weapons/Effects/GEExplosion/expl10
+effects/geexplosion11 lsnd/Weapons/Effects/GEExplosion/expl11
 $random effects/geexplosion { effects/geexplosion1 effects/geexplosion2 effects/geexplosion3 effects/geexplosion4 effects/geexplosion5 effects/geexplosion6 effects/geexplosion7 effects/geexplosion8 effects/geexplosion9 effects/geexplosion10 effects/geexplosion11 }
-weapons/burstrif/fire1 lsounds/WeaponsA/BurstRifle/Fire
-weapons/burstrif/fire2 lsounds/WeaponsA/BurstRifle/Fire2
-weapons/burstrif/fire3 lsounds/WeaponsA/BurstRifle/Fire3
-weapons/burstrif/firefirst lsounds/WeaponsA/BurstRifle/FireFirst
-weapons/burstrif/bolt lsounds/WeaponsA/BurstRifle/Bolt
-weapons/burstrif/draw lsounds/WeaponsA/BurstRifle/Draw
+weapons/burstrif/fire1 lsnd/WeaponsA/BurstRifle/Fire
+weapons/burstrif/fire2 lsnd/WeaponsA/BurstRifle/Fire2
+weapons/burstrif/fire3 lsnd/WeaponsA/BurstRifle/Fire3
+weapons/burstrif/firefirst lsnd/WeaponsA/BurstRifle/FireFirst
+weapons/burstrif/bolt lsnd/WeaponsA/BurstRifle/Bolt
+weapons/burstrif/draw lsnd/WeaponsA/BurstRifle/Draw
 $random weapons/burstrif/fire { weapons/burstrif/fire1 weapons/burstrif/fire2 weapons/burstrif/fire3 }
-weapons/dualpistols/firel lsounds/WeaponsA/DualPistols/FireL
-weapons/dualpistols/firer lsounds/WeaponsA/DualPistols/FireR
-weapons/dualpistols/in lsounds/WeaponsA/DualPistols/ReloadIn
-weapons/dualpistols/out lsounds/WeaponsA/DualPistols/ReloadOut
-weapons/dualpistols/slide lsounds/WeaponsA/DualPistols/ReloadSlide
-weapons/dualpistols/draw lsounds/WeaponsA/DualPistols/Draw
-weapons/mateba/fire lsounds/WeaponsC/Mateba/Fire
-weapons/mateba/open lsounds/WeaponsC/Mateba/Open
-weapons/mateba/eject lsounds/WeaponsC/Mateba/Eject
-weapons/mateba/load lsounds/WeaponsC/Mateba/Load
-weapons/mateba/close lsounds/WeaponsC/Mateba/Close
-weapons/mateba/draw lsounds/WeaponsC/Mateba/Draw
-weapons/mateba/finalize lsounds/WeaponsC/Mateba/Finalize
+weapons/dualpistols/firel lsnd/WeaponsA/DualPistols/FireL
+weapons/dualpistols/firer lsnd/WeaponsA/DualPistols/FireR
+weapons/dualpistols/in lsnd/WeaponsA/DualPistols/ReloadIn
+weapons/dualpistols/out lsnd/WeaponsA/DualPistols/ReloadOut
+weapons/dualpistols/slide lsnd/WeaponsA/DualPistols/ReloadSlide
+weapons/dualpistols/draw lsnd/WeaponsA/DualPistols/Draw
+weapons/mateba/fire lsnd/WeaponsC/Mateba/Fire
+weapons/mateba/open lsnd/WeaponsC/Mateba/Open
+weapons/mateba/eject lsnd/WeaponsC/Mateba/Eject
+weapons/mateba/load lsnd/WeaponsC/Mateba/Load
+weapons/mateba/close lsnd/WeaponsC/Mateba/Close
+weapons/mateba/draw lsnd/WeaponsC/Mateba/Draw
+weapons/mateba/finalize lsnd/WeaponsC/Mateba/Finalize
 $alias weapons/mateba/pickup weapons/mateba/draw
-weapons/erifle/pickup lsounds/WeaponsC/ShockRifle/Pickup
-weapons/erifle/draw lsounds/WeaponsC/ShockRifle/Draw
-weapons/erifle/fire lsounds/WeaponsC/ShockRifle/Fire
-weapons/erifle/zap1 lsounds/WeaponsC/ShockRifle/Zap1
-weapons/erifle/zap2 lsounds/WeaponsC/ShockRifle/Zap2
-weapons/erifle/zap3 lsounds/WeaponsC/ShockRifle/Zap3
-weapons/erifle/reloadout lsounds/WeaponsC/ShockRifle/ReloadOut
-weapons/erifle/reloadin lsounds/WeaponsC/ShockRifle/ReloadIn
-weapons/erifle/shock1 lsounds/WeaponsC/ShockRifle/Shock1
-weapons/erifle/shock2 lsounds/WeaponsC/ShockRifle/Shock2
+weapons/erifle/pickup lsnd/WeaponsC/ShockRifle/Pickup
+weapons/erifle/draw lsnd/WeaponsC/ShockRifle/Draw
+weapons/erifle/fire lsnd/WeaponsC/ShockRifle/Fire
+weapons/erifle/zap1 lsnd/WeaponsC/ShockRifle/Zap1
+weapons/erifle/zap2 lsnd/WeaponsC/ShockRifle/Zap2
+weapons/erifle/zap3 lsnd/WeaponsC/ShockRifle/Zap3
+weapons/erifle/reloadout lsnd/WeaponsC/ShockRifle/ReloadOut
+weapons/erifle/reloadin lsnd/WeaponsC/ShockRifle/ReloadIn
+weapons/erifle/shock1 lsnd/WeaponsC/ShockRifle/Shock1
+weapons/erifle/shock2 lsnd/WeaponsC/ShockRifle/Shock2
 $random weapons/erifle/shock { weapons/erifle/shock1 weapons/erifle/shock2 }
 $random weapons/erifle/zap { weapons/erifle/zap1 weapons/erifle/zap2 weapons/erifle/zap3 }
 $volume weapons/erifle/zap 0.15
-weapons/spas/fire lsounds/WeaponsC/SPAS/Fire
-weapons/spas/fire2 lsounds/WeaponsC/SPAS/Fire2
-weapons/spas/load lsounds/WeaponsC/SPAS/Load
-weapons/spas/pump lsounds/WeaponsC/SPAS/Pump
-weapons/spas/empty lsounds/WeaponsC/SPAS/FireEmpty
-weapons/spas/pickup lsounds/WeaponsC/SPAS/Pickup
-weapons/spas/draw lsounds/WeaponsC/SPAS/Draw
-weapons/smg/fire lsounds/WeaponsC/SMG/Fire
-weapons/smg/firedone lsounds/WeaponsC/SMG/FireDone
-weapons/smg/firehit lsounds/WeaponsC/SMG/FireHit
-weapons/smg/eject lsounds/WeaponsC/SMG/EjectRod
-weapons/smg/insert lsounds/WeaponsC/SMG/InsertRod
-weapons/smg/heat lsounds/WeaponsC/SMG/HeatDisperse
-weapons/smg/lift lsounds/WeaponsC/SMG/Lift
-weapons/smg/open lsounds/WeaponsC/SMG/TopOpen
-weapons/smg/close lsounds/WeaponsC/SMG/TopClose
-weapons/smg/magin2 lsounds/WeaponsC/SMG/MagInLong
-weapons/smg/magout lsounds/WeaponsC/SMG/MagOut
-weapons/smg/magin lsounds/WeaponsC/SMG/MagIn
-weapons/smg/draw lsounds/WeaponsC/SMG/Draw
-weapons/smg/pickup lsounds/WeaponsC/SMG/Pickup
-weapons/ionrifle/fire lsounds/WeaponsC/IonRifle/Fire
-weapons/ionrifle/fire2 lsounds/WeaponsC/IonRifle/Fire2
-weapons/ionrifle/eject lsounds/WeaponsC/IonRifle/Eject
-weapons/ionrifle/load lsounds/WeaponsC/IonRifle/Load
-weapons/ionrifle/magout lsounds/WeaponsC/IonRifle/MagOut
-weapons/ionrifle/magin lsounds/WeaponsC/IonRifle/MagIn
-weapons/ionrifle/zoomout lsounds/WeaponsC/IonRifle/ZoomOut
-weapons/ionrifle/zoomin lsounds/WeaponsC/IonRifle/ZoomIn
-weapons/ionrifle/empty lsounds/WeaponsC/IonRifle/FireEmpty
-weapons/ionrifle/draw lsounds/WeaponsC/IonRifle/Draw
-weapons/ionrifle/pickup lsounds/WeaponsC/IonRifle/Pickup
-weapons/ionrifle/cfire1 lsounds/WeaponsC/IonRifle/Charged1
-weapons/ionrifle/cfire2 lsounds/WeaponsC/IonRifle/Charged2
-weapons/ionrifle/charge lsounds/WeaponsC/IonRifle/Charge
+weapons/spas/fire lsnd/WeaponsC/SPAS/Fire
+weapons/spas/fire2 lsnd/WeaponsC/SPAS/Fire2
+weapons/spas/load lsnd/WeaponsC/SPAS/Load
+weapons/spas/pump lsnd/WeaponsC/SPAS/Pump
+weapons/spas/empty lsnd/WeaponsC/SPAS/FireEmpty
+weapons/spas/pickup lsnd/WeaponsC/SPAS/Pickup
+weapons/spas/draw lsnd/WeaponsC/SPAS/Draw
+weapons/smg/fire lsnd/WeaponsC/SMG/Fire
+weapons/smg/firedone lsnd/WeaponsC/SMG/FireDone
+weapons/smg/firehit lsnd/WeaponsC/SMG/FireHit
+weapons/smg/eject lsnd/WeaponsC/SMG/EjectRod
+weapons/smg/insert lsnd/WeaponsC/SMG/InsertRod
+weapons/smg/heat lsnd/WeaponsC/SMG/HeatDisperse
+weapons/smg/lift lsnd/WeaponsC/SMG/Lift
+weapons/smg/open lsnd/WeaponsC/SMG/TopOpen
+weapons/smg/close lsnd/WeaponsC/SMG/TopClose
+weapons/smg/magin2 lsnd/WeaponsC/SMG/MagInLong
+weapons/smg/magout lsnd/WeaponsC/SMG/MagOut
+weapons/smg/magin lsnd/WeaponsC/SMG/MagIn
+weapons/smg/draw lsnd/WeaponsC/SMG/Draw
+weapons/smg/pickup lsnd/WeaponsC/SMG/Pickup
+weapons/ionrifle/fire lsnd/WeaponsC/IonRifle/Fire
+weapons/ionrifle/fire2 lsnd/WeaponsC/IonRifle/Fire2
+weapons/ionrifle/eject lsnd/WeaponsC/IonRifle/Eject
+weapons/ionrifle/load lsnd/WeaponsC/IonRifle/Load
+weapons/ionrifle/magout lsnd/WeaponsC/IonRifle/MagOut
+weapons/ionrifle/magin lsnd/WeaponsC/IonRifle/MagIn
+weapons/ionrifle/zoomout lsnd/WeaponsC/IonRifle/ZoomOut
+weapons/ionrifle/zoomin lsnd/WeaponsC/IonRifle/ZoomIn
+weapons/ionrifle/empty lsnd/WeaponsC/IonRifle/FireEmpty
+weapons/ionrifle/draw lsnd/WeaponsC/IonRifle/Draw
+weapons/ionrifle/pickup lsnd/WeaponsC/IonRifle/Pickup
+weapons/ionrifle/cfire1 lsnd/WeaponsC/IonRifle/Charged1
+weapons/ionrifle/cfire2 lsnd/WeaponsC/IonRifle/Charged2
+weapons/ionrifle/charge lsnd/WeaponsC/IonRifle/Charge
 $random weapons/ionrifle/cfire { weapons/ionrifle/cfire1 weapons/ionrifle/cfire2 }
 $alias weapons/ionrifle/heat weapons/smg/heat
-weapons/shipgun/explode lsounds/WeaponsC/StarDestroyer/Explode
-weapons/shipgun/fire lsounds/WeaponsC/StarDestroyer/Fire
-weapons/shipgun/firesol lsounds/WeaponsC/StarDestroyer/FireSolspear
-weapons/shipgun/prepare lsounds/WeaponsC/StarDestroyer/Charge
-weapons/shipgun/empty lsounds/WeaponsC/StarDestroyer/FireEmpty
-weapons/shipgun/draw lsounds/WeaponsC/StarDestroyer/Draw
-weapons/shipgun/pickup lsounds/WeaponsC/StarDestroyer/Pickup
-weapons/shipgun/firesurge lsounds/WeaponsC/StarDestroyer/FireSurge
-weapons/shipgun/idle lsounds/WeaponsC/StarDestroyer/Idle
+weapons/shipgun/explode lsnd/WeaponsC/StarDestroyer/Explode
+weapons/shipgun/fire lsnd/WeaponsC/StarDestroyer/Fire
+weapons/shipgun/firesol lsnd/WeaponsC/StarDestroyer/FireSolspear
+weapons/shipgun/prepare lsnd/WeaponsC/StarDestroyer/Charge
+weapons/shipgun/empty lsnd/WeaponsC/StarDestroyer/FireEmpty
+weapons/shipgun/draw lsnd/WeaponsC/StarDestroyer/Draw
+weapons/shipgun/pickup lsnd/WeaponsC/StarDestroyer/Pickup
+weapons/shipgun/firesurge lsnd/WeaponsC/StarDestroyer/FireSurge
+weapons/shipgun/idle lsnd/WeaponsC/StarDestroyer/Idle
 $limit weapons/shipgun/explode 0
 $attenuation weapons/shipgun/explode 0.6
-weapons/blade/slash lsounds/WeaponsC/Blade/Slash
-weapons/blade/hit lsounds/WeaponsC/Blade/Hit
-weapons/delear/fire lsounds/WeaponsC/Delear/Fire
-weapons/delear/open lsounds/WeaponsC/Delear/Open
-weapons/delear/charge lsounds/WeaponsC/Delear/Charge
-weapons/delear/close lsounds/WeaponsC/Delear/Close
-weapons/feuer/explode lsounds/WeaponsC/Feuer/Explode
-weapons/feuer/fire lsounds/WeaponsC/Feuer/Fire
-weapons/feuer/final lsounds/WeaponsC/Feuer/Final
+weapons/blade/slash lsnd/WeaponsC/Blade/Slash
+weapons/blade/hit lsnd/WeaponsC/Blade/Hit
+weapons/delear/fire lsnd/WeaponsC/Delear/Fire
+weapons/delear/open lsnd/WeaponsC/Delear/Open
+weapons/delear/charge lsnd/WeaponsC/Delear/Charge
+weapons/delear/close lsnd/WeaponsC/Delear/Close
+weapons/feuer/explode lsnd/WeaponsC/Feuer/Explode
+weapons/feuer/fire lsnd/WeaponsC/Feuer/Fire
+weapons/feuer/final lsnd/WeaponsC/Feuer/Final
 $limit weapons/feuer/explode 0
 $volume weapons/feuer/fire 0.9
-weapons/rend/slash1 lsounds/WeaponsC/Rend/Fire1
-weapons/rend/slash2 lsounds/WeaponsC/Rend/Fire2
-weapons/rend/slash3 lsounds/WeaponsC/Rend/Fire3
-weapons/rend/end lsounds/WeaponsC/Rend/End
-weapons/rend/reflect lsounds/WeaponsC/Rend/Reflect
+weapons/rend/slash1 lsnd/WeaponsC/Rend/Fire1
+weapons/rend/slash2 lsnd/WeaponsC/Rend/Fire2
+weapons/rend/slash3 lsnd/WeaponsC/Rend/Fire3
+weapons/rend/end lsnd/WeaponsC/Rend/End
+weapons/rend/reflect lsnd/WeaponsC/Rend/Reflect
 $random weapons/rend/slash { weapons/rend/slash1 weapons/rend/slash2 weapons/rend/slash3 }
 $alias weapons/rend/hit weapons/blade/hit
-weapons/hulgyon/proc lsounds/WeaponsC/Hulgyon/Proc
+weapons/hulgyon/proc lsnd/WeaponsC/Hulgyon/Proc
 $limit weapons/hulgyon/proc 0
-weapons/sshot/fire lsounds/WeaponsC/StarShot/Fire
-weapons/sshot/firero lsounds/WeaponsC/StarShot/RunOut
+weapons/sshot/fire lsnd/WeaponsC/StarShot/Fire
+weapons/sshot/firero lsnd/WeaponsC/StarShot/RunOut
 $alias weapons/sshot/hit weapons/shotgun/gauss/puff
 $limit weapons/sshot/hit 0
 $limit weapons/sshot/fire 0
-weapons/cercle/begin lsounds/WeaponsC/Cercle/Begin
-weapons/cercle/attack lsounds/WeaponsC/Cercle/Attack
-weapons/subweapon/charge lsounds/WeaponsD/Subweapons/Charge
-weapons/subweapon/armgun lsounds/WeaponsD/Subweapons/ArmGun
-weapons/subweapon/needle lsounds/WeaponsD/Subweapons/Needle
+weapons/cercle/begin lsnd/WeaponsC/Cercle/Begin
+weapons/cercle/attack lsnd/WeaponsC/Cercle/Attack
+weapons/subweapon/charge lsnd/WeaponsD/Subweapons/Charge
+weapons/subweapon/armgun lsnd/WeaponsD/Subweapons/ArmGun
+weapons/subweapon/needle lsnd/WeaponsD/Subweapons/Needle
 $alias weapons/subweapon/dagger weapons/rend/end
 $alias weapons/subweapon/axe weapons/rend/slash
 $alias weapons/subweapon/grenade weapons/rifle/grenade
-weapons/kampilan/draw lsounds/WeaponsD/Kampilan/Draw
-weapons/kampilan/bonk lsounds/WeaponsD/Kampilan/Bonk
-weapons/kampilan/hit lsounds/WeaponsD/Kampilan/Hit
-weapons/kampilan/hitflesh lsounds/WeaponsD/Kampilan/HitFlesh
-weapons/kampilan/ready1 lsounds/WeaponsD/Kampilan/Ready
-weapons/kampilan/ready2 lsounds/WeaponsD/Kampilan/Ready2
-weapons/kampilan/swing1 lsounds/WeaponsD/Kampilan/Swing
-weapons/kampilan/swing2 lsounds/WeaponsD/Kampilan/Swing2
+weapons/kampilan/draw lsnd/WeaponsD/Kampilan/Draw
+weapons/kampilan/bonk lsnd/WeaponsD/Kampilan/Bonk
+weapons/kampilan/hit lsnd/WeaponsD/Kampilan/Hit
+weapons/kampilan/hitflesh lsnd/WeaponsD/Kampilan/HitFlesh
+weapons/kampilan/ready1 lsnd/WeaponsD/Kampilan/Ready
+weapons/kampilan/ready2 lsnd/WeaponsD/Kampilan/Ready2
+weapons/kampilan/swing1 lsnd/WeaponsD/Kampilan/Swing
+weapons/kampilan/swing2 lsnd/WeaponsD/Kampilan/Swing2
 $random weapons/kampilan/ready { weapons/kampilan/ready1 weapons/kampilan/ready2 }
 $random weapons/kampilan/swing { weapons/kampilan/swing1 weapons/kampilan/swing2 }
-weapons/700e/fire1 lsounds/WeaponsD/700Express/Fire1
-weapons/700e/fire2 lsounds/WeaponsD/700Express/Fire2
-weapons/700e/fire3 lsounds/WeaponsD/700Express/Fire3
-weapons/700e/out lsounds/WeaponsD/700Express/ReloadOut
-weapons/700e/in lsounds/WeaponsD/700Express/ReloadIn
-weapons/700e/move lsounds/WeaponsD/700Express/Move
-weapons/700e/draw lsounds/WeaponsD/700Express/Draw
-weapons/700e/bin lsounds/WeaponsD/700Express/BulletIn
-weapons/700e/cout lsounds/WeaponsD/700Express/CasingsOut
+weapons/700e/fire1 lsnd/WeaponsD/700Express/Fire1
+weapons/700e/fire2 lsnd/WeaponsD/700Express/Fire2
+weapons/700e/fire3 lsnd/WeaponsD/700Express/Fire3
+weapons/700e/out lsnd/WeaponsD/700Express/ReloadOut
+weapons/700e/in lsnd/WeaponsD/700Express/ReloadIn
+weapons/700e/move lsnd/WeaponsD/700Express/Move
+weapons/700e/draw lsnd/WeaponsD/700Express/Draw
+weapons/700e/bin lsnd/WeaponsD/700Express/BulletIn
+weapons/700e/cout lsnd/WeaponsD/700Express/CasingsOut
 $random weapons/700e/fire { weapons/700e/fire1 weapons/700e/fire2 weapons/700e/fire3 }
-weapons/4bore/fire lsounds/WeaponsD/4Bore/Fire
-weapons/4bore/draw lsounds/WeaponsD/4Bore/Draw
-weapons/shrapnel/fire lsounds/WeaponsD/ShrapnelGun/Fire
-weapons/shrapnel/draw lsounds/WeaponsD/ShrapnelGun/Draw
-weapons/shrapnel/bounce lsounds/WeaponsD/ShrapnelGun/Bounce
-weapons/shrapnel/hit lsounds/WeaponsD/ShrapnelGun/Hit
-weapons/motra/fire1 lsounds/WeaponsD/Motra/Fire1
-weapons/motra/fire2 lsounds/WeaponsD/Motra/Fire2
-weapons/motra/fire3 lsounds/WeaponsD/Motra/Fire3
-weapons/motra/out lsounds/WeaponsD/Motra/ReloadOut
-weapons/motra/in lsounds/WeaponsD/Motra/ReloadIn
-weapons/motra/draw lsounds/WeaponsD/Motra/Draw
+weapons/4bore/fire lsnd/WeaponsD/4Bore/Fire
+weapons/4bore/draw lsnd/WeaponsD/4Bore/Draw
+weapons/shrapnel/fire lsnd/WeaponsD/ShrapnelGun/Fire
+weapons/shrapnel/draw lsnd/WeaponsD/ShrapnelGun/Draw
+weapons/shrapnel/bounce lsnd/WeaponsD/ShrapnelGun/Bounce
+weapons/shrapnel/hit lsnd/WeaponsD/ShrapnelGun/Hit
+weapons/motra/fire1 lsnd/WeaponsD/Motra/Fire1
+weapons/motra/fire2 lsnd/WeaponsD/Motra/Fire2
+weapons/motra/fire3 lsnd/WeaponsD/Motra/Fire3
+weapons/motra/out lsnd/WeaponsD/Motra/ReloadOut
+weapons/motra/in lsnd/WeaponsD/Motra/ReloadIn
+weapons/motra/draw lsnd/WeaponsD/Motra/Draw
 $random weapons/motra/fire { weapons/motra/fire1 weapons/motra/fire2 weapons/motra/fire3 }
-weapons/minigun/fire lsounds/WeaponsD/Minigun/Fire
-weapons/minigun/rotate lsounds/WeaponsD/Minigun/Rotate
-weapons/minigun/up lsounds/WeaponsD/Minigun/RotateUp
-weapons/minigun/click lsounds/WeaponsD/Minigun/Click
-weapons/minigun/down lsounds/WeaponsD/Minigun/RotateDown
-weapons/minigun/place lsounds/WeaponsD/Minigun/RotatePlace
-weapons/minigun/empty lsounds/WeaponsD/Minigun/Empty
-weapons/minigun/pickup lsounds/WeaponsD/Minigun/Pickup
-weapons/minigun/draw lsounds/WeaponsD/Minigun/Draw
-weapons/dualrocket/firel1 lsounds/WeaponsD/DualRocket/FireLeft
-weapons/dualrocket/firel2 lsounds/WeaponsD/DualRocket/FireLeft2
-weapons/dualrocket/firel3 lsounds/WeaponsD/DualRocket/FireLeft3
-weapons/dualrocket/firer1 lsounds/WeaponsD/DualRocket/FireRight
-weapons/dualrocket/firer2 lsounds/WeaponsD/DualRocket/FireRight2
-weapons/dualrocket/firer3 lsounds/WeaponsD/DualRocket/FireRight3
-weapons/dualrocket/draw lsounds/WeaponsD/DualRocket/Draw
+weapons/minigun/fire lsnd/WeaponsD/Minigun/Fire
+weapons/minigun/rotate lsnd/WeaponsD/Minigun/Rotate
+weapons/minigun/up lsnd/WeaponsD/Minigun/RotateUp
+weapons/minigun/click lsnd/WeaponsD/Minigun/Click
+weapons/minigun/down lsnd/WeaponsD/Minigun/RotateDown
+weapons/minigun/place lsnd/WeaponsD/Minigun/RotatePlace
+weapons/minigun/empty lsnd/WeaponsD/Minigun/Empty
+weapons/minigun/pickup lsnd/WeaponsD/Minigun/Pickup
+weapons/minigun/draw lsnd/WeaponsD/Minigun/Draw
+weapons/dualrocket/firel1 lsnd/WeaponsD/DualRocket/FireLeft
+weapons/dualrocket/firel2 lsnd/WeaponsD/DualRocket/FireLeft2
+weapons/dualrocket/firel3 lsnd/WeaponsD/DualRocket/FireLeft3
+weapons/dualrocket/firer1 lsnd/WeaponsD/DualRocket/FireRight
+weapons/dualrocket/firer2 lsnd/WeaponsD/DualRocket/FireRight2
+weapons/dualrocket/firer3 lsnd/WeaponsD/DualRocket/FireRight3
+weapons/dualrocket/draw lsnd/WeaponsD/DualRocket/Draw
 $random weapons/dualrocket/firel { weapons/dualrocket/firel1 weapons/dualrocket/firel2 weapons/dualrocket/firel3 }
 $random weapons/dualrocket/firer { weapons/dualrocket/firer1 weapons/dualrocket/firer2 weapons/dualrocket/firer3 }
-weapons/fortune/fire lsounds/WeaponsD/FortuneGun/Fire
-weapons/fortune/hit lsounds/WeaponsD/FortuneGun/Hit
-weapons/fortune/spark lsounds/WeaponsD/FortuneGun/Spark
-weapons/fortune/charge lsounds/WeaponsD/FortuneGun/Charge
-weapons/fortune/draw lsounds/WeaponsD/FortuneGun/Draw
+weapons/fortune/fire lsnd/WeaponsD/FortuneGun/Fire
+weapons/fortune/hit lsnd/WeaponsD/FortuneGun/Hit
+weapons/fortune/spark lsnd/WeaponsD/FortuneGun/Spark
+weapons/fortune/charge lsnd/WeaponsD/FortuneGun/Charge
+weapons/fortune/draw lsnd/WeaponsD/FortuneGun/Draw
 $limit weapons/fortune/hit 0
 $limit weapons/fortune/spark 0
+weapons/rems/fire lsnd/WeaponsD/Rems/Fire
 $alias weapons/unknown/pickup YOUSONOFABITCH
 $alias weapons/fist/pickup MMMMHMHMMMHMMM
-weapons/knife/swing1 lsounds/WeaponsM/Knife/Fire1
-weapons/knife/swing2 lsounds/WeaponsM/Knife/Fire2
-weapons/knife/hitflesh lsounds/WeaponsM/Knife/Hit
-weapons/knife/hitwall lsounds/WeaponsM/Knife/HitWall
+weapons/knife/swing1 lsnd/WeaponsM/Knife/Fire1
+weapons/knife/swing2 lsnd/WeaponsM/Knife/Fire2
+weapons/knife/hitflesh lsnd/WeaponsM/Knife/Hit
+weapons/knife/hitwall lsnd/WeaponsM/Knife/HitWall
 $limit weapons/knife/hitflesh 0
 $limit weapons/knife/hitwall 0
-weapons/pistol/fire lsounds/WeaponsM/Pistol/Fire
-weapons/pistol/fireauto lsounds/WeaponsM/Pistol/FireAuto
-weapons/pistol/reload lsounds/WeaponsM/Pistol/Reload
-weapons/pistol/zoomin lsounds/WeaponsM/Pistol/ScopeIn
-weapons/pistol/zoomout lsounds/WeaponsM/Pistol/ScopeOut
-weapons/pistol/pickup lsounds/WeaponsM/Pistol/Pickup
+weapons/pistol/fire lsnd/WeaponsM/Pistol/Fire
+weapons/pistol/fireauto lsnd/WeaponsM/Pistol/FireAuto
+weapons/pistol/reload lsnd/WeaponsM/Pistol/Reload
+weapons/pistol/zoomin lsnd/WeaponsM/Pistol/ScopeIn
+weapons/pistol/zoomout lsnd/WeaponsM/Pistol/ScopeOut
+weapons/pistol/pickup lsnd/WeaponsM/Pistol/Pickup
 $alias weapons/pistol/draw weapons/pistol/pickup
-weapons/pistol/plasma/fire lsounds/WeaponsM/Pistol/FirePlasma
+weapons/pistol/plasma/fire lsnd/WeaponsM/Pistol/FirePlasma
 $alias weapons/pistol/plasma/explode weapons/plasmax
 $limit weapons/pistol/plasma/explode 0
 $volume weapons/pistol/plasma/explode 0.15
-weapons/revolver/fire lsounds/WeaponsM/Revolver/Fire
-weapons/revolver/draw lsounds/WeaponsM/Revolver/Draw
-weapons/revolver/pickup lsounds/WeaponsM/Revolver/Pickup
-weapons/revolver/reload lsounds/WeaponsM/Revolver/Reload
-weapons/shotgun/fire lsounds/WeaponsM/Shotgun/FireFull
-weapons/shotgun/fire2 lsounds/WeaponsM/Shotgun/FireFull2
-weapons/shotgun/open lsounds/WeaponsM/Shotgun/PumpOpen
-weapons/shotgun/close lsounds/WeaponsM/Shotgun/PumpClose
-weapons/shotgun/zoomin lsounds/WeaponsM/Shotgun/ScopeIn
-weapons/shotgun/zoomout lsounds/WeaponsM/Shotgun/ScopeOut
-weapons/shotgun/pickup lsounds/WeaponsM/Shotgun/Pickup
-weapons/shotgun/just1 lsounds/WeaponsM/Shotgun/Just1
-weapons/shotgun/just2 lsounds/WeaponsM/Shotgun/Just2
-weapons/shotgun/just3 lsounds/WeaponsM/Shotgun/Just3
+weapons/revolver/fire lsnd/WeaponsM/Revolver/Fire
+weapons/revolver/draw lsnd/WeaponsM/Revolver/Draw
+weapons/revolver/pickup lsnd/WeaponsM/Revolver/Pickup
+weapons/revolver/reload lsnd/WeaponsM/Revolver/Reload
+weapons/shotgun/fire lsnd/WeaponsM/Shotgun/FireFull
+weapons/shotgun/fire2 lsnd/WeaponsM/Shotgun/FireFull2
+weapons/shotgun/open lsnd/WeaponsM/Shotgun/PumpOpen
+weapons/shotgun/close lsnd/WeaponsM/Shotgun/PumpClose
+weapons/shotgun/zoomin lsnd/WeaponsM/Shotgun/ScopeIn
+weapons/shotgun/zoomout lsnd/WeaponsM/Shotgun/ScopeOut
+weapons/shotgun/pickup lsnd/WeaponsM/Shotgun/Pickup
+weapons/shotgun/just1 lsnd/WeaponsM/Shotgun/Just1
+weapons/shotgun/just2 lsnd/WeaponsM/Shotgun/Just2
+weapons/shotgun/just3 lsnd/WeaponsM/Shotgun/Just3
 $alias weapons/shotgun/draw weapons/shotgun/open
 $random weapons/shotgun/just { weapons/shotgun/just1 weapons/shotgun/just2 weapons/shotgun/just3 }
-weapons/shotgun/gauss/fire lsounds/WeaponsM/Shotgun/Gauss/ShootGunBang
-weapons/shotgun/gauss/puff lsounds/WeaponsM/Shotgun/Gauss/Fire
-weapons/shotgun/gauss/spark1 lsounds/WeaponsM/Shotgun/Gauss/Spark1
-weapons/shotgun/gauss/spark2 lsounds/WeaponsM/Shotgun/Gauss/Spark2
-weapons/shotgun/gauss/spark3 lsounds/WeaponsM/Shotgun/Gauss/Spark3
-weapons/shotgun/gauss/reloadout lsounds/WeaponsM/Shotgun/Gauss/ReloadOut
-weapons/shotgun/gauss/reloadin lsounds/WeaponsM/Shotgun/Gauss/ReloadIn
+weapons/shotgun/gauss/fire lsnd/WeaponsM/Shotgun/Gauss/ShootGunBang
+weapons/shotgun/gauss/puff lsnd/WeaponsM/Shotgun/Gauss/Fire
+weapons/shotgun/gauss/spark1 lsnd/WeaponsM/Shotgun/Gauss/Spark1
+weapons/shotgun/gauss/spark2 lsnd/WeaponsM/Shotgun/Gauss/Spark2
+weapons/shotgun/gauss/spark3 lsnd/WeaponsM/Shotgun/Gauss/Spark3
+weapons/shotgun/gauss/reloadout lsnd/WeaponsM/Shotgun/Gauss/ReloadOut
+weapons/shotgun/gauss/reloadin lsnd/WeaponsM/Shotgun/Gauss/ReloadIn
 $random weapons/shotgun/gauss/spark { weapons/shotgun/gauss/spark1 weapons/shotgun/gauss/spark2 weapons/shotgun/gauss/spark3 }
 $limit weapons/shotgun/gauss/puff 0
 $limit weapons/shotgun/gauss/spark 0
-weapons/shotgun/poison/fire lsounds/WeaponsM/Shotgun/Poison/FireFull
+weapons/shotgun/poison/fire lsnd/WeaponsM/Shotgun/Poison/FireFull
 $alias weapons/shotgun/poison/acid weapons/shotgun/gauss/spark
-weapons/ssg/fire lsounds/WeaponsM/SuperShotgun/Fire
-weapons/ssg/pickup lsounds/WeaponsM/SuperShotgun/Pickup
-weapons/ssg/close lsounds/WeaponsM/SuperShotgun/Close
-weapons/ssg/open lsounds/WeaponsM/SuperShotgun/Open
-weapons/ssg/load lsounds/WeaponsM/SuperShotgun/Load
-weapons/ssg/empty lsounds/WeaponsM/SuperShotgun/Empty
-weapons/ssg/draw lsounds/WeaponsM/SuperShotgun/Draw
-weapons/lshotgun/fire lsounds/WeaponsM/LazShotgun/Fire
-weapons/lshotgun/open lsounds/WeaponsM/LazShotgun/Open
-weapons/lshotgun/close lsounds/WeaponsM/LazShotgun/Close
-weapons/lshotgun/draw lsounds/WeaponsM/LazShotgun/Draw
+weapons/ssg/fire lsnd/WeaponsM/SuperShotgun/Fire
+weapons/ssg/pickup lsnd/WeaponsM/SuperShotgun/Pickup
+weapons/ssg/close lsnd/WeaponsM/SuperShotgun/Close
+weapons/ssg/open lsnd/WeaponsM/SuperShotgun/Open
+weapons/ssg/load lsnd/WeaponsM/SuperShotgun/Load
+weapons/ssg/empty lsnd/WeaponsM/SuperShotgun/Empty
+weapons/ssg/draw lsnd/WeaponsM/SuperShotgun/Draw
+weapons/lshotgun/fire lsnd/WeaponsM/LazShotgun/Fire
+weapons/lshotgun/open lsnd/WeaponsM/LazShotgun/Open
+weapons/lshotgun/close lsnd/WeaponsM/LazShotgun/Close
+weapons/lshotgun/draw lsnd/WeaponsM/LazShotgun/Draw
 $alias weapons/lshotgun/pickup weapons/lshotgun/open
-weapons/rifle/fire1 lsounds/WeaponsM/CombatRifle/Fire1
-weapons/rifle/fire2 lsounds/WeaponsM/CombatRifle/Fire2
-weapons/rifle/fire3 lsounds/WeaponsM/CombatRifle/Fire3
-weapons/rifle/firesnipe1 lsounds/WeaponsM/CombatRifle/FireSnipe1
-weapons/rifle/firesnipe2 lsounds/WeaponsM/CombatRifle/FireSnipe2
-weapons/rifle/firesnipe3 lsounds/WeaponsM/CombatRifle/FireSnipe3
-weapons/rifle/rldmount lsounds/WeaponsM/CombatRifle/ReloadMount
-weapons/rifle/pickup lsounds/WeaponsM/CombatRifle/Pickup
-weapons/rifle/draw lsounds/WeaponsM/CombatRifle/Draw
-weapons/rifle/firemode lsounds/WeaponsM/CombatRifle/SetFiremode
-weapons/rifle/grenade lsounds/WeaponsM/CombatRifle/FireGrenade
-weapons/rifle/reloadout lsounds/WeaponsM/CombatRifle/ReloadOut
-weapons/rifle/reloadin lsounds/WeaponsM/CombatRifle/ReloadIn
-weapons/rifle/grenadebounce1 lsounds/WeaponsM/CombatRifle/GrenadeBounce1
-weapons/rifle/grenadebounce2 lsounds/WeaponsM/CombatRifle/GrenadeBounce2
-weapons/rifle/grenadebounce3 lsounds/WeaponsM/CombatRifle/GrenadeBounce3
+weapons/rifle/fire1 lsnd/WeaponsM/CombatRifle/Fire1
+weapons/rifle/fire2 lsnd/WeaponsM/CombatRifle/Fire2
+weapons/rifle/fire3 lsnd/WeaponsM/CombatRifle/Fire3
+weapons/rifle/firesnipe1 lsnd/WeaponsM/CombatRifle/FireSnipe1
+weapons/rifle/firesnipe2 lsnd/WeaponsM/CombatRifle/FireSnipe2
+weapons/rifle/firesnipe3 lsnd/WeaponsM/CombatRifle/FireSnipe3
+weapons/rifle/rldmount lsnd/WeaponsM/CombatRifle/ReloadMount
+weapons/rifle/pickup lsnd/WeaponsM/CombatRifle/Pickup
+weapons/rifle/draw lsnd/WeaponsM/CombatRifle/Draw
+weapons/rifle/firemode lsnd/WeaponsM/CombatRifle/SetFiremode
+weapons/rifle/grenade lsnd/WeaponsM/CombatRifle/FireGrenade
+weapons/rifle/reloadout lsnd/WeaponsM/CombatRifle/ReloadOut
+weapons/rifle/reloadin lsnd/WeaponsM/CombatRifle/ReloadIn
+weapons/rifle/grenadebounce1 lsnd/WeaponsM/CombatRifle/GrenadeBounce1
+weapons/rifle/grenadebounce2 lsnd/WeaponsM/CombatRifle/GrenadeBounce2
+weapons/rifle/grenadebounce3 lsnd/WeaponsM/CombatRifle/GrenadeBounce3
 $alias weapons/rifle/firero weapons/runout
 $random weapons/rifle/grenadebounce { weapons/rifle/grenadebounce1 weapons/rifle/grenadebounce2 weapons/rifle/grenadebounce3 }
 $random weapons/rifle/fire { weapons/rifle/fire1 weapons/rifle/fire2 weapons/rifle/fire3 }
 $random weapons/rifle/firesnipe { weapons/rifle/firesnipe1 weapons/rifle/firesnipe2 weapons/rifle/firesnipe3 }
-weapons/rcw/fire lsounds/WeaponsM/CombatRifle/FireLaz
-weapons/rcw/firesnipe lsounds/WeaponsM/CombatRifle/FireLazSnipe
+weapons/rcw/fire lsnd/WeaponsM/CombatRifle/FireLaz
+weapons/rcw/firesnipe lsnd/WeaponsM/CombatRifle/FireLazSnipe
 $volume weapons/rcw/fire 0.7
 $volume weapons/rcw/firesnipe 0.7
-weapons/sniper/fire lsounds/WeaponsM/SniperRifle/Fire
-weapons/sniper/boltback lsounds/WeaponsM/SniperRifle/BoltBack
-weapons/sniper/boltforward lsounds/WeaponsM/SniperRifle/BoltForward
-weapons/sniper/magout lsounds/WeaponsM/SniperRifle/MagOut
-weapons/sniper/magin lsounds/WeaponsM/SniperRifle/MagIn
-weapons/sniper/draw lsounds/WeaponsM/SniperRifle/Draw
+weapons/sniper/fire lsnd/WeaponsM/SniperRifle/Fire
+weapons/sniper/boltback lsnd/WeaponsM/SniperRifle/BoltBack
+weapons/sniper/boltforward lsnd/WeaponsM/SniperRifle/BoltForward
+weapons/sniper/magout lsnd/WeaponsM/SniperRifle/MagOut
+weapons/sniper/magin lsnd/WeaponsM/SniperRifle/MagIn
+weapons/sniper/draw lsnd/WeaponsM/SniperRifle/Draw
 $alias weapons/sniper/zoomin weapons/shotgun/zoomin
 $alias weapons/sniper/zoomout weapons/shotgun/zoomout
-weapons/rocket/fire1 lsounds/WeaponsM/GrenadeLauncher/Fire
-weapons/rocket/fire2 lsounds/WeaponsM/GrenadeLauncher/Fire1
-weapons/rocket/fire3 lsounds/WeaponsM/GrenadeLauncher/Fire2
-weapons/rocket/empty lsounds/WeaponsM/GrenadeLauncher/FireEmpty
-weapons/rocket/pickup lsounds/WeaponsM/GrenadeLauncher/Pickup
-weapons/rocket/draw lsounds/WeaponsM/GrenadeLauncher/Draw
-weapons/rocket/load lsounds/WeaponsM/GrenadeLauncher/Load
-weapons/rocket/lock lsounds/WeaponsM/GrenadeLauncher/Lock
-weapons/rocket/launch lsounds/WeaponsM/GrenadeLauncher/Launch
-weapons/rocket/setalt lsounds/WeaponsM/GrenadeLauncher/SetAlt
-weapons/rocket/setalt1 lsounds/WeaponsM/GrenadeLauncher/SetAlt1
-weapons/rocket/grenade lsounds/WeaponsM/GrenadeLauncher/FireGrenade
-weapons/rocket/mark lsounds/WeaponsM/GrenadeLauncher/Mark
+weapons/rocket/fire1 lsnd/WeaponsM/GrenadeLauncher/Fire
+weapons/rocket/fire2 lsnd/WeaponsM/GrenadeLauncher/Fire1
+weapons/rocket/fire3 lsnd/WeaponsM/GrenadeLauncher/Fire2
+weapons/rocket/empty lsnd/WeaponsM/GrenadeLauncher/FireEmpty
+weapons/rocket/pickup lsnd/WeaponsM/GrenadeLauncher/Pickup
+weapons/rocket/draw lsnd/WeaponsM/GrenadeLauncher/Draw
+weapons/rocket/load lsnd/WeaponsM/GrenadeLauncher/Load
+weapons/rocket/lock lsnd/WeaponsM/GrenadeLauncher/Lock
+weapons/rocket/launch lsnd/WeaponsM/GrenadeLauncher/Launch
+weapons/rocket/setalt lsnd/WeaponsM/GrenadeLauncher/SetAlt
+weapons/rocket/setalt1 lsnd/WeaponsM/GrenadeLauncher/SetAlt1
+weapons/rocket/grenade lsnd/WeaponsM/GrenadeLauncher/FireGrenade
+weapons/rocket/mark lsnd/WeaponsM/GrenadeLauncher/Mark
 $random weapons/rocket/fire { weapons/rocket/fire1 weapons/rocket/fire2 weapons/rocket/fire3 }
-weapons/cannon/fire lsounds/WeaponsM/OmegaCannon/Fire
-weapons/cannon/firebig lsounds/WeaponsM/OmegaCannon/FireBig
-weapons/cannon/fired lsounds/WeaponsM/OmegaCannon/FireDark
-weapons/cannon/prepare lsounds/WeaponsM/OmegaCannon/Prepare
-weapons/cannon/explode lsounds/WeaponsM/OmegaCannon/Explode
-weapons/cannon/empty lsounds/WeaponsM/OmegaCannon/FireEmpty
-weapons/cannon/pickup lsounds/WeaponsM/OmegaCannon/Pickup
-weapons/cannon/draw lsounds/WeaponsM/OmegaCannon/Draw
+weapons/cannon/fire lsnd/WeaponsM/OmegaCannon/Fire
+weapons/cannon/firebig lsnd/WeaponsM/OmegaCannon/FireBig
+weapons/cannon/fired lsnd/WeaponsM/OmegaCannon/FireDark
+weapons/cannon/prepare lsnd/WeaponsM/OmegaCannon/Prepare
+weapons/cannon/explode lsnd/WeaponsM/OmegaCannon/Explode
+weapons/cannon/empty lsnd/WeaponsM/OmegaCannon/FireEmpty
+weapons/cannon/pickup lsnd/WeaponsM/OmegaCannon/Pickup
+weapons/cannon/draw lsnd/WeaponsM/OmegaCannon/Draw
 $limit weapons/cannon/explode 0
-weapons/cannon/impactfloor lsounds/WeaponsM/OmegaCannon/ImpactFloor
-weapons/cannon/impactwall lsounds/WeaponsM/OmegaCannon/ImpactWall
+weapons/cannon/impactfloor lsnd/WeaponsM/OmegaCannon/ImpactFloor
+weapons/cannon/impactwall lsnd/WeaponsM/OmegaCannon/ImpactWall
 $limit weapons/cannon/impactfloor 0
 $limit weapons/cannon/impactwall 0
 $attenuation weapons/cannon/impactfloor 0.8
 $attenuation weapons/cannon/impactwall 0.8
-weapons/punct/fire lsounds/WeaponsM/OmegaCannon/Punctuator/Fire
-weapons/punct/load lsounds/WeaponsM/OmegaCannon/Punctuator/Load
-weapons/rail/fire lsounds/WeaponsM/OmegaCannon/Railgun/Fire
-weapons/rail/impact lsounds/WeaponsM/OmegaCannon/Railgun/Impact
-weapons/rail/charge lsounds/WeaponsM/OmegaCannon/Railgun/Charge
+weapons/punct/fire lsnd/WeaponsM/OmegaCannon/Punctuator/Fire
+weapons/punct/load lsnd/WeaponsM/OmegaCannon/Punctuator/Load
+weapons/rail/fire lsnd/WeaponsM/OmegaCannon/Railgun/Fire
+weapons/rail/impact lsnd/WeaponsM/OmegaCannon/Railgun/Impact
+weapons/rail/charge lsnd/WeaponsM/OmegaCannon/Railgun/Charge
 $limit weapons/rail/impact 0
 $attenuation weapons/rail/impact 0.8
-weapons/dark/wind lsounds/WeaponsM/DarkCannon/Wind
-weapons/dark/water1 lsounds/WeaponsM/DarkCannon/Water
-weapons/dark/water2 lsounds/WeaponsM/DarkCannon/Water2
-weapons/dark/water3 lsounds/WeaponsM/DarkCannon/Water3
-weapons/dark/fire1 lsounds/WeaponsM/DarkCannon/Fire
-weapons/dark/fire2 lsounds/WeaponsM/DarkCannon/Fire2
-weapons/dark/fire3 lsounds/WeaponsM/DarkCannon/Fire3
-weapons/dark/impact1 lsounds/WeaponsM/DarkCannon/Impact
-weapons/dark/impact2 lsounds/WeaponsM/DarkCannon/Impact2
-weapons/dark/impact3 lsounds/WeaponsM/DarkCannon/Impact3
+weapons/dark/wind lsnd/WeaponsM/DarkCannon/Wind
+weapons/dark/water1 lsnd/WeaponsM/DarkCannon/Water
+weapons/dark/water2 lsnd/WeaponsM/DarkCannon/Water2
+weapons/dark/water3 lsnd/WeaponsM/DarkCannon/Water3
+weapons/dark/fire1 lsnd/WeaponsM/DarkCannon/Fire
+weapons/dark/fire2 lsnd/WeaponsM/DarkCannon/Fire2
+weapons/dark/fire3 lsnd/WeaponsM/DarkCannon/Fire3
+weapons/dark/impact1 lsnd/WeaponsM/DarkCannon/Impact
+weapons/dark/impact2 lsnd/WeaponsM/DarkCannon/Impact2
+weapons/dark/impact3 lsnd/WeaponsM/DarkCannon/Impact3
 $random weapons/dark/water { weapons/dark/water1 weapons/dark/water2 weapons/dark/water3 }
 $random weapons/dark/fire { weapons/dark/fire1 weapons/dark/fire2 weapons/dark/fire3 }
 $random weapons/dark/impact { weapons/dark/impact1 weapons/dark/impact2 weapons/dark/impact3 }
 $limit weapons/dark/impact 0
-weapons/redrifle/fire lsounds/WeaponsT/RedRifle/Fire
-weapons/redrifle/bolt lsounds/WeaponsT/RedRifle/Bolt
-weapons/magnum/fire1 lsounds/WeaponsW/Magnum/Fire
-weapons/magnum/fire2 lsounds/WeaponsW/Magnum/Fire2
-weapons/magnum/fireback lsounds/WeaponsW/Magnum/FireBacking
-weapons/magnum/reload lsounds/WeaponsW/Magnum/Reload
-weapons/magnum/pickup lsounds/WeaponsW/Magnum/Pickup
+weapons/redrifle/fire lsnd/WeaponsT/RedRifle/Fire
+weapons/redrifle/bolt lsnd/WeaponsT/RedRifle/Bolt
+weapons/magnum/fire1 lsnd/WeaponsW/Magnum/Fire
+weapons/magnum/fire2 lsnd/WeaponsW/Magnum/Fire2
+weapons/magnum/fireback lsnd/WeaponsW/Magnum/FireBacking
+weapons/magnum/reload lsnd/WeaponsW/Magnum/Reload
+weapons/magnum/pickup lsnd/WeaponsW/Magnum/Pickup
 $random weapons/magnum/fire { weapons/magnum/fire1 weapons/magnum/fire2 }
 $alias weapons/magnum/draw weapons/magnum/pickup
-weapons/cfist/pickup lsounds/Weapons/ChargeFist/Pickup
-weapons/cfist/fire1 lsounds/Weapons/ChargeFist/Fire1
-weapons/cfist/fire2 lsounds/Weapons/ChargeFist/Fire2
-weapons/cfist/fire3 lsounds/Weapons/ChargeFist/Fire3
-weapons/cfist/ready lsounds/Weapons/ChargeFist/Ready
-weapons/cfist/charge lsounds/Weapons/ChargeFist/Charge
-weapons/cfist/chargeend lsounds/Weapons/ChargeFist/ChargeEnd
-weapons/cfist/hit1 lsounds/Weapons/ChargeFist/HitFlesh1
-weapons/cfist/hit2 lsounds/Weapons/ChargeFist/HitFlesh2
-weapons/cfist/hit3 lsounds/Weapons/ChargeFist/HitFlesh3
-weapons/cfist/hitwall1 lsounds/Weapons/ChargeFist/HitWall1
-weapons/cfist/hitwall2 lsounds/Weapons/ChargeFist/HitWall2
-weapons/cfist/hitwall3 lsounds/Weapons/ChargeFist/HitWall3
-weapons/cfist/hitwall4 lsounds/Weapons/ChargeFist/HitWall4
+weapons/cfist/pickup lsnd/Weapons/ChargeFist/Pickup
+weapons/cfist/fire1 lsnd/Weapons/ChargeFist/Fire1
+weapons/cfist/fire2 lsnd/Weapons/ChargeFist/Fire2
+weapons/cfist/fire3 lsnd/Weapons/ChargeFist/Fire3
+weapons/cfist/ready lsnd/Weapons/ChargeFist/Ready
+weapons/cfist/charge lsnd/Weapons/ChargeFist/Charge
+weapons/cfist/chargeend lsnd/Weapons/ChargeFist/ChargeEnd
+weapons/cfist/hit1 lsnd/Weapons/ChargeFist/HitFlesh1
+weapons/cfist/hit2 lsnd/Weapons/ChargeFist/HitFlesh2
+weapons/cfist/hit3 lsnd/Weapons/ChargeFist/HitFlesh3
+weapons/cfist/hitwall1 lsnd/Weapons/ChargeFist/HitWall1
+weapons/cfist/hitwall2 lsnd/Weapons/ChargeFist/HitWall2
+weapons/cfist/hitwall3 lsnd/Weapons/ChargeFist/HitWall3
+weapons/cfist/hitwall4 lsnd/Weapons/ChargeFist/HitWall4
 $random weapons/cfist/hit { weapons/cfist/hit1 weapons/cfist/hit2 weapons/cfist/hit3 }
 $random weapons/cfist/hitwall { weapons/cfist/hitwall1 weapons/cfist/hitwall2 weapons/cfist/hitwall3 weapons/cfist/hitwall4 }
 $random weapons/cfist/fire { weapons/cfist/fire1 weapons/cfist/fire2 weapons/cfist/fire3 }
 $limit weapons/cfist/fire 0
 $limit weapons/cfist/hit 0
 $limit weapons/cfist/hitwall 0
-weapons/missile/fire lsounds/Weapons/MissileLauncher/Fire
-weapons/missile/empty lsounds/Weapons/MissileLauncher/FireEmpty
-weapons/missile/reloadout lsounds/Weapons/MissileLauncher/ReloadOut
-weapons/missile/reloadin lsounds/Weapons/MissileLauncher/ReloadIn
-weapons/missile/draw lsounds/Weapons/MissileLauncher/Draw
-weapons/missile/explode lsounds/Weapons/MissileLauncher/Explode
+weapons/missile/fire lsnd/Weapons/MissileLauncher/Fire
+weapons/missile/empty lsnd/Weapons/MissileLauncher/FireEmpty
+weapons/missile/reloadout lsnd/Weapons/MissileLauncher/ReloadOut
+weapons/missile/reloadin lsnd/Weapons/MissileLauncher/ReloadIn
+weapons/missile/draw lsnd/Weapons/MissileLauncher/Draw
+weapons/missile/explode lsnd/Weapons/MissileLauncher/Explode
 $limit weapons/missile/explode 0
-weapons/plasma/fire lsounds/WeaponsM/PlasmaRifle/Fire
-weapons/plasma/altfire lsounds/WeaponsM/PlasmaRifle/AltFire
-weapons/plasma/pickup lsounds/WeaponsM/PlasmaRifle/Pickup
-weapons/plasma/empty lsounds/WeaponsM/PlasmaRifle/FireEmpty
-weapons/plasma/draw lsounds/WeaponsM/PlasmaRifle/Draw
-weapons/plasma/explode1 lsounds/WeaponsM/PlasmaRifle/Explode1
-weapons/plasma/explode2 lsounds/WeaponsM/PlasmaRifle/Explode2
-weapons/plasma/explode3 lsounds/WeaponsM/PlasmaRifle/Explode3
+weapons/plasma/fire lsnd/WeaponsM/PlasmaRifle/Fire
+weapons/plasma/altfire lsnd/WeaponsM/PlasmaRifle/AltFire
+weapons/plasma/pickup lsnd/WeaponsM/PlasmaRifle/Pickup
+weapons/plasma/empty lsnd/WeaponsM/PlasmaRifle/FireEmpty
+weapons/plasma/draw lsnd/WeaponsM/PlasmaRifle/Draw
+weapons/plasma/explode1 lsnd/WeaponsM/PlasmaRifle/Explode1
+weapons/plasma/explode2 lsnd/WeaponsM/PlasmaRifle/Explode2
+weapons/plasma/explode3 lsnd/WeaponsM/PlasmaRifle/Explode3
 $random weapons/plasma/explode { weapons/plasma/explode1 weapons/plasma/explode2 weapons/plasma/explode3 }
 $limit weapons/plasma/explode 0
 $volume weapons/plasma/explode 0.5
-weapons/plasma/laser/fire_start lsounds/WeaponsM/PlasmaRifle/Laser/FireStart
-weapons/plasma/laser/fire_hum lsounds/WeaponsM/PlasmaRifle/Laser/FireHum
-weapons/plasma/laser/fire_loop lsounds/WeaponsM/PlasmaRifle/Laser/FireLoop
-weapons/plasma/laser/fire_end lsounds/WeaponsM/PlasmaRifle/Laser/FireEnd
-weapons/plasma/laser/spark lsounds/WeaponsM/PlasmaRifle/Laser/Spark
+weapons/plasma/laser/fire_start lsnd/WeaponsM/PlasmaRifle/Laser/FireStart
+weapons/plasma/laser/fire_hum lsnd/WeaponsM/PlasmaRifle/Laser/FireHum
+weapons/plasma/laser/fire_loop lsnd/WeaponsM/PlasmaRifle/Laser/FireLoop
+weapons/plasma/laser/fire_end lsnd/WeaponsM/PlasmaRifle/Laser/FireEnd
+weapons/plasma/laser/spark lsnd/WeaponsM/PlasmaRifle/Laser/Spark
 $limit weapons/plasma/laser/spark 0
-weapons/plasma/part/charge lsounds/WeaponsM/PlasmaRifle/PartBeam/Charge
-weapons/plasma/part/fire lsounds/WeaponsM/PlasmaRifle/PartBeam/Fire
-weapons/plasma/part/reloadout lsounds/WeaponsM/PlasmaRifle/PartBeam/ReloadOut
-weapons/plasma/part/reloadin lsounds/WeaponsM/PlasmaRifle/PartBeam/ReloadIn
+weapons/plasma/part/charge lsnd/WeaponsM/PlasmaRifle/PartBeam/Charge
+weapons/plasma/part/fire lsnd/WeaponsM/PlasmaRifle/PartBeam/Fire
+weapons/plasma/part/reloadout lsnd/WeaponsM/PlasmaRifle/PartBeam/ReloadOut
+weapons/plasma/part/reloadin lsnd/WeaponsM/PlasmaRifle/PartBeam/ReloadIn
 $volume weapons/plasma/part/fire 0.7
-weapons/plasdiff/fire1 lsounds/Weapons/PlasmaDiffuser/Fire
-weapons/plasdiff/fire2 lsounds/Weapons/PlasmaDiffuser/Fire2
-weapons/plasdiff/fire3 lsounds/Weapons/PlasmaDiffuser/Fire3
-weapons/plasdiff/draw lsounds/Weapons/PlasmaDiffuser/Draw
-weapons/plasdiff/empty lsounds/Weapons/PlasmaDiffuser/FireEmpty
+weapons/plasdiff/fire1 lsnd/Weapons/PlasmaDiffuser/Fire
+weapons/plasdiff/fire2 lsnd/Weapons/PlasmaDiffuser/Fire2
+weapons/plasdiff/fire3 lsnd/Weapons/PlasmaDiffuser/Fire3
+weapons/plasdiff/draw lsnd/Weapons/PlasmaDiffuser/Draw
+weapons/plasdiff/empty lsnd/Weapons/PlasmaDiffuser/FireEmpty
 $alias weapons/plasdiff/explode weapons/plasmax
 $limit weapons/plasdiff/explode 0
 $random weapons/plasdiff/fire { weapons/plasdiff/fire1 weapons/plasdiff/fire2 weapons/plasdiff/fire3 }
-doors/dr1_open lsounds/World/Ambiance/DoorOpen
-doors/dr1_clos lsounds/World/Ambiance/DoorClose
-doors/dr2_open lsounds/World/Ambiance/DoorOpenFast
-doors/dr2_clos lsounds/World/Ambiance/DoorCloseFast
-plats/pt1_strt lsounds/World/Ambiance/PlatformStart
-plats/pt1_stop lsounds/World/Ambiance/PlatformStop
-amb/rain lsounds/World/Ambiance/Rain
-amb/wind lsounds/World/Ambiance/Wind
-amb/rainout lsounds/World/Ambiance/RainOut
-amb/windout lsounds/World/Ambiance/WindOut
-amb/bigcomp lsounds/World/Ambiance/BigComputer
-amb/alarmdist1 lsounds/World/Ambiance/AlarmDistant
-amb/alarmdist2 lsounds/World/Ambiance/AlarmDistant2
-amb/alarmdist3 lsounds/World/Ambiance/AlarmDistant3
-amb/alarmdist4 lsounds/World/Ambiance/AlarmDistant4
-amb/ship lsounds/World/Ambiance/Ship
-amb/field lsounds/World/Ambiance/NoEntry
-amb/vent lsounds/World/Ambiance/VentPump
-amb/lightson lsounds/World/Ambiance/LightsOn
-amb/computer lsounds/World/Ambiance/Computer
-amb/fire lsounds/World/Ambiance/Fire
+doors/dr1_open lsnd/World/Ambiance/DoorOpen
+doors/dr1_clos lsnd/World/Ambiance/DoorClose
+doors/dr2_open lsnd/World/Ambiance/DoorOpenFast
+doors/dr2_clos lsnd/World/Ambiance/DoorCloseFast
+plats/pt1_strt lsnd/World/Ambiance/PlatformStart
+plats/pt1_stop lsnd/World/Ambiance/PlatformStop
+amb/rain lsnd/World/Ambiance/Rain
+amb/wind lsnd/World/Ambiance/Wind
+amb/rainout lsnd/World/Ambiance/RainOut
+amb/windout lsnd/World/Ambiance/WindOut
+amb/bigcomp lsnd/World/Ambiance/BigComputer
+amb/alarmdist1 lsnd/World/Ambiance/AlarmDistant
+amb/alarmdist2 lsnd/World/Ambiance/AlarmDistant2
+amb/alarmdist3 lsnd/World/Ambiance/AlarmDistant3
+amb/alarmdist4 lsnd/World/Ambiance/AlarmDistant4
+amb/ship lsnd/World/Ambiance/Ship
+amb/field lsnd/World/Ambiance/NoEntry
+amb/vent lsnd/World/Ambiance/VentPump
+amb/lightson lsnd/World/Ambiance/LightsOn
+amb/computer lsnd/World/Ambiance/Computer
+amb/fire lsnd/World/Ambiance/Fire
 $limit amb/fire 0
 $alias amb/spark weapons/erifle/zap
 $volume amb/spark 0.01
@@ -905,33 +906,33 @@ $ambient 42424 amb/field point 2.0 continuous 1.0
 $ambient 42425 amb/field point 4.0 continuous 1.0
 $ambient 42426 amb/vent point 5.0 continuous 0.5
 $ambient 42427 amb/computer point 2.0 continuous 1.0
-amb/lamp1 lsounds/World/Ambiance/LampTall
-amb/lamp2 lsounds/World/Ambiance/LampSmall
-amb/shatter1 lsounds/World/Ambiance/GlassBreak1
-amb/shatter2 lsounds/World/Ambiance/GlassBreak2
-amb/metalx lsounds/World/Ambiance/MetalExplode
-amb/woodx lsounds/World/Ambiance/WoodExplode
+amb/lamp1 lsnd/World/Ambiance/LampTall
+amb/lamp2 lsnd/World/Ambiance/LampSmall
+amb/shatter1 lsnd/World/Ambiance/GlassBreak1
+amb/shatter2 lsnd/World/Ambiance/GlassBreak2
+amb/metalx lsnd/World/Ambiance/MetalExplode
+amb/woodx lsnd/World/Ambiance/WoodExplode
 $random amb/shatter { amb/shatter1 amb/shatter2 }
 $volume amb/lamp1 0.3
 $volume amb/lamp2 0.3
 $volume amb/shatter 0.4
-misc/barrel/hit1 lsounds/World/Barrel/Hit
-misc/barrel/hit2 lsounds/World/Barrel/Hit2
+misc/barrel/hit1 lsnd/World/Barrel/Hit
+misc/barrel/hit2 lsnd/World/Barrel/Hit2
 $random misc/barrel/hit { misc/barrel/hit1 misc/barrel/hit2 }
-world/splash/nukage lsounds/World/Splashes/Nukage
-world/splash/water1 lsounds/World/Splashes/Water1
-world/splash/water2 lsounds/World/Splashes/Water2
-world/splash/water3 lsounds/World/Splashes/Water3
-world/splash/water4 lsounds/World/Splashes/Water4
-world/splash/water5 lsounds/World/Splashes/Water5
-world/splash/sludge1 lsounds/World/Splashes/Sludge1
-world/splash/sludge2 lsounds/World/Splashes/Sludge2
-world/splash/sludge3 lsounds/World/Splashes/Sludge3
-world/splash/sludge4 lsounds/World/Splashes/Sludge4
-world/splash/lava1 lsounds/World/Splashes/Lava1
-world/splash/lava2 lsounds/World/Splashes/Lava2
-world/splash/lava3 lsounds/World/Splashes/Lava3
-world/splash/lava4 lsounds/World/Splashes/Lava4
+world/splash/nukage lsnd/World/Splashes/Nukage
+world/splash/water1 lsnd/World/Splashes/Water1
+world/splash/water2 lsnd/World/Splashes/Water2
+world/splash/water3 lsnd/World/Splashes/Water3
+world/splash/water4 lsnd/World/Splashes/Water4
+world/splash/water5 lsnd/World/Splashes/Water5
+world/splash/sludge1 lsnd/World/Splashes/Sludge1
+world/splash/sludge2 lsnd/World/Splashes/Sludge2
+world/splash/sludge3 lsnd/World/Splashes/Sludge3
+world/splash/sludge4 lsnd/World/Splashes/Sludge4
+world/splash/lava1 lsnd/World/Splashes/Lava1
+world/splash/lava2 lsnd/World/Splashes/Lava2
+world/splash/lava3 lsnd/World/Splashes/Lava3
+world/splash/lava4 lsnd/World/Splashes/Lava4
 $random world/splash/water { world/splash/water1 world/splash/water2 world/splash/water3 world/splash/water4 world/splash/water5 }
 $random world/splash/sludge { world/splash/sludge1 world/splash/sludge2 world/splash/sludge3 world/splash/sludge4 }
 $random world/splash/lava { world/splash/lava1 world/splash/lava2 world/splash/lava3 world/splash/lava4 }

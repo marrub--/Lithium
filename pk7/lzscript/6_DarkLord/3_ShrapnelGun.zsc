@@ -20,10 +20,10 @@ class Lith_ShrapnelProjectile : Actor {
       Species "Lith_Player";
       Speed 40;
       Projectile;
-      +EXPLODEONWATER
-      +MTHRUSPECIES
-      -NOGRAVITY
-      +RIPPER
+      +ExplodeOnWater
+      +MThruSpecies
+      -NoGravity
+      +Ripper
    }
 
    state lith_a_jumpScale(double scale) {

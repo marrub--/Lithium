@@ -7,7 +7,7 @@
 ## ---------------------------------------------------------------------------|
 
 casings {
-   == lsounds/Weapons/Effects/Casings
+   == lsnd/Weapons/Effects/Casings
    bullet {
       bounce1  CaseBounce1  # ???
       bounce2  CaseBounce2  # ^
@@ -95,7 +95,7 @@ casings {
 
 weapons {
    # Magazine
-   == lsounds/Weapons/Effects/Magazine
+   == lsnd/Weapons/Effects/Magazine
    magbounce1 Drop1 # Halo 3
    magbounce2 Drop2 # ^
    magbounce3 Drop3 # ^
@@ -116,13 +116,13 @@ weapons {
       magbouncef3,
    }
 
-   == lsounds/Weapons
+   == lsnd/Weapons
    empty  Empty  # Half-Life 2 MMod
    runout RunOut # Counter-Strike: Source
 
    sword {
       # sord
-      == lsounds/Weapons/Sword
+      == lsnd/Weapons/Sword
       chargeup Charge  # Touhou 9: Phantasmagoria of Flower View
       attack   Charge1 # ^
       swing    Swing   # ^
@@ -161,11 +161,11 @@ weapons {
 
 # Misc.
 effects {
-   == lsounds/WeaponsM/GrenadeLauncher
+   == lsnd/WeaponsM/GrenadeLauncher
    rocket.fly RocketFly # Unreal Tournament '99
 
    puff {
-      == lsounds/Weapons/Effects/Ricochet
+      == lsnd/Weapons/Effects/Ricochet
       ricochet1  Ric1  # Devil May Cry 2
       ricochet2  Ric2  # ^
       ricochet3  Ric3  # ^
@@ -201,7 +201,7 @@ effects {
       $limit ricochet 0
    }
 
-   == lsounds/Weapons/Effects/GEExplosion
+   == lsnd/Weapons/Effects/GEExplosion
    geexplosion1  expl1  # GoldenEye 007
    geexplosion2  expl2  # ^
    geexplosion3  expl3  # ^

@@ -7,7 +7,7 @@
 ## ---------------------------------------------------------------------------|
 
 # Dark Lord
-== lsounds/PlayerD
+== lsnd/PlayerD
 $playersound    darklord male *death   Death     # Phantasy Star: Nova
 $playersound    darklord male *xdeath  XDeath    # ^
 $playersound    darklord male *pain100 PainSmall # ^

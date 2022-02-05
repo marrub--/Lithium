@@ -51,7 +51,7 @@ class Lith_UniqueID : Inventory
    default
    {
       Inventory.MaxAmount 0x7FFFFFFF;
-      +INVENTORY.UNDROPPABLE
+      +Inventory.UnDroppable
    }
 }
 
@@ -60,7 +60,7 @@ class Lith_MonsterID : Inventory
    default
    {
       Inventory.MaxAmount 0x7FFFFFFF;
-      +INVENTORY.UNDROPPABLE
+      +Inventory.UNDROPPABLE
    }
 }
 

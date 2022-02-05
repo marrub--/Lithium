@@ -7,7 +7,7 @@
 ## ---------------------------------------------------------------------------|
 
 player.pickup {
-   == lsounds/Items
+   == lsnd/Items
    upgrbody    UpgrBody    # Killing Floor, ???
    upgrextr    UpgrExtr    # Phantasy Star Nova
    upgrweap    UpgrWeap    # Halo 3
@@ -100,7 +100,7 @@ player.pickup {
 
 # :V
 items {
-   == lsounds/Items
+   == lsnd/Items
    healthbonus1  bdup/DSHBON1
    healthbonus2  bdup/DSHBON2
    healthbonus3  bdup/DSHBON3

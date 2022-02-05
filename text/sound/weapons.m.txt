@@ -11,7 +11,7 @@ weapons {
    $alias    fist.pickup = .MMMMHMHMMMHMMM
 
    knife {
-      == lsounds/WeaponsM/Knife
+      == lsnd/WeaponsM/Knife
       swing1   Fire1   # Serious Sam: The First Encounter HD
       swing2   Fire2   # ^
       hitflesh Hit     # Killing Floor
@@ -22,7 +22,7 @@ weapons {
    }
 
    pistol {
-      == lsounds/WeaponsM/Pistol
+      == lsnd/WeaponsM/Pistol
       fire     Fire     # Half-Life
       fireauto FireAuto # Killing Floor, ???
       reload   Reload   # Serious Sam: The First Encounter HD
@@ -40,7 +40,7 @@ weapons {
    }
 
    revolver {
-      == lsounds/WeaponsM/Revolver
+      == lsnd/WeaponsM/Revolver
       fire   Fire   # Killing Floor
       draw   Draw   # ^
       pickup Pickup # ^
@@ -48,7 +48,7 @@ weapons {
    }
 
    shotgun {
-      == lsounds/WeaponsM/Shotgun
+      == lsnd/WeaponsM/Shotgun
       fire    FireFull  # Killing Floor, General 6000
       fire2   FireFull2 # ^
       open    PumpOpen  # General 6000
@@ -69,7 +69,7 @@ weapons {
       }
 
       gauss {
-         == lsounds/WeaponsM/Shotgun/Gauss
+         == lsnd/WeaponsM/Shotgun/Gauss
          fire       ShootGunBang # Descent 2 XL
          puff       Fire         # ^
          spark1     Spark1       # Fallout 4
@@ -88,14 +88,14 @@ weapons {
          $limit spark 0
       }
 
-      == lsounds/WeaponsM/Shotgun/Poison
+      == lsnd/WeaponsM/Shotgun/Poison
       poison.fire FireFull # FEAR, Gamemaster Audio - Gun Sound Pack, Killing Floor, General 6000
 
       $alias poison.acid = gauss.spark
    }
 
    ssg {
-      == lsounds/WeaponsM/SuperShotgun
+      == lsnd/WeaponsM/SuperShotgun
       fire   Fire   # Per Kristian, General 6000
       pickup Pickup # General 6000, ???
       close  Close  # Killing Floor, ???
@@ -106,7 +106,7 @@ weapons {
    }
 
    lshotgun {
-      == lsounds/WeaponsM/LazShotgun
+      == lsnd/WeaponsM/LazShotgun
       fire  Fire  # Fallout: New Vegas
       open  Open  # Fallout: New Vegas, FEAR
       close Close # ^
@@ -116,7 +116,7 @@ weapons {
    }
 
    rifle {
-      == lsounds/WeaponsM/CombatRifle
+      == lsnd/WeaponsM/CombatRifle
       fire1      Fire1       # Fallout 4, Killing Floor, Call of Duty: Modern Warfare 2
       fire2      Fire2       # ^
       fire3      Fire3       # ^
@@ -157,7 +157,7 @@ weapons {
    }
 
    rcw {
-      == lsounds/WeaponsM/CombatRifle
+      == lsnd/WeaponsM/CombatRifle
       fire      FireLaz      # Fallout 4, Fallout: New Vegas
       firesnipe FireLazSnipe # ^
 
@@ -166,7 +166,7 @@ weapons {
    }
 
    sniper {
-      == lsounds/WeaponsM/SniperRifle
+      == lsnd/WeaponsM/SniperRifle
       fire        Fire        # Fallout: New Vegas, Firearms: Source
       boltback    BoltBack    # Fallout: New Vegas, FEAR, Firearms: Source
       boltforward BoltForward # ^
@@ -179,7 +179,7 @@ weapons {
    }
 
    rocket {
-      == lsounds/WeaponsM/GrenadeLauncher
+      == lsnd/WeaponsM/GrenadeLauncher
       fire1   Fire        # FEAR
       fire2   Fire1       # ^
       fire3   Fire2       # ^
@@ -202,7 +202,7 @@ weapons {
    }
 
    cannon {
-      == lsounds/WeaponsM/OmegaCannon
+      == lsnd/WeaponsM/OmegaCannon
       fire    Fire      # Serious Sam: The First Encounter HD, Halo 3
       firebig FireBig   # ^
       fired   FireDark  # Serious Sam: The First Encounter HD
@@ -225,13 +225,13 @@ weapons {
    }
 
    punct {
-      == lsounds/WeaponsM/OmegaCannon/Punctuator
+      == lsnd/WeaponsM/OmegaCannon/Punctuator
       fire Fire # FEAR
       load Load # ^
    }
 
    rail {
-      == lsounds/WeaponsM/OmegaCannon/Railgun
+      == lsnd/WeaponsM/OmegaCannon/Railgun
       fire   Fire   # FEAR, Descent 2
       impact Impact # Descent 2
       charge Charge # FEAR, ???
@@ -241,7 +241,7 @@ weapons {
    }
 
    dark {
-      == lsounds/WeaponsM/DarkCannon
+      == lsnd/WeaponsM/DarkCannon
       wind    Wind    # Half-Life 2
       water1  Water   # Steam
       water2  Water2  # ^

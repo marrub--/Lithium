@@ -13,8 +13,8 @@ class Lith_ParticleBeamPuff : Actor
    {
       DamageType "Electric";
 
-      +ALWAYSPUFF
-      +FORCEDECAL
+      +AlwaysPuff
+      +ForceDecal
    }
 }
 
@@ -29,10 +29,10 @@ class Lith_ParticleBeam : Lith_PlasmaLaze
       Species "Lith_Player";
       Translation "Lith_ParticleBeam";
 
-      +DONTHARMSPECIES
-      +FORCERADIUSDMG
-      +FORCEXYBILLBOARD
-      -NOTIMEFREEZE
+      +DontHarmSpecies
+      +ForceRadiusDmg
+      +ForceXyBillboard
+      -NoTimeFreeze
    }
 
    states

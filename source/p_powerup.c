@@ -33,7 +33,7 @@ void Sc_DOGS(void) {
    }
 
    ACS_Delay(35);
-   ACS_SetMusic(sp_lsounds_Silence);
+   ACS_SetMusic(sp_lsnd_Silence);
    ACS_SetActorState(tid, sm_PureSteggleEnergy);
 }
 

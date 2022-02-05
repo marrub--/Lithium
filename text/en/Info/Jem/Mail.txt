@@ -140,19 +140,4 @@ until the remaining two are confirmed dead or incapacitated.
 
 \cg  - \cnOrder
 
-## ---------------------------------------------------------------------------|
-== \#INFO_TITLE_MSecret1Jem | $\#SAVED_BUFFER
-== \#INFO_REMOT_MSecret1Jem | $\#MAIL_INTERNAL
-@@ \#INFO_DESCR_MSecret1Jem
-Another facet of this place, where does it end? I must destroy this
-place, the evil energy is overflowing here... and this architecture
-gives me bad vibes.
-
-## ---------------------------------------------------------------------------|
-== \#INFO_TITLE_MSecret2Jem | $\#SAVED_BUFFER
-== \#INFO_REMOT_MSecret2Jem | $\#MAIL_INTERNAL
-@@ \#INFO_DESCR_MSecret2Jem
-Here seems to be the end of this terrifying compartment of Hell. I'd
-better blaze through this one.
-
 ## EOF

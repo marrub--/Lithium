@@ -8,7 +8,7 @@
 
 body {
    # Body
-   == lsounds/Monsters/Body
+   == lsnd/Monsters/Body
    bullethit1 Bullet1 # Half-Life
    bullethit2 Bullet2 # ^
 
@@ -34,7 +34,7 @@ body {
 
 enemies {
    # Misc
-   == lsounds/Monsters
+   == lsnd/Monsters
    levelup1 LevelUp1 # ???
    levelup2 LevelUp2 # ???
 
@@ -44,7 +44,7 @@ enemies {
    }
 
    ios {
-      == lsounds/Monsters/IoS
+      == lsnd/Monsters/IoS
       crash Crash # Akzeriyyuth (Feryquitous song), mgamabile (FreeSound), connum (FreeSound)
       crack1 Crack1 # speedygonzo (FreeSound)
       crack2 Crack2 # ^
@@ -61,7 +61,7 @@ enemies {
    }
 
    boss {
-      == lsounds/Monsters/Boss
+      == lsnd/Monsters/Boss
       talk1 Talk  # Doom 3
       talk2 Talk2 # ^
       $random talk {
@@ -71,7 +71,7 @@ enemies {
    }
 
    zombie {
-      == lsounds/Monsters/ZombieMan
+      == lsnd/Monsters/ZombieMan
       ready Ready # Fallout 3
       fire  Fire  # Killing Floor
       $attenuation fire 0.5
@@ -79,7 +79,7 @@ enemies {
    }
 
    shotguy {
-      == lsounds/Monsters/ShotGuy
+      == lsnd/Monsters/ShotGuy
       ready Ready # Fallout: New Vegas
       fire  Fire  # Killing Floor
       $attenuation fire 0.5
@@ -87,7 +87,7 @@ enemies {
    }
 
    chainguy {
-      == lsounds/Monsters/ChaingunGuy
+      == lsnd/Monsters/ChaingunGuy
       fire  Fire        # Killing Floor
       bolt  Bolt        # ^
       boltb BoltBack    # ^
@@ -97,13 +97,13 @@ enemies {
    }
 
    mancubus {
-      == lsounds/Monsters/Mancubus
+      == lsnd/Monsters/Mancubus
       fire Fire # FEAR, Doom
       $attenuation fire 0.5
    }
 
    hellknight {
-      == lsounds/Monsters/HellKnight
+      == lsnd/Monsters/HellKnight
       throw Throw # Touhou 7
    }
 
@@ -112,14 +112,14 @@ enemies {
    }
 
    spiderdemon {
-      == lsounds/Monsters/SpiderMastermind
+      == lsnd/Monsters/SpiderMastermind
       ready    Arm      # ???
       fire     Fire     # FEAR
       firestop FireStop # ^
    }
 
    cyberdemon {
-      == lsounds/Monsters/Cyberdemon
+      == lsnd/Monsters/Cyberdemon
       ready    Ready    # FEAR
       fire     Fire     # ^
       firedone FireDone # ^
@@ -129,7 +129,7 @@ enemies {
    }
 
    ophidian {
-      == lsounds/Monsters
+      == lsnd/Monsters
       ice  Ophidian/IceAttack # Touhou 9
       fire Mancubus/Fire      # FEAR, Doom
       $limit ice 0

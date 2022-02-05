@@ -19,14 +19,14 @@ class Lith_KnifPuf1 : Actor
       RenderStyle "Translucent";
       VSpeed 0.5;
 
-      +FORCEPAIN
-      +HITTRACER
-      +MTHRUSPECIES
-      +NOEXTREMEDEATH
-      +NOINTERACTION
-      +PUFFONACTORS
-      +THRUGHOST
-      -ALLOWPARTICLES
+      +ForcePain
+      +HitTracer
+      +MThruSpecies
+      +NoExtremeDeath
+      +NoInteraction
+      +PuffOnActors
+      +ThruGhost
+      -AllowParticles
    }
 
    states
@@ -59,9 +59,9 @@ default
    Weapon.SlotNumber 1;
    Weapon.SlotPriority 0.9;
 
-   +WEAPON.MELEEWEAPON
-   +WEAPON.NOAUTOFIRE
-   +WEAPON.WIMPY_WEAPON
+   +Weapon.MeleeWeapon
+   +Weapon.NoAutoFire
+   +Weapon.Wimpy_Weapon
 }
 
 states(Weapon)

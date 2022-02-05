@@ -15,7 +15,7 @@ class Lith_RifleGrenadeSmoke : Lith_Explosive
       Scale 0.15;
       Alpha 0.8;
 
-      +NOINTERACTION
+      +NoInteraction
    }
 
    states
@@ -52,9 +52,9 @@ default
    DamageType "Shrapnel";
 
    Projectile;
-   +MTHRUSPECIES
-   +EXPLODEONWATER
-   -NOGRAVITY
+   +MThruSpecies
+   +ExplodeOnWater
+   -NoGravity
 }
 
 states

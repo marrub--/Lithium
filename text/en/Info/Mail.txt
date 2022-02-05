@@ -6,6 +6,7 @@
 ##
 ## ---------------------------------------------------------------------------|
 
+!!include Ari/Mail.txt
 !!include Jem/Mail.txt
 !!include Stan/Mail.txt
 

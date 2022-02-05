@@ -15,8 +15,8 @@ class Lith_CannonExplosionParticle : Actor
       Scale 0.5;
       Gravity 0.8;
 
-      -NOGRAVITY
-      +NOCLIP
+      -NoGravity
+      +NoClip
    }
 
    states
@@ -37,7 +37,7 @@ class Lith_CannonSmokeParticle : Lith_CannonExplosionParticle
       Gravity 0.4;
       RenderStyle "Add";
 
-      +NOCLIP
+      +NoClip
    }
 
    states
@@ -63,15 +63,15 @@ class Lith_CannonBall : Lith_Explosive
       DamageType "Shrapnel";
 
       Projectile;
-      +DONTHARMSPECIES
-      +RIPPER
-      +BOUNCEONACTORS
-      +BOUNCEAUTOOFFFLOORONLY
-      +MTHRUSPECIES
-      +USEBOUNCESTATE
-      +FORCERADIUSDMG
-      +CANBOUNCEWATER
-      -NOGRAVITY
+      +DontHarmSpecies
+      +Ripper
+      +BounceOnActors
+      +BounceAutoOffFloorOnly
+      +MThruSpecies
+      +UseBounceState
+      +ForceRadiusDmg
+      +CanBounceWater
+      -NoGravity
    }
 
    double m_Angle;

@@ -7,7 +7,7 @@
 ## ---------------------------------------------------------------------------|
 
 player.wanderer {
-   == lsounds/PlayerW
+   == lsnd/PlayerW
    shadowwalk ShadowWalk # Self-made
 }
 

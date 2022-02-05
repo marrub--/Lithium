@@ -7,7 +7,7 @@
 ## ---------------------------------------------------------------------------|
 
 # Cyber-Mage
-== lsounds/PlayerC
+== lsnd/PlayerC
 $playersound    cybermage male *death   Death     # Doom
 $playersound    cybermage male *xdeath  XDeath    # ^
 $playersound    cybermage male *pain100 PainSmall # ^

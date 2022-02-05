@@ -434,7 +434,7 @@ stab_x(sp_lmusic_DOGS,       "lmusic/DOGS.ogg")
 stab_x(sp_lmusic_Shredder,   "lmusic/Shredder.ogg")
 stab_x(sp_lmusic_Unce,       "lmusic/Unce.ogg")
 stab_x(sp_lmusic_miniwip2,   "lmusic/miniwip2.ogg")
-stab_x(sp_lsounds_Silence,   "lsounds/Silence")
+stab_x(sp_lsnd_Silence,      "lsnd/Silence")
 
 stab_x(sp_F_SKY1,   "F_SKY1")
 stab_x(sp_LITHCAM1, "LITHCAM1")

@@ -104,7 +104,7 @@ class Lith_StarProjectile : Actor
 
       Projectile;
       +FORCERADIUSDMG
-      +RIPPER
+      +Ripper
       +SEEKERMISSILE
    }
 
@@ -204,7 +204,7 @@ class Lith_SolspearThingy : Actor
       RenderStyle "Add";
       Scale 0.15;
 
-      +BRIGHT
+      +Bright
       +NOCLIP
       +NOGRAVITY
    }
@@ -236,8 +236,8 @@ class Lith_Solspear : Actor
       WallBounceFactor 1;
 
       Projectile;
-      +BRIGHT
-      +RIPPER
+      +Bright
+      +Ripper
    }
 
    const FLAGS = SXF_TRANSFERPOINTERS|SXF_NOCHECKPOSITION;

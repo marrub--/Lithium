@@ -65,8 +65,8 @@ default {
    Weapon.BobSpeed 1.5;
    Weapon.BobStyle "InverseSmooth";
 
-   +INVENTORY.UNTOSSABLE;
-   +WEAPON.NOALERT;
+   +Inventory.UnTossable
+   +Weapon.NoAlert
 }
 
 int m_fired;
@@ -373,7 +373,7 @@ action(Weapon) void Lith_A_ZoomFactorScoped(double amount) {
    A_ZoomFactor((1+Lith_UTIL.pData(pdata_weaponzoom)/FIX) * amount * invoker.m_scopeZoom);
 }
 
-action(Weapon) void Lith_GunSmoke(class<Actor> type, double x, double y, bool ignoreCrouch) {
+action(Weapon) void Lith_GunSmoke(class<Actor> type, double x = 0, double y = 6, bool ignoreCrouch = false) {
    if(!ignoreCrouch) (y -= ((1.0 - GetCrouchFactor(AAPTR_DEFAULT)) * 10.0));
    A_FireProjectile(type, 0, 0, x, y, FPF_NOAUTOAIM);
 }

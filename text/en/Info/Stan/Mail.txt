@@ -139,21 +139,4 @@ on guns.
 
 See you.
 
-## ---------------------------------------------------------------------------|
-== \#INFO_TITLE_MSecret1Stan | $\#SAVED_BUFFER
-== \#INFO_REMOT_MSecret1Stan | $\#MAIL_INTERNAL
-@@ \#INFO_DESCR_MSecret1Stan
-This place stinks of rotten flesh! I wonder what's going on here,
-these blue walls sure seem out of place for Hell...
-
-Perhaps some sinners are waiting to eat my rockets!
-
-## ---------------------------------------------------------------------------|
-== \#INFO_TITLE_MSecret2Stan | $\#SAVED_BUFFER
-== \#INFO_REMOT_MSecret2Stan | $\#MAIL_INTERNAL
-@@ \#INFO_DESCR_MSecret2Stan
-Now I've done it, this place just keeps going deeper and getting
-weirder... Damn, it's getting hot in here! Better turn up the heat
-some more.
-
 ## EOF

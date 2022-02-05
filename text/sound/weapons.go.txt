@@ -8,7 +8,7 @@
 
 weapons {
    cfist {
-      == lsounds/Weapons/ChargeFist
+      == lsnd/Weapons/ChargeFist
       pickup    Pickup    # Halo 3
       fire1     Fire1     # ^
       fire2     Fire2     # ^
@@ -49,7 +49,7 @@ weapons {
    }
 
    missile {
-      == lsounds/Weapons/MissileLauncher
+      == lsnd/Weapons/MissileLauncher
       fire      Fire      # FEAR
       empty     FireEmpty # ^
       reloadout ReloadOut # ^
@@ -60,7 +60,7 @@ weapons {
    }
 
    plasma {
-      == lsounds/WeaponsM/PlasmaRifle
+      == lsnd/WeaponsM/PlasmaRifle
       fire    Fire      # Devil May Cry 3
       altfire AltFire   # ^
       pickup  Pickup    # Alliance of Valiant Arms
@@ -81,7 +81,7 @@ weapons {
       $volume explode 0.5
 
       laser {
-         == lsounds/WeaponsM/PlasmaRifle/Laser
+         == lsnd/WeaponsM/PlasmaRifle/Laser
          fire_start FireStart # Unreal Tournament '99
          fire_hum   FireHum   # ^
          fire_loop  FireLoop  # Self-made
@@ -91,7 +91,7 @@ weapons {
       }
 
       part {
-         == lsounds/WeaponsM/PlasmaRifle/PartBeam
+         == lsnd/WeaponsM/PlasmaRifle/PartBeam
          charge    Charge    # Touhou 13
          fire      Fire      # FEAR, Halo 3
          reloadout ReloadOut # FEAR
@@ -102,7 +102,7 @@ weapons {
    }
 
    plasdiff {
-      == lsounds/Weapons/PlasmaDiffuser
+      == lsnd/Weapons/PlasmaDiffuser
       fire1 Fire      # Halo 3
       fire2 Fire2     # ^
       fire3 Fire3     # ^

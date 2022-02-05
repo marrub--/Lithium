@@ -8,7 +8,7 @@
 
 weapons {
    mateba {
-      == lsounds/WeaponsC/Mateba
+      == lsnd/WeaponsC/Mateba
       fire     Fire     # ???
       open     Open     # ???
       eject    Eject    # Killing Floor
@@ -20,7 +20,7 @@ weapons {
    }
 
    erifle {
-      == lsounds/WeaponsC/ShockRifle
+      == lsnd/WeaponsC/ShockRifle
       pickup    Pickup    # Halo 3
       draw      Draw      # ^
       fire      Fire      # Return to Castle Wolfenstein, Halo 3
@@ -47,7 +47,7 @@ weapons {
    }
 
    spas {
-      == lsounds/WeaponsC/SPAS
+      == lsnd/WeaponsC/SPAS
       fire   Fire      # FEAR, Dynamic Range
       fire2  Fire2     # ^
       load   Load      # Halo 3
@@ -58,7 +58,7 @@ weapons {
    }
 
    smg {
-      == lsounds/WeaponsC/SMG
+      == lsnd/WeaponsC/SMG
       fire     Fire         # FEAR
       firedone FireDone     # ^
       firehit  FireHit      # Half-Life 2 MMod
@@ -76,7 +76,7 @@ weapons {
    }
 
    ionrifle {
-      == lsounds/WeaponsC/IonRifle
+      == lsnd/WeaponsC/IonRifle
       fire    Fire      # Fallout: New Vegas
       fire2   Fire2     # ^
       eject   Eject     # Killing Floor
@@ -101,7 +101,7 @@ weapons {
    }
 
    shipgun {
-      == lsounds/WeaponsC/StarDestroyer
+      == lsnd/WeaponsC/StarDestroyer
       explode   Explode      # Halo 3
       fire      Fire         # ^
       firesol   FireSolspear # Halo 3, Fallout 4
@@ -117,13 +117,13 @@ weapons {
    }
 
    blade {
-      == lsounds/WeaponsC/Blade
+      == lsnd/WeaponsC/Blade
       slash Slash # Monster Girl Quest
       hit   Hit   # ^
    }
 
    delear {
-      == lsounds/WeaponsC/Delear
+      == lsnd/WeaponsC/Delear
       fire   Fire   # Devil May Cry 3
       open   Open   # Devil May Cry 3, ???
       charge Charge # Devil May Cry 3, Deus Ex
@@ -131,7 +131,7 @@ weapons {
    }
 
    feuer {
-      == lsounds/WeaponsC/Feuer
+      == lsnd/WeaponsC/Feuer
       explode Explode # Monster Girl Quest
       fire    Fire    # Touhou 13
       final   Final   # ^
@@ -141,7 +141,7 @@ weapons {
    }
 
    rend {
-      == lsounds/WeaponsC/Rend
+      == lsnd/WeaponsC/Rend
       slash1  Fire1   # ???
       slash2  Fire2   # ???
       slash3  Fire3   # ???
@@ -158,13 +158,13 @@ weapons {
    }
 
    hulgyon {
-      == lsounds/WeaponsC/Hulgyon
+      == lsnd/WeaponsC/Hulgyon
       proc Proc # Touhou 13
       $limit proc 0
    }
 
    sshot {
-      == lsounds/WeaponsC/StarShot
+      == lsnd/WeaponsC/StarShot
       fire   Fire   # Halo 3
       firero RunOut # Monster Girl Quest
 
@@ -174,7 +174,7 @@ weapons {
    }
 
    cercle {
-      == lsounds/WeaponsC/Cercle
+      == lsnd/WeaponsC/Cercle
       begin  Begin  # Phantasy Star Online
       attack Attack # ^
    }

@@ -11,7 +11,7 @@ class Lith_AnimItemSprite : Lith_ItemSprite
 {
    default
    {
-      +BRIGHT;
+      +Bright
    }
 
    property Phases: m_Phases;

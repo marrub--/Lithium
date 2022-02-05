@@ -14,9 +14,9 @@ class Lith_DelearDotTrail : Actor
       RenderStyle "Add";
       Scale 0.4;
 
-      +FORCEXYBILLBOARD
-      +NOINTERACTION
-      +NOTIMEFREEZE
+      +ForceXyBillboard
+      +NoInteraction
+      +NoTimeFreeze
    }
 
    states
@@ -34,7 +34,7 @@ class Lith_DelearSprite : Lith_DelearDotTrail
    {
       Scale 0.3;
 
-      +FORCEXYBILLBOARD
+      +ForceXyBillboard
    }
 
    states
@@ -53,8 +53,8 @@ class Lith_DelearExplosion : Actor
       RenderStyle "Add";
       Scale 0.35;
 
-      +FORCEXYBILLBOARD
-      +NOINTERACTION
+      +ForceXyBillboard
+      +NoInteraction
    }
 
    states
@@ -101,8 +101,8 @@ default
    Lith_Weapon.AmmoType "Lith_ManaAmmo";
    Inventory.AltHudIcon "SPELG0";
 
-   +WEAPON.DONTBOB
-   -WEAPON.NOAUTOFIRE
+   +Weapon.DontBob
+   -Weapon.NoAutoFire
 }
 
 states(Weapon)

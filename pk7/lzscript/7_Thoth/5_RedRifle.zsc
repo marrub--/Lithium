@@ -15,7 +15,7 @@ default {
    Weapon.SlotNumber 5;
    Weapon.SlotPriority 1;
 
-   +WEAPON.NOAUTOFIRE;
+   +Weapon.NoAutoFire
 }
 
 action(Weapon) void Lith_A_FireRedRifle() {

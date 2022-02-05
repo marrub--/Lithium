@@ -15,7 +15,7 @@ default {
    Weapon.SlotNumber 3;
    Weapon.SlotPriority 1;
 
-   +WEAPON.NOAUTOFIRE;
+   +Weapon.NoAutoFire
 }
 
 bool m_duplex;

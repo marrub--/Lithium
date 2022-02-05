@@ -6,7 +6,7 @@
 ##
 ## ---------------------------------------------------------------------------|
 
-== lsounds/Player
+== lsnd/Player
 $playersound player male *jump    Jump     # General 6000
 $playersound player male *usefail UseFail  # Self-made
 $playersound player male *land    Land     # Hexen
@@ -47,7 +47,7 @@ player {
       score3,
    }
 
-   == lsounds/Player/Footsteps
+   == lsnd/Player/Footsteps
    step1 Step1 # ???
    step2 Step2 # ???
    step3 Step3 # ???
@@ -96,7 +96,7 @@ player {
       steps4,
    }
 
-   == lsounds/GUI
+   == lsnd/GUI
    counter     Payout/Counter     # Halo 3
    counterdone Payout/CounterDone # ^
 
@@ -105,7 +105,7 @@ player {
    trmopen   Terminal/Open   # Marathon
    trmswitch Terminal/Switch # ^
 
-   == lsounds/Weapons
+   == lsnd/Weapons
    wings Wings # Hexen
 }
 

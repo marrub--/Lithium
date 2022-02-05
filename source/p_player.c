@@ -433,7 +433,7 @@ void P_doIntro() {
    }
 
    pl.modal = _gui_intro;
-   ACS_SetMusic(sp_lsounds_Silence);
+   ACS_SetMusic(sp_lsnd_Silence);
    FreezeTime(false);
    ACS_FadeTo(0, 0, 0, 1.0, 0.0);
 

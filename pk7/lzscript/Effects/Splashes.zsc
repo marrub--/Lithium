@@ -15,15 +15,15 @@ class Lith_Splash : Actor
       Height 5;
       RenderStyle "Translucent";
 
-      +NOCLIP
-      +RANDOMIZE
-      +NOGRAVITY
-      +DONTBLAST
-      +NOTELEPORT
-      +CANNOTPUSH
-      +DONTSPLASH
-      +NOINTERACTION
-      -FLOORCLIP
+      +NoClip
+      +Randomize
+      +NoGravity
+      +DontBlast
+      +NoTeleport
+      +CannotPush
+      +DontSplash
+      +NoInteraction
+      -FloorClip
    }
 }
 
@@ -164,8 +164,8 @@ class Lith_NukageParticle : Actor
       Mass 1;
 
       Projectile;
-      +DONTSPLASH
-      -NOGRAVITY
+      +DontSplash
+      -NoGravity
    }
 
    states
@@ -265,8 +265,8 @@ class Lith_LavaParticle : Actor
       Mass 1;
 
       Projectile;
-      +DONTSPLASH
-      -NOGRAVITY
+      +DontSplash
+      -NoGravity
    }
 
    states

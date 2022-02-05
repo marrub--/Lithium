@@ -84,7 +84,7 @@ default
    Obituary    "$OB_KNIGHT";
    Tag         "$LITH_INFO_SHORT_HellKnight";
 
-   -BOSSDEATH
+   -BossDeath
 }
 
 states

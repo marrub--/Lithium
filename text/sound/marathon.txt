@@ -7,7 +7,7 @@
 ## ---------------------------------------------------------------------------|
 
 marathon {
-   == lsounds/Marathon
+   == lsnd/Marathon
    pickup   Pickup
    explode  Explode
    hitsolid HitSolid

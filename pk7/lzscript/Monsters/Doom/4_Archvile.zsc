@@ -12,7 +12,7 @@ class Lith_ArchvileFire : ArchvileFire replaces ArchvileFire
    default
    {
       Translation "Lith_ArchvileFire";
-      +FORCEYBILLBOARD
+      +ForceYBillboard
    }
 }
 
@@ -49,9 +49,9 @@ class Lith_ArchvileImmolatorBlast : Actor
       Mass int.Max;
       Translation "Lith_ArchvileImmolatorBlast";
 
-      +FLOORHUGGER
-      +FORCEYBILLBOARD
-      -NOGRAVITY
+      +FloorHugger
+      +ForceYBillboard
+      -NoGravity
    }
 
    states
@@ -92,9 +92,9 @@ default
    Obituary "$OB_VILE";
    Tag      "$LITH_INFO_SHORT_Archvile";
 
-   +FLOORCLIP
-   +NOTARGET
-   +QUICKTORETALIATE
+   +FloorClip
+   +NoTarget
+   +QuickToRetaliate
 }
 
 states

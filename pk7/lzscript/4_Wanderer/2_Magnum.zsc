@@ -25,7 +25,7 @@ default {
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/magnum/draw";
 
-   +WEAPON.NOAUTOFIRE;
+   +Weapon.NoAutoFire
 }
 
 action(Weapon) void lith_fireMagnum() {

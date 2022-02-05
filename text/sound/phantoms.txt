@@ -8,7 +8,7 @@
 
 enemies {
    phantom {
-      == lsounds/Monsters/Phantoms
+      == lsnd/Monsters/Phantoms
       spawn1 Spawn  # Self-made
       spawn2 Spawn2 # ^
 
@@ -33,7 +33,7 @@ enemies {
    }
 
    james {
-      == lsounds/Monsters/Phantoms/James
+      == lsnd/Monsters/Phantoms/James
       fire1 Fire  # Alliance of Valiant Arms
       fire2 Fire2 # ^
       fire3 Fire3 # ^
@@ -61,7 +61,7 @@ enemies {
    }
 
    makarov {
-      == lsounds/Monsters/Phantoms/Makarov
+      == lsnd/Monsters/Phantoms/Makarov
       fire1 Fire  # Fallout: New Vegas
       fire2 Fire2 # ^
 
@@ -114,7 +114,7 @@ enemies {
    }
 
    isaac {
-      == lsounds/Monsters/Phantoms/Isaac
+      == lsnd/Monsters/Phantoms/Isaac
       fire1 Fire  # ???, Halo 3
       fire2 Fire2 # ^
 
@@ -128,7 +128,7 @@ enemies {
    }
 
    michael {
-      == lsounds/Monsters/Phantoms/Michael
+      == lsnd/Monsters/Phantoms/Michael
       swing1 Swing  # Fallout 4
       swing2 Swing2 # ^
       swing3 Swing3 # ^

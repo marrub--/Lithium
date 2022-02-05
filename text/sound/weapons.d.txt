@@ -8,7 +8,7 @@
 
 weapons {
    subweapon {
-      == lsounds/WeaponsD/Subweapons
+      == lsnd/WeaponsD/Subweapons
       charge Charge # Rozenkreuzstilette
       armgun ArmGun # Phantasy Star: Nova
       needle Needle # Psychic
@@ -18,7 +18,7 @@ weapons {
    }
 
    kampilan {
-      == lsounds/WeaponsD/Kampilan
+      == lsnd/WeaponsD/Kampilan
       draw     Draw     # Metal Gear Solid 2
       bonk     Bonk     # ^
       hit      Hit      # ^
@@ -32,7 +32,7 @@ weapons {
    }
 
    \700e {
-      == lsounds/WeaponsD/700Express
+      == lsnd/WeaponsD/700Express
       fire1 Fire1      # E.Y.E: Divine Cybermancy
       fire2 Fire2      # ^
       fire3 Fire3      # ^
@@ -51,13 +51,13 @@ weapons {
    }
 
    \4bore {
-      == lsounds/WeaponsD/4Bore
+      == lsnd/WeaponsD/4Bore
       fire Fire # a1337spy
       draw Draw # Sound Ideas Series 6000
    }
 
    shrapnel {
-      == lsounds/WeaponsD/ShrapnelGun
+      == lsnd/WeaponsD/ShrapnelGun
       fire   Fire   # EYE: Divine Cybermancy
       draw   Draw   # ^
       bounce Bounce # Devil May Cry 2
@@ -65,7 +65,7 @@ weapons {
    }
 
    motra {
-      == lsounds/WeaponsD/Motra
+      == lsnd/WeaponsD/Motra
       fire1 Fire1     # E.Y.E: Divine Cybermancy
       fire2 Fire2     # ^
       fire3 Fire3     # ^
@@ -76,7 +76,7 @@ weapons {
    }
 
    minigun {
-      == lsounds/WeaponsD/Minigun
+      == lsnd/WeaponsD/Minigun
       fire   Fire        # Serious Sam: The First Encounter HD
       rotate Rotate      # ^
       up     RotateUp    # ^
@@ -89,7 +89,7 @@ weapons {
    }
 
    dualrocket {
-      == lsounds/WeaponsD/DualRocket
+      == lsnd/WeaponsD/DualRocket
       firel1 FireLeft   # ???
       firel2 FireLeft2  # ???
       firel3 FireLeft3  # ???
@@ -102,7 +102,7 @@ weapons {
    }
 
    fortune {
-      == lsounds/WeaponsD/FortuneGun
+      == lsnd/WeaponsD/FortuneGun
       fire   Fire      # Metal Gear Solid 2
       hit    Hit       # ^
       spark  Spark     # ^
@@ -110,6 +110,11 @@ weapons {
       draw   Draw      # Halo 3, Counter-Strike: Source
       $limit hit 0
       $limit spark 0
+   }
+
+   rems {
+      == lsnd/WeaponsD/Rems
+      fire Fire # Self-made
    }
 }
 

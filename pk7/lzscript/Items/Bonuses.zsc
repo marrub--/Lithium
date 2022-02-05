@@ -18,7 +18,7 @@ class Lith_Coin : Lith_ScoreItem
       Scale 0.3;
       Radius 10;
 
-      +LITH_BASICPICKUP.VACUUM
+      +Lith_BasicPickup.VACUUM
    }
 
    states
@@ -41,7 +41,7 @@ class Lith_ScoreChip : Lith_ScoreItem
       Scale 0.4;
       Radius 12;
 
-      +LITH_BASICPICKUP.VACUUM
+      +Lith_BasicPickup.VACUUM
    }
 
    states
@@ -63,7 +63,7 @@ class Lith_Ruby : Lith_ScoreItem
       Scale 0.3;
       Radius 10;
 
-      +LITH_BASICPICKUP.VACUUM
+      +Lith_BasicPickup.VACUUM
    }
 
    states
@@ -85,7 +85,7 @@ class Lith_Sapphire : Lith_ScoreItem
       Scale 0.4;
       Radius 10;
 
-      +LITH_BASICPICKUP.VACUUM
+      +Lith_BasicPickup.VACUUM
    }
 
    states
@@ -107,7 +107,7 @@ class Lith_Amethyst : Lith_ScoreItem
       Scale 0.3;
       Radius 10;
 
-      +LITH_BASICPICKUP.VACUUM
+      +Lith_BasicPickup.VACUUM
    }
 
    states
@@ -129,7 +129,7 @@ class Lith_Diamond : Lith_ScoreItem
       Scale 0.4;
       Radius 10;
 
-      +LITH_BASICPICKUP.VACUUM
+      +Lith_BasicPickup.VACUUM
    }
 
    states
@@ -151,7 +151,7 @@ class Lith_Emerald : Lith_ScoreItem
       Scale 0.4;
       Radius 10;
 
-      +LITH_BASICPICKUP.VACUUM
+      +Lith_BasicPickup.Vacuum
    }
 
    states
@@ -173,7 +173,7 @@ class Lith_Scheelite : Lith_ScoreItem
       Scale 0.5;
       Radius 12;
 
-      +LITH_BASICPICKUP.VACUUM
+      +Lith_BasicPickup.VACUUM
    }
 
    states
@@ -195,7 +195,7 @@ class Lith_Nambulite : Lith_ScoreItem
       Scale 0.5;
       Radius 12;
 
-      +LITH_BASICPICKUP.VACUUM
+      +Lith_BasicPickup.VACUUM
    }
 
    states
@@ -217,7 +217,7 @@ class Lith_Lepidolite : Lith_ScoreItem
       Scale 0.5;
       Radius 12;
 
-      +LITH_BASICPICKUP.VACUUM
+      +Lith_BasicPickup.VACUUM
    }
 
    states
@@ -239,7 +239,7 @@ class Lith_Petalite : Lith_ScoreItem
       Scale 0.5;
       Radius 12;
 
-      +LITH_BASICPICKUP.VACUUM
+      +Lith_BasicPickup.VACUUM
    }
 
    states
@@ -261,7 +261,7 @@ class Lith_Tourmaline : Lith_ScoreItem
       Scale 0.5;
       Radius 12;
 
-      +LITH_BASICPICKUP.VACUUM
+      +Lith_BasicPickup.VACUUM
    }
 
    states
@@ -416,7 +416,7 @@ class Lith_HealthBonusVial : Lith_BasicPickup
       Lith_BasicPickup.InfoPage "HealthBonus";
       Scale 0.7;
 
-      +LITH_BASICPICKUP.VACUUM
+      +Lith_BasicPickup.VACUUM
    }
 
    override void Lith_OnPickup(Actor mo)

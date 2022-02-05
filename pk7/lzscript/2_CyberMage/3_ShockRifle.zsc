@@ -14,7 +14,7 @@ class Lith_ShockEffectPuff : Lith_Dummy
       DamageType "Electric";
       Species "Lith_Player";
 
-      +DONTHARMSPECIES
+      +DontHarmSpecies
    }
 }
 
@@ -26,9 +26,9 @@ class Lith_ShockEffect : Actor
       RenderStyle "Add";
       Scale 0.6;
 
-      +BRIGHT
-      +NOINTERACTION
-      +RANDOMIZE
+      +Bright
+      +NoInteraction
+      +Randomize
    }
 
    states
@@ -43,10 +43,10 @@ class Lith_ShockEffect2 : Lith_ShockEffect
 {
    default
    {
-      +FRIENDLY
-      +NOBLOCKMAP
-      +NOGRAVITY
-      -NOINTERACTION
+      +Friendly
+      +NoBlockmap
+      +NoGravity
+      -NoInteraction
    }
 
    states
@@ -66,8 +66,8 @@ class Lith_SuperShockEffect : Actor
       Scale 0.6;
       Translation "Lith_SuperShockEffect";
 
-      +BRIGHT
-      +NOINTERACTION
+      +Bright
+      +NoInteraction
    }
 
    states
@@ -85,10 +85,10 @@ class Lith_ShockPuff : Lith_BulletPuff
 {
    default
    {
-      +FORCEPAIN
-      +HITTRACER
-      +PUFFGETSOWNER
-      +PUFFONACTORS
+      +ForcePain
+      +HitTracer
+      +PuffGetsOwner
+      +PuffOnActors
    }
 
    void Lith_A_Shock() {

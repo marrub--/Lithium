@@ -11,7 +11,7 @@ player {
    $alias marine.step = step
 
    # Upgrades
-   == lsounds/PlayerM
+   == lsnd/PlayerM
    rarmor.mode   RArmor/ChangeMode # Halo 3
    rarmor.damage RArmor/Damage     # Touhou 13
 

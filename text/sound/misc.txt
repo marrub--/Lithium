@@ -7,14 +7,14 @@
 ## ---------------------------------------------------------------------------|
 
 # World
-explosion1 lsounds/Explosion
-explosion2 lsounds/Explosion2
-explosion3 lsounds/Explosion3
+explosion1 lsnd/Explosion
+explosion2 lsnd/Explosion2
+explosion3 lsnd/Explosion3
 $random explosion {explosion1, explosion2, explosion3,}
 $limit explosion 0
 $attenuation explosion 0.5
 
-== lsounds
+== lsnd
 silence Silence # Self-made
 
 MMMMHMHMMMHMMM MMMMHMHMMMHMMM # ?????
@@ -25,10 +25,10 @@ misc {
    pop    pop    # ????????????????
    secret Secret # Self-made
 
-   == lsounds/World
+   == lsnd/World
    booom boom # ??????????????
 
-   == lsounds/World/Teleport
+   == lsnd/World/Teleport
    teleport  Teleport    # Self-made
    teleport5 Teleport5   # ^
    teleport6 Teleport6   # ^
@@ -38,13 +38,13 @@ misc {
 }
 
 ghost {
-   == lsounds/Weapons
+   == lsnd/Weapons
    hit GhostHit # Touhou 13
    $alias spawn = .player.pickup.barrier
 }
 
 intermission {
-   == lsounds/GUI/Menu
+   == lsnd/GUI/Menu
    tick      InterTick # Halo 3
    nextstage InterNext # Halo 3, Phantasy Star Online
    paststats InterPass # Phantasy Star Online
@@ -57,7 +57,7 @@ intermission {
 
 misc {
    # Menu
-   == lsounds/GUI
+   == lsnd/GUI
    chat Chat # FEAR
    $alias chat2 = chat
 
@@ -84,7 +84,7 @@ misc {
 }
 
 menu {
-   == lsounds/GUI/Menu
+   == lsnd/GUI/Menu
    backup   Back     # Phantasy Star Online
    cursor   Move     # ^
    activate Activate # ^

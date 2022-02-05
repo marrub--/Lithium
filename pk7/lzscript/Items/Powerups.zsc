@@ -50,8 +50,8 @@ class Lith_Berserk : Inventory replaces Berserk {
       Lith_HERMES.UnlockBip(mo, "Berserk");
       mo.GiveInventory("PowerStrength", 1);
       callAcs("Lith_ItemPopupTag");
-      if(mo.health < 100) {
-         mo.health = 100;
+      if(mo.health < mo.getMaxHealth()) {
+         mo.health = mo.getMaxHealth();
       }
       goAwayAndDie();
       return true;

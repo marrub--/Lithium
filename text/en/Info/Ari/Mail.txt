@@ -1,0 +1,51 @@
+## -*-Agw-LithTxt-*-----------------------------------------------------------|
+##
+## Distributed under the CC0 public domain license.
+## By Alison G. Watson. Attribution is encouraged, though not required.
+## See licenses/cc0.txt for more information.
+##
+## ---------------------------------------------------------------------------|
+
+== \#REMOTE_OMI | omif@corp.AOF?UNVERIFIED
+
+## ---------------------------------------------------------------------------|
+== \#INFO_TITLE_MIntroAri | $\#SAVED_MESSAGE
+== \#INFO_REMOT_MIntroAri | $\#REMOTE_OMI
+@@ \#INFO_DESCR_MIntroAri
+Aricil! I can feel your presence. We're in the same plane now, you and
+I. Good.
+
+I'm going to propose a challenge to you, my dear brother; Whoever can
+make the most Score and get out of here the quickest wins. Let's see
+who will make it to the top first.
+
+I hope you a safe journey. This place gives me horrid vibes.
+
+## ---------------------------------------------------------------------------|
+== \#INFO_TITLE_MCluster1Ari | $\#SAVED_MESSAGE
+== \#INFO_REMOT_MCluster1Ari | $\#REMOTE_OMI
+@@ \#INFO_DESCR_MCluster1Ari
+
+## ---------------------------------------------------------------------------|
+== \#INFO_TITLE_MCluster2Ari | $\#SAVED_MESSAGE
+== \#INFO_REMOT_MCluster2Ari | $\#REMOTE_OMI
+@@ \#INFO_DESCR_MCluster2Ari
+
+## ---------------------------------------------------------------------------|
+== \#INFO_TITLE_MCluster3Ari | $\#SAVED_MESSAGE
+== \#INFO_REMOT_MCluster3Ari | $\#REMOTE_OMI
+@@ \#INFO_DESCR_MCluster3Ari
+
+## ---------------------------------------------------------------------------|
+== \#INFO_TITLE_MPhantomAri | $\#SAVED_MESSAGE
+== \#INFO_REMOT_MPhantomAri | $\#REMOTE_OMI
+@@ \#INFO_DESCR_MPhantomAri
+Aricil! What the hell is going on? There are strange... \cmdark\c-
+things attacking me. If you can, we need to re-group. My
+Computer/Brain Interface is saying weird things to me... I'm loathe to
+say it, but, I'm scared.
+
+I think we should go home, but... The world keeps changing behind me.
+I'm pretty sure the Dimension Driver wouldn't even work here.
+
+## EOF

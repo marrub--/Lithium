@@ -7,7 +7,7 @@
 ## ---------------------------------------------------------------------------|
 
 # Assassin
-== lsounds/PlayerA
+== lsnd/PlayerA
 $playersound    assassin male *death   Death     # Phantasy Star: Nova
 $playersound    assassin male *xdeath  XDeath    # ^
 $playersound    assassin male *pain100 PainSmall # ^

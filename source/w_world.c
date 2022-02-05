@@ -222,11 +222,9 @@ void HInit(void) {
    if(mapscleared != 0) Scr_HInit();
 
    /* Cluster messages. */
-   if(Cluster >=  6) P_BIP_Unlock(P_BIP_NameToPage("MCluster1"), false);
-   if(Cluster >=  7) P_BIP_Unlock(P_BIP_NameToPage("MCluster2"), false);
-   if(Cluster ==  8) P_BIP_Unlock(P_BIP_NameToPage("MCluster3"), false);
-   if(Cluster ==  9) P_BIP_Unlock(P_BIP_NameToPage("MSecret1"),  false);
-   if(Cluster == 10) P_BIP_Unlock(P_BIP_NameToPage("MSecret2"),  false);
+   if(Cluster >= 6) P_BIP_Unlock(P_BIP_NameToPage("MCluster1"), false);
+   if(Cluster >= 7) P_BIP_Unlock(P_BIP_NameToPage("MCluster2"), false);
+   if(Cluster == 8) P_BIP_Unlock(P_BIP_NameToPage("MCluster3"), false);
 
    if(CVarGetI(sc_sv_nobosses) ||
       CVarGetI(sc_sv_nobossdrop)

@@ -33,14 +33,14 @@ default
    Obituary "$OB_SKULL";
    Tag      "$LITH_INFO_SHORT_LostSoul";
 
-   +DONTFALL
-   +FLOAT
-   +MISSILEMORE
-   +NOGRAVITY
-   +NOICEDEATH
-   +QUICKTORETALIATE
-   +THRUSPECIES
-   -COUNTKILL
+   +DontFall
+   +Float
+   +MissileMore
+   +NoGravity
+   +NoIceDeath
+   +QuickToRetaliate
+   +ThruSpecies
+   -CountKill
 }
 
 bool m_Invisible;

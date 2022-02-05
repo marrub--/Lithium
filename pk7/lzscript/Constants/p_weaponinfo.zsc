@@ -45,6 +45,7 @@ enum Lith_WeaponNum {
    weapon_d_motra,
    weapon_d_drocket,
    weapon_d_fortune,
+   weapon_d_rems,
    weapon_i_flintlock,
    weapon_w_magnum,
    weapon_a_dualpist,

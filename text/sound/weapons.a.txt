@@ -8,7 +8,7 @@
 
 weapons {
    burstrif {
-      == lsounds/WeaponsA/BurstRifle
+      == lsnd/WeaponsA/BurstRifle
       fire1     Fire      # Killing Floor
       fire2     Fire2     # ^
       fire3     Fire3     # ^
@@ -19,7 +19,7 @@ weapons {
    }
 
    dualpistols {
-      == lsounds/WeaponsA/DualPistols
+      == lsnd/WeaponsA/DualPistols
       firel FireL       # ???
       firer FireR       # ???
       in    ReloadIn    # ???

@@ -82,6 +82,7 @@ pD:
    d_motra:    [4, Motra,       NMag       ]
    d_drocket:  [5, DualRocket,  Ammo Rocket]
    d_fortune:  [6, FortuneGun,  Ammo Plasma]
+   d_rems:     [7, Rems,        Ammo Cannon]
 
    pickups:
       fist:           d_khanda
@@ -92,7 +93,7 @@ pD:
       chaingun:       d_minigun
       rocketlauncher: d_drocket
       plasmarifle:    d_fortune
-      bfg9000:        m_fist
+      bfg9000:        d_rems
 
 pI:
    i_flintlock: [2, Flintlock, AMag Shell]

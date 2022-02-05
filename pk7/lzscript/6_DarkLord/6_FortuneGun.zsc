@@ -193,7 +193,7 @@ default {
    Lith_Weapon.AmmoType "Lith_PlasmaAmmo";
    Inventory.AltHudIcon "FORTZ0";
 
-   +WEAPON.NOAUTOFIRE;
+   +Weapon.NoAutoFire
 }
 
 int m_chargeTime;

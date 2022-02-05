@@ -71,6 +71,8 @@
    cl: pM tag: CPU1       unl: "KSKK";
    cl: pM tag: CPU2       unl: "KSKK";
 
+   cl: gI tag: DimDriver;
+
    cl: gA tag: OrSigil;
 }
 
@@ -267,15 +269,11 @@
    cl: pM tag: MCluster2Stan;
    cl: pM tag: MCluster3Stan;
    cl: pM tag: MPhantomStan;
-   cl: pM tag: MSecret1Stan;
-   cl: pM tag: MSecret2Stan;
 
    cl: pC tag: MCluster1Jem;
    cl: pC tag: MCluster2Jem;
    cl: pC tag: MCluster3Jem;
-   cl: pC tag: MPhantomJem;
-   cl: pC tag: MSecret1Jem;
-   cl: pC tag: MSecret2Jem;
+   cl: pC tag: MPhantomJem unl: "DimDriver";
 }
 
 /* EOF */

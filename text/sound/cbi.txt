@@ -7,7 +7,7 @@
 ## ---------------------------------------------------------------------------|
 
 player.cbi {
-   == lsounds/GUI
+   == lsnd/GUI
    win95 Startup # Windows 95 / Brian Eno
 
    open  Open  # Halo 3

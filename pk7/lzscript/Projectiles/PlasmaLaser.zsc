@@ -17,18 +17,18 @@ class Lith_PlasmaHit : Lith_PlasmaLaze
       Species "Lith_Player";
       DamageType "Electric";
 
-      +DONTHARMSPECIES
-      +BRIGHT
-      +NOINTERACTION
-      +PUFFONACTORS
-      +PUFFGETSOWNER
-      +NOGRAVITY
-      +NOBLOCKMAP
-      +FLOORCLIP
-      +EXTREMEDEATH
-      +FORCEXYBILLBOARD
-      +MTHRUSPECIES
-      -ALLOWPARTICLES
+      +DontHarmSpecies
+      +Bright
+      +NoInteraction
+      +PuffOnActors
+      +PuffGetsOwner
+      +NoGravity
+      +NoBlockMap
+      +FloorClip
+      +ExtremeDeath
+      +ForceXyBillboard
+      +MThruSpecies
+      -AllowParticles
    }
 
    states
@@ -61,9 +61,9 @@ default
    RenderStyle "Add";
    Scale 0.3;
 
-   +FORCEXYBILLBOARD
-   +NOINTERACTION
-   +NOTIMEFREEZE
+   +ForceXyBillboard
+   +NoInteraction
+   +NoTimeFreeze
 }
 
 override void Tick()

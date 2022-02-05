@@ -8,7 +8,7 @@
 
 weapons {
    magnum {
-      == lsounds/WeaponsW/Magnum
+      == lsnd/WeaponsW/Magnum
       fire1    Fire        # Marathon 2
       fire2    Fire2       # ^
       fireback FireBacking # ^

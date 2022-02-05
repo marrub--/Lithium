@@ -17,8 +17,8 @@ class Lith_OmegaRailFXBase : Actor
       Height 1;
       Radius 1;
 
-      +NOBLOCKMAP
-      +NOGRAVITY
+      +NoBlockmap
+      +NoGravity
    }
 }
 
@@ -29,9 +29,9 @@ class Lith_OmegaRailParticle1 : Lith_OmegaRailFXBase
       Alpha 0.8;
       Translation "Lith_OmegaRailParticle";
 
-      +NOINTERACTION
-      -NOBLOCKMAP
-      -NOGRAVITY
+      +NoInteraction
+      -NoBlockmap
+      -NoGravity
    }
 
    states
@@ -72,9 +72,9 @@ class Lith_OmegaRailBeam : Lith_OmegaRailFXBase
       Species "Lith_Player";
       DamageType "Electric";
 
-      +DONTHARMSPECIES
-      +EXTREMEDEATH
-      +FORCERADIUSDMG
+      +DontHarmSpecies
+      +ExtremeDeath
+      +ForceRadiusDmg
    }
 
    states
@@ -96,8 +96,8 @@ class Lith_OmegaRailExplosion : Lith_OmegaRailFXBase
    {
       Scale 2;
 
-      +EXTREMEDEATH
-      +FORCERADIUSDMG
+      +ExtremeDeath
+      +ForceRadiusDmg
    }
 
    states
@@ -124,11 +124,11 @@ class Lith_OmegaRailHax : FastProjectile
       Height 1;
       Radius 1;
 
-      +NOGRAVITY
-      +NOBLOCKMAP
-      +THRUACTORS
-      +EXTREMEDEATH
-      +EXPLODEONWATER
+      +NoGravity
+      +NoBlockmap
+      +ThruActors
+      +ExtremeDeath
+      +ExplodeOnWater
    }
 
    states

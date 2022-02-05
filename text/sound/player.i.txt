@@ -7,7 +7,7 @@
 ## ---------------------------------------------------------------------------|
 
 # Informant
-== lsounds/PlayerI
+== lsnd/PlayerI
 $playeralias    informant male *land    player.informant.land
 $playeralias    informant male *grunt   silence
 $playersound    informant male *jump    Jump       # Self-made

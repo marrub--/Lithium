@@ -52,7 +52,7 @@ default {
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/700e/draw";
 
-   +WEAPON.NOAUTOFIRE;
+   +Weapon.NoAutoFire
 }
 
 Actor[10] m_laser;

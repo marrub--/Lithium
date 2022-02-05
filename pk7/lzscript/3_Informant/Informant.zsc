@@ -21,7 +21,7 @@ class Lith_InformantPlayer : Lith_Player
       Player.JumpZ 14;
       Tag "$LITH_CLASS_INFORMANT";
 
-      +NOBLOOD;
+      +NoBlood
    }
 
    private int m_dodgeDbc;

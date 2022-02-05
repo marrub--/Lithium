@@ -8,7 +8,7 @@
 
 weapons {
    redrifle {
-      == lsounds/WeaponsT/RedRifle
+      == lsnd/WeaponsT/RedRifle
       fire Fire # Counter-Strike: Source
       bolt Bolt # Serious Sam: The First Encounter
    }
