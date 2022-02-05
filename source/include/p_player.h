@@ -133,7 +133,7 @@ i96 P_Scr_Give(k32 x, k32 y, k32 z, i96 score, bool nomul);
 i96 P_Scr_GivePos(i32 x, i32 y, i96 score, bool nomul);
 void P_Scr_Take(i96 score);
 void P_Lv_GiveEXP(u64 amt);
-cstr P_Discrim(i32 pclass);
+stkcall cstr P_Discrim(i32 pclass);
 stkcall i32 P_Color(i32 pclass);
 void P_Dat_PTickPst(void);
 script extern void P_Scr_Payout(void);

@@ -37,11 +37,12 @@ Ready:
 
 Deselect:
    REMS A 1 Lith_A_Lower(_raise_slow);
-   loop;
+   wait;
 
 Select:
+   REMS A 0 { invoker.m_steamy = 0; }
    REMS A 1 Lith_A_Raise(_raise_slow);
-   loop;
+   wait;
 
 Fire:
    REMS A 1 offset(0, 32) lith_a_setInterpolation(true);

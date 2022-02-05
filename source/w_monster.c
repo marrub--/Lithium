@@ -62,13 +62,19 @@ void ApplyLevels(dmon_t *m, i32 prev) {
    }
 
    if(m->level >= 5) {
-      k32 rn = m->rank / 10.0;
+      k32 rn   = m->rank / 10.0;
       i96 delt = m->level - prev;
+
       i96 hp10 = m->spawnhealth / 10;
       i32 newh = delt * hp10 * (i96)(ACS_RandomFixed(rn - 0.1, rn + 0.1) * 0xfff) / 0xfff;
-      Dbg_Log(log_dmonV, "monster %i: newh %i", m->id, newh);
       SetHealth(0, m->health + newh);
       m->maxhealth += newh;
+
+      k32 newd = delt / ACS_RandomFixed(100.0, 200.0);
+      m->damagemul += newd;
+      SetDamageMultiplier(0, m->damagemul);
+
+      Dbg_Log(log_dmonV, "monster %i: newh %i newd %k", m->id, newh, newd);
    }
 
    for(i32 i = 0; i < dmgtype_max; i++) {
@@ -281,6 +287,7 @@ void MonsterMain(dmon_t *m) {
 
    GetInfo(m);
    m->spawnhealth = m->maxhealth = m->health;
+   m->damagemul = 1.0;
 
    BaseMonsterLevel(m);
 

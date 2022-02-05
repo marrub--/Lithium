@@ -53,11 +53,13 @@ script void Upgr_VitalScan_Update(struct upgrade *upgr) {
       udata.target    = id;
 
       if(m) {
-         udata.rank = m->rank;
-         udata.exp  = m->exp / (k32)_monster_level_exp;
+         udata.rank      = m->rank;
+         udata.exp       = m->exp / (k32)_monster_level_exp;
+         udata.damagfrac = m->damagemul / 4.0;
       } else {
-         udata.rank = 0;
-         udata.exp  = 1.0;
+         udata.rank      = 0;
+         udata.exp       = 1.0;
+         udata.damagfrac = 0.0;
       }
 
       udata.freak = true;
@@ -160,7 +162,9 @@ void Upgr_VitalScan_Render(struct upgrade *upgr) {
 
    /* Hit indicator */
    if(udata.hdelta && CheckFade(fid_vscan)) {
-      PrintTextFmt("-%i", udata.hdelta);
+      ACS_BeginPrint();
+      ACS_PrintChar('-');
+      ACS_PrintInt(udata.hdelta);
       PrintTextFX(sf_smallfnt, CR_RED, x+40,4, y+30,2, fid_vscan, _u_no_unicode);
    }
 
@@ -176,22 +180,30 @@ void Upgr_VitalScan_Render(struct upgrade *upgr) {
 
    PrintText_str(udata.tagstr, font, cr, x+40,4, y+11,2);
 
+   ACS_BeginPrint();
    if(udata.maxhealth) {
       if(udata.freak) {
-         ACS_BeginPrint();
          PrintChrSt(alientext(udata.health));
          ACS_PrintChar('/');
          PrintChrSt(alientext(udata.maxhealth));
       } else {
-         PrintTextFmt("%u/%u", udata.health, udata.maxhealth);
+         ACS_PrintInt(udata.health);
+         ACS_PrintChar('/');
+         ACS_PrintInt(udata.maxhealth);
       }
    } else {
-      PrintTextFmt("%uhp", udata.health);
+      ACS_PrintInt(udata.health);
+      ACS_PrintChar('h');
+      ACS_PrintChar('p');
    }
    PrintTextX(font, CR_WHITE, x+40,4, y+20,2, _u_no_unicode);
 
    /* Health bar */
    if(CVarGetI(sc_scanner_bar)) {
+      SetClip(x, y+2, 80 * udata.damagfrac, 2);
+      PrintSprite(sp_Bars_DamageBar, x,1, y+2,1);
+      ClearClip();
+
       if(udata.split > 0)
          PrintSprite(sa_healthbars[(udata.split - 1) % countof(sa_healthbars)], x,1, y,1);
 

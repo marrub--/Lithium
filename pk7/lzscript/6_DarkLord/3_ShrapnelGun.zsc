@@ -59,7 +59,7 @@ default {
 }
 
 action(Weapon) void Lith_A_FireShrapnel() {
-   lith_takeAmmo(2);
+   lith_takeAmmo(1);
    A_StartSound("weapons/shrapnel/fire", lch_weapon);
    A_AlertMonsters();
    A_GunFlash("DummyFlash");

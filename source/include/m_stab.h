@@ -319,6 +319,7 @@ stab_x(so_Shotgun,       "Shotgun")
 #include "m_drawing.h"
 
 /* Paths */
+stab_x(sp_Bars_DamageBar,       ":Bars:DamageBar")
 stab_x(sp_Bars_ExpBar0,         ":Bars:ExpBar0")
 stab_x(sp_Bars_ExpBar1,         ":Bars:ExpBar1")
 stab_x(sp_Dialogue_Back,        ":Dialogue:Back")

@@ -74,6 +74,7 @@ struct upgr_data_VitalScan {
    k32 x, y, z;
    k64 oangle;
    k64 splitfrac;
+   k64 damagfrac;
    u32 split;
    u32 rank;
    bool freak;

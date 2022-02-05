@@ -110,6 +110,7 @@ struct dmon {
    i32  rank;
    i32  maxhealth;
    i32  spawnhealth;
+   k32  damagemul;
    i32  resist[dmgtype_max];
 
    k32  x, y, z;

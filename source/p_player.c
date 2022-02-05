@@ -207,6 +207,7 @@ void Sc_PlayerDisconnect(void) {
 
 /* Extern Functions -------------------------------------------------------- */
 
+alloc_aut(0) stkcall
 cstr P_Discrim(i32 pclass) {
    switch(pclass) {
    case pcl_marine:    return "Stan";
@@ -363,16 +364,16 @@ void P_bossText(i32 boss) {
 
    cstr fmt;
    switch(boss) {
-      case boss_none:
-      case boss_other:
-         return;
-      case boss_barons:      fmt = LANG "BOSS_BAR_%i_%s"; break;
-      case boss_cyberdemon:  fmt = LANG "BOSS_CYB_%i_%s"; break;
-      case boss_spiderdemon: fmt = LANG "BOSS_SPI_%i_%s"; break;
-      case boss_iconofsin:
-         if(division) fmt = LANG "BOSS_DIV_%i";
-         else         fmt = LANG "BOSS_IOS_%i_%s";
-         break;
+   case boss_none:
+   case boss_other:
+      return;
+   case boss_barons:      fmt = LANG "BOSS_BAR_%i_%s"; break;
+   case boss_cyberdemon:  fmt = LANG "BOSS_CYB_%i_%s"; break;
+   case boss_spiderdemon: fmt = LANG "BOSS_SPI_%i_%s"; break;
+   case boss_iconofsin:
+      if(division) fmt = LANG "BOSS_DIV_%i";
+      else         fmt = LANG "BOSS_IOS_%i_%s";
+      break;
    }
 
    pl.logB(1, tmpstr(lang(sl_log_bosshear1)));
@@ -589,8 +590,8 @@ void P_Atr_pTick() {
    i32 stmt = 75 - stm;
 
    switch(pl.pclass) {
-      case pcl_marine:    P_attrRGE(); break;
-      case pcl_cybermage: P_attrCON(); break;
+   case pcl_marine:    P_attrRGE(); break;
+   case pcl_cybermage: P_attrCON(); break;
    }
 
    pl.maxhealth = pl.spawnhealth + strn;
