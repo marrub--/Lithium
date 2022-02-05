@@ -61,7 +61,7 @@ class Lith_KampilanBonkPuff : Actor {
    }
 
    action void lith_a_setPain() {
-      if(tracer && tracer.health > 0) {
+      if(tracer && !tracer.bBoss && tracer.health > 0) {
          let st = tracer.resolveState("Pain");
          if(st) {
             tracer.setState(st);

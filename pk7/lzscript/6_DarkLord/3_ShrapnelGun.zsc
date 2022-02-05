@@ -12,7 +12,7 @@ class Lith_ShrapnelProjectile : Actor {
       BounceType "Doom";
       BounceSound "weapons/shrapnel/bounce";
       RipSound "weapons/shrapnel/hit";
-      DamageFunction (8);
+      DamageFunction (10);
       DamageType "Shrapnel";
       Gravity 0.5;
       Height 8;
@@ -23,7 +23,6 @@ class Lith_ShrapnelProjectile : Actor {
       +ExplodeOnWater
       +MThruSpecies
       -NoGravity
-      +Ripper
    }
 
    state lith_a_jumpScale(double scale) {
@@ -60,7 +59,7 @@ default {
 }
 
 action(Weapon) void Lith_A_FireShrapnel() {
-   lith_takeAmmo();
+   lith_takeAmmo(2);
    A_StartSound("weapons/shrapnel/fire", lch_weapon);
    A_AlertMonsters();
    A_GunFlash("DummyFlash");
