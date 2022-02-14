@@ -230,7 +230,7 @@ void *Ralloc(register void *p, register mem_size_t s, register mem_tag_t tag) {
       return nil;
    }
 
-   fastmemmove(nxt, p, min(os, s));
+   fastmemmove(nxt, p, mini(os, s));
    Dalloc(p);
 
    if(os < s) {

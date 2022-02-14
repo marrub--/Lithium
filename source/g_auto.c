@@ -19,11 +19,11 @@
 
 static
 void G_cutBox(struct gui_clip *other, i32 *x, i32 *y, i32 *w, i32 *h) {
-   *x = minmax(*x, other->x, other->x + other->w);
-   *y = minmax(*y, other->y, other->y + other->h);
+   *x = clampi(*x, other->x, other->x + other->w);
+   *y = clampi(*y, other->y, other->y + other->h);
 
-   *w = min(*x + *w, other->x + other->w) - *x;
-   *h = min(*y + *h, other->y + other->h) - *y;
+   *w = mini(*x + *w, other->x + other->w) - *x;
+   *h = mini(*y + *h, other->y + other->h) - *y;
 }
 
 static
@@ -85,8 +85,8 @@ void G_UpdateState(struct gui_state *g) {
    if(inverted) g->cy += pl.pitchv * (800.0lk * ymul);
    else         g->cy -= pl.pitchv * (800.0lk * ymul);
 
-   g->cx = minmax(g->cx, 0, g->w);
-   g->cy = minmax(g->cy, 0, g->h);
+   g->cx = clamplk(g->cx, 0, g->w);
+   g->cy = clamplk(g->cy, 0, g->h);
 
    g->clicklft = pl.buttons & BT_ATTACK;
    g->clickrgt = pl.buttons & BT_ALTATTACK;
@@ -153,7 +153,7 @@ void G_Clip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, i32 ww) {
       G_cutBox(other, &clip->x, &clip->y, &clip->w, &clip->h);
    }
 
-   clip->ww = ww ? min(ww, clip->w) : clip->w;
+   clip->ww = ww ? mini(ww, clip->w) : clip->w;
 
    G_setClip(g);
 

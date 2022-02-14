@@ -39,7 +39,7 @@ void StringStack() {
 static
 void Waves() {
    k32 health = pl.health / (k32)pl.maxhealth;
-   i32 frame  = minmax(health * 4, 1, 5);
+   i32 frame  = clampi(health * 4, 1, 5);
    i32 timer  = ACS_Timer();
 
    SetSize(320, 200);

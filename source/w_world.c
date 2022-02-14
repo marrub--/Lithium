@@ -17,10 +17,7 @@
 #include "w_monster.h"
 #include "m_version.h"
 
-/* Extern Objects ---------------------------------------------------------- */
-
 __addrdef __mod_arr lmvar;
-__addrdef __hub_arr lhvar;
 
 struct payoutinfo payout;
 i32 mapscleared;
@@ -47,10 +44,7 @@ bool reopen;
 i32 lmvar mapid;
 
 bool lmvar modinit;
-bool lhvar hubinit;
-bool       gblinit;
-
-/* Extern Functions -------------------------------------------------------- */
+static bool gblinit;
 
 script void SpawnBosses(i96 sum, bool force);
 
@@ -68,8 +62,6 @@ i32 UniqueID(i32 tid) {
 
    return id;
 }
-
-/* Static Functions -------------------------------------------------------- */
 
 alloc_aut(0) script static
 void Boss_HInit(void) {
@@ -155,16 +147,14 @@ void MInitPst(void) {
    payout.scrtmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_SECRETS);
 
    /* Check for if rain should be used.
-    * - If there are more than 1 players, never use rain.
     * - If `NoRain' is set on LithMapLine, never use rain.
     * - If the player has rain enabled, use it if not for those preconditions.
     * - If `UseRain' is set on LithMapLine, use it if not for that.
     */
-   bool multi_player  = ACS_PlayerCount() > 1;
    bool never_rain    = ACS_GetLineUDMFInt(LithMapLine, sm_MapNoRain);
    bool use_rain_user = CVarGetI(sc_sv_rain);
    bool use_rain_map  = ACS_GetLineUDMFInt(LithMapLine, sm_MapUseRain);
-   if(!multi_player && !never_rain && (use_rain_user || use_rain_map)) {
+   if(!never_rain && (use_rain_user || use_rain_map)) {
       dorain = true;
       W_DoRain();
    }
@@ -236,22 +226,13 @@ void HInit(void) {
       for(i32 i = 0; i < bossreward_max; i++)
          CBI_Install(i);
    }
-
-   hubinit = true;
 }
 
-/* Scripts ----------------------------------------------------------------- */
-
-_Noreturn dynam_aut script type("open") static
-void Sc_World(void) {
+dynam_aut script ext("ACS") addr(lsc_worldopen)
+void Sc_World(bool is_reopen) {
    Dbg_Log(log_dev, "%s", __func__);
 
 begin:
-   /* yep. ZDoom doesn't actually clear hub variables in Doom-like map setups.
-    * we can still detect it by using Timer, so correct this variable.
-    */
-   if(hubinit && ACS_Timer() < 2) hubinit = false;
-
    Draw_Init();
 
    if(ACS_GameType() == GAME_TITLE_MAP) {
@@ -302,7 +283,7 @@ begin:
    if(!modinit) MInit();
 
    /* Hub-static pre-player init. */
-   if(!hubinit) HInitPre();
+   if(!is_reopen) HInitPre();
 
    unloaded = false; /* Unloaded flag can be reset now. */
    player_init = true;
@@ -310,7 +291,7 @@ begin:
    ACS_Delay(1); /* Wait for players to get initialized. */
 
    /* Hub-static post-player init. */
-   if(!hubinit) HInit();
+   if(!is_reopen) HInit();
 
    /* Module-static post-hub init. */
    if(!modinit) MInitPst();

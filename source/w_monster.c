@@ -79,7 +79,7 @@ void ApplyLevels(dmon_t *m, i32 prev) {
 
    for(i32 i = 0; i < dmgtype_max; i++) {
       ifauto(i32, resist, m->resist[i] / 15.0) {
-         InvGive(StrParam(OBJ "M_%S%i", sa_dmgtype_names[i], min(resist, _max_rank)), 1);
+         InvGive(StrParam(OBJ "M_%S%i", sa_dmgtype_names[i], mini(resist, _max_rank)), 1);
       }
    }
 
@@ -120,7 +120,7 @@ void ShowBarrier(dmon_t const *m, k32 alpha) {
       }
 
       ACS_SpawnForced(bar, x, y, m->z + m->h / 2, tid);
-      SetAlpha(tid, minmax(alp, 0.0, 1.0));
+      SetAlpha(tid, clampk(alp, 0.0, 1.0));
    }
 }
 
@@ -161,8 +161,8 @@ void BaseMonsterLevel(dmon_t *m) {
 
       rlv += pl.attr.level / 2.0;
 
-      m->rank  = minmax(rrn * bias * 2, 1, _max_rank);
-      m->level = minmax(rlv * bias    , 1, _max_level);
+      m->rank  = clampi(rrn * bias * 2, 1, _max_rank);
+      m->level = clampi(rlv * bias    , 1, _max_level);
    }
 
    switch(m->rank) {
@@ -639,10 +639,6 @@ alloc_aut(0) script ext("ACS") addr(lsc_monsterinfo)
 void Sc_MonsterInfo(void) {
    static bool piss = true;
 
-   while(!gblinit) {
-      ACS_Delay(1);
-   }
-
    noinit static
    mon_name_t cname;
    faststrcpy_str(cname, ACS_GetActorClass(0));
@@ -669,8 +665,6 @@ void Sc_MonsterInfo(void) {
       }
 
       if(init) {
-         ACS_Delay(1);
-
          /* make sure it isn't already dead first */
          if(GetHealth(0) > 0) {
             dmon_t *m = AllocDmon();

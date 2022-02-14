@@ -49,8 +49,8 @@ void G_WinBeg_Imp(struct gui_state *g, gid_t id, struct gui_arg_win *a) {
    if(g->active == id) {
       win->x += g->cx - g->old.cx;
       win->y += g->cy - g->old.cy;
-      win->x = minmax(win->x, 0, g->w - pre->w);
-      win->y = minmax(win->y, 0, g->h - pre->h);
+      win->x = clampi(win->x, 0, g->w - pre->w);
+      win->y = clampi(win->y, 0, g->h - pre->h);
       ox = g->ox + win->x;
       oy = g->oy + win->y;
 

@@ -104,6 +104,7 @@ enum ZscName(ScriptNum) {
    lsc_raindropspawn,
    lsc_monstertype,
    lsc_worldreopen,
+   lsc_worldopen,
    lsc_drawcr,
    lsc_cheatinput,
    #define w_setptr_x(x) lsc_setptr##x,
@@ -233,8 +234,6 @@ extern bool dorain;
 extern bool reopen;
 extern i32 lmvar mapid;
 extern bool lmvar modinit;
-extern bool lhvar hubinit;
-extern bool       gblinit;
 
 /* DECORATE data */
 extern i32 a_x, a_y;

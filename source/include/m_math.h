@@ -20,10 +20,6 @@
 #define dis_bit(x, y) ((x) &= ~dst_bit(y))
 #define tog_bit(x, y) ((x) ^=  dst_bit(y))
 
-#define max(x, y) ((x) < (y) ? (y) : (x))
-#define min(x, y) ((x) < (y) ? (x) : (y))
-#define minmax(x, mi, ma) (min(max(x, mi), ma))
-
 #define k32_to_i32(n) (ik32.k = (n), ik32.i)
 #define i32_to_k32(n) (ik32.i = (n), ik32.k)
 #define k32_to_u32(n) (uk32.k = (n), uk32.u)
@@ -69,10 +65,24 @@ stkcall i32 fastroundk(k32 k);
 stkcall k32 fastround1k(k32 k);
 stkcall i32 fastroundlk(k64 lk);
 stkcall k64 fastround1lk(k64 lk);
+stkcall i32 mini(i32 x, i32 y);
+stkcall u32 minu(u32 x, u32 y);
+stkcall k32 mink(k32 x, k32 y);
+stkcall k64 minlk(k64 x, k64 y);
+stkcall i32 maxi(i32 x, i32 y);
+stkcall u32 maxu(u32 x, u32 y);
+stkcall k32 maxk(k32 x, k32 y);
+stkcall k64 maxlk(k64 x, k64 y);
+stkcall i32 clampi(i32 x, i32 y, i32 z);
+stkcall u32 clampu(u32 x, u32 y, u32 z);
+stkcall k32 clampk(k32 x, k32 y, k32 z);
+stkcall k64 clamplk(k64 x, k64 y, k64 z);
 stkcall i32 ceilk(k32 n);
 stkcall k64 powlk(k64 x, i32 y);
 stkcall k32 mag2k(k32 x, k32 y);
 stkcall i32 mag2i(i32 x, i32 y);
+stkcall k32 ease_in_out_back(k32 x);
+stkcall k32 ease_out_cubic(k32 x);
 stkcall k32 lerpk(k32 a, k32 b, k32 t);
 stkcall k64 lerplk(k64 a, k64 b, k64 t);
 void lerplli(struct interp_data_lli *data);

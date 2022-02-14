@@ -64,11 +64,8 @@ void HUD_TopRight() {
       fnt = sf_lmidfont;
       break;
    case _hud_assassin:
-      fmt = "%s \CjSCR";
-      fnt = sf_lmidfont;
-      break;
    case _hud_darklord:
-      fmt = "%s \CjSCR";
+      fmt = u8"\Cj\C-%s";
       fnt = sf_lmidfont;
       break;
    }
@@ -88,8 +85,8 @@ void HUD_TopRight() {
          } else if(pl.score < pl.old.score) {
             i96 scrdif = pl.old.score - pl.score;
             u32 tics = scrdif * 8 / 0xFFFF;
-            u32 mmx = 30000 - minmax(scrdif / 4, 3276, 29490);
-            SetFade(fid_schit2, minmax(tics, 1, 35), mmx >> 8);
+            u32 mmx = 30000 - clampu(scrdif / 4, 3276, 29490);
+            SetFade(fid_schit2, clampu(tics, 1, 35), mmx >> 8);
          }
 
          if(CheckFade(fid_schit1)) {
@@ -456,7 +453,7 @@ void HUD_BottomLeft() {
       if(pl.health < pl.oldhealth) {
          udata.cr = cr_t;
          ft = (pl.oldhealth - pl.health) / 300.0;
-         ft = minmax(ft, 0.1, 1.0);
+         ft = clampk(ft, 0.1, 1.0);
       } else if(pl.health > pl.oldhealth) {
          udata.cr = cr_g;
          ft = 0.1;

@@ -69,6 +69,7 @@ enum Lith_ScriptNum {
    lsc_raindropspawn,
    lsc_monstertype,
    lsc_worldreopen,
+   lsc_worldopen,
    lsc_drawcr,
    lsc_cheatinput,
    

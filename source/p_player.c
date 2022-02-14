@@ -286,8 +286,8 @@ i96 P_Scr_GivePos(i32 x, i32 y, i96 score, bool nomul) {
    }
 
    /* Get a multiplier for the score accumulator and sound volume */
-   k64 mul = minmax(score, 0, 15000) / 15000.0lk;
-       mul = minmax(mul, 0.1lk, 1.0lk);
+   k64 mul = clamplk(score, 0, 15000) / 15000.0lk;
+       mul = clamplk(mul, 0.1lk, 1.0lk);
    k32 vol = 0.7lk * mul;
 
    /* Play a sound when we pick up score */
@@ -416,8 +416,53 @@ void P_bossText(i32 boss) {
    }
 }
 
+alloc_aut(0) stkcall static
+i32 P_playerColor() {
+   switch(pl.pclass) {
+   case pcl_marine:    return 0xFF00FF00;
+   case pcl_cybermage: return 0xFFBF0F4A;
+   case pcl_informant: return 0xFF8C3BF8;
+   case pcl_wanderer:  return 0xFFFFD023;
+   case pcl_assassin:  return 0xFFE873AF;
+   case pcl_darklord:  return 0xFF3B47F8;
+   case pcl_thoth:     return 0xFFBFBFBF;
+   }
+   return 0xFF000000;
+}
+
+alloc_aut(0) stkcall script static
+void P_doDepthMeter() {
+   str level_name = fast_strupper((ACS_BeginPrint(), ACS_PrintName(PRINTNAME_LEVELNAME), ACS_EndStrParam()));
+   i32 prev_level = (mapscleared % 32) * 8;
+   i32 next_level = (mapscleared + 1 % 32) * 8;
+   i32 player_clr = P_playerColor() & 0xFFFFFF;
+
+   for(i32 i = 0; i < 175; ++i) {
+      i32 curr_level = lerpk(prev_level, next_level, i > 35 ? ease_in_out_back(clampk((i - 35) / 70.0k, 0.0k, 1.0k)) : 0.0k);
+      k32 alpha_k = i > 140 ? 1.0 - ease_out_cubic((i - 140) / 35.0k) : 1.0;
+      i32 alpha = (i32)(0xFF * alpha_k) << 24;
+
+      SetSize(640, 480);
+      PrintTextAX_str(level_name, sf_areaname, CR_WHITE, 640,2, 98,2, alpha_k, _u_no_unicode);
+      PrintRect(640 - 200, 100, 200, 2, alpha);
+      PrintTextAX_str(st_depth, sf_smallfnt, CR_WHITE, 640,2, 102,1, alpha_k, _u_no_unicode);
+      PrintRect(640, 110, 2, 240, alpha);
+      for(i32 j = 0; j < 16; ++j) {
+         i32 w = j % 3 == 0 ? 24 : 8;
+         PrintRect(640 - w, 110 + j * 16, w, 2, alpha);
+      }
+      PrintRect(640 - 24, 110 + curr_level, 24, 2, player_clr | alpha);
+      ACS_Delay(1);
+   }
+}
+
 alloc_aut(0) stkcall script static
 void P_doIntro() {
+   if(mapscleared != 0 || pl.done_intro & pl.pclass) {
+      P_doDepthMeter();
+      return;
+   }
+
    enum {
       _nlines   = 26,
       _out_tics = 35 * 2,
@@ -428,10 +473,6 @@ void P_doIntro() {
 
    noinit static
    u32 linec[_nlines], linen[_nlines];
-
-   if(mapscleared != 0 || pl.done_intro & pl.pclass) {
-      return;
-   }
 
    pl.modal = _gui_intro;
    ACS_SetMusic(sp_lsnd_Silence);
@@ -596,7 +637,7 @@ void P_Atr_pTick() {
 
    pl.maxhealth = pl.spawnhealth + strn;
    SetDamageMultiplier(0, 1.0 + acc + pl.rage);
-   SetMembI(0, sm_DmgFac, minmax(100 * def, 0, 100));
+   SetMembI(0, sm_DmgFac, clampi(100 * def, 0, 100));
    SetSpawnHealth(0, pl.maxhealth);
 
    if(pl.health < stm+10 && (stmt < 2 || pl.ticks % stmt == 0))

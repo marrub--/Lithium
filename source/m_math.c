@@ -20,8 +20,16 @@
       "Neg:I(Stk() LocReg(Lit(:n)))"
       "Retn (Stk())"
    );
-
 #undef abs_impl
+#elif defined(min_max_impl) && min_max_impl == 0
+   return x < y ? x : y;
+#undef min_max_impl
+#elif defined(min_max_impl) && min_max_impl == 1
+   return x < y ? y : x;
+#undef min_max_impl
+#elif defined(min_max_impl) && min_max_impl == 2
+   return x < y ? y : x < z ? x : z;
+#undef min_max_impl
 #elif defined(crc64_impl_type)
    crc64_impl_type const *ptr = data;
 
@@ -33,7 +41,6 @@
       result = crctable[byte(result ^ ptr[i])] ^ (result >> 8);
 
    return ~result;
-
 #undef crc64_impl_type
 #elif defined(bezier_impl_retn)
    noinit static
@@ -45,7 +52,6 @@
    r.x = bezier_impl_func(xa, xb, t);
    r.y = bezier_impl_func(ya, yb, t);
    return r;
-
 #undef bezier_impl_retn
 #undef bezier_impl_type
 #undef bezier_impl_func
@@ -105,6 +111,55 @@ i32 fastabs(i32 n) {
 alloc_aut(0) stkcall
 k32 fastabsk(k32 n) {
    #define abs_impl
+   #include "m_math.c"
+}
+
+alloc_aut(0) stkcall i32 mini(i32 x, i32 y) {
+   #define min_max_impl 0
+   #include "m_math.c"
+}
+alloc_aut(0) stkcall u32 minu(u32 x, u32 y) {
+   #define min_max_impl 0
+   #include "m_math.c"
+}
+alloc_aut(0) stkcall k32 mink(k32 x, k32 y) {
+   #define min_max_impl 0
+   #include "m_math.c"
+}
+alloc_aut(0) stkcall k64 minlk(k64 x, k64 y) {
+   #define min_max_impl 0
+   #include "m_math.c"
+}
+alloc_aut(0) stkcall i32 maxi(i32 x, i32 y) {
+   #define min_max_impl 1
+   #include "m_math.c"
+}
+alloc_aut(0) stkcall u32 maxu(u32 x, u32 y) {
+   #define min_max_impl 1
+   #include "m_math.c"
+}
+alloc_aut(0) stkcall k32 maxk(k32 x, k32 y) {
+   #define min_max_impl 1
+   #include "m_math.c"
+}
+alloc_aut(0) stkcall k64 maxlk(k64 x, k64 y) {
+   #define min_max_impl 1
+   #include "m_math.c"
+}
+alloc_aut(0) stkcall i32 clampi(i32 x, i32 y, i32 z) {
+   #define min_max_impl 2
+   #include "m_math.c"
+}
+alloc_aut(0) stkcall u32 clampu(u32 x, u32 y, u32 z) {
+   #define min_max_impl 2
+   #include "m_math.c"
+}
+alloc_aut(0) stkcall k32 clampk(k32 x, k32 y, k32 z) {
+   #define min_max_impl 2
+   #include "m_math.c"
+}
+alloc_aut(0) stkcall k64 clamplk(k64 x, k64 y, k64 z) {
+   #define min_max_impl 2
    #include "m_math.c"
 }
 
@@ -187,6 +242,23 @@ i32 mag2i(i32 x, i32 y) {
 }
 
 alloc_aut(0) stkcall
+k32 ease_in_out_back(k32 x) {
+   #define C1 1.70158k
+   #define C2 2.5949095k
+   return x < 0.5k
+      ? ((x * 2) * (x * 2) * ((C2 + 1) * 2 * x - C2)) / 2
+      : ((x * 2 - 2) * (x * 2 - 2) * ((C2 + 1) * (x * 2 - 2) + C2) + 2) / 2;
+   #undef C1
+   #undef C2
+}
+
+alloc_aut(0) stkcall
+k32 ease_out_cubic(k32 x) {
+   x = 1 - x;
+   return 1 - x * x * x;
+}
+
+alloc_aut(0) stkcall
 k32 lerpk(k32 a, k32 b, k32 t) {
    return (1.0k - t) * a + t * b;
 }
@@ -202,7 +274,7 @@ void lerplli(struct interp_data_lli *data) {
       data->value_start = data->value_display;
       data->timer_max =
          llabs(data->value - data->value_display) * data->timer_max_cap;
-      data->timer_max = min(data->timer_max, data->timer_max_cap * 35);
+      data->timer_max = mini(data->timer_max, data->timer_max_cap * 35);
       data->timer = data->timer_max - 1;
    }
 

@@ -24,6 +24,8 @@ i32 lmvar rain_dist;
 
 dynam_aut script
 void W_DoRain(void) {
+   ACS_Delay(1);
+
    pl.setActivator();
    StartSound(ss_amb_wind, lch_weather1, CHANF_LOOP, 0.001, ATTN_NONE);
    StartSound(ss_amb_rain, lch_weather2, CHANF_LOOP, 0.001, ATTN_NONE);
@@ -48,7 +50,7 @@ void W_DoRain(void) {
 
       if(rain_chk) {
          skydist = rain_dist / 1024.0;
-         skydist = minmax(skydist, 0, 1);
+         skydist = clampk(skydist, 0, 1);
       } else {
          skydist = 0;
       }

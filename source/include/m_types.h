@@ -111,6 +111,5 @@ union ik64 {i64 i; k64 k;};
 union uk64 {u64 u; k64 k;};
 
 __addrdef extern __mod_arr lmvar;
-__addrdef extern __hub_arr lhvar;
 
 #endif

@@ -15,6 +15,8 @@
 stab_x(st_null, "(null)")
 stab_x(st_none, "None")
 
+stab_x(st_depth, "DEPTH")
+
 stab_x(st_ob_crush,    "(crush)")
 stab_x(st_ob_default,  "(default)")
 stab_x(st_ob_drowning, "(drowning)")

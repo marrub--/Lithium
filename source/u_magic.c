@@ -166,8 +166,8 @@ void Upgr_Magic_Render(struct upgrade *upgr)
 {
    if(!pl.hudenabled) return;
 
-   i32 hprc = ceilk(min(udata.manaperc,        0.5k) * 2 * 62);
-   i32 fprc = ceilk(max(udata.manaperc - 0.5k, 0.0k) * 2 * 62);
+   i32 hprc = ceilk(mink(udata.manaperc,        0.5k) * 2 * 62);
+   i32 fprc = ceilk(maxk(udata.manaperc - 0.5k, 0.0k) * 2 * 62);
 
    PrintSprite(sp_HUD_C_MagicIcon, 1,1, 213,2);
    PrintSprite(sp_HUD_C_BarSmall2, 1,1, 220,2);

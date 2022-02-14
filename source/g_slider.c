@@ -34,7 +34,7 @@ struct slide_ret G_Slider_Imp(struct gui_state *g, gid_t id, struct gui_arg_sld 
    /* get scroll notch and handle inputs */
    if(g->active == id) {
       notchpos = g->cx - x;
-      notchpos = minmax(notchpos, 0, w) / w;
+      notchpos = clampk(notchpos, 0, w) / w;
       ret      = lerpk(a->minima, a->maxima, notchpos);
       if(big) ret = fastround1k(ret);
       else    ret = fastround1k(ret * 10.0k) / 10.0k;

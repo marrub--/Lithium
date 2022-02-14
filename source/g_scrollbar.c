@@ -87,7 +87,7 @@ void G_ScrBeg_Imp(struct gui_state *g, gid_t id, struct gui_arg_scr *a) {
 
       /* finally, normalize and clamp */
       scr->y = supposedy / (k64)h;
-      scr->y = minmax(scr->y, 0, maxy);
+      scr->y = clamplk(scr->y, 0, maxy);
    }
 
    /* get offset of scroller */

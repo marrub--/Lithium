@@ -144,6 +144,7 @@ override void WorldLoaded(WorldEvent ev)
       ACS_ExecuteWithResult(lsc_gsinit);
       ACS_ExecuteWithResult(lsc_strinit);
    }
+   ACS_ExecuteWithResult(lsc_worldopen, ev.isReopen);
 
    if(__lith_fun & lfun_ragnarok) Ragnarok();
 
@@ -291,14 +292,11 @@ override void WorldTick()
             boss_baby_is_dead = true;
             for(int i = 0; i < m_bossBabies.size(); i++) {
                if(m_bossLevel == boss_barons) {
-                  for(int i = 0; i < MAXPLAYERS; i++) {
-                     PlayerInfo player = players[i];
-                     if(playeringame[i] && player.mo) {
-                        SecSpecial spec;
-                        player.mo.floorSector.getSpecial(spec);
-                        if(!(spec.flags & Sector.SECF_ENDLEVEL))
-                           boss_baby_is_dead = false;
-                     }
+                  if(playeringame[consoleplayer] && players[consoleplayer].mo) {
+                     SecSpecial spec;
+                     players[consoleplayer].mo.floorSector.getSpecial(spec);
+                     if(!(spec.flags & Sector.SECF_ENDLEVEL))
+                        boss_baby_is_dead = false;
                   }
                } else if(m_bossBabies[i] && m_bossBabies[i].health > 0) {
                   boss_baby_is_dead = false;
@@ -488,15 +486,12 @@ override void checkReplacement(ReplaceEvent ev) {
 
 override void RenderOverlay(RenderEvent evt) {
    double ftic = level.totaltime - m_bossDeathInit + evt.fracTic;
-
-   for(int i = 0; i < MAXPLAYERS; i++) {
-      PlayerInfo player = players[i];
-      if(m_bossDeathInit == 0) {
-         Shader.SetEnabled(player, "Lith_End", false);
-      } else if(ftic > 15.0) {
-         Shader.SetEnabled(player, "Lith_End", true);
-         Shader.SetUniform1f(player, "Lith_End", "lith_t", ftic - 15.0);
-      }
+   if(m_bossDeathInit == 0) {
+      Shader.SetEnabled(players[consoleplayer], "Lith_End", false);
+   } else if(ftic > 15.0) {
+      console.printf("bruh");
+      Shader.SetEnabled(players[consoleplayer], "Lith_End", true);
+      Shader.SetUniform1f(players[consoleplayer], "Lith_End", "lith_t", ftic - 15.0);
    }
 }
 
