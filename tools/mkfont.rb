@@ -1,15 +1,15 @@
 #!/usr/bin/env -S ruby --enable=frozen-string-literal -w
-## ---------------------------------------------------------------------------|
-##
-## Distributed under the CC0 public domain license.
-## By Alison G. Watson. Attribution is encouraged, though not required.
-## See licenses/cc0.txt for more information.
-##
-## ---------------------------------------------------------------------------|
-##
-## Creates fonts and downloads necessary TTFs if needed.
-##
-## ---------------------------------------------------------------------------|
+## ╭──────────────────────────────────────────────────────────────────────────╮
+## │                                                                          │
+## │             Distributed under the CC0 public domain license.             │
+## │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+## │                See licenses/cc0.txt for more information.                │
+## │                                                                          │
+## ├──────────────────────────────────────────────────────────────────────────┤
+## │                                                                          │
+## │ Creates fonts and downloads necessary TTFs if needed.                    │
+## │                                                                          │
+## ╰──────────────────────────────────────────────────────────────────────────╯
 
 require_relative "corinth.rb"
 require "set"

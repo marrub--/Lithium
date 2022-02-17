@@ -1,15 +1,15 @@
 #!/usr/bin/env sh
-## ---------------------------------------------------------------------------|
-##
-## Distributed under the CC0 public domain license.
-## By Alison G. Watson. Attribution is encouraged, though not required.
-## See licenses/cc0.txt for more information.
-##
-## ---------------------------------------------------------------------------|
-##
-## Script to generate master packages of Lithium.
-##
-## ---------------------------------------------------------------------------|
+## ╭──────────────────────────────────────────────────────────────────────────╮
+## │                                                                          │
+## │             Distributed under the CC0 public domain license.             │
+## │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+## │                See licenses/cc0.txt for more information.                │
+## │                                                                          │
+## ├──────────────────────────────────────────────────────────────────────────┤
+## │                                                                          │
+## │ Script to generate master packages of Lithium.                           │
+## │                                                                          │
+## ╰──────────────────────────────────────────────────────────────────────────╯
 
 (rm -rf master Lithium.pk3 &&
 

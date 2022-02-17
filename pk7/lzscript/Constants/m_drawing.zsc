@@ -3,6 +3,16 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
 enum Lith_FontNum {
    font_misaki_gothic,
    font_misaki_mincho,

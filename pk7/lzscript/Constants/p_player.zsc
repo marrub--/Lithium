@@ -3,6 +3,16 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
 enum Lith_Attrib {
    at_acc,
    at_def,
@@ -48,6 +58,16 @@ enum Lith_PClass {
    
    
    
+
+
+
+
+
+
+
+
+
+
 
 
 

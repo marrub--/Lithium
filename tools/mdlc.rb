@@ -1,15 +1,15 @@
 #!/usr/bin/env -S ruby --enable=frozen-string-literal -w
-## ---------------------------------------------------------------------------|
-##
-## Distributed under the CC0 public domain license.
-## By Zoe Elsie Watson. Attribution is encouraged, though not required.
-## See licenses/cc0.txt for more information.
-##
-## ---------------------------------------------------------------------------|
-##
-## Model data → MODELDEF processor.
-##
-## ---------------------------------------------------------------------------|
+## ╭──────────────────────────────────────────────────────────────────────────╮
+## │                                                                          │
+## │             Distributed under the CC0 public domain license.             │
+## │   By Zoe Elsie Watson. Attribution is encouraged, though not required.   │
+## │                See licenses/cc0.txt for more information.                │
+## │                                                                          │
+## ├──────────────────────────────────────────────────────────────────────────┤
+## │                                                                          │
+## │ Model data → MODELDEF processor.                                         │
+## │                                                                          │
+## ╰──────────────────────────────────────────────────────────────────────────╯
 
 require_relative "corinth.rb"
 

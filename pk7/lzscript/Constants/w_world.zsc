@@ -7,6 +7,16 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
 enum Lith_WData {
    wdata_bossspawned,
    wdata_soulsfreed,
@@ -74,6 +84,16 @@ enum Lith_ScriptNum {
    lsc_cheatinput,
    
    
+
+
+
+
+
+
+
+
+
+
 
 
 

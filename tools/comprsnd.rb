@@ -1,15 +1,15 @@
 #!/usr/bin/env -S ruby --enable=frozen-string-literal -w
-## ---------------------------------------------------------------------------|
-##
-## Distributed under the CC0 public domain license.
-## By Alison G. Watson. Attribution is encouraged, though not required.
-## See licenses/cc0.txt for more information.
-##
-## ---------------------------------------------------------------------------|
-##
-## Compresses sounds.
-##
-## ---------------------------------------------------------------------------|
+## ╭──────────────────────────────────────────────────────────────────────────╮
+## │                                                                          │
+## │             Distributed under the CC0 public domain license.             │
+## │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+## │                See licenses/cc0.txt for more information.                │
+## │                                                                          │
+## ├──────────────────────────────────────────────────────────────────────────┤
+## │                                                                          │
+## │ Compresses sounds.                                                       │
+## │                                                                          │
+## ╰──────────────────────────────────────────────────────────────────────────╯
 
 Dir.glob(ARGV[0]).each do |f|
    if File.file?(f) && open(f) do |f| f.readpartial(4) == "fLaC" end

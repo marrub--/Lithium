@@ -2,10 +2,32 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 enum Lith_MonsterType {
    mtype_unknown,
    
    
+
+
+
+
+
+
+
+
+
+
+
 
 
 mtype_zombie,

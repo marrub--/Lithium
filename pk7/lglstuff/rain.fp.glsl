@@ -1,11 +1,10 @@
-/* ---------------------------------------------------------------------------|
- *
- * stolen from:
- * "The Drive Home" by Martijn Steinrucken aka BigWings - 2017
- * License Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
- *
- * ---------------------------------------------------------------------------|
- */
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │                              adapted from:                               │
+// │       "The Drive Home" by Martijn Steinrucken aka BigWings - 2017        │
+// │      CC Attribution-NonCommercial-ShareAlike 3.0 Unported License.       │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
 
 #define S(x, y, z) smoothstep(x, y, z)
 vec3 N31(float p) {
