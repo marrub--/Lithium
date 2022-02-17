@@ -432,6 +432,8 @@ i32 P_playerColor() {
 
 alloc_aut(0) stkcall script static
 void P_doDepthMeter() {
+   StartSound(ss_player_depthdown, lch_depth, 0, 1.0, ATTN_STATIC);
+
    str level_name = fast_strupper((ACS_BeginPrint(), ACS_PrintName(PRINTNAME_LEVELNAME), ACS_EndStrParam()));
    i32 prev_level = (mapscleared % 32) * 8;
    i32 next_level = (mapscleared + 1 % 32) * 8;

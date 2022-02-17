@@ -277,6 +277,7 @@ $playersound player male *usefail lsnd/Player/UseFail
 $playersound player male *land lsnd/Player/Land
 $playersound player male *dive lsnd/Player/SplashIn
 $playersound player male *surface lsnd/Player/Splash
+player/depthdown lsnd/Player/DepthDown
 player/score1 lsnd/Player/Score1
 player/score2 lsnd/Player/Score2
 player/score3 lsnd/Player/Score3

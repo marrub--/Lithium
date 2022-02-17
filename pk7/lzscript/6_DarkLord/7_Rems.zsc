@@ -7,6 +7,54 @@
  * ---------------------------------------------------------------------------|
  */
 
+class Lith_RemsBulletTrail : Actor {
+   default {
+      RenderStyle "Add";
+      Scale 0.1;
+      +NoInteraction
+   }
+   states {
+   Spawn:
+      BLLT Y 5;
+      stop;
+   }
+}
+
+class Lith_RemsBullet1 : FastProjectile {
+   default {
+      RenderStyle "Add";
+      Radius 5;
+      Height 5;
+      DamageFunction 100;
+      Speed 100;
+      MissileType "Lith_RemsBulletTrail";
+      MissileHeight 8;
+      +FlatSprite
+      +Bright
+   }
+
+   states {
+   Spawn:
+      REMS X 0;
+   SpawnLoop:
+      #### # 1 {
+         a_spawnParticle("Purple", SPF_FULLBRIGHT, 15, 4, 0, fRandom(-5, 5),fRandom(-5, 5),fRandom(-5, 5), fRandom(-5, 5),fRandom(-5, 5),fRandom(-5, 5));
+      }
+      loop;
+   Death:
+      TNT1 A 0;
+      stop;
+   }
+}
+
+class Lith_RemsBullet2 : Lith_RemsBullet1 {
+   states {
+   Spawn:
+      REMS Y 0;
+      goto SpawnLoop;
+   }
+}
+
 class Lith_Rems : Lith_DWeapon;
 
 default {
@@ -49,13 +97,16 @@ Fire:
    REMS A 1 offset(1, 33) {
       a_startSound("weapons/rems/fire", lch_weapon);
       invoker.m_fireLoop = 0;
-      invoker.m_steamy = 350;
+      invoker.m_steamy = 175;
    }
    REMS B 1 offset(171, 88) bright;
    REMS C 1 offset(154, 81) bright;
 FireLoop:
    REMS BC 1 bright {
-      A_OverlayOffset(_psp_weapon, fRandom(128, 164), FRandom(73, 80), WOF_INTERPOLATE);
+      a_overlayOffset(_psp_weapon, fRandom(128, 164), FRandom(73, 80), WOF_INTERPOLATE);
+      a_fireProjectile("Lith_RemsBullet1", spawnofs_xy: fRandom(-2, 4), spawnheight: fRandom(8, 10));
+      a_fireProjectile("Lith_RemsBullet2", spawnofs_xy: fRandom(-2, 4), spawnheight: fRandom(5, 7));
+      a_stop();
       return invoker.m_fireLoop++ == 170 ? resolveState("FireDone") : state(null);
    }
    loop;
