@@ -6,7 +6,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_HeadsUpDisp | $\#UPGRADE_TITLE_HeadsUpDisp
 == \#INFO_TITLE_HeadsUpDisp | Heads Up Display
 @@ \#INFO_DESCR_HeadsUpDisp
@@ -18,7 +18,7 @@ had to be put into fine-tuning this program to tell you exactly when you're
 about to die, your armor is about to break and get you killed, or you're about
 to run out of ammunition, and then die.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_JetBooster | $\#UPGRADE_TITLE_JetBooster
 == \#INFO_TITLE_JetBooster | Pe'i tha E. Jet Boots
 @@ \#INFO_DESCR_JetBooster
@@ -33,7 +33,7 @@ stay stable mid-air for approximately 7 months without fail.
 
 Press "jump" after a double-jump to activate.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ReflexWetw | $\#UPGRADE_TITLE_ReflexWetw
 == \#INFO_TITLE_ReflexWetw | Klaje Mosegon Reflex Enhancing Wetware
 @@ \#INFO_DESCR_ReflexWetw
@@ -48,7 +48,7 @@ upwards with sheer force.
 
 You can also now slide in any direction with ease by pressing "run".
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ReflexWetwJem | $\#UPGRADE_TITLE_ReflexWetw
 == \#INFO_TITLE_ReflexWetwJem | Reflex Enhancing Wetware
 @@ \#INFO_DESCR_ReflexWetwJem
@@ -65,7 +65,7 @@ upwards with sheer force.
 You can also slide in any direction with ease by pressing "run", even while
 mid-air.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_CyberLegs | $\#UPGRADE_TITLE_CyberLegs
 == \#INFO_TITLE_CyberLegs | Prexje Mosegon Speed Enhancing Wetware
 @@ \#INFO_DESCR_CyberLegs
@@ -79,7 +79,7 @@ the fall, the greater the impact.
 Couldn't be deployed initially to you due to complications in shipping to a
 combat zone.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Yh0 | $\#UPGRADE_TITLE_ReactArmor
 == \#INFO_TITLE_Yh0 | Yh-0 Reactive Plating System
 @@ \#INFO_DESCR_Yh0
@@ -93,7 +93,7 @@ plating to each system, can only use one at a time.
 Works over your currently equipped armor, so damage from even rockets may be
 lowered into what feels like a small tickle.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_DefenseNuke | $\#UPGRADE_TITLE_DefenseNuke
 == \#INFO_TITLE_DefenseNuke | Defensive Atomic Bomb
 @@ \#INFO_DESCR_DefenseNuke
@@ -103,7 +103,7 @@ area.
 Unfortunately, due to this weapon being extravagantly loud, anything in the
 area will also be alerted to your presence. Be careful with this thing!
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Adrenaline | $\#UPGRADE_TITLE_Adrenaline
 == \#INFO_TITLE_Adrenaline | Senxans Automatic Adrenaline Injector
 @@ \#INFO_DESCR_Adrenaline
@@ -117,7 +117,7 @@ targeted by enemies.
 Using this without losing your mind or otherwise passing out requires
 intense training given only to military forces.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_VitalScanner | $\#UPGRADE_TITLE_VitalScan
 == \#INFO_TITLE_VitalScanner | Mit'keru Vital Scanner
 @@ \#INFO_DESCR_VitalScanner
@@ -128,7 +128,7 @@ them in a numeric value on your heads up display.
 Unfortunately, the range of this emitter is not as great as it could be, and
 is for the most part only usable in close-quarters.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_AutoReload | $\#UPGRADE_TITLE_AutoReload
 == \#INFO_TITLE_AutoReload | K'meru Automatic Loading System
 @@ \#INFO_DESCR_AutoReload
@@ -139,7 +139,7 @@ Originally created by HLCorp for their highly advanced hazard suits, it was
 retooled to work separately from them so it could be mass produced for
 military needs.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_SoulCleaver | $\#UPGRADE_TITLE_SoulCleaver
 == \#INFO_TITLE_SoulCleaver | \cdSi Ritagliassero\c-, \chCaeruleorum\c- 44
 @@ \#INFO_DESCR_SoulCleaver
@@ -151,7 +151,7 @@ The exact origin of this method is debated, and it is not in common use due to
 its strange circumstances and the general requirement of strong, plentiful
 opponents to be useful in combat.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_StealthSys | $\#UPGRADE_TITLE_StealthSys
 == \#INFO_TITLE_StealthSys | Unnamed Stealth System
 @@ \#INFO_DESCR_StealthSys
@@ -161,7 +161,7 @@ version required a link with \cm[redacted]\c- in order to function (as the
 natives could easily do so,) this version, which was developed by Deceiver
 Solomon, requires only an energy source.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_HeadsUpDispJem | $\#UPGRADE_TITLE_HeadsUpDisp
 == \#INFO_TITLE_HeadsUpDispJem | $\#INFO_TITLE_HeadsUpDisp
 @@ \#INFO_DESCR_HeadsUpDispJem
@@ -169,7 +169,7 @@ This program is the 37th version of the standard issue heads-up display for
 AOF employees. The binary remains uncredited, and the decompiled code has no
 authors listed in any of the files, though is well-commented.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Magic | $\#UPGRADE_TITLE_Magic
 == \#INFO_TITLE_Magic | $\#INFO_SHORT_Magic
 @@ \#INFO_DESCR_Magic

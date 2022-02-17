@@ -10,7 +10,7 @@
 !!include Jem/Mail.txt
 !!include Stan/Mail.txt
 
-## Template ------------------------------------------------------------------|
+## Template ══════════════════════════════════════════════════════════════════╕
 %% \#MAIL_TEMPLATE
 \cd>>>>>[[[[RELAYING MESSAGE]]]]
 
@@ -20,7 +20,7 @@
 == \#MAIL_INTERNAL | <internal>
 == \#MAIL_NOTITLE  | <title omitted>
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_TITLE_MJamesDefeated | the end?
 == \#INFO_REMOT_MJamesDefeated | jam0s@g0n0j0t00.1025
 @@ \#INFO_DESCR_MJamesDefeated
@@ -38,7 +38,7 @@ the lone sinner.
 
 \cgThank you for putting this to an end.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_TITLE_MMakarovDefeated | On Manifestations
 == \#INFO_REMOT_MMakarovDefeated | mak666v@org.r\.\\\-
 @@ \#INFO_DESCR_MMakarovDefeated
@@ -53,7 +53,7 @@ No, there is no need. What your victories have done is enough.
 
 Maybe you don't need such advice.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_TITLE_MIsaacDefeated | Gift
 == \#INFO_REMOT_MIsaacDefeated | isaac@syn.400khz
 %% \#INFO_DESCR_MIsaacDefeated

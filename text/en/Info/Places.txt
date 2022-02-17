@@ -6,7 +6,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_AetosVi | Aetos Vi
 == \#INFO_TITLE_AetosVi | $\#INFO_SHORT_AetosVi
 @@ \#INFO_DESCR_AetosVi
@@ -20,7 +20,7 @@ knowing that they weren't alone in the universe.
 Then, of course, the expeditioners were attacked by natives.
 But that's fine details.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Algidistari | Algidistari
 == \#INFO_TITLE_Algidistari | $\#INFO_SHORT_Algidistari
 @@ \#INFO_DESCR_Algidistari
@@ -33,7 +33,7 @@ Several of the planets in this system such as Neptune 11 are quite large and
 are semi-habitable, thus becoming quite suitable for magi of the
 \chCaeruleum\c- mode to test magic on.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ChAri | Ch'ari
 == \#INFO_TITLE_ChAri | $\#INFO_SHORT_ChAri
 @@ \#INFO_DESCR_ChAri
@@ -50,7 +50,7 @@ communications of the Kiri light up the darkness in a beautiful fashion.
 Its inhabitants include fish and plant life, as well as land-dwelling beasts
 such as giant mammoth-like creatures and the two-legged Falx.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_DurlaPrime | Durla Prime
 == \#INFO_TITLE_DurlaPrime | $\#INFO_SHORT_DurlaPrime
 @@ \#INFO_DESCR_DurlaPrime
@@ -65,7 +65,7 @@ communicate with the avian species.
 The planet is extremely similar to Earth, even having grass and trees that
 mostly resemble their earthly counterparts.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Earth | Earth
 == \#INFO_TITLE_Earth | $\#INFO_SHORT_Earth
 @@ \#INFO_DESCR_Earth
@@ -79,7 +79,7 @@ advances in science.
 By 1000 NE, most of the population on Earth had moved to other inhabitable
 planets, but still a large population remains on the blue planet.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Hell | Hell
 == \#INFO_TITLE_Hell | $\#INFO_SHORT_Hell
 @@ \#INFO_DESCR_Hell
@@ -92,7 +92,7 @@ of Sin, or Satan by some. The inhabitants of Hell seem to gain some kind of
 energy from suffering and death, possibly an abstract power like that
 previously found on Earth, thousands of years ago.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Mars | Mars
 == \#INFO_TITLE_Mars | $\#INFO_SHORT_Mars
 @@ \#INFO_DESCR_Mars
@@ -106,7 +106,7 @@ where Mars is closer to Earth.
 Still to this day many companies on Earth -- and even some intra-galactic
 corporations like OFMD -- use Mars as a place to house autonomous work.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_OmicronXevv | Omicron Xevv
 == \#INFO_TITLE_OmicronXevv | $\#INFO_SHORT_OmicronXevv
 @@ \#INFO_DESCR_OmicronXevv
@@ -117,7 +117,7 @@ temperate asteroids suitable for humans to live on.
 Omicron Xevv has been used by many small companies throughout the years to
 have a secluded, free place to do research, surveillance and development.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_SuperDimension | Super Dimension
 == \#INFO_TITLE_SuperDimension | $\#INFO_SHORT_SuperDimension
 @@ \#INFO_DESCR_SuperDimension
@@ -128,7 +128,7 @@ beings there.
 Several Artifacts have come from this dimension, although many of them
 have been lost to time.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Heaven | The God Cage
 == \#INFO_TITLE_Heaven | $\#INFO_SHORT_Heaven
 @@ \#INFO_DESCR_Heaven
@@ -146,7 +146,7 @@ His demise during the events of the calamity have halted all further knowledge
 about the dimension, leaving it merely the mental shape of a huge chrome
 cylinder box.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ReverseAce | Reverse Ace
 == \#INFO_TITLE_ReverseAce | $\#INFO_SHORT_ReverseAce
 @@ \#INFO_DESCR_ReverseAce
@@ -163,7 +163,7 @@ The origin of its name is unknown, and many details of its appearance were
 left vague by the legendary vessel, making consensus difficult on its
 description.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Tsukama | Tsukama
 == \#INFO_TITLE_Tsukama | $\#INFO_SHORT_Tsukama
 @@ \#INFO_DESCR_Tsukama

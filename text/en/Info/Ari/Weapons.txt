@@ -18,7 +18,7 @@
 == \#INFO_SHORT_Zakuw | Sub-stealers
 == \#INFO_SHORT_Zikr | Sub-darts
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Minigun | Minigun
 == \#INFO_TITLE_Minigun | HBTR-33 Minigun
 @@ \#INFO_DESCR_Minigun

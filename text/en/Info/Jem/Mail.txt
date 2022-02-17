@@ -6,7 +6,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_TITLE_MIntroJem | $\#SAVED_MESSAGE
 == \#INFO_REMOT_MIntroJem | <hidden>@corp.AOF
 == \#INFO_SSIZE_MIntroJem | 36
@@ -41,7 +41,7 @@ The following permissions have been granted:
 \cd>>>>>[[[[auto-saving buffer]]]]
 \cd>>>>>[[[[reloading mail daemon]]]]
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_TITLE_MCluster1Jem | $\#SAVED_BUFFER
 == \#INFO_REMOT_MCluster1Jem | $\#MAIL_INTERNAL
 == \#INFO_SSIZE_MCluster1Jem | 30
@@ -69,7 +69,7 @@ there might be more. Rerouting to other active companies' addresses
 has helped clear my mind.
 @@
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_TITLE_MCluster2Jem | $\#SAVED_BUFFER
 == \#INFO_REMOT_MCluster2Jem | $\#MAIL_INTERNAL
 == \#INFO_SSIZE_MCluster2Jem | 36
@@ -101,7 +101,7 @@ enough for technology that could easily exist two years after this was
 developed.
 @@
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_TITLE_MCluster3Jem | $\#SAVED_BUFFER
 == \#INFO_REMOT_MCluster3Jem | $\#MAIL_INTERNAL
 == \#INFO_SSIZE_MCluster3Jem | 28
@@ -123,7 +123,7 @@ hands.
 
 It doesn't matter. I will see this through.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_TITLE_MPhantomJem | $\#MAIL_NOTITLE
 == \#INFO_REMOT_MPhantomJem | order@corp.AOF
 @@ \#INFO_DESCR_MPhantomJem

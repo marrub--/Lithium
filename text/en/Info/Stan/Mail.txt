@@ -8,7 +8,7 @@
 
 == \#REMOTE_LAMBERT | ALambert@corp.OFMD
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_TITLE_MIntroStan | $\#SAVED_MESSAGE
 == \#INFO_REMOT_MIntroStan | $\#REMOTE_LAMBERT
 == \#INFO_SSIZE_MIntroStan | 77
@@ -65,7 +65,7 @@ sure that the arms we sent you were top-notch.
 
 Lambert out.  Good luck, Blazkowicz.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_TITLE_MCluster1Stan | $\#MAIL_NOTITLE
 == \#INFO_REMOT_MCluster1Stan | $\#REMOTE_LAMBERT
 @@ \#INFO_DESCR_MCluster1Stan
@@ -80,7 +80,7 @@ to be considering giving you a promotion, even.
 
 Lambert out.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_TITLE_MCluster2Stan | $\#MAIL_NOTITLE
 == \#INFO_REMOT_MCluster2Stan | $\#REMOTE_LAMBERT
 @@ \#INFO_DESCR_MCluster2Stan
@@ -96,7 +96,7 @@ city somewhere in Hell. Command will await afterwards.
 
 Lambert out.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_TITLE_MCluster3Stan | $\#SAVED_BUFFER
 == \#INFO_REMOT_MCluster3Stan | $\#MAIL_INTERNAL
 %% \#INFO_DESCR_MCluster3Stan
@@ -107,7 +107,7 @@ Now that you have entered the city, you m\\r-3434[[
 \cd>>>>>[[[[error handler malfunction error]]]]
 \cd>>>>>[[[[failure to proceed]]]]
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_TITLE_MPhantomStan | $\#MAIL_NOTITLE
 == \#INFO_REMOT_MPhantomStan | htic0@gov.<hidden>.mailserv
 == \#INFO_SSIZE_MPhantomStan | 77

@@ -6,7 +6,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ScoreChip | Score Chip
 == \#INFO_TITLE_ScoreChip | GIC 781000 Score Chip
 @@ \#INFO_DESCR_ScoreChip
@@ -23,7 +23,7 @@ both NFC and contact-based transaction. Score Chips use strong cryptography to
 secure transactions and digitally store Score without direct use of a bank,
 similar to old crypto-currencies and even older paper currencies.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_HealthBonus | Health Bonus
 == \#INFO_TITLE_HealthBonus | Energy Vial
 @@ \#INFO_DESCR_HealthBonus
@@ -34,7 +34,7 @@ has reported the elixir as being unpleasant to consume.
 
 Gives 1 health.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_AllMap | Area Map
 == \#INFO_TITLE_AllMap | $\#INFO_SHORT_AllMap
 @@ \#INFO_DESCR_AllMap
@@ -45,7 +45,7 @@ Auto-Map information.
 Unknown manufacturer. There appear to be no markings on it indicating where
 it even came from.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Berserk | Berserk
 == \#INFO_TITLE_Berserk | JAQTen BERSERK Pack
 @@ \#INFO_DESCR_Berserk
@@ -56,7 +56,7 @@ application.
 
 Boosts melee attack strength for the duration of the level.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Infrared | CB-Goggles
 == \#INFO_TITLE_Infrared | SYM4.3 D.556 ACTIVE-INFRARED CB-GOGGLES
 @@ \#INFO_DESCR_Infrared
@@ -67,7 +67,7 @@ Produced by SYM4.3.
 
 Amplifies light for 2 minutes.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_RadSuit | Rad. Suit
 == \#INFO_TITLE_RadSuit | SYM4.3 D.223 RADIATION SHIELDING SUIT
 @@ \#INFO_DESCR_RadSuit
@@ -78,24 +78,24 @@ short operations involving hazardous materials.
 
 Prevents floor damage for 1 minute.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_BackpackBase | Backpack
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_BackpackStan | $\#INFO_SHORT_BackpackBase
 == \#INFO_TITLE_BackpackStan | $\#INFO_SHORT_BackpackBase
 @@ \#INFO_DESCR_BackpackStan
 A backpack left behind by one of the agents sent in before you. All that's left
 inside it is a bit of ammunition they had and a discount card.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_BackpackJem | $\#INFO_SHORT_BackpackBase
 == \#INFO_TITLE_BackpackJem | $\#INFO_SHORT_BackpackBase
 @@ \#INFO_DESCR_BackpackJem
 A backpack left behind by someone. All that's left inside it is a bit of
 ammunition they had and a discount card.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Stimpack | Stimpack
 == \#INFO_TITLE_Stimpack | JJJ 111 Stim-pak(R)
 @@ \#INFO_DESCR_Stimpack
@@ -109,7 +109,7 @@ the legally required revisions to their products.
 
 Restores 10 health.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Medikit | Medikit
 == \#INFO_TITLE_Medikit | JJJ 444 Medi-kit(R)
 @@ \#INFO_DESCR_Medikit
@@ -120,7 +120,7 @@ by many organizations, medical, military, or otherwise.
 
 Restores 25 health.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_KeyDisk | KeyDisk
 == \#INFO_TITLE_KeyDisk | MiCo KeyDisk
 @@ \#INFO_DESCR_KeyDisk
@@ -128,7 +128,7 @@ A secure and durable key medium patented by MiCo. In the many areas that have
 merged with Hell since it began attempting to eat the universe, KeyDisks may
 be found and are potentially necessary to progress your mission.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_KeySkull | Skull Key
 == \#INFO_TITLE_KeySkull | $\#INFO_SHORT_KeySkull
 @@ \#INFO_DESCR_KeySkull
@@ -136,7 +136,7 @@ Some kind of strange key used throughout Hell. Appears to have the same
 hardware as a KeyDisk, but reconfigured into the shape of a skull. May be
 necessary to progress your mission.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Fragma | Barrier
 == \#INFO_TITLE_Fragma | \cdReflecterentur\c-, \ctPurpurarum\c- 42
 @@ \#INFO_DESCR_Fragma
@@ -146,7 +146,7 @@ attacks.
 
 Gives partial invulnerability for 30 seconds.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Invulnerability | Invulnerability
 == \#INFO_TITLE_Invulnerability | Unknown Invulnerability Magic
 @@ \#INFO_DESCR_Invulnerability
@@ -157,7 +157,7 @@ defense, making them incapable of being hurt for a short amount of time.
 
 Gives invulnerability for 30 seconds.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Heart | Super Charge
 == \#INFO_TITLE_Heart | \cdAmarentur\c-, \cdViridium\c- 6
 @@ \#INFO_DESCR_Heart
@@ -168,7 +168,7 @@ form, somehow.
 
 Gives 100 health.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Taochyan | Mega Charge
 == \#INFO_TITLE_Taochyan | \cdCurarentur\c-, \caRosarum\c- 9
 @@ \#INFO_DESCR_Taochyan
@@ -180,7 +180,7 @@ in an absorbent mana pool form, somehow.
 
 Gives 200 health and defends against attack temporarily.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ArmStandard | $\#ITEM_TAG_ArmStandardUp
 == \#INFO_TITLE_ArmStandard | Standard Military Armor
 @@ \#INFO_DESCR_ArmStandard
@@ -188,7 +188,7 @@ A standard plated ballistic vest able to absorb a bit of damage from bullets.
 Attribution to the current design has been lost to time from the hundreds of
 revisions it has gone through, with parts of it dating back as far as 2082 CE.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ArmImproved | $\#ITEM_TAG_ArmImprovedUp
 == \#INFO_TITLE_ArmImproved | Improved Military Armor
 @@ \#INFO_DESCR_ArmImproved
@@ -197,7 +197,7 @@ harder plates and a more absorbent synthetic material to compensate damage
 with. Materials for this are mainly produced by SYM4.3, but the actual assembly
 is done by many others.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ArmTeflon | Teflon Armor
 == \#INFO_TITLE_ArmTeflon | $\#ITEM_TAG_ArmTeflonUp
 @@ \#INFO_DESCR_ArmTeflon
@@ -207,28 +207,28 @@ to resist electric shock by deflection. The material is interleaved with, as
 well, a material similar to the Improved Military Armor's. Produced by Sheka
 Kaff, Inc.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ArmDendrite | $\#ITEM_TAG_ArmDendriteUp
 == \#INFO_TITLE_ArmDendrite | $\#INFO_SHORT_ArmDendrite
 @@ \#INFO_DESCR_ArmDendrite
 An armor with a nickel dendritic micro-structure woven with tungsten and other
 materials for extreme heat resistance. Produced by Sheka Kaff, Inc.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ArmAerodynamic | Aero. Armor
 == \#INFO_TITLE_ArmAerodynamic | $\#ITEM_TAG_ArmAerodynamicUp
 @@ \#INFO_DESCR_ArmAerodynamic
 Light wind-gliding armor with a blue finish that allows the wearer increased
 speed by wind resistance. Produced by Yigan.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ArmHazMat | Haz-mat Armor
 == \#INFO_TITLE_ArmHazMat | Hazardous Materials Armor
 @@ \#INFO_DESCR_ArmHazMat
 An insulating lead suit made to keep out radiation and other hazardous
 environment conditions. Produced by Yigan.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ArmPinkSilver | Pink Silver
 == \#INFO_TITLE_ArmPinkSilver | $\#INFO_SHORT_ArmPinkSilver
 @@ \#INFO_DESCR_ArmPinkSilver
@@ -238,7 +238,7 @@ resistance as well as physical resistance. Upon closer inspection, you notice
 a peculiar drawing on the inside that resembles a cute fox with a heart tail.
 Next to the drawing is a message written in blue paint reading "I miss you."
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ArmMidori | Midori
 == \#INFO_TITLE_ArmMidori | $\#INFO_SHORT_ArmMidori
 @@ \#INFO_DESCR_ArmMidori
@@ -251,7 +251,7 @@ capable of resisting fire magic. For some reason, as you put it on,
 unpleasant memories you never had come rushing in. Despite this, they
 feel pleasant, and make you want to cry.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_WeapnInter | Weapon Interface
 == \#INFO_TITLE_WeapnInter | Weapon Interfacing Device Package
 @@ \#INFO_DESCR_WeapnInter
@@ -269,7 +269,7 @@ and share profits between each other.
 The success of this device was massive, despite how expensive it is, with its
 prices being barred by a "call us to get the numbers."
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_WeapnInte2 | W.R.D.
 == \#INFO_TITLE_WeapnInte2 | $\#CBI_WeapnInte2
 @@ \#INFO_DESCR_WeapnInte2
@@ -286,7 +286,7 @@ This device is capable of completely assembling any weapon given parts and any
 amount of schematics, using computational learning algorithms and a large
 database of possible configurations.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ArmorInter | $\#CBI_ArmorInter
 == \#INFO_TITLE_ArmorInter | Armor Interfacing Device
 @@ \#INFO_DESCR_ArmorInter
@@ -302,7 +302,7 @@ Using these, it has the capability for (but is not installed in its default
 configuration with) methods of damage mitigation, such as secreting
 flame-retardant liquid when fire damage is detected.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_CPU1 | High-Grade CPU
 == \#INFO_TITLE_CPU1 | $\#CBI_CPU2
 @@ \#INFO_DESCR_CPU1
@@ -317,7 +317,7 @@ later acquire a more comfortable BC-0265 CPU.
 The unit houses 2048 physical cores and two billion hybrid synapses, giving
 it a very solid feel and plenty of physical working memory.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_CPU2 | S. High-Grade CPU
 == \#INFO_TITLE_CPU2 | $\#CBI_CPU3
 @@ \#INFO_DESCR_CPU2
@@ -333,7 +333,7 @@ Despite only having 3 billion neurons, not much more than high-grade CPUs,
 the quality of each is much higher, being able to withstand much more precise
 data transfer through high density synapses and storage in each cell.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_OrSigil | 'Or' Sigil
 == \#INFO_TITLE_OrSigil | \cjB\cui\c-narist 'Or' Sigil
 @@ \#INFO_DESCR_OrSigil

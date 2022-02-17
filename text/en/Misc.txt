@@ -40,7 +40,7 @@ A portal to Hell itself.
 May those who attempt to stop it have Godspeed, or Lithium shall
 forever rain from the skies.
 
-## Misc ----------------------------------------------------------------------|
+## Misc ══════════════════════════════════════════════════════════════════════╕
 == \#CHECK | Eng
 
 == \#TIME_FMT_LONG  | %0.2i:%0.2i:%0.2i %i-%i-16%0.2i
@@ -68,7 +68,7 @@ Use at the expense of your world.
 == BGFLAT15 | ZZLITHBG
 == BGFLAT31 | ZZLITHBG
 
-## Obituaries ----------------------------------------------------------------|
+## Obituaries ════════════════════════════════════════════════════════════════╕
 == OB_DEFAULT |
 
 == OB_BABY      | %o got a face full of plasma. Toasty!
@@ -163,7 +163,7 @@ Use at the expense of your world.
 == \#DEATHMSG_19 | THE DEMONS GAVE YOU THE BOOT!
 == \#DEATHMSG_20 | AT LEAST YOU PLAY BETTER THAN KAISER!
 
-## DamNums -------------------------------------------------------------------|
+## DamNums ═══════════════════════════════════════════════════════════════════╕
 == DAMNUM_TYPECOLOR_BULLET    | DamWhite
 == DAMNUM_TYPECOLOR_ELECTRIC  | DamCyan
 == DAMNUM_TYPECOLOR_FIRE      | DamOrange
@@ -173,7 +173,7 @@ Use at the expense of your world.
 == DAMNUM_TYPECOLOR_MELEE     | DamGray
 == DAMNUM_TYPECOLOR_SHRAPNEL  | DamGold
 
-## Menus ---------------------------------------------------------------------|
+## Menus ═════════════════════════════════════════════════════════════════════╕
 == MENU_NGAME  | * (New-Game)
 == MENU_OPTION | * (Options)
 == MENU_LOADG  | * (Load-Game)

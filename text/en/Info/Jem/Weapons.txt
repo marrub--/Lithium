@@ -8,7 +8,7 @@
 
 == \#INFO_SHORT_CFist | Mana Siphon
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Mateba | Mateba
 == \#INFO_TITLE_Mateba | Mateba R119
 @@ \#INFO_DESCR_Mateba
@@ -25,7 +25,7 @@ Due to the original design being lost in time, this revolver sports several
 accuracy deficiencies, but nonetheless has the classic look and feel of the
 original gun. Produced by A.O.F Inc. for knight-class units.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Mateba_A | $\#UPGRADE_TITLE_Mateba_A
 == \#INFO_TITLE_Mateba_A | \cdFinirentur\c-, \cgRussorum\c- 19
 @@ \#INFO_DESCR_Mateba_A
@@ -40,7 +40,7 @@ potentially overload the user. While this modification was created by A.O.F
 Inc, the Finirentur method was created recently by mages of Neptune 11 in
 Algidistari.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ShockRifle | Shock Rifle
 == \#INFO_TITLE_ShockRifle | Home-made Shock Rifle
 @@ \#INFO_DESCR_ShockRifle
@@ -56,7 +56,7 @@ While the weapon only has a 7-round magazine, it fires extremely deadly
 7.62x54mmR cartridges with almost pinpoint accuracy, thanks to being extremely
 well-manufactured, likely under the care of a very skilled Kiri craftsman.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ShockRif_A | $\#UPGRADE_TITLE_ShockRif_A
 == \#INFO_TITLE_ShockRif_A | $\#INFO_SHORT_ShockRif_A
 @@ \#INFO_DESCR_ShockRif_A
@@ -64,7 +64,7 @@ A simple modification to the barrel that wraps an explosive sigil around the
 bullet as it leaves the gun, causing it to explode into electricity upon
 impact.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ShockRif_B | $\#UPGRADE_TITLE_ShockRif_B
 == \#INFO_TITLE_ShockRif_B | $\#INFO_SHORT_ShockRif_B
 @@ \#INFO_DESCR_ShockRif_B
@@ -76,7 +76,7 @@ The liquid crystal is heated with a Heat sigil, however due to unknown reasons
 when the projectiles get stuck in groups with this compound, the combined
 energy still remaining in them explodes violently.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_SPAS | $\#INFO_SHORT_Shotgun
 == \#INFO_TITLE_SPAS | NV48 12-Gauge Shotgun
 @@ \#INFO_DESCR_SPAS
@@ -88,7 +88,7 @@ It fires any standard high-potency 12-gauge shell, and loads 8 shots. The
 design is extremely simple, but it does not overheat or jam often, is cheap to
 produce, and is very, very powerful.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_SPAS_A | $\#UPGRADE_TITLE_SPAS_A
 == \#INFO_TITLE_SPAS_A | \cdInvalidassero\c-, \cgRussorum\c- 14
 @@ \#INFO_DESCR_SPAS_A
@@ -99,7 +99,7 @@ This substance will, upon sudden velocity increase, vibrate rapidly and cause
 projectiles to both go off-target and do loads of damage, as well as explode
 on impact. The origin of this method is unknown.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_SPAS_B | $\#UPGRADE_TITLE_SPAS_B
 == \#INFO_TITLE_SPAS_B | NV48-1 Shell Auto-loader
 @@ \#INFO_DESCR_SPAS_B
@@ -113,7 +113,7 @@ Somehow, the accelerated shots also seem to blend into each other slightly.
 The weapon must be fired a bit slower (and is forced to) due to the violent
 nature of the magic being used, and the added recoil.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_SMG | Sub-Machine Gun
 == \#INFO_TITLE_SMG | SYM4.3 D.22 MODEL M SUBMACHINE GUN
 @@ \#INFO_DESCR_SMG
@@ -128,7 +128,7 @@ The weapon fires modified high velocity, armor piercing, vacuum enabled
 bullpup. It has since been re-branded by SYM4.3, who now produce it for
 Omakeda with royalties.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_SMG_A | $\#UPGRADE_TITLE_SMG_A
 == \#INFO_TITLE_SMG_A | Arms Annex F474
 @@ \#INFO_DESCR_SMG_A
@@ -141,7 +141,7 @@ load, and so care must be taken while reloading the gun to not move too
 suddenly and cause the buffer to rip. If this did occur, the weapon would
 displode, and bullets would fly out constantly.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_SMG_B | $\#UPGRADE_TITLE_SMG_B
 == \#INFO_TITLE_SMG_B | Arms Annex 138D5
 @@ \#INFO_DESCR_SMG_B
@@ -152,7 +152,7 @@ This magic extruder gives all bullets leaving the barrel automatic target
 homing capabilities. The bullets may not only lean toward enemies you aim at,
 but also enemies nearby given a good enough range.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_SMG_C | $\#UPGRADE_TITLE_SMG_C
 == \#INFO_TITLE_SMG_C | SYM4.3 D.24 MODEL M SAFE TRIGGER
 @@ \#INFO_DESCR_SMG_C
@@ -167,7 +167,7 @@ heat of the barrel and stop firing until it has sufficiently cooled down.
 For all intents and purposes, this plan worked great for everyone buying new or
 intending to buy the upgrade kit.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_IonRifle | Ion Rifle
 == \#INFO_TITLE_IonRifle | KDA-[Thrown] Model 11 Ion Rifle
 @@ \#INFO_DESCR_IonRifle
@@ -184,7 +184,7 @@ This is in part required due to the immense heat that would be caused by
 opening the weapon prematurely after firing, and the complexity that would be
 needed to have a fully automatic round cycling system.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_IonRifle_A | $\#UPGRADE_TITLE_IonRifle_A
 == \#INFO_TITLE_IonRifle_A | KDA-[Radiator] M11 Radioactive Ionizer
 @@ \#INFO_DESCR_IonRifle_A
@@ -198,7 +198,7 @@ torn apart from the inside.
 
 Don't you just want to buy 5 of 'em?
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_IonRifle_B | $\#UPGRADE_TITLE_IonRifle_B
 == \#INFO_TITLE_IonRifle_B | KDA-[Overloader] M11 Overload Charger
 @@ \#INFO_DESCR_IonRifle_B
@@ -211,12 +211,12 @@ the damage output.
 Due to the immense amount of heat in the chamber, the weapon must be cooled off
 by air exposure for a few moments after firing.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_CPlasmaRifle | $\#INFO_SHORT_PlasmaRifle
 == \#INFO_TITLE_CPlasmaRifle | $\#INFO_TITLE_PlasmaRifle
 == \#INFO_DESCR_CPlasmaRifle | $\#INFO_DESCR_PlasmaRifle
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_CPlasma_A | $\#UPGRADE_TITLE_CPlasma_A
 == \#INFO_TITLE_CPlasma_A | MD 47.65.69.73.74 Pulse Charger
 @@ \#INFO_DESCR_CPlasma_A
@@ -226,7 +226,7 @@ the results of this internal testing was the Pulse Charger: An oscillating
 plasma emitter similar to the original mechanism, but made for accuracy over
 speed.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_StarDestroyer | Star Destroyer
 == \#INFO_TITLE_StarDestroyer | The Star Destroyer
 @@ \#INFO_DESCR_StarDestroyer
@@ -243,7 +243,7 @@ The resulting projectile grows in size as it disperses energy in front of it,
 causing hundreds of smaller projectiles to come out as it rips through
 anything in its path.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ShipGun_A | Longinus Sols.
 == \#INFO_TITLE_ShipGun_A | The Forsaken Longinus Solspear
 @@ \#INFO_DESCR_ShipGun_A
@@ -256,7 +256,7 @@ of things that it can't kill, such as walls.
 This bolt appears to think on its own, though this is possibly just local
 distortion caused by the high amount of condensed demonic energy.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ShipGun_B | $\#UPGRADE_TITLE_ShipGun_B
 == \#INFO_TITLE_ShipGun_B | The Galliant Surge of Destiny
 @@ \#INFO_DESCR_ShipGun_B
@@ -275,7 +275,7 @@ possibly just speculation.
 The 2nd method of the \ciAurantia\c- mode, the most dead-simple of attacks that
 could be made with \ciAurantia\c- sigils. A potent slash with no physical form.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Delear | Delear
 == \#INFO_TITLE_Delear | \cdDelerentur Ex\c-, \ciAurantiorum\c- 24
 @@ \#INFO_DESCR_Delear
@@ -287,7 +287,7 @@ The design was created by first century mage Johnathon Booker and was later
 further simplified by various spellcasters. Your version of it prefers a flat
 shape rather than a curved one that most use.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Feuer | Feuer
 == \#INFO_TITLE_Feuer | \cdIncenderentur Ex\c-, \ciAurantiorum\c- 32
 @@ \#INFO_DESCR_Feuer
@@ -298,7 +298,7 @@ The method is renowned for being powerful yet simple, and very easy to use.
 It was originally dubbed the "magic missile" before some esoteric historians
 began to protest for unknown reason.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Rend | Romyetya
 == \#INFO_TITLE_Rend | \cdFinderentur Ex\c-, \ciAurantiorum\c- 4
 @@ \#INFO_DESCR_Rend
@@ -309,7 +309,7 @@ replaced with an Extend sigil.
 Far faster, more damaging, and longer range than Blade, Finderentur is useful
 in many situations.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Hulgyon | Hulgyon
 == \#INFO_TITLE_Hulgyon | \cdHumarentur Ex\c-, \ciAurantiorum\c- 16
 @@ \#INFO_DESCR_Hulgyon
@@ -317,7 +317,7 @@ The 16th method of the \ciAurantia\c- mode. Intermediate attack that creates
 several piercing pillars of light forward of the user. One of the few
 classical methods still in use, created by Apollo in 3021 CE.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_StarShot | Hosh'danma
 == \#INFO_TITLE_StarShot | \cdDisploderentur Ex\c-, \ciAurantiorum\c- 8
 @@ \#INFO_DESCR_StarShot
@@ -328,7 +328,7 @@ deploy with, and has been used several high-profile destroy-and-conceal
 missions, including the West Steel Corp. incident, where it was used to
 destroy several micro-fighters and around 195 personnel aboard the enemy ship.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Cercle | Cercle de la Mort
 == \#INFO_TITLE_Cercle | \cdPeccarentur Ex\c-, \cgRussorum\c- 7
 == \#INFO_SSIZE_Cercle | 28

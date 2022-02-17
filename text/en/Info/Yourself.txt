@@ -116,7 +116,7 @@ track anything we're doing. You should be able to mitigate it in a few ways
 since this program removes all of the hooks in the kernel that call into it,
 but you'll have to do them yourself. I'm sure you can. Good luck. Zeke.
 
-## Cybernetics ---------------------------------------------------------------|
+## Cybernetics ═══════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_BIP | B.I.P.
 == \#INFO_TITLE_BIP | Biotic Information Panel (B.I.P.)
 @@ \#INFO_DESCR_BIP
@@ -171,7 +171,7 @@ The currently installed Computer/Brain Interface is not known by this system.
 Please file a report on the Software Sans Pretium bug tracker and attach info
 about your interface to get it added to the descriptions list.
 
-## Attributes ----------------------------------------------------------------|
+## Attributes ════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_AttrACC | Accuracy
 == \#INFO_TITLE_AttrACC | \cgAccuracy\c- (ACC)
 @@ \#INFO_DESCR_AttrACC

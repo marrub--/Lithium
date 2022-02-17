@@ -6,21 +6,21 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-## Body ----------------------------------------------------------------------|
+## Body ══════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_HeadsUpDisp | Heads Up Disp.
 @@ \#UPGRADE_EFFEC_HeadsUpDisp
 Shows vital information.
 
 A Heads Up Display program built into your Computer/Brain Interface.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_HeadsUpDispJem | $\#UPGRADE_TITLE_HeadsUpDisp
 @@ \#UPGRADE_EFFEC_HeadsUpDispJem
 Shows vital information.
 
 A Heads Up Display program.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_JetBooster | Jet Booster
 @@ \#UPGRADE_EFFEC_JetBooster
 Lets you press the "jump" key after a double-jump to fly for a short
@@ -28,7 +28,7 @@ time.
 
 Jet boosters built into your boots.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_ReflexWetw | Reflex Wetware
 @@ \#UPGRADE_EFFEC_ReflexWetw
 Lets you move quicker, easier and more efficiently.
@@ -37,21 +37,21 @@ Allows you to double jump by pressing jump mid-air and slide by pressing run.
 
 Cybernetic wetware that improves your reflexes and implicit agility.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Zoom | Zoom Wetware
 @@ \#UPGRADE_EFFEC_Zoom
 Allows you to press the zoom keys to zoom in and out.
 
 Drivers for zooming software, which utilizes your eye implants.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Flashlight | Flashlight
 @@ \#UPGRADE_EFFEC_Flashlight
 Allows you to press the flashlight key to turn on a flashlight.
 
 Drivers for flashlight software, which utilizes your armor's built-in lighting.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_VitalScan | Vital Scanner
 @@ \#UPGRADE_EFFEC_VitalScan
 While aiming at living things, you can see their health and how much damage is
@@ -62,7 +62,7 @@ Customizable via settings menu.
 A set of nanobots are deployed to get vitality information on targets you aim
 at.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_CyberLegs | Move Wetware
 @@ \#UPGRADE_EFFEC_CyberLegs
 Allows you to jump higher and move faster.
@@ -71,7 +71,7 @@ Damages enemies landed on.
 
 Improved reflex wetware, which gives an even larger combat advantage.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_ReactArmor | R. Armor
 @@ \#UPGRADE_EFFEC_ReactArmor
 Makes your armor react to being hit, switching its mode to the type of damage
@@ -80,14 +80,14 @@ you took, mitigating any further damage of that type.
 Integrate your armor with a highly advanced Yh-0 reactive plating system, made
 by avians on Durla Prime.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_ReactArmor2 | R. Armor 2
 @@ \#UPGRADE_EFFEC_ReactArmor2
 Improves the damage resistance of the Reactive Armor.
 
 Upgrades the Yh0 plating system, reducing damage taken twice over.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_DefenseNuke | Def. Mini Nuke
 @@ \#UPGRADE_EFFEC_DefenseNuke
 When you enter a level, sets off a huge explosion, defending you from initial
@@ -98,7 +98,7 @@ threats away while you're distracted.
 
 \cgThis alerts monsters when you enter a map.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Adrenaline | Adrenaline Inj.
 @@ \#UPGRADE_EFFEC_Adrenaline
 When being targeted by enemies or nearing a projectile, time will stop for one
@@ -109,14 +109,14 @@ Needs to be charged for 30 seconds to activate.
 Implants an adrenaline injector into your skin, which reacts to sudden impulses
 and sound cues.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Magic | Mana Absorber
 @@ \#UPGRADE_EFFEC_Magic
 Killed enemies will drop mana.
 
 Enables mana display on the HUD.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_SoulCleaver | Soul Cleaver
 @@ \#UPGRADE_EFFEC_SoulCleaver
 When living things die, they emit a projectile that will seek other enemies for
@@ -125,20 +125,20 @@ a short time.
 Creates an artificial soul on your targets and makes it destroy their
 neighbors.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_StealthSys | Stealth System
 @@ \#UPGRADE_EFFEC_StealthSys
 Makes you gradually fade out when still, giving you partial invisibility from
 enemies, and generally harder to aim at.
 
-## Weapons -------------------------------------------------------------------|
+## Weapons ═══════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_AutoReload | Auto Reload
 @@ \#UPGRADE_EFFEC_AutoReload
 Weapons in your inventory automatically reload after 5 seconds.
 
 Automated reloading system for your backpack.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Pistol_A | Auto Pistol
 @@ \#UPGRADE_EFFEC_Pistol_A
 Makes your pistol fire in full auto.
@@ -148,7 +148,7 @@ automatically.
 
 \cdCompatible with Plasma Pistol.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Pistol_B | Plasma Pistol
 @@ \#UPGRADE_EFFEC_Pistol_B
 Makes your pistol fire strong plasma.
@@ -157,7 +157,7 @@ Changes the internal mechanisms of the gun to fire charged plasma.
 
 \cdCompatible with Auto Pistol.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Shotgun_B | Poison Shot
 @@ \#UPGRADE_EFFEC_Shotgun_B
 Makes your shotgun fire poison pellets that do 10 damage every half-second
@@ -165,7 +165,7 @@ after hitting a target.
 
 Installs a poison injector into the shell loading mechanism.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Shotgun_A | Gauss Rifle
 @@ \#UPGRADE_EFFEC_Shotgun_A
 Turns your shotgun into a gauss rifle.
@@ -173,7 +173,7 @@ Turns your shotgun into a gauss rifle.
 Re-build the internal mechanisms to turn the railgun part of your shotgun
 into a new one, removing the shell loader entirely.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Rifle_A | Modal Rifle
 @@ \#UPGRADE_EFFEC_Rifle_A
 Gives your rifle a sniper firing mode.
@@ -183,7 +183,7 @@ allowing you to burst-fire accurate, painful shots.
 
 \cdCompatible with Laser Rifle.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Rifle_B | Laser Rifle
 @@ \#UPGRADE_EFFEC_Rifle_B
 Makes your rifle fire penetrating lasers.
@@ -194,7 +194,7 @@ Uses a standard photon accelerator to fire lasers out of your rifle.
 
 \cdCompatible with Modal Rifle.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_RPG_B | Homing Rocket
 @@ \#UPGRADE_EFFEC_RPG_B
 Pressing alt-fire with the rocket launcher selects a target to be traced by
@@ -203,7 +203,7 @@ any rockets you fire afterwards.
 Disperses extra nanomachines out of the rifle that push the rocket toward the
 enemy with extreme accuracy.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_RPG_A | C. Launcher
 @@ \#UPGRADE_EFFEC_RPG_A
 Lets you hold "fire" to queue extra grenades in your grenade launcher.
@@ -216,7 +216,7 @@ all at once.
 Hold fire to load more grenades, and then hold alt-fire to change the firing
 mode.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Plasma_A | Plasmatic Las.
 @@ \#UPGRADE_EFFEC_Plasma_A
 Makes your plasma rifle emit red-hot laser beams.
@@ -224,7 +224,7 @@ Makes your plasma rifle emit red-hot laser beams.
 Switches out the ion emitter with an ion condenser, that can fire out laser
 beams strong enough to cut clean through Adamantium.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Plasma_B | Particle Beam
 @@ \#UPGRADE_EFFEC_Plasma_B
 Makes your plasma rifle fire a deadly long-range particle beam.
@@ -232,7 +232,7 @@ Makes your plasma rifle fire a deadly long-range particle beam.
 Replaces the weapon's ion emitter with an ion accelerator, that fires bursts
 of ions that are then super-charged.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Cannon_A | Punct. Cannon
 @@ \#UPGRADE_EFFEC_Cannon_A
 Your cannon now shoots explosive bolts that send huge shocks through walls.
@@ -240,7 +240,7 @@ Your cannon now shoots explosive bolts that send huge shocks through walls.
 By adding new magic translation buffers to your weapon, it can create
 extreme-yield explosive bolts from the same charge as the cannon type does.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Cannon_B | Omega Railgun
 @@ \#UPGRADE_EFFEC_Cannon_B
 Your cannon fires highly deadly, pinpoint accurate plasma death.
@@ -248,34 +248,34 @@ Your cannon fires highly deadly, pinpoint accurate plasma death.
 Implements a plasma charger in your cannon, made with reverse-engineered
 magical compounds.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Mateba_A | Finalizer
 @@ \#UPGRADE_EFFEC_Mateba_A
 Makes the Mateba fire a projectile that instantly kills monsters below 50%
 health on its last shot.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_ShockRif_A | Shock Charge
 @@ \#UPGRADE_EFFEC_ShockRif_A
 Creates bolts of lightning around the Shock Rifle's impacts.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_ShockRif_B | Elec. Binding
 @@ \#UPGRADE_EFFEC_ShockRif_B
 Makes the Shock Rifle do more shock damage, and when hit with 6 consecutive
 shots, will explode with a sphere of electricity.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_SPAS_A | Void Breath
 @@ \#UPGRADE_EFFEC_SPAS_A
 Makes the Shotgun fire out wisps of energy that deal massive damage.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_SPAS_B | Shell Autoloader
 @@ \#UPGRADE_EFFEC_SPAS_B
 Automatically loads shells, removing the need to reload.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_SMG_A | SMG Trimag
 @@ \#UPGRADE_EFFEC_SMG_A
 Triples the SMG's magazine size, but makes it slower to reload.
@@ -284,7 +284,7 @@ Triples the SMG's magazine size, but makes it slower to reload.
 
 \cdCompatible with Safety System.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_SMG_B | Seeker Rounds
 @@ \#UPGRADE_EFFEC_SMG_B
 Makes the SMG's rounds home in on targets in a small cone.
@@ -293,7 +293,7 @@ Makes the SMG's rounds home in on targets in a small cone.
 
 \cdCompatible with Safety System.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_SMG_C | Safety System
 @@ \#UPGRADE_EFFEC_SMG_C
 When the SMG is about to overheat, makes it stop firing for a short time.
@@ -302,43 +302,43 @@ When the SMG is about to overheat, makes it stop firing for a short time.
 
 \cdCompatible with SMG Trimag.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_IonRifle_A | Rad. Ionizer
 @@ \#UPGRADE_EFFEC_IonRifle_A
 Ionizes enemies, making them take more damage when hit for a few seconds.
 
 \cdCompatible with Overloader.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_IonRifle_B | Overloader
 @@ \#UPGRADE_EFFEC_IonRifle_B
 Lets you hold down fire to charge the Ion Rifle, at the cost of cooldown time.
 
 \cdCompatible with Rad. Ionizer.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_CPlasma_A | Pulse Charger
 @@ \#UPGRADE_EFFEC_CPlasma_A
 Makes the Plasma Rifle fire out long streams of deadly plasma.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_ShipGun_A | Longinus Solspear
 @@ \#UPGRADE_EFFEC_ShipGun_A
 The Star Destroyer will fire fast, piercing beams that bounce around and
 destroy everything in their path.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_ShipGun_B | Surge of Destiny
 @@ \#UPGRADE_EFFEC_ShipGun_B
 The Star Destroyer will emit an aura of protection while firing out projectiles
 from all directions.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Cannon_C | ????????
 @@ \#UPGRADE_EFFEC_Cannon_C
 What the !@#$% is this!?
 
-## Extras --------------------------------------------------------------------|
+## Extras ════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_TorgueMode | EXPLOOSIONS
 @@ \#UPGRADE_EFFEC_TorgueMode
 ARE YOU READY FOR THIS, YOU BADASS MOTHERFUCKER!?! THIS UPGRADE IS NOT ONLY
@@ -348,7 +348,7 @@ AND SHIT, RIGHT!? BUY THIS NOW AND I'LL DO A SICK GUITAR SOLO JUST FOR YOU NO
 CHARGE IN FACT I'LL DO IT ANYWAY OK ACTUALLY BRB I JUST BROKE MY HAND SWINGING
 IT AROUND LIKE THIS I'LL BE BACK WITH A GUITAR MADE OF BANDAGES LATER
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Seven7s | 7777777 Mode
 @@ \#UPGRADE_EFFEC_Seven7s
 Instates cosmic horror and spurious time travel into your very being, causing
@@ -360,17 +360,17 @@ you to instantly implode upon activation. (not really)
 anti-physics powers becaus i did some calculations and found the universe is
 wrong so i am doing my best to flip off reality for a thousand years
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_lolsords | Steele Mode
 @@ \#UPGRADE_EFFEC_lolsords
 You get a sword. It is literally your only weapon.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Goldeneye | 007 Mode
 @@ \#UPGRADE_EFFEC_Goldeneye
 Get the true Goldeneye 007(tm) experience!
 
-## Downgrades ----------------------------------------------------------------|
+## Downgrades ════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_UNCEUNCE | UNCE UNCE
 @@ \#UPGRADE_EFFEC_UNCEUNCE
 UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE
@@ -379,12 +379,12 @@ UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE UNCE
 
 \cgEpilepsy warning! Don't use if you are prone to seizures.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_InstaDeath | Instant Death
 @@ \#UPGRADE_EFFEC_InstaDeath
 Upon losing health, you instantly die.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_OneShot | One Shot
 @@ \#UPGRADE_EFFEC_OneShot
 Firing any gun with a magazine will immediately unload it completely.

@@ -8,14 +8,14 @@
 
 !!include Log/Random.txt
 
-## Health --------------------------------------------------------------------|
+## Health ════════════════════════════════════════════════════════════════════╕
 == \#LOG_HealthBonus | $\#INFO_SHORT_HealthBonus
 == \#LOG_Medikit     | $\#INFO_SHORT_Medikit
 == \#LOG_MegaSphere  | Mega Charge!
 == \#LOG_SoulSphere  | Super Charge!
 == \#LOG_StimPack    | $\#INFO_SHORT_Stimpack
 
-## Keys ----------------------------------------------------------------------|
+## Keys ══════════════════════════════════════════════════════════════════════╕
 == \#LOG_RedCard     | \cgRed KeyDisk
 == \#LOG_BlueCard    | \chBlue KeyDisk
 == \#LOG_YellowCard  | \ckYellow KeyDisk
@@ -23,7 +23,7 @@
 == \#LOG_BlueSkull   | \chBlue Skull
 == \#LOG_YellowSkull | \ckYellow Skull
 
-## Powerups ------------------------------------------------------------------|
+## Powerups ══════════════════════════════════════════════════════════════════╕
 == \#LOG_RadSuit      | Radiation Shielding Suit
 == \#LOG_InfraRed     | $\#INFO_SHORT_Infrared
 == \#LOG_Invuln       | \cjInvulnerability!
@@ -37,7 +37,7 @@
 == \#LOG_ArtiFly      | Wings of Wrath
 == \#LOG_ArtiTeleport | Chaos Device
 
-## Ammo ----------------------------------------------------------------------|
+## Ammo ══════════════════════════════════════════════════════════════════════╕
 == \#LOG_Clip      | $\#TAG_BulletAmmo
 == \#LOG_ClipBox   | Box of Bullets
 == \#LOG_Shell     | $\#TAG_ShellAmmo
@@ -47,7 +47,7 @@
 == \#LOG_Cell      | Energy Charge
 == \#LOG_CellBox   | Tainted Energy Pack
 
-## Bonuses -------------------------------------------------------------------|
+## Bonuses ═══════════════════════════════════════════════════════════════════╕
 == \#LOG_Coin       | Coin
 == \#LOG_ScoreChip  | $\#INFO_SHORT_ScoreChip
 == \#LOG_Ruby       | Flawed Ruby
@@ -141,7 +141,7 @@
 == \#LOG_GroupToggle7 | No items to toggle in \cnSet 3\c-.
 == \#LOG_GroupToggle8 | No items to toggle in \cfSet 4\c-.
 
-## Misc ----------------------------------------------------------------------|
+## Misc ══════════════════════════════════════════════════════════════════════╕
 == \#LOG_Version   | Lithium %s :: Compiled %s
 == \#LOG_StartGame | Press "%jS" to open the menu.
 == \#LOG_MailRecv  | Mail received from <\cj%s\c->.

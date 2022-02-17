@@ -14,7 +14,7 @@ A powerful melee weapon which attaches to the left wrist. Uses energy from a
 cybernetic power source to condense weight and force into super-destructive
 punches.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_MissileLauncher | Missile Launcher
 == \#INFO_TITLE_MissileLauncher | X-400 Lance-missiles
 @@ \#INFO_DESCR_MissileLauncher
@@ -30,7 +30,7 @@ cylinder revolves. New ammunition can be loaded by shoving it carefully into
 the underside of the gun, similar to a shotgun, thanks to a convenient
 automatic rotation as it detects newly loaded missiles.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_PlasmaDiffuser | Plasma Diffuser
 == \#INFO_TITLE_PlasmaDiffuser | SYM4.3 D.640 PLASMA DIFFUSER
 @@ \#INFO_DESCR_PlasmaDiffuser

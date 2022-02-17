@@ -71,7 +71,7 @@ that you're bound to get hit. A lot. ... By the way, why don't these
 guys drop their chainguns?
 @@
 
-## Subordinates --------------------------------------------------------------|
+## Subordinates ══════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Imp | Hell Trooper
 == \#INFO_TITLE_Imp | Hell Trooper "Imp"
 %% \#INFO_DESCR_Imp
@@ -115,7 +115,7 @@ They tend to not make a sound until they lunge at you, so be sure to
 keep an eye out for cracks in the air around you.
 @@
 
-## Residents -----------------------------------------------------------------|
+## Residents ═════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_LostSoul | Lost Soul
 == \#INFO_TITLE_LostSoul | $\#INFO_SHORT_LostSoul
 %% \#INFO_DESCR_LostSoul
@@ -177,7 +177,7 @@ unknown reason. They're quite hearty, and their attacks are fairly
 deadly, but generally the Cacodemon is not a monster to fear.
 @@
 
-## Nobles --------------------------------------------------------------------|
+## Nobles ════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_HellKnight | Hell Knight
 == \#INFO_TITLE_HellKnight | $\#INFO_SHORT_HellKnight
 %% \#INFO_DESCR_HellKnight
@@ -224,7 +224,7 @@ The Revenant is revered among demons for its honor serving after
 death.
 @@
 
-## Tyrants -------------------------------------------------------------------|
+## Tyrants ═══════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_PainElemental | Pain Elemental
 == \#INFO_TITLE_PainElemental | Sin of Bellona, "Pain Elemental"
 %% \#INFO_DESCR_PainElemental
@@ -322,7 +322,7 @@ them they will only continue to chase you down.
 
 == \#INFO_SHORT_Archangel | The Archangel
 
-## Overlord ------------------------------------------------------------------|
+## Overlord ══════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_IconOfSin | Icon of Sin
 == \#INFO_TITLE_IconOfSin | Overlord of Hell, Icon of Sin
 %% \#INFO_DESCR_IconOfSin

@@ -6,7 +6,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-## UI ------------------------------------------------------------------------|
+## UI ════════════════════════════════════════════════════════════════════════╕
 == \#ACTIVATE   | Activate
 == \#AUTOGROUPS | Active Auto-groups
 == \#BUY        | Buy
@@ -105,14 +105,14 @@ You must start
 
 == \#BEGIN | [Press any key to begin]
 
-## BIP -----------------------------------------------------------------------|
+## BIP ═══════════════════════════════════════════════════════════════════════╕
 == \#BIP_AVAILABLE  | %i/%i AVAILABLE
 == \#BIP_BACK       | <BACK
 == \#BIP_CATEGS     | INFO CATEGORIES
 == \#BIP_HEADER     | BIOTIC INFORMATION PANEL ver2.5
 == \#BIP_NO_RESULTS | No results
 
-## Results -------------------------------------------------------------------|
+## Results ═══════════════════════════════════════════════════════════════════╕
 == \#RES_RESULTS  | RESULTS
 == \#RES_KILL     | ELIMINATED %.1lk%%
 == \#RES_ITEM     | ARTIFACTS %.1lk%%
@@ -131,7 +131,7 @@ You must start
 \c%cTRANSACTION
 CLOSED
 
-## Shop ----------------------------------------------------------------------|
+## Shop ══════════════════════════════════════════════════════════════════════╕
 == \#SHOP_CANT_ACTIVATE | Activating requires \ca%i\cbPerf\c-.
 == \#SHOP_ACTIVATE_USES | Activating will use \ca%i\cbPerf\c-.
 == \#SHOP_DISABLE_SAVES | Disabling saves \cn%i\cbPerf\c-.
@@ -165,7 +165,7 @@ CLOSED
 == \#CBI_CPU3 | KSKK Spec. BC-0265 Super High-Grade CPU
 == \#CBI_CPU4 | AOF 5900001 Rev7 CPU
 
-## BIP -----------------------------------------------------------------------|
+## BIP ═══════════════════════════════════════════════════════════════════════╕
 == \#BIP_NAME_CORPORATIONS | Companies
 == \#BIP_NAME_ENEMIES      | Adversaries
 == \#BIP_NAME_ITEMS        | Items
@@ -186,7 +186,7 @@ CLOSED
 == \#BIP_HELP_WEAPONS      | Weapons and weapon upgrades.
 == \#BIP_HELP_YOURSELF     | Your attributes, abilities and history.
 
-## Statistics ----------------------------------------------------------------|
+## Statistics ════════════════════════════════════════════════════════════════╕
 == \#STAT_ScoreMul   | Score multiplier
 == \#STAT_Weapons    | Weapons found
 == \#STAT_HealthUsed | Health used
@@ -203,7 +203,7 @@ CLOSED
 == \#STAT_Brouzouf   | Brouzouf gained
 == \#STAT_TrueMail   | Mail truly received
 
-## Attributes ----------------------------------------------------------------|
+## Attributes ════════════════════════════════════════════════════════════════╕
 == \#ATTR_HELP_ACC | Weapon damage
 == \#ATTR_HELP_DEF | Damage resistance
 == \#ATTR_HELP_STR | Health capacity

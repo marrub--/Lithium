@@ -8,7 +8,7 @@
 
 == \#INV_HINTS | You can right click to quickly move items. To equip armor place it on your \cdbody\c- or press \cnEquip\c-.
 
-## Containers ----------------------------------------------------------------|
+## Containers ════════════════════════════════════════════════════════════════╕
 == \#CONTAINER_Backpack | $\#INFO_SHORT_BackpackBase
 == \#CONTAINER_ArmUpL   | L Shoulder
 == \#CONTAINER_ArmUpR   | R Shoulder
@@ -21,7 +21,7 @@
 == \#CONTAINER_Legs     | Legs
 == \#CONTAINER_Item     | Item
 
-## Tags ----------------------------------------------------------------------|
+## Tags ══════════════════════════════════════════════════════════════════════╕
 == \#ITEM_TAG_ClawOfImp | Claw of Imp
 == \#ITEM_TAG_AndSigil | Binarist 'And' Sigil
 == \#ITEM_TAG_OrSigil | Binarist 'Or' Sigil
@@ -46,7 +46,7 @@
 == \#ITEM_TAG_ArmPinkSilverLo  | Pink Silver Leggings
 == \#ITEM_TAG_ArmMidoriLo      | Midori Leggings
 
-## Descriptions --------------------------------------------------------------|
+## Descriptions ══════════════════════════════════════════════════════════════╕
 %% \#ITEM_SHORT_DivisionSigil
 \cgA mistake of the universe.
 
@@ -123,7 +123,7 @@ Used in division.
 \ca8 DT to fire magic.
 4 DT to other types.
 
-## Sprites -------------------------------------------------------------------|
+## Sprites ═══════════════════════════════════════════════════════════════════╕
 == \#Item_ArmStandardUp    | :Items:ArmStandardUp
 == \#Item_ArmImprovedUp    | :Items:ArmImprovedUp
 == \#Item_ArmTeflonUp      | :Items:ArmTeflonUp

@@ -6,7 +6,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 %% \#BEGINNING_Stan_1
 During the 17th century of the New Era, our country began drafting the
 youth into the military again. Most people couldn't understand why,
@@ -58,7 +58,7 @@ I sit back on the couch and close my eyes, waiting for the next
 interview. The sun shines out the window above me, and I fall asleep
 for a little while.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 %% \#BEGINNING_Jem_1
 I try to think to myself for a moment. I look back at the door, then
 at the back of this transport ship. I am not allotted time to
@@ -89,7 +89,7 @@ digress.
 The world is spinning, not just because of my head. Now there is no
 way out. So into the midst of Hell I go.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 %% \#BEGINNING_Fulk_1
 The laboratory is quiet, as always, despite the current circumstances.
 The silence is only disturbed by the low voices of the staff and the
@@ -130,7 +130,7 @@ Corruption by outside forces would prove disastrous. While an issue,
 there are no other options; the KSKK must fight to keep their world
 from destruction.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 %% \#BEGINNING_Luke_1
 Lucas feels a disturbance. The same kind of disturbance it felt 300
 years ago. Unlike that time, it could pinpoint it - the definite
@@ -154,7 +154,7 @@ didn't judge by appearances.
 It rented a vehicle and set off for distant stars, hoping to find the
 answers and knowledge it had pursued for so long.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 %% \#BEGINNING_Omi_1
 "What do you mean, I shouldn't go for it?" the girl asks, irritated by
 his answer. "It's simply too dangerous to use, let alone get your
@@ -198,7 +198,7 @@ a gigantic, black mass.
 ~
 The Assassin prays for safety.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 %% \#BEGINNING_Ari_1
 Her face darkens. Aricil can tell that she will strike him, and that
 there's no escape from her attack. He braces for the blow, despite the
@@ -233,7 +233,7 @@ of this place, darker and more sinister than should be possible.
 ~
 The Dark Lord prays for safety.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 %% \#BEGINNING_Kiri_1
 ... Time does not exist in this place.
 ~

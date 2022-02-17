@@ -6,7 +6,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_AllPoint | AllPoint
 == \#INFO_TITLE_AllPoint | AllPoint Precision Firearms
 == \#INFO_IMAGE_AllPoint | :BIP:AllPoint
@@ -22,7 +22,7 @@ you want me to talk about our weapons, I'll talk about all of our fine
 armaments; but if you just want me to talk about our 'best-sellers', maybe you
 should just go back to window shopping."
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_AOF | A.O.F
 == \#INFO_TITLE_AOF | A.O.F Inc.
 == \#INFO_IMAGE_AOF | :BIP:AOF
@@ -36,7 +36,7 @@ governments, they finally made it back onto the market in 1370.
 
 A.O.F mainly produce weapon modifications, plasma ammunition, and robotics.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_AOFJem | $\#INFO_SHORT_AOF
 == \#INFO_TITLE_AOFJem | A.O.F Inc. [Bishop-Class Clearance]
 == \#INFO_IMAGE_AOFJem | $\#INFO_IMAGE_AOF
@@ -52,7 +52,7 @@ corporation.
 A.O.F Inc. also mass produces ammunition for energy weapons, robotics and
 modifications for existing weapons.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_AOFAri | AOF
 == \#INFO_TITLE_AOFAri | $\#INFO_SHORT_AOF
 == \#INFO_IMAGE_AOFAri | :BIP:AOF
@@ -65,7 +65,7 @@ life. We were created this way.
 By some strange cosmic coincidence, AOF appear to exist in this
 reality as well. I'm not sure what they're like here.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Cid | Cid
 == \#INFO_TITLE_Cid | $\#INFO_SHORT_Cid
 == \#INFO_IMAGE_Cid | :BIP:Cid
@@ -77,7 +77,7 @@ donate to several charities on Earth.
 This group has gone under several aliases over the past 200 years, and is one
 of the strongest, longest standing black market groups ever.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Facer | Facer
 == \#INFO_TITLE_Facer | $\#INFO_SHORT_Facer
 @@ \#INFO_DESCR_Facer
@@ -92,7 +92,7 @@ off as a civilian hunting weapons seller.
 
 The company was resigned in 2480 after the death of its remaining founder.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_JAQTen | JAQTen
 == \#INFO_TITLE_JAQTen | $\#INFO_SHORT_JAQTen
 @@ \#INFO_DESCR_JAQTen
@@ -108,7 +108,7 @@ repurposed into heavy machinery factories to help the allied Earth troops
 fight. Along with their sales of super-durable MREs to militaries, they were
 able to stay afloat in such an age, and still produce many products today.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_JJJ | JJJ
 == \#INFO_TITLE_JJJ | JJJ Inc.
 @@ \#INFO_DESCR_JJJ
@@ -122,7 +122,7 @@ Despite the large amount of litigation against them due to questionable
 practices in consumer safety and human rights, they still hold strong due to
 their large presence as a household brand and large amount of bank.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_KSKK | KSKK
 == \#INFO_TITLE_KSKK | Kazami Sensou Kenkyuu Kaihatsu GK
 == \#INFO_IMAGE_KSKK | :BIP:KSKK
@@ -136,7 +136,7 @@ Thanks to connections between OFMD and the Kazami government (from the
 circumstances of this operation,) KSKK has agreed to re-enter production of
 their more useful creations.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_KSKKJem | $\#INFO_SHORT_KSKK
 == \#INFO_TITLE_KSKKJem | $\#INFO_TITLE_KSKK
 == \#INFO_IMAGE_KSKKJem | $\#INFO_IMAGE_KSKK
@@ -145,7 +145,7 @@ Kazami Sensou Kenkyuu Kaihatsu (Kazami Military R&D) is a godo kaisha
 business organization based in the Great Empire of Kazami, on Earth. They
 research, develop and produce a large variety of products for the Kazami army.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_MDDO | MDDO
 == \#INFO_TITLE_MDDO | Maxim-Danil Defense Org
 @@ \#INFO_DESCR_MDDO
@@ -155,7 +155,7 @@ for military and paramilitary groups alike.
 
 De-funded and merged into Optic Fiber Maxim-Danil (OFMD) in 1045 NE.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Newvec | Newvec
 == \#INFO_TITLE_Newvec | Newvec Armory Incorporated
 @@ \#INFO_DESCR_Newvec
@@ -164,7 +164,7 @@ don't have much reputation as of now, they have a few very strong backers
 providing them funding. Newvec mostly produces weapons on commission, and only
 sells weapons to the public via online shipping.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_OFMD | OFMD
 == \#INFO_TITLE_OFMD | Optic Fiber Maxim-Danil
 == \#INFO_IMAGE_OFMD | :BIP:OFMD
@@ -179,7 +179,7 @@ emitting themselves from another dimensional plane.
 For now, OFMD are your employers, and supply you with Score, weaponry and
 cyber-tech.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_OFMDJem | $\#INFO_SHORT_OFMD
 == \#INFO_TITLE_OFMDJem | $\#INFO_TITLE_OFMD
 == \#INFO_IMAGE_OFMDJem | $\#INFO_IMAGE_OFMD
@@ -191,7 +191,7 @@ other such common technology.
 Originally, this company only produced optic fiber cables for consumer use,
 but later branched out to create all kinds of computation technology.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Omakeda | Omakeda
 == \#INFO_TITLE_Omakeda | Omakeda Defense Co.
 == \#INFO_IMAGE_Omakeda | :BIP:Omakeda
@@ -203,7 +203,7 @@ mercenaries around the world use their armaments as well.
 Known for their innovative firearm design, Omakeda is one of the highest
 profiting, most popular firearms manufacturers on Earth.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Semaphore | Semaphore, Inc.
 == \#INFO_TITLE_Semaphore | Semaphore, Incorporated
 == \#INFO_IMAGE_Semaphore | :BIP:Semaphore
@@ -219,7 +219,7 @@ While they mainly produce weaponry made for equipping space ships, Semaphore
 have also produced small-batch infantry weapons for gauging interest and
 profitability.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ShekaKaff | Sheka Kaff
 == \#INFO_TITLE_ShekaKaff | Shekaram Kaffrakal Links & Mats
 @@ \#INFO_DESCR_ShekaKaff
@@ -232,7 +232,7 @@ All of their staff appear to speak a language that nobody, even cryptographers,
 can seem to understand or decipher. Despite this, all of their listings and
 business material is written in standard Eastern English.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_SYM43 | SYM4.3
 == \#INFO_TITLE_SYM43 | SYM4.3 WEAPONS INCORPORATED
 == \#INFO_IMAGE_SYM43 | :BIP:Sym43
@@ -248,7 +248,7 @@ three quarters of all recorded mercenary, military and government bodies.
 Weapons confirmed to be made by them have appeared in countless historic
 battles, having existed for over 700 years now.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_UnrealArms | Unreal Arms
 == \#INFO_TITLE_UnrealArms | $\#INFO_SHORT_UnrealArms
 @@ \#INFO_DESCR_UnrealArms
@@ -259,7 +259,7 @@ Unreal Arms create what are dubbed by critics "some of the nicest-feeling
 weapons you can get your hands on", and yet are still able to sell them for a
 nice price thanks to good shipping architecture in the Aetos Vi system.
 
-## ---------------------------------------------------------------------------|
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Yigan | Yigan
 == \#INFO_TITLE_Yigan | $\#INFO_SHORT_Yigan
 @@ \#INFO_DESCR_Yigan

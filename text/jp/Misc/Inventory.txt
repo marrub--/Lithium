@@ -8,7 +8,7 @@
 
 == \#INV_HINTS | 左クリックでもアイテムの移動ができます。アーマーを装備するにはアイテムを\cd該当する体の部位\c-に置くか\cn装備\c-ボタンを押してください。
 
-## Containers ----------------------------------------------------------------|
+## Containers ════════════════════════════════════════════════════════════════╕
 
 == \#CONTAINER_ArmUpL   | 左肩
 == \#CONTAINER_ArmUpR   | 右肩
@@ -21,7 +21,7 @@
 == \#CONTAINER_Legs     | 足
 == \#CONTAINER_Item     | $\#BIP_NAME_ITEMS
 
-## Tags ----------------------------------------------------------------------|
+## Tags ══════════════════════════════════════════════════════════════════════╕
 
 == \#ITEM_TAG_ClawOfImp | インプの爪
 == \#ITEM_TAG_DivisionSigil | \c[Lith_RRed]わ\c[Lith_ROra]り\c[Lith_RYel]ざ\c[Lith_RYlg]ん\c[Lith_RGrn]の\c[Lith_RCya]い\c[Lith_RBlu]ん\c[Lith_RPur]し\c[Lith_RPnk]ょ\c[Lith_RHPn]う
@@ -45,7 +45,7 @@
 == \#ITEM_TAG_ArmPinkSilverLo  | ピンクシルバーのレギンス
 == \#ITEM_TAG_ArmMidoriLo      | ミドリのレギンス
 
-## Descriptions --------------------------------------------------------------|
+## Descriptions ══════════════════════════════════════════════════════════════╕
 
 %% \#ITEM_SHORT_DivisionSigil
 \cg世界最大の失敗。
