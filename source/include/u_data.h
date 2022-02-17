@@ -1,15 +1,14 @@
-/* ---------------------------------------------------------------------------|
- *
- * Distributed under the CC0 public domain license.
- * By Alison G. Watson. Attribution is encouraged, though not required.
- * See licenses/cc0.txt for more information.
- *
- * ---------------------------------------------------------------------------|
- *
- * Upgrade data and handling functions.
- *
- * ---------------------------------------------------------------------------|
- */
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ├──────────────────────────────────────────────────────────────────────────┤
+// │                                                                          │
+// │ Upgrade data and handling functions.                                     │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
 
 #if defined(upgr_category_x)
 upgr_category_x(body)

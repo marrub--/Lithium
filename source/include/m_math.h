@@ -1,15 +1,14 @@
-/* ---------------------------------------------------------------------------|
- *
- * Distributed under the CC0 public domain license.
- * By Alison G. Watson. Attribution is encouraged, though not required.
- * See licenses/cc0.txt for more information.
- *
- * ---------------------------------------------------------------------------|
- *
- * Math functions.
- *
- * ---------------------------------------------------------------------------|
- */
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ├──────────────────────────────────────────────────────────────────────────┤
+// │                                                                          │
+// │ Math functions.                                                          │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
 
 #ifndef m_math_h
 #define m_math_h

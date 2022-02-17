@@ -1,15 +1,14 @@
-/* ---------------------------------------------------------------------------|
- *
- * Distributed under the CC0 public domain license.
- * By Zoe Elsie Watson. Attribution is encouraged, though not required.
- * See licenses/cc0.txt for more information.
- *
- * ---------------------------------------------------------------------------|
- *
- * Cheats.
- *
- * ---------------------------------------------------------------------------|
- */
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │   By Zoe Elsie Watson. Attribution is encouraged, though not required.   │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ├──────────────────────────────────────────────────────────────────────────┤
+// │                                                                          │
+// │ Cheats.                                                                  │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
 
 #include "common.h"
 #include "w_world.h"

@@ -1,15 +1,15 @@
-/* ---------------------------------------------------------------------------|
- *
- * Distributed under the CC0 public domain license.
- * By Alison G. Watson. Attribution is encouraged, though not required.
- * See licenses/cc0.txt for more information.
- *
- * ---------------------------------------------------------------------------|
- *
- * Monster tracking and information.
- *
- * ---------------------------------------------------------------------------|
- */
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ├──────────────────────────────────────────────────────────────────────────┤
+// │                                                                          │
+// │ Monster tracking and information.                                        │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
+
 #if defined(monster_flag_x)
 monster_flag_x(full)
 monster_flag_x(nocase)

@@ -1,15 +1,14 @@
-/* ---------------------------------------------------------------------------|
- *
- * Distributed under the CC0 public domain license.
- * By Alison G. Watson. Attribution is encouraged, though not required.
- * See licenses/cc0.txt for more information.
- *
- * ---------------------------------------------------------------------------|
- *
- * CBI GUI data.
- *
- * ---------------------------------------------------------------------------|
- */
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ├──────────────────────────────────────────────────────────────────────────┤
+// │                                                                          │
+// │ CBI GUI data.                                                            │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
 
 #if defined(cbi_theme_x)
 

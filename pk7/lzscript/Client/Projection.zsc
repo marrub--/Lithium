@@ -1,16 +1,15 @@
-/* ---------------------------------------------------------------------------|
- *
- * Distributed under the CC0 public domain license.
- * By Zoe Elisabeth Watson. Attribution is encouraged, though not required.
- * See licenses/cc0.txt for more information.
- *
- * ---------------------------------------------------------------------------|
- *
- * This extends URANUS to new limits, allowing you to see insi-- okay
- * nevermind sorry
- *
- * ---------------------------------------------------------------------------|
- */
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │ By Zoe Elisabeth Watson. Attribution is encouraged, though not required. │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ├──────────────────────────────────────────────────────────────────────────┤
+// │                                                                          │
+// │ This extends URANUS to new limits, allowing you to see insi-- okay       │
+// │ nevermind sorry                                                          │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
 
 extend class Lith_URANUS;
 

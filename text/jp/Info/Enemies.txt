@@ -1,27 +1,27 @@
-## -*-Agw-LithTxt-*-----------------------------------------------------------|
-##
-## Distributed under the CC0 public domain license.
-## By Alison G. Watson. Attribution is encouraged, though not required.
-## See licenses/cc0.txt for more information.
-##
-## ---------------------------------------------------------------------------|
-##
-## Rank:
-##    \cu非居住者
-##    \cs下位者
-##    \cj居住者
-##    \cf貴族
-##    \cg僭主
-##    \cr大将\c-
-##
-## Threat:
-##    \csD
-##    \ciC
-##    \ckB
-##    \cgA
-##    \crE
-##
-## ---------------------------------------------------------------------------|
+## ╭-*-Agw-LithTxt-*-─────────────────────────────────────────────────────────╮
+## │                                                                          │
+## │             Distributed under the CC0 public domain license.             │
+## │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+## │                See licenses/cc0.txt for more information.                │
+## │                                                                          │
+## ├──────────────────────────────────────────────────────────────────────────┤
+## │                                                                          │
+## │ Rank:                                                                    │
+## │    \cu非居住者                                                            │
+## │    \cs下位者                                                             │
+## │    \cj居住者                                                             │
+## │    \cf貴族                                                               │
+## │    \cg僭主                                                               │
+## │    \cr大将\c-                                                            │
+## │                                                                          │
+## │ Threat:                                                                  │
+## │    \csD                                                                  │
+## │    \ciC                                                                  │
+## │    \ckB                                                                  │
+## │    \cgA                                                                  │
+## │    \crE                                                                  │
+## │                                                                          │
+## ╰──────────────────────────────────────────────────────────────────────────╯
 
 == \#INFO_SHORT_ZombieMan | フォーマー兵卒
 == \#INFO_TITLE_ZombieMan | 憑依人兵卒

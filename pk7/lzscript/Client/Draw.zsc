@@ -1,19 +1,18 @@
-/* ---------------------------------------------------------------------------|
- *
- * Distributed under the CC0 public domain license.
- * By Alison G. Watson. Attribution is encouraged, though not required.
- * See licenses/cc0.txt for more information.
- *
- * ---------------------------------------------------------------------------|
- *
- * The URANUS drawing system is essentially an instruction set with a
- * (very) simple state machine to draw stuff to the screen, either via ACS
- * or via ZScript. This is meant to replace HudMessage and allow a nicer,
- * unified drawing system between ZScript and ACS, usable by the playsim
- * while still providing maximum performance, as well as multiplayer compat.
- *
- * ---------------------------------------------------------------------------|
- */
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ├──────────────────────────────────────────────────────────────────────────┤
+// │                                                                          │
+// │ The URANUS drawing system is essentially an instruction set with a       │
+// │ (very) simple state machine to draw stuff to the screen, either via ACS  │
+// │ or via ZScript. This is meant to replace HudMessage and allow a nicer,   │
+// │ unified drawing system between ZScript and ACS, usable by the playsim    │
+// │ while still providing maximum performance.                               │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
 
 extend class Lith_URANUS;
 

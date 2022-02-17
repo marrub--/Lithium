@@ -1,17 +1,16 @@
-/* ---------------------------------------------------------------------------|
- *
- * Distributed under the CC0 public domain license.
- * By Alison G. Watson. Attribution is encouraged, though not required.
- * Predefined names and titles mostly taken from Kyle873's Doom RPG.
- * Used with permission.
- * See licenses/cc0.txt for more information.
- *
- * ---------------------------------------------------------------------------|
- *
- * Procedural monster name generation.
- *
- * ---------------------------------------------------------------------------|
- */
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+// │    Predefined names and titles mostly taken from Kyle873's Doom RPG.     │
+// │                          Used with permission.                           │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ├──────────────────────────────────────────────────────────────────────────┤
+// │                                                                          │
+// │ Procedural monster name generation.                                      │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
 
 #include "common.h"
 #include "w_world.h"

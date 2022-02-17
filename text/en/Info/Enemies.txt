@@ -1,27 +1,27 @@
-## -*-Agw-LithTxt-*-----------------------------------------------------------|
-##
-## Distributed under the CC0 public domain license.
-## By Alison G. Watson. Attribution is encouraged, though not required.
-## See licenses/cc0.txt for more information.
-##
-## ---------------------------------------------------------------------------|
-##
-## Rank:
-##    \cuNon-resident
-##    \csSubordinate
-##    \cjResident
-##    \cfNoble
-##    \cgTyrant
-##    \crOverlord\c-
-##
-## Threat:
-##    \csD
-##    \ciC
-##    \ckB
-##    \cgA
-##    \crE
-##
-## ---------------------------------------------------------------------------|
+## ╭-*-Agw-LithTxt-*-─────────────────────────────────────────────────────────╮
+## │                                                                          │
+## │             Distributed under the CC0 public domain license.             │
+## │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+## │                See licenses/cc0.txt for more information.                │
+## │                                                                          │
+## ├──────────────────────────────────────────────────────────────────────────┤
+## │                                                                          │
+## │ Rank:                                                                    │
+## │    \cuNon-resident                                                       │
+## │    \csSubordinate                                                        │
+## │    \cjResident                                                           │
+## │    \cfNoble                                                              │
+## │    \cgTyrant                                                             │
+## │    \crOverlord\c-                                                        │
+## │                                                                          │
+## │ Threat:                                                                  │
+## │    \csD                                                                  │
+## │    \ciC                                                                  │
+## │    \ckB                                                                  │
+## │    \cgA                                                                  │
+## │    \crE                                                                  │
+## │                                                                          │
+## ╰──────────────────────────────────────────────────────────────────────────╯
 
 ## Non-residents -------------------------------------------------------------|
 == \#INFO_SHORT_ZombieMan | Former Human

@@ -1,11 +1,11 @@
-/* ---------------------------------------------------------------------------|
- *
- * Distributed under the CC0 public domain license.
- * By Alison G. Watson & Yholl. Attribution is encouraged, though not required.
- * See licenses/cc0.txt for more information.
- *
- * ---------------------------------------------------------------------------|
- */
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │                       By Alison G. Watson & Yholl.                       │
+// │             Attribution is encouraged, though not required.              │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
 
 class Lith_FistCharge : Inventory {default {Inventory.MaxAmount 0x7FFFFFFF;}} /* Yes. */
 class Lith_FistHit : Powerup {default {Powerup.Duration 5;}}

@@ -1,18 +1,17 @@
-/* -*-C-*---------------------------------------------------------------------|
- *
- * Distributed under the CC0 public domain license.
- * By Alison G. Watson. Attribution is encouraged though not required.
- * See licenses/cc0.txt for more information.
- *
- * ---------------------------------------------------------------------------|
- *
- * This file describes the monsters and monster presets available to
- * this mod. You can write your own and it will add on to these
- * definitions as long as it's named "lithmons" and in the root of
- * your project.
- *
- * ---------------------------------------------------------------------------|
- */
+// ╭-*-C-*-───────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │   By Alison G. Watson. Attribution is encouraged though not required.    │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ├──────────────────────────────────────────────────────────────────────────┤
+// │                                                                          │
+// │ This file describes the monsters and monster presets available to        │
+// │ this mod. You can write your own and it will add on to these             │
+// │ definitions as long as it's named "lithmons" and in the root of          │
+// │ your project.                                                            │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
 
 /* Presets -------------------------------------------------------------------|
  *

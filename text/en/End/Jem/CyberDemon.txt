@@ -1,10 +1,10 @@
-## -*-Agw-LithTxt-*-----------------------------------------------------------|
-##
-## Distributed under the CC0 public domain license.
-## By Alison G. Watson. Attribution is encouraged, though not required.
-## See licenses/cc0.txt for more information.
-##
-## ---------------------------------------------------------------------------|
+## ╭-*-Agw-LithTxt-*-─────────────────────────────────────────────────────────╮
+## │                                                                          │
+## │             Distributed under the CC0 public domain license.             │
+## │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+## │                See licenses/cc0.txt for more information.                │
+## │                                                                          │
+## ╰──────────────────────────────────────────────────────────────────────────╯
 
 @@ \#ENDING_CyberDemon_Jem
 The tower collapses around you, crumpling like a facade made of paper.

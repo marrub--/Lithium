@@ -1,54 +1,53 @@
-/* ---------------------------------------------------------------------------|
- *
- * Distributed under the CC0 public domain license.
- * By Alison G. Watson. Attribution is encouraged, though not required.
- * See licenses/cc0.txt for more information.
- *
- * ---------------------------------------------------------------------------|
- *
- * Dialogue VM data. A 6502 emulator with extensions.
- *
- * Registers:
- *
- *    AC - Accumulator
- *    PC - Program Counter
- *    RX - X
- *    RY - Y
- *    SP - Stack Pointer
- *    SR - Processor State
- *
- * Extended registers:
- *
- *    UI - GUI State
- *    VA - VM Action
- *
- * Status bits:
- *
- *    B - Break Command (ignored)
- *    C - Carry
- *    D - Decimal Mode (ignored)
- *    I - Interrupt Disable (ignored)
- *    N - Negative
- *    V - Overflow
- *    Z - Zero
- *
- * Base instructions:
- *
- *    ADC AND ASL BCC BCS BEQ BIT BMI BNE BPL BRK BVC BVS CLC
- *    CLD CLI CLV CMP CPX CPY DEC DEX DEY EOR INC INX INY JMP
- *    JSR LDA LDX LDY LSR NOP ORA PHA PHP PLA PLP ROL ROR RTI
- *    RTS SBC SEC SED SEI STA STX STY TAX TAY TSX TXA TXS TYA
- *
- * Extended instructions:
- *
- *    JPG - Jump Page
- *    LDV - Load VM Action
- *    TRR - Trace Registers
- *    TRS - Trace Stack
- *    TRV - Trace Variables
- *
- * ---------------------------------------------------------------------------|
- */
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ├──────────────────────────────────────────────────────────────────────────┤
+// │                                                                          │
+// │ Dialogue VM data. A 6502 emulator with extensions.                       │
+// │                                                                          │
+// │ Registers:                                                               │
+// │                                                                          │
+// │    AC - Accumulator                                                      │
+// │    PC - Program Counter                                                  │
+// │    RX - X                                                                │
+// │    RY - Y                                                                │
+// │    SP - Stack Pointer                                                    │
+// │    SR - Processor State                                                  │
+// │                                                                          │
+// │ Extended registers:                                                      │
+// │                                                                          │
+// │    UI - GUI State                                                        │
+// │    VA - VM Action                                                        │
+// │                                                                          │
+// │ Status bits:                                                             │
+// │                                                                          │
+// │    B - Break Command (ignored)                                           │
+// │    C - Carry                                                             │
+// │    D - Decimal Mode (ignored)                                            │
+// │    I - Interrupt Disable (ignored)                                       │
+// │    N - Negative                                                          │
+// │    V - Overflow                                                          │
+// │    Z - Zero                                                              │
+// │                                                                          │
+// │ Base instructions:                                                       │
+// │                                                                          │
+// │    ADC AND ASL BCC BCS BEQ BIT BMI BNE BPL BRK BVC BVS CLC               │
+// │    CLD CLI CLV CMP CPX CPY DEC DEX DEY EOR INC INX INY JMP               │
+// │    JSR LDA LDX LDY LSR NOP ORA PHA PHP PLA PLP ROL ROR RTI               │
+// │    RTS SBC SEC SED SEI STA STX STY TAX TAY TSX TXA TXS TYA               │
+// │                                                                          │
+// │ Extended instructions:                                                   │
+// │                                                                          │
+// │    JPG - Jump Page                                                       │
+// │    LDV - Load VM Action                                                  │
+// │    TRR - Trace Registers                                                 │
+// │    TRS - Trace Stack                                                     │
+// │    TRV - Trace Variables                                                 │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
 
 #if defined(ACT)
 ACT(END_GAME)
