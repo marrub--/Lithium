@@ -13,7 +13,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-## Random Pickup Messages ----------------------------------------------------|
+## Random Pickup Messages ════════════════════════════════════════════════════╕
 == \#PK_UNCERTAIN_NUM | 8
 == \#PK_UNCERTAIN_000 | Yes.
 == \#PK_UNCERTAIN_001 | Maybe.
@@ -169,7 +169,7 @@ perced to the rooten.
 == \#PK_GET_092 | Honk if you're an underpaid %S
 == \#PK_GET_093 | YOU AM NO REAL %S
 
-## Random Weapon Names -------------------------------------------------------|
+## Random Weapon Names ═══════════════════════════════════════════════════════╕
 == \#PK_unknown_NUM | 2
 == \#PK_unknown_000 | Literally What The Fuck
 == \#PK_unknown_001 | How Even

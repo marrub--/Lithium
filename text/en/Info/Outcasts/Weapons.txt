@@ -6,7 +6,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-## Outcast Weapons -----------------------------------------------------------|
+## Outcast Weapons ═══════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ChargeFist | Charge Fist
 == \#INFO_TITLE_ChargeFist | Utsu Denkasou Assault Bracelet
 @@ \#INFO_DESCR_ChargeFist

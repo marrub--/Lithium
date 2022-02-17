@@ -23,7 +23,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-## Non-residents -------------------------------------------------------------|
+## Non-residents ═════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ZombieMan | Former Human
 == \#INFO_TITLE_ZombieMan | Possessed Human Rifleman
 %% \#INFO_DESCR_ZombieMan
@@ -288,7 +288,7 @@ man. The Cyber-Demon is an extremely cruel, warmongering beast that
 will destroy any target without prejudice for the glory of Hell.
 @@
 
-## ??? -----------------------------------------------------------------------|
+## ??? ═══════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Phantom | Phantom
 == \#INFO_TITLE_Phantom | $\#INFO_SHORT_Phantom
 %% \#INFO_DESCR_Phantom

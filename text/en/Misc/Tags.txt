@@ -58,7 +58,7 @@
 == \#TAG_UndeadWarrior   | Undead Warrior
 == \#TAG_Weredragon      | Weredragon
 
-## Status Effects ------------------------------------------------------------|
+## Status Effects ════════════════════════════════════════════════════════════╕
 == \#STAT_JET | Jetboost
 == \#STAT_LAG | Jetlagged
 == \#STAT_MKM | Marksman

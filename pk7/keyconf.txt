@@ -6,7 +6,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-// Key Sections --------------------------------------------------------------|
+// Key Sections ══════════════════════════════════════════════════════════════╕
 addkeysection "$LITH_CTRL_ACTIONS" Lith_Actions
 
 addmenukey "$LITH_CTRL_OPENCBI" lith_k_opencbi
@@ -28,7 +28,7 @@ addmenukey "$LITH_CTRL_TOGGRP2" "lith_k_toggrp 1"
 addmenukey "$LITH_CTRL_TOGGRP3" "lith_k_toggrp 2"
 addmenukey "$LITH_CTRL_TOGGRP4" "lith_k_toggrp 3"
 
-// Aliases -------------------------------------------------------------------|
+// Aliases ═══════════════════════════════════════════════════════════════════╕
 alias lith_k_opencbi "pukename Lith_KeyOpenCBI"
 
 alias lith_k_light "pukename Lith_KeyLight"
@@ -43,7 +43,7 @@ alias lith_k_toggrp "pukename Lith_KeyToggleAutoGroup %1"
 alias +lith_k_qact "+user4"
 alias -lith_k_qact "-user4"
 
-// Binds ---------------------------------------------------------------------|
+// Binds ═════════════════════════════════════════════════════════════════════╕
 defaultbind i lith_k_opencbi
 defaultbind g +lith_k_qact
 

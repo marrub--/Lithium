@@ -13,17 +13,18 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-/* Presets -------------------------------------------------------------------|
- *
- * Keys:
- * - name :: The name of the preset. This will be used in monster definitions.
- * - scr  :: The amount of score to make the monster give upon death. Scales
- *           off various factors like luck and the global multiplier option.
- * - exp  :: The amount of EXP to make the monster give upon death. Scales
- *           off various factors like rank and level.
- *
- * ---------------------------------------------------------------------------|
- */
+// ╭Presets───────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │ * Keys:                                                                  │
+// │ * - name :: The name of the preset. This will be used in monster         │
+// │             definitions.                                                 │
+// │ * - scr  :: The amount of score to make the monster give upon death.     │
+// │             Scales off various factors like luck and the global          │
+// │             multiplier option.                                           │
+// │ * - exp  :: The amount of EXP to make the monster give upon death.       │
+// │ *           Scales off various factors like rank and level.              │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
 
 presets {
    /* Tier 1 */
@@ -62,88 +63,94 @@ presets {
    name: AIMainframe scr: 10000000 exp: 9000;
 }
 
-/* Monster Definitions -------------------------------------------------------|
- *
- * Monster definitions are the main purpose of this file. They describe a
- * small, but vital, set of information about each monster that may exist.
- *
- * Note that earlier definitions will always override later ones. For
- * instance, if the class name contains "Zombieman", then a definition made
- * later, perhaps in another file, with the filter "Zombieman2" will *not*
- * be used at all.
- *
- * Each monster definition block is preceded with parentheses which have flags
- * in them. You can put as many flags in there as you want, or none.
- *
- * Flags:
- * - full    :: The class name (actor name in DECORATE) must *entirely* match
- *              the filter, not just partially. Useful for mod compatibility.
- * - nocase  :: The filter will be case insensitive.
- * - dark    :: Dark enemies are corrupted by Hell. Can you save them? Either
- *              way, they'll have six stars, and higher level scaling. Not
- *              recommended to be used by other mods, but it will work.
- * - angelic :: Angelic enemies are beyond saving and only serve their own
- *              will, the will of ultimate consumption. They have seven stars,
- *              and extreme level scaling. Not recommended to be used by other
- *              mods, but it will work.
- *
- * The right-most value will always override anything to the left. For
- * instance, if you have a monster using a preset, and then set the
- * =scr= key, it will use the scr value you provided instead of the
- * preset's.
- *
- * Example: =pre: ZombieMan scr: 500 type: zombie filter: "WeakZombie";=
- *
- * Keys:
- * - filter :: The filter, the most important part. This is a case-sensitive
- *             string that will be matched against each monster that spawns.
- *             If the monster's class name (actor name in DECORATE) contains
- *             this string, in full, then it will be considered to be the
- *             monster just defined, and will have all of its properties.
- * - type   :: The archetype of monster this falls under. This is used by some
- *             of the more subtle systems of Lithium; for instance, the
- *             post-game content, and boss maps. A list of archetypes are
- *             available below.
- * - pre    :: A preset, by name, to import values from into this filter.
- * - scr    :: Same as the key on presets.
- * - exp    :: Ditto.
- * - hacks  :: Hacks. Do not use this in mods. Intentionally undocumented.
- *
- * These are the archetypes of enemy, as described earlier.
- *
- * Types:
- * - zombie        :: A basic-bitch zombie. Might have a rifle or a pistol.
- * - zombiesg      :: A zombie with a shotgun. Watch out!
- * - zombiecg      :: A zombie with a chaingun. Oh shit.
- * - imp           :: An imp of some kind. Really, any small hell creature.
- * - demon         :: A sergeant of hell. Melee kinda enemy. Bitey, maybe.
- * - lostsoul      :: The soul of a demon ready to possess someone.
- * - mancubus      :: A big fucker with flamethrowers or something similar.
- * - arachnotron   :: Some kind of arachnid that might shoot plasma.
- * - cacodemon     :: A floating ball of adorable anger. Might hurt a lot.
- * - hellknight    :: A knight of hell. Likes to throw fire at you.
- * - baron         :: One step up from a knight of hell, some kind of landlord.
- *                    This is a boss. It must mark Baron replacements.
- * - revenant      :: An extremely angry skeleton. Loves to scream at you.
- * - painelemental :: A floating meatball of pure fear. Spawns enemies.
- * - archvile      :: Some asshole who revives enemies and might make you mad.
- * - mastermind    :: Absolutely huge fucking beast that goes rat-a-tat-tat.
- *                    This is a boss. It must mark Mastermind replacements.
- * - cyberdemon    :: Huge rocket-flinging oaf. Might stomp you. (Oh my.)
- *                    This is a boss. It must mark Cyberdemon replacements.
- * - phantom       :: A phantom. Do not use this in other mods please! It will
- *                    probably break something.
- * - angel         :: An angelic enemy. Not actually related to Heaven, just
- *                    milky dark energy boys. Be prepared for death if you use
- *                    this in another mod. (It probably won't break.)
- * - darkone       :: A being of pure dark energy. Harbingers of Ragnarok.
- *                    Be prepared for your dreams to become corrupted if you
- *                    use this in another mod. (It probably won't break.)
- *
- * ---------------------------------------------------------------------------|
- */
+// ╭Monster Definitions───────────────────────────────────────────────────────╮
+// │                                                                          │
+// │ Monster definitions are the main purpose of this file. They describe a   │
+// │ small, but vital, set of information about each monster that may exist.  │
+// │                                                                          │
+// │ Note that earlier definitions will always override later ones. For       │
+// │ instance, if the class name contains "Zombieman", then a definition made │
+// │ later, perhaps in another file, with the filter "Zombieman2" will *not*  │
+// │ be used at all.                                                          │
+// │                                                                          │
+// │ Each monster definition block is preceded with parentheses which have    │
+// │ flags in them. You can put as many flags in there as you want, or none.  │
+// │                                                                          │
+// │ Flags:                                                                   │
+// │ - full    :: The class name (actor name in DECORATE) must *entirely*     │
+// │              match the filter, not just partially. Useful for mod        │
+// │              compatibility.                                              │
+// │ - nocase  :: The filter will be case insensitive.                        │
+// │ - dark    :: Dark enemies are corrupted by Hell. Can you save them?      │
+// │              Either way, they'll have six stars, and higher level        │
+// │              scaling. Not recommended to be used by other mods, but it   │
+// │              will work.                                                  │
+// │ - angelic :: Angelic enemies are beyond saving and only serve their own  │
+// │              will, the will of ultimate consumption. They have seven     │
+// │              stars, and extreme level scaling. Not recommended to be     │
+// │              used by other mods, but it will work.                       │
+// │                                                                          │
+// │ The right-most value will always override anything to the left. For      │
+// │ instance, if you have a monster using a preset, and then set the         │
+// │ =scr= key, it will use the scr value you provided instead of the         │
+// │ preset's.                                                                │
+// │                                                                          │
+// │ Example: =pre: ZombieMan scr: 500 type: zombie filter: "WeakZombie";=    │
+// │                                                                          │
+// │ Keys:                                                                    │
+// │ - filter :: The filter, the most important part. This is a               │
+// │             case-sensitive string that will be matched against each      │
+// │             monster that spawns. If the monster's class name (actor name │
+// │             in DECORATE) contains this string, in full, then it will be  │
+// │             considered to be the monster just defined, and will have all │
+// │             of its properties.                                           │
+// │ - type   :: The archetype of monster this falls under. This is used by   │
+// │             some of the more subtle systems of Lithium; for instance,    │
+// │             the post-game content, and boss maps. A list of archetypes   │
+// │             are available below.                                         │
+// │ - pre    :: A preset, by name, to import values from into this filter.   │
+// │ - scr    :: Same as the key on presets.                                  │
+// │ - exp    :: Ditto.                                                       │
+// │ - hacks  :: Hacks. Do not use this in mods. Intentionally undocumented.  │
+// │                                                                          │
+// │ These are the archetypes of enemy, as described earlier.                 │
+// │                                                                          │
+// │ Types:                                                                   │
+// │ - zombie        :: A basic-bitch zombie. Might have a rifle or a pistol. │
+// │ - zombiesg      :: A zombie with a shotgun. Watch out!                   │
+// │ - zombiecg      :: A zombie with a chaingun. Oh shit.                    │
+// │ - imp           :: An imp of some kind. Really, any small hell creature. │
+// │ - demon         :: A sergeant of hell. Melee kinda enemy. Bitey, maybe.  │
+// │ - lostsoul      :: The soul of a demon ready to possess someone.         │
+// │ - mancubus      :: A big fucker with flamethrowers or something similar. │
+// │ - arachnotron   :: Some kind of arachnid that might shoot plasma.        │
+// │ - cacodemon     :: A floating ball of adorable anger. Might hurt a lot.  │
+// │ - hellknight    :: A knight of hell. Likes to throw fire at you.         │
+// │ - baron         :: One step up from a knight of hell, some kind of       │
+// │                    landlord. This is a boss. It must mark Baron          │
+// │                    replacements.                                         │
+// │ - revenant      :: An extremely angry skeleton. Loves to scream at you.  │
+// │ - painelemental :: A floating meatball of pure fear. Spawns enemies.     │
+// │ - archvile      :: Some asshole who revives enemies and might make you   │
+// │                    angry.                                                │
+// │ - mastermind    :: Absolutely huge fucking beast that goes               │
+// │                    rat-a-tat-tat. This is a boss. It must mark           │
+// │                    Mastermind replacements.                              │
+// │ - cyberdemon    :: Huge rocket-flinging oaf. Might stomp you. (Oh my.)   │
+// │                    This is a boss. It must mark Cyberdemon replacements. │
+// │ - phantom       :: A phantom. Do not use this in other mods please! It   │
+// │                    will probably break something.                        │
+// │ - angel         :: An angelic enemy. Not actually related to Heaven,     │
+// │                    just milky dark energy boys. Be prepared for death if │
+// │                    you use this in another mod. (It probably won't       │
+// │                    break.)                                               │
+// │ - darkone       :: A being of pure dark energy. Harbingers of Ragnarok.  │
+// │                    Be prepared for your dreams to become corrupted if    │
+// │                    you use this in another mod. (It probably won't       │
+// │                    break.)                                               │
+// ╰──────────────────────────────────────────────────────────────────────────╯
 
-/* Base Games -------------------------------------------------------------- */
+// Base Games ════════════════════════════════════════════════════════════════╕
 
 "" {
    /* Doom */
@@ -199,7 +206,7 @@ presets {
    pre: DSparil     type: cyberdemon  filter: "DSparil";
 }
 
-/* Lithium ----------------------------------------------------------------- */
+// Lithium ═══════════════════════════════════════════════════════════════════╕
 
 "full dark" {
    scr: 1000 exp: 0 type: phantom filter: "Lith_Boss_James";
@@ -215,7 +222,7 @@ presets {
    scr: 0 exp: 0 type: cyberdemon filter: "Lith_Steggles";
 }
 
-/* Map Compatibility ------------------------------------------------------- */
+// Map Compatibility ═════════════════════════════════════════════════════════╕
 
 "full" {
    /* ed4_rfo1.wad */
@@ -238,7 +245,7 @@ presets {
    pre: CyberDemon  type: cyberdemon filter: "Cheogsh";
 }
 
-/* Mod Compatibility ------------------------------------------------------- */
+// Mod Compatibility ═════════════════════════════════════════════════════════╕
 
 /* Rampancy */
 "full" {

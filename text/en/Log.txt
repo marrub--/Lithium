@@ -61,7 +61,7 @@
 == \#LOG_Petalite   | Petalite
 == \#LOG_Tourmaline | Tourmaline
 
-## CBI Upgrades (Marine) -----------------------------------------------------|
+## CBI Upgrades (Marine) ═════════════════════════════════════════════════════╕
 == \#LOG_CBI_MUpgr1      | $\#CBI_CPU2
 == \#LOG_CBI_MUpgr2      | $\#CBI_CPU3
 == \#LOG_CBI_MArmorInter | $\#CBI_ArmorInter
@@ -69,7 +69,7 @@
 == \#LOG_CBI_MWeapnInte2 | $\#CBI_WeapnInte2
 == \#LOG_CBI_MRDistInter | $\#CBI_RDistInter
 
-## CBI Upgrades (Cyber-Mage) -------------------------------------------------|
+## CBI Upgrades (Cyber-Mage) ═════════════════════════════════════════════════╕
 == \#LOG_CBI_CSlot3Spell | $\#CBI_Slot3Spell
 == \#LOG_CBI_CSlot4Spell | $\#CBI_Slot4Spell
 == \#LOG_CBI_CSlot5Spell | $\#CBI_Slot5Spell
@@ -77,7 +77,7 @@
 == \#LOG_CBI_CSlot7Spell | $\#CBI_Slot7Spell
 == \#LOG_CBI_CRDistInter | $\#CBI_RDistInter
 
-## CBI Upgrades (Dark Lord) --------------------------------------------------|
+## CBI Upgrades (Dark Lord) ══════════════════════════════════════════════════╕
 == \#LOG_CBI_DRuzuk     | Sub-Daggers & Motril
 == \#LOG_CBI_DZaruk     | Sub-Grenades
 == \#LOG_CBI_DZakwu     | Sub-Axe
@@ -85,7 +85,7 @@
 == \#LOG_CBI_DShield    | Shield
 == \#LOG_CBI_DDimDriver | Dimension Driver
 
-## Level Up ------------------------------------------------------------------|
+## Level Up ══════════════════════════════════════════════════════════════════╕
 == \#LOG_LevelUpStan | You feel stronger, somehow.
 == \#LOG_LevelUpJem  | [INFO] Memory restored: %iKiB
 == \#LOG_LevelUpFulk | \cj<\cdVital\cj>\c- :: %i inodes reclaimed.
@@ -94,7 +94,7 @@
 == \#LOG_LevelUpLuke | Your senses grow sharper.
 == \#LOG_LevelUpKiri | You feel some of your power return to you.
 
-## Boss Warnings -------------------------------------------------------------|
+## Boss Warnings ═════════════════════════════════════════════════════════════╕
 %% \#LOG_BossWarnStan
 \cgWarning: High demonic energy levels detected in area.
 
@@ -115,7 +115,7 @@
 == \#LOG_BossHear2 | \cgSomething is calling out to you.
 == \#LOG_BossHear3 | \cgYou feel intense pain throughout your whole body...
 
-## Auto-groups ---------------------------------------------------------------|
+## Auto-groups ═══════════════════════════════════════════════════════════════╕
 == \#LOG_AutoBuy1 | Auto-bought \cj%i\c- upgrade%s in \caSet 1\c-.
 == \#LOG_AutoBuy2 | Auto-bought \cj%i\c- upgrade%s in \cdSet 2\c-.
 == \#LOG_AutoBuy3 | Auto-bought \cj%i\c- upgrade%s in \cnSet 3\c-.

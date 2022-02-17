@@ -6,7 +6,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-## Quit Messages -------------------------------------------------------------|
+## Quit Messages ═════════════════════════════════════════════════════════════╕
 == QUITMSG1 | Hold it, your contract isn't complete yet!
 == QUITMSG2 | I got nothing.
 == QUITMSG3 | Leave before I make you leave!

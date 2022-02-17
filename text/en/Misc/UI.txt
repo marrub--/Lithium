@@ -139,7 +139,7 @@ CLOSED
 == \#SHOP_MUL_ENABLE  | Enabling will multiply score by \c%c%i\c-%%
 == \#SHOP_MUL_DISABLE | Disabling will multiply score by \c%c%i\c-%%
 
-## CBI Items -----------------------------------------------------------------|
+## CBI Items ═════════════════════════════════════════════════════════════════╕
 == \#CBI_PERF | Performance: %i\cbPerf
 == \#CBI_PUSE | In use: %i\cbPerf
 == \#CBI_WRAM | RAM: %iTiB

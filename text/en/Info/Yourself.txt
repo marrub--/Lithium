@@ -6,7 +6,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-## Backstory (Marine) --------------------------------------------------------|
+## Backstory (Marine) ════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_P114 | Project 114
 == \#INFO_TITLE_P114 | $\#INFO_SHORT_P114
 @@ \#INFO_DESCR_P114
@@ -22,7 +22,7 @@ other operatives to complete the mission with.
 Your advisor is Adam Lambert, and 11 generals currently oversee his and your
 actions on the field.
 
-## Backstory (Cyber-Mage) ----------------------------------------------------|
+## Backstory (Cyber-Mage) ════════════════════════════════════════════════════╕
 == \#INFO_SHORT_OPD2 | Op. D2
 == \#INFO_TITLE_OPD2 | Operation Deception 2
 @@ \#INFO_DESCR_OPD2

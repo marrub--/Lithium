@@ -45,7 +45,7 @@
 @@ \#BOSS_BAR_10_Stan
 \ctPrepare for your last breath.
 
-## Cyber-Demon ---------------------------------------------------------------|
+## Cyber-Demon ═══════════════════════════════════════════════════════════════╕
 @@ \#BOSS_CYB_1_Stan
 What? A human has ascended the tower?
 
@@ -97,7 +97,7 @@ anything but killing anyhow. Like a real demon. Heh heh.
 
 Prepare yourself.
 
-## Spider-Demon --------------------------------------------------------------|
+## Spider-Demon ══════════════════════════════════════════════════════════════╕
 @@ \#BOSS_SPI_1_Stan
 You have come to my lair?
 
@@ -152,7 +152,7 @@ You will not be the last.
 As for yourself, I will keep you as a pet. Laughable and disgusting as
 you are.
 
-## Icon of Sin ---------------------------------------------------------------|
+## Icon of Sin ═══════════════════════════════════════════════════════════════╕
 @@ \#BOSS_IOS_1_Stan
 I think it's about time I ended this already.
 

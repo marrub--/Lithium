@@ -43,7 +43,7 @@
 %% \#BOSS_BAR_10_Jem
 \ctPrepare to die.
 
-## Cyber-Demon ---------------------------------------------------------------|
+## Cyber-Demon ═══════════════════════════════════════════════════════════════╕
 @@ \#BOSS_CYB_1_Jem
 Interesting. Another one has climbed all the way up here.
 
@@ -95,7 +95,7 @@ Good.
 
 Now fuck off and die.
 
-## Spider-Demon --------------------------------------------------------------|
+## Spider-Demon ══════════════════════════════════════════════════════════════╕
 @@ \#BOSS_SPI_1_Jem
 A-hah! Finally one comes who...
 
@@ -157,7 +157,7 @@ by comparison. Burning a candle that ran out of wick long ago.
 
 Enough.
 
-## Icon of Sin ---------------------------------------------------------------|
+## Icon of Sin ═══════════════════════════════════════════════════════════════╕
 @@ \#BOSS_IOS_1_Jem
 You fucking scum.
 

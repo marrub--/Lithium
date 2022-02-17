@@ -141,7 +141,7 @@ Use at the expense of your world.
 == \#OB_Default_4 | %o dehumanized %hself.
 == \#OB_Default_5 | %o went poof.
 
-## Death Messages ------------------------------------------------------------|
+## Death Messages ════════════════════════════════════════════════════════════╕
 == \#DEATHMSG_01 | YOU ARE DEAD, DEAD, DEAD
 == \#DEATHMSG_02 | GAME OVER YEAAAAAAHHHHHHHHHHH
 == \#DEATHMSG_03 | MAYBE YOU SHOULD TRY AN EASIER MAP, LIKE OKU.
