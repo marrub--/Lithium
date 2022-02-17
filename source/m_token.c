@@ -126,6 +126,15 @@ begin:
          }
 
          unget();
+      } else if(ch == '/') {
+         tok1(tok_cmment);
+         getch();
+         for(i32 original_line = orig->line; !FEOF(fp); getch()) {
+            advLine();
+            if(orig->line != original_line) {
+               break;
+            }
+         }
       } else {
          unget();
          tok1(tok_div);
