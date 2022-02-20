@@ -22,6 +22,9 @@ enum Lith_PSprite {
    _psp_d_subweapon,
    _psp_flash_max,
 
+   _psp_rems_particle_first,
+   _psp_rems_particle_last = _psp_rems_particle_first + 70,
+
    _psp_overlay_hax = 69420,
 }
 

@@ -6,6 +6,31 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
+class Lith_RemsSparkSpawner : Actor {
+   default {
+      Radius 4;
+      Height 4;
+      Speed 7;
+      Damage 0;
+
+      Projectile;
+      +THRUACTORS
+      +NOCLIP
+   }
+
+   states
+   {
+   Spawn:
+      TNT1 A 1;
+   Death:
+      TNT1 A 0 {
+         for(int i = 0, j = Random(11, 13); i < j; i++)
+            A_SpawnParticle("Purple", SPF_FULLBRIGHT|SPF_RELATIVE, Random(3, 8), Random(1, 2), FRandom(-15, 15), FRandom(-1,1),FRandom(-1,1),FRandom(-1,1), FRandom(1, 16),FRandom(-0.1, 0.1),(Vel.Z*1.5)+FRandom(-1,1), 0.0, 0.0, -0.05, 0.98, -1);
+      }
+      stop;
+   }
+}
+
 class Lith_RemsBulletTrail : Actor {
    default {
       RenderStyle "Add";
@@ -24,10 +49,12 @@ class Lith_RemsBullet1 : FastProjectile {
       RenderStyle "Add";
       Radius 5;
       Height 5;
-      DamageFunction 100;
+      DamageFunction 34;
+      DamageType "Electric";
       Speed 100;
       MissileType "Lith_RemsBulletTrail";
       MissileHeight 8;
+      +ForcePain
       +FlatSprite
       +Bright
    }
@@ -41,7 +68,12 @@ class Lith_RemsBullet1 : FastProjectile {
       }
       loop;
    Death:
-      TNT1 A 0;
+      BLLT Y 0 {
+         a_startSound("weapons/shotgun/gauss/puff", lch_body, volume: 0.1);
+         a_setScale(0.5);
+         bFlatSprite = false;
+      }
+      BLLT YYYY 2 bright a_fadeOut;
       stop;
    }
 }
@@ -67,14 +99,34 @@ default {
    +Weapon.NoAutoFire
 }
 
-int m_steamy, m_fireLoop;
+override void tick() {
+   super.tick();
+   if(owner) {
+      for(int i = 0; i < m_particleLoop; ++i) {
+         owner.a_overlayOffset(_psp_rems_particle_first + i, fRandom(-16, 16), fRandom(-16, 16), WOF_INTERPOLATE|WOF_ADD);
+      }
+   }
+}
+
+action(weapon) void lith_a_decreaseParticles() {
+   invoker.m_particleAlpha -= 0.2;
+   if(invoker.m_particleAlpha < 0) {
+      return;
+   }
+   for(int i = 0; i < invoker.m_particleLoop; ++i) {
+      a_overlayAlpha(_psp_rems_particle_first + i, invoker.m_particleAlpha);
+   }
+}
+
+int m_steamy, m_fireLoop, m_particleLoop;
+double m_particleAlpha;
 
 states(Weapon) {
 Ready:
    REMS A 0 {
       if(invoker.m_steamy) {
          if(callAcs("Lith_Timer") % 3 == 0) {
-            a_fireProjectile("Lith_GunSmokeEmitter", frandom(-10, 10), 0, 1.5, 9, FPF_NOAUTOAIM, frandom(-10, 10));
+            a_fireProjectile("Lith_GunSmokeEmitter", frandom(-10, 10), 0, 1.5, 9, pitch: frandom(-10, 10));
          }
          invoker.m_steamy--;
       }
@@ -91,31 +143,66 @@ Select:
    REMS A 1 Lith_A_Raise(_raise_slow);
    wait;
 
+RemsParticle:
+   BLLT Y -1 bright;
+   stop;
 Fire:
-   REMS A 1 offset(0, 32) lith_a_setInterpolation(true);
-   REMS A 1 offset(1, 33) {
-      a_startSound("weapons/rems/fire", lch_weapon);
+   #### # 0 lith_jumpNoAmmo(4);
+   REMS A 1 offset(0, 32) {
+      lith_takeAmmo(4);
+      lith_a_setInterpolation(true);
+      a_startSound("weapons/rems/charge", lch_weapon3);
+      invoker.m_particleLoop = 0;
+      invoker.m_particleAlpha = 1.0;
       invoker.m_fireLoop = 0;
       invoker.m_steamy = 175;
    }
-   REMS B 1 offset(171, 88) bright;
+   REMS AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 {
+      a_overlayOffset(_psp_weapon, fRandom(-0.4, 0.7), fRandom(-0.4, 0.7), WOF_INTERPOLATE|WOF_ADD);
+      a_overlay(_psp_rems_particle_first + invoker.m_particleLoop, "RemsParticle");
+      a_overlayFlags(_psp_rems_particle_first + invoker.m_particleLoop, PSPF_ALPHA|PSPF_RENDERSTYLE|PSPF_FORCESTYLE, true);
+      a_overlayFlags(_psp_rems_particle_first + invoker.m_particleLoop, PSPF_ADDWEAPON|PSPF_ADDBOB, false);
+      a_overlayRenderStyle(_psp_rems_particle_first + invoker.m_particleLoop, STYLE_Add);
+      a_overlayScale(_psp_rems_particle_first + invoker.m_particleLoop, fRandom(0.1, 0.5));
+      a_overlayOffset(_psp_rems_particle_first + invoker.m_particleLoop, fRandom(0, 320), fRandom(120, 240));
+      ++invoker.m_particleLoop;
+   }
+   REMS B 1 offset(171, 88) bright a_startSound("weapons/rems/fire", lch_weapon);
    REMS C 1 offset(154, 81) bright;
 FireLoop:
    REMS BC 1 bright {
-      a_overlayOffset(_psp_weapon, fRandom(128, 164), FRandom(73, 80), WOF_INTERPOLATE);
-      a_fireProjectile("Lith_RemsBullet1", spawnofs_xy: fRandom(-2, 4), spawnheight: fRandom(8, 10));
-      a_fireProjectile("Lith_RemsBullet2", spawnofs_xy: fRandom(-2, 4), spawnheight: fRandom(5, 7));
-      a_stop();
+      a_overlayOffset(_psp_weapon, fRandom(128, 184), FRandom(80, 100), WOF_INTERPOLATE);
+      for(int i = 0; i < 2; ++i) {
+         a_fireProjectile("Lith_RemsBullet1", angle: fRandom(-2, 2), spawnofs_xy: fRandom(2, 8), spawnheight: fRandom(8, 10), flags: FPF_NOAUTOAIM, pitch: fRandom(-2, 2));
+         a_fireProjectile("Lith_RemsBullet2", spawnofs_xy: fRandom(2, 8), spawnheight: fRandom(5, 7));
+      }
+      Lith_GunSmoke("Lith_RemsSparkSpawner", 2, 8);
+      A_Recoil(0.7);
+      A_GunFlash("DummyFlash");
+      A_Quake(2, 15, 0, 128);
+      Lith_A_RecoilUp(fRandom(-0.2, 0.8));
       return invoker.m_fireLoop++ == 170 ? resolveState("FireDone") : state(null);
    }
    loop;
 FireDone:
-   REMS C 1 bright offset(151, 80);
+   REMS C 1 bright offset(151, 80) a_startSound("weapons/rems/firefinish", lch_weapon2);
    REMS B 1 bright offset(155, 76);
    REMS D 1 bright offset(141, 74);
-   REMS A 2 offset(4, 39);
-   REMS A 3 offset(2, 35);
-   REMS A 4 offset(1, 33) lith_a_setInterpolation(false);
+   REMS AA 1 offset(4, 39) lith_a_decreaseParticles;
+   REMS AAA 1 offset(2, 35) lith_a_decreaseParticles;
+   REMS A 4 offset(1, 33) {
+      lith_a_setInterpolation(false);
+      a_clearOverlays(_psp_rems_particle_first, _psp_rems_particle_last);
+      invoker.m_particleLoop = 0;
+   }
+   goto ReadySelector;
+FireEmpty:
+   REMS A 2 offset(3, 38);
+   REMS A 1 offset(7, 40);
+   REMS A 1 offset(5, 37) A_StartSound("weapons/rems/empty", lch_dryweapon);
+   REMS A 1 offset(4, 34);
+   REMS A 1 offset(2, 33);
+   REMS A 5 offset(1, 32);
    goto ReadySelector;
 }
 

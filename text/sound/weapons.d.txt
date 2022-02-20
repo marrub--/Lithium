@@ -114,7 +114,11 @@ weapons {
 
    rems {
       == lsnd/WeaponsD/Rems
-      fire Fire # Self-made
+      fire       Fire       # Self-made
+      charge     Charge     # ^
+      empty      FireEmpty  # Sound Ideas Series 6000
+      draw       Draw       # ^
+      firefinish FireFinish # Sigh - Introiutus/Kyrie
    }
 }
 

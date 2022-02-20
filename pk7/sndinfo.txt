@@ -661,6 +661,10 @@ weapons/fortune/draw lsnd/WeaponsD/FortuneGun/Draw
 $limit weapons/fortune/hit 0
 $limit weapons/fortune/spark 0
 weapons/rems/fire lsnd/WeaponsD/Rems/Fire
+weapons/rems/charge lsnd/WeaponsD/Rems/Charge
+weapons/rems/empty lsnd/WeaponsD/Rems/FireEmpty
+weapons/rems/draw lsnd/WeaponsD/Rems/Draw
+weapons/rems/firefinish lsnd/WeaponsD/Rems/FireFinish
 $alias weapons/unknown/pickup YOUSONOFABITCH
 $alias weapons/fist/pickup MMMMHMHMMMHMMM
 weapons/knife/swing1 lsnd/WeaponsM/Knife/Fire1
