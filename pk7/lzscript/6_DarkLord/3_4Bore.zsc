@@ -22,7 +22,7 @@ default
 action(Weapon) void Lith_A_Fire4Bore()
 {
    A_AlertMonsters();
-   lith_takeAmmo(8);
+   lith_takeAmmo(6);
    A_SetBlend("White", 0.2, 6);
    A_GunFlash("DummyFlash");
    Lith_A_GunSmoke(2, 8);
@@ -45,7 +45,7 @@ Select:
    loop;
 
 Fire:
-   #### # 0 lith_jumpNoAmmo(8);
+   #### # 0 lith_jumpNoAmmo(6);
    #### # 0 lith_a_setInterpolation(true);
    4BOR A 7 A_StartSound("weapons/4bore/fire", lch_weapon);
    4BOR G 1 offset(140, 121) Lith_A_Fire4Bore;
