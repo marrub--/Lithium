@@ -421,6 +421,10 @@ i32 P_playerColor() {
 
 alloc_aut(0) stkcall script static
 void P_doDepthMeter() {
+   if(!mapscleared) {
+      return;
+   }
+
    StartSound(ss_player_depthdown, lch_depth, 0, 1.0, ATTN_STATIC);
 
    str level_name = fast_strupper((ACS_BeginPrint(), ACS_PrintName(PRINTNAME_LEVELNAME), ACS_EndStrParam()));

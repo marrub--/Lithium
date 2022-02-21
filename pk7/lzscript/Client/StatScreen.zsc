@@ -10,18 +10,14 @@
 class Lith_STATUS : DoomStatusScreen;
 
 Font m_Font;
+int  m_Souls;
 
-int m_Souls;
-bool m_Ready;
-
-private void Lith_DrawSetq(int x, int y, string text)
-{
+private void Lith_DrawSetq(int x, int y, string text) {
    int lh = m_Font.getHeight() * 3 / 2;
    Screen.DrawText(m_Font, Font.CR_GREEN, x, 60+lh*y, text, DTA_Clean, true);
 }
 
-private void Lith_DrawPrct(int y, string text, int n, int m)
-{
+private void Lith_DrawPrct(int y, string text, int n, int m) {
    Lith_DrawSetq(50+y*2, y, text);
 
         if(n < 0) text = "'...)";
@@ -31,107 +27,27 @@ private void Lith_DrawPrct(int y, string text, int n, int m)
    Lith_DrawSetq(210, y, text);
 }
 
-private void Lith_DrawCent(int x, int y, string text)
-{
+private void Lith_DrawCent(int x, int y, string text) {
    Screen.DrawText(m_Font, Font.CR_GREEN, x - m_Font.stringWidth(text) / 2, y, text, DTA_Clean, true);
 }
 
-override void Start(wbstartstruct wbss)
-{
+override void Start(wbstartstruct wbss) {
    m_Font = Lith_URANUS.instance().fntBig();
    m_Souls = random(400, 700);
    S_StartSound("intermission/mid", lch_body, CHANF_UI | CHANF_LOOP, 0.43, ATTN_NONE);
    Super.Start(wbss);
 }
 
-override void UpdateNoState()
-{
-   if(--cnt <= 0)
-   {
-      End();
-      level.worldDone();
-   }
-}
-
-override void UpdateStats()
-{
-   switch(sp_state)
-   {
-   default:
-      Super.UpdateStats();
-      break;
-   case 9:
-      if(m_Ready) sp_state++;
-      break;
-   case 10:
+override void UpdateStats() {
+   if(sp_state == 10) {
       PlaySound("intermission/paststats");
       initShowNextLoc();
-      break;
+   } else {
+      Super.UpdateStats();
    }
 }
 
-override void Ticker()
-{
-   if(++bcnt == 1) StartMusic();
-
-   m_Ready = false;
-
-   for(int i = 0; i < MAXPLAYERS; i++) if(playeringame[i])
-   {
-      PlayerInfo p = players[i];
-
-      if(p.cmd.buttons & BT_USE)
-      {
-         if(sp_state == 2) cnt_kills [0] += 3;
-         if(sp_state == 4) cnt_items [0] += 3;
-         if(sp_state == 6) cnt_secret[0] += 3;
-         if(sp_state == 8) {cnt_time += 8; cnt_par += 8; cnt_total_time += 8;}
-         if(cnt_pause > 1) cnt_pause--;
-         if(cnt       > 1) cnt--;
-      }
-
-      if(cnt_kills [0] > plrs[me].skills ) cnt_kills [0] = plrs[me].skills;
-      if(cnt_items [0] > plrs[me].sitems ) cnt_items [0] = plrs[me].sitems;
-      if(cnt_secret[0] > plrs[me].ssecret) cnt_secret[0] = plrs[me].ssecret;
-
-      let tt  = Thinker.Tics2Seconds(plrs[me].stime);
-      let pt  = wbs.partime / Thinker.TICRATE;
-      let ttt = Thinker.Tics2Seconds(wbs.totaltime);
-
-      if(cnt_time       > tt ) cnt_time       = tt;
-      if(cnt_par        > pt ) cnt_par        = pt;
-      if(cnt_total_time > ttt) cnt_total_time = ttt;
-
-      if(p.cmd.buttons & BT_ALTATTACK)
-      {
-         switch(sp_state++) {
-         case 2: cnt_kills [0] = plrs[me].skills;  break;
-         case 4: cnt_items [0] = plrs[me].sitems;  break;
-         case 6: cnt_secret[0] = plrs[me].ssecret; break;
-         }
-      }
-
-      if(p.cmd.buttons ^ p.oldbuttons && (p.cmd.buttons & p.oldbuttons) == p.oldbuttons && p.bot == null)
-      {
-         m_Ready = true;
-         playerready[i] = true;
-      }
-
-      p.oldbuttons = p.buttons;
-   }
-
-   bg.updateAnimatedBack();
-
-   switch(curState)
-   {
-   case StatCount:   updateStats();       break;
-   case ShowNextLoc: updateShowNextLoc(); break;
-   case NoState:     updateNoState();     break;
-   }
-}
-
-override void DrawStats()
-{
+override void DrawStats() {
    Lith_DrawPrct(0, "* (setq kills", cnt_kills [0], wbs.maxkills );
    Lith_DrawPrct(1, "* (setq items", cnt_items [0], wbs.maxitems );
    Lith_DrawPrct(2, "* (setq scrts", cnt_secret[0], wbs.maxsecret);
@@ -154,12 +70,9 @@ override void DrawStats()
       Screen.DrawText(m_Font, Font.CR_GREEN, 160 + SP_TIMEX, SP_TIMEY, "(par)", DTA_Clean, true);
       DrawTimeFont(m_Font, 320 - SP_TIMEX, SP_TIMEY, cnt_par, Font.CR_GREEN);
    }
-
-   Screen.DrawText(smallfont, Font.CR_GREEN, 5, 0, "Hold Use to speed up\nHold Alt-Fire to skip", DTA_VirtualWidth, 320, DTA_VirtualHeight, 240);
 }
 
-override void DrawShowNextLoc()
-{
+override void DrawShowNextLoc() {
    bg.drawBackground(CurState, true, snl_pointeron);
 
    if(bcnt % 20 < 10) Lith_DrawCent(160, 70, "(Enter-Area)");
