@@ -15,22 +15,26 @@
 #include "p_player.h"
 #include "w_world.h"
 
-/* Extern Functions -------------------------------------------------------- */
-
-i96 P_Shop_Cost(struct shopdef const *def)
-{
-   return P_Discount(def->cost);
+bool P_Shop_CanBuy(struct shopdef *def) {
+   if(pl.score - def->cost >= 0) {
+      switch(def->shoptype) {
+      case _shop_items:    return Shop_CanBuy((struct shopitem const *)def);
+      case _shop_upgrades: return Upgr_CanBuy((struct upgrade  const *)def);
+      }
+   }
+   return false;
 }
 
-bool P_Shop_CanBuy(struct shopdef const *def, void *obj)
-{
-   return pl.score - P_Shop_Cost(def) >= 0 &&
-          (def->ShopCanBuy ? def->ShopCanBuy(def, obj) : true);
+bool P_Shop_Give(struct shopdef *def, i32 tid) {
+   switch(def->shoptype) {
+   case _shop_items:    return Shop_Give((struct shopitem const *)def, tid);
+   case _shop_upgrades: return Upgr_Give((struct upgrade  const *)def, tid);
+   }
+   return false;
 }
 
-bool P_Shop_Buy(struct shopdef const *def, void *obj, cstr namefmt, bool nodelivery, bool nolog)
-{
-   if(!P_Shop_CanBuy(def, obj))
+bool P_Shop_Buy(struct shopdef *def, cstr namefmt, bool nodelivery, bool nolog) {
+   if(!P_Shop_CanBuy(def))
       return false;
 
    if(!nolog) {
@@ -45,30 +49,38 @@ bool P_Shop_Buy(struct shopdef const *def, void *obj, cstr namefmt, bool nodeliv
       }
    }
 
-   P_Scr_Take(P_Shop_Cost(def));
+   P_Scr_Take(def->cost);
 
    bool delivered = false;
 
-   if(!nodelivery && CVarGetI(sc_player_teleshop))
-   {
+   if(!nodelivery && CVarGetI(sc_player_teleshop)) {
       i32 tid;
 
       struct k32v3 v = trace_from(pl.yaw, pl.pitch, 128, pl.viewheight);
 
-      if(ACS_Spawn(so_BoughtItem, v.x, v.y, v.z, tid = ACS_UniqueTID()))
-      {
-         if(def->ShopGive(def, obj, tid))
+      if(ACS_Spawn(so_BoughtItem, v.x, v.y, v.z, tid = ACS_UniqueTID())) {
+         if(P_Shop_Give(def, tid)) {
             pl.logH(1, tmpstr(lang(sl_log_delivered)));
-         else
+         } else {
             ACS_Thing_Remove(tid);
+         }
 
          delivered = true;
-      }
-      else
+      } else {
          pl.logH(1, tmpstr(lang(sl_log_nodeliver)));
+      }
    }
 
-   if(!delivered) def->ShopBuy(def, obj);
+   if(!delivered) {
+      switch(def->shoptype) {
+      case _shop_items:
+         Shop_Buy((struct shopitem const *)def);
+         break;
+      case _shop_upgrades:
+         P_Upg_SetOwned((struct upgrade *)def);
+         break;
+      }
+   }
 
    return true;
 }

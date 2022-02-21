@@ -13,15 +13,11 @@
 #include "common.h"
 #include "w_world.h"
 
-/* Types ------------------------------------------------------------------- */
-
 struct witem
 {
    i32 weight;
    cstr item;
 };
-
-/* Static Objects ---------------------------------------------------------- */
 
 static
 struct witem const garmor[] = {
@@ -79,8 +75,6 @@ struct witem const abonus[] = {
    BonusItems(1000),
 };
 
-/* Static Functions -------------------------------------------------------- */
-
 static
 cstr RandomWeighted(struct witem const *l, i32 c)
 {
@@ -90,8 +84,6 @@ cstr RandomWeighted(struct witem const *l, i32 c)
 
    return nil;
 }
-
-/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr(OBJ "RandomSpawn")
 void Sc_RandomSpawn(i32 rsn)

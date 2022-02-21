@@ -54,8 +54,6 @@
       _cur->next = nil; \
    })
 
-/* Type Definitions -------------------------------------------------------- */
-
 struct list {
    struct list **prev, *next;
    void        *data;

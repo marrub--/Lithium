@@ -14,8 +14,6 @@
 #include "p_hudid.h"
 #include "w_world.h"
 
-/* Scripts ----------------------------------------------------------------- */
-
 script_str ext("ACS") addr(OBJ "Blade")
 void Sc_Blade(bool hit)
 {

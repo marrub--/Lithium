@@ -12,8 +12,6 @@
 
 #include "d_compile.h"
 
-/* Static Functions -------------------------------------------------------- */
-
 static
 i32 CodeABS(struct compiler *d, cstr reg) {
    struct token *tok = d->tb.get();
@@ -251,8 +249,6 @@ bool CodeZY(struct compiler *d, u32 code) {
 
    return false;
 }
-
-/* Extern Functions -------------------------------------------------------- */
 
 void Dlg_GetStmt_Asm(struct compiler *d) {
    struct token *tok;

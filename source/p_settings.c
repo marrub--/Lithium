@@ -14,8 +14,6 @@
 #include "p_player.h"
 #include "w_world.h"
 
-/* Types ------------------------------------------------------------------- */
-
 enum {
    _left = 2,
    _rght = 280,
@@ -61,8 +59,6 @@ struct set_parm {
    i32 x, y;
    struct setting const *st;
 };
-
-/* Static Functions -------------------------------------------------------- */
 
 #define SG_cvBody(type, name, suff) \
    script static \
@@ -202,8 +198,6 @@ static
 bool S_isEnabled(struct setting const *st) {
    return !st->pclass || pl.pclass & st->pclass;
 }
-
-/* Static Objects ---------------------------------------------------------- */
 
 #define S_bndi(min, max) .bnd = {.i = {min, max}}
 #define S_bndk(min, max) .bnd = {.k = {min, max}}
@@ -401,8 +395,6 @@ struct {
    Typ(wld),
 #undef Typ
 };
-
-/* Extern Functions -------------------------------------------------------- */
 
 void P_CBI_TabSettings(struct gui_state *g) {
    i32 set_num = 0;

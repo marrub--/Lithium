@@ -481,13 +481,13 @@ void HUD_BottomLeft() {
    }
 }
 
-void Upgr_HeadsUpDisp_Activate(struct upgrade *upgr) {
+void Upgr_HeadsUpDisp_Activate(void) {
    lerplli_init(&udata.score,     pl.score,     4);
    lerplli_init(&udata.health,    pl.health,    1);
    lerplli_init(&udata.overdrive, pl.overdrive, 1);
 }
 
-void Upgr_HeadsUpDisp_Render(struct upgrade *upgr) {
+void Upgr_HeadsUpDisp_Render(void) {
    if(!pl.hudenabled) return;
 
    hudtype = CVarGetI(sc_hud_type);

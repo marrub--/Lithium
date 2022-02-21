@@ -13,53 +13,28 @@
 #include "common.h"
 #include "p_player.h"
 
-/* Types ------------------------------------------------------------------- */
-
-struct shopitem
-{
-   anonymous struct shopdef shopdef;
-   i32 pclass;
-   i32 count;
-   str classname;
-   bool weapon;
-};
-
-/* Static Objects ---------------------------------------------------------- */
-
 static
 struct shopitem shopitems[] = {
-/* {{"Name-----------", "BIP------------", Cost---}, Class, Cnt-, "Class---------------", [Flags]}, */
-   {{"ChargeFist",      "ChargeFist",       100000}, gO, 1, sOBJ "ChargeFist",      true},
-   {{"Revolver",        "Revolver",         500000}, pM, 1, sOBJ "Revolver",        true},
-   {{"LazShotgun",      "LazShotgun",      1800000}, pM, 1, sOBJ "LazShotgun",      true},
-   {{"SniperRifle",     "SniperRifle",     1800000}, pM, 1, sOBJ "SniperRifle",     true},
-   {{"MissileLauncher", "MissileLauncher", 2500000}, gO, 1, sOBJ "MissileLauncher", true},
-   {{"PlasmaDiffuser",  "PlasmaDiffuser",  2500000}, gO, 1, sOBJ "PlasmaDiffuser",  true},
+   {{_shop_items, "ChargeFist",      "ChargeFist",       100000}, gO, 1, sOBJ "ChargeFist",      true},
+   {{_shop_items, "Revolver",        "Revolver",         500000}, pM, 1, sOBJ "Revolver",        true},
+   {{_shop_items, "LazShotgun",      "LazShotgun",      1800000}, pM, 1, sOBJ "LazShotgun",      true},
+   {{_shop_items, "SniperRifle",     "SniperRifle",     1800000}, pM, 1, sOBJ "SniperRifle",     true},
+   {{_shop_items, "MissileLauncher", "MissileLauncher", 2500000}, gO, 1, sOBJ "MissileLauncher", true},
+   {{_shop_items, "PlasmaDiffuser",  "PlasmaDiffuser",  2500000}, gO, 1, sOBJ "PlasmaDiffuser",  true},
 };
 
-/* Static Functions -------------------------------------------------------- */
-
-static
-bool Shop_CanBuy(struct shopdef const *, void *item_)
-{
-   struct shopitem *item = item_;
+bool Shop_CanBuy(struct shopitem const *item) {
    i32 cur = InvNum(item->classname);
    i32 max = InvMax(item->classname);
    return max == 0 || cur < max;
 }
 
-static
-void Shop_Buy(struct shopdef const *, void *item_)
-{
-   struct shopitem *item = item_;
+void Shop_Buy(struct shopitem const *item) {
    pl.itemsbought++;
    InvGive(item->classname, item->count);
 }
 
-static
-bool Shop_Give(struct shopdef const *, void *item_, i32 tid)
-{
-   struct shopitem *item = item_;
+bool Shop_Give(struct shopitem const *item, i32 tid) {
    pl.itemsbought++;
    if(item->weapon) {
       PtrInvGive(pl.tid, item->classname, item->count);
@@ -70,21 +45,7 @@ bool Shop_Give(struct shopdef const *, void *item_, i32 tid)
    }
 }
 
-/* Extern Functions -------------------------------------------------------- */
-
-void Shop_MInit(void)
-{
-   for(i32 i = 0; i < countof(shopitems); i++)
-   {
-      struct shopitem *info = &shopitems[i];
-      info->ShopBuy    = Shop_Buy;
-      info->ShopCanBuy = Shop_CanBuy;
-      info->ShopGive   = Shop_Give;
-   }
-}
-
-void P_CBI_TabShop(struct gui_state *g)
-{
+void P_CBI_TabShop(struct gui_state *g) {
    i32 nitems = 0;
    for(i32 i = 0; i < countof(shopitems); i++) {
       if(shopitems[i].pclass & pl.pclass)
@@ -115,15 +76,15 @@ void P_CBI_TabShop(struct gui_state *g)
 
    G_Clip(g, g->ox+98, g->oy+17, 190, 170, 184);
 
-   PrintTextFmt("%s\Cnscr", scoresep(P_Shop_Cost(&item->shopdef)));
+   PrintTextFmt("%s\Cnscr", scoresep(item->shopdef.cost));
    PrintText(sf_smallfnt, g->defcr, g->ox+98,1, g->oy+17,1);
 
    PrintText_str(ns(lang_fmt(LANG "SHOP_DESCR_%s", item->name)), sf_smallfnt, g->defcr, g->ox+98,1, g->oy+27,1);
 
    G_ClipRelease(g);
 
-   if(G_Button(g, tmpstr(lang(sl_buy)), 98, 192, !P_Shop_CanBuy(&item->shopdef, item), .fill = &CBIState(g)->buyfill))
-      P_Shop_Buy(&item->shopdef, item, LANG "SHOP_TITLE_%s%s", false);
+   if(G_Button(g, tmpstr(lang(sl_buy)), 98, 192, !P_Shop_CanBuy(&item->shopdef), .fill = &CBIState(g)->buyfill))
+      P_Shop_Buy(&item->shopdef, LANG "SHOP_TITLE_%s%s", false);
 }
 
 /* EOF */

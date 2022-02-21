@@ -15,8 +15,6 @@
 #include "p_bip.h"
 #include "m_list.h"
 
-/* Static Functions -------------------------------------------------------- */
-
 static
 void EncryptedBody(struct page *page, char *bodytext) {
    faststrcpy_str(bodytext,
@@ -328,8 +326,6 @@ void SearchUI(struct gui_state *g) {
       PrintText_str(ns(lang(sl_bip_no_results)), sf_smallfnt, CR_DARKGREY, g->ox+57,0, g->oy+82,0);
    }
 }
-
-/* Extern Functions -------------------------------------------------------- */
 
 void P_CBI_TabBIP(struct gui_state *g) {
    i32 avail, max = 0;

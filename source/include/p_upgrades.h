@@ -20,21 +20,25 @@
 #include "m_list.h"
 
 #define P_Upg_Buy(upgr, ...) \
-   P_Shop_Buy(&(upgr)->info->shopdef, (upgr), LANG "UPGRADE_TITLE_%s%s", __VA_ARGS__)
+   P_Shop_Buy(&(upgr)->shopdef, LANG "UPGRADE_TITLE_%s%s", __VA_ARGS__)
 
 #define for_upgrade(name) \
    for(i32 _i = 0; _i < UPGR_MAX; _i++) \
       if(get_bit(pl.upgrades[_i].flags, _ug_available)) \
          __with(struct upgrade *name = &pl.upgrades[_i];)
 
-extern struct upgradeinfo upgrinfo[UPGR_MAX];
+extern struct upgrade upgrinfo[UPGR_MAX];
 
-/* These are included here so the compiler may check the function signatures. */
-#define Fn_F(n, cb) void Upgr_##n##_##cb(struct upgrade *upgr);
-#define Fn_S(n, cb) script void Upgr_##n##_##cb(struct upgrade *upgr);
+#define A
+#define D
+#define U
+#define E
+#define R
+#define Case(n)
+#define Fn(n, cb) void Upgr_##n##_##cb(void);
 #include "u_func.h"
-
-void Upgr_MInit(void);
+#undef Fn
+#undef Case
 
 script void P_Upg_PInit(void);
 void P_Upg_PQuit(void);
@@ -42,5 +46,8 @@ void P_Upg_PDeinit(void);
 void P_Upg_PMInit(void);
 
 void P_Upg_Enter(void);
+
+bool Upgr_CanBuy(struct upgrade const *upgr);
+bool Upgr_Give(struct upgrade const *upgr, i32 tid);
 
 #endif

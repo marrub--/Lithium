@@ -187,8 +187,6 @@ end
       hdr("p_weapons.h"),
       hdr("u_common.h"),
       hdr("u_data.h"),
-      hdr("u_func_beg.h"),
-      hdr("u_func_end.h"),
       hdr("w_monster.h"),
       hdr("w_world.h"),
    ],

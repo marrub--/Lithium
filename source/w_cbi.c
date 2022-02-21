@@ -97,8 +97,6 @@ void CBI_InstallSpawned(void) {
    cbispawn = 0;
 }
 
-/* Scripts ----------------------------------------------------------------- */
-
 script_str ext("ACS") addr(OBJ "CbiItemWasSpawned")
 void Sc_CbiItemWasSpawned(i32 num) {
    set_bit(cbispawn, num);

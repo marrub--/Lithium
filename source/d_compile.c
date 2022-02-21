@@ -13,8 +13,6 @@
 #include "d_compile.h"
 #include "m_trie.h"
 
-/* Static Functions -------------------------------------------------------- */
-
 #ifndef NDEBUG
 script static
 bool chtf_dbg_dlg(cheat_params_t const params) {
@@ -133,8 +131,6 @@ void Dlg_GetTop_Prog(struct compiler *d, u32 act, u32 beg, u32 end) {
    }
    unwrap(&d->res);
 }
-
-/* Extern Functions -------------------------------------------------------- */
 
 u32 Dlg_WriteCode(struct dlg_def const *def, u32 c, u32 i) {
    u32 c2, c3;

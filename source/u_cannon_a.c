@@ -14,13 +14,9 @@
 
 #include <math.h>
 
-/* Extern Functions -------------------------------------------------------- */
-
-void Upgr_Cannon_A_Deactivate(struct upgrade *upgr) {
+void Upgr_Cannon_A_Deactivate(void) {
    InvGive(so_GTFO, 1);
 }
-
-/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr(OBJ "PunctuatorFire")
 void Sc_PunctuatorFire(void) {

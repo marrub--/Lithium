@@ -15,8 +15,6 @@
 #include "m_token.h"
 #include "m_tokbuf.h"
 
-/* Scripts ----------------------------------------------------------------- */
-
 script_str ext("ACS") addr(OBJ "CSLoadMap")
 void Sc_CSLoadMap(void)
 {

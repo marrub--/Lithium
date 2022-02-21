@@ -48,8 +48,6 @@
    else if(ch      == c2) tok1(tt2); \
    else                   (unget(), tok1(tt1))
 
-/* Extern Functions -------------------------------------------------------- */
-
 void TokParse(FILE *fp, struct token *tok, struct origin *orig) {
    if(!tok || !fp || !orig) return;
 

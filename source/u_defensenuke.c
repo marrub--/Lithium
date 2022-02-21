@@ -12,9 +12,7 @@
 
 #include "u_common.h"
 
-/* Extern Functions -------------------------------------------------------- */
-
-void Upgr_DefenseNuke_Enter(struct upgrade *upgr)
+void Upgr_DefenseNuke_Enter(void)
 {
    ServCallI(sm_Nuke);
 }

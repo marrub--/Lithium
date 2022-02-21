@@ -24,8 +24,7 @@ void DoAdrenaline() {
    UnfreezeTime(true);
 }
 
-script
-void Upgr_Adrenaline_Update(struct upgrade *upgr) {
+void Upgr_Adrenaline_Update(void) {
    if(!has_status(so_StatAdrenalineCharging) &&
       !has_status(so_StatAdrenalineCharged) &&
       !has_status(so_StatAdrenaline))
@@ -39,7 +38,7 @@ void Upgr_Adrenaline_Update(struct upgrade *upgr) {
    }
 }
 
-void Upgr_Adrenaline_Deactivate(struct upgrade *upgr) {
+void Upgr_Adrenaline_Deactivate(void) {
    rem_status(so_StatAdrenaline);
    rem_status(so_StatAdrenalineCharging);
    rem_status(so_StatAdrenalineCharged);

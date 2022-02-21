@@ -14,8 +14,6 @@
 
 #define udata pl.upgrdata.reactarmor
 
-/* Static Objects ---------------------------------------------------------- */
-
 static
 struct {cstr abbr, full;} const ArmorNames[] = {
    "BUL", "Bullets",
@@ -28,8 +26,6 @@ struct {cstr abbr, full;} const ArmorNames[] = {
    "ICE", "Ice",
    "HZD", "Hazard",
 };
-
-/* Static Functions -------------------------------------------------------- */
 
 static
 void RA_Take(i32 n)
@@ -50,9 +46,7 @@ void RA_Give(cstr name, i32 n)
    InvGive(StrParam(OBJ "RA_%s%i", name, n), 1);
 }
 
-/* Extern Functions -------------------------------------------------------- */
-
-void Upgr_ReactArmor_Deactivate(struct upgrade *upgr)
+void Upgr_ReactArmor_Deactivate(void)
 {
    udata.activearmor = 0;
 
@@ -60,7 +54,7 @@ void Upgr_ReactArmor_Deactivate(struct upgrade *upgr)
    RA_Take(2);
 }
 
-void Upgr_ReactArmor_Render(struct upgrade *upgr)
+void Upgr_ReactArmor_Render(void)
 {
    if(udata.activearmor && CVarGetI(sc_hud_showarmorind))
    {
@@ -70,8 +64,6 @@ void Upgr_ReactArmor_Render(struct upgrade *upgr)
       PrintTextX(sf_bigupper, CR_LIGHTBLUE, 32,1, 217,0, _u_no_unicode);
    }
 }
-
-/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr(OBJ "RA_Give")
 void Sc_GiveRA(i32 num)

@@ -15,15 +15,11 @@
 
 #define udata pl.upgrdata.magic
 
-/* Types ------------------------------------------------------------------- */
-
 struct magic_info {
    i32 st;
    i32 x, y;
    cstr name;
 };
-
-/* Static Objects ---------------------------------------------------------- */
 
 static
 struct magic_info const minf[] = {
@@ -36,8 +32,6 @@ struct magic_info const minf[] = {
    {cupg_c_slot7spell, 130, 100, "Cercle"  },
 };
 
-/* Static Functions -------------------------------------------------------- */
-
 script static
 void GiveMagic(struct magic_info const *m)
 {
@@ -45,7 +39,7 @@ void GiveMagic(struct magic_info const *m)
 }
 
 script static
-void UpdateMagicUI(struct upgrade *upgr)
+void UpdateMagicUI(void)
 {
    struct gui_state *g = &udata.gst;
 
@@ -123,10 +117,7 @@ void SetMagicUI(bool on)
    }
 }
 
-/* Extern Functions -------------------------------------------------------- */
-
-script
-void Upgr_Magic_Update(struct upgrade *upgr)
+void Upgr_Magic_Update(void)
 {
    k32 manaperc = pl.mana / (k32)pl.manamax;
 
@@ -141,7 +132,7 @@ void Upgr_Magic_Update(struct upgrade *upgr)
       SetMagicUI(false);
 
    if(udata.ui)
-      UpdateMagicUI(upgr);
+      UpdateMagicUI();
 
    if(manaperc >= 0.7)
       for(i32 i = 0; i < 5 * manaperc; i++)
@@ -161,7 +152,7 @@ void Upgr_Magic_Update(struct upgrade *upgr)
    }
 }
 
-void Upgr_Magic_Render(struct upgrade *upgr)
+void Upgr_Magic_Render(void)
 {
    if(!pl.hudenabled) return;
 
@@ -179,8 +170,6 @@ void Upgr_Magic_Render(struct upgrade *upgr)
    PrintSprite(sp_HUD_C_ManaBar2, 2,1, 219,2);
    ClearClip();
 }
-
-/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr(OBJ "SetMagicUI")
 void Sc_SetMagicUI(bool on)

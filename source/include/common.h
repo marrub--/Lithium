@@ -156,8 +156,6 @@
 #define InvNum  ACS_CheckInventory
 #define InvTake ACS_TakeInventory
 
-/* Types ------------------------------------------------------------------- */
-
 #ifndef NDEBUG
 enum {
    log_dev,   /* general debug info */
@@ -183,8 +181,6 @@ enum {
 };
 #endif
 
-/* Extern Functions -------------------------------------------------------- */
-
 void FadeFlash(i32 r, i32 g, i32 b, k32 amount, k32 seconds);
 script optargs(1) i32 PtrTID(i32 tid, i32 ptr);
 script optargs(1) i32 PtrPlayerNumber(i32 tid, i32 ptr);
@@ -201,8 +197,6 @@ void Dbg_PrintMem(void const *data, mem_size_t size);
 void Log(cstr fmt, ...);
 #endif
 
-/* Extern Objects ---------------------------------------------------------- */
-
 #ifndef NDEBUG
 extern str dbgstat[],  dbgnote[];
 extern i32 dbgstatnum, dbgnotenum;
@@ -211,6 +205,11 @@ extern i32 dbgstatnum, dbgnotenum;
 #define dbgflags(flags) get_bit(CVarGetI(sc_debug_flags), flags)
 #define dbglevel_any()  !!CVarGetI(sc_debug_level)
 #define dbgflags_any()  !!CVarGetI(sc_debug_flags)
-#endif
+#else
+#define dbglevel(level) false
+#define dbgflags(flags) false
+#define dbglevel_any()  false
+#define dbgflags_any()  false
+#end
 
 #endif

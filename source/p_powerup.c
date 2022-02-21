@@ -15,8 +15,6 @@
 #include "p_hudid.h"
 #include "w_world.h"
 
-/* Scripts ----------------------------------------------------------------- */
-
 alloc_aut(0) script_str ext("ACS") addr(OBJ "DOGS")
 void Sc_DOGS(void) {
    i32 tid = ACS_UniqueTID();
@@ -112,20 +110,5 @@ bool Sc_CheckHealth(void) {
    if(!P_None()) return pl.health < pl.maxhealth;
    return 0;
 }
-
-#define set_discount() pl.discount = 0.9
-
-script_str ext("ACS") addr(OBJ "Discount")
-void Sc_Discount(void) {
-   set_discount();
-}
-
-script static
-bool chtf_discount(cheat_params_t const params) {
-   set_discount();
-   return true;
-}
-
-struct cheat cht_discount = cheat_s("pgtaxevasion", 0, chtf_discount, "Dutch Sandwich initiated");
 
 /* EOF */

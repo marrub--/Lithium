@@ -32,8 +32,6 @@ cbi_theme_x(Trans)
 
 #define CBIState(g) ((struct cbistate *)((g)->state))
 
-/* Type Definitions -------------------------------------------------------- */
-
 enum {
    cbi_tab_arsenal,
    cbi_tab_status,
@@ -105,8 +103,6 @@ struct cbi {
    u32 oldtheme;
    u32 pruse;
 };
-
-/* Extern Functions -------------------------------------------------------- */
 
 void CBI_InstallSpawned(void);
 

@@ -12,8 +12,6 @@
 
 #include "d_compile.h"
 
-/* Extern Functions -------------------------------------------------------- */
-
 void Dlg_PushB1(struct compiler *d, u32 b)
 {
    mem_size_t pc = d->def.codeP++;

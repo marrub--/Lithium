@@ -664,6 +664,7 @@ weapons/rems/fire lsnd/WeaponsD/Rems/Fire
 weapons/rems/charge lsnd/WeaponsD/Rems/Charge
 weapons/rems/empty lsnd/WeaponsD/Rems/FireEmpty
 weapons/rems/draw lsnd/WeaponsD/Rems/Draw
+weapons/rems/wail lsnd/WeaponsD/Rems/Wail
 weapons/rems/firefinish lsnd/WeaponsD/Rems/FireFinish
 $alias weapons/unknown/pickup YOUSONOFABITCH
 $alias weapons/fist/pickup MMMMHMHMMMHMMM

@@ -144,7 +144,7 @@ void Sc_BoughtItemPickup(i32 id) {
       struct upgrade *upgr = &pl.upgrades[id];
 
       if(!get_bit(upgr->flags, _ug_owned)) {
-         switch(upgr->info->category) {
+         switch(upgr->category) {
          case _uc_body: StartSound(ss_player_pickup_upgrbody, lch_item, CHANF_NOPAUSE, 1.0, ATTN_NONE); break;
          case _uc_weap: StartSound(ss_player_pickup_upgrweap, lch_item, CHANF_NOPAUSE, 1.0, ATTN_NONE); break;
          case _uc_extr: StartSound(ss_player_pickup_upgrextr, lch_item, CHANF_NOPAUSE, 1.0, ATTN_NONE); break;

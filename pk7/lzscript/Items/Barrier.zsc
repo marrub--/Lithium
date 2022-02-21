@@ -61,10 +61,10 @@ default
    Inventory.PickupMessage "";
    Inventory.PickupSound "player/pickup/barrier";
 
-   +COUNTITEM
-   +INVENTORY.BIGPOWERUP
-   +INVENTORY.FANCYPICKUPSOUND
-   +INVENTORY.ALWAYSPICKUP
+   +CountItem
+   +Inventory.BigPowerup
+   +Inventory.FancyPickupSound
+   +Inventory.AlwaysPickup
 }
 
 override bool tryPickup(in out Actor mo) {

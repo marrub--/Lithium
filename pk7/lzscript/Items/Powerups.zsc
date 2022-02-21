@@ -12,8 +12,8 @@ class Lith_AllMap : Inventory replaces Allmap {
       Inventory.PickupMessage "";
       Inventory.PickupSound "player/pickup/allmap";
 
-      +COUNTITEM
-      +INVENTORY.FANCYPICKUPSOUND
+      +CountItem
+      +Inventory.FancyPickupSound
       +CastSpriteShadow
    }
 
@@ -21,7 +21,7 @@ class Lith_AllMap : Inventory replaces Allmap {
       Lith_HERMES.Log(msg_item, 5, "_AllMap");
       Lith_HERMES.UnlockBip(mo, "AllMap");
       callAcs("Lith_ItemPopupTag");
-      mo.GiveInventory("MapRevealer", 1);
+      mo.giveInventory("MapRevealer", 1);
       goAwayAndDie();
       return true;
    }
@@ -39,15 +39,15 @@ class Lith_Berserk : Inventory replaces Berserk {
       Inventory.PickupMessage "";
       Inventory.PickupSound "player/pickup/berserk";
 
-      +COUNTITEM
-      +INVENTORY.FANCYPICKUPSOUND
+      +CountItem
+      +Inventory.FancyPickupSound
       +CastSpriteShadow
    }
 
    override bool tryPickup(in out Actor mo) {
       Lith_HERMES.Log(msg_item, 5, "_Berserk");
       Lith_HERMES.UnlockBip(mo, "Berserk");
-      mo.GiveInventory("PowerStrength", 1);
+      mo.giveInventory("PowerStrength", 1);
       callAcs("Lith_ItemPopupTag");
       if(mo.health < mo.getMaxHealth()) {
          mo.health = mo.getMaxHealth();
@@ -77,14 +77,14 @@ class Lith_Infrared : Inventory replaces Infrared {
       Inventory.PickupMessage "";
       Inventory.PickupSound "player/pickup/infrared";
 
-      +COUNTITEM
-      +INVENTORY.FANCYPICKUPSOUND
+      +CountItem
+      +Inventory.FancyPickupSound
    }
 
    override bool tryPickup(in out Actor mo) {
       Lith_HERMES.Log(msg_item, 5, "_Infrared");
       Lith_HERMES.UnlockBip(mo, "Infrared");
-      mo.GiveInventory("Lith_PowerLightAmp", 1);
+      mo.giveInventory("Lith_PowerLightAmp", 1);
       callAcs("Lith_ItemPopupTag");
       goAwayAndDie();
       return true;
@@ -119,14 +119,14 @@ class Lith_Megasphere : Inventory replaces Megasphere {
       Inventory.PickupMessage "";
       Inventory.PickupSound "player/pickup/mega";
 
-      +COUNTITEM
-      +INVENTORY.FANCYPICKUPSOUND
+      +CountItem
+      +Inventory.FancyPickupSound
    }
 
    override bool tryPickup(in out Actor mo) {
       Lith_HERMES.Log(msg_item, 4, "_Megasphere");
       Lith_HERMES.UnlockBip(mo, "Taochyan");
-      mo.GiveInventory("Lith_MegaProtection", 100);
+      mo.giveInventory("Lith_MegaProtection", 100);
       mo.ACS_ScriptCall("Lith_GiveHealthBonus", 200);
       callAcs("Lith_ItemPopupTag");
       goAwayAndDie();
@@ -148,14 +148,14 @@ class Lith_RadSuit : Inventory replaces RadSuit {
       Inventory.PickupMessage "";
       Inventory.PickupSound "player/pickup/radsuit";
 
-      +INVENTORY.FANCYPICKUPSOUND
+      +Inventory.FancyPickupSound
       +CastSpriteShadow
    }
 
    override bool tryPickup(in out Actor mo) {
       Lith_HERMES.Log(msg_item, 5, "_RadSuit");
       Lith_HERMES.UnlockBip(mo, "RadSuit");
-      mo.GiveInventory("Lith_PowerIronFeet", 1);
+      mo.giveInventory("Lith_PowerIronFeet", 1);
       callAcs("Lith_ItemPopupTag");
       goAwayAndDie();
       return true;
@@ -179,8 +179,8 @@ class Lith_SoulSphere : Inventory replaces SoulSphere {
       Inventory.PickupMessage "";
       Inventory.PickupSound "player/pickup/super";
 
-      +COUNTITEM
-      +INVENTORY.FANCYPICKUPSOUND
+      +CountItem
+      +Inventory.FancyPickupSound
    }
 
    override bool tryPickup(in out Actor mo) {
@@ -209,14 +209,14 @@ class Lith_ArtiFly : Inventory replaces ArtiFly {
       Inventory.PickupSound "misc/p_pkup";
       Inventory.RespawnTics 4320;
 
-      +COUNTITEM
-      +INVENTORY.FANCYPICKUPSOUND
+      +CountItem
+      +Inventory.FancyPickupSound
       +CastSpriteShadow
    }
 
    override bool tryPickup(in out Actor mo) {
       Lith_HERMES.Log(msg_item, 5, "_ArtiFly");
-      mo.GiveInventory("PowerFlight", 1);
+      mo.giveInventory("PowerFlight", 1);
       callAcs("Lith_ItemPopupTag");
       goAwayAndDie();
       return true;
@@ -237,8 +237,8 @@ class Lith_ArtiTeleport : Inventory replaces ArtiTeleport {
       Inventory.PickupSound "misc/p_pkup";
       Inventory.RespawnTics 4320;
 
-      +COUNTITEM
-      +INVENTORY.FANCYPICKUPSOUND
+      +CountItem
+      +Inventory.FancyPickupSound
       +CastSpriteShadow
    }
 
@@ -261,33 +261,33 @@ class Lith_PowerLightAmp : PowerLightAmp {
    default {
       +CastSpriteShadow
    }
-   override void Tick() {if(!level.isFrozen()) Super.Tick();}
+   override void Tick() {if(!level.isFrozen()) super.Tick();}
    override void EndEffect() {
-      Super.EndEffect();
+      super.EndEffect();
       S_StartSound("player/infraredoff", lch_item, CHANF_UI);
    }
 }
 
 class Lith_PowerInvulnerable : PowerInvulnerable {
    default {+CastSpriteShadow}
-   override void Tick() {if(!level.isFrozen()) Super.Tick();}
+   override void Tick() {if(!level.isFrozen()) super.Tick();}
 }
 
 class Lith_PowerIronFeet : PowerIronFeet {
    default {+CastSpriteShadow}
-   override void Tick() {if(!level.isFrozen()) Super.Tick();}
+   override void Tick() {if(!level.isFrozen()) super.Tick();}
 }
 
-/* this is a rather terrible hack, but there's actually no other way to give */
-/* the player the special inverted screen color map in the engine... */
+/* this is a rather terrible hack, but there's actually no other way to give
+   the player the special inverted screen color map in the engine... */
 class Lith_PowerInvulnerableGiver : PowerupGiver {
    default {
       Inventory.MaxAmount 0;
       Powerup.Type "Lith_PowerInvulnerable";
       Powerup.Color "InverseMap";
-      +INVENTORY.AUTOACTIVATE
-      +INVENTORY.ALWAYSPICKUP
-      +INVENTORY.BIGPOWERUP
+      +Inventory.AutoActivate
+      +Inventory.AlwaysPickup
+      +Inventory.BigPowerUp
    }
 }
 
@@ -301,9 +301,9 @@ class Lith_InvulnerabilitySphere : Inventory replaces InvulnerabilitySphere {
       Inventory.PickupMessage "";
       Inventory.PickupSound "player/pickup/invuln";
 
-      +COUNTITEM
-      +INVENTORY.BIGPOWERUP
-      +INVENTORY.FANCYPICKUPSOUND
+      +CountItem
+      +Inventory.BigPowerUp
+      +Inventory.FancyPickupSound
    }
 
    override bool tryPickup(in out Actor mo) {
@@ -338,19 +338,26 @@ class Lith_Backpack : Lith_ScoreItem replaces Backpack
       Lith_BasicPickup.InfoPage "Backpack";
       Lith_ScoreItem.Score 10000;
 
-      +COUNTITEM
+      +CountItem
       +CastSpriteShadow
    }
 
-   override void Lith_OnPickup(Actor mo)
+   override void lith_onPickup(Actor mo)
    {
-      mo.GiveInventory("Lith_BulletAmmo", 10);
-      mo.GiveInventory("Lith_ShellAmmo",  4);
-      mo.GiveInventory("Lith_RocketAmmo", 1);
-      mo.GiveInventory("Lith_PlasmaAmmo", 1500);
-      mo.GiveInventory("Lith_CannonAmmo", 4);
-      mo.ACS_ScriptCall("Lith_Discount");
-      Super.Lith_OnPickup(mo);
+      static const class<Inventory> AMMOS[] = {
+         "Lith_BulletAmmo",
+         "Lith_ShellAmmo",
+         "Lith_RocketAmmo",
+         "Lith_PlasmaAmmo",
+         "Lith_CannonAmmo"
+      };
+      for(int i = 0; i < AMMOS.size(); ++i) {
+         readonly<Inventory> def = getDefaultByType(AMMOS[i]);
+         Inventory inv = mo.findInventory(AMMOS[i]);
+         inv.maxAmount = def.maxAmount * 2;
+         mo.giveInventory(AMMOS[i], def.maxAmount / 4);
+      }
+      super.lith_onPickup(mo);
    }
 
    states
@@ -373,7 +380,7 @@ class Lith_Shobon : Actor
 
    override void Tick()
    {
-      Super.Tick();
+      super.Tick();
 
       if(Master)
       {
@@ -408,9 +415,9 @@ class Lith_ShobonSphere : Inventory
       Inventory.PickupMessage "";
       Inventory.PickupSound "misc/p_pkup";
 
-      +COUNTITEM
-      +INVENTORY.BIGPOWERUP
-      +INVENTORY.FANCYPICKUPSOUND
+      +CountItem
+      +Inventory.BigPowerUp
+      +Inventory.FancyPickupSound
    }
 
    override bool tryPickup(in out Actor mo) {

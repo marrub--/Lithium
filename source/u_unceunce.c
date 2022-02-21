@@ -12,21 +12,18 @@
 
 #include "u_common.h"
 
-/* Extern Functions -------------------------------------------------------- */
-
-void Upgr_UNCEUNCE_Activate(struct upgrade *upgr)
+void Upgr_UNCEUNCE_Activate(void)
 {
    ACS_SetMusic(sp_lmusic_Unce);
 }
 
-void Upgr_UNCEUNCE_Deactivate(struct upgrade *upgr)
+void Upgr_UNCEUNCE_Deactivate(void)
 {
    ACS_SetMusic(sp_star);
    ACS_FadeTo(0, 0, 0, 0, 0);
 }
 
-script
-void Upgr_UNCEUNCE_Update(struct upgrade *upgr)
+void Upgr_UNCEUNCE_Update(void)
 {
    k32 reeeed = ACS_Sin(pl.ticks / 35.0) + 1.0 / 2.0;
    k32 greeen = ACS_Cos(pl.ticks / 24.0) + 1.0 / 2.0;

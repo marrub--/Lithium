@@ -25,7 +25,7 @@ class Lith_RemsSparkSpawner : Actor {
    Death:
       TNT1 A 0 {
          for(int i = 0, j = Random(11, 13); i < j; i++)
-            A_SpawnParticle("Purple", SPF_FULLBRIGHT|SPF_RELATIVE, Random(3, 8), Random(1, 2), FRandom(-15, 15), FRandom(-1,1),FRandom(-1,1),FRandom(-1,1), FRandom(1, 16),FRandom(-0.1, 0.1),(Vel.Z*1.5)+FRandom(-1,1), 0.0, 0.0, -0.05, 0.98, -1);
+            A_SpawnParticle("Purple", SPF_FULLBRIGHT|SPF_RELATIVE, Random(3, 8), Random(1, 2), fRandom(-15, 15), fRandom(-1,1),fRandom(-1,1),fRandom(-1,1), fRandom(1, 16),fRandom(-0.1, 0.1),(Vel.Z*1.5)+fRandom(-1,1), 0.0, 0.0, -0.05, 0.98, -1);
       }
       stop;
    }
@@ -35,6 +35,7 @@ class Lith_RemsBulletTrail : Actor {
    default {
       RenderStyle "Add";
       Scale 0.1;
+      Alpha 0.5;
       +NoInteraction
    }
    states {
@@ -150,15 +151,15 @@ Fire:
    #### # 0 lith_jumpNoAmmo(4);
    REMS A 1 offset(0, 32) {
       lith_takeAmmo(4);
-      lith_a_setInterpolation(true);
-      a_startSound("weapons/rems/charge", lch_weapon3);
+      a_startSound("weapons/rems/charge", lch_weapon2);
+      a_startSound("weapons/rems/wail", lch_weapon3);
       invoker.m_particleLoop = 0;
       invoker.m_particleAlpha = 1.0;
       invoker.m_fireLoop = 0;
       invoker.m_steamy = 175;
    }
    REMS AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 {
-      a_overlayOffset(_psp_weapon, fRandom(-0.4, 0.7), fRandom(-0.4, 0.7), WOF_INTERPOLATE|WOF_ADD);
+      a_overlayOffset(_psp_weapon, fRandom(-0.4, 0.6), fRandom(-0.4, 0.6), WOF_INTERPOLATE|WOF_ADD);
       a_overlay(_psp_rems_particle_first + invoker.m_particleLoop, "RemsParticle");
       a_overlayFlags(_psp_rems_particle_first + invoker.m_particleLoop, PSPF_ALPHA|PSPF_RENDERSTYLE|PSPF_FORCESTYLE, true);
       a_overlayFlags(_psp_rems_particle_first + invoker.m_particleLoop, PSPF_ADDWEAPON|PSPF_ADDBOB, false);
@@ -167,11 +168,10 @@ Fire:
       a_overlayOffset(_psp_rems_particle_first + invoker.m_particleLoop, fRandom(0, 320), fRandom(120, 240));
       ++invoker.m_particleLoop;
    }
-   REMS B 1 offset(171, 88) bright a_startSound("weapons/rems/fire", lch_weapon);
-   REMS C 1 offset(154, 81) bright;
+   REMS A 0 a_startSound("weapons/rems/fire", lch_weapon);
 FireLoop:
    REMS BC 1 bright {
-      a_overlayOffset(_psp_weapon, fRandom(128, 184), FRandom(80, 100), WOF_INTERPOLATE);
+      a_overlayOffset(_psp_weapon, fRandom(-9, 47), fRandom(44, 64), WOF_INTERPOLATE);
       for(int i = 0; i < 2; ++i) {
          a_fireProjectile("Lith_RemsBullet1", angle: fRandom(-2, 2), spawnofs_xy: fRandom(2, 8), spawnheight: fRandom(8, 10), flags: FPF_NOAUTOAIM, pitch: fRandom(-2, 2));
          a_fireProjectile("Lith_RemsBullet2", spawnofs_xy: fRandom(2, 8), spawnheight: fRandom(5, 7));
@@ -185,13 +185,12 @@ FireLoop:
    }
    loop;
 FireDone:
-   REMS C 1 bright offset(151, 80) a_startSound("weapons/rems/firefinish", lch_weapon2);
-   REMS B 1 bright offset(155, 76);
-   REMS D 1 bright offset(141, 74);
+   REMS D 1 bright offset(14, 44) a_startSound("weapons/rems/firefinish", lch_weapon2);
+   REMS A 1 bright offset(12, 40);
+   REMS A 1 bright offset(8, 38);
    REMS AA 1 offset(4, 39) lith_a_decreaseParticles;
    REMS AAA 1 offset(2, 35) lith_a_decreaseParticles;
    REMS A 4 offset(1, 33) {
-      lith_a_setInterpolation(false);
       a_clearOverlays(_psp_rems_particle_first, _psp_rems_particle_last);
       invoker.m_particleLoop = 0;
    }

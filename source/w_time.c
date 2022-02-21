@@ -14,12 +14,8 @@
 #include "p_player.h"
 #include "w_world.h"
 
-/* Static Objects ---------------------------------------------------------- */
-
 static
 i32 lmvar frozen;
-
-/* Extern Functions -------------------------------------------------------- */
 
 cstr CanonTime(i32 type, u64 time) {
    noinit static
@@ -73,8 +69,6 @@ void UnfreezeTime(bool players_ok) {
    if(!players_ok) pl.frozen--;
    if(frozen < 1) ServCallI(sm_SetFrozen, false, 0);
 }
-
-/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr(OBJ "Timer")
 i32 Sc_Timer(void) {

@@ -28,7 +28,6 @@ class Lith_RA_Shrapnel1  : Lith_RA_Hax {default {DamageFactor "Shrapnel",  .7;
                                                  DamageFactor "Explosion", .7;}}
 class Lith_RA_Ice1       : Lith_RA_Hax {default {DamageFactor "Ice",       .7;}}
 class Lith_RA_Hazard1    : Lith_RA_Hax {default {DamageFactor "Slime",     .7;}}
-/* ------------------------------------------------------------------------- */
 class Lith_RA_Bullets2   : Lith_RA_Hax {default {DamageFactor "Bullet",    .5;}}
 class Lith_RA_Energy2    : Lith_RA_Hax {default {DamageFactor "Railgun",   .5;
                                                  DamageFactor "Electric",  .5;

@@ -31,7 +31,6 @@ bool bossspawned;
 i32 cbiperf;
 i64 cbiupgr;
 bool legendoom;
-bool drlamonsters;
 enum mission_status lmvar mission = _unfinished;
 
 bool dorain;
@@ -75,7 +74,7 @@ void CheckModCompat(void) {
 
    if((legendoom = ACS_SpawnForced(so_LDLegendaryMonsterMarker, 0, 0, 0, tid = ACS_UniqueTID(), 0))) ACS_Thing_Remove(tid);
 
-   drlamonsters = CVarGetI(sc_drla_is_using_monsters);
+   /*drlamonsters = CVarGetI(sc_drla_is_using_monsters);*/
 }
 
 static
@@ -174,9 +173,6 @@ void MInit(void) {
 
    /* Set the air control because ZDoom's default sucks. */
    ACS_SetAirControl(0.77);
-
-   Upgr_MInit();
-   Shop_MInit();
 }
 
 static
@@ -216,11 +212,8 @@ void HInit(void) {
    if(Cluster == 8) P_BIP_Unlock(P_BIP_NameToPage("MCluster3"), false);
 
    if(CVarGetI(sc_sv_nobosses) ||
-      CVarGetI(sc_sv_nobossdrop)
-      #ifndef NDEBUG
-      || dbgflags(dbgf_items)
-      #endif
-      )
+      CVarGetI(sc_sv_nobossdrop) ||
+      dbgflags(dbgf_items))
    {
       for(i32 i = 0; i < bossreward_max; i++)
          CBI_Install(i);

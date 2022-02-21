@@ -90,9 +90,9 @@ default
    Inventory.PickupMessage "";
    Inventory.PickupSound "misc/p_pkup";
 
-   +COUNTITEM
-   +INVENTORY.BIGPOWERUP
-   +INVENTORY.FANCYPICKUPSOUND
+   +CountItem
+   +Inventory.BigPowerup
+   +Inventory.FancyPickupSound
 }
 
 override void postBeginPlay() {

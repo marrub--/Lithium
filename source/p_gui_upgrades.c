@@ -32,7 +32,7 @@ void GUIUpgradesList(struct gui_state *g) {
       filter_name = ns(lang(sa_upgr_categ[filter]));
 
       for_upgrade(upgr) {
-         if(upgr->info->category == filter) {
+         if(upgr->category == filter) {
             numbtns++;
          }
       }
@@ -56,9 +56,9 @@ void GUIUpgradesList(struct gui_state *g) {
    i32 y = -gui_p.btnlist.h;
    for_upgrade(upgr) {
       if(filter != -1) {
-         if(upgr->info->category != filter) continue;
-      } else if(upgr->info->category != curcategory) {
-         curcategory = upgr->info->category;
+         if(upgr->category != filter) continue;
+      } else if(upgr->category != curcategory) {
+         curcategory = upgr->category;
          y += gui_p.btnlist.h;
          PrintText_str(ns(lang(sa_upgr_categ[curcategory])), sf_lmidfont, g->defcr, g->ox + 40,4, y + g->oy + 1,1);
       }
@@ -69,10 +69,10 @@ void GUIUpgradesList(struct gui_state *g) {
          continue;
 
       cstr color;
-      if(!get_bit(upgr->flags, _ug_owned) && !P_Shop_CanBuy(&upgr->info->shopdef, upgr)) {
+      if(!get_bit(upgr->flags, _ug_owned) && !P_Shop_CanBuy(&upgr->shopdef)) {
          color = "u";
       } else {
-         switch(upgr->info->key) {
+         switch(upgr->key) {
             case UPGR_TorgueMode: color = "g"; break;
             case UPGR_Cannon_C:   color = "m"; break;
             default:              color = nil; break;
@@ -86,7 +86,7 @@ void GUIUpgradesList(struct gui_state *g) {
 
       i32 *upgrsel = &CBIState(g)->upgrsel;
       if(G_Button_HId(g, _i, tmpstr(lang_fmt(LANG "UPGRADE_TITLE_%s",
-                                             upgr->info->name)),
+                                             upgr->name)),
                       0, y, _i == *upgrsel, .color = color, .preset = pre))
          *upgrsel = _i;
 
@@ -123,8 +123,8 @@ void GUIUpgradeRequirements(struct gui_state *g, struct upgrade *upgr) {
    #undef Req
 
    /* Performance rating */
-   if(upgr->info->perf && pl.pclass != pcl_cybermage) {
-      bool over = upgr->info->perf + pl.cbi.pruse > cbiperf;
+   if(upgr->perf && pl.pclass != pcl_cybermage) {
+      bool over = upgr->perf + pl.cbi.pruse > cbiperf;
       cstr fmt;
 
       if(get_bit(upgr->flags, _ug_active))
@@ -134,26 +134,26 @@ void GUIUpgradeRequirements(struct gui_state *g, struct upgrade *upgr) {
       else
          fmt = tmpstr(lang(sl_shop_activate_uses));
 
-      PrintTextFmt(fmt, upgr->info->perf);
+      PrintTextFmt(fmt, upgr->perf);
       PrintText(sf_smallfnt, g->defcr, g->ox+98,1, g->oy+187 + y,2);
       y -= 10;
    }
 
    /* Score multiplier */
-   if(upgr->info->scoreadd != 0) {
+   if(upgr->scoreadd != 0) {
       char cr;
       cstr op;
       bool chk;
 
       if(get_bit(upgr->flags, _ug_active)) {
-         chk = upgr->info->scoreadd > 0;
+         chk = upgr->scoreadd > 0;
          op  = tmpstr(lang(sl_shop_mul_disable));
       } else {
-         chk = upgr->info->scoreadd < 0;
+         chk = upgr->scoreadd < 0;
          op  = tmpstr(lang(sl_shop_mul_enable));
       }
 
-      i32 perc = fastabs(ceilk(100.0k * upgr->info->scoreadd));
+      i32 perc = fastabs(ceilk(100.0k * upgr->scoreadd));
       if(chk) {cr = 'a'; perc = 100 - perc;}
       else    {cr = 'n'; perc = 100 + perc;}
 
@@ -171,22 +171,22 @@ void GUIUpgradeDescription(struct gui_state *g, struct upgrade *upgr) {
    cstr mark;
    str cost;
 
-   switch(upgr->info->key) {
+   switch(upgr->key) {
    case UPGR_lolsords:   mark = "\Cjfolds"; break;
    case UPGR_TorgueMode: mark = "\Cd$";     break;
    default:              mark = "\Cnscr";   break;
    }
 
-   if(upgr->info->cost) cost = StrParam("%s%s", scoresep(P_Shop_Cost(&upgr->info->shopdef)), mark);
+   if(upgr->cost) cost = StrParam("%s%s", scoresep(upgr->shopdef.cost), mark);
    else                 cost = ns(lang(sl_free));
 
    PrintText_str(cost, sf_smallfnt, g->defcr, g->ox+98,1, g->oy+17,1);
 
    /* Category */
-   PrintText_str(ns(lang(sa_upgr_categ[upgr->info->category])), sf_smallfnt, g->defcr, g->ox+98,1, g->oy+27,1);
+   PrintText_str(ns(lang(sa_upgr_categ[upgr->category])), sf_smallfnt, g->defcr, g->ox+98,1, g->oy+27,1);
 
    /* Effect */
-   ifauto(str, effect, lang_fmt_discrim(LANG "UPGRADE_EFFEC_%s%s", upgr->info->name))
+   ifauto(str, effect, lang_fmt_discrim(LANG "UPGRADE_EFFEC_%s%s", upgr->name))
       PrintTextFmt("%S %S", ns(lang(sl_effect)), effect);
 
    static
@@ -196,7 +196,7 @@ void GUIUpgradeDescription(struct gui_state *g, struct upgrade *upgr) {
 
    i32 cr = g->defcr;
 
-   if(upgr->info->key == UPGR_UNCEUNCE)
+   if(upgr->key == UPGR_UNCEUNCE)
       cr = crs[ACS_Timer() / 4 % countof(crs)];
 
    PrintText(sf_smallfnt, cr, g->ox+98,1, g->oy+37,1);
@@ -207,7 +207,7 @@ void GUIUpgradeDescription(struct gui_state *g, struct upgrade *upgr) {
 static
 void GUIUpgradeButtons(struct gui_state *g, struct upgrade *upgr) {
    /* Buy */
-   if(G_Button(g, tmpstr(lang(sl_buy)), 98, 192, !P_Shop_CanBuy(&upgr->info->shopdef, upgr), .fill = &CBIState(g)->buyfill))
+   if(G_Button(g, tmpstr(lang(sl_buy)), 98, 192, !P_Shop_CanBuy(&upgr->shopdef), .fill = &CBIState(g)->buyfill))
       P_Upg_Buy(upgr, false);
 
    /* Activate */

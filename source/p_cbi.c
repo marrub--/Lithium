@@ -126,8 +126,6 @@ void P_CBI_PMinit(void) {
    bip.curpage = nil;
 }
 
-/* Scripts ----------------------------------------------------------------- */
-
 script_str ext("ACS") type("net") addr(OBJ "KeyOpenCBI")
 void Sc_OpenCBI(void) {
    if(ACS_Timer() < 10) return;

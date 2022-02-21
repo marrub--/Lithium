@@ -85,15 +85,15 @@ Prevents floor damage for 1 minute.
 == \#INFO_SHORT_BackpackStan | $\#INFO_SHORT_BackpackBase
 == \#INFO_TITLE_BackpackStan | $\#INFO_SHORT_BackpackBase
 @@ \#INFO_DESCR_BackpackStan
-A backpack left behind by one of the agents sent in before you. All that's left
-inside it is a bit of ammunition they had and a discount card.
+A backpack left behind by one of the agents sent in before you. All
+that's left inside it is a bit of ammunition they had.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_BackpackJem | $\#INFO_SHORT_BackpackBase
 == \#INFO_TITLE_BackpackJem | $\#INFO_SHORT_BackpackBase
 @@ \#INFO_DESCR_BackpackJem
-A backpack left behind by someone. All that's left inside it is a bit of
-ammunition they had and a discount card.
+A backpack left behind by someone. All that's left inside it is a bit
+of ammunition they had.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Stimpack | Stimpack

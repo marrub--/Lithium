@@ -19,11 +19,7 @@
 
 #include <limits.h>
 
-/* Extern Objects ---------------------------------------------------------- */
-
 noinit struct player player;
-
-/* Static Functions -------------------------------------------------------- */
 
 script static
 void P_bossWarning();
@@ -33,8 +29,6 @@ void P_bossText(i32 boss);
 
 script static
 void P_doIntro();
-
-/* Scripts ----------------------------------------------------------------- */
 
 _Noreturn dynam_aut script type("enter") static
 void Sc_PlayerEntry(void) {
@@ -204,8 +198,6 @@ void Sc_PlayerDisconnect(void) {
    fastmemset(&pl, 0, sizeof pl);
 }
 
-/* Extern Functions -------------------------------------------------------- */
-
 alloc_aut(0) stkcall
 cstr P_Discrim(i32 pclass) {
    switch(pclass) {
@@ -334,8 +326,6 @@ void P_Scr_Take(i96 score) {
    pl.scoreaccum     = 0;
    pl.scoreaccumtime = 0;
 }
-
-/* Static Functions -------------------------------------------------------- */
 
 script static
 void P_bossWarningDone() {
@@ -676,8 +666,6 @@ void P_Aug_PTick() {
       }
    }
 }
-
-/* Scripts ----------------------------------------------------------------- */
 
 alloc_aut(0) script_str ext("ACS") addr(OBJ "Markiplier")
 void Sc_MapMarker(i32 tid) {

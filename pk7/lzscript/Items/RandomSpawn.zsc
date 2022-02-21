@@ -31,9 +31,9 @@ static void CopyImportantStuff(Actor lhs, Actor rhs)
    lhs.HandleSpawnFlags();
    lhs.SpawnFlags = rhs.SpawnFlags;
 
-   lhs.bCOUNTITEM = rhs.bCOUNTITEM;
+   lhs.bCountItem = rhs.bCountItem;
 
-   rhs.bCOUNTITEM = false;
+   rhs.bCountItem = false;
 }
 
 override void PostBeginPlay()
@@ -48,7 +48,7 @@ override void PostBeginPlay()
       mo.SpawnPoint = SpawnPoint;
       mo.Angle      = Angle;
       mo.Vel        = Vel;
-      mo.bDROPPED   = bDROPPED;
+      mo.bDropped   = bDropped;
 
       CopyImportantStuff(mo, self);
    }

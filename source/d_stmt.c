@@ -12,8 +12,6 @@
 
 #include "d_compile.h"
 
-/* Extern Functions -------------------------------------------------------- */
-
 void Dlg_GetStmt_Cond(struct compiler *d) {
    struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, 0);
    unwrap(&d->res);

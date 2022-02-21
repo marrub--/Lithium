@@ -28,7 +28,7 @@
 == \#LOG_InfraRed     | $\#INFO_SHORT_Infrared
 == \#LOG_Invuln       | \cjInvulnerability!
 == \#LOG_BlurSphere   | $\#INFO_SHORT_Fragma
-== \#LOG_Backpack     | Backpack + Discount Card
+== \#LOG_Backpack     | Backpack
 == \#LOG_Berserk      | $\#INFO_SHORT_Berserk
 == \#LOG_AllMap       | $\#INFO_SHORT_AllMap
 == \#LOG_DoggoSphere  | \cgwan \ciwan \ckwan \cdwan \chwan \ctwan

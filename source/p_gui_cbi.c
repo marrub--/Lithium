@@ -29,8 +29,6 @@
 #define Slot(name, x, y) PrintSprite(name, g->ox+287-x*48,2, g->oy+48*y-33,1)
 #define CPU(num)         PrintSprite(sp_UI_CPU##num, g->ox-13,1, g->oy-13,1)
 
-/* Static Functions -------------------------------------------------------- */
-
 static
 void CBITab_Marine(struct gui_state *g) {
    i32 ram;
@@ -96,8 +94,6 @@ void CBITab_CyberMage(struct gui_state *g)
    Upgr(cupg_c_slot7spell) Slot(sp_UI_Slot7Spell, 1, 3);
    Upgr(cupg_rdistinter)   Slot(sp_UI_RDistInter, 1, 4);
 }
-
-/* Extern Functions -------------------------------------------------------- */
 
 void P_CBI_TabCBI(struct gui_state *g)
 {

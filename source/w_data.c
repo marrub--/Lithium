@@ -14,8 +14,6 @@
 #include "p_player.h"
 #include "w_world.h"
 
-/* Scripts ----------------------------------------------------------------- */
-
 script ext("ACS") addr(lsc_pdata)
 i32 Sc_LPData(i32 info, i32 permutation) {
    if(P_None()) return 0;

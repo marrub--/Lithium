@@ -12,8 +12,7 @@
 
 #include "u_common.h"
 
-script
-void Upgr_JetBooster_Update(struct upgrade *upgr) {
+void Upgr_JetBooster_Update(void) {
    if(pl.frozen) return;
 
    if(P_ButtonPressed(BT_JUMP) && !pl.onground &&

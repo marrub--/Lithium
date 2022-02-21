@@ -16,8 +16,6 @@
 
 #define CHARGE_MAX (35 * 0.8)
 
-/* Static Functions -------------------------------------------------------- */
-
 alloc_aut(0) script static
 void DodgeView()
 {
@@ -33,22 +31,19 @@ void DodgeView()
    SetViewHeight(0, vh);
 }
 
-/* Extern Functions -------------------------------------------------------- */
-
-void Upgr_ReflexWetw_Activate(struct upgrade *upgr)
+void Upgr_ReflexWetw_Activate(void)
 {
    pl.speedmul += 0.3;
    udata.charge = CHARGE_MAX;
    udata.leaped = 0;
 }
 
-void Upgr_ReflexWetw_Deactivate(struct upgrade *upgr)
+void Upgr_ReflexWetw_Deactivate(void)
 {
    pl.speedmul -= 0.3;
 }
 
-script
-void Upgr_ReflexWetw_Update(struct upgrade *upgr)
+void Upgr_ReflexWetw_Update(void)
 {
    if(udata.leaped == 1) {
       udata.leaped = 2;
@@ -86,8 +81,6 @@ void Upgr_ReflexWetw_Update(struct upgrade *upgr)
       udata.leaped = 1;
    }
 }
-
-/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr(OBJ "DodgeView")
 void Sc_DodgeView(void)

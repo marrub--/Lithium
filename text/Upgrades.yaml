@@ -24,13 +24,13 @@ _uc_body:
       JetBooster:  {              f: --U--, mul: -5}
       CyberLegs:   {scr: 1220000, f: ADU--, pr:  4}
       ReactArmor:  {scr: 3500200, f: -D-R-, pr: 20, req: ai   }
-      ReactArmor2: {scr: 2990200, f: -----, pr: 10, req: ai ra}
+      ReactArmor2: {scr: 2990200,           pr: 10, req: ai ra}
       DefenseNuke: {scr:  580030, f: ----E,         req: ai   }
       Adrenaline:  {scr: 1801000, f: -DU--, pr: 10}
 
    pC:
       Magic:       {              f: --UR-}
-      SoulCleaver: {scr: 1100000, f: -----}
+      SoulCleaver: {scr: 1100000}
       StealthSys:  {scr: 1800450, f: -DU--}
 
    pD:
@@ -38,21 +38,21 @@ _uc_body:
 
 _uc_weap:
    gO:
-      AutoReload: {scr: 950050, f: -----, pr: 2}
+      AutoReload: {scr: 950050, pr: 2}
 
    pM:
-      Pistol_A:  {scr:  140940, f: -----}
-      Pistol_B:  {scr:  340000, f: -----,                req: wmd}
-      Shotgun_A: {scr: 1079430, f: -----, pr: 1, grp: 1, req: wmd}
-      Shotgun_B: {scr: 1010420, f: -----,        grp: 1, req: wmd}
+      Pistol_A:  {scr:  140940}
+      Pistol_B:  {scr:  340000,                          req: wmd}
+      Shotgun_A: {scr: 1079430,           pr: 1, grp: 1, req: wmd}
+      Shotgun_B: {scr: 1010420,                  grp: 1, req: wmd}
       Rifle_A:   {scr:  340100, f: -D-R-}
-      Rifle_B:   {scr: 1008080, f: -----, pr: 1,         req: wmd    }
-      RPG_A:     {scr: 1550000, f: -----,        grp: 2, req: wmd wrd}
+      Rifle_B:   {scr: 1008080,           pr: 1,         req: wmd    }
+      RPG_A:     {scr: 1550000,                  grp: 2, req: wmd wrd}
       RPG_B:     {scr: 2505010, f: --U--, pr: 1, grp: 2, req: wmd    }
-      Plasma_A:  {scr: 2250000, f: -----,        grp: 3, req: wmd    }
-      Plasma_B:  {scr: 2500000, f: -----, pr: 1, grp: 3, req: wmd wrd}
+      Plasma_A:  {scr: 2250000,                  grp: 3, req: wmd    }
+      Plasma_B:  {scr: 2500000,           pr: 1, grp: 3, req: wmd wrd}
       Cannon_A:  {scr: 5100700, f: -D---,        grp: 4, req: wmd    }
-      Cannon_B:  {scr: 5800100, f: -----, pr: 5, grp: 4, req: wmd wrd}
+      Cannon_B:  {scr: 5800100,           pr: 5, grp: 4, req: wmd wrd}
 
    pC:
       Mateba_A:   {scr:  614100, grp: 1}

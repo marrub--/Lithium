@@ -114,11 +114,8 @@ enum ZscName(PClass) {
 
 #include <GDCC/HashMap.h>
 
-#define P_Discount(n) (i96)((n) * pl.discount)
 #define P_None() (!pl.active)
 #define P_Wep_CurType() (pl.weapon.cur->info->type)
-
-/* Extern Functions -------------------------------------------------------- */
 
 script void P_Init(void);
 script void P_Data_Load(void);
@@ -159,8 +156,6 @@ void P_Ren_Magic(void);
 script void P_Ren_Step(void);
 void P_Ren_View(void);
 script void P_Ren_Scope(void);
-
-/* Types ------------------------------------------------------------------- */
 
 enum {
    #define pclass_x(shr, lng, eq) shr = lng,
@@ -313,7 +308,6 @@ struct player {
    str scoreaccumstr;
    i32 scoreaccumtime;
    k64 scoremul;
-   k64 discount;
 
    /* Misc */
    k32 rage;
@@ -385,8 +379,6 @@ struct player {
    bool sgacquired;
 };
 #endif
-
-/* Extern Objects ---------------------------------------------------------- */
 
 #if !ZscOn
 extern struct player pl;

@@ -39,8 +39,6 @@ w_setptr_x(bool)
 #define SetFun(x) CVarSetI(sc_fun, x)
 #endif
 
-/* Types ------------------------------------------------------------------- */
-
 enum ZscName(WData) {
    wdata_bossspawned,
    wdata_soulsfreed,
@@ -211,8 +209,6 @@ enum finale_num {
    _finale_other,
 };
 
-/* Extern Objects ---------------------------------------------------------- */
-
 extern bool lmvar player_init;
 extern struct payoutinfo payout;
 extern i32 mapscleared;
@@ -227,7 +223,6 @@ extern bool bossspawned;
 extern i32 cbiperf;
 extern i64 cbiupgr;
 extern bool legendoom;
-extern bool drlamonsters;
 extern enum mission_status lmvar mission;
 extern bool dorain;
 extern bool reopen;
@@ -238,8 +233,6 @@ extern bool lmvar modinit;
 extern i32 a_x, a_y;
 extern struct polar a_angles[8];
 extern i32 a_cur;
-
-/* Extern Functions -------------------------------------------------------- */
 
 void Scr_HInit(void);
 cstr CanonTime(i32 type, u64 time);

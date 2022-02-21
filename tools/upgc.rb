@@ -103,12 +103,10 @@ _end_h_
 
 #include "u_common.h"
 
-/* Extern Objects ---------------------------------------------------------- */
-
-struct upgradeinfo upgrinfo[] = {
+struct upgrade upgrinfo[] = {
 #{
 res = String.new
-for upg in upgrades do res.concat %(   {{"#{upg[:nam]}", #{upg[:inf]}, #{upg[:scr]}}, #{upg[:pcl]}, #{upg[:cat]}, #{upg[:prf]}, #{upg[:grp]}, #{upg[:req]}, #{upg[:mul]}, UPGR_#{upg[:nam]}},\n) end
+for upg in upgrades do res.concat %(   {{_shop_upgrades, "#{upg[:nam]}", #{upg[:inf]}, #{upg[:scr]}}, #{upg[:pcl]}, #{upg[:cat]}, #{upg[:prf]}, #{upg[:grp]}, #{upg[:req]}, #{upg[:mul]}, UPGR_#{upg[:nam]}},\n) end
 res
 }
 };
@@ -117,14 +115,48 @@ res
 _end_c_
 #{generated_header "upgc"}
 
-#include "u_func_beg.h"
+#ifdef A
+#undef A
+#define A(n) Fn(n, Activate)
+#else
+#define A(n)
+#endif
+#ifdef D
+#undef D
+#define D(n) Fn(n, Deactivate)
+#else
+#define D(n)
+#endif
+#ifdef U
+#undef U
+#define U(n) Fn(n, Update)
+#else
+#define U(n)
+#endif
+#ifdef E
+#undef E
+#define E(n) Fn(n, Enter)
+#else
+#define E(n)
+#endif
+#ifdef R
+#undef R
+#define R(n) Fn(n, Render)
+#else
+#define R(n)
+#endif
 
 #{
 res = String.new
 for upg in upgrades do res.concat upg[:flg] end
 res
 }
-#include "u_func_end.h"
+
+#undef A
+#undef D
+#undef U
+#undef E
+#undef R
 
 /* EOF */
 _end_f_

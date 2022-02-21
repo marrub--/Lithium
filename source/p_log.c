@@ -231,8 +231,6 @@ script void P_Log(i32 cr, i32 x, i32 yy) {
    }
 }
 
-/* Scripts ----------------------------------------------------------------- */
-
 script_str ext("ACS") addr(OBJ "LogS")
 void Sc_Log(i32 levl, i32 type) {
    if(P_None()) return;

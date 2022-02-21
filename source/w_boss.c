@@ -14,8 +14,6 @@
 #include "p_player.h"
 #include "w_world.h"
 
-/* Types ------------------------------------------------------------------- */
-
 struct boss
 {
    char const name[16];
@@ -33,8 +31,6 @@ enum
    diff_any,
    diff_max
 };
-
-/* Static Objects ---------------------------------------------------------- */
 
 static
 struct boss bosses_easy[] = {
@@ -65,8 +61,6 @@ struct boss *lastboss;
 
 static
 i96 scorethreshold = 1000000;
-
-/* Static Functions -------------------------------------------------------- */
 
 static
 void SpawnBossReward(void)
@@ -130,8 +124,6 @@ bool CheckDead(struct boss *b, i32 num)
    return true;
 }
 
-/* Extern Functions -------------------------------------------------------- */
-
 script
 void SpawnBosses(i96 sum, bool force)
 {
@@ -163,8 +155,6 @@ void SpawnBosses(i96 sum, bool force)
 
    TriggerBoss();
 }
-
-/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr(OBJ "PhantomSound")
 void Sc_PhantomSound(void)

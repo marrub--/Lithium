@@ -14,8 +14,6 @@
 #include "p_player.h"
 #include "p_hudid.h"
 
-/* Static Functions -------------------------------------------------------- */
-
 static
 void P_Ren_Advice() {
    if(CheckFade(fid_advice)) {
@@ -40,8 +38,6 @@ void P_Ren_LevelUp() {
       PrintText(sf_smallfnt, CR_WHITE, 220,1, 75,1);
    }
 }
-
-/* Extern Functions -------------------------------------------------------- */
 
 void P_Ren_PTickPst() {
    P_Ren_Magic();

@@ -16,9 +16,7 @@
 
 #define udata pl.upgrdata.flashlight
 
-/* Extern Functions -------------------------------------------------------- */
-
-void Upgr_Flashlight_Enter(struct upgrade *upgr) {
+void Upgr_Flashlight_Enter(void) {
    udata.on        = false;
    udata.battery   = 0xffff;
    udata.intensity = 0.0;
@@ -26,14 +24,14 @@ void Upgr_Flashlight_Enter(struct upgrade *upgr) {
    udata.speed     = 1.0;
 }
 
-void Upgr_Flashlight_Deactivate(struct upgrade *upgr) {
+void Upgr_Flashlight_Deactivate(void) {
    udata.on        = false;
    udata.intensity = 0.0;
    udata.target    = 0.0;
    udata.speed     = 1.0;
 }
 
-script void Upgr_Flashlight_Update(struct upgrade *upgr) {
+void Upgr_Flashlight_Update(void) {
    i32 bat_life  = CVarGetI(sc_light_battery) * 35;
    i32 bat_regen = CVarGetI(sc_light_regen);
 
@@ -75,8 +73,6 @@ script void Upgr_Flashlight_Update(struct upgrade *upgr) {
             "*battery: %u\n",
             udata.target, udata.intensity, udata.speed, udata.battery);
 }
-
-/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr(OBJ "GetFlashlightIntensity")
 k32 Sc_GetFlashlightIntensity(void) {

@@ -34,8 +34,6 @@ bip_category_x(mail)
    for(i32 pagen = 0; pagen < bippagenum; pagen++) \
       __with(struct page *page = &bippages[pagen];)
 
-/* Types ------------------------------------------------------------------- */
-
 enum {
    #define bip_category_x(c) _bipc_##c,
    #include "p_bip.h"
@@ -88,13 +86,9 @@ struct bip {
    u32 rescur;
 };
 
-/* Extern Objects ---------------------------------------------------------- */
-
 extern struct bip  bip;
 extern struct page bippages[];
 extern mem_size_t  bippagenum;
-
-/* Extern Functions -------------------------------------------------------- */
 
 script void P_BIP_PInit(void);
 stkcall void P_BIP_PQuit(void);

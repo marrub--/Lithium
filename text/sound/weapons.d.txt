@@ -118,6 +118,7 @@ weapons {
       charge     Charge     # ^
       empty      FireEmpty  # Sound Ideas Series 6000
       draw       Draw       # ^
+      wail       Wail       # Half-Life 2
       firefinish FireFinish # Sigh - Introiutus/Kyrie
    }
 }

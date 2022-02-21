@@ -14,9 +14,7 @@
 
 #define udata pl.upgrdata.subweapons
 
-/* Extern Functions -------------------------------------------------------- */
-
-script void Upgr_Subweapons_Update(struct upgrade *upgr) {
+void Upgr_Subweapons_Update(void) {
    if(udata.shots < 2) {
       if(udata.charge >= 100) {
          AmbientSound(ss_weapons_subweapon_charge, 1.0);
@@ -41,7 +39,7 @@ script void Upgr_Subweapons_Update(struct upgrade *upgr) {
    }
 }
 
-void Upgr_Subweapons_Render(struct upgrade *upgr) {
+void Upgr_Subweapons_Render(void) {
    if(!pl.hudenabled) return;
 
    PrintSprite(sp_SubWepBack, 66,1, 239,2);
@@ -75,8 +73,6 @@ void Upgr_Subweapons_Enter(struct ugprade *upgr) {
    }
    #endif
 }
-
-/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr(OBJ "GetSubShots")
 i32 Sc_GetSubShots(void) {

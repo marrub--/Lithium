@@ -60,8 +60,6 @@ void W_DoRain(void) {
    }
 }
 
-/* Scripts ----------------------------------------------------------------- */
-
 script ext("ACS") addr(lsc_raindropspawn)
 void Sc_RainDropSpawn(void) {
    if(rain_chk) {

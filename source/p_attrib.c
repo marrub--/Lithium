@@ -14,8 +14,6 @@
 #include "p_player.h"
 #include "w_world.h"
 
-/* Static Functions -------------------------------------------------------- */
-
 static
 void AttrBar(struct gui_state *g, i32 x, i32 y, i32 w, str gfx)
 {
@@ -65,8 +63,6 @@ void StatusInfo(struct gui_state *g, i32 y, str left, str right)
    PrintText_str(left,  sf_lmidfont, g->defcr, g->ox+ 17,1, g->oy+y,1);
    PrintText_str(right, sf_smallfnt, g->defcr, g->ox+267,2, g->oy+y,1);
 }
-
-/* Extern Functions -------------------------------------------------------- */
 
 void P_CBI_TabStatus(struct gui_state *g)
 {

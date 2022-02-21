@@ -15,8 +15,6 @@
 
 
 
-
-
 enum Lith_WData {
    wdata_bossspawned,
    wdata_soulsfreed,

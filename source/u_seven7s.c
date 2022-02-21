@@ -14,18 +14,15 @@
 
 #define udata pl.upgrdata.seven7s
 
-/* Extern Functions -------------------------------------------------------- */
-
-void Upgr_Seven7s_Activate(struct upgrade *upgr) {
+void Upgr_Seven7s_Activate(void) {
    SetGravity(0, 0.0);
 }
 
-void Upgr_Seven7s_Deactivate(struct upgrade *upgr) {
+void Upgr_Seven7s_Deactivate(void) {
    SetGravity(0, 1.0);
 }
 
-script
-void Upgr_Seven7s_Update(struct upgrade *upgr) {
+void Upgr_Seven7s_Update(void) {
    k32 velx, vely, velz = pl.velz > 0 ? pl.velz : -2;
 
    if(pl.velz != 0) {

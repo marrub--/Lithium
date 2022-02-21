@@ -15,8 +15,6 @@
 #include "w_world.h"
 #include "p_hudid.h"
 
-/* Extern Functions -------------------------------------------------------- */
-
 dynam_aut script
 void P_Scr_Payout() {
    enum {

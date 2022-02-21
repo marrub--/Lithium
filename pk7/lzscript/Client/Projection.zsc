@@ -13,15 +13,11 @@
 
 extend class Lith_URANUS;
 
-/* Members ----------------------------------------------------------------- */
-
 private transient Lith_Le_Viewport   viewport;
 private transient Lith_Le_ProjScreen proj;
 private transient Lith_Le_GlScreen   projGl;
 private transient Lith_Le_SwScreen   projSw;
 private transient CVar               cvarRenderer;
-
-/* Member Functions -------------------------------------------------------- */
 
 private void projectSetRenderer() {
    let oldProj = proj;

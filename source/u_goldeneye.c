@@ -12,10 +12,7 @@
 
 #include "u_common.h"
 
-/* Extern Functions -------------------------------------------------------- */
-
-script
-void Upgr_Goldeneye_Update(struct upgrade *upgr)
+void Upgr_Goldeneye_Update(void)
 {
    if(ACS_Random(0, 0x7F) < 0x50)
    {

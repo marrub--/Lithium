@@ -18,9 +18,7 @@
 
 #define udata pl.upgrdata.vitalscan
 
-/* Extern Functions -------------------------------------------------------- */
-
-script void Upgr_VitalScan_Update(struct upgrade *upgr) {
+void Upgr_VitalScan_Update(void) {
    ACS_SetActivator(0, AAPTR_PLAYER_GETTARGET);
 
    bool six = ACS_StrCmp(ACS_GetActorClass(0), so_RLDeVileSix, 11) == 0;
@@ -118,7 +116,7 @@ script void Upgr_VitalScan_Update(struct upgrade *upgr) {
    }
 }
 
-void Upgr_VitalScan_Render(struct upgrade *upgr) {
+void Upgr_VitalScan_Render(void) {
    if(!pl.hudenabled || !udata.target) return;
 
    if(udata.hdtime == 30) SetFade(fid_vscan, 10, 12);

@@ -13,32 +13,31 @@
 #ifndef p_shopdef_h
 #define p_shopdef_h
 
-enum
-{
-   shoptype_items,
-   shoptype_upgrades,
-   shoptype_max
+enum {
+   _shop_items,
+   _shop_upgrades,
 };
 
-funcdef void (*shop_buy_t   )(struct shopdef const *def, void *obj);
-funcdef bool (*shop_canbuy_t)(struct shopdef const *def, void *obj);
-funcdef bool (*shop_give_t  )(struct shopdef const *def, void *obj, i32 tid);
-
-struct shopdef
-{
+struct shopdef {
+   i32  shoptype;
    cstr name;
    cstr bipunlock;
    i96  cost;
-
-   shop_buy_t    ShopBuy;
-   shop_canbuy_t ShopCanBuy;
-   shop_give_t   ShopGive;
 };
 
-void Shop_MInit(void);
+struct shopitem {
+   anonymous struct shopdef shopdef;
+   i32 pclass;
+   i32 count;
+   str classname;
+   bool weapon;
+};
 
-i96 P_Shop_Cost(struct shopdef const *def);
-bool P_Shop_CanBuy(struct shopdef const *def, void *obj);
-optargs(1) bool P_Shop_Buy(struct shopdef const *def, void *obj, cstr namefmt, bool nodelivery, bool nolog);
+bool P_Shop_CanBuy(struct shopdef *def);
+optargs(1) bool P_Shop_Buy(struct shopdef *def, cstr namefmt, bool nodelivery, bool nolog);
+
+bool Shop_CanBuy(struct shopitem const *item);
+void Shop_Buy(struct shopitem const *item);
+bool Shop_Give(struct shopitem const *item, i32 tid);
 
 #endif

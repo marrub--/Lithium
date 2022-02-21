@@ -16,8 +16,6 @@
 #include "w_world.h"
 #include "w_monster.h"
 
-/* Static Functions -------------------------------------------------------- */
-
 static
 void SetupAttributes()
 {
@@ -74,8 +72,6 @@ void SetPClass()
    pl.discrim = P_Discrim(pl.pclass);
    pl.color   = P_Color(pl.pclass);
 }
-
-/* Extern Functions -------------------------------------------------------- */
 
 bool P_ButtonPressed(i32 bt)
 {
@@ -255,7 +251,6 @@ void P_Init() {
       pl.jumpheight   = GetMembK(0, sm_JumpZ);
       pl.spawnhealth  = GetHealth(0);
       pl.maxhealth    = pl.spawnhealth;
-      pl.discount     = 1.0;
       pl.stepnoise    = StrParam("player/%S/step", pl.classname);
    }
 
@@ -371,8 +366,6 @@ void P_Dat_PTickPst() {
    if(pl.jumpboost != pl.old.jumpboost)
       SetMembK(0, sm_JumpZ, pl.jumpheight * boost);
 }
-
-/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr(OBJ "InputChar")
 void Sc_InputChar(i32 ch) {

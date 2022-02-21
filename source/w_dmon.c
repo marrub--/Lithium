@@ -14,8 +14,6 @@
 #include "w_world.h"
 #include "p_player.h"
 
-/* Static Objects ---------------------------------------------------------- */
-
 /* This is lazy-allocated. Don't touch or GDCC will break your
  * computer's face.
  */
@@ -24,8 +22,6 @@ dmon_t dmonalloc[0x7FFF];
 
 noinit static
 i32 lmvar dmonid;
-
-/* Extern Functions -------------------------------------------------------- */
 
 void PrintDmonAllocSize() {
    pl.logH(1, "dmonalloc is %.2k megabytes!", sizeof dmonalloc * 4 / 1024 / 1024.0);

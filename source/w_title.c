@@ -12,8 +12,6 @@
 
 #include "common.h"
 
-/* Static Functions -------------------------------------------------------- */
-
 static
 void Blinker(str bgn) {
    static
@@ -37,8 +35,6 @@ void Blinker(str bgn) {
 
    t++;
 }
-
-/* Extern Functions -------------------------------------------------------- */
 
 dynam_aut script
 void W_Title(void) {

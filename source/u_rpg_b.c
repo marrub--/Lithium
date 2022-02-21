@@ -15,8 +15,6 @@
 
 #define udata pl.upgrdata.rpg_b
 
-/* Static Functions -------------------------------------------------------- */
-
 script static
 i32 CheckTarget()
 {
@@ -26,10 +24,7 @@ i32 CheckTarget()
       return 0;
 }
 
-/* Extern Functions -------------------------------------------------------- */
-
-script
-void Upgr_RPG_B_Update(struct upgrade *upgr)
+void Upgr_RPG_B_Update(void)
 {
    if(P_Wep_CurType() == weapon_m_rocket)
    {
@@ -49,8 +44,6 @@ void Upgr_RPG_B_Update(struct upgrade *upgr)
                          GetX(0), GetY(0), GetZ(0) + GetHeight(0) / 2k);
    }
 }
-
-/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr(OBJ "HomingMissile")
 void Sc_HomingMissile(void)

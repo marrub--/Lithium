@@ -14,16 +14,13 @@
 
 #define udata pl.upgrdata.stealthsys
 
-/* Extern Functions -------------------------------------------------------- */
-
-void Upgr_StealthSys_Deactivate(struct upgrade *upgr)
+void Upgr_StealthSys_Deactivate(void)
 {
    pl.alpha = 1;
    InvTake(so_StealthSystem, 1);
 }
 
-script
-void Upgr_StealthSys_Update(struct upgrade *upgr)
+void Upgr_StealthSys_Update(void)
 {
    k32 vel = fastabsk(pl.getVel()) / 10.0;
    pl.alpha = udata.mulvel = lerpk(udata.mulvel, vel, 0.02);

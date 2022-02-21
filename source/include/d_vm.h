@@ -290,8 +290,6 @@ DCD(0x32, TRV, NP) /* Extension */
 
 #define StructOfsHead(nam, sel) (VAR_##nam##_BEG + S_##nam##_SIZE * (sel))
 
-/* Types ------------------------------------------------------------------- */
-
 enum {
    #define DCD(n, op, ty) DCD_##op##_##ty = n,
    #include "d_vm.h"
@@ -455,13 +453,9 @@ struct dcd_info {
    u32  adrm;
 };
 
-/* Extern Functions -------------------------------------------------------- */
-
 void Dlg_MInit(void);
 
 script void Dlg_Run(u32 num);
-
-/* Extern Objects ---------------------------------------------------------- */
 
 extern struct dlg_def        dlgdefs[DNUM_MAX];
 extern struct dcd_info const dcdinfo[0xFF];

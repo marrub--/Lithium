@@ -14,8 +14,6 @@
 #include "p_player.h"
 #include "w_world.h"
 
-/* Static Functions -------------------------------------------------------- */
-
 static
 void G_cutBox(struct gui_clip *other, i32 *x, i32 *y, i32 *w, i32 *h) {
    *x = clampi(*x, other->x, other->x + other->w);
@@ -34,8 +32,6 @@ void G_setClip(struct gui_state *g) {
       ClearClip();
    }
 }
-
-/* Extern Functions -------------------------------------------------------- */
 
 void G_Auto(struct gui_state *g, gid_t id, i32 x, i32 y, i32 w, i32 h,
             bool slide) {

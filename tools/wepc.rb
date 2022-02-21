@@ -71,8 +71,6 @@ _end_h_
 #include "common.h"
 #include "p_player.h"
 
-/* Extern Objects ---------------------------------------------------------- */
-
 struct weaponinfo const weaponinfo[weapon_max] = {
 #{
 res = String.new
@@ -80,8 +78,6 @@ for wep in weapons do res.concat "   {#{wep[:slt]}, #{wep[:pcl]}, #{wep[:nam]}, 
 res
 }
 };
-
-/* Extern Functions -------------------------------------------------------- */
 
 i32 Wep_FromName(i32 name) {
    switch(pl.pclass) {

@@ -19,8 +19,6 @@
 
 #define HasResistances(m) ((m)->rank >= 2)
 
-/* Static Objects ---------------------------------------------------------- */
-
 noinit static
 struct monster_preset monsterpreset[1024];
 
@@ -29,8 +27,6 @@ struct monster_info monsterinfo[1024];
 
 noinit static
 mem_size_t monsterpresetnum, monsterinfonum;
-
-/* Static Functions -------------------------------------------------------- */
 
 alloc_aut(0) stkcall static
 void GetInfo(dmon_t *m) {
@@ -324,8 +320,6 @@ void MonsterMain(dmon_t *m) {
    }
 }
 
-/* Extern Functions -------------------------------------------------------- */
-
 #ifndef NDEBUG
 void PrintMonsterInfo(dmon_t *m) {
    Log("%p (%p) %s active: %u id: %.3u\n"
@@ -608,8 +602,6 @@ void Mon_Init(void) {
       fclose(fp);
    }
 }
-
-/* Scripts ----------------------------------------------------------------- */
 
 script ext("ACS") addr(lsc_monstertype)
 i32 Sc_GetMonsterType() {

@@ -16,15 +16,12 @@
 
 #define udata pl.upgrdata.zoom
 
-/* Extern Functions -------------------------------------------------------- */
-
-void Upgr_Zoom_Deactivate(struct upgrade *upgr)
+void Upgr_Zoom_Deactivate(void)
 {
    udata.zoom = udata.vzoom = 0;
 }
 
-script
-void Upgr_Zoom_Update(struct upgrade *upgr)
+void Upgr_Zoom_Update(void)
 {
    if(udata.zoom == 0 && udata.vzoom == 0) return;
 
@@ -43,7 +40,7 @@ void Upgr_Zoom_Update(struct upgrade *upgr)
       udata.vzoom = udata.zoom;
 }
 
-void Upgr_Zoom_Render(struct upgrade *upgr)
+void Upgr_Zoom_Render(void)
 {
    if(udata.vzoom)
    {
@@ -68,8 +65,6 @@ void Upgr_Zoom_Render(struct upgrade *upgr)
       }
    }
 }
-
-/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") type("net") addr(OBJ "KeyZoom")
 void Sc_KeyZoom(i32 amt)

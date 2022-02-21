@@ -12,10 +12,7 @@
 
 #include "u_common.h"
 
-/* Extern Functions -------------------------------------------------------- */
-
-script
-void Upgr_InstaDeath_Update(struct upgrade *upgr)
+void Upgr_InstaDeath_Update(void)
 {
    if(pl.health < pl.oldhealth)
       ServCallI(sm_DieNow);

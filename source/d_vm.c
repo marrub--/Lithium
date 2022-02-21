@@ -18,8 +18,6 @@
 #include "d_compile.h"
 #include "w_world.h"
 
-/* Types ------------------------------------------------------------------- */
-
 enum {
    R1_S_PC = 0,
    R1_S_SP = 16,
@@ -51,16 +49,12 @@ enum {
    SR_N,
 };
 
-/* Extern Objects ---------------------------------------------------------- */
-
 struct dlg_def dlgdefs[DNUM_MAX];
 
 struct dcd_info const dcdinfo[0xFF] = {
    #define DCD(n, op, ty) [n] = {#op "." #ty, ADRM_##ty},
    #include "d_vm.h"
 };
-
-/* Static Objects ---------------------------------------------------------- */
 
 noinit static
 cps_t memory[Cps_Size(0xFFFF)];
@@ -77,8 +71,6 @@ cstr const action_names[] = {
    #define ACT(name) #name,
    #include "d_vm.h"
 };
-
-/* Static Functions -------------------------------------------------------- */
 
 /* utilities */
 #define local alloc_aut(0) stkcall static
@@ -721,8 +713,6 @@ void ActFIN_WAIT() {
    }
 }
 
-/* Extern Functions -------------------------------------------------------- */
-
 /* Main dialogue VM. */
 dynam_aut script
 void Dlg_Run(u32 num) {
@@ -1139,8 +1129,6 @@ halt:
 
    pl.modal = _gui_none;
 }
-
-/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr(OBJ "RunProgram")
 void Sc_RunProgram(i32 num) {

@@ -21,16 +21,12 @@
 #include "m_tokbuf.h"
 #include "m_trie.h"
 
-/* Types ------------------------------------------------------------------- */
-
 struct compiler {
    struct tokbuf   tb;
    struct dlg_def  def;
    struct tbuf_err res;
    u32             num;
 };
-
-/* Extern Functions -------------------------------------------------------- */
 
 u32 Dlg_WriteCode(struct dlg_def const *def, u32 c, u32 i);
 

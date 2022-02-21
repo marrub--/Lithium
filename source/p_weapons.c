@@ -15,8 +15,6 @@
 #include "w_world.h"
 #include "p_hudid.h"
 
-/* Static Functions -------------------------------------------------------- */
-
 static
 void GiveWeaponItem(i32 parm, i32 slot) {
    switch(parm) {
@@ -71,8 +69,6 @@ void PickupScore(i32 parm) {
       P_Log_SellWeapon(info, score);
    }
 }
-
-/* Extern Functions -------------------------------------------------------- */
 
 void Wep_GInit(void) {
    for(i32 i = 0; i < weapon_max; i++) {
@@ -190,8 +186,6 @@ void P_Wep_PTick() {
    }
    }
 }
-
-/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr(OBJ "WeaponPickup")
 bool Sc_WeaponPickup(i32 name) {

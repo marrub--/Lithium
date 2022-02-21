@@ -13,25 +13,14 @@
 #include "u_common.h"
 #include "w_world.h"
 
-/* Static Functions -------------------------------------------------------- */
-
-static
-bool UpgrCanBuy(struct shopdef const *, void *upgr) {
-   return !get_bit(((struct upgrade *)upgr)->flags, _ug_owned);
+bool Upgr_CanBuy(struct upgrade const *upgr) {
+   return !get_bit(upgr->flags, _ug_owned);
 }
 
-static
-void UpgrShopBuy(struct shopdef const *, void *upgr) {
-   P_Upg_SetOwned(upgr);
-}
+bool Upgr_Give(struct upgrade const *upgr, i32 tid) {
+   SetMembI(tid, sm_UpgradeId, upgr->key);
 
-static
-bool UpgrGive(struct shopdef const *, void *upgr_, i32 tid) {
-   struct upgrade const *upgr = upgr_;
-
-   SetMembI(tid, sm_UpgradeId, upgr->info->key);
-
-   switch(upgr->info->category) {
+   switch(upgr->category) {
    case _uc_body: SetMembI(tid, sm_UpgradeBody, true); break;
    case _uc_weap: SetMembI(tid, sm_UpgradeWeap, true); break;
    default:       SetMembI(tid, sm_UpgradeExtr, true); break;
@@ -40,27 +29,51 @@ bool UpgrGive(struct shopdef const *, void *upgr_, i32 tid) {
    return true;
 }
 
-/* Extern Functions -------------------------------------------------------- */
+#define Fn(n, cb) Upgr_##n##_##cb();
+#define Case(n) break; case UPGR_##n:;
 
-void Upgr_MInit(void) {
-   for(i32 i = 0; i < UPGR_MAX; i++) {
-      struct upgradeinfo *ui = &upgrinfo[i];
-
-      /* Set up static function pointers */
-      ui->ShopBuy    = UpgrShopBuy;
-      ui->ShopCanBuy = UpgrCanBuy;
-      ui->ShopGive   = UpgrGive;
-
-      /* Set up individual upgrades' function pointers */
-      switch(ui->key) {
-      #define Ret(n) continue;
-      #define Fn_F(n, cb) ui->cb = Upgr_##n##_##cb;
-      #define Fn_S(n, cb) Fn_F(n, cb)
-      #include "u_func.h"
-         continue;
-      }
+static
+void Upgr_Activate(i32 key) {
+   switch(key) {
+   #define A
+   #include "u_func.h"
    }
 }
+
+static
+void Upgr_Deactivate(i32 key) {
+   switch(key) {
+   #define D
+   #include "u_func.h"
+   }
+}
+
+script static
+void Upgr_Update(i32 key) {
+   switch(key) {
+   #define U
+   #include "u_func.h"
+   }
+}
+
+static
+void Upgr_Enter(i32 key) {
+   switch(key) {
+   #define E
+   #include "u_func.h"
+   }
+}
+
+static
+void Upgr_Render(i32 key) {
+   switch(key) {
+   #define R
+   #include "u_func.h"
+   }
+}
+
+#undef Fn
+#undef Case
 
 cstr Upgr_EnumToStr(i32 n) {
    switch(n) {
@@ -76,28 +89,21 @@ void P_Upg_SetOwned(struct upgrade *upgr) {
    set_bit(upgr->flags, _ug_owned);
    pl.upgradesowned++;
 
-   if(upgr->info->category == _uc_body && upgr->info->cost == 0)
+   if(upgr->category == _uc_body && upgr->cost == 0)
       P_Upg_Toggle(upgr);
 }
 
 script void P_Upg_PInit() {
-   fastmemset(pl.upgrades, 0, sizeof pl.upgrades[0] * countof(pl.upgrades));
+   fastmemcpy(pl.upgrades, upgrinfo, sizeof pl.upgrades);
 
-   for(i32 i = 0; i < UPGR_MAX; i++) {
-      if(upgrinfo[i].pclass & pl.pclass) {
-         set_bit(pl.upgrades[i].flags, _ug_available);
+   for(i32 i = 0; i < UPGR_MAX; ++i) {
+      struct upgrade *upgr = &pl.upgrades[i];
+      if(upgr->pclass & pl.pclass) {
+         set_bit(upgr->flags, _ug_available);
+         if(upgr->cost == 0 || dbgflags(dbgf_upgr)) {
+            P_Upg_Buy(upgr, true, true);
+         }
       }
-   }
-
-   for_upgrade(upgr) {
-      upgr->info = &upgrinfo[_i];
-
-      if(upgr->info->cost == 0
-         #ifndef NDEBUG
-         || dbgflags(dbgf_upgr)
-         #endif
-         )
-         P_Upg_Buy(upgr, true, true);
    }
 
    pl.upgrinit = true;
@@ -134,7 +140,7 @@ script void P_Upg_PTick() {
       pl.hudenabled = false;
 
       for_upgrade(upgr) {
-         if(get_bit(upgr->flags, _ug_active) && upgr->info->group == 10) {
+         if(get_bit(upgr->flags, _ug_active) && upgr->group == 10) {
             pl.hudenabled = true;
          }
       }
@@ -144,30 +150,30 @@ script void P_Upg_PTick() {
       return;
 
    for_upgrade(upgr)
-      if(get_bit(upgr->flags, _ug_active) && upgr->info->Update)
-         upgr->info->Update(upgr);
+      if(get_bit(upgr->flags, _ug_active))
+         Upgr_Update(upgr->key);
 }
 
 script void P_Upg_PTickPst() {
+   SetSize(320, 240);
+   ClearClip();
    for_upgrade(upgr) {
-      if(get_bit(upgr->flags, _ug_active) && upgr->info->Render) {
-         SetSize(320, 240);
-         ClearClip();
-         upgr->info->Render(upgr);
+      if(get_bit(upgr->flags, _ug_active)) {
+         Upgr_Render(upgr->key);
       }
    }
 }
 
 void P_Upg_Enter() {
    for_upgrade(upgr)
-      if(get_bit(upgr->flags, _ug_active) && upgr->info->Enter)
-         upgr->info->Enter(upgr);
+      if(get_bit(upgr->flags, _ug_active))
+         Upgr_Enter(upgr->key);
 }
 
 i32 P_Upg_CheckReqs(struct upgrade *upgr) {
    i32 ret = 0;
    for(i32 ureq = 0; ureq < _ur_max; ++ureq) {
-      if(get_bit(upgr->info->requires, ureq)) {
+      if(get_bit(upgr->requires, ureq)) {
          switch(ureq) {
          #define Req(r, cond) case r: if(!(cond)) {set_bit(ret, ureq);} break
          Req(_ur_ai,  get_bit(cbiupgr, cupg_m_armorinter));
@@ -188,7 +194,7 @@ bool P_Upg_CanActivate(struct upgrade *upgr) {
       (get_bit(upgr->flags, _ug_owned) ||
        get_bit(upgr->flags, _ug_active)) &&
       (pl.pclass != pcl_marine ||
-       pl.cbi.pruse + upgr->info->perf <= cbiperf);
+       pl.cbi.pruse + upgr->perf <= cbiperf);
 }
 
 bool P_Upg_Toggle(struct upgrade *upgr) {
@@ -198,24 +204,20 @@ bool P_Upg_Toggle(struct upgrade *upgr) {
    tog_bit(upgr->flags, _ug_active);
    bool on = get_bit(upgr->flags, _ug_active);
 
-   if(on) pl.cbi.pruse += upgr->info->perf;
-   else   pl.cbi.pruse -= upgr->info->perf;
+   if(on) pl.cbi.pruse += upgr->perf;
+   else   pl.cbi.pruse -= upgr->perf;
 
-   if(on && upgr->info->group)
+   if(on && upgr->group)
       for_upgrade(other)
-         if(other != upgr && get_bit(other->flags, _ug_active) && other->info->group == upgr->info->group)
+         if(other != upgr && get_bit(other->flags, _ug_active) && other->group == upgr->group)
             P_Upg_Toggle(other);
 
    if(on) {
-      if(upgr->info->Activate)
-         upgr->info->Activate(upgr);
-
-      pl.scoremul += upgr->info->scoreadd;
+      Upgr_Activate(upgr->key);
+      pl.scoremul += upgr->scoreadd;
    } else {
-      if(upgr->info->Deactivate)
-         upgr->info->Deactivate(upgr);
-
-      pl.scoremul -= upgr->info->scoreadd;
+      Upgr_Deactivate(upgr->key);
+      pl.scoremul -= upgr->scoreadd;
    }
 
    return true;

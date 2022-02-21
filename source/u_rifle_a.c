@@ -12,14 +12,12 @@
 
 #include "u_common.h"
 
-/* Extern Functions -------------------------------------------------------- */
-
-void Upgr_Rifle_A_Deactivate(struct upgrade *upgr)
+void Upgr_Rifle_A_Deactivate(void)
 {
    pl.riflefiremode = 0;
 }
 
-void Upgr_Rifle_A_Render(struct upgrade *upgr)
+void Upgr_Rifle_A_Render(void)
 {
    if(P_Wep_CurType() != weapon_m_rifle) return;
 
@@ -39,8 +37,6 @@ void Upgr_Rifle_A_Render(struct upgrade *upgr)
    PrintSprite(sp_HUD_H_W3, 215,2, 240,2);
    PrintSprite(sa_rifle_modes[rifle_firemode_max - pl.riflefiremode - 1], 215,2, 208 + (pl.riflefiremode * 16),2);
 }
-
-/* Scripts ----------------------------------------------------------------- */
 
 script_str ext("ACS") addr(OBJ "SwitchRifleFiremode")
 void Sc_SwitchRifleFiremode(void)

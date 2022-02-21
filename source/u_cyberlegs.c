@@ -12,22 +12,19 @@
 
 #include "u_common.h"
 
-/* Extern Functions -------------------------------------------------------- */
-
-void Upgr_CyberLegs_Activate(struct upgrade *upgr)
+void Upgr_CyberLegs_Activate(void)
 {
    pl.speedmul += 0.2;
    pl.jumpboost += 0.5;
 }
 
-void Upgr_CyberLegs_Deactivate(struct upgrade *upgr)
+void Upgr_CyberLegs_Deactivate(void)
 {
    pl.speedmul -= 0.2;
    pl.jumpboost -= 0.5;
 }
 
-script
-void Upgr_CyberLegs_Update(struct upgrade *upgr)
+void Upgr_CyberLegs_Update(void)
 {
    k32 absvel = fastabsk(pl.old.velz) * 10.0k;
 

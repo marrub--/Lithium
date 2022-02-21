@@ -14,22 +14,19 @@
 
 #define udata pl.upgrdata.lolsords
 
-/* Extern Functions -------------------------------------------------------- */
-
-void Upgr_lolsords_Activate(struct upgrade *upgr)
+void Upgr_lolsords_Activate(void)
 {
    udata.origweapon = pl.weaponclass;
    InvGive(so_Sword, 1);
 }
 
-void Upgr_lolsords_Deactivate(struct upgrade *upgr)
+void Upgr_lolsords_Deactivate(void)
 {
    InvTake(so_Sword, 1);
    ACS_SetWeapon(udata.origweapon);
 }
 
-script
-void Upgr_lolsords_Update(struct upgrade *upgr)
+void Upgr_lolsords_Update(void)
 {
    ACS_SetWeapon(so_Sword);
 }

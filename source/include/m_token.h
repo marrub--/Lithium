@@ -19,8 +19,6 @@
 
 #define TokStr(tok) fast_strndup((tok)->textV, (tok)->textC)
 
-/* Types ------------------------------------------------------------------- */
-
 enum {
    tok_null,   /* No token */
 
@@ -110,8 +108,6 @@ struct token {
    char textV[256];
    mem_size_t textC;
 };
-
-/* Extern Functions -------------------------------------------------------- */
 
 void TokParse(FILE *fp, struct token *tok, struct origin *orig);
 cstr TokPrint(struct token *tok);
