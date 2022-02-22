@@ -12,7 +12,6 @@ weapons {
       charge Charge # Rozenkreuzstilette
       armgun ArmGun # Phantasy Star: Nova
       needle Needle # Psychic
-      $alias dagger  = .weapons.rend.end
       $alias axe     = .weapons.rend.slash
       $alias grenade = .weapons.rifle.grenade
    }

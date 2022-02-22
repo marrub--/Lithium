@@ -77,8 +77,7 @@ void CBI_Install(i32 num) {
       case cupg_d_zikr:  GiveSubWeapon(_subw_dart);    break;
       case cupg_d_zakwu: GiveSubWeapon(_subw_axe);     break;
       case cupg_d_zaruk: GiveSubWeapon(_subw_grenade); break;
-      case cupg_d_ruzuk: GiveSubWeapon(_subw_dagger);
-                         InvGive(so_Motra, 1); break;
+      case cupg_d_ruzuk: InvGive(so_Motra, 1);         break;
       #undef GiveSubWeapon
       }
 

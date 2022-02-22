@@ -599,7 +599,6 @@ weapons/cercle/attack lsnd/WeaponsC/Cercle/Attack
 weapons/subweapon/charge lsnd/WeaponsD/Subweapons/Charge
 weapons/subweapon/armgun lsnd/WeaponsD/Subweapons/ArmGun
 weapons/subweapon/needle lsnd/WeaponsD/Subweapons/Needle
-$alias weapons/subweapon/dagger weapons/rend/end
 $alias weapons/subweapon/axe weapons/rend/slash
 $alias weapons/subweapon/grenade weapons/rifle/grenade
 weapons/kampilan/draw lsnd/WeaponsD/Kampilan/Draw

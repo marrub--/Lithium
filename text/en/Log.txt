@@ -78,7 +78,7 @@
 == \#LOG_CBI_CRDistInter | $\#CBI_RDistInter
 
 ## CBI Upgrades (Dark Lord) ══════════════════════════════════════════════════╕
-== \#LOG_CBI_DRuzuk     | Sub-Daggers & Motril
+== \#LOG_CBI_DRuzuk     | Motril
 == \#LOG_CBI_DZaruk     | Sub-Grenades
 == \#LOG_CBI_DZakwu     | Sub-Axe
 == \#LOG_CBI_DZikr      | Sub-Dart

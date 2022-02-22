@@ -44,7 +44,7 @@ void Upgr_Subweapons_Render(void) {
 
    PrintSprite(sp_SubWepBack, 66,1, 239,2);
 
-   u32 prc = 38 * udata.charge / (k32)100.0;
+   u32 prc = 29 * udata.charge / (k32)100.0;
    if(udata.shots == 0) SetClip(72, 223, prc, 2);
    /*                */ PrintSprite(sp_SubWepBar1, 72,1, 224,2);
    if(udata.shots == 1) SetClip(72, 223, prc, 2);

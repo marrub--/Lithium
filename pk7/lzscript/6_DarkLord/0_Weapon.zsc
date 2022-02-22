@@ -6,39 +6,6 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_RedDagger : Actor {
-   default {
-      Damage 0;
-      DamageType "Magic";
-      RenderStyle "ColorAdd";
-      Speed 7;
-
-      Projectile;
-      +Bright
-      +Ripper
-      +ForcePain
-   }
-
-   override int specialMissileHit(Actor th) {
-      if(target != th && tracer != th && th.bShootable) {
-         double ang = target ? target.angleTo(self) : 0;
-         tracer = th;
-         th.damageMobj(self, target, 5, 'Magic');
-         th.spawnLineAttackBlood(target, pos, ang, 15, 15);
-      }
-      return 1;
-   }
-
-   states {
-   Spawn:
-      BLLT V -1;
-      stop;
-   Death:
-      BLLT V 1 a_fadeOut;
-      wait;
-   }
-}
-
 class Lith_SubAxe : Actor {
    default {
       Damage 10;
@@ -159,10 +126,6 @@ action(Weapon) void lith_subGunFire() {
    lith_fireBullets(1, 2, -1, 15 * random(2, 4), flags: FBF_NORANDOM, tracerX: -6);
 }
 
-action(Weapon) void lith_subDagFire() {
-   a_fireProjectile("Lith_RedDagger", 0, false, frandom(-8,8), frandom(-8,8));
-}
-
 action(Weapon) void lith_subGrnFire() {
    a_startSound("weapons/subweapon/grenade", lch_altweapon);
    a_alertMonsters();
@@ -207,7 +170,6 @@ override void tick() {
       state which;
       switch(owner.acs_scriptCall("Lith_GetSubType")) {
       case _subw_gun:     which = resolveState("_SubGun"); break;
-      case _subw_dagger:  which = resolveState("_SubDag"); break;
       case _subw_grenade: which = resolveState("_SubGrn"); break;
       case _subw_axe:     which = resolveState("_SubAxe"); break;
       case _subw_dart:    which = resolveState("_SubDrt"); break;
@@ -279,18 +241,6 @@ _SubGun:
    ARGN B 1 bright lith_subGunPreFire;
    ARGN A 1 bright lith_subGunFire;
    TNT1 A 4;
-   stop;
-_SubDag:
-   #### # 0 a_alertMonsters();
-   #### # 0 a_startSound("weapons/subweapon/dagger", lch_altweapon);
-   ADAG DD 2 bright lith_subDagFire;
-   #### # 0 a_startSound("weapons/subweapon/dagger", lch_altweapon);
-   ADAG CC 2 bright lith_subDagFire;
-   #### # 0 a_startSound("weapons/subweapon/dagger", lch_altweapon);
-   ADAG BB 2 bright lith_subDagFire;
-   #### # 0 a_startSound("weapons/subweapon/dagger", lch_altweapon);
-   ADAG AA 2 bright lith_subDagFire;
-   TNT1 A 10;
    stop;
 _SubGrn:
    AGRN A 1 bright lith_subGrnFire;

@@ -17,7 +17,7 @@ defaultOptionMenu {
 }
 
 listMenu "MainMenu" {
-   staticPatch 190, -10, "lgfx/Menu/Title.png"
+   staticPatch 190, 10, "lgfx/Menu/Title.png"
    position    30, 90
 
    textItem "$MENU_NGAME", "n", "PlayerclassMenu"
@@ -33,8 +33,8 @@ listMenu "MainMenu" {
    textItem "$MENU_CREDIT", "c", "CreditsMenu"
    textItem "$MENU_QUITG",  "q", "QuitMenu"
 
-   font "smallfont", "Black", "Black"
-   staticText 285, 57, "1.7.0"
+   font "smallfont", "White", "White"
+   staticText 0, 0, "Version 1.7.0"
 }
 
 listMenu "PlayerclassMenu" {

@@ -36,7 +36,7 @@ void HUD_Log() {
 
 static
 void HUD_TopRight() {
-   cstr fmt;
+   cstr beg, end;
    str  fnt;
    i32  clr = hudcolor;
 
@@ -47,24 +47,27 @@ void HUD_TopRight() {
       lerplli(&udata.score);
    }
 
+   beg = scoresep(udata.score.value_display);
+
    switch(hudtype) {
    default:
    case _hud_marine:
-      fmt = "%s\Cnscr";
+      end = "\Cnscr";
       fnt = sf_smallfnt;
       clr = CR_WHITE;
       break;
    case _hud_cybermage:
-      fmt = "%s \CnScr";
+      end = " \CnScr";
       fnt = sf_italic;
       break;
    case _hud_informant:
-      fmt = "%s \CnScore";
+      end = " \CnScore";
       fnt = sf_lmidfont;
       break;
    case _hud_assassin:
    case _hud_darklord:
-      fmt = u8"\Cj\C-%s";
+      end = beg;
+      beg = u8"\Cj\C-";
       fnt = sf_lmidfont;
       break;
    }
@@ -72,10 +75,8 @@ void HUD_TopRight() {
    i32 y = 3;
 
    if(CVarGetI(sc_hud_showscore)) {
-      char scr[64];
-      sprintf(scr, fmt, scoresep(udata.score.value_display));
-
-      PrintTextChS(scr);
+      PrintTextChS(beg);
+      PrintChrSt(end);
       PrintTextX(fnt, clr, 320,2, y,1, _u_no_unicode);
 
       if(hudtype != _hud_cybermage && hudtype != _hud_old) {
@@ -89,10 +90,12 @@ void HUD_TopRight() {
          }
 
          if(CheckFade(fid_schit1)) {
-            PrintTextChS(scr);
+            PrintTextChS(beg);
+            PrintChrSt(end);
             PrintTextFX(fnt, CR_ORANGE, 320,2, 3,1, fid_schit1, _u_no_unicode);
          } else if(CheckFade(fid_schit2)) {
-            PrintTextChS(scr);
+            PrintTextChS(beg);
+            PrintChrSt(end);
             PrintTextFX(fnt, CR_PURPLE, 320,2, 3,1, fid_schit2, _u_no_unicode);
          }
 
@@ -111,8 +114,13 @@ void HUD_TopRight() {
    }
 
    if(CVarGetI(sc_hud_showlvl)) {
-      PrintTextFmt("Lv.%u", pl.attr.level);
-      if(pl.attr.points) __nprintf(" (\Cn%u\C- pts)", pl.attr.points);
+      PrintTextChS("Lv.");
+      ACS_PrintInt(pl.attr.level);
+      if(pl.attr.points) {
+         PrintChrSt(" (\Cn");
+         ACS_PrintInt(pl.attr.points);
+         PrintChrSt("\C- pts)");
+      }
       PrintTextX(fnt, clr, 320,2, y,1, _u_no_unicode);
       y += 7;
    }

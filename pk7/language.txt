@@ -709,7 +709,6 @@
 "LITH_INFO_SHORT_DualRocket" = "Franca & Sophia";
 "LITH_INFO_SHORT_FortuneGun" = "Fortiuty";
 "LITH_INFO_SHORT_Rakz" = "Sub-bullets";
-"LITH_INFO_SHORT_Ruzuk" = "Sub-daggers";
 "LITH_INFO_SHORT_Zaruk" = "Sub-grenades";
 "LITH_INFO_SHORT_Zakuw" = "Sub-stealers";
 "LITH_INFO_SHORT_Zikr" = "Sub-darts";
@@ -1259,7 +1258,7 @@
 "LITH_LOG_CBI_CSlot6Spell" = "$LITH_CBI_Slot6Spell";
 "LITH_LOG_CBI_CSlot7Spell" = "$LITH_CBI_Slot7Spell";
 "LITH_LOG_CBI_CRDistInter" = "$LITH_CBI_RDistInter";
-"LITH_LOG_CBI_DRuzuk" = "Sub-Daggers & Motril";
+"LITH_LOG_CBI_DRuzuk" = "Motril";
 "LITH_LOG_CBI_DZaruk" = "Sub-Grenades";
 "LITH_LOG_CBI_DZakwu" = "Sub-Axe";
 "LITH_LOG_CBI_DZikr" = "Sub-Dart";
