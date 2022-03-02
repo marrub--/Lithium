@@ -169,7 +169,6 @@ void GUIUpgradeDescription(struct gui_state *g, struct upgrade *upgr) {
 
    /* Cost */
    cstr mark;
-   str cost;
 
    switch(upgr->key) {
    case UPGR_lolsords:   mark = "\Cjfolds"; break;
@@ -177,16 +176,15 @@ void GUIUpgradeDescription(struct gui_state *g, struct upgrade *upgr) {
    default:              mark = "\Cnscr";   break;
    }
 
-   if(upgr->cost) cost = StrParam("%s%s", scoresep(upgr->shopdef.cost), mark);
-   else                 cost = ns(lang(sl_free));
-
-   PrintText_str(cost, sf_smallfnt, g->defcr, g->ox+98,1, g->oy+17,1);
+   PrintText_str(upgr->cost
+      ? fast_strdup2(scoresep(upgr->shopdef.cost), mark)
+      : ns(lang(sl_free)), sf_smallfnt, g->defcr, g->ox+98,1, g->oy+17,1);
 
    /* Category */
    PrintText_str(ns(lang(sa_upgr_categ[upgr->category])), sf_smallfnt, g->defcr, g->ox+98,1, g->oy+27,1);
 
    /* Effect */
-   ifauto(str, effect, lang_fmt_discrim(LANG "UPGRADE_EFFEC_%s%s", upgr->name))
+   ifauto(str, effect, lang_discrim(fast_strdup2(LANG "UPGRADE_EFFEC_", upgr->name)))
       PrintTextFmt("%S %S", ns(lang(sl_effect)), effect);
 
    static

@@ -118,18 +118,6 @@
 #define add_status(fx) ServCallI(sm_AddStatFx, fx)
 #define rem_status(fx) ServCallI(sm_RemStatFx, fx)
 
-#define Spf s""
-
-#define CVAR  "lith_"
-#define DCVAR "__lith_"
-#define LANG  "LITH_"
-#define OBJ   "Lith_"
-
-#define sCVAR  Spf CVAR
-#define sDCVAR Spf DCVAR
-#define sLANG  Spf LANG
-#define sOBJ   Spf OBJ
-
 #define ServCallI(...) SCallI(so_Serv, __VA_ARGS__)
 #define ServCallK(...) SCallK(so_Serv, __VA_ARGS__)
 #define ServCallS(...) SCallS(so_Serv, __VA_ARGS__)

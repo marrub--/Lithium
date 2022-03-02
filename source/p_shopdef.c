@@ -33,13 +33,13 @@ bool P_Shop_Give(struct shopdef *def, i32 tid) {
    return false;
 }
 
-bool P_Shop_Buy(struct shopdef *def, cstr namefmt, bool nodelivery, bool nolog) {
+bool P_Shop_Buy(struct shopdef *def, cstr name, bool nodelivery, bool nolog) {
    if(!P_Shop_CanBuy(def))
       return false;
 
    if(!nolog) {
       pl.logF(tmpstr(lang(sl_log_bought)),
-              ns(lang_fmt_discrim(namefmt, def->name)));
+              ns(lang_discrim(fast_strdup2(name, def->name))));
    }
 
    if(def->bipunlock) {

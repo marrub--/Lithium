@@ -63,7 +63,7 @@ struct set_parm {
 #define SG_cvBody(type, name, suff) \
    script static \
    type SG_cv##name(struct set_parm const *sp, type *v) { \
-      str cvar = fast_strcpy2(CVAR, sp->st->text); \
+      str cvar = fast_strdup2(CVAR, sp->st->text); \
       if(v) {CVarSet##suff(cvar, *v); return *v;} \
       else  {return CVarGet##suff(cvar);} \
    }

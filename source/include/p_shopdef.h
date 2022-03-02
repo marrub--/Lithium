@@ -34,7 +34,7 @@ struct shopitem {
 };
 
 bool P_Shop_CanBuy(struct shopdef *def);
-optargs(1) bool P_Shop_Buy(struct shopdef *def, cstr namefmt, bool nodelivery, bool nolog);
+optargs(1) bool P_Shop_Buy(struct shopdef *def, cstr name, bool nodelivery, bool nolog);
 
 bool Shop_CanBuy(struct shopitem const *item);
 void Shop_Buy(struct shopitem const *item);

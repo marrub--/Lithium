@@ -72,6 +72,7 @@ GlobalCrH(wselm1) GlobalCrH(wselm2) GlobalCrH(wselm3) GlobalCrH(wselms)
 #define PrintTextFmt(...)  StrParamBegin(__VA_ARGS__)
 #define PrintTextChr(s, n) (ACS_BeginPrint(), PrintChars(s, n))
 #define PrintTextChS(s)    (ACS_BeginPrint(), PrintChrSt(s))
+#define PrintTextChL(s)    (ACS_BeginPrint(), PrintChrLi(s))
 #define PrintTextEnd()     ACS_EndStrParam()
 
 #define PrintText_str(s, font, cr, x, xa, y, ya) \

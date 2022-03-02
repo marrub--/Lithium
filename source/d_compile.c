@@ -28,7 +28,9 @@ bool chtf_dbg_dlg(cheat_params_t const params) {
 
    if(def->codeV) {
       ACS_BeginLog();
-      __nprintf("--- Script %u ---\n", n);
+      PrintChrLi("--- Script ");
+      ACS_PrintHex(n);
+      PrintChrLi(" ---\n");
       __nprintf("Disassembling(%p,%u,%u)...\n", def->codeV, def->codeC,
                 def->codeP);
 
@@ -39,7 +41,7 @@ bool chtf_dbg_dlg(cheat_params_t const params) {
          i = Dlg_WriteCode(def, c, i);
          ACS_PrintChar('\n');
       }
-      PrintChrSt("Dumping code...\n");
+      PrintChrLi("Dumping code...\n");
       Dbg_PrintMemC(def->codeV, def->codeC);
       __nprintf("Dumping string table(%p,%u,%u)...\n", def->stabV, def->stabC,
                 def->stabP);
@@ -140,7 +142,7 @@ u32 Dlg_WriteCode(struct dlg_def const *def, u32 c, u32 i) {
    __nprintf("%02X ", c);
 
    if(!inf->name[0]) {
-      PrintChrSt("       invalid opcode");
+      PrintChrLi("       invalid opcode");
       return i;
    }
 

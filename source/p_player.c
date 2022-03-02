@@ -489,7 +489,7 @@ void P_doIntro() {
          last = which;
 
          ACS_BeginPrint();
-         PrintChrSt(LANG "BEGINNING_");
+         PrintChrLi(LANG "BEGINNING_");
          PrintChrSt(pl.discrim);
          ACS_PrintChar('_');
          ACS_PrintInt(which);

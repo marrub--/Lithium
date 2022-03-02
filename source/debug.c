@@ -75,7 +75,7 @@ void Dbg_PrintMemC(cps_t const *d, mem_size_t size) {
       pos += 3;
    }
 
-   PrintChrSt("\nEOF\n");
+   PrintChrLi("\nEOF\n");
 }
 
 void Dbg_PrintMem(void const *data, mem_size_t size) {
@@ -103,7 +103,7 @@ void Dbg_PrintMem(void const *data, mem_size_t size) {
       pos += 3;
    }
 
-   PrintChrSt("\nEOF\n");
+   PrintChrLi("\nEOF\n");
 }
 
 void Log(cstr fmt, ...) {

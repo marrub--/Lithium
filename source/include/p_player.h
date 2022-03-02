@@ -304,7 +304,6 @@ struct player {
 
    /* Score */
    i96 scoreaccum;
-   str scoreaccumstr;
    i32 scoreaccumtime;
    k64 scoremul;
 

@@ -753,10 +753,11 @@ void Dlg_Run(u32 num) {
    #ifndef NDEBUG
    if(dbglevel(log_dlg)) {
       ACS_BeginLog();
-      __nprintf("--- begin dialogue %u ---\n", num);
-      PrintChrSt("Dumping segment PRG...\n");
+      PrintChrLi("--- begin dialogue ");
+      ACS_PrintHex(num);
+      PrintChrLi(" ---\nDumping segment PRG...\n");
       Dbg_PrintMemC(&memory[PRG_BEG_C], def->codeC);
-      PrintChrSt("Dumping segment STR...\n");
+      PrintChrLi("Dumping segment STR...\n");
       Dbg_PrintMemC(&memory[STR_BEG_C], def->stabC);
       ACS_EndLog();
    }

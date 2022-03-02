@@ -51,11 +51,11 @@ void Waves() {
 
    /* Square */
    for(i32 i = 0; i < 70; i++) {
-      const k32 frq = 1.0k / 40.0k;
+      #define FRQ 0.025k
 
       i32 pos = (7 + timer + i) % 160;
       i32 a   =
-         2.0k * (2.0k * floork(frq * pos) - floork(2.0k * frq * pos)) + 1.0k;
+         2.0k * (2.0k * floork(FRQ * pos) - floork(2.0k * FRQ * pos)) + 1.0k;
 
       if(pos % 20) {
          PrintSpriteA(sp_HUD_H_D16, 300 + (a > 0) * 7,1, 25 + pos,1, i / 70.0k);

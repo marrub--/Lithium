@@ -158,7 +158,7 @@ str RandomName(i32 id) {
    srand(id ? mapseed + id : ACS_Random(0, INT32_MAX));
 
    ACS_BeginPrint();
-   PrintChars("\Cg", 2);
+   PrintChrLi("\Cg");
 
    if(id && rand() % 1000 != 0) {
       noinit static
@@ -204,7 +204,7 @@ str RandomName(i32 id) {
    }
 
    if(id) {
-      PrintChars(", the ", 6);
+      PrintChrLi(", the ");
       PrintChrSt(titles[rand() % countof(titles)]);
    }
 

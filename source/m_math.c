@@ -64,6 +64,8 @@
 #define K64_LO 0x00000000FFFFFFFFUL
 #define K64_HI 0xFFFFFFFF00000000UL
 
+#define POLYNOMIAL 0xC96C5795D7870F42 /* ECMA 182 */
+
 union ik32 ik32;
 union uk32 uk32;
 
@@ -75,13 +77,11 @@ bool crcinit;
 
 static
 void InitCRC64(void) {
-   u64 const polynomial = 0xC96C5795D7870F42; /* ECMA 182 */
-
    for(u64 i = 0; i < 256; i++) {
       u64 remainder = i;
 
       for(i32 j = 0; j < 8; j++) {
-         if(remainder & 1) remainder = (remainder >> 1) ^ polynomial;
+         if(remainder & 1) remainder = (remainder >> 1) ^ POLYNOMIAL;
          else              remainder >>= 1;
       }
 

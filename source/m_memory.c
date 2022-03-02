@@ -77,7 +77,7 @@ struct mem_blk *CheckUsedBlock(struct mem_blk *blk, cstr func) {
       (void *)blk > (void *)(mem_dat + sizeof mem_dat)) {
       ACS_BeginPrint();
       PrintChrSt(func);
-      PrintChrSt(" ERROR: out of bounds block ");
+      PrintChrLi(" ERROR: out of bounds block ");
       ACS_PrintHex((intptr_t)blk);
       ACS_EndLog();
       return nil;
@@ -86,7 +86,7 @@ struct mem_blk *CheckUsedBlock(struct mem_blk *blk, cstr func) {
    if(blk->idn != _mem_idn) {
       ACS_BeginPrint();
       PrintChrSt(func);
-      PrintChrSt(" ERROR: invalid identifier for ");
+      PrintChrLi(" ERROR: invalid identifier for ");
       ACS_PrintHex((intptr_t)blk);
       ACS_EndLog();
       return nil;
@@ -95,7 +95,7 @@ struct mem_blk *CheckUsedBlock(struct mem_blk *blk, cstr func) {
    if(blk->tag == _tag_free) {
       ACS_BeginPrint();
       PrintChrSt(func);
-      PrintChrSt(" ERROR: already freed ");
+      PrintChrLi(" ERROR: already freed ");
       ACS_PrintHex((intptr_t)blk);
       ACS_EndLog();
       return nil;
@@ -144,7 +144,7 @@ void Dalloc(register void *p) {
    #ifndef NDEBUG
 error:
    ACS_BeginPrint();
-   PrintChrSt("Dalloc ERROR: memory not initialized but freeing pointer");
+   PrintChrLi("Dalloc ERROR: memory not initialized but freeing pointer");
    ACS_EndLog();
    #endif
 }
@@ -177,7 +177,7 @@ void *Malloc(register mem_size_t rs, register mem_tag_t tag) {
           */
          #ifndef NDEBUG
          ACS_BeginPrint();
-         PrintChrSt("Malloc ERROR: out of memory - couldn't allocate ");
+         PrintChrLi("Malloc ERROR: out of memory - couldn't allocate ");
          ACS_PrintInt(s);
          ACS_EndLog();
          #endif
@@ -282,7 +282,7 @@ void PrintDplBlks(struct dpl_blk *cur) {
    } while(cur = cur->nxt);
    ACS_PrintChar('(');
    ACS_PrintInt(i);
-   PrintChars(" in list)\n", 10);
+   PrintChrLi(" in list)\n");
 }
 
 alloc_aut(0) stkcall
@@ -298,20 +298,20 @@ void __GDCC__alloc_dump(void) {
 
    do {
       ACS_BeginPrint();
-      PrintChars("blk:", 4);
+      PrintChrLi("blk:");
       ACS_PrintHex((intptr_t)blk);
-      PrintChars(" prv:", 5);
+      PrintChrLi(" prv:");
       ACS_PrintHex((intptr_t)blk->prv);
-      PrintChars(" nxt:", 5);
+      PrintChrLi(" nxt:");
       ACS_PrintHex((intptr_t)blk->nxt);
-      PrintChars(" siz:", 5);
+      PrintChrLi(" siz:");
       ACS_PrintHex(blk->siz);
-      PrintChars(" tag:", 5);
+      PrintChrLi(" tag:");
       PrintChrSt(TagName(blk->tag));
       ACS_PrintChar('(');
       ACS_PrintInt(blk->tag);
       ACS_PrintChar(')');
-      PrintChars(" idn:", 5);
+      PrintChrLi(" idn:");
       ACS_PrintHex(blk->idn);
       ACS_EndLog();
 
@@ -320,10 +320,10 @@ void __GDCC__alloc_dump(void) {
    } while(blk != mem_top->cur);
 
    ACS_BeginPrint();
-   PrintChars("total sizes\n", 12);
+   PrintChrLi("total sizes\n");
    for(mem_tag_t i = 0; i < _tag_max; i++) {
       PrintChrSt(TagName(i));
-      PrintChars(":\t\t", 3);
+      PrintChrLi(":\t\t");
       ACS_PrintInt(tagsizes[i]);
       ACS_PrintChar('\n');
    }
@@ -331,11 +331,11 @@ void __GDCC__alloc_dump(void) {
 
    ACS_BeginPrint();
    if(dpl_act) {
-      PrintChars("active freelist\n", 16);
+      PrintChrLi("active freelist\n");
       PrintDplBlks(dpl_act);
    }
    if(dpl_ina) {
-      PrintChars("inactive freelist\n", 18);
+      PrintChrLi("inactive freelist\n");
       PrintDplBlks(dpl_ina);
    }
    ACS_EndLog();
@@ -379,7 +379,7 @@ dyn:
    #ifndef NDEBUG
    if(dbglevel(log_dpl)) {
       ACS_BeginPrint();
-      PrintChars("Plsa: alloc ", 12);
+      PrintChrLi("Plsa: alloc ");
       ACS_PrintHex((intptr_t)dpl_ina);
       ACS_EndLog();
    }
@@ -392,7 +392,7 @@ dyn:
    #ifndef NDEBUG
 overflow:
    ACS_BeginPrint();
-   PrintChrSt("Plsa ERROR: stack overflow ");
+   PrintChrLi("Plsa ERROR: stack overflow ");
    ACS_PrintHex((intptr_t)pls_stk);
    ACS_PrintChar(' ');
    ACS_PrintHex((intptr_t)pls_cur);
@@ -411,7 +411,7 @@ void __GDCC__Plsf(void *p) {
       #ifndef NDEBUG
       if(dbglevel(log_dpl)) {
          ACS_BeginPrint();
-         PrintChars("Plsf: dealloc ", 14);
+         PrintChrLi("Plsf: dealloc ");
          ACS_PrintHex((intptr_t)blk);
          ACS_EndLog();
       }
@@ -436,7 +436,7 @@ void __GDCC__Plsf(void *p) {
    #ifndef NDEBUG
 invalid:
    ACS_BeginPrint();
-   PrintChrSt("Plsf ERROR: incorrect stack pointer ");
+   PrintChrLi("Plsf ERROR: incorrect stack pointer ");
    ACS_PrintHex((intptr_t)p);
    ACS_PrintChar(' ');
    ACS_PrintHex((intptr_t)pls_cur);

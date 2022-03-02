@@ -101,25 +101,31 @@ void HUD_TopRight() {
 
          y += 7;
 
+         static i96 scoreaccum_disp;
+
          if(pl.scoreaccumtime > 0) {
             SetFade(fid_scacum, 5, 12);
-            pl.scoreaccumstr = StrParam("%c%s", pl.scoreaccum >= 0 ? '+' : ' ', scoresep(pl.scoreaccum));
+            scoreaccum_disp = pl.scoreaccum;
          }
 
-         if(CheckFade(fid_scacum))
-            PrintTextFX_str(pl.scoreaccumstr, fnt, CR_WHITE, 320,2, y,1, fid_scacum, _u_no_unicode);
+         if(CheckFade(fid_scacum)) {
+            ACS_BeginPrint();
+            ACS_PrintChar(scoreaccum_disp >= 0 ? '+' : ' ');
+            PrintChrSt(scoresep(scoreaccum_disp));
+            PrintTextFX(fnt, CR_WHITE, 320,2, y,1, fid_scacum, _u_no_unicode);
+         }
       }
 
       y += 7;
    }
 
    if(CVarGetI(sc_hud_showlvl)) {
-      PrintTextChS("Lv.");
+      PrintTextChL("Lv.");
       ACS_PrintInt(pl.attr.level);
       if(pl.attr.points) {
-         PrintChrSt(" (\Cn");
+         PrintChrLi(" (\Cn");
          ACS_PrintInt(pl.attr.points);
-         PrintChrSt("\C- pts)");
+         PrintChrLi("\C- pts)");
       }
       PrintTextX(fnt, clr, 320,2, y,1, _u_no_unicode);
       y += 7;
@@ -132,7 +138,10 @@ void HUD_TopRight() {
          ((u64)(pl.attr.exp     - pl.attr.expprev) * 24) /
           (u64)(pl.attr.expnext - pl.attr.expprev);
       SetClip(296, y, fr, 2);
-      PrintSprite(StrParam(":Bars:ExpBar%i", expbar), 296,1, y,1);
+      ACS_BeginPrint();
+      PrintChrLi(":Bars:ExpBar");
+      ACS_PrintInt(expbar);
+      PrintSprite(ACS_EndStrParam(), 296,1, y,1);
       ClearClip();
       y += 3;
    }
@@ -166,8 +175,8 @@ void HUD_BottomRight() {
                      319,2, 239,2);
          switch(wep->ammotype & AT_AMag) {
          case AT_AMag: PrintSprite(sp_HUD_M_BarBig, 214,2, ymg+7,2);
-         case AT_Ammo: PrintTextChS("AMMO"); break;
-         case AT_NMag: PrintTextChS("MAG"); break;
+         case AT_Ammo: PrintTextChL("AMMO"); break;
+         case AT_NMag: PrintTextChL("MAG"); break;
          }
          PrintTextX(fnt, hudcolor, 281,1, 238,2, _u_no_unicode);
       }
@@ -217,8 +226,8 @@ void HUD_BottomRight() {
          PrintSprite(sp_HUD_D_AmmoBack, 320,2, 239,2);
          switch(wep->ammotype & AT_AMag) {
          case AT_AMag: PrintSprite(sp_HUD_D_Ammo2Back, 230,2, 239,2);
-         case AT_Ammo: PrintTextChS(u8"\n"); break;
-         case AT_NMag: PrintTextChS(u8"\n"); break;
+         case AT_Ammo: PrintTextChL(u8"\n"); break;
+         case AT_NMag: PrintTextChL(u8"\n"); break;
          }
          PrintTextX(sf_lmidfont, hudcolor, 309,4, 230,0, _u_no_unicode);
       }
@@ -248,7 +257,7 @@ void HUD_BottomRight() {
          ACS_PrintChar('T');
       } else {
          if(!(wep->ammotype & AT_Ammo)) {
-            PrintChrSt(u8"∞");
+            PrintChrLi(u8"∞");
          }
          i32 magcur = wep->magmax - wep->magcur;
          if(wep->magmax >= 1000 && magcur < 1000) {
@@ -376,7 +385,7 @@ void HUD_BottomLeft() {
    case _hud_marine:
       PrintSprite(InvNum(so_PowerStrength) ? sp_HUD_M_SplitBackRed : sp_HUD_M_SplitBack, 0,1, 240,2);
 
-      PrintTextChr("VIT", 3);
+      PrintTextChL("VIT");
       PrintTextX(sf_bigupper, hudcolor, 2,1, 238,2, _u_no_unicode);
 
       for(i32 i = 0, x_ = (8 + pl.ticks) % 57; i < 20; i++) {
@@ -422,7 +431,7 @@ void HUD_BottomLeft() {
    case _hud_darklord:
       PrintSprite(sp_HUD_D_HPBack, 0,1, 239,2);
 
-      PrintTextChS(u8"");
+      PrintTextChL(u8"");
       PrintTextX(sf_lmidfont, hudcolor, 8,4, 229,0, _u_no_unicode);
 
       for(i32 i = 0, x_ = (8 + pl.ticks) % 40; i < 20; i++) {

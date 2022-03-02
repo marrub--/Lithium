@@ -10,22 +10,37 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
+#define Spf s""
+
+#define CVAR  "lith_"
+#define DCVAR "__lith_"
+#define LANG  "LITH_"
+#define OBJ   "Lith_"
+
+#define sCVAR  Spf CVAR
+#define sDCVAR Spf DCVAR
+#define sLANG  Spf LANG
+#define sOBJ   Spf OBJ
+
+#ifndef STR_PREFIXES_ONLY
 #include <GDCC.h>
 #include <stdio.h>
 
 #define lang_fmt(...) (StrParamBegin(__VA_ARGS__), lang(ACS_EndStrParam()))
 #define lang_fmt_discrim(...) (lang_fmt(__VA_ARGS__, pl.discrim) |? lang_fmt(__VA_ARGS__, ""))
 
+#define lang_discrim(name) (lang((ACS_BeginPrint(), ACS_PrintString(name), PrintChrSt(pl.discrim), ACS_EndStrParam())) |? lang(name))
+
 #define StrParamBegin(...) (ACS_BeginPrint(), __nprintf(__VA_ARGS__))
 #define StrParam(...) (StrParamBegin(__VA_ARGS__), ACS_EndStrParam())
 
 #define PrintChars(s, n) ACS_PrintGlobalCharRange((i32)(s), __GDCC__Sta, 0, n)
 #define PrintChrSt(s)    ACS_PrintGlobalCharArray((i32)(s), __GDCC__Sta)
+#define PrintChrLi(s)    ACS_PrintGlobalCharRange((i32)(s), __GDCC__Sta, 0, sizeof(s))
 
 #define fast_strndup(s, n) (ACS_BeginPrint(), PrintChars(s, n), ACS_EndStrParam())
 #define fast_strdup(s)     (ACS_BeginPrint(), PrintChrSt(s),    ACS_EndStrParam())
-
-#define fast_strcpy2(s1, s2) \
+#define fast_strdup2(s1, s2) \
    (ACS_BeginPrint(), PrintChrSt(s1), PrintChrSt(s2), ACS_EndStrParam())
 
 #define fastmemset(p, s, c, ...) \
@@ -142,5 +157,6 @@ stkcall str ns(str s);
 stkcall cstr tmpstr(str s);
 stkcall cstr RemoveTextColors_str(astr s, i32 size);
 stkcall cstr RemoveTextColors    (cstr s, i32 size);
+#endif
 
 /* EOF */
