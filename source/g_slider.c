@@ -63,7 +63,7 @@ struct slide_ret G_Slider_Imp(struct gui_state *g, gid_t id, struct gui_arg_sld 
    /* draw value */
    if(pre->font) {
       cstr suf = a->suf |? "";
-      if(a->integ) PrintTextFmt("%i%s",                (i32)ret, suf);
+      if(a->integ) {ACS_BeginPrint(); ACS_PrintInt(ret); PrintChrSt(suf);}
       else         PrintTextFmt("%.*k%s", big ? 1 : 2, (k32)ret, suf);
 
       PrintText(pre->font, g->defcr, x + pre->w/2,4, y + pre->h/2,0);

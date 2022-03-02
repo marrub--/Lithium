@@ -43,7 +43,10 @@ bool G_Button_Imp(struct gui_state *g, gid_t id, struct gui_arg_btn *a) {
       else                     color = pre->cdef;
       if(!color) color = "-";
 
-      PrintTextFmt("\C%s%s", color, a->label);
+      ACS_BeginPrint();
+      ACS_PrintChar('\C');
+      PrintChrSt(color);
+      PrintChrSt(a->label);
       PrintText(pre->font, g->defcr, x,pre->ax, y,pre->ay);
    }
 

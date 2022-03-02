@@ -53,7 +53,10 @@ void DrawAttr(struct gui_state *g, i32 x, i32 y, i32 at)
 
    PrintTextA_str(ns(lang_fmt(LANG "ATTR_HELP_%.3s", name)), sf_smallfnt, g->defcr, g->ox+x+1,1, g->oy+y,1, helptrns);
 
-   PrintTextFmt("%u/%i", attr, ATTR_VIS_MAX);
+   ACS_BeginPrint();
+   ACS_PrintInt(attr);
+   ACS_PrintChar('/');
+   ACS_PrintInt(ATTR_VIS_MAX);
    PrintText(sf_lmidfont, g->defcr, g->ox+x+202,1, g->oy+y,1);
 }
 

@@ -35,7 +35,7 @@ struct magic_info const minf[] = {
 script static
 void GiveMagic(struct magic_info const *m)
 {
-   ACS_SetWeapon(StrParam(OBJ "%s", m->name));
+   ACS_SetWeapon(fast_strdup2(OBJ, m->name));
 }
 
 script static
@@ -122,7 +122,7 @@ void Upgr_Magic_Update(void)
    k32 manaperc = pl.mana / (k32)pl.manamax;
 
    if(udata.manaperc < 1 && manaperc == 1)
-      AmbientSound(ss_player_manafull, 1.0);
+      AmbientSound(ss_player_jem_manafull, 1.0);
 
    udata.manaperc = manaperc;
 

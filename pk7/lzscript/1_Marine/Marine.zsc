@@ -39,7 +39,7 @@ class Lith_StatAdrenalineCharged : Lith_StatFx {
 class Lith_StatAdrenalineCharging : Lith_StatFx {
    override void initCb() {basic("ACH", 35 * 30);}
    override void doneCb() {
-      S_StartSound("player/adren/ready", lch_body2,
+      S_StartSound("player/stan/adren/ready", lch_body2,
                    CHANF_NOPAUSE|CHANF_MAYBE_LOCAL|CHANF_UI, 1.0, ATTN_STATIC);
       Lith_HERMES.log(msg_huds, 1, "_AdrenalineReady");
       addStatFx("Lith_StatAdrenalineCharged");

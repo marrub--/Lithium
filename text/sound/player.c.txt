@@ -16,10 +16,10 @@ $playersound    cybermage male *pain50  Pain      # ^
 $playersounddup cybermage male *pain25  *pain50   # ^
 $playersound    cybermage male *grunt   Grunt     # Doom 64
 
-player {
-   manafull FullCharge # Touhou 13
+player.jem {
+   $alias step = .player.step
 
-   $alias cyber-mage.step = step
+   manafull FullCharge # Touhou 13
 }
 
 # EOF

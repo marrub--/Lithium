@@ -184,8 +184,12 @@ void GUIUpgradeDescription(struct gui_state *g, struct upgrade *upgr) {
    PrintText_str(ns(lang(sa_upgr_categ[upgr->category])), sf_smallfnt, g->defcr, g->ox+98,1, g->oy+27,1);
 
    /* Effect */
-   ifauto(str, effect, lang_discrim(fast_strdup2(LANG "UPGRADE_EFFEC_", upgr->name)))
-      PrintTextFmt("%S %S", ns(lang(sl_effect)), effect);
+   ifauto(str, effect, lang_discrim(fast_strdup2(LANG "UPGRADE_EFFEC_", upgr->name))) {
+      ACS_BeginPrint();
+      ACS_PrintString(ns(lang(sl_effect)));
+      ACS_PrintChar(' ');
+      ACS_PrintString(effect);
+   }
 
    static
    i32 const crs[] = {

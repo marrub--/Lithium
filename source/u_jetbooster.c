@@ -24,7 +24,7 @@ void Upgr_JetBooster_Update(void) {
       k32 angle = pl.yaw - ACS_VectorAngle(pl.forwardv, pl.sidev);
 
       add_status(so_StatJetBooster);
-      StartSound(ss_player_rocketboost, lch_auto, 0);
+      StartSound(ss_player_stan_rocketboost, lch_auto, 0);
       P_SetVel(pl.velx + ACS_Cos(angle) * 16.0, pl.vely + ACS_Sin(angle) * 16.0, 10.0);
    }
 }

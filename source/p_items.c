@@ -466,7 +466,10 @@ void P_CBI_TabItems(struct gui_state *g) {
 
       setPos();
       if(sel->scr > 0) {
-         PrintTextFmt("(%s\Cnscr\C-)", scoresep(sel->scr));
+         ACS_BeginPrint();
+         ACS_PrintChar('(');
+         PrintChrSt(scoresep(sel->scr));
+         PrintChrLi("\Cnscr\C-)");
          PrintText(sf_smallfnt, g->defcr, g->ox+x+18,1, g->oy+y,1);
       }
 

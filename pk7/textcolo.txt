@@ -25,6 +25,11 @@ Lith_Angelic {
    #9b9879 #ffffff 128 255
 }
 
+Lith_Evil {
+   #1d0202 #363636 0   127
+   #1d0202 #655e5e 128 255
+}
+
 Lith_RRed {#000000 #f54f4c}
 Lith_RDOr {#000000 #f2754b}
 Lith_ROra {#000000 #f7a54d}

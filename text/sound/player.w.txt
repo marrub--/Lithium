@@ -6,7 +6,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-player.wanderer {
+player.luke {
    == lsnd/PlayerW
    shadowwalk ShadowWalk # Self-made
 }

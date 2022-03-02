@@ -11,7 +11,7 @@ class Lith_RA_Hax : PowerProtection
    default
    {
       Powerup.Duration int.max;
-      ActiveSound "player/rarmor/damage";
+      ActiveSound "player/stan/rarmor/damage";
    }
 }
 

@@ -31,8 +31,6 @@ void Upgr_VitalScan_Update(void) {
    if(GetHealth(0) <= 0) {
       fastmemset(&udata, 0, sizeof udata);
    } else if(validtarget) {
-      bool freak = ACS_CheckFlag(0, sm_invuln) || ACS_CheckFlag(0, sm_nodamage);
-
       i32 chp = GetHealth(0);
       i32 shp = ServCallI(sm_GetSpawnHealth);
 
@@ -59,25 +57,29 @@ void Upgr_VitalScan_Update(void) {
          udata.damagfrac = 0.0;
       }
 
-      udata.freak = true;
+      udata.freak = ACS_CheckFlag(0, sm_invuln) || ACS_CheckFlag(0, sm_nodamage);
 
+      ACS_BeginPrint();
       if(udata.rank == 6) {
-         udata.tagstr = StrParam("\C[Lith_Dark]%tS\C-", 0);
+         PrintChrLi("\C[Lith_Dark]");
       } else if(udata.rank == 7) {
-         udata.tagstr = StrParam("\C[Lith_Angelic]%tS\C-", 0);
+         PrintChrLi("\C[Lith_Angelic]");
       } else if(udata.rank == 8) {
-         udata.tagstr = StrParam("\C[Lith_Dark]%tS\C-", 0);
-      } else if(freak || ACS_CheckFlag(0, sm_boss)) {
-         udata.tagstr = RandomName(!freak &? id);
-      } else if(six) {
-         udata.tagstr = st_six_tag;
-      } else {
-         udata.tagstr = StrParam("%tS\C-", 0);
-         udata.freak = false;
+         PrintChrLi("\C[Lith_Evil]");
       }
 
+      if(udata.freak || ACS_CheckFlag(0, sm_boss)) {
+         RandomName(!udata.freak &? id);
+      } else if(six) {
+         ACS_PrintString(st_six_tag);
+      } else {
+         ACS_PrintName(0);
+      }
+      ACS_PrintChar('\C');
+      ACS_PrintChar('-');
+
       if(legendoom && InvNum(so_LDLegendaryMonsterTransformed))
-         udata.tagstr = StrParam("\CgLegendary\C- %tS\C-", 0);
+         PrintChrLi(" (\CgLegendary\C-)");
 
       udata.oldhealth = udata.health;
       udata.health    = chp;
@@ -88,8 +90,11 @@ void Upgr_VitalScan_Update(void) {
             ACS_CheckFlag(0, sm_shadow) ?
             m->level - ACS_Random(-5, 5) :
             m->level;
-         udata.tagstr = StrParam("%S lv.%i", udata.tagstr, level);
+         PrintChrLi(" lv.");
+         ACS_PrintInt(level);
       }
+
+      udata.tagstr = ACS_EndStrParam();
 
       if(shp) {
          i32 splitr = chp % shp;

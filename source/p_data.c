@@ -251,7 +251,7 @@ void P_Init() {
       pl.jumpheight   = GetMembK(0, sm_JumpZ);
       pl.spawnhealth  = GetHealth(0);
       pl.maxhealth    = pl.spawnhealth;
-      pl.stepnoise    = StrParam("player/%S/step", pl.classname);
+      pl.stepnoise    = fast_strdup3("player/", pl.discrim, "/step");
    }
 
    fastmemset(&pl.old, 0, sizeof pl.old);

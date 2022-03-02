@@ -74,7 +74,11 @@ void ApplyLevels(dmon_t *m, i32 prev) {
 
    for(i32 i = 0; i < dmgtype_max; i++) {
       ifauto(i32, resist, m->resist[i] / 15.0) {
-         InvGive(StrParam(OBJ "M_%S%i", sa_dmgtype_names[i], mini(resist, _max_rank)), 1);
+         ACS_BeginPrint();
+         PrintChrLi(OBJ "M_");
+         ACS_PrintString(sa_dmgtype_names[i]);
+         ACS_PrintInt(mini(resist, _max_rank));
+         InvGive(ACS_EndStrParam(), 1);
       }
    }
 

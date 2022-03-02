@@ -48,7 +48,7 @@ class Lith_WandererPlayer : Lith_Player {
             !Lith_StatFx.getInPool("Lith_StatShadowWalked") &&
             player && player.buttons & BT_SPEED)
          {
-            A_StartSound("player/wanderer/shadowwalk", lch_voice);
+            A_StartSound("player/luke/shadowwalk", lch_voice);
             Lith_StatFx.addToPool(self, "Lith_StatShadowWalker");
             callACS("Lith_DodgeViewShadowWalk");
          }

@@ -76,7 +76,9 @@ void P_CBI_TabShop(struct gui_state *g) {
 
    G_Clip(g, g->ox+98, g->oy+17, 190, 170, 184);
 
-   PrintTextFmt("%s\Cnscr", scoresep(item->shopdef.cost));
+   ACS_BeginPrint();
+   PrintChrSt(scoresep(item->shopdef.cost));
+   PrintChrLi("\Cnscr");
    PrintText(sf_smallfnt, g->defcr, g->ox+98,1, g->oy+17,1);
 
    PrintText_str(ns(lang_fmt(LANG "SHOP_DESCR_%s", item->name)), sf_smallfnt, g->defcr, g->ox+98,1, g->oy+27,1);

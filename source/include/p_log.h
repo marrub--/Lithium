@@ -15,7 +15,7 @@
 
 #include "m_vec.h"
 
-str RandomName(i32 id);
+void RandomName(i32 id);
 
 void P_Log_Both(i32 levl, cstr fmt, ...); /* log to HUD and full log */
 void P_Log_HUDs(i32 levl, cstr fmt, ...); /* log to HUD only */

@@ -37,11 +37,14 @@ bool G_TxtBox_Imp(struct gui_state *g, gid_t id, struct gui_arg_txt *a) {
    PrintSprite(sp_UI_ResultFrame, a->x-3 + g->ox,1, a->y-3 + g->oy,1);
 
    SetClipW(a->x + g->ox, a->y + g->oy, 260, 200, 260);
+   ACS_BeginPrint();
    if(st->tbptr) {
-      PrintTextFmt("%s%s", Cps_Expand(st->txtbuf, 0, st->tbptr),
-                           hot ? Ticker("|", "") : "");
+      PrintChrSt(Cps_Expand(st->txtbuf, 0, st->tbptr));
+      PrintChrSt(hot ? Ticker("|", "") : "");
    } else {
-      PrintTextFmt("\C%c%S", hot ? 'c' : 'm', ns(lang(sl_gui_textbox)));
+      ACS_PrintChar('\C');
+      ACS_PrintChar(hot ? 'c' : 'm');
+      ACS_PrintString(ns(lang(sl_gui_textbox)));
    }
    PrintText(sf_smallfnt, g->defcr, a->x + g->ox,1, a->y + g->oy,1);
    ClearClip();

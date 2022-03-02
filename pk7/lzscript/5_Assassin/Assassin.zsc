@@ -46,13 +46,13 @@ class Lith_AssassinPlayer : Lith_Player {
                let c = cos(a) * 20;
                let s = sin(a) * 20;
                a_changeVelocity(c, s);
-               a_startSound("player/assassin/roll", lch_body);
+               a_startSound("player/omi/roll", lch_body);
                m_dodgeDbc = 40;
                m_wasHorizontalDodge = true;
             } else if(!(player.oldButtons & BT_JUMP) &&
                       player.buttons & BT_JUMP && !player.onGround) {
                vel.z = 16.0;
-               a_startSound("player/assassin/djump", lch_body);
+               a_startSound("player/omi/djump", lch_body);
                m_dodgeDbc = 40;
                m_wasHorizontalDodge = false;
             }

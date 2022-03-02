@@ -408,7 +408,11 @@ void DialogueGUI() {
    PrintText_str(snam, sf_bigupper, CR_GREEN, 30,1, 35,1);
 
    G_Clip(&gst, left, top, 257, 150);
-   PrintTextFmt("\Cd> Remote: %S\n\Cd> Date: %s", srem, CanonTime(ct_full, ticks));
+   ACS_BeginPrint();
+   PrintChrLi("\Cd> Remote: ");
+   ACS_PrintString(srem);
+   PrintChrLi("\n\Cd> Date: ");
+   PrintChrSt(CanonTime(ct_full, ticks));
    PrintText(sf_lmidfont, CR_WHITE, left,1, top,1);
 
    if(text) {

@@ -333,9 +333,9 @@ $playersounddup assassin male *pain75 *pain100
 $playersound assassin male *pain50 lsnd/PlayerA/Pain
 $playersounddup assassin male *pain25 *pain50
 $playersound assassin male *grunt lsnd/PlayerA/Grunt
-$alias player/assassin/step player/step
-player/assassin/roll lsnd/PlayerA/Roll
-player/assassin/djump lsnd/PlayerA/DoubleJump
+$alias player/omi/step player/step
+player/omi/roll lsnd/PlayerA/Roll
+player/omi/djump lsnd/PlayerA/DoubleJump
 $playersound cybermage male *death lsnd/PlayerC/Death
 $playersound cybermage male *xdeath lsnd/PlayerC/XDeath
 $playersound cybermage male *pain100 lsnd/PlayerC/PainSmall
@@ -343,8 +343,8 @@ $playersounddup cybermage male *pain75 *pain100
 $playersound cybermage male *pain50 lsnd/PlayerC/Pain
 $playersounddup cybermage male *pain25 *pain50
 $playersound cybermage male *grunt lsnd/PlayerC/Grunt
-player/manafull lsnd/PlayerC/FullCharge
-$alias player/cyber-mage/step player/step
+$alias player/jem/step player/step
+player/jem/manafull lsnd/PlayerC/FullCharge
 $playersound darklord male *death lsnd/PlayerD/Death
 $playersound darklord male *xdeath lsnd/PlayerD/XDeath
 $playersound darklord male *pain100 lsnd/PlayerD/PainSmall
@@ -353,8 +353,8 @@ $playersounddup darklord male *pain50 *pain75
 $playersounddup darklord male *pain25 *pain75
 $playersound darklord male *grunt lsnd/PlayerD/Grunt
 $playersound darklord male *land lsnd/PlayerD/Land
-player/darklord/step lsnd/PlayerD/Step
-$playeralias informant male *land player/informant/land
+player/ari/step lsnd/PlayerD/Step
+$playeralias informant male *land player/fulk/land
 $playeralias informant male *grunt silence
 $playersound informant male *jump lsnd/PlayerI/Jump
 $playersound informant male *death lsnd/PlayerI/Death
@@ -363,23 +363,23 @@ $playersound informant male *pain100 lsnd/PlayerI/PainSmall
 $playersounddup informant male *pain75 *pain100
 $playersound informant male *pain50 lsnd/PlayerI/Pain
 $playersounddup informant male *pain25 *pain50
-player/informant/land1 lsnd/PlayerI/Land1
-player/informant/land2 lsnd/PlayerI/Land2
-player/informant/land3 lsnd/PlayerI/Land3
-player/informant/step1 lsnd/PlayerI/Footsteps/Step1
-player/informant/step2 lsnd/PlayerI/Footsteps/Step2
-player/informant/step3 lsnd/PlayerI/Footsteps/Step3
-player/informant/step4 lsnd/PlayerI/Footsteps/Step4
-player/informant/dodge lsnd/PlayerI/Dodge
-$random player/informant/land { player/informant/land1 player/informant/land2 player/informant/land3 }
-$random player/informant/step { player/informant/step1 player/informant/step2 player/informant/step3 player/informant/step4 }
-$alias player/marine/step player/step
-player/rarmor/mode lsnd/PlayerM/RArmor/ChangeMode
-player/rarmor/damage lsnd/PlayerM/RArmor/Damage
-player/rocketboost lsnd/PlayerM/RocketBoost
-player/adren/inj lsnd/PlayerM/Adrenaline/Inject
-player/adren/ready lsnd/PlayerM/Adrenaline/Ready
-player/wanderer/shadowwalk lsnd/PlayerW/ShadowWalk
+player/fulk/land1 lsnd/PlayerI/Land1
+player/fulk/land2 lsnd/PlayerI/Land2
+player/fulk/land3 lsnd/PlayerI/Land3
+player/fulk/step1 lsnd/PlayerI/Footsteps/Step1
+player/fulk/step2 lsnd/PlayerI/Footsteps/Step2
+player/fulk/step3 lsnd/PlayerI/Footsteps/Step3
+player/fulk/step4 lsnd/PlayerI/Footsteps/Step4
+player/fulk/dodge lsnd/PlayerI/Dodge
+$random player/fulk/land { player/fulk/land1 player/fulk/land2 player/fulk/land3 }
+$random player/fulk/step { player/fulk/step1 player/fulk/step2 player/fulk/step3 player/fulk/step4 }
+$alias player/stan/step player/step
+player/stan/rarmor/mode lsnd/PlayerM/RArmor/ChangeMode
+player/stan/rarmor/damage lsnd/PlayerM/RArmor/Damage
+player/stan/rocketboost lsnd/PlayerM/RocketBoost
+player/stan/adren/inj lsnd/PlayerM/Adrenaline/Inject
+player/stan/adren/ready lsnd/PlayerM/Adrenaline/Ready
+player/luke/shadowwalk lsnd/PlayerW/ShadowWalk
 marathon/pickup lsnd/Marathon/Pickup
 marathon/explode lsnd/Marathon/Explode
 marathon/hitsolid lsnd/Marathon/HitSolid

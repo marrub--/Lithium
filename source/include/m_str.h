@@ -42,6 +42,8 @@
 #define fast_strdup(s)     (ACS_BeginPrint(), PrintChrSt(s),    ACS_EndStrParam())
 #define fast_strdup2(s1, s2) \
    (ACS_BeginPrint(), PrintChrSt(s1), PrintChrSt(s2), ACS_EndStrParam())
+#define fast_strdup3(s1, s2, s3) \
+   (ACS_BeginPrint(), PrintChrSt(s1), PrintChrSt(s2), PrintChrSt(s3), ACS_EndStrParam())
 
 #define fastmemset(p, s, c, ...) \
    statement({ \

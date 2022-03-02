@@ -154,10 +154,9 @@ void copy_name_str(char **p, cstr src) {
    *p += len;
 }
 
-str RandomName(i32 id) {
+void RandomName(i32 id) {
    srand(id ? mapseed + id : ACS_Random(0, INT32_MAX));
 
-   ACS_BeginPrint();
    PrintChrLi("\Cg");
 
    if(id && rand() % 1000 != 0) {
@@ -207,8 +206,6 @@ str RandomName(i32 id) {
       PrintChrLi(", the ");
       PrintChrSt(titles[rand() % countof(titles)]);
    }
-
-   return ACS_EndStrParam();
 }
 
 /* EOF */

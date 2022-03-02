@@ -6,12 +6,13 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
+== lsnd/PlayerM
+
 # Marine
-player {
-   $alias marine.step = step
+player.stan {
+   $alias step = .player.step
 
    # Upgrades
-   == lsnd/PlayerM
    rarmor.mode   RArmor/ChangeMode # Halo 3
    rarmor.damage RArmor/Damage     # Touhou 13
 

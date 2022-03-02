@@ -225,7 +225,7 @@ void Sc_SpawnBoss(void)
 {
    if(!boss) return;
 
-   ServCallI(sm_SpawnBoss, StrParam(OBJ "Boss_%s", boss->name), boss->phase);
+   ServCallI(sm_SpawnBoss, fast_strdup2(OBJ "Boss_", boss->name), boss->phase);
 
    Dbg_Log(log_boss, "%s: Boss %s phase %i spawned", __func__, boss->name, boss->phase);
    Dbg_Note("boss: %s phase %i spawned\n", boss->name, boss->phase);

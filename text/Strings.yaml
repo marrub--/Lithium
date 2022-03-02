@@ -642,7 +642,6 @@ ss_:
    - misc_telein:              misc/telein
    - misc_teleout:             misc/teleout
    - player_YOUVEGOTMAIL:      player/YOUVEGOTMAIL
-   - player_adren_inj:         player/adren/inj
    - player_cbi_auto_buy:      player/cbi/auto/buy
    - player_cbi_auto_invalid:  player/cbi/auto/invalid
    - player_cbi_auto_toggle:   player/cbi/auto/toggle
@@ -666,19 +665,20 @@ ss_:
    - player_depthdown:         player/depthdown
    - player_doublejump:        player/doublejump
    - player_glare:             player/glare
+   - player_jem_manafull:      player/jem/manafull
    - player_levelup:           player/levelup
    - player_lightoff:          player/lightoff
    - player_lighton:           player/lighton
-   - player_manafull:          player/manafull
    - player_pickup_item:       player/pickup/item
    - player_pickup_upgrbody:   player/pickup/upgrbody
    - player_pickup_upgrextr:   player/pickup/upgrextr
    - player_pickup_upgrweap:   player/pickup/upgrweap
-   - player_rarmor_mode:       player/rarmor/mode
-   - player_rocketboost:       player/rocketboost
    - player_score:             player/score
    - player_showtext:          player/showtext
    - player_slide:             player/slide
+   - player_stan_adren_inj:    player/stan/adren/inj
+   - player_stan_rarmor_mode:  player/stan/rarmor/mode
+   - player_stan_rocketboost:  player/stan/rocketboost
    - player_startgame:         player/startgame
    - player_trmopen:           player/trmopen
    - player_trmswitch:         player/trmswitch
