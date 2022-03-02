@@ -90,7 +90,7 @@ script void P_CBI_PTick() {
 
    if(G_Button(g, .x = 283, 0, Pre(btnexit))) P_GUI_Use();
 
-   faststrcpy_str(tn[0], ns(lang_fmt_discrim(LANG "TAB_ARSENAL_%s")));
+   faststrcpy_str(tn[0], ns(lang_discrim(sl_tab_arsenal)));
    faststrcpy_str(tn[1], ns(lang(sl_tab_status)));
    faststrcpy_str(tn[2], ns(lang(sl_tab_inventory)));
    faststrcpy_str(tn[3], ns(lang(sl_tab_info)));

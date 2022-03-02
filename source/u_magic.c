@@ -72,8 +72,7 @@ void UpdateMagicUI(void)
          .h        = 64
       };
 
-      if(G_Button_FId(g, i + 1, tmpstr(lang_fmt(LANG "INFO_SHORT_%s",
-                                                m->name)),
+      if(G_Button_FId(g, i + 1, tmpstr(lang(fast_strdup2(LANG "INFO_SHORT_", m->name))),
                       m->x, m->y, .preset = &pre))
       {
          GiveMagic(m);

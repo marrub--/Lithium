@@ -106,7 +106,7 @@ void Sc_PickupCbiItem(i32 num) {
    FadeFlash(0, 255, 0, 0.7, 0.5);
 
    ifauto(struct cupgdef const *, c, GetCUpgr(pl.pclass_b, num)) {
-      str nam      = ns(lang_fmt(LANG "LOG_CBI_%s", c->msg));
+      str nam      = ns(lang(fast_strdup2(LANG "LOG_CBI_", c->msg)));
       i32 itemdisp = CVarGetI(sc_player_itemdisp);
       if(itemdisp & _itm_disp_pop) {
          P_ItemPopup(nam, GetX(0), GetY(0), GetZ(0));

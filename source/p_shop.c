@@ -60,8 +60,7 @@ void P_CBI_TabShop(struct gui_state *g) {
          continue;
 
       i32 *shopsel = &CBIState(g)->shopsel;
-      if(G_Button_HId(g, i, tmpstr(lang_fmt(LANG "SHOP_TITLE_%s",
-                                            shopitems[i].name)),
+      if(G_Button_HId(g, i, tmpstr(lang(fast_strdup2(LANG "SHOP_TITLE_", shopitems[i].name))),
                       0, y, i == *shopsel, Pre(btnlistsel)))
       {
          *shopsel = i;
@@ -81,7 +80,7 @@ void P_CBI_TabShop(struct gui_state *g) {
    PrintChrLi("\Cnscr");
    PrintText(sf_smallfnt, g->defcr, g->ox+98,1, g->oy+17,1);
 
-   PrintText_str(ns(lang_fmt(LANG "SHOP_DESCR_%s", item->name)), sf_smallfnt, g->defcr, g->ox+98,1, g->oy+27,1);
+   PrintText_str(ns(lang(fast_strdup2(LANG "SHOP_DESCR_", item->name))), sf_smallfnt, g->defcr, g->ox+98,1, g->oy+27,1);
 
    G_ClipRelease(g);
 

@@ -237,7 +237,12 @@ void Sc_Log(i32 levl, i32 type) {
 
    str name = ServCallS(sm_GetLogName);
 
-   if(name[0] == '_') name = lang_fmt(LANG "LOG%S", name);
+   if(name[0] == '_') {
+      ACS_BeginPrint();
+      PrintChrLi(LANG "LOG");
+      ACS_PrintString(name);
+      name = lang(ACS_EndStrParam());
+   }
 
    switch(type) {
    case msg_scri:

@@ -18,7 +18,7 @@
 static
 void EncryptedBody(struct page *page, char *bodytext) {
    faststrcpy_str(bodytext,
-                  ns(lang_fmt(LANG "INFO_DESCR_%s", page->name)));
+                  ns(lang(fast_strdup2(LANG "INFO_DESCR_", page->name))));
    for(char *p = bodytext; *p; p++) {
       *p = !IsPrint(*p) ? *p : *p ^ 7;
    }
@@ -30,7 +30,7 @@ void MailBody(struct page *page, char *bodytext) {
    char remote[128];
    cstr sent;
 
-   faststrcpy_str(remote, ns(lang_fmt(LANG "INFO_REMOT_%s", page->name)));
+   faststrcpy_str(remote, ns(lang(fast_strdup2(LANG "INFO_REMOT_", page->name))));
    sent = CanonTime(ct_full, page->time);
 
    mem_size_t end =
@@ -38,7 +38,7 @@ void MailBody(struct page *page, char *bodytext) {
    bodytext[end++] = '\n';
    bodytext[end++] = '\n';
    faststrcpy_str(&bodytext[end],
-                  ns(lang_fmt(LANG "INFO_DESCR_%s", page->name)));
+                  ns(lang(fast_strdup2(LANG "INFO_DESCR_", page->name))));
 }
 
 static
@@ -46,13 +46,13 @@ cstr GetShortName(struct page *page) {
    if(page->category == _bipc_mail) {
       return CanonTime(ct_short, page->time);
    } else {
-      return tmpstr(lang_fmt(LANG "INFO_SHORT_%s", page->name));
+      return tmpstr(lang(fast_strdup2(LANG "INFO_SHORT_", page->name)));
    }
 }
 
 static
 cstr GetFullName(struct page *page) {
-   return tmpstr(lang_fmt(LANG "INFO_TITLE_%s", page->name));
+   return tmpstr(lang(fast_strdup2(LANG "INFO_TITLE_", page->name)));
 }
 
 static
@@ -68,7 +68,7 @@ cstr GetBody(struct page *page) {
       break;
    default:
       faststrcpy_str(bodytext,
-                     ns(lang_fmt(LANG "INFO_DESCR_%s", page->name)));
+                     ns(lang(fast_strdup2(LANG "INFO_DESCR_", page->name))));
       break;
    }
    return bodytext;
@@ -94,9 +94,9 @@ static
 void DrawPage(struct gui_state *g, struct page *page) {
    gosub_enable();
 
-   str image  = lang_fmt(LANG "INFO_IMAGE_%s", page->name);
+   str image  = lang(fast_strdup2(LANG "INFO_IMAGE_", page->name));
    i32 height =
-      faststrtoi32_str(ns(lang_fmt(LANG "INFO_SSIZE_%s", page->name)));
+      faststrtoi32_str(ns(lang(fast_strdup2(LANG "INFO_SSIZE_", page->name))));
 
    i32 cr, x, y;
 
@@ -181,10 +181,10 @@ void MainUI(struct gui_state *g) {
    return;
 
 doCateg:
-   PrintTextA_str(ns(lang_fmt(LANG "BIP_HELP_%s", P_BIP_CategoryToName(cat))),
+   PrintTextA_str(ns(lang(fast_strdup2(LANG "BIP_HELP_", P_BIP_CategoryToName(cat)))),
                   sf_smallfnt, g->defcr, g->ox+92,1, g->oy+72+n,1, 0.7);
-   if(G_Button_HId(g, cat, tmpstr(ns(lang_fmt(LANG "BIP_NAME_%s",
-                                              P_BIP_CategoryToName(cat)))),
+   if(G_Button_HId(g, cat, tmpstr(ns(lang(fast_strdup2(LANG "BIP_NAME_",
+                                                       P_BIP_CategoryToName(cat))))),
                    32, 72 + n, Pre(btnbipmain)))
    {
       bip.curcategory = cat;

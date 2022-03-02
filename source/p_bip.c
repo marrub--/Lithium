@@ -33,7 +33,7 @@ mem_size_t  bippagenum;
 script static
 void MailNotifyFinish(cstr name) {
    char remote[128];
-   faststrcpy_str(remote, ns(lang_fmt(LANG "INFO_REMOT_%s", name)));
+   faststrcpy_str(remote, ns(lang(fast_strdup2(LANG "INFO_REMOT_", name))));
 
    pl.logB(1, tmpstr(lang(sl_log_mailrecv)), remote);
 

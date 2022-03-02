@@ -85,8 +85,7 @@ void GUIUpgradesList(struct gui_state *g) {
       else                                      pre = &gui_p.btnlistsel;
 
       i32 *upgrsel = &CBIState(g)->upgrsel;
-      if(G_Button_HId(g, _i, tmpstr(lang_fmt(LANG "UPGRADE_TITLE_%s",
-                                             upgr->name)),
+      if(G_Button_HId(g, _i, tmpstr(lang(fast_strdup2(LANG "UPGRADE_TITLE_", upgr->name))),
                       0, y, _i == *upgrsel, .color = color, .preset = pre))
          *upgrsel = _i;
 

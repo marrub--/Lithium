@@ -51,7 +51,7 @@ void DrawAttr(struct gui_state *g, i32 x, i32 y, i32 at)
       helptrns += 0.3;
    }
 
-   PrintTextA_str(ns(lang_fmt(LANG "ATTR_HELP_%.3s", name)), sf_smallfnt, g->defcr, g->ox+x+1,1, g->oy+y,1, helptrns);
+   PrintTextA_str(ns(lang(fast_strdup2(LANG "ATTR_HELP_", name))), sf_smallfnt, g->defcr, g->ox+x+1,1, g->oy+y,1, helptrns);
 
    ACS_BeginPrint();
    ACS_PrintInt(attr);

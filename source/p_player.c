@@ -330,7 +330,7 @@ void P_Scr_Take(i96 score) {
 script static
 void P_bossWarningDone() {
    if(bossspawned)
-      pl.logB(1, tmpstr(lang_fmt_discrim(LANG "LOG_BossWarn%s")));
+      pl.logB(1, tmpstr(lang_discrim(sl_log_bosswarn)));
 }
 
 alloc_aut(0) script static

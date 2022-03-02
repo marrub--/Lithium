@@ -92,7 +92,7 @@ void S_empty(struct set_parm const *sp) {
 
 script static
 void S_label(struct set_parm const *sp) {
-   PrintText_str(ns(lang_fmt(LANG "%s", sp->st->text)),
+   PrintText_str(ns(lang(fast_strdup2(LANG, sp->st->text))),
                  sf_smallfnt, sp->g->defcr, sp->g->ox + _left,1,
                  sp->g->oy + sp->y,1);
 }
@@ -123,7 +123,7 @@ void S_integ(struct set_parm const *sp) {
    struct slide_ret sret =
       G_Slider_HId(sp->g, sp->y, _rght - gui_p.slddef.w, sp->y,
                    sp->st->bnd.i.min, sp->st->bnd.i.max, v, true,
-                   .suf = tmpstr(lang_fmt(LANG "st_suff_%s", sp->st->suff)));
+                   .suf = tmpstr(lang(fast_strdup2(LANG "st_suff_", sp->st->suff))));
    if(sret.different) {
       v = sret.value;
       sp->st->cb_g.i(sp, &v);
@@ -139,7 +139,7 @@ void S_fixed(struct set_parm const *sp) {
    struct slide_ret sret =
       G_Slider_HId(sp->g, sp->y, _rght - gui_p.slddef.w, sp->y,
                    sp->st->bnd.k.min, sp->st->bnd.k.max, v,
-                   .suf = tmpstr(lang_fmt(LANG "st_suff_%s", sp->st->suff)));
+                   .suf = tmpstr(lang(fast_strdup2(LANG "st_suff_", sp->st->suff))));
    if(sret.different) {
       v = sret.value;
       sp->st->cb_g.k(sp, &v);

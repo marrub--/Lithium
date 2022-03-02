@@ -263,14 +263,14 @@ static
 str GetRemote() {
    u32  adr = MemB2_G(VAR_REMOTEL);
    cstr nam = adr ? MemSC_G(adr) : "UNKNOWN";
-   return ns(lang_fmt(LANG "REMOTE_%s", nam));
+   return ns(lang(fast_strdup2(LANG "REMOTE_", nam)));
 }
 
 static
 str GetName() {
    u32  adr = MemB2_G(VAR_NAMEL);
    cstr nam = adr ? MemSC_G(adr) : "UNKNOWN";
-   return ns(lang_fmt(LANG "PNAME_%s", nam));
+   return ns(lang(fast_strdup2(LANG "PNAME_", nam)));
 }
 
 static
@@ -428,7 +428,7 @@ void DialogueGUI() {
 
       for(i32 i = 0; i < oc; i++, y += 14) {
          u32  adr = MemB2_G(StructOfs(OPT, NAML, i));
-         cstr txt = tmpstr(lang_fmt(LANG "OPT_%s", MemSC_G(adr)));
+         cstr txt = tmpstr(lang(fast_strdup2(LANG "OPT_", MemSC_G(adr))));
 
          if(G_Button_HId(&gst, i, txt, 45, y, Pre(btndlgsel))) {
             MemB1_S(VAR_UACT, UACT_SELOPTION);

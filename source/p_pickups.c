@@ -67,7 +67,7 @@ void P_Log_Weapon(struct weaponinfo const *info) {
    if(CVarGetI(sc_player_sillypickups)) {
       silly_pickup(info->type);
    } else if(info->name) {
-      str nam = ns(lang_fmt(LANG "INFO_SHORT_%s", info->name));
+      str nam = ns(lang(fast_strdup2(LANG "INFO_SHORT_", info->name)));
       if(itemdisp & _itm_disp_pop) {
          P_ItemPopup(nam, GetX(0), GetY(0), GetZ(0));
       }
@@ -88,7 +88,7 @@ void P_Log_SellWeapon(struct weaponinfo const *info, i96 score) {
    if(CVarGetI(sc_player_sillypickups))
       nam = get_name(weapon);
    else
-      nam = lang_fmt(LANG "INFO_SHORT_%s", info->name);
+      nam = lang(fast_strdup2(LANG "INFO_SHORT_", info->name));
    nam = ns(nam);
 
    cstr msg = tmpstr(lang(sl_log_sell));

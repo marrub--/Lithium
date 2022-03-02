@@ -30,7 +30,7 @@ void Container(struct gui_state *g, struct container *cont, i32 sx, i32 sy) {
    i32 h = cont->h * 8;
    i32 w = cont->w * 8;
 
-   PrintText_str(ns(lang_fmt(LANG "CONTAINER_%s", cont->cname)),
+   PrintText_str(ns(lang(fast_strdup2(LANG "CONTAINER_", cont->cname))),
                  sf_smallfnt, g->defcr, sx,1, sy,2);
 
    for(i32 y = 0; y < h; y += 8) {
