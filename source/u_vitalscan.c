@@ -23,10 +23,8 @@ void Upgr_VitalScan_Update(void) {
 
    bool six = ACS_StrCmp(ACS_GetActorClass(0), so_RLDeVileSix, 11) == 0;
 
-   bool validtarget =
-      six ||
-      ACS_CheckFlag(0, sm_countkill) ||
-      ACS_PlayerNumber() != -1;
+   dmon_t const *const m = DmonSelf();
+   bool validtarget = m || six || ACS_CheckFlag(0, sm_countkill) || ACS_PlayerNumber() != -1;
 
    if(GetHealth(0) <= 0) {
       fastmemset(&udata, 0, sizeof udata);
@@ -35,7 +33,6 @@ void Upgr_VitalScan_Update(void) {
       i32 shp = ServCallI(sm_GetSpawnHealth);
 
       i32 id = UniqueID();
-      dmon_t const *const m = DmonSelf();
 
       i32 ot = udata.target;
 
