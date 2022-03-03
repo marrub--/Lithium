@@ -332,6 +332,7 @@ struct setting const st_ply[] = {
    {S_label, "st_labl_boss_2"},
    {S_label, "st_labl_boss_3"},
    {S_label, "st_labl_boss_4"},
+   #ifndef NDEBUG
    {S_empty},
    {S_label, "st_labl_ply_postgame"},
    {S_boole, "sv_postgame", S_cvBoole, .fill = true},
@@ -339,6 +340,7 @@ struct setting const st_ply[] = {
    {S_label, "st_labl_postgame_2"},
    {S_label, "st_labl_postgame_3"},
    {S_label, "st_labl_postgame_4"},
+   #endif
 };
 
 struct setting const st_wep[] = {

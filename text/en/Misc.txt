@@ -285,55 +285,84 @@ This one isn't even remotely fair.
 == \#CTRL_TOGGRP4    | Toggle \cfSet 4
 
 ## Description characters:
+## 012345678901234567890123456789
+## 012345678901234567890123456789
+## 01234567890123456789012345678
+## 012345678901234567890123456
 ## 01234567890123456789012345
-## 01234567890123456789012345
-## 0123456789012345678901234
-## 012345678901234567890123
-## 0123456789012345678901
 
 == \#CLASS_MARINE     | Marine
 == \#CLASS_MARINE_Nam | Stan Blazkowicz
 == \#CLASS_MARINE_Col | Lith_Green
 %% \#CLASS_MARINE_Dsc
 An exceptional soldier,
-augmented with cyber-tech
-and advanced weaponry.
-Agile, skillful, and
-ready for action.
+augmented with tech and some
+of the most advanced weaponry
+there is. Agile, simple,
+an advanced baseline.
 
 == \#CLASS_CYBERMAGE     | Cyber-Mage
 == \#CLASS_CYBERMAGE_Nam | Jeremy Stilko
 == \#CLASS_CYBERMAGE_Col | Lith_Red
 %% \#CLASS_CYBERMAGE_Dsc
-Possesses great knowledge
-of magic and technology,
-capable of using both
-firearms and spells to
-his advantage.
+Possesses great knowledge of
+magic and cybernetics, capable
+of using both firearms and
+spells to his advantage.
+Relies on weapon quirks.
 
 == \#CLASS_INFORMANT     | Informant
 == \#CLASS_INFORMANT_Nam | Fulk 5
-== \#CLASS_INFORMANT_Col | Lith_Purple
-== \#CLASS_INFORMANT_Dsc | Not implemented
+## == \#CLASS_INFORMANT_Col | Lith_Purple
+== \#CLASS_INFORMANT_Col | Black
+%% \#CLASS_INFORMANT_Dsc
+An advanced combat robot,
+built to seal Hell before it
+gets any worse. They rely on
+countering enemies and
+their obtuse arsenal.
 
 == \#CLASS_ASSASSIN     | Assassin
 == \#CLASS_ASSASSIN_Nam | Omisielle Faulzaje
-== \#CLASS_ASSASSIN_Col | Lith_Pink
-== \#CLASS_ASSASSIN_Dsc | Not implemented
+## == \#CLASS_ASSASSIN_Col | Lith_Pink
+== \#CLASS_ASSASSIN_Col | Black
+%% \#CLASS_ASSASSIN_Dsc
+An intruder from another
+dimension, a fast and violent
+human constructed in a lab.
+They use combos and tricks
+to kill through the horde.
 
 == \#CLASS_DARKLORD     | Dark Lord
 == \#CLASS_DARKLORD_Nam | Aricil Deyan'za
 == \#CLASS_DARKLORD_Col | Lith_Blue
-== \#CLASS_DARKLORD_Dsc | Sort of implemented
+%% \#CLASS_DARKLORD_Dsc
+A walking tank, lord of all
+destruction. Much like a tank,
+moves slow, but hits hard.
+Bring the slaughter, but be
+prepared to think deftly.
 
 == \#CLASS_WANDERER     | Wanderer
 == \#CLASS_WANDERER_Nam | Lucas Sánchez
-== \#CLASS_WANDERER_Col | Lith_Yellow
-== \#CLASS_WANDERER_Dsc | Not implemented
+## == \#CLASS_WANDERER_Col | Lith_Yellow
+== \#CLASS_WANDERER_Col | Black
+%% \#CLASS_WANDERER_Dsc
+An alien with no home,
+wandering throughout the stars
+searching for purpose. Has an
+advanced arsenal and alien
+magic with odd effects.
 
 == \#CLASS_THOTH     | Thoth
 == \#CLASS_THOTH_Nam | Kirihito Kosatohara
-== \#CLASS_THOTH_Col | Lith_Grey
-== \#CLASS_THOTH_Dsc | Not implemented
+## == \#CLASS_THOTH_Col | Lith_Grey
+== \#CLASS_THOTH_Col | Black
+%% \#CLASS_THOTH_Dsc
+The third incarnation of the
+immortal Kirika, sent by the
+god Thoth to reassert
+causality. Armed to the
+teeth with guns and magic.
 
 ## EOF

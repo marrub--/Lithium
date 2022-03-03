@@ -488,7 +488,6 @@ override void RenderOverlay(RenderEvent evt) {
    if(m_bossDeathInit == 0) {
       Shader.SetEnabled(players[consoleplayer], "Lith_End", false);
    } else if(ftic > 15.0) {
-      console.printf("bruh");
       Shader.SetEnabled(players[consoleplayer], "Lith_End", true);
       Shader.SetUniform1f(players[consoleplayer], "Lith_End", "lith_t", ftic - 15.0);
    }

@@ -59,8 +59,7 @@ reinit:
 
    if(pl.teleportedout) P_TeleportIn();
 
-   while(pl.active)
-   {
+   while(pl.active) {
       if(pl.reinit)
          goto reinit;
 

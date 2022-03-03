@@ -34,7 +34,7 @@ listMenu "MainMenu" {
    textItem "$MENU_QUITG",  "q", "QuitMenu"
 
    font "smallfont", "White", "White"
-   staticText 0, 0, "Version 1.7.0"
+   staticText 0, 0, "Version 1.7.0 DEV"
 }
 
 listMenu "PlayerclassMenu" {

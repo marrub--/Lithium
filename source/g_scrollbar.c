@@ -58,8 +58,8 @@ void G_ScrBeg_Imp(struct gui_state *g, gid_t id, struct gui_arg_scr *a) {
       {
          k64 const cy = g->cy - y - caph;
 
-         /* if it isn't grabbed and the cursor is over the scroller, */
-         /* set the grab position to where the cursor is relative to it */
+         /* if it isn't grabbed and the cursor is over the scroller,
+          * set the grab position to where the cursor is relative to it */
          if(!scr->grabbed && cy > supposedy && cy < supposedy + scrlh)
          {
             scr->grabbed = true;
