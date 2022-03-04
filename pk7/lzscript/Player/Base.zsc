@@ -50,6 +50,8 @@ Lith_AdviceMarker m_curAdvice;
 
 int m_wasDamaged;
 
+int m_speed;
+
 property ViewBob: m_VBob;
 
 override void BeginPlay() {
@@ -66,6 +68,13 @@ override void GiveDefaultInventory() {
    lith_giveDefItem("Lith_RocketAmmo", 0);
    lith_giveDefItem("Lith_PlasmaAmmo", 0);
    lith_giveDefItem("Lith_CannonAmmo", 0);
+}
+
+override double, double tweakSpeeds(double forward, double side) {
+   [forward, side] = super.tweakSpeeds(forward, side);
+   forward *= double(m_speed) / 100.0;
+   side    *= double(m_speed) / 100.0;
+   return forward, side;
 }
 
 void lith_giveDefItem(class<Inventory> type, int amount) {

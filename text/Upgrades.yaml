@@ -18,11 +18,11 @@ _uc_body:
       VitalScan:   {pg: VitalScanner, f: --UR-, pr: 2}
 
    gO:
-      ReflexWetw: {f: ADU--, pr: 5, mul: -5}
+      ReflexWetw: {f: A-U--, pr: 5, mul: -5}
 
    pM:
       JetBooster:  {              f: --U--, mul: -5}
-      CyberLegs:   {scr: 1220000, f: ADU--, pr:  4}
+      CyberLegs:   {scr: 1220000, f: --U--, pr:  4}
       ReactArmor:  {scr: 3500200, f: -D-R-, pr: 20, req: ai   }
       ReactArmor2: {scr: 2990200,           pr: 10, req: ai ra}
       DefenseNuke: {scr:  580030, f: ----E,         req: ai   }

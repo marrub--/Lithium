@@ -70,6 +70,7 @@
    cl: pM tag: CPU1       unl: "KSKK";
    cl: pM tag: CPU2       unl: "KSKK";
 
+   cl: pD tag: Rokuw;
    cl: gI tag: DimDriver;
 
    cl: gA tag: OrSigil;
@@ -215,12 +216,16 @@
    cl: gO tag: MissileLauncher;
    cl: gO tag: PlasmaDiffuser unl: "SYM43 MDDO Semaphore";
 
+   cl: pD tag: Khanda;
+   cl: pD tag: Kampilan;
    cl: pD tag: "700Express";
-   cl: pD tag: "4Bore";
    cl: pD tag: ShrapnelGun;
+   cl: pD tag: "4Bore";
    cl: pD tag: Minigun unl: "AOF";
+   cl: pD tag: Motra;
    cl: pD tag: DualRocket;
    cl: pD tag: FortuneGun;
+   cl: pD tag: Rems;
 }
 
 "weapons auto" {
@@ -237,13 +242,9 @@
    cl: pC tag: StarShot unl: "AOF";
    cl: pC tag: Cercle   unl: "Earth";
 
-   cl: pD tag: Ruzuk;
    cl: pD tag: Zaruk;
    cl: pD tag: Zakwu;
    cl: pD tag: Zikr;
-   cl: pD tag: Rokuw;
-   cl: pD tag: Rowuk;
-   cl: pD tag: Zwew;
 }
 
 "extra auto" {

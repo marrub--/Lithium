@@ -10,7 +10,6 @@ class Lith_CyberMagePlayer : Lith_Player {
    default {
       Player.AttackZOffset 12;
       Player.DisplayName "$LITH_CLASS_CYBERMAGE";
-      Player.JumpZ 9;
       Player.Portrait "lgfx/Portraits/CyberMage.png";
       Player.SoundClass "cybermage";
       Player.ViewHeight 45;

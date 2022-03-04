@@ -6,6 +6,9 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
+!!include Ari/Items.txt
+!!include Intruders/Items.txt
+
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ScoreChip | Score Chip
 == \#INFO_TITLE_ScoreChip | GIC 781000 Score Chip

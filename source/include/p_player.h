@@ -208,8 +208,6 @@ struct player_delta {
    k32 velx, vely, velz;
    k32 pitchv, yawv;
    k32 forwardv, sidev, upv;
-   k32 speedmul;
-   k32 jumpboost;
 
    /* Input */
    i32  buttons;
@@ -309,6 +307,8 @@ struct player {
 
    /* Misc */
    k32 rage;
+   i32 speedmul;
+   i32 jumpboost;
 
    char *notes[16];
 

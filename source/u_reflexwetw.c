@@ -33,18 +33,14 @@ void DodgeView()
 
 void Upgr_ReflexWetw_Activate(void)
 {
-   pl.speedmul += 0.3;
    udata.charge = CHARGE_MAX;
    udata.leaped = 0;
 }
 
-void Upgr_ReflexWetw_Deactivate(void)
-{
-   pl.speedmul -= 0.3;
-}
-
 void Upgr_ReflexWetw_Update(void)
 {
+   pl.speedmul += 30;
+
    if(udata.leaped == 1) {
       udata.leaped = 2;
    }

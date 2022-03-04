@@ -6,15 +6,19 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
+== \#INFO_SHORT_Khanda      | Khanda
+== \#INFO_SHORT_Kampilan    | Kampilan
 == \#INFO_SHORT_700Express  | .700 Express
 == \#INFO_SHORT_4Bore       | 4 ga. Shotgun
+== \#INFO_SHORT_Motra       | Motril
 == \#INFO_SHORT_ShrapnelGun | Shrapnel Gun
 == \#INFO_SHORT_DualRocket  | Franca & Sophia
 == \#INFO_SHORT_FortuneGun  | Fortiuty
+== \#INFO_SHORT_Rems        | Qasl 339-7 Rems
 
 == \#INFO_SHORT_Rakz | Sub-bullets
 == \#INFO_SHORT_Zaruk | Sub-grenades
-== \#INFO_SHORT_Zakuw | Sub-stealers
+== \#INFO_SHORT_Zakwu | Sub-stealers
 == \#INFO_SHORT_Zikr | Sub-darts
 
 ## ═══════════════════════════════════════════════════════════════════════════╕

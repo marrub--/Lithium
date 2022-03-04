@@ -12,20 +12,11 @@
 
 #include "u_common.h"
 
-void Upgr_CyberLegs_Activate(void)
-{
-   pl.speedmul += 0.2;
-   pl.jumpboost += 0.5;
-}
-
-void Upgr_CyberLegs_Deactivate(void)
-{
-   pl.speedmul -= 0.2;
-   pl.jumpboost -= 0.5;
-}
-
 void Upgr_CyberLegs_Update(void)
 {
+   pl.speedmul  += 20;
+   pl.jumpboost += 50;
+
    k32 absvel = fastabsk(pl.old.velz) * 10.0k;
 
    if(pl.velz == 0 && absvel > 160)

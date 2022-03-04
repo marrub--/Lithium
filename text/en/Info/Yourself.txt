@@ -299,4 +299,12 @@ into your very senses.
 
 Leveling up in concentration will multiply damage dealt when you gain mana.
 
+== \#INFO_SHORT_AttrREF | Reflex
+== \#INFO_TITLE_AttrREF | \cmReflex\c- (REF)
+@@ \#INFO_DESCR_AttrREF
+Reflex is your adrenaline, the rush of strength as you feel pain. Your
+slow body moves quicker the sharper this rush is.
+
+Leveling up in reflex will multiply movement speed when damaged.
+
 ## EOF

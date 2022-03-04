@@ -419,6 +419,22 @@ flickerlight2 Lith_ShotgunTrail2 {
    attenuate 1
 }
 
+flickerlight2 Lith_RemsLight1 {
+   color 0.56 0.25 1.0
+   size 80
+   secondarysize 40
+   interval 0.05
+   attenuate 1
+}
+
+flickerlight2 Lith_RemsLight2 {
+   color 0.56 0.25 1.0
+   size 10
+   secondarysize 20
+   interval 0.05
+   attenuate 1
+}
+
 object Lith_CandleFlare                     {frame YLGL {light Lith_Candle}}
 object Lith_CandelabraFlare                 {frame YLGL {light Lith_Candelabra}}
 object Lith_TechLampFlare                   {frame BLGL {light Lith_BigLamp}}

@@ -120,6 +120,27 @@ class Lith_CasBigHot : Lith_CasBig {
    }
 }
 
+class Lith_CasRemsHot : Lith_CasShell {
+   default {
+      Scale 0.05;
+   }
+
+   states {
+   Spawn1:
+      TNT1 A 0;
+      BREM AABBCCDDEEFFGGHH 1 A_SpawnItemEx("Lith_CasingSmoke", 0,0,3, frandom(-0.2,0),frandom(-0.2,0));
+   Spawn2:
+      BREM ABCDEFGH 1;
+      loop;
+   Death:
+      #### # 0 A_StartSound("casings/shell/die", lch_body);
+      #### CG 0 A_Jump(128, "Done");
+      #### # 100;
+      #### # 1 A_FadeOut;
+      wait;
+   }
+}
+
 class Lith_Cas700e : Lith_CasBig {
    states {
    Spawn1:

@@ -10,17 +10,10 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-#define Spf s""
-
 #define CVAR  "lith_"
 #define DCVAR "__lith_"
 #define LANG  "LITH_"
 #define OBJ   "Lith_"
-
-#define sCVAR  Spf CVAR
-#define sDCVAR Spf DCVAR
-#define sLANG  Spf LANG
-#define sOBJ   Spf OBJ
 
 #ifndef STR_PREFIXES_ONLY
 #include <GDCC.h>

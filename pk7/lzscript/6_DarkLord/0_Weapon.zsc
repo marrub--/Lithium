@@ -124,6 +124,7 @@ action(Weapon) void lith_subGunFire() {
    a_startSound("weapons/subweapon/armgun", lch_altweapon);
    a_alertMonsters();
    lith_fireBullets(1, 2, -1, 15 * random(2, 4), flags: FBF_NORANDOM, tracerX: -6);
+   A_FireProjectile("Lith_LightProjectileRedShort", 0);
 }
 
 action(Weapon) void lith_subGrnFire() {

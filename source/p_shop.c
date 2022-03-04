@@ -15,12 +15,12 @@
 
 static
 struct shopitem shopitems[] = {
-   {{_shop_items, "ChargeFist",      "ChargeFist",       100000}, gO, 1, sOBJ "ChargeFist",      true},
-   {{_shop_items, "Revolver",        "Revolver",         500000}, pM, 1, sOBJ "Revolver",        true},
-   {{_shop_items, "LazShotgun",      "LazShotgun",      1800000}, pM, 1, sOBJ "LazShotgun",      true},
-   {{_shop_items, "SniperRifle",     "SniperRifle",     1800000}, pM, 1, sOBJ "SniperRifle",     true},
-   {{_shop_items, "MissileLauncher", "MissileLauncher", 2500000}, gO, 1, sOBJ "MissileLauncher", true},
-   {{_shop_items, "PlasmaDiffuser",  "PlasmaDiffuser",  2500000}, gO, 1, sOBJ "PlasmaDiffuser",  true},
+   {{_shop_items, "ChargeFist",      "ChargeFist",       100000}, gO, 1, s"" OBJ "ChargeFist",      true},
+   {{_shop_items, "Revolver",        "Revolver",         500000}, pM, 1, s"" OBJ "Revolver",        true},
+   {{_shop_items, "LazShotgun",      "LazShotgun",      1800000}, pM, 1, s"" OBJ "LazShotgun",      true},
+   {{_shop_items, "SniperRifle",     "SniperRifle",     1800000}, pM, 1, s"" OBJ "SniperRifle",     true},
+   {{_shop_items, "MissileLauncher", "MissileLauncher", 2500000}, gO, 1, s"" OBJ "MissileLauncher", true},
+   {{_shop_items, "PlasmaDiffuser",  "PlasmaDiffuser",  2500000}, gO, 1, s"" OBJ "PlasmaDiffuser",  true},
 };
 
 bool Shop_CanBuy(struct shopitem const *item) {

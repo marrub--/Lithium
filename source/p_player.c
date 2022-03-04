@@ -594,6 +594,9 @@ void P_doIntro() {
    pl.modal = _gui_none;
 }
 
+static k32 damage_mul;
+static i32 max_health;
+
 static
 void P_attrRGE() {
    i32 rge = pl.attr.attrs[at_spc];
@@ -602,16 +605,32 @@ void P_attrRGE() {
       pl.rage += rge * (pl.oldhealth - pl.health) / 1000.0;
 
    pl.rage = lerpk(pl.rage, 0, 0.02);
+
+   damage_mul += pl.rage;
 }
 
 static
 void P_attrCON() {
-   i32 rge = pl.attr.attrs[at_spc];
+   i32 con = pl.attr.attrs[at_spc];
 
    if(pl.mana > pl.oldmana)
-      pl.rage += rge * (pl.mana - pl.oldmana) / 1100.0;
+      pl.rage += con * (pl.mana - pl.oldmana) / 1100.0;
 
    pl.rage = lerpk(pl.rage, 0, 0.03);
+
+   damage_mul += pl.rage;
+}
+
+static
+void P_attrREF() {
+   i32 ref = pl.attr.attrs[at_spc];
+
+   if(pl.health < pl.oldhealth)
+      pl.rage += ref * (pl.oldhealth - pl.health) / 150.0;
+
+   pl.rage = lerpk(pl.rage, 0, 0.01);
+
+   pl.speedmul += (int)pl.rage;
 }
 
 static
@@ -624,17 +643,22 @@ void P_Atr_pTick() {
    i32  stm = pl.attr.attrs[at_stm];
    i32 stmt = 75 - stm;
 
+   max_health = pl.spawnhealth + strn;
+   damage_mul = 1.0 + acc;
+
    switch(pl.pclass) {
    case pcl_marine:    P_attrRGE(); break;
    case pcl_cybermage: P_attrCON(); break;
+   case pcl_darklord:  P_attrREF(); break;
    }
 
-   pl.maxhealth = pl.spawnhealth + strn;
-   SetDamageMultiplier(0, 1.0 + acc + pl.rage);
+   SetDamageMultiplier(0, damage_mul);
    SetMembI(0, sm_DmgFac, clampi(100 * def, 0, 100));
+
+   pl.maxhealth = max_health;
    SetSpawnHealth(0, pl.maxhealth);
 
-   if(pl.health < stm+10 && (stmt < 2 || pl.ticks % stmt == 0))
+   if(pl.health < stm + 10 && (stmt < 2 || pl.ticks % stmt == 0))
       pl.health = pl.health + 1;
 }
 

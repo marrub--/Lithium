@@ -319,6 +319,18 @@ perced to the rooten.
 == \#PK_c_shipgun_012 | Store Destroyer
 == \#PK_c_shipgun_013 | Master Spark
 
+== \#PK_d_kampilan_NUM | 3
+== \#PK_d_kampilan_000 | Crumpilan
+== \#PK_d_kampilan_001 | Cumpeelahn
+== \#PK_d_kampilan_002 | Scrumbilan
+== \#PK_d_kampilan_003 | Sprumpilun
+
+== \#PK_d_khanda_NUM | 3
+== \#PK_d_khanda_000 | Kanda
+== \#PK_d_khanda_001 | Cornda
+== \#PK_d_khanda_002 | Kramduh
+== \#PK_d_khanda_003 | Cranda
+
 == \#PK_d_700e_NUM | 4
 == \#PK_d_700e_000 | 700 Sexpress
 == \#PK_d_700e_001 | 777 Bexbus

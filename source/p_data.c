@@ -143,6 +143,15 @@ void P_Dat_PTickPre()
       if(pl.y != pl.old.y) pl.unitstravelled += fastabs(pl.y - pl.old.y);
       if(pl.z != pl.old.z) pl.unitstravelled += fastabs(pl.z - pl.old.z);
    }
+
+   switch(pl.pclass) {
+   default:            pl.speedmul = 100; pl.jumpboost = 100; break;
+   case pcl_marine:    pl.speedmul = 70;  pl.jumpboost = 100; break;
+   case pcl_cybermage: pl.speedmul = 70;  pl.jumpboost = 125; break;
+   case pcl_informant: pl.speedmul = 100; pl.jumpboost = 175; break;
+   case pcl_assassin:  pl.speedmul = 100; pl.jumpboost = 150; break;
+   case pcl_darklord:  pl.speedmul = 50;  pl.jumpboost = 100; break;
+   }
 }
 
 alloc_aut(0) script static
@@ -355,16 +364,11 @@ void P_Init() {
 }
 
 void P_Dat_PTickPst() {
-   k32 boost = 1 + pl.jumpboost;
-
    if(pl.frozen != pl.old.frozen)
       ACS_SetPlayerProperty(0, pl.frozen > 0, PROP_TOTALLYFROZEN);
 
-   if(pl.speedmul != pl.old.speedmul)
-      SetMembK(0, sm_Speed, 0.7 + pl.speedmul);
-
-   if(pl.jumpboost != pl.old.jumpboost)
-      SetMembK(0, sm_JumpZ, pl.jumpheight * boost);
+   SetMembI(0, sm_Speed, pl.speedmul);
+   SetMembK(0, sm_JumpZ, pl.jumpheight * (pl.jumpboost / 100.0k));
 }
 
 script_str ext("ACS") addr(OBJ "InputChar")

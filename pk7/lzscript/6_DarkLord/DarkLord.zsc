@@ -12,10 +12,8 @@ class Lith_DarkLordPlayer : Lith_Player {
       Lith_Player.ViewBob 0.4;
       Player.AttackZOffset 17;
       Player.DisplayName "$LITH_CLASS_DARKLORD";
-      Player.ForwardMove 1, 0.5;
       Player.MaxHealth 150;
       Player.Portrait "lgfx/Portraits/DarkLord.png";
-      Player.SideMove 1, 0.5;
       Player.SoundClass "darklord";
       Player.ViewHeight 50;
       Tag "$LITH_CLASS_DARKLORD";

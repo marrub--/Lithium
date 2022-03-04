@@ -29,7 +29,7 @@ common_main do
             ammo = hwep[2].split
             ammo[0].prepend "AT_"
             if ammo[1]
-               ammo[1] = 'sOBJ "' + ammo[1] + 'Ammo"'
+               ammo[1] = 's"" OBJ "' + ammo[1] + 'Ammo"'
             else
                ammo.push "snil"
             end
@@ -41,7 +41,7 @@ common_main do
             wep[:snd] = 's"weapons/' + name[2..] + '/pickup"'
             wep[:aty] = ammo[0]
             wep[:acl] = ammo[1]
-            wep[:cls] = 'sOBJ ' + cname
+            wep[:cls] = 's"" OBJ ' + cname
             wep[:typ] = name
             weapons.push wep
          end

@@ -100,9 +100,9 @@ void StrInit() {
    str *ary;
    i32 i;
    #define stab_ary_bgn_x(name) i = 0, ary = name;
-   #define stab_ary_ent_x(strn) ary[i++] = Spf strn;
+   #define stab_ary_ent_x(strn) ary[i++] = s"" strn;
    #define stab_ary_end_x()
-   #define stab_x(n, s) n = Spf s;
+   #define stab_x(n, s) n = s"" s;
    #include "m_stab.h"
 }
 

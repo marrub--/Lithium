@@ -82,7 +82,7 @@ Use at the expense of your world.
 == OB_FATSO     | %o isn't the best at dodging those slow projectiles.
 == OB_IMP       | Target priority isn't %p specialty, really.
 == OB_IMPHIT    | To be honest, there's not much recovery from those claws, %o.
-== OB_KNIGHT    | %o is a bonafide genius, walking %hself right into that projectile spear.
+== OB_KNIGHT    | %o is great at dodging, walking %hself right into that projectile spear.
 == OB_KNIGHTHIT | Oooh! Wait, do you ever think about how the knights in Destiny are the exact same as the ones in Doom? Weird.
 == OB_SHOTGUY   | %o got %p face filled with delicious lead.
 == OB_SKULL     | %o hates lost souls.
@@ -248,16 +248,6 @@ This one is extra hard.
 [[[[ Enemies will be significantly more aggressive. ]]]]
 [[[[ Enemy level scaling is more intense. ]]]]
 [[[[ You will take slightly more damage. ]]]]
-[[[[ You will get more score. ]]]]
-
-%% \#SKILL_NIGHTMARE
-Are you sure?
-This one isn't even remotely fair.
-[[[[ Enemies will not infight. ]]]]
-[[[[ Enemy level scaling is more intense. ]]]]
-[[[[ Enemies will have less health. ]]]]
-[[[[ Enemies will respawn. ]]]]
-[[[[ You will take significantly more damage. ]]]]
 [[[[ You will get more score. ]]]]
 
 == DOSY     | (Press Y to quit.)

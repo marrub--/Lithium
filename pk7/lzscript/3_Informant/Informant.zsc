@@ -17,7 +17,6 @@ class Lith_InformantPlayer : Lith_Player
       Player.Portrait "lgfx/Portraits/Informant.png";
       Player.ViewHeight 44;
       Player.AttackZOffset 11;
-      Player.JumpZ 14;
       Tag "$LITH_CLASS_INFORMANT";
 
       +NoBlood

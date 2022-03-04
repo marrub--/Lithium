@@ -14,13 +14,24 @@
 void P_Ren_Debug() {
    if(!dbglevel(log_devh)) return;
 
-   Dbg_Stat("exp: lv.%u %u/%u/%u\n", pl.attr.level, pl.attr.expprev, pl.attr.exp, pl.attr.expnext);
-   Dbg_Stat("x: %k\ny: %k\nz: %k\n", pl.x, pl.y, pl.z);
-   Dbg_Stat("vx: %k\nvy: %k\nvz: %k\nvel: %k\n", pl.velx, pl.vely, pl.velz, pl.getVel());
-   Dbg_Stat("a.y: %k\na.p: %k\na.r: %k\n", pl.yaw * 360, pl.pitch * 360, pl.roll * 360);
-   Dbg_Stat("ap.y: %lk\nap.p: %lk\nap.r: %lk\n", pl.addyaw * 360, pl.addpitch * 360, pl.addroll * 360);
-   Dbg_Stat("rage: %k\n", pl.rage);
-   Dbg_Stat("score: %lli\n", pl.score);
+   Dbg_Stat(
+      "exp: lv.%u %u/%u/%u\n"
+      "x: %k\ny: %k\nz: %k\n"
+      "vx: %k\nvy: %k\nvz: %k\nvel: %k\n"
+      "a.y: %k\na.p: %k\na.r: %k\n"
+      "ap.y: %lk\nap.p: %lk\nap.r: %lk\n"
+      "rage: %k\n"
+      "score: %lli\n"
+      "speedmul: %i\njumpboost: %i\n",
+      pl.attr.level, pl.attr.expprev, pl.attr.exp, pl.attr.expnext,
+      pl.x, pl.y, pl.z,
+      pl.velx, pl.vely, pl.velz, pl.getVel(),
+      pl.yaw * 360, pl.pitch * 360, pl.roll * 360,
+      pl.addyaw * 360, pl.addpitch * 360, pl.addroll * 360,
+      pl.rage,
+      pl.score,
+      pl.speedmul, pl.jumpboost
+   );
 
    SetSize(320, 240);
 
