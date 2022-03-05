@@ -65,7 +65,7 @@ void Upgr_VitalScan_Update(void) {
          PrintChrLi("\C[Lith_Evil]");
       }
 
-      if(udata.freak || ACS_CheckFlag(0, sm_boss)) {
+      if(udata.rank < 6 && (udata.freak || ACS_CheckFlag(0, sm_boss))) {
          RandomName(!udata.freak &? id);
       } else if(six) {
          ACS_PrintString(st_six_tag);

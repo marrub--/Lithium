@@ -17,6 +17,7 @@
 enum {
    _left = 2,
    _rght = 280,
+   _leng = 10,
 };
 
 enum {
@@ -364,7 +365,7 @@ struct setting const st_wep[] = {
    {S_empty},
    {S_label, "st_labl_wep_behaviour"},
    {S_boole, "weapons_riflemodeclear", S_cvBoole, .pclass = pM},
-   {S_boole, "weapons_reloadempty",   S_cvBoole},
+   {S_boole, "weapons_reloadempty",    S_cvBoole},
 };
 
 struct setting const st_wld[] = {
@@ -428,7 +429,7 @@ void P_CBI_TabSettings(struct gui_state *g) {
          if(!G_ScrOcc(g, &CBIState(g)->settingscr, sp.y, 10))
             sp.st->cb(&sp);
 
-         sp.y += 10;
+         sp.y += _leng;
       }
    }
 
