@@ -48,7 +48,7 @@ override void tick() {
          }
 
          if(m_windUp) {
-            m_windUp -= 0.08;
+            m_windUp -= 0.015;
 
             if(m_windUp < 0) {
                m_windUp = m_sndState = 0;
@@ -67,7 +67,7 @@ int Lith_WindupTime() {
 
 void lith_incrementWindup() {
    if(lith_isMinigunFiring()) {
-      m_windUp += 0.11;
+      m_windUp += 0.09;
    }
 }
 
