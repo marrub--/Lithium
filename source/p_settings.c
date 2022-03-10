@@ -105,6 +105,9 @@ void S_label(struct set_parm const *sp, bool tooltip) {
    PrintText_str(ns(lang(fast_strdup2(LANG, sp->st->text))),
                  sf_smallfnt, sp->g->defcr, sp->g->ox + _left,1,
                  sp->g->oy + sp->y,1);
+   if(tooltip) {
+      G_Tooltip(sp->g, _left, sp->y, _rght - _left, _leng, sp->st->text);
+   }
 }
 
 static
@@ -295,7 +298,7 @@ struct setting const st_itm[] = {
    {_s_boole, "player_noitemfx",   S_cvBoole},
    {_s_empty},
    {_s_label, "st_labl_itm_balance"},
-   {_s_boole, "sv_nobossdrop", S_cvBoole},
+   {_s_boole, "sv_nobossdrop", S_cvBoole, .fill = true},
    {_s_boole, "sv_wepdrop",    S_cvBoole},
    {_s_empty},
    {_s_label, "st_labl_itm_misc"},
@@ -331,25 +334,12 @@ struct setting const st_ply[] = {
    {_s_boole, "st_done_intro",      .cb_g = {.b = SG_doneIntro}},
    {_s_empty},
    {_s_strng, "player_pronouns", S_cvStrng},
-   {_s_label, "st_labl_pro_1"},
-   {_s_label, "st_labl_pro_2"},
-   {_s_label, "st_labl_pro_3"},
-   {_s_label, "st_labl_pro_4"},
-   {_s_label, "st_labl_pro_5"},
    {_s_empty},
    {_s_boole, "player_bosstexts", S_cvBoole},
-   {_s_label, "st_labl_boss_1"},
-   {_s_label, "st_labl_boss_2"},
-   {_s_label, "st_labl_boss_3"},
-   {_s_label, "st_labl_boss_4"},
    #ifndef NDEBUG
    {_s_empty},
    {_s_label, "st_labl_ply_postgame"},
    {_s_boole, "sv_postgame", S_cvBoole, .fill = true},
-   {_s_label, "st_labl_postgame_1"},
-   {_s_label, "st_labl_postgame_2"},
-   {_s_label, "st_labl_postgame_3"},
-   {_s_label, "st_labl_postgame_4"},
    #endif
 };
 
@@ -379,7 +369,7 @@ struct setting const st_wep[] = {
 
 struct setting const st_wld[] = {
    {_s_label, "st_labl_wld_balance"},
-   {_s_boole, "sv_nobosses", S_cvBoole},
+   {_s_boole, "sv_nobosses", S_cvBoole, .fill = true},
    {_s_empty},
    {_s_label, "st_labl_wld_visuals"},
    {_s_boole, "sv_lessparticles", S_cvBoole},
@@ -409,6 +399,8 @@ struct {
 };
 
 void P_CBI_TabSettings(struct gui_state *g) {
+   pl.cbi.st.settingsfill.tic = 70;
+
    i32 set_num = 0;
 
    gtab_t tn[countof(settings)];

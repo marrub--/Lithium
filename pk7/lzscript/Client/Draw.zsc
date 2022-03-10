@@ -60,12 +60,30 @@ private transient play DrawData[8000] m_D;
 private transient play uint m_DPtr;
 private transient play FadeMsg[256] m_FadeMsg;
 private transient play vector2 m_VirtualSize;
-private transient play int m_BreakWidth;
+private transient play int m_breakX;
 private transient play bool m_NoDraw;
 
 private transient Font m_UFntSml;
 
 private transient bool m_English;
+
+static int LA(int pos, string s, string fnt) {
+   let cl = Lith_URANUS(Find("Lith_URANUS"));
+
+   uint breakx = cl.m_breakX ? cl.m_breakX - pos : 0x7FFF;
+
+   let  fon = cl.fntAny(fnt);
+   let  brl = fon.breakLines(s, breakx);
+   uint lny = fon.getHeight() * brl.count();
+   uint lnx = 0;
+
+   for(uint i = 0; i < brl.count(); i++) {
+      let lnw = brl.stringWidth(i);
+      if(lnx < lnw) lnx = lnw;
+   }
+
+   return (lnx & 0xFFFF) | ((lny & 0xFFFF) << 16);
+}
 
 static void LZ(int w, int h) {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
@@ -214,9 +232,10 @@ static void LT(string txt, string fnt, int xx, int yy, double anum, int cr, int 
 
    uint lns, lnx = 0;
 
+   uint breakx = cl.m_breakX && xa == _xl ? cl.m_breakX - x : 0x7FFF;
    cl.m_D[p].Fnt = cl.fntAny(fnt, flags & _u_no_unicode);
    cl.m_D[p].LnY = cl.m_D[p].Fnt.GetHeight();
-   let       brl = cl.m_D[p].Fnt.BreakLines(txt, cl.m_BreakWidth ? cl.m_BreakWidth : 0x7fff);
+   let       brl = cl.m_D[p].Fnt.BreakLines(txt, breakx);
 
    lns = brl.Count();
 
@@ -282,7 +301,11 @@ static void LC(int x = 0, int y = 0, int w = 0, int h = 0, int ww = 0) {
       cl.m_D[p].Type = _type_clipClear;
    }
 
-   cl.m_BreakWidth = ww;
+   if(ww) {
+      cl.m_breakX = x + ww;
+   } else {
+      cl.m_breakX = 0;
+   }
    cl.m_DPtr++;
 }
 

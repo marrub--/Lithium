@@ -17,6 +17,15 @@
 struct globalcolors globalcolors;
 
 alloc_aut(0) stkcall
+struct i32v2 const *TextSize(str s, str font, i32 pos) {
+   static struct i32v2 draw_text_size;
+   draw_text_size.x = DrawCallI(sm_LA, pos, s, font);
+   draw_text_size.y = draw_text_size.x >> 16;
+   draw_text_size.x &= 0xFFFF;
+   return &draw_text_size;
+}
+
+alloc_aut(0) stkcall
 void Draw_Init(void) {
    #define GlobalCr(name) \
       globalcolors.name = ServCallI(sm_FindFontColor, so_##name);

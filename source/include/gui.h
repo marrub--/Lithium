@@ -118,6 +118,7 @@ struct gui_state {
    void *state;
 
    cstr gfxprefix;
+   str  tooltip;
 };
 
 struct gui_pre_btn {

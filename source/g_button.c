@@ -56,7 +56,7 @@ bool G_Button_Imp(struct gui_state *g, gid_t id, struct gui_arg_btn *a) {
 
       if(a->fill && a->fill->tic) {
          if(g->hot == id && g->active == id) {
-            click = G_Filler(g->cx + 8, g->cy, a->fill, click);
+            click = G_Filler(g->cx - 19, g->cy + 4, a->fill, click);
          } else {
             if(g->active != id) {
                a->fill->cur = 0;

@@ -100,13 +100,28 @@ void G_Begin(struct gui_state *g, i32 w, i32 h) {
    if(!w) w = 320;
    if(!h) h = 200;
 
-   g->hot = 0;
-   g->clip = -1;
+   g->hot     = 0;
+   g->clip    = -1;
+   g->tooltip = snil;
 
    SetSize(g->w = w, g->h = h);
 }
 
 void G_End(struct gui_state *g, enum cursor curs) {
+   if(g->tooltip) {
+      SetClipW(0, 0, g->w, g->h, g->w);
+      i32 x = g->cx + 7;
+      i32 y = g->cy + 2;
+      struct i32v2 const *s = TextSize(g->tooltip, sf_smallfnt, x);
+      if(y + s->y + 2 > g->h) {
+         y = g->h - s->y - 2;
+      }
+      PrintRect(x-1, y-1, s->x+2, s->y+2, 0xFFBA8CC6);
+      PrintRect(x, y, s->x, s->y, 0xFF1A141D);
+      PrintText_str(g->tooltip, sf_smallfnt, CR_WHITE, x,1, y,1);
+      ClearClip();
+   }
+
    str cgfx;
 
    switch(curs) {
@@ -191,6 +206,25 @@ bool G_Filler(i32 x, i32 y, struct gui_fil *fil, bool held) {
    return false;
 }
 
+stkcall
+void G_Tooltip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, cstr id) {
+   x += g->ox;
+   y += g->oy;
+
+   if(g->clip >= 0) {
+      G_cutBox(&g->clips[g->clip], &x, &y, &w, &h);
+   }
+
+   if(aabb_point(x, y, w - 1, h - 1, g->cx, g->cy)) {
+      str tt = lang((ACS_BeginPrint(),
+                     PrintChrLi(LANG "TOOLTIP_"),
+                     PrintChrSt(id),
+                     ACS_EndStrParam()));
+      if(tt) {
+         g->tooltip = tt;
+      }
+   }
+}
 
 i32 G_Tabs(struct gui_state *g, mem_size_t *st, gtab_t const *names, mem_size_t num, i32 x, i32 y, i32 yp) {
    i32 xp = 0;
