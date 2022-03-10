@@ -12,17 +12,14 @@
 
 #include "u_common.h"
 
-void Upgr_CyberLegs_Update(void)
-{
+void Upgr_CyberLegs_Update(void) {
    pl.speedmul  += 20;
    pl.jumpboost += 50;
 
    k32 absvel = fastabsk(pl.old.velz) * 10.0k;
 
-   if(pl.velz == 0 && absvel > 160)
-   {
-      for(k32 i = absvel; i >= 100; i -= 100)
-      {
+   if(pl.velz == 0 && absvel > 160) {
+      for(k32 i = absvel; i >= 100; i -= 100) {
          i32 tid;
          ACS_SpawnForced(so_ExplodoBoots, pl.x, pl.y, pl.z, tid = ACS_UniqueTID());
          ACS_SetActivator(tid);

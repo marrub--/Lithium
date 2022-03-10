@@ -164,7 +164,7 @@ void EquipItem(struct item *sel) {
    AmbientSound(ok ? ss_player_cbi_invmov : ss_player_cbi_auto_invalid, 1.0);
 }
 
-void P_Inv_PInit() {
+void P_Inv_PInit(void) {
    static
    struct container const baseinv[] = {
       [_inv_backpack]    = {11, 7, "Backpack", _cont_store},
@@ -188,7 +188,7 @@ void P_Inv_PInit() {
    pl.invinit = true;
 }
 
-void P_Inv_PQuit() {
+void P_Inv_PQuit(void) {
    for(i32 i = 0; i < _inv_num; i++) {
       ListDestroy(&pl.inv[i].head, {
          struct item *it = _obj;
@@ -216,7 +216,7 @@ script
 void P_Item_Destroy(struct item *item) {
    Dbg_Log(log_dev, "P_Item_Destroy: destroying item %p", item);
 
-   ServCallI(sm_DeleteItem, item);
+   ServCallV(sm_DeleteItem, item);
 
    if(!P_None()) {
       if(pl.useitem == item) pl.useitem = nil;
@@ -331,7 +331,7 @@ bool P_Inv_Add(struct item *item) {
 }
 
 script
-void P_Inv_PTick() {
+void P_Inv_PTick(void) {
    if(pl.useitem) {
       struct item *item = pl.useitem;
 
@@ -495,7 +495,7 @@ void P_CBI_TabItems(struct gui_state *g) {
 }
 
 static
-struct itemdata ItemData() {
+struct itemdata ItemData(void) {
    struct itemdata data = {
       .w     = GetMembI(0, sm_W),
       .h     = GetMembI(0, sm_H),
@@ -509,14 +509,14 @@ struct itemdata ItemData() {
 }
 
 script_str ext("ACS") addr(OBJ "ItemCreate")
-struct item *Sc_ItemCreate() {
+struct item *Sc_ItemCreate(void) {
    struct itemdata data = ItemData();
    Dbg_Log(log_dev, "%s: creating %S", __func__, data.name);
    return P_Item_New(&data);
 }
 
 script_str ext("ACS") addr(OBJ "BagItemCreate")
-struct item *Sc_BagItemCreate() {
+struct item *Sc_BagItemCreate(void) {
    struct itemdata data = ItemData();
    set_bit(data.flags, _if_openable);
    Dbg_Log(log_dev, "%s: creating %S", __func__, data.name);
@@ -535,7 +535,7 @@ void P_ItemPopup(str tag, k32 x, k32 y, k32 z) {
       vp.x = 320/2 + ACS_Random(-64, 64);
       vp.y = 240/2 + ACS_Random(-48, 48);
    }
-   DrawCallI(sm_AddItemPop, vp.x, vp.y, tag);
+   DrawCallV(sm_AddItemPop, vp.x, vp.y, tag);
 }
 
 script_str ext("ACS") addr(OBJ "ItemPopupAmmo")

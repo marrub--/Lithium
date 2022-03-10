@@ -51,8 +51,8 @@ void Sc_Obituary(void) {
       for(char *next = nil,
                *word = faststrtok(pbuf, &next, '/');
           word && i < _pn_max;
-          word = faststrtok(nil, &next, '/')
-      ) {
+          word = faststrtok(nil, &next, '/'))
+      {
          set[i++] = word;
       }
    }

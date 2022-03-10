@@ -22,24 +22,24 @@
 noinit struct player player;
 
 script static
-void P_bossWarning();
+void P_bossWarning(void);
 
 script static
 void P_bossText(i32 boss);
 
 script static
-void P_doIntro();
+void P_doIntro(void);
 
 _Noreturn dynam_aut script type("enter") static
 void Sc_PlayerEntry(void) {
    static
-   void P_Scr_PTickPre();
+   void P_Scr_PTickPre(void);
 
    static
-   void P_Atr_pTick();
+   void P_Atr_pTick(void);
 
    static
-   void P_Aug_PTick();
+   void P_Aug_PTick(void);
 
    if(ACS_GameType() == GAME_TITLE_MAP) return;
 
@@ -60,14 +60,16 @@ reinit:
    if(pl.teleportedout) P_TeleportIn();
 
    while(pl.active) {
-      if(pl.reinit)
+      if(pl.reinit) {
          goto reinit;
+      }
 
       P_Dat_PTickPre();
 
       /* Check for resurrect. */
-      if(pl.health > 0 && pl.dead)
+      if(pl.health > 0 && pl.dead) {
          pl.reinit = true;
+      }
 
       /* These can be changed any time, so save them here. */
       struct player_delta olddelta = pl.cur;
@@ -122,9 +124,9 @@ void revenge(void) {
    if(CVarGetI(sc_sv_revenge)) {
       AmbientSound(ss_player_death1, 1.0);
       ACS_Delay(35);
-      ServCallI(sm_PlayerDeath);
+      ServCallV(sm_PlayerDeath);
       ACS_Delay(25);
-      ServCallI(sm_PlayerDeathNuke);
+      ServCallV(sm_PlayerDeathNuke);
       ACS_Delay(25);
    }
 }
@@ -225,7 +227,7 @@ i32 P_Color(i32 pclass) {
    return CR_WHITE;
 }
 
-void P_GUI_Close() {
+void P_GUI_Close(void) {
    if(pl.modal == _gui_cbi) {
       UnfreezeTime();
 
@@ -234,7 +236,7 @@ void P_GUI_Close() {
    }
 }
 
-void P_GUI_Use() {
+void P_GUI_Use(void) {
    if(pl.dead) return;
 
    switch(pl.modal) {
@@ -267,8 +269,9 @@ i96 P_Scr_Give(k32 x, k32 y, k32 z, i96 score, bool nomul) {
 
 i96 P_Scr_GivePos(i32 x, i32 y, i96 score, bool nomul) {
    /* Could cause division by zero */
-   if(score == 0)
+   if(score == 0) {
       return 0;
+   }
 
    if(!nomul) {
       score *= pl.scoremul;
@@ -281,8 +284,9 @@ i96 P_Scr_GivePos(i32 x, i32 y, i96 score, bool nomul) {
    k32 vol = 0.7lk * mul;
 
    /* Play a sound when we pick up score */
-   if(vol > 0.001k && CVarGetI(sc_player_scoresound))
+   if(vol > 0.001k && CVarGetI(sc_player_scoresound)) {
       StartSound(ss_player_score, lch_item2, 0, vol, ATTN_STATIC);
+   }
 
    /* hue */
    if(get_bit(pl.upgrades[UPGR_CyberLegs].flags, _ug_active) && ACS_Random(0, 10000) == 0) {
@@ -307,7 +311,7 @@ i96 P_Scr_GivePos(i32 x, i32 y, i96 score, bool nomul) {
       pl.logH(1, "+\Cj%lli\Cnscr", score);
    }
    if(scoredisp & _itm_disp_pop) {
-      DrawCallI(sm_AddScoreNum, x, y, StrParam("%lli\Cnscr", score));
+      DrawCallV(sm_AddScoreNum, x, y, StrParam("%lli\Cnscr", score));
    }
 
    return score;
@@ -327,13 +331,14 @@ void P_Scr_Take(i96 score) {
 }
 
 script static
-void P_bossWarningDone() {
-   if(bossspawned)
+void P_bossWarningDone(void) {
+   if(bossspawned) {
       pl.logB(1, tmpstr(lang_discrim(sl_log_bosswarn)));
+   }
 }
 
 alloc_aut(0) script static
-void P_bossWarning() {
+void P_bossWarning(void) {
    ACS_Delay(35 * 5);
    P_bossWarningDone();
 }
@@ -405,7 +410,7 @@ void P_bossText(i32 boss) {
 }
 
 alloc_aut(0) stkcall static
-i32 P_playerColor() {
+i32 P_playerColor(void) {
    switch(pl.pclass) {
    case pcl_marine:    return 0xFF00FF00;
    case pcl_cybermage: return 0xFFBF0F4A;
@@ -419,7 +424,7 @@ i32 P_playerColor() {
 }
 
 alloc_aut(0) stkcall script static
-void P_doDepthMeter() {
+void P_doDepthMeter(void) {
    if(!mapscleared) {
       return;
    }
@@ -451,7 +456,7 @@ void P_doDepthMeter() {
 }
 
 alloc_aut(0) stkcall script static
-void P_doIntro() {
+void P_doIntro(void) {
    if(mapscleared != 0 || pl.done_intro & pl.pclass) {
       P_doDepthMeter();
       return;
@@ -598,11 +603,12 @@ static k32 damage_mul;
 static i32 max_health;
 
 static
-void P_attrRGE() {
+void P_attrRGE(void) {
    i32 rge = pl.attr.attrs[at_spc];
 
-   if(pl.health < pl.oldhealth)
+   if(pl.health < pl.oldhealth) {
       pl.rage += rge * (pl.oldhealth - pl.health) / 1000.0;
+   }
 
    pl.rage = lerpk(pl.rage, 0, 0.02);
 
@@ -610,11 +616,12 @@ void P_attrRGE() {
 }
 
 static
-void P_attrCON() {
+void P_attrCON(void) {
    i32 con = pl.attr.attrs[at_spc];
 
-   if(pl.mana > pl.oldmana)
+   if(pl.mana > pl.oldmana) {
       pl.rage += con * (pl.mana - pl.oldmana) / 1100.0;
+   }
 
    pl.rage = lerpk(pl.rage, 0, 0.03);
 
@@ -622,11 +629,12 @@ void P_attrCON() {
 }
 
 static
-void P_attrREF() {
+void P_attrREF(void) {
    i32 ref = pl.attr.attrs[at_spc];
 
-   if(pl.health < pl.oldhealth)
+   if(pl.health < pl.oldhealth) {
       pl.rage += ref * (pl.oldhealth - pl.health) / 150.0;
+   }
 
    pl.rage = lerpk(pl.rage, 0, 0.01);
 
@@ -634,7 +642,7 @@ void P_attrREF() {
 }
 
 static
-void P_Atr_pTick() {
+void P_Atr_pTick(void) {
    if(Paused) return;
 
    k32  acc = pl.attr.attrs[at_acc] / 150.0;
@@ -658,12 +666,13 @@ void P_Atr_pTick() {
    pl.maxhealth = max_health;
    SetSpawnHealth(0, pl.maxhealth);
 
-   if(pl.health < stm + 10 && (stmt < 2 || pl.ticks % stmt == 0))
+   if(pl.health < stm + 10 && (stmt < 2 || pl.ticks % stmt == 0)) {
       pl.health = pl.health + 1;
+   }
 }
 
 static
-void P_Scr_PTickPre() {
+void P_Scr_PTickPre(void) {
    if(!pl.scoreaccumtime || pl.score < pl.old.score) {
       pl.scoreaccum = 0;
       pl.scoreaccumtime = 0;
@@ -674,7 +683,7 @@ void P_Scr_PTickPre() {
 }
 
 static
-void P_Aug_PTick() {
+void P_Aug_PTick(void) {
    for(i32 i = 0; i < 4; i++) {
       i32 total = 0;
 
@@ -726,8 +735,9 @@ str GetAdviceMarker(i32 tid) {
       for(i32 i = 0, n = ACS_StrLen(text); i < n; i++) {
          if(text[i] == '{') {
             ACS_BeginPrint();
-            for(i32 j = 0; j < 15 && text[++i] != '}'; j++)
+            for(i32 j = 0; j < 15 && text[++i] != '}'; j++) {
                ACS_PrintChar(text[i]);
+            }
             ACS_PrintBind(ACS_EndStrParam());
          } else {
             ACS_PrintChar(text[i]);

@@ -14,8 +14,8 @@
 #include "p_player.h"
 #include "w_world.h"
 
-static
-void G_cutBox(struct gui_clip *other, i32 *x, i32 *y, i32 *w, i32 *h) {
+alloc_aut(0) stkcall static
+void G_cutBox(struct gui_clip const *other, i32 *x, i32 *y, i32 *w, i32 *h) {
    *x = clampi(*x, other->x, other->x + other->w);
    *y = clampi(*y, other->y, other->y + other->h);
 
@@ -89,10 +89,11 @@ void G_UpdateState(struct gui_state *g) {
 
    g->defcr = Draw_GetCr(CVarGetI(sc_gui_defcr));
 
-   if(!g->clickany)
+   if(!g->clickany) {
       g->slide = 0;
-   else if(g->slidecount)
+   } else if(g->slidecount) {
       g->slidetime++;
+   }
 }
 
 void G_Begin(struct gui_state *g, i32 w, i32 h) {
@@ -124,8 +125,9 @@ void G_End(struct gui_state *g, enum cursor curs) {
 
    PrintSprite(cgfx, g->cx,1, g->cy,1);
 
-   if(!g->clickany)
+   if(!g->clickany) {
       g->active = 0;
+   }
 }
 
 void G_Clip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, i32 ww) {
@@ -189,9 +191,8 @@ bool G_Filler(i32 x, i32 y, struct gui_fil *fil, bool held) {
    return false;
 }
 
-i32 G_Tabs(struct gui_state *g, mem_size_t *st, gtab_t const *names,
-           mem_size_t num, i32 x, i32 y, i32 yp)
-{
+
+i32 G_Tabs(struct gui_state *g, mem_size_t *st, gtab_t const *names, mem_size_t num, i32 x, i32 y, i32 yp) {
    i32 xp = 0;
 
    for(mem_size_t i = 0; i < num; i++) {

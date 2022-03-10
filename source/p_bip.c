@@ -101,8 +101,8 @@ void BipInfo_Page(struct tokbuf *tb, struct tbuf_err *res, struct page const *te
          for(char *next = nil,
                   *word = faststrtok(v, &next, ' ');
              word;
-             word = faststrtok(nil, &next, ' ')
-         ) {
+             word = faststrtok(nil, &next, ' '))
+         {
             page->unlocks[i++] = BipStr(word);
          }
          break;
@@ -128,8 +128,8 @@ struct page BipInfo_Template(struct tokbuf *tb, struct tbuf_err *res) {
    for(char *next = nil,
             *word = faststrtok(tok->textV, &next, ' ');
        word;
-       word = faststrtok(nil, &next, ' ')
-   ) {
+       word = faststrtok(nil, &next, ' '))
+   {
       switch(BipInfo_Template_Name(word)) {
       #define bip_category_x(name) \
       case _bipinfo_template_##name: \

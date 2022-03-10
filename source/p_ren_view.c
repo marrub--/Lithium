@@ -14,14 +14,14 @@
 
 /* Update view bobbing when you get damaged. */
 script static
-void P_Ren_DamageBob()
-{
+void P_Ren_DamageBob(void) {
    if(!InvNum(so_PowerStrength) && pl.health < pl.oldhealth) {
       k64 angle = (k64)ACS_RandomFixed(tau, -tau);
       k64 distance;
 
-      if(pl.bobyaw + pl.bobpitch > 0.05)
+      if(pl.bobyaw + pl.bobpitch > 0.05) {
          angle = lerplk(angle, atan2f(pl.bobpitch, pl.bobyaw), 0.25lk);
+      }
 
       distance  = mag2k(pl.bobyaw, pl.bobpitch);
       distance += (pl.oldhealth - pl.health) / (k64)pl.maxhealth;
@@ -39,8 +39,7 @@ void P_Ren_DamageBob()
 }
 
 /* Update additive view. */
-void P_Ren_View()
-{
+void P_Ren_View(void) {
    if(Paused) return;
 
    P_Ren_DamageBob();

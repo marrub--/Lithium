@@ -124,6 +124,8 @@
                                   ACS_StrLen(_src) + 1, _src, 0); \
    })
 
+#define ns(s) (s |? st_null)
+
 stkcall i32 radix(char c);
 stkcall i32 faststrtoi32_str(astr p);
 stkcall i32 faststrtoi32(cstr p);
@@ -148,7 +150,6 @@ stkcall char *faststrtok(char *s, char **next, char c);
 stkcall cstr scoresep(i96 num);
 stkcall cstr alientext(i32 num);
 stkcall str lang(str name);
-stkcall str ns(str s);
 stkcall cstr tmpstr(str s);
 stkcall cstr RemoveTextColors_str(astr s, i32 size);
 stkcall cstr RemoveTextColors    (cstr s, i32 size);

@@ -10,7 +10,7 @@
 #include "p_player.h"
 #include "p_hudid.h"
 
-script void P_Ren_Step() {
+script void P_Ren_Step(void) {
    static
    struct {str nam, snd; i32 nxt;} const stepsnd[] = {
       {s"FWATER1", s"player/stepw", 11},
@@ -49,8 +49,13 @@ script void P_Ren_Step() {
    i32 next  = 10;
 
    if(vol && pl.onground) {
-      for(i32 i = 0; i < countof(stepsnd); i++)
-         if(floor == stepsnd[i].nam) {snd = stepsnd[i].snd; next = stepsnd[i].nxt; break;}
+      for(i32 i = 0; i < countof(stepsnd); i++) {
+         if(floor == stepsnd[i].nam) {
+            snd = stepsnd[i].snd;
+            next = stepsnd[i].nxt;
+            break;
+         }
+      }
 
       StartSound(snd, lch_step, 0, vol);
       pl.nextstep = next;

@@ -16,8 +16,9 @@
 bool G_Button_Imp(struct gui_state *g, gid_t id, struct gui_arg_btn *a) {
    struct gui_pre_btn const *pre = a->preset |? &gui_p.btndef;
 
-   if(!a->disabled)
+   if(!a->disabled) {
       G_Auto(g, id, a->x, a->y, pre->w, pre->h, a->slide);
+   }
 
    __with(char graphic[30];) {
       if(g->hot == id && pre->hot) G_Prefix(g, graphic, pre, hot);

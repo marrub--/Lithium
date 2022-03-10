@@ -15,8 +15,7 @@
 #include "w_world.h"
 #include "gui.h"
 
-void P_CBI_TabStatistics(struct gui_state *g)
-{
+void P_CBI_TabStatistics(struct gui_state *g) {
    i32 n = 0;
 
    #define Stat(name, f, x) \

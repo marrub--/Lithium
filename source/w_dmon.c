@@ -23,7 +23,7 @@ dmon_t dmonalloc[0x7FFF];
 noinit static
 i32 lmvar dmonid;
 
-void PrintDmonAllocSize() {
+void PrintDmonAllocSize(void) {
    pl.logH(1, "dmonalloc is %.2k megabytes!", sizeof dmonalloc * 4 / 1024 / 1024.0);
 }
 

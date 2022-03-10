@@ -85,10 +85,11 @@ void P_Log_SellWeapon(struct weaponinfo const *info, i96 score) {
 
    str nam;
 
-   if(CVarGetI(sc_player_sillypickups))
+   if(CVarGetI(sc_player_sillypickups)) {
       nam = get_name(weapon);
-   else
+   } else {
       nam = lang(fast_strdup2(LANG "INFO_SHORT_", info->name));
+   }
    nam = ns(nam);
 
    cstr msg = tmpstr(lang(sl_log_sell));

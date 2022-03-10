@@ -25,7 +25,7 @@ void Sc_DOGS(void) {
       k32 ang = ACS_RandomFixed(0, 1);
       k32 dst = ACS_RandomFixed(0, 64);
       ACS_SpawnForced(so_Steggles, pl.x + ACS_Cos(ang) * dst, pl.y + ACS_Sin(ang) * dst, pl.z + 8, tid);
-      ServCallI(sm_AlertMonsters);
+      ServCallV(sm_AlertMonsters);
       ACS_Delay(10);
    }
 
@@ -85,10 +85,8 @@ void Sc_GetSigil(void) {
 }
 
 script_str ext("ACS") addr(OBJ "GiveHealthBonus")
-void Sc_GiveHealthBonus(i32 amount)
-{
-   if(!P_None())
-   {
+void Sc_GiveHealthBonus(i32 amount) {
+   if(!P_None()) {
       amount += pl.health;
       if(amount > pl.maxhealth + 100) amount = pl.maxhealth + 100;
       pl.health = amount;

@@ -62,7 +62,7 @@ void LogV(i32 levl) {
 }
 
 static
-void LogPop() {
+void LogPop(void) {
    log.hudC--;
    fastmemmove(&log.hudV[0], &log.hudV[1], sizeof log.hudV[0] * log.hudC);
 }
@@ -129,12 +129,16 @@ void P_Log_Full(cstr fmt, ...) {
    LogF(&lf);
 }
 
-void P_Log_Entry() {
+void P_Log_Entry(void) {
    struct logmap *lm = nil;
    i32 lnum = MapNum;
 
-   for(i32 i = 0; i < log.mapsC; i++)
-      if(log.mapsV[i].lnum == lnum) {lm = &log.mapsV[i]; break;}
+   for(i32 i = 0; i < log.mapsC; i++) {
+      if(log.mapsV[i].lnum == lnum) {
+         lm = &log.mapsV[i];
+         break;
+      }
+   }
 
    if(!lm) {
       Vec_GrowN(log.maps, 1, 32, _tag_logs);
@@ -148,7 +152,7 @@ void P_Log_Entry() {
    pl.logF(tmpstr(lang(sl_enter_fmt)), lm->name, CanonTime(ct_full, ticks));
 }
 
-script void P_Log_PTick() {
+script void P_Log_PTick(void) {
    if(log.curtime == 0) {
       if(log.hudC) {
          LogPop();
@@ -167,11 +171,17 @@ void P_CBI_TabLog(struct gui_state *g) {
    static
    i32 const ht = 10;
 
-   if(G_Button(g, .x = 12, 25, Pre(btnprev)))
-      if(--CBIState(g)->logsel < 0) CBIState(g)->logsel = log.mapsC - 1;
+   if(G_Button(g, .x = 12, 25, Pre(btnprev))) {
+      if(--CBIState(g)->logsel < 0) {
+         CBIState(g)->logsel = log.mapsC - 1;
+      }
+   }
 
-   if(G_Button(g, .x = 12 + gui_p.btnprev.w, 25, Pre(btnnext)))
-      if(++CBIState(g)->logsel >= log.mapsC) CBIState(g)->logsel = 0;
+   if(G_Button(g, .x = 12 + gui_p.btnprev.w, 25, Pre(btnnext))) {
+      if(++CBIState(g)->logsel >= log.mapsC) {
+         CBIState(g)->logsel = 0;
+      }
+   }
 
    struct logmap *lm = &log.mapsV[CBIState(g)->logsel];
 
@@ -255,8 +265,9 @@ void Sc_Log(i32 levl, i32 type) {
       pl.logF(tmpstr(name));
       break;
    case msg_item:
-      if(CVarGetI(sc_player_itemdisp) & _itm_disp_log)
+      if(CVarGetI(sc_player_itemdisp) & _itm_disp_log) {
          pl.logB(levl, tmpstr(name));
+      }
       break;
    }
 }

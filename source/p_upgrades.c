@@ -89,11 +89,12 @@ void P_Upg_SetOwned(struct upgrade *upgr) {
    set_bit(upgr->flags, _ug_owned);
    pl.upgradesowned++;
 
-   if(upgr->category == _uc_body && upgr->cost == 0)
+   if(upgr->category == _uc_body && upgr->cost == 0) {
       P_Upg_Toggle(upgr);
+   }
 }
 
-script void P_Upg_PInit() {
+script void P_Upg_PInit(void) {
    fastmemcpy(pl.upgrades, upgrinfo, sizeof pl.upgrades);
 
    for(i32 i = 0; i < UPGR_MAX; ++i) {
@@ -109,13 +110,13 @@ script void P_Upg_PInit() {
    pl.upgrinit = true;
 }
 
-void P_Upg_PQuit() {
+void P_Upg_PQuit(void) {
    fastmemset(pl.upgrades, 0, sizeof pl.upgrades[0] * countof(pl.upgrades));
 
    pl.upgrinit = false;
 }
 
-void P_Upg_PDeinit() {
+void P_Upg_PDeinit(void) {
    for_upgrade(upgr) {
       if(get_bit(upgr->flags, _ug_active)) {
          set_bit(upgr->flags, _ug_wasactive);
@@ -124,7 +125,7 @@ void P_Upg_PDeinit() {
    }
 }
 
-void P_Upg_PMInit() {
+void P_Upg_PMInit(void) {
    for_upgrade(upgr) {
       if(get_bit(upgr->flags, _ug_wasactive)) {
          dis_bit(upgr->flags, _ug_wasactive);
@@ -133,7 +134,7 @@ void P_Upg_PMInit() {
    }
 }
 
-script void P_Upg_PTick() {
+script void P_Upg_PTick(void) {
    if(pl.modal >= _gui_disables_hud) {
       pl.hudenabled = false;
    } else {
@@ -146,15 +147,18 @@ script void P_Upg_PTick() {
       }
    }
 
-   if(Paused)
+   if(Paused) {
       return;
+   }
 
-   for_upgrade(upgr)
-      if(get_bit(upgr->flags, _ug_active))
+   for_upgrade(upgr) {
+      if(get_bit(upgr->flags, _ug_active)) {
          Upgr_Update(upgr->key);
+      }
+   }
 }
 
-script void P_Upg_PTickPst() {
+script void P_Upg_PTickPst(void) {
    SetSize(320, 240);
    ClearClip();
    for_upgrade(upgr) {
@@ -164,10 +168,12 @@ script void P_Upg_PTickPst() {
    }
 }
 
-void P_Upg_Enter() {
-   for_upgrade(upgr)
-      if(get_bit(upgr->flags, _ug_active))
+void P_Upg_Enter(void) {
+   for_upgrade(upgr) {
+      if(get_bit(upgr->flags, _ug_active)) {
          Upgr_Enter(upgr->key);
+      }
+   }
 }
 
 i32 P_Upg_CheckReqs(struct upgrade *upgr) {
@@ -198,8 +204,9 @@ bool P_Upg_CanActivate(struct upgrade *upgr) {
 }
 
 bool P_Upg_Toggle(struct upgrade *upgr) {
-   if(!P_Upg_CanActivate(upgr))
+   if(!P_Upg_CanActivate(upgr)) {
       return false;
+   }
 
    tog_bit(upgr->flags, _ug_active);
    bool on = get_bit(upgr->flags, _ug_active);
@@ -207,10 +214,13 @@ bool P_Upg_Toggle(struct upgrade *upgr) {
    if(on) pl.cbi.pruse += upgr->perf;
    else   pl.cbi.pruse -= upgr->perf;
 
-   if(on && upgr->group)
-      for_upgrade(other)
-         if(other != upgr && get_bit(other->flags, _ug_active) && other->group == upgr->group)
+   if(on && upgr->group) {
+      for_upgrade(other) {
+         if(other != upgr && get_bit(other->flags, _ug_active) && other->group == upgr->group) {
             P_Upg_Toggle(other);
+         }
+      }
+   }
 
    if(on) {
       Upgr_Activate(upgr->key);

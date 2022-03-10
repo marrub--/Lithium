@@ -63,8 +63,7 @@ static
 i96 scorethreshold = 1000000;
 
 static
-void SpawnBossReward(void)
-{
+void SpawnBossReward(void) {
    k32 x = GetX(0);
    k32 y = GetY(0);
    k32 z = GetZ(0);
@@ -80,8 +79,7 @@ void SpawnBossReward(void)
 }
 
 static
-void TriggerBoss(void)
-{
+void TriggerBoss(void) {
    static
    bool firstboss = true;
 
@@ -103,12 +101,13 @@ void TriggerBoss(void)
       return;
    }
 
-   if(!boss->phase)
+   if(!boss->phase) {
       boss->phase = 1;
+   }
 
    Dbg_Log(log_boss, "%s: Spawning boss %s phase %i", __func__, boss->name, boss->phase);
 
-   ServCallI(sm_TriggerBoss);
+   ServCallV(sm_TriggerBoss);
 
    if(firstboss) {
       firstboss = false;
@@ -117,16 +116,17 @@ void TriggerBoss(void)
 }
 
 static
-bool CheckDead(struct boss *b, i32 num)
-{
-   for(i32 i = 0; i < num; i++)
-      if(!b[i].dead) return false;
+bool CheckDead(struct boss *b, i32 num) {
+   for(i32 i = 0; i < num; i++) {
+      if(!b[i].dead) {
+         return false;
+      }
+   }
    return true;
 }
 
 script
-void SpawnBosses(i96 sum, bool force)
-{
+void SpawnBosses(i96 sum, bool force) {
    if(islithmap || (!force && sum < scorethreshold)) return;
 
    alldead[diff_easy] = CheckDead(bosses_easy, countof(bosses_easy));
@@ -136,57 +136,54 @@ void SpawnBosses(i96 sum, bool force)
    i32 diff =
       difficulty == diff_any ? ACS_Random(diff_easy, diff_hard) : difficulty;
 
-   if(alldead[diff])
-   {
+   if(alldead[diff]) {
       Dbg_Log(log_boss, "%s: All dead, returning", __func__);
       return;
    }
 
    Dbg_Log(log_boss, "%s: Spawning boss, difficulty %i", __func__, diff);
 
-   if(!lastboss || lastboss->dead) switch(diff)
-   {
-   case diff_easy: do boss = &bosses_easy[ACS_Random(1, countof(bosses_easy)) - 1]; while(boss->dead); break;
-   case diff_medi: do boss = &bosses_medi[ACS_Random(1, countof(bosses_medi)) - 1]; while(boss->dead); break;
-   case diff_hard: do boss = &bosses_hard[ACS_Random(1, countof(bosses_hard)) - 1]; while(boss->dead); break;
-   }
-   else
+   if(!lastboss || lastboss->dead) {
+      switch(diff) {
+      case diff_easy: do boss = &bosses_easy[ACS_Random(1, countof(bosses_easy)) - 1]; while(boss->dead); break;
+      case diff_medi: do boss = &bosses_medi[ACS_Random(1, countof(bosses_medi)) - 1]; while(boss->dead); break;
+      case diff_hard: do boss = &bosses_hard[ACS_Random(1, countof(bosses_hard)) - 1]; while(boss->dead); break;
+      }
+   } else {
       boss = lastboss;
+   }
 
    TriggerBoss();
 }
 
 script_str ext("ACS") addr(OBJ "PhantomSound")
-void Sc_PhantomSound(void)
-{
+void Sc_PhantomSound(void) {
    ACS_AmbientSound(ss_enemies_phantom_spawned, 127);
 }
 
 alloc_aut(0) script_str ext("ACS") addr(OBJ "PhantomTeleport")
-void Sc_PhantomTeleport(void)
-{
+void Sc_PhantomTeleport(void) {
    k32 ang = ACS_GetActorAngle(0);
 
    ACS_ThrustThing(ang * 256, 64, true, 0);
 
    for(i32 i = 0; i < 15; i++) {
-      ServCallI(sm_PhantomTeleport);
+      ServCallV(sm_PhantomTeleport);
       ACS_Delay(1);
    }
 }
 
 dynam_aut script_str ext("ACS") addr(OBJ "PhantomDeath")
-void Sc_PhantomDeath(void)
-{
+void Sc_PhantomDeath(void) {
    ACS_StopSound(0, 7);
 
    if(boss->phase == boss->phasenum) {
       /* Death */
       ACS_AmbientSound(ss_player_death1, 127);
       ACS_Delay(35);
-      ServCallI(sm_PlayerDeath);
+      ServCallV(sm_PlayerDeath);
       ACS_Delay(25);
-      ServCallI(sm_PlayerDeathNuke);
+      ServCallV(sm_PlayerDeathNuke);
       ACS_Delay(25);
       noinit static
       char tag[20];
@@ -200,14 +197,15 @@ void Sc_PhantomDeath(void)
       ACS_AmbientSound(ss_enemies_phantom_escape, 127);
       ACS_SetActorState(0, sm_GetOutOfDodge);
       ACS_Delay(5);
-      ServCallI(sm_PhantomOut);
+      ServCallV(sm_PhantomOut);
       ACS_Delay(2);
    }
 
    Dbg_Log(log_boss, "%s: %s phase %i defeated", __func__, boss->name, boss->phase);
 
-   if(!CVarGetI(sc_sv_nobossdrop))
+   if(!CVarGetI(sc_sv_nobossdrop)) {
       SpawnBossReward();
+   }
 
    soulsfreed++;
 
@@ -221,11 +219,10 @@ void Sc_PhantomDeath(void)
 }
 
 script_str ext("ACS") addr(OBJ "SpawnBoss")
-void Sc_SpawnBoss(void)
-{
+void Sc_SpawnBoss(void) {
    if(!boss) return;
 
-   ServCallI(sm_SpawnBoss, fast_strdup2(OBJ "Boss_", boss->name), boss->phase);
+   ServCallV(sm_SpawnBoss, fast_strdup2(OBJ "Boss_", boss->name), boss->phase);
 
    Dbg_Log(log_boss, "%s: Boss %s phase %i spawned", __func__, boss->name, boss->phase);
    Dbg_Note("boss: %s phase %i spawned\n", boss->name, boss->phase);

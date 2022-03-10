@@ -24,14 +24,14 @@ void F_Start(i32 which) {
 }
 
 dynam_aut script
-void F_Run() {
+void F_Run(void) {
    pl.dlg.page = finale;
    pl.modal = _gui_dlg;
    Dlg_Run(DNUM_PRG_BEG);
 }
 
 script_str ext("ACS") addr(OBJ "Finale")
-void Sc_Finale() {
+void Sc_Finale(void) {
    i32 boss = ServCallI(sm_GetBossLevel);
    i32 which;
 

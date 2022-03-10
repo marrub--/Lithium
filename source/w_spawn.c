@@ -76,8 +76,7 @@ struct witem const abonus[] = {
 };
 
 static
-cstr RandomWeighted(struct witem const *l, i32 c)
-{
+cstr RandomWeighted(struct witem const *l, i32 c) {
    i32 sel = ACS_Random(1, l[c - 1].weight);
 
    for(i32 i = 0; i < c; i++) if(sel <= l[i].weight) return l[i].item;
@@ -86,8 +85,7 @@ cstr RandomWeighted(struct witem const *l, i32 c)
 }
 
 script_str ext("ACS") addr(OBJ "RandomSpawn")
-void Sc_RandomSpawn(i32 rsn)
-{
+void Sc_RandomSpawn(i32 rsn) {
    cstr item;
 
    switch(rsn) {
@@ -98,7 +96,7 @@ void Sc_RandomSpawn(i32 rsn)
    default: return;
    }
 
-   SCallI(so_RandomSpawn, sm_Set, fast_strdup(item));
+   SCallV(so_RandomSpawn, sm_Set, fast_strdup(item));
 }
 
 /* EOF */

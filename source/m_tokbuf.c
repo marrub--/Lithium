@@ -66,8 +66,9 @@ struct token *TBufGet(struct tokbuf *tb) {
    if(tb->tend) {
       i32 s = tb->tend - _bbeg;
 
-      for(i32 i = s, j = 0; i < tb->tend; i++, j++)
+      for(i32 i = s, j = 0; i < tb->tend; i++, j++) {
          tb->toks[j] = tb->toks[i];
+      }
 
       fastmemset(&tb->toks[s], 0, sizeof tb->toks[s] * (tb->tend - s));
    }

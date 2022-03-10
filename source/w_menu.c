@@ -15,14 +15,14 @@
 #include "w_world.h"
 
 #define section_beg() ACS_BeginPrint()
-#define section_end() SCallI(so_CreditsMenu, sm_AddSection, ACS_EndStrParam())
+#define section_end() SCallV(so_CreditsMenu, sm_AddSection, ACS_EndStrParam())
 #define ch(c) (ACS_PrintChar(c))
 #define cr(c) (ch('\C'), ch(c))
 #define skip_ws() while(*inp && *inp == ' ') ++inp
 #define rest() while(*inp && *inp != '\n') ch(*inp++)
 
 alloc_aut(0) script_str ext("ACS") addr(OBJ "OpenCreditsMenu")
-void Sc_OpenCreditsMenu() {
+void Sc_OpenCreditsMenu(void) {
    astr inp = ns(lang(sl_credits));
 
    section_beg();

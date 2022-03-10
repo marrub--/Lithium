@@ -52,16 +52,13 @@ void G_ScrBeg_Imp(struct gui_state *g, gid_t id, struct gui_arg_scr *a) {
    if(scr->nextsnd) scr->nextsnd--;
 
    /* move scroller */
-   __with(k64 supposedy = scr->y * h;)
-   {
-      if(g->active == id)
-      {
+   __with(k64 supposedy = scr->y * h;) {
+      if(g->active == id) {
          k64 const cy = g->cy - y - caph;
 
          /* if it isn't grabbed and the cursor is over the scroller,
           * set the grab position to where the cursor is relative to it */
-         if(!scr->grabbed && cy > supposedy && cy < supposedy + scrlh)
-         {
+         if(!scr->grabbed && cy > supposedy && cy < supposedy + scrlh) {
             scr->grabbed = true;
             scr->grabpos = cy - supposedy;
          }
@@ -71,14 +68,11 @@ void G_ScrBeg_Imp(struct gui_state *g, gid_t id, struct gui_arg_scr *a) {
          if(scr->grabbed) supposedy = cy - scr->grabpos;
          else             supposedy = cy - scrlh / 2;
 
-         if(g->cy != g->old.cy && scr->nextsnd == 0)
-         {
+         if(g->cy != g->old.cy && scr->nextsnd == 0) {
             AmbientSound(ss_player_cbi_scroll, 1.0);
             scr->nextsnd = 7;
          }
-      }
-      else if(scr->grabbed)
-      {
+      } else if(scr->grabbed) {
          AmbientSound(ss_player_cbi_scrollend, 1.0);
          scr->grabbed = false;
          scr->nextsnd = 0;
@@ -90,10 +84,10 @@ void G_ScrBeg_Imp(struct gui_state *g, gid_t id, struct gui_arg_scr *a) {
    }
 
    /* get offset of scroller */
-   __with(i32 vofs = 0;) /* offset in pixels of the content */
-   {
-      if(a->contenth > realh && maxy)
+   __with(i32 vofs = 0; /* offset in pixels of the content */) {
+      if(a->contenth > realh && maxy) {
          vofs = roundlk((a->contenth - realh) * (scr->y / maxy), 10);
+      }
 
       /* set the scrollbar's offset */
       scr->ox = a->x + pre->scrlw; /* offset by scrollbar width */
@@ -105,28 +99,24 @@ void G_ScrBeg_Imp(struct gui_state *g, gid_t id, struct gui_arg_scr *a) {
    }
 
    /* draw top cap */
-   __with(char cap[64];)
-   {
+   __with(char cap[64];) {
       G_Prefix(g, cap, pre, capS);
       PrintSprite(fast_strdup(cap), x,2, y,1);
    }
    y += caph;
 
    /* draw middle of bar */
-   __with(char scrl[64];)
-   {
+   __with(char scrl[64];) {
       G_Prefix(g, scrl, pre, scrl);
       str scrls = fast_strdup(scrl);
-      for(i32 i = 0; i < blocks; i++)
-      {
+      for(i32 i = 0; i < blocks; i++) {
          PrintSprite(scrls, x,2, y,1);
          y += blockh;
       }
    }
 
    /* draw bottom cap */
-   __with(char cap[64];)
-   {
+   __with(char cap[64];) {
       G_Prefix(g, cap, pre, capE);
       if(cap[0]) PrintSprite(fast_strdup(cap), x,2, y,1);
    }
@@ -135,14 +125,12 @@ void G_ScrBeg_Imp(struct gui_state *g, gid_t id, struct gui_arg_scr *a) {
    i32 const ory = a->y + g->oy;
 
    /* draw scroller */
-   __with(char gfx[64];)
-   {
+   __with(char gfx[64];) {
       if(g->hot == id || g->active == id) G_Prefix(g, gfx, pre, notchhot);
       else                                G_Prefix(g, gfx, pre, notchgfx);
 
       str gfxs = fast_strdup(gfx);
-      for(i32 i = 0; i < notches; i++)
-      {
+      for(i32 i = 0; i < notches; i++) {
          i32 const npos = roundlk(caph + h * scr->y + caph * i, 10);
          PrintSprite(gfxs, x,2, ory + npos,1);
       }

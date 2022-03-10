@@ -111,8 +111,7 @@ struct mem_blk *CheckUsedBlock(struct mem_blk *blk, cstr func) {
    ((struct mem_blk *)((char *)p - sizeof(struct mem_blk)))
 
 alloc_aut(0) stkcall
-struct mem_blk *MergeAdjacent(struct mem_blk *lhs, struct mem_blk *rhs)
-{
+struct mem_blk *MergeAdjacent(struct mem_blk *lhs, struct mem_blk *rhs) {
    rhs->siz += lhs->siz;
    (rhs->nxt = lhs->nxt)->prv = rhs;
 

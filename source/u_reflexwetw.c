@@ -17,12 +17,10 @@
 #define CHARGE_MAX (35 * 0.8)
 
 alloc_aut(0) script static
-void DodgeView()
-{
+void DodgeView(void) {
    k32 vh = pl.viewheight;
 
-   for(i32 i = 0; i < 20; i++)
-   {
+   for(i32 i = 0; i < 20; i++) {
       k32 mul = 1.0 - (ACS_Sin(i / 40.0) * 0.6);
       SetViewHeight(0, vh * mul);
       ACS_Delay(1);
@@ -31,22 +29,21 @@ void DodgeView()
    SetViewHeight(0, vh);
 }
 
-void Upgr_ReflexWetw_Activate(void)
-{
+void Upgr_ReflexWetw_Activate(void) {
    udata.charge = CHARGE_MAX;
    udata.leaped = 0;
 }
 
-void Upgr_ReflexWetw_Update(void)
-{
+void Upgr_ReflexWetw_Update(void) {
    pl.speedmul += 30;
 
    if(udata.leaped == 1) {
       udata.leaped = 2;
    }
 
-   if(udata.charge < CHARGE_MAX)
+   if(udata.charge < CHARGE_MAX) {
       udata.charge++;
+   }
 
    if(pl.frozen) return;
 
@@ -79,8 +76,7 @@ void Upgr_ReflexWetw_Update(void)
 }
 
 script_str ext("ACS") addr(OBJ "DodgeView")
-void Sc_DodgeView(void)
-{
+void Sc_DodgeView(void) {
    if(!P_None()) DodgeView();
 }
 

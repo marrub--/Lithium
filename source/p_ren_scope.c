@@ -17,7 +17,7 @@ noinit static
 mem_size_t hudstrnum;
 
 static
-void StringStack() {
+void StringStack(void) {
    if(ACS_Timer() % 3 == 0) {
       str s = StrParam("%.8X", ACS_Random(INT32_MIN + 1, INT32_MAX));
       if(hudstrnum == 20) {
@@ -36,7 +36,7 @@ void StringStack() {
 }
 
 static
-void Waves() {
+void Waves(void) {
    k32 health = pl.health / (k32)pl.maxhealth;
    i32 frame  = clampi(health * 4, 1, 5);
    i32 timer  = ACS_Timer();
@@ -72,7 +72,7 @@ void Waves() {
 }
 
 static
-void ScopeC() {
+void ScopeC(void) {
    i32 which = ACS_Timer() % 16 / 4;
 
    if(pl.scopetoken) {
@@ -98,21 +98,22 @@ void ScopeC() {
 }
 
 static
-void ScopeI() {
+void ScopeI(void) {
    k32 a = (1 + ACS_Sin(ACS_Timer() / 70.0)) * 0.25 + 0.5;
    SetSize(320, 200);
    PrintSpriteAP(sp_HUD_I_ScopeOverlay, 160,0, 100,0, a);
 }
 
 static
-void ScopeM() {
+void ScopeM(void) {
    Waves();
    StringStack();
 }
 
-script void P_Ren_Scope() {
-   if(pl.old.scopetoken && !pl.scopetoken)
+script void P_Ren_Scope(void) {
+   if(pl.old.scopetoken && !pl.scopetoken) {
       hudstrnum = 0;
+   }
 
    switch(pl.pclass) {
       case pcl_cybermage:                   ScopeC(); break;

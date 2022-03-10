@@ -28,8 +28,7 @@ struct {cstr abbr, full;} const ArmorNames[] = {
 };
 
 static
-void RA_Take(i32 n)
-{
+void RA_Take(i32 n) {
    InvTake(StrParam(OBJ "RA_Bullets%i", n),   INT32_MAX);
    InvTake(StrParam(OBJ "RA_Energy%i", n),    INT32_MAX);
    InvTake(StrParam(OBJ "RA_Fire%i", n),      INT32_MAX);
@@ -41,23 +40,19 @@ void RA_Take(i32 n)
 }
 
 static
-void RA_Give(cstr name, i32 n)
-{
+void RA_Give(cstr name, i32 n) {
    InvGive(StrParam(OBJ "RA_%s%i", name, n), 1);
 }
 
-void Upgr_ReactArmor_Deactivate(void)
-{
+void Upgr_ReactArmor_Deactivate(void) {
    udata.activearmor = 0;
 
    RA_Take(1);
    RA_Take(2);
 }
 
-void Upgr_ReactArmor_Render(void)
-{
-   if(udata.activearmor && CVarGetI(sc_hud_showarmorind))
-   {
+void Upgr_ReactArmor_Render(void) {
+   if(udata.activearmor && CVarGetI(sc_hud_showarmorind)) {
       PrintSprite(sp_HUD_M_SplitLeft, 12,1, 226,2);
 
       PrintTextChr(ArmorNames[udata.activearmor - 1].abbr, 3);
@@ -66,14 +61,11 @@ void Upgr_ReactArmor_Render(void)
 }
 
 script_str ext("ACS") addr(OBJ "RA_Give")
-void Sc_GiveRA(i32 num)
-{
-   if(!P_None())
-   {
+void Sc_GiveRA(i32 num) {
+   if(!P_None()) {
       if(!get_bit(pl.upgrades[UPGR_ReactArmor].flags, _ug_active)) return;
 
-      if(udata.activearmor != num + 1)
-      {
+      if(udata.activearmor != num + 1) {
          cstr name = ArmorNames[num].full;
 
          udata.activearmor = num + 1;
@@ -85,10 +77,11 @@ void Sc_GiveRA(i32 num)
 
          pl.logH(3, tmpstr(lang(sl_log_activearmor)), name);
 
-         if(get_bit(pl.upgrades[UPGR_ReactArmor2].flags, _ug_active))
+         if(get_bit(pl.upgrades[UPGR_ReactArmor2].flags, _ug_active)) {
             RA_Give(name, 2);
-         else
+         } else {
             RA_Give(name, 1);
+         }
       }
    }
 }

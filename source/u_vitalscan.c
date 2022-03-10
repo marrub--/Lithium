@@ -75,8 +75,9 @@ void Upgr_VitalScan_Update(void) {
       ACS_PrintChar('\C');
       ACS_PrintChar('-');
 
-      if(legendoom && InvNum(so_LDLegendaryMonsterTransformed))
+      if(legendoom && InvNum(so_LDLegendaryMonsterTransformed)) {
          PrintChrLi(" (\CgLegendary\C-)");
+      }
 
       udata.oldhealth = udata.health;
       udata.health    = chp;
@@ -203,8 +204,9 @@ void Upgr_VitalScan_Render(void) {
       PrintSprite(sp_Bars_DamageBar, x,1, y+2,1);
       ClearClip();
 
-      if(udata.split > 0)
+      if(udata.split > 0) {
          PrintSprite(sa_healthbars[(udata.split - 1) % countof(sa_healthbars)], x,1, y,1);
+      }
 
       SetClip(x, y, 80 * udata.splitfrac, 3);
       PrintSprite(sa_healthbars[udata.split % countof(sa_healthbars)], x,1, y,1);

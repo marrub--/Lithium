@@ -23,7 +23,7 @@ bool G_TxtBox_Imp(struct gui_state *g, gid_t id, struct gui_arg_txt *a) {
    bool hot = g->hot == id;
 
    if(hot && g->clicklft && !g->old.clicklft) {
-      ServCallI(sm_GrabInput, Cps_Expand_str(st->txtbuf, 0, st->tbptr));
+      ServCallV(sm_GrabInput, Cps_Expand_str(st->txtbuf, 0, st->tbptr));
    }
 
    if(pl.tb.changed) {

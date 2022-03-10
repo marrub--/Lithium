@@ -101,7 +101,7 @@ bool check_version(cstr name, i32 version, i32 expected) {
 }
 
 script
-void P_Data_Save() {
+void P_Data_Save(void) {
    Dbg_Log(log_dev, "Saving data...");
 
    ACS_BeginPrint();
@@ -150,7 +150,7 @@ void P_Data_Save() {
 }
 
 script
-void P_Data_Load() {
+void P_Data_Load(void) {
    noinit static
    char chunk_name[5];
 

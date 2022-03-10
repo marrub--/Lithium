@@ -34,8 +34,9 @@ bool P_Shop_Give(struct shopdef *def, i32 tid) {
 }
 
 bool P_Shop_Buy(struct shopdef *def, cstr name, bool nodelivery, bool nolog) {
-   if(!P_Shop_CanBuy(def))
+   if(!P_Shop_CanBuy(def)) {
       return false;
+   }
 
    if(!nolog) {
       pl.logF(tmpstr(lang(sl_log_bought)),

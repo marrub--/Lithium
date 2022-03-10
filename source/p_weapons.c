@@ -79,7 +79,7 @@ void Wep_GInit(void) {
 
 /* Update information on what weapons we have. */
 script
-void P_Wep_PTickPre() {
+void P_Wep_PTickPre(void) {
    struct weapondata *w = &pl.weapon;
 
    w->prev = w->cur;
@@ -95,13 +95,16 @@ void P_Wep_PTickPre() {
 
       if(!(pl.pclass & info->pclass) ||
          !(wep->owned = InvNum(info->classname)))
+      {
          continue;
+      }
 
       w->slot[info->slot] += wep->owned;
 
       /* Check for currently held weapon. */
-      if(!w->cur && pl.weaponclass == info->classname)
+      if(!w->cur && pl.weaponclass == info->classname) {
          w->cur = wep;
+      }
 
       wep->info      = info;
       wep->ammotype  = info->defammotype;
@@ -110,16 +113,19 @@ void P_Wep_PTickPre() {
       /* Special exceptions. */
       switch(i) {
       case weapon_m_shotgun:
-         if(get_bit(pl.upgrades[UPGR_Shotgun_A].flags, _ug_active))
+         if(get_bit(pl.upgrades[UPGR_Shotgun_A].flags, _ug_active)) {
             wep->ammotype = AT_NMag;
+         }
          break;
       case weapon_c_spas:
-         if(get_bit(pl.upgrades[UPGR_SPAS_B].flags, _ug_active))
+         if(get_bit(pl.upgrades[UPGR_SPAS_B].flags, _ug_active)) {
             wep->ammotype = AT_Ammo;
+         }
          break;
       case weapon_m_plasma:
-         if(get_bit(pl.upgrades[UPGR_Plasma_B].flags, _ug_active))
+         if(get_bit(pl.upgrades[UPGR_Plasma_B].flags, _ug_active)) {
             wep->ammotype = AT_AMag;
+         }
          break;
       }
 
@@ -141,7 +147,7 @@ void P_Wep_PTickPre() {
          wep->ammotype & AT_NMag && !(wep->ammotype & AT_Mana))
       {
          if(wep->autoreload >= 35 * 3) {
-            ServCallI(sm_AutoReload, info->classname);
+            ServCallV(sm_AutoReload, info->classname);
          }
 
          if(w->cur != wep) {
@@ -158,7 +164,7 @@ void P_Wep_PTickPre() {
 }
 
 script
-void P_Wep_PTick() {
+void P_Wep_PTick(void) {
    if(!Paused) {
       i32 heat = InvNum(so_SMGHeat);
            if(heat < 100) InvTake(so_SMGHeat, 5);
@@ -175,7 +181,7 @@ void P_Wep_PTick() {
       PrintTextA_str(ns(lang(sl_mana_charge)), sf_smallfnt, CR_BRICK, 160,0, 100,0, 0.5);
       break;
    case weapon_c_delear:
-      ServCallI(sm_DelearSprite);
+      ServCallV(sm_DelearSprite);
       break;
    case weapon_o_cfist: {
       i32 fcharg = InvNum(so_FistCharge);
@@ -283,7 +289,7 @@ i32 Sc_GetFinalizerMaxHealth(void) {
 alloc_aut(0) script_str ext("ACS") addr(OBJ "SurgeOfDestiny")
 void Sc_SurgeOfDestiny(void) {
    for(i32 i = 0; i < (35 * 17) / 2; i++) {
-      ServCallI(sm_SurgeOfDestiny);
+      ServCallV(sm_SurgeOfDestiny);
       ACS_Delay(2);
    }
 }
@@ -328,7 +334,7 @@ void Sc_PoisonFXTicker(void) {
       if(InvNum(so_PoisonFXReset)) {
          InvTake(so_PoisonFXReset, INT32_MAX);
          InvTake(so_PoisonFXTimer, INT32_MAX);
-         ServCallI(sm_GivePoison);
+         ServCallV(sm_GivePoison);
          return;
       }
    }
@@ -337,7 +343,7 @@ void Sc_PoisonFXTicker(void) {
       InvTake(so_PoisonFXReset, INT32_MAX);
       InvTake(so_PoisonFXTimer, INT32_MAX);
    } else if(InvNum(so_PoisonFXTimer)) {
-      ServCallI(sm_PoisonFX);
+      ServCallV(sm_PoisonFX);
       InvTake(so_PoisonFXTimer, 1);
    }
 }

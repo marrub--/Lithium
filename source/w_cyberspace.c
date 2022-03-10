@@ -16,16 +16,18 @@
 #include "m_tokbuf.h"
 
 script_str ext("ACS") addr(OBJ "CSLoadMap")
-void Sc_CSLoadMap(void)
-{
+void Sc_CSLoadMap(void) {
    #if 0
    FILE *fp = W_Open(sp_lfiles_Cyberspace, 't');
    i32 w, h, *map;
 
    fscanf(fp, "%i %i", &w, &h);
 
-   for(i32 y = 0; y < h; y++) for(i32 x = 0; x < w; x++)
-      fscanf(fp, "%i ", &map[x + y * w]);
+   for(i32 y = 0; y < h; y++) {
+      for(i32 x = 0; x < w; x++) {
+         fscanf(fp, "%i ", &map[x + y * w]);
+      }
+   }
 
    fclose(fp);
    #endif

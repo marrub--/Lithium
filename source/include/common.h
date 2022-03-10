@@ -61,6 +61,7 @@
 
 #define FourCC(a, b, c, d) ((d << 24) | (c << 16) | (b << 8) | (a << 0))
 
+#define SCallV(...) (ACS_ScriptCall(__VA_ARGS__), (void)0)
 #define SCallI ACS_ScriptCall
 #define SCallK ACS_ScriptCallFixed
 #define SCallS ACS_ScriptCallString
@@ -115,13 +116,15 @@
 #define WaitPause() while(Paused) ACS_Delay(1)
 
 #define has_status(fx) ServCallI(sm_HasStatFx, fx)
-#define add_status(fx) ServCallI(sm_AddStatFx, fx)
-#define rem_status(fx) ServCallI(sm_RemStatFx, fx)
+#define add_status(fx) ServCallV(sm_AddStatFx, fx)
+#define rem_status(fx) ServCallV(sm_RemStatFx, fx)
 
+#define ServCallV(...) SCallV(so_Serv, __VA_ARGS__)
 #define ServCallI(...) SCallI(so_Serv, __VA_ARGS__)
 #define ServCallK(...) SCallK(so_Serv, __VA_ARGS__)
 #define ServCallS(...) SCallS(so_Serv, __VA_ARGS__)
 
+#define DrawCallV(...) SCallV(so_Draw, __VA_ARGS__)
 #define DrawCallI(...) SCallI(so_Draw, __VA_ARGS__)
 #define DrawCallK(...) SCallK(so_Draw, __VA_ARGS__)
 #define DrawCallS(...) SCallS(so_Draw, __VA_ARGS__)

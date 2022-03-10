@@ -35,38 +35,38 @@ GlobalCrH(wselm1) GlobalCrH(wselm2) GlobalCrH(wselm3) GlobalCrH(wselms)
 #define YArg(y, ya) (((i32)(y) & _ymask) | ((i32)(ya) << 29))
 
 #define PrintRect(x, y, w, h, c) \
-   DrawCallI(sm_LR, (i32)(x), (i32)(y), (i32)(w), (i32)(h), \
+   DrawCallV(sm_LR, (i32)(x), (i32)(y), (i32)(w), (i32)(h), \
              (i32)(c))
 
 #define PrintFill(c) \
-   DrawCallI(sm_LW, (i32)(c))
+   DrawCallV(sm_LW, (i32)(c))
 
 #define PrintLine(x, y, z, w, c) \
-   DrawCallI(sm_LL, (i32)(x), (i32)(y), (i32)(z), (i32)(w), (i32)(c))
+   DrawCallV(sm_LL, (i32)(x), (i32)(y), (i32)(z), (i32)(w), (i32)(c))
 
 #define PrintSprite(name, x, xa, y, ya) \
-   DrawCallI(sm_LS, name, XArg(x, xa), YArg(y, ya), 0.0k, 0)
+   DrawCallV(sm_LS, name, XArg(x, xa), YArg(y, ya), 0.0k, 0)
 
 #define PrintSpriteA(name, x, xa, y, ya, alpha) \
-   DrawCallI(sm_LS, name, XArg(x, xa), YArg(y, ya), (k32)(alpha), _u_alpha)
+   DrawCallV(sm_LS, name, XArg(x, xa), YArg(y, ya), (k32)(alpha), _u_alpha)
 
 #define PrintSpriteF(name, x, xa, y, ya, num) \
-   DrawCallI(sm_LS, name, XArg(x, xa), YArg(y, ya), (k32)(num), _u_fade)
+   DrawCallV(sm_LS, name, XArg(x, xa), YArg(y, ya), (k32)(num), _u_fade)
 
 #define PrintSpriteP(name, x, xa, y, ya) \
-   DrawCallI(sm_LS, name, XArg(x, xa), YArg(y, ya), 0.0k, _u_add)
+   DrawCallV(sm_LS, name, XArg(x, xa), YArg(y, ya), 0.0k, _u_add)
 
 #define PrintSpriteAP(name, x, xa, y, ya, alpha) \
-   DrawCallI(sm_LS, name, XArg(x, xa), YArg(y, ya), (k32)(alpha), _u_add | _u_alpha)
+   DrawCallV(sm_LS, name, XArg(x, xa), YArg(y, ya), (k32)(alpha), _u_add | _u_alpha)
 
 #define PrintSpriteFP(name, x, xa, y, ya, num) \
-   DrawCallI(sm_LS, name, XArg(x, xa), YArg(y, ya), (k32)(num), _u_add | _u_fade)
+   DrawCallV(sm_LS, name, XArg(x, xa), YArg(y, ya), (k32)(num), _u_add | _u_fade)
 
 #define PrintSpriteC(name, x, xa, y, ya, c) \
-   DrawCallI(sm_LS, name, XArg(x, xa), YArg(y, ya), 0.0k, _u_color, (i32)(c))
+   DrawCallV(sm_LS, name, XArg(x, xa), YArg(y, ya), 0.0k, _u_color, (i32)(c))
 
 #define PrintSpriteAC(name, x, xa, y, ya, alpha, c) \
-   DrawCallI(sm_LS, name, XArg(x, xa), YArg(y, ya), (k32)(alpha), \
+   DrawCallV(sm_LS, name, XArg(x, xa), YArg(y, ya), (k32)(alpha), \
              _u_color|_u_alpha, (i32)(c))
 
 #define PrintTextFmt(...)  StrParamBegin(__VA_ARGS__)
@@ -76,22 +76,22 @@ GlobalCrH(wselm1) GlobalCrH(wselm2) GlobalCrH(wselm3) GlobalCrH(wselms)
 #define PrintTextEnd()     ACS_EndStrParam()
 
 #define PrintText_str(s, font, cr, x, xa, y, ya) \
-   DrawCallI(sm_LT, s, font, XArg(x, xa), YArg(y, ya), 0.0k, cr, 0)
+   DrawCallV(sm_LT, s, font, XArg(x, xa), YArg(y, ya), 0.0k, cr, 0)
 
 #define PrintTextX_str(s, font, cr, x, xa, y, ya, flg) \
-   DrawCallI(sm_LT, s, font, XArg(x, xa), YArg(y, ya), 0.0k, cr, flg)
+   DrawCallV(sm_LT, s, font, XArg(x, xa), YArg(y, ya), 0.0k, cr, flg)
 
 #define PrintTextA_str(s, font, cr, x, xa, y, ya, alpha) \
-   DrawCallI(sm_LT, s, font, XArg(x, xa), YArg(y, ya), (k32)(alpha), cr, _u_alpha)
+   DrawCallV(sm_LT, s, font, XArg(x, xa), YArg(y, ya), (k32)(alpha), cr, _u_alpha)
 
 #define PrintTextAX_str(s, font, cr, x, xa, y, ya, alpha, flg) \
-   DrawCallI(sm_LT, s, font, XArg(x, xa), YArg(y, ya), (k32)(alpha), cr, _u_alpha|(i32)(flg))
+   DrawCallV(sm_LT, s, font, XArg(x, xa), YArg(y, ya), (k32)(alpha), cr, _u_alpha|(i32)(flg))
 
 #define PrintTextF_str(s, font, cr, x, xa, y, ya, num) \
-   DrawCallI(sm_LT, s, font, XArg(x, xa), YArg(y, ya), (k32)(num), cr, _u_fade)
+   DrawCallV(sm_LT, s, font, XArg(x, xa), YArg(y, ya), (k32)(num), cr, _u_fade)
 
 #define PrintTextFX_str(s, font, cr, x, xa, y, ya, num, flg) \
-   DrawCallI(sm_LT, s, font, XArg(x, xa), YArg(y, ya), (k32)(num), cr, _u_fade|(i32)(flg))
+   DrawCallV(sm_LT, s, font, XArg(x, xa), YArg(y, ya), (k32)(num), cr, _u_fade|(i32)(flg))
 
 #define PrintText(...)   PrintText_str  (PrintTextEnd(), __VA_ARGS__)
 #define PrintTextX(...)  PrintTextX_str (PrintTextEnd(), __VA_ARGS__)
@@ -101,20 +101,20 @@ GlobalCrH(wselm1) GlobalCrH(wselm2) GlobalCrH(wselm3) GlobalCrH(wselms)
 #define PrintTextFX(...) PrintTextFX_str(PrintTextEnd(), __VA_ARGS__)
 
 #define SetClip(x, y, w, h) \
-   DrawCallI(sm_LC, (i32)(x), (i32)(y), (i32)(w), (i32)(h))
+   DrawCallV(sm_LC, (i32)(x), (i32)(y), (i32)(w), (i32)(h))
 #define SetClipW(x, y, w, h, ww) \
-   DrawCallI(sm_LC, (i32)(x), (i32)(y), (i32)(w), (i32)(h), (i32)(ww))
+   DrawCallV(sm_LC, (i32)(x), (i32)(y), (i32)(w), (i32)(h), (i32)(ww))
 #define ClearClip() \
-   DrawCallI(sm_LC)
+   DrawCallV(sm_LC)
 
 #define SetSize(w, h) \
-   DrawCallI(sm_LZ, (i32)(w), (i32)(h))
+   DrawCallV(sm_LZ, (i32)(w), (i32)(h))
 
 #define SetFade(n, time, speed) \
-   DrawCallI(sm_LF, (i32)(n), (i32)(time), (i32)(speed), 1.0k)
+   DrawCallV(sm_LF, (i32)(n), (i32)(time), (i32)(speed), 1.0k)
 
 #define SetFadeA(n, time, speed, alpha) \
-   DrawCallI(sm_LF, (i32)(n), (i32)(time), (i32)(speed), (k32)(alpha))
+   DrawCallV(sm_LF, (i32)(n), (i32)(time), (i32)(speed), (k32)(alpha))
 
 #define CheckFade(n) \
    DrawCallI(sm_LX, (i32)(n))
@@ -123,13 +123,13 @@ GlobalCrH(wselm1) GlobalCrH(wselm2) GlobalCrH(wselm3) GlobalCrH(wselms)
    DrawCallI(sm_LY, (i32)(n))
 
 #define StartSound(...) \
-   DrawCallI(sm_StartSound, __VA_ARGS__)
+   DrawCallV(sm_StartSound, __VA_ARGS__)
 
 #define AmbientSound(snd, vol) \
    StartSound(snd, lch_auto, 0, vol, ATTN_STATIC)
 
 #define EndDrawing() \
-   DrawCallI(sm_LE)
+   DrawCallV(sm_LE)
 
 enum {
    CHANF_LISTENERZ   = 8,

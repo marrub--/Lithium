@@ -12,13 +12,11 @@
 
 #include "u_common.h"
 
-void Upgr_Rifle_A_Deactivate(void)
-{
+void Upgr_Rifle_A_Deactivate(void) {
    pl.riflefiremode = 0;
 }
 
-void Upgr_Rifle_A_Render(void)
-{
+void Upgr_Rifle_A_Render(void) {
    if(P_Wep_CurType() != weapon_m_rifle) return;
 
    if(CVarGetI(sc_weapons_riflescope) &&
@@ -39,21 +37,18 @@ void Upgr_Rifle_A_Render(void)
 }
 
 script_str ext("ACS") addr(OBJ "SwitchRifleFiremode")
-void Sc_SwitchRifleFiremode(void)
-{
-   if(!P_None())
-   {
+void Sc_SwitchRifleFiremode(void) {
+   if(!P_None()) {
       pl.riflefiremode = ++pl.riflefiremode % rifle_firemode_max;
       AmbientSound(ss_weapons_rifle_firemode, 1.0);
    }
 }
 
 script_str ext("ACS") addr(OBJ "ResetRifleMode")
-void Sc_ResetRifleMode(void)
-{
-   if(!P_None())
-      if(CVarGetI(sc_weapons_riflemodeclear))
-         pl.riflefiremode = 0;
+void Sc_ResetRifleMode(void) {
+   if(!P_None() && CVarGetI(sc_weapons_riflemodeclear)) {
+      pl.riflefiremode = 0;
+   }
 }
 
 /* EOF */

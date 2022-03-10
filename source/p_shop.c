@@ -48,16 +48,17 @@ bool Shop_Give(struct shopitem const *item, i32 tid) {
 void P_CBI_TabShop(struct gui_state *g) {
    i32 nitems = 0;
    for(i32 i = 0; i < countof(shopitems); i++) {
-      if(shopitems[i].pclass & pl.pclass)
+      if(shopitems[i].pclass & pl.pclass) {
          nitems++;
+      }
    }
 
    G_ScrBeg(g, &CBIState(g)->shopscr, 2, 23, gui_p.btnlist.w, 186, gui_p.btnlist.h * nitems);
 
-   for(i32 i = 0, y = 0; i < countof(shopitems); i++)
-   {
-      if(G_ScrOcc(g, &CBIState(g)->shopscr, y, gui_p.btnlistsel.h) || !(shopitems[i].pclass & pl.pclass))
+   for(i32 i = 0, y = 0; i < countof(shopitems); i++) {
+      if(G_ScrOcc(g, &CBIState(g)->shopscr, y, gui_p.btnlistsel.h) || !(shopitems[i].pclass & pl.pclass)) {
          continue;
+      }
 
       i32 *shopsel = &CBIState(g)->shopsel;
       if(G_Button_HId(g, i, tmpstr(lang(fast_strdup2(LANG "SHOP_TITLE_", shopitems[i].name))),
@@ -84,8 +85,9 @@ void P_CBI_TabShop(struct gui_state *g) {
 
    G_ClipRelease(g);
 
-   if(G_Button(g, tmpstr(lang(sl_buy)), 98, 192, !P_Shop_CanBuy(&item->shopdef), .fill = &CBIState(g)->buyfill))
+   if(G_Button(g, tmpstr(lang(sl_buy)), 98, 192, !P_Shop_CanBuy(&item->shopdef), .fill = &CBIState(g)->buyfill)) {
       P_Shop_Buy(&item->shopdef, LANG "SHOP_TITLE_", false);
+   }
 }
 
 /* EOF */

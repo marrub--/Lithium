@@ -35,30 +35,34 @@ void FadeFlash(i32 r, i32 g, i32 b, k32 amount, k32 seconds) {
 
 script
 i32 PtrTID(i32 tid, i32 ptr) {
-   if(tid || ptr)
+   if(tid || ptr) {
       ACS_SetActivator(tid, ptr);
+   }
    return ACS_ActivatorTID();
 }
 
 script
 i32 PtrPlayerNumber(i32 tid, i32 ptr) {
-   if(tid || ptr)
+   if(tid || ptr) {
       ACS_SetActivator(tid, ptr);
+   }
    return ACS_PlayerNumber();
 }
 
 script
 bool PtrValid(i32 tid, i32 ptr) {
-   if(tid || ptr)
+   if(tid || ptr) {
       return ACS_SetActivator(tid, ptr);
+   }
    else
       return true;
 }
 
 script
 bool PtrSet(i32 tid, i32 ptr, i32 assign, i32 tid2, i32 ptr2, i32 flags) {
-   if(tid || ptr)
+   if(tid || ptr) {
       ACS_SetActivator(tid, ptr);
+   }
    return ACS_SetPointer(assign, tid2, ptr2, flags);
 }
 

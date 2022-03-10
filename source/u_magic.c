@@ -33,14 +33,12 @@ struct magic_info const minf[] = {
 };
 
 script static
-void GiveMagic(struct magic_info const *m)
-{
+void GiveMagic(struct magic_info const *m) {
    ACS_SetWeapon(fast_strdup2(OBJ, m->name));
 }
 
 script static
-void UpdateMagicUI(void)
-{
+void UpdateMagicUI(void) {
    struct gui_state *g = &udata.gst;
 
    G_Begin(g, 320, 240);
@@ -83,8 +81,7 @@ void UpdateMagicUI(void)
 }
 
 alloc_aut(0) script static
-void GivePlayerZ(i32 tid)
-{
+void GivePlayerZ(i32 tid) {
    while(ACS_ThingCount(T_NONE, tid)) {
       SetMembI(tid, sm_UserZ, pl.z);
       ACS_Delay(1);
@@ -92,21 +89,17 @@ void GivePlayerZ(i32 tid)
 }
 
 static
-void SetMagicUI(bool on)
-{
+void SetMagicUI(bool on) {
    if(pl.dead) return;
 
-   if(on)
-   {
+   if(on) {
       udata.ui = true;
       pl.semifrozen++;
 
       udata.gst.gfxprefix = ":UI:";
       udata.gst.cx = 320/2;
       udata.gst.cy = 240/2;
-   }
-   else if(!on && udata.ui)
-   {
+   } else if(!on && udata.ui) {
       if(udata.gst.hot) GiveMagic(&minf[udata.gst.hot - 1]);
 
       udata.ui = false;
@@ -116,43 +109,44 @@ void SetMagicUI(bool on)
    }
 }
 
-void Upgr_Magic_Update(void)
-{
+void Upgr_Magic_Update(void) {
    k32 manaperc = pl.mana / (k32)pl.manamax;
 
-   if(udata.manaperc < 1 && manaperc == 1)
+   if(udata.manaperc < 1 && manaperc == 1) {
       AmbientSound(ss_player_jem_manafull, 1.0);
+   }
 
    udata.manaperc = manaperc;
 
-   if(pl.buttons & BT_USER4 && !(pl.old.buttons & BT_USER4))
+   if(pl.buttons & BT_USER4 && !(pl.old.buttons & BT_USER4)) {
       SetMagicUI(true);
-   else if(!(pl.buttons & BT_USER4) && pl.old.buttons & BT_USER4)
+   } else if(!(pl.buttons & BT_USER4) && pl.old.buttons & BT_USER4) {
       SetMagicUI(false);
+   }
 
-   if(udata.ui)
+   if(udata.ui) {
       UpdateMagicUI();
+   }
 
-   if(manaperc >= 0.7)
-      for(i32 i = 0; i < 5 * manaperc; i++)
-   {
-      k32 dst = ACS_RandomFixed(32, 56);
-      k32 ang = ACS_RandomFixed(0, 1);
-      i32 tid = ACS_UniqueTID();
-      i32 x   = ACS_Cos(ang) * dst;
-      i32 y   = ACS_Sin(ang) * dst;
-      i32 z   = ACS_Random(8, 48);
-      ACS_Spawn(so_ManaLeak, pl.x + x, pl.y + y, pl.z + z, tid);
-      SetMembI(tid, sm_UserX, x);
-      SetMembI(tid, sm_UserY, y);
-      SetAlpha(tid, manaperc / 2);
-      PtrSet(tid, AAPTR_DEFAULT, AAPTR_MASTER, pl.tid);
-      GivePlayerZ(tid);
+   if(manaperc >= 0.7) {
+      for(i32 i = 0; i < 5 * manaperc; i++) {
+         k32 dst = ACS_RandomFixed(32, 56);
+         k32 ang = ACS_RandomFixed(0, 1);
+         i32 tid = ACS_UniqueTID();
+         i32 x   = ACS_Cos(ang) * dst;
+         i32 y   = ACS_Sin(ang) * dst;
+         i32 z   = ACS_Random(8, 48);
+         ACS_Spawn(so_ManaLeak, pl.x + x, pl.y + y, pl.z + z, tid);
+         SetMembI(tid, sm_UserX, x);
+         SetMembI(tid, sm_UserY, y);
+         SetAlpha(tid, manaperc / 2);
+         PtrSet(tid, AAPTR_DEFAULT, AAPTR_MASTER, pl.tid);
+         GivePlayerZ(tid);
+      }
    }
 }
 
-void Upgr_Magic_Render(void)
-{
+void Upgr_Magic_Render(void) {
    if(!pl.hudenabled) return;
 
    i32 hprc = ceilk(mink(udata.manaperc,        0.5k) * 2 * 62);
@@ -171,8 +165,7 @@ void Upgr_Magic_Render(void)
 }
 
 script_str ext("ACS") addr(OBJ "SetMagicUI")
-void Sc_SetMagicUI(bool on)
-{
+void Sc_SetMagicUI(bool on) {
    if(!P_None()) SetMagicUI(on);
 }
 

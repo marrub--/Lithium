@@ -62,8 +62,7 @@ void CBITab_Marine(struct gui_state *g) {
 }
 
 static
-void CBITab_CyberMage(struct gui_state *g)
-{
+void CBITab_CyberMage(struct gui_state *g) {
    CPU(2);
    PrintText_str(ns(lang(sl_cbi_cpu4)), sf_smallfnt, g->defcr, g->ox+7,1, g->oy+47,1);
 
@@ -95,8 +94,7 @@ void CBITab_CyberMage(struct gui_state *g)
    Upgr(cupg_rdistinter)   Slot(sp_UI_RDistInter, 1, 4);
 }
 
-void P_CBI_TabCBI(struct gui_state *g)
-{
+void P_CBI_TabCBI(struct gui_state *g) {
    switch(pl.pclass) {
    case pcl_marine:    CBITab_Marine   (g); break;
    case pcl_cybermage: CBITab_CyberMage(g); break;

@@ -206,7 +206,7 @@ static void StaB2_S(u32 v) {MemB2_S(STA_BEG + DecSP(2) - 1, v);}
 /* trace */
 #ifndef NDEBUG
 static
-void TraceReg() {
+void TraceReg(void) {
    __nprintf("PC:%04X SP:%02X VA:%02X "
              "AC:%02X RX:%02X RY:%02X SR:%02X",
              GetPC(), GetSP(), GetVA(),
@@ -260,14 +260,14 @@ str GetText(i32 from) {
 }
 
 static
-str GetRemote() {
+str GetRemote(void) {
    u32  adr = MemB2_G(VAR_REMOTEL);
    cstr nam = adr ? MemSC_G(adr) : "UNKNOWN";
    return ns(lang(fast_strdup2(LANG "REMOTE_", nam)));
 }
 
 static
-str GetName() {
+str GetName(void) {
    u32  adr = MemB2_G(VAR_NAMEL);
    cstr nam = adr ? MemSC_G(adr) : "UNKNOWN";
    return ns(lang(fast_strdup2(LANG "PNAME_", nam)));
@@ -391,7 +391,7 @@ void TerminalGUI(u32 tact) {
 }
 
 static
-void DialogueGUI() {
+void DialogueGUI(void) {
    enum {left = 37, top = 75, texttop = top + 24};
 
    str snam = GetName();
@@ -492,19 +492,19 @@ void F_drawText(i32 h, str text) {
 
 /* VM actions */
 static
-void ActEND_GAME() {
+void ActEND_GAME(void) {
    SetVA(ACT_NONE);
-   ServCallI(sm_ActuallyEndTheGame);
+   ServCallV(sm_ActuallyEndTheGame);
 }
 
 static
-void ActLD_ITEM() {
+void ActLD_ITEM(void) {
    SetVA(ACT_NONE);
    ModSR_ZN(SetAC(InvNum(MemSA_G(MemB2_G(VAR_ADRL)))));
 }
 
 static
-void ActLD_OPT() {
+void ActLD_OPT(void) {
    SetVA(ACT_NONE);
 
    u32 cnt = MemB1_G(VAR_OPT_CNT);
@@ -515,7 +515,7 @@ void ActLD_OPT() {
 }
 
 static
-void ActSCRIPT_I() {
+void ActSCRIPT_I(void) {
    SetVA(ACT_NONE);
 
    u32 s0 = MemB1_G(VAR_SCP0), s1 = MemB1_G(VAR_SCP1);
@@ -526,7 +526,7 @@ void ActSCRIPT_I() {
 }
 
 static
-void ActSCRIPT_S() {
+void ActSCRIPT_S(void) {
    SetVA(ACT_NONE);
 
    str s0 = MemSA_G(MemB2_G(VAR_ADRL));
@@ -537,7 +537,7 @@ void ActSCRIPT_S() {
 }
 
 alloc_aut(0) sync static
-void ActTELEPORT_INTERLEVEL() {
+void ActTELEPORT_INTERLEVEL(void) {
    i32 tag = MemB2_G(VAR_ADRL);
 
    ACS_Delay(5);
@@ -547,7 +547,7 @@ void ActTELEPORT_INTERLEVEL() {
 }
 
 alloc_aut(0) sync static
-void ActTELEPORT_INTRALEVEL() {
+void ActTELEPORT_INTRALEVEL(void) {
    i32 tag = MemB2_G(VAR_ADRL);
 
    ACS_Delay(5);
@@ -557,7 +557,7 @@ void ActTELEPORT_INTRALEVEL() {
 }
 
 alloc_aut(0) sync static
-void ActDLG_WAIT() {
+void ActDLG_WAIT(void) {
    SetVA(ACT_NONE);
 
    AmbientSound(ss_player_cbi_dlgopen, 1.0);
@@ -577,7 +577,7 @@ void ActDLG_WAIT() {
 }
 
 alloc_aut(0) sync static
-void ActTRM_WAIT() {
+void ActTRM_WAIT(void) {
    SetVA(ACT_NONE);
 
    u32 tact = MemB1_G(VAR_TACT);
@@ -609,7 +609,7 @@ void ActTRM_WAIT() {
 }
 
 alloc_aut(0) sync static
-void ActFIN_WAIT() {
+void ActFIN_WAIT(void) {
    enum {
       _fill_x = 280,
       _fill_y = 220,
@@ -720,8 +720,9 @@ void ActFIN_WAIT() {
 /* Main dialogue VM. */
 dynam_aut script
 void Dlg_Run(u32 num) {
-   if(pl.dead || pl.modal != _gui_dlg)
+   if(pl.dead || pl.modal != _gui_dlg) {
       return;
+   }
 
    /* get the dialogue by number */
    register struct dlg_def *def = &dlgdefs[num];
@@ -1112,22 +1113,24 @@ TRR_NP:
    ACS_BeginLog();
    TraceReg();
    ACS_EndLog();
-   JmpVI();
    #endif
+   JmpVI();
 
 TRS_NP:
    #ifndef NDEBUG
-   for(u32 i = GetSP() + 1; i <= 0xFF; i++)
+   for(u32 i = GetSP() + 1; i <= 0xFF; i++) {
       Log("%02X: %02X", i, MemB1_G(STA_BEG + i));
-   JmpVI();
+   }
    #endif
+   JmpVI();
 
 TRV_NP:
    #ifndef NDEBUG
-   for(u32 i = 0; i <= 0xFF; i++)
+   for(u32 i = 0; i <= 0xFF; i++) {
       Log("%02X: %02X", i, MemB1_G(VAR_BEG + i));
-   JmpVI();
+   }
    #endif
+   JmpVI();
 
 halt:
    Dbg_Log(log_dlg, "%s: exited", __func__);

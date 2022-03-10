@@ -16,7 +16,7 @@
 #include "p_hudid.h"
 
 dynam_aut script
-void P_Scr_Payout() {
+void P_Scr_Payout(void) {
    enum {
       _begin_total      = 35,
       _begin_tax        = 44,
@@ -127,8 +127,9 @@ void P_Scr_Payout() {
             if(snd != snil) AmbientSound(snd, 0.62);
          }
 
-         if(i == _begin_tax || i == _begin_grandtotal)
+         if(i == _begin_tax || i == _begin_grandtotal) {
             AmbientSound(ss_player_counterdone, 0.62);
+         }
       }
 
       ACS_Delay(1);

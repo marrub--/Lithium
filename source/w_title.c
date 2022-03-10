@@ -52,18 +52,17 @@ void W_Title(void) {
 
    i32 len = ACS_StrLen(txt);
 
-   for(i32 t = 0, pos = 0;;)
-   {
+   for(i32 t = 0, pos = 0;;) {
       PrintText_str(ACS_StrMid(txt, 0, pos), sf_smallfnt, Cr(green), 7,1, 6,1);
 
-      if(t == 0)
-      {
+      if(t == 0) {
          if(++pos >= len) break;
 
-         if(txt[pos] == '\n')
+         if(txt[pos] == '\n') {
             t = 20;
-         else
+         } else {
             t = 1;
+         }
       }
       else
          t--;
@@ -73,24 +72,21 @@ void W_Title(void) {
       EndDrawing();
    }
 
-   for(i32 i = 0; i < 35 * 7; i++)
-   {
+   for(i32 i = 0; i < 35 * 7; i++) {
       PrintText_str(txt, sf_smallfnt, Cr(green), 7,1, 6,1);
       Blinker(bgn);
       ACS_Delay(1);
       EndDrawing();
    }
 
-   for(k32 a = 1; a > 0; a -= 0.01)
-   {
+   for(k32 a = 1; a > 0; a -= 0.01) {
       PrintTextA_str(txt, sf_smallfnt, Cr(green), 7,1, 6,1, a);
       Blinker(bgn);
       ACS_Delay(1);
       EndDrawing();
    }
 
-   for(;;)
-   {
+   for(;;) {
       Blinker(bgn);
       ACS_Delay(1);
       EndDrawing();

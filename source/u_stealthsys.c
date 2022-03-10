@@ -14,14 +14,12 @@
 
 #define udata pl.upgrdata.stealthsys
 
-void Upgr_StealthSys_Deactivate(void)
-{
+void Upgr_StealthSys_Deactivate(void) {
    pl.alpha = 1;
    InvTake(so_StealthSystem, 1);
 }
 
-void Upgr_StealthSys_Update(void)
-{
+void Upgr_StealthSys_Update(void) {
    k32 vel = fastabsk(pl.getVel()) / 10.0;
    pl.alpha = udata.mulvel = lerpk(udata.mulvel, vel, 0.02);
 

@@ -12,10 +12,10 @@
 
 #include "u_common.h"
 
-void Upgr_InstaDeath_Update(void)
-{
-   if(pl.health < pl.oldhealth)
-      ServCallI(sm_DieNow);
+void Upgr_InstaDeath_Update(void) {
+   if(pl.health < pl.oldhealth) {
+      ServCallV(sm_DieNow);
+   }
 }
 
 /* EOF */

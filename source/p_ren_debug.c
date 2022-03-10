@@ -11,7 +11,7 @@
 #include "p_player.h"
 #include "p_hudid.h"
 
-void P_Ren_Debug() {
+void P_Ren_Debug(void) {
    if(!dbglevel(log_devh)) return;
 
    Dbg_Stat(
@@ -36,10 +36,12 @@ void P_Ren_Debug() {
    SetSize(320, 240);
 
    ACS_BeginPrint();
-   for(i32 i = 0; i < dbgstatnum; i++)
+   for(i32 i = 0; i < dbgstatnum; i++) {
       ACS_PrintString(dbgstat[i]);
-   for(i32 i = 0; i < dbgnotenum; i++)
+   }
+   for(i32 i = 0; i < dbgnotenum; i++) {
       ACS_PrintString(dbgnote[i]);
+   }
    PrintTextA(sf_smallfnt, CR_WHITE, 10,1, 20,1, 0.2);
 }
 #endif

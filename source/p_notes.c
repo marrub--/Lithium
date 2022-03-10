@@ -15,20 +15,20 @@
 #include "w_world.h"
 #include "gui.h"
 
-void P_CBI_TabNotes(struct gui_state *g)
-{
+void P_CBI_TabNotes(struct gui_state *g) {
    struct gui_txt *st = &CBIState(g)->notebox;
    G_TxtBox(g, st, 35, 27);
 
-   if(G_Button(g, tmpstr(lang(sl_clear)), 3, 37, Pre(btnclear)))
+   if(G_Button(g, tmpstr(lang(sl_clear)), 3, 37, Pre(btnclear))) {
       G_TxtBoxRes(st);
+   }
 
    G_ScrBeg(g, &CBIState(g)->notescr, 2, 50, 280, 160, 30 * countof(pl.notes), 240);
 
-   for(i32 i = 0; i < countof(pl.notes); i++)
-   {
-      if(G_ScrOcc(g, &CBIState(g)->notescr, i * 30, 30))
+   for(i32 i = 0; i < countof(pl.notes); i++) {
+      if(G_ScrOcc(g, &CBIState(g)->notescr, i * 30, 30)) {
          continue;
+      }
 
       PrintTextFmt(tmpstr(lang(sl_note_fmt)), i + 1);
       PrintText(sf_lmidfont, g->defcr, g->ox+2,1, i * 30 + g->oy,1);

@@ -15,13 +15,17 @@
 
 static
 void GUIUpgradesList(struct gui_state *g) {
-   if(G_Button(g, .x = 77, 200, Pre(btnprev)))
-      if(CBIState(g)->upgrfilter-- <= 0)
+   if(G_Button(g, .x = 77, 200, Pre(btnprev))) {
+      if(CBIState(g)->upgrfilter-- <= 0) {
          CBIState(g)->upgrfilter = _uc_max;
+      }
+   }
 
-   if(G_Button(g, .x = 77 + gui_p.btnprev.w, 200, Pre(btnnext)))
-      if(CBIState(g)->upgrfilter++ >= _uc_max)
+   if(G_Button(g, .x = 77 + gui_p.btnprev.w, 200, Pre(btnnext))) {
+      if(CBIState(g)->upgrfilter++ >= _uc_max) {
          CBIState(g)->upgrfilter = 0;
+      }
+   }
 
    i32 numbtns = 0;
    i32 filter  = CBIState(g)->upgrfilter - 1;
@@ -65,8 +69,9 @@ void GUIUpgradesList(struct gui_state *g) {
 
       y += gui_p.btnlist.h;
 
-      if(G_ScrOcc(g, &CBIState(g)->upgrscr, y, gui_p.btnlist.h))
+      if(G_ScrOcc(g, &CBIState(g)->upgrscr, y, gui_p.btnlist.h)) {
          continue;
+      }
 
       cstr color;
       if(!get_bit(upgr->flags, _ug_owned) && !P_Shop_CanBuy(&upgr->shopdef)) {
@@ -87,7 +92,9 @@ void GUIUpgradesList(struct gui_state *g) {
       i32 *upgrsel = &CBIState(g)->upgrsel;
       if(G_Button_HId(g, _i, tmpstr(lang(fast_strdup2(LANG "UPGRADE_TITLE_", upgr->name))),
                       0, y, _i == *upgrsel, .color = color, .preset = pre))
+      {
          *upgrsel = _i;
+      }
 
       for(i32 i = 0; i < 4; i++) {
          if(get_bit(upgr->agroups, i)) {
@@ -126,12 +133,13 @@ void GUIUpgradeRequirements(struct gui_state *g, struct upgrade *upgr) {
       bool over = upgr->perf + pl.cbi.pruse > cbiperf;
       cstr fmt;
 
-      if(get_bit(upgr->flags, _ug_active))
+      if(get_bit(upgr->flags, _ug_active)) {
          fmt = tmpstr(lang(sl_shop_disable_saves));
-      else if(over)
+      } else if(over) {
          fmt = tmpstr(lang(sl_shop_cant_activate));
-      else
+      } else {
          fmt = tmpstr(lang(sl_shop_activate_uses));
+      }
 
       PrintTextFmt(fmt, upgr->perf);
       PrintText(sf_smallfnt, g->defcr, g->ox+98,1, g->oy+187 + y,2);
@@ -197,8 +205,9 @@ void GUIUpgradeDescription(struct gui_state *g, struct upgrade *upgr) {
 
    i32 cr = g->defcr;
 
-   if(upgr->key == UPGR_UNCEUNCE)
+   if(upgr->key == UPGR_UNCEUNCE) {
       cr = crs[ACS_Timer() / 4 % countof(crs)];
+   }
 
    PrintText(sf_smallfnt, cr, g->ox+98,1, g->oy+37,1);
 
@@ -208,15 +217,18 @@ void GUIUpgradeDescription(struct gui_state *g, struct upgrade *upgr) {
 static
 void GUIUpgradeButtons(struct gui_state *g, struct upgrade *upgr) {
    /* Buy */
-   if(G_Button(g, tmpstr(lang(sl_buy)), 98, 192, !P_Shop_CanBuy(&upgr->shopdef), .fill = &CBIState(g)->buyfill))
+   if(G_Button(g, tmpstr(lang(sl_buy)), 98, 192, !P_Shop_CanBuy(&upgr->shopdef), .fill = &CBIState(g)->buyfill)) {
       P_Upg_Buy(upgr, false);
+   }
 
    /* Activate */
    if(G_Button(g, tmpstr(get_bit(upgr->flags, _ug_active) ?
                          lang(sl_deactivate) :
                          lang(sl_activate)),
                98 + gui_p.btndef.w + 2, 192, !P_Upg_CanActivate(upgr)))
+   {
       P_Upg_Toggle(upgr);
+   }
 
    /* Groups */
    PrintText_str(ns(lang(sl_autogroups)), sf_smallfnt, g->defcr, g->ox+242,0, g->oy+192,0);

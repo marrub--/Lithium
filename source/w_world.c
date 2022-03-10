@@ -179,8 +179,9 @@ static
 void HInitPre(void) {
    Dbg_Log(log_dev, "%s", __func__);
 
-   if(unloaded)
+   if(unloaded) {
       mapscleared++;
+   }
 
    bossspawned = false;
 
@@ -200,8 +201,9 @@ static
 void HInit(void) {
    Dbg_Log(log_dev, "%s", __func__);
 
-   if(!CVarGetI(sc_sv_nobosses))
+   if(!CVarGetI(sc_sv_nobosses)) {
       Boss_HInit();
+   }
 
    /* Payout, which is not done on the first map. */
    if(mapscleared != 0) Scr_HInit();
@@ -215,8 +217,9 @@ void HInit(void) {
       CVarGetI(sc_sv_nobossdrop) ||
       dbgflags(dbgf_items))
    {
-      for(i32 i = 0; i < bossreward_max; i++)
+      for(i32 i = 0; i < bossreward_max; i++) {
          CBI_Install(i);
+      }
    }
 }
 

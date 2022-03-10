@@ -96,7 +96,7 @@
 #include "m_stab.h"
 
 alloc_aut(0) script ext("ACS") addr(lsc_strinit)
-void StrInit() {
+void StrInit(void) {
    str *ary;
    i32 i;
    #define stab_ary_bgn_x(name) i = 0, ary = name;
@@ -356,11 +356,6 @@ alloc_aut(0) stkcall
 str lang(str name) {
    str ret = ServCallS(sm_Localize, name);
    return ret != name ? ret : snil;
-}
-
-alloc_aut(0) stkcall
-str ns(str s) {
-   return s != snil ? s : st_null;
 }
 
 noinit static

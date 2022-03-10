@@ -12,9 +12,8 @@
 
 #include "u_common.h"
 
-void Upgr_DefenseNuke_Enter(void)
-{
-   ServCallI(sm_Nuke);
+void Upgr_DefenseNuke_Enter(void) {
+   ServCallV(sm_Nuke);
 }
 
 /* EOF */

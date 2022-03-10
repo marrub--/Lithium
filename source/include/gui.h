@@ -35,7 +35,7 @@
 #define G_TxtBox_HId(g, id, ...) G_TxtBox_FId(g, G_HId(id), __VA_ARGS__)
 #define G_WinBeg_HId(g, id, ...) G_WinBeg_FId(g, G_HId(id), __VA_ARGS__)
 
-/* Hashed */
+/* Automatic ID */
 #define G_Button(g, ...) G_Button_HId(g, 0, __VA_ARGS__)
 #define G_ChkBox(g, ...) G_ChkBox_HId(g, 0, __VA_ARGS__)
 #define G_ScrBeg(g, ...) G_ScrBeg_HId(g, 0, __VA_ARGS__)
@@ -295,6 +295,9 @@ void G_ClipRelease(struct gui_state *g);
 
 stkcall
 bool G_Filler(i32 x, i32 y, struct gui_fil *fil, bool held);
+
+stkcall
+void G_Tooltip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, cstr id);
 
 i32 G_Tabs(struct gui_state *g, mem_size_t *st, gtab_t const *names,
            mem_size_t num, i32 x, i32 y, i32 yp);

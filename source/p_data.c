@@ -17,8 +17,7 @@
 #include "w_monster.h"
 
 static
-void SetupAttributes()
-{
+void SetupAttributes(void) {
    fastmemcpy(pl.attr.names[at_acc], "ACC", 3);
    fastmemcpy(pl.attr.names[at_def], "DEF", 3);
    fastmemcpy(pl.attr.names[at_str], "STR", 3);
@@ -50,8 +49,7 @@ void SetupAttributes()
 }
 
 static
-void SetPClass()
-{
+void SetPClass(void) {
    pl.pcstr = ACS_GetActorClass(0);
 
    #define set_pcl(name) pl.pclass = pcl_##name, pl.pclass_b = pcl_##name##_b
@@ -73,21 +71,18 @@ void SetPClass()
    pl.color   = P_Color(pl.pclass);
 }
 
-bool P_ButtonPressed(i32 bt)
-{
+bool P_ButtonPressed(i32 bt) {
    return pl.buttons & bt && !(pl.old.buttons & bt);
 }
 
-bool P_SetVel(k32 velx, k32 vely, k32 velz, bool add)
-{
+bool P_SetVel(k32 velx, k32 vely, k32 velz, bool add) {
    if(add) pl.velx += velx, pl.vely += vely, pl.velz += velz;
    else    pl.velx  = velx, pl.vely  = vely, pl.velz  = velz;
 
    return ACS_SetActorVelocity(pl.tid, velx, vely, velz, add, true);
 }
 
-void P_ValidateTID()
-{
+void P_ValidateTID(void) {
    if(ACS_ActivatorTID() == 0) {
       ACS_Thing_ChangeTID(0, pl.tid = ACS_UniqueTID());
       Dbg_Log(log_dev, "set ptid from 0 to %i", pl.tid);
@@ -98,8 +93,7 @@ void P_ValidateTID()
 }
 
 /* Update all of the player's data. */
-void P_Dat_PTickPre()
-{
+void P_Dat_PTickPre(void) {
    enum {
       _warpflags = WARPF_NOCHECKPOSITION | WARPF_MOVEPTR |
                    WARPF_WARPINTERPOLATION | WARPF_COPYINTERPOLATION |
@@ -246,7 +240,7 @@ struct cheat cht_give_ammo = cheat_s("pgfa", 0, chtf_give_ammo, "Fully ammunized
 
 /* Reset some things on the player when they spawn. */
 script
-void P_Init() {
+void P_Init(void) {
    if(!pl.wasinit) {
       fastmemset(&pl, 0, sizeof pl);
 
@@ -301,7 +295,7 @@ void P_Init() {
    pl.scoreaccumtime = 0;
    pl.scoremul       = 1.1;
 
-   ServCallI(sm_PlayerInit);
+   ServCallV(sm_PlayerInit);
 
    pl.alpha = 1;
 
@@ -363,9 +357,10 @@ void P_Init() {
    #endif
 }
 
-void P_Dat_PTickPst() {
-   if(pl.frozen != pl.old.frozen)
+void P_Dat_PTickPst(void) {
+   if(pl.frozen != pl.old.frozen) {
       ACS_SetPlayerProperty(0, pl.frozen > 0, PROP_TOTALLYFROZEN);
+   }
 
    SetMembI(0, sm_Speed, pl.speedmul);
    SetMembK(0, sm_JumpZ, pl.jumpheight * (pl.jumpboost / 100.0k));

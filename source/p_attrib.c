@@ -15,16 +15,14 @@
 #include "w_world.h"
 
 static
-void AttrBar(struct gui_state *g, i32 x, i32 y, i32 w, str gfx)
-{
+void AttrBar(struct gui_state *g, i32 x, i32 y, i32 w, str gfx) {
    G_Clip(g, g->ox+x, g->oy+y, w * 4, 8);
    PrintSprite(gfx, g->ox+x,1, g->oy+y,1);
    G_ClipRelease(g);
 }
 
 static
-void DrawAttr(struct gui_state *g, i32 x, i32 y, i32 at)
-{
+void DrawAttr(struct gui_state *g, i32 x, i32 y, i32 at) {
    u32  attr = pl.attr.attrs[at];
    cstr name = pl.attr.names[at];
    k32  helptrns = 0.5;
@@ -44,8 +42,7 @@ void DrawAttr(struct gui_state *g, i32 x, i32 y, i32 at)
 
    AttrBar(g, x, y, attr, sp_UI_AttrBar2);
 
-   if(attr > ATTR_VIS_MAX)
-   {
+   if(attr > ATTR_VIS_MAX) {
       i32 vatr = attr - ATTR_VIS_MAX;
       AttrBar(g, x, y, (vatr / (k64)ATTR_VIS_DIFF) * ATTR_VIS_MAX, sp_UI_AttrBar4);
       helptrns += 0.3;
@@ -61,14 +58,12 @@ void DrawAttr(struct gui_state *g, i32 x, i32 y, i32 at)
 }
 
 static
-void StatusInfo(struct gui_state *g, i32 y, str left, str right)
-{
+void StatusInfo(struct gui_state *g, i32 y, str left, str right) {
    PrintText_str(left,  sf_lmidfont, g->defcr, g->ox+ 17,1, g->oy+y,1);
    PrintText_str(right, sf_smallfnt, g->defcr, g->ox+267,2, g->oy+y,1);
 }
 
-void P_CBI_TabStatus(struct gui_state *g)
-{
+void P_CBI_TabStatus(struct gui_state *g) {
    i32 y = 27;
 
    PrintText_str(pl.name, sf_lmidfont, g->defcr, g->ox+17,1, g->oy+y,1);
@@ -101,8 +96,9 @@ void P_CBI_TabStatus(struct gui_state *g)
 
    y += 10;
 
-   for(i32 i = 0; i < at_max; i++, y += 10)
+   for(i32 i = 0; i < at_max; i++, y += 10) {
       DrawAttr(g, 40, y, i);
+   }
 }
 
 /* EOF */

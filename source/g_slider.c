@@ -39,8 +39,9 @@ struct slide_ret G_Slider_Imp(struct gui_state *g, gid_t id, struct gui_arg_sld 
       else    ret = fastround1k(ret * 10.0k) / 10.0k;
 
       /* play sound */
-      if(pre->snd && g->cx != g->old.cx && g->cx >= x && g->cx < x + w)
+      if(pre->snd && g->cx != g->old.cx && g->cx >= x && g->cx < x + w) {
          AmbientSound(pre->snd, 0.47);
+      }
    } else {
       notchpos = (a->val - a->minima) / a->maxima;
       ret      = a->val;

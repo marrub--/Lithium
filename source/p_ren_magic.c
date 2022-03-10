@@ -10,7 +10,7 @@
 #include "p_player.h"
 #include "p_hudid.h"
 
-void P_Ren_Magic() {
+void P_Ren_Magic(void) {
    SetSize(800, 600);
 
    for(i32 i = 0; i < 4; i++) {

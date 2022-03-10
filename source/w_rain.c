@@ -40,9 +40,9 @@ void W_DoRain(void) {
       }
 
       if((InHell || InSecret) && !islithmap) {
-         ServCallI(sm_SpawnRain, so_BloodRainDrop);
+         ServCallV(sm_SpawnRain, so_BloodRainDrop);
       } else {
-         ServCallI(sm_SpawnRain, so_RainDrop);
+         ServCallV(sm_SpawnRain, so_RainDrop);
       }
 
       ACS_Delay(1);

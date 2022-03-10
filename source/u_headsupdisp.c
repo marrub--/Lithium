@@ -18,7 +18,7 @@ static
 i32 hudtype, hudcolor;
 
 static
-void HUD_Log() {
+void HUD_Log(void) {
    i32 logcolor = CVarGetI(sc_hud_logcolor);
    if(logcolor == 'l') logcolor = hudtype != _hud_old ? hudcolor : CR_GREEN;
    else                logcolor = Draw_GetCr(logcolor);
@@ -35,7 +35,7 @@ void HUD_Log() {
 }
 
 static
-void HUD_TopRight() {
+void HUD_TopRight(void) {
    cstr beg, end;
    str  fnt;
    i32  clr = hudcolor;
@@ -148,7 +148,7 @@ void HUD_TopRight() {
 }
 
 static
-void HUD_BottomRight() {
+void HUD_BottomRight(void) {
    struct invweapon const *wep = pl.weapon.cur;
 
    bool showweps = CVarGetI(sc_hud_showweapons);
@@ -342,8 +342,9 @@ void HUD_BottomRight() {
          ACS_PrintInt(i);
          PrintTextX(sf_lsmlhfnt, cr, x,2, y,2, _u_no_unicode);
 
-         if(pl.weapon.cur->info->slot == i)
+         if(pl.weapon.cur->info->slot == i) {
             SetFade(fid_slotnS + i, 1, 6);
+         }
 
          if(CheckFade(fid_slotnS + i)) {
             ACS_BeginPrint();
@@ -372,7 +373,7 @@ void HUD_BottomRight() {
 }
 
 static
-void HUD_BottomLeft() {
+void HUD_BottomLeft(void) {
    i32 health = pl.health;
    i32 x;
    i32 y;
@@ -508,10 +509,11 @@ void Upgr_HeadsUpDisp_Render(void) {
    if(!pl.hudenabled) return;
 
    hudtype = CVarGetI(sc_hud_type);
-   if(hudtype <= 0 || hudtype > _hud_max)
+   if(hudtype <= 0 || hudtype > _hud_max) {
       hudtype = pl.pclass_b;
-   else
+   } else {
       --hudtype;
+   }
 
    hudcolor = hudtype != _hud_old ? P_Color(dst_bit(hudtype)) : CR_RED;
 

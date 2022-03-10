@@ -12,8 +12,7 @@
 
 #include "d_compile.h"
 
-void Dlg_PushB1(struct compiler *d, u32 b)
-{
+void Dlg_PushB1(struct compiler *d, u32 b) {
    mem_size_t pc = d->def.codeP++;
 
    if(pc + 1 > PRG_END - PRG_BEG) {
@@ -34,20 +33,17 @@ void Dlg_PushB1(struct compiler *d, u32 b)
    Cps_SetC(d->def.codeV, pc, b);
 }
 
-void Dlg_PushB2(struct compiler *d, u32 word)
-{
+void Dlg_PushB2(struct compiler *d, u32 word) {
    Dlg_PushB1(d, word & 0xFF); unwrap(&d->res);
    Dlg_PushB1(d, word >> 8); unwrap(&d->res);
 }
 
-void Dlg_PushLdVA(struct compiler *d, u32 action)
-{
+void Dlg_PushLdVA(struct compiler *d, u32 action) {
    Dlg_PushB1(d, DCD_LDV_VI); unwrap(&d->res);
    Dlg_PushB1(d, action); unwrap(&d->res);
 }
 
-struct ptr2 Dlg_PushLdAdr(struct compiler *d, u32 at, u32 set)
-{
+struct ptr2 Dlg_PushLdAdr(struct compiler *d, u32 at, u32 set) {
    struct ptr2 adr;
 
    Dlg_PushB1(d, DCD_LDA_VI); unwrap(&d->res);
@@ -67,8 +63,7 @@ struct ptr2 Dlg_PushLdAdr(struct compiler *d, u32 at, u32 set)
    return adr;
 }
 
-void Dlg_SetB1(struct compiler *d, u32 ptr, u32 b)
-{
+void Dlg_SetB1(struct compiler *d, u32 ptr, u32 b) {
    if(b > 0xFF) {
       d->tb.err(&d->res, "byte error (overflow) %u", b);
       unwrap(&d->res);
@@ -77,14 +72,12 @@ void Dlg_SetB1(struct compiler *d, u32 ptr, u32 b)
    Cps_SetC(d->def.codeV, ptr, b);
 }
 
-void Dlg_SetB2(struct compiler *d, u32 ptr, u32 word)
-{
+void Dlg_SetB2(struct compiler *d, u32 ptr, u32 word) {
    Dlg_SetB1(d, ptr + 0, word & 0xFF); unwrap(&d->res);
    Dlg_SetB1(d, ptr + 1, word >> 8); unwrap(&d->res);
 }
 
-u32 Dlg_PushStr(struct compiler *d, cstr s, u32 l)
-{
+u32 Dlg_PushStr(struct compiler *d, cstr s, u32 l) {
    u32  p = d->def.stabP;
    u32 vl = Cps_Size(p + l) - d->def.stabC;
 

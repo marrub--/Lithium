@@ -15,7 +15,7 @@
 #include "p_hudid.h"
 
 static
-void P_Ren_Advice() {
+void P_Ren_Advice(void) {
    if(CheckFade(fid_advice)) {
       SetSize(640, 480);
 
@@ -26,7 +26,7 @@ void P_Ren_Advice() {
 }
 
 static
-void P_Ren_LevelUp() {
+void P_Ren_LevelUp(void) {
    if(pl.old.attr.level && pl.old.attr.level < pl.attr.level) {
       AmbientSound(ss_player_levelup, 1.0);
       pl.logH(1, tmpstr(lang_discrim(sl_log_levelup)), ACS_Random(1000, 9000));
@@ -39,7 +39,7 @@ void P_Ren_LevelUp() {
    }
 }
 
-void P_Ren_PTickPst() {
+void P_Ren_PTickPst(void) {
    P_Ren_Magic();
    P_Ren_Step();
    P_Ren_View();
@@ -52,7 +52,7 @@ void P_Ren_PTickPst() {
 }
 
 alloc_aut(0) script
-void P_TeleportIn() {
+void P_TeleportIn(void) {
    pl.teleportedout = false;
 
    ACS_AmbientSound(ss_misc_telein, 127);

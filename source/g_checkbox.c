@@ -16,8 +16,9 @@
 bool G_ChkBox_Imp(struct gui_state *g, gid_t id, struct gui_arg_cbx *a) {
    struct gui_pre_cbx const *pre = a->preset |? &gui_p.cbxdef;
 
-   if(!a->disabled)
+   if(!a->disabled) {
       G_Auto(g, id, a->x, a->y, pre->w, pre->h);
+   }
 
    __with(char bgfx[30], cgfx[30];) {
       if(g->hot == id && pre->hot) G_Prefix(g, bgfx, pre, hot);

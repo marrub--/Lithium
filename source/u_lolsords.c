@@ -14,20 +14,17 @@
 
 #define udata pl.upgrdata.lolsords
 
-void Upgr_lolsords_Activate(void)
-{
+void Upgr_lolsords_Activate(void) {
    udata.origweapon = pl.weaponclass;
    InvGive(so_Sword, 1);
 }
 
-void Upgr_lolsords_Deactivate(void)
-{
+void Upgr_lolsords_Deactivate(void) {
    InvTake(so_Sword, 1);
    ACS_SetWeapon(udata.origweapon);
 }
 
-void Upgr_lolsords_Update(void)
-{
+void Upgr_lolsords_Update(void) {
    ACS_SetWeapon(so_Sword);
 }
 

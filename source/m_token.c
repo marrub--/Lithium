@@ -140,12 +140,15 @@ begin:
       goto done;
 
    case '.':
-      if(getch() == '.')
+      if(getch() == '.') {
          tok2('.', tok_dot2, tok_dot3);
-      else if(IsDigit(ch))
-         {unget(); break;}
-      else
-         {unget(); tok1(tok_dot);}
+      } else if(IsDigit(ch)) {
+         unget();
+         break;
+      } else {
+         unget();
+         tok1(tok_dot);
+      }
       goto done;
 
    case '`':
@@ -157,8 +160,9 @@ begin:
    case '\'': tok1(tok_charac); goto string;
    case '"':  tok1(tok_string); goto string;
    string:
-      for(i32 i = 0, beg = ch; getch() != beg && !FEOF(fp);)
+      for(i32 i = 0, beg = ch; getch() != beg && !FEOF(fp);) {
          textNext() = ch;
+      }
       goto done;
    }
 

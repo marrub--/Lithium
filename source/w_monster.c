@@ -94,11 +94,12 @@ void ShowBarrier(dmon_t const *m, k32 alpha) {
       anyplayer = true;
    }
 
-   if(!anyplayer)
+   if(!anyplayer) {
       return;
+   }
 
    BeginAngles(m->x, m->y);
-   ServCallI(sm_MonsterBarrierLook);
+   ServCallV(sm_MonsterBarrierLook);
 
    for(i32 i = 0; i < a_cur; i++) {
       struct polar *a = &a_angles[i];
@@ -165,13 +166,16 @@ void BaseMonsterLevel(dmon_t *m) {
    }
 
    switch(m->rank) {
-      case 5: ServCallI(sm_SetTeleFogTo, so_TeleFog5); break;
-      case 6: ServCallI(sm_SetTeleFogTo, so_TeleFog6); break;
-      case 7: ServCallI(sm_SetTeleFogTo, so_TeleFog7); break;
+      case 5: ServCallV(sm_SetTeleFogTo, so_TeleFog5); break;
+      case 6: ServCallV(sm_SetTeleFogTo, so_TeleFog6); break;
+      case 7: ServCallV(sm_SetTeleFogTo, so_TeleFog7); break;
    }
 
-   if(HasResistances(m)) for(i32 i = 0; i < m->rank; i++)
-      m->resist[ACS_Random(1, dmgtype_max) - 1] += 5;
+   if(HasResistances(m)) {
+      for(i32 i = 0; i < m->rank; i++) {
+         m->resist[ACS_Random(1, dmgtype_max) - 1] += 5;
+      }
+   }
 
    ApplyLevels(m, 0);
 
@@ -216,8 +220,9 @@ void OnFinalize(dmon_t *m) {
       if(pl.sgacquired) {
          bool high_level_imp =
             m->mi->type == mtype_imp && m->level >= 70 && m->rank >= 4;
-         if(high_level_imp && ACS_Random(0, 100) < 4)
+         if(high_level_imp && ACS_Random(0, 100) < 4) {
             ACS_SpawnForced(so_ClawOfImp, m->x, m->y, m->z);
+         }
       }
 
       if(!m->finalized) {
@@ -248,8 +253,9 @@ void OnFinalize(dmon_t *m) {
             }
          }
 
-         if(get_bit(pl.upgrades[UPGR_SoulCleaver].flags, _ug_active))
+         if(get_bit(pl.upgrades[UPGR_SoulCleaver].flags, _ug_active)) {
             SoulCleave(m);
+         }
       }
 
            if(pl.health <  5) P_Lv_GiveEXP(50);
@@ -317,7 +323,7 @@ void MonsterMain(dmon_t *m) {
       }
 
       if(InvNum(so_Ionized) && tic % 5 == 0) {
-         ServCallI(sm_IonizeFX);
+         ServCallV(sm_IonizeFX);
       }
 
       ACS_Delay(2);
@@ -343,8 +349,9 @@ void PrintMonsterInfo(dmon_t *m) {
        m->mi->exp, m->mi->score,
        m->mi->flags, m->mi->type);
 
-   for(i32 i = 0; i < countof(m->resist); i++)
+   for(i32 i = 0; i < countof(m->resist); i++) {
       Log("resist %S: %i", sa_dmgtype_names[i], m->resist[i]);
+   }
 }
 #endif
 
@@ -608,7 +615,7 @@ void Mon_Init(void) {
 }
 
 script ext("ACS") addr(lsc_monstertype)
-i32 Sc_GetMonsterType() {
+i32 Sc_GetMonsterType(void) {
    ifauto(dmon_t *, m, DmonSelf()) return m->mi->type;
    else                            return mtype_unknown;
 }
@@ -638,8 +645,9 @@ void Sc_MonsterInfo(void) {
    mon_name_t cname;
    faststrcpy_str(cname, ACS_GetActorClass(0));
 
-   if(faststrstr(cname, "RLAdaptive") || faststrstr(cname, "RLCyberdemonMkII"))
+   if(faststrstr(cname, "RLAdaptive") || faststrstr(cname, "RLCyberdemonMkII")) {
       return;
+   }
 
    for(i32 i = 0; i < monsterinfonum; i++) {
       struct monster_info const *mi = &monsterinfo[i];
@@ -678,8 +686,9 @@ void Sc_MonsterInfo(void) {
 
 script_str ext("ACS") addr(OBJ "MonsterFinalized")
 void Sc_MonsterFinalized(void) {
-   ifauto(dmon_t *, m, DmonSelf())
+   ifauto(dmon_t *, m, DmonSelf()) {
       OnFinalize(m);
+   }
 }
 
 /* EOF */

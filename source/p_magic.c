@@ -15,8 +15,7 @@
 #include "w_world.h"
 
 script_str ext("ACS") addr(OBJ "Blade")
-void Sc_Blade(bool hit)
-{
+void Sc_Blade(bool hit) {
    if(!P_None()) {
       if(!pl.onground) P_SetVel(pl.velx / 2, pl.vely / 2, 0);
       pl.bladehit = hit;
@@ -25,8 +24,7 @@ void Sc_Blade(bool hit)
 }
 
 script_str ext("ACS") addr(OBJ "Rend")
-void Sc_Rend(bool hit, i32 set)
-{
+void Sc_Rend(bool hit, i32 set) {
    if(!P_None()) {
       if(!pl.onground) P_SetVel(pl.velx / 2, pl.vely / 2, 0);
       pl.rendhit = hit;
@@ -35,10 +33,8 @@ void Sc_Rend(bool hit, i32 set)
 }
 
 dynam_aut script_str ext("ACS") addr(OBJ "Feuer")
-void Sc_Feuer(bool left, bool fire)
-{
-   if(!P_None())
-   {
+void Sc_Feuer(bool left, bool fire) {
+   if(!P_None()) {
       str actor = fire ? so_FeuerExplosion : so_FeuerTest;
       struct k32v3 t = trace_from(pl.yaw, pl.pitch, 1024, pl.attackheight);
 
@@ -74,10 +70,8 @@ void Sc_Feuer(bool left, bool fire)
 }
 
 dynam_aut script_str ext("ACS") addr(OBJ "Cercle")
-void Sc_Cercle(void)
-{
-   if(!P_None())
-   {
+void Sc_Cercle(void) {
+   if(!P_None()) {
       struct k32v3 v = trace_from(pl.yaw, pl.pitch, 1024, pl.attackheight, true);
 
       FreezeTime();
@@ -86,8 +80,7 @@ void Sc_Cercle(void)
       ACS_AmbientSound(ss_weapons_cercle_begin, 127);
 
       i32 fxtid = ACS_UniqueTID();
-      for(i32 i = 0; i < 100; i++)
-      {
+      for(i32 i = 0; i < 100; i++) {
          k32 px = ACS_Cos(i / 100.0) * 77;
          k32 py = ACS_Sin(i / 100.0) * 77;
          i32 tid;
@@ -118,8 +111,7 @@ void Sc_Cercle(void)
       ACS_Delay(35);
 
       i32 fxtid3 = ACS_UniqueTID();
-      for(i32 i = 0; i < 3; i++)
-      {
+      for(i32 i = 0; i < 3; i++) {
          k32 px = ACS_Cos(i / 3.0) * 60;
          k32 py = ACS_Sin(i / 3.0) * 60;
          i32 tid;
@@ -147,10 +139,8 @@ void Sc_Cercle(void)
 }
 
 dynam_aut script_str ext("ACS") addr(OBJ "MagicSelect")
-void Sc_MagicSelect(i32 num)
-{
-   if(!P_None())
-   {
+void Sc_MagicSelect(i32 num) {
+   if(!P_None()) {
       if(!CVarGetI(sc_weapons_magicselanims)) return;
 
       switch(num) {
