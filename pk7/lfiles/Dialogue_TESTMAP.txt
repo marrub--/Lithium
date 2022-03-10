@@ -6,9 +6,9 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-program 7;
+lipu_ilo 7;
 
-page 0 {
+lipu 0 {
    ldx #$FF;
    txs;
    lda #$1A;
@@ -21,103 +21,103 @@ page 0 {
    <$A9 $7F $00>
 }
 
-dialogue 1;
+toki 1;
 
-page 0 {
+lipu 0 {
    name JACQUES;
    icon "AOF";
    remote JACQUES;
 
-   if item "Lith_DivisionSigil" page 7;
+   seme ijo "Lith_DivisionSigil" lipu 7;
 
    text TESTMAP_01_00;
 
-   option TESTMAP_01_00_01 page 2;
+   option TESTMAP_01_00_01 lipu 2;
    option TESTMAP_01_00_02 brk;
 }
 
-page 2 {
-   if class pM text TESTMAP_01_02_M;
-   if class pC text TESTMAP_01_02_C;
+lipu 2 {
+   seme poki pM text TESTMAP_01_02_M;
+   seme poki pC text TESTMAP_01_02_C;
 
    option TESTMAP_01_02_01 {
       script 2;
-      page 2;
+      lipu 2;
    }
 
-   option TESTMAP_01_02_02 page 3;
+   option TESTMAP_01_02_02 lipu 3;
    option TESTMAP_01_02_03 brk;
 }
 
-page 3 {
-   if class pC {
+lipu 3 {
+   seme poki pC {
       text TESTMAP_01_03_C;
-      option TESTMAP_01_03_01_C page 10;
-      option TESTMAP_01_03_02_C page 11;
-   } else {
+      option TESTMAP_01_03_01_C lipu 10;
+      option TESTMAP_01_03_02_C lipu 11;
+   } ante {
       text TESTMAP_01_03_M;
-      option TESTMAP_01_03_01_M page 4;
+      option TESTMAP_01_03_01_M lipu 4;
    }
 }
 
-page 10 {
+lipu 10 {
    text TESTMAP_01_10;
 
-   option TESTMAP_01_10_01 page 13;
+   option TESTMAP_01_10_01 lipu 13;
    option TESTMAP_01_10_02 brk;
 }
 
-page 11 {
+lipu 11 {
    text TESTMAP_01_11;
 
-   option TESTMAP_01_11_01 page 12;
+   option TESTMAP_01_11_01 lipu 12;
 }
 
-page 12 {
+lipu 12 {
    text TESTMAP_01_12;
 
-   option TESTMAP_01_12_01 page 10;
+   option TESTMAP_01_12_01 lipu 10;
 }
 
-page 13 {
+lipu 13 {
    text TESTMAP_01_13;
 
-   option TESTMAP_01_13_01 page 14;
+   option TESTMAP_01_13_01 lipu 14;
 }
 
-page 14 {
+lipu 14 {
    text TESTMAP_01_14;
 
-   option TESTMAP_01_14_01 page 15;
+   option TESTMAP_01_14_01 lipu 15;
 }
 
-page 15 {
+lipu 15 {
    text TESTMAP_01_15;
 
-   option TESTMAP_01_15_01 page 16;
+   option TESTMAP_01_15_01 lipu 16;
 }
 
-page 16 {
+lipu 16 {
    text TESTMAP_01_16;
 
    option TESTMAP_01_16_01 brk;
 }
 
-page 4 {
+lipu 4 {
    text TESTMAP_01_04;
 
    option TESTMAP_01_04_01 brk;
 }
 
-page 7 {
+lipu 7 {
    text TESTMAP_01_07;
 
    option TESTMAP_01_07_01 brk;
 }
 
-terminal 1;
+ilo 1;
 
-unfinished {
+awen {
    remote TEST;
 
    logon "01602" text TEST;

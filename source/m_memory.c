@@ -15,13 +15,13 @@
 
 #define _mem_idn 0xC0FFEE69
 #define _mem_beg 0xADEADBED
-#define _mem_frg 128
-#define _mem_siz 268435456
+#define _mem_frg 0x80
+#define _mem_siz 0x10000000
 
-#define _pls_siz 67108864
+#define _pls_siz 0x4000000
 
-#define _dpl_siz 64
-#define _dpl_bsz 8192
+#define _dpl_siz 0x40
+#define _dpl_bsz 0x2000
 
 struct mem_blk {
    mem_tag_t idn;

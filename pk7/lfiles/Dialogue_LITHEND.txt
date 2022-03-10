@@ -6,90 +6,90 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-program 0;
+lipu_ilo 0;
 
 /* Music Subroutine */
-page 15 {
-   if class pM {
+lipu 15 {
+   seme poki pM {
       music "lmusic/lithambientwip3.ogg";
-   } else if class pC {
+   } ante seme poki pC {
       music "lmusic/tmary7.ogg";
-   } else if class pI {
-   } else if class pW {
-   } else if class pA {
+   } ante seme poki pI {
+   } ante seme poki pW {
+   } ante seme poki pA {
       music "lmusic/tpw.2.ogg";
-   } else if class pD {
+   } ante seme poki pD {
       music "lmusic/tpwrev.ogg";
-   } else if class pT {
+   } ante seme poki pT {
       music "lmusic/rg.ogg";
    }
    rts;
 }
 
 /* Normal */
-page 0 {
-   jsr page 15;
-   if class pM {
+lipu 0 {
+   jsr lipu 15;
+   seme poki pM {
       image ":End:Stan:Normal";
       fade_in 50;
       crawl Normal_Stan 400;
-   } else if class pC {
+   } ante seme poki pC {
       image ":End:Jem:Normal";
       fade_in 50;
       crawl Normal_Jem 400;
    }
-   page 14;
+   lipu 14;
 }
 
 /* Barons */
-page 1 {
-   jsr page 15;
-   if class pM {
+lipu 1 {
+   jsr lipu 15;
+   seme poki pM {
       image ":End:Stan:Barons";
       fade_in 50;
       crawl Barons_Stan 400;
-   } else if class pC {
+   } ante seme poki pC {
       image ":End:Jem:Barons";
       fade_in 50;
       crawl Barons_Jem 400;
    }
-   page 14;
+   lipu 14;
 }
 
 /* Cyber-Demon */
-page 2 {
-   jsr page 15;
-   if class pM {
+lipu 2 {
+   jsr lipu 15;
+   seme poki pM {
       image ":End:Stan:CyberDemon";
       fade_in 50;
       crawl CyberDemon_Stan 400;
-   } else if class pC {
+   } ante seme poki pC {
       image ":End:Jem:CyberDemon";
       fade_in 50;
       crawl CyberDemon_Jem 400;
    }
-   page 14;
+   lipu 14;
 }
 
 /* Spider-Demon */
-page 3 {
-   jsr page 15;
-   if class pM {
+lipu 3 {
+   jsr lipu 15;
+   seme poki pM {
       image ":End:Stan:SpiderDemon";
       fade_in 50;
       crawl SpiderDemon_Stan 400;
-   } else if class pC {
+   } ante seme poki pC {
       image ":End:Jem:SpiderDemon";
       fade_in 50;
       crawl SpiderDemon_Jem 400;
    }
-   page 14;
+   lipu 14;
 }
 
 /* Icon of Sin */
-page 4 {
-   jsr page 15;
-   if class pM {
+lipu 4 {
+   jsr lipu 15;
+   seme poki pM {
       image ":End:Stan:IconOfSin";
       fade_in 50;
       crawl IconOfSin_1_Stan 900;
@@ -99,7 +99,7 @@ page 4 {
       crawl IconOfSin_5_Stan 700;
       crawl IconOfSin_6_Stan 700;
       crawl IconOfSin_7_Stan 400;
-   } else if class pC {
+   } ante seme poki pC {
       image ":End:Jem:IconOfSin";
       fade_in 50;
       crawl IconOfSin_1_Jem 600;
@@ -112,43 +112,43 @@ page 4 {
       crawl IconOfSin_8_Jem 600;
       crawl IconOfSin_9_Jem 400;
    }
-   page 14;
+   lipu 14;
 }
 
 /* Time-Out */
-page 5 {
+lipu 5 {
    music "lmusic/asdfn2.ogg";
    image "HELP";
    fade_in 10;
    crawl TimeOut_1 900;
-   page 14;
+   lipu 14;
 }
 
 /* Division */
-page 6 {
+lipu 6 {
    music "lmusic/siarani.ogg";
    fade_in 10;
    crawl DivisionSigil 900;
-   page 14;
+   lipu 14;
 }
 
 /* Other */
-page 7 {
-   jsr page 15;
-   if class pM {
+lipu 7 {
+   jsr lipu 15;
+   seme poki pM {
       image ":End:Stan:Other";
       fade_in 50;
       crawl Other_Stan 400;
-   } else if class pC {
+   } ante seme poki pC {
       image ":End:Jem:Other";
       fade_in 50;
       crawl Other_Jem 400;
    }
-   page 14;
+   lipu 14;
 }
 
 /* Common */
-page 14 {
+lipu 14 {
    fade_out 100;
    image "TITLEPIC";
    music "lmusic/crucifying.opus";

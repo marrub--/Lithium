@@ -64,7 +64,7 @@ void Dlg_GetStmt_Cond(struct compiler *d) {
    u32  else_ptr;
 
    tok = d->tb.get();
-   if(TokIsKw(tok, "else")) {
+   if(TokIsKw(tok, "else") || TokIsKw(tok, "ante")) {
       Dlg_PushB1(d, DCD_JMP_AI); unwrap(&d->res);
       Dlg_PushB2(d, 0); unwrap(&d->res);
       else_ptr = d->def.codeP;

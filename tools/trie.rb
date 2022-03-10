@@ -59,11 +59,12 @@ def mk_trie_code defs, node, idx = 0, indent = 1, res = String.new, word = Strin
       end
 
       if child.terminal?
-         en = word.clone
+         al = defs[:aliases] && defs[:aliases][word.to_sym]
+         en = al || word.clone
 
          if pfx
             en.prepend pfx
-            ENUMS.push en unless defs[:enum]
+            ENUMS.push en unless defs[:enum] || al
          end
 
          res.concat "#{ind indent + 1}return #{en};\n"
@@ -89,8 +90,11 @@ common_main do
    hsh = YAML.load(STDIN.read, symbolize_names: true)
 
    for func, defs in hsh
+      words = []
+      defs[:words]   && defs[:words].each        do |k| words << k      end
+      defs[:aliases] && defs[:aliases].keys.each do |k| words << k.to_s end
       trie = Rambling::Trie.create
-      trie.concat defs[:words]
+      trie.concat words.sort
       trie.compress!
       code = mk_trie_code defs, trie.children
       func = "stkcall\ni32 #{func}(register cstr s)"

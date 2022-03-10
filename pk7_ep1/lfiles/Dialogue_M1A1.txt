@@ -6,12 +6,12 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-terminal 1;
+ilo 1;
 
-unfinished {
+awen {
    remote OCS;
 
-   if class pC {
+   seme poki pC {
       logon "LogonAOF" text AOF;
 
       pict 1 text M1A1_01_C_01;
@@ -19,7 +19,7 @@ unfinished {
       pict 1 text M1A1_01_C_03;
 
       logoff "LogonAOF" text AOF;
-   } else {
+   } ante {
       logon "UAC" text UAC;
 
       pict 1 text M1A1_01_M_01;
@@ -29,9 +29,9 @@ unfinished {
    }
 }
 
-terminal 2;
+ilo 2;
 
-unfinished {
+awen {
    remote DATA;
 
    logon "LogonData" text DATA;
@@ -43,18 +43,18 @@ unfinished {
    teleport_intralevel 4;
 }
 
-terminal 3;
+ilo 3;
 
-unfinished {
+awen {
    remote OCS;
 
-   if class pC {
+   seme poki pC {
       logon "LogonAOF" text AOF;
 
       pict 3 text M1A1_03_C_01;
 
       logoff "LogonAOF" text AOF;
-   } else {
+   } ante {
       logon "UAC" text UAC;
 
       pict 1 text M1A1_03_M_01;

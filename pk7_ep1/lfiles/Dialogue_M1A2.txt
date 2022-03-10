@@ -6,19 +6,19 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-terminal 1;
+ilo 1;
 
-unfinished {
+awen {
    remote OCS;
 
-   if class pC {
+   seme poki pC {
       logon "LogonAOF" text AOF;
 
       pict 1 text M1A2_01_C_01;
       pict 1 text M1A2_01_C_02;
 
       logoff "LogonAOF" text AOF;
-   } else {
+   } ante {
       logon "UAC" text UAC;
 
       pict 3 text M1A2_01_M_01;
@@ -29,9 +29,9 @@ unfinished {
    script "Lith_UnlockVents";
 }
 
-terminal 2;
+ilo 2;
 
-unfinished {
+awen {
    remote DATA;
 
    logon "LogonData" text DATA;
@@ -42,9 +42,9 @@ unfinished {
    logoff "LogonData" text DATA;
 }
 
-terminal 3;
+ilo 3;
 
-unfinished {
+awen {
    remote DATA;
 
    logon "LogonData" text DATA;
@@ -54,43 +54,43 @@ unfinished {
    logoff "LogonData" text DATA;
 }
 
-dialogue 1;
+toki 1;
 
-page 0 {
+lipu 0 {
    icon   "Maxie";
    remote HIDDEN;
 
    text M1A2_01_00;
 
-   option M1A2_01_00_01 page 1;
-   option M1A2_01_00_02 page 2;
+   option M1A2_01_00_01 lipu 1;
+   option M1A2_01_00_02 lipu 2;
    option M1A2_01_00_03 brk;
 }
 
-page 1 {
+lipu 1 {
    name   "Maxie";
    remote MAXIE;
 
    text M1A2_01_01;
 
-   option M1A2_01_01_01 page 3;
+   option M1A2_01_01_01 lipu 3;
 }
 
-page 2 {
+lipu 2 {
    text M1A2_01_02;
 
-   option M1A2_01_02_01 page 3;
+   option M1A2_01_02_01 lipu 3;
    option M1A2_01_02_02 brk;
 }
 
-page 3 {
+lipu 3 {
    text M1A2_01_03;
 
-   option M1A2_01_03_01 page 4;
+   option M1A2_01_03_01 lipu 4;
    option M1A2_01_03_02 brk;
 }
 
-page 4 {
+lipu 4 {
    text M1A2_01_04;
 
    option M1A2_01_04_01 brk;

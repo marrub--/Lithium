@@ -37,11 +37,18 @@ Dlg_TopLevelName:
       - dialogue
       - program
       - terminal
+   aliases:
+      lipu_ilo: program
+      ilo:      terminal
+      toki:     dialogue
 Dlg_CondName:
    prefix: _dlg_cond_
    words:
       - class
       - item
+   aliases:
+      ijo:  item
+      poki: class
 Dlg_StmtName:
    prefix: _dlg_stmt_
    words:
@@ -66,6 +73,9 @@ Dlg_StmtName:
       - teleport_intralevel
       - text
       - wait
+   aliases:
+      seme: if
+      lipu: page
 Dlg_ItemName:
    prefix: _dlg_item_
    words:
@@ -73,6 +83,11 @@ Dlg_ItemName:
       - finished
       - page
       - unfinished
+   aliases:
+      pakala: failure
+      pini:   finished
+      lipu:   page
+      awen:   unfinished
 P_ClassToInt:
    words: [
       #define pclass_x(shr, lng, eq) shr, lng,
@@ -113,6 +128,8 @@ MonInfo_TopLevelName:
    prefix: _moninfo_toplevel_
    words:
       - presets
+   aliases:
+      tan: presets
 Upgr_StrToEnum:
    enum: UPGR_
    words: [
