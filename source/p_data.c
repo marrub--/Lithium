@@ -311,7 +311,7 @@ void P_Init(void) {
    if(!pl.invinit) P_Inv_PInit();
 
    if(!pl.wasinit) {
-      pl.logH(1, tmpstr(lang(sl_log_version)), VersionName, __DATE__);
+      pl.logH(1, tmpstr(lang(sl_log_version)), vernam, __DATE__);
 
       #ifndef NDEBUG
       if(dbglevel_any()) {

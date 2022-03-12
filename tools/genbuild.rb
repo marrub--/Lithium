@@ -88,6 +88,7 @@ end
       SrcsEnt.from("m_str.c"),
       SrcsEnt.from("m_tokbuf.c"),
       SrcsEnt.from("m_token.c"),
+      SrcsEnt.from("m_version.c"),
       SrcsEnt.from("p_attrib.c"),
       SrcsEnt.from("p_bip.c"),
       SrcsEnt.from("p_cbi.c"),

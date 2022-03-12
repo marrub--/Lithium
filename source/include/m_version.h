@@ -10,29 +10,46 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-#define MakeVer(major, minor, patch, build) \
-   (major * 1000000 + \
-    minor *   10000 + \
-    patch *     100 + \
-    build)
-#define VersionName "1.7.0 DEV (Yttrium Oxide)"
-#define Ver1_0_0   10.0k  /* Lithium */
-#define Ver1_1_0   11.0k  /* Lithium Chloride */
-#define Ver1_2_0   12.0k  /* Lithium Carbonate */
-#define Ver1_3_0   13.0k  /* Zabuyelite */
-#define Ver1_3_1   13.1k  /* LITHIUM - Hell Knights Insist On Dying */
-#define Ver1_4_0   14.0k  /* Lumate */
-#define Ver1_5_0a  15.01k /* Pegmatite */
-#define Ver1_5_0a2 15.02k /* Pegmatite */
-#define Ver1_5_0b  15.03k /* Pegmatite */
-#define Ver1_5_0   15.04k /* Pegmatite */
-#define Ver1_5_1   15.1k  /* Rubellite Pegmatite */
-#define Ver1_5_2   15.2k  /* Rubellite Pegmatite */
-#define Ver1_5_3   15.3k  /* Indicolite Pegmatite */
-#define Ver1_6_0   16.0k  /* Hyper-Dilithium */
-#define Ver1_6_1   16.1k  /* Hyper-Trilithium */
-#define Ver1_6_2   16.2k  /* Trilithionite */
-#define Ver1_6_3   16.3k  /* Trilithionite Red */
-#define Ver1_7_0   MakeVer(1, 7, 0, 0) /* Yttrium Oxide */
+#define VerNum(maj, min, pat, bui, bna, nam) \
+   (maj * 1000000 + \
+    min *   10000 + \
+    pat *     100 + \
+    bui)
+#define VerNam(maj, min, pat, bui, bna, nam) \
+   #maj "." #min "." #pat bna " (" nam ")"
+#define VerStr(maj, min, pat, bui, bna, nam) \
+   #maj "." #min "." #pat bna
+
+#ifdef VERSION
+VERSION(1, 0, 0, 0, "",   "Lithium")
+VERSION(1, 1, 0, 0, "",   "Lithium Chloride")
+VERSION(1, 2, 0, 0, "",   "Lithium Carbonate")
+VERSION(1, 3, 0, 0, "",   "Zabuyelite")
+VERSION(1, 3, 1, 0, "",   "LITHIUM - Hell Knights Insist On Dying")
+VERSION(1, 4, 0, 0, "",   "Lumate")
+VERSION(1, 5, 0, 0, "a",  "Pegmatite")
+VERSION(1, 5, 0, 1, "a2", "Pegmatite")
+VERSION(1, 5, 0, 2, "b",  "Pegmatite")
+VERSION(1, 5, 0, 3, "",   "Pegmatite")
+VERSION(1, 5, 1, 0, "",   "Rubellite Pegmatite")
+VERSION(1, 5, 2, 0, "",   "Rubellite Pegmatite")
+VERSION(1, 5, 3, 0, "",   "Indicolite Pegmatite")
+VERSION(1, 6, 0, 0, "",   "Hyper-Dilithium")
+VERSION(1, 6, 1, 0, "",   "Hyper-Trilithium")
+VERSION(1, 6, 2, 0, "",   "Trilithionite")
+VERSION(1, 6, 3, 0, "",   "Trilithionite Red")
+VERSION(1, 7, 0, 0, "b",  "Yttrium Oxide")
+#undef VERSION
+#else
+#define VERSION(maj, min, pat, bui, bna, nam) \
+   extern i32  vernum_##maj##_##min##_##pat##_##bui; \
+   extern cstr vernam_##maj##_##min##_##pat##_##bui; \
+   extern cstr verstr_##maj##_##min##_##pat##_##bui;
+#include "m_version.h"
+i32 version_name_to_num(cstr s);
+#define vernum vernum_1_7_0_0
+#define vernam vernam_1_7_0_0
+#define verstr verstr_1_7_0_0
+#endif
 
 /* EOF */

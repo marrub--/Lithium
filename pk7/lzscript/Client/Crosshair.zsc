@@ -26,7 +26,7 @@ static clearScope textureId xhairB() {
       ":XHairs:basicb",  ":XHairs:delearb", ":XHairs:finib",
       ":XHairs:angleb",  ":XHairs:dotb",    ":XHairs:xpb"
    };
-   return getTextureForName(XB_GFX[clamp(lith_xhair_style, 0, XB_GFX.size())]);
+   return getTextureForName(XB_GFX[clamp(lith_xhair_style, 0, XB_GFX.size()-1)]);
 }
 
 static clearScope textureId xhairW() {
@@ -36,7 +36,7 @@ static clearScope textureId xhairW() {
       ":XHairs:basicw",  ":XHairs:delearw", ":XHairs:finiw",
       ":XHairs:anglew",  ":XHairs:dotw",    ":XHairs:xpw"
    };
-   return getTextureForName(XW_GFX[clamp(lith_xhair_style, 0, XW_GFX.size())]);
+   return getTextureForName(XW_GFX[clamp(lith_xhair_style, 0, XW_GFX.size()-1)]);
 }
 
 private ui void drawCrosshair(RenderEvent evt) {

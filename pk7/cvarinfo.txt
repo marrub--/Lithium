@@ -6,8 +6,6 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-server float __lith_version;
-
 server noarchive string __lith_end;
 server nosave    int    __lith_fun;
 

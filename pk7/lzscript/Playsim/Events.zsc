@@ -6,17 +6,6 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-/* FINAL: Fuck Inconsistent Naming of Acroynms, Ligma */
-class Lith_FINAL : StaticEventHandler {
-   override void worldLoaded(WorldEvent ev) {
-      if(ev.isSaveGame) {
-         if(__lith_fun != Lith_HERMES.instance().m_latchFun) {
-            CallACS("Lith_TimelineInconsistent");
-         }
-      }
-   }
-}
-
 extend class Lith_HERMES;
 
 private array<Actor> m_bossBabies;
@@ -25,8 +14,11 @@ int m_latchFun;
 
 static int GetBossLevel() {return Instance().m_bossLevel;}
 
-override void WorldLoaded(WorldEvent ev)
-{
+bool checkLatches() {
+   return __lith_fun != m_latchFun;
+}
+
+override void WorldLoaded(WorldEvent ev) {
    if(!ev.isSaveGame) {
       m_latchFun = __lith_fun;
    }

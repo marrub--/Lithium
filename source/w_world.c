@@ -78,38 +78,26 @@ void CheckModCompat(void) {
 }
 
 static
-bool updateTo(k32 to) {
-   k32 cur = CVarGetK(sc_version);
-   if(cur < to) {
-      CVarSetK(sc_version, to);
-      return true;
-   } else {
-      return false;
-   }
-}
-
-static
 void UpdateGame(void) {
-   if(updateTo(Ver1_5_2)) {
-      CVarSetI(sc_sv_difficulty, 10); /* 1 => 10 */
+   i32 ver_num = version_name_to_num(tmpstr(CVarGetS(sc_version)));
+
+   if(ver_num < vernum_1_5_2_0 && CVarGetI(sc_sv_difficulty) == 1) {
+      CVarSetI(sc_sv_difficulty, 10);
    }
 
-   if(updateTo(Ver1_6_0)) {
-      CVarSetK(sc_player_footstepvol, 0.2); /* 1.0 => 0.2 */
+   if(ver_num < vernum_1_6_0_0 && CVarGetK(sc_player_footstepvol) == 1.0k) {
+      CVarSetK(sc_player_footstepvol, 0.2k);
    }
 
-   if(updateTo(Ver1_6_1)) {
-      CVarSetK(sc_weapons_zoomfactor, 1.5); /* 3.0 => 1.5 */
+   if(ver_num < vernum_1_6_1_0 && CVarGetK(sc_weapons_zoomfactor) == 3.0k) {
+      CVarSetK(sc_weapons_zoomfactor, 1.5);
    }
 
-   if(updateTo(Ver1_7_0)) {
-      /* unfortunate, but we forgot to add this for 1.6.3. so, we'll fix it in
-       * version 1.7 instead.
-       */
-      if(CVarGetI(sc_xhair_style) >= 10) {
-         CVarSetI(sc_xhair_style, 0);
-      }
+   if(ver_num < vernum_1_6_3_0 && CVarGetI(sc_xhair_style) >= 10) {
+      CVarSetI(sc_xhair_style, 0);
    }
+
+   CVarSetS(sc_version, fast_strdup(verstr));
 }
 
 static
