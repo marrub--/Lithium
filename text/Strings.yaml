@@ -216,6 +216,7 @@ sm_:
    - Set
    - SetFrozen
    - SetTeleFogTo
+   - SetVersion
    - SpawnBoss
    - SpawnRain
    - Speed: m_speed

@@ -80,6 +80,7 @@ enum Lith_ScriptNum {
    lsc_worldopen,
    lsc_drawcr,
    lsc_cheatinput,
+   lsc_versionname,
    
    
 

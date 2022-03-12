@@ -11,6 +11,7 @@
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
 #include "common.h"
+#include "w_world.h"
 #include "m_version.h"
 
 #define VERSION(maj, min, pat, bui, bna, nam) \
@@ -49,6 +50,11 @@ i32 version_name_to_num(cstr s) {
       }
    #include "m_version.h"
    return vernum;
+}
+
+script ext("ACS") addr(lsc_versionname)
+void Sc_VersionName(void) {
+   DrawCallV(sm_SetVersion, fast_strdup(vernam));
 }
 
 /* EOF */

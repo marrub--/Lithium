@@ -101,6 +101,17 @@ class ListMenuItemLith_CreditsMenuScroll : ListMenuItemTextItem {
    }
 }
 
+class ListMenuItemLith_VersionName : ListMenuItem {
+   void init(ListMenuDescriptor desc, double x, double y) {
+      super.init(x, y);
+   }
+
+   override void draw(bool selected, ListMenuDescriptor desc) {
+      let ver = Lith_URANUS.instance().getVersion();
+      drawText(desc, desc.mFont, Font.CR_WHITE, mXPos, mYPos, ver, false);
+   }
+}
+
 class Lith_CreditsMenu : ListMenu {
    array<BrokenLines> m_sections;
    int                m_sectionTic;
@@ -168,6 +179,18 @@ extend class Lith_URANUS;
 private transient ui int              m_screenDim;
 private transient ui Shape2DTransform m_menuRectXf;
 private transient ui Shape2D          m_menuRect;
+private transient ui string           m_versionName;
+
+static ui void setVersion(string s) {
+   instance().m_versionName = s;
+}
+
+ui string getVersion() {
+   if(m_versionName.length() == 0) {
+      acs_executeWithResult(lsc_versionname);
+   }
+   return m_versionName;
+}
 
 private ui void tickMenu() {
    if(!(menuDelegate is "Lith_MenuDelegate")) {

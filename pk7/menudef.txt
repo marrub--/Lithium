@@ -34,7 +34,7 @@ listMenu "MainMenu" {
    textItem "$MENU_QUITG",  "q", "QuitMenu"
 
    font "smallfont", "White", "White"
-   staticText 0, 0, "Version 1.7.0 DEV"
+   lith_versionName 0, 0
 }
 
 listMenu "PlayerclassMenu" {
@@ -70,8 +70,8 @@ listMenu "CreditsMenu" {
    position 48,  64
    font     "ltrmfont", "Lith_Green", "White"
 
-   Lith_CreditsMenuScroll "$LITH_LEFT",  "l", 0
-   Lith_CreditsMenuScroll "$LITH_RIGHT", "r", 1
+   lith_creditsMenuScroll "$LITH_LEFT",  "l", 0
+   lith_creditsMenuScroll "$LITH_RIGHT", "r", 1
 }
 
 /* EOF */

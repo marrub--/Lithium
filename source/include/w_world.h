@@ -104,6 +104,7 @@ enum ZscName(ScriptNum) {
    lsc_worldopen,
    lsc_drawcr,
    lsc_cheatinput,
+   lsc_versionname,
    #define w_setptr_x(x) lsc_setptr##x,
    #include "w_world.h"
 };
