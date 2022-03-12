@@ -325,11 +325,12 @@ perced to the rooten.
 == \#PK_d_kampilan_002 | Scrumbilan
 == \#PK_d_kampilan_003 | Sprumpilun
 
-== \#PK_d_khanda_NUM | 3
+== \#PK_d_khanda_NUM | 4
 == \#PK_d_khanda_000 | Kanda
 == \#PK_d_khanda_001 | Cornda
 == \#PK_d_khanda_002 | Kramduh
 == \#PK_d_khanda_003 | Cranda
+== \#PK_d_khanda_004 | Candy
 
 == \#PK_d_700e_NUM | 4
 == \#PK_d_700e_000 | 700 Sexpress
@@ -337,6 +338,36 @@ perced to the rooten.
 == \#PK_d_700e_002 | 7 Binbus
 == \#PK_d_700e_003 | Barbro Bexbess
 == \#PK_d_700e_004 | Beven Bundred Bexpress
+
+== \#PK_d_shrapnel_NUM | 3
+== \#PK_d_shrapnel_000 | Shart Gun
+== \#PK_d_shrapnel_001 | Sharpel Gun
+== \#PK_d_shrapnel_002 | Shapiro Gun
+== \#PK_d_shrapnel_003 | Shetnel Gnu
+
+== \#PK_d_4bore_NUM | 3
+== \#PK_d_4bore_000 | Hunting Shunting
+== \#PK_d_4bore_001 | Hotgun Shotgun
+== \#PK_d_4bore_002 | Huntimg Shortgun
+== \#PK_d_4bore_003 | Honter Gun
+
+== \#PK_d_drocket_NUM | 3
+== \#PK_d_drocket_000 | Frank & Soph
+== \#PK_d_drocket_001 | Bonnie & Clyde
+== \#PK_d_drocket_002 | Frunklie & Scrunklie
+== \#PK_d_drocket_003 | Fuck & Suck
+
+== \#PK_d_fortune_NUM | 3
+== \#PK_d_fortune_000 | Fuck-you-ity
+== \#PK_d_fortune_001 | ForCHEWity
+== \#PK_d_fortune_002 | Literally Fortune's Railgun
+== \#PK_d_fortune_003 | Unlucky Fuck
+
+== \#PK_d_rems_NUM | 3
+== \#PK_d_rems_000 | Qasl 666-4 Rems (Satanic)
+== \#PK_d_rems_001 | Qask Rims
+== \#PK_d_rems_002 | Quack Rums
+== \#PK_d_rems_003 | Cackling Rems
 
 == \#PK_d_minigun_NUM | 5
 == \#PK_d_minigun_000 | Mnegbun
