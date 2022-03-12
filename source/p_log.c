@@ -171,6 +171,8 @@ void P_CBI_TabLog(struct gui_state *g) {
    static
    i32 const ht = 10;
 
+   i32 logsel_last = CBIState(g)->logsel;
+
    if(G_Button(g, .x = 12, 25, Pre(btnprev))) {
       if(--CBIState(g)->logsel < 0) {
          CBIState(g)->logsel = log.mapsC - 1;
@@ -181,6 +183,10 @@ void P_CBI_TabLog(struct gui_state *g) {
       if(++CBIState(g)->logsel >= log.mapsC) {
          CBIState(g)->logsel = 0;
       }
+   }
+
+   if(CBIState(g)->logsel != logsel_last) {
+      G_ScrollReset(g, &CBIState(g)->logscr);
    }
 
    struct logmap *lm = &log.mapsV[CBIState(g)->logsel];
