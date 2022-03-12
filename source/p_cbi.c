@@ -21,10 +21,12 @@ gtab_t tn[5];
 
 static
 void P_CBI_TabArsenal(struct gui_state *g) {
-   faststrcpy_str(tn[0], ns(lang(sl_tab_upgrades)));
-   faststrcpy_str(tn[1], ns(lang(sl_tab_shop)));
+   if(pl.pclass & pcl_outcasts) {
+      faststrcpy_str(tn[0], ns(lang(sl_tab_upgrades)));
+      faststrcpy_str(tn[1], ns(lang(sl_tab_shop)));
 
-   G_Tabs(g, &CBIState(g)->arsetab, tn, 2, 0, 0, 1);
+      G_Tabs(g, &CBIState(g)->arsetab, tn, 2, 0, 0, 1);
+   }
 
    switch(CBIState(g)->arsetab) {
    case cbi_tab_arsenal_upgrades: P_CBI_TabUpgrades(g); break;
