@@ -98,6 +98,10 @@ void P_CBI_TabCBI(struct gui_state *g) {
    switch(pl.pclass) {
    case pcl_marine:    CBITab_Marine   (g); break;
    case pcl_cybermage: CBITab_CyberMage(g); break;
+   default:
+      PrintTextChL("not implemented");
+      PrintText(sf_smallfnt, rainbowcr(), g->ox+7,1, g->oy+47,1);
+      break;
    }
 }
 

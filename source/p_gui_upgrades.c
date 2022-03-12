@@ -198,15 +198,10 @@ void GUIUpgradeDescription(struct gui_state *g, struct upgrade *upgr) {
       ACS_PrintString(effect);
    }
 
-   static
-   i32 const crs[] = {
-      CR_RED, CR_ORANGE, CR_YELLOW, CR_GREEN, CR_BLUE, CR_PURPLE, CR_DARKRED
-   };
-
    i32 cr = g->defcr;
 
    if(upgr->key == UPGR_UNCEUNCE) {
-      cr = crs[ACS_Timer() / 4 % countof(crs)];
+      cr = rainbowcr();
    }
 
    PrintText(sf_smallfnt, cr, g->ox+98,1, g->oy+37,1);
