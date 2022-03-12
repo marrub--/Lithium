@@ -201,6 +201,7 @@ void HInit(void) {
    if(Cluster >= 7) P_BIP_Unlock(P_BIP_NameToPage("MCluster2"), false);
    if(Cluster == 8) P_BIP_Unlock(P_BIP_NameToPage("MCluster3"), false);
 
+   /* CBI */
    if(CVarGetI(sc_sv_nobosses) ||
       CVarGetI(sc_sv_nobossdrop) ||
       dbgflags(dbgf_items))
@@ -209,6 +210,8 @@ void HInit(void) {
          CBI_Install(i);
       }
    }
+
+   CBI_InstallSpawned();
 }
 
 dynam_aut script ext("ACS") addr(lsc_worldopen)
@@ -348,8 +351,6 @@ script type("unloading") static
 void Sc_WorldUnload(void) {
    unloaded = true;
    Dbg_Log(log_dev, "%s", __func__);
-
-   CBI_InstallSpawned();
 
    pl.setActivator();
    P_Upg_PDeinit();

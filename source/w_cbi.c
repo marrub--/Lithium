@@ -15,7 +15,7 @@
 #include "p_player.h"
 
 static
-i32 lmvar cbispawn;
+i32 cbispawn;
 
 static
 struct cupgdef {
@@ -93,7 +93,6 @@ void CBI_InstallSpawned(void) {
          CBI_Install(i);
       }
    }
-   cbispawn = 0;
 }
 
 script_str ext("ACS") addr(OBJ "CbiItemWasSpawned")
