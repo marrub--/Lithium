@@ -16,7 +16,7 @@ defaultOptionMenu {
    position -15
 }
 
-listMenu "MainMenu" {
+listMenu "MainMenuTextOnly" {
    staticPatch 190, 10, "lgfx/Menu/Title.png"
    position    30, 90
 
@@ -38,14 +38,10 @@ listMenu "MainMenu" {
 }
 
 listMenu "PlayerclassMenu" {
-   class "Lith_PlayerclassMenu"
-
-   staticTextCentered 160, 30, "$MENU_CHOOSECLASS"
-   position           14, 55
+   class              "Lith_PlayerclassMenu"
    font               "ltrmfont"
-   staticPatch        4, 48, "lgfx/Menu/ClassBack.png"
-   staticPatch        100, 50, "lgfx/Menu/ClassDescBack.png"
-   playerDisplay      117, 65, "00 00 00", "00 FF 00"
+   position           14, 55
+   lith_playerDisplay 0, 0, "00 00 00", "00 FF 00"
 }
 
 listMenu "EpisodeMenu" {
@@ -53,7 +49,8 @@ listMenu "EpisodeMenu" {
    staticTextCentered  160, 30, "$MENU_WHICHEPISODE"
    staticPatchCentered 42, 48, "lgfx/Menu/EpisodeBack.png"
    position            48, 53
-   font                "bigupper", "Lith_Green", "White"
+   font                "ltrmfont", "Lith_Green", "White"
+   lineSpacing         9
 }
 
 listMenu "SkillMenu" {
@@ -62,6 +59,7 @@ listMenu "SkillMenu" {
    staticPatchCentered 42, 48, "lgfx/Menu/EpisodeBack.png"
    position            48, 53
    font                "bigupper", "Lith_Green", "White"
+   lineSpacing         30
 }
 
 listMenu "CreditsMenu" {

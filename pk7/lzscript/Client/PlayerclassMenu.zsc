@@ -6,6 +6,24 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
+class ListMenuItemLith_PlayerDisplay : ListMenuItemPlayerDisplay {
+   void init(ListMenuDescriptor menu, int x, int y, color c1, color c2) {
+      super.init(menu, x, y, c1, c2);
+   }
+
+   override void draw(bool selected, ListMenuDescriptor desc) {
+      if(mMode == 0 && updatePlayerClass()) {
+         let pcl = getDefaultByType((class<PlayerPawn>)(mPlayerClass.type));
+         let por = Lith_URANUS.getTextureForName(":Portraits:" .. pcl.soundclass);
+         int porx, pory; [porx, pory] = TexMan.getSize(por);
+         drawTexture(desc, por, 320 - porx, (240 - pory) / 2);
+         super.draw(selected, desc);
+      }
+      screen.drawTexture(Lith_URANUS.getTextureForName(":Menu:ClassBack"), true, 4, 48, DTA_Alpha, 0.5, DTA_Clean, true);
+      screen.drawTexture(Lith_URANUS.getTextureForName(":Menu:ClassDescBack"), true, 100, 126, DTA_Alpha, 0.5, DTA_Clean, true);
+   }
+}
+
 class Lith_PlayerclassMenu : ListMenu;
 
 override void Init(Menu parent, ListMenuDescriptor desc) {
@@ -30,12 +48,12 @@ override void Drawer() {
       let cr  = Font.FindFontColor(col);
       Font bigf = menuDelegate.pickFont("bigupper");
       Font smlf = menuDelegate.pickFont("ltrmfont");
-      Screen.DrawText(bigf, cr, 168, 59,  txt, DTA_Clean, true);
-      Screen.DrawText(smlf, cr, 168, 73,  nam, DTA_Clean, true);
+      Screen.DrawText(bigf, cr, 168, 75+59,  txt, DTA_Clean, true);
+      Screen.DrawText(smlf, cr, 168, 75+73,  nam, DTA_Clean, true);
       if(cr == Font.CR_BLACK) {
-         Screen.DrawText(smlf, cr, 176, 81, "NOT IMPLEMENTED", DTA_Clean, true);
+         Screen.DrawText(smlf, cr, 176, 75+81, "NOT IMPLEMENTED", DTA_Clean, true);
       }
-      Screen.DrawText(smlf, cr, 104, 108, dsc, DTA_Clean, true);
+      Screen.DrawText(smlf, cr, 104, 75+108, dsc, DTA_Clean, true);
    }
 }
 

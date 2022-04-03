@@ -47,6 +47,8 @@ gameinfo {
    BorderFlat     = "lgfx/Menu/Black.png"
    PauseSign      = "lgfx/Menu/Pause.png"
    MenuBackButton = "lgfx/Menu/BackUp.png"
+
+   ForceTextInMenus = true
 }
 
 automap {
@@ -64,21 +66,6 @@ automap {
 
 clearskills
 
-skill normal {
-   ACSReturn   = 0
-   Key         = "h"
-   Name        = "$DIFF_NORMAL"
-   SpawnFilter = 3
-   DefaultSkill
-}
-
-skill hard {
-   ACSReturn   = 1
-   Key         = "u"
-   Name        = "$DIFF_HARD"
-   SpawnFilter = 4
-}
-
 skill tourist {
    ACSReturn      = 2
    Aggressiveness = -0.3
@@ -93,6 +80,21 @@ skill tourist {
    EasyBossBrain
    EasyKey
    TotalInfighting
+}
+
+skill normal {
+   ACSReturn   = 0
+   Key         = "h"
+   Name        = "$DIFF_NORMAL"
+   SpawnFilter = 3
+   DefaultSkill
+}
+
+skill hard {
+   ACSReturn   = 1
+   Key         = "u"
+   Name        = "$DIFF_HARD"
+   SpawnFilter = 4
 }
 
 skill nightmare {

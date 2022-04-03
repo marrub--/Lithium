@@ -13,7 +13,6 @@ class Lith_DarkLordPlayer : Lith_Player {
       Player.AttackZOffset 17;
       Player.DisplayName "$LITH_CLASS_DARKLORD";
       Player.MaxHealth 150;
-      Player.Portrait "lgfx/Portraits/DarkLord.png";
       Player.SoundClass "darklord";
       Player.ViewHeight 50;
       Tag "$LITH_CLASS_DARKLORD";

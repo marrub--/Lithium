@@ -14,6 +14,7 @@ default {
    Player.ForwardMove 2, 1;
    Player.AirCapacity 0;
    Player.GruntSpeed 16;
+   Player.Portrait "TNT1A0";
    Species "Lith_Player";
    Lith_Player.ViewBob 1;
 

@@ -20,15 +20,15 @@ map M1A2 "The Ash Is Burning" {
 }
 
 episode M1A1 {
-   Name = "∞¹ - Nanto Naku"
+   Name = "Nanto Naku"
 }
 
 episode M2A1 {
-   Name = "∞² - Era"
+   Name = "Era"
 }
 
 episode M3A1 {
-   Name = "ℵ₀ - F.S.S."
+   Name = "F.S.S."
 }
 
 /* EOF */
