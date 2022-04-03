@@ -7,7 +7,6 @@
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
 #include "lzscript/People/Base.zsc"
-#include "lzscript/People/AdvMarine.zsc"
 #include "lzscript/People/People.zsc"
 
 /* EOF */

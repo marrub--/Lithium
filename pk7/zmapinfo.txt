@@ -111,9 +111,6 @@ skill nightmare {
 
 map TITLEMAP "Lithium Title" {
    LevelNum = 1888001
-   Sky1 = "LITHSKRD", 0.05
-   Sky2 = "LITHSKS1"
-   DoubleSky
 }
 
 map TESTMAP "Test Map" {
@@ -147,13 +144,6 @@ doomednums {
    22433 = Lith_AdviceMarker
    22434 = Lith_MapMarker
    22435 = Lith_Person_Maxie
-}
-
-spawnnums {
-   22420 = Lith_AdvMarine
-   22421 = Lith_TitleCyberdemon
-   22422 = Lith_TitleHellKnight
-   22423 = Lith_TitleImp
 }
 
 intermission Inter_Bunny       {}

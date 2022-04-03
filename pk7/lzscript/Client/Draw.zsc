@@ -368,6 +368,7 @@ static clearScope textureId getTextureForName(string tex) {
 
 override void onRegister() {
    projectRegister();
+   checkEnglish();
 }
 
 override void worldUnloaded(WorldEvent evt) {
@@ -380,8 +381,6 @@ static ui void drawRect(int sx, int sy, int px, int py, color cr) {
 }
 
 override void worldTick() {
-   m_English = Lith_HERMES.localize("LITH_CHECK") == "Eng";
-
    switch(lith_gui_jpfont) {
    default:
    case font_misaki_gothic: m_UFntSml = "MisakiG";  break;
@@ -646,6 +645,10 @@ Font fntAny(name name, bool noUnicode = false) const {
    else if(name == 'ltrmfont') return fntTrm(noUnicode);
    else if(name == 'bigupper') return fntBig(noUnicode);
    else                        return Font.getFont(name);
+}
+
+void checkEnglish() {
+   m_English = Lith_HERMES.localize("LITH_CHECK") == "Eng";
 }
 
 /* EOF */

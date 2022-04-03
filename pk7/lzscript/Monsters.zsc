@@ -43,8 +43,6 @@
 #include "lzscript/Monsters/Lithium/6_Makarov.zsc"
 #include "lzscript/Monsters/Lithium/6_Michael.zsc"
 
-#include "lzscript/Monsters/Lithium/TitleMap.zsc"
-
 class Lith_UniqueID : Inventory
 {
    default
