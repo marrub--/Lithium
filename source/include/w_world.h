@@ -50,8 +50,8 @@ enum ZscName(WData) {
 enum ZscName(Fun) {
    lfun_ragnarok = 1 << 0,
    lfun_bips     = 1 << 1,
-   lfun_final    = 1 << 2,
-   lfun_division = 1 << 3,
+   lfun_division = 1 << 2,
+   lfun_tainted  = 1 << 3,
 };
 
 enum ZscName(BossRewardNum) {
@@ -151,7 +151,7 @@ enum {
    cupg_c_slot5spell,
    cupg_c_slot6spell,
    cupg_c_slot7spell,
-   cupg_d_ruzuk,
+   cupg_d_motra,
    cupg_d_zaruk,
    cupg_d_zakwu,
    cupg_d_zikr,
@@ -218,7 +218,7 @@ extern i32 mapseed;
 extern bool unloaded;
 extern bool lmvar islithmap;
 extern i32 secretsfound;
-extern u64 ticks;
+extern i32 ticks;
 extern i32 soulsfreed;
 extern bool bossspawned;
 extern i32 cbiperf;
@@ -236,7 +236,7 @@ extern struct polar a_angles[8];
 extern i32 a_cur;
 
 void Scr_HInit(void);
-cstr CanonTime(i32 type, u64 time);
+cstr CanonTime(i32 type, i32 time);
 optargs(1) i32 UniqueID(i32 tid);
 void BeginAngles(i32 x, i32 y);
 k32 AddAngle(i32 x, i32 y);

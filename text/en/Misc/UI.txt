@@ -79,7 +79,7 @@
 == \#STATUS_NX | Next
 == \#STATUS_CL | Class
 
-== \#STATUS_LEVELUP | Divide %u points among your attributes.
+== \#STATUS_LEVELUP | Divide %i points among your attributes.
 
 == \#ON  | On
 == \#OFF | Off

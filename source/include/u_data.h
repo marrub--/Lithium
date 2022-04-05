@@ -68,14 +68,14 @@ struct upgr_data_VitalScan {
    i32 health;
    i32 oldhealth;
    i32 maxhealth;
-   u32 hdelta;
-   u32 hdtime;
+   i32 hdelta;
+   i32 hdtime;
    k32 x, y, z;
    k64 oangle;
    k64 splitfrac;
    k64 damagfrac;
-   u32 split;
-   u32 rank;
+   i32 split;
+   i32 rank;
    bool freak;
    k32 exp;
 };
@@ -106,10 +106,10 @@ struct upgr_data_StealthSys {
 };
 
 struct upgr_data_Subweapons {
-   u32 charge;
-   u32 shots;
-   u32 which;
-   u32 have;
+   i32 charge;
+   i32 shots;
+   i32 which;
+   i32 have;
 };
 
 struct upgr_data_HeadsUpDisp {
@@ -149,8 +149,8 @@ struct upgrade {
 
    i32 key;
 
-   u32 agroups;
-   u32 flags;
+   i32 agroups;
+   i32 flags;
 };
 
 bool P_Upg_CanActivate(struct upgrade *upgr);

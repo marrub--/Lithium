@@ -15,7 +15,7 @@ void P_Ren_Debug(void) {
    if(!dbglevel(log_devh)) return;
 
    Dbg_Stat(
-      "exp: lv.%u %u/%u/%u\n"
+      "exp: lv.%i %i/%i/%i\n"
       "x: %k\ny: %k\nz: %k\n"
       "vx: %k\nvy: %k\nvz: %k\nvel: %k\n"
       "a.y: %k\na.p: %k\na.r: %k\n"

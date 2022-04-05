@@ -127,8 +127,7 @@ class Lith_SpawnShot : SpawnShot replaces SpawnShot {
       Speed 20;
    }
 
-   states
-   {
+   states {
    Spawn:
       BOSF A 3 bright A_SpawnSound;
       BOSF BBBCCCDDD 1 bright A_SpawnFly("Lith_SpawnFire");
@@ -180,7 +179,7 @@ class Lith_BossEye : BossEye replaces BossEye {
    }
 
    action(Actor) void Lith_A_BrainSpit() {
-      if(__lith_fun & lfun_final) {
+      if(__lith_fun & lfun_tainted) {
          m_lastBreath++;
          if(m_lastBreath < 1) {
             A_SetTics(35);
@@ -241,7 +240,7 @@ override void postBeginPlay()
       m_bossEye = true;
    }
 
-   bool fun = __lith_fun & lfun_final;
+   bool fun = __lith_fun & lfun_tainted;
    if(fun) health *= 4;
    m_shieldMax = fun ? 50 : 100;
    m_shieldRegenTicks = 0;

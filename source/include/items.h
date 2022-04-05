@@ -50,10 +50,10 @@ script funcdef void (*item_place_t  )(struct item *item, struct container *cont)
 
 struct itemdata {
    str name, spr;
-   u32 w, h;
-   u32 equip;
+   i32 w, h;
+   i32 equip;
    i96 scr;
-   u32 flags;
+   i32 flags;
 
    item_use_t     Use;
    item_tick_t    Tick;
@@ -65,7 +65,7 @@ struct itemdata {
 struct item {
    anonymous struct itemdata data;
 
-   u32 x, y;
+   i32 x, y;
 
    struct container *container;
 
@@ -73,7 +73,7 @@ struct item {
 };
 
 struct container {
-   u32          w, h;
+   i32          w, h;
    cstr         cname;
    i32          type;
    struct list *head;

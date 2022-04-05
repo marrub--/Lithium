@@ -127,7 +127,7 @@ void P_GUI_Use(void);
 i96 P_Scr_Give(k32 x, k32 y, k32 z, i96 score, bool nomul);
 i96 P_Scr_GivePos(i32 x, i32 y, i96 score, bool nomul);
 void P_Scr_Take(i96 score);
-void P_Lv_GiveEXP(u64 amt);
+void P_Lv_GiveEXP(i32 amt);
 stkcall cstr P_Discrim(i32 pclass);
 stkcall i32 P_Color(i32 pclass);
 void P_Dat_PTickPst(void);
@@ -196,7 +196,7 @@ struct player_delta {
    /* Status */
    k32 alpha;
    i96 score;
-   u32 maxhealth;
+   i32 maxhealth;
 
    struct dlg_start_info dlg;
 
@@ -212,8 +212,8 @@ struct player_delta {
    /* Input */
    i32  buttons;
    bool scopetoken;
-   u32  frozen;
-   u32  semifrozen;
+   i32  frozen;
+   i32  semifrozen;
 
    /* GUI */
    i32 modal;
@@ -263,7 +263,7 @@ struct player {
    /* Info */
    i32  tid;
    i32  num;
-   u64  ticks;
+   i32  ticks;
    str  name;
    i32  pclass;
    i32  pclass_b;
@@ -284,7 +284,7 @@ struct player {
    struct upgr_data upgrdata;
    struct upgrade   upgrades[UPGR_MAX];
 
-   u32 autobuy;
+   i32 autobuy;
 
    bool upgrinit;
 
@@ -312,16 +312,16 @@ struct player {
 
    char *notes[16];
 
-   u32 nextstep;
+   i32 nextstep;
 
    bool teleportedout;
-   u32  done_intro;
+   i32  done_intro;
 
    /* Input */
    struct gui_txt tb;
 
    /* Static data */
-   u32 spawnhealth;
+   i32 spawnhealth;
    k32 jumpheight;
    k32 viewheight;
    k32 attackheight;
@@ -350,20 +350,20 @@ struct player {
    struct cbi cbi;
 
    /* Statistics */
-   u32 healthsum;
-   u32 healthused;
+   i32 healthsum;
+   i32 healthused;
 
    i96 scoresum;
    i96 scoreused;
 
-   u32 unitstravelled;
+   i32 unitstravelled;
 
-   u32 spuriousexplosions;
-   u32 brouzouf;
+   i32 spuriousexplosions;
+   i32 brouzouf;
 
-   u32 weaponsheld;
-   u32 itemsbought;
-   u32 upgradesowned;
+   i32 weaponsheld;
+   i32 itemsbought;
+   i32 upgradesowned;
 
    /* Weapons */
    struct weapondata weapon;

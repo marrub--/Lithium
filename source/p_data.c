@@ -149,8 +149,8 @@ void P_Dat_PTickPre(void) {
 }
 
 alloc_aut(0) script static
-void LevelUp(u32 *attr, char **attrptrs) {
-   u32 level = pl.attr.level;
+void LevelUp(i32 *attr, char **attrptrs) {
+   i32 level = pl.attr.level;
 
    for(i32 i = 0; i < 35 * 5; ++i) {
       if(level != pl.attr.level) {
@@ -168,11 +168,11 @@ void LevelUp(u32 *attr, char **attrptrs) {
    pl.attr.lvupstr[0] = '\0';
 }
 
-void P_Lv_GiveEXP(u64 amt) {
+void P_Lv_GiveEXP(i32 amt) {
    struct player_attributes *a = &pl.attr;
 
    noinit static
-   u32 attr[at_max];
+   i32 attr[at_max];
    fastmemset(attr, 0, sizeof attr);
 
    i32 levelup = 0;

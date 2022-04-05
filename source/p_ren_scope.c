@@ -86,13 +86,13 @@ void ScopeC(void) {
 
    SetSize(320, 200);
 
-   for(u32 i = 0; i < 4; i++) {
-      u32 fid = fid_scopecoS + i;
+   for(i32 i = 0; i < 4; i++) {
+      i32 fid = fid_scopecoS + i;
       if(CheckFade(fid)) PrintSpriteFP(sa_scopes[i], 0,1, 0,1, fid);
    }
 
-   for(u32 i = 0; i < 200; i++) {
-      u32 fid = fid_scopecgS + i;
+   for(i32 i = 0; i < 200; i++) {
+      i32 fid = fid_scopecgS + i;
       if(CheckFade(fid)) PrintSpriteFP(sp_HUD_H_D41, 32,0, i,1, fid);
    }
 }

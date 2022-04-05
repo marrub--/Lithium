@@ -23,7 +23,7 @@ void AttrBar(struct gui_state *g, i32 x, i32 y, i32 w, str gfx) {
 
 static
 void DrawAttr(struct gui_state *g, i32 x, i32 y, i32 at) {
-   u32  attr = pl.attr.attrs[at];
+   i32  attr = pl.attr.attrs[at];
    cstr name = pl.attr.names[at];
    k32  helptrns = 0.5;
 

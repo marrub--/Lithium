@@ -78,12 +78,12 @@
 == \#LOG_CBI_CRDistInter | $\#CBI_RDistInter
 
 ## CBI Upgrades (Dark Lord) ══════════════════════════════════════════════════╕
-== \#LOG_CBI_DRuzuk     | Motril
-== \#LOG_CBI_DZaruk     | Sub-Grenades
-== \#LOG_CBI_DZakwu     | Sub-Axe
-== \#LOG_CBI_DZikr      | Sub-Dart
-== \#LOG_CBI_DShield    | Shield
-== \#LOG_CBI_DDimDriver | Dimension Driver
+== \#LOG_CBI_DMotra     | $\#INFO_SHORT_Motra
+== \#LOG_CBI_DZaruk     | $\#INFO_SHORT_Zaruk
+== \#LOG_CBI_DZakwu     | $\#INFO_SHORT_Zakwu
+== \#LOG_CBI_DZikr      | $\#INFO_SHORT_Zikr
+== \#LOG_CBI_DShield    | $\#INFO_SHORT_Shield
+== \#LOG_CBI_DDimDriver | $\#INFO_SHORT_DimDriver
 
 ## Level Up ══════════════════════════════════════════════════════════════════╕
 == \#LOG_LevelUpStan | You feel stronger, somehow.

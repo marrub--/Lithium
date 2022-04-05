@@ -196,14 +196,14 @@ doCateg:
 
 static
 void CategoryUI(struct gui_state *g) {
-   u32 categ = bip.curcategory;
-   u32 n = bip.categorymax[categ];
+   i32 categ = bip.curcategory;
+   i32 n = bip.categorymax[categ];
 
    if(categ == _bipc_extra) goto draw;
 
    G_ScrBeg(g, &CBIState(g)->bipscr, 2, 37, gui_p.btnlist.w, 170, gui_p.btnlist.h * n);
 
-   u32 i = 0;
+   i32 i = 0;
    for_page() {
       if(page->category != categ || !get_bit(page->flags, _page_available) ||
          (categ == _bipc_mail && !get_bit(page->flags, _page_unlocked)))

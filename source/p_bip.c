@@ -309,11 +309,6 @@ cstr P_BIP_CategoryToName(i32 category) {
    return nil;
 }
 
-script static
-void BipNameErr(cstr name, cstr discrim) {
-   Dbg_Log(log_dev, "ERROR couldn't find page %s or %s");
-}
-
 alloc_aut(0) stkcall
 struct page *P_BIP_NameToPage(cstr name) {
    noinit static
@@ -324,7 +319,16 @@ struct page *P_BIP_NameToPage(cstr name) {
          return page;
       }
    }
-   BipNameErr(name, discrim);
+   #ifndef NDEBUG
+   if(dbglevel(log_dev)) {
+      ACS_BeginPrint();
+      PrintChrLi("ERROR couldn't find page ");
+      PrintChrSt(name);
+      PrintChrLi(" or ");
+      PrintChrSt(discrim);
+      ACS_EndLog();
+   }
+   #endif
    return nil;
 }
 

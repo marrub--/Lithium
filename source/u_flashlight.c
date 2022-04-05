@@ -70,7 +70,7 @@ void Upgr_Flashlight_Update(void) {
    udata.was_on = was_on;
 
    Dbg_Stat("*target: %lk\n*intensity: %lk\n*speed: %lk\n"
-            "*battery: %u\n",
+            "*battery: %i\n",
             udata.target, udata.intensity, udata.speed, udata.battery);
 }
 

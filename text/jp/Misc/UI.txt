@@ -70,7 +70,7 @@
 == \#STATUS_LV | レベル
 == \#STATUS_NX | 次のレベルまで
 
-== \#STATUS_LEVELUP | 現在%uポイントをステータスに割り当てられます。
+== \#STATUS_LEVELUP | 現在%iポイントをステータスに割り当てられます。
 
 == \#ON  | オン
 == \#OFF | オフ

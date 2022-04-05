@@ -70,7 +70,7 @@
    cl: pM tag: CPU1       unl: "KSKK";
    cl: pM tag: CPU2       unl: "KSKK";
 
-   cl: pD tag: Rokuw;
+   cl: pD tag: Shield;
    cl: gI tag: DimDriver;
 
    cl: gA tag: OrSigil;
@@ -133,6 +133,7 @@
    cl: gO tag: ChAri          unl: "AetosVi";
    cl: pM tag: DurlaPrime     unl: "Earth AetosVi";
    cl: gO tag: Earth;
+   cl: pD tag: EarthAri;
    cl: pC tag: Heaven;
    cl: gA tag: Hell           unl: "Earth";
    cl: gO tag: Mars           unl: "Earth OFMD";
@@ -160,7 +161,7 @@
    cl: gO tag: Omakeda    unl: "Earth";
    cl: gO tag: Semaphore  unl: "OmicronXevv";
    cl: gA tag: ShekaKaff  unl: "Tsukama";
-   cl: gO tag: SYM43      unl: "AetosVi";
+   cl: gA tag: SYM43      unl: "AetosVi";
    cl: pM tag: UnrealArms unl: "AetosVi";
    cl: gA tag: Yigan;
 }

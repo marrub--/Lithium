@@ -99,9 +99,9 @@ struct cbi {
       struct gui_fil settingsfill;
    } st;
 
-   u32 theme;
-   u32 oldtheme;
-   u32 pruse;
+   i32 theme;
+   i32 oldtheme;
+   i32 pruse;
 };
 
 void CBI_InstallSpawned(void);

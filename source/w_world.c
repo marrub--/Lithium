@@ -25,7 +25,7 @@ i32 mapseed;
 bool unloaded;
 bool lmvar islithmap;
 i32 secretsfound;
-u64 ticks;
+i32 ticks;
 i32 soulsfreed;
 bool bossspawned;
 i32 cbiperf;

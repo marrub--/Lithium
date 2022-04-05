@@ -114,7 +114,7 @@ void P_Data_Save(void) {
 
    chunk_out("agrp", 1);
    for(i32 i = 0; i < UPGR_MAX; ++i) {
-      u32 groups = pl.upgrades[i].agroups;
+      i32 groups = pl.upgrades[i].agroups;
       if(groups) {
          PrintChrSt(Upgr_EnumToStr(i));
          ACS_PrintChar(' ');

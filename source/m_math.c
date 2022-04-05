@@ -68,7 +68,7 @@
 #define POLYNOMIAL 0xC96C5795D7870F42 /* ECMA 182 */
 
 union ik32 ik32;
-union uk32 uk32;
+union ik64 ik64;
 
 noinit static
 u64 crctable[256]; /* NB: Don't try to hash >8bit data. */
@@ -174,63 +174,63 @@ alloc_aut(0) stkcall k64 clamplk(k64 x, k64 y, k64 z) {
 
 alloc_aut(0) stkcall
 i32 fastroundk(k32 k) {
-   uk32.k = k; uk32.u &= K32_LO;
-   k64 fr = uk32.k;
-   uk32.k = k; uk32.u &= K32_HI;
-   if(fr > 0.5k) return uk32.k + 1.0k;
-   else          return uk32.k;
+   ik32.k = k; ik32.i &= K32_LO;
+   k64 fr = ik32.k;
+   ik32.k = k; ik32.i &= K32_HI;
+   if(fr > 0.5k) return ik32.k + 1.0k;
+   else          return ik32.k;
 }
 
 alloc_aut(0) stkcall
 k32 fastround1k(k32 k) {
-   uk32.k = k; uk32.u &= K32_LO;
-   k32 fr = uk32.k;
-   uk32.k = k; uk32.u &= K32_HI;
-   /**/ if(fr > 0.9k) return uk32.u += 65536,  uk32.k;
-   else if(fr > 0.8k) return uk32.u += 0xE667, uk32.k;
-   else if(fr > 0.7k) return uk32.u += 0xCCCD, uk32.k;
-   else if(fr > 0.6k) return uk32.u += 0xB334, uk32.k;
-   else if(fr > 0.5k) return uk32.u += 0x999A, uk32.k;
-   else if(fr > 0.4k) return uk32.u += 0x8001, uk32.k;
-   else if(fr > 0.3k) return uk32.u += 0x6667, uk32.k;
-   else if(fr > 0.2k) return uk32.u += 0x4CCD, uk32.k;
-   else if(fr > 0.1k) return uk32.u += 0x3334, uk32.k;
-   else if(fr > 0.0k) return uk32.u += 0x199A, uk32.k;
-   else               return uk32.k;
+   ik32.k = k; ik32.i &= K32_LO;
+   k32 fr = ik32.k;
+   ik32.k = k; ik32.i &= K32_HI;
+   /**/ if(fr > 0.9k) return ik32.i += 65536,  ik32.k;
+   else if(fr > 0.8k) return ik32.i += 0xE667, ik32.k;
+   else if(fr > 0.7k) return ik32.i += 0xCCCD, ik32.k;
+   else if(fr > 0.6k) return ik32.i += 0xB334, ik32.k;
+   else if(fr > 0.5k) return ik32.i += 0x999A, ik32.k;
+   else if(fr > 0.4k) return ik32.i += 0x8001, ik32.k;
+   else if(fr > 0.3k) return ik32.i += 0x6667, ik32.k;
+   else if(fr > 0.2k) return ik32.i += 0x4CCD, ik32.k;
+   else if(fr > 0.1k) return ik32.i += 0x3334, ik32.k;
+   else if(fr > 0.0k) return ik32.i += 0x199A, ik32.k;
+   else               return ik32.k;
 }
 
 alloc_aut(0) stkcall
 i32 fastroundlk(k64 k) {
-   uk64.k = k; uk64.u &= K64_LO;
-   k64 fr = uk64.k;
-   uk64.k = k; uk64.u &= K64_HI;
-   if(fr > 0.5lk) return uk64.k + 1.0lk;
-   else           return uk64.k;
+   ik64.k = k; ik64.i &= K64_LO;
+   k64 fr = ik64.k;
+   ik64.k = k; ik64.i &= K64_HI;
+   if(fr > 0.5lk) return ik64.k + 1.0lk;
+   else           return ik64.k;
 }
 
 alloc_aut(0) stkcall
 k64 fastround1lk(k64 k) {
-   uk64.k = k; uk64.u &= K64_LO;
-   k64 fr = uk64.k;
-   uk64.k = k; uk64.u &= K64_HI;
-   /**/ if(fr > 0.9lk) return uk64.u += 4294967296, uk64.k;
-   else if(fr > 0.8lk) return uk64.u += 0xE6666667, uk64.k;
-   else if(fr > 0.7lk) return uk64.u += 0xCCCCCCCD, uk64.k;
-   else if(fr > 0.6lk) return uk64.u += 0xB3333334, uk64.k;
-   else if(fr > 0.5lk) return uk64.u += 0x9999999A, uk64.k;
-   else if(fr > 0.4lk) return uk64.u += 0x80000001, uk64.k;
-   else if(fr > 0.3lk) return uk64.u += 0x66666667, uk64.k;
-   else if(fr > 0.2lk) return uk64.u += 0x4CCCCCCD, uk64.k;
-   else if(fr > 0.1lk) return uk64.u += 0x33333334, uk64.k;
-   else if(fr > 0.0lk) return uk64.u += 0x1999999A, uk64.k;
-   else                return uk64.k;
+   ik64.k = k; ik64.i &= K64_LO;
+   k64 fr = ik64.k;
+   ik64.k = k; ik64.i &= K64_HI;
+   /**/ if(fr > 0.9lk) return ik64.i += 4294967296, ik64.k;
+   else if(fr > 0.8lk) return ik64.i += 0xE6666667, ik64.k;
+   else if(fr > 0.7lk) return ik64.i += 0xCCCCCCCD, ik64.k;
+   else if(fr > 0.6lk) return ik64.i += 0xB3333334, ik64.k;
+   else if(fr > 0.5lk) return ik64.i += 0x9999999A, ik64.k;
+   else if(fr > 0.4lk) return ik64.i += 0x80000001, ik64.k;
+   else if(fr > 0.3lk) return ik64.i += 0x66666667, ik64.k;
+   else if(fr > 0.2lk) return ik64.i += 0x4CCCCCCD, ik64.k;
+   else if(fr > 0.1lk) return ik64.i += 0x33333334, ik64.k;
+   else if(fr > 0.0lk) return ik64.i += 0x1999999A, ik64.k;
+   else                return ik64.k;
 }
 
 alloc_aut(0) stkcall
 i32 ceilk(k32 n) {
-   uk32.k = n;
-   if(uk32.u & K32_LO) return uk32.u &= K32_HI, uk32.k + 1.0k;
-   else                return uk32.k;
+   ik32.k = n;
+   if(ik32.i & K32_LO) return ik32.i &= K32_HI, ik32.k + 1.0k;
+   else                return ik32.k;
 }
 
 alloc_aut(0) stkcall

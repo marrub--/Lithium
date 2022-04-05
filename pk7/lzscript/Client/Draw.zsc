@@ -63,9 +63,14 @@ private transient play vector2 m_VirtualSize;
 private transient play int m_breakX;
 private transient play bool m_NoDraw;
 
-private transient Font m_UFntSml;
+private transient Font m_uFntSml;
+private transient Font m_lMidFont;
+private transient Font m_lTrmFont;
+private transient Font m_lBigFont;
+private transient Font m_lJTrmFont;
+private transient Font m_newConsoleFont;
 
-private transient bool m_English;
+private transient bool m_english;
 
 static int LA(int pos, string s, string fnt) {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
@@ -369,6 +374,20 @@ static clearScope textureId getTextureForName(string tex) {
 override void onRegister() {
    projectRegister();
    checkEnglish();
+
+   switch(lith_gui_jpfont) {
+   default:
+   case font_misaki_gothic: m_uFntSml = 'MisakiG';  break;
+   case font_misaki_mincho: m_uFntSml = 'MisakiM';  break;
+   case font_k6x8:          m_uFntSml = 'k6x8';     break;
+   case font_jiskan16:      m_uFntSml = 'jiskan16'; break;
+   }
+
+   m_lMidFont       = 'lmidfont';
+   m_lTrmFont       = 'ltrmfont';
+   m_lBigFont       = 'lbigfont';
+   m_lJTrmFont      = 'ljtrmfont';
+   m_newConsoleFont = 'newconsolefont';
 }
 
 override void worldUnloaded(WorldEvent evt) {
@@ -381,14 +400,6 @@ static ui void drawRect(int sx, int sy, int px, int py, color cr) {
 }
 
 override void worldTick() {
-   switch(lith_gui_jpfont) {
-   default:
-   case font_misaki_gothic: m_UFntSml = "MisakiG";  break;
-   case font_misaki_mincho: m_UFntSml = "MisakiM";  break;
-   case font_k6x8:          m_UFntSml = "k6x8";     break;
-   case font_jiskan16:      m_UFntSml = "jiskan16"; break;
-   }
-
    projectSetRenderer();
    tickDmgNums();
    tickScrNums();
@@ -620,23 +631,19 @@ private ui void drawInventory(RenderEvent evt) {
 }
 
 Font fntSml(bool noUnicode = false) const {
-   if(noUnicode || m_English) return smallFont;
-   else                       return m_UFntSml;
+   return noUnicode || m_english ? smallFont : m_uFntSml;
 }
 
 Font fntMid(bool noUnicode = false) const {
-   if(noUnicode || m_English) return 'lmidfont';
-   else                       return m_UFntSml;
+   return noUnicode || m_english ? m_lMidFont : m_uFntSml;
 }
 
 Font fntBig(bool noUnicode = false) const {
-   if(noUnicode || m_English) return 'lbigfont';
-   else                       return 'newconsolefont';
+   return noUnicode || m_english ? m_lBigFont : m_newConsoleFont;
 }
 
 Font fntTrm(bool noUnicode = false) const {
-   if(noUnicode || m_English) return 'ltrmfont';
-   else                       return 'ljtrmfont';
+   return noUnicode || m_english ? m_lTrmFont : m_lJTrmFont;
 }
 
 Font fntAny(name name, bool noUnicode = false) const {
@@ -648,7 +655,7 @@ Font fntAny(name name, bool noUnicode = false) const {
 }
 
 void checkEnglish() {
-   m_English = Lith_HERMES.localize("LITH_CHECK") == "Eng";
+   m_english = Lith_HERMES.localize("LITH_CHECK") == "Eng";
 }
 
 /* EOF */

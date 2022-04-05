@@ -21,10 +21,8 @@
 
 #define k32_to_i32(n) (ik32.k = (n), ik32.i)
 #define i32_to_k32(n) (ik32.i = (n), ik32.k)
-#define k32_to_u32(n) (uk32.k = (n), uk32.u)
-#define u32_to_k32(n) (uk32.u = (n), uk32.k)
 
-#define k32_to_byte(n) ((k32_to_u32((k32)(n) * 255.0) >> 16) & 0xff)
+#define k32_to_byte(n) ((k32_to_i32((k32)(n) * 255.0) >> 16) & 0xff)
 
 #define floork(n)  ((i32)(n))
 #define floorlk(n) ((i64)(n))
@@ -33,8 +31,6 @@
 
 extern union ik32 ik32;
 extern union ik64 ik64;
-extern union uk32 uk32;
-extern union uk64 uk64;
 
 /* To make pitch values down=0, up=1 */
 #define PITCH_BASE (-0.5)

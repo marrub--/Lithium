@@ -40,7 +40,7 @@ struct cupgdef {
       {cupg_rdistinter,   "CRDistInter"            },
    },
    [pcl_darklord_b] = {
-      {cupg_d_ruzuk,     "DRuzuk",     "Ruzuk"    },
+      {cupg_d_motra,     "DMotra",     "Motra"    },
       {cupg_d_zaruk,     "DZaruk",     "Zaruk"    },
       {cupg_d_zakwu,     "DZakwu",     "Zakwu"    },
       {cupg_d_zikr,      "DZikr",      "Zikr"     },
@@ -77,7 +77,7 @@ void CBI_Install(i32 num) {
       case cupg_d_zikr:  GiveSubWeapon(_subw_dart);    break;
       case cupg_d_zakwu: GiveSubWeapon(_subw_axe);     break;
       case cupg_d_zaruk: GiveSubWeapon(_subw_grenade); break;
-      case cupg_d_ruzuk: InvGive(so_Motra, 1);         break;
+      case cupg_d_motra: InvGive(so_Motra, 1);         break;
       #undef GiveSubWeapon
       }
 

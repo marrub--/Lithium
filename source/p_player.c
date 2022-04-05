@@ -133,10 +133,6 @@ void revenge(void) {
 
 dynam_aut script type("death") static
 void Sc_PlayerDeath(void) {
-   i32 fun = GetFun();
-
-   if(fun & lfun_final) SetFun(fun & ~lfun_final);
-
    pl.dead = true;
 
    P_Upg_PDeinit();
@@ -349,7 +345,7 @@ void P_bossText(i32 boss) {
       return;
    }
 
-   bool division = boss == boss_iconofsin && GetFun() & lfun_final;
+   bool division = boss == boss_iconofsin && GetFun() & lfun_tainted;
 
    if(division) pl.logB(1, tmpstr(lang(sl_log_bosshear3)));
 

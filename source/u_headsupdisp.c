@@ -84,9 +84,9 @@ void HUD_TopRight(void) {
             SetFade(fid_schit1, 4, 12);
          } else if(pl.score < pl.old.score) {
             i96 scrdif = pl.old.score - pl.score;
-            u32 tics = scrdif * 8 / 0xFFFF;
-            u32 mmx = 30000 - clampu(scrdif / 4, 3276, 29490);
-            SetFade(fid_schit2, clampu(tics, 1, 35), mmx >> 8);
+            i32 tics   = scrdif * 8 / 0xFFFF;
+            i32 mmx    = 30000 - clampi(scrdif / 4, 3276, 29490);
+            SetFade(fid_schit2, clampi(tics, 1, 35), mmx >> 8);
          }
 
          if(CheckFade(fid_schit1)) {
@@ -134,9 +134,9 @@ void HUD_TopRight(void) {
    i32 expbar = CVarGetI(sc_hud_expbar);
    if(expbar > 0) {
       PrintSprite(sp_Bars_ExpBar0, 320,2, y,1);
-      u32 fr =
-         ((u64)(pl.attr.exp     - pl.attr.expprev) * 24) /
-          (u64)(pl.attr.expnext - pl.attr.expprev);
+      i32 fr =
+         ((pl.attr.exp     - pl.attr.expprev) * 24) /
+          (pl.attr.expnext - pl.attr.expprev);
       SetClip(296, y, fr, 2);
       ACS_BeginPrint();
       PrintChrLi(":Bars:ExpBar");

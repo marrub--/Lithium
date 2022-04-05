@@ -31,10 +31,8 @@ static clearscope void StartSound(Actor mo, sound snd, int slot, int flags, doub
    {if(mo) mo.A_StartSound(snd, slot, flags, volume, attenuation, pitch);}
 
 override void worldLoaded(WorldEvent ev) {
-   if(ev.isSaveGame) {
-      if(Lith_HERMES.instance().checkLatches()) {
-         CallACS("Lith_TimelineInconsistent");
-      }
+   if(ev.isSaveGame && Lith_HERMES.instance().m_tainted) {
+      CallACS("Lith_TimelineInconsistent");
    }
 }
 

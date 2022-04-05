@@ -26,7 +26,7 @@ void Upgr_Subweapons_Update(void) {
    }
 
    if(pl.buttons & BT_USER4 && !(pl.old.buttons & BT_USER4)) {
-      for(u32 next = udata.which + 1;; next++) {
+      for(i32 next = udata.which + 1;; next++) {
          if(next >= _subw_max) {
             next = 0;
          }
@@ -44,7 +44,7 @@ void Upgr_Subweapons_Render(void) {
 
    PrintSprite(sp_SubWepBack, 66,1, 239,2);
 
-   u32 prc = 29 * udata.charge / (k32)100.0;
+   i32 prc = 29 * udata.charge / (k32)100.0;
    if(udata.shots == 0) SetClip(72, 223, prc, 2);
    /*                */ PrintSprite(sp_SubWepBar1, 72,1, 224,2);
    if(udata.shots == 1) SetClip(72, 223, prc, 2);
