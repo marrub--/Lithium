@@ -184,7 +184,7 @@ void BipInfo_Compile(struct tokbuf *tb, struct tbuf_err *res) {
 
 script static
 void P_BIP_InitInfo(void) {
-   Dbg_Log(log_dev, "P_BIP_InitInfo");
+   Dbg_Log(log_dev, _l(__func__));
 
    FILE *fp;
    i32 prev = 0;
@@ -209,7 +209,7 @@ void P_BIP_PInit(void) {
    if(!bippagenum) P_BIP_InitInfo();
 
    #ifndef NDEBUG
-   if(dbglevel_any()) pl.logH(1, "There are %u info pages!", bippagenum);
+   if(dbglevel_any()) pl.logH(1, "There are %i info pages!", bippagenum);
    #endif
 
    bip.pagemax = 0;
@@ -246,9 +246,7 @@ void P_BIP_PInit(void) {
 script
 void P_BIP_Unlock(struct page *page, bool from_load) {
    if(!page) {
-      #ifndef NDEBUG
-      Log("ERROR page was null");
-      #endif
+      Dbg_Err(_l("page was null"));
       return;
    }
 
@@ -260,13 +258,13 @@ void P_BIP_Unlock(struct page *page, bool from_load) {
     */
    if(!get_bit(page->flags, _page_available)) {
       if(!from_load) {
-         Dbg_Log(log_dev, "page '%s' not available", page->name);
+         Dbg_Log(log_dev, _l("page '"), _p(page->name), _l("' not available"));
       }
       return;
    }
 
    if(!was_unlocked) {
-      Dbg_Log(log_bip, "unlocking page '%s'", page->name);
+      Dbg_Log(log_bip, _l("unlocking page '"), _p(page->name), _c('\''));
 
       bip.pageavail++;
       bip.categoryavail[page->category]++;
@@ -290,7 +288,7 @@ void P_BIP_Unlock(struct page *page, bool from_load) {
          }
       }
    } else {
-      Dbg_Log(log_bip, "already unlocked page '%s'", page->name);
+      Dbg_Log(log_bip, _l("already unlocked page '"), _p(page->name), _c('\''));
    }
 }
 
@@ -319,16 +317,8 @@ struct page *P_BIP_NameToPage(cstr name) {
          return page;
       }
    }
-   #ifndef NDEBUG
-   if(dbglevel(log_dev)) {
-      ACS_BeginPrint();
-      PrintChrLi("ERROR couldn't find page ");
-      PrintChrSt(name);
-      PrintChrLi(" or ");
-      PrintChrSt(discrim);
-      ACS_EndLog();
-   }
-   #endif
+   Dbg_Err(_l("couldn't find page "), _p(name), _l(" or "),
+           _p((cstr)discrim));
    return nil;
 }
 

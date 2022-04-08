@@ -52,7 +52,7 @@
    })
 #define unwrap_print(e) \
    unwrap_do(e, { \
-      ACS_BeginLog(); \
+      ACS_BeginPrint(); \
       PrintChrSt((e)->err); \
       ACS_EndLog(); \
    })

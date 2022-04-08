@@ -75,29 +75,17 @@ alloc_aut(0) stkcall static
 struct mem_blk *CheckUsedBlock(struct mem_blk *blk, cstr func) {
    if((void *)blk < (void *)mem_dat ||
       (void *)blk > (void *)(mem_dat + sizeof mem_dat)) {
-      ACS_BeginPrint();
-      PrintChrSt(func);
-      PrintChrLi(" ERROR: out of bounds block ");
-      ACS_PrintHex((intptr_t)blk);
-      ACS_EndLog();
+      Dbg_Err(_l("out of bounds block "), ACS_PrintHex((intptr_t)blk));
       return nil;
    }
 
    if(blk->idn != _mem_idn) {
-      ACS_BeginPrint();
-      PrintChrSt(func);
-      PrintChrLi(" ERROR: invalid identifier for ");
-      ACS_PrintHex((intptr_t)blk);
-      ACS_EndLog();
+      Dbg_Err(_l("invalid identifier for "), ACS_PrintHex((intptr_t)blk));
       return nil;
    }
 
    if(blk->tag == _tag_free) {
-      ACS_BeginPrint();
-      PrintChrSt(func);
-      PrintChrLi(" ERROR: already freed ");
-      ACS_PrintHex((intptr_t)blk);
-      ACS_EndLog();
+      Dbg_Err(_l("already freed "), ACS_PrintHex((intptr_t)blk));
       return nil;
    }
 
@@ -140,12 +128,8 @@ void Dalloc(register void *p) {
 
    [[return]] __asm(":\"done\" Rjnk()");
 
-   #ifndef NDEBUG
 error:
-   ACS_BeginPrint();
-   PrintChrLi("Dalloc ERROR: memory not initialized but freeing pointer");
-   ACS_EndLog();
-   #endif
+   Dbg_Err(_l("memory not initialized but freeing pointer"));
 }
 
 alloc_aut(0) stkcall
@@ -174,12 +158,7 @@ void *Malloc(register mem_size_t rs, register mem_tag_t tag) {
          /* well, no more memory to check...
           * don't worry, this won't ever really happen, right?
           */
-         #ifndef NDEBUG
-         ACS_BeginPrint();
-         PrintChrLi("Malloc ERROR: out of memory - couldn't allocate ");
-         ACS_PrintInt(s);
-         ACS_EndLog();
-         #endif
+         Dbg_Err(_l("out of memory - couldn't allocate "), _p(s));
          return nil;
       } else if(cur->tag != _tag_free) {
          blk = cur = cur->nxt;
@@ -375,31 +354,17 @@ dyn:
       }
    }
 
-   #ifndef NDEBUG
-   if(dbglevel(log_dpl)) {
-      ACS_BeginPrint();
-      PrintChrLi("Plsa: alloc ");
-      ACS_PrintHex((intptr_t)dpl_ina);
-      ACS_EndLog();
-   }
-   #endif
+   Dbg_Log(log_dpl, _l("alloc "), ACS_PrintHex((intptr_t)dpl_ina));
 
    dpl_ina = (p = dpl_ina)->nxt;
    p->nxt = dpl_act;
    return (dpl_act = p)->dat;
 
-   #ifndef NDEBUG
 overflow:
-   ACS_BeginPrint();
-   PrintChrLi("Plsa ERROR: stack overflow ");
-   ACS_PrintHex((intptr_t)pls_stk);
-   ACS_PrintChar(' ');
-   ACS_PrintHex((intptr_t)pls_cur);
-   ACS_PrintChar(' ');
-   ACS_PrintInt(s);
-   ACS_EndLog();
+   Dbg_Err(_l("stack overflow "), ACS_PrintHex((intptr_t)pls_stk),
+           _c(' '),               ACS_PrintHex((intptr_t)pls_cur),
+           _c(' '),               _p(s));
    return nil;
-   #endif
 }
 
 alloc_aut(0) stkcall
@@ -407,14 +372,7 @@ void __GDCC__Plsf(void *p) {
    if(p >= (void *)dpl_dat && p < (void *)&dpl_dat[_dpl_siz]) {
       struct dpl_blk *blk = GetDplBlk(p);
 
-      #ifndef NDEBUG
-      if(dbglevel(log_dpl)) {
-         ACS_BeginPrint();
-         PrintChrLi("Plsf: dealloc ");
-         ACS_PrintHex((intptr_t)blk);
-         ACS_EndLog();
-      }
-      #endif
+      Dbg_Log(log_dpl, _l("Plsf: dealloc "), ACS_PrintHex((intptr_t)blk));
 
       if(blk->prv) blk->prv->nxt = blk->nxt;
       else         dpl_act       = blk->nxt;
@@ -432,15 +390,9 @@ void __GDCC__Plsf(void *p) {
       "Rjnk()"
    );
 
-   #ifndef NDEBUG
 invalid:
-   ACS_BeginPrint();
-   PrintChrLi("Plsf ERROR: incorrect stack pointer ");
-   ACS_PrintHex((intptr_t)p);
-   ACS_PrintChar(' ');
-   ACS_PrintHex((intptr_t)pls_cur);
-   ACS_EndLog();
-   #endif
+   Dbg_Err(_l("incorrect stack pointer "), ACS_PrintHex((intptr_t)p),
+           _c(' '),                        ACS_PrintHex((intptr_t)pls_cur));
 }
 
 /* EOF */

@@ -69,7 +69,9 @@ void ApplyLevels(dmon_t *m, i32 prev) {
       m->damagemul += newd;
       SetDamageMultiplier(0, m->damagemul);
 
-      Dbg_Log(log_dmonV, "monster %i: newh %i newd %k", m->id, newh, newd);
+      Dbg_Log(log_dmonV,
+              _l("monster "), _p(m->id), _l(": newh "), _p(newh),
+              _l(" newd "), _p(newd));
    }
 
    for(i32 i = 0; i < dmgtype_max; i++) {
@@ -82,7 +84,9 @@ void ApplyLevels(dmon_t *m, i32 prev) {
       }
    }
 
-   Dbg_Log(log_dmon, "monster %i leveled up (%i -> %i)", m->id, prev, m->level);
+   Dbg_Log(log_dmon,
+           _l("monster "), _p(m->id), _l(" leveled up ("), _p(prev),
+           _l(" -> "), _p(m->level), _c(')'));
 }
 
 script static
@@ -179,8 +183,9 @@ void BaseMonsterLevel(dmon_t *m) {
 
    ApplyLevels(m, 0);
 
-   Dbg_Log(log_dmon, "monster %-4i \Cdr%i \Cgl%-3i \C-running on %S",
-      m->id, m->rank, m->level, ACS_GetActorClass(0));
+   Dbg_Log(log_dmon,
+           _l("monster "), _p(m->id), _l(" \Cdr"), _p(m->rank), _l(" \Cgl"),
+           _p(m->level), _l(" \C-running on "), _p(ACS_GetActorClass(0)));
 }
 
 /* Spawn a Monster Soul and temporarily set the species of it until the
@@ -270,7 +275,7 @@ void OnFinalize(dmon_t *m) {
 
 script static
 void OnDeath(dmon_t *m) {
-   Dbg_Log(log_dmon, "monster %i is ded", m->id);
+   Dbg_Log(log_dmon, _l("monster "), _p(m->id), _l(" is ded"));
 
    m->wasdead = true;
 
@@ -281,7 +286,7 @@ void OnDeath(dmon_t *m) {
 
 script static
 void OnResurrect(dmon_t *m) {
-   Dbg_Log(log_dmon, "monster %i resurrected", m->id);
+   Dbg_Log(log_dmon, _l("monster "), _p(m->id), _l(" resurrected"));
 
    m->resurrect = false;
 }
@@ -332,26 +337,31 @@ void MonsterMain(dmon_t *m) {
 
 #ifndef NDEBUG
 void PrintMonsterInfo(dmon_t *m) {
-   Log("%p (%p) %s active: %u id: %.3u\n"
-       "wasdead: %u finalized: %u painwait: %i\n"
-       "level: %.3i rank: %i exp: %i\n"
-       "health: %i/%i\n"
-       "x: %k y: %k z: %k\n"
-       "r: %k h: %k\n"
-       "mi->exp: %lu mi->score: %lli\n"
-       "mi->flags: %i mi->type: %i",
-       m, m->mi, m->mi->name, m->active, m->id,
-       m->wasdead, m->finalized, m->painwait,
-       m->level, m->rank, m->exp,
-       m->health, m->maxhealth,
-       m->x, m->y, m->z,
-       m->r, m->h,
-       m->mi->exp, m->mi->score,
-       m->mi->flags, m->mi->type);
+   ACS_BeginPrint();
+
+   __nprintf(
+      "%p (%p) %s active: %u id: %.3u\n"
+      "wasdead: %u finalized: %u painwait: %i\n"
+      "level: %.3i rank: %i exp: %i\n"
+      "health: %i/%i\n"
+      "x: %k y: %k z: %k\n"
+      "r: %k h: %k\n"
+      "mi->exp: %lu mi->score: %lli\n"
+      "mi->flags: %i mi->type: %i",
+      m, m->mi, m->mi->name, m->active, m->id,
+      m->wasdead, m->finalized, m->painwait,
+      m->level, m->rank, m->exp,
+      m->health, m->maxhealth,
+      m->x, m->y, m->z,
+      m->r, m->h,
+      m->mi->exp, m->mi->score,
+      m->mi->flags, m->mi->type);
 
    for(i32 i = 0; i < countof(m->resist); i++) {
-      Log("resist %S: %i", sa_dmgtype_names[i], m->resist[i]);
+      __nprintf("resist %S: %i", sa_dmgtype_names[i], m->resist[i]);
    }
+
+   ACS_EndLog();
 }
 #endif
 
@@ -366,7 +376,7 @@ void MonInfo_Preset(struct tokbuf *tb, struct tbuf_err *res) {
       unwrap(res);
       switch(MonInfo_Preset_Name(k)) {
       case _moninfo_preset_name: faststrcpy(pre->prename, v);  break;
-      case _moninfo_preset_exp:  pre->exp   = faststrtou64(v); break;
+      case _moninfo_preset_exp:  pre->exp   = faststrtoi32(v); break;
       case _moninfo_preset_scr:  pre->score = faststrtoi96(v); break;
       default:
          tb->err(res, "%s MonInfo_Preset: invalid key %s; expected "
@@ -379,8 +389,9 @@ void MonInfo_Preset(struct tokbuf *tb, struct tbuf_err *res) {
    }
    unwrap(res);
 
-   Dbg_Log(log_dmonV, "preset %s added: exp = %lu, score = %lli",
-           pre->prename, pre->exp, pre->score);
+   Dbg_Log(log_dmonV,
+           _l("preset "), _p((cstr)pre->prename), _l(" added: exp = "),
+           _p(pre->exp), _l(", score = "), _p(pre->score));
 }
 
 struct monster_info *MonInfo_BeginDef(void) {
@@ -389,8 +400,9 @@ struct monster_info *MonInfo_BeginDef(void) {
 
 void MonInfo_FinishDef(struct monster_info *mi) {
    ++monsterinfonum;
-   Dbg_Log(log_dmonV, "monster %s added: type = %i, flags = %i",
-           mi->name, mi->type, mi->flags);
+   Dbg_Log(log_dmonV,
+           _l("monster "), _p((cstr)mi->name), _l(" added: type = "),
+           _p(mi->type), _l(", flags = "), _p(mi->flags));
 }
 
 void MonInfo_ColorfulHellHack(struct monster_info *mi) {
@@ -425,7 +437,7 @@ void MonInfo_Monster(struct tokbuf *tb, struct tbuf_err *res, i32 flags) {
       unwrap(res);
       switch(MonInfo_Monster_Name(k)) {
       case _moninfo_monster_filter: faststrcpy(mi->name, v);     break;
-      case _moninfo_monster_exp:    mi->exp   = faststrtou64(v); break;
+      case _moninfo_monster_exp:    mi->exp   = faststrtoi32(v); break;
       case _moninfo_monster_scr:    mi->score = faststrtoi96(v); break;
       case _moninfo_monster_pre:
          for(struct monster_preset *pre = monsterpreset;; ++pre) {
@@ -593,7 +605,7 @@ void MonInfo_Compile(struct tokbuf *tb, struct tbuf_err *res) {
 
 script
 void Mon_Init(void) {
-   Dbg_Log(log_dev, "Mon_Init");
+   Dbg_Log(log_dev, _l(__func__));
 
    FILE *fp;
    i32 prev = 0;
@@ -629,13 +641,6 @@ script_str ext("ACS") addr(OBJ "ResurrectMonster")
 void Sc_ResurrectMonster(i32 amt) {
    ifauto(dmon_t *, m, DmonSelf()) m->resurrect = true;
 }
-
-#ifndef NDEBUG
-script static
-void LogError(cstr cname) {
-   Dbg_Log(log_dev, "ERROR no monster %s", cname);
-}
-#endif
 
 alloc_aut(0) script ext("ACS") addr(lsc_monsterinfo)
 void Sc_MonsterInfo(void) {
@@ -679,9 +684,7 @@ void Sc_MonsterInfo(void) {
       }
    }
 
-   #ifndef NDEBUG
-   LogError(cname);
-   #endif
+   Dbg_Err(_l("no monster "), _p((cstr)cname));
 }
 
 script_str ext("ACS") addr(OBJ "MonsterFinalized")

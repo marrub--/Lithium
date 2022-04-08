@@ -135,15 +135,14 @@ script extern void P_Scr_Payout(void);
 void P_Log_SellWeapon(struct weaponinfo const *info, i96 score);
 void P_Log_Weapon(struct weaponinfo const *info);
 
-script void P_Wep_PTickPre (void);
-       void P_Dat_PTickPre (void);
-script void P_CBI_PTick    (void);
-script void P_Inv_PTick    (void);
-script void P_Log_PTick    (void);
-script void P_Upg_PTick    (void);
-script void P_Wep_PTick    (void);
-script void P_Upg_PTickPst (void);
-       void P_Ren_PTickPst (void);
+script void P_Wep_PTickPre(void);
+       void P_Dat_PTickPre(void);
+script void P_CBI_PTick   (void);
+script void P_Inv_PTick   (void);
+script void P_Log_PTick   (void);
+script void P_Upg_PTick   (void);
+script void P_Wep_PTick   (void);
+       void P_Ren_PTickPst(void);
 
 script void P_TeleportIn (void);
 sync   void P_TeleportOut(i32 tag);
@@ -242,6 +241,8 @@ struct player {
    __prop manamax      {default: ACS_GetMaxInventory(->tid, so_ManaAmmo)}
    __prop health       {default:   GetHealth(->tid),
                         operator=: SetHealth(->tid, ...)}
+   __prop shield       {default:   GetMembI(->tid, sm_Shield),
+                        operator=: SetMembI(->tid, sm_Shield, ...)}
    __prop setActivator {operator(): ACS_SetActivator(->tid)}
    __prop getVel       {operator(): mag2k(->velx, ->vely)}
    __prop onground     {default: GetMembI(->tid, sm_OnGround)}
@@ -279,6 +280,7 @@ struct player {
    struct player_delta old;
    i32 oldhealth;
    i32 oldmana;
+   i32 oldshield;
 
    /* Upgrades */
    struct upgr_data upgrdata;
@@ -316,6 +318,8 @@ struct player {
 
    bool teleportedout;
    i32  done_intro;
+
+   i32 regenwait;
 
    /* Input */
    struct gui_txt tb;

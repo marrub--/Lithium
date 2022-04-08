@@ -134,6 +134,16 @@ void P_Upg_PMInit(void) {
    }
 }
 
+static script void P_Upg_pTickPst(void) {
+   SetSize(320, 240);
+   ClearClip();
+   for_upgrade(upgr) {
+      if(get_bit(upgr->flags, _ug_active)) {
+         Upgr_Render(upgr->key);
+      }
+   }
+}
+
 script void P_Upg_PTick(void) {
    if(pl.modal >= _gui_disables_hud) {
       pl.hudenabled = false;
@@ -147,25 +157,15 @@ script void P_Upg_PTick(void) {
       }
    }
 
-   if(Paused) {
-      return;
-   }
-
-   for_upgrade(upgr) {
-      if(get_bit(upgr->flags, _ug_active)) {
-         Upgr_Update(upgr->key);
+   if(!Paused) {
+      for_upgrade(upgr) {
+         if(get_bit(upgr->flags, _ug_active)) {
+            Upgr_Update(upgr->key);
+         }
       }
    }
-}
 
-script void P_Upg_PTickPst(void) {
-   SetSize(320, 240);
-   ClearClip();
-   for_upgrade(upgr) {
-      if(get_bit(upgr->flags, _ug_active)) {
-         Upgr_Render(upgr->key);
-      }
-   }
+   P_Upg_pTickPst();
 }
 
 void P_Upg_Enter(void) {

@@ -214,7 +214,7 @@ struct item *P_Item_New(struct itemdata const *data) {
 
 script
 void P_Item_Destroy(struct item *item) {
-   Dbg_Log(log_dev, "P_Item_Destroy: destroying item %p", item);
+   Dbg_Log(log_dev, _l("destroying item "), ACS_PrintHex((intptr_t)item));
 
    ServCallV(sm_DeleteItem, item);
 
@@ -335,7 +335,9 @@ void P_Inv_PTick(void) {
    if(pl.useitem) {
       struct item *item = pl.useitem;
 
-      Dbg_Log(log_dev, "using %S (%p)", item->name, item);
+      Dbg_Log(log_dev,
+              _l("using "), _p(item->name), _c(' '), _c('('),
+              ACS_PrintHex((intptr_t)item), _c(')'));
       if(item->Use && !item->Use(item)) {
          AmbientSound(ss_player_cbi_auto_invalid, 1.0);
       }
@@ -511,7 +513,7 @@ struct itemdata ItemData(void) {
 script_str ext("ACS") addr(OBJ "ItemCreate")
 struct item *Sc_ItemCreate(void) {
    struct itemdata data = ItemData();
-   Dbg_Log(log_dev, "%s: creating %S", __func__, data.name);
+   Dbg_Log(log_dev, _l("creating "), _p(data.name));
    return P_Item_New(&data);
 }
 
@@ -519,7 +521,7 @@ script_str ext("ACS") addr(OBJ "BagItemCreate")
 struct item *Sc_BagItemCreate(void) {
    struct itemdata data = ItemData();
    set_bit(data.flags, _if_openable);
-   Dbg_Log(log_dev, "%s: creating %S", __func__, data.name);
+   Dbg_Log(log_dev, _l("creating "), _p(data.name));
    return &P_BagItem_New(
       GetMembI(0, sm_InvW),
       GetMembI(0, sm_InvH),
@@ -558,7 +560,7 @@ void Sc_ItemPopupTag(void) {
 
 script_str ext("ACS") addr(OBJ "ItemAttach")
 bool Sc_ItemAttach(struct item *item) {
-   Dbg_Log(log_dev, "%s: attaching item %p", __func__, item);
+   Dbg_Log(log_dev, _l("attaching item "), ACS_PrintHex((intptr_t)item));
 
    if(!P_None()) {
       if(P_Inv_Add(item)) {
@@ -575,7 +577,7 @@ bool Sc_ItemAttach(struct item *item) {
 script_str ext("ACS") addr(OBJ "ItemDetach")
 void Sc_ItemDetach(struct item *item) {
    if(item->Destroy) {
-      Dbg_Log(log_dev, "%s: detaching item %p", __func__, item);
+      Dbg_Log(log_dev, _l("detaching item "), ACS_PrintHex((intptr_t)item));
       item->Destroy(item);
    }
 }

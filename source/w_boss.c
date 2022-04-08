@@ -86,17 +86,13 @@ void TriggerBoss(void) {
    if(!boss) return;
 
    if(boss->dead) {
-      #ifndef NDEBUG
-      Log("%s ERROR: %s is dead, invalid num", __func__, boss->name);
-      #endif
+      Dbg_Err(_p((cstr)boss->name), _l(" is dead, invalid num"));
       boss = nil;
       return;
    }
 
    if(boss->phase > boss->phasenum) {
-      #ifndef NDEBUG
-      Log("%s ERROR: invalid boss phase", __func__);
-      #endif
+      Dbg_Err(_l("invalid boss phase"));
       boss = nil;
       return;
    }
@@ -105,7 +101,9 @@ void TriggerBoss(void) {
       boss->phase = 1;
    }
 
-   Dbg_Log(log_boss, "%s: Spawning boss %s phase %i", __func__, boss->name, boss->phase);
+   Dbg_Log(log_boss,
+           _l("Spawning boss "), _p((cstr)boss->name), _l(" phase "),
+           _p(boss->phase));
 
    ServCallV(sm_TriggerBoss);
 
@@ -137,11 +135,11 @@ void SpawnBosses(i96 sum, bool force) {
       difficulty == diff_any ? ACS_Random(diff_easy, diff_hard) : difficulty;
 
    if(alldead[diff]) {
-      Dbg_Log(log_boss, "%s: All dead, returning", __func__);
+      Dbg_Log(log_boss, _l("All bosses dead, returning"));
       return;
    }
 
-   Dbg_Log(log_boss, "%s: Spawning boss, difficulty %i", __func__, diff);
+   Dbg_Log(log_boss, _l("Spawning boss, difficulty "), _p(diff));
 
    if(!lastboss || lastboss->dead) {
       switch(diff) {
@@ -201,7 +199,9 @@ void Sc_PhantomDeath(void) {
       ACS_Delay(2);
    }
 
-   Dbg_Log(log_boss, "%s: %s phase %i defeated", __func__, boss->name, boss->phase);
+   Dbg_Log(log_boss,
+           _l("Boss "), _p((cstr)boss->name), _l(" phase "), _p(boss->phase),
+           _l(" defeated"));
 
    if(!CVarGetI(sc_sv_nobossdrop)) {
       SpawnBossReward();
@@ -224,7 +224,9 @@ void Sc_SpawnBoss(void) {
 
    ServCallV(sm_SpawnBoss, fast_strdup2(OBJ "Boss_", boss->name), boss->phase);
 
-   Dbg_Log(log_boss, "%s: Boss %s phase %i spawned", __func__, boss->name, boss->phase);
+   Dbg_Log(log_boss,
+           _l("Boss "), _p((cstr)boss->name), _l(" phase "), _p(boss->phase),
+           _l(" spawned"));
    Dbg_Note("boss: %s phase %i spawned\n", boss->name, boss->phase);
 
    bossspawned = true;

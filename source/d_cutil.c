@@ -86,7 +86,9 @@ u32 Dlg_PushStr(struct compiler *d, cstr s, u32 l) {
       unwrap(&d->res);
    }
 
-   Dbg_Log(log_dlg, "%s: (%3u %3u) '%s'", __func__, l, vl, s);
+   Dbg_Log(log_dlg,
+           _l(__func__), _l(": ("), _p(l), _c(' '), _p(vl), _l(") '"), _p(s),
+           _c('\''));
 
    Vec_Grow(d->def.stab, vl, _tag_dlgs);
    d->def.stabC += vl;

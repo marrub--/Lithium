@@ -217,6 +217,7 @@ sm_:
    - SetFrozen
    - SetTeleFogTo
    - SetVersion
+   - Shield: m_shield
    - SpawnBoss
    - SpawnRain
    - Speed: m_speed

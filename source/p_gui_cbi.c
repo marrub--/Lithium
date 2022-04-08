@@ -38,7 +38,6 @@ void CBITab_Marine(struct gui_state *g) {
    else Upgr(cupg_m_cpu1) {CPU(2); ram = 100; name = ns(lang(sl_cbi_cpu2));}
    else                   {CPU(3); ram =  50; name = ns(lang(sl_cbi_cpu1));}
 
-   PrintTextChS(name);
    PrintText_str(name, sf_smallfnt, g->defcr, g->ox+7,1, g->oy+47,1);
 
    InfoStart;

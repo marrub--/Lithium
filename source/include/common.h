@@ -46,13 +46,6 @@
 #define IsSmallNumber(x) ((x) > -0.001 && (x) < 0.001)
 #define CloseEnough(x, y) (IsSmallNumber(x - y))
 
-#ifndef NDEBUG
-#define Dbg_Log(level, ...) \
-   (dbglevel(level) ? Log(c"" #level ": " __VA_ARGS__) : (void)0)
-#else
-#define Dbg_Log(...)
-#endif
-
 /* !!!FIXME!!! GZDoom doesn't have a way of using PRINT_NONOTIFY yet */
 #define ConsoleLog(...) ((void)0)
 
@@ -136,10 +129,28 @@
 #define Dbg_Note(...) \
    (dbglevel(log_devh) ? Dbg_Note_Impl(__VA_ARGS__) : (void)0)
 
-#define Dbg_Trace(n) (ACS_BeginLog(), PrintChrSt(__func__), ACS_PrintInt(n), ACS_EndLog())
+#define Dbg_Trace(n) (ACS_BeginPrint(), PrintChrLi(__func__), ACS_PrintInt(n), ACS_EndLog())
+
+#define Dbg_Log(level, ...) \
+   (dbglevel(level) ? \
+    (ACS_BeginPrint(), \
+     PrintChrLi(#level), \
+     ACS_PrintChar(':'), \
+     ACS_PrintChar(' '), \
+     __VA_ARGS__, \
+     ACS_EndLog()) : \
+    (void)0)
+#define Dbg_Err(...) \
+   (ACS_BeginPrint(), \
+    PrintChrLi(__func__), \
+    PrintChrLi(" \CgERROR\C-: "), \
+    __VA_ARGS__, \
+    ACS_EndLog())
 #else
 #define Dbg_Stat(...)
 #define Dbg_Note(...)
+#define Dbg_Log(...)
+#define Dbg_Err(...)
 #endif
 
 #define InvGive ACS_GiveInventory
@@ -156,8 +167,6 @@ enum {
    log_dmonV, /* verbose debug info for the monster tracker */
    log_dlg,   /* debug info for the dialogue/terminal compiler */
    log_bip,   /* debug info for the BIP */
-   log_sys,   /* meta debug info */
-   log_sysV,  /* tick info */
    log_dpl,   /* dynamic stack usage */
    log_save,  /* save data */
 };
@@ -185,7 +194,6 @@ void PtrInvSet (i32 tid, str item, i32 amount);
 void Dbg_Stat_Impl(cstr fmt, ...);
 void Dbg_Note_Impl(cstr fmt, ...);
 void Dbg_PrintMem(void const *data, mem_size_t size);
-void Log(cstr fmt, ...);
 #endif
 
 #ifndef NDEBUG

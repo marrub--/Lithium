@@ -26,8 +26,8 @@ bool chtf_dbg_dlg(cheat_params_t const params) {
 
    struct dlg_def *def = &dlgdefs[n];
 
+   ACS_BeginPrint();
    if(def->codeV) {
-      ACS_BeginLog();
       PrintChrLi("--- Script ");
       ACS_PrintHex(n);
       PrintChrLi(" ---\n");
@@ -46,10 +46,10 @@ bool chtf_dbg_dlg(cheat_params_t const params) {
       __nprintf("Dumping string table(%p,%u,%u)...\n", def->stabV, def->stabC,
                 def->stabP);
       Dbg_PrintMemC(def->stabV, def->stabC);
-      ACS_EndLog();
    } else {
-      Log("dialogue %u has no code", n);
+      __nprintf("dialogue %u has no code", n);
    }
+   ACS_EndLog();
 
    return true;
 }
@@ -67,7 +67,9 @@ static
 void Dlg_GetItem_Page(struct compiler *d, u32 num, u32 act) {
    d->def.pages[num] = d->def.codeP;
 
-   Dbg_Log(log_dlg, "--- page %u (%u)", num, d->def.codeP);
+   Dbg_Log(log_dlg,
+           _l("--- page "), _p(num),
+           _c(' '), _c('('), _p(d->def.codeP), _c(')'));
 
    Dlg_GetStmt(d); unwrap(&d->res);
 
@@ -126,7 +128,7 @@ void Dlg_GetTop_Prog(struct compiler *d, u32 act, u32 beg, u32 end) {
    FinishDef(d);
    d->num = num;
 
-   Dbg_Log(log_dlg, "\n---\nheading %u\n---", num);
+   Dbg_Log(log_dlg, _l("\n---\nheading "), _p(num), _l("\n---"));
 
    while(Dlg_GetItem(d, act)) {
       unwrap(&d->res);

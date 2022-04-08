@@ -98,7 +98,6 @@ end
       SrcsEnt.from("p_gui_upgrades.c"),
       SrcsEnt.from("p_items.c"),
       SrcsEnt.from("p_log.c"),
-      SrcsEnt.from("p_m_dbg.c"),
       SrcsEnt.from("p_magic.c"),
       SrcsEnt.from("p_notes.c"),
       SrcsEnt.from("p_obituary.c"),

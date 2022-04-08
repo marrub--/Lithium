@@ -102,7 +102,7 @@ void UpdateGame(void) {
 
 static
 void MInitPre(void) {
-   Dbg_Log(log_dev, "%s", __func__);
+   Dbg_Log(log_dev, _l(__func__));
 
    CheckModCompat();
    UpdateGame();
@@ -110,7 +110,7 @@ void MInitPre(void) {
 
 static
 void GInit(void) {
-   Dbg_Log(log_dev, "%s", __func__);
+   Dbg_Log(log_dev, _l(__func__));
 
    cbiperf = 10;
 
@@ -124,7 +124,7 @@ void GInit(void) {
 
 static
 void MInitPst(void) {
-   Dbg_Log(log_dev, "%s", __func__);
+   Dbg_Log(log_dev, _l(__func__));
 
    payout.par = ACS_GetLevelInfo(LEVELINFO_PAR_TIME) * 35;
 
@@ -150,7 +150,7 @@ void MInitPst(void) {
 
 static
 void MInit(void) {
-   Dbg_Log(log_dev, "%s", __func__);
+   Dbg_Log(log_dev, _l(__func__));
 
    Dlg_MInit();
 
@@ -165,7 +165,7 @@ void MInit(void) {
 
 static
 void HInitPre(void) {
-   Dbg_Log(log_dev, "%s", __func__);
+   Dbg_Log(log_dev, _l(__func__));
 
    if(unloaded) {
       mapscleared++;
@@ -187,7 +187,7 @@ void HInitPre(void) {
 
 static
 void HInit(void) {
-   Dbg_Log(log_dev, "%s", __func__);
+   Dbg_Log(log_dev, _l(__func__));
 
    if(!CVarGetI(sc_sv_nobosses)) {
       Boss_HInit();
@@ -216,7 +216,7 @@ void HInit(void) {
 
 dynam_aut script ext("ACS") addr(lsc_worldopen)
 void Sc_World(bool is_reopen) {
-   Dbg_Log(log_dev, "%s", __func__);
+   Dbg_Log(log_dev, _l(__func__));
 
 begin:
    Draw_Init();
@@ -232,30 +232,33 @@ begin:
       return;
    }
 
-   #ifndef NDEBUG
    if(CVarGetI(sc_sv_failtime) == 0) for(;;) {
-      Log("\n=======\n"
-          "The configuration for this mod has been wiped, or you accidentally "
-          "set '" CVAR "sv_failtime' to 0 manually. If you did the latter, "
-          "please set it to something else. Otherwise, please follow these "
-          "instructions to fix your configuration:\n"
-          "\n"
-          "1. Navigate to your GZDoom folder.\n"
-          "2. Find the configuration settings file (if you have extensions "
-          "shown it will be the ini file in the folder) and open it.\n"
-          "3. Find the heading '[Doom.Player.Mod]' and delete any lines "
-          "starting with '" CVAR "' or '" DCVAR "' under it.\n"
-          "4. Find the heading '[Doom.LocalServerInfo.Mod]' and delete any "
-          "lines starting with '" CVAR "' or '" DCVAR "' under it.\n"
-          "5. Save the file and start GZDoom again. If the issue persists "
-          "try these steps again or delete your GZDoom configuration.\n"
-          "\n\n\n\n\n\n"
-          "Invalid settings detected. Please open the console"
-          "(\"%jS\" or options menu) for more information.",
-          sc_toggleconsole);
+      ACS_BeginPrint();
+      PrintChrLi(
+         "\n=======\n"
+         "The configuration for this mod has been wiped, or you accidentally "
+         "set '" CVAR "sv_failtime' to 0 manually. If you did the latter, "
+         "please set it to something else. Otherwise, please follow these "
+         "instructions to fix your configuration:\n"
+         "\n"
+         "1. Navigate to your GZDoom folder.\n"
+         "2. Find the configuration settings file (if you have extensions "
+         "shown it will be the ini file in the folder) and open it.\n"
+         "3. Find the heading '[Doom.Player.Mod]' and delete any lines "
+         "starting with '" CVAR "' or '" DCVAR "' under it.\n"
+         "4. Find the heading '[Doom.LocalServerInfo.Mod]' and delete any "
+         "lines starting with '" CVAR "' or '" DCVAR "' under it.\n"
+         "5. Save the file and start GZDoom again. If the issue persists "
+         "try these steps again or delete your GZDoom configuration.\n"
+         "\n\n\n\n\n\n"
+         "Invalid settings detected. Please open the console"
+         "(\"");
+      ACS_PrintBind(sc_toggleconsole);
+      PrintChrLi("\" or options menu) for more information.");
       ACS_Delay(10);
    }
 
+   #ifndef NDEBUG
    dbgnotenum = 0;
    #endif
 
@@ -350,7 +353,7 @@ void Sc_WorldReopen(void) {
 script type("unloading") static
 void Sc_WorldUnload(void) {
    unloaded = true;
-   Dbg_Log(log_dev, "%s", __func__);
+   Dbg_Log(log_dev, _l(__func__));
 
    pl.setActivator();
    P_Upg_PDeinit();

@@ -92,8 +92,10 @@ void str_inp(astr *p, char *out, mem_size_t max_len, char delim) {
 static
 bool check_version(cstr name, i32 version, i32 expected) {
    if(version != expected) {
-      Dbg_Log(log_dev, "version %i expected for chunk %s but got %i",
-              expected, name, version);
+      Dbg_Log(log_dev,
+              _l("version "), _p(expected),
+              _l(" expected for chunk "), _p(name),
+              _l(" but got "), _p(version));
       return false;
    } else {
       return true;
@@ -102,7 +104,7 @@ bool check_version(cstr name, i32 version, i32 expected) {
 
 script
 void P_Data_Save(void) {
-   Dbg_Log(log_dev, "Saving data...");
+   Dbg_Log(log_dev, _l("Saving data..."));
 
    ACS_BeginPrint();
    chunk_out("Lith", 7);
@@ -154,7 +156,7 @@ void P_Data_Load(void) {
    noinit static
    char chunk_name[5];
 
-   Dbg_Log(log_dev, "Loading data...");
+   Dbg_Log(log_dev, _l("Loading data..."));
 
    astr inp = CVarGetS(sc_psave);
    while(byte(*inp) == _eoc_1 && byte(inp[1]) == _eoc_2) {
@@ -166,7 +168,9 @@ void P_Data_Load(void) {
       i32 version = num_inp(&inp);
       unwrap_end(' ', error);
 
-      Dbg_Log(log_dev, "loading chunk %s version %i", chunk_name, version);
+      Dbg_Log(log_dev,
+              _l("loading chunk "), _l(chunk_name),
+              _l(" version "), _p(version));
 
       switch(P_SaveChunkName(chunk_name)) {
       case _save_chunk_Lith:
@@ -229,10 +233,12 @@ void P_Data_Load(void) {
          }
          break;
       skip_err:
-         Dbg_Log(log_dev, "chunk %s has errors -- skipping", chunk_name);
+         Dbg_Log(log_dev,
+                 _l("chunk "), _l(chunk_name), _l(" has errors -- skipping"));
          goto skip;
       default:
-         Dbg_Log(log_dev, "unknown chunk %s -- skipping", chunk_name);
+         Dbg_Log(log_dev,
+                 _l("unknown chunk "), _l(chunk_name), _l(" -- skipping"));
       skip:
          while(*inp && !(*inp == _eoc_1 && inp[1] == _eoc_2)) ++inp;
          break;
@@ -244,7 +250,7 @@ void P_Data_Load(void) {
    }
 
 error:
-   Dbg_Log(log_dev, "terminated early");
+   Dbg_Log(log_dev, _l("terminated early"));
 }
 
 /* EOF */

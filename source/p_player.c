@@ -32,14 +32,10 @@ void P_doIntro(void);
 
 _Noreturn dynam_aut script type("enter") static
 void Sc_PlayerEntry(void) {
-   static
-   void P_Scr_PTickPre(void);
-
-   static
-   void P_Atr_pTick(void);
-
-   static
-   void P_Aug_PTick(void);
+   static void P_Scr_PTickPre(void);
+   static void P_Spe_pTick(void);
+   static void P_Atr_pTick(void);
+   static void P_Aug_pTick(void);
 
    if(ACS_GameType() == GAME_TITLE_MAP) return;
 
@@ -59,45 +55,44 @@ reinit:
 
    if(pl.teleportedout) P_TeleportIn();
 
+   struct player_delta olddelta;
+   i32                 oldhealth;
+   i32                 oldmana;
+   i32                 oldshield;
+
    while(pl.active) {
       if(pl.reinit) {
          goto reinit;
       }
 
-      P_Dat_PTickPre();
-
-      /* Check for resurrect. */
+      /* Check for resurrect */
       if(pl.health > 0 && pl.dead) {
          pl.reinit = true;
       }
 
-      /* These can be changed any time, so save them here. */
-      struct player_delta olddelta = pl.cur;
-      i32 oldhealth = pl.health;
-      i32 oldmana   = pl.mana;
+      /* Update data */
+      P_Dat_PTickPre();
 
-      /* Tick all systems. */
-      P_Wep_PTickPre(); /* Update weapon info */
-      P_Scr_PTickPre(); /* Update score */
+      olddelta  = pl.cur;
+      oldhealth = pl.health;
+      oldmana   = pl.mana;
+      oldshield = pl.shield;
 
-      if(!pl.dead) P_Upg_PTick();
-      P_Upg_PTickPst();
-
+      /* Tick all systems */
       if(!pl.dead) {
+         P_Wep_PTickPre();
+         P_Scr_PTickPre();
+         P_Spe_pTick();
+         P_Upg_PTick();
          P_Inv_PTick();
-
-         if(pl.modal == _gui_cbi) P_CBI_PTick();
-
-         P_Aug_PTick();
-
+         P_CBI_PTick();
+         P_Aug_pTick();
          P_Atr_pTick();
          P_Wep_PTick();
          P_Log_PTick();
-
-         P_Dat_PTickPst(); /* Update engine info */
+         P_Dat_PTickPst();
+         P_Ren_PTickPst();
       }
-
-      P_Ren_PTickPst();
 
       /* Tic passes */
       ACS_Delay(1);
@@ -111,6 +106,7 @@ reinit:
       pl.old       = olddelta;
       pl.oldhealth = oldhealth;
       pl.oldmana   = oldmana;
+      pl.oldshield = oldshield;
 
       /* If the map changes this we need to make sure it's still correct. */
       P_ValidateTID();
@@ -624,8 +620,7 @@ void P_attrCON(void) {
    damage_mul += pl.rage;
 }
 
-static
-void P_attrREF(void) {
+static void P_attrREF(void) {
    i32 ref = pl.attr.attrs[at_spc];
 
    if(pl.health < pl.oldhealth) {
@@ -637,8 +632,33 @@ void P_attrREF(void) {
    pl.speedmul += (int)pl.rage;
 }
 
-static
-void P_Atr_pTick(void) {
+script static void P_Spe_shieldDestroyed(void) {
+   pl.regenwait = 140;
+   /*
+   for(i32 i = 0; i < 35*2; ++i) {
+   }
+   */
+}
+
+static void P_Spe_pTick(void) {
+   if(Paused) return;
+
+   if(get_bit(cbiupgr, cupg_d_shield)) {
+      if(pl.shield == 0) {
+         if(pl.oldshield != 0) {
+            P_Spe_shieldDestroyed();
+         }
+      } else if(pl.shield < pl.oldshield) {
+         pl.regenwait = 35;
+      } else if(pl.regenwait) {
+         --pl.regenwait;
+      } else if(pl.shield < 250) {
+         pl.shield = pl.shield + 1;
+      }
+   }
+}
+
+static void P_Atr_pTick(void) {
    if(Paused) return;
 
    k32  acc = pl.attr.attrs[at_acc] / 150.0;
@@ -679,7 +699,7 @@ void P_Scr_PTickPre(void) {
 }
 
 static
-void P_Aug_PTick(void) {
+void P_Aug_pTick(void) {
    for(i32 i = 0; i < 4; i++) {
       i32 total = 0;
 

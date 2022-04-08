@@ -22,7 +22,8 @@ void P_Ren_Debug(void) {
       "ap.y: %lk\nap.p: %lk\nap.r: %lk\n"
       "rage: %k\n"
       "score: %lli\n"
-      "speedmul: %i\njumpboost: %i\n",
+      "speedmul: %i\njumpboost: %i\n"
+      "shield: %i\nregenwait: %i\n",
       pl.attr.level, pl.attr.expprev, pl.attr.exp, pl.attr.expnext,
       pl.x, pl.y, pl.z,
       pl.velx, pl.vely, pl.velz, pl.getVel(),
@@ -30,7 +31,8 @@ void P_Ren_Debug(void) {
       pl.addyaw * 360, pl.addpitch * 360, pl.addroll * 360,
       pl.rage,
       pl.score,
-      pl.speedmul, pl.jumpboost
+      pl.speedmul, pl.jumpboost,
+      pl.shield, pl.regenwait
    );
 
    SetSize(320, 240);

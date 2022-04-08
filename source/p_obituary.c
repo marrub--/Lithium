@@ -103,7 +103,7 @@ void Sc_Obituary(void) {
 
    if(out[0]) {
       i32 time = 0;
-      Dbg_Log(log_dev, "%s", out);
+      Dbg_Log(log_dev, _p((cstr)out));
       pl.obit = out;
    }
 }

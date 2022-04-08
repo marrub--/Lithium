@@ -215,18 +215,11 @@ void TraceReg(void) {
 #endif
 
 /* jumps */
-#ifndef NDEBUG
 #define JmpDbg() \
-   statement(if(dbglevel(log_dlg)) { \
-      ACS_BeginLog(); \
-      Dlg_WriteCode(def, next, GetPC() - PRG_BEG); \
-      ACS_PrintChar(' '); \
-      TraceReg(); \
-      ACS_EndLog(); \
-   })
-#else
-#define JmpDbg() statement(;)
-#endif
+   Dbg_Log(log_dlg, \
+      Dlg_WriteCode(def, next, GetPC() - PRG_BEG), \
+      _c(' '), \
+      TraceReg())
 
 /* jump next byte */
 #define JmpVI() \
@@ -728,9 +721,7 @@ void Dlg_Run(u32 num) {
    register struct dlg_def *def = &dlgdefs[num];
 
    if(!def->codeV) {
-      #ifndef NDEBUG
-      Log("%s ERROR: dialogue %u has no code", __func__, num);
-      #endif
+      Dbg_Err(_l("dialogue "), _p(num), _l(" has no code"));
       goto halt;
    }
 
@@ -755,18 +746,13 @@ void Dlg_Run(u32 num) {
    for(u32 i = 0; i < def->codeC; i++) memory[PRG_BEG_C + i] = def->codeV[i];
    for(u32 i = 0; i < def->stabC; i++) memory[STR_BEG_C + i] = def->stabV[i];
 
-   #ifndef NDEBUG
-   if(dbglevel(log_dlg)) {
-      ACS_BeginLog();
-      PrintChrLi("--- begin dialogue ");
-      ACS_PrintHex(num);
-      PrintChrLi(" ---\nDumping segment PRG...\n");
-      Dbg_PrintMemC(&memory[PRG_BEG_C], def->codeC);
-      PrintChrLi("Dumping segment STR...\n");
-      Dbg_PrintMemC(&memory[STR_BEG_C], def->stabC);
-      ACS_EndLog();
-   }
-   #endif
+   Dbg_Log(log_dlg,
+      _l("--- begin dialogue "),
+      ACS_PrintHex(num),
+      _l(" ---\nDumping segment PRG...\n"),
+      Dbg_PrintMemC(&memory[PRG_BEG_C], def->codeC),
+      _l("Dumping segment STR...\n"),
+      Dbg_PrintMemC(&memory[STR_BEG_C], def->stabC));
 
    /* copy some constants into memory */
    MemB1_S(VAR_PCLASS, pl.pclass);
@@ -784,7 +770,7 @@ void Dlg_Run(u32 num) {
 
 vmaction:
    while(ua = GetVA(), (ua != ACT_NONE && ua < ACT_MAX)) {
-      Dbg_Log(log_dlg, "action %02X %s", ua, action_names[ua]);
+      Dbg_Log(log_dlg, _l("action "), _p(ua), _c(' '), _p(action_names[ua]));
       switch(ua) {
       #define ACT(name) case ACT_##name: Act##name(); break;
       #include "d_vm.h"
@@ -1110,7 +1096,7 @@ INY_NP: ModSR_ZN(SetRY(GetRY() + 1)); JmpVI();
 /* Trace */
 TRR_NP:
    #ifndef NDEBUG
-   ACS_BeginLog();
+   ACS_BeginPrint();
    TraceReg();
    ACS_EndLog();
    #endif
@@ -1118,22 +1104,26 @@ TRR_NP:
 
 TRS_NP:
    #ifndef NDEBUG
+   ACS_BeginPrint();
    for(u32 i = GetSP() + 1; i <= 0xFF; i++) {
-      Log("%02X: %02X", i, MemB1_G(STA_BEG + i));
+      __nprintf("%02X: %02X", i, MemB1_G(STA_BEG + i));
    }
+   ACS_EndLog();
    #endif
    JmpVI();
 
 TRV_NP:
    #ifndef NDEBUG
+   ACS_BeginPrint();
    for(u32 i = 0; i <= 0xFF; i++) {
-      Log("%02X: %02X", i, MemB1_G(VAR_BEG + i));
+      __nprintf("%02X: %02X", i, MemB1_G(VAR_BEG + i));
    }
+   ACS_EndLog();
    #endif
    JmpVI();
 
 halt:
-   Dbg_Log(log_dlg, "%s: exited", __func__);
+   Dbg_Log(log_dlg, _l(__func__), _l(": exited"));
 
    pl.modal = _gui_none;
 }

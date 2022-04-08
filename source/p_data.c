@@ -60,12 +60,10 @@ void SetPClass(void) {
    else if(pl.pcstr == so_AssassinPlayer ) set_pcl(assassin);
    else if(pl.pcstr == so_DarkLordPlayer ) set_pcl(darklord);
    else if(pl.pcstr == so_ThothPlayer    ) set_pcl(thoth);
-   #ifndef NDEBUG
    else {
-      Log("Invalid player class detected (%S (%p)), "
-          "everything is going to explode!", pl.pcstr, pl.pcstr);
+      Dbg_Err(_l("Invalid player class "), _p(pl.pcstr),
+              _l(", everything is going to explode!"));
    }
-   #endif
 
    pl.discrim = P_Discrim(pl.pclass);
    pl.color   = P_Color(pl.pclass);
@@ -85,9 +83,11 @@ bool P_SetVel(k32 velx, k32 vely, k32 velz, bool add) {
 void P_ValidateTID(void) {
    if(ACS_ActivatorTID() == 0) {
       ACS_Thing_ChangeTID(0, pl.tid = ACS_UniqueTID());
-      Dbg_Log(log_dev, "set ptid from 0 to %i", pl.tid);
+      Dbg_Log(log_dev, _l("set ptid from 0 to "), _p(pl.tid));
    } else if(pl.tid != ACS_ActivatorTID()) {
-      Dbg_Log(log_dev, "set ptid from %i to %i", pl.tid, ACS_ActivatorTID());
+      Dbg_Log(log_dev,
+              _l("set ptid from "), _p(pl.tid), _l(" to "),
+              _p(ACS_ActivatorTID()));
       pl.tid = ACS_ActivatorTID();
    }
 }

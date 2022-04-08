@@ -65,6 +65,8 @@ void P_CBI_TabInfo(struct gui_state *g) {
 }
 
 script void P_CBI_PTick(void) {
+   if(pl.modal != _gui_cbi) return;
+
    struct gui_state *g = &pl.cbi.guistate;
 
    pl.cbi.st.buyfill.tic  = CVarGetI(sc_gui_buyfiller);

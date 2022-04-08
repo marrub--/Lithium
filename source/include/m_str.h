@@ -27,8 +27,6 @@
 #define StrParamBegin(...) (ACS_BeginPrint(), __nprintf(__VA_ARGS__))
 #define StrParam(...) (StrParamBegin(__VA_ARGS__), ACS_EndStrParam())
 
-#define PrintChars(s, n) ACS_PrintGlobalCharRange((i32)(s), __GDCC__Sta, 0, n)
-#define PrintChrSt(s)    ACS_PrintGlobalCharArray((i32)(s), __GDCC__Sta)
 #define PrintChrLi(s)    ACS_PrintGlobalCharRange((i32)(s), __GDCC__Sta, 0, sizeof(s))
 
 #define fast_strndup(s, n) (ACS_BeginPrint(), PrintChars(s, n), ACS_EndStrParam())
@@ -126,6 +124,19 @@
 
 #define ns(s) (s |? st_null)
 
+#define _p(v) \
+   (_Generic(v, \
+      k32: ACS_PrintFixed, \
+      i32: ACS_PrintInt, \
+      i96: printscr, \
+      u32: ACS_PrintInt, \
+      cstr: PrintChrSt, \
+      str: ACS_PrintString)((v)))
+#define _l(s) PrintChrLi(s)
+#define _c(c) ACS_PrintChar(c)
+
+stkcall void PrintChars(cstr s, mem_size_t n);
+stkcall void PrintChrSt(cstr s);
 stkcall i32 radix(char c);
 stkcall i32 faststrtoi32_str(astr p);
 stkcall i32 faststrtoi32(cstr p);
@@ -147,6 +158,7 @@ stkcall bool faststrchk(cstr s1, cstr s2);
 stkcall bool faststrcasechk(cstr s1, cstr s2);
 stkcall char *faststrchr(cstr s, char c);
 stkcall char *faststrtok(char *s, char **next, char c);
+stkcall void printscr(i96 num);
 stkcall cstr scoresep(i96 num);
 stkcall cstr alientext(i32 num);
 stkcall str lang(str name);

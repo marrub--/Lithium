@@ -89,13 +89,13 @@ typedef char mon_name_t[64];
 
 struct monster_preset {
    mon_name_t prename;
-   u64        exp;
+   i32        exp;
    i96        score;
 };
 
 struct monster_info {
    anonymous struct monster_preset pre;
-   enum mtype type;
+   i32        type;
    mon_name_t name;
    i32        flags;
 };

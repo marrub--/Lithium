@@ -107,6 +107,16 @@ void StrInit(void) {
 }
 
 alloc_aut(0) stkcall
+void PrintChars(cstr s, mem_size_t n) {
+   ACS_PrintGlobalCharRange((i32)(s), __GDCC__Sta, 0, n);
+}
+
+alloc_aut(0) stkcall
+void PrintChrSt(cstr s) {
+   ACS_PrintGlobalCharArray((i32)(s), __GDCC__Sta);
+}
+
+alloc_aut(0) stkcall
 i32 radix(char c) {
    /**/ if(c >= 'a' && c <= 'z') return c - 'a';
    else if(c >= 'A' && c <= 'Z') return c - 'A';
@@ -317,6 +327,11 @@ cstr scoresep(i96 num) {
    if(!cnum) outp++;
 
    return outp;
+}
+
+alloc_aut(0) stkcall
+void printscr(i96 num) {
+   PrintChrSt(scoresep(num));
 }
 
 alloc_aut(0) stkcall

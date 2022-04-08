@@ -106,18 +106,6 @@ void Dbg_PrintMem(void const *data, mem_size_t size) {
    PrintChrLi("\nEOF\n");
 }
 
-void Log(cstr fmt, ...) {
-   va_list vl;
-
-   ACS_BeginPrint();
-
-   va_start(vl, fmt);
-   __vnprintf(fmt, vl);
-   va_end(vl);
-
-   ACS_EndLog();
-}
-
 dynam_aut script_str ext("ACS") addr(OBJ "Thingomamob")
 void Sc_Thimgomabjhdf(void) {
    static

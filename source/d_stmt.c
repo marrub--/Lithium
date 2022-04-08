@@ -255,7 +255,7 @@ script void Dlg_GetStmt(struct compiler *d) {
       unwrap(&d->res);
       break;
    case tok_identi: {
-      Dbg_Log(log_dlg, "%s: %s", __func__, tok->textV);
+      Dbg_Log(log_dlg, _l(__func__), _l(": "), _p((cstr)tok->textV));
 
       switch(Dlg_StmtName(tok->textV)) {
       /* conditionals */
