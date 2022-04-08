@@ -19,29 +19,22 @@
 
 #include <limits.h>
 
-noinit struct player player;
+noinit struct player pl;
 
-script static
-void P_bossWarning(void);
+script static void P_bossWarning(void);
+script static void P_bossText(i32 boss);
+script static void P_doIntro(void);
 
-script static
-void P_bossText(i32 boss);
+static void P_Scr_PTickPre(void);
+static void P_Spe_pTick(void);
+static void P_Atr_pTick(void);
+static void P_Aug_pTick(void);
 
-script static
-void P_doIntro(void);
-
-_Noreturn dynam_aut script type("enter") static
+_Noreturn dynam_aut script addr(lsc_playeropen)
 void Sc_PlayerEntry(void) {
-   static void P_Scr_PTickPre(void);
-   static void P_Spe_pTick(void);
-   static void P_Atr_pTick(void);
-   static void P_Aug_pTick(void);
-
    if(ACS_GameType() == GAME_TITLE_MAP) return;
 
 reinit:
-   while(!player_init) ACS_Delay(1);
-
    P_Init();
    P_Log_Entry();
    P_Upg_Enter();

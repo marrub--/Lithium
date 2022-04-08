@@ -102,6 +102,7 @@ enum ZscName(ScriptNum) {
    lsc_monstertype,
    lsc_worldreopen,
    lsc_worldopen,
+   lsc_playeropen,
    lsc_drawcr,
    lsc_cheatinput,
    lsc_versionname,
@@ -210,7 +211,6 @@ enum finale_num {
    _finale_other,
 };
 
-extern bool lmvar player_init;
 extern struct payoutinfo payout;
 extern i32 mapscleared;
 extern i32 prevcluster;

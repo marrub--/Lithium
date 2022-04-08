@@ -64,6 +64,11 @@ override void BeginPlay() {
    m_wasFrozen = false;
 }
 
+override void postBeginPlay() {
+   super.postBeginPlay();
+   ACS_ExecuteWithResult(lsc_playeropen);
+}
+
 override void GiveDefaultInventory() {
    lith_giveDefItem("Lith_IDOL", 0);
    lith_giveDefItem("Lith_ManaAmmo", 0);

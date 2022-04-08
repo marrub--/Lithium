@@ -35,8 +35,6 @@ enum mission_status lmvar mission = _unfinished;
 
 bool dorain;
 
-bool lmvar player_init;
-
 bool reopen;
 
 i32 lmvar mapid;
@@ -225,8 +223,8 @@ begin:
       W_Title();
       return;
    } else if(MapNum == 1911777) {
-      ACS_SetPlayerProperty(true, true, PROP_TOTALLYFROZEN);
       pl.setActivator();
+      ACS_SetPlayerProperty(true, true, PROP_TOTALLYFROZEN);
       Dlg_MInit();
       F_Run();
       return;
@@ -275,9 +273,8 @@ begin:
    if(!is_reopen) HInitPre();
 
    unloaded = false; /* Unloaded flag can be reset now. */
-   player_init = true;
 
-   ACS_Delay(1); /* Wait for players to get initialized. */
+   ACS_Delay(2); /* Wait for players to get initialized. */
 
    /* Hub-static post-player init. */
    if(!is_reopen) HInit();
@@ -295,7 +292,7 @@ begin:
 
    for(;;) {
       if(reopen) {
-         player_init = reopen = false;
+         reopen = false;
          goto begin;
       }
 
