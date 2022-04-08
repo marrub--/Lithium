@@ -9,6 +9,13 @@
 extend class Lith_Player;
 
 override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int flags, double angle) {
+   if(Lith_StatFx.getInPool("Lith_StatShadowWalker") || m_iFrames) {
+      return 0;
+   } else if(m_shield) {
+      m_shield = max(m_shield - damage, 0);
+      return 0;
+   }
+
    /* ÜBER KLUDGE (override behaviour for DONTHARMSPECIES) */
    if(inflictor && inflictor.species == species && inflictor.bDONTHARMSPECIES && (!source || !source.bISMONSTER))
       return 0;

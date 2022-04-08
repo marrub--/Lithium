@@ -22,7 +22,6 @@ class Lith_InformantPlayer : Lith_Player
    }
 
    private int m_dodgeDbc;
-   private int m_iFrames;
    int m_overdrive;
 
    override void giveDefaultInventory()
@@ -52,14 +51,6 @@ class Lith_InformantPlayer : Lith_Player
       }
 
       super.tick();
-   }
-
-   override int damageMobj(Actor inflictor, Actor source, int damage, name mod, int flags, double angle)
-   {
-      if(m_iFrames)
-         return 0;
-      else
-         return super.damageMobj(inflictor, source, damage, mod, flags, angle);
    }
 }
 

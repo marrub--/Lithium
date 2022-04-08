@@ -25,6 +25,9 @@ meta double m_VBob;
 
 private double m_RainLerp;
 
+int m_iFrames;
+int m_shield;
+
 Lith_Flashlight m_light;
 
 Lith_Cyberspace m_cs;
@@ -238,7 +241,7 @@ override void CheckPitch() {
    }
 }
 
-override void CheckAirSupply() {
+override void checkAirSupply() {
    /* No. */
 }
 

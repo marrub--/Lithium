@@ -18,10 +18,10 @@ class Lith_DarkLordPlayer : Lith_Player {
       Tag "$LITH_CLASS_DARKLORD";
    }
 
-   override void GiveDefaultInventory() {
-      Super.GiveDefaultInventory();
-      Lith_GiveDefWeapon("Lith_Khanda");
-      Lith_GiveDefWeapon("Lith_700Express");
+   override void giveDefaultInventory() {
+      super.giveDefaultInventory();
+      lith_giveDefWeapon("Lith_Khanda");
+      lith_giveDefWeapon("Lith_700Express");
    }
 }
 
@@ -29,8 +29,7 @@ class Lith_DarkLordSprint : PowerSpeed {
    default {
       Powerup.Duration 2;
       Speed 2.1;
-
-      +POWERSPEED.NOTRAIL
+      +PowerSpeed.NoTrail
    }
 }
 

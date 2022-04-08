@@ -55,13 +55,6 @@ class Lith_WandererPlayer : Lith_Player {
 
       super.tick();
    }
-
-   override int damageMobj(Actor inflictor, Actor source, int damage, name mod, int flags, double angle) {
-      if(Lith_StatFx.getInPool("Lith_StatShadowWalker"))
-         return 0;
-      else
-         return super.damageMobj(inflictor, source, damage, mod, flags, angle);
-   }
 }
 
 class Lith_WWeapon : Lith_Weapon {
