@@ -11,7 +11,10 @@ player.pickup {
    upgrbody    UpgrBody    # Killing Floor, ???
    upgrextr    UpgrExtr    # Phantasy Star Nova
    upgrweap    UpgrWeap    # Halo 3
-   upgrcbi     CBIUpgrade  # ^
+   upgrcbio    CBIUpgradeO # ^
+   #upgrcbim    CBIUpgradeM # Self-made
+   upgrcbii    CBIUpgradeI # ^
+   #upgrcbif    CBIUpgradeF # ^
    item        Item        # Firearms: Source
    barrier     Barrier     # Touhou 13
    infrared    Goggles     # ???

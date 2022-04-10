@@ -77,7 +77,7 @@ void Sc_Cercle(void) {
       FreezeTime();
       ACS_Delay(2); /* necessary so sounds may play */
 
-      ACS_AmbientSound(ss_weapons_cercle_begin, 127);
+      AmbientSound(ss_weapons_cercle_begin, 0.5k);
 
       i32 fxtid = ACS_UniqueTID();
       for(i32 i = 0; i < 100; i++) {
@@ -100,7 +100,7 @@ void Sc_Cercle(void) {
       SetMembI(fxtid, sm_Trigger, true);
       SetMembI(fxtid, sm_FxTID, fxtid2);
 
-      ACS_AmbientSound(ss_weapons_cercle_attack, 127);
+      AmbientSound(ss_weapons_cercle_attack, 0.5k);
 
       ACS_Delay(35);
       SetMembI(fxtid2, sm_Trigger, true);

@@ -15,24 +15,26 @@ void P_Ren_Debug(void) {
    if(!dbglevel(log_devh)) return;
 
    Dbg_Stat(
-      "exp: lv.%i %i/%i/%i\n"
-      "x: %k\ny: %k\nz: %k\n"
-      "vx: %k\nvy: %k\nvz: %k\nvel: %k\n"
-      "a.y: %k\na.p: %k\na.r: %k\n"
-      "ap.y: %lk\nap.p: %lk\nap.r: %lk\n"
-      "rage: %k\n"
-      "score: %lli\n"
-      "speedmul: %i\njumpboost: %i\n"
-      "shield: %i\nregenwait: %i\n",
-      pl.attr.level, pl.attr.expprev, pl.attr.exp, pl.attr.expnext,
-      pl.x, pl.y, pl.z,
-      pl.velx, pl.vely, pl.velz, pl.getVel(),
-      pl.yaw * 360, pl.pitch * 360, pl.roll * 360,
-      pl.addyaw * 360, pl.addpitch * 360, pl.addroll * 360,
-      pl.rage,
-      pl.score,
-      pl.speedmul, pl.jumpboost,
-      pl.shield, pl.regenwait
+      _l("exp: lv."),
+      _p(pl.attr.level), _c(' '), _p(pl.attr.expprev), _c('/'),
+      _p(pl.attr.exp),   _c('/'), _p(pl.attr.expnext), _c('\n'),
+      _l("x: "),         _p(pl.x),              _c('\n'),
+      _l("y: "),         _p(pl.y),              _c('\n'),
+      _l("z: "),         _p(pl.z),              _c('\n'),
+      _l("vx: "),        _p(pl.velx),           _c('\n'),
+      _l("vy: "),        _p(pl.vely),           _c('\n'),
+      _l("vz: "),        _p(pl.velz),           _c('\n'),
+      _l("v: "),         _p(pl.getVel()),       _c('\n'),
+      _l("y: "),         _p(pl.yaw      * 360), _c('\n'),
+      _l("p: "),         _p(pl.pitch    * 360), _c('\n'),
+      _l("r: "),         _p(pl.roll     * 360), _c('\n'),
+      _l("ay: "),        _p(pl.addyaw   * 360), _c('\n'),
+      _l("ap: "),        _p(pl.addpitch * 360), _c('\n'),
+      _l("ar: "),        _p(pl.addroll  * 360), _c('\n'),
+      _l("rage: "),      _p(pl.rage),           _c('\n'),
+      _l("score: "),     _p(pl.score),          _c('\n'),
+      _l("speedmul: "),  _p(pl.speedmul),       _c('\n'),
+      _l("jumpboost: "), _p(pl.jumpboost),      _c('\n')
    );
 
    SetSize(320, 240);

@@ -17,6 +17,14 @@ $playersounddup darklord male *pain25  *pain75   # ^
 $playersound    darklord male *grunt   Grunt     # ^
 $playersound    darklord male *land    Land      # Resident Evil 4, Slave Zero
 
-player.ari.step Step # Resident Evil 4
+player.ari {
+   step Step # Resident Evil 4
+   shield {
+      break  ShieldBreak     # SI Series 6000
+      regenw ShieldRegenWait # Self-made
+      regenl ShieldRegen     # ^
+      regend ShieldRegenDone # ^
+   }
+}
 
 # EOF

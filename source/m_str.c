@@ -335,6 +335,11 @@ void printscr(i96 num) {
 }
 
 alloc_aut(0) stkcall
+void printk64(k64 num) {
+   ACS_PrintFixed((k32)num);
+}
+
+alloc_aut(0) stkcall
 cstr alientext(i32 num) {
    noinit static
    char out[80];

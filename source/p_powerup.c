@@ -89,7 +89,7 @@ void Sc_GiveHealthBonus(i32 amount) {
    if(!P_None()) {
       amount += pl.health;
       if(amount > pl.maxhealth + 100) amount = pl.maxhealth + 100;
-      pl.health = amount;
+      pl.setHealth(amount);
    }
 }
 
@@ -99,7 +99,7 @@ void Sc_GiveHealth(i32 amount) {
       amount += pl.health;
       amount *= 1 + pl.attr.attrs[at_vit] / 80.0;
       if(amount > pl.maxhealth) amount = pl.maxhealth;
-      pl.health = amount;
+      pl.setHealth(amount);
    }
 }
 

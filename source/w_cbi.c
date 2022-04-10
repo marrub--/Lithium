@@ -78,6 +78,20 @@ void CBI_Install(i32 num) {
       case cupg_d_zakwu: GiveSubWeapon(_subw_axe);     break;
       case cupg_d_zaruk: GiveSubWeapon(_subw_grenade); break;
       case cupg_d_motra: InvGive(so_Motra, 1);         break;
+      case cupg_d_shield:
+         #ifndef NDEBUG
+         if(dbgflags(dbgf_items)) {
+            pl.regenwaitmax = 1;
+            pl.regenwait    = 0;
+            pl.setShield(pl.shieldmax = 100);
+         } else {
+         #endif
+            pl.regenwaitmax = 20;
+            pl.regenwait = 5;
+         #ifndef NDEBUG
+         }
+         #endif
+         break;
       #undef GiveSubWeapon
       }
 

@@ -338,7 +338,7 @@ void P_Init(void) {
 
    i32 minhealth = CVarGetI(sc_sv_minhealth);
    if(pl.health < minhealth) {
-      pl.health = minhealth;
+      pl.setHealth(minhealth);
    }
 
    #ifndef NDEBUG

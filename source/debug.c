@@ -21,34 +21,6 @@
 str dbgstat[64], dbgnote[64];
 i32 dbgstatnum,  dbgnotenum;
 
-void Dbg_Stat_Impl(cstr fmt, ...) {
-   if(!dbglevel(log_devh)) return;
-
-   va_list vl;
-
-   ACS_BeginPrint();
-
-   va_start(vl, fmt);
-   __vnprintf(fmt, vl);
-   va_end(vl);
-
-   dbgstat[dbgstatnum++] = ACS_EndStrParam();
-}
-
-void Dbg_Note_Impl(cstr fmt, ...) {
-   if(!dbglevel(log_devh)) return;
-
-   va_list vl;
-
-   ACS_BeginPrint();
-
-   va_start(vl, fmt);
-   __vnprintf(fmt, vl);
-   va_end(vl);
-
-   dbgnote[dbgnotenum++] = ACS_EndStrParam();
-}
-
 void Dbg_PrintMemC(cps_t const *d, mem_size_t size) {
    i32 pos = 0;
 

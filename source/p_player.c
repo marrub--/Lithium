@@ -136,28 +136,25 @@ void Sc_PlayerDeath(void) {
 
    str deathmsg = snil;
    for(i32 time = 0; pl.dead; ++time) {
-      if(time != 0 && time % (35 * 5) == 0) {
+      if(time != 0 && time % (35 * 30) == 0) {
          deathmsg = ns(lang_fmt(LANG "DEATHMSG_%.2i", ACS_Random(1, 20)));
          SetFade(fid_deathmsg, 35 * 4, 24);
       }
 
+      SetSize(320, 240);
+      SetClipW(0, 0, 320, 240, 320);
+
       if(CheckFade(fid_deathmsg)) {
-         PrintTextF_str(deathmsg, sf_lmidfont, CR_WHITE, 320/2,4, 0,1,
+         PrintTextF_str(deathmsg, sf_smallfnt, CR_WHITE, 0,1, 240-8,2,
                         fid_deathmsg);
       }
 
       if(pl.obit) {
-         SetSize(320, 240);
-         SetClipW(0, 0, 320, 240, 320);
-         ACS_BeginPrint();
-         ACS_PrintChar('>');
-         ACS_PrintChar(' ');
-         PrintChrSt(pl.obit);
-         ACS_PrintChar(' ');
-         ACS_PrintChar('<');
-         PrintText(sf_lmidfont, CR_WHITE, 320/2,4, 240,2);
-         ClearClip();
+         PrintTextChS(pl.obit);
+         PrintText(sf_smallfnt, CR_WHITE, 0,1, 240,2);
       }
+
+      ClearClip();
 
       ACS_Delay(1);
 
@@ -625,28 +622,55 @@ static void P_attrREF(void) {
    pl.speedmul += (int)pl.rage;
 }
 
-script static void P_Spe_shieldDestroyed(void) {
-   pl.regenwait = 140;
-   /*
-   for(i32 i = 0; i < 35*2; ++i) {
+static void P_Spe_shieldDestroyed(void) {
+   StartSound(ss_player_ari_shield_break, lch_shield, CHANF_MAYBE_LOCAL|CHANF_UI, 1.0, ATTN_STATIC);
+   pl.regenwaitmax = 365;
+   pl.regenwait    = 400;
+   ACS_FadeTo(184, 205, 255, 0.3k, 0.0k);
+   ACS_FadeTo(222, 5, 92, 0.0k, 1.0k);
+}
+
+static void P_Spe_shieldHit(void) {
+   ACS_StopSound(pl.tid, lch_shield);
+   i32 diff = pl.oldshield - pl.shield;
+   if(pl.regenwait <= 150) {
+      pl.regenwaitmax = 115;
+      pl.regenwait    = 150;
    }
-   */
+   k32 amt = diff / (k32)pl.shieldmax;
+   ACS_FadeTo(184, 205, 255, amt, 0.0k);
+   ACS_FadeTo(222, 5, 92, 0.0k, amt*2.0k + 2.0k/35.0k);
 }
 
 static void P_Spe_pTick(void) {
    if(Paused) return;
 
    if(get_bit(cbiupgr, cupg_d_shield)) {
-      if(pl.shield == 0) {
-         if(pl.oldshield != 0) {
-            P_Spe_shieldDestroyed();
-         }
+      Dbg_Stat(
+         _l("shield: "),       _p((i32)pl.shield),  _c('\n'),
+         _l("shieldmax: "),    _p(pl.shieldmax),    _c('\n'),
+         _l("regenwait: "),    _p(pl.regenwait),    _c('\n'),
+         _l("regenwaitmax: "), _p(pl.regenwaitmax), _c('\n')
+      );
+
+      pl.shieldmax = 100;
+      if(pl.shield == 0 && pl.oldshield != 0) {
+         P_Spe_shieldDestroyed();
       } else if(pl.shield < pl.oldshield) {
-         pl.regenwait = 35;
+         P_Spe_shieldHit();
       } else if(pl.regenwait) {
          --pl.regenwait;
-      } else if(pl.shield < 250) {
-         pl.shield = pl.shield + 1;
+         if(pl.regenwait == pl.regenwaitmax) {
+            StartSound(ss_player_ari_shield_regenw, lch_auto, CHANF_MAYBE_LOCAL|CHANF_UI, 1.0, ATTN_STATIC);
+         }
+      } else if(pl.shield < pl.shieldmax) {
+         if(pl.shield == pl.oldshield) {
+            StartSound(ss_player_ari_shield_regenl, lch_shield, CHANF_MAYBE_LOCAL|CHANF_UI|CHANF_LOOP, 1.0, ATTN_STATIC);
+         }
+         pl.setShield(pl.shield + 1);
+         if(pl.shield == pl.shieldmax) {
+            StartSound(ss_player_ari_shield_regend, lch_shield, CHANF_MAYBE_LOCAL|CHANF_UI, 1.0, ATTN_STATIC);
+         }
       }
    }
 }
@@ -676,7 +700,7 @@ static void P_Atr_pTick(void) {
    SetSpawnHealth(0, pl.maxhealth);
 
    if(pl.health < stm + 10 && (stmt < 2 || pl.ticks % stmt == 0)) {
-      pl.health = pl.health + 1;
+      pl.setHealth(pl.health + 1);
    }
 }
 
@@ -851,7 +875,7 @@ void Sc_TimelineInconsistent(void) {
       ACS_FadeTo(0, 0, 0, 1.0, 0.0);
       SetSize(320, 240);
       PrintText_str(ns(lang(sl_bad_timeline)), sf_bigupper, CR_WHITE, 160,4, 120,0);
-      pl.health = -1;
+      pl.setHealth(-1);
       ACS_Delay(1);
    }
 }

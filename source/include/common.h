@@ -124,10 +124,10 @@
 
 #ifndef NDEBUG
 #define Dbg_Stat(...) \
-   (dbglevel(log_devh) ? Dbg_Stat_Impl(__VA_ARGS__) : (void)0)
+   (dbglevel(log_devh) ? (ACS_BeginPrint(), (__VA_ARGS__), dbgstat[dbgstatnum++] = ACS_EndStrParam(), (void)0) : (void)0)
 
 #define Dbg_Note(...) \
-   (dbglevel(log_devh) ? Dbg_Note_Impl(__VA_ARGS__) : (void)0)
+   (dbglevel(log_devh) ? (ACS_BeginPrint(), (__VA_ARGS__), dbgnote[dbgnotenum++] = ACS_EndStrParam(), (void)0) : (void)0)
 
 #define Dbg_Trace(n) (ACS_BeginPrint(), PrintChrLi(__func__), ACS_PrintInt(n), ACS_EndLog())
 
@@ -137,14 +137,14 @@
      PrintChrLi(#level), \
      ACS_PrintChar(':'), \
      ACS_PrintChar(' '), \
-     __VA_ARGS__, \
+     (__VA_ARGS__), \
      ACS_EndLog()) : \
     (void)0)
 #define Dbg_Err(...) \
    (ACS_BeginPrint(), \
     PrintChrLi(__func__), \
     PrintChrLi(" \CgERROR\C-: "), \
-    __VA_ARGS__, \
+    (__VA_ARGS__), \
     ACS_EndLog())
 #else
 #define Dbg_Stat(...)
@@ -191,8 +191,6 @@ void PtrInvGive(i32 tid, str item, i32 amount);
 void PtrInvTake(i32 tid, str item, i32 amount);
 void PtrInvSet (i32 tid, str item, i32 amount);
 #ifndef NDEBUG
-void Dbg_Stat_Impl(cstr fmt, ...);
-void Dbg_Note_Impl(cstr fmt, ...);
 void Dbg_PrintMem(void const *data, mem_size_t size);
 #endif
 

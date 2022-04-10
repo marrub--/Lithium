@@ -156,7 +156,7 @@ void SpawnBosses(i96 sum, bool force) {
 
 script_str ext("ACS") addr(OBJ "PhantomSound")
 void Sc_PhantomSound(void) {
-   ACS_AmbientSound(ss_enemies_phantom_spawned, 127);
+   AmbientSound(ss_enemies_phantom_spawned, 0.5k);
 }
 
 alloc_aut(0) script_str ext("ACS") addr(OBJ "PhantomTeleport")
@@ -177,7 +177,7 @@ void Sc_PhantomDeath(void) {
 
    if(boss->phase == boss->phasenum) {
       /* Death */
-      ACS_AmbientSound(ss_player_death1, 127);
+      AmbientSound(ss_player_death1, 0.5k);
       ACS_Delay(35);
       ServCallV(sm_PlayerDeath);
       ACS_Delay(25);
@@ -192,7 +192,7 @@ void Sc_PhantomDeath(void) {
       if(difficulty != diff_any) difficulty++;
    } else {
       /* Escape */
-      ACS_AmbientSound(ss_enemies_phantom_escape, 127);
+      AmbientSound(ss_enemies_phantom_escape, 0.5k);
       ACS_SetActorState(0, sm_GetOutOfDodge);
       ACS_Delay(5);
       ServCallV(sm_PhantomOut);
@@ -210,7 +210,7 @@ void Sc_PhantomDeath(void) {
    soulsfreed++;
 
    scorethreshold = scorethreshold * 17 / 10;
-   Dbg_Note(c"score threshold raised to %lli\n", scorethreshold);
+   Dbg_Note(_l("score threshold raised to "), _p(scorethreshold), _c('\n'));
 
    boss->phase++;
    boss = nil;
@@ -227,7 +227,8 @@ void Sc_SpawnBoss(void) {
    Dbg_Log(log_boss,
            _l("Boss "), _p((cstr)boss->name), _l(" phase "), _p(boss->phase),
            _l(" spawned"));
-   Dbg_Note("boss: %s phase %i spawned\n", boss->name, boss->phase);
+   Dbg_Note(_l("boss: "), _p((cstr)boss->name), _l(" phase "), _p(boss->phase),
+            _l(" spawned\n"));
 
    bossspawned = true;
 }

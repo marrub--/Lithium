@@ -12,6 +12,7 @@ class Lith_BossReward1 : Lith_CbiItem {
       Lith_CbiItem.UpgrNum bossreward_easy_1;
       Lith_CbiItem.SpriteM "WUPGA";
       Lith_CbiItem.SpriteC "SPELA";
+      Lith_CbiItem.SpriteD "CUPGZ";
    }
 }
 
@@ -21,6 +22,7 @@ class Lith_BossReward2 : Lith_CbiItem {
       Lith_CbiItem.UpgrNum bossreward_easy_2;
       Lith_CbiItem.SpriteM "CUPGA";
       Lith_CbiItem.SpriteC "SPELB";
+      Lith_CbiItem.SpriteD "CUPGZ";
    }
 }
 
@@ -30,6 +32,7 @@ class Lith_BossReward3 : Lith_CbiItem {
       Lith_CbiItem.UpgrNum bossreward_med_1;
       Lith_CbiItem.SpriteM "ARM1Z";
       Lith_CbiItem.SpriteC "SPELC";
+      Lith_CbiItem.SpriteD "CUPGZ";
    }
 }
 
@@ -39,6 +42,7 @@ class Lith_BossReward4 : Lith_CbiItem {
       Lith_CbiItem.UpgrNum bossreward_med_2;
       Lith_CbiItem.SpriteM "CUPGB";
       Lith_CbiItem.SpriteC "SPELD";
+      Lith_CbiItem.SpriteD "CUPGZ";
    }
 }
 
@@ -48,6 +52,7 @@ class Lith_BossReward5 : Lith_CbiItem {
       Lith_CbiItem.UpgrNum bossreward_med_3;
       Lith_CbiItem.SpriteM "WRDPA";
       Lith_CbiItem.SpriteC "SPELE";
+      Lith_CbiItem.SpriteD "CUPGZ";
    }
 }
 
@@ -55,9 +60,9 @@ class Lith_BossReward6 : Lith_CbiItem {
    default {
       Tag "$LITH_TAG_Upgrade6";
       Lith_CbiItem.UpgrNum bossreward_hard_1;
-      Lith_CbiItem.Sprite "IOBJC";
-
-      +Lith_CbiItem.Pkup_Generic
+      Lith_CbiItem.SpriteM "IOBJC";
+      Lith_CbiItem.SpriteC "IOBJC";
+      Lith_CbiItem.SpriteD "CUPGZ";
    }
 }
 
@@ -92,6 +97,20 @@ override bool tryPickup(in out Actor mo) {
    mo.acs_scriptCall("Lith_PickupCbiItem", m_upgNum);
    goAwayAndDie();
    return true;
+}
+
+override void playPickupSound(Actor toucher) {
+   int pcl = Lith_UTIL.pData(pdata_pclass);
+   if(pcl & pcl_outcasts) {
+      pickupSound = "player/pickup/upgrcbio";
+   } else if(pcl & pcl_missioners) {
+      pickupSound = "player/pickup/upgrcbim";
+   } else if(pcl & pcl_intruders) {
+      pickupSound = "player/pickup/upgrcbii";
+   } else if(pcl & pcl_finalizer) {
+      pickupSound = "player/pickup/upgrcbif";
+   }
+   super.playPickupSound(toucher);
 }
 
 /* EOF */

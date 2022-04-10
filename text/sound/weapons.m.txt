@@ -49,13 +49,13 @@ weapons {
 
    shotgun {
       == lsnd/WeaponsM/Shotgun
-      fire    FireFull  # Killing Floor, General 6000
+      fire    FireFull  # Killing Floor, SI Series 6000
       fire2   FireFull2 # ^
-      open    PumpOpen  # General 6000
+      open    PumpOpen  # SI Series 6000
       close   PumpClose # ^
       zoomin  ScopeIn   # Halo 3, EYE: Divine Cybermancy
       zoomout ScopeOut  # ^
-      pickup  Pickup    # Halo 3, EYE: Divine Cybermancy, General 6000
+      pickup  Pickup    # Halo 3, EYE: Divine Cybermancy, SI Series 6000
       just1   Just1     # Halo 3
       just2   Just2     # ^
       just3   Just3     # ^
@@ -75,7 +75,7 @@ weapons {
          spark1     Spark1       # Fallout 4
          spark2     Spark2       # ^
          spark3     Spark3       # ^
-         reloadout  ReloadOut    # General 6000
+         reloadout  ReloadOut    # SI Series 6000
          reloadin   ReloadIn     # ^
 
          $random spark {
@@ -89,20 +89,20 @@ weapons {
       }
 
       == lsnd/WeaponsM/Shotgun/Poison
-      poison.fire FireFull # FEAR, Gamemaster Audio - Gun Sound Pack, Killing Floor, General 6000
+      poison.fire FireFull # FEAR, Gamemaster Audio - Gun Sound Pack, Killing Floor, SI Series 6000
 
       $alias poison.acid = gauss.spark
    }
 
    ssg {
       == lsnd/WeaponsM/SuperShotgun
-      fire   Fire   # Per Kristian, General 6000
-      pickup Pickup # General 6000, ???
+      fire   Fire   # Per Kristian, SI Series 6000
+      pickup Pickup # SI Series 6000, ???
       close  Close  # Killing Floor, ???
       open   Open   # ^
-      load   Load   # General 6000, ???
-      empty  Empty  # General 6000
-      draw   Draw   # General 6000, Killing Floor, ???
+      load   Load   # SI Series 6000, ???
+      empty  Empty  # SI Series 6000
+      draw   Draw   # SI Series 6000, Killing Floor, ???
    }
 
    lshotgun {

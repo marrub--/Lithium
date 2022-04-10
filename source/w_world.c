@@ -322,7 +322,7 @@ begin:
          missionkill = kills;
       }
 
-      Dbg_Stat("mission%%: %i\n", missionprc);
+      Dbg_Stat(_l("mission%: "), _p(missionprc), _c('\n'));
 
       ACS_Delay(1);
 

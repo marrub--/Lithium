@@ -27,8 +27,13 @@ class Lith_URANUS : StaticEventHandler;
 static clearscope Lith_URANUS Instance()
    {return Lith_URANUS(Find("Lith_URANUS"));}
 
-static clearscope void StartSound(Actor mo, sound snd, int slot, int flags, double volume = 1.0, double attenuation = 1.0, double pitch = 1.0)
-   {if(mo) mo.A_StartSound(snd, slot, flags, volume, attenuation, pitch);}
+static clearscope void StartSound(Actor mo, sound snd, int slot, int flags, double volume = 1.0, double attenuation = 1.0, double pitch = 1.0) {
+   if(!mo) {
+      S_StartSound(snd, slot, flags, volume, attenuation, pitch);
+   } else {
+      mo.A_StartSound(snd, slot, flags, volume, attenuation, pitch);
+   }
+}
 
 override void worldLoaded(WorldEvent ev) {
    if(ev.isSaveGame && Lith_HERMES.instance().m_tainted) {

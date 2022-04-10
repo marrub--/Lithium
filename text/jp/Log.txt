@@ -23,7 +23,6 @@
 ## Powerups ══════════════════════════════════════════════════════════════════╕
 == \#LOG_RadSuit      | 放射線遮蔽スーツ
 == \#LOG_Invuln       | 不死身!
-== \#LOG_Backpack     | バックパックと割引カード
 == \#LOG_DoggoSphere  | \cgわん\ciわん\ckわん\cdわん\chわん\ctわん
 == \#LOG_Dogs         | 犬を得た
 == \#LOG_ShobonSphere | (´・ω・｀）

@@ -367,6 +367,8 @@ sp_:
    - HUD_D_Ammo2Back:      HUD_D:Ammo2Back
    - HUD_D_AmmoBack:       HUD_D:AmmoBack
    - HUD_D_HPBack:         HUD_D:HPBack
+   - HUD_D_ShieldBack:     HUD_D:ShieldBack
+   - HUD_D_ShieldCharge:   HUD_D:ShieldCharge
    - HUD_D_WepBack:        HUD_D:WepBack
    - HUD_H_A1:             HUD:H_A1
    - HUD_H_A2:             HUD:H_A2
@@ -647,6 +649,10 @@ ss_:
    - misc_telein:              misc/telein
    - misc_teleout:             misc/teleout
    - player_YOUVEGOTMAIL:      player/YOUVEGOTMAIL
+   - player_ari_shield_break:  player/ari/shield/break
+   - player_ari_shield_regend: player/ari/shield/regend
+   - player_ari_shield_regenl: player/ari/shield/regenl
+   - player_ari_shield_regenw: player/ari/shield/regenw
    - player_cbi_auto_buy:      player/cbi/auto/buy
    - player_cbi_auto_invalid:  player/cbi/auto/invalid
    - player_cbi_auto_toggle:   player/cbi/auto/toggle

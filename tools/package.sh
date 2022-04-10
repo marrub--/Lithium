@@ -11,9 +11,17 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
+if [ $RELEASE ]
+   CC_FLAGS=$CC_FLAGS -DRELEASE
+fi
+
+if [ ! $DEBUG ]
+   CC_FLAGS=$CC_FLAGS -DNDEBUG
+fi
+
 (rm -rf master Lithium.pk3 &&
 
- env CC_FLAGS=-DNDEBUG tools/genbuild.rb &&
+ env CC_FLAGS=$CC_FLAGS tools/genbuild.rb &&
  ninja -t clean &&
  ninja &&
 

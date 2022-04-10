@@ -54,7 +54,23 @@ i32 version_name_to_num(cstr s) {
 
 script ext("ACS") addr(lsc_versionname)
 void Sc_VersionName(void) {
-   DrawCallV(sm_SetVersion, fast_strdup(vernam));
+   DrawCallV(
+      sm_SetVersion,
+#ifndef NDEBUG
+      (ACS_BeginPrint(),
+       ACS_PrintString(
+#endif
+      fast_strdup(vernam)
+#ifndef NDEBUG
+       ), PrintChrLi(" ("
+#ifdef RELEASE
+                     "DEBUG"
+#else
+                     "DEV"
+#endif
+                     ")"), ACS_EndStrParam())
+#endif
+   );
 }
 
 /* EOF */

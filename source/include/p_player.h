@@ -236,19 +236,19 @@ struct player_delta {
  */
 struct player {
    /* data */
-   __prop megaProtect  {default: PtrInvNum(->tid, so_MegaProtection)}
-   __prop mana         {default: PtrInvNum(->tid, so_ManaAmmo)}
-   __prop manamax      {default: ACS_GetMaxInventory(->tid, so_ManaAmmo)}
-   __prop health       {default:   GetHealth(->tid),
-                        operator=: SetHealth(->tid, ...)}
-   __prop shield       {default:   GetMembI(->tid, sm_Shield),
-                        operator=: SetMembI(->tid, sm_Shield, ...)}
+   __prop megaProtect  {default:    PtrInvNum(->tid, so_MegaProtection)}
+   __prop mana         {default:    PtrInvNum(->tid, so_ManaAmmo)}
+   __prop manamax      {default:    ACS_GetMaxInventory(->tid, so_ManaAmmo)}
+   __prop health       {default:    GetPropI(->tid, APROP_Health)}
+   __prop setHealth    {operator(): SetPropI(->tid, APROP_Health)}
+   __prop shield       {default:    GetMembI(->tid, sm_Shield)}
+   __prop setShield    {operator(): SetMembI(->tid, sm_Shield)}
    __prop setActivator {operator(): ACS_SetActivator(->tid)}
    __prop getVel       {operator(): mag2k(->velx, ->vely)}
-   __prop onground     {default: GetMembI(->tid, sm_OnGround)}
-   __prop waterlevel   {default: GetMembI(->tid, sm_WaterLevel)}
-   __prop classname    {default: GetNameTag(->tid)}
-   __prop overdrive    {default: GetMembI(->tid, sm_Overdrive)}
+   __prop onground     {default:    GetMembI(->tid, sm_OnGround)}
+   __prop waterlevel   {default:    GetMembI(->tid, sm_WaterLevel)}
+   __prop classname    {default:    GetNameTag(->tid)}
+   __prop overdrive    {default:    GetMembI(->tid, sm_Overdrive)}
 
    /* log */
    __prop logB {operator(): P_Log_Both()}
@@ -319,6 +319,8 @@ struct player {
    bool teleportedout;
    i32  done_intro;
 
+   i32 shieldmax;
+   i32 regenwaitmax;
    i32 regenwait;
 
    /* Input */

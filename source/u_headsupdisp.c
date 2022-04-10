@@ -432,13 +432,27 @@ void HUD_BottomLeft(void) {
    case _hud_darklord:
       PrintSprite(sp_HUD_D_HPBack, 0,1, 239,2);
 
+      if(pl.shieldmax) {
+         k32 fr = pl.shield / (k32)pl.shieldmax * 50;
+         SetClip(16, 0, fr, 240);
+         PrintSprite(sp_HUD_D_ShieldBack, 16,1, 239,2);
+         ClearClip();
+      }
+
+      if(pl.regenwaitmax && pl.shield != pl.shieldmax) {
+         k32 fr = (pl.regenwaitmax - pl.regenwait) / (k32)pl.regenwaitmax * 50;
+         SetClip(16, 0, fr, 240);
+         PrintSpriteA(sp_HUD_D_ShieldCharge, 16,1, 239,2, (ACS_Sin(pl.ticks / 30.0k) + 1.0k) / 2.0k);
+         ClearClip();
+      }
+
       PrintTextChL(u8"");
       PrintTextX(sf_lmidfont, hudcolor, 8,4, 229,0, _u_no_unicode);
 
-      for(i32 i = 0, x_ = (8 + pl.ticks) % 40; i < 20; i++) {
+      for(i32 i = 0, x_ = (8 + pl.ticks) % 41; i < 20; i++) {
          i32 xx = x_ - i;
-         if(xx < 0) xx += 40;
-         PrintSpriteA(wgfx, 21+xx,1, 220,1, (20 - i) / 20.0);
+         if(xx < 0) xx += 41;
+         PrintSpriteA(wgfx, 20+xx,1, 220,1, (20 - i) / 20.0);
       }
 
       x    = 18;

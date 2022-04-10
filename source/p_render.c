@@ -55,7 +55,7 @@ alloc_aut(0) script
 void P_TeleportIn(void) {
    pl.teleportedout = false;
 
-   ACS_AmbientSound(ss_misc_telein, 127);
+   AmbientSound(ss_misc_telein, 0.5k);
    ACS_SetCameraToTexture(pl.tid, sp_LITHCAM3, 90);
 
    for(i32 i = 18, j = 18; i >= 1; i--) {
@@ -72,7 +72,7 @@ void P_TeleportIn(void) {
 
 alloc_aut(0) sync
 void P_TeleportOut(i32 tag) {
-   ACS_AmbientSound(ss_misc_teleout, 127);
+   AmbientSound(ss_misc_teleout, 0.5k);
    ACS_SetCameraToTexture(pl.tid, sp_LITHCAM3, 90);
 
    for(i32 i = 1, j = 1; i <= 20; i++) {

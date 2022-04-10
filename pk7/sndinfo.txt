@@ -205,7 +205,8 @@ $random enemies/michael/hit { enemies/michael/hit1 enemies/michael/hit2 enemies/
 player/pickup/upgrbody lsnd/Items/UpgrBody
 player/pickup/upgrextr lsnd/Items/UpgrExtr
 player/pickup/upgrweap lsnd/Items/UpgrWeap
-player/pickup/upgrcbi lsnd/Items/CBIUpgrade
+player/pickup/upgrcbio lsnd/Items/CBIUpgradeO
+player/pickup/upgrcbii lsnd/Items/CBIUpgradeI
 player/pickup/item lsnd/Items/Item
 player/pickup/barrier lsnd/Items/Barrier
 player/pickup/infrared lsnd/Items/Goggles
@@ -354,6 +355,10 @@ $playersounddup darklord male *pain25 *pain75
 $playersound darklord male *grunt lsnd/PlayerD/Grunt
 $playersound darklord male *land lsnd/PlayerD/Land
 player/ari/step lsnd/PlayerD/Step
+player/ari/shield/break lsnd/PlayerD/ShieldBreak
+player/ari/shield/regenw lsnd/PlayerD/ShieldRegenWait
+player/ari/shield/regenl lsnd/PlayerD/ShieldRegen
+player/ari/shield/regend lsnd/PlayerD/ShieldRegenDone
 $playeralias informant male *land player/fulk/land
 $playeralias informant male *grunt silence
 $playersound informant male *jump lsnd/PlayerI/Jump

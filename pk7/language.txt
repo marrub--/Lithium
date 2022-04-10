@@ -489,12 +489,12 @@
 "LITH_INFO_SHORT_RadSuit" = "Rad. Suit";
 "LITH_INFO_TITLE_RadSuit" = "SYM4.3 D.223 RADIATION SHIELDING SUIT";
 "LITH_INFO_DESCR_RadSuit" = "A radiation shielding suit produced by SYM4.3. Easy to equip and extremely lightweight, capable of blocking all radiation damage for a bit of time before wearing thin. Padded with iron and lead weave. Mass-produced for use in many short operations involving hazardous materials.\n\nPrevents floor damage for 1 minute.";
-"LITH_INFO_SHORT_BackpackBase" = "Backpack";
-"LITH_INFO_SHORT_BackpackStan" = "$LITH_INFO_SHORT_BackpackBase";
-"LITH_INFO_TITLE_BackpackStan" = "$LITH_INFO_SHORT_BackpackBase";
+"LITH_INFO_SHORT_Backpack" = "Backpack";
+"LITH_INFO_SHORT_BackpackStan" = "$LITH_INFO_SHORT_Backpack";
+"LITH_INFO_TITLE_BackpackStan" = "$LITH_INFO_SHORT_Backpack";
 "LITH_INFO_DESCR_BackpackStan" = "A backpack left behind by one of the agents sent in before you. All that's left inside it is a bit of ammunition they had.";
-"LITH_INFO_SHORT_BackpackJem" = "$LITH_INFO_SHORT_BackpackBase";
-"LITH_INFO_TITLE_BackpackJem" = "$LITH_INFO_SHORT_BackpackBase";
+"LITH_INFO_SHORT_BackpackJem" = "$LITH_INFO_SHORT_Backpack";
+"LITH_INFO_TITLE_BackpackJem" = "$LITH_INFO_SHORT_Backpack";
 "LITH_INFO_DESCR_BackpackJem" = "A backpack left behind by someone. All that's left inside it is a bit of ammunition they had.";
 "LITH_INFO_SHORT_Stimpack" = "Stimpack";
 "LITH_INFO_TITLE_Stimpack" = "JJJ 111 Stim-pak(R)";
@@ -1263,7 +1263,7 @@
 "LITH_LOG_InfraRed" = "$LITH_INFO_SHORT_Infrared";
 "LITH_LOG_Invuln" = "\cjInvulnerability!";
 "LITH_LOG_BlurSphere" = "$LITH_INFO_SHORT_Fragma";
-"LITH_LOG_Backpack" = "Backpack";
+"LITH_LOG_Backpack" = "$LITH_INFO_SHORT_Backpack";
 "LITH_LOG_Berserk" = "$LITH_INFO_SHORT_Berserk";
 "LITH_LOG_AllMap" = "$LITH_INFO_SHORT_AllMap";
 "LITH_LOG_DoggoSphere" = "\cgwan \ciwan \ckwan \cdwan \chwan \ctwan";
@@ -2768,7 +2768,6 @@
 "LITH_LOG_YellowSkull" = "\ck黄スカルキー";
 "LITH_LOG_RadSuit" = "放射線遮蔽スーツ";
 "LITH_LOG_Invuln" = "不死身!";
-"LITH_LOG_Backpack" = "バックパックと割引カード";
 "LITH_LOG_DoggoSphere" = "\cgわん\ciわん\ckわん\cdわん\chわん\ctわん";
 "LITH_LOG_Dogs" = "犬を得た";
 "LITH_LOG_ShobonSphere" = "(´・ω・｀）";
