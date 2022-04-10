@@ -85,7 +85,7 @@ cstr RandomWeighted(struct witem const *l, i32 c) {
 }
 
 script_str ext("ACS") addr(OBJ "RandomSpawn")
-void Sc_RandomSpawn(i32 rsn) {
+void Z_RandomSpawn(i32 rsn) {
    cstr item;
 
    switch(rsn) {

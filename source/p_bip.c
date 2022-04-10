@@ -19,19 +19,15 @@
 #include "m_tokbuf.h"
 #include "m_trie.h"
 
-noinit
-struct bip bip;
+noinit struct bip bip;
 
-noinit
-char       bipstring[0x7FFF];
-mem_size_t bipstrptr;
+noinit char bipstring[0x7FFF];
+mem_size_t  bipstrptr;
 
-noinit
-struct page bippages[512];
-mem_size_t  bippagenum;
+noinit struct page bippages[512];
+mem_size_t         bippagenum;
 
-script static
-void MailNotifyFinish(cstr name) {
+script static void MailNotifyFinish(cstr name) {
    char remote[128];
    faststrcpy_str(remote, ns(lang(fast_strdup2(LANG "INFO_REMOT_", name))));
 
@@ -273,11 +269,11 @@ void P_BIP_Unlock(struct page *page, bool from_load) {
          MailNotify(page->name);
       }
 
-      page->time = ticks;
+      page->time = wl.ticks;
 
       if(!from_load && page->category <= _bipc_last_normal) {
          set_bit(page->flags, _page_new);
-         if(!get_bit(page->flags, _page_auto) && ticks > 3) {
+         if(!get_bit(page->flags, _page_auto) && wl.ticks > 3) {
             P_Data_Save();
          }
       }
@@ -323,7 +319,7 @@ struct page *P_BIP_NameToPage(cstr name) {
 }
 
 script_str ext("ACS") addr(OBJ "BIPUnlock")
-void Sc_UnlockPage(void) {
+void Z_UnlockPage(void) {
    if(!P_None()) {
       noinit static
       char tag[32];

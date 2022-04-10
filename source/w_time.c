@@ -71,7 +71,7 @@ void UnfreezeTime(bool players_ok) {
 }
 
 script_str ext("ACS") addr(OBJ "Timer")
-i32 Sc_Timer(void) {
+i32 Z_Timer(void) {
    return ACS_Timer();
 }
 

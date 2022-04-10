@@ -25,7 +25,7 @@ enum {
 typedef cstr pronoun_set[_pn_max];
 
 script_str ext("ACS") addr(OBJ "Obituary")
-void Sc_Obituary(void) {
+void Z_Obituary(void) {
    static
    pronoun_set const defaultpronoun[] = {
       {"he",   "him",  "his",   "his",    "he's"   },

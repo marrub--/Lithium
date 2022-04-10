@@ -32,7 +32,7 @@ void P_CBI_TabStatistics(struct gui_state *g) {
    Stat(sl_stat_healthsum,  "%u",   pl.healthsum);
    Stat(sl_stat_scoreused,  "%lli", pl.scoreused);
    Stat(sl_stat_scoresum,   "%lli", pl.scoresum);
-   Stat(sl_stat_secrets,    "%i",   secretsfound);
+   Stat(sl_stat_secrets,    "%i",   wl.secretsfound);
    Stat(sl_stat_units,      "%imu", pl.unitstravelled);
    Stat(sl_stat_upgrades,   "%i",   pl.upgradesowned);
    Stat(sl_stat_items,      "%i",   pl.itemsbought);

@@ -61,7 +61,7 @@ void Upgr_ReactArmor_Render(void) {
 }
 
 script_str ext("ACS") addr(OBJ "RA_Give")
-void Sc_GiveRA(i32 num) {
+void Z_GiveRA(i32 num) {
    if(!P_None()) {
       if(!get_bit(pl.upgrades[UPGR_ReactArmor].flags, _ug_active)) return;
 

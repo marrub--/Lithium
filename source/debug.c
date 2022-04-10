@@ -79,7 +79,7 @@ void Dbg_PrintMem(void const *data, mem_size_t size) {
 }
 
 dynam_aut script_str ext("ACS") addr(OBJ "Thingomamob")
-void Sc_Thimgomabjhdf(void) {
+void Z_Thimgomabjhdf(void) {
    static
    struct gui_pre_win const pre = {
       .bg = "Background",
@@ -175,7 +175,7 @@ void dbg_font_test(str font) {
          y += _h;
       }
       SetClipW(0, 0, 320, 240, 320);
-      PrintTextChS(pangrams[ticks / 35 % countof(pangrams)]);
+      PrintTextChS(pangrams[wl.ticks / 35 % countof(pangrams)]);
       PrintTextX(font, CR_WHITE, 0,1, y,1, _u_no_unicode);
       ClearClip();
       ACS_Delay(1);

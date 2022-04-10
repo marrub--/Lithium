@@ -31,7 +31,7 @@ void F_Run(void) {
 }
 
 script_str ext("ACS") addr(OBJ "Finale")
-void Sc_Finale(void) {
+void Z_Finale(void) {
    i32 boss = ServCallI(sm_GetBossLevel);
    i32 which;
 

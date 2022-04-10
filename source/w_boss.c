@@ -125,7 +125,7 @@ bool CheckDead(struct boss *b, i32 num) {
 
 script
 void SpawnBosses(i96 sum, bool force) {
-   if(islithmap || (!force && sum < scorethreshold)) return;
+   if(ml.islithmap || (!force && sum < scorethreshold)) return;
 
    alldead[diff_easy] = CheckDead(bosses_easy, countof(bosses_easy));
    alldead[diff_medi] = CheckDead(bosses_medi, countof(bosses_medi));
@@ -155,12 +155,12 @@ void SpawnBosses(i96 sum, bool force) {
 }
 
 script_str ext("ACS") addr(OBJ "PhantomSound")
-void Sc_PhantomSound(void) {
+void Z_PhantomSound(void) {
    AmbientSound(ss_enemies_phantom_spawned, 0.5k);
 }
 
 alloc_aut(0) script_str ext("ACS") addr(OBJ "PhantomTeleport")
-void Sc_PhantomTeleport(void) {
+void Z_PhantomTeleport(void) {
    k32 ang = ACS_GetActorAngle(0);
 
    ACS_ThrustThing(ang * 256, 64, true, 0);
@@ -172,7 +172,7 @@ void Sc_PhantomTeleport(void) {
 }
 
 dynam_aut script_str ext("ACS") addr(OBJ "PhantomDeath")
-void Sc_PhantomDeath(void) {
+void Z_PhantomDeath(void) {
    ACS_StopSound(0, 7);
 
    if(boss->phase == boss->phasenum) {
@@ -207,7 +207,7 @@ void Sc_PhantomDeath(void) {
       SpawnBossReward();
    }
 
-   soulsfreed++;
+   wl.soulsfreed++;
 
    scorethreshold = scorethreshold * 17 / 10;
    Dbg_Note(_l("score threshold raised to "), _p(scorethreshold), _c('\n'));
@@ -215,11 +215,11 @@ void Sc_PhantomDeath(void) {
    boss->phase++;
    boss = nil;
 
-   bossspawned = false;
+   wl.bossspawned = false;
 }
 
 script_str ext("ACS") addr(OBJ "SpawnBoss")
-void Sc_SpawnBoss(void) {
+void Z_SpawnBoss(void) {
    if(!boss) return;
 
    ServCallV(sm_SpawnBoss, fast_strdup2(OBJ "Boss_", boss->name), boss->phase);
@@ -230,7 +230,7 @@ void Sc_SpawnBoss(void) {
    Dbg_Note(_l("boss: "), _p((cstr)boss->name), _l(" phase "), _p(boss->phase),
             _l(" spawned\n"));
 
-   bossspawned = true;
+   wl.bossspawned = true;
 }
 
 script static

@@ -22,21 +22,6 @@ who will make it to the top first.
 I hope you a safe journey. This place gives me horrid vibes.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_TITLE_MCluster1Ari | $\#SAVED_MESSAGE
-== \#INFO_REMOT_MCluster1Ari | $\#REMOTE_OMI
-@@ \#INFO_DESCR_MCluster1Ari
-
-## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_TITLE_MCluster2Ari | $\#SAVED_MESSAGE
-== \#INFO_REMOT_MCluster2Ari | $\#REMOTE_OMI
-@@ \#INFO_DESCR_MCluster2Ari
-
-## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_TITLE_MCluster3Ari | $\#SAVED_MESSAGE
-== \#INFO_REMOT_MCluster3Ari | $\#REMOTE_OMI
-@@ \#INFO_DESCR_MCluster3Ari
-
-## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_TITLE_MPhantomAri | $\#SAVED_MESSAGE
 == \#INFO_REMOT_MPhantomAri | $\#REMOTE_OMI
 @@ \#INFO_DESCR_MPhantomAri
@@ -47,5 +32,7 @@ say it, but, I'm scared.
 
 I think we should go home, but... The world keeps changing behind me.
 I'm pretty sure the Dimension Driver wouldn't even work here.
+
+Good hunting.
 
 ## EOF

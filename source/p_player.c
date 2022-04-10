@@ -30,8 +30,8 @@ static void P_Spe_pTick(void);
 static void P_Atr_pTick(void);
 static void P_Aug_pTick(void);
 
-_Noreturn dynam_aut script addr(lsc_playeropen)
-void Sc_PlayerEntry(void) {
+dynam_aut script addr(lsc_playeropen)
+void Z_PlayerEntry(void) {
    if(ACS_GameType() == GAME_TITLE_MAP) return;
 
 reinit:
@@ -121,7 +121,7 @@ void revenge(void) {
 }
 
 dynam_aut script type("death") static
-void Sc_PlayerDeath(void) {
+void Z_PlayerDeath(void) {
    pl.dead = true;
 
    P_Upg_PDeinit();
@@ -165,17 +165,17 @@ void Sc_PlayerDeath(void) {
 }
 
 script type("respawn") static
-void Sc_PlayerRespawn(void) {
+void Z_PlayerRespawn(void) {
    pl.reinit = true;
 }
 
 script type("return") static
-void Sc_PlayerReturn(void) {
+void Z_PlayerReturn(void) {
    pl.reinit = true;
 }
 
 script type("disconnect") static
-void Sc_PlayerDisconnect(void) {
+void Z_PlayerDisconnect(void) {
    P_BIP_PQuit();
 
    fastmemset(&pl, 0, sizeof pl);
@@ -314,7 +314,7 @@ void P_Scr_Take(i96 score) {
 
 script static
 void P_bossWarningDone(void) {
-   if(bossspawned) {
+   if(wl.bossspawned) {
       pl.logB(1, tmpstr(lang_discrim(sl_log_bosswarn)));
    }
 }
@@ -407,15 +407,15 @@ i32 P_playerColor(void) {
 
 alloc_aut(0) stkcall script static
 void P_doDepthMeter(void) {
-   if(!mapscleared) {
+   if(!wl.mapscleared) {
       return;
    }
 
    StartSound(ss_player_depthdown, lch_depth, 0, 1.0, ATTN_STATIC);
 
    str level_name = fast_strupper((ACS_BeginPrint(), ACS_PrintName(PRINTNAME_LEVELNAME), ACS_EndStrParam()));
-   i32 prev_level = (mapscleared % 32) * 8;
-   i32 next_level = (mapscleared + 1 % 32) * 8;
+   i32 prev_level = (wl.mapscleared % 32) * 8;
+   i32 next_level = (wl.mapscleared + 1 % 32) * 8;
    i32 player_clr = P_playerColor() & 0xFFFFFF;
 
    for(i32 i = 0; i < 175; ++i) {
@@ -439,7 +439,7 @@ void P_doDepthMeter(void) {
 
 alloc_aut(0) stkcall script static
 void P_doIntro(void) {
-   if(mapscleared != 0 || pl.done_intro & pl.pclass) {
+   if(wl.mapscleared != 0 || pl.done_intro & pl.pclass) {
       P_doDepthMeter();
       return;
    }
@@ -622,30 +622,10 @@ static void P_attrREF(void) {
    pl.speedmul += (int)pl.rage;
 }
 
-static void P_Spe_shieldDestroyed(void) {
-   StartSound(ss_player_ari_shield_break, lch_shield, CHANF_MAYBE_LOCAL|CHANF_UI, 1.0, ATTN_STATIC);
-   pl.regenwaitmax = 365;
-   pl.regenwait    = 400;
-   ACS_FadeTo(184, 205, 255, 0.3k, 0.0k);
-   ACS_FadeTo(222, 5, 92, 0.0k, 1.0k);
-}
-
-static void P_Spe_shieldHit(void) {
-   ACS_StopSound(pl.tid, lch_shield);
-   i32 diff = pl.oldshield - pl.shield;
-   if(pl.regenwait <= 150) {
-      pl.regenwaitmax = 115;
-      pl.regenwait    = 150;
-   }
-   k32 amt = diff / (k32)pl.shieldmax;
-   ACS_FadeTo(184, 205, 255, amt, 0.0k);
-   ACS_FadeTo(222, 5, 92, 0.0k, amt*2.0k + 2.0k/35.0k);
-}
-
 static void P_Spe_pTick(void) {
    if(Paused) return;
 
-   if(get_bit(cbiupgr, cupg_d_shield)) {
+   if(get_bit(wl.cbiupgr, cupg_d_shield)) {
       Dbg_Stat(
          _l("shield: "),       _p((i32)pl.shield),  _c('\n'),
          _l("shieldmax: "),    _p(pl.shieldmax),    _c('\n'),
@@ -653,11 +633,23 @@ static void P_Spe_pTick(void) {
          _l("regenwaitmax: "), _p(pl.regenwaitmax), _c('\n')
       );
 
-      pl.shieldmax = 100;
+      pl.shieldmax = 50;
       if(pl.shield == 0 && pl.oldshield != 0) {
-         P_Spe_shieldDestroyed();
+         StartSound(ss_player_ari_shield_break, lch_shield, CHANF_MAYBE_LOCAL|CHANF_UI, 1.0, ATTN_STATIC);
+         pl.regenwaitmax = 365;
+         pl.regenwait    = 400;
+         ACS_FadeTo(184, 205, 255, 0.3k, 0.0k);
+         ACS_FadeTo(222, 5, 92, 0.0k, 3.0k);
       } else if(pl.shield < pl.oldshield) {
-         P_Spe_shieldHit();
+         ACS_StopSound(pl.tid, lch_shield);
+         i32 diff = pl.oldshield - pl.shield;
+         if(pl.regenwait <= 150) {
+            pl.regenwaitmax = 115;
+            pl.regenwait    = 150;
+         }
+         k32 amt = diff / (k32)pl.shieldmax;
+         ACS_FadeTo(184, 205, 255, amt, 0.0k);
+         ACS_FadeTo(222, 5, 92, 0.0k, amt*2.0k + 2.0k/35.0k);
       } else if(pl.regenwait) {
          --pl.regenwait;
          if(pl.regenwait == pl.regenwaitmax) {
@@ -667,9 +659,12 @@ static void P_Spe_pTick(void) {
          if(pl.shield == pl.oldshield) {
             StartSound(ss_player_ari_shield_regenl, lch_shield, CHANF_MAYBE_LOCAL|CHANF_UI|CHANF_LOOP, 1.0, ATTN_STATIC);
          }
-         pl.setShield(pl.shield + 1);
+         if(wl.ticks % 3 == 0) {
+            pl.setShield(pl.shield + 1);
+         }
          if(pl.shield == pl.shieldmax) {
             StartSound(ss_player_ari_shield_regend, lch_shield, CHANF_MAYBE_LOCAL|CHANF_UI, 1.0, ATTN_STATIC);
+            SetFade(fid_shielddone, 3, 8);
          }
       }
    }
@@ -737,7 +732,7 @@ void P_Aug_pTick(void) {
 }
 
 alloc_aut(0) script_str ext("ACS") addr(OBJ "Markiplier")
-void Sc_MapMarker(i32 tid) {
+void Z_MapMarker(i32 tid) {
    enum {ticks = 35 * 2};
 
    str text = GetNameTag(tid);
@@ -783,7 +778,7 @@ str GetAdviceMarker(i32 tid) {
 }
 
 alloc_aut(0) script_str ext("ACS") addr(OBJ "SetAdviceMarker")
-void Sc_SetAdviceMarker(i32 tid) {
+void Z_SetAdviceMarker(i32 tid) {
    str text = GetAdviceMarker(tid);
 
    ACS_Delay(5);
@@ -793,7 +788,7 @@ void Sc_SetAdviceMarker(i32 tid) {
 }
 
 script_str type("net") ext("ACS") addr(OBJ "KeyBuyAutoGroup")
-void Sc_KeyBuyAutoGroup(i32 grp) {
+void Z_KeyBuyAutoGroup(i32 grp) {
    if(grp < 0 || grp >= 4) {
       return;
    }
@@ -828,7 +823,7 @@ void Sc_KeyBuyAutoGroup(i32 grp) {
 }
 
 script_str type("net") ext("ACS") addr(OBJ "KeyToggleAutoGroup")
-void Sc_KeyToggleAutoGroup(i32 grp) {
+void Z_KeyToggleAutoGroup(i32 grp) {
    if(grp < 0 || grp >= 4) {
       return;
    }
@@ -852,7 +847,7 @@ void Sc_KeyToggleAutoGroup(i32 grp) {
 }
 
 alloc_aut(0) script_str type("net") ext("ACS") addr(OBJ "KeyGlare")
-void Sc_KeyGlare(void) {
+void Z_KeyGlare(void) {
    if(!P_None()) {
       ACS_FadeTo(255, 255, 255, 1.0, 0.0);
 
@@ -869,7 +864,7 @@ void Sc_KeyGlare(void) {
 }
 
 _Noreturn dynam_aut script_str ext("ACS") addr(OBJ "TimelineInconsistent")
-void Sc_TimelineInconsistent(void) {
+void Z_TimelineInconsistent(void) {
    pl.setActivator();
    for(;;) {
       ACS_FadeTo(0, 0, 0, 1.0, 0.0);

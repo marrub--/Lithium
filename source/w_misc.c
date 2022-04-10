@@ -87,37 +87,37 @@ void PtrInvSet(i32 tid, str item, i32 amount) {
 }
 
 void BeginAngles(i32 x, i32 y) {
-   a_cur = 0;
-   for(i32 i = 0; i < countof(a_angles); i++) {
-      a_angles[i].ang = 0;
-      a_angles[i].dst = 0;
+   wl.a_cur = 0;
+   for(i32 i = 0; i < countof(wl.a_angles); i++) {
+      wl.a_angles[i].ang = 0;
+      wl.a_angles[i].dst = 0;
    }
-   a_x = x;
-   a_y = y;
+   wl.a_x = x;
+   wl.a_y = y;
 }
 
 k32 AddAngle(i32 x, i32 y) {
-   if(a_cur >= countof(a_angles)) {
+   if(wl.a_cur >= countof(wl.a_angles)) {
       return 0;
    }
 
-   struct polar *p = &a_angles[a_cur++];
-   *p = ctopol(x - a_x, y - a_y);
+   struct polar *p = &wl.a_angles[wl.a_cur++];
+   *p = ctopol(x - wl.a_x, y - wl.a_y);
    return p->ang;
 }
 
 script ext("ACS") addr(lsc_addangle)
-void Sc_AddAngle(i32 x, i32 y) {
+void Z_AddAngle(i32 x, i32 y) {
    AddAngle(x, y);
 }
 
 script_str ext("ACS") addr(OBJ "EmitScore")
-void Sc_EmitScore(i32 amount) {
+void Z_EmitScore(i32 amount) {
    /* dummied out */
 }
 
 script_str ext("ACS") addr(OBJ "EmitEXP")
-void Sc_EmitEXP(i32 amount) {
+void Z_EmitEXP(i32 amount) {
    P_Lv_GiveEXP(amount);
 }
 
@@ -135,14 +135,14 @@ bool chtf_give_exp(cheat_params_t const params) {
 struct cheat cht_give_exp = cheat_s("pgtuition", 3, chtf_give_exp, "Tuition granted");
 
 script_str ext("ACS") addr(OBJ "GiveScore")
-void Sc_GiveScore(i32 score) {
+void Z_GiveScore(i32 score) {
    P_Scr_Give(GetX(0), GetY(0), GetZ(0),
               score * (k64)ACS_RandomFixed(0.7, 1.2),
               false);
 }
 
 script_str ext("ACS") addr(OBJ "BoughtItemPickup")
-void Sc_BoughtItemPickup(i32 id) {
+void Z_BoughtItemPickup(i32 id) {
    if(P_None()) return;
    if(id) {
       struct upgrade *upgr = &pl.upgrades[id];

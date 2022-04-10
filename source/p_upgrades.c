@@ -182,10 +182,10 @@ i32 P_Upg_CheckReqs(struct upgrade *upgr) {
       if(get_bit(upgr->requires, ureq)) {
          switch(ureq) {
          #define Req(r, cond) case r: if(!(cond)) {set_bit(ret, ureq);} break
-         Req(_ur_ai,  get_bit(cbiupgr, cupg_m_armorinter));
-         Req(_ur_wmd, get_bit(cbiupgr, cupg_m_weapninter));
-         Req(_ur_wrd, get_bit(cbiupgr, cupg_m_weapninte2));
-         Req(_ur_rdi, get_bit(cbiupgr, cupg_rdistinter));
+         Req(_ur_ai,  get_bit(wl.cbiupgr, cupg_m_armorinter));
+         Req(_ur_wmd, get_bit(wl.cbiupgr, cupg_m_weapninter));
+         Req(_ur_wrd, get_bit(wl.cbiupgr, cupg_m_weapninte2));
+         Req(_ur_rdi, get_bit(wl.cbiupgr, cupg_rdistinter));
          Req(_ur_ra,  get_bit(pl.upgrades[UPGR_ReactArmor].flags, _ug_owned));
          #undef Req
          }
@@ -200,7 +200,7 @@ bool P_Upg_CanActivate(struct upgrade *upgr) {
       (get_bit(upgr->flags, _ug_owned) ||
        get_bit(upgr->flags, _ug_active)) &&
       (pl.pclass != pcl_marine ||
-       pl.cbi.pruse + upgr->perf <= cbiperf);
+       pl.cbi.pruse + upgr->perf <= wl.cbiperf);
 }
 
 bool P_Upg_Toggle(struct upgrade *upgr) {

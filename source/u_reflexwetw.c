@@ -76,12 +76,12 @@ void Upgr_ReflexWetw_Update(void) {
 }
 
 script_str ext("ACS") addr(OBJ "DodgeView")
-void Sc_DodgeView(void) {
+void Z_DodgeView(void) {
    if(!P_None()) DodgeView();
 }
 
 script_str ext("ACS") addr(OBJ "DodgeViewShadowWalk")
-void Sc_DodgeViewShadowWalk(void) {
+void Z_DodgeViewShadowWalk(void) {
    if(!P_None()) {
       k32 vh = pl.viewheight;
 

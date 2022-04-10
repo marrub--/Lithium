@@ -66,7 +66,11 @@ override void BeginPlay() {
 
 override void postBeginPlay() {
    super.postBeginPlay();
-   ACS_ExecuteWithResult(lsc_playeropen);
+   travelled();
+}
+
+override void travelled() {
+   acs_executeWithResult(lsc_playeropen);
 }
 
 override void GiveDefaultInventory() {
@@ -208,8 +212,7 @@ void Lith_PostTick() {
    }
 }
 
-override void Tick()
-{
+override void Tick() {
    if(level.levelnum == 1911777) return;
 
    if(player && player.mo == self) Lith_PreTick();

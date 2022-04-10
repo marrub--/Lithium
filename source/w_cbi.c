@@ -61,11 +61,11 @@ void CBI_Install(i32 num) {
    pl.setActivator();
 
    ifauto(struct cupgdef const *, c, GetCUpgr(pl.pclass_b, num)) {
-      set_bit(cbiupgr, c->key);
+      set_bit(wl.cbiupgr, c->key);
 
       switch(c->key) {
-      case cupg_m_cpu1: cbiperf += 20; break;
-      case cupg_m_cpu2: cbiperf += 40; break;
+      case cupg_m_cpu1: wl.cbiperf += 20; break;
+      case cupg_m_cpu2: wl.cbiperf += 40; break;
 
       case cupg_c_slot3spell: InvGive(so_Feuer,    1); break;
       case cupg_c_slot4spell: InvGive(so_Rend,     1); break;
@@ -79,18 +79,8 @@ void CBI_Install(i32 num) {
       case cupg_d_zaruk: GiveSubWeapon(_subw_grenade); break;
       case cupg_d_motra: InvGive(so_Motra, 1);         break;
       case cupg_d_shield:
-         #ifndef NDEBUG
-         if(dbgflags(dbgf_items)) {
-            pl.regenwaitmax = 1;
-            pl.regenwait    = 0;
-            pl.setShield(pl.shieldmax = 100);
-         } else {
-         #endif
-            pl.regenwaitmax = 20;
-            pl.regenwait = 5;
-         #ifndef NDEBUG
-         }
-         #endif
+         pl.regenwaitmax = 20;
+         pl.regenwait = 5;
          break;
       #undef GiveSubWeapon
       }
@@ -112,12 +102,12 @@ void CBI_InstallSpawned(void) {
 }
 
 script_str ext("ACS") addr(OBJ "CbiItemWasSpawned")
-void Sc_CbiItemWasSpawned(i32 num) {
+void Z_CbiItemWasSpawned(i32 num) {
    set_bit(cbispawn, num);
 }
 
 script_str ext("ACS") addr(OBJ "PickupCbiItem")
-void Sc_PickupCbiItem(i32 num) {
+void Z_PickupCbiItem(i32 num) {
    FadeFlash(0, 255, 0, 0.7, 0.5);
 
    ifauto(struct cupgdef const *, c, GetCUpgr(pl.pclass_b, num)) {

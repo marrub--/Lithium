@@ -53,7 +53,7 @@ i32 version_name_to_num(cstr s) {
 }
 
 script ext("ACS") addr(lsc_versionname)
-void Sc_VersionName(void) {
+void Z_VersionName(void) {
    DrawCallV(
       sm_SetVersion,
 #ifndef NDEBUG

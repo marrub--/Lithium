@@ -96,6 +96,11 @@ override void WorldLoaded(WorldEvent ev) {
       "DA38541C021A24295986E4CC1FF65D68"  // urania.wad map30
    };
 
+   if(ev.isSaveGame && m_tainted) {
+      CallACS("Lith_TimelineInconsistent");
+      return;
+   }
+
    m_bossLevel = boss_none;
 
    m_bossBabies.clear();
@@ -124,9 +129,7 @@ override void WorldLoaded(WorldEvent ev) {
       }
    }
 
-   if(ev.isReopen) {
-      ACS_ExecuteWithResult(lsc_worldreopen);
-   } else {
+   if(!ev.isReopen) {
       ACS_ExecuteWithResult(lsc_gsinit);
       ACS_ExecuteWithResult(lsc_strinit);
    }
@@ -134,12 +137,13 @@ override void WorldLoaded(WorldEvent ev) {
 
    if(__lith_fun & lfun_ragnarok) Ragnarok();
 
-   bool in_hell = CallACS("Lith_InHell");
-   if(CallACS("Lith_SkyMap")) {
+   if(ACS_ExecuteWithResult(lsc_wdata, wdata_skymap)) {
       for(int i = 0, j = level.sectors.size(); i < j; i++) {
          Sector sec = level.sectors[i];
          if(sec.getTexture(Sector.Ceiling) == skyflatnum) {
-            if(in_hell) sec.setColor("#ff7777");
+            if(ACS_ExecuteWithResult(lsc_wdata, wdata_inhell)) {
+               sec.setColor("#ff7777");
+            }
             sec.lightlevel = int(clamp(sec.lightlevel * lith_sv_skydarkening, 64.0, 255.0));
          }
       }
@@ -219,7 +223,7 @@ override void WorldThingSpawned(WorldEvent ev)
       m_bossBabies.push(th);
 
    if(th.bISMONSTER && !(th is "RandomSpawner")) {
-      Lith_UTIL.Exec(th, lsc_monsterinfo);
+      Lith_UTIL.exec(th, lsc_monsterinfo);
 
       if(__lith_fun & lfun_ragnarok)
          Lith_HERMES.PrepareForRagnarok(th);
@@ -241,7 +245,7 @@ override void WorldThingSpawned(WorldEvent ev)
             }
 
             if(typ == mtype_unknown ||
-               Lith_UTIL.Exec(th, lsc_monstertype) == typ)
+               Lith_UTIL.exec(th, lsc_monstertype) == typ)
                m_bossBabies.push(th);
             break;
       }
@@ -374,9 +378,8 @@ override void WorldThingDied(WorldEvent ev)
    }
 }
 
-override void WorldThingRevived(WorldEvent ev)
-{
-   ev.Thing.ACS_ScriptCall("Lith_ResurrectMonster");
+override void worldThingRevived(WorldEvent ev) {
+   ev.thing.acs_scriptCall("Lith_ResurrectMonster");
 }
 
 override void checkReplacement(ReplaceEvent ev) {

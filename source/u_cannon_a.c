@@ -19,7 +19,7 @@ void Upgr_Cannon_A_Deactivate(void) {
 }
 
 script_str ext("ACS") addr(OBJ "PunctuatorFire")
-void Sc_PunctuatorFire(void) {
+void Z_PunctuatorFire(void) {
    if(!P_None()) {
       struct k32v3 v = trace_from(pl.yaw, pl.pitch, 2048, pl.attackheight);
       ACS_SpawnForced(so_PunctuatorPuff, v.x, v.y, v.z);

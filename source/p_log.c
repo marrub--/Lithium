@@ -149,7 +149,7 @@ void P_Log_Entry(void) {
 
    log.curmap = lm;
 
-   pl.logF(tmpstr(lang(sl_enter_fmt)), lm->name, CanonTime(ct_full, ticks));
+   pl.logF(tmpstr(lang(sl_enter_fmt)), lm->name, CanonTime(ct_full, wl.ticks));
 }
 
 script void P_Log_PTick(void) {
@@ -248,7 +248,7 @@ script void P_Log(i32 cr, i32 x, i32 yy) {
 }
 
 script_str ext("ACS") addr(OBJ "LogS")
-void Sc_Log(i32 levl, i32 type) {
+void Z_Log(i32 levl, i32 type) {
    if(P_None()) return;
 
    str name = ServCallS(sm_GetLogName);

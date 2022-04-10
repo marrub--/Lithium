@@ -36,7 +36,7 @@ void P_Scr_Payout(void) {
    scoresep(i < _begin_total ? lerplk(0, scr, i / 34.0lk) : scr)
 
    i32 amounty;
-   struct payoutinfo pay = payout;
+   struct payoutinfo pay = wl.pay;
 
    pl.setActivator();
    ACS_Delay(25);

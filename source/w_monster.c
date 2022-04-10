@@ -105,8 +105,8 @@ void ShowBarrier(dmon_t const *m, k32 alpha) {
    BeginAngles(m->x, m->y);
    ServCallV(sm_MonsterBarrierLook);
 
-   for(i32 i = 0; i < a_cur; i++) {
-      struct polar *a = &a_angles[i];
+   for(i32 i = 0; i < wl.a_cur; i++) {
+      struct polar *a = &wl.a_angles[i];
 
       k32 dst = m->r / 2 + a->dst / 4;
       k32 x   = m->x + ACS_Cos(a->ang) * dst;
@@ -133,7 +133,7 @@ void BaseMonsterLevel(dmon_t *m) {
    k32 rlv = ACS_RandomFixed(1, _max_level);
    k32 bias;
 
-   bias = mapscleared / 40.0;
+   bias = wl.mapscleared / 40.0;
 
    bias *= bias;
    switch(ACS_GameSkill()) {
@@ -627,23 +627,23 @@ void Mon_Init(void) {
 }
 
 script ext("ACS") addr(lsc_monstertype)
-i32 Sc_GetMonsterType(void) {
+i32 Z_GetMonsterType(void) {
    ifauto(dmon_t *, m, DmonSelf()) return m->mi->type;
    else                            return mtype_unknown;
 }
 
 script_str ext("ACS") addr(OBJ "GiveMonsterEXP")
-void Sc_GiveMonsterEXP(i32 amt) {
+void Z_GiveMonsterEXP(i32 amt) {
    ifauto(dmon_t *, m, DmonSelf()) m->exp += amt;
 }
 
 script_str ext("ACS") addr(OBJ "ResurrectMonster")
-void Sc_ResurrectMonster(i32 amt) {
+void Z_ResurrectMonster(i32 amt) {
    ifauto(dmon_t *, m, DmonSelf()) m->resurrect = true;
 }
 
 alloc_aut(0) script ext("ACS") addr(lsc_monsterinfo)
-void Sc_MonsterInfo(void) {
+void Z_MonsterInfo(void) {
    static bool piss = true;
 
    noinit static
@@ -688,7 +688,7 @@ void Sc_MonsterInfo(void) {
 }
 
 script_str ext("ACS") addr(OBJ "MonsterFinalized")
-void Sc_MonsterFinalized(void) {
+void Z_MonsterFinalized(void) {
    ifauto(dmon_t *, m, DmonSelf()) {
       OnFinalize(m);
    }

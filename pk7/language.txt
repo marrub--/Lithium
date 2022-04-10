@@ -566,18 +566,9 @@
 "LITH_INFO_TITLE_MIntroAri" = "$LITH_SAVED_MESSAGE";
 "LITH_INFO_REMOT_MIntroAri" = "$LITH_REMOTE_OMI";
 "LITH_INFO_DESCR_MIntroAri" = "Aricil! I can feel your presence. We're in the same plane now, you and I. Good.\n\nI'm going to propose a challenge to you, my dear brother; Whoever can make the most Score and get out of here the quickest wins. Let's see who will make it to the top first.\n\nI hope you a safe journey. This place gives me horrid vibes.";
-"LITH_INFO_TITLE_MCluster1Ari" = "$LITH_SAVED_MESSAGE";
-"LITH_INFO_REMOT_MCluster1Ari" = "$LITH_REMOTE_OMI";
-"LITH_INFO_DESCR_MCluster1Ari" = "";
-"LITH_INFO_TITLE_MCluster2Ari" = "$LITH_SAVED_MESSAGE";
-"LITH_INFO_REMOT_MCluster2Ari" = "$LITH_REMOTE_OMI";
-"LITH_INFO_DESCR_MCluster2Ari" = "";
-"LITH_INFO_TITLE_MCluster3Ari" = "$LITH_SAVED_MESSAGE";
-"LITH_INFO_REMOT_MCluster3Ari" = "$LITH_REMOTE_OMI";
-"LITH_INFO_DESCR_MCluster3Ari" = "";
 "LITH_INFO_TITLE_MPhantomAri" = "$LITH_SAVED_MESSAGE";
 "LITH_INFO_REMOT_MPhantomAri" = "$LITH_REMOTE_OMI";
-"LITH_INFO_DESCR_MPhantomAri" = "Aricil! What the hell is going on? There are strange... \cmdark\c- things attacking me. If you can, we need to re-group. My Computer/Brain Interface is saying weird things to me... I'm loathe to say it, but, I'm scared.\n\nI think we should go home, but... The world keeps changing behind me. I'm pretty sure the Dimension Driver wouldn't even work here.";
+"LITH_INFO_DESCR_MPhantomAri" = "Aricil! What the hell is going on? There are strange... \cmdark\c- things attacking me. If you can, we need to re-group. My Computer/Brain Interface is saying weird things to me... I'm loathe to say it, but, I'm scared.\n\nI think we should go home, but... The world keeps changing behind me. I'm pretty sure the Dimension Driver wouldn't even work here.\n\nGood hunting.";
 "LITH_INFO_TITLE_MIntroJem" = "$LITH_SAVED_MESSAGE";
 "LITH_INFO_REMOT_MIntroJem" = "<hidden>@corp.AOF";
 "LITH_INFO_SSIZE_MIntroJem" = "36";
@@ -1371,7 +1362,7 @@
 "LITH_BEGINNING_Ari_2" = "In another world, the Dark Lord awakens. His head hurts. Everything\naround him moves in slow motion. Not just for a moment, but forever.\nTime flows differently here, he supposes. At least it's here at all.\n~\nInspecting his surroundings, he has awoken in a dark place, almost\nsuiting him. Yet, a darker energy emanates throughout the atmosphere\nof this place, darker and more sinister than should be possible.\n~\nThe Dark Lord prays for safety.";
 "LITH_BEGINNING_Kiri_1" = "... Time does not exist in this place.\n~\nFor this reason I believe I have been reincarnated. Because I think, I\nam - and I have been summoned to divide the...\n~\nThe... There's a problem; but the nature of it is indiscernible. While\nthe knowledge of all my past lives and predictions of the future stay\ntrue, the self is false. It has been falsified. Not by me, or by \"me.\"\n~\nWhile I ponder this discrepancy it dawns on \"me.\" The self of now does\nnot impact the past, but merely the future. And so, it shall have been\nthat it was merely the needs of causality asking that I ... change.\n~\nWell, my ways have always been given doubt by those around me. Perhaps\nit's time for a change. Something more... imbalanced.\n~\nWhile not a God, still some properties of them seem to rub off on me.\nI am affected by the waves, I sleep in nothingness. I am absolute.\nYet, what I am still missing is faith.\n~\nI may wish for more than this immortality, but I shall not act out of\nmy being just to get there. Having no faith is better than what I\nwould become. Being more than grey would be worse than staying between\nthe folds.";
 "LITH_INV_HINTS" = "You can right click to quickly move items. To equip armor place it on your \cdbody\c- or press \cnEquip\c-.";
-"LITH_CONTAINER_Backpack" = "$LITH_INFO_SHORT_BackpackBase";
+"LITH_CONTAINER_Backpack" = "$LITH_INFO_SHORT_Backpack";
 "LITH_CONTAINER_ArmUpL" = "L Shoulder";
 "LITH_CONTAINER_ArmUpR" = "R Shoulder";
 "LITH_CONTAINER_ArmLoL" = "L Wrist";
@@ -2482,7 +2473,7 @@
 "LITH_INFO_SHORT_RadSuit" = "RADスーツ";
 "LITH_INFO_TITLE_RadSuit" = "SYM4.3 D.223 放射線遮蔽スーツ";
 "LITH_INFO_DESCR_RadSuit" = "SYM4.3によって作成された放射線遮蔽スーツは着用が簡単で、非常に軽量で薄く少しの間全ての放射線損傷をブロックすることができる。鉄と鉛織りでパッド入り。有害物質を含んだ場所での短期作業のために大量生産。\n\n1分間床でのダメージを防ぐ。";
-"LITH_INFO_SHORT_BackpackBase" = "バックパック";
+"LITH_INFO_SHORT_Backpack" = "バックパック";
 "LITH_INFO_DESCR_BackpackStan" = "そちらより先に派遣されたエージェントの一人が残したバックパック。中に残っているのは、彼らが持っていた弾薬と割引カードだけだ。";
 "LITH_INFO_DESCR_BackpackJem" = "誰かが残したバックパック。中に残っているのは、誰かが持っていた弾薬と割引カードだけだ。";
 "LITH_INFO_SHORT_Stimpack" = "スティムパック";

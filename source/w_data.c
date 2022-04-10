@@ -15,7 +15,7 @@
 #include "w_world.h"
 
 script ext("ACS") addr(lsc_pdata)
-i32 Sc_LPData(i32 info, i32 permutation) {
+i32 Z_LPData(i32 info, i32 permutation) {
    if(P_None()) return 0;
 
    switch(info) {
@@ -40,21 +40,22 @@ i32 Sc_LPData(i32 info, i32 permutation) {
 }
 
 script ext("ACS") addr(lsc_wdata)
-i32 Sc_LWData(i32 info) {
+i32 Z_LWData(i32 info) {
    switch(info) {
-   case wdata_bossspawned: return bossspawned;
-   case wdata_soulsfreed:  return soulsfreed;
-   case wdata_dorain:      return dorain;
+   case wdata_bossspawned: return wl.bossspawned;
+   case wdata_soulsfreed:  return wl.soulsfreed;
+   case wdata_dorain:      return wl.dorain;
    case wdata_ptid:        return pl.tid;
    case wdata_pclass:      return pl.pclass;
+   case wdata_skymap:      return CVarGetI(sc_sv_sky) && !ml.islithmap;
+   case wdata_inhell:      return MapNum >= 21;
    }
-
    return 0;
 }
 
 #define w_setptr_x(t) \
    script ext("ACS") addr(lsc_setptr##t) \
-      void Sc_SetPtr_##t(intptr_t p, t s) { \
+      void Z_SetPtr_##t(intptr_t p, t s) { \
       *(t *)p = s; \
    }
 #include "w_world.h"

@@ -37,7 +37,7 @@ void Upgr_Rifle_A_Render(void) {
 }
 
 script_str ext("ACS") addr(OBJ "SwitchRifleFiremode")
-void Sc_SwitchRifleFiremode(void) {
+void Z_SwitchRifleFiremode(void) {
    if(!P_None()) {
       pl.riflefiremode = ++pl.riflefiremode % rifle_firemode_max;
       AmbientSound(ss_weapons_rifle_firemode, 1.0);
@@ -45,7 +45,7 @@ void Sc_SwitchRifleFiremode(void) {
 }
 
 script_str ext("ACS") addr(OBJ "ResetRifleMode")
-void Sc_ResetRifleMode(void) {
+void Z_ResetRifleMode(void) {
    if(!P_None() && CVarGetI(sc_weapons_riflemodeclear)) {
       pl.riflefiremode = 0;
    }

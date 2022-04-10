@@ -446,6 +446,10 @@ void HUD_BottomLeft(void) {
          ClearClip();
       }
 
+      if(CheckFade(fid_shielddone)) {
+         PrintSpriteFP(sp_HUD_D_ShieldDone, 16,1, 239,2, fid_shielddone);
+      }
+
       PrintTextChL(u8"");
       PrintTextX(sf_lmidfont, hudcolor, 8,4, 229,0, _u_no_unicode);
 

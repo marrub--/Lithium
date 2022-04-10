@@ -131,7 +131,7 @@ void P_Lv_GiveEXP(i32 amt);
 stkcall cstr P_Discrim(i32 pclass);
 stkcall i32 P_Color(i32 pclass);
 void P_Dat_PTickPst(void);
-script extern void P_Scr_Payout(void);
+script void P_Scr_Payout(void);
 void P_Log_SellWeapon(struct weaponinfo const *info, i96 score);
 void P_Log_Weapon(struct weaponinfo const *info);
 

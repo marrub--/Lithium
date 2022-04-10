@@ -369,6 +369,7 @@ sp_:
    - HUD_D_HPBack:         HUD_D:HPBack
    - HUD_D_ShieldBack:     HUD_D:ShieldBack
    - HUD_D_ShieldCharge:   HUD_D:ShieldCharge
+   - HUD_D_ShieldDone:     HUD_D:ShieldDone
    - HUD_D_WepBack:        HUD_D:WepBack
    - HUD_H_A1:             HUD:H_A1
    - HUD_H_A2:             HUD:H_A2

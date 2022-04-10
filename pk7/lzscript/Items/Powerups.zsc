@@ -332,7 +332,7 @@ class Lith_Backpack : Lith_ScoreItem replaces Backpack
 {
    default
    {
-      Tag "$LITH_INFO_SHORT_BackpackBase";
+      Tag "$LITH_INFO_SHORT_Backpack";
       Inventory.PickupSound "player/pickup/item";
       Lith_BasicPickup.LogName "Backpack", 5;
       Lith_BasicPickup.InfoPage "Backpack";

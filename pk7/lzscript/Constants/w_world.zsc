@@ -21,6 +21,8 @@ enum Lith_WData {
    wdata_dorain,
    wdata_ptid,
    wdata_pclass,
+   wdata_skymap,
+   wdata_inhell,
 };
 
 enum Lith_Fun {

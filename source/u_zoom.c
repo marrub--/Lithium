@@ -62,7 +62,7 @@ void Upgr_Zoom_Render(void) {
 }
 
 script_str ext("ACS") type("net") addr(OBJ "KeyZoom")
-void Sc_KeyZoom(i32 amt) {
+void Z_KeyZoom(i32 amt) {
    if(ACS_Timer() < 10) return;
 
    if(!P_None()) {

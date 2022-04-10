@@ -21,10 +21,6 @@ w_setptr_x(bool)
 #if !ZscOn
 #include <stdbool.h>
 
-#define InSecret (Cluster == 9 || Cluster == 10)
-#define InHell   (Cluster >= 8)
-#define OnEarth  (Cluster == 7)
-
 #define MapNum  ACS_GetLevelInfo(LEVELINFO_LEVELNUM)
 #define Cluster ACS_GetLevelInfo(LEVELINFO_CLUSTERNUM)
 
@@ -45,6 +41,8 @@ enum ZscName(WData) {
    wdata_dorain,
    wdata_ptid,
    wdata_pclass,
+   wdata_skymap,
+   wdata_inhell,
 };
 
 enum ZscName(Fun) {
@@ -211,29 +209,35 @@ enum finale_num {
    _finale_other,
 };
 
-extern struct payoutinfo payout;
-extern i32 mapscleared;
-extern i32 prevcluster;
-extern i32 mapseed;
-extern bool unloaded;
-extern bool lmvar islithmap;
-extern i32 secretsfound;
-extern i32 ticks;
-extern i32 soulsfreed;
-extern bool bossspawned;
-extern i32 cbiperf;
-extern i64 cbiupgr;
-extern bool legendoom;
-extern enum mission_status lmvar mission;
-extern bool dorain;
-extern bool reopen;
-extern i32 lmvar mapid;
-extern bool lmvar modinit;
+struct world {
+   struct payoutinfo pay;
+   i32               mapscleared;
+   bool              unloaded;
+   i32               secretsfound;
+   i32               ticks;
+   i32               soulsfreed;
+   bool              bossspawned;
+   i32               cbiperf;
+   i64               cbiupgr;
+   bool              legendoom;
+   bool              dorain;
+   bool              gblinit;
 
-/* DECORATE data */
-extern i32 a_x, a_y;
-extern struct polar a_angles[8];
-extern i32 a_cur;
+   i32          a_x, a_y;
+   struct polar a_angles[8];
+   i32          a_cur;
+};
+
+struct map_locals {
+   bool                islithmap;
+   enum mission_status mission;
+   i32                 mapid;
+   i32                 mapseed;
+   bool                modinit;
+};
+
+extern struct world            wl;
+extern struct map_locals lmvar ml;
 
 void Scr_HInit(void);
 cstr CanonTime(i32 type, i32 time);

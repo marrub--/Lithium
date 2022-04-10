@@ -58,7 +58,7 @@ void Upgr_Flashlight_Update(void) {
       } else if(udata.battery < 0) {
          udata.battery = 0;
          udata.on = false;
-      } else if(udata.battery < bat_life / 4 && ticks % 10 == 0) {
+      } else if(udata.battery < bat_life / 4 && wl.ticks % 10 == 0) {
          udata.intensity = ACS_RandomFixed(0.25, 0.75);
       }
    }
@@ -76,12 +76,12 @@ void Upgr_Flashlight_Update(void) {
 }
 
 script_str ext("ACS") addr(OBJ "GetFlashlightIntensity")
-k32 Sc_GetFlashlightIntensity(void) {
+k32 Z_GetFlashlightIntensity(void) {
    if(!P_None()) {return udata.intensity;}
    return 0.0;
 }
 
 script_str type("net") ext("ACS") addr(OBJ "KeyLight")
-void Sc_KeyLight(void) {if(!P_None()) {udata.on = !udata.on;}}
+void Z_KeyLight(void) {if(!P_None()) {udata.on = !udata.on;}}
 
 /* EOF */

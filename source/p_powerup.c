@@ -16,7 +16,7 @@
 #include "w_world.h"
 
 alloc_aut(0) script_str ext("ACS") addr(OBJ "DOGS")
-void Sc_DOGS(void) {
+void Z_DOGS(void) {
    i32 tid = ACS_UniqueTID();
 
    ACS_SetMusic(sp_lmusic_DOGS);
@@ -35,7 +35,7 @@ void Sc_DOGS(void) {
 }
 
 script_str ext("ACS") addr(OBJ "BarrierBullets")
-void Sc_BarrierBullets(void) {
+void Z_BarrierBullets(void) {
    if(!P_None() && PtrPlayerNumber(0, AAPTR_TARGET) >= 0) {
       k32 ang   = ACS_VectorAngle(GetX(0) - pl.x, GetY(0) - pl.y);
       k32 xang  = ACS_VectorAngle(pl.x - GetX(0), pl.y - GetY(0));
@@ -50,7 +50,7 @@ void Sc_BarrierBullets(void) {
 }
 
 dynam_aut script_str ext("ACS") addr(OBJ "GetSigil")
-void Sc_GetSigil(void) {
+void Z_GetSigil(void) {
    if(!P_None()) {
       P_GUI_Close();
 
@@ -85,7 +85,7 @@ void Sc_GetSigil(void) {
 }
 
 script_str ext("ACS") addr(OBJ "GiveHealthBonus")
-void Sc_GiveHealthBonus(i32 amount) {
+void Z_GiveHealthBonus(i32 amount) {
    if(!P_None()) {
       amount += pl.health;
       if(amount > pl.maxhealth + 100) amount = pl.maxhealth + 100;
@@ -94,7 +94,7 @@ void Sc_GiveHealthBonus(i32 amount) {
 }
 
 script_str ext("ACS") addr(OBJ "GiveHealth")
-void Sc_GiveHealth(i32 amount) {
+void Z_GiveHealth(i32 amount) {
    if(!P_None()) {
       amount += pl.health;
       amount *= 1 + pl.attr.attrs[at_vit] / 80.0;
@@ -104,7 +104,7 @@ void Sc_GiveHealth(i32 amount) {
 }
 
 script_str ext("ACS") addr(OBJ "CheckHealth")
-bool Sc_CheckHealth(void) {
+bool Z_CheckHealth(void) {
    if(!P_None()) return pl.health < pl.maxhealth;
    return 0;
 }

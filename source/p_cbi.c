@@ -131,7 +131,7 @@ void P_CBI_PMinit(void) {
 }
 
 script_str ext("ACS") type("net") addr(OBJ "KeyOpenCBI")
-void Sc_OpenCBI(void) {
+void Z_OpenCBI(void) {
    if(ACS_Timer() < 10) return;
    if(!P_None()) P_GUI_Use();
 }

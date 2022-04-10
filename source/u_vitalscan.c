@@ -75,7 +75,7 @@ void Upgr_VitalScan_Update(void) {
       ACS_PrintChar('\C');
       ACS_PrintChar('-');
 
-      if(legendoom && InvNum(so_LDLegendaryMonsterTransformed)) {
+      if(wl.legendoom && InvNum(so_LDLegendaryMonsterTransformed)) {
          PrintChrLi(" (\CgLegendary\C-)");
       }
 

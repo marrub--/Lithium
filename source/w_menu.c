@@ -22,7 +22,7 @@
 #define rest() while(*inp && *inp != '\n') ch(*inp++)
 
 alloc_aut(0) script_str ext("ACS") addr(OBJ "OpenCreditsMenu")
-void Sc_OpenCreditsMenu(void) {
+void Z_OpenCreditsMenu(void) {
    astr inp = ns(lang(sl_credits));
 
    section_beg();

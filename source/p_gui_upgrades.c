@@ -130,7 +130,7 @@ void GUIUpgradeRequirements(struct gui_state *g, struct upgrade *upgr) {
 
    /* Performance rating */
    if(upgr->perf && pl.pclass != pcl_cybermage) {
-      bool over = upgr->perf + pl.cbi.pruse > cbiperf;
+      bool over = upgr->perf + pl.cbi.pruse > wl.cbiperf;
       cstr fmt;
 
       if(get_bit(upgr->flags, _ug_active)) {

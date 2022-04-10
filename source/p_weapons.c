@@ -194,7 +194,7 @@ void P_Wep_PTick(void) {
 }
 
 script_str ext("ACS") addr(OBJ "WeaponPickup")
-bool Sc_WeaponPickup(i32 name) {
+bool Z_WeaponPickup(i32 name) {
    if(P_None()) return false;
 
    bool weaponstay = CVarGetI(sc_sv_weaponstay);
@@ -230,7 +230,7 @@ bool Sc_WeaponPickup(i32 name) {
 }
 
 script_str ext("ACS") addr(OBJ "CircleSpread")
-k32 Sc_CircleSpread(k32 mdx, k32 mdy, bool getpitch) {
+k32 Z_CircleSpread(k32 mdx, k32 mdy, bool getpitch) {
    noinit static
    k32 y, p;
 
@@ -249,14 +249,14 @@ k32 Sc_CircleSpread(k32 mdx, k32 mdy, bool getpitch) {
 }
 
 script_str ext("ACS") addr(OBJ "ChargeFistDamage")
-i32 Sc_ChargeFistDamage(void) {
+i32 Z_ChargeFistDamage(void) {
    i32 amount = InvNum(so_FistCharge);
    InvTake(so_FistCharge, INT32_MAX);
    return amount * ACS_Random(1, 3);
 }
 
 script_str ext("ACS") addr(OBJ "AmmoRunOut")
-k32 Sc_AmmoRunOut(bool ro, k32 mul) {
+k32 Z_AmmoRunOut(bool ro, k32 mul) {
    if(!P_None()) {
       struct invweapon const *wep = pl.weapon.cur;
       k32 inv = wep->magcur / (k32)wep->magmax;
@@ -276,7 +276,7 @@ k32 Sc_AmmoRunOut(bool ro, k32 mul) {
 }
 
 script_str ext("ACS") addr(OBJ "GetFinalizerMaxHealth")
-i32 Sc_GetFinalizerMaxHealth(void) {
+i32 Z_GetFinalizerMaxHealth(void) {
    i32 sh = ServCallI(sm_GetSpawnHealth);
 
    ifauto(dmon_t *, m, DmonSelf()) {
@@ -287,7 +287,7 @@ i32 Sc_GetFinalizerMaxHealth(void) {
 }
 
 alloc_aut(0) script_str ext("ACS") addr(OBJ "SurgeOfDestiny")
-void Sc_SurgeOfDestiny(void) {
+void Z_SurgeOfDestiny(void) {
    for(i32 i = 0; i < (35 * 17) / 2; i++) {
       ServCallV(sm_SurgeOfDestiny);
       ACS_Delay(2);
@@ -295,7 +295,7 @@ void Sc_SurgeOfDestiny(void) {
 }
 
 script_str ext("ACS") addr(OBJ "GetWRF")
-i32 Sc_GetWRF(void) {
+i32 Z_GetWRF(void) {
    enum {
       WRF_NOBOB         = 1,
       WRF_NOSWITCH      = 2,
@@ -327,7 +327,7 @@ i32 Sc_GetWRF(void) {
 }
 
 alloc_aut(0) script_str ext("ACS") addr(OBJ "PoisonFXTicker")
-void Sc_PoisonFXTicker(void) {
+void Z_PoisonFXTicker(void) {
    for(i32 i = 0; i < 17; i++) {
       PausableTick();
 
@@ -349,7 +349,7 @@ void Sc_PoisonFXTicker(void) {
 }
 
 script_str ext("ACS") addr(OBJ "RecoilUp")
-void Sc_RecoilUp(k32 amount) {
+void Z_RecoilUp(k32 amount) {
    if(!P_None()) {
       pl.extrpitch += amount / 180.0lk;
    }

@@ -14,7 +14,7 @@
 #include "p_player.h"
 #include "w_world.h"
 
-#define Upgr(name) if(get_bit(cbiupgr, name))
+#define Upgr(name) if(get_bit(wl.cbiupgr, name))
 
 #define InfoStart i32 y  = 57
 #define InfoSep       y += 20
@@ -42,7 +42,7 @@ void CBITab_Marine(struct gui_state *g) {
 
    InfoStart;
 
-   Info(tmpstr(lang(sl_cbi_perf)), cbiperf);
+   Info(tmpstr(lang(sl_cbi_perf)), wl.cbiperf);
    Info(tmpstr(lang(sl_cbi_puse)), pl.cbi.pruse);
    Info(tmpstr(lang(sl_cbi_wram)), ram);
 

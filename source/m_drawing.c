@@ -14,7 +14,7 @@
 #include "p_player.h"
 #include "w_world.h"
 
-struct globalcolors globalcolors;
+noinit struct globalcolors globalcolors;
 
 alloc_aut(0) stkcall
 struct i32v2 const *TextSize(str s, str font, i32 pos) {
@@ -70,7 +70,7 @@ i32 Draw_GetCr(i32 n) {
 }
 
 alloc_aut(0) script ext("ACS") addr(lsc_drawcr)
-i32 Sc_DrawCr(i32 cr) {
+i32 Z_DrawCr(i32 cr) {
    return Draw_GetCr(cr);
 }
 

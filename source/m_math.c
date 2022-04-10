@@ -67,8 +67,8 @@
 
 #define POLYNOMIAL 0xC96C5795D7870F42 /* ECMA 182 */
 
-union ik32 ik32;
-union ik64 ik64;
+noinit union ik32 ik32;
+noinit union ik64 ik64;
 
 noinit static
 u64 crctable[256]; /* NB: Don't try to hash >8bit data. */

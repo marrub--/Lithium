@@ -18,29 +18,8 @@
 
 __addrdef __mod_arr lmvar;
 
-struct payoutinfo payout;
-i32 mapscleared;
-i32 prevcluster;
-i32 mapseed;
-bool unloaded;
-bool lmvar islithmap;
-i32 secretsfound;
-i32 ticks;
-i32 soulsfreed;
-bool bossspawned;
-i32 cbiperf;
-i64 cbiupgr;
-bool legendoom;
-enum mission_status lmvar mission = _unfinished;
-
-bool dorain;
-
-bool reopen;
-
-i32 lmvar mapid;
-
-bool lmvar modinit;
-static bool gblinit;
+noinit struct world            wl;
+noinit struct map_locals lmvar ml;
 
 script void SpawnBosses(i96 sum, bool force);
 
@@ -54,7 +33,7 @@ i32 UniqueID(i32 tid) {
    i32 id = PtrInvNum(tid, so_UniqueID);
 
    /* Otherwise we have to give a new unique identifier. */
-   if(id == 0) PtrInvGive(tid, so_UniqueID, id = ++mapid);
+   if(id == 0) PtrInvGive(tid, so_UniqueID, id = ++ml.mapid);
 
    return id;
 }
@@ -70,7 +49,7 @@ static
 void CheckModCompat(void) {
    i32 tid;
 
-   if((legendoom = ACS_SpawnForced(so_LDLegendaryMonsterMarker, 0, 0, 0, tid = ACS_UniqueTID(), 0))) ACS_Thing_Remove(tid);
+   if((wl.legendoom = ACS_SpawnForced(so_LDLegendaryMonsterMarker, 0, 0, 0, tid = ACS_UniqueTID(), 0))) ACS_Thing_Remove(tid);
 
    /*drlamonsters = CVarGetI(sc_drla_is_using_monsters);*/
 }
@@ -110,25 +89,25 @@ static
 void GInit(void) {
    Dbg_Log(log_dev, _l(__func__));
 
-   cbiperf = 10;
+   wl.cbiperf = 10;
 
-   islithmap = (MapNum >= LithMapBeg && MapNum <= LithMapEnd);
+   ml.islithmap = (MapNum >= LithMapBeg && MapNum <= LithMapEnd);
 
    Mon_Init();
    Wep_GInit();
 
-   gblinit = true;
+   wl.gblinit = true;
 }
 
 static
 void MInitPst(void) {
    Dbg_Log(log_dev, _l(__func__));
 
-   payout.par = ACS_GetLevelInfo(LEVELINFO_PAR_TIME) * 35;
+   wl.pay.par = ACS_GetLevelInfo(LEVELINFO_PAR_TIME) * 35;
 
-   payout.killmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_MONSTERS);
-   payout.itemmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_ITEMS);
-   payout.scrtmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_SECRETS);
+   wl.pay.killmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_MONSTERS);
+   wl.pay.itemmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_ITEMS);
+   wl.pay.scrtmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_SECRETS);
 
    /* Check for if rain should be used.
     * - If `NoRain' is set on LithMapLine, never use rain.
@@ -139,11 +118,11 @@ void MInitPst(void) {
    bool use_rain_user = CVarGetI(sc_sv_rain);
    bool use_rain_map  = ACS_GetLineUDMFInt(LithMapLine, sm_MapUseRain);
    if(!never_rain && (use_rain_user || use_rain_map)) {
-      dorain = true;
+      wl.dorain = true;
       W_DoRain();
    }
 
-   modinit = true;
+   ml.modinit = true;
 }
 
 static
@@ -152,10 +131,10 @@ void MInit(void) {
 
    Dlg_MInit();
 
-   soulsfreed = 0;
+   wl.soulsfreed = 0;
 
    /* Init a random seed from the map. */
-   mapseed = ACS_Random(0, INT32_MAX);
+   ml.mapseed = ACS_Random(0, INT32_MAX);
 
    /* Set the air control because ZDoom's default sucks. */
    ACS_SetAirControl(0.77);
@@ -165,17 +144,17 @@ static
 void HInitPre(void) {
    Dbg_Log(log_dev, _l(__func__));
 
-   if(unloaded) {
-      mapscleared++;
+   if(wl.unloaded) {
+      wl.mapscleared++;
    }
 
-   bossspawned = false;
+   wl.bossspawned = false;
 
-   if(CVarGetI(sc_sv_sky) && !islithmap) {
-      if(InHell) {
+   if(CVarGetI(sc_sv_sky) && !ml.islithmap) {
+      if(MapNum >= 21) {
          ACS_ChangeSky(sp_LITHSKRD, sp_LITHSKRD);
          ACS_SetSkyScrollSpeed(1, 0.01);
-      } else if(OnEarth) {
+      } else if(MapNum >= 12) {
          ACS_ChangeSky(sp_LITHSKDE, sp_LITHSKDE);
       } else {
          ACS_ChangeSky(sp_LITHSKS1, sp_LITHSKS1);
@@ -192,12 +171,14 @@ void HInit(void) {
    }
 
    /* Payout, which is not done on the first map. */
-   if(mapscleared != 0) Scr_HInit();
+   if(wl.mapscleared != 0) Scr_HInit();
 
    /* Cluster messages. */
-   if(Cluster >= 6) P_BIP_Unlock(P_BIP_NameToPage("MCluster1"), false);
-   if(Cluster >= 7) P_BIP_Unlock(P_BIP_NameToPage("MCluster2"), false);
-   if(Cluster == 8) P_BIP_Unlock(P_BIP_NameToPage("MCluster3"), false);
+   if(pl.pclass & pcl_outcasts) {
+      if(wl.mapscleared == 10) P_BIP_Unlock(P_BIP_NameToPage("MCluster1"), false);
+      if(wl.mapscleared == 20) P_BIP_Unlock(P_BIP_NameToPage("MCluster2"), false);
+      if(wl.mapscleared == 25) P_BIP_Unlock(P_BIP_NameToPage("MCluster3"), false);
+   }
 
    /* CBI */
    if(CVarGetI(sc_sv_nobosses) ||
@@ -213,10 +194,9 @@ void HInit(void) {
 }
 
 dynam_aut script ext("ACS") addr(lsc_worldopen)
-void Sc_World(bool is_reopen) {
+void Z_World(bool is_reopen) {
    Dbg_Log(log_dev, _l(__func__));
 
-begin:
    Draw_Init();
 
    if(ACS_GameType() == GAME_TITLE_MAP) {
@@ -265,14 +245,14 @@ begin:
     */
    Xalloc(_tag_temp);
 
-   if(!modinit) MInitPre();
-   if(!gblinit) GInit();
-   if(!modinit) MInit();
+   if(!ml.modinit) MInitPre();
+   if(!wl.gblinit) GInit();
+   if(!ml.modinit) MInit();
 
    /* Hub-static pre-player init. */
    if(!is_reopen) HInitPre();
 
-   unloaded = false; /* Unloaded flag can be reset now. */
+   wl.unloaded = false; /* Unloaded flag can be reset now. */
 
    ACS_Delay(2); /* Wait for players to get initialized. */
 
@@ -280,7 +260,7 @@ begin:
    if(!is_reopen) HInit();
 
    /* Module-static post-hub init. */
-   if(!modinit) MInitPst();
+   if(!ml.modinit) MInitPst();
 
    /* Main loop. */
    i32 prevscrts = 0;
@@ -291,12 +271,7 @@ begin:
    i32 missionprc  = 0;
 
    for(;;) {
-      if(reopen) {
-         reopen = false;
-         goto begin;
-      }
-
-      if(ticks > CVarGetI(sc_sv_failtime) * 35 * 60 * 60 && !islithmap) {
+      if(wl.ticks > CVarGetI(sc_sv_failtime) * 35 * 60 * 60 && !ml.islithmap) {
          F_Start(_finale_time_out);
          return;
       }
@@ -305,10 +280,10 @@ begin:
       i32 kills = ACS_GetLevelInfo(LEVELINFO_KILLED_MONSTERS);
       i32 items = ACS_GetLevelInfo(LEVELINFO_FOUND_ITEMS);
 
-      if(kills > prevkills)  payout.killnum += kills - prevkills;
-      if(items > previtems)  payout.itemnum += items - previtems;
-      if(scrts > prevscrts) {payout.scrtnum += scrts - prevscrts;
-                             secretsfound   += scrts - prevscrts;}
+      if(kills > prevkills)  wl.pay.killnum  += kills - prevkills;
+      if(items > previtems)  wl.pay.itemnum  += items - previtems;
+      if(scrts > prevscrts) {wl.pay.scrtnum  += scrts - prevscrts;
+                             wl.secretsfound += scrts - prevscrts;}
 
       prevscrts = scrts;
       prevkills = kills;
@@ -329,27 +304,16 @@ begin:
       #ifndef NDEBUG
       dbgstatnum = 0;
       #endif
-      ticks++;
+      wl.ticks++;
 
       i32 autosave = CVarGetI(sc_sv_autosave);
-      if(autosave && ticks % (35 * 60 * autosave) == 0) ACS_Autosave();
+      if(autosave && wl.ticks % (35 * 60 * autosave) == 0) ACS_Autosave();
    }
 }
 
-script_str ext("ACS") addr(OBJ "InHell") i32 Sc_InHell(void) {return InHell;}
-
-script_str ext("ACS") addr(OBJ "SkyMap") i32 Sc_SkyMap(void) {
-   return CVarGetI(sc_sv_sky) && !islithmap;
-}
-
-alloc_aut(0) script ext("ACS") addr(lsc_worldreopen)
-void Sc_WorldReopen(void) {
-   reopen = true;
-}
-
 script type("unloading") static
-void Sc_WorldUnload(void) {
-   unloaded = true;
+void Z_WorldUnload(void) {
+   wl.unloaded = true;
    Dbg_Log(log_dev, _l(__func__));
 
    pl.setActivator();

@@ -40,6 +40,7 @@ enum
    fid_advice,
    fid_subwepS,
    fid_subwepE = fid_subwepS + 6 - 1,
+   fid_shielddone,
 };
 
 #endif

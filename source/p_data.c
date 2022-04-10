@@ -241,6 +241,8 @@ struct cheat cht_give_ammo = cheat_s("pgfa", 0, chtf_give_ammo, "Fully ammunized
 /* Reset some things on the player when they spawn. */
 script
 void P_Init(void) {
+   Dbg_Log(log_dev, _l(__func__));
+
    if(!pl.wasinit) {
       fastmemset(&pl, 0, sizeof pl);
 
@@ -367,12 +369,12 @@ void P_Dat_PTickPst(void) {
 }
 
 script_str ext("ACS") addr(OBJ "InputChar")
-void Sc_InputChar(i32 ch) {
+void Z_InputChar(i32 ch) {
    if(!P_None()) Cps_SetC(pl.tb.txtbuf, pl.tb.tbptr++, ch);
 }
 
 script_str ext("ACS") addr(OBJ "InputEnd")
-void Sc_InputEnd(i32 ch) {
+void Z_InputEnd(i32 ch) {
    if(!P_None()) pl.tb.changed = true;
 }
 

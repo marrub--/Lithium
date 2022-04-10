@@ -511,14 +511,14 @@ struct itemdata ItemData(void) {
 }
 
 script_str ext("ACS") addr(OBJ "ItemCreate")
-struct item *Sc_ItemCreate(void) {
+struct item *Z_ItemCreate(void) {
    struct itemdata data = ItemData();
    Dbg_Log(log_dev, _l("creating "), _p(data.name));
    return P_Item_New(&data);
 }
 
 script_str ext("ACS") addr(OBJ "BagItemCreate")
-struct item *Sc_BagItemCreate(void) {
+struct item *Z_BagItemCreate(void) {
    struct itemdata data = ItemData();
    set_bit(data.flags, _if_openable);
    Dbg_Log(log_dev, _l("creating "), _p(data.name));
@@ -541,7 +541,7 @@ void P_ItemPopup(str tag, k32 x, k32 y, k32 z) {
 }
 
 script_str ext("ACS") addr(OBJ "ItemPopupAmmo")
-void Sc_ItemPopupAmmo(k32 x, k32 y, k32 z) {
+void Z_ItemPopupAmmo(k32 x, k32 y, k32 z) {
    i32 ammodisp = CVarGetI(sc_player_ammodisp);
    if(ammodisp & _itm_disp_log) {
       pl.logH(1, "%S", GetMembS(0, sm_LogText));
@@ -552,19 +552,19 @@ void Sc_ItemPopupAmmo(k32 x, k32 y, k32 z) {
 }
 
 script_str ext("ACS") addr(OBJ "ItemPopupTag")
-void Sc_ItemPopupTag(void) {
+void Z_ItemPopupTag(void) {
    if(CVarGetI(sc_player_itemdisp) & _itm_disp_pop) {
       P_ItemPopup(GetNameTag(0), GetX(0), GetY(0), GetZ(0));
    }
 }
 
 script_str ext("ACS") addr(OBJ "ItemAttach")
-bool Sc_ItemAttach(struct item *item) {
+bool Z_ItemAttach(struct item *item) {
    Dbg_Log(log_dev, _l("attaching item "), ACS_PrintHex((intptr_t)item));
 
    if(!P_None()) {
       if(P_Inv_Add(item)) {
-         Sc_ItemPopupTag();
+         Z_ItemPopupTag();
          return true;
       } else {
          return false;
@@ -575,7 +575,7 @@ bool Sc_ItemAttach(struct item *item) {
 }
 
 script_str ext("ACS") addr(OBJ "ItemDetach")
-void Sc_ItemDetach(struct item *item) {
+void Z_ItemDetach(struct item *item) {
    if(item->Destroy) {
       Dbg_Log(log_dev, _l("detaching item "), ACS_PrintHex((intptr_t)item));
       item->Destroy(item);
@@ -583,7 +583,7 @@ void Sc_ItemDetach(struct item *item) {
 }
 
 script_str ext("ACS") addr(OBJ "ItemCanPlace")
-bool Sc_ItemCanPlace(struct item *item) {
+bool Z_ItemCanPlace(struct item *item) {
    if(!P_None()) {
       for(i32 i = 0; i < _inv_num; i++) {
          if(ItemCanPlaceAny(&pl.inv[i], item)) {
@@ -596,7 +596,7 @@ bool Sc_ItemCanPlace(struct item *item) {
 }
 
 script_str ext("ACS") addr(OBJ "ItemOnBody")
-bool Sc_ItemOnBody(struct item *item) {
+bool Z_ItemOnBody(struct item *item) {
    return item->container && item->container->type == _cont_body;
 }
 

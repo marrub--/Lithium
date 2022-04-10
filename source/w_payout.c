@@ -18,9 +18,9 @@ void Scr_HInit(void) {
    k64 taxpct = ACS_RandomFixed(0, 4 / 100.0);
 
 #define GenPay(name, mul) \
-   statement(if(payout.name##max) { \
-      payout.name##pct = (payout.name##num / (k64)payout.name##max) * 100; \
-      payout.name##scr = payout.name##pct * mul; \
+   statement(if(wl.pay.name##max) { \
+      wl.pay.name##pct = (wl.pay.name##num / (k64)wl.pay.name##max) * 100; \
+      wl.pay.name##scr = wl.pay.name##pct * mul; \
    })
 
    GenPay(kill, 500);
@@ -29,24 +29,24 @@ void Scr_HInit(void) {
 
 #undef GenPay
 
-   if(ticks <= payout.par)    payout.activities.par     = 10000;
-   if(payout.killpct >= 100)  payout.activities.kill100 = 10000;
-   if(payout.itempct >= 100)  payout.activities.item100 = 5000;
-   if(payout.scrtpct >= 100)  payout.activities.scrt100 = 15000;
-   if(ACS_Random(0, 10) == 0) payout.activities.sponsor = ACS_Random(1, 3) * 5000;
+   if(wl.ticks <= wl.pay.par) wl.pay.activities.par     = 10000;
+   if(wl.pay.killpct >= 100)  wl.pay.activities.kill100 = 10000;
+   if(wl.pay.itempct >= 100)  wl.pay.activities.item100 = 5000;
+   if(wl.pay.scrtpct >= 100)  wl.pay.activities.scrt100 = 15000;
+   if(ACS_Random(0, 10) == 0) wl.pay.activities.sponsor = ACS_Random(1, 3) * 5000;
 
-   payout.total  = payout.killscr + payout.itemscr;
-   payout.total -= payout.tax = payout.total * taxpct;
+   wl.pay.total  = wl.pay.killscr + wl.pay.itemscr;
+   wl.pay.total -= wl.pay.tax = wl.pay.total * taxpct;
 
-   for(i32 i = 0, *p = (i32 *)&payout.activities;
-       i < sizeof(payout.activities) / sizeof(i32);
+   for(i32 i = 0, *p = (i32 *)&wl.pay.activities;
+       i < sizeof(wl.pay.activities) / sizeof(i32);
        i++, p++) {
-      payout.total += *p;
+      wl.pay.total += *p;
    }
 
    P_Scr_Payout();
 
-   fastmemset(&payout, 0, sizeof payout);
+   fastmemset(&wl.pay, 0, sizeof wl.pay);
 }
 
 /* EOF */

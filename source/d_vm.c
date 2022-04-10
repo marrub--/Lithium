@@ -49,7 +49,7 @@ enum {
    SR_N,
 };
 
-struct dlg_def dlgdefs[DNUM_MAX];
+noinit struct dlg_def dlgdefs[DNUM_MAX];
 
 struct dcd_info const dcdinfo[0xFF] = {
    #define DCD(n, op, ty) [n] = {#op "." #ty, ADRM_##ty},
@@ -324,8 +324,8 @@ void TerminalGUI(u32 tact) {
    str br;
    switch(tact) {
    case TACT_LOGON:
-   case TACT_LOGOFF: br = fast_strdup(CanonTime(ct_date, ticks)); break;
-   default:          br = ns(lang(sl_term_use_to_ack));           break;
+   case TACT_LOGOFF: br = fast_strdup(CanonTime(ct_date, wl.ticks)); break;
+   default:          br = ns(lang(sl_term_use_to_ack));              break;
    }
    PrintText_str(br, sf_ltrmfont, CR_RED, tright,2, tbottom,2);
 
@@ -405,7 +405,7 @@ void DialogueGUI(void) {
    PrintChrLi("\Cd> Remote: ");
    ACS_PrintString(srem);
    PrintChrLi("\n\Cd> Date: ");
-   PrintChrSt(CanonTime(ct_full, ticks));
+   PrintChrSt(CanonTime(ct_full, wl.ticks));
    PrintText(sf_lmidfont, CR_WHITE, left,1, top,1);
 
    if(text) {
@@ -1129,7 +1129,7 @@ halt:
 }
 
 script_str ext("ACS") addr(OBJ "RunProgram")
-void Sc_RunProgram(i32 num) {
+void Z_RunProgram(i32 num) {
    if(!P_None() && pl.modal == _gui_none) {
       pl.dlg.num = DNUM_PRG_BEG + num;
       pl.modal = _gui_dlg;
@@ -1137,7 +1137,7 @@ void Sc_RunProgram(i32 num) {
 }
 
 script_str ext("ACS") addr(OBJ "RunDialogue")
-void Sc_RunDialogue(i32 num) {
+void Z_RunDialogue(i32 num) {
    if(!P_None() && pl.modal == _gui_none) {
       pl.dlg.num = DNUM_DLG_BEG + num;
       pl.dlg.page = 0;
@@ -1146,9 +1146,9 @@ void Sc_RunDialogue(i32 num) {
 }
 
 script_str ext("ACS") addr(OBJ "RunTerminal")
-void Sc_RunTerminal(i32 num) {
+void Z_RunTerminal(i32 num) {
    if(!P_None() && pl.modal == _gui_none) {
-      switch(mission) {
+      switch(ml.mission) {
       case _unfinished: pl.dlg.page = DPAGE_UNFINISHED; break;
       case _finished:   pl.dlg.page = DPAGE_FINISHED;   break;
       case _failure:    pl.dlg.page = DPAGE_FAILURE;    break;
@@ -1166,7 +1166,7 @@ bool chtf_run_prg(cheat_params_t const params) {
    }
    i32 p0 = params[0] - '0';
    i32 p1 = params[1] - '0';
-   Sc_RunProgram(p0 * 10 + p1);
+   Z_RunProgram(p0 * 10 + p1);
    return true;
 }
 
@@ -1177,7 +1177,7 @@ bool chtf_run_dlg(cheat_params_t const params) {
    }
    i32 p0 = params[0] - '0';
    i32 p1 = params[1] - '0';
-   Sc_RunDialogue(p0 * 10 + p1);
+   Z_RunDialogue(p0 * 10 + p1);
    return true;
 }
 
@@ -1188,7 +1188,7 @@ bool chtf_run_trm(cheat_params_t const params) {
    }
    i32 p0 = params[0] - '0';
    i32 p1 = params[1] - '0';
-   Sc_RunTerminal(p0 * 10 + p1);
+   Z_RunTerminal(p0 * 10 + p1);
    return true;
 }
 

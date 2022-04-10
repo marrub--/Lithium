@@ -39,7 +39,7 @@ void W_DoRain(void) {
          InvTake(so_SMGHeat, 1);
       }
 
-      if((InHell || InSecret) && !islithmap) {
+      if(!ml.islithmap && MapNum >= 21) {
          ServCallV(sm_SpawnRain, so_BloodRainDrop);
       } else {
          ServCallV(sm_SpawnRain, so_RainDrop);
@@ -61,7 +61,7 @@ void W_DoRain(void) {
 }
 
 script ext("ACS") addr(lsc_raindropspawn)
-void Sc_RainDropSpawn(void) {
+void Z_RainDropSpawn(void) {
    if(rain_chk) {
       i32 dist = mag2i(GetX(0) - rain_px, GetY(0) - rain_py);
       if(dist < rain_dist) rain_dist = dist;

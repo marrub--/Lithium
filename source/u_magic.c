@@ -51,7 +51,7 @@ void UpdateMagicUI(void) {
    for(i32 i = 0; i < countof(minf); i++) {
       struct magic_info const *m = &minf[i];
 
-      if(m->st != -1 && !get_bit(cbiupgr, m->st)) continue;
+      if(m->st != -1 && !get_bit(wl.cbiupgr, m->st)) continue;
 
       char gfx[32] = ":UI:"; faststrcat (gfx, m->name);
       char hot[32] = ":UI:"; faststrcat2(hot, m->name, "Sel");
@@ -165,7 +165,7 @@ void Upgr_Magic_Render(void) {
 }
 
 script_str ext("ACS") addr(OBJ "SetMagicUI")
-void Sc_SetMagicUI(bool on) {
+void Z_SetMagicUI(bool on) {
    if(!P_None()) SetMagicUI(on);
 }
 
