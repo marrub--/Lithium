@@ -172,6 +172,8 @@
 }
 
 "weapons" {
+   cl: pD tag: Subweapons;
+
    cl: gO tag: ChargeFist unl: "KSKK";
 
    cl: pM tag: Revolver        unl: "Earth";
