@@ -19,7 +19,7 @@ mem_size_t hudstrnum;
 static
 void StringStack(void) {
    if(ACS_Timer() % 3 == 0) {
-      str s = StrParam("%.8X", ACS_Random(INT32_MIN + 1, INT32_MAX));
+      str s = strp(ACS_PrintHex(ACS_Random(INT32_MIN + 1, INT32_MAX)));
       if(hudstrnum == 20) {
          fastmemmove(&hudstrs[0], &hudstrs[1], sizeof(str) * 19);
          hudstrs[19] = s;

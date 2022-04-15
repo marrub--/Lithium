@@ -7,42 +7,42 @@
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
 ## Barons ════════════════════════════════════════════════════════════════════╕
-%% \#BOSS_BAR_1_Stan
+%% \#BOSS_BAR_1_Lane
 \cg何の騒ぎだ!
 \cy人間が我が領地に来たか。
 
-%% \#BOSS_BAR_2_Stan
+%% \#BOSS_BAR_2_Lane
 \cg大した度胸の奴が来たか。
 \cy心配するな。すぐ終わる。
 
-%% \#BOSS_BAR_3_Stan
+%% \#BOSS_BAR_3_Lane
 \cg戦士なぞ有り得んな。
 \cyここが冥府だ。進むならば、死ぬだけだ。
 
-%% \#BOSS_BAR_4_Stan
+%% \#BOSS_BAR_4_Lane
 \cg何者であろうと通さぬ。
 \cy覚えておけ、ダイモスは我々の物だ。
 
-%% \#BOSS_BAR_5_Stan
+%% \#BOSS_BAR_5_Lane
 \cg覚悟が決め現実を受け入れよ。
 \cy勝ち目はオマエに無いと。
 
-%% \#BOSS_BAR_6_Stan
+%% \#BOSS_BAR_6_Lane
 \ct銀河の塵と化せ。
 
-%% \#BOSS_BAR_7_Stan
+%% \#BOSS_BAR_7_Lane
 \cg主の革命は近い。
 \cy門に着いた頃には手遅れだろう。
 
-%% \#BOSS_BAR_8_Stan
+%% \#BOSS_BAR_8_Lane
 \cg死ぬまで戦い続けろ。
 \cyまあ、無駄な足掻きだがな。
 
-%% \#BOSS_BAR_9_Stan
+%% \#BOSS_BAR_9_Lane
 \cg逃げられはせん。
 \cy何処へ向かおうが絶望のみだ。
 
-@@ \#BOSS_BAR_10_Stan
+@@ \#BOSS_BAR_10_Lane
 \ct覚悟しろ。
 
 ## EOF

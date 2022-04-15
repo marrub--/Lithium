@@ -7,124 +7,131 @@
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
 gameinfo {
-   AdvisoryTime        = 0
-   DrawReadThis        = false
-   IntermissionCounter = true
-   NoRandomPlayerClass = true
+   advisoryTime        = 0
+   drawReadThis        = false
+   intermissionCounter = true
+   noRandomPlayerClass = true
 
-   IntermissionMusic = "lmusic/alchemis.it"
-   PrecacheSounds    = "amb/rain", "amb/wind"
-   QuitSound         = "misc/quitsound"
+   intermissionMusic = "lmusic/alchemis.it"
+   precacheSounds    = "amb/rain", "amb/wind"
+   quitSound         = "misc/quitsound"
 
-   AddEventHandlers  = "Lith_HERMES", "Lith_URANUS"
-   PlayerClasses     = "Lith_MarinePlayer",    "Lith_CyberMagePlayer",
+   addEventHandlers  = "Lith_HERMES", "Lith_URANUS"
+   playerClasses     = "Lith_MarinePlayer",    "Lith_CyberMagePlayer",
                        "Lith_InformantPlayer", "Lith_WandererPlayer",
                        "Lith_AssassinPlayer",  "Lith_DarkLordPlayer",
                        "Lith_ThothPlayer"
-   StatScreen_Single = "Lith_STATUS"
-   StatusBarClass    = "Lith_StatusBar"
-   MessageBoxClass   = "Lith_MESSAGEBOX"
+   statScreen_Single = "Lith_STATUS"
+   statusBarClass    = "Lith_StatusBar"
+   messageBoxClass   = "Lith_MESSAGEBOX"
 
-   QuitMessages = "HACK HACK THIS IS A HACK WOW WHAT A HACK"
+   quitMessages = "HACK HACK THIS IS A HACK WOW WHAT A HACK"
 
-   DimColor                = "Black"
-   DimAmount               = 0
-   PickupColor             = "#A0F3A0"
-   MenuFontColor_Action    = "White"
-   MenuFontColor_Header    = "Lith_Green"
-   MenuFontColor_Highlight = "Lith_Green"
-   MenuFontColor_Label     = "White"
-   MenuFontColor_Selection = "Lith_Green"
-   MenuFontColor_Title     = "Lith_Green"
-   MenuFontColor_Value     = "Lith_Purple"
+   dimColor                = "Black"
+   dimAmount               = 0
+   pickupColor             = "#A0F3A0"
+   menuFontColor_Action    = "White"
+   menuFontColor_Header    = "Lith_Green"
+   menuFontColor_Highlight = "Lith_Green"
+   menuFontColor_Label     = "White"
+   menuFontColor_Selection = "Lith_Green"
+   menuFontColor_Title     = "Lith_Green"
+   menuFontColor_Value     = "Lith_Purple"
 
-   StatScreen_MapNameFont  = "bigupper", "White"
-   StatScreen_FinishedFont = "bigupper", "Lith_Green"
-   StatScreen_EnteringFont = "bigupper", "Lith_Green"
-   StatScreen_ContentFont  = "bigupper", "Lith_Green"
+   statScreen_MapNameFont  = "bigupper", "White"
+   statScreen_FinishedFont = "bigupper", "Lith_Green"
+   statScreen_EnteringFont = "bigupper", "Lith_Green"
+   statScreen_ContentFont  = "bigupper", "Lith_Green"
 
-   InfoPage       = "HELP"
-   BorderFlat     = "lgfx/Menu/Black.png"
-   PauseSign      = "lgfx/Menu/Pause.png"
-   MenuBackButton = "lgfx/Menu/BackUp.png"
+   infoPage       = "HELP"
+   borderFlat     = "lgfx/Menu/Black.png"
+   pauseSign      = "lgfx/Menu/Pause.png"
+   menuBackButton = "lgfx/Menu/BackUp.png"
 
-   ForceTextInMenus = true
+   forceTextInMenus = true
 }
 
 automap {
-   Base                 = "Doom"
-   Background           = "#000000"
-   CeilingDiffWallColor = "#007700"
-   FloorDiffWallColor   = "#005500"
-   GridColor            = "#AA0000"
-   ShowLocks            = true
-   SpecialWallColor     = "#FF00FF"
-   WallColor            = "#00FF00"
-   YourColor            = "#00FF00"
-   PortalColor          = "#00AA00"
+   base                 = "Doom"
+   background           = "#000000"
+   ceilingDiffWallColor = "#007700"
+   floorDiffWallColor   = "#005500"
+   gridColor            = "#AA0000"
+   specialWallColor     = "#FF00FF"
+   wallColor            = "#00FF00"
+   yourColor            = "#00FF00"
+   portalColor          = "#00AA00"
+   showLocks            = true
 }
 
 clearskills
 
 skill tourist {
-   ACSReturn      = 2
-   Aggressiveness = -0.3
-   DamageFactor   = 0.1
-   HealthFactor   = 2
-   Key            = "t"
-   MonsterHealth  = 0.1
-   MustConfirm    = "$LITH_SKILL_TOURIST"
-   Name           = "$DIFF_TOURIST"
-   RespawnTime    = 0.5
-   SpawnFilter    = 2
-   EasyBossBrain
-   EasyKey
-   TotalInfighting
+   acsReturn      = 2
+   aggressiveness = -0.3
+   damageFactor   = 0.1
+   healthFactor   = 2
+   key            = "t"
+   monsterHealth  = 0.1
+   mustConfirm    = "$LITH_SKILL_TOURIST"
+   name           = "$DIFF_TOURIST"
+   respawnTime    = 0.5
+   spawnFilter    = 2
+   easyBossBrain
+   easyKey
+   totalInfighting
 }
 
 skill normal {
-   ACSReturn   = 0
-   Key         = "h"
-   Name        = "$DIFF_NORMAL"
-   SpawnFilter = 3
-   DefaultSkill
+   acsReturn   = 0
+   key         = "h"
+   name        = "$DIFF_NORMAL"
+   spawnFilter = 3
+   defaultSkill
 }
 
 skill hard {
-   ACSReturn   = 1
-   Key         = "u"
-   Name        = "$DIFF_HARD"
-   SpawnFilter = 4
+   acsReturn   = 1
+   key         = "u"
+   name        = "$DIFF_HARD"
+   spawnFilter = 4
 }
 
 skill nightmare {
-   ACSReturn     = 3
-   DamageFactor  = 2
-   Key           = "t"
-   MonsterHealth = 0.5
-   MustConfirm   = "$LITH_SKILL_NIGHTMARE"
-   Name          = "$DIFF_NMARE"
-   RespawnTime   = 0.5
-   SpawnFilter   = 5
-   NoInfighting
+   acsReturn     = 3
+   damageFactor  = 2
+   key           = "t"
+   monsterHealth = 0.5
+   mustConfirm   = "$LITH_SKILL_NIGHTMARE"
+   name          = "$DIFF_NMARE"
+   respawnTime   = 0.5
+   spawnFilter   = 5
+   noInfighting
 }
 
-map TITLEMAP "Lithium Title" {
-   LevelNum = 1888001
+episode TITLEMAP {
+   name = "Abyss"
+   key  = "a"
+}
+
+map TITLEMAP "Abyss" {
+   levelNum = 1888001
+   sky1     = "LITHBLAK"
+   music    = "lmusic/into_abyss.opus"
 }
 
 map TESTMAP "Test Map" {
-   LevelNum = 1888000
-   Music    = "lmusic/dandalins story.it"
-   Next     = 1
-   Sky1     = "LITHBGS4", 0.1
-   Sky2     = "LITHSKD2"
-   DoubleSky
+   levelNum = 1888000
+   music    = "lmusic/dandalins story.it"
+   next     = 1
+   sky1     = "LITHBGS4", 0.1
+   sky2     = "LITHSKD2"
+   doubleSky
 }
 
 map LITHEND "" {
-   LevelNum = 1911777
-   NoIntermission
+   levelNum = 1911777
+   noIntermission
 }
 
 doomednums {
@@ -144,6 +151,14 @@ doomednums {
    22433 = Lith_AdviceMarker
    22434 = Lith_MapMarker
    22435 = Lith_Person_Maxie
+   22436 = Lith_Person_LaneDoll
+   22437 = Lith_Person_JemDoll
+   22438 = Lith_Person_FulkDoll
+   22439 = Lith_Person_LukeDoll
+   22440 = Lith_Person_OmiDoll
+   22441 = Lith_Person_AriDoll
+   22442 = Lith_Person_KiriDoll
+   22443 = Lith_AbyssTeleporter
 }
 
 intermission Inter_Bunny       {}

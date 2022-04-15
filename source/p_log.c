@@ -17,24 +17,17 @@
 #include "p_hudid.h"
 #include "w_world.h"
 
-struct logfdt
-{
-   str inf;
-};
-
-struct logmap
-{
+struct logmap {
    str name;
    i32 lnum;
-
-   Vec_Decl(struct logfdt, data);
+   str       *dataV;
+   mem_size_t dataC;
 };
 
-struct logdat
-{
-   struct logfdt fdta;
-   i32           time;
-   i32           ftim;
+struct logdat {
+   str fdta;
+   i32 time;
+   i32 ftim;
 };
 
 struct loginfo
@@ -42,7 +35,8 @@ struct loginfo
    struct logdat hudV[7];
    mem_size_t    hudC;
 
-   Vec_Decl(struct logmap, maps);
+   struct logmap *mapsV;
+   mem_size_t     mapsC;
 
    struct logmap *curmap;
    i32            curtime;
@@ -78,9 +72,9 @@ void LogH(struct logdat *ld) {
 }
 
 static
-void LogF(struct logfdt *lf) {
-   Vec_GrowN(log.curmap->data, 1, 8, _tag_logs);
-   Vec_Next(log.curmap->data) = *lf;
+void LogF(str lf) {
+   log.curmap->dataV = Talloc(log.curmap->dataV, log.curmap->dataC + 1, _tag_logs);
+   log.curmap->dataV[log.curmap->dataC++] = lf;
 }
 
 void P_Log_Both(i32 levl, cstr fmt, ...) {
@@ -93,9 +87,9 @@ void P_Log_Both(i32 levl, cstr fmt, ...) {
    __vnprintf(fmt, vl);
    va_end(vl);
 
-   ld.fdta.inf = ACS_EndStrParam();
+   ld.fdta = ACS_EndStrParam();
 
-   LogF(&ld.fdta);
+   LogF(ld.fdta);
    LogH(&ld);
 }
 
@@ -109,14 +103,12 @@ void P_Log_HUDs(i32 levl, cstr fmt, ...) {
    __vnprintf(fmt, vl);
    va_end(vl);
 
-   ld.fdta.inf = ACS_EndStrParam();
+   ld.fdta = ACS_EndStrParam();
 
    LogH(&ld);
 }
 
 void P_Log_Full(cstr fmt, ...) {
-   struct logfdt lf = {};
-
    ACS_BeginPrint();
 
    va_list vl;
@@ -124,9 +116,7 @@ void P_Log_Full(cstr fmt, ...) {
    __vnprintf(fmt, vl);
    va_end(vl);
 
-   lf.inf = ACS_EndStrParam();
-
-   LogF(&lf);
+   LogF(ACS_EndStrParam());
 }
 
 void P_Log_Entry(void) {
@@ -141,8 +131,8 @@ void P_Log_Entry(void) {
    }
 
    if(!lm) {
-      Vec_GrowN(log.maps, 1, 32, _tag_logs);
-      lm = &Vec_Next(log.maps);
+      log.mapsV = Talloc(log.mapsV, log.mapsC + 1, _tag_logs);
+      lm = &log.mapsV[log.mapsC++];
       lm->name = (ACS_BeginPrint(), ACS_PrintName(PRINTNAME_LEVELNAME), ACS_EndStrParam());
       lm->lnum = lnum;
    }
@@ -201,7 +191,7 @@ void P_CBI_TabLog(struct gui_state *g) {
       if(G_ScrOcc(g, &CBIState(g)->logscr, y, ht)) continue;
 
       PrintSprite(sp_UI_LogList, g->ox,1, y + g->oy,1);
-      PrintText_str(lm->dataV[i].inf, sf_smallfnt, CR_GREEN, g->ox + 2,1, y + g->oy + 1,1);
+      PrintText_str(lm->dataV[i], sf_smallfnt, CR_GREEN, g->ox + 2,1, y + g->oy + 1,1);
    }
 
    G_ScrEnd(g, &CBIState(g)->logscr);
@@ -234,10 +224,10 @@ script void P_Log(i32 cr, i32 x, i32 yy) {
             a = (ld->ftim + 129) / 10.0 + 1.0;
          }
 
-         PrintTextA_str(ld->fdta.inf, sf_lmidfont, cr, x,1, y,ya, a);
+         PrintTextA_str(ld->fdta, sf_lmidfont, cr, x,1, y,ya, a);
 
          if(CheckFade(fid_logadS + i)) {
-            cstr s = RemoveTextColors_str(ld->fdta.inf, ACS_StrLen(ld->fdta.inf));
+            cstr s = RemoveTextColors_str(ld->fdta, ACS_StrLen(ld->fdta));
             PrintTextChS(s);
             PrintTextFX(sf_lmidfont, CR_WHITE, x,1, y,ya, fid_logadS + i, _u_add);
          }

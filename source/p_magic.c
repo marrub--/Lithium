@@ -156,7 +156,7 @@ void Z_MagicSelect(i32 num) {
             SetSize(320, 240);
             PrintSprite(sp_MagicSel_BG, 160,0, 120,0);
             SetSize(64, 64);
-            PrintSpriteA(StrParam(":MagicSel:Slot%i_%i", num, i + 1), 0,1, 0,1, 0.5);
+            PrintSpriteA(strp(_l(":MagicSel:Slot"), _p(num), _c('_'), _p(i + 1)), 0,1, 0,1, 0.5);
             ACS_Delay(1);
          }
       }

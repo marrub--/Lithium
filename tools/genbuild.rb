@@ -174,7 +174,6 @@ end
       hdr("m_tokbuf.h"),
       hdr("m_token.h"),
       hdr("m_types.h"),
-      hdr("m_vec.h"),
       hdr("m_version.h"),
       hdr("p_attrib.h"),
       hdr("p_bip.h"),

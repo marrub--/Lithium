@@ -13,12 +13,12 @@
 
 !!include End/TimeOut.txt
 
-!!include End/Stan/Barons.txt
-!!include End/Stan/CyberDemon.txt
-!!include End/Stan/Dialogue.txt
-!!include End/Stan/IconOfSin.txt
-!!include End/Stan/Normal.txt
-!!include End/Stan/SpiderDemon.txt
+!!include End/Lane/Barons.txt
+!!include End/Lane/CyberDemon.txt
+!!include End/Lane/Dialogue.txt
+!!include End/Lane/IconOfSin.txt
+!!include End/Lane/Normal.txt
+!!include End/Lane/SpiderDemon.txt
 
 !!include End/Jem/Barons.txt
 !!include End/Jem/CyberDemon.txt

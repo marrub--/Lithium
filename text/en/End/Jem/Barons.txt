@@ -6,7 +6,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-@@ \#ENDING_Barons_Jem
+@@ LITHEND_Barons_Jem
 As you enter the portal you feel like you did that fated day many
 years ago, but it's not just your jaw now. Your whole body feels like
 it's been removed from this galaxy, and you're stretched across an

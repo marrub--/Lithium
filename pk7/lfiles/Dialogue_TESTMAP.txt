@@ -6,129 +6,130 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-lipu_ilo 7;
-
-lipu 0 {
-   ldx #$FF;
-   txs;
-   lda #$1A;
-   pha;
-   pla;
-   tay;
-   lda #$AA;
-   trs;
-   trr;
-   <$A9 $7F $00>
+ilo_nimi {
+   unused,
+   test_term,
 }
 
-toki 1;
-
-lipu 0 {
-   name JACQUES;
-   icon "AOF";
-   remote JACQUES;
-
-   seme ijo "Lith_DivisionSigil" lipu 7;
-
-   text TESTMAP_01_00;
-
-   option TESTMAP_01_00_01 lipu 2;
-   option TESTMAP_01_00_02 brk;
+toki_nimi {
+   unused,
+   jacques,
 }
 
-lipu 2 {
-   seme poki pM text TESTMAP_01_02_M;
-   seme poki pC text TESTMAP_01_02_C;
+toki jacques {
+   lipu_nimi {
+      begin,
+      hey,
+      lifes_unfair,
+      division,
+      start_talking,
+      c_what_asic,
+      c_zj,
+      c_troubled,
+      c_worse,
+      c_malnutrition,
+      c_thebeat,
+      c_darker,
+   }
 
-   option TESTMAP_01_02_01 {
+   lipu begin {
+      name JACQUES;
+      icon AOF;
+      remote JACQUES;
+
+      seme ijo "Lith_DivisionSigil" lipu division;
+
+      text _0;
+
+      option _1 lipu hey;
+      option _2 brk;
+   }
+
+   lipu hey {
+      seme poki pC text _0c;
+      ante         text _0;
+
+      option _1 {
+         script 2;
+         lipu hey;
+      }
+
+      option _2 lipu start_talking;
+      option _3 brk;
+   }
+
+   lipu start_talking {
+      seme poki pC {
+         text _0c;
+         option _1c lipu c_what_asic;
+         option _2c lipu c_zj;
+      } ante {
+         text _0;
+         option _1 lipu lifes_unfair;
+      }
+   }
+
+   lipu c_what_asic {
+      text _0;
+      option _1 lipu c_worse;
+      option _2 brk;
+   }
+
+   lipu c_zj {
+      text _0;
+      option _1 lipu c_troubled;
+   }
+
+   lipu c_troubled {
+      text _0;
+      option _1 lipu c_what_asic;
+   }
+
+   lipu c_worse {
+      text _0;
+      option _1 lipu c_malnutrition;
+   }
+
+   lipu c_malnutrition {
+      text _0;
+      option _1 lipu c_thebeat;
+   }
+
+   lipu c_thebeat {
+      text _0;
+      option _1 lipu c_darker;
+   }
+
+   lipu c_darker {
+      text _0;
+      option _1 brk;
+   }
+
+   lipu lifes_unfair {
+      text _0;
+      option _1 brk;
+   }
+
+   lipu division {
+      text _0;
+      option _1 brk;
+   }
+}
+
+ilo test_term {
+   awen {
+      remote TEST;
+
+      logon "01602" text _l;
+
+      info text _0;
+
+      pict "AOF" text _1;
+
+      logoff "01602";
+
       script 2;
-      lipu 2;
    }
-
-   option TESTMAP_01_02_02 lipu 3;
-   option TESTMAP_01_02_03 brk;
-}
-
-lipu 3 {
-   seme poki pC {
-      text TESTMAP_01_03_C;
-      option TESTMAP_01_03_01_C lipu 10;
-      option TESTMAP_01_03_02_C lipu 11;
-   } ante {
-      text TESTMAP_01_03_M;
-      option TESTMAP_01_03_01_M lipu 4;
-   }
-}
-
-lipu 10 {
-   text TESTMAP_01_10;
-
-   option TESTMAP_01_10_01 lipu 13;
-   option TESTMAP_01_10_02 brk;
-}
-
-lipu 11 {
-   text TESTMAP_01_11;
-
-   option TESTMAP_01_11_01 lipu 12;
-}
-
-lipu 12 {
-   text TESTMAP_01_12;
-
-   option TESTMAP_01_12_01 lipu 10;
-}
-
-lipu 13 {
-   text TESTMAP_01_13;
-
-   option TESTMAP_01_13_01 lipu 14;
-}
-
-lipu 14 {
-   text TESTMAP_01_14;
-
-   option TESTMAP_01_14_01 lipu 15;
-}
-
-lipu 15 {
-   text TESTMAP_01_15;
-
-   option TESTMAP_01_15_01 lipu 16;
-}
-
-lipu 16 {
-   text TESTMAP_01_16;
-
-   option TESTMAP_01_16_01 brk;
-}
-
-lipu 4 {
-   text TESTMAP_01_04;
-
-   option TESTMAP_01_04_01 brk;
-}
-
-lipu 7 {
-   text TESTMAP_01_07;
-
-   option TESTMAP_01_07_01 brk;
-}
-
-ilo 1;
-
-awen {
-   remote TEST;
-
-   logon "01602" text TEST;
-
-   info text TESTMAP_01_01;
-
-   pict "AOF" text TESTMAP_01_02;
-
-   logoff "01602";
-
-   script 2;
 }
 
 /* EOF */

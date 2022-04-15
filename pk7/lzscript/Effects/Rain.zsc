@@ -59,13 +59,28 @@ class Lith_RainDrop : Actor {
    }
 }
 
-class Lith_BloodRainDrop : Lith_RainDrop
-{
-   default
-   {
+class Lith_BloodRainDrop : Lith_RainDrop {
+   default {
       Alpha 0.5;
       RenderStyle "Subtract";
       Translation "Lith_BloodRainDrop";
+   }
+}
+
+
+class Lith_AbyssRainDrop : Lith_RainDrop {
+   default {
+      Alpha 1.0;
+      RenderStyle "Normal";
+   }
+
+   states {
+   Spawn:
+      RNDZ A -1;
+      stop;
+   Death:
+      RNDZ BCDEFGH 3;
+      stop;
    }
 }
 

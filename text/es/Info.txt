@@ -6,6 +6,6 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-!!include Info/Stan/Weapons.txt
+!!include Info/Lane/Weapons.txt
 
 ## EOF

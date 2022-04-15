@@ -7,7 +7,7 @@
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-%% \#BEGINNING_Stan_1
+%% \#BEGINNING_Lane_1
 During the 17th century of the New Era, our country began drafting the
 youth into the military again. Most people couldn't understand why,
 even though it was pretty obvious if you looked at our current
@@ -32,7 +32,7 @@ The egghead pauses for a minute. While he doesn't look disturbed by
 the question, he seems to not know how to phrase the answer. "Hell.
 That's where you're going."
 
-%% \#BEGINNING_Stan_2
+%% \#BEGINNING_Lane_2
 Somehow, a scoff escapes me, a disparaging chuckle - I completely
 believe him. He deliberates for a moment thinking I'd react harsher,
 and asks, "That's it? No questions? That would be quite excellent, as

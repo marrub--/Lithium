@@ -6,18 +6,25 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-@@ \#ENDING_Barons_Stan
-As you're flung through the gate your body is desynthesized. If the
-demons were really smart enough they'd have stopped there.
+@@ LITHEND_SpiderDemon_Lane
+The massive spider demon explodes into a million bits as your body is
+once again shuttled through dimensions of space-time.
 
-Your body is in Deimos now... but something feels wrong. The air is
-humid and hot as hell, and reality bends around you.
+As you travel to the next plane, your mind feels like it too is being
+spread infinitely. You think of a hundred things at once.
 
-The walls seem to flex and twitch with your every movement. You look
-up to the sky and see nothing but red;
+A lot of them are starting to seem like sad thoughts.
 
-This version of Deimos is in Hell itself!
+Why did you get chosen?
 
-You ready yourself for the coming onslaught.
+Is there really a threat, or am I just fighting such a long and
+horrendeous war against nothing?
+
+Did any of the demons really exaggerate?
+
+These thoughts all seem to fly away as you are returned to the
+corporeal world.
+
+You seem to be on some kind of twisted version of Earth...
 
 ## EOF

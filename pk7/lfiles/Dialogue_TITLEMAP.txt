@@ -1,0 +1,106 @@
+// ╭-*-Agw-LithDlg-*-─────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
+
+toki_nimi {
+   currently_unused,
+   lane,
+   jem,
+   fulk,
+   luke,
+   omi,
+   ari,
+   kiri,
+}
+
+kon {
+   lane_met,
+   lane_rpg,
+   lane_where,
+   lane_scars,
+}
+
+toki lane {
+   lipu_nimi {
+      begin,
+      m_meet,
+      m_nothing,
+      m_seen,
+      c_meet,
+      other_meet,
+   }
+
+   lipu begin {
+      name   DOLL;
+      remote UNKNOWN;
+      icon   Doll;
+
+      text _0;
+
+      seme kon %lane_met {
+         /*             */ option _3  brk;
+      } else {
+         /**/ seme poki pM option _1m lipu m_meet;
+         ante seme poki pC option _1c lipu c_meet;
+         ante              option _1  lipu other_meet;
+         /*             */ option _2  brk;
+      }
+   }
+
+   /* Lane */
+   lipu m_meet {
+      inc %lane_met;
+
+      text _0;
+
+      option _1 lipu m_nothing;
+      option _2 brk;
+      option _3 lipu m_seen;
+   }
+
+   lipu m_nothing {
+      seme !kon %lane_rpg   option _1 { inc %lane_rpg;   lipu m_nothing; }
+      seme !kon %lane_where option _2 { inc %lane_where; lipu m_nothing; }
+      option _3 lipu m_seen;
+      option _4 brk;
+
+      seme kon %lane_rpg {
+         text _5;
+         dec %lane_rpg;
+      } ante seme kon %lane_where {
+         text _6;
+         dec %lane_where;
+      } ante {
+         text _0;
+      }
+   }
+
+   lipu m_seen {
+      seme kon %lane_scars {
+         text _3;
+         option _4 brk;
+         option _5 brk;
+      } ante {
+         text _0;
+         option _1 brk;
+         option _2 {
+            inc %lane_scars;
+            lipu m_seen;
+         }
+      }
+   }
+
+   lipu c_meet {
+      lipu begin;
+   }
+
+   lipu other_meet {
+      lipu begin;
+   }
+}
+
+/* EOF */

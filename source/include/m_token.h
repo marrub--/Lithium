@@ -13,8 +13,7 @@
 #ifndef m_token_h
 #define m_token_h
 
-#include "m_vec.h"
-
+#include "m_types.h"
 #include <stdio.h>
 
 #define TokStr(tok) fast_strndup((tok)->textV, (tok)->textC)

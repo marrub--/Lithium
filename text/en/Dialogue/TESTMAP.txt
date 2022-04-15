@@ -6,48 +6,50 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-%% \#PAGE_TESTMAP_01_01
+== TESTMAP_test_term_l | $\#LOGON_TEST
+
+%% TESTMAP_test_term_0
 test text, information block
 
-%% \#PAGE_TESTMAP_01_02
+%% TESTMAP_test_term_1
 test with picture
 and multiple lines of text
 
-@@ \#DLOG_TESTMAP_01_00
+@@ TESTMAP_jacques_begin_0
 ...
 
-== \#OPT_TESTMAP_01_00_01 | Hello.
-== \#OPT_TESTMAP_01_00_02 | Farewell.
+== TESTMAP_jacques_begin_1 | Hello.
+== TESTMAP_jacques_begin_2 | Farewell.
 
-@@ \#DLOG_TESTMAP_01_02_M
+@@ TESTMAP_jacques_hey_0
 Hi.
 
-@@ \#DLOG_TESTMAP_01_02_C
+@@ TESTMAP_jacques_hey_0c
 Hey.
 
-== \#OPT_TESTMAP_01_02_01 | emit skeltal
-== \#OPT_TESTMAP_01_02_02 | Talk to me.
-== \#OPT_TESTMAP_01_02_03 | Thanks, bye!
+== TESTMAP_jacques_hey_1 | emit skeltal
+== TESTMAP_jacques_hey_2 | Talk to me.
+== TESTMAP_jacques_hey_3 | Thanks, bye!
 
-@@ \#DLOG_TESTMAP_01_03_M
+@@ TESTMAP_jacques_start_talking_0
 Too bad.
 
-@@ \#DLOG_TESTMAP_01_03_C
+@@ TESTMAP_jacques_start_talking_0c
 What did you need, Stilko?
 
-== \#OPT_TESTMAP_01_03_01_C | The nightmares are back.
-== \#OPT_TESTMAP_01_03_02_C | I just needed someone to talk to.
+== TESTMAP_jacques_start_talking_1c | The nightmares are back.
+== TESTMAP_jacques_start_talking_2c | I just needed someone to talk to.
 
-== \#OPT_TESTMAP_01_03_01_M | That's rude.
+== TESTMAP_jacques_start_talking_1 | That's rude.
 
-@@ \#DLOG_TESTMAP_01_04
+@@ TESTMAP_jacques_lifes_unfair_0
 Life is rude.
 
 Now go away.
 
-== \#OPT_TESTMAP_01_04_01 | Right.
+== TESTMAP_jacques_lifes_unfair_1 | Right.
 
-%% \#DLOG_TESTMAP_01_07
+%% TESTMAP_jacques_division_0
 thousands are sailing
 the same self    the only self
 
@@ -61,9 +63,9 @@ arching to the single point of consciousness
 find yourself
 starting back
 
-== \#OPT_TESTMAP_01_07 | $\#OPT_TESTMAP_01_02_03
+== TESTMAP_jacques_division_1 | Oh. Okay.
 
-@@ \#DLOG_TESTMAP_01_10
+@@ TESTMAP_jacques_c_what_asic_0
  Already? Are you sure it isn't just ASIC bugs? I have trouble
 believing that they'd be back so soon, after your doctor gave you that
 prescription and even turned down your AS-voltage.
@@ -71,10 +73,10 @@ prescription and even turned down your AS-voltage.
  You know, ASIC hardware reacts to changes. It might just be that it's
 settling to the new voltage and giving you a hard time.
 
-== \#OPT_TESTMAP_01_10_01 | It's not that, I'm certain.. They're \cmworse\c-.
-== \#OPT_TESTMAP_01_10_02 | Right... Thank you, Zeke.
+== TESTMAP_jacques_c_what_asic_1 | It's not that, I'm certain.. They're \cmworse\c-.
+== TESTMAP_jacques_c_what_asic_2 | Right... Thank you, Zeke.
 
-@@ \#DLOG_TESTMAP_01_11
+@@ TESTMAP_jacques_c_zj_0
  I know how that is. You know, Order doesn't pass through this part of
 the ship. You could say "Zeke" again if you want. I know they don't
 like the names we give ourselves, but we're not infront of them. We at
@@ -83,46 +85,46 @@ least have that freedom.
  If you want, I can call you "Jem," too. Though I'd rather you of all
 people not get in trouble for being called by your true name.
 
-== \#OPT_TESTMAP_01_11_01 | Thanks, 'Z.'
+== TESTMAP_jacques_c_zj_1 | Thanks, 'Z.'
 
-@@ \#DLOG_TESTMAP_01_12
+@@ TESTMAP_jacques_c_troubled_0
  Heh.. "Z." You're quite creative.
 
  There's trouble in your voice, though. I know you usually tremble,
 but right now it seems even worse than usual. What's wrong, "J?"
 
-== \#OPT_TESTMAP_01_12_01 | ... The nightmares are back.
+== TESTMAP_jacques_c_troubled_1 | ... The nightmares are back.
 
-@@ \#DLOG_TESTMAP_01_13
+@@ TESTMAP_jacques_c_worse_0
  Worse?
 
  ...
 
  You can feel in them now, right? That's why you're trembling.
 
-== \#OPT_TESTMAP_01_13_01 | Yeah. And I don't want to go to the doctor.
+== TESTMAP_jacques_c_worse_1 | Yeah. And I don't want to go to the doctor.
 
-@@ \#DLOG_TESTMAP_01_14
+@@ TESTMAP_jacques_c_malnutrition_0
  ...
 
  Is there anything I can do to help? It's not a lack of food or
 something, right?
 
-== \#OPT_TESTMAP_01_14_01 | You'd have told me if you could hear it, right?
+== TESTMAP_jacques_c_malnutrition_1 | You'd have told me if you could hear it, right?
 
-@@ \#DLOG_TESTMAP_01_15
+@@ TESTMAP_jacques_c_thebeat_0
  Are you hearing a beat? It could be your home calling for you. I'd
 imagine AOF didn't put much use to that planet after they went and
 captured you, it's probably just aching for its mana to be used.
 
-== \#OPT_TESTMAP_01_15_01 | That's not it, I always hear that. What I hear now is.. darker.
+== TESTMAP_jacques_c_thebeat_1 | That's not it, I always hear that. What I hear now is.. darker.
 
-@@ \#DLOG_TESTMAP_01_16
+@@ TESTMAP_jacques_c_darker_0
  Darker...
 
  Then, do you think that it's come? Doesn't ever come excluding
 incantation, vile, enroaching reality, Hell?
 
-== \#OPT_TESTMAP_01_16_01 | It's coming. Just thought I'd let you know.
+== TESTMAP_jacques_c_darker_1 | It's coming. Just thought I'd let you know.
 
 ## EOF

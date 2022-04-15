@@ -41,6 +41,8 @@ void W_DoRain(void) {
 
       if(!ml.islithmap && MapNum >= 21) {
          ServCallV(sm_SpawnRain, so_BloodRainDrop);
+      } else if(MapNum == 1888001) {
+         ServCallV(sm_SpawnRain, so_AbyssRainDrop);
       } else {
          ServCallV(sm_SpawnRain, so_RainDrop);
       }

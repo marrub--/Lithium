@@ -6,7 +6,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-@@ \#ENDING_CyberDemon_Jem
+@@ LITHEND_CyberDemon_Jem
 The tower collapses around you, crumpling like a facade made of paper.
 As you fall ever deeper into the heart of Hell, you feel a sense of
 dread.

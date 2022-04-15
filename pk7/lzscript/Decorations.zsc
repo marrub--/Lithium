@@ -18,5 +18,6 @@
 #include "lzscript/Decorations/TorchBase.zsc"
 #include "lzscript/Decorations/TorchSmall.zsc"
 #include "lzscript/Decorations/TorchTall.zsc"
+#include "lzscript/Decorations/Abyss.zsc"
 
 /* EOF */

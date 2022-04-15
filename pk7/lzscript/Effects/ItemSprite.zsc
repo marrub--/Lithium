@@ -13,24 +13,24 @@ class Lith_AnimItemSprite : Lith_ItemSprite
       +Bright
    }
 
-   property Phases: m_Phases;
+   property Phases: m_phases;
 
-   meta int m_Phases;
-   int m_Iter, m_Phase;
+   meta int m_phases;
+   int m_iter, m_phase;
 
-   action state Lith_A_JumpPhase()
-      {return invoker.m_Phase == invoker.m_Iter++ ? ResolveState("Super::SpawnLoop") : null;}
+   action state lith_a_jumpPhase()
+      {return invoker.m_phase == invoker.m_iter++ ? resolveState("Super::SpawnLoop") : null;}
 
    states
    {
    Spawn:
-      TNT1 A 0 {m_Phase = random(0, m_Phases - 1);}
+      TNT1 A 0 {m_phase = random(0, m_phases - 1);}
       goto Super::Spawn;
    SpawnLoop:
       TNT1 A 0 {
-         m_Phase = (m_Phase + 1) % m_Phases;
-         m_Iter = 0;
-         return ResolveState("SetSpr");
+         m_phase = (m_phase + 1) % m_phases;
+         m_iter = 0;
+         return resolveState("SetSpr");
       }
    }
 }
@@ -42,41 +42,37 @@ class Lith_ItemSprite : Actor;
 
 default
 {
-   +NOINTERACTION
-   +NOTIMEFREEZE
+   +NoInteraction
+   +NoTimeFreeze
    +CastSpriteShadow
 }
 
-vector3 m_OrigPos;
-int m_FAng;
-int m_FZAng;
+vector3 m_origPos;
+int m_fAng;
+int m_fzAng;
 
 states
 {
 Spawn:
    #### # 0;
    #### # 0 {
-      m_FAng  = random(0, 359);
-      m_FZAng = random(0, 359);
-      return ResolveState("SpawnLoop");
+      m_fAng  = random(0, 359);
+      m_fzAng = random(0, 359);
+      return resolveState("SpawnLoop");
    }
    stop;
 SpawnLoop:
-   #### # 0 {
-      if(!master || !master.bSPECIAL)
-         return ResolveState("Done");
-      else
-         return state(null);
-   }
-   #### # 0 {
-      m_FAng  = (m_FAng  + 2) % 360;
-      m_FZAng = (m_FZAng + 3) % 360;
-      m_OrigPos = pos;
-   }
-   #### # 1 bright A_Warp(AAPTR_MASTER, cos(m_FAng) * 4.0, sin(m_FAng) * 4.0, 16.0 + (sin(m_FZAng) * 12.0), 0.0, WARPF_NOCHECKPOSITION);
-   #### # 0 {
-      A_Warp(AAPTR_MASTER, m_OrigPos.x, m_OrigPos.y, m_OrigPos.z, 0, WARPF_ABSOLUTEPOSITION);
-      return ResolveState("SpawnLoop");
+   #### # 1 bright;
+   #### # 0 bright {
+      if(!master || (!master.bSpecial && !master.special)) {
+         return resolveState("Done");
+      } else {
+         m_fAng  = (m_fAng  + 2) % 360;
+         m_fzAng = (m_fzAng + 3) % 360;
+         m_origPos = pos;
+         a_warp(AAPTR_MASTER, cos(m_fAng) * 4.0, sin(m_fAng) * 4.0, 16.0 + (sin(m_fzAng) * 12.0), 0.0, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE);
+         return resolveState("SpawnLoop");
+      }
    }
    stop;
 Done:

@@ -145,11 +145,9 @@ private void Lith_ItemVacuum() {
    } else {
       for(let it = BlockThingsIterator.Create(self, 70); it.next();) {
          let inv = Lith_BasicPickup(it.thing);
-
          if(inv && inv.bVACUUM && inv.bSPECIAL && inv.checkSight(self)) {
             let dst = distance2D(inv);
             let t = clamp((140 - dst) / 1000., 0., 1.);
-
             if(t) {
                let newp = Lith_UTIL.vec3Lerp(inv.pos, pos, t);
                inv.tryMove(newp.xy, 20);

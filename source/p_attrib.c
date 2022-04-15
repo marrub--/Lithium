@@ -72,19 +72,19 @@ void P_CBI_TabStatus(struct gui_state *g) {
    StatusInfo(g, y, ns(lang(sl_status_cl)), pl.classname);
    y += 10;
 
-   StatusInfo(g, y, ns(lang(sl_status_lv)), StrParam("%u", pl.attr.level));
+   StatusInfo(g, y, ns(lang(sl_status_lv)), strp(_p(pl.attr.level)));
    y += 10;
-   StatusInfo(g, y, ns(lang(sl_status_hp)), StrParam("%i/%i", pl.health, pl.maxhealth));
+   StatusInfo(g, y, ns(lang(sl_status_hp)), strp(_p((i32)pl.health), _c('/'), _p(pl.maxhealth)));
    y += 10;
 
    if(pl.pclass & pcl_magicuser) {
-      StatusInfo(g, y, ns(lang(sl_status_mp)), StrParam("%i/%i", pl.mana, pl.manamax));
+      StatusInfo(g, y, ns(lang(sl_status_mp)), strp(_p((i32)pl.mana), _c('/'), _p((i32)pl.manamax)));
       y += 10;
    }
 
-   StatusInfo(g, y, ns(lang(sl_status_xp)),  StrParam("%u", pl.attr.exp));
+   StatusInfo(g, y, ns(lang(sl_status_xp)), strp(_p(pl.attr.exp)));
    y += 10;
-   StatusInfo(g, y, ns(lang(sl_status_nx)), StrParam("%u", pl.attr.expnext));
+   StatusInfo(g, y, ns(lang(sl_status_nx)), strp(_p(pl.attr.expnext)));
    y += 10;
 
    y += pl.pclass & pcl_magicuser ? 20 : 30;

@@ -6,159 +6,168 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-lipu_ilo 0;
+lipu_ilo_nimi {
+   endings,
+}
 
-/* Music Subroutine */
-lipu 15 {
-   seme poki pM {
-      music "lmusic/lithambientwip3.ogg";
-   } ante seme poki pC {
-      music "lmusic/tmary7.ogg";
-   } ante seme poki pI {
-   } ante seme poki pW {
-   } ante seme poki pA {
-      music "lmusic/tpw.2.ogg";
-   } ante seme poki pD {
-      music "lmusic/tpwrev.ogg";
-   } ante seme poki pT {
-      music "lmusic/rg.ogg";
+lipu_ilo endings {
+   lipu_nimi {
+      normal,
+      barons,
+      cyberdemon,
+      spiderdemon,
+      ios,
+      time_out,
+      division,
+      other,
+      common,
+      music_subr,
    }
-   rts;
-}
 
-/* Normal */
-lipu 0 {
-   jsr lipu 15;
-   seme poki pM {
-      image ":End:Stan:Normal";
-      fade_in 50;
-      crawl Normal_Stan 400;
-   } ante seme poki pC {
-      image ":End:Jem:Normal";
-      fade_in 50;
-      crawl Normal_Jem 400;
+   lipu music_subr {
+      seme poki pM {
+         music "lmusic/lithambientwip3.ogg";
+      } ante seme poki pC {
+         music "lmusic/tmary7.ogg";
+      } ante seme poki pI {
+      } ante seme poki pW {
+      } ante seme poki pA {
+         music "lmusic/tpw.2.ogg";
+      } ante seme poki pD {
+         music "lmusic/tpwrev.ogg";
+      } ante seme poki pT {
+         music "lmusic/rg.ogg";
+      }
+      rts;
    }
-   lipu 14;
-}
 
-/* Barons */
-lipu 1 {
-   jsr lipu 15;
-   seme poki pM {
-      image ":End:Stan:Barons";
-      fade_in 50;
-      crawl Barons_Stan 400;
-   } ante seme poki pC {
-      image ":End:Jem:Barons";
-      fade_in 50;
-      crawl Barons_Jem 400;
+   lipu normal {
+      jsr lipu music_subr;
+      seme poki pM {
+         image ":End:Lane:Normal";
+         fade_in 50;
+         crawl Normal_Lane 400;
+      } ante seme poki pC {
+         image ":End:Jem:Normal";
+         fade_in 50;
+         crawl Normal_Jem 400;
+      }
+      lipu common;
    }
-   lipu 14;
-}
 
-/* Cyber-Demon */
-lipu 2 {
-   jsr lipu 15;
-   seme poki pM {
-      image ":End:Stan:CyberDemon";
-      fade_in 50;
-      crawl CyberDemon_Stan 400;
-   } ante seme poki pC {
-      image ":End:Jem:CyberDemon";
-      fade_in 50;
-      crawl CyberDemon_Jem 400;
+   lipu barons {
+      jsr lipu music_subr;
+      seme poki pM {
+         image ":End:Lane:Barons";
+         fade_in 50;
+         crawl Barons_Lane 400;
+      } ante seme poki pC {
+         image ":End:Jem:Barons";
+         fade_in 50;
+         crawl Barons_Jem 400;
+      }
+      lipu common;
    }
-   lipu 14;
-}
 
-/* Spider-Demon */
-lipu 3 {
-   jsr lipu 15;
-   seme poki pM {
-      image ":End:Stan:SpiderDemon";
-      fade_in 50;
-      crawl SpiderDemon_Stan 400;
-   } ante seme poki pC {
-      image ":End:Jem:SpiderDemon";
-      fade_in 50;
-      crawl SpiderDemon_Jem 400;
+   lipu cyberdemon {
+      jsr lipu music_subr;
+      seme poki pM {
+         image ":End:Lane:CyberDemon";
+         fade_in 50;
+         crawl CyberDemon_Lane 400;
+      } ante seme poki pC {
+         image ":End:Jem:CyberDemon";
+         fade_in 50;
+         crawl CyberDemon_Jem 400;
+      }
+      lipu common;
    }
-   lipu 14;
-}
 
-/* Icon of Sin */
-lipu 4 {
-   jsr lipu 15;
-   seme poki pM {
-      image ":End:Stan:IconOfSin";
-      fade_in 50;
-      crawl IconOfSin_1_Stan 900;
-      crawl IconOfSin_2_Stan 700;
-      crawl IconOfSin_3_Stan 700;
-      crawl IconOfSin_4_Stan 700;
-      crawl IconOfSin_5_Stan 700;
-      crawl IconOfSin_6_Stan 700;
-      crawl IconOfSin_7_Stan 400;
-   } ante seme poki pC {
-      image ":End:Jem:IconOfSin";
-      fade_in 50;
-      crawl IconOfSin_1_Jem 600;
-      crawl IconOfSin_2_Jem 600;
-      crawl IconOfSin_3_Jem 600;
-      crawl IconOfSin_4_Jem 600;
-      crawl IconOfSin_5_Jem 600;
-      crawl IconOfSin_6_Jem 600;
-      crawl IconOfSin_7_Jem 600;
-      crawl IconOfSin_8_Jem 600;
-      crawl IconOfSin_9_Jem 400;
+   lipu spiderdemon {
+      jsr lipu music_subr;
+      seme poki pM {
+         image ":End:Lane:SpiderDemon";
+         fade_in 50;
+         crawl SpiderDemon_Lane 400;
+      } ante seme poki pC {
+         image ":End:Jem:SpiderDemon";
+         fade_in 50;
+         crawl SpiderDemon_Jem 400;
+      }
+      lipu common;
    }
-   lipu 14;
-}
 
-/* Time-Out */
-lipu 5 {
-   music "lmusic/asdfn2.ogg";
-   image "HELP";
-   fade_in 10;
-   crawl TimeOut_1 900;
-   lipu 14;
-}
-
-/* Division */
-lipu 6 {
-   music "lmusic/siarani.ogg";
-   fade_in 10;
-   crawl DivisionSigil 900;
-   lipu 14;
-}
-
-/* Other */
-lipu 7 {
-   jsr lipu 15;
-   seme poki pM {
-      image ":End:Stan:Other";
-      fade_in 50;
-      crawl Other_Stan 400;
-   } ante seme poki pC {
-      image ":End:Jem:Other";
-      fade_in 50;
-      crawl Other_Jem 400;
+   lipu ios {
+      jsr lipu music_subr;
+      seme poki pM {
+         image ":End:Lane:IconOfSin";
+         fade_in 50;
+         crawl IconOfSin_1_Lane 900;
+         crawl IconOfSin_2_Lane 700;
+         crawl IconOfSin_3_Lane 700;
+         crawl IconOfSin_4_Lane 700;
+         crawl IconOfSin_5_Lane 700;
+         crawl IconOfSin_6_Lane 700;
+         crawl IconOfSin_7_Lane 400;
+      } ante seme poki pC {
+         image ":End:Jem:IconOfSin";
+         fade_in 50;
+         crawl IconOfSin_1_Jem 600;
+         crawl IconOfSin_2_Jem 600;
+         crawl IconOfSin_3_Jem 600;
+         crawl IconOfSin_4_Jem 600;
+         crawl IconOfSin_5_Jem 600;
+         crawl IconOfSin_6_Jem 600;
+         crawl IconOfSin_7_Jem 600;
+         crawl IconOfSin_8_Jem 600;
+         crawl IconOfSin_9_Jem 400;
+      }
+      lipu common;
    }
-   lipu 14;
+
+   lipu time_out {
+      music "lmusic/asdfn2.ogg";
+      image "HELP";
+      fade_in 10;
+      crawl TimeOut_1 900;
+      lipu common;
+   }
+
+   lipu division {
+      music "lmusic/siarani.ogg";
+      fade_in 10;
+      crawl DivisionSigil 900;
+      lipu common;
+   }
+
+   lipu other {
+      jsr lipu music_subr;
+      seme poki pM {
+         image ":End:Lane:Other";
+         fade_in 50;
+         crawl Other_Lane 400;
+      } ante seme poki pC {
+         image ":End:Jem:Other";
+         fade_in 50;
+         crawl Other_Jem 400;
+      }
+      lipu common;
+   }
+
+   lipu common {
+      fade_out 100;
+      image "TITLEPIC";
+      music "lmusic/crucifying.opus";
+      fade_in 70;
+      crawl Credits 400;
+      fade_out 70;
+      image "";
+      wait 50;
+      crawl Dedication 100; wait 100; fade_out 150; wait 15;
+      crawl Finished   20;  wait 70;  fade_out 20;
+      mus_fade 300;
+      ldv #0;
+   }
 }
 
-/* Common */
-lipu 14 {
-   fade_out 100;
-   image "TITLEPIC";
-   music "lmusic/crucifying.opus";
-   fade_in 70;
-   crawl Credits 400;
-   fade_out 70;
-   image "";
-   wait 50;
-   crawl Dedication 100; wait 100; fade_out 150; wait 15;
-   crawl Finished   20;  wait 70;  fade_out 20;
-   mus_fade 300;
-   ldv #0;
-}
+/* EOF */

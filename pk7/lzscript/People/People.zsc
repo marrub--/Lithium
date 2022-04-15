@@ -35,4 +35,118 @@ class Lith_Person_Maxie : Lith_BasePerson {
    }
 }
 
+class Lith_DollBacking1 : Actor {
+   default {
+      RenderStyle "Add";
+      +NoTimeFreeze
+      +NoInteraction
+      +NoGravity
+      +Bright
+   }
+   states {
+   Spawn:
+      TNT1 A 0;
+      LDOL A 0 {alpha = fRandom(0.2, 0.3);}
+   Spawn1:
+      #### # 1 a_fadeOut;
+      wait;
+   }
+}
+
+class Lith_DollBacking2 : Lith_DollBacking1 {
+   states {
+   Spawn:
+      TNT1 A 0;
+      LDOL J 0 {
+         if(random(0, 1)) {
+            --frame;
+            a_setRenderStyle(alpha, style_translucent);
+         }
+      }
+      goto Spawn1;
+   }
+}
+
+class Lith_DollPerson : Lith_BasePerson abstract {
+   default {
+      Radius 32;
+      Height 64;
+      Tag "$LITH_PNAME_DOLL";
+      +NoTimeFreeze
+      +Solid
+   }
+
+   property DollNoise: m_dollNoise; /* doll's haunted [loads gun] */
+   meta sound m_dollNoise;
+
+   override void postBeginPlay() {
+      super.postBeginPlay();
+      if(gameState == gs_titlelevel) {
+         destroy();
+      }
+   }
+
+   override void tick() {
+      super.tick();
+      bool observed = false;
+      for(let it = BlockThingsIterator.Create(self, 300); it.next();) {
+         let player = Lith_Player(it.thing);
+         if(player) {
+            if(target != player) {
+               player.a_startSound(m_dollNoise, lch_doll, CHANF_LOOP|CHANF_NOPAUSE|CHANF_MAYBE_LOCAL|CHANF_UI, 1.0, ATTN_STATIC);
+               target = player;
+            }
+            observed = true;
+            player.a_soundVolume(lch_doll, (300 - distance2D(player) + 150) / 450.0);
+         }
+      }
+      if(!observed && target) {
+         target.a_stopSound(lch_doll);
+         target = null;
+      }
+   }
+
+   states(actor) {
+   Spawn1:
+      #### # 0 {
+         tracer = spawn("Lith_ItemSprite", pos);
+         tracer.master = self;
+         tracer.sprite = sprite;
+         tracer.frame  = frame;
+      }
+   Spawn2:
+      TNT1 A 1 {
+         double  ang = fRandom(0.0, 360.0);
+         double  vel = fRandom(0.5, 0.6);
+         vector3 vec = (cos(ang)*vel, sin(ang)*vel, fRandom(-0.6,0.6));
+         vector3 pos = (tracer.pos.xy, tracer.pos.z + 20);
+         spawn("Lith_DollBacking1", pos).vel = vec;
+         spawn("Lith_DollBacking2", pos).vel = vec;
+      }
+      loop;
+   }
+}
+
+class Lith_Person_LaneDoll : Lith_DollPerson
+   {default {Lith_DollPerson.DollNoise "player/lane/doll";}
+    states(actor) {Spawn: LDOL B 0; goto Spawn1;}}
+class Lith_Person_JemDoll : Lith_DollPerson
+   {default {Lith_DollPerson.DollNoise "player/jem/doll";}
+    states(actor) {Spawn: LDOL C 0; goto Spawn1;}}
+class Lith_Person_FulkDoll : Lith_DollPerson
+   {default {Lith_DollPerson.DollNoise "player/fulk/doll";}
+    states(actor) {Spawn: LDOL D 0; goto Spawn1;}}
+class Lith_Person_LukeDoll : Lith_DollPerson
+   {default {Lith_DollPerson.DollNoise "player/luke/doll";}
+    states(actor) {Spawn: LDOL E 0; goto Spawn1;}}
+class Lith_Person_OmiDoll : Lith_DollPerson
+   {default {Lith_DollPerson.DollNoise "player/omi/doll";}
+    states(actor) {Spawn: LDOL F 0; goto Spawn1;}}
+class Lith_Person_AriDoll : Lith_DollPerson
+   {default {Lith_DollPerson.DollNoise "player/ari/doll";}
+    states(actor) {Spawn: LDOL G 0; goto Spawn1;}}
+class Lith_Person_KiriDoll : Lith_DollPerson
+   {default {Lith_DollPerson.DollNoise "player/kiri/doll";}
+    states(actor) {Spawn: LDOL H 0; goto Spawn1;}}
+
 /* EOF */

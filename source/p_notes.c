@@ -40,7 +40,7 @@ void P_CBI_TabNotes(struct gui_state *g) {
          cstr       s = Cps_Expand(CBIState(g)->notebox.txtbuf, 0, l);
 
          if(l) {
-            pl.notes[i] = Ralloc(pl.notes[i], l + 1, _tag_plyr);
+            pl.notes[i] = Talloc(pl.notes[i], l + 1, _tag_plyr);
             fastmemmove(pl.notes[i], s, l);
          } else {
             Dalloc(pl.notes[i]);

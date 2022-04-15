@@ -12,18 +12,38 @@
 
 #include "d_compile.h"
 
-void Dlg_GetStmt_Cond(struct compiler *d) {
-   struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, 0);
+noinit static char txtbuf[64];
+
+static mem_size_t prefixed_text(struct compiler *d, cstr text) {
+   char *p = txtbuf;
+   faststrpcpy(&p, d->nam[d->pool].names[d->name]);
+   if(d->page < DPAGE_NORMAL_MAX) {
+      *p++ = '_';
+      faststrpcpy(&p, d->nam[_name_pool_pages].names[d->page]);
+   }
+   faststrpcpy(&p, text);
+   ++p;
+   return (mem_size_t)(p - txtbuf);
+}
+
+static void stmt_cond(struct compiler *d) {
+   struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, tok_not, 0);
    unwrap(&d->res);
 
    bool bne = true;
 
+   if(tok->type == tok_not) {
+      bne = !bne;
+      tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, 0);
+      unwrap(&d->res);
+   }
+
    switch(Dlg_CondName(tok->textV)) {
    case _dlg_cond_item:
+      bne = !bne;
+
       tok = d->tb.expc(&d->res, d->tb.get(), tok_string, 0);
       unwrap(&d->res);
-
-      bne = false;
 
       u32 s = Dlg_PushStr(d, tok->textV, tok->textC); unwrap(&d->res);
       Dlg_PushLdAdr(d, VAR_ADRL, s); unwrap(&d->res);
@@ -45,6 +65,25 @@ void Dlg_GetStmt_Cond(struct compiler *d) {
          d->tb.err(&d->res, "%s invalid playerclass type", TokPrint(tok));
          unwrap(&d->res);
       }
+      break;
+   case _dlg_cond_var:
+      d->tb.expc(&d->res, d->tb.get(), tok_mod, 0);
+      unwrap(&d->res);
+
+      tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, 0);
+      unwrap(&d->res);
+
+      i32 n = Dlg_CheckNamePool(d, _name_pool_variables, tok->textV);
+      if(n < 0) {
+         d->tb.err(&d->res, "bad variable name '%s'", tok->textV);
+         unwrap(&d->res);
+      }
+
+      Dlg_PushB1(d, DCD_LDA_AI);  unwrap(&d->res);
+      Dlg_PushB2(d, VAR_END - n); unwrap(&d->res);
+
+      Dlg_PushB1(d, DCD_CMP_VI); unwrap(&d->res);
+      Dlg_PushB1(d, 1);          unwrap(&d->res);
       break;
    default:
       d->tb.err(&d->res, "invalid conditional type", TokPrint(tok));
@@ -98,13 +137,13 @@ void Dlg_GetStmt_Cond(struct compiler *d) {
    }
 }
 
-void Dlg_GetStmt_Option(struct compiler *d) {
+static void stmt_option(struct compiler *d) {
    struct ptr2 adr;
 
    struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, tok_string, 0);
    unwrap(&d->res);
 
-   u32 s = Dlg_PushStr(d, tok->textV, tok->textC);
+   u32 s = Dlg_PushStr(d, txtbuf, prefixed_text(d, tok->textV));
    unwrap(&d->res);
    Dlg_PushLdAdr(d, VAR_ADRL, s); unwrap(&d->res);
    adr = Dlg_PushLdAdr(d, VAR_RADRL, 0); unwrap(&d->res); /* placeholder */
@@ -125,21 +164,33 @@ void Dlg_GetStmt_Option(struct compiler *d) {
    Dlg_SetB2(d, ptr - 2, PRG_BEG + d->def.codeP); unwrap(&d->res);
 }
 
-void Dlg_GetStmt_Page(struct compiler *d) {
-   struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_number, 0);
+static void stmt_page(struct compiler *d) {
+   struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, 0);
    unwrap(&d->res);
+
+   i32 n = Dlg_CheckNamePool(d, _name_pool_pages, tok->textV);
+   if(n >= DPAGE_MAX || n < 0) {
+      d->tb.err(&d->res, "bad page name '%s'", tok->textV);
+      unwrap(&d->res);
+   }
+
    Dlg_PushB1(d, DCD_JPG_VI); unwrap(&d->res);
-   Dlg_PushB1(d, faststrtoi32(tok->textV)); unwrap(&d->res);
+   Dlg_PushB1(d, n); unwrap(&d->res);
 
    tok = d->tb.expc(&d->res, d->tb.get(), tok_semico, 0);
    unwrap(&d->res);
 }
 
-void Dlg_GetStmt_Str(struct compiler *d, u32 adr) {
+optargs(1) static void stmt_str(struct compiler *d, u32 adr, bool prefix) {
    struct token *tok =
       d->tb.expc(&d->res, d->tb.get(), tok_identi, tok_string, tok_number, 0);
    unwrap(&d->res);
-   u32 s = Dlg_PushStr(d, tok->textV, tok->textC);
+
+   u32 s = Dlg_PushStr(
+      d,
+      !prefix ? tok->textV : txtbuf,
+      !prefix ? tok->textC : prefixed_text(d, tok->textV)
+   );
    unwrap(&d->res);
    Dlg_PushLdAdr(d, adr, s); unwrap(&d->res);
 
@@ -147,7 +198,7 @@ void Dlg_GetStmt_Str(struct compiler *d, u32 adr) {
    unwrap(&d->res);
 }
 
-void Dlg_GetStmt_Terminal(struct compiler *d, u32 act) {
+static void stmt_terminal(struct compiler *d, u32 act) {
    struct token *tok;
    if(act != TACT_INFO) {
       tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, tok_string, tok_number, 0);
@@ -166,7 +217,7 @@ void Dlg_GetStmt_Terminal(struct compiler *d, u32 act) {
    Dlg_PushLdVA(d, ACT_TRM_WAIT); unwrap(&d->res);
 }
 
-void Dlg_GetStmt_Finale(struct compiler *d, u32 act) {
+static void stmt_finale(struct compiler *d, u32 act) {
    struct token *tok;
    if(act == FACT_CRAWL) {
       tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, tok_string, 0);
@@ -187,7 +238,7 @@ void Dlg_GetStmt_Finale(struct compiler *d, u32 act) {
    Dlg_PushLdVA(d, ACT_FIN_WAIT); unwrap(&d->res);
 }
 
-void Dlg_GetStmt_Num(struct compiler *d, u32 act) {
+static void stmt_num(struct compiler *d, u32 act) {
    struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_number, 0);
    unwrap(&d->res);
 
@@ -198,7 +249,7 @@ void Dlg_GetStmt_Num(struct compiler *d, u32 act) {
    unwrap(&d->res);
 }
 
-void Dlg_GetStmt_Script(struct compiler *d) {
+static void stmt_script(struct compiler *d) {
    struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_string, tok_number, 0);
    unwrap(&d->res);
 
@@ -240,7 +291,7 @@ void Dlg_GetStmt_Script(struct compiler *d) {
    unwrap(&d->res);
 }
 
-void Dlg_GetStmt_Block(struct compiler *d) {
+static void stmt_block(struct compiler *d) {
    while(!d->tb.drop(tok_bracec)) {
       Dlg_GetStmt(d); unwrap(&d->res);
    }
@@ -251,7 +302,7 @@ script void Dlg_GetStmt(struct compiler *d) {
 
    switch(tok->type) {
    case tok_braceo:
-      Dlg_GetStmt_Block(d);
+      stmt_block(d);
       unwrap(&d->res);
       break;
    case tok_identi: {
@@ -259,39 +310,39 @@ script void Dlg_GetStmt(struct compiler *d) {
 
       switch(Dlg_StmtName(tok->textV)) {
       /* conditionals */
-      case _dlg_stmt_if:     Dlg_GetStmt_Cond(d);   break;
-      case _dlg_stmt_option: Dlg_GetStmt_Option(d); break;
+      case _dlg_stmt_if:     stmt_cond(d);   break;
+      case _dlg_stmt_option: stmt_option(d); break;
 
       /* terminals */
-      case _dlg_stmt_logon:  Dlg_GetStmt_Terminal(d, TACT_LOGON);  break;
-      case _dlg_stmt_logoff: Dlg_GetStmt_Terminal(d, TACT_LOGOFF); break;
-      case _dlg_stmt_pict:   Dlg_GetStmt_Terminal(d, TACT_PICT);   break;
-      case _dlg_stmt_info:   Dlg_GetStmt_Terminal(d, TACT_INFO);   break;
+      case _dlg_stmt_logon:  stmt_terminal(d, TACT_LOGON);  break;
+      case _dlg_stmt_logoff: stmt_terminal(d, TACT_LOGOFF); break;
+      case _dlg_stmt_pict:   stmt_terminal(d, TACT_PICT);   break;
+      case _dlg_stmt_info:   stmt_terminal(d, TACT_INFO);   break;
 
       /* finales */
-      case _dlg_stmt_fade_in:  Dlg_GetStmt_Finale(d, FACT_FADE_IN);  break;
-      case _dlg_stmt_fade_out: Dlg_GetStmt_Finale(d, FACT_FADE_OUT); break;
-      case _dlg_stmt_wait:     Dlg_GetStmt_Finale(d, FACT_WAIT);     break;
-      case _dlg_stmt_mus_fade: Dlg_GetStmt_Finale(d, FACT_MUS_FADE); break;
-      case _dlg_stmt_crawl:    Dlg_GetStmt_Finale(d, FACT_CRAWL);    break;
+      case _dlg_stmt_fade_in:  stmt_finale(d, FACT_FADE_IN);  break;
+      case _dlg_stmt_fade_out: stmt_finale(d, FACT_FADE_OUT); break;
+      case _dlg_stmt_wait:     stmt_finale(d, FACT_WAIT);     break;
+      case _dlg_stmt_mus_fade: stmt_finale(d, FACT_MUS_FADE); break;
+      case _dlg_stmt_crawl:    stmt_finale(d, FACT_CRAWL);    break;
 
       /* general */
-      case _dlg_stmt_page:   Dlg_GetStmt_Page(d);   break;
-      case _dlg_stmt_script: Dlg_GetStmt_Script(d); break;
+      case _dlg_stmt_page:   stmt_page(d);   break;
+      case _dlg_stmt_script: stmt_script(d); break;
       case _dlg_stmt_teleport_interlevel:
-         Dlg_GetStmt_Num(d, ACT_TELEPORT_INTERLEVEL);
+         stmt_num(d, ACT_TELEPORT_INTERLEVEL);
          break;
       case _dlg_stmt_teleport_intralevel:
-         Dlg_GetStmt_Num(d, ACT_TELEPORT_INTRALEVEL);
+         stmt_num(d, ACT_TELEPORT_INTRALEVEL);
          break;
 
       /* strings */
-      case _dlg_stmt_name:   Dlg_GetStmt_Str(d, VAR_NAMEL);   break;
-      case _dlg_stmt_icon:   Dlg_GetStmt_Str(d, VAR_ICONL);   break;
-      case _dlg_stmt_remote: Dlg_GetStmt_Str(d, VAR_REMOTEL); break;
-      case _dlg_stmt_text:   Dlg_GetStmt_Str(d, VAR_TEXTL);   break;
-      case _dlg_stmt_music:  Dlg_GetStmt_Str(d, VAR_MUSICL);  break;
-      case _dlg_stmt_image:  Dlg_GetStmt_Str(d, VAR_PICTL);   break;
+      case _dlg_stmt_icon:   stmt_str(d, VAR_ICONL);       break;
+      case _dlg_stmt_image:  stmt_str(d, VAR_PICTL);       break;
+      case _dlg_stmt_music:  stmt_str(d, VAR_MUSICL);      break;
+      case _dlg_stmt_name:   stmt_str(d, VAR_NAMEL);       break;
+      case _dlg_stmt_remote: stmt_str(d, VAR_REMOTEL);     break;
+      case _dlg_stmt_text:   stmt_str(d, VAR_TEXTL, true); break;
 
       default:
          Dlg_GetStmt_Asm(d);

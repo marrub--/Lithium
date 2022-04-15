@@ -36,6 +36,8 @@
 #define fast_strdup3(s1, s2, s3) \
    (ACS_BeginPrint(), PrintChrSt(s1), PrintChrSt(s2), PrintChrSt(s3), ACS_EndStrParam())
 
+#define strp(...) (ACS_BeginPrint(), (__VA_ARGS__), ACS_EndStrParam())
+
 #define fastmemset(p, s, c, ...) \
    statement({ \
       register mem_byte_t *_p = (void *)(p); \
@@ -48,6 +50,14 @@
       register mem_byte_t       *_lhs = (void *)(lhs); \
       register mem_byte_t const *_rhs = (void *)(rhs); \
       register mem_size_t        _s   = (s); \
+      while(_s--) *_lhs++ = *_rhs++; \
+   })
+
+#define fastmemcpy_str(lhs, rhs, s) \
+   statement({ \
+      register mem_byte_t                 *_lhs = (void           *)(lhs); \
+      register mem_byte_t const __str_ars *_rhs = (void __str_ars *)(rhs); \
+      register mem_size_t                  _s   = (s); \
       while(_s--) *_lhs++ = *_rhs++; \
    })
 
@@ -69,24 +79,41 @@
 
 #define faststrcpy(dest, src) \
    statement({ \
-      register cstr  _src  = src; \
-      register char *_dest = dest; \
+      register cstr  _src  = (src); \
+      register char *_dest = (dest); \
       for(; (*_dest = *_src); ++_dest, ++_src); \
+   })
+
+#define faststrpcpy(dest, src) \
+   statement({ \
+      register cstr   _src  = (src); \
+      register char **_dest = (dest); \
+      for(; (**_dest = *_src); ++*_dest, ++_src); \
+   })
+
+#define faststrpcpy_str(dest, src) \
+   statement({ \
+      register str    _src  = (src); \
+      register char **_dest = (dest); \
+      register i32    _len  = ACS_StrLen(_src); \
+      ACS_StrCpyToGlobalCharRange((i32)(*_dest), __GDCC__Sta, 0, _len + 1, \
+                                  _src, 0); \
+      *_dest += _len; \
    })
 
 #define faststrcat(dest, src) \
    statement({ \
-      register cstr  _src  = src; \
-      register char *_dest = dest; \
+      register cstr  _src  = (src); \
+      register char *_dest = (dest); \
       register bool  _end  = false; \
       for(; *_src; ++_dest) if((_end = _end || !*_dest)) *_dest = *_src++; \
    })
 
 #define faststrcat2(dest, src1, src2) \
    statement({ \
-      register cstr  _src1 = src1; \
-      register cstr  _src2 = src2; \
-      register char *_dest = dest; \
+      register cstr  _src1 = (src1); \
+      register cstr  _src2 = (src2); \
+      register char *_dest = (dest); \
       register bool  _end  = false; \
       for(; *_src1; ++_dest) if((_end = _end || !*_dest)) *_dest = *_src1++; \
       for(; (*_dest = *_src2); ++_dest, ++_src2); \
@@ -94,9 +121,9 @@
 
 #define faststrcpy2(dest, src1, src2) \
    statement({ \
-      register cstr  _src1 = src1; \
-      register cstr  _src2 = src2; \
-      register char *_dest = dest; \
+      register cstr  _src1 = (src1); \
+      register cstr  _src2 = (src2); \
+      register char *_dest = (dest); \
       for(; *_src1; ++_src1) *_dest++ = *_src1; \
       for(; *_src2; ++_src2) *_dest++ = *_src2; \
       *_dest++ = '\0'; \
@@ -104,10 +131,10 @@
 
 #define faststrcpy3(dest, src1, src2, src3) \
    statement({ \
-      register cstr  _src1 = src1; \
-      register cstr  _src2 = src2; \
-      register cstr  _src3 = src3; \
-      register char *_dest = dest; \
+      register cstr  _src1 = (src1); \
+      register cstr  _src2 = (src2); \
+      register cstr  _src3 = (src3); \
+      register char *_dest = (dest); \
       for(; *_src1; ++_src1) *_dest++ = *_src1; \
       for(; *_src2; ++_src2) *_dest++ = *_src2; \
       for(; *_src3; ++_src3) *_dest++ = *_src3; \
@@ -116,8 +143,8 @@
 
 #define faststrcpy_str(dest, src) \
    statement({ \
-      register str   _src  = src; \
-      register char *_dest = dest; \
+      register str   _src  = (src); \
+      register char *_dest = (dest); \
       ACS_StrCpyToGlobalCharRange((i32)(_dest), __GDCC__Sta, 0, \
                                   ACS_StrLen(_src) + 1, _src, 0); \
    })

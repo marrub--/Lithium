@@ -6,7 +6,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-%% \#ENDING_IconOfSin_1_Stan
+%% LITHEND_IconOfSin_1_Lane
 It feels like nothing's changed.
 
 
@@ -37,7 +37,7 @@ Again, all you can bring yourself to answer,
 
                          "I don't know."
 
-%% \#ENDING_IconOfSin_2_Stan
+%% LITHEND_IconOfSin_2_Lane
 With an ocean of depressive thoughts, you considered all alternatives.
 
 
@@ -66,7 +66,7 @@ With an ocean of depressive thoughts, you considered all alternatives.
               No,
                         they didn't.
 
-%% \#ENDING_IconOfSin_3_Stan
+%% LITHEND_IconOfSin_3_Lane
   ...
 
 
@@ -93,7 +93,7 @@ With an ocean of depressive thoughts, you considered all alternatives.
              Drowning in the middle of a miserable dream,
                                   the dream is fading away.
 
-@@ \#ENDING_IconOfSin_4_Stan
+@@ LITHEND_IconOfSin_4_Lane
 It's all you can think about. The need to get away from this life.
 From this accursed world. Nothing is worth it. No matter how hard you
 try in life,
@@ -120,7 +120,7 @@ End it.
 
          "\cgEnd this miserable existence.\c-"
 
-%% \#ENDING_IconOfSin_5_Stan
+%% LITHEND_IconOfSin_5_Lane
 ...
 
       ...
@@ -151,7 +151,7 @@ End it.
          "\cgJust like I thought.\c-"
          "\cgYou're just a fucking idiot.\c-"
 
-%% \#ENDING_IconOfSin_6_Stan
+%% LITHEND_IconOfSin_6_Lane
 ...
 
                     «Bring yourself to hope.»
@@ -183,7 +183,7 @@ End it.
 
  "I can do it..."
 
-%% \#ENDING_IconOfSin_7_Stan
+%% LITHEND_IconOfSin_7_Lane
 \cdYou awaken in a hospital bed, cybernetics turned off,
 \cdbody aching all over. It's over. The fight against
 \cdHell has been won.

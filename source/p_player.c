@@ -32,7 +32,16 @@ static void P_Aug_pTick(void);
 
 dynam_aut script addr(lsc_playeropen)
 void Z_PlayerEntry(void) {
-   if(ACS_GameType() == GAME_TITLE_MAP) return;
+   Dbg_Log(log_dev, _l(__func__));
+
+   if(!ml.modinit) {
+      ACS_Delay(2);
+   }
+
+   if(ml.mapkind != _map_kind_normal) {
+      ACS_SetPlayerProperty(true, true, PROP_TOTALLYFROZEN);
+      return;
+   }
 
 reinit:
    P_Init();
@@ -184,7 +193,7 @@ void Z_PlayerDisconnect(void) {
 alloc_aut(0) stkcall
 cstr P_Discrim(i32 pclass) {
    switch(pclass) {
-   case pcl_marine:    return "Stan";
+   case pcl_marine:    return "Lane";
    case pcl_cybermage: return "Jem";
    case pcl_informant: return "Fulk";
    case pcl_wanderer:  return "Luke";
@@ -293,7 +302,7 @@ i96 P_Scr_GivePos(i32 x, i32 y, i96 score, bool nomul) {
       pl.logH(1, "+\Cj%lli\Cnscr", score);
    }
    if(scoredisp & _itm_disp_pop) {
-      DrawCallV(sm_AddScoreNum, x, y, StrParam("%lli\Cnscr", score));
+      DrawCallV(sm_AddScoreNum, x, y, strp(_p(score), _l("\Cnscr")));
    }
 
    return score;
@@ -463,8 +472,7 @@ void P_doIntro(void) {
    register i32 which = 1;
    register i32 last  = 0;
 
-   noinit static
-   struct gui_fil fil;
+   noinit static struct gui_fil fil;
    fil.tic = 70;
 
    text[0] = '\0';
@@ -619,7 +627,7 @@ static void P_attrREF(void) {
 
    pl.rage = lerpk(pl.rage, 0, 0.01);
 
-   pl.speedmul += (int)pl.rage;
+   pl.speedmul += (i32)pl.rage;
 }
 
 static void P_Spe_pTick(void) {
@@ -733,6 +741,8 @@ void P_Aug_pTick(void) {
 
 alloc_aut(0) script_str ext("ACS") addr(OBJ "Markiplier")
 void Z_MapMarker(i32 tid) {
+   if(ml.mapkind != _map_kind_normal) return;
+
    enum {ticks = 35 * 2};
 
    str text = GetNameTag(tid);

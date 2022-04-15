@@ -60,7 +60,8 @@ cstr TagName(mem_tag_t tag) {
    case _tag_head: return "listhead";
    case _tag_libc: return "libc";
 
-   case _tag_dlgs: return "dialogue";
+   case _tag_dlgv: return "dialogue vm";
+   case _tag_dlgc: return "dialogue compiler";
    case _tag_file: return "file";
    case _tag_item: return "item";
    case _tag_logs: return "log";
@@ -354,7 +355,7 @@ dyn:
       }
    }
 
-   Dbg_Log(log_dpl, _l("alloc "), ACS_PrintHex((intptr_t)dpl_ina));
+   Dbg_Log(log_dpl, _l("Plsa "), ACS_PrintHex((intptr_t)dpl_ina));
 
    dpl_ina = (p = dpl_ina)->nxt;
    p->nxt = dpl_act;
@@ -372,7 +373,7 @@ void __GDCC__Plsf(void *p) {
    if(p >= (void *)dpl_dat && p < (void *)&dpl_dat[_dpl_siz]) {
       struct dpl_blk *blk = GetDplBlk(p);
 
-      Dbg_Log(log_dpl, _l("Plsf: dealloc "), ACS_PrintHex((intptr_t)blk));
+      Dbg_Log(log_dpl, _l("Plsf "), ACS_PrintHex((intptr_t)blk));
 
       if(blk->prv) blk->prv->nxt = blk->nxt;
       else         dpl_act       = blk->nxt;

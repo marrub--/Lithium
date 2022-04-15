@@ -132,9 +132,9 @@ software is included in most C/B operating system bases.
 The latest version of the software is 2.5, and since version 2.0 it has had
 automatic update functionality.
 
-== \#INFO_SHORT_CBIStan | C/B I
-== \#INFO_TITLE_CBIStan | Computer/Brain Interface (C/B I)
-@@ \#INFO_DESCR_CBIStan
+== \#INFO_SHORT_CBILane | C/B I
+== \#INFO_TITLE_CBILane | Computer/Brain Interface (C/B I)
+@@ \#INFO_DESCR_CBILane
 One of the biggest advancements in technology over the past thousand years, a
 Computer/Brain Interface, or C/B I (sometimes "CBI,") is an interface between
 a human brain and a computer. Usually installed within the skull and the brain,
@@ -145,8 +145,8 @@ Computer/Brain Interfaces are not classified as prosthetics, only enhancements,
 as they do not replace any part of the body and only add onto it. The C/B I
 currently installed is a self-servicing military model.
 
-== \#INFO_SHORT_CBIJem | $\#INFO_SHORT_CBIStan
-== \#INFO_TITLE_CBIJem | $\#INFO_TITLE_CBIStan
+== \#INFO_SHORT_CBIJem | $\#INFO_SHORT_CBILane
+== \#INFO_TITLE_CBIJem | $\#INFO_TITLE_CBILane
 @@ \#INFO_DESCR_CBIJem
 One of the biggest advancements in technology over the past thousand years, a
 Computer/Brain Interface, or C/B I (sometimes "CBI,") is an interface between
@@ -158,8 +158,8 @@ While Computer/Brain Interfaces are not usually classified as prosthetics, the
 one currently installed is due to extensive bodily restructuring done to the
 user.
 
-== \#INFO_SHORT_CBIAri | $\#INFO_SHORT_CBIStan
-== \#INFO_TITLE_CBIAri | $\#INFO_TITLE_CBIStan
+== \#INFO_SHORT_CBIAri | $\#INFO_SHORT_CBILane
+== \#INFO_TITLE_CBIAri | $\#INFO_TITLE_CBILane
 @@ \#INFO_DESCR_CBIAri
 One of the biggest advancements in technology over the past thousand years, a
 Computer/Brain Interface, or C/B I (sometimes "CBI,") is an interface between

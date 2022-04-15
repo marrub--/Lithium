@@ -248,6 +248,7 @@ sm_:
 ## Objects
 so_:
    OBJ:
+   - AbyssRainDrop
    - AssassinPlayer
    - BarrierFX
    - BloodRainDrop
@@ -678,6 +679,9 @@ ss_:
    - player_doublejump:        player/doublejump
    - player_glare:             player/glare
    - player_jem_manafull:      player/jem/manafull
+   - player_lane_adren_inj:    player/lane/adren/inj
+   - player_lane_rarmor_mode:  player/lane/rarmor/mode
+   - player_lane_rocketboost:  player/lane/rocketboost
    - player_levelup:           player/levelup
    - player_lightoff:          player/lightoff
    - player_lighton:           player/lighton
@@ -688,9 +692,6 @@ ss_:
    - player_score:             player/score
    - player_showtext:          player/showtext
    - player_slide:             player/slide
-   - player_stan_adren_inj:    player/stan/adren/inj
-   - player_stan_rarmor_mode:  player/stan/rarmor/mode
-   - player_stan_rocketboost:  player/stan/rocketboost
    - player_startgame:         player/startgame
    - player_trmopen:           player/trmopen
    - player_trmswitch:         player/trmswitch

@@ -32,8 +32,16 @@ Press {+crouch} to crouch into the vent.
 == \#MARKER_Unknown | Unknown
 
 == \#MARKER_M1A1_EscapePod   | Escape Pod 02C3
-== \#MARKER_M1A1_Quarters    | Personal Quarters
 == \#MARKER_M1A1_Maintenance | Maintenance Area
+== \#MARKER_M1A1_Quarters    | Personal Quarters
 == \#MARKER_M1A1_TeleportBay | Teleport Bay 1E14
+
+== \#MARKER_TITLEMAP_Court       | Court of Sins
+== \#MARKER_TITLEMAP_Garden      | Garden
+== \#MARKER_TITLEMAP_Inescapable | Inescapable Prison
+== \#MARKER_TITLEMAP_Library     | Library of Memories
+== \#MARKER_TITLEMAP_Sight       | Room of Sight
+== \#MARKER_TITLEMAP_Sludge      | Sludge Factory
+== \#MARKER_TITLEMAP_WhatWas     | Ruins of What Was
 
 ## EOF

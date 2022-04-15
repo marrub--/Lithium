@@ -9,7 +9,9 @@
 == lsnd/PlayerM
 
 # Marine
-player.stan {
+player.lane {
+   doll Doll # Made of the strands of the universe
+
    $alias step = .player.step
 
    # Upgrades

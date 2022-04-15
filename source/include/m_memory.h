@@ -22,7 +22,8 @@ enum {
    _tag_head,
    _tag_libc,
 
-   _tag_dlgs,
+   _tag_dlgv,
+   _tag_dlgc,
    _tag_file,
    _tag_item,
    _tag_logs,
@@ -33,6 +34,7 @@ enum {
 };
 
 #define Salloc(t, tag) Malloc(sizeof(t), tag)
+#define Talloc(p, l, tag) Ralloc(p, sizeof((p)[0]) * (l), tag)
 
 stkcall void  Dalloc(void *p);
 stkcall void *Malloc(mem_size_t s, mem_tag_t tag);

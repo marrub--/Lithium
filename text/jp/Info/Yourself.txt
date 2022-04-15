@@ -89,7 +89,7 @@ Biotic Information Panel(バイオチックインフォメーションパネル�
 
 ソフトウェアの最新バージョンは2.5で、バージョン2.0から自動更新機能を備えた。
 
-@@ \#INFO_DESCR_CBIStan
+@@ \#INFO_DESCR_CBILane
 Computer/Brain Interface(コンピューター/脳インタフェース、或いはCBI〘シービーアイ〙)は、
 人間の脳とコンピューターの間の
 インターフェイスである。C/BIは通常、頭蓋骨や脳のほか中枢神経系の他の箇所にも

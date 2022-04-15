@@ -16,7 +16,7 @@
 !!include Info/Yourself.txt
 
 !!include Info/Jem/Weapons.txt
-!!include Info/Stan/Weapons.txt
+!!include Info/Lane/Weapons.txt
 
 !!include Info/Outcasts/Weapons.txt
 

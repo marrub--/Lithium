@@ -205,8 +205,7 @@ static void StaB2_S(u32 v) {MemB2_S(STA_BEG + DecSP(2) - 1, v);}
 
 /* trace */
 #ifndef NDEBUG
-static
-void TraceReg(void) {
+static void TraceReg(void) {
    __nprintf("PC:%04X SP:%02X VA:%02X "
              "AC:%02X RX:%02X RY:%02X SR:%02X",
              GetPC(), GetSP(), GetVA(),
@@ -230,45 +229,22 @@ void TraceReg(void) {
    })
 
 /* VM action auxiliary */
-enum {
-   _from_dlg,
-   _from_trm,
-   _from_lon,
-   _from_fin,
-};
-
-static
-str GetText(i32 from) {
+static str GetText(void) {
    u32  adr = MemB2_G(VAR_TEXTL);
-   cstr pfx;
-
-   switch(from) {
-   case _from_dlg: pfx = "DLOG";   break;
-   case _from_trm: pfx = "PAGE";   break;
-   case _from_lon: pfx = "LOGON";  break;
-   case _from_fin: pfx = "ENDING"; break;
-   }
-
-   return adr ? lang_fmt(LANG "%s_%s", pfx, MemSC_G(adr)) : snil;
+   cstr sc  = MemSC_G(adr);
+   return adr ? lang(strp(_p(ml.maplump), _c('_'), _p(sc))) : snil;
 }
 
-static
-str GetRemote(void) {
+static str GetRemote(void) {
    u32  adr = MemB2_G(VAR_REMOTEL);
    cstr nam = adr ? MemSC_G(adr) : "UNKNOWN";
    return ns(lang(fast_strdup2(LANG "REMOTE_", nam)));
 }
 
-static
-str GetName(void) {
+static str GetName(void) {
    u32  adr = MemB2_G(VAR_NAMEL);
    cstr nam = adr ? MemSC_G(adr) : "UNKNOWN";
    return ns(lang(fast_strdup2(LANG "PNAME_", nam)));
-}
-
-static
-void ConsoleLogText(i32 from) {
-   __with(str text = GetText(from);) if(text) ConsoleLog("%s", text);
 }
 
 #define ResetName()   MemB2_S(VAR_NAMEL,   0)
@@ -309,7 +285,7 @@ void TerminalGUI(u32 tact) {
    default:         lng = sl_term_remote; goto trmtxt;
    case TACT_LOGON: lng = sl_term_open_connect;
    trmtxt:
-      tr = StrParam(tmpstr(lang(lng)), tr);
+      tr = strp(_p(lang(lng)), _p(tr));
       break;
    case TACT_LOGOFF:
       tr = ns(lang(sl_term_disconnecting));
@@ -336,7 +312,7 @@ void TerminalGUI(u32 tact) {
    case TACT_LOGON:
    case TACT_LOGOFF: {
       i32 y = tmidy;
-      str text = GetText(_from_lon);
+      str text = GetText();
 
       if(text) {
          PrintText_str(text, sf_ltrmfont, CR_WHITE, tmidx,0, tmidy + 35,0);
@@ -347,7 +323,7 @@ void TerminalGUI(u32 tact) {
       break;
    }
    case TACT_PICT: {
-      str text = GetText(_from_trm);
+      str text = GetText();
 
       PrintSprite(fast_strdup(pict), tmidx/2,0, tmidy,0);
 
@@ -361,7 +337,7 @@ void TerminalGUI(u32 tact) {
       break;
    }
    case TACT_INFO: {
-      str text = GetText(_from_trm);
+      str text = GetText();
 
       G_Clip(&gst, 0, ttop, ttwidth, ttheigh);
 
@@ -389,14 +365,14 @@ void DialogueGUI(void) {
 
    str snam = GetName();
    str srem = GetRemote();
-   str text = GetText(_from_dlg);
+   str text = GetText();
    char icon[32] = ":Dialogue:Icon"; faststrcat(icon, MemSC_G(MemB2_G(VAR_ICONL)));
 
    G_Begin(&gst, 320, 240);
    G_UpdateState(&gst);
 
-   PrintSpriteA(sp_Dialogue_Back,  0,1, 0,1, 0.7);
-   PrintSpriteA(fast_strdup(icon), 0,1, 0,1, 0.7);
+   PrintSpriteA(sp_Dialogue_Back,  0,1, 0,1, 0.9);
+   PrintSpriteA(fast_strdup(icon), 0,1, 0,1, 0.9);
 
    PrintText_str(snam, sf_bigupper, CR_GREEN, 30,1, 35,1);
 
@@ -421,7 +397,7 @@ void DialogueGUI(void) {
 
       for(i32 i = 0; i < oc; i++, y += 14) {
          u32  adr = MemB2_G(StructOfs(OPT, NAML, i));
-         cstr txt = tmpstr(lang(fast_strdup2(LANG "OPT_", MemSC_G(adr))));
+         cstr txt = tmpstr(lang(strp(_p(ml.maplump), _c('_'), _p(MemSC_G(adr)))));
 
          if(G_Button_HId(&gst, i, txt, 45, y, Pre(btndlgsel))) {
             MemB1_S(VAR_UACT, UACT_SELOPTION);
@@ -458,8 +434,7 @@ void GuiAct(void) {
    }
 }
 
-static
-void F_drawBack(str bgnd) {
+alloc_aut(0) stkcall static void F_drawBack(str bgnd) {
    SetSize(320, 200);
    PrintFill(0xFF000000);
    if(bgnd[0]) {
@@ -468,13 +443,11 @@ void F_drawBack(str bgnd) {
    SetSize(320, 240);
 }
 
-static
-void F_drawFade(k32 amount) {
+alloc_aut(0) stkcall static void F_drawFade(k32 amount) {
    PrintFill(0x000000 | ((i32)(255.0k * amount) << 24));
 }
 
-static
-void F_drawText(i32 h, str text) {
+alloc_aut(0) stkcall static void F_drawText(i32 h, str text) {
    if(text[0]) {
       SetClipW(10, 10, 300, h, 300);
       PrintRect(0, 0, 320, 240, 0x7F000000);
@@ -484,20 +457,17 @@ void F_drawText(i32 h, str text) {
 }
 
 /* VM actions */
-static
-void ActEND_GAME(void) {
+alloc_aut(0) stkcall static void ActEND_GAME(void) {
    SetVA(ACT_NONE);
    ServCallV(sm_ActuallyEndTheGame);
 }
 
-static
-void ActLD_ITEM(void) {
+stkcall static void ActLD_ITEM(void) {
    SetVA(ACT_NONE);
    ModSR_ZN(SetAC(InvNum(MemSA_G(MemB2_G(VAR_ADRL)))));
 }
 
-static
-void ActLD_OPT(void) {
+stkcall static void ActLD_OPT(void) {
    SetVA(ACT_NONE);
 
    u32 cnt = MemB1_G(VAR_OPT_CNT);
@@ -507,8 +477,7 @@ void ActLD_OPT(void) {
    MemB2_S(StructOfs(OPT, PTRL, cnt), MemB2_G(VAR_RADRL));
 }
 
-static
-void ActSCRIPT_I(void) {
+stkcall static void ActSCRIPT_I(void) {
    SetVA(ACT_NONE);
 
    u32 s0 = MemB1_G(VAR_SCP0), s1 = MemB1_G(VAR_SCP1);
@@ -518,8 +487,7 @@ void ActSCRIPT_I(void) {
    ModSR_ZN(SetAC(ACS_ExecuteWithResult(s0, s1, s2, s3, s4)));
 }
 
-static
-void ActSCRIPT_S(void) {
+stkcall static void ActSCRIPT_S(void) {
    SetVA(ACT_NONE);
 
    str s0 = MemSA_G(MemB2_G(VAR_ADRL));
@@ -529,8 +497,7 @@ void ActSCRIPT_S(void) {
    ModSR_ZN(SetAC(ACS_NamedExecuteWithResult(s0, s1, s2, s3, s4)));
 }
 
-alloc_aut(0) sync static
-void ActTELEPORT_INTERLEVEL(void) {
+alloc_aut(0) sync static void ActTELEPORT_INTERLEVEL(void) {
    i32 tag = MemB2_G(VAR_ADRL);
 
    ACS_Delay(5);
@@ -539,8 +506,7 @@ void ActTELEPORT_INTERLEVEL(void) {
    SetVA(ACT_HALT);
 }
 
-alloc_aut(0) sync static
-void ActTELEPORT_INTRALEVEL(void) {
+alloc_aut(0) sync static void ActTELEPORT_INTRALEVEL(void) {
    i32 tag = MemB2_G(VAR_ADRL);
 
    ACS_Delay(5);
@@ -549,16 +515,13 @@ void ActTELEPORT_INTRALEVEL(void) {
    SetVA(ACT_HALT);
 }
 
-alloc_aut(0) sync static
-void ActDLG_WAIT(void) {
+alloc_aut(0) sync static void ActDLG_WAIT(void) {
    SetVA(ACT_NONE);
 
    AmbientSound(ss_player_cbi_dlgopen, 1.0);
 
    FreezeTime();
    P_SetVel(0, 0, 0);
-
-   ConsoleLogText(_from_dlg);
 
    do {
       DialogueGUI();
@@ -569,8 +532,7 @@ void ActDLG_WAIT(void) {
    GuiAct();
 }
 
-alloc_aut(0) sync static
-void ActTRM_WAIT(void) {
+alloc_aut(0) sync static void ActTRM_WAIT(void) {
    SetVA(ACT_NONE);
 
    u32 tact = MemB1_G(VAR_TACT);
@@ -582,10 +544,8 @@ void ActTRM_WAIT(void) {
       if(tact == TACT_LOGON || tact == TACT_LOGOFF) {
          AmbientSound(ss_player_trmopen, 1.0);
          timer = 45;
-         ConsoleLogText(_from_lon);
       } else {
          timer = INT32_MAX;
-         ConsoleLogText(_from_trm);
       }
 
       FreezeTime();
@@ -601,8 +561,7 @@ void ActTRM_WAIT(void) {
    }
 }
 
-alloc_aut(0) sync static
-void ActFIN_WAIT(void) {
+alloc_aut(0) sync static void ActFIN_WAIT(void) {
    enum {
       _fill_x = 280,
       _fill_y = 220,
@@ -632,7 +591,7 @@ void ActFIN_WAIT(void) {
       }
       break;
    case FACT_FADE_OUT: {
-      str text = GetText(_from_fin);
+      str text = GetText();
       for(u32 i = tics; i > 0; --i) {
          F_drawBack(bgnd);
          F_drawText(220, text);
@@ -644,7 +603,7 @@ void ActFIN_WAIT(void) {
       break;
    }
    case FACT_WAIT: {
-      str text = GetText(_from_fin);
+      str text = GetText();
       for(u32 i = tics; i > 0; --i) {
          F_drawBack(bgnd);
          F_drawText(220, text);
@@ -662,12 +621,13 @@ void ActFIN_WAIT(void) {
       }
       break;
    case FACT_CRAWL: {
-      ConsoleLogText(_from_fin);
-      str text = GetText(_from_fin);
+      str text = GetText();
       i32 leng = ACS_StrLen(text);
 
-      struct gui_fil fil_fill     = {0, 75};
-      struct gui_fil fil_skipfill = {0, 35};
+      static struct gui_fil fil_fill;
+      static struct gui_fil fil_skipfill;
+      fil_fill.tic     = 75;
+      fil_skipfill.tic = 35;
 
       for(i32 i = tics; i >= 0; i--) {
          F_drawBack(bgnd);
@@ -711,8 +671,7 @@ void ActFIN_WAIT(void) {
 }
 
 /* Main dialogue VM. */
-dynam_aut script
-void Dlg_Run(u32 num) {
+dynam_aut script void Dlg_Run(u32 num) {
    if(pl.dead || pl.modal != _gui_dlg) {
       return;
    }

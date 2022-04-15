@@ -86,7 +86,7 @@
 == \#LOG_CBI_DDimDriver | $\#INFO_SHORT_DimDriver
 
 ## Level Up ══════════════════════════════════════════════════════════════════╕
-== \#LOG_LevelUpStan | You feel stronger, somehow.
+== \#LOG_LevelUpLane | You feel stronger, somehow.
 == \#LOG_LevelUpJem  | [INFO] Memory restored: %iKiB
 == \#LOG_LevelUpFulk | \cj<\cdVital\cj>\c- :: %i inodes reclaimed.
 == \#LOG_LevelUpOmi  | You're having fun with this.
@@ -95,7 +95,7 @@
 == \#LOG_LevelUpKiri | You feel some of your power return to you.
 
 ## Boss Warnings ═════════════════════════════════════════════════════════════╕
-%% \#LOG_BossWarnStan
+%% \#LOG_BossWarnLane
 \cgWarning: High demonic energy levels detected in area.
 
 %% \#LOG_BossWarnJem

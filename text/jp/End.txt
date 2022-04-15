@@ -6,6 +6,6 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-!!include End/Stan/Dialogue.txt
+!!include End/Lane/Dialogue.txt
 
 ## EOF

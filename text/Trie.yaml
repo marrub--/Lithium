@@ -35,19 +35,29 @@ Dlg_TopLevelName:
    prefix: _dlg_toplevel_
    words:
       - dialogue
+      - dialogue_names
       - program
+      - program_names
       - terminal
+      - terminal_names
+      - var
    aliases:
-      lipu_ilo: program
-      ilo:      terminal
-      toki:     dialogue
+      ilo:           terminal
+      ilo_nimi:      terminal_names
+      kon:           var
+      lipu_ilo:      program
+      lipu_ilo_nimi: program_names
+      toki:          dialogue
+      toki_nimi:     dialogue_names
 Dlg_CondName:
    prefix: _dlg_cond_
    words:
       - class
       - item
+      - var
    aliases:
       ijo:  item
+      kon:  var
       poki: class
 Dlg_StmtName:
    prefix: _dlg_stmt_
@@ -61,8 +71,8 @@ Dlg_StmtName:
       - info
       - logoff
       - logon
-      - music
       - mus_fade
+      - music
       - name
       - option
       - page
@@ -74,20 +84,22 @@ Dlg_StmtName:
       - text
       - wait
    aliases:
-      seme: if
       lipu: page
+      seme: if
 Dlg_ItemName:
    prefix: _dlg_item_
    words:
       - failure
       - finished
       - page
+      - page_names
       - unfinished
    aliases:
-      pakala: failure
-      pini:   finished
-      lipu:   page
-      awen:   unfinished
+      awen:      unfinished
+      lipu:      page
+      lipu_nimi: page_names
+      pakala:    failure
+      pini:      finished
 P_ClassToInt:
    words: [
       #define pclass_x(shr, lng, eq) shr, lng,

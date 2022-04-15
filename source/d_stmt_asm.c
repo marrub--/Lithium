@@ -15,10 +15,11 @@
 static
 i32 CodeABS(struct compiler *d, cstr reg) {
    struct token *tok = d->tb.get();
+   i32 n;
 
-   if(tok->type == tok_number) {
-      i32 n = faststrtoi32(tok->textV);
-
+   switch(tok->type) {
+   case tok_number:
+      n = faststrtoi32(tok->textV);
       if(n <= 0xFFFF) {
          if(!reg) {
             return n;
@@ -30,13 +31,18 @@ i32 CodeABS(struct compiler *d, cstr reg) {
             d->tb.unget();
          }
       }
-   } else if(tok->type == tok_identi) {
-      i32 n = -1;
+      break;
+   case tok_identi:
+      n = -1;
       switch(Dlg_ItemName(tok->textV)) {
       case _dlg_item_page:
          tok = d->tb.get();
-         if(tok->type == tok_number) {
-            n = faststrtoi32(tok->textV);
+         if(tok->type == tok_identi) {
+            n = Dlg_CheckNamePool(d, _name_pool_pages, tok->textV);
+            if(n >= DPAGE_MAX || n < 0) {
+               d->tb.err(&d->res, "bad page name '%s'", tok->textV);
+               unwrap(&d->res);
+            }
          } else {
             d->tb.unget();
          }
@@ -48,6 +54,19 @@ i32 CodeABS(struct compiler *d, cstr reg) {
       if(n >= 0) {
          return PRG_BEG + d->def.pages[n];
       }
+      break;
+   case tok_mod:
+      tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, 0);
+      unwrap(&d->res);
+
+      n = Dlg_CheckNamePool(d, _name_pool_variables, tok->textV);
+      if(n >= 0) {
+         return VAR_END - n;
+      } else {
+         d->tb.err(&d->res, "unknown variable '%s'", tok->textV);
+         unwrap(&d->res);
+      }
+      break;
    }
 
    d->tb.unget();

@@ -29,19 +29,19 @@ struct {cstr abbr, full;} const ArmorNames[] = {
 
 static
 void RA_Take(i32 n) {
-   InvTake(StrParam(OBJ "RA_Bullets%i", n),   INT32_MAX);
-   InvTake(StrParam(OBJ "RA_Energy%i", n),    INT32_MAX);
-   InvTake(StrParam(OBJ "RA_Fire%i", n),      INT32_MAX);
-   InvTake(StrParam(OBJ "RA_FireMagic%i", n), INT32_MAX);
-   InvTake(StrParam(OBJ "RA_Magic%i", n),     INT32_MAX);
-   InvTake(StrParam(OBJ "RA_Melee%i", n),     INT32_MAX);
-   InvTake(StrParam(OBJ "RA_Shrapnel%i", n),  INT32_MAX);
-   InvTake(StrParam(OBJ "RA_Ice%i", n),       INT32_MAX);
+   InvTake(strp(_l(OBJ "RA_Bullets"),   _p(n)), INT32_MAX);
+   InvTake(strp(_l(OBJ "RA_Energy"),    _p(n)), INT32_MAX);
+   InvTake(strp(_l(OBJ "RA_Fire"),      _p(n)), INT32_MAX);
+   InvTake(strp(_l(OBJ "RA_FireMagic"), _p(n)), INT32_MAX);
+   InvTake(strp(_l(OBJ "RA_Magic"),     _p(n)), INT32_MAX);
+   InvTake(strp(_l(OBJ "RA_Melee"),     _p(n)), INT32_MAX);
+   InvTake(strp(_l(OBJ "RA_Shrapnel"),  _p(n)), INT32_MAX);
+   InvTake(strp(_l(OBJ "RA_Ice"),       _p(n)), INT32_MAX);
 }
 
 static
 void RA_Give(cstr name, i32 n) {
-   InvGive(StrParam(OBJ "RA_%s%i", name, n), 1);
+   InvGive(strp(_l(OBJ "RA_"), _p(name), _p(n)), 1);
 }
 
 void Upgr_ReactArmor_Deactivate(void) {
@@ -73,7 +73,7 @@ void Z_GiveRA(i32 num) {
          RA_Take(1);
          RA_Take(2);
 
-         AmbientSound(ss_player_stan_rarmor_mode, 1.0);
+         AmbientSound(ss_player_lane_rarmor_mode, 1.0);
 
          pl.logH(3, tmpstr(lang(sl_log_activearmor)), name);
 

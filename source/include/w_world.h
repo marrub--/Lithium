@@ -209,6 +209,12 @@ enum finale_num {
    _finale_other,
 };
 
+enum map_kind {
+   _map_kind_normal,
+   _map_kind_title,
+   _map_kind_end,
+};
+
 struct world {
    struct payoutinfo pay;
    i32               mapscleared;
@@ -231,8 +237,10 @@ struct world {
 struct map_locals {
    bool                islithmap;
    enum mission_status mission;
+   str                 maplump;
    i32                 mapid;
    i32                 mapseed;
+   i32                 mapkind;
    bool                modinit;
 };
 

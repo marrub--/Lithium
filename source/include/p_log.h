@@ -13,8 +13,6 @@
 #ifndef p_log_h
 #define p_log_h
 
-#include "m_vec.h"
-
 void RandomName(i32 id);
 
 void P_Log_Both(i32 levl, cstr fmt, ...); /* log to HUD and full log */

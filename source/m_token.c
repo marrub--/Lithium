@@ -11,7 +11,6 @@
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
 #include "m_token.h"
-#include "m_vec.h"
 #include "m_char.h"
 #include "m_file.h"
 #include "m_str.h"

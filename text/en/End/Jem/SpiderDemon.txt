@@ -6,7 +6,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-@@ \#ENDING_SpiderDemon_Jem
+@@ LITHEND_SpiderDemon_Jem
 The demon whithers and dies as you deliver the final blow to it.
 Finally, you're getting somewhere.
 

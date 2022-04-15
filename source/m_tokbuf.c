@@ -116,18 +116,21 @@ bool TBufDrop(struct tokbuf *tb, i32 t) {
 }
 
 void TBufErr(struct tokbuf *tb, struct tbuf_err *res, cstr fmt, ...) {
-   noinit static
-   char errbuf[1024];
+   noinit static char errbuf[1024];
 
-   va_list vl;
+   va_list    vl;
    mem_size_t len = faststrlen(tb->fname);
+   mem_size_t c = 0;
 
-   errbuf[0] = '(';
-   fastmemcpy(errbuf, tb->fname, len + 1);
-   errbuf[len] = ')';
+   errbuf[c++] = '(';
+   fastmemcpy(errbuf + c, tb->fname, len);
+   c += len;
+   errbuf[c++] = ')';
+   fastmemcpy(errbuf + c, " \CgERROR\C-: ", 12);
+   c += 12;
 
    va_start(vl, fmt);
-   vsprintf(&errbuf[len + 1], fmt, vl);
+   vsprintf(&errbuf[c], fmt, vl);
    va_end(vl);
 
    res->some = true;

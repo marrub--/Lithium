@@ -41,12 +41,12 @@
 
 == \#TERM_DISCONNECTING | 切断中...
 == \#TERM_USE_TO_ACK    | 使うで確認します
-== \#TERM_OPEN_CONNECT  | %Sの接続を開きます
-== \#TERM_REMOTE        | 遠隔: %S
+== \#TERM_OPEN_CONNECT  | 接続を開きます:
+== \#TERM_REMOTE        | 遠隔:
 
 == \#GUI_TEXTBOX | [ここにクリックして入力開始]
 
-== \#TAB_ARSENAL_Stan | 兵器
+== \#TAB_ARSENAL_Lane | 兵器
 == \#TAB_ARSENAL_Jem  | 指令
 == \#TAB_ARSENAL_Ari  | 機体
 

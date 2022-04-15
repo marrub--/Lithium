@@ -281,8 +281,12 @@ This one is extra hard.
 ## 012345678901234567890123456
 ## 01234567890123456789012345
 
+## FIXME: add cvar to save name change state
+##        player seeing lane's true name is not canon, but her name is only
+##        used here, so it's ok
 == \#CLASS_MARINE     | Marine
-== \#CLASS_MARINE_Nam | Stan Blazkowicz
+== \#CLASS_MARINE_Nam | Stanley J. Blazkowicz
+##== \#CLASS_MARINE_Nam | Lane Blazkowicz
 == \#CLASS_MARINE_Col | Lith_Green
 %% \#CLASS_MARINE_Dsc
 An exceptional soldier,
@@ -302,7 +306,7 @@ spells to his advantage.
 Relies on weapon quirks.
 
 == \#CLASS_INFORMANT     | Informant
-== \#CLASS_INFORMANT_Nam | Fulk 5
+== \#CLASS_INFORMANT_Nam | Folques of Red and Black
 ## == \#CLASS_INFORMANT_Col | Lith_Purple
 == \#CLASS_INFORMANT_Col | Black
 %% \#CLASS_INFORMANT_Dsc

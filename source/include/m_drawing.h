@@ -213,6 +213,7 @@ enum ZscName(Channel) {
    lch_voice2,
    lch_weapon2,
    lch_weapon3,
+   lch_doll,
 
    lch_step,
    lch_weather1,

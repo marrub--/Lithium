@@ -9,13 +9,13 @@
 class Lith_BasePerson : Actor;
 
 default {
-   +DONTTHRUST
-   +USESPECIAL
+   +DontThrust
+   +UseSpecial
 }
 
-override void PostBeginPlay() {
+override void postBeginPlay() {
    super.postBeginPlay();
-   A_SetSpecial(84, -int('Lith_RunDialogue'), args[0]);
+   a_setSpecial(84, -int('Lith_RunDialogue'), args[0]);
 }
 
 /* EOF */

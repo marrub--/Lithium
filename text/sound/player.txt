@@ -115,6 +115,7 @@ $include "sound/player.c.txt"
 $include "sound/player.d.txt"
 $include "sound/player.i.txt"
 $include "sound/player.m.txt"
+$include "sound/player.t.txt"
 $include "sound/player.w.txt"
 
 # EOF

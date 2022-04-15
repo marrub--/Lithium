@@ -9,6 +9,7 @@
 !!include Dialogue/M1A1.txt
 !!include Dialogue/M1A2.txt
 !!include Dialogue/TESTMAP.txt
+!!include Dialogue/TITLEMAP.txt
 
 == \#REMOTE_UNKNOWN | <unknown>@raddr.4E19
 == \#REMOTE_HIDDEN  | <hidden>
@@ -21,6 +22,7 @@
 == \#PNAME_UNKNOWN | ???
 == \#PNAME_MAXIE   | Maxie
 == \#PNAME_JACQUES | Jacques
+== \#PNAME_DOLL    | Doll
 
 == \#LOGON_AOF  | \ch2929ff\cm..\cr4-\cg<<<LCMD INP \cn188D 1F4C\cg>>>
 == \#LOGON_UAC  | \cd*** ON-BOARD COMMAND SYSTEM ACCESS TERMINAL ***

@@ -1,0 +1,41 @@
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
+
+class Lith_AbyssTeleporter : Actor {
+   default {
+      Radius 32;
+      Height 32;
+      +NoTimeFreeze
+      +DontThrust
+      +UseSpecial
+   }
+
+   override void postBeginPlay() {
+      super.postBeginPlay();
+      if(gameState == gs_titlelevel) {
+         destroy();
+      } else {
+         a_setSpecial(70, 0, args[0], 1);
+      }
+   }
+
+   states(actor) {
+   Spawn:
+      TNT1 A 1 {
+         double  ang = fRandom(0.0, 360.0);
+         double  vel = fRandom(0.5, 0.6);
+         vector3 vec = (cos(ang)*vel, sin(ang)*vel, fRandom(-0.6,0.6));
+         vector3 pos = (pos.xy, pos.z + 30);
+         spawn("Lith_DollBacking1", pos).vel = vec;
+         spawn("Lith_DollBacking2", pos).vel = vec;
+      }
+      loop;
+   }
+}
+
+/* EOF */

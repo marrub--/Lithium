@@ -6,8 +6,11 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
+== lsnd/PlayerW
+
 player.luke {
-   == lsnd/PlayerW
+   doll Doll # Made of the strands of the universe
+
    shadowwalk ShadowWalk # Self-made
 }
 

@@ -38,7 +38,7 @@
    cl: gA tag: HealthBonus;
 
    cl: gA tag: AllMap;
-   cl: pM tag: BackpackStan;
+   cl: pM tag: BackpackLane;
    cl: pC tag: BackpackJem;
    cl: gA tag: Berserk  unl: "JAQTen";
    cl: gA tag: Infrared unl: "SYM43";
@@ -84,7 +84,7 @@
    cl: pC tag: HackInfo;
 
    cl: gA tag: BIP;
-   cl: pM tag: CBIStan;
+   cl: pM tag: CBILane;
    cl: pC tag: CBIJem;
    cl: pD tag: CBIAri;
 
@@ -259,7 +259,7 @@
 }
 
 "mail auto" {
-   cl: pM tag: MIntroStan;
+   cl: pM tag: MIntroLane;
    cl: pC tag: MIntroJem;
 }
 
@@ -268,10 +268,10 @@
    cl: gA tag: MMakarovDefeated;
    cl: gA tag: MIsaacDefeated;
 
-   cl: pM tag: MCluster1Stan;
-   cl: pM tag: MCluster2Stan;
-   cl: pM tag: MCluster3Stan;
-   cl: pM tag: MPhantomStan;
+   cl: pM tag: MCluster1Lane;
+   cl: pM tag: MCluster2Lane;
+   cl: pM tag: MCluster3Lane;
+   cl: pM tag: MPhantomLane;
 
    cl: pC tag: MCluster1Jem;
    cl: pC tag: MCluster2Jem;

@@ -81,6 +81,9 @@ static
 void MInitPre(void) {
    Dbg_Log(log_dev, _l(__func__));
 
+   ml.maplump   = strp(ACS_PrintName(PRINTNAME_LEVEL));
+   ml.islithmap = (MapNum >= LithMapBeg && MapNum <= LithMapEnd);
+
    CheckModCompat();
    UpdateGame();
 }
@@ -90,8 +93,6 @@ void GInit(void) {
    Dbg_Log(log_dev, _l(__func__));
 
    wl.cbiperf = 10;
-
-   ml.islithmap = (MapNum >= LithMapBeg && MapNum <= LithMapEnd);
 
    Mon_Init();
    Wep_GInit();
@@ -109,19 +110,6 @@ void MInitPst(void) {
    wl.pay.itemmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_ITEMS);
    wl.pay.scrtmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_SECRETS);
 
-   /* Check for if rain should be used.
-    * - If `NoRain' is set on LithMapLine, never use rain.
-    * - If the player has rain enabled, use it if not for those preconditions.
-    * - If `UseRain' is set on LithMapLine, use it if not for that.
-    */
-   bool never_rain    = ACS_GetLineUDMFInt(LithMapLine, sm_MapNoRain);
-   bool use_rain_user = CVarGetI(sc_sv_rain);
-   bool use_rain_map  = ACS_GetLineUDMFInt(LithMapLine, sm_MapUseRain);
-   if(!never_rain && (use_rain_user || use_rain_map)) {
-      wl.dorain = true;
-      W_DoRain();
-   }
-
    ml.modinit = true;
 }
 
@@ -138,6 +126,19 @@ void MInit(void) {
 
    /* Set the air control because ZDoom's default sucks. */
    ACS_SetAirControl(0.77);
+
+   /* Check for if rain should be used.
+    * - If `NoRain' is set on LithMapLine, never use rain.
+    * - If the player has rain enabled, use it if not for those preconditions.
+    * - If `UseRain' is set on LithMapLine, use it if not for that.
+    */
+   bool never_rain    = ACS_GetLineUDMFInt(LithMapLine, sm_MapNoRain);
+   bool use_rain_user = CVarGetI(sc_sv_rain);
+   bool use_rain_map  = ACS_GetLineUDMFInt(LithMapLine, sm_MapUseRain);
+   if(!never_rain && (use_rain_user || use_rain_map)) {
+      wl.dorain = true;
+      W_DoRain();
+   }
 }
 
 static
@@ -197,18 +198,15 @@ dynam_aut script ext("ACS") addr(lsc_worldopen)
 void Z_World(bool is_reopen) {
    Dbg_Log(log_dev, _l(__func__));
 
-   Draw_Init();
-
    if(ACS_GameType() == GAME_TITLE_MAP) {
-      W_Title();
-      return;
+      ml.mapkind = _map_kind_title;
    } else if(MapNum == 1911777) {
-      pl.setActivator();
-      ACS_SetPlayerProperty(true, true, PROP_TOTALLYFROZEN);
-      Dlg_MInit();
-      F_Run();
-      return;
+      ml.mapkind = _map_kind_end;
+   } else {
+      ml.mapkind = _map_kind_normal;
    }
+
+   Draw_Init();
 
    if(CVarGetI(sc_sv_failtime) == 0) for(;;) {
       ACS_BeginPrint();
@@ -253,6 +251,16 @@ void Z_World(bool is_reopen) {
    if(!is_reopen) HInitPre();
 
    wl.unloaded = false; /* Unloaded flag can be reset now. */
+
+   /* Special map main-loop functions. */
+   switch(ml.mapkind) {
+   case _map_kind_title:
+      W_Title();
+      return;
+   case _map_kind_end:
+      F_Run();
+      return;
+   }
 
    ACS_Delay(2); /* Wait for players to get initialized. */
 

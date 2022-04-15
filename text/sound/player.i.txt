@@ -19,6 +19,8 @@ $playersound    informant male *pain50  Pain       # ^
 $playersounddup informant male *pain25  *pain50    # ^
 
 player.fulk {
+   doll Doll # Made of the strands of the universe
+
    land1 Land1 # Phantasy Star: Nova
    land2 Land2 # ^
    land3 Land3 # ^

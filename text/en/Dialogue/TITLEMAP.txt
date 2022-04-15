@@ -1,0 +1,115 @@
+## ╭-*-Agw-LithTxt-*-─────────────────────────────────────────────────────────╮
+## │                                                                          │
+## │             Distributed under the CC0 public domain license.             │
+## │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+## │                See licenses/cc0.txt for more information.                │
+## │                                                                          │
+## ╰──────────────────────────────────────────────────────────────────────────╯
+
+@@ TITLEMAP_lane_begin_0
+I will walk, with my shadow flag...
+
+Oh, hello there. Apologies!
+
+%% TITLEMAP_lane_begin_o0
+Hello.
+\cq[Who is this..?]
+
+%% TITLEMAP_lane_begin_o0c
+Ah, hey there.
+\cq[She looks cute. She reminds me of Daniel.]
+
+%% TITLEMAP_lane_begin_1m
+Ah, hey there. You look familiar.
+\cq[Who is she?]
+
+%% TITLEMAP_lane_begin_2
+Oh, sorry, didn't mean to bother you.
+\cq[Back out while you can.]
+
+%% TITLEMAP_lane_begin_3
+Oh, sorry, didn't mean to bother you.
+\cq[Back out.]
+
+@@ TITLEMAP_lane_m_meet_0
+Oh, do I? How so, might I ask? I don't believe I've met you before.
+
+\cn[I feel intimidated by this doll.]
+
+%% TITLEMAP_lane_m_meet_1
+No, it must be nothing.
+\ct[I'm sure it's nothing.]
+
+%% TITLEMAP_lane_m_meet_2
+No, just forget about it, sorry.
+\cr[God damn it.]
+
+%% TITLEMAP_lane_m_meet_3
+No, I've definitely seen you.
+\cq[What is it?]
+
+@@ TITLEMAP_lane_m_nothing_0
+Hmm... Well, whatever. Say, do you like RPG games? Also, where exactly
+are we? I feel like I know *you*...
+
+\cn[These subject hops are a bit hard to follow. I wonder if people find
+me this hard to follow.]
+
+@@ TITLEMAP_lane_m_nothing_5
+Don't you hate it when they make you grind to get a 100% run? It's
+just kind of mean to do that. Why not just make hidden areas?
+
+\cn[I'm kind of perplexed. I did just finish a 100% run of an RPG
+recently, and I did end up thinking that. Weird.]
+
+\c-Anyways!
+
+@@ TITLEMAP_lane_m_nothing_6
+Strange! Were you passing into Hell, by chance? I think we might be in
+some kind of precipice - a dream, perhaps!
+
+\cn[She's surprisingly happy about this revelation.]
+
+%% TITLEMAP_lane_m_nothing_1
+I do like RPG games. Why?
+\ct[Probably best to ignore the rest for now.]
+
+%% TITLEMAP_lane_m_nothing_2
+I'm not sure where we are. I just... woke up here.
+\ct[I'm probably in Hell.]
+
+%% TITLEMAP_lane_m_nothing_3
+Why *do* we think we look alike, anyhow?
+\cq[Maybe this was worth questioning.]
+
+%% TITLEMAP_lane_m_nothing_4
+Nevermind, you talk a mile a minute.
+\cr[Not that I'm one to talk.]
+
+@@ TITLEMAP_lane_m_seen_0
+Hmm... Do you happen to have scars on your upper arms?
+
+\cn[...What? How?]
+
+%% TITLEMAP_lane_m_seen_1
+No.
+\cr[Fuck.]
+
+%% TITLEMAP_lane_m_seen_2
+...Yes. Burn marks. Self-inflicted.
+\cr[*Fuck.*]
+
+@@ TITLEMAP_lane_m_seen_3
+...Ah.
+
+\cn[Ah...]
+
+%% TITLEMAP_lane_m_seen_4
+I'm leaving.
+\cr[I want to die. \cgI want to die. \cmI want to die.\cr]
+
+%% TITLEMAP_lane_m_seen_5
+I see.
+\cr[We're the same person. \cmGod damn it.\cr]
+
+## EOF

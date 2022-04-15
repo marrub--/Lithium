@@ -282,7 +282,6 @@ DCD(0x32, TRV, NP) /* Extension */
 #define d_vm_h
 
 #include "w_world.h"
-#include "m_vec.h"
 #include "m_cps.h"
 
 #define StructOfs(nam, mem, sel) \
@@ -297,16 +296,16 @@ enum {
 
 enum {
    DNUM_PRG_BEG,
-   DNUM_PRG_END = DNUM_PRG_BEG + 10,
+   DNUM_PRG_END = DNUM_PRG_BEG + 15,
    DNUM_DLG_BEG,
-   DNUM_DLG_END = DNUM_DLG_BEG + 10,
+   DNUM_DLG_END = DNUM_DLG_BEG + 15,
    DNUM_TRM_BEG,
-   DNUM_TRM_END = DNUM_TRM_BEG + 10,
+   DNUM_TRM_END = DNUM_TRM_BEG + 15,
    DNUM_MAX,
 };
 
 enum {
-   DPAGE_NORMAL_MAX = 30,
+   DPAGE_NORMAL_MAX = 32,
    DPAGE_UNFINISHED,
    DPAGE_FINISHED,
    DPAGE_FAILURE,
@@ -395,9 +394,6 @@ enum {
 
    VAR_OPT_BEG,
    VAR_OPT_END = VAR_OPT_BEG + S_OPT_SIZE * 16,
-
-   /* end */
-   VAR_END
 };
 
 enum {
@@ -437,9 +433,8 @@ enum {
 
 struct dlg_def {
    u32 pages[DPAGE_MAX];
-   mem_size_t codeP, stabP;
-   Vec_Decl(u32, code);
-   Vec_Decl(u32, stab);
+   u32 *codeV; mem_size_t codeC, codeP;
+   u32 *stabV; mem_size_t stabC, stabP;
 };
 
 struct dlg_start_info {

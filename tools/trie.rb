@@ -45,7 +45,7 @@ def mk_trie_code defs, node, idx = 0, indent = 1, res = String.new, word = Strin
          res.concat "#{ind indent}case '#{child.letter}':\n"
       else
          ltr = ltr.each_char.collect do |c| c end
-         ltr.push '\0' if child.terminal?
+         ltr.push '\0' if child.children.empty?
 
          res.concat "#{ind indent}if("
          chrs = ltr.each_with_index.map do |c, i|
@@ -67,12 +67,24 @@ def mk_trie_code defs, node, idx = 0, indent = 1, res = String.new, word = Strin
             ENUMS.push en unless defs[:enum] || al
          end
 
-         res.concat "#{ind indent + 1}return #{en};\n"
-      else
+         if child.children.empty?
+            res.concat "#{ind indent + 1}return #{en};\n"
+         else
+            res.concat "#{ind indent + 1}if(s[#{idx}] == '\\0') {\n"
+            res.concat "#{ind indent + 2}return #{en};\n"
+            res.concat "#{ind indent + 1}}\n"
+         end
+      end
+
+      unless child.children.empty?
          mk_trie_code defs, child.children, idx, indent + 1, res, word
       end
 
-      res.concat "#{ind indent}}\n" unless switch
+      if switch
+         res.concat "#{ind indent + 1}break;\n"
+      else
+         res.concat "#{ind indent}}\n"
+      end
 
       word.replace orig_word
       idx = orig_idx

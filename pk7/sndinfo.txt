@@ -344,6 +344,7 @@ $playersounddup cybermage male *pain75 *pain100
 $playersound cybermage male *pain50 lsnd/PlayerC/Pain
 $playersounddup cybermage male *pain25 *pain50
 $playersound cybermage male *grunt lsnd/PlayerC/Grunt
+player/jem/doll lsnd/PlayerC/Doll
 $alias player/jem/step player/step
 player/jem/manafull lsnd/PlayerC/FullCharge
 $playersound darklord male *death lsnd/PlayerD/Death
@@ -368,6 +369,7 @@ $playersound informant male *pain100 lsnd/PlayerI/PainSmall
 $playersounddup informant male *pain75 *pain100
 $playersound informant male *pain50 lsnd/PlayerI/Pain
 $playersounddup informant male *pain25 *pain50
+player/fulk/doll lsnd/PlayerI/Doll
 player/fulk/land1 lsnd/PlayerI/Land1
 player/fulk/land2 lsnd/PlayerI/Land2
 player/fulk/land3 lsnd/PlayerI/Land3
@@ -378,12 +380,15 @@ player/fulk/step4 lsnd/PlayerI/Footsteps/Step4
 player/fulk/dodge lsnd/PlayerI/Dodge
 $random player/fulk/land { player/fulk/land1 player/fulk/land2 player/fulk/land3 }
 $random player/fulk/step { player/fulk/step1 player/fulk/step2 player/fulk/step3 player/fulk/step4 }
-$alias player/stan/step player/step
-player/stan/rarmor/mode lsnd/PlayerM/RArmor/ChangeMode
-player/stan/rarmor/damage lsnd/PlayerM/RArmor/Damage
-player/stan/rocketboost lsnd/PlayerM/RocketBoost
-player/stan/adren/inj lsnd/PlayerM/Adrenaline/Inject
-player/stan/adren/ready lsnd/PlayerM/Adrenaline/Ready
+player/lane/doll lsnd/PlayerM/Doll
+$alias player/lane/step player/step
+player/lane/rarmor/mode lsnd/PlayerM/RArmor/ChangeMode
+player/lane/rarmor/damage lsnd/PlayerM/RArmor/Damage
+player/lane/rocketboost lsnd/PlayerM/RocketBoost
+player/lane/adren/inj lsnd/PlayerM/Adrenaline/Inject
+player/lane/adren/ready lsnd/PlayerM/Adrenaline/Ready
+player/kiri/doll lsnd/PlayerT/Doll
+player/luke/doll lsnd/PlayerW/Doll
 player/luke/shadowwalk lsnd/PlayerW/ShadowWalk
 marathon/pickup lsnd/Marathon/Pickup
 marathon/explode lsnd/Marathon/Explode
