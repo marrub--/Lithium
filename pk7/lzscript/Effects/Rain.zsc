@@ -29,7 +29,7 @@ class Lith_RainDrop : Actor {
 
    override void postBeginPlay() {
       super.postBeginPlay();
-      acs_executeWithResult(lsc_raindropspawn);
+      acs_executeWithResult(lsc_raindropspawn, int(players[consoleplayer].mo.distance2d(self)));
       vel     = (0, 0, fRandom(-12, -16));
       scale.y = fRandom(1.5, 3.5);
       m_done  = false;
@@ -39,7 +39,7 @@ class Lith_RainDrop : Actor {
       if(m_done) {
          Lith_UTIL.stateTick(self);
          a_fadeOut(0.25 / 21.0);
-      } else if((waterLevel > 0 || pos.z <= floorZ)) {
+      } else if(waterLevel > 0 || pos.z <= floorZ) {
          setOrigin((pos.xy, floorZ), false);
          scale = (1, 1);
          m_done = true;

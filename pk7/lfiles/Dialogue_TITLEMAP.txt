@@ -82,6 +82,7 @@ toki lane {
    lipu m_seen {
       seme kon %lane_scars {
          text _3;
+         script "Lith_SetLane";
          option _4 brk;
          option _5 brk;
       } ante {

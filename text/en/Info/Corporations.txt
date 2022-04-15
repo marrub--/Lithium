@@ -55,7 +55,7 @@ modifications for existing weapons.
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_AOFAri | AOF
 == \#INFO_TITLE_AOFAri | $\#INFO_SHORT_AOF
-== \#INFO_IMAGE_AOFAri | :BIP:AOF
+== \#INFO_IMAGE_AOFAri | $\#INFO_IMAGE_AOF
 @@ \#INFO_DESCR_AOFAri
 AOF is a company founded during the dark ages. Famously, they supplied
 both sides of the war, however neither side did win. On the inside,

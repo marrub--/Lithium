@@ -19,8 +19,8 @@ class ListMenuItemLith_PlayerDisplay : ListMenuItemPlayerDisplay {
          drawTexture(desc, por, 320 - porx, (240 - pory) / 2);
          super.draw(selected, desc);
       }
-      screen.drawTexture(Lith_URANUS.getTextureForName(":Menu:ClassBack"), true, 4, 48, DTA_Alpha, 0.5, DTA_Clean, true);
-      screen.drawTexture(Lith_URANUS.getTextureForName(":Menu:ClassDescBack"), true, 100, 126, DTA_Alpha, 0.5, DTA_Clean, true);
+      screen.drawTexture(Lith_URANUS.getTextureForName(":Menu:ClassBack"), true, 4, 48, DTA_Alpha, 0.9, DTA_Clean, true);
+      screen.drawTexture(Lith_URANUS.getTextureForName(":Menu:ClassDescBack"), true, 100, 126, DTA_Alpha, 0.9, DTA_Clean, true);
    }
 }
 
@@ -41,19 +41,29 @@ override void Drawer() {
    if(mDesc.mSelectedItem < 0) return;
    let sel = ListMenuItemTextItem(mDesc.mItems[mDesc.mSelectedItem]);
    if(sel) {
+      let nsf = "_Nam";
+      let psf = "_Pro";
+      if(sel.mText == "$LITH_CLASS_MARINE" && !(__lith_fun & lfun_lane)) {
+         nsf = "_DeN";
+         psf = "_DPr";
+      }
       let col = Lith_HERMES.localize(sel.mText .. "_Col");
-      let nam = Lith_HERMES.localize(sel.mText .. "_Nam");
+      let nam = Lith_HERMES.localize(sel.mText .. nsf);
+      let pro = Lith_HERMES.localize(sel.mText .. psf);
       let dsc = Lith_HERMES.localize(sel.mText .. "_Dsc");
       let txt = Lith_HERMES.localize(sel.mText);
       let cr  = Font.FindFontColor(col);
       Font bigf = menuDelegate.pickFont("bigupper");
-      Font smlf = menuDelegate.pickFont("ltrmfont");
-      Screen.DrawText(bigf, cr, 168, 75+59,  txt, DTA_Clean, true);
-      Screen.DrawText(smlf, cr, 168, 75+73,  nam, DTA_Clean, true);
+      Font midf = menuDelegate.pickFont("lmidfont");
+      Font smlf = menuDelegate.pickFont("smallfont");
+      Font trmf = menuDelegate.pickFont("ltrmfont");
+      Screen.DrawText(bigf, cr, 168, 75+59, txt, DTA_Clean, true);
+      Screen.DrawText(midf, cr, 168, 75+73, nam, DTA_Clean, true);
+      Screen.DrawText(smlf, cr, 317-smlf.stringWidth(pro), 75+83, pro, DTA_Clean, true);
       if(cr == Font.CR_BLACK) {
          Screen.DrawText(smlf, cr, 176, 75+81, "NOT IMPLEMENTED", DTA_Clean, true);
       }
-      Screen.DrawText(smlf, cr, 104, 75+108, dsc, DTA_Clean, true);
+      Screen.DrawText(trmf, cr, 104, 75+108, dsc, DTA_Clean, true);
    }
 }
 

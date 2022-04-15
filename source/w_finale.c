@@ -25,6 +25,7 @@ void F_Start(i32 which) {
 
 dynam_aut script
 void F_Run(void) {
+   pl.setActivator();
    pl.dlg.page = finale;
    pl.modal    = _gui_dlg;
    Dlg_Run(DNUM_PRG_BEG);

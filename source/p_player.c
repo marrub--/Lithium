@@ -367,10 +367,10 @@ void P_bossText(i32 boss) {
 
    WaitPause();
 
-   i32 t = 35 * 5 * (division ? 8 : 10);
+   i32 t = 35 * 10 * (division ? 8 : 10);
    str text;
    for(i32 i = 0, j = 1; i < t; i++) {
-      if(i % (35 * 5) == 0) {
+      if(i % (35 * 7) == 0) {
          k32 di = ACS_RandomFixed(0.1, 0.2);
          k32 fa = ACS_RandomFixed(0.1, 0.6);
          k32 ft = ACS_RandomFixed(0.1, 1.0);
@@ -386,15 +386,19 @@ void P_bossText(i32 boss) {
 
          StartSound(ss_enemies_boss_talk, lch_voice2, CHANF_LOCAL, 1.0, 1.0, pt);
 
-         SetFade(fid_bosstext, 20, 1);
-         text = ns(lang_fmt_discrim(fmt, j));
+         SetFade(fid_bosstext, 35 * 3, 1);
+         text = lang_fmt_discrim(fmt, j);
+         if(!text) {
+            break;
+         }
+
          j++;
       }
 
-      SetSize(640, 400);
-      SetClipW(0, 0, 640, 400, 640);
-      PrintTextF_str(text, sf_bigupper, CR_WHITE, 320,4, 100,0, fid_bosstext);
-      ClearClip();
+      if(CheckFade(fid_bosstext)) {
+         SetSize(640, 400);
+         PrintTextF_str(text, sf_bigupper, CR_WHITE, 320,4, 100,0, fid_bosstext);
+      }
 
       PausableTick();
    }
@@ -883,6 +887,11 @@ void Z_TimelineInconsistent(void) {
       pl.setHealth(-1);
       ACS_Delay(1);
    }
+}
+
+alloc_aut(0) script_str ext("ACS") addr(OBJ "SetLane")
+void Z_SetLane(void) {
+   SetFun(GetFun() | lfun_lane);
 }
 
 /* EOF */

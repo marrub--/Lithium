@@ -39,7 +39,7 @@ listMenu "MainMenuTextOnly" {
 
 listMenu "PlayerclassMenu" {
    class              "Lith_PlayerclassMenu"
-   font               "ltrmfont"
+   font               "lmidfont"
    position           14, 55
    lith_playerDisplay 0, 0, "00 00 00", "00 FF 00"
 }
@@ -49,7 +49,7 @@ listMenu "EpisodeMenu" {
    staticTextCentered  160, 30, "$MENU_WHICHEPISODE"
    staticPatchCentered 42, 48, "lgfx/Menu/EpisodeBack.png"
    position            48, 53
-   font                "ltrmfont", "Lith_Green", "White"
+   font                "lmidfont", "Lith_Green", "White"
    lineSpacing         9
 }
 

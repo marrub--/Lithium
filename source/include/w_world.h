@@ -50,6 +50,7 @@ enum ZscName(Fun) {
    lfun_bips     = 1 << 1,
    lfun_division = 1 << 2,
    lfun_tainted  = 1 << 3,
+   lfun_lane     = 1 << 4,
 };
 
 enum ZscName(BossRewardNum) {

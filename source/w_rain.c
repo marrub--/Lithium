@@ -23,7 +23,7 @@ i32 lmvar rain_dist;
 
 dynam_aut script
 void W_DoRain(void) {
-   ACS_Delay(1);
+   ACS_Delay(2);
 
    pl.setActivator();
    StartSound(ss_amb_wind, lch_weather1, CHANF_LOOP, 0.001, ATTN_NONE);
@@ -62,11 +62,10 @@ void W_DoRain(void) {
    }
 }
 
-script ext("ACS") addr(lsc_raindropspawn)
-void Z_RainDropSpawn(void) {
-   if(rain_chk) {
-      i32 dist = mag2i(GetX(0) - rain_px, GetY(0) - rain_py);
-      if(dist < rain_dist) rain_dist = dist;
+alloc_aut(0) script ext("ACS") addr(lsc_raindropspawn)
+void Z_RainDropSpawn(i32 dist) {
+   if(rain_chk && dist < rain_dist) {
+      rain_dist = dist;
    }
 }
 

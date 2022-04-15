@@ -285,8 +285,10 @@ This one is extra hard.
 ##        player seeing lane's true name is not canon, but her name is only
 ##        used here, so it's ok
 == \#CLASS_MARINE     | Marine
-== \#CLASS_MARINE_Nam | Stanley J. Blazkowicz
-##== \#CLASS_MARINE_Nam | Lane Blazkowicz
+== \#CLASS_MARINE_DeN | Stanley J. Blazkowicz
+== \#CLASS_MARINE_DPr | he/him
+== \#CLASS_MARINE_Nam | Lane Blazkowicz
+== \#CLASS_MARINE_Pro | she/her
 == \#CLASS_MARINE_Col | Lith_Green
 %% \#CLASS_MARINE_Dsc
 An exceptional soldier,
@@ -297,6 +299,7 @@ an advanced baseline.
 
 == \#CLASS_CYBERMAGE     | Cyber-Mage
 == \#CLASS_CYBERMAGE_Nam | Jeremy Stilko
+== \#CLASS_CYBERMAGE_Pro | he/him
 == \#CLASS_CYBERMAGE_Col | Lith_Red
 %% \#CLASS_CYBERMAGE_Dsc
 Possesses great knowledge of
@@ -307,6 +310,7 @@ Relies on weapon quirks.
 
 == \#CLASS_INFORMANT     | Informant
 == \#CLASS_INFORMANT_Nam | Folques of Red and Black
+== \#CLASS_INFORMANT_Pro | they/them
 ## == \#CLASS_INFORMANT_Col | Lith_Purple
 == \#CLASS_INFORMANT_Col | Black
 %% \#CLASS_INFORMANT_Dsc
@@ -318,6 +322,7 @@ their obtuse arsenal.
 
 == \#CLASS_ASSASSIN     | Assassin
 == \#CLASS_ASSASSIN_Nam | Omisielle Faulzaje
+== \#CLASS_ASSASSIN_Pro | they/she
 ## == \#CLASS_ASSASSIN_Col | Lith_Pink
 == \#CLASS_ASSASSIN_Col | Black
 %% \#CLASS_ASSASSIN_Dsc
@@ -329,6 +334,7 @@ to kill through the horde.
 
 == \#CLASS_DARKLORD     | Dark Lord
 == \#CLASS_DARKLORD_Nam | Aricil Deyan'za
+== \#CLASS_DARKLORD_Pro | he/they
 == \#CLASS_DARKLORD_Col | Lith_Blue
 %% \#CLASS_DARKLORD_Dsc
 A walking tank, lord of all
@@ -339,6 +345,7 @@ prepared to think deftly.
 
 == \#CLASS_WANDERER     | Wanderer
 == \#CLASS_WANDERER_Nam | Lucas Sánchez
+== \#CLASS_WANDERER_Pro | it/its
 ## == \#CLASS_WANDERER_Col | Lith_Yellow
 == \#CLASS_WANDERER_Col | Black
 %% \#CLASS_WANDERER_Dsc
@@ -350,6 +357,7 @@ magic with odd effects.
 
 == \#CLASS_THOTH     | Thoth
 == \#CLASS_THOTH_Nam | Kirihito Kosatohara
+== \#CLASS_THOTH_Pro | she/her
 ## == \#CLASS_THOTH_Col | Lith_Grey
 == \#CLASS_THOTH_Col | Black
 %% \#CLASS_THOTH_Dsc
