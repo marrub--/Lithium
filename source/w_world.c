@@ -21,7 +21,7 @@ __addrdef __mod_arr lmvar;
 noinit struct world            wl;
 noinit struct map_locals lmvar ml;
 
-script void SpawnBosses(i96 sum, bool force);
+script void SpawnBosses(score_t sum, bool force);
 
 i32 UniqueID(i32 tid) {
    i32 pn;

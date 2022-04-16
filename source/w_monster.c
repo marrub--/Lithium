@@ -58,10 +58,10 @@ void ApplyLevels(dmon_t *m, i32 prev) {
 
    if(m->level >= 5) {
       k32 rn   = m->rank / 10.0;
-      i96 delt = m->level - prev;
+      i32 delt = m->level - prev;
 
-      i96 hp10 = m->spawnhealth / 10;
-      i32 newh = delt * hp10 * (i96)(ACS_RandomFixed(rn - 0.1, rn + 0.1) * 0xfff) / 0xfff;
+      i32 hp10 = m->spawnhealth / 10;
+      i32 newh = delt * hp10 * (i32)(ACS_RandomFixed(rn - 0.1, rn + 0.1) * 0xfff) / 0xfff;
       SetHealth(0, m->health + newh);
       m->maxhealth += newh;
 
@@ -346,7 +346,7 @@ void PrintMonsterInfo(dmon_t *m) {
       "health: %i/%i\n"
       "x: %k y: %k z: %k\n"
       "r: %k h: %k\n"
-      "mi->exp: %lu mi->score: %lli\n"
+      "mi->exp: %lu mi->score: %" FMT_SCR "\n"
       "mi->flags: %i mi->type: %i",
       m, m->mi, m->mi->name, m->active, m->id,
       m->wasdead, m->finalized, m->painwait,
@@ -377,7 +377,7 @@ void MonInfo_Preset(struct tokbuf *tb, struct tbuf_err *res) {
       switch(MonInfo_Preset_Name(k)) {
       case _moninfo_preset_name: faststrcpy(pre->prename, v);  break;
       case _moninfo_preset_exp:  pre->exp   = faststrtoi32(v); break;
-      case _moninfo_preset_scr:  pre->score = faststrtoi96(v); break;
+      case _moninfo_preset_scr:  pre->score = faststrtoscr(v); break;
       default:
          tb->err(res, "%s MonInfo_Preset: invalid key %s; expected "
                  "name, "
@@ -438,7 +438,7 @@ void MonInfo_Monster(struct tokbuf *tb, struct tbuf_err *res, i32 flags) {
       switch(MonInfo_Monster_Name(k)) {
       case _moninfo_monster_filter: faststrcpy(mi->name, v);     break;
       case _moninfo_monster_exp:    mi->exp   = faststrtoi32(v); break;
-      case _moninfo_monster_scr:    mi->score = faststrtoi96(v); break;
+      case _moninfo_monster_scr:    mi->score = faststrtoscr(v); break;
       case _moninfo_monster_pre:
          for(struct monster_preset *pre = monsterpreset;; ++pre) {
             if(faststrchk(pre->prename, v)) {

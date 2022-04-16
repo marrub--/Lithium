@@ -79,6 +79,16 @@ typedef uint32_t u32;
 typedef uint64_t u64;
 typedef uint96_t u96;
 
+#define SCR_MAX         INT64_MAX
+#define FMT_SCR         "li"
+#define faststrtoscr    faststrtoi64
+#define lerpscr         lerpli
+#define lerpscr_init    lerpli_init
+#define interp_data_scr interp_data_li
+#define scorediv_t      ldiv_t
+
+typedef i64 score_t;
+
 typedef i32 mem_tag_t;
 typedef i32 mem_size_t;
 typedef i32 mem_byte_t;

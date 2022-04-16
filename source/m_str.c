@@ -300,7 +300,7 @@ char *faststrtok(char *s, char **next, char c) {
 }
 
 alloc_aut(0) stkcall
-cstr scoresep(i96 num) {
+cstr scoresep(score_t num) {
    noinit static
    char out[48];
 
@@ -314,7 +314,7 @@ cstr scoresep(i96 num) {
    i32 cnum = 0;
 
    while(num) {
-      lldiv_t div = __div(num, 10LL);
+      scorediv_t div = __div(num, (score_t)10);
       *--outp = div.rem + '0';
       num = div.quot;
 
@@ -330,7 +330,7 @@ cstr scoresep(i96 num) {
 }
 
 alloc_aut(0) stkcall
-void printscr(i96 num) {
+void printscr(score_t num) {
    PrintChrSt(scoresep(num));
 }
 

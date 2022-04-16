@@ -14,8 +14,7 @@
 #include "p_player.h"
 #include "w_world.h"
 
-struct boss
-{
+struct boss {
    char const name[16];
    i32  const phasenum;
 
@@ -23,8 +22,7 @@ struct boss
    bool dead;
 };
 
-enum
-{
+enum {
    diff_easy,
    diff_medi,
    diff_hard,
@@ -32,38 +30,29 @@ enum
    diff_max
 };
 
-static
-struct boss bosses_easy[] = {
+static struct boss bosses_easy[] = {
    {"James", 2},
 };
 
-static
-struct boss bosses_medi[] = {
+static struct boss bosses_medi[] = {
    {"Makarov", 3},
 };
 
-static
-struct boss bosses_hard[] = {
+static struct boss bosses_hard[] = {
    {"Isaac", 3},
 };
 
-static
-struct boss *lmvar boss;
+static struct boss *lmvar boss;
 
-static
-bool alldead[diff_max];
+static bool alldead[diff_max];
 
-static
-i32 rewardnum, difficulty;
+static i32 rewardnum, difficulty;
 
-static
-struct boss *lastboss;
+static struct boss *lastboss;
 
-static
-i96 scorethreshold = 1000000;
+static score_t scorethreshold = 1000000;
 
-static
-void SpawnBossReward(void) {
+static void SpawnBossReward(void) {
    k32 x = GetX(0);
    k32 y = GetY(0);
    k32 z = GetZ(0);
@@ -78,8 +67,7 @@ void SpawnBossReward(void) {
    }
 }
 
-static
-void TriggerBoss(void) {
+static void TriggerBoss(void) {
    static
    bool firstboss = true;
 
@@ -113,8 +101,7 @@ void TriggerBoss(void) {
    }
 }
 
-static
-bool CheckDead(struct boss *b, i32 num) {
+static bool CheckDead(struct boss *b, i32 num) {
    for(i32 i = 0; i < num; i++) {
       if(!b[i].dead) {
          return false;
@@ -123,8 +110,7 @@ bool CheckDead(struct boss *b, i32 num) {
    return true;
 }
 
-script
-void SpawnBosses(i96 sum, bool force) {
+script void SpawnBosses(score_t sum, bool force) {
    if(ml.islithmap || (!force && sum < scorethreshold)) return;
 
    alldead[diff_easy] = CheckDead(bosses_easy, countof(bosses_easy));
@@ -233,8 +219,7 @@ void Z_SpawnBoss(void) {
    wl.bossspawned = true;
 }
 
-script static
-bool chtf_summon_boss(cheat_params_t const params) {
+script static bool chtf_summon_boss(cheat_params_t const params) {
    i32 diff  = params[0] - '0';
    i32 num   = params[1] - '0';
    i32 phase = params[2] - '0';

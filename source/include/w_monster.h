@@ -90,7 +90,7 @@ typedef char mon_name_t[64];
 struct monster_preset {
    mon_name_t prename;
    i32        exp;
-   i96        score;
+   score_t    score;
 };
 
 struct monster_info {

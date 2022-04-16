@@ -33,6 +33,7 @@ void P_Ren_Debug(void) {
       _l("ar: "),        _p(pl.addroll  * 360), _c('\n'),
       _l("rage: "),      _p(pl.rage),           _c('\n'),
       _l("score: "),     _p(pl.score),          _c('\n'),
+      _l("scoremul: "),  _p(pl.scoremul),       _c('\n'),
       _l("speedmul: "),  _p(pl.speedmul),       _c('\n'),
       _l("jumpboost: "), _p(pl.jumpboost),      _c('\n')
    );

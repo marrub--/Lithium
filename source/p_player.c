@@ -248,7 +248,7 @@ void P_GUI_Use(void) {
    }
 }
 
-i96 P_Scr_Give(k32 x, k32 y, k32 z, i96 score, bool nomul) {
+score_t P_Scr_Give(k32 x, k32 y, k32 z, score_t score, bool nomul) {
    bool seen;
    struct i32v2 vp = project(x, y, z, &seen);
    if(!seen) {
@@ -258,14 +258,14 @@ i96 P_Scr_Give(k32 x, k32 y, k32 z, i96 score, bool nomul) {
    return P_Scr_GivePos(vp.x, vp.y, score, nomul);
 }
 
-i96 P_Scr_GivePos(i32 x, i32 y, i96 score, bool nomul) {
+score_t P_Scr_GivePos(i32 x, i32 y, score_t score, bool nomul) {
    /* Could cause division by zero */
    if(score == 0) {
       return 0;
    }
 
    if(!nomul) {
-      score *= pl.scoremul;
+      score *= pl.scoremul / 100.0lk;
       score *= 1 + (k64)ACS_RandomFixed(0, pl.attr.attrs[at_luk] / 77.7);
    }
 
@@ -299,7 +299,7 @@ i96 P_Scr_GivePos(i32 x, i32 y, i96 score, bool nomul) {
    /* display score */
    i32 scoredisp = CVarGetI(sc_player_scoredisp);
    if(scoredisp & _itm_disp_log) {
-      pl.logH(1, "+\Cj%lli\Cnscr", score);
+      pl.logH(1, "+\Cj%" FMT_SCR "\Cnscr", score);
    }
    if(scoredisp & _itm_disp_pop) {
       DrawCallV(sm_AddScoreNum, x, y, strp(_p(score), _l("\Cnscr")));
@@ -308,7 +308,7 @@ i96 P_Scr_GivePos(i32 x, i32 y, i96 score, bool nomul) {
    return score;
 }
 
-void P_Scr_Take(i96 score) {
+void P_Scr_Take(score_t score) {
    if(pl.score - score >= 0) {
       pl.scoreused += score;
       pl.score     -= score;

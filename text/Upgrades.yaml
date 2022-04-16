@@ -21,8 +21,8 @@ _uc_body:
       ReflexWetw: {f: A-U--, pr: 5, mul: -5}
 
    pM:
-      JetBooster:  {              f: --U--, mul: -5}
-      CyberLegs:   {scr: 1220000, f: --U--, pr:  4}
+      JetBooster:  {                       f: --U--, mul: -5}
+      CyberLegs:   {         scr: 1220000, f: --U--, pr:  4}
       ReactArmor:  {pg: N/A, scr: 3500200, f: -D-R-, pr: 20, req: ai   }
       ReactArmor2: {pg: N/A, scr: 2990200,           pr: 10, req: ai ra}
       DefenseNuke: {         scr:  580030, f: ----E,         req: ai   }

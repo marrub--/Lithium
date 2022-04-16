@@ -266,7 +266,7 @@ void P_Init(void) {
    P_ValidateTID();
 
    #ifndef NDEBUG
-   if(dbgflags(dbgf_score)) pl.score = 0xFFFFFFFFFFFFFFFFll;
+   if(dbgflags(dbgf_score)) pl.score = SCR_MAX / 4;
    #endif
 
    /* pls not exit map with murder thingies out */
@@ -293,7 +293,7 @@ void P_Init(void) {
 
    pl.scoreaccum     = 0;
    pl.scoreaccumtime = 0;
-   pl.scoremul       = 1.1;
+   pl.scoremul       = 110;
 
    ServCallV(sm_PlayerInit);
 

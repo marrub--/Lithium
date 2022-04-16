@@ -44,7 +44,7 @@ void HUD_TopRight(void) {
       udata.score.value_display = pl.score;
    } else {
       udata.score.value = pl.score;
-      lerplli(&udata.score);
+      lerpscr(&udata.score);
    }
 
    beg = scoresep(udata.score.value_display);
@@ -83,9 +83,9 @@ void HUD_TopRight(void) {
          if(pl.score > pl.old.score) {
             SetFade(fid_schit1, 4, 12);
          } else if(pl.score < pl.old.score) {
-            i96 scrdif = pl.old.score - pl.score;
-            i32 tics   = scrdif * 8 / 0xFFFF;
-            i32 mmx    = 30000 - clampi(scrdif / 4, 3276, 29490);
+            score_t scrdif = pl.old.score - pl.score;
+            i32     tics   = scrdif * 8 / 0xFFFF;
+            i32     mmx    = 30000 - clampi(scrdif / 4, 3276, 29490);
             SetFade(fid_schit2, clampi(tics, 1, 35), mmx >> 8);
          }
 
@@ -101,7 +101,7 @@ void HUD_TopRight(void) {
 
          y += 7;
 
-         static i96 scoreaccum_disp;
+         static score_t scoreaccum_disp;
 
          if(pl.scoreaccumtime > 0) {
             SetFade(fid_scacum, 5, 12);
@@ -413,7 +413,7 @@ void HUD_BottomLeft(void) {
       PrintSprite(sp_HUD_I_HPBack, 0,1, 239,2);
 
       udata.health.value = pl.health;
-      lerplli(&udata.health);
+      lerpscr(&udata.health);
 
       health = udata.health.value_display;
       x      = 25;
@@ -518,9 +518,9 @@ void HUD_BottomLeft(void) {
 }
 
 void Upgr_HeadsUpDisp_Activate(void) {
-   lerplli_init(&udata.score,     pl.score,     4);
-   lerplli_init(&udata.health,    pl.health,    1);
-   lerplli_init(&udata.overdrive, pl.overdrive, 1);
+   lerpscr_init(&udata.score,     pl.score,     4);
+   lerpscr_init(&udata.health,    pl.health,    1);
+   lerpscr_init(&udata.overdrive, pl.overdrive, 1);
 }
 
 void Upgr_HeadsUpDisp_Render(void) {

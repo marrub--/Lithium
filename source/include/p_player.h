@@ -124,15 +124,15 @@ optargs(1) bool P_SetVel(k32 velx, k32 vely, k32 velz, bool add);
 void P_ValidateTID(void);
 void P_GUI_Close(void);
 void P_GUI_Use(void);
-i96 P_Scr_Give(k32 x, k32 y, k32 z, i96 score, bool nomul);
-i96 P_Scr_GivePos(i32 x, i32 y, i96 score, bool nomul);
-void P_Scr_Take(i96 score);
+score_t P_Scr_Give(k32 x, k32 y, k32 z, score_t score, bool nomul);
+score_t P_Scr_GivePos(i32 x, i32 y, score_t score, bool nomul);
+void P_Scr_Take(score_t score);
 void P_Lv_GiveEXP(i32 amt);
 stkcall cstr P_Discrim(i32 pclass);
 stkcall i32 P_Color(i32 pclass);
 void P_Dat_PTickPst(void);
 script void P_Scr_Payout(void);
-void P_Log_SellWeapon(struct weaponinfo const *info, i96 score);
+void P_Log_SellWeapon(struct weaponinfo const *info, score_t score);
 void P_Log_Weapon(struct weaponinfo const *info);
 
 script void P_Wep_PTickPre(void);
@@ -193,9 +193,9 @@ enum {
 /* Data that needs to be kept track of between frames. */
 struct player_delta {
    /* Status */
-   k32 alpha;
-   i96 score;
-   i32 maxhealth;
+   k32     alpha;
+   score_t score;
+   i32     maxhealth;
 
    struct dlg_start_info dlg;
 
@@ -303,9 +303,9 @@ struct player {
    bool hudenabled;
 
    /* Score */
-   i96 scoreaccum;
-   i32 scoreaccumtime;
-   k64 scoremul;
+   score_t scoreaccum;
+   i32     scoreaccumtime;
+   i32     scoremul;
 
    /* Misc */
    k32 rage;
@@ -359,8 +359,8 @@ struct player {
    i32 healthsum;
    i32 healthused;
 
-   i96 scoresum;
-   i96 scoreused;
+   score_t scoresum;
+   score_t scoreused;
 
    i32 unitstravelled;
 

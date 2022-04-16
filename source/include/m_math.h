@@ -41,6 +41,28 @@ extern union ik64 ik64;
 #define pi4 (pi / 4.0lk)
 #define tau (pi * 2.0lk)
 
+struct interp_data_i {
+   i32 value;
+   i32 value_old;
+   i32 value_start;
+   i32 value_display;
+
+   i32 timer;
+   i32 timer_max;
+   i32 timer_max_cap;
+};
+
+struct interp_data_li {
+   i64 value;
+   i64 value_old;
+   i64 value_start;
+   i64 value_display;
+
+   i64 timer;
+   i64 timer_max;
+   i64 timer_max_cap;
+};
+
 struct interp_data_lli {
    i96 value;
    i96 value_old;
@@ -81,6 +103,10 @@ stkcall k32 ease_in_out_back(k32 x);
 stkcall k32 ease_out_cubic(k32 x);
 stkcall k32 lerpk(k32 a, k32 b, k32 t);
 stkcall k64 lerplk(k64 a, k64 b, k64 t);
+void lerpi(struct interp_data_i *data);
+void lerpi_init(struct interp_data_i *data, i32 value, i32 timer);
+void lerpli(struct interp_data_li *data);
+void lerpli_init(struct interp_data_li *data, i64 value, i64 timer);
 void lerplli(struct interp_data_lli *data);
 void lerplli_init(struct interp_data_lli *data, i96 value, i96 timer);
 stkcall bool aabb_aabb(i32 x1, i32 y1, i32 w1, i32 h1, i32 x2, i32 y2, i32 w2, i32 h2);

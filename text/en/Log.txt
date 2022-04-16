@@ -146,9 +146,7 @@
 == \#LOG_StartGame | Press "%jS" to open the menu.
 == \#LOG_MailRecv  | Mail received from <\cj%s\c->.
 
-== \#LOG_SellOrder | 0
-== \#LOG_Sell | Sold the %S for %lli\cnscr\c-.
-== \#LOG_CBI  | Installed %S.
+== \#LOG_CBI | Installed %S.
 
 == \#LOG_ActiveArmor | Activating Armor->%s()
 

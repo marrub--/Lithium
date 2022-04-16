@@ -117,9 +117,9 @@ struct upgr_data_HeadsUpDisp {
    i32 cr;
 
    /* informant */
-   struct interp_data_lli score;
-   struct interp_data_lli health;
-   struct interp_data_lli overdrive;
+   struct interp_data_scr score;
+   struct interp_data_scr health;
+   struct interp_data_scr overdrive;
 };
 
 struct upgr_data {
@@ -145,7 +145,7 @@ struct upgrade {
    i32 perf;
    i32 group;
    i32 requires;
-   k32 scoreadd;
+   i32 scoreadd;
 
    i32 key;
 

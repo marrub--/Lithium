@@ -60,7 +60,7 @@ static
 void PickupScore(i32 parm) {
    struct weaponinfo const *info = &weaponinfo[parm];
 
-   i96 score = 4000 * info->slot;
+   score_t score = 4000 * info->slot;
 
    GiveWeaponItem(parm, info->slot);
    score = P_Scr_Give(GetX(0), GetY(0), GetZ(0), score, false);

@@ -241,7 +241,7 @@ bool chtf_give_exp_to(cheat_params_t const params) {
 script static
 bool chtf_give_score(cheat_params_t const params) {
    pl.setActivator();
-   P_Scr_GivePos(0, 0, INT96_MAX, true);
+   P_Scr_GivePos(0, 0, SCR_MAX, true);
    return true;
 }
 

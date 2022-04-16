@@ -79,10 +79,8 @@ void P_Log_Weapon(struct weaponinfo const *info) {
    }
 }
 
-void P_Log_SellWeapon(struct weaponinfo const *info, i96 score) {
+void P_Log_SellWeapon(struct weaponinfo const *info, score_t score) {
    i32 weapon = info->type;
-   bool ord = faststrtoi32_str(ns(lang(sl_log_sellorder))) == 0;
-
    str nam;
 
    if(CVarGetI(sc_player_sillypickups)) {
@@ -92,10 +90,8 @@ void P_Log_SellWeapon(struct weaponinfo const *info, i96 score) {
    }
    nam = ns(nam);
 
-   cstr msg = tmpstr(lang(sl_log_sell));
-
-   if(ord) pl.logB(1, msg, nam, score);
-   else    pl.logB(1, msg, score, nam);
+   /* FIXME */
+   pl.logB(1, "Sold the %S for %" FMT_SCR "\Cnscr\C-.", nam, score);
 }
 
 /* EOF */

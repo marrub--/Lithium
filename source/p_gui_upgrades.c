@@ -160,7 +160,7 @@ void GUIUpgradeRequirements(struct gui_state *g, struct upgrade *upgr) {
          op  = tmpstr(lang(sl_shop_mul_enable));
       }
 
-      i32 perc = fastabs(ceilk(100.0k * upgr->scoreadd));
+      i32 perc = fastabs(upgr->scoreadd);
       if(chk) {cr = 'a'; perc = 100 - perc;}
       else    {cr = 'n'; perc = 100 + perc;}
 

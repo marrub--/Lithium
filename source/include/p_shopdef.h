@@ -19,10 +19,10 @@ enum {
 };
 
 struct shopdef {
-   i32  shoptype;
-   cstr name;
-   cstr bipunlock;
-   i96  cost;
+   i32     shoptype;
+   cstr    name;
+   cstr    bipunlock;
+   score_t cost;
 };
 
 struct shopitem {

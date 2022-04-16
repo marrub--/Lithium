@@ -71,7 +71,7 @@ common_main do
             upg[:prf] = hupg[:pr]  || 0
             upg[:grp] = hupg[:grp] || 0
             upg[:req] = reqs.join "|"
-            upg[:mul] = mul / 100.0
+            upg[:mul] = mul
             upg[:flg] = flg
             upgrades.push upg
          end

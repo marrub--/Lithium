@@ -55,6 +55,42 @@
 #undef bezier_impl_retn
 #undef bezier_impl_type
 #undef bezier_impl_func
+#elif defined(int_lerp_impl_type)
+   /* code by Kate, originally for Doom RPG. */
+   if(data->value != data->value_old) {
+      data->value_start = data->value_display;
+      data->timer_max =
+         llabs(data->value - data->value_display) * data->timer_max_cap;
+      data->timer_max = mini(data->timer_max, data->timer_max_cap * 35);
+      data->timer = data->timer_max - 1;
+   }
+
+   if(data->timer > 0) {
+      int_lerp_impl_type timer_max2 = data->timer_max * data->timer_max;
+      int_lerp_impl_type timer2     = data->timer     * data->timer;
+
+      int_lerp_impl_type perc = timer_max2 - timer2;
+
+      data->value_display =
+         data->value_start + ((data->value - data->value_start) * perc /
+                              timer_max2);
+
+      data->timer--;
+   } else {
+      data->value_display = data->value;
+   }
+
+   data->value_old = data->value;
+#undef int_lerp_impl_type
+#elif defined(int_lerp_init_impl)
+   data->value         = value;
+   data->value_old     = value;
+   data->value_start   = value;
+   data->value_display = value;
+   data->timer         = 0;
+   data->timer_max     = 0;
+   data->timer_max_cap = 2;
+#undef int_lerp_init_impl
 #else
 #include "common.h"
 
@@ -277,42 +313,34 @@ k64 lerplk(k64 a, k64 b, k64 t) {
    return (1.0lk - t) * a + t * b;
 }
 
-/* code by Kate, originally for Doom RPG. */
+void lerpi(struct interp_data_i *data) {
+   #define int_lerp_impl_type i32
+   #include "m_math.c"
+}
+
+void lerpi_init(struct interp_data_i *data, i32 value, i32 timer) {
+   #define int_lerp_init_impl
+   #include "m_math.c"
+}
+
+void lerpli(struct interp_data_li *data) {
+   #define int_lerp_impl_type i64
+   #include "m_math.c"
+}
+
+void lerpli_init(struct interp_data_li *data, i64 value, i64 timer) {
+   #define int_lerp_init_impl
+   #include "m_math.c"
+}
+
 void lerplli(struct interp_data_lli *data) {
-   if(data->value != data->value_old) {
-      data->value_start = data->value_display;
-      data->timer_max =
-         llabs(data->value - data->value_display) * data->timer_max_cap;
-      data->timer_max = mini(data->timer_max, data->timer_max_cap * 35);
-      data->timer = data->timer_max - 1;
-   }
-
-   if(data->timer > 0) {
-      i96 timer_max2 = data->timer_max * data->timer_max;
-      i96 timer2     = data->timer     * data->timer;
-
-      i96 perc = timer_max2 - timer2;
-
-      data->value_display =
-         data->value_start + ((data->value - data->value_start) * perc /
-                              timer_max2);
-
-      data->timer--;
-   } else {
-      data->value_display = data->value;
-   }
-
-   data->value_old = data->value;
+   #define int_lerp_impl_type i96
+   #include "m_math.c"
 }
 
 void lerplli_init(struct interp_data_lli *data, i96 value, i96 timer) {
-   data->value         = value;
-   data->value_old     = value;
-   data->value_start   = value;
-   data->value_display = value;
-   data->timer         = 0;
-   data->timer_max     = 0;
-   data->timer_max_cap = 2;
+   #define int_lerp_init_impl
+   #include "m_math.c"
 }
 
 alloc_aut(0) stkcall

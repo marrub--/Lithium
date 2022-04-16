@@ -49,11 +49,11 @@ script funcdef void (*item_destroy_t)(struct item *item);
 script funcdef void (*item_place_t  )(struct item *item, struct container *cont);
 
 struct itemdata {
-   str name, spr;
-   i32 w, h;
-   i32 equip;
-   i96 scr;
-   i32 flags;
+   str     name, spr;
+   i32     w, h;
+   i32     equip;
+   score_t scr;
+   i32     flags;
 
    item_use_t     Use;
    item_tick_t    Tick;

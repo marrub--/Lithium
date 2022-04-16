@@ -546,8 +546,6 @@ sl_:
    - log_levelup:         LOG_LevelUp
    - log_mailrecv:        LOG_MailRecv
    - log_nodeliver:       LOG_NoDeliver
-   - log_sell:            LOG_Sell
-   - log_sellorder:       LOG_SellOrder
    - log_startgame:       LOG_StartGame
    - log_version:         LOG_Version
    - mail_template:       MAIL_TEMPLATE
