@@ -72,7 +72,11 @@ void lith_incrementWindup() {
 }
 
 bool lith_isMinigunFiring() {
-   return owner.player.buttons & (BT_ATTACK|BT_RELOAD);
+   return !owner.player.isTotallyFrozen() && owner.player.buttons & (BT_ATTACK|BT_RELOAD);
+}
+
+bool lith_isMinigunHeld() {
+   return !owner.player.isTotallyFrozen() && owner.player.buttons & BT_ATTACK;
 }
 
 action(Weapon) state Lith_A_MinigunReady(statelabel lb, statelabel l) {
@@ -88,7 +92,7 @@ action(Weapon) state Lith_A_MinigunReady(statelabel lb, statelabel l) {
    state st = Lith_A_Ready(flags);
    if(st) return st;
 
-   if(player.buttons & BT_ATTACK)
+   if(invoker.lith_isMinigunHeld())
    {
       if(!invoker.lith_noAmmo())
          return ResolveState(l);
