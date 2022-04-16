@@ -6,25 +6,9 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-@@ LITHEND_SpiderDemon_Lane
-The massive spider demon explodes into a million bits as your body is
-once again shuttled through dimensions of space-time.
+@@ LITHEND_Normal
+You exit this plane of Hell and prepare for the next.
 
-As you travel to the next plane, your mind feels like it too is being
-spread infinitely. You think of a hundred things at once.
-
-A lot of them are starting to seem like sad thoughts.
-
-Why did you get chosen?
-
-Is there really a threat, or am I just fighting such a long and
-horrendeous war against nothing?
-
-Did any of the demons really exaggerate?
-
-These thoughts all seem to fly away as you are returned to the
-corporeal world.
-
-You seem to be on some kind of twisted version of Earth...
+Some day this will all be over.
 
 ## EOF

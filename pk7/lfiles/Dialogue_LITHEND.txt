@@ -13,13 +13,9 @@ lipu_ilo_nimi {
 lipu_ilo endings {
    lipu_nimi {
       normal,
-      barons,
-      cyberdemon,
-      spiderdemon,
       ios,
       time_out,
       division,
-      other,
       common,
       music_subr,
    }
@@ -42,131 +38,73 @@ lipu_ilo endings {
    }
 
    lipu normal {
-      jsr lipu music_subr;
-      seme poki pM {
-         image ":End:Lane:Normal";
-         fade_in 50;
-         crawl Normal_Lane 400;
-      } ante seme poki pC {
-         image ":End:Jem:Normal";
-         fade_in 50;
-         crawl Normal_Jem 400;
-      }
-      lipu common;
-   }
-
-   lipu barons {
-      jsr lipu music_subr;
-      seme poki pM {
-         image ":End:Lane:Barons";
-         fade_in 50;
-         crawl Barons_Lane 400;
-      } ante seme poki pC {
-         image ":End:Jem:Barons";
-         fade_in 50;
-         crawl Barons_Jem 400;
-      }
-      lipu common;
-   }
-
-   lipu cyberdemon {
-      jsr lipu music_subr;
-      seme poki pM {
-         image ":End:Lane:CyberDemon";
-         fade_in 50;
-         crawl CyberDemon_Lane 400;
-      } ante seme poki pC {
-         image ":End:Jem:CyberDemon";
-         fade_in 50;
-         crawl CyberDemon_Jem 400;
-      }
-      lipu common;
-   }
-
-   lipu spiderdemon {
-      jsr lipu music_subr;
-      seme poki pM {
-         image ":End:Lane:SpiderDemon";
-         fade_in 50;
-         crawl SpiderDemon_Lane 400;
-      } ante seme poki pC {
-         image ":End:Jem:SpiderDemon";
-         fade_in 50;
-         crawl SpiderDemon_Jem 400;
-      }
-      lipu common;
+      jsr     lipu music_subr;
+      image   ":End:Normal";
+      fade_in 50;
+      crawl   Normal 400;
+      lipu    common;
    }
 
    lipu ios {
       jsr lipu music_subr;
       seme poki pM {
-         image ":End:Lane:IconOfSin";
+         image   ":End:Lane";
          fade_in 50;
-         crawl IconOfSin_1_Lane 900;
-         crawl IconOfSin_2_Lane 700;
-         crawl IconOfSin_3_Lane 700;
-         crawl IconOfSin_4_Lane 700;
-         crawl IconOfSin_5_Lane 700;
-         crawl IconOfSin_6_Lane 700;
-         crawl IconOfSin_7_Lane 400;
+         crawl   IconOfSin_1_Lane 900;
+         crawl   IconOfSin_2_Lane 700;
+         crawl   IconOfSin_3_Lane 700;
+         crawl   IconOfSin_4_Lane 700;
+         crawl   IconOfSin_5_Lane 700;
+         crawl   IconOfSin_6_Lane 700;
+         crawl   IconOfSin_7_Lane 400;
       } ante seme poki pC {
-         image ":End:Jem:IconOfSin";
+         image   ":End:Jem";
          fade_in 50;
-         crawl IconOfSin_1_Jem 600;
-         crawl IconOfSin_2_Jem 600;
-         crawl IconOfSin_3_Jem 600;
-         crawl IconOfSin_4_Jem 600;
-         crawl IconOfSin_5_Jem 600;
-         crawl IconOfSin_6_Jem 600;
-         crawl IconOfSin_7_Jem 600;
-         crawl IconOfSin_8_Jem 600;
-         crawl IconOfSin_9_Jem 400;
+         crawl   IconOfSin_1_Jem 600;
+         crawl   IconOfSin_2_Jem 600;
+         crawl   IconOfSin_3_Jem 600;
+         crawl   IconOfSin_4_Jem 600;
+         crawl   IconOfSin_5_Jem 600;
+         crawl   IconOfSin_6_Jem 600;
+         crawl   IconOfSin_7_Jem 600;
+         crawl   IconOfSin_8_Jem 600;
+         crawl   IconOfSin_9_Jem 400;
+      } ante seme poki pD {
+         image   ":End:Ari";
+         fade_in 50;
+         crawl   IconOfSin_1_Ari 600;
       }
       lipu common;
    }
 
    lipu time_out {
-      music "lmusic/asdfn2.ogg";
-      image "HELP";
+      music   "lmusic/asdfn2.ogg";
+      image   "HELP";
       fade_in 10;
-      crawl TimeOut_1 900;
-      lipu common;
+      crawl   TimeOut_1 900;
+      lipu    common;
    }
 
    lipu division {
-      music "lmusic/siarani.ogg";
+      music   "lmusic/siarani.ogg";
       fade_in 10;
-      crawl DivisionSigil 900;
-      lipu common;
-   }
-
-   lipu other {
-      jsr lipu music_subr;
-      seme poki pM {
-         image ":End:Lane:Other";
-         fade_in 50;
-         crawl Other_Lane 400;
-      } ante seme poki pC {
-         image ":End:Jem:Other";
-         fade_in 50;
-         crawl Other_Jem 400;
-      }
-      lipu common;
+      crawl   DivisionSigil 900;
+      lipu    common;
    }
 
    lipu common {
       fade_out 100;
-      image "TITLEPIC";
-      music "lmusic/crucifying.opus";
-      fade_in 70;
-      crawl Credits 400;
+      image    "TITLEPIC";
+      music    "lmusic/crucifying.opus";
+      fade_in  70;
+      crawl    Credits 400;
       fade_out 70;
-      image "";
-      wait 50;
-      crawl Dedication 100; wait 100; fade_out 150; wait 15;
-      crawl Finished   20;  wait 70;  fade_out 20;
+      image    "";
+      wait     50;
+      crawl    Dedication 100; wait 100; fade_out 150; wait 15;
+      crawl    Finished   20;  wait 70;  fade_out 20;
       mus_fade 300;
-      ldv #0;
+      ldv      #0;
    }
 }
 

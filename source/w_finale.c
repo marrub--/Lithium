@@ -36,17 +36,17 @@ void Z_Finale(void) {
    i32 boss = ServCallI(sm_GetBossLevel);
    i32 which;
 
-   if(GetFun() & lfun_division) {
-      which = _finale_division;
-   } else {
-      switch(boss) {
-      case boss_none:        which = _finale_normal;      break;
-      case boss_barons:      which = _finale_barons;      break;
-      case boss_cyberdemon:  which = _finale_cyberdemon;  break;
-      case boss_spiderdemon: which = _finale_spiderdemon; break;
-      case boss_iconofsin:   which = _finale_icon_of_sin; break;
-      case boss_other:       which = _finale_other;       break;
+   switch(boss) {
+   default:
+      which = _finale_normal;
+      break;
+   case boss_iconofsin:
+      if(GetFun() & lfun_division) {
+         which = _finale_division;
+      } else {
+         which = _finale_icon_of_sin;
       }
+      break;
    }
 
    F_Start(which);

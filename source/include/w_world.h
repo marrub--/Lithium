@@ -201,13 +201,9 @@ enum mission_status {
 
 enum finale_num {
    _finale_normal,
-   _finale_barons,
-   _finale_cyberdemon,
-   _finale_spiderdemon,
    _finale_icon_of_sin,
    _finale_time_out,
    _finale_division,
-   _finale_other,
 };
 
 enum map_kind {

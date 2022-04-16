@@ -6,25 +6,20 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-!!include End/Division.txt
-
 !!include End/Credits.txt
 !!include End/Dedication.txt
 
+!!include End/Division.txt
+!!include End/Normal.txt
 !!include End/TimeOut.txt
 
-!!include End/Lane/Barons.txt
-!!include End/Lane/CyberDemon.txt
 !!include End/Lane/Dialogue.txt
 !!include End/Lane/IconOfSin.txt
-!!include End/Lane/Normal.txt
-!!include End/Lane/SpiderDemon.txt
 
-!!include End/Jem/Barons.txt
-!!include End/Jem/CyberDemon.txt
 !!include End/Jem/Dialogue.txt
 !!include End/Jem/IconOfSin.txt
-!!include End/Jem/Normal.txt
-!!include End/Jem/SpiderDemon.txt
+
+!!include End/Ari/Dialogue.txt
+!!include End/Ari/IconOfSin.txt
 
 ## EOF

@@ -6,19 +6,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-@@ LITHEND_CyberDemon_Lane
-What the demon said to you still rings in your ears, as the tower
-collapses around you. You feel like you've been falling forever at
-this point, and have no idea when it will end.
-
-Could one with a mission so important really be misunderstood so
-badly? Did it merely mistake you for some kind of hybrid?
-
-Was it right?
-
-All of these thoughts vanish instantly as you hit the ground harder
-than two planets colliding. Somehow you haven't died.
-
-You get ready for the next wave.
+%% LITHEND_IconOfSin_1_Ari
+\cg - This story is a work in progress -
 
 ## EOF

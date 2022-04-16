@@ -250,13 +250,9 @@ bool chtf_end_game(cheat_params_t const params) {
    i32 which;
    switch(params[0]) {
    case 'n': which = _finale_normal;      break;
-   case 'b': which = _finale_barons;      break;
-   case 'c': which = _finale_cyberdemon;  break;
-   case 's': which = _finale_spiderdemon; break;
    case 'i': which = _finale_icon_of_sin; break;
    case 't': which = _finale_time_out;    break;
    case 'd': which = _finale_division;    break;
-   case 'o': which = _finale_other;       break;
    default:
       return false;
    }
