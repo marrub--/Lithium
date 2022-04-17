@@ -204,6 +204,6 @@ extern i32 dbgstatnum, dbgnotenum;
 #define dbgflags(flags) false
 #define dbglevel_any()  false
 #define dbgflags_any()  false
-#end
+#endif
 
 #endif

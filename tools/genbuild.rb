@@ -195,7 +195,14 @@ end
    fp: open("build.ninja", "wb"),
 })
 
-@cfg = {}
+@cfg = {
+   lib_path: ENV["LIB_PATH"],
+   all_arg:  ENV["ALL_ARG"],
+   mk_arg:   ENV["MK_ARG"],
+   cc_arg:   ENV["CC_ARG"],
+   cpp_arg:  ENV["CPP_ARG"],
+   ld_arg:   ENV["LD_ARG"],
+}
 req_file(".build-cfg.rb") do end
 
 INC_PATH = "--include #{hdr ""} "
