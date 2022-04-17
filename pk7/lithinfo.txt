@@ -40,6 +40,7 @@
    cl: gA tag: AllMap;
    cl: pM tag: BackpackLane;
    cl: pC tag: BackpackJem;
+   cl: pD tag: BackpackAri;
    cl: gA tag: Berserk  unl: "JAQTen";
    cl: gA tag: Infrared unl: "SYM43";
    cl: gA tag: RadSuit  unl: "SYM43";

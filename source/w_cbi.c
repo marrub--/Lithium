@@ -42,9 +42,9 @@ struct cupgdef {
    [pcl_darklord_b] = {
       {cupg_d_motra,     "DMotra",     "Motra"    },
       {cupg_d_zaruk,     "DZaruk",     "Zaruk"    },
+      {cupg_d_shield,    "DShield",    "Shield"   },
       {cupg_d_zakwu,     "DZakwu",     "Zakwu"    },
       {cupg_d_zikr,      "DZikr",      "Zikr"     },
-      {cupg_d_shield,    "DShield",    "Shield"   },
       {cupg_d_dimdriver, "DDimDriver", "DimDriver"},
    },
 };

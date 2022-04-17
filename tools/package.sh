@@ -12,16 +12,18 @@
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
 if [ $RELEASE ]
-   CC_FLAGS=$CC_FLAGS -DRELEASE
+then
+   CC_FLAGS="$CC_FLAGS -DRELEASE"
 fi
 
 if [ ! $DEBUG ]
-   CC_FLAGS=$CC_FLAGS -DNDEBUG
+then
+   CC_FLAGS="$CC_FLAGS -DNDEBUG"
 fi
 
 (rm -rf master Lithium.pk3 &&
 
- env CC_FLAGS=$CC_FLAGS tools/genbuild.rb &&
+ env "CC_FLAGS=$CC_FLAGS" tools/genbuild.rb &&
  ninja -t clean &&
  ninja &&
 
@@ -33,7 +35,7 @@ fi
  cp -r --archive ../tools    ltools &&
  cp -r --archive ../licenses licenses &&
  cp    --archive ../credits.txt . &&
- cp    --archive ../bin/lithmain_ld.txt . &&
+ cp    --archive ../bin/lithmain_ld.txt.ir . &&
  zip -r ../Lithium.pk3 ./* \
      -x '*.gitignore' '*.bat' '*.dbs' '*.wad.b*' '*.swp') 2>&1 > /tmp/lbuild
 
