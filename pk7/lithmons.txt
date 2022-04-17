@@ -176,6 +176,7 @@ presets {
    pre: SpiderDemon   type: mastermind    filter: "SpiderMastermind";
    pre: CyberDemon    type: cyberdemon    filter: "Cyberdemon";
    pre: CyberDemon    type: cyberdemon    filter: "CyberDemon";
+   pre: ZombieMan     type: zombie        filter: "WolfensteinSS";
 
    /* Chex Quest */
    pre: Imp         type: imp        filter: "FlemoidusBipedicus";

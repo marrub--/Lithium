@@ -550,6 +550,27 @@ private ui void drawNearbyItems(RenderEvent evt) {
 private transient ui textureId m_texBatteryOutline;
 private transient ui textureId m_texBattery;
 
+private clearScope int, int ammoAmt(Actor mo, class<Lith_Ammo> ty) const {
+   let inv = mo.findInventory(ty);
+   int amt = inv.amount;
+   int max = inv.maxAmount;
+   int clr;
+   if(amt == max) {
+      clr = CH_L_N;
+   } else if(amt > max - max / 4) {
+      clr = CH_L_D;
+   } else if(amt > max / 2) {
+      clr = CH_L_F;
+   } else if(amt > max / 4) {
+      clr = CH_L_I;
+   } else if(amt != 0) {
+      clr = CH_L_G;
+   } else {
+      clr = CH_L_M;
+   }
+   return amt, clr;
+}
+
 private ui void drawInventory(RenderEvent evt) {
    static const string keyClasses[] = {
       "BlueCard",  "RedCard",  "YellowCard",
@@ -581,12 +602,19 @@ private ui void drawInventory(RenderEvent evt) {
    string inv_text = "";
    int y = 0;
 
-   inv_text.appendFormat(" %i\n %i\n %i\n %i\n %i\n",
-                         mo.countInv("Lith_BulletAmmo"),
-                         mo.countInv("Lith_ShellAmmo"),
-                         mo.countInv("Lith_RocketAmmo"),
-                         mo.countInv("Lith_PlasmaAmmo"),
-                         mo.countInv("Lith_CannonAmmo"));
+   int blt, cblt; [blt, cblt] = ammoAmt(mo, 'Lith_BulletAmmo');
+   int shl, cshl; [shl, cshl] = ammoAmt(mo, 'Lith_ShellAmmo');
+   int rkt, crkt; [rkt, crkt] = ammoAmt(mo, 'Lith_RocketAmmo');
+   int nrg, cnrg; [nrg, cnrg] = ammoAmt(mo, 'Lith_PlasmaAmmo');
+   int drk, cdrk; [drk, cdrk] = ammoAmt(mo, 'Lith_CannonAmmo');
+
+   inv_text.appendFormat(
+      " \c%c%i\c-\n \c%c%i\c-\n \c%c%i\c-\n \c%c%i\c-\n \c%c%i\c-\n",
+      cblt, blt,
+      cshl, shl,
+      crkt, rkt,
+      cnrg, nrg,
+      cdrk, drk);
    y += 5 * 8;
 
    bool any_key = false;
