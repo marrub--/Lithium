@@ -146,7 +146,9 @@ override void tick() {
 }
 
 override void onDestroy() {
-   doneCb();
+   if(plyr) {
+      doneCb();
+   }
 }
 
 virtual void initCb() {}

@@ -6,10 +6,8 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_BarrierFX : Actor
-{
-   default
-   {
+class Lith_BarrierFX : Actor {
+   default {
       RenderStyle "Add";
       Scale 0.3;
 
@@ -17,8 +15,7 @@ class Lith_BarrierFX : Actor
       +NOINTERACTION
    }
 
-   states
-   {
+   states {
    Spawn:
       TNT1 A 0;
       LBAR A 10 A_StartSound("player/barrier", lch_body, CHANF_NOPAUSE|CHANF_LISTENERZ);
@@ -27,18 +24,15 @@ class Lith_BarrierFX : Actor
    }
 }
 
-class Lith_HasBarrier : Powerup
-{
-   default
-   {
-      Powerup.Duration -30;
+class Lith_HasBarrier : Powerup {
+   default {
+      Powerup.Duration -0x7FFFFFFD;
       Powerup.Color "C3 DF E8", 0.1;
+      +Inventory.HubPower
    }
 
-   override void Tick()
-   {
-      if(!isFrozen())
-      {
+   override void Tick() {
+      if(!isFrozen()) {
          Actor th;
          for(let it = ThinkerIterator.Create("Actor"); (th = Actor(it.Next()));)
             if(th.bMISSILE && th.Target && th.Target.bCOUNTKILL && !th.IsZeroDamage() &&
@@ -53,10 +47,19 @@ class Lith_HasBarrier : Powerup
    }
 }
 
+class Lith_BarrierStat : Lith_StatFx {
+   override void initCb() {
+      basic("BAR", 2100);
+      plyr.giveInventory("Lith_HasBarrier", 1);
+   }
+   override void doneCb() {
+      plyr.takeInventory("Lith_HasBarrier", 1);
+   }
+}
+
 class Lith_BlurSphere : Inventory;
 
-default
-{
+default {
    Tag "$LITH_TAG_BlurSphere";
    Inventory.PickupMessage "";
    Inventory.PickupSound "player/pickup/barrier";
@@ -70,15 +73,13 @@ default
 override bool tryPickup(in out Actor mo) {
    Lith_HERMES.Log(msg_item, 5, "_BlurSphere");
    Lith_HERMES.UnlockBip(mo, "Fragma");
-   mo.TakeInventory("Lith_HasBarrier", 1);
-   mo.GiveInventory("Lith_HasBarrier", 1);
+   Lith_StatFx.addToPool(Lith_Player(mo), "Lith_BarrierStat");
    callAcs("Lith_ItemPopupTag");
    goAwayAndDie();
    return true;
 }
 
-states
-{
+states {
 Spawn:
    TNT1 A 0;
    TNT1 A 0 A_SpawnItemEx("Lith_BlurSphereSprite", flags: SXF_SETMASTER);
