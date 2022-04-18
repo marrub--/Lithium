@@ -52,6 +52,8 @@ enum Lith_Channel {
    lch_weather1,
    lch_weather2,
    lch_depth,
+
+   lch_ambient,
 };
 
 enum Lith_DrawFlags {

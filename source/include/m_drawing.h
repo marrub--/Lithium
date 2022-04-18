@@ -126,7 +126,7 @@ GlobalCrH(wselm1) GlobalCrH(wselm2) GlobalCrH(wselm3) GlobalCrH(wselms)
    DrawCallV(sm_StartSound, __VA_ARGS__)
 
 #define AmbientSound(snd, vol) \
-   StartSound(snd, lch_auto, 0, vol, ATTN_STATIC)
+   StartSound(snd, lch_ambient, CHANF_LOCAL|CHANF_UI, vol, ATTN_STATIC)
 
 #define EndDrawing() \
    DrawCallV(sm_LE)
@@ -219,6 +219,8 @@ enum ZscName(Channel) {
    lch_weather1,
    lch_weather2,
    lch_depth,
+
+   lch_ambient,
 };
 
 enum ZscName(DrawFlags) {

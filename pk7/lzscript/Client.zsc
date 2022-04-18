@@ -28,9 +28,9 @@ static clearscope Lith_URANUS Instance()
    {return Lith_URANUS(Find("Lith_URANUS"));}
 
 static clearscope void StartSound(Actor mo, sound snd, int slot, int flags, double volume = 1.0, double attenuation = 1.0, double pitch = 1.0) {
-   if(!mo) {
-      S_StartSound(snd, slot, flags, volume, attenuation, pitch);
-   } else {
+   if(slot == lch_ambient) {
+      S_StartSound(snd, lch_auto, flags, volume, attenuation, pitch);
+   } else if(mo) {
       mo.A_StartSound(snd, slot, flags, volume, attenuation, pitch);
    }
 }
