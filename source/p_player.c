@@ -645,7 +645,6 @@ static void P_Spe_pTick(void) {
          _l("regenwaitmax: "), _p(pl.regenwaitmax), _c('\n')
       );
 
-      pl.shieldmax = 45;
       if(pl.shield == 0 && pl.oldshield != 0) {
          StartSound(ss_player_ari_shield_break, lch_shield, CHANF_MAYBE_LOCAL|CHANF_UI, 1.0, ATTN_STATIC);
          pl.regenwaitmax = 665;

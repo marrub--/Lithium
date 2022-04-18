@@ -34,8 +34,8 @@ class Lith_ShrapnelProjectile : Actor {
       TNT1 A 0;
       SBRK ABCDEFGHIJKLMN 0 lith_a_jumpScale(0.26);
       BLLT I 0 lith_a_jumpScale(1.0);
-      SCRP D 0 lith_a_jumpScale(0.4);
-      SCRP E 0 lith_a_jumpScale(0.3);
+      SHCA D 0 lith_a_jumpScale(0.4);
+      SHCA E 0 lith_a_jumpScale(0.3);
    Spawn2:
       #### # 1 A_SpawnItemEx("Lith_CasingSmoke", 0,0,3, frandom(-0.2,0),frandom(-0.2,0));
       loop;
@@ -71,40 +71,40 @@ action(Weapon) void Lith_A_FireShrapnel() {
 
 states(Weapon) {
 Ready:
-   SCRP A 1 Lith_A_Ready;
+   SHCA A 1 Lith_A_Ready;
    loop;
 
 Deselect:
-   SCRP A 1 Lith_A_Lower(_raise_fast);
+   SHCA A 1 Lith_A_Lower(_raise_fast);
    loop;
 
 Select:
-   SCRP A 1 Lith_A_Raise(_raise_fast);
+   SHCA A 1 Lith_A_Raise(_raise_fast);
    loop;
 
 Fire:
    #### # 0 lith_jumpNoAmmo;
    #### # 0 lith_a_setInterpolation(true);
-   SCRP A 1;
-   SCRP A 1 offset(2, 33);
-   SCRP C 1 offset(164, 109) Lith_A_FireShrapnel();
-   SCRP B 1 offset(173, 117);
-   SCRP B 1 offset(180, 121);
-   SCRP B 1 offset(183, 123);
-   SCRP B 1 offset(178, 120);
-   SCRP B 1 offset(169, 114);
-   SCRP C 1 offset(165, 108);
-   SCRP C 1 offset(152, 104);
+   SHCA A 1;
+   SHCA A 1 offset(2, 33);
+   SHCA C 1 offset(164, 109) Lith_A_FireShrapnel();
+   SHCA B 1 offset(173, 117);
+   SHCA B 1 offset(180, 121);
+   SHCA B 1 offset(183, 123);
+   SHCA B 1 offset(178, 120);
+   SHCA B 1 offset(169, 114);
+   SHCA C 1 offset(165, 108);
+   SHCA C 1 offset(152, 104);
    #### # 0 lith_a_setInterpolation(false);
-   SCRP A 1 offset(1, 32);
+   SHCA A 1 offset(1, 32);
    goto ReadySelector;
 FireEmpty:
-   SCRP A 2 offset(3, 38);
-   SCRP A 1 offset(7, 40);
-   SCRP A 1 offset(5, 37) A_StartSound("weapons/spas/empty", lch_dryweapon);
-   SCRP A 1 offset(4, 34);
-   SCRP A 1 offset(2, 33);
-   SCRP A 5 offset(1, 32);
+   SHCA A 2 offset(3, 38);
+   SHCA A 1 offset(7, 40);
+   SHCA A 1 offset(5, 37) A_StartSound("weapons/spas/empty", lch_dryweapon);
+   SHCA A 1 offset(4, 34);
+   SHCA A 1 offset(2, 33);
+   SHCA A 5 offset(1, 32);
    goto ReadySelector;
 }
 
