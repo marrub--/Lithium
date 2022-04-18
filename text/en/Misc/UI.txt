@@ -85,11 +85,11 @@
 == \#OFF | Off
 
 %% \#SKIP_INTRO_1
-: Skip intro
+ Hold: Skip intro
 It will not show up again.
 
 %% \#SKIP_INTRO_2
-: Continue to next page
+ Hold: Continue to next page
 
 %% \#BAD_TIMELINE
 This timeline is

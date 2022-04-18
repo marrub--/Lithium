@@ -2021,8 +2021,8 @@
 "LITH_STATUS_LEVELUP" = "Divide %i points among your attributes.";
 "LITH_ON" = "On";
 "LITH_OFF" = "Off";
-"LITH_SKIP_INTRO_1" = ": Skip intro\nIt will not show up again.";
-"LITH_SKIP_INTRO_2" = ": Continue to next page";
+"LITH_SKIP_INTRO_1" = "Hold: Skip intro\nIt will not show up again.";
+"LITH_SKIP_INTRO_2" = "Hold: Continue to next page";
 "LITH_BAD_TIMELINE" = "This timeline is\n\n\n           irreparable,\n\n and cannot continue.\n\nYou must start\n\n\cganew.";
 "LITH_BEGIN" = "[Press any key to begin]";
 "LITH_BIP_AVAILABLE" = "%i/%i AVAILABLE";

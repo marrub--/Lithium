@@ -39,7 +39,7 @@ listMenu "MainMenuTextOnly" {
 
 listMenu "PlayerclassMenu" {
    class              "Lith_PlayerclassMenu"
-   font               "lmidfont"
+   font               "ltrmfont"
    position           14, 55
    lith_playerDisplay 0, 0, "00 00 00", "00 FF 00"
 }

@@ -531,7 +531,7 @@ private ui void drawNearbyItems(RenderEvent evt) {
    Font fnt = fntSml();
    for(let it = BlockThingsIterator.create(evt.camera, 256.0); it.next();) {
       let mo = it.thing;
-      if(mo.bSpecial) {
+      if(Inventory(mo) && mo.bSpecial) {
          int px, py; bool seen;
          [px, py, seen] = project(mo.pos);
          if(seen) {
