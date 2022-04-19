@@ -11,7 +11,7 @@ class Lith_ShrapnelProjectile : Actor {
       BounceType "Doom";
       BounceSound "weapons/shrapnel/bounce";
       RipSound "weapons/shrapnel/hit";
-      DamageFunction (10);
+      DamageFunction (11);
       DamageType "Shrapnel";
       Gravity 0.5;
       Height 8;

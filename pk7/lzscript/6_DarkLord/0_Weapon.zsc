@@ -8,7 +8,7 @@
 
 class Lith_SubAxe : Actor {
    default {
-      Damage 10;
+      Damage 30;
       DamageType "Magic";
       Speed 16;
 
@@ -89,8 +89,8 @@ class Lith_SubDart : Actor {
       loop;
    Death:
       DDAR A 35 {
-         if(tracer && tracer.health > 10 && m_dartTicks++ < 10) {
-            tracer.a_damageSelf(10, "Poison");
+         if(tracer && m_dartTicks++ < 10) {
+            tracer.a_damageSelf(30, "Poison");
          } else {
             destroy();
          }

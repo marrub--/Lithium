@@ -11,6 +11,7 @@ gameinfo {
    drawReadThis        = false
    intermissionCounter = true
    noRandomPlayerClass = true
+   gibFactor           = 0.5
 
    intermissionMusic = "lmusic/alchemis.it"
    precacheSounds    = "amb/rain", "amb/wind"
@@ -22,7 +23,7 @@ gameinfo {
                        "Lith_AssassinPlayer",  "Lith_DarkLordPlayer",
                        "Lith_ThothPlayer"
    statScreen_Single = "Lith_STATUS"
-   statusBarClass    = "Lith_StatusBar"
+   statusBarClass    = "Lith_STATUSBAR"
    messageBoxClass   = "Lith_MESSAGEBOX"
 
    quitMessages = "HACK HACK THIS IS A HACK WOW WHAT A HACK"

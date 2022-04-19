@@ -8,8 +8,7 @@
 
 class Lith_Minigun : Lith_DWeapon;
 
-default
-{
+default {
    Lith_Weapon.SpawnType "Lith_ChaingunPickup";
    Lith_Weapon.AmmoType "Lith_BulletAmmo";
    Tag "$LITH_INFO_SHORT_Minigun";
@@ -67,7 +66,7 @@ int Lith_WindupTime() {
 
 void lith_incrementWindup() {
    if(lith_isMinigunFiring()) {
-      m_windUp += 0.09;
+      m_windUp += 0.097;
    }
 }
 
@@ -92,19 +91,17 @@ action(Weapon) state Lith_A_MinigunReady(statelabel lb, statelabel l) {
    state st = Lith_A_Ready(flags);
    if(st) return st;
 
-   if(invoker.lith_isMinigunHeld())
-   {
-      if(!invoker.lith_noAmmo())
+   if(invoker.lith_isMinigunHeld()) {
+      if(!invoker.lith_noAmmo()) {
          return ResolveState(l);
-      else
-      {
+      } else {
          A_StartSound("weapons/minigun/empty", lch_dryweapon);
          A_OverlayOffset(_psp_weapon, FRandom(2, 3), FRandom(32, 34), WOF_INTERPOLATE);
          return null;
       }
-   }
-   else
+   } else {
       return null;
+   }
 }
 
 action(Weapon) state Lith_A_MinigunPostReady(statelabel l) {
@@ -119,10 +116,12 @@ action(Weapon) void Lith_A_MinigunFire() {
    A_GunFlash("DummyFlash");
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
    Lith_A_GunSmokeSmall(1.9);
-   Lith_FireBullets(7, 1.7, 2, 7, tracerX: 1);
+   for(int i = 0; i < 2; ++i) {
+      Lith_FireBullets(4, 1.7, 2, 7, tracerX: 1);
+      Lith_A_Casing("Lith_CasBigHot", 9, 7, 20, frandom(3,5), frandom(1,5), frandom(10,12));
+   }
    Lith_A_RecoilUp(0.15);
    A_Recoil(0.07);
-   Lith_A_Casing("Lith_CasBigHot", 9, 7, 20, frandom(3,5), frandom(1,5), frandom(10,12));
 }
 
 action(Weapon) void Lith_A_MinigunPostFire() {

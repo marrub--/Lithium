@@ -10,7 +10,7 @@ class Lith_Motra : Lith_DWeapon;
 
 default {
    Lith_Weapon.SpawnType "Lith_PistolPickup";
-   Lith_Weapon.MagSize 29;
+   Lith_Weapon.MagSize 43;
    Tag "$LITH_INFO_SHORT_Motra";
    Weapon.SlotNumber 4;
    Weapon.SlotPriority 0.9;
@@ -22,7 +22,7 @@ default {
 
 action(Weapon) void lith_fireMotra() {
    int accuracy = invoker.m_ads ? 0  : 3;
-   int damage   = invoker.m_ads ? 16 : 15;
+   int damage   = invoker.m_ads ? 20 : 18;
    Lith_A_RecoilUp(0.15);
    Lith_FireBullets(accuracy, accuracy, -1, damage, FBF_NORANDOM, puffType: "Lith_BulletPuffPainful", tracerX: 3);
    Lith_A_GunSmokeSmall(1, 6);

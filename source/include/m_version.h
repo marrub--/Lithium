@@ -39,6 +39,7 @@ VERSION(1, 6, 1, 0, "",   "Hyper-Trilithium")
 VERSION(1, 6, 2, 0, "",   "Trilithionite")
 VERSION(1, 6, 3, 0, "",   "Trilithionite Red")
 VERSION(1, 7, 0, 0, "b",  "Yttrium Oxide")
+VERSION(1, 7, 0, 1, "b2", "Yttrium Oxide")
 #undef VERSION
 #else
 #define VERSION(maj, min, pat, bui, bna, nam) \
@@ -47,9 +48,9 @@ VERSION(1, 7, 0, 0, "b",  "Yttrium Oxide")
    extern cstr verstr_##maj##_##min##_##pat##_##bui;
 #include "m_version.h"
 i32 version_name_to_num(cstr s);
-#define vernum vernum_1_7_0_0
-#define vernam vernam_1_7_0_0
-#define verstr verstr_1_7_0_0
+#define vernum vernum_1_7_0_1
+#define vernam vernam_1_7_0_1
+#define verstr verstr_1_7_0_1
 #endif
 
 /* EOF */

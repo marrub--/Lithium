@@ -14,6 +14,10 @@
 #include "p_player.h"
 #include "w_world.h"
 
+enum {
+   _scorethreshold_default = 1000000,
+};
+
 struct boss {
    char const name[16];
    i32  const phasenum;
@@ -23,34 +27,43 @@ struct boss {
 };
 
 enum {
-   diff_easy,
-   diff_medi,
-   diff_hard,
-   diff_any,
-   diff_max
+   _diff_easy,
+   _diff_medi,
+   _diff_hard,
+   _diff_any,
+   _diff_max
 };
 
 static struct boss bosses_easy[] = {
    {"James", 2},
+   /*{"Nesse", 1},*/
 };
 
 static struct boss bosses_medi[] = {
    {"Makarov", 3},
+   /*{"Lily", 3},*/
 };
 
 static struct boss bosses_hard[] = {
    {"Isaac", 3},
+   /*{"Drench", 3},*/
 };
 
 static struct boss *lmvar boss;
 
-static bool alldead[diff_max];
+static bool alldead[_diff_max];
 
 static i32 rewardnum, difficulty;
 
 static struct boss *lastboss;
 
-static score_t scorethreshold = 1000000;
+static score_t scorethreshold = _scorethreshold_default;
+
+static void set_next_score_threshold() {
+   static score_t mul = 17;
+   scorethreshold = _scorethreshold_default * mul / 10;
+   mul += 10;
+}
 
 static void SpawnBossReward(void) {
    k32 x = GetX(0);
@@ -113,12 +126,12 @@ static bool CheckDead(struct boss *b, i32 num) {
 script void SpawnBosses(score_t sum, bool force) {
    if(ml.islithmap || (!force && sum < scorethreshold)) return;
 
-   alldead[diff_easy] = CheckDead(bosses_easy, countof(bosses_easy));
-   alldead[diff_medi] = CheckDead(bosses_medi, countof(bosses_medi));
-   alldead[diff_hard] = CheckDead(bosses_hard, countof(bosses_hard));
+   alldead[_diff_easy] = CheckDead(bosses_easy, countof(bosses_easy));
+   alldead[_diff_medi] = CheckDead(bosses_medi, countof(bosses_medi));
+   alldead[_diff_hard] = CheckDead(bosses_hard, countof(bosses_hard));
 
    i32 diff =
-      difficulty == diff_any ? ACS_Random(diff_easy, diff_hard) : difficulty;
+      difficulty == _diff_any ? ACS_Random(_diff_easy, _diff_hard) : difficulty;
 
    if(alldead[diff]) {
       Dbg_Log(log_boss, _l("All bosses dead, returning"));
@@ -129,9 +142,9 @@ script void SpawnBosses(score_t sum, bool force) {
 
    if(!lastboss || lastboss->dead) {
       switch(diff) {
-      case diff_easy: do boss = &bosses_easy[ACS_Random(1, countof(bosses_easy)) - 1]; while(boss->dead); break;
-      case diff_medi: do boss = &bosses_medi[ACS_Random(1, countof(bosses_medi)) - 1]; while(boss->dead); break;
-      case diff_hard: do boss = &bosses_hard[ACS_Random(1, countof(bosses_hard)) - 1]; while(boss->dead); break;
+      case _diff_easy: do boss = &bosses_easy[ACS_Random(1, countof(bosses_easy)) - 1]; while(boss->dead); break;
+      case _diff_medi: do boss = &bosses_medi[ACS_Random(1, countof(bosses_medi)) - 1]; while(boss->dead); break;
+      case _diff_hard: do boss = &bosses_hard[ACS_Random(1, countof(bosses_hard)) - 1]; while(boss->dead); break;
       }
    } else {
       boss = lastboss;
@@ -175,7 +188,7 @@ void Z_PhantomDeath(void) {
       P_BIP_Unlock(P_BIP_NameToPage(tag), false);
       boss->dead = true;
 
-      if(difficulty != diff_any) difficulty++;
+      if(difficulty != _diff_any) difficulty++;
    } else {
       /* Escape */
       AmbientSound(ss_enemies_phantom_escape, 0.5k);
@@ -195,7 +208,7 @@ void Z_PhantomDeath(void) {
 
    wl.soulsfreed++;
 
-   scorethreshold = scorethreshold * 17 / 10;
+   set_next_score_threshold();
    Dbg_Note(_l("score threshold raised to "), _p(scorethreshold), _c('\n'));
 
    boss->phase++;
@@ -224,7 +237,7 @@ script static bool chtf_summon_boss(cheat_params_t const params) {
    i32 num   = params[1] - '0';
    i32 phase = params[2] - '0';
 
-   if(diff < 0 || diff >= diff_any ||
+   if(diff < 0 || diff >= _diff_any ||
       num < 0 || num > 9 ||
       phase < 0 || phase > 9)
    {
@@ -232,9 +245,9 @@ script static bool chtf_summon_boss(cheat_params_t const params) {
    }
 
    switch(params[0] - '0') {
-   case diff_easy: boss = &bosses_easy[num]; break;
-   case diff_medi: boss = &bosses_medi[num]; break;
-   case diff_hard: boss = &bosses_hard[num]; break;
+   case _diff_easy: boss = &bosses_easy[num]; break;
+   case _diff_medi: boss = &bosses_medi[num]; break;
+   case _diff_hard: boss = &bosses_hard[num]; break;
    }
 
    if(phase) {

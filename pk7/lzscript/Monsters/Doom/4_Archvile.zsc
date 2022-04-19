@@ -73,7 +73,6 @@ class Lith_Archvile : Lith_Monster replaces Archvile;
 
 default
 {
-   GibHealth      400;
    Health         800;
    Height         56;
    Mass           500;
