@@ -33,10 +33,9 @@ void F_Run(void) {
 
 script_str ext("ACS") addr(OBJ "Finale")
 void Z_Finale(void) {
-   i32 boss = ServCallI(sm_GetBossLevel);
    i32 which;
 
-   switch(boss) {
+   switch(ml.boss) {
    default:
       which = _finale_normal;
       break;

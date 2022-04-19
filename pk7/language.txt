@@ -238,6 +238,7 @@
 "LITH_BOSS_DIV_6" = "I do not know if I can.\n\nLeave. Now.";
 "LITH_BOSS_DIV_7" = "If you are so avaritious that you must truly defeat me once more,\n\ndo not touch the Artifact.";
 "LITH_BOSS_DIV_8" = "Kill me if you must.\n\nBut I will not hold back.\n\nI plead of you to leave,\n\nor die by my hand.";
+"LITH_VERSE_CORRUPTED" = "[the archdemon thrashes / i prepare the ritual]\n\"You never get a break from life. Not until you die.\"\n\"Have you ever died? Really, and truly?\"\n\"Are you ready to find out what it feels like?\"\n[the archdemon protests]\n\"It won't hurt. But you will feel every part of it.\"";
 "LITHEND_Normal" = "You exit this plane of Hell and prepare for the next.\n\nSome day this will all be over.";
 "LITHEND_TimeOut_1" = "You feel a sense of \cgoverwhelming dread. Everything is over? You scream, but your body doesn't respond. \cmEverything is over now. \cjEver\cgyt\c[Lith_Green]h\c[Lith_Pink]i\c[Lith_Yellow]n\c[Lith_Red]g\c[Lith_Purple].\cr Your v\cgision melts. Your min\cmd\cg is \cngone\cr. Nothing makes sense. \cmEverything\cr makes sense.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\cgGOOD NIGHT\n\n\n\n\n\n\n\n...                           GOOD NIGHT ...\n27154175928871285582608745517002178602783852106501698717822300469657836";
 "LITH_BOSS_BAR_1_Lane" = "\cgWhat a riot!\n\cyA human comes to our domain.";

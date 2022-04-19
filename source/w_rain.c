@@ -39,7 +39,7 @@ void W_DoRain(void) {
          InvTake(so_SMGHeat, 1);
       }
 
-      if(!ml.islithmap && MapNum >= 21) {
+      if(!get_bit(ml.mapflag, _mapf_lithium) && MapNum >= 21) {
          ServCallV(sm_SpawnRain, so_BloodRainDrop);
       } else if(MapNum == 1888001) {
          ServCallV(sm_SpawnRain, so_AbyssRainDrop);

@@ -22,7 +22,7 @@
 noinit struct player pl;
 
 script static void P_bossWarning(void);
-script static void P_bossText(i32 boss);
+script static void P_bossText(void);
 script static void P_doIntro(void);
 
 static void P_Scr_PTickPre(void);
@@ -53,7 +53,7 @@ reinit:
 
    P_bossWarning();
 
-   P_bossText(ServCallI(sm_GetBossLevel));
+   P_bossText();
 
    if(pl.teleportedout) P_TeleportIn();
 
@@ -335,19 +335,27 @@ void P_bossWarning(void) {
 }
 
 dynam_aut script static
-void P_bossText(i32 boss) {
-   if(boss == boss_iconofsin && ServCallI(sm_IsRampancy)) {
+void P_bossText(void) {
+   if(ml.boss == boss_iconofsin && ServCallI(sm_IsRampancy)) {
       return;
    }
 
-   bool division = boss == boss_iconofsin && GetFun() & lfun_tainted;
+   bool division = get_bit(ml.mapflag, _mapf_corrupted);
 
-   if(division) pl.logB(1, tmpstr(lang(sl_log_bosshear3)));
+   if(division) {
+      for(i32 i = 0; i < 35*2; i++) {
+         SetSize(320, 240);
+         PrintFill(0xFF070707);
+         PrintText_str(ns(lang(sl_verse_corrupted)), sf_lmidfont, CR_WHITE, 160,4, 120,0);
+         ACS_Delay(1);
+      }
+      pl.logB(1, tmpstr(lang(sl_log_bosshear3)));
+   }
 
    if(!CVarGetI(sc_player_bosstexts)) return;
 
    cstr fmt;
-   switch(boss) {
+   switch(ml.boss) {
    case boss_none:
    case boss_other:
       return;
@@ -396,7 +404,7 @@ void P_bossText(i32 boss) {
       }
 
       if(CheckFade(fid_bosstext)) {
-         SetSize(640, 400);
+         SetSize(640, 480);
          PrintTextF_str(text, sf_bigupper, CR_WHITE, 320,4, 100,0, fid_bosstext);
       }
 

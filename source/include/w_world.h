@@ -212,6 +212,11 @@ enum map_kind {
    _map_kind_end,
 };
 
+enum map_flag {
+   _mapf_lithium,
+   _mapf_corrupted,
+};
+
 struct world {
    struct payoutinfo pay;
    i32               mapscleared;
@@ -232,12 +237,13 @@ struct world {
 };
 
 struct map_locals {
-   bool                islithmap;
    enum mission_status mission;
+   i32                 boss;
    str                 maplump;
    i32                 mapid;
    i32                 mapseed;
    i32                 mapkind;
+   i32                 mapflag;
    bool                modinit;
 };
 

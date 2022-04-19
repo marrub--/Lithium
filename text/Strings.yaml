@@ -484,6 +484,8 @@ sp_:
 ## Language Strings
 sl_:
    LANG:
+   - "off":               "OFF"
+   - "on":                "ON"
    - activate:            ACTIVATE
    - autogroups:          AUTOGROUPS
    - bad_timeline:        BAD_TIMELINE
@@ -552,8 +554,6 @@ sl_:
    - mana_charge:         MANA_CHARGE
    - move:                MOVE
    - note_fmt:            NOTE_FMT
-   - "off":               "OFF"
-   - "on":                "ON"
    - open:                OPEN
    - opener:              OPENER
    - pk_get_000:          PK_GET_000
@@ -562,15 +562,15 @@ sl_:
    - required:            REQUIRED
    - res_account:         RES_ACCOUNT
    - res_closed:          RES_CLOSED
-   - res_item:            RES_ITEM
    - res_item100:         RES_ITEM100
-   - res_kill:            RES_KILL
+   - res_item:            RES_ITEM
    - res_kill100:         RES_KILL100
+   - res_kill:            RES_KILL
    - res_par:             RES_PAR
    - res_payment:         RES_PAYMENT
    - res_results:         RES_RESULTS
-   - res_scrt:            RES_SCRT
    - res_scrt100:         RES_SCRT100
+   - res_scrt:            RES_SCRT
    - res_sponsor:         RES_SPONSOR
    - res_subtotal:        RES_SUBTOTAL
    - res_tax:             RES_TAX
@@ -636,6 +636,7 @@ sl_:
    - time_fmt_long:       TIME_FMT_LONG
    - time_fmt_short:      TIME_FMT_SHORT
    - use:                 USE
+   - verse_corrupted:     VERSE_CORRUPTED
 
 ## Sounds
 ss_:

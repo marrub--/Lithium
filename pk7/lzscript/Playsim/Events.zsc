@@ -301,7 +301,7 @@ override void WorldTick()
                if(m_tainted) {
                   nf |=  lfun_division;
                   nf &= ~lfun_tainted;
-               } else {
+               } else if(!(nf & lfun_division)) {
                   nf |= lfun_tainted;
                }
                CVar.findCVar('__lith_fun').setInt(nf);

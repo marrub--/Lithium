@@ -47,7 +47,7 @@ i32 Z_LWData(i32 info) {
    case wdata_dorain:      return wl.dorain;
    case wdata_ptid:        return pl.tid;
    case wdata_pclass:      return pl.pclass;
-   case wdata_skymap:      return CVarGetI(sc_sv_sky) && !ml.islithmap;
+   case wdata_skymap:      return CVarGetI(sc_sv_sky) && !get_bit(ml.mapflag, _mapf_lithium);
    case wdata_inhell:      return MapNum >= 21;
    }
    return 0;

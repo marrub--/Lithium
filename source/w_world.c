@@ -81,8 +81,14 @@ static
 void MInitPre(void) {
    Dbg_Log(log_dev, _l(__func__));
 
-   ml.maplump   = strp(ACS_PrintName(PRINTNAME_LEVEL));
-   ml.islithmap = (MapNum >= LithMapBeg && MapNum <= LithMapEnd);
+   ml.maplump = strp(ACS_PrintName(PRINTNAME_LEVEL));
+   ml.boss = ServCallI(sm_GetBossLevel);
+   if(MapNum >= LithMapBeg && MapNum <= LithMapEnd) {
+      set_bit(ml.mapflag, _mapf_lithium);
+   }
+   if(ml.boss == boss_iconofsin && GetFun() & lfun_tainted) {
+      set_bit(ml.mapflag, _mapf_corrupted);
+   }
 
    CheckModCompat();
    UpdateGame();
@@ -151,7 +157,7 @@ void HInitPre(void) {
 
    wl.bossspawned = false;
 
-   if(CVarGetI(sc_sv_sky) && !ml.islithmap) {
+   if(CVarGetI(sc_sv_sky) && !get_bit(ml.mapflag, _mapf_lithium)) {
       if(MapNum >= 21) {
          ACS_ChangeSky(sp_LITHSKRD, sp_LITHSKRD);
          ACS_SetSkyScrollSpeed(1, 0.01);
@@ -279,7 +285,7 @@ void Z_World(bool is_reopen) {
    i32 missionprc  = 0;
 
    for(;;) {
-      if(wl.ticks > CVarGetI(sc_sv_failtime) * 35 * 60 * 60 && !ml.islithmap) {
+      if(wl.ticks > CVarGetI(sc_sv_failtime) * 35 * 60 * 60 && !get_bit(ml.mapflag, _mapf_lithium)) {
          F_Start(_finale_time_out);
          return;
       }

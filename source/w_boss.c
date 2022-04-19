@@ -124,7 +124,7 @@ static bool CheckDead(struct boss *b, i32 num) {
 }
 
 script void SpawnBosses(score_t sum, bool force) {
-   if(ml.islithmap || (!force && sum < scorethreshold)) return;
+   if(get_bit(ml.mapflag, _mapf_lithium) || (!force && sum < scorethreshold)) return;
 
    alldead[_diff_easy] = CheckDead(bosses_easy, countof(bosses_easy));
    alldead[_diff_medi] = CheckDead(bosses_medi, countof(bosses_medi));
