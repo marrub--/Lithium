@@ -53,6 +53,7 @@ _uc_weap:
       Plasma_B:  {         scr: 2500000,           pr: 1, grp: 3, req: wmd wrd}
       Cannon_A:  {         scr: 5100700, f: -D---,        grp: 4, req: wmd    }
       Cannon_B:  {         scr: 5800100,           pr: 5, grp: 4, req: wmd wrd}
+      Cannon_C:  {pg: N/A, scr: 1500000,                  grp: 4, req: wmd wrd rdi}
 
    pC:
       Mateba_A:   {scr:  614100, grp: 1}
@@ -75,9 +76,6 @@ _uc_extr:
       Seven7s:    {pg: N/A, scr: 8235430, f: ADU--, mul: 10, pr: 7, req: rdi}
       lolsords:   {pg: N/A, scr: 1000000, f: ADU--, mul: 20,        req: rdi}
       Goldeneye:  {pg: N/A, scr:   70000, f: --U--, mul:  7,        req: rdi}
-
-   pM:
-      Cannon_C: {pg: N/A, scr: 1500000, grp: 4, req: wmd wrd rdi}
 
 _uc_down:
    gA:
