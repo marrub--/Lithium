@@ -60,6 +60,7 @@ class Lith_MenuDelegate : MenuDelegateBase {
             Screen.drawTexture(tex, false, m_selPos.x, m_selPos.y,
                                DTA_VirtualWidth,dw,
                                DTA_VirtualHeight,dh,
+                               DTA_FullScreenScale,FSMODE_SCALETOFIT43,
                                DTA_FillColor,c,
                                DTA_Alpha,a);
          }

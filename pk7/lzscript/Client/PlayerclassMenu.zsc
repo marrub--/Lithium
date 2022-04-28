@@ -16,7 +16,18 @@ class ListMenuItemLith_PlayerDisplay : ListMenuItemPlayerDisplay {
          let pcl = getDefaultByType((class<PlayerPawn>)(mPlayerClass.type));
          let por = Lith_URANUS.getTextureForName(":Portraits:" .. pcl.soundclass);
          int porx, pory; [porx, pory] = TexMan.getSize(por);
-         drawTexture(desc, por, 320 - porx, (240 - pory) / 2);
+         int scrw  = Screen.getWidth();
+         int scrh  = Screen.getHeight();
+         let scale = double(scrh) / pory;
+         let sc240 = 240.0 / pory;
+         let xy    = Screen.virtualToRealCoords((320-(porx*sc240),0), (scrw, scrh), (320, 240));
+         int x     = int(xy.x);
+         int dw    = int(porx*scale);
+         int dh    = int(pory*scale);
+         Screen.drawTexture(por, true, x, 0,
+                            DTA_KEEPRATIO,true,
+                            DTA_DESTWIDTH,dw,
+                            DTA_DESTHEIGHT,dh);
          super.draw(selected, desc);
       }
       screen.drawTexture(Lith_URANUS.getTextureForName(":Menu:ClassBack"), true, 4, 48, DTA_Alpha, 0.9, DTA_Clean, true);
