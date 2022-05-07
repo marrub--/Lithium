@@ -356,12 +356,8 @@ void P_bossText(void) {
 
    cstr fmt;
    switch(ml.boss) {
-   case boss_none:
-   case boss_other:
+   default:
       return;
-   case boss_barons:      fmt = LANG "BOSS_BAR_%i_%s"; break;
-   case boss_cyberdemon:  fmt = LANG "BOSS_CYB_%i_%s"; break;
-   case boss_spiderdemon: fmt = LANG "BOSS_SPI_%i_%s"; break;
    case boss_iconofsin:
       if(division) fmt = LANG "BOSS_DIV_%i";
       else         fmt = LANG "BOSS_IOS_%i_%s";
