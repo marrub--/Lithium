@@ -460,7 +460,9 @@ void MonInfo_Monster(struct tokbuf *tb, struct tbuf_err *res, i32 flags) {
          {
             switch(MonInfo_Monster_HackName(hack)) {
             case _moninfo_hack_ch:
-               MonInfo_ColorfulHellHack(mi);
+               if(get_bit(wl.compat, _comp_ch)) {
+                  MonInfo_ColorfulHellHack(mi);
+               }
                finished = true;
                break;
             default:
@@ -650,7 +652,7 @@ void Z_MonsterInfo(void) {
    mon_name_t cname;
    faststrcpy_str(cname, ACS_GetActorClass(0));
 
-   if(faststrstr(cname, "RLAdaptive") || faststrstr(cname, "RLCyberdemonMkII")) {
+   if(get_bit(wl.compat, _comp_drla) && (faststrstr(cname, "RLAdaptive") || faststrstr(cname, "RLCyberdemonMkII"))) {
       return;
    }
 

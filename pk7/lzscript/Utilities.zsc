@@ -89,6 +89,11 @@ struct Lith_UTIL {
          mo.setState(mo.curState.nextState);
       }
    }
+
+   static bool classExists(string cnam) {
+      class<Object> cls = cnam;
+      return cls != null;
+   }
 }
 
 class Lith_LineTracer : LineTracer {

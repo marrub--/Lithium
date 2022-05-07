@@ -26,12 +26,11 @@ void W_DoRain(void) {
    ACS_Delay(2);
 
    str raindrop;
-   if(get_msk(ml.flag, _mapf_cat) == _mapc_hell) {
-      raindrop = so_BloodRainDrop;
-   } else if(MapNum == LithMapAbyss) {
-      raindrop = so_AbyssRainDrop;
-   } else {
-      raindrop = so_RainDrop;
+   switch(get_msk(ml.flag, _mapf_rain)) {
+   default: return;
+   case _mapr_rain:  raindrop = so_RainDrop;      return;
+   case _mapr_blood: raindrop = so_BloodRainDrop; return;
+   case _mapr_abyss: raindrop = so_AbyssRainDrop; return;
    }
 
    pl.setActivator();

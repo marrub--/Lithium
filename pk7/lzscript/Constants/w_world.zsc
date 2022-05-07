@@ -50,6 +50,8 @@ enum Lith_EData {
    _edt_heretic,
    _edt_chex,
    _edt_rampancy,
+   _edt_legendoom,
+   _edt_colorfulhell,
    _edt_riflegrenade,
 
    _edt_obituary,

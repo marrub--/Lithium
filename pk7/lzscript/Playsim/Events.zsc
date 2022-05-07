@@ -21,8 +21,6 @@ override void WorldLoaded(WorldEvent ev) {
    m_bossLevel = boss_none;
    m_bossBabies.clear();
 
-   let sum = Level.GetChecksum();
-
    if(level.nextMap.left(6) == "enDSeQ") {
       if(level.info.flags & LEVEL_BRUISERSPECIAL || level.info.flags3 & LEVEL3_E1M8SPECIAL) {
          m_bossLevel = boss_barons;

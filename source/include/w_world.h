@@ -79,6 +79,8 @@ enum ZscName(EData) {
    _edt_heretic,
    _edt_chex,
    _edt_rampancy,
+   _edt_legendoom,
+   _edt_colorfulhell,
    _edt_riflegrenade,
 
    _edt_obituary,
@@ -286,6 +288,13 @@ enum finale_num {
    _finale_division,
 };
 
+enum compat_flag {
+   _comp_legendoom,
+   _comp_rampancy,
+   _comp_drla,
+   _comp_ch,
+};
+
 struct world {
    struct payoutinfo pay;
    i32               mapscleared;
@@ -295,7 +304,7 @@ struct world {
    bool              bossspawned;
    i32               cbiperf;
    i64               cbiupgr;
-   bool              legendoom;
+   i32               compat;
    bool              init;
 
    i32          a_x, a_y;

@@ -49,9 +49,10 @@ static
 void CheckModCompat(void) {
    i32 tid;
 
-   if((wl.legendoom = ACS_SpawnForced(so_LDLegendaryMonsterMarker, 0, 0, 0, tid = ACS_UniqueTID(), 0))) ACS_Thing_Remove(tid);
-
-   /*drlamonsters = CVarGetI(sc_drla_is_using_monsters);*/
+   if(EDataI(_edt_legendoom))              set_bit(wl.compat, _comp_legendoom);
+   if(EDataI(_edt_rampancy))               set_bit(wl.compat, _comp_rampancy);
+   if(CVarGetI(sc_drla_is_using_monsters)) set_bit(wl.compat, _comp_drla);
+   if(EDataI(_edt_colorfulhell))           set_bit(wl.compat, _comp_ch);
 }
 
 static
@@ -113,10 +114,8 @@ void MInitPre(void) {
 
       if(CVarGetI(sc_sv_rain) || ml.humidity > 60 + dewpoint) {
          set_msk(ml.flag, _mapf_rain, _mapr_rain);
-         W_DoRain();
       } else if(ml.temperature <= 0 && rand() % 99 < 11) {
          set_msk(ml.flag, _mapf_rain, _mapr_snow);
-         W_DoRain();
       }
    } else {
       set_bit(ml.flag, _mapf_vacuum);
@@ -135,6 +134,7 @@ void MInitPre(void) {
       set_msk(ml.flag, _mapf_cat, _mapc_hell);
    }
 
+   W_DoRain();
    CheckModCompat();
    UpdateGame();
 }

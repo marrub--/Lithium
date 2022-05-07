@@ -38,14 +38,14 @@ static int EDataI(Actor mo, int info) {
    case _edt_bosslevel:   return Instance().m_bossLevel;
    case _edt_paused:      return level.isFrozen();
    case _edt_spawnhealth: return mo.spawnHealth();
-   case _edt_chex:        return gameinfo.gametype & GAME_Chex    != 0;
-   case _edt_heretic:     return gameinfo.gametype & GAME_Heretic != 0;
 
-   case _edt_rampancy: {
-      string why = "Robot_Thingo";
-      class<Object> stopit = why;
-      return stopit != null;
-   }
+   case _edt_chex:    return gameinfo.gametype & GAME_Chex    != 0;
+   case _edt_heretic: return gameinfo.gametype & GAME_Heretic != 0;
+
+   case _edt_rampancy:     return Lith_UTIL.classExists("Robot_Thingo");
+   case _edt_legendoom:    return Lith_UTIL.classExists("LDLegendaryMonsterMarker");
+   case _edt_colorfulhell: return Lith_UTIL.classExists("CHBoner");
+
    case _edt_riflegrenade:
       return !Lith_CombatRifle(mo.findInventory("Lith_CombatRifle")).m_grenFire;
    }
