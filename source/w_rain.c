@@ -21,9 +21,18 @@ k32 lmvar rain_px, rain_py;
 static
 i32 lmvar rain_dist;
 
-dynam_aut script
+alloc_aut(0) script
 void W_DoRain(void) {
    ACS_Delay(2);
+
+   str raindrop;
+   if(get_msk(ml.flag, _mapf_cat) == _mapc_hell) {
+      raindrop = so_BloodRainDrop;
+   } else if(MapNum == LithMapAbyss) {
+      raindrop = so_AbyssRainDrop;
+   } else {
+      raindrop = so_RainDrop;
+   }
 
    pl.setActivator();
    StartSound(ss_amb_wind, lch_weather1, CHANF_LOOP, 0.001, ATTN_NONE);
@@ -39,13 +48,7 @@ void W_DoRain(void) {
          InvTake(so_SMGHeat, 1);
       }
 
-      if(get_msk(ml.flag, _mapf_cat) == _mapc_hell) {
-         ServCallV(sm_SpawnRain, so_BloodRainDrop);
-      } else if(MapNum == LithMapAbyss) {
-         ServCallV(sm_SpawnRain, so_AbyssRainDrop);
-      } else {
-         ServCallV(sm_SpawnRain, so_RainDrop);
-      }
+      ServCallV(sm_SpawnRain, raindrop);
 
       ACS_Delay(1);
 
@@ -64,7 +67,7 @@ void W_DoRain(void) {
 
 alloc_aut(0) script ext("ACS") addr(lsc_raindropspawn)
 void Z_RainDropSpawn(i32 dist) {
-   if(rain_chk && dist < rain_dist) {
+   if(dist < rain_dist) {
       rain_dist = dist;
    }
 }

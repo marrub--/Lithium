@@ -59,12 +59,14 @@ static struct boss *lastboss;
 
 static score_t scorethreshold = _scorethreshold_default;
 
+stkcall
 static void set_next_score_threshold() {
    static score_t mul = 17;
    scorethreshold = _scorethreshold_default * mul / 10;
    mul += 10;
 }
 
+stkcall
 static void SpawnBossReward(void) {
    k32 x = GetX(0);
    k32 y = GetY(0);
@@ -172,7 +174,7 @@ void Z_PhantomTeleport(void) {
    }
 }
 
-dynam_aut script_str ext("ACS") addr(OBJ "PhantomDeath")
+alloc_aut(0) script_str ext("ACS") addr(OBJ "PhantomDeath")
 void Z_PhantomDeath(void) {
    ACS_StopSound(0, 7);
 
