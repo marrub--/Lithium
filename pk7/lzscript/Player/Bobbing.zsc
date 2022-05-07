@@ -29,26 +29,26 @@ void Lith_BobWeapon() {
 
    m_LastIPitch = m_IPitch;
    m_LastVPitch = m_VPitch;
-   m_IPitch = Lith_UTIL.Lerp(m_IPitch, Pitch, 0.377);
+   m_IPitch = Lith_UTIL.Lerp(m_IPitch, Pitch, 0.277);
    m_VPitch = Min(m_IPitch - m_LastIPitch, 0.4);
 
    m_LastIYaw = m_IYaw;
    m_LastVYaw = m_VYaw;
-   m_IYaw = Lith_UTIL.AngleLerp(m_IYaw, Angle, 0.377);
+   m_IYaw = Lith_UTIL.AngleLerp(m_IYaw, Angle, 0.277);
    if(m_IYaw - m_LastIYaw ~== 0) {m_VYaw = 0;}
    else                          {m_VYaw = m_IYaw - m_LastIYaw;}
    m_VYaw = clamp(m_VYaw, -20, 20);
 
    if(Vel.Z - m_LastZVel > double.Epsilon) {
       if(m_LastZVel >= 0) {m_ZVel += Vel.Z;}
-      else                {m_ZVel += 5 - m_LastZVel * 2;}
+      else                {m_ZVel += 10 - m_LastZVel * 4;}
    }
 
    m_ZVel = Lith_UTIL.Lerp(m_ZVel, 0, 0.277);
    m_LastZVel = Vel.Z;
 
    m_LastVZVel = m_VZVel;
-   m_VZVel = Lith_UTIL.Lerp(m_VZVel, m_ZVel, 0.42);
+   m_VZVel = Lith_UTIL.Lerp(m_VZVel, m_ZVel, 0.32);
 
    if(Lith_UTIL.pData(_pdt_upgrade, UPGR_Seven7s)) {
       m_mbobprv = m_mbobpos;
