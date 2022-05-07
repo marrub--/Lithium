@@ -22,10 +22,6 @@ class Lith_BossFucker : Inventory
 
 extend class Lith_HERMES;
 
-static int GetSpawnHealth(Actor mo) {
-   return mo.spawnHealth();
-}
-
 static void SurgeOfDestiny(Actor mo) {
    mo.GiveInventory("Lith_SurgeProtector", 1);
    mo.A_Explode(128, 192, 0);
@@ -147,7 +143,7 @@ static void SpawnBoss(Actor a, string name, int phase)
 }
 
 static void triggerBoss() {
-   if(acs_executeWithResult(lsc_wdata, wdata_bossspawned)) return;
+   if(Lith_UTIL.pData(_pdt_bossspawned)) return;
 
    double minRadius = getDefaultByType('Lith_Phantom').radius;
    double minHeight = getDefaultByType('Lith_Phantom').height;

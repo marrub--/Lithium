@@ -155,7 +155,7 @@ void copy_name_str(char **p, cstr src) {
 }
 
 void RandomName(i32 id) {
-   srand(id ? ml.mapseed + id : ACS_Random(0, INT32_MAX));
+   srand(id ? ml.seed + id : ACS_Random(0, INT32_MAX));
 
    PrintChrLi("\Cg");
 

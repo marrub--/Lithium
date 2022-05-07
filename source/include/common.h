@@ -101,7 +101,7 @@
 #define SetSpecies(tid, x)          SetPropS(tid, APROP_Species,          x)
 #define SetViewHeight(tid, x)       SetPropK(tid, APROP_ViewHeight,       x)
 
-#define Paused ServCallI(sm_GetPaused)
+#define Paused EDataI(_edt_paused)
 #define PausableTick() do ACS_Delay(1); while(Paused)
 #define WaitPause() while(Paused) ACS_Delay(1)
 

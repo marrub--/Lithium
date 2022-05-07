@@ -124,7 +124,9 @@ static bool CheckDead(struct boss *b, i32 num) {
 }
 
 script void SpawnBosses(score_t sum, bool force) {
-   if(get_bit(ml.mapflag, _mapf_lithium) || (!force && sum < scorethreshold)) return;
+   if(get_msk(ml.flag, _mapf_cat) == _mapc_lithium || (!force && sum < scorethreshold)) {
+      return;
+   }
 
    alldead[_diff_easy] = CheckDead(bosses_easy, countof(bosses_easy));
    alldead[_diff_medi] = CheckDead(bosses_medi, countof(bosses_medi));
@@ -206,7 +208,7 @@ void Z_PhantomDeath(void) {
       SpawnBossReward();
    }
 
-   wl.soulsfreed++;
+   ml.soulsfreed++;
 
    set_next_score_threshold();
    Dbg_Note(_l("score threshold raised to "), _p(scorethreshold), _c('\n'));

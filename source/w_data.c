@@ -16,39 +16,28 @@
 
 script ext("ACS") addr(lsc_pdata)
 i32 Z_LPData(i32 info, i32 permutation) {
-   if(P_None()) return 0;
-
    switch(info) {
-   case pdata_weapon:       return P_Wep_CurType();
-   case pdata_upgrade:      return get_bit(pl.upgrades[permutation].flags, _ug_active);
-   case pdata_riflemode:    return pl.riflefiremode;
-   case pdata_hassigil:     return pl.sgacquired;
-   case pdata_weaponzoom:   return k32_to_i32(CVarGetK(sc_weapons_zoomfactor));
-   case pdata_pclass:       return pl.pclass;
-   case pdata_semifrozen:   return pl.semifrozen > 0;
-   case pdata_addp:         return k32_to_i32(pl.addpitch * 360.0);
-   case pdata_addy:         return k32_to_i32(pl.addyaw   * 360.0);
-   case pdata_addr:         return k32_to_i32(pl.addroll  * 360.0);
-   case pdata_recoilp:      return k32_to_i32(pl.extrpitch);
-   case pdata_attr:         return pl.attr.attrs[permutation];
-   case pdata_alpha:        return k32_to_i32(pl.alpha);
-   case pdata_oldhealth:    return pl.oldhealth;
-   case pdata_hudenabled:   return pl.hudenabled;
-   case pdata_flashbattery: return pl.upgrdata.flashlight.battery;
-   }
-   return 0;
-}
-
-script ext("ACS") addr(lsc_wdata)
-i32 Z_LWData(i32 info) {
-   switch(info) {
-   case wdata_bossspawned: return wl.bossspawned;
-   case wdata_soulsfreed:  return wl.soulsfreed;
-   case wdata_dorain:      return wl.dorain;
-   case wdata_ptid:        return pl.tid;
-   case wdata_pclass:      return pl.pclass;
-   case wdata_skymap:      return CVarGetI(sc_sv_sky) && !get_bit(ml.mapflag, _mapf_lithium);
-   case wdata_inhell:      return MapNum >= 21;
+   case _pdt_weapon:       return P_Wep_CurType();
+   case _pdt_upgrade:      return get_bit(pl.upgrades[permutation].flags, _ug_active);
+   case _pdt_riflemode:    return pl.riflefiremode;
+   case _pdt_hassigil:     return pl.sgacquired;
+   case _pdt_weaponzoom:   return k32_to_i32(CVarGetK(sc_weapons_zoomfactor));
+   case _pdt_pclass:       return pl.pclass;
+   case _pdt_semifrozen:   return pl.semifrozen > 0;
+   case _pdt_addp:         return k32_to_i32(pl.addpitch * 360.0);
+   case _pdt_addy:         return k32_to_i32(pl.addyaw   * 360.0);
+   case _pdt_addr:         return k32_to_i32(pl.addroll  * 360.0);
+   case _pdt_recoilp:      return k32_to_i32(pl.extrpitch);
+   case _pdt_attr:         return pl.attr.attrs[permutation];
+   case _pdt_alpha:        return k32_to_i32(pl.alpha);
+   case _pdt_oldhealth:    return pl.oldhealth;
+   case _pdt_hudenabled:   return pl.hudenabled;
+   case _pdt_flashbattery: return pl.upgrdata.flashlight.battery;
+   case _pdt_bossspawned:  return wl.bossspawned;
+   case _pdt_soulsfreed:   return ml.soulsfreed;
+   case _pdt_ptid:         return pl.tid;
+   case _pdt_mapf:         return get_bit(ml.flag, permutation);
+   case _pdt_mapc:         return get_msk(ml.flag, _mapf_cat);
    }
    return 0;
 }

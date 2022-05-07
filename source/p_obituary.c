@@ -57,7 +57,7 @@ void Z_Obituary(void) {
       }
    }
 
-   str obit = ServCallS(sm_GetObituary);
+   str obit = EDataS(_edt_obituary);
    if(!obit[0]) return;
 
    i32 rn = ACS_Random(1, 5);

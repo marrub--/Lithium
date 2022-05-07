@@ -152,20 +152,15 @@ sm_:
    - DieMonster
    - DieNow
    - DmgFac: m_DmgFac
+   - EDataI
+   - EDataS
    - FindFontColor
    - FindLump
    - FxTID: m_FxTID
    - GetAttackHeight
-   - GetBipName
-   - GetBossLevel
    - GetCurMag
-   - GetLogName
    - GetMaxMag
-   - GetObituary
    - GetOutOfDodge
-   - GetPaused
-   - GetRifleGrenade
-   - GetSpawnHealth
    - GetViewHeight
    - GivePoison
    - GrabInput
@@ -180,7 +175,6 @@ sm_:
    - InvType:  m_InvType
    - InvW:     m_InvW
    - IonizeFX
-   - IsRampancy
    - JumpZ
    - LA
    - LC
@@ -469,6 +463,11 @@ sp_:
    - lsnd_Silence:      lsnd/Silence
 
    - F_SKY1
+   - SKY2
+   - SKY3
+   - SKY4
+   - RSKY2
+   - RSKY3
    - LITHCAM1
    - LITHCAM2
    - LITHCAM3
@@ -674,7 +673,6 @@ ss_:
    - player_counter:           player/counter
    - player_counterdone:       player/counterdone
    - player_death1:            player/death1
-   - player_depthdown:         player/depthdown
    - player_doublejump:        player/doublejump
    - player_glare:             player/glare
    - player_jem_manafull:      player/jem/manafull

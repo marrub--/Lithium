@@ -321,12 +321,12 @@ default
 action(Weapon) void Lith_A_FireStar()
 {
    A_GunFlash("DummyFlash");
-   if(Lith_UTIL.pData(pdata_upgrade, UPGR_ShipGun_A))
+   if(Lith_UTIL.pData(_pdt_upgrade, UPGR_ShipGun_A))
    {
       A_StartSound("weapons/shipgun/firesol", lch_weapon);
       A_FireProjectile("Lith_Solspear");
    }
-   else if(Lith_UTIL.pData(pdata_upgrade, UPGR_ShipGun_B))
+   else if(Lith_UTIL.pData(_pdt_upgrade, UPGR_ShipGun_B))
    {
       A_StartSound("weapons/shipgun/firesurge", lch_weapon);
       CallACS("Lith_SurgeOfDestiny");

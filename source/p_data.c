@@ -124,7 +124,7 @@ void P_Dat_PTickPre(void) {
 
    pl.buttons = ACS_GetPlayerInput(-1, INPUT_BUTTONS);
 
-   pl.name        = (ACS_BeginPrint(), ACS_PrintName(0), ACS_EndStrParam());
+   pl.name        = strp(ACS_PrintName(0));
    pl.weaponclass = ACS_GetWeapon();
 
    pl.scopetoken = InvNum(so_WeaponScopedToken);

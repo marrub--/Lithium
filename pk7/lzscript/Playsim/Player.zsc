@@ -64,13 +64,6 @@ static void PlayerDeathNuke(Actor mo) {
    Nuke(mo);
 }
 
-static string GetObituary()
-{
-   let sv = Instance();
-   if(sv) return sv.m_Obituary;
-   else   return "";
-}
-
 static void DeleteItem(Actor mo, int item)
 {
    let id = Lith_IDOL(mo.FindInventory("Lith_IDOL"));
@@ -84,20 +77,12 @@ static bool UseItem(Actor mo, int item)
    else   return false;
 }
 
-static string GetLogName() {
-   return instance().m_data.logName;
-}
-
 static clearScope void Log(int type, int levl, string name) {
    let sv = instance();
    if(sv) {
       sv.m_data.logName = name;
       callAcs("Lith_LogS", levl, type);
    }
-}
-
-static string GetBipName() {
-   return instance().m_data.bipName;
 }
 
 static void UnlockBip(Actor mo, string name) {

@@ -221,7 +221,7 @@ void Dlg_MInit(void) {
    fastmemset(&d,      0, sizeof d);
 
    FILE *fp =
-      W_Open(strp(_l("lfiles/Dialogue_"), _p(ml.maplump), _l(".txt")), 't');
+      W_Open(strp(_l("lfiles/Dialogue_"), _p(ml.lump), _l(".txt")), 't');
 
    if(fp) {
       TBufCtor(&d.tb, fp, "Dialogue file");

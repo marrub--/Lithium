@@ -10,11 +10,29 @@
               Readings */
 class Lith_STATUSBAR : BaseStatusBar;
 
+private transient Font   m_pauseFont;
+private transient string m_pauseText;
+private transient int    m_pauseTextWidth;
+private transient int    m_pauseTextHeight;
+
 override void flashItem(class<Inventory> itemtype) {}
 override void drawPowerups() {}
 
 override bool processMidPrint(Font fnt, string text, bool bold) {
-   if(text && text.length()) Lith_HERMES.log(msg_huds, 1, text);
+   if(text && text.length()) {
+      Lith_HERMES.log(msg_huds, 1, text);
+   }
+   return true;
+}
+
+override bool drawPaused(int player) {
+   if(!m_pauseFont) {
+      m_pauseFont       = "lbigfont";
+      m_pauseText       = "*** paused ***";
+      m_pauseTextWidth  = m_pauseFont.stringWidth(m_pauseText);
+      m_pauseTextHeight = m_pauseFont.getHeight();
+   }
+   Screen.drawText(m_pauseFont, Font.CR_WHITE, 320 + cos(gameTic * 2.2) * 10 - m_pauseTextWidth / 2, 240 + sin(gameTic * 2.5) * 16 - m_pauseTextHeight / 2, m_pauseText, DTA_VIRTUALWIDTH, 640, DTA_VIRTUALHEIGHT, 480);
    return true;
 }
 

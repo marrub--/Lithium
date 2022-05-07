@@ -30,7 +30,7 @@ void Upgr_VitalScan_Update(void) {
       fastmemset(&udata, 0, sizeof udata);
    } else if(validtarget) {
       i32 chp = GetHealth(0);
-      i32 shp = ServCallI(sm_GetSpawnHealth);
+      i32 shp = EDataI(_edt_spawnhealth);
 
       i32 id = UniqueID();
 

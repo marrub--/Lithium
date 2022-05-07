@@ -33,7 +33,7 @@ i32 UniqueID(i32 tid) {
    i32 id = PtrInvNum(tid, so_UniqueID);
 
    /* Otherwise we have to give a new unique identifier. */
-   if(id == 0) PtrInvGive(tid, so_UniqueID, id = ++ml.mapid);
+   if(id == 0) PtrInvGive(tid, so_UniqueID, id = ++ml.id);
 
    return id;
 }
@@ -81,13 +81,58 @@ static
 void MInitPre(void) {
    Dbg_Log(log_dev, _l(__func__));
 
-   ml.maplump = strp(ACS_PrintName(PRINTNAME_LEVEL));
-   ml.boss = ServCallI(sm_GetBossLevel);
+   /* Init a random seed from the map. */
+   ml.seed = ACS_Random(0, INT32_MAX);
+
+   /* Set the air control because ZDoom's default sucks. */
+   ACS_SetAirControl(0.77);
+
+   /* Set up everything else about the map. -T */
+   ml.soulsfreed = 0;
+   srand(ml.seed);
+   ml.lump = strp(ACS_PrintName(PRINTNAME_LEVEL));
+   ml.name = strp(ACS_PrintName(PRINTNAME_LEVELNAME));
+   ml.boss = EDataI(_edt_bosslevel);
    if(MapNum >= LithMapBeg && MapNum <= LithMapEnd) {
-      set_bit(ml.mapflag, _mapf_lithium);
+      set_msk(ml.flag, _mapf_cat, _mapc_lithium);
    }
    if(ml.boss == boss_iconofsin && GetFun() & lfun_tainted) {
-      set_bit(ml.mapflag, _mapf_corrupted);
+      set_bit(ml.flag, _mapf_corrupted);
+   }
+
+   /* TODO: check if map has environment conditions baked in */
+   i32 dewpoint    = rand() % 11 - 1;
+   ml.temperature  = rand() % 100;
+   ml.humidity     = ml.temperature + dewpoint;
+   ml.humidity     = mini(ml.humidity * ml.humidity / 90, 100);
+   ml.temperature -= 30;
+   if(ml.humidity > 0) {
+      if(ml.temperature >= 12 + dewpoint && rand() % 99 < 33) {
+         set_bit(ml.flag, _mapf_thunder);
+      }
+
+      if(CVarGetI(sc_sv_rain) || ml.humidity > 60 + dewpoint) {
+         set_bit(ml.flag, _mapf_rain);
+         W_DoRain(/*_rain_rain*/);
+      } /*else if(CVarGetI(sc_sv_snow) || (ml.temperature <= 0 && rand() % 99 < 11)) {
+         set_bit(ml.flag, _mapf_snow);
+         W_DoRain(_rain_snow);
+      }*/
+   } else {
+      set_bit(ml.flag, _mapf_vacuum);
+      ml.humidity    = 0;
+      ml.temperature = -270;
+   }
+
+   if(CVarGetI(sc_sv_sky) && get_msk(ml.flag, _mapf_cat) != _mapc_lithium) {
+      set_bit(ml.flag, _mapf_skyreplace);
+   }
+
+   str sky = fast_strupper(EDataS(_edt_sky1));
+   if(sky == sp_SKY2 || sky == sp_RSKY2) {
+      set_msk(ml.flag, _mapf_cat, _mapc_interstice);
+   } else if(sky == sp_SKY3 || sky == sp_SKY4 || sky == sp_RSKY3) {
+      set_msk(ml.flag, _mapf_cat, _mapc_hell);
    }
 
    CheckModCompat();
@@ -103,7 +148,7 @@ void GInit(void) {
    Mon_Init();
    Wep_GInit();
 
-   wl.gblinit = true;
+   wl.init = true;
 }
 
 static
@@ -116,7 +161,7 @@ void MInitPst(void) {
    wl.pay.itemmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_ITEMS);
    wl.pay.scrtmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_SECRETS);
 
-   ml.modinit = true;
+   ml.init = true;
 }
 
 static
@@ -124,27 +169,6 @@ void MInit(void) {
    Dbg_Log(log_dev, _l(__func__));
 
    Dlg_MInit();
-
-   wl.soulsfreed = 0;
-
-   /* Init a random seed from the map. */
-   ml.mapseed = ACS_Random(0, INT32_MAX);
-
-   /* Set the air control because ZDoom's default sucks. */
-   ACS_SetAirControl(0.77);
-
-   /* Check for if rain should be used.
-    * - If `NoRain' is set on LithMapLine, never use rain.
-    * - If the player has rain enabled, use it if not for those preconditions.
-    * - If `UseRain' is set on LithMapLine, use it if not for that.
-    */
-   bool never_rain    = ACS_GetLineUDMFInt(LithMapLine, sm_MapNoRain);
-   bool use_rain_user = CVarGetI(sc_sv_rain);
-   bool use_rain_map  = ACS_GetLineUDMFInt(LithMapLine, sm_MapUseRain);
-   if(!never_rain && (use_rain_user || use_rain_map)) {
-      wl.dorain = true;
-      W_DoRain();
-   }
 }
 
 static
@@ -157,11 +181,11 @@ void HInitPre(void) {
 
    wl.bossspawned = false;
 
-   if(CVarGetI(sc_sv_sky) && !get_bit(ml.mapflag, _mapf_lithium)) {
-      if(MapNum >= 21) {
+   if(get_bit(ml.flag, _mapf_skyreplace)) {
+      if(get_msk(ml.flag, _mapf_cat) == _mapc_hell) {
          ACS_ChangeSky(sp_LITHSKRD, sp_LITHSKRD);
          ACS_SetSkyScrollSpeed(1, 0.01);
-      } else if(MapNum >= 12) {
+      } else if(get_msk(ml.flag, _mapf_cat) == _mapc_interstice) {
          ACS_ChangeSky(sp_LITHSKDE, sp_LITHSKDE);
       } else {
          ACS_ChangeSky(sp_LITHSKS1, sp_LITHSKS1);
@@ -205,19 +229,19 @@ void Z_World(bool is_reopen) {
    Dbg_Log(log_dev, _l(__func__));
 
    if(ACS_GameType() == GAME_TITLE_MAP) {
-      ml.mapkind = _map_kind_title;
+      ml.kind = _map_kind_title;
    } else if(MapNum == 1911777) {
-      ml.mapkind = _map_kind_end;
+      ml.kind = _map_kind_end;
    } else {
-      ml.mapkind = _map_kind_normal;
+      ml.kind = _map_kind_normal;
    }
 
    Draw_Init();
 
    if(CVarGetI(sc_sv_failtime) == 0) for(;;) {
-      ACS_BeginPrint();
-      PrintChrLi(
-         "\n=======\n"
+      SetSize(320, 240);
+      SetClipW(0, 0, 320, 240, 320);
+      PrintTextChL(
          "The configuration for this mod has been wiped, or you accidentally "
          "set '" CVAR "sv_failtime' to 0 manually. If you did the latter, "
          "please set it to something else. Otherwise, please follow these "
@@ -231,13 +255,11 @@ void Z_World(bool is_reopen) {
          "4. Find the heading '[Doom.LocalServerInfo.Mod]' and delete any "
          "lines starting with '" CVAR "' or '" DCVAR "' under it.\n"
          "5. Save the file and start GZDoom again. If the issue persists "
-         "try these steps again or delete your GZDoom configuration.\n"
-         "\n\n\n\n\n\n"
-         "Invalid settings detected. Please open the console"
-         "(\"");
-      ACS_PrintBind(sc_toggleconsole);
-      PrintChrLi("\" or options menu) for more information.");
-      ACS_Delay(10);
+         "try these steps again or delete your GZDoom configuration.");
+      PrintText(sf_ltrmfont, CR_WHITE, 0,1, 16,1);
+      ClearClip();
+      ACS_Delay(1);
+      EndDrawing();
    }
 
    #ifndef NDEBUG
@@ -249,9 +271,9 @@ void Z_World(bool is_reopen) {
     */
    Xalloc(_tag_temp);
 
-   if(!ml.modinit) MInitPre();
-   if(!wl.gblinit) GInit();
-   if(!ml.modinit) MInit();
+   if(!ml.init) MInitPre();
+   if(!wl.init) GInit();
+   if(!ml.init) MInit();
 
    /* Hub-static pre-player init. */
    if(!is_reopen) HInitPre();
@@ -259,7 +281,7 @@ void Z_World(bool is_reopen) {
    wl.unloaded = false; /* Unloaded flag can be reset now. */
 
    /* Special map main-loop functions. */
-   switch(ml.mapkind) {
+   switch(ml.kind) {
    case _map_kind_title:
       W_Title();
       return;
@@ -274,7 +296,7 @@ void Z_World(bool is_reopen) {
    if(!is_reopen) HInit();
 
    /* Module-static post-hub init. */
-   if(!ml.modinit) MInitPst();
+   if(!ml.init) MInitPst();
 
    /* Main loop. */
    i32 prevscrts = 0;
@@ -285,7 +307,7 @@ void Z_World(bool is_reopen) {
    i32 missionprc  = 0;
 
    for(;;) {
-      if(wl.ticks > CVarGetI(sc_sv_failtime) * 35 * 60 * 60 && !get_bit(ml.mapflag, _mapf_lithium)) {
+      if(wl.ticks > CVarGetI(sc_sv_failtime) * 35 * 60 * 60 && get_msk(ml.flag, _mapf_cat) != _mapc_lithium) {
          F_Start(_finale_time_out);
          return;
       }

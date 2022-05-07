@@ -232,7 +232,7 @@ static void TraceReg(void) {
 static str GetText(void) {
    u32  adr = MemB2_G(VAR_TEXTL);
    cstr sc  = MemSC_G(adr);
-   return adr ? lang(strp(_p(ml.maplump), _c('_'), _p(sc))) : snil;
+   return adr ? lang(strp(_p(ml.lump), _c('_'), _p(sc))) : snil;
 }
 
 static str GetRemote(void) {
@@ -397,7 +397,7 @@ void DialogueGUI(void) {
 
       for(i32 i = 0; i < oc; i++, y += 14) {
          u32  adr = MemB2_G(StructOfs(OPT, NAML, i));
-         cstr txt = tmpstr(lang(strp(_p(ml.maplump), _c('_'), _p(MemSC_G(adr)))));
+         cstr txt = tmpstr(lang(strp(_p(ml.lump), _c('_'), _p(MemSC_G(adr)))));
 
          if(G_Button_HId(&gst, i, txt, 45, y, Pre(btndlgsel))) {
             MemB1_S(VAR_UACT, UACT_SELOPTION);
@@ -1108,9 +1108,9 @@ script_str ext("ACS") addr(OBJ "RunTerminal")
 void Z_RunTerminal(i32 num) {
    if(!P_None() && pl.modal == _gui_none) {
       switch(ml.mission) {
-      case _unfinished: pl.dlg.page = DPAGE_UNFINISHED; break;
-      case _finished:   pl.dlg.page = DPAGE_FINISHED;   break;
-      case _failure:    pl.dlg.page = DPAGE_FAILURE;    break;
+      case _mstat_unfinished: pl.dlg.page = DPAGE_UNFINISHED; break;
+      case _mstat_finished:   pl.dlg.page = DPAGE_FINISHED;   break;
+      case _mstat_failure:    pl.dlg.page = DPAGE_FAILURE;    break;
       }
 
       pl.dlg.num = DNUM_TRM_BEG + num;

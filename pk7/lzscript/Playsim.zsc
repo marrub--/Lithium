@@ -13,7 +13,6 @@
 #include "lzscript/Playsim/Files.zsc"
 #include "lzscript/Playsim/Input.zsc"
 #include "lzscript/Playsim/Monsters.zsc"
-#include "lzscript/Playsim/Pause.zsc"
 #include "lzscript/Playsim/Player.zsc"
 #include "lzscript/Playsim/StatusEffects.zsc"
 #include "lzscript/Playsim/Weapons.zsc"

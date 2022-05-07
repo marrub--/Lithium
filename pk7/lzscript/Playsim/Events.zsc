@@ -12,8 +12,6 @@ private array<Actor> m_bossBabies;
 private int m_bossDeathInit;
 bool m_tainted;
 
-static int GetBossLevel() {return Instance().m_bossLevel;}
-
 override void WorldLoaded(WorldEvent ev) {
    static const string BH_BARONS[] = {
       "ED26C05D1B179D373E839AC7CCFB07AE", // 2002ado.wad e1m8
@@ -137,11 +135,11 @@ override void WorldLoaded(WorldEvent ev) {
 
    if(__lith_fun & lfun_ragnarok) Ragnarok();
 
-   if(ACS_ExecuteWithResult(lsc_wdata, wdata_skymap)) {
+   if(Lith_UTIL.pData(_pdt_mapf, _mapf_skyreplace)) {
       for(int i = 0, j = level.sectors.size(); i < j; i++) {
          Sector sec = level.sectors[i];
          if(sec.getTexture(Sector.Ceiling) == skyflatnum) {
-            if(ACS_ExecuteWithResult(lsc_wdata, wdata_inhell)) {
+            if(Lith_UTIL.pData(_pdt_mapc) == _mapc_hell) {
                sec.setColor("#ff7777");
             }
             sec.lightlevel = int(clamp(sec.lightlevel * lith_sv_skydarkening, 64.0, 255.0));
@@ -200,13 +198,15 @@ override void WorldThingDestroyed(WorldEvent ev)
    if(item) item.Lith_Destroy();
 }
 
-override void WorldUnloaded(WorldEvent ev)
-{
+override void WorldUnloaded(WorldEvent ev) {
    m_bossDeathInit = 0;
 
    let it = ThinkerIterator.Create("Lith_InventoryItem");
-   for(Lith_InventoryItem mo; mo = Lith_InventoryItem(it.Next());)
-      if(!mo.owner) mo.Lith_Destroy();
+   for(Lith_InventoryItem mo; mo = Lith_InventoryItem(it.Next());) {
+      if(!mo.owner) {
+         mo.Lith_Destroy();
+      }
+   }
 }
 
 override void WorldThingSpawned(WorldEvent ev)

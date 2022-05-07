@@ -44,15 +44,6 @@ static void SetFrozen(bool on, bool players_ok) {
    }
 }
 
-static bool IsRampancy() {
-   string why = "Robot_Thingo";
-   class<Object> stopit = why;
-   return stopit != null;
-}
-
-static bool IsHeretic() {return gameinfo.gametype & GAME_Heretic != 0;}
-static bool IsChex()    {return gameinfo.gametype & GAME_Chex    != 0;}
-
 static Lith_DamageType nameToDT(name type) {
    switch(type) {
    case 'None': if(Instance().m_DmgWorld) return ldt_hazard;

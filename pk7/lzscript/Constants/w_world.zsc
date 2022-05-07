@@ -15,14 +15,45 @@
 
 
 
-enum Lith_WData {
-   wdata_bossspawned,
-   wdata_soulsfreed,
-   wdata_dorain,
-   wdata_ptid,
-   wdata_pclass,
-   wdata_skymap,
-   wdata_inhell,
+
+enum Lith_PData {
+   _pdt_weapon,
+   _pdt_upgrade,
+   _pdt_riflemode,
+   _pdt_hassigil,
+   _pdt_weaponzoom,
+   _pdt_pclass,
+   _pdt_semifrozen,
+   _pdt_addp,
+   _pdt_addy,
+   _pdt_addr,
+   _pdt_recoilp,
+   _pdt_attr,
+   _pdt_alpha,
+   _pdt_oldhealth,
+   _pdt_hudenabled,
+   _pdt_flashbattery,
+   _pdt_bossspawned,
+   _pdt_soulsfreed,
+   _pdt_ptid,
+   _pdt_mapf,
+   _pdt_mapc,
+};
+
+
+enum Lith_EData {
+   _edt_bosslevel,
+   _edt_paused,
+   _edt_spawnhealth,
+   _edt_heretic,
+   _edt_chex,
+   _edt_rampancy,
+   _edt_riflegrenade,
+
+   _edt_obituary,
+   _edt_logname,
+   _edt_bipname,
+   _edt_sky1,
 };
 
 enum Lith_Fun {
@@ -74,7 +105,6 @@ enum Lith_ScriptNum {
    lsc_gsinit = 17000,
    lsc_strinit,
    lsc_pdata,
-   lsc_wdata,
    lsc_addangle,
    lsc_monsterinfo,
    lsc_raindropspawn,
@@ -134,6 +164,27 @@ enum Lith_RifleMode {
    rifle_firemode_grenade,
    rifle_firemode_burst,
    rifle_firemode_max
+};
+
+enum Lith_MapFlag {
+   
+   _mapf_corrupted,
+   _mapf_thunder,
+   _mapf_vacuum,
+   _mapf_rain,
+
+   
+   _mapf_skyreplace,
+
+   
+   _mapf_cat_beg,
+   _mapf_cat_end = _mapf_cat_beg + 2,
+};
+
+enum Lith_MapCategory {
+   _mapc_lithium,
+   _mapc_interstice,
+   _mapc_hell,
 };
 
 

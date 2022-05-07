@@ -22,19 +22,17 @@
 #define lang_fmt(...) (StrParamBegin(__VA_ARGS__), lang(ACS_EndStrParam()))
 #define lang_fmt_discrim(...) (lang_fmt(__VA_ARGS__, pl.discrim) |? lang_fmt(__VA_ARGS__, ""))
 
-#define lang_discrim(name) (lang((ACS_BeginPrint(), ACS_PrintString(name), PrintChrSt(pl.discrim), ACS_EndStrParam())) |? lang(name))
+#define lang_discrim(name) (lang(strp(ACS_PrintString(name), PrintChrSt(pl.discrim))) |? lang(name))
 
 #define StrParamBegin(...) (ACS_BeginPrint(), __nprintf(__VA_ARGS__))
 #define StrParam(...) (StrParamBegin(__VA_ARGS__), ACS_EndStrParam())
 
 #define PrintChrLi(s)    ACS_PrintGlobalCharRange((i32)(s), __GDCC__Sta, 0, sizeof(s))
 
-#define fast_strndup(s, n) (ACS_BeginPrint(), PrintChars(s, n), ACS_EndStrParam())
-#define fast_strdup(s)     (ACS_BeginPrint(), PrintChrSt(s),    ACS_EndStrParam())
-#define fast_strdup2(s1, s2) \
-   (ACS_BeginPrint(), PrintChrSt(s1), PrintChrSt(s2), ACS_EndStrParam())
-#define fast_strdup3(s1, s2, s3) \
-   (ACS_BeginPrint(), PrintChrSt(s1), PrintChrSt(s2), PrintChrSt(s3), ACS_EndStrParam())
+#define fast_strndup(s, n)       strp(PrintChars(s, n))
+#define fast_strdup(s)           strp(PrintChrSt(s))
+#define fast_strdup2(s1, s2)     strp(PrintChrSt(s1), PrintChrSt(s2))
+#define fast_strdup3(s1, s2, s3) strp(PrintChrSt(s1), PrintChrSt(s2), PrintChrSt(s3))
 
 #define strp(...) (ACS_BeginPrint(), (__VA_ARGS__), ACS_EndStrParam())
 

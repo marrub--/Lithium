@@ -406,9 +406,9 @@ override void worldTick() {
 }
 
 override void uiTick() {
-   /* warning: this entire function is hacks. */
-   if(gameState == GS_FINALE && (!level.nextMap || level.nextMap.left(6) == "enDSeQ"))
+   if(gameState == GS_FINALE && (!level.nextMap || level.nextMap.left(6) == "enDSeQ")) {
       callACS("Lith_Finale");
+   }
 
    tickMenu();
 }
@@ -419,7 +419,7 @@ override void renderOverlay(RenderEvent evt) {
    if(evt.camera && !automapActive) {
       bool hud_enabled = false;
       if(evt.camera.player) {
-         hud_enabled = Lith_UTIL.pData(pdata_hudenabled);
+         hud_enabled = Lith_UTIL.pData(_pdt_hudenabled);
       }
 
       if(hud_enabled) {
@@ -635,7 +635,7 @@ private ui void drawInventory(RenderEvent evt) {
 
    y = drawStatFx(evt, y);
 
-   int battery  = Lith_UTIL.pData(pdata_flashbattery);
+   int battery  = Lith_UTIL.pData(_pdt_flashbattery);
    int bat_life = lith_light_battery * 35;
 
    if(bat_life > 0 && battery < bat_life) {

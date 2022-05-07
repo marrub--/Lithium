@@ -19,6 +19,12 @@
 #define dis_bit(x, y) ((x) &= ~dst_bit(y))
 #define tog_bit(x, y) ((x) ^=  dst_bit(y))
 
+#define dst_msk(y)       ((1 << (y##_end - y##_beg) - 1) << y##_beg)
+#define val_msk(x, y)    (((x) <<  y##_beg)    &  dst_msk(y))
+#define get_msk(x, y)    (((x) &   dst_msk(y)) >> y##_beg)
+#define dis_msk(x, y)    ( (x) &= ~dst_msk(y))
+#define set_msk(x, y, z) (dis_msk(x, y), (x) |= val_msk(z, y))
+
 #define k32_to_i32(n) (ik32.k = (n), ik32.i)
 #define i32_to_k32(n) (ik32.i = (n), ik32.k)
 

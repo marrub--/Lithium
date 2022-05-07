@@ -47,7 +47,7 @@ class Lith_HulgyonSprite : Actor
       BLLT T 1 bright;
       BLLT T 1 bright {
          A_Warp(AAPTR_PLAYER1, 32,0,32, 0, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE);
-         return Lith_UTIL.pData(pdata_weapon) != weapon_c_hulgyon ? ResolveState("Null") : state(null);
+         return Lith_UTIL.pData(_pdt_weapon) != weapon_c_hulgyon ? ResolveState("Null") : state(null);
       }
       wait;
    }

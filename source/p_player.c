@@ -34,11 +34,11 @@ dynam_aut script addr(lsc_playeropen)
 void Z_PlayerEntry(void) {
    Dbg_Log(log_dev, _l(__func__));
 
-   if(!ml.modinit) {
+   if(!ml.init) {
       ACS_Delay(2);
    }
 
-   if(ml.mapkind != _map_kind_normal) {
+   if(!wl.init || ml.kind != _map_kind_normal) {
       ACS_SetPlayerProperty(true, true, PROP_TOTALLYFROZEN);
       return;
    }
@@ -336,11 +336,11 @@ void P_bossWarning(void) {
 
 dynam_aut script static
 void P_bossText(void) {
-   if(ml.boss == boss_iconofsin && ServCallI(sm_IsRampancy)) {
+   if(ml.boss == boss_iconofsin && EDataI(_edt_rampancy)) {
       return;
    }
 
-   bool division = get_bit(ml.mapflag, _mapf_corrupted);
+   bool division = get_bit(ml.flag, _mapf_corrupted);
 
    if(division) {
       for(i32 i = 0; i < 35*2; i++) {
@@ -428,38 +428,33 @@ i32 P_playerColor(void) {
 
 alloc_aut(0) stkcall script static
 void P_doDepthMeter(void) {
-   if(!wl.mapscleared) {
-      return;
-   }
-
-   StartSound(ss_player_depthdown, lch_depth, 0, 1.0, ATTN_STATIC);
-
-   str level_name = fast_strupper((ACS_BeginPrint(), ACS_PrintName(PRINTNAME_LEVELNAME), ACS_EndStrParam()));
    i32 prev_level = (wl.mapscleared % 32) * 8;
    i32 next_level = (wl.mapscleared + 1 % 32) * 8;
    i32 player_clr = P_playerColor() & 0xFFFFFF;
 
-   for(i32 i = 0; i < 175; ++i) {
-      i32 curr_level = lerpk(prev_level, next_level, i > 35 ? ease_in_out_back(clampk((i - 35) / 70.0k, 0.0k, 1.0k)) : 0.0k);
-      k32 alpha_k = i > 140 ? 1.0 - ease_out_cubic((i - 140) / 35.0k) : 1.0;
-      i32 alpha = (i32)(0xFF * alpha_k) << 24;
+   for(i32 i = 0; i < 140; ++i) {
+      i32 curr_level = lerpk(prev_level, next_level, i < 70 ? ease_out_cubic(i / 70.0k) : 1.0k);
+      k32 alpha_k = i > 105 ? 1.0 - ease_out_cubic((i - 105) / 35.0k) : 1.0;
+      i32 alpha_i = 0xFF * alpha_k;
+      i32 alpha_m = alpha_i << 24;
+      i32 cr      = 0xFFFF0000 | (alpha_i << 8) | alpha_i;
 
       SetSize(640, 480);
-      PrintTextAX_str(level_name, sf_areaname, CR_WHITE, 640,2, 98,2, alpha_k, _u_no_unicode);
-      PrintRect(640 - 200, 100, 200, 2, alpha);
-      PrintTextAX_str(st_depth, sf_smallfnt, CR_WHITE, 640,2, 102,1, alpha_k, _u_no_unicode);
-      PrintRect(640, 110, 2, 240, alpha);
+      PrintTextAX_str(st_depth, sf_smallfnt, CR_WHITE, 640,2, 176-2,2, alpha_k, _u_no_unicode);
+      PrintRect(640, 176, 2, 128-8, cr);
       for(i32 j = 0; j < 16; ++j) {
          i32 w = j % 3 == 0 ? 24 : 8;
-         PrintRect(640 - w, 110 + j * 16, w, 2, alpha);
+         PrintRect(640 - w, 176 + j * 8, w, 2, cr);
       }
-      PrintRect(640 - 24, 110 + curr_level, 24, 2, player_clr | alpha);
+      PrintRect(640 - 24, 176 + curr_level, 24, 2, player_clr | alpha_m);
       ACS_Delay(1);
    }
 }
 
 alloc_aut(0) stkcall script static
 void P_doIntro(void) {
+   pl.missionstatshow = pl.missionstatshowmax = 170;
+
    if(wl.mapscleared != 0 || pl.done_intro & pl.pclass) {
       P_doDepthMeter();
       return;
@@ -752,7 +747,7 @@ void P_Aug_pTick(void) {
 
 alloc_aut(0) script_str ext("ACS") addr(OBJ "Markiplier")
 void Z_MapMarker(i32 tid) {
-   if(ml.mapkind != _map_kind_normal) return;
+   if(ml.kind != _map_kind_normal) return;
 
    enum {ticks = 35 * 2};
 

@@ -7,7 +7,7 @@
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
 map M1A1 "Begin The Begin" {
-   LevelNum = 1888101
+   LevelNum = 1888100
    Sky1 = "LITHN16S"
    Music = "lmusic/M1A1.ogg"
 
@@ -15,7 +15,7 @@ map M1A1 "Begin The Begin" {
 }
 
 map M1A2 "The Ash Is Burning" {
-   LevelNum = 1888102
+   LevelNum = 1888101
    Music = "lmusic/M1A2.ogg"
 }
 

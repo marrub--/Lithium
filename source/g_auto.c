@@ -107,7 +107,7 @@ void G_Begin(struct gui_state *g, i32 w, i32 h) {
    SetSize(g->w = w, g->h = h);
 }
 
-void G_End(struct gui_state *g, enum cursor curs) {
+void G_End(struct gui_state *g, i32 curs) {
    if(g->tooltip) {
       SetClipW(0, 0, g->w, g->h, g->w);
       i32 x = g->cx + 7;
@@ -216,10 +216,7 @@ void G_Tooltip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, cstr id) {
    }
 
    if(aabb_point(x, y, w - 1, h - 1, g->cx, g->cy)) {
-      str tt = lang((ACS_BeginPrint(),
-                     PrintChrLi(LANG "TOOLTIP_"),
-                     PrintChrSt(id),
-                     ACS_EndStrParam()));
+      str tt = lang(strp(PrintChrLi(LANG "TOOLTIP_"), PrintChrSt(id)));
       if(tt) {
          g->tooltip = tt;
       }

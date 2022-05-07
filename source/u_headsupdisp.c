@@ -356,7 +356,7 @@ void HUD_BottomRight(void) {
 
    switch(P_Wep_CurType()) {
    case weapon_m_rifle:
-      if(ServCallI(sm_GetRifleGrenade)) {
+      if(EDataI(_edt_riflegrenade)) {
          PrintSprite(sp_HUD_H_D44, 280,1, 237,1);
       }
       break;

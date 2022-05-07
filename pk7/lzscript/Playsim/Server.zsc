@@ -33,4 +33,33 @@ static clearScope string localize(string name) {
    return ret;
 }
 
+static int EDataI(Actor mo, int info) {
+   switch(info) {
+   case _edt_bosslevel:   return Instance().m_bossLevel;
+   case _edt_paused:      return level.isFrozen();
+   case _edt_spawnhealth: return mo.spawnHealth();
+   case _edt_chex:        return gameinfo.gametype & GAME_Chex    != 0;
+   case _edt_heretic:     return gameinfo.gametype & GAME_Heretic != 0;
+
+   case _edt_rampancy: {
+      string why = "Robot_Thingo";
+      class<Object> stopit = why;
+      return stopit != null;
+   }
+   case _edt_riflegrenade:
+      return !Lith_CombatRifle(mo.findInventory("Lith_CombatRifle")).m_grenFire;
+   }
+   return 0;
+}
+
+static string EDataS(Actor mo, int info) {
+   switch(info) {
+   case _edt_obituary: return instance().m_obituary;
+   case _edt_logname:  return instance().m_data.logName;
+   case _edt_bipname:  return instance().m_data.bipName;
+   case _edt_sky1:     return level.info.skyPic1;
+   }
+   return "";
+}
+
 /* EOF */

@@ -133,7 +133,7 @@ void P_Log_Entry(void) {
    if(!lm) {
       log.mapsV = Talloc(log.mapsV, log.mapsC + 1, _tag_logs);
       lm = &log.mapsV[log.mapsC++];
-      lm->name = (ACS_BeginPrint(), ACS_PrintName(PRINTNAME_LEVELNAME), ACS_EndStrParam());
+      lm->name = ml.name;
       lm->lnum = lnum;
    }
 
@@ -241,7 +241,7 @@ script_str ext("ACS") addr(OBJ "LogS")
 void Z_Log(i32 levl, i32 type) {
    if(P_None()) return;
 
-   str name = ServCallS(sm_GetLogName);
+   str name = EDataS(_edt_logname);
 
    if(name[0] == '_') {
       ACS_BeginPrint();

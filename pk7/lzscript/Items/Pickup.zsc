@@ -21,7 +21,7 @@ class Lith_ItemGlow : Actor {
    override void postBeginPlay() {
       super.postBeginPlay();
       sprite = Actor.GetSpriteIndex("LIFX");
-      switch(ACS_ExecuteWithResult(lsc_wdata, wdata_pclass)) {
+      switch(Lith_UTIL.pData(_pdt_pclass)) {
       case pcl_marine:    frame = CH_U_M - CH_U_A; break;
       case pcl_cybermage: frame = CH_U_C - CH_U_A; break;
       case pcl_informant: frame = CH_U_I - CH_U_A; break;

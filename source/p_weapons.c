@@ -277,7 +277,7 @@ k32 Z_AmmoRunOut(bool ro, k32 mul) {
 
 script_str ext("ACS") addr(OBJ "GetFinalizerMaxHealth")
 i32 Z_GetFinalizerMaxHealth(void) {
-   i32 sh = ServCallI(sm_GetSpawnHealth);
+   i32 sh = EDataI(_edt_spawnhealth);
 
    ifauto(dmon_t *, m, DmonSelf()) {
       return sh + (m->maxhealth - sh) * 0.5;

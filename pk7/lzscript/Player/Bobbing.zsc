@@ -50,7 +50,7 @@ void Lith_BobWeapon() {
    m_LastVZVel = m_VZVel;
    m_VZVel = Lith_UTIL.Lerp(m_VZVel, m_ZVel, 0.42);
 
-   if(Lith_UTIL.pData(pdata_upgrade, UPGR_Seven7s)) {
+   if(Lith_UTIL.pData(_pdt_upgrade, UPGR_Seven7s)) {
       m_mbobprv = m_mbobpos;
       if(!(vel.length() < 4 ||
            !player.readyweapon ||
@@ -71,7 +71,7 @@ override vector2 BobWeapon(double ticfrac) {
    if(!wep) return (0, 0);
 
    // marathon bobbing :P
-   if(Lith_UTIL.pData(pdata_upgrade, UPGR_Seven7s)) {
+   if(Lith_UTIL.pData(_pdt_upgrade, UPGR_Seven7s)) {
       return (0, (m_mbobpos - m_mbobprv) * ticfrac + m_mbobpos + 5 + clamp(20 - 20 * (pitch + 90) / 180.0, 5, 15));
    }
 

@@ -24,25 +24,6 @@ enum Lith_Attrib {
    at_max
 };
 
-enum Lith_PData {
-   pdata_weapon,
-   pdata_upgrade,
-   pdata_riflemode,
-   pdata_hassigil,
-   pdata_weaponzoom,
-   pdata_pclass,
-   pdata_semifrozen,
-   pdata_addp,
-   pdata_addy,
-   pdata_addr,
-   pdata_recoilp,
-   pdata_attr,
-   pdata_alpha,
-   pdata_oldhealth,
-   pdata_hudenabled,
-   pdata_flashbattery,
-};
-
 enum Lith_SubweaponType {
    _subw_gun,
    _subw_grenade,

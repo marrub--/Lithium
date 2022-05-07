@@ -63,25 +63,6 @@ enum ZscName(Attrib) {
    at_max
 };
 
-enum ZscName(PData) {
-   pdata_weapon,
-   pdata_upgrade,
-   pdata_riflemode,
-   pdata_hassigil,
-   pdata_weaponzoom,
-   pdata_pclass,
-   pdata_semifrozen,
-   pdata_addp,
-   pdata_addy,
-   pdata_addr,
-   pdata_recoilp,
-   pdata_attr,
-   pdata_alpha,
-   pdata_oldhealth,
-   pdata_hudenabled,
-   pdata_flashbattery,
-};
-
 enum ZscName(SubweaponType) {
    _subw_gun,
    _subw_grenade,
@@ -322,6 +303,9 @@ struct player {
    i32 shieldmax;
    i32 regenwaitmax;
    i32 regenwait;
+
+   i32 missionstatshow;
+   i32 missionstatshowmax;
 
    /* Input */
    struct gui_txt tb;

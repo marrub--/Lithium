@@ -109,7 +109,7 @@ action(Weapon) State Lith_A_FireMateba()
    A_GunFlash("DummyFlash");
    if(invoker.m_Fired & 1)
       Lith_A_Casing("Lith_CasSmallHot", 14, 2, 32, frandom(1,2), frandom(3,5), frandom(2,3));
-   if(Lith_UTIL.pData(pdata_upgrade, UPGR_Mateba_A) && invoker.Lith_MagEmpty())
+   if(Lith_UTIL.pData(_pdt_upgrade, UPGR_Mateba_A) && invoker.Lith_MagEmpty())
       return ResolveState("Finalize");
    Lith_A_RecoilDn(0.2);
    Lith_FireBullets(2, 2, -1, 30, FBF_NORANDOM);

@@ -323,7 +323,7 @@ void Z_UnlockPage(void) {
    if(!P_None()) {
       noinit static
       char tag[32];
-      faststrcpy_str(tag, ServCallS(sm_GetBipName));
+      faststrcpy_str(tag, EDataS(_edt_bipname));
       P_BIP_Unlock(P_BIP_NameToPage(tag), false);
    }
 }

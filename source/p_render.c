@@ -39,6 +39,34 @@ void P_Ren_LevelUp(void) {
    }
 }
 
+alloc_aut(0) stkcall static
+void P_Ren_Mission(void) {
+   if(pl.missionstatshow) {
+      k32 ss    = pl.missionstatshow--;
+      k32 max   = pl.missionstatshowmax;
+      k32 quart = max / 4.0k;
+      k32 alpha = ss < quart ? ease_out_cubic(ss / quart) : 1.0k;
+      SetSize(320, 240);
+      ACS_BeginPrint();
+      _p(fast_strupper(ml.name)); _c('\n');
+      if(get_bit(ml.flag, _mapf_vacuum)) {
+         _l("\CjENV: \CiVACUUM\n");
+      } else {
+         _l("\CjTEMPERATURE: \Cv"); _p(ml.temperature); _l(u8"°C\n");
+         _l("\CjHUMIDITY: \Cy");    _p(ml.humidity);    _l("%\n");
+      }
+      if(get_bit(ml.flag, _mapf_rain))      _l("\CjENV: \CnRAINING\n");
+      if(get_bit(ml.flag, _mapf_thunder))   _l("\CjENV: \CkELEC. STORM\n");
+      if(get_bit(ml.flag, _mapf_corrupted)) _l("\CjENV: \CgCAUSALITY SHIFT\n");
+      switch(ml.mission) {
+      case _mstat_unfinished: _l("\CjMISSION: \CiUNFINISHED"); break;
+      case _mstat_finished:   _l("\CjMISSION: \CdFINISHED");   break;
+      case _mstat_failure:    _l("\CjMISSION: \CgFAILURE");    break;
+      }
+      PrintTextA(sf_smallfnt, pl.color, 320,3, 28,1, alpha);
+   }
+}
+
 void P_Ren_PTickPst(void) {
    P_Ren_Magic();
    P_Ren_Step();
@@ -49,6 +77,7 @@ void P_Ren_PTickPst(void) {
    #ifndef NDEBUG
    P_Ren_Debug();
    #endif
+   P_Ren_Mission();
 }
 
 alloc_aut(0) script

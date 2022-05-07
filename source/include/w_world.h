@@ -27,22 +27,61 @@ w_setptr_x(bool)
 /* Line 1888300 is used as a control line for mod features.
  * Similarly, maps in a certain range are marked as Lithium maps.
  */
-#define LithMapLine 0x001CD02C
-#define LithMapBeg  0x001CCF00
-#define LithMapEnd  0x001CD2E7
+enum {
+   LithMapLine = 0x001CD02C,
+
+   LithMapBeg = 0x001CCF00,
+   LithMapAbyss,
+   LithMapM1A1 = LithMapBeg + 100,
+   LithMapEnd = LithMapBeg + 999,
+};
 
 #define GetFun()  CVarGetI(sc_fun)
 #define SetFun(x) CVarSetI(sc_fun, x)
+
+#define EDataI(...) ServCallI(sm_EDataI, __VA_ARGS__)
+#define EDataS(...) ServCallS(sm_EDataS, __VA_ARGS__)
 #endif
 
-enum ZscName(WData) {
-   wdata_bossspawned,
-   wdata_soulsfreed,
-   wdata_dorain,
-   wdata_ptid,
-   wdata_pclass,
-   wdata_skymap,
-   wdata_inhell,
+/* Program Data */
+enum ZscName(PData) {
+   _pdt_weapon,
+   _pdt_upgrade,
+   _pdt_riflemode,
+   _pdt_hassigil,
+   _pdt_weaponzoom,
+   _pdt_pclass,
+   _pdt_semifrozen,
+   _pdt_addp,
+   _pdt_addy,
+   _pdt_addr,
+   _pdt_recoilp,
+   _pdt_attr,
+   _pdt_alpha,
+   _pdt_oldhealth,
+   _pdt_hudenabled,
+   _pdt_flashbattery,
+   _pdt_bossspawned,
+   _pdt_soulsfreed,
+   _pdt_ptid,
+   _pdt_mapf,
+   _pdt_mapc,
+};
+
+/* External Data */
+enum ZscName(EData) {
+   _edt_bosslevel,
+   _edt_paused,
+   _edt_spawnhealth,
+   _edt_heretic,
+   _edt_chex,
+   _edt_rampancy,
+   _edt_riflegrenade,
+
+   _edt_obituary,
+   _edt_logname,
+   _edt_bipname,
+   _edt_sky1,
 };
 
 enum ZscName(Fun) {
@@ -94,7 +133,6 @@ enum ZscName(ScriptNum) {
    lsc_gsinit = 17000,
    lsc_strinit,
    lsc_pdata,
-   lsc_wdata,
    lsc_addangle,
    lsc_monsterinfo,
    lsc_raindropspawn,
@@ -136,6 +174,27 @@ enum ZscName(RifleMode) {
    rifle_firemode_grenade,
    rifle_firemode_burst,
    rifle_firemode_max
+};
+
+enum ZscName(MapFlag) {
+   /* states */
+   _mapf_corrupted,
+   _mapf_thunder,
+   _mapf_vacuum,
+   _mapf_rain,
+
+   /* visual info */
+   _mapf_skyreplace,
+
+   /* categories */
+   _mapf_cat_beg,
+   _mapf_cat_end = _mapf_cat_beg + 2,
+};
+
+enum ZscName(MapCategory) {
+   _mapc_lithium,
+   _mapc_interstice,
+   _mapc_hell,
 };
 
 #if !ZscOn
@@ -194,9 +253,9 @@ struct payoutinfo {
 };
 
 enum mission_status {
-   _unfinished,
-   _finished,
-   _failure
+   _mstat_unfinished,
+   _mstat_finished,
+   _mstat_failure
 };
 
 enum finale_num {
@@ -212,24 +271,17 @@ enum map_kind {
    _map_kind_end,
 };
 
-enum map_flag {
-   _mapf_lithium,
-   _mapf_corrupted,
-};
-
 struct world {
    struct payoutinfo pay;
    i32               mapscleared;
    bool              unloaded;
    i32               secretsfound;
    i32               ticks;
-   i32               soulsfreed;
    bool              bossspawned;
    i32               cbiperf;
    i64               cbiupgr;
    bool              legendoom;
-   bool              dorain;
-   bool              gblinit;
+   bool              init;
 
    i32          a_x, a_y;
    struct polar a_angles[8];
@@ -237,14 +289,18 @@ struct world {
 };
 
 struct map_locals {
-   enum mission_status mission;
-   i32                 boss;
-   str                 maplump;
-   i32                 mapid;
-   i32                 mapseed;
-   i32                 mapkind;
-   i32                 mapflag;
-   bool                modinit;
+   i32  mission;
+   i32  temperature;
+   i32  humidity;
+   i32  soulsfreed;
+   i32  boss;
+   str  name;
+   str  lump;
+   i32  id;
+   i32  seed;
+   i32  kind;
+   i32  flag;
+   bool init;
 };
 
 extern struct world            wl;

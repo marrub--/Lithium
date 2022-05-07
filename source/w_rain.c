@@ -39,9 +39,9 @@ void W_DoRain(void) {
          InvTake(so_SMGHeat, 1);
       }
 
-      if(!get_bit(ml.mapflag, _mapf_lithium) && MapNum >= 21) {
+      if(get_msk(ml.flag, _mapf_cat) == _mapc_hell) {
          ServCallV(sm_SpawnRain, so_BloodRainDrop);
-      } else if(MapNum == 1888001) {
+      } else if(MapNum == LithMapAbyss) {
          ServCallV(sm_SpawnRain, so_AbyssRainDrop);
       } else {
          ServCallV(sm_SpawnRain, so_RainDrop);

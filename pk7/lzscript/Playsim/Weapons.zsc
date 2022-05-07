@@ -26,10 +26,6 @@ static void AutoReload(string cname) {
    if(wep) wep.lith_reloadFinish(true);
 }
 
-static bool GetRifleGrenade(Actor p) {
-   return !Lith_CombatRifle(p.findInventory("Lith_CombatRifle")).m_grenFire;
-}
-
 static void IonizeFX(Actor mo) {
    Lith_CopyEffect.create("Lith_IonizedFx", mo);
 }
@@ -70,7 +66,7 @@ static void DelearSprite(Actor mo_) {
 static void PoisonFX(Actor mo) {
    /* removed weird ass bullshit... */
    let trg = Lith_Player(mo.Target);
-   int dmg = trg ? Lith_UTIL.pData(pdata_attr, at_acc) / 4 : 0;
+   int dmg = trg ? Lith_UTIL.pData(_pdt_attr, at_acc) / 4 : 0;
    mo.A_DamageSelf(10 + dmg, "Poison");
    mo.A_StartSound("weapons/shotgun/poison/acid", lch_body3, attenuation: 0.5);
    Lith_CopyEffect.create("Lith_PoisonFx", mo);

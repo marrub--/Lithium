@@ -104,7 +104,7 @@ void Lith_GiveDefWeapon(class<Weapon> type) {
 override void PlayerThink() {
    if(level.levelnum == 1911777) return;
 
-   if(Lith_UTIL.pData(pdata_semifrozen)) {
+   if(Lith_UTIL.pData(_pdt_semifrozen)) {
       UserCmd cmd = player.cmd;
       cmd.pitch = cmd.yaw = cmd.roll = 0;
       player.turnticks = 0;
@@ -119,8 +119,9 @@ private void Lith_RainEffect() {
    Shader.SetUniform1f(player, "Lith_Rain", "lith_t", level.totaltime / 15.);
    Shader.SetUniform1f(player, "Lith_Rain", "lith_m", m_RainLerp);
 
-   if(player && ACS_ExecuteWithResult(lsc_wdata, wdata_dorain) &&
-      ceilingpic == skyflatnum && pitch < -5) {
+   if(player && Lith_UTIL.pData(_pdt_mapf, _mapf_rain) &&
+      ceilingpic == skyflatnum && pitch < -5)
+   {
       double m = -pitch - 5;
       m_RainLerp = Lith_UTIL.Lerp(m_RainLerp, m / 85., 0.1);
       Shader.SetEnabled(player, "Lith_Rain", true);
@@ -160,8 +161,8 @@ private void Lith_ItemVacuum() {
 void Lith_PreTick() {
    if(m_wasDamaged) {
       --m_wasDamaged;
-   } else if(Lith_UTIL.pData(pdata_pclass) & (pcl_wanderer | pcl_thoth) &&
-             health < Lith_UTIL.pData(pdata_oldhealth)) {
+   } else if(Lith_UTIL.pData(_pdt_pclass) & (pcl_wanderer | pcl_thoth) &&
+             health < Lith_UTIL.pData(_pdt_oldhealth)) {
       m_wasDamaged = 7;
    }
 
@@ -175,7 +176,7 @@ void Lith_PreTick() {
    m_wasFrozen = isFrozen();
 
    /* hack to keep the view from moving around */
-   if(Lith_UTIL.pData(pdata_semifrozen)) {
+   if(Lith_UTIL.pData(_pdt_semifrozen)) {
       angle -= 1;
       pitch -= 1;
       A_SetAngle(angle + 1, SPF_INTERPOLATE);
@@ -188,9 +189,9 @@ void Lith_PreTick() {
 }
 
 void Lith_PostTick() {
-   viewPitch = -(Lith_UTIL.pData(pdata_addp)/FIX);
-   viewAngle = -(Lith_UTIL.pData(pdata_addy)/FIX);
-   viewRoll  = -(Lith_UTIL.pData(pdata_addr)/FIX);
+   viewPitch = -(Lith_UTIL.pData(_pdt_addp)/FIX);
+   viewAngle = -(Lith_UTIL.pData(_pdt_addy)/FIX);
+   viewRoll  = -(Lith_UTIL.pData(_pdt_addr)/FIX);
 
    if(lith_player_rainshader)
       Lith_RainEffect();

@@ -140,8 +140,8 @@ Fire:
    GRLG A 0 {
       invoker.m_Loaded = invoker.m_Iter = invoker.m_Mode = 0;
    }
-   GRLG A 0 A_JumpIf(Lith_UTIL.pData(pdata_upgrade, UPGR_RPG_A), "FireUnreal");
-   GRLG A 0 A_JumpIf(Lith_UTIL.pData(pdata_upgrade, UPGR_RPG_B), "FireHoming");
+   GRLG A 0 A_JumpIf(Lith_UTIL.pData(_pdt_upgrade, UPGR_RPG_A), "FireUnreal");
+   GRLG A 0 A_JumpIf(Lith_UTIL.pData(_pdt_upgrade, UPGR_RPG_B), "FireHoming");
    GRLG A 0 Lith_A_FireRocket;
 FireAnim:
    GRLG B 1 bright A_GunFlash;
@@ -179,11 +179,11 @@ Flash:
 
 AltFire:
    GRLG A 1;
-   GRLG A 0 A_JumpIf(Lith_UTIL.pData(pdata_upgrade, UPGR_RPG_B), "Ready");
+   GRLG A 0 A_JumpIf(Lith_UTIL.pData(_pdt_upgrade, UPGR_RPG_B), "Ready");
    GRLG A 0 lith_jumpNoAmmo;
    GRLG A 0 {
-      if(Lith_UTIL.pData(pdata_upgrade, UPGR_RPG_A)) Lith_A_FireRocket();
-      else                                           Lith_A_FireGrenade();
+      if(Lith_UTIL.pData(_pdt_upgrade, UPGR_RPG_A)) Lith_A_FireRocket();
+      else                                          Lith_A_FireGrenade();
    }
    goto FireAnim;
 FireHoming:

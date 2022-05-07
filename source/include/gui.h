@@ -288,7 +288,7 @@ void G_UpdateState(struct gui_state *g);
 
 optargs(2)
 void G_Begin(struct gui_state *g, i32 w, i32 h);
-void G_End(struct gui_state *g, enum cursor curs);
+void G_End(struct gui_state *g, i32 curs);
 
 optargs(1)
 void G_Clip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, i32 ww);

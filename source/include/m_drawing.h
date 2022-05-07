@@ -218,7 +218,6 @@ enum ZscName(Channel) {
    lch_step,
    lch_weather1,
    lch_weather2,
-   lch_depth,
 
    lch_ambient,
 };
