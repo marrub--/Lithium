@@ -38,6 +38,8 @@ enum Lith_PData {
    _pdt_ptid,
    _pdt_mapf,
    _pdt_mapc,
+   _pdt_mapr,
+   _pdt_mapk,
 };
 
 
@@ -171,7 +173,6 @@ enum Lith_MapFlag {
    _mapf_corrupted,
    _mapf_thunder,
    _mapf_vacuum,
-   _mapf_rain,
 
    
    _mapf_skyreplace,
@@ -179,12 +180,31 @@ enum Lith_MapFlag {
    
    _mapf_cat_beg,
    _mapf_cat_end = _mapf_cat_beg + 2,
+   _mapf_rain_beg,
+   _mapf_rain_end = _mapf_rain_beg + 3,
+   _mapf_kind_beg,
+   _mapf_kind_end = _mapf_kind_beg + 2,
+};
+
+enum Lith_MapRain {
+   _mapr_none,
+   _mapr_rain,
+   _mapr_blood,
+   _mapr_abyss,
+   _mapr_snow,
 };
 
 enum Lith_MapCategory {
+   _mapc_none,
    _mapc_lithium,
    _mapc_interstice,
    _mapc_hell,
+};
+
+enum Lith_MapKind {
+   _mapk_normal,
+   _mapk_title,
+   _mapk_end,
 };
 
 

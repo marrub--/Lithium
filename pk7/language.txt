@@ -1866,7 +1866,7 @@
 "LITH_TOOLTIP_sv_nobosses" = "Disables mid-mission bosses added by Lithium. Only enable if you know what this is.";
 "LITH_sv_postgame" = "Enable";
 "LITH_TOOLTIP_sv_postgame" = "\cgWarning:\c- Post-game content can \cicause saves to be effectively deleted\c-, and will have \cipermanent repercussions\c-. Only enable if you really want more.";
-"LITH_sv_rain" = "Enable";
+"LITH_sv_rain" = "Always enable";
 "LITH_sv_revenge" = "Explode on death";
 "LITH_sv_sky" = "Replace skies";
 "LITH_sv_skydarkening" = "Outside sector darkening";

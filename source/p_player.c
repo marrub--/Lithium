@@ -38,7 +38,7 @@ void Z_PlayerEntry(void) {
       ACS_Delay(2);
    }
 
-   if(!wl.init || ml.kind != _map_kind_normal) {
+   if(!wl.init || get_msk(ml.flag, _mapf_kind) != _mapk_normal) {
       ACS_SetPlayerProperty(true, true, PROP_TOTALLYFROZEN);
       return;
    }
@@ -747,7 +747,7 @@ void P_Aug_pTick(void) {
 
 alloc_aut(0) script_str ext("ACS") addr(OBJ "Markiplier")
 void Z_MapMarker(i32 tid) {
-   if(ml.kind != _map_kind_normal) return;
+   if(get_msk(ml.flag, _mapf_kind) != _mapk_normal) return;
 
    enum {ticks = 35 * 2};
 

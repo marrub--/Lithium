@@ -112,12 +112,12 @@ void MInitPre(void) {
       }
 
       if(CVarGetI(sc_sv_rain) || ml.humidity > 60 + dewpoint) {
-         set_bit(ml.flag, _mapf_rain);
-         W_DoRain(/*_rain_rain*/);
-      } /*else if(CVarGetI(sc_sv_snow) || (ml.temperature <= 0 && rand() % 99 < 11)) {
-         set_bit(ml.flag, _mapf_snow);
-         W_DoRain(_rain_snow);
-      }*/
+         set_msk(ml.flag, _mapf_rain, _mapr_rain);
+         W_DoRain();
+      } else if(ml.temperature <= 0 && rand() % 99 < 11) {
+         set_msk(ml.flag, _mapf_rain, _mapr_snow);
+         W_DoRain();
+      }
    } else {
       set_bit(ml.flag, _mapf_vacuum);
       ml.humidity    = 0;
@@ -229,11 +229,11 @@ void Z_World(bool is_reopen) {
    Dbg_Log(log_dev, _l(__func__));
 
    if(ACS_GameType() == GAME_TITLE_MAP) {
-      ml.kind = _map_kind_title;
-   } else if(MapNum == 1911777) {
-      ml.kind = _map_kind_end;
+      set_msk(ml.flag, _mapf_kind, _mapk_title);
+   } else if(MapNum == LithMapEnd) {
+      set_msk(ml.flag, _mapf_kind, _mapk_end);
    } else {
-      ml.kind = _map_kind_normal;
+      set_msk(ml.flag, _mapf_kind, _mapk_normal);
    }
 
    Draw_Init();
@@ -281,11 +281,11 @@ void Z_World(bool is_reopen) {
    wl.unloaded = false; /* Unloaded flag can be reset now. */
 
    /* Special map main-loop functions. */
-   switch(ml.kind) {
-   case _map_kind_title:
+   switch(get_msk(ml.flag, _mapf_kind)) {
+   case _mapk_title:
       W_Title();
       return;
-   case _map_kind_end:
+   case _mapk_end:
       F_Run();
       return;
    }

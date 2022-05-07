@@ -19,7 +19,7 @@
 #define dis_bit(x, y) ((x) &= ~dst_bit(y))
 #define tog_bit(x, y) ((x) ^=  dst_bit(y))
 
-#define dst_msk(y)       ((1 << (y##_end - y##_beg) - 1) << y##_beg)
+#define dst_msk(y)       (((1 << (y##_end - y##_beg)) - 1) << y##_beg)
 #define val_msk(x, y)    (((x) <<  y##_beg)    &  dst_msk(y))
 #define get_msk(x, y)    (((x) &   dst_msk(y)) >> y##_beg)
 #define dis_msk(x, y)    ( (x) &= ~dst_msk(y))

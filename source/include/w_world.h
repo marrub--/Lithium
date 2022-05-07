@@ -31,9 +31,10 @@ enum {
    LithMapLine = 0x001CD02C,
 
    LithMapBeg = 0x001CCF00,
+   LithMapTest = LithMapBeg,
    LithMapAbyss,
    LithMapM1A1 = LithMapBeg + 100,
-   LithMapEnd = LithMapBeg + 999,
+   LithMapEnd = 0x001D2BE1,
 };
 
 #define GetFun()  CVarGetI(sc_fun)
@@ -66,6 +67,8 @@ enum ZscName(PData) {
    _pdt_ptid,
    _pdt_mapf,
    _pdt_mapc,
+   _pdt_mapr,
+   _pdt_mapk,
 };
 
 /* External Data */
@@ -181,7 +184,6 @@ enum ZscName(MapFlag) {
    _mapf_corrupted,
    _mapf_thunder,
    _mapf_vacuum,
-   _mapf_rain,
 
    /* visual info */
    _mapf_skyreplace,
@@ -189,12 +191,31 @@ enum ZscName(MapFlag) {
    /* categories */
    _mapf_cat_beg,
    _mapf_cat_end = _mapf_cat_beg + 2,
+   _mapf_rain_beg,
+   _mapf_rain_end = _mapf_rain_beg + 3,
+   _mapf_kind_beg,
+   _mapf_kind_end = _mapf_kind_beg + 2,
+};
+
+enum ZscName(MapRain) {
+   _mapr_none,
+   _mapr_rain,
+   _mapr_blood,
+   _mapr_abyss,
+   _mapr_snow,
 };
 
 enum ZscName(MapCategory) {
+   _mapc_none,
    _mapc_lithium,
    _mapc_interstice,
    _mapc_hell,
+};
+
+enum ZscName(MapKind) {
+   _mapk_normal,
+   _mapk_title,
+   _mapk_end,
 };
 
 #if !ZscOn
@@ -265,12 +286,6 @@ enum finale_num {
    _finale_division,
 };
 
-enum map_kind {
-   _map_kind_normal,
-   _map_kind_title,
-   _map_kind_end,
-};
-
 struct world {
    struct payoutinfo pay;
    i32               mapscleared;
@@ -298,7 +313,6 @@ struct map_locals {
    str  lump;
    i32  id;
    i32  seed;
-   i32  kind;
    i32  flag;
    bool init;
 };

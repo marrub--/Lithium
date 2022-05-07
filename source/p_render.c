@@ -55,7 +55,11 @@ void P_Ren_Mission(void) {
          _l("\CjTEMPERATURE: \Cv"); _p(ml.temperature); _l(u8"°C\n");
          _l("\CjHUMIDITY: \Cy");    _p(ml.humidity);    _l("%\n");
       }
-      if(get_bit(ml.flag, _mapf_rain))      _l("\CjENV: \CnRAINING\n");
+      switch(get_msk(ml.flag, _mapf_rain)) {
+      case _mapr_rain:  _l("\CjENV: \CnRAINING\n");       break;
+      case _mapr_blood: _l("\CjENV: \CgSANGUINE RAIN\n"); break;
+      case _mapr_snow:  _l("\CjENV: \CwSNOWING\n");       break;
+      }
       if(get_bit(ml.flag, _mapf_thunder))   _l("\CjENV: \CkELEC. STORM\n");
       if(get_bit(ml.flag, _mapf_corrupted)) _l("\CjENV: \CgCAUSALITY SHIFT\n");
       switch(ml.mission) {

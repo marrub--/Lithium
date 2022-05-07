@@ -332,7 +332,7 @@ what this is.
 deleted\c-, and will have \cipermanent repercussions\c-. Only enable
 if you really want more.
 
-== \#sv_rain | Enable
+== \#sv_rain | Always enable
 == \#sv_revenge | Explode on death
 == \#sv_sky | Replace skies
 == \#sv_skydarkening | Outside sector darkening
