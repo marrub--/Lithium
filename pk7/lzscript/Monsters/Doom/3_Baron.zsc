@@ -105,9 +105,10 @@ default
    Obituary    "$OB_BARON";
    Tag         "$LITH_INFO_SHORT_BaronOfHell";
 
-   +BOSSDEATH
-   +FLOORCLIP
-   +MISSILEMORE
+   +E1M8Boss
+   +BossDeath
+   +FloorClip
+   +MissileMore
 }
 
 int m_Angle;
@@ -158,7 +159,7 @@ Death.Extreme:
 Crash.Extreme:
    BOSS P 5 Lith_A_XDie;
    BOSS QRSTUVW 5;
-   BOSS X -1;
+   BOSS X -1 A_BossDeath;
    stop;
 
 Raise:

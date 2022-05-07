@@ -67,12 +67,14 @@ default
    Obituary "$OB_SPIDER";
    Tag      "$LITH_INFO_SHORT_SpiderMastermind";
 
-   +BOSS
-   +BOSSDEATH
-   +DONTMORPH
-   +FLOORCLIP
-   +MISSILEMORE
-   +NORADIUSDMG
+   +E3M8Boss
+   +E4M8Boss
+   +Boss
+   +BossDeath
+   +DontMorph
+   +FloorClip
+   +MissileMore
+   +NoRadiusDmg
 }
 
 override class<Actor> GetBloodType(int type)

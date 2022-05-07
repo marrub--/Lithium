@@ -132,7 +132,15 @@ map TESTMAP "Test Map" {
 
 map LITHEND "" {
    levelNum = 1911777
+   endOfGame
+   noAutoSaveHint
+   noClusterText
    noIntermission
+   noInventoryBar
+   noLightFade
+   noStatistics
+   resetHealth
+   resetInventory
 }
 
 doomednums {

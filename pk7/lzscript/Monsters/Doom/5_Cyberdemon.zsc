@@ -97,13 +97,15 @@ default
    Obituary "$OB_CYBORG";
    Tag      "$LITH_INFO_SHORT_Cyberdemon";
 
-   +BOSS
-   +BOSSDEATH
-   +DONTMORPH
-   +FLOORCLIP
-   +MISSILEEVENMORE
-   +MISSILEMORE
-   +NORADIUSDMG
+   +E2M8Boss
+   +E4M6Boss
+   +Boss
+   +BossDeath
+   +DontMorph
+   +FloorClip
+   +MissileEvenMore
+   +MissileMore
+   +NoRadiusDmg
 }
 
 void Lith_A_CyberdemonShoot()
