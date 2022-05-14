@@ -334,6 +334,7 @@ $playersounddup assassin male *pain75 *pain100
 $playersound assassin male *pain50 lsnd/PlayerA/Pain
 $playersounddup assassin male *pain25 *pain50
 $playersound assassin male *grunt lsnd/PlayerA/Grunt
+player/omi/doll lsnd/PlayerA/Doll
 $alias player/omi/step player/step
 player/omi/roll lsnd/PlayerA/Roll
 player/omi/djump lsnd/PlayerA/DoubleJump
@@ -355,6 +356,7 @@ $playersounddup darklord male *pain50 *pain75
 $playersounddup darklord male *pain25 *pain75
 $playersound darklord male *grunt lsnd/PlayerD/Grunt
 $playersound darklord male *land lsnd/PlayerD/Land
+player/ari/doll lsnd/PlayerD/Doll
 player/ari/step lsnd/PlayerD/Step
 player/ari/shield/break lsnd/PlayerD/ShieldBreak
 player/ari/shield/regenw lsnd/PlayerD/ShieldRegenWait
