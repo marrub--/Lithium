@@ -106,8 +106,9 @@ default
    Obituary "$OB_BABY";
    Tag      "$LITH_INFO_SHORT_Arachnotron";
 
-   +BOSSDEATH
-   +FLOORCLIP
+   +Map07Boss2
+   +BossDeath
+   +FloorClip
 }
 
 states

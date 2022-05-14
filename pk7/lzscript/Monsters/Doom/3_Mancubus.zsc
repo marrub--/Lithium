@@ -73,8 +73,9 @@ default
    Obituary "$OB_FATSO";
    Tag      "$LITH_INFO_SHORT_Mancubus";
 
-   +BOSSDEATH
-   +FLOORCLIP
+   +BossDeath
+   +Map07Boss1
+   +FloorClip
 }
 
 states
