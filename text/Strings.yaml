@@ -12,6 +12,8 @@
 
 #define STR_PREFIXES_ONLY
 #include "m_str.h"
+#define VER_DEFINES_ONLY
+#include "m_version.h"
 #define NO_PREFIX ""
 
 ## Loose Strings
@@ -31,6 +33,8 @@ st_:
    - ob_slime:    (slime)
    - ob_suicide:  (suicide)
    - six_tag:     \Cg6
+
+   - ver: verstr
 
 ## Font Names
 sf_:

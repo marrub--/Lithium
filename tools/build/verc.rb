@@ -6,14 +6,14 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-i = txt "Strings.yaml"
-h = hdr "m_stab.h"
+i = txt "Versions.yaml"
+h = hdr "m_version.h"
 
 @ctx.fp << <<ninja
-rule stab
- command = gdcc-cpp -o - #{CPP_ARG} $in | #{tool "stab.rb"} $out
- description = [stab.rb] String Table Generator
-build #{h}: stab #{i} | #{tool "stab.rb"} #{hdr "m_drawing.h"} #{hdr "u_data.h"} #{hdr "m_version.h"}
+rule verc
+ command = #{tool "verc.rb"} $in $out
+ description = [verc.rb] Version Compiler
+build #{h}: verc #{i} | #{tool "verc.rb"}
 ninja
 
 @ctx.ordr.push h

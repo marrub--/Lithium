@@ -1,0 +1,51 @@
+## ╭──────────────────────────────────────────────────────────────────────────╮
+## │                                                                          │
+## │             Distributed under the CC0 public domain license.             │
+## │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+## │                See licenses/cc0.txt for more information.                │
+## │                                                                          │
+## ├──────────────────────────────────────────────────────────────────────────┤
+## │                                                                          │
+## │ Versions of Lithium.                                                     │
+## │                                                                          │
+## ╰──────────────────────────────────────────────────────────────────────────╯
+
+all:
+   - [1,0,0,0, "",   "Lithium"]
+   - [1,1,0,0, "",   "Lithium Chloride"]
+   - [1,2,0,0, "",   "Lithium Carbonate"]
+   - [1,3,0,0, "",   "Zabuyelite"]
+   - [1,3,1,0, "",   "LITHIUM - Hell Knights Insist On Dying"]
+   - [1,4,0,0, "",   "Lumate"]
+   - [1,5,0,0, "a",  "Pegmatite"]
+   - [1,5,0,1, "a2", "Pegmatite"]
+   - [1,5,0,2, "b",  "Pegmatite"]
+   - [1,5,0,3, "",   "Pegmatite"]
+   - [1,5,1,0, "",   "Rubellite Pegmatite"]
+   - [1,5,2,0, "",   "Rubellite Pegmatite"]
+   - [1,5,3,0, "",   "Indicolite Pegmatite"]
+   - [1,6,0,0, "",   "Hyper-Dilithium"]
+   - [1,6,1,0, "",   "Hyper-Trilithium"]
+   - [1,6,2,0, "",   "Trilithionite"]
+   - [1,6,3,0, "",   "Trilithionite Red"]
+   - [1,7,0,0, "b",  "Yttrium Oxide"]
+   - [1,7,0,1, "b2", "Yttrium Oxide"]
+current: "1_7_0_1"
+legacy:
+   1000: "1_0_0_0"
+   1100: "1_1_0_0"
+   1200: "1_2_0_0"
+   1300: "1_3_0_0"
+   1310: "1_3_1_0"
+   1400: "1_4_0_0"
+   1501: "1_5_0_0"
+   1502: "1_5_0_1"
+   1503: "1_5_0_2"
+   1504: "1_5_0_3"
+   1510: "1_5_1_0"
+   1520: "1_5_2_0"
+   1530: "1_5_3_0"
+   1600: "1_6_0_0"
+   1610: "1_6_1_0"
+   1620: "1_6_2_0"
+   1630: "1_6_3_0"

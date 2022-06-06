@@ -11,10 +11,11 @@ tools/.build-cfg.rb
 *.ninja*
 source/include/m_stab.h
 source/include/m_trie.h
+source/include/m_version.h
 source/include/p_weaponinfo.h
 source/include/u_func.h
 source/include/u_names.h
+source/m_trie.c
 source/p_upgrinfo.c
 source/p_weaponinfo.c
-source/m_trie.c
 gzdoom-crash.log

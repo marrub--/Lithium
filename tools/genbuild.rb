@@ -174,7 +174,6 @@ end
       hdr("m_tokbuf.h"),
       hdr("m_token.h"),
       hdr("m_types.h"),
-      hdr("m_version.h"),
       hdr("p_attrib.h"),
       hdr("p_bip.h"),
       hdr("p_cbi.h"),
@@ -226,6 +225,7 @@ req_file "build/trie.rb"
 req_file "build/stab.rb"
 req_file "build/upgc.rb"
 req_file "build/wepc.rb"
+req_file "build/verc.rb"
 
 # things that generate stuff outside of the build system
 req_file "build/mdlc.rb"

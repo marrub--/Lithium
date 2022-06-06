@@ -75,7 +75,7 @@ void UpdateGame(void) {
       CVarSetI(sc_xhair_style, 0);
    }
 
-   CVarSetS(sc_version, fast_strdup(verstr));
+   CVarSetS(sc_version, st_ver);
 }
 
 static
