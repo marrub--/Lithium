@@ -120,7 +120,7 @@ void S_boole(struct set_parm const *sp) {
                                         lang(sl_on) :
                                         lang(sl_off)),
                    _rght - gui_p.btnlist.w, sp->y, Pre(btnlist),
-                   .fill = sp->st->fill ? &CBIState(sp->g)->settingsfill : nil))
+                   .fill = sp->st->fill ? &pl.cbi.st.settingsfill : nil))
    {
       v = !v;
       sp->st->cb_g.b(sp, &v);
@@ -409,11 +409,11 @@ void P_CBI_TabSettings(struct gui_state *g) {
       faststrcpy_str(tn[i], ns(lang(*settings[i].nam)));
    }
 
-   i32 yp = G_Tabs(g, &CBIState(g)->settingstab, tn, countof(tn), 0, 0, 1);
+   i32 yp = G_Tabs(g, &pl.cbi.st.settingstab, tn, countof(tn), 0, 0, 1);
    yp *= gui_p.btntab.h;
 
-   struct setting const *set = settings[CBIState(g)->settingstab].set;
-   mem_size_t            num = settings[CBIState(g)->settingstab].num;
+   struct setting const *set = settings[pl.cbi.st.settingstab].set;
+   mem_size_t            num = settings[pl.cbi.st.settingstab].num;
 
    for(i32 i = 0; i < num; i++) {
       if(S_isEnabled(&set[i])) {
@@ -421,7 +421,7 @@ void P_CBI_TabSettings(struct gui_state *g) {
       }
    }
 
-   G_ScrBeg(g, &CBIState(g)->settingscr, 2, 17 + yp, _rght, 192 - yp,
+   G_ScrBeg(g, &pl.cbi.st.settingscr, 2, 17 + yp, _rght, 192 - yp,
             set_num * 10);
 
    struct set_parm sp = {g, 0, 0};
@@ -430,7 +430,7 @@ void P_CBI_TabSettings(struct gui_state *g) {
       sp.st = &set[i];
 
       if(S_isEnabled(sp.st)) {
-         if(!G_ScrOcc(g, &CBIState(g)->settingscr, sp.y, 10)) {
+         if(!G_ScrOcc(g, &pl.cbi.st.settingscr, sp.y, 10)) {
             switch(sp.st->cb) {
             case _s_empty: S_empty(&sp); break;
             case _s_label: S_label(&sp); break;
@@ -446,7 +446,7 @@ void P_CBI_TabSettings(struct gui_state *g) {
       }
    }
 
-   G_ScrEnd(g, &CBIState(g)->settingscr);
+   G_ScrEnd(g, &pl.cbi.st.settingscr);
 }
 
 /* EOF */

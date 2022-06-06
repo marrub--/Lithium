@@ -37,7 +37,6 @@ enum
    fid_result,
    fid_result2,
    fid_bosstext,
-   fid_advice,
    fid_subwepS,
    fid_subwepE = fid_subwepS + 6 - 1,
    fid_shielddone,

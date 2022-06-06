@@ -27,7 +27,7 @@
 #define StrParamBegin(...) (ACS_BeginPrint(), __nprintf(__VA_ARGS__))
 #define StrParam(...) (StrParamBegin(__VA_ARGS__), ACS_EndStrParam())
 
-#define PrintChrLi(s)    ACS_PrintGlobalCharRange((i32)(s), __GDCC__Sta, 0, sizeof(s))
+#define PrintChrLi(s) ACS_PrintGlobalCharRange((i32)(s), __GDCC__Sta, 0, sizeof(s))
 
 #define fast_strndup(s, n)       strp(PrintChars(s, n))
 #define fast_strdup(s)           strp(PrintChrSt(s))

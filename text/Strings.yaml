@@ -180,6 +180,7 @@ sm_:
    - IonizeFX
    - JumpZ
    - LA
+   - LB
    - LC
    - LF
    - LL
@@ -617,6 +618,7 @@ sl_:
    - tab_arsenal:         TAB_ARSENAL_
    - tab_attributes:      TAB_ATTRIBUTES
    - tab_bip:             TAB_BIP
+   - tab_tuts:            TAB_TUTS
    - tab_cbi:             TAB_CBI
    - tab_info:            TAB_INFO
    - tab_inventory:       TAB_INVENTORY

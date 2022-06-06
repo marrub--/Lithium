@@ -161,40 +161,40 @@ void P_CBI_TabLog(struct gui_state *g) {
    static
    i32 const ht = 10;
 
-   i32 logsel_last = CBIState(g)->logsel;
+   i32 logsel_last = pl.cbi.st.logsel;
 
    if(G_Button(g, .x = 12, 25, Pre(btnprev))) {
-      if(--CBIState(g)->logsel < 0) {
-         CBIState(g)->logsel = log.mapsC - 1;
+      if(--pl.cbi.st.logsel < 0) {
+         pl.cbi.st.logsel = log.mapsC - 1;
       }
    }
 
    if(G_Button(g, .x = 12 + gui_p.btnprev.w, 25, Pre(btnnext))) {
-      if(++CBIState(g)->logsel >= log.mapsC) {
-         CBIState(g)->logsel = 0;
+      if(++pl.cbi.st.logsel >= log.mapsC) {
+         pl.cbi.st.logsel = 0;
       }
    }
 
-   if(CBIState(g)->logsel != logsel_last) {
-      G_ScrollReset(g, &CBIState(g)->logscr);
+   if(pl.cbi.st.logsel != logsel_last) {
+      G_ScrollReset(g, &pl.cbi.st.logscr);
    }
 
-   struct logmap *lm = &log.mapsV[CBIState(g)->logsel];
+   struct logmap *lm = &log.mapsV[pl.cbi.st.logsel];
 
    PrintText_str(lm->name, sf_lmidfont, g->defcr, g->ox+15+gui_p.btnprev.w+gui_p.btnnext.w,1, g->oy+27,1);
 
-   G_ScrBeg(g, &CBIState(g)->logscr, 2, 37, 280, 175, lm->dataC * ht);
+   G_ScrBeg(g, &pl.cbi.st.logscr, 2, 37, 280, 175, lm->dataC * ht);
 
    for(i32 i = 0; i < lm->dataC; i++) {
       i32 const y = ht * i;
 
-      if(G_ScrOcc(g, &CBIState(g)->logscr, y, ht)) continue;
+      if(G_ScrOcc(g, &pl.cbi.st.logscr, y, ht)) continue;
 
       PrintSprite(sp_UI_LogList, g->ox,1, y + g->oy,1);
       PrintText_str(lm->dataV[i], sf_smallfnt, CR_GREEN, g->ox + 2,1, y + g->oy + 1,1);
    }
 
-   G_ScrEnd(g, &CBIState(g)->logscr);
+   G_ScrEnd(g, &pl.cbi.st.logscr);
 }
 
 script void P_Log(i32 cr, i32 x, i32 yy) {

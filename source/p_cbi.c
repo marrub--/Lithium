@@ -25,10 +25,10 @@ void P_CBI_TabArsenal(struct gui_state *g) {
       faststrcpy_str(tn[0], ns(lang(sl_tab_upgrades)));
       faststrcpy_str(tn[1], ns(lang(sl_tab_shop)));
 
-      G_Tabs(g, &CBIState(g)->arsetab, tn, 2, 0, 0, 1);
+      G_Tabs(g, &pl.cbi.st.arsetab, tn, 2, 0, 0, 1);
    }
 
-   switch(CBIState(g)->arsetab) {
+   switch(pl.cbi.st.arsetab) {
    case cbi_tab_arsenal_upgrades: P_CBI_TabUpgrades(g); break;
    case cbi_tab_arsenal_shop:     P_CBI_TabShop    (g); break;
    }
@@ -40,9 +40,9 @@ void P_CBI_TabStat(struct gui_state *g) {
    faststrcpy_str(tn[1], ns(lang(sl_tab_cbi)));
    faststrcpy_str(tn[2], ns(lang(sl_tab_statistics)));
 
-   G_Tabs(g, &CBIState(g)->stattab, tn, 3, 0, 0, 1);
+   G_Tabs(g, &pl.cbi.st.stattab, tn, 3, 0, 0, 1);
 
-   switch(CBIState(g)->stattab) {
+   switch(pl.cbi.st.stattab) {
    case cbi_tab_stat_attr:       P_CBI_TabStatus    (g); break;
    case cbi_tab_stat_cbi:        P_CBI_TabCBI       (g); break;
    case cbi_tab_stat_statistics: P_CBI_TabStatistics(g); break;
@@ -52,13 +52,15 @@ void P_CBI_TabStat(struct gui_state *g) {
 static
 void P_CBI_TabInfo(struct gui_state *g) {
    faststrcpy_str(tn[0], ns(lang(sl_tab_bip)));
-   faststrcpy_str(tn[1], ns(lang(sl_tab_log)));
-   faststrcpy_str(tn[2], ns(lang(sl_tab_notes)));
+   faststrcpy_str(tn[1], ns(lang(sl_tab_tuts)));
+   faststrcpy_str(tn[2], ns(lang(sl_tab_log)));
+   faststrcpy_str(tn[3], ns(lang(sl_tab_notes)));
 
-   G_Tabs(g, &CBIState(g)->infotab, tn, 3, 0, 0, 1);
+   G_Tabs(g, &pl.cbi.st.infotab, tn, 4, 0, 0, 1);
 
-   switch(CBIState(g)->infotab) {
+   switch(pl.cbi.st.infotab) {
    case cbi_tab_info_bip:   P_CBI_TabBIP  (g); break;
+   case cbi_tab_info_tuts:  P_CBI_TabTuts (g); break;
    case cbi_tab_info_log:   P_CBI_TabLog  (g); break;
    case cbi_tab_info_notes: P_CBI_TabNotes(g); break;
    }
@@ -90,7 +92,7 @@ script void P_CBI_PTick(void) {
 
    G_UpdateState(g);
 
-   G_WinBeg(g, &CBIState(g)->mainwin);
+   G_WinBeg(g, &pl.cbi.st.mainwin);
 
    if(G_Button(g, .x = 283, 0, Pre(btnexit))) P_GUI_Use();
 
@@ -100,9 +102,9 @@ script void P_CBI_PTick(void) {
    faststrcpy_str(tn[3], ns(lang(sl_tab_info)));
    faststrcpy_str(tn[4], ns(lang(sl_tab_settings)));
 
-   G_Tabs(g, &CBIState(g)->maintab, tn, 5, 0, 0, 0);
+   G_Tabs(g, &pl.cbi.st.maintab, tn, 5, 0, 0, 0);
 
-   switch(CBIState(g)->maintab) {
+   switch(pl.cbi.st.maintab) {
    case cbi_tab_arsenal:  P_CBI_TabArsenal (g); break;
    case cbi_tab_status:   P_CBI_TabStat    (g); break;
    case cbi_tab_items:    P_CBI_TabItems   (g); break;
@@ -110,7 +112,7 @@ script void P_CBI_PTick(void) {
    case cbi_tab_settings: P_CBI_TabSettings(g); break;
    }
 
-   G_WinEnd(g, &CBIState(g)->mainwin);
+   G_WinEnd(g, &pl.cbi.st.mainwin);
 
    G_End(g, CVarGetI(sc_gui_cursor));
 }
@@ -120,7 +122,6 @@ void P_CBI_PMinit(void) {
    pl.cbi.guistate.cy = 240 / 2;
 
    pl.cbi.guistate.gfxprefix = ":UI:";
-   pl.cbi.guistate.state     = &pl.cbi.st;
 
    pl.cbi.st.upgrsel = UPGR_MAX;
 

@@ -53,14 +53,14 @@ void P_CBI_TabShop(struct gui_state *g) {
       }
    }
 
-   G_ScrBeg(g, &CBIState(g)->shopscr, 2, 23, gui_p.btnlist.w, 186, gui_p.btnlist.h * nitems);
+   G_ScrBeg(g, &pl.cbi.st.shopscr, 2, 23, gui_p.btnlist.w, 186, gui_p.btnlist.h * nitems);
 
    for(i32 i = 0, y = 0; i < countof(shopitems); i++) {
-      if(G_ScrOcc(g, &CBIState(g)->shopscr, y, gui_p.btnlistsel.h) || !(shopitems[i].pclass & pl.pclass)) {
+      if(G_ScrOcc(g, &pl.cbi.st.shopscr, y, gui_p.btnlistsel.h) || !(shopitems[i].pclass & pl.pclass)) {
          continue;
       }
 
-      i32 *shopsel = &CBIState(g)->shopsel;
+      i32 *shopsel = &pl.cbi.st.shopsel;
       if(G_Button_HId(g, i, tmpstr(lang(fast_strdup2(LANG "SHOP_TITLE_", shopitems[i].name))),
                       0, y, i == *shopsel, Pre(btnlistsel)))
       {
@@ -70,9 +70,9 @@ void P_CBI_TabShop(struct gui_state *g) {
       y += gui_p.btnlistsel.h;
    }
 
-   G_ScrEnd(g, &CBIState(g)->shopscr);
+   G_ScrEnd(g, &pl.cbi.st.shopscr);
 
-   struct shopitem *item = &shopitems[CBIState(g)->shopsel];
+   struct shopitem *item = &shopitems[pl.cbi.st.shopsel];
 
    G_Clip(g, g->ox+98, g->oy+17, 190, 170, 184);
 
@@ -85,7 +85,7 @@ void P_CBI_TabShop(struct gui_state *g) {
 
    G_ClipRelease(g);
 
-   if(G_Button(g, tmpstr(lang(sl_buy)), 98, 192, !P_Shop_CanBuy(&item->shopdef), .fill = &CBIState(g)->buyfill)) {
+   if(G_Button(g, tmpstr(lang(sl_buy)), 98, 192, !P_Shop_CanBuy(&item->shopdef), .fill = &pl.cbi.st.buyfill)) {
       P_Shop_Buy(&item->shopdef, LANG "SHOP_TITLE_", false);
    }
 }

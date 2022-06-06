@@ -157,7 +157,6 @@ doomednums {
    22430 = Lith_DivisionSigil
    22431 = Lith_Chair
    22432 = Lith_BoomBarrel
-   22433 = Lith_AdviceMarker
    22434 = Lith_MapMarker
    22435 = Lith_Person_Maxie
    22436 = Lith_Person_LaneDoll

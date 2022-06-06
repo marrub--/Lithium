@@ -16,19 +16,19 @@
 static
 void GUIUpgradesList(struct gui_state *g) {
    if(G_Button(g, .x = 77, 200, Pre(btnprev))) {
-      if(CBIState(g)->upgrfilter-- <= 0) {
-         CBIState(g)->upgrfilter = _uc_max;
+      if(pl.cbi.st.upgrfilter-- <= 0) {
+         pl.cbi.st.upgrfilter = _uc_max;
       }
    }
 
    if(G_Button(g, .x = 77 + gui_p.btnprev.w, 200, Pre(btnnext))) {
-      if(CBIState(g)->upgrfilter++ >= _uc_max) {
-         CBIState(g)->upgrfilter = 0;
+      if(pl.cbi.st.upgrfilter++ >= _uc_max) {
+         pl.cbi.st.upgrfilter = 0;
       }
    }
 
    i32 numbtns = 0;
-   i32 filter  = CBIState(g)->upgrfilter - 1;
+   i32 filter  = pl.cbi.st.upgrfilter - 1;
 
    str filter_name;
 
@@ -53,7 +53,7 @@ void GUIUpgradesList(struct gui_state *g) {
    PrintTextFmt(tmpstr(lang(sl_cat_filter)), filter_name);
    PrintText(sf_smallfnt, g->defcr, g->ox+2,1, g->oy+202,1);
 
-   G_ScrBeg(g, &CBIState(g)->upgrscr, 2, 23, gui_p.btnlist.w, 178, gui_p.btnlist.h * numbtns);
+   G_ScrBeg(g, &pl.cbi.st.upgrscr, 2, 23, gui_p.btnlist.w, 178, gui_p.btnlist.h * numbtns);
 
    i32 curcategory = -1;
 
@@ -69,7 +69,7 @@ void GUIUpgradesList(struct gui_state *g) {
 
       y += gui_p.btnlist.h;
 
-      if(G_ScrOcc(g, &CBIState(g)->upgrscr, y, gui_p.btnlist.h)) {
+      if(G_ScrOcc(g, &pl.cbi.st.upgrscr, y, gui_p.btnlist.h)) {
          continue;
       }
 
@@ -89,7 +89,7 @@ void GUIUpgradesList(struct gui_state *g) {
       else if(get_bit(upgr->flags, _ug_owned )) pre = &gui_p.btnlistactive;
       else                                      pre = &gui_p.btnlistsel;
 
-      i32 *upgrsel = &CBIState(g)->upgrsel;
+      i32 *upgrsel = &pl.cbi.st.upgrsel;
       if(G_Button_HId(g, _i, tmpstr(lang(fast_strdup2(LANG "UPGRADE_TITLE_", upgr->name))),
                       0, y, _i == *upgrsel, .color = color, .preset = pre))
       {
@@ -103,7 +103,7 @@ void GUIUpgradesList(struct gui_state *g) {
       }
    }
 
-   G_ScrEnd(g, &CBIState(g)->upgrscr);
+   G_ScrEnd(g, &pl.cbi.st.upgrscr);
 }
 
 static
@@ -212,7 +212,7 @@ void GUIUpgradeDescription(struct gui_state *g, struct upgrade *upgr) {
 static
 void GUIUpgradeButtons(struct gui_state *g, struct upgrade *upgr) {
    /* Buy */
-   if(G_Button(g, tmpstr(lang(sl_buy)), 98, 192, !P_Shop_CanBuy(&upgr->shopdef), .fill = &CBIState(g)->buyfill)) {
+   if(G_Button(g, tmpstr(lang(sl_buy)), 98, 192, !P_Shop_CanBuy(&upgr->shopdef), .fill = &pl.cbi.st.buyfill)) {
       P_Upg_Buy(upgr, false);
    }
 
@@ -246,16 +246,16 @@ void GUIUpgradeButtons(struct gui_state *g, struct upgrade *upgr) {
 void P_CBI_TabUpgrades(struct gui_state *g) {
    GUIUpgradesList(g);
 
-   if(CBIState(g)->upgrsel == UPGR_MAX) {
+   if(pl.cbi.st.upgrsel == UPGR_MAX) {
       for_upgrade(upgr) {
          if(get_bit(upgr->flags, _ug_available)) {
-            CBIState(g)->upgrsel = _i;
+            pl.cbi.st.upgrsel = _i;
             break;
          }
       }
    }
 
-   struct upgrade *upgr = &pl.upgrades[CBIState(g)->upgrsel];
+   struct upgrade *upgr = &pl.upgrades[pl.cbi.st.upgrsel];
 
    GUIUpgradeDescription (g, upgr);
    GUIUpgradeButtons     (g, upgr);

@@ -15,17 +15,6 @@
 #include "p_hudid.h"
 
 static
-void P_Ren_Advice(void) {
-   if(CheckFade(fid_advice)) {
-      SetSize(640, 480);
-
-      SetClipW(80, 100, 500, 500, 500);
-      PrintTextF_str(pl.advice, sf_smallfnt, CR_YELLOW, 80,1, 100,1, fid_advice);
-      ClearClip();
-   }
-}
-
-static
 void P_Ren_LevelUp(void) {
    if(pl.old.attr.level && pl.old.attr.level < pl.attr.level) {
       AmbientSound(ss_player_levelup, 1.0);
@@ -102,7 +91,6 @@ void P_Ren_PTickPst(void) {
    P_Ren_Step();
    P_Ren_View();
    P_Ren_Scope();
-   P_Ren_Advice();
    P_Ren_LevelUp();
    #ifndef NDEBUG
    P_Ren_Debug();

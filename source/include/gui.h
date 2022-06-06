@@ -115,8 +115,6 @@ struct gui_state {
    i32 clip;
    struct gui_clip clips[16];
 
-   void *state;
-
    cstr gfxprefix;
    str  tooltip;
 };

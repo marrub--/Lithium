@@ -30,8 +30,6 @@ cbi_theme_x(Trans)
 
 #include "gui.h"
 
-#define CBIState(g) ((struct cbistate *)((g)->state))
-
 enum {
    cbi_tab_arsenal,
    cbi_tab_status,
@@ -53,6 +51,7 @@ enum {
 
 enum {
    cbi_tab_info_bip,
+   cbi_tab_info_tuts,
    cbi_tab_info_log,
    cbi_tab_info_notes,
 };
@@ -66,7 +65,7 @@ enum {
 struct cbi {
    struct gui_state guistate;
 
-   struct cbistate {
+   struct cbi_state {
       mem_size_t maintab;
       mem_size_t stattab;
       mem_size_t arsetab;
@@ -78,6 +77,8 @@ struct cbi {
       struct gui_scr bipscr;
       struct gui_scr bipinfoscr;
       struct gui_txt bipsearch;
+
+      struct gui_scr tutscr;
 
       i32            logsel;
       struct gui_scr logscr;
@@ -114,6 +115,7 @@ void P_CBI_TabStatus    (struct gui_state *g);
 void P_CBI_TabStatistics(struct gui_state *g);
 
 void P_CBI_TabBIP       (struct gui_state *g);
+void P_CBI_TabTuts      (struct gui_state *g);
 void P_CBI_TabLog       (struct gui_state *g);
 void P_CBI_TabNotes     (struct gui_state *g);
 

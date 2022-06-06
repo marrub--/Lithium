@@ -87,7 +87,7 @@ void SetCurPage(struct gui_state *g, struct page *page) {
    bip.pagebodypos = 0;
    bip.pagebodylen = faststrlen(bip.pagebody);
 
-   G_ScrollReset(g, &CBIState(g)->bipinfoscr);
+   G_ScrollReset(g, &pl.cbi.st.bipinfoscr);
 }
 
 static
@@ -109,7 +109,7 @@ void DrawPage(struct gui_state *g, struct page *page) {
    i32 const gh = gui_p.scrdef.scrlh * 23;
 
    if(height) {
-      G_ScrBeg(g, &CBIState(g)->bipinfoscr, 97 - gui_p.scrdef.scrlw,
+      G_ScrBeg(g, &pl.cbi.st.bipinfoscr, 97 - gui_p.scrdef.scrlw,
                27, gw, gh, height * 8 + 20, 184);
    } else {
       G_Clip(g, g->ox+97, g->oy+27, gw, gh, 184);
@@ -140,7 +140,7 @@ void DrawPage(struct gui_state *g, struct page *page) {
          cr = g->defcr, x = 1, y = 20);
 
    if(height) {
-      G_ScrEnd(g, &CBIState(g)->bipinfoscr);
+      G_ScrEnd(g, &pl.cbi.st.bipinfoscr);
    } else {
       g->oy -= 27;
       g->ox -= 97;
@@ -201,7 +201,7 @@ void CategoryUI(struct gui_state *g) {
 
    if(categ == _bipc_extra) goto draw;
 
-   G_ScrBeg(g, &CBIState(g)->bipscr, 2, 37, gui_p.btnlist.w, 170, gui_p.btnlist.h * n);
+   G_ScrBeg(g, &pl.cbi.st.bipscr, 2, 37, gui_p.btnlist.w, 170, gui_p.btnlist.h * n);
 
    i32 i = 0;
    for_page() {
@@ -213,7 +213,7 @@ void CategoryUI(struct gui_state *g) {
 
       i32 y = gui_p.btnlist.h * i++;
 
-      if(G_ScrOcc(g, &CBIState(g)->bipscr, y, gui_p.btnlist.h)) {
+      if(G_ScrOcc(g, &pl.cbi.st.bipscr, y, gui_p.btnlist.h)) {
          continue;
       }
 
@@ -231,7 +231,7 @@ void CategoryUI(struct gui_state *g) {
       }
    }
 
-   G_ScrEnd(g, &CBIState(g)->bipscr);
+   G_ScrEnd(g, &pl.cbi.st.bipscr);
 
 draw:
    if(bip.curpage) DrawPage(g, bip.curpage);
@@ -259,11 +259,11 @@ i32 SearchPage(struct page *page, cstr query) {
 
 static
 void SearchUI(struct gui_state *g) {
-   struct gui_txt *st = &CBIState(g)->bipsearch;
+   struct gui_txt *st = &pl.cbi.st.bipsearch;
 
    bip.lastcategory = _bipc_main;
 
-   if(G_TxtBox(g, &CBIState(g)->bipsearch, 10, 52)) {
+   if(G_TxtBox(g, &pl.cbi.st.bipsearch, 10, 52)) {
       struct extraname {
          u64  crc;
          cstr which;

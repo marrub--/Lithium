@@ -12,6 +12,7 @@
 !!include Info/Items.txt
 !!include Info/Mail.txt
 !!include Info/Places.txt
+!!include Info/Tutorials.txt
 !!include Info/Upgrades.txt
 !!include Info/Weapons.txt
 !!include Info/Yourself.txt

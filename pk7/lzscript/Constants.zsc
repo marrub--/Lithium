@@ -150,7 +150,6 @@ enum Lith_ASCII {
 
 enum Lith_StatNum {
    _stat_mapmark = Thinker.STAT_USER + 7,
-   _stat_advicemark,
    _stat_cyberspace,
    _stat_statfx,
 }

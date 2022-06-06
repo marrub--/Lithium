@@ -299,8 +299,6 @@ void P_Init(void) {
 
    pl.alpha = 1;
 
-   pl.advice = snil;
-
    pl.attr.lvupstr[0] = '\0';
 
    if(!bip.init) P_BIP_PInit();

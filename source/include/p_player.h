@@ -260,7 +260,6 @@ struct player {
    str  pcstr;
    cstr discrim;
    i32  color;
-   str  advice;
    cstr obit;
 
    /* Deltas */

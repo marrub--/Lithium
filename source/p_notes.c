@@ -16,17 +16,17 @@
 #include "gui.h"
 
 void P_CBI_TabNotes(struct gui_state *g) {
-   struct gui_txt *st = &CBIState(g)->notebox;
+   struct gui_txt *st = &pl.cbi.st.notebox;
    G_TxtBox(g, st, 35, 27);
 
    if(G_Button(g, tmpstr(lang(sl_clear)), 3, 37, Pre(btnclear))) {
       G_TxtBoxRes(st);
    }
 
-   G_ScrBeg(g, &CBIState(g)->notescr, 2, 50, 280, 160, 30 * countof(pl.notes), 240);
+   G_ScrBeg(g, &pl.cbi.st.notescr, 2, 50, 280, 160, 30 * countof(pl.notes), 240);
 
    for(i32 i = 0; i < countof(pl.notes); i++) {
-      if(G_ScrOcc(g, &CBIState(g)->notescr, i * 30, 30)) {
+      if(G_ScrOcc(g, &pl.cbi.st.notescr, i * 30, 30)) {
          continue;
       }
 
@@ -36,8 +36,8 @@ void P_CBI_TabNotes(struct gui_state *g) {
       if(G_Button_HId(g, i, pl.notes[i] |? tmpstr(lang(sl_empty)),
                       44, i * 30, Pre(btnnote)))
       {
-         mem_size_t l = CBIState(g)->notebox.tbptr;
-         cstr       s = Cps_Expand(CBIState(g)->notebox.txtbuf, 0, l);
+         mem_size_t l = pl.cbi.st.notebox.tbptr;
+         cstr       s = Cps_Expand(pl.cbi.st.notebox.txtbuf, 0, l);
 
          if(l) {
             pl.notes[i] = Talloc(pl.notes[i], l + 1, _tag_plyr);
@@ -51,7 +51,7 @@ void P_CBI_TabNotes(struct gui_state *g) {
       }
    }
 
-   G_ScrEnd(g, &CBIState(g)->notescr);
+   G_ScrEnd(g, &pl.cbi.st.notescr);
 }
 
 /* EOF */

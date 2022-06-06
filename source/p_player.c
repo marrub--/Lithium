@@ -757,39 +757,6 @@ void Z_MapMarker(i32 tid) {
    }
 }
 
-alloc_aut(0) stkcall static
-str GetAdviceMarker(i32 tid) {
-   if(tid) {
-      str text = GetNameTag(tid);
-
-      ACS_BeginPrint();
-      for(i32 i = 0, n = ACS_StrLen(text); i < n; i++) {
-         if(text[i] == '{') {
-            ACS_BeginPrint();
-            for(i32 j = 0; j < 15 && text[++i] != '}'; j++) {
-               ACS_PrintChar(text[i]);
-            }
-            ACS_PrintBind(ACS_EndStrParam());
-         } else {
-            ACS_PrintChar(text[i]);
-         }
-      }
-      return ACS_EndStrParam();
-   } else {
-      return snil;
-   }
-}
-
-alloc_aut(0) script_str ext("ACS") addr(OBJ "SetAdviceMarker")
-void Z_SetAdviceMarker(i32 tid) {
-   str text = GetAdviceMarker(tid);
-
-   ACS_Delay(5);
-
-   pl.advice = text;
-   SetFade(fid_advice, 35 * 5, 12);
-}
-
 script_str type("net") ext("ACS") addr(OBJ "KeyBuyAutoGroup")
 void Z_KeyBuyAutoGroup(i32 grp) {
    if(grp < 0 || grp >= 4) {

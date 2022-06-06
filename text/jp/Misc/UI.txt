@@ -59,6 +59,7 @@
 == \#TAB_CBI        | ＣＢＩ
 
 == \#TAB_BIP        | ＢＩＰ
+== \#TAB_TUTS       | 使い方
 == \#TAB_LOG        | ログ
 == \#TAB_STATISTICS | 統計
 == \#TAB_NOTES      | ノート

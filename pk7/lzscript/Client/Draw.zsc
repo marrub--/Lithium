@@ -90,6 +90,12 @@ static int LA(int pos, string s, string fnt) {
    return (lnx & 0xFFFF) | ((lny & 0xFFFF) << 16);
 }
 
+static int LB(string t) {
+   let tx = getTextureForName(t);
+   int sx, sy; [sx, sy] = TexMan.GetSize(tx);
+   return (sx & 0xFFFF) | ((sy & 0xFFFF) << 16);
+}
+
 static void LZ(int w, int h) {
    let cl = Lith_URANUS(Find("Lith_URANUS"));
 

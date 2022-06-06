@@ -65,6 +65,7 @@
 == \#TAB_CBI        | CBI
 
 == \#TAB_BIP        | BIP
+== \#TAB_TUTS       | How-To
 == \#TAB_LOG        | Log
 == \#TAB_STATISTICS | Statistics
 == \#TAB_NOTES      | Notes

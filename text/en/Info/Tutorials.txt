@@ -1,0 +1,214 @@
+## ╭-*-Agw-LithTxt-*-─────────────────────────────────────────────────────────╮
+## │                                                                          │
+## │             Distributed under the CC0 public domain license.             │
+## │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+## │                See licenses/cc0.txt for more information.                │
+## │                                                                          │
+## ├──────────────────────────────────────────────────────────────────────────┤
+## │                                                                          │
+## │ Tutorials.                                                               │
+## │                                                                          │
+## ╰──────────────────────────────────────────────────────────────────────────╯
+
+== \#TUT_Movement_NAM | Movement
+@@ \#TUT_Movement_DSC
+- HORIZONTAL MOVEMENT
+
+Each class has a <unique horizontal movement mechanic> bound to
+{+speed} (Dodge / Run.) Some can <sprint>, <dodge>, or even <slide>.
+
+- JUMPING
+
+Press {+jump} to <jump> in supported maps. Some classes can
+<double-jump> or <fly> by jumping.
+
+- CROUCHING
+
+Hold {+crouch} to <crouch> in supported maps. Some classes can quickly
+<fall> by crouching.
+
+== \#TUT_Enemies_NAM | Enemies 1
+@@ \#TUT_Enemies_DSC
+- MONSTERS
+
+Lithium comes with <a set of new behaviours for monsters>, with the
+option of <more difficult behaviour>. Several <monster mods also work>
+with Lithium; however, if enemies don't have levels, they aren't
+compatible.
+
+! Please report broken monster mods.
+
+- PHANTOMS
+
+\c[Lith_Dark]Phantoms\c- will show up occasionally based on your
+progression. They are very dangerous mid-bosses that give <unique
+rewards>.
+
+- BOSSES
+
+<Boss arenas> will usually have unique behaviour, making them much
+more difficult. The <Icon of Sin> has fully redone behaviour.
+
+== \#TUT_EnemyMechanics_NAM | Enemies 2
+@@ \#TUT_EnemyMechanics_DSC
+- LEVELS
+
+All enemies have a <level> and <rank>. Enemies with higher <levels>
+will have <more health>, <deal more damage>, and <resist damage
+better>. Enemies with higher <ranks> will have <higher level scaling>,
+<more resistances>, and <gain experience faster>.
+
+- DAMAGE TYPES
+
+There are 8 damage types enemies can inflict:
+
+@@
+* Bullet Damage
+* Electric Damage
+* Fire Damage
+* Fire Magic Damage
+* Ice Damage
+* Magic Damage
+* Melee Damage
+* Shrapnel Damage
+@@
+
+== \#TUT_Items_NAM | Items
+@@ \#TUT_Items_DSC
+- SHOPPING
+
+Upgrades can be acquired by buying them with \cnScore\c-. Some classes
+also have a separate shop where weapons can be bought.
+
+! Some classes do not have upgrades yet.
+
+- PERMANENT UPGRADES
+
+\c[Lith_Dark]Phantoms\c- will drop a set of six or more <permanent
+upgrades> upon defeat depending on the class you chose. These
+<permanent upgrades> may be necessary to buy certain <upgrades> or
+unlock new mechanics.
+
+- POWERUPS
+
+@@
+* The <Barrier> power-up grants partial invulnerability by deflecting many attacks.
+* The <Mega-charge> will give you <magic armor> that protects you from damage.
+@@
+
+== \#TUT_Story_NAM | Story
+@@ \#TUT_Story_DSC
+! This applies only to Lithium's maps.
+
+- TERMINALS
+
+Walk up to a terminal and press {+use} to <read it>.
+
+Some terminals may be <necessary to progress>.
+
+- DIALOGUE
+
+Some people and things are not enemies, at least not right now.
+
+Walk up to friendlies and press {+use} to <talk> with them.
+
+Dialogues are <not necessary to progress>.
+
+== \#TUT_MarineMove_NAM | Marine 1
+@@ \#TUT_MarineMove_DSC
+- SLIDING
+
+Press or hold {+speed} (Dodge / Run) while on the ground or in the air
+to <slide horizontally>. You will be moved in whatever direction
+you're actively moving in.
+
+- JUMPING
+
+Press {+jump} (jump):
+
+@@
+* On the ground to <jump> normally.
+* While in the air to <double-jump>.
+* While sliding to <super-jump>.
+* After <double-jumping> or <super-jumping> to activate <flight>.
+@@
+
+== \#TUT_MarineItem_NAM | Marine 2
+%% \#TUT_MarineItem_DSC
+- WEAPONS
+
+* Most of \c[Lith_Green]Marine\c-'s weapons \cddo have\c- <alt-fires> ({+altattack}.)
+* No weapons use the <Weapon Action> ({+user1}) button.
+* The <Special Action> ({+lith_k_qact}) button will quickly attack with a knife.
+
+- ITEMS
+
+\c[Lith_Green]Marine\c-'s \c[Lith_Dark]Phantoms\c- will drop:
+
+* Devices needed to buy more kinds of upgrade.
+
+== \#TUT_CyberMageMove_NAM | Cyber-Mage 1
+@@ \#TUT_CyberMageMove_DSC
+- SLIDING
+
+Press or hold {+speed} (Dodge / Run) while on the ground or in the air
+to <slide horizontally>. You will be moved in whatever direction
+you're actively moving in.
+
+- JUMPING
+
+Press {+jump} (jump):
+
+@@
+* On the ground to <jump> normally.
+* While in the air to <double-jump>.
+* While sliding to <super-jump>.
+@@
+
+== \#TUT_CyberMageItem_NAM | Cyber-Mage 2
+%% \#TUT_CyberMageItem_DSC
+- WEAPONS
+
+* Most of \c[Lith_Red]Cyber-Mage\c-'s weapons \ckdo not\c- have <alt-fires> ({+altattack}.)
+* The Sub-Machine Gun uses the <Weapon Action> ({+user1}) button to manually reload the chamber.
+* The <Special Action> ({+lith_k_qact}) button will open a menu for switching magic.
+
+- ITEMS
+
+\c[Lith_Red]Cyber-Mage\c-'s \c[Lith_Dark]Phantoms\c- will drop:
+
+* Spells you can cast with <mana>.
+
+== \#TUT_DarkLordMove_NAM | Dark Lord 1
+@@ \#TUT_DarkLordMove_DSC
+- SPRINTING
+
+Hold {+speed} (Dodge / Run) while on the ground to <sprint>. Your
+movement speed will be greatly increased, but you won't be able to use
+<weapons> except for your <sub-weapons>.
+
+- MOBILITY
+
+\c[Lith_Blue]Dark Lord\c- has limited mobility, but can still move
+around maps decently well. Recoil can turn the tides of combat.
+
+== \#TUT_DarkLordItem_NAM | Dark Lord 2
+%% \#TUT_DarkLordItem_DSC
+- WEAPONS
+
+* \c[Lith_Blue]Dark Lord\c-'s <alt-fire> button ({+altattack}) is bound to activating <sub-weapons>.
+* <Sub-weapons> are infinite use, charge quickly, and can be <used at any time>.
+* The <Special Action> ({+lith_k_qact}) button will switch the equipped <sub-weapon>.
+* The <Minigun> uses the <reload> button ({+reload}) to wind up without firing.
+* <Ruzuk> uses the <Weapon Action> ({+user1}) button to aim down sights.
+
+- ITEMS
+
+\c[Lith_Blue]Dark Lord\c-'s \c[Lith_Dark]Phantoms\c- will drop:
+
+* Three additional <sub-weapons>.
+* One additional <weapon>.
+* A regenerating <shield> that will protect you from taking damage.
+* A device needed to buy certain upgrades.
+
+## EOF

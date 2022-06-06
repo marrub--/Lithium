@@ -95,6 +95,7 @@ end
       SrcsEnt.from("p_data.c"),
       SrcsEnt.from("p_gui_bip.c"),
       SrcsEnt.from("p_gui_cbi.c"),
+      SrcsEnt.from("p_gui_tuts.c"),
       SrcsEnt.from("p_gui_upgrades.c"),
       SrcsEnt.from("p_items.c"),
       SrcsEnt.from("p_log.c"),
