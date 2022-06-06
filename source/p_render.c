@@ -49,6 +49,7 @@ void P_Ren_Mission(void) {
       SetSize(320, 240);
       ACS_BeginPrint();
       _p(fast_strupper(ml.name)); _c('\n');
+      _l("\Cj"); _p(CanonTime(ct_full, wl.ticks)); _c('\n');
       if(get_bit(ml.flag, _mapf_vacuum)) {
          _l("\CjENV: \CiVACUUM\n");
       } else {

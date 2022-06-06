@@ -69,27 +69,23 @@ void W_Title(void) {
 
       Blinker(bgn);
       ACS_Delay(1);
-      EndDrawing();
    }
 
    for(i32 i = 0; i < 35 * 7; i++) {
       PrintText_str(txt, sf_smallfnt, Cr(green), 7,1, 6,1);
       Blinker(bgn);
       ACS_Delay(1);
-      EndDrawing();
    }
 
    for(k32 a = 1; a > 0; a -= 0.01) {
       PrintTextA_str(txt, sf_smallfnt, Cr(green), 7,1, 6,1, a);
       Blinker(bgn);
       ACS_Delay(1);
-      EndDrawing();
    }
 
    for(;;) {
       Blinker(bgn);
       ACS_Delay(1);
-      EndDrawing();
    }
 }
 

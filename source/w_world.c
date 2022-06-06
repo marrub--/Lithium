@@ -259,7 +259,6 @@ void Z_World(bool is_reopen) {
       PrintText(sf_ltrmfont, CR_WHITE, 0,1, 16,1);
       ClearClip();
       ACS_Delay(1);
-      EndDrawing();
    }
 
    #ifndef NDEBUG

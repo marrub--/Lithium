@@ -128,9 +128,6 @@ GlobalCrH(wselm1) GlobalCrH(wselm2) GlobalCrH(wselm3) GlobalCrH(wselms)
 #define AmbientSound(snd, vol) \
    StartSound(snd, lch_ambient, CHANF_LOCAL|CHANF_UI, vol, ATTN_STATIC)
 
-#define EndDrawing() \
-   DrawCallV(sm_LE)
-
 enum {
    CHANF_LISTENERZ   = 8,
    CHANF_MAYBE_LOCAL = 16,
@@ -183,7 +180,6 @@ stkcall struct i32v2 const *TextSize(str s, str font, i32 pos);
 enum ZscName(FontNum) {
    font_misaki_gothic,
    font_misaki_mincho,
-   font_k6x8,
    font_jiskan16,
    font_num,
 };

@@ -166,8 +166,6 @@ void Z_PlayerDeath(void) {
       ClearClip();
 
       ACS_Delay(1);
-
-      EndDrawing();
    }
 
    pl.obit = nil;

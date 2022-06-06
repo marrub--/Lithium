@@ -587,7 +587,6 @@ alloc_aut(0) sync static void ActFIN_WAIT(void) {
          F_drawBack(bgnd);
          F_drawFade(i / (k32)tics);
          ACS_Delay(1);
-         EndDrawing();
       }
       break;
    case FACT_FADE_OUT: {
@@ -597,7 +596,6 @@ alloc_aut(0) sync static void ActFIN_WAIT(void) {
          F_drawText(220, text);
          F_drawFade((tics - i) / (k32)tics);
          ACS_Delay(1);
-         EndDrawing();
       }
       ResetText();
       break;
@@ -608,7 +606,6 @@ alloc_aut(0) sync static void ActFIN_WAIT(void) {
          F_drawBack(bgnd);
          F_drawText(220, text);
          ACS_Delay(1);
-         EndDrawing();
       }
       break;
    }
@@ -617,7 +614,6 @@ alloc_aut(0) sync static void ActFIN_WAIT(void) {
          F_drawBack(bgnd);
          ACS_SetMusicVolume(i / (k32)tics);
          ACS_Delay(1);
-         EndDrawing();
       }
       break;
    case FACT_CRAWL: {
@@ -663,7 +659,6 @@ alloc_aut(0) sync static void ActFIN_WAIT(void) {
          }
 
          ACS_Delay(1);
-         EndDrawing();
       }
       break;
    }

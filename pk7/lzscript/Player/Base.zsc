@@ -185,7 +185,6 @@ void Lith_PreTick() {
 
    /* draw stuff if we're the camera */
    if(m_cs) m_cs.lith_drawFrame();
-   Lith_URANUS.LE();
 }
 
 void Lith_PostTick() {

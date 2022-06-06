@@ -117,8 +117,7 @@
 
 == \#st_name_jpfont_0 | Misaki Gothic
 == \#st_name_jpfont_1 | Misaki Mincho
-== \#st_name_jpfont_2 | k6x8
-== \#st_name_jpfont_3 | jiskan16
+== \#st_name_jpfont_2 | jiskan16
 
 == \#st_name_theme_0 | Green
 == \#st_name_theme_1 | Rose Pink

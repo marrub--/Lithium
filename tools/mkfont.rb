@@ -52,7 +52,6 @@ cmap_all = cmap_all.to_a.sort
 fonts = []
 fonts.push Font.new 8,  "MisakiG",   cmap_all
 fonts.push Font.new 8,  "MisakiM",   cmap_all
-fonts.push Font.new 8,  "k6x8",      cmap_all
 fonts.push Font.new 16, "jiskan16",  cmap_all
 fonts.push Font.new(8,  "ljtrmfont", cmap_all, lambda do |words, ch|
                        words.push "-stroke",      "black",

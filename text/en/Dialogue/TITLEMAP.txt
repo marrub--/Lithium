@@ -6,6 +6,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
+## Marine ════════════════════════════════════════════════════════════════════╕
 @@ TITLEMAP_lane_begin_0
 I will walk, with my shadow flag...
 
@@ -19,15 +20,15 @@ Hello.
 Ah, hey there.
 \cq[She looks cute. She reminds me of Daniel.]
 
-%% TITLEMAP_lane_begin_1m
+%% TITLEMAP_lane_begin_o0m
 Ah, hey there. You look familiar.
 \cq[Who is she?]
 
-%% TITLEMAP_lane_begin_2
+%% TITLEMAP_lane_begin_o2
 Oh, sorry, didn't mean to bother you.
 \cq[Back out while you can.]
 
-%% TITLEMAP_lane_begin_3
+%% TITLEMAP_lane_begin_o1
 Oh, sorry, didn't mean to bother you.
 \cq[Back out.]
 
@@ -36,15 +37,15 @@ Oh, do I? How so, might I ask? I don't believe I've met you before.
 
 \cn[I feel intimidated by this doll.]
 
-%% TITLEMAP_lane_m_meet_1
+%% TITLEMAP_lane_m_meet_o0
 No, it must be nothing.
 \ct[I'm sure it's nothing.]
 
-%% TITLEMAP_lane_m_meet_2
+%% TITLEMAP_lane_m_meet_o1
 No, just forget about it, sorry.
 \cr[God damn it.]
 
-%% TITLEMAP_lane_m_meet_3
+%% TITLEMAP_lane_m_meet_o2
 No, I've definitely seen you.
 \cq[What is it?]
 
@@ -55,7 +56,7 @@ are we? I feel like I know *you*...
 \cn[These subject hops are a bit hard to follow. I wonder if people find
 me this hard to follow.]
 
-@@ TITLEMAP_lane_m_nothing_5
+@@ TITLEMAP_lane_m_nothing_1
 Don't you hate it when they make you grind to get a 100% run? It's
 just kind of mean to do that. Why not just make hidden areas?
 
@@ -64,25 +65,25 @@ recently, and I did end up thinking that. Weird.]
 
 \c-Anyways!
 
-@@ TITLEMAP_lane_m_nothing_6
+@@ TITLEMAP_lane_m_nothing_2
 Strange! Were you passing into Hell, by chance? I think we might be in
 some kind of precipice - a dream, perhaps!
 
 \cn[She's surprisingly happy about this revelation.]
 
-%% TITLEMAP_lane_m_nothing_1
+%% TITLEMAP_lane_m_nothing_o0
 I do like RPG games. Why?
 \ct[Probably best to ignore the rest for now.]
 
-%% TITLEMAP_lane_m_nothing_2
+%% TITLEMAP_lane_m_nothing_o1
 I'm not sure where we are. I just... woke up here.
 \ct[I'm probably in Hell.]
 
-%% TITLEMAP_lane_m_nothing_3
+%% TITLEMAP_lane_m_nothing_o2
 Why *do* we think we look alike, anyhow?
 \cq[Maybe this was worth questioning.]
 
-%% TITLEMAP_lane_m_nothing_4
+%% TITLEMAP_lane_m_nothing_o3
 Nevermind, you talk a mile a minute.
 \cr[Not that I'm one to talk.]
 
@@ -91,25 +92,132 @@ Hmm... Do you happen to have scars on your upper arms?
 
 \cn[...What? How?]
 
-%% TITLEMAP_lane_m_seen_1
+%% TITLEMAP_lane_m_seen_o0
 No.
 \cr[Fuck.]
 
-%% TITLEMAP_lane_m_seen_2
+%% TITLEMAP_lane_m_seen_o1
 ...Yes. Burn marks. Self-inflicted.
 \cr[*Fuck.*]
 
-@@ TITLEMAP_lane_m_seen_3
+@@ TITLEMAP_lane_m_seen_1
 ...Ah.
 
 \cn[Ah...]
 
-%% TITLEMAP_lane_m_seen_4
+%% TITLEMAP_lane_m_seen_o2
 I'm leaving.
 \cr[I want to die. \cgI want to die. \cmI want to die.\cr]
 
-%% TITLEMAP_lane_m_seen_5
+%% TITLEMAP_lane_m_seen_o3
 I see.
 \cr[We're the same person. \cmGod damn it.\cr]
+
+## Thoth ═════════════════════════════════════════════════════════════════════╕
+%% TITLEMAP_kiri_begin_0
+\cn[The doll is completely unresponsive. You poke it, but it's just lifeless. Like everything else.]
+
+%% TITLEMAP_kiri_begin_0t
+\c[Lith_Angelic]It's weird seeing myself like this.
+\c[Lith_Evil]It's weird seeing myself like this.
+\c[Lith_Angelic]It's weird seeing myself like this.
+\c[Lith_Evil]It's weird seeing myself like this.
+\c[Lith_Angelic]It's weird seeing myself like this.
+\c[Lith_Evil]It's weird seeing myself like this.
+\c[Lith_Angelic]It's weird seeing myself like this.
+       \c[Lith_Evil]It's weird seeing myself like this.
+       \c[Lith_Angelic]It's weird seeing myself like this.
+       \c[Lith_Evil]It's weird seeing myself like this.
+       \c[Lith_Angelic]It's weird seeing myself like this.
+       \c[Lith_Evil]It's weird seeing myself like this.
+       \c[Lith_Angelic]It's weird seeing myself like this.
+       \c[Lith_Evil]It's weird seeing myself like this.
+
+%% TITLEMAP_kiri_begin_1t
+Hello, me.
+
+%% TITLEMAP_kiri_begin_o0
+\cq[Proceed.]
+
+%% TITLEMAP_kiri_begin_o1
+\cq[Don't go.]
+
+%% TITLEMAP_kiri_t_breaking_0
+\cq[Don't go.]
+\cq[Please.]
+\cq[I want someone to talk to.]
+\c[Lith_Angelic]It's weird seeing myself like this.
+\c[Lith_Evil]It's weird seeing myself like this.
+\c[Lith_Angelic]It's weird seeing myself like this.
+\c[Lith_Evil]It's weird seeing myself like this.
+\c[Lith_Angelic]It's weird seeing myself like this.
+\c[Lith_Evil]It's weird seeing myself like this.
+\c[Lith_Angelic]It's weird seeing myself like this.
+       \c[Lith_Evil]It's weird seeing myself like this.
+       \c[Lith_Angelic]It's weird seeing myself like this.
+       \c[Lith_Evil]It's weird seeing myself like this.
+       \c[Lith_Angelic]It's weird seeing myself like this.
+       \c[Lith_Evil]It's weird seeing myself like this.
+       \c[Lith_Angelic]It's weird seeing myself like this.
+       \c[Lith_Evil]It's weird seeing myself like this.
+
+%% TITLEMAP_kiri_t_breaking_o0
+\cq[Okay.]
+
+%% TITLEMAP_kiri_t_down_0
+\cr[Thank you...]
+\cq[Thank you so much...]
+
+\cn[I think I'm understanding a bit more now.]
+
+\c[Lith_Angelic]It's weird seeing myself like this.
+\c[Lith_Evil]Do you think we're closer?
+
+\cq[We are missing a vital part.]
+\cn[Where is it?]
+\cq[That's a good question...]
+
+%% TITLEMAP_kiri_t_down_o0
+\cq[Where *is* it?]
+
+%% TITLEMAP_kiri_t_down_o1
+\cr[No, it doesn't matter now.]
+
+%% TITLEMAP_kiri_t_broken_0
+\cr[I think we're broken...]
+\cq[We need to find it...]
+
+\cn[I know where it is.]
+
+\c[Lith_Angelic]There's still time to get past the precepice.
+\c[Lith_Evil]We're no closer now.
+
+\cq[It's...]
+\cn[Here.]
+\c-"Right here."
+
+You hear a voice from inside your head. You realize it's yours.
+
+%% TITLEMAP_kiri_t_broken_o0
+You weren't fully awake.
+
+%% TITLEMAP_kiri_t_entity_0
+\c[Lith_Angelic]The \c[Lith_Evil]entity behind you, \c[Lith_Angelic]what is that?
+
+\c-I don't know.
+
+                  \c[Lith_Angelic]It worries us.
+
+\cn[It's like a light. I've never seen something like it before.]
+\cq[There's something beyond the light, infinitely
+smallllllllllllllllllllll============>>>>>??????????????
+
+\cr>>>>>[[[[computational cluster array failure]]]]
+\cr>>>>>[[[[maintenance access mode initiated]]]]
+\c-              >>>>> DON'T SEE THE LIGHT <<<<<
+\cq[Pleasant thing. Shall we ignore it?]
+
+%% TITLEMAP_kiri_t_entity_o0
+\c[Lith_Evil]...Gladly.
 
 ## EOF

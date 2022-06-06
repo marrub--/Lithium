@@ -207,7 +207,7 @@
 @ Jimmy             - lmidfont and smallfont
 @ The Author        - areaname
 @ Toshiyuki Imamura - jiskan16, ljtrmfont
-@ littlelimit       - Misaki and k6x8
+@ littlelimit       - Misaki
 ~
                        * LOOKING FOR CREDITS *
 

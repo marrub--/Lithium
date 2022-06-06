@@ -175,9 +175,6 @@ FireLoop:
       for(int i = 0; i < 2; ++i) {
          a_fireProjectile("Lith_RemsBullet1", angle: fRandom(-2, 2), spawnofs_xy: fRandom(2, 8), spawnheight: fRandom(8, 10), flags: FPF_NOAUTOAIM, pitch: fRandom(-2, 2));
          a_fireProjectile("Lith_RemsBullet2", spawnofs_xy: fRandom(2, 8), spawnheight: fRandom(5, 7));
-         for(int j = 0; j < 2; ++j) {
-            Lith_A_Casing("Lith_CasRemsHot", 9, 10, 20, frandom(3,5), frandom(-5,-10), frandom(10,12));
-         }
       }
       Lith_GunSmoke("Lith_RemsSparkSpawner", 2, 8);
       A_Recoil(0.7);

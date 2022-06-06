@@ -17,6 +17,7 @@
 static
 i32 lmvar frozen;
 
+script
 cstr CanonTime(i32 type, i32 time) {
    noinit static
    char ft[64], st[64], dt[64], fmt[64];

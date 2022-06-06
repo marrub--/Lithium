@@ -346,23 +346,6 @@ static void LW(color cr = 0) {
    cl.m_DPtr++;
 }
 
-static void LE() {
-   let cl = Lith_URANUS(Find("Lith_URANUS"));
-
-   cl.m_DPtr = 0;
-
-   for(uint i = 0; i < cl.m_FadeMsg.Size(); i++) {
-      if(cl.m_FadeMsg[i].Fade) {
-         if(!cl.m_FadeMsg[i].Time) {
-            cl.m_FadeMsg[i].Fade =
-               Max(int(cl.m_FadeMsg[i].Fade) - int(cl.m_FadeMsg[i].FSub), 0);
-         } else {
-            cl.m_FadeMsg[i].Time--;
-         }
-      }
-   }
-}
-
 static clearScope textureId getTextureForName(string tex) {
    if(tex.byteAt(0) == CH_COLON) {
       tex.replace(":", "/");
@@ -379,7 +362,6 @@ override void onRegister() {
    default:
    case font_misaki_gothic: m_uFntSml = 'MisakiG';  break;
    case font_misaki_mincho: m_uFntSml = 'MisakiM';  break;
-   case font_k6x8:          m_uFntSml = 'k6x8';     break;
    case font_jiskan16:      m_uFntSml = 'jiskan16'; break;
    }
 
@@ -403,6 +385,19 @@ override void worldTick() {
    projectSetRenderer();
    tickDmgNums();
    tickScrNums();
+
+   m_DPtr = 0;
+
+   for(uint i = 0; i < m_FadeMsg.Size(); i++) {
+      if(m_FadeMsg[i].Fade) {
+         if(!m_FadeMsg[i].Time) {
+            m_FadeMsg[i].Fade =
+               Max(int(m_FadeMsg[i].Fade) - int(m_FadeMsg[i].FSub), 0);
+         } else {
+            m_FadeMsg[i].Time--;
+         }
+      }
+   }
 }
 
 override void uiTick() {

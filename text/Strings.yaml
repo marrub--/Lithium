@@ -39,7 +39,6 @@ sf_:
    - bigupper
    - italic
    - jiskan16
-   - k6x8
    - ljtrmfont
    - lmidfont
    - lsmlhfnt
@@ -178,7 +177,6 @@ sm_:
    - JumpZ
    - LA
    - LC
-   - LE
    - LF
    - LL
    - LR

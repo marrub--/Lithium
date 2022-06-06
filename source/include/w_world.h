@@ -330,7 +330,7 @@ extern struct world            wl;
 extern struct map_locals lmvar ml;
 
 void Scr_HInit(void);
-cstr CanonTime(i32 type, i32 time);
+script cstr CanonTime(i32 type, i32 time);
 optargs(1) i32 UniqueID(i32 tid);
 void BeginAngles(i32 x, i32 y);
 k32 AddAngle(i32 x, i32 y);
