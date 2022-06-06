@@ -136,8 +136,6 @@ world.splash {
       lava3,
       lava4,
    }
-
-   $alias nukage = sludge
 }
 
 # EOF

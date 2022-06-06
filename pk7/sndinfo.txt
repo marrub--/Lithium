@@ -950,4 +950,3 @@ world/splash/lava4 lsnd/World/Splashes/Lava4
 $random world/splash/water { world/splash/water1 world/splash/water2 world/splash/water3 world/splash/water4 world/splash/water5 }
 $random world/splash/sludge { world/splash/sludge1 world/splash/sludge2 world/splash/sludge3 world/splash/sludge4 }
 $random world/splash/lava { world/splash/lava1 world/splash/lava2 world/splash/lava3 world/splash/lava4 }
-$alias world/splash/nukage world/splash/sludge
