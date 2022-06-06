@@ -172,6 +172,7 @@ enum Lith_RifleMode {
 
 enum Lith_MapFlag {
    
+   _mapf_playerinit,
    _mapf_corrupted,
    _mapf_thunder,
    _mapf_vacuum,

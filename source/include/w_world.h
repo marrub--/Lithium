@@ -183,6 +183,7 @@ enum ZscName(RifleMode) {
 
 enum ZscName(MapFlag) {
    /* states */
+   _mapf_playerinit,
    _mapf_corrupted,
    _mapf_thunder,
    _mapf_vacuum,

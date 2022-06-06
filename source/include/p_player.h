@@ -224,7 +224,7 @@ struct player {
    __prop setHealth    {operator(): SetPropI(->tid, APROP_Health)}
    __prop shield       {default:    GetMembI(->tid, sm_Shield)}
    __prop setShield    {operator(): SetMembI(->tid, sm_Shield)}
-   __prop setActivator {operator(): ACS_SetActivator(->tid)}
+   __prop setActivator {operator(): ACS_SetActivator(0, AAPTR_PLAYER1)}
    __prop getVel       {operator(): mag2k(->velx, ->vely)}
    __prop onground     {default:    GetMembI(->tid, sm_OnGround)}
    __prop waterlevel   {default:    GetMembI(->tid, sm_WaterLevel)}
