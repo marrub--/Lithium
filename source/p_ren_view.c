@@ -15,7 +15,7 @@
 /* Update view bobbing when you get damaged. */
 script static
 void P_Ren_DamageBob(void) {
-   if(!InvNum(so_PowerStrength) && pl.health < pl.oldhealth) {
+   if(!InvNum(so_PowerStrength) && pl.health < pl.old.health) {
       k64 angle = (k64)ACS_RandomFixed(tau, -tau);
       k64 distance;
 
@@ -24,7 +24,7 @@ void P_Ren_DamageBob(void) {
       }
 
       distance  = mag2k(pl.bobyaw, pl.bobpitch);
-      distance += (pl.oldhealth - pl.health) / (k64)pl.maxhealth;
+      distance += (pl.old.health - pl.health) / (k64)pl.maxhealth;
       distance *= 0.2lk;
 
       k64 ys = sinf(angle), yc = cosf(angle);

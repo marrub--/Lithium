@@ -54,19 +54,12 @@ reinit:
    P_Log_Entry();
    P_Upg_Enter();
    P_Data_Load();
-
    P_doIntro();
-
    P_bossWarning();
-
    P_bossText();
-
    if(pl.teleportedout) P_TeleportIn();
 
-   struct player_delta olddelta;
-   i32                 oldhealth;
-   i32                 oldmana;
-   i32                 oldshield;
+   struct old_player_delta olddelta;
 
    while(pl.active) {
       if(pl.reinit) {
@@ -81,10 +74,10 @@ reinit:
       /* Update data */
       P_Dat_PTickPre();
 
-      olddelta  = pl.cur;
-      oldhealth = pl.health;
-      oldmana   = pl.mana;
-      oldshield = pl.shield;
+      olddelta.del    = pl.cur;
+      olddelta.health = pl.health;
+      olddelta.mana   = pl.mana;
+      olddelta.shield = pl.shield;
 
       /* Tick all systems */
       if(!pl.dead) {
@@ -110,15 +103,9 @@ reinit:
          pl.dlg.num = 0;
       }
 
-      /* Update previous-tic values */
-      pl.old       = olddelta;
-      pl.oldhealth = oldhealth;
-      pl.oldmana   = oldmana;
-      pl.oldshield = oldshield;
-
-      /* If the map changes this we need to make sure it's still correct. */
+      /* Update post-tic values */
+      pl.old = olddelta;
       P_ValidateTID();
-
       pl.ticks++;
    }
 }
@@ -603,8 +590,8 @@ static
 void P_attrRGE(void) {
    i32 rge = pl.attr.attrs[at_spc];
 
-   if(pl.health < pl.oldhealth) {
-      pl.rage += rge * (pl.oldhealth - pl.health) / 1000.0;
+   if(pl.health < pl.old.health) {
+      pl.rage += rge * (pl.old.health - pl.health) / 1000.0;
    }
 
    pl.rage = lerpk(pl.rage, 0, 0.02);
@@ -616,8 +603,8 @@ static
 void P_attrCON(void) {
    i32 con = pl.attr.attrs[at_spc];
 
-   if(pl.mana > pl.oldmana) {
-      pl.rage += con * (pl.mana - pl.oldmana) / 1100.0;
+   if(pl.mana > pl.old.mana) {
+      pl.rage += con * (pl.mana - pl.old.mana) / 1100.0;
    }
 
    pl.rage = lerpk(pl.rage, 0, 0.03);
@@ -628,8 +615,8 @@ void P_attrCON(void) {
 static void P_attrREF(void) {
    i32 ref = pl.attr.attrs[at_spc];
 
-   if(pl.health < pl.oldhealth) {
-      pl.rage += ref * (pl.oldhealth - pl.health) / 150.0;
+   if(pl.health < pl.old.health) {
+      pl.rage += ref * (pl.old.health - pl.health) / 150.0;
    }
 
    pl.rage = lerpk(pl.rage, 0, 0.01);
@@ -648,15 +635,15 @@ static void P_Spe_pTick(void) {
          _l("regenwaitmax: "), _p(pl.regenwaitmax), _c('\n')
       );
 
-      if(pl.shield == 0 && pl.oldshield != 0) {
+      if(pl.shield == 0 && pl.old.shield != 0) {
          StartSound(ss_player_ari_shield_break, lch_shield, CHANF_MAYBE_LOCAL|CHANF_UI, 1.0, ATTN_STATIC);
          pl.regenwaitmax = 665;
          pl.regenwait    = 700;
          ACS_FadeTo(184, 205, 255, 0.3k, 0.0k);
          ACS_FadeTo(222, 5, 92, 0.0k, 3.0k);
-      } else if(pl.shield < pl.oldshield) {
+      } else if(pl.shield < pl.old.shield) {
          ACS_StopSound(pl.tid, lch_shield);
-         i32 diff = pl.oldshield - pl.shield;
+         i32 diff = pl.old.shield - pl.shield;
          if(pl.regenwait <= 350) {
             pl.regenwaitmax = 315;
             pl.regenwait    = 350;
@@ -670,7 +657,7 @@ static void P_Spe_pTick(void) {
             StartSound(ss_player_ari_shield_regenw, lch_auto, CHANF_MAYBE_LOCAL|CHANF_UI, 0.9, ATTN_STATIC);
          }
       } else if(pl.shield < pl.shieldmax) {
-         if(pl.shield == pl.oldshield) {
+         if(pl.shield == pl.old.shield) {
             StartSound(ss_player_ari_shield_regenl, lch_shield, CHANF_MAYBE_LOCAL|CHANF_UI|CHANF_LOOP, 1.0, ATTN_STATIC);
          }
          if(wl.ticks % 3 == 0) {

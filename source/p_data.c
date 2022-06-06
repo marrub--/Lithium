@@ -130,8 +130,8 @@ void P_Dat_PTickPre(void) {
    pl.scopetoken = InvNum(so_WeaponScopedToken);
 
    if(ACS_Timer() > 4) {
-      /**/ if(pl.health < pl.oldhealth) pl.healthused += pl.oldhealth - pl.health;
-      else if(pl.health > pl.oldhealth) pl.healthsum  += pl.health    - pl.oldhealth;
+      /**/ if(pl.health < pl.old.health) pl.healthused += pl.old.health - pl.health;
+      else if(pl.health > pl.old.health) pl.healthsum  += pl.health     - pl.old.health;
 
       if(pl.x != pl.old.x) pl.unitstravelled += fastabs(pl.x - pl.old.x);
       if(pl.y != pl.old.y) pl.unitstravelled += fastabs(pl.y - pl.old.y);

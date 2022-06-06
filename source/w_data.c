@@ -30,7 +30,7 @@ i32 Z_LPData(i32 info, i32 permutation) {
    case _pdt_recoilp:      return k32_to_i32(pl.extrpitch);
    case _pdt_attr:         return pl.attr.attrs[permutation];
    case _pdt_alpha:        return k32_to_i32(pl.alpha);
-   case _pdt_oldhealth:    return pl.oldhealth;
+   case _pdt_oldhealth:    return pl.old.health;
    case _pdt_hudenabled:   return pl.hudenabled;
    case _pdt_flashbattery: return pl.upgrdata.flashlight.battery;
    case _pdt_bossspawned:  return wl.bossspawned;

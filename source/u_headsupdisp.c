@@ -485,11 +485,11 @@ void HUD_BottomLeft(void) {
    if(cr_g) {
       k32 ft = 0;
 
-      if(pl.health < pl.oldhealth) {
+      if(pl.health < pl.old.health) {
          udata.cr = cr_t;
-         ft = (pl.oldhealth - pl.health) / 300.0;
+         ft = (pl.old.health - pl.health) / 300.0;
          ft = clampk(ft, 0.1, 1.0);
-      } else if(pl.health > pl.oldhealth) {
+      } else if(pl.health > pl.old.health) {
          udata.cr = cr_g;
          ft = 0.1;
       }

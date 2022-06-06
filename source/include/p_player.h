@@ -202,6 +202,14 @@ struct player_delta {
    struct player_attributes attr;
 };
 
+struct old_player_delta {
+   anonymous struct player_delta del;
+
+   i32 health;
+   i32 mana;
+   i32 shield;
+};
+
 /*      07-04-2016: That's a lot of data!
  * edit 09-04-2016: Holy shit, that's really a lot of data!
  * edit 07-05-2016: JESUS TAKE THE WHEEL
@@ -257,11 +265,8 @@ struct player {
 
    /* Deltas */
    anonymous
-   struct player_delta cur;
-   struct player_delta old;
-   i32 oldhealth;
-   i32 oldmana;
-   i32 oldshield;
+   struct     player_delta cur;
+   struct old_player_delta old;
 
    /* Upgrades */
    struct upgr_data upgrdata;
