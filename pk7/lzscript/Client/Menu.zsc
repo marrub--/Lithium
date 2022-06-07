@@ -21,6 +21,11 @@ class Lith_MenuDelegate : MenuDelegateBase {
          null;
    }
 
+   static ui Lith_MenuDelegate create() {
+      let m = new("Lith_MenuDelegate");
+      return m;
+   }
+
    override void playSound(name sndName) {
       if(sndName == 'menu/cursor') {
          return;
@@ -48,8 +53,8 @@ class Lith_MenuDelegate : MenuDelegateBase {
          let dw   = desc.displayWidth();
          let dh   = desc.displayHeight();
          let a    = (sin(gameTic * 10.0) + 1.0) / 2.0;
-         let c    = Lith_URANUS.xhairColor();
-         let tex  = Lith_URANUS.xhairW();
+         let c    = Lith_RenderProvider.xhairColor();
+         let tex  = Lith_RenderProvider.xhairW();
          if(dw == ListMenuDescriptor.CleanScale) {
             Screen.drawTexture(tex, false, m_selPos.x, m_selPos.y,
                                DTA_Clean,true,
@@ -74,13 +79,13 @@ class Lith_MenuDelegate : MenuDelegateBase {
       Font lmidfont = "lmidfont";
       Font ltrmfont = "ltrmfont";
       if(fnt == smallFont) {
-         return Lith_URANUS.instance().fntSml();
+         return Lith_RenderProvider.instance().fntSml();
       } else if(fnt == lmidfont) {
-         return Lith_URANUS.instance().fntMid();
+         return Lith_RenderProvider.instance().fntMid();
       } else if(fnt == ltrmfont) {
-         return Lith_URANUS.instance().fntTrm();
+         return Lith_RenderProvider.instance().fntTrm();
       } else if(fnt == bigFont || fnt == bigupper) {
-         return Lith_URANUS.instance().fntBig();
+         return Lith_RenderProvider.instance().fntBig();
       } else {
          return fnt;
       }
@@ -194,10 +199,6 @@ ui string getVersion() {
 }
 
 private ui void tickMenu() {
-   if(!(menuDelegate is "Lith_MenuDelegate")) {
-      menuDelegate.destroy();
-      menuDelegate = new("Lith_MenuDelegate");
-   }
    if(!m_menuRectXf) {
       m_menuRectXf = new("Shape2DTransform");
       m_menuRect   = new("Shape2D");

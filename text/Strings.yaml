@@ -182,6 +182,7 @@ sm_:
    - LA
    - LB
    - LC
+   - LD
    - LF
    - LL
    - LR
@@ -302,6 +303,7 @@ so_:
    - PunctuatorPuff
    - RainDrop
    - RandomSpawn
+   - Ren: RenderProvider
    - Rend
    - RocketAmmo
    - SMGHeat

@@ -1,0 +1,733 @@
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
+
+class Lith_RenderProvider;
+
+enum DrawType {
+   _type_clipSet,
+   _type_clipClear,
+   _type_setSize,
+   _type_line,
+   _type_sprite,
+   _type_spriteAlpha,
+   _type_spriteStencil,
+   _type_spriteStencilAlpha,
+   _type_text,
+   _type_textAlpha,
+   _type_rect,
+   _type_fill,
+}
+
+struct DrawData {
+   uint8 type;
+
+   uint8 cr;
+   uint8 lnY;
+   uint8 style;
+
+   int16 x, y, z, w;
+
+   color     c;
+   textureId tex;
+   double    a;
+
+   Font          fnt;
+   array<string> txt;
+   array<int>    lnX;
+}
+
+struct FadeMsg {
+   uint8 Fade;
+   uint8 Time;
+   uint8 FSub;
+   uint8 Alph;
+}
+
+private transient DrawData[8000] m_d;
+private transient uint           m_dPtr;
+private transient FadeMsg[256]   m_fadeMsg;
+private transient vector2        m_virtualSize;
+private transient int            m_breakX;
+private transient bool           m_noDraw;
+private transient bool           m_english;
+private transient Font           m_uFntSml;
+private transient Font           m_lMidFont;
+private transient Font           m_lTrmFont;
+private transient Font           m_lBigFont;
+private transient Font           m_lJTrmFont;
+private transient Font           m_newConsoleFont;
+
+static ui void drawRect(int sx, int sy, int px, int py, color cr) {
+   Screen.dim(cr, cr.a/255.0, px, py, sx, sy);
+}
+
+clearScope vector2 getScSized(double x, double y, bool kludge = false, vector2 vsz = (0.0, 0.0)) {
+   if(!vsz.x || !vsz.y) {
+      vsz = m_virtualSize;
+   }
+   double sw = Screen.GetWidth();
+   double sh = Screen.GetHeight();
+
+   vector2 xy, sc;
+
+   if(kludge) [sc, xy] = Screen.VirtualToRealCoords((0, 0), ( x,  y), vsz);
+   else       [xy, sc] = Screen.VirtualToRealCoords((x, y), (sw, sh), vsz);
+
+   return xy;
+}
+
+private ui void drawNearbyItems(RenderEvent evt) {
+   if(!lith_hud_showitems) {
+      return;
+   }
+   Font fnt = fntSml();
+   for(let it = BlockThingsIterator.create(evt.camera, 256.0); it.next();) {
+      let mo = it.thing;
+      if(Inventory(mo) && mo.bSpecial) {
+         int px, py; bool seen;
+         [px, py, seen] = project(mo.pos);
+         if(seen) {
+            string tag   = mo.getTag();
+            double dist  = mo.distance3D(evt.camera);
+            double alpha = 1.0 - clamp(dist / 256.0, 0.0, 1.0);
+            int    sw    = fnt.stringWidth(tag);
+            int    cr    = acs_executeWithResult(lsc_drawcr, lith_hud_itemcolor);
+            Screen.drawText(fnt, cr, px - sw / 2, py, tag, DTA_Alpha,alpha,
+                            DTA_VirtualWidth,320, DTA_VirtualHeight,240);
+         }
+      }
+   }
+}
+
+private transient ui textureId m_texBatteryOutline;
+private transient ui textureId m_texBattery;
+
+private clearScope int, int ammoAmt(Actor mo, class<Lith_Ammo> ty) const {
+   let inv = mo.findInventory(ty);
+   int amt = inv.amount;
+   int max = inv.maxAmount;
+   int clr;
+   if(amt == max) {
+      clr = CH_L_N;
+   } else if(amt > max - max / 4) {
+      clr = CH_L_D;
+   } else if(amt > max / 2) {
+      clr = CH_L_F;
+   } else if(amt > max / 4) {
+      clr = CH_L_I;
+   } else if(amt != 0) {
+      clr = CH_L_G;
+   } else {
+      clr = CH_L_M;
+   }
+   return amt, clr;
+}
+
+private ui void drawInventory(RenderEvent evt) {
+   static const string keyClasses[] = {
+      "BlueCard",  "RedCard",  "YellowCard",
+      "BlueSkull", "RedSkull", "YellowSkull",
+
+      "ChexBlueCard", "ChexRedCard", "ChexYellowCard",
+
+      "KeyBlue", "KeyGreen", "KeyYellow"
+   };
+
+   static const string keyText[] = {
+      "\cn", "\ca", "\cf",
+      "\cn", "\ca", "\cf",
+
+      "\cn", "\ca", "\cf",
+
+      "\cn", "\cd", "\cf"
+   };
+
+   if(m_texBatteryOutline.isNull()) {
+      m_texBatteryOutline = getTextureForName(":HUD:BatteryOutline");
+   }
+   if(m_texBattery.isNull()) {
+      m_texBattery = getTextureForName(":HUD:Battery");
+   }
+
+   let mo = evt.camera;
+
+   string inv_text = "";
+   int y = 0;
+
+   int blt, cblt; [blt, cblt] = ammoAmt(mo, 'Lith_BulletAmmo');
+   int shl, cshl; [shl, cshl] = ammoAmt(mo, 'Lith_ShellAmmo');
+   int rkt, crkt; [rkt, crkt] = ammoAmt(mo, 'Lith_RocketAmmo');
+   int nrg, cnrg; [nrg, cnrg] = ammoAmt(mo, 'Lith_PlasmaAmmo');
+   int drk, cdrk; [drk, cdrk] = ammoAmt(mo, 'Lith_CannonAmmo');
+
+   inv_text.appendFormat(
+      " \c%c%i\c-\n \c%c%i\c-\n \c%c%i\c-\n \c%c%i\c-\n \c%c%i\c-\n",
+      cblt, blt,
+      cshl, shl,
+      crkt, rkt,
+      cnrg, nrg,
+      cdrk, drk);
+   y += 5 * 8;
+
+   bool any_key = false;
+   for(int i = 0; i < keyClasses.size(); ++i) {
+      class<Key> kt = keyClasses[i];
+      if(kt && mo.countInv(kt)) {
+         inv_text = inv_text .. keyText[i];
+         any_key  = true;
+      }
+   }
+   if(any_key) {
+      y += 8;
+      inv_text = inv_text .. "\n";
+   }
+
+   Screen.drawText(smallFont, Font.CR_WHITE, 0, 0, inv_text,
+                   DTA_VirtualWidth,320, DTA_VirtualHeight,240);
+
+   y = drawStatFx(evt, y);
+
+   int battery  = Lith_UTIL.pData(_pdt_flashbattery);
+   int bat_life = lith_light_battery * 35;
+
+   if(bat_life > 0 && battery < bat_life) {
+      double s = battery / double(bat_life) * 8.0;
+
+      Screen.drawTexture(m_texBatteryOutline, false, 0, y,
+                         DTA_VirtualWidth,320, DTA_VirtualHeight,240);
+
+      y += 2;
+
+      vector2 cb, cs;
+      cb = getScSized(2, y, vsz: (320, 240));
+      cs = getScSized(2, s, vsz: (320, 240));
+      Screen.setClipRect(int(cb.x), int(cb.y), int(cs.x), int(cs.y));
+      Screen.drawTexture(m_texBattery, false, 2, y,
+                         DTA_VirtualWidth,320, DTA_VirtualHeight,240);
+      Screen.clearClipRect();
+
+      y += 10;
+   }
+}
+
+Font fntSml(bool noUnicode = false) const {
+   return noUnicode || m_english ? smallFont : m_uFntSml;
+}
+
+Font fntMid(bool noUnicode = false) const {
+   return noUnicode || m_english ? m_lMidFont : m_uFntSml;
+}
+
+Font fntBig(bool noUnicode = false) const {
+   return noUnicode || m_english ? m_lBigFont : m_newConsoleFont;
+}
+
+Font fntTrm(bool noUnicode = false) const {
+   return noUnicode || m_english ? m_lTrmFont : m_lJTrmFont;
+}
+
+Font fntAny(name name, bool noUnicode = false) const {
+   /**/ if(name == 'smallfnt') return fntSml(noUnicode);
+   else if(name == 'lmidfont') return fntMid(noUnicode);
+   else if(name == 'ltrmfont') return fntTrm(noUnicode);
+   else if(name == 'bigupper') return fntBig(noUnicode);
+   else                        return Font.getFont(name);
+}
+
+void unload() {
+   m_dPtr = 0;
+   m_dmgNumInit = false;
+}
+
+void tick() {
+   projectSetRenderer();
+
+   tickDmgNums();
+   tickScrNums();
+
+   m_dPtr = 0;
+
+   for(uint i = 0; i < m_fadeMsg.size(); i++) {
+      if(m_fadeMsg[i].fade) {
+         if(!m_fadeMsg[i].time) {
+            m_fadeMsg[i].fade =
+               Max(int(m_fadeMsg[i].fade) - int(m_fadeMsg[i].fSub), 0);
+         } else {
+            m_fadeMsg[i].time--;
+         }
+      }
+   }
+}
+
+ui void render(RenderEvent evt) {
+   projectSetUp(evt);
+
+   if(evt.camera && !automapActive) {
+      bool hud_enabled = false;
+      if(evt.camera.player) {
+         hud_enabled = Lith_UTIL.pData(_pdt_hudenabled);
+      }
+
+      if(hud_enabled) {
+         drawNearbyItems(evt);
+         drawDmgNums(evt);
+         drawCrosshair(evt);
+         drawInventory(evt);
+      }
+
+      int scw = 320, sch = 240;
+      for(uint i = 0; i < m_DPtr; i++) {
+         switch(m_D[i].Type) {
+         case _type_clipSet:
+            Screen.setClipRect(m_D[i].X, m_D[i].Y, m_D[i].Z, m_D[i].W);
+            break;
+         case _type_clipClear:
+            Screen.clearClipRect();
+            break;
+         case _type_setSize:
+            scw = m_D[i].X;
+            sch = m_D[i].Y;
+            break;
+         case _type_line:
+            Screen.drawLine(m_D[i].X, m_D[i].Y, m_D[i].Z, m_D[i].W, m_D[i].C);
+            break;
+         case _type_sprite:
+            Screen.drawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
+                               DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
+                               DTA_TopOffset,0, DTA_LeftOffset,0,
+                               DTA_LegacyRenderStyle,m_D[i].Style);
+            break;
+         case _type_spriteAlpha:
+            Screen.drawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
+                               DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
+                               DTA_TopOffset,0, DTA_LeftOffset,0,
+                               DTA_LegacyRenderStyle,m_D[i].Style,
+                               DTA_Alpha,m_D[i].A);
+            break;
+         case _type_spriteStencil:
+            Screen.drawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
+                               DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
+                               DTA_TopOffset,0, DTA_LeftOffset,0,
+                               DTA_FillColor,m_D[i].C);
+            break;
+         case _type_spriteStencilAlpha:
+            Screen.drawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
+                               DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
+                               DTA_TopOffset,0, DTA_LeftOffset,0,
+                               DTA_Alpha,m_D[i].A, DTA_FillColor,m_D[i].C);
+            break;
+         case _type_text:
+            for(uint ln = 0, lns = m_D[i].LnX.Size(); ln < lns; ln++) {
+               Screen.drawText(m_D[i].Fnt, m_D[i].Cr,
+                               m_D[i].X-m_D[i].LnX[ln], m_D[i].Y+m_D[i].LnY*ln,
+                               m_D[i].Txt[ln],
+                               DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
+                               DTA_LegacyRenderStyle,m_D[i].Style);
+            }
+            break;
+         case _type_textAlpha:
+            for(uint ln = 0, lns = m_D[i].LnX.Size(); ln < lns; ln++) {
+               Screen.drawText(m_D[i].Fnt, m_D[i].Cr,
+                               m_D[i].X-m_D[i].LnX[ln], m_D[i].Y+m_D[i].LnY*ln,
+                               m_D[i].Txt[ln],
+                               DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
+                               DTA_Alpha,m_D[i].A,
+                               DTA_LegacyRenderStyle,m_D[i].Style);
+            }
+            break;
+         case _type_rect:
+            drawRect(m_D[i].Z, m_D[i].W, m_D[i].X, m_D[i].Y, m_D[i].C);
+            break;
+         case _type_fill:
+            drawRect(Screen.getWidth(), Screen.getHeight(), 0, 0, m_D[i].C);
+            break;
+         }
+      }
+
+      let p = Lith_Player(evt.camera);
+      if(p && p.m_cs) p.m_cs.lith_render();
+
+      if(hud_enabled) {
+         drawScrNums(evt);
+      }
+   }
+}
+
+static clearScope textureId getTextureForName(string tex) {
+   if(tex.byteAt(0) == CH_COLON) {
+      tex.replace(":", "/");
+      tex = "lgfx" .. tex .. ".png";
+   }
+   return TexMan.checkForTexture(tex, TexMan.Type_Any);
+}
+
+static Lith_RenderProvider create() {
+   let r = new("Lith_RenderProvider");
+
+   r.m_english = Lith_HERMES.localize("LITH_CHECK") == "Eng";
+
+   switch(lith_gui_jpfont) {
+   default:
+   case font_misaki_gothic: r.m_uFntSml = 'MisakiG';  break;
+   case font_misaki_mincho: r.m_uFntSml = 'MisakiM';  break;
+   case font_jiskan16:      r.m_uFntSml = 'jiskan16'; break;
+   }
+
+   r.m_lMidFont       = 'lmidfont';
+   r.m_lTrmFont       = 'ltrmfont';
+   r.m_lBigFont       = 'lbigfont';
+   r.m_lJTrmFont      = 'ljtrmfont';
+   r.m_newConsoleFont = 'newconsolefont';
+
+   r.projectRegister();
+
+   return r;
+}
+
+static clearScope Lith_RenderProvider instance() {
+   return Lith_Player(players[consoleplayer].mo).m_ren;
+}
+
+static int LA(int pos, string s, string fnt) {
+   let r = instance();
+
+   uint breakx = r.m_breakX ? r.m_breakX - pos : 0x7FFF;
+
+   let  fon = r.fntAny(fnt);
+   let  brl = fon.breakLines(s, breakx);
+   uint lny = fon.getHeight() * brl.count();
+   uint lnx = 0;
+
+   for(uint i = 0; i < brl.count(); i++) {
+      let lnw = brl.stringWidth(i);
+      if(lnx < lnw) lnx = lnw;
+   }
+
+   return (lnx & 0xFFFF) | ((lny & 0xFFFF) << 16);
+}
+
+static int LB(string t) {
+   let tx = getTextureForName(t);
+   int sx, sy; [sx, sy] = TexMan.GetSize(tx);
+   return (sx & 0xFFFF) | ((sy & 0xFFFF) << 16);
+}
+
+/*
+static int LD(string txt, string fnt, int xx, int yy, int flags) {
+   let r = instance();
+
+   int  x  = xx & _xmask;
+   int  y  = yy & _ymask;
+   uint xa = xx & _xflag;
+   uint ya = yy & _yflag;
+
+   uint  breakx = r.m_breakX ? r.m_breakX - x : 0x7FFF;
+   r.m_d[p].fnt = r.fntAny(fnt, flags & _u_no_unicode);
+   r.m_d[p].lnY = r.m_d[p].fnt.getHeight();
+   let      brl = r.m_d[p].fnt.breakLines(txt, breakx);
+   uint     lns = brl.Count();
+
+   r.m_d[p].txt.resize(lns);
+   array<int> lnW;
+   lnW.Resize(lns);
+
+   uint lnx = 0;
+   for(uint i = 0, w; i < lns; i++) {
+      r.m_d[p].txt[i] = brl.stringAt(i);
+      lnW[i] = brl.stringWidth(i);
+      if(lnx < (w = lnW[i])) {
+         lnx = w;
+      }
+   }
+
+   switch(xa) {
+   default:
+   case _x3:
+   case _x4:
+   case _xl: r.m_d[p].x = x;           break;
+   case _x5: r.m_d[p].x = x + lnx / 2; break;
+   case _x6:
+   case _xc: r.m_d[p].x = x - lnx / 2; break;
+   case _xr: r.m_d[p].x = x - lnx;     break;
+   }
+
+   switch(ya) {
+   default:
+   case _yt: r.m_d[p].y = y;                           break;
+   case _yc: r.m_d[p].y = y - r.m_d[p].lnY * lns / 2; break;
+   case _yb: r.m_d[p].y = y - r.m_d[p].lnY * lns;     break;
+   }
+
+   r.m_d[p].lnX.resize(lns);
+
+   for(uint i = 0; i < lns; i++) {
+           if(xa == _x3) r.m_d[p].lnX[i] = lnW[i];
+      else if(xa <  _x4) r.m_d[p].lnX[i] = 0;
+      else               r.m_d[p].lnX[i] = lnW[i] / 2;
+   }
+
+}
+*/
+
+static void LZ(int w, int h) {
+   let r = instance();
+
+   let p = r.m_DPtr;
+
+   r.m_D[p].Type = _type_setSize;
+
+   r.m_D[p].X = w;
+   r.m_D[p].Y = h;
+
+   r.m_DPtr++;
+
+   r.m_VirtualSize = (w, h);
+}
+
+static void LF(int fnum, int time, int speed, double alpha) {
+   let r = instance();
+
+   r.m_fadeMsg[fnum].Time = time;
+   r.m_fadeMsg[fnum].FSub = speed;
+   r.m_fadeMsg[fnum].Alph = uint(alpha * 255.0);
+   r.m_fadeMsg[fnum].Fade = 255;
+}
+
+static bool LX(int num) {
+   let r = instance();
+   return r.m_fadeMsg[num].Fade > 0 && r.m_fadeMsg[num].Alph > 0;
+}
+
+static int LY(int num) {
+   let r = instance();
+   return int(r.m_fadeMsg[num].Fade / 255.0 *
+              r.m_fadeMsg[num].Alph / 255.0 *
+              255.0);
+}
+
+static void LL(int x, int y, int z, int w, color c = 0) {
+   let r = instance();
+
+   if(r.m_NoDraw) return;
+   let p = r.m_DPtr;
+
+   r.m_D[p].Type = _type_line;
+
+   vector2 xy = r.getScSized(x, y);
+   vector2 zw = r.getScSized(z, w);
+   r.m_D[p].X = int(xy.x);
+   r.m_D[p].Y = int(xy.y);
+   r.m_D[p].Z = int(zw.x);
+   r.m_D[p].W = int(zw.y);
+
+   r.m_D[p].C = c;
+
+   r.m_DPtr++;
+}
+
+static void LS(string tex, int xx, int yy, double anum, int flags, color cr = 0) {
+   let r = instance();
+   if(r.m_NoDraw) return;
+
+   int  x  = xx & _xmask;
+   int  y  = yy & _ymask;
+   uint xa = xx & _xflag;
+   uint ya = yy & _yflag;
+
+   let p = r.m_DPtr;
+
+   if(flags & _u_fade) {
+      r.m_D[p].A  = r.m_fadeMsg[uint(anum)].Fade / 255.0;
+      r.m_D[p].A *= r.m_fadeMsg[uint(anum)].Alph / 255.0;
+   } else if(flags & _u_alpha) {
+      r.m_D[p].A = anum;
+   } else {
+      r.m_D[p].A = 1.0;
+   }
+   if(r.m_D[p].A < 0.001) return;
+   r.m_D[p].Type = r.m_D[p].A != 1.0 ? _type_spriteAlpha : _type_sprite;
+
+   if(flags & _u_add)
+      r.m_D[p].Style = STYLE_Add;
+   else if(r.m_D[p].Type == _type_spriteAlpha)
+      r.m_D[p].Style = STYLE_Translucent;
+   else
+      r.m_D[p].Style = STYLE_Normal;
+
+   if(flags & _u_color) {
+      if(r.m_D[p].Type == _type_spriteAlpha)
+         r.m_D[p].Type = _type_spriteStencilAlpha;
+      else
+         r.m_D[p].Type = _type_spriteStencil;
+      r.m_D[p].C = cr;
+   }
+
+   r.m_D[p].Tex = getTextureForName(tex);
+
+   int sx, sy; [sx, sy] = TexMan.GetSize(r.m_D[p].Tex);
+
+   switch(xa) {
+      default:
+      case _xl: r.m_D[p].X = x;          break;
+      case _xc: r.m_D[p].X = x - sx / 2; break;
+      case _xr: r.m_D[p].X = x - sx;     break;
+   }
+
+   switch(ya) {
+      default:
+      case _yt: r.m_D[p].Y = y;          break;
+      case _yc: r.m_D[p].Y = y - sy / 2; break;
+      case _yb: r.m_D[p].Y = y - sy;     break;
+   }
+
+   r.m_DPtr++;
+}
+
+static void LT(string txt, string fnt, int xx, int yy, double anum, int cr, int flags) {
+   let r = instance();
+   if(r.m_NoDraw) return;
+
+   int  x  = xx & _xmask;
+   int  y  = yy & _ymask;
+   uint xa = xx & _xflag;
+   uint ya = yy & _yflag;
+
+   let p = r.m_DPtr;
+
+   if(flags & _u_fade) {
+      r.m_D[p].A  = r.m_fadeMsg[uint(anum)].Fade / 255.0;
+      r.m_D[p].A *= r.m_fadeMsg[uint(anum)].Alph / 255.0;
+   } else if(flags & _u_alpha) {
+      r.m_D[p].A = anum;
+   } else {
+      r.m_D[p].A = 1.0;
+   }
+   if(r.m_D[p].A < 0.001) return;
+   r.m_D[p].Type = r.m_D[p].A != 1.0 ? _type_textAlpha : _type_text;
+
+   if(flags & _u_add)
+      r.m_D[p].Style = STYLE_Add;
+   else if(r.m_D[p].Type == _type_textAlpha)
+      r.m_D[p].Style = STYLE_Translucent;
+   else
+      r.m_D[p].Style = STYLE_Normal;
+
+   r.m_D[p].Cr = cr;
+
+   uint lns, lnx = 0;
+
+   uint  breakx = r.m_breakX && xa == _xl ? r.m_breakX - x : 0x7FFF;
+   r.m_D[p].Fnt = r.fntAny(fnt, flags & _u_no_unicode);
+   r.m_D[p].LnY = r.m_D[p].Fnt.GetHeight();
+   let      brl = r.m_D[p].Fnt.BreakLines(txt, breakx);
+
+   lns = brl.Count();
+
+   r.m_D[p].Txt.Resize(lns);
+   array<int> LnW;
+   LnW.Resize(lns);
+
+   for(uint i = 0, w; i < lns; i++) {
+      r.m_D[p].Txt[i] = brl.StringAt(i);
+      LnW[i] = brl.StringWidth(i);
+
+      if(lnx < (w = LnW[i])) lnx = w;
+   }
+
+   switch(xa) {
+   default:
+   case _x3:
+   case _x4:
+   case _xl: r.m_D[p].X = x;           break;
+   case _x5: r.m_D[p].X = x + lnx / 2; break;
+   case _x6:
+   case _xc: r.m_D[p].X = x - lnx / 2; break;
+   case _xr: r.m_D[p].X = x - lnx;     break;
+   }
+
+   switch(ya) {
+   default:
+   case _yt: r.m_D[p].Y = y;                          break;
+   case _yc: r.m_D[p].Y = y - r.m_D[p].LnY * lns / 2; break;
+   case _yb: r.m_D[p].Y = y - r.m_D[p].LnY * lns;     break;
+   }
+
+   r.m_D[p].LnX.Resize(lns);
+
+   for(uint i = 0; i < lns; i++) {
+           if(xa == _x3) r.m_D[p].LnX[i] = LnW[i];
+      else if(xa <  _x4) r.m_D[p].LnX[i] = 0;
+      else               r.m_D[p].LnX[i] = LnW[i] / 2;
+   }
+
+   r.m_DPtr++;
+}
+
+static void LC(int x = 0, int y = 0, int w = 0, int h = 0, int ww = 0) {
+   let r = instance();
+
+   let p = r.m_DPtr;
+
+   if(x || y || w || h) {
+      /* simple optimization (which also prevents division by zero) */
+      if((r.m_NoDraw = w <= 0 || h <= 0)) return;
+
+      r.m_D[p].Type = _type_clipSet;
+
+      vector2 xy = r.getScSized(x, y);
+      vector2 zw = r.getScSized(w, h, true);
+      r.m_D[p].X = int(xy.x);
+      r.m_D[p].Y = int(xy.y);
+      r.m_D[p].Z = int(zw.x);
+      r.m_D[p].W = int(zw.y);
+   } else {
+      r.m_NoDraw = false;
+      r.m_D[p].Type = _type_clipClear;
+   }
+
+   if(ww) {
+      r.m_breakX = x + ww;
+   } else {
+      r.m_breakX = 0;
+   }
+   r.m_DPtr++;
+}
+
+static void LR(int x = 0, int y = 0, int w = 0, int h = 0, color cr = 0) {
+   let r = instance();
+
+   if(r.m_NoDraw) return;
+   let p = r.m_DPtr;
+
+   r.m_D[p].Type = _type_rect;
+
+   vector2 xy = r.getScSized(x, y);
+   vector2 zw = r.getScSized(w, h, true);
+   r.m_D[p].X = int(xy.x);
+   r.m_D[p].Y = int(xy.y);
+   r.m_D[p].Z = int(zw.x);
+   r.m_D[p].W = int(zw.y);
+
+   r.m_D[p].C = cr;
+
+   r.m_DPtr++;
+}
+
+static void LW(color cr = 0) {
+   let r = instance();
+
+   if(r.m_NoDraw) return;
+   let p = r.m_DPtr;
+
+   r.m_D[p].Type = _type_fill;
+   r.m_D[p].C = cr;
+
+   r.m_DPtr++;
+}
+
+/* EOF */

@@ -11,7 +11,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-extend class Lith_URANUS;
+extend class Lith_RenderProvider;
 
 private transient Lith_Le_Viewport   viewport;
 private transient Lith_Le_ProjScreen proj;

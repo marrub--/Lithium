@@ -21,7 +21,7 @@ class Lith_TextInputMenu : Menu {
       super.drawer();
 
       if(m_inputMenu) {
-         Font   fnt = Lith_URANUS.instance().fntSml();
+         Font   fnt = Lith_RenderProvider.instance().fntSml();
          int    lny = fnt.getHeight();
          string txt = m_inputMenu.getText() .. fnt.GetCursor();
 

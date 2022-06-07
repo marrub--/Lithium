@@ -55,21 +55,17 @@ int m_wasDamaged;
 
 int m_speed;
 
+Lith_URANUS         m_uranus;
+Lith_RenderProvider m_ren;
+
 property ViewBob: m_VBob;
 
 override void BeginPlay() {
-   Super.BeginPlay();
+   super.beginPlay();
    viewbob = m_VBob;
    m_wasFrozen = false;
-}
-
-override void postBeginPlay() {
-   super.postBeginPlay();
-   travelled();
-}
-
-override void travelled() {
-   acs_executeWithResult(lsc_playeropen);
+   m_uranus = Lith_URANUS.instanceFind();
+   m_ren    = m_uranus.m_ren;
 }
 
 override void GiveDefaultInventory() {
@@ -200,7 +196,7 @@ void Lith_PostTick() {
       Lith_ItemVacuum();
    }
 
-   Lith_URANUS.LZ(320, 240);
+   Lith_RenderProvider.LZ(320, 240);
 
    if(!isFrozen()) {
       Lith_ShowMapMarker();

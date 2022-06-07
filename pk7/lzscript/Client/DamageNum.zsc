@@ -31,7 +31,7 @@ class Lith_ScoreNum {
    Lith_ScoreNum m_next;
 }
 
-extend class Lith_URANUS;
+extend class Lith_RenderProvider;
 
 private transient Lith_ScoreNum             m_scrNumHead;
 private transient Lith_DamageNum[_dnum_max] m_dmgNumHeads;
@@ -55,17 +55,11 @@ private void addScoreNumImpl(int x, int y, string amount, vector2 end) {
 }
 
 static void addItemPop(int x, int y, string amount) {
-   let cl = instance();
-   if(!cl) return;
-
-   cl.addScoreNumImpl(x, y, amount, (0.0, 0.0));
+   instance().addScoreNumImpl(x, y, amount, (0.0, 0.0));
 }
 
 static void addScoreNum(int x, int y, string amount) {
-   let cl = instance();
-   if(!cl) return;
-
-   cl.addScoreNumImpl(x, y, amount, (320.0, 0.0));
+   instance().addScoreNumImpl(x, y, amount, (320.0, 0.0));
 }
 
 void addDamageNum(vector3 origin, double w, int damage, Actor receiver) {

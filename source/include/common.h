@@ -114,10 +114,10 @@
 #define ServCallK(...) SCallK(so_Serv, __VA_ARGS__)
 #define ServCallS(...) SCallS(so_Serv, __VA_ARGS__)
 
-#define DrawCallV(...) SCallV(so_Draw, __VA_ARGS__)
-#define DrawCallI(...) SCallI(so_Draw, __VA_ARGS__)
-#define DrawCallK(...) SCallK(so_Draw, __VA_ARGS__)
-#define DrawCallS(...) SCallS(so_Draw, __VA_ARGS__)
+#define DrawCallV(...) SCallV(so_Ren, __VA_ARGS__)
+#define DrawCallI(...) SCallI(so_Ren, __VA_ARGS__)
+#define DrawCallK(...) SCallK(so_Ren, __VA_ARGS__)
+#define DrawCallS(...) SCallS(so_Ren, __VA_ARGS__)
 
 #ifndef NDEBUG
 #define Dbg_Stat(...) \

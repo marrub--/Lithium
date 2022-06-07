@@ -6,9 +6,10 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
+#include "lzscript/Client/Draw.zsc"
+#include "lzscript/Client/Render.zsc"
 #include "lzscript/Client/Crosshair.zsc"
 #include "lzscript/Client/DamageNum.zsc"
-#include "lzscript/Client/Draw.zsc"
 #include "lzscript/Client/Menu.zsc"
 #include "lzscript/Client/MessageBox.zsc"
 #include "lzscript/Client/PlayerclassMenu.zsc"
@@ -24,8 +25,13 @@
 /* URANUS: Users Really Are Not UI Systems */
 class Lith_URANUS : StaticEventHandler;
 
-static clearscope Lith_URANUS Instance()
-   {return Lith_URANUS(Find("Lith_URANUS"));}
+static clearScope Lith_URANUS instanceFind() {
+   return Lith_URANUS(Find('Lith_URANUS'));
+}
+
+static clearScope Lith_URANUS instance() {
+   return Lith_Player(players[consoleplayer].mo).m_uranus;
+}
 
 static clearscope void StartSound(Actor mo, sound snd, int slot, int flags, double volume = 1.0, double attenuation = 1.0, double pitch = 1.0) {
    if(slot == lch_ambient) {

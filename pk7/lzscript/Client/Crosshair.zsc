@@ -10,7 +10,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-extend class Lith_URANUS;
+extend class Lith_RenderProvider;
 
 static clearScope color xhairColor() {
    uint r = clamp(lith_xhair_r, 0, 255);

@@ -123,7 +123,7 @@ GlobalCrH(wselm1) GlobalCrH(wselm2) GlobalCrH(wselm3) GlobalCrH(wselms)
    DrawCallI(sm_LY, (i32)(n))
 
 #define StartSound(...) \
-   DrawCallV(sm_StartSound, __VA_ARGS__)
+   SCallV(so_Draw, sm_StartSound, __VA_ARGS__)
 
 #define AmbientSound(snd, vol) \
    StartSound(snd, lch_ambient, CHANF_LOCAL|CHANF_UI, vol, ATTN_STATIC)

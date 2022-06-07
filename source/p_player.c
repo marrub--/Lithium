@@ -30,15 +30,9 @@ static void P_Spe_pTick(void);
 static void P_Atr_pTick(void);
 static void P_Aug_pTick(void);
 
-dynam_aut script addr(lsc_playeropen)
+dynam_aut script type("enter") addr(lsc_playeropen)
 void Z_PlayerEntry(void) {
    Dbg_Log(log_dev, _l(__func__));
-
-   if(!get_bit(ml.flag, _mapf_playerinit)) {
-      set_bit(ml.flag, _mapf_playerinit);
-   } else {
-      return;
-   }
 
    if(!ml.init) {
       ACS_Delay(2);

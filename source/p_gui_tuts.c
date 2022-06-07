@@ -69,11 +69,11 @@ void P_CBI_TabTuts(struct gui_state *g) {
       _pal_warn,
    };
 
-   struct {
+   static struct {
       i32 def;
       i32 hi;
       i32 bind;
-   } crs[] = {
+   } const crs[] = {
       [_pal_default] = {.def = CR_WHITE,   .hi = 'd',.bind = 'v'},
       [_pal_list]    = {.def = CR_ICE,     .hi = 'q',.bind = 'n'},
       [_pal_head]    = {.def = CR_SAPPHIRE,.hi = 'p',.bind = 'h'},
@@ -81,7 +81,7 @@ void P_CBI_TabTuts(struct gui_state *g) {
    };
 
    str page = lang(tut_name(cur_page, "_DSC"));
-   i32 pal = _pal_default, y = 0, cb = dst_bit(_cb_sol);
+   i32 pal = _pal_default, y = 0, cb = dst_bit(_cb_sol), which = 0;
    ACS_BeginPrint();
    for(astr eol = page; !get_bit(cb, _cb_end); ++eol) {
       switch(*eol) {
@@ -142,12 +142,14 @@ void P_CBI_TabTuts(struct gui_state *g) {
          break;
       case '*':
          pal = _pal_list;
-         PrintChrLi(u8" × ");
+         PrintChrLi(u8" ×");
          break;
       case '-':
          if(get_bit(cb, _cb_sol)) {
             pal = _pal_head;
             ++eol;
+            PrintChrSt(alientext(which++));
+            ACS_PrintChar(' ');
             break;
          }
          goto print;

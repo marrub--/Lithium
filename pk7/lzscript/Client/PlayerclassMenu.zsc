@@ -14,7 +14,7 @@ class ListMenuItemLith_PlayerDisplay : ListMenuItemPlayerDisplay {
    override void draw(bool selected, ListMenuDescriptor desc) {
       if(mMode == 0 && updatePlayerClass()) {
          let pcl = getDefaultByType((class<PlayerPawn>)(mPlayerClass.type));
-         let por = Lith_URANUS.getTextureForName(":Portraits:" .. pcl.soundclass);
+         let por = Lith_RenderProvider.getTextureForName(":Portraits:" .. pcl.soundclass);
          int porx, pory; [porx, pory] = TexMan.getSize(por);
          int scrw  = Screen.getWidth();
          int scrh  = Screen.getHeight();
@@ -30,8 +30,8 @@ class ListMenuItemLith_PlayerDisplay : ListMenuItemPlayerDisplay {
                             DTA_DESTHEIGHT,dh);
          super.draw(selected, desc);
       }
-      screen.drawTexture(Lith_URANUS.getTextureForName(":Menu:ClassBack"), true, 4, 48, DTA_Alpha, 0.9, DTA_Clean, true);
-      screen.drawTexture(Lith_URANUS.getTextureForName(":Menu:ClassDescBack"), true, 100, 126, DTA_Alpha, 0.9, DTA_Clean, true);
+      screen.drawTexture(Lith_RenderProvider.getTextureForName(":Menu:ClassBack"), true, 4, 48, DTA_Alpha, 0.9, DTA_Clean, true);
+      screen.drawTexture(Lith_RenderProvider.getTextureForName(":Menu:ClassDescBack"), true, 100, 126, DTA_Alpha, 0.9, DTA_Clean, true);
    }
 }
 

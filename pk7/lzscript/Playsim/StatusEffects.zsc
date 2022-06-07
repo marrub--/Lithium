@@ -20,7 +20,7 @@ extend class Lith_HERMES {
    }
 }
 
-extend class Lith_URANUS {
+extend class Lith_RenderProvider {
    private ui int drawStatFx(RenderEvent evt, int y) {
       Lith_StatFx stat;
       for(let it = ThinkerIterator.create("Lith_StatFx", _stat_statfx);
@@ -132,7 +132,7 @@ void init(Lith_Player plyr_) {
    plyr = plyr_;
    initCb();
    fnam = "$LITH_STAT_" .. snam;
-   icon = Lith_URANUS.getTextureForName(":Stat:" .. snam);
+   icon = Lith_RenderProvider.getTextureForName(":Stat:" .. snam);
 }
 
 override void tick() {
