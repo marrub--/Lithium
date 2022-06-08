@@ -115,6 +115,16 @@ episode TITLEMAP {
    key  = "a"
 }
 
+gameDefaults {
+   allowJump
+   allowCrouch
+   allowFreeLook
+   spawnWithWeaponRaised
+   smoothLighting
+   forceFakeContrast
+   enableSkyBoxAo
+}
+
 map TITLEMAP "Abyss" {
    levelNum = 1888001
    sky1     = "LITHBLAK"
