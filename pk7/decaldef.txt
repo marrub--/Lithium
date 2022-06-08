@@ -381,7 +381,6 @@ generator Lith_RendHit               Lith_Rend
 generator Lith_RendHit2              Lith_Rend
 generator Lith_ChargeFistPuff        Lith_ChargeFistScorch
 generator Lith_FortuneShot           Lith_RailHit
-generator Lith_RemsBullet1           Lith_RemsScorch
-generator Lith_RemsBullet2           Lith_RemsScorch
+generator Lith_RemsBullet            Lith_RemsScorch
 
 /* EOF */

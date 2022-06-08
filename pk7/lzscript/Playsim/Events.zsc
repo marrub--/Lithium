@@ -395,10 +395,10 @@ override void checkReplacement(ReplaceEvent ev) {
 override void RenderOverlay(RenderEvent evt) {
    double ftic = level.totaltime - m_bossDeathInit + evt.fracTic;
    if(m_bossDeathInit == 0) {
-      Shader.SetEnabled(players[consoleplayer], "Lith_End", false);
+      PpShader.SetEnabled("Lith_End", false);
    } else if(ftic > 15.0) {
-      Shader.SetEnabled(players[consoleplayer], "Lith_End", true);
-      Shader.SetUniform1f(players[consoleplayer], "Lith_End", "lith_t", ftic - 15.0);
+      PpShader.SetEnabled("Lith_End", true);
+      PpShader.SetUniform1f("Lith_End", "lith_t", ftic - 15.0);
    }
 }
 

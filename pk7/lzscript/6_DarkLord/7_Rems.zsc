@@ -45,7 +45,7 @@ class Lith_RemsBulletTrail : Actor {
    }
 }
 
-class Lith_RemsBullet1 : FastProjectile {
+class Lith_RemsBullet : FastProjectile {
    default {
       RenderStyle "Add";
       Radius 5;
@@ -70,20 +70,12 @@ class Lith_RemsBullet1 : FastProjectile {
       loop;
    Death:
       BLLT Y 0 {
-         a_startSound("weapons/shotgun/gauss/puff", lch_body, volume: 0.1);
+         a_startSound("weapons/shotgun/gauss/puff", lch_body, volume: 0.2);
          a_setScale(0.5);
          bFlatSprite = false;
       }
       BLLT YYYY 2 light("Lith_RemsLight2") bright a_fadeOut;
       stop;
-   }
-}
-
-class Lith_RemsBullet2 : Lith_RemsBullet1 {
-   states {
-   Spawn:
-      REMS Y 0;
-      goto SpawnLoop;
    }
 }
 
@@ -172,12 +164,11 @@ Fire:
 FireLoop:
    REMS BC 1 bright {
       a_overlayOffset(_psp_weapon, fRandom(-9, 47), fRandom(44, 64), WOF_INTERPOLATE);
-      for(int i = 0; i < 2; ++i) {
-         a_fireProjectile("Lith_RemsBullet1", angle: fRandom(-2, 2), spawnofs_xy: fRandom(2, 8), spawnheight: fRandom(8, 10), flags: FPF_NOAUTOAIM, pitch: fRandom(-2, 2));
-         a_fireProjectile("Lith_RemsBullet2", spawnofs_xy: fRandom(2, 8), spawnheight: fRandom(5, 7));
+      for(int i = 0; i < 4; ++i) {
+         a_fireProjectile("Lith_RemsBullet", angle: fRandom(-20, 20), spawnofs_xy: fRandom(2, 8), spawnheight: fRandom(8, 10), flags: FPF_NOAUTOAIM, pitch: fRandom(-4, 4));
       }
       Lith_GunSmoke("Lith_RemsSparkSpawner", 2, 8);
-      A_Recoil(0.7);
+      A_Recoil(0.4);
       A_GunFlash("DummyFlash");
       A_Quake(2, 15, 0, 128);
       Lith_A_RecoilUp(fRandom(-0.2, 0.8));
@@ -186,14 +177,49 @@ FireLoop:
    loop;
 FireDone:
    REMS D 1 bright offset(14, 44) a_startSound("weapons/rems/firefinish", lch_weapon2);
-   REMS A 1 bright offset(12, 40);
-   REMS A 1 bright offset(8, 38);
-   REMS AA 1 offset(4, 39) lith_a_decreaseParticles;
-   REMS AAA 1 offset(2, 35) lith_a_decreaseParticles;
-   REMS A 4 offset(1, 33) {
+   REMS A 1 bright offset(12, 40) lith_a_decreaseParticles;
+   REMS A 1 bright offset(8, 38) {
+      lith_a_decreaseParticles();
+      lith_a_setInterpolation(true);
+   }
+   REMS A 1 offset(4, 39) lith_a_decreaseParticles;
+   REMS AA 1 offset(2, 35) lith_a_decreaseParticles;
+   REMS A 1 offset(1, 33) {
       a_clearOverlays(_psp_rems_particle_first, _psp_rems_particle_last);
       invoker.m_particleLoop = 0;
    }
+   #### # 2 offset(1, 32) Lith_A_RecoilDn(0.25);
+   #### # 2 offset(3, 32) Lith_A_RecoilDn(0.25);
+   #### # 2 offset(4, 32) Lith_A_RecoilDn(0.25);
+   #### # 2 offset(8, 38) Lith_A_RecoilDn(0.25);
+   #### # 2 offset(12, 45);
+   #### # 2 offset(16, 53);
+   #### # 1 offset(19, 60);
+   #### # 1 offset(21, 64);
+   #### # 1 offset(23, 67);
+   #### # 0 Lith_A_ReloadBobDn(0.5);
+   #### # 1 offset(22, 74) A_StartSound("weapons/sniper/boltback", lch_weapon2);
+   #### # 1 offset(19, 78) Lith_A_ReloadBobDn(0.5);
+   #### # 5 offset(18, 80);
+   #### # 1 offset(17, 74) A_StartSound("weapons/sniper/boltforward", lch_weapon3);
+   #### # 1 offset(19, 67);
+   #### # 1 offset(20, 66);
+   #### # 1 offset(21, 62);
+   #### # 1 offset(20, 60);
+   #### # 1 offset(21, 63);
+   #### # 1 offset(23, 66);
+   #### # 2 offset(24, 68);
+   #### # 2 offset(25, 63);
+   #### # 2 offset(24, 59);
+   #### # 2 offset(22, 57);
+   #### # 2 offset(20, 54);
+   #### # 2 offset(16, 49);
+   #### # 2 offset(12, 44);
+   #### # 2 offset(10, 42);
+   #### # 2 offset(8, 40);
+   #### # 2 offset(5, 38);
+   #### # 2 offset(2, 35);
+   #### # 6 offset(0, 32) lith_a_setInterpolation(false);
    goto ReadySelector;
 FireEmpty:
    REMS A 2 offset(3, 38);

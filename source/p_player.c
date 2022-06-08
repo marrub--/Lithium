@@ -24,11 +24,11 @@ noinit struct player pl;
 script static void P_bossWarning(void);
 script static void P_bossText(void);
 script static void P_doIntro(void);
-
 static void P_Scr_PTickPre(void);
 static void P_Spe_pTick(void);
 static void P_Atr_pTick(void);
 static void P_Aug_pTick(void);
+static void P_initCbi(void);
 
 dynam_aut script type("enter") addr(lsc_playeropen)
 void Z_PlayerEntry(void) {
@@ -52,6 +52,7 @@ reinit:
    P_bossWarning();
    P_bossText();
    if(pl.teleportedout) P_TeleportIn();
+   P_initCbi();
 
    struct old_player_delta olddelta;
 
@@ -173,6 +174,20 @@ void Z_PlayerDisconnect(void) {
    P_BIP_PQuit();
 
    fastmemset(&pl, 0, sizeof pl);
+}
+
+static void P_initCbi(void) {
+   /* CBI */
+   if(CVarGetI(sc_sv_nobosses) ||
+      CVarGetI(sc_sv_nobossdrop) ||
+      dbgflags(dbgf_items))
+   {
+      for(i32 i = 0; i < bossreward_max; i++) {
+         CBI_Install(i);
+      }
+   }
+
+   CBI_InstallSpawned();
 }
 
 alloc_aut(0) stkcall

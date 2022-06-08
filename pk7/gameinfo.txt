@@ -7,5 +7,7 @@
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
 StartupType = "Heretic"
+LoadBrightmaps = 1
+LoadLights = 1
 
 /* EOF */

@@ -210,18 +210,6 @@ void HInit(void) {
       if(wl.mapscleared == 20) P_BIP_Unlock(P_BIP_NameToPage("MCluster2"), false);
       if(wl.mapscleared == 25) P_BIP_Unlock(P_BIP_NameToPage("MCluster3"), false);
    }
-
-   /* CBI */
-   if(CVarGetI(sc_sv_nobosses) ||
-      CVarGetI(sc_sv_nobossdrop) ||
-      dbgflags(dbgf_items))
-   {
-      for(i32 i = 0; i < bossreward_max; i++) {
-         CBI_Install(i);
-      }
-   }
-
-   CBI_InstallSpawned();
 }
 
 dynam_aut script ext("ACS") addr(lsc_worldopen)

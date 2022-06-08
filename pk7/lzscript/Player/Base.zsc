@@ -111,20 +111,20 @@ override void PlayerThink() {
 }
 
 private void Lith_RainEffect() {
-   Shader.SetUniform1f(player, "Lith_Rain", "lith_t", level.totaltime / 15.);
-   Shader.SetUniform1f(player, "Lith_Rain", "lith_m", m_RainLerp);
+   PpShader.SetUniform1f("Lith_Rain", "lith_t", level.totaltime / 15.);
+   PpShader.SetUniform1f("Lith_Rain", "lith_m", m_RainLerp);
 
    if(player && Lith_UTIL.pData(_pdt_mapr) == _mapr_rain &&
       ceilingpic == skyflatnum && pitch < -5)
    {
       double m = -pitch - 5;
       m_RainLerp = Lith_UTIL.Lerp(m_RainLerp, m / 85., 0.1);
-      Shader.SetEnabled(player, "Lith_Rain", true);
+      PpShader.SetEnabled("Lith_Rain", true);
    } else if(m_RainLerp > 0.01) {
       m_RainLerp = Lith_UTIL.Lerp(m_RainLerp, 0, 0.1);
    } else {
       m_RainLerp = 0;
-      Shader.SetEnabled(player, "Lith_Rain", false);
+      PpShader.SetEnabled("Lith_Rain", false);
    }
 }
 
@@ -190,7 +190,7 @@ void Lith_PostTick() {
    if(lith_player_rainshader)
       Lith_RainEffect();
    else
-      Shader.SetEnabled(player, "Lith_Rain", false);
+      PpShader.SetEnabled("Lith_Rain", false);
 
    if(!isFrozen()) {
       Lith_ItemVacuum();
