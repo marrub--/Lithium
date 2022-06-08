@@ -66,6 +66,7 @@ default
    RenderStyle    "Stencil";
    Speed          15;
    StencilColor   "white";
+   Species        "Lith_Angel";
 
    ActiveSound "vile/active";
    DeathSound  "vile/death";

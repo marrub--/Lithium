@@ -31,6 +31,7 @@ default
    PainChance       170;
    Radius           20;
    Speed            9;
+   Species          "Lith_ShotgunGuy";
 
    DropItem "Lith_Shell", 255, 4;
 

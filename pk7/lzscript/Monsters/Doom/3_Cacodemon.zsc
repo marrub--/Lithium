@@ -36,6 +36,7 @@ default
    PainChance 128;
    Radius     31;
    Speed      8;
+   Species    "Lith_Cacodemon";
 
    ActiveSound "caco/active";
    DeathSound  "caco/death";

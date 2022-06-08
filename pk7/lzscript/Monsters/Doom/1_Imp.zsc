@@ -73,6 +73,7 @@ default
    Radius           18;
    Scale            0.9;
    Speed            9;
+   Species          "Lith_Imp";
 
    ActiveSound "imp/active";
    DeathSound  "imp/death";

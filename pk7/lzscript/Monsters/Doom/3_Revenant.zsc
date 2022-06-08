@@ -93,6 +93,7 @@ default
    PainChance     100;
    Radius         20;
    Speed          10;
+   Species        "Lith_Revenant";
 
    ActiveSound "skeleton/active";
    DeathSound  "skeleton/death";

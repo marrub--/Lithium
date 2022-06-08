@@ -27,6 +27,7 @@ default
    DeathSound  "demon/death";
    PainSound   "demon/pain";
    SeeSound    "demon/sight";
+   Species     "Lith_Demon";
 
    HitObituary "$OB_DEMONHIT";
    Tag         "$LITH_INFO_SHORT_Demon";

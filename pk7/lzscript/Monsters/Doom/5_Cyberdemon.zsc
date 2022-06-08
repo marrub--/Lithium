@@ -88,6 +88,7 @@ default
    MinMissileChance 160;
    Radius           40;
    Speed            16;
+   Species          "Lith_Cyberdemon";
 
    ActiveSound "cyber/active";
    DeathSound  "cyber/death";

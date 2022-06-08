@@ -17,6 +17,7 @@ default
    Alpha       0.5;
    RenderStyle "Fuzzy";
    Speed       11;
+   Species     "Lith_Demon";
 
    SeeSound "";
 

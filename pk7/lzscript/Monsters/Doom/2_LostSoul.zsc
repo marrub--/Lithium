@@ -23,6 +23,7 @@ default
    Radius      16;
    RenderStyle "Add";
    Speed       8;
+   Species     "Lith_LostSoul";
 
    ActiveSound "skull/active";
    AttackSound "skull/melee";

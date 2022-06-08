@@ -26,6 +26,7 @@ default
    PainChance 128;
    Radius     31;
    Speed      8;
+   Species    "Lith_LostSoul";
 
    ActiveSound "pain/active";
    DeathSound  "pain/death";

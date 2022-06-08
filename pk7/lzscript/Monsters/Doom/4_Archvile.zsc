@@ -80,6 +80,7 @@ default
    PainChance     2;
    Radius         20;
    Speed          15;
+   Species        "Lith_Archvile";
 
    ActiveSound "vile/active";
    DeathSound  "vile/death";

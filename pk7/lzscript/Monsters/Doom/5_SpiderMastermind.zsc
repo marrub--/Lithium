@@ -58,6 +58,7 @@ default
    MinMissileChance 120;
    Radius           128;
    Speed            16;
+   Species          "Lith_SpiderMastermind";
 
    ActiveSound "spider/active";
    DeathSound  "spider/death";

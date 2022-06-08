@@ -64,6 +64,7 @@ default
    PainChance 50;
    Radius     48;
    Speed      8;
+   Species    "Lith_Mancubus";
 
    ActiveSound "fatso/active";
    DeathSound  "fatso/death";

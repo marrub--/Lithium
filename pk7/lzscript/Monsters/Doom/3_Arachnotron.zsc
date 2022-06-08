@@ -97,6 +97,7 @@ default
    PainChance   128;
    Radius       64;
    Speed        12;
+   Species      "Lith_Arachnotron";
 
    ActiveSound "baby/active";
    DeathSound  "baby/death";

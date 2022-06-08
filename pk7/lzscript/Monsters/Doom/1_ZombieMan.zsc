@@ -33,6 +33,7 @@ default
    PainChance       200;
    Radius           20;
    Speed            9;
+   Species          "Lith_ZombieMan";
 
    DropItem "Lith_Clip", 255, 5;
 
