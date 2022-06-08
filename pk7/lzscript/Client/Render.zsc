@@ -349,6 +349,8 @@ ui void render(RenderEvent evt) {
          }
       }
 
+      Screen.clearClipRect();
+
       let p = Lith_Player(evt.camera);
       if(p && p.m_cs) p.m_cs.lith_render();
 
