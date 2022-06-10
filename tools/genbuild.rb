@@ -49,7 +49,6 @@ end
 
 def req_file fname
    begin
-      @ctx.rgen.push tool fname
       require_relative fname
    rescue LoadError => exc
       if block_given?
@@ -57,6 +56,8 @@ def req_file fname
       else
          raise exc
       end
+   else
+      @ctx.rgen.push tool fname
    end
 end
 
