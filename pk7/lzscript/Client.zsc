@@ -25,12 +25,8 @@
 /* URANUS: Users Really Are Not UI Systems */
 class Lith_URANUS : StaticEventHandler;
 
-static clearScope Lith_URANUS instanceFind() {
-   return Lith_URANUS(Find('Lith_URANUS'));
-}
-
 static clearScope Lith_URANUS instance() {
-   return Lith_Player(players[consoleplayer].mo).m_uranus;
+   return Lith_URANUS(Find('Lith_URANUS'));
 }
 
 static clearscope void StartSound(Actor mo, sound snd, int slot, int flags, double volume = 1.0, double attenuation = 1.0, double pitch = 1.0) {

@@ -55,17 +55,12 @@ int m_wasDamaged;
 
 int m_speed;
 
-Lith_URANUS         m_uranus;
-Lith_RenderProvider m_ren;
-
 property ViewBob: m_VBob;
 
 override void BeginPlay() {
    super.beginPlay();
    viewbob = m_VBob;
    m_wasFrozen = false;
-   m_uranus = Lith_URANUS.instanceFind();
-   m_ren    = m_uranus.m_ren;
 }
 
 override void GiveDefaultInventory() {

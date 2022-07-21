@@ -24,49 +24,50 @@ enum DrawType {
 }
 
 struct DrawData {
-   uint8 type;
-
-   uint8 cr;
-   uint8 lnY;
-   uint8 style;
-
-   int16 x, y, z, w;
-
+   uint8     type;
+   uint8     cr;
+   uint8     lnY;
+   uint8     style;
+   int16     x, y, z, w;
+   int16     tsz, tpt;
+   double    a;
+   Font      fnt;
    color     c;
    textureId tex;
-   double    a;
-
-   Font          fnt;
-   array<string> txt;
-   array<int>    lnX;
 }
 
 struct FadeMsg {
-   uint8 Fade;
-   uint8 Time;
-   uint8 FSub;
-   uint8 Alph;
+   uint8 fade;
+   uint8 time;
+   uint8 fSub;
+   uint8 alph;
 }
 
-private transient DrawData[8000] m_d;
-private transient uint           m_dPtr;
-private transient FadeMsg[256]   m_fadeMsg;
-private transient vector2        m_virtualSize;
-private transient int            m_breakX;
-private transient bool           m_noDraw;
-private transient bool           m_english;
-private transient Font           m_uFntSml;
-private transient Font           m_lMidFont;
-private transient Font           m_lTrmFont;
-private transient Font           m_lBigFont;
-private transient Font           m_lJTrmFont;
-private transient Font           m_newConsoleFont;
+const DPTR_MAX = 8192;
+const TPTR_MAX = 8192*32;
+
+private transient DrawData[DPTR_MAX] m_d;
+private transient string  [TPTR_MAX] m_txt;
+private transient int     [TPTR_MAX] m_lnx;
+private transient int                m_tPtr;
+private transient int                m_dPtr;
+private transient FadeMsg[256]       m_fadeMsg;
+private transient vector2            m_virtualSize;
+private transient int                m_breakX;
+private transient bool               m_noDraw;
+private transient bool               m_english;
+private transient Font               m_uFntSml;
+private transient Font               m_lMidFont;
+private transient Font               m_lTrmFont;
+private transient Font               m_lBigFont;
+private transient Font               m_lJTrmFont;
+private transient Font               m_newConsoleFont;
 
 static ui void drawRect(int sx, int sy, int px, int py, color cr) {
    Screen.dim(cr, cr.a/255.0, px, py, sx, sy);
 }
 
-clearScope vector2 getScSized(double x, double y, bool kludge = false, vector2 vsz = (0.0, 0.0)) {
+clearScope vector2 getScSized(double x, double y, bool kludge = false, vector2 vsz = (0, 0)) {
    if(!vsz.x || !vsz.y) {
       vsz = m_virtualSize;
    }
@@ -241,6 +242,7 @@ Font fntAny(name name, bool noUnicode = false) const {
 
 void unload() {
    m_dPtr = 0;
+   m_tPtr = 0;
    m_dmgNumInit = false;
 }
 
@@ -251,8 +253,9 @@ void tick() {
    tickScrNums();
 
    m_dPtr = 0;
+   m_tPtr = 0;
 
-   for(uint i = 0; i < m_fadeMsg.size(); i++) {
+   for(int i = 0; i < m_fadeMsg.size(); i++) {
       if(m_fadeMsg[i].fade) {
          if(!m_fadeMsg[i].time) {
             m_fadeMsg[i].fade =
@@ -262,6 +265,10 @@ void tick() {
          }
       }
    }
+}
+
+static DrawData getDt(DrawData d) {
+   return d;
 }
 
 ui void render(RenderEvent evt) {
@@ -281,70 +288,71 @@ ui void render(RenderEvent evt) {
       }
 
       int scw = 320, sch = 240;
-      for(uint i = 0; i < m_DPtr; i++) {
-         switch(m_D[i].Type) {
+      for(int i = 0; i < m_DPtr; i++) {
+         let d = getDt(m_d[i]);
+         switch(d.Type) {
          case _type_clipSet:
-            Screen.setClipRect(m_D[i].X, m_D[i].Y, m_D[i].Z, m_D[i].W);
+            Screen.setClipRect(d.X, d.Y, d.Z, d.W);
             break;
          case _type_clipClear:
             Screen.clearClipRect();
             break;
          case _type_setSize:
-            scw = m_D[i].X;
-            sch = m_D[i].Y;
+            scw = d.X;
+            sch = d.Y;
             break;
          case _type_line:
-            Screen.drawLine(m_D[i].X, m_D[i].Y, m_D[i].Z, m_D[i].W, m_D[i].C);
+            Screen.drawLine(d.X, d.Y, d.Z, d.W, d.C);
             break;
          case _type_sprite:
-            Screen.drawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
+            Screen.drawTexture(d.Tex, false, d.X, d.Y,
                                DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
                                DTA_TopOffset,0, DTA_LeftOffset,0,
-                               DTA_LegacyRenderStyle,m_D[i].Style);
+                               DTA_LegacyRenderStyle,d.Style);
             break;
          case _type_spriteAlpha:
-            Screen.drawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
+            Screen.drawTexture(d.Tex, false, d.X, d.Y,
                                DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
                                DTA_TopOffset,0, DTA_LeftOffset,0,
-                               DTA_LegacyRenderStyle,m_D[i].Style,
-                               DTA_Alpha,m_D[i].A);
+                               DTA_LegacyRenderStyle,d.Style,
+                               DTA_Alpha,d.A);
             break;
          case _type_spriteStencil:
-            Screen.drawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
+            Screen.drawTexture(d.Tex, false, d.X, d.Y,
                                DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
                                DTA_TopOffset,0, DTA_LeftOffset,0,
-                               DTA_FillColor,m_D[i].C);
+                               DTA_FillColor,d.C);
             break;
          case _type_spriteStencilAlpha:
-            Screen.drawTexture(m_D[i].Tex, false, m_D[i].X, m_D[i].Y,
+            Screen.drawTexture(d.Tex, false, d.X, d.Y,
                                DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
                                DTA_TopOffset,0, DTA_LeftOffset,0,
-                               DTA_Alpha,m_D[i].A, DTA_FillColor,m_D[i].C);
+                               DTA_Alpha,d.A, DTA_FillColor,d.C);
             break;
          case _type_text:
-            for(uint ln = 0, lns = m_D[i].LnX.Size(); ln < lns; ln++) {
-               Screen.drawText(m_D[i].Fnt, m_D[i].Cr,
-                               m_D[i].X-m_D[i].LnX[ln], m_D[i].Y+m_D[i].LnY*ln,
-                               m_D[i].Txt[ln],
+            for(int ln = 0; ln < d.tsz; ln++) {
+               Screen.drawText(d.Fnt, d.Cr,
+                               d.X-m_lnx[d.tpt + ln], d.Y+d.LnY*ln,
+                               m_txt[d.tpt + ln],
                                DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
-                               DTA_LegacyRenderStyle,m_D[i].Style);
+                               DTA_LegacyRenderStyle,d.Style);
             }
             break;
          case _type_textAlpha:
-            for(uint ln = 0, lns = m_D[i].LnX.Size(); ln < lns; ln++) {
-               Screen.drawText(m_D[i].Fnt, m_D[i].Cr,
-                               m_D[i].X-m_D[i].LnX[ln], m_D[i].Y+m_D[i].LnY*ln,
-                               m_D[i].Txt[ln],
+            for(int ln = 0; ln < d.tsz; ln++) {
+               Screen.drawText(d.Fnt, d.Cr,
+                               d.X-m_lnx[d.tpt + ln], d.Y+d.LnY*ln,
+                               m_txt[d.tpt + ln],
                                DTA_VirtualWidth,scw, DTA_VirtualHeight,sch,
-                               DTA_Alpha,m_D[i].A,
-                               DTA_LegacyRenderStyle,m_D[i].Style);
+                               DTA_Alpha,d.A,
+                               DTA_LegacyRenderStyle,d.Style);
             }
             break;
          case _type_rect:
-            drawRect(m_D[i].Z, m_D[i].W, m_D[i].X, m_D[i].Y, m_D[i].C);
+            drawRect(d.Z, d.W, d.X, d.Y, d.C);
             break;
          case _type_fill:
-            drawRect(Screen.getWidth(), Screen.getHeight(), 0, 0, m_D[i].C);
+            drawRect(Screen.getWidth(), Screen.getHeight(), 0, 0, d.C);
             break;
          }
       }
@@ -392,20 +400,20 @@ static Lith_RenderProvider create() {
 }
 
 static clearScope Lith_RenderProvider instance() {
-   return Lith_Player(players[consoleplayer].mo).m_ren;
+   return Lith_URANUS.instance().m_ren;
 }
 
 static int LA(int pos, string s, string fnt) {
    let r = instance();
 
-   uint breakx = r.m_breakX ? r.m_breakX - pos : 0x7FFF;
+   int breakx = r.m_breakX ? r.m_breakX - pos : 0x7FFF;
 
    let  fon = r.fntAny(fnt);
    let  brl = fon.breakLines(s, breakx);
-   uint lny = fon.getHeight() * brl.count();
-   uint lnx = 0;
+   int lny = fon.getHeight() * brl.count();
+   int lnx = 0;
 
-   for(uint i = 0; i < brl.count(); i++) {
+   for(int i = 0; i < brl.count(); i++) {
       let lnw = brl.stringWidth(i);
       if(lnx < lnw) lnx = lnw;
    }
@@ -419,74 +427,15 @@ static int LB(string t) {
    return (sx & 0xFFFF) | ((sy & 0xFFFF) << 16);
 }
 
-/*
-static int LD(string txt, string fnt, int xx, int yy, int flags) {
-   let r = instance();
-
-   int  x  = xx & _xmask;
-   int  y  = yy & _ymask;
-   uint xa = xx & _xflag;
-   uint ya = yy & _yflag;
-
-   uint  breakx = r.m_breakX ? r.m_breakX - x : 0x7FFF;
-   r.m_d[p].fnt = r.fntAny(fnt, flags & _u_no_unicode);
-   r.m_d[p].lnY = r.m_d[p].fnt.getHeight();
-   let      brl = r.m_d[p].fnt.breakLines(txt, breakx);
-   uint     lns = brl.Count();
-
-   r.m_d[p].txt.resize(lns);
-   array<int> lnW;
-   lnW.Resize(lns);
-
-   uint lnx = 0;
-   for(uint i = 0, w; i < lns; i++) {
-      r.m_d[p].txt[i] = brl.stringAt(i);
-      lnW[i] = brl.stringWidth(i);
-      if(lnx < (w = lnW[i])) {
-         lnx = w;
-      }
-   }
-
-   switch(xa) {
-   default:
-   case _x3:
-   case _x4:
-   case _xl: r.m_d[p].x = x;           break;
-   case _x5: r.m_d[p].x = x + lnx / 2; break;
-   case _x6:
-   case _xc: r.m_d[p].x = x - lnx / 2; break;
-   case _xr: r.m_d[p].x = x - lnx;     break;
-   }
-
-   switch(ya) {
-   default:
-   case _yt: r.m_d[p].y = y;                           break;
-   case _yc: r.m_d[p].y = y - r.m_d[p].lnY * lns / 2; break;
-   case _yb: r.m_d[p].y = y - r.m_d[p].lnY * lns;     break;
-   }
-
-   r.m_d[p].lnX.resize(lns);
-
-   for(uint i = 0; i < lns; i++) {
-           if(xa == _x3) r.m_d[p].lnX[i] = lnW[i];
-      else if(xa <  _x4) r.m_d[p].lnX[i] = 0;
-      else               r.m_d[p].lnX[i] = lnW[i] / 2;
-   }
-
-}
-*/
-
 static void LZ(int w, int h) {
    let r = instance();
 
-   let p = r.m_DPtr;
+   let d = getDt(r.m_d[r.m_DPtr++]);
 
-   r.m_D[p].Type = _type_setSize;
+   d.Type = _type_setSize;
 
-   r.m_D[p].X = w;
-   r.m_D[p].Y = h;
-
-   r.m_DPtr++;
+   d.X = w;
+   d.Y = h;
 
    r.m_VirtualSize = (w, h);
 }
@@ -496,7 +445,7 @@ static void LF(int fnum, int time, int speed, double alpha) {
 
    r.m_fadeMsg[fnum].Time = time;
    r.m_fadeMsg[fnum].FSub = speed;
-   r.m_fadeMsg[fnum].Alph = uint(alpha * 255.0);
+   r.m_fadeMsg[fnum].Alph = int(alpha * 255.0);
    r.m_fadeMsg[fnum].Fade = 255;
 }
 
@@ -516,20 +465,18 @@ static void LL(int x, int y, int z, int w, color c = 0) {
    let r = instance();
 
    if(r.m_NoDraw) return;
-   let p = r.m_DPtr;
+   let d = getDt(r.m_d[r.m_DPtr++]);
 
-   r.m_D[p].Type = _type_line;
+   d.Type = _type_line;
 
    vector2 xy = r.getScSized(x, y);
    vector2 zw = r.getScSized(z, w);
-   r.m_D[p].X = int(xy.x);
-   r.m_D[p].Y = int(xy.y);
-   r.m_D[p].Z = int(zw.x);
-   r.m_D[p].W = int(zw.y);
+   d.X = int(xy.x);
+   d.Y = int(xy.y);
+   d.Z = int(zw.x);
+   d.W = int(zw.y);
 
-   r.m_D[p].C = c;
-
-   r.m_DPtr++;
+   d.C = c;
 }
 
 static void LS(string tex, int xx, int yy, double anum, int flags, color cr = 0) {
@@ -538,56 +485,55 @@ static void LS(string tex, int xx, int yy, double anum, int flags, color cr = 0)
 
    int  x  = xx & _xmask;
    int  y  = yy & _ymask;
-   uint xa = xx & _xflag;
-   uint ya = yy & _yflag;
+   int xa = xx & _xflag;
+   int ya = yy & _yflag;
 
-   let p = r.m_DPtr;
+   let d = getDt(r.m_d[r.m_DPtr]);
 
    if(flags & _u_fade) {
-      r.m_D[p].A  = r.m_fadeMsg[uint(anum)].Fade / 255.0;
-      r.m_D[p].A *= r.m_fadeMsg[uint(anum)].Alph / 255.0;
+      d.A  = r.m_fadeMsg[int(anum)].Fade / 255.0;
+      d.A *= r.m_fadeMsg[int(anum)].Alph / 255.0;
    } else if(flags & _u_alpha) {
-      r.m_D[p].A = anum;
+      d.A = anum;
    } else {
-      r.m_D[p].A = 1.0;
+      d.A = 1.0;
    }
-   if(r.m_D[p].A < 0.001) return;
-   r.m_D[p].Type = r.m_D[p].A != 1.0 ? _type_spriteAlpha : _type_sprite;
+   if(d.A < 0.001) return;
+   ++r.m_dPtr;
+   d.Type = d.A != 1.0 ? _type_spriteAlpha : _type_sprite;
 
    if(flags & _u_add)
-      r.m_D[p].Style = STYLE_Add;
-   else if(r.m_D[p].Type == _type_spriteAlpha)
-      r.m_D[p].Style = STYLE_Translucent;
+      d.Style = STYLE_Add;
+   else if(d.Type == _type_spriteAlpha)
+      d.Style = STYLE_Translucent;
    else
-      r.m_D[p].Style = STYLE_Normal;
+      d.Style = STYLE_Normal;
 
    if(flags & _u_color) {
-      if(r.m_D[p].Type == _type_spriteAlpha)
-         r.m_D[p].Type = _type_spriteStencilAlpha;
+      if(d.Type == _type_spriteAlpha)
+         d.Type = _type_spriteStencilAlpha;
       else
-         r.m_D[p].Type = _type_spriteStencil;
-      r.m_D[p].C = cr;
+         d.Type = _type_spriteStencil;
+      d.C = cr;
    }
 
-   r.m_D[p].Tex = getTextureForName(tex);
+   d.Tex = getTextureForName(tex);
 
-   int sx, sy; [sx, sy] = TexMan.GetSize(r.m_D[p].Tex);
+   int sx, sy; [sx, sy] = TexMan.GetSize(d.Tex);
 
    switch(xa) {
       default:
-      case _xl: r.m_D[p].X = x;          break;
-      case _xc: r.m_D[p].X = x - sx / 2; break;
-      case _xr: r.m_D[p].X = x - sx;     break;
+      case _xl: d.X = x;          break;
+      case _xc: d.X = x - sx / 2; break;
+      case _xr: d.X = x - sx;     break;
    }
 
    switch(ya) {
       default:
-      case _yt: r.m_D[p].Y = y;          break;
-      case _yc: r.m_D[p].Y = y - sy / 2; break;
-      case _yb: r.m_D[p].Y = y - sy;     break;
+      case _yt: d.Y = y;          break;
+      case _yc: d.Y = y - sy / 2; break;
+      case _yb: d.Y = y - sy;     break;
    }
-
-   r.m_DPtr++;
 }
 
 static void LT(string txt, string fnt, int xx, int yy, double anum, int cr, int flags) {
@@ -596,140 +542,127 @@ static void LT(string txt, string fnt, int xx, int yy, double anum, int cr, int 
 
    int  x  = xx & _xmask;
    int  y  = yy & _ymask;
-   uint xa = xx & _xflag;
-   uint ya = yy & _yflag;
+   int xa = xx & _xflag;
+   int ya = yy & _yflag;
 
-   let p = r.m_DPtr;
+   let d = getDt(r.m_d[r.m_DPtr]);
 
    if(flags & _u_fade) {
-      r.m_D[p].A  = r.m_fadeMsg[uint(anum)].Fade / 255.0;
-      r.m_D[p].A *= r.m_fadeMsg[uint(anum)].Alph / 255.0;
+      d.A  = r.m_fadeMsg[int(anum)].Fade / 255.0;
+      d.A *= r.m_fadeMsg[int(anum)].Alph / 255.0;
    } else if(flags & _u_alpha) {
-      r.m_D[p].A = anum;
+      d.A = anum;
    } else {
-      r.m_D[p].A = 1.0;
+      d.A = 1.0;
    }
-   if(r.m_D[p].A < 0.001) return;
-   r.m_D[p].Type = r.m_D[p].A != 1.0 ? _type_textAlpha : _type_text;
+   if(d.A < 0.001) return;
+   ++r.m_dPtr;
+   d.Type = d.A != 1.0 ? _type_textAlpha : _type_text;
 
    if(flags & _u_add)
-      r.m_D[p].Style = STYLE_Add;
-   else if(r.m_D[p].Type == _type_textAlpha)
-      r.m_D[p].Style = STYLE_Translucent;
+      d.Style = STYLE_Add;
+   else if(d.Type == _type_textAlpha)
+      d.Style = STYLE_Translucent;
    else
-      r.m_D[p].Style = STYLE_Normal;
+      d.Style = STYLE_Normal;
 
-   r.m_D[p].Cr = cr;
+   d.Cr = cr;
 
-   uint lns, lnx = 0;
+   int lnx = 0;
 
-   uint  breakx = r.m_breakX && xa == _xl ? r.m_breakX - x : 0x7FFF;
-   r.m_D[p].Fnt = r.fntAny(fnt, flags & _u_no_unicode);
-   r.m_D[p].LnY = r.m_D[p].Fnt.GetHeight();
-   let      brl = r.m_D[p].Fnt.BreakLines(txt, breakx);
+   int breakx = r.m_breakX && xa == _xl ? r.m_breakX - x : 0x7FFF;
+   d.Fnt = r.fntAny(fnt, flags & _u_no_unicode);
+   d.LnY = d.Fnt.GetHeight();
+   let brl = d.Fnt.BreakLines(txt, breakx);
 
-   lns = brl.Count();
+   d.tsz = brl.Count();
+   d.tpt = r.m_tPtr;
+   r.m_tPtr += d.tsz;
 
-   r.m_D[p].Txt.Resize(lns);
-   array<int> LnW;
-   LnW.Resize(lns);
-
-   for(uint i = 0, w; i < lns; i++) {
-      r.m_D[p].Txt[i] = brl.StringAt(i);
-      LnW[i] = brl.StringWidth(i);
-
-      if(lnx < (w = LnW[i])) lnx = w;
+   for(int i = 0; i < d.tsz; i++) {
+      r.m_txt[d.tpt + i] = brl.StringAt(i);
+      int lnw = brl.stringWidth(i);
+      if(lnx < lnw) lnx = lnw;
+           if(xa == _x3) r.m_lnx[d.tpt + i] = lnw;
+      else if(xa <  _x4) r.m_lnx[d.tpt + i] = 0;
+      else               r.m_lnx[d.tpt + i] = lnw / 2;
    }
 
    switch(xa) {
    default:
    case _x3:
    case _x4:
-   case _xl: r.m_D[p].X = x;           break;
-   case _x5: r.m_D[p].X = x + lnx / 2; break;
+   case _xl: d.X = x;           break;
+   case _x5: d.X = x + lnx / 2; break;
    case _x6:
-   case _xc: r.m_D[p].X = x - lnx / 2; break;
-   case _xr: r.m_D[p].X = x - lnx;     break;
+   case _xc: d.X = x - lnx / 2; break;
+   case _xr: d.X = x - lnx;     break;
    }
 
    switch(ya) {
    default:
-   case _yt: r.m_D[p].Y = y;                          break;
-   case _yc: r.m_D[p].Y = y - r.m_D[p].LnY * lns / 2; break;
-   case _yb: r.m_D[p].Y = y - r.m_D[p].LnY * lns;     break;
+   case _yt: d.Y = y;                     break;
+   case _yc: d.Y = y - d.LnY * d.tsz / 2; break;
+   case _yb: d.Y = y - d.LnY * d.tsz;     break;
    }
-
-   r.m_D[p].LnX.Resize(lns);
-
-   for(uint i = 0; i < lns; i++) {
-           if(xa == _x3) r.m_D[p].LnX[i] = LnW[i];
-      else if(xa <  _x4) r.m_D[p].LnX[i] = 0;
-      else               r.m_D[p].LnX[i] = LnW[i] / 2;
-   }
-
-   r.m_DPtr++;
 }
 
 static void LC(int x = 0, int y = 0, int w = 0, int h = 0, int ww = 0) {
    let r = instance();
 
-   let p = r.m_DPtr;
+   let d = getDt(r.m_d[r.m_DPtr]);
 
    if(x || y || w || h) {
       /* simple optimization (which also prevents division by zero) */
       if((r.m_NoDraw = w <= 0 || h <= 0)) return;
 
-      r.m_D[p].Type = _type_clipSet;
+      d.Type = _type_clipSet;
 
       vector2 xy = r.getScSized(x, y);
       vector2 zw = r.getScSized(w, h, true);
-      r.m_D[p].X = int(xy.x);
-      r.m_D[p].Y = int(xy.y);
-      r.m_D[p].Z = int(zw.x);
-      r.m_D[p].W = int(zw.y);
+      d.X = int(xy.x);
+      d.Y = int(xy.y);
+      d.Z = int(zw.x);
+      d.W = int(zw.y);
    } else {
       r.m_NoDraw = false;
-      r.m_D[p].Type = _type_clipClear;
+      d.Type = _type_clipClear;
    }
+   ++r.m_dPtr;
 
    if(ww) {
       r.m_breakX = x + ww;
    } else {
       r.m_breakX = 0;
    }
-   r.m_DPtr++;
 }
 
 static void LR(int x = 0, int y = 0, int w = 0, int h = 0, color cr = 0) {
    let r = instance();
 
    if(r.m_NoDraw) return;
-   let p = r.m_DPtr;
+   let d = getDt(r.m_d[r.m_DPtr++]);
 
-   r.m_D[p].Type = _type_rect;
+   d.Type = _type_rect;
 
    vector2 xy = r.getScSized(x, y);
    vector2 zw = r.getScSized(w, h, true);
-   r.m_D[p].X = int(xy.x);
-   r.m_D[p].Y = int(xy.y);
-   r.m_D[p].Z = int(zw.x);
-   r.m_D[p].W = int(zw.y);
+   d.X = int(xy.x);
+   d.Y = int(xy.y);
+   d.Z = int(zw.x);
+   d.W = int(zw.y);
 
-   r.m_D[p].C = cr;
-
-   r.m_DPtr++;
+   d.C = cr;
 }
 
 static void LW(color cr = 0) {
    let r = instance();
 
    if(r.m_NoDraw) return;
-   let p = r.m_DPtr;
+   let d = getDt(r.m_d[r.m_DPtr++]);
 
-   r.m_D[p].Type = _type_fill;
-   r.m_D[p].C = cr;
-
-   r.m_DPtr++;
+   d.Type = _type_fill;
+   d.C = cr;
 }
 
 /* EOF */
