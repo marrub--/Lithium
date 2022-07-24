@@ -14,12 +14,9 @@
 #include "p_player.h"
 #include "w_world.h"
 
-static
-bool lmvar rain_chk;
-static
-k32 lmvar rain_px, rain_py;
-static
-i32 lmvar rain_dist;
+static bool lmvar rain_chk;
+static k32  lmvar rain_px, rain_py;
+static i32  lmvar rain_dist;
 
 alloc_aut(0) script
 void W_DoRain(void) {
@@ -28,14 +25,17 @@ void W_DoRain(void) {
    str raindrop;
    switch(get_msk(ml.flag, _mapf_rain)) {
    default: return;
-   case _mapr_rain:  raindrop = so_RainDrop;      return;
-   case _mapr_blood: raindrop = so_BloodRainDrop; return;
-   case _mapr_abyss: raindrop = so_AbyssRainDrop; return;
+   case _mapr_rain:  raindrop = so_RainDrop;      break;
+   case _mapr_blood: raindrop = so_BloodRainDrop; break;
+   case _mapr_abyss: raindrop = so_AbyssRainDrop; break;
+   case _mapr_snow:  raindrop = so_SnowDrop;      break;
    }
 
    pl.setActivator();
    StartSound(ss_amb_wind, lch_weather1, CHANF_LOOP, 0.001, ATTN_NONE);
-   StartSound(ss_amb_rain, lch_weather2, CHANF_LOOP, 0.001, ATTN_NONE);
+   if(get_msk(ml.flag, _mapf_rain) != _mapr_snow) {
+      StartSound(ss_amb_rain, lch_weather2, CHANF_LOOP, 0.001, ATTN_NONE);
+   }
 
    k32 skydist, curskydist = 1;
    for(;;) {

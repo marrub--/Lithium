@@ -63,22 +63,17 @@ static Lith_DamageType nameToDT(name type) {
 }
 
 static void SpawnRain(Actor mo, string type_) {
-   double maxdist = 1024;
-
+   class<Actor> type    = type_;
+   double       maxdist = 1024;
    if(!mo) {
       mo = players[consoleplayer].camera;
       maxdist = 8192;
    }
-
-   class<Actor> type = type_;
-
    for(int i = 0, j = int(maxdist/37.9259259); i < j; i++) {
-      float   ang  = frandom(-180, 180);
-      float   dist = frandom(16, maxdist);
-      vector3 pos  = (mo.pos.xy + (cos(ang) * dist, sin(ang) * dist),
-                      mo.pos.z + frandom(256, 256+64));
+      let pos = (mo.pos.xy + (fRandom(-maxdist, maxdist), fRandom(-maxdist, maxdist)), 0.0);
       let sec = level.pointInSector(pos.xy);
       if(sec && sec.getTexture(Sector.CEILING) == skyFlatNum) {
+         pos.z = mo.pos.z + 512 - fRandom(0, 16);
          Actor.spawn(type, pos);
       }
    }
