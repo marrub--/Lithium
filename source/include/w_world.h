@@ -50,7 +50,6 @@ enum ZscName(PData) {
    _pdt_upgrade,
    _pdt_riflemode,
    _pdt_hassigil,
-   _pdt_weaponzoom,
    _pdt_pclass,
    _pdt_semifrozen,
    _pdt_addp,
@@ -183,7 +182,6 @@ enum ZscName(RifleMode) {
 
 enum ZscName(MapFlag) {
    /* states */
-   _mapf_playerinit,
    _mapf_corrupted,
    _mapf_thunder,
    _mapf_vacuum,

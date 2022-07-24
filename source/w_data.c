@@ -21,7 +21,6 @@ i32 Z_LPData(i32 info, i32 permutation) {
    case _pdt_upgrade:      return get_bit(pl.upgrades[permutation].flags, _ug_active);
    case _pdt_riflemode:    return pl.riflefiremode;
    case _pdt_hassigil:     return pl.sgacquired;
-   case _pdt_weaponzoom:   return k32_to_i32(CVarGetK(sc_weapons_zoomfactor));
    case _pdt_pclass:       return pl.pclass;
    case _pdt_semifrozen:   return pl.semifrozen > 0;
    case _pdt_addp:         return k32_to_i32(pl.addpitch * 360.0);

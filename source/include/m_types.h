@@ -86,6 +86,9 @@ typedef uint96_t u96;
 #define lerpscr_init    lerpli_init
 #define interp_data_scr interp_data_li
 #define scorediv_t      ldiv_t
+#define minscr          minli
+#define maxscr          maxli
+#define clampscr        clampli
 
 typedef i64 score_t;
 

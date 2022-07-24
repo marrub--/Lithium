@@ -10,6 +10,7 @@ extend class Lith_HERMES;
 
 private array<Actor> m_bossBabies;
 private int m_bossDeathInit;
+private bool m_extraHard;
 bool m_tainted;
 
 override void WorldLoaded(WorldEvent ev) {
@@ -18,6 +19,7 @@ override void WorldLoaded(WorldEvent ev) {
       return;
    }
 
+   m_extraHard = lith_sv_extrahard;
    m_bossLevel = boss_none;
    m_bossBabies.clear();
 
@@ -304,7 +306,7 @@ override void checkReplacement(ReplaceEvent ev) {
    case 'BossTarget': return;
    }
    ev.isFinal = false;
-   if(lith_sv_extrahard) {
+   if(m_extraHard) {
       switch(ev.replacee.GetClassName()) {
       case 'ZombieMan':     ev.replacement = 'Lith_XH_ZombieMan';     return;
       case 'ShotgunGuy':    ev.replacement = 'Lith_XH_ShotgunGuy';    return;

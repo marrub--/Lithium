@@ -10,7 +10,52 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-#ifndef common_h
+#ifdef cvar_x
+#define cvar_get(name) \
+   (_Generic(cv.name, \
+      bool: CVarGetI, \
+      i32:  CVarGetI, \
+      k32:  CVarGetK, \
+      str:  CVarGetS)(sc_##name))
+#ifndef cvar_gbl
+#define cvar_gbl(ty, na)
+#endif
+#ifndef cvar_map
+#define cvar_map(ty, na)
+#endif
+#ifndef cvar_tic
+#define cvar_tic(ty, na)
+#endif
+/*
+  if a setting should only update on map or game start, place it here.
+*/
+cvar_x(gbl, sv_autosave, i32)
+cvar_x(gbl, sv_failtime, i32)
+cvar_x(gbl, sv_nobossdrop, bool)
+cvar_x(gbl, sv_nobosses, bool)
+cvar_x(map, player_bosstexts, bool)
+cvar_x(map, player_resultssound, bool)
+cvar_x(map, sv_difficulty, i32)
+cvar_x(map, sv_extrahard, bool)
+cvar_x(map, sv_minhealth, i32)
+cvar_x(map, sv_wepdrop, bool)
+
+/*
+  if a cvar is checked variably more than once every tic under normal
+  circumstances, place it here. if it can change in-between tics, do
+  not place it here.
+*/
+cvar_x(tic, debug_flags, i32)
+cvar_x(tic, debug_level, i32)
+cvar_x(tic, player_scoredisp, i32)
+cvar_x(tic, player_scoresound, bool)
+
+#undef cvar_tic
+#undef cvar_map
+#undef cvar_gbl
+#undef cvar_get
+#undef cvar_x
+#elif !defined(common_h)
 #define common_h
 
 #pragma GDCC FIXED_LITERAL ON
@@ -150,10 +195,10 @@
 #define Dbg_Err(...)
 #endif
 
-#define InvGive ACS_GiveInventory
+#define InvGive     ACS_GiveInventory
 #define InvMax(arg) ACS_GetMaxInventory(0, arg)
-#define InvNum  ACS_CheckInventory
-#define InvTake ACS_TakeInventory
+#define InvNum      ACS_CheckInventory
+#define InvTake     ACS_TakeInventory
 
 #ifndef NDEBUG
 enum {
@@ -191,14 +236,21 @@ void PtrInvSet (i32 tid, str item, i32 amount);
 void Dbg_PrintMem(void const *data, mem_size_t size);
 #endif
 
+struct cvars {
+   #define cvar_x(ev, na, ty) ty na;
+   #include "common.h"
+};
+
+extern struct cvars cv;
+
 #ifndef NDEBUG
 extern str dbgstat[],  dbgnote[];
 extern i32 dbgstatnum, dbgnotenum;
 
-#define dbglevel(level) get_bit(CVarGetI(sc_debug_level), level)
-#define dbgflags(flags) get_bit(CVarGetI(sc_debug_flags), flags)
-#define dbglevel_any()  !!CVarGetI(sc_debug_level)
-#define dbgflags_any()  !!CVarGetI(sc_debug_flags)
+#define dbglevel(level) get_bit(cv.debug_level, level)
+#define dbgflags(flags) get_bit(cv.debug_flags, flags)
+#define dbglevel_any()  !!cv.debug_level
+#define dbgflags_any()  !!cv.debug_flags
 #else
 #define dbglevel(level) false
 #define dbgflags(flags) false

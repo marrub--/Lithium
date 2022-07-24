@@ -73,7 +73,6 @@ class Lith_TorchFlame : Actor
    }
 
    override void postBeginPlay() {
-      /* don't pollute the global RNG */
       if(lith_sv_lessparticles && random[Lith_TorchFlame](0, 1)) {
          destroy();
          return;

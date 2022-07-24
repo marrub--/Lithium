@@ -30,7 +30,7 @@ struct DrawData {
    uint8     style;
    int16     x, y, z, w;
    int16     tsz, tpt;
-   double    a;
+   float     a;
    Font      fnt;
    color     c;
    textureId tex;
@@ -67,12 +67,12 @@ static ui void drawRect(int sx, int sy, int px, int py, color cr) {
    Screen.dim(cr, cr.a/255.0, px, py, sx, sy);
 }
 
-clearScope vector2 getScSized(double x, double y, bool kludge = false, vector2 vsz = (0, 0)) {
+clearScope vector2 getScSized(float x, float y, bool kludge = false, vector2 vsz = (0, 0)) {
    if(!vsz.x || !vsz.y) {
       vsz = m_virtualSize;
    }
-   double sw = Screen.GetWidth();
-   double sh = Screen.GetHeight();
+   float sw = Screen.GetWidth();
+   float sh = Screen.GetHeight();
 
    vector2 xy, sc;
 
@@ -82,8 +82,16 @@ clearScope vector2 getScSized(double x, double y, bool kludge = false, vector2 v
    return xy;
 }
 
+private transient bool m_showItems;
+private transient int  m_itemColor;
+
+private void tickNearbyItems() {
+   m_showItems = lith_hud_showitems;
+   m_itemColor = lith_hud_itemcolor;
+}
+
 private ui void drawNearbyItems(RenderEvent evt) {
-   if(!lith_hud_showitems) {
+   if(!m_showItems) {
       return;
    }
    Font fnt = fntSml();
@@ -94,10 +102,10 @@ private ui void drawNearbyItems(RenderEvent evt) {
          [px, py, seen] = project(mo.pos);
          if(seen) {
             string tag   = mo.getTag();
-            double dist  = mo.distance3D(evt.camera);
-            double alpha = 1.0 - clamp(dist / 256.0, 0.0, 1.0);
+            float  dist  = mo.distance3D(evt.camera);
+            float  alpha = 1.0 - clamp(dist / 256.0, 0.0, 1.0);
             int    sw    = fnt.stringWidth(tag);
-            int    cr    = acs_executeWithResult(lsc_drawcr, lith_hud_itemcolor);
+            int    cr    = acs_executeWithResult(lsc_drawcr, m_itemColor);
             Screen.drawText(fnt, cr, px - sw / 2, py, tag, DTA_Alpha,alpha,
                             DTA_VirtualWidth,320, DTA_VirtualHeight,240);
          }
@@ -127,6 +135,12 @@ private clearScope int, int ammoAmt(Actor mo, class<Lith_Ammo> ty) const {
       clr = CH_L_M;
    }
    return amt, clr;
+}
+
+private transient int m_lightBattery;
+
+private void tickInventory() {
+   m_lightBattery = lith_light_battery;
 }
 
 private ui void drawInventory(RenderEvent evt) {
@@ -194,10 +208,10 @@ private ui void drawInventory(RenderEvent evt) {
    y = drawStatFx(evt, y);
 
    int battery  = Lith_UTIL.pData(_pdt_flashbattery);
-   int bat_life = lith_light_battery * 35;
+   int bat_life = m_lightBattery * 35;
 
    if(bat_life > 0 && battery < bat_life) {
-      double s = battery / double(bat_life) * 8.0;
+      float s = battery / float(bat_life) * 8.0;
 
       Screen.drawTexture(m_texBatteryOutline, false, 0, y,
                          DTA_VirtualWidth,320, DTA_VirtualHeight,240);
@@ -249,8 +263,11 @@ void unload() {
 void tick() {
    projectSetRenderer();
 
+   tickNearbyItems();
    tickDmgNums();
    tickScrNums();
+   tickCrosshair();
+   tickInventory();
 
    m_dPtr = 0;
    m_tPtr = 0;
@@ -408,8 +425,8 @@ static int LA(int pos, string s, string fnt) {
 
    int breakx = r.m_breakX ? r.m_breakX - pos : 0x7FFF;
 
-   let  fon = r.fntAny(fnt);
-   let  brl = fon.breakLines(s, breakx);
+   let fon = r.fntAny(fnt);
+   let brl = fon.breakLines(s, breakx);
    int lny = fon.getHeight() * brl.count();
    int lnx = 0;
 
@@ -440,7 +457,7 @@ static void LZ(int w, int h) {
    r.m_VirtualSize = (w, h);
 }
 
-static void LF(int fnum, int time, int speed, double alpha) {
+static void LF(int fnum, int time, int speed, float alpha) {
    let r = instance();
 
    r.m_fadeMsg[fnum].Time = time;
@@ -479,7 +496,7 @@ static void LL(int x, int y, int z, int w, color c = 0) {
    d.C = c;
 }
 
-static void LS(string tex, int xx, int yy, double anum, int flags, color cr = 0) {
+static void LS(string tex, int xx, int yy, float anum, int flags, color cr = 0) {
    let r = instance();
    if(r.m_NoDraw) return;
 
@@ -536,7 +553,7 @@ static void LS(string tex, int xx, int yy, double anum, int flags, color cr = 0)
    }
 }
 
-static void LT(string txt, string fnt, int xx, int yy, double anum, int cr, int flags) {
+static void LT(string txt, string fnt, int xx, int yy, float anum, int cr, int flags) {
    let r = instance();
    if(r.m_NoDraw) return;
 

@@ -348,7 +348,7 @@ action(Weapon) void Lith_A_ReloadBobDn(double amt) {
 action(Weapon) void Lith_A_ScopeIn() {
    if(!CountInv("Lith_WeaponScopedToken")) {
       self.GiveInventory("Lith_WeaponScopedToken", 1);
-      A_ZoomFactor((1+Lith_UTIL.pData(_pdt_weaponzoom)/FIX)*invoker.m_scopeZoom);
+      A_ZoomFactor((1+lith_weapons_zoomfactor)*invoker.m_scopeZoom);
       A_StartSound(invoker.m_scopeInSnd, lch_scope);
    }
 }
@@ -372,7 +372,7 @@ action(Weapon) void Lith_A_ScopeToggle() {
 }
 
 action(Weapon) void Lith_A_ZoomFactorScoped(double amount) {
-   A_ZoomFactor((1+Lith_UTIL.pData(_pdt_weaponzoom)/FIX) * amount * invoker.m_scopeZoom);
+   A_ZoomFactor((1+lith_weapons_zoomfactor) * amount * invoker.m_scopeZoom);
 }
 
 action(Weapon) void Lith_GunSmoke(class<Actor> type, double x = 0, double y = 6, bool ignoreCrouch = false) {

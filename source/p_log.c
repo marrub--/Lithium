@@ -199,6 +199,7 @@ void P_CBI_TabLog(struct gui_state *g) {
 
 script void P_Log(i32 cr, i32 x, i32 yy) {
    if(CVarGetI(sc_hud_showlog)) {
+      bool log_from_top = CVarGetI(sc_hud_logfromtop);
       k32 scale = CVarGetK(sc_hud_logsize);
       i32 yo = 200 / scale;
       i32 xs = 320 / scale;
@@ -214,8 +215,8 @@ script void P_Log(i32 cr, i32 x, i32 yy) {
          i32 y = 10 * i;
          i32 ya;
 
-         if(CVarGetI(sc_hud_logfromtop)) {ya = 1; y = 64 + y;}
-         else                            {ya = 2; y = (yo - y) + yy;}
+         if(log_from_top) {ya = 1; y = 64 + y;}
+         else             {ya = 2; y = (yo - y) + yy;}
 
          k32 a = 1.0;
          if(ld->ftim > 0) {

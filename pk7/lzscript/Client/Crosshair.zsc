@@ -12,31 +12,41 @@
 
 extend class Lith_RenderProvider;
 
-static clearScope color xhairColor() {
-   uint r = clamp(lith_xhair_r, 0, 255);
-   uint g = clamp(lith_xhair_g, 0, 255);
-   uint b = clamp(lith_xhair_b, 0, 255);
-   return (r << 16) | (g << 8) | (b << 0);
+private transient uint8 m_xhairR, m_xhairG, m_xhairB, m_xhairA, m_xhairStyle;
+private transient bool m_xhairEnable, m_xhairEnableJuicer;
+
+private void tickCrosshair() {
+   m_xhairR            = clamp(lith_xhair_r, 0, 255);
+   m_xhairG            = clamp(lith_xhair_g, 0, 255);
+   m_xhairB            = clamp(lith_xhair_b, 0, 255);
+   m_xhairA            = clamp(lith_xhair_a, 0, 255);
+   m_xhairStyle        = clamp(lith_xhair_style, 0, 9);
+   m_xhairEnable       = lith_xhair_enable;
+   m_xhairEnableJuicer = lith_xhair_enablejuicer;
 }
 
-static clearScope textureId xhairB() {
+clearScope color xhairColor() const {
+   return (m_xhairR << 16) | (m_xhairG << 8) | (m_xhairB << 0);
+}
+
+clearScope textureId xhairB() const {
    static const string[] XB_GFX = {
       ":XHairs:crossb",
       ":XHairs:circleb", ":XHairs:deltab",  ":XHairs:ovalb",
       ":XHairs:basicb",  ":XHairs:delearb", ":XHairs:finib",
       ":XHairs:angleb",  ":XHairs:dotb",    ":XHairs:xpb"
    };
-   return getTextureForName(XB_GFX[clamp(lith_xhair_style, 0, XB_GFX.size()-1)]);
+   return getTextureForName(XB_GFX[m_xhairStyle]);
 }
 
-static clearScope textureId xhairW() {
+clearScope textureId xhairW() const {
    static const string[] XW_GFX = {
       ":XHairs:crossw",
       ":XHairs:circlew", ":XHairs:deltaw",  ":XHairs:ovalw",
       ":XHairs:basicw",  ":XHairs:delearw", ":XHairs:finiw",
       ":XHairs:anglew",  ":XHairs:dotw",    ":XHairs:xpw"
    };
-   return getTextureForName(XW_GFX[clamp(lith_xhair_style, 0, XW_GFX.size()-1)]);
+   return getTextureForName(XW_GFX[m_xhairStyle]);
 }
 
 private ui void drawCrosshair(RenderEvent evt) {
@@ -70,9 +80,7 @@ private ui void drawCrosshair(RenderEvent evt) {
    }
 
    /* draw the crosshair */
-   uint a = clamp(lith_xhair_a, 0, 255);
-
-   if(lith_xhair_enable && a) {
+   if(m_xhairEnable && m_xhairA) {
       textureId xhb = xhairB();
       textureId xhw = xhairW();
       color     c   = xhairColor();
@@ -86,7 +94,7 @@ private ui void drawCrosshair(RenderEvent evt) {
       Screen.DrawTexture(xhb, false, xhx, xhy,
                          DTA_VirtualWidth,320, DTA_VirtualHeight,240,
                          DTA_TopOffset,0, DTA_LeftOffset,0,
-                         DTA_Alpha,a/255.0);
+                         DTA_Alpha,m_xhairA/255.0);
 
       xhx = xh.x - wsx/2.0;
       xhy = xh.y - wsy/2.0;
@@ -94,9 +102,9 @@ private ui void drawCrosshair(RenderEvent evt) {
       Screen.DrawTexture(xhw, false, xhx, xhy,
                          DTA_VirtualWidth,320, DTA_VirtualHeight,240,
                          DTA_TopOffset,0, DTA_LeftOffset,0,
-                         DTA_Alpha,a/255.0,DTA_FillColor,c);
+                         DTA_Alpha,m_xhairA/255.0,DTA_FillColor,c);
 
-      if(lith_xhair_enablejuicer) {
+      if(m_xhairEnableJuicer) {
          textureId xhl = getTextureForName(":XHairs:L");
          textureId xhr = getTextureForName(":XHairs:R");
 
@@ -109,11 +117,11 @@ private ui void drawCrosshair(RenderEvent evt) {
          Screen.DrawTexture(xhl, false, xhx-xp, xhy,
                             DTA_VirtualWidth,320, DTA_VirtualHeight,240,
                             DTA_TopOffset,0, DTA_LeftOffset,0,
-                            DTA_Alpha,a/255.0,DTA_FillColor,c);
+                            DTA_Alpha,m_xhairA/255.0,DTA_FillColor,c);
          Screen.DrawTexture(xhr, false, xhx+xp, xhy,
                             DTA_VirtualWidth,320, DTA_VirtualHeight,240,
                             DTA_TopOffset,0, DTA_LeftOffset,0,
-                            DTA_Alpha,a/255.0,DTA_FillColor,c);
+                            DTA_Alpha,m_xhairA/255.0,DTA_FillColor,c);
       }
    }
 }

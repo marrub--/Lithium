@@ -206,7 +206,7 @@ void Z_PhantomDeath(void) {
            _l("Boss "), _p((cstr)boss->name), _l(" phase "), _p(boss->phase),
            _l(" defeated"));
 
-   if(!CVarGetI(sc_sv_nobossdrop)) {
+   if(!cv.sv_nobossdrop) {
       SpawnBossReward();
    }
 

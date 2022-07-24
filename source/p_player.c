@@ -177,11 +177,7 @@ void Z_PlayerDisconnect(void) {
 }
 
 static void P_initCbi(void) {
-   /* CBI */
-   if(CVarGetI(sc_sv_nobosses) ||
-      CVarGetI(sc_sv_nobossdrop) ||
-      dbgflags(dbgf_items))
-   {
+   if(cv.sv_nobosses || cv.sv_nobossdrop || dbgflags(dbgf_items)) {
       for(i32 i = 0; i < bossreward_max; i++) {
          CBI_Install(i);
       }
@@ -269,14 +265,15 @@ score_t P_Scr_GivePos(i32 x, i32 y, score_t score, bool nomul) {
       score *= 1 + (k64)ACS_RandomFixed(0, pl.attr.attrs[at_luk] / 77.7);
    }
 
-   /* Get a multiplier for the score accumulator and sound volume */
-   k64 mul = clamplk(score, 0, 15000) / 15000.0lk;
-       mul = clamplk(mul, 0.1lk, 1.0lk);
-   k32 vol = 0.7lk * mul;
+   /* Get a multiplier for the score accumulator */
+   k32 mul = clampk(clampscr(score, 0, 15000) / 15000.0k, 0.1k, 1.0k);
 
    /* Play a sound when we pick up score */
-   if(vol > 0.001k && CVarGetI(sc_player_scoresound)) {
-      StartSound(ss_player_score, lch_item2, 0, vol, ATTN_STATIC);
+   if(cv.player_scoresound) {
+      k32 vol = 0.7k * mul;
+      if(vol > 0.001k) {
+         StartSound(ss_player_score, lch_item2, 0, vol, ATTN_STATIC);
+      }
    }
 
    /* hue */
@@ -294,14 +291,13 @@ score_t P_Scr_GivePos(i32 x, i32 y, score_t score, bool nomul) {
    pl.score          += score;
    pl.scoresum       += score;
    pl.scoreaccum     += score;
-   pl.scoreaccumtime += 20 * (mul * 2.0lk);
+   pl.scoreaccumtime += 20 * mul * 2;
 
    /* display score */
-   i32 scoredisp = CVarGetI(sc_player_scoredisp);
-   if(scoredisp & _itm_disp_log) {
+   if(cv.player_scoredisp & _itm_disp_log) {
       pl.logH(1, "+\Cj%" FMT_SCR "\Cnscr", score);
    }
-   if(scoredisp & _itm_disp_pop) {
+   if(cv.player_scoredisp & _itm_disp_pop) {
       DrawCallV(sm_AddScoreNum, x, y, strp(_p(score), _l("\Cnscr")));
    }
 
@@ -352,7 +348,7 @@ void P_bossText(void) {
       pl.logB(1, tmpstr(lang(sl_log_bosshear3)));
    }
 
-   if(!CVarGetI(sc_player_bosstexts)) return;
+   if(!cv.player_bosstexts) return;
 
    cstr fmt;
    switch(ml.boss) {

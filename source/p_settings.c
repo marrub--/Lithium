@@ -371,16 +371,14 @@ struct setting const st_wld[] = {
    {_s_label, "st_labl_wld_balance"},
    {_s_boole, "sv_nobosses", S_cvBoole, .fill = true},
    {_s_empty},
-   {_s_label, "st_labl_wld_visuals"},
+   {_s_label, "st_labl_wld_fx"},
    {_s_boole, "sv_lessparticles", S_cvBoole},
    {_s_empty},
-   {_s_label, "st_labl_wld_rain"},
-   {_s_boole, "sv_rain",           S_cvBoole},
+   {_s_label, "st_labl_wld_env"},
+   {_s_enume, "sv_rain",           S_cvInteg, S_bndi(0, 4), "rain"},
    {_s_boole, "player_rainshader", S_cvBoole},
-   {_s_empty},
-   {_s_label, "st_labl_wld_sky"},
-   {_s_boole, "sv_sky",          S_cvBoole},
-   {_s_fixed, "sv_skydarkening", S_cvFixed, S_bndk(0.0, 1.0),  "mult"},
+   {_s_boole, "sv_sky",            S_cvBoole},
+   {_s_fixed, "sv_skydarkening",   S_cvFixed, S_bndk(0.0, 1.0),  "mult"},
 };
 
 struct {

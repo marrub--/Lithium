@@ -142,10 +142,10 @@ void BaseMonsterLevel(dmon_t *m) {
    case _skill_tourist:   bias += 0.1; break;
    case _skill_nightmare: bias += 0.5; break;
    }
-   if(CVarGetI(sc_sv_extrahard)) {
+   if(cv.sv_extrahard) {
       bias += 0.1;
    }
-   bias += CVarGetI(sc_sv_difficulty) / 100.0;
+   bias += cv.sv_difficulty / 100.0;
    bias *= ACS_RandomFixed(1, 1.5);
 
    if(m->mi->type == mtype_darkone) {
@@ -237,7 +237,7 @@ void OnFinalize(dmon_t *m) {
             SpawnManaPickup(m);
          }
 
-         if(CVarGetI(sc_sv_wepdrop)) {
+         if(cv.sv_wepdrop) {
             str sp = snil;
             switch(m->mi->type) {
                case mtype_zombiesg:

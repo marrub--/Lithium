@@ -334,9 +334,8 @@ void P_Init(void) {
       pl.wasinit = true;
    }
 
-   i32 minhealth = CVarGetI(sc_sv_minhealth);
-   if(pl.health < minhealth) {
-      pl.setHealth(minhealth);
+   if(pl.health < cv.sv_minhealth) {
+      pl.setHealth(cv.sv_minhealth);
    }
 
    #ifndef NDEBUG

@@ -8,13 +8,14 @@
 
 server noarchive string __lith_end;
 server nosave    int    __lith_fun;
+server nosave    string __lith_version;
 
 server noarchive int __lith_debug_level = 0;
 server noarchive int __lith_debug_flags = 0;
 
 server int   lith_sv_difficulty    = 10;
 server bool  lith_sv_extrahard     = false;
-server bool  lith_sv_rain          = false;
+server int   lith_sv_rain          = 1;
 server bool  lith_sv_sky           = false;
 server float lith_sv_skydarkening  = 0.77;
 server bool  lith_sv_revenge       = true;

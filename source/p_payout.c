@@ -117,7 +117,7 @@ void P_Scr_Payout(void) {
          Rght(tmpstr(lang(sl_res_closed)), (i % 6) < 3 ? 'n' : '-');
       }
 
-      if(CVarGetI(sc_player_resultssound)) {
+      if(cv.player_resultssound) {
          if(counting) {
             str snd = snil;
 

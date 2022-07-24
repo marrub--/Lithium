@@ -143,6 +143,11 @@
 == \#st_name_itmdisp_2 | Projected
 == \#st_name_itmdisp_3 | Log + Projected
 
+== \#st_name_rain_0 | No rain
+== \#st_name_rain_1 | Environment-based
+== \#st_name_rain_2 | Always rain
+== \#st_name_rain_3 | Always snow
+
 == \#st_labl_gui | GUI
 == \#st_labl_hud | HUD
 == \#st_labl_itm | $\#BIP_NAME_ITEMS
@@ -177,9 +182,8 @@
 == \#st_labl_wep_behaviour | \cnBehaviour
 
 == \#st_labl_wld_balance | \cnBalance
-== \#st_labl_wld_rain    | \cnRain
-== \#st_labl_wld_sky     | \cnSky
-== \#st_labl_wld_visuals | \cnVisuals
+== \#st_labl_wld_fx      | \cnEffects
+== \#st_labl_wld_env     | \cnEnvironment
 
 == \#BLUE_INTENSITY  | Blue intensity
 == \#GREEN_INTENSITY | Green intensity
@@ -261,7 +265,7 @@ subject/object/possessive determiner/possessive/action
 
 For example: they/them/their/theirs/they're
 
-== \#player_rainshader | Enable screen shader
+== \#player_rainshader | Enable rain shader
 @@ \#TOOLTIP_player_rainshader
 TECHNOLOGY! Puts rain from the air on your screen. Shouldn't cause any
 issues.
@@ -303,14 +307,21 @@ Automatically buys this autogroup when you have the Score available.
 
 == \#st_done_intro | Don't play intro on next game start
 == \#sv_autosave | Autosave interval
+@@ \#TOOLTIP_sv_autosave
+\cg(Applies on next game start)
+
 == \#sv_difficulty | Difficulty base
 @@ \#TOOLTIP_sv_difficulty
 The base scale for enemy levels; 100% means enemies can spawn at
 maximum level and rank on even the first map.
 
+\ck(Applies on next map start)
+
 == \#sv_extrahard | Extra Hard
 @@ \#TOOLTIP_sv_extrahard
 Enables more difficult enemy patterns.
+
+\ck(Applies on next map start)
 
 == \#sv_lessparticles | Less particles
 == \#sv_minhealth | Minimum health on map start
@@ -320,10 +331,14 @@ Enables more difficult enemy patterns.
 Gives you all rewards from mid-mission bosses added by Lithium. Only
 enable if you know what this is.
 
+\cg(Applies on next game start)
+
 == \#sv_nobosses | No phantoms
 @@ \#TOOLTIP_sv_nobosses
 Disables mid-mission bosses added by Lithium. Only enable if you know
 what this is.
+
+\cg(Applies on next game start)
 
 == \#sv_postgame | Enable
 @@ \#TOOLTIP_sv_postgame
@@ -331,15 +346,26 @@ what this is.
 deleted\c-, and will have \cipermanent repercussions\c-. Only enable
 if you really want more.
 
-== \#sv_rain | Always enable
+== \#sv_rain | Enable raining
+@@ \#TOOLTIP_sv_rain
+\ck(Applies on next map start)
+
 == \#sv_revenge | Explode on death
 == \#sv_sky | Replace skies
+@@ \#TOOLTIP_sv_sky
+Replaces sky textures with ones from Lithium, which are intended to be
+more appropriate looking for the environment.
+
+\ck(Applies on next map start)
+
 == \#sv_skydarkening | Outside sector darkening
 
 == \#sv_wepdrop | Drop weapons from zombies
 @@ \#TOOLTIP_sv_wepdrop
 Mainly exists for map compatibility. Drops weapons from zombie enemies
 when you don't have them already. May cause issues in normal gameplay.
+
+\ck(Applies on next map start)
 
 == \#weapons_alpha | Weapon opacity
 == \#weapons_casingfadeout | Casings fade out

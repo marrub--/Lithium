@@ -16,6 +16,7 @@ enum Lith_BobDir {
 int m_mbobprv;
 int m_mbobpos;
 int m_mbobdir;
+bool m_noFireBob;
 
 void Lith_BobWeapon() {
    double mang = atan2(vel.y, vel.x) - angle;
@@ -62,6 +63,7 @@ void Lith_BobWeapon() {
       /**/ if(m_mbobpos < -10) {m_mbobdir = _up;   m_mbobpos = -10;}
       else if(m_mbobpos >  10) {m_mbobdir = _down; m_mbobpos =  10;}
    }
+   m_noFireBob = lith_weapons_nofirebob;
 }
 
 override vector2 BobWeapon(double ticfrac) {
@@ -89,7 +91,7 @@ override vector2 BobWeapon(double ticfrac) {
       double bobtarget = Player.Bob;
 
       // don't bob when firing if the option is enabled
-      if(lith_weapons_nofirebob && !(Player.WeaponState & WF_WEAPONBOBBING)) {
+      if(m_noFireBob && !(Player.WeaponState & WF_WEAPONBOBBING)) {
          bobtarget = 0;
       }
 

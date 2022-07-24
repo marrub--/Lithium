@@ -52,35 +52,10 @@ void P_Ren_Mission(void) {
       }
       if(get_bit(ml.flag, _mapf_thunder))   _l("\CjENV: \CkELEC. STORM\n");
       if(get_bit(ml.flag, _mapf_corrupted)) _l("\CjENV: \CgCAUSALITY SHIFT\n");
-      if(get_msk(ml.flag, _mapf_cat) == _mapc_lithium) {
-         switch(ml.mission) {
-         case _mstat_unfinished: _l("\CjMISSION: \CiUNFINISHED"); break;
-         case _mstat_finished:   _l("\CjMISSION: \CdFINISHED");   break;
-         case _mstat_failure:    _l("\CjMISSION: \CgFAILURE");    break;
-         }
-      } else {
-         _l("\CjMISSION: \Ci");
-         if(!ml.boss) {
-            switch(pl.pclass) {
-            case pcl_marine:    _l("UNFINISHED");    break;
-            case pcl_cybermage: _l("ESCAPE");        break;
-            case pcl_informant: _l("BECOME SAVIOR"); break;
-            case pcl_wanderer:  _l("ROAM");          break;
-            case pcl_assassin:  _l("GET RICH");      break;
-            case pcl_darklord:  _l("FIND OMI");      break;
-            case pcl_thoth:     _l("FIX THIS");      break;
-            }
-         } else {
-            switch(pl.pclass) {
-            case pcl_marine:    _l("SURVIVE");            break;
-            case pcl_cybermage: _l("ESCAPE");             break;
-            case pcl_informant: _l("ACTUALIZE");          break;
-            case pcl_wanderer:  _l("BECOME MORE");        break;
-            case pcl_assassin:  _l("SAVE MYSELF");        break;
-            case pcl_darklord:  _l("FIND OURSELF");       break;
-            case pcl_thoth:     _l("REASSERT CAUSALITY"); break;
-            }
-         }
+      switch(ml.mission) {
+      case _mstat_unfinished: _l("\CjMISSION: \CiUNFINISHED"); break;
+      case _mstat_finished:   _l("\CjMISSION: \CdFINISHED");   break;
+      case _mstat_failure:    _l("\CjMISSION: \CgFAILURE");    break;
       }
       PrintTextA(sf_smallfnt, pl.color, 320,3, 28,1, alpha);
    }

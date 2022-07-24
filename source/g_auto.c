@@ -69,12 +69,11 @@ void G_Auto(struct gui_state *g, gid_t id, i32 x, i32 y, i32 w, i32 h,
 }
 
 void G_UpdateState(struct gui_state *g) {
-   bool inverted = CVarGetI(sc_invertmouse);
-
    g->old = g->cur;
 
-   k32 xmul = CVarGetK(sc_gui_xmul);
-   k32 ymul = CVarGetK(sc_gui_ymul);
+   bool inverted = CVarGetI(sc_invertmouse);
+   k32  xmul     = CVarGetK(sc_gui_xmul);
+   k32  ymul     = CVarGetK(sc_gui_ymul);
 
                 g->cx -= pl.yawv   * (800.0lk * xmul);
    if(inverted) g->cy += pl.pitchv * (800.0lk * ymul);

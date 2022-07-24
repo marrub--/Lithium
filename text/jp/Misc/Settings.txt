@@ -139,7 +139,6 @@
 == \#sv_nobossdrop          | ファントム討伐報酬所持でスタート
 == \#sv_nobosses            | ファントムを出現させない
 == \#sv_postgame            | NG+を有効にする
-== \#sv_rain                | 外に雨を降らす
 == \#sv_revenge             | 神風
 == \#sv_wepdrop             | 敵が武器を落とす
 == \#weapons_alpha          | 武器の透明度

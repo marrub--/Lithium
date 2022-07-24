@@ -20,6 +20,7 @@ __addrdef __mod_arr lmvar;
 
 noinit struct world            wl;
 noinit struct map_locals lmvar ml;
+noinit struct cvars            cv;
 
 script void SpawnBosses(score_t sum, bool force);
 
@@ -82,6 +83,10 @@ static
 void MInitPre(void) {
    Dbg_Log(log_dev, _l(__func__));
 
+   #define cvar_map(ty, na) cv.na = cvar_get(na);
+   #define cvar_x(ev, na, ty) cvar_##ev(ty, na)
+   #include "common.h"
+
    /* Init a random seed from the map. */
    ml.seed = ACS_Random(0, INT32_MAX);
 
@@ -112,10 +117,15 @@ void MInitPre(void) {
          set_bit(ml.flag, _mapf_thunder);
       }
 
-      if(CVarGetI(sc_sv_rain) || ml.humidity > 60 + dewpoint) {
-         set_msk(ml.flag, _mapf_rain, _mapr_rain);
-      } else if(ml.temperature <= 0 && rand() % 99 < 11) {
-         set_msk(ml.flag, _mapf_rain, _mapr_snow);
+      switch(CVarGetI(sc_sv_rain)) {
+      case 1:
+         if(ml.humidity > 60 + dewpoint) {
+         case 2:
+            set_msk(ml.flag, _mapf_rain, _mapr_rain);
+         } else if(ml.temperature <= 0 && rand() % 99 < 11) {
+         case 3:
+            set_msk(ml.flag, _mapf_rain, _mapr_snow);
+         }
       }
    } else {
       set_bit(ml.flag, _mapf_vacuum);
@@ -135,8 +145,18 @@ void MInitPre(void) {
    }
 
    W_DoRain();
+}
+
+static
+void GInitPre(void) {
+   Dbg_Log(log_dev, _l(__func__));
+
    CheckModCompat();
    UpdateGame();
+
+   #define cvar_gbl(ty, na) cv.na = cvar_get(na);
+   #define cvar_x(ev, na, ty) cvar_##ev(ty, na)
+   #include "common.h"
 }
 
 static
@@ -197,7 +217,7 @@ static
 void HInit(void) {
    Dbg_Log(log_dev, _l(__func__));
 
-   if(!CVarGetI(sc_sv_nobosses)) {
+   if(!cv.sv_nobosses) {
       Boss_HInit();
    }
 
@@ -258,6 +278,7 @@ void Z_World(bool is_reopen) {
     */
    Xalloc(_tag_temp);
 
+   if(!wl.init) GInitPre();
    if(!ml.init) MInitPre();
    if(!wl.init) GInit();
    if(!ml.init) MInit();
@@ -294,10 +315,14 @@ void Z_World(bool is_reopen) {
    i32 missionprc  = 0;
 
    for(;;) {
-      if(wl.ticks > CVarGetI(sc_sv_failtime) * 35 * 60 * 60 && get_msk(ml.flag, _mapf_cat) != _mapc_lithium) {
+      if(wl.ticks > cv.sv_failtime * 35 * 60 * 60 && get_msk(ml.flag, _mapf_cat) != _mapc_lithium) {
          F_Start(_finale_time_out);
          return;
       }
+
+      #define cvar_tic(ty, na) cv.na = cvar_get(na);
+      #define cvar_x(ev, na, ty) cvar_##ev(ty, na)
+      #include "common.h"
 
       i32 scrts = ACS_GetLevelInfo(LEVELINFO_FOUND_SECRETS);
       i32 kills = ACS_GetLevelInfo(LEVELINFO_KILLED_MONSTERS);
@@ -329,8 +354,9 @@ void Z_World(bool is_reopen) {
       #endif
       wl.ticks++;
 
-      i32 autosave = CVarGetI(sc_sv_autosave);
-      if(autosave && wl.ticks % (35 * 60 * autosave) == 0) ACS_Autosave();
+      if(cv.sv_autosave && wl.ticks % (35 * 60 * cv.sv_autosave) == 0) {
+         ACS_Autosave();
+      }
    }
 }
 

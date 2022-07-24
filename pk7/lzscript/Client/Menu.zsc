@@ -53,8 +53,9 @@ class Lith_MenuDelegate : MenuDelegateBase {
          let dw   = desc.displayWidth();
          let dh   = desc.displayHeight();
          let a    = (sin(gameTic * 10.0) + 1.0) / 2.0;
-         let c    = Lith_RenderProvider.xhairColor();
-         let tex  = Lith_RenderProvider.xhairW();
+         let r    = Lith_RenderProvider.instance();
+         let c    = r.xhairColor();
+         let tex  = r.xhairW();
          if(dw == ListMenuDescriptor.CleanScale) {
             Screen.drawTexture(tex, false, m_selPos.x, m_selPos.y,
                                DTA_Clean,true,

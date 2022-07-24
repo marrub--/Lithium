@@ -163,6 +163,10 @@ alloc_aut(0) stkcall i32 mini(i32 x, i32 y) {
    #define min_max_impl 0
    #include "m_math.c"
 }
+alloc_aut(0) stkcall i64 minli(i64 x, i64 y) {
+   #define min_max_impl 0
+   #include "m_math.c"
+}
 alloc_aut(0) stkcall u32 minu(u32 x, u32 y) {
    #define min_max_impl 0
    #include "m_math.c"
@@ -179,6 +183,10 @@ alloc_aut(0) stkcall i32 maxi(i32 x, i32 y) {
    #define min_max_impl 1
    #include "m_math.c"
 }
+alloc_aut(0) stkcall i64 maxli(i64 x, i64 y) {
+   #define min_max_impl 1
+   #include "m_math.c"
+}
 alloc_aut(0) stkcall u32 maxu(u32 x, u32 y) {
    #define min_max_impl 1
    #include "m_math.c"
@@ -192,6 +200,10 @@ alloc_aut(0) stkcall k64 maxlk(k64 x, k64 y) {
    #include "m_math.c"
 }
 alloc_aut(0) stkcall i32 clampi(i32 x, i32 y, i32 z) {
+   #define min_max_impl 2
+   #include "m_math.c"
+}
+alloc_aut(0) stkcall i64 clampli(i64 x, i64 y, i64 z) {
    #define min_max_impl 2
    #include "m_math.c"
 }
