@@ -143,7 +143,6 @@ enum ZscName(ScriptNum) {
    lsc_monstertype,
    lsc_worldreopen,
    lsc_worldopen,
-   lsc_playeropen,
    lsc_drawcr,
    lsc_cheatinput,
    lsc_versionname,
@@ -296,15 +295,16 @@ enum compat_flag {
 
 struct world {
    struct payoutinfo pay;
-   i32               mapscleared;
-   bool              unloaded;
-   i32               secretsfound;
-   i32               ticks;
-   bool              bossspawned;
-   i32               cbiperf;
-   i64               cbiupgr;
-   i32               compat;
-   bool              init;
+
+   i32  mapscleared;
+   bool unloaded;
+   i32  secretsfound;
+   i32  ticks;
+   bool bossspawned;
+   i32  cbiperf;
+   i64  cbiupgr;
+   i32  compat;
+   bool init;
 
    i32          a_x, a_y;
    struct polar a_angles[8];

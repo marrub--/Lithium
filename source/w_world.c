@@ -82,17 +82,13 @@ void UpdateGame(void) {
 static
 void MInitPre(void) {
    Dbg_Log(log_dev, _l(__func__));
-
    #define cvar_map(ty, na) cv.na = cvar_get(na);
    #define cvar_x(ev, na, ty) cvar_##ev(ty, na)
    #include "common.h"
-
    /* Init a random seed from the map. */
    ml.seed = ACS_Random(0, INT32_MAX);
-
    /* Set the air control because ZDoom's default sucks. */
    ACS_SetAirControl(0.77);
-
    /* Set up everything else about the map. -T */
    ml.soulsfreed = 0;
    srand(ml.seed);
@@ -105,24 +101,25 @@ void MInitPre(void) {
    if(ml.boss == boss_iconofsin && GetFun() & lfun_tainted) {
       set_bit(ml.flag, _mapf_corrupted);
    }
-
-   /* TODO: check if map has environment conditions baked in */
+   /* TODO: check for map's built-in dewpoint and temp */
    i32 dewpoint    = rand() % 11 - 1;
    ml.temperature  = rand() % 100;
    ml.humidity     = ml.temperature + dewpoint;
    ml.humidity     = mini(ml.humidity * ml.humidity / 90, 100);
    ml.temperature -= 30;
+   /* TODO: check for map's built-in thunder and snow settings */
+   i32 thunder_chk = rand() % 99;
+   i32    snow_chk = rand() % 99;
    if(ml.humidity > 0) {
-      if(ml.temperature >= 12 + dewpoint && rand() % 99 < 33) {
+      if(ml.temperature >= 12 + dewpoint && thunder_chk < 33) {
          set_bit(ml.flag, _mapf_thunder);
       }
-
       switch(CVarGetI(sc_sv_rain)) {
       case 1:
          if(ml.humidity > 60 + dewpoint) {
          case 2:
             set_msk(ml.flag, _mapf_rain, _mapr_rain);
-         } else if(ml.temperature <= 0 && rand() % 99 < 11) {
+         } else if(ml.temperature <= 0 && snow_chk < 11) {
          case 3:
             set_msk(ml.flag, _mapf_rain, _mapr_snow);
          }
@@ -132,28 +129,24 @@ void MInitPre(void) {
       ml.humidity    = 0;
       ml.temperature = -270;
    }
-
+   /* TODO: check for map's sky setting instead */
    if(CVarGetI(sc_sv_sky) && get_msk(ml.flag, _mapf_cat) != _mapc_lithium) {
       set_bit(ml.flag, _mapf_skyreplace);
    }
-
    str sky = fast_strupper(EDataS(_edt_sky1));
    if(sky == sp_SKY2 || sky == sp_RSKY2) {
       set_msk(ml.flag, _mapf_cat, _mapc_interstice);
    } else if(sky == sp_SKY3 || sky == sp_SKY4 || sky == sp_RSKY3) {
       set_msk(ml.flag, _mapf_cat, _mapc_hell);
    }
-
    W_DoRain();
 }
 
 static
 void GInitPre(void) {
    Dbg_Log(log_dev, _l(__func__));
-
    CheckModCompat();
    UpdateGame();
-
    #define cvar_gbl(ty, na) cv.na = cvar_get(na);
    #define cvar_x(ev, na, ty) cvar_##ev(ty, na)
    #include "common.h"

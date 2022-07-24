@@ -30,8 +30,7 @@ static void P_Atr_pTick(void);
 static void P_Aug_pTick(void);
 static void P_initCbi(void);
 
-dynam_aut script type("enter") addr(lsc_playeropen)
-void Z_PlayerEntry(void) {
+dynam_aut script type("enter") void Z_PlayerEntry(void) {
    Dbg_Log(log_dev, _l(__func__));
 
    if(!ml.init) {
@@ -105,8 +104,7 @@ reinit:
    }
 }
 
-alloc_aut(0) script static
-void revenge(void) {
+alloc_aut(0) script static void revenge(void) {
    if(CVarGetI(sc_sv_revenge)) {
       AmbientSound(ss_player_death1, 1.0);
       ACS_Delay(35);
@@ -117,18 +115,11 @@ void revenge(void) {
    }
 }
 
-dynam_aut script type("death") static
-void Z_PlayerDeath(void) {
+dynam_aut script type("death") static void Z_PlayerDeath(void) {
    pl.dead = true;
 
    P_Upg_PDeinit();
-
-   /* unfortunately, we can't keep anything even when we want to */
-   P_Inv_PQuit();
-   P_Upg_PQuit();
-   P_BIP_PQuit();
-   pl.score = pl.scoreaccum = pl.scoreaccumtime = 0;
-
+   pl.scoreaccum = pl.scoreaccumtime = 0;
    revenge();
 
    str deathmsg = snil;
@@ -159,21 +150,12 @@ void Z_PlayerDeath(void) {
    pl.obit = nil;
 }
 
-script type("respawn") static
-void Z_PlayerRespawn(void) {
+script type("respawn") static void Z_PlayerRespawn(void) {
    pl.reinit = true;
 }
 
-script type("return") static
-void Z_PlayerReturn(void) {
+script type("return") static void Z_PlayerReturn(void) {
    pl.reinit = true;
-}
-
-script type("disconnect") static
-void Z_PlayerDisconnect(void) {
-   P_BIP_PQuit();
-
-   fastmemset(&pl, 0, sizeof pl);
 }
 
 static void P_initCbi(void) {
@@ -186,8 +168,7 @@ static void P_initCbi(void) {
    CBI_InstallSpawned();
 }
 
-alloc_aut(0) stkcall
-cstr P_Discrim(i32 pclass) {
+alloc_aut(0) stkcall cstr P_Discrim(i32 pclass) {
    switch(pclass) {
    case pcl_marine:    return "Lane";
    case pcl_cybermage: return "Jem";
@@ -200,8 +181,7 @@ cstr P_Discrim(i32 pclass) {
    return "";
 }
 
-alloc_aut(0) stkcall
-i32 P_Color(i32 pclass) {
+alloc_aut(0) stkcall i32 P_Color(i32 pclass) {
    switch(pclass) {
    case pcl_marine:    return Cr(green);
    case pcl_cybermage: return Cr(red);
@@ -317,15 +297,13 @@ void P_Scr_Take(score_t score) {
    pl.scoreaccumtime = 0;
 }
 
-script static
-void P_bossWarningDone(void) {
+script static void P_bossWarningDone(void) {
    if(wl.bossspawned) {
       pl.logB(1, tmpstr(lang_discrim(sl_log_bosswarn)));
    }
 }
 
-alloc_aut(0) script static
-void P_bossWarning(void) {
+alloc_aut(0) script static void P_bossWarning(void) {
    ACS_Delay(35 * 5);
    P_bossWarningDone();
 }
@@ -404,8 +382,7 @@ void P_bossText(void) {
    }
 }
 
-alloc_aut(0) stkcall static
-i32 P_playerColor(void) {
+alloc_aut(0) stkcall static i32 P_playerColor(void) {
    switch(pl.pclass) {
    case pcl_marine:    return 0xFF00FF00;
    case pcl_cybermage: return 0xFFBF0F4A;
@@ -418,22 +395,18 @@ i32 P_playerColor(void) {
    return 0xFF000000;
 }
 
-alloc_aut(0) stkcall script static
-void P_doDepthMeter(void) {
+alloc_aut(0) stkcall script static void P_doDepthMeter(void) {
    i32 prev_level = (wl.mapscleared % 32) * 8;
    i32 next_level = (wl.mapscleared + 1 % 32) * 8;
    i32 player_clr = P_playerColor() & 0xFFFFFF;
-
    for(i32 i = 0; i < 140; ++i) {
       i32 curr_level = lerpk(prev_level, next_level, i < 70 ? ease_out_cubic(i / 70.0k) : 1.0k);
       k32 alpha_k = i > 105 ? 1.0 - ease_out_cubic((i - 105) / 35.0k) : 1.0;
       i32 alpha_i = 0xFF * alpha_k;
       i32 alpha_m = alpha_i << 24;
       i32 cr      = 0xFFFF0000 | (alpha_i << 8) | alpha_i;
-
       SetSize(640, 480);
       PrintTextAX_str(st_depth, sf_smallfnt, CR_WHITE, 640,2, 176-2,2, alpha_k, _u_no_unicode);
-      PrintRect(640, 176, 2, 128-8, cr);
       for(i32 j = 0; j < 16; ++j) {
          i32 w = j % 3 == 0 ? 24 : 8;
          PrintRect(640 - w, 176 + j * 8, w, 2, cr);
@@ -443,8 +416,7 @@ void P_doDepthMeter(void) {
    }
 }
 
-alloc_aut(0) stkcall script static
-void P_doIntro(void) {
+alloc_aut(0) stkcall script static void P_doIntro(void) {
    pl.missionstatshow = pl.missionstatshowmax = 170;
 
    if(wl.mapscleared != 0 || pl.done_intro & pl.pclass) {
@@ -457,11 +429,8 @@ void P_doIntro(void) {
       _out_tics = 35 * 2,
    };
 
-   noinit static
-   char text[8192], *lines[_nlines];
-
-   noinit static
-   u32 linec[_nlines], linen[_nlines];
+   noinit static char text[8192], *lines[_nlines];
+   noinit static u32 linec[_nlines], linen[_nlines];
 
    pl.modal = _gui_intro;
    ACS_SetMusic(sp_lsnd_Silence);
@@ -591,8 +560,7 @@ void P_doIntro(void) {
 static k32 damage_mul;
 static i32 max_health;
 
-static
-void P_attrRGE(void) {
+static void P_attrRGE(void) {
    i32 rge = pl.attr.attrs[at_spc];
 
    if(pl.health < pl.old.health) {
@@ -604,8 +572,7 @@ void P_attrRGE(void) {
    damage_mul += pl.rage;
 }
 
-static
-void P_attrCON(void) {
+static void P_attrCON(void) {
    i32 con = pl.attr.attrs[at_spc];
 
    if(pl.mana > pl.old.mana) {
@@ -705,8 +672,7 @@ static void P_Atr_pTick(void) {
    }
 }
 
-static
-void P_Scr_PTickPre(void) {
+static void P_Scr_PTickPre(void) {
    if(!pl.scoreaccumtime || pl.score < pl.old.score) {
       pl.scoreaccum = 0;
       pl.scoreaccumtime = 0;
@@ -716,8 +682,7 @@ void P_Scr_PTickPre(void) {
    else if(pl.scoreaccumtime < 0) pl.scoreaccumtime++;
 }
 
-static
-void P_Aug_pTick(void) {
+static void P_Aug_pTick(void) {
    for(i32 i = 0; i < 4; i++) {
       i32 total = 0;
 
@@ -737,8 +702,7 @@ void P_Aug_pTick(void) {
    }
 }
 
-alloc_aut(0) script_str ext("ACS") addr(OBJ "Markiplier")
-void Z_MapMarker(i32 tid) {
+alloc_aut(0) script_str ext("ACS") addr(OBJ "Markiplier") void Z_MapMarker(i32 tid) {
    if(get_msk(ml.flag, _mapf_kind) != _mapk_normal) return;
 
    enum {ticks = 35 * 2};
@@ -762,8 +726,7 @@ void Z_MapMarker(i32 tid) {
    }
 }
 
-script_str type("net") ext("ACS") addr(OBJ "KeyBuyAutoGroup")
-void Z_KeyBuyAutoGroup(i32 grp) {
+script_str type("net") ext("ACS") addr(OBJ "KeyBuyAutoGroup") void Z_KeyBuyAutoGroup(i32 grp) {
    if(grp < 0 || grp >= 4) {
       return;
    }
@@ -797,8 +760,7 @@ void Z_KeyBuyAutoGroup(i32 grp) {
    }
 }
 
-script_str type("net") ext("ACS") addr(OBJ "KeyToggleAutoGroup")
-void Z_KeyToggleAutoGroup(i32 grp) {
+script_str type("net") ext("ACS") addr(OBJ "KeyToggleAutoGroup") void Z_KeyToggleAutoGroup(i32 grp) {
    if(grp < 0 || grp >= 4) {
       return;
    }
@@ -821,8 +783,7 @@ void Z_KeyToggleAutoGroup(i32 grp) {
    }
 }
 
-alloc_aut(0) script_str type("net") ext("ACS") addr(OBJ "KeyGlare")
-void Z_KeyGlare(void) {
+alloc_aut(0) script_str type("net") ext("ACS") addr(OBJ "KeyGlare") void Z_KeyGlare(void) {
    if(!P_None()) {
       ACS_FadeTo(255, 255, 255, 1.0, 0.0);
 
@@ -838,8 +799,7 @@ void Z_KeyGlare(void) {
    }
 }
 
-_Noreturn dynam_aut script_str ext("ACS") addr(OBJ "TimelineInconsistent")
-void Z_TimelineInconsistent(void) {
+_Noreturn dynam_aut script_str ext("ACS") addr(OBJ "TimelineInconsistent") void Z_TimelineInconsistent(void) {
    pl.setActivator();
    for(;;) {
       ACS_FadeTo(0, 0, 0, 1.0, 0.0);
@@ -850,8 +810,7 @@ void Z_TimelineInconsistent(void) {
    }
 }
 
-alloc_aut(0) script_str ext("ACS") addr(OBJ "SetLane")
-void Z_SetLane(void) {
+alloc_aut(0) script_str ext("ACS") addr(OBJ "SetLane") void Z_SetLane(void) {
    SetFun(GetFun() | lfun_lane);
 }
 
