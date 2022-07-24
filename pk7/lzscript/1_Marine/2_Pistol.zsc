@@ -75,7 +75,7 @@ default
    +WEAPON.NOAUTOFIRE
 }
 
-override double, double GetFirePattern()
+override double, double Lith_GetFirePattern()
 {
    switch(m_FirePattern = (m_FirePattern + 1) % 4) {
    case 0: return  1,  0.5;

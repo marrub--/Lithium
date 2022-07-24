@@ -64,6 +64,8 @@ default {
    Lith_Weapon.ScopeInSound "weapons/shotgun/zoomin";
    Lith_Weapon.ScopeOutSound "weapons/shotgun/zoomout";
    Lith_Weapon.ScopeZoom 1.0;
+   Lith_Weapon.DefaultSpeed 1.0;
+   Lith_Weapon.SprintSpeed 2.0;
    Weapon.BobSpeed 1.5;
    Weapon.BobStyle "InverseSmooth";
 
@@ -78,10 +80,13 @@ int m_firePattern;
 private meta sound m_scopeOutSnd;
 private meta sound m_scopeInSnd;
 private meta double m_scopeZoom;
+private meta double m_defaultSpeed;
+private meta double m_sprintSpeed;
 
 private meta class<Actor> m_spawnType;
 
 private bool m_side;
+private float m_speedUp;
 
 protected bool m_ads;
 
@@ -96,19 +101,32 @@ property ScopeZoom:     m_scopeZoom;
 
 property SpawnType: m_spawnType;
 
+property DefaultSpeed: m_defaultSpeed;
+property SprintSpeed:  m_sprintSpeed;
+
 const _psp_flags =
    PSPF_ADDWEAPON | PSPF_ADDBOB | PSPF_ALPHA | PSPF_RENDERSTYLE;
 
-virtual double, double GetFirePattern() {
-   return 0, 0;
+virtual double, double lith_getFirePattern() {return 0, 0;}
+virtual bool           lith_checkSprint()    {return false;}
+
+virtual state lith_ready(int flags) {
+   if(lith_checkSprint()) {
+      return resolveState("_Sprint");
+   } else {
+      return null;
+   }
 }
 
-virtual state Lith_Ready(int flags) {
-   return null;
+virtual void lith_reloadFinish(bool isAuto) {m_fired = 0;}
+
+override double getSpeedFactor() {
+   return owner && owner.player.readyWeapon == self ? m_speedUp : 1;
 }
 
-override void tick() {
-   super.tick();
+override void beginPlay() {
+   super.beginPlay();
+   m_speedUp = m_defaultSpeed;
 }
 
 int lith_getRaiseSpeed(Lith_RaiseSpeed speed) {
@@ -120,6 +138,12 @@ int lith_getRaiseSpeed(Lith_RaiseSpeed speed) {
    default:             throwAbortException("invalid raise speed");
    }
    return 0;
+}
+
+bool lith_magEmpty() {return m_fired >= m_max;}
+
+bool lith_noAmmo(int minAmount = 1) const {
+   return m_ammoType && owner.countInv(m_ammoType) < minAmount;
 }
 
 action(Weapon) void lith_a_setInterpolation(bool on) {
@@ -278,17 +302,6 @@ action(Weapon) state Lith_A_Ready(int flags = 0) {
    }
 }
 
-action(Actor) void Lith_A_SpawnPickup(class<Actor> a) {
-}
-
-bool Lith_MagEmpty() {
-   return m_fired >= m_max;
-}
-
-virtual void Lith_ReloadFinish(bool isauto) {
-   m_fired = 0;
-}
-
 action(Weapon) state Lith_A_JumpIfMagEmpty(bool autoreload = true, statelabel rsn = "Reload", statelabel esn = "FireEmpty") {
    statelabel sn;
    if(autoreload) {
@@ -404,7 +417,7 @@ action(Weapon) void Lith_A_Casing(class<Lith_CasingBase> cas, double px, double 
 
 action(Weapon) void Lith_FixedBullets(int numBullets, int damage, int flags = 0, class<Actor> puffType = "Lith_BulletPuff", double tracerX = 0, double range = 8192) {
    for(int i = 0; i < numBullets; i++) {
-      double p, y; [p, y] = invoker.GetFirePattern();
+      double p, y; [p, y] = invoker.Lith_GetFirePattern();
       Lith_FireBullets(p, y, -1, damage, FBF_EXPLICITANGLE | FBF_NORANDOM | flags, puffType, tracerX, range);
    }
 }
@@ -457,10 +470,6 @@ action(Weapon) void lith_a_fireMelee(int damage, double range, int flags = 0, cl
    }
 }
 
-bool lith_noAmmo(int minAmount = 1) const {
-   return m_ammoType && owner.countInv(m_ammoType) < minAmount;
-}
-
 action(Weapon) State lith_jumpNoAmmo(int minAmount = 1, stateLabel label = "FireEmpty") {
    if(invoker.lith_noAmmo(minAmount)) {
       if(label == "FireEmpty") {
@@ -490,6 +499,23 @@ action(Weapon) clearScope int lith_maxInv(class<Inventory> itemType) {
       return item.maxAmount;
    } else {
       return getDefaultByType(itemType).maxAmount;
+   }
+}
+
+action(Weapon) void lith_sprint() {
+   invoker.m_speedUp = invoker.m_sprintSpeed;
+}
+
+action(Weapon) state lith_jumpIfSprint() {
+   if(vel.xy.length() < 8) {
+      player.getPSprite(_psp_weapon).frame = 99;
+   }
+
+   if(getPlayerInput(INPUT_BUTTONS) & BT_SPEED == 0) {
+      invoker.m_speedUp = invoker.m_defaultSpeed;
+      return resolveState("_SprintDone");
+   } else {
+      return null;
    }
 }
 

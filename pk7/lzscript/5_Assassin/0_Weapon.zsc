@@ -1,29 +1,12 @@
 class Lith_AWeapon : Lith_Weapon;
 
 default {
+   Lith_Weapon.SprintSpeed 1.5;
    Inventory.RestrictedTo "Lith_AssassinPlayer";
 }
 
-override state Lith_Ready(int flags) {
-   if(Lith_AssassinPlayer(owner).m_isSprinting) {
-      return resolveState("_Sprint");
-   } else {
-      return super.lith_ready(flags);
-   }
-}
-
-action(Weapon) void Lith_Sprint() {
-   self.GiveInventory("Lith_AssassinSprint", 1);
-}
-
-action(Weapon) state Lith_JumpIfSprint() {
-   if(vel.xy.length() < 8)
-      player.getPSprite(_psp_weapon).frame = 99;
-
-   if(getPlayerInput(INPUT_BUTTONS) & BT_SPEED == 0)
-      return resolveState("_SprintDone");
-   else
-      return null;
+override bool lith_checkSprint() {
+   return Lith_AssassinPlayer(owner).m_isSprinting;
 }
 
 states(Weapon) {

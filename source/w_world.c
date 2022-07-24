@@ -139,7 +139,6 @@ void MInitPre(void) {
    } else if(sky == sp_SKY3 || sky == sp_SKY4 || sky == sp_RSKY3) {
       set_msk(ml.flag, _mapf_cat, _mapc_hell);
    }
-   W_DoRain();
 }
 
 static

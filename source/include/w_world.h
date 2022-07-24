@@ -341,7 +341,6 @@ script void W_Title(void);
 script void F_Run(void);
 void F_Load(void);
 void F_Start(i32 which);
-script void W_DoRain(void);
 #endif
 
 #endif

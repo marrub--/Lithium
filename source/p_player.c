@@ -52,6 +52,7 @@ reinit:
    P_bossText();
    if(pl.teleportedout) P_TeleportIn();
    P_initCbi();
+   P_DoRain();
 
    struct old_player_delta olddelta;
 

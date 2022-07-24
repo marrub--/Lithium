@@ -37,10 +37,14 @@ void P_CBI_TabStatistics(struct gui_state *g) {
    Stat(sl_stat_upgrades,   "%i",        pl.upgradesowned);
    Stat(sl_stat_items,      "%i",        pl.itemsbought);
    Stat(sl_stat_mail,       "%i",        bip.mailreceived);
-   Stat(sl_stat_time,       "%li",       pl.ticks / 35L);
-   Stat(sl_stat_boom,       "%i",        pl.spuriousexplosions);
-   Stat(sl_stat_brouzouf,   "%i",        pl.brouzouf);
-   Stat(sl_stat_truemail,   "%i",        bip.mailtrulyreceived);
+   Stat(sl_stat_time,       "%i",        pl.ticks / 35);
+   if(pl.pclass & pcl_outcasts) {
+      Stat(sl_stat_boom, "%i", pl.spuriousexplosions);
+   }
+   if(pl.pclass == pcl_marine) {
+      Stat(sl_stat_brouzouf, "%i", pl.brouzouf);
+   }
+   Stat(sl_stat_truemail, "%i", bip.mailtrulyreceived);
 }
 
 /* EOF */

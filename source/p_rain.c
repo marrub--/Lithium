@@ -19,9 +19,7 @@ static k32  lmvar rain_px, rain_py;
 static i32  lmvar rain_dist;
 
 alloc_aut(0) script
-void W_DoRain(void) {
-   ACS_Delay(2);
-
+void P_DoRain(void) {
    str raindrop;
    switch(get_msk(ml.flag, _mapf_rain)) {
    default: return;
@@ -31,7 +29,6 @@ void W_DoRain(void) {
    case _mapr_snow:  raindrop = so_SnowDrop;      break;
    }
 
-   pl.setActivator();
    StartSound(ss_amb_wind, lch_weather1, CHANF_LOOP, 0.001, ATTN_NONE);
    if(get_msk(ml.flag, _mapf_rain) != _mapr_snow) {
       StartSound(ss_amb_rain, lch_weather2, CHANF_LOOP, 0.001, ATTN_NONE);

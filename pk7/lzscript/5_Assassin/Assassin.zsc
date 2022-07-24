@@ -62,15 +62,6 @@ class Lith_AssassinPlayer : Lith_Player {
    }
 }
 
-class Lith_AssassinSprint : PowerSpeed {
-   default {
-      Powerup.Duration 2;
-      Speed 1.5;
-
-      +POWERSPEED.NOTRAIL
-   }
-}
-
 #include "lzscript/5_Assassin/0_Weapon.zsc"
 #include "lzscript/5_Assassin/2_DualPistols.zsc"
 #include "lzscript/5_Assassin/4_BurstRifle.zsc"

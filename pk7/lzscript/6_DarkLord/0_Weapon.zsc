@@ -102,17 +102,14 @@ class Lith_SubDart : Actor {
 class Lith_DWeapon : Lith_Weapon;
 
 default {
+   Lith_Weapon.SprintSpeed 2.1;
    Inventory.RestrictedTo "Lith_DarkLordPlayer";
 
    +Weapon.NoAutoFire
 }
 
-override state lith_ready(int flags) {
-   if(owner.getPlayerInput(INPUT_BUTTONS) & BT_SPEED != 0) {
-      return resolveState("_Sprint");
-   } else {
-      return super.lith_ready(flags);
-   }
+override bool lith_checkSprint() {
+   return owner.getPlayerInput(INPUT_BUTTONS) & BT_SPEED != 0;
 }
 
 action(Weapon) void lith_subGunPreFire() {
@@ -142,22 +139,6 @@ action(Weapon) void lith_subAxeFire() {
 action(Weapon) void lith_subDrtFire() {
    a_startSound("weapons/subweapon/needle", lch_altweapon);
    a_fireProjectile("Lith_SubDart", 0, false, -7, 6);
-}
-
-action(Weapon) void lith_sprint() {
-   self.giveInventory("Lith_DarkLordSprint", 1);
-}
-
-action(Weapon) state lith_jumpIfSprint() {
-   if(vel.xy.length() < 8) {
-      player.getPSprite(_psp_weapon).frame = 99;
-   }
-
-   if(getPlayerInput(INPUT_BUTTONS) & BT_SPEED == 0) {
-      return resolveState("_SprintDone");
-   } else {
-      return null;
-   }
 }
 
 override void tick() {

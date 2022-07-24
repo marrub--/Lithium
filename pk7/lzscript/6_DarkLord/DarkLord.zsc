@@ -25,14 +25,6 @@ class Lith_DarkLordPlayer : Lith_Player {
    }
 }
 
-class Lith_DarkLordSprint : PowerSpeed {
-   default {
-      Powerup.Duration 2;
-      Speed 2.1;
-      +PowerSpeed.NoTrail
-   }
-}
-
 #include "lzscript/6_DarkLord/0_Weapon.zsc"
 #include "lzscript/6_DarkLord/1_Kampilan.zsc"
 #include "lzscript/6_DarkLord/1_Khanda.zsc"
