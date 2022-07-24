@@ -117,6 +117,7 @@ enum Lith_ScriptNum {
    lsc_drawcr,
    lsc_cheatinput,
    lsc_versionname,
+   lsc_giveammo,
    
    
 

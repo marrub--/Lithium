@@ -240,4 +240,36 @@ override void checkAirSupply() {
    /* No. */
 }
 
+override void cheatGive(string name_, int amount) {
+   switch(name(name_.makeLower())) {
+   case 'health':
+      if(amount != 0) {
+         player.health = health += amount;
+      } else {
+         player.health = health = getMaxHealth(true);
+      }
+      break;
+   case 'ammo':
+      acs_executeWithResult(lsc_giveammo);
+      break;
+   case 'armor':
+      break;
+   case 'all':
+   case 'artifacts':
+   case 'backpack':
+   case 'everything':
+   case 'keys':
+   case 'puzzlepieces':
+      super.cheatGive(name_, amount);
+      break;
+   default:
+      class<Inventory> ty = name_;
+      if(ty) {
+         giveInventory(ty, amount, true);
+      } else {
+         Console.printf("\cgERROR\c-: unknown item `%s'", name_);
+      }
+   }
+}
+
 /* EOF */

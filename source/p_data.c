@@ -227,9 +227,7 @@ void P_Lv_GiveEXP(i32 amt) {
    a->exp += amt;
 }
 
-
-script static
-bool chtf_give_ammo(cheat_params_t const params) {
+script ext("ACS") addr(lsc_giveammo) bool chtf_give_ammo(cheat_params_t const params) {
    for(i32 i = 0; i < countof(sa_ammo_types); ++i) {
       InvGive(sa_ammo_types[i], 0x7FFFFFFF);
    }

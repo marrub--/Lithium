@@ -25,6 +25,7 @@ gameinfo {
    statScreen_Single = "Lith_STATUS"
    statusBarClass    = "Lith_STATUSBAR"
    messageBoxClass   = "Lith_MESSAGEBOX"
+   backpackType      = "Lith_Backpack"
 
    quitMessages = "HACK HACK THIS IS A HACK WOW WHAT A HACK"
 
