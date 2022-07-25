@@ -9,6 +9,7 @@
 zcpp = [
    {i: "items.h",        z: "items.zsc"},
    {i: "m_drawing.h",    z: "m_drawing.zsc"},
+   {i: "m_version.h",    z: "m_version.zsc"},
    {i: "p_player.h",     z: "p_player.zsc"},
    {i: "p_weaponinfo.h", z: "p_weaponinfo.zsc"},
    {i: "u_names.h",      z: "u_names.zsc"},

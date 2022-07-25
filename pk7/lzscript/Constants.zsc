@@ -8,6 +8,7 @@
 
 #include "lzscript/Constants/items.zsc"
 #include "lzscript/Constants/m_drawing.zsc"
+#include "lzscript/Constants/m_version.zsc"
 #include "lzscript/Constants/p_player.zsc"
 #include "lzscript/Constants/p_weaponinfo.zsc"
 #include "lzscript/Constants/u_names.zsc"

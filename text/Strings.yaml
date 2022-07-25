@@ -214,7 +214,6 @@ sm_:
    - Set
    - SetFrozen
    - SetTeleFogTo
-   - SetVersion
    - Shield: m_shield
    - SpawnBoss
    - SpawnRain

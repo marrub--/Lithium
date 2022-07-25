@@ -14,8 +14,10 @@ private bool m_extraHard;
 bool m_tainted;
 
 override void WorldLoaded(WorldEvent ev) {
-   if(ev.isSaveGame && m_tainted) {
-      CallACS("Lith_TimelineInconsistent");
+   if(ev.isSaveGame){
+      if(m_tainted) {
+         CallACS("Lith_TimelineInconsistent");
+      }
       return;
    }
 

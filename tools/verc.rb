@@ -51,7 +51,7 @@ common_main do
    src.concat <<~_end_c_
 #{generated_header "verc"}
 
-#ifdef VERSION
+#if defined(VERSION)
 #{
    vers.reduce(String.new) do |s, ver|
       s.concat "VERSION(#{ver[:maj]}, #{ver[:min]}, #{ver[:pat]}, #{ver[:bui]}, \"#{ver[:bna]}\", \"#{ver[:nam]}\")\n"
@@ -76,7 +76,22 @@ common_main do
 #define vernum vernum_#{hsh[:current]}
 #define verstr verstr_#{hsh[:current]}
 #define vernam vernam_#{hsh[:current]}
-#ifndef VER_DEFINES_ONLY
+#if defined(ZscOn)
+const LITH_VERNAM = vernam;
+const LITH_VERNUM = vernum;
+const LITH_VERSTR = verstr;
+const LITH_VERSION = vernam
+#ifndef NDEBUG
+" ("
+#ifdef RELEASE
+"DEBUG"
+#else
+"DEV"
+#endif
+")"
+#endif
+;
+#elif !defined(VER_DEFINES_ONLY)
 i32 version_name_to_num(cstr s);
 #endif
 #endif

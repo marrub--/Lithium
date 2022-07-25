@@ -690,17 +690,4 @@ static clearscope void StartSound(Actor mo, sound snd, int slot, int flags, doub
    }
 }
 
-private transient ui string m_versionName;
-
-static ui void setVersion(string s) {
-   instance().m_versionName = s;
-}
-
-ui string getVersion() {
-   if(m_versionName.length() == 0) {
-      acs_executeWithResult(lsc_versionname);
-   }
-   return m_versionName;
-}
-
 /* EOF */

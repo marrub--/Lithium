@@ -114,8 +114,7 @@ class ListMenuItemLith_VersionName : ListMenuItem {
    }
 
    override void draw(bool selected, ListMenuDescriptor desc) {
-      let ver = Lith_RenderProvider.instance().getVersion();
-      drawText(desc, desc.mFont, Font.CR_WHITE, mXPos, mYPos, ver, false);
+      drawText(desc, desc.mFont, Font.CR_WHITE, mXPos, mYPos, LITH_VERSION, false);
    }
 }
 

@@ -97,6 +97,11 @@
 
 alloc_aut(0) script ext("ACS") addr(lsc_strinit)
 void StrInit(void) {
+   static bool init;
+   if(init) {
+      return;
+   }
+   init = true;
    str *ary;
    i32 i;
    #define stab_ary_bgn_x(name) i = 0, ary = name;
