@@ -26,10 +26,6 @@ class Lith_URANUS : StaticEventHandler;
 
 Lith_RenderProvider m_ren;
 
-static clearScope Lith_URANUS instance() {
-   return Lith_URANUS(Find('Lith_URANUS'));
-}
-
 override void onRegister() {
    m_ren = Lith_RenderProvider.create();
 }

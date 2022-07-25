@@ -94,6 +94,13 @@ struct Lith_UTIL {
       class<Object> cls = cnam;
       return cls != null;
    }
+
+   static float, float circleSpread(float mdy, float mdp) {
+      float dy = fRandom(mdy, 0);
+      float dp = fRandom(mdp, 0);
+      float a  = fRandom(0, 360);
+      return sin(a) * dy, cos(a) * dp;
+   }
 }
 
 class Lith_LineTracer : LineTracer {

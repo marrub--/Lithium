@@ -71,9 +71,4 @@ void UnfreezeTime(bool players_ok) {
    if(frozen < 1) ServCallV(sm_SetFrozen, false, 0);
 }
 
-script_str ext("ACS") addr(OBJ "Timer")
-i32 Z_Timer(void) {
-   return ACS_Timer();
-}
-
 /* EOF */

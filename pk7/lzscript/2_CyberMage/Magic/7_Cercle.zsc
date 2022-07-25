@@ -266,7 +266,7 @@ class Lith_CircleSprite : Actor {
    Spawn:
       BLLT W 1;
       BLLT W 1 {
-         A_Warp(AAPTR_PLAYER1, 64,0,32, (CallACS("Lith_Timer")+m_ofs)*1.7%180.0-90.0, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE);
+         A_Warp(AAPTR_PLAYER1, 64,0,32, (level.time+m_ofs)*1.7%180.0-90.0, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE);
          return Lith_UTIL.pData(_pdt_weapon) != weapon_c_cercle ? ResolveState("Null") : state(null);
       }
       wait;

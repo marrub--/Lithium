@@ -63,8 +63,10 @@ action(Weapon) void Lith_A_FirePlasma()
    lith_takeAmmo(35);
    A_GunFlash("DummyFlash");
    A_StartSound("weapons/plasma/fire", lch_weapon);
-   for(int i = 0; i < 4; i++)
-      A_FireProjectile("Lith_PlasmaBolt", CallACS("Lith_CircleSpread", 7 * IFIX, 3 * IFIX, false) / FIX, false, 0, -9, 0, -(CallACS("Lith_CircleSpread", 0, 0, true) / FIX));
+   for(int i = 0; i < 4; i++) {
+      float y, p; [y, p] = Lith_UTIL.circleSpread(7, 3);
+      A_FireProjectile("Lith_PlasmaBolt", y, false, 0, -9, 0, -p);
+   }
    A_FireProjectile("Lith_LightProjectileGreenShort", 0);
 }
 

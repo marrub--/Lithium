@@ -229,25 +229,6 @@ bool Z_WeaponPickup(i32 name) {
    }
 }
 
-script_str ext("ACS") addr(OBJ "CircleSpread")
-k32 Z_CircleSpread(k32 mdx, k32 mdy, bool getpitch) {
-   noinit static
-   k32 y, p;
-
-   if(!getpitch) {
-      k32 dx = ACS_RandomFixed(mdx,  0.0);
-      k32 dy = ACS_RandomFixed(mdy,  0.0);
-      k32 a  = ACS_RandomFixed(1.0, -1.0);
-
-      y = ACS_Sin(a) * dx;
-      p = ACS_Cos(a) * dy;
-
-      return y;
-   } else {
-      return p;
-   }
-}
-
 script_str ext("ACS") addr(OBJ "ChargeFistDamage")
 i32 Z_ChargeFistDamage(void) {
    i32 amount = InvNum(so_FistCharge);

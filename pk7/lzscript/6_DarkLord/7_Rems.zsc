@@ -118,7 +118,7 @@ states(Weapon) {
 Ready:
    REMS A 0 {
       if(invoker.m_steamy) {
-         if(callAcs("Lith_Timer") % 3 == 0) {
+         if(level.time % 3 == 0) {
             a_fireProjectile("Lith_GunSmokeEmitter", frandom(-10, 10), 0, 1.5, 9, pitch: frandom(-10, 10));
          }
          invoker.m_steamy--;

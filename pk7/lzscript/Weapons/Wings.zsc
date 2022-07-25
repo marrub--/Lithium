@@ -35,8 +35,8 @@ Ready:
          }
       }
    }
-   TNT1 A 0 A_JumpIf(CallACS("Lith_Timer") % 40 == 0, "Flap");
-   TNT1 A 0 A_JumpIf(CallACS("Lith_Timer") % 2  == 0, "Ready");
+   TNT1 A 0 A_JumpIf(level.time % 40 == 0, "Flap");
+   TNT1 A 0 A_JumpIf(level.time % 2  == 0, "Ready");
    TNT1 A 0 A_ChangeVelocity(0, 0, -0.2);
    loop;
 Flap:

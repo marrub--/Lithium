@@ -417,7 +417,7 @@ static Lith_RenderProvider create() {
 }
 
 static clearScope Lith_RenderProvider instance() {
-   return Lith_URANUS.instance().m_ren;
+   return Lith_URANUS(StaticEventHandler.find('Lith_URANUS')).m_ren;
 }
 
 static int LA(int pos, string s, string fnt) {

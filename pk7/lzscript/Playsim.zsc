@@ -6,8 +6,6 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-#include "lzscript/Playsim/Server.zsc"
-
 #include "lzscript/Playsim/Cyberspace.zsc"
 #include "lzscript/Playsim/Events.zsc"
 #include "lzscript/Playsim/Files.zsc"
@@ -17,5 +15,61 @@
 #include "lzscript/Playsim/StatusEffects.zsc"
 #include "lzscript/Playsim/Weapons.zsc"
 #include "lzscript/Playsim/World.zsc"
+
+/* HERMES: Horribly Explicit and Rudimentary Methods for Extended Scripting */
+class Lith_HERMES : EventHandler;
+
+play string m_Obituary;
+play name m_DmgType;
+play bool m_DmgWorld;
+play int m_BossLevel;
+private Lith_LineTracer m_tracer;
+
+override void onRegister() {
+   m_tracer = new("Lith_LineTracer");
+}
+
+static clearScope Lith_HERMES Instance()
+   {return Lith_HERMES(Find("Lith_HERMES"));}
+
+static clearScope string localize(string name) {
+   string ret = StringTable.localize(name, false);
+   while(ret.byteAt(0) == CH_DOLLAR) {
+      string next = StringTable.localize(ret);
+      if(next != ret) ret = next;
+      else            break;
+   }
+   return ret;
+}
+
+static int EDataI(Actor mo, int info) {
+   switch(info) {
+   case _edt_bosslevel:   return Instance().m_bossLevel;
+   case _edt_paused:      return level.isFrozen();
+   case _edt_spawnhealth: return mo.spawnHealth();
+
+   case _edt_chex:    return gameinfo.gametype & GAME_Chex    != 0;
+   case _edt_heretic: return gameinfo.gametype & GAME_Heretic != 0;
+
+   case _edt_rampancy:     return Lith_UTIL.classExists("Robot_Thingo");
+   case _edt_legendoom:    return Lith_UTIL.classExists("LDLegendaryMonsterMarker");
+   case _edt_colorfulhell: return Lith_UTIL.classExists("CHBoner");
+
+   case _edt_riflegrenade:
+      return !Lith_CombatRifle(mo.findInventory("Lith_CombatRifle")).m_grenFire;
+   }
+   return 0;
+}
+
+static string EDataS(Actor mo, int info) {
+   switch(info) {
+   case _edt_obituary: return instance().m_obituary;
+   case _edt_logname:  return instance().m_data.logName;
+   case _edt_bipname:  return instance().m_data.bipName;
+   case _edt_sky1:     return level.info.skyPic1;
+   }
+   return "";
+}
+
 
 /* EOF */
