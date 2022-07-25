@@ -10,7 +10,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-#ifdef cvar_x
+#if defined(cvar_x)
 #define cvar_get(name) \
    (_Generic(cv.name, \
       bool: CVarGetI, \

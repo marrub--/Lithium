@@ -6,7 +6,6 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-#include "lzscript/Client/Draw.zsc"
 #include "lzscript/Client/Render.zsc"
 #include "lzscript/Client/Crosshair.zsc"
 #include "lzscript/Client/DamageNum.zsc"
@@ -25,16 +24,40 @@
 /* URANUS: Users Really Are Not UI Systems */
 class Lith_URANUS : StaticEventHandler;
 
+Lith_RenderProvider m_ren;
+
 static clearScope Lith_URANUS instance() {
    return Lith_URANUS(Find('Lith_URANUS'));
 }
 
-static clearscope void StartSound(Actor mo, sound snd, int slot, int flags, double volume = 1.0, double attenuation = 1.0, double pitch = 1.0) {
-   if(slot == lch_ambient) {
-      S_StartSound(snd, lch_auto, flags, volume, attenuation, pitch);
-   } else if(mo) {
-      mo.A_StartSound(snd, slot, flags, volume, attenuation, pitch);
+override void onRegister() {
+   m_ren = Lith_RenderProvider.create();
+}
+
+override void worldUnloaded(WorldEvent evt) {
+   m_ren.unload();
+}
+
+override void worldTick() {
+   m_ren.tick();
+}
+
+override void uiTick() {
+   if(!(menuDelegate is "Lith_MenuDelegate")) {
+      menuDelegate.destroy();
+      menuDelegate = Lith_MenuDelegate.create();
    }
+
+   if(gameState == GS_FINALE && (!level.nextMap || level.nextMap.left(6) == "enDSeQ")) {
+      callACS("Lith_Finale");
+   }
+
+   m_ren.tickMenu();
+}
+
+override void renderOverlay(RenderEvent evt) {
+   m_ren.render(evt);
+   m_ren.drawMenu(evt);
 }
 
 /* EOF */

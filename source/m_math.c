@@ -138,8 +138,7 @@ u64 crc64_str(void  __str_ars const *data, mem_size_t len, u64 result) {
    #include "m_math.c"
 }
 
-alloc_aut(0) stkcall
-i32 rainbowcr(void) {
+alloc_aut(0) stkcall i32 rainbowcr(void) {
    static
    i32 const crs[] = {
       CR_BRICK, CR_ORANGE, CR_GOLD, CR_GREEN, CR_LIGHTBLUE, CR_PURPLE
@@ -147,18 +146,14 @@ i32 rainbowcr(void) {
    return crs[ACS_Timer() / 4 % countof(crs)];
 }
 
-alloc_aut(0) stkcall
-i32 fastabs(i32 n) {
+alloc_aut(0) stkcall i32 fastabs(i32 n) {
    #define abs_impl
    #include "m_math.c"
 }
-
-alloc_aut(0) stkcall
-k32 fastabsk(k32 n) {
+alloc_aut(0) stkcall k32 fastabsk(k32 n) {
    #define abs_impl
    #include "m_math.c"
 }
-
 alloc_aut(0) stkcall i32 mini(i32 x, i32 y) {
    #define min_max_impl 0
    #include "m_math.c"

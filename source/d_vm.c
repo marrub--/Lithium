@@ -78,9 +78,6 @@ cstr const action_names[] = {
 #define SignB1(v) get_bit(v,  7)
 #define SignB2(v) get_bit(v, 15)
 
-#define WrapB1(p) ((u32)(p) & 0x00FF)
-#define WrapB2(p) ((u32)(p) & 0xFFFF)
-
 local i32 SignExtendB1(u32 v) {return SignB1(v) ? (v) | 0xFFFFFF00 : (v);}
 local i32 SignExtendB2(u32 v) {return SignB2(v) ? (v) | 0xFFFF0000 : (v);}
 
@@ -147,10 +144,10 @@ static u32  MemB2_G(u32 p) {return MemB1_G(p) | (MemB1_G(p + 1) << 8);}
 #define     MemC2_G()      (MemB2_G(GetPC()))
 #define     MemI1_G()      (MemB1_G(IncPC(1)))
 #define     MemI2_G()      (MemB2_G(IncPC(2)))
-static u32  MemIZ_G(u32 p) {return WrapB1(MemI1_G() + p);}
-static u32  MemIA_G(u32 p) {return WrapB2(MemI2_G() + p);}
+static u32  MemIZ_G(u32 p) {return byte(MemI1_G() + p);}
+static u32  MemIA_G(u32 p) {return word(MemI2_G() + p);}
 
-#define     MemB1_S(p, v)         Cps_SetC(memory, p, WrapB1(v))
+#define     MemB1_S(p, v)         Cps_SetC(memory, p, byte(v))
 static void MemB2_S(u32 p, u32 v) {MemB1_S(p, v); MemB1_S(p + 1, v >> 8);}
 
 /* addressed memory access */
@@ -159,7 +156,7 @@ static void MemB2_S(u32 p, u32 v) {MemB1_S(p, v); MemB1_S(p + 1, v >> 8);}
 #define AdrAY_V() (MemIA_G(GetRY()))
 #define AdrII_V() (MemB2_G(MemI2_G()))
 #define AdrIX_V() (MemB2_G(MemIZ_G(GetRX())))
-#define AdrIY_V() (WrapB2(MemB2_G(MemI1_G()) + GetRY()))
+#define AdrIY_V() (word(MemB2_G(MemI1_G()) + GetRY()))
 #define AdrRI_V() (SignExtendB1(MemI1_G()))
 #define AdrVI_V() (MemI1_G())
 #define AdrZI_V() (MemI1_G())

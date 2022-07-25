@@ -20,8 +20,8 @@ char buf[4096];
 
 alloc_aut(0) stkcall
 void Cps_SetC(cps_t *cps, mem_size_t p, char c) {
-   cps[p / 4] &= ~Cps_Shift(p,     0xFF);
-   cps[p / 4] |=  Cps_Shift(p, c & 0xFF);
+   cps[p / 4] &= ~Cps_Shift(p, 0xFF);
+   cps[p / 4] |=  Cps_Shift(p, byte(c));
 }
 
 alloc_aut(0) stkcall

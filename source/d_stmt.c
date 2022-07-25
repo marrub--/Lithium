@@ -156,8 +156,8 @@ static void stmt_option(struct compiler *d) {
    u32 ptr = d->def.codeP;
    u32 rel = PRG_BEG + ptr;
 
-   Dlg_SetB1(d, adr.l, rel & 0xFF); unwrap(&d->res);
-   Dlg_SetB1(d, adr.h, rel >> 8); unwrap(&d->res);
+   Dlg_SetB1(d, adr.l, byte(rel));      unwrap(&d->res);
+   Dlg_SetB1(d, adr.h, byte(rel >> 8)); unwrap(&d->res);
 
    Dlg_GetStmt(d); unwrap(&d->res);
 
@@ -211,7 +211,7 @@ static void stmt_terminal(struct compiler *d, u32 act) {
    Dlg_GetStmt(d); unwrap(&d->res);
 
    Dlg_PushB1(d, DCD_LDA_VI);     unwrap(&d->res);
-   Dlg_PushB1(d, act & 0xFF);     unwrap(&d->res);
+   Dlg_PushB1(d, byte(act));      unwrap(&d->res);
    Dlg_PushB1(d, DCD_STA_AI);     unwrap(&d->res);
    Dlg_PushB2(d, VAR_TACT);       unwrap(&d->res);
    Dlg_PushLdVA(d, ACT_TRM_WAIT); unwrap(&d->res);
@@ -229,10 +229,10 @@ static void stmt_finale(struct compiler *d, u32 act) {
 
    tok = d->tb.expc(&d->res, d->tb.get(), tok_number, 0);
    unwrap(&d->res);
-   Dlg_PushLdAdr(d, VAR_ADRL, faststrtoi32(tok->textV) & 0xFFFF); unwrap(&d->res);
+   Dlg_PushLdAdr(d, VAR_ADRL, word(faststrtoi32(tok->textV))); unwrap(&d->res);
 
    Dlg_PushB1(d, DCD_LDA_VI);     unwrap(&d->res);
-   Dlg_PushB1(d, act & 0xFF);     unwrap(&d->res);
+   Dlg_PushB1(d, byte(act));      unwrap(&d->res);
    Dlg_PushB1(d, DCD_STA_AI);     unwrap(&d->res);
    Dlg_PushB2(d, VAR_FACT);       unwrap(&d->res);
    Dlg_PushLdVA(d, ACT_FIN_WAIT); unwrap(&d->res);
@@ -242,7 +242,7 @@ static void stmt_num(struct compiler *d, u32 act) {
    struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_number, 0);
    unwrap(&d->res);
 
-   Dlg_PushLdAdr(d, VAR_ADRL, faststrtoi32(tok->textV) & 0xFFFF); unwrap(&d->res);
+   Dlg_PushLdAdr(d, VAR_ADRL, word(faststrtoi32(tok->textV))); unwrap(&d->res);
    Dlg_PushLdVA(d, act); unwrap(&d->res);
 
    tok = d->tb.expc(&d->res, d->tb.get(), tok_semico, 0);

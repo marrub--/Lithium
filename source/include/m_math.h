@@ -28,11 +28,12 @@
 #define k32_to_i32(n) (ik32.k = (n), ik32.i)
 #define i32_to_k32(n) (ik32.i = (n), ik32.k)
 
-#define k32_to_byte(n) ((k32_to_i32((k32)(n) * 255.0) >> 16) & 0xff)
+#define k32_to_byte(n) (byte(k32_to_i32((k32)(n) * 255.0) >> 16))
 
 #define floork(n)  ((i32)(n))
 #define floorlk(n) ((i64)(n))
 
+#define word(n) ((n) & 0xFFFF)
 #define byte(n) ((n) & 0xFF)
 
 extern union ik32 ik32;

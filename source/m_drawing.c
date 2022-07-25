@@ -21,7 +21,7 @@ struct i32v2 const *TextSize(str s, str font, i32 pos) {
    static struct i32v2 draw_text_size;
    draw_text_size.x = DrawCallI(sm_LA, pos, s, font);
    draw_text_size.y = draw_text_size.x >> 16;
-   draw_text_size.x &= 0xFFFF;
+   draw_text_size.x = word(draw_text_size.x);
    return &draw_text_size;
 }
 
@@ -30,7 +30,7 @@ struct i32v2 const *TextureSize(str t) {
    static struct i32v2 draw_texture_size;
    draw_texture_size.x = DrawCallI(sm_LB, t);
    draw_texture_size.y = draw_texture_size.x >> 16;
-   draw_texture_size.x &= 0xFFFF;
+   draw_texture_size.x = word(draw_texture_size.x);
    return &draw_texture_size;
 }
 

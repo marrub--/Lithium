@@ -114,7 +114,7 @@ class ListMenuItemLith_VersionName : ListMenuItem {
    }
 
    override void draw(bool selected, ListMenuDescriptor desc) {
-      let ver = Lith_URANUS.instance().getVersion();
+      let ver = Lith_RenderProvider.instance().getVersion();
       drawText(desc, desc.mFont, Font.CR_WHITE, mXPos, mYPos, ver, false);
    }
 }
@@ -181,25 +181,13 @@ class Lith_SkillEpMenu : ListMenu {
    }
 }
 
-extend class Lith_URANUS;
+extend class Lith_RenderProvider;
 
 private transient ui int              m_screenDim;
 private transient ui Shape2DTransform m_menuRectXf;
 private transient ui Shape2D          m_menuRect;
-private transient ui string           m_versionName;
 
-static ui void setVersion(string s) {
-   instance().m_versionName = s;
-}
-
-ui string getVersion() {
-   if(m_versionName.length() == 0) {
-      acs_executeWithResult(lsc_versionname);
-   }
-   return m_versionName;
-}
-
-private ui void tickMenu() {
+ui void tickMenu() {
    if(!m_menuRectXf) {
       m_menuRectXf = new("Shape2DTransform");
       m_menuRect   = new("Shape2D");
@@ -229,7 +217,7 @@ private ui void tickMenu() {
    }
 }
 
-private ui void drawMenu(RenderEvent evt) {
+ui void drawMenu(RenderEvent evt) {
    if(m_screenDim) {
       int size = Screen.getHeight() / 14;
       int w = Screen.getWidth()  / size;
