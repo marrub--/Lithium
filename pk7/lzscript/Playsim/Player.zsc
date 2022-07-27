@@ -12,7 +12,7 @@ string m_logName;
 string m_bipName;
 
 static clearScope double GetViewHeight(Actor mo) {
-   return Lith_Player(mo).player.viewz - mo.pos.z;
+   return Lith_Player(mo).viewHeight;
 }
 
 static clearScope double GetAttackHeight(Actor mo) {

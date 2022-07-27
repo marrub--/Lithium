@@ -41,11 +41,11 @@ void P_Ren_Debug(void) {
    SetSize(320, 240);
 
    ACS_BeginPrint();
-   for(i32 i = 0; i < dbgstatnum; i++) {
-      ACS_PrintString(dbgstat[i]);
+   for(i32 i = 0; i < wl.dbgstatnum; i++) {
+      ACS_PrintString(wl.dbgstat[i]);
    }
-   for(i32 i = 0; i < dbgnotenum; i++) {
-      ACS_PrintString(dbgnote[i]);
+   for(i32 i = 0; i < ml.dbgnotenum; i++) {
+      ACS_PrintString(ml.dbgnote[i]);
    }
    PrintTextA(sf_smallfnt, CR_WHITE, 10,1, 20,1, 0.2);
 }

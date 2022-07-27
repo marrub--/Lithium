@@ -23,8 +23,7 @@ void F_Start(i32 which) {
                    CHANGELEVEL_PRERAISEWEAPON, -1);
 }
 
-dynam_aut script
-void F_Run(void) {
+dynam_aut script void F_Run(void) {
    pl.setActivator();
    pl.dlg.page = finale;
    pl.modal    = _gui_dlg;

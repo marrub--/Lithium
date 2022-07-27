@@ -133,7 +133,7 @@ void BaseMonsterLevel(dmon_t *m) {
    k32 rlv = ACS_RandomFixed(1, _max_level);
    k32 bias;
 
-   bias = wl.mapscleared / 40.0;
+   bias = wl.hubscleared / 40.0;
 
    bias *= bias;
    switch(ACS_GameSkill()) {

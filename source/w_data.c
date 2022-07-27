@@ -32,13 +32,13 @@ i32 Z_LPData(i32 info, i32 permutation) {
    case _pdt_oldhealth:    return pl.old.health;
    case _pdt_hudenabled:   return pl.hudenabled;
    case _pdt_flashbattery: return pl.upgrdata.flashlight.battery;
-   case _pdt_bossspawned:  return wl.bossspawned;
    case _pdt_soulsfreed:   return ml.soulsfreed;
    case _pdt_ptid:         return pl.tid;
    case _pdt_mapf:         return get_bit(ml.flag, permutation);
    case _pdt_mapc:         return get_msk(ml.flag, _mapf_cat);
    case _pdt_mapr:         return get_msk(ml.flag, _mapf_rain);
    case _pdt_mapk:         return get_msk(ml.flag, _mapf_kind);
+   case _pdt_mapb:         return get_msk(ml.flag, _mapf_boss);
    }
    return 0;
 }

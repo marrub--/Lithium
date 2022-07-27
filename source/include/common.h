@@ -166,10 +166,10 @@ cvar_x(tic, player_scoresound, bool)
 
 #ifndef NDEBUG
 #define Dbg_Stat(...) \
-   (dbglevel(log_devh) ? (ACS_BeginPrint(), (__VA_ARGS__), dbgstat[dbgstatnum++] = ACS_EndStrParam(), (void)0) : (void)0)
+   (dbglevel(log_devh) ? (ACS_BeginPrint(), (__VA_ARGS__), wl.dbgstat[wl.dbgstatnum++] = ACS_EndStrParam(), (void)0) : (void)0)
 
 #define Dbg_Note(...) \
-   (dbglevel(log_devh) ? (ACS_BeginPrint(), (__VA_ARGS__), dbgnote[dbgnotenum++] = ACS_EndStrParam(), (void)0) : (void)0)
+   (dbglevel(log_devh) ? (ACS_BeginPrint(), (__VA_ARGS__), ml.dbgnote[ml.dbgnotenum++] = ACS_EndStrParam(), (void)0) : (void)0)
 
 #define Dbg_Trace(n) (ACS_BeginPrint(), PrintChrLi(__func__), ACS_PrintInt(n), ACS_EndLog())
 
@@ -244,9 +244,6 @@ struct cvars {
 extern struct cvars cv;
 
 #ifndef NDEBUG
-extern str dbgstat[],  dbgnote[];
-extern i32 dbgstatnum, dbgnotenum;
-
 #define dbglevel(level) get_bit(cv.debug_level, level)
 #define dbgflags(flags) get_bit(cv.debug_flags, flags)
 #define dbglevel_any()  !!cv.debug_level

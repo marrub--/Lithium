@@ -14,7 +14,7 @@
 #include "p_player.h"
 #include "w_world.h"
 
-void Scr_HInit(void) {
+void Scr_MInit(void) {
    k64 taxpct = ACS_RandomFixed(0, 4 / 100.0);
 
 #define GenPay(name, mul) \
@@ -29,11 +29,11 @@ void Scr_HInit(void) {
 
 #undef GenPay
 
-   if(wl.ticks <= wl.pay.par) wl.pay.activities.par     = 10000;
-   if(wl.pay.killpct >= 100)  wl.pay.activities.kill100 = 10000;
-   if(wl.pay.itempct >= 100)  wl.pay.activities.item100 = 5000;
-   if(wl.pay.scrtpct >= 100)  wl.pay.activities.scrt100 = 15000;
-   if(ACS_Random(0, 10) == 0) wl.pay.activities.sponsor = ACS_Random(1, 3) * 5000;
+   if(ACS_Timer() <= wl.pay.par) wl.pay.activities.par     = 10000;
+   if(wl.pay.killpct >= 100)     wl.pay.activities.kill100 = 10000;
+   if(wl.pay.itempct >= 100)     wl.pay.activities.item100 = 5000;
+   if(wl.pay.scrtpct >= 100)     wl.pay.activities.scrt100 = 15000;
+   if(ACS_Random(0, 10) == 0)    wl.pay.activities.sponsor = ACS_Random(1, 3) * 5000;
 
    wl.pay.total  = wl.pay.killscr + wl.pay.itemscr;
    wl.pay.total -= wl.pay.tax = wl.pay.total * taxpct;

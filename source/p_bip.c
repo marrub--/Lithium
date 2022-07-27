@@ -269,11 +269,11 @@ void P_BIP_Unlock(struct page *page, bool from_load) {
          MailNotify(page->name);
       }
 
-      page->time = wl.ticks;
+      page->time = ACS_Timer();
 
       if(!from_load && page->category <= _bipc_last_normal) {
          set_bit(page->flags, _page_new);
-         if(!get_bit(page->flags, _page_auto) && wl.ticks > 3) {
+         if(!get_bit(page->flags, _page_auto) && ACS_Timer() > 3) {
             P_Data_Save();
          }
       }

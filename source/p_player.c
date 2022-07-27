@@ -30,14 +30,12 @@ static void P_Atr_pTick(void);
 static void P_Aug_pTick(void);
 static void P_initCbi(void);
 
-dynam_aut script type("enter") void Z_PlayerEntry(void) {
+dynam_aut script void P_Player(void) {
    Dbg_Log(log_dev, _l(__func__));
 
-   if(!ml.init) {
-      ACS_Delay(2);
-   }
+   pl.setActivator();
 
-   if(!wl.init || get_msk(ml.flag, _mapf_kind) != _mapk_normal) {
+   if(get_msk(ml.flag, _mapf_kind) != _mapk_normal) {
       ACS_SetPlayerProperty(true, true, PROP_TOTALLYFROZEN);
       return;
    }
@@ -299,7 +297,7 @@ void P_Scr_Take(score_t score) {
 }
 
 script static void P_bossWarningDone(void) {
-   if(wl.bossspawned) {
+   if(get_msk(ml.flag, _mapf_boss) == _mapb_spawned) {
       pl.logB(1, tmpstr(lang_discrim(sl_log_bosswarn)));
    }
 }
@@ -397,8 +395,8 @@ alloc_aut(0) stkcall static i32 P_playerColor(void) {
 }
 
 alloc_aut(0) stkcall script static void P_doDepthMeter(void) {
-   i32 prev_level = (wl.mapscleared % 32) * 8;
-   i32 next_level = (wl.mapscleared + 1 % 32) * 8;
+   i32 prev_level = (wl.hubscleared % 32) * 8;
+   i32 next_level = (wl.hubscleared + 1 % 32) * 8;
    i32 player_clr = P_playerColor() & 0xFFFFFF;
    for(i32 i = 0; i < 140; ++i) {
       i32 curr_level = lerpk(prev_level, next_level, i < 70 ? ease_out_cubic(i / 70.0k) : 1.0k);
@@ -420,7 +418,7 @@ alloc_aut(0) stkcall script static void P_doDepthMeter(void) {
 alloc_aut(0) stkcall script static void P_doIntro(void) {
    pl.missionstatshow = pl.missionstatshowmax = 170;
 
-   if(wl.mapscleared != 0 || pl.done_intro & pl.pclass) {
+   if(wl.hubscleared != 0 || pl.done_intro & pl.pclass) {
       P_doDepthMeter();
       return;
    }
@@ -633,7 +631,7 @@ static void P_Spe_pTick(void) {
          if(pl.shield == pl.old.shield) {
             StartSound(ss_player_ari_shield_regenl, lch_shield, CHANF_MAYBE_LOCAL|CHANF_UI|CHANF_LOOP, 1.0, ATTN_STATIC);
          }
-         if(wl.ticks % 3 == 0) {
+         if(ACS_Timer() % 3 == 0) {
             pl.setShield(pl.shield + 1);
          }
          if(pl.shield == pl.shieldmax) {

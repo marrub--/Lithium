@@ -134,11 +134,10 @@ void lith_moveLaser(double pit) {
 }
 
 void lith_spawnLaserTrace(double pit) {
-   if(!owner) return;
-
    let ply = Lith_Player(owner);
-   let sz  = ply.player.viewz - ply.pos.z;
+   if(!ply) return;
 
+   let sz  = ply.player.viewz - ply.pos.z;
    let loc = Lith_UTIL.TraceFrom(ply, ply.m_iyaw, ply.m_ipitch - pit, 2048, sz);
    Spawn("Lith_700Laser", loc);
 

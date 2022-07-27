@@ -23,11 +23,6 @@ string m_Obituary;
 name m_DmgType;
 bool m_DmgWorld;
 int m_BossLevel;
-private Lith_LineTracer m_tracer;
-
-override void onRegister() {
-   m_tracer = new("Lith_LineTracer");
-}
 
 static clearScope Lith_HERMES Instance()
    {return Lith_HERMES(Find('Lith_HERMES'));}

@@ -97,6 +97,7 @@ enum ZscName(PClass) {
 #define P_None() (!pl.active)
 #define P_Wep_CurType() (pl.weapon.cur->info->type)
 
+script void P_Player(void);
 script void P_Init(void);
 script void P_Data_Load(void);
 script void P_Data_Save(void);

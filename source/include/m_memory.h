@@ -28,7 +28,6 @@ enum {
    _tag_item,
    _tag_logs,
    _tag_plyr,
-   _tag_temp,
 
    _tag_max
 };

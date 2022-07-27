@@ -58,7 +58,7 @@ void Upgr_Flashlight_Update(void) {
       } else if(udata.battery < 0) {
          udata.battery = 0;
          udata.on = false;
-      } else if(udata.battery < bat_life / 4 && wl.ticks % 10 == 0) {
+      } else if(udata.battery < bat_life / 4 && ACS_Timer() % 10 == 0) {
          udata.intensity = ACS_RandomFixed(0.25, 0.75);
       }
    }

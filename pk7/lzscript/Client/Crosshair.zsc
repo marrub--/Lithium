@@ -52,7 +52,7 @@ clearScope textureId xhairW() const {
 private ui void drawCrosshair(RenderEvent evt) {
    let pl = evt.camera;
 
-   vector3 viewPos = (evt.viewPos.xy, evt.viewPos.z - lith_hermes.getViewHeight(pl) + lith_hermes.getAttackHeight(pl));
+   vector3 viewPos = (evt.viewPos.xy, evt.viewPos.z - pl.player.viewHeight + lith_hermes.getAttackHeight(pl));
 
    double yaw   = evt.viewAngle + Lith_UTIL.pData(_pdt_addy)/FIX;
    double pitch = evt.viewPitch + Lith_UTIL.pData(_pdt_addp)/FIX;

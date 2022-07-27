@@ -172,7 +172,7 @@ enum {
    _sfont_max,
 };
 
-stkcall void Draw_Init(void);
+stkcall void DrawInit(void);
 stkcall i32 Draw_GetCr(i32 n);
 stkcall struct i32v2 const *TextSize(str s, str font, i32 pos);
 stkcall struct i32v2 const *TextureSize(str tx);

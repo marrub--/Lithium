@@ -297,8 +297,8 @@ void TerminalGUI(u32 tact) {
    str br;
    switch(tact) {
    case TACT_LOGON:
-   case TACT_LOGOFF: br = fast_strdup(CanonTime(ct_date, wl.ticks)); break;
-   default:          br = ns(lang(sl_term_use_to_ack));              break;
+   case TACT_LOGOFF: br = fast_strdup(CanonTime(ct_date, ACS_Timer())); break;
+   default:          br = ns(lang(sl_term_use_to_ack));                 break;
    }
    PrintText_str(br, sf_ltrmfont, CR_RED, tright,2, tbottom,2);
 
@@ -378,7 +378,7 @@ void DialogueGUI(void) {
    PrintChrLi("\Cd> Remote: ");
    ACS_PrintString(srem);
    PrintChrLi("\n\Cd> Date: ");
-   PrintChrSt(CanonTime(ct_full, wl.ticks));
+   PrintChrSt(CanonTime(ct_full, ACS_Timer()));
    PrintText(sf_lmidfont, CR_WHITE, left,1, top,1);
 
    if(text) {

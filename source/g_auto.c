@@ -196,7 +196,7 @@ bool G_Filler(i32 x, i32 y, struct gui_fil *fil, bool held) {
 
    if(held) {
       ++fil->cur;
-   } else if(fil->cur && wl.ticks % 4 == 0) {
+   } else if(fil->cur && ACS_Timer() % 4 == 0) {
       --fil->cur;
    }
 

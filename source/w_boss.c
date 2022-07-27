@@ -126,7 +126,7 @@ static bool CheckDead(struct boss *b, i32 num) {
 }
 
 script void SpawnBosses(score_t sum, bool force) {
-   if(get_msk(ml.flag, _mapf_cat) == _mapc_lithium || (!force && sum < scorethreshold)) {
+   if(get_msk(ml.flag, _mapf_boss) == _mapb_nospawn || (!force && sum < scorethreshold)) {
       return;
    }
 
@@ -218,7 +218,7 @@ void Z_PhantomDeath(void) {
    boss->phase++;
    boss = nil;
 
-   wl.bossspawned = false;
+   set_msk(ml.flag, _mapf_boss, _mapb_none);
 }
 
 script_str ext("ACS") addr(OBJ "SpawnBoss")
@@ -233,7 +233,7 @@ void Z_SpawnBoss(void) {
    Dbg_Note(_l("boss: "), _p((cstr)boss->name), _l(" phase "), _p(boss->phase),
             _l(" spawned\n"));
 
-   wl.bossspawned = true;
+   set_msk(ml.flag, _mapf_boss, _mapb_spawned);
 }
 
 script static bool chtf_summon_boss(cheat_params_t const params) {

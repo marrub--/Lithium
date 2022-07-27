@@ -161,6 +161,7 @@
 #define _l(s) PrintChrLi(s)
 #define _c(c) ACS_PrintChar(c)
 
+script void StrInit(void);
 stkcall void PrintChars(cstr s, mem_size_t n);
 stkcall void PrintChrSt(cstr s);
 stkcall i32 radix(char c);

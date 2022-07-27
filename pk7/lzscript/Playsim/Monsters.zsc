@@ -143,7 +143,7 @@ static void SpawnBoss(Actor a, string name, int phase)
 }
 
 static void triggerBoss() {
-   if(Lith_UTIL.pData(_pdt_bossspawned)) return;
+   if(Lith_UTIL.pData(_pdt_mapb) == _mapb_spawned) return;
 
    double minRadius = getDefaultByType('Lith_Phantom').radius;
    double minHeight = getDefaultByType('Lith_Phantom').height;

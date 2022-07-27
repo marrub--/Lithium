@@ -139,7 +139,7 @@ void P_Log_Entry(void) {
 
    log.curmap = lm;
 
-   pl.logF(tmpstr(lang(sl_enter_fmt)), lm->name, CanonTime(ct_full, wl.ticks));
+   pl.logF(tmpstr(lang(sl_enter_fmt)), lm->name, CanonTime(ct_full, ACS_Timer()));
 }
 
 script void P_Log_PTick(void) {

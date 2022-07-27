@@ -46,22 +46,23 @@ struct FadeMsg {
 const DPTR_MAX = 8192;
 const TPTR_MAX = 8192*32;
 
-private transient DrawData[DPTR_MAX] m_d;
-private transient string  [TPTR_MAX] m_txt;
-private transient int     [TPTR_MAX] m_lnx;
-private transient int                m_tPtr;
-private transient int                m_dPtr;
-private transient FadeMsg[256]       m_fadeMsg;
-private transient vector2            m_virtualSize;
-private transient int                m_breakX;
-private transient bool               m_noDraw;
-private transient bool               m_english;
-private transient Font               m_uFntSml;
-private transient Font               m_lMidFont;
-private transient Font               m_lTrmFont;
-private transient Font               m_lBigFont;
-private transient Font               m_lJTrmFont;
-private transient Font               m_newConsoleFont;
+private DrawData[DPTR_MAX] m_d;
+private string  [TPTR_MAX] m_txt;
+private int     [TPTR_MAX] m_lnx;
+private int                m_tPtr;
+private int                m_dPtr;
+private FadeMsg[256]       m_fadeMsg;
+private vector2            m_virtualSize;
+private int                m_breakX;
+private bool               m_noDraw;
+private bool               m_english;
+private Font               m_uFntSml;
+private Font               m_lMidFont;
+private Font               m_lTrmFont;
+private Font               m_lBigFont;
+private Font               m_lJTrmFont;
+private Font               m_newConsoleFont;
+private Lith_LineTracer    m_tracer;
 
 static ui void drawRect(int sx, int sy, int px, int py, color cr) {
    Screen.dim(cr, cr.a/255.0, px, py, sx, sy);
@@ -87,7 +88,7 @@ private transient int  m_itemColor;
 
 private void tickNearbyItems() {
    m_showItems = lith_hud_showitems;
-   m_itemColor = lith_hud_itemcolor;
+   m_itemColor = acs_executeWithResult(lsc_drawcr, lith_hud_itemcolor);
 }
 
 private ui void drawNearbyItems(RenderEvent evt) {
@@ -105,7 +106,7 @@ private ui void drawNearbyItems(RenderEvent evt) {
             float  dist  = mo.distance3D(evt.camera);
             float  alpha = 1.0 - clamp(dist / 256.0, 0.0, 1.0);
             int    sw    = fnt.stringWidth(tag);
-            int    cr    = acs_executeWithResult(lsc_drawcr, m_itemColor);
+            int    cr    = m_itemColor;
             Screen.drawText(fnt, cr, px - sw / 2, py, tag, DTA_Alpha,alpha,
                             DTA_VirtualWidth,320, DTA_VirtualHeight,240);
          }
@@ -412,6 +413,7 @@ static Lith_RenderProvider create() {
    r.m_newConsoleFont = 'newconsolefont';
 
    r.projectRegister();
+   r.m_tracer = new("Lith_LineTracer");
 
    return r;
 }
@@ -688,6 +690,23 @@ static clearscope void StartSound(Actor mo, sound snd, int slot, int flags, doub
    } else if(mo) {
       mo.A_StartSound(snd, slot, flags, volume, attenuation, pitch);
    }
+}
+
+clearScope vector3 traceFromPos(Sector sec, vector3 pos, double yaw, double pitch, double dist, Actor ignore, bool floor, ETraceFlags flags) {
+   yaw   = Lith_UTIL.constDeg(yaw);
+   pitch = Lith_UTIL.constDeg(pitch);
+
+   let len = cos(pitch);
+   let dir = (len * cos(yaw), len * sin(yaw), -sin(pitch));
+
+   m_tracer.m_ignore = ignore;
+   m_tracer.trace(pos, sec, dir, dist, flags);
+
+   return m_tracer.results.hitPos;
+}
+
+clearScope vector3 traceFromActor(Actor mo, double yaw, double pitch, double dist, double offsetZ, bool floor, ETraceFlags flags) {
+   return traceFromPos(mo.curSector, mo.pos + (0.0, 0.0, offsetZ), yaw, pitch, dist, mo, floor, flags);
 }
 
 /* EOF */

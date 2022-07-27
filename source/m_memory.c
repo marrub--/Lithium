@@ -41,17 +41,10 @@ struct dpl_blk {
    char dat[_dpl_bsz];
 };
 
-noinit static
-char mem_dat[_mem_siz];
-
-noinit static
-struct mem_top *mem_top;
-
-noinit static
-char pls_stk[_pls_siz], *pls_cur;
-
-noinit static
-struct dpl_blk dpl_dat[_dpl_siz], *dpl_ina, *dpl_act;
+noinit static char            mem_dat[_mem_siz];
+noinit static struct mem_top *mem_top;
+noinit static char            pls_stk[_pls_siz], *pls_cur;
+noinit static struct dpl_blk  dpl_dat[_dpl_siz], *dpl_ina, *dpl_act;
 
 alloc_aut(0) stkcall static
 cstr TagName(mem_tag_t tag) {
@@ -66,7 +59,6 @@ cstr TagName(mem_tag_t tag) {
    case _tag_item: return "item";
    case _tag_logs: return "log";
    case _tag_plyr: return "player";
-   case _tag_temp: return "temporary";
    }
    return "unknown";
 }
@@ -251,17 +243,18 @@ alloc_aut(0) stkcall static
 void PrintDplBlks(struct dpl_blk *cur) {
    mem_size_t i = 0;
    do {
+      PrintChrLi("cur:");
       ACS_PrintHex((intptr_t)cur);
-      ACS_PrintChar(' ');
+      PrintChrLi(" prv:");
       ACS_PrintHex((intptr_t)cur->prv);
-      ACS_PrintChar(' ');
+      PrintChrLi(" nxt:");
       ACS_PrintHex((intptr_t)cur->nxt);
       ACS_PrintChar('\n');
       i++;
    } while(cur = cur->nxt);
    ACS_PrintChar('(');
    ACS_PrintInt(i);
-   PrintChrLi(" in list)\n");
+   PrintChrLi(" in list)");
 }
 
 alloc_aut(0) stkcall
@@ -299,12 +292,12 @@ void __GDCC__alloc_dump(void) {
    } while(blk != mem_top->cur);
 
    ACS_BeginPrint();
-   PrintChrLi("total sizes\n");
+   PrintChrLi("total sizes");
    for(mem_tag_t i = 0; i < _tag_max; i++) {
+      ACS_PrintChar('\n');
       PrintChrSt(TagName(i));
       PrintChrLi(":\t\t");
       ACS_PrintInt(tagsizes[i]);
-      ACS_PrintChar('\n');
    }
    ACS_EndLog();
 
@@ -313,10 +306,29 @@ void __GDCC__alloc_dump(void) {
       PrintChrLi("active freelist\n");
       PrintDplBlks(dpl_act);
    }
+   ACS_EndLog();
+   ACS_BeginPrint();
    if(dpl_ina) {
       PrintChrLi("inactive freelist\n");
       PrintDplBlks(dpl_ina);
    }
+   ACS_EndLog();
+
+   ACS_BeginPrint();
+   PrintChrLi("mem_dat=");
+   ACS_PrintHex((intptr_t)mem_dat);
+   PrintChrLi("\nmem_top=");
+   ACS_PrintHex((intptr_t)mem_top);
+   PrintChrLi("\npls_stk=");
+   ACS_PrintHex((intptr_t)pls_stk);
+   PrintChrLi("\npls_cur=");
+   ACS_PrintHex((intptr_t)pls_cur);
+   PrintChrLi("\ndpl_dat=");
+   ACS_PrintHex((intptr_t)dpl_dat);
+   PrintChrLi("\ndpl_ina=");
+   ACS_PrintHex((intptr_t)dpl_ina);
+   PrintChrLi("\ndpl_act=");
+   ACS_PrintHex((intptr_t)dpl_act);
    ACS_EndLog();
 }
 

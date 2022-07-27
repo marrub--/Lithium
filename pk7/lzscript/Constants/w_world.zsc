@@ -32,13 +32,13 @@ enum Lith_PData {
    _pdt_oldhealth,
    _pdt_hudenabled,
    _pdt_flashbattery,
-   _pdt_bossspawned,
    _pdt_soulsfreed,
    _pdt_ptid,
    _pdt_mapf,
    _pdt_mapc,
    _pdt_mapr,
    _pdt_mapk,
+   _pdt_mapb,
 };
 
 
@@ -106,17 +106,16 @@ enum Lith_DamageType {
 
 enum Lith_ScriptNum {
    lsc_gsinit = 17000,
-   lsc_strinit,
+   lsc_worldopen,
    lsc_pdata,
    lsc_addangle,
    lsc_monsterinfo,
    lsc_raindropspawn,
    lsc_monstertype,
-   lsc_worldreopen,
-   lsc_worldopen,
    lsc_drawcr,
    lsc_cheatinput,
    lsc_giveammo,
+   lsc_hubclear,
    
    
 
@@ -178,12 +177,20 @@ enum Lith_MapFlag {
    _mapf_skyreplace,
 
    
+   _mapf_boss_beg,
+   _mapf_boss_end = _mapf_boss_beg + 2,
    _mapf_cat_beg,
    _mapf_cat_end = _mapf_cat_beg + 2,
    _mapf_rain_beg,
    _mapf_rain_end = _mapf_rain_beg + 3,
    _mapf_kind_beg,
    _mapf_kind_end = _mapf_kind_beg + 2,
+};
+
+enum Lith_MapBoss {
+   _mapb_nospawn,
+   _mapb_none,
+   _mapb_spawned,
 };
 
 enum Lith_MapRain {

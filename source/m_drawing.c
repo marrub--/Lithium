@@ -35,7 +35,7 @@ struct i32v2 const *TextureSize(str t) {
 }
 
 alloc_aut(0) stkcall
-void Draw_Init(void) {
+void DrawInit(void) {
    #define GlobalCr(name) \
       globalcolors.name = ServCallI(sm_FindFontColor, so_##name);
    #include "m_drawing.h"

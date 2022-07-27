@@ -14,7 +14,7 @@ private bool m_extraHard;
 bool m_tainted;
 
 override void WorldLoaded(WorldEvent ev) {
-   if(ev.isSaveGame){
+   if(ev.isSaveGame) {
       if(m_tainted) {
          CallACS("Lith_TimelineInconsistent");
       }
@@ -43,11 +43,9 @@ override void WorldLoaded(WorldEvent ev) {
       }
    }
 
-   if(!ev.isReopen) {
-      ACS_ExecuteWithResult(lsc_gsinit);
-      ACS_ExecuteWithResult(lsc_strinit);
+   if(!ev.isReOpen) {
+      ACS_ExecuteWithResult(lsc_worldopen);
    }
-   ACS_ExecuteWithResult(lsc_worldopen, ev.isReopen);
 
    if(__lith_fun & lfun_ragnarok) Ragnarok();
 
@@ -115,6 +113,9 @@ override void WorldThingDestroyed(WorldEvent ev)
 }
 
 override void WorldUnloaded(WorldEvent ev) {
+   if(!(level.clusterFlags & level.CLUSTER_HUB || level.info.flags2 & LEVEL2_HEXENHACK) || LevelInfo.findLevelInfo(ev.nextMap).cluster != level.cluster) {
+      ACS_ExecuteWithResult(lsc_hubclear);
+   }
    m_bossDeathInit = 0;
 
    let it = ThinkerIterator.Create("Lith_InventoryItem");

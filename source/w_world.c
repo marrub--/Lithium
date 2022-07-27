@@ -39,15 +39,7 @@ i32 UniqueID(i32 tid) {
    return id;
 }
 
-alloc_aut(0) script static
-void Boss_HInit(void) {
-   ACS_Delay(1); /* Delay another tic for monster spawners. */
-
-   SpawnBosses(pl.scoresum, false);
-}
-
-static
-void CheckModCompat(void) {
+static void CheckModCompat(void) {
    i32 tid;
 
    if(EDataI(_edt_legendoom))              set_bit(wl.compat, _comp_legendoom);
@@ -56,8 +48,7 @@ void CheckModCompat(void) {
    if(EDataI(_edt_colorfulhell))           set_bit(wl.compat, _comp_ch);
 }
 
-static
-void UpdateGame(void) {
+static void UpdateGame(void) {
    i32 ver_num = version_name_to_num(tmpstr(CVarGetS(sc_version)));
 
    if(ver_num < vernum_1_5_2_0 && CVarGetI(sc_sv_difficulty) == 1) {
@@ -79,24 +70,41 @@ void UpdateGame(void) {
    CVarSetS(sc_version, st_ver);
 }
 
-static
-void MInitPre(void) {
+script static void GInit(void) {
    Dbg_Log(log_dev, _l(__func__));
-   #define cvar_map(ty, na) cv.na = cvar_get(na);
-   #define cvar_x(ev, na, ty) cvar_##ev(ty, na)
-   #include "common.h"
-   /* Init a random seed from the map. */
+   CheckModCompat();
+   UpdateGame();
+   wl.cbiperf = 10;
+   Mon_Init();
+   Wep_GInit();
+   wl.init = true;
+}
+
+script static void MInit(void) {
+   Dbg_Log(log_dev, _l(__func__));
+   /* Init a random seed for the map. */
    ml.seed = ACS_Random(0, INT32_MAX);
    /* Set the air control because ZDoom's default sucks. */
    ACS_SetAirControl(0.77);
    /* Set up everything else about the map. -T */
+   if(ACS_GameType() == GAME_TITLE_MAP) {
+      set_msk(ml.flag, _mapf_kind, _mapk_title);
+   } else if(MapNum == LithMapEnd) {
+      set_msk(ml.flag, _mapf_kind, _mapk_end);
+   } else {
+      set_msk(ml.flag, _mapf_kind, _mapk_normal);
+   }
    ml.soulsfreed = 0;
    srand(ml.seed);
    ml.lump = strp(ACS_PrintName(PRINTNAME_LEVEL));
    ml.name = strp(ACS_PrintName(PRINTNAME_LEVELNAME));
    ml.boss = EDataI(_edt_bosslevel);
    if(MapNum >= LithMapBeg && MapNum <= LithMapEnd) {
-      set_msk(ml.flag, _mapf_cat, _mapc_lithium);
+      set_msk(ml.flag, _mapf_cat,  _mapc_lithium);
+      set_msk(ml.flag, _mapf_boss, _mapb_nospawn);
+   }
+   if(cv.sv_nobosses) {
+      set_msk(ml.flag, _mapf_boss, _mapb_nospawn);
    }
    if(ml.boss == boss_iconofsin && GetFun() & lfun_tainted) {
       set_bit(ml.flag, _mapf_corrupted);
@@ -139,60 +147,8 @@ void MInitPre(void) {
    } else if(sky == sp_SKY3 || sky == sp_SKY4 || sky == sp_RSKY3) {
       set_msk(ml.flag, _mapf_cat, _mapc_hell);
    }
-}
-
-static
-void GInitPre(void) {
-   Dbg_Log(log_dev, _l(__func__));
-   CheckModCompat();
-   UpdateGame();
-   #define cvar_gbl(ty, na) cv.na = cvar_get(na);
-   #define cvar_x(ev, na, ty) cvar_##ev(ty, na)
-   #include "common.h"
-}
-
-static
-void GInit(void) {
-   Dbg_Log(log_dev, _l(__func__));
-
-   wl.cbiperf = 10;
-
-   Mon_Init();
-   Wep_GInit();
-
-   wl.init = true;
-}
-
-static
-void MInitPst(void) {
-   Dbg_Log(log_dev, _l(__func__));
-
-   wl.pay.par = ACS_GetLevelInfo(LEVELINFO_PAR_TIME) * 35;
-
-   wl.pay.killmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_MONSTERS);
-   wl.pay.itemmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_ITEMS);
-   wl.pay.scrtmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_SECRETS);
-
-   ml.init = true;
-}
-
-static
-void MInit(void) {
-   Dbg_Log(log_dev, _l(__func__));
-
    Dlg_MInit();
-}
-
-static
-void HInitPre(void) {
-   Dbg_Log(log_dev, _l(__func__));
-
-   if(wl.unloaded) {
-      wl.mapscleared++;
-   }
-
-   wl.bossspawned = false;
-
+   SpawnBosses(pl.scoresum, false);
    if(get_bit(ml.flag, _mapf_skyreplace)) {
       if(get_msk(ml.flag, _mapf_cat) == _mapc_hell) {
          ACS_ChangeSky(sp_LITHSKRD, sp_LITHSKRD);
@@ -205,40 +161,80 @@ void HInitPre(void) {
    }
 }
 
-static
-void HInit(void) {
+static void MInitPst(void) {
    Dbg_Log(log_dev, _l(__func__));
 
-   if(!cv.sv_nobosses) {
-      Boss_HInit();
+   if(wl.hubscleared != 0) {
+      Scr_MInit();
    }
 
-   /* Payout, which is not done on the first map. */
-   if(wl.mapscleared != 0) Scr_HInit();
-
-   /* Cluster messages. */
    if(pl.pclass & pcl_outcasts) {
-      if(wl.mapscleared == 10) P_BIP_Unlock(P_BIP_NameToPage("MCluster1"), false);
-      if(wl.mapscleared == 20) P_BIP_Unlock(P_BIP_NameToPage("MCluster2"), false);
-      if(wl.mapscleared == 25) P_BIP_Unlock(P_BIP_NameToPage("MCluster3"), false);
+      if(wl.hubscleared == 10) P_BIP_Unlock(P_BIP_NameToPage("MCluster1"), false);
+      if(wl.hubscleared == 20) P_BIP_Unlock(P_BIP_NameToPage("MCluster2"), false);
+      if(wl.hubscleared == 25) P_BIP_Unlock(P_BIP_NameToPage("MCluster3"), false);
+   }
+
+   /* TODO: figure out what to do with these in a hub setup */
+   wl.pay.par = ACS_GetLevelInfo(LEVELINFO_PAR_TIME) * 35;
+
+   wl.pay.killmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_MONSTERS);
+   wl.pay.itemmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_ITEMS);
+   wl.pay.scrtmax += ACS_GetLevelInfo(LEVELINFO_TOTAL_SECRETS);
+}
+
+dynam_aut script void W_World(void) {
+   Dbg_Log(log_dev, _l(__func__));
+   MInitPst();
+   P_Player();
+   /* Main loop. */
+   for(;;) {
+      if(ACS_Timer() > cv.sv_failtime * 35 * 60 * 60) {
+         F_Start(_finale_time_out);
+         return;
+      }
+
+      #define cvar_tic(ty, na) cv.na = cvar_get(na);
+      #define cvar_x(ev, na, ty) cvar_##ev(ty, na)
+      #include "common.h"
+
+      i32 scrts = ACS_GetLevelInfo(LEVELINFO_FOUND_SECRETS);
+      i32 kills = ACS_GetLevelInfo(LEVELINFO_KILLED_MONSTERS);
+      i32 items = ACS_GetLevelInfo(LEVELINFO_FOUND_ITEMS);
+
+      if(kills > ml.prevkills)  wl.pay.killnum  += kills - ml.prevkills;
+      if(items > ml.previtems)  wl.pay.itemnum  += items - ml.previtems;
+      if(scrts > ml.prevscrts) {wl.pay.scrtnum  += scrts - ml.prevscrts;
+                                wl.secretsfound += scrts - ml.prevscrts;}
+
+      ml.prevscrts = scrts;
+      ml.prevkills = kills;
+      ml.previtems = items;
+
+      if(ACS_Timer() % 5 == 0 && ml.missionkill < kills) {
+         if(++ml.missionprc >= 150) {
+            SpawnBosses(0, true);
+            ml.missionprc = 0;
+         }
+         ml.missionkill = kills;
+      }
+
+      Dbg_Stat(_l("mission%: "), _p(ml.missionprc), _c('\n'));
+
+      ACS_Delay(1);
+
+      #ifndef NDEBUG
+      wl.dbgstatnum = 0;
+      #endif
+
+      if(cv.sv_autosave && ACS_Timer() && ACS_Timer() % (35 * 60 * cv.sv_autosave) == 0) {
+         ACS_Autosave();
+      }
    }
 }
 
-dynam_aut script ext("ACS") addr(lsc_worldopen)
-void Z_World(bool is_reopen) {
+alloc_aut(0) script static void W_WrongConfig() {
    Dbg_Log(log_dev, _l(__func__));
-
-   if(ACS_GameType() == GAME_TITLE_MAP) {
-      set_msk(ml.flag, _mapf_kind, _mapk_title);
-   } else if(MapNum == LithMapEnd) {
-      set_msk(ml.flag, _mapf_kind, _mapk_end);
-   } else {
-      set_msk(ml.flag, _mapf_kind, _mapk_normal);
-   }
-
-   Draw_Init();
-
-   if(CVarGetI(sc_sv_failtime) == 0) for(;;) {
+   for(;;) {
       SetSize(320, 240);
       SetClipW(0, 0, 320, 240, 320);
       PrintTextChL(
@@ -260,107 +256,57 @@ void Z_World(bool is_reopen) {
       ClearClip();
       ACS_Delay(1);
    }
+}
 
-   #ifndef NDEBUG
-   dbgnotenum = 0;
-   #endif
+script ext("ACS") addr(lsc_gsinit) void GsInit(void);
 
-   /* Now, initialize everything.
-    * Start by deallocating temporary tags.
-    */
-   Xalloc(_tag_temp);
+alloc_aut(0) script ext("ACS") addr(lsc_worldopen) void Z_World(void) {
+   if(!wl.init) {
+      GsInit();
+      StrInit();
+      DrawInit();
+      #define cvar_gbl(ty, na) cv.na = cvar_get(na);
+      #define cvar_x(ev, na, ty) cvar_##ev(ty, na)
+      #include "common.h"
+   }
 
-   if(!wl.init) GInitPre();
-   if(!ml.init) MInitPre();
-   if(!wl.init) GInit();
-   if(!ml.init) MInit();
+   /* TODO: handle map cvars properly */
+   #define cvar_map(ty, na) cv.na = cvar_get(na);
+   #define cvar_tic(ty, na) cv.na = cvar_get(na);
+   #define cvar_x(ev, na, ty) cvar_##ev(ty, na)
+   #include "common.h"
 
-   /* Hub-static pre-player init. */
-   if(!is_reopen) HInitPre();
+   Dbg_Log(log_dev, _l(__func__));
 
-   wl.unloaded = false; /* Unloaded flag can be reset now. */
-
-   /* Special map main-loop functions. */
-   switch(get_msk(ml.flag, _mapf_kind)) {
-   case _mapk_title:
-      W_Title();
-      return;
-   case _mapk_end:
-      F_Run();
+   if(CVarGetI(sc_sv_failtime) == 0) {
+      W_WrongConfig();
       return;
    }
 
-   ACS_Delay(2); /* Wait for players to get initialized. */
+   if(!wl.init) {
+      GInit();
+   }
+   MInit();
 
-   /* Hub-static post-player init. */
-   if(!is_reopen) HInit();
-
-   /* Module-static post-hub init. */
-   if(!ml.init) MInitPst();
-
-   /* Main loop. */
-   i32 prevscrts = 0;
-   i32 prevkills = 0;
-   i32 previtems = 0;
-
-   i32 missionkill = 0;
-   i32 missionprc  = 0;
-
-   for(;;) {
-      if(wl.ticks > cv.sv_failtime * 35 * 60 * 60 && get_msk(ml.flag, _mapf_cat) != _mapc_lithium) {
-         F_Start(_finale_time_out);
-         return;
-      }
-
-      #define cvar_tic(ty, na) cv.na = cvar_get(na);
-      #define cvar_x(ev, na, ty) cvar_##ev(ty, na)
-      #include "common.h"
-
-      i32 scrts = ACS_GetLevelInfo(LEVELINFO_FOUND_SECRETS);
-      i32 kills = ACS_GetLevelInfo(LEVELINFO_KILLED_MONSTERS);
-      i32 items = ACS_GetLevelInfo(LEVELINFO_FOUND_ITEMS);
-
-      if(kills > prevkills)  wl.pay.killnum  += kills - prevkills;
-      if(items > previtems)  wl.pay.itemnum  += items - previtems;
-      if(scrts > prevscrts) {wl.pay.scrtnum  += scrts - prevscrts;
-                             wl.secretsfound += scrts - prevscrts;}
-
-      prevscrts = scrts;
-      prevkills = kills;
-      previtems = items;
-
-      if(ACS_Timer() % 5 == 0 && missionkill < kills) {
-         if(++missionprc >= 150) {
-            SpawnBosses(0, true);
-            missionprc = 0;
-         }
-         missionkill = kills;
-      }
-
-      Dbg_Stat(_l("mission%: "), _p(missionprc), _c('\n'));
-
-      ACS_Delay(1);
-
-      #ifndef NDEBUG
-      dbgstatnum = 0;
-      #endif
-      wl.ticks++;
-
-      if(cv.sv_autosave && wl.ticks % (35 * 60 * cv.sv_autosave) == 0) {
-         ACS_Autosave();
-      }
+   /* choose main-loop function */
+   switch(get_msk(ml.flag, _mapf_kind)) {
+   case _mapk_title: W_Title(); break;
+   case _mapk_end:   F_Run();   break;
+   default:          W_World(); break;
    }
 }
 
-script type("unloading") static
-void Z_WorldUnload(void) {
-   wl.unloaded = true;
+script type("unloading") static void Z_WorldUnload(void) {
    Dbg_Log(log_dev, _l(__func__));
-
    pl.setActivator();
    P_Upg_PDeinit();
    P_GUI_Close();
    P_Dat_PTickPst();
+}
+
+script ext("ACS") addr(lsc_hubclear) void Z_HubCleared(void) {
+   Dbg_Log(log_dev, _l(__func__));
+   wl.hubscleared++;
 }
 
 /* EOF */

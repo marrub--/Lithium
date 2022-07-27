@@ -61,13 +61,13 @@ enum ZscName(PData) {
    _pdt_oldhealth,
    _pdt_hudenabled,
    _pdt_flashbattery,
-   _pdt_bossspawned,
    _pdt_soulsfreed,
    _pdt_ptid,
    _pdt_mapf,
    _pdt_mapc,
    _pdt_mapr,
    _pdt_mapk,
+   _pdt_mapb,
 };
 
 /* External Data */
@@ -135,17 +135,16 @@ enum ZscName(DamageType) {
 
 enum ZscName(ScriptNum) {
    lsc_gsinit = 17000,
-   lsc_strinit,
+   lsc_worldopen,
    lsc_pdata,
    lsc_addangle,
    lsc_monsterinfo,
    lsc_raindropspawn,
    lsc_monstertype,
-   lsc_worldreopen,
-   lsc_worldopen,
    lsc_drawcr,
    lsc_cheatinput,
    lsc_giveammo,
+   lsc_hubclear,
    #define w_setptr_x(x) lsc_setptr##x,
    #include "w_world.h"
 };
@@ -189,12 +188,20 @@ enum ZscName(MapFlag) {
    _mapf_skyreplace,
 
    /* categories */
+   _mapf_boss_beg,
+   _mapf_boss_end = _mapf_boss_beg + 2,
    _mapf_cat_beg,
    _mapf_cat_end = _mapf_cat_beg + 2,
    _mapf_rain_beg,
    _mapf_rain_end = _mapf_rain_beg + 3,
    _mapf_kind_beg,
    _mapf_kind_end = _mapf_kind_beg + 2,
+};
+
+enum ZscName(MapBoss) {
+   _mapb_nospawn,
+   _mapb_none,
+   _mapb_spawned,
 };
 
 enum ZscName(MapRain) {
@@ -296,11 +303,8 @@ enum compat_flag {
 struct world {
    struct payoutinfo pay;
 
-   i32  mapscleared;
-   bool unloaded;
+   i32  hubscleared;
    i32  secretsfound;
-   i32  ticks;
-   bool bossspawned;
    i32  cbiperf;
    i64  cbiupgr;
    i32  compat;
@@ -309,26 +313,39 @@ struct world {
    i32          a_x, a_y;
    struct polar a_angles[8];
    i32          a_cur;
+
+   #ifndef NDEBUG
+   str dbgstat[64];
+   i32 dbgstatnum;
+   #endif
 };
 
 struct map_locals {
-   i32  mission;
-   i32  temperature;
-   i32  humidity;
-   i32  soulsfreed;
-   i32  boss;
-   str  name;
-   str  lump;
-   i32  id;
-   i32  seed;
-   i32  flag;
-   bool init;
+   i32 mission;
+   i32 temperature;
+   i32 humidity;
+   i32 soulsfreed;
+   i32 boss;
+   str name;
+   str lump;
+   i32 id;
+   i32 seed;
+   i32 flag;
+   i32 prevscrts;
+   i32 prevkills;
+   i32 previtems;
+   i32 missionkill;
+   i32 missionprc;
+   #ifndef NDEBUG
+   str dbgnote[64];
+   i32 dbgnotenum;
+   #endif
 };
 
 extern struct world            wl;
 extern struct map_locals lmvar ml;
 
-void Scr_HInit(void);
+void Scr_MInit(void);
 script cstr CanonTime(i32 type, i32 time);
 optargs(1) i32 UniqueID(i32 tid);
 void BeginAngles(i32 x, i32 y);
