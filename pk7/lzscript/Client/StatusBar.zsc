@@ -20,7 +20,7 @@ override void drawPowerups() {}
 
 override bool processMidPrint(Font fnt, string text, bool bold) {
    if(text && text.length()) {
-      Lith_HERMES.log(msg_huds, 1, text);
+      EventHandler.sendNetworkEvent("Lith_Log:" .. text, msg_huds, 1);
    }
    return true;
 }

@@ -8,12 +8,8 @@
 
 extend class Lith_HERMES;
 
-struct HermesData clearScope {
-   string logName;
-   string bipName;
-}
-
-private HermesData m_data;
+string m_logName;
+string m_bipName;
 
 static clearScope double GetViewHeight(Actor mo) {
    return Lith_Player(mo).player.viewz - mo.pos.z;
@@ -77,10 +73,10 @@ static bool UseItem(Actor mo, int item)
    else   return false;
 }
 
-static clearScope void Log(int type, int levl, string name) {
+static void Log(int type, int levl, string name) {
    let sv = instance();
    if(sv) {
-      sv.m_data.logName = name;
+      sv.m_logName = name;
       callAcs("Lith_LogS", levl, type);
    }
 }
@@ -88,7 +84,7 @@ static clearScope void Log(int type, int levl, string name) {
 static void UnlockBip(Actor mo, string name) {
    let sv = Instance();
    if(sv && mo.Player) {
-      sv.m_data.bipName = name;
+      sv.m_bipName = name;
       mo.ACS_ScriptCall("Lith_BIPUnlock");
    }
 }

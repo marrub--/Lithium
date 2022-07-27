@@ -406,4 +406,10 @@ override void RenderOverlay(RenderEvent evt) {
    }
 }
 
+override void networkProcess(ConsoleEvent evt) {
+   if(evt.name.left(9) == "Lith_Log:") {
+      log(evt.args[0], evt.args[1], evt.name.mid(9));
+   }
+}
+
 /* EOF */

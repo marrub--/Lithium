@@ -149,7 +149,7 @@ static void triggerBoss() {
    double minHeight = getDefaultByType('Lith_Phantom').height;
 
    Actor mo;
-   for(let it = ThinkerIterator.create(); (mo = Actor(it.next()));) {
+   for(let it = ThinkerIterator.create('Actor'); (mo = Actor(it.next()));) {
       if(mo.bIsMonster && mo.radius >= minRadius && mo.height >= minHeight) {
          mo.acs_scriptCall("Lith_SpawnBoss", 0);
          break;
