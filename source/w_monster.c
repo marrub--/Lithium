@@ -137,9 +137,10 @@ void BaseMonsterLevel(dmon_t *m) {
 
    bias *= bias;
    switch(ACS_GameSkill()) {
+   case _skill_tourist:   bias += 0.1; break;
+   default:
    case _skill_normal:    bias += 0.2; break;
    case _skill_hard:      bias += 0.3; break;
-   case _skill_tourist:   bias += 0.1; break;
    case _skill_nightmare: bias += 0.5; break;
    }
    if(cv.sv_extrahard) {
@@ -361,7 +362,7 @@ void PrintMonsterInfo(dmon_t *m) {
       __nprintf("resist %S: %i", sa_dmgtype_names[i], m->resist[i]);
    }
 
-   ACS_EndLog();
+   EndLogEx(_pri_bold|_pri_nonotify);
 }
 #endif
 
@@ -686,7 +687,7 @@ void Z_MonsterInfo(void) {
       }
    }
 
-   Dbg_Err(_l("no monster "), _p((cstr)cname));
+   PrintErr(_l("no monster "), _p((cstr)cname));
 }
 
 script_str ext("ACS") addr(OBJ "MonsterFinalized")

@@ -52,9 +52,7 @@
    })
 #define unwrap_print(e) \
    unwrap_do(e, { \
-      ACS_BeginPrint(); \
-      PrintChrSt((e)->err); \
-      ACS_EndLog(); \
+      PrintErr(_p((e)->err)); \
    })
 
 #define gosub_enable() lbl _gsret = lnil

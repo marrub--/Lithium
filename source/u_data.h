@@ -40,7 +40,7 @@ enum {
    _ug_available,
    _ug_active,
    _ug_owned,
-   _ug_wasactive, /* for reinitializing on map load */
+   _ug_wasactive, /* for reinitializing */
 };
 
 struct upgr_data_Seven7s {

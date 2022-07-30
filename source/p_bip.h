@@ -91,7 +91,6 @@ extern struct page bippages[];
 extern mem_size_t  bippagenum;
 
 script void P_BIP_PInit(void);
-stkcall void P_BIP_PQuit(void);
 
 script void P_BIP_Unlock(struct page *page, bool from_load);
 stkcall struct page *P_BIP_NameToPage(cstr name);

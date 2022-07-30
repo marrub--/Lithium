@@ -11,10 +11,6 @@ extend class Lith_HERMES;
 string m_logName;
 string m_bipName;
 
-static clearScope double GetViewHeight(Actor mo) {
-   return Lith_Player(mo).viewHeight;
-}
-
 static clearScope double GetAttackHeight(Actor mo) {
    return mo.height / 2.0 + mo.player.mo.attackZOffset * mo.player.crouchFactor;
 }

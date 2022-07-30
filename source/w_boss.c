@@ -89,13 +89,13 @@ static void TriggerBoss(void) {
    if(!boss) return;
 
    if(boss->dead) {
-      Dbg_Err(_p((cstr)boss->name), _l(" is dead, invalid num"));
+      PrintErr(_p((cstr)boss->name), _l(" is dead, invalid num"));
       boss = nil;
       return;
    }
 
    if(boss->phase > boss->phasenum) {
-      Dbg_Err(_l("invalid boss phase"));
+      PrintErr(_l("invalid boss phase"));
       boss = nil;
       return;
    }

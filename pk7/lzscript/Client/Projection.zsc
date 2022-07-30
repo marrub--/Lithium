@@ -13,11 +13,11 @@
 
 extend class Lith_RenderProvider;
 
-private transient Lith_Le_Viewport   viewport;
-private transient Lith_Le_ProjScreen proj;
-private transient Lith_Le_GlScreen   projGl;
-private transient Lith_Le_SwScreen   projSw;
-private transient CVar               cvarRenderer;
+private Lith_Le_Viewport   viewport;
+private Lith_Le_ProjScreen proj;
+private Lith_Le_GlScreen   projGl;
+private Lith_Le_SwScreen   projSw;
+private CVar               cvarRenderer;
 
 private void projectSetRenderer() {
    let oldProj = proj;

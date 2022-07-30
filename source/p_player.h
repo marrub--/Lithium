@@ -275,8 +275,6 @@ struct player {
 
    i32 autobuy;
 
-   bool upgrinit;
-
    /* Inventory */
    struct container inv[_inv_num];
 
@@ -284,7 +282,6 @@ struct player {
    struct item *selitem;
    struct item *opnitem;
    bool         movitem;
-   bool         invinit;
 
    /* HUD */
    bool hudenabled;
@@ -311,7 +308,6 @@ struct player {
    i32 regenwait;
 
    i32 missionstatshow;
-   i32 missionstatshowmax;
 
    /* Input */
    struct gui_txt tb;

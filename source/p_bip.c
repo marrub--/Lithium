@@ -235,14 +235,12 @@ void P_BIP_PInit(void) {
          P_BIP_Unlock(page, false);
       }
    }
-
-   bip.init = true;
 }
 
 script
 void P_BIP_Unlock(struct page *page, bool from_load) {
    if(!page) {
-      Dbg_Err(_l("page was null"));
+      PrintErr(_l("page was null"));
       return;
    }
 
@@ -289,11 +287,6 @@ void P_BIP_Unlock(struct page *page, bool from_load) {
 }
 
 alloc_aut(0) stkcall
-void P_BIP_PQuit(void) {
-   bip.init = false;
-}
-
-alloc_aut(0) stkcall
 cstr P_BIP_CategoryToName(i32 category) {
    switch(category) {
       #define bip_category_x(c) case _bipc_##c: return #c;
@@ -313,8 +306,8 @@ struct page *P_BIP_NameToPage(cstr name) {
          return page;
       }
    }
-   Dbg_Err(_l("couldn't find page "), _p(name), _l(" or "),
-           _p((cstr)discrim));
+   PrintErr(_l("couldn't find page "), _p(name), _l(" or "),
+            _p((cstr)discrim));
    return nil;
 }
 

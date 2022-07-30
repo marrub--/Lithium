@@ -30,7 +30,7 @@ class SrcsEnt
 end
 
 def  bin(s) = "bin/"                    + s + ".ir"
-def  hdr(s) = "source/include/"         + s
+def  hdr(s) = "source/"                 + s
 def  src(s) = "source/"                 + s
 def  txt(s) = "text/"                   + s
 def  zsc(s) = "pk7/lzscript/Constants/" + s

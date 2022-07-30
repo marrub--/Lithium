@@ -39,6 +39,7 @@ i32 Z_LPData(i32 info, i32 permutation) {
    case _pdt_mapr:         return get_msk(ml.flag, _mapf_rain);
    case _pdt_mapk:         return get_msk(ml.flag, _mapf_kind);
    case _pdt_mapb:         return get_msk(ml.flag, _mapf_boss);
+   case _pdt_maps:         return get_msk(ml.flag, _mapf_sky);
    }
    return 0;
 }

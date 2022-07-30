@@ -30,6 +30,15 @@ override void onRegister() {
    m_ren = Lith_RenderProvider.create();
 }
 
+override void worldLoaded(WorldEvent evt) {
+   if(evt.isSaveGame) {
+      m_ren.replaceSky();
+      if(Lith_UTIL.pData(_pdt_mapf, _mapf_corrupted)) {
+         CallACS("Lith_TimelineInconsistent");
+      }
+   }
+}
+
 override void worldUnloaded(WorldEvent evt) {
    m_ren.unload();
 }

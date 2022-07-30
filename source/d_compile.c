@@ -49,7 +49,7 @@ bool chtf_dbg_dlg(cheat_params_t const params) {
    } else {
       __nprintf("dialogue %u has no code", n);
    }
-   ACS_EndLog();
+   EndLogEx(_pri_critical|_pri_nonotify);
 
    return true;
 }

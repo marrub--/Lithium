@@ -28,13 +28,15 @@ void P_Ren_LevelUp(void) {
    }
 }
 
+script_str ext("ACS") addr(OBJ "ShowMission") void Z_ShowMission(void) {
+   pl.missionstatshow = ACS_Timer() + 105;
+}
+
 alloc_aut(0) stkcall static
 void P_Ren_Mission(void) {
-   if(pl.missionstatshow) {
-      k32 ss    = pl.missionstatshow--;
-      k32 max   = pl.missionstatshowmax;
-      k32 quart = max / 4.0k;
-      k32 alpha = ss < quart ? ease_out_cubic(ss / quart) : 1.0k;
+   i32 delta = ACS_Timer() - pl.missionstatshow;
+   if(delta < 0) {
+      k32 alpha = delta > -43 ? ease_out_cubic(delta / -43.0k) : 1.0k;
       SetSize(320, 240);
       ACS_BeginPrint();
       _p(fast_strupper(ml.name)); _c('\n');
@@ -43,7 +45,7 @@ void P_Ren_Mission(void) {
          _l("\CiVACUUM\n");
       } else {
          _l("\Cv"); _p(ml.temperature); _l(u8"°C\n");
-         _l("\Cy");    _p(ml.humidity); _l("%RH\n");
+         _l("\Cy"); _p(ml.humidity);    _l("%RH\n");
       }
       switch(get_msk(ml.flag, _mapf_rain)) {
       case _mapr_rain:  _l("\CnRAINING (WATER)\n");   break;

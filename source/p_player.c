@@ -404,8 +404,9 @@ alloc_aut(0) stkcall script static void P_doDepthMeter(void) {
       i32 alpha_i = 0xFF * alpha_k;
       i32 alpha_m = alpha_i << 24;
       i32 cr      = 0xFFFF0000 | (alpha_i << 8) | alpha_i;
+      SetSize(320, 240);
+      PrintTextAX_str(st_depth, sf_smallfnt, CR_WHITE, 320,2, 87,2, alpha_k, _u_no_unicode);
       SetSize(640, 480);
-      PrintTextAX_str(st_depth, sf_smallfnt, CR_WHITE, 640,2, 176-2,2, alpha_k, _u_no_unicode);
       for(i32 j = 0; j < 16; ++j) {
          i32 w = j % 3 == 0 ? 24 : 8;
          PrintRect(640 - w, 176 + j * 8, w, 2, cr);
@@ -416,7 +417,7 @@ alloc_aut(0) stkcall script static void P_doDepthMeter(void) {
 }
 
 alloc_aut(0) stkcall script static void P_doIntro(void) {
-   pl.missionstatshow = pl.missionstatshowmax = 170;
+   pl.missionstatshow = ACS_Timer() + 170;
 
    if(wl.hubscleared != 0 || pl.done_intro & pl.pclass) {
       P_doDepthMeter();

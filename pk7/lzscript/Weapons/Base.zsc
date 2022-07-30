@@ -162,6 +162,9 @@ action(Weapon) void lith_a_overlayTick() {
    } else {
       a = lith_weapons_alpha;
       style = style_translucent;
+      if(!invoker.m_ads) {
+         a_zoomFactor(1.0, ZOOM_INSTANT);
+      }
    }
 
    a *= Lith_UTIL.pData(_pdt_alpha) / FIX;
@@ -242,8 +245,6 @@ action(Weapon) void Lith_A_Raise(Lith_RaiseSpeed speed) {
    int raiseSpeed = invoker.lith_getRaiseSpeed(speed);
    let psp = player.getPSprite(_psp_weapon);
    if(psp) {
-      A_Overlay(_psp_overlay_hax, "_MultithreadedFuckingOverlaysBecauseGodIsDeadAndGrafZahlKilledHim");
-
       if(psp.y <= weaponBottom) {
          resetPSprite(psp);
       }
@@ -289,8 +290,9 @@ action(Weapon) void Lith_A_DoubleOffset(bool left, int x, int y) {
 }
 
 action(Weapon) state Lith_A_Ready(int flags = 0) {
-   if(!countInv("Lith_WeaponScopedToken") && !invoker.m_ads) {
-      a_zoomFactor(1.0, ZOOM_INSTANT);
+   let psp = player.getPSprite(_psp_overlay_hax);
+   if(!psp || !psp.curState) {
+      A_Overlay(_psp_overlay_hax, "_MultithreadedFuckingOverlaysBecauseGodIsDeadAndGrafZahlKilledHim");
    }
 
    let st = invoker.lith_ready(flags);

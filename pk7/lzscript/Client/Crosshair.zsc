@@ -12,8 +12,8 @@
 
 extend class Lith_RenderProvider;
 
-private transient uint8 m_xhairR, m_xhairG, m_xhairB, m_xhairA, m_xhairStyle;
-private transient bool m_xhairEnable, m_xhairEnableJuicer;
+private uint8 m_xhairR, m_xhairG, m_xhairB, m_xhairA, m_xhairStyle;
+private bool m_xhairEnable, m_xhairEnableJuicer;
 
 private void tickCrosshair() {
    m_xhairR            = clamp(lith_xhair_r, 0, 255);

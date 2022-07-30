@@ -39,6 +39,7 @@ enum Lith_PData {
    _pdt_mapr,
    _pdt_mapk,
    _pdt_mapb,
+   _pdt_maps,
 };
 
 
@@ -46,13 +47,15 @@ enum Lith_EData {
    _edt_bosslevel,
    _edt_paused,
    _edt_spawnhealth,
+   _edt_viewheight,
+   _edt_attackheight,
+   _edt_lightning,
    _edt_heretic,
    _edt_chex,
    _edt_rampancy,
    _edt_legendoom,
    _edt_colorfulhell,
    _edt_riflegrenade,
-
    _edt_obituary,
    _edt_logname,
    _edt_bipname,
@@ -168,15 +171,9 @@ enum Lith_RifleMode {
 };
 
 enum Lith_MapFlag {
-   
    _mapf_corrupted,
    _mapf_thunder,
    _mapf_vacuum,
-
-   
-   _mapf_skyreplace,
-
-   
    _mapf_boss_beg,
    _mapf_boss_end = _mapf_boss_beg + 2,
    _mapf_cat_beg,
@@ -185,6 +182,8 @@ enum Lith_MapFlag {
    _mapf_rain_end = _mapf_rain_beg + 3,
    _mapf_kind_beg,
    _mapf_kind_end = _mapf_kind_beg + 2,
+   _mapf_sky_beg,
+   _mapf_sky_end = _mapf_sky_beg + 2,
 };
 
 enum Lith_MapBoss {
@@ -203,7 +202,7 @@ enum Lith_MapRain {
 
 enum Lith_MapCategory {
    _mapc_none,
-   _mapc_lithium,
+   _mapc_abyss,
    _mapc_interstice,
    _mapc_hell,
 };
@@ -212,6 +211,13 @@ enum Lith_MapKind {
    _mapk_normal,
    _mapk_title,
    _mapk_end,
+};
+
+enum Lith_MapSky {
+   _maps_nochange,
+   _maps_vanilla,
+   _maps_replace,
+   _maps_shader,
 };
 
 

@@ -377,7 +377,7 @@ struct setting const st_wld[] = {
    {_s_label, "st_labl_wld_env"},
    {_s_enume, "sv_rain",           S_cvInteg, S_bndi(0, 4), "rain"},
    {_s_boole, "player_rainshader", S_cvBoole},
-   {_s_boole, "sv_sky",            S_cvBoole},
+   {_s_enume, "sv_sky",            S_cvInteg, S_bndi(0, 4), "sky"},
    {_s_fixed, "sv_skydarkening",   S_cvFixed, S_bndk(0.0, 1.0),  "mult"},
 };
 

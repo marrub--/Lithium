@@ -18,6 +18,7 @@
 #ifndef STR_PREFIXES_ONLY
 #include <GDCC.h>
 #include <stdio.h>
+#include "m_math.h"
 
 #define lang_fmt(...) (StrParamBegin(__VA_ARGS__), lang(ACS_EndStrParam()))
 #define lang_fmt_discrim(...) (lang_fmt(__VA_ARGS__, pl.discrim) |? lang_fmt(__VA_ARGS__, ""))
@@ -147,6 +148,9 @@
                                   ACS_StrLen(_src) + 1, _src, 0); \
    })
 
+#define EndLogEx(level) \
+   ServCallV(sm_Print, (level), ACS_EndStrParam())
+
 #define ns(s) (s |? st_null)
 
 #define _p(v) \
@@ -160,6 +164,18 @@
       str:     ACS_PrintString)((v)))
 #define _l(s) PrintChrLi(s)
 #define _c(c) ACS_PrintChar(c)
+
+enum {
+   _pri_pickup,
+   _pri_death,
+   _pri_critical,
+   _pri_chat,
+   _pri_teamchat,
+   _pri_log,
+   _pri_bold = 200,
+   _pri_nonotify = dst_bit(10),
+   _pri_nolog = dst_bit(11),
+};
 
 script void StrInit(void);
 stkcall void PrintChars(cstr s, mem_size_t n);

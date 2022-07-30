@@ -68,17 +68,17 @@ alloc_aut(0) stkcall static
 struct mem_blk *CheckUsedBlock(struct mem_blk *blk, cstr func) {
    if((void *)blk < (void *)mem_dat ||
       (void *)blk > (void *)(mem_dat + sizeof mem_dat)) {
-      Dbg_Err(_l("out of bounds block "), ACS_PrintHex((intptr_t)blk));
+      PrintErr(_l("out of bounds block "), ACS_PrintHex((intptr_t)blk));
       return nil;
    }
 
    if(blk->idn != _mem_idn) {
-      Dbg_Err(_l("invalid identifier for "), ACS_PrintHex((intptr_t)blk));
+      PrintErr(_l("invalid identifier for "), ACS_PrintHex((intptr_t)blk));
       return nil;
    }
 
    if(blk->tag == _tag_free) {
-      Dbg_Err(_l("already freed "), ACS_PrintHex((intptr_t)blk));
+      PrintErr(_l("already freed "), ACS_PrintHex((intptr_t)blk));
       return nil;
    }
 
@@ -122,7 +122,7 @@ void Dalloc(register void *p) {
    [[return]] __asm(":\"done\" Rjnk()");
 
 error:
-   Dbg_Err(_l("memory not initialized but freeing pointer"));
+   PrintErr(_l("memory not initialized but freeing pointer"));
 }
 
 alloc_aut(0) stkcall
@@ -151,7 +151,7 @@ void *Malloc(register mem_size_t rs, register mem_tag_t tag) {
          /* well, no more memory to check...
           * don't worry, this won't ever really happen, right?
           */
-         Dbg_Err(_l("out of memory - couldn't allocate "), _p(s));
+         PrintErr(_l("out of memory - couldn't allocate "), _p(s));
          return nil;
       } else if(cur->tag != _tag_free) {
          blk = cur = cur->nxt;
@@ -285,7 +285,7 @@ void __GDCC__alloc_dump(void) {
       ACS_PrintChar(')');
       PrintChrLi(" idn:");
       ACS_PrintHex(blk->idn);
-      ACS_EndLog();
+      EndLogEx(_pri_bold|_pri_nonotify);
 
       tagsizes[blk->tag] += blk->siz;
       blk = blk->nxt;
@@ -299,20 +299,20 @@ void __GDCC__alloc_dump(void) {
       PrintChrLi(":\t\t");
       ACS_PrintInt(tagsizes[i]);
    }
-   ACS_EndLog();
+   EndLogEx(_pri_bold|_pri_nonotify);
 
    ACS_BeginPrint();
    if(dpl_act) {
       PrintChrLi("active freelist\n");
       PrintDplBlks(dpl_act);
    }
-   ACS_EndLog();
+   EndLogEx(_pri_bold|_pri_nonotify);
    ACS_BeginPrint();
    if(dpl_ina) {
       PrintChrLi("inactive freelist\n");
       PrintDplBlks(dpl_ina);
    }
-   ACS_EndLog();
+   EndLogEx(_pri_bold|_pri_nonotify);
 
    ACS_BeginPrint();
    PrintChrLi("mem_dat=");
@@ -329,7 +329,7 @@ void __GDCC__alloc_dump(void) {
    ACS_PrintHex((intptr_t)dpl_ina);
    PrintChrLi("\ndpl_act=");
    ACS_PrintHex((intptr_t)dpl_act);
-   ACS_EndLog();
+   EndLogEx(_pri_bold|_pri_nonotify);
 }
 
 #define GetDplBlk(p) \
@@ -374,9 +374,9 @@ dyn:
    return (dpl_act = p)->dat;
 
 overflow:
-   Dbg_Err(_l("stack overflow "), ACS_PrintHex((intptr_t)pls_stk),
-           _c(' '),               ACS_PrintHex((intptr_t)pls_cur),
-           _c(' '),               _p(s));
+   PrintErr(_l("stack overflow "), ACS_PrintHex((intptr_t)pls_stk),
+            _c(' '),               ACS_PrintHex((intptr_t)pls_cur),
+            _c(' '),               _p(s));
    return nil;
 }
 
@@ -404,8 +404,8 @@ void __GDCC__Plsf(void *p) {
    );
 
 invalid:
-   Dbg_Err(_l("incorrect stack pointer "), ACS_PrintHex((intptr_t)p),
-           _c(' '),                        ACS_PrintHex((intptr_t)pls_cur));
+   PrintErr(_l("incorrect stack pointer "), ACS_PrintHex((intptr_t)p),
+            _c(' '),                        ACS_PrintHex((intptr_t)pls_cur));
 }
 
 /* EOF */

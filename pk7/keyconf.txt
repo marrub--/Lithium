@@ -15,6 +15,7 @@ addmenukey "$LITH_CTRL_LIGHT"   lith_k_light
 addmenukey "$LITH_CTRL_ZOOMIN"  "lith_k_zoom 30"
 addmenukey "$LITH_CTRL_ZOOMOUT" "lith_k_zoom -60"
 addmenukey "$LITH_CTRL_GLARE"   lith_k_glare
+addmenukey "$LITH_CTRL_MISSION" lith_k_mission
 
 addkeysection "$LITH_CTRL_AUTOGROUPS" Lith_AutoGroups
 
@@ -30,21 +31,18 @@ addmenukey "$LITH_CTRL_TOGGRP4" "lith_k_toggrp 3"
 
 // Aliases ═══════════════════════════════════════════════════════════════════╕
 alias lith_k_opencbi "pukename Lith_KeyOpenCBI"
-
 alias lith_k_light "pukename Lith_KeyLight"
-
 alias lith_k_zoom "pukename Lith_KeyZoom %1"
-
 alias lith_k_glare "pukename Lith_KeyGlare"
-
+alias lith_k_mission "pukename Lith_ShowMission"
 alias lith_k_buygrp "pukename Lith_KeyBuyAutoGroup %1"
 alias lith_k_toggrp "pukename Lith_KeyToggleAutoGroup %1"
-
 alias +lith_k_qact "+user4"
 alias -lith_k_qact "-user4"
 
 // Binds ═════════════════════════════════════════════════════════════════════╕
 defaultbind i lith_k_opencbi
 defaultbind g +lith_k_qact
+defaultbind m lith_k_mission
 
 // EOF

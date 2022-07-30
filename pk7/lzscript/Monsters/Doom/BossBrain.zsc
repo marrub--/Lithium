@@ -240,9 +240,11 @@ override void postBeginPlay()
       m_bossEye = true;
    }
 
-   bool fun = __lith_fun & lfun_tainted;
-   if(fun) health *= 4;
-   m_shieldMax = fun ? 50 : 100;
+   m_shieldMax = 50;
+   if(__lith_fun & lfun_tainted) {
+      health *= 4;
+      m_shieldMax *= 2;
+   }
    m_shieldRegenTicks = 0;
    m_shield = m_shieldMax;
    m_oldShield = m_shieldMax;

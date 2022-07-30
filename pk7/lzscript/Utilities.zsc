@@ -105,7 +105,6 @@ struct Lith_UTIL {
 
 class Lith_LineTracer : LineTracer {
    Actor m_ignore;
-
    override ETraceStatus traceCallback() {
       let mo = results.hitActor;
       let ln = results.hitLine;
@@ -129,6 +128,42 @@ class Lith_LineTracer : LineTracer {
          break;
       }
       return tomare ? TRACE_STOP : TRACE_SKIP;
+   }
+}
+
+class Lith_FnBool abstract {
+   virtual bool run() {return false;}
+}
+
+class Lith_FnBoolFuse : Lith_FnBool {
+   bool        m_result;
+   Lith_FnBool m_fInner;
+   static Lith_FnBoolFuse create(class<Lith_FnBoolFuse> ty, Lith_FnBool fInner) {
+      let f = Lith_FnBoolFuse(new(ty));
+      f.m_fInner = fInner;
+      return f;
+   }
+   override bool run() {
+      if(!m_result) {
+         m_result = m_fInner.run();
+      }
+      return m_result;
+   }
+}
+
+class Lith_FnSector : Lith_FnBool abstract {
+   static Lith_FnSector init(class<Lith_FnSector> ty) {
+      let f = Lith_FnSector(new(ty));
+      return f;
+   }
+   virtual bool call(Sector sec) {return false;}
+   override bool run() {
+      for(int i = 0, j = level.sectors.size(); i < j; ++i) {
+         if(call(level.sectors[i])) {
+            return true;
+         }
+      }
+      return false;
    }
 }
 

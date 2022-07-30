@@ -148,6 +148,11 @@
 == \#st_name_rain_2 | Always rain
 == \#st_name_rain_3 | Always snow
 
+== \#st_name_sky_0 | No change
+== \#st_name_sky_1 | Vanilla-like
+== \#st_name_sky_2 | Replace skies
+== \#st_name_sky_3 | Shader
+
 == \#st_labl_gui | GUI
 == \#st_labl_hud | HUD
 == \#st_labl_itm | $\#BIP_NAME_ITEMS
@@ -352,9 +357,11 @@ if you really want more.
 
 == \#sv_revenge | Explode on death
 == \#sv_sky | Replace skies
-@@ \#TOOLTIP_sv_sky
-Replaces sky textures with ones from Lithium, which are intended to be
-more appropriate looking for the environment.
+%% \#TOOLTIP_sv_sky
+No change: No changes will be made to skies.
+Vanilla-like: Allows skies to have additional visual weather effects. May be incompatible with some maps.
+Replace skies: Replaces skies with ones designed for Lithium.
+Shader: A dynamic, soft sky replacement for a more chill atmosphere.
 
 \ck(Applies on next map start)
 

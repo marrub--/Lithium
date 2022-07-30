@@ -41,7 +41,6 @@ extern struct upgrade upgrinfo[UPGR_MAX];
 #undef Case
 
 script void P_Upg_PInit(void);
-void P_Upg_PQuit(void);
 void P_Upg_PDeinit(void);
 void P_Upg_PMInit(void);
 

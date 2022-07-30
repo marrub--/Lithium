@@ -49,6 +49,7 @@ class Lith_MenuDelegate : MenuDelegateBase {
 
       if(sel) {
          let pos  = getSelPos(sel);
+         /* FIXME: don't use lerp like this, timescale can change; set from tick */
          m_selPos = Lith_UTIL.vec2Lerp(m_selPos, pos, 0.25);
          let dw   = desc.displayWidth();
          let dh   = desc.displayHeight();
@@ -182,9 +183,9 @@ class Lith_SkillEpMenu : ListMenu {
 
 extend class Lith_RenderProvider;
 
-private transient ui int              m_screenDim;
-private transient ui Shape2DTransform m_menuRectXf;
-private transient ui Shape2D          m_menuRect;
+private ui int              m_screenDim;
+private ui Shape2DTransform m_menuRectXf;
+private ui Shape2D          m_menuRect;
 
 ui void tickMenu() {
    if(!m_menuRectXf) {

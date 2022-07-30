@@ -139,44 +139,54 @@ sc_:
 
 ## Methods / Members
 sm_:
+   m_:
+   - AmmoText
+   - DmgFac
+   - FxTID
+   - H
+   - InvEquip
+   - InvH
+   - InvName
+   - InvSell
+   - InvType
+   - InvW
+   - LogText
+   - OnGround
+   - Overdrive
+   - Shield
+   - Speed
+   - Trigger
+   - UpgradeBody
+   - UpgradeExtr
+   - UpgradeId
+   - UpgradeWeap
+   - W
    NO_PREFIX:
    - ActuallyEndTheGame
-   - AddItemPop:  addItemPop
-   - AddScoreNum: addScoreNum
-   - AddSection:  addSection
-   - AddStatFx:   addStatFx
+   - AddItemPop
+   - AddScoreNum
+   - AddSection
+   - AddStatFx
    - AdrenalineCheck
    - AlertMonsters
-   - AmmoText: m_ammoText
    - AutoReload
    - CheckLump
    - DelearSprite
    - DeleteItem
    - DieMonster
    - DieNow
-   - DmgFac: m_DmgFac
    - EDataI
    - EDataS
    - FindFontColor
    - FindLump
-   - FxTID: m_FxTID
-   - GetAttackHeight
    - GetCurMag
    - GetMaxMag
    - GetOutOfDodge
-   - GetViewHeight
    - GivePoison
    - GrabInput
-   - H:         m_H
-   - HasStatFx: hasStatFx
+   - HasStatFx
    - Health
    - Height
-   - InvEquip: m_InvEquip
-   - InvH:     m_InvH
-   - InvName:  m_InvName
-   - InvSell:  m_InvSell
-   - InvType:  m_InvType
-   - InvW:     m_InvW
    - IonizeFX
    - JumpZ
    - LA
@@ -192,46 +202,36 @@ sm_:
    - LX
    - LY
    - LZ
-   - Localize:   localize
-   - LogText:    m_logText
+   - Localize
    - MapNoRain:  "user_" OBJ "NoRain"
    - MapUseRain: "user_" OBJ "UseRain"
    - MonsterBarrierLook
    - Nuke
-   - OnGround:  m_OnGround
-   - Overdrive: m_Overdrive
    - PhantomOut
    - PhantomTeleport
    - PlayerDeath
    - PlayerDeathNuke
    - PlayerInit
    - PoisonFX
+   - Print
    - Project
    - PureSteggleEnergy
    - Radius
    - ReadLump
-   - RemStatFx: remStatFx
+   - RemStatFx
    - Set
    - SetFrozen
    - SetTeleFogTo
-   - Shield: m_shield
    - SpawnBoss
    - SpawnRain
-   - Speed: m_speed
    - StartSound
    - SurgeOfDestiny
    - TraceFrom
-   - Trigger: m_Trigger
    - TriggerBoss
-   - UpgradeBody: m_UpgradeBody
-   - UpgradeExtr: m_UpgradeExtr
-   - UpgradeId:   m_UpgradeId
-   - UpgradeWeap: m_UpgradeWeap
    - UseItem
    - UserX: user_X
    - UserY: user_Y
    - UserZ: user_Z
-   - W:     m_W
    - WaterLevel
 
    - boss:      BOSS
@@ -478,9 +478,6 @@ sp_:
    - LITHEND
    - LITHINFO
    - LITHMONS
-   - LITHSKDE
-   - LITHSKRD
-   - LITHSKS1
 
    - star: "*"
 

@@ -94,47 +94,54 @@ misc.barrel {
    }
 }
 
-world.splash {
-   # Splashes
-   == lsnd/World/Splashes
-   nukage Nukage # ???
+world {
+   == lsnd/World
+   thunder1 Lightning  # SI Series 6000
+   thunder2 Lightning2 # ^
+   $random thunder {thunder1, thunder2,}
 
-   water1 Water1 # Call of Duty: Modern Warfare 2
-   water2 Water2 # ^
-   water3 Water3 # ^
-   water4 Water4 # ^
-   water5 Water5 # ^
+   splash {
+      # Splashes
+      == lsnd/World/Splashes
+      nukage Nukage # ???
 
-   sludge1 Sludge1 # ???
-   sludge2 Sludge2 # ???
-   sludge3 Sludge3 # ???
-   sludge4 Sludge4 # ???
+      water1 Water1 # Call of Duty: Modern Warfare 2
+      water2 Water2 # ^
+      water3 Water3 # ^
+      water4 Water4 # ^
+      water5 Water5 # ^
 
-   lava1 Lava1 # ???
-   lava2 Lava2 # ???
-   lava3 Lava3 # ???
-   lava4 Lava4 # ???
+      sludge1 Sludge1 # ???
+      sludge2 Sludge2 # ???
+      sludge3 Sludge3 # ???
+      sludge4 Sludge4 # ???
 
-   $random water {
-      water1,
-      water2,
-      water3,
-      water4,
-      water5,
-   }
+      lava1 Lava1 # ???
+      lava2 Lava2 # ???
+      lava3 Lava3 # ???
+      lava4 Lava4 # ???
 
-   $random sludge {
-      sludge1,
-      sludge2,
-      sludge3,
-      sludge4,
-   }
+      $random water {
+         water1,
+         water2,
+         water3,
+         water4,
+         water5,
+      }
 
-   $random lava {
-      lava1,
-      lava2,
-      lava3,
-      lava4,
+      $random sludge {
+         sludge1,
+         sludge2,
+         sludge3,
+         sludge4,
+      }
+
+      $random lava {
+         lava1,
+         lava2,
+         lava3,
+         lava4,
+      }
    }
 }
 

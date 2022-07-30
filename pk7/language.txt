@@ -1692,6 +1692,10 @@
 "LITH_st_name_rain_1" = "Environment-based";
 "LITH_st_name_rain_2" = "Always rain";
 "LITH_st_name_rain_3" = "Always snow";
+"LITH_st_name_sky_0" = "No change";
+"LITH_st_name_sky_1" = "Vanilla-like";
+"LITH_st_name_sky_2" = "Replace skies";
+"LITH_st_name_sky_3" = "Shader";
 "LITH_st_labl_gui" = "GUI";
 "LITH_st_labl_hud" = "HUD";
 "LITH_st_labl_itm" = "$LITH_BIP_NAME_ITEMS";
@@ -1816,7 +1820,7 @@
 "LITH_TOOLTIP_sv_rain" = "\ck(Applies on next map start)";
 "LITH_sv_revenge" = "Explode on death";
 "LITH_sv_sky" = "Replace skies";
-"LITH_TOOLTIP_sv_sky" = "Replaces sky textures with ones from Lithium, which are intended to be more appropriate looking for the environment.\n\n\ck(Applies on next map start)";
+"LITH_TOOLTIP_sv_sky" = "No change: No changes will be made to skies.\nVanilla-like: Allows skies to have additional visual weather effects. May be incompatible with some maps.\nReplace skies: Replaces skies with ones designed for Lithium.\nShader: A dynamic, soft sky replacement for a more chill atmosphere.\n\n\ck(Applies on next map start)";
 "LITH_sv_skydarkening" = "Outside sector darkening";
 "LITH_sv_wepdrop" = "Drop weapons from zombies";
 "LITH_TOOLTIP_sv_wepdrop" = "Mainly exists for map compatibility. Drops weapons from zombie enemies when you don't have them already. May cause issues in normal gameplay.\n\n\ck(Applies on next map start)";
@@ -2242,6 +2246,7 @@
 "LITH_CTRL_OPENCBI" = "Open CBI";
 "LITH_CTRL_ZOOMIN" = "Zoom In";
 "LITH_CTRL_ZOOMOUT" = "Zoom Out";
+"LITH_CTRL_MISSION" = "Show Mission Status";
 "LITH_CTRL_AUTOGROUPS" = "Lithium Auto-groups";
 "LITH_CTRL_BUYGRP1" = "Buy \caSet 1";
 "LITH_CTRL_BUYGRP2" = "Buy \cdSet 2";

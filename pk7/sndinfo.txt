@@ -933,6 +933,9 @@ $volume amb/shatter 0.4
 misc/barrel/hit1 lsnd/World/Barrel/Hit
 misc/barrel/hit2 lsnd/World/Barrel/Hit2
 $random misc/barrel/hit { misc/barrel/hit1 misc/barrel/hit2 }
+world/thunder1 lsnd/World/Lightning
+world/thunder2 lsnd/World/Lightning2
+$random world/thunder { world/thunder1 world/thunder2 }
 world/splash/nukage lsnd/World/Splashes/Nukage
 world/splash/water1 lsnd/World/Splashes/Water1
 world/splash/water2 lsnd/World/Splashes/Water2

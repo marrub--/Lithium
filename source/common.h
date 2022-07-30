@@ -127,13 +127,11 @@ cvar_x(tic, player_scoresound, bool)
 #define GetY ACS_GetActorY
 #define GetZ ACS_GetActorZ
 
-#define GetHealth(tid)       GetMembI(tid, sm_Health)
-#define GetHeight(tid)       GetMembK(tid, sm_Height)
-#define GetNameTag(tid)      GetPropS(tid, APROP_NameTag)
-#define GetRadius(tid)       GetMembK(tid, sm_Radius)
-#define GetSpecies(tid)      GetPropS(tid, APROP_Species)
-#define GetViewHeight(tid)   ServCallK(sm_GetViewHeight)
-#define GetAttackHeight(tid) ServCallK(sm_GetAttackHeight)
+#define GetHealth(tid)  GetMembI(tid, sm_Health)
+#define GetHeight(tid)  GetMembK(tid, sm_Height)
+#define GetNameTag(tid) GetPropS(tid, APROP_NameTag)
+#define GetRadius(tid)  GetMembK(tid, sm_Radius)
+#define GetSpecies(tid) GetPropS(tid, APROP_Species)
 
 #define SetAlpha(tid, x)            SetPropK(tid, APROP_Alpha,            x)
 #define SetDamage(tid, x)           SetPropI(tid, APROP_Damage,           x)
@@ -171,7 +169,7 @@ cvar_x(tic, player_scoresound, bool)
 #define Dbg_Note(...) \
    (dbglevel(log_devh) ? (ACS_BeginPrint(), (__VA_ARGS__), ml.dbgnote[ml.dbgnotenum++] = ACS_EndStrParam(), (void)0) : (void)0)
 
-#define Dbg_Trace(n) (ACS_BeginPrint(), PrintChrLi(__func__), ACS_PrintInt(n), ACS_EndLog())
+#define Dbg_Trace(n) (ACS_BeginPrint(), PrintChrLi(__func__), ACS_PrintInt(n), EndLogEx(_pri_bold|_pri_nolog))
 
 #define Dbg_Log(level, ...) \
    (dbglevel(level) ? \
@@ -180,20 +178,21 @@ cvar_x(tic, player_scoresound, bool)
      ACS_PrintChar(':'), \
      ACS_PrintChar(' '), \
      (__VA_ARGS__), \
-     ACS_EndLog()) : \
+     EndLogEx(_pri_critical|_pri_nonotify)) : \
     (void)0)
-#define Dbg_Err(...) \
-   (ACS_BeginPrint(), \
-    PrintChrLi(__func__), \
-    PrintChrLi(" \CgERROR\C-: "), \
-    (__VA_ARGS__), \
-    ACS_EndLog())
+#define PrintErrLevel _pri_bold
 #else
 #define Dbg_Stat(...)
 #define Dbg_Note(...)
 #define Dbg_Log(...)
-#define Dbg_Err(...)
+#define PrintErrLevel (_pri_bold | _pri_nonotify)
 #endif
+#define PrintErr(...) \
+   (ACS_BeginPrint(), \
+    PrintChrLi(__func__), \
+    PrintChrLi(" \CgERROR\C-: "), \
+    (__VA_ARGS__), \
+    EndLogEx(PrintErrLevel))
 
 #define InvGive     ACS_GiveInventory
 #define InvMax(arg) ACS_GetMaxInventory(0, arg)

@@ -46,7 +46,7 @@ gameinfo {
    statScreen_ContentFont  = "bigupper", "Lith_Green"
 
    infoPage       = "HELP"
-   borderFlat     = "lgfx/Menu/Black.png"
+   borderFlat     = "LITHBLAK"
    pauseSign      = "lgfx/Menu/Pause.png"
    menuBackButton = "lgfx/Menu/BackUp.png"
 
@@ -69,7 +69,7 @@ automap {
 clearskills
 
 skill tourist {
-   acsReturn      = 2
+   acsReturn      = 0
    aggressiveness = -0.3
    damageFactor   = 0.1
    healthFactor   = 2
@@ -85,7 +85,7 @@ skill tourist {
 }
 
 skill normal {
-   acsReturn   = 0
+   acsReturn   = 2
    key         = "h"
    name        = "$DIFF_NORMAL"
    spawnFilter = 3
@@ -93,14 +93,14 @@ skill normal {
 }
 
 skill hard {
-   acsReturn   = 1
+   acsReturn   = 3
    key         = "u"
    name        = "$DIFF_HARD"
    spawnFilter = 4
 }
 
 skill nightmare {
-   acsReturn     = 3
+   acsReturn     = 4
    damageFactor  = 2
    key           = "t"
    monsterHealth = 0.5
@@ -127,22 +127,19 @@ gameDefaults {
 }
 
 map TITLEMAP "Abyss" {
-   levelNum = 1888001
-   sky1     = "LITHBLAK"
-   music    = "lmusic/into_abyss.opus"
+   sky1  = "LITHBLAK"
+   music = "lmusic/into_abyss.opus"
 }
 
 map TESTMAP "Test Map" {
-   levelNum = 1888000
-   music    = "lmusic/dandalins story.it"
-   next     = 1
-   sky1     = "LITHBGS4", 0.1
-   sky2     = "LITHSKD2"
+   music = "lmusic/dandalins story.it"
+   next  = 1
+   sky1  = "LITHSKCL", 0.1
+   sky2  = "LITHSKDE"
    doubleSky
 }
 
 map LITHEND "" {
-   levelNum = 1911777
    endOfGame
    noAutoSaveHint
    noClusterText

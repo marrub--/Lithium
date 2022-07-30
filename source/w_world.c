@@ -82,26 +82,19 @@ script static void GInit(void) {
 
 script static void MInit(void) {
    Dbg_Log(log_dev, _l(__func__));
-   /* Init a random seed for the map. */
-   ml.seed = ACS_Random(0, INT32_MAX);
-   /* Set the air control because ZDoom's default sucks. */
    ACS_SetAirControl(0.77);
-   /* Set up everything else about the map. -T */
-   if(ACS_GameType() == GAME_TITLE_MAP) {
-      set_msk(ml.flag, _mapf_kind, _mapk_title);
-   } else if(MapNum == LithMapEnd) {
-      set_msk(ml.flag, _mapf_kind, _mapk_end);
-   } else {
-      set_msk(ml.flag, _mapf_kind, _mapk_normal);
-   }
    ml.soulsfreed = 0;
+   ml.seed = ACS_Random(0, INT32_MAX);
    srand(ml.seed);
    ml.lump = strp(ACS_PrintName(PRINTNAME_LEVEL));
    ml.name = strp(ACS_PrintName(PRINTNAME_LEVELNAME));
    ml.boss = EDataI(_edt_bosslevel);
-   if(MapNum >= LithMapBeg && MapNum <= LithMapEnd) {
-      set_msk(ml.flag, _mapf_cat,  _mapc_lithium);
-      set_msk(ml.flag, _mapf_boss, _mapb_nospawn);
+   if(ACS_GameType() == GAME_TITLE_MAP) {
+      set_msk(ml.flag, _mapf_kind, _mapk_title);
+   } else if(ml.lump == sp_LITHEND) {
+      set_msk(ml.flag, _mapf_kind, _mapk_end);
+   } else {
+      set_msk(ml.flag, _mapf_kind, _mapk_normal);
    }
    if(cv.sv_nobosses) {
       set_msk(ml.flag, _mapf_boss, _mapb_nospawn);
@@ -109,24 +102,33 @@ script static void MInit(void) {
    if(ml.boss == boss_iconofsin && GetFun() & lfun_tainted) {
       set_bit(ml.flag, _mapf_corrupted);
    }
-   /* TODO: check for map's built-in dewpoint and temp */
+   str sky = fast_strupper(EDataS(_edt_sky1));
+   if(sky == sp_SKY2 || sky == sp_RSKY2) {
+      set_msk(ml.flag, _mapf_cat, _mapc_interstice);
+   } else if(sky == sp_SKY3 || sky == sp_SKY4 || sky == sp_RSKY3) {
+      set_msk(ml.flag, _mapf_cat, _mapc_hell);
+   }
    i32 dewpoint    = rand() % 11 - 1;
    ml.temperature  = rand() % 100;
    ml.humidity     = ml.temperature + dewpoint;
    ml.humidity     = mini(ml.humidity * ml.humidity / 90, 100);
    ml.temperature -= 30;
-   /* TODO: check for map's built-in thunder and snow settings */
    i32 thunder_chk = rand() % 99;
    i32    snow_chk = rand() % 99;
    if(ml.humidity > 0) {
-      if(ml.temperature >= 12 + dewpoint && thunder_chk < 33) {
+      if(EDataI(_edt_lightning) ||
+         (ml.temperature >= 12 + dewpoint && thunder_chk < 33)) {
          set_bit(ml.flag, _mapf_thunder);
       }
       switch(CVarGetI(sc_sv_rain)) {
       case 1:
          if(ml.humidity > 60 + dewpoint) {
          case 2:
-            set_msk(ml.flag, _mapf_rain, _mapr_rain);
+            if(get_msk(ml.flag, _mapf_cat) == _mapc_hell) {
+               set_msk(ml.flag, _mapf_rain, _mapr_blood);
+            } else {
+               set_msk(ml.flag, _mapf_rain, _mapr_rain);
+            }
          } else if(ml.temperature <= 0 && snow_chk < 11) {
          case 3:
             set_msk(ml.flag, _mapf_rain, _mapr_snow);
@@ -136,29 +138,13 @@ script static void MInit(void) {
       set_bit(ml.flag, _mapf_vacuum);
       ml.humidity    = 0;
       ml.temperature = -270;
-   }
-   /* TODO: check for map's sky setting instead */
-   if(CVarGetI(sc_sv_sky) && get_msk(ml.flag, _mapf_cat) != _mapc_lithium) {
-      set_bit(ml.flag, _mapf_skyreplace);
-   }
-   str sky = fast_strupper(EDataS(_edt_sky1));
-   if(sky == sp_SKY2 || sky == sp_RSKY2) {
-      set_msk(ml.flag, _mapf_cat, _mapc_interstice);
-   } else if(sky == sp_SKY3 || sky == sp_SKY4 || sky == sp_RSKY3) {
-      set_msk(ml.flag, _mapf_cat, _mapc_hell);
-   }
-   Dlg_MInit();
-   SpawnBosses(pl.scoresum, false);
-   if(get_bit(ml.flag, _mapf_skyreplace)) {
-      if(get_msk(ml.flag, _mapf_cat) == _mapc_hell) {
-         ACS_ChangeSky(sp_LITHSKRD, sp_LITHSKRD);
-         ACS_SetSkyScrollSpeed(1, 0.01);
-      } else if(get_msk(ml.flag, _mapf_cat) == _mapc_interstice) {
-         ACS_ChangeSky(sp_LITHSKDE, sp_LITHSKDE);
-      } else {
-         ACS_ChangeSky(sp_LITHSKS1, sp_LITHSKS1);
+      if(get_msk(ml.flag, _mapf_cat) == _mapc_abyss) {
+         set_msk(ml.flag, _mapf_rain, _mapr_abyss);
       }
    }
+   set_msk(ml.flag, _mapf_sky, CVarGetI(sc_sv_sky));
+   Dlg_MInit();
+   SpawnBosses(pl.scoresum, false);
 }
 
 static void MInitPst(void) {
@@ -270,7 +256,7 @@ alloc_aut(0) script ext("ACS") addr(lsc_worldopen) void Z_World(void) {
       #include "common.h"
    }
 
-   /* TODO: handle map cvars properly */
+   /* TODO: handle map cvars properly in hubs */
    #define cvar_map(ty, na) cv.na = cvar_get(na);
    #define cvar_tic(ty, na) cv.na = cvar_get(na);
    #define cvar_x(ev, na, ty) cvar_##ev(ty, na)
@@ -299,7 +285,6 @@ alloc_aut(0) script ext("ACS") addr(lsc_worldopen) void Z_World(void) {
 script type("unloading") static void Z_WorldUnload(void) {
    Dbg_Log(log_dev, _l(__func__));
    pl.setActivator();
-   P_Upg_PDeinit();
    P_GUI_Close();
    P_Dat_PTickPst();
 }
@@ -307,6 +292,7 @@ script type("unloading") static void Z_WorldUnload(void) {
 script ext("ACS") addr(lsc_hubclear) void Z_HubCleared(void) {
    Dbg_Log(log_dev, _l(__func__));
    wl.hubscleared++;
+   pl.setActivator();
 }
 
 /* EOF */

@@ -369,6 +369,8 @@ presets {
    pre: ShotgunGuy  type: zombiesg filter: "FormerSergeant";
    pre: ChaingunGuy type: zombiecg filter: "FormerCommando";
    pre: DRLACaptain type: zombie   filter: "FormerCaptain";
+   pre: DRLACaptain type: zombie   filter: "FormerCyborg";
+   pre: DRLACaptain type: zombie   filter: "EliteHuman";
 }
 
 /* Colorful Hell */

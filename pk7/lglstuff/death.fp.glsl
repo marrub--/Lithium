@@ -13,7 +13,7 @@ vec4 Process(vec4 color)
    float s = cos(sin(uv.x) * uv.y * 3.0 + timer) + 0.5;
    float tt = (uv.x * sin(timer) + uv.y * cos(timer)) * 3.0;
    vec4 fc = vec4(-(s * 0.05 * cos(tt)), 1.0, -(s * 0.05 * sin(tt)), a);
-   return fc * color;
+   return max(fc, 0.0) * color;
 }
 
 /* EOF */

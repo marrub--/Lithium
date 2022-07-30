@@ -94,7 +94,6 @@ script void P_Item_Place(struct item *item, struct container *cont);
 optargs(1) struct bagitem *P_BagItem_New(i32 w, i32 h, i32 type, struct itemdata const *data);
 
 void P_Inv_PInit(void);
-void P_Inv_PQuit(void);
 
 bool P_Inv_Place(struct container *cont, struct item *item, i32 x, i32 y);
 script bool P_Inv_PlaceFirst(struct container *cont, struct item *item);

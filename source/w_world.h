@@ -24,19 +24,6 @@ w_setptr_x(bool)
 #define MapNum  ACS_GetLevelInfo(LEVELINFO_LEVELNUM)
 #define Cluster ACS_GetLevelInfo(LEVELINFO_CLUSTERNUM)
 
-/* Line 1888300 is used as a control line for mod features.
- * Similarly, maps in a certain range are marked as Lithium maps.
- */
-enum {
-   LithMapLine = 0x001CD02C,
-
-   LithMapBeg = 0x001CCF00,
-   LithMapTest = LithMapBeg,
-   LithMapAbyss,
-   LithMapM1A1 = LithMapBeg + 100,
-   LithMapEnd = 0x001D2BE1,
-};
-
 #define GetFun()  CVarGetI(sc_fun)
 #define SetFun(x) CVarSetI(sc_fun, x)
 
@@ -68,6 +55,7 @@ enum ZscName(PData) {
    _pdt_mapr,
    _pdt_mapk,
    _pdt_mapb,
+   _pdt_maps,
 };
 
 /* External Data */
@@ -75,13 +63,15 @@ enum ZscName(EData) {
    _edt_bosslevel,
    _edt_paused,
    _edt_spawnhealth,
+   _edt_viewheight,
+   _edt_attackheight,
+   _edt_lightning,
    _edt_heretic,
    _edt_chex,
    _edt_rampancy,
    _edt_legendoom,
    _edt_colorfulhell,
    _edt_riflegrenade,
-
    _edt_obituary,
    _edt_logname,
    _edt_bipname,
@@ -179,15 +169,9 @@ enum ZscName(RifleMode) {
 };
 
 enum ZscName(MapFlag) {
-   /* states */
    _mapf_corrupted,
    _mapf_thunder,
    _mapf_vacuum,
-
-   /* visual info */
-   _mapf_skyreplace,
-
-   /* categories */
    _mapf_boss_beg,
    _mapf_boss_end = _mapf_boss_beg + 2,
    _mapf_cat_beg,
@@ -196,6 +180,8 @@ enum ZscName(MapFlag) {
    _mapf_rain_end = _mapf_rain_beg + 3,
    _mapf_kind_beg,
    _mapf_kind_end = _mapf_kind_beg + 2,
+   _mapf_sky_beg,
+   _mapf_sky_end = _mapf_sky_beg + 2,
 };
 
 enum ZscName(MapBoss) {
@@ -214,7 +200,7 @@ enum ZscName(MapRain) {
 
 enum ZscName(MapCategory) {
    _mapc_none,
-   _mapc_lithium,
+   _mapc_abyss,
    _mapc_interstice,
    _mapc_hell,
 };
@@ -223,6 +209,13 @@ enum ZscName(MapKind) {
    _mapk_normal,
    _mapk_title,
    _mapk_end,
+};
+
+enum ZscName(MapSky) {
+   _maps_nochange,
+   _maps_vanilla,
+   _maps_replace,
+   _maps_shader,
 };
 
 #if !ZscOn
@@ -247,10 +240,10 @@ enum {
 };
 
 enum {
-   _skill_normal,
-   _skill_hard,
-   _skill_tourist,
-   _skill_nightmare
+   _skill_tourist   = 0,
+   _skill_normal    = 2,
+   _skill_hard      = 3,
+   _skill_nightmare = 4,
 };
 
 enum {

@@ -61,8 +61,8 @@ void SetPClass(void) {
    else if(pl.pcstr == so_DarkLordPlayer ) set_pcl(darklord);
    else if(pl.pcstr == so_ThothPlayer    ) set_pcl(thoth);
    else {
-      Dbg_Err(_l("Invalid player class "), _p(pl.pcstr),
-              _l(", everything is going to explode!"));
+      PrintErr(_l("Invalid player class "), _p(pl.pcstr),
+               _l(", everything is going to explode!"));
    }
 
    pl.discrim = P_Discrim(pl.pclass);
@@ -247,8 +247,8 @@ void P_Init(void) {
       SetPClass();
       SetupAttributes();
 
-      pl.viewheight   = GetViewHeight();
-      pl.attackheight = GetAttackHeight();
+      pl.viewheight   = EDataI(_edt_viewheight);
+      pl.attackheight = EDataI(_edt_attackheight);
       pl.jumpheight   = GetMembK(0, sm_JumpZ);
       pl.spawnhealth  = GetHealth(0);
       pl.maxhealth    = pl.spawnhealth;
@@ -274,6 +274,7 @@ void P_Init(void) {
    InvTake(so_WeaponScopedToken, INT32_MAX);
 
    P_CBI_PMinit();
+   P_Upg_PMInit();
 
    pl.frozen     = 0;
    pl.semifrozen = 0;
@@ -299,14 +300,11 @@ void P_Init(void) {
 
    pl.attr.lvupstr[0] = '\0';
 
-   if(!bip.init) P_BIP_PInit();
-
-   if(!pl.upgrinit) P_Upg_PInit();
-   else             P_Upg_PMInit();
-
-   if(!pl.invinit) P_Inv_PInit();
-
    if(!pl.wasinit) {
+      P_BIP_PInit();
+      P_Upg_PInit();
+      P_Inv_PInit();
+
       pl.logH(1, tmpstr(lang(sl_log_version)), vernam, __DATE__);
 
       #ifndef NDEBUG

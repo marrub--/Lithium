@@ -106,14 +106,6 @@ script void P_Upg_PInit(void) {
          }
       }
    }
-
-   pl.upgrinit = true;
-}
-
-void P_Upg_PQuit(void) {
-   fastmemset(pl.upgrades, 0, sizeof pl.upgrades[0] * countof(pl.upgrades));
-
-   pl.upgrinit = false;
 }
 
 void P_Upg_PDeinit(void) {

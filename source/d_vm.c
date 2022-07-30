@@ -498,7 +498,7 @@ alloc_aut(0) sync static void ActTELEPORT_INTERLEVEL(void) {
    i32 tag = MemB2_G(VAR_ADRL);
 
    ACS_Delay(5);
-   P_TeleportOut(tag + LithMapBeg);
+   P_TeleportOut(tag);
 
    SetVA(ACT_HALT);
 }
@@ -672,7 +672,7 @@ dynam_aut script void Dlg_Run(u32 num) {
    register struct dlg_def *def = &dlgdefs[num];
 
    if(!def->codeV) {
-      Dbg_Err(_l("dialogue "), _p(num), _l(" has no code"));
+      PrintErr(_l("dialogue "), _p(num), _l(" has no code"));
       goto halt;
    }
 
@@ -1049,7 +1049,7 @@ TRR_NP:
    #ifndef NDEBUG
    ACS_BeginPrint();
    TraceReg();
-   ACS_EndLog();
+   EndLogEx(_pri_critical|_pri_nonotify);
    #endif
    JmpVI();
 
@@ -1059,7 +1059,7 @@ TRS_NP:
    for(u32 i = GetSP() + 1; i <= 0xFF; i++) {
       __nprintf("%02X: %02X", i, MemB1_G(STA_BEG + i));
    }
-   ACS_EndLog();
+   EndLogEx(_pri_critical|_pri_nonotify);
    #endif
    JmpVI();
 
@@ -1069,7 +1069,7 @@ TRV_NP:
    for(u32 i = 0; i <= 0xFF; i++) {
       __nprintf("%02X: %02X", i, MemB1_G(VAR_BEG + i));
    }
-   ACS_EndLog();
+   EndLogEx(_pri_critical|_pri_nonotify);
    #endif
    JmpVI();
 

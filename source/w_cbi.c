@@ -95,7 +95,7 @@ void CBI_Install(i32 num) {
          P_BIP_Unlock(P_BIP_NameToPage(c->nam), false);
       }
    } else {
-      Dbg_Err(_l("no upgrade "), _p(num), _l(" for "), _p(pl.pclass_b));
+      PrintErr(_l("no upgrade "), _p(num), _l(" for "), _p(pl.pclass_b));
    }
 }
 

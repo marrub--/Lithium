@@ -10,10 +10,10 @@
               Readings */
 class Lith_STATUSBAR : BaseStatusBar;
 
-private transient Font   m_pauseFont;
-private transient string m_pauseText;
-private transient int    m_pauseTextWidth;
-private transient int    m_pauseTextHeight;
+private Font   m_pauseFont;
+private string m_pauseText;
+private int    m_pauseTextWidth;
+private int    m_pauseTextHeight;
 
 override void flashItem(class<Inventory> itemtype) {}
 override void drawPowerups() {}

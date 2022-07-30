@@ -33,13 +33,13 @@ class Lith_ScoreNum {
 
 extend class Lith_RenderProvider;
 
-private transient Lith_ScoreNum             m_scrNumHead;
-private transient Lith_DamageNum[_dnum_max] m_dmgNumHeads;
-private transient bool                      m_dmgNumInit;
-private transient int                       m_dmgNumAmount;
-private transient bool                      m_showDamageNums;
-private transient float                     m_damageNumAlpha;
-private transient float                     m_itemDispAlpha;
+private Lith_ScoreNum             m_scrNumHead;
+private Lith_DamageNum[_dnum_max] m_dmgNumHeads;
+private bool                      m_dmgNumInit;
+private int                       m_dmgNumAmount;
+private bool                      m_showDamageNums;
+private float                     m_damageNumAlpha;
+private float                     m_itemDispAlpha;
 
 private void addScoreNumImpl(int x, int y, string amount, vector2 end) {
    if(!m_scrNumHead) {

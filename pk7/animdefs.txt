@@ -6,8 +6,9 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-cameratexture LITHCAM1 320 200
-cameratexture LITHCAM2 480 240
-cameratexture LITHCAM3 640 480
+cameraTexture LITHCAM1 320 200
+cameraTexture LITHCAM2 480 240
+cameraTexture LITHCAM3 640 480
+canvasTexture LITHCSKY 1024 200
 
 /* EOF */

@@ -6,431 +6,436 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-brightmap sprite FORTA0 {map "lglstuff/brightmaps/FORTA0.png"}
-brightmap sprite IONGA0 {map "lglstuff/brightmaps/IONGA0.png"}
-brightmap sprite LSHTA0 {map "lglstuff/brightmaps/LSHTA0.png"}
-brightmap sprite MARPA0 {map "lglstuff/brightmaps/MARPA0.png"}
-brightmap sprite MARPB0 {map "lglstuff/brightmaps/MARPB0.png"}
-brightmap sprite MARPC0 {map "lglstuff/brightmaps/MARPC0.png"}
-brightmap sprite PDFGA0 {map "lglstuff/brightmaps/PDFGA0.png"}
-brightmap sprite PDFGB0 {map "lglstuff/brightmaps/PDFGA0.png"}
-brightmap sprite PDFGC0 {map "lglstuff/brightmaps/PDFGA0.png"}
-brightmap sprite PDFGD0 {map "lglstuff/brightmaps/PDFGA0.png"}
-brightmap sprite PDFGE0 {map "lglstuff/brightmaps/PDFGA0.png"}
-brightmap sprite PDFGF0 {map "lglstuff/brightmaps/PDFGA0.png"}
-brightmap sprite PDFGG0 {map "lglstuff/brightmaps/PDFGA0.png"}
-brightmap sprite SDSGA0 {map "lglstuff/brightmaps/SDSGA0.png"}
-brightmap sprite SDSGB0 {map "lglstuff/brightmaps/SDSGB0.png"}
-brightmap sprite SDSGC0 {map "lglstuff/brightmaps/SDSGC0.png"}
-brightmap sprite SDSGD0 {map "lglstuff/brightmaps/SDSGD0.png"}
-brightmap sprite SDSGE0 {map "lglstuff/brightmaps/SDSGE0.png"}
-brightmap sprite SDSGF0 {map "lglstuff/brightmaps/SDSGF0.png"}
-brightmap sprite SDSGG0 {map "lglstuff/brightmaps/SDSGG0.png"}
-brightmap sprite SDSGH0 {map "lglstuff/brightmaps/SDSGH0.png"}
-brightmap sprite SHTGF0 {map "lglstuff/brightmaps/SHTGF0.png"}
-brightmap sprite SHTGG0 {map "lglstuff/brightmaps/SHTGG0.png"}
-brightmap sprite SHTGH0 {map "lglstuff/brightmaps/SHTGH0.png"}
-brightmap sprite SHTGI0 {map "lglstuff/brightmaps/SHTGI0.png"}
-brightmap sprite SHTGJ0 {map "lglstuff/brightmaps/SHTGJ0.png"}
-brightmap sprite SHTGK0 {map "lglstuff/brightmaps/SHTGK0.png"}
-brightmap sprite SHTGN0 {map "lglstuff/brightmaps/SHTGN0.png"}
-brightmap sprite SHTGO0 {map "lglstuff/brightmaps/SHTGO0.png"}
+brightMap sprite FORTA0 {map "lglstuff/brightmaps/FORTA0.png"}
+brightMap sprite IONGA0 {map "lglstuff/brightmaps/IONGA0.png"}
+brightMap sprite LSHTA0 {map "lglstuff/brightmaps/LSHTA0.png"}
+brightMap sprite MARPA0 {map "lglstuff/brightmaps/MARPA0.png"}
+brightMap sprite MARPB0 {map "lglstuff/brightmaps/MARPB0.png"}
+brightMap sprite MARPC0 {map "lglstuff/brightmaps/MARPC0.png"}
+brightMap sprite PDFGA0 {map "lglstuff/brightmaps/PDFGA0.png"}
+brightMap sprite PDFGB0 {map "lglstuff/brightmaps/PDFGA0.png"}
+brightMap sprite PDFGC0 {map "lglstuff/brightmaps/PDFGA0.png"}
+brightMap sprite PDFGD0 {map "lglstuff/brightmaps/PDFGA0.png"}
+brightMap sprite PDFGE0 {map "lglstuff/brightmaps/PDFGA0.png"}
+brightMap sprite PDFGF0 {map "lglstuff/brightmaps/PDFGA0.png"}
+brightMap sprite PDFGG0 {map "lglstuff/brightmaps/PDFGA0.png"}
+brightMap sprite SDSGA0 {map "lglstuff/brightmaps/SDSGA0.png"}
+brightMap sprite SDSGB0 {map "lglstuff/brightmaps/SDSGB0.png"}
+brightMap sprite SDSGC0 {map "lglstuff/brightmaps/SDSGC0.png"}
+brightMap sprite SDSGD0 {map "lglstuff/brightmaps/SDSGD0.png"}
+brightMap sprite SDSGE0 {map "lglstuff/brightmaps/SDSGE0.png"}
+brightMap sprite SDSGF0 {map "lglstuff/brightmaps/SDSGF0.png"}
+brightMap sprite SDSGG0 {map "lglstuff/brightmaps/SDSGG0.png"}
+brightMap sprite SDSGH0 {map "lglstuff/brightmaps/SDSGH0.png"}
+brightMap sprite SHTGF0 {map "lglstuff/brightmaps/SHTGF0.png"}
+brightMap sprite SHTGG0 {map "lglstuff/brightmaps/SHTGG0.png"}
+brightMap sprite SHTGH0 {map "lglstuff/brightmaps/SHTGH0.png"}
+brightMap sprite SHTGI0 {map "lglstuff/brightmaps/SHTGI0.png"}
+brightMap sprite SHTGJ0 {map "lglstuff/brightmaps/SHTGJ0.png"}
+brightMap sprite SHTGK0 {map "lglstuff/brightmaps/SHTGK0.png"}
+brightMap sprite SHTGN0 {map "lglstuff/brightmaps/SHTGN0.png"}
+brightMap sprite SHTGO0 {map "lglstuff/brightmaps/SHTGO0.png"}
 
-hardwareshader sprite LDTHA0 {
+hardwareShader sprite LDTHA0 {
    shader "lglstuff/death.fp.glsl"
    speed 1.0
 }
 
-hardwareshader postprocess scene {
+hardwareShader texture LITHBSKY {
+   shader "lglstuff/sky.fp.glsl"
+   texture lith_skyColorTex "LITHCSKY"
+}
+
+hardwareShader postProcess scene {
    shader "lglstuff/rain.fp.glsl" 330
    name "Lith_Rain"
    uniform float lith_t
    uniform float lith_m
 }
 
-hardwareshader postprocess screen {
+hardwareShader postProcess screen {
    shader "lglstuff/end.fp.glsl" 330
    name "Lith_End"
    uniform float lith_t
 }
 
-pointlight Lith_Candle {
+pointLight Lith_Candle {
    color 1.0 1.0 0.3
    size 24
    offset 0 -4 0
    attenuate 1
 }
 
-pointlight Lith_Candelabra {
+pointLight Lith_Candelabra {
    color 1.0 1.0 0.3
    size 67
    offset 0 -24 0
    attenuate 1
 }
 
-pointlight Lith_FinalizerLight {
+pointLight Lith_FinalizerLight {
    color 0.9 0.08 0.08
    size 46
    attenuate 1
 }
 
-pointlight Lith_RailSpot {
+pointLight Lith_RailSpot {
    color 0.6 0.2 0.2
    size 46
    attenuate 1
 }
 
-pointlight Lith_RailBeam {
+pointLight Lith_RailBeam {
    color 0.9 0.2 0.2
    size 64
    attenuate 1
 }
 
-pulselight Lith_BigLamp {
+pulseLight Lith_BigLamp {
    color 0.8 0.8 1.0
    size 96
-   secondarysize 99
+   secondarySize 99
    interval 0.4
    offset 0 -30 0
    attenuate 1
 }
 
-pulselight Lith_SmallLamp {
+pulseLight Lith_SmallLamp {
    color 0.8 0.8 1.0
    size 84
-   secondarysize 87
+   secondarySize 87
    interval 0.4
    offset 0 -20 0
    attenuate 1
 }
 
-pulselight Lith_Lamp {
+pulseLight Lith_Lamp {
    color 1.0 1.0 0.8
    size 84
-   secondarysize 87
+   secondarySize 87
    interval 1.14
    offset 0 -10 0
    attenuate 1
 }
 
-pulselight Lith_GunshotOrange {
+pulseLight Lith_GunshotOrange {
    color 0.9 0.35 0.05
    size 92
-   secondarysize 70
+   secondarySize 70
    interval 0.2
    attenuate 1
 }
 
-pulselight Lith_VoidShotLight {
+pulseLight Lith_VoidShotLight {
    color 0.8 0.0 0.8
    size 52
-   secondarysize 32
+   secondarySize 32
    interval 0.8
    subtractive 1
    attenuate 1
 }
 
-pulselight Lith_IonRifleLight {
+pulseLight Lith_IonRifleLight {
    color 0.7 0.7 1.0
    size 128
-   secondarysize 110
+   secondarySize 110
    interval 0.4
    attenuate 1
 }
 
-pulselight Lith_CPlasmaRifleLight {
+pulseLight Lith_CPlasmaRifleLight {
    color 0.1 0.9 0.18
    size 64
-   secondarysize 45
+   secondarySize 45
    interval 0.3
    attenuate 1
 }
 
-pulselight Lith_IonExplosionLight {
+pulseLight Lith_IonExplosionLight {
    color 0.7 0.7 1.0
    size 192
-   secondarysize 90
+   secondarySize 90
    interval 2.5
    attenuate 1
 }
 
-pulselight Lith_StarRainbow1 {
+pulseLight Lith_StarRainbow1 {
    color 1.0 0.0 0.0
    size 512
-   secondarysize 160
+   secondarySize 160
    interval 4.0
    attenuate 1
 }
 
-pulselight Lith_StarRainbow2 {
+pulseLight Lith_StarRainbow2 {
    color 0.0 1.0 0.0
    size 512
-   secondarysize 160
+   secondarySize 160
    interval 3.0
    attenuate 1
 }
 
-pulselight Lith_StarRainbow3 {
+pulseLight Lith_StarRainbow3 {
    color 0.0 0.0 1.0
    size 512
-   secondarysize 160
+   secondarySize 160
    interval 2.0
    attenuate 1
 }
 
-pulselight Lith_StarExplosion {
+pulseLight Lith_StarExplosion {
    color 1.0 1.0 1.0
    size 512
-   secondarysize 256
+   secondarySize 256
    interval 2.5
    attenuate 1
 }
 
-pulselight Lith_BladeLight {
+pulseLight Lith_BladeLight {
    color 0.95 0.8 0.1
    size 56
-   secondarysize 22
+   secondarySize 22
    interval 1.5
    attenuate 1
 }
 
-flickerlight Lith_BulletPuff1 {
+flickerLight Lith_BulletPuff1 {
    color 0.55 0.49 0.05
    size 18
-   secondarysize 12
+   secondarySize 12
    chance 0.8
    attenuate 1
 }
 
-flickerlight Lith_BulletPuff2 {
+flickerLight Lith_BulletPuff2 {
    color 0.5 0.43 0.0
    size 10
-   secondarysize 6
+   secondarySize 6
    chance 0.8
    attenuate 1
 }
 
-flickerlight Lith_BulletPuff3 {
+flickerLight Lith_BulletPuff3 {
    color 0.5 0.35 0.0
    size 6
-   secondarysize 4
+   secondarySize 4
    chance 0.8
    attenuate 1
 }
 
-flickerlight Lith_FeuerLight {
+flickerLight Lith_FeuerLight {
    color 0.95 0.66 0.05
    size 46
-   secondarysize 40
+   secondarySize 40
    chance 0.8
    attenuate 1
 }
 
-flickerlight Lith_HeavenlyImage {
+flickerLight Lith_HeavenlyImage {
    color 1.0 1.0 1.0
    size 48
-   secondarysize 32
+   secondarySize 32
    chance 0.8
    attenuate 1
 }
 
-flickerlight Lith_CircleLight {
+flickerLight Lith_CircleLight {
    color 0.8 0.0 0.0
    size 46
-   secondarysize 40
+   secondarySize 40
    chance 0.7
    offset 0 0 0
    attenuate 1
 }
 
-flickerlight Lith_CircleLightSmall {
+flickerLight Lith_CircleLightSmall {
    color 0.9 0.3 0.3
    size 26
-   secondarysize 20
+   secondarySize 20
    chance 0.7
    offset 0 0 0
    attenuate 1
 }
 
-flickerlight Lith_RailExplode {
+flickerLight Lith_RailExplode {
    color 0.8 0.0 0.0
    size 50
-   secondarysize 40
+   secondarySize 40
    chance 0.7
    offset 0 0 0
    attenuate 1
 }
 
-flickerlight Lith_Explode1 {
+flickerLight Lith_Explode1 {
    color 1.0 0.7 0.5
    size 96
-   secondarysize 108
+   secondarySize 108
    chance 0.3
    attenuate 1
 }
 
-flickerlight Lith_Explode2 {
+flickerLight Lith_Explode2 {
    color 0.5 0.3 0.2
    size 120
-   secondarysize 132
+   secondarySize 132
    chance 0.3
    attenuate 1
 }
 
-flickerlight Lith_Explode3 {
+flickerLight Lith_Explode3 {
    color 0.3 0.1 0.1
    size 144
-   secondarysize 156
+   secondarySize 156
    chance 0.3
    attenuate 1
 }
 
-flickerlight2 Lith_TorchSmallR {
+flickerLight2 Lith_TorchSmallR {
    color 1.0 0.5 0.2
    size 72
-   secondarysize 81
+   secondarySize 81
    interval 0.1
    offset 0 -2 0
    attenuate 1
 }
 
-flickerlight2 Lith_TorchSmallG {
+flickerLight2 Lith_TorchSmallG {
    color 0.3 1.0 0.3
    size 72
-   secondarysize 81
+   secondarySize 81
    interval 0.1
    offset 0 -2 0
    attenuate 1
 }
 
-flickerlight2 Lith_TorchSmallB {
+flickerLight2 Lith_TorchSmallB {
    color 0.3 0.3 1.0
    size 72
-   secondarysize 81
+   secondarySize 81
    interval 0.1
    offset 0 -2 0
    attenuate 1
 }
 
-flickerlight2 Lith_TorchTallR {
+flickerLight2 Lith_TorchTallR {
    color 1.0 0.5 0.2
    size 90
-   secondarysize 99
+   secondarySize 99
    interval 0.1
    offset 0 -5 0
    attenuate 1
 }
 
-flickerlight2 Lith_TorchTallG {
+flickerLight2 Lith_TorchTallG {
    color 0.3 1.0 0.3
    size 90
-   secondarysize 99
+   secondarySize 99
    interval 0.1
    offset 0 -5 0
    attenuate 1
 }
 
-flickerlight2 Lith_TorchTallB {
+flickerLight2 Lith_TorchTallB {
    color 0.3 0.3 1.0
    size 90
-   secondarysize 99
+   secondarySize 99
    interval 0.1
    offset 0 -5 0
    attenuate 1
 }
 
-flickerlight2 Lith_ShockLight {
+flickerLight2 Lith_ShockLight {
    color 0.7 0.7 1.0
    size 45
-   secondarysize 52
+   secondarySize 52
    interval 0.02
    attenuate 1
 }
 
-flickerlight2 Lith_PoisonBlob {
+flickerLight2 Lith_PoisonBlob {
    color 0.3 1.0 0.3
    size 8
-   secondarysize 16
+   secondarySize 16
    interval 0.02
    attenuate 1
 }
 
-flickerlight2 Lith_StarLight1 {
+flickerLight2 Lith_StarLight1 {
    color 0.12 0.06 0.95
    size 45
-   secondarysize 52
+   secondarySize 52
    interval 0.02
    attenuate 1
 }
 
-flickerlight2 Lith_StarLight2 {
+flickerLight2 Lith_StarLight2 {
    color 0.95 0.06 0.12
    size 45
-   secondarysize 52
+   secondarySize 52
    interval 0.02
    attenuate 1
 }
 
-flickerlight2 Lith_SuperShockLight {
+flickerLight2 Lith_SuperShockLight {
    color 0.7 0.7 1.0
    size 115
-   secondarysize 125
+   secondarySize 125
    interval 0.04
    attenuate 1
 }
 
-flickerlight2 Lith_SMGTrailLight {
+flickerLight2 Lith_SMGTrailLight {
    color 0.7 0.7 1.0
    size 25
-   secondarysize 30
+   secondarySize 30
    interval 0.02
    attenuate 1
 }
 
-flickerlight2 Lith_PlasmaPistolLight {
+flickerLight2 Lith_PlasmaPistolLight {
    color 0.1 0.18 0.9
    size 40
-   secondarysize 48
+   secondarySize 48
    interval 0.05
    attenuate 1
 }
 
-flickerlight2 Lith_CPlasmaLight {
+flickerLight2 Lith_CPlasmaLight {
    color 0.1 0.9 0.18
    size 36
-   secondarysize 40
+   secondarySize 40
    interval 0.05
    attenuate 1
 }
 
-flickerlight2 Lith_ShotgunTrail1 {
+flickerLight2 Lith_ShotgunTrail1 {
    color 0.1 0.9 0.18
    size 16
-   secondarysize 8
+   secondarySize 8
    interval 0.05
    attenuate 1
 }
 
-flickerlight2 Lith_ShotgunTrail2 {
+flickerLight2 Lith_ShotgunTrail2 {
    color 0.1 0.9 0.18
    size 8
-   secondarysize 4
+   secondarySize 4
    interval 0.05
    attenuate 1
 }
 
-flickerlight2 Lith_RemsLight1 {
+flickerLight2 Lith_RemsLight1 {
    color 0.56 0.25 1.0
    size 80
-   secondarysize 40
+   secondarySize 40
    interval 0.05
    attenuate 1
 }
 
-flickerlight2 Lith_RemsLight2 {
+flickerLight2 Lith_RemsLight2 {
    color 0.56 0.25 1.0
    size 10
-   secondarysize 20
+   secondarySize 20
    interval 0.05
    attenuate 1
 }

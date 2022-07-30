@@ -184,22 +184,6 @@ void P_Inv_PInit(void) {
    for(i32 i = 0; i < _inv_num; i++) {
       pl.inv[i].head = nil;
    }
-
-   pl.invinit = true;
-}
-
-void P_Inv_PQuit(void) {
-   for(i32 i = 0; i < _inv_num; i++) {
-      ListDestroy(&pl.inv[i].head, {
-         struct item *it = _obj;
-         it->Destroy(it);
-      });
-   }
-
-   pl.useitem = pl.selitem = pl.opnitem = nil;
-   pl.movitem = false;
-
-   pl.invinit = false;
 }
 
 struct item *P_Item_New(struct itemdata const *data) {
