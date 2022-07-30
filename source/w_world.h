@@ -129,7 +129,6 @@ enum ZscName(ScriptNum) {
    lsc_pdata,
    lsc_addangle,
    lsc_monsterinfo,
-   lsc_raindropspawn,
    lsc_monstertype,
    lsc_drawcr,
    lsc_cheatinput,

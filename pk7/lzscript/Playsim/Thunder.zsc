@@ -8,7 +8,7 @@
 
 class Lith_ThunderThinker : Thinker;
 
-private int          m_next, m_len, m_speed, m_dist;
+private int          m_next, m_len, m_speed, m_nextSnd;
 private array<int16> m_lights;
 
 static Lith_ThunderThinker create() {
@@ -21,6 +21,7 @@ static Lith_ThunderThinker create() {
 }
 
 private void setFlash() {
+   int oldNext = m_next;
    if(random(0, 255) < 50) {
       m_next = random(16, 31);
    } else if(random() < 128 && level.time & 32 == 0) {
@@ -28,11 +29,14 @@ private void setFlash() {
    } else {
       m_next = random(5, 20) * ticrate;
    }
+   if(oldNext) {
+      m_nextSnd = oldNext + random(1, m_next / 2);
+   } else {
+      m_nextSnd = -1;
+   }
    m_len   = random( 8, 40);
-   m_dist  = random( 5, 35);
    m_speed = random(-2, -8);
    m_next += level.time;
-   m_dist += m_next;
    Lith_RenderProvider.instance().setSkyFlash(m_next, m_len);
 }
 
@@ -41,9 +45,8 @@ override void tick() {
       return;
    }
    let delta = level.time - m_next;
-   if(level.time == m_dist || m_dist > m_next) {
+   if(level.time == m_nextSnd) {
       S_StartSound("world/thunder", lch_auto, 0, 1.0, ATTN_NONE, fRandom(0.8, 2.0));
-      m_dist = -1;
    }
    /* TODO: make these use functors */
    if(delta < 0) {

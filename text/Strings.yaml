@@ -246,6 +246,7 @@ sm_:
 so_:
    OBJ:
    - AbyssRainDrop
+   - Ash
    - AssassinPlayer
    - BarrierFX
    - BloodRainDrop

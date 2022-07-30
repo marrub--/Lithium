@@ -51,6 +51,7 @@ void P_Ren_Mission(void) {
       case _rain_rain:  _l("\CnRAINING (WATER)\n");   break;
       case _rain_blood: _l("\CgRAINING (UNKNOWN)\n"); break;
       case _rain_snow:  _l("\CwSNOWING\n");           break;
+      case _rain_fire:  _l("\CxFIRESTORM\n");         break;
       }
       if(get_bit(ml.flag, _mflg_thunder))   {_l("\CkELEC. STORM\n");}
       if(get_bit(ml.flag, _mflg_corrupted)) {_l("\CgCAUSALITY SHIFT\n");}

@@ -25,17 +25,16 @@ class Lith_RainDrop : Actor {
       +NoTrigger
    }
 
-   bool m_done;
+   protected bool m_done;
 
    override void postBeginPlay() {
       super.postBeginPlay();
-      acs_executeWithResult(lsc_raindropspawn, int(players[consoleplayer].mo.distance2d(self)));
       vel      = (0, 0, fRandom(-12, -16));
       scale.y *= fRandom(1.5, 3.5);
       m_done   = false;
    }
 
-   override void Tick() {
+   override void tick() {
       if(m_done) {
          Lith_UTIL.stateTick(self);
          a_fadeOut(0.25 / 21.0);
@@ -98,6 +97,32 @@ class Lith_SnowDrop : Lith_RainDrop {
    Death:
       RNDS BCDE 12;
       stop;
+   }
+}
+
+class Lith_Ash : Lith_SnowDrop {
+   default {
+      Scale 0.5;
+      +RollSprite
+   }
+   private spriteId m_rnda;
+   override void postBeginPlay() {
+      m_rnda = getSpriteIndex("RNDA");
+   }
+   override void tick() {
+      if(!m_done) {
+         Lith_UTIL.stateTick(self);
+         if(sprite == m_rnda) {
+            a_setRoll(roll + 1, SPF_INTERPOLATE);
+         }
+      }
+      super.tick();
+   }
+   states {
+   Spawn:
+      RDTF ABCDEFG 1 bright;
+      RNDA A -1;
+      wait;
    }
 }
 

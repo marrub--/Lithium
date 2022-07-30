@@ -327,8 +327,9 @@ ui void drawSky(RenderEvent evt) {
       for(int x = 0, i = 0; x < canvas_w; x += skySx, ++i) {
          m_skyCanvas.drawTexture(m_skyBase, true, x, 0, DTA_DestHeight,canvas_h, DTA_DestWidth,skySx, DTA_FlipY,true);
       }
+      /* TODO: draw psx fire additively here */
       if(bdelta) {
-         m_skyCanvas.dim("white", vdelta * 0.2f, 0, 0, canvas_w, canvas_h);
+         m_skyCanvas.dim("white", vdelta * 0.2f, 0, 0, canvas_w, canvas_h, STYLE_Add);
          m_skyCanvas.drawTexture(m_skyLightning, true, m_skyFlashPos, 0, DTA_Alpha,1.0 - vdelta, DTA_LegacyRenderStyle,STYLE_Add, DTA_Color,m_skyFlashColor, DTA_FlipY,true, DTA_FlipX,int(m_skyFlashPos) & 1 == 0);
       }
    }
