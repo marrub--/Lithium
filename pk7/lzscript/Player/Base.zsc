@@ -92,7 +92,7 @@ void Lith_GiveDefWeapon(class<Weapon> type) {
 }
 
 override void PlayerThink() {
-   if(Lith_UTIL.pData(_pdt_mapk) != _mapk_normal) return;
+   if(Lith_UTIL.pData(_pdt_mfunc) != _mfunc_normal) return;
 
    if(Lith_UTIL.pData(_pdt_semifrozen)) {
       UserCmd cmd = player.cmd;
@@ -109,7 +109,7 @@ private void Lith_RainEffect() {
    PpShader.SetUniform1f("Lith_Rain", "lith_t", level.totaltime / 15.);
    PpShader.SetUniform1f("Lith_Rain", "lith_m", m_RainLerp);
 
-   if(player && Lith_UTIL.pData(_pdt_mapr) == _mapr_rain &&
+   if(player && Lith_UTIL.pData(_pdt_rain) == _rain_rain &&
       ceilingpic == skyflatnum && pitch < -5)
    {
       double m = -pitch - 5;
@@ -200,7 +200,7 @@ void Lith_PostTick() {
 }
 
 override void Tick() {
-   if(Lith_UTIL.pData(_pdt_mapk) != _mapk_normal) return;
+   if(Lith_UTIL.pData(_pdt_mfunc) != _mfunc_normal) return;
 
    if(player && player.mo == self) Lith_PreTick();
 

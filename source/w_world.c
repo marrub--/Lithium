@@ -82,6 +82,7 @@ script static void GInit(void) {
 
 script static void MInit(void) {
    Dbg_Log(log_dev, _l(__func__));
+   i32 fun = GetFun();
    ACS_SetAirControl(0.77);
    ml.soulsfreed = 0;
    ml.seed = ACS_Random(0, INT32_MAX);
@@ -90,23 +91,25 @@ script static void MInit(void) {
    ml.name = strp(ACS_PrintName(PRINTNAME_LEVELNAME));
    ml.boss = EDataI(_edt_bosslevel);
    if(ACS_GameType() == GAME_TITLE_MAP) {
-      set_msk(ml.flag, _mapf_kind, _mapk_title);
+      set_msk(ml.flag, _mflg_func, _mfunc_title);
    } else if(ml.lump == sp_LITHEND) {
-      set_msk(ml.flag, _mapf_kind, _mapk_end);
+      set_msk(ml.flag, _mflg_func, _mfunc_end);
    } else {
-      set_msk(ml.flag, _mapf_kind, _mapk_normal);
+      set_msk(ml.flag, _mflg_func, _mfunc_normal);
    }
    if(cv.sv_nobosses) {
-      set_msk(ml.flag, _mapf_boss, _mapb_nospawn);
+      set_msk(ml.flag, _mflg_boss, _mphantom_nospawn);
    }
-   if(ml.boss == boss_iconofsin && GetFun() & lfun_tainted) {
-      set_bit(ml.flag, _mapf_corrupted);
+   if(ml.boss == boss_iconofsin && fun & lfun_tainted) {
+      set_bit(ml.flag, _mflg_corrupted);
    }
    str sky = fast_strupper(EDataS(_edt_sky1));
-   if(sky == sp_SKY2 || sky == sp_RSKY2) {
-      set_msk(ml.flag, _mapf_cat, _mapc_interstice);
+   if(fun & lfun_ragnarok) {
+      set_msk(ml.flag, _mflg_env, _menv_evil);
+   } else if(sky == sp_SKY2 || sky == sp_RSKY2) {
+      set_msk(ml.flag, _mflg_env, _menv_interstice);
    } else if(sky == sp_SKY3 || sky == sp_SKY4 || sky == sp_RSKY3) {
-      set_msk(ml.flag, _mapf_cat, _mapc_hell);
+      set_msk(ml.flag, _mflg_env, _menv_hell);
    }
    i32 dewpoint    = rand() % 11 - 1;
    ml.temperature  = rand() % 100;
@@ -116,33 +119,37 @@ script static void MInit(void) {
    i32 thunder_chk = rand() % 99;
    i32    snow_chk = rand() % 99;
    if(ml.humidity > 0) {
-      if(EDataI(_edt_lightning) ||
-         (ml.temperature >= 12 + dewpoint && thunder_chk < 33)) {
-         set_bit(ml.flag, _mapf_thunder);
+      bool thunder =
+         EDataI(_edt_lightning) ||
+         (ml.temperature >= 12 + dewpoint && thunder_chk < 33);
+      if(thunder) {
+         set_bit(ml.flag, _mflg_thunder);
       }
       switch(CVarGetI(sc_sv_rain)) {
       case 1:
          if(ml.humidity > 60 + dewpoint) {
          case 2:
-            if(get_msk(ml.flag, _mapf_cat) == _mapc_hell) {
-               set_msk(ml.flag, _mapf_rain, _mapr_blood);
-            } else {
-               set_msk(ml.flag, _mapf_rain, _mapr_rain);
+            switch(get_msk(ml.flag, _mflg_env)) {
+            case _menv_hell: set_msk(ml.flag, _mflg_rain, _rain_blood); break;
+            default:         set_msk(ml.flag, _mflg_rain, _rain_rain);  break;
             }
          } else if(ml.temperature <= 0 && snow_chk < 11) {
          case 3:
-            set_msk(ml.flag, _mapf_rain, _mapr_snow);
+            switch(get_msk(ml.flag, _mflg_env)) {
+            case _menv_hell: set_msk(ml.flag, _mflg_rain, _rain_fire); break;
+            default:         set_msk(ml.flag, _mflg_rain, _rain_snow); break;
+            }
          }
       }
    } else {
-      set_bit(ml.flag, _mapf_vacuum);
+      set_bit(ml.flag, _mflg_vacuum);
       ml.humidity    = 0;
       ml.temperature = -270;
-      if(get_msk(ml.flag, _mapf_cat) == _mapc_abyss) {
-         set_msk(ml.flag, _mapf_rain, _mapr_abyss);
+      if(get_msk(ml.flag, _mflg_env) == _menv_abyss) {
+         set_msk(ml.flag, _mflg_rain, _rain_abyss);
       }
    }
-   set_msk(ml.flag, _mapf_sky, CVarGetI(sc_sv_sky));
+   set_msk(ml.flag, _mflg_sky, CVarGetI(sc_sv_sky));
    Dlg_MInit();
    SpawnBosses(pl.scoresum, false);
 }
@@ -275,10 +282,10 @@ alloc_aut(0) script ext("ACS") addr(lsc_worldopen) void Z_World(void) {
    MInit();
 
    /* choose main-loop function */
-   switch(get_msk(ml.flag, _mapf_kind)) {
-   case _mapk_title: W_Title(); break;
-   case _mapk_end:   F_Run();   break;
-   default:          W_World(); break;
+   switch(get_msk(ml.flag, _mflg_func)) {
+   case _mfunc_title: W_Title(); break;
+   case _mfunc_end:   F_Run();   break;
+   default:           W_World(); break;
    }
 }
 

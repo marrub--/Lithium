@@ -50,12 +50,12 @@ enum ZscName(PData) {
    _pdt_flashbattery,
    _pdt_soulsfreed,
    _pdt_ptid,
-   _pdt_mapf,
-   _pdt_mapc,
-   _pdt_mapr,
-   _pdt_mapk,
-   _pdt_mapb,
-   _pdt_maps,
+   _pdt_mflg,
+   _pdt_menv,
+   _pdt_rain,
+   _pdt_mfunc,
+   _pdt_mphantom,
+   _pdt_msky,
 };
 
 /* External Data */
@@ -169,53 +169,55 @@ enum ZscName(RifleMode) {
 };
 
 enum ZscName(MapFlag) {
-   _mapf_corrupted,
-   _mapf_thunder,
-   _mapf_vacuum,
-   _mapf_boss_beg,
-   _mapf_boss_end = _mapf_boss_beg + 2,
-   _mapf_cat_beg,
-   _mapf_cat_end = _mapf_cat_beg + 2,
-   _mapf_rain_beg,
-   _mapf_rain_end = _mapf_rain_beg + 3,
-   _mapf_kind_beg,
-   _mapf_kind_end = _mapf_kind_beg + 2,
-   _mapf_sky_beg,
-   _mapf_sky_end = _mapf_sky_beg + 2,
+   _mflg_corrupted,
+   _mflg_thunder,
+   _mflg_vacuum,
+   _mflg_boss_beg,
+   _mflg_boss_end = _mflg_boss_beg + 2,
+   _mflg_env_beg,
+   _mflg_env_end = _mflg_env_beg + 2,
+   _mflg_rain_beg,
+   _mflg_rain_end = _mflg_rain_beg + 3,
+   _mflg_func_beg,
+   _mflg_func_end = _mflg_func_beg + 2,
+   _mflg_sky_beg,
+   _mflg_sky_end = _mflg_sky_beg + 2,
 };
 
-enum ZscName(MapBoss) {
-   _mapb_nospawn,
-   _mapb_none,
-   _mapb_spawned,
+enum ZscName(MapPhantom) {
+   _mphantom_nospawn,
+   _mphantom_none,
+   _mphantom_spawned,
 };
 
 enum ZscName(MapRain) {
-   _mapr_none,
-   _mapr_rain,
-   _mapr_blood,
-   _mapr_abyss,
-   _mapr_snow,
+   _rain_none,
+   _rain_rain,
+   _rain_blood,
+   _rain_abyss,
+   _rain_snow,
+   _rain_fire,
 };
 
-enum ZscName(MapCategory) {
-   _mapc_none,
-   _mapc_abyss,
-   _mapc_interstice,
-   _mapc_hell,
+enum ZscName(MapEnvironment) {
+   _menv_none,
+   _menv_interstice,
+   _menv_hell,
+   _menv_abyss,
+   _menv_evil,
 };
 
 enum ZscName(MapKind) {
-   _mapk_normal,
-   _mapk_title,
-   _mapk_end,
+   _mfunc_normal,
+   _mfunc_title,
+   _mfunc_end,
 };
 
 enum ZscName(MapSky) {
-   _maps_nochange,
-   _maps_vanilla,
-   _maps_replace,
-   _maps_shader,
+   _msky_nochange,
+   _msky_vanilla,
+   _msky_replace,
+   _msky_shader,
 };
 
 #if !ZscOn

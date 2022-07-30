@@ -41,19 +41,19 @@ void P_Ren_Mission(void) {
       ACS_BeginPrint();
       _p(fast_strupper(ml.name)); _c('\n');
       _l("\Cj"); _p(CanonTime(ct_full, ACS_Timer())); _c('\n');
-      if(get_bit(ml.flag, _mapf_vacuum)) {
+      if(get_bit(ml.flag, _mflg_vacuum)) {
          _l("\CiVACUUM\n");
       } else {
          _l("\Cv"); _p(ml.temperature); _l(u8"°C\n");
          _l("\Cy"); _p(ml.humidity);    _l("%RH\n");
       }
-      switch(get_msk(ml.flag, _mapf_rain)) {
-      case _mapr_rain:  _l("\CnRAINING (WATER)\n");   break;
-      case _mapr_blood: _l("\CgRAINING (UNKNOWN)\n"); break;
-      case _mapr_snow:  _l("\CwSNOWING\n");           break;
+      switch(get_msk(ml.flag, _mflg_rain)) {
+      case _rain_rain:  _l("\CnRAINING (WATER)\n");   break;
+      case _rain_blood: _l("\CgRAINING (UNKNOWN)\n"); break;
+      case _rain_snow:  _l("\CwSNOWING\n");           break;
       }
-      if(get_bit(ml.flag, _mapf_thunder))   {_l("\CkELEC. STORM\n");}
-      if(get_bit(ml.flag, _mapf_corrupted)) {_l("\CgCAUSALITY SHIFT\n");}
+      if(get_bit(ml.flag, _mflg_thunder))   {_l("\CkELEC. STORM\n");}
+      if(get_bit(ml.flag, _mflg_corrupted)) {_l("\CgCAUSALITY SHIFT\n");}
       switch(ml.mission) {
       case _mstat_unfinished: _l("\CjMISSION \CiUNFINISHED"); break;
       case _mstat_finished:   _l("\CjMISSION \CdFINISHED");   break;

@@ -67,22 +67,53 @@ override void WorldLoaded(WorldEvent ev) {
       }
    }
 
-   if(__lith_fun & lfun_ragnarok) Ragnarok();
-
-   if(Lith_UTIL.pData(_pdt_maps) != _maps_nochange &&
-      !(lith_sv_skydarkening ~== 1)) {
+   int menv = Lith_UTIL.pData(_pdt_menv);
+   if(menv == _menv_evil) {
+      S_ChangeMusic("lmusic/Ragnarok.ogg", 0, true, true);
+   }
+   if(Lith_UTIL.pData(_pdt_msky) != _msky_nochange && !(lith_sv_skydarkening ~== 1)) {
       for(int i = 0, j = level.sectors.size(); i < j; i++) {
          Sector sec = level.sectors[i];
          if(sec.getTexture(Sector.Ceiling) == skyflatnum) {
-            if(Lith_UTIL.pData(_pdt_mapc) == _mapc_hell) {
+            int ll =
+               int(clamp(sec.lightlevel * lith_sv_skydarkening, 64.0, 255.0));
+            switch(menv) {
+            case _menv_hell:
                sec.setColor("#ff7777");
+               break;
+            case _menv_evil:
+               sec.setColor("#ff2222");
+               ll = 107;
+               sec.flags |= Sector.SECF_ENDGODMODE;
+               sec.setAngle(Sector.floor,   frandom(0, 360));
+               sec.setAngle(Sector.ceiling, frandom(0, 360));
+
+               for(int k = 0, l = sec.lines.size(); k < l; k++) {
+                  Line ln = sec.lines[k];
+                  ln.flags |= Line.ML_DONTDRAW;
+                  ln.alpha = frandom(0.5, 1);
+
+                  for(int m = 0; m < 2; m++) {
+                     Side sd = ln.sidedef[m];
+                     if(sd) {
+                        sd.addTextureXOffset(Side.top,    frandom(-7,7));
+                        sd.addTextureXOffset(Side.mid,    frandom(-7,7));
+                        sd.addTextureXOffset(Side.bottom, frandom(-7,7));
+                        sd.addTextureYOffset(Side.top,    frandom(-7,7));
+                        sd.addTextureYOffset(Side.mid,    frandom(-7,7));
+                        sd.addTextureYOffset(Side.bottom, frandom(-7,7));
+                        sd.light = random(-40, 40);
+                     }
+                  }
+               }
+               break;
             }
-            sec.setLightLevel(int(clamp(sec.lightlevel * lith_sv_skydarkening, 64.0, 255.0)));
+            sec.setLightLevel(ll);
          }
       }
    }
 
-   if(Lith_UTIL.pData(_pdt_mapf, _mapf_thunder) &&
+   if(Lith_UTIL.pData(_pdt_mflg, _mflg_thunder) &&
       !(level.info.flags2 & LEVEL2_HEXENHACK) && /* no-no! */
       !(level.info.flags & LEVEL_STARTLIGHTNING)) {
       m_thunder = Lith_ThunderThinker.create();
@@ -123,8 +154,12 @@ override void WorldThingSpawned(WorldEvent ev) {
    if(th.bISMONSTER && !(th is "RandomSpawner")) {
       Lith_UTIL.exec(th, lsc_monsterinfo);
 
-      if(__lith_fun & lfun_ragnarok)
-         Lith_HERMES.PrepareForRagnarok(th);
+      if(Lith_UTIL.pData(_pdt_menv) == _menv_evil) {
+         th.damageMultiply += 2;
+         th.scale.X *= fRandom(0.9, 1.1);
+         th.scale.Y *= fRandom(0.9, 1.1);
+         th.bLookAllAround = true;
+      }
 
       switch(m_bossLevel) {
          case boss_barons:
@@ -148,7 +183,7 @@ override void WorldThingSpawned(WorldEvent ev) {
       }
 
       if(m_bossLevel != boss_none) {
-         if(Lith_UTIL.pData(_pdt_mapf, _mapf_corrupted)) {
+         if(Lith_UTIL.pData(_pdt_mflg, _mflg_corrupted)) {
             th.Health *= 2;
             th.ReactionTime = 0;
             th.DamageMultiply *= 1.5;
@@ -194,7 +229,7 @@ override void WorldTick() {
             m_bossDeathInit = level.totaltime;
             if(m_bossLevel == boss_iconofsin && lith_sv_postgame) {
                int nf = __lith_fun;
-               if(Lith_UTIL.pData(_pdt_mapf, _mapf_corrupted)) {
+               if(Lith_UTIL.pData(_pdt_mflg, _mflg_corrupted)) {
                   nf |=  lfun_division;
                   nf &= ~lfun_tainted;
                } else if(!(nf & lfun_division)) {
@@ -434,49 +469,6 @@ static string EDataS(Actor mo, int info) {
    case _edt_sky1:     return level.info.skyPic1;
    }
    return "";
-}
-
-static void Ragnarok() {
-   S_ChangeMusic("lmusic/Ragnarok.ogg", 0, true, true);
-
-   let sky = Lith_RenderProvider.getTextureForName("HELP");
-
-   level.changeSky(sky, sky);
-   level.skyspeed1 = 0.001;
-   level.skyspeed2 = 0.001;
-
-   for(int i = 0, j = level.sectors.size(); i < j; i++) {
-      Sector sec = level.sectors[i];
-      sec.lightlevel = 107;
-      sec.flags |= Sector.SECF_ENDGODMODE;
-      sec.setAngle(Sector.floor,   frandom(0, 360));
-      sec.setAngle(Sector.ceiling, frandom(0, 360));
-
-      for(int k = 0, l = sec.lines.size(); k < l; k++) {
-         Line lin = sec.lines[k];
-         lin.flags |= Line.ML_DONTDRAW;
-         lin.alpha = frandom(0.5, 1);
-
-         for(int m = 0; m < 2; m++) {
-            Side sid = lin.sidedef[m];
-            if(sid) {
-               sid.addTextureXOffset(Side.top,    frandom(-7,7));
-               sid.addTextureXOffset(Side.mid,    frandom(-7,7));
-               sid.addTextureXOffset(Side.bottom, frandom(-7,7));
-               sid.addTextureYOffset(Side.top,    frandom(-7,7));
-               sid.addTextureYOffset(Side.mid,    frandom(-7,7));
-               sid.addTextureYOffset(Side.bottom, frandom(-7,7));
-               sid.light = random(-40, 40);
-            }
-         }
-      }
-   }
-
-   Thinker th;
-   for(let it = ThinkerIterator.Create("Actor"); (th = it.next());) {
-      let mo = Actor(th);
-      if(mo && mo.bISMONSTER) PrepareForRagnarok(mo);
-   }
 }
 
 static clearScope void print(int level, string s) {

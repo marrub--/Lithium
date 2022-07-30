@@ -35,7 +35,7 @@ dynam_aut script void P_Player(void) {
 
    pl.setActivator();
 
-   if(get_msk(ml.flag, _mapf_kind) != _mapk_normal) {
+   if(get_msk(ml.flag, _mflg_func) != _mfunc_normal) {
       ACS_SetPlayerProperty(true, true, PROP_TOTALLYFROZEN);
       return;
    }
@@ -297,7 +297,7 @@ void P_Scr_Take(score_t score) {
 }
 
 script static void P_bossWarningDone(void) {
-   if(get_msk(ml.flag, _mapf_boss) == _mapb_spawned) {
+   if(get_msk(ml.flag, _mflg_boss) == _mphantom_spawned) {
       pl.logB(1, tmpstr(lang_discrim(sl_log_bosswarn)));
    }
 }
@@ -313,7 +313,7 @@ void P_bossText(void) {
       return;
    }
 
-   bool division = get_bit(ml.flag, _mapf_corrupted);
+   bool division = get_bit(ml.flag, _mflg_corrupted);
 
    if(division) {
       for(i32 i = 0; i < 35*2; i++) {
@@ -703,7 +703,7 @@ static void P_Aug_pTick(void) {
 }
 
 alloc_aut(0) script_str ext("ACS") addr(OBJ "Markiplier") void Z_MapMarker(i32 tid) {
-   if(get_msk(ml.flag, _mapf_kind) != _mapk_normal) return;
+   if(get_msk(ml.flag, _mflg_func) != _mfunc_normal) return;
 
    enum {ticks = 35 * 2};
 

@@ -268,7 +268,7 @@ void unload() {
    m_dPtr = 0;
    m_tPtr = 0;
    m_dmgNumInit = false;
-   m_skyMode = _maps_nochange;
+   m_skyMode = _msky_nochange;
 }
 
 void tick() {
@@ -294,8 +294,8 @@ void tick() {
       }
    }
 
-   if(m_skyMode != _maps_nochange && level.skyTexture1 != m_sky) {
-      if(m_skyMode == _maps_vanilla) {
+   if(m_skyMode != _msky_nochange && level.skyTexture1 != m_sky) {
+      if(m_skyMode == _msky_vanilla) {
          m_skyBase = level.skyTexture1;
       }
       level.changeSky(m_sky, level.skyTexture2);
@@ -310,8 +310,8 @@ ui void drawSky(RenderEvent evt) {
    let  delta = level.time - m_skyFlash;
    let bdelta = delta >= 0 && delta < m_skyFlashLen;
    let vdelta = bdelta ? 1.0f - (delta + evt.fracTic) / float(m_skyFlashLen) : 0.0f;
-   m_skyCanvas.dim("black", 1.0, 0, 0, canvas_w, canvas_h);
-   if(m_skyMode == _maps_shader) {
+   m_skyCanvas.clearScreen("black");
+   if(m_skyMode == _msky_shader) {
       color cr = m_skyColor;
       if(bdelta) {
          cr = color(
@@ -320,7 +320,7 @@ ui void drawSky(RenderEvent evt) {
             min(int(cr.g * 5.0f * vdelta), 255),
             min(int(cr.b * 5.0f * vdelta), 255));
       }
-      m_skyCanvas.dim(cr, 1.0, 0, 0, canvas_w, canvas_h);
+      m_skyCanvas.clearScreen(cr);
    } else {
       int skySx, skySy; [skySx, skySy] = TexMan.getSize(m_skyBase);
       skySx *= canvas_h / skySy;
@@ -335,7 +335,7 @@ ui void drawSky(RenderEvent evt) {
 }
 
 ui void render(RenderEvent evt) {
-   if(m_skyMode != _maps_nochange) {
+   if(m_skyMode != _msky_nochange) {
       drawSky(evt);
    }
 
@@ -770,22 +770,23 @@ void replaceSky() {
    m_skyB         = getTextureForName("LITHBSKY");
    m_skyC         = getTextureForName("LITHCSKY");
    m_skyLightning = getTextureForName("LITHSKLI");
-   m_skyMode      = Lith_UTIL.pData(_pdt_maps);
+   m_skyMode      = Lith_UTIL.pData(_pdt_msky);
    switch(m_skyMode) {
-   case _maps_shader:
+   case _msky_shader:
       color cr;
       /* no atmosphere...? */
-      if(Lith_UTIL.pData(_pdt_mapf, _mapf_vacuum)) {
+      if(Lith_UTIL.pData(_pdt_mflg, _mflg_vacuum)) {
          cr = "black";
       } else {
-         switch(Lith_UTIL.pData(_pdt_mapc)) {
-         case _mapc_hell:       cr = "#540203"; break;
-         case _mapc_interstice: cr = "#160508"; break;
-         case _mapc_abyss:      cr = "#afafaf"; break;
+         switch(Lith_UTIL.pData(_pdt_menv)) {
+         case _menv_evil:       cr = "#ff0000"; break;
+         case _menv_hell:       cr = "#540203"; break;
+         case _menv_interstice: cr = "#160508"; break;
+         case _menv_abyss:      cr = "#afafaf"; break;
          default:               cr = "#0c0c0f"; break;
          }
          /* energy in the clouds? */
-         if(Lith_UTIL.pData(_pdt_mapf, _mapf_thunder)) {
+         if(Lith_UTIL.pData(_pdt_mflg, _mflg_thunder)) {
             cr = color(
                255,
                min(int(cr.r * 1.437f), 255),
@@ -795,19 +796,24 @@ void replaceSky() {
       }
       /* TODO: other env. factors such as humidity */
       m_skyColor = cr;
-      m_skyBase = m_skyC;
-      m_sky = m_skyB;
+      m_skyBase  = m_skyC;
+      m_sky      = m_skyB;
       break;
-   case _maps_replace:
-      switch(Lith_UTIL.pData(_pdt_mapc)) {
-      case _mapc_hell:
+   case _msky_replace:
+      level.skySpeed1 = 0.0;
+      switch(Lith_UTIL.pData(_pdt_menv)) {
+      case _menv_evil:
+         m_skyBase = getTextureForName("HELP");
+         level.skySpeed1 = 0.001;
+         break;
+      case _menv_hell:
          m_skyBase = getTextureForName("LITHSKRD");
          level.skySpeed1 = 0.01;
          break;
-      case _mapc_interstice:
+      case _menv_interstice:
          m_skyBase = getTextureForName("LITHSKDE");
          break;
-      case _mapc_abyss:
+      case _menv_abyss:
          m_skyBase = getTextureForName("LITHWHIT");
          break;
       default:
@@ -816,9 +822,9 @@ void replaceSky() {
       }
       m_sky = m_skyC;
       break;
-   case _maps_vanilla:
+   case _msky_vanilla:
       m_skyBase = level.skyTexture1;
-      m_sky = m_skyC;
+      m_sky     = m_skyC;
       break;
    }
    if(m_sky.isValid()) {

@@ -62,14 +62,6 @@ static void PhantomTeleport(Actor mo) {
    Lith_CopyEffect.create("Lith_PhantomTeleportFx", mo, vel: (0.0, 0.0, 0.5));
 }
 
-static void PrepareForRagnarok(Actor mo)
-{
-   mo.DamageMultiply += 2;
-   mo.Scale.X *= FRandom(0.9, 1.1);
-   mo.Scale.Y *= FRandom(0.9, 1.1);
-   mo.bLOOKALLAROUND = true;
-}
-
 static void MonsterBarrierLook(Actor mo)
 {
    for(let it = BlockThingsIterator.Create(mo, 192*2); it.Next();)
@@ -143,7 +135,7 @@ static void SpawnBoss(Actor a, string name, int phase)
 }
 
 static void triggerBoss() {
-   if(Lith_UTIL.pData(_pdt_mapb) == _mapb_spawned) return;
+   if(Lith_UTIL.pData(_pdt_mphantom) == _mphantom_spawned) return;
 
    double minRadius = getDefaultByType('Lith_Phantom').radius;
    double minHeight = getDefaultByType('Lith_Phantom').height;

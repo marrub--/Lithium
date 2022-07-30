@@ -20,15 +20,15 @@ static i32  lmvar rain_dist;
 
 alloc_aut(0) script void P_DoRain(void) {
    str raindrop;
-   switch(get_msk(ml.flag, _mapf_rain)) {
+   switch(get_msk(ml.flag, _mflg_rain)) {
    default: return;
-   case _mapr_rain:  raindrop = so_RainDrop;      break;
-   case _mapr_blood: raindrop = so_BloodRainDrop; break;
-   case _mapr_abyss: raindrop = so_AbyssRainDrop; break;
-   case _mapr_snow:  raindrop = so_SnowDrop;      break;
+   case _rain_rain:  raindrop = so_RainDrop;      break;
+   case _rain_blood: raindrop = so_BloodRainDrop; break;
+   case _rain_abyss: raindrop = so_AbyssRainDrop; break;
+   case _rain_snow:  raindrop = so_SnowDrop;      break;
    }
    StartSound(ss_amb_wind, lch_weather1, CHANF_LOOP, 0.001, ATTN_NONE);
-   if(get_msk(ml.flag, _mapf_rain) != _mapr_snow) {
+   if(get_msk(ml.flag, _mflg_rain) != _rain_snow) {
       StartSound(ss_amb_rain, lch_weather2, CHANF_LOOP, 0.001, ATTN_NONE);
    }
    k32 skydist, curskydist = 1;
