@@ -1,0 +1,162 @@
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
+
+extend class Lith_RenderProvider;
+
+const canvas_w = 1024;
+const canvas_h = 128;
+
+private Canvas m_skyCanvas;
+private textureId m_sky, m_skyBase, m_skyB, m_skyC, m_skyGradient, m_skyLightning, m_skyClouds;
+private int m_skyMode, m_skyFlash, m_skyFlashLen;
+private float m_skyFlashPos;
+private color m_skyColor, m_skyFlashColor;
+private bool m_doubleSky;
+
+private void tickSky() {
+   if(m_skyMode != _msky_nochange && curSkyTex() != m_sky) {
+      if(m_skyMode == _msky_vanilla) {
+         setSkyBase(curSkyTex(), curSkySpeed());
+      }
+      setSky();
+   }
+}
+
+private textureId curSkyTex() const {
+   return m_doubleSky ? level.skyTexture2 : level.skyTexture1;
+}
+
+private double curSkySpeed() const {
+   return m_doubleSky ? level.skySpeed2 : level.skySpeed1;
+}
+
+private void setSky() const {
+   if(m_doubleSky) {level.changeSky(level.skyTexture1, m_sky);}
+   else            {level.changeSky(m_sky, level.skyTexture2);}
+}
+
+private void setSkyBase(textureId tex, double skySpeed) {
+   if(m_doubleSky) {level.skySpeed2 = skySpeed;}
+   else            {level.skySpeed1 = skySpeed;}
+   m_skyBase = tex;
+}
+
+void setSkyFlash(int skyFlash, int skyFlashLen) {
+   if(m_skyMode != _msky_nochange) {
+      m_skyFlash      = skyFlash;
+      m_skyFlashLen   = skyFlashLen / 2;
+      m_skyFlashPos   = fRandom(0, canvas_w-TexMan.getSize(m_skyLightning));
+      m_skyFlashColor = color(179 + random(0, 76), 220 + random(0, 35), 255, 255);
+   }
+}
+
+void replaceSky() {
+   m_sky.setInvalid();
+   m_skyClouds.setInvalid();
+   m_doubleSky    = level.info.flags & LEVEL_DOUBLESKY;
+   m_skyB         = getTex("LITHBSKY");
+   m_skyC         = getTex("LITHCSKY");
+   m_skyGradient  = getTex("LITHSKGR");
+   m_skyLightning = getTex("LITHSKLI");
+   m_skyMode      = Lith_UTIL.pData(_pdt_msky);
+   switch(m_skyMode) {
+   case _msky_shader:
+      color cr;
+      /* no atmosphere...? */
+      if(Lith_UTIL.pData(_pdt_mflg, _mflg_vacuum)) {
+         cr = "black";
+      } else {
+         switch(Lith_UTIL.pData(_pdt_menv)) {
+         case _menv_evil:       cr = "#ff0000"; break;
+         case _menv_hell:       cr = "#540203"; break;
+         case _menv_interstice: cr = "#160508"; break;
+         case _menv_abyss:      cr = "#afafaf"; break;
+         default:               cr = "#0c0c0f"; break;
+         }
+         /* energy in the clouds? */
+         if(Lith_UTIL.pData(_pdt_mflg, _mflg_thunder)) {
+            cr = color(
+               255,
+               min(int(cr.r * 1.437f), 255),
+               min(int(cr.g * 1.437f), 255),
+               min(int(cr.b * 1.437f), 255));
+         }
+      }
+      /* TODO: other env. factors such as humidity */
+      m_skyColor = cr;
+      setSkyBase(m_skyC, 0.0);
+      m_sky = m_skyB;
+      break;
+   case _msky_replace:
+      switch(Lith_UTIL.pData(_pdt_menv)) {
+      case _menv_evil:       setSkyBase(getTex("HELP"),     0.001); break;
+      case _menv_hell:       setSkyBase(getTex("LITHSKRD"), 0.01);  break;
+      case _menv_interstice: setSkyBase(getTex("LITHSKDE"), 0.0);   break;
+      case _menv_abyss:      setSkyBase(getTex("LITHWHIT"), 0.0);   break;
+      default:               setSkyBase(getTex("LITHSKST"), 0.0);   break;
+      }
+      m_sky = m_skyC;
+      break;
+   case _msky_vanilla:
+      setSkyBase(curSkyTex(), curSkySpeed());
+      m_sky = m_skyC;
+      break;
+   }
+   if(m_sky.isValid()) {
+      if(m_sky == m_skyC) {
+         switch(Lith_UTIL.pData(_pdt_rain)) {
+         case _rain_blood: /* TODO */
+         case _rain_snow:
+         case _rain_fire: /* TODO */
+         case _rain_rain: m_skyClouds = getTex("LITHSKCL"); break;
+         }
+      }
+      m_skyCanvas = TexMan.getCanvas("LITHCSKY");
+      setSky();
+   }
+}
+
+ui private void drawSky(RenderEvent evt) {
+   let  delta = level.time - m_skyFlash;
+   let bDelta = delta >= 0 && delta < m_skyFlashLen;
+   let vDelta = bDelta ? 1.0f - (delta + evt.fracTic) / float(m_skyFlashLen) : 0.0f;
+   m_skyCanvas.clearScreen("black");
+   if(m_skyMode == _msky_shader) {
+      color cr = m_skyColor;
+      if(bDelta) {
+         cr = color(
+            255,
+            min(int(cr.r * 5.0f * vDelta), 255),
+            min(int(cr.g * 5.0f * vDelta), 255),
+            min(int(cr.b * 5.0f * vDelta), 255));
+      }
+      m_skyCanvas.clearScreen(cr);
+   } else {
+      int szx, szy; [szx, szy] = TexMan.getSize(m_skyBase);
+      if(szy < canvas_h) {
+         szy = canvas_h * (canvas_h / szy);
+      } else {
+         szy = canvas_h;
+      }
+      for(int x = 0, i = 0; x < canvas_w; x += szx, ++i) {
+         m_skyCanvas.drawTexture(m_skyBase, true, x, 0, DTA_DestHeight,szy, DTA_DestWidth,szx, DTA_FlipY,true);
+      }
+      if(bDelta) {
+         m_skyCanvas.drawTexture(m_skyLightning, true, m_skyFlashPos, 0, DTA_Alpha,1.0 - vDelta, DTA_LegacyRenderStyle,STYLE_Add, DTA_Color,m_skyFlashColor, DTA_FlipY,true, DTA_FlipX,int(m_skyFlashPos) & 1 == 0);
+      }
+      if(m_skyClouds.isValid()) {
+         m_skyCanvas.drawTexture(m_skyClouds, true, 0, 0, DTA_FlipX,true,DTA_FlipY,true);
+      }
+      m_skyCanvas.drawTexture(m_skyGradient, true, 0, 0, DTA_DestHeight,szy, DTA_FlipY,true);
+      if(bDelta) {
+         m_skyCanvas.dim("white", vDelta * 0.2f, 0, 0, canvas_w, canvas_h, STYLE_Add);
+      }
+   }
+}
+
+/* EOF */

@@ -35,7 +35,7 @@ private void setFlash() {
       m_next = random(5, 20) * ticrate;
    }
    if(oldNext) {
-      m_nextSnd = oldNext + random(1, m_next / 2);
+      m_nextSnd = oldNext + random(2, min(m_next / 4, 3 * ticrate));
    } else {
       m_nextSnd = -1;
    }
@@ -50,7 +50,7 @@ override void tick() {
       return;
    }
    if(m_time == m_nextSnd) {
-      S_StartSound("world/thunder", lch_auto, 0, 1.0, ATTN_NONE, fRandom(0.8, 2.0));
+      S_StartSound("world/thunder", lch_weather1, 0, 1.0, ATTN_NONE, fRandom(0.9, 1.8));
    }
    /* TODO: make these use functors */
    let delta = m_time++ - m_next;
