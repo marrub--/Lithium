@@ -7,12 +7,14 @@
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
 #include "lzscript/Client/Render.zsc"
+
 #include "lzscript/Client/Crosshair.zsc"
 #include "lzscript/Client/DamageNum.zsc"
 #include "lzscript/Client/Menu.zsc"
 #include "lzscript/Client/MessageBox.zsc"
 #include "lzscript/Client/PlayerclassMenu.zsc"
 #include "lzscript/Client/Projection.zsc"
+#include "lzscript/Client/Sky.zsc"
 #include "lzscript/Client/StatScreen.zsc"
 #include "lzscript/Client/StatusBar.zsc"
 

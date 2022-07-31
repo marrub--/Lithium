@@ -134,7 +134,7 @@ void init(Lith_Player plyr_) {
    plyr = plyr_;
    initCb();
    fnam = "$LITH_STAT_" .. snam;
-   icon = Lith_RenderProvider.getTextureForName(":Stat:" .. snam);
+   icon = Lith_RenderProvider.getTex(":Stat:" .. snam);
 }
 
 override void tick() {

@@ -8,10 +8,15 @@
 
 class Lith_ThunderThinker : Thinker;
 
-private int          m_next, m_len, m_speed, m_nextSnd;
+private int          m_time, m_next, m_len, m_speed, m_nextSnd;
 private array<int16> m_lights;
 
 static Lith_ThunderThinker create() {
+   if(!Lith_UTIL.pData(_pdt_mflg, _mflg_thunder) ||
+      level.info.flags2 & LEVEL2_HEXENHACK || /* no-no! */
+      level.info.flags & LEVEL_STARTLIGHTNING) {
+      return null;
+   }
    let th = new("Lith_ThunderThinker");
    for(int i = 0, j = level.sectors.size(); i < j; ++i) {
       th.m_lights.push(int16.max);
@@ -24,7 +29,7 @@ private void setFlash() {
    int oldNext = m_next;
    if(random(0, 255) < 50) {
       m_next = random(16, 31);
-   } else if(random() < 128 && level.time & 32 == 0) {
+   } else if(random(0, 255) < 128 && m_time & 32 == 0) {
       m_next = random(2, 9) * ticrate;
    } else {
       m_next = random(5, 20) * ticrate;
@@ -36,7 +41,7 @@ private void setFlash() {
    }
    m_len   = random( 8, 40);
    m_speed = random(-2, -8);
-   m_next += level.time;
+   m_next += m_time;
    Lith_RenderProvider.instance().setSkyFlash(m_next, m_len);
 }
 
@@ -44,11 +49,11 @@ override void tick() {
    if(level.isFrozen()) {
       return;
    }
-   let delta = level.time - m_next;
-   if(level.time == m_nextSnd) {
+   if(m_time == m_nextSnd) {
       S_StartSound("world/thunder", lch_auto, 0, 1.0, ATTN_NONE, fRandom(0.8, 2.0));
    }
    /* TODO: make these use functors */
+   let delta = m_time++ - m_next;
    if(delta < 0) {
       return;
    } else if(delta == 0) {

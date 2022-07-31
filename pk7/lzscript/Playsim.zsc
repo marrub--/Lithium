@@ -11,6 +11,7 @@
 #include "lzscript/Playsim/Input.zsc"
 #include "lzscript/Playsim/Monsters.zsc"
 #include "lzscript/Playsim/Player.zsc"
+#include "lzscript/Playsim/Rain.zsc"
 #include "lzscript/Playsim/StatusEffects.zsc"
 #include "lzscript/Playsim/Thunder.zsc"
 #include "lzscript/Playsim/Weapons.zsc"
@@ -27,6 +28,7 @@ private array<Actor> m_bossBabies;
 private int m_bossDeathInit;
 private bool m_extraHard;
 private Lith_ThunderThinker m_thunder;
+private Lith_RainThinker m_rain;
 
 override void WorldLoaded(WorldEvent ev) {
    m_extraHard = lith_sv_extrahard;
@@ -113,10 +115,9 @@ override void WorldLoaded(WorldEvent ev) {
       }
    }
 
-   if(Lith_UTIL.pData(_pdt_mflg, _mflg_thunder) &&
-      !(level.info.flags2 & LEVEL2_HEXENHACK) && /* no-no! */
-      !(level.info.flags & LEVEL_STARTLIGHTNING)) {
+   if(!ev.isReOpen) {
       m_thunder = Lith_ThunderThinker.create();
+      m_rain    = Lith_RainThinker.create();
    }
 }
 

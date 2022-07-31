@@ -8,9 +8,6 @@
 
 class Lith_RenderProvider;
 
-const canvas_w = 1024;
-const canvas_h = 200;
-
 enum DrawType {
    _type_clipSet,
    _type_clipClear,
@@ -67,12 +64,6 @@ private Font               m_lJTrmFont;
 private Font               m_newConsoleFont;
 private Lith_LineTracer    m_tracer;
 
-private Canvas m_skyCanvas;
-private textureId m_sky, m_skyBase, m_skyB, m_skyC, m_skyLightning;
-private int m_skyMode, m_skyFlash, m_skyFlashLen;
-private float m_skyFlashPos;
-private color m_skyColor, m_skyFlashColor;
-
 private bool m_showItems;
 private int  m_itemColor;
 
@@ -81,187 +72,28 @@ private ui textureId m_texBattery;
 
 private int m_lightBattery;
 
-static ui void drawRect(int sx, int sy, int px, int py, color cr) {
-   Screen.dim(cr, cr.a/255.0, px, py, sx, sy);
-}
+static Lith_RenderProvider create() {
+   let r = new("Lith_RenderProvider");
 
-clearScope vector2 getScSized(float x, float y, bool kludge = false, vector2 vsz = (0, 0)) {
-   if(!vsz.x || !vsz.y) {
-      vsz = m_virtualSize;
-   }
-   float sw = Screen.GetWidth();
-   float sh = Screen.GetHeight();
+   r.m_english = Lith_HERMES.localize("LITH_CHECK") == "Eng";
 
-   vector2 xy, sc;
-
-   if(kludge) [sc, xy] = Screen.VirtualToRealCoords((0, 0), ( x,  y), vsz);
-   else       [xy, sc] = Screen.VirtualToRealCoords((x, y), (sw, sh), vsz);
-
-   return xy;
-}
-
-private void tickNearbyItems() {
-   m_showItems = lith_hud_showitems;
-   m_itemColor = acs_executeWithResult(lsc_drawcr, lith_hud_itemcolor);
-}
-
-private ui void drawNearbyItems(RenderEvent evt) {
-   if(!m_showItems) {
-      return;
-   }
-   Font fnt = fntSml();
-   for(let it = BlockThingsIterator.create(evt.camera, 256.0); it.next();) {
-      let mo = it.thing;
-      if(Inventory(mo) && mo.bSpecial) {
-         int px, py; bool seen;
-         [px, py, seen] = project(mo.pos);
-         if(seen) {
-            string tag   = mo.getTag();
-            float  dist  = mo.distance3D(evt.camera);
-            float  alpha = 1.0 - clamp(dist / 256.0, 0.0, 1.0);
-            int    sw    = fnt.stringWidth(tag);
-            int    cr    = m_itemColor;
-            Screen.drawText(fnt, cr, px - sw / 2, py, tag, DTA_Alpha,alpha,
-                            DTA_VirtualWidth,320, DTA_VirtualHeight,240);
-         }
-      }
-   }
-}
-
-private clearScope int, int ammoAmt(Actor mo, class<Lith_Ammo> ty) const {
-   let inv = mo.findInventory(ty);
-   int amt = inv.amount;
-   int max = inv.maxAmount;
-   int clr;
-   if(amt == max) {
-      clr = CH_L_N;
-   } else if(amt > max - max / 4) {
-      clr = CH_L_D;
-   } else if(amt > max / 2) {
-      clr = CH_L_F;
-   } else if(amt > max / 4) {
-      clr = CH_L_I;
-   } else if(amt != 0) {
-      clr = CH_L_G;
-   } else {
-      clr = CH_L_M;
-   }
-   return amt, clr;
-}
-
-private void tickInventory() {
-   m_lightBattery = lith_light_battery;
-}
-
-private ui void drawInventory(RenderEvent evt) {
-   static const string keyClasses[] = {
-      "BlueCard",  "RedCard",  "YellowCard",
-      "BlueSkull", "RedSkull", "YellowSkull",
-
-      "ChexBlueCard", "ChexRedCard", "ChexYellowCard",
-
-      "KeyBlue", "KeyGreen", "KeyYellow"
-   };
-
-   static const string keyText[] = {
-      "\cn", "\ca", "\cf",
-      "\cn", "\ca", "\cf",
-
-      "\cn", "\ca", "\cf",
-
-      "\cn", "\cd", "\cf"
-   };
-
-   if(m_texBatteryOutline.isNull()) {
-      m_texBatteryOutline = getTextureForName(":HUD:BatteryOutline");
-   }
-   if(m_texBattery.isNull()) {
-      m_texBattery = getTextureForName(":HUD:Battery");
+   switch(lith_gui_jpfont) {
+   default:
+   case font_misaki_gothic: r.m_uFntSml = 'MisakiG';  break;
+   case font_misaki_mincho: r.m_uFntSml = 'MisakiM';  break;
+   case font_jiskan16:      r.m_uFntSml = 'jiskan16'; break;
    }
 
-   let mo = evt.camera;
+   r.m_lMidFont       = 'lmidfont';
+   r.m_lTrmFont       = 'ltrmfont';
+   r.m_lBigFont       = 'lbigfont';
+   r.m_lJTrmFont      = 'ljtrmfont';
+   r.m_newConsoleFont = 'newconsolefont';
 
-   string inv_text = "";
-   int y = 0;
+   r.projectRegister();
+   r.m_tracer = new("Lith_LineTracer");
 
-   int blt, cblt; [blt, cblt] = ammoAmt(mo, 'Lith_BulletAmmo');
-   int shl, cshl; [shl, cshl] = ammoAmt(mo, 'Lith_ShellAmmo');
-   int rkt, crkt; [rkt, crkt] = ammoAmt(mo, 'Lith_RocketAmmo');
-   int nrg, cnrg; [nrg, cnrg] = ammoAmt(mo, 'Lith_PlasmaAmmo');
-   int drk, cdrk; [drk, cdrk] = ammoAmt(mo, 'Lith_CannonAmmo');
-
-   inv_text.appendFormat(
-      " \c%c%i\c-\n \c%c%i\c-\n \c%c%i\c-\n \c%c%i\c-\n \c%c%i\c-\n",
-      cblt, blt,
-      cshl, shl,
-      crkt, rkt,
-      cnrg, nrg,
-      cdrk, drk);
-   y += 5 * 8;
-
-   bool any_key = false;
-   for(int i = 0; i < keyClasses.size(); ++i) {
-      class<Key> kt = keyClasses[i];
-      if(kt && mo.countInv(kt)) {
-         inv_text = inv_text .. keyText[i];
-         any_key  = true;
-      }
-   }
-   if(any_key) {
-      y += 8;
-      inv_text = inv_text .. "\n";
-   }
-
-   Screen.drawText(smallFont, Font.CR_WHITE, 0, 0, inv_text,
-                   DTA_VirtualWidth,320, DTA_VirtualHeight,240);
-
-   y = drawStatFx(evt, y);
-
-   int battery  = Lith_UTIL.pData(_pdt_flashbattery);
-   int bat_life = m_lightBattery * 35;
-
-   if(bat_life > 0 && battery < bat_life) {
-      float s = battery / float(bat_life) * 8.0;
-
-      Screen.drawTexture(m_texBatteryOutline, false, 0, y,
-                         DTA_VirtualWidth,320, DTA_VirtualHeight,240);
-
-      y += 2;
-
-      vector2 cb, cs;
-      cb = getScSized(2, y, vsz: (320, 240));
-      cs = getScSized(2, s, vsz: (320, 240));
-      Screen.setClipRect(int(cb.x), int(cb.y), int(cs.x), int(cs.y));
-      Screen.drawTexture(m_texBattery, false, 2, y,
-                         DTA_VirtualWidth,320, DTA_VirtualHeight,240);
-      Screen.clearClipRect();
-
-      y += 10;
-   }
-}
-
-Font fntSml(bool noUnicode = false) const {
-   return noUnicode || m_english ? smallFont : m_uFntSml;
-}
-
-Font fntMid(bool noUnicode = false) const {
-   return noUnicode || m_english ? m_lMidFont : m_uFntSml;
-}
-
-Font fntBig(bool noUnicode = false) const {
-   return noUnicode || m_english ? m_lBigFont : m_newConsoleFont;
-}
-
-Font fntTrm(bool noUnicode = false) const {
-   return noUnicode || m_english ? m_lTrmFont : m_lJTrmFont;
-}
-
-Font fntAny(name name, bool noUnicode = false) const {
-   /**/ if(name == 'smallfnt') return fntSml(noUnicode);
-   else if(name == 'lmidfont') return fntMid(noUnicode);
-   else if(name == 'ltrmfont') return fntTrm(noUnicode);
-   else if(name == 'bigupper') return fntBig(noUnicode);
-   else                        return Font.getFont(name);
+   return r;
 }
 
 void unload() {
@@ -273,66 +105,13 @@ void unload() {
 
 void tick() {
    projectSetRenderer();
-
    tickNearbyItems();
    tickDmgNums();
    tickScrNums();
    tickCrosshair();
    tickInventory();
-
-   m_dPtr = 0;
-   m_tPtr = 0;
-
-   for(int i = 0; i < m_fadeMsg.size(); i++) {
-      if(m_fadeMsg[i].fade) {
-         if(!m_fadeMsg[i].time) {
-            m_fadeMsg[i].fade =
-               Max(int(m_fadeMsg[i].fade) - int(m_fadeMsg[i].fSub), 0);
-         } else {
-            m_fadeMsg[i].time--;
-         }
-      }
-   }
-
-   if(m_skyMode != _msky_nochange && level.skyTexture1 != m_sky) {
-      if(m_skyMode == _msky_vanilla) {
-         m_skyBase = level.skyTexture1;
-      }
-      level.changeSky(m_sky, level.skyTexture2);
-   }
-}
-
-static DrawData getDt(DrawData d) {
-   return d;
-}
-
-ui void drawSky(RenderEvent evt) {
-   let  delta = level.time - m_skyFlash;
-   let bdelta = delta >= 0 && delta < m_skyFlashLen;
-   let vdelta = bdelta ? 1.0f - (delta + evt.fracTic) / float(m_skyFlashLen) : 0.0f;
-   m_skyCanvas.clearScreen("black");
-   if(m_skyMode == _msky_shader) {
-      color cr = m_skyColor;
-      if(bdelta) {
-         cr = color(
-            255,
-            min(int(cr.r * 5.0f * vdelta), 255),
-            min(int(cr.g * 5.0f * vdelta), 255),
-            min(int(cr.b * 5.0f * vdelta), 255));
-      }
-      m_skyCanvas.clearScreen(cr);
-   } else {
-      int skySx, skySy; [skySx, skySy] = TexMan.getSize(m_skyBase);
-      skySx *= canvas_h / skySy;
-      for(int x = 0, i = 0; x < canvas_w; x += skySx, ++i) {
-         m_skyCanvas.drawTexture(m_skyBase, true, x, 0, DTA_DestHeight,canvas_h, DTA_DestWidth,skySx, DTA_FlipY,true);
-      }
-      /* TODO: draw psx fire additively here */
-      if(bdelta) {
-         m_skyCanvas.dim("white", vdelta * 0.2f, 0, 0, canvas_w, canvas_h, STYLE_Add);
-         m_skyCanvas.drawTexture(m_skyLightning, true, m_skyFlashPos, 0, DTA_Alpha,1.0 - vdelta, DTA_LegacyRenderStyle,STYLE_Add, DTA_Color,m_skyFlashColor, DTA_FlipY,true, DTA_FlipX,int(m_skyFlashPos) & 1 == 0);
-      }
-   }
+   tickDraw();
+   tickSky();
 }
 
 ui void render(RenderEvent evt) {
@@ -436,42 +215,6 @@ ui void render(RenderEvent evt) {
    }
 }
 
-static clearScope textureId getTextureForName(string tex) {
-   if(tex.byteAt(0) == CH_COLON) {
-      tex.replace(":", "/");
-      tex = "lgfx" .. tex .. ".png";
-   }
-   return TexMan.checkForTexture(tex, TexMan.Type_Any);
-}
-
-static Lith_RenderProvider create() {
-   let r = new("Lith_RenderProvider");
-
-   r.m_english = Lith_HERMES.localize("LITH_CHECK") == "Eng";
-
-   switch(lith_gui_jpfont) {
-   default:
-   case font_misaki_gothic: r.m_uFntSml = 'MisakiG';  break;
-   case font_misaki_mincho: r.m_uFntSml = 'MisakiM';  break;
-   case font_jiskan16:      r.m_uFntSml = 'jiskan16'; break;
-   }
-
-   r.m_lMidFont       = 'lmidfont';
-   r.m_lTrmFont       = 'ltrmfont';
-   r.m_lBigFont       = 'lbigfont';
-   r.m_lJTrmFont      = 'ljtrmfont';
-   r.m_newConsoleFont = 'newconsolefont';
-
-   r.projectRegister();
-   r.m_tracer = new("Lith_LineTracer");
-
-   return r;
-}
-
-static clearScope Lith_RenderProvider instance() {
-   return Lith_URANUS(StaticEventHandler.find('Lith_URANUS')).m_ren;
-}
-
 static int LA(int pos, string s, string fnt) {
    let r = instance();
 
@@ -491,7 +234,7 @@ static int LA(int pos, string s, string fnt) {
 }
 
 static int LB(string t) {
-   let tx = getTextureForName(t);
+   let tx = getTex(t);
    int sx, sy; [sx, sy] = TexMan.GetSize(tx);
    return (sx & 0xFFFF) | ((sy & 0xFFFF) << 16);
 }
@@ -586,7 +329,7 @@ static void LS(string tex, int xx, int yy, float anum, int flags, color cr = 0) 
       d.C = cr;
    }
 
-   d.Tex = getTextureForName(tex);
+   d.Tex = getTex(tex);
 
    int sx, sy; [sx, sy] = TexMan.GetSize(d.Tex);
 
@@ -742,6 +485,162 @@ static clearscope void StartSound(Actor mo, sound snd, int slot, int flags, doub
    }
 }
 
+private void tickDraw() {
+   m_dPtr = 0;
+   m_tPtr = 0;
+
+   for(int i = 0; i < m_fadeMsg.size(); i++) {
+      if(m_fadeMsg[i].fade) {
+         if(!m_fadeMsg[i].time) {
+            m_fadeMsg[i].fade =
+               Max(int(m_fadeMsg[i].fade) - int(m_fadeMsg[i].fSub), 0);
+         } else {
+            m_fadeMsg[i].time--;
+         }
+      }
+   }
+}
+
+private void tickNearbyItems() {
+   m_showItems = lith_hud_showitems;
+   m_itemColor = acs_executeWithResult(lsc_drawcr, lith_hud_itemcolor);
+}
+
+private ui void drawNearbyItems(RenderEvent evt) {
+   if(!m_showItems) {
+      return;
+   }
+   Font fnt = fntSml();
+   for(let it = BlockThingsIterator.create(evt.camera, 256.0); it.next();) {
+      let mo = it.thing;
+      if(Inventory(mo) && mo.bSpecial) {
+         int px, py; bool seen;
+         [px, py, seen] = project(mo.pos);
+         if(seen) {
+            string tag   = mo.getTag();
+            float  dist  = mo.distance3D(evt.camera);
+            float  alpha = 1.0 - clamp(dist / 256.0, 0.0, 1.0);
+            int    sw    = fnt.stringWidth(tag);
+            int    cr    = m_itemColor;
+            Screen.drawText(fnt, cr, px - sw / 2, py, tag, DTA_Alpha,alpha,
+                            DTA_VirtualWidth,320, DTA_VirtualHeight,240);
+         }
+      }
+   }
+}
+
+private clearScope int, int ammoAmt(Actor mo, class<Lith_Ammo> ty) const {
+   let inv = mo.findInventory(ty);
+   int amt = inv.amount;
+   int max = inv.maxAmount;
+   int clr;
+   if(amt == max) {
+      clr = CH_L_N;
+   } else if(amt > max - max / 4) {
+      clr = CH_L_D;
+   } else if(amt > max / 2) {
+      clr = CH_L_F;
+   } else if(amt > max / 4) {
+      clr = CH_L_I;
+   } else if(amt != 0) {
+      clr = CH_L_G;
+   } else {
+      clr = CH_L_M;
+   }
+   return amt, clr;
+}
+
+private void tickInventory() {
+   m_lightBattery = lith_light_battery;
+}
+
+private ui void drawInventory(RenderEvent evt) {
+   static const string keyClasses[] = {
+      "BlueCard",  "RedCard",  "YellowCard",
+      "BlueSkull", "RedSkull", "YellowSkull",
+
+      "ChexBlueCard", "ChexRedCard", "ChexYellowCard",
+
+      "KeyBlue", "KeyGreen", "KeyYellow"
+   };
+
+   static const string keyText[] = {
+      "\cn", "\ca", "\cf",
+      "\cn", "\ca", "\cf",
+
+      "\cn", "\ca", "\cf",
+
+      "\cn", "\cd", "\cf"
+   };
+
+   if(m_texBatteryOutline.isNull()) {
+      m_texBatteryOutline = getTex(":HUD:BatteryOutline");
+   }
+   if(m_texBattery.isNull()) {
+      m_texBattery = getTex(":HUD:Battery");
+   }
+
+   let mo = evt.camera;
+
+   string inv_text = "";
+   int y = 0;
+
+   int blt, cblt; [blt, cblt] = ammoAmt(mo, 'Lith_BulletAmmo');
+   int shl, cshl; [shl, cshl] = ammoAmt(mo, 'Lith_ShellAmmo');
+   int rkt, crkt; [rkt, crkt] = ammoAmt(mo, 'Lith_RocketAmmo');
+   int nrg, cnrg; [nrg, cnrg] = ammoAmt(mo, 'Lith_PlasmaAmmo');
+   int drk, cdrk; [drk, cdrk] = ammoAmt(mo, 'Lith_CannonAmmo');
+
+   inv_text.appendFormat(
+      " \c%c%i\c-\n \c%c%i\c-\n \c%c%i\c-\n \c%c%i\c-\n \c%c%i\c-\n",
+      cblt, blt,
+      cshl, shl,
+      crkt, rkt,
+      cnrg, nrg,
+      cdrk, drk);
+   y += 5 * 8;
+
+   bool any_key = false;
+   for(int i = 0; i < keyClasses.size(); ++i) {
+      class<Key> kt = keyClasses[i];
+      if(kt && mo.countInv(kt)) {
+         inv_text = inv_text .. keyText[i];
+         any_key  = true;
+      }
+   }
+   if(any_key) {
+      y += 8;
+      inv_text = inv_text .. "\n";
+   }
+
+   Screen.drawText(smallFont, Font.CR_WHITE, 0, 0, inv_text,
+                   DTA_VirtualWidth,320, DTA_VirtualHeight,240);
+
+   y = drawStatFx(evt, y);
+
+   int battery  = Lith_UTIL.pData(_pdt_flashbattery);
+   int bat_life = m_lightBattery * 35;
+
+   if(bat_life > 0 && battery < bat_life) {
+      float s = battery / float(bat_life) * 8.0;
+
+      Screen.drawTexture(m_texBatteryOutline, false, 0, y,
+                         DTA_VirtualWidth,320, DTA_VirtualHeight,240);
+
+      y += 2;
+
+      vector2 cb, cs;
+      cb = getScSized(2, y, vsz: (320, 240));
+      cs = getScSized(2, s, vsz: (320, 240));
+      Screen.setClipRect(int(cb.x), int(cb.y), int(cs.x), int(cs.y));
+      Screen.drawTexture(m_texBattery, false, 2, y,
+                         DTA_VirtualWidth,320, DTA_VirtualHeight,240);
+      Screen.clearClipRect();
+
+      y += 10;
+   }
+}
+
 clearScope vector3 traceFromPos(Sector sec, vector3 pos, double yaw, double pitch, double dist, Actor ignore, bool floor, ETraceFlags flags) {
    yaw   = Lith_UTIL.constDeg(yaw);
    pitch = Lith_UTIL.constDeg(pitch);
@@ -759,79 +658,63 @@ clearScope vector3 traceFromActor(Actor mo, double yaw, double pitch, double dis
    return traceFromPos(mo.curSector, mo.pos + (0.0, 0.0, offsetZ), yaw, pitch, dist, mo, floor, flags);
 }
 
-void setSkyFlash(int skyFlash, int skyFlashLen) {
-   m_skyFlash      = skyFlash;
-   m_skyFlashLen   = skyFlashLen / 2;
-   m_skyFlashPos   = fRandom(0, canvas_w-200);
-   m_skyFlashColor = color(179 + random(0, 76), 220 + random(0, 35), 255, 255);
+clearScope vector2 getScSized(float x, float y, bool kludge = false, vector2 vsz = (0, 0)) {
+   if(!vsz.x || !vsz.y) {
+      vsz = m_virtualSize;
+   }
+   float sw = Screen.GetWidth();
+   float sh = Screen.GetHeight();
+
+   vector2 xy, sc;
+
+   if(kludge) [sc, xy] = Screen.VirtualToRealCoords((0, 0), ( x,  y), vsz);
+   else       [xy, sc] = Screen.VirtualToRealCoords((x, y), (sw, sh), vsz);
+
+   return xy;
 }
 
-void replaceSky() {
-   m_sky.setInvalid();
-   m_skyB         = getTextureForName("LITHBSKY");
-   m_skyC         = getTextureForName("LITHCSKY");
-   m_skyLightning = getTextureForName("LITHSKLI");
-   m_skyMode      = Lith_UTIL.pData(_pdt_msky);
-   switch(m_skyMode) {
-   case _msky_shader:
-      color cr;
-      /* no atmosphere...? */
-      if(Lith_UTIL.pData(_pdt_mflg, _mflg_vacuum)) {
-         cr = "black";
-      } else {
-         switch(Lith_UTIL.pData(_pdt_menv)) {
-         case _menv_evil:       cr = "#ff0000"; break;
-         case _menv_hell:       cr = "#540203"; break;
-         case _menv_interstice: cr = "#160508"; break;
-         case _menv_abyss:      cr = "#afafaf"; break;
-         default:               cr = "#0c0c0f"; break;
-         }
-         /* energy in the clouds? */
-         if(Lith_UTIL.pData(_pdt_mflg, _mflg_thunder)) {
-            cr = color(
-               255,
-               min(int(cr.r * 1.437f), 255),
-               min(int(cr.g * 1.437f), 255),
-               min(int(cr.b * 1.437f), 255));
-         }
-      }
-      /* TODO: other env. factors such as humidity */
-      m_skyColor = cr;
-      m_skyBase  = m_skyC;
-      m_sky      = m_skyB;
-      break;
-   case _msky_replace:
-      level.skySpeed1 = 0.0;
-      switch(Lith_UTIL.pData(_pdt_menv)) {
-      case _menv_evil:
-         m_skyBase = getTextureForName("HELP");
-         level.skySpeed1 = 0.001;
-         break;
-      case _menv_hell:
-         m_skyBase = getTextureForName("LITHSKRD");
-         level.skySpeed1 = 0.01;
-         break;
-      case _menv_interstice:
-         m_skyBase = getTextureForName("LITHSKDE");
-         break;
-      case _menv_abyss:
-         m_skyBase = getTextureForName("LITHWHIT");
-         break;
-      default:
-         m_skyBase = getTextureForName("LITHSKST");
-         break;
-      }
-      m_sky = m_skyC;
-      break;
-   case _msky_vanilla:
-      m_skyBase = level.skyTexture1;
-      m_sky     = m_skyC;
-      break;
+static ui void drawRect(int sx, int sy, int px, int py, color cr) {
+   Screen.dim(cr, cr.a/255.0, px, py, sx, sy);
+}
+
+Font fntSml(bool noUnicode = false) const {
+   return noUnicode || m_english ? smallFont : m_uFntSml;
+}
+
+Font fntMid(bool noUnicode = false) const {
+   return noUnicode || m_english ? m_lMidFont : m_uFntSml;
+}
+
+Font fntBig(bool noUnicode = false) const {
+   return noUnicode || m_english ? m_lBigFont : m_newConsoleFont;
+}
+
+Font fntTrm(bool noUnicode = false) const {
+   return noUnicode || m_english ? m_lTrmFont : m_lJTrmFont;
+}
+
+Font fntAny(name name, bool noUnicode = false) const {
+   /**/ if(name == 'smallfnt') return fntSml(noUnicode);
+   else if(name == 'lmidfont') return fntMid(noUnicode);
+   else if(name == 'ltrmfont') return fntTrm(noUnicode);
+   else if(name == 'bigupper') return fntBig(noUnicode);
+   else                        return Font.getFont(name);
+}
+
+static clearScope textureId getTex(string tex) {
+   if(tex.byteAt(0) == CH_COLON) {
+      tex.replace(":", "/");
+      tex = "lgfx" .. tex .. ".png";
    }
-   if(m_sky.isValid()) {
-      m_skyCanvas = TexMan.getCanvas("LITHCSKY");
-      level.changeSky(m_sky, level.skyTexture2);
-   }
+   return TexMan.checkForTexture(tex, TexMan.Type_Any);
+}
+
+static DrawData getDt(DrawData d) {
+   return d;
+}
+
+static clearScope Lith_RenderProvider instance() {
+   return Lith_URANUS(StaticEventHandler.find('Lith_URANUS')).m_ren;
 }
 
 /* EOF */

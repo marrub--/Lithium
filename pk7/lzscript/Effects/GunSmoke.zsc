@@ -30,7 +30,7 @@ class Lith_GunSmoke : Actor
       Alpha = FRandom(.1, .4);
       Vel *= .01;
       Scale *= FRandom(.07, .14);
-      if(Random() < 128) Scale.X = -Scale.X;
+      if(Random(0, 255) < 128) Scale.X = -Scale.X;
    }
 
    states

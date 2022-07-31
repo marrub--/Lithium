@@ -116,7 +116,6 @@ void P_Dat_PTickPst(void);
 script void P_Scr_Payout(void);
 void P_Log_SellWeapon(struct weaponinfo const *info, score_t score);
 void P_Log_Weapon(struct weaponinfo const *info);
-script void P_DoRain(void);
 
 script void P_Wep_PTickPre(void);
        void P_Dat_PTickPre(void);

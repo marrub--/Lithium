@@ -205,7 +205,7 @@ void lith_a_smokeFX() {
 }
 
 void lith_a_ricochetFX() {
-   if(random() < 32) return;
+   if(random(0, 255) < 32) return;
 
    for(int i = 0, m = random(0, 3); i < m; i++)
       a_spawnItemEx("Lith_HotEmber", fRandom(-1, 1), fRandom(-1, 1), fRandom(0, 1), fRandom(-4, 4), fRandom(-4, 4), fRandom(2, 5), 0, SXF_NOCHECKPOSITION);

@@ -36,7 +36,7 @@ clearScope textureId xhairB() const {
       ":XHairs:basicb",  ":XHairs:delearb", ":XHairs:finib",
       ":XHairs:angleb",  ":XHairs:dotb",    ":XHairs:xpb"
    };
-   return getTextureForName(XB_GFX[m_xhairStyle]);
+   return getTex(XB_GFX[m_xhairStyle]);
 }
 
 clearScope textureId xhairW() const {
@@ -46,7 +46,7 @@ clearScope textureId xhairW() const {
       ":XHairs:basicw",  ":XHairs:delearw", ":XHairs:finiw",
       ":XHairs:anglew",  ":XHairs:dotw",    ":XHairs:xpw"
    };
-   return getTextureForName(XW_GFX[m_xhairStyle]);
+   return getTex(XW_GFX[m_xhairStyle]);
 }
 
 private ui void drawCrosshair(RenderEvent evt) {
@@ -105,8 +105,8 @@ private ui void drawCrosshair(RenderEvent evt) {
                          DTA_Alpha,m_xhairA/255.0,DTA_FillColor,c);
 
       if(m_xhairEnableJuicer) {
-         textureId xhl = getTextureForName(":XHairs:L");
-         textureId xhr = getTextureForName(":XHairs:R");
+         textureId xhl = getTex(":XHairs:L");
+         textureId xhr = getTex(":XHairs:R");
 
          int esx, esy; [esx, esy] = TexMan.GetSize(xhl);
          xhx = xh.x - esx/2.0;

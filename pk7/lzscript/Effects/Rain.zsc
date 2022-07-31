@@ -21,7 +21,6 @@ class Lith_RainDrop : Actor {
       +NoBlockmap
       +NoInteraction
       +NoTeleport
-      +NoTimeFreeze
       +NoTrigger
    }
 
@@ -35,6 +34,9 @@ class Lith_RainDrop : Actor {
    }
 
    override void tick() {
+      if(isFrozen()) {
+         return;
+      }
       if(m_done) {
          Lith_UTIL.stateTick(self);
          a_fadeOut(0.25 / 21.0);
@@ -110,6 +112,9 @@ class Lith_Ash : Lith_SnowDrop {
       m_rnda = getSpriteIndex("RNDA");
    }
    override void tick() {
+      if(isFrozen()) {
+         return;
+      }
       if(!m_done) {
          Lith_UTIL.stateTick(self);
          if(sprite == m_rnda) {

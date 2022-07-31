@@ -223,7 +223,6 @@ sm_:
    - SetFrozen
    - SetTeleFogTo
    - SpawnBoss
-   - SpawnRain
    - StartSound
    - SurgeOfDestiny
    - TraceFrom
@@ -245,11 +244,8 @@ sm_:
 ## Objects
 so_:
    OBJ:
-   - AbyssRainDrop
-   - Ash
    - AssassinPlayer
    - BarrierFX
-   - BloodRainDrop
    - BossReward1
    - BossReward2
    - BossReward3
@@ -300,7 +296,6 @@ so_:
    - PoisonFXTimer
    - PunctuatorExplosion
    - PunctuatorPuff
-   - RainDrop
    - RandomSpawn
    - Ren: RenderProvider
    - Rend
@@ -308,7 +303,6 @@ so_:
    - SMGHeat
    - Serv: HERMES
    - ShellAmmo
-   - SnowDrop
    - StarShot
    - StatAdrenaline
    - StatAdrenalineCharged
@@ -643,8 +637,6 @@ sl_:
 ## Sounds
 ss_:
    NO_PREFIX:
-   - amb_rain:                 amb/rain
-   - amb_wind:                 amb/wind
    - enemies_boss_talk:        enemies/boss/talk
    - enemies_phantom_escape:   enemies/phantom/escape
    - enemies_phantom_spawned:  enemies/phantom/spawned

@@ -134,7 +134,7 @@ map TITLEMAP "Abyss" {
 map TESTMAP "Test Map" {
    music = "lmusic/dandalins story.it"
    next  = 1
-   sky1  = "LITHSKCL", 0.1
+   sky1  = "LITHSKQC", 0.1
    sky2  = "LITHSKDE"
    doubleSky
 }
