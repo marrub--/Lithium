@@ -18,7 +18,6 @@ class Lith_DamageNum {
    vector3        m_lastOrigin;
    string         m_damage;
    int            m_ticks;
-   int            m_origTick;
    int            m_cr;
    Lith_DamageNum m_next;
 }
@@ -97,7 +96,6 @@ void addDamageNum(vector3 origin, float w, int damage, Actor receiver) {
       dnum.m_lastOrigin = dnum.m_origin;
       dnum.m_damage     = damage >= 1000000 ? "∞" : string.format("%i", damage);
       dnum.m_ticks      = 35 + min(damage, 120) / 3;
-      dnum.m_origTick   = level.totalTime;
       dnum.m_next       = start.m_next;
 
       if(receiver.player) {

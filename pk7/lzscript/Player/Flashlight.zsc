@@ -9,31 +9,17 @@
 class Lith_SpotLight : DynamicLight {
    default {
       DynamicLight.Type "Point";
-      +DYNAMICLIGHT.ATTENUATE
-      +DYNAMICLIGHT.SPOT
+      +DynamicLight.Attenuate
+      +DynamicLight.Spot
    }
 }
 
-class Lith_Flashlight : Thinker;
-
-Lith_Player m_p;
+extend class Lith_Player;
 
 Lith_SpotLight[2] m_light;
 
-static Lith_Flashlight create(Lith_Player pl) {
-   let light = new("Lith_Flashlight");
-
-   light.m_p = pl;
-   light.m_light[0] = Lith_SpotLight(Actor.Spawn("Lith_SpotLight", pl.pos));
-   light.m_light[1] = Lith_SpotLight(Actor.Spawn("Lith_SpotLight", pl.pos));
-
-   return light;
-}
-
-override void tick() {
-   super.tick();
-
-   double intn = m_p.acs_scriptCall("Lith_GetFlashlightIntensity") / FIX;
+private void tickFlashlight() {
+   double intn = acs_scriptCall("Lith_GetFlashlightIntensity") / FIX;
 
    int r = clamp(lith_light_r, 0, 255);
    int g = clamp(lith_light_g, 0, 255);
@@ -57,9 +43,9 @@ override void tick() {
    m_light[1].spotOuterAngle = 45;
 
    for(int i = 0; i < 2; i++) {
-      m_light[i].A_SetAngle(m_p.angle, true);
-      m_light[i].A_SetPitch(m_p.pitch, true);
-      m_light[i].setOrigin((m_p.pos.xy, m_p.player.viewz), true);
+      m_light[i].a_setAngle(angle, true);
+      m_light[i].a_setPitch(pitch, true);
+      m_light[i].setOrigin((pos.xy, player.viewz), true);
    }
 }
 

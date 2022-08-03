@@ -72,7 +72,7 @@ override void Tick()
    if(lith_weapons_rainbowlaser)
    {
       A_SetRenderStyle(Alpha, STYLE_AddStencil);
-      SetShade(crs[uint(-int(Target.Distance2D(self) / 20) + Level.TotalTime) % crs.Size()]);
+      SetShade(crs[uint(-int(Target.Distance2D(self) / 20) + Level.Time) % crs.Size()]);
    }
 
    Super.Tick();

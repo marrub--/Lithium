@@ -84,9 +84,12 @@ struct Lith_UTIL {
       return acs_executeWithResult(lsc_pdata, info, permutation);
    }
 
-   static play void stateTick(Actor mo) {
+   static play bool stateTick(Actor mo) {
       if(mo.tics >= 0 && --mo.tics <= 0) {
          mo.setState(mo.curState.nextState);
+         return true;
+      } else {
+         return false;
       }
    }
 

@@ -398,6 +398,9 @@ alloc_aut(0) stkcall script static void P_doDepthMeter(void) {
    i32 next_level = (wl.hubscleared + 1 % 32) * 8;
    i32 player_clr = P_playerColor() & 0xFFFFFF;
    for(i32 i = 0; i < 140; ++i) {
+      if(i == 105 && cv.player_resultssound) {
+         AmbientSound(ss_player_depthdown, 1.0);
+      }
       i32 curr_level = lerpk(prev_level, next_level, i < 70 ? ease_out_cubic(i / 70.0k) : 1.0k);
       k32 alpha_k = i > 105 ? 1.0 - ease_out_cubic((i - 105) / 35.0k) : 1.0;
       i32 alpha_i = 0xFF * alpha_k;

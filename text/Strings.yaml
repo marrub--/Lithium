@@ -668,6 +668,7 @@ ss_:
    - player_counter:           player/counter
    - player_counterdone:       player/counterdone
    - player_death1:            player/death1
+   - player_depthdown:         player/depthdown
    - player_doublejump:        player/doublejump
    - player_glare:             player/glare
    - player_jem_manafull:      player/jem/manafull

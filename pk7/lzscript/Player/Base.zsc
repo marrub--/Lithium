@@ -21,14 +21,12 @@ default {
    +THRUSPECIES
 }
 
-meta double m_VBob;
+meta double m_vBob;
 
-private double m_RainLerp;
+private double m_rainLerp;
 
 int m_iFrames;
 int m_shield;
-
-Lith_Flashlight m_light;
 
 Lith_Cyberspace m_cs;
 
@@ -37,17 +35,17 @@ bool m_wasFrozen;
 
 int m_DmgFac;
 
-double m_VPitch, m_LastVPitch;
-double m_IPitch, m_LastIPitch;
+double m_vPitch, m_lastVPitch;
+double m_iPitch, m_lastIPitch;
 
-double m_VYaw, m_LastVYaw;
-double m_IYaw, m_LastIYaw;
+double m_vYaw, m_lastVYaw;
+double m_iYaw, m_lastIYaw;
 
-double m_ZVel, m_LastZVel;
+double m_zVel, m_lastZVel;
 
-double m_VXVel, m_LastVXVel;
-double m_VYVel, m_LastVYVel;
-double m_VZVel, m_LastVZVel;
+double m_vXVel, m_lastVXVel;
+double m_vYVel, m_lastVYVel;
+double m_vZVel, m_lastVZVel;
 
 Lith_MapMarker m_curMark;
 
@@ -55,15 +53,15 @@ int m_wasDamaged;
 
 int m_speed;
 
-property ViewBob: m_VBob;
+property ViewBob: m_vBob;
 
-override void BeginPlay() {
+override void beginPlay() {
    super.beginPlay();
-   viewbob = m_VBob;
+   viewbob = m_vBob;
    m_wasFrozen = false;
 }
 
-override void GiveDefaultInventory() {
+override void giveDefaultInventory() {
    lith_giveDefItem("Lith_IDOL", 0);
    lith_giveDefItem("Lith_ManaAmmo", 0);
    lith_giveDefItem("Lith_BulletAmmo", 0);
@@ -85,40 +83,40 @@ void lith_giveDefItem(class<Inventory> type, int amount) {
    if(inv) inv.amount = amount;
 }
 
-void Lith_GiveDefWeapon(class<Weapon> type) {
+void lith_giveDefWeapon(class<Weapon> type) {
    let wep = Weapon(giveInventoryType(type));
    wep.amount = 1;
    player.readyWeapon = player.pendingWeapon = wep;
 }
 
-override void PlayerThink() {
+override void playerThink() {
    if(Lith_UTIL.pData(_pdt_mfunc) != _mfunc_normal) return;
 
    if(Lith_UTIL.pData(_pdt_semifrozen)) {
       UserCmd cmd = player.cmd;
       cmd.pitch = cmd.yaw = cmd.roll = 0;
-      player.turnticks = 0;
+      player.turnTicks = 0;
    }
 
-   m_onGround = pos.z - floorz <= 16 || bONMOBJ || bMBFBOUNCER || player.cheats & CF_NOCLIP2;
+   m_onGround = pos.z - floorz <= 16 || bOnMobj || bMbfBouncer || player.cheats & CF_NOCLIP2;
 
-   Super.PlayerThink();
+   super.playerThink();
 }
 
 private void Lith_RainEffect() {
-   PpShader.SetUniform1f("Lith_Rain", "lith_t", level.totaltime / 15.);
-   PpShader.SetUniform1f("Lith_Rain", "lith_m", m_RainLerp);
+   PpShader.setUniform1f("Lith_Rain", "lith_t", level.time / 15.);
+   PpShader.setUniform1f("Lith_Rain", "lith_m", m_rainLerp);
 
    if(player && Lith_UTIL.pData(_pdt_rain) == _rain_rain &&
       ceilingpic == skyflatnum && pitch < -5)
    {
       double m = -pitch - 5;
-      m_RainLerp = Lith_UTIL.Lerp(m_RainLerp, m / 85., 0.1);
+      m_rainLerp = Lith_UTIL.Lerp(m_rainLerp, m / 85., 0.1);
       PpShader.SetEnabled("Lith_Rain", true);
-   } else if(m_RainLerp > 0.01) {
-      m_RainLerp = Lith_UTIL.Lerp(m_RainLerp, 0, 0.1);
+   } else if(m_rainLerp > 0.01) {
+      m_rainLerp = Lith_UTIL.Lerp(m_rainLerp, 0, 0.1);
    } else {
-      m_RainLerp = 0;
+      m_rainLerp = 0;
       PpShader.SetEnabled("Lith_Rain", false);
    }
 }
@@ -148,7 +146,7 @@ private void Lith_ItemVacuum() {
    }
 }
 
-void Lith_PreTick() {
+void lith_preTick() {
    if(m_wasDamaged) {
       --m_wasDamaged;
    } else if(Lith_UTIL.pData(_pdt_pclass) & (pcl_wanderer | pcl_thoth) &&
@@ -161,7 +159,7 @@ void Lith_PreTick() {
       viewBob = 0;
    } else if(m_wasFrozen && !isFrozen()) {
       if(player.psprites) player.psprites.tics = player.psprites.curState.tics;
-      viewBob = m_VBob;
+      viewBob = m_vBob;
    }
    m_wasFrozen = isFrozen();
 
@@ -169,15 +167,17 @@ void Lith_PreTick() {
    if(Lith_UTIL.pData(_pdt_semifrozen)) {
       angle -= 1;
       pitch -= 1;
-      A_SetAngle(angle + 1, SPF_INTERPOLATE);
-      A_SetPitch(pitch + 1, SPF_INTERPOLATE);
+      a_setAngle(angle + 1, SPF_INTERPOLATE);
+      a_setPitch(pitch + 1, SPF_INTERPOLATE);
    }
+
+   tickFlashlight();
 
    /* draw stuff if we're the camera */
    if(m_cs) m_cs.lith_drawFrame();
 }
 
-void Lith_PostTick() {
+void lith_postTick() {
    viewPitch = -(Lith_UTIL.pData(_pdt_addp)/FIX);
    viewAngle = -(Lith_UTIL.pData(_pdt_addy)/FIX);
    viewRoll  = -(Lith_UTIL.pData(_pdt_addr)/FIX);
@@ -199,18 +199,22 @@ void Lith_PostTick() {
    }
 }
 
-override void Tick() {
-   if(Lith_UTIL.pData(_pdt_mfunc) != _mfunc_normal) return;
-
-   if(player && player.mo == self) Lith_PreTick();
-
-   Super.Tick();
-
-   if(player && player.mo == self) Lith_PostTick();
+override void tick() {
+   if(Lith_UTIL.pData(_pdt_mfunc) != _mfunc_normal) {
+      super.tick();
+   } else {
+      if(player && player.mo == self) {
+         lith_preTick();
+      }
+      super.tick();
+      if(player && player.mo == self) {
+         lith_postTick();
+      }
+   }
 }
 
-override void CheckPitch() {
-   if(!Level.IsFreelookAllowed()) {
+override void checkPitch() {
+   if(!level.isFreelookAllowed()) {
       Pitch = 0;
    } else {
       int clook = Player.Cmd.Pitch;
@@ -226,7 +230,7 @@ override void CheckPitch() {
 
    if(Player.Centering) {
       if(Abs(Pitch) > 2) {
-         A_SetPitch(Pitch * (3 / 4.0), SPF_INTERPOLATE);
+         a_setPitch(Pitch * (3 / 4.0), SPF_INTERPOLATE);
       } else {
          Pitch = 0;
          Player.Centering = false;

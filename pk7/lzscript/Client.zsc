@@ -10,6 +10,7 @@
 
 #include "lzscript/Client/Crosshair.zsc"
 #include "lzscript/Client/DamageNum.zsc"
+#include "lzscript/Client/Draw.zsc"
 #include "lzscript/Client/Menu.zsc"
 #include "lzscript/Client/MessageBox.zsc"
 #include "lzscript/Client/PlayerclassMenu.zsc"

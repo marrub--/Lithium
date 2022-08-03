@@ -447,7 +447,7 @@ alloc_aut(0) stkcall static void F_drawFade(k32 amount) {
 alloc_aut(0) stkcall static void F_drawText(i32 h, str text) {
    if(text && text[0]) {
       SetClipW(10, 10, 300, h, 300);
-      PrintRect(0, 0, 320, 240, 0x7F000000);
+      PrintFill(0x7F000000);
       PrintText_str(text, sf_smallfnt, CR_WHITE, 10,1, 10,1);
       ClearClip();
    }

@@ -108,20 +108,33 @@ class Lith_Ash : Lith_SnowDrop {
       +RollSprite
    }
    private spriteId m_rnda;
+   private float m_rollSpeed;
    override void postBeginPlay() {
+      super.postBeginPlay();
       m_rnda = getSpriteIndex("RNDA");
+      m_rollSpeed = fRandom(0.4, 0.9);
    }
    override void tick() {
       if(isFrozen()) {
          return;
       }
-      if(!m_done) {
-         Lith_UTIL.stateTick(self);
-         if(sprite == m_rnda) {
-            a_setRoll(roll + 1, SPF_INTERPOLATE);
-         }
-      }
       super.tick();
+      if(!m_done) {
+         bool swap = Lith_UTIL.stateTick(self);
+         if(sprite == m_rnda) {
+            if(swap) {
+               scale = (0.75, 0.75) * fRandom(0.25, 1.0);
+               a_setRenderStyle(0.9, STYLE_Translucent);
+            }
+            a_setRoll(roll + m_rollSpeed, SPF_INTERPOLATE);
+         } else {
+            a_setRenderStyle(0.5, STYLE_Translucent);
+            vel *= fRandom(0.5, 0.75);
+         }
+      } else {
+         scale = (0.5, 0.5);
+         roll  = 0;
+      }
    }
    states {
    Spawn:

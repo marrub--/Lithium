@@ -201,9 +201,11 @@ override void WorldThingSpawned(WorldEvent ev) {
 
 override void WorldTick() {
    if(m_bossLevel != boss_none) {
-      for(int i = 0, m = Level.Lines.Size(); i < m; i++)
-         for(int j = 0; j < 3; j++)
-            Level.Lines[i].Sidedef[0].SetTextureYOffset(j, Sin(Level.TotalTime)*4);
+      for(int i = 0, m = level.lines.size(); i < m; i++) {
+         for(int j = 0; j < 3; j++) {
+            level.lines[i].sidedef[0].setTextureYOffset(j, sin(level.totalTime)*4);
+         }
+      }
 
       if(m_bossDeathInit == 0) {
          bool boss_baby_is_dead;
@@ -227,7 +229,7 @@ override void WorldTick() {
          }
 
          if(boss_baby_is_dead) {
-            m_bossDeathInit = level.totaltime;
+            m_bossDeathInit = level.time;
             if(m_bossLevel == boss_iconofsin && lith_sv_postgame) {
                int nf = __lith_fun;
                if(Lith_UTIL.pData(_pdt_mflg, _mflg_corrupted)) {
@@ -412,7 +414,7 @@ override void checkReplacement(ReplaceEvent ev) {
 }
 
 override void RenderOverlay(RenderEvent evt) {
-   double ftic = level.totaltime - m_bossDeathInit + evt.fracTic;
+   double ftic = level.time - m_bossDeathInit + evt.fracTic;
    if(m_bossDeathInit == 0) {
       PpShader.SetEnabled("Lith_End", false);
    } else if(ftic > 15.0) {
