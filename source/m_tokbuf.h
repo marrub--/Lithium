@@ -15,9 +15,12 @@
 
 #include "m_token.h"
 #include "m_types.h"
+#include "m_flow.h"
 
 #include <stdbool.h>
 #include <stdarg.h>
+
+stkcall funcdef i32 (*read_flag_func)(cstr s);
 
 i32           TBufProc (struct token *tok);
 i32           TBufProcL(struct token *tok);
@@ -29,20 +32,16 @@ struct token *TBufUnGet(struct tokbuf *tb);
 struct token *TBufReGet(struct tokbuf *tb);
 struct token *TBufBack (struct tokbuf *tb, i32 n);
 bool          TBufDrop (struct tokbuf *tb, i32 t);
-void          TBufErr  (struct tokbuf *tb, struct tbuf_err *res, cstr fmt, ...);
-struct token *TBufExpc (struct tokbuf *tb, struct tbuf_err *res, struct token *tok, ...);
-void          TBufExpDr(struct tokbuf *tb, struct tbuf_err *res, i32 t);
-bool          TBufKv   (struct tokbuf *tb, struct tbuf_err *res, char *k, char *v);
+void          TBufErr  (struct tokbuf *tb, struct err *res, cstr fmt, ...);
+struct token *TBufExpc (struct tokbuf *tb, struct err *res, struct token *tok, ...);
+void          TBufExpDr(struct tokbuf *tb, struct err *res, i32 t);
+bool          TBufKv   (struct tokbuf *tb, struct err *res, char *k, char *v);
+i32           TBufRFlag(struct tokbuf *tb, struct err *res, char *s, read_flag_func fn);
 
 enum {
    tokproc_next,
    tokproc_done,
    tokproc_skip
-};
-
-struct tbuf_err {
-   bool some;
-   cstr err;
 };
 
 funcdef i32 (*tbuf_process_t)(struct token *tok);
@@ -58,6 +57,7 @@ struct tokbuf {
    __prop expc  {operator(): TBufExpc (this)}
    __prop expdr {operator(): TBufExpDr(this)}
    __prop kv    {operator(): TBufKv   (this)}
+   __prop rflag {operator(): TBufRFlag(this)}
 
    struct origin orig;
 

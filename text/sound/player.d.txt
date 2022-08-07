@@ -8,14 +8,15 @@
 
 # Dark Lord
 == lsnd/PlayerD
-$playersound    darklord male *death   Death     # Phantasy Star: Nova
-$playersound    darklord male *xdeath  XDeath    # ^
-$playersound    darklord male *pain100 PainSmall # ^
-$playersound    darklord male *pain75  Pain      # ^
-$playersounddup darklord male *pain50  *pain75   # ^
-$playersounddup darklord male *pain25  *pain75   # ^
-$playersound    darklord male *grunt   Grunt     # ^
-$playersound    darklord male *land    Land      # Resident Evil 4, Slave Zero
+$playersound    lith_darklord * *death      Death      # Phantasy Star: Nova
+$playersound    lith_darklord * *wimpydeath DeathSmall # ^
+$playersound    lith_darklord * *crazydeath DeathBig   # ^
+$playersound    lith_darklord * *pain100    PainSmall  # ^
+$playersounddup lith_darklord * *pain75     *pain100   # ^
+$playersound    lith_darklord * *pain50     Pain       # ^
+$playersounddup lith_darklord * *pain25     *pain50    # ^
+$playersound    lith_darklord * *grunt      Grunt      # ^
+$playersound    lith_darklord * *land       Land       # Resident Evil 4, Slave Zero
 
 player.ari {
    doll Doll # Made of the strands of the universe

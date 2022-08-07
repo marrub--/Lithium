@@ -26,16 +26,15 @@ const fire_canvas_h = 128;
 
 /* all modes */
 private Canvas    m_skyCanvas;
-private textureId m_sky;
+private textureId m_sky, m_prevSky1, m_prevSky2;
 private int       m_skyMode, m_skyRain;
-private bool      m_skyDouble;
 
 /* shader mode */
-private color     m_skyColor;
+private color m_skyColor;
 
 /* canvas mode */
 private textureId m_skyBase, m_skyGradient;
-private int       m_skyBaseW, m_skyBaseH;
+private int       m_skyBaseSw, m_skyBaseSh, m_skyBaseDw, m_skyBaseDh, m_skyBaseY;
 private double    m_skySpeed;
 
 /* electric storms */
@@ -57,15 +56,14 @@ private void tickSky() {
    if(m_skyMode == _msky_nochange) {
       return;
    }
-   if(curSkyTex() != m_sky) {
-      if(m_skyMode == _msky_vanilla) {
-         setSkyBase(curSkyTex(), curSkySpeed());
-      }
-      setSky();
+   if(level.skyTexture1 != m_prevSky1 || level.skyTexture2 != m_prevSky2) {
+      setSky(m_sky);
    }
    if(m_skyRain == _rain_fire) {
       tickSkyFire();
    }
+   m_prevSky1 = level.skyTexture1;
+   m_prevSky2 = level.skyTexture2;
 }
 
 ui private void drawSky(RenderEvent evt) {
@@ -87,32 +85,27 @@ ui private void drawSky(RenderEvent evt) {
       }
       m_skyCanvas.clearScreen(cr);
    } else {
-      int szx = m_skyBaseW, szy = m_skyBaseH;
-      if(szy < canvas_h) {
-         szx *= canvas_h / szy;
-         szy *= canvas_h / szy;
-      }
-      int xofs = int((msTimeF() * m_skySpeed) % szx);
-      m_skyCanvas.drawTexture(m_skyBase, true, canvas_w-szx, 0, DTA_DestHeight,szy, DTA_DestWidth,szx, DTA_SrcX,-xofs, DTA_FlipY,true);
-      m_skyCanvas.drawTexture(m_skyBase, true, 0, 0, DTA_SrcWidth,xofs, DTA_DestHeight,szy, DTA_DestWidth,xofs, DTA_SrcX,szx-xofs, DTA_FlipY,true);
-      for(int x = xofs; x < canvas_w-szx; x += szx) {
-         m_skyCanvas.drawTexture(m_skyBase, true, x, 0, DTA_DestHeight,szy, DTA_DestWidth,szx, DTA_FlipY,true);
+      int dw = m_skyBaseDw, dh = m_skyBaseDh;
+      int sw = m_skyBaseSw, sh = m_skyBaseSh;
+      int xofs = int((msTimeF() * m_skySpeed) % dw);
+      int yofs = m_skyBaseY;
+      m_skyCanvas.drawTexture(m_skyBase, true, canvas_w-dw, 0, DTA_SrcWidth,sw, DTA_SrcHeight,sh, DTA_DestHeight,dh, DTA_DestWidth,dw, DTA_SrcY,yofs, DTA_SrcX,-xofs, DTA_FlipY,true);
+      m_skyCanvas.drawTexture(m_skyBase, true, 0, 0, DTA_SrcWidth,xofs, DTA_DestHeight,sh, DTA_DestWidth,xofs, DTA_SrcY,yofs, DTA_SrcX,sw-xofs, DTA_FlipY,true);
+      for(int x = xofs; x < canvas_w-sw; x += sw) {
+         m_skyCanvas.drawTexture(m_skyBase, true, x, 0, DTA_SrcWidth,sw, DTA_SrcHeight,sh, DTA_DestWidth,sw, DTA_DestHeight,sh, DTA_SrcY,yofs, DTA_FlipY,true);
       }
       if(bDelta) {
          m_skyCanvas.drawTexture(m_skyLightning, true, m_skyFlashPos, 0, DTA_Alpha,1.0 - vDelta, DTA_LegacyRenderStyle,STYLE_Add, DTA_Color,m_skyFlashColor, DTA_FlipY,true, DTA_FlipX,m_skyFlashPos & 1 == 0);
       }
       if(m_skyClouds.isValid()) {
          int cszx = m_skyCloudsW, cszy = m_skyCloudsH;
-         int scale = canvas_h / cszy;
-         cszx *= scale;
-         cszy *= scale;
          for(int x = 0; x < canvas_w; x += cszx) {
             m_skyCanvas.drawTexture(m_skyClouds, true, x, 0, DTA_DestHeight,canvas_h, DTA_DestWidth,cszx, DTA_FlipX,true,DTA_FlipY,true, DTA_LegacyRenderStyle,m_skyCloudsStyle, DTA_Color,m_skyCloudsColor);
          }
       }
-      m_skyCanvas.drawTexture(m_skyGradient, true, 0, 0, DTA_DestHeight,szy,DTA_DestWidth,canvas_w, DTA_FlipY,true);
+      m_skyCanvas.drawTexture(m_skyGradient, true, 0, 0, DTA_DestHeight,dh,DTA_DestWidth,canvas_w, DTA_FlipY,true);
       if(bDelta) {
-         m_skyCanvas.dim("white", vDelta * 0.2f, 0, 0, canvas_w, szy, STYLE_Add);
+         m_skyCanvas.dim("white", vDelta * 0.2f, 0, 0, canvas_w, dh, STYLE_Add);
       }
    }
 }
@@ -120,7 +113,6 @@ ui private void drawSky(RenderEvent evt) {
 void replaceSky() {
    m_sky.setInvalid();
    m_skyClouds.setInvalid();
-   m_skyDouble      = level.info.flags & LEVEL_DOUBLESKY;
    let skyB         = getTex("LITHBSKY");
    let skyC         = getTex("LITHCSKY");
    m_skyGradient    = getTex("LITHSKGR");
@@ -128,6 +120,9 @@ void replaceSky() {
    m_skyMode        = Lith_UTIL.pData(_pdt_msky);
    m_skyRain        = Lith_UTIL.pData(_pdt_rain);
    switch(m_skyMode) {
+   default:
+      m_skyMode = _msky_nochange;
+      return;
    case _msky_shader:
       color cr;
       /* no atmosphere...? */
@@ -152,8 +147,8 @@ void replaceSky() {
       }
       /* TODO: other env. factors such as humidity */
       m_skyColor = cr;
+      setSky(skyB);
       setSkyBase(skyC, 0.0);
-      m_sky = skyB;
       break;
    case _msky_replace:
       switch(Lith_UTIL.pData(_pdt_menv)) {
@@ -164,33 +159,27 @@ void replaceSky() {
       default:               setSkyBase(getTex("LITHSKST"), 0.0);   break;
       }
       /* TODO: other env. factors such as humidity */
-      m_sky = skyC;
-      break;
    case _msky_vanilla:
-      setSkyBase(curSkyTex(), curSkySpeed());
-      m_sky = skyC;
+      setSky(skyC);
       break;
    }
-   if(m_sky.isValid()) {
-      if(m_skyMode != _msky_shader) {
-         switch(m_skyRain) {
-         case _rain_fire:
-            setSkyClouds(getTex("LITHFIRE"), STYLE_Add);
-            initSkyFire();
-            break;
-         case _rain_blood:
-            setSkyClouds(getTex("LITHSKCL"), cr: 0xFFCF0000);
-            break;
-         case _rain_snow:
-         case _rain_rain:
-            setSkyClouds(getTex("LITHSKCL"));
-            break;
-         }
+   if(m_skyMode != _msky_shader) {
+      switch(m_skyRain) {
+      case _rain_fire:
+         setSkyClouds(getTex("LITHFIRE"), STYLE_Add);
+         initSkyFire();
+         break;
+      case _rain_blood:
+         setSkyClouds(getTex("LITHSKCL"), cr: 0xFFCF0000);
+         break;
+      case _rain_snow:
+      case _rain_rain:
+         setSkyClouds(getTex("LITHSKCL"));
+         break;
       }
-      m_skyFireCanvas = TexMan.getCanvas("LITHFIRE");
-      m_skyCanvas     = TexMan.getCanvas("LITHCSKY");
-      setSky();
    }
+   m_skyFireCanvas = TexMan.getCanvas("LITHFIRE");
+   m_skyCanvas     = TexMan.getCanvas("LITHCSKY");
 }
 
 /* firestorms */
@@ -219,34 +208,60 @@ private void tickSkyFire() {
    }
 }
 
-/* getters */
-private textureId curSkyTex() const {
-   return m_skyDouble ? level.skyTexture2 : level.skyTexture1;
-}
-
-private double curSkySpeed() const {
-   return m_skyDouble ? level.skySpeed2 : level.skySpeed1;
-}
-
 /* setters */
-private void setSky() const {
-   if(m_skyDouble) {level.changeSky(level.skyTexture1, m_sky);}
-   else            {level.changeSky(m_sky, level.skyTexture2);}
+private void setSky(textureId sky) const {
+   let st1 = level.skyTexture1;
+   let st2 = level.skyTexture2;
+   let dblBefore = checkDoubleSky(st1, st2);
+   let dblAfter  = dblBefore && checkDoubleSky(st1, sky);
+   if(m_skyMode == _msky_vanilla) {
+      let curTex   = dblBefore ? level.skyTexture2 : level.skyTexture1;
+      let curSpeed = dblBefore ? level.skySpeed2   : level.skySpeed1;
+      setSkyBase(curTex, curSpeed);
+   }
+   if(dblBefore) {level.changeSky(st1, sky);}
+   else          {level.changeSky(sky, st2);}
+   if(dblAfter)  {level.changeSky(st1, sky); level.skySpeed2 = 0.0;}
+   else          {level.changeSky(sky, st2); level.skySpeed1 = 0.0;}
+   m_sky       = sky;
+   m_prevSky1  = level.skyTexture1;
+   m_prevSky2  = level.skyTexture2;
 }
 
 private void setSkyBase(textureId tex, double skySpeed) {
-   if(m_skyDouble) {level.skySpeed2 = 0.0;}
-   else            {level.skySpeed1 = 0.0;}
    m_skySpeed = skySpeed;
    m_skyBase  = tex;
-   [m_skyBaseW, m_skyBaseH] = TexMan.getSize(m_skyBase);
+   [m_skyBaseSw, m_skyBaseSh] = TexMan.getSize(m_skyBase);
+   if(m_skyBaseSh < canvas_h) {
+      m_skyBaseDw = m_skyBaseSh *= canvas_h / m_skyBaseSh;
+      m_skyBaseDh = m_skyBaseSw *= canvas_h / m_skyBaseSh;
+   } else if(m_skyBaseSh == canvas_h) {
+      m_skyBaseDh = m_skyBaseSh;
+      m_skyBaseDw = m_skyBaseSw;
+   } else if(m_skyBaseSh < 200) {
+      let ratio = canvas_h / float(m_skyBaseSh);
+      m_skyBaseDh = canvas_h;
+      m_skyBaseDw = int(m_skyBaseSw * ratio);
+   } else if(m_skyBaseSh <= 240) {
+      m_skyBaseDh = m_skyBaseSh = canvas_h;
+      m_skyBaseDw = m_skyBaseSw;
+   } else {
+      m_skyBaseY  = m_skyBaseSh - canvas_h;
+      m_skyBaseDh = m_skyBaseSh = canvas_h;
+      m_skyBaseDw = m_skyBaseSw;
+   }
 }
 
 private void setSkyClouds(textureId tex, int style = STYLE_Normal, color cr = 0xFFFFFFFF) {
    m_skyClouds      = tex;
    m_skyCloudsColor = cr;
    m_skyCloudsStyle = style;
-   [m_skyCloudsW, m_skyCloudsH] = TexMan.getSize(m_skyClouds);
+   int w, h; [w, h] = TexMan.getSize(m_skyClouds);
+   int scale = canvas_h / h;
+   w *= scale;
+   h *= scale;
+   m_skyCloudsW = w;
+   m_skyCloudsH = h;
 }
 
 void setSkyFlash(int skyFlash, int skyFlashLen) {
@@ -255,6 +270,21 @@ void setSkyFlash(int skyFlash, int skyFlashLen) {
       m_skyFlashLen   = skyFlashLen / 2;
       m_skyFlashPos   = random(0, canvas_w-TexMan.getSize(m_skyLightning));
       m_skyFlashColor = color(179 + random(0, 76), 220 + random(0, 35), 255, 255);
+   }
+}
+
+private clearScope static bool checkDoubleSky(textureId st1, textureId st2) {
+   if(level.info.flags & LEVEL_DOUBLESKY) {
+      int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
+      if(st1.isValid()) {
+         [x1, y1] = TexMan.getSize(st1);
+      }
+      if(st2.isValid()) {
+         [x2, y2] = TexMan.getSize(st2);
+      }
+      return y1 == y2 && y1 != 0;
+   } else {
+      return false;
    }
 }
 

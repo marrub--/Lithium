@@ -6,55 +6,55 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-brightMap sprite FORTA0 {map "lglstuff/brightmaps/FORTA0.png"}
-brightMap sprite IONGA0 {map "lglstuff/brightmaps/IONGA0.png"}
-brightMap sprite LSHTA0 {map "lglstuff/brightmaps/LSHTA0.png"}
-brightMap sprite MARPA0 {map "lglstuff/brightmaps/MARPA0.png"}
-brightMap sprite MARPB0 {map "lglstuff/brightmaps/MARPB0.png"}
-brightMap sprite MARPC0 {map "lglstuff/brightmaps/MARPC0.png"}
-brightMap sprite PDFGA0 {map "lglstuff/brightmaps/PDFGA0.png"}
-brightMap sprite PDFGB0 {map "lglstuff/brightmaps/PDFGA0.png"}
-brightMap sprite PDFGC0 {map "lglstuff/brightmaps/PDFGA0.png"}
-brightMap sprite PDFGD0 {map "lglstuff/brightmaps/PDFGA0.png"}
-brightMap sprite PDFGE0 {map "lglstuff/brightmaps/PDFGA0.png"}
-brightMap sprite PDFGF0 {map "lglstuff/brightmaps/PDFGA0.png"}
-brightMap sprite PDFGG0 {map "lglstuff/brightmaps/PDFGA0.png"}
-brightMap sprite SDSGA0 {map "lglstuff/brightmaps/SDSGA0.png"}
-brightMap sprite SDSGB0 {map "lglstuff/brightmaps/SDSGB0.png"}
-brightMap sprite SDSGC0 {map "lglstuff/brightmaps/SDSGC0.png"}
-brightMap sprite SDSGD0 {map "lglstuff/brightmaps/SDSGD0.png"}
-brightMap sprite SDSGE0 {map "lglstuff/brightmaps/SDSGE0.png"}
-brightMap sprite SDSGF0 {map "lglstuff/brightmaps/SDSGF0.png"}
-brightMap sprite SDSGG0 {map "lglstuff/brightmaps/SDSGG0.png"}
-brightMap sprite SDSGH0 {map "lglstuff/brightmaps/SDSGH0.png"}
-brightMap sprite SHTGF0 {map "lglstuff/brightmaps/SHTGF0.png"}
-brightMap sprite SHTGG0 {map "lglstuff/brightmaps/SHTGG0.png"}
-brightMap sprite SHTGH0 {map "lglstuff/brightmaps/SHTGH0.png"}
-brightMap sprite SHTGI0 {map "lglstuff/brightmaps/SHTGI0.png"}
-brightMap sprite SHTGJ0 {map "lglstuff/brightmaps/SHTGJ0.png"}
-brightMap sprite SHTGK0 {map "lglstuff/brightmaps/SHTGK0.png"}
-brightMap sprite SHTGN0 {map "lglstuff/brightmaps/SHTGN0.png"}
-brightMap sprite SHTGO0 {map "lglstuff/brightmaps/SHTGO0.png"}
+brightMap sprite FORTA0 {map "lmisc/brightmaps/FORTA0.png"}
+brightMap sprite IONGA0 {map "lmisc/brightmaps/IONGA0.png"}
+brightMap sprite LSHTA0 {map "lmisc/brightmaps/LSHTA0.png"}
+brightMap sprite MARPA0 {map "lmisc/brightmaps/MARPA0.png"}
+brightMap sprite MARPB0 {map "lmisc/brightmaps/MARPB0.png"}
+brightMap sprite MARPC0 {map "lmisc/brightmaps/MARPC0.png"}
+brightMap sprite PDFGA0 {map "lmisc/brightmaps/PDFGA0.png"}
+brightMap sprite PDFGB0 {map "lmisc/brightmaps/PDFGA0.png"}
+brightMap sprite PDFGC0 {map "lmisc/brightmaps/PDFGA0.png"}
+brightMap sprite PDFGD0 {map "lmisc/brightmaps/PDFGA0.png"}
+brightMap sprite PDFGE0 {map "lmisc/brightmaps/PDFGA0.png"}
+brightMap sprite PDFGF0 {map "lmisc/brightmaps/PDFGA0.png"}
+brightMap sprite PDFGG0 {map "lmisc/brightmaps/PDFGA0.png"}
+brightMap sprite SDSGA0 {map "lmisc/brightmaps/SDSGA0.png"}
+brightMap sprite SDSGB0 {map "lmisc/brightmaps/SDSGB0.png"}
+brightMap sprite SDSGC0 {map "lmisc/brightmaps/SDSGC0.png"}
+brightMap sprite SDSGD0 {map "lmisc/brightmaps/SDSGD0.png"}
+brightMap sprite SDSGE0 {map "lmisc/brightmaps/SDSGE0.png"}
+brightMap sprite SDSGF0 {map "lmisc/brightmaps/SDSGF0.png"}
+brightMap sprite SDSGG0 {map "lmisc/brightmaps/SDSGG0.png"}
+brightMap sprite SDSGH0 {map "lmisc/brightmaps/SDSGH0.png"}
+brightMap sprite SHTGF0 {map "lmisc/brightmaps/SHTGF0.png"}
+brightMap sprite SHTGG0 {map "lmisc/brightmaps/SHTGG0.png"}
+brightMap sprite SHTGH0 {map "lmisc/brightmaps/SHTGH0.png"}
+brightMap sprite SHTGI0 {map "lmisc/brightmaps/SHTGI0.png"}
+brightMap sprite SHTGJ0 {map "lmisc/brightmaps/SHTGJ0.png"}
+brightMap sprite SHTGK0 {map "lmisc/brightmaps/SHTGK0.png"}
+brightMap sprite SHTGN0 {map "lmisc/brightmaps/SHTGN0.png"}
+brightMap sprite SHTGO0 {map "lmisc/brightmaps/SHTGO0.png"}
 
 hardwareShader sprite LDTHA0 {
-   shader "lglstuff/death.fp.glsl"
+   shader "lmisc/death.fp.glsl"
    speed 1.0
 }
 
 hardwareShader texture LITHBSKY {
-   shader "lglstuff/sky.fp.glsl"
+   shader "lmisc/sky.fp.glsl"
    texture lith_skyColorTex "LITHCSKY"
 }
 
 hardwareShader postProcess scene {
-   shader "lglstuff/rain.fp.glsl" 330
+   shader "lmisc/rain.fp.glsl" 330
    name "Lith_Rain"
    uniform float lith_t
    uniform float lith_m
 }
 
 hardwareShader postProcess screen {
-   shader "lglstuff/end.fp.glsl" 330
+   shader "lmisc/end.fp.glsl" 330
    name "Lith_End"
    uniform float lith_t
 }

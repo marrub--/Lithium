@@ -7,11 +7,17 @@
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
 == lsnd/Player
-$playersound player male *jump    Jump     # SI Series 6000
-$playersound player male *usefail UseFail  # Self-made
-$playersound player male *land    Land     # Hexen
-$playersound player male *dive    SplashIn # Call of Duty: Modern Warfare 2
-$playersound player male *surface Splash   # ^
+$playersound    * * *jump        Jump     # SI Series 6000
+$playersound    * * *usefail     UseFail  # Self-made
+$playersound    * * *puzzfail    PuzzFail # ^
+$playersound    * * *keytry      KeyTry   # ^
+$playersound    * * *land        Land     # Hexen
+$playersound    * * *xdeath      Gibbed   # Doom 3
+$playersound    * * *splat       Splat    # Call of Duty: Modern Warfare 2
+$playersound    * * *dive        SplashIn # ^
+$playersound    * * *surface     Splash   # ^
+$playersounddup * * *drainhealth *pain50
+$playersounddup * * *poison      *pain100
 
 player {
    depthdown    DepthDown           # LSD: Dream Emulator

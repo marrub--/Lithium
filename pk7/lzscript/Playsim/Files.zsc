@@ -22,4 +22,20 @@ static clearScope string readLump(int lump) {
    return s;
 }
 
+static clearScope int getMapInfoLump() {
+   int id = Wads.checkNumForName(level.mapName, Wads.ns_global);
+   if(id >= 0 && Wads.getLumpFullName(++id) ~== "TEXTMAP") {
+      int numl = Wads.getNumLumps();
+      while(id < numl) {
+         let name = Wads.getLumpFullName(++id);
+         if(name ~== "LITHMAP") {
+            return id;
+         } else if(name ~== "ENDMAP") {
+            break;
+         }
+      }
+   }
+   return -1;
+}
+
 /* EOF */

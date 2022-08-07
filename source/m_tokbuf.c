@@ -115,29 +115,19 @@ bool TBufDrop(struct tokbuf *tb, i32 t) {
    }
 }
 
-void TBufErr(struct tokbuf *tb, struct tbuf_err *res, cstr fmt, ...) {
+void TBufErr(struct tokbuf *tb, struct err *res, cstr fmt, ...) {
    noinit static char errbuf[1024];
-
    va_list    vl;
    mem_size_t len = faststrlen(tb->fname);
-   mem_size_t c = 0;
-
-   errbuf[c++] = '(';
-   fastmemcpy(errbuf + c, tb->fname, len);
-   c += len;
-   errbuf[c++] = ')';
-   fastmemcpy(errbuf + c, " \CgERROR\C-: ", 12);
-   c += 12;
-
+   fastmemcpy(errbuf, tb->fname, len);
    va_start(vl, fmt);
-   vsprintf(&errbuf[c], fmt, vl);
+   vsprintf(&errbuf[len], fmt, vl);
    va_end(vl);
-
    res->some = true;
    res->err  = errbuf;
 }
 
-struct token *TBufExpc(struct tokbuf *tb, struct tbuf_err *res, struct token *tok, ...) {
+struct token *TBufExpc(struct tokbuf *tb, struct err *res, struct token *tok, ...) {
    noinit static
    i32 tt[8];
    noinit static
@@ -170,17 +160,17 @@ struct token *TBufExpc(struct tokbuf *tb, struct tbuf_err *res, struct token *to
       faststrcat(ttstr, TokType(tt[i++]));
    }
    tb->err(res, "%s expected %s", TokPrint(tok), ttstr);
-   unwrap_cb();
+   unwrap_retn();
 }
 
-void TBufExpDr(struct tokbuf *tb, struct tbuf_err *res, i32 t) {
+void TBufExpDr(struct tokbuf *tb, struct err *res, i32 t) {
    if(!tb->drop(t)) {
       struct token *tok = tb->reget();
       tb->err(res, "%s expected %s", TokPrint(tok), TokType(t));
    }
 }
 
-bool TBufKv(struct tokbuf *tb, struct tbuf_err *res, char *k, char *v) {
+bool TBufKv(struct tokbuf *tb, struct err *res, char *k, char *v) {
    struct token *tok = tb->expc(res, tb->get(), tok_semico, tok_identi, 0);
    unwrap(res);
 
@@ -196,6 +186,20 @@ bool TBufKv(struct tokbuf *tb, struct tbuf_err *res, char *k, char *v) {
       faststrcpy(v, tok->textV);
       return true;
    }
+}
+
+i32 TBufRFlag(struct tokbuf *tb, struct err *res, char *s, read_flag_func fn) {
+   i32 ret = 0;
+   for(char *nx, *fl = faststrtok(s, &nx, ' '); fl; fl = faststrtok(nil, &nx, ' ')) {
+      i32 parsed = fn(fl);
+      if(parsed != -1) {
+         set_bit(ret, parsed);
+      } else {
+         tb->err(res, "%s: invalid flag '%s'", TokPrint(tb->reget()), fl);
+         unwrap_retn();
+      }
+   }
+   return ret;
 }
 
 /* EOF */

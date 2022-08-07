@@ -20,21 +20,20 @@
 /* HERMES: Horribly Explicit and Rudimentary Methods for Extended Scripting */
 class Lith_HERMES : EventHandler;
 
-string m_Obituary;
-name m_DmgType;
-bool m_DmgWorld;
-int m_BossLevel;
+string m_obituary;
+name m_dmgType;
+bool m_dmgWorld;
+int m_bossLevel;
 private array<Actor> m_bossBabies;
 private int m_bossDeathInit;
 private bool m_extraHard;
 private Lith_ThunderThinker m_thunder;
 private Lith_RainThinker m_rain;
 
-override void WorldLoaded(WorldEvent ev) {
+override void worldLoaded(WorldEvent ev) {
    m_extraHard = lith_sv_extrahard;
    m_bossLevel = boss_none;
    m_bossBabies.clear();
-
    if(level.nextMap.left(6) == "enDSeQ") {
       if(level.info.flags & LEVEL_BRUISERSPECIAL || level.info.flags3 & LEVEL3_E1M8SPECIAL) {
          m_bossLevel = boss_barons;
@@ -49,119 +48,106 @@ override void WorldLoaded(WorldEvent ev) {
          }
       }
    }
-
    if(!ev.isReOpen) {
-      ACS_ExecuteWithResult(lsc_worldopen);
+      acs_executeWithResult(lsc_worldopen);
       Lith_RenderProvider.instance().replaceSky();
-   }
-
-   /* TODO */
-   int id = Wads.checkNumForName(level.mapName, Wads.ns_global);
-   if(id >= 0 && Wads.getLumpFullName(++id) ~== "TEXTMAP") {
-      int numl = Wads.getNumLumps();
-      while(id < numl) {
-         let name = Wads.getLumpFullName(++id);
-         if(name ~== "LITHMAP") {
-            Console.printf("%s", Wads.readLump(id));
-         } else if(name ~== "ENDMAP") {
-            break;
-         }
+      if(Lith_UTIL.pData(_pdt_menv) == _menv_evil) {
+         setUpEvilMap();
       }
-   }
-
-   int menv = Lith_UTIL.pData(_pdt_menv);
-   if(menv == _menv_evil) {
-      S_ChangeMusic("lmusic/Ragnarok.ogg", 0, true, true);
-   }
-   if(Lith_UTIL.pData(_pdt_msky) != _msky_nochange && !(lith_sv_skydarkening ~== 1)) {
-      for(int i = 0, j = level.sectors.size(); i < j; i++) {
-         Sector sec = level.sectors[i];
-         if(sec.getTexture(Sector.Ceiling) == skyflatnum) {
-            int ll =
-               int(clamp(sec.lightlevel * lith_sv_skydarkening, 64.0, 255.0));
-            switch(menv) {
-            case _menv_hell:
-               sec.setColor("#ff7777");
-               break;
-            case _menv_evil:
-               sec.setColor("#ff2222");
-               ll = 107;
-               sec.flags |= Sector.SECF_ENDGODMODE;
-               sec.setAngle(Sector.floor,   frandom(0, 360));
-               sec.setAngle(Sector.ceiling, frandom(0, 360));
-
-               for(int k = 0, l = sec.lines.size(); k < l; k++) {
-                  Line ln = sec.lines[k];
-                  ln.flags |= Line.ML_DONTDRAW;
-                  ln.alpha = frandom(0.5, 1);
-
-                  for(int m = 0; m < 2; m++) {
-                     Side sd = ln.sidedef[m];
-                     if(sd) {
-                        sd.addTextureXOffset(Side.top,    frandom(-7,7));
-                        sd.addTextureXOffset(Side.mid,    frandom(-7,7));
-                        sd.addTextureXOffset(Side.bottom, frandom(-7,7));
-                        sd.addTextureYOffset(Side.top,    frandom(-7,7));
-                        sd.addTextureYOffset(Side.mid,    frandom(-7,7));
-                        sd.addTextureYOffset(Side.bottom, frandom(-7,7));
-                        sd.light = random(-40, 40);
-                     }
-                  }
-               }
-               break;
-            }
-            sec.setLightLevel(ll);
-         }
-      }
-   }
-
-   if(!ev.isReOpen) {
+      darkenSkySectors();
       m_thunder = Lith_ThunderThinker.create();
       m_rain    = Lith_RainThinker.create();
    }
 }
 
-override void WorldThingDestroyed(WorldEvent ev) {
-   let item = Lith_InventoryItem(ev.thing);
-   if(item) item.Lith_Destroy();
-}
-
-override void WorldUnloaded(WorldEvent ev) {
-   if(!(level.clusterFlags & level.CLUSTER_HUB || level.info.flags2 & LEVEL2_HEXENHACK) || LevelInfo.findLevelInfo(ev.nextMap).cluster != level.cluster) {
-      ACS_ExecuteWithResult(lsc_hubclear);
-   }
-   m_bossDeathInit = 0;
-
-   let it = ThinkerIterator.Create("Lith_InventoryItem");
-   for(Lith_InventoryItem mo; mo = Lith_InventoryItem(it.Next());) {
-      if(!mo.owner) {
-         mo.Lith_Destroy();
+void setUpEvilMap() {
+   S_ChangeMusic("lmusic/Ragnarok.ogg", 0, true, true);
+   for(int i = 0, j = level.sectors.size(); i < j; i++) {
+      Sector sec = level.sectors[i];
+      sec.flags |= Sector.SECF_ENDGODMODE;
+      sec.setAngle(Sector.floor,   frandom(0, 360));
+      sec.setAngle(Sector.ceiling, frandom(0, 360));
+      for(int k = 0, l = sec.lines.size(); k < l; k++) {
+         Line ln = sec.lines[k];
+         ln.flags |= Line.ML_DONTDRAW;
+         ln.alpha = frandom(0.5, 1);
+         for(int m = 0; m < 2; m++) {
+            Side sd = ln.sidedef[m];
+            if(sd) {
+               sd.addTextureXOffset(Side.top,    frandom(-7,7));
+               sd.addTextureXOffset(Side.mid,    frandom(-7,7));
+               sd.addTextureXOffset(Side.bottom, frandom(-7,7));
+               sd.addTextureYOffset(Side.top,    frandom(-7,7));
+               sd.addTextureYOffset(Side.mid,    frandom(-7,7));
+               sd.addTextureYOffset(Side.bottom, frandom(-7,7));
+               sd.light = random(-40, 40);
+            }
+         }
       }
    }
 }
 
-override void WorldThingSpawned(WorldEvent ev) {
-   let th = ev.Thing;
-
-   if(th is "CommanderKeen") {
-      th.bNOBLOOD = true;
-      th.SetTag("Commander Keen");
+private void darkenSkySectors() {
+   if(lith_sv_skydarkening >= 1) {
       return;
    }
+   int menv = Lith_UTIL.pData(_pdt_menv);
+   for(int i = 0, j = level.sectors.size(); i < j; i++) {
+      Sector sec = level.sectors[i];
+      if(sec.getTexture(Sector.Ceiling) != skyflatnum) {
+         continue;
+      }
+      int ll =
+         int(clamp(sec.lightlevel * lith_sv_skydarkening, 64.0, 255.0));
+      switch(menv) {
+      case _menv_hell:
+         sec.setColor("#ff7777");
+         break;
+      case _menv_evil:
+         sec.setColor("#ff2222");
+         ll = 107;
+         break;
+      }
+      sec.setLightLevel(ll);
+   }
+}
 
-   if(m_bossLevel == boss_iconofsin && th is "BossBrain")
+override void worldThingDestroyed(WorldEvent ev) {
+   let item = Lith_InventoryItem(ev.thing);
+   if(item) item.lith_destroy();
+}
+
+override void worldUnloaded(WorldEvent ev) {
+   if(!(level.clusterFlags & LevelLocals.CLUSTER_HUB || level.info.flags2 & LEVEL2_HEXENHACK) || LevelInfo.findLevelInfo(ev.nextMap).cluster != level.cluster) {
+      acs_executeWithResult(lsc_hubclear);
+   }
+   m_bossDeathInit = 0;
+   let it = ThinkerIterator.create("Lith_InventoryItem");
+   for(Lith_InventoryItem mo; mo = Lith_InventoryItem(it.next());) {
+      if(!mo.owner) {
+         mo.lith_destroy();
+      }
+   }
+}
+
+override void worldThingSpawned(WorldEvent ev) {
+   let th = ev.thing;
+   if(th is "CommanderKeen") {
+      th.bNoBlood = true;
+      th.setTag("Commander Keen");
+      return;
+   }
+   if(m_bossLevel == boss_iconofsin && th is "BossBrain") {
       m_bossBabies.push(th);
-
-   if(th.bISMONSTER && !(th is "RandomSpawner")) {
+   }
+   if(th.bIsMonster && !(th is "RandomSpawner")) {
       Lith_UTIL.exec(th, lsc_monsterinfo);
-
       if(Lith_UTIL.pData(_pdt_menv) == _menv_evil) {
          th.damageMultiply += 2;
          th.scale.X *= fRandom(0.9, 1.1);
          th.scale.Y *= fRandom(0.9, 1.1);
          th.bLookAllAround = true;
       }
-
       switch(m_bossLevel) {
          case boss_barons:
             if(th.bE1M8Boss) {
@@ -182,34 +168,30 @@ override void WorldThingSpawned(WorldEvent ev) {
             }
             break;
       }
-
       if(m_bossLevel != boss_none) {
          if(Lith_UTIL.pData(_pdt_mflg, _mflg_corrupted)) {
-            th.Health *= 2;
-            th.ReactionTime = 0;
-            th.DamageMultiply *= 1.5;
+            th.health *= 2;
+            th.reactionTime = 0;
+            th.damageMultiply *= 1.5;
          }
-
          if(th.bBossDeath) {
-            th.Health = int(th.Health * 2.7);
-            th.ReactionTime = 0;
-            th.DamageMultiply *= 1.6;
+            th.health = int(th.health * 2.7);
+            th.reactionTime = 0;
+            th.damageMultiply *= 1.6;
          }
       }
    }
 }
 
-override void WorldTick() {
+override void worldTick() {
    if(m_bossLevel != boss_none) {
       for(int i = 0, m = level.lines.size(); i < m; i++) {
          for(int j = 0; j < 3; j++) {
             level.lines[i].sidedef[0].setTextureYOffset(j, sin(level.totalTime)*4);
          }
       }
-
       if(m_bossDeathInit == 0) {
          bool boss_baby_is_dead;
-
          if(m_bossBabies.size() == 0) {
             boss_baby_is_dead = false;
          } else {
@@ -227,7 +209,6 @@ override void WorldTick() {
                }
             }
          }
-
          if(boss_baby_is_dead) {
             m_bossDeathInit = level.time;
             if(m_bossLevel == boss_iconofsin && lith_sv_postgame) {
@@ -245,26 +226,23 @@ override void WorldTick() {
    }
 }
 
-override void WorldThingDamaged(WorldEvent ev) {
+override void worldThingDamaged(WorldEvent ev) {
    let src = ev.damageSource;
    let dst = ev.thing;
-
-   if(!dst) return;
-
+   if(!dst) {
+      return;
+   }
    let pos = dst.pos + (0, 0, dst.height / 2);
-
    Lith_RenderProvider.instance().addDamageNum(pos, dst.radius/2, ev.damage, ev.thing);
-
-   if(ev.damageType == 'Bullet' && ev.damage >= 8 && !dst.bNOBLOOD) {
+   if(ev.damageType == 'Bullet' && ev.damage >= 8 && !dst.bNoBlood) {
       double vol = clamp(ev.damage / 10.0, 0, 1);
       let mo = Actor.spawn("Lith_Dummy", pos);
-      mo.A_StartSound("body/bullethit", lch_body, volume: vol * frandom(0.5, 1.1));
+      mo.a_startSound("body/bullethit", lch_body, volume: vol * frandom(0.5, 1.1));
    }
-
-   if(!src || src == dst) return;
-
+   if(!src || src == dst) {
+      return;
+   }
    let player = Lith_Player(src);
-
    if(player) {
       let magnum = Lith_Magnum(player.player.readyWeapon);
       if(magnum) {
@@ -274,33 +252,34 @@ override void WorldThingDamaged(WorldEvent ev) {
             magnum.lith_addAccurate();
          }
       }
-   } else if(src.CountInv("Lith_MonsterID") && (dst.bCOUNTKILL || dst.Player)) {
-      src.ACS_ScriptCall("Lith_GiveMonsterEXP", ev.Damage);
+   } else if(src.CountInv("Lith_MonsterID") && (dst.bCountKill || dst.Player)) {
+      src.ACS_ScriptCall("Lith_GiveMonsterEXP", ev.damage);
    }
 }
 
-override void WorldThingDied(WorldEvent ev) {
-   let mo = ev.Thing;
-   if(mo.bCOUNTKILL && !mo.bNOBLOOD && mo.Health < mo.GetGibHealth())
-      for(int i = 0; i < 20; i++)
-   {
-      let xo = FRandom(-mo.Radius,mo.Radius);
-      let yo = FRandom(-mo.Radius,mo.Radius);
-      let zo = FRandom(         0,mo.Height);
-      let p = mo.Pos + (xo,yo,zo);
-      let bl = Actor.Spawn("Lith_BloodHitCore", p, ALLOW_REPLACE);
-      bl.Translation = mo.BloodTranslation;
-      if(ev.Inflictor) bl.A_Face(ev.Inflictor);
+override void worldThingDied(WorldEvent ev) {
+   let mo = ev.thing;
+   if(mo.bCountKill && !mo.bNoBlood && mo.health < mo.getGibHealth()) {
+      for(int i = 0; i < 20; i++) {
+         let xo = fRandom(-mo.radius,mo.radius);
+         let yo = fRandom(-mo.radius,mo.radius);
+         let zo = fRandom(         0,mo.height);
+         let p = mo.pos + (xo,yo,zo);
+         let bl = Actor.spawn("Lith_BloodHitCore", p, ALLOW_REPLACE);
+         bl.translation = mo.bloodTranslation;
+         if(ev.inflictor) {
+            bl.a_face(ev.inflictor);
+         }
+      }
    }
-
    int sph = mo.spawnHealth();
-   if(mo.bBOSSSPAWNED && sph > 50) {
+   if(mo.bBossSpawned && sph > 50) {
       Lith_BossBrain to;
       int dmg = sph / 50 * random(1, 4);
       double sc = log10(sph);
       for(let it = ThinkerIterator.create("Lith_BossBrain"); (to = Lith_BossBrain(it.next()));) {
-         if(to.m_Shield > 0) {
-            let shot = Actor.Spawn("Lith_BossDamage", mo.pos);
+         if(to.m_shield > 0) {
+            let shot = Actor.spawn("Lith_BossDamage", mo.pos);
             shot.target = mo;
             shot.tracer = to;
             shot.setDamage(dmg);
@@ -429,8 +408,9 @@ override void networkProcess(ConsoleEvent evt) {
    }
 }
 
-static clearScope Lith_HERMES Instance()
-   {return Lith_HERMES(Find('Lith_HERMES'));}
+static clearScope Lith_HERMES Instance() {
+   return Lith_HERMES(Find('Lith_HERMES'));
+}
 
 static clearScope string localize(string name) {
    string ret = StringTable.localize(name, false);
@@ -469,7 +449,10 @@ static string EDataS(Actor mo, int info) {
    case _edt_obituary: return instance().m_obituary;
    case _edt_logname:  return instance().m_logName;
    case _edt_bipname:  return instance().m_bipName;
-   case _edt_sky1:     return level.info.skyPic1;
+   case _edt_origsky1: return level.info.skyPic1;
+   case _edt_origsky2: return level.info.skyPic2;
+   case _edt_sky1:     return TexMan.getName(level.skyTexture1);
+   case _edt_sky2:     return TexMan.getName(level.skyTexture2);
    }
    return "";
 }

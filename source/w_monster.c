@@ -171,9 +171,9 @@ void BaseMonsterLevel(dmon_t *m) {
    }
 
    switch(m->rank) {
-      case 5: ServCallV(sm_SetTeleFogTo, so_TeleFog5); break;
-      case 6: ServCallV(sm_SetTeleFogTo, so_TeleFog6); break;
-      case 7: ServCallV(sm_SetTeleFogTo, so_TeleFog7); break;
+   case 5: ServCallV(sm_SetTeleFogTo, so_TeleFog5); break;
+   case 6: ServCallV(sm_SetTeleFogTo, so_TeleFog6); break;
+   case 7: ServCallV(sm_SetTeleFogTo, so_TeleFog7); break;
    }
 
    if(HasResistances(m)) {
@@ -367,7 +367,7 @@ void PrintMonsterInfo(dmon_t *m) {
 #endif
 
 script
-void MonInfo_Preset(struct tokbuf *tb, struct tbuf_err *res) {
+void MonInfo_Preset(struct tokbuf *tb, struct err *res) {
    noinit static
    mon_name_t k, v;
 
@@ -385,7 +385,7 @@ void MonInfo_Preset(struct tokbuf *tb, struct tbuf_err *res) {
                  "exp, "
                  "or scr",
                  TokPrint(tb->reget()), k);
-         unwrap_cb();
+         unwrap_retn();
       }
    }
    unwrap(res);
@@ -424,7 +424,7 @@ void MonInfo_ColorfulHellHack(struct monster_info *mi) {
 }
 
 script static
-void MonInfo_Monster(struct tokbuf *tb, struct tbuf_err *res, i32 flags) {
+void MonInfo_Monster(struct tokbuf *tb, struct err *res, i32 flags) {
    noinit static
    mon_name_t k, v;
 
@@ -470,7 +470,7 @@ void MonInfo_Monster(struct tokbuf *tb, struct tbuf_err *res, i32 flags) {
                tb->err(res, "%s MonInfo_Monster: invalid hack '%s'; expected "
                        "ch",
                        TokPrint(tb->reget()), hack);
-               unwrap_cb();
+               unwrap_retn();
             }
          }
          break;
@@ -483,7 +483,7 @@ void MonInfo_Monster(struct tokbuf *tb, struct tbuf_err *res, i32 flags) {
                  "type, "
                  "or hacks",
                  TokPrint(tb->reget()), k);
-         unwrap_cb();
+         unwrap_retn();
       }
    }
    unwrap(res);
@@ -494,7 +494,7 @@ void MonInfo_Monster(struct tokbuf *tb, struct tbuf_err *res, i32 flags) {
 }
 
 static
-i32 MonInfo_Flags(struct tokbuf *tb, struct tbuf_err *res) {
+i32 MonInfo_Flags(struct tokbuf *tb, struct err *res) {
    gosub_enable();
 
    char         *flag, *next, c;
@@ -545,12 +545,12 @@ sflag:
               #include "w_monster.h"
               "or `%c'",
               TokPrint(tok), flag, c);
-      unwrap_cb();
+      unwrap_retn();
    }
 }
 
 script static
-void MonInfo_Monsters(struct tokbuf *tb, struct tbuf_err *res) {
+void MonInfo_Monsters(struct tokbuf *tb, struct err *res) {
    i32 flags = MonInfo_Flags(tb, res);
    unwrap(res);
 
@@ -564,7 +564,7 @@ void MonInfo_Monsters(struct tokbuf *tb, struct tbuf_err *res) {
 }
 
 script static
-void MonInfo_Presets(struct tokbuf *tb, struct tbuf_err *res) {
+void MonInfo_Presets(struct tokbuf *tb, struct err *res) {
    tb->expdr(res, tok_braceo);
    unwrap(res);
 
@@ -575,7 +575,7 @@ void MonInfo_Presets(struct tokbuf *tb, struct tbuf_err *res) {
 }
 
 script static
-void MonInfo_Compile(struct tokbuf *tb, struct tbuf_err *res) {
+void MonInfo_Compile(struct tokbuf *tb, struct err *res) {
    for(;;) {
       struct token *tok =
          tb->expc(res, tb->get(), tok_pareno, tok_string, tok_identi,
@@ -598,7 +598,7 @@ void MonInfo_Compile(struct tokbuf *tb, struct tbuf_err *res) {
             break;
          default:
             tb->err(res, "%s MonInfo_Compile: invalid toplevel identifier", TokPrint(tok));
-            unwrap_cb();
+            unwrap_retn();
             break;
          }
          break;
@@ -610,20 +610,16 @@ script
 void Mon_Init(void) {
    Dbg_Log(log_dev, _l(__func__));
 
-   FILE *fp;
-   i32 prev = 0;
-
    monsterpresetnum = 0;
    monsterinfonum   = 0;
 
-   while((fp = W_OpenIter(sp_LITHMONS, 't', &prev))) {
+   i32 prev = 0;
+   for(FILE *fp; (fp = W_OpenIter(sp_LITHMONS, 't', &prev));) {
       struct tokbuf tb;
       TBufCtor(&tb, fp, "LITHMONS");
-
-      struct tbuf_err res = {};
+      struct err res = {};
       MonInfo_Compile(&tb, &res);
       unwrap_print(&res);
-
       TBufDtor(&tb);
       fclose(fp);
    }

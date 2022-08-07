@@ -14,6 +14,7 @@
 #include "m_char.h"
 #include "m_file.h"
 #include "m_str.h"
+#include "m_flow.h"
 #include <ACS_ZDoom.h>
 
 #define textNext() tok->textV[tok->textC++]

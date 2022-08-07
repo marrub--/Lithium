@@ -16,7 +16,6 @@ explosion3 lsnd/Explosion3
 $random explosion { explosion1 explosion2 explosion3 }
 $limit explosion 0
 $attenuation explosion 0.5
-silence lsnd/Silence
 MMMMHMHMMMHMMM lsnd/MMMMHMHMMMHMMM
 YOUSONOFABITCH lsnd/YOUSONOFABITCH
 AAAAAAAAAAAAAA lsnd/AAAAAAAAAAAAAA
@@ -270,11 +269,94 @@ items/healthbonus14 lsnd/Items/bdup/DSHBON14
 $random items/healthbonusrandom { items/healthbonus1 items/healthbonus2 items/healthbonus3 items/healthbonus4 items/healthbonus5 items/healthbonus6 items/healthbonus7 items/healthbonus8 items/healthbonus9 items/healthbonus10 items/healthbonus11 items/healthbonus12 items/healthbonus13 items/healthbonus14 }
 items/vial lsnd/Items/HealthBonus
 $random items/healthbonus { items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/healthbonusrandom }
+$playersound player neutral *jump lsnd/Player/Jump
+$playersound player other *jump lsnd/Player/Jump
+$playersound player female *jump lsnd/Player/Jump
 $playersound player male *jump lsnd/Player/Jump
+$playersound fighter neutral *jump lsnd/Player/Jump
+$playersound fighter other *jump lsnd/Player/Jump
+$playersound fighter female *jump lsnd/Player/Jump
+$playersound fighter male *jump lsnd/Player/Jump
+$playersound player neutral *usefail lsnd/Player/UseFail
+$playersound player other *usefail lsnd/Player/UseFail
+$playersound player female *usefail lsnd/Player/UseFail
 $playersound player male *usefail lsnd/Player/UseFail
+$playersound fighter neutral *usefail lsnd/Player/UseFail
+$playersound fighter other *usefail lsnd/Player/UseFail
+$playersound fighter female *usefail lsnd/Player/UseFail
+$playersound fighter male *usefail lsnd/Player/UseFail
+$playersound player neutral *puzzfail lsnd/Player/PuzzFail
+$playersound player other *puzzfail lsnd/Player/PuzzFail
+$playersound player female *puzzfail lsnd/Player/PuzzFail
+$playersound player male *puzzfail lsnd/Player/PuzzFail
+$playersound fighter neutral *puzzfail lsnd/Player/PuzzFail
+$playersound fighter other *puzzfail lsnd/Player/PuzzFail
+$playersound fighter female *puzzfail lsnd/Player/PuzzFail
+$playersound fighter male *puzzfail lsnd/Player/PuzzFail
+$playersound player neutral *keytry lsnd/Player/KeyTry
+$playersound player other *keytry lsnd/Player/KeyTry
+$playersound player female *keytry lsnd/Player/KeyTry
+$playersound player male *keytry lsnd/Player/KeyTry
+$playersound fighter neutral *keytry lsnd/Player/KeyTry
+$playersound fighter other *keytry lsnd/Player/KeyTry
+$playersound fighter female *keytry lsnd/Player/KeyTry
+$playersound fighter male *keytry lsnd/Player/KeyTry
+$playersound player neutral *land lsnd/Player/Land
+$playersound player other *land lsnd/Player/Land
+$playersound player female *land lsnd/Player/Land
 $playersound player male *land lsnd/Player/Land
+$playersound fighter neutral *land lsnd/Player/Land
+$playersound fighter other *land lsnd/Player/Land
+$playersound fighter female *land lsnd/Player/Land
+$playersound fighter male *land lsnd/Player/Land
+$playersound player neutral *xdeath lsnd/Player/Gibbed
+$playersound player other *xdeath lsnd/Player/Gibbed
+$playersound player female *xdeath lsnd/Player/Gibbed
+$playersound player male *xdeath lsnd/Player/Gibbed
+$playersound fighter neutral *xdeath lsnd/Player/Gibbed
+$playersound fighter other *xdeath lsnd/Player/Gibbed
+$playersound fighter female *xdeath lsnd/Player/Gibbed
+$playersound fighter male *xdeath lsnd/Player/Gibbed
+$playersound player neutral *splat lsnd/Player/Splat
+$playersound player other *splat lsnd/Player/Splat
+$playersound player female *splat lsnd/Player/Splat
+$playersound player male *splat lsnd/Player/Splat
+$playersound fighter neutral *splat lsnd/Player/Splat
+$playersound fighter other *splat lsnd/Player/Splat
+$playersound fighter female *splat lsnd/Player/Splat
+$playersound fighter male *splat lsnd/Player/Splat
+$playersound player neutral *dive lsnd/Player/SplashIn
+$playersound player other *dive lsnd/Player/SplashIn
+$playersound player female *dive lsnd/Player/SplashIn
 $playersound player male *dive lsnd/Player/SplashIn
+$playersound fighter neutral *dive lsnd/Player/SplashIn
+$playersound fighter other *dive lsnd/Player/SplashIn
+$playersound fighter female *dive lsnd/Player/SplashIn
+$playersound fighter male *dive lsnd/Player/SplashIn
+$playersound player neutral *surface lsnd/Player/Splash
+$playersound player other *surface lsnd/Player/Splash
+$playersound player female *surface lsnd/Player/Splash
 $playersound player male *surface lsnd/Player/Splash
+$playersound fighter neutral *surface lsnd/Player/Splash
+$playersound fighter other *surface lsnd/Player/Splash
+$playersound fighter female *surface lsnd/Player/Splash
+$playersound fighter male *surface lsnd/Player/Splash
+$playersounddup player neutral *drainhealth *pain50
+$playersounddup player other *drainhealth *pain50
+$playersounddup player female *drainhealth *pain50
+$playersounddup player male *drainhealth *pain50
+$playersounddup fighter neutral *drainhealth *pain50
+$playersounddup fighter other *drainhealth *pain50
+$playersounddup fighter female *drainhealth *pain50
+$playersounddup fighter male *drainhealth *pain50
+$playersounddup player neutral *poison *pain100
+$playersounddup player other *poison *pain100
+$playersounddup player female *poison *pain100
+$playersounddup player male *poison *pain100
+$playersounddup fighter neutral *poison *pain100
+$playersounddup fighter other *poison *pain100
+$playersounddup fighter female *poison *pain100
+$playersounddup fighter male *poison *pain100
 player/depthdown lsnd/Player/DepthDown
 player/score1 lsnd/Player/Score1
 player/score2 lsnd/Player/Score2
@@ -327,50 +409,167 @@ player/YOUVEGOTMAIL lsnd/GUI/Mail
 player/trmopen lsnd/GUI/Terminal/Open
 player/trmswitch lsnd/GUI/Terminal/Switch
 player/wings lsnd/Weapons/Wings
-$playersound assassin male *death lsnd/PlayerA/Death
-$playersound assassin male *xdeath lsnd/PlayerA/XDeath
-$playersound assassin male *pain100 lsnd/PlayerA/PainSmall
-$playersounddup assassin male *pain75 *pain100
-$playersound assassin male *pain50 lsnd/PlayerA/Pain
-$playersounddup assassin male *pain25 *pain50
-$playersound assassin male *grunt lsnd/PlayerA/Grunt
+$playersound lith_assassin neutral *death lsnd/PlayerA/Death
+$playersound lith_assassin other *death lsnd/PlayerA/Death
+$playersound lith_assassin female *death lsnd/PlayerA/Death
+$playersound lith_assassin male *death lsnd/PlayerA/Death
+$playersound lith_assassin neutral *wimpydeath lsnd/PlayerA/DeathSmall
+$playersound lith_assassin other *wimpydeath lsnd/PlayerA/DeathSmall
+$playersound lith_assassin female *wimpydeath lsnd/PlayerA/DeathSmall
+$playersound lith_assassin male *wimpydeath lsnd/PlayerA/DeathSmall
+$playersound lith_assassin neutral *crazydeath lsnd/PlayerA/DeathBig
+$playersound lith_assassin other *crazydeath lsnd/PlayerA/DeathBig
+$playersound lith_assassin female *crazydeath lsnd/PlayerA/DeathBig
+$playersound lith_assassin male *crazydeath lsnd/PlayerA/DeathBig
+$playersound lith_assassin neutral *pain100 lsnd/PlayerA/PainSmall
+$playersound lith_assassin other *pain100 lsnd/PlayerA/PainSmall
+$playersound lith_assassin female *pain100 lsnd/PlayerA/PainSmall
+$playersound lith_assassin male *pain100 lsnd/PlayerA/PainSmall
+$playersounddup lith_assassin neutral *pain75 *pain100
+$playersounddup lith_assassin other *pain75 *pain100
+$playersounddup lith_assassin female *pain75 *pain100
+$playersounddup lith_assassin male *pain75 *pain100
+$playersound lith_assassin neutral *pain50 lsnd/PlayerA/Pain
+$playersound lith_assassin other *pain50 lsnd/PlayerA/Pain
+$playersound lith_assassin female *pain50 lsnd/PlayerA/Pain
+$playersound lith_assassin male *pain50 lsnd/PlayerA/Pain
+$playersounddup lith_assassin neutral *pain25 *pain50
+$playersounddup lith_assassin other *pain25 *pain50
+$playersounddup lith_assassin female *pain25 *pain50
+$playersounddup lith_assassin male *pain25 *pain50
+$playersound lith_assassin neutral *grunt lsnd/PlayerA/Grunt
+$playersound lith_assassin other *grunt lsnd/PlayerA/Grunt
+$playersound lith_assassin female *grunt lsnd/PlayerA/Grunt
+$playersound lith_assassin male *grunt lsnd/PlayerA/Grunt
 player/omi/doll lsnd/PlayerA/Doll
 $alias player/omi/step player/step
 player/omi/roll lsnd/PlayerA/Roll
 player/omi/djump lsnd/PlayerA/DoubleJump
-$playersound cybermage male *death lsnd/PlayerC/Death
-$playersound cybermage male *xdeath lsnd/PlayerC/XDeath
-$playersound cybermage male *pain100 lsnd/PlayerC/PainSmall
-$playersounddup cybermage male *pain75 *pain100
-$playersound cybermage male *pain50 lsnd/PlayerC/Pain
-$playersounddup cybermage male *pain25 *pain50
-$playersound cybermage male *grunt lsnd/PlayerC/Grunt
+$playersound lith_cybermage neutral *death lsnd/PlayerC/Death
+$playersound lith_cybermage other *death lsnd/PlayerC/Death
+$playersound lith_cybermage female *death lsnd/PlayerC/Death
+$playersound lith_cybermage male *death lsnd/PlayerC/Death
+$playersound lith_cybermage neutral *wimpydeath lsnd/PlayerC/DeathSmall
+$playersound lith_cybermage other *wimpydeath lsnd/PlayerC/DeathSmall
+$playersound lith_cybermage female *wimpydeath lsnd/PlayerC/DeathSmall
+$playersound lith_cybermage male *wimpydeath lsnd/PlayerC/DeathSmall
+$playersound lith_cybermage neutral *crazydeath lsnd/PlayerC/DeathBig
+$playersound lith_cybermage other *crazydeath lsnd/PlayerC/DeathBig
+$playersound lith_cybermage female *crazydeath lsnd/PlayerC/DeathBig
+$playersound lith_cybermage male *crazydeath lsnd/PlayerC/DeathBig
+$playersound lith_cybermage neutral *pain100 lsnd/PlayerC/PainSmall
+$playersound lith_cybermage other *pain100 lsnd/PlayerC/PainSmall
+$playersound lith_cybermage female *pain100 lsnd/PlayerC/PainSmall
+$playersound lith_cybermage male *pain100 lsnd/PlayerC/PainSmall
+$playersounddup lith_cybermage neutral *pain75 *pain100
+$playersounddup lith_cybermage other *pain75 *pain100
+$playersounddup lith_cybermage female *pain75 *pain100
+$playersounddup lith_cybermage male *pain75 *pain100
+$playersound lith_cybermage neutral *pain50 lsnd/PlayerC/Pain
+$playersound lith_cybermage other *pain50 lsnd/PlayerC/Pain
+$playersound lith_cybermage female *pain50 lsnd/PlayerC/Pain
+$playersound lith_cybermage male *pain50 lsnd/PlayerC/Pain
+$playersounddup lith_cybermage neutral *pain25 *pain50
+$playersounddup lith_cybermage other *pain25 *pain50
+$playersounddup lith_cybermage female *pain25 *pain50
+$playersounddup lith_cybermage male *pain25 *pain50
+$playersound lith_cybermage neutral *grunt lsnd/PlayerC/Grunt
+$playersound lith_cybermage other *grunt lsnd/PlayerC/Grunt
+$playersound lith_cybermage female *grunt lsnd/PlayerC/Grunt
+$playersound lith_cybermage male *grunt lsnd/PlayerC/Grunt
 player/jem/doll lsnd/PlayerC/Doll
 $alias player/jem/step player/step
 player/jem/manafull lsnd/PlayerC/FullCharge
-$playersound darklord male *death lsnd/PlayerD/Death
-$playersound darklord male *xdeath lsnd/PlayerD/XDeath
-$playersound darklord male *pain100 lsnd/PlayerD/PainSmall
-$playersound darklord male *pain75 lsnd/PlayerD/Pain
-$playersounddup darklord male *pain50 *pain75
-$playersounddup darklord male *pain25 *pain75
-$playersound darklord male *grunt lsnd/PlayerD/Grunt
-$playersound darklord male *land lsnd/PlayerD/Land
+$playersound lith_darklord neutral *death lsnd/PlayerD/Death
+$playersound lith_darklord other *death lsnd/PlayerD/Death
+$playersound lith_darklord female *death lsnd/PlayerD/Death
+$playersound lith_darklord male *death lsnd/PlayerD/Death
+$playersound lith_darklord neutral *wimpydeath lsnd/PlayerD/DeathSmall
+$playersound lith_darklord other *wimpydeath lsnd/PlayerD/DeathSmall
+$playersound lith_darklord female *wimpydeath lsnd/PlayerD/DeathSmall
+$playersound lith_darklord male *wimpydeath lsnd/PlayerD/DeathSmall
+$playersound lith_darklord neutral *crazydeath lsnd/PlayerD/DeathBig
+$playersound lith_darklord other *crazydeath lsnd/PlayerD/DeathBig
+$playersound lith_darklord female *crazydeath lsnd/PlayerD/DeathBig
+$playersound lith_darklord male *crazydeath lsnd/PlayerD/DeathBig
+$playersound lith_darklord neutral *pain100 lsnd/PlayerD/PainSmall
+$playersound lith_darklord other *pain100 lsnd/PlayerD/PainSmall
+$playersound lith_darklord female *pain100 lsnd/PlayerD/PainSmall
+$playersound lith_darklord male *pain100 lsnd/PlayerD/PainSmall
+$playersounddup lith_darklord neutral *pain75 *pain100
+$playersounddup lith_darklord other *pain75 *pain100
+$playersounddup lith_darklord female *pain75 *pain100
+$playersounddup lith_darklord male *pain75 *pain100
+$playersound lith_darklord neutral *pain50 lsnd/PlayerD/Pain
+$playersound lith_darklord other *pain50 lsnd/PlayerD/Pain
+$playersound lith_darklord female *pain50 lsnd/PlayerD/Pain
+$playersound lith_darklord male *pain50 lsnd/PlayerD/Pain
+$playersounddup lith_darklord neutral *pain25 *pain50
+$playersounddup lith_darklord other *pain25 *pain50
+$playersounddup lith_darklord female *pain25 *pain50
+$playersounddup lith_darklord male *pain25 *pain50
+$playersound lith_darklord neutral *grunt lsnd/PlayerD/Grunt
+$playersound lith_darklord other *grunt lsnd/PlayerD/Grunt
+$playersound lith_darklord female *grunt lsnd/PlayerD/Grunt
+$playersound lith_darklord male *grunt lsnd/PlayerD/Grunt
+$playersound lith_darklord neutral *land lsnd/PlayerD/Land
+$playersound lith_darklord other *land lsnd/PlayerD/Land
+$playersound lith_darklord female *land lsnd/PlayerD/Land
+$playersound lith_darklord male *land lsnd/PlayerD/Land
 player/ari/doll lsnd/PlayerD/Doll
 player/ari/step lsnd/PlayerD/Step
 player/ari/shield/break lsnd/PlayerD/ShieldBreak
 player/ari/shield/regenw lsnd/PlayerD/ShieldRegenWait
 player/ari/shield/regenl lsnd/PlayerD/ShieldRegen
 player/ari/shield/regend lsnd/PlayerD/ShieldRegenDone
-$playeralias informant male *land player/fulk/land
-$playeralias informant male *grunt silence
-$playersound informant male *jump lsnd/PlayerI/Jump
-$playersound informant male *death lsnd/PlayerI/Death
-$playersound informant male *xdeath lsnd/PlayerI/XDeath
-$playersound informant male *pain100 lsnd/PlayerI/PainSmall
-$playersounddup informant male *pain75 *pain100
-$playersound informant male *pain50 lsnd/PlayerI/Pain
-$playersounddup informant male *pain25 *pain50
+$playersound lith_informant neutral *splat lsnd/PlayerI/Splat
+$playersound lith_informant other *splat lsnd/PlayerI/Splat
+$playersound lith_informant female *splat lsnd/PlayerI/Splat
+$playersound lith_informant male *splat lsnd/PlayerI/Splat
+$playersound lith_informant neutral *xdeath lsnd/PlayerI/Gibbed
+$playersound lith_informant other *xdeath lsnd/PlayerI/Gibbed
+$playersound lith_informant female *xdeath lsnd/PlayerI/Gibbed
+$playersound lith_informant male *xdeath lsnd/PlayerI/Gibbed
+$playersound lith_informant neutral *death lsnd/PlayerI/Death
+$playersound lith_informant other *death lsnd/PlayerI/Death
+$playersound lith_informant female *death lsnd/PlayerI/Death
+$playersound lith_informant male *death lsnd/PlayerI/Death
+$playersound lith_informant neutral *wimpydeath lsnd/PlayerI/DeathSmall
+$playersound lith_informant other *wimpydeath lsnd/PlayerI/DeathSmall
+$playersound lith_informant female *wimpydeath lsnd/PlayerI/DeathSmall
+$playersound lith_informant male *wimpydeath lsnd/PlayerI/DeathSmall
+$playersound lith_informant neutral *crazydeath lsnd/PlayerI/DeathBig
+$playersound lith_informant other *crazydeath lsnd/PlayerI/DeathBig
+$playersound lith_informant female *crazydeath lsnd/PlayerI/DeathBig
+$playersound lith_informant male *crazydeath lsnd/PlayerI/DeathBig
+$playersound lith_informant neutral *pain100 lsnd/PlayerI/PainSmall
+$playersound lith_informant other *pain100 lsnd/PlayerI/PainSmall
+$playersound lith_informant female *pain100 lsnd/PlayerI/PainSmall
+$playersound lith_informant male *pain100 lsnd/PlayerI/PainSmall
+$playersounddup lith_informant neutral *pain75 *pain100
+$playersounddup lith_informant other *pain75 *pain100
+$playersounddup lith_informant female *pain75 *pain100
+$playersounddup lith_informant male *pain75 *pain100
+$playersound lith_informant neutral *pain50 lsnd/PlayerI/Pain
+$playersound lith_informant other *pain50 lsnd/PlayerI/Pain
+$playersound lith_informant female *pain50 lsnd/PlayerI/Pain
+$playersound lith_informant male *pain50 lsnd/PlayerI/Pain
+$playersounddup lith_informant neutral *pain25 *pain50
+$playersounddup lith_informant other *pain25 *pain50
+$playersounddup lith_informant female *pain25 *pain50
+$playersounddup lith_informant male *pain25 *pain50
+$playersound lith_informant neutral *jump lsnd/PlayerI/Jump
+$playersound lith_informant other *jump lsnd/PlayerI/Jump
+$playersound lith_informant female *jump lsnd/PlayerI/Jump
+$playersound lith_informant male *jump lsnd/PlayerI/Jump
+$playeralias lith_informant neutral *grunt dsempty
+$playeralias lith_informant other *grunt dsempty
+$playeralias lith_informant female *grunt dsempty
+$playeralias lith_informant male *grunt dsempty
+$playeralias lith_informant neutral *land player/fulk/land
+$playeralias lith_informant other *land player/fulk/land
+$playeralias lith_informant female *land player/fulk/land
+$playeralias lith_informant male *land player/fulk/land
 player/fulk/doll lsnd/PlayerI/Doll
 player/fulk/land1 lsnd/PlayerI/Land1
 player/fulk/land2 lsnd/PlayerI/Land2
@@ -382,6 +581,34 @@ player/fulk/step4 lsnd/PlayerI/Footsteps/Step4
 player/fulk/dodge lsnd/PlayerI/Dodge
 $random player/fulk/land { player/fulk/land1 player/fulk/land2 player/fulk/land3 }
 $random player/fulk/step { player/fulk/step1 player/fulk/step2 player/fulk/step3 player/fulk/step4 }
+$playersound lith_marine neutral *death lsnd/PlayerM/Death
+$playersound lith_marine other *death lsnd/PlayerM/Death
+$playersound lith_marine female *death lsnd/PlayerM/Death
+$playersound lith_marine male *death lsnd/PlayerM/Death
+$playersound lith_marine neutral *wimpydeath lsnd/PlayerM/DeathSmall
+$playersound lith_marine other *wimpydeath lsnd/PlayerM/DeathSmall
+$playersound lith_marine female *wimpydeath lsnd/PlayerM/DeathSmall
+$playersound lith_marine male *wimpydeath lsnd/PlayerM/DeathSmall
+$playersound lith_marine neutral *crazydeath lsnd/PlayerM/DeathBig
+$playersound lith_marine other *crazydeath lsnd/PlayerM/DeathBig
+$playersound lith_marine female *crazydeath lsnd/PlayerM/DeathBig
+$playersound lith_marine male *crazydeath lsnd/PlayerM/DeathBig
+$playersound lith_marine neutral *pain100 lsnd/PlayerM/PainSmall
+$playersound lith_marine other *pain100 lsnd/PlayerM/PainSmall
+$playersound lith_marine female *pain100 lsnd/PlayerM/PainSmall
+$playersound lith_marine male *pain100 lsnd/PlayerM/PainSmall
+$playersounddup lith_marine neutral *pain75 *pain100
+$playersounddup lith_marine other *pain75 *pain100
+$playersounddup lith_marine female *pain75 *pain100
+$playersounddup lith_marine male *pain75 *pain100
+$playersound lith_marine neutral *pain50 lsnd/PlayerM/Pain
+$playersound lith_marine other *pain50 lsnd/PlayerM/Pain
+$playersound lith_marine female *pain50 lsnd/PlayerM/Pain
+$playersound lith_marine male *pain50 lsnd/PlayerM/Pain
+$playersounddup lith_marine neutral *pain25 *pain50
+$playersounddup lith_marine other *pain25 *pain50
+$playersounddup lith_marine female *pain25 *pain50
+$playersounddup lith_marine male *pain25 *pain50
 player/lane/doll lsnd/PlayerM/Doll
 $alias player/lane/step player/step
 player/lane/rarmor/mode lsnd/PlayerM/RArmor/ChangeMode
@@ -890,6 +1117,8 @@ doors/dr2_open lsnd/World/Ambiance/DoorOpenFast
 doors/dr2_clos lsnd/World/Ambiance/DoorCloseFast
 plats/pt1_strt lsnd/World/Ambiance/PlatformStart
 plats/pt1_stop lsnd/World/Ambiance/PlatformStop
+switches/normbutn lsnd/World/Ambiance/SwitchNormal
+switches/exitbutn lsnd/World/Ambiance/SwitchExit
 amb/rain lsnd/World/Ambiance/Rain
 amb/wind lsnd/World/Ambiance/Wind
 amb/rainout lsnd/World/Ambiance/RainOut

@@ -1,0 +1,66 @@
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ├──────────────────────────────────────────────────────────────────────────┤
+// │                                                                          │
+// │ Map metadata reading.                                                    │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
+
+#include "common.h"
+#include "w_world.h"
+#include "m_file.h"
+#include "m_tokbuf.h"
+#include "m_trie.h"
+
+static void ReadKeys(struct tokbuf *tb, struct err *res, struct map_info *mi) {
+   noinit static char k[16], v[64];
+   while(tb->kv(res, k, v)) {
+      unwrap(res);
+      i32 key = MapInfoKeyName(k);
+      set_bit(mi->use, key);
+      switch(key) {
+      case _mi_key_dewpoint:
+      case _mi_key_seed:
+      case _mi_key_temperature:
+         mi->keys[key] = faststrtoi32(v);
+         break;
+      case _mi_key_environment:
+         mi->keys[key] = MapInfoEnvName(v);
+         break;
+      case _mi_key_sky:
+         mi->keys[key] = MapInfoSkyName(v);
+         break;
+      case _mi_key_flags:
+         mi->keys[key] = tb->rflag(res, v, MapInfoFlagName);
+         unwrap(res);
+         break;
+      default:
+         tb->err(res, "%s: invalid key %s", TokPrint(tb->reget()), k);
+         unwrap_retn();
+      }
+   }
+   tb->expc(res, tb->get(), tok_eof, 0);
+   unwrap(res);
+}
+
+script struct map_info ReadMapInfo(void) {
+   struct map_info ret;
+   ret.use = 0;
+   i32 lump = W_GetMapInfoLump();
+   if(lump == -1) {
+      return ret;
+   }
+   FILE *fp = W_OpenNum(lump, 't');
+   struct tokbuf tb;
+   TBufCtor(&tb, fp, "LITHMAP");
+   struct err res = {};
+   ReadKeys(&tb, &res, &ret);
+   unwrap_print(&res);
+   TBufDtor(&tb);
+   fclose(fp);
+   return ret;
+}

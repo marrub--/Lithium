@@ -132,7 +132,6 @@ sync   void P_TeleportOut(i32 tag);
 #ifndef NDEBUG
 void P_Ren_Debug(void);
 #endif
-void P_Ren_Magic(void);
 script void P_Ren_Step(void);
 void P_Ren_View(void);
 script void P_Ren_Scope(void);

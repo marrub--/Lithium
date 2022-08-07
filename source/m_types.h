@@ -19,8 +19,6 @@
 #include <stdfix.h>
 #include <stdint.h>
 
-#define statement(body) do body while(0)
-
 #define nil  ((void *)0)
 #define snil ((__str_ent *)0)
 #define lnil ((__label *)0)
@@ -41,33 +39,6 @@
 
 /* makes it easier to find function typedefs -zoe */
 #define funcdef typedef
-
-#define unwrap_do(e, stmt) statement(if((e)->some) statement(stmt);)
-
-#define unwrap_cb() [[return]] __asm("Rjnk()")
-
-#define unwrap(e) \
-   unwrap_do(e, { \
-      unwrap_cb(); \
-   })
-#define unwrap_print(e) \
-   unwrap_do(e, { \
-      PrintErr(_p((e)->err)); \
-   })
-
-#define gosub_enable() lbl _gsret = lnil
-
-#define gosub_(label, lh) \
-   statement({ \
-      _gsret = &&_l##lh; \
-      goto label; \
-   _l##lh:; \
-   })
-#define gosub__(label, lh)  gosub_ (label, lh)
-#define gosub___(label)     gosub__(label, LineHashIdent)
-#define gosub(label, ...) __with((__VA_ARGS__);) gosub___(label)
-
-#define gosub_ret() goto *_gsret
 
 typedef int32_t i32;
 typedef int64_t i64;

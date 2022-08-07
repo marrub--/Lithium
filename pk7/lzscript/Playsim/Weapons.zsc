@@ -63,23 +63,4 @@ static void DelearSprite(Actor mo_) {
    }
 }
 
-static void PoisonFX(Actor mo) {
-   /* removed weird ass bullshit... */
-   let trg = Lith_Player(mo.Target);
-   int dmg = trg ? Lith_UTIL.pData(_pdt_attr, at_acc) / 4 : 0;
-   mo.A_DamageSelf(10 + dmg, "Poison");
-   mo.A_StartSound("weapons/shotgun/poison/acid", lch_body3, attenuation: 0.5);
-   Lith_CopyEffect.create("Lith_PoisonFx", mo);
-   mo.ACS_ScriptCall("Lith_PoisonFXTicker");
-}
-
-static void GivePoison(Actor mo) {
-   if(mo.CountInv("Lith_PoisonFXTimer")) {
-      mo.GiveInventory("Lith_PoisonFXReset", 1);
-   } else {
-      mo.GiveInventory("Lith_PoisonFXTimer", 20);
-      PoisonFX(mo);
-   }
-}
-
 /* EOF */

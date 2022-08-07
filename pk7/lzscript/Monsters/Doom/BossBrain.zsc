@@ -101,7 +101,7 @@ class Lith_ATField : Actor {
    Spawn:
       LBAR B 1;
    SpawnLoop:
-      LBAR B 0 A_Explode(40, 100, 0, false, 100);
+      LBAR B 0;
       LBAR B 1 A_FadeOut(frandom(0.06, 0.08));
       loop;
    }
@@ -230,8 +230,7 @@ int m_shieldMax;
 bool m_bossEye;
 int m_boom;
 
-override void postBeginPlay()
-{
+override void postBeginPlay() {
    super.postBeginPlay();
 
    Lith_BossEye th;
@@ -289,7 +288,7 @@ override int damageMobj(Actor inflictor, Actor source, int damage, name mod, int
    }
 
    if(m_bossEye) {
-      if(m_shield <= 0 || source is "ExplosiveBarrel" || source == self) {
+      if(!source || !source.player || m_shield <= 0) {
          return super.damageMobj(inflictor, source, damage, mod, flags, angle);
       } else {
          return 0;

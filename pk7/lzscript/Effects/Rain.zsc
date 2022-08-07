@@ -23,16 +23,13 @@ class Lith_RainDrop : Actor {
       +NoTeleport
       +NoTrigger
    }
-
    protected bool m_done;
-
    override void postBeginPlay() {
       super.postBeginPlay();
       vel      = (0, 0, fRandom(-12, -16));
       scale.y *= fRandom(1.5, 3.5);
       m_done   = false;
    }
-
    override void tick() {
       if(isFrozen()) {
          return;
@@ -49,7 +46,6 @@ class Lith_RainDrop : Actor {
          setOrigin(pos + vel, true);
       }
    }
-
    states {
    Spawn:
       RNDR A -1;
@@ -74,7 +70,6 @@ class Lith_AbyssRainDrop : Lith_RainDrop {
       Alpha 1.0;
       RenderStyle "Normal";
    }
-
    states {
    Spawn:
       RNDZ A -1;
@@ -91,7 +86,6 @@ class Lith_SnowDrop : Lith_RainDrop {
       RenderStyle "Normal";
       YScale 0.5;
    }
-
    states {
    Spawn:
       RNDS A -1;
@@ -104,15 +98,16 @@ class Lith_SnowDrop : Lith_RainDrop {
 
 class Lith_Ash : Lith_SnowDrop {
    default {
-      Scale 0.5;
+      Alpha 0.9;
+      Scale 0.75;
       +RollSprite
    }
-   private spriteId m_rnda;
    private float m_rollSpeed;
    override void postBeginPlay() {
-      super.postBeginPlay();
-      m_rnda = getSpriteIndex("RNDA");
-      m_rollSpeed = fRandom(0.4, 0.9);
+      Actor.postBeginPlay();
+      m_rollSpeed = fRandom(0.4, 0.9) * fRandomPick(-1, 1);
+      scale      *= fRandom(0.25, 1.0);
+      vel         = (0, 0, -fRandom(0.84, 1.2));
    }
    override void tick() {
       if(isFrozen()) {
@@ -120,25 +115,14 @@ class Lith_Ash : Lith_SnowDrop {
       }
       super.tick();
       if(!m_done) {
-         bool swap = Lith_UTIL.stateTick(self);
-         if(sprite == m_rnda) {
-            if(swap) {
-               scale = (0.75, 0.75) * fRandom(0.25, 1.0);
-               a_setRenderStyle(0.9, STYLE_Translucent);
-            }
-            a_setRoll(roll + m_rollSpeed, SPF_INTERPOLATE);
-         } else {
-            a_setRenderStyle(0.5, STYLE_Translucent);
-            vel *= fRandom(0.5, 0.75);
-         }
+         a_setRoll(roll + m_rollSpeed, SPF_INTERPOLATE);
       } else {
-         scale = (0.5, 0.5);
+         scale = (0.8, 0.5);
          roll  = 0;
       }
    }
    states {
    Spawn:
-      RDTF ABCDEFG 1 bright;
       RNDA A -1;
       wait;
    }

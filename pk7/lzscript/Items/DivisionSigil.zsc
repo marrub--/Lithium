@@ -45,7 +45,6 @@ class Lith_DivisionSigil : Lith_DivisionItem {
    }
 
    override bool tryPickup(in out Actor mo) {
-      mo.A_StartSound("player/getsigil", lch_body3, attenuation: ATTN_NONE);
       mo.acs_scriptCall("Lith_GetSigil");
       return super.tryPickup(mo);
    }

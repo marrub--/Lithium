@@ -8,13 +8,14 @@
 
 # Cyber-Mage
 == lsnd/PlayerC
-$playersound    cybermage male *death   Death     # Doom
-$playersound    cybermage male *xdeath  XDeath    # ^
-$playersound    cybermage male *pain100 PainSmall # ^
-$playersounddup cybermage male *pain75  *pain100  # ^
-$playersound    cybermage male *pain50  Pain      # ^
-$playersounddup cybermage male *pain25  *pain50   # ^
-$playersound    cybermage male *grunt   Grunt     # Doom 64
+$playersound    lith_cybermage * *death      Death      # Doom
+$playersound    lith_cybermage * *wimpydeath DeathSmall # ^
+$playersound    lith_cybermage * *crazydeath DeathBig   # ^
+$playersound    lith_cybermage * *pain100    PainSmall  # ^
+$playersounddup lith_cybermage * *pain75     *pain100   # ^
+$playersound    lith_cybermage * *pain50     Pain       # ^
+$playersounddup lith_cybermage * *pain25     *pain50    # ^
+$playersound    lith_cybermage * *grunt      Grunt      # Doom 64
 
 player.jem {
    doll Doll # Made of the strands of the universe

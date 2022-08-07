@@ -31,7 +31,8 @@ class Lith_StatShadowWalked : Lith_StatFx {
 class Lith_WandererPlayer : Lith_Player {
    default {
       Player.DisplayName "$LITH_CLASS_WANDERER";
-      Player.SoundClass "wanderer";
+      Player.SoundClass "lith_wanderer";
+      Player.Portrait ":Portraits:Wanderer";
       Tag "$LITH_CLASS_WANDERER";
       Health 50;
    }

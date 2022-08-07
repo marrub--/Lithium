@@ -164,6 +164,7 @@
       str:     ACS_PrintString)((v)))
 #define _l(s) PrintChrLi(s)
 #define _c(c) ACS_PrintChar(c)
+#define _v(x, y, z) (_c('('), _p(x), _c(','), _p(y), _c(','), _p(z), _c(')'))
 
 enum {
    _pri_pickup,
@@ -208,7 +209,7 @@ stkcall cstr alientext(i32 num);
 stkcall str lang(str name);
 stkcall cstr tmpstr(str s);
 stkcall cstr RemoveTextColors_str(astr s, i32 size);
-stkcall cstr RemoveTextColors    (cstr s, i32 size);
+stkcall cstr RemoveTextColors(cstr s, i32 size);
 #endif
 
 /* EOF */

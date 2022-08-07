@@ -148,3 +148,27 @@ Upgr_StrToEnum:
       #define upgrade_x(name) name,
       #include "u_names.h"
    ]
+MapInfoKeyName:
+   enum: _mi_key_
+   words: [
+      #define w_mapkey_x(x) x,
+      #include "w_world.h"
+   ]
+MapInfoSkyName:
+   enum: _msky_
+   words: [
+      #define w_mapsky_x(x) x,
+      #include "w_world.h"
+   ]
+MapInfoEnvName:
+   enum: _menv_
+   words: [
+      #define w_mapenv_x(x) x,
+      #include "w_world.h"
+   ]
+MapInfoFlagName:
+   prefix: _mi_flag_
+   words:
+      - nophantom
+      - nosnow
+      - nothunder

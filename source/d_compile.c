@@ -221,14 +221,14 @@ void Dlg_MInit(void) {
    fastmemset(&d,      0, sizeof d);
 
    FILE *fp =
-      W_Open(strp(_l("lfiles/Dialogue_"), _p(ml.lump), _l(".txt")), 't');
+      W_Open(strp(_l("lmisc/Dialogue_"), _p(ml.lump), _l(".txt")), 't');
 
    if(fp) {
       TBufCtor(&d.tb, fp, "Dialogue file");
 
       for(;;) {
          struct token *tok = d.tb.expc(&d.res, d.tb.get(), tok_identi, tok_eof, 0);
-         unwrap_do(&d.res, goto done;);
+         unwrap_goto(&d.res, done);
          if(tok->type == tok_eof) break;
 
          switch(Dlg_TopLevelName(tok->textV)) {
@@ -256,7 +256,7 @@ void Dlg_MInit(void) {
          default:
             d.tb.err(&d.res, "invalid toplevel item '%s'", tok->textV);
          }
-         unwrap_do(&d.res, goto done;);
+         unwrap_goto(&d.res, done);
       }
 
       FinishDef(&d);

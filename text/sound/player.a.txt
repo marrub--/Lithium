@@ -8,13 +8,14 @@
 
 # Assassin
 == lsnd/PlayerA
-$playersound    assassin male *death   Death     # Phantasy Star: Nova
-$playersound    assassin male *xdeath  XDeath    # ^
-$playersound    assassin male *pain100 PainSmall # ^
-$playersounddup assassin male *pain75  *pain100  # ^
-$playersound    assassin male *pain50  Pain      # ^
-$playersounddup assassin male *pain25  *pain50   # ^
-$playersound    assassin male *grunt   Grunt     # ^
+$playersound    lith_assassin * *death      Death      # Phantasy Star: Nova
+$playersound    lith_assassin * *wimpydeath DeathSmall # ^
+$playersound    lith_assassin * *crazydeath DeathBig   # ^
+$playersound    lith_assassin * *pain100    PainSmall  # ^
+$playersounddup lith_assassin * *pain75     *pain100   # ^
+$playersound    lith_assassin * *pain50     Pain       # ^
+$playersounddup lith_assassin * *pain25     *pain50    # ^
+$playersound    lith_assassin * *grunt      Grunt      # ^
 
 player.omi {
    doll Doll # Made of the strands of the universe

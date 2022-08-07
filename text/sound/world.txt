@@ -6,8 +6,8 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
+== lsnd/World/Ambiance
 doors {
-   == lsnd/World/Ambiance
    dr1_open DoorOpen      # Doom 3
    dr1_clos DoorClose     # ^
    dr2_open DoorOpenFast  # ^
@@ -15,13 +15,16 @@ doors {
 }
 
 plats {
-   == lsnd/World/Ambiance
    pt1_strt PlatformStart # Doom 3
    pt1_stop PlatformStop  # ^
 }
 
+switches {
+   normbutn SwitchNormal # ???
+   exitbutn SwitchExit   # Doom 64
+}
+
 amb {
-   == lsnd/World/Ambiance
    # Ambiance
    rain       Rain          # ???
    wind       Wind          # ^

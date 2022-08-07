@@ -31,7 +31,7 @@ class OutDir
 
    def initialize name, args
       @name = name
-      @args = args
+      @args = args.dup
    end
 
    def self.args_to_s args
@@ -174,7 +174,15 @@ def parse_player state, tok, directive
       args.push state.prepend_file_dir tok.text
    end
 
-   state.write OutDir.new directive, args
+   pclasses = args[0] == "*" ? %w[player fighter]            : [args[0]]
+   genders  = args[1] == "*" ? %w[neutral other female male] : [args[1]]
+   pclasses.each do |pcl|
+      args[0] = pcl
+      genders.each do |gender|
+         args[1] = gender
+         state.write OutDir.new directive, args
+      end
+   end
 end
 
 def parse_directive state

@@ -15,6 +15,7 @@
 #include "w_world.h"
 #include "w_monster.h"
 #include "m_version.h"
+#include "m_trie.h"
 
 __addrdef __mod_arr lmvar;
 
@@ -74,6 +75,7 @@ script static void GInit(void) {
    Dbg_Log(log_dev, _l(__func__));
    CheckModCompat();
    UpdateGame();
+   wl.scorethreshold = _scorethreshold_default;
    wl.cbiperf = 10;
    Mon_Init();
    Wep_GInit();
@@ -82,10 +84,13 @@ script static void GInit(void) {
 
 script static void MInit(void) {
    Dbg_Log(log_dev, _l(__func__));
+   #define mi_opt(key, l, r) (get_bit(mi.use, key) ? (v = mi.keys[key], l) : (r))
+   struct map_info mi = ReadMapInfo();
+   i32 v;
    i32 fun = GetFun();
    ACS_SetAirControl(0.77);
    ml.soulsfreed = 0;
-   ml.seed = ACS_Random(0, INT32_MAX);
+   ml.seed = mi_opt(_mi_key_seed, v, ACS_Random(0, INT32_MAX));
    srand(ml.seed);
    ml.lump = strp(ACS_PrintName(PRINTNAME_LEVEL));
    ml.name = strp(ACS_PrintName(PRINTNAME_LEVELNAME));
@@ -97,27 +102,28 @@ script static void MInit(void) {
    } else {
       set_msk(ml.flag, _mflg_func, _mfunc_normal);
    }
-   if(cv.sv_nobosses) {
+   if(mi_opt(_mi_key_flags, get_bit(v, _mi_flag_nophantom), cv.sv_nobosses)) {
       set_msk(ml.flag, _mflg_boss, _mphantom_nospawn);
    }
    if(ml.boss == boss_iconofsin && fun & lfun_tainted) {
       set_bit(ml.flag, _mflg_corrupted);
    }
-   str sky = fast_strupper(EDataS(_edt_sky1));
-   if(fun & lfun_ragnarok) {
+   str sky = fast_strupper(EDataS(_edt_origsky1));
+   if(get_bit(mi.use, _mi_key_environment)) {
+      set_msk(ml.flag, _mflg_env, mi.keys[_mi_key_environment]);
+   } else if(fun & lfun_ragnarok) {
       set_msk(ml.flag, _mflg_env, _menv_evil);
    } else if(sky == sp_SKY2 || sky == sp_RSKY2) {
       set_msk(ml.flag, _mflg_env, _menv_interstice);
    } else if(sky == sp_SKY3 || sky == sp_SKY4 || sky == sp_RSKY3) {
       set_msk(ml.flag, _mflg_env, _menv_hell);
    }
-   i32 dewpoint    = rand() % 11 - 1;
-   ml.temperature  = rand() % 100;
-   ml.humidity     = ml.temperature + dewpoint;
+   i32 dewpoint    = mi_opt(_mi_key_dewpoint,    v, rand() % 11 - 1);
+   ml.temperature  = mi_opt(_mi_key_temperature, v, rand() % 100 - 40);
+   ml.humidity     = maxi(ml.temperature + 40 + dewpoint, 0);
    ml.humidity     = mini(ml.humidity * ml.humidity / 90, 100);
-   ml.temperature -= 30;
-   i32 thunder_chk = rand() % 99;
-   i32    snow_chk = rand() % 99;
+   i32 thunder_chk = mi_opt(_mi_flag_nothunder, 100, rand() % 99);
+   i32 snow_chk    = mi_opt(_mi_flag_nosnow,    100, rand() % 99);
    if(ml.humidity > 0) {
       bool thunder =
          EDataI(_edt_lightning) ||
@@ -149,7 +155,7 @@ script static void MInit(void) {
          set_msk(ml.flag, _mflg_rain, _rain_abyss);
       }
    }
-   set_msk(ml.flag, _mflg_sky, CVarGetI(sc_sv_sky));
+   set_msk(ml.flag, _mflg_sky, mi_opt(_mi_key_sky, v, CVarGetI(sc_sv_sky)));
    Dlg_MInit();
    SpawnBosses(pl.scoresum, false);
 }
@@ -211,13 +217,7 @@ dynam_aut script void W_World(void) {
          ml.missionkill = kills;
       }
 
-      Dbg_Stat(_l("mission%: "), _p(ml.missionprc), _c('\n'));
-
       ACS_Delay(1);
-
-      #ifndef NDEBUG
-      wl.dbgstatnum = 0;
-      #endif
 
       if(cv.sv_autosave && ACS_Timer() && ACS_Timer() % (35 * 60 * cv.sv_autosave) == 0) {
          ACS_Autosave();

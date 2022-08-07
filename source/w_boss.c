@@ -14,10 +14,6 @@
 #include "p_player.h"
 #include "w_world.h"
 
-enum {
-   _scorethreshold_default = 1000000,
-};
-
 struct boss {
    char const name[16];
    i32  const phasenum;
@@ -57,12 +53,10 @@ static i32 rewardnum, difficulty;
 
 static struct boss *lastboss;
 
-static score_t scorethreshold = _scorethreshold_default;
-
 stkcall
 static void set_next_score_threshold() {
    static score_t mul = 17;
-   scorethreshold = _scorethreshold_default * mul / 10;
+   wl.scorethreshold = _scorethreshold_default * mul / 10;
    mul += 10;
 }
 
@@ -126,7 +120,7 @@ static bool CheckDead(struct boss *b, i32 num) {
 }
 
 script void SpawnBosses(score_t sum, bool force) {
-   if(get_msk(ml.flag, _mflg_boss) == _mphantom_nospawn || (!force && sum < scorethreshold)) {
+   if(get_msk(ml.flag, _mflg_boss) == _mphantom_nospawn || (!force && sum < wl.scorethreshold)) {
       return;
    }
 
@@ -213,7 +207,6 @@ void Z_PhantomDeath(void) {
    ml.soulsfreed++;
 
    set_next_score_threshold();
-   Dbg_Note(_l("score threshold raised to "), _p(scorethreshold), _c('\n'));
 
    boss->phase++;
    boss = nil;
@@ -230,8 +223,6 @@ void Z_SpawnBoss(void) {
    Dbg_Log(log_boss,
            _l("Boss "), _p((cstr)boss->name), _l(" phase "), _p(boss->phase),
            _l(" spawned"));
-   Dbg_Note(_l("boss: "), _p((cstr)boss->name), _l(" phase "), _p(boss->phase),
-            _l(" spawned\n"));
 
    set_msk(ml.flag, _mflg_boss, _mphantom_spawned);
 }

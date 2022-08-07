@@ -59,7 +59,10 @@ enum Lith_EData {
    _edt_obituary,
    _edt_logname,
    _edt_bipname,
+   _edt_origsky1,
+   _edt_origsky2,
    _edt_sky1,
+   _edt_sky2,
 };
 
 enum Lith_Fun {
@@ -201,11 +204,28 @@ enum Lith_MapRain {
 };
 
 enum Lith_MapEnvironment {
-   _menv_none,
-   _menv_interstice,
-   _menv_hell,
-   _menv_abyss,
-   _menv_evil,
+   
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+_menv_none,
+_menv_interstice,
+_menv_hell,
+_menv_abyss,
+_menv_evil,
+
+
 };
 
 enum Lith_MapKind {
@@ -215,10 +235,27 @@ enum Lith_MapKind {
 };
 
 enum Lith_MapSky {
-   _msky_nochange,
-   _msky_vanilla,
-   _msky_replace,
-   _msky_shader,
+   
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+_msky_nochange,
+_msky_vanilla,
+_msky_replace,
+_msky_shader,
+
+
 };
 
 

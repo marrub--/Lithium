@@ -37,7 +37,7 @@ struct name_pool {
 
 struct compiler {
    struct tokbuf    tb;
-   struct tbuf_err  res;
+   struct err       res;
    struct dlg_def   def;
    struct name_pool nam[_name_pool_max];
    i32              pool;

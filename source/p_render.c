@@ -55,12 +55,36 @@ void P_Ren_Mission(void) {
       }
       if(get_bit(ml.flag, _mflg_thunder))   {_l("\CkELEC. STORM\n");}
       if(get_bit(ml.flag, _mflg_corrupted)) {_l("\CgCAUSALITY SHIFT\n");}
+      switch(get_msk(ml.flag, _mflg_env)) {
+      case _menv_none:       _l("\CjAREA \CnNOMINAL\n");        break;
+      case _menv_interstice: _l("\CjAREA \CiIRREGULAR\n");      break;
+      case _menv_hell:       _l("\CjAREA \CgNOT IN REALITY\n"); break;
+      case _menv_abyss:      _l("\CjAREA \CmUNKNOWN\n");        break;
+      case _menv_evil:       _l("\CjAREA \CrCORRUPTED\n");      break;
+      }
       switch(ml.mission) {
       case _mstat_unfinished: _l("\CjMISSION \CiUNFINISHED"); break;
       case _mstat_finished:   _l("\CjMISSION \CdFINISHED");   break;
       case _mstat_failure:    _l("\CjMISSION \CgFAILED");     break;
       }
       PrintTextA(sf_smallfnt, pl.color, 320,3, 28,1, alpha);
+   }
+}
+
+static void P_Ren_Magic(void) {
+   SetSize(800, 600);
+
+   for(i32 i = 0; i < 4; i++) {
+      i32 fid = fid_rendS + i;
+      if(CheckFade(fid)) {
+         PrintSpriteFP(pl.rendhit ? sa_rend_ht[i] : sa_rend_nh[i],
+                       400,0, 300,0, fid);
+      }
+   }
+
+   if(CheckFade(fid_blade)) {
+      PrintSpriteFP(pl.bladehit ? sp_Weapon_BladeHit : sp_Weapon_Blade,
+                    400,0, 300,0, fid_blade);
    }
 }
 

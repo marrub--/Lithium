@@ -72,6 +72,7 @@ cvar_x(tic, player_scoresound, bool)
 #include "m_stab.h"
 #include "m_cheat.h"
 #include "m_char.h"
+#include "m_flow.h"
 
 #define Stringify(s)  #s
 #define XStringify(s) Stringify(s)
@@ -163,13 +164,7 @@ cvar_x(tic, player_scoresound, bool)
 #define DrawCallS(...) SCallS(so_Ren, __VA_ARGS__)
 
 #ifndef NDEBUG
-#define Dbg_Stat(...) \
-   (dbglevel(log_devh) ? (ACS_BeginPrint(), (__VA_ARGS__), wl.dbgstat[wl.dbgstatnum++] = ACS_EndStrParam(), (void)0) : (void)0)
-
-#define Dbg_Note(...) \
-   (dbglevel(log_devh) ? (ACS_BeginPrint(), (__VA_ARGS__), ml.dbgnote[ml.dbgnotenum++] = ACS_EndStrParam(), (void)0) : (void)0)
-
-#define Dbg_Trace(n) (ACS_BeginPrint(), PrintChrLi(__func__), ACS_PrintInt(n), EndLogEx(_pri_bold|_pri_nolog))
+#define Dbg_Trace(n) (ACS_BeginPrint(), PrintChrLi(__func__), ACS_PrintChar(':'), ACS_PrintChar(' '), _p(n), EndLogEx(_pri_bold|_pri_nolog))
 
 #define Dbg_Log(level, ...) \
    (dbglevel(level) ? \

@@ -15,6 +15,27 @@ w_setptr_x(i32)
 w_setptr_x(k32)
 w_setptr_x(bool)
 #undef w_setptr_x
+#elif defined(w_mapenv_x)
+w_mapenv_x(none)
+w_mapenv_x(interstice)
+w_mapenv_x(hell)
+w_mapenv_x(abyss)
+w_mapenv_x(evil)
+#undef w_mapenv_x
+#elif defined(w_mapsky_x)
+w_mapsky_x(nochange)
+w_mapsky_x(vanilla)
+w_mapsky_x(replace)
+w_mapsky_x(shader)
+#undef w_mapsky_x
+#elif defined(w_mapkey_x)
+w_mapkey_x(dewpoint)
+w_mapkey_x(environment)
+w_mapkey_x(flags)
+w_mapkey_x(seed)
+w_mapkey_x(sky)
+w_mapkey_x(temperature)
+#undef w_mapkey_x
 #elif !defined(w_world_h)
 #define w_world_h
 
@@ -75,7 +96,10 @@ enum ZscName(EData) {
    _edt_obituary,
    _edt_logname,
    _edt_bipname,
+   _edt_origsky1,
+   _edt_origsky2,
    _edt_sky1,
+   _edt_sky2,
 };
 
 enum ZscName(Fun) {
@@ -199,11 +223,8 @@ enum ZscName(MapRain) {
 };
 
 enum ZscName(MapEnvironment) {
-   _menv_none,
-   _menv_interstice,
-   _menv_hell,
-   _menv_abyss,
-   _menv_evil,
+   #define w_mapenv_x(x) _menv_##x,
+   #include "w_world.h"
 };
 
 enum ZscName(MapKind) {
@@ -213,13 +234,17 @@ enum ZscName(MapKind) {
 };
 
 enum ZscName(MapSky) {
-   _msky_nochange,
-   _msky_vanilla,
-   _msky_replace,
-   _msky_shader,
+   #define w_mapsky_x(x) _msky_##x,
+   #include "w_world.h"
 };
 
 #if !ZscOn
+enum {
+   #define w_mapkey_x(x) _mi_key_##x,
+   #include "w_world.h"
+   _mi_key_max,
+};
+
 enum {
    cupg_rdistinter,
    cupg_m_weapninter,
@@ -294,8 +319,18 @@ enum compat_flag {
    _comp_ch,
 };
 
+enum {
+   _scorethreshold_default = 1000000,
+};
+
+struct map_info {
+   i32 use;
+   i32 keys[_mi_key_max];
+};
+
 struct world {
    struct payoutinfo pay;
+   score_t scorethreshold;
 
    i32  hubscleared;
    i32  secretsfound;
@@ -307,11 +342,6 @@ struct world {
    i32          a_x, a_y;
    struct polar a_angles[8];
    i32          a_cur;
-
-   #ifndef NDEBUG
-   str dbgstat[64];
-   i32 dbgstatnum;
-   #endif
 };
 
 struct map_locals {
@@ -330,10 +360,6 @@ struct map_locals {
    i32 previtems;
    i32 missionkill;
    i32 missionprc;
-   #ifndef NDEBUG
-   str dbgnote[64];
-   i32 dbgnotenum;
-   #endif
 };
 
 extern struct world            wl;
@@ -351,6 +377,7 @@ script void W_Title(void);
 script void F_Run(void);
 void F_Load(void);
 void F_Start(i32 which);
+script struct map_info ReadMapInfo(void);
 #endif
 
 #endif

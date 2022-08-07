@@ -180,9 +180,9 @@ sm_:
    - FindFontColor
    - FindLump
    - GetCurMag
+   - GetMapInfoLump
    - GetMaxMag
    - GetOutOfDodge
-   - GivePoison
    - GrabInput
    - HasStatFx
    - Health
@@ -212,7 +212,6 @@ sm_:
    - PlayerDeath
    - PlayerDeathNuke
    - PlayerInit
-   - PoisonFX
    - Print
    - Project
    - PureSteggleEnergy
@@ -292,8 +291,6 @@ so_:
    - Motra
    - PlasmaAmmo
    - Player
-   - PoisonFXReset
-   - PoisonFXTimer
    - PunctuatorExplosion
    - PunctuatorPuff
    - RandomSpawn
@@ -454,13 +451,13 @@ sp_:
    - Weapon_BladeHit:      Weapon:BladeHit
 
    NO_PREFIX:
-   - lfiles_Cyberspace: lfiles/Cyberspace.txt
-   - lmusic_DOGS:       lmusic/DOGS.ogg
-   - lmusic_Shredder:   lmusic/Shredder.ogg
-   - lmusic_Unce:       lmusic/Unce.ogg
-   - lmusic_miniwip2:   lmusic/miniwip2.ogg
-   - lsnd_Silence:      lsnd/Silence
+   - lmisc_Cyberspace: lmisc/Cyberspace.txt
+   - lmusic_DOGS:      lmusic/DOGS.ogg
+   - lmusic_Shredder:  lmusic/Shredder.ogg
+   - lmusic_Unce:      lmusic/Unce.ogg
+   - lmusic_miniwip2:  lmusic/miniwip2.ogg
 
+   - DSEMPTY
    - F_SKY1
    - SKY2
    - SKY3
@@ -670,6 +667,7 @@ ss_:
    - player_death1:            player/death1
    - player_depthdown:         player/depthdown
    - player_doublejump:        player/doublejump
+   - player_getsigil:          player/getsigil
    - player_glare:             player/glare
    - player_jem_manafull:      player/jem/manafull
    - player_lane_adren_inj:    player/lane/adren/inj

@@ -17,6 +17,7 @@ default {
    Player.Portrait "TNT1A0";
    Species "Lith_Player";
    Lith_Player.ViewBob 1;
+   GibHealth -100;
 
    +THRUSPECIES
 }
@@ -274,6 +275,23 @@ override void cheatGive(string name_, int amount) {
          Console.printf("\cgERROR\c-: unknown item `%s'", name_);
       }
    }
+}
+
+states {
+Death:
+   PLAY H 10 a_playerScream;
+   PLAY I 10;
+   PLAY J 10 a_noBlocking;
+   PLAY KLM 10;
+   PLAY N -1;
+   stop;
+XDeath:
+   PLAY O 5 a_playerScream;
+   PLAY P 5;
+   PLAY Q 5 a_noBlocking;
+   PLAY RSTUV 5;
+   PLAY W -1;
+   stop;
 }
 
 /* EOF */

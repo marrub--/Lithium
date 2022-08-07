@@ -14,7 +14,7 @@ class ListMenuItemLith_PlayerDisplay : ListMenuItemPlayerDisplay {
    override void draw(bool selected, ListMenuDescriptor desc) {
       if(mMode == 0 && updatePlayerClass()) {
          let pcl = getDefaultByType((class<PlayerPawn>)(mPlayerClass.type));
-         let por = Lith_RenderProvider.getTex(":Portraits:" .. pcl.soundclass);
+         let por = Lith_RenderProvider.getTex(pcl.portrait);
          int porx, pory; [porx, pory] = TexMan.getSize(por);
          int scrw  = Screen.getWidth();
          int scrh  = Screen.getHeight();

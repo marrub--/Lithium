@@ -66,11 +66,8 @@ cstr BipStr(cstr in) {
 }
 
 script static
-void BipInfo_Page(struct tokbuf *tb, struct tbuf_err *res, struct page const *template) {
-   noinit static
-   char k[64], v[64];
-
-   cstr st;
+void BipInfo_Page(struct tokbuf *tb, struct err *res, struct page const *template) {
+   noinit static char k[64], v[64];
 
    struct page *page = &bippages[bippagenum++];
    fastmemcpy(page, template, sizeof *page);
@@ -85,7 +82,7 @@ void BipInfo_Page(struct tokbuf *tb, struct tbuf_err *res, struct page const *te
          } else {
             tb->err(res, "%s BipInfo_Page: invalid pclass %s",
                     TokPrint(tb->reget()), v);
-            unwrap_cb();
+            unwrap_retn();
          }
          break;
       }
@@ -109,7 +106,7 @@ void BipInfo_Page(struct tokbuf *tb, struct tbuf_err *res, struct page const *te
                  "tag, "
                  "or unl",
                  TokPrint(tb->reget()), k);
-         unwrap_cb();
+         unwrap_retn();
       }
    }
    unwrap(res);
@@ -117,7 +114,7 @@ void BipInfo_Page(struct tokbuf *tb, struct tbuf_err *res, struct page const *te
 }
 
 static
-struct page BipInfo_Template(struct tokbuf *tb, struct tbuf_err *res) {
+struct page BipInfo_Template(struct tokbuf *tb, struct err *res) {
    struct token *tok = tb->reget();
    struct page template = {};
 
@@ -143,14 +140,14 @@ struct page BipInfo_Template(struct tokbuf *tb, struct tbuf_err *res) {
                  "auto, "
                  "or `\"'",
                  TokPrint(tok), word);
-         unwrap_cb();
+         unwrap_retn();
       }
    }
    return template;
 }
 
 script static
-void BipInfo_Pages(struct tokbuf *tb, struct tbuf_err *res) {
+void BipInfo_Pages(struct tokbuf *tb, struct err *res) {
    struct page const template = BipInfo_Template(tb, res);
    unwrap(res);
 
@@ -164,7 +161,7 @@ void BipInfo_Pages(struct tokbuf *tb, struct tbuf_err *res) {
 }
 
 script static
-void BipInfo_Compile(struct tokbuf *tb, struct tbuf_err *res) {
+void BipInfo_Compile(struct tokbuf *tb, struct err *res) {
    for(;;) {
       struct token *tok = tb->expc(res, tb->get(), tok_string, tok_eof, 0);
       unwrap(res);
@@ -182,19 +179,15 @@ script static
 void P_BIP_InitInfo(void) {
    Dbg_Log(log_dev, _l(__func__));
 
-   FILE *fp;
-   i32 prev = 0;
-
    bippagenum = 0;
 
-   while((fp = W_OpenIter(sp_LITHINFO, 't', &prev))) {
+   i32 prev = 0;
+   for(FILE *fp; (fp = W_OpenIter(sp_LITHINFO, 't', &prev));) {
       struct tokbuf tb;
       TBufCtor(&tb, fp, "LITHINFO");
-
-      struct tbuf_err res = {};
+      struct err res = {};
       BipInfo_Compile(&tb, &res);
       unwrap_print(&res);
-
       TBufDtor(&tb);
       fclose(fp);
    }

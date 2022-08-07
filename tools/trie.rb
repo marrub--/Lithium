@@ -109,7 +109,7 @@ common_main do
       trie.concat words.sort
       trie.compress!
       code = mk_trie_code defs, trie.children
-      func = "stkcall\ni32 #{func}(register cstr s)"
+      func = "stkcall i32 #{func}(register cstr s)"
       FUNCS.push [func, code]
    end
 

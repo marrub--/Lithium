@@ -14,16 +14,16 @@ awen {
    seme poki pC {
       logon "LogonAOF" text AOF;
 
-      pict 1 text M1A1_01_C_01;
-      pict 2 text M1A1_01_C_02;
-      pict 1 text M1A1_01_C_03;
+      pict 1 text _01_C_01;
+      pict 2 text _01_C_02;
+      pict 1 text _01_C_03;
 
       logoff "LogonAOF" text AOF;
    } ante {
       logon "UAC" text UAC;
 
-      pict 1 text M1A1_01_M_01;
-      pict 2 text M1A1_01_M_02;
+      pict 1 text _01_M_01;
+      pict 2 text _01_M_02;
 
       logoff "UAC" text UAC;
    }
@@ -36,7 +36,7 @@ awen {
 
    logon "LogonData" text DATA;
 
-   info text M1A1_02_01;
+   info text _02_01;
 
    logoff "LogonData" text DATA;
 
@@ -51,13 +51,13 @@ awen {
    seme poki pC {
       logon "LogonAOF" text AOF;
 
-      pict 3 text M1A1_03_C_01;
+      pict 3 text _03_C_01;
 
       logoff "LogonAOF" text AOF;
    } ante {
       logon "UAC" text UAC;
 
-      pict 1 text M1A1_03_M_01;
+      pict 1 text _03_M_01;
 
       logoff "UAC" text UAC;
    }

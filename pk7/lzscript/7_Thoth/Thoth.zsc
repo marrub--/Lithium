@@ -9,7 +9,8 @@
 class Lith_ThothPlayer : Lith_Player {
    default {
       Player.DisplayName "$LITH_CLASS_THOTH";
-      Player.SoundClass "thoth";
+      Player.SoundClass "lith_thoth";
+      Player.Portrait ":Portraits:Thoth";
       Tag "$LITH_CLASS_THOTH";
    }
 }

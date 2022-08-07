@@ -30,7 +30,7 @@ void Z_DOGS(void) {
    }
 
    ACS_Delay(35);
-   ACS_SetMusic(sp_lsnd_Silence);
+   ACS_SetMusic(sp_DSEMPTY);
    ACS_SetActorState(tid, sm_PureSteggleEnergy);
 }
 
@@ -60,6 +60,8 @@ void Z_GetSigil(void) {
       #ifndef NDEBUG
       if(dbglevel_any()) return;
       #endif
+
+      StartSound(ss_player_getsigil, lch_body3, 0, 1.0, ATTN_NONE);
 
       FreezeTime();
 

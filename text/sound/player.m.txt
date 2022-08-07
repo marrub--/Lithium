@@ -7,6 +7,13 @@
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
 == lsnd/PlayerM
+$playersound    lith_marine * *death      Death      # Doom
+$playersound    lith_marine * *wimpydeath DeathSmall # ^
+$playersound    lith_marine * *crazydeath DeathBig   # ^
+$playersound    lith_marine * *pain100    PainSmall  # Doom
+$playersounddup lith_marine * *pain75     *pain100   # ^
+$playersound    lith_marine * *pain50     Pain       # ^
+$playersounddup lith_marine * *pain25     *pain50    # ^
 
 # Marine
 player.lane {

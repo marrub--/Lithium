@@ -9,7 +9,8 @@
 class Lith_AssassinPlayer : Lith_Player {
    default {
       Player.DisplayName "$LITH_CLASS_ASSASSIN";
-      Player.SoundClass "assassin";
+      Player.SoundClass "lith_assassin";
+      Player.Portrait ":Portraits:Assassin";
       Tag "$LITH_CLASS_ASSASSIN";
    }
 

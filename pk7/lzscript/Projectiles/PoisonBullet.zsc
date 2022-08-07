@@ -6,48 +6,37 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_PoisonFXTimer : Inventory {default {Inventory.MaxAmount 20;}}
-class Lith_PoisonFXReset : Inventory {default {Inventory.MaxAmount 1;}}
-
-class Lith_PoisonBlob : Actor
-{
-   default
-   {
+class Lith_PoisonBlob : Actor {
+   default {
       Alpha 1;
       Mass 20;
       RenderStyle "Translucent";
       Scale 0.5;
-
       +Bright
       +NoBlockmap
       +NoClip
       -NoGravity
    }
-
-   states
-   {
+   states {
    Spawn:
       BLLT G 5;
-      BLLT G 0 A_StartSound("weapons/shotgun/poison/acid", lch_body);
+      BLLT G 0 a_startSound("weapons/shotgun/poison/acid", lch_body);
    SpawnLoop:
-      BLLT G 0 A_JumpIf(Pos.Z == FloorZ, "Crash"); /* >:I */
-      BLLT G 1 A_FadeOut(0.01);
+      BLLT G 0 a_jumpIf(pos.z == floorZ, "Crash"); /* >:I */
+      BLLT G 1 a_fadeOut(0.01);
       loop;
    Crash:
-      RADB ABCDEFGHIJKLM 1 A_FadeOut(0.01);
+      RADB ABCDEFGHIJKLM 1 a_fadeOut(0.01);
       wait;
    }
 }
 
-class Lith_PoisonBullet : Lith_BulletPuff
-{
-   default
-   {
+class Lith_PoisonBullet : Lith_BulletPuff {
+   default {
       Alpha 0.9;
       DamageType "Bullet";
       RenderStyle "Add";
       Species "Lith_Player";
-
       +DontHarmSpecies
       +FloorClip
       +ForceXyBillboard
@@ -60,25 +49,52 @@ class Lith_PoisonBullet : Lith_BulletPuff
       +PuffOnActors
       -AllowParticles
    }
-
-   void Lith_SpawnPoisonBlobs()
-   {
-      for(int i = 0; i < 5; i++)
-         A_SpawnItemEx("Lith_PoisonBlob", 0,0,0, FRandom(-1,1),FRandom(-1,1),FRandom(2,6), 0, 0, 64);
+   void lith_spawnPoisonBlobs() {
+      for(int i = 0; i < 5; i++) {
+         a_spawnItemEx("Lith_PoisonBlob", 0,0,0, fRandom(-1,1),fRandom(-1,1),fRandom(2,6), 0, 0, 64);
+      }
    }
-
-   states
-   {
+   states {
    Spawn:
       TNT1 A 0;
-      TNT1 A 0 {if(Tracer) Lith_HERMES.GivePoison(Tracer);}
-      TNT1 A 0 A_JumpIf(!Tracer || Tracer.bNOBLOOD, "Crash");
-      TNT1 A 0 Lith_SpawnPoisonBlobs;
+      TNT1 A 0 {
+         if(tracer) {
+            let ticker = Lith_PoisonTicker(tracer.findinventory("Lith_PoisonTicker"));
+            if(!ticker) {
+               ticker = Lith_PoisonTicker(tracer.giveInventoryType("Lith_PoisonTicker"));
+            }
+            ticker.m_end = level.time + 70;
+            ticker.target = target;
+         }
+         return !tracer || tracer.bNoBlood ? resolveState("Crash") : state(null);
+      }
+      TNT1 A 0 lith_spawnPoisonBlobs;
       stop;
    Crash:
       XPUF Q 0;
-      XPUF Q 0 Lith_SpawnPoisonBlobs;
-      goto Super::Spawn;
+      XPUF Q 0 lith_spawnPoisonBlobs;
+      goto super::Spawn;
+   }
+}
+
+class Lith_PoisonTicker : Inventory;
+
+int m_end;
+
+override void tick() {
+   if(!owner || level.time == m_end) {
+      destroy();
+      return;
+   }
+   super.tick();
+   if(isFrozen()) {
+      return;
+   }
+   if(level.time & 7 == 0) {
+      int dmg = Lith_UTIL.pData(_pdt_attr, at_acc) / 4;
+      owner.damageMobj(target, target, 10 + dmg, 'Poison');
+      owner.a_startSound("weapons/shotgun/poison/acid", lch_body3, attenuation: 0.5);
+      Lith_CopyEffect.create("Lith_PoisonFx", owner);
    }
 }
 

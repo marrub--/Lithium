@@ -68,11 +68,6 @@ void Upgr_Flashlight_Update(void) {
    }
 
    udata.was_on = was_on;
-
-   Dbg_Stat(_l("*target: "),    _p(udata.target),    _c('\n'),
-            _l("*intensity: "), _p(udata.intensity), _c('\n'),
-            _l("*speed: "),     _p(udata.speed),     _c('\n'),
-            _l("*battery: "),   _p(udata.battery),   _c('\n'));
 }
 
 script_str ext("ACS") addr(OBJ "GetFlashlightIntensity")

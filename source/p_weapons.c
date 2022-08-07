@@ -307,28 +307,6 @@ i32 Z_GetWRF(void) {
    return flags;
 }
 
-alloc_aut(0) script_str ext("ACS") addr(OBJ "PoisonFXTicker")
-void Z_PoisonFXTicker(void) {
-   for(i32 i = 0; i < 17; i++) {
-      PausableTick();
-
-      if(InvNum(so_PoisonFXReset)) {
-         InvTake(so_PoisonFXReset, INT32_MAX);
-         InvTake(so_PoisonFXTimer, INT32_MAX);
-         ServCallV(sm_GivePoison);
-         return;
-      }
-   }
-
-   if(GetHealth(0) <= 0) {
-      InvTake(so_PoisonFXReset, INT32_MAX);
-      InvTake(so_PoisonFXTimer, INT32_MAX);
-   } else if(InvNum(so_PoisonFXTimer)) {
-      ServCallV(sm_PoisonFX);
-      InvTake(so_PoisonFXTimer, 1);
-   }
-}
-
 script_str ext("ACS") addr(OBJ "RecoilUp")
 void Z_RecoilUp(k32 amount) {
    if(!P_None()) {

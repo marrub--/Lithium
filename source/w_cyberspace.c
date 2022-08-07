@@ -18,7 +18,7 @@
 script_str ext("ACS") addr(OBJ "CSLoadMap")
 void Z_CSLoadMap(void) {
    #if 0
-   FILE *fp = W_Open(sp_lfiles_Cyberspace, 't');
+   FILE *fp = W_Open(sp_lmisc_Cyberspace, 't');
    i32 w, h, *map;
 
    fscanf(fp, "%i %i", &w, &h);

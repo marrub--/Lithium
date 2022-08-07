@@ -137,6 +137,7 @@ map TESTMAP "Test Map" {
    sky1  = "LITHSKQC", 0.1
    sky2  = "LITHSKDE"
    doubleSky
+   fallingDamage
 }
 
 map LITHEND "" {
