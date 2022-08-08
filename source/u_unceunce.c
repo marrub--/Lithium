@@ -10,7 +10,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-#include "u_common.h"
+#include "u_all.h"
 
 void Upgr_UNCEUNCE_Activate(void) {
    ACS_SetMusic(sp_lmusic_Unce);

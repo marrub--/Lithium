@@ -10,7 +10,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-#include "common.h"
+#include "m_engine.h"
 #include "p_player.h"
 #include "w_world.h"
 #include "m_cps.h"
@@ -40,7 +40,7 @@ bool G_TxtBox_Imp(struct gui_state *g, gid_t id, struct gui_arg_txt *a) {
    ACS_BeginPrint();
    if(st->tbptr) {
       PrintChrSt(Cps_Expand(st->txtbuf, 0, st->tbptr));
-      PrintChrSt(hot ? Ticker("|", "") : "");
+      PrintChrSt(hot ? (ACS_Timer() & 31 < 15 ? "|" : "") : "");
    } else {
       ACS_PrintChar('\C');
       ACS_PrintChar(hot ? 'c' : 'm');

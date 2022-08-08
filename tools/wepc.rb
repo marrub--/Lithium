@@ -68,7 +68,7 @@ res
 _end_h_
 #{generated_header "wepc"}
 
-#include "common.h"
+#include "m_engine.h"
 #include "p_player.h"
 
 struct weaponinfo const weaponinfo[weapon_max] = {

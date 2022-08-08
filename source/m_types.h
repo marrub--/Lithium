@@ -13,11 +13,16 @@
 #ifndef m_types_h
 #define m_types_h
 
+#pragma GDCC FIXED_LITERAL ON
+
 #include <limits.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdfix.h>
 #include <stdint.h>
+
+#define countof(a) (sizeof(a) / sizeof(*(a)))
+#define swap(t, a, b) statement({ t _tmp = a; a = b; b = _tmp; })
 
 #define nil  ((void *)0)
 #define snil ((__str_ent *)0)

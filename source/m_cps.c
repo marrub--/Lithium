@@ -10,7 +10,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-#include "common.h"
+#include "m_engine.h"
 #include "m_cps.h"
 
 #define Cps_Shift(i, set) ((set) << ((i) % 4 * 8))

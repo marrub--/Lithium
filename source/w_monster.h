@@ -61,7 +61,7 @@ enum ZscName(ServGender, srv_gender) {
 };
 
 #if !ZscOn
-#include "common.h"
+#include "m_engine.h"
 #include "m_list.h"
 
 enum {

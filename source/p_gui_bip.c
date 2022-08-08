@@ -10,7 +10,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-#include "common.h"
+#include "m_engine.h"
 #include "p_player.h"
 #include "p_bip.h"
 #include "m_list.h"
@@ -150,7 +150,7 @@ void DrawPage(struct gui_state *g, struct page *page) {
 
 drawText:
    if(bip.pagebodypos == bip.pagebodylen) {
-      if(Ticker(true, false)) {
+      if(ACS_Timer() % 35 < 17) {
          ACS_PrintChar('\n');
          ACS_PrintChar('|');
       }

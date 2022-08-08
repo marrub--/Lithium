@@ -92,7 +92,7 @@
    data->timer_max_cap = 2;
 #undef int_lerp_init_impl
 #else
-#include "common.h"
+#include "m_engine.h"
 
 #include <math.h>
 

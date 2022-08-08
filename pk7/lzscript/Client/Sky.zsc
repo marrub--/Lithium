@@ -137,7 +137,7 @@ void replaceSky() {
          default:               cr = 0xFF0C0C0F; break;
          }
          /* energy in the clouds? */
-         if(Lith_UTIL.pData(_pdt_mflg, _mflg_thunder)) {
+         if(Lith_UTIL.pData(_pdt_mflg, _mflg_lightning)) {
             cr = color(
                255,
                min(int(cr.r * 1.437f), 255),

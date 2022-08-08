@@ -12,7 +12,7 @@
 
 #define _GNU_SOURCE
 
-#include "common.h"
+#include "m_engine.h"
 #include "m_file.h"
 #include "w_world.h"
 

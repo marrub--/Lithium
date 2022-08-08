@@ -10,7 +10,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-#include "u_common.h"
+#include "u_all.h"
 
 #define udata pl.upgrdata.lolsords
 

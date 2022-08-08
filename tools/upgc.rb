@@ -101,7 +101,7 @@ enum ZscName(UpgradeName) {
 _end_h_
 #{generated_header "upgc"}
 
-#include "u_common.h"
+#include "u_all.h"
 
 struct upgrade upgrinfo[] = {
 #{

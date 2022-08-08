@@ -20,6 +20,17 @@
 #include <stdio.h>
 #include "m_math.h"
 
+#define Stringify(s)  #s
+#define XStringify(s) Stringify(s)
+
+#define LineHash                (__LINE__ * FileHash)
+#define LineHashStr             XStringify(__LINE__) "_" XStringify(FileHash)
+#define LineHashIdent_( ln, fh) ln ## _ ## fh
+#define LineHashIdent__(ln, fh) LineHashIdent_(ln, fh)
+#define LineHashIdent           LineHashIdent__(__LINE__, FileHash)
+
+#define _f __func__
+
 #define lang_fmt(...) (StrParamBegin(__VA_ARGS__), lang(ACS_EndStrParam()))
 #define lang_fmt_discrim(...) (lang_fmt(__VA_ARGS__, pl.discrim) |? lang_fmt(__VA_ARGS__, ""))
 
@@ -165,6 +176,13 @@
 #define _l(s) PrintChrLi(s)
 #define _c(c) ACS_PrintChar(c)
 #define _v(x, y, z) (_c('('), _p(x), _c(','), _p(y), _c(','), _p(z), _c(')'))
+
+#define PrintErr(...) \
+   (ACS_BeginPrint(), \
+    PrintChrLi(__func__), \
+    PrintChrLi(" \CgERROR\C-: "), \
+    (__VA_ARGS__), \
+    EndLogEx(PrintErrLevel))
 
 enum {
    _pri_pickup,

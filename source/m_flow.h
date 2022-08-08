@@ -13,6 +13,9 @@
 #ifndef m_flow_h
 #define m_flow_h
 
+#define ifw(decl, ...) __with(decl;) if(__VA_ARGS__)
+#define ifauto(type, name, ...) ifw(type name = (__VA_ARGS__), name)
+
 #define statement(body) do body while(0)
 
 #define unwrap_do(e, stmt) statement(if((e)->some) statement(stmt);)
@@ -41,6 +44,8 @@
 #define gosub(label, ...)   __with((__VA_ARGS__);) gosub___(label)
 #define gosub_ret()         goto *_gsret
 #define gosub_enable()      lbl _gsret = lnil
+
+#define err_set(e, buf) ((e)->some = true, (e)->err = buf, (void)0)
 
 struct err {
    bool some;

@@ -373,18 +373,18 @@ void MonInfo_Preset(struct tokbuf *tb, struct err *res) {
 
    struct monster_preset *pre = &monsterpreset[monsterpresetnum++];
 
-   while(tb->kv(res, k, v)) {
+   while(tb_kv(tb, res, k, v)) {
       unwrap(res);
       switch(MonInfo_Preset_Name(k)) {
       case _moninfo_preset_name: faststrcpy(pre->prename, v);  break;
       case _moninfo_preset_exp:  pre->exp   = faststrtoi32(v); break;
       case _moninfo_preset_scr:  pre->score = faststrtoscr(v); break;
       default:
-         tb->err(res, "%s MonInfo_Preset: invalid key %s; expected "
-                 "name, "
-                 "exp, "
-                 "or scr",
-                 TokPrint(tb->reget()), k);
+         tb_err(tb, res, "invalid key %s; expected "
+                "name, "
+                "exp, "
+                "or scr",
+                nil, _f, k);
          unwrap_retn();
       }
    }
@@ -434,7 +434,7 @@ void MonInfo_Monster(struct tokbuf *tb, struct err *res, i32 flags) {
 
    mi->flags = flags;
 
-   while(tb->kv(res, k, v)) {
+   while(tb_kv(tb, res, k, v)) {
       unwrap(res);
       switch(MonInfo_Monster_Name(k)) {
       case _moninfo_monster_filter: faststrcpy(mi->name, v);     break;
@@ -467,22 +467,22 @@ void MonInfo_Monster(struct tokbuf *tb, struct err *res, i32 flags) {
                finished = true;
                break;
             default:
-               tb->err(res, "%s MonInfo_Monster: invalid hack '%s'; expected "
-                       "ch",
-                       TokPrint(tb->reget()), hack);
+               tb_err(tb, res, "invalid hack '%s'; expected "
+                      "ch",
+                      nil, _f, hack);
                unwrap_retn();
             }
          }
          break;
       default:
-         tb->err(res, "%s MonInfo_Monster: invalid key %s; expected "
-                 "filter, "
-                 "exp, "
-                 "scr, "
-                 "pre, "
-                 "type, "
-                 "or hacks",
-                 TokPrint(tb->reget()), k);
+         tb_err(tb, res, "invalid key %s; expected "
+                "filter, "
+                "exp, "
+                "scr, "
+                "pre, "
+                "type, "
+                "or hacks",
+                nil, _f, k);
          unwrap_retn();
       }
    }
@@ -502,7 +502,7 @@ i32 MonInfo_Flags(struct tokbuf *tb, struct err *res) {
    struct token *tok;
 
    flags = 0;
-   tok   = tb->reget();
+   tok   = tb_reget(tb);
 
    /* this supports two syntaxes since we originally implemented this
     * with a more complex syntax but realized it was pointless later,
@@ -522,7 +522,7 @@ i32 MonInfo_Flags(struct tokbuf *tb, struct err *res) {
       }
    } else {
       for(c = ')';;) {
-         tok = tb->expc(res, tb->get(), tok_identi, tok_parenc, 0);
+         tok = tb_expc(tb, res, tb_get(tb), tok_identi, tok_parenc, 0);
          unwrap(res);
 
          if(tok->type == tok_parenc) {
@@ -540,11 +540,11 @@ sflag:
       set_bit(flags, flgn);
       gosub_ret();
    } else {
-      tb->err(res, "%s MonInfo_Flags: invalid flag %s; expected "
-              #define monster_flag_x(name) #name ", "
-              #include "w_monster.h"
-              "or `%c'",
-              TokPrint(tok), flag, c);
+      tb_err(tb, res, "invalid flag %s; expected "
+             #define monster_flag_x(name) #name ", "
+             #include "w_monster.h"
+             "or `%c'",
+             tok, _f, flag, c);
       unwrap_retn();
    }
 }
@@ -554,10 +554,10 @@ void MonInfo_Monsters(struct tokbuf *tb, struct err *res) {
    i32 flags = MonInfo_Flags(tb, res);
    unwrap(res);
 
-   tb->expdr(res, tok_braceo);
+   tb_expdr(tb, res, tok_braceo);
    unwrap(res);
 
-   while(!tb->drop(tok_bracec)) {
+   while(!tb_drop(tb, tok_bracec)) {
       MonInfo_Monster(tb, res, flags);
       unwrap(res);
    }
@@ -565,10 +565,10 @@ void MonInfo_Monsters(struct tokbuf *tb, struct err *res) {
 
 script static
 void MonInfo_Presets(struct tokbuf *tb, struct err *res) {
-   tb->expdr(res, tok_braceo);
+   tb_expdr(tb, res, tok_braceo);
    unwrap(res);
 
-   while(!tb->drop(tok_bracec)) {
+   while(!tb_drop(tb, tok_bracec)) {
       MonInfo_Preset(tb, res);
       unwrap(res);
    }
@@ -577,9 +577,7 @@ void MonInfo_Presets(struct tokbuf *tb, struct err *res) {
 script static
 void MonInfo_Compile(struct tokbuf *tb, struct err *res) {
    for(;;) {
-      struct token *tok =
-         tb->expc(res, tb->get(), tok_pareno, tok_string, tok_identi,
-                  tok_eof, 0);
+      struct token *tok = tb_expc(tb, res, tb_get(tb), tok_pareno, tok_string, tok_identi, tok_eof, 0);
       unwrap(res);
 
       switch(tok->type) {
@@ -597,7 +595,7 @@ void MonInfo_Compile(struct tokbuf *tb, struct err *res) {
             unwrap(res);
             break;
          default:
-            tb->err(res, "%s MonInfo_Compile: invalid toplevel identifier", TokPrint(tok));
+            tb_err(tb, res, "invalid toplevel token", tok, _f);
             unwrap_retn();
             break;
          }
@@ -616,11 +614,11 @@ void Mon_Init(void) {
    i32 prev = 0;
    for(FILE *fp; (fp = W_OpenIter(sp_LITHMONS, 't', &prev));) {
       struct tokbuf tb;
-      TBufCtor(&tb, fp, "LITHMONS");
+      tb_ctor(&tb, fp, "LITHMONS");
       struct err res = {};
       MonInfo_Compile(&tb, &res);
       unwrap_print(&res);
-      TBufDtor(&tb);
+      tb_dtor(&tb);
       fclose(fp);
    }
 }

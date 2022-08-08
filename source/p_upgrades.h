@@ -13,7 +13,7 @@
 #ifndef p_upgrades_h
 #define p_upgrades_h
 
-#include "common.h"
+#include "m_engine.h"
 #include "u_names.h"
 #include "u_data.h"
 #include "p_shopdef.h"

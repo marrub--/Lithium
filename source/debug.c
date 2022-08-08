@@ -10,7 +10,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-#include "common.h"
+#include "m_engine.h"
 #include "p_player.h"
 #include "w_monster.h"
 
@@ -182,18 +182,18 @@ void dbg_font_test(str font) {
 script static
 bool chtf_dbg_font_test(cheat_params_t const params) {
    str font;
-   switch(FourCC(params[0], params[1], 0, 0)) {
-   case FourCC('a', 'n', 0, 0): font = sf_areaname;  break;
-   case FourCC('b', 'u', 0, 0): font = sf_bigupper;  break;
-   case FourCC('i', 't', 0, 0): font = sf_italic;    break;
-   case FourCC('j', 'k', 0, 0): font = sf_jiskan16;  break;
-   case FourCC('l', 'j', 0, 0): font = sf_ljtrmfont; break;
-   case FourCC('l', 'm', 0, 0): font = sf_lmidfont;  break;
-   case FourCC('l', 's', 0, 0): font = sf_lsmlhfnt;  break;
-   case FourCC('l', 't', 0, 0): font = sf_ltrmfont;  break;
-   case FourCC('m', 'g', 0, 0): font = sf_misakig;   break;
-   case FourCC('m', 'm', 0, 0): font = sf_misakim;   break;
-   case FourCC('s', 'f', 0, 0): font = sf_smallfnt;  break;
+   switch(fourcc(params[0], params[1], 0, 0)) {
+   case fourcc('a', 'n', 0, 0): font = sf_areaname;  break;
+   case fourcc('b', 'u', 0, 0): font = sf_bigupper;  break;
+   case fourcc('i', 't', 0, 0): font = sf_italic;    break;
+   case fourcc('j', 'k', 0, 0): font = sf_jiskan16;  break;
+   case fourcc('l', 'j', 0, 0): font = sf_ljtrmfont; break;
+   case fourcc('l', 'm', 0, 0): font = sf_lmidfont;  break;
+   case fourcc('l', 's', 0, 0): font = sf_lsmlhfnt;  break;
+   case fourcc('l', 't', 0, 0): font = sf_ltrmfont;  break;
+   case fourcc('m', 'g', 0, 0): font = sf_misakig;   break;
+   case fourcc('m', 'm', 0, 0): font = sf_misakim;   break;
+   case fourcc('s', 'f', 0, 0): font = sf_smallfnt;  break;
    default:
       return false;
    }

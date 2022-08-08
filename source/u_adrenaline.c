@@ -10,7 +10,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-#include "u_common.h"
+#include "u_all.h"
 
 dynam_aut script static
 void DoAdrenaline(void) {

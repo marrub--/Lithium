@@ -10,7 +10,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-#include "u_common.h"
+#include "u_all.h"
 
 void Upgr_InstaDeath_Update(void) {
    if(pl.health < pl.old.health) {

@@ -10,7 +10,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-#include "u_common.h"
+#include "u_all.h"
 
 void Upgr_CyberLegs_Update(void) {
    pl.speedmul  += 20;

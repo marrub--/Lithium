@@ -80,7 +80,7 @@ enum ZscName(PClass) {
 };
 
 #if !ZscOn
-#include "common.h"
+#include "m_engine.h"
 #include "p_cbi.h"
 #include "p_upgrades.h"
 #include "p_bip.h"

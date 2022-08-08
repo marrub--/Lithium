@@ -10,7 +10,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-#include "u_common.h"
+#include "u_all.h"
 #include "w_world.h"
 
 bool Upgr_CanBuy(struct upgrade const *upgr) {

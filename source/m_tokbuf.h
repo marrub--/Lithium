@@ -20,55 +20,38 @@
 #include <stdbool.h>
 #include <stdarg.h>
 
-stkcall funcdef i32 (*read_flag_func)(cstr s);
-
-i32           TBufProc (struct token *tok);
-i32           TBufProcL(struct token *tok);
-void          TBufCtor (struct tokbuf *tb, FILE *fp, cstr fname);
-void          TBufDtor (struct tokbuf *tb);
-struct token *TBufGet  (struct tokbuf *tb);
-struct token *TBufPeek (struct tokbuf *tb);
-struct token *TBufUnGet(struct tokbuf *tb);
-struct token *TBufReGet(struct tokbuf *tb);
-struct token *TBufBack (struct tokbuf *tb, i32 n);
-bool          TBufDrop (struct tokbuf *tb, i32 t);
-void          TBufErr  (struct tokbuf *tb, struct err *res, cstr fmt, ...);
-struct token *TBufExpc (struct tokbuf *tb, struct err *res, struct token *tok, ...);
-void          TBufExpDr(struct tokbuf *tb, struct err *res, i32 t);
-bool          TBufKv   (struct tokbuf *tb, struct err *res, char *k, char *v);
-i32           TBufRFlag(struct tokbuf *tb, struct err *res, char *s, read_flag_func fn);
-
 enum {
    tokproc_next,
    tokproc_done,
    tokproc_skip
 };
 
-funcdef i32 (*tbuf_process_t)(struct token *tok);
+stkcall funcdef i32 (*tb_rflag_f  )(cstr s);
+stkcall funcdef i32 (*tb_process_f)(struct token *tok);
 
 struct tokbuf {
-   __prop get   {operator(): TBufGet  (this)}
-   __prop peek  {operator(): TBufPeek (this)}
-   __prop unget {operator(): TBufUnGet(this)}
-   __prop reget {operator(): TBufReGet(this)}
-   __prop back  {operator(): TBufBack (this)}
-   __prop drop  {operator(): TBufDrop (this)}
-   __prop err   {operator(): TBufErr  (this)}
-   __prop expc  {operator(): TBufExpc (this)}
-   __prop expdr {operator(): TBufExpDr(this)}
-   __prop kv    {operator(): TBufKv   (this)}
-   __prop rflag {operator(): TBufRFlag(this)}
-
    struct origin orig;
-
-   FILE *fp;
-   cstr  fname;
-
-   struct token toks[32];
-
-   i32 tpos, tend;
-
-   tbuf_process_t tokProcess;
+   FILE         *fp;
+   cstr          fname;
+   struct token  toks[32];
+   i32           tpos, tend;
+   tb_process_f  tok_process;
 };
+
+stkcall i32           tb_proc (struct token *tok);
+stkcall i32           tb_procl(struct token *tok);
+void                  tb_ctor (struct tokbuf *tb, FILE *fp, cstr fname);
+void                  tb_dtor (struct tokbuf *tb);
+struct token         *tb_get  (struct tokbuf *tb);
+stkcall struct token *tb_unget(struct tokbuf *tb);
+stkcall struct token *tb_reget(struct tokbuf *tb);
+stkcall struct token *tb_back (struct tokbuf *tb, i32 n);
+struct token         *tb_peek (struct tokbuf *tb);
+bool                  tb_drop (struct tokbuf *tb, i32 t);
+void                  tb_err  (struct tokbuf *tb, struct err *res, cstr fmt, struct token *tok, cstr func, ...);
+struct token         *tb_expc (struct tokbuf *tb, struct err *res, struct token *tok, ...);
+void                  tb_expdr(struct tokbuf *tb, struct err *res, i32 t);
+bool                  tb_kv   (struct tokbuf *tb, struct err *res, char *k, char *v);
+i32                   tb_rflag(struct tokbuf *tb, struct err *res, char *s, tb_rflag_f fn);
 
 #endif

@@ -10,7 +10,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-#include "common.h"
+#include "m_engine.h"
 #include "p_player.h"
 
 void G_WinBeg_Imp(struct gui_state *g, gid_t id, struct gui_arg_win *a) {

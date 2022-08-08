@@ -193,7 +193,7 @@ enum ZscName(RifleMode) {
 
 enum ZscName(MapFlag) {
    _mflg_corrupted,
-   _mflg_thunder,
+   _mflg_lightning,
    _mflg_vacuum,
    _mflg_boss_beg,
    _mflg_boss_end = _mflg_boss_beg + 2,

@@ -169,6 +169,6 @@ MapInfoEnvName:
 MapInfoFlagName:
    prefix: _mi_flag_
    words:
+      - nolightning
       - nophantom
       - nosnow
-      - nothunder

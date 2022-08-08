@@ -16,7 +16,8 @@ void Dlg_PushB1(struct compiler *d, u32 b) {
    mem_size_t pc = d->def.codeP++;
 
    if(pc + 1 > PRG_END - PRG_BEG) {
-      d->tb.err(&d->res, "PRG segment overflow"); unwrap(&d->res);
+      tb_err(&d->tb, &d->res, "PRG segment overflow", nil, _f);
+      unwrap(&d->res);
    }
 
    if(pc + 1 > d->def.codeC * 4) {
@@ -25,7 +26,8 @@ void Dlg_PushB1(struct compiler *d, u32 b) {
    }
 
    if(b > 0xFF) {
-      d->tb.err(&d->res, "byte error (overflow) %u", b); unwrap(&d->res);
+      tb_err(&d->tb, &d->res, "byte error (overflow) %u", nil, _f, b);
+      unwrap(&d->res);
    }
 
    Cps_SetC(d->def.codeV, pc, b);
@@ -63,7 +65,8 @@ struct ptr2 Dlg_PushLdAdr(struct compiler *d, u32 at, u32 set) {
 
 void Dlg_SetB1(struct compiler *d, u32 ptr, u32 b) {
    if(b > 0xFF) {
-      d->tb.err(&d->res, "byte error (overflow) %u", b); unwrap(&d->res);
+      tb_err(&d->tb, &d->res, "byte error (overflow) %u", nil, _f, b);
+      unwrap(&d->res);
    }
 
    Cps_SetC(d->def.codeV, ptr, b);
@@ -79,7 +82,8 @@ u32 Dlg_PushStr(struct compiler *d, cstr s, u32 l) {
    u32 vl = Cps_Size(p + l) - d->def.stabC;
 
    if(p + l > STR_END - STR_BEG) {
-      d->tb.err(&d->res, "STR segment overflow"); unwrap(&d->res);
+      tb_err(&d->tb, &d->res, "STR segment overflow", nil, _f);
+      unwrap(&d->res);
    }
 
    Dbg_Log(log_dlg,
@@ -98,10 +102,10 @@ u32 Dlg_PushStr(struct compiler *d, cstr s, u32 l) {
 void Dlg_GetNamePool(struct compiler *d, i32 which) {
    struct name_pool *pool = &d->nam[which];
 
-   d->tb.expc(&d->res, d->tb.get(), tok_braceo, 0); unwrap(&d->res);
+   tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_braceo, 0); unwrap(&d->res);
 
-   while(!d->tb.drop(tok_bracec)) {
-      struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, 0);
+   while(!tb_drop(&d->tb, tok_bracec)) {
+      struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, 0);
       unwrap(&d->res);
 
       char *s = Malloc(tok->textC + 1, _tag_dlgc);
@@ -110,7 +114,7 @@ void Dlg_GetNamePool(struct compiler *d, i32 which) {
       pool->names = Talloc(pool->names, pool->num_names + 1, _tag_dlgc);
       pool->names[pool->num_names++] = s;
 
-      d->tb.expc(&d->res, d->tb.get(), tok_comma, 0); unwrap(&d->res);
+      tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_comma, 0); unwrap(&d->res);
    }
 }
 

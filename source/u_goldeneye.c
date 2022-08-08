@@ -10,7 +10,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-#include "u_common.h"
+#include "u_all.h"
 
 void Upgr_Goldeneye_Update(void) {
    if(ACS_Random(0, 0x7F) < 0x50) {

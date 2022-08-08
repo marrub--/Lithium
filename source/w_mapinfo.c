@@ -10,7 +10,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-#include "common.h"
+#include "m_engine.h"
 #include "w_world.h"
 #include "m_file.h"
 #include "m_tokbuf.h"
@@ -18,7 +18,7 @@
 
 static void ReadKeys(struct tokbuf *tb, struct err *res, struct map_info *mi) {
    noinit static char k[16], v[64];
-   while(tb->kv(res, k, v)) {
+   while(tb_kv(tb, res, k, v)) {
       unwrap(res);
       i32 key = MapInfoKeyName(k);
       set_bit(mi->use, key);
@@ -35,15 +35,15 @@ static void ReadKeys(struct tokbuf *tb, struct err *res, struct map_info *mi) {
          mi->keys[key] = MapInfoSkyName(v);
          break;
       case _mi_key_flags:
-         mi->keys[key] = tb->rflag(res, v, MapInfoFlagName);
+         mi->keys[key] = tb_rflag(tb, res, v, MapInfoFlagName);
          unwrap(res);
          break;
       default:
-         tb->err(res, "%s: invalid key %s", TokPrint(tb->reget()), k);
+         tb_err(tb, res, "invalid key %s", nil, _f, k);
          unwrap_retn();
       }
    }
-   tb->expc(res, tb->get(), tok_eof, 0);
+   tb_expc(tb, res, tb_get(tb), tok_eof, 0);
    unwrap(res);
 }
 
@@ -56,11 +56,11 @@ script struct map_info ReadMapInfo(void) {
    }
    FILE *fp = W_OpenNum(lump, 't');
    struct tokbuf tb;
-   TBufCtor(&tb, fp, "LITHMAP");
+   tb_ctor(&tb, fp, "LITHMAP");
    struct err res = {};
    ReadKeys(&tb, &res, &ret);
    unwrap_print(&res);
-   TBufDtor(&tb);
+   tb_dtor(&tb);
    fclose(fp);
    return ret;
 }

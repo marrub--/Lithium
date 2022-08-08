@@ -10,7 +10,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-#include "u_common.h"
+#include "u_all.h"
 
 void Upgr_Rifle_A_Deactivate(void) {
    pl.riflefiremode = 0;

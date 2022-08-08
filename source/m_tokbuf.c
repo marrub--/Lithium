@@ -20,122 +20,121 @@ enum {
    _bend = 28,
 };
 
-i32 TBufProc(struct token *tok) {
+stkcall alloc_aut(0) i32 tb_proc(struct token *tok) {
    switch(tok->type) {
-      case tok_eof:    return tokproc_done;
-      case tok_lnend:
-      case tok_cmment: return tokproc_skip;
+   case tok_eof:    return tokproc_done;
+   case tok_lnend:
+   case tok_cmment: return tokproc_skip;
    }
-
    return tokproc_next;
 }
 
-i32 TBufProcL(struct token *tok) {
+stkcall alloc_aut(0) i32 tb_procl(struct token *tok) {
    switch(tok->type) {
-      case tok_eof:    return tokproc_done;
-      case tok_cmment: return tokproc_skip;
+   case tok_eof:    return tokproc_done;
+   case tok_cmment: return tokproc_skip;
    }
-
    return tokproc_next;
 }
 
-void TBufCtor(struct tokbuf *tb, FILE *fp, cstr fname) {
+void tb_ctor(struct tokbuf *tb, FILE *fp, cstr fname) {
    fastmemset(tb, 0, sizeof *tb);
-
    tb->fp        = fp;
    tb->fname     = fname;
    tb->orig.line = 1;
-
-   if(!tb->tokProcess) tb->tokProcess = TBufProc;
+   if(!tb->tok_process) tb->tok_process = tb_proc;
 }
 
-void TBufDtor(struct tokbuf *tb) {
+void tb_dtor(struct tokbuf *tb) {
    for(i32 i = 0; i < _bend; i++) {
       tb->toks[i].type = 0;
       tb->toks[i].textC = 0;
    }
 }
 
-struct token *TBufGet(struct tokbuf *tb) {
-   if(++tb->tpos < tb->tend) return &tb->toks[tb->tpos];
-
+struct token *tb_get(struct tokbuf *tb) {
+   if(++tb->tpos < tb->tend) {
+      return &tb->toks[tb->tpos];
+   }
    /* free beginning of buffer */
-   for(i32 i = 0; i < _bbeg; i++) tb->toks[i].textC = 0;
-
+   for(i32 i = 0; i < _bbeg; i++) {
+      tb->toks[i].textC = 0;
+   }
    /* move end of buffer to beginning */
    if(tb->tend) {
       i32 s = tb->tend - _bbeg;
-
       for(i32 i = s, j = 0; i < tb->tend; i++, j++) {
          tb->toks[j] = tb->toks[i];
       }
-
       fastmemset(&tb->toks[s], 0, sizeof tb->toks[s] * (tb->tend - s));
    }
-
    /* get new tokens */
    for(tb->tpos = tb->tend = _bbeg; tb->tend < _bend; tb->tend++) {
    skip:
       TokParse(tb->fp, &tb->toks[tb->tend], &tb->orig);
-
-      switch(tb->tokProcess(&tb->toks[tb->tend])) {
+      switch(tb->tok_process(&tb->toks[tb->tend])) {
          case tokproc_next: break;
          case tokproc_done: goto done;
          case tokproc_skip: goto skip;
       }
    }
-
 done:
    return &tb->toks[tb->tpos];
 }
 
-struct token *TBufPeek(struct tokbuf *tb) {
-   TBufGet(tb);
-   return TBufUnGet(tb);
-}
-
-struct token *TBufUnGet(struct tokbuf *tb) {
+stkcall alloc_aut(0) struct token *tb_unget(struct tokbuf *tb) {
    return &tb->toks[tb->tpos--];
 }
 
-struct token *TBufReGet(struct tokbuf *tb) {
+stkcall alloc_aut(0) struct token *tb_reget(struct tokbuf *tb) {
    return &tb->toks[tb->tpos];
 }
 
-struct token *TBufBack(struct tokbuf *tb, i32 n) {
+stkcall alloc_aut(0) struct token *tb_back(struct tokbuf *tb, i32 n) {
    return &tb->toks[tb->tpos - n];
 }
 
-bool TBufDrop(struct tokbuf *tb, i32 t) {
-   if(TBufGet(tb)->type != t) {
-      TBufUnGet(tb);
+struct token *tb_peek(struct tokbuf *tb) {
+   tb_get(tb);
+   return tb_unget(tb);
+}
+
+bool tb_drop(struct tokbuf *tb, i32 t) {
+   if(tb_get(tb)->type != t) {
+      tb_unget(tb);
       return false;
    } else {
       return true;
    }
 }
 
-void TBufErr(struct tokbuf *tb, struct err *res, cstr fmt, ...) {
+void tb_err(struct tokbuf *tb, struct err *res, cstr fmt, struct token *tok, cstr func, ...) {
    noinit static char errbuf[1024];
-   va_list    vl;
-   mem_size_t len = faststrlen(tb->fname);
-   fastmemcpy(errbuf, tb->fname, len);
-   va_start(vl, fmt);
-   vsprintf(&errbuf[len], fmt, vl);
+   va_list vl;
+   char *p = errbuf;
+   if(tb->fname) {
+      faststrpcpy(&p, tb->fname);
+   }
+   tok = tok |? tb_reget(tb);
+   if(tok) {
+      faststrpcpy(&p, TokPrint(tok));
+   }
+   if(func) {
+      faststrpcpy(&p, func);
+   }
+   *p++ = ':';
+   *p++ = ' ';
+   va_start(vl, func);
+   vsprintf(p, fmt, vl);
    va_end(vl);
-   res->some = true;
-   res->err  = errbuf;
+   err_set(res, errbuf);
 }
 
-struct token *TBufExpc(struct tokbuf *tb, struct err *res, struct token *tok, ...) {
-   noinit static
-   i32 tt[8];
-   noinit static
-   char ttstr[128];
-
+struct token *tb_expc(struct tokbuf *tb, struct err *res, struct token *tok, ...) {
+   noinit static i32  tt[8];
+   noinit static char ttstr[128];
    mem_size_t ttnum;
    va_list    args;
-
    va_start(args, tok);
    for(ttnum = 0; (tt[ttnum] = va_arg(args, i32)); ++ttnum) {
       if(tok->type == tt[ttnum]) {
@@ -143,10 +142,8 @@ struct token *TBufExpc(struct tokbuf *tb, struct err *res, struct token *tok, ..
       }
    }
    va_end(args);
-
    mem_size_t i = 0;
    ttstr[0] = '\0';
-
    faststrcat(ttstr, TokType(tt[i++]));
    if(ttnum > 1) {
       while(i < ttnum - 1) {
@@ -159,19 +156,19 @@ struct token *TBufExpc(struct tokbuf *tb, struct err *res, struct token *tok, ..
       faststrcat(ttstr, " or ");
       faststrcat(ttstr, TokType(tt[i++]));
    }
-   tb->err(res, "%s expected %s", TokPrint(tok), ttstr);
+   tb_err(tb, res, "expected %s", tok, nil, ttstr);
    unwrap_retn();
 }
 
-void TBufExpDr(struct tokbuf *tb, struct err *res, i32 t) {
-   if(!tb->drop(t)) {
-      struct token *tok = tb->reget();
-      tb->err(res, "%s expected %s", TokPrint(tok), TokType(t));
+void tb_expdr(struct tokbuf *tb, struct err *res, i32 t) {
+   if(!tb_drop(tb, t)) {
+      struct token *tok = tb_reget(tb);
+      tb_err(tb, res, "expected %s", tok, nil, TokType(t));
    }
 }
 
-bool TBufKv(struct tokbuf *tb, struct err *res, char *k, char *v) {
-   struct token *tok = tb->expc(res, tb->get(), tok_semico, tok_identi, 0);
+bool tb_kv(struct tokbuf *tb, struct err *res, char *k, char *v) {
+   struct token *tok = tb_expc(tb, res, tb_get(tb), tok_semico, tok_identi, 0);
    unwrap(res);
 
    if(tok->type == tok_semico) {
@@ -179,23 +176,23 @@ bool TBufKv(struct tokbuf *tb, struct err *res, char *k, char *v) {
       return false;
    } else {
       faststrcpy(k, tok->textV);
-      tb->expdr(res, tok_col);
+      tb_expdr(tb, res, tok_col);
       unwrap(res);
-      tok = tb->expc(res, tb->get(), tok_identi, tok_number, tok_string, 0);
+      tok = tb_expc(tb, res, tb_get(tb), tok_identi, tok_number, tok_string, 0);
       unwrap(res);
       faststrcpy(v, tok->textV);
       return true;
    }
 }
 
-i32 TBufRFlag(struct tokbuf *tb, struct err *res, char *s, read_flag_func fn) {
+i32 tb_rflag(struct tokbuf *tb, struct err *res, char *s, tb_rflag_f fn) {
    i32 ret = 0;
    for(char *nx, *fl = faststrtok(s, &nx, ' '); fl; fl = faststrtok(nil, &nx, ' ')) {
       i32 parsed = fn(fl);
       if(parsed != -1) {
          set_bit(ret, parsed);
       } else {
-         tb->err(res, "%s: invalid flag '%s'", TokPrint(tb->reget()), fl);
+         tb_err(tb, res, "invalid flag '%s'", nil, nil, fl);
          unwrap_retn();
       }
    }

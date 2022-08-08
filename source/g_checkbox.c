@@ -10,7 +10,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-#include "common.h"
+#include "m_engine.h"
 #include "p_player.h"
 
 bool G_ChkBox_Imp(struct gui_state *g, gid_t id, struct gui_arg_cbx *a) {

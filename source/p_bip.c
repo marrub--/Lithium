@@ -10,7 +10,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-#include "common.h"
+#include "m_engine.h"
 #include "p_player.h"
 #include "p_bip.h"
 #include "m_list.h"
@@ -72,7 +72,7 @@ void BipInfo_Page(struct tokbuf *tb, struct err *res, struct page const *templat
    struct page *page = &bippages[bippagenum++];
    fastmemcpy(page, template, sizeof *page);
 
-   while(tb->kv(res, k, v)) {
+   while(tb_kv(tb, res, k, v)) {
       unwrap(res);
       switch(BipInfo_Page_Name(k)) {
       case _bipinfo_page_cl: {
@@ -80,8 +80,7 @@ void BipInfo_Page(struct tokbuf *tb, struct err *res, struct page const *templat
          if(pcl != -1) {
             page->pclass = pcl;
          } else {
-            tb->err(res, "%s BipInfo_Page: invalid pclass %s",
-                    TokPrint(tb->reget()), v);
+            tb_err(tb, res, "invalid pclass %s", nil, _f, v);
             unwrap_retn();
          }
          break;
@@ -101,11 +100,11 @@ void BipInfo_Page(struct tokbuf *tb, struct err *res, struct page const *templat
          break;
       }
       default:
-         tb->err(res, "%s BipInfo_Page: invalid key %s; expected "
-                 "cl, "
-                 "tag, "
-                 "or unl",
-                 TokPrint(tb->reget()), k);
+         tb_err(tb, res, "invalid key %s; expected "
+                "cl, "
+                "tag, "
+                "or unl",
+                nil, _f, k);
          unwrap_retn();
       }
    }
@@ -115,7 +114,7 @@ void BipInfo_Page(struct tokbuf *tb, struct err *res, struct page const *templat
 
 static
 struct page BipInfo_Template(struct tokbuf *tb, struct err *res) {
-   struct token *tok = tb->reget();
+   struct token *tok = tb_reget(tb);
    struct page template = {};
 
    for(char *next = nil,
@@ -134,12 +133,12 @@ struct page BipInfo_Template(struct tokbuf *tb, struct err *res) {
          break;
       default:
          /* TODO: make a function for generating proper lists */
-         tb->err(res, "%s BipInfo_Template: invalid word %s; expected "
-                 #define bip_category_x(name) #name ", "
-                 #include "p_bip.h"
-                 "auto, "
-                 "or `\"'",
-                 TokPrint(tok), word);
+         tb_err(tb, res, "invalid word %s; expected "
+                #define bip_category_x(name) #name ", "
+                #include "p_bip.h"
+                "auto, "
+                "or `\"'",
+                tok, _f, word);
          unwrap_retn();
       }
    }
@@ -151,10 +150,10 @@ void BipInfo_Pages(struct tokbuf *tb, struct err *res) {
    struct page const template = BipInfo_Template(tb, res);
    unwrap(res);
 
-   tb->expdr(res, tok_braceo);
+   tb_expdr(tb, res, tok_braceo);
    unwrap(res);
 
-   while(!tb->drop(tok_bracec)) {
+   while(!tb_drop(tb, tok_bracec)) {
       BipInfo_Page(tb, res, &template);
       unwrap(res);
    }
@@ -163,7 +162,7 @@ void BipInfo_Pages(struct tokbuf *tb, struct err *res) {
 script static
 void BipInfo_Compile(struct tokbuf *tb, struct err *res) {
    for(;;) {
-      struct token *tok = tb->expc(res, tb->get(), tok_string, tok_eof, 0);
+      struct token *tok = tb_expc(tb, res, tb_get(tb), tok_string, tok_eof, 0);
       unwrap(res);
 
       if(tok->type == tok_eof) {
@@ -184,11 +183,11 @@ void P_BIP_InitInfo(void) {
    i32 prev = 0;
    for(FILE *fp; (fp = W_OpenIter(sp_LITHINFO, 't', &prev));) {
       struct tokbuf tb;
-      TBufCtor(&tb, fp, "LITHINFO");
+      tb_ctor(&tb, fp, "LITHINFO");
       struct err res = {};
       BipInfo_Compile(&tb, &res);
       unwrap_print(&res);
-      TBufDtor(&tb);
+      tb_dtor(&tb);
       fclose(fp);
    }
 }

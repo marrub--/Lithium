@@ -13,7 +13,7 @@
 #ifndef d_compile_h
 #define d_compile_h
 
-#include "common.h"
+#include "m_engine.h"
 #include "w_world.h"
 #include "p_player.h"
 #include "d_vm.h"

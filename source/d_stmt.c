@@ -27,14 +27,14 @@ static mem_size_t prefixed_text(struct compiler *d, cstr text) {
 }
 
 static void stmt_cond(struct compiler *d) {
-   struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, tok_not, 0);
+   struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, tok_not, 0);
    unwrap(&d->res);
 
    bool bne = true;
 
    if(tok->type == tok_not) {
       bne = !bne;
-      tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, 0);
+      tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, 0);
       unwrap(&d->res);
    }
 
@@ -42,7 +42,7 @@ static void stmt_cond(struct compiler *d) {
    case _dlg_cond_item:
       bne = !bne;
 
-      tok = d->tb.expc(&d->res, d->tb.get(), tok_string, 0);
+      tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_string, 0);
       unwrap(&d->res);
 
       u32 s = Dlg_PushStr(d, tok->textV, tok->textC); unwrap(&d->res);
@@ -50,7 +50,7 @@ static void stmt_cond(struct compiler *d) {
       Dlg_PushLdVA(d, ACT_LD_ITEM); unwrap(&d->res);
       break;
    case _dlg_cond_class:
-      tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, 0);
+      tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, 0);
       unwrap(&d->res);
 
       Dlg_PushB1(d, DCD_LDA_AI); unwrap(&d->res);
@@ -62,20 +62,20 @@ static void stmt_cond(struct compiler *d) {
          Dlg_PushB1(d, pcl);
          unwrap(&d->res);
       } else {
-         d->tb.err(&d->res, "%s invalid playerclass type", TokPrint(tok));
+         tb_err(&d->tb, &d->res, "invalid playerclass type", tok, _f);
          unwrap(&d->res);
       }
       break;
    case _dlg_cond_var:
-      d->tb.expc(&d->res, d->tb.get(), tok_mod, 0);
+      tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_mod, 0);
       unwrap(&d->res);
 
-      tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, 0);
+      tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, 0);
       unwrap(&d->res);
 
       i32 n = Dlg_CheckNamePool(d, _name_pool_variables, tok->textV);
       if(n < 0) {
-         d->tb.err(&d->res, "bad variable name '%s'", tok->textV);
+         tb_err(&d->tb, &d->res, "bad variable name", tok, _f);
          unwrap(&d->res);
       }
 
@@ -86,7 +86,7 @@ static void stmt_cond(struct compiler *d) {
       Dlg_PushB1(d, 1);          unwrap(&d->res);
       break;
    default:
-      d->tb.err(&d->res, "invalid conditional type", TokPrint(tok));
+      tb_err(&d->tb, &d->res, "invalid conditional type", tok, _f);
       unwrap(&d->res);
    }
 
@@ -102,14 +102,14 @@ static void stmt_cond(struct compiler *d) {
    bool use_else = false;
    u32  else_ptr;
 
-   tok = d->tb.get();
+   tok = tb_get(&d->tb);
    if(TokIsKw(tok, "else") || TokIsKw(tok, "ante")) {
       Dlg_PushB1(d, DCD_JMP_AI); unwrap(&d->res);
       Dlg_PushB2(d, 0); unwrap(&d->res);
       else_ptr = d->def.codeP;
       use_else = true;
    } else {
-      d->tb.unget();
+      tb_unget(&d->tb);
    }
 
    u32 rel = d->def.codeP - ptr;
@@ -140,7 +140,7 @@ static void stmt_cond(struct compiler *d) {
 static void stmt_option(struct compiler *d) {
    struct ptr2 adr;
 
-   struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, tok_string, 0);
+   struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, tok_string, 0);
    unwrap(&d->res);
 
    u32 s = Dlg_PushStr(d, txtbuf, prefixed_text(d, tok->textV));
@@ -165,25 +165,25 @@ static void stmt_option(struct compiler *d) {
 }
 
 static void stmt_page(struct compiler *d) {
-   struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, 0);
+   struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, 0);
    unwrap(&d->res);
 
    i32 n = Dlg_CheckNamePool(d, _name_pool_pages, tok->textV);
    if(n >= DPAGE_MAX || n < 0) {
-      d->tb.err(&d->res, "bad page name '%s'", tok->textV);
+      tb_err(&d->tb, &d->res, "bad page name", tok, _f);
       unwrap(&d->res);
    }
 
    Dlg_PushB1(d, DCD_JPG_VI); unwrap(&d->res);
    Dlg_PushB1(d, n); unwrap(&d->res);
 
-   tok = d->tb.expc(&d->res, d->tb.get(), tok_semico, 0);
+   tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_semico, 0);
    unwrap(&d->res);
 }
 
 optargs(1) static void stmt_str(struct compiler *d, u32 adr, bool prefix) {
    struct token *tok =
-      d->tb.expc(&d->res, d->tb.get(), tok_identi, tok_string, tok_number, 0);
+      tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, tok_string, tok_number, 0);
    unwrap(&d->res);
 
    u32 s = Dlg_PushStr(
@@ -194,14 +194,14 @@ optargs(1) static void stmt_str(struct compiler *d, u32 adr, bool prefix) {
    unwrap(&d->res);
    Dlg_PushLdAdr(d, adr, s); unwrap(&d->res);
 
-   tok = d->tb.expc(&d->res, d->tb.get(), tok_semico, 0);
+   tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_semico, 0);
    unwrap(&d->res);
 }
 
 static void stmt_terminal(struct compiler *d, u32 act) {
    struct token *tok;
    if(act != TACT_INFO) {
-      tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, tok_string, tok_number, 0);
+      tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, tok_string, tok_number, 0);
       unwrap(&d->res);
       u32 s = Dlg_PushStr(d, tok->textV, tok->textC);
       unwrap(&d->res);
@@ -220,14 +220,14 @@ static void stmt_terminal(struct compiler *d, u32 act) {
 static void stmt_finale(struct compiler *d, u32 act) {
    struct token *tok;
    if(act == FACT_CRAWL) {
-      tok = d->tb.expc(&d->res, d->tb.get(), tok_identi, tok_string, 0);
+      tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, tok_string, 0);
       unwrap(&d->res);
       u32 s = Dlg_PushStr(d, tok->textV, tok->textC);
       unwrap(&d->res);
       Dlg_PushLdAdr(d, VAR_TEXTL, s); unwrap(&d->res);
    }
 
-   tok = d->tb.expc(&d->res, d->tb.get(), tok_number, 0);
+   tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_number, 0);
    unwrap(&d->res);
    Dlg_PushLdAdr(d, VAR_ADRL, word(faststrtoi32(tok->textV))); unwrap(&d->res);
 
@@ -239,18 +239,18 @@ static void stmt_finale(struct compiler *d, u32 act) {
 }
 
 static void stmt_num(struct compiler *d, u32 act) {
-   struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_number, 0);
+   struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_number, 0);
    unwrap(&d->res);
 
    Dlg_PushLdAdr(d, VAR_ADRL, word(faststrtoi32(tok->textV))); unwrap(&d->res);
    Dlg_PushLdVA(d, act); unwrap(&d->res);
 
-   tok = d->tb.expc(&d->res, d->tb.get(), tok_semico, 0);
+   tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_semico, 0);
    unwrap(&d->res);
 }
 
 static void stmt_script(struct compiler *d) {
-   struct token *tok = d->tb.expc(&d->res, d->tb.get(), tok_string, tok_number, 0);
+   struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_string, tok_number, 0);
    unwrap(&d->res);
 
    u32 act;
@@ -272,8 +272,8 @@ static void stmt_script(struct compiler *d) {
       Dlg_PushB2(d, VAR_SCP0); unwrap(&d->res);
    }
 
-   for(u32 i = 0; i < 4 && d->tb.drop(tok_comma); i++) {
-      tok = d->tb.expc(&d->res, d->tb.get(), tok_number, 0);
+   for(u32 i = 0; i < 4 && tb_drop(&d->tb, tok_comma); i++) {
+      tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_number, 0);
       unwrap(&d->res);
 
       u32 prm = faststrtoi32(tok->textV);
@@ -287,18 +287,18 @@ static void stmt_script(struct compiler *d) {
 
    Dlg_PushLdVA(d, act); unwrap(&d->res);
 
-   tok = d->tb.expc(&d->res, d->tb.get(), tok_semico, 0);
+   tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_semico, 0);
    unwrap(&d->res);
 }
 
 static void stmt_block(struct compiler *d) {
-   while(!d->tb.drop(tok_bracec)) {
+   while(!tb_drop(&d->tb, tok_bracec)) {
       Dlg_GetStmt(d); unwrap(&d->res);
    }
 }
 
 script void Dlg_GetStmt(struct compiler *d) {
-   struct token *tok = d->tb.get();
+   struct token *tok = tb_get(&d->tb);
 
    switch(tok->type) {
    case tok_braceo:
@@ -306,7 +306,7 @@ script void Dlg_GetStmt(struct compiler *d) {
       unwrap(&d->res);
       break;
    case tok_identi: {
-      Dbg_Log(log_dlg, _l(__func__), _l(": "), _p((cstr)tok->textV));
+      Dbg_Log(log_dlg, _l(_f), _l(": "), _p((cstr)tok->textV));
 
       switch(Dlg_StmtName(tok->textV)) {
       /* conditionals */
@@ -352,14 +352,14 @@ script void Dlg_GetStmt(struct compiler *d) {
       break;
    }
    case tok_lt:
-      while((tok = d->tb.expc(&d->res, d->tb.get(), tok_number, tok_gt, 0))->type != tok_gt) {
+      while((tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_number, tok_gt, 0))->type != tok_gt) {
          unwrap(&d->res);
          Dlg_PushB1(d, faststrtoi32(tok->textV)); unwrap(&d->res);
       }
    case tok_semico:
       break;
    default:
-      d->tb.err(&d->res, "%s invalid token in statement", TokPrint(tok));
+      tb_err(&d->tb, &d->res, "invalid token in statement", tok, _f);
       unwrap(&d->res);
       break;
    }

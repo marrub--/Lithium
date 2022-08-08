@@ -10,7 +10,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-#include "common.h"
+#include "m_engine.h"
 #include <GDCC.h>
 
 #define _mem_idn 0xC0FFEE69
@@ -113,7 +113,7 @@ void Dalloc(register void *p) {
       #endif
    );
 
-   blk = CheckUsedBlock(GetBlock(p), __func__);
+   blk = CheckUsedBlock(GetBlock(p), _f);
    blk->tag = _tag_free;
 
    if(blk->prv->tag == _tag_free) blk = MergeAdjacent(blk, blk->prv);
@@ -192,7 +192,7 @@ void *Ralloc(register void *p, register mem_size_t s, register mem_tag_t tag) {
       return Malloc(s, tag);
    }
 
-   os = CheckUsedBlock(GetBlock(p), __func__)->siz - sizeof(struct mem_blk);
+   os = CheckUsedBlock(GetBlock(p), _f)->siz - sizeof(struct mem_blk);
 
    nxt = Malloc(s, tag);
 

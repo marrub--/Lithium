@@ -10,7 +10,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-#include "common.h"
+#include "m_engine.h"
 #include "p_player.h"
 #include "w_world.h"
 #include "w_monster.h"
@@ -85,6 +85,7 @@ script static void GInit(void) {
 script static void MInit(void) {
    Dbg_Log(log_dev, _l(__func__));
    #define mi_opt(key, l, r) (get_bit(mi.use, key) ? (v = mi.keys[key], l) : (r))
+   #define mi_flg(flg) (get_bit(mi.use, _mi_key_flags) && get_bit(mi.keys[_mi_key_flags], flg))
    struct map_info mi = ReadMapInfo();
    i32 v;
    i32 fun = GetFun();
@@ -102,7 +103,7 @@ script static void MInit(void) {
    } else {
       set_msk(ml.flag, _mflg_func, _mfunc_normal);
    }
-   if(mi_opt(_mi_key_flags, get_bit(v, _mi_flag_nophantom), cv.sv_nobosses)) {
+   if(mi_flg(_mi_flag_nophantom) || cv.sv_nobosses) {
       set_msk(ml.flag, _mflg_boss, _mphantom_nospawn);
    }
    if(ml.boss == boss_iconofsin && fun & lfun_tainted) {
@@ -118,18 +119,18 @@ script static void MInit(void) {
    } else if(sky == sp_SKY3 || sky == sp_SKY4 || sky == sp_RSKY3) {
       set_msk(ml.flag, _mflg_env, _menv_hell);
    }
-   i32 dewpoint    = mi_opt(_mi_key_dewpoint,    v, rand() % 11 - 1);
-   ml.temperature  = mi_opt(_mi_key_temperature, v, rand() % 100 - 40);
-   ml.humidity     = maxi(ml.temperature + 40 + dewpoint, 0);
-   ml.humidity     = mini(ml.humidity * ml.humidity / 90, 100);
-   i32 thunder_chk = mi_opt(_mi_flag_nothunder, 100, rand() % 99);
-   i32 snow_chk    = mi_opt(_mi_flag_nosnow,    100, rand() % 99);
+   i32 dewpoint   = mi_opt(_mi_key_dewpoint,    v, rand() % 11 - 1);
+   ml.temperature = mi_opt(_mi_key_temperature, v, rand() % 100 - 40);
+   ml.humidity    = maxi(ml.temperature + 40 + dewpoint, 0);
+   ml.humidity    = mini(ml.humidity * ml.humidity / 90, 100);
+   bool lightning = rand() % 99 < 33 && !mi_flg(_mi_flag_nolightning);
+   bool snow      = rand() % 99 < 11 && !mi_flg(_mi_flag_nosnow);
    if(ml.humidity > 0) {
-      bool thunder =
+      lightning =
          EDataI(_edt_lightning) ||
-         (ml.temperature >= 12 + dewpoint && thunder_chk < 33);
-      if(thunder) {
-         set_bit(ml.flag, _mflg_thunder);
+         (lightning && ml.temperature >= dewpoint + 12);
+      if(lightning) {
+         set_bit(ml.flag, _mflg_lightning);
       }
       switch(CVarGetI(sc_sv_rain)) {
       case 1:
@@ -139,7 +140,7 @@ script static void MInit(void) {
             case _menv_hell: set_msk(ml.flag, _mflg_rain, _rain_blood); break;
             default:         set_msk(ml.flag, _mflg_rain, _rain_rain);  break;
             }
-         } else if(ml.temperature <= 0 && snow_chk < 11) {
+         } else if(ml.temperature <= 0 && snow) {
          case 3:
             switch(get_msk(ml.flag, _mflg_env)) {
             case _menv_hell: set_msk(ml.flag, _mflg_rain, _rain_fire); break;
@@ -194,7 +195,7 @@ dynam_aut script void W_World(void) {
 
       #define cvar_tic(ty, na) cv.na = cvar_get(na);
       #define cvar_x(ev, na, ty) cvar_##ev(ty, na)
-      #include "common.h"
+      #include "m_engine.h"
 
       i32 scrts = ACS_GetLevelInfo(LEVELINFO_FOUND_SECRETS);
       i32 kills = ACS_GetLevelInfo(LEVELINFO_KILLED_MONSTERS);
@@ -260,14 +261,14 @@ alloc_aut(0) script ext("ACS") addr(lsc_worldopen) void Z_World(void) {
       DrawInit();
       #define cvar_gbl(ty, na) cv.na = cvar_get(na);
       #define cvar_x(ev, na, ty) cvar_##ev(ty, na)
-      #include "common.h"
+      #include "m_engine.h"
    }
 
    /* TODO: handle map cvars properly in hubs */
    #define cvar_map(ty, na) cv.na = cvar_get(na);
    #define cvar_tic(ty, na) cv.na = cvar_get(na);
    #define cvar_x(ev, na, ty) cvar_##ev(ty, na)
-   #include "common.h"
+   #include "m_engine.h"
 
    Dbg_Log(log_dev, _l(__func__));
 

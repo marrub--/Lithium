@@ -10,7 +10,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-#include "common.h"
+#include "m_engine.h"
 #include "p_player.h"
 #include "p_hudid.h"
 
@@ -53,7 +53,7 @@ void P_Ren_Mission(void) {
       case _rain_snow:  _l("\CwSNOWING\n");           break;
       case _rain_fire:  _l("\CxFIRESTORM\n");         break;
       }
-      if(get_bit(ml.flag, _mflg_thunder))   {_l("\CkELEC. STORM\n");}
+      if(get_bit(ml.flag, _mflg_lightning)) {_l("\CkELEC. STORM\n");}
       if(get_bit(ml.flag, _mflg_corrupted)) {_l("\CgCAUSALITY SHIFT\n");}
       switch(get_msk(ml.flag, _mflg_env)) {
       case _menv_none:       _l("\CjAREA \CnNOMINAL\n");        break;

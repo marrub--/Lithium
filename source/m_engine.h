@@ -6,7 +6,7 @@
 // │                                                                          │
 // ├──────────────────────────────────────────────────────────────────────────┤
 // │                                                                          │
-// │ Common functions and debugging functions.                                │
+// │ Engine functions.                                                        │
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
@@ -55,16 +55,15 @@ cvar_x(tic, player_scoresound, bool)
 #undef cvar_gbl
 #undef cvar_get
 #undef cvar_x
-#elif !defined(common_h)
-#define common_h
+#elif !defined(m_engine_h)
+#define m_engine_h
 
-#pragma GDCC FIXED_LITERAL ON
+#include "m_types.h"
 
 #include <ACS_ZDoom.h>
 #include <stdarg.h>
 #include <stdlib.h>
 
-#include "m_types.h"
 #include "m_memory.h"
 #include "m_drawing.h"
 #include "m_math.h"
@@ -73,29 +72,7 @@ cvar_x(tic, player_scoresound, bool)
 #include "m_cheat.h"
 #include "m_char.h"
 #include "m_flow.h"
-
-#define Stringify(s)  #s
-#define XStringify(s) Stringify(s)
-
-#define LineHash    (__LINE__ * FileHash)
-#define LineHashStr XStringify(__LINE__) "_" XStringify(FileHash)
-#define LineHashIdent_( ln, fh) ln ## _ ## fh
-#define LineHashIdent__(ln, fh) LineHashIdent_(ln, fh)
-#define LineHashIdent           LineHashIdent__(__LINE__, FileHash)
-
-#define ifw(decl, ...) __with(decl;) if(__VA_ARGS__)
-#define ifauto(type, name, ...) ifw(type name = (__VA_ARGS__), name)
-
-#define countof(a) (sizeof(a) / sizeof(*(a)))
-#define swap(t, a, b) statement({ t _tmp = a; a = b; b = _tmp; })
-
-#define IsSmallNumber(x) ((x) > -0.001 && (x) < 0.001)
-#define CloseEnough(x, y) (IsSmallNumber(x - y))
-
-#define TickerT(t, on, off) ((ACS_Timer() % 35) < (t) ? (on) : (off))
-#define Ticker(on, off) (TickerT(17, on, off))
-
-#define FourCC(a, b, c, d) ((d << 24) | (c << 16) | (b << 8) | (a << 0))
+#include "m_dbg.h"
 
 #define SCallV(...) (ACS_ScriptCall(__VA_ARGS__), (void)0)
 #define SCallI ACS_ScriptCall
@@ -163,59 +140,10 @@ cvar_x(tic, player_scoresound, bool)
 #define DrawCallK(...) SCallK(so_Ren, __VA_ARGS__)
 #define DrawCallS(...) SCallS(so_Ren, __VA_ARGS__)
 
-#ifndef NDEBUG
-#define Dbg_Trace(n) (ACS_BeginPrint(), PrintChrLi(__func__), ACS_PrintChar(':'), ACS_PrintChar(' '), _p(n), EndLogEx(_pri_bold|_pri_nolog))
-
-#define Dbg_Log(level, ...) \
-   (dbglevel(level) ? \
-    (ACS_BeginPrint(), \
-     PrintChrLi(#level), \
-     ACS_PrintChar(':'), \
-     ACS_PrintChar(' '), \
-     (__VA_ARGS__), \
-     EndLogEx(_pri_critical|_pri_nonotify)) : \
-    (void)0)
-#define PrintErrLevel _pri_bold
-#else
-#define Dbg_Stat(...)
-#define Dbg_Note(...)
-#define Dbg_Log(...)
-#define PrintErrLevel (_pri_bold | _pri_nonotify)
-#endif
-#define PrintErr(...) \
-   (ACS_BeginPrint(), \
-    PrintChrLi(__func__), \
-    PrintChrLi(" \CgERROR\C-: "), \
-    (__VA_ARGS__), \
-    EndLogEx(PrintErrLevel))
-
 #define InvGive     ACS_GiveInventory
 #define InvMax(arg) ACS_GetMaxInventory(0, arg)
 #define InvNum      ACS_CheckInventory
 #define InvTake     ACS_TakeInventory
-
-#ifndef NDEBUG
-enum {
-   log_dev,   /* general debug info */
-   log_devh,  /* prints live stats to the HUD (position, angles, etc) */
-   log_boss,  /* debug info for the boss system */
-   log_dmon,  /* debug info for the monster tracker */
-   log_dmonV, /* verbose debug info for the monster tracker */
-   log_dlg,   /* debug info for the dialogue/terminal compiler */
-   log_bip,   /* debug info for the BIP */
-   log_dpl,   /* dynamic stack usage */
-   log_save,  /* save data */
-};
-
-enum {
-   dbgf_ammo,
-   dbgf_bip,
-   dbgf_gui,
-   dbgf_items,
-   dbgf_score,
-   dbgf_upgr,
-};
-#endif
 
 void FadeFlash(i32 r, i32 g, i32 b, k32 amount, k32 seconds);
 script optargs(1) i32 PtrTID(i32 tid, i32 ptr);
@@ -226,27 +154,12 @@ i32  PtrInvNum(i32 tid, str item);
 void PtrInvGive(i32 tid, str item, i32 amount);
 void PtrInvTake(i32 tid, str item, i32 amount);
 void PtrInvSet (i32 tid, str item, i32 amount);
-#ifndef NDEBUG
-void Dbg_PrintMem(void const *data, mem_size_t size);
-#endif
 
 struct cvars {
    #define cvar_x(ev, na, ty) ty na;
-   #include "common.h"
+   #include "m_engine.h"
 };
 
 extern struct cvars cv;
-
-#ifndef NDEBUG
-#define dbglevel(level) get_bit(cv.debug_level, level)
-#define dbgflags(flags) get_bit(cv.debug_flags, flags)
-#define dbglevel_any()  !!cv.debug_level
-#define dbgflags_any()  !!cv.debug_flags
-#else
-#define dbglevel(level) false
-#define dbgflags(flags) false
-#define dbglevel_any()  false
-#define dbgflags_any()  false
-#endif
 
 #endif

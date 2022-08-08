@@ -1,0 +1,97 @@
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
+
+class Lith_LightningThinker : Thinker;
+
+private int          m_time, m_next, m_len, m_speed, m_nextSnd;
+private array<int16> m_lights;
+
+static Lith_LightningThinker create() {
+   if(!Lith_UTIL.pData(_pdt_mflg, _mflg_lightning) ||
+      level.info.flags2 & LEVEL2_HEXENHACK || /* no-no! */
+      level.info.flags & LEVEL_STARTLIGHTNING) {
+      return null;
+   }
+   let th = new("Lith_LightningThinker");
+   for(int i = 0, j = level.sectors.size(); i < j; ++i) {
+      th.m_lights.push(int16.max);
+   }
+   th.setFlash();
+   return th;
+}
+
+private void setFlash() {
+   int oldNext = m_next;
+   if(random(0, 255) < 50) {
+      m_next = random(16, 31);
+   } else if(random(0, 255) < 128 && m_time & 32 == 0) {
+      m_next = random(2, 9) * ticrate;
+   } else {
+      m_next = random(5, 20) * ticrate;
+   }
+   if(oldNext) {
+      m_nextSnd = oldNext + random(2, min(m_next / 4, 3 * ticrate));
+   } else {
+      m_nextSnd = -1;
+   }
+   m_len   = random( 8, 40);
+   m_speed = random(-2, -8);
+   m_next += m_time;
+   Lith_RenderProvider.instance().setSkyFlash(m_next, m_len);
+}
+
+override void tick() {
+   if(level.isFrozen()) {
+      return;
+   }
+   if(m_time == m_nextSnd) {
+      S_StartSound("world/thunder", lch_weather1, 0, 1.0, ATTN_NONE, fRandom(0.9, 1.8));
+   }
+   /* TODO: make these use functors */
+   let delta = m_time++ - m_next;
+   if(delta < 0) {
+      return;
+   } else if(delta == 0) {
+      int flash = random(200, 231);
+      for(int i = 0, j = level.sectors.size(); i < j; ++i) {
+         Sector sec = level.sectors[i];
+         if(sec.getTexture(Sector.ceiling) == skyFlatNum ||
+            (sec.special >= 197 && sec.special <= 199)) {
+            int light, orig = sec.lightLevel;
+            switch(sec.special) {
+            case 198: light = min(orig + 64, flash); break;
+            case 199: light = min(orig + 32, flash); break;
+            default:  light = flash;                 break;
+            }
+            if(light < orig) {
+               m_lights[i] = int16.max;
+            } else {
+               sec.setLightLevel(light);
+               m_lights[i] = orig;
+            }
+         }
+      }
+   } else if(delta < m_len) {
+      for(int i = 0, j = level.sectors.size(); i < j; ++i) {
+         Sector sec = level.sectors[i];
+         if(m_lights[i] < sec.lightLevel + m_speed) {
+            sec.changeLightLevel(m_speed);
+         }
+      }
+   } else if(delta == m_len) {
+      for(int i = 0, j = level.sectors.size(); i < j; ++i) {
+         if(m_lights[i] != int16.max) {
+            level.sectors[i].setLightLevel(m_lights[i]);
+         }
+         m_lights[i] = int16.max;
+      }
+      setFlash();
+   }
+}
+
+/* EOF */

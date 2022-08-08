@@ -10,7 +10,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-#include "common.h"
+#include "m_engine.h"
 #include "p_player.h"
 
 struct slide_ret G_Slider_Imp(struct gui_state *g, gid_t id, struct gui_arg_sld *a) {
