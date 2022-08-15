@@ -31,11 +31,11 @@ override void tick() {
    if(level.time & m_timerRnd) {
       return;
    }
-   float r    = fRandomPick(1.0, 2.5, 5.0, 6.0, 7.0, 10.0, 20.0, 30.0, 45.0);
+   float r    = fRandomPick(1.0, 2.5, 5.0, 6.0, 7.0, 10.0, 20.0, 30.0, 45.0, 90.0, 180.0);
    m_speed    = fRandom(0.0, m_maxSpeed);
    m_angle   += fRandom(-r, r);
    m_windVec  = (cos(m_angle) * m_speed, sin(m_angle) * m_speed);
-   m_timerRnd = randomPick(7, 15, 63, 255, 511, 2047, 4095);
+   m_timerRnd = randomPick(7, 15, 63, 255, 511);
    if(m_player) {
       m_player.a_soundVolume(lch_weather1, m_speed / 110.0);
    }

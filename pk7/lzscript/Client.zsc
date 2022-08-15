@@ -28,6 +28,7 @@
 class Lith_URANUS : StaticEventHandler;
 
 Lith_RenderProvider m_ren;
+ui Lith_MenuDelegate m_del;
 
 override void onRegister() {
    m_ren = Lith_RenderProvider.create();
@@ -51,15 +52,16 @@ override void worldTick() {
 }
 
 override void uiTick() {
-   if(!(menuDelegate is "Lith_MenuDelegate")) {
-      menuDelegate.destroy();
-      menuDelegate = Lith_MenuDelegate.create();
+   if(!m_del) {
+      if(menuDelegate) {
+         menuDelegate.destroy();
+      }
+      m_del = Lith_MenuDelegate.create();
+      menuDelegate = m_del;
    }
-
    if(gameState == GS_FINALE && (!level.nextMap || level.nextMap.left(6) == "enDSeQ")) {
       callACS("Lith_Finale");
    }
-
    m_ren.tickMenu();
 }
 

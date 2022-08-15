@@ -282,9 +282,6 @@ This one is extra hard.
 ## 012345678901234567890123456
 ## 01234567890123456789012345
 
-## FIXME: add cvar to save name change state
-##        player seeing lane's true name is not canon, but her name is only
-##        used here, so it's ok
 == \#CLASS_MARINE     | Marine
 == \#CLASS_MARINE_DeN | Stanley J. Blazkowicz
 == \#CLASS_MARINE_DPr | he/him

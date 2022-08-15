@@ -7,25 +7,21 @@
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
 class Lith_MenuDelegate : MenuDelegateBase {
-   ui ListMenuDescriptor     m_lastDesc;
    ui ListMenuItemSelectable m_lastSel;
-   ui vector2                m_selPos;
-
+   ui Lith_VecLerp           m_selPos;
    ui static vector2 getSelPos(ListMenuItemSelectable sel) {
       return sel ? (sel.getX() - 8.0, sel.getY() + sel.mHeight / 4.0) : (0, 0);
    }
-
    ui static ListMenuItemSelectable getSelItem(ListMenuDescriptor desc, int which) {
       return which >= 0 && which < desc.mItems.size() ?
          ListMenuItemSelectable(desc.mItems[which]) :
          null;
    }
-
-   static ui Lith_MenuDelegate create() {
-      let m = new("Lith_MenuDelegate");
+   static Lith_MenuDelegate create() {
+      let m = new('Lith_MenuDelegate');
+      m.m_selPos = Lith_VecLerp.create();
       return m;
    }
-
    override void playSound(name sndName) {
       if(sndName == 'menu/cursor') {
          return;
@@ -34,37 +30,28 @@ class Lith_MenuDelegate : MenuDelegateBase {
       sound  snd    = sndStr;
       S_StartSound(snd, lch_body, CHANF_UI, snd_menuVolume);
    }
-
    override bool drawSelector(ListMenuDescriptor desc) {
-      let num = desc.mSelectedItem;
-      let sel = getSelItem(desc, num);
-
-      if(m_lastDesc != desc) {
-         m_selPos   = (0, 0);
-         m_lastDesc = desc;
-      } else if(sel != m_lastSel) {
+      let sel = getSelItem(desc, desc.mSelectedItem);
+      if(m_lastSel && sel != m_lastSel) {
          S_StartSound("menu/cursor", lch_body, CHANF_UI, snd_menuVolume);
       }
       m_lastSel = sel;
-
       if(sel) {
-         let pos  = getSelPos(sel);
-         /* FIXME: don't use lerp like this, timescale can change; set from tick */
-         m_selPos = Lith_UTIL.vec2Lerp(m_selPos, pos, 0.25);
-         let dw   = desc.displayWidth();
-         let dh   = desc.displayHeight();
-         let a    = (sin(gameTic * 10.0) + 1.0) / 2.0;
-         let r    = Lith_RenderProvider.instance();
-         let c    = r.xhairColor();
-         let tex  = r.xhairW();
+         let cur = m_selPos.update(getSelPos(sel), msTimeF());
+         let dw  = desc.displayWidth();
+         let dh  = desc.displayHeight();
+         let a   = (sin(gameTic * 10.0) + 1.0) / 2.0;
+         let r   = Lith_RenderProvider.instance();
+         let c   = r.xhairColor();
+         let tex = r.xhairW();
          if(dw == ListMenuDescriptor.CleanScale) {
-            Screen.drawTexture(tex, false, m_selPos.x, m_selPos.y,
+            Screen.drawTexture(tex, false, cur.x, cur.y,
                                DTA_Clean,true,
                                DTA_KeepRatio,true,
                                DTA_FillColor,c,
                                DTA_Alpha,a);
          } else {
-            Screen.drawTexture(tex, false, m_selPos.x, m_selPos.y,
+            Screen.drawTexture(tex, false, cur.x, cur.y,
                                DTA_VirtualWidth,dw,
                                DTA_VirtualHeight,dh,
                                DTA_FullScreenScale,FSMODE_SCALETOFIT43,
@@ -72,10 +59,8 @@ class Lith_MenuDelegate : MenuDelegateBase {
                                DTA_Alpha,a);
          }
       }
-
       return true;
    }
-
    override Font pickFont(Font fnt) {
       Font bigupper = "bigupper";
       Font lmidfont = "lmidfont";
@@ -96,12 +81,10 @@ class Lith_MenuDelegate : MenuDelegateBase {
 
 class ListMenuItemLith_CreditsMenuScroll : ListMenuItemTextItem {
    bool m_right;
-
    void init(ListMenuDescriptor desc, string text, string hotKey, bool right) {
       super.init(desc, text, hotkey, 'None');
       m_right = right;
    }
-
    override bool activate() {
       let mn = Lith_CreditsMenu(Menu.getCurrentMenu());
       if(mn) mn.changeSection(m_right);
@@ -124,14 +107,12 @@ class Lith_CreditsMenu : ListMenu {
    int                m_sectionTic;
    int                m_curSection;
    Font               m_font;
-
    static void addSection(string txt) {
       let mn = Lith_CreditsMenu(Menu.getCurrentMenu());
       if(mn) {
          mn.m_sections.push(mn.m_font.breakLines(txt, 640));
       }
    }
-
    void changeSection(bool right) {
       if(right) ++m_curSection;
       else      --m_curSection;
@@ -142,22 +123,18 @@ class Lith_CreditsMenu : ListMenu {
       }
       m_sectionTic = gameTic;
    }
-
    override void drawer() {
       super.drawer();
-
       if(!m_sections.size()) {
          m_font = "ltrmfont";
          callAcs("Lith_OpenCreditsMenu");
          m_sectionTic = gameTic;
          m_curSection = 0;
       }
-
       int tic = gameTic - m_sectionTic;
       float xx =
          640.0 *
          (1.0 - Lith_UTIL.easeInOutQuad(clamp(tic / 35.0, 0.0, 1.0)));
-
       int lny = m_font.getHeight();
       let sec = m_sections[m_curSection];
       for(uint lnN = 0, lnC = sec.count(); lnN < lnC; ++lnN) {
@@ -186,19 +163,16 @@ extend class Lith_RenderProvider;
 ui int              m_screenDim;
 ui Shape2DTransform m_menuRectXf;
 ui Shape2D          m_menuRect;
-
 ui void tickMenu() {
    if(!m_menuRectXf) {
       m_menuRectXf = new("Shape2DTransform");
       m_menuRect   = new("Shape2D");
    }
-
    if(menuActive && !Menu.getCurrentMenu().dontDim) {
       if(m_screenDim < 15) ++m_screenDim;
    } else {
       if(m_screenDim > 0) --m_screenDim;
    }
-
    if(m_screenDim) {
       double dim  = m_screenDim / 15.0;
       double dimx = Lith_UTIL.easeInOutQuad(dim) / 2.0;
@@ -216,7 +190,6 @@ ui void tickMenu() {
       m_menuRect.pushTriangle(0, 2, 3);
    }
 }
-
 ui void drawMenu(RenderEvent evt) {
    if(m_screenDim) {
       int size = Screen.getHeight() / 14;

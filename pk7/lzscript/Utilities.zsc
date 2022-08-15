@@ -29,14 +29,6 @@ struct Lith_UTIL {
       return 2 * d % 360 - d;
    }
 
-   static double angleLerp(double a, double b, double t) {
-      return a + sDiffDeg(a, b) * t;
-   }
-
-   static double lerp(double a, double b, double t) {
-      return (1 - t) * a + t * b;
-   }
-
    static double easeInOutQuad(double t) {
       if(t < 0.5) {
          return 2.0 * t * t;
@@ -46,14 +38,25 @@ struct Lith_UTIL {
       }
    }
 
+   static double easeOutCubic(double t) {
+      t = 1 - t;
+      return 1 - t * t * t;
+   }
+
+   static double lerp(double a, double b, double t) {
+      return (1.0 - t) * a + t * b;
+   }
+
    static vector2 vec2Lerp(vector2 a, vector2 b, double t) {
-      let vec = (lerp(a.x, b.x, t), lerp(a.y, b.y, t));
-      return vec;
+      return (1.0 - t) * a + t * b;
    }
 
    static vector3 vec3Lerp(vector3 a, vector3 b, double t) {
-      let vec = (lerp(a.x, b.x, t), lerp(a.y, b.y, t), lerp(a.z, b.z, t));
-      return vec;
+      return (1.0 - t) * a + t * b;
+   }
+
+   static double angleLerp(double a, double b, double t) {
+      return a + sDiffDeg(a, b) * t;
    }
 
    static color colorLerp(color a, color b, double t) {
@@ -167,6 +170,38 @@ class Lith_FnSector : Lith_FnBool abstract {
          }
       }
       return false;
+   }
+}
+
+class Lith_VecLerp {
+   vector2 lst, nex;
+   double  ds, tm;
+   static Lith_VecLerp create(class<Lith_VecLerp> lt = 'Lith_VecLerp') {
+      let l = Lith_VecLerp(new(lt));
+      l.lst = (0, 0);
+      l.nex = (0, 0);
+      l.ds = 1;
+      l.tm = 0;
+      return l;
+   }
+   vector2 update(vector2 new, double ct) {
+      let cur = get_cur(ct);
+      if(new == nex) {
+         return cur;
+      } else {
+         let del = cur - new;
+         lst = cur;
+         nex = new;
+         ds  = get_ds(del);
+         tm  = ct + ds;
+         return lst;
+      }
+   }
+   double get_ds(vector2 del) const {
+      return sqrt(del.x * del.x + del.y * del.y) * 20.0;
+   }
+   vector2 get_cur(double ct) const {
+      return ct < tm ? Lith_UTIL.vec2Lerp(lst, nex, Lith_UTIL.easeOutCubic(1 - clamp((tm - ct) / ds, 0, 1))) : nex;
    }
 }
 
