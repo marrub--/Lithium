@@ -29,9 +29,9 @@ w_mapsky_x(replace)
 w_mapsky_x(shader)
 #undef w_mapsky_x
 #elif defined(w_mapkey_x)
-w_mapkey_x(dewpoint)
 w_mapkey_x(environment)
 w_mapkey_x(flags)
+w_mapkey_x(humidity)
 w_mapkey_x(seed)
 w_mapkey_x(sky)
 w_mapkey_x(temperature)
@@ -41,6 +41,8 @@ w_mapkey_x(temperature)
 
 #if !ZscOn
 #include <stdbool.h>
+
+#define DefaultAirControl() ACS_SetAirControl(0.77k)
 
 #define MapNum  ACS_GetLevelInfo(LEVELINFO_LEVELNUM)
 #define Cluster ACS_GetLevelInfo(LEVELINFO_CLUSTERNUM)
@@ -77,6 +79,8 @@ enum ZscName(PData) {
    _pdt_mfunc,
    _pdt_mphantom,
    _pdt_msky,
+   _pdt_temperature,
+   _pdt_humidity,
 };
 
 /* External Data */

@@ -16,19 +16,19 @@
 
 void Upgr_Seven7s_Activate(void) {
    SetGravity(0, 0.0);
+   ACS_SetAirControl(0.0);
 }
 
 void Upgr_Seven7s_Deactivate(void) {
    SetGravity(0, 1.0);
+   DefaultAirControl();
 }
 
 void Upgr_Seven7s_Update(void) {
    k32 velx, vely, velz = pl.velz > 0 ? pl.velz : -2;
-
    if(pl.velz != 0) {
       if(!udata.in_air) {
          udata.in_air = true;
-         SetFriction(0, 0.0);
          udata.fvel = pl.getVel();
          udata.fyaw = pl.yaw - ACS_VectorAngle(pl.velx, pl.vely);
       }
@@ -38,11 +38,9 @@ void Upgr_Seven7s_Update(void) {
       vely = ACS_Sin(pl.yaw - fyaw) * udata.fvel;
    } else {
       udata.in_air = false;
-      SetFriction(0, 1.0);
       velx = pl.velx;
       vely = pl.vely;
    }
-
    P_SetVel(velx, vely, velz);
 }
 

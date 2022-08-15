@@ -89,19 +89,18 @@ script static void MInit(void) {
    struct map_info mi = ReadMapInfo();
    i32 v;
    i32 fun = GetFun();
-   ACS_SetAirControl(0.77);
+   DefaultAirControl();
    ml.soulsfreed = 0;
    ml.seed = mi_opt(_mi_key_seed, v, ACS_Random(0, INT32_MAX));
    srand(ml.seed);
    ml.lump = strp(ACS_PrintName(PRINTNAME_LEVEL));
    ml.name = strp(ACS_PrintName(PRINTNAME_LEVELNAME));
    ml.boss = EDataI(_edt_bosslevel);
+   i32 func = _mfunc_normal;
    if(ACS_GameType() == GAME_TITLE_MAP) {
-      set_msk(ml.flag, _mflg_func, _mfunc_title);
+      func = _mfunc_title;
    } else if(ml.lump == sp_LITHEND) {
-      set_msk(ml.flag, _mflg_func, _mfunc_end);
-   } else {
-      set_msk(ml.flag, _mflg_func, _mfunc_normal);
+      func = _mfunc_end;
    }
    if(mi_flg(_mi_flag_nophantom) || cv.sv_nobosses) {
       set_msk(ml.flag, _mflg_boss, _mphantom_nospawn);
@@ -109,42 +108,38 @@ script static void MInit(void) {
    if(ml.boss == boss_iconofsin && fun & lfun_tainted) {
       set_bit(ml.flag, _mflg_corrupted);
    }
+   i32 env = _menv_none;
    str sky = fast_strupper(EDataS(_edt_origsky1));
    if(get_bit(mi.use, _mi_key_environment)) {
-      set_msk(ml.flag, _mflg_env, mi.keys[_mi_key_environment]);
+      env = mi.keys[_mi_key_environment];
    } else if(fun & lfun_ragnarok) {
-      set_msk(ml.flag, _mflg_env, _menv_evil);
+      env = _menv_evil;
    } else if(sky == sp_SKY2 || sky == sp_RSKY2) {
-      set_msk(ml.flag, _mflg_env, _menv_interstice);
+      env = _menv_interstice;
    } else if(sky == sp_SKY3 || sky == sp_SKY4 || sky == sp_RSKY3) {
-      set_msk(ml.flag, _mflg_env, _menv_hell);
+      env = _menv_hell;
    }
-   i32 dewpoint   = mi_opt(_mi_key_dewpoint,    v, rand() % 11 - 1);
-   ml.temperature = mi_opt(_mi_key_temperature, v, rand() % 100 - 40);
-   ml.humidity    = maxi(ml.temperature + 40 + dewpoint, 0);
-   ml.humidity    = mini(ml.humidity * ml.humidity / 90, 100);
-   bool lightning = rand() % 99 < 33 && !mi_flg(_mi_flag_nolightning);
-   bool snow      = rand() % 99 < 11 && !mi_flg(_mi_flag_nosnow);
-   if(ml.humidity > 0) {
-      lightning =
-         EDataI(_edt_lightning) ||
-         (lightning && ml.temperature >= dewpoint + 12);
-      if(lightning) {
-         set_bit(ml.flag, _mflg_lightning);
-      }
+   ml.humidity    = mi_opt(_mi_key_humidity,    v, rand() % 101);
+   ml.temperature = mi_opt(_mi_key_temperature, v, rand() % 301 - 80);
+   i32  lrnd      = ml.temperature * 12 / 55;
+   i32  hrnd      = fastabs(ml.temperature / 2) * (ml.humidity / 40);
+   bool lightning = rand() % 99 < lrnd && !mi_flg(_mi_flag_nolightning);
+   bool any_rain  = rand() % 99 < hrnd && !mi_flg(_mi_flag_norain);
+   i32  rain      = _rain_none;
+   if(ml.humidity > 0 || ml.temperature > -70) {
       switch(CVarGetI(sc_sv_rain)) {
       case 1:
-         if(ml.humidity > 60 + dewpoint) {
+         if(any_rain) {
          case 2:
-            switch(get_msk(ml.flag, _mflg_env)) {
-            case _menv_hell: set_msk(ml.flag, _mflg_rain, _rain_blood); break;
-            default:         set_msk(ml.flag, _mflg_rain, _rain_rain);  break;
-            }
-         } else if(ml.temperature <= 0 && snow) {
-         case 3:
-            switch(get_msk(ml.flag, _mflg_env)) {
-            case _menv_hell: set_msk(ml.flag, _mflg_rain, _rain_fire); break;
-            default:         set_msk(ml.flag, _mflg_rain, _rain_snow); break;
+            switch(env) {
+            case _menv_hell:
+               if(ml.temperature >= 100) {rain = _rain_fire;}
+               else                      {rain = _rain_blood;}
+               break;
+            default:
+               if(ml.temperature <= 0) {rain = _rain_snow;}
+               else                    {rain = _rain_rain;}
+               break;
             }
          }
       }
@@ -152,11 +147,17 @@ script static void MInit(void) {
       set_bit(ml.flag, _mflg_vacuum);
       ml.humidity    = 0;
       ml.temperature = -270;
-      if(get_msk(ml.flag, _mflg_env) == _menv_abyss) {
-         set_msk(ml.flag, _mflg_rain, _rain_abyss);
+      if(env == _menv_abyss) {
+         rain = _rain_abyss;
       }
    }
-   set_msk(ml.flag, _mflg_sky, mi_opt(_mi_key_sky, v, CVarGetI(sc_sv_sky)));
+   if(EDataI(_edt_lightning) || lightning) {
+      set_bit(ml.flag, _mflg_lightning);
+   }
+   set_msk(ml.flag, _mflg_rain, rain);
+   set_msk(ml.flag, _mflg_func, func);
+   set_msk(ml.flag, _mflg_env,  env);
+   set_msk(ml.flag, _mflg_sky,  mi_opt(_mi_key_sky, v, CVarGetI(sc_sv_sky)));
    Dlg_MInit();
    SpawnBosses(pl.scoresum, false);
 }

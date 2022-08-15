@@ -14,7 +14,7 @@ class Lith_CopyEffect : Actor abstract {
       +Lith_CopyEffect.UpdateStates
    }
 
-   private readOnly uint m_flags;
+   readOnly uint m_flags;
 
    flagDef UpdatePos:    m_flags, 0;
    flagDef UpdateStates: m_flags, 1;

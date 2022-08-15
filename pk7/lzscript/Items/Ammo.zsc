@@ -11,8 +11,8 @@ class Lith_Ammo : Inventory abstract {
       +Inventory.KeepDepleted
    }
 
-   private transient string m_ammoText;
-   private transient string m_logText;
+   transient string m_ammoText;
+   transient string m_logText;
 
    void lith_absorbAmount(string logText, vector3 p, in out int amt) {
       int originalAmt = amt;

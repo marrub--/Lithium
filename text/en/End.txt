@@ -13,13 +13,8 @@
 !!include End/Normal.txt
 !!include End/TimeOut.txt
 
-!!include End/Lane/Dialogue.txt
 !!include End/Lane/IconOfSin.txt
-
-!!include End/Jem/Dialogue.txt
 !!include End/Jem/IconOfSin.txt
-
-!!include End/Ari/Dialogue.txt
 !!include End/Ari/IconOfSin.txt
 
 ## EOF

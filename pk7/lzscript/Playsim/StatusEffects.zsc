@@ -21,7 +21,7 @@ extend class Lith_HERMES {
 }
 
 extend class Lith_RenderProvider {
-   private ui int drawStatFx(RenderEvent evt, int y) {
+   ui int drawStatFx(RenderEvent evt, int y) {
       Lith_StatFx stat;
       let fnt = fntSml();
       int i = 0;

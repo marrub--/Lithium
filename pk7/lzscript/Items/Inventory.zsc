@@ -44,7 +44,7 @@ class Lith_InventoryItem : Inventory abstract {
    property Size:     m_w, m_h;
    property InfoPage: m_infoPage;
 
-   private void Lith_OnAttach(Actor mo) {
+   void Lith_OnAttach(Actor mo) {
    }
 
    bool Lith_OnBody() {
@@ -67,14 +67,14 @@ class Lith_InventoryItem : Inventory abstract {
       }
    }
 
-   private void Lith_CreateItem() {
+   void Lith_CreateItem() {
       switch(m_itemType) {
       case _itemt_item:    m_invItem = CallACS("Lith_ItemCreate");    break;
       case _itemt_bagitem: m_invItem = CallACS("Lith_BagItemCreate"); break;
       }
    }
 
-   private string Lith_GetName() {
+   string Lith_GetName() {
       return Lith_HERMES.localize("LITH_ITEM_TAG_" .. m_invName);
    }
 
@@ -140,11 +140,11 @@ class Lith_BasicPickup : Inventory {
       +CastSpriteShadow
    }
 
-   private meta string m_LogName;
-   private meta int    m_LogType;
-   private meta int    m_LogLevl;
+   meta string m_LogName;
+   meta int    m_LogType;
+   meta int    m_LogLevl;
 
-   private int m_Flags;
+   int m_Flags;
 
    string m_InfoPage;
 

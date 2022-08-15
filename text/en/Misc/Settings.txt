@@ -146,7 +146,6 @@
 == \#st_name_rain_0 | No rain
 == \#st_name_rain_1 | Environment-based
 == \#st_name_rain_2 | Always rain
-== \#st_name_rain_3 | Always snow
 
 == \#st_name_sky_0 | No change
 == \#st_name_sky_1 | Vanilla-like
@@ -240,14 +239,6 @@ The font to use when Japanese is set as the language.
 Changes the inverted palette to an orange one. My eyes, they're saved!
 
 == \#player_ammodisp | Display picked up ammo
-
-== \#player_bosstexts | Enable boss dialogues
-@@ \#TOOLTIP_player_bosstexts
-Content warning for boss dialogues: \cgSuicide, transphobia, ableism.\c-
-
-Please disable this if you need to! These dialogues are \cnnot vital
-to gameplay.
-
 == \#player_brightweps | Bright weapon pickups
 == \#player_damagebob | Bob view when damaged
 == \#player_damagebobmul | Damage bob multiplier

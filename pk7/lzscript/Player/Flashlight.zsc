@@ -18,7 +18,7 @@ extend class Lith_Player;
 
 Lith_SpotLight[2] m_light;
 
-private void tickFlashlight() {
+void tickFlashlight() {
    double intn = acs_scriptCall("Lith_GetFlashlightIntensity") / FIX;
 
    int r = clamp(lith_light_r, 0, 255);

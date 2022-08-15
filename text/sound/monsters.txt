@@ -60,16 +60,6 @@ enemies {
       }
    }
 
-   boss {
-      == lsnd/Monsters/Boss
-      talk1 Talk  # Doom 3
-      talk2 Talk2 # ^
-      $random talk {
-         talk1,
-         talk2,
-      }
-   }
-
    zombie {
       == lsnd/Monsters/ZombieMan
       ready Ready # Fallout 3

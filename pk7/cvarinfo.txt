@@ -95,7 +95,6 @@ server int lith_light_radius  = 400;
 
 server bool   lith_player_altinvuln     = false;
 server int    lith_player_ammodisp      = 2;
-server bool   lith_player_bosstexts     = true;
 server bool   lith_player_brightweps    = false;
 server bool   lith_player_damagebob     = true;
 server int    lith_player_itemdisp      = 1;

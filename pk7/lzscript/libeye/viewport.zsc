@@ -12,18 +12,18 @@
 
 struct Lith_Le_Viewport {
 
-	private vector2					scene_origin;
-	private vector2					scene_size;
+	vector2					scene_origin;
+	vector2					scene_size;
 
-	private vector2					viewport_origin;
-	private vector2					viewport_bound;
-	private vector2					viewport_size;
+	vector2					viewport_origin;
+	vector2					viewport_bound;
+	vector2					viewport_size;
 
-	private double					scene_aspect;
-	private double					viewport_aspect;
+	double					scene_aspect;
+	double					viewport_aspect;
 
-	private double					scale_f;
-	private vector2					scene_to_viewport;
+	double					scale_f;
+	vector2					scene_to_viewport;
 
 	ui void FromHud () const {
 		scene_aspect = Screen.GetAspectRatio();

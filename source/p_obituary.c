@@ -48,11 +48,8 @@ void Z_Obituary(void) {
       faststrcpy_str(pbuf, pset);
 
       i32 i = 0;
-      for(char *next = nil,
-               *word = faststrtok(pbuf, &next, '/');
-          word && i < _pn_max;
-          word = faststrtok(nil, &next, '/'))
-      {
+      for(char *next = nil, *word = faststrtok(pbuf, &next, '/');
+          word && i < _pn_max; word = faststrtok(nil, &next, '/')) {
          set[i++] = word;
       }
    }

@@ -455,25 +455,17 @@ void MonInfo_Monster(struct tokbuf *tb, struct err *res, i32 flags) {
          }
          break;
       }
-      case _moninfo_monster_hacks:
-         for(char *next, *hack = faststrtok(v, &next, ' '); hack;
-             hack = faststrtok(nil, &next, ' '))
-         {
-            switch(MonInfo_Monster_HackName(hack)) {
-            case _moninfo_hack_ch:
-               if(get_bit(wl.compat, _comp_ch)) {
-                  MonInfo_ColorfulHellHack(mi);
-               }
-               finished = true;
-               break;
-            default:
-               tb_err(tb, res, "invalid hack '%s'; expected "
-                      "ch",
-                      nil, _f, hack);
-               unwrap_retn();
+      case _moninfo_monster_hacks: {
+         i32 hacks = tb_rflag(tb, res, v, MonInfo_Monster_HackName);
+         unwrap(res);
+         if(get_bit(hacks, _moninfo_hack_ch)) {
+            if(get_bit(wl.compat, _comp_ch)) {
+               MonInfo_ColorfulHellHack(mi);
             }
+            finished = true;
          }
          break;
+      }
       default:
          tb_err(tb, res, "invalid key %s; expected "
                 "filter, "

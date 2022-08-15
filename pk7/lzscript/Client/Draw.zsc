@@ -46,22 +46,22 @@ struct FadeMsg {
 const DPTR_MAX = 8192;
 const TPTR_MAX = 8192*32;
 
-private DrawData[DPTR_MAX] m_d;
-private string  [TPTR_MAX] m_txt;
-private int     [TPTR_MAX] m_lnx;
-private int                m_tPtr;
-private int                m_dPtr;
-private FadeMsg[256]       m_fadeMsg;
-private vector2            m_virtualSize;
-private int                m_breakX;
-private bool               m_noDraw;
-private bool               m_english;
-private Font               m_uFntSml;
-private Font               m_lMidFont;
-private Font               m_lTrmFont;
-private Font               m_lBigFont;
-private Font               m_lJTrmFont;
-private Font               m_newConsoleFont;
+DrawData[DPTR_MAX] m_d;
+string  [TPTR_MAX] m_txt;
+int     [TPTR_MAX] m_lnx;
+int                m_tPtr;
+int                m_dPtr;
+FadeMsg[256]       m_fadeMsg;
+vector2            m_virtualSize;
+int                m_breakX;
+bool               m_noDraw;
+bool               m_english;
+Font               m_uFntSml;
+Font               m_lMidFont;
+Font               m_lTrmFont;
+Font               m_lBigFont;
+Font               m_lJTrmFont;
+Font               m_newConsoleFont;
 
 ui void drawAllData(RenderEvent evt) {
    int scw = 320, sch = 240;
@@ -399,7 +399,7 @@ static void LW(color cr = 0) {
    d.C = cr;
 }
 
-private void tickDraw() {
+void tickDraw() {
    m_dPtr = 0;
    m_tPtr = 0;
 

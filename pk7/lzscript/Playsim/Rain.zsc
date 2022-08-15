@@ -8,9 +8,9 @@
 
 class Lith_RainThinker : Thinker;
 
-private Actor        m_player;
-private class<Actor> m_rainDrop;
-private float        m_visDist;
+Actor        m_player;
+class<Actor> m_rainDrop;
+float        m_visDist;
 
 static Lith_RainThinker create() {
    class<Actor> rainDrop;

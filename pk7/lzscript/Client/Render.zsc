@@ -8,15 +8,15 @@
 
 class Lith_RenderProvider;
 
-private Lith_LineTracer m_tracer;
+Lith_LineTracer m_tracer;
 
-private bool m_showItems;
-private int  m_itemColor;
+bool m_showItems;
+int  m_itemColor;
 
-private ui textureId m_texBatteryOutline;
-private ui textureId m_texBattery;
+ui textureId m_texBatteryOutline;
+ui textureId m_texBattery;
 
-private int m_lightCurBattery, m_lightMaxBattery;
+int m_lightCurBattery, m_lightMaxBattery;
 
 static Lith_RenderProvider create() {
    let r = new("Lith_RenderProvider");
@@ -97,12 +97,12 @@ static clearscope void StartSound(Actor mo, sound snd, int slot, int flags, doub
    }
 }
 
-private void tickNearbyItems() {
+void tickNearbyItems() {
    m_showItems = lith_hud_showitems;
    m_itemColor = acs_executeWithResult(lsc_drawcr, lith_hud_itemcolor);
 }
 
-private ui void drawNearbyItems(RenderEvent evt) {
+ui void drawNearbyItems(RenderEvent evt) {
    if(!m_showItems) {
       return;
    }
@@ -125,12 +125,12 @@ private ui void drawNearbyItems(RenderEvent evt) {
    }
 }
 
-private void tickInventory() {
+void tickInventory() {
    m_lightMaxBattery = lith_light_battery * 35;
    m_lightCurBattery = Lith_UTIL.pData(_pdt_flashbattery);
 }
 
-private ui void drawInventory(RenderEvent evt) {
+ui void drawInventory(RenderEvent evt) {
    static const string keyClasses[] = {
       "BlueCard",  "RedCard",  "YellowCard",
       "BlueSkull", "RedSkull", "YellowSkull",
@@ -214,7 +214,7 @@ private ui void drawInventory(RenderEvent evt) {
    }
 }
 
-private clearScope int, int ammoAmt(Actor mo, class<Lith_Ammo> ty) const {
+clearScope int, int ammoAmt(Actor mo, class<Lith_Ammo> ty) const {
    let inv = mo.findInventory(ty);
    int amt = inv.amount;
    int max = inv.maxAmount;

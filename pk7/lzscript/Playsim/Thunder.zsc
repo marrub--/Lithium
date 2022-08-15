@@ -8,8 +8,8 @@
 
 class Lith_ThunderThinker : Thinker;
 
-private int          m_time, m_next, m_len, m_speed, m_nextSnd;
-private array<int16> m_lights;
+int          m_time, m_next, m_len, m_speed, m_nextSnd;
+array<int16> m_lights;
 
 static Lith_ThunderThinker create() {
    if(!Lith_UTIL.pData(_pdt_mflg, _mflg_thunder) ||
@@ -25,7 +25,7 @@ static Lith_ThunderThinker create() {
    return th;
 }
 
-private void setFlash() {
+void setFlash() {
    int oldNext = m_next;
    if(random(0, 255) < 50) {
       m_next = random(16, 31);

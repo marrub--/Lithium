@@ -13,13 +13,13 @@
 
 extend class Lith_RenderProvider;
 
-private Lith_Le_Viewport   viewport;
-private Lith_Le_ProjScreen proj;
-private Lith_Le_GlScreen   projGl;
-private Lith_Le_SwScreen   projSw;
-private CVar               cvarRenderer;
+Lith_Le_Viewport   viewport;
+Lith_Le_ProjScreen proj;
+Lith_Le_GlScreen   projGl;
+Lith_Le_SwScreen   projSw;
+CVar               cvarRenderer;
 
-private void projectSetRenderer() {
+void projectSetRenderer() {
    let oldProj = proj;
    switch(cvarRenderer.getInt()) {
    default:        proj = projGl; break;
@@ -30,7 +30,7 @@ private void projectSetRenderer() {
    }
 }
 
-private ui void projectSetUp(RenderEvent evt) {
+ui void projectSetUp(RenderEvent evt) {
    viewport.fromHud();
    proj.cacheResolution();
    proj.cacheFov(players[consolePlayer].fov);
@@ -60,7 +60,7 @@ clearScope int, int, bool project(vector3 v) {
    return int(scrn.x), int(scrn.y), vis;
 }
 
-private void projectRegister() {
+void projectRegister() {
    projGl = new("Lith_Le_GlScreen");
    projSw = new("Lith_Le_SwScreen");
    cvarRenderer = CVar.getCVar("vid_rendermode", players[consolePlayer]);

@@ -8,8 +8,8 @@
 
 class Lith_MultiSpawner : Actor;
 
-private meta int          m_Num;
-private meta class<Actor> m_Name;
+meta int          m_Num;
+meta class<Actor> m_Name;
 
 property Amount: m_Num;
 property Type:   m_Name;

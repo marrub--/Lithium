@@ -90,11 +90,8 @@ void BipInfo_Page(struct tokbuf *tb, struct err *res, struct page const *templat
          break;
       case _bipinfo_page_unl: {
          i32 i = 0;
-         for(char *next = nil,
-                  *word = faststrtok(v, &next, ' ');
-             word;
-             word = faststrtok(nil, &next, ' '))
-         {
+         for(char *next = nil, *word = faststrtok(v, &next, ' '); word;
+             word = faststrtok(nil, &next, ' ')) {
             page->unlocks[i++] = BipStr(word);
          }
          break;
@@ -116,31 +113,15 @@ static
 struct page BipInfo_Template(struct tokbuf *tb, struct err *res) {
    struct token *tok = tb_reget(tb);
    struct page template = {};
-
-   for(char *next = nil,
-            *word = faststrtok(tok->textV, &next, ' ');
-       word;
-       word = faststrtok(nil, &next, ' '))
-   {
-      switch(BipInfo_Template_Name(word)) {
-      #define bip_category_x(name) \
-      case _bipinfo_template_##name: \
-         template.category = _bipc_##name; \
-         break;
-      #include "p_bip.h"
-      case _bipinfo_template_auto:
-         set_bit(template.flags, _page_auto);
-         break;
-      default:
-         /* TODO: make a function for generating proper lists */
-         tb_err(tb, res, "invalid word %s; expected "
-                #define bip_category_x(name) #name ", "
-                #include "p_bip.h"
-                "auto, "
-                "or `\"'",
-                tok, _f, word);
-         unwrap_retn();
-      }
+   i32 tflags = tb_rflag(tb, res, tok->textV, BipInfo_Template_Name);
+   unwrap(res);
+   #define bip_category_x(name) \
+   if(get_bit(tflags, _bipinfo_template_##name)) { \
+      template.category = _bipc_##name; \
+   }
+   #include "p_bip.h"
+   if(get_bit(tflags, _bipinfo_template_auto)) {
+      set_bit(template.flags, _page_auto);
    }
    return template;
 }

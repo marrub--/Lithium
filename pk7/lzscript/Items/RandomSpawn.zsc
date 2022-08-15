@@ -8,8 +8,8 @@
 
 class Lith_RandomSpawn : Actor;
 
-private meta int m_SpawnNum;
-private class<Actor> m_Type;
+meta int m_SpawnNum;
+class<Actor> m_Type;
 
 property SpawnNum: m_SpawnNum;
 

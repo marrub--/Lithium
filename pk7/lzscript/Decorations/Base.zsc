@@ -17,8 +17,8 @@ class Lith_SwitchableDecor : Actor {
       +CastSpriteShadow
    }
 
-   private meta sound m_IdleNoise;
-   private meta double m_Volume;
+   meta sound m_IdleNoise;
+   meta double m_Volume;
 
    property Noise: m_IdleNoise;
    property Volume: m_Volume;
@@ -69,8 +69,8 @@ class Lith_DestructableSwitchDecor : Lith_SwitchableDecor {
 }
 
 class Lith_FlareDecor : Lith_DestructableSwitchDecor {
-   private meta class<Actor> m_Type;
-   private Actor m_Flare;
+   meta class<Actor> m_Type;
+   Actor m_Flare;
 
    property Type: m_Type;
 

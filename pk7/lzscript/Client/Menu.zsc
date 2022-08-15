@@ -7,15 +7,15 @@
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
 class Lith_MenuDelegate : MenuDelegateBase {
-   private ui ListMenuDescriptor     m_lastDesc;
-   private ui ListMenuItemSelectable m_lastSel;
-   private ui vector2                m_selPos;
+   ui ListMenuDescriptor     m_lastDesc;
+   ui ListMenuItemSelectable m_lastSel;
+   ui vector2                m_selPos;
 
-   private ui static vector2 getSelPos(ListMenuItemSelectable sel) {
+   ui static vector2 getSelPos(ListMenuItemSelectable sel) {
       return sel ? (sel.getX() - 8.0, sel.getY() + sel.mHeight / 4.0) : (0, 0);
    }
 
-   private ui static ListMenuItemSelectable getSelItem(ListMenuDescriptor desc, int which) {
+   ui static ListMenuItemSelectable getSelItem(ListMenuDescriptor desc, int which) {
       return which >= 0 && which < desc.mItems.size() ?
          ListMenuItemSelectable(desc.mItems[which]) :
          null;
@@ -183,9 +183,9 @@ class Lith_SkillEpMenu : ListMenu {
 
 extend class Lith_RenderProvider;
 
-private ui int              m_screenDim;
-private ui Shape2DTransform m_menuRectXf;
-private ui Shape2D          m_menuRect;
+ui int              m_screenDim;
+ui Shape2DTransform m_menuRectXf;
+ui Shape2D          m_menuRect;
 
 ui void tickMenu() {
    if(!m_menuRectXf) {

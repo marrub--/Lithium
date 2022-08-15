@@ -24,7 +24,7 @@ static clearScope string readLump(int lump) {
 
 static clearScope int getMapInfoLump() {
    int id = Wads.checkNumForName(level.mapName, Wads.ns_global);
-   if(id >= 0 && Wads.getLumpFullName(++id) ~== "TEXTMAP") {
+   if(id != -1 && Wads.getLumpFullName(++id) ~== "TEXTMAP") {
       int numl = Wads.getNumLumps();
       while(id < numl) {
          let name = Wads.getLumpFullName(++id);

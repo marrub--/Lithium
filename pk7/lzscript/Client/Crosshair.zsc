@@ -12,10 +12,10 @@
 
 extend class Lith_RenderProvider;
 
-private uint8 m_xhairR, m_xhairG, m_xhairB, m_xhairA, m_xhairStyle;
-private bool m_xhairEnable, m_xhairEnableJuicer;
+uint8 m_xhairR, m_xhairG, m_xhairB, m_xhairA, m_xhairStyle;
+bool m_xhairEnable, m_xhairEnableJuicer;
 
-private void tickCrosshair() {
+void tickCrosshair() {
    m_xhairR            = clamp(lith_xhair_r, 0, 255);
    m_xhairG            = clamp(lith_xhair_g, 0, 255);
    m_xhairB            = clamp(lith_xhair_b, 0, 255);
@@ -49,7 +49,7 @@ clearScope textureId xhairW() const {
    return getTex(XW_GFX[m_xhairStyle]);
 }
 
-private ui void drawCrosshair(RenderEvent evt) {
+ui void drawCrosshair(RenderEvent evt) {
    let pl = evt.camera;
 
    vector3 viewPos = (evt.viewPos.xy, evt.viewPos.z - pl.player.viewHeight + lith_hermes.getAttackHeight(pl));

@@ -161,7 +161,7 @@ default {
    +RollCenter
 }
 
-private double m_rollSpeed;
+double m_rollSpeed;
 
 override void postBeginPlay() {
    super.postBeginPlay();

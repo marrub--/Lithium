@@ -40,6 +40,8 @@ i32 Z_LPData(i32 info, i32 permutation) {
    case _pdt_mfunc:        return get_msk(ml.flag, _mflg_func);
    case _pdt_mphantom:     return get_msk(ml.flag, _mflg_boss);
    case _pdt_msky:         return get_msk(ml.flag, _mflg_sky);
+   case _pdt_temperature:  return ml.temperature;
+   case _pdt_humidity:     return ml.humidity;
    }
    return 0;
 }

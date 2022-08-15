@@ -323,61 +323,6 @@ void P_bossText(void) {
       }
       pl.logB(1, tmpstr(lang(sl_log_bosshear3)));
    }
-
-   if(!cv.player_bosstexts) return;
-
-   cstr fmt;
-   switch(ml.boss) {
-   default:
-      return;
-   case boss_iconofsin:
-      if(division) fmt = LANG "BOSS_DIV_%i";
-      else         fmt = LANG "BOSS_IOS_%i_%s";
-      break;
-   }
-
-   pl.logB(1, tmpstr(lang(sl_log_bosshear1)));
-   pl.logB(1, tmpstr(lang(sl_log_bosshear2)));
-
-   ACS_Delay(35 * 4);
-
-   WaitPause();
-
-   i32 t = 35 * 10 * (division ? 8 : 10);
-   str text;
-   for(i32 i = 0, j = 1; i < t; i++) {
-      if(i % (35 * 7) == 0) {
-         k32 di = ACS_RandomFixed(0.1, 0.2);
-         k32 fa = ACS_RandomFixed(0.1, 0.6);
-         k32 ft = ACS_RandomFixed(0.1, 1.0);
-         k32 ya = ACS_RandomFixed(0.0, 0.6);
-         k32 pt = ACS_RandomFixed(0.2, 1.1);
-         k32 ys = ACS_Sin(ya), yc = ACS_Cos(ya);
-
-         pl.bobyaw   += ys * di;
-         pl.bobpitch += yc * di;
-
-         ACS_FadeTo(255, 0, 0, fa, 0.0);
-         ACS_FadeTo(255, 0, 0, 0.0, ft);
-
-         StartSound(ss_enemies_boss_talk, lch_voice2, CHANF_LOCAL, 1.0, 1.0, pt);
-
-         SetFade(fid_bosstext, 35 * 3, 1);
-         text = lang_fmt_discrim(fmt, j);
-         if(!text) {
-            break;
-         }
-
-         j++;
-      }
-
-      if(CheckFade(fid_bosstext)) {
-         SetSize(640, 480);
-         PrintTextF_str(text, sf_bigupper, CR_WHITE, 320,4, 100,0, fid_bosstext);
-      }
-
-      PausableTick();
-   }
 }
 
 alloc_aut(0) stkcall static i32 P_playerColor(void) {

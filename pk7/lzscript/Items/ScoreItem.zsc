@@ -8,7 +8,7 @@
 
 class Lith_ScoreItem : Lith_BasicPickup;
 
-private meta int m_Score;
+meta int m_Score;
 
 property Score: m_Score;
 

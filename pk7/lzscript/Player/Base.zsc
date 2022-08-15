@@ -24,7 +24,7 @@ default {
 
 meta double m_vBob;
 
-private double m_rainLerp;
+double m_rainLerp;
 
 int m_iFrames;
 int m_shield;
@@ -104,7 +104,7 @@ override void playerThink() {
    super.playerThink();
 }
 
-private void Lith_RainEffect() {
+void Lith_RainEffect() {
    PpShader.setUniform1f("Lith_Rain", "lith_t", level.time / 15.);
    PpShader.setUniform1f("Lith_Rain", "lith_m", m_rainLerp);
 
@@ -122,7 +122,7 @@ private void Lith_RainEffect() {
    }
 }
 
-private void Lith_ItemVacuum() {
+void Lith_ItemVacuum() {
    if(__lith_fun & lfun_bips) {
       for(let it = BlockThingsIterator.Create(self, 70); it.next();) {
          if(Inventory(it.thing)) {

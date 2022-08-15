@@ -40,6 +40,8 @@ enum Lith_PData {
    _pdt_mfunc,
    _pdt_mphantom,
    _pdt_msky,
+   _pdt_temperature,
+   _pdt_humidity,
 };
 
 

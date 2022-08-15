@@ -128,13 +128,13 @@ default {
    +Inventory.Quiet
 }
 
-private meta class<Lith_Ammo> m_type, m_type2;
-private int m_amount, m_amount2;
+meta class<Lith_Ammo> m_type, m_type2;
+int m_amount, m_amount2;
 
 property Give:  m_type,  m_amount;
 property Give2: m_type2, m_amount2;
 
-private bool lith_ammoNotFull(Actor mo) {
+bool lith_ammoNotFull(Actor mo) {
    let t1 = m_type;
    let t2 = m_type2;
    let a1 = m_amount;
@@ -159,7 +159,7 @@ override bool canPickup(Actor mo) {
    }
 }
 
-private void lith_absorbAmmo(Actor mo, class<Lith_Ammo> ty, in out int amt) {
+void lith_absorbAmmo(Actor mo, class<Lith_Ammo> ty, in out int amt) {
    if(!ty) return;
 
    if(mo is "Lith_ThothPlayer") {ty = "Lith_ManaAmmo"; amt *= 7;}

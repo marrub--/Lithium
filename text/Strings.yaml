@@ -82,7 +82,6 @@ sc_:
    - light_regen
 
    - player_ammodisp
-   - player_bosstexts
    - player_damagebob
    - player_damagebobmul
    - player_footstepvol
@@ -634,7 +633,6 @@ sl_:
 ## Sounds
 ss_:
    NO_PREFIX:
-   - enemies_boss_talk:        enemies/boss/talk
    - enemies_phantom_escape:   enemies/phantom/escape
    - enemies_phantom_spawned:  enemies/phantom/spawned
    - marathon_pickup:          marathon/pickup

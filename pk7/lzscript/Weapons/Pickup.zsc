@@ -110,7 +110,7 @@ default {
    Lith_WeaponPickup.Glow "Lith_WeapGlow";
 }
 
-private meta int m_wepName;
+meta int m_wepName;
 
 property WepName: m_wepName;
 

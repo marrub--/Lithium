@@ -42,8 +42,8 @@ default {
    +INVENTORY.ISARMOR
 }
 
-private int    m_save0, m_save1;
-private double m_speed;
+int    m_save0, m_save1;
+double m_speed;
 
 protected int m_curSave;
 

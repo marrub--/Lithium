@@ -62,7 +62,7 @@ default {
 int m_Phase;
 int m_MeleeTime;
 
-private int m_Step;
+int m_Step;
 
 virtual void Lith_PostInit() {
    CallACS("Lith_PhantomSound");

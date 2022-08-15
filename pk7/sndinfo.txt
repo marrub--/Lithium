@@ -111,9 +111,6 @@ enemies/ios/crack3 lsnd/Monsters/IoS/Crack3
 enemies/ios/crack4 lsnd/Monsters/IoS/Crack4
 enemies/ios/crack5 lsnd/Monsters/IoS/Crack5
 $random enemies/ios/crack { enemies/ios/crack1 enemies/ios/crack2 enemies/ios/crack3 enemies/ios/crack4 enemies/ios/crack5 }
-enemies/boss/talk1 lsnd/Monsters/Boss/Talk
-enemies/boss/talk2 lsnd/Monsters/Boss/Talk2
-$random enemies/boss/talk { enemies/boss/talk1 enemies/boss/talk2 }
 enemies/zombie/ready lsnd/Monsters/ZombieMan/Ready
 enemies/zombie/fire lsnd/Monsters/ZombieMan/Fire
 $attenuation enemies/zombie/fire 0.5

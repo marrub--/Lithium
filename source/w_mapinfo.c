@@ -23,7 +23,7 @@ static void ReadKeys(struct tokbuf *tb, struct err *res, struct map_info *mi) {
       i32 key = MapInfoKeyName(k);
       set_bit(mi->use, key);
       switch(key) {
-      case _mi_key_dewpoint:
+      case _mi_key_humidity:
       case _mi_key_seed:
       case _mi_key_temperature:
          mi->keys[key] = faststrtoi32(v);

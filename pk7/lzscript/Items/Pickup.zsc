@@ -65,34 +65,34 @@ class Lith_UpgrGlow : Lith_ItemGlow {
 }
 
 mixin class Lith_Pickup {
-   private meta int m_PkFlags;
+   meta int m_PkFlags;
 
-   private meta string m_PkSprGf;
+   meta string m_PkSprGf;
 
-   private meta string m_PkSprAf;
-   private meta string m_PkSprCf;
-   private meta string m_PkSprDf;
-   private meta string m_PkSprIf;
-   private meta string m_PkSprMf;
-   private meta string m_PkSprTf;
-   private meta string m_PkSprWf;
+   meta string m_PkSprAf;
+   meta string m_PkSprCf;
+   meta string m_PkSprDf;
+   meta string m_PkSprIf;
+   meta string m_PkSprMf;
+   meta string m_PkSprTf;
+   meta string m_PkSprWf;
 
-   private int m_PkGlA;
-   private int m_PkGlZ;
+   int m_PkGlA;
+   int m_PkGlZ;
 
-   private Actor m_PkSpr;
+   Actor m_PkSpr;
 
-   private Lith_Sprite m_PkSprG;
+   Lith_Sprite m_PkSprG;
 
-   private Lith_Sprite m_PkSprA;
-   private Lith_Sprite m_PkSprC;
-   private Lith_Sprite m_PkSprD;
-   private Lith_Sprite m_PkSprI;
-   private Lith_Sprite m_PkSprM;
-   private Lith_Sprite m_PkSprT;
-   private Lith_Sprite m_PkSprW;
+   Lith_Sprite m_PkSprA;
+   Lith_Sprite m_PkSprC;
+   Lith_Sprite m_PkSprD;
+   Lith_Sprite m_PkSprI;
+   Lith_Sprite m_PkSprM;
+   Lith_Sprite m_PkSprT;
+   Lith_Sprite m_PkSprW;
 
-   private meta class<Actor> m_PkGlow;
+   meta class<Actor> m_PkGlow;
 
    property Sprite: m_PkSprGf;
 

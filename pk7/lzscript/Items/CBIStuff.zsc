@@ -78,7 +78,7 @@ default {
    +Inventory.AlwaysPickup
 }
 
-private meta int m_upgNum;
+meta int m_upgNum;
 
 property UpgrNum: m_upgNum;
 

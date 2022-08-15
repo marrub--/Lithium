@@ -12,12 +12,12 @@ class Lith_STATUS : DoomStatusScreen;
 Font m_Font;
 int  m_Souls;
 
-private void Lith_DrawSetq(int x, int y, string text) {
+void Lith_DrawSetq(int x, int y, string text) {
    int lh = m_Font.getHeight() * 3 / 2;
    Screen.DrawText(m_Font, Font.CR_GREEN, x, 60+lh*y, text, DTA_Clean, true);
 }
 
-private void Lith_DrawPrct(int y, string text, int n, int m) {
+void Lith_DrawPrct(int y, string text, int n, int m) {
    Lith_DrawSetq(50+y*2, y, text);
 
         if(n < 0) text = "'...)";
@@ -27,7 +27,7 @@ private void Lith_DrawPrct(int y, string text, int n, int m) {
    Lith_DrawSetq(210, y, text);
 }
 
-private void Lith_DrawCent(int x, int y, string text) {
+void Lith_DrawCent(int x, int y, string text) {
    Screen.DrawText(m_Font, Font.CR_GREEN, x - m_Font.stringWidth(text) / 2, y, text, DTA_Clean, true);
 }
 

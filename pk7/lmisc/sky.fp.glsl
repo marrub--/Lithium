@@ -54,7 +54,7 @@ float AddStarField(vec2 samplePosition, float threshold) {
 
 vec4 Process(vec4 color) {
    vec2  uv   = gl_TexCoord[0].st;
-   float star = AddStarField(uv * vec2(20.0, 10.0), 0.0007);
+   float star = AddStarField(uv * vec2(80.0, 10.0), 0.0007);
    vec3  sky  = texture(lith_skyColorTex, vec2(0)).rgb;
    return vec4(min(sky * uv.y + star, 1.0), 1.0) * color;
 }

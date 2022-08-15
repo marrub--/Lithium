@@ -25,34 +25,32 @@ const fire_canvas_w = 64;
 const fire_canvas_h = 128;
 
 /* all modes */
-private Canvas    m_skyCanvas;
-private textureId m_sky, m_prevSky1, m_prevSky2;
-private int       m_skyMode, m_skyRain;
-
-/* shader mode */
-private color m_skyColor;
+Canvas    m_skyCanvas;
+textureId m_sky, m_prevSky1, m_prevSky2;
+int       m_skyMode, m_skyRain;
+color     m_skyColor;
 
 /* canvas mode */
-private textureId m_skyBase, m_skyGradient;
-private int       m_skyBaseSw, m_skyBaseSh, m_skyBaseDw, m_skyBaseDh, m_skyBaseY;
-private double    m_skySpeed;
+textureId m_skyBase, m_skyGradient;
+int       m_skyBaseSw, m_skyBaseSh, m_skyBaseDw, m_skyBaseDh, m_skyBaseY;
+double    m_skySpeed;
 
 /* electric storms */
-private textureId m_skyLightning;
-private int       m_skyFlash, m_skyFlashLen, m_skyFlashPos;
-private color     m_skyFlashColor;
+textureId m_skyLightning;
+int       m_skyFlash, m_skyFlashLen, m_skyFlashPos;
+color     m_skyFlashColor;
 
 /* firestorms */
-private Canvas                               m_skyFireCanvas;
-private uint8[fire_canvas_w * fire_canvas_h] m_skyFire;
+Canvas                               m_skyFireCanvas;
+uint8[fire_canvas_w * fire_canvas_h] m_skyFire;
 
 /* clouds */
-private textureId m_skyClouds;
-private int       m_skyCloudsStyle, m_skyCloudsW, m_skyCloudsH;
-private color     m_skyCloudsColor;
+textureId m_skyClouds;
+int       m_skyCloudsStyle, m_skyCloudsW, m_skyCloudsH;
+color     m_skyCloudsColor;
 
 /* callbacks */
-private void tickSky() {
+void tickSky() {
    if(m_skyMode == _msky_nochange) {
       return;
    }
@@ -66,14 +64,14 @@ private void tickSky() {
    m_prevSky2 = level.skyTexture2;
 }
 
-ui private void drawSky(RenderEvent evt) {
+ui void drawSky(RenderEvent evt) {
    if(m_skyMode == _msky_nochange) {
       return;
    }
    let  delta = level.time - m_skyFlash;
    let bDelta = delta >= 0 && delta < m_skyFlashLen;
    let vDelta = bDelta ? 1.0f - (delta + evt.fracTic) / float(m_skyFlashLen) : 0.0f;
-   m_skyCanvas.clearScreen("black");
+   m_skyCanvas.dim("black", 1.0, 0, 0, canvas_w, canvas_h);
    if(m_skyMode == _msky_shader) {
       let cr = m_skyColor;
       if(bDelta) {
@@ -83,7 +81,7 @@ ui private void drawSky(RenderEvent evt) {
             min(int(cr.g * 5.0f * vDelta), 255),
             min(int(cr.b * 5.0f * vDelta), 255));
       }
-      m_skyCanvas.clearScreen(cr);
+      m_skyCanvas.dim(cr, 1.0, 0, 0, canvas_w, canvas_h);
    } else {
       int dw = m_skyBaseDw, dh = m_skyBaseDh;
       int sw = m_skyBaseSw, sh = m_skyBaseSh;
@@ -104,6 +102,7 @@ ui private void drawSky(RenderEvent evt) {
          }
       }
       m_skyCanvas.drawTexture(m_skyGradient, true, 0, 0, DTA_DestHeight,dh,DTA_DestWidth,canvas_w, DTA_FlipY,true);
+      m_skyCanvas.dim(m_skyColor, m_skyColor.a / 400.0, 0, 0, canvas_w, canvas_h, STYLE_Add);
       if(bDelta) {
          m_skyCanvas.dim("white", vDelta * 0.2f, 0, 0, canvas_w, dh, STYLE_Add);
       }
@@ -111,8 +110,11 @@ ui private void drawSky(RenderEvent evt) {
 }
 
 void replaceSky() {
+   m_skyFlash    = 0;
+   m_skyFlashLen = 0;
    m_sky.setInvalid();
    m_skyClouds.setInvalid();
+   let fog          = Lith_HERMES.instance().m_fogColor;
    let skyB         = getTex("LITHBSKY");
    let skyC         = getTex("LITHCSKY");
    m_skyGradient    = getTex("LITHSKGR");
@@ -127,7 +129,7 @@ void replaceSky() {
       color cr;
       /* no atmosphere...? */
       if(Lith_UTIL.pData(_pdt_mflg, _mflg_vacuum)) {
-         cr = "black";
+         cr = 0xFF000000;
       } else {
          switch(Lith_UTIL.pData(_pdt_menv)) {
          case _menv_evil:       cr = 0xFFFF0000; break;
@@ -145,7 +147,12 @@ void replaceSky() {
                min(int(cr.b * 1.437f), 255));
          }
       }
-      /* TODO: other env. factors such as humidity */
+      cr = color(
+         255,
+         min(cr.r + int(fog.r * (fog.a / 255.0)), 255),
+         min(cr.g + int(fog.g * (fog.a / 255.0)), 255),
+         min(cr.b + int(fog.b * (fog.a / 255.0)), 255)
+      );
       m_skyColor = cr;
       setSky(skyB);
       setSkyBase(skyC, 0.0);
@@ -158,9 +165,9 @@ void replaceSky() {
       case _menv_abyss:      setSkyBase(getTex("LITHWHIT"), 0.0);   break;
       default:               setSkyBase(getTex("LITHSKST"), 0.0);   break;
       }
-      /* TODO: other env. factors such as humidity */
    case _msky_vanilla:
       setSky(skyC);
+      m_skyColor = Lith_HERMES.instance().m_fogColor;
       break;
    }
    if(m_skyMode != _msky_shader) {
@@ -183,13 +190,13 @@ void replaceSky() {
 }
 
 /* firestorms */
-private void initSkyFire() {
+void initSkyFire() {
    for(int src = 0; src < m_skyFire.size(); ++src) {
       m_skyFire[src] = src < fire_canvas_w * (fire_canvas_h - 1) ? 0 : fire_pal.size() - 1;
    }
 }
 
-private void tickSkyFire() {
+void tickSkyFire() {
    for(int src = fire_canvas_w; src < m_skyFire.size(); ++src) {
       if(m_skyFire[src] == 0) {
          m_skyFire[src - fire_canvas_w] = 0;
@@ -209,7 +216,7 @@ private void tickSkyFire() {
 }
 
 /* setters */
-private void setSky(textureId sky) const {
+void setSky(textureId sky) const {
    let st1 = level.skyTexture1;
    let st2 = level.skyTexture2;
    let dblBefore = checkDoubleSky(st1, st2);
@@ -228,7 +235,7 @@ private void setSky(textureId sky) const {
    m_prevSky2  = level.skyTexture2;
 }
 
-private void setSkyBase(textureId tex, double skySpeed) {
+void setSkyBase(textureId tex, double skySpeed) {
    m_skySpeed = skySpeed;
    m_skyBase  = tex;
    [m_skyBaseSw, m_skyBaseSh] = TexMan.getSize(m_skyBase);
@@ -252,7 +259,7 @@ private void setSkyBase(textureId tex, double skySpeed) {
    }
 }
 
-private void setSkyClouds(textureId tex, int style = STYLE_Normal, color cr = 0xFFFFFFFF) {
+void setSkyClouds(textureId tex, int style = STYLE_Normal, color cr = 0xFFFFFFFF) {
    m_skyClouds      = tex;
    m_skyCloudsColor = cr;
    m_skyCloudsStyle = style;
@@ -273,7 +280,7 @@ void setSkyFlash(int skyFlash, int skyFlashLen) {
    }
 }
 
-private clearScope static bool checkDoubleSky(textureId st1, textureId st2) {
+clearScope static bool checkDoubleSky(textureId st1, textureId st2) {
    if(level.info.flags & LEVEL_DOUBLESKY) {
       int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
       if(st1.isValid()) {

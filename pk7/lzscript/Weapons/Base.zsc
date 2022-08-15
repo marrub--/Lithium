@@ -77,20 +77,20 @@ int m_fired;
 int m_max;
 int m_firePattern;
 
-private meta sound m_scopeOutSnd;
-private meta sound m_scopeInSnd;
-private meta double m_scopeZoom;
-private meta double m_defaultSpeed;
-private meta double m_sprintSpeed;
+meta sound m_scopeOutSnd;
+meta sound m_scopeInSnd;
+meta double m_scopeZoom;
+meta double m_defaultSpeed;
+meta double m_sprintSpeed;
 
-private meta class<Actor> m_spawnType;
+meta class<Actor> m_spawnType;
 
-private bool m_side;
-private float m_speedUp;
+bool m_side;
+float m_speedUp;
 
 protected bool m_ads;
 
-private class<Lith_Ammo> m_ammoType;
+class<Lith_Ammo> m_ammoType;
 
 property AmmoType: m_ammoType;
 property MagSize:  m_max;
