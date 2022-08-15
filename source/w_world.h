@@ -35,6 +35,7 @@ w_mapkey_x(humidity)
 w_mapkey_x(seed)
 w_mapkey_x(sky)
 w_mapkey_x(temperature)
+w_mapkey_x(windspeed)
 #undef w_mapkey_x
 #elif !defined(w_world_h)
 #define w_world_h
@@ -81,6 +82,7 @@ enum ZscName(PData) {
    _pdt_msky,
    _pdt_temperature,
    _pdt_humidity,
+   _pdt_windspeed,
 };
 
 /* External Data */
@@ -104,6 +106,7 @@ enum ZscName(EData) {
    _edt_origsky2,
    _edt_sky1,
    _edt_sky2,
+   _edt_windspeed,
 };
 
 enum ZscName(Fun) {
@@ -352,6 +355,7 @@ struct map_locals {
    i32 mission;
    i32 temperature;
    i32 humidity;
+   i32 windspeed;
    i32 soulsfreed;
    i32 boss;
    str name;

@@ -42,6 +42,7 @@ enum Lith_PData {
    _pdt_msky,
    _pdt_temperature,
    _pdt_humidity,
+   _pdt_windspeed,
 };
 
 
@@ -65,6 +66,7 @@ enum Lith_EData {
    _edt_origsky2,
    _edt_sky1,
    _edt_sky2,
+   _edt_windspeed,
 };
 
 enum Lith_Fun {

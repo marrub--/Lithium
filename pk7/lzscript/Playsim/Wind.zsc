@@ -1,0 +1,44 @@
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
+
+class Lith_WindThinker : Thinker;
+
+Actor   m_player;
+vector2 m_windVec;
+double  m_angle, m_speed, m_maxSpeed;
+int     m_timerRnd;
+
+static Lith_WindThinker create() {
+   let th = new('Lith_WindThinker');
+   th.m_maxSpeed = Lith_UTIL.pData(_pdt_windspeed);
+   th.m_player   = players[consolePlayer].mo;
+   if(th.m_player) {
+      th.m_player.a_startSound("amb/wind", lch_weather1, CHANF_LOOP, 0.001, ATTN_NONE);
+   }
+   return th;
+}
+
+override void tick() {
+   if(level.isFrozen()) {
+      return;
+   }
+   m_speed += fRandom(-0.001, 0.001);
+   if(level.time & m_timerRnd) {
+      return;
+   }
+   float r    = fRandomPick(1.0, 2.5, 5.0, 6.0, 7.0, 10.0, 20.0, 30.0, 45.0);
+   m_speed    = fRandom(0.0, m_maxSpeed);
+   m_angle   += fRandom(-r, r);
+   m_windVec  = (cos(m_angle) * m_speed, sin(m_angle) * m_speed);
+   m_timerRnd = randomPick(7, 15, 63, 255, 511, 2047, 4095);
+   if(m_player) {
+      m_player.a_soundVolume(lch_weather1, m_speed / 110.0);
+   }
+}
+
+/* EOF */

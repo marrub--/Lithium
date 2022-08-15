@@ -26,6 +26,7 @@ static void ReadKeys(struct tokbuf *tb, struct err *res, struct map_info *mi) {
       case _mi_key_humidity:
       case _mi_key_seed:
       case _mi_key_temperature:
+      case _mi_key_windspeed:
          mi->keys[key] = faststrtoi32(v);
          break;
       case _mi_key_environment:

@@ -9,12 +9,13 @@
 #include "lzscript/Playsim/Cyberspace.zsc"
 #include "lzscript/Playsim/Files.zsc"
 #include "lzscript/Playsim/Input.zsc"
+#include "lzscript/Playsim/Lightning.zsc"
 #include "lzscript/Playsim/Monsters.zsc"
 #include "lzscript/Playsim/Player.zsc"
 #include "lzscript/Playsim/Rain.zsc"
 #include "lzscript/Playsim/StatusEffects.zsc"
-#include "lzscript/Playsim/Lightning.zsc"
 #include "lzscript/Playsim/Weapons.zsc"
+#include "lzscript/Playsim/Wind.zsc"
 #include "lzscript/Playsim/World.zsc"
 
 /* HERMES: Horribly Explicit and Rudimentary Methods for Extended Scripting */
@@ -25,11 +26,12 @@ name m_dmgType;
 bool m_dmgWorld;
 int m_bossLevel;
 color m_fogColor;
-private array<Actor> m_bossBabies;
-private int m_bossDeathInit;
-private bool m_extraHard;
-private Lith_LightningThinker m_lightning;
-private Lith_RainThinker m_rain;
+array<Actor> m_bossBabies;
+int m_bossDeathInit;
+bool m_extraHard;
+Lith_LightningThinker m_lightning;
+Lith_RainThinker m_rain;
+Lith_WindThinker m_wind;
 
 override void worldLoaded(WorldEvent ev) {
    m_extraHard = lith_sv_extrahard;
@@ -68,13 +70,14 @@ void setUpEnvironment() {
    if(vacuum) {
       level.gravity *= 0.2;
    }
+   m_wind      = Lith_WindThinker.create();
    m_lightning = Lith_LightningThinker.create();
    m_rain      = Lith_RainThinker.create();
    m_fogColor  = color(
       int(humidity * 2.55),
-      clamp(int(temperature * 0.8375), 0, 255),
-      clamp(int(abs(temperature * 0.2375)), 0, 255),
-      clamp(int(temperature * -0.6375), 0, 255)
+      clamp(int(temperature * 0.1375), 0, 255),
+      clamp(int(abs(temperature * 0.0375)), 0, 255),
+      clamp(int(temperature * -0.8375), 0, 255)
    );
    for(int i = 0, j = level.sectors.size(); i < j; i++) {
       Sector sec = level.sectors[i];
@@ -442,12 +445,13 @@ static clearScope string localize(string name) {
 
 static int EDataI(Actor mo, int info) {
    switch(info) {
-   case _edt_bosslevel:    return Instance().m_bossLevel;
+   case _edt_bosslevel:    return instance().m_bossLevel;
    case _edt_paused:       return level.isFrozen();
    case _edt_spawnhealth:  return mo.spawnHealth();
    case _edt_viewheight:   return int(Lith_Player(mo).viewHeight);
    case _edt_attackheight: return int(getAttackHeight(mo));
    case _edt_lightning:    return level.info.flags & LEVEL_STARTLIGHTNING;
+   case _edt_windspeed:    return int(instance().m_wind.m_speed);
 
    case _edt_chex:    return gameinfo.gametype & GAME_Chex    != 0;
    case _edt_heretic: return gameinfo.gametype & GAME_Heretic != 0;

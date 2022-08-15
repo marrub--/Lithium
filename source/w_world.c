@@ -121,12 +121,13 @@ script static void MInit(void) {
    }
    ml.humidity    = mi_opt(_mi_key_humidity,    v, rand() % 101);
    ml.temperature = mi_opt(_mi_key_temperature, v, rand() % 301 - 80);
+   ml.windspeed   = mi_opt(_mi_key_windspeed,   v, rand() % 100);
    i32  lrnd      = ml.temperature * 12 / 55;
    i32  hrnd      = fastabs(ml.temperature / 2) * (ml.humidity / 40);
    bool lightning = rand() % 99 < lrnd && !mi_flg(_mi_flag_nolightning);
    bool any_rain  = rand() % 99 < hrnd && !mi_flg(_mi_flag_norain);
    i32  rain      = _rain_none;
-   if(ml.humidity > 0 || ml.temperature > -70) {
+   if(ml.temperature > -70) {
       switch(CVarGetI(sc_sv_rain)) {
       case 1:
          if(any_rain) {

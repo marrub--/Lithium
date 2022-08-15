@@ -8,13 +8,12 @@
 
 class Lith_RainDrop : Actor {
    default {
-      Alpha 0.25;
+      Alpha 0.8;
+      RenderStyle "Add";
       Height 2;
       Radius 2;
-      RenderStyle "Add";
       XScale 0.5;
       YScale 1.0;
-
       +DontSplash
       +DropOff
       +ForceYBillboard
@@ -23,12 +22,12 @@ class Lith_RainDrop : Actor {
       +NoTeleport
       +NoTrigger
    }
-   protected bool m_done;
-   override void postBeginPlay() {
-      super.postBeginPlay();
-      vel      = (0, 0, fRandom(-12, -16));
-      scale.y *= fRandom(1.5, 3.5);
-      m_done   = false;
+   bool m_done;
+   override void beginPlay() {
+      super.beginPlay();
+      vel.z   = fRandom[lith_rain](-19, -26);
+      scale.y = vel.z;
+      m_done  = false;
    }
    override void tick() {
       if(isFrozen()) {
@@ -39,6 +38,7 @@ class Lith_RainDrop : Actor {
          a_fadeOut(0.25 / 21.0);
       } else if(waterLevel > 0 || pos.z <= floorZ) {
          setOrigin((pos.xy, floorZ), false);
+         vel = (0, 0, 0);
          scale = (1, 1);
          m_done = true;
          setState(resolveState("Death"));
@@ -104,10 +104,10 @@ class Lith_Ash : Lith_SnowDrop {
    }
    float m_rollSpeed;
    override void postBeginPlay() {
-      Actor.postBeginPlay();
-      m_rollSpeed = fRandom(0.4, 0.9) * fRandomPick(-1, 1);
-      scale      *= fRandom(0.25, 1.0);
-      vel         = (0, 0, -fRandom(0.84, 1.2));
+      super.postBeginPlay();
+      m_rollSpeed =  fRandom[lith_rain](0.4, 0.9) * fRandomPick[lith_rain](-1, 1);
+      scale      *=  fRandom[lith_rain](0.25, 1.0);
+      vel.z       = -fRandom[lith_rain](0.84, 1.2);
    }
    override void tick() {
       if(isFrozen()) {

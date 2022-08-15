@@ -34,6 +34,9 @@ script_str ext("ACS") addr(OBJ "ShowMission") void Z_ShowMission(void) {
 
 alloc_aut(0) stkcall static
 void P_Ren_Mission(void) {
+   if(ACS_Timer() == 0) {
+      return;
+   }
    i32 delta = ACS_Timer() - pl.missionstatshow;
    if(delta < 0) {
       k32 alpha = delta > -43 ? ease_out_cubic(delta / -43.0k) : 1.0k;
@@ -44,8 +47,9 @@ void P_Ren_Mission(void) {
       if(get_bit(ml.flag, _mflg_vacuum)) {
          _l("\CiVACUUM\n");
       } else {
-         _l("\Cv"); _p(ml.temperature); _l(u8"°C\n");
-         _l("\Cy"); _p(ml.humidity);    _l("%RH\n");
+         _l("\Cv"); _p(ml.temperature);         _l(u8"°C\n");
+         _l("\Cy"); _p(ml.humidity);            _l("%RH\n");
+         _l("\Ce"); _p(EDataI(_edt_windspeed)); _l("m/s\n");
       }
       switch(get_msk(ml.flag, _mflg_rain)) {
       case _rain_rain:  _l("\CnRAINING (WATER)\n");   break;
@@ -67,7 +71,7 @@ void P_Ren_Mission(void) {
       case _mstat_finished:   _l("\CjMISSION \CdFINISHED");   break;
       case _mstat_failure:    _l("\CjMISSION \CgFAILED");     break;
       }
-      PrintTextA(sf_smallfnt, pl.color, 320,3, 28,1, alpha);
+      PrintTextAX(sf_smallfnt, pl.color, 320,3, 28,1, alpha, _u_no_unicode);
    }
 }
 

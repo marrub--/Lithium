@@ -101,8 +101,8 @@ ui void drawSky(RenderEvent evt) {
             m_skyCanvas.drawTexture(m_skyClouds, true, x, 0, DTA_DestHeight,canvas_h, DTA_DestWidth,cszx, DTA_FlipX,true,DTA_FlipY,true, DTA_LegacyRenderStyle,m_skyCloudsStyle, DTA_Color,m_skyCloudsColor);
          }
       }
-      m_skyCanvas.drawTexture(m_skyGradient, true, 0, 0, DTA_DestHeight,dh,DTA_DestWidth,canvas_w, DTA_FlipY,true);
       m_skyCanvas.dim(m_skyColor, m_skyColor.a / 400.0, 0, 0, canvas_w, canvas_h, STYLE_Add);
+      m_skyCanvas.drawTexture(m_skyGradient, true, 0, 0, DTA_DestHeight,dh,DTA_DestWidth,canvas_w, DTA_FlipY,true);
       if(bDelta) {
          m_skyCanvas.dim("white", vDelta * 0.2f, 0, 0, canvas_w, dh, STYLE_Add);
       }

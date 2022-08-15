@@ -9,7 +9,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 model "Lith_BulletTracer" {
-   Path "lmodels"
+   Path "lmisc/models"
    DontCullBackFaces 
    UseActorRoll 
    Scale 16.0 1.0 32.0
@@ -19,7 +19,7 @@ model "Lith_BulletTracer" {
    FrameIndex "____" "A" 0 0
 }
 model "Lith_BulletTracerSlow" {
-   Path "lmodels"
+   Path "lmisc/models"
    DontCullBackFaces 
    UseActorRoll 
    Scale 16.0 1.0 32.0
@@ -29,7 +29,7 @@ model "Lith_BulletTracerSlow" {
    FrameIndex "____" "A" 0 0
 }
 model "Lith_BulletTracerBig" {
-   Path "lmodels"
+   Path "lmisc/models"
    DontCullBackFaces 
    UseActorRoll 
    Scale 24.0 1.0 40.0
@@ -39,7 +39,7 @@ model "Lith_BulletTracerBig" {
    FrameIndex "____" "A" 0 0
 }
 model "Lith_FortuneShotWind" {
-   Path "lmodels"
+   Path "lmisc/models"
    DontCullBackFaces 
    UseActorRoll 
    UseActorPitch 
@@ -47,4 +47,14 @@ model "Lith_FortuneShotWind" {
    Model 0 "tapered.obj"
    Skin 0 "air.png"
    FrameIndex "____" "A" 0 0
+}
+model "Lith_RainDrop" {
+   Path "lmisc/models"
+   DontCullBackFaces 
+   UseActorRoll 
+   UseActorPitch 
+   Scale 16.0 1.0 1.0
+   Model 0 "square.obj"
+   Skin 0 "rain.png"
+   FrameIndex "RNDR" "A" 0 0
 }
