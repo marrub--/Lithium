@@ -89,16 +89,16 @@ class Lith_OmegaRailBeam : Lith_OmegaRailFXBase
    }
 }
 
-class Lith_OmegaRailExplosion : Lith_OmegaRailFXBase
-{
-   default
-   {
+class Lith_OmegaRailExplosion : Lith_OmegaRailFXBase {
+   default {
       Scale 2;
-
       +ExtremeDeath
       +ForceRadiusDmg
    }
-
+   override void markPrecacheSounds() {
+      super.markPrecacheSounds();
+      markSound("weapons/rail/impact");
+   }
    states
    {
    Spawn:

@@ -41,6 +41,11 @@ default
    +FLOORCLIP
 }
 
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("enemies/chainguy/fire");
+   markSound("enemies/chainguy/bolt");
+}
 virtual void Lith_A_ChaingunGuyShot()
 {
    A_StartSound("enemies/chainguy/fire", lch_weapon);

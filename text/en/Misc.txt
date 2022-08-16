@@ -237,19 +237,6 @@ Use at the expense of your world.
 == CNTRLMNU_KEYS         | \cm[Unused] Keys List
 == CNTRLMNU_STATS        | \cm[Unused] Stats
 
-%% \#SKILL_TOURIST
-Are you certain?
-This one is just amusing.
-
-%% \#SKILL_EXTRAHARD
-Are you sure?
-This one is extra hard.
-[[[[ Enemies will have altered attack patterns. ]]]]
-[[[[ Enemies will be significantly more aggressive. ]]]]
-[[[[ Enemy level scaling is more intense. ]]]]
-[[[[ You will take slightly more damage. ]]]]
-[[[[ You will get more score. ]]]]
-
 == DOSY     | (Press Y to quit.)
 == PRESSYN  | Press Y or N.
 == PRESSKEY | Press a key.

@@ -51,6 +51,11 @@ virtual void Lith_A_ShotgunGuyShot()
    if(!Lith_BarrierBullets(3))
       A_CustomBulletAttack(22.5, 4, 3, random(1, 5) * 3, "BulletPuff", 0, CBAF_NORANDOM);
 }
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("enemies/shotguy/fire");
+   markSound("enemies/shotguy/ready");
+}
 
 states
 {

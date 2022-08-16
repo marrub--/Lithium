@@ -17,6 +17,10 @@ class Lith_PoisonBlob : Actor {
       +NoClip
       -NoGravity
    }
+   override void markPrecacheSounds() {
+      super.markPrecacheSounds();
+      markSound("weapons/shotgun/poison/acid");
+   }
    states {
    Spawn:
       BLLT G 5;
@@ -78,9 +82,11 @@ class Lith_PoisonBullet : Lith_BulletPuff {
 }
 
 class Lith_PoisonTicker : Inventory;
-
 int m_end;
-
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("weapons/shotgun/poison/acid");
+}
 override void tick() {
    if(!owner || level.time == m_end) {
       destroy();

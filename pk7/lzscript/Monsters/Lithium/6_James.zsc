@@ -50,6 +50,13 @@ default
 
    Tag "$LITH_INFO_TITLE_James";
 }
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("enemies/james/fire");
+   markSound("enemies/james/knife");
+   markSound("enemies/james/knifehit");
+   markSound("enemies/phantom/lunge");
+}
 
 states
 {

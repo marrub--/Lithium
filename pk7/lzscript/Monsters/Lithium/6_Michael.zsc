@@ -20,6 +20,11 @@ default
 }
 
 override void Lith_OnDeath() {if(Master && Master.Health > 0) A_KillMaster();}
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("enemies/michael/hit");
+   markSound("enemies/michael/swing");
+}
 
 states
 {

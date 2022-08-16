@@ -64,6 +64,10 @@ int m_MeleeTime;
 
 int m_Step;
 
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("enemies/phantom/aura");
+}
 virtual void Lith_PostInit() {
    CallACS("Lith_PhantomSound");
    A_StartSound("enemies/phantom/aura", lch_body2, CHANF_LOOP, 0.7, 0.7);

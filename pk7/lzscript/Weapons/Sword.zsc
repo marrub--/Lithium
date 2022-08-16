@@ -6,13 +6,14 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_SwordPuff : Lith_BulletPuff
-{
-   default
-   {
+class Lith_SwordPuff : Lith_BulletPuff {
+   default {
       DamageType "Melee";
    }
-
+   override void markPrecacheSounds() {
+      super.markPrecacheSounds();
+      markSound("weapons/sword/swing1");
+   }
    states {
    PuffNormal:   XPUF A 0 A_StartSound("weapons/sword/swing1", lch_body2); goto Super::PuffNormal;
    PuffMirrored: XPUF A 0 A_StartSound("weapons/sword/swing1", lch_body2); goto Super::PuffMirrored;
@@ -23,8 +24,7 @@ class Lith_SwordCharge : Inventory {default {Inventory.MaxAmount 25;}}
 
 class Lith_Sword : Lith_Weapon;
 
-default
-{
+default {
    Tag "$LITH_TAG_Sword";
    Weapon.Kickback 100;
    Weapon.SlotNumber 0;
@@ -33,9 +33,15 @@ default
    +WEAPON.MELEEWEAPON
    +WEAPON.NOAUTOFIRE
 }
-
-states(Weapon)
-{
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("weapons/sword/hit");
+   markSound("weapons/sword/normal");
+   markSound("weapons/sword/charge");
+   markSound("weapons/sword/chargeup");
+   markSound("weapons/sword/swing");
+}
+states(Weapon) {
 Ready:
    SORD A 0 {self.TakeInventory("Lith_SwordCharge", 0x7FFFFFFF);}
    SORD A 1 Lith_A_Ready;

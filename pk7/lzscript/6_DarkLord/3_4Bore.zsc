@@ -19,6 +19,15 @@ default
    Inventory.AltHudIcon "4BORZ0";
 }
 
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("weapons/empty");
+   markSound("weapons/4bore/fire");
+   markSound("weapons/4bore/open");
+   markSound("weapons/4bore/load");
+   markSound("weapons/4bore/close");
+   markSound("weapons/4bore/empty");
+}
 action(Weapon) void Lith_A_Fire4Bore()
 {
    A_AlertMonsters();
@@ -66,18 +75,19 @@ Fire:
    4BOR C 1 offset(4, 135);
    4BOR C 1 offset(-22, 143);
    4BOR D 1 offset(-28, 166) {
-      A_StartSound("weapons/ssg/open", lch_reload);
+      A_StartSound("weapons/4bore/open", lch_reload);
       Lith_A_Casing("Lith_Cas4Bore", 15, -1, 40, FRandom(3,4), FRandom(7,8), FRandom(2,9));
       Lith_A_Casing("Lith_Cas4Bore", 15, -4, 40, FRandom(3,4), FRandom(7,8), FRandom(2,9));
    }
    4BOR D 1 offset(-41, 172);
    4BOR D 1 offset(-56, 186);
    4BOR D 1 offset(-71, 201);
-   TNT1 A 14 A_StartSound("weapons/ssg/load", lch_reload2);
+   TNT1 A 12;
+   TNT1 A 2 A_StartSound("weapons/4bore/load", lch_reload2);
    4BOR F 1 offset(-43, 182) Lith_A_ReloadBobUp(1);
    4BOR F 1 offset(-25, 155);
    4BOR F 1 offset(-8, 137);
-   4BOR E 3 offset(55, 96) A_StartSound("weapons/ssg/close", lch_reload3);
+   4BOR E 3 offset(55, 96) A_StartSound("weapons/4bore/close", lch_reload3);
    4BOR E 2 offset(59, 95);
    4BOR E 2 offset(60, 97);
    4BOR E 2 offset(60, 95);
@@ -93,7 +103,7 @@ Fire:
 FireEmpty:
    4BOR A 2 offset(3, 38);
    4BOR A 1 offset(7, 40);
-   4BOR A 1 offset(5, 37) A_StartSound("weapons/spas/empty", lch_dryweapon);
+   4BOR A 1 offset(5, 37) A_StartSound("weapons/4bore/empty", lch_dryweapon);
    4BOR A 1 offset(4, 34);
    4BOR A 1 offset(2, 33);
    4BOR A 5 offset(1, 32);

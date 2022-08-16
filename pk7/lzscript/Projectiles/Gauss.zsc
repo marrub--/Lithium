@@ -6,24 +6,19 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_GaussExplosionParticle : Actor
-{
-   default
-   {
+class Lith_GaussExplosionParticle : Actor {
+   default {
       RenderStyle "Translucent";
       Scale 0.4;
       Mass 3000;
       BounceType "Doom";
-
       +Bright
       +NoBlockmap
       +ForceXyBillboard
       +NoTeleport
       +NoClip
    }
-
-   states
-   {
+   states {
    Spawn:
       BLLT B 0;
       BLLT BBBCCCDDD 1 A_FadeOut(0.06);
@@ -33,12 +28,10 @@ class Lith_GaussExplosionParticle : Actor
 
 class Lith_GaussPuff : Actor;
 
-default
-{
+default {
    RenderStyle "Translucent";
    Species "Lith_Player";
    DamageType "Electric";
-
    +DontHarmSpecies
    +Bright
    +PuffOnActors
@@ -52,9 +45,12 @@ default
    +WallSprite
    -AllowParticles
 }
-
-States
-{
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("weapons/shotgun/gauss/puff");
+   markSound("weapons/shotgun/gauss/spark");
+}
+states {
 Crash:
    BLLT A 0;
    BLLT A 0 A_StartSound("weapons/shotgun/gauss/puff", lch_body);

@@ -16,7 +16,10 @@ default
 
    +WEAPON.CHEATNOTWEAPON
 }
-
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("player/wings");
+}
 states(Weapon)
 {
 Ready:

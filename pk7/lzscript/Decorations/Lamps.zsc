@@ -13,6 +13,10 @@ class Lith_LampSpark : Actor {
       RenderStyle "Add";
       +NoInteraction
    }
+   override void markPrecacheSounds() {
+      super.markPrecacheSounds();
+      markSound("amb/spark");
+   }
 
    states {
    Spawn:
@@ -38,6 +42,10 @@ class Lith_TechLamp : Lith_FlareDecor replaces TechLamp
       ProjectilePassHeight -80;
       Lith_FlareDecor.Type "Lith_TechLampFlare";
       Lith_SwitchableDecor.Noise "amb/lamp1";
+   }
+   override void markPrecacheSounds() {
+      super.markPrecacheSounds();
+      markSound("amb/shatter");
    }
 
    states

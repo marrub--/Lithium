@@ -19,9 +19,19 @@ default {
 }
 
 double     m_windUp;
-int        m_sndState;
 statelabel m_lastState;
+bool       m_sndState, m_click;
+int        m_ammoState;
 
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("weapons/minigun/fire");
+   markSound("weapons/minigun/rotate");
+   markSound("weapons/minigun/down");
+   markSound("weapons/minigun/place");
+   markSound("weapons/minigun/click1");
+   markSound("weapons/minigun/click2");
+}
 override void tick() {
    if(owner && owner.player && owner.health > 0 && !isFrozen()) {
       if(owner.player.readyWeapon != self) {
@@ -35,22 +45,22 @@ override void tick() {
          owner.A_AlertMonsters(256);
 
          if(!m_sndState) {
-            owner.A_StartSound("weapons/minigun/up", lch_weapon2, CHANF_LOOP);
-            m_sndState++;
-         } else if(m_sndState++ == 15) {
             owner.A_StartSound("weapons/minigun/rotate", lch_weapon2, CHANF_LOOP);
+            m_sndState = true;
          }
       } else {
          if(m_sndState) {
             owner.A_StartSound("weapons/minigun/down", lch_weapon2);
-            m_sndState = 0;
+            m_sndState = false;
          }
 
          if(m_windUp) {
             m_windUp -= 0.015;
+            m_click = true;
 
             if(m_windUp < 0) {
-               m_windUp = m_sndState = 0;
+               m_windUp = 0;
+               m_sndState = false;
                owner.A_StartSound("weapons/minigun/place", lch_weapon3);
             }
          }
@@ -62,12 +72,6 @@ override void tick() {
 
 int Lith_WindupTime() {
    return 1 + int((1.0 - m_windUp) * 10.0);
-}
-
-void lith_incrementWindup() {
-   if(lith_isMinigunFiring()) {
-      m_windUp += 0.097;
-   }
 }
 
 bool lith_isMinigunFiring() {
@@ -86,7 +90,10 @@ action(Weapon) state Lith_A_MinigunReady(statelabel lb, statelabel l) {
    invoker.m_lastState = lb;
 
    A_SetTics(invoker.Lith_WindupTime());
-   invoker.lith_incrementWindup();
+   if(invoker.lith_isMinigunFiring()) {
+      invoker.m_windUp += 0.097;
+      invoker.m_click = false;
+   }
 
    state st = Lith_A_Ready(flags);
    if(st) return st;
@@ -109,15 +116,18 @@ action(Weapon) state Lith_A_MinigunPostReady(statelabel l) {
 }
 
 action(Weapon) void Lith_A_MinigunFire() {
-   lith_takeAmmo(1);
+   if(invoker.m_ammoState++ == 2) {
+      lith_takeAmmo(1);
+      invoker.m_ammoState = 0;
+   }
    A_AlertMonsters();
-   A_StartSound("weapons/minigun/fire", lch_weapon);
+   A_StartSound("weapons/minigun/fire", lch_weapon, pitch: fRandom(0.95, 1.05) * max(invoker.m_windUp, 0.8));
    A_OverlayOffset(_psp_weapon, FRandom(3, 8), FRandom(34, 39), WOF_INTERPOLATE);
    A_GunFlash("DummyFlash");
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
    Lith_A_GunSmokeSmall(1.9);
    for(int i = 0; i < 2; ++i) {
-      Lith_FireBullets(4, 1.7, 2, 7, tracerX: 1);
+      Lith_FireBullets(8, 4, -1, 7, tracerX: 1);
       Lith_A_Casing("Lith_CasBigHot", 9, 7, 20, frandom(3,5), frandom(1,5), frandom(10,12));
    }
    Lith_A_RecoilUp(0.15);
@@ -129,14 +139,19 @@ action(Weapon) void Lith_A_MinigunPostFire() {
    A_SetTics(invoker.Lith_WindupTime());
 }
 
-states(Weapon)
-{
+states(Weapon) {
 Ready:
    MNGG A 1 Lith_A_MinigunReady("Ready", "Fire");
    MNGG A 0 Lith_A_MinigunPostReady("Ready2");
    loop;
 Ready2:
-   MNGG B 0 A_StartSound("weapons/minigun/click", lch_dryweapon, volume: 0.4);
+   MNGG B 0 {
+      if(invoker.m_click) {
+         A_StartSound("weapons/minigun/click1", lch_dryweapon, volume: fRandom(0.3, 0.5), pitch: fRandom(1.0, 1.9) * (1.0 + invoker.m_windUp));
+      } else {
+         A_StartSound("weapons/minigun/click2", lch_dryweapon, volume: fRandom(0.3, 0.5), pitch: fRandom(1.0, 1.4) * (1.0 + invoker.m_windUp));
+      }
+   }
 Ready2Loop:
    MNGG B 1 Lith_A_MinigunReady("Ready2Loop", "Fire2");
    MNGG B 0 Lith_A_MinigunPostReady("Ready3");

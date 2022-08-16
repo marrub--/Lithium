@@ -22,7 +22,12 @@ class Lith_SwitchableDecor : Actor {
 
    property Noise: m_IdleNoise;
    property Volume: m_Volume;
-
+   override void markPrecacheSounds() {
+      super.markPrecacheSounds();
+      markSound(m_idleNoise);
+      markSound("amb/turnon");
+      markSound("amb/turnoff");
+   }
    virtual void Lith_Active() {
       if(m_IdleNoise)
          A_StartSound(m_IdleNoise, lch_body, CHANF_LOOP, m_Volume, ATTN_STATIC);

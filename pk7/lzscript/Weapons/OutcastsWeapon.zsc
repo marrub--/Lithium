@@ -8,18 +8,18 @@
 
 class Lith_OutcastsWeapon : Lith_Weapon;
 
-default
-{
+default {
    Inventory.RestrictedTo "Lith_MarinePlayer", "Lith_CyberMagePlayer";
 }
-
-action(Weapon) void Lith_A_HitKnife(class<Actor> puff)
-{
+bool m_KnifeReFire;
+action(Weapon) void Lith_A_HitKnife(class<Actor> puff) {
    lith_a_fireMelee((CountInv("PowerStrength") ? 20 : 5) * random(1, 10), 100, _mlf_no_turn, puff);
 }
-
-bool m_KnifeReFire;
-
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("weapons/knife/swing1");
+   markSound("weapons/knife/swing2");
+}
 states(Weapon)
 {
 User4:

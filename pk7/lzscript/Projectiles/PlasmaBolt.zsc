@@ -6,19 +6,15 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_PlasmaBoltTrail : Actor
-{
-   default
-   {
+class Lith_PlasmaBoltTrail : Actor {
+   default {
       Alpha 0.2;
       RenderStyle "Add";
       Scale 0.125;
-
       +NOINTERACTION
    }
 
-   states
-   {
+   states {
    Spawn:
       TNT1 A 0;
       TNT1 A 0 ResolveState("Particles");
@@ -33,59 +29,49 @@ class Lith_PlasmaBoltTrail : Actor
    }
 }
 
-class Lith_PlasmaBoltTrail_Green : Lith_PlasmaBoltTrail
-{
-   states
-   {
+class Lith_PlasmaBoltTrail_Green : Lith_PlasmaBoltTrail {
+   states {
    Particles:
       TNT1 A 0 A_SpawnParticle("Green", SPF_FULLBRIGHT, 6, 2, 0, 0,0,0, frandom(-2, 2),frandom(-2, 2),frandom(-2, 2));
       goto SpawnPick;
    }
 }
 
-class Lith_PlasmaBoltTrail_Red : Lith_PlasmaBoltTrail
-{
-   default
-   {
+class Lith_PlasmaBoltTrail_Red : Lith_PlasmaBoltTrail {
+   default {
       Translation "Lith_PlasmaBoltTrail_Red";
    }
-
-   states
-   {
+   states {
    Particles:
       TNT1 A 0 A_SpawnParticle("Red", SPF_FULLBRIGHT, 6, 2, 0, 0,0,0, frandom(-2, 2),frandom(-2, 2),frandom(-2, 2));
       goto SpawnPick;
    }
 }
 
-class Lith_PlasmaBoltTrail_Blue : Lith_PlasmaBoltTrail
-{
-   default
-   {
+class Lith_PlasmaBoltTrail_Blue : Lith_PlasmaBoltTrail {
+   default {
       Translation "Lith_PlasmaBoltTrail_Blue";
       Alpha 0.5;
    }
-
-   states
-   {
+   states {
    Particles:
       TNT1 A 0 A_SpawnParticle("Blue", SPF_FULLBRIGHT, 6, 2, 0, 0,0,0, frandom(-2, 2),frandom(-2, 2),frandom(-2, 2));
       goto SpawnPick;
    }
 }
 
-class Lith_PenetratingPlasmaBolt : Lith_PlasmaBolt
-{
-   default
-   {
+class Lith_PenetratingPlasmaBolt : Lith_PlasmaBolt {
+   default {
       DamageFunction 7;
       Speed 47;
 
       +RIPPER
    }
-
-   states
-   {
+   override void markPrecacheSounds() {
+      super.markPrecacheSounds();
+      markSound("weapons/plasma/explode");
+   }
+   states {
    Trail:
       TNT1 A 0 A_JumpIf(m_TrailStep >= 10, "TrailDone");
       TNT1 A 0 {m_TrailStep++;}
@@ -103,24 +89,23 @@ class Lith_PenetratingPlasmaBolt : Lith_PlasmaBolt
 
 class Lith_PlasmaBolt : Actor;
 
-default
-{
+default {
    Radius 12;
    Height 12;
    Speed 50;
    DamageFunction 10;
    DamageType "Electric";
    Species "Lith_Player";
-
    Projectile;
    +DONTHARMSPECIES
    +MTHRUSPECIES
 }
-
 int m_TrailStep;
-
-states
-{
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("weapons/plasma/explode");
+}
+states {
 Spawn:
    TNT1 A 3;
    TNT1 A 0 ResolveState("Trail");

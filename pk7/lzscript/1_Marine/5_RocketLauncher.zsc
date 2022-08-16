@@ -94,6 +94,17 @@ int m_Loaded;
 int m_Iter;
 int m_Mode;
 
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("weapons/rocket/fire");
+   markSound("weapons/rocket/grenade");
+   markSound("weapons/rocket/load");
+   markSound("weapons/rocket/empty");
+   markSound("weapons/rocket/lock");
+   markSound("weapons/rocket/launch");
+   markSound("weapons/rocket/setalt");
+   markSound("weapons/rocket/setalt1");
+}
 action(Weapon) void Lith_A_FireRocket()
 {
    A_AlertMonsters();
@@ -144,7 +155,10 @@ Fire:
    GRLG A 0 A_JumpIf(Lith_UTIL.pData(_pdt_upgrade, UPGR_RPG_B), "FireHoming");
    GRLG A 0 Lith_A_FireRocket;
 FireAnim:
-   GRLG B 1 bright A_GunFlash;
+   GRLG B 1 bright {
+      A_GunFlash();
+      a_overlayRenderStyle(_psp_flash, style_add);
+   }
    GRLG B 1 bright;
    GRLG C 1 bright offset(0, 33);
    GRLG CD 1 bright offset(0, 34);

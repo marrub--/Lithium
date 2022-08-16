@@ -55,6 +55,11 @@ class Lith_Heretic_OphidianIceProjectile : SnakeProjA replaces SnakeProjA {
       SeeSound "";
    }
 
+   override void markPrecacheSounds() {
+      super.markPrecacheSounds();
+      markSound("enemies/ophidian/ice");
+      markSound("enemies/ophidian/fire");
+   }
    states {
    Spawn:
       TNT1 A 0;

@@ -10,15 +10,12 @@ class Lith_BloodHitSpray : Actor {
    default {
       Scale 0.45;
       RenderStyle "Translucent";
-
       +NoInteraction
       +DontSplash
       +FlatSprite
       +RollSprite
    }
-
    double m_step;
-
    override void postBeginPlay() {
       super.postBeginPlay();
       alpha  = fRandom(.7,   .9);
@@ -27,7 +24,6 @@ class Lith_BloodHitSpray : Actor {
       scale *= fRandom(.5,    1);
       m_step = fRandom(.01, .02);
    }
-
    override void tick() {
       if(!isFrozen()) {
          if(m_step < .015) setOrigin(pos + (0, 0, .04), true);
@@ -37,7 +33,6 @@ class Lith_BloodHitSpray : Actor {
          if(alpha <= 0) destroy();
       }
    }
-
    states {
    Spawn:
       BLCO B -1;
@@ -55,9 +50,7 @@ class Lith_BloodHitCore : Actor {
       +FlatSprite
       +RollSprite
    }
-
    int m_tics;
-
    override void postBeginPlay() {
       super.postBeginPlay();
       if(!translation) a_setTranslation('Lith_AllToRed');
@@ -82,12 +75,6 @@ class Lith_BloodHitCore : Actor {
          }
       }
    }
-
-   override void markPrecacheSounds() {
-      super.markPrecacheSounds();
-      markSound("body/flesh");
-   }
-
    states {
    Spawn:
       BLCO A -1;
@@ -101,31 +88,14 @@ default {
    +Corpse
    +DontSplash
 }
-
 int m_lev;
 int m_waitTics;
-
 override void tick() {
    if(bNoInteraction)  setOrigin((pos.xy, floorZ), true);
    if(m_waitTics == 0) super.tick();
    else                m_waitTics -= 1;
 }
-
-void lith_a_dogs() {
-   for(let it = BlockThingsIterator.create(self, 64); it.next();) {
-      let mo = it.thing;
-      if(mo.player && mo.countInv("Lith_Dogs")) {
-         let steg = spawn("Lith_RealSpectralSteggles", pos + (0,0,32), ALLOW_REPLACE);
-         steg.vel = (frandom(-10,10),frandom(-10,10),frandom(2,9));
-         steg.angle = fRandom(0, 359);
-         steg.target = mo;
-      }
-   }
-}
-
 void lith_a_setLevel(int num) {
-   lith_a_dogs();
-
    if(!m_lev) {
       let mo = spawn("Lith_BloodHitCore", pos + (fRandom(-1,1),fRandom(-1,1),fRandom(-1,1)), ALLOW_REPLACE);
       mo.translation = translation;
@@ -134,10 +104,8 @@ void lith_a_setLevel(int num) {
       vel.x += fRandom(-2,2);
       vel.y += fRandom(-2,2);
    }
-
    m_lev = num;
 }
-
 states {
 Spawn:
    TNT1 A 0 nodelay resolveState("Heavy"); /* HACK: this is STILL hardcoded! */

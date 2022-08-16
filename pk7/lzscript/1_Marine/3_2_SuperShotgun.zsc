@@ -55,6 +55,7 @@ action(Weapon) void Lith_A_FireSSG()
    A_Recoil(1.2);
    Lith_A_RecoilUp(1.5);
    A_GunFlash();
+   a_overlayRenderStyle(_psp_flash, style_add);
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
 }
 

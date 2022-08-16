@@ -29,24 +29,25 @@ class Lith_MonsterSoulEffect : Actor
 
 class Lith_MonsterSoul : Actor;
 
-default
-{
+default {
    RenderStyle "Add";
    Scale 0.25;
    Damage 7;
    Radius 4;
    Height 4;
    Speed 7;
-
    Projectile;
    +SEEKERMISSILE
    +MTHRUSPECIES
    +THRUSPECIES
    +BRIGHT
 }
-
-states
-{
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("ghost/spawn");
+   markSound("ghost/hit");
+}
+states {
 Spawn:
    BLLT N 0;
    BLLT N 0 A_StartSound("ghost/spawn", lch_body, attenuation: 0.5);

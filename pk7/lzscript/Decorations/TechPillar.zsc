@@ -8,6 +8,11 @@
 
 class Lith_TechPillar : TechPillar replaces TechPillar;
 
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("amb/lamp1");
+}
+
 states {
 Spawn:
    ELEC A 0;

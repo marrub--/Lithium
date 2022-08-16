@@ -82,6 +82,10 @@ class Lith_MakarovChain : Actor
       +HITTRACER
    }
 
+   override void markPrecacheSounds() {
+      super.markPrecacheSounds();
+      markSound("enemies/makarov/chainhit");
+   }
    states
    {
    Spawn:
@@ -102,6 +106,16 @@ default
    Health 3000;
 
    Tag "$LITH_INFO_TITLE_Makarov";
+}
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("enemies/makarov/fire");
+   markSound("enemies/makarov/pump");
+   markSound("enemies/makarov/throw");
+   markSound("enemies/makarov/chainthrow");
+   markSound("enemies/makarov/scythe");
+   markSound("enemies/makarov/scythehit");
+   markSound("enemies/phantom/lunge");
 }
 
 states

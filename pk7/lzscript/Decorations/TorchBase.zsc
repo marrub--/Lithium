@@ -43,6 +43,10 @@ class Lith_TorchDecor : Lith_FlareDecor
          0, 0, 0.02,
          1.0, -1);
    }
+   override void markPrecacheSounds() {
+      super.markPrecacheSounds();
+      markSound("amb/woodx");
+   }
 
    states
    {

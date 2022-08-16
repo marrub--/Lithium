@@ -19,6 +19,10 @@ class Lith_Candlestick : Lith_FlareDecor replaces Candlestick
       Lith_SwitchableDecor.Noise "amb/fire";
       Lith_SwitchableDecor.Volume 0.3;
    }
+   override void markPrecacheSounds() {
+      super.markPrecacheSounds();
+      markSound("amb/puff");
+   }
 
    states {
    Spawn:    CAND ABCDBDABCAC 3 bright; loop;
@@ -41,6 +45,10 @@ class Lith_Candelabra : Lith_FlareDecor replaces Candelabra
       ProjectilePassHeight -60;
       Lith_FlareDecor.Type "Lith_CandelabraFlare";
       Lith_SwitchableDecor.Noise "amb/fire";
+   }
+   override void markPrecacheSounds() {
+      super.markPrecacheSounds();
+      markSound("amb/metalx");
    }
 
    states {

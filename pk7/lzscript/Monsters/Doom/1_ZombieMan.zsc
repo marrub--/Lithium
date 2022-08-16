@@ -48,6 +48,12 @@ default
    +FLOORCLIP
 }
 
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("enemies/chainguy/fire");
+   markSound("enemies/zombie/fire");
+   markSound("enemies/zombie/ready");
+}
 virtual void Lith_A_ZombieManShot()
 {
    A_StartSound("enemies/zombie/fire", lch_weapon);

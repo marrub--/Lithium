@@ -70,6 +70,10 @@ sound        m_sound;
 property RingType : m_ringType;
 property Sound    : m_sound;
 
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound(m_sound);
+}
 override void postBeginPlay() {
    super.postBeginPlay();
    A_StartSound(m_sound, lch_body);

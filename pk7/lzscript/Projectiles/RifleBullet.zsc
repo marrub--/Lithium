@@ -10,21 +10,23 @@ class Lith_RifleBulletPainless : Lith_RifleBullet {default {+PAINLESS}}
 
 class Lith_RifleBullet : Lith_BulletPuff;
 
-default
-{
+default {
    Mass 9999;
    DamageType "Bullet";
    Species "Lith_Player";
-
-   +DONTHARMSPECIES
-   +MTHRUSPECIES
-   +FORCERADIUSDMG
-   +PUFFONACTORS
-   +PUFFGETSOWNER
+   +DontHarmSpecies
+   +MThruSpecies
+   +ForceRadiusDmg
+   +PuffOnActors
+   +PuffGetsOwner
 }
-
-states
-{
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("marathon/hit");
+   markSound("marathon/hitwall");
+   markSound("marathon/hitsolid");
+}
+states {
 Crash:
    TNT1 A 0;
    TNT1 A 0 A_Explode(7, 32, 0);

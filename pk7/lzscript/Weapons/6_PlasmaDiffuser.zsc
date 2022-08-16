@@ -53,7 +53,11 @@ default {
 
    +Weapon.CheatNotWeapon
 }
-
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("weapons/plasdiff/fire");
+   markSound("weapons/plasdiff/empty");
+}
 action(Weapon) void Lith_A_FirePlasmaDiff() {
    lith_takeAmmo(60);
    A_GunFlash("DummyFlash");

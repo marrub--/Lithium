@@ -140,7 +140,6 @@
 == \#sv_postgame            | NG+を有効にする
 == \#sv_revenge             | 神風
 == \#sv_wepdrop             | 敵が武器を落とす
-== \#weapons_alpha          | 武器の透明度
 == \#weapons_casingfadeout  | 薬莢の消える速さ
 == \#weapons_casings        | 薬莢の表示
 == \#weapons_magdrops       | リロード後のマガジン表示

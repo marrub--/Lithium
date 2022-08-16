@@ -85,6 +85,10 @@ default
 
    -BossDeath
 }
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("baron/melee");
+}
 
 states
 {

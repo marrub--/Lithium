@@ -365,7 +365,6 @@ when you don't have them already. May cause issues in normal gameplay.
 
 \ck(Applies on next map start)
 
-== \#weapons_alpha | Weapon opacity
 == \#weapons_casingfadeout | Casings fade out
 == \#weapons_casings | Emit casings from weapons which use them
 == \#weapons_fastlazshot | Better laser shotgun performance

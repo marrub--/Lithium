@@ -15,6 +15,10 @@ class Lith_MonsterLevelUp : Actor
       +NOINTERACTION
    }
 
+   override void markPrecacheSounds() {
+      super.markPrecacheSounds();
+      markSound("enemies/levelup");
+   }
    states
    {
    Spawn:

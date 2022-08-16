@@ -110,6 +110,10 @@ default
    +FloorClip
    +MissileMore
 }
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("baron/melee");
+}
 
 int m_Angle;
 

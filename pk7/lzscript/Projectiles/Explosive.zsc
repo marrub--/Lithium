@@ -14,6 +14,12 @@ class Lith_ExplosionAfterSmoke : Lith_BulletAfterSmoke {
 
 class Lith_Explosive : Actor;
 
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("explosion");
+   markSound("marathon/explode");
+}
+
 bool checkMarathon() {
    return Lith_UTIL.pData(_pdt_upgrade, UPGR_Seven7s);
 }

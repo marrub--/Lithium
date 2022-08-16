@@ -25,9 +25,9 @@ class Lith_RainDrop : Actor {
    bool m_done;
    override void beginPlay() {
       super.beginPlay();
-      vel.z   = fRandom[lith_rain](-19, -26);
-      scale.y = vel.z;
-      m_done  = false;
+      vel.z    = fRandom[lith_rain](-19, -26);
+      scale.y *= vel.z;
+      m_done   = false;
    }
    override void tick() {
       if(isFrozen()) {
@@ -84,7 +84,7 @@ class Lith_SnowDrop : Lith_RainDrop {
    default {
       Alpha 1.0;
       RenderStyle "Normal";
-      YScale 0.5;
+      YScale 0.1;
    }
    states {
    Spawn:

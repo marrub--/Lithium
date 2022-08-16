@@ -10,7 +10,10 @@ class Lith_BossBrainExplosion : Actor {
    default {
       +NOGRAVITY
    }
-
+   override void markPrecacheSounds() {
+      super.markPrecacheSounds();
+      markSound("weapons/rocklx");
+   }
    states
    {
    Spawn:
@@ -188,8 +191,6 @@ class Lith_BossEye : BossEye replaces BossEye {
          A_SetTics(40 / m_lastBreath);
          if(m_lastBreath > 6) {
             m_lastBreath = -15;
-         } else if(m_lastBreath == 3) {
-            A_StartSound("enemies/boss/talk", lch_body2, attenuation: ATTN_NONE);
          }
       }
       A_BrainSpit();
@@ -230,6 +231,13 @@ int m_shieldMax;
 bool m_bossEye;
 int m_boom;
 
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("enemies/ios/crack");
+   markSound("enemies/ios/crash");
+   markSound("brain/pain");
+   markSound("brain/death");
+}
 override void postBeginPlay() {
    super.postBeginPlay();
 

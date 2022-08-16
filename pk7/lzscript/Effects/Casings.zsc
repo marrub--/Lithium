@@ -37,7 +37,10 @@ class Lith_CasShell : Lith_CasingBase {
       BounceCount 5;
       BounceSound "casings/shell/bounce";
    }
-
+   override void markPrecacheSounds() {
+      super.markPrecacheSounds();
+      markSound("casings/shell/die");
+   }
    states {
    Spawn1:
       SCAS AABBCCDDEEFFGGHH 1;
@@ -69,6 +72,10 @@ class Lith_CasSmall : Lith_CasingBase {
       BounceSound "casings/bullet/bounce";
    }
 
+   override void markPrecacheSounds() {
+      super.markPrecacheSounds();
+      markSound("casings/bullet/die");
+   }
    states {
    Spawn1:
       BCAS ABCDEFGH 1;
@@ -100,6 +107,10 @@ class Lith_CasBig : Lith_CasingBase {
       BounceSound "casings/bullet/bounce";
    }
 
+   override void markPrecacheSounds() {
+      super.markPrecacheSounds();
+      markSound("casings/bullet/die");
+   }
    states {
    Spawn1:
       BBCA ABCDEFGH 1;
@@ -132,6 +143,10 @@ class Lith_Cas4Bore : Lith_CasShell {
    default {
       Scale 0.34;
       +RollSprite
+   }
+   override void markPrecacheSounds() {
+      super.markPrecacheSounds();
+      markSound("casings/shell/die");
    }
    states {
    Spawn1:

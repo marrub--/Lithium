@@ -104,7 +104,8 @@ class Lith_DWeapon : Lith_Weapon;
 default {
    Lith_Weapon.SprintSpeed 2.1;
    Inventory.RestrictedTo "Lith_DarkLordPlayer";
-
+   Weapon.BobStyle "InverseAlpha";
+   Weapon.BobSpeed 0.9;
    +Weapon.NoAutoFire
 }
 

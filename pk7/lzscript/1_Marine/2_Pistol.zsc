@@ -75,6 +75,14 @@ default
    +WEAPON.NOAUTOFIRE
 }
 
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("weapons/empty");
+   markSound("weapons/pistol/fire");
+   markSound("weapons/pistol/fireauto");
+   markSound("weapons/pistol/reload");
+   markSound("weapons/pistol/plasma/fire");
+}
 override double, double Lith_GetFirePattern()
 {
    switch(m_FirePattern = (m_FirePattern + 1) % 4) {

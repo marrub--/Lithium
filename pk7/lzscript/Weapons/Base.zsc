@@ -119,6 +119,11 @@ virtual state lith_ready(int flags) {
 }
 
 virtual void lith_reloadFinish(bool isAuto) {m_fired = 0;}
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound(m_scopeOutSnd);
+   markSound(m_scopeInSnd);
+}
 
 override double getSpeedFactor() {
    return owner && owner.player.readyWeapon == self ? m_speedUp : 1;
@@ -153,20 +158,14 @@ action(Weapon) void lith_a_setInterpolation(bool on) {
 }
 
 action(Weapon) void lith_a_overlayTick() {
-   float a;
-   int style;
-
+   float a = 1.0;
+   int style = style_normal;
    if(countInv("Lith_WeaponScopedToken")) {
       a = lith_weapons_scopealpha;
       style = style_subtract;
-   } else {
-      a = lith_weapons_alpha;
-      style = style_translucent;
-      if(!invoker.m_ads) {
-         a_zoomFactor(1.0, ZOOM_INSTANT);
-      }
+   } else if(!invoker.m_ads) {
+      a_zoomFactor(1.0, ZOOM_INSTANT);
    }
-
    a *= Lith_UTIL.pData(_pdt_alpha) / FIX;
 
    for(int psp = _psp_weapon;; ++psp) {
@@ -177,7 +176,9 @@ action(Weapon) void lith_a_overlayTick() {
       }
 
       a_overlayFlags(psp, pspf_alpha|pspf_renderstyle, true);
-      a_overlayRenderStyle(psp, style);
+      if(style != style_normal) {
+         a_overlayRenderStyle(psp, style);
+      }
       a_overlayAlpha(psp, a);
 
       if(Lith_Player(self).m_wasDamaged) {
@@ -282,11 +283,11 @@ action(Weapon) void Lith_A_DoubleState(bool oscillate, statelabel lh, statelabel
    }
 }
 
-action(Weapon) void Lith_A_DoubleOffset(bool left, int x, int y) {
+action(Weapon) void Lith_A_DoubleOffset(bool left, int x, int y, int flags = 0) {
    int fst = left ? _psp_double_lg : _psp_double_rg;
    int snd = left ? _psp_double_lf : _psp_double_rf;
-   A_OverlayOffset(fst, x, y);
-   A_OverlayOffset(snd, x, y);
+   A_OverlayOffset(fst, x, y, flags);
+   A_OverlayOffset(snd, x, y, flags);
 }
 
 action(Weapon) state Lith_A_Ready(int flags = 0) {

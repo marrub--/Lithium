@@ -56,6 +56,21 @@ int m_speed;
 
 property ViewBob: m_vBob;
 
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("player/barrier");
+   markSound("player/nuke");
+   markSound("player/death");
+   markSound("player/death2");
+   markSound("player/infraredoff");
+   markSound("body/flesh");
+   markSound("body/bullethit");
+   markSound("world/thunder");
+   markSound("amb/wind");
+   markSound("amb/rain");
+   markSound("weapons/dark/fire");
+}
+
 override void beginPlay() {
    super.beginPlay();
    viewbob = m_vBob;

@@ -66,10 +66,8 @@ class Lith_SwordHither : Actor
    }
 }
 
-class Lith_SwordHitter : Actor
-{
-   default
-   {
+class Lith_SwordHitter : Actor {
+   default {
       Damage 30;
       DamageType "Melee";
       Height 6;
@@ -83,12 +81,13 @@ class Lith_SwordHitter : Actor
       +MTHRUSPECIES
       +RIPPER
    }
-
    int m_TrailStep;
    int m_Delta;
-
-   states
-   {
+   override void markPrecacheSounds() {
+      super.markPrecacheSounds();
+      markSound("weapons/sword/attack");
+   }
+   states {
    Spawn:
       TNT1 A 0;
       TNT1 A 3 A_StartSound("weapons/sword/attack", lch_body);

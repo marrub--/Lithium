@@ -43,13 +43,14 @@ default
    +RocketTrail
    -NoGravity
 }
-
 vector3 m_PVel;
-
 action void Lith_A_SpawnRocketTrail() {
    A_SpawnItemEx("Lith_RocketTrail", 0, 0, 4, frandom(-0.5,0.5), frandom(-0.5,0.5), 0, 0, SXF_ABSOLUTEANGLE | SXF_NOCHECKPOSITION);
 }
-
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("effects/rocket/fly");
+}
 states
 {
 Spawn:

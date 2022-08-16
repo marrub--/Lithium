@@ -79,6 +79,10 @@ class Lith_DollPerson : Lith_BasePerson abstract {
    property DollNoise: m_dollNoise; /* doll's haunted [loads gun] */
    meta sound m_dollNoise;
 
+   override void markPrecacheSounds() {
+      super.markPrecacheSounds();
+      markSound(m_dollNoise);
+   }
    override void postBeginPlay() {
       super.postBeginPlay();
       if(gameState == gs_titlelevel) {

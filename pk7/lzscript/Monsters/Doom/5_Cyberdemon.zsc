@@ -109,6 +109,11 @@ default
    +NoRadiusDmg
 }
 
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("enemies/cyberdemon/fire");
+   markSound("enemies/cyberdemon/ready");
+}
 void Lith_A_CyberdemonShoot()
 {
    A_StartSound("enemies/cyberdemon/fire", lch_weapon);

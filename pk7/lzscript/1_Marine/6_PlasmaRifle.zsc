@@ -58,6 +58,20 @@ default
    Inventory.AltHudIcon "PLASA0";
 }
 
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("weapons/plasma/fire");
+   markSound("weapons/plasma/part/fire");
+   markSound("weapons/plasma/part/charge");
+   markSound("weapons/plasma/part/reloadin");
+   markSound("weapons/plasma/part/reloadout");
+   markSound("weapons/plasma/altfire");
+   markSound("weapons/plasma/empty");
+   markSound("weapons/plasma/laser/fire_start");
+   markSound("weapons/plasma/laser/fire_loop");
+   markSound("weapons/plasma/laser/fire_hum");
+   markSound("weapons/plasma/laser/fire_end");
+}
 action(Weapon) void Lith_A_FirePlasma()
 {
    lith_takeAmmo(35);

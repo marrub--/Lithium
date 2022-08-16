@@ -18,6 +18,10 @@ default {
    Lith_FlareDecor.Type "Lith_TorchSmallRFlare";
 }
 
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("amb/metalx");
+}
 states {
 Spawn:    FCAN ABC 4 bright; loop;
 Inactive: FCAN Y -1; stop;

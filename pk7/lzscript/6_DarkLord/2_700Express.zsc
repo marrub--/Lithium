@@ -78,6 +78,7 @@ override void tick() {
 }
 
 action(Weapon) void lith_fire700e() {
+   Lith_A_RecoilUp(2.5);
    A_GunFlash("DummyFlash");
    A_Recoil(1.5);
    A_Quake(2, 3, 0, 128);
@@ -167,20 +168,16 @@ Select:
 Fire:
    #### # 0 Lith_A_JumpIfMagEmpty;
    #### # 0 Lith_A_MagIncr;
-   700E A 1 offset(2, 32) {
-      lith_laser(0.0);
-      lith_a_setInterpolation(true);
-   }
    700E Y 1 bright {
       lith_fire700e();
       lith_laser(22.0);
    }
-   700E Z 1 bright offset(10, 28) {
-      Lith_A_RecoilUp(2);
-      lith_laser(16.0);
+   700E Z 1 bright offset(10, 28) lith_laser(16.0);
+   700E CCC 1 bright lith_laser(9.0);
+   700E CC 1 offset(9, 28) {
+      lith_a_setInterpolation(true);
+      lith_laser(8.0);
    }
-   700E CC 1 bright lith_laser(9.0);
-   700E CC 1 offset(9, 28) lith_laser(8.0);
    700E C 1 offset(7, 30) lith_laser(7.0);
    700E C 1 offset(5, 31) lith_laser(6.0);
    700E C 1 offset(4, 31) lith_laser(6.0);
@@ -248,13 +245,11 @@ ReloadDone:
       Lith_A_ReloadBobUp(2);
       lith_a_setInterpolation(true);
    }
-   700E C 1 offset(-15, 70);
    700E C 1 offset(-10, 60);
-   700E C 1 offset(-7, 40);
-   700E C 2 offset(-5, 36);
-   700E C 4 offset(-2, 34);
-   700E B 2 offset(1, 32);
-   700E A 2 lith_a_setInterpolation(false);
+   700E C 3 offset(-7, 40);
+   700E C 3 offset(-5, 36);
+   700E C 2 offset(-2, 34);
+   700E B 3 offset(1, 32) lith_a_setInterpolation(false);
    goto ReadySelector;
 }
 

@@ -51,8 +51,12 @@ weapons {
 
    \4bore {
       == lsnd/WeaponsD/4Bore
-      fire Fire # a1337spy
-      draw Draw # SI Series 6000
+      fire  Fire  # a1337spy
+      draw  Draw  # SI Series 6000
+      close Close # ^
+      open  Open  # ^
+      load  Load  # ^
+      empty Empty # ^
    }
 
    shrapnel {
@@ -76,15 +80,26 @@ weapons {
 
    minigun {
       == lsnd/WeaponsD/Minigun
-      fire   Fire        # Serious Sam: The First Encounter HD
-      rotate Rotate      # ^
-      up     RotateUp    # ^
-      click  Click       # ^
-      down   RotateDown  # E.Y.E: Divine Cybermancy
-      place  RotatePlace # Quake 2
-      empty  Empty       # Halo 3
-      pickup Pickup      # Doom 3
-      draw   Draw        # ^
+      fire    Fire    # Serious Sam: The First Encounter HD
+      rotate  Rotate  # SI Series 6000
+      click11 Click11 # ^
+      click12 Click12 # ^
+      click13 Click13 # ^
+      click14 Click14 # ^
+      click21 Click21 # ^
+      click22 Click22 # ^
+      click23 Click23 # ^
+      click24 Click24 # ^
+      place   Place   # ^
+      down1   Down1   # Killing Floor
+      down2   Down2   # ^
+      down3   Down3   # ^
+      empty   Empty   # Halo 3
+      pickup  Pickup  # Doom 3
+      draw    Draw    # ^
+      $random down {down1, down2, down3,}
+      $random click1 {click11, click12, click13, click14,}
+      $random click2 {click21, click22, click23, click24,}
    }
 
    dualrocket {

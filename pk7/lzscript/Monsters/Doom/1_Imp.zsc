@@ -87,6 +87,10 @@ default
    +FLOORCLIP
 }
 
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("imp/melee");
+}
 states
 {
 Spawn:

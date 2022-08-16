@@ -16,6 +16,10 @@ class Lith_HulgyonHit : Actor
       +THRUACTORS
    }
 
+   override void markPrecacheSounds() {
+      super.markPrecacheSounds();
+      markSound("weapons/hulgyon/proc");
+   }
    void Lith_A_Spawn(double z)
    {
       A_SpawnItemEx("Lith_HulgyonEffect", 0,0,z  , flags: SXF_TRANSFERPOINTERS);

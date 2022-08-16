@@ -78,6 +78,10 @@ default
    +Map07Boss1
    +FloorClip
 }
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("enemies/mancubus/fire");
+}
 
 states
 {

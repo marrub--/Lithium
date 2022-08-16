@@ -14,6 +14,10 @@ class Lith_RevenantTracer : RevenantTracer replaces RevenantTracer
    }
 
    int m_Timer;
+   override void markPrecacheSounds() {
+      super.markPrecacheSounds();
+      markSound("enemies/revenant/home");
+   }
 
    states
    {

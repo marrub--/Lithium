@@ -31,7 +31,6 @@ server int   lith_sv_minhealth     = 0;
 
 server float lith_weapons_zoomfactor     = 1.5;
 server float lith_weapons_scopealpha     = 0.2;
-server float lith_weapons_alpha          = 1.0;
 server bool  lith_weapons_riflescope     = false;
 server bool  lith_weapons_riflemodeclear = false;
 server bool  lith_weapons_magdrops       = true;

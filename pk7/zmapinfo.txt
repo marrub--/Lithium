@@ -75,7 +75,6 @@ skill tourist {
    healthFactor   = 2
    key            = "t"
    monsterHealth  = 0.1
-   mustConfirm    = "$LITH_SKILL_TOURIST"
    name           = "$DIFF_TOURIST"
    respawnTime    = 0.5
    spawnFilter    = 2
@@ -104,7 +103,6 @@ skill nightmare {
    damageFactor  = 2
    key           = "t"
    monsterHealth = 0.5
-   mustConfirm   = "$LITH_SKILL_NIGHTMARE"
    name          = "$DIFF_NMARE"
    respawnTime   = 0.5
    spawnFilter   = 5

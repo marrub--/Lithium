@@ -100,7 +100,6 @@ k32 AddAngle(i32 x, i32 y) {
    if(wl.a_cur >= countof(wl.a_angles)) {
       return 0;
    }
-
    struct polar *p = &wl.a_angles[wl.a_cur++];
    *p = ctopol(x - wl.a_x, y - wl.a_y);
    return p->ang;

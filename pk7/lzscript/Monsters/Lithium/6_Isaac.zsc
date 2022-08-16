@@ -94,6 +94,10 @@ void Lith_A_SpawnDupe()
 }
 
 int m_Dupes;
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("enemies/isaac/fire");
+}
 
 states
 {

@@ -36,6 +36,10 @@ override void Lith_OnDeath()
    let m = Lith_Boss_Isaac(Master);
    if(m) m.m_Dupes--;
 }
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("enemies/isaac/fire");
+}
 
 states
 {

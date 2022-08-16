@@ -353,7 +353,6 @@ struct setting const st_wep[] = {
    {_s_boole, "weapons_magdrops",      S_cvBoole},
    {_s_boole, "weapons_magfadeout",    S_cvBoole},
    {_s_boole, "weapons_nofirebob",     S_cvBoole},
-   {_s_fixed, "weapons_alpha",         S_cvFixed, S_bndk(0.0,  1.0), "mult"},
    {_s_fixed, "weapons_recoil",        S_cvFixed, S_bndk(0.0,  1.0), "mult"},
    {_s_fixed, "weapons_reloadbob",     S_cvFixed, S_bndk(0.0,  1.0), "mult"},
    {_s_fixed, "weapons_ricochetvol",   S_cvFixed, S_bndk(0.0,  1.0), "mult"},

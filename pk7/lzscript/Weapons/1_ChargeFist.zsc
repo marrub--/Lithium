@@ -10,10 +10,8 @@
 class Lith_FistCharge : Inventory {default {Inventory.MaxAmount 0x7FFFFFFF;}} /* Yes. */
 class Lith_FistHit : Powerup {default {Powerup.Duration 5;}}
 
-class Lith_ChargeFistQuakerOats : Actor
-{
-   default
-   {
+class Lith_ChargeFistQuakerOats : Actor {
+   default {
       +NOGRAVITY
       +NOINTERACTION
    }
@@ -29,21 +27,21 @@ class Lith_ChargeFistQuakerOats : Actor
    }
 }
 
-class Lith_ChargeFistPuff : Actor
-{
-   default
-   {
+class Lith_ChargeFistPuff : Actor {
+   default {
       Alpha 0.6;
       RenderStyle "Translucent";
-
       +HITTRACER
       +NOINTERACTION
       +PUFFGETSOWNER
       +PUFFONACTORS
    }
-
-   states
-   {
+   override void markPrecacheSounds() {
+      super.markPrecacheSounds();
+      markSound("weapons/cfist/hit");
+      markSound("weapons/cfist/hitwall");
+   }
+   states {
    Crash:
    Spawn:
       TNT1 A 0;
@@ -70,8 +68,7 @@ class Lith_ChargeFistPuff : Actor
 
 class Lith_ChargeFist : Lith_OutcastsWeapon;
 
-default
-{
+default {
    Lith_Weapon.SpawnType "Lith_ChainsawPickup";
    DamageType "Melee";
    Tag "$LITH_INFO_SHORT_ChargeFist";
@@ -79,14 +76,18 @@ default
    Weapon.SlotNumber 1;
    Weapon.SlotPriority 1;
    Inventory.AltHudIcon "CFISZ0";
-
    +WEAPON.CHEATNOTWEAPON
    +WEAPON.MELEEWEAPON
    +WEAPON.NOAUTOFIRE
 }
-
-states(Weapon)
-{
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("weapons/cfist/ready");
+   markSound("weapons/cfist/charge");
+   markSound("weapons/cfist/chargeend");
+   markSound("weapons/cfist/fire");
+}
+states(Weapon) {
 Ready:
    TNT1 A 0 {self.TakeInventory("Lith_FistCharge", 0x7FFFFFFF);}
    TNT1 A 1 Lith_A_Ready;
@@ -122,7 +123,10 @@ WaitForRelease:
    #### G 1 A_ReFire("WaitForRelease");
 Release:
    TNT1 A 0 A_StartSound("weapons/cfist/chargeend", lch_weapon);
-   TNT1 A 0 A_GunFlash("SekritHax", GFF_NOEXTCHANGE); /* OH NO NOT yholehax */
+   TNT1 A 0 {
+      A_GunFlash("SekritHax", GFF_NOEXTCHANGE); /* OH NO NOT yholehax */
+      a_overlayRenderStyle(_psp_flash, style_normal);
+   }
 Release1:
    CFI2 A 0 A_JumpIf(Lith_UTIL.pData(_pdt_pclass) == pcl_marine, "Release2");
    CCF2 A 0;

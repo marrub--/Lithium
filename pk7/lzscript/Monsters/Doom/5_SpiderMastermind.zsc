@@ -87,6 +87,12 @@ override class<Actor> GetBloodType(int type)
       return Super.GetBloodType(type);
 }
 
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("spider/walk");
+   markSound("enemies/spiderdemon/fire");
+   markSound("enemies/spiderdemon/ready");
+}
 void Lith_A_Metal()
 {
    A_StartSound("spider/walk", lch_body, attenuation: ATTN_IDLE);

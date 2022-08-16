@@ -9,8 +9,7 @@
 
 class Lith_MissileLauncher : Lith_OutcastsWeapon;
 
-default
-{
+default {
    Tag "$LITH_INFO_SHORT_MissileLauncher";
    Weapon.UpSound "weapons/missile/draw";
    Weapon.SlotNumber 5;
@@ -22,12 +21,16 @@ default
    Inventory.AltHudIcon "MLAUA0";
    Lith_Weapon.MagSize 10;
    Lith_Weapon.AmmoType "Lith_RocketAmmo";
-
    +WEAPON.CHEATNOTWEAPON
 }
-
 int m_Reset;
-
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("weapons/missile/empty");
+   markSound("weapons/missile/fire");
+   markSound("weapons/missile/reloadin");
+   markSound("weapons/missile/reloadout");
+}
 action(Weapon) State Lith_A_FireMissile()
 {
    Lith_A_MagIncr();
