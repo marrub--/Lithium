@@ -65,6 +65,7 @@ weapons {
       draw   Draw   # ^
       bounce Bounce # Devil May Cry 2
       hit    Hit    # ^
+      $volume bounce 0.2
    }
 
    motra {

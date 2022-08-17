@@ -11,24 +11,23 @@ class Lith_ShrapnelProjectile : Actor {
       BounceType "Doom";
       BounceSound "weapons/shrapnel/bounce";
       RipSound "weapons/shrapnel/hit";
-      DamageFunction (11);
+      DamageFunction (12);
       DamageType "Shrapnel";
       Gravity 0.5;
       Height 8;
       Radius 8;
       Species "Lith_Player";
-      Speed 40;
+      Speed 10;
       Projectile;
       +ExplodeOnWater
       +MThruSpecies
+      +NoClip
       -NoGravity
    }
-
    state lith_a_jumpScale(double scale) {
       a_setScale(scale);
       return a_jump(255/17, "Spawn2");
    }
-
    states {
    Spawn:
       TNT1 A 0;
@@ -38,11 +37,32 @@ class Lith_ShrapnelProjectile : Actor {
       SHCA E 0 lith_a_jumpScale(0.3);
    Spawn2:
       #### # 1 A_SpawnItemEx("Lith_CasingSmoke", 0,0,3, frandom(-0.2,0),frandom(-0.2,0));
+      #### # 0 {
+         bNoClip = false;
+      }
+      #### # 1;
       loop;
    Death:
-      #### # 140;
+      #### # 10;
       #### # 1 A_FadeOut;
       wait;
+   }
+}
+
+class Lith_ShrapnelPuff : Actor {
+   default {
+      +PuffOnActors
+      +NoBlockmap
+      +NoGravity
+      +NoClip
+      +NoSector
+      +PuffGetsOwner
+   }
+   override void postBeginPlay() {
+      angle = angleTo(target);
+      let prj = a_spawnProjectile('Lith_ShrapnelProjectile', 0, 0, fRandom(-20, 20), CMF_OFFSETPITCH, fRandom(-20, 20));
+      prj.target = target;
+      destroy();
    }
 }
 
@@ -56,39 +76,34 @@ default {
    Weapon.UpSound "weapons/shrapnel/draw";
    Lith_Weapon.AmmoType "Lith_ShellAmmo";
 }
-
 action(Weapon) void Lith_A_FireShrapnel() {
    lith_takeAmmo(1);
    A_StartSound("weapons/shrapnel/fire", lch_weapon);
    A_AlertMonsters();
-   A_GunFlash("DummyFlash");
-   Lith_A_RecoilUp(5);
+   A_GunFlash();
+   a_overlayRenderStyle(_psp_flash, style_add);
+   Lith_A_RecoilUp(2);
    lith_a_setInterpolation(true);
-   for(int i = 0; i < 12; ++i) {
-      A_FireProjectile("Lith_ShrapnelProjectile", frandom(-5, 5), false, frandom(5, 10), frandom(-7, 7), FPF_NOAUTOAIM);
-   }
+   Lith_FireBullets(4.5, 4.5, 14, 12, FBF_NORANDOM, puffType: 'Lith_ShrapnelPuff');
 }
-
 states(Weapon) {
 Ready:
    SHCA A 1 Lith_A_Ready;
    loop;
-
 Deselect:
    SHCA A 1 Lith_A_Lower(_raise_fast);
    loop;
-
 Select:
    SHCA A 1 Lith_A_Raise(_raise_fast);
    loop;
-
 Fire:
    #### # 0 lith_jumpNoAmmo;
    #### # 0 lith_a_setInterpolation(true);
    SHCA A 1;
    SHCA A 1 offset(2, 33);
-   SHCA C 1 offset(164, 109) Lith_A_FireShrapnel();
-   SHCA B 1 offset(173, 117);
+   SHCA A 1 offset(4, 34);
+   SHCA C 1 offset(164, 109);
+   SHCA B 1 offset(173, 117) bright lith_a_fireShrapnel;
    SHCA B 1 offset(180, 121);
    SHCA B 1 offset(183, 123);
    SHCA B 1 offset(178, 120);
@@ -97,6 +112,7 @@ Fire:
    SHCA C 1 offset(152, 104);
    #### # 0 lith_a_setInterpolation(false);
    SHCA A 1 offset(1, 32);
+   SHCA A 1 a_reFire;
    goto ReadySelector;
 FireEmpty:
    SHCA A 2 offset(3, 38);
@@ -106,6 +122,9 @@ FireEmpty:
    SHCA A 1 offset(2, 33);
    SHCA A 5 offset(1, 32);
    goto ReadySelector;
+Flash:
+   SHCA F 2 bright;
+   stop;
 }
 
 /* EOF */

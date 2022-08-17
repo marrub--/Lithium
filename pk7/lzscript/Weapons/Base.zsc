@@ -86,7 +86,7 @@ meta double m_sprintSpeed;
 meta class<Actor> m_spawnType;
 
 bool m_side;
-float m_speedUp;
+bool m_speedUp;
 
 protected bool m_ads;
 
@@ -111,6 +111,7 @@ virtual double, double lith_getFirePattern() {return 0, 0;}
 virtual bool           lith_checkSprint()    {return false;}
 
 virtual state lith_ready(int flags) {
+   m_speedUp = false;
    if(lith_checkSprint()) {
       return resolveState("_Sprint");
    } else {
@@ -126,12 +127,7 @@ override void markPrecacheSounds() {
 }
 
 override double getSpeedFactor() {
-   return owner && owner.player.readyWeapon == self ? m_speedUp : 1;
-}
-
-override void beginPlay() {
-   super.beginPlay();
-   m_speedUp = m_defaultSpeed;
+   return owner && owner.player.readyWeapon == self ? (m_speedUp ? m_sprintSpeed : m_defaultSpeed) : 1;
 }
 
 int lith_getRaiseSpeed(Lith_RaiseSpeed speed) {
@@ -506,7 +502,7 @@ action(Weapon) clearScope int lith_maxInv(class<Inventory> itemType) {
 }
 
 action(Weapon) void lith_sprint() {
-   invoker.m_speedUp = invoker.m_sprintSpeed;
+   invoker.m_speedUp = true;
 }
 
 action(Weapon) state lith_jumpIfSprint() {
@@ -515,7 +511,7 @@ action(Weapon) state lith_jumpIfSprint() {
    }
 
    if(getPlayerInput(INPUT_BUTTONS) & BT_SPEED == 0) {
-      invoker.m_speedUp = invoker.m_defaultSpeed;
+      invoker.m_speedUp = false;
       return resolveState("_SprintDone");
    } else {
       return null;

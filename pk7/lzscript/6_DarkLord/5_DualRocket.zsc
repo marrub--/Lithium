@@ -94,6 +94,7 @@ FireEmptyLH:
    FRAN A 0;
 FireOffsetsLH:
    #### # 1 Lith_A_DoubleOffset(_lhs, -4, 4, WOF_INTERPOLATE);
+   #### # 2 Lith_A_DoubleOffset(_lhs, -38-random(-2,10), 38+random(-2,10), WOF_INTERPOLATE);
    #### # 2 Lith_A_DoubleOffset(_lhs, -24-random(-2,8), 24+random(-2,8), WOF_INTERPOLATE);
    #### # 1 Lith_A_DoubleOffset(_lhs, -6 -random(-2,2), 11+random(-2,2), WOF_INTERPOLATE);
    #### # 1 Lith_A_DoubleOffset(_lhs, -3 -random(-1,1), 8 +random(-1,1), WOF_INTERPOLATE);
@@ -106,6 +107,7 @@ FireEmptyRH:
    SOPH A 0;
 FireOffsetsRH:
    #### # 1 Lith_A_DoubleOffset(_rhs, 4, 4, WOF_INTERPOLATE);
+   #### # 2 Lith_A_DoubleOffset(_rhs, 38+random(-2,10), 38+random(-2,10), WOF_INTERPOLATE);
    #### # 2 Lith_A_DoubleOffset(_rhs, 24+random(-2,8), 24+random(-2,8), WOF_INTERPOLATE);
    #### # 1 Lith_A_DoubleOffset(_rhs, 5 +random(-2,2), 11+random(-2,2), WOF_INTERPOLATE);
    #### # 1 Lith_A_DoubleOffset(_rhs, 3 +random(-1,1), 8 +random(-1,1), WOF_INTERPOLATE);

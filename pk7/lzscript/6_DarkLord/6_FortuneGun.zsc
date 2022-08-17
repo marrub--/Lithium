@@ -249,7 +249,7 @@ FireCharge:
       A_SpawnItemEx("Lith_FortuneSpark2", flags: SXF_SETMASTER|SXF_NOCHECKPOSITION);
       A_FireProjectile("Lith_LightProjectileSkyShort", 0);
    }
-   FORT AAAAAAAAAAAAAA 1 a_overlayOffset(_psp_weapon, fRandom[lith_fortune](0, 4), fRandom[lith_fortune](32, 34), wof_interpolate);
+   FORT AAAAAA 1 a_overlayOffset(_psp_weapon, fRandom[lith_fortune](0, 4), fRandom[lith_fortune](32, 34), wof_interpolate);
    FORT A 0 a_jumpIf(--invoker.m_chargeTime, "FireCharge");
 Fire2:
    #### # 0 lith_jumpNoAmmo(350);
