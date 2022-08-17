@@ -6,20 +6,33 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_DivisionSigilSprite : Lith_AnimItemSprite {
+class Lith_DivisionSigilSprite : Lith_ItemSprite {
    default {
-      Lith_AnimItemSprite.Phases 23;
       +Bright
    }
-
    states(Actor) {
-   SetSpr:
-      DIVI ABCDEFGHIJKLMNOPQRSTUVW 0 Lith_A_JumpPhase;
-      stop;
+   Spawn:
+      DIVI ABCDEFGHIJKLMNOPQRSTUVW 1;
+      loop;
    }
 }
 
 class Lith_DivisionSigil : Lith_DivisionItem {
+   override void postBeginPlay() {
+      super.postBeginPlay();
+      spawn("Lith_DivisionSigilSprite", pos).master = self;
+   }
+   override bool canPickup(Actor mo) {
+      if(super.canPickup(mo)) {
+         return !Lith_UTIL.pData(_pdt_hassigil);
+      } else {
+         return false;
+      }
+   }
+   override bool tryPickup(in out Actor mo) {
+      mo.acs_scriptCall("Lith_GetSigil");
+      return super.tryPickup(mo);
+   }
    default {
       Tag "$LITH_ITEM_TAG_DivisionSigil";
       Lith_InventoryItem.InvName "DivisionSigil";
@@ -29,24 +42,6 @@ class Lith_DivisionSigil : Lith_DivisionItem {
       Lith_InventoryItem.InvSell -1;
       Lith_InventoryItem.ItemType _itemt_bagitem;
       +Lith_DivisionItem.Pkup_NoSprite
-   }
-
-   override void postBeginPlay() {
-      super.postBeginPlay();
-      spawn("Lith_DivisionSigilSprite", pos).master = self;
-   }
-
-   override bool canPickup(Actor mo) {
-      if(super.canPickup(mo)) {
-         return !Lith_UTIL.pData(_pdt_hassigil);
-      } else {
-         return false;
-      }
-   }
-
-   override bool tryPickup(in out Actor mo) {
-      mo.acs_scriptCall("Lith_GetSigil");
-      return super.tryPickup(mo);
    }
 }
 
@@ -80,21 +75,18 @@ class Lith_OrSigil : Lith_DivisionItem {
 class Lith_DivisionItem : Lith_InventoryItem;
 
 mixin Lith_Pickup;
-
+override void postBeginPlay() {
+   super.postBeginPlay();
+   pkPostBeginPlay();
+}
+override void tick() {
+   super.tick();
+   pkTick();
+}
 default {
    Lith_DivisionItem.Glow "Lith_ItemGlow";
    Inventory.PickupSound "player/pickup/evil";
    +Lith_DivisionItem.Pkup_Generic
-}
-
-override void postBeginPlay() {
-   super.postBeginPlay();
-   Lith_PickupPostBeginPlay();
-}
-
-override void tick() {
-   super.tick();
-   Lith_PickupTick();
 }
 
 /* EOF */

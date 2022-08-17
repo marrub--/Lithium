@@ -146,6 +146,12 @@ alloc_aut(0) stkcall i32 rainbowcr(void) {
    return crs[ACS_Timer() / 4 % countof(crs)];
 }
 
+alloc_aut(0) stkcall i32 const_deg(i32 n) {
+   n %= 360;
+   if(n < 0) n += 360;
+   return n;
+}
+
 alloc_aut(0) stkcall i32 fastabs(i32 n) {
    #define abs_impl
    #include "m_math.c"

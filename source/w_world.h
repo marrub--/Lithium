@@ -107,6 +107,7 @@ enum ZscName(EData) {
    _edt_sky1,
    _edt_sky2,
    _edt_windspeed,
+   _edt_windangle,
 };
 
 enum ZscName(Fun) {

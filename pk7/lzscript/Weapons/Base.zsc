@@ -525,7 +525,7 @@ Spawn:
       /* UDMF maps have a surprising amount of control over things, so we
        * have to use a load of flags to make this work properly.
        */
-      if(!bDROPPED && m_spawnType)
+      if(m_spawnType) {
          A_SpawnItemEx(m_spawnType, flags:
                        SXF_TRANSFERTRANSLATION | SXF_TRANSFERAMBUSHFLAG  |
                        SXF_TRANSFERPITCH       | SXF_TRANSFERPOINTERS    |
@@ -533,6 +533,7 @@ Spawn:
                        SXF_TRANSFERSTENCILCOL  | SXF_TRANSFERALPHA       |
                        SXF_TRANSFERRENDERSTYLE | SXF_TRANSFERSPRITEFRAME |
                        SXF_TRANSFERROLL);
+      }
    }
    stop;
 }

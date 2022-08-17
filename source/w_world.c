@@ -120,7 +120,7 @@ script static void MInit(void) {
       env = _menv_hell;
    }
    ml.humidity    = mi_opt(_mi_key_humidity,    v, rand() % 101);
-   ml.temperature = mi_opt(_mi_key_temperature, v, rand() % 301 - 80);
+   ml.temperature = mi_opt(_mi_key_temperature, v, rand() % 301 - 100);
    ml.windspeed   = mi_opt(_mi_key_windspeed,   v, rand() % 100);
    i32  lrnd      = ml.temperature * 12 / 55;
    i32  hrnd      = fastabs(ml.temperature / 2) * (ml.humidity / 40);

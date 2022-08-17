@@ -84,13 +84,13 @@ property UpgrNum: m_upgNum;
 
 override void postBeginPlay() {
    super.postBeginPlay();
-   lith_pickupPostBeginPlay();
+   pkPostBeginPlay();
    acs_namedExecuteWithResult("Lith_CbiItemWasSpawned", m_upgNum);
 }
 
 override void tick() {
    super.tick();
-   lith_pickupTick();
+   pkTick();
 }
 
 override bool tryPickup(in out Actor mo) {

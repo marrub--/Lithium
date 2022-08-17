@@ -11,12 +11,10 @@ class Lith_AllMap : Inventory replaces Allmap {
       Tag "$LITH_INFO_SHORT_AllMap";
       Inventory.PickupMessage "";
       Inventory.PickupSound "player/pickup/allmap";
-
       +CountItem
       +Inventory.FancyPickupSound
       +CastSpriteShadow
    }
-
    override bool tryPickup(in out Actor mo) {
       Lith_HERMES.Log(msg_item, 5, "_AllMap");
       Lith_HERMES.UnlockBip(mo, "AllMap");
@@ -25,7 +23,6 @@ class Lith_AllMap : Inventory replaces Allmap {
       goAwayAndDie();
       return true;
    }
-
    states {
    Spawn:
       PMAP ABCDCB 6 bright;
@@ -48,12 +45,10 @@ class Lith_Berserk : Inventory replaces Berserk {
       Tag "$LITH_INFO_SHORT_Berserk";
       Inventory.PickupMessage "";
       Inventory.PickupSound "player/pickup/berserk";
-
       +CountItem
       +Inventory.FancyPickupSound
       +CastSpriteShadow
    }
-
    override bool tryPickup(in out Actor mo) {
       Lith_HERMES.Log(msg_item, 5, "_Berserk");
       Lith_HERMES.UnlockBip(mo, "Berserk");
@@ -65,7 +60,6 @@ class Lith_Berserk : Inventory replaces Berserk {
       goAwayAndDie();
       return true;
    }
-
    states {
    Spawn:
       PSTR A -1;
@@ -97,11 +91,9 @@ class Lith_Infrared : Inventory replaces Infrared {
       Tag "$LITH_INFO_SHORT_Infrared";
       Inventory.PickupMessage "";
       Inventory.PickupSound "player/pickup/infrared";
-
       +CountItem
       +Inventory.FancyPickupSound
    }
-
    override bool tryPickup(in out Actor mo) {
       Lith_HERMES.Log(msg_item, 5, "_Infrared");
       Lith_HERMES.UnlockBip(mo, "Infrared");
@@ -110,7 +102,6 @@ class Lith_Infrared : Inventory replaces Infrared {
       goAwayAndDie();
       return true;
    }
-
    states {
    Spawn:
       PVIS A 6 bright;
@@ -119,19 +110,31 @@ class Lith_Infrared : Inventory replaces Infrared {
    }
 }
 
-class Lith_InvulnerabilitySphereSprite : Lith_MagicSphereItemSprite {
-   default {Lith_AnimItemSprite.Phases 24;}
-   states {SetSpr: PINV AAAAAABBBBBBCCCCCCDDDDDD 0 Lith_A_JumpPhase; stop;}
+class Lith_InvulnerabilitySphereSprite : Lith_FadeOutItemSprite {
+   states {
+   Spawn:
+      PINV ABCD 6 bright;
+      loop;
+   }
 }
 
-class Lith_MegasphereSprite : Lith_MagicSphereItemSprite {
-   default {Lith_AnimItemSprite.Phases 30;}
-   states {SetSpr: MEGA AAAAAABBBBBBCCCCCCDDDDDDBBBBBB 0 Lith_A_JumpPhase; stop;}
+class Lith_MegasphereSprite : Lith_FadeOutItemSprite {
+   states {
+   Spawn:
+      MEGA ABCDB 6 bright;
+      loop;
+   }
 }
 
-class Lith_BlurSphereSprite : Lith_MagicSphereItemSprite {
-   default {Lith_AnimItemSprite.Phases 36; +VISIBILITYPULSE}
-   states {SetSpr: PINS AAAAAABBBBBBCCCCCCDDDDDDCCCCCCBBBBBB 0 Lith_A_JumpPhase; stop;}
+class Lith_BlurSphereSprite : Lith_FadeOutItemSprite {
+   default {
+      +VisibilityPulse
+   }
+   states {
+   Spawn:
+      PINS ABCDCB 6 bright;
+      loop;
+   }
 }
 
 class Lith_Megasphere : Inventory replaces Megasphere {
@@ -139,11 +142,9 @@ class Lith_Megasphere : Inventory replaces Megasphere {
       Tag "$LITH_TAG_Megasphere";
       Inventory.PickupMessage "";
       Inventory.PickupSound "player/pickup/mega";
-
       +CountItem
       +Inventory.FancyPickupSound
    }
-
    override bool tryPickup(in out Actor mo) {
       Lith_HERMES.Log(msg_item, 4, "_Megasphere");
       Lith_HERMES.UnlockBip(mo, "Taochyan");
@@ -182,7 +183,6 @@ class Lith_RadSuit : Inventory replaces RadSuit {
       +Inventory.FancyPickupSound
       +CastSpriteShadow
    }
-
    override bool tryPickup(in out Actor mo) {
       Lith_HERMES.Log(msg_item, 5, "_RadSuit");
       Lith_HERMES.UnlockBip(mo, "RadSuit");
@@ -191,7 +191,6 @@ class Lith_RadSuit : Inventory replaces RadSuit {
       goAwayAndDie();
       return true;
    }
-
    states {
    Spawn:
       SUIT A -1 bright;
@@ -199,9 +198,12 @@ class Lith_RadSuit : Inventory replaces RadSuit {
    }
 }
 
-class Lith_SoulSphereSprite : Lith_MagicSphereItemSprite {
-   default {Lith_AnimItemSprite.Phases 30;}
-   states {SetSpr: SOUL AAAAAABBBBBBCCCCCCDDDDDDBBBBBB 0 Lith_A_JumpPhase; stop;}
+class Lith_SoulSphereSprite : Lith_FadeOutItemSprite {
+   states {
+   Spawn:
+      SOUL ABCDB 6 bright;
+      loop;
+   }
 }
 
 class Lith_SoulSphere : Inventory replaces SoulSphere {
@@ -209,11 +211,9 @@ class Lith_SoulSphere : Inventory replaces SoulSphere {
       Tag "$LITH_TAG_SoulSphere";
       Inventory.PickupMessage "";
       Inventory.PickupSound "player/pickup/super";
-
       +CountItem
       +Inventory.FancyPickupSound
    }
-
    override bool tryPickup(in out Actor mo) {
       Lith_HERMES.Log(msg_item, 4, "_Soulsphere");
       Lith_HERMES.UnlockBip(mo, "Heart");
@@ -222,7 +222,6 @@ class Lith_SoulSphere : Inventory replaces SoulSphere {
       goAwayAndDie();
       return true;
    }
-
    states {
    Spawn:
       TNT1 A 0;
@@ -262,7 +261,6 @@ class Lith_ArtiFly : Inventory replaces ArtiFly {
       goAwayAndDie();
       return true;
    }
-
    states {
    Spawn:
       SOAR ABCB 5;
@@ -277,12 +275,10 @@ class Lith_ArtiTeleport : Inventory replaces ArtiTeleport {
       Inventory.PickupFlash "PickupFlash";
       Inventory.PickupSound "misc/p_pkup";
       Inventory.RespawnTics 4320;
-
       +CountItem
       +Inventory.FancyPickupSound
       +CastSpriteShadow
    }
-
    override bool tryPickup(in out Actor mo) {
       Lith_HERMES.Log(msg_item, 5, "_ArtiTeleport");
       mo.useInventory(mo.giveInventoryType("ArtiTeleport"));
@@ -290,7 +286,6 @@ class Lith_ArtiTeleport : Inventory replaces ArtiTeleport {
       goAwayAndDie();
       return true;
    }
-
    states(Actor) {
    Spawn:
       ATLP ABCB 4;
@@ -350,12 +345,10 @@ class Lith_InvulnerabilitySphere : Inventory replaces InvulnerabilitySphere {
       Tag "$LITH_LOG_Invuln";
       Inventory.PickupMessage "";
       Inventory.PickupSound "player/pickup/invuln";
-
       +CountItem
       +Inventory.BigPowerUp
       +Inventory.FancyPickupSound
    }
-
    override bool tryPickup(in out Actor mo) {
       Lith_HERMES.Log(msg_item, 6, "_Invuln");
       Lith_HERMES.UnlockBip(mo, "Invulnerability");
@@ -364,7 +357,6 @@ class Lith_InvulnerabilitySphere : Inventory replaces InvulnerabilitySphere {
       goAwayAndDie();
       return true;
    }
-
    states(Actor) {
    Spawn:
       TNT1 A 0;
@@ -381,11 +373,9 @@ class Lith_Backpack : Lith_ScoreItem replaces Backpack {
       Lith_BasicPickup.LogName "Backpack", 5;
       Lith_BasicPickup.InfoPage "Backpack";
       Lith_ScoreItem.Score 10000;
-
       +CountItem
       +CastSpriteShadow
    }
-
    override void lith_onPickup(Actor mo) {
       static const class<Inventory> AMMOS[] = {
          "Lith_BulletAmmo",
@@ -402,7 +392,6 @@ class Lith_Backpack : Lith_ScoreItem replaces Backpack {
       }
       super.lith_onPickup(mo);
    }
-
    states {
    Spawn:
       BPAK A -1;
@@ -415,15 +404,11 @@ class Lith_Shobon : Actor {
       +NOINTERACTION
       +CastSpriteShadow
    }
-
    vector2 m_DoruPos;
-
    override void Tick() {
       super.Tick();
-
       if(Master) {
          let v = Master.Vel;
-
          if(!(v.X ~== 0) || !(v.Y ~== 0)) {
             double a  = Atan2(v.Y, v.X) - 180;
             double m  = v.XY.Length();
@@ -431,11 +416,9 @@ class Lith_Shobon : Actor {
             double y_ = Lith_UTIL.Lerp(m_DoruPos.Y, Sin(a) * 32, m / 32.);
             m_DoruPos = (x_, y_);
          }
-
          SetOrigin(Master.Pos + m_DoruPos, true);
       }
    }
-
    states {
    Spawn:
       SHOB A -1;
@@ -448,12 +431,10 @@ class Lith_ShobonSphere : Inventory {
       Tag "$LITH_TAG_ShobonSphere";
       Inventory.PickupMessage "";
       Inventory.PickupSound "misc/p_pkup";
-
       +CountItem
       +Inventory.BigPowerUp
       +Inventory.FancyPickupSound
    }
-
    override bool tryPickup(in out Actor mo) {
       Lith_HERMES.Log(msg_item, 5, "_ShobonSphere");
       spawn("Lith_Shobon", mo.pos).master = mo;
@@ -461,7 +442,6 @@ class Lith_ShobonSphere : Inventory {
       goAwayAndDie();
       return true;
    }
-
    states {
    Spawn:
       TNT1 A 0;

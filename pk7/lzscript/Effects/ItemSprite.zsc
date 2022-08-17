@@ -6,74 +6,43 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_AnimItemSprite : Lith_ItemSprite
-{
-   default
-   {
-      +Bright
-   }
-
-   property Phases: m_phases;
-
-   meta int m_phases;
-   int m_iter, m_phase;
-
-   action state lith_a_jumpPhase()
-      {return invoker.m_phase == invoker.m_iter++ ? resolveState("Super::SpawnLoop") : null;}
-
-   states
-   {
-   Spawn:
-      TNT1 A 0 {m_phase = random(0, m_phases - 1);}
-      goto Super::Spawn;
-   SpawnLoop:
-      TNT1 A 0 {
-         m_phase = (m_phase + 1) % m_phases;
-         m_iter = 0;
-         return resolveState("SetSpr");
-      }
+class Lith_FadeOutItemSprite : Lith_ItemSprite {
+   states {
+   Done:
+      #### # 1 A_FadeOut;
+      wait;
    }
 }
-
-class Lith_MagicSphereItemSprite : Lith_AnimItemSprite
-   {states {Done: #### # 1 A_FadeOut; wait;}}
 
 class Lith_ItemSprite : Actor;
 
-default
-{
-   +NoInteraction
-   +NoTimeFreeze
-   +CastSpriteShadow
-}
-
-vector3 m_origPos;
 int m_fAng;
 int m_fzAng;
-
-states
-{
+default {
+   +NoInteraction
+   +CastSpriteShadow
+}
+override void postBeginPlay() {
+   super.postBeginPlay();
+   m_fAng  = random(0, 359);
+   m_fzAng = random(0, 359);
+}
+override void tick() {
+   if(isFrozen()) {
+      return;
+   }
+   Lith_UTIL.stateTick(self);
+   if(master && (master.bSpecial || master.special)) {
+      let fAng  = (msTimeF() + m_fAng)  * 0.06666;
+      let fzAng = (msTimeF() + m_fzAng) * 0.1;
+      setOrigin(master.pos + (cos(fAng) * 4.0, sin(fAng) * 4.0, 16.0 + sin(fzAng) * 12.0), true);
+   } else if(!inStateSequence(curState, resolveState("Done"))) {
+      setState(resolveState("Done"));
+   }
+}
+states {
 Spawn:
-   #### # 0;
-   #### # 0 {
-      m_fAng  = random(0, 359);
-      m_fzAng = random(0, 359);
-      return resolveState("SpawnLoop");
-   }
-   stop;
-SpawnLoop:
-   #### # 1 bright;
-   #### # 0 bright {
-      if(!master || (!master.bSpecial && !master.special)) {
-         return resolveState("Done");
-      } else {
-         m_fAng  = (m_fAng  + 2) % 360;
-         m_fzAng = (m_fzAng + 3) % 360;
-         m_origPos = pos;
-         a_warp(AAPTR_MASTER, cos(m_fAng) * 4.0, sin(m_fAng) * 4.0, 16.0 + (sin(m_fzAng) * 12.0), 0.0, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE);
-         return resolveState("SpawnLoop");
-      }
-   }
+   #### # -1 bright;
    stop;
 Done:
    TNT1 A 0;

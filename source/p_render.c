@@ -28,18 +28,14 @@ void P_Ren_LevelUp(void) {
    }
 }
 
-script_str ext("ACS") addr(OBJ "ShowMission") void Z_ShowMission(void) {
-   pl.missionstatshow = ACS_Timer() + 105;
-}
-
 alloc_aut(0) stkcall static
 void P_Ren_Mission(void) {
    if(ACS_Timer() == 0) {
       return;
    }
-   i32 delta = ACS_Timer() - pl.missionstatshow;
-   if(delta < 0) {
-      k32 alpha = delta > -43 ? ease_out_cubic(delta / -43.0k) : 1.0k;
+   i32 delta = pl.missionstatshow - ACS_Timer();
+   if(delta >= 0) {
+      k32 alpha = delta <= 35 ? ease_out_cubic(delta / 35.0k) : 1.0k;
       SetSize(320, 240);
       ACS_BeginPrint();
       _p(fast_strupper(ml.name)); _c('\n');
@@ -47,15 +43,28 @@ void P_Ren_Mission(void) {
       if(get_bit(ml.flag, _mflg_vacuum)) {
          _l("\CiVACUUM\n");
       } else {
-         _l("\Cv"); _p(ml.temperature);         _l(u8"°C\n");
-         _l("\Cy"); _p(ml.humidity);            _l("%RH\n");
-         _l("\Ce"); _p(EDataI(_edt_windspeed)); _l("m/s\n");
+         static const cstr angles[] = {
+            u8"↑",
+            u8"↖",
+            u8"←",
+            u8"↙",
+            u8"↓",
+            u8"↘",
+            u8"→",
+            u8"↗",
+         };
+         _l("\Cv");  _p(ml.temperature); _l(u8"°C\n");
+         _l("\Cy");  _p(ml.humidity);    _l("%RH\n");
+         _l("\Ce");  _p(EDataI(_edt_windspeed));
+         i32 ang = EDataI(_edt_windangle) - (i32)(pl.yaw * 360.0k);
+         _l("m/s "); _p(angles[const_deg(ang) / 45]);
+         _l("\n");
       }
       switch(get_msk(ml.flag, _mflg_rain)) {
       case _rain_rain:  _l("\CnRAINING (WATER)\n");   break;
       case _rain_blood: _l("\CgRAINING (UNKNOWN)\n"); break;
-      case _rain_snow:  _l("\CwSNOWING\n");           break;
-      case _rain_fire:  _l("\CxFIRESTORM\n");         break;
+      case _rain_snow:  _l("\CwRAINING (SNOW)\n");    break;
+      case _rain_fire:  _l("\CxRAINING (ASH)\n");     break;
       }
       if(get_bit(ml.flag, _mflg_lightning)) {_l("\CkELEC. STORM\n");}
       if(get_bit(ml.flag, _mflg_corrupted)) {_l("\CgCAUSALITY SHIFT\n");}

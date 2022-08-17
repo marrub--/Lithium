@@ -53,6 +53,7 @@ reinit:
 
    struct old_player_delta olddelta;
 
+   i32 idletics = 0;
    while(pl.active) {
       if(pl.reinit) {
          goto reinit;
@@ -73,6 +74,14 @@ reinit:
 
       /* Tick all systems */
       if(!pl.dead) {
+         if(pl.x == pl.old.x && pl.y == pl.old.y && pl.z == pl.old.z) {
+            ++idletics;
+         } else {
+            idletics = 0;
+         }
+         if(idletics > 38) {
+            pl.missionstatshow = ACS_Timer() + 35;
+         }
          P_Wep_PTickPre();
          P_Scr_PTickPre();
          P_Spe_pTick();
@@ -364,7 +373,7 @@ alloc_aut(0) stkcall script static void P_doDepthMeter(void) {
 }
 
 alloc_aut(0) stkcall script static void P_doIntro(void) {
-   pl.missionstatshow = ACS_Timer() + 170;
+   pl.missionstatshow = ACS_Timer() + 70;
 
    if(wl.hubscleared != 0 || pl.done_intro & pl.pclass) {
       P_doDepthMeter();

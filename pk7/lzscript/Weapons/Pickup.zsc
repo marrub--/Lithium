@@ -103,35 +103,25 @@ class Lith_BFG9000Pickup : Lith_WeaponPickup replaces BFG9000 {
 class Lith_WeaponPickup : Inventory abstract;
 
 mixin Lith_Pickup;
-
-default {
-   Inventory.PickupMessage "";
-   Inventory.PickupSound "";
-   Lith_WeaponPickup.Glow "Lith_WeapGlow";
-}
-
 meta int m_wepName;
-
 property WepName: m_wepName;
-
 override void postBeginPlay() {
-   if(bDROPPED) {
-      destroy();
-   } else {
-      super.postBeginPlay();
-      Lith_PickupPostBeginPlay();
-   }
+   super.postBeginPlay();
+   pkPostBeginPlay();
 }
-
 override void tick() {
    super.tick();
-   Lith_PickupTick();
+   pkTick();
 }
-
 override bool tryPickup(in out Actor mo) {
    mo.acs_scriptCall("Lith_WeaponPickup", m_wepName);
    goAwayAndDie();
    return true;
+}
+default {
+   Inventory.PickupMessage "";
+   Inventory.PickupSound "";
+   Lith_WeaponPickup.Glow "Lith_WeapGlow";
 }
 
 /* EOF */

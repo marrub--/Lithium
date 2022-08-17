@@ -452,6 +452,7 @@ static int EDataI(Actor mo, int info) {
    case _edt_attackheight: return int(getAttackHeight(mo));
    case _edt_lightning:    return level.info.flags & LEVEL_STARTLIGHTNING;
    case _edt_windspeed:    return int(instance().m_wind.m_speed);
+   case _edt_windangle:    return int(Lith_UTIL.constDeg(instance().m_wind.m_angle));
 
    case _edt_chex:    return gameinfo.gametype & GAME_Chex    != 0;
    case _edt_heretic: return gameinfo.gametype & GAME_Heretic != 0;

@@ -12,12 +12,9 @@ class Lith_ItemGlow : Actor {
       Alpha 0.7;
       Scale 0.1;
       Translation "Lith_ItemGlow";
-
       +ForceXyBillboard
       +NoInteraction
-      +NoTimeFreeze
    }
-
    override void postBeginPlay() {
       super.postBeginPlay();
       sprite = Actor.GetSpriteIndex("LIFX");
@@ -34,16 +31,11 @@ class Lith_ItemGlow : Actor {
          break;
       }
    }
-
    states {
    Spawn:
       #### # 5 bright;
-      #### # 0 bright A_JumpIf(players[consolePlayer].camera.Vec2To(self).Length() > 600, "Spawn1");
       #### # 1 bright A_FadeOut(1.0 / 35.0);
       wait;
-   Spawn1:
-      #### # 4;
-      stop;
    }
 }
 
@@ -51,7 +43,6 @@ class Lith_WeapGlow : Lith_ItemGlow {
    default {
       Translation "Lith_WeapGlow";
    }
-
    override void postBeginPlay() {
       super.postBeginPlay();
       if(lith_player_brightweps) A_SetTranslation("Lith_WeapGlowBright");
@@ -65,120 +56,100 @@ class Lith_UpgrGlow : Lith_ItemGlow {
 }
 
 mixin class Lith_Pickup {
-   meta int m_PkFlags;
-
-   meta string m_PkSprGf;
-
-   meta string m_PkSprAf;
-   meta string m_PkSprCf;
-   meta string m_PkSprDf;
-   meta string m_PkSprIf;
-   meta string m_PkSprMf;
-   meta string m_PkSprTf;
-   meta string m_PkSprWf;
-
-   int m_PkGlA;
-   int m_PkGlZ;
-
-   Actor m_PkSpr;
-
-   Lith_Sprite m_PkSprG;
-
-   Lith_Sprite m_PkSprA;
-   Lith_Sprite m_PkSprC;
-   Lith_Sprite m_PkSprD;
-   Lith_Sprite m_PkSprI;
-   Lith_Sprite m_PkSprM;
-   Lith_Sprite m_PkSprT;
-   Lith_Sprite m_PkSprW;
-
-   meta class<Actor> m_PkGlow;
-
-   property Sprite: m_PkSprGf;
-
-   property SpriteA: m_PkSprAf;
-   property SpriteC: m_PkSprCf;
-   property SpriteD: m_PkSprDf;
-   property SpriteI: m_PkSprIf;
-   property SpriteM: m_PkSprMf;
-   property SpriteT: m_PkSprTf;
-   property SpriteW: m_PkSprWf;
-
-   property Glow: m_PkGlow;
-
-   flagdef Pkup_Generic:  m_PkFlags, 0;
-   flagdef Pkup_NoSprite: m_PkFlags, 1;
-
-   void lith_pickupPostBeginPlay() {
-      if(m_PkSprGf) m_PkSprG.Get(m_PkSprGf);
-
-      if(m_PkSprAf) m_PkSprA.Get(m_PkSprAf);
-      if(m_PkSprCf) m_PkSprC.Get(m_PkSprCf);
-      if(m_PkSprDf) m_PkSprD.Get(m_PkSprDf);
-      if(m_PkSprIf) m_PkSprI.Get(m_PkSprIf);
-      if(m_PkSprMf) m_PkSprM.Get(m_PkSprMf);
-      if(m_PkSprTf) m_PkSprT.Get(m_PkSprTf);
-      if(m_PkSprWf) m_PkSprW.Get(m_PkSprWf);
-
+   meta int m_pkFlags;
+   meta string m_pkSprGf;
+   meta string m_pkSprAf;
+   meta string m_pkSprCf;
+   meta string m_pkSprDf;
+   meta string m_pkSprIf;
+   meta string m_pkSprMf;
+   meta string m_pkSprTf;
+   meta string m_pkSprWf;
+   Actor m_pkSpr;
+   Lith_Sprite m_pkSprG;
+   Lith_Sprite m_pkSprA;
+   Lith_Sprite m_pkSprC;
+   Lith_Sprite m_pkSprD;
+   Lith_Sprite m_pkSprI;
+   Lith_Sprite m_pkSprM;
+   Lith_Sprite m_pkSprT;
+   Lith_Sprite m_pkSprW;
+   meta class<Actor> m_pkGlow;
+   property Sprite: m_pkSprGf;
+   property SpriteA: m_pkSprAf;
+   property SpriteC: m_pkSprCf;
+   property SpriteD: m_pkSprDf;
+   property SpriteI: m_pkSprIf;
+   property SpriteM: m_pkSprMf;
+   property SpriteT: m_pkSprTf;
+   property SpriteW: m_pkSprWf;
+   property Glow: m_pkGlow;
+   flagdef Pkup_Generic:  m_pkFlags, 0;
+   flagdef Pkup_NoSprite: m_pkFlags, 1;
+   flagdef Pkup_NoGlow:   m_pkFlags, 2;
+   void pkPostBeginPlay() {
+      if(m_pkSprGf) {m_pkSprG.get(m_pkSprGf);}
+      if(m_pkSprAf) {m_pkSprA.get(m_pkSprAf);}
+      if(m_pkSprCf) {m_pkSprC.get(m_pkSprCf);}
+      if(m_pkSprDf) {m_pkSprD.get(m_pkSprDf);}
+      if(m_pkSprIf) {m_pkSprI.get(m_pkSprIf);}
+      if(m_pkSprMf) {m_pkSprM.get(m_pkSprMf);}
+      if(m_pkSprTf) {m_pkSprT.get(m_pkSprTf);}
+      if(m_pkSprWf) {m_pkSprW.get(m_pkSprWf);}
       if(!bPkup_NoSprite) {
-         m_PkSpr = Spawn("Lith_ItemSprite", Pos);
-         m_PkSpr.Master = self;
+         m_pkSpr = spawn("Lith_ItemSprite", Pos);
+         m_pkSpr.master = self;
       } else {
-         m_PkSpr = null;
+         m_pkSpr = null;
       }
    }
-
-   void lith_pickupTick() {
-      if(!m_PkSpr) return;
-
+   void pkTick() {
+      if(!m_pkSpr) {
+         return;
+      }
       if(bPkup_Generic) {
-         lith_setSpr(m_PkSprG);
+         pkSetSpr(m_pkSprG);
          return;
       }
-
-      if(!players[consolePlayer].camera)
+      if(!players[consolePlayer].camera) {
          return;
-
+      }
       let p = players[consolePlayer].camera;
-      /**/ if(m_PkSprAf && p is "Lith_AssassinPlayer")  lith_setSpr(m_PkSprA);
-      else if(m_PkSprCf && p is "Lith_CyberMagePlayer") lith_setSpr(m_PkSprC);
-      else if(m_PkSprDf && p is "Lith_DarkLordPlayer")  lith_setSpr(m_PkSprD);
-      else if(m_PkSprIf && p is "Lith_InformantPlayer") lith_setSpr(m_PkSprI);
-      else if(m_PkSprMf && p is "Lith_MarinePlayer")    lith_setSpr(m_PkSprM);
-      else if(m_PkSprTf && p is "Lith_ThothPlayer")     lith_setSpr(m_PkSprT);
-      else if(m_PkSprWf && p is "Lith_WandererPlayer")  lith_setSpr(m_PkSprW);
-      else if(m_PkSprGf)                                lith_setSpr(m_PkSprG);
+      /**/ if(m_pkSprAf && p is "Lith_AssassinPlayer")  {pkSetSpr(m_pkSprA);}
+      else if(m_pkSprCf && p is "Lith_CyberMagePlayer") {pkSetSpr(m_pkSprC);}
+      else if(m_pkSprDf && p is "Lith_DarkLordPlayer")  {pkSetSpr(m_pkSprD);}
+      else if(m_pkSprIf && p is "Lith_InformantPlayer") {pkSetSpr(m_pkSprI);}
+      else if(m_pkSprMf && p is "Lith_MarinePlayer")    {pkSetSpr(m_pkSprM);}
+      else if(m_pkSprTf && p is "Lith_ThothPlayer")     {pkSetSpr(m_pkSprT);}
+      else if(m_pkSprWf && p is "Lith_WandererPlayer")  {pkSetSpr(m_pkSprW);}
+      else if(m_pkSprGf)                                {pkSetSpr(m_pkSprG);}
    }
-
-   void lith_setSpr(Lith_Sprite s) {
-      m_PkSpr.Sprite = s.Spr;
-      m_PkSpr.Frame  = s.Frm;
+   void pkSetSpr(Lith_Sprite s) {
+      m_pkSpr.sprite = s.spr;
+      m_pkSpr.frame  = s.frm;
    }
-
-   void lith_itemGlow() {
-      m_PkGlA = (m_PkGlA + 5) % 360;
-      m_PkGlZ = (m_PkGlZ + 2) % 360;
-
-      if(!lith_player_noitemfx &&
-         players[consolePlayer].camera.CheckSight(self,
-                                                  SF_IGNOREVISIBILITY       |
-                                                  SF_SEEPASTSHOOTABLELINES  |
-                                                  SF_SEEPASTBLOCKEVERYTHING)) {
-         double s = sin(m_PkGlA);
-         double z = sin(m_PkGlZ);
-         double c = cos(m_PkGlA);
-
-         spawn(m_PkGlow, pos + (     s  * 32,      c  * 32,      24 + z *  9));
-         spawn(m_PkGlow, pos + (           0,      s  * 32,      24 + c * 32));
-         spawn(m_PkGlow, pos + (     c  * 32,      s  * 32,      24 + s * 32));
-         spawn(m_PkGlow, pos + (     c  * 32, (1 - s) * 32 - 32, 24 + s * 32));
-         spawn(m_PkGlow, pos + (     s  * 32,                 0, 24 + c * 32));
-         spawn(m_PkGlow, pos + (     s  * 32,      c  * 32,      24 + s * 32));
-         spawn(m_PkGlow, pos + ((1 - s) * 32 - 32, c  * 32,      24 + s * 32));
+   void pkItemGlow() {
+      if(isFrozen() || lith_player_noitemfx || bPkup_NoGlow) {
+         return;
       }
+      let d  = distance2D(players[consolePlayer].camera);
+      let s  = sin(msTimeF() * 0.14285);
+      let z  = sin(msTimeF() * 0.05714);
+      let c  = cos(msTimeF() * 0.14285);
+      let ns = 1 - s;
+      if(d < 2048) spawn(m_pkGlow, pos+( s*32,     c*32, 24+z*9));
+      if(d < 4096) spawn(m_pkGlow, pos+(    0,     s*32, 24+c*32));
+      if(d < 8192) spawn(m_pkGlow, pos+( c*32,     s*32, 24+s*32));
+      if(d < 4096) spawn(m_pkGlow, pos+( c*32, ns*32-32, 24+s*32));
+      if(d < 8192) spawn(m_pkGlow, pos+( s*32,        0, 24+c*32));
+      if(d < 4096) spawn(m_pkGlow, pos+( s*32,     c*32, 24+s*32));
+      if(d < 2048) spawn(m_pkGlow, pos+(ns*32-32,  c*32, 24+s*32));
    }
-
-   states(Actor) {Spawn: TNT1 A 1 lith_itemGlow(); loop;}
+   states(Actor) {
+   spawn:
+      TNT1 A 1 pkItemGlow();
+      loop;
+   }
 }
 
 /* EOF */

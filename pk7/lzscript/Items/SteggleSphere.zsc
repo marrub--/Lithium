@@ -51,30 +51,28 @@ class Lith_Steggles : MBFHelperDog {
    }
 }
 
-class Lith_SteggleSphereSprite : Lith_AnimItemSprite
-{
-   default {Lith_AnimItemSprite.Phases 24;}
-   states {SetSpr: DOGO AAAAAABBBBBBCCCCCCBBBBBB 0 Lith_A_JumpPhase; stop;}
+class Lith_SteggleSphereSprite : Lith_ItemSprite {
+   states {
+   Spawn:
+      DOGO ABCB 6;
+      loop;
+   }
 }
 
 class Lith_SteggleSphere : Inventory;
 
-default
-{
+default {
    Tag "$LITH_TAG_SteggleSphere";
    Inventory.PickupMessage "";
    Inventory.PickupSound "misc/p_pkup";
-
    +CountItem
    +Inventory.BigPowerup
    +Inventory.FancyPickupSound
 }
-
 override void postBeginPlay() {
    super.postBeginPlay();
    spawn("Lith_SteggleSphereSprite", self.pos).master = self;
 }
-
 override bool tryPickup(in out Actor mo) {
    mo.ACS_ScriptCall("Lith_DOGS");
    callAcs("Lith_ItemPopupTag");
@@ -82,7 +80,6 @@ override bool tryPickup(in out Actor mo) {
    goAwayAndDie();
    return true;
 }
-
 states {
 Spawn:
    TNT1 A 1;

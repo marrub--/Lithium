@@ -48,13 +48,3 @@ model "Lith_FortuneShotWind" {
    Skin 0 "air.png"
    FrameIndex "____" "A" 0 0
 }
-model "Lith_RainDrop" {
-   Path "lmisc/models"
-   DontCullBackFaces 
-   UseActorRoll 
-   UseActorPitch 
-   Scale 16.0 1.0 1.0
-   Model 0 "square.obj"
-   Skin 0 "rain.png"
-   FrameIndex "RNDR" "A" 0 0
-}

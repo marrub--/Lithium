@@ -10,13 +10,15 @@ class Lith_WindThinker : Thinker;
 
 Actor   m_player;
 vector2 m_windVec;
-double  m_angle, m_speed, m_maxSpeed;
+double  m_angle, m_speed, m_angleDest, m_speedDest, m_maxSpeed, m_speedSpeed, m_angleSpeed;
 int     m_timerRnd;
 
 static Lith_WindThinker create() {
    let th = new('Lith_WindThinker');
-   th.m_maxSpeed = Lith_UTIL.pData(_pdt_windspeed);
-   th.m_player   = players[consolePlayer].mo;
+   th.m_maxSpeed  = Lith_UTIL.pData(_pdt_windspeed);
+   th.m_player    = players[consolePlayer].mo;
+   th.m_angle     =
+   th.m_angleDest = fRandom[lith_wind](0, 360);
    if(th.m_player) {
       th.m_player.a_startSound("amb/wind", lch_weather1, CHANF_LOOP, 0.001, ATTN_NONE);
    }
@@ -27,17 +29,21 @@ override void tick() {
    if(level.isFrozen()) {
       return;
    }
-   m_speed += fRandom(-0.001, 0.001);
+   m_speed      = Lith_UTIL.lerp(m_speed, m_speedDest, m_speedSpeed);
+   m_angle      = Lith_UTIL.lerp(m_angle, m_angleDest, m_angleSpeed);
+   m_windVec    = (cos(m_angle) * m_speed * 0.9142857142857143, sin(m_angle) * m_speed * 0.9142857142857143);
+   m_speedDest += fRandom[lith_wind](-0.001, 0.001);
    if(level.time & m_timerRnd) {
       return;
    }
-   float r    = fRandomPick(1.0, 2.5, 5.0, 6.0, 7.0, 10.0, 20.0, 30.0, 45.0, 90.0, 180.0);
-   m_speed    = fRandom(0.0, m_maxSpeed);
-   m_angle   += fRandom(-r, r);
-   m_windVec  = (cos(m_angle) * m_speed, sin(m_angle) * m_speed);
-   m_timerRnd = randomPick(7, 15, 63, 255, 511);
+   let r        = fRandomPick[lith_wind](1.0, 2.5, 5.0, 6.0, 7.0, 10.0, 20.0, 30.0, 45.0, 90.0, 180.0);
+   m_speedDest  = fRandom[lith_wind](0.0, m_maxSpeed);
+   m_angleDest += fRandom[lith_wind](-r, r);
+   m_speedSpeed = 0.01 * fRandom[lith_wind](0.1, max(m_maxSpeed / 50.0, 0.1));
+   m_angleSpeed = 0.01 * fRandom[lith_wind](0.1, max(m_maxSpeed / 50.0, 0.1));
+   m_timerRnd   = randomPick[lith_wind](7, 15, 63, 255, 511);
    if(m_player) {
-      m_player.a_soundVolume(lch_weather1, m_speed / 110.0);
+      m_player.a_soundVolume(lch_weather1, m_speed / 50.0);
    }
 }
 

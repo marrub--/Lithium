@@ -250,7 +250,6 @@ Use at the expense of your world.
 == \#CTRL_OPENCBI | Open CBI
 == \#CTRL_ZOOMIN  | Zoom In
 == \#CTRL_ZOOMOUT | Zoom Out
-== \#CTRL_MISSION | Show Mission Status
 
 == \#CTRL_AUTOGROUPS | Lithium Auto-groups
 == \#CTRL_BUYGRP1    | Buy \caSet 1

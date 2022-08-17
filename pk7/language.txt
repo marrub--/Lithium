@@ -2213,7 +2213,6 @@
 "LITH_CTRL_OPENCBI" = "Open CBI";
 "LITH_CTRL_ZOOMIN" = "Zoom In";
 "LITH_CTRL_ZOOMOUT" = "Zoom Out";
-"LITH_CTRL_MISSION" = "Show Mission Status";
 "LITH_CTRL_AUTOGROUPS" = "Lithium Auto-groups";
 "LITH_CTRL_BUYGRP1" = "Buy \caSet 1";
 "LITH_CTRL_BUYGRP2" = "Buy \cdSet 2";

@@ -837,6 +837,7 @@ weapons/subweapon/armgun lsnd/WeaponsD/Subweapons/ArmGun
 weapons/subweapon/needle lsnd/WeaponsD/Subweapons/Needle
 $alias weapons/subweapon/axe weapons/rend/slash
 $alias weapons/subweapon/grenade weapons/rifle/grenade
+weapons/kampilan/pickup lsnd/WeaponsD/Kampilan/Pickup
 weapons/kampilan/draw lsnd/WeaponsD/Kampilan/Draw
 weapons/kampilan/bonk lsnd/WeaponsD/Kampilan/Bonk
 weapons/kampilan/hit lsnd/WeaponsD/Kampilan/Hit

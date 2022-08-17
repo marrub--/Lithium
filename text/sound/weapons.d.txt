@@ -18,7 +18,8 @@ weapons {
 
    kampilan {
       == lsnd/WeaponsD/Kampilan
-      draw     Draw     # Metal Gear Solid 2
+      pickup   Pickup   # Metal Gear Solid 2
+      draw     Draw     # ^
       bonk     Bonk     # ^
       hit      Hit      # ^
       hitflesh HitFlesh # ^

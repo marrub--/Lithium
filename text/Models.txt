@@ -45,15 +45,4 @@ TracerSizeBig {
    FrameIndex "____" "A" 0 0;
 }
 
-\#RainDrop : All {
-   UseActorPitch;
-
-   Scale 16.0 1.0 1.0;
-
-   Model 0 "square.obj";
-   Skin  0 "rain.png";
-
-   FrameIndex "RNDR" "A" 0 0;
-}
-
 ## EOF
