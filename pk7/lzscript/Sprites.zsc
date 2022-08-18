@@ -6,22 +6,18 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-struct Lith_Sprite
-{
-   spriteid Spr;
-   int      Frm;
+struct Lith_Sprite {
+   spriteId spr;
+   int      frm;
 
-   play void Get(string full)
-   {
+   play void get(string full) {
       Spr = Actor.GetSpriteIndex(full.left(4));
       Frm = full.ByteAt(4) - CH_U_A;
    }
 }
 
-class Lith_SpriteLoader : Actor
-{
-   states
-   {
+class Lith_SpriteLoader : Actor {
+   states {
       ARM1 A 0;
       CUPG A 0;
       DITM A 0;

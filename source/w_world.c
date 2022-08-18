@@ -127,7 +127,7 @@ script static void MInit(void) {
    bool lightning = rand() % 99 < lrnd && !mi_flg(_mi_flag_nolightning);
    bool any_rain  = rand() % 99 < hrnd && !mi_flg(_mi_flag_norain);
    i32  rain      = _rain_none;
-   if(ml.temperature > -70) {
+   if(ml.temperature > -90) {
       switch(CVarGetI(sc_sv_rain)) {
       case 1:
          if(any_rain) {

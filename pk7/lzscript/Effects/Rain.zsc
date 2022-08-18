@@ -23,37 +23,44 @@ class Lith_RainDrop : Actor {
    }
    bool m_done;
    float m_rollSpeed;
+   float m_accel;
+   void lith_giveUp() {
+      bRollSprite = false;
+      bFlatSprite = false;
+      setOrigin((pos.xy, floorZ), false);
+      vel    = (0, 0, 0);
+      roll   = 0;
+      scale  = (1, 1);
+      m_done = true;
+      setState(resolveState("Death"));
+   }
    override void beginPlay() {
       super.beginPlay();
-      vel.z    = fRandom[lith_rain](-19, -26);
-      scale.y *= vel.z;
-      m_done   = false;
+      m_accel = 1.03;
    }
    override void tick() {
-      if(isFrozen()) {
-      } else if(m_done) {
+      if(!isFrozen()) {
          Lith_UTIL.stateTick(self);
-      } else {
+         if(m_done) {
+            return;
+         }
          if(m_rollSpeed) {
             a_setRoll(roll + m_rollSpeed, SPF_INTERPOLATE);
          }
          if(waterLevel > 0 || pos.z <= floorZ) {
-            bRollSprite = false;
-            bFlatSprite = false;
-            setOrigin((pos.xy, floorZ), false);
-            vel    = (0, 0, 0);
-            roll   = 0;
-            scale  = (1, 1);
-            m_done = true;
-            setState(resolveState("Death"));
+            lith_giveUp();
          } else {
+            if(vel.xy.length() < 64) {
+               vel *= m_accel;
+            }
             setOrigin(pos + vel, true);
          }
       }
    }
    states {
    Spawn:
-      RNDR A -1;
+      RNDR A 350;
+      RNDR A 0 lith_giveUp;
       stop;
    Death:
       RNDR BCDEFGH 3;
@@ -78,7 +85,8 @@ class Lith_AbyssRainDrop : Lith_RainDrop {
    }
    states {
    Spawn:
-      RNDZ A -1;
+      RNDZ A 350;
+      RNDZ A 0 lith_giveUp;
       stop;
    Death:
       RNDZ BCDEFGH 3;
@@ -94,7 +102,8 @@ class Lith_SnowDrop : Lith_RainDrop {
    }
    states {
    Spawn:
-      RNDS A -1;
+      RNDS A 350;
+      RNDS A 0 lith_giveUp;
       stop;
    Death:
       RNDS BCDE 12;
@@ -104,22 +113,27 @@ class Lith_SnowDrop : Lith_RainDrop {
 
 class Lith_Ash : Lith_SnowDrop {
    default {
+      RenderStyle "Translucent";
       Alpha 0.9;
-      XScale 0.75;
-      YScale 0.06;
    }
    override void postBeginPlay() {
       super.postBeginPlay();
       m_rollSpeed = fRandom[lith_rain](0.4, 0.9) * fRandomPick[lith_rain](-1, 1);
-      scale      *=  fRandom[lith_rain](0.25, 1.0);
-      vel.z       = -fRandom[lith_rain](0.84, 1.2);
+      angle   = fRandom[lith_rain](0, 360);
+      pitch   = fRandom[lith_rain](0, 180);
+      roll    = fRandom[lith_rain](0, 360);
+      scale   = (1, 1) * fRandom[lith_rain](1.0, 1.4);
+      vel    *= fRandom[lith_rain](0.03, 0.1);
+      m_accel = 1.001;
    }
    states {
    Spawn:
-      RNDA A 40;
+      RNDA A 300;
+      RNDA A 0 lith_giveUp;
+      stop;
    Death:
       RNDA A 1 a_fadeOut(0.25 / 21.0);
-      wait;
+      loop;
    }
 }
 

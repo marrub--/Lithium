@@ -80,10 +80,11 @@ double spawnRain() const {
             zpos    = min(maxh, sec.findLowestCeilingPoint());
             lastSec = sec;
          }
-         let rain = Actor.spawn(m_rainDrop, (pos, zpos - fRandom[lith_rain](0.0, 16.0)));
-         rain.angle = m_wind.m_angle;
-         rain.pitch = Lith_UTIL.constDeg(90.0 - m_wind.m_speed * 0.2);
-         rain.vel  += m_wind.m_windVec * 0.1;
+         let rain      = Actor.spawn(m_rainDrop, (pos, zpos - fRandom[lith_rain](0.0, 16.0)));
+         rain.angle    = m_wind.m_angle     + fRandom[lith_rain](-2, 2);
+         rain.pitch    = m_wind.m_windPitch + fRandom[lith_rain](-2, 2);
+         rain.vel      = m_wind.m_windVec   * fRandom[lith_rain](0.9, 1.1);
+         rain.scale.y *= rain.vel.z;
          if(m_rainSnd) {
             let dist = mo.distance2d(rain);
             if(dist < raindist) {

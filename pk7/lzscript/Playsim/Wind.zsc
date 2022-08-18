@@ -9,10 +9,9 @@
 class Lith_WindThinker : Thinker;
 
 Actor   m_player;
-vector2 m_windVec;
-double  m_angle, m_speed, m_angleDest, m_speedDest, m_maxSpeed, m_speedSpeed, m_angleSpeed;
+vector3 m_windVec;
+double  m_angle, m_speed, m_speedUnits, m_angleDest, m_speedDest, m_maxSpeed, m_speedSpeed, m_angleSpeed, m_windPitch;
 int     m_timerRnd;
-
 static Lith_WindThinker create() {
    let th = new('Lith_WindThinker');
    th.m_maxSpeed  = Lith_UTIL.pData(_pdt_windspeed);
@@ -24,19 +23,36 @@ static Lith_WindThinker create() {
    }
    return th;
 }
-
 override void tick() {
    if(level.isFrozen()) {
       return;
    }
    m_speed      = Lith_UTIL.lerp(m_speed, m_speedDest, m_speedSpeed);
    m_angle      = Lith_UTIL.lerp(m_angle, m_angleDest, m_angleSpeed);
-   m_windVec    = (cos(m_angle) * m_speed * 0.9142857142857143, sin(m_angle) * m_speed * 0.9142857142857143);
-   m_speedDest += fRandom[lith_wind](-0.001, 0.001);
+   m_speedUnits = (m_speed * 32.0) / 35.0;
+   m_windVec    = (cos(m_angle) * m_speedUnits, sin(m_angle) * m_speedUnits, -m_speedUnits);
+   let wx  = m_windVec.x;
+   let wy  = m_windVec.y;
+   let wz  = m_windVec.z;
+   let wa2 = !(wx ~== 0) || !(wy ~== 0);
+   let wa3 = wa2         || !(wz ~== 0);
+   let wl2 = wa2 ? wx*wx + wy*wy : 0;
+   let wl3 = wa3 ? wl2   + wz*wz : 0;
+   let ws2 = wa2 ? sqrt(wl2) : 0;
+   if(wa3 && wa2) {
+      m_windPitch = atan(wz / ws2);
+      if((cos(m_angle)*wx + sin(m_angle)*wy)/ws2 < 0) {
+         m_windPitch *= -1;
+      } else {
+         m_windPitch = abs(m_windPitch);
+      }
+   } else {
+      m_windPitch = 90;
+   }
    if(level.time & m_timerRnd) {
       return;
    }
-   let r        = fRandomPick[lith_wind](1.0, 2.5, 5.0, 6.0, 7.0, 10.0, 20.0, 30.0, 45.0, 90.0, 180.0);
+   let r        = fRandomPick[lith_wind](3.0, 6.0, 10.0, 20.0, 30.0, 45.0, 90.0, 180.0);
    m_speedDest  = fRandom[lith_wind](0.0, m_maxSpeed);
    m_angleDest += fRandom[lith_wind](-r, r);
    m_speedSpeed = 0.01 * fRandom[lith_wind](0.1, max(m_maxSpeed / 50.0, 0.1));
