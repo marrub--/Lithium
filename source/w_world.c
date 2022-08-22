@@ -84,9 +84,9 @@ script static void GInit(void) {
 
 script static void MInit(void) {
    Dbg_Log(log_dev, _l(__func__));
-   #define mi_opt(key, l, r) (get_bit(mi.use, key) ? (v = mi.keys[key], l) : (r))
-   #define mi_flg(flg) (get_bit(mi.use, _mi_key_flags) && get_bit(mi.keys[_mi_key_flags], flg))
-   struct map_info mi = ReadMapInfo();
+   #define mi_opt(key, l, r) (get_bit(mi->use, key) ? (v = mi->keys[key], l) : (r))
+   #define mi_flg(flg) (get_bit(mi->use, _mi_key_flags) && get_bit(mi->keys[_mi_key_flags], flg))
+   struct map_info *mi = GetMapInfo();
    i32 v;
    i32 fun = GetFun();
    DefaultAirControl();
@@ -110,8 +110,8 @@ script static void MInit(void) {
    }
    i32 env = _menv_none;
    str sky = fast_strupper(EDataS(_edt_origsky1));
-   if(get_bit(mi.use, _mi_key_environment)) {
-      env = mi.keys[_mi_key_environment];
+   if(get_bit(mi->use, _mi_key_environment)) {
+      env = mi->keys[_mi_key_environment];
    } else if(fun & lfun_ragnarok) {
       env = _menv_evil;
    } else if(sky == sp_SKY2 || sky == sp_RSKY2) {

@@ -8,7 +8,7 @@
 
 class Lith_GaussExplosionParticle : Actor {
    default {
-      RenderStyle "Translucent";
+      RenderStyle "Add";
       Scale 0.4;
       Mass 3000;
       BounceType "Doom";
@@ -21,7 +21,7 @@ class Lith_GaussExplosionParticle : Actor {
    states {
    Spawn:
       BLLT B 0;
-      BLLT BBBCCCDDD 1 A_FadeOut(0.06);
+      BLLT BBBCCCDDD 1 bright A_FadeOut(0.06);
       wait;
    }
 }

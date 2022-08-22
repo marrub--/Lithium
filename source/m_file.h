@@ -16,7 +16,6 @@
 #include <stdio.h>
 
 #define FEOF(fp) ((fp)->_flag & _FILEFLAG_EOF)
-#define W_GetMapInfoLump() ServCallI(sm_GetMapInfoLump)
 FILE *W_OpenNum(i32 lump, char rw);
 FILE *W_Open(str fname, char rw);
 FILE *W_OpenIter(str fname, char rw, i32 *prev);

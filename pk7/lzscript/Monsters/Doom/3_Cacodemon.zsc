@@ -82,15 +82,15 @@ Crash:
    HEAD L -1;
    stop;
 Death.Extreme:
-   CACX A -1;
+   LI07 Q -1;
 Crash.Extreme:
-   CACX A 5 Lith_A_XDie;
-   CACX BC 5;
-   CACX D 4;
-   CACX E 3;
-   CACX F 4;
-   CACX G 5;
-   CACX H -1;
+   LI07 Q 5 Lith_A_XDie;
+   LI07 RS 5;
+   LI07 T 4;
+   LI07 U 3;
+   LI07 V 4;
+   LI07 W 5;
+   LI07 X -1;
    stop;
 
 Raise:

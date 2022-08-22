@@ -35,15 +35,16 @@ class Lith_HotEmber : Actor {
       Renderstyle "Translucent";
       Alpha 0.9;
       Scale 0.3;
+      +Bright
       +NoBlockmap
       +DontSplash
       -NoGravity
    }
    states {
    Spawn:
-      EPUF A 1 bright light("Lith_BulletPuff1");
-      EPUF BBCC 4 bright light("Lith_BulletPuff2") a_spawnItemEx("Lith_HotEmberTrail", fRandom[lith_bulletpuff](0, 0.5), fRandom[lith_bulletpuff](-0.5, 0.5), fRandom[lith_bulletpuff](-0.5, 0.5), fRandom[lith_bulletpuff](0, 0.5), fRandom[lith_bulletpuff](-0.5, 0.5), fRandom[lith_bulletpuff](-0.5, 0.5));
-      EPUF DEFG 4 bright light("Lith_BulletPuff3");
+      LI0A A 1 light("Lith_BulletPuff1");
+      LI0A BBCC 4 light("Lith_BulletPuff2") a_spawnItemEx("Lith_HotEmberTrail", fRandom[lith_bulletpuff](0, 0.5), fRandom[lith_bulletpuff](-0.5, 0.5), fRandom[lith_bulletpuff](-0.5, 0.5), fRandom[lith_bulletpuff](0, 0.5), fRandom[lith_bulletpuff](-0.5, 0.5), fRandom[lith_bulletpuff](-0.5, 0.5));
+      LI0A DEFG 4 light("Lith_BulletPuff3");
       stop;
    }
 }
@@ -109,6 +110,7 @@ class Lith_BulletTracer : FastProjectile {
       Height 2;
       Speed 67;
       RenderStyle "Add";
+      +Bright
       +NoDamage
       +DontSplash
    }
@@ -120,7 +122,7 @@ class Lith_BulletTracer : FastProjectile {
 
    states {
    Spawn:
-      ____ A -1 bright light("Lith_BulletPuff1");
+      ____ A -1 light("Lith_BulletPuff1");
       stop;
    }
 }
@@ -169,6 +171,7 @@ default {
    DamageType "Bullet";
    Species "Lith_Player";
    Alpha 0.9;
+   +Bright
    +DontHarmSpecies
    +NoGravity
    +NoBlockmap
@@ -204,6 +207,10 @@ override void markPrecacheSounds() {
    super.markPrecacheSounds();
    markSound("effects/puff/ricochet");
 }
+override void beginPlay() {
+   super.beginPlay();
+   setState(a_jump(256, "PuffNormal", "PuffNormalAlt", "PuffMirrored", "PuffMirroredAlt"));
+}
 override void postBeginPlay() {
    super.postBeginPlay();
    if(random[lith_bulletpuff](0, 3) == 0) {
@@ -215,45 +222,41 @@ override void postBeginPlay() {
    if(Lith_UTIL.pData(_pdt_upgrade, UPGR_TorgueMode)) {
       a_spawnItemEx("Lith_EXPLOOOSION", flags: SXF_TRANSFERPOINTERS|SXF_NOCHECKPOSITION);
    }
+   if(random[lith_bulletpuff](0, 4) == 0) {
+      a_spawnItemEx("Lith_BulletRicochetSpark");
+   }
+   if(random[lith_bulletpuff](0, 100) == 0) {
+      a_spawnItemEx("Lith_PuffSmoke", 0, 0, 4.0 + 0.1 * random[lith_bulletpuff](-10, 10));
+   }
 }
 states {
 Spawn:
-   XPUF Q 0;
-   XPUF Q 0 {
-      if(random[lith_bulletpuff](0, 4) == 0) {
-         a_spawnItemEx("Lith_BulletRicochetSpark");
-      }
-      if(random[lith_bulletpuff](0, 100) == 0) {
-         a_spawnItemEx("Lith_PuffSmoke", 0, 0, 4.0 + 0.1 * random[lith_bulletpuff](-10, 10));
-      }
-      return a_jump(256, "PuffNormal", "PuffMirrored");
-   }
-PuffNormal:
-   XPUF Q 0 a_jump(128, "PuffNormalAlt");
-   XPUF QR 1 bright light("Lith_BulletPuff1");
-   XPUF STU 1 bright light("Lith_BulletPuff2");
-PuffNormalEnd:
-   XPUF FG 1 bright light("Lith_BulletPuff3");
-   XPUF H 1 bright;
+   XPUF A 0;
    stop;
+PuffNormal:
+   XPUF QR 1 light("Lith_BulletPuff1");
+   XPUF STU 1 light("Lith_BulletPuff2");
+   goto PuffNormalEnd;
 PuffNormalAlt:
    XPUF A 0 lith_a_playRicochetSound;
-   XPUF AB 1 bright;
-   XPUF CDE 1 bright light("Lith_BulletPuff2");
-   goto PuffNormalEnd;
-PuffMirrored:
-   XPUF V 0 a_jump(128, "PuffMirroredAlt");
-   XPUF VW 1 bright light("Lith_BulletPuff1");
-   XPUF XYZ 1 bright light("Lith_BulletPuff2");
-PuffMirroredEnd:
-   XPUF NO 1 bright light("Lith_BulletPuff3");
-   XPUF P 1 bright;
+   XPUF AB 1;
+   XPUF CDE 1 light("Lith_BulletPuff2");
+PuffNormalEnd:
+   XPUF FG 1 light("Lith_BulletPuff3");
+   XPUF H 1;
    stop;
+PuffMirrored:
+   XPUF VW 1 light("Lith_BulletPuff1");
+   XPUF XYZ 1 light("Lith_BulletPuff2");
+   goto PuffMirroredEnd;
 PuffMirroredAlt:
    XPUF I 0 lith_a_playRicochetSound;
-   XPUF IJ 1 bright;
-   XPUF KLM 1 bright light("Lith_BulletPuff2");
-   goto PuffMirroredEnd;
+   XPUF IJ 1;
+   XPUF KLM 1 light("Lith_BulletPuff2");
+PuffMirroredEnd:
+   XPUF NO 1 light("Lith_BulletPuff3");
+   XPUF P 1;
+   stop;
 }
 
 /* EOF */

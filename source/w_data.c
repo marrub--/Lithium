@@ -22,6 +22,7 @@ i32 Z_LPData(i32 info, i32 permutation) {
    case _pdt_riflemode:    return pl.riflefiremode;
    case _pdt_hassigil:     return pl.sgacquired;
    case _pdt_pclass:       return pl.pclass;
+   case _pdt_pclass_b:     return pl.pclass_b;
    case _pdt_semifrozen:   return pl.semifrozen > 0;
    case _pdt_addp:         return k32_to_i32(pl.addpitch * 360.0);
    case _pdt_addy:         return k32_to_i32(pl.addyaw   * 360.0);

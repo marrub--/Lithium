@@ -934,7 +934,7 @@ weapons/pistol/zoomout lsnd/WeaponsM/Pistol/ScopeOut
 weapons/pistol/pickup lsnd/WeaponsM/Pistol/Pickup
 $alias weapons/pistol/draw weapons/pistol/pickup
 weapons/pistol/plasma/fire lsnd/WeaponsM/Pistol/FirePlasma
-$alias weapons/pistol/plasma/explode weapons/plasmax
+$alias weapons/pistol/plasma/explode weapons/plasdiff/explode
 $limit weapons/pistol/plasma/explode 0
 $volume weapons/pistol/plasma/explode 0.15
 weapons/revolver/fire lsnd/WeaponsM/Revolver/Fire
@@ -1122,7 +1122,7 @@ weapons/plasdiff/fire2 lsnd/Weapons/PlasmaDiffuser/Fire2
 weapons/plasdiff/fire3 lsnd/Weapons/PlasmaDiffuser/Fire3
 weapons/plasdiff/draw lsnd/Weapons/PlasmaDiffuser/Draw
 weapons/plasdiff/empty lsnd/Weapons/PlasmaDiffuser/FireEmpty
-$alias weapons/plasdiff/explode weapons/plasmax
+weapons/plasdiff/explode lsnd/Weapons/PlasmaDiffuser/Explode
 $limit weapons/plasdiff/explode 0
 $random weapons/plasdiff/fire { weapons/plasdiff/fire1 weapons/plasdiff/fire2 weapons/plasdiff/fire3 }
 doors/dr1_open lsnd/World/Ambiance/DoorOpen

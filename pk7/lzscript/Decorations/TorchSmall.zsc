@@ -6,31 +6,29 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_TorchSmall : Lith_TorchDecor
-{
-   default
-   {
+class Lith_TorchSmall : Lith_TorchDecor {
+   default {
       Health 100;
       Height 37;
       DeathHeight 37;
       ProjectilePassHeight -37;
       Lith_TorchDecor.Height 35;
    }
-
-   states {Spawn: SMTP A 0; goto Spawn1;}
+   states {
+   Spawn:
+      LI03 GGGGHHHHJJJJKKKK 1 bright Lith_A_SpawnFlame;
+      loop;
+   }
 }
 
-class Lith_TorchSmallR : Lith_TorchSmall replaces ShortRedTorch
-{
-   default
-   {
+class Lith_TorchSmallR : Lith_TorchSmall replaces ShortRedTorch {
+   default {
       Lith_FlareDecor.Type "Lith_TorchSmallRFlare";
       Lith_TorchDecor.TypeColo "Lith_TorchRFlame", "B30000", "FF7F1B", "EBDB57";
    }
 }
 
-class Lith_TorchSmallG : Lith_TorchSmall replaces ShortGreenTorch
-{
+class Lith_TorchSmallG : Lith_TorchSmall replaces ShortGreenTorch {
    default
    {
       Lith_FlareDecor.Type "Lith_TorchSmallGFlare";
@@ -38,10 +36,8 @@ class Lith_TorchSmallG : Lith_TorchSmall replaces ShortGreenTorch
    }
 }
 
-class Lith_TorchSmallB : Lith_TorchSmall replaces ShortBlueTorch
-{
-   default
-   {
+class Lith_TorchSmallB : Lith_TorchSmall replaces ShortBlueTorch {
+   default {
       Lith_FlareDecor.Type "Lith_TorchSmallBFlare";
       Lith_TorchDecor.TypeColo "Lith_TorchBFlame", "0000B3", "3737FF", "ABABFF";
    }

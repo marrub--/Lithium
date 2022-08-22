@@ -16,7 +16,7 @@ class Lith_Person_Jacques : Lith_BasePerson {
 
    states {
    Spawn:
-      NMA6 A -1;
+      PLAY A -1;
       stop;
    }
 }

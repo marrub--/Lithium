@@ -21,8 +21,8 @@ class Lith_700Laser : Actor {
 
    states {
    Spawn:
-      BLLT U 2;
-      BLLT U 1 A_FadeOut;
+      LI09 X 2;
+      LI09 X 1 A_FadeOut;
       wait;
    }
 }
@@ -36,7 +36,7 @@ class Lith_700Laser2 : Lith_700Laser {
 class Lith_700Laser3 : Lith_700Laser {
    states {
    Spawn:
-      BLLT U -1;
+      LI09 X -1;
       stop;
    }
 }

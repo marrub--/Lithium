@@ -22,6 +22,7 @@ enum Lith_PData {
    _pdt_riflemode,
    _pdt_hassigil,
    _pdt_pclass,
+   _pdt_pclass_b,
    _pdt_semifrozen,
    _pdt_addp,
    _pdt_addy,
@@ -68,6 +69,7 @@ enum Lith_EData {
    _edt_sky2,
    _edt_windspeed,
    _edt_windangle,
+   _edt_maphash,
 };
 
 enum Lith_Fun {

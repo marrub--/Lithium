@@ -476,6 +476,7 @@ static string EDataS(Actor mo, int info) {
    case _edt_origsky2: return level.info.skyPic2;
    case _edt_sky1:     return TexMan.getName(level.skyTexture1);
    case _edt_sky2:     return TexMan.getName(level.skyTexture2);
+   case _edt_maphash:  return level.getChecksum();
    }
    return "";
 }

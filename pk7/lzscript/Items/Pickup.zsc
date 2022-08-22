@@ -17,19 +17,8 @@ class Lith_ItemGlow : Actor {
    }
    override void postBeginPlay() {
       super.postBeginPlay();
-      sprite = Actor.GetSpriteIndex("LIFX");
-      switch(Lith_UTIL.pData(_pdt_pclass)) {
-      case pcl_marine:    frame = CH_U_M - CH_U_A; break;
-      case pcl_cybermage: frame = CH_U_C - CH_U_A; break;
-      case pcl_informant: frame = CH_U_I - CH_U_A; break;
-      case pcl_wanderer:  frame = CH_U_W - CH_U_A; break;
-      case pcl_assassin:  frame = CH_U_A - CH_U_A; break;
-      case pcl_darklord:  frame = CH_U_D - CH_U_A; break;
-      case pcl_thoth:     frame = CH_U_T - CH_U_A; break;
-      default:
-         sprite = Actor.GetSpriteIndex("UNKN");
-         break;
-      }
+      sprite = Actor.GetSpriteIndex("LI09");
+      frame  = Lith_UTIL.pData(_pdt_pclass_b);
    }
    states {
    Spawn:

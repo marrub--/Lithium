@@ -35,16 +35,14 @@ class Lith_BloodHitSpray : Actor {
    }
    states {
    Spawn:
-      BLCO B -1;
+      LI09 U -1;
       stop;
    }
 }
-
 class Lith_BloodHitCore : Actor {
    default {
       Scale 0.4;
       RenderStyle "Translucent";
-
       +NoInteraction
       +DontSplash
       +FlatSprite
@@ -65,7 +63,6 @@ class Lith_BloodHitCore : Actor {
       mo.angle = angle;
       if(random(0, 255) < 128) a_startSound("body/flesh", lch_body);
    }
-
    override void tick() {
       if(!isFrozen()) {
          if(++m_tics > 4) {
@@ -77,7 +74,7 @@ class Lith_BloodHitCore : Actor {
    }
    states {
    Spawn:
-      BLCO A -1;
+      LI09 T -1;
       stop;
    }
 }
@@ -113,12 +110,12 @@ Spawn:
    TNT1 A 0 resolveState("Low");
    stop;
 Heavy:
-   BLUD A 8 lith_a_setLevel(1);
+   LI09 M 8 lith_a_setLevel(1);
 Medium:
-   BLUD B 8 lith_a_setLevel(2);
+   LI09 N 8 lith_a_setLevel(2);
 Low:
-   BLUD C 8 lith_a_setLevel(3);
-   BLUD CCCCCCCCCC 2 a_fadeOut(.1);
+   LI09 O 8 lith_a_setLevel(3);
+   LI09 OOOOOOOOOO 2 a_fadeOut(.1);
    stop;
 Crash:
    BLSP # 1 {

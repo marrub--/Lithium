@@ -17,7 +17,7 @@ default {
 
 states {
 Spawn:
-   CHAI A -1;
+   LI02 A -1;
    stop;
 }
 

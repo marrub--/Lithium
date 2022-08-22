@@ -25,11 +25,11 @@ class Lith_Candlestick : Lith_FlareDecor replaces Candlestick
    }
 
    states {
-   Spawn:    CAND ABCDBDABCAC 3 bright; loop;
-   Inactive: CAND I -1; stop;
+   Spawn:    LI03 ABCDBDABCAC 3 bright; loop;
+   Inactive: LI03 F -1; stop;
    Death:
-      CAND X 0 A_StartSound("amb/puff", lch_body3);
-      CAND X -1;
+      LI03 E 0 A_StartSound("amb/puff", lch_body3);
+      LI03 E -1;
       stop;
    }
 }
@@ -52,11 +52,11 @@ class Lith_Candelabra : Lith_FlareDecor replaces Candelabra
    }
 
    states {
-   Spawn:    CBRA ABCDBDABCAC 3 bright; loop;
-   Inactive: CBRA I -1; stop;
+   Spawn:    LI02 UVWXVXUVWUW 3 bright; loop;
+   Inactive: LI02 Z -1; stop;
    Death:
-      CBRA X 0 A_StartSound("amb/metalx", lch_body3);
-      CBRA X -1;
+      LI02 Y 0 A_StartSound("amb/metalx", lch_body3);
+      LI02 Y -1;
       stop;
    }
 }

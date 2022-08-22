@@ -50,9 +50,6 @@ class Lith_TorchDecor : Lith_FlareDecor
 
    states
    {
-   Spawn1:
-      #### AAAABBBBCCCCDDDD 1 bright Lith_A_SpawnFlame;
-      loop;
    Inactive:
       #### A -1;
       stop;

@@ -34,7 +34,7 @@ weapons {
 
       plasma.fire FirePlasma # Quake 2
 
-      $alias plasma.explode = .weapons.plasmax
+      $alias plasma.explode = .weapons.plasdiff.explode
       $limit plasma.explode 0
       $volume plasma.explode 0.15
    }

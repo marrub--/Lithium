@@ -61,8 +61,8 @@ class Lith_BaronBall : BaronBall replaces BaronBall
    states
    {
    Spawn:
-      HLF1 A 0;
-      HLF1 AAAABBBB 1 bright A_SpawnItemEx("Lith_BaronHellfireTrailSpawner", 0, frandom(-0.5, 0.5), 0, frandom(0,-1));
+      BAL7 A 0;
+      BAL7 AAAABBBB 1 bright A_SpawnItemEx("Lith_BaronHellfireTrailSpawner", 0, frandom(-0.5, 0.5), 0, frandom(0,-1));
       loop;
    Death:
       BAL7 CDE 6 bright;
@@ -159,11 +159,11 @@ Crash:
    BOSS O -1 A_BossDeath;
    stop;
 Death.Extreme:
-   BOSS P -1;
+   LI07 H -1;
 Crash.Extreme:
-   BOSS P 5 Lith_A_XDie;
-   BOSS QRSTUVW 5;
-   BOSS X -1 A_BossDeath;
+   LI07 H 5 Lith_A_XDie;
+   LI07 IJKLMNO 5;
+   LI07 P -1 A_BossDeath;
    stop;
 
 Raise:

@@ -23,6 +23,7 @@ const canvas_h = 128;
 
 const fire_canvas_w = 64;
 const fire_canvas_h = 128;
+const fire_canvas_size = fire_canvas_w * fire_canvas_h;
 
 /* all modes */
 Canvas    m_skyCanvas;
@@ -42,7 +43,7 @@ color     m_skyFlashColor;
 
 /* firestorms */
 Canvas                               m_skyFireCanvas;
-uint8[fire_canvas_w * fire_canvas_h] m_skyFire;
+uint8[fire_canvas_size] m_skyFire;
 
 /* clouds */
 textureId m_skyClouds;

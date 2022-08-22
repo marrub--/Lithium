@@ -103,13 +103,13 @@ weapons {
 
    plasdiff {
       == lsnd/Weapons/PlasmaDiffuser
-      fire1 Fire      # Halo 3
-      fire2 Fire2     # ^
-      fire3 Fire3     # ^
-      draw  Draw      # Fallout 3, Halo 3
-      empty FireEmpty # ^
+      fire1   Fire      # Halo 3
+      fire2   Fire2     # ^
+      fire3   Fire3     # ^
+      draw    Draw      # Fallout 3, Halo 3
+      empty   FireEmpty # ^
+      explode Explode   # Doom
 
-      $alias explode = .weapons.plasmax
       $limit explode 0
 
       $random fire {

@@ -56,11 +56,11 @@ class Lith_ArchvileImmolatorBlast : Actor
    states
    {
    Spawn:
-      DVBL AB 1 bright;
-      DVBL C 2 bright;
-      DVBL DE 3 bright;
-      DVBL FGH 4 bright;
-      DVBL IJ 5 A_FadeOut;
+      LI04 QR 1 bright;
+      LI04 S 2 bright;
+      LI04 TU 3 bright;
+      LI04 VWX 4 bright;
+      LI04 YZ 5 A_FadeOut;
       stop;
    }
 }
@@ -141,11 +141,11 @@ Crash:
    stop;
 
 Death.Extreme:
-   VILX A -1;
+   LI07 A -1;
 Crash.Extreme:
-   VILX A 5 Lith_A_XDie;
-   VILX BCDEF 5;
-   VILX G -1;
+   LI07 A 5 Lith_A_XDie;
+   LI07 BCDEF 5;
+   LI07 G -1;
    stop;
 }
 

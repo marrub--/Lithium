@@ -6,152 +6,111 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_RedCard : Lith_BasicPickup replaces RedCard
-{
-   default
-   {
+class Lith_RedCard : Lith_BasicPickup replaces RedCard {
+   default {
       Tag "$LITH_LOG_RedCard";
       Inventory.PickupSound "player/pickup/redkey";
       Lith_BasicPickup.LogName "RedCard", 5;
       Lith_BasicPickup.InfoPage "KeyDisk";
    }
-
-   override void PostBeginPlay()
-   {
+   override void PostBeginPlay() {
       Super.PostBeginPlay();
       self.GiveInventory("RedCard", 1);
    }
-
-   states
-   {
+   states {
    Spawn:
-      RKEY A 10;
-      RKEY B 10 bright;
+      LI06 A 10;
+      LI06 B 10 bright;
       loop;
    }
 }
-
-class Lith_BlueCard : Lith_BasicPickup replaces BlueCard
-{
-   default
-   {
+class Lith_BlueCard : Lith_BasicPickup replaces BlueCard {
+   default {
       Tag "$LITH_LOG_BlueCard";
       Inventory.PickupSound "player/pickup/bluekey";
       Lith_BasicPickup.LogName "BlueCard", 5;
       Lith_BasicPickup.InfoPage "KeyDisk";
    }
-
-   override void PostBeginPlay()
-   {
+   override void PostBeginPlay() {
       Super.PostBeginPlay();
       self.GiveInventory("BlueCard", 1);
    }
-
-   states
-   {
+   states {
    Spawn:
-      BKEY A 10;
-      BKEY B 10 bright;
+      LI06 E 10;
+      LI06 F 10 bright;
       loop;
    }
 }
-
-class Lith_YellowCard : Lith_BasicPickup replaces YellowCard
-{
-   default
-   {
+class Lith_YellowCard : Lith_BasicPickup replaces YellowCard {
+   default {
       Tag "$LITH_LOG_YellowCard";
       Inventory.PickupSound "player/pickup/yellowkey";
       Lith_BasicPickup.LogName "YellowCard", 5;
       Lith_BasicPickup.InfoPage "KeyDisk";
    }
-
-   override void PostBeginPlay()
-   {
+   override void PostBeginPlay() {
       Super.PostBeginPlay();
       self.GiveInventory("YellowCard", 1);
    }
-
-   states
-   {
+   states {
    Spawn:
-      YKEY A 10;
-      YKEY B 10 bright;
+      LI06 C 10;
+      LI06 D 10 bright;
       loop;
    }
 }
-
-class Lith_RedSkull : Lith_BasicPickup replaces RedSkull
-{
-   default
-   {
+class Lith_RedSkull : Lith_BasicPickup replaces RedSkull {
+   default {
       Tag "$LITH_LOG_RedSkull";
       Inventory.PickupSound "player/pickup/redskull";
       Lith_BasicPickup.LogName "RedSkull", 5;
       Lith_BasicPickup.InfoPage "KeySkull";
    }
-
-   override void PostBeginPlay()
-   {
+   override void PostBeginPlay() {
       Super.PostBeginPlay();
       self.GiveInventory("RedSkull", 1);
    }
-
-   states
-   {
+   states {
    Spawn:
-      RSKU A 10;
-      RSKU B 10 bright;
+      LI06 G 10;
+      LI06 H 10 bright;
       loop;
    }
 }
-
-class Lith_BlueSkull : Lith_BasicPickup replaces BlueSkull
-{
-   default
-   {
+class Lith_BlueSkull : Lith_BasicPickup replaces BlueSkull {
+   default {
       Tag "$LITH_LOG_BlueSkull";
       Inventory.PickupSound "player/pickup/blueskull";
       Lith_BasicPickup.LogName "BlueSkull", 5;
       Lith_BasicPickup.InfoPage "KeySkull";
    }
-
-   override void PostBeginPlay()
-   {
+   override void PostBeginPlay() {
       Super.PostBeginPlay();
       self.GiveInventory("BlueSkull", 1);
    }
-
-   states
-   {
+   states {
    Spawn:
-      BSKU A 10;
-      BSKU B 10 bright;
+      LI06 K 10;
+      LI06 L 10 bright;
       loop;
    }
 }
-
-class Lith_YellowSkull : Lith_BasicPickup replaces YellowSkull
-{
-   default
-   {
+class Lith_YellowSkull : Lith_BasicPickup replaces YellowSkull {
+   default {
       Tag "$LITH_LOG_YellowSkull";
       Inventory.PickupSound "player/pickup/yellowskull";
       Lith_BasicPickup.LogName "YellowSkull", 5;
       Lith_BasicPickup.InfoPage "KeySkull";
    }
-
-   override void PostBeginPlay()
-   {
+   override void PostBeginPlay() {
       Super.PostBeginPlay();
       self.GiveInventory("YellowSkull", 1);
    }
-
-   states
-   {
+   states {
    Spawn:
-      YSKU A 10;
-      YSKU B 10 bright;
+      LI06 I 10;
+      LI06 J 10 bright;
       loop;
    }
 }

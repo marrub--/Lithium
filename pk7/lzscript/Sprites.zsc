@@ -16,14 +16,14 @@ struct Lith_Sprite {
    }
 }
 
-class Lith_SpriteLoader : Actor {
+class Lith_SpriteLoader : Actor abstract {
    states {
       ARM1 A 0;
       CUPG A 0;
       DITM A 0;
       FDLI A 0;
       IOBJ A 0;
-      LIFX A 0;
+      LI09 A 0;
       LWEP A 0;
       SPEL A 0;
       WRDP A 0;

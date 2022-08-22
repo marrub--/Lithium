@@ -1,0 +1,26 @@
+// ╭-*-C-*-───────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
+
+name:        "TESTMAP"
+seed:        777
+flags:       "nophantom"
+environment: "interstice"
+humidity:    60
+temperature: 140
+windspeed:   100
+sky:         "vanilla";
+
+name:        "TITLEMAP"
+seed:        0
+flags:       "nophantom"
+environment: "abyss"
+humidity:    0
+temperature: -270
+sky:         "vanilla";
+
+/* EOF */

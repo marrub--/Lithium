@@ -179,7 +179,6 @@ sm_:
    - FindFontColor
    - FindLump
    - GetCurMag
-   - GetMapInfoLump
    - GetMaxMag
    - GetOutOfDodge
    - GrabInput
@@ -468,6 +467,7 @@ sp_:
    - LITHCAM3
    - LITHEND
    - LITHINFO
+   - LITHMAP
    - LITHMONS
 
    - star: "*"

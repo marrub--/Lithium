@@ -18,7 +18,7 @@ class Lith_PhantomAuraFX : Actor {
 
    states {
    Spawn:
-      LDTH A 1 A_FadeOut(0.01);
+      LI09 W 1 A_FadeOut(0.01);
       wait;
    }
 }

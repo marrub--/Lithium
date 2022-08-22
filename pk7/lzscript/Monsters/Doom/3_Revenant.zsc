@@ -152,12 +152,12 @@ Crash:
    SKEL Q -1;
    stop;
 Death.Extreme:
-   REVX A -1;
+   LI08 Q -1;
 Crash.Extreme:
-   REVX A 3 Lith_A_XDie;
-   REVX B 4;
-   REVX CDE 5;
-   REVX F -1;
+   LI08 Q 3 Lith_A_XDie;
+   LI08 R 4;
+   LI08 STU 5;
+   LI08 V -1;
    stop;
 
 Raise:

@@ -29,6 +29,8 @@ w_mapsky_x(replace)
 w_mapsky_x(shader)
 #undef w_mapsky_x
 #elif defined(w_mapkey_x)
+w_mapkey_x(name)
+w_mapkey_x(hash)
 w_mapkey_x(environment)
 w_mapkey_x(flags)
 w_mapkey_x(humidity)
@@ -62,6 +64,7 @@ enum ZscName(PData) {
    _pdt_riflemode,
    _pdt_hassigil,
    _pdt_pclass,
+   _pdt_pclass_b,
    _pdt_semifrozen,
    _pdt_addp,
    _pdt_addy,
@@ -108,6 +111,7 @@ enum ZscName(EData) {
    _edt_sky2,
    _edt_windspeed,
    _edt_windangle,
+   _edt_maphash,
 };
 
 enum ZscName(Fun) {
@@ -386,7 +390,7 @@ script void W_Title(void);
 script void F_Run(void);
 void F_Load(void);
 void F_Start(i32 which);
-script struct map_info ReadMapInfo(void);
+script struct map_info *GetMapInfo(void);
 #endif
 
 #endif

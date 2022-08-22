@@ -50,9 +50,9 @@ class Lith_TechLamp : Lith_FlareDecor replaces TechLamp
 
    states
    {
-   Spawn:    TLMP ABCD 4 bright; loop;
-   Inactive: TLMP Y -1; stop;
-   Death:    TLMP X 0;
+   Spawn:    LI02 IJKL 4 bright; loop;
+   Inactive: LI02 N -1; stop;
+   Death:    LI02 M 0;
    Death1:
       #### # 1 A_StartSound("amb/shatter", lch_body3, attenuation: ATTN_NORM);
       #### # 35 A_SpawnItemEx("Lith_LampSpark", frandom(-0.5, 0.5), frandom(-0.5, 0.5), height-8, 0, 0, frandom(-1,1), frandom(-1,1), random(2,4), 168);
@@ -73,9 +73,9 @@ class Lith_TechLamp2 : Lith_TechLamp replaces TechLamp2
    }
 
    states {
-   Spawn:    TLP2 ABCD 4 bright; loop;
-   Inactive: TLP2 Y -1; stop;
-   Death:    TLP2 X 0; goto Death1;
+   Spawn:    LI02 OPQR 4 bright; loop;
+   Inactive: LI02 T -1; stop;
+   Death:    LI02 S 0; goto Death1;
    }
 }
 
@@ -91,9 +91,9 @@ class Lith_Column : Lith_TechLamp2 replaces Column
    }
 
    states {
-   Spawn:    COLU ABCDEDCB 4 bright; loop;
-   Inactive: COLU Y -1; stop;
-   Death:    COLU X 0; goto Death1;
+   Spawn:    LI02 BCDEFEDC 4 bright; loop;
+   Inactive: LI02 H -1; stop;
+   Death:    LI02 G 0; goto Death1;
    }
 }
 
