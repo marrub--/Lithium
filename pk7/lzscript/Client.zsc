@@ -13,7 +13,7 @@
 #include "lzscript/Client/Draw.zsc"
 #include "lzscript/Client/Menu.zsc"
 #include "lzscript/Client/MessageBox.zsc"
-#include "lzscript/Client/PlayerclassMenu.zsc"
+#include "lzscript/Client/PlayerClassMenu.zsc"
 #include "lzscript/Client/Projection.zsc"
 #include "lzscript/Client/Sky.zsc"
 #include "lzscript/Client/StatScreen.zsc"
@@ -27,16 +27,19 @@
 /* URANUS: Users Really Are Not UI Systems */
 class Lith_URANUS : StaticEventHandler;
 
-Lith_RenderProvider m_ren;
 ui Lith_MenuDelegate m_del;
 
+static clearScope Lith_URANUS instance() {
+   return Lith_URANUS(find('Lith_URANUS'));
+}
+
 override void onRegister() {
-   m_ren = Lith_RenderProvider.create();
+   renRegister();
 }
 
 override void worldLoaded(WorldEvent evt) {
    if(evt.isSaveGame) {
-      m_ren.replaceSky();
+      replaceSky();
       if(Lith_UTIL.pData(_pdt_mflg, _mflg_corrupted)) {
          CallACS("Lith_TimelineInconsistent");
       }
@@ -44,11 +47,11 @@ override void worldLoaded(WorldEvent evt) {
 }
 
 override void worldUnloaded(WorldEvent evt) {
-   m_ren.unload();
+   renUnload();
 }
 
 override void worldTick() {
-   m_ren.tick();
+   renTick();
 }
 
 override void uiTick() {
@@ -62,12 +65,12 @@ override void uiTick() {
    if(gameState == GS_FINALE && (!level.nextMap || level.nextMap.left(6) == "enDSeQ")) {
       callACS("Lith_Finale");
    }
-   m_ren.tickMenu();
+   tickMenu();
 }
 
 override void renderOverlay(RenderEvent evt) {
-   m_ren.render(evt);
-   m_ren.drawMenu(evt);
+   renRender(evt);
+   drawMenu(evt);
 }
 
 /* EOF */

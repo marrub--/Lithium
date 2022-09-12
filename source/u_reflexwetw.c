@@ -13,19 +13,16 @@
 #include "u_all.h"
 
 #define udata pl.upgrdata.reflexwetw
-
 #define CHARGE_MAX (35 * 0.8)
 
-alloc_aut(0) script static
-void DodgeView(void) {
+alloc_aut(0) script_str ext("ACS") addr(OBJ "DodgeView")
+void Z_DodgeView(void) {
    k32 vh = pl.viewheight;
-
    for(i32 i = 0; i < 20; i++) {
       k32 mul = 1.0 - (ACS_Sin(i / 40.0) * 0.6);
       SetViewHeight(0, vh * mul);
       ACS_Delay(1);
    }
-
    SetViewHeight(0, vh);
 }
 
@@ -56,7 +53,7 @@ void Upgr_ReflexWetw_Update(void) {
          AmbientSound(ss_player_slide, 1.0);
          P_SetVel(pl.velx + (ACS_Cos(angle) * 32.0), pl.vely + (ACS_Sin(angle) * 32.0), 0);
 
-         DodgeView();
+         Z_DodgeView();
 
          udata.charge = 0;
       }
@@ -75,24 +72,17 @@ void Upgr_ReflexWetw_Update(void) {
    }
 }
 
-script_str ext("ACS") addr(OBJ "DodgeView")
-void Z_DodgeView(void) {
-   if(!P_None()) DodgeView();
-}
-
 script_str ext("ACS") addr(OBJ "DodgeViewShadowWalk")
 void Z_DodgeViewShadowWalk(void) {
-   if(!P_None()) {
-      k32 vh = pl.viewheight;
+   k32 vh = pl.viewheight;
 
-      for(i32 i = 0; i < 105; i++) {
-         k32 mul = 1.0k - (ACS_Sin(i / 105.0k / 2.0k) * 0.3k) - 0.1k;
-         SetViewHeight(0, vh * mul);
-         ACS_Delay(1);
-      }
-
-      SetViewHeight(0, vh);
+   for(i32 i = 0; i < 105; i++) {
+      k32 mul = 1.0k - (ACS_Sin(i / 105.0k / 2.0k) * 0.3k) - 0.1k;
+      SetViewHeight(0, vh * mul);
+      ACS_Delay(1);
    }
+
+   SetViewHeight(0, vh);
 }
 
 /* EOF */

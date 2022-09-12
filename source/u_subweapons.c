@@ -76,30 +76,17 @@ void Upgr_Subweapons_Enter(struct ugprade *upgr) {
 
 script_str ext("ACS") addr(OBJ "GetSubShots")
 i32 Z_GetSubShots(void) {
-   if(!P_None()) {
-      if(get_bit(pl.upgrades[UPGR_Subweapons].flags, _ug_active)) {
-         return udata.shots;
-      }
-   }
-
-   return 0;
+   return udata.shots;
 }
 
 script_str ext("ACS") addr(OBJ "TakeSubShot")
 void Z_TakeSubShot(void) {
-   if(!P_None()) {
-      if(get_bit(pl.upgrades[UPGR_Subweapons].flags, _ug_active)) {
-         udata.shots--;
-      }
-   }
+   udata.shots--;
 }
 
 script_str ext("ACS") addr(OBJ "GetSubType")
 i32 Z_GetSubType(void) {
-   if(!P_None()) {
-      return udata.which;
-   }
-   return 0;
+   return udata.which;
 }
 
 /* EOF */

@@ -36,7 +36,7 @@ void Z_DOGS(void) {
 
 script_str ext("ACS") addr(OBJ "BarrierBullets")
 void Z_BarrierBullets(void) {
-   if(!P_None() && PtrPlayerNumber(0, AAPTR_TARGET) >= 0) {
+   if(PtrPlayerNumber(0, AAPTR_TARGET) >= 0) {
       k32 ang   = ACS_VectorAngle(GetX(0) - pl.x, GetY(0) - pl.y);
       k32 xang  = ACS_VectorAngle(pl.x - GetX(0), pl.y - GetY(0));
       k32 zdiff = pl.z - GetZ(0);
@@ -51,64 +51,57 @@ void Z_BarrierBullets(void) {
 
 dynam_aut script_str ext("ACS") addr(OBJ "GetSigil")
 void Z_GetSigil(void) {
-   if(!P_None()) {
-      P_GUI_Close();
+   P_GUI_Close();
 
-      pl.logF("*** WARNING - CAUSAL SHIFT DETECTED IN WETWARE ***");
-      pl.sgacquired = true;
+   P_LogF("*** WARNING - CAUSAL SHIFT DETECTED IN WETWARE ***");
+   pl.sgacquired = true;
 
-      #ifndef NDEBUG
-      if(dbglevel_any()) return;
-      #endif
+#ifndef NDEBUG
+   if(dbglevel_any()) return;
+#endif
 
-      StartSound(ss_player_getsigil, lch_body3, 0, 1.0, ATTN_NONE);
+   StartSound(ss_player_getsigil, lch_body3, 0, 1.0, ATTN_NONE);
 
-      FreezeTime();
+   FreezeTime();
 
-      ACS_FadeTo(0, 0, 0, 0.4, 0.087);
+   ACS_FadeTo(0, 0, 0, 0.4, 0.087);
 
-      ACS_Delay(3);
+   ACS_Delay(3);
 
-      SetFade(fid_divsigil, 44, 8);
-      for(i32 i = 0;; i++) {
-         if(!CheckFade(fid_divsigil)) break;
+   SetFade(fid_divsigil, 44, 8);
+   for(i32 i = 0;; i++) {
+      if(!CheckFade(fid_divsigil)) break;
 
-         SetSize(640, 480);
-         PrintTextF_str(ns(lang(sl_div_get)), sf_bigupper, CR_ORANGE, 320,4, 240,2, fid_divsigil);
-         PrintTextF_str(ns(lang(sl_div_warning)), sf_bigupper, CR_RED, 320,4, 240,1, fid_divsigil);
+      SetSize(640, 480);
+      PrintTextF_str(ns(lang(sl_div_get)), sf_bigupper, CR_ORANGE, 320,4, 240,2, fid_divsigil);
+      PrintTextF_str(ns(lang(sl_div_warning)), sf_bigupper, CR_RED, 320,4, 240,1, fid_divsigil);
 
-         ACS_Delay(1);
-      }
-
-      ACS_FadeTo(0, 0, 0, 0.0, 0.145);
-
-      UnfreezeTime();
+      ACS_Delay(1);
    }
+
+   ACS_FadeTo(0, 0, 0, 0.0, 0.145);
+
+   UnfreezeTime();
 }
 
 script_str ext("ACS") addr(OBJ "GiveHealthBonus")
 void Z_GiveHealthBonus(i32 amount) {
-   if(!P_None()) {
-      amount += pl.health;
-      if(amount > pl.maxhealth + 100) amount = pl.maxhealth + 100;
-      pl.setHealth(amount);
-   }
+   amount += pl.health;
+   if(amount > pl.maxhealth + 100) amount = pl.maxhealth + 100;
+   pl.setHealth(amount);
 }
 
 script_str ext("ACS") addr(OBJ "GiveHealth")
 void Z_GiveHealth(i32 amount) {
-   if(!P_None()) {
-      amount += pl.health;
-      amount *= 1 + pl.attr.attrs[at_vit] / 80.0;
-      if(amount > pl.maxhealth) amount = pl.maxhealth;
-      pl.setHealth(amount);
-   }
+   amount += pl.health;
+   amount *= 1 + pl.attr.attrs[at_vit] / 80.0;
+   if(amount > pl.maxhealth) amount = pl.maxhealth;
+   pl.setHealth(amount);
 }
 
 script_str ext("ACS") addr(OBJ "CheckHealth")
 bool Z_CheckHealth(void) {
-   if(!P_None()) return pl.health < pl.maxhealth;
-   return 0;
+   return pl.health < pl.maxhealth;
 }
 
 /* EOF */

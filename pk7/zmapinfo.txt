@@ -75,7 +75,7 @@ skill tourist {
    healthFactor   = 2
    key            = "t"
    monsterHealth  = 0.1
-   name           = "$DIFF_TOURIST"
+   name           = "$LITH_DIFF_TOURIST"
    respawnTime    = 0.5
    spawnFilter    = 2
    easyBossBrain
@@ -86,7 +86,7 @@ skill tourist {
 skill normal {
    acsReturn   = 2
    key         = "h"
-   name        = "$DIFF_NORMAL"
+   name        = "$LITH_DIFF_NORMAL"
    spawnFilter = 3
    defaultSkill
 }
@@ -94,7 +94,7 @@ skill normal {
 skill hard {
    acsReturn   = 3
    key         = "u"
-   name        = "$DIFF_HARD"
+   name        = "$LITH_DIFF_HARD"
    spawnFilter = 4
 }
 
@@ -103,15 +103,19 @@ skill nightmare {
    damageFactor  = 2
    key           = "t"
    monsterHealth = 0.5
-   name          = "$DIFF_NMARE"
+   name          = "$LITH_DIFF_NMARE"
    respawnTime   = 0.5
    spawnFilter   = 5
    noInfighting
 }
 
 episode TITLEMAP {
-   name = "Abyss"
+   name = "Lithium - Abyss"
    key  = "a"
+}
+
+episode TESTMAP {
+   name = "Lithium - Test Map"
 }
 
 gameDefaults {
@@ -132,9 +136,7 @@ map TITLEMAP "Abyss" {
 map TESTMAP "Test Map" {
    music = "lmusic/dandalins story.it"
    next  = 1
-   sky1  = "LITHSKQC", 0.1
-   sky2  = "LITHSKDE"
-   doubleSky
+   sky1  = "LITHSKDE"
    fallingDamage
 }
 

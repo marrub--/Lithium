@@ -10,14 +10,60 @@
                Butt-pulled Omega haX */
 class Lith_MESSAGEBOX : MessageBoxMenu;
 
-override void Init(Menu parent, string message, int message_mode, bool play_sound, name cmd, voidptr native_handler)
-{
+vector2 m_bk, m_bkSize;
+
+override void init(Menu parent, string message, int messageMode, bool playSound, name cmd, voidPtr nativeHandler) {
    if(message == "HACK HACK THIS IS A HACK WOW WHAT A HACK") {
       int num = Lith_HERMES.localize("QUITMSGNUM").toInt(10);
-      num = (gametic % num) + 1;
-      message = Lith_HERMES.localize(string.Format("QUITMSG%i", num));
+      num = random[lith_quitmsg](1, num);
+      message = Lith_HERMES.localize(string.Format("QUITMSG%i", num)) .. "\n\n" .. Lith_HERMES.localize("QUITMSGEND");
    }
-   super.Init(parent, message, message_mode, play_sound, cmd, native_handler);
+   super.init(parent, message, messageMode, playSound, cmd, nativeHandler);
+   double fontHeight = textFont.getHeight();
+   m_bkSize = (0, 0);
+   for(int i = 0, n = mMessage.count(); i < n; ++i) {
+      double w = mMessage.stringWidth(i);
+      m_bkSize.x  = max(m_bkSize.x, w);
+      m_bkSize.y += fontHeight;
+   }
+   if(mMessageMode == 0) {
+      m_bkSize.y += fontHeight * 3;
+      m_bkSize.x  = max(m_bkSize.x, textFont.stringWidth(StringTable.localize("$TXT_YES")) * 2);
+      m_bkSize.x  = max(m_bkSize.x, textFont.stringWidth(StringTable.localize("$TXT_NO")) * 2);
+   }
+   m_bk.x = 320 / 2 - m_bkSize.x / 2;
+   m_bk.y = 240 / 2 - m_bkSize.y / 2;
+}
+
+override void drawer() {
+   Lith_URANUS.drawBack(m_bk.x - 2, m_bk.y, m_bkSize.x + 2, m_bkSize.y, (0, 0), _bk_tl1br2);
+   double fontHeight = textFont.getHeight();
+   for(int i = 0, n = mMessage.count(); i < n; i++) {
+      Screen.drawText(textFont, Font.CR_WHITE, m_bk.x + m_bkSize.x / 2 - mMessage.stringWidth(i) / 2, m_bk.y + fontHeight * i, mMessage.stringAt(i), DTA_Clean,true);
+   }
+   if(mMessageMode == 0) {
+      mMouseY = int(m_bk.y + fontHeight * (mMessage.count() + 1));
+      Screen.drawText(textFont, messageSelection == 0 ? optionMenuSettings.mFontColorSelection : optionMenuSettings.mFontColor, 320 / 2, mMouseY, StringTable.localize("$TXT_YES"), DTA_Clean,true);
+      Screen.drawText(textFont, messageSelection == 1 ? optionMenuSettings.mFontColorSelection : optionMenuSettings.mFontColor, 320 / 2, mMouseY + fontHeight, StringTable.localize("$TXT_NO"), DTA_Clean,true);
+      if(messageSelection >= 0) {
+         Lith_MenuDelegate(menuDelegate).lith_drawSelector((320 / 2 - 11, mMouseY + fontHeight * messageSelection), (0, 0));
+      }
+   }
+}
+
+override bool mouseEvent(int type, int x, int y) {
+   if(mMessageMode != 1) {
+      vector2 sp, ss;
+      [sp, ss] = Lith_URANUS.cleanPosScale((0, mMouseY), (0, textFont.getHeight()));
+      if(y >= sp.y && y < sp.y + ss.y * 2) {
+         messageSelection = y >= sp.y + ss.y;
+      } else {
+         messageSelection = -1;
+      }
+      return type != MOUSE_RELEASE || menuEvent(MKEY_ENTER, true);
+   } else {
+      return type == MOUSE_CLICK && menuEvent(MKEY_ENTER, true);
+   }
 }
 
 /* EOF */

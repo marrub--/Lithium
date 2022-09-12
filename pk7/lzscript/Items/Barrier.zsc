@@ -72,7 +72,7 @@ default {
 override bool tryPickup(in out Actor mo) {
    Lith_HERMES.Log(msg_item, 5, "_BlurSphere");
    Lith_HERMES.UnlockBip(mo, "Fragma");
-   Lith_StatFx.addToPool(Lith_Player(mo), "Lith_BarrierStat");
+   Lith_StatFx.addToPool("Lith_BarrierStat");
    callAcs("Lith_ItemPopupTag");
    goAwayAndDie();
    return true;

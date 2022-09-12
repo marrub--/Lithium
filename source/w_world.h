@@ -29,11 +29,12 @@ w_mapsky_x(replace)
 w_mapsky_x(shader)
 #undef w_mapsky_x
 #elif defined(w_mapkey_x)
-w_mapkey_x(name)
-w_mapkey_x(hash)
 w_mapkey_x(environment)
 w_mapkey_x(flags)
+w_mapkey_x(hash)
 w_mapkey_x(humidity)
+w_mapkey_x(name)
+w_mapkey_x(script)
 w_mapkey_x(seed)
 w_mapkey_x(sky)
 w_mapkey_x(temperature)
@@ -46,15 +47,15 @@ w_mapkey_x(windspeed)
 #include <stdbool.h>
 
 #define DefaultAirControl() ACS_SetAirControl(0.77k)
-
 #define MapNum  ACS_GetLevelInfo(LEVELINFO_LEVELNUM)
 #define Cluster ACS_GetLevelInfo(LEVELINFO_CLUSTERNUM)
-
 #define GetFun()  CVarGetI(sc_fun)
 #define SetFun(x) CVarSetI(sc_fun, x)
-
 #define EDataI(...) ServCallI(sm_EDataI, __VA_ARGS__)
 #define EDataS(...) ServCallS(sm_EDataS, __VA_ARGS__)
+#define mi_setup(mi) union map_key _v;
+#define mi_opt(mi, key, l, r) (get_bit((mi)->use, key) ? (_v = (mi)->keys[key], l) : (r))
+#define mi_flg(mi, flg) (get_bit((mi)->use, _mi_key_flags) && get_bit((mi)->keys[_mi_key_flags].i, flg))
 #endif
 
 /* Program Data */
@@ -119,7 +120,8 @@ enum ZscName(Fun) {
    lfun_bips     = 1 << 1,
    lfun_division = 1 << 2,
    lfun_tainted  = 1 << 3,
-   lfun_lane     = 1 << 4,
+   lfun_lane     = 1 << 16,
+   lfun_postgame = 0xFFFF,
 };
 
 enum ZscName(BossRewardNum) {
@@ -290,27 +292,6 @@ enum {
    ct_date
 };
 
-struct payoutinfo {
-   i32 killnum, killmax, killscr;
-   i32 itemnum, itemmax, itemscr;
-   i32 scrtnum, scrtmax, scrtscr;
-
-   k64 killpct, itempct, scrtpct;
-
-   i32 total;
-   i32 tax;
-
-   i32 par;
-
-   struct {
-      i32 kill100;
-      i32 item100;
-      i32 scrt100;
-      i32 par;
-      i32 sponsor;
-   } activities;
-};
-
 enum mission_status {
    _mstat_unfinished,
    _mstat_finished,
@@ -335,22 +316,42 @@ enum {
    _scorethreshold_default = 1000000,
 };
 
+struct payoutinfo {
+   i32 killnum, killmax, killscr;
+   i32 itemnum, itemmax, itemscr;
+   i32 scrtnum, scrtmax, scrtscr;
+   k64 killpct, itempct, scrtpct;
+   i32 total;
+   i32 tax;
+   i32 par;
+   struct {
+      i32 kill100;
+      i32 item100;
+      i32 scrt100;
+      i32 par;
+      i32 sponsor;
+   } activities;
+};
+
+union map_key {
+   i32 i;
+   str s;
+};
+
 struct map_info {
    i32 use;
-   i32 keys[_mi_key_max];
+   union map_key keys[_mi_key_max];
 };
 
 struct world {
    struct payoutinfo pay;
    score_t scorethreshold;
-
    i32  hubscleared;
    i32  secretsfound;
    i32  cbiperf;
    i64  cbiupgr;
    i32  compat;
    bool init;
-
    i32          a_x, a_y;
    struct polar a_angles[8];
    i32          a_cur;
@@ -373,6 +374,7 @@ struct map_locals {
    i32 previtems;
    i32 missionkill;
    i32 missionprc;
+   struct map_info *mi;
 };
 
 extern struct world            wl;

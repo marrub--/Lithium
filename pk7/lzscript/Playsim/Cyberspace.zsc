@@ -149,7 +149,7 @@ ui void lith_render() const {
    /* draw scene from pixel buffer */
    for(int y = 0; y < RH; y++) {
       for(int x = 0; x < RW; x++) {
-         Lith_RenderProvider.drawRect(1, 1, x, y, m_dBuf[x + y * RW]);
+         Lith_URANUS.drawRect(x, y, 1, 1, m_dBuf[x + y * RW], (RW, RH));
       }
    }
 }

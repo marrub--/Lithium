@@ -13,36 +13,31 @@
 #include "m_engine.h"
 #include "m_cps.h"
 
-#define Cps_Shift(i, set) ((set) << ((i) % 4 * 8))
+#define Cps_Ptr(i) (((i) & 3) << 3)
 
-noinit static
-char buf[4096];
+noinit static char buf[4096];
 
-alloc_aut(0) stkcall
-void Cps_SetC(cps_t *cps, mem_size_t p, char c) {
-   cps[p / 4] &= ~Cps_Shift(p, 0xFF);
-   cps[p / 4] |=  Cps_Shift(p, byte(c));
+alloc_aut(0) stkcall void Cps_SetC(cps_t *cps, mem_size_t p, i32 c) {
+   mem_size_t pp = Cps_Ptr(p);
+   cps[p / 4] = cps[p / 4] & ~(0xFF << pp) | byte(c) << pp;
 }
 
 alloc_aut(0) stkcall
 mem_byte_t Cps_GetC(cps_t const *cps, mem_size_t p) {
-   return byte((cps[p / 4] & (0xFF << (p % 4 * 8))) >> (p % 4 * 8));
+   return byte(cps[p / 4] >> Cps_Ptr(p));
 }
 
-alloc_aut(0) stkcall
-cstr Cps_Expand(cps_t const *cps, mem_size_t s, mem_size_t l) {
-   mem_size_t i;
-   for(i = 0; i < l;) buf[i++] = Cps_GetC(cps, i + s);
-   buf[i] = '\0';
+alloc_aut(0) stkcall cstr Cps_Expand(cps_t const *cps, mem_size_t s, mem_size_t l) {
+   for(mem_size_t i = 0; i < l; ++i) {
+      buf[i] = Cps_GetC(cps, s + i);
+   }
+   buf[l] = '\0';
    return buf;
 }
 
-alloc_aut(0) stkcall
-cstr Cps_ExpandNT(cps_t const *cps, mem_size_t s) {
-   mem_size_t i;
-   char ch;
-   for(i = 0; (ch = Cps_GetC(cps, i + s));) buf[i++] = ch;
-   buf[i] = '\0';
+alloc_aut(0) stkcall cstr Cps_ExpandNT(cps_t const *cps, mem_size_t s) {
+   for(mem_size_t i = 0; (buf[i] = Cps_GetC(cps, s + i)); ++i) {
+   }
    return buf;
 }
 

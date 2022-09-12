@@ -18,6 +18,10 @@ $playersound    * * *dive        SplashIn # ^
 $playersound    * * *surface     Splash   # ^
 $playersounddup * * *drainhealth *pain50
 $playersounddup * * *poison      *pain100
+$playeralias    * * *step-lava   player.step.lava
+$playeralias    * * *step-normal player.step.normal
+$playeralias    * * *step-slime  player.step.slime
+$playeralias    * * *step-water  player.step.water
 
 player {
    depthdown    DepthDown           # LSD: Dream Emulator
@@ -54,53 +58,28 @@ player {
       score3,
    }
 
-   == lsnd/Player/Footsteps
-   step1 Step1 # ???
-   step2 Step2 # ???
-   step3 Step3 # ???
-   step4 Step4 # ???
-
-   stepw1 Water1 # Black Mesa
-   stepw2 Water2 # ^
-   stepw3 Water3 # ^
-   stepw4 Water4 # ^
-
-   stepl1 Lava1 # Insurgency
-   stepl2 Lava2 # ^
-   stepl3 Lava3 # ^
-   stepl4 Lava4 # ^
-
-   steps1 Slime1 # Battlefield 4
-   steps2 Slime2 # ^
-   steps3 Slime3 # ^
-   steps4 Slime4 # ^
-
-   $random step {
-      step1,
-      step2,
-      step3,
-      step4,
-   }
-
-   $random stepw {
-      stepw1,
-      stepw2,
-      stepw3,
-      stepw4,
-   }
-
-   $random stepl {
-      stepl1,
-      stepl2,
-      stepl3,
-      stepl4,
-   }
-
-   $random steps {
-      steps1,
-      steps2,
-      steps3,
-      steps4,
+   step {
+      == lsnd/Player/Footsteps
+      lava1 Lava1 # Insurgency
+      lava2 Lava2 # ^
+      lava3 Lava3 # ^
+      lava4 Lava4 # ^
+      normal1 Step1 # ???
+      normal2 Step2 # ???
+      normal3 Step3 # ???
+      normal4 Step4 # ???
+      slime1 Slime1 # Battlefield 4
+      slime2 Slime2 # ^
+      slime3 Slime3 # ^
+      slime4 Slime4 # ^
+      water1 Water1 # Black Mesa
+      water2 Water2 # ^
+      water3 Water3 # ^
+      water4 Water4 # ^
+      $random lava   {lava1,     lava2,     lava3,     lava4,}
+      $random normal {normal1, normal2, normal3, normal4,}
+      $random slime  {slime1,    slime2,    slime3,    slime4,}
+      $random water  {water1,    water2,    water3,    water4,}
    }
 
    == lsnd/GUI

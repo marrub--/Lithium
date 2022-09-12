@@ -72,11 +72,12 @@ void Upgr_Flashlight_Update(void) {
 
 script_str ext("ACS") addr(OBJ "GetFlashlightIntensity")
 k32 Z_GetFlashlightIntensity(void) {
-   if(!P_None()) {return udata.intensity;}
-   return 0.0;
+   return udata.intensity;
 }
 
 script_str type("net") ext("ACS") addr(OBJ "KeyLight")
-void Z_KeyLight(void) {if(!P_None()) {udata.on = !udata.on;}}
+void Z_KeyLight(void) {
+   udata.on = !udata.on;
+}
 
 /* EOF */

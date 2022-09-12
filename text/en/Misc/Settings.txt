@@ -147,6 +147,10 @@
 == \#st_name_rain_1 | Environment-based
 == \#st_name_rain_2 | Always rain
 
+== \#st_name_rainphys_0 | Advanced
+== \#st_name_rainphys_1 | Static
+== \#st_name_rainphys_2 | Simple
+
 == \#st_name_sky_0 | No change
 == \#st_name_sky_1 | Vanilla-like
 == \#st_name_sky_2 | Replace skies
@@ -210,9 +214,8 @@ The color for most of the text in in-game GUIs.
 @@ \#TOOLTIP_gui_jpfont
 The font to use when Japanese is set as the language.
 
+== \#gui_curspeed | Cursor speed
 == \#gui_theme | Interface theme
-== \#gui_xmul | Horizontal cursor speed
-== \#gui_ymul | Vertical cursor speed
 == \#hud_type | Type
 == \#hud_expbar | Show experience bar
 == \#hud_logfromtop | Display at the top of the screen
@@ -233,7 +236,6 @@ The font to use when Japanese is set as the language.
 == \#light_r | $\#RED_INTENSITY
 == \#light_radius | Radius
 == \#light_regen | Battery regeneration
-
 == \#player_altinvuln | Alternate invulnerability palette
 @@ \#TOOLTIP_player_altinvuln
 Changes the inverted palette to an orange one. My eyes, they're saved!
@@ -246,7 +248,6 @@ Changes the inverted palette to an orange one. My eyes, they're saved!
 == \#player_itemdisp | Display picked up items
 == \#player_itemdispalpha | Score/item/ammo alpha
 == \#player_lvsys | Level-up system
-
 == \#player_noitemfx | No item effects
 @@ \#TOOLTIP_player_noitemfx
 Disables the effects around items such as weapons and Phantom rewards,
@@ -269,7 +270,6 @@ issues.
 == \#player_resultssound | Play sounds
 == \#player_scoredisp | Display score gained
 == \#player_scoresound | Play a sound when score is gained
-
 == \#player_sillypickups | Silly pickup messages
 @@ \#TOOLTIP_player_sillypickups
 Highly recommended!
@@ -289,7 +289,6 @@ laterally.
 == \#scanner_slide | Slide to target
 == \#scanner_xoffs | Horizontal offset
 == \#scanner_yoffs | Vertical offset
-
 == \#st_autobuy_1 | Auto-buy \caSet 1
 @@ \#TOOLTIP_autobuy_1
 Automatically buys this autogroup when you have the Score available.
@@ -321,7 +320,6 @@ Enables more difficult enemy patterns.
 
 == \#sv_lessparticles | Less particles
 == \#sv_minhealth | Minimum health on map start
-
 == \#sv_nobossdrop | Start with phantom rewards
 @@ \#TOOLTIP_sv_nobossdrop
 Gives you all rewards from mid-mission bosses added by Lithium. Only
@@ -346,18 +344,23 @@ if you really want more.
 @@ \#TOOLTIP_sv_rain
 \ck(Applies on next map start)
 
+== \#sv_rainphysics | Rain physics
+%% \#TOOLTIP_sv_rainphysics
+Advanced: Rain has heavy motions, dynamically pitches and rolls. (Default.)
+Static: Rain only lightly reacts to wind, always pouring straight down. (Similar to old versions.)
+Simple: Rain reacts strongly to wind, always pouring straight down. (Initial wind velocity concept.)
+
 == \#sv_revenge | Explode on death
 == \#sv_sky | Replace skies
 %% \#TOOLTIP_sv_sky
-No change: No changes will be made to skies.
-Vanilla-like: Allows skies to have additional visual weather effects. May be incompatible with some maps.
-Replace skies: Replaces skies with ones designed for Lithium.
-Shader: A dynamic, soft sky replacement for a more chill atmosphere.
+No change: No changes will be made to skies. (Most compatible.)
+Vanilla-like: Allows vanilla skies to have additional visual effects. (May be incompatible with some edge cases. Default.)
+Replace skies: A palette of replacement skies based on the environment.
+Shader: A dynamic, soft, full sky replacement for a more chill atmosphere.
 
 \ck(Applies on next map start)
 
 == \#sv_skydarkening | Outside sector darkening
-
 == \#sv_wepdrop | Drop weapons from zombies
 @@ \#TOOLTIP_sv_wepdrop
 Mainly exists for map compatibility. Drops weapons from zombie enemies
@@ -385,7 +388,6 @@ when you don't have them already. May cause issues in normal gameplay.
 == \#xhair_a | Alpha
 == \#xhair_b | $\#BLUE_INTENSITY
 == \#xhair_enable | Enable
-
 == \#xhair_enablejuicer | Juicer
 @@ \#TOOLTIP_xhair_enablejuicer
 Seriously, why do they call them that? The little thingies around the

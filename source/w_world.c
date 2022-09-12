@@ -56,23 +56,15 @@ static void UpdateGame(void) {
       CVarSetI(sc_sv_difficulty, 10);
    }
 
-   if(ver_num < vernum_1_6_0_0 && CVarGetK(sc_player_footstepvol) == 1.0k) {
-      CVarSetK(sc_player_footstepvol, 0.2k);
-   }
-
    if(ver_num < vernum_1_6_1_0 && CVarGetK(sc_weapons_zoomfactor) == 3.0k) {
       CVarSetK(sc_weapons_zoomfactor, 1.5);
-   }
-
-   if(ver_num < vernum_1_6_3_0 && CVarGetI(sc_xhair_style) >= 10) {
-      CVarSetI(sc_xhair_style, 0);
    }
 
    CVarSetS(sc_version, st_ver);
 }
 
 script static void GInit(void) {
-   Dbg_Log(log_dev, _l(__func__));
+   Dbg_Log(log_dev, _l(_f));
    CheckModCompat();
    UpdateGame();
    wl.scorethreshold = _scorethreshold_default;
@@ -83,18 +75,16 @@ script static void GInit(void) {
 }
 
 script static void MInit(void) {
-   Dbg_Log(log_dev, _l(__func__));
-   #define mi_opt(key, l, r) (get_bit(mi->use, key) ? (v = mi->keys[key], l) : (r))
-   #define mi_flg(flg) (get_bit(mi->use, _mi_key_flags) && get_bit(mi->keys[_mi_key_flags], flg))
-   struct map_info *mi = GetMapInfo();
-   i32 v;
+   Dbg_Log(log_dev, _l(_f));
+   ml.lump = strp(ACS_PrintName(PRINTNAME_LEVEL));
+   ml.name = strp(ACS_PrintName(PRINTNAME_LEVELNAME));
+   struct map_info *mi = ml.mi = GetMapInfo();
+   mi_setup(mi);
    i32 fun = GetFun();
    DefaultAirControl();
    ml.soulsfreed = 0;
-   ml.seed = mi_opt(_mi_key_seed, v, ACS_Random(0, INT32_MAX));
+   ml.seed = mi_opt(mi, _mi_key_seed, _v.i, ACS_Random(0, INT32_MAX));
    srand(ml.seed);
-   ml.lump = strp(ACS_PrintName(PRINTNAME_LEVEL));
-   ml.name = strp(ACS_PrintName(PRINTNAME_LEVELNAME));
    ml.boss = EDataI(_edt_bosslevel);
    i32 func = _mfunc_normal;
    if(ACS_GameType() == GAME_TITLE_MAP) {
@@ -102,7 +92,7 @@ script static void MInit(void) {
    } else if(ml.lump == sp_LITHEND) {
       func = _mfunc_end;
    }
-   if(mi_flg(_mi_flag_nophantom) || cv.sv_nobosses) {
+   if(mi_flg(mi, _mi_flag_nophantom) || cv.sv_nobosses) {
       set_msk(ml.flag, _mflg_boss, _mphantom_nospawn);
    }
    if(ml.boss == boss_iconofsin && fun & lfun_tainted) {
@@ -111,7 +101,7 @@ script static void MInit(void) {
    i32 env = _menv_none;
    str sky = fast_strupper(EDataS(_edt_origsky1));
    if(get_bit(mi->use, _mi_key_environment)) {
-      env = mi->keys[_mi_key_environment];
+      env = mi->keys[_mi_key_environment].i;
    } else if(fun & lfun_ragnarok) {
       env = _menv_evil;
    } else if(sky == sp_SKY2 || sky == sp_RSKY2) {
@@ -119,13 +109,13 @@ script static void MInit(void) {
    } else if(sky == sp_SKY3 || sky == sp_SKY4 || sky == sp_RSKY3) {
       env = _menv_hell;
    }
-   ml.humidity    = mi_opt(_mi_key_humidity,    v, rand() % 101);
-   ml.temperature = mi_opt(_mi_key_temperature, v, rand() % 301 - 100);
-   ml.windspeed   = mi_opt(_mi_key_windspeed,   v, rand() % 100);
+   ml.humidity    = mi_opt(mi, _mi_key_humidity,    _v.i, rand() % 101);
+   ml.temperature = mi_opt(mi, _mi_key_temperature, _v.i, rand() % 301 - 100);
+   ml.windspeed   = mi_opt(mi, _mi_key_windspeed,   _v.i, rand() % 100);
    i32  lrnd      = ml.temperature * 12 / 55;
    i32  hrnd      = fastabs(ml.temperature / 2) * (ml.humidity / 40);
-   bool lightning = rand() % 99 < lrnd && !mi_flg(_mi_flag_nolightning);
-   bool any_rain  = rand() % 99 < hrnd && !mi_flg(_mi_flag_norain);
+   bool lightning = rand() % 99 < lrnd && !mi_flg(mi, _mi_flag_nolightning);
+   bool any_rain  = rand() % 99 < hrnd && !mi_flg(mi, _mi_flag_norain);
    i32  rain      = _rain_none;
    if(ml.temperature > -90) {
       switch(CVarGetI(sc_sv_rain)) {
@@ -158,13 +148,13 @@ script static void MInit(void) {
    set_msk(ml.flag, _mflg_rain, rain);
    set_msk(ml.flag, _mflg_func, func);
    set_msk(ml.flag, _mflg_env,  env);
-   set_msk(ml.flag, _mflg_sky,  mi_opt(_mi_key_sky, v, CVarGetI(sc_sv_sky)));
+   set_msk(ml.flag, _mflg_sky,  mi_opt(mi, _mi_key_sky, _v.i, CVarGetI(sc_sv_sky)));
    Dlg_MInit();
    SpawnBosses(pl.scoresum, false);
 }
 
 static void MInitPst(void) {
-   Dbg_Log(log_dev, _l(__func__));
+   Dbg_Log(log_dev, _l(_f));
 
    if(wl.hubscleared != 0) {
       Scr_MInit();
@@ -185,7 +175,7 @@ static void MInitPst(void) {
 }
 
 dynam_aut script void W_World(void) {
-   Dbg_Log(log_dev, _l(__func__));
+   Dbg_Log(log_dev, _l(_f));
    MInitPst();
    P_Player();
    /* Main loop. */
@@ -229,7 +219,7 @@ dynam_aut script void W_World(void) {
 }
 
 alloc_aut(0) script static void W_WrongConfig() {
-   Dbg_Log(log_dev, _l(__func__));
+   Dbg_Log(log_dev, _l(_f));
    for(;;) {
       SetSize(320, 240);
       SetClipW(0, 0, 320, 240, 320);
@@ -272,7 +262,7 @@ alloc_aut(0) script ext("ACS") addr(lsc_worldopen) void Z_World(void) {
    #define cvar_x(ev, na, ty) cvar_##ev(ty, na)
    #include "m_engine.h"
 
-   Dbg_Log(log_dev, _l(__func__));
+   Dbg_Log(log_dev, _l(_f));
 
    if(CVarGetI(sc_sv_failtime) == 0) {
       W_WrongConfig();
@@ -293,14 +283,14 @@ alloc_aut(0) script ext("ACS") addr(lsc_worldopen) void Z_World(void) {
 }
 
 script type("unloading") static void Z_WorldUnload(void) {
-   Dbg_Log(log_dev, _l(__func__));
+   Dbg_Log(log_dev, _l(_f));
    pl.setActivator();
    P_GUI_Close();
    P_Dat_PTickPst();
 }
 
 script ext("ACS") addr(lsc_hubclear) void Z_HubCleared(void) {
-   Dbg_Log(log_dev, _l(__func__));
+   Dbg_Log(log_dev, _l(_f));
    wl.hubscleared++;
    pl.setActivator();
 }

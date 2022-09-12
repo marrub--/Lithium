@@ -13,7 +13,7 @@
 == QUITMSG4 | Super, now I can get back to emitting bees at your house!
 == QUITMSG5 | Look at this wuss!
 == QUITMSG6 | I'm rooting for you whichever way you go!
-== QUITMSG7 | Exit?
+== QUITMSG7 | You sure about this?
 == QUITMSG8 | Wait, there's a youkai waiting for you at the exit!
 == QUITMSG9 | Get outta here, and get me some money too.
 
@@ -58,7 +58,7 @@ is unusual in that he doesn't have a blindfold on.
 Cyber-Mage's weapon pickups look retro due to
 limitations in his bootleg space reformation wetware.
 
-== QUITMSG20 | Marine's Sniper Rifle was formerly his service weapon.
+== QUITMSG20 | Marine's Sniper Rifle was formerly their service weapon.
 
 %% QUITMSG21
 The English language diversified in the past
@@ -78,9 +78,8 @@ The amount of wetware jammed into Cyber-Mage's
 brain is not healthy for anyone.
 
 %% QUITMSG25
-Marine was previously a gun collector, but stopped
-after regulations passed regarding personal defense
-weaponry in the military.
+Marine was previously a gun collector,
+but became disinterested after service.
 
 %% QUITMSG26
 The Shock Rifle was previously used for hunting,
@@ -130,7 +129,7 @@ ZDoom is a fuck
 410,757,864,530 SCRIPT ERRORS
 
 == QUITMSG40 | GET OUT
-== QUITMSG41 | do-it.wad
+== QUITMSG41 | DO IT BITCH YOU WON'T
 == QUITMSG42 | You'll do whatever it takes to get the JooJ done right, right?
 == QUITMSG43 | La la lai la, la la lai la, la la lai la lai lai laa
 == QUITMSG44 | You dare defy ME?
@@ -307,6 +306,15 @@ Get the hell outta here.
 == QUITMSG112 | o weka pona?
 == QUITMSG113 | .i lu do cliva li'u preti?
 
-== QUITMSGNUM | 113
+%% QUITMSG114
+LAKE OF FIRE!
+LAKE OF FIRE!!
+LAKE!
+OF!!
+FIRE!!!
+
+== QUITMSGNUM | 114
+
+== QUITMSGEND | (Quit?)
 
 ## EOF

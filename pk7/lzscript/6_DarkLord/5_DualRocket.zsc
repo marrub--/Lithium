@@ -21,11 +21,12 @@ class Lith_Sophia : Lith_Rocket {
       Translation "Lith_Sophia";
       +SeekerMissile
    }
-
    states {
    SpawnLoop:
-      #### # 0 Lith_A_SpawnRocketTrail;
-      #### # 1 bright A_SeekerMissile(0, 2, SMF_LOOK);
+      #### # 1 bright {
+         Lith_A_SpawnRocketTrail();
+         A_SeekerMissile(0, 2, SMF_LOOK);
+      }
       loop;
    }
 }
@@ -47,11 +48,13 @@ action(Weapon) void Lith_A_FireRocket(class<Actor> cl, double xofs) {
    A_FireProjectile(cl, 0, true, xofs, -2);
    lith_takeAmmo();
    Lith_A_RecoilUp(1.2);
+   a_recoil(0.5);
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
 }
 
 action(weapon) void lith_a_setupFlashOverlay(int psp, stateLabel label) {
    a_overlay(psp, label);
+   a_overlayFlags(psp, pspf_renderstyle, true);
    a_overlayRenderStyle(psp, style_add);
 }
 
@@ -93,28 +96,28 @@ FlashRH:
 FireEmptyLH:
    FRAN A 0;
 FireOffsetsLH:
-   #### # 1 Lith_A_DoubleOffset(_lhs, -4, 4, WOF_INTERPOLATE);
-   #### # 2 Lith_A_DoubleOffset(_lhs, -38-random(-2,10), 38+random(-2,10), WOF_INTERPOLATE);
-   #### # 2 Lith_A_DoubleOffset(_lhs, -24-random(-2,8), 24+random(-2,8), WOF_INTERPOLATE);
-   #### # 1 Lith_A_DoubleOffset(_lhs, -6 -random(-2,2), 11+random(-2,2), WOF_INTERPOLATE);
-   #### # 1 Lith_A_DoubleOffset(_lhs, -3 -random(-1,1), 8 +random(-1,1), WOF_INTERPOLATE);
-   #### # 1 Lith_A_DoubleOffset(_lhs, -2, 6, WOF_INTERPOLATE);
-   #### # 1 Lith_A_DoubleOffset(_lhs, -2, 4, WOF_INTERPOLATE);
-   #### # 1 Lith_A_DoubleOffset(_lhs, -1, 1, WOF_INTERPOLATE);
-   #### # 1 Lith_A_DoubleOffset(_lhs,  0, 0, WOF_INTERPOLATE);
+   #### # 2 Lith_A_DoubleOffset(_lhs, -48, 48, WOF_INTERPOLATE);
+   #### # 1 Lith_A_DoubleOffset(_lhs, -38, 38, WOF_INTERPOLATE);
+   #### # 2 Lith_A_DoubleOffset(_lhs, -24, 24, WOF_INTERPOLATE);
+   #### # 1 Lith_A_DoubleOffset(_lhs, -6,  11, WOF_INTERPOLATE);
+   #### # 1 Lith_A_DoubleOffset(_lhs, -3,  8,  WOF_INTERPOLATE);
+   #### # 1 Lith_A_DoubleOffset(_lhs, -2,  6,  WOF_INTERPOLATE);
+   #### # 1 Lith_A_DoubleOffset(_lhs, -2,  4,  WOF_INTERPOLATE);
+   #### # 1 Lith_A_DoubleOffset(_lhs, -1,  1,  WOF_INTERPOLATE);
+   #### # 1 Lith_A_DoubleOffset(_lhs,  0,  0,  WOF_INTERPOLATE);
    goto ReadyLH;
 FireEmptyRH:
    SOPH A 0;
 FireOffsetsRH:
-   #### # 1 Lith_A_DoubleOffset(_rhs, 4, 4, WOF_INTERPOLATE);
-   #### # 2 Lith_A_DoubleOffset(_rhs, 38+random(-2,10), 38+random(-2,10), WOF_INTERPOLATE);
-   #### # 2 Lith_A_DoubleOffset(_rhs, 24+random(-2,8), 24+random(-2,8), WOF_INTERPOLATE);
-   #### # 1 Lith_A_DoubleOffset(_rhs, 5 +random(-2,2), 11+random(-2,2), WOF_INTERPOLATE);
-   #### # 1 Lith_A_DoubleOffset(_rhs, 3 +random(-1,1), 8 +random(-1,1), WOF_INTERPOLATE);
-   #### # 1 Lith_A_DoubleOffset(_rhs, 2, 6, WOF_INTERPOLATE);
-   #### # 1 Lith_A_DoubleOffset(_rhs, 2, 4, WOF_INTERPOLATE);
-   #### # 1 Lith_A_DoubleOffset(_rhs, 1, 1, WOF_INTERPOLATE);
-   #### # 1 Lith_A_DoubleOffset(_rhs, 0, 0, WOF_INTERPOLATE);
+   #### # 2 Lith_A_DoubleOffset(_rhs, 48, 48, WOF_INTERPOLATE);
+   #### # 1 Lith_A_DoubleOffset(_rhs, 38, 38, WOF_INTERPOLATE);
+   #### # 2 Lith_A_DoubleOffset(_rhs, 24, 24, WOF_INTERPOLATE);
+   #### # 1 Lith_A_DoubleOffset(_rhs, 5,  11, WOF_INTERPOLATE);
+   #### # 1 Lith_A_DoubleOffset(_rhs, 3,  8,  WOF_INTERPOLATE);
+   #### # 1 Lith_A_DoubleOffset(_rhs, 2,  6,  WOF_INTERPOLATE);
+   #### # 1 Lith_A_DoubleOffset(_rhs, 2,  4,  WOF_INTERPOLATE);
+   #### # 1 Lith_A_DoubleOffset(_rhs, 1,  1,  WOF_INTERPOLATE);
+   #### # 1 Lith_A_DoubleOffset(_rhs, 0,  0,  WOF_INTERPOLATE);
    goto ReadyRH;
 FireEmpty:
    #### # 6 Lith_A_DoubleState(_oscillate, "FireEmptyLH", "FireEmptyRH");

@@ -16,7 +16,7 @@
 
 script static
 void print_cheat_msg(cstr msg) {
-   pl.logH(1, "%s", msg);
+   P_LogH(1, "%s", msg);
 }
 
 stkcall alloc_aut(0) static
@@ -48,7 +48,9 @@ i32 check_cheat(struct cheat *cht, i32 ch) {
 
 alloc_aut(0) script ext("ACS") addr(lsc_cheatinput)
 bool Z_CheatInput(i32 ch) {
-   if(P_None()) return false;
+   if(!wl.init) {
+      return false;
+   }
    i32  res;
    bool grab = false;
 #define cheat_x(name) \

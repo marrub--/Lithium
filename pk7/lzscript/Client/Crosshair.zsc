@@ -10,7 +10,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-extend class Lith_RenderProvider;
+extend class Lith_URANUS;
 
 uint8 m_xhairR, m_xhairG, m_xhairB, m_xhairA, m_xhairStyle;
 bool m_xhairEnable, m_xhairEnableJuicer;
@@ -73,9 +73,7 @@ ui void drawCrosshair(RenderEvent evt) {
       [tr1x, tr1y, seen] = project((tr.pos.xy, tr.pos.z + tr.height / 2.0));
 
       if(seen) {
-         vector2 tr1 = getScSized(tr1x, tr1y);
-         vector2 tr2 = getScSized(xh.x, xh.y);
-         Screen.drawLine(int(tr1.x), int(tr1.y), int(tr2.x), int(tr2.y), "red");
+         drawLn(tr1x, tr1y, int(xh.x), int(xh.y), 0xFFFF0000, (320, 240));
       }
    }
 

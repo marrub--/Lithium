@@ -19,9 +19,6 @@ $playersound    lith_cybermage * *grunt      Grunt      # Doom 64
 
 player.jem {
    doll Doll # Made of the strands of the universe
-
-   $alias step = .player.step
-
    manafull FullCharge # Touhou 13
 }
 

@@ -7,8 +7,8 @@
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
 extend class Lith_HERMES {
-   static void addStatFx(Actor mo, string which) {
-      Lith_StatFx.addToPool(Lith_Player(mo), which);
+   static void addStatFx(string which) {
+      Lith_StatFx.addToPool(which);
    }
 
    static bool hasStatFx(string which) {
@@ -20,7 +20,7 @@ extend class Lith_HERMES {
    }
 }
 
-extend class Lith_RenderProvider {
+extend class Lith_URANUS {
    ui int drawStatFx(RenderEvent evt, int y) {
       Lith_StatFx stat;
       let fnt = fntSml();
@@ -69,11 +69,12 @@ class Lith_StatFx : Thinker abstract;
 string      snam;
 string      fnam;
 textureId   icon;
-uint        tics;
+int         tics;
 int         cnt0;
 Lith_Player plyr;
 
-static Lith_StatFx addToPool(Lith_Player plyr, class<Lith_StatFx> which) {
+static Lith_StatFx addToPool(class<Lith_StatFx> which) {
+   let plyr = Lith_Player(players[consolePlayer].mo);
    Lith_StatFx stat;
    for(let it = ThinkerIterator.create("Lith_StatFx", _stat_statfx);
        (stat = Lith_StatFx(it.next()));)
@@ -112,7 +113,7 @@ static void deleteFromPool(class<Lith_StatFx> which) {
    }
 }
 
-void basic(string snam_, uint tics_) {
+void basic(string snam_, int tics_) {
    snam = snam_;
    tics = tics_;
 }
@@ -125,16 +126,12 @@ void take(class<Inventory> which, int n = int.MAX) {
    if(plyr) plyr.takeInventory(which, n);
 }
 
-void addStatFx(class<Lith_StatFx> which) {
-   addToPool(plyr, which);
-}
-
 void init(Lith_Player plyr_) {
    changeStatNum(_stat_statfx);
    plyr = plyr_;
    initCb();
    fnam = "$LITH_STAT_" .. snam;
-   icon = Lith_RenderProvider.getTex(":Stat:" .. snam);
+   icon = Lith_URANUS.getTex(":Stat:" .. snam);
 }
 
 override void tick() {

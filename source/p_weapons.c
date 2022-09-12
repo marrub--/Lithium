@@ -195,8 +195,6 @@ void P_Wep_PTick(void) {
 
 script_str ext("ACS") addr(OBJ "WeaponPickup")
 bool Z_WeaponPickup(i32 name) {
-   if(P_None()) return false;
-
    bool weaponstay = CVarGetI(sc_sv_weaponstay);
    i32 parm = weapon_unknown;
 
@@ -238,22 +236,18 @@ i32 Z_ChargeFistDamage(void) {
 
 script_str ext("ACS") addr(OBJ "AmmoRunOut")
 k32 Z_AmmoRunOut(bool ro, k32 mul) {
-   if(!P_None()) {
-      struct invweapon const *wep = pl.weapon.cur;
-      k32 inv = wep->magcur / (k32)wep->magmax;
+   struct invweapon const *wep = pl.weapon.cur;
+   k32 inv = wep->magcur / (k32)wep->magmax;
 
-      mul = mul |? 1.2k;
+   mul = mul |? 1.2k;
 
-      if(ro) inv = inv * mul;
-      else   inv = mul - inv * 0.4;
+   if(ro) inv = inv * mul;
+   else   inv = mul - inv * 0.4;
 
-           if(inv < 0) inv = 0;
-      else if(inv > 1) inv = 1;
+   if(inv < 0) inv = 0;
+   else if(inv > 1) inv = 1;
 
-      return inv;
-   }
-
-   return 0;
+   return inv;
 }
 
 script_str ext("ACS") addr(OBJ "GetFinalizerMaxHealth")
@@ -291,27 +285,19 @@ i32 Z_GetWRF(void) {
       WRF_ALLOWUSER3    = 512,
       WRF_ALLOWUSER4    = 1024
    };
-
    i32 flags = 0;
-
-   if(!P_None()) {
-      if(pl.semifrozen) {
-         flags |= WRF_NOFIRE;
-      }
-
-      if(pl.pclass & (pcl_marine | pcl_darklord)) {
-         flags |= WRF_ALLOWUSER4;
-      }
+   if(pl.semifrozen) {
+      flags |= WRF_NOFIRE;
    }
-
+   if(pl.pclass & (pcl_marine | pcl_darklord)) {
+      flags |= WRF_ALLOWUSER4;
+   }
    return flags;
 }
 
 script_str ext("ACS") addr(OBJ "RecoilUp")
 void Z_RecoilUp(k32 amount) {
-   if(!P_None()) {
-      pl.extrpitch += amount / 180.0lk;
-   }
+   pl.extrpitch += amount / 180.0lk;
 }
 
 /* EOF */

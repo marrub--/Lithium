@@ -16,6 +16,11 @@ weapons {
       $alias grenade = .weapons.rifle.grenade
    }
 
+   khanda {
+      == lsnd/WeaponsD/Khanda
+      draw Draw # Fallout 4
+   }
+
    kampilan {
       == lsnd/WeaponsD/Kampilan
       pickup   Pickup   # Metal Gear Solid 2
@@ -124,6 +129,7 @@ weapons {
       spark  Spark     # ^
       charge Charge    # Self-made
       draw   Draw      # Halo 3, Counter-Strike: Source
+      load   Load      # SI Series 6000
       $limit hit 0
       $limit spark 0
    }

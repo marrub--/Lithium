@@ -81,10 +81,12 @@ action(Weapon) void Lith_A_FireShrapnel() {
    A_StartSound("weapons/shrapnel/fire", lch_weapon);
    A_AlertMonsters();
    A_GunFlash();
+   a_overlayFlags(_psp_flash, pspf_renderstyle, true);
    a_overlayRenderStyle(_psp_flash, style_add);
    Lith_A_RecoilUp(2);
+   a_recoil(0.7);
    lith_a_setInterpolation(true);
-   Lith_FireBullets(4.5, 4.5, 14, 12, FBF_NORANDOM, puffType: 'Lith_ShrapnelPuff');
+   Lith_FireBullets(3.5, 2.5, 14, 12, FBF_NORANDOM, puffType: 'Lith_ShrapnelPuff');
 }
 states(Weapon) {
 Ready:
@@ -104,10 +106,10 @@ Fire:
    SHCA A 1 offset(4, 34);
    SHCA C 1 offset(164, 109);
    SHCA B 1 offset(173, 117) bright lith_a_fireShrapnel;
-   SHCA B 1 offset(180, 121);
-   SHCA B 1 offset(183, 123);
-   SHCA B 1 offset(178, 120);
-   SHCA B 1 offset(169, 114);
+   SHCA B 2 offset(180, 121);
+   SHCA B 4 offset(183, 123);
+   SHCA B 2 offset(178, 120);
+   SHCA B 2 offset(169, 114);
    SHCA C 1 offset(165, 108);
    SHCA C 1 offset(152, 104);
    #### # 0 lith_a_setInterpolation(false);

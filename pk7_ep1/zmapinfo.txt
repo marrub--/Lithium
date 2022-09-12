@@ -1,0 +1,32 @@
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
+
+map M1A1 "Begin The Begin" {
+   LevelNum = 1888100
+   Sky1 = "LITHSKST"
+   Music = "lmusic/M1A1.opus"
+}
+
+map M1A2 "The Ash Is Burning" {
+   LevelNum = 1888101
+   Music = "lmusic/M1A2.opus"
+}
+
+episode M1A1 {
+   Name = "Lithium - Nanto Naku"
+}
+
+episode M2A1 {
+   Name = "Lithium - Era"
+}
+
+episode M3A1 {
+   Name = "Lithium - F.S.S."
+}
+
+/* EOF */

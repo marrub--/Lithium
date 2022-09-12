@@ -80,9 +80,6 @@ struct cbi {
 
       struct gui_scr tutscr;
 
-      i32            logsel;
-      struct gui_scr logscr;
-
       struct gui_scr settingscr;
 
       i32            shopsel;

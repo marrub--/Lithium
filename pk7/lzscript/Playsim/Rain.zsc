@@ -8,11 +8,18 @@
 
 class Lith_RainThinker : Thinker;
 
+enum physicsnum {
+   _physnum_advanced,
+   _physnum_static,
+   _physnum_simple,
+};
+
 Lith_WindThinker m_wind;
 Actor            m_player;
 class<Actor>     m_rainDrop;
 float            m_visDist;
 bool             m_rainSnd;
+
 static Lith_RainThinker create() {
    bool         rainSnd;
    class<Actor> rainDrop;
@@ -35,6 +42,7 @@ static Lith_RainThinker create() {
    }
    return th;
 }
+
 override void tick() {
    if(level.isFrozen() || level.time & 1) {
       return;
@@ -54,6 +62,7 @@ override void tick() {
       m_player.A_SoundVolume(lch_weather2, 1 - m_visDist);
    }
 }
+
 double spawnRain() const {
    let maxDist = m_rainSnd ? 2048 : 512;
    let mo      = m_player;
@@ -64,14 +73,22 @@ double spawnRain() const {
    if(!mo || !mo.curSector) {
       return maxDist;
    }
-   let raindist = 1024.0;
-   let mpos     = mo.pos.xy;
-   let maxh     = mo.pos.z + 768;
+   double  raindist = 1024;
+   vector2 mpos     = mo.pos.xy;
+   double  maxh     = mo.pos.z + 768;
    if(mo.curSector.getTexture(Sector.ceiling) == skyFlatNum) {
-      raindist = 0.0;
+      raindist = 0;
    }
-   Sector lastSec = null;
-   double zpos;
+   bool    advanced;
+   Sector  lastSec  = null;
+   vector3 mul;
+   double  zpos;
+   switch(lith_sv_rainphysics) {
+   default:
+   case _physnum_advanced: advanced = true;  mul = (0.6,  0.6,  1.0); break;
+   case _physnum_simple:   advanced = false; mul = (0.06, 0.06, 0.9); break;
+   case _physnum_static:   advanced = false; mul = (0.01, 0.01, 0.7); break;
+   }
    for(int i = 0, j = maxDist/30; i < j; i++) {
       let pos = mpos + (fRandom[lith_rain](-maxDist, maxDist), fRandom[lith_rain](-maxDist, maxDist));
       let sec = level.pointInSector(pos);
@@ -81,10 +98,11 @@ double spawnRain() const {
             lastSec = sec;
          }
          let rain      = Actor.spawn(m_rainDrop, (pos, zpos - fRandom[lith_rain](0.0, 16.0)));
-         rain.angle    = m_wind.m_angle     + fRandom[lith_rain](-2, 2);
-         rain.pitch    = m_wind.m_windPitch + fRandom[lith_rain](-2, 2);
-         rain.vel      = m_wind.m_windVec   * fRandom[lith_rain](0.9, 1.1);
-         rain.scale.y *= rain.vel.z;
+         rain.angle    = m_wind.m_angle     + fRandom[lith_rain](-1, 1);
+         rain.pitch    = m_wind.m_windPitch + fRandom[lith_rain](-1, 1);
+         rain.vel      = (m_wind.m_windVec.x * fRandom[lith_rain](0.95, 1.05) * mul.x, m_wind.m_windVec.y * fRandom[lith_rain](0.95, 1.05) * mul.y, m_wind.m_windVec.z * fRandom[lith_rain](0.95, 1.05) * mul.z);
+         rain.bFlatSprite = rain.bRollSprite = advanced || !m_rainSnd;
+         rain.scale.y *= rain.vel.z / 3.0;
          if(m_rainSnd) {
             let dist = mo.distance2d(rain);
             if(dist < raindist) {

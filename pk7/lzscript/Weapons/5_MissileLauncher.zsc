@@ -31,8 +31,7 @@ override void markPrecacheSounds() {
    markSound("weapons/missile/reloadin");
    markSound("weapons/missile/reloadout");
 }
-action(Weapon) State Lith_A_FireMissile()
-{
+action(Weapon) State Lith_A_FireMissile() {
    Lith_A_MagIncr();
    A_AlertMonsters();
    A_StartSound("weapons/missile/fire", lch_weapon);
@@ -49,20 +48,16 @@ action(Weapon) State Lith_A_FireMissile()
    }
    return null;
 }
-
-states(Weapon)
-{
+states(Weapon) {
 Ready:
    MISG A 1 Lith_A_Ready(WRF_ALLOWRELOAD);
    loop;
-
 Deselect:
    MISG A 1 Lith_A_Lower(_raise_fast);
    loop;
 Select:
    MISG A 1 Lith_A_Raise(_raise_fast);
    loop;
-
 Reload:
    MISG A 0 Lith_A_JumpIfMagFull;
    MISG A 1 lith_a_setInterpolation(true);
@@ -100,7 +95,6 @@ Reload:
    MISG A 4 offset(1, 34) A_WeaponReady(WRF_NOBOB);
    MISG A 4 A_WeaponReady(WRF_NOBOB);
    goto ReadySelector;
-
 Fire:
    MISG A 0 {invoker.m_Reset = 0;}
 Fire1:
@@ -144,7 +138,6 @@ FireAnim6: /* worship the crime, for it brings graf salt */
    MISG D 1 bright offset(0, 39);
    MISG A 0 {invoker.m_Reset++;}
    goto AnimResetting6;
-
 AnimResetting6: /* oh yessssss */
    MISG A 1 offset(0, 39) A_ReFire("Fire1");
    MISG A 0 {invoker.m_Reset--;}
@@ -165,7 +158,6 @@ AnimResetting:
    MISG A 0 {invoker.m_Reset--;}
    MISG AAAAA 1 offset(0, 32) A_ReFire("Fire1");
    goto ReadySelector;
-
 FireEmpty: /* fuck u i ain't doing more */
    MISG A 1;
    MISG A 2 offset(0, 41);

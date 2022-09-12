@@ -210,7 +210,7 @@ action(Weapon) void Lith_A_FireFortune() {
    A_SetBlend("#80ffd5", 0.4, 20);
    A_StartSound("weapons/fortune/fire", lch_weapon, attenuation: 0.5, pitch: frandom[lith_fortune](0.9, 1.05));
    A_GunFlash("DummyFlash");
-   A_Recoil(4);
+   A_Recoil(6);
    A_Quake(2, 15, 0, 128);
    let pr = A_FireProjectile("Lith_FortuneProjectile", spawnheight: -32);
    pr.pitch = self.pitch;
@@ -270,13 +270,14 @@ Fire2:
    FORT A 1 offset(10, 42);
    FORT A 1 offset(8, 41);
    FORT A 1 offset(7, 40);
-   FORT A 1 offset(6, 38);
-   FORT A 1 offset(5, 37) A_ReFire("Fire2");
-   FORT A 1 offset(4, 36) A_WeaponReady;
-   FORT A 1 offset(3, 35) A_WeaponReady;
-   FORT A 1 offset(2, 34) A_WeaponReady;
-   FORT A 1 offset(1, 33) A_WeaponReady;
-   FORT A 1 offset(1, 32) A_WeaponReady;
+   FORT A 2 offset(6, 38);
+   FORT AAA 1 offset(5, 37) A_ReFire("Fire2");
+   FORT AAAA 1 offset(4, 36) a_weaponReady(WRF_NOBOB);
+   FORT AAAAA 1 offset(3, 35) a_weaponReady(WRF_NOBOB);
+   FORT AAAAAA 1 offset(2, 34) a_weaponReady(WRF_NOBOB);
+   FORT AAAAAAA 1 offset(1, 33) a_weaponReady(WRF_NOBOB);
+   FORT A 0 a_startSound("weapons/fortune/load", lch_dryweapon);
+   FORT AAAAAAAA 1 offset(1, 32) a_weaponReady(WRF_NOBOB);
    goto ReadySelector;
 FireEmpty:
    FORT A 2 offset(3, 38);

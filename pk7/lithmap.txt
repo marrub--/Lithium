@@ -13,7 +13,8 @@ environment: "interstice"
 humidity:    60
 temperature: 140
 windspeed:   100
-sky:         "vanilla";
+sky:         "vanilla"
+script:      "lmisc/TestMap.ldlg";
 
 name:        "TITLEMAP"
 seed:        0
@@ -21,6 +22,18 @@ flags:       "nophantom"
 environment: "abyss"
 humidity:    0
 temperature: -270
-sky:         "vanilla";
+windspeed:   0
+sky:         "vanilla"
+script:      "lmisc/Abyss.ldlg";
+
+name:        "LITHEND"
+seed:        0
+flags:       "nophantom nolightning norain"
+environment: "none"
+humidity:    0
+temperature: 20
+windspeed:   0
+sky:         "nochange"
+script:      "lmisc/Endings.ldlg";
 
 /* EOF */

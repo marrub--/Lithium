@@ -62,10 +62,9 @@ sc_:
    CVAR:
    - gui_buyfiller
    - gui_cursor
+   - gui_curspeed
    - gui_defcr
    - gui_theme
-   - gui_xmul
-   - gui_ymul
 
    - hud_expbar
    - hud_logcolor
@@ -149,11 +148,13 @@ sm_:
    - InvSell
    - InvType
    - InvW
+   - ItemType
    - LogText
    - OnGround
    - Overdrive
    - Shield
    - Speed
+   - Sprinting
    - Trigger
    - UpgradeBody
    - UpgradeExtr
@@ -292,7 +293,7 @@ so_:
    - PunctuatorExplosion
    - PunctuatorPuff
    - RandomSpawn
-   - Ren: RenderProvider
+   - Ren: URANUS
    - Rend
    - RocketAmmo
    - SMGHeat
@@ -451,7 +452,7 @@ sp_:
    NO_PREFIX:
    - lmisc_Cyberspace: lmisc/Cyberspace.txt
    - lmusic_DOGS:      lmusic/DOGS.ogg
-   - lmusic_Shredder:  lmusic/Shredder.ogg
+   - lmusic_Shredder:  lmusic/Shredder.opus
    - lmusic_Unce:      lmusic/Unce.ogg
    - lmusic_miniwip2:  lmusic/miniwip2.ogg
 
@@ -682,6 +683,7 @@ ss_:
    - player_showtext:          player/showtext
    - player_slide:             player/slide
    - player_startgame:         player/startgame
+   - player_step_sprint:       "*step-sprint"
    - player_trmopen:           player/trmopen
    - player_trmswitch:         player/trmswitch
    - player_zoomin:            player/zoomin

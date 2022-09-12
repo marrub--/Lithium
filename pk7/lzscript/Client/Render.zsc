@@ -6,7 +6,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_RenderProvider;
+extend class Lith_URANUS;
 
 Lith_LineTracer m_tracer;
 
@@ -18,38 +18,34 @@ ui textureId m_texBattery;
 
 int m_lightCurBattery, m_lightMaxBattery;
 
-static Lith_RenderProvider create() {
-   let r = new("Lith_RenderProvider");
-
-   r.m_english = Lith_HERMES.localize("LITH_CHECK") == "Eng";
+void renRegister() {
+   m_english = Lith_HERMES.localize("LITH_CHECK") == "Eng";
 
    switch(lith_gui_jpfont) {
    default:
-   case font_misaki_gothic: r.m_uFntSml = 'MisakiG';  break;
-   case font_misaki_mincho: r.m_uFntSml = 'MisakiM';  break;
-   case font_jiskan16:      r.m_uFntSml = 'jiskan16'; break;
+   case font_misaki_gothic: m_uFntSml = 'MisakiG';  break;
+   case font_misaki_mincho: m_uFntSml = 'MisakiM';  break;
+   case font_jiskan16:      m_uFntSml = 'jiskan16'; break;
    }
 
-   r.m_lMidFont       = 'lmidfont';
-   r.m_lTrmFont       = 'ltrmfont';
-   r.m_lBigFont       = 'lbigfont';
-   r.m_lJTrmFont      = 'ljtrmfont';
-   r.m_newConsoleFont = 'newconsolefont';
+   m_lMidFont       = 'lmidfont';
+   m_lTrmFont       = 'ltrmfont';
+   m_lBigFont       = 'lbigfont';
+   m_lJTrmFont      = 'ljtrmfont';
+   m_newConsoleFont = 'newconsolefont';
 
-   r.projectRegister();
-   r.m_tracer = new("Lith_LineTracer");
-
-   return r;
+   projectRegister();
+   m_tracer = new("Lith_LineTracer");
 }
 
-void unload() {
+void renUnload() {
    m_dPtr = 0;
    m_tPtr = 0;
    m_dmgNumInit = false;
    m_skyMode = _msky_nochange;
 }
 
-void tick() {
+void renTick() {
    projectSetRenderer();
    tickNearbyItems();
    tickDmgNums();
@@ -60,7 +56,7 @@ void tick() {
    tickSky();
 }
 
-ui void render(RenderEvent evt) {
+ui void renRender(RenderEvent evt) {
    drawSky(evt);
 
    projectSetUp(evt);
@@ -202,12 +198,8 @@ ui void drawInventory(RenderEvent evt) {
 
       y += 2;
 
-      vector2 cb, cs;
-      cb = getScSized(2, y, vsz: (320, 240));
-      cs = getScSized(2, s, vsz: (320, 240));
-      Screen.setClipRect(int(cb.x), int(cb.y), int(cs.x), int(cs.y));
-      Screen.drawTexture(m_texBattery, false, 2, y,
-                         DTA_VirtualWidth,320, DTA_VirtualHeight,240);
+      setClip(2, y, 2, s, (320, 240));
+      Screen.drawTexture(m_texBattery, false, 2, y, DTA_VirtualWidth,320, DTA_VirtualHeight,240);
       Screen.clearClipRect();
 
       y += 10;
@@ -250,10 +242,6 @@ clearScope vector3 traceFromPos(Sector sec, vector3 pos, double yaw, double pitc
 
 clearScope vector3 traceFromActor(Actor mo, double yaw, double pitch, double dist, double offsetZ, bool floor, ETraceFlags flags) {
    return traceFromPos(mo.curSector, mo.pos + (0.0, 0.0, offsetZ), yaw, pitch, dist, mo, floor, flags);
-}
-
-static clearScope Lith_RenderProvider instance() {
-   return Lith_URANUS(StaticEventHandler.find('Lith_URANUS')).m_ren;
 }
 
 /* EOF */

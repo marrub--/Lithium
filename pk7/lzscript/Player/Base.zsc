@@ -24,6 +24,8 @@ default {
 
 meta double m_vBob;
 
+bool m_sprinting;
+
 double m_rainLerp;
 
 int m_iFrames;
@@ -207,7 +209,7 @@ void lith_postTick() {
       Lith_ItemVacuum();
    }
 
-   Lith_RenderProvider.LZ(320, 240);
+   Lith_URANUS.LZ(320, 240);
 
    if(!isFrozen()) {
       Lith_ShowMapMarker();
@@ -287,7 +289,12 @@ override void cheatGive(string name_, int amount) {
       if(ty) {
          giveInventory(ty, amount, true);
       } else {
-         Console.printf("\cgERROR\c-: unknown item `%s'", name_);
+         class<Actor> ty2 = name_;
+         if(ty2) {
+            spawn(ty2, pos);
+         } else {
+            Console.printf("\cgERROR\c-: unknown item `%s'", name_);
+         }
       }
    }
 }

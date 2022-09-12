@@ -157,6 +157,7 @@ Fire:
 FireAnim:
    GRLG B 1 bright {
       A_GunFlash();
+      a_overlayFlags(_psp_flash, pspf_renderstyle, true);
       a_overlayRenderStyle(_psp_flash, style_add);
    }
    GRLG B 1 bright;

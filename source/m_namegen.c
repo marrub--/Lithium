@@ -166,7 +166,7 @@ void RandomName(i32 id) {
       cstr last = nil;
       cstr suf;
       struct word_root const *root;
-      for(i32 i = 0, n = 3 + rand() % 4; i < n; i++) {
+      for(i32 i = 0, n = 3 + (rand() & 3); i < n; i++) {
          if(i == 0) {
             /* root word */
             root = &roots[rand() % countof(roots)];

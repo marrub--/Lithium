@@ -16,6 +16,7 @@ server noarchive int __lith_debug_flags = 0;
 server int   lith_sv_difficulty    = 10;
 server bool  lith_sv_extrahard     = false;
 server int   lith_sv_rain          = 1;
+server int   lith_sv_rainphysics   = 0;
 server int   lith_sv_sky           = 0;
 server float lith_sv_skydarkening  = 1.0;
 server bool  lith_sv_revenge       = true;
@@ -47,8 +48,7 @@ server bool  lith_weapons_nofirebob      = false;
 server bool  lith_weapons_fastlazshot    = false;
 server bool  lith_weapons_reducedsg      = false;
 
-server float lith_gui_xmul      = 1.0;
-server float lith_gui_ymul      = 1.0;
+server float lith_gui_curspeed  = 1.0;
 server int   lith_gui_buyfiller = 0;
 server int   lith_gui_theme     = 0;
 server int   lith_gui_cursor    = 0;

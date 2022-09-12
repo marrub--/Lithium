@@ -13,18 +13,18 @@
 #include "m_engine.h"
 #include "p_player.h"
 
-static cstr tutorials[] = {
-   "Movement",
-   "Enemies",
-   "EnemyMechanics",
-   "Items",
-   "Story",
-   "MarineMove",
-   "MarineItem",
-   "CyberMageMove",
-   "CyberMageItem",
-   "DarkLordMove",
-   "DarkLordItem",
+static str tutorials[] = {
+   s"Movement",
+   s"Enemies",
+   s"EnemyMechanics",
+   s"Items",
+   s"Story",
+   s"MarineMove",
+   s"MarineItem",
+   s"CyberMageMove",
+   s"CyberMageItem",
+   s"DarkLordMove",
+   s"DarkLordItem",
 };
 
 static i32 cur_page;
@@ -90,12 +90,13 @@ void P_CBI_TabTuts(struct gui_state *g) {
       case '\n': {
          str p = ACS_EndStrParam();
          if(p[0] != '\0') {
-            struct i32v2 const *s = TextSize(p, sf_smallfnt, g->ox);
+            struct i32v2 s;
+            TextSize(&s, p, sf_smallfnt, 184);
             i32 x  = pal >= _pal_head ? g->ox + 92 : g->ox;
             i32 xa = pal >= _pal_head ? 4 : 1;
             str fn = pal == _pal_head ? sf_lmidfont : sf_smallfnt;
             PrintText_str(p, fn, crs[pal].def, x,xa, g->oy + y,1);
-            y += s->y;
+            y += s.y;
          } else {
             ACS_EndStrParam();
             y += 8;

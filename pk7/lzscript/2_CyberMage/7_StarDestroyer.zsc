@@ -6,10 +6,8 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_StarShrapnel : Actor
-{
-   default
-   {
+class Lith_StarShrapnel : Actor {
+   default {
       DamageFunction 10;
       Height 2;
       Mass 0;
@@ -17,13 +15,11 @@ class Lith_StarShrapnel : Actor
       RenderStyle "Add";
       Scale 0.7;
       Speed 32;
-
       Projectile;
       +NODAMAGETHRUST
    }
 
-   states
-   {
+   states {
    Spawn:
       BLLT M 4 bright;
       loop;
@@ -37,62 +33,57 @@ class Lith_StarShrapnel : Actor
    }
 }
 
-class Lith_StarShrapnelHoming : Lith_StarShrapnel
-{
-   default
-   {
+class Lith_StarShrapnelHoming : Lith_StarShrapnel {
+   default {
       DamageFunction 30;
       Scale 1.4;
       Translation "Lith_StarShrapnelHoming";
    }
 
-   states
-   {
+   states {
    Spawn:
       BLLT M 4 bright A_SeekerMissile(45, 360, SMF_LOOK);
       loop;
    }
 }
 
-class Lith_StarWoosh1 : Actor
-{
-   default
-   {
+class Lith_StarWoosh1 : Actor {
+   default {
       Height 8;
       Radius 8;
       RenderStyle "Add";
       Scale 0.7;
-
       +NOINTERACTION
    }
 
-   states
-   {
-   Death:
+   states {
    Spawn:
-      BLLT L 0;
-      BLLT L 0 bright A_JumpIf(Scale.X < 0.01, "Null");
-      BLLT L 2 bright A_SetScale(Scale.X*FRandom(0.9,1.0));
+      BLLT L 2 bright {
+         scale *= scale.x * fRandom(0.9, 1.0);
+         if(scale.x < 0.01) {
+            destroy();
+         }
+      }
       loop;
    }
 }
 
-class Lith_StarWoosh2 : Lith_StarWoosh1
-{
-   states
-   {
+class Lith_StarWoosh2 : Lith_StarWoosh1 {
+   states {
    Spawn:
-      BLLT L 0;
-      BLLT L 0 bright A_SetScale(Scale.X*FRandom(0.95,1.0));
-      BLLT L 1 bright A_FadeOut(0.05);
+      BLLT L 1 bright {
+         scale *= scale.x * fRandom(0.95, 1.0);
+         if(scale.x < 0.01) {
+            destroy();
+         }
+         a_fadeOut(0.05);
+      }
       loop;
    }
 }
 
-class Lith_StarProjectile : Actor
-{
-   default
-   {
+class Lith_StarProjectile : Actor {
+   default {
       Damage 20;
       Speed 2;
       Scale 0.15;
@@ -100,7 +91,6 @@ class Lith_StarProjectile : Actor
       Height 8;
       Mass 500;
       RenderStyle "Add";
-
       Projectile;
       +FORCERADIUSDMG
       +Ripper
@@ -111,8 +101,7 @@ class Lith_StarProjectile : Actor
    int m_RushTimer;
    int m_HomingShrapnelTimer;
 
-   states
-   {
+   states {
    Spawn:
       TNT1 A 4;
       TNT1 A 0 {
@@ -194,20 +183,16 @@ class Lith_StarProjectile : Actor
    }
 }
 
-class Lith_SolspearThingy : Actor
-{
-   default
-   {
+class Lith_SolspearThingy : Actor {
+   default {
       RenderStyle "Add";
       Scale 0.15;
-
       +Bright
       +NOCLIP
       +NOGRAVITY
    }
 
-   states
-   {
+   states {
    Spawn:
       BLLT L 0;
       BLLT L 5 A_Explode(128, 128, 0);
@@ -216,10 +201,8 @@ class Lith_SolspearThingy : Actor
    }
 }
 
-class Lith_Solspear : Actor
-{
-   default
-   {
+class Lith_Solspear : Actor {
+   default {
       BounceCount 15;
       BounceFactor 1;
       BounceSound "weapons/dark/fire";
@@ -231,7 +214,6 @@ class Lith_Solspear : Actor
       Scale 0.15;
       Speed 48;
       WallBounceFactor 1;
-
       Projectile;
       +Bright
       +Ripper
@@ -239,8 +221,7 @@ class Lith_Solspear : Actor
 
    const FLAGS = SXF_TRANSFERPOINTERS|SXF_NOCHECKPOSITION;
 
-   states
-   {
+   states {
    Spawn:
       BLLT L 1;
       BLLT L 0 {
@@ -263,22 +244,18 @@ class Lith_Solspear : Actor
    }
 }
 
-class Lith_StarBarrier : Actor
-{
-   default
-   {
+class Lith_StarBarrier : Actor {
+   default {
       Alpha 0.8;
       RenderStyle "Add";
       Translation "Lith_StarBarrier";
       XScale 0.3;
       YScale 0.4;
-
       +NOINTERACTION
       +NOTIMEFREEZE
    }
 
-   states
-   {
+   states {
    Spawn:
       LBAR A 0;
       LBAR A 1 A_ScaleVelocity(FRandom(0.5,1));
@@ -288,21 +265,19 @@ class Lith_StarBarrier : Actor
    }
 }
 
-class Lith_SurgeProtector : Powerup
-{
-   default
-   {
+class Lith_SurgeProtector : Powerup {
+   default {
       Powerup.Duration 3;
    }
 
-   override void ModifyDamage(int damage, name damageType, out int newdamage, bool passive)
-      {newdamage = damage / 4;}
+   override void ModifyDamage(int damage, name damageType, out int newdamage, bool passive) {
+      newdamage = damage / 4;
+   }
 }
 
 class Lith_StarDestroyer : Lith_CWeapon;
 
-default
-{
+default {
    Lith_Weapon.SpawnType "Lith_BFG9000Pickup";
    Tag "$LITH_INFO_SHORT_StarDestroyer";
    Weapon.BobRangeX 1.7;
@@ -312,50 +287,39 @@ default
    Weapon.UpSound "weapons/shipgun/draw";
    Lith_Weapon.AmmoType "Lith_CannonAmmo";
    Inventory.AltHudIcon "SDSGZ0";
-
    +WEAPON.NOAUTOFIRE
 }
 
-action(Weapon) void Lith_A_FireStar()
-{
+action(Weapon) void Lith_A_FireStar() {
    A_GunFlash("DummyFlash");
-   if(Lith_UTIL.pData(_pdt_upgrade, UPGR_ShipGun_A))
-   {
+   if(Lith_UTIL.pData(_pdt_upgrade, UPGR_ShipGun_A)) {
       A_StartSound("weapons/shipgun/firesol", lch_weapon);
       A_FireProjectile("Lith_Solspear");
-   }
-   else if(Lith_UTIL.pData(_pdt_upgrade, UPGR_ShipGun_B))
-   {
+   } else if(Lith_UTIL.pData(_pdt_upgrade, UPGR_ShipGun_B)) {
       A_StartSound("weapons/shipgun/firesurge", lch_weapon);
       CallACS("Lith_SurgeOfDestiny");
       A_FireProjectile("Lith_SurgeRainbowProjectile1", 0);
       A_FireProjectile("Lith_SurgeRainbowProjectile2", 0);
       A_FireProjectile("Lith_SurgeRainbowProjectile3", 0);
-   }
-   else
-   {
+   } else {
       A_StartSound("weapons/shipgun/fire", lch_weapon);
       A_FireProjectile("Lith_StarProjectile");
    }
 }
 
-states(Weapon)
-{
+states(Weapon) {
 Ready:
    SDSG AABBCCDDEEFFGGHH 1 Lith_A_Ready;
    loop;
-
 Deselect:
    SDSG A 0 A_StopSound(lch_idleweapon);
 DeselectLoop:
    SDSG A 1 Lith_A_Lower(_raise_slow);
    loop;
-
 Select:
    SDSG A 0 A_StartSound("weapons/shipgun/idle", lch_idleweapon, CHANF_LOOP);
    SDSG A 1 Lith_A_Raise(_raise_slow);
    wait;
-
 Fire:
    SDSG A 0 lith_jumpNoAmmo(5);
    SDSG A 1 A_StartSound("weapons/shipgun/prepare", lch_weapon2);

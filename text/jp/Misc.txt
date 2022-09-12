@@ -114,12 +114,10 @@ Lithiumの雨が宇宙から降り注ぐか。
 == MENU_WHICHEPISODE | オマエの物語は
 == MENU_CHOOSESKILL  | オマエのスキルは
 
-== DIFF_TOURIST | ただのツアーだよ。
-== DIFF_EASY    | 手伝ってくれ。
-== DIFF_NORMAL  | 存分にやってくれ。
-== DIFF_HARD    | ｳﾙﾄﾗﾊﾞｲｵﾚﾝｽ!
-== DIFF_XHARD   | 我が生き様を見よ!
-== DIFF_NMARE   | 惑わった悪夢!
+== \#DIFF_TOURIST | ただのツアーだよ。
+== \#DIFF_NORMAL  | 存分にやってくれ。
+== \#DIFF_HARD    | ｳﾙﾄﾗﾊﾞｲｵﾚﾝｽ!
+== \#DIFF_NMARE   | 悪夢!
 
 == PLYRMNU_PRESSSPACE | \cjスペースキー\c-で
 == PLYRMNU_SEEFRONT   | で前面を表示。

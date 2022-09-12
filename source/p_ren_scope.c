@@ -67,13 +67,13 @@ void Waves(void) {
    /* Triangle */
    for(i32 i = 0; i < 70; i++) {
       i32 pos = (5 + timer + i) % 160;
-      PrintSpriteA(sp_HUD_H_D14, 300 + fastabs(pos % 16 - 8),1, 25 + pos,1, i / 70.0k);
+      PrintSpriteA(sp_HUD_H_D14, 300 + fastabs((pos & 15) - 8),1, 25 + pos,1, i / 70.0k);
    }
 }
 
 static
 void ScopeC(void) {
-   i32 which = ACS_Timer() % 16 / 4;
+   i32 which = (ACS_Timer() & 15) / 4;
 
    if(pl.scopetoken) {
       SetFadeA(fid_scopecoS + which, 1, 16, 0.5);

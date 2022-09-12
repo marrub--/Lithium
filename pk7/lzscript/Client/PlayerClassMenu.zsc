@@ -1,0 +1,81 @@
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
+
+class ListMenuItemLith_PlayerDisplay : ListMenuItemPlayerDisplay {
+   void init(ListMenuDescriptor menu) {
+      super.init(menu, 0, 0, "black", "green");
+   }
+
+   override void draw(bool selected, ListMenuDescriptor desc) {
+      if(mMode == 0 && updatePlayerClass()) {
+         let pcl = getDefaultByType((class<PlayerPawn>)(mPlayerClass.type));
+         let por = Lith_URANUS.getTex(pcl.portrait);
+         int porx, pory; [porx, pory] = TexMan.getSize(por);
+         int scrw  = Screen.getWidth();
+         int scrh  = Screen.getHeight();
+         let scale = double(scrh) / pory;
+         let sc240 = 240.0 / pory;
+         let xy    = Screen.virtualToRealCoords((320-(porx*sc240),0), (scrw, scrh), (320, 240));
+         int x     = int(xy.x);
+         int dw    = int(porx*scale);
+         int dh    = int(pory*scale);
+         Screen.drawTexture(por, true, x, 0,
+                            DTA_KEEPRATIO,true,
+                            DTA_DESTWIDTH,dw,
+                            DTA_DESTHEIGHT,dh);
+      }
+      Lith_URANUS.drawBack(14-2, 55-2, 74+2, 108+2, (0, 0), _bk_tl1br2);
+   }
+}
+
+class Lith_PlayerClassMenu : ListMenu;
+
+override void init(Menu parent, ListMenuDescriptor desc) {
+   super.init(parent, desc);
+   for(int i = 0; i < mDesc.mItems.size(); ++i) {
+      let sel = ListMenuItemTextItem(mDesc.mItems[i]);
+      if(sel) {
+         sel.mColor = Font.findFontColor(Lith_HERMES.localize(sel.mText .. "_Col"));
+      }
+   }
+}
+
+override void drawer() {
+   super.drawer();
+   if(mDesc.mSelectedItem < 0) return;
+   let sel = ListMenuItemTextItem(mDesc.mItems[mDesc.mSelectedItem]);
+   if(sel) {
+      let nsf = "_Nam";
+      let psf = "_Pro";
+      if(sel.mText == "$LITH_CLASS_MARINE" && !(__lith_fun & lfun_lane)) {
+         nsf = "_DeN";
+         psf = "_DPr";
+      }
+      let col = Lith_HERMES.localize(sel.mText .. "_Col");
+      let nam = Lith_HERMES.localize(sel.mText .. nsf);
+      let pro = Lith_HERMES.localize(sel.mText .. psf);
+      let dsc = Lith_HERMES.localize(sel.mText .. "_Dsc");
+      let txt = Lith_HERMES.localize(sel.mText);
+      let cr  = Font.findFontColor(col);
+      Font bigf = menuDelegate.pickFont("bigupper");
+      Font midf = menuDelegate.pickFont("lmidfont");
+      Font smlf = menuDelegate.pickFont("smallfont");
+      Font trmf = menuDelegate.pickFont("ltrmfont");
+      Lith_URANUS.drawBack(168-2, 75+59-2,  150+2, 32+2, (0, 0), _bk_tl1);
+      Lith_URANUS.drawBack(104-2, 75+108-2, 206+2, 58+2, (0, 0), _bk_br3);
+      Screen.drawText(bigf, cr, 168, 75+59, txt, DTA_Clean, true);
+      Screen.drawText(midf, cr, 168, 75+73, nam, DTA_Clean, true);
+      Screen.drawText(smlf, cr, 317-smlf.stringWidth(pro), 75+81, pro, DTA_Clean, true);
+      if(cr == Font.CR_BLACK) {
+         Screen.drawText(smlf, cr, 168, 75+81, "NOT IMPLEMENTED", DTA_Clean, true);
+      }
+      Screen.drawText(trmf, cr, 104, 75+108, dsc, DTA_Clean, true);
+   }
+}
+
+/* EOF */

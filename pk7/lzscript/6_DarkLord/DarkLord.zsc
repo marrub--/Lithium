@@ -18,7 +18,6 @@ class Lith_DarkLordPlayer : Lith_Player {
       Player.ViewHeight 50;
       Tag "$LITH_CLASS_DARKLORD";
    }
-
    override void giveDefaultInventory() {
       super.giveDefaultInventory();
       lith_giveDefWeapon("Lith_Khanda");

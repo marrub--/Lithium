@@ -8,20 +8,30 @@
 
 class Lith_MenuDelegate : MenuDelegateBase {
    ui ListMenuItemSelectable m_lastSel;
-   ui Lith_VecLerp           m_selPos;
-   ui static vector2 getSelPos(ListMenuItemSelectable sel) {
+   ui Lith_VecLerp m_selPos;
+   ui Font m_bigupper;
+   ui Font m_lmidfont;
+   ui Font m_ltrmfont;
+
+   static Lith_MenuDelegate create() {
+      let m = new('Lith_MenuDelegate');
+      m.m_selPos = Lith_VecLerp.create();
+      m.m_bigupper = "bigupper";
+      m.m_lmidfont = "lmidfont";
+      m.m_ltrmfont = "ltrmfont";
+      return m;
+   }
+
+   ui static vector2 lith_getSelPos(ListMenuItemSelectable sel) {
       return sel ? (sel.getX() - 8.0, sel.getY() + sel.mHeight / 4.0) : (0, 0);
    }
-   ui static ListMenuItemSelectable getSelItem(ListMenuDescriptor desc, int which) {
+
+   ui static ListMenuItemSelectable lith_getSelItem(ListMenuDescriptor desc, int which) {
       return which >= 0 && which < desc.mItems.size() ?
          ListMenuItemSelectable(desc.mItems[which]) :
          null;
    }
-   static Lith_MenuDelegate create() {
-      let m = new('Lith_MenuDelegate');
-      m.m_selPos = Lith_VecLerp.create();
-      return m;
-   }
+
    override void playSound(name sndName) {
       if(sndName == 'menu/cursor') {
          return;
@@ -30,49 +40,56 @@ class Lith_MenuDelegate : MenuDelegateBase {
       sound  snd    = sndStr;
       S_StartSound(snd, lch_body, CHANF_UI, snd_menuVolume);
    }
+
+   void lith_drawSelector(vector2 selPos, vector2 vsz) {
+      let cur = m_selPos.update(selPos, msTimeF());
+      let a   = (sin(gameTic * 10.0) + 1.0) / 2.0;
+      let r   = Lith_URANUS.instance();
+      let c   = r.xhairColor();
+      let tex = r.xhairW();
+      if(vsz.x == 0) {
+         Screen.drawTexture(tex, false, cur.x, cur.y,
+                            DTA_Clean,true,
+                            DTA_KeepRatio,true,
+                            DTA_FillColor,c,
+                            DTA_Alpha,a);
+      } else {
+         Screen.drawTexture(tex, false, cur.x, cur.y,
+                            DTA_VirtualWidthF,vsz.x,
+                            DTA_VirtualHeightF,vsz.y,
+                            DTA_FullScreenScale,FSMODE_SCALETOFIT43,
+                            DTA_FillColor,c,
+                            DTA_Alpha,a);
+      }
+   }
+
    override bool drawSelector(ListMenuDescriptor desc) {
-      let sel = getSelItem(desc, desc.mSelectedItem);
-      if(m_lastSel && sel != m_lastSel) {
+      let sel = lith_getSelItem(desc, desc.mSelectedItem);
+      if(m_lastSel && m_lastSel != sel) {
          S_StartSound("menu/cursor", lch_body, CHANF_UI, snd_menuVolume);
       }
       m_lastSel = sel;
       if(sel) {
-         let cur = m_selPos.update(getSelPos(sel), msTimeF());
-         let dw  = desc.displayWidth();
-         let dh  = desc.displayHeight();
-         let a   = (sin(gameTic * 10.0) + 1.0) / 2.0;
-         let r   = Lith_RenderProvider.instance();
-         let c   = r.xhairColor();
-         let tex = r.xhairW();
+         let dw = desc.displayWidth();
+         let dh = desc.displayHeight();
          if(dw == ListMenuDescriptor.CleanScale) {
-            Screen.drawTexture(tex, false, cur.x, cur.y,
-                               DTA_Clean,true,
-                               DTA_KeepRatio,true,
-                               DTA_FillColor,c,
-                               DTA_Alpha,a);
-         } else {
-            Screen.drawTexture(tex, false, cur.x, cur.y,
-                               DTA_VirtualWidth,dw,
-                               DTA_VirtualHeight,dh,
-                               DTA_FullScreenScale,FSMODE_SCALETOFIT43,
-                               DTA_FillColor,c,
-                               DTA_Alpha,a);
+            dw = 0;
+            dh = 0;
          }
+         lith_drawSelector(lith_getSelPos(sel), (dw, dh));
       }
       return true;
    }
+
    override Font pickFont(Font fnt) {
-      Font bigupper = "bigupper";
-      Font lmidfont = "lmidfont";
-      Font ltrmfont = "ltrmfont";
       if(fnt == smallFont) {
-         return Lith_RenderProvider.instance().fntSml();
-      } else if(fnt == lmidfont) {
-         return Lith_RenderProvider.instance().fntMid();
-      } else if(fnt == ltrmfont) {
-         return Lith_RenderProvider.instance().fntTrm();
-      } else if(fnt == bigFont || fnt == bigupper) {
-         return Lith_RenderProvider.instance().fntBig();
+         return Lith_URANUS.instance().fntSml();
+      } else if(fnt == m_lmidfont) {
+         return Lith_URANUS.instance().fntMid();
+      } else if(fnt == m_ltrmfont) {
+         return Lith_URANUS.instance().fntTrm();
+      } else if(fnt == bigFont || fnt == m_bigupper) {
+         return Lith_URANUS.instance().fntBig();
       } else {
          return fnt;
       }
@@ -81,10 +98,12 @@ class Lith_MenuDelegate : MenuDelegateBase {
 
 class ListMenuItemLith_CreditsMenuScroll : ListMenuItemTextItem {
    bool m_right;
+
    void init(ListMenuDescriptor desc, string text, string hotKey, bool right) {
       super.init(desc, text, hotkey, 'None');
       m_right = right;
    }
+
    override bool activate() {
       let mn = Lith_CreditsMenu(Menu.getCurrentMenu());
       if(mn) mn.changeSection(m_right);
@@ -98,7 +117,7 @@ class ListMenuItemLith_VersionName : ListMenuItem {
    }
 
    override void draw(bool selected, ListMenuDescriptor desc) {
-      drawText(desc, desc.mFont, Font.CR_WHITE, mXPos, mYPos, LITH_VERSION, false);
+      drawText(desc, desc.mFont, Font.CR_WHITE, getX(), getY(), LITH_VERSION, false);
    }
 }
 
@@ -107,12 +126,14 @@ class Lith_CreditsMenu : ListMenu {
    int                m_sectionTic;
    int                m_curSection;
    Font               m_font;
+
    static void addSection(string txt) {
       let mn = Lith_CreditsMenu(Menu.getCurrentMenu());
       if(mn) {
          mn.m_sections.push(mn.m_font.breakLines(txt, 640));
       }
    }
+
    void changeSection(bool right) {
       if(right) ++m_curSection;
       else      --m_curSection;
@@ -123,6 +144,7 @@ class Lith_CreditsMenu : ListMenu {
       }
       m_sectionTic = gameTic;
    }
+
    override void drawer() {
       super.drawer();
       if(!m_sections.size()) {
@@ -150,31 +172,75 @@ class Lith_CreditsMenu : ListMenu {
 }
 
 class Lith_SkillEpMenu : ListMenu {
+   double m_bkSizeX, m_bkSizeY;
+
    override void init(Menu parent, ListMenuDescriptor desc) {
       super.init(parent, desc);
+      double maxWidth = 0;
+      double minX     = 32767;
       for(int i = 0, s = mDesc.mItems.size(); i < s; ++i) {
-         mDesc.mItems[i].setX(160 - mDesc.mItems[i].getWidth() / 2);
+         int width = mDesc.mItems[i].getWidth();
+         int x     = 160 - width / 2;
+         mDesc.mItems[i].setX(x);
+         maxWidth = max(maxWidth, width);
+         minX     = min(minX,     x);
       }
+      mDesc.mXPos = minX;
+      m_bkSizeX = maxWidth;
+      m_bkSizeY = mDesc.mItems.size() * mDesc.mLineSpacing;
+   }
+
+   override void drawer() {
+      Lith_URANUS.drawBack(mDesc.mXPos, mDesc.mYPos, m_bkSizeX, m_bkSizeY, (0, 0), _bk_tl1br2);
+      super.drawer();
    }
 }
 
-extend class Lith_RenderProvider;
+enum Lith_BackFlags {
+   _bk_sq,
+   _bk_tl1 = 1 << 0,
+   _bk_tl2 = 2 << 0,
+   _bk_tl3 = 3 << 0,
+   _bk_bl1 = 1 << 2,
+   _bk_bl2 = 2 << 2,
+   _bk_bl3 = 3 << 2,
+   _bk_tr1 = 1 << 4,
+   _bk_tr2 = 2 << 4,
+   _bk_tr3 = 3 << 4,
+   _bk_br1 = 1 << 6,
+   _bk_br2 = 2 << 6,
+   _bk_br3 = 3 << 6,
+   _bk_tl2br1 = _bk_tl2 | _bk_br1,
+   _bk_tl1br2 = _bk_tl1 | _bk_br2,
+   _bk_tr2bl1 = _bk_tr2 | _bk_bl1,
+   _bk_tr1bl2 = _bk_tr1 | _bk_bl2,
+}
 
-ui int              m_screenDim;
+extend class Lith_URANUS;
+
+ui bool             m_screenDim, m_screenWasDim;
+ui double           m_screenDimNext;
 ui Shape2DTransform m_menuRectXf;
 ui Shape2D          m_menuRect;
+
 ui void tickMenu() {
    if(!m_menuRectXf) {
       m_menuRectXf = new("Shape2DTransform");
       m_menuRect   = new("Shape2D");
    }
-   if(menuActive && !Menu.getCurrentMenu().dontDim) {
-      if(m_screenDim < 15) ++m_screenDim;
-   } else {
-      if(m_screenDim > 0) --m_screenDim;
+   m_screenWasDim = m_screenDim;
+   m_screenDim = menuActive && !Menu.getCurrentMenu().dontDim;
+   if(m_screenDim != m_screenWasDim) {
+      m_screenDimNext = msTimeF() + 430;
    }
+}
+
+ui void drawMenu(RenderEvent evt) {
+   double dim = clamp((m_screenDimNext - msTimeF()) / 430, 0, 1);
    if(m_screenDim) {
-      double dim  = m_screenDim / 15.0;
+      dim = 1 - dim;
+   }
+   if(dim) {
       double dimx = Lith_UTIL.easeInOutQuad(dim) / 2.0;
       double dimy = dim / 2.0;
       m_menuRect.clear();
@@ -188,10 +254,6 @@ ui void tickMenu() {
       m_menuRect.pushCoord((1, 1));
       m_menuRect.pushTriangle(0, 3, 1);
       m_menuRect.pushTriangle(0, 2, 3);
-   }
-}
-ui void drawMenu(RenderEvent evt) {
-   if(m_screenDim) {
       int size = Screen.getHeight() / 14;
       int w = Screen.getWidth()  / size;
       int h = Screen.getHeight() / size;
@@ -201,10 +263,52 @@ ui void drawMenu(RenderEvent evt) {
             m_menuRectXf.scale((size, size));
             m_menuRectXf.translate((x * size, y * size));
             m_menuRect.setTransform(m_menuRectXf);
-            Screen.DrawShape(skyflatnum, false, m_menuRect, DTA_Alpha,0.5, DTA_FillColor,0);
+            Screen.drawShapeFill("black", 0.5, m_menuRect);
          }
       }
    }
+}
+
+ui static void drawBack(double x, double y, double w, double h, vector2 vsz, uint bk, uint vfl = 0) {
+   let tl = (bk & _bk_tl3) >> 0;
+   let tr = (bk & _bk_tr3) >> 2;
+   let bl = (bk & _bk_bl3) >> 4;
+   let br = (bk & _bk_br3) >> 6;
+   let ut = max(tl, tr, 1) * 4;
+   let ur = max(tr, br, 1) * 4;
+   let ub = max(bl, br, 1) * 4;
+   let ul = max(tl, bl, 1) * 4;
+   vector2 v[8];
+   uint vn = 0;
+   let shp = new("Shape2D");
+   if(tl) {v[vn++]=(x  -ul, y  +ul); v[vn++]=(x  +ut, y  -ut);}
+   else   {v[vn++]=(x  -ut, y  -ul);}
+   if(tr) {v[vn++]=(x+w-ut, y  -ut); v[vn++]=(x+w+ur, y  +ur);}
+   else   {v[vn++]=(x+w+ur, y  -ut);}
+   if(br) {v[vn++]=(x+w+ur, y+h-ur); v[vn++]=(x+w-ub, y+h+ub);}
+   else   {v[vn++]=(x+w+ub, y+h+ur);}
+   if(bl) {v[vn++]=(x  +ub, y+h+ub); v[vn++]=(x  -ul, y+h-ul);}
+   else   {v[vn++]=(x  -ul, y+h+ub);}
+   for(uint i = 0; i < vn; ++i) {
+      shp.pushVertex(anyPos(v[i], vsz, vfl));
+      shp.pushCoord((0, 0));
+      if(i) {
+         shp.pushTriangle(0, i - 1, i);
+      }
+   }
+   Screen.drawShapeFill("black", 0.77, shp);
+   vector2 cp = v[0];
+   for(uint i = 1; i <= vn; ++i) {
+      vector2 np = i == vn ? v[0] : v[i];
+      drawLn(cp.x, cp.y, np.x, np.y, 0xFF00FF00, vsz, vfl);
+      cp = np;
+   }
+   /*
+   drawLn(x, y, x+w, y, 0xFFFFFF00, vsz, vfl);
+   drawLn(x+w, y, x+w, y+h, 0xFFFFFF00, vsz, vfl);
+   drawLn(x+w, y+h, x, y+h, 0xFFFFFF00, vsz, vfl);
+   drawLn(x, y+h, x, y, 0xFFFFFF00, vsz, vfl);
+   */
 }
 
 /* EOF */

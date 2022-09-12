@@ -142,7 +142,6 @@ void Z_GiveScore(i32 score) {
 
 script_str ext("ACS") addr(OBJ "BoughtItemPickup")
 void Z_BoughtItemPickup(i32 id) {
-   if(P_None()) return;
    if(id) {
       struct upgrade *upgr = &pl.upgrades[id];
 

@@ -23,7 +23,6 @@ class Lith_RainDrop : Actor {
    }
    bool m_done;
    float m_rollSpeed;
-   float m_accel;
    void lith_giveUp() {
       bRollSprite = false;
       bFlatSprite = false;
@@ -33,10 +32,6 @@ class Lith_RainDrop : Actor {
       scale  = (1, 1);
       m_done = true;
       setState(resolveState("Death"));
-   }
-   override void beginPlay() {
-      super.beginPlay();
-      m_accel = 1.03;
    }
    override void tick() {
       if(!isFrozen()) {
@@ -50,9 +45,6 @@ class Lith_RainDrop : Actor {
          if(waterLevel > 0 || pos.z <= floorZ) {
             lith_giveUp();
          } else {
-            if(vel.xy.length() < 64) {
-               vel *= m_accel;
-            }
             setOrigin(pos + vel, true);
          }
       }
@@ -80,7 +72,6 @@ class Lith_BloodRainDrop : Lith_RainDrop {
 class Lith_AbyssRainDrop : Lith_RainDrop {
    default {
       Alpha 1.0;
-      YScale 0.25;
       RenderStyle "Normal";
    }
    states {
@@ -119,12 +110,11 @@ class Lith_Ash : Lith_SnowDrop {
    override void postBeginPlay() {
       super.postBeginPlay();
       m_rollSpeed = fRandom[lith_rain](0.4, 0.9) * fRandomPick[lith_rain](-1, 1);
-      angle   = fRandom[lith_rain](0, 360);
-      pitch   = fRandom[lith_rain](0, 180);
-      roll    = fRandom[lith_rain](0, 360);
-      scale   = (1, 1) * fRandom[lith_rain](1.0, 1.4);
-      vel    *= fRandom[lith_rain](0.03, 0.1);
-      m_accel = 1.001;
+      angle = fRandom[lith_rain](0, 360);
+      pitch = fRandom[lith_rain](0, 180);
+      roll  = fRandom[lith_rain](0, 360);
+      scale = (1, 1) * fRandom[lith_rain](1.0, 1.4);
+      vel  *= fRandom[lith_rain](0.03, 0.1);
    }
    states {
    Spawn:

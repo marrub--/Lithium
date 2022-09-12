@@ -44,7 +44,7 @@ void Upgr_RPG_B_Update(void) {
 
 script_str ext("ACS") addr(OBJ "HomingMissile")
 void Z_HomingMissile(void) {
-   if(!P_None() && PtrPlayerNumber(0, AAPTR_TARGET) >= 0) {
+   if(PtrPlayerNumber(0, AAPTR_TARGET) >= 0) {
       ACS_SetPointer(AAPTR_TRACER, pl.tid, AAPTR_TRACER);
    }
 }

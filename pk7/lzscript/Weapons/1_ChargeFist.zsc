@@ -125,6 +125,7 @@ Release:
    TNT1 A 0 A_StartSound("weapons/cfist/chargeend", lch_weapon);
    TNT1 A 0 {
       A_GunFlash("SekritHax", GFF_NOEXTCHANGE); /* OH NO NOT yholehax */
+      a_overlayFlags(_psp_flash, pspf_renderstyle, true);
       a_overlayRenderStyle(_psp_flash, style_normal);
    }
 Release1:

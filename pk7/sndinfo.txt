@@ -354,6 +354,38 @@ $playersounddup fighter neutral *poison *pain100
 $playersounddup fighter other *poison *pain100
 $playersounddup fighter female *poison *pain100
 $playersounddup fighter male *poison *pain100
+$playeralias player neutral *step-lava player/step/lava
+$playeralias player other *step-lava player/step/lava
+$playeralias player female *step-lava player/step/lava
+$playeralias player male *step-lava player/step/lava
+$playeralias fighter neutral *step-lava player/step/lava
+$playeralias fighter other *step-lava player/step/lava
+$playeralias fighter female *step-lava player/step/lava
+$playeralias fighter male *step-lava player/step/lava
+$playeralias player neutral *step-normal player/step/normal
+$playeralias player other *step-normal player/step/normal
+$playeralias player female *step-normal player/step/normal
+$playeralias player male *step-normal player/step/normal
+$playeralias fighter neutral *step-normal player/step/normal
+$playeralias fighter other *step-normal player/step/normal
+$playeralias fighter female *step-normal player/step/normal
+$playeralias fighter male *step-normal player/step/normal
+$playeralias player neutral *step-slime player/step/slime
+$playeralias player other *step-slime player/step/slime
+$playeralias player female *step-slime player/step/slime
+$playeralias player male *step-slime player/step/slime
+$playeralias fighter neutral *step-slime player/step/slime
+$playeralias fighter other *step-slime player/step/slime
+$playeralias fighter female *step-slime player/step/slime
+$playeralias fighter male *step-slime player/step/slime
+$playeralias player neutral *step-water player/step/water
+$playeralias player other *step-water player/step/water
+$playeralias player female *step-water player/step/water
+$playeralias player male *step-water player/step/water
+$playeralias fighter neutral *step-water player/step/water
+$playeralias fighter other *step-water player/step/water
+$playeralias fighter female *step-water player/step/water
+$playeralias fighter male *step-water player/step/water
 player/depthdown lsnd/Player/DepthDown
 player/score1 lsnd/Player/Score1
 player/score2 lsnd/Player/Score2
@@ -380,26 +412,26 @@ $volume player/nuke 0.7
 $volume player/doublejump 0.7
 $limit player/barrier 0
 $random player/score { player/score1 player/score2 player/score3 }
-player/step1 lsnd/Player/Footsteps/Step1
-player/step2 lsnd/Player/Footsteps/Step2
-player/step3 lsnd/Player/Footsteps/Step3
-player/step4 lsnd/Player/Footsteps/Step4
-player/stepw1 lsnd/Player/Footsteps/Water1
-player/stepw2 lsnd/Player/Footsteps/Water2
-player/stepw3 lsnd/Player/Footsteps/Water3
-player/stepw4 lsnd/Player/Footsteps/Water4
-player/stepl1 lsnd/Player/Footsteps/Lava1
-player/stepl2 lsnd/Player/Footsteps/Lava2
-player/stepl3 lsnd/Player/Footsteps/Lava3
-player/stepl4 lsnd/Player/Footsteps/Lava4
-player/steps1 lsnd/Player/Footsteps/Slime1
-player/steps2 lsnd/Player/Footsteps/Slime2
-player/steps3 lsnd/Player/Footsteps/Slime3
-player/steps4 lsnd/Player/Footsteps/Slime4
-$random player/step { player/step1 player/step2 player/step3 player/step4 }
-$random player/stepw { player/stepw1 player/stepw2 player/stepw3 player/stepw4 }
-$random player/stepl { player/stepl1 player/stepl2 player/stepl3 player/stepl4 }
-$random player/steps { player/steps1 player/steps2 player/steps3 player/steps4 }
+player/step/lava1 lsnd/Player/Footsteps/Lava1
+player/step/lava2 lsnd/Player/Footsteps/Lava2
+player/step/lava3 lsnd/Player/Footsteps/Lava3
+player/step/lava4 lsnd/Player/Footsteps/Lava4
+player/step/normal1 lsnd/Player/Footsteps/Step1
+player/step/normal2 lsnd/Player/Footsteps/Step2
+player/step/normal3 lsnd/Player/Footsteps/Step3
+player/step/normal4 lsnd/Player/Footsteps/Step4
+player/step/slime1 lsnd/Player/Footsteps/Slime1
+player/step/slime2 lsnd/Player/Footsteps/Slime2
+player/step/slime3 lsnd/Player/Footsteps/Slime3
+player/step/slime4 lsnd/Player/Footsteps/Slime4
+player/step/water1 lsnd/Player/Footsteps/Water1
+player/step/water2 lsnd/Player/Footsteps/Water2
+player/step/water3 lsnd/Player/Footsteps/Water3
+player/step/water4 lsnd/Player/Footsteps/Water4
+$random player/step/lava { player/step/lava1 player/step/lava2 player/step/lava3 player/step/lava4 }
+$random player/step/normal { player/step/normal1 player/step/normal2 player/step/normal3 player/step/normal4 }
+$random player/step/slime { player/step/slime1 player/step/slime2 player/step/slime3 player/step/slime4 }
+$random player/step/water { player/step/water1 player/step/water2 player/step/water3 player/step/water4 }
 player/counter lsnd/GUI/Payout/Counter
 player/counterdone lsnd/GUI/Payout/CounterDone
 player/YOUVEGOTMAIL lsnd/GUI/Mail
@@ -439,7 +471,6 @@ $playersound lith_assassin other *grunt lsnd/PlayerA/Grunt
 $playersound lith_assassin female *grunt lsnd/PlayerA/Grunt
 $playersound lith_assassin male *grunt lsnd/PlayerA/Grunt
 player/omi/doll lsnd/PlayerA/Doll
-$alias player/omi/step player/step
 player/omi/roll lsnd/PlayerA/Roll
 player/omi/djump lsnd/PlayerA/DoubleJump
 $playersound lith_cybermage neutral *death lsnd/PlayerC/Death
@@ -475,7 +506,6 @@ $playersound lith_cybermage other *grunt lsnd/PlayerC/Grunt
 $playersound lith_cybermage female *grunt lsnd/PlayerC/Grunt
 $playersound lith_cybermage male *grunt lsnd/PlayerC/Grunt
 player/jem/doll lsnd/PlayerC/Doll
-$alias player/jem/step player/step
 player/jem/manafull lsnd/PlayerC/FullCharge
 $playersound lith_darklord neutral *death lsnd/PlayerD/Death
 $playersound lith_darklord other *death lsnd/PlayerD/Death
@@ -513,12 +543,24 @@ $playersound lith_darklord neutral *land lsnd/PlayerD/Land
 $playersound lith_darklord other *land lsnd/PlayerD/Land
 $playersound lith_darklord female *land lsnd/PlayerD/Land
 $playersound lith_darklord male *land lsnd/PlayerD/Land
+$playersound lith_darklord neutral *step-normal lsnd/PlayerD/Step
+$playersound lith_darklord other *step-normal lsnd/PlayerD/Step
+$playersound lith_darklord female *step-normal lsnd/PlayerD/Step
+$playersound lith_darklord male *step-normal lsnd/PlayerD/Step
+$playeralias lith_darklord neutral *step-sprint player/ari/step-sprint
+$playeralias lith_darklord other *step-sprint player/ari/step-sprint
+$playeralias lith_darklord female *step-sprint player/ari/step-sprint
+$playeralias lith_darklord male *step-sprint player/ari/step-sprint
+player/ari/step-sprint1 lsnd/PlayerD/StepSprint1
+player/ari/step-sprint2 lsnd/PlayerD/StepSprint2
+player/ari/step-sprint3 lsnd/PlayerD/StepSprint3
 player/ari/doll lsnd/PlayerD/Doll
-player/ari/step lsnd/PlayerD/Step
+player/ari/sprint lsnd/PlayerD/Sprint
 player/ari/shield/break lsnd/PlayerD/ShieldBreak
 player/ari/shield/regenw lsnd/PlayerD/ShieldRegenWait
 player/ari/shield/regenl lsnd/PlayerD/ShieldRegen
 player/ari/shield/regend lsnd/PlayerD/ShieldRegenDone
+$random player/ari/step-sprint { player/ari/step-sprint1 player/ari/step-sprint2 player/ari/step-sprint3 }
 $playersound lith_informant neutral *splat lsnd/PlayerI/Splat
 $playersound lith_informant other *splat lsnd/PlayerI/Splat
 $playersound lith_informant female *splat lsnd/PlayerI/Splat
@@ -567,6 +609,10 @@ $playeralias lith_informant neutral *land player/fulk/land
 $playeralias lith_informant other *land player/fulk/land
 $playeralias lith_informant female *land player/fulk/land
 $playeralias lith_informant male *land player/fulk/land
+$playeralias lith_informant neutral *step-normal player/fulk/step
+$playeralias lith_informant other *step-normal player/fulk/step
+$playeralias lith_informant female *step-normal player/fulk/step
+$playeralias lith_informant male *step-normal player/fulk/step
 player/fulk/doll lsnd/PlayerI/Doll
 player/fulk/land1 lsnd/PlayerI/Land1
 player/fulk/land2 lsnd/PlayerI/Land2
@@ -607,7 +653,6 @@ $playersounddup lith_marine other *pain25 *pain50
 $playersounddup lith_marine female *pain25 *pain50
 $playersounddup lith_marine male *pain25 *pain50
 player/lane/doll lsnd/PlayerM/Doll
-$alias player/lane/step player/step
 player/lane/rarmor/mode lsnd/PlayerM/RArmor/ChangeMode
 player/lane/rarmor/damage lsnd/PlayerM/RArmor/Damage
 player/lane/rocketboost lsnd/PlayerM/RocketBoost
@@ -837,6 +882,7 @@ weapons/subweapon/armgun lsnd/WeaponsD/Subweapons/ArmGun
 weapons/subweapon/needle lsnd/WeaponsD/Subweapons/Needle
 $alias weapons/subweapon/axe weapons/rend/slash
 $alias weapons/subweapon/grenade weapons/rifle/grenade
+weapons/khanda/draw lsnd/WeaponsD/Khanda/Draw
 weapons/kampilan/pickup lsnd/WeaponsD/Kampilan/Pickup
 weapons/kampilan/draw lsnd/WeaponsD/Kampilan/Draw
 weapons/kampilan/bonk lsnd/WeaponsD/Kampilan/Bonk
@@ -910,6 +956,7 @@ weapons/fortune/hit lsnd/WeaponsD/FortuneGun/Hit
 weapons/fortune/spark lsnd/WeaponsD/FortuneGun/Spark
 weapons/fortune/charge lsnd/WeaponsD/FortuneGun/Charge
 weapons/fortune/draw lsnd/WeaponsD/FortuneGun/Draw
+weapons/fortune/load lsnd/WeaponsD/FortuneGun/Load
 $limit weapons/fortune/hit 0
 $limit weapons/fortune/spark 0
 weapons/rems/fire lsnd/WeaponsD/Rems/Fire

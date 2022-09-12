@@ -16,7 +16,7 @@
 #define ifw(decl, ...) __with(decl;) if(__VA_ARGS__)
 #define ifauto(type, name, ...) ifw(type name = (__VA_ARGS__), name)
 
-#define statement(body) if(1) {body} else (void)0
+#define statement(body) if(1) {body} else unwrap_retn()
 
 #define unwrap_do(e, stmt) statement(if((e)->some) statement(stmt);)
 #define unwrap_retn() [[return]] __asm("Rjnk()")

@@ -9,7 +9,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 [default]
-"LITH_CREDITS" = "////----------------------------------------------------------------------\\\\\\\\\n%//                                                                        \\\\%\n%/         /7       //777777777777777777777777777  ///                      \\%\n%         /:/7     //........................../  /::/ 77    777    777///   %\n%        /://               //77/     ///    /// /:7/77:7   /::/7 //77///    %\n%       /://    /777       //77=======::////::///:7/ /:7   //::::7:::://     %\n%      /://    /::/       //77/====7::::::::://:/7/ /:/   //::/777777//      %\n%     /://    /::/       //77/    /:://   /://:/7/ /:=/  /777/  7 /7//       %\n%    /:======/::/=======//77/    /:://   /://:/7/  7::::=77//    /::/        %\n%   /:::::://::/==========//    ===//   /://:/7/    7==/:7//    /::/         %\n%          /::/                        /://  ^^                //7/          %\n%          ^^^                         ^^^                     ^^^           %\n%                                                                            %\n%\\                          Project Golan, Xevv 2                           /%\n%\\\\                                                                        //%\n\\\\\\\\______________________________________________________________________////\n~\n///%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\\\\\\\n%/                                                                           \\%\n%  I have probably miscredited or forgotten to credit some people.            %\n%  Please tell me if I did and I will correct it.                             %\n%                                                                             %\n%  If you wanna use something from this mod, *please* ask me (Marrub) first.  %\n%  I don't want myself or anyone else who's given me stuff (directly or not)  %\n%  to get pissed off because proper attribution or permission wasn't given.   %\n%                                                                             %\n%  Sound credits are all in the <ltext/sound> files as comments.              %\n%                                                                             %\n%  See <licenses/GDCC-libc.txt> for licensing of GDCC libc, as is included    %\n%  in linked binary form in <acs/lithmain.bin>.                               %\n%                                                                             %\n%  Sources for GDCC libc can be found at <https://github.com/DavidPH/GDCC>.   %\n%                                                                             %\n%  Lithium's source can be found at <https://github.com/marrub--/Lithium>.    %\n%\\                                                                           /%\n\\\\\\%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%///\n~\n                              * Audio *\n\n@ 505           - Title music (hYmns - Shredder)\n@ BouncyTEM     - Nanto Naku music (Perdition)\n@ Green Den     - Test map music (Dandalins Story)\n@ Kyle873       \\ Fallout 4 sound rip\n                | Phantasy Star Nova sound rip\n@ Shadowlink226 - Halo 3 sound rip\n@ Skaven        - Intermission music (The Alchemist)\n@ TerminusEst13 - A whole bunch of sound sources\n@ WildWeasel    - Sound rip from Mac OS 9\n@ _sink         - End of game music\n@ a1337spy      - Various sounds\n~\n                             * Weapons *\n\n@ ChronoTeeth     - SPAS reload frames\n@ DT7             - Khanda model (CC-BY-4.0; https://skfb.ly/66BHu)\n@ Dr Cosmobyte    - Plasma Diffuser sprite, Gauss Shotgun idle sprite\n@ Dynamo          - Minigun rip from Target\n@ JetPlane        - Image used as a base for the SMG sprite\n@ Minigunner      - Missile Launcher sprite\n@ Pablomarcellana - Kampilan model (CC-BY-4.0; https://skfb.ly/6RnBM)\n@ Sgt. Shivers    \\ Shotgun, knife, and revolver sprites\n                  | Mateba & SPAS reload animations\n@ VriskaSerket    - Image used as a base for the Star Destroyer sprite\n@ WildWeasel      - Sleeves for Cyber-Mage\n@ Yholl           - Made the Charge Fist not suck\n@ Zombie          - Image used as a base for the SPAS sprite\n@ vikingbro       - Image used as a base for the Shock Rifle sprite\n@ zrrion          - Sprites for the Grenade Launcher, Pistol and Plasma Rifle\n~\n                             * Graphics *\n\n@ Amuscaria      - XDeaths for the Hell Knight and Baron of Hell\n@ Anthony Cole   - Test map marine sprites\n@ Combine_Kegan  - Shobon.\n@ HorrorMovieGuy - SteggleSphere sprites\n@ Kate Fox       \\ Blank sphere used as a base for the the Blursphere\n                 | Intermission text and background\n@ Kurashiki      - Basilissa art\n@ Marlboro Mike  \\ Score item sprites\n                 | Rocket Box pickup\n@ Marphy Black   - Doom 2 Minor Sprite Fixes sprites are included in the mod\n@ Minigunner     - Smooth explosion sprites\n@ Ryan Cordell   \\ Green/blue armor pickups\n                 | XDeaths for the Cacodemon, Demon, Archvile, and Revenant\n                 | Archvile, Arachnotron, and Baron attack effects\n                 | Splash and bullet puff spark effects\n@ Seryder        - Briefcase sprite (WUPGA0)\n@ Sgt. Shivers   \\ Armor sprites\n                 | Windows XP and Basilissa themes\n@ SiFi 270       - Commander Keen sprites\n@ Skelegant      - Shobon Sphere sprite\n@ TerminusEst13  - SHKRA0/B0\n@ Xaser Acheron  - Bullet puffs, probably other things I took from Psychic\n@ Yholl          - Cardinal gem sprites\n@ a1337spy       - Score chip sprite\n@ abbuw          - Vent texture\n@ monkeybtm6     - BLLTR0 sprite\n@ vikingbro      - Image used as a base for the Shock Rifle sprite\n@ zrrion         - Skull key, health, cell pack, and health bonus pickups\n~\n                               * Code *\n\n@ Gutawer         - Lots of help with ZScript\n@ KeksDose        - (De)projection code\n@ Jimmy           - Made the original MENUDEF code\n@ Kate Fox        \\ Integer interpolation function\n                  | Cannon and plasma rifle code are based on Error: Doom\n                  | This was originally a mod of Error: Doom!\n                  | Prettied up the rain effects\n@ Marisa Kirisame - Help with ZScript and fonts\n@ Yholl           \\ Effects from LegenDoom\n                  | Knife code\n                  | Missile Launcher code\n~\n                               * Help *\n\n@ Combine_Kegan      - Ideas for stuff, shitposting\n@ DavidPH            \\ Lots of help with a lot of things,\n                     | GDCC, and generally cool person\n@ Dr Cosmobyte       - Sprite finding\n@ JetPlane           - Emotional support twink\n@ Jimmy              - Really cool dude\n@ Kate Fox           - My biggest inspiration.\n@ Kyle873            - said a nice thing i think maybe. Also inspiration.\n@ Marty Kirra        - Cool person\n@ Ribonucleic Asshat - Emotional support twink (female)\n@ TerminusEst13      - Help with finding some sprites to work with\n@ Theshooter7        - Making Danimator, which I used for a lot of animations\n@ Wartorn            - Help with HUD design, emotional support\n@ WildWeasel         - Help with making fonts, suggestions for HUD\n@ Xaser Acheron      - Help with code stuff\n@ Yholl              \\ eviel gost\n                     | Ideas for a lot of stuff\n                     | Re-texturing the TITLEMAP for me\n                     | Marathon resources\n                     | Descriptions for some of the extra upgrades\n                     | Help with a bunch of stuff\n@ Zombie             - Lots of help with ZScript\n~\n                             * Testing *\n\n- Ancient Chaos Wizard\n- Ikazu-san\n- MENTHA\n- RiboNucleic Asshat\n- Sgt. Shivers\n- Briar Wolfblood\n- Sledge\n- Yholl\n- Zombie\n- a1337spy\n- anomalouslymandatory\n- nax\n- rd\n- silentw\n- wildweasel\n\n                    Thanks so much to all of you!\n~\n                           * Omega Cannon *\n\n@ Minigunner                   - Centered DNF enforcer gun\n@ Solo Spaghetti, Bloax & Slax - Skull SSG\n@ Marrub                       - Redraw\n\n                           * Combat Rifle *\n\n@ Sgt. Shivers  - Model rip\n@ TheRailgunner - Edit of model rip\n@ Marrub        - Small edits\n\n                            * Ion Rifle *\n\n@ monkeybtm6    - Weapon rip from Disruptor\n@ torridGristle - Assault rifle sprite\n@ Marrub        - Redraw\n\n                          * Laser Shotgun *\n\n@ Mike12                           - Vented shotgun\n@ Dr Cosmobyte, Cage & Scuba Steve - Auto shotgun\n@ Marrub                           - Redraw of sights and design\n\n                           * Sniper Rifle *\n\n@ MrEnchanter  - Sniper rifle sprite\n@ Marrub       - Redrawing and detailing, re-handing\n@ Sgt. Shivers - Firing animation\n\n                          * Super Shotgun *\n\n@ Captain J & Turbo - Whole sprite\n@ Sgt. Shivers      - Animation\n\n                          * 4-Bore Shotgun *\n\n@ JoeyTD  - Center frame base\n@ Batandy - Reload animation base\n~\n                              * Fonts *\n\n@ Hanataka Shinya   - jiskan16\n@ Hiroshi Tachibana - ljtrmfont\n@ IBM               - bigupper\n@ Jimmy             - lmidfont and smallfont\n@ The Author        - areaname\n@ Toshiyuki Imamura - jiskan16, ljtrmfont\n@ littlelimit       - Misaki\n~\n                       * LOOKING FOR CREDITS *\n\n- Barrel explosion sprites";
+"LITH_CREDITS" = "////----------------------------------------------------------------------\\\\\\\\\n%//                                                                        \\\\%\n%/             /777    /777777777777777777777777 /777                       \\%\n%             /::/    /:::::::::::::::::::::::/ /:://77  /777   /77777       %\n%            /::/    /========/::/====/777==/777:://:/  /::::7 /::::/        %\n%           /::/   /777      /::/====/::/==/::/:://:/  /::/::/:::::/         %\n%          /::/   /::/      /::::::::::::::::/:://:/  /::/ /:://::/          %\n%         /::/   /::/      /::/====/::/==/::/:://::///::/  // /::/           %\n%        /::/===/::/======/::/    /::/  /::/::/ /::::::/     /::/            %\n%       /======/::/=========/    /==/  /::/==/   /====/     /::/             %\n%             /==/                    /==/                 /==/              %\n%                                                                            %\n%                                                                            %\n%\\                          Project Golan, Xevv 2                           /%\n%\\\\                                                                        //%\n\\\\\\\\______________________________________________________________________////\n~\n///%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\\\\\\\n%/                                                                           \\%\n%  I have probably miscredited or forgotten to credit some people.            %\n%  Please tell me if I did and I will correct it.                             %\n%                                                                             %\n%  If you wanna use something from this mod, *please* ask me (Marrub) first.  %\n%  I don't want myself or anyone else who's given me stuff (directly or not)  %\n%  to get pissed off because proper attribution or permission wasn't given.   %\n%                                                                             %\n%  Sound credits are all in the <ltext/sound> files as comments.              %\n%                                                                             %\n%  See <licenses/GDCC-libc.txt> for licensing of GDCC libc, as is included    %\n%  in linked binary form in <acs/lithmain.bin>.                               %\n%                                                                             %\n%  Sources for GDCC libc can be found at <https://github.com/DavidPH/GDCC>.   %\n%                                                                             %\n%  Lithium's source can be found at <https://github.com/marrub--/Lithium>.    %\n%\\                                                                           /%\n\\\\\\%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%///\n~\n                              * Audio *\n\n@ 505           - Title music (hYmns - Shredder)\n@ BouncyTEM     - Nanto Naku music (Perdition)\n@ Green Den     - Test map music (Dandalins Story)\n@ Kyle873       \\ Fallout 4 sound rip\n                | Phantasy Star Nova sound rip\n@ Shadowlink226 - Halo 3 sound rip\n@ Skaven        - Intermission music (The Alchemist)\n@ TerminusEst13 - A whole bunch of sound sources\n@ WildWeasel    - Sound rip from Mac OS 9\n@ _sink         - End of game music\n@ a1337spy      - Various sounds\n~\n                             * Weapons *\n\n@ ChronoTeeth     - SPAS reload frames\n@ DT7             - Khanda model (CC-BY-4.0; https://skfb.ly/66BHu)\n@ Dr Cosmobyte    - Plasma Diffuser sprite, Gauss Shotgun idle sprite\n@ Dynamo          - Minigun rip from Target\n@ JetPlane        - Image used as a base for the SMG sprite\n@ Minigunner      - Missile Launcher sprite\n@ Pablomarcellana - Kampilan model (CC-BY-4.0; https://skfb.ly/6RnBM)\n@ Sgt. Shivers    \\ Shotgun, knife, and revolver sprites\n                  | Mateba & SPAS reload animations\n@ VriskaSerket    - Image used as a base for the Star Destroyer sprite\n@ WildWeasel      - Sleeves for Cyber-Mage\n@ Yholl           - Made the Charge Fist not suck\n@ Zombie          - Image used as a base for the SPAS sprite\n@ vikingbro       - Image used as a base for the Shock Rifle sprite\n@ zrrion          - Sprites for the Grenade Launcher, Pistol and Plasma Rifle\n~\n                             * Graphics *\n\n@ Amuscaria      - XDeaths for the Hell Knight and Baron of Hell\n@ Anthony Cole   - Test map marine sprites\n@ Combine_Kegan  - Shobon.\n@ HorrorMovieGuy - SteggleSphere sprites\n@ Kate Fox       \\ Blank sphere used as a base for the the Blursphere\n                 | Intermission text and background\n@ Kurashiki      - Basilissa art\n@ Marlboro Mike  \\ Score item sprites\n                 | Rocket Box pickup\n@ Marphy Black   - Doom 2 Minor Sprite Fixes sprites are included in the mod\n@ Minigunner     - Smooth explosion sprites\n@ Ryan Cordell   \\ Green/blue armor pickups\n                 | XDeaths for the Cacodemon, Demon, Archvile, and Revenant\n                 | Archvile, Arachnotron, and Baron attack effects\n                 | Splash and bullet puff spark effects\n@ Seryder        - Briefcase sprite (WUPGA0)\n@ Sgt. Shivers   \\ Armor sprites\n                 | Windows XP and Basilissa themes\n@ SiFi 270       - Commander Keen sprites\n@ Skelegant      - Shobon Sphere sprite\n@ TerminusEst13  - SHKRA0/B0\n@ Xaser Acheron  - Bullet puffs, probably other things I took from Psychic\n@ Yholl          - Cardinal gem sprites\n@ a1337spy       - Score chip sprite\n@ abbuw          - Vent texture\n@ monkeybtm6     - BLLTR0 sprite\n@ vikingbro      - Image used as a base for the Shock Rifle sprite\n@ zrrion         - Skull key, health, cell pack, and health bonus pickups\n~\n                               * Code *\n\n@ Gutawer         - Lots of help with ZScript\n@ KeksDose        - (De)projection code\n@ Jimmy           - Made the original MENUDEF code\n@ Kate Fox        \\ Integer interpolation function\n                  | Cannon and plasma rifle code are based on Error: Doom\n                  | This was originally a mod of Error: Doom!\n                  | Prettied up the rain effects\n@ Marisa Kirisame - Help with ZScript and fonts\n@ Yholl           \\ Effects from LegenDoom\n                  | Knife code\n                  | Missile Launcher code\n~\n                               * Help *\n\n@ Combine_Kegan      - Ideas for stuff, shitposting\n@ DavidPH            \\ Lots of help with a lot of things,\n                     | GDCC, and generally cool person\n@ Dr Cosmobyte       - Sprite finding\n@ JetPlane           - Emotional support twink\n@ Jimmy              - Really cool dude\n@ Kate Fox           - My biggest inspiration.\n@ Kyle873            - said a nice thing i think maybe. Also inspiration.\n@ Marty Kirra        - Cool person\n@ Ribonucleic Asshat - Emotional support twink (female)\n@ TerminusEst13      - Help with finding some sprites to work with\n@ Theshooter7        - Making Danimator, which I used for a lot of animations\n@ Wartorn            - Help with HUD design, emotional support\n@ WildWeasel         - Help with making fonts, suggestions for HUD\n@ Xaser Acheron      - Help with code stuff\n@ Yholl              \\ eviel gost\n                     | Ideas for a lot of stuff\n                     | Re-texturing the TITLEMAP for me\n                     | Marathon resources\n                     | Descriptions for some of the extra upgrades\n                     | Help with a bunch of stuff\n@ Zombie             - Lots of help with ZScript\n~\n                             * Testing *\n\n- Ancient Chaos Wizard\n- Ikazu-san\n- MENTHA\n- RiboNucleic Asshat\n- Sgt. Shivers\n- Briar Wolfblood\n- Sledge\n- Yholl\n- Zombie\n- a1337spy\n- anomalouslymandatory\n- nax\n- rd\n- silentw\n- wildweasel\n\n                    Thanks so much to all of you!\n~\n                           * Omega Cannon *\n\n@ Minigunner                   - Centered DNF enforcer gun\n@ Solo Spaghetti, Bloax & Slax - Skull SSG\n@ Marrub                       - Redraw\n\n                           * Combat Rifle *\n\n@ Sgt. Shivers  - Model rip\n@ TheRailgunner - Edit of model rip\n@ Marrub        - Small edits\n\n                            * Ion Rifle *\n\n@ monkeybtm6    - Weapon rip from Disruptor\n@ torridGristle - Assault rifle sprite\n@ Marrub        - Redraw\n\n                          * Laser Shotgun *\n\n@ Mike12                           - Vented shotgun\n@ Dr Cosmobyte, Cage & Scuba Steve - Auto shotgun\n@ Marrub                           - Redraw of sights and design\n\n                           * Sniper Rifle *\n\n@ MrEnchanter  - Sniper rifle sprite\n@ Marrub       - Redrawing and detailing, re-handing\n@ Sgt. Shivers - Firing animation\n\n                          * Super Shotgun *\n\n@ Captain J & Turbo - Whole sprite\n@ Sgt. Shivers      - Animation\n\n                          * 4-Bore Shotgun *\n\n@ JoeyTD  - Center frame base\n@ Batandy - Reload animation base\n~\n                              * Fonts *\n\n@ Hanataka Shinya   - jiskan16\n@ Hiroshi Tachibana - ljtrmfont\n@ IBM               - bigupper\n@ Jimmy             - lmidfont and smallfont\n@ The Author        - areaname\n@ Toshiyuki Imamura - jiskan16, ljtrmfont\n@ littlelimit       - Misaki\n~\n                       * LOOKING FOR CREDITS *\n\n- Barrel explosion sprites";
 [en enu default]
 "LITH_SHOP_TITLE_ChargeFist" = "$LITH_INFO_SHORT_ChargeFist";
 "LITH_SHOP_DESCR_ChargeFist" = "A melee weapon that you can charge.";
@@ -1355,6 +1355,7 @@
 "LITH_ITEM_TAG_AndSigil" = "Binarist 'And' Sigil";
 "LITH_ITEM_TAG_OrSigil" = "Binarist 'Or' Sigil";
 "LITH_ITEM_TAG_DivisionSigil" = "\c[Lith_RRed]D\c[Lith_ROra]i\c[Lith_RYel]v\c[Lith_RYlg]i\c[Lith_RGrn]s\c[Lith_RCya]i\c[Lith_RBlu]o\c[Lith_RPur]n \c[Lith_RPnk]S\c[Lith_RHPn]i\c[Lith_RRed]g\c[Lith_ROra]i\c[Lith_RYel]l";
+"LITH_ITEM_TAG_PortaAmp" = "CB-Visor";
 "LITH_ITEM_TAG_ArmStandardUp" = "Standard Armor";
 "LITH_ITEM_TAG_ArmImprovedUp" = "Improved Armor";
 "LITH_ITEM_TAG_ArmTeflonUp" = "Teflon-weave Armor";
@@ -1391,26 +1392,6 @@
 "LITH_ITEM_SHORT_ArmHazMatLo" = "\ca10 DT to hazards.\n1 DT to other types.";
 "LITH_ITEM_SHORT_ArmPinkSilverLo" = "\ca8 DT to magic.\n4 DT to other types.";
 "LITH_ITEM_SHORT_ArmMidoriLo" = "\ca8 DT to fire magic.\n4 DT to other types.";
-"LITH_Item_ArmStandardUp" = ":Items:ArmStandardUp";
-"LITH_Item_ArmImprovedUp" = ":Items:ArmImprovedUp";
-"LITH_Item_ArmTeflonUp" = ":Items:ArmTeflonUp";
-"LITH_Item_ArmDendriteUp" = ":Items:ArmDendriteUp";
-"LITH_Item_ArmAerodynamicUp" = ":Items:ArmAerodynamicUp";
-"LITH_Item_ArmHazMatUp" = ":Items:ArmHazMatUp";
-"LITH_Item_ArmPinkSilverUp" = ":Items:ArmPinkSilverUp";
-"LITH_Item_ArmMidoriUp" = ":Items:ArmMidoriUp";
-"LITH_Item_ArmStandardLo" = ":Items:ArmStandardLo";
-"LITH_Item_ArmImprovedLo" = ":Items:ArmImprovedLo";
-"LITH_Item_ArmTeflonLo" = ":Items:ArmTeflonLo";
-"LITH_Item_ArmDendriteLo" = ":Items:ArmDendriteLo";
-"LITH_Item_ArmAerodynamicLo" = ":Items:ArmAerodynamicLo";
-"LITH_Item_ArmHazMatLo" = ":Items:ArmHazMatLo";
-"LITH_Item_ArmPinkSilverLo" = ":Items:ArmPinkSilverLo";
-"LITH_Item_ArmMidoriLo" = ":Items:ArmMidoriLo";
-"LITH_Item_ClawOfImp" = ":Items:ClawOfImp";
-"LITH_Item_AndSigil" = ":Items:AndSigil";
-"LITH_Item_OrSigil" = ":Items:OrSigil";
-"LITH_Item_DivisionSigil" = ":Items:DivisionSigil";
 "LITH_MARKER_Unknown" = "Unknown";
 "LITH_MARKER_M1A1_EscapePod" = "Escape Pod 02C3";
 "LITH_MARKER_M1A1_Maintenance" = "Maintenance Area";
@@ -1429,7 +1410,7 @@
 "QUITMSG4" = "Super, now I can get back to emitting bees at your house!";
 "QUITMSG5" = "Look at this wuss!";
 "QUITMSG6" = "I'm rooting for you whichever way you go!";
-"QUITMSG7" = "Exit?";
+"QUITMSG7" = "You sure about this?";
 "QUITMSG8" = "Wait, there's a youkai waiting for you at the exit!";
 "QUITMSG9" = "Get outta here, and get me some money too.";
 "QUITMSG10" = "Wait, don't go!\nI still have to sell you the expansion pack!";
@@ -1442,12 +1423,12 @@
 "QUITMSG17" = "The Omega Cannon was created in a swamp dimension by\na strange lizard-man who lusted for murder.\nHow it got here is a mystery.";
 "QUITMSG18" = "Jeremy Stilko, Cyber-Mage, is blind, but can see\nthanks to cybernetics. The profile image he has\nis unusual in that he doesn't have a blindfold on.";
 "QUITMSG19" = "Cyber-Mage's weapon pickups look retro due to\nlimitations in his bootleg space reformation wetware.";
-"QUITMSG20" = "Marine's Sniper Rifle was formerly his service weapon.";
+"QUITMSG20" = "Marine's Sniper Rifle was formerly their service weapon.";
 "QUITMSG21" = "The English language diversified in the past\nthousand years, splitting into dozens of dialects.\nThe most common are Eastern and Northwest English.";
 "QUITMSG22" = "The Ensurer watches over all.";
 "QUITMSG23" = "The Star Destroyer's hum is a product of the\nenergy buffer on its top channeling sound\nthrough the main hull of the gun, which may\nprove the existence of a fifth dimension.";
 "QUITMSG24" = "The amount of wetware jammed into Cyber-Mage's\nbrain is not healthy for anyone.";
-"QUITMSG25" = "Marine was previously a gun collector, but stopped\nafter regulations passed regarding personal defense\nweaponry in the military.";
+"QUITMSG25" = "Marine was previously a gun collector,\nbut became disinterested after service.";
 "QUITMSG26" = "The Shock Rifle was previously used for hunting,\nfamed for its great power and ease of use.\nBefore it was stripped down and modified, anyway.";
 "QUITMSG27" = "Rumors have spread of similarities between the\nphantoms haunting Hell and tales of past heroes.";
 "QUITMSG28" = "Within the week there will be OLD MEN,\nRUNNING THE WORLD, if you quit.";
@@ -1463,7 +1444,7 @@
 "QUITMSG38" = "Can you at least offer weak opposition to exiting?";
 "QUITMSG39" = "BORN TO CRASH\nZDoom is a fuck\n410,757,864,530 SCRIPT ERRORS";
 "QUITMSG40" = "GET OUT";
-"QUITMSG41" = "do-it.wad";
+"QUITMSG41" = "DO IT BITCH YOU WON'T";
 "QUITMSG42" = "You'll do whatever it takes to get the JooJ done right, right?";
 "QUITMSG43" = "La la lai la, la la lai la, la la lai la lai lai laa";
 "QUITMSG44" = "You dare defy ME?";
@@ -1536,7 +1517,9 @@
 "QUITMSG111" = "Return to the Hunter's Dream?";
 "QUITMSG112" = "o weka pona?";
 "QUITMSG113" = ".i lu do cliva li'u preti?";
-"QUITMSGNUM" = "113";
+"QUITMSG114" = "LAKE OF FIRE!\nLAKE OF FIRE!!\nLAKE!\nOF!!\nFIRE!!!";
+"QUITMSGNUM" = "114";
+"QUITMSGEND" = "(Quit?)";
 "LITH_st_suff_perc" = "%";
 "LITH_st_suff_mult" = "x";
 "LITH_st_suff_minu" = "min";
@@ -1664,6 +1647,9 @@
 "LITH_st_name_rain_0" = "No rain";
 "LITH_st_name_rain_1" = "Environment-based";
 "LITH_st_name_rain_2" = "Always rain";
+"LITH_st_name_rainphys_0" = "Advanced";
+"LITH_st_name_rainphys_1" = "Static";
+"LITH_st_name_rainphys_2" = "Simple";
 "LITH_st_name_sky_0" = "No change";
 "LITH_st_name_sky_1" = "Vanilla-like";
 "LITH_st_name_sky_2" = "Replace skies";
@@ -1709,9 +1695,8 @@
 "LITH_TOOLTIP_gui_defcr" = "The color for most of the text in in-game GUIs.";
 "LITH_gui_jpfont" = "Japanese font";
 "LITH_TOOLTIP_gui_jpfont" = "The font to use when Japanese is set as the language.";
+"LITH_gui_curspeed" = "Cursor speed";
 "LITH_gui_theme" = "Interface theme";
-"LITH_gui_xmul" = "Horizontal cursor speed";
-"LITH_gui_ymul" = "Vertical cursor speed";
 "LITH_hud_type" = "Type";
 "LITH_hud_expbar" = "Show experience bar";
 "LITH_hud_logfromtop" = "Display at the top of the screen";
@@ -1788,9 +1773,11 @@
 "LITH_TOOLTIP_sv_postgame" = "\cgWarning:\c- Post-game content can \cicause saves to be effectively deleted\c-, and will have \cipermanent repercussions\c-. Only enable if you really want more.";
 "LITH_sv_rain" = "Enable raining";
 "LITH_TOOLTIP_sv_rain" = "\ck(Applies on next map start)";
+"LITH_sv_rainphysics" = "Rain physics";
+"LITH_TOOLTIP_sv_rainphysics" = "Advanced: Rain has heavy motions, dynamically pitches and rolls. (Default.)\nStatic: Rain only lightly reacts to wind, always pouring straight down. (Similar to old versions.)\nSimple: Rain reacts strongly to wind, always pouring straight down. (Initial wind velocity concept.)";
 "LITH_sv_revenge" = "Explode on death";
 "LITH_sv_sky" = "Replace skies";
-"LITH_TOOLTIP_sv_sky" = "No change: No changes will be made to skies.\nVanilla-like: Allows skies to have additional visual weather effects. May be incompatible with some maps.\nReplace skies: Replaces skies with ones designed for Lithium.\nShader: A dynamic, soft sky replacement for a more chill atmosphere.\n\n\ck(Applies on next map start)";
+"LITH_TOOLTIP_sv_sky" = "No change: No changes will be made to skies. (Most compatible.)\nVanilla-like: Allows vanilla skies to have additional visual effects. (May be incompatible with some edge cases. Default.)\nReplace skies: A palette of replacement skies based on the environment.\nShader: A dynamic, soft, full sky replacement for a more chill atmosphere.\n\n\ck(Applies on next map start)";
 "LITH_sv_skydarkening" = "Outside sector darkening";
 "LITH_sv_wepdrop" = "Drop weapons from zombies";
 "LITH_TOOLTIP_sv_wepdrop" = "Mainly exists for map compatibility. Drops weapons from zombie enemies when you don't have them already. May cause issues in normal gameplay.\n\n\ck(Applies on next map start)";
@@ -2081,8 +2068,8 @@
 "OB_VILE" = "%o had %p ass burned up. Oh, %r crispy!";
 "OB_ZOMBIE" = "%o got plinked to death.";
 "LITH_OB_S_Explosion" = "%o made %hself go boom.";
-"LITH_OB_Falling_1" = "%o took a long walk off a short floor.";
-"LITH_OB_Falling_2" = "The floor fell love with %o.";
+"LITH_OB_Falling_1" = "%o took a walk off a short cliff.";
+"LITH_OB_Falling_2" = "The floor fell in love with %o.";
 "LITH_OB_Falling_3" = "%o became paste with the power of gravity.";
 "LITH_OB_Falling_4" = "Goodbye, %o.";
 "LITH_OB_Falling_5" = "%o doesn't like heights.";
@@ -2157,15 +2144,10 @@
 "MNU_SAVEGAME" = "(Save-Game)";
 "MNU_LOADGAME" = "(Load-Game)";
 "MNU_OPTIONS" = "(Options)";
-"MENU_CHOOSECLASS" = "Your Class Is:";
-"MENU_WHICHEPISODE" = "Your Story Is:";
-"MENU_CHOOSESKILL" = "Your Skill Is:";
-"DIFF_TOURIST" = "I'm just a tourist.";
-"DIFF_EASY" = "Throw me a bone.";
-"DIFF_NORMAL" = "Hurt me plenty.";
-"DIFF_HARD" = "Ultra-Violence!";
-"DIFF_XHARD" = "Watch me die!";
-"DIFF_NMARE" = "Bewildered Nightmare!";
+"LITH_DIFF_TOURIST" = "I'm just a tourist.";
+"LITH_DIFF_NORMAL" = "Hurt me plenty.";
+"LITH_DIFF_HARD" = "Ultra-Violence!";
+"LITH_DIFF_NMARE" = "Nightmare!";
 "PLYRMNU_PRESSSPACE" = "Press \cjSPACE";
 "PLYRMNU_SEEFRONT" = "to see the front.";
 "PLYRMNU_SEEBACK" = "to see the back.";
@@ -2910,11 +2892,10 @@
 "LITH_RED_INTENSITY" = "赤みの強さ";
 "LITH_gui_buyfiller" = "アイテムの購入確認";
 "LITH_gui_cursor" = "カーソル";
+"LITH_gui_curspeed" = "カーソル感度";
 "LITH_gui_defcr" = "テキストの色";
 "LITH_gui_jpfont" = "フォント";
 "LITH_gui_theme" = "インターフェースのテーマ変更";
-"LITH_gui_xmul" = "カーソルの平行感度";
-"LITH_gui_ymul" = "カーソルの垂直感度";
 "LITH_hud_expbar" = "経験値バーの表示";
 "LITH_hud_logfromtop" = "スクリーン上部に表示";
 "LITH_hud_logsize" = "大きさ";
@@ -3208,12 +3189,10 @@
 "MENU_CHOOSECLASS" = "オマエのクラスは";
 "MENU_WHICHEPISODE" = "オマエの物語は";
 "MENU_CHOOSESKILL" = "オマエのスキルは";
-"DIFF_TOURIST" = "ただのツアーだよ。";
-"DIFF_EASY" = "手伝ってくれ。";
-"DIFF_NORMAL" = "存分にやってくれ。";
-"DIFF_HARD" = "ｳﾙﾄﾗﾊﾞｲｵﾚﾝｽ!";
-"DIFF_XHARD" = "我が生き様を見よ!";
-"DIFF_NMARE" = "惑わった悪夢!";
+"LITH_DIFF_TOURIST" = "ただのツアーだよ。";
+"LITH_DIFF_NORMAL" = "存分にやってくれ。";
+"LITH_DIFF_HARD" = "ｳﾙﾄﾗﾊﾞｲｵﾚﾝｽ!";
+"LITH_DIFF_NMARE" = "悪夢!";
 "PLYRMNU_PRESSSPACE" = "\cjスペースキー\c-で";
 "PLYRMNU_SEEFRONT" = "で前面を表示。";
 "PLYRMNU_SEEBACK" = "で背面を表示。";

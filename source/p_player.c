@@ -31,7 +31,7 @@ static void P_Aug_pTick(void);
 static void P_initCbi(void);
 
 dynam_aut script void P_Player(void) {
-   Dbg_Log(log_dev, _l(__func__));
+   Dbg_Log(log_dev, _l(_f));
 
    pl.setActivator();
 
@@ -54,7 +54,7 @@ reinit:
    struct old_player_delta olddelta;
 
    i32 idletics = 0;
-   while(pl.active) {
+   for(;;) {
       if(pl.reinit) {
          goto reinit;
       }
@@ -74,10 +74,12 @@ reinit:
 
       /* Tick all systems */
       if(!pl.dead) {
-         if(pl.x == pl.old.x && pl.y == pl.old.y && pl.z == pl.old.z) {
-            ++idletics;
-         } else {
-            idletics = 0;
+         if(!Paused) {
+            if(pl.x == pl.old.x && pl.y == pl.old.y && pl.z == pl.old.z) {
+               ++idletics;
+            } else {
+               idletics = 0;
+            }
          }
          if(idletics > 38) {
             pl.missionstatshow = ACS_Timer() + 35;
@@ -266,7 +268,7 @@ score_t P_Scr_GivePos(i32 x, i32 y, score_t score, bool nomul) {
    /* hue */
    if(get_bit(pl.upgrades[UPGR_CyberLegs].flags, _ug_active) && ACS_Random(0, 10000) == 0) {
       pl.brouzouf += score;
-      pl.logB(1, "You gained brouzouf.");
+      P_LogB(1, "You gained brouzouf.");
    }
 
    if(get_bit(pl.upgrades[UPGR_TorgueMode].flags, _ug_active) && ACS_Random(0, 10) == 0) {
@@ -282,7 +284,7 @@ score_t P_Scr_GivePos(i32 x, i32 y, score_t score, bool nomul) {
 
    /* display score */
    if(cv.player_scoredisp & _itm_disp_log) {
-      pl.logH(1, "+\Cj%" FMT_SCR "\Cnscr", score);
+      P_LogH(1, "+\Cj%" FMT_SCR "\Cnscr", score);
    }
    if(cv.player_scoredisp & _itm_disp_pop) {
       DrawCallV(sm_AddScoreNum, x, y, strp(_p(score), _l("\Cnscr")));
@@ -306,7 +308,7 @@ void P_Scr_Take(score_t score) {
 
 script static void P_bossWarningDone(void) {
    if(get_msk(ml.flag, _mflg_boss) == _mphantom_spawned) {
-      pl.logB(1, tmpstr(lang_discrim(sl_log_bosswarn)));
+      P_LogB(1, tmpstr(lang_discrim(sl_log_bosswarn)));
    }
 }
 
@@ -330,7 +332,7 @@ void P_bossText(void) {
          PrintText_str(ns(lang(sl_verse_corrupted)), sf_lmidfont, CR_WHITE, 160,4, 120,0);
          ACS_Delay(1);
       }
-      pl.logB(1, tmpstr(lang(sl_log_bosshear3)));
+      P_LogB(1, tmpstr(lang(sl_log_bosshear3)));
    }
 }
 
@@ -348,26 +350,45 @@ alloc_aut(0) stkcall static i32 P_playerColor(void) {
 }
 
 alloc_aut(0) stkcall script static void P_doDepthMeter(void) {
-   i32 prev_level = (wl.hubscleared % 32) * 8;
-   i32 next_level = (wl.hubscleared + 1 % 32) * 8;
+   enum {
+      scale      = 8,
+      y          = 110,
+      y_scaled   = (y + 1) * scale,
+      notch_sx   = 12      * scale,
+      notch_sy   = 1       * scale,
+      notch_dist = 4       * scale,
+      scr_w      = 320     * scale,
+      scr_h      = 240     * scale,
+      t_initial  = 15,
+      t_move     = 70,
+      t_wait     = 35,
+      t_out      = 35,
+      s_initial = 0, e_initial = s_initial + t_initial,
+      s_move,        e_move    = s_move    + t_move,
+      s_wait,        e_wait    = s_wait    + t_wait,
+      s_out,         e_out     = s_out     + t_out,
+   };
+   i32 prev_level = (wl.hubscleared     & 31) * notch_dist;
+   i32 next_level = (wl.hubscleared + 1 & 31) * notch_dist;
    i32 player_clr = P_playerColor() & 0xFFFFFF;
-   for(i32 i = 0; i < 140; ++i) {
-      if(i == 105 && cv.player_resultssound) {
+   ACS_Delay(8);
+   for(i32 i = 0; i < e_out; ++i) {
+      if(i == s_out && cv.player_resultssound) {
          AmbientSound(ss_player_depthdown, 1.0);
       }
-      i32 curr_level = lerpk(prev_level, next_level, i < 70 ? ease_out_cubic(i / 70.0k) : 1.0k);
-      k32 alpha_k = i > 105 ? 1.0 - ease_out_cubic((i - 105) / 35.0k) : 1.0;
+      i32 curr_level = lerpk(prev_level, next_level, i <= e_move ? ease_out_cubic(maxi(i - e_initial, 0) / (k32)t_move) : 1.0k);
+      k32 alpha_k = i >= s_out ? 1.0 - ease_out_cubic((i - e_wait) / (k32)t_out) : 1.0;
       i32 alpha_i = 0xFF * alpha_k;
       i32 alpha_m = alpha_i << 24;
-      i32 cr      = 0xFFFF0000 | (alpha_i << 8) | alpha_i;
+      i32 cr = 0xFFFF0000 | (alpha_i << 8) | alpha_i;
       SetSize(320, 240);
-      PrintTextAX_str(st_depth, sf_smallfnt, CR_WHITE, 320,2, 87,2, alpha_k, _u_no_unicode);
-      SetSize(640, 480);
+      PrintTextAX_str(st_depth, sf_smallfnt, CR_WHITE, 320,2, y,2, alpha_k, _u_no_unicode);
+      SetSize(320*scale, 240*scale);
       for(i32 j = 0; j < 16; ++j) {
-         i32 w = j % 3 == 0 ? 24 : 8;
-         PrintRect(640 - w, 176 + j * 8, w, 2, cr);
+         i32 notch_w = j % 3 == 0 ? notch_sx : notch_sx / 3;
+         PrintRect(scr_w - notch_w, y_scaled + notch_dist * j, notch_w, notch_sy, cr);
       }
-      PrintRect(640 - 24, 176 + curr_level, 24, 2, player_clr | alpha_m);
+      PrintRect(scr_w - notch_sx, y_scaled + curr_level, notch_sx, notch_sy, player_clr | alpha_m);
       ACS_Delay(1);
    }
 }
@@ -386,7 +407,7 @@ alloc_aut(0) stkcall script static void P_doIntro(void) {
    };
 
    noinit static char text[8192], *lines[_nlines];
-   noinit static u32 linec[_nlines], linen[_nlines];
+   noinit static i32 linec[_nlines], linen[_nlines];
 
    pl.modal = _gui_intro;
    ACS_SetMusic(sp_DSEMPTY);
@@ -646,7 +667,7 @@ static void P_Aug_pTick(void) {
 
       if(total) {
          AmbientSound(ss_player_cbi_auto_buy, 1.0);
-         pl.logH(1, tmpstr(lang_fmt(LANG "LOG_AutoBuy%i", i + 1)), total, total != 1 ? "s" : "");
+         P_LogH(1, tmpstr(lang_fmt(LANG "LOG_AutoBuy%i", i + 1)), total, total != 1 ? "s" : "");
       }
    }
 }
@@ -680,33 +701,31 @@ script_str type("net") ext("ACS") addr(OBJ "KeyBuyAutoGroup") void Z_KeyBuyAutoG
       return;
    }
 
-   if(!P_None()) {
-      i32 total = 0, success = 0;
+   i32 total = 0, success = 0;
 
-      for_upgrade(upgr) {
-         if(!get_bit(upgr->flags, _ug_owned) && get_bit(upgr->agroups, grp)) {
-            total++;
+   for_upgrade(upgr) {
+      if(!get_bit(upgr->flags, _ug_owned) && get_bit(upgr->agroups, grp)) {
+         total++;
 
-            if(P_Upg_Buy(upgr, true)) {
-               success++;
-               P_Upg_Toggle(upgr);
-            }
+         if(P_Upg_Buy(upgr, true)) {
+            success++;
+            P_Upg_Toggle(upgr);
          }
       }
-
-      char cr;
-      str  snd;
-
-      /**/ if(success ==     0) {cr = 'g'; snd = ss_player_cbi_auto_invalid;}
-      else if(success != total) {cr = 'j'; snd = ss_player_cbi_auto_buy;}
-      else                      {cr = 'q'; snd = ss_player_cbi_auto_buy;}
-
-      AmbientSound(snd, 1.0);
-
-      i32 fmt = total ? grp + 1 : grp + 5;
-
-      pl.logH(1, tmpstr(lang_fmt(LANG "LOG_GroupBuy%i", fmt)), cr, success, total, success != 1 ? "s" : "");
    }
+
+   char cr;
+   str  snd;
+
+   /**/ if(success ==     0) {cr = 'g'; snd = ss_player_cbi_auto_invalid;}
+   else if(success != total) {cr = 'j'; snd = ss_player_cbi_auto_buy;}
+   else                      {cr = 'q'; snd = ss_player_cbi_auto_buy;}
+
+   AmbientSound(snd, 1.0);
+
+   i32 fmt = total ? grp + 1 : grp + 5;
+
+   P_LogH(1, tmpstr(lang_fmt(LANG "LOG_GroupBuy%i", fmt)), cr, success, total, success != 1 ? "s" : "");
 }
 
 script_str type("net") ext("ACS") addr(OBJ "KeyToggleAutoGroup") void Z_KeyToggleAutoGroup(i32 grp) {
@@ -714,38 +733,34 @@ script_str type("net") ext("ACS") addr(OBJ "KeyToggleAutoGroup") void Z_KeyToggl
       return;
    }
 
-   if(!P_None()) {
-      i32 total = 0;
+   i32 total = 0;
 
-      for_upgrade(upgr) {
-         if(get_bit(upgr->flags, _ug_owned) && get_bit(upgr->agroups, grp)) {
-            total++;
-            P_Upg_Toggle(upgr);
-         }
+   for_upgrade(upgr) {
+      if(get_bit(upgr->flags, _ug_owned) && get_bit(upgr->agroups, grp)) {
+         total++;
+         P_Upg_Toggle(upgr);
       }
-
-      if(total) AmbientSound(ss_player_cbi_auto_toggle,  1.0);
-      else      AmbientSound(ss_player_cbi_auto_invalid, 1.0);
-
-      i32 fmt = total ? grp + 1 : grp + 5;
-      pl.logH(1, tmpstr(lang_fmt(LANG "LOG_GroupToggle%i", fmt)));
    }
+
+   if(total) AmbientSound(ss_player_cbi_auto_toggle,  1.0);
+   else      AmbientSound(ss_player_cbi_auto_invalid, 1.0);
+
+   i32 fmt = total ? grp + 1 : grp + 5;
+   P_LogH(1, tmpstr(lang_fmt(LANG "LOG_GroupToggle%i", fmt)));
 }
 
 alloc_aut(0) script_str type("net") ext("ACS") addr(OBJ "KeyGlare") void Z_KeyGlare(void) {
-   if(!P_None()) {
-      ACS_FadeTo(255, 255, 255, 1.0, 0.0);
+   ACS_FadeTo(255, 255, 255, 1.0, 0.0);
 
-      AmbientSound(ss_player_glare, 1.0);
-      ACS_LineAttack(0, pl.yaw, pl.pitch, 1, so_Dummy, st_none,
-         32767.0, FHF_NORANDOMPUFFZ | FHF_NOIMPACTDECAL);
+   AmbientSound(ss_player_glare, 1.0);
+   ACS_LineAttack(0, pl.yaw, pl.pitch, 1, so_Dummy, st_none,
+                  32767.0, FHF_NORANDOMPUFFZ | FHF_NOIMPACTDECAL);
 
-      ACS_Delay(14);
+   ACS_Delay(14);
 
-      ACS_FadeTo(255, 255, 255, 0.0, 0.2);
+   ACS_FadeTo(255, 255, 255, 0.0, 0.2);
 
-      ACS_Delay(19);
-   }
+   ACS_Delay(19);
 }
 
 _Noreturn dynam_aut script_str ext("ACS") addr(OBJ "TimelineInconsistent") void Z_TimelineInconsistent(void) {

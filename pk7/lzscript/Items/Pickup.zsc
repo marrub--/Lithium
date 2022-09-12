@@ -14,17 +14,23 @@ class Lith_ItemGlow : Actor {
       Translation "Lith_ItemGlow";
       +ForceXyBillboard
       +NoInteraction
+      +Bright
    }
-   override void postBeginPlay() {
-      super.postBeginPlay();
-      sprite = Actor.GetSpriteIndex("LI09");
-      frame  = Lith_UTIL.pData(_pdt_pclass_b);
+
+   override void beginPlay() {
+      super.beginPlay();
    }
+
+   override void tick() {
+      if(getAge() > 5 && (alpha -= 0.03) < 0) {
+         destroy();
+      }
+   }
+
    states {
    Spawn:
-      #### # 5 bright;
-      #### # 1 bright A_FadeOut(1.0 / 35.0);
-      wait;
+      LI09 # -1;
+      stop;
    }
 }
 
@@ -32,9 +38,12 @@ class Lith_WeapGlow : Lith_ItemGlow {
    default {
       Translation "Lith_WeapGlow";
    }
+
    override void postBeginPlay() {
       super.postBeginPlay();
-      if(lith_player_brightweps) A_SetTranslation("Lith_WeapGlowBright");
+      if(lith_player_brightweps) {
+         A_SetTranslation("Lith_WeapGlowBright");
+      }
    }
 }
 
@@ -64,6 +73,8 @@ mixin class Lith_Pickup {
    Lith_Sprite m_pkSprT;
    Lith_Sprite m_pkSprW;
    meta class<Actor> m_pkGlow;
+   int m_pkGlowFrame;
+
    property Sprite: m_pkSprGf;
    property SpriteA: m_pkSprAf;
    property SpriteC: m_pkSprCf;
@@ -76,6 +87,7 @@ mixin class Lith_Pickup {
    flagdef Pkup_Generic:  m_pkFlags, 0;
    flagdef Pkup_NoSprite: m_pkFlags, 1;
    flagdef Pkup_NoGlow:   m_pkFlags, 2;
+
    void pkPostBeginPlay() {
       if(m_pkSprGf) {m_pkSprG.get(m_pkSprGf);}
       if(m_pkSprAf) {m_pkSprA.get(m_pkSprAf);}
@@ -91,7 +103,9 @@ mixin class Lith_Pickup {
       } else {
          m_pkSpr = null;
       }
+      m_pkGlowFrame = Lith_UTIL.pData(_pdt_pclass_b);
    }
+
    void pkTick() {
       if(!m_pkSpr) {
          return;
@@ -113,29 +127,38 @@ mixin class Lith_Pickup {
       else if(m_pkSprWf && p is "Lith_WandererPlayer")  {pkSetSpr(m_pkSprW);}
       else if(m_pkSprGf)                                {pkSetSpr(m_pkSprG);}
    }
+
    void pkSetSpr(Lith_Sprite s) {
       m_pkSpr.sprite = s.spr;
       m_pkSpr.frame  = s.frm;
    }
-   void pkItemGlow() {
+
+   void pkItemGlow() const {
       if(isFrozen() || lith_player_noitemfx || bPkup_NoGlow) {
          return;
       }
-      let d  = distance2D(players[consolePlayer].camera);
-      let s  = sin(msTimeF() * 0.14285);
-      let z  = sin(msTimeF() * 0.05714);
-      let c  = cos(msTimeF() * 0.14285);
-      let ns = 1 - s;
-      if(d < 2048) spawn(m_pkGlow, pos+( s*32,     c*32, 24+z*9));
-      if(d < 4096) spawn(m_pkGlow, pos+(    0,     s*32, 24+c*32));
-      if(d < 8192) spawn(m_pkGlow, pos+( c*32,     s*32, 24+s*32));
-      if(d < 4096) spawn(m_pkGlow, pos+( c*32, ns*32-32, 24+s*32));
-      if(d < 8192) spawn(m_pkGlow, pos+( s*32,        0, 24+c*32));
-      if(d < 4096) spawn(m_pkGlow, pos+( s*32,     c*32, 24+s*32));
-      if(d < 2048) spawn(m_pkGlow, pos+(ns*32-32,  c*32, 24+s*32));
+      let d = int(distance2D(players[consolePlayer].camera));
+      let s = sin(msTimeF() * 0.14285);
+      let z = sin(msTimeF() * 0.05714);
+      let c = cos(msTimeF() * 0.14285);
+      let n = 1 - s;
+      switch(d / 512) {
+      case 0:
+         spawn(m_pkGlow, pos+(s*32,    c*32, 24+z*9) ).frame = m_pkGlowFrame;
+         spawn(m_pkGlow, pos+(c*32, n*32-32, 24+s*32)).frame = m_pkGlowFrame;
+         spawn(m_pkGlow, pos+(n*32-32, c*32, 24+s*32)).frame = m_pkGlowFrame;
+      case 1:
+         spawn(m_pkGlow, pos+(   0, s*32, 24+c*32)).frame = m_pkGlowFrame;
+         spawn(m_pkGlow, pos+(s*32, c*32, 24+s*32)).frame = m_pkGlowFrame;
+      case 2:
+         spawn(m_pkGlow, pos+(s*32, 0, 24+c*32)).frame = m_pkGlowFrame;
+      default:
+         spawn(m_pkGlow, pos+(c*32, s*32, 24+s*32)).frame = m_pkGlowFrame;
+      }
    }
+
    states(Actor) {
-   spawn:
+   Spawn:
       TNT1 A 1 pkItemGlow();
       loop;
    }

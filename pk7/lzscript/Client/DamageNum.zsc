@@ -30,7 +30,7 @@ class Lith_ScoreNum {
    Lith_ScoreNum m_next;
 }
 
-extend class Lith_RenderProvider;
+extend class Lith_URANUS;
 
 Lith_ScoreNum             m_scrNumHead;
 Lith_DamageNum[_dnum_max] m_dmgNumHeads;

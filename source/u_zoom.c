@@ -63,13 +63,9 @@ void Upgr_Zoom_Render(void) {
 
 script_str ext("ACS") type("net") addr(OBJ "KeyZoom")
 void Z_KeyZoom(i32 amt) {
-   if(ACS_Timer() < 10) return;
-
-   if(!P_None()) {
-      if(get_bit(pl.upgrades[UPGR_Zoom].flags, _ug_active)) udata.zoom += amt;
-      if(udata.zoom < 0)                                    udata.zoom  = 0;
-      if(udata.zoom > 80)                                   udata.zoom  = 80;
-   }
+   if(get_bit(pl.upgrades[UPGR_Zoom].flags, _ug_active)) udata.zoom += amt;
+   if(udata.zoom < 0)                                    udata.zoom  = 0;
+   if(udata.zoom > 80)                                   udata.zoom  = 80;
 }
 
 /* EOF */

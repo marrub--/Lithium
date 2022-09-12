@@ -432,25 +432,25 @@ enum {
 };
 
 struct dlg_def {
-   u32 pages[DPAGE_MAX];
+   mem_size_t pages[DPAGE_MAX];
    u32 *codeV; mem_size_t codeC, codeP;
    u32 *stabV; mem_size_t stabC, stabP;
 };
 
 struct dlg_start_info {
-   u32 active;
-   u32 page;
-   u32 num;
+   mem_size_t active;
+   mem_size_t page;
+   mem_size_t num;
 };
 
 struct dcd_info {
-   char name[7];
-   u32  adrm;
+   char       name[7];
+   mem_size_t adrm;
 };
 
 void Dlg_MInit(void);
 
-script void Dlg_Run(u32 num);
+script void Dlg_Run(mem_size_t num);
 
 extern struct dlg_def        dlgdefs[DNUM_MAX];
 extern struct dcd_info const dcdinfo[0xFF];

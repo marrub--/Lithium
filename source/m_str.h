@@ -179,7 +179,7 @@
 
 #define PrintErr(...) \
    (ACS_BeginPrint(), \
-    PrintChrLi(__func__), \
+    PrintChrLi(_f), \
     PrintChrLi(" \CgERROR\C-: "), \
     (__VA_ARGS__), \
     EndLogEx(PrintErrLevel))
@@ -228,6 +228,7 @@ stkcall str lang(str name);
 stkcall cstr tmpstr(str s);
 stkcall cstr RemoveTextColors_str(astr s, i32 size);
 stkcall cstr RemoveTextColors(cstr s, i32 size);
+void RandomName(i32 id);
 #endif
 
 /* EOF */

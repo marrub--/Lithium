@@ -14,11 +14,9 @@
 #include "p_player.h"
 #include "w_world.h"
 
-static
-void Container(struct gui_state *g, struct container *cont, i32 sx, i32 sy) {
+static void Container(struct gui_state *g, struct container *cont, i32 sx, i32 sy) {
    sx += g->ox;
    sy += g->oy;
-
    str bg;
    switch(cont->type) {
       case _cont_store:  bg = sp_UI_InvBackStore;     break;
@@ -26,19 +24,15 @@ void Container(struct gui_state *g, struct container *cont, i32 sx, i32 sy) {
       case _cont_arms_l: bg = sp_UI_InvBackLowerArms; break;
       case _cont_body:   bg = sp_UI_InvBackBody;      break;
    }
-
    i32 h = cont->h * 8;
    i32 w = cont->w * 8;
-
    PrintText_str(ns(lang(fast_strdup2(LANG "CONTAINER_", cont->cname))),
                  sf_smallfnt, g->defcr, sx,1, sy,2);
-
    for(i32 y = 0; y < h; y += 8) {
       for(i32 x = 0; x < w; x += 8) {
          PrintSpriteA(bg, sx+x,1, sy+y,1, 0.8);
       }
    }
-
    if(pl.movitem && g->clicklft &&
       aabb_point(sx, sy, w, h, g->cx, g->cy) &&
       (P_Inv_Place(cont, pl.selitem, (g->cx - sx) / 8, (g->cy - sy) / 8) ||
@@ -46,27 +40,21 @@ void Container(struct gui_state *g, struct container *cont, i32 sx, i32 sy) {
       pl.movitem = false;
       AmbientSound(ss_player_cbi_invmov, 1.0);
    }
-
    bool didresel = false; /* Basic bitch hack. -Ten */
-
    for_item(cont) {
       i32 x = sx + it->x * 8;
       i32 y = sy + it->y * 8;
       i32 ex = it->w * 8 - 1;
       i32 ey = it->h * 8 - 1;
-
       PrintSprite(it->spr, x,1, y,1);
-
       if(pl.movitem) {
          continue;
       }
-
       if(!didresel && pl.selitem != it && g->clicklft && aabb_point(x, y, ex, ey, g->cx, g->cy)) {
          didresel = true;
          pl.selitem = it;
          AmbientSound(ss_player_cbi_invcur, 1.0);
       }
-
       if(pl.selitem == it) {
          k32 a = (ACS_Sin(ACS_Timer() / 105.0k) * 0.5k + 1.2k) / 4.0k;
          PrintRect(x, y, ex + 1, ey + 1, 0xF0E658 | (i32)(a * 255.0k) << 24);
@@ -109,7 +97,6 @@ bool ItemCanPlace(struct container *cont, struct item *item, i32 x, i32 y) {
       x + item->w > cont->w || y + item->h > cont->h) {
       return false;
    }
-
    for_item(cont) if(it != item) {
       /* there is certainly a better way of doing this that still
        * accounts for overlap but,
@@ -135,7 +122,6 @@ static
 bool ItemCanPlaceAny(struct container *cont, struct item *item) {
    i32 xn = cont->w / item->w;
    i32 yn = cont->h / item->h;
-
    for(i32 y = 0; y < yn; y++) {
       for(i32 x = 0; x < xn; x++) {
          if(ItemCanPlace(cont, item, x * item->w, y * item->h)) {
@@ -143,30 +129,25 @@ bool ItemCanPlaceAny(struct container *cont, struct item *item) {
          }
       }
    }
-
    return false;
 }
 
 static
 void EquipItem(struct item *sel) {
    bool ok = false;
-
    for(i32 i = 0; i < _inv_num; i++) {
       struct container *cont = &pl.inv[i];
-
       if(cont->type == sel->equip && (P_Inv_PlaceFirst(cont, sel) ||
                                       P_Inv_SwapFirst(cont, sel))) {
          ok = true;
          break;
       }
    }
-
    AmbientSound(ok ? ss_player_cbi_invmov : ss_player_cbi_auto_invalid, 1.0);
 }
 
 void P_Inv_PInit(void) {
-   static
-   struct container const baseinv[] = {
+   static struct container const baseinv[] = {
       [_inv_backpack]    = {11, 7, "Backpack", _cont_store},
       [_inv_arm_upper_l] = {1,  3, "ArmUpL",   _cont_arms_u},
       [_inv_arm_upper_r] = {1,  3, "ArmUpR",   _cont_arms_u},
@@ -178,37 +159,28 @@ void P_Inv_PInit(void) {
       [_inv_torso]       = {4,  2, "Torso",    _cont_body},
       [_inv_legs]        = {2,  3, "Legs",     _cont_body},
    };
-
    fastmemcpy(pl.inv, baseinv, sizeof baseinv);
-
    for(i32 i = 0; i < _inv_num; i++) {
       pl.inv[i].head = nil;
    }
 }
 
-struct item *P_Item_New(struct itemdata const *data) {
+struct item *P_Item_New(struct item_info const *info) {
    struct item *item = Salloc(struct item, _tag_item);
-
-   item->data    = *data;
+   item->info    = *info;
    item->Destroy = P_Item_Destroy;
    item->Place   = P_Item_Place;
-
    return item;
 }
 
 script
 void P_Item_Destroy(struct item *item) {
    Dbg_Log(log_dev, _l("destroying item "), ACS_PrintHex((intptr_t)item));
-
    ServCallV(sm_DeleteItem, item);
-
-   if(!P_None()) {
-      if(pl.useitem == item) pl.useitem = nil;
-      if(pl.selitem == item) pl.selitem = nil;
-      if(pl.opnitem == item) pl.opnitem = nil;
-      pl.movitem = false;
-   }
-
+   if(pl.useitem == item) pl.useitem = nil;
+   if(pl.selitem == item) pl.selitem = nil;
+   if(pl.opnitem == item) pl.opnitem = nil;
+   pl.movitem = false;
    P_Item_Unlink(item);
    Dalloc(item);
 }
@@ -233,21 +205,18 @@ void P_Item_Unlink(struct item *item) {
 }
 
 struct bagitem *P_BagItem_New(i32 w, i32 h, i32 type,
-                              struct itemdata const *data) {
+                              struct item_info const *info) {
    struct bagitem *item = Salloc(struct bagitem, _tag_item);
-
    item->content.w     = w;
    item->content.h     = h;
    item->content.cname = "Item";
    item->content.type  = type;
    item->content.head  = nil;
-
-   item->data    = *data;
+   item->info    = *info;
    item->Tick    = BagItem_Tick;
    item->Show    = BagItem_Show;
    item->Destroy = BagItem_Destroy;
    item->Place   = BagItem_Place;
-
    return item;
 }
 
@@ -255,17 +224,13 @@ bool P_Inv_Place(struct container *cont, struct item *item, i32 x, i32 y) {
    if(!ItemCanPlace(cont, item, x, y)) {
       return false;
    }
-
    item->Place(item, cont);
-
    item->x = x;
    item->y = y;
-
    return true;
 }
 
-script
-bool P_Inv_PlaceFirst(struct container *cont, struct item *item) {
+script bool P_Inv_PlaceFirst(struct container *cont, struct item *item) {
    for(i32 y = 0; y < cont->h; y++) {
       for(i32 x = 0; x < cont->w; x++) {
          if(P_Inv_Place(cont, item, x, y)) {
@@ -273,12 +238,10 @@ bool P_Inv_PlaceFirst(struct container *cont, struct item *item) {
          }
       }
    }
-
    return false;
 }
 
-script
-bool P_Inv_SwapFirst(struct container *cont, struct item *lhs) {
+script bool P_Inv_SwapFirst(struct container *cont, struct item *lhs) {
    for_item(cont) {
       if(P_Inv_Swap(lhs, it)) {
          return true;
@@ -310,25 +273,20 @@ bool P_Inv_Add(struct item *item) {
          return true;
       }
    }
-
    return false;
 }
 
-script
-void P_Inv_PTick(void) {
+script void P_Inv_PTick(void) {
    if(pl.useitem) {
       struct item *item = pl.useitem;
-
       Dbg_Log(log_dev,
               _l("using "), _p(item->name), _c(' '), _c('('),
               ACS_PrintHex((intptr_t)item), _c(')'));
       if(item->Use && !item->Use(item)) {
          AmbientSound(ss_player_cbi_auto_invalid, 1.0);
       }
-
       pl.useitem = nil;
    }
-
    for(i32 i = 0; i < _inv_num; i++) {
       for_item(&pl.inv[i]) {
          if(it->Tick) {
@@ -356,8 +314,7 @@ void P_Inv_PTick(void) {
    })
 
 void P_CBI_TabItems(struct gui_state *g) {
-   static
-   i32 const xs[] = {
+   static i32 const xs[] = {
       [_inv_backpack]    =        8*1,
       [_inv_arm_upper_l] = 294-48-8*8,
       [_inv_arm_upper_r] = 294-48-8*1,
@@ -369,9 +326,7 @@ void P_CBI_TabItems(struct gui_state *g) {
       [_inv_torso]       = 294-48-8*6,
       [_inv_legs]        = 294-48-8*5,
    };
-
-   static
-   i32 const ys[] = {
+   static i32 const ys[] = {
       [_inv_backpack]    = 64+8*-5,
       [_inv_arm_upper_l] = 64+8*-2,
       [_inv_arm_upper_r] = 64+8*-2,
@@ -383,44 +338,34 @@ void P_CBI_TabItems(struct gui_state *g) {
       [_inv_torso]       = 64+8* 0,
       [_inv_legs]        = 64+8*10,
    };
-
    PrintSpriteA(sp_UI_Body, g->ox+294-122,1, g->oy+24,1, 0.6);
    PrintSpriteA(sp_UI_Bag,  g->ox+     16,1, g->oy+16,1, 0.6);
-
    PrintText_str(ns(lang(sl_inv_hints)),
                  sf_smallfnt, g->defcr, g->ox+2,1, g->oy+212,2);
-
    for(i32 i = 0; i < _inv_num; i++) {
       Container(g, &pl.inv[i], xs[i], ys[i]);
    }
-
    struct item *sel = pl.selitem;
-
    if(sel) {
       i32 n = 0, x, y;
       i32 nx = xs[_inv_backpack];
       i32 ny = ys[_inv_backpack] + 60;
-
       if(g->clickrgt && !g->old.clickrgt) {
          pl.movitem = !pl.movitem;
       }
-
       setPos();
       PrintText_str(ns(lang_fmt(LANG "ITEM_TAG_%S", sel->name)),
                     sf_smallfnt, g->defcr, g->ox+x,1, g->oy+y,1);
       incY(8);
-
       setPos();
       PrintText_str(ns(lang_fmt(LANG "ITEM_SHORT_%S", sel->name)),
                     sf_smallfnt, g->defcr, g->ox+x,1, g->oy+y,1);
       incY(16);
-
       setPos();
       if(G_Button(g, tmpstr(lang(sl_move)), x, y, .color = "n", Pre(btnclear))) {
          pl.movitem = !pl.movitem;
       }
       incPos();
-
       if(get_bit(sel->flags, _if_equippable)) {
          setPos();
          if(G_Button(g, tmpstr(lang(sl_equip)), x, y, .color = "n",
@@ -429,7 +374,6 @@ void P_CBI_TabItems(struct gui_state *g) {
          }
          incPos();
       }
-
       if(get_bit(sel->flags, _if_openable)) {
          setPos();
          if(G_Button(g, tmpstr(pl.opnitem == sel ?
@@ -441,7 +385,6 @@ void P_CBI_TabItems(struct gui_state *g) {
          }
          incPos();
       }
-
       if(sel->Use) {
          setPos();
          if(G_Button(g, tmpstr(lang(sl_use)), x, y, .color = "g", Pre(btnclear))) {
@@ -449,7 +392,6 @@ void P_CBI_TabItems(struct gui_state *g) {
          }
          incPos();
       }
-
       setPos();
       if(sel->scr > 0) {
          ACS_BeginPrint();
@@ -458,7 +400,6 @@ void P_CBI_TabItems(struct gui_state *g) {
          PrintChrLi("\Cnscr\C-)");
          PrintText(sf_smallfnt, g->defcr, g->ox+x+18,1, g->oy+y,1);
       }
-
       if(sel->scr >= 0 &&
          G_Button(g, tmpstr(sel->scr > 0 ? lang(sl_sell) : lang(sl_discard)),
                   x, y, .color = "g", .fill = &pl.cbi.st.itemfill,
@@ -470,7 +411,6 @@ void P_CBI_TabItems(struct gui_state *g) {
          AmbientSound(ss_player_cbi_invrem, 1.0);
          incPos();
       }
-
       ny = y;
       incY(16);
       setPos();
@@ -480,38 +420,44 @@ void P_CBI_TabItems(struct gui_state *g) {
    }
 }
 
-static
-struct itemdata ItemData(void) {
-   struct itemdata data = {
+static struct item_info ItemInfo(void) {
+   struct item_info info = {
       .w     = GetMembI(0, sm_W),
       .h     = GetMembI(0, sm_H),
       .equip = GetMembI(0, sm_InvEquip),
       .scr   = GetMembI(0, sm_InvSell),
       .name  = GetMembS(0, sm_InvName),
    };
-   data.spr = ns(lang_fmt(LANG "Item_%S", data.name));
-   if(data.equip != _cont_store) set_bit(data.flags, _if_equippable);
-   return data;
+   info.spr = strp(_l(":Items:"), _p(info.name));
+   if(info.equip != _cont_store) {
+      set_bit(info.flags, _if_equippable);
+   }
+   return info;
 }
 
 script_str ext("ACS") addr(OBJ "ItemCreate")
 struct item *Z_ItemCreate(void) {
-   struct itemdata data = ItemData();
-   Dbg_Log(log_dev, _l("creating "), _p(data.name));
-   return P_Item_New(&data);
-}
-
-script_str ext("ACS") addr(OBJ "BagItemCreate")
-struct item *Z_BagItemCreate(void) {
-   struct itemdata data = ItemData();
-   set_bit(data.flags, _if_openable);
-   Dbg_Log(log_dev, _l("creating "), _p(data.name));
-   return &P_BagItem_New(
-      GetMembI(0, sm_InvW),
-      GetMembI(0, sm_InvH),
-      GetMembI(0, sm_InvType),
-      &data
-   )->item;
+   struct item_info info = ItemInfo();
+   Dbg_Log(log_dev, _l("creating "), _p(info.name));
+   i32 itemt = GetMembI(0, sm_ItemType);
+   switch(itemt) {
+   case _itemt_item:
+      return P_Item_New(&info);
+   case _itemt_bagitem:
+      set_bit(info.flags, _if_openable);
+      return &P_BagItem_New(
+         GetMembI(0, sm_InvW),
+         GetMembI(0, sm_InvH),
+         GetMembI(0, sm_InvType),
+         &info)->item;
+   case _itemt_useitem:
+      struct item *item = P_Item_New(&info);
+      item->Use = P_Item_Use;
+      return item;
+   default:
+      PrintErr(_l("unknown item type "), _p(itemt));
+   }
+   return nil;
 }
 
 void P_ItemPopup(str tag, k32 x, k32 y, k32 z) {
@@ -524,63 +470,49 @@ void P_ItemPopup(str tag, k32 x, k32 y, k32 z) {
    DrawCallV(sm_AddItemPop, vp.x, vp.y, tag);
 }
 
-script_str ext("ACS") addr(OBJ "ItemPopupAmmo")
-void Z_ItemPopupAmmo(k32 x, k32 y, k32 z) {
+script_str ext("ACS") addr(OBJ "ItemPopupAmmo") void Z_ItemPopupAmmo(k32 x, k32 y, k32 z) {
    i32 ammodisp = CVarGetI(sc_player_ammodisp);
    if(ammodisp & _itm_disp_log) {
-      pl.logH(1, "%S", GetMembS(0, sm_LogText));
+      P_LogH(1, "%S", GetMembS(0, sm_LogText));
    }
    if(ammodisp & _itm_disp_pop) {
       P_ItemPopup(GetMembS(0, sm_AmmoText), x, y, z);
    }
 }
 
-script_str ext("ACS") addr(OBJ "ItemPopupTag")
-void Z_ItemPopupTag(void) {
+script_str ext("ACS") addr(OBJ "ItemPopupTag") void Z_ItemPopupTag(void) {
    if(CVarGetI(sc_player_itemdisp) & _itm_disp_pop) {
       P_ItemPopup(GetNameTag(0), GetX(0), GetY(0), GetZ(0));
    }
 }
 
-script_str ext("ACS") addr(OBJ "ItemAttach")
-bool Z_ItemAttach(struct item *item) {
+script_str ext("ACS") addr(OBJ "ItemAttach") bool Z_ItemAttach(struct item *item) {
    Dbg_Log(log_dev, _l("attaching item "), ACS_PrintHex((intptr_t)item));
-
-   if(!P_None()) {
-      if(P_Inv_Add(item)) {
-         Z_ItemPopupTag();
-         return true;
-      } else {
-         return false;
-      }
+   if(P_Inv_Add(item)) {
+      Z_ItemPopupTag();
+      return true;
+   } else {
+      return false;
    }
-
-   return false;
 }
 
-script_str ext("ACS") addr(OBJ "ItemDetach")
-void Z_ItemDetach(struct item *item) {
+script_str ext("ACS") addr(OBJ "ItemDetach") void Z_ItemDetach(struct item *item) {
    if(item->Destroy) {
       Dbg_Log(log_dev, _l("detaching item "), ACS_PrintHex((intptr_t)item));
       item->Destroy(item);
    }
 }
 
-script_str ext("ACS") addr(OBJ "ItemCanPlace")
-bool Z_ItemCanPlace(struct item *item) {
-   if(!P_None()) {
-      for(i32 i = 0; i < _inv_num; i++) {
-         if(ItemCanPlaceAny(&pl.inv[i], item)) {
-            return true;
-         }
+script_str ext("ACS") addr(OBJ "ItemCanPlace") bool Z_ItemCanPlace(struct item *item) {
+   for(i32 i = 0; i < _inv_num; i++) {
+      if(ItemCanPlaceAny(&pl.inv[i], item)) {
+         return true;
       }
    }
-
    return false;
 }
 
-script_str ext("ACS") addr(OBJ "ItemOnBody")
-bool Z_ItemOnBody(struct item *item) {
+script_str ext("ACS") addr(OBJ "ItemOnBody") bool Z_ItemOnBody(struct item *item) {
    return item->container && item->container->type == _cont_body;
 }
 

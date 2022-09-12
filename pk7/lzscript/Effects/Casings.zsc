@@ -11,7 +11,6 @@ class Lith_CasingSmoke : Actor {
       RenderStyle "Add";
       Alpha 0.6;
       Scale 0.02;
-
       Projectile;
       +NOINTERACTION
       +NOTELEPORT
@@ -37,24 +36,28 @@ class Lith_CasShell : Lith_CasingBase {
       BounceCount 5;
       BounceSound "casings/shell/bounce";
    }
+
    override void markPrecacheSounds() {
       super.markPrecacheSounds();
       markSound("casings/shell/die");
    }
+
    states {
-   Spawn1:
+   Spawn:
       SCAS AABBCCDDEEFFGGHH 1;
       loop;
    Death:
-      TNT1 A 0 A_StartSound("casings/shell/die", lch_body);
-      SCAS IJKLMN 0 A_Jump(64, "Done");
+      SCAS I 0 {
+         A_StartSound("casings/shell/die", lch_body);
+         frame += random(0, 5);
+      }
       goto Done;
    }
 }
 
 class Lith_CasShellHot : Lith_CasShell {
    states {
-   Spawn1:
+   Spawn:
       TNT1 A 0;
       SCAS AABBCCDDEEFFGGHH 1 A_SpawnItemEx("Lith_CasingSmoke", 0,0,3, frandom(-0.2,0),frandom(-0.2,0));
    Spawn2:
@@ -76,20 +79,28 @@ class Lith_CasSmall : Lith_CasingBase {
       super.markPrecacheSounds();
       markSound("casings/bullet/die");
    }
+
    states {
-   Spawn1:
+   Spawn:
       BCAS ABCDEFGH 1;
       loop;
    Death:
-      TNT1 A 0 A_StartSound("casings/bullet/die", lch_body);
-      BCAS KGIJ 0 A_Jump(64, "Done");
+      BCAS A 0 {
+         A_StartSound("casings/bullet/die", lch_body);
+         switch(random(0, 3)) {
+         case 0: frame = CH_U_K - CH_U_A; break;
+         case 1: frame = CH_U_G - CH_U_A; break;
+         case 2: frame = CH_U_I - CH_U_A; break;
+         case 3: frame = CH_U_J - CH_U_A; break;
+         }
+      }
       goto Done;
    }
 }
 
 class Lith_CasSmallHot : Lith_CasSmall {
    states {
-   Spawn1:
+   Spawn:
       TNT1 A 0;
       BCAS ABCDEFGH 1 A_SpawnItemEx("Lith_CasingSmoke", 0,0,3, frandom(-0.2,0),frandom(-0.2,0));
    Spawn2:
@@ -111,20 +122,23 @@ class Lith_CasBig : Lith_CasingBase {
       super.markPrecacheSounds();
       markSound("casings/bullet/die");
    }
+
    states {
-   Spawn1:
+   Spawn:
       BBCA ABCDEFGH 1;
       loop;
    Death:
-      #### # 0 A_StartSound("casings/bullet/die", lch_body);
-      #### CG 0 A_Jump(128, "Done");
+      #### # 0 {
+         A_StartSound("casings/bullet/die", lch_body);
+         frame = random(0, 1) ? CH_U_C - CH_U_A : CH_U_G - CH_U_A;
+      }
       goto Done;
    }
 }
 
 class Lith_CasBigHot : Lith_CasBig {
    states {
-   Spawn1:
+   Spawn:
       TNT1 A 0;
       BBCA ABCDEFGH 1 A_SpawnItemEx("Lith_CasingSmoke", 0, 0, 3);
       loop;
@@ -133,7 +147,7 @@ class Lith_CasBigHot : Lith_CasBig {
 
 class Lith_Cas700e : Lith_CasBig {
    states {
-   Spawn1:
+   Spawn:
       B7CA ABCDEFGH 1;
       loop;
    }
@@ -149,7 +163,7 @@ class Lith_Cas4Bore : Lith_CasShell {
       markSound("casings/shell/die");
    }
    states {
-   Spawn1:
+   Spawn:
       #### # 0 a_setRoll(roll + 90);
       S4CA A 1 {
          a_setRoll(roll + 5, SPF_INTERPOLATE);
@@ -157,11 +171,10 @@ class Lith_Cas4Bore : Lith_CasShell {
       }
       wait;
    Death:
-      TNT1 A 0 {
+      S4CA A 0 {
          roll = roll % 360 < 180 ? 90 : 270;
          A_StartSound("casings/shell/die", lch_body);
       }
-      S4CA A 0;
       goto Done;
    }
 }
@@ -172,7 +185,6 @@ default {
    BounceType "Doom";
    Radius 3;
    Height 3;
-
    +MISSILE
    +NOTELEPORT
    +THRUACTORS
@@ -182,15 +194,16 @@ default {
    +CastSpriteShadow
 }
 
+override void postBeginPlay() {
+   super.postBeginPlay();
+   if(!lith_weapons_casings) {
+      destroy();
+   }
+}
+
 states {
-Spawn:
-   TNT1 A 0;
-   TNT1 A 0 A_JumpIf(!lith_weapons_casings, "Null");
-   TNT1 A 0 ResolveState("Spawn1");
-   stop;
 Done:
-   #### # 0 A_JumpIf(lith_weapons_casingfadeout, "DoneFade");
-   #### # -1;
+   #### # -1 A_JumpIf(lith_weapons_casingfadeout, "DoneFade");
    stop;
 DoneFade:
    #### # 300;

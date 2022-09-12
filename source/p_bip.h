@@ -82,8 +82,8 @@ struct bip {
    i32          lastcategory;
 
    struct page *result[8];
-   u32 resnum;
-   u32 rescur;
+   i32 resnum;
+   i32 rescur;
 };
 
 extern struct bip  bip;

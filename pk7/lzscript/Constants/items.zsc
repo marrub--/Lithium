@@ -20,6 +20,12 @@ enum Lith_Container {
    _cont_body,
 };
 
+enum Lith_InventoryItemType {
+   _itemt_item,
+   _itemt_bagitem,
+   _itemt_useitem,
+};
+
 
 
 

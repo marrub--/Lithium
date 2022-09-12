@@ -166,7 +166,7 @@ void Upgr_Magic_Render(void) {
 
 script_str ext("ACS") addr(OBJ "SetMagicUI")
 void Z_SetMagicUI(bool on) {
-   if(!P_None()) SetMagicUI(on);
+   SetMagicUI(on);
 }
 
 /* EOF */

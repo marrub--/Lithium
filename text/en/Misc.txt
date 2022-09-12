@@ -94,8 +94,8 @@ Use at the expense of your world.
 
 == \#OB_S_Explosion | %o made %hself go boom.
 
-== \#OB_Falling_1 | %o took a long walk off a short floor.
-== \#OB_Falling_2 | The floor fell love with %o.
+== \#OB_Falling_1 | %o took a walk off a short cliff.
+== \#OB_Falling_2 | The floor fell in love with %o.
 == \#OB_Falling_3 | %o became paste with the power of gravity.
 == \#OB_Falling_4 | Goodbye, %o.
 == \#OB_Falling_5 | %o doesn't like heights.
@@ -185,16 +185,10 @@ Use at the expense of your world.
 == MNU_LOADGAME | (Load-Game)
 == MNU_OPTIONS  | (Options)
 
-== MENU_CHOOSECLASS  | Your Class Is:
-== MENU_WHICHEPISODE | Your Story Is:
-== MENU_CHOOSESKILL  | Your Skill Is:
-
-== DIFF_TOURIST | I'm just a tourist.
-== DIFF_EASY    | Throw me a bone.
-== DIFF_NORMAL  | Hurt me plenty.
-== DIFF_HARD    | Ultra-Violence!
-== DIFF_XHARD   | Watch me die!
-== DIFF_NMARE   | Bewildered Nightmare!
+== \#DIFF_TOURIST | I'm just a tourist.
+== \#DIFF_NORMAL  | Hurt me plenty.
+== \#DIFF_HARD    | Ultra-Violence!
+== \#DIFF_NMARE   | Nightmare!
 
 == PLYRMNU_PRESSSPACE | Press \cjSPACE
 == PLYRMNU_SEEFRONT   | to see the front.

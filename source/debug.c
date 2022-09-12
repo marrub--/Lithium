@@ -87,38 +87,36 @@ void Z_Thimgomabjhdf(void) {
       .by = 3,
    };
 
-   if(!P_None()) {
-      if(pl.modal != _gui_none) return;
+   if(pl.modal != _gui_none) return;
 
-      pl.modal = _gui_waypoint;
-      FreezeTime();
+   pl.modal = _gui_waypoint;
+   FreezeTime();
 
-      struct gui_win win = {};
+   struct gui_win win = {};
 
-      struct gui_state g = {
-         .cx = 320 / 2,
-         .cy = 240 / 2,
-         .gfxprefix = ":UI_Green:",
-      };
+   struct gui_state g = {
+      .cx = 320 / 2,
+      .cy = 240 / 2,
+      .gfxprefix = ":UI_Green:",
+   };
 
-      for(;;) {
-         if(pl.dead) break;
+   for(;;) {
+      if(pl.dead) break;
 
-         G_Begin(&g, 320, 240);
+      G_Begin(&g, 320, 240);
 
-         G_UpdateState(&g);
+      G_UpdateState(&g);
 
-         G_WinBeg(&g, &win, .preset = &pre);
+      G_WinBeg(&g, &win, .preset = &pre);
 
-         G_WinEnd(&g, &win);
+      G_WinEnd(&g, &win);
 
-         G_End(&g, gui_curs_outlineinv);
+      G_End(&g, gui_curs_outlineinv);
 
-         ACS_Delay(1);
-      }
-
-      UnfreezeTime();
+      ACS_Delay(1);
    }
+
+   UnfreezeTime();
 }
 
 script static
@@ -161,10 +159,10 @@ void dbg_font_test(str font) {
       SetSize(320, 240);
       i32 y = 0;
       for(i32 i = 0; i < countof(strings); i++) {
-         PrintLine(0, y, 70, y, 0xFF00FF);
-         PrintLine(0, y, 0, y + _h, 0xFF00FF);
-         PrintLine(70, y, 320, y, 0x00FFFF);
-         PrintLine(70, y, 70, y + _h, 0x00FFFF);
+         PrintLine(0, y, 70, y, 0xFFFF00FF);
+         PrintLine(0, y, 0, y + _h, 0xFFFF00FF);
+         PrintLine(70, y, 320, y, 0xFF00FFFF);
+         PrintLine(70, y, 70, y + _h, 0xFF00FFFF);
          PrintTextChS(strings[i].lhs);
          PrintTextX(font, CR_WHITE, 0,1, y,1, _u_no_unicode);
          PrintTextChS(strings[i].rhs);

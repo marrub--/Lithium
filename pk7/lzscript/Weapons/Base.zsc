@@ -86,7 +86,6 @@ meta double m_sprintSpeed;
 meta class<Actor> m_spawnType;
 
 bool m_side;
-bool m_speedUp;
 
 protected bool m_ads;
 
@@ -111,7 +110,7 @@ virtual double, double lith_getFirePattern() {return 0, 0;}
 virtual bool           lith_checkSprint()    {return false;}
 
 virtual state lith_ready(int flags) {
-   m_speedUp = false;
+   Lith_Player(owner).m_sprinting = false;
    if(lith_checkSprint()) {
       return resolveState("_Sprint");
    } else {
@@ -119,7 +118,10 @@ virtual state lith_ready(int flags) {
    }
 }
 
-virtual void lith_reloadFinish(bool isAuto) {m_fired = 0;}
+virtual void lith_reloadFinish(bool isAuto) {
+   m_fired = 0;
+}
+
 override void markPrecacheSounds() {
    super.markPrecacheSounds();
    markSound(m_scopeOutSnd);
@@ -127,7 +129,24 @@ override void markPrecacheSounds() {
 }
 
 override double getSpeedFactor() {
-   return owner && owner.player.readyWeapon == self ? (m_speedUp ? m_sprintSpeed : m_defaultSpeed) : 1;
+   return owner && owner.player.readyWeapon == self ? (Lith_Player(owner).m_sprinting ? m_sprintSpeed : m_defaultSpeed) : 1;
+}
+
+override void postBeginPlay() {
+   super.postBeginPlay();
+   if(owner) {
+      return;
+   }
+   if(m_spawnType) {
+      A_SpawnItemEx(m_spawnType, flags:
+                    SXF_TRANSFERTRANSLATION | SXF_TRANSFERAMBUSHFLAG  |
+                    SXF_TRANSFERPITCH       | SXF_TRANSFERPOINTERS    |
+                    SXF_TRANSFERSCALE       | SXF_TRANSFERSPECIAL     |
+                    SXF_TRANSFERSTENCILCOL  | SXF_TRANSFERALPHA       |
+                    SXF_TRANSFERRENDERSTYLE | SXF_TRANSFERSPRITEFRAME |
+                    SXF_TRANSFERROLL);
+   }
+   destroy();
 }
 
 int lith_getRaiseSpeed(Lith_RaiseSpeed speed) {
@@ -164,19 +183,10 @@ action(Weapon) void lith_a_overlayTick() {
    }
    a *= Lith_UTIL.pData(_pdt_alpha) / FIX;
 
-   for(int psp = _psp_weapon;; ++psp) {
-      if(psp == _psp_wep_max) {
-         psp = _psp_flash;
-      } else if(psp == _psp_flash_max) {
-         break;
-      }
-
+   for(int psp = _psp_weapon; psp < _psp_wep_max; ++psp) {
       a_overlayFlags(psp, pspf_alpha|pspf_renderstyle, true);
-      if(style != style_normal) {
-         a_overlayRenderStyle(psp, style);
-      }
+      a_overlayRenderStyle(psp, style);
       a_overlayAlpha(psp, a);
-
       if(Lith_Player(self).m_wasDamaged) {
          a_overlayTranslation(psp, "Lith_FuckUp" .. random(1, 4));
       } else {
@@ -502,16 +512,15 @@ action(Weapon) clearScope int lith_maxInv(class<Inventory> itemType) {
 }
 
 action(Weapon) void lith_sprint() {
-   invoker.m_speedUp = true;
+   Lith_Player(invoker.owner).m_sprinting = true;
 }
 
 action(Weapon) state lith_jumpIfSprint() {
    if(vel.xy.length() < 8) {
       player.getPSprite(_psp_weapon).frame = 99;
    }
-
    if(getPlayerInput(INPUT_BUTTONS) & BT_SPEED == 0) {
-      invoker.m_speedUp = false;
+      Lith_Player(invoker.owner).m_sprinting = false;
       return resolveState("_SprintDone");
    } else {
       return null;
@@ -521,20 +530,6 @@ action(Weapon) state lith_jumpIfSprint() {
 states(Actor) {
 Spawn:
    TNT1 A 0;
-   TNT1 A 0 {
-      /* UDMF maps have a surprising amount of control over things, so we
-       * have to use a load of flags to make this work properly.
-       */
-      if(m_spawnType) {
-         A_SpawnItemEx(m_spawnType, flags:
-                       SXF_TRANSFERTRANSLATION | SXF_TRANSFERAMBUSHFLAG  |
-                       SXF_TRANSFERPITCH       | SXF_TRANSFERPOINTERS    |
-                       SXF_TRANSFERSCALE       | SXF_TRANSFERSPECIAL     |
-                       SXF_TRANSFERSTENCILCOL  | SXF_TRANSFERALPHA       |
-                       SXF_TRANSFERRENDERSTYLE | SXF_TRANSFERSPRITEFRAME |
-                       SXF_TRANSFERROLL);
-      }
-   }
    stop;
 }
 

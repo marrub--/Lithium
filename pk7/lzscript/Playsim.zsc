@@ -33,10 +33,19 @@ Lith_LightningThinker m_lightning;
 Lith_RainThinker m_rain;
 Lith_WindThinker m_wind;
 
-override void worldLoaded(WorldEvent ev) {
+override void onRegister() {
    m_extraHard = lith_sv_extrahard;
+}
+
+override void worldLoaded(WorldEvent ev) {
+   if(ev.isReOpen) {
+      return;
+   }
    m_bossLevel = boss_none;
    m_bossBabies.clear();
+   if(!lith_sv_postgame) {
+      CVar.findCVar('__lith_fun').setInt(__lith_fun & ~lfun_postgame);
+   }
    if(level.nextMap.left(6) == "enDSeQ") {
       if(level.info.flags & LEVEL_BRUISERSPECIAL || level.info.flags3 & LEVEL3_E1M8SPECIAL) {
          m_bossLevel = boss_barons;
@@ -51,11 +60,9 @@ override void worldLoaded(WorldEvent ev) {
          }
       }
    }
-   if(!ev.isReOpen) {
-      acs_executeWithResult(lsc_worldopen);
-      setUpEnvironment();
-      Lith_RenderProvider.instance().replaceSky();
-   }
+   acs_executeWithResult(lsc_worldopen);
+   setUpEnvironment();
+   Lith_URANUS.instance().replaceSky();
 }
 
 void setUpEnvironment() {
@@ -254,7 +261,7 @@ override void worldThingDamaged(WorldEvent ev) {
       return;
    }
    let pos = dst.pos + (0, 0, dst.height / 2);
-   Lith_RenderProvider.instance().addDamageNum(pos, dst.radius/2, ev.damage, ev.thing);
+   Lith_URANUS.instance().addDamageNum(pos, dst.radius/2, ev.damage, ev.thing);
    if(ev.damageType == 'Bullet' && ev.damage >= 8 && !dst.bNoBlood) {
       double vol = clamp(ev.damage / 10.0, 0, 1);
       let mo = Actor.spawn("Lith_Dummy", pos);

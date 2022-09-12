@@ -45,7 +45,7 @@ static void stmt_cond(struct compiler *d) {
       tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_string, 0);
       unwrap(&d->res);
 
-      u32 s = Dlg_PushStr(d, tok->textV, tok->textC); unwrap(&d->res);
+      mem_size_t s = Dlg_PushStr(d, tok->textV, tok->textC); unwrap(&d->res);
       Dlg_PushLdAdr(d, VAR_ADRL, s); unwrap(&d->res);
       Dlg_PushLdVA(d, ACT_LD_ITEM); unwrap(&d->res);
       break;
@@ -92,15 +92,15 @@ static void stmt_cond(struct compiler *d) {
 
    Dlg_PushB1(d, 0); unwrap(&d->res); /* placeholder */
    Dlg_PushB1(d, 0); unwrap(&d->res); /* placeholder */
-   u32 ptr = d->def.codeP;
+   mem_size_t ptr = d->def.codeP;
    Dlg_PushB1(d, 0); unwrap(&d->res); /* placeholder */
    Dlg_PushB1(d, 0); unwrap(&d->res); /* placeholder */
    Dlg_PushB1(d, 0); unwrap(&d->res); /* placeholder */
 
    Dlg_GetStmt(d); unwrap(&d->res);
 
-   bool use_else = false;
-   u32  else_ptr;
+   bool       use_else = false;
+   mem_size_t else_ptr;
 
    tok = tb_get(&d->tb);
    if(TokIsKw(tok, "else") || TokIsKw(tok, "ante")) {
@@ -112,7 +112,7 @@ static void stmt_cond(struct compiler *d) {
       tb_unget(&d->tb);
    }
 
-   u32 rel = d->def.codeP - ptr;
+   mem_size_t rel = d->def.codeP - ptr;
    if(rel > 0x7F) {
       /* if A !~ B then jump +3 (continue) */
       Dlg_SetB1(d, ptr - 2, bne ? DCD_BEQ_RI : DCD_BNE_RI); unwrap(&d->res);
@@ -143,7 +143,7 @@ static void stmt_option(struct compiler *d) {
    struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, tok_string, 0);
    unwrap(&d->res);
 
-   u32 s = Dlg_PushStr(d, txtbuf, prefixed_text(d, tok->textV));
+   mem_size_t s = Dlg_PushStr(d, txtbuf, prefixed_text(d, tok->textV));
    unwrap(&d->res);
    Dlg_PushLdAdr(d, VAR_ADRL, s); unwrap(&d->res);
    adr = Dlg_PushLdAdr(d, VAR_RADRL, 0); unwrap(&d->res); /* placeholder */
@@ -153,8 +153,8 @@ static void stmt_option(struct compiler *d) {
    Dlg_PushB1(d, DCD_JMP_AI); unwrap(&d->res);
    Dlg_PushB2(d, 0); unwrap(&d->res); /* placeholder */
 
-   u32 ptr = d->def.codeP;
-   u32 rel = PRG_BEG + ptr;
+   mem_size_t ptr = d->def.codeP;
+   mem_size_t rel = PRG_BEG + ptr;
 
    Dlg_SetB1(d, adr.l, byte(rel));      unwrap(&d->res);
    Dlg_SetB1(d, adr.h, byte(rel >> 8)); unwrap(&d->res);
@@ -181,16 +181,12 @@ static void stmt_page(struct compiler *d) {
    unwrap(&d->res);
 }
 
-optargs(1) static void stmt_str(struct compiler *d, u32 adr, bool prefix) {
+optargs(1) static void stmt_str(struct compiler *d, mem_size_t adr, bool prefix) {
    struct token *tok =
       tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, tok_string, tok_number, 0);
    unwrap(&d->res);
 
-   u32 s = Dlg_PushStr(
-      d,
-      !prefix ? tok->textV : txtbuf,
-      !prefix ? tok->textC : prefixed_text(d, tok->textV)
-   );
+   mem_size_t s = Dlg_PushStr(d, !prefix ? tok->textV : txtbuf, !prefix ? tok->textC : prefixed_text(d, tok->textV));
    unwrap(&d->res);
    Dlg_PushLdAdr(d, adr, s); unwrap(&d->res);
 
@@ -198,12 +194,12 @@ optargs(1) static void stmt_str(struct compiler *d, u32 adr, bool prefix) {
    unwrap(&d->res);
 }
 
-static void stmt_terminal(struct compiler *d, u32 act) {
+static void stmt_terminal(struct compiler *d, i32 act) {
    struct token *tok;
    if(act != TACT_INFO) {
       tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, tok_string, tok_number, 0);
       unwrap(&d->res);
-      u32 s = Dlg_PushStr(d, tok->textV, tok->textC);
+      mem_size_t s = Dlg_PushStr(d, tok->textV, tok->textC);
       unwrap(&d->res);
       Dlg_PushLdAdr(d, VAR_PICTL, s); unwrap(&d->res);
    }
@@ -217,12 +213,12 @@ static void stmt_terminal(struct compiler *d, u32 act) {
    Dlg_PushLdVA(d, ACT_TRM_WAIT); unwrap(&d->res);
 }
 
-static void stmt_finale(struct compiler *d, u32 act) {
+static void stmt_finale(struct compiler *d, i32 act) {
    struct token *tok;
    if(act == FACT_CRAWL) {
       tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, tok_string, 0);
       unwrap(&d->res);
-      u32 s = Dlg_PushStr(d, tok->textV, tok->textC);
+      mem_size_t s = Dlg_PushStr(d, tok->textV, tok->textC);
       unwrap(&d->res);
       Dlg_PushLdAdr(d, VAR_TEXTL, s); unwrap(&d->res);
    }
@@ -238,7 +234,7 @@ static void stmt_finale(struct compiler *d, u32 act) {
    Dlg_PushLdVA(d, ACT_FIN_WAIT); unwrap(&d->res);
 }
 
-static void stmt_num(struct compiler *d, u32 act) {
+static void stmt_num(struct compiler *d, i32 act) {
    struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_number, 0);
    unwrap(&d->res);
 
@@ -253,15 +249,15 @@ static void stmt_script(struct compiler *d) {
    struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_string, tok_number, 0);
    unwrap(&d->res);
 
-   u32 act;
+   i32 act;
 
    if(tok->type == tok_string) {
       act = ACT_SCRIPT_S;
-      u32 s = Dlg_PushStr(d, tok->textV, tok->textC);
+      mem_size_t s = Dlg_PushStr(d, tok->textV, tok->textC);
       unwrap(&d->res);
       Dlg_PushLdAdr(d, VAR_ADRL, s); unwrap(&d->res);
    } else {
-      u32 prm = faststrtoi32(tok->textV);
+      i32 prm = faststrtoi32(tok->textV);
 
       act = ACT_SCRIPT_I;
 
@@ -272,11 +268,11 @@ static void stmt_script(struct compiler *d) {
       Dlg_PushB2(d, VAR_SCP0); unwrap(&d->res);
    }
 
-   for(u32 i = 0; i < 4 && tb_drop(&d->tb, tok_comma); i++) {
+   for(i32 i = 0; i < 4 && tb_drop(&d->tb, tok_comma); i++) {
       tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_number, 0);
       unwrap(&d->res);
 
-      u32 prm = faststrtoi32(tok->textV);
+      i32 prm = faststrtoi32(tok->textV);
 
       Dlg_PushB1(d, DCD_LDA_VI); unwrap(&d->res);
       Dlg_PushB1(d, prm); unwrap(&d->res);
@@ -306,7 +302,7 @@ script void Dlg_GetStmt(struct compiler *d) {
       unwrap(&d->res);
       break;
    case tok_identi: {
-      Dbg_Log(log_dlg, _l(_f), _l(": "), _p((cstr)tok->textV));
+      Dbg_Log(log_gsinfo, _l(_f), _l(": "), _p((cstr)tok->textV));
 
       switch(Dlg_StmtName(tok->textV)) {
       /* conditionals */

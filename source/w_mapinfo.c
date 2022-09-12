@@ -18,9 +18,12 @@
 
 noinit static struct map_info mi_all[128];
 noinit static i32 mi_num;
+
 static void ReadKeys(struct tokbuf *tb, struct err *res) {
    noinit static char k[16], v[64];
    struct map_info *mi = &mi_all[mi_num];
+   mi_setup(mi);
+   mi->use = 0;
    while(tb_kv(tb, res, k, v)) {
       unwrap(res);
       i32 key = MapInfoKeyName(k);
@@ -28,22 +31,23 @@ static void ReadKeys(struct tokbuf *tb, struct err *res) {
       switch(key) {
       case _mi_key_name:
       case _mi_key_hash:
-         mi->keys[key] = (i32)fast_strdup(v);
+      case _mi_key_script:
+         mi->keys[key].s = fast_strdup(v);
          break;
       case _mi_key_humidity:
       case _mi_key_seed:
       case _mi_key_temperature:
       case _mi_key_windspeed:
-         mi->keys[key] = faststrtoi32(v);
+         mi->keys[key].i = faststrtoi32(v);
          break;
       case _mi_key_environment:
-         mi->keys[key] = MapInfoEnvName(v);
+         mi->keys[key].i = MapInfoEnvName(v);
          break;
       case _mi_key_sky:
-         mi->keys[key] = MapInfoSkyName(v);
+         mi->keys[key].i = MapInfoSkyName(v);
          break;
       case _mi_key_flags:
-         mi->keys[key] = tb_rflag(tb, res, v, MapInfoFlagName);
+         mi->keys[key].i = tb_rflag(tb, res, v, MapInfoFlagName);
          unwrap(res);
          break;
       default:
@@ -54,9 +58,12 @@ static void ReadKeys(struct tokbuf *tb, struct err *res) {
    if(!get_bit(mi->use, _mi_key_name) && !get_bit(mi->use, _mi_key_hash)) {
       tb_err(tb, res, "requires name or hash field", nil, _f);
       unwrap_retn();
+   } else {
+      Dbg_Log(log_gsinfo, _l("added map '"), _p(get_bit(mi->use, _mi_key_name) ? mi->keys[_mi_key_name].s : mi->keys[_mi_key_hash].s), _c('\''));
+      mi_num++;
    }
-   mi_num++;
 }
+
 script struct map_info *GetMapInfo(void) {
    noinit static bool mi_init;
    if(!mi_init) {
@@ -80,13 +87,10 @@ script struct map_info *GetMapInfo(void) {
    str hash = EDataS(_edt_maphash);
    for(i32 i = 0; i < mi_num; ++i) {
       struct map_info *mi = &mi_all[i];
+      mi_setup(mi);
       bool ok = true;
-      if(get_bit(mi->use, _mi_key_hash)) {
-         ok = ok && hash == (str)mi->keys[_mi_key_hash];
-      }
-      if(get_bit(mi->use, _mi_key_name)) {
-         ok = ok && ml.lump == (str)mi->keys[_mi_key_name];
-      }
+      ok = mi_opt(mi, _mi_key_hash, ok && hash    == _v.s, ok);
+      ok = mi_opt(mi, _mi_key_name, ok && ml.lump == _v.s, ok);
       if(ok) {
          return mi;
       }

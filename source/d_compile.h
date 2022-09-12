@@ -46,21 +46,18 @@ struct compiler {
    i32              name;
 };
 
-u32 Dlg_WriteCode(struct dlg_def const *def, u32 c, u32 i);
-
+mem_size_t Dlg_WriteCode(struct dlg_def const *def, mem_size_t c, mem_size_t i);
 void Dlg_GetStmt_Asm(struct compiler *d);
 script void Dlg_GetStmt(struct compiler *d);
-
-void Dlg_PushB1(struct compiler *d, u32 b);
-void Dlg_PushB2(struct compiler *d, u32 word);
-void Dlg_PushLdVA(struct compiler *d, u32 action);
-struct ptr2 Dlg_PushLdAdr(struct compiler *d, u32 at, u32 set);
-void Dlg_SetB1(struct compiler *d, u32 ptr, u32 b);
-void Dlg_SetB2(struct compiler *d, u32 ptr, u32 word);
-u32 Dlg_PushStr(struct compiler *d, cstr s, u32 l);
-
-void Dlg_GetNamePool(struct compiler *d, i32 which);
-i32 Dlg_CheckNamePool(struct compiler *d, i32 which, cstr check);
-void Dlg_ClearNamePool(struct compiler *d, i32 which);
+void Dlg_PushB1(struct compiler *d, i32 b);
+void Dlg_PushB2(struct compiler *d, i32 word);
+void Dlg_PushLdVA(struct compiler *d, i32 action);
+struct ptr2 Dlg_PushLdAdr(struct compiler *d, mem_size_t at, i32 set);
+void Dlg_SetB1(struct compiler *d, mem_size_t ptr, i32 b);
+void Dlg_SetB2(struct compiler *d, mem_size_t ptr, i32 word);
+mem_size_t Dlg_PushStr(struct compiler *d, cstr s, mem_size_t l);
+void Dlg_GetNamePool(struct compiler *d, mem_size_t which);
+i32 Dlg_CheckNamePool(struct compiler *d, mem_size_t which, cstr check);
+void Dlg_ClearNamePool(struct compiler *d, mem_size_t which);
 
 #endif

@@ -12,6 +12,7 @@ Actor   m_player;
 vector3 m_windVec;
 double  m_angle, m_speed, m_speedUnits, m_angleDest, m_speedDest, m_maxSpeed, m_speedSpeed, m_angleSpeed, m_windPitch;
 int     m_timerRnd;
+
 static Lith_WindThinker create() {
    let th = new('Lith_WindThinker');
    th.m_maxSpeed  = Lith_UTIL.pData(_pdt_windspeed);
@@ -23,6 +24,7 @@ static Lith_WindThinker create() {
    }
    return th;
 }
+
 override void tick() {
    if(level.isFrozen()) {
       return;
@@ -30,7 +32,7 @@ override void tick() {
    m_speed      = Lith_UTIL.lerp(m_speed, m_speedDest, m_speedSpeed);
    m_angle      = Lith_UTIL.lerp(m_angle, m_angleDest, m_angleSpeed);
    m_speedUnits = (m_speed * 32.0) / 35.0;
-   m_windVec    = (cos(m_angle) * m_speedUnits, sin(m_angle) * m_speedUnits, -m_speedUnits);
+   m_windVec    = (cos(m_angle) * m_speedUnits, sin(m_angle) * m_speedUnits, -32.0 - m_speed);
    let wx  = m_windVec.x;
    let wy  = m_windVec.y;
    let wz  = m_windVec.z;

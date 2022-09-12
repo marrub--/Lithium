@@ -69,7 +69,7 @@ void ApplyLevels(dmon_t *m, i32 prev) {
       m->damagemul += newd;
       SetDamageMultiplier(0, m->damagemul);
 
-      Dbg_Log(log_dmonV,
+      Dbg_Log(log_dmon,
               _l("monster "), _p(m->id), _l(": newh "), _p(newh),
               _l(" newd "), _p(newd));
    }
@@ -222,7 +222,7 @@ void SpawnManaPickup(dmon_t *m) {
 
 static
 void OnFinalize(dmon_t *m) {
-   if(!P_None() && PtrPlayerNumber(0, AAPTR_TARGET) >= 0) {
+   if(PtrPlayerNumber(0, AAPTR_TARGET) >= 0) {
       if(pl.sgacquired) {
          bool high_level_imp =
             m->mi->type == mtype_imp && m->level >= 70 && m->rank >= 4;
@@ -390,7 +390,7 @@ void MonInfo_Preset(struct tokbuf *tb, struct err *res) {
    }
    unwrap(res);
 
-   Dbg_Log(log_dmonV,
+   Dbg_Log(log_gsinfo,
            _l("preset "), _p((cstr)pre->prename), _l(" added: exp = "),
            _p(pre->exp), _l(", score = "), _p(pre->score));
 }
@@ -401,7 +401,7 @@ struct monster_info *MonInfo_BeginDef(void) {
 
 void MonInfo_FinishDef(struct monster_info *mi) {
    ++monsterinfonum;
-   Dbg_Log(log_dmonV,
+   Dbg_Log(log_gsinfo,
            _l("monster "), _p((cstr)mi->name), _l(" added: type = "),
            _p(mi->type), _l(", flags = "), _p(mi->flags));
 }
@@ -598,7 +598,7 @@ void MonInfo_Compile(struct tokbuf *tb, struct err *res) {
 
 script
 void Mon_Init(void) {
-   Dbg_Log(log_dev, _l(__func__));
+   Dbg_Log(log_dev, _l(_f));
 
    monsterpresetnum = 0;
    monsterinfonum   = 0;

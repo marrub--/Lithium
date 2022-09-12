@@ -51,10 +51,10 @@ void silly_pickup(i32 weapon) {
       cstr fmt = tmpstr(lang_fmt(LANG "PK_GET_%.3i", ifmt));
       str  unc =     ns(lang_fmt(LANG "PK_UNCERTAIN_%.3i", iunc));
 
-      if(flag & 1 && flag & 4) pl.logB(1, fmt, nam, nam, unc);
-      else if(flag & 1            ) pl.logB(1, fmt, nam, nam);
-      else if(            flag & 4) pl.logB(1, fmt, nam, unc);
-      else                          pl.logB(1, fmt, nam);
+      /**/ if(flag & 1 && flag & 4) P_LogB(1, fmt, nam, nam, unc);
+      else if(flag & 1            ) P_LogB(1, fmt, nam, nam);
+      else if(            flag & 4) P_LogB(1, fmt, nam, unc);
+      else                          P_LogB(1, fmt, nam);
    }
 }
 
@@ -72,10 +72,10 @@ void P_Log_Weapon(struct weaponinfo const *info) {
          P_ItemPopup(nam, GetX(0), GetY(0), GetZ(0));
       }
       if(itemdisp & _itm_disp_log) {
-         pl.logB(1, tmpstr(lang(sl_pk_get_000)), nam);
+         P_LogB(1, tmpstr(lang(sl_pk_get_000)), nam);
       }
    } else {
-      pl.logB(1, "Acquired impossible object");
+      P_LogB(1, "Acquired impossible object");
    }
 }
 
@@ -91,7 +91,7 @@ void P_Log_SellWeapon(struct weaponinfo const *info, score_t score) {
    nam = ns(nam);
 
    /* FIXME */
-   pl.logB(1, "Sold the %S for %" FMT_SCR "\Cnscr\C-.", nam, score);
+   P_LogB(1, "Sold the %S for %" FMT_SCR "\Cnscr\C-.", nam, score);
 }
 
 /* EOF */

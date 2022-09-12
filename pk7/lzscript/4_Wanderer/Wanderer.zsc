@@ -8,7 +8,7 @@
 
 class Lith_StatShadowWalker : Lith_StatFx {
    override void initCb() {basic("SWR", 105);}
-   override void doneCb() {addStatFx("Lith_StatShadowWalked");}
+   override void doneCb() {addToPool("Lith_StatShadowWalked");}
    override void tickCb() {
       let a = plyr.angle - atan2(plyr.player.cmd.sidemove,
                                  plyr.player.cmd.forwardmove);
@@ -49,7 +49,7 @@ class Lith_WandererPlayer : Lith_Player {
             player && player.buttons & BT_SPEED)
          {
             A_StartSound("player/luke/shadowwalk", lch_voice);
-            Lith_StatFx.addToPool(self, "Lith_StatShadowWalker");
+            Lith_StatFx.addToPool("Lith_StatShadowWalker");
             callACS("Lith_DodgeViewShadowWalk");
          }
       }

@@ -20,6 +20,12 @@ enum ZscName(Container) {
    _cont_body,
 };
 
+enum ZscName(InventoryItemType) {
+   _itemt_item,
+   _itemt_bagitem,
+   _itemt_useitem,
+};
+
 #if !ZscOn
 #define for_item(cont) for_list(struct item *it, (cont)->head)
 
@@ -48,13 +54,12 @@ script funcdef void (*item_show_t   )(struct item *item, struct gui_state *g, i3
 script funcdef void (*item_destroy_t)(struct item *item);
 script funcdef void (*item_place_t  )(struct item *item, struct container *cont);
 
-struct itemdata {
+struct item_info {
    str     name, spr;
    i32     w, h;
    i32     equip;
    score_t scr;
    i32     flags;
-
    item_use_t     Use;
    item_tick_t    Tick;
    item_show_t    Show;
@@ -63,7 +68,7 @@ struct itemdata {
 };
 
 struct item {
-   anonymous struct itemdata data;
+   anonymous struct item_info info;
 
    i32 x, y;
 
@@ -84,14 +89,14 @@ struct bagitem {
    struct container content;
 };
 
-optargs(1) struct item *P_Item_New(struct itemdata const *data);
+optargs(1) struct item *P_Item_New(struct item_info const *info);
 void P_Item_Unlink(struct item *item);
 
 script void P_Item_Destroy(struct item *item);
 script bool P_Item_Use(struct item *item);
 script void P_Item_Place(struct item *item, struct container *cont);
 
-optargs(1) struct bagitem *P_BagItem_New(i32 w, i32 h, i32 type, struct itemdata const *data);
+optargs(1) struct bagitem *P_BagItem_New(i32 w, i32 h, i32 type, struct item_info const *info);
 
 void P_Inv_PInit(void);
 

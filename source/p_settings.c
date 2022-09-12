@@ -227,8 +227,7 @@ struct setting const st_gui[] = {
    {_s_enume, "gui_cursor",    S_cvInteg, S_bndi(0, gui_curs_max), "cursor"},
    {_s_enume, "gui_defcr",     S_cvInteg, S_color},
    {_s_enume, "gui_theme",     S_cvInteg, S_bndi(0, cbi_theme_max), "theme"},
-   {_s_fixed, "gui_xmul",      S_cvFixed, S_bndk(0.1, 2.0), "mult"},
-   {_s_fixed, "gui_ymul",      S_cvFixed, S_bndk(0.1, 2.0), "mult"},
+   {_s_fixed, "gui_curspeed",  S_cvFixed, S_bndk(0.1, 2.0), "mult"},
    {_s_integ, "gui_buyfiller", S_cvInteg, S_bndi(0, 70), "tick"},
    {_s_empty},
    {_s_label, "st_labl_gui_results"},
@@ -317,11 +316,9 @@ struct setting const st_itm[] = {
 
 struct setting const st_ply[] = {
    {_s_label, "st_labl_ply_balance"},
-   {_s_integ, "sv_difficulty", S_cvInteg, S_bndi(1,   100),  "perc"},
-   {_s_integ, "sv_minhealth",  S_cvInteg, S_bndi(0,   200),  "perc"},
-   {_s_integ, "sv_autosave",   S_cvInteg, S_bndi(0,   30),   "minu"},
-   {_s_enume, "player_lvsys",  S_cvInteg, S_bndi(0, atsys_max), "lvsys"},
-   {_s_boole, "sv_extrahard",  S_cvBoole},
+   {_s_integ, "sv_minhealth", S_cvInteg, S_bndi(0, 200), "perc"},
+   {_s_integ, "sv_autosave",  S_cvInteg, S_bndi(0, 30), "minu"},
+   {_s_enume, "player_lvsys", S_cvInteg, S_bndi(0, atsys_max), "lvsys"},
    {_s_empty},
    {_s_label, "st_labl_ply_damage"},
    {_s_boole, "sv_revenge",          S_cvBoole},
@@ -334,11 +331,6 @@ struct setting const st_ply[] = {
    {_s_boole, "st_done_intro",      .cb_g = {.b = SG_doneIntro}},
    {_s_empty},
    {_s_strng, "player_pronouns", S_cvStrng},
-   #ifndef NDEBUG
-   {_s_empty},
-   {_s_label, "st_labl_ply_postgame"},
-   {_s_boole, "sv_postgame", S_cvBoole, .fill = true},
-   #endif
 };
 
 struct setting const st_wep[] = {
@@ -366,6 +358,8 @@ struct setting const st_wep[] = {
 
 struct setting const st_wld[] = {
    {_s_label, "st_labl_wld_balance"},
+   {_s_integ, "sv_difficulty", S_cvInteg, S_bndi(1, 100), "perc"},
+   {_s_boole, "sv_extrahard",  S_cvBoole},
    {_s_boole, "sv_nobosses", S_cvBoole, .fill = true},
    {_s_empty},
    {_s_label, "st_labl_wld_fx"},
@@ -373,9 +367,15 @@ struct setting const st_wld[] = {
    {_s_empty},
    {_s_label, "st_labl_wld_env"},
    {_s_enume, "sv_rain",           S_cvInteg, S_bndi(0, 3), "rain"},
+   {_s_enume, "sv_rainphysics",    S_cvInteg, S_bndi(0, 3), "rainphys"},
    {_s_boole, "player_rainshader", S_cvBoole},
    {_s_enume, "sv_sky",            S_cvInteg, S_bndi(0, 4), "sky"},
    {_s_fixed, "sv_skydarkening",   S_cvFixed, S_bndk(0.0, 1.0),  "mult"},
+   #ifndef NDEBUG
+   {_s_empty},
+   {_s_label, "st_labl_ply_postgame"},
+   {_s_boole, "sv_postgame", S_cvBoole, .fill = true},
+   #endif
 };
 
 struct {

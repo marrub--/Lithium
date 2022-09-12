@@ -16,9 +16,12 @@ static clearScope int checkLump(string name) {
    return Wads.checkNumForFullName(name);
 }
 
-static clearScope string readLump(int lump) {
+static clearScope string readLump(int lump, bool text) {
    let s = Wads.readLump(lump);
-   s.replace("\\c", "\c");
+   if(text) {
+      s.replace("\r\n", "\n");
+      s.replace("\\c", "\c");
+   }
    return s;
 }
 

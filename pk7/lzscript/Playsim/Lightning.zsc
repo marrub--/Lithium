@@ -42,7 +42,7 @@ void setFlash() {
    m_len   = random( 8, 40);
    m_speed = random(-2, -8);
    m_next += m_time;
-   Lith_RenderProvider.instance().setSkyFlash(m_next, m_len);
+   Lith_URANUS.instance().setSkyFlash(m_next, m_len);
 }
 
 override void tick() {

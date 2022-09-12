@@ -84,7 +84,6 @@ enum ZscName(PClass) {
 #include "p_cbi.h"
 #include "p_upgrades.h"
 #include "p_bip.h"
-#include "p_log.h"
 #include "m_list.h"
 #include "p_weapons.h"
 #include "p_shopdef.h"
@@ -92,11 +91,7 @@ enum ZscName(PClass) {
 #include "items.h"
 #include "d_vm.h"
 
-#include <GDCC/HashMap.h>
-
-#define P_None() (!pl.active)
 #define P_Wep_CurType() (pl.weapon.cur->info->type)
-
 script void P_Player(void);
 script void P_Init(void);
 script void P_Data_Load(void);
@@ -116,6 +111,11 @@ void P_Dat_PTickPst(void);
 script void P_Scr_Payout(void);
 void P_Log_SellWeapon(struct weaponinfo const *info, score_t score);
 void P_Log_Weapon(struct weaponinfo const *info);
+void P_LogB(i32 levl, cstr fmt, ...); /* log to HUD and full log */
+void P_LogH(i32 levl, cstr fmt, ...); /* log to HUD only */
+void P_LogF(          cstr fmt, ...); /* log to full log only */
+void P_Log_Entry(void);
+script void P_Log(i32 cr, i32 x, i32 yy);
 
 script void P_Wep_PTickPre(void);
        void P_Dat_PTickPre(void);
@@ -239,14 +239,8 @@ struct player {
    __prop classname    {default:    GetNameTag(->tid)}
    __prop overdrive    {default:    GetMembI(->tid, sm_Overdrive)}
 
-   /* log */
-   __prop logB {operator(): P_Log_Both()}
-   __prop logF {operator(): P_Log_Full()}
-   __prop logH {operator(): P_Log_HUDs()}
-
    /* Initialization */
    bool wasinit;
-   bool active;
    bool dead;
    bool reinit;
 
@@ -315,7 +309,6 @@ struct player {
    k32 jumpheight;
    k32 viewheight;
    k32 attackheight;
-   str stepnoise;
 
    /* pitch/yaw in precalculated sane radian format */
    k64 pitchf;

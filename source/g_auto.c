@@ -59,35 +59,28 @@ void G_Auto(struct gui_state *g, gid_t id, i32 x, i32 y, i32 w, i32 h,
 
    #ifndef NDEBUG
    if(dbgflags(dbgf_gui)) {
-      PrintLine(x, y, x + w, y + h, 0xFF0000);
-      PrintLine(x, y, x + w, y, 0xFF0000);
-      PrintLine(x, y, x, y + h, 0xFF0000);
-      PrintLine(x, y + h, x + w, y + h, 0xFF0000);
-      PrintLine(x + w, y, x + w, y + h, 0xFF0000);
+      PrintLine(x, y, x + w, y + h, 0xFFFF0000);
+      PrintLine(x, y, x + w, y, 0xFFFF0000);
+      PrintLine(x, y, x, y + h, 0xFFFF0000);
+      PrintLine(x, y + h, x + w, y + h, 0xFFFF0000);
+      PrintLine(x + w, y, x + w, y + h, 0xFFFF0000);
    }
    #endif
 }
 
 void G_UpdateState(struct gui_state *g) {
-   g->old = g->cur;
-
    bool inverted = CVarGetI(sc_invertmouse);
-   k32  xmul     = CVarGetK(sc_gui_xmul);
-   k32  ymul     = CVarGetK(sc_gui_ymul);
-
-                g->cx -= pl.yawv   * (800.0lk * xmul);
-   if(inverted) g->cy += pl.pitchv * (800.0lk * ymul);
-   else         g->cy -= pl.pitchv * (800.0lk * ymul);
-
+   k32  curspeed = CVarGetK(sc_gui_curspeed) * 800.0k;
+   g->old = g->cur;
+                g->cx -= pl.yawv   * curspeed * (g->w / (k32)g->h);
+   if(inverted) g->cy += pl.pitchv * curspeed;
+   else         g->cy -= pl.pitchv * curspeed;
    g->cx = clamplk(g->cx, 0, g->w);
    g->cy = clamplk(g->cy, 0, g->h);
-
    g->clicklft = pl.buttons & BT_ATTACK;
    g->clickrgt = pl.buttons & BT_ALTATTACK;
    g->clickany = g->clicklft || g->clickrgt;
-
    g->defcr = Draw_GetCr(CVarGetI(sc_gui_defcr));
-
    if(!g->clickany) {
       g->slide = 0;
    } else if(g->slidecount) {
@@ -108,16 +101,21 @@ void G_Begin(struct gui_state *g, i32 w, i32 h) {
 
 void G_End(struct gui_state *g, i32 curs) {
    if(g->tooltip) {
-      SetClipW(0, 0, g->w, g->h, g->w);
-      i32 x = g->cx + 7;
-      i32 y = g->cy + 2;
-      struct i32v2 const *s = TextSize(g->tooltip, sf_smallfnt, x);
-      if(y + s->y + 2 > g->h) {
-         y = g->h - s->y - 2;
+      noinit static struct i32v2 p, s;
+      i32 ww;
+      p.x = g->cx + 7;
+      p.y = g->cy + 2;
+      ww = g->w - p.x;
+      TextSize(&s, g->tooltip, sf_smallfnt, ww);
+      if(s.x < 100) {
+         ww = g->cx - 2;
+         TextSize(&s, g->tooltip, sf_smallfnt, ww);
+         p.x = ww - s.x;
       }
-      PrintRect(x-1, y-1, s->x+2, s->y+2, 0xFFBA8CC6);
-      PrintRect(x, y, s->x, s->y, 0xFF1A141D);
-      PrintText_str(g->tooltip, sf_smallfnt, CR_WHITE, x,1, y,1);
+      PrintRect(p.x-1, p.y-1, s.x+2, s.y+2, 0xFFBA8CC6);
+      PrintRect(p.x,   p.y,   s.x,   s.y,   0xFF1A141D);
+      SetClipW(p.x, p.y, s.x, s.y, ww);
+      PrintText_str(g->tooltip, sf_smallfnt, CR_WHITE, p.x,1, p.y,1);
       ClearClip();
    }
 
@@ -171,13 +169,13 @@ void G_Clip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, i32 ww) {
    #ifndef NDEBUG
    if(dbgflags(dbgf_gui)) {
       x = clip->x, y = clip->y, w = clip->w, h = clip->h;
-      PrintLine(x,     y,     x + w, y + h, 0x00FFFF);
-      PrintLine(x,     y,     x + w, y,     0x00FFFF);
-      PrintLine(x,     y + h, x + w, y + h, 0x00FFFF);
-      PrintLine(x + w, y,     x + w, y + h, 0x00FFFF);
-      PrintLine(x,     y,     x,     y + h, 0x00FFFF);
+      PrintLine(x,     y,     x + w, y + h, 0xFF00FFFF);
+      PrintLine(x,     y,     x + w, y,     0xFF00FFFF);
+      PrintLine(x,     y + h, x + w, y + h, 0xFF00FFFF);
+      PrintLine(x + w, y,     x + w, y + h, 0xFF00FFFF);
+      PrintLine(x,     y,     x,     y + h, 0xFF00FFFF);
 
-      PrintLine(x, y + h / 2, x + clip->ww, y + h / 2, 0xFF00FF);
+      PrintLine(x, y + h / 2, x + clip->ww, y + h / 2, 0xFFFF00FF);
    }
    #endif
 }
@@ -196,7 +194,7 @@ bool G_Filler(i32 x, i32 y, struct gui_fil *fil, bool held) {
 
    if(held) {
       ++fil->cur;
-   } else if(fil->cur && ACS_Timer() % 4 == 0) {
+   } else if(fil->cur && ACS_Timer() & 3 == 0) {
       --fil->cur;
    }
 

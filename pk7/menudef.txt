@@ -19,7 +19,6 @@ defaultOptionMenu {
 listMenu "MainMenuTextOnly" {
    staticPatch 190, 10, "lgfx/Menu/Title.png"
    position    30, 90
-
    textItem "$MENU_NGAME", "n", "PlayerclassMenu"
    ifOption(swapMenu) {
       textItem "$MENU_LOADG",  "l", "LoadGameMenu"
@@ -32,42 +31,36 @@ listMenu "MainMenuTextOnly" {
    }
    textItem "$MENU_CREDIT", "c", "CreditsMenu"
    textItem "$MENU_QUITG",  "q", "QuitMenu"
-
    font "smallfont", "White", "White"
    lith_versionName 0, 0
 }
 
-listMenu "PlayerclassMenu" {
-   class              "Lith_PlayerclassMenu"
-   font               "ltrmfont"
-   position           14, 55
-   lith_playerDisplay 0, 0, "00 00 00", "00 FF 00"
+listMenu "PlayerClassMenu" {
+   class    "Lith_PlayerClassMenu"
+   font     "ltrmfont"
+   position 14, 55
+   lith_playerDisplay
 }
 
 listMenu "EpisodeMenu" {
    class "Lith_SkillEpMenu"
-   staticTextCentered  160, 30, "$MENU_WHICHEPISODE"
-   staticPatchCentered 42, 48, "lgfx/Menu/EpisodeBack.png"
-   position            48, 53
-   font                "lmidfont", "Lith_Green", "White"
-   lineSpacing         9
+   position    0, 48
+   font        "lmidfont", "Lith_Green", "White"
+   lineSpacing 9
 }
 
 listMenu "SkillMenu" {
    class "Lith_SkillEpMenu"
-   staticTextCentered  160, 30, "$MENU_CHOOSESKILL"
-   staticPatchCentered 42, 48, "lgfx/Menu/EpisodeBack.png"
-   position            48, 53
-   font                "bigupper", "Lith_Green", "White"
-   lineSpacing         30
+   position    0, 48
+   font        "bigupper", "Lith_Green", "White"
+   lineSpacing 16
 }
 
 listMenu "CreditsMenu" {
    class    "Lith_CreditsMenu"
    size     640, 480
-   position 48,  64
+   position 48,  48
    font     "ltrmfont", "Lith_Green", "White"
-
    lith_creditsMenuScroll "$LITH_LEFT",  "l", 0
    lith_creditsMenuScroll "$LITH_RIGHT", "r", 1
 }

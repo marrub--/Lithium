@@ -32,15 +32,15 @@
 
 #ifndef NDEBUG
 enum {
-   log_dev,   /* general debug info */
-   log_devh,  /* prints live stats to the HUD (position, angles, etc) */
-   log_boss,  /* debug info for the boss system */
-   log_dmon,  /* debug info for the monster tracker */
-   log_dmonV, /* verbose debug info for the monster tracker */
-   log_dlg,   /* debug info for the dialogue/terminal compiler */
-   log_bip,   /* debug info for the BIP */
-   log_dpl,   /* dynamic stack usage */
-   log_save,  /* save data */
+   log_dev,    /* general debug info */
+   log_devh,   /* prints live stats to the HUD (position, angles, etc) */
+   log_boss,   /* debug info for the boss system */
+   log_dmon,   /* debug info for the monster tracker */
+   log_gsinfo, /* static info compilers' informational output */
+   log_dlg,    /* debug info for the dialogue/terminal VM */
+   log_bip,    /* debug info for the BIP */
+   log_dpl,    /* dynamic stack usage */
+   log_save,   /* save data */
 };
 
 enum {

@@ -174,7 +174,7 @@ enum {
 
 stkcall void DrawInit(void);
 stkcall i32 Draw_GetCr(i32 n);
-stkcall struct i32v2 const *TextSize(str s, str font, i32 pos);
+stkcall void TextSize(struct i32v2 *draw_text_size, str s, str font, i32 wrap);
 stkcall struct i32v2 const *TextureSize(str tx);
 #endif
 
@@ -212,7 +212,8 @@ enum ZscName(Channel) {
    lch_weapon3,
    lch_doll,
 
-   lch_step,
+   lch_step1,
+   lch_step2,
    lch_weather1,
    lch_weather2,
 

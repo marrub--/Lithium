@@ -19,9 +19,6 @@ $playersound    lith_assassin * *grunt      Grunt      # ^
 
 player.omi {
    doll Doll # Made of the strands of the universe
-
-   $alias step = .player.step
-
    roll  Roll       # Dark Souls
    djump DoubleJump # ^
 }

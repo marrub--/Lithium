@@ -16,13 +16,10 @@
 
 noinit struct globalcolors globalcolors;
 
-alloc_aut(0) stkcall
-struct i32v2 const *TextSize(str s, str font, i32 pos) {
-   static struct i32v2 draw_text_size;
-   draw_text_size.x = DrawCallI(sm_LA, pos, s, font);
-   draw_text_size.y = draw_text_size.x >> 16;
-   draw_text_size.x = word(draw_text_size.x);
-   return &draw_text_size;
+alloc_aut(0) stkcall void TextSize(struct i32v2 *draw_text_size, str s, str font, i32 wrap) {
+   draw_text_size->x = DrawCallI(sm_LA, wrap, s, font);
+   draw_text_size->y = draw_text_size->x >> 16;
+   draw_text_size->x = word(draw_text_size->x);
 }
 
 alloc_aut(0) stkcall

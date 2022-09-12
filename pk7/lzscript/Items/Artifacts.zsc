@@ -1,0 +1,495 @@
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
+
+class Lith_AllMap : Inventory replaces Allmap {
+   default {
+      Tag "$LITH_INFO_SHORT_AllMap";
+      Inventory.PickupMessage "";
+      Inventory.PickupSound "player/pickup/allmap";
+      +CountItem
+      +Inventory.FancyPickupSound
+      +CastSpriteShadow
+   }
+   override bool tryPickup(in out Actor mo) {
+      Lith_HERMES.Log(msg_item, 5, "_AllMap");
+      Lith_HERMES.UnlockBip(mo, "AllMap");
+      callAcs("Lith_ItemPopupTag");
+      mo.giveInventory("MapRevealer", 1);
+      goAwayAndDie();
+      return true;
+   }
+   states {
+   Spawn:
+      PMAP ABCDCB 6 bright;
+      loop;
+   }
+}
+
+class Lith_BerserkStat : Lith_StatFx {
+   override void initCb() {
+      basic("BER", -1);
+      plyr.giveInventory("PowerStrength", 1);
+   }
+   override void doneCb() {
+      plyr.takeInventory("PowerStrength", 1);
+   }
+}
+
+class Lith_Berserk : Inventory replaces Berserk {
+   default {
+      Tag "$LITH_INFO_SHORT_Berserk";
+      Inventory.PickupMessage "";
+      Inventory.PickupSound "player/pickup/berserk";
+      +CountItem
+      +Inventory.FancyPickupSound
+      +CastSpriteShadow
+   }
+   override bool tryPickup(in out Actor mo) {
+      Lith_HERMES.Log(msg_item, 5, "_Berserk");
+      Lith_HERMES.UnlockBip(mo, "Berserk");
+      Lith_StatFx.addToPool("Lith_BerserkStat");
+      callAcs("Lith_ItemPopupTag");
+      if(mo.health < mo.getMaxHealth()) {
+         mo.health = mo.getMaxHealth();
+      }
+      goAwayAndDie();
+      return true;
+   }
+   states {
+   Spawn:
+      PSTR A -1;
+      stop;
+   }
+}
+
+class Lith_BlurSphereReplacer : RandomSpawner replaces BlurSphere {
+   default {
+      DropItem "Lith_BlurSphere", 255, 9998;
+      DropItem "Lith_SteggleSphere", 255, 1;
+      DropItem "Lith_ShobonSphere", 255, 1;
+   }
+}
+
+class Lith_InfraredStat : Lith_StatFx {
+   override void initCb() {
+      basic("INR", 4200);
+      plyr.giveInventory("Lith_PowerLightAmp", 1);
+   }
+   override void doneCb() {
+      plyr.takeInventory("Lith_PowerLightAmp", 1);
+      S_StartSound("player/infraredoff", lch_item, CHANF_UI);
+   }
+}
+
+class Lith_Infrared2Stat : Lith_StatFx {
+   override void initCb() {
+      basic("INR", -1);
+      plyr.giveInventory("Lith_PowerLightAmp2", 1);
+      plyr.a_startSound("player/pickup/infrared", lch_item, CHANF_UI);
+   }
+   override void doneCb() {
+      plyr.takeInventory("Lith_PowerLightAmp2", 1);
+      plyr.a_startSound("player/infraredoff", lch_item, CHANF_UI);
+   }
+}
+
+class Lith_Infrared : Inventory replaces Infrared {
+   default {
+      Tag "$LITH_INFO_SHORT_Infrared";
+      Inventory.PickupMessage "";
+      Inventory.PickupSound "player/pickup/infrared";
+      +CountItem
+      +Inventory.FancyPickupSound
+   }
+   override bool tryPickup(in out Actor mo) {
+      Lith_HERMES.Log(msg_item, 5, "_Infrared");
+      Lith_HERMES.UnlockBip(mo, "Infrared");
+      Lith_StatFx.addToPool("Lith_InfraredStat");
+      callAcs("Lith_ItemPopupTag");
+      goAwayAndDie();
+      return true;
+   }
+   states {
+   Spawn:
+      PVIS A 6 bright;
+      PVIS B 6;
+      loop;
+   }
+}
+
+class Lith_PortaAmp : Lith_InventoryItem {
+   default {
+      Tag "$LITH_ITEM_TAG_PortaAmp";
+      Lith_InventoryItem.InvName "PortaAmp";
+      Lith_InventoryItem.Size 4, 2;
+      Lith_InventoryItem.ItemType _itemt_useitem;
+   }
+   bool m_on;
+   override bool lith_useItem() {
+      if(m_on) {
+         Lith_StatFx.deleteFromPool("Lith_Infrared2Stat");
+      } else {
+         Lith_StatFx.addToPool("Lith_Infrared2Stat");
+      }
+      m_on = !m_on;
+      return false;
+   }
+   states {
+   Spawn:
+      PVIS C 6 bright;
+      PVIS D 6;
+      loop;
+   }
+}
+
+class Lith_InvulnerabilitySphereSprite : Lith_FadeOutItemSprite {
+   states {
+   Spawn:
+      PINV ABCD 6 bright;
+      loop;
+   }
+}
+
+class Lith_MegasphereSprite : Lith_FadeOutItemSprite {
+   states {
+   Spawn:
+      MEGA ABCDB 6 bright;
+      loop;
+   }
+}
+
+class Lith_BlurSphereSprite : Lith_FadeOutItemSprite {
+   default {
+      +VisibilityPulse
+   }
+   states {
+   Spawn:
+      PINS ABCDCB 6 bright;
+      loop;
+   }
+}
+
+class Lith_Megasphere : Inventory replaces Megasphere {
+   default {
+      Tag "$LITH_TAG_Megasphere";
+      Inventory.PickupMessage "";
+      Inventory.PickupSound "player/pickup/mega";
+      +CountItem
+      +Inventory.FancyPickupSound
+   }
+   override bool tryPickup(in out Actor mo) {
+      Lith_HERMES.Log(msg_item, 4, "_Megasphere");
+      Lith_HERMES.UnlockBip(mo, "Taochyan");
+      mo.giveInventory("Lith_MegaProtection", 100);
+      mo.ACS_ScriptCall("Lith_GiveHealthBonus", 200);
+      callAcs("Lith_ItemPopupTag");
+      goAwayAndDie();
+      return true;
+   }
+
+   states {
+   Spawn:
+      TNT1 A 0;
+      TNT1 A 0 A_SpawnItemEx("Lith_MegasphereSprite", 0,0,0, 0,0,0, 0, SXF_SETMASTER);
+      TNT1 A 1;
+      wait;
+   }
+}
+
+class Lith_RadSuitStat : Lith_StatFx {
+   override void initCb() {
+      basic("RAD", 2100);
+      plyr.giveInventory("Lith_PowerIronFeet", 1);
+   }
+   override void doneCb() {
+      plyr.takeInventory("Lith_PowerIronFeet", 1);
+   }
+}
+
+class Lith_RadSuit : Inventory replaces RadSuit {
+   default {
+      Tag "$LITH_LOG_RadSuit";
+      Inventory.PickupMessage "";
+      Inventory.PickupSound "player/pickup/radsuit";
+
+      +Inventory.FancyPickupSound
+      +CastSpriteShadow
+   }
+   override bool tryPickup(in out Actor mo) {
+      Lith_HERMES.Log(msg_item, 5, "_RadSuit");
+      Lith_HERMES.UnlockBip(mo, "RadSuit");
+      Lith_StatFx.addToPool("Lith_RadSuitStat");
+      callAcs("Lith_ItemPopupTag");
+      goAwayAndDie();
+      return true;
+   }
+   states {
+   Spawn:
+      SUIT A -1 bright;
+      stop;
+   }
+}
+
+class Lith_SoulSphereSprite : Lith_FadeOutItemSprite {
+   states {
+   Spawn:
+      SOUL ABCDB 6 bright;
+      loop;
+   }
+}
+
+class Lith_SoulSphere : Inventory replaces SoulSphere {
+   default {
+      Tag "$LITH_TAG_SoulSphere";
+      Inventory.PickupMessage "";
+      Inventory.PickupSound "player/pickup/super";
+      +CountItem
+      +Inventory.FancyPickupSound
+   }
+   override bool tryPickup(in out Actor mo) {
+      Lith_HERMES.Log(msg_item, 4, "_Soulsphere");
+      Lith_HERMES.UnlockBip(mo, "Heart");
+      mo.ACS_ScriptCall("Lith_GiveHealthBonus", 100);
+      callAcs("Lith_ItemPopupTag");
+      goAwayAndDie();
+      return true;
+   }
+   states {
+   Spawn:
+      TNT1 A 0;
+      TNT1 A 0 A_SpawnItemEx("Lith_SoulSphereSprite", 0,0,0, 0,0,0, 0, SXF_SETMASTER);
+      TNT1 A 1;
+      wait;
+   }
+}
+
+class Lith_FlyStat : Lith_StatFx {
+   override void initCb() {
+      basic("FLY", 2100);
+      plyr.giveInventory("Lith_PowerFlight", 1);
+   }
+   override void doneCb() {
+      plyr.takeInventory("Lith_PowerFlight", 1);
+   }
+}
+
+class Lith_ArtiFly : Inventory replaces ArtiFly {
+   default {
+      Tag "$LITH_LOG_ArtiFly";
+      Inventory.PickupMessage "";
+      Inventory.PickupFlash "PickupFlash";
+      Inventory.PickupSound "misc/p_pkup";
+      Inventory.RespawnTics 4320;
+
+      +CountItem
+      +Inventory.FancyPickupSound
+      +CastSpriteShadow
+   }
+
+   override bool tryPickup(in out Actor mo) {
+      Lith_HERMES.Log(msg_item, 5, "_ArtiFly");
+      Lith_StatFx.addToPool("Lith_FlyStat");
+      callAcs("Lith_ItemPopupTag");
+      goAwayAndDie();
+      return true;
+   }
+   states {
+   Spawn:
+      SOAR ABCB 5;
+      loop;
+   }
+}
+
+class Lith_ArtiTeleport : Inventory replaces ArtiTeleport {
+   default {
+      Tag "$LITH_LOG_ArtiTeleport";
+      Inventory.PickupMessage "";
+      Inventory.PickupFlash "PickupFlash";
+      Inventory.PickupSound "misc/p_pkup";
+      Inventory.RespawnTics 4320;
+      +CountItem
+      +Inventory.FancyPickupSound
+      +CastSpriteShadow
+   }
+   override bool tryPickup(in out Actor mo) {
+      Lith_HERMES.Log(msg_item, 5, "_ArtiTeleport");
+      mo.useInventory(mo.giveInventoryType("ArtiTeleport"));
+      callAcs("Lith_ItemPopupTag");
+      goAwayAndDie();
+      return true;
+   }
+   states(Actor) {
+   Spawn:
+      ATLP ABCB 4;
+      loop;
+   }
+}
+
+class Lith_PowerFlight : PowerFlight {
+   default {Powerup.Duration 0x7FFFFFFD; +Inventory.HubPower}
+}
+
+class Lith_PowerLightAmp : PowerLightAmp {
+   default {Powerup.Duration 0x7FFFFFFD; +Inventory.HubPower}
+}
+
+class Lith_PowerLightAmp2 : PowerLightAmp {
+   default {Powerup.Duration 0x7FFFFFFD; +Inventory.HubPower}
+}
+
+class Lith_PowerInvulnerable : PowerInvulnerable {
+   default {Powerup.Duration 0x7FFFFFFD; +Inventory.HubPower}
+}
+
+class Lith_PowerIronFeet : PowerIronFeet {
+   default {Powerup.Duration 0x7FFFFFFD; +Inventory.HubPower}
+}
+
+/* this is a rather terrible hack, but there's actually no other way to give
+   the player the special inverted screen color map in the engine... */
+class Lith_PowerInvulnerableGiver : PowerupGiver {
+   default {
+      Inventory.MaxAmount 0;
+      Powerup.Type "Lith_PowerInvulnerable";
+      Powerup.Color "InverseMap";
+      +Inventory.AutoActivate
+      +Inventory.AlwaysPickup
+      +Inventory.BigPowerUp
+   }
+}
+
+class Lith_PowerInvulnerableGiver2 : Lith_PowerInvulnerableGiver {
+   default {Powerup.Color "GoldMap";}
+}
+
+class Lith_InvulnerableStat : Lith_StatFx {
+   override void initCb() {
+      basic("INV", 1050);
+      if(lith_player_altinvuln) {
+         plyr.giveInventory("Lith_PowerInvulnerableGiver2", 1);
+      } else {
+         plyr.giveInventory("Lith_PowerInvulnerableGiver", 1);
+      }
+   }
+   override void doneCb() {
+      plyr.takeInventory("Lith_PowerInvulnerable", 1);
+   }
+}
+
+class Lith_InvulnerabilitySphere : Inventory replaces InvulnerabilitySphere {
+   default {
+      Tag "$LITH_LOG_Invuln";
+      Inventory.PickupMessage "";
+      Inventory.PickupSound "player/pickup/invuln";
+      +CountItem
+      +Inventory.BigPowerUp
+      +Inventory.FancyPickupSound
+   }
+   override bool tryPickup(in out Actor mo) {
+      Lith_HERMES.Log(msg_item, 6, "_Invuln");
+      Lith_HERMES.UnlockBip(mo, "Invulnerability");
+      Lith_StatFx.addToPool("Lith_InvulnerableStat");
+      callAcs("Lith_ItemPopupTag");
+      goAwayAndDie();
+      return true;
+   }
+   states(Actor) {
+   Spawn:
+      TNT1 A 0;
+      TNT1 A 0 A_SpawnItemEx("Lith_InvulnerabilitySphereSprite", flags: SXF_SETMASTER);
+      TNT1 A 1;
+      wait;
+   }
+}
+
+class Lith_Backpack : Lith_ScoreItem replaces Backpack {
+   default {
+      Tag "$LITH_INFO_SHORT_Backpack";
+      Inventory.PickupSound "player/pickup/item";
+      Lith_BasicPickup.LogName "Backpack", 5;
+      Lith_BasicPickup.InfoPage "Backpack";
+      Lith_ScoreItem.Score 10000;
+      +CountItem
+      +CastSpriteShadow
+   }
+   override void lith_onPickup(Actor mo) {
+      static const class<Inventory> AMMOS[] = {
+         "Lith_BulletAmmo",
+         "Lith_ShellAmmo",
+         "Lith_RocketAmmo",
+         "Lith_PlasmaAmmo",
+         "Lith_CannonAmmo"
+      };
+      for(int i = 0; i < AMMOS.size(); ++i) {
+         readonly<Inventory> def = getDefaultByType(AMMOS[i]);
+         Inventory inv = mo.findInventory(AMMOS[i]);
+         inv.maxAmount = def.maxAmount * 2;
+         mo.giveInventory(AMMOS[i], def.maxAmount / 4);
+      }
+      super.lith_onPickup(mo);
+   }
+   states {
+   Spawn:
+      BPAK A -1;
+      stop;
+   }
+}
+
+class Lith_Shobon : Actor {
+   default {
+      +NOINTERACTION
+      +CastSpriteShadow
+   }
+   vector2 m_DoruPos;
+   override void Tick() {
+      super.Tick();
+      if(Master) {
+         let v = Master.Vel;
+         if(!(v.X ~== 0) || !(v.Y ~== 0)) {
+            double a  = Atan2(v.Y, v.X) - 180;
+            double m  = v.XY.Length();
+            double x_ = Lith_UTIL.Lerp(m_DoruPos.X, Cos(a) * 32, m / 32.);
+            double y_ = Lith_UTIL.Lerp(m_DoruPos.Y, Sin(a) * 32, m / 32.);
+            m_DoruPos = (x_, y_);
+         }
+         SetOrigin(Master.Pos + m_DoruPos, true);
+      }
+   }
+   states {
+   Spawn:
+      SHOB A -1;
+      stop;
+   }
+}
+
+class Lith_ShobonSphere : Inventory {
+   default {
+      Tag "$LITH_TAG_ShobonSphere";
+      Inventory.PickupMessage "";
+      Inventory.PickupSound "misc/p_pkup";
+      +CountItem
+      +Inventory.BigPowerUp
+      +Inventory.FancyPickupSound
+   }
+   override bool tryPickup(in out Actor mo) {
+      Lith_HERMES.Log(msg_item, 5, "_ShobonSphere");
+      spawn("Lith_Shobon", mo.pos).master = mo;
+      callAcs("Lith_ItemPopupTag");
+      goAwayAndDie();
+      return true;
+   }
+   states {
+   Spawn:
+      TNT1 A 0;
+      SHOB B 0 A_SpawnItemEx("Lith_ItemSprite", flags: SXF_SETMASTER|SXF_TRANSFERSPRITEFRAME);
+      TNT1 A 1;
+      wait;
+   }
+}
+
+/* EOF */

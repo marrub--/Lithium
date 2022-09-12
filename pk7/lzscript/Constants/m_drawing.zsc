@@ -47,7 +47,8 @@ enum Lith_Channel {
    lch_weapon3,
    lch_doll,
 
-   lch_step,
+   lch_step1,
+   lch_step2,
    lch_weather1,
    lch_weather2,
 

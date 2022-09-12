@@ -17,18 +17,14 @@
 /* This is lazy-allocated. Don't touch or GDCC will break your
  * computer's face.
  */
-noinit static
-dmon_t dmonalloc[0x7FFF];
-
-noinit static
-i32 lmvar dmonid;
+noinit static dmon_t    dmonalloc[0x7FFF];
+noinit static i32 lmvar dmonid;
 
 void PrintDmonAllocSize(void) {
-   pl.logH(1, "dmonalloc is %.2k megabytes!", sizeof dmonalloc * 4 / 1024 / 1024.0);
+   P_LogH(1, "dmonalloc is %.2k megabytes!", sizeof dmonalloc * 4 / 1024 / 1024.0);
 }
 
-script
-dmon_t *DmonPtr(i32 tid, i32 ptr) {
+script dmon_t *DmonPtr(i32 tid, i32 ptr) {
    if(tid || ptr) ACS_SetActivator(tid, ptr);
    return DmonSelf();
 }
@@ -43,8 +39,7 @@ dmon_t *Dmon(i32 id) {
    else                     return nil;
 }
 
-alloc_aut(0) stkcall
-dmon_t *AllocDmon(void) {
+alloc_aut(0) stkcall dmon_t *AllocDmon(void) {
    dmon_t *m = &dmonalloc[dmonid];
    fastmemset(m, 0, sizeof *m);
    m->active = true;

@@ -16,7 +16,7 @@ static clearScope double GetAttackHeight(Actor mo) {
 }
 
 static ui void Project(Actor mo, double x_, double y_, double z_, int px, int py, int pv) {
-   int x, y; bool v; [x, y, v] = Lith_RenderProvider.instance().project((x_, y_, z_));
+   int x, y; bool v; [x, y, v] = Lith_URANUS.instance().project((x_, y_, z_));
    if(px) ACS_ExecuteWithResult(lsc_setptri32,  px, x);
    if(py) ACS_ExecuteWithResult(lsc_setptri32,  py, y);
    if(pv) ACS_ExecuteWithResult(lsc_setptrbool, pv, v);
@@ -57,16 +57,14 @@ static void PlayerDeathNuke(Actor mo) {
    Nuke(mo);
 }
 
-static void DeleteItem(Actor mo, int item)
-{
-   let id = Lith_IDOL(mo.FindInventory("Lith_IDOL"));
-   if(id) id.Lith_Remove(item);
+static void DeleteItem(Actor mo, int item) {
+   let id = Lith_IDOL(mo.findInventory("Lith_IDOL"));
+   if(id) id.lith_remove(item);
 }
 
-static bool UseItem(Actor mo, int item)
-{
-   let id = Lith_IDOL(mo.FindInventory("Lith_IDOL"));
-   if(id) return id.Lith_Use(item);
+static bool UseItem(Actor mo, int item) {
+   let id = Lith_IDOL(mo.findInventory("Lith_IDOL"));
+   if(id) return id.lith_use(item);
    else   return false;
 }
 

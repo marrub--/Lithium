@@ -1,0 +1,18 @@
+// ╭-*-C-*-───────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
+
+name:        "M1A1"
+flags:       "nophantom nolightning norain"
+environment: "none"
+humidity:    10
+temperature: 20
+windspeed:   2
+sky:         "vanilla"
+script:      "lmisc/M1A1.ldlg";
+
+/* EOF */

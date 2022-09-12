@@ -121,7 +121,7 @@ action(Weapon) void Lith_A_MinigunFire() {
       invoker.m_ammoState = 0;
    }
    A_AlertMonsters();
-   A_StartSound("weapons/minigun/fire", lch_weapon, pitch: fRandom(0.95, 1.05) * max(invoker.m_windUp, 0.8));
+   A_StartSound("weapons/minigun/fire", lch_weapon, pitch: max(invoker.m_windUp, 0.8));
    A_OverlayOffset(_psp_weapon, FRandom(3, 8), FRandom(34, 39), WOF_INTERPOLATE);
    A_GunFlash("DummyFlash");
    A_FireProjectile("Lith_LightProjectileRedShort", 0);

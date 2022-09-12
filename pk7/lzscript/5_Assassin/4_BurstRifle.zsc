@@ -23,6 +23,7 @@ action(Weapon) void Lith_A_FireBurstRifle() {
    double p = clamp(3 / invoker.m_lessen, 0.5, 1.0);
    Lith_A_MagIncr();
    A_GunFlash();
+   a_overlayFlags(_psp_flash, pspf_renderstyle, true);
    a_overlayRenderStyle(_psp_flash, style_add);
    Lith_FireBullets(2, 1, -1, int(60 / invoker.m_lessen), FBF_NORANDOM);
    Lith_A_GunSmokeSmall();

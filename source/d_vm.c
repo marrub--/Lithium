@@ -89,14 +89,12 @@ local i32 SignExtendB2(u32 v) {return SignB2(v) ? (v) | 0xFFFF0000 : (v);}
 #define GetRX() ((r2 & R2_M_RX) >> R2_S_RX)
 #define GetRY() ((r2 & R2_M_RY) >> R2_S_RY)
 #define GetSR() ((r2 & R2_M_SR) >> R2_S_SR)
-
 #define Set(reg, msk, bit) \
    statement({ \
       reg &= ~msk; \
       reg |= v << bit & msk; \
       return (reg & msk) >> bit; \
    })
-
 local u32 SetPC(u32 v) {Set(r1, R1_M_PC, R1_S_PC);}
 local u32 SetSP(u32 v) {Set(r1, R1_M_SP, R1_S_SP);}
 local u32 SetVA(u32 v) {Set(r1, R1_M_VA, R1_S_VA);}
@@ -105,9 +103,7 @@ local u32 SetRX(u32 v) {Set(r2, R2_M_RX, R2_S_RX);}
 local u32 SetRY(u32 v) {Set(r2, R2_M_RY, R2_S_RY);}
 local u32 SetSR(u32 v) {Set(r2, R2_M_SR, R2_S_SR);}
 #undef Set
-
 local u32 DecSP(u32 n) {u32 x = GetSP(); SetSP(x - n); return x;}
-
 local u32 IncPC(u32 n) {u32 x = GetPC(); SetPC(x + n); return x;}
 local u32 IncSP(u32 n) {u32 x = GetSP(); SetSP(x + n); return x;}
 
@@ -220,27 +216,27 @@ static void TraceReg(void) {
 /* jump next byte */
 #define JmpVI() \
    statement({ \
-      u32 next = MemI1_G(); \
+      mem_size_t next = MemI1_G(); \
       JmpDbg(); \
       goto *cases[next]; \
    })
 
 /* VM action auxiliary */
 static str GetText(void) {
-   u32  adr = MemB2_G(VAR_TEXTL);
-   cstr sc  = MemSC_G(adr);
+   mem_size_t adr = MemB2_G(VAR_TEXTL);
+   cstr       sc  = MemSC_G(adr);
    return adr ? lang(strp(_p(ml.lump), _c('_'), _p(sc))) : snil;
 }
 
 static str GetRemote(void) {
-   u32  adr = MemB2_G(VAR_REMOTEL);
-   cstr nam = adr ? MemSC_G(adr) : "UNKNOWN";
+   mem_size_t adr = MemB2_G(VAR_REMOTEL);
+   cstr       nam = adr ? MemSC_G(adr) : "UNKNOWN";
    return ns(lang(fast_strdup2(LANG "REMOTE_", nam)));
 }
 
 static str GetName(void) {
-   u32  adr = MemB2_G(VAR_NAMEL);
-   cstr nam = adr ? MemSC_G(adr) : "UNKNOWN";
+   mem_size_t adr = MemB2_G(VAR_NAMEL);
+   cstr       nam = adr ? MemSC_G(adr) : "UNKNOWN";
    return ns(lang(fast_strdup2(LANG "PNAME_", nam)));
 }
 
@@ -250,7 +246,7 @@ static str GetName(void) {
 #define ResetMusic()  MemB2_S(VAR_MUSICL,  0)
 
 static
-void TerminalGUI(u32 tact) {
+void TerminalGUI(i32 tact) {
    enum {
       /* text */
       twidth  = 640, theigh = 480,
@@ -387,14 +383,14 @@ void DialogueGUI(void) {
 
    G_ClipRelease(&gst);
 
-   u32 oc = MemB1_G(VAR_OPT_CNT);
+   mem_size_t oc = MemB1_G(VAR_OPT_CNT);
 
    if(oc) {
       i32 y = 220 - 14 * oc;
 
-      for(i32 i = 0; i < oc; i++, y += 14) {
-         u32  adr = MemB2_G(StructOfs(OPT, NAML, i));
-         cstr txt = tmpstr(lang(strp(_p(ml.lump), _c('_'), _p(MemSC_G(adr)))));
+      for(mem_size_t i = 0; i < oc; i++, y += 14) {
+         mem_size_t adr = MemB2_G(StructOfs(OPT, NAML, i));
+         cstr       txt = tmpstr(lang(strp(_p(ml.lump), _c('_'), _p(MemSC_G(adr)))));
 
          if(G_Button_HId(&gst, i, txt, 45, y, Pre(btndlgsel))) {
             MemB1_S(VAR_UACT, UACT_SELOPTION);
@@ -408,7 +404,7 @@ void DialogueGUI(void) {
 
 static
 void GuiAct(void) {
-   u32 action = MemB1_G(VAR_UACT);
+   i32 action = MemB1_G(VAR_UACT);
    MemB1_S(VAR_UACT, UACT_NONE);
 
    ResetText();
@@ -417,8 +413,8 @@ void GuiAct(void) {
    case UACT_ACKNOWLEDGE:
       break;
    case UACT_SELOPTION: {
-      u32 sel = MemB1_G(VAR_OPT_SEL);
-      u32 adr = MemB2_G(StructOfs(OPT, PTRL, sel));
+      mem_size_t sel = MemB1_G(VAR_OPT_SEL);
+      mem_size_t adr = MemB2_G(StructOfs(OPT, PTRL, sel));
       SetVA(ACT_JUMP);
       SetPC(adr);
       MemB1_S(VAR_OPT_SEL, 0);
@@ -467,7 +463,7 @@ stkcall static void ActLD_ITEM(void) {
 stkcall static void ActLD_OPT(void) {
    SetVA(ACT_NONE);
 
-   u32 cnt = MemB1_G(VAR_OPT_CNT);
+   i32 cnt = MemB1_G(VAR_OPT_CNT);
    MemB1_S(VAR_OPT_CNT, cnt + 1);
 
    MemB2_S(StructOfs(OPT, NAML, cnt), MemB2_G(VAR_ADRL));
@@ -477,9 +473,9 @@ stkcall static void ActLD_OPT(void) {
 stkcall static void ActSCRIPT_I(void) {
    SetVA(ACT_NONE);
 
-   u32 s0 = MemB1_G(VAR_SCP0), s1 = MemB1_G(VAR_SCP1);
-   u32 s2 = MemB1_G(VAR_SCP2), s3 = MemB1_G(VAR_SCP3);
-   u32 s4 = MemB1_G(VAR_SCP4);
+   i32 s0 = MemB1_G(VAR_SCP0), s1 = MemB1_G(VAR_SCP1),
+       s2 = MemB1_G(VAR_SCP2), s3 = MemB1_G(VAR_SCP3),
+       s4 = MemB1_G(VAR_SCP4);
 
    ModSR_ZN(SetAC(ACS_ExecuteWithResult(s0, s1, s2, s3, s4)));
 }
@@ -488,8 +484,8 @@ stkcall static void ActSCRIPT_S(void) {
    SetVA(ACT_NONE);
 
    str s0 = MemSA_G(MemB2_G(VAR_ADRL));
-   u32 s1 = MemB1_G(VAR_SCP1), s2 = MemB1_G(VAR_SCP2);
-   u32 s3 = MemB1_G(VAR_SCP3), s4 = MemB1_G(VAR_SCP4);
+   i32 s1 = MemB1_G(VAR_SCP1), s2 = MemB1_G(VAR_SCP2),
+       s3 = MemB1_G(VAR_SCP3), s4 = MemB1_G(VAR_SCP4);
 
    ModSR_ZN(SetAC(ACS_NamedExecuteWithResult(s0, s1, s2, s3, s4)));
 }
@@ -532,7 +528,7 @@ alloc_aut(0) sync static void ActDLG_WAIT(void) {
 alloc_aut(0) sync static void ActTRM_WAIT(void) {
    SetVA(ACT_NONE);
 
-   u32 tact = MemB1_G(VAR_TACT);
+   i32 tact = MemB1_G(VAR_TACT);
    MemB1_S(VAR_TACT, TACT_NONE);
 
    if(tact != TACT_NONE) {
@@ -563,24 +559,19 @@ alloc_aut(0) sync static void ActFIN_WAIT(void) {
       _fill_x = 280,
       _fill_y = 220,
    };
-
    SetVA(ACT_NONE);
-
-   u32 fact = MemB1_G(VAR_FACT);
+   i32 fact = MemB1_G(VAR_FACT);
    MemB1_S(VAR_FACT, FACT_NONE);
-
-   u32 musi = MemB2_G(VAR_MUSICL);
+   mem_size_t musi = MemB2_G(VAR_MUSICL);
    if(musi) {
       ACS_SetMusic(MemSA_G(musi));
       ResetMusic();
    }
-
    str bgnd = MemSA_G(MemB2_G(VAR_PICTL));
-   u32 tics = MemB2_G(VAR_ADRL);
-
+   i32 tics = MemB2_G(VAR_ADRL);
    switch(fact) {
    case FACT_FADE_IN:
-      for(u32 i = tics; i > 0; --i) {
+      for(i32 i = tics; i > 0; --i) {
          F_drawBack(bgnd);
          F_drawFade(i / (k32)tics);
          ACS_Delay(1);
@@ -588,7 +579,7 @@ alloc_aut(0) sync static void ActFIN_WAIT(void) {
       break;
    case FACT_FADE_OUT: {
       str text = GetText();
-      for(u32 i = tics; i > 0; --i) {
+      for(i32 i = tics; i > 0; --i) {
          F_drawBack(bgnd);
          F_drawText(220, text);
          F_drawFade((tics - i) / (k32)tics);
@@ -599,7 +590,7 @@ alloc_aut(0) sync static void ActFIN_WAIT(void) {
    }
    case FACT_WAIT: {
       str text = GetText();
-      for(u32 i = tics; i > 0; --i) {
+      for(i32 i = tics; i > 0; --i) {
          F_drawBack(bgnd);
          F_drawText(220, text);
          ACS_Delay(1);
@@ -607,7 +598,7 @@ alloc_aut(0) sync static void ActFIN_WAIT(void) {
       break;
    }
    case FACT_MUS_FADE:
-      for(u32 i = tics; i > 0; --i) {
+      for(i32 i = tics; i > 0; --i) {
          F_drawBack(bgnd);
          ACS_SetMusicVolume(i / (k32)tics);
          ACS_Delay(1);
@@ -616,23 +607,18 @@ alloc_aut(0) sync static void ActFIN_WAIT(void) {
    case FACT_CRAWL: {
       str text = GetText();
       i32 leng = ACS_StrLen(text);
-
       static struct gui_fil fil_fill;
       static struct gui_fil fil_skipfill;
       fil_fill.tic     = 75;
       fil_skipfill.tic = 35;
-
       for(i32 i = tics; i >= 0; i--) {
          F_drawBack(bgnd);
-
          i32 buttons = ACS_GetPlayerInput(-1, INPUT_BUTTONS);
-         u32 p, h;
-
+         i32 p, h;
          if(i > 1) {
             if(ACS_Timer() % 3 == 0) {
                StartSound(ss_player_cbi_keypress, lch_body2, CHANF_NOPAUSE|CHANF_MAYBE_LOCAL|CHANF_UI, 1.0, ATTN_STATIC);
             }
-
             k32 mul = 1.0 - i / (k32)tics;
             p = leng * mul;
             h = 220  * mul;
@@ -640,9 +626,7 @@ alloc_aut(0) sync static void ActFIN_WAIT(void) {
             p = leng;
             h = 220;
          }
-
          F_drawText(h, ACS_StrMid(text, 0, p));
-
          if(tics > 100) {
             if(i == 1) {
                if(!G_Filler(_fill_x, _fill_y, &fil_fill,
@@ -654,7 +638,6 @@ alloc_aut(0) sync static void ActFIN_WAIT(void) {
                i = 2;
             }
          }
-
          ACS_Delay(1);
       }
       break;
@@ -663,62 +646,50 @@ alloc_aut(0) sync static void ActFIN_WAIT(void) {
 }
 
 /* Main dialogue VM. */
-dynam_aut script void Dlg_Run(u32 num) {
+dynam_aut script void Dlg_Run(mem_size_t num) {
    if(pl.dead || pl.modal != _gui_dlg) {
       return;
    }
-
    /* get the dialogue by number */
    register struct dlg_def *def = &dlgdefs[num];
-
    if(!def->codeV) {
       PrintErr(_l("dialogue "), _p(num), _l(" has no code"));
       goto halt;
    }
-
    /* GUI state */
    fastmemset(&gst, 0, sizeof gst);
    gst.cx = 320 / 2;
    gst.cy = 200 / 2;
    gst.gfxprefix = ":UI_Green:";
-
    /* VM state */
    register u32 ua, ub, ur;
    register i32 sa, sb, sr;
-
    r1 = 0;
    r2 = 0;
-
    ResetName();
    ResetRemote();
    ResetText();
-
    /* copy program data into memory */
-   for(u32 i = 0; i < def->codeC; i++) memory[PRG_BEG_C + i] = def->codeV[i];
-   for(u32 i = 0; i < def->stabC; i++) memory[STR_BEG_C + i] = def->stabV[i];
-
-   Dbg_Log(log_dlg,
+   fastmemcpy(&memory[PRG_BEG_C], def->codeV, def->codeC);
+   fastmemcpy(&memory[STR_BEG_C], def->stabV, def->stabC);
+   Dbg_Log(log_gsinfo,
       _l("--- begin dialogue "),
       ACS_PrintHex(num),
       _l(" ---\nDumping segment PRG...\n"),
       Dbg_PrintMemC(&memory[PRG_BEG_C], def->codeC),
       _l("Dumping segment STR...\n"),
       Dbg_PrintMemC(&memory[STR_BEG_C], def->stabC));
-
    /* copy some constants into memory */
    MemB1_S(VAR_PCLASS, pl.pclass);
-
    static
    __label *const cases[0xFF] = {
       #define DCD(n, op, ty) [n] = &&op##_##ty,
       #include "d_vm.h"
    };
-
    /* all right, start the damn VM already! */
    SetSP(0xFF);
    SetPC(PRG_BEG + def->pages[pl.dlg.page]);
    JmpVI();
-
 vmaction:
    while(ua = GetVA(), (ua != ACT_NONE && ua < ACT_MAX)) {
       Dbg_Log(log_dlg, _l("action "), _p(ua), _c(' '), _p(action_names[ua]));
@@ -730,11 +701,9 @@ vmaction:
       }
    }
    JmpVI();
-
 /* No-op */
 NOP_NP:
    JmpVI();
-
 /* Jumps */
 branch:
    if(ub) {
@@ -742,38 +711,30 @@ branch:
       JmpVI();
    }
    JmpVI();
-
 BRK_NP:
    goto halt;
-
 JSR_AI: {
-   u32 adr = AdrAI_V();
+   mem_size_t adr = AdrAI_V();
    StaB2_S(GetPC() - 1);
    SetPC(adr);
    JmpVI();
 }
-
 JMP_AI:
    SetPC(AdrAI_V());
    JmpVI();
-
 JMP_II:
    SetPC(AdrII_V());
    JmpVI();
-
 JPG_VI:
    SetPC(PRG_BEG + def->pages[AdrVI_V()]);
    JmpVI();
-
 RTI_NP:
    SetSR(StaB1_G());
    SetPC(StaB2_G());
    JmpVI();
-
 RTS_NP:
    SetPC(StaB2_G() + 1);
    JmpVI();
-
 BCS_RI: sa = AdrRI_V(), ub = GetSR_C() != 0; goto branch;
 BCC_RI: sa = AdrRI_V(), ub = GetSR_C() == 0; goto branch;
 BMI_RI: sa = AdrRI_V(), ub = GetSR_N() != 0; goto branch;
@@ -782,7 +743,6 @@ BVS_RI: sa = AdrRI_V(), ub = GetSR_V() != 0; goto branch;
 BVC_RI: sa = AdrRI_V(), ub = GetSR_V() == 0; goto branch;
 BEQ_RI: sa = AdrRI_V(), ub = GetSR_Z() != 0; goto branch;
 BNE_RI: sa = AdrRI_V(), ub = GetSR_Z() == 0; goto branch;
-
 /* Comparison */
 compare:
    ur = ua - ub;
@@ -795,10 +755,8 @@ bit:
    SetSR_V(ub & 0x40);
    SetSR_N(ub & 0x80);
    JmpVI();
-
 BIT_AI: ub = AdrAI_G(); goto bit;
 BIT_ZI: ub = AdrZI_G(); goto bit;
-
 CMP_AI: ua = GetAC(), ub = AdrAI_G(); goto compare;
 CMP_AX: ua = GetAC(), ub = AdrAX_G(); goto compare;
 CMP_AY: ua = GetAC(), ub = AdrAY_G(); goto compare;
@@ -807,21 +765,17 @@ CMP_IY: ua = GetAC(), ub = AdrIY_G(); goto compare;
 CMP_VI: ua = GetAC(), ub = AdrVI_V(); goto compare;
 CMP_ZI: ua = GetAC(), ub = AdrZI_G(); goto compare;
 CMP_ZX: ua = GetAC(), ub = AdrZX_G(); goto compare;
-
 CPX_AI: ua = GetRX(), ub = AdrAI_G(); goto compare;
 CPX_VI: ua = GetRX(), ub = AdrVI_V(); goto compare;
 CPX_ZI: ua = GetRX(), ub = AdrZI_G(); goto compare;
-
 CPY_AI: ua = GetRY(), ub = AdrAI_G(); goto compare;
 CPY_VI: ua = GetRY(), ub = AdrVI_V(); goto compare;
 CPY_ZI: ua = GetRY(), ub = AdrZI_G(); goto compare;
-
 /* Stack */
 PHA_NP: StaB1_S(GetAC());           JmpVI();
 PHP_NP: StaB1_S(GetSR());           JmpVI();
 PLA_NP: ModSR_ZN(SetAC(StaB1_G())); JmpVI();
 PLP_NP: SetSR(StaB1_G());           JmpVI();
-
 /* Flags */
 CLC_NP: SetSR_C(0); JmpVI();
 CLD_NP: SetSR_D(0); JmpVI();
@@ -830,7 +784,6 @@ CLV_NP: SetSR_V(0); JmpVI();
 SEC_NP: SetSR_C(1); JmpVI();
 SED_NP: SetSR_D(1); JmpVI();
 SEI_NP: SetSR_I(1); JmpVI();
-
 /* Load */
 LDA_AI: ModSR_ZN(SetAC(AdrAI_G())); JmpVI();
 LDA_AX: ModSR_ZN(SetRY(AdrAX_G())); JmpVI();
@@ -840,25 +793,21 @@ LDA_IY: ModSR_ZN(SetRY(AdrIY_G())); JmpVI();
 LDA_VI: ModSR_ZN(SetAC(AdrVI_V())); JmpVI();
 LDA_ZI: ModSR_ZN(SetAC(AdrZI_G())); JmpVI();
 LDA_ZX: ModSR_ZN(SetAC(AdrZX_G())); JmpVI();
-
 LDX_AI: ModSR_ZN(SetRX(AdrAI_G())); JmpVI();
 LDX_AY: ModSR_ZN(SetRY(AdrAX_G())); JmpVI();
 LDX_VI: ModSR_ZN(SetRX(AdrVI_V())); JmpVI();
 LDX_ZI: ModSR_ZN(SetRX(AdrZI_G())); JmpVI();
 LDX_ZY: ModSR_ZN(SetRX(AdrZY_G())); JmpVI();
-
 LDY_AI: ModSR_ZN(SetRY(AdrAI_G())); JmpVI();
 LDY_AX: ModSR_ZN(SetRY(AdrAX_G())); JmpVI();
 LDY_VI: ModSR_ZN(SetRY(AdrVI_V())); JmpVI();
 LDY_ZI: ModSR_ZN(SetRY(AdrZI_G())); JmpVI();
 LDY_ZX: ModSR_ZN(SetRY(AdrZX_G())); JmpVI();
-
 LDV_AI: SetVA(AdrAI_G()); goto vmaction;
 LDV_AX: SetVA(AdrAX_G()); goto vmaction;
 LDV_VI: SetVA(AdrVI_V()); goto vmaction;
 LDV_ZI: SetVA(AdrZI_G()); goto vmaction;
 LDV_ZX: SetVA(AdrZX_G()); goto vmaction;
-
 /* Transfer */
 TAX_NP: ModSR_ZN(SetRX(GetAC())); JmpVI();
 TAY_NP: ModSR_ZN(SetRY(GetAC())); JmpVI();
@@ -866,7 +815,6 @@ TSX_NP: ModSR_ZN(SetRX(GetSP())); JmpVI();
 TXA_NP: ModSR_ZN(SetAC(GetRX())); JmpVI();
 TXS_NP:          SetSP(GetRX());  JmpVI();
 TYA_NP: ModSR_ZN(SetAC(GetRY())); JmpVI();
-
 /* Store */
 STA_AI: AdrAI_S(GetAC()); JmpVI();
 STA_AX: AdrAX_S(GetAC()); JmpVI();
@@ -875,15 +823,12 @@ STA_IX: AdrIX_S(GetAC()); JmpVI();
 STA_IY: AdrIY_S(GetAC()); JmpVI();
 STA_ZI: AdrZI_S(GetAC()); JmpVI();
 STA_ZX: AdrZX_S(GetAC()); JmpVI();
-
 STX_AI: AdrAI_S(GetRX()); JmpVI();
 STX_ZI: AdrZI_S(GetRX()); JmpVI();
 STX_ZY: AdrZY_S(GetRX()); JmpVI();
-
 STY_AI: AdrAI_S(GetRY()); JmpVI();
 STY_ZI: AdrZI_S(GetRY()); JmpVI();
 STY_ZX: AdrZX_S(GetRY()); JmpVI();
-
 /* Arithmetic */
 adc:
    ua = GetAC();
@@ -899,64 +844,51 @@ sbc:
    ModSR_V(ua, ub, ur);
    ModSR_ZN(SetAC(ur));
    JmpVI();
-
 and: ModSR_ZN(SetAC(GetAC() & ub)); JmpVI();
 eor: ModSR_ZN(SetAC(GetAC() ^ ub)); JmpVI();
 ora: ModSR_ZN(SetAC(GetAC() | ub)); JmpVI();
-
 asl:
    ur = AdrAC_G(ua, ub);
-
    SetSR_C(ur & 0x80);
    ur <<= 1;
-
    AdrAC_S(ua, ub, ur);
    ModSR_ZN(ur);
    JmpVI();
 lsr:
    ur = AdrAC_G(ua, ub);
-
    SetSR_C(ur & 1);
    ur >>= 1;
-
    AdrAC_S(ua, ub, ur);
    ModSR_ZN(ur);
    JmpVI();
 rol:
    ur = AdrAC_G(ua, ub);
-
    ub |= GetSR_C();
    SetSR_C(ur & 0x80);
    ur <<= 1;
    ur |= ub & 1;
-
    AdrAC_S(ua, ub, ur);
    ModSR_ZN(ur);
    JmpVI();
 ror:
    ur = AdrAC_G(ua, ub);
-
    ub |= GetSR_C() << 7;
    SetSR_C(ur & 1);
    ur >>= 1;
    ur |= ub & 0x80;
-
    AdrAC_S(ua, ub, ur);
    ModSR_ZN(ur);
    JmpVI();
 dec:
    ub = MemB1_G(ua) - 1;
-
    MemB1_S(ua, ub);
    ModSR_ZN(ub);
    JmpVI();
 inc:
    ub = MemB1_G(ua) + 1;
-
    MemB1_S(ua, ub);
    ModSR_ZN(ub);
    JmpVI();
-
 ADC_AI: ub = AdrAI_G(); goto adc;
 ADC_AX: ub = AdrAX_G(); goto adc;
 ADC_AY: ub = AdrAY_G(); goto adc;
@@ -965,7 +897,6 @@ ADC_IY: ub = AdrIY_G(); goto adc;
 ADC_VI: ub = AdrVI_V(); goto adc;
 ADC_ZI: ub = AdrZI_G(); goto adc;
 ADC_ZX: ub = AdrZX_G(); goto adc;
-
 SBC_AI: ub = AdrAI_G(); goto sbc;
 SBC_AX: ub = AdrAX_G(); goto sbc;
 SBC_AY: ub = AdrAY_G(); goto sbc;
@@ -974,7 +905,6 @@ SBC_IY: ub = AdrIY_G(); goto sbc;
 SBC_VI: ub = AdrVI_V(); goto sbc;
 SBC_ZI: ub = AdrZI_G(); goto sbc;
 SBC_ZX: ub = AdrZX_G(); goto sbc;
-
 AND_AI: ub = AdrAI_G(); goto and;
 AND_AX: ub = AdrAX_G(); goto and;
 AND_AY: ub = AdrAY_G(); goto and;
@@ -983,7 +913,6 @@ AND_IY: ub = AdrIY_G(); goto and;
 AND_VI: ub = AdrVI_V(); goto and;
 AND_ZI: ub = AdrZI_G(); goto and;
 AND_ZX: ub = AdrZX_G(); goto and;
-
 EOR_AI: ub = AdrAI_G(); goto eor;
 EOR_AX: ub = AdrAX_G(); goto eor;
 EOR_AY: ub = AdrAY_G(); goto eor;
@@ -992,7 +921,6 @@ EOR_IY: ub = AdrIY_G(); goto eor;
 EOR_VI: ub = AdrVI_V(); goto eor;
 EOR_ZI: ub = AdrZI_G(); goto eor;
 EOR_ZX: ub = AdrZX_G(); goto eor;
-
 ORA_AI: ub = AdrAI_G(); goto ora;
 ORA_AX: ub = AdrAX_G(); goto ora;
 ORA_AY: ub = AdrAY_G(); goto ora;
@@ -1001,49 +929,38 @@ ORA_IY: ub = AdrIY_G(); goto ora;
 ORA_VI: ub = AdrVI_V(); goto ora;
 ORA_ZI: ub = AdrZI_G(); goto ora;
 ORA_ZX: ub = AdrZX_G(); goto ora;
-
 ASL_AI: ua = AdrAI_V(); goto asl;
 ASL_AX: ua = AdrAX_V(); goto asl;
 ASL_NP: ub = 2;         goto asl;
 ASL_ZI: ua = AdrZI_V(); goto asl;
 ASL_ZX: ua = AdrZX_V(); goto asl;
-
 LSR_AI: ua = AdrAI_V(); goto lsr;
 LSR_AX: ua = AdrAX_V(); goto lsr;
 LSR_NP: ub = 2;         goto lsr;
 LSR_ZI: ua = AdrZI_V(); goto lsr;
 LSR_ZX: ua = AdrZX_V(); goto lsr;
-
 ROL_AI: ua = AdrAI_V(); goto rol;
 ROL_AX: ua = AdrAX_V(); goto rol;
 ROL_NP: ub = 2;         goto rol;
 ROL_ZI: ua = AdrZI_V(); goto rol;
 ROL_ZX: ua = AdrZX_V(); goto rol;
-
 ROR_AI: ua = AdrAI_V(); goto ror;
 ROR_AX: ua = AdrAX_V(); goto ror;
 ROR_NP: ub = 2;         goto ror;
 ROR_ZI: ua = AdrZI_V(); goto ror;
 ROR_ZX: ua = AdrZX_V(); goto ror;
-
 DEC_AI: ua = AdrAI_V(); goto dec;
 DEC_AX: ua = AdrAX_V(); goto dec;
 DEC_ZI: ua = AdrZI_V(); goto dec;
 DEC_ZX: ua = AdrZX_V(); goto dec;
-
 INC_AI: ua = AdrAI_V(); goto inc;
 INC_AX: ua = AdrAX_V(); goto inc;
 INC_ZI: ua = AdrZI_V(); goto inc;
 INC_ZX: ua = AdrZX_V(); goto inc;
-
 DEX_NP: ModSR_ZN(SetRX(GetRX() - 1)); JmpVI();
-
 DEY_NP: ModSR_ZN(SetRY(GetRY() - 1)); JmpVI();
-
 INX_NP: ModSR_ZN(SetRX(GetRX() + 1)); JmpVI();
-
 INY_NP: ModSR_ZN(SetRY(GetRY() + 1)); JmpVI();
-
 /* Trace */
 TRR_NP:
    #ifndef NDEBUG
@@ -1052,36 +969,32 @@ TRR_NP:
    EndLogEx(_pri_critical|_pri_nonotify);
    #endif
    JmpVI();
-
 TRS_NP:
    #ifndef NDEBUG
    ACS_BeginPrint();
-   for(u32 i = GetSP() + 1; i <= 0xFF; i++) {
+   for(mem_size_t i = GetSP() + 1; i <= 0xFF; i++) {
       __nprintf("%02X: %02X", i, MemB1_G(STA_BEG + i));
    }
    EndLogEx(_pri_critical|_pri_nonotify);
    #endif
    JmpVI();
-
 TRV_NP:
    #ifndef NDEBUG
    ACS_BeginPrint();
-   for(u32 i = 0; i <= 0xFF; i++) {
+   for(i32 i = 0; i <= 0xFF; i++) {
       __nprintf("%02X: %02X", i, MemB1_G(VAR_BEG + i));
    }
    EndLogEx(_pri_critical|_pri_nonotify);
    #endif
    JmpVI();
-
 halt:
-   Dbg_Log(log_dlg, _l(__func__), _l(": exited"));
-
+   Dbg_Log(log_dlg, _l(_f), _l(": exited"));
    pl.modal = _gui_none;
 }
 
 script_str ext("ACS") addr(OBJ "RunProgram")
 void Z_RunProgram(i32 num) {
-   if(!P_None() && pl.modal == _gui_none) {
+   if(pl.modal == _gui_none) {
       pl.dlg.num = DNUM_PRG_BEG + num;
       pl.modal = _gui_dlg;
    }
@@ -1089,7 +1002,7 @@ void Z_RunProgram(i32 num) {
 
 script_str ext("ACS") addr(OBJ "RunDialogue")
 void Z_RunDialogue(i32 num) {
-   if(!P_None() && pl.modal == _gui_none) {
+   if(pl.modal == _gui_none) {
       pl.dlg.num = DNUM_DLG_BEG + num;
       pl.dlg.page = 0;
       pl.modal = _gui_dlg;
@@ -1098,13 +1011,12 @@ void Z_RunDialogue(i32 num) {
 
 script_str ext("ACS") addr(OBJ "RunTerminal")
 void Z_RunTerminal(i32 num) {
-   if(!P_None() && pl.modal == _gui_none) {
+   if(pl.modal == _gui_none) {
       switch(ml.mission) {
       case _mstat_unfinished: pl.dlg.page = DPAGE_UNFINISHED; break;
       case _mstat_finished:   pl.dlg.page = DPAGE_FINISHED;   break;
       case _mstat_failure:    pl.dlg.page = DPAGE_FAILURE;    break;
       }
-
       pl.dlg.num = DNUM_TRM_BEG + num;
       pl.modal = _gui_dlg;
    }

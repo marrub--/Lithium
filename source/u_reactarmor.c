@@ -62,26 +62,24 @@ void Upgr_ReactArmor_Render(void) {
 
 script_str ext("ACS") addr(OBJ "RA_Give")
 void Z_GiveRA(i32 num) {
-   if(!P_None()) {
-      if(!get_bit(pl.upgrades[UPGR_ReactArmor].flags, _ug_active)) return;
+   if(!get_bit(pl.upgrades[UPGR_ReactArmor].flags, _ug_active)) return;
 
-      if(udata.activearmor != num + 1) {
-         cstr name = ArmorNames[num].full;
+   if(udata.activearmor != num + 1) {
+      cstr name = ArmorNames[num].full;
 
-         udata.activearmor = num + 1;
+      udata.activearmor = num + 1;
 
-         RA_Take(1);
-         RA_Take(2);
+      RA_Take(1);
+      RA_Take(2);
 
-         AmbientSound(ss_player_lane_rarmor_mode, 1.0);
+      AmbientSound(ss_player_lane_rarmor_mode, 1.0);
 
-         pl.logH(3, tmpstr(lang(sl_log_activearmor)), name);
+      P_LogH(3, tmpstr(lang(sl_log_activearmor)), name);
 
-         if(get_bit(pl.upgrades[UPGR_ReactArmor2].flags, _ug_active)) {
-            RA_Give(name, 2);
-         } else {
-            RA_Give(name, 1);
-         }
+      if(get_bit(pl.upgrades[UPGR_ReactArmor2].flags, _ug_active)) {
+         RA_Give(name, 2);
+      } else {
+         RA_Give(name, 1);
       }
    }
 }

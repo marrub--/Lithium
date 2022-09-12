@@ -181,7 +181,6 @@ end
       hdr("p_bip.h"),
       hdr("p_cbi.h"),
       hdr("p_hudid.h"),
-      hdr("p_log.h"),
       hdr("p_player.h"),
       hdr("p_shopdef.h"),
       hdr("p_upgrades.h"),

@@ -8,18 +8,19 @@
 
 # Informant
 == lsnd/PlayerI
-$playersound    lith_informant * *splat      Splat      # Fallout: New Vegas
-$playersound    lith_informant * *xdeath     Gibbed     # Fallout 4
-$playersound    lith_informant * *death      Death      # Self-made
-$playersound    lith_informant * *wimpydeath DeathSmall # ^
-$playersound    lith_informant * *crazydeath DeathBig   # ^
-$playersound    lith_informant * *pain100    PainSmall  # Doom
-$playersounddup lith_informant * *pain75     *pain100   # ^
-$playersound    lith_informant * *pain50     Pain       # ^
-$playersounddup lith_informant * *pain25     *pain50    # ^
-$playersound    lith_informant * *jump       Jump       # Self-made
-$playeralias    lith_informant * *grunt      dsempty
-$playeralias    lith_informant * *land       player.fulk.land
+$playersound    lith_informant * *splat       Splat      # Fallout: New Vegas
+$playersound    lith_informant * *xdeath      Gibbed     # Fallout 4
+$playersound    lith_informant * *death       Death      # Self-made
+$playersound    lith_informant * *wimpydeath  DeathSmall # ^
+$playersound    lith_informant * *crazydeath  DeathBig   # ^
+$playersound    lith_informant * *pain100     PainSmall  # Doom
+$playersounddup lith_informant * *pain75      *pain100   # ^
+$playersound    lith_informant * *pain50      Pain       # ^
+$playersounddup lith_informant * *pain25      *pain50    # ^
+$playersound    lith_informant * *jump        Jump       # Self-made
+$playeralias    lith_informant * *grunt       dsempty
+$playeralias    lith_informant * *land        player.fulk.land
+$playeralias    lith_informant * *step-normal player.fulk.step
 
 player.fulk {
    doll Doll # Made of the strands of the universe

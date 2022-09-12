@@ -72,11 +72,11 @@ struct Lith_UTIL {
    }
 
    static vector3 traceFrom(Actor mo, double yaw, double pitch, double dist, double offsetz, bool floor = false, ETraceFlags flags = 0) {
-      return Lith_RenderProvider.instance().traceFromActor(mo, yaw, pitch, dist, offsetZ, floor, flags);
+      return Lith_URANUS.instance().traceFromActor(mo, yaw, pitch, dist, offsetZ, floor, flags);
    }
 
    static vector3 traceFromPos(Sector sec, vector3 pos, double yaw, double pitch, double dist, Actor ignore = null, bool floor = false, ETraceFlags flags = 0) {
-      return Lith_RenderProvider.instance().traceFromPos(sec, pos, yaw, pitch, dist, ignore, floor, flags);
+      return Lith_URANUS.instance().traceFromPos(sec, pos, yaw, pitch, dist, ignore, floor, flags);
    }
 
    static play int exec(Actor mo, int scr, int arg0 = 0, int arg1 = 0, int arg2 = 0, int arg3 = 0) {

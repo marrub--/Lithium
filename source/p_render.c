@@ -18,7 +18,7 @@ static
 void P_Ren_LevelUp(void) {
    if(pl.old.attr.level && pl.old.attr.level < pl.attr.level) {
       AmbientSound(ss_player_levelup, 1.0);
-      pl.logH(1, tmpstr(lang_discrim(sl_log_levelup)), ACS_Random(1000, 9000));
+      P_LogH(1, tmpstr(lang_discrim(sl_log_levelup)), ACS_Random(1000, 9000));
    }
 
    if(pl.attr.lvupstr[0]) {

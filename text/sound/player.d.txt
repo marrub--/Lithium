@@ -8,26 +8,31 @@
 
 # Dark Lord
 == lsnd/PlayerD
-$playersound    lith_darklord * *death      Death      # Phantasy Star: Nova
-$playersound    lith_darklord * *wimpydeath DeathSmall # ^
-$playersound    lith_darklord * *crazydeath DeathBig   # ^
-$playersound    lith_darklord * *pain100    PainSmall  # ^
-$playersounddup lith_darklord * *pain75     *pain100   # ^
-$playersound    lith_darklord * *pain50     Pain       # ^
-$playersounddup lith_darklord * *pain25     *pain50    # ^
-$playersound    lith_darklord * *grunt      Grunt      # ^
-$playersound    lith_darklord * *land       Land       # Resident Evil 4, Slave Zero
+$playersound    lith_darklord * *death       Death      # Phantasy Star: Nova
+$playersound    lith_darklord * *wimpydeath  DeathSmall # ^
+$playersound    lith_darklord * *crazydeath  DeathBig   # ^
+$playersound    lith_darklord * *pain100     PainSmall  # ^
+$playersounddup lith_darklord * *pain75      *pain100   # ^
+$playersound    lith_darklord * *pain50      Pain       # ^
+$playersounddup lith_darklord * *pain25      *pain50    # ^
+$playersound    lith_darklord * *grunt       Grunt      # ^
+$playersound    lith_darklord * *land        Land       # Resident Evil 4, Slave Zero
+$playersound    lith_darklord * *step-normal Step       # Resident Evil 4
+$playeralias    lith_darklord * *step-sprint player.ari.step-sprint
 
 player.ari {
-   doll Doll # Made of the strands of the universe
-
-   step Step # Resident Evil 4
+   step-sprint1 StepSprint1 # SI Series 6000
+   step-sprint2 StepSprint2 # ^
+   step-sprint3 StepSprint3 # ^
+   doll   Doll   # Made of the strands of the universe
+   sprint Sprint # SI Series 6000
    shield {
       break  ShieldBreak     # SI Series 6000
       regenw ShieldRegenWait # Self-made
       regenl ShieldRegen     # ^
       regend ShieldRegenDone # ^
    }
+   $random step-sprint {step-sprint1, step-sprint2, step-sprint3,}
 }
 
 # EOF

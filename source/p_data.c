@@ -241,41 +241,26 @@ script
 void P_Init(void) {
    if(!pl.wasinit) {
       fastmemset(&pl, 0, sizeof pl);
-
-      pl.active = true;
-
       SetPClass();
       SetupAttributes();
-
       pl.viewheight   = EDataI(_edt_viewheight);
       pl.attackheight = EDataI(_edt_attackheight);
       pl.jumpheight   = GetMembK(0, sm_JumpZ);
       pl.spawnhealth  = GetHealth(0);
       pl.maxhealth    = pl.spawnhealth;
-      pl.stepnoise    = fast_strdup3("player/", pl.discrim, "/step");
    }
-
    fastmemset(&pl.old, 0, sizeof pl.old);
-
    pl.reinit = pl.dead = false;
-
    /* If the map sets the TID early on, it could already be set here. */
    pl.tid = 0;
    P_ValidateTID();
-
    #ifndef NDEBUG
    if(dbgflags(dbgf_score)) pl.score = SCR_MAX / 4;
    #endif
-
-   /* pls not exit map with murder thingies out */
-   /* is bad practice */
-   ACS_SetPlayerProperty(0, false, PROP_INSTANTWEAPONSWITCH);
    SetViewHeight(0, pl.viewheight);
    InvTake(so_WeaponScopedToken, INT32_MAX);
-
    P_CBI_PMinit();
    P_Upg_PMInit();
-
    pl.frozen     = 0;
    pl.semifrozen = 0;
 
@@ -305,16 +290,16 @@ void P_Init(void) {
       P_Upg_PInit();
       P_Inv_PInit();
 
-      pl.logH(1, tmpstr(lang(sl_log_version)), vernam, __DATE__);
+      P_LogH(1, tmpstr(lang(sl_log_version)), vernam, __DATE__);
 
       #ifndef NDEBUG
       if(dbglevel_any()) {
-         pl.logH(1, "player is %u bytes long!", sizeof pl * 4);
-         pl.logH(1, "snil is \"%S\"", snil);
+         P_LogH(1, "player is %u bytes long!", sizeof pl * 4);
+         P_LogH(1, "snil is \"%S\"", snil);
          PrintDmonAllocSize();
       } else {
       #endif
-         pl.logH(1, tmpstr(lang(sl_log_startgame)), sc_k_opencbi);
+         P_LogH(1, tmpstr(lang(sl_log_startgame)), sc_k_opencbi);
       #ifndef NDEBUG
       }
       #endif
@@ -361,12 +346,12 @@ void P_Dat_PTickPst(void) {
 
 script_str ext("ACS") addr(OBJ "InputChar")
 void Z_InputChar(i32 ch) {
-   if(!P_None()) Cps_SetC(pl.tb.txtbuf, pl.tb.tbptr++, ch);
+   Cps_SetC(pl.tb.txtbuf, pl.tb.tbptr++, ch);
 }
 
 script_str ext("ACS") addr(OBJ "InputEnd")
 void Z_InputEnd(i32 ch) {
-   if(!P_None()) pl.tb.changed = true;
+   pl.tb.changed = true;
 }
 
 /* EOF */

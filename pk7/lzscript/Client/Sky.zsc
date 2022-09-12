@@ -6,7 +6,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-extend class Lith_RenderProvider;
+extend class Lith_URANUS;
 
 static const color[] fire_pal = {
    0xFF070707, 0xFF1F0707, 0xFF2F0F07, 0xFF470F07, 0xFF571707, 0xFF671F07,

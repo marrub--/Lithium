@@ -26,6 +26,7 @@
 == \#ITEM_TAG_AndSigil | Binarist 'And' Sigil
 == \#ITEM_TAG_OrSigil | Binarist 'Or' Sigil
 == \#ITEM_TAG_DivisionSigil | \c[Lith_RRed]D\c[Lith_ROra]i\c[Lith_RYel]v\c[Lith_RYlg]i\c[Lith_RGrn]s\c[Lith_RCya]i\c[Lith_RBlu]o\c[Lith_RPur]n \c[Lith_RPnk]S\c[Lith_RHPn]i\c[Lith_RRed]g\c[Lith_ROra]i\c[Lith_RYel]l
+== \#ITEM_TAG_PortaAmp | CB-Visor
 
 == \#ITEM_TAG_ArmStandardUp    | Standard Armor
 == \#ITEM_TAG_ArmImprovedUp    | Improved Armor
@@ -122,29 +123,5 @@ Used in division.
 %% \#ITEM_SHORT_ArmMidoriLo
 \ca8 DT to fire magic.
 4 DT to other types.
-
-## Sprites ═══════════════════════════════════════════════════════════════════╕
-== \#Item_ArmStandardUp    | :Items:ArmStandardUp
-== \#Item_ArmImprovedUp    | :Items:ArmImprovedUp
-== \#Item_ArmTeflonUp      | :Items:ArmTeflonUp
-== \#Item_ArmDendriteUp    | :Items:ArmDendriteUp
-== \#Item_ArmAerodynamicUp | :Items:ArmAerodynamicUp
-== \#Item_ArmHazMatUp      | :Items:ArmHazMatUp
-== \#Item_ArmPinkSilverUp  | :Items:ArmPinkSilverUp
-== \#Item_ArmMidoriUp      | :Items:ArmMidoriUp
-
-== \#Item_ArmStandardLo    | :Items:ArmStandardLo
-== \#Item_ArmImprovedLo    | :Items:ArmImprovedLo
-== \#Item_ArmTeflonLo      | :Items:ArmTeflonLo
-== \#Item_ArmDendriteLo    | :Items:ArmDendriteLo
-== \#Item_ArmAerodynamicLo | :Items:ArmAerodynamicLo
-== \#Item_ArmHazMatLo      | :Items:ArmHazMatLo
-== \#Item_ArmPinkSilverLo  | :Items:ArmPinkSilverLo
-== \#Item_ArmMidoriLo      | :Items:ArmMidoriLo
-
-== \#Item_ClawOfImp     | :Items:ClawOfImp
-== \#Item_AndSigil      | :Items:AndSigil
-== \#Item_OrSigil       | :Items:OrSigil
-== \#Item_DivisionSigil | :Items:DivisionSigil
 
 ## EOF

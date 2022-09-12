@@ -19,8 +19,6 @@ $playersounddup lith_marine * *pain25     *pain50    # ^
 player.lane {
    doll Doll # Made of the strands of the universe
 
-   $alias step = .player.step
-
    # Upgrades
    rarmor.mode   RArmor/ChangeMode # Halo 3
    rarmor.damage RArmor/Damage     # Touhou 13
