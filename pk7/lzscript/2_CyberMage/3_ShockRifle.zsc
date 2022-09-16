@@ -82,16 +82,12 @@ class Lith_ShockHitCount : Inventory {default {Inventory.MaxAmount 6;}}
 
 class Lith_ShockPuff : Lith_BulletPuffPainful {
    default {
-      +HitTracer
-      +PuffGetsOwner
       +PuffOnActors
    }
-
    void lith_a_shock() {
       tracer.a_damageSelf(5, "Electric", 0, "None", src: AAPTR_TARGET);
       Lith_CopyEffect.create("Lith_ShockFx", tracer);
    }
-
    states {
    Crash:
       TNT1 A 0;

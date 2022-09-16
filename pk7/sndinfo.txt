@@ -885,6 +885,10 @@ weapons/subweapon/needle lsnd/WeaponsD/Subweapons/Needle
 $alias weapons/subweapon/axe weapons/rend/slash
 $alias weapons/subweapon/grenade weapons/rifle/grenade
 weapons/khanda/draw lsnd/WeaponsD/Khanda/Draw
+weapons/khanda/swing1 lsnd/WeaponsD/Khanda/Swing
+weapons/khanda/swing2 lsnd/WeaponsD/Khanda/Swing2
+weapons/khanda/swing3 lsnd/WeaponsD/Khanda/Swing3
+$random weapons/khanda/swing { weapons/khanda/swing1 weapons/khanda/swing2 weapons/khanda/swing3 }
 weapons/kampilan/pickup lsnd/WeaponsD/Kampilan/Pickup
 weapons/kampilan/draw lsnd/WeaponsD/Kampilan/Draw
 weapons/kampilan/bonk lsnd/WeaponsD/Kampilan/Bonk

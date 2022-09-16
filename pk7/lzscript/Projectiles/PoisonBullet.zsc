@@ -41,17 +41,8 @@ class Lith_PoisonBullet : Lith_BulletPuff {
       DamageType "Bullet";
       RenderStyle "Add";
       Species "Lith_Player";
-      +DontHarmSpecies
-      +FloorClip
-      +ForceXyBillboard
-      +HitTracer
-      +MThruSpecies
-      +NoBlockmap
       +NoExtremeDeath
-      +NoGravity
-      +PuffGetsOwner
       +PuffOnActors
-      -AllowParticles
    }
 
    override void postBeginPlay() {

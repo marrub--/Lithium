@@ -161,8 +161,8 @@ class Lith_BulletRicochetSpark : Actor {
    }
 }
 
-class Lith_BulletPuffPainless : Lith_BulletPuff {default {+PAINLESS}}
-class Lith_BulletPuffPainful  : Lith_BulletPuff {default {+FORCEPAIN}}
+class Lith_BulletPuffPainless : Lith_BulletPuff {default {+Painless}}
+class Lith_BulletPuffPainful  : Lith_BulletPuff {default {+ForcePain}}
 
 class Lith_BulletPuff : Actor replaces BulletPuff;
 
@@ -173,20 +173,24 @@ default {
    Alpha 0.9;
    +Bright
    +DontHarmSpecies
-   +NoGravity
-   +NoBlockmap
    +FloorClip
+   +ForceRadiusDmg
    +ForceXyBillboard
-   +PuffGetsOwner
+   +HitTracer
    +MThruSpecies
+   +NoBlockmap
+   +NoGravity
+   +PuffGetsOwner
    -AllowParticles
 }
+
 void lith_a_smokeFX() {
    for(int i = 0, m = random[lith_bulletpuff](0, 2); i < m; i++) {
       a_spawnItemEx("Lith_BulletAfterSmoke", fRandom[lith_bulletpuff](-1,1), fRandom[lith_bulletpuff](-1,1), fRandom[lith_bulletpuff](-2,2),
          fRandom[lith_bulletpuff](-0.5,0.5), fRandom[lith_bulletpuff](-0.5,0.5), fRandom[lith_bulletpuff](-0.2,0.2));
    }
 }
+
 void lith_a_ricochetFX() {
    if(random[lith_bulletpuff](0, 255) < 32) return;
    for(int i = 0, m = random[lith_bulletpuff](0, 3); i < m; i++) {
@@ -198,11 +202,13 @@ void lith_a_ricochetFX() {
       0, 0, fRandom[lith_bulletpuff](-0.5, -3),
       1.0, -1);
 }
+
 void lith_a_playRicochetSound() {
    if(random(0, 6) == 0) {
       a_startSound("effects/puff/ricochet", lch_body, volume: lith_weapons_ricochetvol);
    }
 }
+
 override void markPrecacheSounds() {
    super.markPrecacheSounds();
    markSound("effects/puff/ricochet");
@@ -210,24 +216,29 @@ override void markPrecacheSounds() {
    markSound("marathon/hitwall");
    markSound("marathon/hitsolid");
 }
+
 override void postBeginPlay() {
    super.postBeginPlay();
+   if(Lith_UTIL.pData(_pdt_upgrade, UPGR_TorgueMode)) {
+      a_spawnItemEx("Lith_EXPLOOOSION", flags: SXF_TRANSFERPOINTERS|SXF_NOCHECKPOSITION);
+   }
+   if(tracer) {
+      return;
+   }
    if(random[lith_bulletpuff](0, 3) == 0) {
       lith_a_smokeFX();
    }
    if(random[lith_bulletpuff](0, 2) == 0) {
       lith_a_ricochetFX();
    }
-   if(Lith_UTIL.pData(_pdt_upgrade, UPGR_TorgueMode)) {
-      a_spawnItemEx("Lith_EXPLOOOSION", flags: SXF_TRANSFERPOINTERS|SXF_NOCHECKPOSITION);
-   }
    if(random[lith_bulletpuff](0, 4) == 0) {
       a_spawnItemEx("Lith_BulletRicochetSpark");
    }
-   if(random[lith_bulletpuff](0, 100) == 0) {
+   if(random[lith_bulletpuff](0, 20) == 0) {
       a_spawnItemEx("Lith_PuffSmoke", 0, 0, 4.0 + 0.1 * random[lith_bulletpuff](-10, 10));
    }
 }
+
 states {
 Spawn:
    XPUF A 0;

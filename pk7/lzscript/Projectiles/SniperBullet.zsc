@@ -6,18 +6,13 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_SniperBullet : Lith_BulletPuff;
+class Lith_SniperBullet : Lith_BulletPuffPainful;
 
 default {
    Mass 20;
    DamageType "Bullet";
    Species "Lith_Player";
-   +DontHarmSpecies
-   +MThruSpecies
-   +ForceRadiusDmg
    +PuffOnActors
-   +PuffGetsOwner
-   +ForcePain
    +NoExtremeDeath
 }
 

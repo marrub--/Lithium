@@ -48,13 +48,8 @@ default {
    Scale 1.5;
    DamageType "Bullet";
    Species "Lith_Player";
-   +DontHarmSpecies
-   +MThruSpecies
-   +ForceRadiusDmg
    +PuffOnActors
-   +PuffGetsOwner
    +NoExtremeDeath
-   +HitTracer
 }
 
 override void postBeginPlay() {

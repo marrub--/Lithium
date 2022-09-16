@@ -19,6 +19,10 @@ weapons {
    khanda {
       == lsnd/WeaponsD/Khanda
       draw Draw # Fallout 4
+      swing1 Swing  # Metal Gear Solid 2
+      swing2 Swing2 # ^
+      swing3 Swing3 # ^
+      $random swing {swing1, swing2, swing3,}
    }
 
    kampilan {

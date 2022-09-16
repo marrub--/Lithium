@@ -9,27 +9,22 @@
 class Lith_KhandaPuff : Lith_BulletPuff {
    default {
       Mass 5;
-      +HitTracer
-      +MThruSpecies
-      +NoInteraction
       +PuffOnActors
-      +PuffGetsOwner
       +ThruGhost
-      -AllowParticles
    }
 
    override void postBeginPlay() {
       super.postBeginPlay();
       if(!tracer || tracer.bNoBlood) {
          if(target) {
-            target.a_startSound("weapons/sword/swing1", lch_auto);
+            target.a_startSound("weapons/sword/swing1", lch_weapon3);
          }
       } else {
          for(int i = 0; i < 5; ++i) {
             a_startSound("body/flesh", lch_auto);
          }
          if(target) {
-            target.a_startSound("weapons/sword/hit", lch_auto);
+            target.a_startSound("weapons/sword/hit", lch_weapon3);
          }
       }
    }
@@ -66,18 +61,21 @@ Fire:
    KHAN C 2 offset(-198, 124);
    KHAN C 3 offset(-205, 126);
 Hold:
-   KHAN D 1 offset(-103, 143) a_startSound("weapons/kampilan/swing", lch_weapon);
+   KHAN D 1 offset(-103, 143) a_startSound("weapons/khanda/swing", lch_weapon);
    #### # 0 lith_a_setInterpolation(true);
    KHAN E 1 offset(163, 120) lith_a_fireMelee(countInv("PowerStrength") ? 30 : 20, 128);
-   KHAN E 1 offset(259, 175);
-   TNT1 A 5;
-   KHAN F 1 offset(148, 170);
-   KHAN G 1 offset(80, 98) a_startSound("weapons/kampilan/swing", lch_weapon);
-   KHAN H 1 offset(-25, 40) lith_a_fireMelee(countInv("PowerStrength") ? 30 : 20, 128, _mlf_pull_in|_mlf_no_turn|_mlf_damage_stepup, "Lith_KhandaPuff");
-   KHAN H 1 offset(-130, 12);
-   KHAN I 1 offset(-124, -21);
    #### # 0 lith_a_setInterpolation(false);
-   #### # 0 a_reFire;
+   KHAN E 1 offset(259, 175);
+   TNT1 A 3 a_weaponOffset(0, 32);
+   KHAN F 1 offset(148, 170);
+   #### # 0 lith_a_setInterpolation(true);
+   KHAN G 1 offset(80, 98) a_startSound("weapons/khanda/swing", lch_weapon2);
+   KHAN H 1 offset(-25, 40) lith_a_fireMelee(countInv("PowerStrength") ? 60 : 30, 128, _mlf_pull_in|_mlf_no_turn|_mlf_damage_stepup, "Lith_KhandaPuff");
+   KHAN H 1 offset(-130, 12);
+   #### # 0 lith_a_setInterpolation(false);
+   KHAN I 1 offset(-124, -21);
+   TNT1 A 3 a_weaponOffset(0, 32);
+   TNT1 A 0 a_reFire;
    KHAN A 3 offset(-126, 71);
    #### # 0 lith_a_setInterpolation(true);
    KHAN A 1 offset(-88, 43);
