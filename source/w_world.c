@@ -286,7 +286,7 @@ script type("unloading") static void Z_WorldUnload(void) {
    Dbg_Log(log_dev, _l(_f));
    pl.setActivator();
    P_GUI_Close();
-   P_Dat_PTickPst();
+   P_Dat_PTick();
 }
 
 script ext("ACS") addr(lsc_hubclear) void Z_HubCleared(void) {

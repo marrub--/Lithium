@@ -190,7 +190,9 @@ movement speed will be greatly increased, but you won't be able to use
 - MOBILITY
 
 \c[Lith_Blue]Dark Lord\c- has limited mobility, but can still move
-around maps decently well. Recoil can turn the tides of combat.
+around maps better than vanilla. Besides sprinting, some weapons have
+enormous enough recoil to push you backwards, and the <Khanda> allows
+you to walk and sprint at increased speed.
 
 == \#TUT_DarkLordItem_NAM | Dark Lord 2
 %% \#TUT_DarkLordItem_DSC

@@ -89,13 +89,13 @@ reinit:
          P_Spe_pTick();
          P_Upg_PTick();
          P_Inv_PTick();
+         P_Ren_PTick();
          P_CBI_PTick();
          P_Aug_pTick();
          P_Atr_pTick();
          P_Wep_PTick();
          P_Log_PTick();
-         P_Dat_PTickPst();
-         P_Ren_PTickPst();
+         P_Dat_PTick();
       }
 
       /* Tic passes */

@@ -335,7 +335,7 @@ void P_Init(void) {
    #endif
 }
 
-void P_Dat_PTickPst(void) {
+void P_Dat_PTick(void) {
    if(pl.frozen != pl.old.frozen) {
       ACS_SetPlayerProperty(0, pl.frozen > 0, PROP_TOTALLYFROZEN);
    }

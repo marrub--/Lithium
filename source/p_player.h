@@ -107,7 +107,7 @@ void P_Scr_Take(score_t score);
 void P_Lv_GiveEXP(i32 amt);
 stkcall cstr P_Discrim(i32 pclass);
 stkcall i32 P_Color(i32 pclass);
-void P_Dat_PTickPst(void);
+void P_Dat_PTick(void);
 script void P_Scr_Payout(void);
 void P_Log_SellWeapon(struct weaponinfo const *info, score_t score);
 void P_Log_Weapon(struct weaponinfo const *info);
@@ -124,7 +124,7 @@ script void P_Inv_PTick   (void);
 script void P_Log_PTick   (void);
 script void P_Upg_PTick   (void);
 script void P_Wep_PTick   (void);
-       void P_Ren_PTickPst(void);
+       void P_Ren_PTick   (void);
 
 script void P_TeleportIn (void);
 sync   void P_TeleportOut(i32 tag);

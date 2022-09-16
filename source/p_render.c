@@ -101,7 +101,7 @@ static void P_Ren_Magic(void) {
    }
 }
 
-void P_Ren_PTickPst(void) {
+void P_Ren_PTick(void) {
    P_Ren_Magic();
    P_Ren_Step();
    P_Ren_View();
