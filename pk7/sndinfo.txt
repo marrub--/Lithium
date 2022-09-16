@@ -767,6 +767,8 @@ effects/geexplosion8 lsnd/Weapons/Effects/GEExplosion/expl8
 effects/geexplosion9 lsnd/Weapons/Effects/GEExplosion/expl9
 effects/geexplosion10 lsnd/Weapons/Effects/GEExplosion/expl10
 effects/geexplosion11 lsnd/Weapons/Effects/GEExplosion/expl11
+$limit effects/geexplosion 0
+$attenuation effects/geexplosion 0.5
 $random effects/geexplosion { effects/geexplosion1 effects/geexplosion2 effects/geexplosion3 effects/geexplosion4 effects/geexplosion5 effects/geexplosion6 effects/geexplosion7 effects/geexplosion8 effects/geexplosion9 effects/geexplosion10 effects/geexplosion11 }
 weapons/burstrif/fire1 lsnd/WeaponsA/BurstRifle/Fire
 weapons/burstrif/fire2 lsnd/WeaponsA/BurstRifle/Fire2
@@ -903,6 +905,9 @@ weapons/700e/move lsnd/WeaponsD/700Express/Move
 weapons/700e/draw lsnd/WeaponsD/700Express/Draw
 weapons/700e/bin lsnd/WeaponsD/700Express/BulletIn
 weapons/700e/cout lsnd/WeaponsD/700Express/CasingsOut
+weapons/700e/explode lsnd/WeaponsD/700Express/Explode
+$limit weapons/700e/explode 0
+$attenuation weapons/700e/explode 0.6
 $random weapons/700e/fire { weapons/700e/fire1 weapons/700e/fire2 weapons/700e/fire3 }
 weapons/4bore/fire lsnd/WeaponsD/4Bore/Fire
 weapons/4bore/draw lsnd/WeaponsD/4Bore/Draw
@@ -1078,11 +1083,12 @@ weapons/cannon/explode lsnd/WeaponsM/OmegaCannon/Explode
 weapons/cannon/empty lsnd/WeaponsM/OmegaCannon/FireEmpty
 weapons/cannon/pickup lsnd/WeaponsM/OmegaCannon/Pickup
 weapons/cannon/draw lsnd/WeaponsM/OmegaCannon/Draw
-$limit weapons/cannon/explode 0
 weapons/cannon/impactfloor lsnd/WeaponsM/OmegaCannon/ImpactFloor
 weapons/cannon/impactwall lsnd/WeaponsM/OmegaCannon/ImpactWall
+$limit weapons/cannon/explode 0
 $limit weapons/cannon/impactfloor 0
 $limit weapons/cannon/impactwall 0
+$attenuation weapons/cannon/explode 0.5
 $attenuation weapons/cannon/impactfloor 0.8
 $attenuation weapons/cannon/impactwall 0.8
 weapons/punct/fire lsnd/WeaponsM/OmegaCannon/Punctuator/Fire
@@ -1142,6 +1148,7 @@ weapons/missile/reloadin lsnd/Weapons/MissileLauncher/ReloadIn
 weapons/missile/draw lsnd/Weapons/MissileLauncher/Draw
 weapons/missile/explode lsnd/Weapons/MissileLauncher/Explode
 $limit weapons/missile/explode 0
+$attenuation weapons/missile/explode 0.8
 weapons/plasma/fire lsnd/WeaponsM/PlasmaRifle/Fire
 weapons/plasma/altfire lsnd/WeaponsM/PlasmaRifle/AltFire
 weapons/plasma/pickup lsnd/WeaponsM/PlasmaRifle/Pickup

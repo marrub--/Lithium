@@ -213,7 +213,8 @@ effects {
    geexplosion9  expl9  # ^
    geexplosion10 expl10 # ^
    geexplosion11 expl11 # ^
-
+   $limit geexplosion 0
+   $attenuation geexplosion 0.5
    $random geexplosion {
       geexplosion1,
       geexplosion2,

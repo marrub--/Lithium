@@ -90,9 +90,11 @@ void GUIUpgradesList(struct gui_state *g) {
       else                                      pre = &gui_p.btnlistsel;
 
       i32 *upgrsel = &pl.cbi.st.upgrsel;
-      if(G_Button_HId(g, _i, tmpstr(lang(fast_strdup2(LANG "UPGRADE_TITLE_", upgr->name))),
-                      0, y, _i == *upgrsel, .color = color, .preset = pre))
-      {
+      str  upgrnam = lang(fast_strdup2(LANG "UPGRADE_TITLE_", upgr->name));
+      if(!upgrnam) {
+         upgrnam = fast_strdup(upgr->name);
+      }
+      if(G_Button_HId(g, _i, tmpstr(upgrnam), 0, y, _i == *upgrsel, .color = color, .preset = pre)) {
          *upgrsel = _i;
       }
 

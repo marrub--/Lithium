@@ -53,40 +53,32 @@ class Lith_PoisonBullet : Lith_BulletPuff {
       +PuffOnActors
       -AllowParticles
    }
-   void lith_spawnPoisonBlobs() {
+
+   override void postBeginPlay() {
+      super.postBeginPlay();
       for(int i = 0; i < 5; i++) {
          a_spawnItemEx("Lith_PoisonBlob", 0,0,0, fRandom(-1,1),fRandom(-1,1),fRandom(2,6), 0, 0, 64);
       }
-   }
-   states {
-   Spawn:
-      TNT1 A 0;
-      TNT1 A 0 {
-         if(tracer) {
-            let ticker = Lith_PoisonTicker(tracer.findinventory("Lith_PoisonTicker"));
-            if(!ticker) {
-               ticker = Lith_PoisonTicker(tracer.giveInventoryType("Lith_PoisonTicker"));
-            }
-            ticker.m_end = level.time + 70;
-            ticker.target = target;
+      if(tracer) {
+         let ticker = Lith_PoisonTicker(tracer.findinventory("Lith_PoisonTicker"));
+         if(!ticker) {
+            ticker = Lith_PoisonTicker(tracer.giveInventoryType("Lith_PoisonTicker"));
          }
-         return !tracer || tracer.bNoBlood ? resolveState("Crash") : state(null);
+         ticker.m_end = level.time + 70;
+         ticker.target = target;
       }
-      TNT1 A 0 lith_spawnPoisonBlobs;
-      stop;
-   Crash:
-      XPUF Q 0;
-      XPUF Q 0 lith_spawnPoisonBlobs;
-      goto super::Spawn;
    }
 }
 
 class Lith_PoisonTicker : Inventory;
+
 int m_end;
+
 override void markPrecacheSounds() {
    super.markPrecacheSounds();
    markSound("weapons/shotgun/poison/acid");
 }
+
 override void tick() {
    if(!owner || level.time == m_end) {
       destroy();

@@ -46,7 +46,12 @@ cstr GetShortName(struct page *page) {
    if(page->category == _bipc_mail) {
       return CanonTime(ct_short, page->time);
    } else {
-      return tmpstr(lang(fast_strdup2(LANG "INFO_SHORT_", page->name)));
+      str infonam = lang(fast_strdup2(LANG "INFO_SHORT_", page->name));
+      if(!infonam) {
+         return page->name;
+      } else {
+         return tmpstr(infonam);
+      }
    }
 }
 

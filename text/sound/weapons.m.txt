@@ -211,15 +211,12 @@ weapons {
       empty   FireEmpty # Killing Floor
       pickup  Pickup    # Halo 3, Doom 3
       draw    Draw      # Fallout: New Vegas
-
+      impactfloor ImpactFloor # ???
+      impactwall  ImpactWall  # ???
       $limit explode 0
-
-      impactfloor ImpactFloor
-      impactwall  ImpactWall
-
       $limit impactfloor 0
       $limit impactwall 0
-
+      $attenuation explode 0.5
       $attenuation impactfloor 0.8
       $attenuation impactwall 0.8
    }

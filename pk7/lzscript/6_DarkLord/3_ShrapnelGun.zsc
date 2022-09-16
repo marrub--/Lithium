@@ -75,9 +75,12 @@ default {
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/shrapnel/draw";
    Lith_Weapon.AmmoType "Lith_ShellAmmo";
+   -Weapon.NoAutoFire
 }
+
+int m_chargeLevel;
+
 action(Weapon) void Lith_A_FireShrapnel() {
-   lith_takeAmmo(1);
    A_StartSound("weapons/shrapnel/fire", lch_weapon);
    A_AlertMonsters();
    A_GunFlash();
@@ -86,8 +89,10 @@ action(Weapon) void Lith_A_FireShrapnel() {
    Lith_A_RecoilUp(2);
    a_recoil(0.7);
    lith_a_setInterpolation(true);
-   Lith_FireBullets(3.5, 2.5, 14, 12, FBF_NORANDOM, puffType: 'Lith_ShrapnelPuff');
+   Lith_FireBullets(3.5, 2.5, 14 + 5 * invoker.m_chargeLevel, 12, FBF_NORANDOM, puffType: 'Lith_ShrapnelPuff');
+   a_setTics(1 + (invoker.m_chargeLevel / 4));
 }
+
 states(Weapon) {
 Ready:
    SHCA A 1 Lith_A_Ready;
@@ -100,10 +105,31 @@ Select:
    loop;
 Fire:
    #### # 0 lith_jumpNoAmmo;
-   #### # 0 lith_a_setInterpolation(true);
+   #### # 0 {
+      lith_a_setInterpolation(true);
+      invoker.m_chargeLevel = 0;
+   }
    SHCA A 1;
    SHCA A 1 offset(2, 33);
    SHCA A 1 offset(4, 34);
+   SHCA A 0 lith_takeAmmo(1);
+   SHCA A 0 a_jumpIf(!Lith_UTIL.pData(_pdt_upgrade, UPGR_Shrapnel_A), "FireDone");
+   SCHA A 0 a_startSound("weapons/rail/charge", lch_weapon);
+Charge:
+   SHCA A 1 a_weaponOffset(fRandom(6, 6+4), fRandom(36, 36+4), wof_interpolate);
+   SHCA A 2 a_weaponOffset(fRandom(6, 6+4), fRandom(36, 36+4), wof_interpolate);
+   SHCA A 0 {
+      if(++invoker.m_chargeLevel & 3 == 3) {
+         if(invoker.lith_noAmmo()) {
+            return resolveState("FireDone");
+         } else {
+            lith_takeAmmo();
+         }
+      }
+      a_reFire("Charge");
+      return state(null);
+   }
+FireDone:
    SHCA C 1 offset(164, 109);
    SHCA B 1 offset(173, 117) bright lith_a_fireShrapnel;
    SHCA B 2 offset(180, 121);
@@ -113,8 +139,7 @@ Fire:
    SHCA C 1 offset(165, 108);
    SHCA C 1 offset(152, 104);
    #### # 0 lith_a_setInterpolation(false);
-   SHCA A 1 offset(1, 32);
-   SHCA A 1 a_reFire;
+   SHCA A 1 a_weaponOffset(0, 32);
    goto ReadySelector;
 FireEmpty:
    SHCA A 2 offset(3, 38);

@@ -6,35 +6,73 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_700Bullet : Lith_BulletPuff;
+class Lith_700Explosion : Actor {
+   default {
+      Scale 0.4;
+      RenderStyle "Add";
+      +Bright
+      +NoBlockmap
+      +NoGravity
+   }
 
-default
-{
+   int m_ticks;
+
+   states {
+   Spawn:
+      RDGL A 1 {
+         if(tracer) {
+            setOrigin(tracer.pos, true);
+         }
+         scale.x = scale.y = fRandom(0.2, 0.6);
+         return a_jumpIf(++m_ticks > 25, "Death");
+      }
+      loop;
+   Death:
+      MICX A 1 {
+         scale = (0.4, 0.4);
+         a_explode(80, 200, 0);
+         a_startSound("weapons/700e/explode", lch_body);
+      }
+      MICX BC 2;
+      MICX D 3;
+      MICX EF 2;
+      MICX G 4;
+      stop;
+   }
+}
+
+class Lith_700Bullet : Lith_BulletPuffPainless;
+
+default {
    Mass 10;
    Scale 1.5;
    DamageType "Bullet";
    Species "Lith_Player";
-
-   +DONTHARMSPECIES
-   +MTHRUSPECIES
-   +FORCERADIUSDMG
-   +PUFFONACTORS
-   +PUFFGETSOWNER
-   +NOEXTREMEDEATH
-   +PAINLESS
+   +DontHarmSpecies
+   +MThruSpecies
+   +ForceRadiusDmg
+   +PuffOnActors
+   +PuffGetsOwner
+   +NoExtremeDeath
+   +HitTracer
 }
 
-states
-{
-Spawn:
-   TNT1 A 0;
-   TNT1 A 0 A_Explode(10, 32, 0);
-   TNT1 AAA 0 A_SpawnItemEx("Lith_PuffSmoke", frandom(-3,3), frandom(-3,3), frandom(1,5) + 0.1 * random(-10, 10));
-   goto Super::Spawn;
-XDeath:
-   TNT1 A 0;
-   TNT1 A 0 A_Explode(35, 200, 0);
-   stop;
+override void postBeginPlay() {
+   super.postBeginPlay();
+   if(Lith_UTIL.pData(_pdt_upgrade, UPGR_700E_A)) {
+      let mo = spawn("Lith_700Explosion", tracer ? tracer.pos : pos);
+      mo.tracer = tracer;
+      mo.target = target;
+      if(tracer) {
+         mo.worldOffset = pos - tracer.pos;
+      }
+   } else {
+      if(tracer) {
+         A_Explode(35, 200, 0);
+      } else {
+         A_Explode(10, 32, 0);
+      }
+   }
 }
 
 /* EOF */

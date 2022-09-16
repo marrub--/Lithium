@@ -47,7 +47,9 @@ weapons {
       draw  Draw       # ^
       bin   BulletIn   # Temporal Assassin
       cout  CasingsOut # ^
-
+      explode Explode # Self-made
+      $limit explode 0
+      $attenuation explode 0.6
       $random fire {
          fire1,
          fire2,

@@ -57,6 +57,7 @@ weapons {
       draw      Draw      # Halo 3, Doom 3
       explode   Explode   # ???
       $limit explode 0
+      $attenuation explode 0.8
    }
 
    plasma {

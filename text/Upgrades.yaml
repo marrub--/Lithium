@@ -16,10 +16,8 @@ _uc_body:
       Flashlight:  {pg: N/A,          f: -DU-E}
       Zoom:        {pg: N/A,          f: -DUR-}
       VitalScan:   {pg: VitalScanner, f: --UR-, pr: 2}
-
    gO:
       ReflexWetw: {f: A-U--, pr: 5, mul: -5}
-
    pM:
       JetBooster:  {                       f: --U--, mul: -5}
       CyberLegs:   {         scr: 1220000, f: --U--, pr:  4}
@@ -27,19 +25,15 @@ _uc_body:
       ReactArmor2: {pg: N/A, scr: 2990200,           pr: 10, req: ai ra}
       DefenseNuke: {         scr:  580030, f: ----E,         req: ai   }
       Adrenaline:  {         scr: 1801000, f: -DU--, pr: 10}
-
    pC:
       Magic:       {              f: --UR-}
       SoulCleaver: {scr: 1100000}
       StealthSys:  {scr: 1800450, f: -DU--}
-
    pD:
       Subweapons: {f: --URE}
-
 _uc_weap:
    gO:
       AutoReload: {scr: 950050, pr: 2}
-
    pM:
       Pistol_A:  {pg: N/A, scr:  140940}
       Pistol_B:  {pg: N/A, scr:  340000,                          req: wmd}
@@ -54,7 +48,6 @@ _uc_weap:
       Cannon_A:  {         scr: 5100700, f: -D---,        grp: 4, req: wmd    }
       Cannon_B:  {         scr: 5800100,           pr: 5, grp: 4, req: wmd wrd}
       Cannon_C:  {pg: N/A, scr: 1500000,                  grp: 4, req: wmd wrd rdi}
-
    pC:
       Mateba_A:   {scr:  614100, grp: 1}
       ShockRif_A: {scr: 1519590, grp: 2}
@@ -69,18 +62,20 @@ _uc_weap:
       CPlasma_A:  {scr: 2230500, grp: 4}
       ShipGun_A:  {scr: 6988800, grp: 5}
       ShipGun_B:  {scr: 7767700, grp: 5}
-
+   pD:
+      700E_A:     {scr: 3034000}
+      Shrapnel_A: {scr: 3034000}
 _uc_extr:
    gO:
       TorgueMode: {pg: N/A, scr: 8000000,                    pr: 8, req: rdi}
       Seven7s:    {pg: N/A, scr: 8235430, f: ADU--, mul: 10, pr: 7, req: rdi}
       lolsords:   {pg: N/A, scr: 1000000, f: ADU--, mul: 20,        req: rdi}
       Goldeneye:  {pg: N/A, scr:   70000, f: --U--, mul:  7,        req: rdi}
-
 _uc_down:
    gA:
       UNCEUNCE:   {pg: N/A, f: ADU--, mul: 30}
       InstaDeath: {pg: N/A, f: --U--, mul: 50}
-      OneShot:    {pg: N/A,           mul: 50}
+   gO:
+      OneShot: {pg: N/A, mul: 50}
 
-## EOF
+# EOF

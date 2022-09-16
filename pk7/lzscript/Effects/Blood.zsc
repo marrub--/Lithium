@@ -48,7 +48,9 @@ class Lith_BloodHitCore : Actor {
       +FlatSprite
       +RollSprite
    }
-   int m_tics;
+
+   int m_ticks;
+
    override void postBeginPlay() {
       super.postBeginPlay();
       if(!translation) a_setTranslation('Lith_AllToRed');
@@ -61,17 +63,21 @@ class Lith_BloodHitCore : Actor {
       mo.translation = translation;
       mo.scale = scale;
       mo.angle = angle;
-      if(random(0, 255) < 128) a_startSound("body/flesh", lch_body);
+      if(random(0, 255) < 128) {
+         a_startSound("body/flesh", lch_body);
+      }
    }
+
    override void tick() {
       if(!isFrozen()) {
-         if(++m_tics > 4) {
+         if(++m_ticks > 4) {
             scale *= .95;
             alpha -= .1;
             if(alpha <= 0) destroy();
          }
       }
    }
+
    states {
    Spawn:
       LI09 T -1;
@@ -85,13 +91,16 @@ default {
    +Corpse
    +DontSplash
 }
+
 int m_lev;
-int m_waitTics;
+int m_waitTicks;
+
 override void tick() {
    if(bNoInteraction)  setOrigin((pos.xy, floorZ), true);
-   if(m_waitTics == 0) super.tick();
-   else                m_waitTics -= 1;
+   if(m_waitTicks == 0) super.tick();
+   else                m_waitTicks -= 1;
 }
+
 void lith_a_setLevel(int num) {
    if(!m_lev) {
       let mo = spawn("Lith_BloodHitCore", pos + (fRandom(-1,1),fRandom(-1,1),fRandom(-1,1)), ALLOW_REPLACE);
@@ -103,6 +112,7 @@ void lith_a_setLevel(int num) {
    }
    m_lev = num;
 }
+
 states {
 Spawn:
    TNT1 A 0 nodelay resolveState("Heavy"); /* HACK: this is STILL hardcoded! */
@@ -127,7 +137,7 @@ Crash:
       unlinkFromWorld(ctx);
       setXyz(pos + (fRandom(-8,8), fRandom(-8,8), 0));
       linkToWorld(ctx);
-      m_waitTics = lith_sv_bloodtime;
+      m_waitTicks = lith_sv_bloodtime;
       switch(m_lev) {
       case 1: frame = CH_U_A - CH_U_A; break;
       case 2: frame = CH_U_B - CH_U_A; break;

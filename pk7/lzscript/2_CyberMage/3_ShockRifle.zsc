@@ -80,23 +80,19 @@ class Lith_SuperShockEffect : Actor
 
 class Lith_ShockHitCount : Inventory {default {Inventory.MaxAmount 6;}}
 
-class Lith_ShockPuff : Lith_BulletPuff
-{
-   default
-   {
-      +ForcePain
+class Lith_ShockPuff : Lith_BulletPuffPainful {
+   default {
       +HitTracer
       +PuffGetsOwner
       +PuffOnActors
    }
 
-   void Lith_A_Shock() {
-      tracer.A_DamageSelf(5, "Electric", 0, "None", src: AAPTR_TARGET);
+   void lith_a_shock() {
+      tracer.a_damageSelf(5, "Electric", 0, "None", src: AAPTR_TARGET);
       Lith_CopyEffect.create("Lith_ShockFx", tracer);
    }
 
-   states
-   {
+   states {
    Crash:
       TNT1 A 0;
       TNT1 A 0 {
@@ -104,7 +100,7 @@ class Lith_ShockPuff : Lith_BulletPuff
          A_SpawnItemEx("Lith_ShockEffect");
       }
       TNT1 A 0 A_JumpIf(Lith_UTIL.pData(_pdt_upgrade, UPGR_ShockRif_A), "Charged");
-      goto Super::Spawn;
+      goto super::Spawn;
    Melee:
    Spawn:
       TNT1 A 0;

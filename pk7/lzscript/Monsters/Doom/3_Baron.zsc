@@ -6,14 +6,11 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_BaronHellfireTrailSpawner : Actor
-{
-   default
-   {
+class Lith_BaronHellfireTrailSpawner : Actor {
+   default {
       Height 2;
       Radius 2;
-
-      +NOINTERACTION
+      +NoInteraction
    }
 
    override void postBeginPlay() {

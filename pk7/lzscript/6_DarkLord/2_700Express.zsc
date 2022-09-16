@@ -11,12 +11,11 @@ class Lith_700Laser : Actor {
       Scale 0.25;
       Alpha 0.5;
       RenderStyle "Translucent";
-
       ClearFlags;
-      +NOINTERACTION
-      +BRIGHT
-      +FORCEXYBILLBOARD
-      +NOTIMEFREEZE
+      +NoInteraction
+      +Bright
+      +ForceXyBillboard
+      +NoTimeFreeze
    }
 
    states {
@@ -50,7 +49,6 @@ default {
    Weapon.SlotNumber 2;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/700e/draw";
-
    +Weapon.NoAutoFire
 }
 
@@ -60,20 +58,20 @@ bool m_doLaser;
 override void tick() {
    super.tick();
    vector3 beg, end; [beg, end] = lith_getLaserPos(0.0);
-
    for(int i = 0; i < m_laser.size(); i++) {
       if(!owner || owner.player.readyWeapon != self) {
-         if(m_laser[i]) m_laser[i].destroy();
+         if(m_laser[i]) {
+            m_laser[i].destroy();
+         }
       } else if(m_doLaser) {
-         if(!m_laser[i])
-            m_laser[i] = Spawn("Lith_700Laser3",
-                               lith_lerpLaserPos(beg, end, i));
+         if(!m_laser[i]) {
+            m_laser[i] = Spawn("Lith_700Laser3", lith_lerpLaserPos(beg, end, i));
+         }
          m_laser[i].alpha = 0.2 / (i + 1);
       } else if(m_laser[i]) {
          m_laser[i].alpha = 0.0;
       }
    }
-
    m_doLaser = false;
 }
 
@@ -84,35 +82,31 @@ action(Weapon) void lith_fire700e() {
    A_Quake(2, 3, 0, 128);
    Lith_FireBullets(0, 0, -1, int(60*frandom(1,1.7)), FBF_NORANDOM, "Lith_700Bullet", 4, tracer: _tr_slow);
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
-   for(int i = 1; i <= 3; i++)
+   for(int i = 1; i <= 3; i++) {
       Lith_A_GunSmoke(7, 3 * i);
+   }
    A_StartSound("weapons/700e/fire", lch_weapon, pitch: FRandom(0.9, 1.0));
 }
 
 vector3, vector3 lith_getLaserPos(double pit) {
    let ply = Lith_Player(owner);
    let sz  = ply.player.viewz - ply.pos.z - 3;
-
    let ps = sin(ply.pitch - pit - 90);
    let cz = cos(ply.pitch - pit - 90);
    let ys = sin(ply.angle - 15);
    let yc = cos(ply.angle - 15);
    let cx = ps * yc;
    let cy = ps * ys;
-
    let beg = (ply.pos.x      + cx * -16,
               ply.pos.y      + cy * -16,
               ply.pos.z + sz + cz * -16);
-
    ys = sin(ply.angle);
    yc = cos(ply.angle);
    cx = ps * yc;
    cy = ps * ys;
-
    let end = (beg.X + cx * -32,
               beg.Y + cy * -32,
               beg.Z + cz * -32);
-
    return beg, end;
 }
 
@@ -122,11 +116,8 @@ vector3 lith_lerpLaserPos(vector3 beg, vector3 end, int i) {
 
 void lith_moveLaser(double pit) {
    if(!owner) return;
-
    m_doLaser = true;
-
    vector3 beg, end; [beg, end] = lith_getLaserPos(pit);
-
    for(int i = 0; i < m_laser.size(); i++) {
       if(m_laser[i]) {
          m_laser[i].setOrigin(lith_lerpLaserPos(beg, end, i), true);
@@ -137,11 +128,9 @@ void lith_moveLaser(double pit) {
 void lith_spawnLaserTrace(double pit) {
    let ply = Lith_Player(owner);
    if(!ply) return;
-
    let sz  = ply.player.viewz - ply.pos.z;
    let loc = Lith_UTIL.TraceFrom(ply, ply.m_iyaw, ply.m_ipitch - pit, 2048, sz);
    Spawn("Lith_700Laser", loc);
-
    loc = Lith_UTIL.TraceFrom(ply, ply.angle, ply.pitch - pit, 2048, sz);
    Spawn("Lith_700Laser2", loc);
 
@@ -157,14 +146,12 @@ Ready:
    700E A 0 lith_laser(0.0);
    700E A 1 Lith_A_Ready(WRF_ALLOWRELOAD);
    loop;
-
 Deselect:
    700E A 1 Lith_A_Lower(_raise_fast);
    wait;
 Select:
    700E A 1 Lith_A_Raise(_raise_fast);
    wait;
-
 Fire:
    #### # 0 Lith_A_JumpIfMagEmpty;
    #### # 0 Lith_A_MagIncr;
@@ -192,7 +179,6 @@ Fire:
       lith_a_setInterpolation(false);
    }
    goto ReadySelector;
-
 FireEmpty:
    700E A 1 lith_laser(0.0);
    700E AA 1 offset(3, 38) lith_laser(0.0);
@@ -205,7 +191,6 @@ FireEmpty:
    700E A 1 offset(2, 33) lith_laser(0.0);
    700E AAAAA 1 offset(1, 32) lith_laser(0.0);
    goto ReadySelector;
-
 Reload:
    #### # 0 Lith_A_JumpIfMagFull;
    700E B 1 lith_a_setInterpolation(true);
