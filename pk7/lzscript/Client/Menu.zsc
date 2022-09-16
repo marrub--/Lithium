@@ -263,7 +263,8 @@ ui void drawMenu(RenderEvent evt) {
             m_menuRectXf.scale((size, size));
             m_menuRectXf.translate((x * size, y * size));
             m_menuRect.setTransform(m_menuRectXf);
-            Screen.drawShapeFill("black", 0.5, m_menuRect);
+            /* FIXME */
+            Screen.drawShapeFill("black", 0.5, m_menuRect, DTA_LegacyRenderStyle, STYLE_TRANSLUCENTSTENCIL, DTA_Alpha, 0.5);
          }
       }
    }
@@ -296,7 +297,8 @@ ui static void drawBack(double x, double y, double w, double h, vector2 vsz, uin
          shp.pushTriangle(0, i - 1, i);
       }
    }
-   Screen.drawShapeFill("black", 0.77, shp);
+   /* FIXME */
+   Screen.drawShapeFill("black", 0.77, shp, DTA_LegacyRenderStyle, STYLE_TRANSLUCENTSTENCIL, DTA_Alpha, 0.77);
    vector2 cp = v[0];
    for(uint i = 1; i <= vn; ++i) {
       vector2 np = i == vn ? v[0] : v[i];
