@@ -44,7 +44,8 @@ default {
 }
 
 action(Weapon) void Lith_A_FireRocket(class<Actor> cl, double xofs) {
-   A_GunFlash("DummyFlash");
+   lith_gunFlash();
+   a_alertMonsters();
    A_FireProjectile(cl, 0, true, xofs, -2);
    lith_takeAmmo();
    Lith_A_RecoilUp(1.2);

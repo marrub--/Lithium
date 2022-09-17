@@ -1078,7 +1078,6 @@ weapons/rocket/load lsnd/WeaponsM/GrenadeLauncher/Load
 weapons/rocket/lock lsnd/WeaponsM/GrenadeLauncher/Lock
 weapons/rocket/launch lsnd/WeaponsM/GrenadeLauncher/Launch
 weapons/rocket/setalt lsnd/WeaponsM/GrenadeLauncher/SetAlt
-weapons/rocket/setalt1 lsnd/WeaponsM/GrenadeLauncher/SetAlt1
 weapons/rocket/grenade lsnd/WeaponsM/GrenadeLauncher/FireGrenade
 weapons/rocket/mark lsnd/WeaponsM/GrenadeLauncher/Mark
 $random weapons/rocket/fire { weapons/rocket/fire1 weapons/rocket/fire2 weapons/rocket/fire3 }

@@ -54,7 +54,9 @@ action(Weapon) void Lith_A_FireSSG()
    A_StartSound("weapons/ssg/fire", lch_weapon);
    A_Recoil(1.2);
    Lith_A_RecoilUp(1.5);
-   A_GunFlash();
+   lith_gunFlash();
+   a_alertMonsters();
+   a_overlay(_psp_flash, "Flash");
    a_overlayFlags(_psp_flash, pspf_renderstyle, true);
    a_overlayRenderStyle(_psp_flash, style_add);
    A_FireProjectile("Lith_LightProjectileRedLong", 0);

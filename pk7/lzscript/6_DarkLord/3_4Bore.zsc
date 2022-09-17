@@ -33,7 +33,8 @@ action(Weapon) void Lith_A_Fire4Bore()
    A_AlertMonsters();
    lith_takeAmmo(6);
    A_SetBlend("White", 0.2, 6);
-   A_GunFlash("DummyFlash");
+   lith_gunFlash();
+   a_alertMonsters();
    Lith_A_GunSmoke(2, 8);
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
    Lith_FireBullets(4, 2, 8, 50 * random(1, 3), FBF_NORANDOM, "Lith_700Bullet", tracer: _tr_big);

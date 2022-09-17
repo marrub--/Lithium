@@ -6,7 +6,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_ShockEffectPuff : Lith_Dummy {
+class Lith_ShockEffectPuff : Lith_BasicPuff {
    default {
       DamageType "Electric";
       Species "Lith_Player";
@@ -130,7 +130,8 @@ action(Weapon) void Lith_A_FireShock() {
    A_Light(1);
    Lith_A_RecoilUp(0.5);
    A_Recoil(0.1);
-   A_GunFlash("DummyFlash");
+   lith_gunFlash();
+   a_alertMonsters();
    A_StartSound("weapons/erifle/fire", lch_weapon);
    Lith_FireBullets(1, 0, -1, int(37*FRandom(1,1.5)), FBF_NORANDOM, "Lith_ShockPuff");
    A_FireProjectile("Lith_LightProjectileRedShort", 0);

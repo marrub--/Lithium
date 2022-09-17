@@ -75,7 +75,8 @@ override void markPrecacheSounds() {
 action(Weapon) void Lith_A_FirePlasma()
 {
    lith_takeAmmo(35);
-   A_GunFlash("DummyFlash");
+   lith_gunFlash();
+   a_alertMonsters();
    A_StartSound("weapons/plasma/fire", lch_weapon);
    for(int i = 0; i < 4; i++) {
       float y, p; [y, p] = Lith_UTIL.circleSpread(7, 3);
@@ -89,7 +90,7 @@ action(Weapon) void Lith_A_FireLaser()
    lith_takeAmmo(10);
    A_AlertMonsters();
    A_FireBullets(0, 0, 1, 0, "Lith_PlasmaHit", FBF_NORANDOMPUFFZ);
-   A_RailAttack(Lith_UTIL.pData(_pdt_upgrade, UPGR_TorgueMode) ? 1 : 12, 0, false, "", "Red", RGF_SILENT|RGF_FULLBRIGHT|RGF_NOPIERCING, 0, "Lith_Dummy", 0, 0, 0, 1, 3, 0, "Lith_PlasmaLaze");
+   A_RailAttack(Lith_UTIL.pData(_pdt_upgrade, UPGR_TorgueMode) ? 1 : 12, 0, false, "", "Red", RGF_SILENT|RGF_FULLBRIGHT|RGF_NOPIERCING, 0, "Lith_BasicPuff", 0, 0, 0, 1, 3, 0, "Lith_PlasmaLaze");
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
 }
 
@@ -106,7 +107,8 @@ action(Weapon) void Lith_A_FireRail()
 action(Weapon) void Lith_A_FireAltPlasma()
 {
    lith_takeAmmo(90);
-   A_GunFlash("DummyFlash");
+   lith_gunFlash();
+   a_alertMonsters();
    A_FireProjectile("Lith_PenetratingPlasmaBolt", 0, false, 0, -9);
    A_FireProjectile("Lith_PenetratingPlasmaBolt", frandom(-2.7, -1.9), false, 0, -9);
    A_FireProjectile("Lith_PenetratingPlasmaBolt", frandom(2.7, 1.9), false, 0, -9);
@@ -116,7 +118,7 @@ action(Weapon) void Lith_A_FireAltPlasma()
 
 action(Weapon) void Lith_A_EmitIons(int spars)
 {
-   A_RailAttack(0, 0, false, "", "White", RGF_SILENT|RGF_FULLBRIGHT, spars, "Lith_Dummy", 0, 0, 0, 1, 0.75, 0, "", -2);
+   A_RailAttack(0, 0, false, "", "White", RGF_SILENT|RGF_FULLBRIGHT, spars, "Lith_BasicPuff", 0, 0, 0, 1, 0.75, 0, "", -2);
 }
 
 states(Weapon)

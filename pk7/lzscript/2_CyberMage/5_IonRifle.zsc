@@ -182,15 +182,16 @@ action(Weapon) void Lith_A_FireIonRifle()
 {
    Lith_A_MagIncr();
    lith_takeAmmo(2);
-   A_GunFlash("DummyFlash");
+   lith_gunFlash();
+   a_alertMonsters();
    A_FireProjectile("Lith_LightProjectileSkyLong", 0);
    A_FireProjectile("Lith_IonRifleHax", flags: FPF_NOAUTOAIM);
    if(invoker.m_Charge >= 1.5)
       A_FireProjectile("Lith_IonRifleHax", flags: FPF_NOAUTOAIM);
    if(invoker.m_Charge >= 2)
       A_FireProjectile("Lith_IonRifleHax", flags: FPF_NOAUTOAIM);
-   A_RailAttack(int(invoker.m_Charge * 300), 0, false, "", "White", RGF_SILENT|RGF_FULLBRIGHT, 0, "Lith_Dummy", 0, 0, 0, 0, 16, 0, "Lith_IonRifleParticle");
-   A_RailAttack(0, 0, false, "", "White", RGF_SILENT|RGF_FULLBRIGHT, 0, "Lith_Dummy", 0, 0, 0, 0, 0.5, 0);
+   A_RailAttack(int(invoker.m_Charge * 300), 0, false, "", "White", RGF_SILENT|RGF_FULLBRIGHT, 0, "Lith_BasicPuff", 0, 0, 0, 0, 16, 0, "Lith_IonRifleParticle");
+   A_RailAttack(0, 0, false, "", "White", RGF_SILENT|RGF_FULLBRIGHT, 0, "Lith_BasicPuff", 0, 0, 0, 0, 0.5, 0);
    A_Recoil(invoker.m_Charge * 2);
    if(invoker.m_Charge >= 2)
       A_StartSound("weapons/ionrifle/fire2", lch_weapon);

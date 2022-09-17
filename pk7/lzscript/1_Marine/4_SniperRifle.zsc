@@ -28,7 +28,8 @@ action(Weapon) void Lith_A_FireSniper()
 {
    lith_takeAmmo(5);
    Lith_A_MagIncr();
-   A_GunFlash("DummyFlash");
+   lith_gunFlash();
+   a_alertMonsters();
    Lith_FireBullets(0, 0, 1, 161, FBF_NORANDOM, "Lith_SniperBullet");
    A_Recoil(1);
    Lith_A_RecoilUp(2);

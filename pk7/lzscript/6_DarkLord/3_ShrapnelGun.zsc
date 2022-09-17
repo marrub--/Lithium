@@ -83,7 +83,9 @@ int m_chargeLevel;
 action(Weapon) void Lith_A_FireShrapnel() {
    A_StartSound("weapons/shrapnel/fire", lch_weapon);
    A_AlertMonsters();
-   A_GunFlash();
+   lith_gunFlash();
+   a_alertMonsters();
+   a_overlay(_psp_flash, "Flash");
    a_overlayFlags(_psp_flash, pspf_renderstyle, true);
    a_overlayRenderStyle(_psp_flash, style_add);
    Lith_A_RecoilUp(2);

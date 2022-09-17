@@ -341,7 +341,6 @@ generator Lith_Franca                Scorch
 generator Lith_Sophia                Scorch
 generator Lith_HomingRocket          Scorch
 generator Lith_SpiralRocket          Scorch
-generator Lith_OmegaRailDummy        Scorch
 generator Lith_FatShot               Scorch
 generator Lith_PunctuatorPuff        Scorch
 generator Lith_Solspear              Scorch
@@ -359,7 +358,7 @@ generator Lith_DiffPlasma            PlasmaScorchLower
 generator Lith_PulseCharge           PlasmaScorchLower
 generator Lith_Star                  PlasmaScorchLower
 generator Lith_VoidShot              PlasmaScorchLower
-generator Lith_OmegaRailDummy        BFGScorch
+generator Lith_OmegaRailPuff         BFGScorch
 generator Lith_ParticleBeamPuff      Lith_ParticleBeamScorch
 generator Lith_DelearDot             Lith_DelearScorch
 generator Lith_PoisonBullet          Lith_PoisonScorch

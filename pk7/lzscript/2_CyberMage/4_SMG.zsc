@@ -105,7 +105,8 @@ double m_Recoil;
 action(Weapon) void Lith_A_FireSMG()
 {
    Lith_A_MagIncr();
-   A_GunFlash("DummyFlash");
+   lith_gunFlash();
+   a_alertMonsters();
    A_StartSound("weapons/rifle/firero", lch_dryweapon, volume: CallACS("Lith_AmmoRunOut", true, 0.5*FIX)/FIX);
    Lith_A_RecoilUp(0.15);
    A_FireProjectile("Lith_LightProjectileRedShort", 0);

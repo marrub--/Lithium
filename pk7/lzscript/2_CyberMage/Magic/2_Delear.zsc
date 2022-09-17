@@ -141,7 +141,8 @@ Fire:
       case 15: A_FireProjectile("Lith_DelearDot", 0, false,  20, 2 ); break;
       }
       Lith_A_MagIncr();
-      A_GunFlash("DummyFlash");
+      lith_gunFlash();
+      a_alertMonsters();
       A_StartSound("weapons/delear/fire", lch_weapon);
    }
    goto ReadySelector;

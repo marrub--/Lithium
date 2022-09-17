@@ -262,10 +262,10 @@ override void worldThingDamaged(WorldEvent ev) {
    }
    let pos = dst.pos + (0, 0, dst.height / 2);
    Lith_URANUS.instance().addDamageNum(pos, dst.radius/2, ev.damage, ev.thing);
-   if(ev.damageType == 'Bullet' && ev.damage >= 8 && !dst.bNoBlood) {
-      double vol = clamp(ev.damage / 10.0, 0, 1);
-      let mo = Actor.spawn("Lith_Dummy", pos);
-      mo.a_startSound("body/bullethit", lch_body, volume: vol * frandom(0.5, 1.1));
+   if(ev.damageType == 'Bullet' && ev.damage >= 4 && !dst.bNoBlood) {
+      double vol = min(ev.damage / 16.0, 1);
+      let mo = Actor.spawn("Lith_GoAway", pos);
+      mo.a_startSound("body/bullethit", lch_body, volume: vol);
    }
    if(!src || src == dst) {
       return;

@@ -76,7 +76,8 @@ default
 
 action(Weapon) void Lith_A_FireCPlasma()
 {
-   A_GunFlash("DummyFlash");
+   lith_gunFlash();
+   a_alertMonsters();
    A_FireProjectile("Lith_LightProjectileGreenShort", 0);
    lith_takeAmmo(30);
    A_StartSound("weapons/plasma/fire", lch_weapon);
@@ -88,7 +89,8 @@ action(Weapon) void Lith_A_FireCPlasma()
 
 action(Weapon) void Lith_A_FirePulse()
 {
-   A_GunFlash("DummyFlash");
+   lith_gunFlash();
+   a_alertMonsters();
    A_FireProjectile("Lith_LightProjectileGreenLong", 0);
    lith_takeAmmo(80);
    A_StartSound("weapons/plasma/altfire", lch_weapon);

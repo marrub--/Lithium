@@ -291,7 +291,8 @@ default {
 }
 
 action(Weapon) void Lith_A_FireStar() {
-   A_GunFlash("DummyFlash");
+   lith_gunFlash();
+   a_alertMonsters();
    if(Lith_UTIL.pData(_pdt_upgrade, UPGR_ShipGun_A)) {
       A_StartSound("weapons/shipgun/firesol", lch_weapon);
       A_FireProjectile("Lith_Solspear");

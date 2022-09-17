@@ -244,6 +244,7 @@ so_:
    OBJ:
    - AssassinPlayer
    - BarrierFX
+   - BasicPuff
    - BossReward1
    - BossReward2
    - BossReward3
@@ -261,7 +262,6 @@ so_:
    - CyberMagePlayer
    - DarkLordPlayer
    - DivisionSigil
-   - Dummy
    - EXPLOOOSION
    - ExplodoBoots
    - Feuer

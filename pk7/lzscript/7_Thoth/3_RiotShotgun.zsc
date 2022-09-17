@@ -21,7 +21,8 @@ bool m_duplex;
 
 action(Weapon) void Lith_A_FireRiotShotgun() {
    lith_takeAmmo(10);
-   A_GunFlash("DummyFlash");
+   lith_gunFlash();
+   a_alertMonsters();
    Lith_FireBullets(7, 7, 17, 7, FBF_NORANDOM);
    Lith_A_GunSmoke();
    Lith_A_RecoilUp(4);

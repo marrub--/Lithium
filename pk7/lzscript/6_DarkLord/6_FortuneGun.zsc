@@ -6,7 +6,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_FortuneProjectilePuff : Lith_Dummy {
+class Lith_FortuneProjectilePuff : Lith_BasicPuff {
    default {
       DamageType "Electric";
       Species "Lith_Player";
@@ -209,7 +209,8 @@ action(Weapon) void Lith_A_FireFortune() {
    lith_takeAmmo(350);
    A_SetBlend("#80ffd5", 0.4, 20);
    A_StartSound("weapons/fortune/fire", lch_weapon, attenuation: 0.5, pitch: frandom[lith_fortune](0.9, 1.05));
-   A_GunFlash("DummyFlash");
+   lith_gunFlash();
+   a_alertMonsters();
    A_Recoil(6);
    A_Quake(2, 15, 0, 128);
    let pr = A_FireProjectile("Lith_FortuneProjectile", spawnheight: -32);

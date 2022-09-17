@@ -169,7 +169,8 @@ FireLoop:
       }
       Lith_GunSmoke("Lith_RemsSparkSpawner", 2, 8);
       A_Recoil(0.4);
-      A_GunFlash("DummyFlash");
+      lith_gunFlash();
+      a_alertMonsters();
       A_Quake(2, 15, 0, 128);
       Lith_A_RecoilUp(fRandom(-0.2, 0.8));
       return invoker.m_fireLoop++ == 170 ? resolveState("FireDone") : state(null);

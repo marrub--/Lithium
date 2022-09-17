@@ -77,7 +77,8 @@ override void tick() {
 
 action(Weapon) void lith_fire700e() {
    Lith_A_RecoilUp(2.5);
-   A_GunFlash("DummyFlash");
+   lith_gunFlash();
+   a_alertMonsters();
    A_Recoil(1.5);
    A_Quake(2, 3, 0, 128);
    Lith_FireBullets(0, 0, -1, int(60*frandom(1,1.7)), FBF_NORANDOM, "Lith_700Bullet", 4, tracer: _tr_slow);

@@ -19,7 +19,8 @@ default {
 
 action(Weapon) void Lith_A_FireDualPistols(int xofs) {
    Lith_A_MagIncr();
-   A_GunFlash("DummyFlash");
+   lith_gunFlash();
+   a_alertMonsters();
    Lith_FireBullets(2, 1, -1, 10, tracerX: xofs);
    Lith_A_GunSmokeSmall(xofs * 0.4);
    Lith_A_RecoilUp(0.4);

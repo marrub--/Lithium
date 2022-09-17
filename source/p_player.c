@@ -753,7 +753,7 @@ alloc_aut(0) script_str type("net") ext("ACS") addr(OBJ "KeyGlare") void Z_KeyGl
    ACS_FadeTo(255, 255, 255, 1.0, 0.0);
 
    AmbientSound(ss_player_glare, 1.0);
-   ACS_LineAttack(0, pl.yaw, pl.pitch, 1, so_Dummy, st_none,
+   ACS_LineAttack(0, pl.yaw, pl.pitch, 1, so_BasicPuff, st_none,
                   32767.0, FHF_NORANDOMPUFFZ | FHF_NOIMPACTDECAL);
 
    ACS_Delay(14);

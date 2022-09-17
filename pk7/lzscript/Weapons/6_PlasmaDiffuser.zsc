@@ -60,7 +60,8 @@ override void markPrecacheSounds() {
 }
 action(Weapon) void Lith_A_FirePlasmaDiff() {
    lith_takeAmmo(60);
-   A_GunFlash("DummyFlash");
+   lith_gunFlash();
+   a_alertMonsters();
    A_StartSound("weapons/plasdiff/fire", lch_weapon);
    A_FireProjectile("Lith_DiffPlasma", 0, false, 0, -9);
    A_FireProjectile("Lith_LightProjectileSkyShort", 0);

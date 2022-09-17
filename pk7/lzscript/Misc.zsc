@@ -6,53 +6,54 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_Dummy : Actor
-{
-   default
-   {
-      +NOTIMEFREEZE
-      +ALWAYSPUFF
-      +FORCEDECAL
-      +PUFFONACTORS
-      +NOGRAVITY
-      +BLOODLESSIMPACT
+class Lith_GoAway : Actor {
+   default {
+      +NoInteraction
    }
 
-   states
-   {
+   override void beginPlay() {}
+   override void postBeginPlay() {}
+   override void tick() {destroy();}
+}
+
+class Lith_BasicPuff : Actor {
+   default {
+      +NoTimeFreeze
+      +AlwaysPuff
+      +ForceDecal
+      +PuffOnActors
+      +NoGravity
+      +BloodlessImpact
+   }
+
+   states {
    Spawn:
       TNT1 A 1;
       stop;
    }
 }
 
-/* Don't remove this, it is actually used for checking if this mod is loaded. */
-class Lith_GreyHam : HealthBonus
-{
-   default
-   {
+/* Used for checking if this mod is loaded. */
+class Lith_GreyHam : HealthBonus {
+   default {
       Tag "$LITH_TAG_GreyHam";
       Inventory.PickupMessage "Picked up a grey ham.";
    }
 
-   states
-   {
+   states {
    Spawn:
       MURB A -1;
       stop;
    }
 }
 
-class Lith_Bip : Actor
-{
-   default
-   {
-      +BRIGHT
-      +NOBLOCKMAP
+class Lith_Bip : Actor {
+   default {
+      +Bright
+      +NoBlockmap
    }
 
-   states
-   {
+   states {
    Spawn:
       ABIP A -1;
       stop;

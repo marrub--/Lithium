@@ -527,6 +527,10 @@ action(Weapon) state lith_jumpIfSprint() {
    }
 }
 
+action void lith_gunFlash() {
+   player.mo.playAttacking2();
+}
+
 states(Actor) {
 Spawn:
    TNT1 A 0;
@@ -545,9 +549,6 @@ ReadySelector:
          ? ResolveState("AltReady")
          : ResolveState("Ready");
    }
-   stop;
-DummyFlash:
-   TNT1 A 0 A_AlertMonsters;
    stop;
 }
 

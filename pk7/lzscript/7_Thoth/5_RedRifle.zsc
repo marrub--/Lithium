@@ -19,7 +19,8 @@ default {
 
 action(Weapon) void Lith_A_FireRedRifle() {
    lith_takeAmmo(30);
-   A_GunFlash("DummyFlash");
+   lith_gunFlash();
+   a_alertMonsters();
    Lith_FireBullets(0, 0, -1, 300, FBF_NORANDOM);
    Lith_A_GunSmoke();
    Lith_A_RecoilUp(4);

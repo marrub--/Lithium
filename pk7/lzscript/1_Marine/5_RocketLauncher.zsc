@@ -156,7 +156,9 @@ Fire:
    GRLG A 0 Lith_A_FireRocket;
 FireAnim:
    GRLG B 1 bright {
-      A_GunFlash();
+      lith_gunFlash();
+      a_alertMonsters();
+      a_overlay(_psp_flash, "Flash");
       a_overlayFlags(_psp_flash, pspf_renderstyle, true);
       a_overlayRenderStyle(_psp_flash, style_add);
    }
@@ -223,7 +225,12 @@ FireUnrealLoad:
       lith_takeAmmo();
    }
    GRLR BC 2;
-   GRLR D 4 A_GunFlash("AltModeChanger", GFF_NOEXTCHANGE);
+   GRLR D 4 {
+      if(player.buttons & BT_ALTATTACK && invoker.m_mode < 2) {
+         ++invoker.m_mode;
+         a_startSound("weapons/rocket/setalt", lch_weapon, pitch: invoker.m_mode * 0.7);
+      }
+   }
    GRLR EF 2;
    GRLR GH 1;
 FireUnrealCheckRefire:
@@ -247,14 +254,6 @@ FireUnrealReal:
 FireUnrealSingle:
    GRLG A 0 A_FireProjectile("Lith_Rocket");
    goto FireAnim;
-AltModeChanger:
-   TNT1 A 0 {
-      if(player.buttons & BT_ALTATTACK) switch(invoker.m_Mode) {
-         case 0: ++invoker.m_Mode; A_StartSound("weapons/rocket/setalt", lch_weapon);  break;
-         case 1: ++invoker.m_Mode; A_StartSound("weapons/rocket/setalt1", lch_weapon); break;
-      }
-   }
-   stop;
 }
 
 /* EOF */

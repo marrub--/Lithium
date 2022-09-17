@@ -190,7 +190,6 @@ weapons {
       lock    Lock        # Unreal Tournament '99
       launch  Launch      # ^
       setalt  SetAlt      # Killing Floor
-      setalt1 SetAlt1     # ^
       grenade FireGrenade # Quake, Quake 2
       mark    Mark        # Phantasy Star Nova
 

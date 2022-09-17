@@ -123,7 +123,8 @@ action(Weapon) void Lith_A_MinigunFire() {
    A_AlertMonsters();
    A_StartSound("weapons/minigun/fire", lch_weapon, pitch: max(invoker.m_windUp, 0.8));
    A_OverlayOffset(_psp_weapon, FRandom(3, 8), FRandom(34, 39), WOF_INTERPOLATE);
-   A_GunFlash("DummyFlash");
+   lith_gunFlash();
+   a_alertMonsters();
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
    Lith_A_GunSmokeSmall(1.9);
    for(int i = 0; i < 2; ++i) {

@@ -7,7 +7,7 @@
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
 class Lith_GTFO : Inventory {default {Inventory.MaxAmount 1;}}
-class Lith_OmegaRailDummy : Lith_Dummy {}
+class Lith_OmegaRailPuff : Lith_BasicPuff {}
 
 class Lith_BFG9000 : Lith_MWeapon;
 
@@ -41,13 +41,15 @@ action(Weapon) void Lith_A_FirePunct()
 {
    A_AlertMonsters();
    lith_takeAmmo(2);
-   A_GunFlash("DummyFlash");
+   lith_gunFlash();
+   a_alertMonsters();
    CallACS("Lith_PunctuatorFire", 0);
 }
 
 action(Weapon) void Lith_A_FireCannonBig()
 {
-   A_GunFlash("DummyFlash");
+   lith_gunFlash();
+   a_alertMonsters();
    lith_takeAmmo(2);
    A_StartSound("weapons/cannon/firebig", lch_weapon);
    A_Recoil(4);
@@ -58,7 +60,8 @@ action(Weapon) void Lith_A_FireCannonBig()
 
 action(Weapon) void Lith_A_FireCannonSmall()
 {
-   A_GunFlash("DummyFlash");
+   lith_gunFlash();
+   a_alertMonsters();
    lith_takeAmmo(1);
    A_StartSound("weapons/cannon/fire", lch_weapon);
    A_Recoil(2);
@@ -70,15 +73,17 @@ action(Weapon) void Lith_A_FireCannonSmall()
 action(Weapon) void Lith_A_FireDarkMatter()
 {
    A_FireProjectile("Lith_DarkMatter", 0, false, 0, 0, FPF_NOAUTOAIM);
-   A_GunFlash("DummyFlash");
+   lith_gunFlash();
+   a_alertMonsters();
    A_StartSound("weapons/cannon/fired", lch_weapon);
 }
 
 action(Weapon) void Lith_A_FireOmegaRail()
 {
    lith_takeAmmo(2);
-   A_GunFlash("DummyFlash");
-   A_RailAttack(500, 0, false, "", "", RGF_SILENT, 0, "Lith_OmegaRailDummy", 0, 0, 0, 0, 0.9, 0, "Lith_OmegaRailBeam", -19);
+   lith_gunFlash();
+   a_alertMonsters();
+   A_RailAttack(500, 0, false, "", "", RGF_SILENT, 0, "Lith_OmegaRailPuff", 0, 0, 0, 0, 0.9, 0, "Lith_OmegaRailBeam", -19);
    A_FireProjectile("Lith_OmegaRailHax", 0, false, 0, -19);
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
 }
