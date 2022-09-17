@@ -45,17 +45,17 @@
 
 class Lith_UniqueID : Inventory {
    default {
-      Inventory.MaxAmount 0x7FFFFFFF;
+      Inventory.MaxAmount int.max;
       +Inventory.UnDroppable
    }
 }
 class Lith_MonsterID : Inventory {
    default {
-      Inventory.MaxAmount 0x7FFFFFFF;
+      Inventory.MaxAmount int.max;
       +Inventory.UNDROPPABLE
    }
 }
-class Lith_MResist : PowerProtection {default {Powerup.Duration 0x7FFFFFFF;}}
+class Lith_MResist : PowerProtection {default {Powerup.Duration 0x7FFFFFFD;}}
 class Lith_M_Bullets1 :Lith_MResist{default{DamageFactor "Bullet",   0.8;}}
 class Lith_M_Energy1  :Lith_MResist{default{DamageFactor "Railgun",  0.8; DamageFactor "Electric", 0.8; DamageFactor "Plasma", 0.8;}}
 class Lith_M_Fire1    :Lith_MResist{default{DamageFactor "Fire",     0.8;}}

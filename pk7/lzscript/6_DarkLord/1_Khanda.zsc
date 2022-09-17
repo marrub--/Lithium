@@ -15,18 +15,25 @@ class Lith_KhandaPuff : Lith_BulletPuff {
 
    override void postBeginPlay() {
       super.postBeginPlay();
-      if(!tracer || tracer.bNoBlood) {
-         if(target) {
-            target.a_startSound("weapons/sword/swing1", lch_weapon3);
-         }
-      } else {
-         for(int i = 0; i < 5; ++i) {
-            a_startSound("body/flesh", lch_auto);
+      if(tracer) {
+         if(!tracer.bNoBlood) {
+            for(int i = 0; i < 5; ++i) {
+               a_startSound("body/flesh", lch_auto);
+            }
          }
          if(target) {
             target.a_startSound("weapons/sword/hit", lch_weapon3);
          }
+      } else if(target) {
+         target.a_startSound("weapons/sword/swing1", lch_weapon3);
       }
+   }
+
+   override void markPrecacheSounds() {
+      super.markPrecacheSounds();
+      markSound("weapons/sword/swing1");
+      markSound("weapons/sword/hit");
+      markSound("body/flesh");
    }
 }
 
@@ -41,6 +48,11 @@ default {
    Weapon.SlotPriority 0.9;
    Weapon.UpSound "weapons/khanda/draw";
    +Weapon.NoAutoFire
+}
+
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("weapons/khanda/swing");
 }
 
 states(Weapon) {

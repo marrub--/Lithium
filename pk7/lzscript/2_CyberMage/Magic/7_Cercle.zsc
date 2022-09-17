@@ -313,7 +313,7 @@ Fire:
    TNT1 A 0 A_JumpIf(countInv("Lith_ManaAmmo") == lith_maxInv("Lith_ManaAmmo"), 1);
    goto ReadySelector;
    TNT1 A 10 {
-      lith_takeAmmo(0x7FFFFFFF);
+      lith_takeAmmo(int.max);
       A_AlertMonsters();
       ACS_NamedExecuteWithResult("Lith_Cercle", false);
    }

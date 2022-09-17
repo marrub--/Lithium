@@ -919,6 +919,7 @@ weapons/4bore/close lsnd/WeaponsD/4Bore/Close
 weapons/4bore/open lsnd/WeaponsD/4Bore/Open
 weapons/4bore/load lsnd/WeaponsD/4Bore/Load
 weapons/4bore/empty lsnd/WeaponsD/4Bore/Empty
+weapons/4bore/pickup lsnd/WeaponsD/4Bore/Pickup
 weapons/shrapnel/fire lsnd/WeaponsD/ShrapnelGun/Fire
 weapons/shrapnel/draw lsnd/WeaponsD/ShrapnelGun/Draw
 weapons/shrapnel/bounce lsnd/WeaponsD/ShrapnelGun/Bounce
@@ -951,21 +952,23 @@ weapons/minigun/draw lsnd/WeaponsD/Minigun/Draw
 $random weapons/minigun/down { weapons/minigun/down1 weapons/minigun/down2 weapons/minigun/down3 }
 $random weapons/minigun/click1 { weapons/minigun/click11 weapons/minigun/click12 weapons/minigun/click13 weapons/minigun/click14 }
 $random weapons/minigun/click2 { weapons/minigun/click21 weapons/minigun/click22 weapons/minigun/click23 weapons/minigun/click24 }
-weapons/dualrocket/firel1 lsnd/WeaponsD/DualRocket/FireLeft
-weapons/dualrocket/firel2 lsnd/WeaponsD/DualRocket/FireLeft2
-weapons/dualrocket/firel3 lsnd/WeaponsD/DualRocket/FireLeft3
-weapons/dualrocket/firer1 lsnd/WeaponsD/DualRocket/FireRight
-weapons/dualrocket/firer2 lsnd/WeaponsD/DualRocket/FireRight2
-weapons/dualrocket/firer3 lsnd/WeaponsD/DualRocket/FireRight3
-weapons/dualrocket/draw lsnd/WeaponsD/DualRocket/Draw
-$random weapons/dualrocket/firel { weapons/dualrocket/firel1 weapons/dualrocket/firel2 weapons/dualrocket/firel3 }
-$random weapons/dualrocket/firer { weapons/dualrocket/firer1 weapons/dualrocket/firer2 weapons/dualrocket/firer3 }
+weapons/drocket/firel1 lsnd/WeaponsD/DualRocket/FireLeft
+weapons/drocket/firel2 lsnd/WeaponsD/DualRocket/FireLeft2
+weapons/drocket/firel3 lsnd/WeaponsD/DualRocket/FireLeft3
+weapons/drocket/firer1 lsnd/WeaponsD/DualRocket/FireRight
+weapons/drocket/firer2 lsnd/WeaponsD/DualRocket/FireRight2
+weapons/drocket/firer3 lsnd/WeaponsD/DualRocket/FireRight3
+weapons/drocket/draw lsnd/WeaponsD/DualRocket/Draw
+weapons/drocket/pickup lsnd/WeaponsD/DualRocket/Pickup
+$random weapons/drocket/firel { weapons/drocket/firel1 weapons/drocket/firel2 weapons/drocket/firel3 }
+$random weapons/drocket/firer { weapons/drocket/firer1 weapons/drocket/firer2 weapons/drocket/firer3 }
 weapons/fortune/fire lsnd/WeaponsD/FortuneGun/Fire
 weapons/fortune/hit lsnd/WeaponsD/FortuneGun/Hit
 weapons/fortune/spark lsnd/WeaponsD/FortuneGun/Spark
 weapons/fortune/charge lsnd/WeaponsD/FortuneGun/Charge
 weapons/fortune/draw lsnd/WeaponsD/FortuneGun/Draw
 weapons/fortune/load lsnd/WeaponsD/FortuneGun/Load
+weapons/fortune/pickup lsnd/WeaponsD/FortuneGun/Pickup
 $limit weapons/fortune/hit 0
 $limit weapons/fortune/spark 0
 weapons/rems/fire lsnd/WeaponsD/Rems/Fire

@@ -63,12 +63,13 @@ weapons {
 
    \4bore {
       == lsnd/WeaponsD/4Bore
-      fire  Fire  # a1337spy
-      draw  Draw  # SI Series 6000
-      close Close # ^
-      open  Open  # ^
-      load  Load  # ^
-      empty Empty # ^
+      fire   Fire   # a1337spy
+      draw   Draw   # SI Series 6000
+      close  Close  # ^
+      open   Open   # ^
+      load   Load   # ^
+      empty  Empty  # ^
+      pickup Pickup # ^
    }
 
    shrapnel {
@@ -115,7 +116,7 @@ weapons {
       $random click2 {click21, click22, click23, click24,}
    }
 
-   dualrocket {
+   drocket {
       == lsnd/WeaponsD/DualRocket
       firel1 FireLeft   # ???
       firel2 FireLeft2  # ???
@@ -124,18 +125,20 @@ weapons {
       firer2 FireRight2 # ???
       firer3 FireRight3 # ???
       draw   Draw       # Doom 3
+      pickup Pickup     # SI Series 6000
       $random firel {firel1, firel2, firel3,}
       $random firer {firer1, firer2, firer3,}
    }
 
    fortune {
       == lsnd/WeaponsD/FortuneGun
-      fire   Fire      # Metal Gear Solid 2
-      hit    Hit       # ^
-      spark  Spark     # ^
-      charge Charge    # Self-made
-      draw   Draw      # Halo 3, Counter-Strike: Source
-      load   Load      # SI Series 6000
+      fire   Fire   # Metal Gear Solid 2
+      hit    Hit    # ^
+      spark  Spark  # ^
+      charge Charge # Self-made
+      draw   Draw   # Halo 3, Counter-Strike: Source
+      load   Load   # SI Series 6000
+      pickup Pickup # ^
       $limit hit 0
       $limit spark 0
    }

@@ -17,12 +17,16 @@ class Lith_700Explosion : Actor {
 
    int m_ticks;
 
+   override void tick() {
+      Lith_UTIL.stateTick(self);
+      if(tracer) {
+         setOrigin(tracer.pos, true);
+      }
+   }
+
    states {
    Spawn:
       RDGL A 1 {
-         if(tracer) {
-            setOrigin(tracer.pos, true);
-         }
          scale.x = scale.y = fRandom(0.2, 0.6);
          return a_jumpIf(++m_ticks > 25, "Death");
       }
@@ -63,9 +67,9 @@ override void postBeginPlay() {
       }
    } else {
       if(tracer) {
-         A_Explode(35, 200, 0);
+         a_explode(35, 200, 0);
       } else {
-         A_Explode(10, 32, 0);
+         a_explode(10, 32, 0);
       }
    }
 }

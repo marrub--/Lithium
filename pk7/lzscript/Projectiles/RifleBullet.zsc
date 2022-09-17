@@ -20,9 +20,6 @@ default {
 override void postBeginPlay() {
    super.postBeginPlay();
    a_explode(7, 32, 0);
-   if(tracer && Lith_UTIL.pData(_pdt_upgrade, UPGR_Seven7s)) {
-      a_startSound("marathon/hit", lch_body);
-   }
 }
 
 /* EOF */

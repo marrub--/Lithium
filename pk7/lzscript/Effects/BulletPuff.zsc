@@ -223,19 +223,22 @@ override void postBeginPlay() {
       a_spawnItemEx("Lith_EXPLOOOSION", flags: SXF_TRANSFERPOINTERS|SXF_NOCHECKPOSITION);
    }
    if(tracer) {
-      return;
-   }
-   if(random[lith_bulletpuff](0, 3) == 0) {
-      lith_a_smokeFX();
-   }
-   if(random[lith_bulletpuff](0, 2) == 0) {
-      lith_a_ricochetFX();
-   }
-   if(random[lith_bulletpuff](0, 4) == 0) {
-      a_spawnItemEx("Lith_BulletRicochetSpark");
-   }
-   if(random[lith_bulletpuff](0, 20) == 0) {
-      a_spawnItemEx("Lith_PuffSmoke", 0, 0, 4.0 + 0.1 * random[lith_bulletpuff](-10, 10));
+      if(Lith_UTIL.pData(_pdt_upgrade, UPGR_Seven7s)) {
+         a_startSound("marathon/hit", lch_body);
+      }
+   } else {
+      if(random[lith_bulletpuff](0, 3) == 0) {
+         lith_a_smokeFX();
+      }
+      if(random[lith_bulletpuff](0, 2) == 0) {
+         lith_a_ricochetFX();
+      }
+      if(random[lith_bulletpuff](0, 4) == 0) {
+         a_spawnItemEx("Lith_BulletRicochetSpark");
+      }
+      if(random[lith_bulletpuff](0, 20) == 0) {
+         a_spawnItemEx("Lith_PuffSmoke", 0, 0, 4.0 + 0.1 * random[lith_bulletpuff](-10, 10));
+      }
    }
 }
 

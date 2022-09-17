@@ -38,7 +38,7 @@ default {
    Tag "$LITH_INFO_SHORT_DualRocket";
    Weapon.SlotNumber 5;
    Weapon.SlotPriority 1;
-   Weapon.UpSound "weapons/dualrocket/draw";
+   Weapon.UpSound "weapons/drocket/draw";
    Lith_Weapon.AmmoType "Lith_RocketAmmo";
    Inventory.AltHudIcon "FRANZ0";
 }
@@ -79,12 +79,12 @@ Fire:
    goto ReadySelector;
 FireLH:
    FRAN A 0 lith_a_setupFlashOverlay(_psp_double_lf, "FlashLH");
-   FRAN A 0 A_StartSound("weapons/dualrocket/firel", lch_weapon);
+   FRAN A 0 A_StartSound("weapons/drocket/firel", lch_weapon);
    FRAN A 1 Lith_A_FireRocket("Lith_Franca", -14);
    goto FireOffsetsLH;
 FireRH:
    SOPH A 0 lith_a_setupFlashOverlay(_psp_double_rf, "FlashRH");
-   SOPH A 0 A_StartSound("weapons/dualrocket/firer", lch_weapon2);
+   SOPH A 0 A_StartSound("weapons/drocket/firer", lch_weapon2);
    SOPH A 1 Lith_A_FireRocket("Lith_Sophia", 14);
    goto FireOffsetsRH;
 FlashLH:

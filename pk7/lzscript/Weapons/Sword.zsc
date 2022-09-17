@@ -9,14 +9,7 @@
 class Lith_SwordPuff : Lith_BulletPuff {
    default {
       DamageType "Melee";
-   }
-   override void markPrecacheSounds() {
-      super.markPrecacheSounds();
-      markSound("weapons/sword/swing1");
-   }
-   override void postBeginPlay() {
-      super.postBeginPlay();
-      a_startSound("weapons/sword/swing1", lch_body2);
+      AttackSound "weapons/sword/swing1";
    }
 }
 
@@ -28,10 +21,9 @@ default {
    Tag "$LITH_TAG_Sword";
    Weapon.Kickback 100;
    Weapon.SlotNumber 0;
-
-   +WEAPON.CHEATNOTWEAPON
-   +WEAPON.MELEEWEAPON
-   +WEAPON.NOAUTOFIRE
+   +Weapon.CheatNotWeapon
+   +Weapon.MeleeWeapon
+   +Weapon.NoAutoFire
 }
 override void markPrecacheSounds() {
    super.markPrecacheSounds();
@@ -43,7 +35,7 @@ override void markPrecacheSounds() {
 }
 states(Weapon) {
 Ready:
-   SORD A 0 {self.TakeInventory("Lith_SwordCharge", 0x7FFFFFFF);}
+   SORD A 0 {self.TakeInventory("Lith_SwordCharge", int.max);}
    SORD A 1 Lith_A_Ready;
    loop;
 

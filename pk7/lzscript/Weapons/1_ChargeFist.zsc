@@ -7,7 +7,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_FistCharge : Inventory {default {Inventory.MaxAmount 0x7FFFFFFF;}} /* Yes. */
+class Lith_FistCharge : Inventory {default {Inventory.MaxAmount int.max;}} /* Yes. */
 class Lith_FistHit : Powerup {default {Powerup.Duration 5;}}
 
 class Lith_ChargeFistQuakerOats : Actor {
@@ -89,7 +89,7 @@ override void markPrecacheSounds() {
 }
 states(Weapon) {
 Ready:
-   TNT1 A 0 {self.TakeInventory("Lith_FistCharge", 0x7FFFFFFF);}
+   TNT1 A 0 {self.TakeInventory("Lith_FistCharge", int.max);}
    TNT1 A 1 Lith_A_Ready;
    loop;
 
