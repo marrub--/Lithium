@@ -57,8 +57,6 @@
 "LITH_UPGRADE_EFFEC_SoulCleaver" = "When living things die, they emit a projectile that will seek other enemies for a short time.\n\nCreates an artificial soul on your targets and makes it destroy their neighbors.";
 "LITH_UPGRADE_TITLE_StealthSys" = "Stealth System";
 "LITH_UPGRADE_EFFEC_StealthSys" = "Makes you gradually fade out when still, giving you partial invisibility from enemies, and generally harder to aim at.";
-"LITH_UPGRADE_TITLE_AutoReload" = "Auto Reload";
-"LITH_UPGRADE_EFFEC_AutoReload" = "Weapons in your inventory automatically reload after 5 seconds.\n\nAutomated reloading system for your backpack.";
 "LITH_UPGRADE_TITLE_Pistol_A" = "Auto Pistol";
 "LITH_UPGRADE_EFFEC_Pistol_A" = "Makes your pistol fire in full auto.\n\nSimply changes the trigger mechanism a bit to make the pistol fire automatically.\n\n\cdCompatible with Plasma Pistol.";
 "LITH_UPGRADE_TITLE_Pistol_B" = "Plasma Pistol";
@@ -661,9 +659,6 @@
 "LITH_INFO_SHORT_VitalScanner" = "$LITH_UPGRADE_TITLE_VitalScan";
 "LITH_INFO_TITLE_VitalScanner" = "Mit'keru Vital Scanner";
 "LITH_INFO_DESCR_VitalScanner" = "A small nanomachine emitter is strapped to your belt, which fires out nanos programmed to grab vital signs of enemies under your crosshair, and display them in a numeric value on your heads up display.\n\nUnfortunately, the range of this emitter is not as great as it could be, and is for the most part only usable in close-quarters.";
-"LITH_INFO_SHORT_AutoReload" = "$LITH_UPGRADE_TITLE_AutoReload";
-"LITH_INFO_TITLE_AutoReload" = "K'meru Automatic Loading System";
-"LITH_INFO_DESCR_AutoReload" = "A rather small robot that can fit in your backpack, which uses a learning algorithm to figure out how to load your guns.\n\nOriginally created by HLCorp for their highly advanced hazard suits, it was retooled to work separately from them so it could be mass produced for military needs.";
 "LITH_INFO_SHORT_SoulCleaver" = "$LITH_UPGRADE_TITLE_SoulCleaver";
 "LITH_INFO_TITLE_SoulCleaver" = "\cdSi Ritagliassero\c-, \chCaeruleorum\c- 44";
 "LITH_INFO_DESCR_SoulCleaver" = "The 44th method of the \chCaeruleum\c- mode, this rather complex attack must be applied passively. It siphons power from the recently deceased and releases it into a ball of metaphysical attack energy.\n\nThe exact origin of this method is debated, and it is not in common use due to its strange circumstances and the general requirement of strong, plentiful opponents to be useful in combat.";
@@ -1784,7 +1779,7 @@
 "LITH_TOOLTIP_sv_sky" = "No change: No changes will be made to skies. (Most compatible.)\nVanilla-like: Allows vanilla skies to have additional visual effects. (May be incompatible with some edge cases. Default.)\nReplace skies: A palette of replacement skies based on the environment.\nShader: A dynamic, soft, full sky replacement for a more chill atmosphere.\n\n\ck(Applies on next map start)";
 "LITH_sv_skydarkening" = "Outside sector darkening";
 "LITH_sv_wepdrop" = "Drop weapons from zombies";
-"LITH_TOOLTIP_sv_wepdrop" = "Mainly exists for map compatibility. Drops weapons from zombie enemies when you don't have them already. May cause issues in normal gameplay.\n\n\ck(Applies on next map start)";
+"LITH_TOOLTIP_sv_wepdrop" = "Mainly exists for map compatibility. Drops weapons from zombie enemies like vanilla. May cause issues in normal gameplay.\n\n\ck(Applies on next map start)";
 "LITH_weapons_casingfadeout" = "Casings fade out";
 "LITH_weapons_casings" = "Emit casings from weapons which use them";
 "LITH_weapons_fastlazshot" = "Better laser shotgun performance";
@@ -2281,8 +2276,6 @@
 "LITH_UPGRADE_EFFEC_SoulCleaver" = "生物が死ぬと、短期間他の敵を探す発射体を放出。\n\nターゲットに人工魂を生成し、隣人を呪います。";
 "LITH_UPGRADE_TITLE_StealthSys" = "ステルスシステム";
 "LITH_UPGRADE_EFFEC_StealthSys" = "静止しているときに徐々にフェードアウトし部分的な不可視性を与え敵から狙われるのを難しくします。";
-"LITH_UPGRADE_TITLE_AutoReload" = "自動リロード";
-"LITH_UPGRADE_EFFEC_AutoReload" = "所持中の武器が射撃5秒後に自動的にリロード。\n\nバックパックの自動リロードシステム。";
 "LITH_UPGRADE_TITLE_Pistol_A" = "ﾌﾙｵｰﾄ ﾋﾟｽﾄﾙ";
 "LITH_UPGRADE_EFFEC_Pistol_A" = "フルオートでピストルを発射。\n\nトリガー機構を少し変更するだけで、ピストルが自動的に発射されます\n\n\cdプラズマピストルと互換性があります。";
 "LITH_UPGRADE_TITLE_Pistol_B" = "プラズマピストル";
@@ -2554,8 +2547,6 @@
 "LITH_INFO_DESCR_Adrenaline" = "体から無駄になったアドレナリンを集め、危険な状況になった時、一気に注入される。\n\n敵に狙われたり敵弾に接近することによって時間が止まっているような、非常に速く移動可能な効果が引き起こされる\n\nこれで正気を失ったり意識を失ったりすることなく使用するには、軍隊だけに与えられる厳しい訓練が必要である。";
 "LITH_INFO_TITLE_VitalScanner" = "Mit'keru バイタルスキャナー";
 "LITH_INFO_DESCR_VitalScanner" = "ベルトには小さなナノマシンエミッターが装着されており、クロスヘアの下にある敵のバイタルサインを捉えるようプログラムされたナノ粒子を発射し、ヘッドアップディスプレイに数値で表示する\n\n残念ながら、このエミッタの範囲はそれほど長くはなく近距離でしか使用できない。";
-"LITH_INFO_TITLE_AutoReload" = "K'meru 自動化リローディングシステム";
-"LITH_INFO_DESCR_AutoReload" = "リュックサックに収まる小型のロボットで、学習アルゴリズムを使って銃の装填方法を学習する。\n\n元々はHLCorp社が遥かに高度なハザードスーツのために開発したものだが、軍のニーズに合わせて大量生産できるようにHLCorp社とは別の形に改造された。";
 "LITH_INFO_TITLE_SoulCleaver" = "\cdシ'リタギラッセロ\c-, \chカエルレウム\c-44";
 "LITH_INFO_DESCR_SoulCleaver" = "\chカエルレウム\c-第44式、このかなり複雑な攻撃は受動的に適用されなければならない。それは直前に亡くなった者からパワーを吸い上げ、形而上学的な攻撃エネルギーの球体を放出する。\n\nこの術式の正確な起源については議論されているが、その奇妙な状態や強大な敵との戦闘に有用であるという根本的な要件のために、一般的には使用されていない。";
 "LITH_INFO_TITLE_StealthSys" = "名も無きステルスシステム";

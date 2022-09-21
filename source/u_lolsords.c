@@ -15,7 +15,7 @@
 #define udata pl.upgrdata.lolsords
 
 void Upgr_lolsords_Activate(void) {
-   udata.origweapon = pl.weaponclass;
+   udata.origweapon = pl.weapon.cur.class;
    InvGive(so_Sword, 1);
 }
 

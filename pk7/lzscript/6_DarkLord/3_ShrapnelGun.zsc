@@ -29,7 +29,7 @@ class Lith_ShrapnelProjectile : Actor {
 
    override void postBeginPlay() {
       super.postBeginPlay();
-      m_smoke = !lith_sv_lessparticles && random[lith_shrapnelgun](0, 1);
+      m_smoke = !lith_sv_lessparticles && random[Lith_ShrapnelGun](0, 1);
    }
 
    state lith_a_jumpScale(double scale) {
@@ -69,7 +69,7 @@ class Lith_ShrapnelPuff : Lith_BulletPuff {
       angle = angleTo(target);
       let prj = a_spawnProjectile('Lith_ShrapnelProjectile', 0, 0, fRandom(-20, 20), CMF_OFFSETPITCH, fRandom(-20, 20));
       prj.target = target;
-      if(random[lith_shrapnelgun](0, 5) == 0) {
+      if(random[Lith_ShrapnelGun](0, 5) == 0) {
          super.postBeginPlay();
       } else {
          destroy();
@@ -104,7 +104,7 @@ action(Weapon) void Lith_A_FireShrapnel() {
    Lith_A_RecoilUp(2);
    a_recoil(0.7);
    lith_a_setInterpolation(true);
-   Lith_FireBullets(3.5, 2.5, 14 + 5 * invoker.m_chargeLevel, 12, FBF_NORANDOM, puffType: 'Lith_ShrapnelPuff');
+   Lith_FireBullets(3.5, 2.5, 14 + 5 * invoker.m_chargeLevel, 12, FBF_NORANDOM, 'Lith_ShrapnelPuff', 2);
    a_setTics(1 + (invoker.m_chargeLevel / 4));
 }
 

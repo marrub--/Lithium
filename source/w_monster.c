@@ -242,27 +242,6 @@ void OnFinalize(dmon_t *m) {
             SpawnManaPickup(m);
          }
 
-         if(cv.sv_wepdrop) {
-            str sp = snil;
-            switch(m->mi->type) {
-               case mtype_zombiesg:
-                  if(!pl.weapon.slot[3]) {
-                     sp = so_Shotgun;
-                  }
-                  break;
-               case mtype_zombiecg:
-                  if(!pl.weapon.slot[4]) {
-                     sp = so_Chaingun;
-                  }
-                  break;
-            }
-            if(sp) {
-               i32 tid = ACS_UniqueTID();
-               ACS_SpawnForced(sp, m->x, m->y, m->z, tid);
-               ACS_SetActorFlag(tid, sm_dropped, false);
-            }
-         }
-
          if(get_bit(pl.upgrades[UPGR_SoulCleaver].flags, _ug_active)) {
             SoulCleave(m);
          }

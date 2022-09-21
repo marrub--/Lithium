@@ -58,14 +58,14 @@ void silly_pickup(i32 weapon) {
    }
 }
 
-void P_Log_Weapon(struct weaponinfo const *info) {
+void P_Log_Weapon(i32 which) {
+   struct weaponinfo const *info = &weaponinfo[which];
    i32 itemdisp = CVarGetI(sc_player_itemdisp);
    if(itemdisp == _itm_disp_none) {
       return;
    }
-
    if(CVarGetI(sc_player_sillypickups)) {
-      silly_pickup(info->type);
+      silly_pickup(which);
    } else if(info->name) {
       str nam = ns(lang(fast_strdup2(LANG "INFO_SHORT_", info->name)));
       if(itemdisp & _itm_disp_pop) {
@@ -79,17 +79,15 @@ void P_Log_Weapon(struct weaponinfo const *info) {
    }
 }
 
-void P_Log_SellWeapon(struct weaponinfo const *info, score_t score) {
-   i32 weapon = info->type;
+void P_Log_SellWeapon(i32 which, score_t score) {
+   struct weaponinfo const *info = &weaponinfo[which];
    str nam;
-
    if(CVarGetI(sc_player_sillypickups)) {
-      nam = get_name(weapon);
+      nam = get_name(which);
    } else {
       nam = lang(fast_strdup2(LANG "INFO_SHORT_", info->name));
    }
    nam = ns(nam);
-
    /* FIXME */
    P_LogB(1, "Sold the %S for %" FMT_SCR "\Cnscr\C-.", nam, score);
 }

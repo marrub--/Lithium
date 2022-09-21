@@ -37,7 +37,6 @@ cvar_x(map, player_resultssound, bool)
 cvar_x(map, sv_difficulty, i32)
 cvar_x(map, sv_extrahard, bool)
 cvar_x(map, sv_minhealth, i32)
-cvar_x(map, sv_wepdrop, bool)
 
 /*
   if a cvar is checked variably more than once every tic under normal

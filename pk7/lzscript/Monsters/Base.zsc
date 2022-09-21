@@ -34,14 +34,17 @@ default {
    +CastSpriteShadow
    +InterpolateAngles
 }
+
 void Lith_A_Die() {
    A_Scream();
    A_NoBlocking();
 }
+
 void Lith_A_XDie() {
    A_XScream();
    A_NoBlocking();
 }
+
 bool Lith_BarrierBullets(int n = 1) {
    if(target && target.countInv("Lith_HasBarrier")) {
       for(int i = 0; i < n; i++) {

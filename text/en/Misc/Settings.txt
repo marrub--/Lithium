@@ -364,7 +364,7 @@ Shader: A dynamic, soft, full sky replacement for a more chill atmosphere.
 == \#sv_wepdrop | Drop weapons from zombies
 @@ \#TOOLTIP_sv_wepdrop
 Mainly exists for map compatibility. Drops weapons from zombie enemies
-when you don't have them already. May cause issues in normal gameplay.
+like vanilla. May cause issues in normal gameplay.
 
 \ck(Applies on next map start)
 

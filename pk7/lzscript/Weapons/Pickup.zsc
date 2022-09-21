@@ -108,19 +108,27 @@ class Lith_WeaponPickup : Inventory abstract;
 mixin Lith_Pickup;
 meta int m_wepName;
 property WepName: m_wepName;
+
 override void postBeginPlay() {
-   super.postBeginPlay();
-   pkPostBeginPlay();
+   if(bDropped && !lith_sv_wepdrop) {
+      destroy();
+   } else {
+      super.postBeginPlay();
+      pkPostBeginPlay();
+   }
 }
+
 override void tick() {
    super.tick();
    pkTick();
 }
+
 override bool tryPickup(in out Actor mo) {
    mo.acs_scriptCall("Lith_WeaponPickup", m_wepName);
    goAwayAndDie();
    return true;
 }
+
 default {
    Inventory.PickupMessage "";
    Inventory.PickupSound "";

@@ -32,8 +32,6 @@ _uc_body:
    pD:
       Subweapons: {f: --URE}
 _uc_weap:
-   gO:
-      AutoReload: {scr: 950050, pr: 2}
    pM:
       Pistol_A:  {pg: N/A, scr:  140940}
       Pistol_B:  {pg: N/A, scr:  340000,                          req: wmd}

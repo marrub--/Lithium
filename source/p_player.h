@@ -91,7 +91,7 @@ enum ZscName(PClass) {
 #include "items.h"
 #include "d_vm.h"
 
-#define P_Wep_CurType() (pl.weapon.cur->info->type)
+#define P_Wep_CurType() (pl.weapon.cur.type)
 script void P_Player(void);
 script void P_Init(void);
 script void P_Data_Load(void);
@@ -109,8 +109,8 @@ stkcall cstr P_Discrim(i32 pclass);
 stkcall i32 P_Color(i32 pclass);
 void P_Dat_PTick(void);
 script void P_Scr_Payout(void);
-void P_Log_SellWeapon(struct weaponinfo const *info, score_t score);
-void P_Log_Weapon(struct weaponinfo const *info);
+void P_Log_SellWeapon(i32 which, score_t score);
+void P_Log_Weapon(i32 which);
 void P_LogB(i32 levl, cstr fmt, ...); /* log to HUD and full log */
 void P_LogH(i32 levl, cstr fmt, ...); /* log to HUD only */
 void P_LogF(          cstr fmt, ...); /* log to full log only */
@@ -344,16 +344,14 @@ struct player {
    i32 spuriousexplosions;
    i32 brouzouf;
 
-   i32 weaponsheld;
    i32 itemsbought;
    i32 upgradesowned;
 
    /* Weapons */
    struct weapondata weapon;
-   str weaponclass;
+   i32 weaponsheld;
 
    i32  riflefiremode;
-   bool autoreload;
    bool bladehit, rendhit;
 
    /* 🌌 「÷」 0 */

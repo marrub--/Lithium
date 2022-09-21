@@ -15,8 +15,6 @@
 
 #include "p_weaponinfo.h"
 
-#define HasWeapon(w) pl.weapon.inv[(w)].owned
-
 #define SLOT_MAX 8
 
 enum {
@@ -36,14 +34,13 @@ struct weaponinfo {
    i32  defammotype;
    str  defammoclass;
    str  classname;
-   i32  type;
    cstr typename;
 };
 
 struct invweapon {
    struct weaponinfo const *info;
-   bool owned;
-   i32 autoreload;
+   i32 type;
+   str class;
    i32 ammotype;
    str ammoclass;
    i32 magmax;
@@ -54,14 +51,11 @@ struct invweapon {
 
 struct weapondata {
    i32 slot[SLOT_MAX];
-   struct invweapon inv[weapon_max];
-   struct invweapon *cur;
-   struct invweapon *prev;
+   struct invweapon cur;
 };
 
 extern struct weaponinfo const weaponinfo[weapon_max];
 
-void Wep_GInit(void);
 i32 Wep_FromName(i32 name);
 
 #endif

@@ -70,7 +70,6 @@ script static void GInit(void) {
    wl.scorethreshold = _scorethreshold_default;
    wl.cbiperf = 10;
    Mon_Init();
-   Wep_GInit();
    wl.init = true;
 }
 

@@ -78,6 +78,7 @@ weapons {
       draw   Draw   # ^
       bounce Bounce # Devil May Cry 2
       hit    Hit    # ^
+      pickup Pickup # SI Series 6000
       $volume bounce 0.2
    }
 
@@ -151,6 +152,7 @@ weapons {
       draw       Draw       # ^
       wail       Wail       # Half-Life 2
       firefinish FireFinish # Sigh - Introiutus/Kyrie
+      pickup     Pickup     # SI Series 6000
    }
 }
 

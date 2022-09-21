@@ -11,7 +11,7 @@
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
 #ifndef NDEBUG
-#define Dbg_Trace(n) (ACS_BeginPrint(), ACS_PrintChar('\C'), ACS_PrintChar(ACS_Timer() & 3 ? 'i' : 'g'), PrintChrLi(_f), ACS_PrintChar(':'), ACS_PrintChar(' '), _p(n), EndLogEx(_pri_bold|_pri_nolog))
+#define Dbg_Trace(n) (ACS_BeginPrint(), _c('\C'), _c(ACS_Timer() & 1 ? 'i' : 'g'), _l(_f), _c(':'), _c(' '), _l(#n), _c(' '), _c('='), _c(' '), _p(n), EndLogEx(_pri_bold|_pri_nolog))
 
 #define Dbg_Log(level, ...) \
    (dbglevel(level) ? \

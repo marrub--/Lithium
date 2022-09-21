@@ -924,6 +924,7 @@ weapons/shrapnel/fire lsnd/WeaponsD/ShrapnelGun/Fire
 weapons/shrapnel/draw lsnd/WeaponsD/ShrapnelGun/Draw
 weapons/shrapnel/bounce lsnd/WeaponsD/ShrapnelGun/Bounce
 weapons/shrapnel/hit lsnd/WeaponsD/ShrapnelGun/Hit
+weapons/shrapnel/pickup lsnd/WeaponsD/ShrapnelGun/Pickup
 $volume weapons/shrapnel/bounce 0.2
 weapons/motra/fire1 lsnd/WeaponsD/Motra/Fire1
 weapons/motra/fire2 lsnd/WeaponsD/Motra/Fire2
@@ -977,6 +978,7 @@ weapons/rems/empty lsnd/WeaponsD/Rems/FireEmpty
 weapons/rems/draw lsnd/WeaponsD/Rems/Draw
 weapons/rems/wail lsnd/WeaponsD/Rems/Wail
 weapons/rems/firefinish lsnd/WeaponsD/Rems/FireFinish
+weapons/rems/pickup lsnd/WeaponsD/Rems/Pickup
 $alias weapons/unknown/pickup YOUSONOFABITCH
 $alias weapons/fist/pickup MMMMHMHMMMHMMM
 weapons/knife/swing1 lsnd/WeaponsM/Knife/Fire1

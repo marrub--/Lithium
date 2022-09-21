@@ -29,6 +29,7 @@ default
    Speed      9;
 
    DropItem "Lith_ClipBox", 255, 20;
+   DropItem "Lith_ChaingunPickup";
 
    ActiveSound "chainguy/active";
    DeathSound  "chainguy/death";

@@ -30,13 +30,13 @@ override void markPrecacheSounds() {
 
 action(Weapon) void Lith_A_Fire4Bore() {
    A_AlertMonsters();
-   lith_takeAmmo(6);
+   lith_takeAmmo(4);
    A_SetBlend("White", 0.2, 6);
    lith_gunFlash();
    a_alertMonsters();
    Lith_A_GunSmoke(2, 8);
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
-   Lith_FireBullets(4, 2, 8, random[lith_dlweapon](125, 150), FBF_NORANDOM, "Lith_700Bullet", tracer: _tr_big);
+   Lith_FireBullets(4, 2, 8, random[lith_dlweapon](125, 150), FBF_NORANDOM, "Lith_700Bullet", 2, tracer: _tr_big);
    Lith_A_RecoilUp(10);
    a_recoil(4);
 }
@@ -54,7 +54,7 @@ Select:
    loop;
 
 Fire:
-   #### # 0 lith_jumpNoAmmo(6);
+   #### # 0 lith_jumpNoAmmo(4);
    #### # 0 lith_a_setInterpolation(true);
    4BOR A 7 A_StartSound("weapons/4bore/fire", lch_weapon);
    4BOR G 2 offset(140, 121) Lith_A_Fire4Bore;

@@ -34,6 +34,7 @@ default
    Species          "Lith_ShotgunGuy";
 
    DropItem "Lith_Shell", 255, 4;
+   DropItem "Lith_ShotgunPickup";
 
    ActiveSound "shotguy/active";
    DeathSound  "shotguy/death";
@@ -51,6 +52,7 @@ virtual void Lith_A_ShotgunGuyShot()
    if(!Lith_BarrierBullets(3))
       A_CustomBulletAttack(22.5, 4, 3, random(1, 5) * 3, "BulletPuff", 0, CBAF_NORANDOM);
 }
+
 override void markPrecacheSounds() {
    super.markPrecacheSounds();
    markSound("enemies/shotguy/fire");

@@ -113,7 +113,6 @@ sc_:
    - sv_rain
    - sv_revenge
    - sv_sky
-   - sv_wepdrop
 
    - weapons_magicselanims
    - weapons_riflemodeclear
@@ -169,7 +168,6 @@ sm_:
    - AddStatFx
    - AdrenalineCheck
    - AlertMonsters
-   - AutoReload
    - CheckLump
    - DelearSprite
    - DeleteItem
@@ -233,7 +231,6 @@ sm_:
 
    - boss:      BOSS
    - countkill: COUNTKILL
-   - dropped:   DROPPED
    - invuln:    INVULNERABLE
    - nodamage:  NODAMAGE
    - shadow:    SHADOW
@@ -322,10 +319,8 @@ so_:
    - LDLegendaryMonsterTransformed
    - RLDeVileSix
 
-   - Chaingun
    - PowerFlight
    - PowerStrength
-   - Shotgun
 
    CVAR: [
 #define GlobalCr(name) #name,

@@ -20,12 +20,6 @@ static int GetCurMag(string cname) {
    return wep ? wep.m_fired : -1;
 }
 
-static void AutoReload(string cname) {
-   let p   = players[consolePlayer].mo;
-   let wep = p ? Lith_Weapon(p.findInventory(cname)) : null;
-   if(wep) wep.lith_reloadFinish(true);
-}
-
 static void IonizeFX(Actor mo) {
    Lith_CopyEffect.create("Lith_IonizedFx", mo);
 }

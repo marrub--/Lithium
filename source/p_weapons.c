@@ -66,14 +66,7 @@ void PickupScore(i32 parm) {
    score = P_Scr_Give(GetX(0), GetY(0), GetZ(0), score, false);
 
    if(CVarGetI(sc_player_itemdisp) & _itm_disp_log) {
-      P_Log_SellWeapon(info, score);
-   }
-}
-
-void Wep_GInit(void) {
-   for(i32 i = 0; i < weapon_max; i++) {
-      struct weaponinfo *info = (struct weaponinfo *)&weaponinfo[i];
-      info->type = i;
+      P_Log_SellWeapon(parm, score);
    }
 }
 
@@ -81,85 +74,50 @@ void Wep_GInit(void) {
 script
 void P_Wep_PTickPre(void) {
    struct weapondata *w = &pl.weapon;
-
-   w->prev = w->cur;
-
-   /* Reset data temporarily. */
-   w->cur = nil;
-   for(i32 i = 0; i < SLOT_MAX; i++) w->slot[i] = 0;
-
-   /* Iterate over each weapon setting information on it. */
+   w->cur.type  = weapon_unknown;
+   w->cur.info  = &weaponinfo[weapon_unknown];
+   w->cur.class = fast_strupper(ACS_GetWeapon());
+   for(i32 i = 0; i < SLOT_MAX; i++) {
+      w->slot[i] = 0;
+   }
    for(i32 i = weapon_min; i < weapon_max; i++) {
       struct weaponinfo const *info = &weaponinfo[i];
-      struct invweapon *wep = &w->inv[i];
-
-      if(!(pl.pclass & info->pclass) ||
-         !(wep->owned = InvNum(info->classname)))
-      {
+      if(!(pl.pclass & info->pclass)) {
          continue;
       }
-
-      w->slot[info->slot] += wep->owned;
-
-      /* Check for currently held weapon. */
-      if(!w->cur && pl.weaponclass == info->classname) {
-         w->cur = wep;
+      w->slot[info->slot] += InvNum(info->classname);
+      if(w->cur.class != info->classname) {
+         continue;
       }
-
-      wep->info      = info;
-      wep->ammotype  = info->defammotype;
-      wep->ammoclass = info->defammoclass;
-
-      /* Special exceptions. */
+      w->cur.type      = i;
+      w->cur.info      = info;
+      w->cur.ammotype  = info->defammotype;
+      w->cur.ammoclass = info->defammoclass;
       switch(i) {
       case weapon_m_shotgun:
          if(get_bit(pl.upgrades[UPGR_Shotgun_A].flags, _ug_active)) {
-            wep->ammotype = AT_NMag;
+            w->cur.ammotype = AT_NMag;
          }
          break;
       case weapon_c_spas:
          if(get_bit(pl.upgrades[UPGR_SPAS_B].flags, _ug_active)) {
-            wep->ammotype = AT_Ammo;
+            w->cur.ammotype = AT_Ammo;
          }
          break;
       case weapon_m_plasma:
          if(get_bit(pl.upgrades[UPGR_Plasma_B].flags, _ug_active)) {
-            wep->ammotype = AT_AMag;
+            w->cur.ammotype = AT_AMag;
          }
          break;
       }
-
-      /* Set magazine and ammo counts. */
-      if(w->cur == wep) {
-         if(wep->ammotype & AT_NMag) {
-            wep->magmax = ServCallI(sm_GetMaxMag, wep->info->classname);
-            wep->magcur = ServCallI(sm_GetCurMag, wep->info->classname);
-         }
-
-         if(wep->ammotype & AT_Ammo) {
-            wep->ammomax = InvMax(wep->ammoclass);
-            wep->ammocur = InvNum(wep->ammoclass);
-         }
+      if(w->cur.ammotype & AT_NMag) {
+         w->cur.magmax = ServCallI(sm_GetMaxMag, info->classname);
+         w->cur.magcur = ServCallI(sm_GetCurMag, info->classname);
       }
-
-      /* Auto-reload. */
-      if(get_bit(pl.upgrades[UPGR_AutoReload].flags, _ug_active) &&
-         wep->ammotype & AT_NMag && !(wep->ammotype & AT_Mana))
-      {
-         if(wep->autoreload >= 35 * 3) {
-            ServCallV(sm_AutoReload, info->classname);
-         }
-
-         if(w->cur != wep) {
-            wep->autoreload++;
-         } else {
-            wep->autoreload = 0;
-         }
+      if(w->cur.ammotype & AT_Ammo) {
+         w->cur.ammomax = InvMax(w->cur.ammoclass);
+         w->cur.ammocur = InvNum(w->cur.ammoclass);
       }
-   }
-
-   if(!w->cur) {
-      w->cur = &w->inv[weapon_unknown];
    }
 }
 
@@ -206,7 +164,7 @@ bool Z_WeaponPickup(i32 name) {
 
    struct weaponinfo const *info = &weaponinfo[parm];
 
-   if(HasWeapon(parm)) {
+   if(InvNum(info->classname)) {
       if(!weaponstay) {
          WeaponGrab(info);
          PickupScore(parm);
@@ -220,7 +178,7 @@ bool Z_WeaponPickup(i32 name) {
       P_BIP_Unlock(P_BIP_NameToPage(info->name), false);
 
       GiveWeaponItem(parm, info->slot);
-      P_Log_Weapon(info);
+      P_Log_Weapon(parm);
       InvGive(info->classname, 1);
 
       return !weaponstay;
@@ -236,7 +194,7 @@ i32 Z_ChargeFistDamage(void) {
 
 script_str ext("ACS") addr(OBJ "AmmoRunOut")
 k32 Z_AmmoRunOut(bool ro, k32 mul) {
-   struct invweapon const *wep = pl.weapon.cur;
+   struct invweapon const *wep = &pl.weapon.cur;
    k32 inv = wep->magcur / (k32)wep->magmax;
 
    mul = mul |? 1.2k;

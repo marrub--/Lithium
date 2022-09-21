@@ -124,8 +124,7 @@ void P_Dat_PTickPre(void) {
 
    pl.buttons = ACS_GetPlayerInput(-1, INPUT_BUTTONS);
 
-   pl.name        = strp(ACS_PrintName(0));
-   pl.weaponclass = ACS_GetWeapon();
+   pl.name = strp(ACS_PrintName(0));
 
    pl.scopetoken = InvNum(so_WeaponScopedToken);
 
@@ -327,7 +326,7 @@ void P_Init(void) {
    if(dbgflags(dbgf_items)) {
       for(i32 i = weapon_min; i < weapon_max; ++i) {
          struct weaponinfo const *info = &weaponinfo[i];
-         if(info->classname != snil && info->pclass & pl.pclass) {
+         if(info->pclass & pl.pclass) {
             InvGive(info->classname, 1);
          }
       }

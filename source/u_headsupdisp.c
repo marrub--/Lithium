@@ -149,7 +149,7 @@ void HUD_TopRight(void) {
 
 static
 void HUD_BottomRight(void) {
-   struct invweapon const *wep = pl.weapon.cur;
+   struct invweapon const *wep = &pl.weapon.cur;
 
    bool showweps = CVarGetI(sc_hud_showweapons);
 
@@ -342,7 +342,7 @@ void HUD_BottomRight(void) {
          ACS_PrintInt(i);
          PrintTextX(sf_lsmlhfnt, cr, x,2, y,2, _u_no_unicode);
 
-         if(pl.weapon.cur->info->slot == i) {
+         if(pl.weapon.cur.info->slot == i) {
             SetFade(fid_slotnS + i, 1, 6);
          }
 
@@ -379,7 +379,7 @@ void HUD_BottomLeft(void) {
    i32 y;
    i32 cr_g = 0;
    i32 cr_t;
-   str wgfx = sa_wgfx[pl.weapon.cur->info->slot];
+   str wgfx = sa_wgfx[pl.weapon.cur.info->slot];
 
    switch(hudtype) {
    default:

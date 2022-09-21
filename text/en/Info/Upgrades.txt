@@ -129,17 +129,6 @@ Unfortunately, the range of this emitter is not as great as it could be, and
 is for the most part only usable in close-quarters.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_SHORT_AutoReload | $\#UPGRADE_TITLE_AutoReload
-== \#INFO_TITLE_AutoReload | K'meru Automatic Loading System
-@@ \#INFO_DESCR_AutoReload
-A rather small robot that can fit in your backpack, which uses a learning
-algorithm to figure out how to load your guns.
-
-Originally created by HLCorp for their highly advanced hazard suits, it was
-retooled to work separately from them so it could be mass produced for
-military needs.
-
-## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_SoulCleaver | $\#UPGRADE_TITLE_SoulCleaver
 == \#INFO_TITLE_SoulCleaver | \cdSi Ritagliassero\c-, \chCaeruleorum\c- 44
 @@ \#INFO_DESCR_SoulCleaver

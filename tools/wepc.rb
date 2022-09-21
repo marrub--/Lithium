@@ -33,15 +33,14 @@ common_main do
             else
                ammo.push "snil"
             end
-            cname = '"' + hwep[1] + '"'
             wep = {}
             wep[:slt] = hwep[0]
             wep[:pcl] = pcl
-            wep[:nam] = cname
+            wep[:nam] = '"' + hwep[1] + '"'
             wep[:snd] = 's"weapons/' + name[2..] + '/pickup"'
             wep[:aty] = ammo[0]
             wep[:acl] = ammo[1]
-            wep[:cls] = 's"" OBJ ' + cname
+            wep[:cls] = 's"LITH_' + hwep[1].upcase + '"'
             wep[:typ] = name
             weapons.push wep
          end
@@ -74,7 +73,7 @@ _end_h_
 struct weaponinfo const weaponinfo[weapon_max] = {
 #{
 res = String.new
-for wep in weapons do res.concat "   {#{wep[:slt]}, #{wep[:pcl]}, #{wep[:nam]}, #{wep[:snd]}, #{wep[:aty]}, #{wep[:acl]}, #{wep[:cls]}, weapon_#{wep[:typ]}, \"#{wep[:typ]}\"},\n" end
+for wep in weapons do res.concat "   {#{wep[:slt]}, #{wep[:pcl]}, #{wep[:nam]}, #{wep[:snd]}, #{wep[:aty]}, #{wep[:acl]}, #{wep[:cls]}, \"#{wep[:typ]}\"},\n" end
 res
 }
 };
