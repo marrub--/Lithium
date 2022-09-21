@@ -6,28 +6,31 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_RifleGrenadeSmoke : Lith_Explosive
-{
-   default
-   {
+class Lith_RifleGrenadeSmoke : Actor {
+   default {
       RenderStyle "Add";
       Scale 0.15;
       Alpha 0.8;
-
       +NoInteraction
    }
 
-   states
-   {
-   Spawn:
-      TNT1 A 0;
-      TNT1 A 0 {
-         if(CheckMarathon()) return ResolveState("Marathon");
-         else                return state(null);
+   override void tick() {
+      if(!isFrozen()) {
+         Lith_UTIL.stateTick(self);
       }
+   }
+
+   states {
+   Spawn:
+      TNT1 A 2;
       SMOK ACDGHJKMPQ 1 bright;
       stop;
-   Marathon:
+   }
+}
+
+class Lith_RifleGrenadeSmokeMarathon : Lith_RifleGrenadeSmoke {
+   states {
+   Spawn:
       TNT1 A 2;
       MA7G HI 1 bright;
       MA7G JKLM 1;
@@ -37,8 +40,7 @@ class Lith_RifleGrenadeSmoke : Lith_Explosive
 
 class Lith_RifleGrenade : Lith_Explosive;
 
-default
-{
+default {
    Radius 8;
    Height 8;
    Speed 25;
@@ -49,20 +51,21 @@ default
    BounceSound "weapons/rifle/grenadebounce";
    Species "Lith_Player";
    DamageType "Shrapnel";
-
    Projectile;
    +MThruSpecies
    +ExplodeOnWater
    -NoGravity
 }
 
-states
-{
+states {
 Spawn:
-   SGRN A 2 bright A_SpawnItemEx("Lith_RifleGrenadeSmoke", -8, flags: SXF_TRANSFERPOINTERS);
+   SGRN A 2 bright {
+      if(checkMarathon()) {spawn("Lith_RifleGrenadeSmokeMarathon", pos);}
+      else                {spawn("Lith_RifleGrenadeSmoke",         pos);}
+   }
    loop;
 Death:
-   TNT1 A 0 A_Explode();
+   TNT1 A 0 A_Explode;
    TNT1 A 0 Lith_A_ExplodeSound;
    TNT1 A 0 Lith_A_DoExplosion;
    stop;

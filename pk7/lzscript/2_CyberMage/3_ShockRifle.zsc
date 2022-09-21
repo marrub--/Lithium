@@ -9,8 +9,6 @@
 class Lith_ShockEffectPuff : Lith_BasicPuff {
    default {
       DamageType "Electric";
-      Species "Lith_Player";
-      +DontHarmSpecies
    }
 }
 
@@ -20,8 +18,16 @@ class Lith_ShockEffect : Actor {
       RenderStyle "Add";
       Scale 0.6;
       +Bright
-      +NoInteraction
+      +NoBlockmap
+      +NoGravity
+      +NoClip
       +Randomize
+   }
+
+   override void tick() {
+      if(!isFrozen()) {
+         Lith_UTIL.stateTick(self);
+      }
    }
 
    states {
@@ -73,7 +79,9 @@ class Lith_ShockPuff : Lith_BulletPuffPainful {
 
    void lith_shock() {
       if(tracer) {
-         tracer.a_damageSelf(5, "Electric", 0, "None", src: AAPTR_TARGET);
+         if(!tracer.bDormant) {
+            tracer.a_damageSelf(5, "Electric", 0, "None", src: AAPTR_TARGET);
+         }
          Lith_CopyEffect.create("Lith_ShockFx", tracer);
       }
    }
@@ -95,7 +103,7 @@ class Lith_ShockPuff : Lith_BulletPuffPainful {
                tracer.takeInventory("Lith_ShockHitCount", int.max);
                spawn("Lith_SuperShockEffect", pos);
                a_startSound("weapons/erifle/shock", lch_body);
-               a_explode(64, 512, 0);
+               a_explode(64, 512, xf_nosplash);
                setState(resolveState("Shock"));
             }
          }

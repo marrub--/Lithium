@@ -91,6 +91,10 @@ void ApplyLevels(dmon_t *m, i32 prev) {
 
 script static
 void ShowBarrier(dmon_t const *m, k32 alpha) {
+   if(Paused) {
+      return;
+   }
+
    bool anyplayer = false;
 
    /* Optimization: Check for players nearby first. */

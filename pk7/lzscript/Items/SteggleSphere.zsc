@@ -6,15 +6,6 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_Dogs : Inventory {
-   default {
-      Inventory.MaxAmount 1;
-      Inventory.InterHubAmount 0;
-
-      +INVENTORY.UNDROPPABLE
-   }
-}
-
 class Lith_Steggles : MBFHelperDog {
    default {
       Health 10000000;
@@ -28,7 +19,6 @@ class Lith_Steggles : MBFHelperDog {
    states {
    Energize:
       DOGS A 0 {
-         target.GiveInventory("Lith_Dogs", 1);
          target.GiveInventory("HealthBonus", 1);
          callAcs("Lith_ItemPopupTag");
          Lith_HERMES.Log(msg_item, 1, "_Dogs");

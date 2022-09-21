@@ -6,16 +6,13 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_BossFucker : Inventory
-{
-   override void Tick()
-   {
-      if(!Owner.Tracer || Owner.Tracer.Health <= 0)
-      {
-         Owner.A_BossDeath();
-         Owner.ClearCounters();
-         Owner.Destroy();
-         Destroy();
+class Lith_BossFucker : Inventory {
+   override void tick() {
+      if(!owner.tracer || owner.tracer.health <= 0) {
+         owner.a_bossDeath();
+         owner.clearCounters();
+         owner.destroy();
+         destroy();
       }
    }
 }
@@ -24,7 +21,7 @@ extend class Lith_HERMES;
 
 static void SurgeOfDestiny(Actor mo) {
    mo.GiveInventory("Lith_SurgeProtector", 1);
-   mo.A_Explode(128, 192, 0);
+   mo.A_Explode(128, 192, xf_nosplash);
    mo.A_StartSound("weapons/dark/fire", lch_body);
    mo.A_SpawnItemEx("Lith_StarBarrier", 24,0,32, 2,0,2,  50, SXF_NOCHECKPOSITION);
    mo.A_SpawnItemEx("Lith_StarBarrier", 24,0,32, 2,0,2,  90, SXF_NOCHECKPOSITION);
@@ -108,14 +105,16 @@ static void SpawnBoss(Actor a, string name, int phase)
       a.Destroy();
    } else {
       /* great, it's going to screw everything up, let's "fix" that:
-       * we shut them up, banish them to the shadow realm, remove them from
-       * the world, lobotomize them and make them into a zombie. morbid... */
-      for(int i = 1; i < 8; i++) a.A_StopSound(i);
-      a.SetXYZ((65535, 65535, 0)); /* Banish. */
-      a.RemoveFromHash();
-      a.Tics = -1;
-      a.Tracer = b;
-      a.GiveInventory("Lith_BossFucker", 1);
+       * we silence them, banish them to the shadow realm, remove them from
+       * the world, stop them from thinking and make them into a zombie.
+       * morbid...
+       */
+      for(int i = 1; i < 8; ++i) a.A_StopSound(i);
+      a.setXYZ((65535, 65535, 0)); /* Banish. */
+      a.removeFromHash();
+      a.tics = -1;
+      a.tracer = b;
+      a.giveInventory("Lith_BossFucker", 1);
    }
 
    b.m_Phase = phase;

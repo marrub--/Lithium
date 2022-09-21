@@ -417,6 +417,7 @@ class Lith_Backpack : Lith_ScoreItem replaces Backpack {
       +CountItem
       +CastSpriteShadow
    }
+
    override void lith_onPickup(Actor mo) {
       static const class<Inventory> AMMOS[] = {
          "Lith_BulletAmmo",
@@ -433,6 +434,7 @@ class Lith_Backpack : Lith_ScoreItem replaces Backpack {
       }
       super.lith_onPickup(mo);
    }
+
    states {
    Spawn:
       BPAK A -1;
@@ -442,24 +444,26 @@ class Lith_Backpack : Lith_ScoreItem replaces Backpack {
 
 class Lith_Shobon : Actor {
    default {
-      +NOINTERACTION
+      +NoInteraction
       +CastSpriteShadow
    }
-   vector2 m_DoruPos;
-   override void Tick() {
-      super.Tick();
-      if(Master) {
-         let v = Master.Vel;
-         if(!(v.X ~== 0) || !(v.Y ~== 0)) {
-            double a  = Atan2(v.Y, v.X) - 180;
-            double m  = v.XY.Length();
-            double x_ = Lith_UTIL.Lerp(m_DoruPos.X, Cos(a) * 32, m / 32.);
-            double y_ = Lith_UTIL.Lerp(m_DoruPos.Y, Sin(a) * 32, m / 32.);
-            m_DoruPos = (x_, y_);
+
+   vector2 m_doruPos;
+
+   override void tick() {
+      if(master) {
+         let v = master.vel;
+         if(!(v.x ~== 0) || !(v.y ~== 0)) {
+            double a  = atan2(v.y, v.x) - 180;
+            double m  = v.xy.length();
+            double x_ = Lith_UTIL.lerp(m_doruPos.x, cos(a) * 32, m / 32.);
+            double y_ = Lith_UTIL.lerp(m_doruPos.y, sin(a) * 32, m / 32.);
+            m_doruPos = (x_, y_);
          }
-         SetOrigin(Master.Pos + m_DoruPos, true);
+         setOrigin(master.pos + m_doruPos, true);
       }
    }
+
    states {
    Spawn:
       SHOB A -1;

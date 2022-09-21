@@ -176,6 +176,7 @@ doomednums {
    22441 = Lith_Person_AriDoll
    22442 = Lith_Person_KiriDoll
    22443 = Lith_AbyssTeleporter
+   22444 = Lith_TargetPractice
 }
 
 intermission Inter_Bunny       {}

@@ -19,6 +19,13 @@ class Lith_PuffSmoke : Actor {
       +ForceXyBillboard
       +DontSplash
    }
+
+   override void tick() {
+      if(!isFrozen()) {
+         Lith_UTIL.stateTick(self);
+      }
+   }
+
    states {
    Spawn:
       SMK5 ABCDEFGHIJKLMNOP 1;
@@ -59,12 +66,14 @@ class Lith_HotEmberTrail : Actor {
       +DontSplash
       +NoInteraction
    }
+
    states {
    Spawn:
       EPUF EFG 5 light("Lith_BulletPuff3");
       stop;
    }
 }
+
 class Lith_BulletAfterSmoke : Actor {
    default {
       RenderStyle "Add";
@@ -78,7 +87,9 @@ class Lith_BulletAfterSmoke : Actor {
       +ForceXyBillboard
       +DontSplash
    }
+
    double m_sx, m_sy;
+
    override void postBeginPlay() {
       super.postBeginPlay();
       scale.x *= fRandom[lith_bulletpuff](2, 6);
@@ -86,13 +97,15 @@ class Lith_BulletAfterSmoke : Actor {
       m_sx = fRandom[lith_bulletpuff](0.005, 0.01);
       m_sy = fRandom[lith_bulletpuff](0.001, 0.005);
    }
+
    override void tick() {
-      super.tick();
       if(!isFrozen()) {
+         Lith_UTIL.stateTick(self);
          scale.x += m_sx;
          scale.y += m_sy;
       }
    }
+
    states {
    Spawn:
       TNT1 A 0;
@@ -103,21 +116,38 @@ class Lith_BulletAfterSmoke : Actor {
    }
 }
 
-class Lith_BulletTracer : FastProjectile {
+class Lith_BulletTracer : Actor {
    default {
-      Damage 0;
       Radius 2;
       Height 2;
       Speed 67;
       RenderStyle "Add";
       +Bright
-      +NoDamage
       +DontSplash
    }
+
+   vector3 m_targ;
+   double  m_velw;
+
    override void postBeginPlay() {
-      super.postBeginPlay();
-      int n = randomPick[lith_bulletpuff](45, -45);
-      roll = fRandom[lith_bulletpuff](n - 2, n + 2);
+      if(tracer) {
+         super.postBeginPlay();
+         int n = randomPick[lith_bulletpuff](45, -45);
+         roll = fRandom[lith_bulletpuff](n - 2, n + 2);
+         m_targ = tracer.pos;
+         m_velw = vel.length();
+      } else {
+         destroy();
+      }
+   }
+
+   override void tick() {
+      if(!isFrozen()) {
+         setOrigin(pos + vel, true);
+         if((pos - m_targ).length() <= m_velw) {
+            destroy();
+         }
+      }
    }
 
    states {
@@ -180,6 +210,7 @@ default {
    +MThruSpecies
    +NoBlockmap
    +NoGravity
+   +NoClip
    +PuffGetsOwner
    -AllowParticles
 }
@@ -223,22 +254,26 @@ override void postBeginPlay() {
       a_spawnItemEx("Lith_EXPLOOOSION", flags: SXF_TRANSFERPOINTERS|SXF_NOCHECKPOSITION);
    }
    if(tracer) {
-      if(Lith_UTIL.pData(_pdt_upgrade, UPGR_Seven7s)) {
-         a_startSound("marathon/hit", lch_body);
+      if(!tracer.bDormant) {
+         if(Lith_UTIL.pData(_pdt_upgrade, UPGR_Seven7s)) {
+            a_startSound("marathon/hit", lch_body);
+         }
+         return;
+      } else {
+         setState(spawnState);
       }
-   } else {
-      if(random[lith_bulletpuff](0, 3) == 0) {
-         lith_a_smokeFX();
-      }
-      if(random[lith_bulletpuff](0, 2) == 0) {
-         lith_a_ricochetFX();
-      }
-      if(random[lith_bulletpuff](0, 4) == 0) {
-         a_spawnItemEx("Lith_BulletRicochetSpark");
-      }
-      if(random[lith_bulletpuff](0, 20) == 0) {
-         a_spawnItemEx("Lith_PuffSmoke", 0, 0, 4.0 + 0.1 * random[lith_bulletpuff](-10, 10));
-      }
+   }
+   if(random[lith_bulletpuff](0, 3) == 0) {
+      lith_a_smokeFX();
+   }
+   if(random[lith_bulletpuff](0, 2) == 0) {
+      lith_a_ricochetFX();
+   }
+   if(random[lith_bulletpuff](0, 4) == 0) {
+      spawn("Lith_BulletRicochetSpark", pos);
+   }
+   if(random[lith_bulletpuff](0, 20) == 0) {
+      spawn("Lith_PuffSmoke", pos + (0, 0, 4.0 + 0.1 * random[lith_bulletpuff](-10, 10)));
    }
 }
 

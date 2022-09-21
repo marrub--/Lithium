@@ -18,7 +18,9 @@ class Lith_700Explosion : Actor {
    int m_ticks;
 
    override void tick() {
-      Lith_UTIL.stateTick(self);
+      if(!isFrozen()) {
+         Lith_UTIL.stateTick(self);
+      }
       if(tracer) {
          setOrigin(tracer.pos, true);
       }
@@ -67,9 +69,9 @@ override void postBeginPlay() {
       }
    } else {
       if(tracer) {
-         a_explode(35, 200, 0);
+         a_explode(35, 200, xf_nosplash);
       } else {
-         a_explode(10, 32, 0);
+         a_explode(10, 32, xf_nosplash);
       }
    }
 }

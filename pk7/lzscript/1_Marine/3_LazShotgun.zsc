@@ -6,15 +6,11 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_LazShotgunTrail : Actor
-{
-   default
-   {
+class Lith_LazShotgunTrail : Actor {
+   default {
       RenderStyle "Add";
       Scale 0.34;
-
       +NOINTERACTION
-      +NOTIMEFREEZE
    }
 
    override void postBeginPlay() {
@@ -25,7 +21,9 @@ class Lith_LazShotgunTrail : Actor
    }
 
    override void tick() {
-      a_fadeOut(0.1);
+      if(!isFrozen()) {
+         a_fadeOut(0.1);
+      }
    }
 
    states

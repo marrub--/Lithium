@@ -18,8 +18,7 @@ class Lith_KampilanPuff : Actor {
       -AllowParticles
    }
 
-   states
-   {
+   states {
    Spawn:
    XDeath:
       TNT1 A 0;
@@ -68,8 +67,7 @@ class Lith_KampilanBonkPuff : Actor {
       }
    }
 
-   states
-   {
+   states {
    Spawn:
    XDeath:
       TNT1 A 0;

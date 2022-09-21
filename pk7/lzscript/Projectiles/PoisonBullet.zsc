@@ -50,12 +50,12 @@ class Lith_PoisonBullet : Lith_BulletPuff {
       for(int i = 0; i < 5; i++) {
          a_spawnItemEx("Lith_PoisonBlob", 0,0,0, fRandom(-1,1),fRandom(-1,1),fRandom(2,6), 0, 0, 64);
       }
-      if(tracer) {
+      if(tracer && !tracer.bDormant) {
          let ticker = Lith_PoisonTicker(tracer.findinventory("Lith_PoisonTicker"));
          if(!ticker) {
             ticker = Lith_PoisonTicker(tracer.giveInventoryType("Lith_PoisonTicker"));
          }
-         ticker.m_end = level.time + 70;
+         ticker.m_end = 70;
          ticker.target = target;
       }
    }
@@ -71,12 +71,11 @@ override void markPrecacheSounds() {
 }
 
 override void tick() {
-   if(!owner || level.time == m_end) {
-      destroy();
+   if(isFrozen()) {
       return;
    }
-   super.tick();
-   if(isFrozen()) {
+   if(!owner || owner.health <= 0 || m_end-- <= 0) {
+      destroy();
       return;
    }
    if(level.time & 7 == 0) {

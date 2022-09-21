@@ -11,13 +11,16 @@ class Lith_CasingSmoke : Actor {
       RenderStyle "Add";
       Alpha 0.6;
       Scale 0.02;
-      Projectile;
       +NOINTERACTION
       +NOTELEPORT
       +THRUACTORS
       +DROPOFF
       +FLOORCLIP
       +FORCEXYBILLBOARD
+   }
+
+   override void tick() {
+      Lith_UTIL.stateTick(self);
    }
 
    states {
@@ -59,7 +62,7 @@ class Lith_CasShellHot : Lith_CasShell {
    states {
    Spawn:
       TNT1 A 0;
-      SCAS AABBCCDDEEFFGGHH 1 A_SpawnItemEx("Lith_CasingSmoke", 0,0,3, frandom(-0.2,0),frandom(-0.2,0));
+      SCAS AABBCCDDEEFFGGHH 1 lith_spawnSmoke(0,0,3, frandom(-0.2,0),frandom(-0.2,0));
    Spawn2:
       SCAS ABCDEFGH 1;
       loop;
@@ -102,7 +105,7 @@ class Lith_CasSmallHot : Lith_CasSmall {
    states {
    Spawn:
       TNT1 A 0;
-      BCAS ABCDEFGH 1 A_SpawnItemEx("Lith_CasingSmoke", 0,0,3, frandom(-0.2,0),frandom(-0.2,0));
+      BCAS ABCDEFGH 1 lith_spawnSmoke(0,0,3, frandom(-0.2,0),frandom(-0.2,0));
    Spawn2:
       BCAS ABCDEFGH 1;
       loop;
@@ -140,7 +143,7 @@ class Lith_CasBigHot : Lith_CasBig {
    states {
    Spawn:
       TNT1 A 0;
-      BBCA ABCDEFGH 1 A_SpawnItemEx("Lith_CasingSmoke", 0, 0, 3);
+      BBCA ABCDEFGH 1 lith_spawnSmoke(0, 0, 3);
       loop;
    }
 }
@@ -167,7 +170,7 @@ class Lith_Cas4Bore : Lith_CasShell {
       #### # 0 a_setRoll(roll + 90);
       S4CA A 1 {
          a_setRoll(roll + 5, SPF_INTERPOLATE);
-         a_spawnItemEx("Lith_CasingSmoke", 0, 0, 3);
+         lith_spawnSmoke(0, 0, 3);
       }
       wait;
    Death:
@@ -194,11 +197,21 @@ default {
    +CastSpriteShadow
 }
 
+bool m_lessparticles;
+
 override void postBeginPlay() {
    super.postBeginPlay();
    if(!lith_weapons_casings) {
       destroy();
+   } else {
+      m_lessparticles = lith_sv_lessparticles;
    }
+}
+
+void lith_spawnSmoke(double x, double y, double z, double xv = 0, double yv = 0, double zv = 0) {
+   if(m_lessparticles) return;
+   let mo = spawn("Lith_CasingSmoke", pos + (x, y, z));
+   mo.vel = (xv, yv, zv);
 }
 
 states {

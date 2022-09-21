@@ -6,7 +6,15 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_8BallGrenade : Lith_RifleGrenade
+class Lith_RocketGrenade : Lith_RifleGrenade
+{
+   default
+   {
+      Damage 20;
+   }
+}
+
+class Lith_8BallGrenade : Lith_RocketGrenade
 {
    default
    {
@@ -119,7 +127,7 @@ action(Weapon) void Lith_A_FireGrenade()
    A_AlertMonsters();
    lith_takeAmmo();
    A_StartSound("weapons/rocket/grenade", lch_weapon);
-   A_FireProjectile("Lith_RifleGrenade");
+   A_FireProjectile("Lith_RocketGrenade");
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
 }
 

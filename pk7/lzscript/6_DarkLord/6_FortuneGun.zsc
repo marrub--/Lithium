@@ -9,58 +9,12 @@
 class Lith_FortuneProjectilePuff : Lith_BasicPuff {
    default {
       DamageType "Electric";
-      Species "Lith_Player";
-
-      +DONTHARMSPECIES
-   }
-}
-
-class Lith_FortuneShotWind : Actor {
-   default {
-      RenderStyle "Add";
-      Radius 1;
-      Height 1;
-
-      +NoInteraction
-      +BRIGHT
-   }
-
-   override void postBeginPlay() {
-      super.postBeginPlay();
-      roll = frandom[lith_fortune](0, 360);
-      alpha = frandom[lith_fortune](0.5, 0.7);
-      scale.x = frandom[lith_fortune](0.2, 1.0);
-   }
-
-   states {
-   Spawn:
-      ____ A 20;
-      ____ A 1 A_FadeOut;
-      wait;
-   }
-}
-
-class Lith_FortuneShotWindSpawner : Actor {
-   default {
-      Radius 1;
-      Height 1;
-      +NoInteraction
-   }
-
-   states {
-   Spawn:
-      TNT1 A 0;
-      TNT1 A 0 {
-         if(random[lith_fortune](0,1)) A_SpawnItemEx("Lith_FortuneShotWind", frandom[lith_fortune](-8,8),frandom[lith_fortune](-8,8),frandom[lith_fortune](-8,8), flags: SXF_NOCHECKPOSITION|SXF_TRANSFERPITCH);
-      }
-      stop;
    }
 }
 
 class Lith_FortuneExplosionParticle : Actor {
    default {
       RenderStyle "Add";
-
       +NoInteraction
       +RollSprite
       +FlatSprite
@@ -74,10 +28,11 @@ class Lith_FortuneExplosionParticle : Actor {
    }
 
    override void tick() {
-      super.tick();
-      a_fadeOut(0.05);
-      scale.x += 0.05;
-      scale.y += 0.05;
+      if(!isFrozen()) {
+         a_fadeOut(0.05);
+         scale.x += 0.05;
+         scale.y += 0.05;
+      }
    }
 
    states {
@@ -99,7 +54,7 @@ class Lith_FortuneExplosion : Lith_Explosive {
    Spawn:
       TNT1 A 0;
       TNT1 A 0 {
-         a_explode(100, 100, XF_NOSPLASH, false, 100);
+         a_explode(100, 100, xf_nosplash, false, 100);
          a_quake(3, 20, 0, 640);
          for(int i = 0; i < 2; i++)
             spawn("Lith_FortuneExplosionParticle", pos);
@@ -116,8 +71,6 @@ class Lith_FortuneShot : FastProjectile {
       Height 5;
       DamageFunction 100;
       Speed 170;
-      MissileHeight 8;
-      MissileType "Lith_FortuneShotWindSpawner";
    }
 
    states {
@@ -136,17 +89,28 @@ class Lith_FortuneProjectile : Actor {
       Height 1;
       Radius 1;
       Projectile;
-      +Ripper
-      +NoBossRip
+      +NoClip
+      -ActivateImpact
+      -ActivatePCross
+   }
+
+   override void postBeginPlay() {
+      super.postBeginPlay();
+      a_spawnProjectile("Lith_FortuneShot", flags: CMF_TRACKOWNER|CMF_AIMDIRECTION|CMF_SAVEPITCH|CMF_ABSOLUTEPITCH, pitch: pitch);
+   }
+
+   override void tick() {
+      if(!isFrozen()) {
+         Lith_UTIL.stateTick(self);
+      }
    }
 
    states {
    Spawn:
       TNT1 A 0;
-      TNT1 A 0 A_SpawnProjectile("Lith_FortuneShot", flags: CMF_TRACKOWNER|CMF_AIMDIRECTION|CMF_SAVEPITCH|CMF_ABSOLUTEPITCH, pitch: pitch);
       TNT1 AAAAAAAA 2 {
          A_StartSound("weapons/fortune/spark", lch_body, 0, frandom[lith_fortune](0.1, 0.3), 2.0, frandom[lith_fortune](0.5, 1.5));
-         A_CustomRailgun(100, 0, "", Lith_UTIL.colorLerp("#ffffff", "#91c3ff", fRandom[lith_fortune](0.0, 1.0)), RGF_SILENT|RGF_EXPLICITANGLE|RGF_FULLBRIGHT|RGF_CENTERZ, 0, 50, "Lith_FortuneProjectilePuff", 0, 0, 16000, 10, 0.2, 0, spawnofs_z: 32);
+         A_CustomRailgun(50, 0, "", Lith_UTIL.colorLerp("#ffffff", "#91c3ff", fRandom[lith_fortune](0.0, 1.0)), RGF_SILENT|RGF_EXPLICITANGLE|RGF_FULLBRIGHT|RGF_CENTERZ, 0, 50, "Lith_FortuneProjectilePuff", 0, 0, 16000, 10, 0.2, 0, spawnofs_z: 32);
       }
       stop;
    }
@@ -154,21 +118,17 @@ class Lith_FortuneProjectile : Actor {
 
 class Lith_FortuneSpark : Lith_ShockEffect {
    default {
-      +FORCEXYBILLBOARD
-      +FRIENDLY
-      +NOBLOCKMAP
-      +NoGravity
-      -NoInteraction
+      Projectile;
+      +ForceXyBillboard
    }
 
-   states
-   {
+   states {
    Spawn:
       ZAP1 FFEEFFEEFFEEDDCCBBCCBBAABBAA 1 {
-         if(master) {
-            A_Warp(AAPTR_PLAYER1, cos(master.pitch)*16, 4, 44-sin(master.pitch)*16, 0, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE);
-            angle = master.angle;
-            pitch = master.pitch;
+         if(target) {
+            A_Warp(AAPTR_PLAYER1, cos(target.pitch)*16, 4, 44-sin(target.pitch)*16, 0, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE);
+            angle = target.angle;
+            pitch = target.pitch;
          }
          if(random[lith_fortune](0, 1) == 0) {
             A_CustomRailgun(5, 0, "", "White", RGF_SILENT|RGF_EXPLICITANGLE|RGF_FULLBRIGHT|RGF_CENTERZ, 0, 10, "Lith_ShockEffectPuff", FRandom[lith_fortune](-45, 45), FRandom[lith_fortune](-45, 45), FRandom[lith_fortune](100,400), 10, 0.2, 0);
@@ -176,9 +136,6 @@ class Lith_FortuneSpark : Lith_ShockEffect {
       }
       stop;
    }
-}
-
-class Lith_FortuneSpark2 : Lith_FortuneSpark {
 }
 
 class Lith_FortuneGun : Lith_DWeapon;
@@ -225,7 +182,7 @@ Ready:
    FORT A 0 {
       if(random[lith_fortune](0, 77) == 0 || level.time % 50 == 0) {
          A_StartSound("weapons/fortune/spark", lch_weapon3, pitch: frandom[lith_fortune](0.9, 1.2));
-         A_SpawnItemEx("Lith_FortuneSpark", flags: SXF_SETMASTER|SXF_NOCHECKPOSITION);
+         A_SpawnItemEx("Lith_FortuneSpark", flags: SXF_SETTARGET|SXF_NOCHECKPOSITION);
          A_FireProjectile("Lith_LightProjectileSkyShort", 0);
       }
    }
@@ -247,7 +204,7 @@ Fire:
    }
 FireCharge:
    FORT A 0 {
-      A_SpawnItemEx("Lith_FortuneSpark2", flags: SXF_SETMASTER|SXF_NOCHECKPOSITION);
+      A_SpawnItemEx("Lith_FortuneSpark", flags: SXF_SETTARGET|SXF_NOCHECKPOSITION);
       A_FireProjectile("Lith_LightProjectileSkyShort", 0);
    }
    FORT AAAAAA 1 a_overlayOffset(_psp_weapon, fRandom[lith_fortune](0, 4), fRandom[lith_fortune](32, 34), wof_interpolate);

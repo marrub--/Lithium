@@ -88,7 +88,7 @@ default {
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/rems/draw";
    Lith_Weapon.AmmoType "Lith_CannonAmmo";
-
+   Inventory.AltHudIcon "REMSZ0";
    +Weapon.NoAutoFire
 }
 

@@ -439,7 +439,7 @@ action(Weapon) void Lith_FireBullets(double spreadHorz, double spreadVert, int n
    case _tr_big:    tracerType = "Lith_BulletTracerBig";  break;
    case _tr_none:   tracerType = null;                    break;
    }
-   A_FireBullets(spreadHorz, spreadVert, numBullets, damage, puffType, flags, range, tracerType, 7 + FRandom(-1, 0), tracerX + FRandom(-0.7, 0.7));
+   A_FireBullets(spreadHorz, spreadVert, numBullets, damage, puffType, flags | FBF_PUFFTRACER, range, tracerType, 7 + FRandom(-1, 0), tracerX + FRandom(-0.7, 0.7));
 }
 
 action(Weapon) void lith_a_fireMelee(int damage, double range, int flags = 0, class<Actor> puffType = "Lith_BulletPuff") {

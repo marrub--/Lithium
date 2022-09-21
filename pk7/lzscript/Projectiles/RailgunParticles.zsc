@@ -81,7 +81,7 @@ class Lith_OmegaRailBeam : Lith_OmegaRailFXBase
    Spawn:
       BFE1 C 0 bright;
       BFE1 C 25 bright {
-         A_Explode(24, 256, 0, false, 256);
+         A_Explode(24, 256, xf_nosplash, false, 256);
          A_SpawnItemEx("Lith_OmegaRailParticle1", FRandom(-57, 57),FRandom(-57, 57),FRandom(-57, 57));
       }
       BFE1 DEF 4 bright;
@@ -104,7 +104,7 @@ class Lith_OmegaRailExplosion : Lith_OmegaRailFXBase {
    Spawn:
       BFE1 C 0 bright;
       BFE1 C 15 bright {
-         A_Explode(128, 512, 0, false, 512);
+         A_Explode(128, 512, xf_nosplash, false, 512);
          A_StartSound("weapons/rail/impact", lch_body);
          for(int i = 0; i < 26; i++)
             A_SpawnItemEx("Lith_OmegaRailParticle2", FRandom(-32, 32),FRandom(-32, 32),FRandom(-32, 32), FRandom(-2, 2),FRandom(-2, 2),FRandom(-2, 2));

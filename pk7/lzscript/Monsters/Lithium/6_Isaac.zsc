@@ -6,26 +6,6 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_IsaacThompsonTrail : Actor {
-   default {
-      Alpha       0.8;
-      RenderStyle "Add";
-      Scale       0.8;
-
-      +NOINTERACTION
-   }
-
-   override void tick() {
-      a_fadeOut();
-   }
-
-   states {
-   Spawn:
-      PUFF A -1;
-      stop;
-   }
-}
-
 class Lith_IsaacThompsonBullet : FastProjectile
 {
    default
@@ -34,7 +14,7 @@ class Lith_IsaacThompsonBullet : FastProjectile
       DamageFunction 3 * Random(1, 4);
       DamageType     "Bullet";
       Height         4;
-      MissileType    "Lith_IsaacThompsonTrail";
+      MissileType    "Lith_MonsterBulletTrail";
       Radius         4;
       RenderStyle    "Translucent";
       Scale          0.3;

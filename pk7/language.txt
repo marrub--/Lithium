@@ -1187,11 +1187,15 @@
 "LITH_PK_d_700e_002" = "7 Binbus";
 "LITH_PK_d_700e_003" = "Barbro Bexbess";
 "LITH_PK_d_700e_004" = "Beven Bundred Bexpress";
-"LITH_PK_d_shrapnel_NUM" = "3";
+"LITH_PK_d_shrapnel_NUM" = "7";
 "LITH_PK_d_shrapnel_000" = "Shart Gun";
 "LITH_PK_d_shrapnel_001" = "Sharpel Gun";
 "LITH_PK_d_shrapnel_002" = "Shapiro Gun";
 "LITH_PK_d_shrapnel_003" = "Shetnel Gnu";
+"LITH_PK_d_shrapnel_004" = "Shorpnel Gum";
+"LITH_PK_d_shrapnel_005" = "Shrimp";
+"LITH_PK_d_shrapnel_006" = "Shrangle Cronker";
+"LITH_PK_d_shrapnel_007" = "Shorken Poker";
 "LITH_PK_d_4bore_NUM" = "3";
 "LITH_PK_d_4bore_000" = "Hunting Shunting";
 "LITH_PK_d_4bore_001" = "Hotgun Shotgun";
@@ -1216,7 +1220,7 @@
 "LITH_PK_d_minigun_000" = "Mnegbun";
 "LITH_PK_d_minigun_001" = "Minibini";
 "LITH_PK_d_minigun_002" = "Bimbo";
-"LITH_PK_d_minigun_003" = "Miggug";
+"LITH_PK_d_minigun_003" = "Min Bin";
 "LITH_PK_d_minigun_004" = "Marg-Rarg";
 "LITH_PK_d_minigun_005" = "Many Barreled Rifle";
 "LITH_LOG_HealthBonus" = "$LITH_INFO_SHORT_HealthBonus";

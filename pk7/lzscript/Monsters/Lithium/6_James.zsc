@@ -6,10 +6,6 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_JamesRevolverTrail : Lith_IsaacThompsonTrail
-{
-}
-
 class Lith_JamesRevolverBullet : FastProjectile
 {
    default
@@ -18,7 +14,7 @@ class Lith_JamesRevolverBullet : FastProjectile
       DamageFunction 4 * Random(1, 4);
       DamageType     "Bullet";
       Height         4;
-      MissileType    "Lith_JamesRevolverTrail";
+      MissileType    "Lith_MonsterBulletTrail";
       Radius         8;
       RenderStyle    "Translucent";
       Scale          0.8;

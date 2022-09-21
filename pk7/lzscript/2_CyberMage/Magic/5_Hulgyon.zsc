@@ -22,7 +22,7 @@ class Lith_HulgyonEffect : Actor
    {
    Spawn:
       BLLT P 0;
-      BLLT P 0 A_Explode(48, 90, 0);
+      BLLT P 0 A_Explode(48, 90, xf_nosplash);
       BLLT P 5;
       BLLT P 1 A_FadeOut(0.2);
       wait;

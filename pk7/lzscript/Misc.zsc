@@ -18,12 +18,18 @@ class Lith_GoAway : Actor {
 
 class Lith_BasicPuff : Actor {
    default {
-      +NoTimeFreeze
+      Species "Lith_Player";
       +AlwaysPuff
-      +ForceDecal
-      +PuffOnActors
-      +NoGravity
       +BloodlessImpact
+      +DontHarmSpecies
+      +ForceDecal
+      +HitTracer
+      +NoBlockmap
+      +NoClip
+      +NoGravity
+      +NoTimeFreeze
+      +PuffGetsOwner
+      +PuffOnActors
    }
 
    states {
@@ -56,6 +62,99 @@ class Lith_Bip : Actor {
    states {
    Spawn:
       ABIP A -1;
+      stop;
+   }
+}
+
+class Lith_TargetPractice : Actor {
+   default {
+      RenderStyle "Add";
+      Scale 1.7;
+      Height 56;
+      Radius 32;
+      Activation THINGSPEC_DEFAULT|THINGSPEC_NODEATHSPECIAL|THINGSPEC_SWITCH|THINGSPEC_DEACTIVATE;
+      Mass int.max;
+      +NoDamageThrust
+      +Shootable
+      +Solid
+      +Bright
+      +UseSpecial
+   }
+
+   int m_tic;
+   int m_sec;
+   int m_secPrev;
+   int m_secLast;
+   int m_secCur;
+   int m_secNext;
+   int m_dps;
+   int m_dpsNext;
+
+   override void beginPlay() {
+      super.beginPlay();
+      worldOffset.z = 24;
+      m_secNext = -1;
+      m_dpsNext = -1;
+   }
+
+   override void tick() {
+      super.tick();
+      if(!isFrozen()) {
+         if(m_tic) {
+            if(m_secNext == -1) {
+               m_secNext = getAge() + 35;
+            }
+            Console.printf("Damage this tick: %i", m_tic);
+            m_sec += m_tic;
+            m_tic = 0;
+         }
+         if(getAge() == m_dpsNext) {
+            int avg = 0;
+            if(m_secLast > 1) {
+               --m_secLast;
+               m_dps -= m_secPrev;
+               avg = m_dps / m_secLast;
+            } else {
+               avg = m_dps;
+            }
+            Console.printf("DPS: %i total over %i seconds, %i average", m_dps, m_secLast, avg);
+            m_dps = 0;
+            m_secCur = 0;
+            m_secNext = -1;
+            m_dpsNext = -1;
+         } else if(getAge() == m_secNext) {
+            ++m_secCur;
+            Console.printf("Damage this second (%i): %i", m_secCur, m_sec);
+            if(m_sec) {
+               m_dps += m_sec;
+               m_secPrev = m_sec;
+               m_dpsNext = getAge() + 35 * 5;
+               m_secLast = m_secCur;
+               m_sec = 0;
+            }
+            m_secNext = getAge() + 35;
+         }
+      }
+   }
+
+   override void activate(Actor mo) {
+      bDormant = false;
+   }
+
+   override void deactivate(Actor mo) {
+      bDormant = true;
+   }
+
+   override int damageMobj(Actor inflictor, Actor source, int damage, name mod, int flags, double angle) {
+      health = int.max;
+      int dmg = super.damageMobj(inflictor, source, damage, mod, flags, angle);
+      m_tic += dmg;
+      return dmg;
+   }
+
+   states {
+   Spawn:
+      LI09 Y -1;
       stop;
    }
 }

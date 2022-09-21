@@ -38,7 +38,7 @@ class Lith_ParticleBeam : Lith_PlasmaLaze
    {
    Spawn:
       BLLT A 0;
-      BLLT A 2 A_Explode(8, 256, 0);
+      BLLT A 2 A_Explode(8, 256, xf_nosplash);
       BFS1 A 1 A_FadeOut(0.1);
       wait;
    }

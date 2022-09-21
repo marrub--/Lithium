@@ -8,8 +8,7 @@
 
 class Lith_4Bore : Lith_DWeapon;
 
-default
-{
+default {
    Lith_Weapon.SpawnType "Lith_SuperShotgunPickup";
    Tag "$LITH_INFO_SHORT_4Bore";
    Weapon.SlotNumber 3;
@@ -28,8 +27,8 @@ override void markPrecacheSounds() {
    markSound("weapons/4bore/close");
    markSound("weapons/4bore/empty");
 }
-action(Weapon) void Lith_A_Fire4Bore()
-{
+
+action(Weapon) void Lith_A_Fire4Bore() {
    A_AlertMonsters();
    lith_takeAmmo(6);
    A_SetBlend("White", 0.2, 6);
@@ -37,13 +36,12 @@ action(Weapon) void Lith_A_Fire4Bore()
    a_alertMonsters();
    Lith_A_GunSmoke(2, 8);
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
-   Lith_FireBullets(4, 2, 8, 50 * random(1, 3), FBF_NORANDOM, "Lith_700Bullet", tracer: _tr_big);
+   Lith_FireBullets(4, 2, 8, random[lith_dlweapon](125, 150), FBF_NORANDOM, "Lith_700Bullet", tracer: _tr_big);
    Lith_A_RecoilUp(10);
    a_recoil(4);
 }
 
-states(Weapon)
-{
+states(Weapon) {
 Ready:
    4BOR A 1 Lith_A_Ready;
    loop;

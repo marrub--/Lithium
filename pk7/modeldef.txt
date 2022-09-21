@@ -38,13 +38,3 @@ model "Lith_BulletTracerBig" {
    Skin 0 "tracer.png"
    FrameIndex "____" "A" 0 0
 }
-model "Lith_FortuneShotWind" {
-   Path "lmisc/models"
-   DontCullBackFaces 
-   UseActorRoll 
-   UseActorPitch 
-   Scale 128.0 16.0 1.0
-   Model 0 "tapered.obj"
-   Skin 0 "air.png"
-   FrameIndex "____" "A" 0 0
-}

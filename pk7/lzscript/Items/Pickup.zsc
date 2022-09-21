@@ -22,7 +22,7 @@ class Lith_ItemGlow : Actor {
    }
 
    override void tick() {
-      if(getAge() > 5 && (alpha -= 0.03) < 0) {
+      if(!isFrozen() && getAge() > 5 && (alpha -= 0.03) < 0) {
          destroy();
       }
    }

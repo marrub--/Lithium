@@ -57,7 +57,7 @@ action(Weapon) void Lith_A_JustAttack()
       invoker.m_Just = 0;
       A_AlertMonsters();
       A_StartSound("weapons/shotgun/just", lch_weapon2);
-      A_RailAttack(20, 0, false, "", "LightBlue", RGF_SILENT | RGF_FULLBRIGHT, 128, "Lith_BasicPuff", 0, 0, 0, 48, 3, 3);
+      A_RailAttack(40, 0, false, "", "LightBlue", RGF_SILENT | RGF_FULLBRIGHT, 128, "Lith_BasicPuff", 0, 0, 0, 48, 3, 3);
    }
 }
 
@@ -72,13 +72,13 @@ action(Weapon) void Lith_A_FireShotgun()
 
    if(Lith_UTIL.pData(_pdt_upgrade, UPGR_Shotgun_B))
    {
-      Lith_FixedBullets(8, 10, pufftype: "Lith_PoisonBullet");
+      Lith_FixedBullets(8, 19, pufftype: "Lith_PoisonBullet");
       A_StartSound("weapons/shotgun/poison/fire", lch_weapon);
    }
    else
    {
-      Lith_FixedBullets(8, 10);
-      A_RailAttack(20, 0, true, "", "Green", RGF_SILENT | RGF_FULLBRIGHT, 2, "Lith_ShotgunRailPuff", 1, 1, 0, 0, 0.9, 1, "Lith_ShotgunTrail", 0);
+      Lith_FixedBullets(8, 17);
+      A_RailAttack(70, 0, true, "", "Green", RGF_SILENT | RGF_FULLBRIGHT, 2, "Lith_ShotgunRailPuff", 1, 1, 0, 0, 0.9, 1, "Lith_ShotgunTrail", 0);
       if(lith_weapons_reducedsg)
          A_StartSound("weapons/shotgun/fire2", lch_weapon);
       else

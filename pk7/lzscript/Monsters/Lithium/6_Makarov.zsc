@@ -6,10 +6,6 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_MakarovShotgunTrail : Lith_IsaacThompsonTrail
-{
-}
-
 class Lith_MakarovShotgunBullet : FastProjectile
 {
    default
@@ -18,7 +14,7 @@ class Lith_MakarovShotgunBullet : FastProjectile
       DamageFunction 3 * Random(1, 4);
       DamageType "Bullet";
       Height 20;
-      MissileType "Lith_MakarovShotgunTrail";
+      MissileType "Lith_MonsterBulletTrail";
       Radius 8;
       RenderStyle "Translucent";
       Scale 0.5;

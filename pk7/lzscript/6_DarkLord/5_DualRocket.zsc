@@ -9,15 +9,13 @@
 class Lith_Franca : Lith_Rocket {
    default {
       Speed 30;
-      Damage 50;
+      DamageFunction (random[lith_dlweapon](80, 150));
       Translation "Lith_Franca";
    }
 }
 
-class Lith_Sophia : Lith_Rocket {
+class Lith_Sophia : Lith_Franca {
    default {
-      Speed 30;
-      Damage 30;
       Translation "Lith_Sophia";
       +SeekerMissile
    }

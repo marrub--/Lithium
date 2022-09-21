@@ -14,7 +14,7 @@
 #include "lzscript/Items/Barrier.zsc"
 #include "lzscript/Items/Bonuses.zsc"
 #include "lzscript/Items/BoughtItem.zsc"
-#include "lzscript/Items/CBIStuff.zsc"
+#include "lzscript/Items/CbiStuff.zsc"
 #include "lzscript/Items/DivisionSigil.zsc"
 #include "lzscript/Items/Health.zsc"
 #include "lzscript/Items/Inventory.zsc"

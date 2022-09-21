@@ -19,7 +19,7 @@ default {
 
 override void postBeginPlay() {
    super.postBeginPlay();
-   a_explode(7, 32, 0);
+   a_explode(7, 32, xf_nosplash);
 }
 
 /* EOF */

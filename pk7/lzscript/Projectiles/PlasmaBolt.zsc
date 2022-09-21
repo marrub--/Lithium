@@ -93,13 +93,14 @@ default {
    Radius 12;
    Height 12;
    Speed 50;
-   DamageFunction 10;
+   DamageFunction 12;
    DamageType "Electric";
    Species "Lith_Player";
    Projectile;
    +DONTHARMSPECIES
    +MTHRUSPECIES
 }
+
 int m_TrailStep;
 override void markPrecacheSounds() {
    super.markPrecacheSounds();

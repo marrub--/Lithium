@@ -6,13 +6,15 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_SpiderMastermindBulletTrail : Lith_IsaacThompsonTrail {
+class Lith_SpiderMastermindBulletTrail : Lith_MonsterBulletTrail {
    default {
       Scale 0.6;
    }
 
    override void tick() {
-      a_fadeOut(0.05);
+      if(!isFrozen()) {
+         a_fadeOut(0.05);
+      }
    }
 }
 

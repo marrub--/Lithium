@@ -339,11 +339,15 @@ perced to the rooten.
 == \#PK_d_700e_003 | Barbro Bexbess
 == \#PK_d_700e_004 | Beven Bundred Bexpress
 
-== \#PK_d_shrapnel_NUM | 3
+== \#PK_d_shrapnel_NUM | 7
 == \#PK_d_shrapnel_000 | Shart Gun
 == \#PK_d_shrapnel_001 | Sharpel Gun
 == \#PK_d_shrapnel_002 | Shapiro Gun
 == \#PK_d_shrapnel_003 | Shetnel Gnu
+== \#PK_d_shrapnel_004 | Shorpnel Gum
+== \#PK_d_shrapnel_005 | Shrimp
+== \#PK_d_shrapnel_006 | Shrangle Cronker
+== \#PK_d_shrapnel_007 | Shorken Poker
 
 == \#PK_d_4bore_NUM | 3
 == \#PK_d_4bore_000 | Hunting Shunting
@@ -373,7 +377,7 @@ perced to the rooten.
 == \#PK_d_minigun_000 | Mnegbun
 == \#PK_d_minigun_001 | Minibini
 == \#PK_d_minigun_002 | Bimbo
-== \#PK_d_minigun_003 | Miggug
+== \#PK_d_minigun_003 | Min Bin
 == \#PK_d_minigun_004 | Marg-Rarg
 == \#PK_d_minigun_005 | Many Barreled Rifle
 

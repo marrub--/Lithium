@@ -46,15 +46,23 @@
 class Lith_UniqueID : Inventory {
    default {
       Inventory.MaxAmount int.max;
-      +Inventory.UnDroppable
+      +Inventory.Undroppable
+   }
+
+   override void tick() {
    }
 }
+
 class Lith_MonsterID : Inventory {
    default {
       Inventory.MaxAmount int.max;
-      +Inventory.UNDROPPABLE
+      +Inventory.Undroppable
+   }
+
+   override void tick() {
    }
 }
+
 class Lith_MResist : PowerProtection {default {Powerup.Duration 0x7FFFFFFD;}}
 class Lith_M_Bullets1 :Lith_MResist{default{DamageFactor "Bullet",   0.8;}}
 class Lith_M_Energy1  :Lith_MResist{default{DamageFactor "Railgun",  0.8; DamageFactor "Electric", 0.8; DamageFactor "Plasma", 0.8;}}
@@ -86,52 +94,65 @@ class Lith_M_Fire5    :Lith_MResist{default{DamageFactor "Fire",     0.1;}}
 class Lith_M_Magic5   :Lith_MResist{default{DamageFactor "Magic",    0.1;}}
 class Lith_M_Melee5   :Lith_MResist{default{DamageFactor "Melee",    0.1;}}
 class Lith_M_Shrapnel5:Lith_MResist{default{DamageFactor "Shrapnel", 0.1; DamageFactor "Explosion", 0.1;}}
+
 class Lith_MonsterBarrier : Actor {
    default {
       RenderStyle "Add";
       XScale 0.3;
       YScale 0.6;
-      +NoTimeFreeze
       +NoInteraction
    }
+
    void lith_moveUp() {
       setOrigin((pos.xy, pos.z + 2.0), true);
    }
+
    override void tick() {
-      a_fadeOut();
-      lith_moveUp();
+      if(!isFrozen()) {
+         a_fadeOut();
+         lith_moveUp();
+      }
    }
+
    states {
    Spawn:
       LI09 H -1;
       stop;
    }
 }
+
 class Lith_MonsterHeptaura : Lith_MonsterBarrier {
    default {
       XScale 0.2;
       YScale 0.4;
    }
+
    override void tick() {
-      a_fadeOut(fRandom(0.06, 0.08));
-      lith_moveUp();
+      if(!isFrozen()) {
+         a_fadeOut(fRandom[lith_heptaura](0.06, 0.08));
+         lith_moveUp();
+      }
    }
+
    states {
    Spawn:
       LI09 I -1;
       stop;
    }
 }
+
 class Lith_MonsterSkotosaura : Lith_MonsterBarrier {
    default {
       RenderStyle "Normal";
    }
+
    states {
    Spawn:
       LI09 J -1;
       stop;
    }
 }
+
 class Lith_MonsterFosaura : Lith_MonsterHeptaura {
    states {
    Spawn:
@@ -139,10 +160,32 @@ class Lith_MonsterFosaura : Lith_MonsterHeptaura {
       stop;
    }
 }
+
 class Lith_MonsterFavlosaura : Lith_MonsterHeptaura {
    states {
    Spawn:
       LI09 L -1;
+      stop;
+   }
+}
+
+class Lith_MonsterBulletTrail : Actor {
+   default {
+      RenderStyle "Add";
+      Alpha 0.8;
+      Scale 0.8;
+      +NoInteraction
+   }
+
+   override void tick() {
+      if(!isFrozen()) {
+         a_fadeOut();
+      }
+   }
+
+   states {
+   Spawn:
+      PUFF A -1;
       stop;
    }
 }

@@ -11,9 +11,9 @@ class Lith_SwitchableDecor : Actor {
       Mass int.max;
       Activation THINGSPEC_Default | THINGSPEC_NoDeathSpecial | THINGSPEC_Switch | THINGSPEC_Deactivate;
       Lith_SwitchableDecor.Volume 1;
-      +SOLID
-      +USESPECIAL
-      +FORCEYBILLBOARD
+      +Solid
+      +UseSpecial
+      +ForceYBillboard
       +CastSpriteShadow
    }
 
@@ -22,12 +22,14 @@ class Lith_SwitchableDecor : Actor {
 
    property Noise: m_IdleNoise;
    property Volume: m_Volume;
+
    override void markPrecacheSounds() {
       super.markPrecacheSounds();
       markSound(m_idleNoise);
       markSound("amb/turnon");
       markSound("amb/turnoff");
    }
+
    virtual void Lith_Active() {
       if(m_IdleNoise)
          A_StartSound(m_IdleNoise, lch_body, CHANF_LOOP, m_Volume, ATTN_STATIC);
@@ -44,7 +46,7 @@ class Lith_SwitchableDecor : Actor {
 
    override void Die(Actor source, Actor inflictor, int dmgflags) {
       Super.Die(source, inflictor, dmgflags);
-      bUSESPECIAL = false;
+      bUseSpecial = false;
       Lith_Inactive();
    }
 

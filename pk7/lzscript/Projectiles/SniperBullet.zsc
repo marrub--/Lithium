@@ -18,7 +18,7 @@ default {
 
 override void postBeginPlay() {
    super.postBeginPlay();
-   a_explode(25, 128, 0);
+   a_explode(25, 128, xf_nosplash);
 }
 
 /* EOF */

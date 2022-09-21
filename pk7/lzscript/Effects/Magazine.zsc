@@ -116,11 +116,7 @@ class Lith_SMGBarrel : Lith_DroppedMagazine {
       Mass 160;
    }
 
-   void lith_emitSteam() {
-      a_spawnItemEx("Lith_RifleGrenadeSmoke", flags: SXF_TRANSFERPOINTERS);
-   }
-
-   states {Spawn1: MGZN A 3 lith_emitSteam; loop;}
+   states {Spawn1: MGZN A 3 spawn("Lith_RifleGrenadeSmoke", pos); loop;}
 }
 
 class Lith_ShockRifleMagazine : Lith_DroppedMagazine {

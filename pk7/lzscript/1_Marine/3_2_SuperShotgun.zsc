@@ -49,7 +49,7 @@ action(Weapon) void Lith_A_FireSSG()
 {
    lith_takeAmmo(2);
    A_AlertMonsters();
-   Lith_FixedBullets(16, 16);
+   Lith_FixedBullets(16, 22);
    Lith_A_GunSmoke();
    A_StartSound("weapons/ssg/fire", lch_weapon);
    A_Recoil(1.2);

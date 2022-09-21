@@ -34,15 +34,4 @@ TracerSizeBig {
 \#BulletTracerSlow : All TracerSizeNrm Tracer {}
 \#BulletTracerBig  : All TracerSizeBig Tracer {}
 
-\#FortuneShotWind : All {
-   UseActorPitch;
-
-   Scale 128.0 16.0 1.0;
-
-   Model 0 "tapered.obj";
-   Skin  0 "air.png";
-
-   FrameIndex "____" "A" 0 0;
-}
-
 ## EOF

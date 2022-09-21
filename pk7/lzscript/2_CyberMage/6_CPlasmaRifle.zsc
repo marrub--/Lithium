@@ -55,7 +55,7 @@ class Lith_PulseCharge : Actor
       TNT1 A 1 A_SpawnItemEx("Lith_PulseChargeTrail");
       loop;
    Death:
-      TNT1 A 0 A_Explode(96, 32, 0);
+      TNT1 A 0 A_Explode(96, 32, xf_nosplash);
       TNT1 AAAAA 0 A_SpawnItemEx("Lith_PulseChargeTrail", 0,0,0, FRandom(-2,2),FRandom(-2,2),FRandom(-2,2), 0, SXF_NOCHECKPOSITION);
       stop;
    }

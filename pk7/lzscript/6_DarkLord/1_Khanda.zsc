@@ -16,7 +16,7 @@ class Lith_KhandaPuff : Lith_BulletPuff {
    override void postBeginPlay() {
       super.postBeginPlay();
       if(tracer) {
-         if(!tracer.bNoBlood) {
+         if(!tracer.bNoBlood && !tracer.bDormant) {
             for(int i = 0; i < 5; ++i) {
                a_startSound("body/flesh", lch_auto);
             }
@@ -47,6 +47,7 @@ default {
    Weapon.SlotNumber 1;
    Weapon.SlotPriority 0.9;
    Weapon.UpSound "weapons/khanda/draw";
+   Inventory.AltHudIcon "KAMLZ0";
    +Weapon.NoAutoFire
 }
 
@@ -75,7 +76,7 @@ Fire:
 Hold:
    KHAN D 1 offset(-103, 143) a_startSound("weapons/khanda/swing", lch_weapon);
    #### # 0 lith_a_setInterpolation(true);
-   KHAN E 1 offset(163, 120) lith_a_fireMelee(countInv("PowerStrength") ? 30 : 20, 128);
+   KHAN E 1 offset(163, 120) lith_a_fireMelee(countInv("PowerStrength") ? 40 : 20, 128, _mlf_pull_in|_mlf_no_turn, "Lith_KhandaPuff");
    #### # 0 lith_a_setInterpolation(false);
    KHAN E 1 offset(259, 175);
    TNT1 A 3 a_weaponOffset(0, 32);

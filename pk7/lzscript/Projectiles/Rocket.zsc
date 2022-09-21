@@ -6,53 +6,56 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_RocketTrail : Actor
-{
-   default
-   {
+class Lith_RocketTrail : Actor {
+   default {
       RenderStyle "Add";
       Scale 0.076;
-
       +NoInteraction
    }
 
-   states
-   {
+   override void tick() {
+      setOrigin(pos + vel, true);
+      a_fadeOut(0.05);
+   }
+
+   states {
    Spawn:
-      SMOK A 1 A_FadeOut(0.05);
-      wait;
+      SMOK A -1;
+      stop;
    }
 }
 
 class Lith_Rocket : Lith_Explosive;
 
-default
-{
-   Damage 20;
+default {
+   Damage 30;
    DamageType "Shrapnel";
    Gravity 0.2;
    Height 2;
    Radius 2;
    Scale 0.7;
    Species "Lith_Player";
-   Speed 20;
-
+   Speed 24;
    Projectile;
    +ExplodeOnWater
    +MThruSpecies
    +RocketTrail
    -NoGravity
 }
+
 vector3 m_PVel;
+
 action void Lith_A_SpawnRocketTrail() {
-   A_SpawnItemEx("Lith_RocketTrail", 0, 0, 4, frandom(-0.5,0.5), frandom(-0.5,0.5), 0, 0, SXF_ABSOLUTEANGLE | SXF_NOCHECKPOSITION);
+   let mo = spawn("Lith_RocketTrail", pos + (0, 0, 4));
+   mo.vel = (frandom(-0.5,0.5), frandom(-0.5,0.5), 0);
 }
+
 override void markPrecacheSounds() {
    super.markPrecacheSounds();
    markSound("effects/rocket/fly");
 }
-states
-{
+
+states {
 Spawn:
    MISL A 0;
    #### # 0 {
@@ -64,7 +67,7 @@ Spawn:
       bNOGRAVITY = true;
       A_ChangeVelocity(m_PVel.X, m_PVel.Y, m_PVel.Z + 0.5, CVF_REPLACE);
       A_StartSound("effects/rocket/fly", lch_body, CHANF_LOOP, 0.65);
-      return ResolveState("SpawnLoop");
+      return resolveState("SpawnLoop");
    }
    stop;
 SpawnLoop:

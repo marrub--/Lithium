@@ -24,10 +24,19 @@ class Lith_ShrapnelProjectile : Actor {
       +NoClip
       -NoGravity
    }
+
+   bool m_smoke;
+
+   override void postBeginPlay() {
+      super.postBeginPlay();
+      m_smoke = !lith_sv_lessparticles && random[lith_shrapnelgun](0, 1);
+   }
+
    state lith_a_jumpScale(double scale) {
       a_setScale(scale);
       return a_jump(255/17, "Spawn2");
    }
+
    states {
    Spawn:
       TNT1 A 0;
@@ -36,11 +45,13 @@ class Lith_ShrapnelProjectile : Actor {
       SHCA D 0 lith_a_jumpScale(0.4);
       SHCA E 0 lith_a_jumpScale(0.3);
    Spawn2:
-      #### # 1 A_SpawnItemEx("Lith_CasingSmoke", 0,0,3, frandom(-0.2,0),frandom(-0.2,0));
-      #### # 0 {
-         bNoClip = false;
+      #### # 1 {
+         if(m_smoke) {
+            let mo = spawn('Lith_CasingSmoke', pos + (0, 0, 3));
+            mo.vel = (frandom(-0.2,0),frandom(-0.2,0),0);
+         }
       }
-      #### # 1;
+      #### # 1 {bNoClip = false;}
       loop;
    Death:
       #### # 10;
@@ -49,20 +60,20 @@ class Lith_ShrapnelProjectile : Actor {
    }
 }
 
-class Lith_ShrapnelPuff : Actor {
+class Lith_ShrapnelPuff : Lith_BulletPuff {
    default {
       +PuffOnActors
-      +NoBlockmap
-      +NoGravity
-      +NoClip
-      +NoSector
-      +PuffGetsOwner
    }
+
    override void postBeginPlay() {
       angle = angleTo(target);
       let prj = a_spawnProjectile('Lith_ShrapnelProjectile', 0, 0, fRandom(-20, 20), CMF_OFFSETPITCH, fRandom(-20, 20));
       prj.target = target;
-      destroy();
+      if(random[lith_shrapnelgun](0, 5) == 0) {
+         super.postBeginPlay();
+      } else {
+         destroy();
+      }
    }
 }
 
@@ -75,12 +86,14 @@ default {
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/shrapnel/draw";
    Lith_Weapon.AmmoType "Lith_ShellAmmo";
+   Inventory.AltHudIcon "SHCAZ0";
    -Weapon.NoAutoFire
 }
 
 int m_chargeLevel;
 
 action(Weapon) void Lith_A_FireShrapnel() {
+   Lith_A_GunSmokeSmall(1, 6);
    A_StartSound("weapons/shrapnel/fire", lch_weapon);
    A_AlertMonsters();
    lith_gunFlash();
