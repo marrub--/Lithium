@@ -114,6 +114,7 @@ stkcall k32 mag2k(k32 x, k32 y);
 stkcall i32 mag2i(i32 x, i32 y);
 stkcall k32 ease_in_out_back(k32 x);
 stkcall k32 ease_out_cubic(k32 x);
+stkcall k32 ease_in_out_sine(k32 x);
 stkcall k32 lerpk(k32 a, k32 b, k32 t);
 stkcall k64 lerplk(k64 a, k64 b, k64 t);
 void lerpi(struct interp_data_i *data);

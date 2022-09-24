@@ -28,8 +28,8 @@ override void init(Menu parent, string message, int messageMode, bool playSound,
    }
    if(mMessageMode == 0) {
       m_bkSize.y += fontHeight * 3;
-      m_bkSize.x  = max(m_bkSize.x, textFont.stringWidth(StringTable.localize("$TXT_YES")) * 2);
-      m_bkSize.x  = max(m_bkSize.x, textFont.stringWidth(StringTable.localize("$TXT_NO")) * 2);
+      m_bkSize.x  = max(m_bkSize.x, textFont.stringWidth(Lith_HERMES.localize("TXT_YES")) * 2);
+      m_bkSize.x  = max(m_bkSize.x, textFont.stringWidth(Lith_HERMES.localize("TXT_NO")) * 2);
    }
    m_bk.x = 320 / 2 - m_bkSize.x / 2;
    m_bk.y = 240 / 2 - m_bkSize.y / 2;
@@ -43,8 +43,8 @@ override void drawer() {
    }
    if(mMessageMode == 0) {
       mMouseY = int(m_bk.y + fontHeight * (mMessage.count() + 1));
-      Screen.drawText(textFont, messageSelection == 0 ? optionMenuSettings.mFontColorSelection : optionMenuSettings.mFontColor, 320 / 2, mMouseY, StringTable.localize("$TXT_YES"), DTA_Clean,true);
-      Screen.drawText(textFont, messageSelection == 1 ? optionMenuSettings.mFontColorSelection : optionMenuSettings.mFontColor, 320 / 2, mMouseY + fontHeight, StringTable.localize("$TXT_NO"), DTA_Clean,true);
+      Screen.drawText(textFont, messageSelection == 0 ? optionMenuSettings.mFontColorSelection : optionMenuSettings.mFontColor, 320 / 2, mMouseY, Lith_HERMES.localize("TXT_YES"), DTA_Clean,true);
+      Screen.drawText(textFont, messageSelection == 1 ? optionMenuSettings.mFontColorSelection : optionMenuSettings.mFontColor, 320 / 2, mMouseY + fontHeight, Lith_HERMES.localize("TXT_NO"), DTA_Clean,true);
       if(messageSelection >= 0) {
          Lith_MenuDelegate(menuDelegate).lith_drawSelector((320 / 2 - 11, mMouseY + fontHeight * messageSelection), (0, 0));
       }

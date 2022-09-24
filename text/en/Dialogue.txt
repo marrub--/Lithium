@@ -8,7 +8,7 @@
 
 !!include Dialogue/M1A1.txt
 !!include Dialogue/M1A2.txt
-!!include Dialogue/TESTMAP.txt
+!!include Dialogue/LITHTEST.txt
 !!include Dialogue/TITLEMAP.txt
 
 == \#REMOTE_UNKNOWN | <unknown>@raddr.4E19

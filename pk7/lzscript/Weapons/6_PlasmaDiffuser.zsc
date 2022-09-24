@@ -82,7 +82,7 @@ Select:
 
 Fire:
    PDFG A 0 lith_jumpNoAmmo;
-   PDFG H 1 offset(0, 44) bright Lith_A_FirePlasmaDiff();
+   PDFG H 1 offset(0, 44) bright Lith_A_FirePlasmaDiff;
    PDFG I 1 offset(0, 40) bright;
    PDFG J 1 offset(0, 37) bright;
    PDFG A 2 offset(0, 35) bright;

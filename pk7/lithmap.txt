@@ -6,7 +6,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-name:        "TESTMAP"
+name:        "LITHTEST"
 seed:        777
 flags:       "nophantom"
 environment: "interstice"
@@ -15,6 +15,15 @@ temperature: 140
 windspeed:   100
 sky:         "vanilla"
 script:      "lmisc/TestMap.ldlg";
+
+name:        "LITHBOX"
+seed:        0
+flags:       "nophantom nolightning norain"
+environment: "none"
+humidity:    0
+temperature: 30
+windspeed:   1
+sky:         "nochange";
 
 name:        "TITLEMAP"
 seed:        0

@@ -37,7 +37,7 @@ Select:
    loop;
 
 Fire:
-   PISG A 10 Lith_A_MagIncr();
+   PISG A 10 Lith_A_MagIncr;
    goto ReadySelector;
 }
 

@@ -61,8 +61,8 @@ _uc_weap:
       ShipGun_A:  {scr: 6988800, grp: 5}
       ShipGun_B:  {scr: 7767700, grp: 5}
    pD:
-      700E_A:     {scr: 3034000}
-      Shrapnel_A: {scr: 3034000}
+      700E_A:     {scr:  800000}
+      Shrapnel_A: {scr: 1000000}
 _uc_extr:
    gO:
       TorgueMode: {pg: N/A, scr: 8000000,                    pr: 8, req: rdi}

@@ -28,9 +28,9 @@ lipu_ilo endings {
       } ante seme poki pI {
       } ante seme poki pW {
       } ante seme poki pA {
-         music "lmusic/tpw.2.ogg";
+         music "lmusic/naturalrev.opus";
       } ante seme poki pD {
-         music "lmusic/tpwrev.ogg";
+         music "lmusic/natural.opus";
       } ante seme poki pT {
          music "lmusic/rg.ogg";
       }

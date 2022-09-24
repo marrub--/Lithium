@@ -8,17 +8,21 @@
 
 extend class Lith_Player;
 
-void Lith_ShowMapMarker() {
-   Lith_MapMarker th;
+Sector m_curMark;
+string m_curMarkStr;
 
-   for(let it = ThinkerIterator.create("Lith_MapMarker", _stat_mapmark);
-       (th = (Lith_MapMarker(it.next())));) {
-      if(th.cursector == cursector && th != m_curMark &&
-         (!m_curMark || th.getTag() != m_curMark.getTag())) {
-         m_curMark = th;
-         CallACS("Lith_Markiplier", m_curMark.tid);
-         break;
+void Lith_ShowMapMarker() {
+   if(m_curMark == curSector) {
+      return;
+   }
+   let mkr = curSector.getUdmfString('user_marker');
+   if(mkr) {
+      m_curMark    = curSector;
+      m_curMarkStr = Lith_HERMES.localize("LITH_MARKER_" .. level.mapName .. "_" .. mkr);
+      if(!m_curMarkStr) {
+         m_curMarkStr = Lith_HERMES.localize("LITH_MARKER_" .. mkr);
       }
+      callAcs("Lith_Markiplier");
    }
 }
 

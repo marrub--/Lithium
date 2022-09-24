@@ -162,6 +162,7 @@ override void markPrecacheSounds() {
    markSound("weapons/fortune/charge");
    markSound("weapons/spas/empty");
 }
+
 action(Weapon) void Lith_A_FireFortune() {
    lith_takeAmmo(350);
    A_SetBlend("#80ffd5", 0.4, 20);

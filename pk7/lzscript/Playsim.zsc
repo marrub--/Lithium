@@ -447,7 +447,11 @@ static clearScope string localize(string name) {
       if(next != ret) ret = next;
       else            break;
    }
-   return ret;
+   if(ret == name) {
+      return "";
+   } else {
+      return ret;
+   }
 }
 
 static int EDataI(Actor mo, int info) {

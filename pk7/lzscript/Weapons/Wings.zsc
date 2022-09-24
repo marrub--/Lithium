@@ -8,20 +8,20 @@
 
 class Lith_WingsOfDeath : Lith_Weapon;
 
-default
-{
+default {
    Tag "$LITH_TAG_WingsOfDeath";
    Weapon.SlotNumber 0;
    Inventory.AltHudIcon "DWNGA0";
-
-   +WEAPON.CHEATNOTWEAPON
+   Lith_Weapon.DefaultSpeed 4;
+   +Weapon.CheatNotWeapon
 }
+
 override void markPrecacheSounds() {
    super.markPrecacheSounds();
    markSound("player/wings");
 }
-states(Weapon)
-{
+
+states(Weapon) {
 Ready:
    TNT1 A 1 A_WeaponReady(WRF_NOFIRE);
    TNT1 A 0 {
@@ -34,7 +34,7 @@ Ready:
          let mo = it.thing;
          if(mo != self && mo.bSHOOTABLE && mo.checkSight(self)) {
             mo.target = self;
-            mo.A_Die();
+            mo.damageMobj(self, self, int.max, 'Massacre', DMG_THRUSTLESS|DMG_FORCED|DMG_PLAYERATTACK|DMG_FOILINVUL|DMG_FOILBUDDHA|DMG_NO_ARMOR|DMG_NO_FACTOR|DMG_NO_PROTECT|DMG_NO_ENHANCE);
          }
       }
    }
@@ -48,7 +48,6 @@ Flap:
       A_StartSound("player/wings", lch_weapon);
    }
    goto ReadySelector;
-
 Deselect:
    TNT1 A 0 {self.TakeInventory("PowerFlight", 1);}
    TNT1 A 0 Lith_A_Lower(_raise_instant);
@@ -56,7 +55,6 @@ Deselect:
 Select:
    TNT1 A 0 Lith_A_Raise(_raise_instant);
    wait;
-
 Fire:
    goto ReadySelector;
 }

@@ -11,8 +11,7 @@ class Lith_FistPickup : Lith_WeaponPickup replaces Fist {
       Tag "$LITH_TAG_Weapon0";
       Lith_WeaponPickup.WepName wepnam_fist;
       Lith_WeaponPickup.Sprite "FISTA";
-
-      +LITH_WEAPONPICKUP.PKUP_GENERIC
+      +Lith_WeaponPickup.Pkup_Generic
    }
 }
 

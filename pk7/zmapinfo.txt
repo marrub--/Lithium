@@ -114,7 +114,7 @@ episode TITLEMAP {
    key  = "a"
 }
 
-episode TESTMAP {
+episode LITHTEST {
    name = "Lithium - Test Map"
 }
 
@@ -133,11 +133,16 @@ map TITLEMAP "Abyss" {
    music = "lmusic/into_abyss.opus"
 }
 
-map TESTMAP "Test Map" {
+map LITHTEST "Test Map" {
    music = "lmusic/dandalins story.it"
    next  = 1
    sky1  = "LITHSKDE"
    fallingDamage
+}
+
+map LITHBOX "Box Map" {
+   music = "DSEMPTY"
+   next  = 1
 }
 
 map LITHEND "" {
@@ -166,7 +171,6 @@ doomednums {
    22430 = Lith_DivisionSigil
    22431 = Lith_Chair
    22432 = Lith_BoomBarrel
-   22434 = Lith_MapMarker
    22435 = Lith_Person_Maxie
    22436 = Lith_Person_LaneDoll
    22437 = Lith_Person_JemDoll

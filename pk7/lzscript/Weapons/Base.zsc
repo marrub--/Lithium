@@ -539,7 +539,7 @@ Spawn:
 
 states(Weapon) {
 _MultithreadedFuckingOverlaysBecauseGodIsDeadAndGrafZahlKilledHim:
-   TNT1 A 1 lith_a_overlayTick();
+   TNT1 A 1 lith_a_overlayTick;
    loop;
 FireEmpty:
 ReadySelector:

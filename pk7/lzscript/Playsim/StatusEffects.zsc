@@ -130,7 +130,7 @@ void init(Lith_Player plyr_) {
    changeStatNum(_stat_statfx);
    plyr = plyr_;
    initCb();
-   fnam = "$LITH_STAT_" .. snam;
+   fnam = "LITH_STAT_" .. snam;
    icon = Lith_URANUS.getTex(":Stat:" .. snam);
 }
 

@@ -57,11 +57,11 @@ override void Die(Actor source, Actor inflictor, int dmgflags) {
 
    if(source == self) {
       switch(sv.m_DmgType) {
-         case 'Shrapnel': ob = "$LITH_OB_S_Explosion"; break;
-         default:         ob = "(suicide)";            break;
+         case 'Shrapnel': ob = "LITH_OB_S_Explosion"; break;
+         default:         ob = "(suicide)";           break;
       }
    } else if(source) {
-      ob = sv.m_DmgType == 'Melee' ? source.hitobituary : source.obituary;
+      ob = sv.m_DmgType == 'Melee' ? source.hitObituary : source.obituary;
    } else {
       switch(sv.m_DmgType) {
          case 'Falling':  ob = "(falling)";  break;

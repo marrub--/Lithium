@@ -98,12 +98,12 @@ struct monster_info {
    i32        type;
    mon_name_t name;
    i32        flags;
+   i32        mass;
 };
 
 struct dmon {
    bool active;
    i32  id;
-
    bool wasdead;
    i32  exp;
    i32  level;
@@ -112,29 +112,22 @@ struct dmon {
    i32  spawnhealth;
    k32  damagemul;
    i32  resist[dmgtype_max];
-
    k32  x, y, z;
    k32  r, h;
    i32  health;
    i32  painwait;
    bool finalized;
    bool resurrect;
-
    struct monster_info const *mi;
 };
 
-/* this must be kept as a typedef, because it could be moved to another */
-/* address space, and then I'd have to do a bunch of rewriting again */
 typedef struct dmon dmon_t;
 
 dmon_t *DmonSelf(void);
 dmon_t *Dmon(i32 id);
 stkcall dmon_t *AllocDmon(void);
-
 void PrintMonsterInfo(dmon_t *m);
 void PrintDmonAllocSize(void);
-
 script void Mon_Init(void);
 #endif
-
 #endif

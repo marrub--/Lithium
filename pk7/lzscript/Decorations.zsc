@@ -12,7 +12,6 @@
 #include "lzscript/Decorations/Candles.zsc"
 #include "lzscript/Decorations/Chair.zsc"
 #include "lzscript/Decorations/Lamps.zsc"
-#include "lzscript/Decorations/Marker.zsc"
 #include "lzscript/Decorations/TechPillar.zsc"
 #include "lzscript/Decorations/TorchBase.zsc"
 #include "lzscript/Decorations/TorchSmall.zsc"

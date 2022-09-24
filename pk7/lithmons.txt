@@ -32,7 +32,6 @@ presets {
    name: ShotgunGuy  scr: 1200 exp: 10;
    name: ChaingunGuy scr: 1400 exp: 15;
    name: Imp         scr: 1200 exp: 5;
-   name: DRLACaptain scr: 1500 exp: 15;
 
    /* Tier 2 */
    name: Demon      scr: 2000 exp: 10;
@@ -59,8 +58,7 @@ presets {
    name: Maulotaur   scr: 40000 exp: 580;
 
    /* Tier 6 */
-   name: DSparil     scr: 10000000 exp: 9000;
-   name: AIMainframe scr: 10000000 exp: 9000;
+   name: FinalBoss scr: 10000000 exp: 9000;
 }
 
 // ╭Monster Definitions───────────────────────────────────────────────────────╮
@@ -68,10 +66,10 @@ presets {
 // │ Monster definitions are the main purpose of this file. They describe a   │
 // │ small, but vital, set of information about each monster that may exist.  │
 // │                                                                          │
-// │ Note that earlier definitions will always override later ones. For       │
+// │ Note that later definitions will always override earlier ones. For       │
 // │ instance, if the class name contains "Zombieman", then a definition made │
-// │ later, perhaps in another file, with the filter "Zombieman2" will *not*  │
-// │ be used at all.                                                          │
+// │ later, perhaps in another file, with the filter "Zombieman2", the second │
+// │ one will be used instead.                                                │
 // │                                                                          │
 // │ Each monster definition block is preceded with parentheses which have    │
 // │ flags in them. You can put as many flags in there as you want, or none.  │
@@ -152,8 +150,8 @@ presets {
 
 // Base Games ════════════════════════════════════════════════════════════════╕
 
+/* Doom */
 "" {
-   /* Doom */
    pre: ZombieMan     type: zombie        filter: "ZombieMan";
    pre: ZombieMan     type: zombie        filter: "Zombieman";
    pre: ShotgunGuy    type: zombiesg      filter: "ShotgunGuy";
@@ -171,14 +169,16 @@ presets {
    pre: HellKnight    type: hellknight    filter: "Knight";
    pre: BaronOfHell   type: baron         filter: "Baron";
    pre: Revenant      type: revenant      filter: "Revenant";
-   pre: PainElemental type: painelemental filter: "PainElemental";
+   pre: PainElemental type: painelemental filter: "Elemental";
    pre: Archvile      type: archvile      filter: "Archvile";
    pre: SpiderDemon   type: mastermind    filter: "SpiderMastermind";
    pre: CyberDemon    type: cyberdemon    filter: "Cyberdemon";
    pre: CyberDemon    type: cyberdemon    filter: "CyberDemon";
    pre: ZombieMan     type: zombie        filter: "WolfensteinSS";
+}
 
-   /* Chex Quest */
+/* Chex Quest */
+"" {
    pre: Imp         type: imp        filter: "FlemoidusBipedicus";
    pre: Imp         type: imp        filter: "Quadrumpus";
    pre: LostSoul    type: lostsoul   filter: "ChexSoul";
@@ -192,8 +192,10 @@ presets {
    pre: Cacodemon   type: cacodemon  filter: "SuperCycloptis";
    pre: SpiderDemon type: mastermind filter: "Flembomination";
    pre: CyberDemon  type: cyberdemon filter: "Snotfolus";
+}
 
-   /* Heretic */
+/* Heretic */
+"" {
    pre: Imp         type: imp         filter: "Gargoyle";
    pre: Demon       type: demon       filter: "Golem";
    pre: Nitrogolem  type: demon       filter: "Nitrogolem";
@@ -204,7 +206,7 @@ presets {
    pre: HellKnight  type: hellknight  filter: "SpectralWarrior";
    pre: BaronOfHell type: cacodemon   filter: "IronLich";
    pre: Maulotaur   type: mastermind  filter: "Maulotaur";
-   pre: DSparil     type: cyberdemon  filter: "DSparil";
+   pre: FinalBoss   type: cyberdemon  filter: "DSparil";
 }
 
 // Lithium ═══════════════════════════════════════════════════════════════════╕
@@ -225,20 +227,24 @@ presets {
 
 // Map Compatibility ═════════════════════════════════════════════════════════╕
 
+/* ed4_rfo1.wad */
 "full" {
-   /* ed4_rfo1.wad */
-   pre: DRLACaptain   type: zombie        filter: "BazookaZombie";
+   pre: ChaingunGuy   type: zombie        filter: "BazookaZombie";
    pre: Imp           type: imp           filter: "BatFamiliar";
    pre: Imp           type: imp           filter: "DragonFamiliar";
    pre: Arachnotron   type: arachnotron   filter: "Arachnophyte";
    pre: Arachnotron   type: arachnotron   filter: "RailSpider";
    pre: CyberDemon    type: cacodemon     filter: "RealAbstractPain";
    pre: PainElemental type: painelemental filter: "EDPE";
+}
 
-   /* dop.pk3 */
+/* dop.pk3 */
+"full" {
    pre: LostSoul type: lostsoul filter: "LostGhoul";
+}
 
-   /* Cheogsh.wad */
+/* Cheogsh.wad */
+"full" {
    pre: Spectre     type: demon      filter: "KDiZDNightmare";
    pre: Imp         type: imp        filter: "Howler";
    pre: Imp         type: imp        filter: "SoulHarvester";
@@ -267,12 +273,12 @@ presets {
    pre: Archvile      type: archvile      filter: "Robot_RepairBot";
    pre: CyberDemon    type: cyberdemon    filter: "Robot_MilitaryBot";
    pre: SpiderDemon   type: mastermind    filter: "Robot_LoaderBot";
-   pre: AIMainframe   type: mastermind    filter: "Robot_BossEye";
+   pre: FinalBoss     type: mastermind    filter: "Robot_BossEye";
    pre: ChaingunGuy   type: zombie        filter: "Robot_GunTurret";
 }
 
-"" {
-   /* Shut Up and Lithium */
+/* Shut Up and Lithium */
+"full" {
    pre: ZombieMan     type: imp         filter: "Remnant";
    pre: ZombieMan     type: imp         filter: "Roach";
    pre: Imp           type: imp         filter: "Turmoil";
@@ -308,16 +314,23 @@ presets {
    pre: Cacodemon     type: cacodemon   filter: "Lividus";
    pre: HellKnight    type: hellknight  filter: "Deepone";
    pre: BaronOfHell   type: baron       filter: "Deeptwo";
+}
 
-   /* Western Patch */
+/* Western Patch */
+"full" {
    pre: ZombieMan  type: zombie   filter: "Westman";
    pre: ZombieMan  type: zombie   filter: "WildGunmanGuy";
    pre: ShotgunGuy type: zombiesg filter: "TheOutsider";
+}
 
-   /* Combined Harms */
+/* Malefactors */
+"nocase" {
    pre: ZombieMan     type: zombie        filter: "ZombieGunner";
    pre: ShotgunGuy    type: zombiesg      filter: "ShotGunner";
    pre: ChaingunGuy   type: zombiecg      filter: "ChainGunner";
+}
+
+"full" {
    pre: Demon         type: demon         filter: "Pinky";
    pre: Spectre       type: demon         filter: "sneakypinky";
    pre: Cacodemon     type: cacodemon     filter: "bigmouthedhissything";
@@ -341,7 +354,6 @@ presets {
 "full" {
    pre: ZombieMan     type: zombie        filter: "DuneWarrior";
    pre: ShotgunGuy    type: zombiesg      filter: "NailBorg";
-   pre: ShotgunGuy    type: zombiesg      filter: "QuadShotgunZombie";
    pre: ChaingunGuy   type: zombiecg      filter: "ZSpecOpsMachinegun";
    pre: LostSoul      type: lostsoul      filter: "MiniSentinel";
    pre: LostSoul      type: lostsoul      filter: "Railbot";
@@ -368,9 +380,9 @@ presets {
    pre: ZombieMan   type: zombie   filter: "FormerHuman";
    pre: ShotgunGuy  type: zombiesg filter: "FormerSergeant";
    pre: ChaingunGuy type: zombiecg filter: "FormerCommando";
-   pre: DRLACaptain type: zombie   filter: "FormerCaptain";
-   pre: DRLACaptain type: zombie   filter: "FormerCyborg";
-   pre: DRLACaptain type: zombie   filter: "EliteHuman";
+   pre: ChaingunGuy type: zombie   filter: "FormerCaptain";
+   pre: ChaingunGuy type: zombie   filter: "FormerCyborg";
+   pre: ChaingunGuy type: zombie   filter: "EliteHuman";
 }
 
 /* Colorful Hell */
@@ -390,7 +402,6 @@ presets {
    pre: PainElemental type: painelemental filter: "PE"     hacks: "ch";
    pre: CyberDemon    type: cyberdemon    filter: "Cybie"  hacks: "ch";
    pre: SpiderDemon   type: mastermind    filter: "Mind"   hacks: "ch";
-
    pre: ShotgunGuy    type: zombiesg      filter: "ShotgunPunish";
    pre: Revenant      type: revenant      filter: "MrBones";
    pre: ShotgunGuy    type: zombiesg      filter: "ShotgunShrine";
@@ -423,14 +434,12 @@ presets {
    pre: HellKnight    type: hellknight    filter: "Authority";
    pre: BaronOfHell   type: baron         filter: "Virtue_Virgin";
    pre: Revenant      type: revenant      filter: "Aspect_of_Iris";
-   pre: PainElemental type: painelemental filter: "JoyElemental";
    pre: Archvile      type: archvile      filter: "Dollmaykr";
    pre: SpiderDemon   type: mastermind    filter: "SeraphClone";
    pre: CyberDemon    type: cyberdemon    filter: "Seraph";
    pre: CyberDemon    type: angel         filter: "Great_Seraph";
    pre: CyberDemon    type: angel         filter: "Great_Seraph2";
    pre: CyberDemon    type: angel         filter: "Queen_of_Queens";
-
    pre: ZombieMan     type: zombie        filter: "KnifeDoll";
    pre: ZombieMan     type: zombie        filter: "TurboDoll";
    pre: ZombieMan     type: zombie        filter: "TurboRevolverDoll";
@@ -438,7 +447,6 @@ presets {
    pre: BaronOfHell   type: baron         filter: "RedEgg";
    pre: BaronOfHell   type: baron         filter: "RedEgg2";
    pre: BaronOfHell   type: baron         filter: "RedEgg3";
-
    pre: ChaingunGuy   type: zombiecg      filter: "SnowFlake";
    pre: Imp           type: imp           filter: "EliteCherub";
    pre: Cacodemon     type: cacodemon     filter: "Aphrodites_Kiss";
@@ -446,6 +454,86 @@ presets {
    pre: Cacodemon     type: archvile      filter: "Elite_Aphrodites_Kiss";
    pre: HellKnight    type: hellknight    filter: "Jay";
    pre: HellKnight    type: hellknight    filter: "Jay2";
+}
+
+/* Pandemonia Monsters */
+"" {
+   pre: ChaingunGuy type: zombiecg filter: "ChaingunZombie";
+   pre: ChaingunGuy type: zombiecg filter: "RifleZombie";
+   pre: ShotgunGuy  type: zombiesg filter: "RocketZombie";
+   pre: ShotgunGuy  type: zombiesg filter: "ShotgunZombie";
+   pre: ZombieMan   type: zombie   filter: "PistolZombie";
+}
+
+"full" {
+   pre: Arachnotron   type: arachnotron   filter: "Arachknight";
+   pre: Arachnotron   type: arachnotron   filter: "ChaosObserver";
+   pre: Arachnotron   type: arachnotron   filter: "Widow";
+   pre: Archvile      type: archvile      filter: "Cryptek";
+   pre: Archvile      type: archvile      filter: "DarkVile";
+   pre: Archvile      type: archvile      filter: "Diabolist";
+   pre: Archvile      type: archvile      filter: "Distortionist";
+   pre: Archvile      type: archvile      filter: "Infernalist";
+   pre: BaronOfHell   type: baron         filter: "Afrit";
+   pre: BaronOfHell   type: baron         filter: "ArchonOfHell";
+   pre: BaronOfHell   type: baron         filter: "BruiserDemon";
+   pre: BaronOfHell   type: baron         filter: "Cyberwarden";
+   pre: BaronOfHell   type: baron         filter: "Cybruiser";
+   pre: BaronOfHell   type: baron         filter: "DarkCybruiser";
+   pre: BaronOfHell   type: baron         filter: "Pyrobruiser";
+   pre: Cacodemon     type: cacodemon     filter: "Agathodemon";
+   pre: Cacodemon     type: cacodemon     filter: "Cacobot";
+   pre: Cacodemon     type: cacodemon     filter: "Crackodemon";
+   pre: Cacodemon     type: cacodemon     filter: "Witherdemon";
+   pre: ChaingunGuy   type: zombiecg      filter: "AssaultGunner";
+   pre: ChaingunGuy   type: zombiecg      filter: "BFG10kWarrior";
+   pre: ChaingunGuy   type: zombiecg      filter: "BFGCommando";
+   pre: ChaingunGuy   type: zombiecg      filter: "ChaosDeathmark";
+   pre: ChaingunGuy   type: zombiecg      filter: "NailborgCommando";
+   pre: ChaingunGuy   type: zombiecg      filter: "SpecOpsGunner";
+   pre: ChaingunGuy   type: zombiecg      filter: "SpecOpsLieutenant";
+   pre: CyberDemon    type: cyberdemon    filter: "DarkCardinal";
+   pre: CyberDemon    type: cyberdemon    filter: "Dreamweaver";
+   pre: CyberDemon    type: cyberdemon    filter: "Eradicator";
+   pre: CyberDemon    type: cyberdemon    filter: "Plamexis";
+   pre: CyberDemon    type: hellknight    filter: "GeneralRoasterock";
+   pre: CyberDemon    type: hellknight    filter: "Myrkura";
+   pre: Demon         type: demon         filter: "BloodFiend";
+   pre: Demon         type: demon         filter: "ChaosFlayer";
+   pre: Demon         type: demon         filter: "MagmaDemon";
+   pre: Demon         type: demon         filter: "MechDemon";
+   pre: Demon         type: demon         filter: "PandMauler";
+   pre: HellKnight    type: hellknight    filter: "CyberHellViscount";
+   pre: HellKnight    type: hellknight    filter: "HellViscount";
+   pre: HellKnight    type: hellknight    filter: "HellWarden";
+   pre: HellKnight    type: hellknight    filter: "Infernoble";
+   pre: Imp           type: imp           filter: "Devil";
+   pre: Imp           type: imp           filter: "Harvester";
+   pre: Imp           type: imp           filter: "Plagueling";
+   pre: Imp           type: imp           filter: "Scoundrel";
+   pre: LostSoul      type: lostsoul      filter: "ChaosUmbra";
+   pre: LostSoul      type: lostsoul      filter: "Electrosoul";
+   pre: LostSoul      type: lostsoul      filter: "PandWraith";
+   pre: LostSoul      type: lostsoul      filter: "Phantasm" mass: 50;
+   pre: LostSoul      type: lostsoul      filter: "SoullessDrone";
+   pre: Mancubus      type: mancubus      filter: "Corpulent";
+   pre: Mancubus      type: mancubus      filter: "Mafibus";
+   pre: Mancubus      type: mancubus      filter: "Maxibus";
+   pre: Mancubus      type: mancubus      filter: "Tankubus";
+   pre: PainElemental type: painelemental filter: "ChaosBeholder";
+   pre: Revenant      type: revenant      filter: "ChaosHollow";
+   pre: Revenant      type: revenant      filter: "PandSentinel";
+   pre: Revenant      type: revenant      filter: "Sentry";
+   pre: ShotgunGuy    type: zombiesg      filter: "ChaosWarrior";
+   pre: ShotgunGuy    type: zombiesg      filter: "ShotgunAdmiral";
+   pre: Spectre       type: demon         filter: "ChaosOphydian";
+   pre: Spectre       type: demon         filter: "Darkbeast";
+   pre: Spectre       type: demon         filter: "Delusion";
+   pre: Spectre       type: demon         filter: "Wretch";
+   pre: SpiderDemon   type: mastermind    filter: "Arachnophyte" mass: 5000;
+   pre: SpiderDemon   type: mastermind    filter: "ChaosMonolith";
+   pre: SpiderDemon   type: mastermind    filter: "SpiderMasterspark";
+   pre: ZombieMan     type: zombie        filter: "SpecOpsRifleman";
 }
 
 /* EOF */

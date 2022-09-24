@@ -672,26 +672,29 @@ static void P_Aug_pTick(void) {
    }
 }
 
-alloc_aut(0) script_str ext("ACS") addr(OBJ "Markiplier") void Z_MapMarker(i32 tid) {
-   if(get_msk(ml.flag, _mflg_func) != _mfunc_normal) return;
-
-   enum {ticks = 35 * 2};
-
-   str text = GetNameTag(tid);
-
+alloc_aut(0) script_str ext("ACS") addr(OBJ "Markiplier") void Z_MapMarker(void) {
+   if(get_msk(ml.flag, _mflg_func) != _mfunc_normal) {
+      return;
+   }
+   enum {
+      t           = 35 * 5,
+      t_pos       = 50,
+      t_alpha     = 35 * 2,
+      t_alpha_beg = t_alpha,
+      t_alpha_end = t - t_alpha,
+   };
+   static struct i32v2 s;
+   str text = GetMembS(0, sm_CurMarkStr);
+   TextSize(&s, text, sf_areaname, INT_MAX);
    ACS_Delay(5);
-
-   for(i32 i = 0; i < ticks; i++) {
+   for(i32 i = 0; i < t; i++) {
       k32 alpha;
-
-      /**/ if(i < 15)         alpha = i / 15.0;
-      else if(i > ticks - 15) alpha = (ticks - i) / 15.0;
-      else                    alpha = 1.0;
-
-      i32 x = fastabsk(ACS_Sin(i / (k32)ticks / 4.0)) / 4.0 * 800.0;
-
+      /**/ if(i < t_alpha_beg) alpha = i / (k32)t_alpha;
+      else if(i > t_alpha_end) alpha = (t - i) / (k32)t_alpha;
+      else                     alpha = 1.0;
+      i32 x = 40 - (s.x - ease_in_out_sine(mink(i / (k32)t_pos, 1.0k)) * s.x);
       SetSize(640, 480);
-      PrintTextAX_str(text, sf_areaname, CR_WHITE, x,4, 80,0, alpha, _u_no_unicode);
+      PrintTextAX_str(text, sf_areaname, CR_WHITE, x,1, 80,0, alpha, _u_no_unicode);
       ACS_Delay(1);
    }
 }

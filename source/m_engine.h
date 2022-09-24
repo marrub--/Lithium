@@ -108,6 +108,7 @@ cvar_x(tic, player_scoresound, bool)
 #define GetNameTag(tid) GetPropS(tid, APROP_NameTag)
 #define GetRadius(tid)  GetMembK(tid, sm_Radius)
 #define GetSpecies(tid) GetPropS(tid, APROP_Species)
+#define GetMass(tid)    GetPropI(tid, APROP_Mass)
 
 #define SetAlpha(tid, x)            SetPropK(tid, APROP_Alpha,            x)
 #define SetDamage(tid, x)           SetPropI(tid, APROP_Damage,           x)

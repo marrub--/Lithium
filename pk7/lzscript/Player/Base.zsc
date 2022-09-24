@@ -50,8 +50,6 @@ double m_vXVel, m_lastVXVel;
 double m_vYVel, m_lastVYVel;
 double m_vZVel, m_lastVZVel;
 
-Lith_MapMarker m_curMark;
-
 int m_wasDamaged;
 
 int m_speed;

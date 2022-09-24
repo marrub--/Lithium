@@ -375,7 +375,7 @@ cstr alientext(i32 num) {
 alloc_aut(0) stkcall
 str lang(str name) {
    str ret = ServCallS(sm_Localize, name);
-   return ret != name ? ret : snil;
+   return ret != st_empty ? ret : snil;
 }
 
 noinit static

@@ -6,17 +6,6 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_BossFucker : Inventory {
-   override void tick() {
-      if(!owner.tracer || owner.tracer.health <= 0) {
-         owner.a_bossDeath();
-         owner.clearCounters();
-         owner.destroy();
-         destroy();
-      }
-   }
-}
-
 extend class Lith_HERMES;
 
 static void SurgeOfDestiny(Actor mo) {
@@ -65,83 +54,59 @@ static void MonsterBarrierLook(Actor mo)
       if(it.Thing.Player) ACS_ExecuteWithResult(lsc_addangle, int(it.Thing.Pos.X), int(it.Thing.Pos.Y));
 }
 
-static void SpawnBoss(Actor a, string name, int phase)
-{
-   let b = Lith_Phantom(Actor.Spawn(name, a.Pos));
-
-   /* copy info */
-   b.Angle      = a.Angle;
-   b.Args[0]    = a.Args[0];
-   b.Args[1]    = a.Args[1];
-   b.Args[2]    = a.Args[2];
-   b.Args[3]    = a.Args[3];
-   b.Args[4]    = a.Args[4];
-   b.Master     = a.Master;
-   b.Pitch      = a.Pitch;
-   b.Roll       = a.Roll;
-   b.SpawnAngle = a.SpawnAngle;
-   b.SpawnPoint = a.SpawnPoint;
-   b.Special    = a.Special;
-   b.Special1   = a.Special1;
-   b.Special2   = a.Special2;
-   b.Target     = a.Target;
-   b.Tracer     = a.Tracer;
-   b.Vel        = a.Vel;
-
-   b.ChangeTID(a.TID);
-
-   b.bCOUNTSECRET = a.SpawnFlags &  MTF_SECRET;
-   b.SpawnFlags   = a.SpawnFlags & ~MTF_SECRET;
-   b.HandleSpawnFlags();
-   b.SpawnFlags = a.SpawnFlags;
-
-   /* probably fixes some weird stuff... */
-   if(a.health < 10000)
-      b.Health += a.Health / 2;
-
-   /* delete it if it's not a boss, otherwise prepare for omega hack */
-   if(!a.bBOSS && !a.bBOSSDEATH) {
-      a.ClearCounters();
-      a.Destroy();
-   } else {
-      /* great, it's going to screw everything up, let's "fix" that:
-       * we silence them, banish them to the shadow realm, remove them from
-       * the world, stop them from thinking and make them into a zombie.
-       * morbid...
-       */
-      for(int i = 1; i < 8; ++i) a.A_StopSound(i);
-      a.setXYZ((65535, 65535, 0)); /* Banish. */
-      a.removeFromHash();
-      a.tics = -1;
-      a.tracer = b;
-      a.giveInventory("Lith_BossFucker", 1);
+static void SpawnBoss(Actor a, string name, int phase) {
+   let b = Lith_Phantom(Actor.spawn(name, a.pos));
+   b.angle      = a.angle;
+   b.args[0]    = a.args[0];
+   b.args[1]    = a.args[1];
+   b.args[2]    = a.args[2];
+   b.args[3]    = a.args[3];
+   b.args[4]    = a.args[4];
+   b.master     = a.master;
+   b.pitch      = a.pitch;
+   b.roll       = a.roll;
+   b.spawnAngle = a.spawnAngle;
+   b.spawnPoint = a.spawnPoint;
+   b.special    = a.special;
+   b.special1   = a.special1;
+   b.special2   = a.special2;
+   b.target     = a.target;
+   b.tracer     = a.tracer;
+   b.vel        = a.vel;
+   b.changeTID(a.tid);
+   b.bCountSecret = a.spawnFlags &  MTF_SECRET;
+   b.spawnFlags   = a.spawnFlags & ~MTF_SECRET;
+   b.handleSpawnFlags();
+   b.spawnFlags = a.spawnFlags;
+   if(a.health < 10000) {
+      b.health += a.health / 2;
    }
-
-   b.m_Phase = phase;
-
+   a.clearCounters();
+   a.destroy();
+   b.m_phase = phase;
    if(phase == 2) {
-      b.DamageMultiply = 1.5;
-      b.ReactionTime   = 4;
-      b.Health         = int(b.Health * 1.5);
-      b.bMISSILEMORE   = true;
+      b.damageMultiply = 1.5;
+      b.reactionTime   = 4;
+      b.health         = b.health * 3 / 2;
+      b.bMissileMore   = true;
    } else if(phase == 3) {
-      b.DamageMultiply   = 2;
-      b.ReactionTime     = 2;
-      b.Health          *= 2;
-      b.bMISSILEMORE     = true;
-      b.bMISSILEEVENMORE = true;
+      b.damageMultiply   = 2;
+      b.reactionTime     = 2;
+      b.health          *= 2;
+      b.bMissileMore     = true;
+      b.bMissileEvenMore = true;
    }
 }
 
 static void triggerBoss() {
-   if(Lith_UTIL.pData(_pdt_mphantom) == _mphantom_spawned) return;
-
+   if(Lith_UTIL.pData(_pdt_mphantom) == _mphantom_spawned) {
+      return;
+   }
    double minRadius = getDefaultByType('Lith_Phantom').radius;
    double minHeight = getDefaultByType('Lith_Phantom').height;
-
    Actor mo;
    for(let it = ThinkerIterator.create('Actor'); (mo = Actor(it.next()));) {
-      if(mo.bIsMonster && mo.radius >= minRadius && mo.height >= minHeight) {
+      if(!mo.bBoss && !mo.bBossDeath && mo.bIsMonster && mo.radius >= minRadius && mo.height >= minHeight) {
          mo.acs_scriptCall("Lith_SpawnBoss", 0);
          break;
       }

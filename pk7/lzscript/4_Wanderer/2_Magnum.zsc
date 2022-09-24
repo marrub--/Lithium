@@ -79,7 +79,7 @@ Fire:
    #### # 0 lith_a_jumpIfMagEmpty;
    #### # 0 lith_a_magIncr;
    MAGN A 1 offset(2, 32);
-   MAGN B 1 bright lith_fireMagnum();
+   MAGN B 1 bright lith_fireMagnum;
    MAGN B 1 bright offset(10, 28) lith_a_recoilUp(1.7);
    MAGN BB 1 bright;
    MAGN CC 1 bright offset(9, 28);

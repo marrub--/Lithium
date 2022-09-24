@@ -19,6 +19,7 @@
 ## Loose Strings
 st_:
    NO_PREFIX:
+   - empty:  ""
    - "null": (null)
    - none:   None
 
@@ -138,6 +139,7 @@ sc_:
 sm_:
    m_:
    - AmmoText
+   - CurMarkStr
    - DmgFac
    - FxTID
    - H
@@ -449,7 +451,6 @@ sp_:
    - lmusic_DOGS:      lmusic/DOGS.ogg
    - lmusic_Shredder:  lmusic/Shredder.opus
    - lmusic_Unce:      lmusic/Unce.ogg
-   - lmusic_miniwip2:  lmusic/miniwip2.ogg
 
    - DSEMPTY
    - F_SKY1

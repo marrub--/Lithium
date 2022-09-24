@@ -117,6 +117,7 @@ MonInfo_Monster_Name:
       - exp
       - filter
       - hacks
+      - mass
       - pre
       - scr
       - type

@@ -139,10 +139,16 @@ u64 crc64_str(void  __str_ars const *data, mem_size_t len, u64 result) {
 }
 
 alloc_aut(0) stkcall i32 rainbowcr(void) {
-   static
-   i32 const crs[] = {
-      CR_BRICK, CR_ORANGE, CR_GOLD, CR_GREEN, CR_LIGHTBLUE, CR_PURPLE
-   };
+   static i32 crs[7];
+   if(!crs[0]) {
+      crs[0] = Cr(rred);
+      crs[1] = Cr(rora);
+      crs[2] = Cr(ryel);
+      crs[3] = Cr(rgrn);
+      crs[4] = Cr(rblu);
+      crs[5] = Cr(rpur);
+      crs[6] = Cr(rpnk);
+   }
    return crs[ACS_Timer() / 4 % countof(crs)];
 }
 
@@ -299,8 +305,7 @@ i32 mag2i(i32 x, i32 y) {
    return ACS_Sqrt(x * x + y * y);
 }
 
-alloc_aut(0) stkcall
-k32 ease_in_out_back(k32 x) {
+alloc_aut(0) stkcall k32 ease_in_out_back(k32 x) {
    #define C1 1.70158k
    #define C2 2.5949095k
    return x < 0.5k
@@ -310,19 +315,20 @@ k32 ease_in_out_back(k32 x) {
    #undef C2
 }
 
-alloc_aut(0) stkcall
-k32 ease_out_cubic(k32 x) {
+alloc_aut(0) stkcall k32 ease_out_cubic(k32 x) {
    x = 1 - x;
    return 1 - x * x * x;
 }
 
-alloc_aut(0) stkcall
-k32 lerpk(k32 a, k32 b, k32 t) {
+alloc_aut(0) stkcall k32 ease_in_out_sine(k32 x) {
+   return -(ACS_Cos(x / 2) - 1) / 2;
+}
+
+alloc_aut(0) stkcall k32 lerpk(k32 a, k32 b, k32 t) {
    return (1.0k - t) * a + t * b;
 }
 
-alloc_aut(0) stkcall
-k64 lerplk(k64 a, k64 b, k64 t) {
+alloc_aut(0) stkcall k64 lerplk(k64 a, k64 b, k64 t) {
    return (1.0lk - t) * a + t * b;
 }
 
