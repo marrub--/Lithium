@@ -16,17 +16,22 @@ class Lith_FadeOutItemSprite : Lith_ItemSprite {
 
 class Lith_ItemSprite : Actor;
 
-int m_fAng;
-int m_fzAng;
 default {
    +NoInteraction
    +CastSpriteShadow
 }
+
+double m_fAng;
+double m_fzAng;
+State m_doneState;
+
 override void postBeginPlay() {
    super.postBeginPlay();
-   m_fAng  = random(0, 359);
-   m_fzAng = random(0, 359);
+   m_fAng  = fRandom(0, 359);
+   m_fzAng = fRandom(0, 359);
+   m_doneState = resolveState("Done");
 }
+
 override void tick() {
    if(isFrozen()) {
       return;
@@ -36,10 +41,11 @@ override void tick() {
       let fAng  = (msTimeF() + m_fAng)  * 0.06666;
       let fzAng = (msTimeF() + m_fzAng) * 0.1;
       setOrigin(master.pos + (cos(fAng) * 4.0, sin(fAng) * 4.0, 16.0 + sin(fzAng) * 12.0), true);
-   } else if(!inStateSequence(curState, resolveState("Done"))) {
-      setState(resolveState("Done"));
+   } else if(!inStateSequence(curState, m_doneState)) {
+      setState(m_doneState);
    }
 }
+
 states {
 Spawn:
    #### # -1 bright;

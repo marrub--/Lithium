@@ -166,7 +166,7 @@ script void P_BIP_PInit(void) {
       bip.categorymax[categ] = 0;
    }
    for_page() {
-      bool avail = page->pclass & pl.pclass;
+      bool avail = get_bit(page->pclass, pl.pclass);
       if(avail) {
          set_bit(page->flags, _page_available);
          bip.pagemax++;

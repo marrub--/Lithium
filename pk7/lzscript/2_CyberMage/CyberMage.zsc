@@ -16,6 +16,12 @@ class Lith_CyberMagePlayer : Lith_Player {
       Tag "$LITH_CLASS_CYBERMAGE";
    }
 
+   override void beginPlay() {
+      super.beginPlay();
+      m_discrim = "Jem";
+      m_pclass = pcl_cybermage;
+   }
+
    override void GiveDefaultInventory() {
       Super.GiveDefaultInventory();
       Lith_GiveDefItem("Lith_CFist", 1);

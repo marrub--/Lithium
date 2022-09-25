@@ -77,7 +77,7 @@ void P_CBI_TabStatus(struct gui_state *g) {
    StatusInfo(g, y, ns(lang(sl_status_hp)), strp(_p((i32)pl.health), _c('/'), _p(pl.maxhealth)));
    y += 10;
 
-   if(pl.pclass & pcl_magicuser) {
+   if(get_bit(pcl_magicuser, pl.pclass)) {
       StatusInfo(g, y, ns(lang(sl_status_mp)), strp(_p((i32)pl.mana), _c('/'), _p((i32)pl.manamax)));
       y += 10;
    }
@@ -87,7 +87,7 @@ void P_CBI_TabStatus(struct gui_state *g) {
    StatusInfo(g, y, ns(lang(sl_status_nx)), strp(_p(pl.attr.expnext)));
    y += 10;
 
-   y += pl.pclass & pcl_magicuser ? 20 : 30;
+   y += get_bit(pcl_magicuser, pl.pclass) ? 20 : 30;
 
    if(pl.attr.points) {
       PrintTextFmt(tmpstr(lang(sl_status_levelup)), pl.attr.points);

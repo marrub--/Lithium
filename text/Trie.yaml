@@ -102,7 +102,7 @@ Dlg_ItemName:
       pini:      finished
 P_ClassToInt:
    words: [
-      #define pclass_x(shr, lng, eq) shr, lng,
+      #define pclass_x(shr, eq) shr,
       #include "p_player.h"
    ]
 MonInfo_Preset_Name:

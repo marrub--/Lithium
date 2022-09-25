@@ -99,7 +99,7 @@ script void P_Upg_PInit(void) {
 
    for(i32 i = 0; i < UPGR_MAX; ++i) {
       struct upgrade *upgr = &pl.upgrades[i];
-      if(upgr->pclass & pl.pclass) {
+      if(get_bit(upgr->pclass, pl.pclass)) {
          set_bit(upgr->flags, _ug_available);
          if(upgr->cost == 0 || dbgflags(dbgf_upgr)) {
             P_Upg_Buy(upgr, true, true);

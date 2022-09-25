@@ -177,19 +177,6 @@ static void P_initCbi(void) {
    CBI_InstallSpawned();
 }
 
-alloc_aut(0) stkcall cstr P_Discrim(i32 pclass) {
-   switch(pclass) {
-   case pcl_marine:    return "Lane";
-   case pcl_cybermage: return "Jem";
-   case pcl_informant: return "Fulk";
-   case pcl_wanderer:  return "Luke";
-   case pcl_assassin:  return "Omi";
-   case pcl_darklord:  return "Ari";
-   case pcl_thoth:     return "Kiri";
-   }
-   return "";
-}
-
 alloc_aut(0) stkcall i32 P_Color(i32 pclass) {
    switch(pclass) {
    case pcl_marine:    return Cr(green);
@@ -396,7 +383,7 @@ alloc_aut(0) stkcall script static void P_doDepthMeter(void) {
 alloc_aut(0) stkcall script static void P_doIntro(void) {
    pl.missionstatshow = ACS_Timer() + 70;
 
-   if(wl.hubscleared != 0 || pl.done_intro & pl.pclass) {
+   if(wl.hubscleared != 0 || get_bit(pl.done_intro, pl.pclass)) {
       P_doDepthMeter();
       return;
    }
@@ -528,7 +515,7 @@ alloc_aut(0) stkcall script static void P_doIntro(void) {
 
    ACS_SetMusic(sp_star);
 
-   pl.done_intro |= pl.pclass;
+   set_bit(pl.done_intro, pl.pclass);
    P_Data_Save();
 
    pl.modal = _gui_none;

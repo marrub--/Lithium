@@ -140,6 +140,7 @@ sm_:
    m_:
    - AmmoText
    - CurMarkStr
+   - Discrim
    - DmgFac
    - FxTID
    - H
@@ -153,6 +154,7 @@ sm_:
    - LogText
    - OnGround
    - Overdrive
+   - PClass
    - Shield
    - Speed
    - Sprinting
@@ -241,7 +243,6 @@ sm_:
 ## Objects
 so_:
    OBJ:
-   - AssassinPlayer
    - BarrierFX
    - BasicPuff
    - BossReward1
@@ -258,9 +259,6 @@ so_:
    - CircleSpearThrower
    - ClawOfImp
    - CreditsMenu
-   - CyberMagePlayer
-   - DarkLordPlayer
-   - DivisionSigil
    - EXPLOOOSION
    - ExplodoBoots
    - Feuer
@@ -271,12 +269,10 @@ so_:
    - GEExplosion
    - GTFO
    - Hulgyon
-   - InformantPlayer
    - Ionized
    - ManaAmmo
    - ManaLeak
    - ManaPickup
-   - MarinePlayer
    - MegaProtection
    - MonsterBarrier
    - MonsterFavlosaura
@@ -311,9 +307,7 @@ so_:
    - TeleFog5
    - TeleFog6
    - TeleFog7
-   - ThothPlayer
    - UniqueID
-   - WandererPlayer
    - WeaponScopedToken
 
    NO_PREFIX:

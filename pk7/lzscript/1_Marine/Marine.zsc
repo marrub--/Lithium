@@ -16,6 +16,12 @@ class Lith_MarinePlayer : Lith_Player {
       Tag "$LITH_CLASS_MARINE";
    }
 
+   override void beginPlay() {
+      super.beginPlay();
+      m_discrim = "Lane";
+      m_pclass = pcl_marine;
+   }
+
    override void GiveDefaultInventory() {
       Super.GiveDefaultInventory();
       Lith_GiveDefItem("Lith_Fist", 1);

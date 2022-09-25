@@ -36,7 +36,7 @@ action(Weapon) void Lith_A_Fire4Bore() {
    a_alertMonsters();
    Lith_A_GunSmoke(2, 8);
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
-   Lith_FireBullets(4, 2, 8, random[lith_dlweapon](125, 150), FBF_NORANDOM, "Lith_700Bullet", 2, tracer: _tr_big);
+   Lith_FireBullets(4, 2, 8, random[lith_dlweapon](125, 150), FBF_NORANDOM, tracerX: 2, tracer: _tr_big);
    Lith_A_RecoilUp(10);
    a_recoil(4);
 }

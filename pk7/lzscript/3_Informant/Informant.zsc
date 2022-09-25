@@ -25,6 +25,12 @@ class Lith_InformantPlayer : Lith_Player
    int m_dodgeDbc;
    int m_overdrive;
 
+   override void beginPlay() {
+      super.beginPlay();
+      m_discrim = "Fulk";
+      m_pclass = pcl_informant;
+   }
+
    override void giveDefaultInventory()
    {
       super.giveDefaultInventory();

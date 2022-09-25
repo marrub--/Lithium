@@ -35,10 +35,10 @@ void SetupAttributes(void) {
    case pcl_thoth:     fastmemcpy(pl.attr.names[at_spc], "MNA", 3); break;
    }
 
-   if(pl.pclass & pcl_robot) {
+   if(get_bit(pcl_robot, pl.pclass)) {
       fastmemcpy(pl.attr.names[at_vit], "POT", 3);
       fastmemcpy(pl.attr.names[at_stm], "REP", 3);
-   } else if(pl.pclass & pcl_nonhuman) {
+   } else if(get_bit(pcl_nonhuman, pl.pclass)) {
       fastmemcpy(pl.attr.names[at_vit], "POT", 3);
       fastmemcpy(pl.attr.names[at_stm], "REG", 3);
    }
@@ -50,23 +50,9 @@ void SetupAttributes(void) {
 
 static
 void SetPClass(void) {
-   pl.pcstr = ACS_GetActorClass(0);
-
-   #define set_pcl(name) pl.pclass = pcl_##name, pl.pclass_b = pcl_##name##_b
-   /**/ if(pl.pcstr == so_MarinePlayer   ) set_pcl(marine);
-   else if(pl.pcstr == so_CyberMagePlayer) set_pcl(cybermage);
-   else if(pl.pcstr == so_InformantPlayer) set_pcl(informant);
-   else if(pl.pcstr == so_WandererPlayer ) set_pcl(wanderer);
-   else if(pl.pcstr == so_AssassinPlayer ) set_pcl(assassin);
-   else if(pl.pcstr == so_DarkLordPlayer ) set_pcl(darklord);
-   else if(pl.pcstr == so_ThothPlayer    ) set_pcl(thoth);
-   else {
-      PrintErr(_l("Invalid player class "), _p(pl.pcstr),
-               _l(", everything is going to explode!"));
-   }
-
-   pl.discrim = P_Discrim(pl.pclass);
-   pl.color   = P_Color(pl.pclass);
+   pl.pclass = GetMembI(0, sm_PClass);
+   pl.color  = P_Color(pl.pclass);
+   faststrcpy_str(pl.discrim, GetMembS(0, sm_Discrim));
 }
 
 bool P_ButtonPressed(i32 bt) {
@@ -302,15 +288,6 @@ void P_Init(void) {
       #ifndef NDEBUG
       }
       #endif
-
-      if(GetFun() & lfun_division) {
-         k32 a = ACS_GetActorAngle(0);
-         k32 x = GetX(0) + ACS_Cos(a) * 128.0;
-         k32 y = GetY(0) + ACS_Sin(a) * 128.0;
-         k32 z = GetZ(0);
-         ACS_SpawnForced(so_DivisionSigil, x, y, z);
-      }
-
       pl.wasinit = true;
    }
 
@@ -326,7 +303,7 @@ void P_Init(void) {
    if(dbgflags(dbgf_items)) {
       for(i32 i = weapon_min; i < weapon_max; ++i) {
          struct weaponinfo const *info = &weaponinfo[i];
-         if(info->pclass & pl.pclass) {
+         if(get_bit(info->pclass, pl.pclass)) {
             InvGive(info->classname, 1);
          }
       }

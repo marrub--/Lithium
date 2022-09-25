@@ -82,7 +82,7 @@ void P_Wep_PTickPre(void) {
    }
    for(i32 i = weapon_min; i < weapon_max; i++) {
       struct weaponinfo const *info = &weaponinfo[i];
-      if(!(pl.pclass & info->pclass)) {
+      if(!get_bit(info->pclass, pl.pclass)) {
          continue;
       }
       w->slot[info->slot] += InvNum(info->classname);
@@ -247,7 +247,7 @@ i32 Z_GetWRF(void) {
    if(pl.semifrozen) {
       flags |= WRF_NOFIRE;
    }
-   if(pl.pclass & (pcl_marine | pcl_darklord)) {
+   if(get_bit(pM | pD, pl.pclass)) {
       flags |= WRF_ALLOWUSER4;
    }
    return flags;

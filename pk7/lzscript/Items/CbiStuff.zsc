@@ -100,14 +100,14 @@ override bool tryPickup(in out Actor mo) {
 }
 
 override void playPickupSound(Actor toucher) {
-   int pcl = Lith_UTIL.pData(_pdt_pclass);
-   if(pcl & pcl_outcasts) {
+   int pcl = 1 << Lith_Player(toucher).m_pclass;
+   if(pcl_outcasts & pcl) {
       pickupSound = "player/pickup/upgrcbio";
-   } else if(pcl & pcl_missioners) {
+   } else if(pcl_missioners & pcl) {
       pickupSound = "player/pickup/upgrcbim";
-   } else if(pcl & pcl_intruders) {
+   } else if(pcl_intruders & pcl) {
       pickupSound = "player/pickup/upgrcbii";
-   } else if(pcl & pcl_finalizer) {
+   } else if(pcl_finalizer & pcl) {
       pickupSound = "player/pickup/upgrcbif";
    }
    super.playPickupSound(toucher);

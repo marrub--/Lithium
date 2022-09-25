@@ -7,20 +7,21 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_Player : DoomPlayer;
+class Lith_Player : DoomPlayer abstract;
 
 default {
    Player.SideMove 2, 1;
    Player.ForwardMove 2, 1;
    Player.AirCapacity 0;
    Player.GruntSpeed 16;
-   Player.Portrait "TNT1A0";
    Species "Lith_Player";
    Lith_Player.ViewBob 1;
    GibHealth -100;
-
-   +THRUSPECIES
+   +ThruSpecies
 }
+
+int    m_pclass;
+string m_discrim;
 
 meta double m_vBob;
 
@@ -56,44 +57,6 @@ int m_speed;
 
 property ViewBob: m_vBob;
 
-override void markPrecacheSounds() {
-   super.markPrecacheSounds();
-   markSound("player/barrier");
-   markSound("player/nuke");
-   markSound("player/death");
-   markSound("player/death2");
-   markSound("player/infraredoff");
-   markSound("body/flesh");
-   markSound("body/bullethit");
-   markSound("world/thunder");
-   markSound("amb/wind");
-   markSound("amb/rain");
-   markSound("weapons/dark/fire");
-}
-
-override void beginPlay() {
-   super.beginPlay();
-   viewbob = m_vBob;
-   m_wasFrozen = false;
-}
-
-override void giveDefaultInventory() {
-   lith_giveDefItem("Lith_IDOL", 0);
-   lith_giveDefItem("Lith_ManaAmmo", 0);
-   lith_giveDefItem("Lith_BulletAmmo", 0);
-   lith_giveDefItem("Lith_ShellAmmo", 0);
-   lith_giveDefItem("Lith_RocketAmmo", 0);
-   lith_giveDefItem("Lith_PlasmaAmmo", 0);
-   lith_giveDefItem("Lith_CannonAmmo", 0);
-}
-
-override double, double tweakSpeeds(double forward, double side) {
-   [forward, side] = super.tweakSpeeds(forward, side);
-   forward *= double(m_speed) / 100.0;
-   side    *= double(m_speed) / 100.0;
-   return forward, side;
-}
-
 void lith_giveDefItem(class<Inventory> type, int amount) {
    let inv = giveInventoryType(type);
    if(inv) inv.amount = amount;
@@ -103,20 +66,6 @@ void lith_giveDefWeapon(class<Weapon> type) {
    let wep = Weapon(giveInventoryType(type));
    wep.amount = 1;
    player.readyWeapon = player.pendingWeapon = wep;
-}
-
-override void playerThink() {
-   if(Lith_UTIL.pData(_pdt_mfunc) != _mfunc_normal) return;
-
-   if(Lith_UTIL.pData(_pdt_semifrozen)) {
-      UserCmd cmd = player.cmd;
-      cmd.pitch = cmd.yaw = cmd.roll = 0;
-      player.turnTicks = 0;
-   }
-
-   m_onGround = pos.z - floorz <= 16 || bOnMobj || bMbfBouncer || player.cheats & CF_NOCLIP2;
-
-   super.playerThink();
 }
 
 void Lith_RainEffect() {
@@ -165,7 +114,7 @@ void Lith_ItemVacuum() {
 void lith_preTick() {
    if(m_wasDamaged) {
       --m_wasDamaged;
-   } else if(Lith_UTIL.pData(_pdt_pclass) & (pcl_wanderer | pcl_thoth) &&
+   } else if((pW | pT) & (1 << m_pclass) &&
              health < Lith_UTIL.pData(_pdt_oldhealth)) {
       m_wasDamaged = 7;
    }
@@ -213,6 +162,65 @@ void lith_postTick() {
       Lith_ShowMapMarker();
       Lith_BobWeapon();
    }
+}
+
+override void markPrecacheSounds() {
+   super.markPrecacheSounds();
+   markSound("player/barrier");
+   markSound("player/nuke");
+   markSound("player/death");
+   markSound("player/death2");
+   markSound("player/infraredoff");
+   markSound("body/flesh");
+   markSound("body/bullethit");
+   markSound("world/thunder");
+   markSound("amb/wind");
+   markSound("amb/rain");
+   markSound("weapons/dark/fire");
+}
+
+override void beginPlay() {
+   super.beginPlay();
+   viewbob = m_vBob;
+   m_wasFrozen = false;
+}
+
+override void postBeginPlay() {
+   super.postBeginPlay();
+   if(__lith_fun & lfun_division) {
+      spawn('Lith_DivisionSigil', pos + (cos(angle) * 128, sin(angle) * 128, 0)).bDropped = false;
+   }
+}
+
+override void giveDefaultInventory() {
+   lith_giveDefItem("Lith_IDOL", 0);
+   lith_giveDefItem("Lith_ManaAmmo", 0);
+   lith_giveDefItem("Lith_BulletAmmo", 0);
+   lith_giveDefItem("Lith_ShellAmmo", 0);
+   lith_giveDefItem("Lith_RocketAmmo", 0);
+   lith_giveDefItem("Lith_PlasmaAmmo", 0);
+   lith_giveDefItem("Lith_CannonAmmo", 0);
+}
+
+override double, double tweakSpeeds(double forward, double side) {
+   [forward, side] = super.tweakSpeeds(forward, side);
+   forward *= double(m_speed) / 100.0;
+   side    *= double(m_speed) / 100.0;
+   return forward, side;
+}
+
+override void playerThink() {
+   if(Lith_UTIL.pData(_pdt_mfunc) != _mfunc_normal) return;
+
+   if(Lith_UTIL.pData(_pdt_semifrozen)) {
+      UserCmd cmd = player.cmd;
+      cmd.pitch = cmd.yaw = cmd.roll = 0;
+      player.turnTicks = 0;
+   }
+
+   m_onGround = pos.z - floorz <= 16 || bOnMobj || bMbfBouncer || player.cheats & CF_NOCLIP2;
+
+   super.playerThink();
 }
 
 override void tick() {

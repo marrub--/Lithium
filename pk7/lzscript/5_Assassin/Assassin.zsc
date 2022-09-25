@@ -18,6 +18,12 @@ class Lith_AssassinPlayer : Lith_Player {
    bool m_isSprinting;
    bool m_wasHorizontalDodge;
 
+   override void beginPlay() {
+      super.beginPlay();
+      m_discrim = "Omi";
+      m_pclass = pcl_assassin;
+   }
+
    override void giveDefaultInventory() {
       super.giveDefaultInventory();
       lith_giveDefWeapon("Lith_DualPistols");

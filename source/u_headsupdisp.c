@@ -528,12 +528,12 @@ void Upgr_HeadsUpDisp_Render(void) {
 
    hudtype = CVarGetI(sc_hud_type);
    if(hudtype <= 0 || hudtype > _hud_max) {
-      hudtype = pl.pclass_b;
+      hudtype = pl.pclass;
    } else {
       --hudtype;
    }
 
-   hudcolor = hudtype != _hud_old ? P_Color(dst_bit(hudtype)) : CR_RED;
+   hudcolor = hudtype != _hud_old ? P_Color(hudtype) : CR_RED;
 
    HUD_Log();
    HUD_TopRight();

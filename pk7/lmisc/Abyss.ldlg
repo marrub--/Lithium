@@ -7,7 +7,7 @@
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
 toki_nimi {
-   currently_unused,
+   start,
    lane,
    jem,
    fulk,
@@ -24,6 +24,20 @@ kon {
    lane_scars,
    kiri_met,
    kiri_self,
+}
+
+// Tutorial ══════════════════════════════════════════════════════════════════╕
+toki start {
+   lipu_nimi {
+      begin,
+   }
+
+   lipu begin {
+      name   UNKNOWN;
+      remote DATA;
+      icon   Data;
+      option _o1 brk;
+   }
 }
 
 // Marine ════════════════════════════════════════════════════════════════════╕

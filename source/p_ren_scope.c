@@ -99,6 +99,9 @@ void ScopeC(void) {
 
 static
 void ScopeI(void) {
+   if(!pl.scopetoken) {
+      return;
+   }
    k32 a = (1 + ACS_Sin(ACS_Timer() / 70.0)) * 0.25 + 0.5;
    SetSize(320, 200);
    PrintSpriteAP(sp_HUD_I_ScopeOverlay, 160,0, 100,0, a);
@@ -106,6 +109,9 @@ void ScopeI(void) {
 
 static
 void ScopeM(void) {
+   if(!pl.scopetoken) {
+      return;
+   }
    Waves();
    StringStack();
 }
@@ -114,11 +120,10 @@ script void P_Ren_Scope(void) {
    if(pl.old.scopetoken && !pl.scopetoken) {
       hudstrnum = 0;
    }
-
    switch(pl.pclass) {
-      case pcl_cybermage:                   ScopeC(); break;
-      case pcl_informant: if(pl.scopetoken) ScopeI(); break;
-      case pcl_marine:    if(pl.scopetoken) ScopeM(); break;
+   case pcl_cybermage: ScopeC(); break;
+   case pcl_informant: ScopeI(); break;
+   case pcl_marine:    ScopeM(); break;
    }
 }
 

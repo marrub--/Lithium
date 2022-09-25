@@ -75,18 +75,20 @@ class Lith_OrSigil : Lith_DivisionItem {
 class Lith_DivisionItem : Lith_InventoryItem;
 
 mixin Lith_Pickup;
+
 override void postBeginPlay() {
    super.postBeginPlay();
    pkPostBeginPlay();
 }
+
 override void tick() {
    super.tick();
    pkTick();
 }
+
 default {
    Lith_DivisionItem.Glow "Lith_ItemGlow";
    Inventory.PickupSound "player/pickup/evil";
-   +Lith_DivisionItem.Pkup_Generic
 }
 
 /* EOF */

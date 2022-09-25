@@ -22,8 +22,8 @@ struct cupgdef {
    i32  key;
    cstr msg;
    cstr nam;
-} const cdefs[pcl_max_b][bossreward_max] = {
-   [pcl_marine_b] = {
+} const cdefs[pcl_max][bossreward_max] = {
+   [pcl_marine] = {
       {cupg_m_weapninter, "MWeapnInter", "WeapnInter"},
       {cupg_m_weapninte2, "MWeapnInte2", "WeapnInte2"},
       {cupg_m_armorinter, "MArmorInter", "ArmorInter"},
@@ -31,7 +31,7 @@ struct cupgdef {
       {cupg_m_cpu2,       "MUpgr2",      "CPU2"      },
       {cupg_rdistinter,   "MRDistInter"              },
    },
-   [pcl_cybermage_b] = {
+   [pcl_cybermage] = {
       {cupg_c_slot3spell, "CSlot3Spell", "Feuer"   },
       {cupg_c_slot4spell, "CSlot4Spell", "Rend"    },
       {cupg_c_slot5spell, "CSlot5Spell", "Hulgyon" },
@@ -39,7 +39,7 @@ struct cupgdef {
       {cupg_c_slot7spell, "CSlot7Spell", "Cercle"  },
       {cupg_rdistinter,   "CRDistInter"            },
    },
-   [pcl_darklord_b] = {
+   [pcl_darklord] = {
       {cupg_d_motra,     "DMotra",     "Motra"    },
       {cupg_d_zaruk,     "DZaruk",     "Zaruk"    },
       {cupg_d_shield,    "DShield",    "Shield"   },
@@ -60,7 +60,7 @@ void CBI_Install(i32 num) {
 
    pl.setActivator();
 
-   ifauto(struct cupgdef const *, c, GetCUpgr(pl.pclass_b, num)) {
+   ifauto(struct cupgdef const *, c, GetCUpgr(pl.pclass, num)) {
       set_bit(wl.cbiupgr, c->key);
 
       switch(c->key) {
@@ -95,7 +95,7 @@ void CBI_Install(i32 num) {
          P_BIP_Unlock(P_BIP_NameToPage(c->nam), false);
       }
    } else {
-      PrintErr(_l("no upgrade "), _p(num), _l(" for "), _p(pl.pclass_b));
+      PrintErr(_l("no upgrade "), _p(num), _l(" for "), _p(pl.pclass));
    }
 }
 
@@ -116,7 +116,7 @@ script_str ext("ACS") addr(OBJ "PickupCbiItem")
 void Z_PickupCbiItem(i32 num) {
    FadeFlash(0, 255, 0, 0.7, 0.5);
 
-   ifauto(struct cupgdef const *, c, GetCUpgr(pl.pclass_b, num)) {
+   ifauto(struct cupgdef const *, c, GetCUpgr(pl.pclass, num)) {
       str nam      = ns(lang(fast_strdup2(LANG "LOG_CBI_", c->msg)));
       i32 itemdisp = CVarGetI(sc_player_itemdisp);
       if(itemdisp & _itm_disp_pop) {

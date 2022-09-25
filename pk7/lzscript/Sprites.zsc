@@ -6,17 +6,13 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-struct Lith_Sprite {
-   spriteId spr;
-   int      frm;
-
-   play void get(string full) {
-      Spr = Actor.GetSpriteIndex(full.left(4));
-      Frm = full.ByteAt(4) - CH_U_A;
-   }
-}
-
 class Lith_SpriteLoader : Actor abstract {
+   static spriteId, int get(string full) {
+      spriteId spr = Actor.getSpriteIndex(full.left(4));
+      int      frm = full.byteAt(4) - CH_U_A;
+      return spr, frm;
+   }
+
    states {
       ARM1 A 0;
       CUPG A 0;

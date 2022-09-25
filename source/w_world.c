@@ -159,7 +159,7 @@ static void MInitPst(void) {
       Scr_MInit();
    }
 
-   if(pl.pclass & pcl_outcasts) {
+   if(get_bit(pcl_outcasts, pl.pclass)) {
       if(wl.hubscleared == 10) P_BIP_Unlock(P_BIP_NameToPage("MCluster1"), false);
       if(wl.hubscleared == 20) P_BIP_Unlock(P_BIP_NameToPage("MCluster2"), false);
       if(wl.hubscleared == 25) P_BIP_Unlock(P_BIP_NameToPage("MCluster3"), false);

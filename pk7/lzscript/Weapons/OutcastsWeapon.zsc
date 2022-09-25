@@ -24,7 +24,7 @@ states(Weapon)
 {
 User4:
    #### # 0 {
-      return Lith_UTIL.pData(_pdt_pclass) == pcl_marine ?
+      return Lith_Player(self).m_pclass == pcl_marine ?
          null :
          ResolveState("ReadySelector");
    }

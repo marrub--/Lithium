@@ -79,7 +79,7 @@ res
 };
 
 i32 Wep_FromName(i32 name) {
-   switch(pl.pclass) {
+   switch(dst_bit(pl.pclass)) {
 #{
 res = String.new
 for pcl, map in pickups

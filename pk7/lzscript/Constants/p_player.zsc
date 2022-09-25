@@ -33,11 +33,16 @@ enum Lith_SubweaponType {
 };
 
 enum Lith_PClass {
-   pcl_unknown,
-
+   pcl_marine,
+   pcl_cybermage,
+   pcl_informant,
+   pcl_wanderer,
+   pcl_assassin,
+   pcl_darklord,
+   pcl_thoth,
+   pcl_max,
    
    
-   
 
 
 
@@ -51,43 +56,36 @@ enum Lith_PClass {
 
 
 
+pM =  1 << pcl_marine,
+pC =  1 << pcl_cybermage,
+pI =  1 << pcl_informant,
+pW =  1 << pcl_wanderer,
+pA =  1 << pcl_assassin,
+pD =  1 << pcl_darklord,
+pT =  1 << pcl_thoth,
+
+gO =  pM | pC,
+gM =  pI | pW,
+gI =  pA | pD,
+gF =  pT,
+
+gH =  pM | pC | pA,
+gN =  pW | pD | pT,
+gR =  pI,
+
+gA =  gH | gN | gR,
+gU =  pC | pW | pT,
 
 
-
-pcl_marine_b =     0,
-pcl_cybermage_b =  1,
-pcl_informant_b =  2,
-pcl_wanderer_b =   3,
-pcl_assassin_b =   4,
-pcl_darklord_b =   5,
-pcl_thoth_b =      6,
-pcl_max_b =        7,
-
- pcl_marine =     1 << pcl_marine_b,
- pcl_cybermage =  1 << pcl_cybermage_b,
- pcl_informant =  1 << pcl_informant_b,
- pcl_wanderer =   1 << pcl_wanderer_b,
- pcl_assassin =   1 << pcl_assassin_b,
- pcl_darklord =   1 << pcl_darklord_b,
- pcl_thoth =      1 << pcl_thoth_b,
-
-
- pcl_outcasts =    pcl_marine    | pcl_cybermage,
- pcl_missioners =  pcl_informant | pcl_wanderer,
- pcl_intruders =   pcl_assassin  | pcl_darklord,
- pcl_finalizer =   pcl_thoth,
-
-
- pcl_human =     pcl_marine   | pcl_cybermage | pcl_assassin,
- pcl_nonhuman =  pcl_wanderer | pcl_darklord  | pcl_thoth,
- pcl_robot =     pcl_informant,
-
-
- pcl_any =        pcl_human     | pcl_nonhuman | pcl_robot,
- pcl_magicuser =  pcl_cybermage | pcl_wanderer | pcl_thoth,
-
-
-
+   pcl_outcasts   = gO,
+   pcl_missioners = gM,
+   pcl_intruders  = gI,
+   pcl_finalizer  = gF,
+   pcl_human    = gH,
+   pcl_nonhuman = gN,
+   pcl_robot    = gR,
+   pcl_any       = gA,
+   pcl_magicuser = gU,
 };
 
 

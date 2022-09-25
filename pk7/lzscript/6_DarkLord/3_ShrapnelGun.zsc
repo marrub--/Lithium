@@ -104,7 +104,7 @@ action(Weapon) void Lith_A_FireShrapnel() {
    Lith_A_RecoilUp(2);
    a_recoil(0.7);
    lith_a_setInterpolation(true);
-   Lith_FireBullets(3.5, 2.5, 14 + 5 * invoker.m_chargeLevel, 12, FBF_NORANDOM, 'Lith_ShrapnelPuff', 2);
+   Lith_FireBullets(3.5, 2.5, 14 + invoker.m_chargeLevel * 3 / 2, 12, FBF_NORANDOM, 'Lith_ShrapnelPuff', 2);
    a_setTics(1 + (invoker.m_chargeLevel / 4));
 }
 
@@ -134,7 +134,7 @@ Charge:
    SHCA A 1 a_weaponOffset(fRandom(6, 6+4), fRandom(36, 36+4), wof_interpolate);
    SHCA A 2 a_weaponOffset(fRandom(6, 6+4), fRandom(36, 36+4), wof_interpolate);
    SHCA A 0 {
-      if(++invoker.m_chargeLevel & 3 == 3) {
+      if(++invoker.m_chargeLevel & 7 == 7) {
          if(invoker.lith_noAmmo()) {
             return resolveState("FireDone");
          } else {

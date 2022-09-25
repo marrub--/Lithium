@@ -680,7 +680,7 @@ dynam_aut script void Dlg_Run(mem_size_t num) {
       _l("Dumping segment STR...\n"),
       Dbg_PrintMemC(&memory[STR_BEG_C], def->stabC));
    /* copy some constants into memory */
-   MemB1_S(VAR_PCLASS, pl.pclass);
+   MemB1_S(VAR_PCLASS, dst_bit(pl.pclass));
    static
    __label *const cases[0xFF] = {
       #define DCD(n, op, ty) [n] = &&op##_##ty,

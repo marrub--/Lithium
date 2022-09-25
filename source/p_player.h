@@ -11,44 +11,26 @@
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
 #if defined(pclass_x)
-#ifndef pclass_bit_x
-#define pclass_bit_x(lng, eq)
-#endif
-
-/* Base Classes */
-pclass_bit_x(pcl_marine_b,    0)
-pclass_bit_x(pcl_cybermage_b, 1)
-pclass_bit_x(pcl_informant_b, 2)
-pclass_bit_x(pcl_wanderer_b,  3)
-pclass_bit_x(pcl_assassin_b,  4)
-pclass_bit_x(pcl_darklord_b,  5)
-pclass_bit_x(pcl_thoth_b,     6)
-pclass_bit_x(pcl_max_b,       7)
-
-pclass_x(pM, pcl_marine,    1 << pcl_marine_b)
-pclass_x(pC, pcl_cybermage, 1 << pcl_cybermage_b)
-pclass_x(pI, pcl_informant, 1 << pcl_informant_b)
-pclass_x(pW, pcl_wanderer,  1 << pcl_wanderer_b)
-pclass_x(pA, pcl_assassin,  1 << pcl_assassin_b)
-pclass_x(pD, pcl_darklord,  1 << pcl_darklord_b)
-pclass_x(pT, pcl_thoth,     1 << pcl_thoth_b)
-
+pclass_x(pM, 1 << pcl_marine)
+pclass_x(pC, 1 << pcl_cybermage)
+pclass_x(pI, 1 << pcl_informant)
+pclass_x(pW, 1 << pcl_wanderer)
+pclass_x(pA, 1 << pcl_assassin)
+pclass_x(pD, 1 << pcl_darklord)
+pclass_x(pT, 1 << pcl_thoth)
 /* Groups */
-pclass_x(gO, pcl_outcasts,   pcl_marine    | pcl_cybermage)
-pclass_x(gM, pcl_missioners, pcl_informant | pcl_wanderer)
-pclass_x(gI, pcl_intruders,  pcl_assassin  | pcl_darklord)
-pclass_x(gF, pcl_finalizer,  pcl_thoth)
-
+pclass_x(gO, pM | pC)
+pclass_x(gM, pI | pW)
+pclass_x(gI, pA | pD)
+pclass_x(gF, pT)
 /* Lifeform Type */
-pclass_x(gH, pcl_human,    pcl_marine   | pcl_cybermage | pcl_assassin)
-pclass_x(gN, pcl_nonhuman, pcl_wanderer | pcl_darklord  | pcl_thoth)
-pclass_x(gR, pcl_robot,    pcl_informant)
-
+pclass_x(gH, pM | pC | pA)
+pclass_x(gN, pW | pD | pT)
+pclass_x(gR, pI)
 /* Misc. Abilities */
-pclass_x(gA, pcl_any,       pcl_human     | pcl_nonhuman | pcl_robot)
-pclass_x(gU, pcl_magicuser, pcl_cybermage | pcl_wanderer | pcl_thoth)
+pclass_x(gA, gH | gN | gR)
+pclass_x(gU, pC | pW | pT)
 #undef pclass_x
-#undef pclass_bit_x
 #elif !defined(p_player_h)
 #define p_player_h
 
@@ -72,11 +54,25 @@ enum ZscName(SubweaponType) {
 };
 
 enum ZscName(PClass) {
-   pcl_unknown,
-
-   #define pclass_bit_x(lng, eq) lng = eq,
-   #define pclass_x(shr, lng, eq) lng = eq,
+   pcl_marine,
+   pcl_cybermage,
+   pcl_informant,
+   pcl_wanderer,
+   pcl_assassin,
+   pcl_darklord,
+   pcl_thoth,
+   pcl_max,
+   #define pclass_x(shr, eq) shr = eq,
    #include "p_player.h"
+   pcl_outcasts   = gO,
+   pcl_missioners = gM,
+   pcl_intruders  = gI,
+   pcl_finalizer  = gF,
+   pcl_human    = gH,
+   pcl_nonhuman = gN,
+   pcl_robot    = gR,
+   pcl_any       = gA,
+   pcl_magicuser = gU,
 };
 
 #if !ZscOn
@@ -105,7 +101,6 @@ score_t P_Scr_Give(k32 x, k32 y, k32 z, score_t score, bool nomul);
 score_t P_Scr_GivePos(i32 x, i32 y, score_t score, bool nomul);
 void P_Scr_Take(score_t score);
 void P_Lv_GiveEXP(i32 amt);
-stkcall cstr P_Discrim(i32 pclass);
 stkcall i32 P_Color(i32 pclass);
 void P_Dat_PTick(void);
 script void P_Scr_Payout(void);
@@ -135,11 +130,6 @@ void P_Ren_Debug(void);
 script void P_Ren_Step(void);
 void P_Ren_View(void);
 script void P_Ren_Scope(void);
-
-enum {
-   #define pclass_x(shr, lng, eq) shr = lng,
-   #include "p_player.h"
-};
 
 enum {
    _gui_none,
@@ -250,9 +240,7 @@ struct player {
    i32  ticks;
    str  name;
    i32  pclass;
-   i32  pclass_b;
-   str  pcstr;
-   cstr discrim;
+   char discrim[5];
    i32  color;
    cstr obit;
 

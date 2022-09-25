@@ -23,10 +23,10 @@ class Lith_GunSmoke : Actor {
 
    override void postBeginPlay() {
       super.postBeginPlay();
-      alpha = fRandom(.1, .4);
+      alpha = fRandom[Lith_GunSmoke](.1, .4);
       vel *= .01;
-      scale *= fRandom(.07, .14);
-      if(random(0, 255) < 128) scale.x = -scale.x;
+      scale *= fRandom[Lith_GunSmoke](.07, .14);
+      if(random[Lith_GunSmoke](0, 255) < 128) scale.x = -scale.x;
    }
 
    override void tick() {
@@ -60,8 +60,8 @@ class Lith_GunSmokeEmitter : Actor {
       TNT1 A 1;
    Death:
       TNT1 A 0 {
-         for(int i = 0, n = random(5, 7); i < n; i++)
-            A_SpawnItemEx("Lith_GunSmoke", fRandom(-1,1),fRandom(-1,1),fRandom(-1,1), zvel: vel.z, flags: flags);
+         for(int i = 0, n = random[Lith_GunSmoke](5, 7); i < n; i++)
+            A_SpawnItemEx("Lith_GunSmoke", fRandom[Lith_GunSmoke](-1,1),fRandom[Lith_GunSmoke](-1,1),fRandom[Lith_GunSmoke](-1,1), zvel: vel.z, flags: flags);
       }
       stop;
    }
@@ -85,23 +85,23 @@ class Lith_GunSmokeSpawner : Actor {
    const flags = SXF_NOCHECKPOSITION|SXF_ORIGINATOR|SXF_ABSOLUTEVELOCITY;
 
    void lith_spawnSmoke(double vx, double vy) {
-      A_SpawnItemEx("Lith_GunSmoke", fRandom(-4,4),fRandom(-1,1),fRandom(-2,2), vel.x + vx,vel.y + vy,vel.z, 0, flags);
+      A_SpawnItemEx("Lith_GunSmoke", fRandom[Lith_GunSmoke](-4,4),fRandom[Lith_GunSmoke](-1,1),fRandom[Lith_GunSmoke](-2,2), vel.x + vx,vel.y + vy,vel.z, 0, flags);
    }
 
    void lith_spawnParticles(color c) {
-      A_SpawnParticle(c, SPF_FULLBRIGHT|SPF_RELATIVE, random(3, 8), random(1, 2), fRandom(-15, 15), fRandom(-1,1),fRandom(-1,1),fRandom(-1,1), fRandom(1, 16),fRandom(-0.1, 0.1),(vel.z*1.5)+fRandom(-1,1), 0.0, 0.0, -0.05, 0.98, -1);
+      A_SpawnParticle(c, SPF_FULLBRIGHT|SPF_RELATIVE, random[Lith_GunSmoke](3, 8), random[Lith_GunSmoke](1, 2), fRandom[Lith_GunSmoke](-15, 15), fRandom[Lith_GunSmoke](-1,1),fRandom[Lith_GunSmoke](-1,1),fRandom[Lith_GunSmoke](-1,1), fRandom[Lith_GunSmoke](1, 16),fRandom[Lith_GunSmoke](-0.1, 0.1),(vel.z*1.5)+fRandom[Lith_GunSmoke](-1,1), 0.0, 0.0, -0.05, 0.98, -1);
    }
 
    override void postBeginPlay() {
       setXyz(pos + vel);
-      lith_spawnSmoke(0, fRandom(-0.2, 0.2));
-      for(int i = 0, j = random(m_Part + 1, m_Part + 3); i < j; i++)
+      lith_spawnSmoke(0, fRandom[Lith_GunSmoke](-0.2, 0.2));
+      for(int i = 0, j = random[Lith_GunSmoke](m_Part + 1, m_Part + 3); i < j; i++)
          lith_spawnParticles("Yellow");
       if(lith_sv_lessparticles) return;
-      for(int i = 0, j = random(m_Part + 1, m_Part + 2); i < j; i++)
+      for(int i = 0, j = random[Lith_GunSmoke](m_Part + 1, m_Part + 2); i < j; i++)
          lith_spawnParticles("White");
-      for(int i = 0, n = random(m_Part/2, m_Part); i < n; i++)
-         lith_spawnSmoke(fRandom(-10, 10), fRandom(-10, 10));
+      for(int i = 0, n = random[Lith_GunSmoke](m_Part/2, m_Part); i < n; i++)
+         lith_spawnSmoke(fRandom[Lith_GunSmoke](-10, 10), fRandom[Lith_GunSmoke](-10, 10));
       destroy();
    }
 

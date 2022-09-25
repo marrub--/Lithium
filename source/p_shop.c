@@ -48,7 +48,7 @@ bool Shop_Give(struct shopitem const *item, i32 tid) {
 void P_CBI_TabShop(struct gui_state *g) {
    i32 nitems = 0;
    for(i32 i = 0; i < countof(shopitems); i++) {
-      if(shopitems[i].pclass & pl.pclass) {
+      if(get_bit(shopitems[i].pclass, pl.pclass)) {
          nitems++;
       }
    }
@@ -56,7 +56,7 @@ void P_CBI_TabShop(struct gui_state *g) {
    G_ScrBeg(g, &pl.cbi.st.shopscr, 2, 23, gui_p.btnlist.w, 186, gui_p.btnlist.h * nitems);
 
    for(i32 i = 0, y = 0; i < countof(shopitems); i++) {
-      if(G_ScrOcc(g, &pl.cbi.st.shopscr, y, gui_p.btnlistsel.h) || !(shopitems[i].pclass & pl.pclass)) {
+      if(G_ScrOcc(g, &pl.cbi.st.shopscr, y, gui_p.btnlistsel.h) || !get_bit(shopitems[i].pclass, pl.pclass)) {
          continue;
       }
 

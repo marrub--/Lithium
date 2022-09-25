@@ -64,8 +64,6 @@ enum ZscName(PData) {
    _pdt_upgrade,
    _pdt_riflemode,
    _pdt_hassigil,
-   _pdt_pclass,
-   _pdt_pclass_b,
    _pdt_semifrozen,
    _pdt_addp,
    _pdt_addy,

@@ -33,7 +33,7 @@ override void PostBeginPlay()
          mo.SpawnPoint = SpawnPoint;
          mo.Angle      = Angle;
          mo.Vel        = (FRandom[L_MS](-2, 2), FRandom[L_MS](-2, 2), 0);
-         mo.bDROPPED   = bDROPPED;
+         mo.bDropped   = bDropped;
 
          if(i == 0) Lith_RandomSpawn.CopyImportantStuff(mo, self);
       }

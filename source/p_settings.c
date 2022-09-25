@@ -92,8 +92,8 @@ bool SG_autoBuy(struct set_parm const *sp, bool *v) {
 
 script static
 bool SG_doneIntro(struct set_parm const *sp, bool *v) {
-   if(v) {pl.done_intro ^= pl.pclass; P_Data_Save();}
-   return pl.done_intro &  pl.pclass;
+   if(v) {tog_bit(pl.done_intro, pl.pclass); P_Data_Save();}
+   return get_bit(pl.done_intro, pl.pclass);
 }
 
 static
@@ -209,7 +209,7 @@ void S_strng(struct set_parm const *sp) {
 
 static
 bool S_isEnabled(struct setting const *st) {
-   return !st->pclass || pl.pclass & st->pclass;
+   return !st->pclass || get_bit(st->pclass, pl.pclass);
 }
 
 #define S_bndi(min, max) .bnd = {.i = {min, max}}

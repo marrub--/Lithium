@@ -38,7 +38,7 @@ void P_CBI_TabStatistics(struct gui_state *g) {
    Stat(sl_stat_items,      "%i",        pl.itemsbought);
    Stat(sl_stat_mail,       "%i",        bip.mailreceived);
    Stat(sl_stat_time,       "%i",        pl.ticks / 35);
-   if(pl.pclass & pcl_outcasts) {
+   if(get_bit(pcl_outcasts, pl.pclass)) {
       Stat(sl_stat_boom, "%i", pl.spuriousexplosions);
    }
    if(pl.pclass == pcl_marine) {

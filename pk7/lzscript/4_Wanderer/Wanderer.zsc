@@ -37,6 +37,12 @@ class Lith_WandererPlayer : Lith_Player {
       Health 50;
    }
 
+   override void beginPlay() {
+      super.beginPlay();
+      m_discrim = "Luke";
+      m_pclass = pcl_wanderer;
+   }
+
    override void giveDefaultInventory() {
       super.giveDefaultInventory();
       lith_giveDefWeapon("Lith_Magnum");

@@ -54,7 +54,6 @@ class Lith_UpgrGlow : Lith_ItemGlow {
 }
 
 mixin class Lith_Pickup {
-   meta int m_pkFlags;
    meta string m_pkSprGf;
    meta string m_pkSprAf;
    meta string m_pkSprCf;
@@ -63,17 +62,11 @@ mixin class Lith_Pickup {
    meta string m_pkSprMf;
    meta string m_pkSprTf;
    meta string m_pkSprWf;
-   Actor m_pkSpr;
-   Lith_Sprite m_pkSprG;
-   Lith_Sprite m_pkSprA;
-   Lith_Sprite m_pkSprC;
-   Lith_Sprite m_pkSprD;
-   Lith_Sprite m_pkSprI;
-   Lith_Sprite m_pkSprM;
-   Lith_Sprite m_pkSprT;
-   Lith_Sprite m_pkSprW;
    meta class<Actor> m_pkGlow;
+   uint m_pkFlags;
+   Actor m_pkSpr;
    int m_pkGlowFrame;
+   double m_pkOffset;
 
    property Sprite: m_pkSprGf;
    property SpriteA: m_pkSprAf;
@@ -84,67 +77,54 @@ mixin class Lith_Pickup {
    property SpriteT: m_pkSprTf;
    property SpriteW: m_pkSprWf;
    property Glow: m_pkGlow;
-   flagdef Pkup_Generic:  m_pkFlags, 0;
-   flagdef Pkup_NoSprite: m_pkFlags, 1;
-   flagdef Pkup_NoGlow:   m_pkFlags, 2;
+
+   flagDef Pkup_NoSprite: m_pkFlags, 0;
+   flagDef Pkup_NoGlow:   m_pkFlags, 1;
+   flagDef Pkup_SpawnFx:  m_pkFlags, 2;
 
    void pkPostBeginPlay() {
-      if(m_pkSprGf) {m_pkSprG.get(m_pkSprGf);}
-      if(m_pkSprAf) {m_pkSprA.get(m_pkSprAf);}
-      if(m_pkSprCf) {m_pkSprC.get(m_pkSprCf);}
-      if(m_pkSprDf) {m_pkSprD.get(m_pkSprDf);}
-      if(m_pkSprIf) {m_pkSprI.get(m_pkSprIf);}
-      if(m_pkSprMf) {m_pkSprM.get(m_pkSprMf);}
-      if(m_pkSprTf) {m_pkSprT.get(m_pkSprTf);}
-      if(m_pkSprWf) {m_pkSprW.get(m_pkSprWf);}
-      if(!bPkup_NoSprite) {
-         m_pkSpr = spawn("Lith_ItemSprite", Pos);
-         m_pkSpr.master = self;
-      } else {
-         m_pkSpr = null;
+      if(bDropped) {
+         bPkup_NoGlow  = true;
+         bPkup_SpawnFx = false;
       }
-      m_pkGlowFrame = Lith_UTIL.pData(_pdt_pclass_b);
+      m_pkSpr = null;
+      m_pkGlowFrame = Lith_Player(players[consoleplayer].mo).m_pclass;
+      m_pkOffset = fRandom[Lith_Pickup](0, 360);
    }
 
    void pkTick() {
-      if(!m_pkSpr) {
-         return;
-      }
-      if(bPkup_Generic) {
-         pkSetSpr(m_pkSprG);
-         return;
-      }
-      if(!players[consolePlayer].camera) {
-         return;
-      }
-      let p = players[consolePlayer].camera;
-      /**/ if(m_pkSprAf && p is "Lith_AssassinPlayer")  {pkSetSpr(m_pkSprA);}
-      else if(m_pkSprCf && p is "Lith_CyberMagePlayer") {pkSetSpr(m_pkSprC);}
-      else if(m_pkSprDf && p is "Lith_DarkLordPlayer")  {pkSetSpr(m_pkSprD);}
-      else if(m_pkSprIf && p is "Lith_InformantPlayer") {pkSetSpr(m_pkSprI);}
-      else if(m_pkSprMf && p is "Lith_MarinePlayer")    {pkSetSpr(m_pkSprM);}
-      else if(m_pkSprTf && p is "Lith_ThothPlayer")     {pkSetSpr(m_pkSprT);}
-      else if(m_pkSprWf && p is "Lith_WandererPlayer")  {pkSetSpr(m_pkSprW);}
-      else if(m_pkSprGf)                                {pkSetSpr(m_pkSprG);}
    }
 
-   void pkSetSpr(Lith_Sprite s) {
-      m_pkSpr.sprite = s.spr;
-      m_pkSpr.frame  = s.frm;
+   void pkSetSpr(string f) {
+      [m_pkSpr.sprite, m_pkSpr.frame] = Lith_SpriteLoader.get(f);
    }
 
    void pkItemGlow() const {
-      if(isFrozen() || lith_player_noitemfx || bPkup_NoGlow) {
+      if(isFrozen()) {
          return;
       }
-      let d = int(distance2D(players[consolePlayer].camera));
-      let s = sin(msTimeF() * 0.14285);
-      let z = sin(msTimeF() * 0.05714);
-      let c = cos(msTimeF() * 0.14285);
+      let p = players[consolePlayer].camera;
+      let d = int(distance2D(p));
+      bool needSprite = !bPkup_NoSprite && !m_pkSpr;
+      bool needFx     = bPkup_SpawnFx;
+      if((needSprite || needFx) && checkSight(p)) {
+         if(needSprite) {
+            pkSpawnSprite();
+         }
+         if(needFx) {
+            pkSpawnFx();
+         }
+      }
+      if(lith_player_noitemfx || bPkup_NoGlow) {
+         return;
+      }
+      let s = sin(m_pkOffset + msTimeF() * 0.14285);
+      let z = sin(m_pkOffset + msTimeF() * 0.05714);
+      let c = cos(m_pkOffset + msTimeF() * 0.14285);
       let n = 1 - s;
       switch(d / 512) {
       case 0:
-         spawn(m_pkGlow, pos+(s*32,    c*32, 24+z*9) ).frame = m_pkGlowFrame;
+         spawn(m_pkGlow, pos+(s*32,    c*32, 24+z*9 )).frame = m_pkGlowFrame;
          spawn(m_pkGlow, pos+(c*32, n*32-32, 24+s*32)).frame = m_pkGlowFrame;
          spawn(m_pkGlow, pos+(n*32-32, c*32, 24+s*32)).frame = m_pkGlowFrame;
       case 1:
@@ -157,9 +137,27 @@ mixin class Lith_Pickup {
       }
    }
 
+   void pkSpawnFx() {
+      bPkup_SpawnFx = false;
+   }
+
+   void pkSpawnSprite() {
+      let pcl = Lith_Player(players[consoleplayer].mo).m_pclass;
+      m_pkSpr = spawn('Lith_ItemSprite', pos);
+      m_pkSpr.master = self;
+      /**/ if(m_pkSprAf && pcl == pcl_assassin)  {pkSetSpr(m_pkSprAf);}
+      else if(m_pkSprCf && pcl == pcl_cybermage) {pkSetSpr(m_pkSprCf);}
+      else if(m_pkSprDf && pcl == pcl_darklord)  {pkSetSpr(m_pkSprDf);}
+      else if(m_pkSprIf && pcl == pcl_informant) {pkSetSpr(m_pkSprIf);}
+      else if(m_pkSprMf && pcl == pcl_marine)    {pkSetSpr(m_pkSprMf);}
+      else if(m_pkSprTf && pcl == pcl_thoth)     {pkSetSpr(m_pkSprTf);}
+      else if(m_pkSprWf && pcl == pcl_wanderer)  {pkSetSpr(m_pkSprWf);}
+      else if(m_pkSprGf)                         {pkSetSpr(m_pkSprGf);}
+   }
+
    states(Actor) {
    Spawn:
-      TNT1 A 1 pkItemGlow();
+      TNT1 A 1 pkItemGlow;
       loop;
    }
 }

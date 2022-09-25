@@ -13,6 +13,12 @@ class Lith_ThothPlayer : Lith_Player {
       Player.Portrait ":Portraits:Thoth";
       Tag "$LITH_CLASS_THOTH";
    }
+
+   override void beginPlay() {
+      super.beginPlay();
+      m_discrim = "Kiri";
+      m_pclass = pcl_thoth;
+   }
 }
 
 class Lith_TWeapon : Lith_Weapon {

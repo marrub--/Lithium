@@ -11,7 +11,6 @@ class Lith_FistPickup : Lith_WeaponPickup replaces Fist {
       Tag "$LITH_TAG_Weapon0";
       Lith_WeaponPickup.WepName wepnam_fist;
       Lith_WeaponPickup.Sprite "FISTA";
-      +Lith_WeaponPickup.Pkup_Generic
    }
 }
 
@@ -132,6 +131,7 @@ default {
    Inventory.PickupMessage "";
    Inventory.PickupSound "";
    Lith_WeaponPickup.Glow "Lith_WeapGlow";
+   +Lith_WeaponPickup.Pkup_SpawnFx
 }
 
 /* EOF */

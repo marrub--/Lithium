@@ -18,6 +18,13 @@ class Lith_DarkLordPlayer : Lith_Player {
       Player.ViewHeight 50;
       Tag "$LITH_CLASS_DARKLORD";
    }
+
+   override void beginPlay() {
+      super.beginPlay();
+      m_discrim = "Ari";
+      m_pclass = pcl_darklord;
+   }
+
    override void giveDefaultInventory() {
       super.giveDefaultInventory();
       lith_giveDefWeapon("Lith_Khanda");
