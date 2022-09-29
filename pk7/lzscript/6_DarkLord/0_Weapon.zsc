@@ -187,7 +187,7 @@ action(Weapon) void lith_sprintOfs(double x, double y, int flags = 0) {
 
 states(Weapon) {
 _Sprint:
-   #### # 1 offset(1, 34) lith_a_cancelScope;
+   #### # 1 offset(1, 34) lith_a_adsCancel;
    #### # 1 offset(4, 40);
    #### # 1 offset(10, 55) a_startSound("player/ari/sprint", lch_body3);
    #### # 1 offset(17, 70);

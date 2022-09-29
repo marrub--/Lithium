@@ -232,6 +232,7 @@ sm_:
    - UserY: user_Y
    - UserZ: user_Z
    - WaterLevel
+   - WeaponScoped
 
    - boss:      BOSS
    - countkill: COUNTKILL
@@ -308,7 +309,6 @@ so_:
    - TeleFog6
    - TeleFog7
    - UniqueID
-   - WeaponScopedToken
 
    NO_PREFIX:
    - LDLegendaryMonsterMarker

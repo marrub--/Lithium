@@ -8,6 +8,11 @@
 
 extend class Lith_HERMES;
 
+static bool weaponScoped() {
+   let wep = Lith_Weapon(players[consolePlayer].readyWeapon);
+   return wep.m_ads == Lith_Weapon._ads_scope;
+}
+
 static int GetMaxMag(string cname) {
    let p   = players[consolePlayer].mo;
    let wep = p ? Lith_Weapon(p.findInventory(cname)) : null;

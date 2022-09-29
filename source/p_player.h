@@ -102,6 +102,7 @@ score_t P_Scr_GivePos(i32 x, i32 y, score_t score, bool nomul);
 void P_Scr_Take(score_t score);
 void P_Lv_GiveEXP(i32 amt);
 stkcall i32 P_Color(i32 pclass);
+stkcall i32 P_Char(i32 pclass);
 void P_Dat_PTick(void);
 script void P_Scr_Payout(void);
 void P_Log_SellWeapon(i32 which, score_t score);

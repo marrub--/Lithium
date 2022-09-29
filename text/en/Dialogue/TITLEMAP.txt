@@ -7,6 +7,42 @@
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
 ## Tutorial ══════════════════════════════════════════════════════════════════╕
+%% TITLEMAP_start_begin_0
+\c[Lith_Green]Into the pit!
+\c[Lith_Red]Into Abyss -
+\c[Lith_Purple]Into a silent void,
+\c[Lith_Yellow]you wander.
+\c[Lith_Pink]We look to the future,
+\c[Lith_Blue]you destroy your present.
+\c[Lith_Grey]Iterate.
+
+%% TITLEMAP_start_begin_o1m
+Huh?
+\cq[I'm leaving.]
+
+%% TITLEMAP_start_begin_o1c
+What?
+\cq[I'm leaving.]
+
+%% TITLEMAP_start_begin_o1i
+Delete message.
+\cq[Not meant to be here.]
+
+%% TITLEMAP_start_begin_o1w
+Where..?
+\cq[Forwards...]
+
+%% TITLEMAP_start_begin_o1a
+Future..?
+\cq[I don't like this. I'm out of here.]
+
+%% TITLEMAP_start_begin_o1d
+Alright.
+\cq[I don't like this. I'm out of here.]
+
+%% TITLEMAP_start_begin_o1t
+Rid me of this illusion.
+\cq[None of this.]
 
 ## Marine ════════════════════════════════════════════════════════════════════╕
 @@ TITLEMAP_lane_begin_0

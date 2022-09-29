@@ -390,9 +390,9 @@ void DialogueGUI(void) {
 
       for(mem_size_t i = 0; i < oc; i++, y += 14) {
          mem_size_t adr = MemB2_G(StructOfs(OPT, NAML, i));
-         cstr       txt = tmpstr(lang(strp(_p(ml.lump), _c('_'), _p(MemSC_G(adr)))));
-
-         if(G_Button_HId(&gst, i, txt, 45, y, Pre(btndlgsel))) {
+         str        txt = lang(strp(_p(ml.lump), _c('_'), _p(MemSC_G(adr)), _c(P_Char(pl.pclass))));
+         if(!txt)  {txt = lang(strp(_p(ml.lump), _c('_'), _p(MemSC_G(adr))));}
+         if(G_Button_HId(&gst, i, tmpstr(txt), 45, y, Pre(btndlgsel))) {
             MemB1_S(VAR_UACT, UACT_SELOPTION);
             MemB1_S(VAR_OPT_SEL, i);
          }
@@ -609,14 +609,16 @@ alloc_aut(0) sync static void ActFIN_WAIT(void) {
       i32 leng = ACS_StrLen(text);
       static struct gui_fil fil_fill;
       static struct gui_fil fil_skipfill;
+      fil_fill.cur     = 0;
       fil_fill.tic     = 75;
+      fil_skipfill.cur = 0;
       fil_skipfill.tic = 35;
       for(i32 i = tics; i >= 0; i--) {
          F_drawBack(bgnd);
          i32 buttons = ACS_GetPlayerInput(-1, INPUT_BUTTONS);
          i32 p, h;
          if(i > 1) {
-            if(ACS_Timer() % 3 == 0) {
+            if(ACS_Timer() % 3 == 0 && text[p] != ' ') {
                StartSound(ss_player_cbi_keypress, lch_body2, CHANF_NOPAUSE|CHANF_MAYBE_LOCAL|CHANF_UI, 1.0, ATTN_STATIC);
             }
             k32 mul = 1.0 - i / (k32)tics;

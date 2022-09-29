@@ -28,22 +28,22 @@ fantasy at this point. A fantasy in the sea of a dream.
 I don't know.
 
 
-                     "Will I ever be saved?"
+                     "Will I ever be normal?"
 
 
-Again, all you can bring yourself to answer,
+All you can bring yourself to answer,
 
 
 
                          "I don't know."
 
 %% LITHEND_IconOfSin_2_Lane
-With an ocean of depressive thoughts, you considered all alternatives.
+With an ocean of depressive thoughts, you considered all paths forward.
 
 
 
 
-                       "Why don't I just kill myself?"
+                       "Why don't I ju t k*l[ m**,l/?"
 
 
 
@@ -67,34 +67,34 @@ With an ocean of depressive thoughts, you considered all alternatives.
                         they didn't.
 
 %% LITHEND_IconOfSin_3_Lane
-  ...
 
 
                       "Please, just let this end for me."
 
 
-......
+
+
+                        "Give me some kind of reason,"
 
 
 
-                        "At least tell me why I'm alive..."
 
 
-
-.........
-
-
-
-"Please..."
+"please..."
 
 
 
 
              Drowning in the middle of a miserable dream,
+
+
+
+
+
                                   the dream is fading away.
 
 @@ LITHEND_IconOfSin_4_Lane
-It's all you can think about. The need to get away from this life.
+It's all you can think about. The \cgneed to get away from this life.\c-
 From this accursed world. Nothing is worth it. No matter how hard you
 try in life,
 @@
@@ -109,23 +109,20 @@ try in life,
 
 
 
+^[^[^[^[
 
 
-End it.
+End it,
 
 
 
 
 
-
-         "\cgEnd this miserable existence.\c-"
+         this cycle.
 
 %% LITHEND_IconOfSin_5_Lane
-...
 
-      ...
 
-              ...
 
                     «Why?»
 
@@ -136,7 +133,7 @@ End it.
          "Why bother?"
 
                     «You said it yourself.»
-                    «You need to consider all of the alternatives.»
+                    «You need to consider every path, logically.»
 
          "\cgI have.\c-"
 
@@ -144,34 +141,31 @@ End it.
                     «Those which give you no hope.»
 
          "\cgWhat point is there in having hope?\c-"
-         "\cmThere isn't anything left.\c-"
+         "\cmThere won't be anything left.\c-"
 
-                    «...»
-
-         "\cgJust like I thought.\c-"
-         "\cgYou're just a fucking idiot.\c-"
+                    «Don't let them pave your way.»
 
 %% LITHEND_IconOfSin_6_Lane
-...
+
 
                     «Bring yourself to hope.»
                     «For just one moment.»
 
 
-...
-
-
-
-        ...
 
 
 
 
- ...
+        --
 
 
 
-     ......
+
+ *
+
+
+
+     ..
 
 
                     «It doesn't have to end like this.»
@@ -181,7 +175,7 @@ End it.
       ...
 
 
- "I can do it..."
+ "I'll live."
 
 %% LITHEND_IconOfSin_7_Lane
 \cdYou awaken in a hospital bed, cybernetics turned off,

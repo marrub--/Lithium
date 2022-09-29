@@ -16,12 +16,14 @@ uint8 m_xhairR, m_xhairG, m_xhairB, m_xhairA, m_xhairStyle;
 bool m_xhairEnable, m_xhairEnableJuicer;
 
 void tickCrosshair() {
+   PlayerInfo  p = players[consolePlayer];
+   Lith_Weapon w = Lith_Weapon(p.readyWeapon);
    m_xhairR            = clamp(lith_xhair_r, 0, 255);
    m_xhairG            = clamp(lith_xhair_g, 0, 255);
    m_xhairB            = clamp(lith_xhair_b, 0, 255);
    m_xhairA            = clamp(lith_xhair_a, 0, 255);
    m_xhairStyle        = clamp(lith_xhair_style, 0, 9);
-   m_xhairEnable       = lith_xhair_enable;
+   m_xhairEnable       = lith_xhair_enable && (!w || !w.m_ads);
    m_xhairEnableJuicer = lith_xhair_enablejuicer;
 }
 

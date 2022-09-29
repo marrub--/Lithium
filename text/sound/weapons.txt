@@ -119,6 +119,8 @@ weapons {
    == lsnd/Weapons
    empty  Empty  # Half-Life 2 MMod
    runout RunOut # Counter-Strike: Source
+   adsin  AdsIn  # Call of Duty: Modern Warfare 2
+   adsout AdsOut # ^
 
    sword {
       # sord

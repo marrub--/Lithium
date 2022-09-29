@@ -116,7 +116,7 @@ action(Weapon) state Lith_A_MinigunPostReady(statelabel l) {
 }
 
 action(Weapon) void Lith_A_MinigunFire() {
-   if(invoker.m_ammoState++ == 2) {
+   if(invoker.m_ammoState++ == 1) {
       lith_takeAmmo(1);
       invoker.m_ammoState = 0;
    }
@@ -182,7 +182,7 @@ Fire2:
 Fire3:
    MNGG F 1 bright Lith_A_MinigunFire;
    MNGG C 1 Lith_A_MinigunPostFire;
-   goto Ready;
+   goto ReadySelector;
 }
 
 /* EOF */

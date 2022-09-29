@@ -36,6 +36,7 @@ toki start {
       name   UNKNOWN;
       remote DATA;
       icon   Data;
+      text   _0;
       option _o1 brk;
    }
 }
@@ -59,10 +60,12 @@ toki lane {
       seme kon %lane_met {
          /*             */ option _o2  brk;
       } ante {
-         /**/ seme poki pM option _o0m lipu m_meet;
-         ante seme poki pC option _o0c lipu c_meet;
-         ante              option _o0  lipu other_meet;
-         /*             */ option _o1  brk;
+         option _o0 {
+            /**/ seme poki pM lipu m_meet;
+            ante seme poki pC lipu c_meet;
+            ante              lipu other_meet;
+         }
+         option _o1 brk;
       }
    }
 

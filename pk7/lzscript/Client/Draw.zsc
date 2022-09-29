@@ -129,7 +129,7 @@ ui void drawAllData(RenderEvent evt) {
          drawRect(d.X, d.Y, d.Z, d.W, d.C, sc);
          break;
       case _type_fill:
-         Screen.clearScreen(d.C);
+         Screen.dim(d.C, (d.C>>24)/255.0, 0,0, Screen.getWidth(),Screen.getHeight());
          break;
       }
    }

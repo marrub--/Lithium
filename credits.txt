@@ -48,7 +48,6 @@
 @ Skaven        - Intermission music (The Alchemist)
 @ TerminusEst13 - A whole bunch of sound sources
 @ WildWeasel    - Sound rip from Mac OS 9
-@ _sink         - End of game music
 @ a1337spy      - Various sounds
 ~
                              * Weapons *

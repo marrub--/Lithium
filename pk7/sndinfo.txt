@@ -722,6 +722,8 @@ $random weapons/magbounce { weapons/magbounce1 weapons/magbounce2 weapons/magbou
 $random weapons/magbouncef { weapons/magbouncef1 weapons/magbouncef2 weapons/magbouncef3 }
 weapons/empty lsnd/Weapons/Empty
 weapons/runout lsnd/Weapons/RunOut
+weapons/adsin lsnd/Weapons/AdsIn
+weapons/adsout lsnd/Weapons/AdsOut
 weapons/sword/chargeup lsnd/Weapons/Sword/Charge
 weapons/sword/attack lsnd/Weapons/Sword/Charge1
 weapons/sword/swing lsnd/Weapons/Sword/Swing

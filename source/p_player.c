@@ -190,6 +190,19 @@ alloc_aut(0) stkcall i32 P_Color(i32 pclass) {
    return CR_WHITE;
 }
 
+alloc_aut(0) stkcall i32 P_Char(i32 pclass) {
+   switch(pclass) {
+   case pcl_marine:    return 'm';
+   case pcl_cybermage: return 'c';
+   case pcl_informant: return 'i';
+   case pcl_wanderer:  return 'w';
+   case pcl_assassin:  return 'a';
+   case pcl_darklord:  return 'd';
+   case pcl_thoth:     return 't';
+   }
+   return '\0';
+}
+
 void P_GUI_Close(void) {
    if(pl.modal == _gui_cbi) {
       UnfreezeTime();

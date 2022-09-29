@@ -55,36 +55,42 @@ Select:
 
 Fire:
    #### # 0 lith_jumpNoAmmo(4);
-   #### # 0 lith_a_setInterpolation(true);
    4BOR A 7 A_StartSound("weapons/4bore/fire", lch_weapon);
-   4BOR G 2 offset(140, 121) Lith_A_Fire4Bore;
+   4BOR G 1 offset(140, 121) Lith_A_Fire4Bore;
    4BOR H 1 bright offset(89, 71);
-   4BOR B 1 bright offset(97, 77);
+   4BOR B 2 bright offset(97, 77);
    4BOR G 2 offset(156, 135);
+   #### # 0 lith_a_setInterpolation(true);
    4BOR A 3 offset(15, 48);
-   4BOR A 2 offset(11, 44);
+   4BOR A 3 offset(11, 44);
    4BOR A 1 offset(8, 41);
-   4BOR A 2 offset(5, 39);
+   4BOR A 1 offset(5, 39);
    4BOR A 1 offset(3, 36);
    4BOR A 1 offset(2, 34);
    4BOR A 1 offset(-3, 32);
    4BOR A 1 offset(-5, 32);
    4BOR A 1 offset(-10, 33);
    4BOR A 1 offset(-22, 36);
+   #### # 0 lith_a_setInterpolation(false);
    4BOR C 1 offset(19, 130);
+   #### # 0 lith_a_setInterpolation(true);
    4BOR C 1 offset(4, 135);
    4BOR C 1 offset(-22, 143);
+   #### # 0 lith_a_setInterpolation(false);
    4BOR D 1 offset(-28, 166) {
       A_StartSound("weapons/4bore/open", lch_reload);
       Lith_A_Casing("Lith_Cas4Bore", 15, -1, 40, FRandom(3,4), FRandom(7,8), FRandom(2,9));
       Lith_A_Casing("Lith_Cas4Bore", 15, -4, 40, FRandom(3,4), FRandom(7,8), FRandom(2,9));
    }
+   #### # 0 lith_a_setInterpolation(true);
    4BOR D 1 offset(-41, 172);
    4BOR D 1 offset(-56, 186);
    4BOR D 1 offset(-71, 201);
+   #### # 0 lith_a_setInterpolation(false);
    TNT1 A 12;
    TNT1 A 6 A_StartSound("weapons/4bore/load", lch_reload2);
    4BOR F 1 offset(-43, 182) Lith_A_ReloadBobUp(1);
+   #### # 0 lith_a_setInterpolation(true);
    4BOR F 1 offset(-30, 162);
    4BOR F 1 offset(-25, 155);
    4BOR F 1 offset(-8, 137);

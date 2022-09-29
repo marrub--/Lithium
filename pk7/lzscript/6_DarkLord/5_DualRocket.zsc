@@ -95,26 +95,26 @@ FlashRH:
 FireEmptyLH:
    FRAN A 0;
 FireOffsetsLH:
-   #### # 2 Lith_A_DoubleOffset(_lhs, -48, 48, WOF_INTERPOLATE);
-   #### # 1 Lith_A_DoubleOffset(_lhs, -38, 38, WOF_INTERPOLATE);
+   #### # 2 Lith_A_DoubleOffset(_lhs, -68, 68, WOF_INTERPOLATE);
+   #### # 1 Lith_A_DoubleOffset(_lhs, -46, 46, WOF_INTERPOLATE);
    #### # 2 Lith_A_DoubleOffset(_lhs, -24, 24, WOF_INTERPOLATE);
-   #### # 1 Lith_A_DoubleOffset(_lhs, -6,  11, WOF_INTERPOLATE);
-   #### # 1 Lith_A_DoubleOffset(_lhs, -3,  8,  WOF_INTERPOLATE);
-   #### # 1 Lith_A_DoubleOffset(_lhs, -2,  6,  WOF_INTERPOLATE);
-   #### # 1 Lith_A_DoubleOffset(_lhs, -2,  4,  WOF_INTERPOLATE);
+   #### # 1 Lith_A_DoubleOffset(_lhs, -12, 12, WOF_INTERPOLATE);
+   #### # 1 Lith_A_DoubleOffset(_lhs, -8,  8,  WOF_INTERPOLATE);
+   #### # 1 Lith_A_DoubleOffset(_lhs, -6,  6,  WOF_INTERPOLATE);
+   #### # 1 Lith_A_DoubleOffset(_lhs, -3,  3,  WOF_INTERPOLATE);
    #### # 1 Lith_A_DoubleOffset(_lhs, -1,  1,  WOF_INTERPOLATE);
    #### # 1 Lith_A_DoubleOffset(_lhs,  0,  0,  WOF_INTERPOLATE);
    goto ReadyLH;
 FireEmptyRH:
    SOPH A 0;
 FireOffsetsRH:
-   #### # 2 Lith_A_DoubleOffset(_rhs, 48, 48, WOF_INTERPOLATE);
-   #### # 1 Lith_A_DoubleOffset(_rhs, 38, 38, WOF_INTERPOLATE);
+   #### # 2 Lith_A_DoubleOffset(_rhs, 68, 68, WOF_INTERPOLATE);
+   #### # 1 Lith_A_DoubleOffset(_rhs, 46, 46, WOF_INTERPOLATE);
    #### # 2 Lith_A_DoubleOffset(_rhs, 24, 24, WOF_INTERPOLATE);
-   #### # 1 Lith_A_DoubleOffset(_rhs, 5,  11, WOF_INTERPOLATE);
-   #### # 1 Lith_A_DoubleOffset(_rhs, 3,  8,  WOF_INTERPOLATE);
-   #### # 1 Lith_A_DoubleOffset(_rhs, 2,  6,  WOF_INTERPOLATE);
-   #### # 1 Lith_A_DoubleOffset(_rhs, 2,  4,  WOF_INTERPOLATE);
+   #### # 1 Lith_A_DoubleOffset(_rhs, 12, 12, WOF_INTERPOLATE);
+   #### # 1 Lith_A_DoubleOffset(_rhs, 8,  8,  WOF_INTERPOLATE);
+   #### # 1 Lith_A_DoubleOffset(_rhs, 6,  6,  WOF_INTERPOLATE);
+   #### # 1 Lith_A_DoubleOffset(_rhs, 3,  3,  WOF_INTERPOLATE);
    #### # 1 Lith_A_DoubleOffset(_rhs, 1,  1,  WOF_INTERPOLATE);
    #### # 1 Lith_A_DoubleOffset(_rhs, 0,  0,  WOF_INTERPOLATE);
    goto ReadyRH;

@@ -6,9 +6,21 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_WeaponScopedToken : Inventory {default {Inventory.MaxAmount 1;}}
-
 class Lith_Weapon : Weapon;
+
+default {
+   Inventory.PickupMessage "";
+   Inventory.PickupSound "";
+   Lith_Weapon.AdsInSound "weapons/adsin";
+   Lith_Weapon.AdsOutSound "weapons/adsout";
+   Lith_Weapon.AdsZoom 1.0;
+   Lith_Weapon.DefaultSpeed 1.0;
+   Lith_Weapon.SprintSpeed 2.0;
+   Weapon.BobSpeed 1.5;
+   Weapon.BobStyle "InverseSmooth";
+   +Inventory.UnTossable
+   +Weapon.NoAlert
+}
 
 enum Lith_PSprite {
    _psp_weapon = psp_weapon,
@@ -58,48 +70,32 @@ enum Lith_MeleeFlags {
    _mlf_damage_stepup,
 }
 
-default {
-   Inventory.PickupMessage "";
-   Inventory.PickupSound "";
-   Lith_Weapon.ScopeInSound "weapons/shotgun/zoomin";
-   Lith_Weapon.ScopeOutSound "weapons/shotgun/zoomout";
-   Lith_Weapon.ScopeZoom 1.0;
-   Lith_Weapon.DefaultSpeed 1.0;
-   Lith_Weapon.SprintSpeed 2.0;
-   Weapon.BobSpeed 1.5;
-   Weapon.BobStyle "InverseSmooth";
-
-   +Inventory.UnTossable
-   +Weapon.NoAlert
+enum Lith_Ads {
+   _ads_none,
+   _ads_scope,
+   _ads_sights,
 }
 
-int m_fired;
-int m_max;
-int m_firePattern;
-
-meta sound m_scopeOutSnd;
-meta sound m_scopeInSnd;
-meta double m_scopeZoom;
+meta sound m_adsOutSnd;
+meta sound m_adsInSnd;
+meta double m_adsZoom;
 meta double m_defaultSpeed;
 meta double m_sprintSpeed;
-
 meta class<Actor> m_spawnType;
+meta class<Lith_Ammo> m_ammoType;
 
 bool m_side;
+int m_ads;
+int m_firePattern;
+int m_fired;
+int m_max;
 
-protected bool m_ads;
-
-class<Lith_Ammo> m_ammoType;
-
-property AmmoType: m_ammoType;
-property MagSize:  m_max;
-
-property ScopeOutSound: m_scopeOutSnd;
-property ScopeInSound:  m_scopeInSnd;
-property ScopeZoom:     m_scopeZoom;
-
-property SpawnType: m_spawnType;
-
+property AmmoType:     m_ammoType;
+property MagSize:      m_max;
+property AdsOutSound:  m_adsOutSnd;
+property AdsInSound:   m_adsInSnd;
+property AdsZoom:      m_adsZoom;
+property SpawnType:    m_spawnType;
 property DefaultSpeed: m_defaultSpeed;
 property SprintSpeed:  m_sprintSpeed;
 
@@ -124,8 +120,8 @@ virtual void lith_reloadFinish(bool isAuto) {
 
 override void markPrecacheSounds() {
    super.markPrecacheSounds();
-   markSound(m_scopeOutSnd);
-   markSound(m_scopeInSnd);
+   markSound(m_adsOutSnd);
+   markSound(m_adsInSnd);
 }
 
 override double getSpeedFactor() {
@@ -175,11 +171,11 @@ action(Weapon) void lith_a_setInterpolation(bool on) {
 action(Weapon) void lith_a_overlayTick() {
    float a = 1.0;
    int style = style_normal;
-   if(countInv("Lith_WeaponScopedToken")) {
+   if(invoker.m_ads == _ads_scope) {
       a = lith_weapons_scopealpha;
       style = style_subtract;
    } else if(!invoker.m_ads) {
-      a_zoomFactor(1.0, ZOOM_INSTANT);
+      lith_a_adsZoomOut();
    }
    a *= Lith_UTIL.pData(_pdt_alpha) / FIX;
 
@@ -299,7 +295,7 @@ action(Weapon) void Lith_A_DoubleOffset(bool left, int x, int y, int flags = 0) 
 action(Weapon) state Lith_A_Ready(int flags = 0) {
    let psp = player.getPSprite(_psp_overlay_hax);
    if(!psp || !psp.curState) {
-      A_Overlay(_psp_overlay_hax, "_MultithreadedFuckingOverlaysBecauseGodIsDeadAndGrafZahlKilledHim");
+      A_Overlay(_psp_overlay_hax, "_OverlayHax");
    }
 
    let st = invoker.lith_ready(flags);
@@ -367,34 +363,37 @@ action(Weapon) void Lith_A_ReloadBobDn(double amt) {
    CallACS("Lith_RecoilUp", int(v * FIX));
 }
 
-action(Weapon) void Lith_A_ScopeIn() {
-   if(!CountInv("Lith_WeaponScopedToken")) {
-      self.GiveInventory("Lith_WeaponScopedToken", 1);
-      A_ZoomFactor((1+lith_weapons_zoomfactor)*invoker.m_scopeZoom);
-      A_StartSound(invoker.m_scopeInSnd, lch_scope);
+action(Weapon) void lith_a_adsZoomFactor(double amount = 1.0) {
+   a_zoomFactor((1+lith_weapons_zoomfactor) * amount * invoker.m_adsZoom);
+}
+
+action(Weapon) void lith_a_adsZoomOut() {
+   a_zoomFactor(1.0, ZOOM_INSTANT);
+}
+
+action(Weapon) void lith_a_adsCancel() {
+   invoker.m_ads = _ads_none;
+   lith_a_adsZoomOut();
+}
+
+action(Weapon) void lith_a_adsIn(int ads = _ads_sights) {
+   if(!invoker.m_ads) {
+      invoker.m_ads = ads;
+      lith_a_adsZoomFactor();
+      a_startSound(invoker.m_adsInSnd, lch_scope);
    }
 }
 
-action(Weapon) void Lith_A_CancelScope() {
-   invoker.m_ads = false;
-   self.TakeInventory("Lith_WeaponScopedToken", 1);
-   A_ZoomFactor(1.0, ZOOM_INSTANT);
-}
-
-action(Weapon) void Lith_A_ScopeOut() {
-   if(CountInv("Lith_WeaponScopedToken")) {
-      Lith_A_CancelScope();
-      A_StartSound(invoker.m_scopeOutSnd, lch_scope);
+action(Weapon) void lith_a_adsOut() {
+   if(invoker.m_ads) {
+      lith_a_adsCancel();
+      a_startSound(invoker.m_adsOutSnd, lch_scope);
    }
 }
 
-action(Weapon) void Lith_A_ScopeToggle() {
-   if(CountInv("Lith_WeaponScopedToken")) Lith_A_ScopeOut();
-   else                                   Lith_A_ScopeIn();
-}
-
-action(Weapon) void Lith_A_ZoomFactorScoped(double amount) {
-   A_ZoomFactor((1+lith_weapons_zoomfactor) * amount * invoker.m_scopeZoom);
+action(Weapon) state lith_a_adsToggle(int ads = _ads_sights) {
+   if(invoker.m_ads) {lith_a_adsOut();   return resolveState("AdsOut");}
+   else              {lith_a_adsIn(ads); return resolveState("AdsIn");}
 }
 
 action(Weapon) void Lith_GunSmoke(class<Actor> type, double x = 0, double y = 6, bool ignoreCrouch = false) {
@@ -538,16 +537,16 @@ Spawn:
 }
 
 states(Weapon) {
-_MultithreadedFuckingOverlaysBecauseGodIsDeadAndGrafZahlKilledHim:
+_OverlayHax:
    TNT1 A 1 lith_a_overlayTick;
    loop;
+AdsOut:
+AdsIn:
 FireEmpty:
 ReadySelector:
    #### # 0 {
       lith_a_setInterpolation(false);
-      return CountInv("Lith_WeaponScopedToken") || invoker.m_ads
-         ? ResolveState("AltReady")
-         : ResolveState("Ready");
+      return invoker.m_ads ? ResolveState("AltReady") : ResolveState("Ready");
    }
    stop;
 }

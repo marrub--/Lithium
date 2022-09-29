@@ -22,9 +22,9 @@ lipu_ilo endings {
 
    lipu music_subr {
       seme poki pM {
-         music "lmusic/lithambientwip3.ogg";
+         music "lmusic/braun.opus";
       } ante seme poki pC {
-         music "lmusic/tmary7.ogg";
+         music "lmusic/velar.opus";
       } ante seme poki pI {
       } ante seme poki pW {
       } ante seme poki pA {
@@ -32,7 +32,7 @@ lipu_ilo endings {
       } ante seme poki pD {
          music "lmusic/natural.opus";
       } ante seme poki pT {
-         music "lmusic/rg.ogg";
+         music "lmusic/fribby.opus";
       }
       rts;
    }
@@ -50,29 +50,29 @@ lipu_ilo endings {
       seme poki pM {
          image   ":End:Lane";
          fade_in 50;
-         crawl   IconOfSin_1_Lane 900;
-         crawl   IconOfSin_2_Lane 700;
-         crawl   IconOfSin_3_Lane 700;
-         crawl   IconOfSin_4_Lane 700;
-         crawl   IconOfSin_5_Lane 700;
-         crawl   IconOfSin_6_Lane 700;
+         crawl   IconOfSin_1_Lane 500;
+         crawl   IconOfSin_2_Lane 500;
+         crawl   IconOfSin_3_Lane 500;
+         crawl   IconOfSin_4_Lane 500;
+         crawl   IconOfSin_5_Lane 500;
+         crawl   IconOfSin_6_Lane 500;
          crawl   IconOfSin_7_Lane 400;
       } ante seme poki pC {
          image   ":End:Jem";
          fade_in 50;
-         crawl   IconOfSin_1_Jem 600;
-         crawl   IconOfSin_2_Jem 600;
-         crawl   IconOfSin_3_Jem 600;
-         crawl   IconOfSin_4_Jem 600;
-         crawl   IconOfSin_5_Jem 600;
-         crawl   IconOfSin_6_Jem 600;
-         crawl   IconOfSin_7_Jem 600;
-         crawl   IconOfSin_8_Jem 600;
+         crawl   IconOfSin_1_Jem 500;
+         crawl   IconOfSin_2_Jem 500;
+         crawl   IconOfSin_3_Jem 500;
+         crawl   IconOfSin_4_Jem 500;
+         crawl   IconOfSin_5_Jem 500;
+         crawl   IconOfSin_6_Jem 500;
+         crawl   IconOfSin_7_Jem 500;
+         crawl   IconOfSin_8_Jem 500;
          crawl   IconOfSin_9_Jem 400;
       } ante seme poki pD {
          image   ":End:Ari";
          fade_in 50;
-         crawl   IconOfSin_1_Ari 600;
+         crawl   IconOfSin_1_Ari 35;
       }
       lipu common;
    }

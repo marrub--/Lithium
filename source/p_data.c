@@ -112,7 +112,7 @@ void P_Dat_PTickPre(void) {
 
    pl.name = strp(ACS_PrintName(0));
 
-   pl.scopetoken = InvNum(so_WeaponScopedToken);
+   pl.scopetoken = ServCallI(sm_WeaponScoped);
 
    if(ACS_Timer() > 4) {
       /**/ if(pl.health < pl.old.health) pl.healthused += pl.old.health - pl.health;
@@ -243,7 +243,6 @@ void P_Init(void) {
    if(dbgflags(dbgf_score)) pl.score = SCR_MAX / 4;
    #endif
    SetViewHeight(0, pl.viewheight);
-   InvTake(so_WeaponScopedToken, INT32_MAX);
    P_CBI_PMinit();
    P_Upg_PMInit();
    pl.frozen     = 0;
