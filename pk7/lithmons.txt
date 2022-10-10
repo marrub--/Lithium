@@ -422,11 +422,11 @@ presets {
 /* Angelic Aviary */
 "" {
    pre: ZombieMan     type: zombie        filter: "RevolverDoll";
-   pre: ShotgunGuy    type: zombiesg      filter: "ShotgunDuo";
+   pre: ShotgunGuy    type: zombiesg      filter: "ShotgunDuo";  
    pre: ChaingunGuy   type: zombiecg      filter: "Snowball";
    pre: Imp           type: imp           filter: "Cherub";
    pre: Demon         type: demon         filter: "Cardinal";
-   pre: Spectre       type: demon         filter: "Blackbird";
+   pre: Spectre       type: demon         filter: "BlackBird";
    pre: LostSoul      type: lostsoul      filter: "Putto";
    pre: Mancubus      type: mancubus      filter: "Principality";
    pre: Arachnotron   type: arachnotron   filter: "Ophanim";
@@ -434,12 +434,19 @@ presets {
    pre: HellKnight    type: hellknight    filter: "Authority";
    pre: BaronOfHell   type: baron         filter: "Virtue_Virgin";
    pre: Revenant      type: revenant      filter: "Aspect_of_Iris";
+   pre: PainElemental type: painelemental filter: "JoyElemental";
    pre: Archvile      type: archvile      filter: "Dollmaykr";
-   pre: SpiderDemon   type: mastermind    filter: "SeraphClone";
+   pre: SpiderDemon   type: mastermind    filter: "Crusader_Queen";
+   pre: BaronOfHell   type: baron         filter: "Crusader_QueenPhase2";
    pre: CyberDemon    type: cyberdemon    filter: "Seraph";
-   pre: CyberDemon    type: angel         filter: "Great_Seraph";
-   pre: CyberDemon    type: angel         filter: "Great_Seraph2";
-   pre: CyberDemon    type: angel         filter: "Queen_of_Queens";
+   pre: CyberDemon    type: cyberdemon    filter: "PureSeraph";
+   pre: CyberDemon    type: cyberdemon    filter: "CensoredSeraph";
+   pre: CyberDemon    type: angel    	  filter: "Great_Seraph";
+   pre: CyberDemon    type: angel   	  filter: "Great_Seraph2";
+   pre: CyberDemon    type: angel    	  filter: "Queen_of_Queens";
+   pre: CyberDemon    type: angel    	  filter: "Destroying_Angel";
+   pre: CyberDemon    type: angel    	  filter: "Willendorf";
+
    pre: ZombieMan     type: zombie        filter: "KnifeDoll";
    pre: ZombieMan     type: zombie        filter: "TurboDoll";
    pre: ZombieMan     type: zombie        filter: "TurboRevolverDoll";
@@ -447,13 +454,41 @@ presets {
    pre: BaronOfHell   type: baron         filter: "RedEgg";
    pre: BaronOfHell   type: baron         filter: "RedEgg2";
    pre: BaronOfHell   type: baron         filter: "RedEgg3";
-   pre: ChaingunGuy   type: zombiecg      filter: "SnowFlake";
+
+   pre: ChaingunGuy   type: zombiecg      filter: "Rusalka";
    pre: Imp           type: imp           filter: "EliteCherub";
+   pre: Imp           type: imp           filter: "LessAnnoyingCherub"; 
    pre: Cacodemon     type: cacodemon     filter: "Aphrodites_Kiss";
    pre: Cacodemon     type: cacodemon     filter: "Aphrodites_Kiss2";
    pre: Cacodemon     type: archvile      filter: "Elite_Aphrodites_Kiss";
    pre: HellKnight    type: hellknight    filter: "Jay";
    pre: HellKnight    type: hellknight    filter: "Jay2";
+   pre: Imp           type: imp           filter: "WillendorfCherub";
+   pre: BaronOfHell   type: baron         filter: "Virtue_Virgin_Classic";
+
+   pre: ZombieMan     type: zombie        filter: "QuietRevolverDoll";
+   pre: ShotgunGuy    type: zombiesg      filter: "QuietShotgunDuo";  
+   pre: ChaingunGuy   type: zombiecg      filter: "QuietSnowball";
+   pre: Imp           type: imp           filter: "QuietCherub";
+   pre: Demon         type: demon         filter: "QuietCardinal";
+   pre: Spectre       type: demon         filter: "QuietBlackBird";
+   pre: LostSoul      type: lostsoul      filter: "QuietPutto";
+   pre: Mancubus      type: mancubus      filter: "QuietPrincipality";
+   pre: Arachnotron   type: arachnotron   filter: "QuietOphanim";
+   pre: Cacodemon     type: cacodemon     filter: "QuietKiss";
+   pre: HellKnight    type: hellknight    filter: "QuietAuthority";
+   pre: BaronOfHell   type: baron         filter: "QuietVirtue_Virgin";
+   pre: Revenant      type: revenant      filter: "QuietAspect_of_Iris";
+   pre: PainElemental type: painelemental filter: "QuietJoyElemental";
+   pre: Archvile      type: archvile      filter: "QuietDollmaykr";
+   pre: SpiderDemon   type: mastermind    filter: "QuietCrusader_Queen";
+   pre: BaronOfHell   type: baron         filter: "QuietCrusader_QueenPhase2";
+   pre: CyberDemon    type: cyberdemon    filter: "QuietSeraph";
+   pre: CyberDemon    type: cyberdemon    filter: "QuietPureSeraph";
+   pre: CyberDemon    type: cyberdemon    filter: "QuietCensoredSeraph";
+   pre: CyberDemon    type: angel    	  filter: "QuietGreat_Seraph";
+   pre: CyberDemon    type: angel   	  filter: "QuietGreat_Seraph2";
+   pre: CyberDemon    type: angel    	  filter: "QuietQueen_of_Queens";
 }
 
 /* Pandemonia Monsters */
