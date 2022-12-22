@@ -34,9 +34,9 @@ bool G_TxtBox_Imp(struct gui_state *g, gid_t id, struct gui_arg_txt *a) {
       st->changed = false;
    }
 
-   PrintSprite(sp_UI_ResultFrame, a->x-3 + g->ox,1, a->y-3 + g->oy,1);
+   PrintSprite(sp_UI_ResultFrame, a->x-2 + g->ox,1, a->y-1 + g->oy,1);
 
-   SetClipW(a->x + g->ox, a->y + g->oy, 260, 200, 260);
+   G_Clip(g, a->x, a->y, 130, 200, 130);
    ACS_BeginPrint();
    if(st->tbptr) {
       PrintChrSt(Cps_Expand(st->txtbuf, 0, st->tbptr));
@@ -47,7 +47,7 @@ bool G_TxtBox_Imp(struct gui_state *g, gid_t id, struct gui_arg_txt *a) {
       ACS_PrintString(ns(lang(sl_gui_textbox)));
    }
    PrintText(sf_smallfnt, g->defcr, a->x + g->ox,1, a->y + g->oy,1);
-   ClearClip();
+   G_ClipRelease(g);
 
    return st->changed;
 }

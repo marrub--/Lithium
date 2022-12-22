@@ -26,8 +26,7 @@ struct word_root {
    cstr root;
 };
 
-/*
- * consonants:
+/* consonants:
  * q [kʷ] k [k]
  * v [v] s [ɕ] t [t]
  * r [ɻ] l [l]

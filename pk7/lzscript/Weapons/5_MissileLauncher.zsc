@@ -33,7 +33,7 @@ override void markPrecacheSounds() {
 }
 action(Weapon) State Lith_A_FireMissile() {
    Lith_A_MagIncr();
-   A_AlertMonsters();
+   SoundAlert(Invoker.Owner);
    A_StartSound("weapons/missile/fire", lch_weapon);
    lith_takeAmmo();
    for(int i = 0; i < 3; i++)

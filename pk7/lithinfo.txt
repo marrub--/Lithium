@@ -169,6 +169,8 @@
 "weapons auto" {
    cl: pM tag: Pistol unl: "Omakeda";
    cl: pC tag: Mateba unl: "AOF";
+   cl: pD tag: Khanda;
+   cl: pD tag: "700Express";
 }
 
 "weapons" {
@@ -219,10 +221,10 @@
    cl: gO tag: MissileLauncher;
    cl: gO tag: PlasmaDiffuser unl: "SYM43 MDDO Semaphore";
 
-   cl: pD tag: Khanda;
    cl: pD tag: Kampilan;
-   cl: pD tag: "700Express";
+   cl: pD tag: "700E_A";
    cl: pD tag: ShrapnelGun;
+   cl: pD tag: Shrapnel_A;
    cl: pD tag: "4Bore";
    cl: pD tag: Minigun unl: "AOF";
    cl: pD tag: Motra;
@@ -278,11 +280,9 @@
    cl: pC tag: MCluster3Jem;
    cl: pC tag: MPhantomJem;
 
-   /*
    cl: pC tag: MCluster1Ari;
    cl: pC tag: MCluster2Ari;
    cl: pC tag: MCluster3Ari;
-   */
    cl: pC tag: MPhantomAri unl: "DimDriver";
 }
 

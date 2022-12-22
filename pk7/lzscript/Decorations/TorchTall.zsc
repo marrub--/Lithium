@@ -15,9 +15,9 @@ class Lith_TorchTall : Lith_TorchDecor {
       Lith_TorchDecor.Height 55;
    }
    states {
-   Spawn:
-      LI03 LLLLMMMMNNNNOOOO 1 bright Lith_A_SpawnFlame;
-      loop;
+   Spawn:    #DTT AAAABBBBCCCCDDDD 1 bright Lith_A_SpawnFlame; loop;
+   Inactive: #DTT E -1; stop;
+   Death:    #DTT F 0; goto Death1;
    }
 }
 

@@ -20,8 +20,8 @@ class Lith_700Laser : Actor {
 
    states {
    Spawn:
-      LI09 X 2;
-      LI09 X 1 A_FadeOut;
+      #ELA A 2;
+      #ELA A 1 A_FadeOut;
       wait;
    }
 }
@@ -35,7 +35,7 @@ class Lith_700Laser2 : Lith_700Laser {
 class Lith_700Laser3 : Lith_700Laser {
    states {
    Spawn:
-      LI09 X -1;
+      #ELA A -1;
       stop;
    }
 }
@@ -78,7 +78,7 @@ override void tick() {
 action(Weapon) void lith_fire700e() {
    Lith_A_RecoilUp(2.5);
    lith_gunFlash();
-   a_alertMonsters();
+   soundAlert(invoker.owner);
    A_Recoil(1.5);
    A_Quake(2, 3, 0, 128);
    Lith_FireBullets(0, 0, -1, random[lith_dlweapon](60, 102), FBF_NORANDOM, "Lith_700Bullet", 4, tracer: _tr_slow);

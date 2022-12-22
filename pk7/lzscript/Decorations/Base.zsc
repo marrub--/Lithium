@@ -9,7 +9,7 @@
 class Lith_SwitchableDecor : Actor {
    default {
       Mass int.max;
-      Activation THINGSPEC_Default | THINGSPEC_NoDeathSpecial | THINGSPEC_Switch | THINGSPEC_Deactivate;
+      Activation AF_DEFAULT|AF_NODEATHSPECIAL|AF_SWITCH|AF_DEACTIVATE;
       Lith_SwitchableDecor.Volume 1;
       +Solid
       +UseSpecial

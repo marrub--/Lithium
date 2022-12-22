@@ -14,7 +14,7 @@ humidity:    60
 temperature: 140
 windspeed:   100
 sky:         "vanilla"
-script:      "lmisc/TestMap.ldlg";
+script:      "lmisc/TestMap.mmmm";
 
 name:        "LITHBOX"
 seed:        0
@@ -33,7 +33,7 @@ humidity:    0
 temperature: -270
 windspeed:   0
 sky:         "vanilla"
-script:      "lmisc/Abyss.ldlg";
+script:      "lmisc/Abyss.mmmm";
 
 name:        "LITHEND"
 seed:        0
@@ -43,6 +43,6 @@ humidity:    0
 temperature: 20
 windspeed:   0
 sky:         "nochange"
-script:      "lmisc/Endings.ldlg";
+script:      "lmisc/Endings.mmmm";
 
 /* EOF */

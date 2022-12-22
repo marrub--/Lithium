@@ -5130,6 +5130,275 @@
    "114";
 "QUITMSGEND" =
    "(Quit?)";
+"LITH_BLUE_INTENSITY" =
+   "Blue intensity";
+"LITH_GREEN_INTENSITY" =
+   "Green intensity";
+"LITH_RED_INTENSITY" =
+   "Red intensity";
+"LITH_gui_buyfiller" =
+   "Click protection for buying items";
+"LITH_TOOLTIP_gui_buyfiller" =
+   "Time (in 35ths of seconds) needed to hold a click to buy upgrades and items.";
+"LITH_gui_cursor" =
+   "Cursor";
+"LITH_TOOLTIP_gui_cursor" =
+   "Which cursor graphic to use for in-game GUIs.";
+"LITH_gui_defcr" =
+   "Default text color";
+"LITH_TOOLTIP_gui_defcr" =
+   "The color for most of the text in in-game GUIs.";
+"LITH_gui_jpfont" =
+   "Japanese font";
+"LITH_TOOLTIP_gui_jpfont" =
+   "The font to use when Japanese is set as the language.";
+"LITH_gui_curspeed" =
+   "Cursor speed";
+"LITH_gui_theme" =
+   "Interface theme";
+"LITH_hud_type" =
+   "Type";
+"LITH_hud_expbar" =
+   "Show experience bar";
+"LITH_hud_logfromtop" =
+   "Display log at top of screen";
+"LITH_hud_logsize" =
+   "Log scale";
+"LITH_hud_logcolor" =
+   "Log text color";
+"LITH_hud_showarmorind" =
+   "Show reactive armor indicator";
+"LITH_hud_showdamage" =
+   "Display damage dealt";
+"LITH_hud_showlog" =
+   "Show log";
+"LITH_hud_showlvl" =
+   "Show level";
+"LITH_hud_showscore" =
+   "Show score";
+"LITH_hud_showweapons" =
+   "Show weapons";
+"LITH_hud_damagealpha" =
+   "Damage alpha";
+"LITH_hud_showitems" =
+   "Show near-by items";
+"LITH_hud_showinteract" =
+   "Show near-by interactables";
+"LITH_hud_showammo" =
+   "Show ammo totals";
+"LITH_hud_itemcolor" =
+   "Near-by item text color";
+"LITH_light_b" =
+   "$LITH_BLUE_INTENSITY";
+"LITH_light_battery" =
+   "Battery";
+"LITH_light_g" =
+   "$LITH_GREEN_INTENSITY";
+"LITH_light_r" =
+   "$LITH_RED_INTENSITY";
+"LITH_light_radius" =
+   "Radius";
+"LITH_light_regen" =
+   "Battery regeneration";
+"LITH_player_altinvuln" =
+   "Alternate invulnerability palette";
+"LITH_TOOLTIP_player_altinvuln" =
+   "Changes the inverted palette to an orange one. My eyes, they're saved!";
+"LITH_player_ammodisp" =
+   "Display picked up ammo";
+"LITH_player_brightweps" =
+   "Bright weapon pickups";
+"LITH_player_damagebob" =
+   "Bob view when damaged";
+"LITH_player_damagebobmul" =
+   "Damage bob multiplier";
+"LITH_player_footstepvol" =
+   "Footstep volume";
+"LITH_player_itemdisp" =
+   "Display picked up items";
+"LITH_player_itemdispalpha" =
+   "Score/item/ammo alpha";
+"LITH_player_lvsys" =
+   "Level-up system";
+"LITH_player_noitemfx" =
+   "No item effects";
+"LITH_TOOLTIP_player_noitemfx" =
+   "Disables the effects around items such as weapons and Phantom rewards, leaving only the item itself.";
+"LITH_player_pronouns" =
+   "Pronouns";
+"LITH_TOOLTIP_player_pronouns" =
+   "If this box is empty, then the default pronouns for your player gender will be used. Otherwise, provide them in this format:\n"
+   "\n"
+   "subject/object/possessive determiner/possessive/action\n"
+   "\n"
+   "For example: they/them/their/theirs/they're";
+"LITH_player_rainshader" =
+   "Enable rain shader";
+"LITH_TOOLTIP_player_rainshader" =
+   "TECHNOLOGY! Puts rain from the air on your screen. Shouldn't cause any issues.";
+"LITH_player_resultssound" =
+   "Play sounds on results/depth meter";
+"LITH_player_scoredisp" =
+   "Display score gained";
+"LITH_player_scoresound" =
+   "Play a sound when score is gained";
+"LITH_player_sillypickups" =
+   "Silly pickup messages";
+"LITH_TOOLTIP_player_sillypickups" =
+   "Highly recommended!";
+"LITH_player_teleshop" =
+   "Teleport in bought items and upgrades";
+"LITH_TOOLTIP_player_teleshop" =
+   "Creates an item in the world when you buy something.";
+"LITH_player_viewtilt" =
+   "View tilt when strafing";
+"LITH_TOOLTIP_player_viewtilt" =
+   "Motion sickness warning. Changes how much the view tilts when moving laterally.";
+"LITH_scanner_font" =
+   "Font";
+"LITH_scanner_bar" =
+   "Health bar";
+"LITH_scanner_color" =
+   "Text color";
+"LITH_scanner_slide" =
+   "Positioning";
+"LITH_scanner_xoffs" =
+   "Horizontal offset";
+"LITH_scanner_yoffs" =
+   "Vertical offset";
+"LITH_st_autobuy_1" =
+   "Auto-buy \caSet 1";
+"LITH_TOOLTIP_autobuy_1" =
+   "Automatically buys this autogroup when you have the Score available.";
+"LITH_st_autobuy_2" =
+   "Auto-buy \cdSet 2";
+"LITH_st_autobuy_3" =
+   "Auto-buy \cnSet 3";
+"LITH_st_autobuy_4" =
+   "Auto-buy \cfSet 4";
+"LITH_TOOLTIP_autobuy_2" =
+   "$LITH_TOOLTIP_autobuy_1";
+"LITH_TOOLTIP_autobuy_3" =
+   "$LITH_TOOLTIP_autobuy_1";
+"LITH_TOOLTIP_autobuy_4" =
+   "$LITH_TOOLTIP_autobuy_1";
+"LITH_st_done_intro" =
+   "Don't play intro on next game start";
+"LITH_sv_autosave" =
+   "Autosave interval";
+"LITH_TOOLTIP_sv_autosave" =
+   "\cg(Applies on next game start)";
+"LITH_sv_difficulty" =
+   "Difficulty base";
+"LITH_TOOLTIP_sv_difficulty" =
+   "The base scale for enemy levels; 100% means enemies can spawn at maximum level and rank on even the first map.\n"
+   "\n"
+   "\ck(Applies on next map start)";
+"LITH_sv_extrahard" =
+   "Extra Hard";
+"LITH_TOOLTIP_sv_extrahard" =
+   "Enables more difficult enemy patterns.\n"
+   "\n"
+   "\ck(Applies on next map start)";
+"LITH_sv_lessparticles" =
+   "Less particles";
+"LITH_sv_minhealth" =
+   "Minimum health on map start";
+"LITH_sv_nobossdrop" =
+   "Start with phantom rewards";
+"LITH_TOOLTIP_sv_nobossdrop" =
+   "Gives you all rewards from mid-mission bosses added by Lithium. Only enable if you know what this is.\n"
+   "\n"
+   "\cg(Applies on next game start)";
+"LITH_sv_nobosses" =
+   "No phantoms";
+"LITH_TOOLTIP_sv_nobosses" =
+   "Disables mid-mission bosses added by Lithium. Only enable if you know what this is.\n"
+   "\n"
+   "\cg(Applies on next game start)";
+"LITH_sv_postgame" =
+   "Enable";
+"LITH_TOOLTIP_sv_postgame" =
+   "\cgWarning:\c- Post-game content can \cicause saves to be effectively deleted\c-, and will have \cipermanent repercussions\c-. Only enable if you really want more.";
+"LITH_sv_rain" =
+   "Enable raining";
+"LITH_TOOLTIP_sv_rain" =
+   "\ck(Applies on next map start)";
+"LITH_sv_rainphysics" =
+   "Rain physics";
+"LITH_TOOLTIP_sv_rainphysics" =
+   "Advanced: Rain has heavy motions, dynamically pitches and rolls. (Default.)\n"
+   "Static: Rain only lightly reacts to wind, always pouring straight down. (Similar to old versions.)\n"
+   "Simple: Rain reacts strongly to wind, always pouring straight down. (Initial wind velocity concept.)";
+"LITH_sv_revenge" =
+   "Explode on death";
+"LITH_sv_sky" =
+   "Replace skies";
+"LITH_TOOLTIP_sv_sky" =
+   "No change: No changes will be made to skies. (Most compatible.)\n"
+   "Vanilla-like: Allows vanilla skies to have additional visual effects. (May be incompatible with some edge cases. Default.)\n"
+   "Replace skies: A palette of replacement skies based on the environment.\n"
+   "Shader: A dynamic, soft, full sky replacement for a more chill atmosphere.\n"
+   "\n"
+   "\ck(Applies on next map start)";
+"LITH_sv_skydarkening" =
+   "Outside sector darkening";
+"LITH_sv_wepdrop" =
+   "Drop weapons from zombies";
+"LITH_TOOLTIP_sv_wepdrop" =
+   "Mainly exists for map compatibility. Drops weapons from zombie enemies like vanilla. May cause issues in normal gameplay.\n"
+   "\n"
+   "\ck(Applies on next map start)";
+"LITH_weapons_casingfadeout" =
+   "Casings fade out";
+"LITH_weapons_casings" =
+   "Emit casings from weapons which use them";
+"LITH_weapons_fastlazshot" =
+   "Better laser shotgun performance";
+"LITH_weapons_magdrops" =
+   "Drop magazines from weapons";
+"LITH_weapons_magfadeout" =
+   "Magazines fade out";
+"LITH_weapons_magicselanims" =
+   "Magic selection animations";
+"LITH_weapons_nofirebob" =
+   "No mid-fire bobbing";
+"LITH_weapons_rainbowlaser" =
+   "Rainbow lasers";
+"LITH_weapons_recoil" =
+   "Visual recoil amount";
+"LITH_weapons_reducedsg" =
+   "Reduced shotgun sound";
+"LITH_weapons_reloadbob" =
+   "Reload bobbing amount";
+"LITH_weapons_reloadempty" =
+   "Reload the weapon upon magazine emptying";
+"LITH_weapons_ricochetvol" =
+   "Ricochet volume";
+"LITH_weapons_riflemodeclear" =
+   "Clear rifle mode on switch";
+"LITH_weapons_riflescope" =
+   "Modal Rifle scope";
+"LITH_weapons_scopealpha" =
+   "Scope opacity";
+"LITH_weapons_zoomfactor" =
+   "Scope zoom factor";
+"LITH_xhair_a" =
+   "Alpha";
+"LITH_xhair_b" =
+   "$LITH_BLUE_INTENSITY";
+"LITH_xhair_enable" =
+   "Enable";
+"LITH_xhair_enablejuicer" =
+   "Juicer";
+"LITH_TOOLTIP_xhair_enablejuicer" =
+   "Seriously, why do they call them that? The little thingies around the crosshair that follow the recoil. They're... juicy. Guess that's why.";
+"LITH_xhair_g" =
+   "$LITH_GREEN_INTENSITY";
+"LITH_xhair_r" =
+   "$LITH_RED_INTENSITY";
+"LITH_xhair_style" =
+   "Style";
 "LITH_st_suff_perc" =
    "%";
 "LITH_st_suff_mult" =
@@ -5398,331 +5667,54 @@
    "Replace skies";
 "LITH_st_name_sky_3" =
    "Shader";
-"LITH_st_labl_gui" =
-   "GUI";
-"LITH_st_labl_hud" =
-   "HUD";
-"LITH_st_labl_itm" =
+"LITH_st_tab_gui" =
+   "Interface";
+"LITH_st_tab_itm" =
    "$LITH_BIP_NAME_ITEMS";
-"LITH_st_labl_ply" =
-   "Player";
-"LITH_st_labl_wep" =
+"LITH_st_tab_wep" =
    "$LITH_BIP_NAME_WEAPONS";
-"LITH_st_labl_wld" =
-   "World";
-"LITH_st_labl_gui_cbi" =
-   "\cnCBI";
-"LITH_st_labl_gui_language" =
-   "\cnLanguage";
-"LITH_st_labl_gui_results" =
-   "\cnResults Screen";
-"LITH_st_labl_hud_hud" =
-   "\cnHeads-Up Display";
-"LITH_st_labl_hud_log" =
-   "\cnLog";
-"LITH_st_labl_hud_nearby" =
-   "\cnNear-by Items";
-"LITH_st_labl_hud_personal" =
-   "\cnPersonal Info (Top-Right Corner)";
-"LITH_st_labl_hud_pops" =
-   "\cnPop-ups and Logging";
-"LITH_st_labl_hud_scanner" =
-   "\cnVital Scanner";
-"LITH_st_labl_hud_xhair" =
-   "\cnDynamic Crosshair";
-"LITH_st_labl_itm_autogroups" =
+"LITH_st_tab_gam" =
+   "Game";
+"LITH_st_labl_autogroups" =
    "\cnAuto-groups";
-"LITH_st_labl_itm_balance" =
+"LITH_st_labl_balance" =
    "\cnBalance";
-"LITH_st_labl_itm_pickups" =
-   "\cnItem Pickups";
-"LITH_st_labl_itm_flashlight" =
-   "\cnFlashlight";
-"LITH_st_labl_itm_misc" =
-   "\cnMiscellaneous";
-"LITH_st_labl_ply_balance" =
-   "\cnBalance";
-"LITH_st_labl_ply_damage" =
-   "\cnDamage Effects";
-"LITH_st_labl_ply_visuals" =
-   "\cnVisuals & Display";
-"LITH_st_labl_ply_postgame" =
-   "\cnPost-game Content";
-"LITH_st_labl_wep_effects" =
-   "\cnEffects";
-"LITH_st_labl_wep_behaviour" =
+"LITH_st_labl_behaviour" =
    "\cnBehaviour";
-"LITH_st_labl_wld_balance" =
-   "\cnBalance";
-"LITH_st_labl_wld_fx" =
+"LITH_st_labl_damage" =
+   "\cnDamage Effects";
+"LITH_st_labl_effects" =
    "\cnEffects";
-"LITH_st_labl_wld_env" =
+"LITH_st_labl_env" =
    "\cnEnvironment";
-"LITH_BLUE_INTENSITY" =
-   "Blue intensity";
-"LITH_GREEN_INTENSITY" =
-   "Green intensity";
-"LITH_RED_INTENSITY" =
-   "Red intensity";
-"LITH_gui_buyfiller" =
-   "Click protection for buying items";
-"LITH_TOOLTIP_gui_buyfiller" =
-   "Time (in 35ths of seconds) needed to hold a click to buy upgrades and items.";
-"LITH_gui_cursor" =
-   "Cursor";
-"LITH_TOOLTIP_gui_cursor" =
-   "Which cursor graphic to use for in-game GUIs.";
-"LITH_gui_defcr" =
-   "Default text color";
-"LITH_TOOLTIP_gui_defcr" =
-   "The color for most of the text in in-game GUIs.";
-"LITH_gui_jpfont" =
-   "Japanese font";
-"LITH_TOOLTIP_gui_jpfont" =
-   "The font to use when Japanese is set as the language.";
-"LITH_gui_curspeed" =
-   "Cursor speed";
-"LITH_gui_theme" =
-   "Interface theme";
-"LITH_hud_type" =
-   "Type";
-"LITH_hud_expbar" =
-   "Show experience bar";
-"LITH_hud_logfromtop" =
-   "Display at the top of the screen";
-"LITH_hud_logsize" =
-   "Size";
-"LITH_hud_logcolor" =
-   "Color";
-"LITH_hud_showarmorind" =
-   "Show reactive armor indicator";
-"LITH_hud_showdamage" =
-   "Display damage dealt";
-"LITH_hud_showlog" =
-   "Show";
-"LITH_hud_showlvl" =
-   "Show level";
-"LITH_hud_showscore" =
-   "Show score";
-"LITH_hud_showweapons" =
-   "Show weapons";
-"LITH_hud_damagealpha" =
-   "Damage alpha";
-"LITH_hud_showitems" =
-   "Show";
-"LITH_hud_itemcolor" =
-   "Color";
-"LITH_light_b" =
-   "$LITH_BLUE_INTENSITY";
-"LITH_light_battery" =
-   "Battery";
-"LITH_light_g" =
-   "$LITH_GREEN_INTENSITY";
-"LITH_light_r" =
-   "$LITH_RED_INTENSITY";
-"LITH_light_radius" =
-   "Radius";
-"LITH_light_regen" =
-   "Battery regeneration";
-"LITH_player_altinvuln" =
-   "Alternate invulnerability palette";
-"LITH_TOOLTIP_player_altinvuln" =
-   "Changes the inverted palette to an orange one. My eyes, they're saved!";
-"LITH_player_ammodisp" =
-   "Display picked up ammo";
-"LITH_player_brightweps" =
-   "Bright weapon pickups";
-"LITH_player_damagebob" =
-   "Bob view when damaged";
-"LITH_player_damagebobmul" =
-   "Damage bob multiplier";
-"LITH_player_footstepvol" =
-   "Footstep volume";
-"LITH_player_itemdisp" =
-   "Display picked up items";
-"LITH_player_itemdispalpha" =
-   "Score/item/ammo alpha";
-"LITH_player_lvsys" =
-   "Level-up system";
-"LITH_player_noitemfx" =
-   "No item effects";
-"LITH_TOOLTIP_player_noitemfx" =
-   "Disables the effects around items such as weapons and Phantom rewards, leaving only the item itself.";
-"LITH_player_pronouns" =
-   "Pronouns";
-"LITH_TOOLTIP_player_pronouns" =
-   "If this box is empty, then the default pronouns for your player gender will be used. Otherwise, provide them in this format:\n"
-   "\n"
-   "subject/object/possessive determiner/possessive/action\n"
-   "\n"
-   "For example: they/them/their/theirs/they're";
-"LITH_player_rainshader" =
-   "Enable rain shader";
-"LITH_TOOLTIP_player_rainshader" =
-   "TECHNOLOGY! Puts rain from the air on your screen. Shouldn't cause any issues.";
-"LITH_player_resultssound" =
-   "Play sounds";
-"LITH_player_scoredisp" =
-   "Display score gained";
-"LITH_player_scoresound" =
-   "Play a sound when score is gained";
-"LITH_player_sillypickups" =
-   "Silly pickup messages";
-"LITH_TOOLTIP_player_sillypickups" =
-   "Highly recommended!";
-"LITH_player_teleshop" =
-   "Teleport in bought items and upgrades";
-"LITH_TOOLTIP_player_teleshop" =
-   "Creates an item in the world when you buy something.";
-"LITH_player_viewtilt" =
-   "View tilt when strafing";
-"LITH_TOOLTIP_player_viewtilt" =
-   "Motion sickness warning. Changes how much the view tilts when moving laterally.";
-"LITH_scanner_font" =
-   "Font";
-"LITH_scanner_bar" =
-   "Health bar";
-"LITH_scanner_color" =
-   "Color";
-"LITH_scanner_slide" =
-   "Slide to target";
-"LITH_scanner_xoffs" =
-   "Horizontal offset";
-"LITH_scanner_yoffs" =
-   "Vertical offset";
-"LITH_st_autobuy_1" =
-   "Auto-buy \caSet 1";
-"LITH_TOOLTIP_autobuy_1" =
-   "Automatically buys this autogroup when you have the Score available.";
-"LITH_st_autobuy_2" =
-   "Auto-buy \cdSet 2";
-"LITH_st_autobuy_3" =
-   "Auto-buy \cnSet 3";
-"LITH_st_autobuy_4" =
-   "Auto-buy \cfSet 4";
-"LITH_TOOLTIP_autobuy_2" =
-   "$LITH_TOOLTIP_autobuy_1";
-"LITH_TOOLTIP_autobuy_3" =
-   "$LITH_TOOLTIP_autobuy_1";
-"LITH_TOOLTIP_autobuy_4" =
-   "$LITH_TOOLTIP_autobuy_1";
-"LITH_st_done_intro" =
-   "Don't play intro on next game start";
-"LITH_sv_autosave" =
-   "Autosave interval";
-"LITH_TOOLTIP_sv_autosave" =
-   "\cg(Applies on next game start)";
-"LITH_sv_difficulty" =
-   "Difficulty base";
-"LITH_TOOLTIP_sv_difficulty" =
-   "The base scale for enemy levels; 100% means enemies can spawn at maximum level and rank on even the first map.\n"
-   "\n"
-   "\ck(Applies on next map start)";
-"LITH_sv_extrahard" =
-   "Extra Hard";
-"LITH_TOOLTIP_sv_extrahard" =
-   "Enables more difficult enemy patterns.\n"
-   "\n"
-   "\ck(Applies on next map start)";
-"LITH_sv_lessparticles" =
-   "Less particles";
-"LITH_sv_minhealth" =
-   "Minimum health on map start";
-"LITH_sv_nobossdrop" =
-   "Start with phantom rewards";
-"LITH_TOOLTIP_sv_nobossdrop" =
-   "Gives you all rewards from mid-mission bosses added by Lithium. Only enable if you know what this is.\n"
-   "\n"
-   "\cg(Applies on next game start)";
-"LITH_sv_nobosses" =
-   "No phantoms";
-"LITH_TOOLTIP_sv_nobosses" =
-   "Disables mid-mission bosses added by Lithium. Only enable if you know what this is.\n"
-   "\n"
-   "\cg(Applies on next game start)";
-"LITH_sv_postgame" =
-   "Enable";
-"LITH_TOOLTIP_sv_postgame" =
-   "\cgWarning:\c- Post-game content can \cicause saves to be effectively deleted\c-, and will have \cipermanent repercussions\c-. Only enable if you really want more.";
-"LITH_sv_rain" =
-   "Enable raining";
-"LITH_TOOLTIP_sv_rain" =
-   "\ck(Applies on next map start)";
-"LITH_sv_rainphysics" =
-   "Rain physics";
-"LITH_TOOLTIP_sv_rainphysics" =
-   "Advanced: Rain has heavy motions, dynamically pitches and rolls. (Default.)\n"
-   "Static: Rain only lightly reacts to wind, always pouring straight down. (Similar to old versions.)\n"
-   "Simple: Rain reacts strongly to wind, always pouring straight down. (Initial wind velocity concept.)";
-"LITH_sv_revenge" =
-   "Explode on death";
-"LITH_sv_sky" =
-   "Replace skies";
-"LITH_TOOLTIP_sv_sky" =
-   "No change: No changes will be made to skies. (Most compatible.)\n"
-   "Vanilla-like: Allows vanilla skies to have additional visual effects. (May be incompatible with some edge cases. Default.)\n"
-   "Replace skies: A palette of replacement skies based on the environment.\n"
-   "Shader: A dynamic, soft, full sky replacement for a more chill atmosphere.\n"
-   "\n"
-   "\ck(Applies on next map start)";
-"LITH_sv_skydarkening" =
-   "Outside sector darkening";
-"LITH_sv_wepdrop" =
-   "Drop weapons from zombies";
-"LITH_TOOLTIP_sv_wepdrop" =
-   "Mainly exists for map compatibility. Drops weapons from zombie enemies like vanilla. May cause issues in normal gameplay.\n"
-   "\n"
-   "\ck(Applies on next map start)";
-"LITH_weapons_casingfadeout" =
-   "Casings fade out";
-"LITH_weapons_casings" =
-   "Emit casings from weapons which use them";
-"LITH_weapons_fastlazshot" =
-   "Better laser shotgun performance";
-"LITH_weapons_magdrops" =
-   "Drop magazines from weapons";
-"LITH_weapons_magfadeout" =
-   "Magazines fade out";
-"LITH_weapons_magicselanims" =
-   "Magic selection animations";
-"LITH_weapons_nofirebob" =
-   "No mid-fire bobbing";
-"LITH_weapons_rainbowlaser" =
-   "Rainbow lasers";
-"LITH_weapons_recoil" =
-   "Visual recoil amount";
-"LITH_weapons_reducedsg" =
-   "Reduced shotgun sound";
-"LITH_weapons_reloadbob" =
-   "Reload bobbing amount";
-"LITH_weapons_reloadempty" =
-   "Reload the weapon upon magazine emptying";
-"LITH_weapons_ricochetvol" =
-   "Ricochet volume";
-"LITH_weapons_riflemodeclear" =
-   "Clear rifle mode on switch";
-"LITH_weapons_riflescope" =
-   "Modal Rifle scope";
-"LITH_weapons_scopealpha" =
-   "Scope opacity";
-"LITH_weapons_zoomfactor" =
-   "Scope zoom factor";
-"LITH_xhair_a" =
-   "Alpha";
-"LITH_xhair_b" =
-   "$LITH_BLUE_INTENSITY";
-"LITH_xhair_enable" =
-   "Enable";
-"LITH_xhair_enablejuicer" =
-   "Juicer";
-"LITH_TOOLTIP_xhair_enablejuicer" =
-   "Seriously, why do they call them that? The little thingies around the crosshair that follow the recoil. They're... juicy. Guess that's why.";
-"LITH_xhair_g" =
-   "$LITH_GREEN_INTENSITY";
-"LITH_xhair_r" =
-   "$LITH_RED_INTENSITY";
-"LITH_xhair_style" =
-   "Style";
+"LITH_st_labl_flashlight" =
+   "\cnFlashlight";
+"LITH_st_labl_fx" =
+   "\cnEffects";
+"LITH_st_labl_gui" =
+   "\cnGUI";
+"LITH_st_labl_hud" =
+   "\cnHeads-Up Display";
+"LITH_st_labl_language" =
+   "\cnLanguage";
+"LITH_st_labl_log" =
+   "\cnLogging";
+"LITH_st_labl_misc" =
+   "\cnMiscellaneous";
+"LITH_st_labl_personal" =
+   "\cnPersonal Info (Top-Right Corner)";
+"LITH_st_labl_pickups" =
+   "\cnItem Pickups";
+"LITH_st_labl_player" =
+   "\cnPlayer";
+"LITH_st_labl_postgame" =
+   "\cnPost-game Content";
+"LITH_st_labl_projected" =
+   "\cnIn-world UI";
+"LITH_st_labl_scanner" =
+   "\cnVital Scanner";
+"LITH_st_labl_xhair" =
+   "\cnDynamic Crosshair";
 "LITH_TAG_BlurSphere" =
    "Fragma";
 "LITH_TAG_GreyHam" =

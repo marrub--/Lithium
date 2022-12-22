@@ -24,8 +24,8 @@ class Lith_PlayerDeathParticle : Actor
    {
    Spawn:
       TNT1 A random(3, 10);
-      LI09 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW 1 A_SetScale(frandom(0.15, 0.2));
-      LI09 W 1 A_FadeOut(0.01);
+      #EDE AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SetScale(frandom(0.15, 0.2));
+      #EDE A 1 A_FadeOut(0.01);
       wait;
    }
 }
@@ -45,8 +45,8 @@ class Lith_PlayerDeathParticle2 : Actor
    {
    Spawn:
       TNT1 A random(3, 10);
-      LI09 WWWW 12 A_FadeOut(0.1);
-      LI09 WWWW 4 A_FadeOut(0.1);
+      #EDE AAAA 12 A_FadeOut(0.1);
+      #EDE AAAA 4 A_FadeOut(0.1);
       stop;
    }
 }

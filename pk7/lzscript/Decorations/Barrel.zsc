@@ -25,18 +25,18 @@ default {
 states
 {
 Spawn:
-   LI01 ABCDEFGHIJKLM 2;
+   #DBA ABCDEFGHIJKLM 2;
    loop;
 Pain:
-   LI01 N 5 A_Pain;
+   #DBA N 5 A_Pain;
    goto Spawn;
 Death:
-   LI01 OP 5;
-   LI01 Q 3 bright;
-   LI01 R 2 bright A_Scream;
-   LI01 S 3 bright A_Explode;
-   LI01 TUV 4 bright;
-   LI01 W 3 bright;
+   #DBA OP 5;
+   #DBA Q 3 bright;
+   #DBA R 2 bright A_Scream;
+   #DBA S 3 bright A_Explode;
+   #DBA TUV 4 bright;
+   #DBA W 3 bright;
    TNT1 A 10;
    TNT1 A 1050 A_BarrelDestroy;
    TNT1 A 5 A_Respawn;

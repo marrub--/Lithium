@@ -298,8 +298,7 @@ bool G_Filler(i32 x, i32 y, struct gui_fil *fil, bool held);
 stkcall
 void G_Tooltip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, cstr id);
 
-i32 G_Tabs(struct gui_state *g, mem_size_t *st, gtab_t const *names,
-           mem_size_t num, i32 x, i32 y, i32 yp);
+i32 G_Tabs(struct gui_state *g, mem_size_t *st, gtab_t const *tn, mem_size_t num, i32 yp);
 
 void G_ScrEnd(struct gui_state *g, struct gui_scr *scr);
 optargs(1)

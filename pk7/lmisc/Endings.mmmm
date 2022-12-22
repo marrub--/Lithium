@@ -72,7 +72,8 @@ lipu_ilo endings {
       } ante seme poki pD {
          image   ":End:Ari";
          fade_in 50;
-         crawl   IconOfSin_1_Ari 35;
+         crawl   IconOfSin_1_Ari 500;
+         crawl   IconOfSin_2_Ari 500;
       }
       lipu common;
    }

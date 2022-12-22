@@ -37,7 +37,7 @@ class Lith_GunSmoke : Actor {
 
    states {
    Spawn:
-      SMOK ABCDEFGHIJKLMNOPQ 5;
+      #ESM ABCDEFGHIJKLMNOPQ 5;
       stop;
    }
 }

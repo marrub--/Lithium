@@ -142,7 +142,7 @@ Fire:
       }
       Lith_A_MagIncr();
       lith_gunFlash();
-      a_alertMonsters();
+      soundAlert(invoker.owner);
       A_StartSound("weapons/delear/fire", lch_weapon);
    }
    goto ReadySelector;

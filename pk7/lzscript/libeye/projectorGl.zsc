@@ -15,9 +15,9 @@ class Lith_Le_GlScreen : Lith_Le_ProjScreen {
 
 		// kd: Pitch is a weird gzd joke. It's probably to compensate looking
 		// speed and all. After that, you see what makes this fast.
-		world_ang.y = VectorAngle(
-			cos(world_ang.y),
-			sin(world_ang.y) * pixel_stretch);
+		world_ang.y = atan2(
+			sin(world_ang.y) * pixel_stretch,
+			cos(world_ang.y));
 
 
 		super.Reorient(world_view_pos, world_ang);

@@ -77,7 +77,7 @@ default
 action(Weapon) void Lith_A_FireCPlasma()
 {
    lith_gunFlash();
-   a_alertMonsters();
+   soundAlert(invoker.owner);
    A_FireProjectile("Lith_LightProjectileGreenShort", 0);
    lith_takeAmmo(30);
    A_StartSound("weapons/plasma/fire", lch_weapon);
@@ -90,7 +90,7 @@ action(Weapon) void Lith_A_FireCPlasma()
 action(Weapon) void Lith_A_FirePulse()
 {
    lith_gunFlash();
-   a_alertMonsters();
+   soundAlert(invoker.owner);
    A_FireProjectile("Lith_LightProjectileGreenLong", 0);
    lith_takeAmmo(80);
    A_StartSound("weapons/plasma/altfire", lch_weapon);

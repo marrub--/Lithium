@@ -10,8 +10,15 @@ extend class Lith_URANUS;
 
 Lith_LineTracer m_tracer;
 
-bool m_showItems;
-int  m_itemColor;
+enum ShowFlags {
+   SHOWF_AMMO     = 1 << 0,
+   SHOWF_DAMAGE   = 1 << 1,
+   SHOWF_INTERACT = 1 << 2,
+   SHOWF_ITEMS    = 1 << 3,
+}
+
+int m_showFlags;
+int m_itemColor;
 
 ui textureId m_texBatteryOutline;
 ui textureId m_texBattery;
@@ -47,11 +54,10 @@ void renUnload() {
 
 void renTick() {
    projectSetRenderer();
-   tickNearbyItems();
+   tickSettings();
    tickDmgNums();
    tickScrNums();
    tickCrosshair();
-   tickInventory();
    tickDraw();
    tickSky();
 }
@@ -68,7 +74,7 @@ ui void renRender(RenderEvent evt) {
       }
 
       if(hud_enabled) {
-         drawNearbyItems(evt);
+         drawNearByStuff(evt);
          drawDmgNums(evt);
          drawCrosshair(evt);
          drawInventory(evt);
@@ -93,19 +99,28 @@ static clearscope void StartSound(Actor mo, sound snd, int slot, int flags, doub
    }
 }
 
-void tickNearbyItems() {
-   m_showItems = lith_hud_showitems;
+void tickSettings() {
+   m_showFlags =
+      (lith_hud_showammo     ? SHOWF_AMMO     : 0) |
+      (lith_hud_showdamage   ? SHOWF_DAMAGE   : 0) |
+      (lith_hud_showinteract ? SHOWF_INTERACT : 0) |
+      (lith_hud_showitems    ? SHOWF_ITEMS    : 0);
    m_itemColor = acs_executeWithResult(lsc_drawcr, lith_hud_itemcolor);
+   m_lightMaxBattery = lith_light_battery * 35;
+   m_lightCurBattery = Lith_UTIL.pData(_pdt_flashbattery);
 }
 
-ui void drawNearbyItems(RenderEvent evt) {
-   if(!m_showItems) {
+ui void drawNearByStuff(RenderEvent evt) {
+   if(!(m_showFlags & (SHOWF_ITEMS | SHOWF_INTERACT))) {
       return;
    }
    Font fnt = fntSml();
    for(let it = BlockThingsIterator.create(evt.camera, 256.0); it.next();) {
       let mo = it.thing;
-      if(Inventory(mo) && mo.bSpecial) {
+      if(mo && mo.getTag("\xFF") != "\xFF" &&
+         ((m_showFlags & SHOWF_ITEMS)    && Inventory(mo) && mo.bSpecial ||
+          (m_showFlags & SHOWF_INTERACT) && mo.bUseSpecial))
+      {
          int px, py; bool seen;
          [px, py, seen] = project(mo.pos);
          if(seen) {
@@ -121,57 +136,43 @@ ui void drawNearbyItems(RenderEvent evt) {
    }
 }
 
-void tickInventory() {
-   m_lightMaxBattery = lith_light_battery * 35;
-   m_lightCurBattery = Lith_UTIL.pData(_pdt_flashbattery);
-}
-
 ui void drawInventory(RenderEvent evt) {
    static const string keyClasses[] = {
       "BlueCard",  "RedCard",  "YellowCard",
       "BlueSkull", "RedSkull", "YellowSkull",
-
       "ChexBlueCard", "ChexRedCard", "ChexYellowCard",
-
       "KeyBlue", "KeyGreen", "KeyYellow"
    };
-
    static const string keyText[] = {
       "\cn", "\ca", "\cf",
       "\cn", "\ca", "\cf",
-
       "\cn", "\ca", "\cf",
-
       "\cn", "\cd", "\cf"
    };
-
    if(m_texBatteryOutline.isNull()) {
       m_texBatteryOutline = getTex(":HUD:BatteryOutline");
    }
    if(m_texBattery.isNull()) {
       m_texBattery = getTex(":HUD:Battery");
    }
-
    let mo = evt.camera;
-
    string inv_text = "";
    int y = 0;
-
-   int blt, cblt; [blt, cblt] = ammoAmt(mo, 'Lith_BulletAmmo');
-   int shl, cshl; [shl, cshl] = ammoAmt(mo, 'Lith_ShellAmmo');
-   int rkt, crkt; [rkt, crkt] = ammoAmt(mo, 'Lith_RocketAmmo');
-   int nrg, cnrg; [nrg, cnrg] = ammoAmt(mo, 'Lith_PlasmaAmmo');
-   int drk, cdrk; [drk, cdrk] = ammoAmt(mo, 'Lith_CannonAmmo');
-
-   inv_text.appendFormat(
-      " \c%c%i\c-\n \c%c%i\c-\n \c%c%i\c-\n \c%c%i\c-\n \c%c%i\c-\n",
-      cblt, blt,
-      cshl, shl,
-      crkt, rkt,
-      cnrg, nrg,
-      cdrk, drk);
-   y += 5 * 8;
-
+   if(m_showFlags & SHOWF_AMMO) {
+      int blt, cblt; [blt, cblt] = ammoAmt(mo, 'Lith_BulletAmmo');
+      int shl, cshl; [shl, cshl] = ammoAmt(mo, 'Lith_ShellAmmo');
+      int rkt, crkt; [rkt, crkt] = ammoAmt(mo, 'Lith_RocketAmmo');
+      int nrg, cnrg; [nrg, cnrg] = ammoAmt(mo, 'Lith_PlasmaAmmo');
+      int drk, cdrk; [drk, cdrk] = ammoAmt(mo, 'Lith_CannonAmmo');
+      inv_text.appendFormat(
+         " \c%c%i\c-\n \c%c%i\c-\n \c%c%i\c-\n \c%c%i\c-\n \c%c%i\c-\n",
+         cblt, blt,
+         cshl, shl,
+         crkt, rkt,
+         cnrg, nrg,
+         cdrk, drk);
+      y += 5 * 8;
+   }
    bool any_key = false;
    for(int i = 0; i < keyClasses.size(); ++i) {
       class<Key> kt = keyClasses[i];
@@ -184,24 +185,17 @@ ui void drawInventory(RenderEvent evt) {
       y += 8;
       inv_text = inv_text .. "\n";
    }
-
    Screen.drawText(smallFont, Font.CR_WHITE, 0, 0, inv_text,
                    DTA_VirtualWidth,320, DTA_VirtualHeight,240);
-
    y = drawStatFx(evt, y);
-
    if(m_lightMaxBattery > 0 && m_lightCurBattery < m_lightMaxBattery) {
       float s = m_lightCurBattery / float(m_lightMaxBattery) * 8.0f;
-
       Screen.drawTexture(m_texBatteryOutline, false, 0, y,
                          DTA_VirtualWidth,320, DTA_VirtualHeight,240);
-
       y += 2;
-
       setClip(2, y, 2, s, (320, 240));
       Screen.drawTexture(m_texBattery, false, 2, y, DTA_VirtualWidth,320, DTA_VirtualHeight,240);
       Screen.clearClipRect();
-
       y += 10;
    }
 }
@@ -241,7 +235,7 @@ clearScope vector3 traceFromPos(Sector sec, vector3 pos, double yaw, double pitc
 }
 
 clearScope vector3 traceFromActor(Actor mo, double yaw, double pitch, double dist, double offsetZ, bool floor, ETraceFlags flags) {
-   return traceFromPos(mo.curSector, mo.pos + (0.0, 0.0, offsetZ), yaw, pitch, dist, mo, floor, flags);
+   return traceFromPos(mo.curSector, mo.pos.plusZ(offsetZ), yaw, pitch, dist, mo, floor, flags);
 }
 
 /* EOF */

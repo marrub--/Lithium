@@ -22,7 +22,7 @@ class Lith_BossReward2 : Lith_CbiItem {
       Lith_CbiItem.UpgrNum bossreward_easy_2;
       Lith_CbiItem.SpriteM "CUPGA";
       Lith_CbiItem.SpriteC "SPELB";
-      Lith_CbiItem.SpriteD "CUPGZ";
+      Lith_CbiItem.SpriteD "CUPGC";
    }
 }
 
@@ -32,7 +32,7 @@ class Lith_BossReward3 : Lith_CbiItem {
       Lith_CbiItem.UpgrNum bossreward_med_1;
       Lith_CbiItem.SpriteM "ARM1Z";
       Lith_CbiItem.SpriteC "SPELC";
-      Lith_CbiItem.SpriteD "CUPGZ";
+      Lith_CbiItem.SpriteD "CUPGG";
    }
 }
 
@@ -42,7 +42,7 @@ class Lith_BossReward4 : Lith_CbiItem {
       Lith_CbiItem.UpgrNum bossreward_med_2;
       Lith_CbiItem.SpriteM "CUPGB";
       Lith_CbiItem.SpriteC "SPELD";
-      Lith_CbiItem.SpriteD "CUPGZ";
+      Lith_CbiItem.SpriteD "CUPGD";
    }
 }
 
@@ -52,7 +52,7 @@ class Lith_BossReward5 : Lith_CbiItem {
       Lith_CbiItem.UpgrNum bossreward_med_3;
       Lith_CbiItem.SpriteM "WRDPA";
       Lith_CbiItem.SpriteC "SPELE";
-      Lith_CbiItem.SpriteD "CUPGZ";
+      Lith_CbiItem.SpriteD "CUPGE";
    }
 }
 
@@ -62,7 +62,7 @@ class Lith_BossReward6 : Lith_CbiItem {
       Lith_CbiItem.UpgrNum bossreward_hard_1;
       Lith_CbiItem.SpriteM "IOBJC";
       Lith_CbiItem.SpriteC "IOBJC";
-      Lith_CbiItem.SpriteD "CUPGZ";
+      Lith_CbiItem.SpriteD "CUPGF";
    }
 }
 

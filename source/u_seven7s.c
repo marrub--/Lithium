@@ -30,7 +30,7 @@ void Upgr_Seven7s_Update(void) {
       if(!udata.in_air) {
          udata.in_air = true;
          udata.fvel = pl.getVel();
-         udata.fyaw = pl.yaw - ACS_VectorAngle(pl.velx, pl.vely);
+         udata.fyaw = pl.yaw - atan2k(pl.vely, pl.velx);
       }
       k32 fyaw = udata.fyaw;
       fyaw = floork(fyaw * 100.0k) / 100.0k;

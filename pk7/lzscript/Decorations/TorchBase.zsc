@@ -48,12 +48,9 @@ class Lith_TorchDecor : Lith_FlareDecor {
    }
 
    states {
-   Inactive:
-      #### A -1;
-      stop;
-   Death:
-      #### X 0 A_StartSound("amb/woodx", lch_body3);
-      #### X -1;
+   Death1:
+      #### # 0 A_StartSound("amb/woodx", lch_body3);
+      #### # -1;
       stop;
    }
 }
@@ -93,8 +90,8 @@ class Lith_TorchFlame : Actor {
    }
 }
 
-class Lith_TorchRFlame : Lith_TorchFlame {states {Spawn: LI05 C 0; goto Spawn1;}}
-class Lith_TorchGFlame : Lith_TorchFlame {states {Spawn: LI05 J 0; goto Spawn1;}}
-class Lith_TorchBFlame : Lith_TorchFlame {states {Spawn: LI05 Q 0; goto Spawn1;}}
+class Lith_TorchRFlame : Lith_TorchFlame {states {Spawn: #EFR A 0; goto Spawn1;}}
+class Lith_TorchGFlame : Lith_TorchFlame {states {Spawn: #EFG A 0; goto Spawn1;}}
+class Lith_TorchBFlame : Lith_TorchFlame {states {Spawn: #EFB A 0; goto Spawn1;}}
 
 /* EOF */

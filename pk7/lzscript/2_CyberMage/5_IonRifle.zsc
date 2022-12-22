@@ -186,7 +186,7 @@ action(Weapon) void Lith_A_FireIonRifle()
    Lith_A_MagIncr();
    lith_takeAmmo(2);
    lith_gunFlash();
-   a_alertMonsters();
+   soundAlert(invoker.owner);
    A_FireProjectile("Lith_LightProjectileSkyLong", 0);
    A_FireProjectile("Lith_IonRifleHax", flags: FPF_NOAUTOAIM);
    if(invoker.m_Charge >= 1.5)
@@ -267,8 +267,8 @@ DoFire:
    TNT1 A 0 A_JumpIf(invoker.m_ads, "FireAnim_Scoped");
 FireAnim_Unscoped:
    IONG CB 2 bright;
-   IONG D 1 bright lith_a_setInterpolation(true);
-   IONG E 1 bright;
+   IONG D 1 bright;
+   IONG E 1 bright lith_a_setInterpolation(true);
    IONG FGA 1;
    goto ChillCheck;
 FireAnim_Scoped:

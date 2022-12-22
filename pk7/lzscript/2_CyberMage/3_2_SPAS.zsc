@@ -118,7 +118,7 @@ action(Weapon) State Lith_A_FireSPAS()
       A_Recoil(15);
       Lith_FireBullets(10.5, 3.5, 3, 3);
    }
-   A_AlertMonsters();
+   SoundAlert(Invoker.Owner);
    A_Recoil(0.7);
    Lith_A_RecoilUp(0.4);
    A_Light(1);

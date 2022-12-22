@@ -37,8 +37,8 @@ class Lith_PlayerClassMenu : ListMenu;
 
 override void init(Menu parent, ListMenuDescriptor desc) {
    super.init(parent, desc);
-   for(int i = 0; i < mDesc.mItems.size(); ++i) {
-      let sel = ListMenuItemTextItem(mDesc.mItems[i]);
+   foreach(item : mDesc.mItems) {
+      let sel = ListMenuItemTextItem(item);
       if(sel) {
          sel.mColor = Font.findFontColor(Lith_HERMES.localize(sel.mText .. "_Col"));
       }

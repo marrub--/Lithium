@@ -116,7 +116,7 @@ class Lith_MonsterBarrier : Actor {
 
    states {
    Spawn:
-      LI09 H -1;
+      #EBA A -1;
       stop;
    }
 }
@@ -136,7 +136,7 @@ class Lith_MonsterHeptaura : Lith_MonsterBarrier {
 
    states {
    Spawn:
-      LI09 I -1;
+      #EBA B -1;
       stop;
    }
 }
@@ -148,7 +148,7 @@ class Lith_MonsterSkotosaura : Lith_MonsterBarrier {
 
    states {
    Spawn:
-      LI09 J -1;
+      #EBA C -1;
       stop;
    }
 }
@@ -156,7 +156,7 @@ class Lith_MonsterSkotosaura : Lith_MonsterBarrier {
 class Lith_MonsterFosaura : Lith_MonsterHeptaura {
    states {
    Spawn:
-      LI09 K -1;
+      #EBA D -1;
       stop;
    }
 }
@@ -164,7 +164,7 @@ class Lith_MonsterFosaura : Lith_MonsterHeptaura {
 class Lith_MonsterFavlosaura : Lith_MonsterHeptaura {
    states {
    Spawn:
-      LI09 L -1;
+      #EBA E -1;
       stop;
    }
 }

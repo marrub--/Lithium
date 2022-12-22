@@ -29,16 +29,16 @@ class Lith_TeleFog7 : Lith_TeleFog {
 
 class Lith_TeleFogRing5 : Lith_TeleFogRing {
    default {RenderStyle "ColorAdd";}
-   states {Spawn: LTEL BCDEE 2 A_FadeOut; stop;}
+   states {Spawn: #ETP BCDEE 2 A_FadeOut; stop;}
 }
 
 class Lith_TeleFogRing6 : Lith_TeleFogRing {
    default {RenderStyle "Subtract";}
-   states {Spawn: LTEL FFFFF 2 A_FadeOut; stop;}
+   states {Spawn: #ETP FFFFF 2 A_FadeOut; stop;}
 }
 
 class Lith_TeleFogRing7 : Lith_TeleFogRing {
-   states {Spawn: LTEL GGGGG 2 A_FadeOut; stop;}
+   states {Spawn: #ETP GGGGG 2 A_FadeOut; stop;}
 }
 
 class Lith_TeleFogRing : Actor {
@@ -49,7 +49,7 @@ class Lith_TeleFogRing : Actor {
       +BRIGHT
    }
 
-   states {Spawn: LTEL AAAAA 2 A_FadeOut; stop;}
+   states {Spawn: #ETP AAAAA 2 A_FadeOut; stop;}
 }
 
 class Lith_TeleFog : Actor replaces TeleportFog;
@@ -74,6 +74,7 @@ override void markPrecacheSounds() {
    super.markPrecacheSounds();
    markSound(m_sound);
 }
+
 override void postBeginPlay() {
    super.postBeginPlay();
    A_StartSound(m_sound, lch_body);

@@ -42,7 +42,7 @@ class Lith_CannonSmokeParticle : Lith_CannonExplosionParticle
    states
    {
    Spawn:
-      SMOK ABCDEFGHIJKLM 1 A_FadeOut(0.06);
+      #ESM ABCDEFGHIJKLM 1 A_FadeOut(0.06);
       stop;
    }
 }

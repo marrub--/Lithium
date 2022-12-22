@@ -133,13 +133,14 @@ Release1:
    CCF2 A 0;
    /* GOTTA RELEASE FAST */
 Release2:
-   #### A 0 A_ChangeVelocity(Cos(Pitch) * 3, 0, Sin(Pitch) * -3, 1);
-   #### A 0 A_AlertMonsters(128);
+   #### # 0 A_ChangeVelocity(Cos(Pitch) * 3, 0, Sin(Pitch) * -3, 1);
+   #### # 0 SoundAlert(Invoker.Owner, maxDist: 128);
    #### A 1 A_StartSound("weapons/cfist/fire", lch_weapon2);
    #### B 1;
-   #### A 0 lith_a_fireMelee(CallACS("Lith_ChargeFistDamage"), 128, 0, "Lith_ChargeFistPuff");
-   #### A 0 A_JumpIf(countInv("Lith_FistHit") >= 1, "HitRecoil");
-   #### C 2 lith_a_setInterpolation(true); /* Missed, so you quickly bring your fist back */
+   #### # 0 lith_a_fireMelee(CallACS("Lith_ChargeFistDamage"), 128, 0, "Lith_ChargeFistPuff");
+   #### # 0 A_JumpIf(countInv("Lith_FistHit") >= 1, "HitRecoil");
+   #### C 2 lith_a_setInterpolation(true);
+   /* Missed, so you quickly bring your fist back */
    #### D 5;
    #### H 2;
    #### I 1;
@@ -149,8 +150,8 @@ Release2:
    TNT1 AAAAAAAAAA 1 A_ReFire;
    goto ReadySelector;
 HitRecoil:
-   #### A 0 {
-      A_AlertMonsters();
+   #### # 0 {
+      SoundAlert(Invoker.Owner);
       A_ChangeVelocity(Cos(Pitch) * -2, 0, Sin(Pitch) * 2, 1);
       lith_a_setInterpolation(true);
    }

@@ -20,7 +20,7 @@ class Lith_PuffItDownBro : Actor {
 
    states {
    Spawn:
-      SMOK ABDEGHJKMNPQ 2 bright;
+      #ESM ABDEGHJKMNPQ 2 bright;
       stop;
    }
 }

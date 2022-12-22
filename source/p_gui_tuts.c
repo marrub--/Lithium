@@ -50,7 +50,7 @@ void P_CBI_TabTuts(struct gui_state *g) {
 
    G_ScrEnd(g, &pl.cbi.st.tutscr);
 
-   G_Clip(g, g->ox+97, g->oy+27, 190, gui_p.scrdef.scrlh * 23, 184);
+   G_Clip(g, 97, 27, 190, gui_p.scrdef.scrlh * 23, 184);
    g->ox += 97;
    g->oy += 27;
 

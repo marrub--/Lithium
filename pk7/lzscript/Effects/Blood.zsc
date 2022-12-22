@@ -15,7 +15,9 @@ class Lith_BloodHitSpray : Actor {
       +FlatSprite
       +RollSprite
    }
+
    double m_step;
+
    override void postBeginPlay() {
       super.postBeginPlay();
       alpha  = fRandom(.7,   .9);
@@ -24,21 +26,24 @@ class Lith_BloodHitSpray : Actor {
       scale *= fRandom(.5,    1);
       m_step = fRandom(.01, .02);
    }
+
    override void tick() {
       if(!isFrozen()) {
-         if(m_step < .015) setOrigin(pos + (0, 0, .04), true);
-         else              setOrigin(pos - (0, 0, .04), true);
+         if(m_step < .015) setOrigin(pos.plusZ( 0.04), true);
+         else              setOrigin(pos.plusZ(-0.04), true);
          scale *= 1.004;
          alpha -= m_step;
          if(alpha <= 0) destroy();
       }
    }
+
    states {
    Spawn:
-      LI09 U -1;
+      #EBS A -1;
       stop;
    }
 }
+
 class Lith_BloodHitCore : Actor {
    default {
       Scale 0.4;
@@ -80,7 +85,7 @@ class Lith_BloodHitCore : Actor {
 
    states {
    Spawn:
-      LI09 T -1;
+      #EBC A -1;
       stop;
    }
 }
@@ -96,9 +101,9 @@ int m_lev;
 int m_waitTicks;
 
 override void tick() {
-   if(bNoInteraction)  setOrigin((pos.xy, floorZ), true);
+   if(bNoInteraction)   setOrigin((pos.xy, floorZ), true);
    if(m_waitTicks == 0) super.tick();
-   else                m_waitTicks -= 1;
+   else                 m_waitTicks -= 1;
 }
 
 void lith_a_setLevel(int num) {
@@ -120,15 +125,15 @@ Spawn:
    TNT1 A 0 resolveState("Low");
    stop;
 Heavy:
-   LI09 M 8 lith_a_setLevel(1);
+   #EBD A 8 lith_a_setLevel(1);
 Medium:
-   LI09 N 8 lith_a_setLevel(2);
+   #EBD B 8 lith_a_setLevel(2);
 Low:
-   LI09 O 8 lith_a_setLevel(3);
-   LI09 OOOOOOOOOO 2 a_fadeOut(.1);
+   #EBD C 8 lith_a_setLevel(3);
+   #EBD CCCCCCCCCC 2 a_fadeOut(.1);
    stop;
 Crash:
-   BLSP # 1 {
+   #EBP # 1 {
       alpha = 1;
       vel = (0, 0, 0);
       scale = (fRandom(.6, 2.2), fRandom(1, 1.2));
@@ -144,7 +149,7 @@ Crash:
       case 3: frame = CH_U_C - CH_U_A; break;
       }
    }
-   BLSP # 0 {
+   #EBP # 0 {
       a_setRenderStyle(1, STYLE_Translucent);
       switch(m_lev) {
       case 1: return resolveState("DoneHigh");
@@ -155,11 +160,11 @@ Crash:
    }
    stop;
 DoneHigh:
-   BLSP BBBBBBBBBBBBBBBBBBBB 1 a_fadeOut(.01);
+   #EBP BBBBBBBBBBBBBBBBBBBB 1 a_fadeOut(.01);
 DoneMedium:
-   BLSP CCCCCCCCCCCCCCCCCCCC 1 a_fadeOut(.01);
+   #EBP CCCCCCCCCCCCCCCCCCCC 1 a_fadeOut(.01);
 DoneLow:
-   BLSP DDDDDDDDDDDDDDDDDDDD 1 a_fadeOut(.01);
+   #EBP DDDDDDDDDDDDDDDDDDDD 1 a_fadeOut(.01);
    stop;
 }
 

@@ -26,7 +26,6 @@ enum {
 };
 
 enum {
-   _s_empty,
    _s_label,
    _s_boole,
    _s_integ,
@@ -35,39 +34,39 @@ enum {
    _s_strng,
 };
 
-script funcdef bool (*scb_b_t)(struct set_parm const *sp, bool *v);
-script funcdef i32  (*scb_i_t)(struct set_parm const *sp, i32  *v);
-script funcdef k32  (*scb_k_t)(struct set_parm const *sp, k32  *v);
-script funcdef str  (*scb_s_t)(struct set_parm const *sp, str  *v);
-
 /* all members are ordered by how many types use them */
 struct setting {
    /* used by all */
-   i32 cb;
+   i32 ty;
    /* used by any with text */
    cstr text;
-   /* used by any with a variable */
-   union {
-      scb_b_t b;
-      scb_i_t i;
-      scb_k_t k;
-      scb_s_t s;
-   } cb_g;
    /* used by any with a scalar */
    union {
-      struct {i32 min, max;} i;
-      struct {k32 min, max;} k;
+      struct {i32 min, max;} bi;
+      struct {k32 min, max;} bk;
    } bnd;
    cstr suff;
    /* used in special cases */
    bool fill;
    i32  pclass;
+   union {
+      script bool (*cb)(struct set_parm const *sp, bool *v);
+      script i32  (*ci)(struct set_parm const *sp, i32  *v);
+      script k32  (*ck)(struct set_parm const *sp, k32  *v);
+      script str  (*cs)(struct set_parm const *sp, str  *v);
+   } f;
 };
 
 struct set_parm {
    struct gui_state *g;
    i32 x, y;
    struct setting const *st;
+};
+
+struct settings_tab {
+   char                  nam[4];
+   struct setting const *set;
+   mem_size_t            num;
 };
 
 #define SG_cvBody(type, name, suff) \
@@ -83,25 +82,18 @@ SG_cvBody(i32,  Integ, I)
 SG_cvBody(k32,  Fixed, K)
 SG_cvBody(str,  Strng, S)
 
-script static
-bool SG_autoBuy(struct set_parm const *sp, bool *v) {
+script static bool SG_autoBuy(struct set_parm const *sp, bool *v) {
    i32 which = sp->st->text[faststrlen(sp->st->text) - 1] - '1';
    if(v) {tog_bit(pl.autobuy, which); P_Data_Save();}
    return get_bit(pl.autobuy, which);
 }
 
-script static
-bool SG_doneIntro(struct set_parm const *sp, bool *v) {
+script static bool SG_doneIntro(struct set_parm const *sp, bool *v) {
    if(v) {tog_bit(pl.done_intro, pl.pclass); P_Data_Save();}
    return get_bit(pl.done_intro, pl.pclass);
 }
 
-static
-void S_empty(struct set_parm const *sp) {
-}
-
-optargs(1) static
-void S_label(struct set_parm const *sp, bool tooltip) {
+optargs(1) static void S_label(struct set_parm const *sp, bool tooltip) {
    PrintText_str(ns(lang(fast_strdup2(LANG, sp->st->text))),
                  sf_smallfnt, sp->g->defcr, sp->g->ox + _left,1,
                  sp->g->oy + sp->y,1);
@@ -110,9 +102,8 @@ void S_label(struct set_parm const *sp, bool tooltip) {
    }
 }
 
-static
-void S_boole(struct set_parm const *sp) {
-   bool v = sp->st->cb_g.b(sp, nil);
+static void S_boole(struct set_parm const *sp) {
+   bool v = sp->st->f.cb ? sp->st->f.cb(sp, nil) : SG_cvBoole(sp, nil);
 
    S_label(sp, true);
 
@@ -123,47 +114,44 @@ void S_boole(struct set_parm const *sp) {
                    .fill = sp->st->fill ? &pl.cbi.st.settingsfill : nil))
    {
       v = !v;
-      sp->st->cb_g.b(sp, &v);
+      sp->st->f.cb ? sp->st->f.cb(sp, &v) : SG_cvBoole(sp, &v);
    }
 }
 
-static
-void S_integ(struct set_parm const *sp) {
-   i32 v = sp->st->cb_g.i(sp, nil);
+static void S_integ(struct set_parm const *sp) {
+   i32 v = sp->st->f.ci ? sp->st->f.ci(sp, nil) : SG_cvInteg(sp, nil);
 
    S_label(sp, true);
 
    struct slide_ret sret =
       G_Slider_HId(sp->g, sp->y, _rght - gui_p.slddef.w, sp->y,
-                   sp->st->bnd.i.min, sp->st->bnd.i.max, v, true,
+                   sp->st->bnd.bi.min, sp->st->bnd.bi.max, v, true,
                    .suf = tmpstr(lang(fast_strdup2(LANG "st_suff_", sp->st->suff))));
    if(sret.different) {
       v = sret.value;
-      sp->st->cb_g.i(sp, &v);
+      sp->st->f.ci ? sp->st->f.ci(sp, &v) : SG_cvInteg(sp, &v);
    }
 }
 
-static
-void S_fixed(struct set_parm const *sp) {
-   k32 v = sp->st->cb_g.k(sp, nil);
+static void S_fixed(struct set_parm const *sp) {
+   k32 v = sp->st->f.ck ? sp->st->f.ck(sp, nil) : SG_cvFixed(sp, nil);
 
    S_label(sp, true);
 
    struct slide_ret sret =
       G_Slider_HId(sp->g, sp->y, _rght - gui_p.slddef.w, sp->y,
-                   sp->st->bnd.k.min, sp->st->bnd.k.max, v,
+                   sp->st->bnd.bk.min, sp->st->bnd.bk.max, v,
                    .suf = tmpstr(lang(fast_strdup2(LANG "st_suff_", sp->st->suff))));
    if(sret.different) {
       v = sret.value;
-      sp->st->cb_g.k(sp, &v);
+      sp->st->f.ck ? sp->st->f.ck(sp, &v) : SG_cvFixed(sp, &v);
    }
 }
 
-static
-void S_enume(struct set_parm const *sp) {
-   i32 v = sp->st->cb_g.i(sp, nil);
-   i32 min = sp->st->bnd.i.min;
-   i32 max = sp->st->bnd.i.max - 1;
+static void S_enume(struct set_parm const *sp) {
+   i32 v = sp->st->f.ci ? sp->st->f.ci(sp, nil) : SG_cvInteg(sp, nil);
+   i32 min = sp->st->bnd.bi.min;
+   i32 max = sp->st->bnd.bi.max - 1;
    i32 btw = gui_p.btnnexts.w;
 
    S_label(sp, true);
@@ -171,13 +159,13 @@ void S_enume(struct set_parm const *sp) {
    if(G_Button_HId(sp->g, sp->y, .x = _rght - btw * 2, sp->y, v <= min,
                    Pre(btnprevs))) {
       v--;
-      sp->st->cb_g.i(sp, &v);
+      sp->st->f.ci ? sp->st->f.ci(sp, &v) : SG_cvInteg(sp, &v);
    }
 
    if(G_Button_HId(sp->g, sp->y, .x = _rght - btw, sp->y, v >= max,
                    Pre(btnnexts))) {
       v++;
-      sp->st->cb_g.i(sp, &v);
+      sp->st->f.ci ? sp->st->f.ci(sp, &v) : SG_cvInteg(sp, &v);
    }
 
    i32 cr = faststrchk(sp->st->suff, "color") ? Draw_GetCr(v) : sp->g->defcr;
@@ -190,9 +178,8 @@ void S_enume(struct set_parm const *sp) {
                  sp->g->oy + sp->y,1);
 }
 
-static
-void S_strng(struct set_parm const *sp) {
-   str        v   = sp->st->cb_g.s(sp, nil);
+static void S_strng(struct set_parm const *sp) {
+   str        v   = sp->st->f.cs ? sp->st->f.cs(sp, nil) : SG_cvStrng(sp, nil);
    mem_size_t len = ACS_StrLen(v);
 
    S_label(sp, true);
@@ -201,233 +188,192 @@ void S_strng(struct set_parm const *sp) {
    st.tbptr = len;
    for(mem_size_t i = 0; i < len; i++) Cps_SetC(st.txtbuf, i, v[i]);
 
-   if(G_TxtBox_HId(sp->g, sp->y, &st, _rght - 132, sp->y)) {
+   if(G_TxtBox_HId(sp->g, sp->y, &st, _rght - 130, sp->y)) {
       v = Cps_Expand_str(st.txtbuf, 0, st.tbptr);
-      sp->st->cb_g.s(sp, &v);
+      sp->st->f.cs ? sp->st->f.cs(sp, &v) : SG_cvStrng(sp, &v);
    }
 }
 
-static
-bool S_isEnabled(struct setting const *st) {
+static bool S_isEnabled(struct setting const *st) {
    return !st->pclass || get_bit(st->pclass, pl.pclass);
 }
 
-#define S_bndi(min, max) .bnd = {.i = {min, max}}
-#define S_bndk(min, max) .bnd = {.k = {min, max}}
+#define s_label(label, ...)           {_s_label, label, __VA_ARGS__}
+#define s_boole(label, ...)           {_s_boole, label, __VA_ARGS__}
+#define s_integ(label, min, max, ...) {_s_integ, label, {.bi = {min, max}}, __VA_ARGS__}
+#define s_fixed(label, min, max, ...) {_s_fixed, label, {.bk = {min, max}}, __VA_ARGS__}
+#define s_strng(label, ...)           {_s_strng, label, __VA_ARGS__}
+#define s_enume(label, min, max, ...) {_s_enume, label, {.bi = {min, max}}, __VA_ARGS__}
+#define s_color(label, ...)           s_enume(label, _gcr_first, _gcr_max, "color")
 
-#define S_color S_bndi(_gcr_first, _gcr_max), "color"
-
-#define S_cvBoole .cb_g = {.b = SG_cvBoole}
-#define S_cvInteg .cb_g = {.i = SG_cvInteg}
-#define S_cvFixed .cb_g = {.k = SG_cvFixed}
-#define S_cvStrng .cb_g = {.s = SG_cvStrng}
-
-struct setting const st_gui[] = {
-   {_s_label, "st_labl_gui_cbi"},
-   {_s_enume, "gui_cursor",    S_cvInteg, S_bndi(0, gui_curs_max), "cursor"},
-   {_s_enume, "gui_defcr",     S_cvInteg, S_color},
-   {_s_enume, "gui_theme",     S_cvInteg, S_bndi(0, cbi_theme_max), "theme"},
-   {_s_fixed, "gui_curspeed",  S_cvFixed, S_bndk(0.1, 2.0), "mult"},
-   {_s_integ, "gui_buyfiller", S_cvInteg, S_bndi(0, 70), "tick"},
-   {_s_empty},
-   {_s_label, "st_labl_gui_results"},
-   {_s_boole, "player_resultssound", S_cvBoole},
-   {_s_empty},
-   {_s_label, "st_labl_gui_language"},
-   {_s_enume, "gui_jpfont", S_cvInteg, S_bndi(0, font_num), "jpfont"},
+static struct setting const st_gui[] = {
+   s_label("st_labl_gui"),
+   s_enume("gui_cursor",    0, gui_curs_max, "cursor"),
+   s_color("gui_defcr"),
+   s_enume("gui_theme",     0, cbi_theme_max, "theme"),
+   s_fixed("gui_curspeed",  0.1, 2.0, "mult"),
+   s_integ("gui_buyfiller", 0, 70, "tick"),
+   s_enume("gui_jpfont", 0, font_num, "jpfont"),
+   s_label("st_labl_hud"),
+   s_enume("hud_type", 0, _hud_max + 1, "hudtype"),
+   s_boole("hud_showarmorind", .pclass = pM),
+   s_boole("hud_showweapons"),
+   s_boole("hud_showlvl"),
+   s_boole("hud_showscore"),
+   s_enume("hud_expbar", 0, lxb_max, "expbar"),
+   s_boole("hud_showlog"),
+   s_boole("hud_showammo"),
+   s_fixed("hud_logsize", 0.2, 1.0, "mult"),
+   s_boole("hud_logfromtop"),
+   s_color("hud_logcolor"),
+   s_boole("player_sillypickups"),
+   s_enume("player_scoredisp", _itm_disp_none, _itm_disp_max, "itmdisp"),
+   s_enume("player_itemdisp",  _itm_disp_none, _itm_disp_max, "itmdisp"),
+   s_enume("player_ammodisp",  _itm_disp_none, _itm_disp_max, "itmdisp"),
+   s_label("st_labl_projected"),
+   s_boole("hud_showdamage"),
+   s_fixed("player_itemdispalpha", 0.0, 1.0, "mult"),
+   s_fixed("hud_damagealpha",      0.0, 1.0, "mult"),
+   s_boole("hud_showitems"),
+   s_boole("hud_showinteract"),
+   s_color("hud_itemcolor"),
+   s_label("st_labl_xhair"),
+   s_boole("xhair_enable"),
+   s_boole("xhair_enablejuicer"),
+   s_enume("xhair_style", 0, lxh_max, "xhair"),
+   s_integ("xhair_r",     0, 255,     "byte"),
+   s_integ("xhair_g",     0, 255,     "byte"),
+   s_integ("xhair_b",     0, 255,     "byte"),
+   s_integ("xhair_a",     0, 255,     "byte"),
+   s_label("st_labl_scanner"),
+   s_integ("scanner_xoffs", -160, 160, "pxls"),
+   s_integ("scanner_yoffs", -160, 160, "pxls"),
+   s_enume("scanner_slide", 0, _ssld_max, "slide"),
+   s_boole("scanner_bar"),
+   s_enume("scanner_font",  0, _sfont_max, "sfont"),
+   s_color("scanner_color"),
 };
 
-struct setting const st_hud[] = {
-   {_s_label, "st_labl_hud_personal"},
-   {_s_boole, "hud_showlvl",   S_cvBoole},
-   {_s_boole, "hud_showscore", S_cvBoole},
-   {_s_enume, "hud_expbar",    S_cvInteg, S_bndi(0, lxb_max), "expbar"},
-   {_s_empty},
-   {_s_label, "st_labl_hud_hud"},
-   {_s_enume, "hud_type",         S_cvInteg, S_bndi(0, _hud_max + 1), "hudtype"},
-   {_s_boole, "hud_showarmorind", S_cvBoole, .pclass = pM},
-   {_s_boole, "hud_showweapons",  S_cvBoole},
-   {_s_empty},
-   {_s_label, "st_labl_hud_log"},
-   {_s_boole, "hud_showlog",         S_cvBoole},
-   {_s_fixed, "hud_logsize",         S_cvFixed, S_bndk(0.2, 1.0), "mult"},
-   {_s_boole, "hud_logfromtop",      S_cvBoole},
-   {_s_enume, "hud_logcolor",        S_cvInteg, S_color},
-   {_s_boole, "player_sillypickups", S_cvBoole},
-   {_s_empty},
-   {_s_label, "st_labl_hud_pops"},
-   {_s_enume, "player_scoredisp",     S_cvInteg, S_bndi(_itm_disp_none, _itm_disp_max), "itmdisp"},
-   {_s_enume, "player_itemdisp",      S_cvInteg, S_bndi(_itm_disp_none, _itm_disp_max), "itmdisp"},
-   {_s_enume, "player_ammodisp",      S_cvInteg, S_bndi(_itm_disp_none, _itm_disp_max), "itmdisp"},
-   {_s_boole, "hud_showdamage",       S_cvBoole},
-   {_s_fixed, "player_itemdispalpha", S_cvFixed, S_bndk(0.0, 1.0), "mult"},
-   {_s_fixed, "hud_damagealpha",      S_cvFixed, S_bndk(0.0, 1.0), "mult"},
-   {_s_empty},
-   {_s_label, "st_labl_hud_nearby"},
-   {_s_boole, "hud_showitems", S_cvBoole},
-   {_s_enume, "hud_itemcolor", S_cvInteg, S_color},
-   {_s_empty},
-   {_s_label, "st_labl_hud_xhair"},
-   {_s_boole, "xhair_enable",       S_cvBoole},
-   {_s_boole, "xhair_enablejuicer", S_cvBoole},
-   {_s_enume, "xhair_style",        S_cvInteg, S_bndi(0, lxh_max), "xhair"},
-   {_s_integ, "xhair_r", S_cvInteg, S_bndi(0, 255), "byte"},
-   {_s_integ, "xhair_g", S_cvInteg, S_bndi(0, 255), "byte"},
-   {_s_integ, "xhair_b", S_cvInteg, S_bndi(0, 255), "byte"},
-   {_s_integ, "xhair_a", S_cvInteg, S_bndi(0, 255), "byte"},
-   {_s_empty},
-   {_s_label, "st_labl_hud_scanner"},
-   {_s_integ, "scanner_xoffs", S_cvInteg, S_bndi(-160, 160), "pxls"},
-   {_s_integ, "scanner_yoffs", S_cvInteg, S_bndi(-160, 160), "pxls"},
-   {_s_enume, "scanner_font",    S_cvInteg, S_bndi(0, _sfont_max), "sfont"},
-   {_s_boole, "scanner_bar",     S_cvBoole},
-   {_s_enume, "scanner_slide",   S_cvInteg, S_bndi(0, _ssld_max), "slide"},
-   {_s_enume, "scanner_color",   S_cvInteg, S_color},
-};
-
-struct setting const st_itm[] = {
-   {_s_label, "st_labl_itm_autogroups"},
-   {_s_boole, "st_autobuy_1", .cb_g = {.b = SG_autoBuy}},
-   {_s_boole, "st_autobuy_2", .cb_g = {.b = SG_autoBuy}},
-   {_s_boole, "st_autobuy_3", .cb_g = {.b = SG_autoBuy}},
-   {_s_boole, "st_autobuy_4", .cb_g = {.b = SG_autoBuy}},
-   {_s_empty},
-   {_s_label, "st_labl_itm_pickups"},
-   {_s_boole, "player_brightweps", S_cvBoole},
-   {_s_boole, "player_noitemfx",   S_cvBoole},
-   {_s_empty},
-   {_s_label, "st_labl_itm_balance"},
-   {_s_boole, "sv_nobossdrop", S_cvBoole, .fill = true},
-   {_s_boole, "sv_wepdrop",    S_cvBoole},
-   {_s_empty},
-   {_s_label, "st_labl_itm_misc"},
-   {_s_boole, "player_altinvuln",  S_cvBoole},
-   {_s_boole, "player_scoresound", S_cvBoole},
-   {_s_boole, "player_teleshop",   S_cvBoole},
-   {_s_empty},
-   {_s_label, "st_labl_itm_flashlight"},
-   {_s_integ, "light_battery", S_cvInteg, S_bndi(0, 60), "secs"},
-   {_s_integ, "light_regen",   S_cvInteg, S_bndi(1, 10), "mult"},
-   {_s_integ, "light_r", S_cvInteg, S_bndi(0, 255), "byte"},
-   {_s_integ, "light_g", S_cvInteg, S_bndi(0, 255), "byte"},
-   {_s_integ, "light_b", S_cvInteg, S_bndi(0, 255), "byte"},
-   {_s_integ, "light_radius", S_cvInteg, S_bndi(100, 1000), "unit"},
-};
-
-struct setting const st_ply[] = {
-   {_s_label, "st_labl_ply_balance"},
-   {_s_integ, "sv_minhealth", S_cvInteg, S_bndi(0, 200), "perc"},
-   {_s_integ, "sv_autosave",  S_cvInteg, S_bndi(0, 30), "minu"},
-   {_s_enume, "player_lvsys", S_cvInteg, S_bndi(0, atsys_max), "lvsys"},
-   {_s_empty},
-   {_s_label, "st_labl_ply_damage"},
-   {_s_boole, "sv_revenge",          S_cvBoole},
-   {_s_boole, "player_damagebob",    S_cvBoole},
-   {_s_fixed, "player_damagebobmul", S_cvFixed, S_bndk(0.0, 1.0), "mult"},
-   {_s_empty},
-   {_s_label, "st_labl_ply_visuals"},
-   {_s_fixed, "player_footstepvol", S_cvFixed, S_bndk(0.0, 1.0), "mult"},
-   {_s_fixed, "player_viewtilt",    S_cvFixed, S_bndk(0.0, 1.0), "mult"},
-   {_s_boole, "st_done_intro",      .cb_g = {.b = SG_doneIntro}},
-   {_s_empty},
-   {_s_strng, "player_pronouns", S_cvStrng},
-};
-
-struct setting const st_wep[] = {
-   {_s_label, "st_labl_wep_effects"},
-   {_s_boole, "weapons_magicselanims", S_cvBoole, .pclass = pC},
-   {_s_boole, "weapons_fastlazshot",   S_cvBoole, .pclass = pM},
-   {_s_boole, "weapons_rainbowlaser",  S_cvBoole, .pclass = pM},
-   {_s_boole, "weapons_reducedsg",     S_cvBoole, .pclass = pM},
-   {_s_boole, "weapons_riflescope",    S_cvBoole, .pclass = pM},
-   {_s_boole, "weapons_casingfadeout", S_cvBoole},
-   {_s_boole, "weapons_casings",       S_cvBoole},
-   {_s_boole, "weapons_magdrops",      S_cvBoole},
-   {_s_boole, "weapons_magfadeout",    S_cvBoole},
-   {_s_boole, "weapons_nofirebob",     S_cvBoole},
-   {_s_fixed, "weapons_recoil",        S_cvFixed, S_bndk(0.0,  1.0), "mult"},
-   {_s_fixed, "weapons_reloadbob",     S_cvFixed, S_bndk(0.0,  1.0), "mult"},
-   {_s_fixed, "weapons_ricochetvol",   S_cvFixed, S_bndk(0.0,  1.0), "mult"},
-   {_s_fixed, "weapons_scopealpha",    S_cvFixed, S_bndk(0.0,  1.0), "mult"},
-   {_s_fixed, "weapons_zoomfactor",    S_cvFixed, S_bndk(1.0, 10.0), "mult"},
-   {_s_empty},
-   {_s_label, "st_labl_wep_behaviour"},
-   {_s_boole, "weapons_riflemodeclear", S_cvBoole, .pclass = pM},
-   {_s_boole, "weapons_reloadempty",    S_cvBoole},
-};
-
-struct setting const st_wld[] = {
-   {_s_label, "st_labl_wld_balance"},
-   {_s_integ, "sv_difficulty", S_cvInteg, S_bndi(1, 100), "perc"},
-   {_s_boole, "sv_extrahard",  S_cvBoole},
-   {_s_boole, "sv_nobosses", S_cvBoole, .fill = true},
-   {_s_empty},
-   {_s_label, "st_labl_wld_fx"},
-   {_s_boole, "sv_lessparticles", S_cvBoole},
-   {_s_empty},
-   {_s_label, "st_labl_wld_env"},
-   {_s_enume, "sv_rain",           S_cvInteg, S_bndi(0, 3), "rain"},
-   {_s_enume, "sv_rainphysics",    S_cvInteg, S_bndi(0, 3), "rainphys"},
-   {_s_boole, "player_rainshader", S_cvBoole},
-   {_s_enume, "sv_sky",            S_cvInteg, S_bndi(0, 4), "sky"},
-   {_s_fixed, "sv_skydarkening",   S_cvFixed, S_bndk(0.0, 1.0),  "mult"},
+static struct setting const st_gam[] = {
+   s_label("st_labl_balance"),
+   s_integ("sv_difficulty", 1, 100, "perc"),
+   s_enume("player_lvsys", 0, atsys_max, "lvsys"),
+   s_boole("sv_extrahard"),
+   s_boole("sv_nobosses", .fill = true),
+   s_integ("sv_minhealth", 0, 200, "perc"),
+   s_integ("sv_autosave",  0, 30, "minu"),
+   s_label("st_labl_fx"),
+   s_boole("sv_revenge"),
+   s_boole("sv_lessparticles"),
+   s_boole("player_altinvuln"),
+   s_boole("st_done_intro", .f = {.cb = SG_doneIntro}),
+   s_label("st_labl_player"),
+   s_boole("player_damagebob"),
+   s_fixed("player_damagebobmul", 0.0, 1.0, "mult"),
+   s_fixed("player_viewtilt",     0.0, 1.0, "mult"),
+   s_fixed("player_footstepvol",  0.0, 1.0, "mult"),
+   s_boole("player_resultssound"),
+   s_boole("player_scoresound"),
+   s_strng("player_pronouns"),
+   s_label("st_labl_env"),
+   s_enume("sv_rain",        0, 3, "rain"),
+   s_enume("sv_rainphysics", 0, 3, "rainphys"),
+   s_boole("player_rainshader"),
+   s_enume("sv_sky",          0, 4,     "sky"),
+   s_fixed("sv_skydarkening", 0.0, 1.0, "mult"),
    #ifndef NDEBUG
-   {_s_empty},
-   {_s_label, "st_labl_ply_postgame"},
-   {_s_boole, "sv_postgame", S_cvBoole, .fill = true},
+   s_label("st_labl_postgame"),
+   s_boole("sv_postgame", .fill = true),
    #endif
 };
 
-struct {
-   str                  *nam;
-   struct setting const *set;
-   mem_size_t            num;
-} const settings[] = {
-#define Typ(name) {&sl_st_labl_##name, st_##name, countof(st_##name)}
+static struct setting const st_itm[] = {
+   s_label("st_labl_autogroups"),
+   s_boole("st_autobuy_1", .f = {.cb = SG_autoBuy}),
+   s_boole("st_autobuy_2", .f = {.cb = SG_autoBuy}),
+   s_boole("st_autobuy_3", .f = {.cb = SG_autoBuy}),
+   s_boole("st_autobuy_4", .f = {.cb = SG_autoBuy}),
+   s_label("st_labl_pickups"),
+   s_boole("player_brightweps"),
+   s_boole("player_noitemfx"),
+   s_boole("player_teleshop"),
+   s_label("st_labl_balance"),
+   s_boole("sv_nobossdrop", .fill = true),
+   s_boole("sv_wepdrop"),
+   s_label("st_labl_flashlight"),
+   s_integ("light_battery", 0,   60,   "secs"),
+   s_integ("light_regen",   1,   10,   "mult"),
+   s_integ("light_r",       0,   255,  "byte"),
+   s_integ("light_g",       0,   255,  "byte"),
+   s_integ("light_b",       0,   255,  "byte"),
+   s_integ("light_radius",  100, 1000, "unit"),
+};
+
+static struct setting const st_wep[] = {
+   s_label("st_labl_effects"),
+   s_boole("weapons_magicselanims", .pclass = pC),
+   s_boole("weapons_fastlazshot",   .pclass = pM),
+   s_boole("weapons_rainbowlaser",  .pclass = pM),
+   s_boole("weapons_reducedsg",     .pclass = pM),
+   s_boole("weapons_riflescope",    .pclass = pM),
+   s_boole("weapons_casingfadeout"),
+   s_boole("weapons_casings"),
+   s_boole("weapons_magdrops"),
+   s_boole("weapons_magfadeout"),
+   s_boole("weapons_nofirebob"),
+   s_fixed("weapons_recoil",      0.0,  1.0, "mult"),
+   s_fixed("weapons_reloadbob",   0.0,  1.0, "mult"),
+   s_fixed("weapons_ricochetvol", 0.0,  1.0, "mult"),
+   s_fixed("weapons_scopealpha",  0.0,  1.0, "mult"),
+   s_fixed("weapons_zoomfactor",  1.0, 10.0, "mult"),
+   s_label("st_labl_behaviour"),
+   s_boole("weapons_riflemodeclear", .pclass = pM),
+   s_boole("weapons_reloadempty"),
+};
+
+static struct settings_tab const settings[] = {
+#define Typ(name) {#name, st_##name, countof(st_##name)}
    Typ(gui),
-   Typ(hud),
+   Typ(gam),
    Typ(itm),
-   Typ(ply),
    Typ(wep),
-   Typ(wld),
 #undef Typ
 };
 
 void P_CBI_TabSettings(struct gui_state *g) {
+   noinit static gtab_t tn[countof(settings)];
    pl.cbi.st.settingsfill.tic = 70;
-
    i32 set_num = 0;
-
-   gtab_t tn[countof(settings)];
-
    for(i32 i = 0; i < countof(settings); i++) {
-      faststrcpy_str(tn[i], ns(lang(*settings[i].nam)));
+      faststrcpy_str(tn[i], ns(lang_fmt(LANG "st_tab_%s", settings[i].nam)));
    }
-
-   i32 yp = G_Tabs(g, &pl.cbi.st.settingstab, tn, countof(tn), 0, 0, 1);
+   i32 yp = G_Tabs(g, &pl.cbi.st.settingstab, tn, countof(settings), 1);
    yp *= gui_p.btntab.h;
-
+   i32 y_len = 0;
    struct setting const *set = settings[pl.cbi.st.settingstab].set;
    mem_size_t            num = settings[pl.cbi.st.settingstab].num;
-
-   for(i32 i = 0; i < num; i++) {
-      if(S_isEnabled(&set[i])) {
-         set_num++;
-      }
-   }
-
-   G_ScrBeg(g, &pl.cbi.st.settingscr, 2, 17 + yp, _rght, 192 - yp,
-            set_num * 10);
-
    struct set_parm sp = {g, 0, 0};
-
    for(i32 i = 0; i < num; i++) {
       sp.st = &set[i];
-
       if(S_isEnabled(sp.st)) {
-         if(!G_ScrOcc(g, &pl.cbi.st.settingscr, sp.y, 10)) {
-            switch(sp.st->cb) {
-            case _s_empty: S_empty(&sp); break;
+         set_num++;
+         y_len += _leng;
+         if(sp.st->ty == _s_label && i != 0) {
+            y_len += _leng;
+         }
+      }
+   }
+   G_ScrBeg(g, &pl.cbi.st.settingscr, 2, 17 + yp, _rght, 192 - yp, y_len);
+   for(i32 i = 0; i < num; i++) {
+      sp.st = &set[i];
+      if(S_isEnabled(sp.st)) {
+         y_len = _leng;
+         if(sp.st->ty == _s_label && i != 0) {
+            y_len += _leng;
+            sp.y  += _leng;
+         }
+         if(!G_ScrOcc(g, &pl.cbi.st.settingscr, sp.y, y_len)) {
+            switch(sp.st->ty) {
             case _s_label: S_label(&sp); break;
             case _s_boole: S_boole(&sp); break;
             case _s_integ: S_integ(&sp); break;
@@ -436,11 +382,9 @@ void P_CBI_TabSettings(struct gui_state *g) {
             case _s_strng: S_strng(&sp); break;
             }
          }
-
          sp.y += _leng;
       }
    }
-
    G_ScrEnd(g, &pl.cbi.st.settingscr);
 }
 

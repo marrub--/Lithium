@@ -29,7 +29,7 @@ Ready:
       Lith_CopyEffect.create("Lith_HeavenlyImage", self, (-4,-4,0), (-5,-7,1));
       Lith_CopyEffect.create("Lith_HeavenlyImage", self, (-4, 4,0), (-5, 7,1));
       self.GiveInventory("PowerFlight", 1);
-      A_AlertMonsters();
+      SoundAlert(Invoker.Owner);
       for(let it = BlockThingsIterator.create(self, 1024); it.next();) {
          let mo = it.thing;
          if(mo != self && mo.bSHOOTABLE && mo.checkSight(self)) {

@@ -115,7 +115,7 @@ override void markPrecacheSounds() {
 }
 action(Weapon) void Lith_A_FireRocket()
 {
-   A_AlertMonsters();
+   SoundAlert(Invoker.Owner);
    lith_takeAmmo();
    A_StartSound("weapons/rocket/fire", lch_weapon);
    A_FireProjectile("Lith_Rocket");
@@ -124,7 +124,7 @@ action(Weapon) void Lith_A_FireRocket()
 
 action(Weapon) void Lith_A_FireGrenade()
 {
-   A_AlertMonsters();
+   SoundAlert(Invoker.Owner);
    lith_takeAmmo();
    A_StartSound("weapons/rocket/grenade", lch_weapon);
    A_FireProjectile("Lith_RocketGrenade");
@@ -133,7 +133,7 @@ action(Weapon) void Lith_A_FireGrenade()
 
 action(Weapon) void Lith_A_FireHomingRocket()
 {
-   A_AlertMonsters();
+   SoundAlert(Invoker.Owner);
    lith_takeAmmo();
    A_StartSound("weapons/rocket/fire", lch_weapon);
    A_FireProjectile("Lith_HomingRocket");
@@ -165,7 +165,7 @@ Fire:
 FireAnim:
    GRLG B 1 bright {
       lith_gunFlash();
-      a_alertMonsters();
+      soundAlert(invoker.owner);
       a_overlay(_psp_flash, "Flash");
       a_overlayFlags(_psp_flash, pspf_renderstyle, true);
       a_overlayRenderStyle(_psp_flash, style_add);
@@ -246,7 +246,7 @@ FireUnrealCheckRefire:
    GRLG A 0 A_ReFire("FireUnrealRefire");
 FireUnrealReal:
    GRLG A 0 {
-      A_AlertMonsters();
+      SoundAlert(Invoker.Owner);
       A_StartSound("weapons/rocket/launch", lch_weapon3);
       A_StartSound("weapons/rocket/fire", lch_weapon);
    }

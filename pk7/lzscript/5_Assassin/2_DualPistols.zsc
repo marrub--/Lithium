@@ -20,7 +20,7 @@ default {
 action(Weapon) void Lith_A_FireDualPistols(int xofs) {
    Lith_A_MagIncr();
    lith_gunFlash();
-   a_alertMonsters();
+   soundAlert(invoker.owner);
    Lith_FireBullets(2, 1, -1, 10, tracerX: xofs);
    Lith_A_GunSmokeSmall(xofs * 0.4);
    Lith_A_RecoilUp(0.4);

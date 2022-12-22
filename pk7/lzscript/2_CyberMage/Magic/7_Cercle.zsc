@@ -314,7 +314,7 @@ Fire:
    goto ReadySelector;
    TNT1 A 10 {
       lith_takeAmmo(int.max);
-      A_AlertMonsters();
+      SoundAlert(Invoker.Owner);
       ACS_NamedExecuteWithResult("Lith_Cercle", false);
    }
    goto ReadySelector;

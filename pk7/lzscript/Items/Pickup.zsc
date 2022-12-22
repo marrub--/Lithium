@@ -22,14 +22,14 @@ class Lith_ItemGlow : Actor {
    }
 
    override void tick() {
-      if(!isFrozen() && getAge() > 5 && (alpha -= 0.03) < 0) {
+      if(!master || !master.bSpecial || (!isFrozen() && getAge() > 5 && (alpha -= 0.03) < 0)) {
          destroy();
       }
    }
 
    states {
    Spawn:
-      LI09 # -1;
+      #EIG # -1;
       stop;
    }
 }
@@ -118,26 +118,41 @@ mixin class Lith_Pickup {
       if(lith_player_noitemfx || bPkup_NoGlow) {
          return;
       }
-      let s = sin(m_pkOffset + msTimeF() * 0.14285);
-      let z = sin(m_pkOffset + msTimeF() * 0.05714);
-      let c = cos(m_pkOffset + msTimeF() * 0.14285);
+      let s = sin(m_pkOffset + level.time/35.0*142.85);
+      let z = sin(m_pkOffset + level.time/35.0* 57.14);
+      let c = cos(m_pkOffset + level.time/35.0*142.85);
       let n = 1 - s;
       switch(d / 512) {
       case 0:
-         spawn(m_pkGlow, pos+(s*32,    c*32, 24+z*9 )).frame = m_pkGlowFrame;
-         spawn(m_pkGlow, pos+(c*32, n*32-32, 24+s*32)).frame = m_pkGlowFrame;
-         spawn(m_pkGlow, pos+(n*32-32, c*32, 24+s*32)).frame = m_pkGlowFrame;
+         pkSpawnGlow(pos+(s*32,    c*32, 24+z*9 ));
+         pkSpawnGlow(pos+(c*32, n*32-32, 24+s*32));
+         pkSpawnGlow(pos+(n*32-32, c*32, 24+s*32));
       case 1:
-         spawn(m_pkGlow, pos+(   0, s*32, 24+c*32)).frame = m_pkGlowFrame;
-         spawn(m_pkGlow, pos+(s*32, c*32, 24+s*32)).frame = m_pkGlowFrame;
+         pkSpawnGlow(pos+(   0, s*32, 24+c*32));
+         pkSpawnGlow(pos+(s*32, c*32, 24+s*32));
       case 2:
-         spawn(m_pkGlow, pos+(s*32, 0, 24+c*32)).frame = m_pkGlowFrame;
+         pkSpawnGlow(pos+(s*32, 0, 24+c*32));
       default:
-         spawn(m_pkGlow, pos+(c*32, s*32, 24+s*32)).frame = m_pkGlowFrame;
+         pkSpawnGlow(pos+(c*32, s*32, 24+s*32));
       }
    }
 
+   void pkSpawnGlow(vector3 pos) {
+      let m = spawn(m_pkGlow, pos);
+      m.frame = m_pkGlowFrame;
+      m.master = self;
+   }
+
    void pkSpawnFx() {
+      /* TODO
+      let p = Lith_Player(players[consoleplayer].mo);
+      a_startSound("player/" .. p.m_discrim .. "/item-spawn", lch_body, attenuation: 0.5);
+      switch(pcl) {
+      case pcl_darklord:
+         spawn('Lith_DarkLordItemSpawnFx', pos);
+         break;
+      }
+      */
       bPkup_SpawnFx = false;
    }
 

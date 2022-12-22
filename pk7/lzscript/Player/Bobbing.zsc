@@ -19,7 +19,7 @@ int m_mbobdir;
 bool m_noFireBob;
 
 void Lith_BobWeapon() {
-   double mang = atan2(vel.y, vel.x) - angle;
+   double mang = vel.angle() - angle;
    double mvel = vel.xy.length();
 
    m_LastVXVel = m_VXVel;

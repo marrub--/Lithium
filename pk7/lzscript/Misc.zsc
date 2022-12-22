@@ -72,7 +72,7 @@ class Lith_TargetPractice : Actor {
       Scale 1.7;
       Height 56;
       Radius 32;
-      Activation THINGSPEC_DEFAULT|THINGSPEC_NODEATHSPECIAL|THINGSPEC_SWITCH|THINGSPEC_DEACTIVATE;
+      Activation AF_DEFAULT|AF_NODEATHSPECIAL|AF_SWITCH|AF_DEACTIVATE;
       Mass int.max;
       +NoDamageThrust
       +Shootable
@@ -154,7 +154,7 @@ class Lith_TargetPractice : Actor {
 
    states {
    Spawn:
-      LI09 Y -1;
+      #ETA A -1;
       stop;
    }
 }

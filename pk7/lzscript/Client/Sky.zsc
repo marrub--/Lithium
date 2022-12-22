@@ -86,7 +86,7 @@ ui void drawSky(RenderEvent evt) {
    } else {
       int dw = m_skyBaseDw, dh = m_skyBaseDh;
       int sw = m_skyBaseSw, sh = m_skyBaseSh;
-      int xofs = int((msTimeF() * m_skySpeed) % dw);
+      int xofs = int(((gameTic + evt.fracTic) * 28.5714 * m_skySpeed) % dw);
       int yofs = m_skyBaseY;
       m_skyCanvas.drawTexture(m_skyBase, true, canvas_w-dw, 0, DTA_SrcWidth,sw, DTA_SrcHeight,sh, DTA_DestHeight,dh, DTA_DestWidth,dw, DTA_SrcY,yofs, DTA_SrcX,-xofs, DTA_FlipY,true);
       m_skyCanvas.drawTexture(m_skyBase, true, 0, 0, DTA_SrcWidth,xofs, DTA_DestHeight,sh, DTA_DestWidth,xofs, DTA_SrcY,yofs, DTA_SrcX,sw-xofs, DTA_FlipY,true);

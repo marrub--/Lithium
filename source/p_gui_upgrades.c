@@ -174,7 +174,7 @@ void GUIUpgradeRequirements(struct gui_state *g, struct upgrade *upgr) {
 
 static
 void GUIUpgradeDescription(struct gui_state *g, struct upgrade *upgr) {
-   G_Clip(g, g->ox+98, g->oy+17, 190, 170, 184);
+   G_Clip(g, 98, 17, 190, 170, 184);
 
    /* Cost */
    cstr mark;

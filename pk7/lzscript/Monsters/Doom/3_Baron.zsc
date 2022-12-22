@@ -156,11 +156,11 @@ Crash:
    BOSS O -1 A_BossDeath;
    stop;
 Death.Extreme:
-   LI07 H -1;
+   #MBA A -1;
 Crash.Extreme:
-   LI07 H 5 Lith_A_XDie;
-   LI07 IJKLMNO 5;
-   LI07 P -1 A_BossDeath;
+   #MBA A 5 Lith_A_XDie;
+   #MBA BCDEFGH 5;
+   #MBA I -1 A_BossDeath;
    stop;
 
 Raise:

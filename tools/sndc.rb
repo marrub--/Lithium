@@ -22,7 +22,7 @@ class OutDef
    end
 
    def to_s
-      @path.join("/") + " " + @file
+      @path.join("/") + " = " + @file
    end
 end
 

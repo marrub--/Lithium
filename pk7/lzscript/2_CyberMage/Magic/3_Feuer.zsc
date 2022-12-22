@@ -146,7 +146,7 @@ default {
 
 action(Weapon) void Lith_A_FireFeuer(bool left) {
    CallACS("Lith_Feuer", left, true);
-   A_AlertMonsters();
+   SoundAlert(Invoker.Owner);
    lith_takeAmmo(15);
    A_StartSound("weapons/feuer/fire", lch_weapon);
 }

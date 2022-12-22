@@ -49,9 +49,9 @@ class Lith_HotEmber : Actor {
    }
    states {
    Spawn:
-      LI0A A 1 light("Lith_BulletPuff1");
-      LI0A BBCC 4 light("Lith_BulletPuff2") a_spawnItemEx("Lith_HotEmberTrail", fRandom[lith_bulletpuff](0, 0.5), fRandom[lith_bulletpuff](-0.5, 0.5), fRandom[lith_bulletpuff](-0.5, 0.5), fRandom[lith_bulletpuff](0, 0.5), fRandom[lith_bulletpuff](-0.5, 0.5), fRandom[lith_bulletpuff](-0.5, 0.5));
-      LI0A DEFG 4 light("Lith_BulletPuff3");
+      #EEM A 1 light("Lith_BulletPuff1");
+      #EEM BBCC 4 light("Lith_BulletPuff2") a_spawnItemEx("Lith_HotEmberTrail", fRandom[lith_bulletpuff](0, 0.5), fRandom[lith_bulletpuff](-0.5, 0.5), fRandom[lith_bulletpuff](-0.5, 0.5), fRandom[lith_bulletpuff](0, 0.5), fRandom[lith_bulletpuff](-0.5, 0.5), fRandom[lith_bulletpuff](-0.5, 0.5));
+      #EEM DEFG 4 light("Lith_BulletPuff3");
       stop;
    }
 }
@@ -69,7 +69,7 @@ class Lith_HotEmberTrail : Actor {
 
    states {
    Spawn:
-      EPUF EFG 5 light("Lith_BulletPuff3");
+      #EEM EFG 5 light("Lith_BulletPuff3");
       stop;
    }
 }
@@ -109,9 +109,9 @@ class Lith_BulletAfterSmoke : Actor {
    states {
    Spawn:
       TNT1 A 0;
-      SMOK AAAAAAAAAABBBBBBBBBBCCCCCCCCCC 1 a_fadeIn(fRandom[lith_bulletpuff](0.001, 0.005));
-      SMOK DEFG random(14, 56);
-      SMOK HHHHHHHHHIIIIIIIIIJJJJJJJJJJJJJJKKKKKKKKK 1 a_fadeOut(0.005);
+      #ESM AAAAAAAAAABBBBBBBBBBCCCCCCCCCC 1 a_fadeIn(fRandom[lith_bulletpuff](0.001, 0.005));
+      #ESM DEFG random(14, 56);
+      #ESM HHHHHHHHHIIIIIIIIIJJJJJJJJJJJJJJKKKKKKKKK 1 a_fadeOut(0.005);
       stop;
    }
 }
@@ -273,7 +273,7 @@ override void postBeginPlay() {
       spawn("Lith_BulletRicochetSpark", pos);
    }
    if(random[lith_bulletpuff](0, 20) == 0) {
-      spawn("Lith_PuffSmoke", pos + (0, 0, 4.0 + 0.1 * random[lith_bulletpuff](-10, 10)));
+      spawn("Lith_PuffSmoke", pos.plusZ(4.0 + 0.1 * random[lith_bulletpuff](-10, 10)));
    }
 }
 

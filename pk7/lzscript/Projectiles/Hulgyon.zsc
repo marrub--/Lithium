@@ -30,7 +30,7 @@ class Lith_HulgyonHit : Actor
    {
    Spawn:
       TNT1 A 0;
-      TNT1 A 0 A_AlertMonsters;
+      TNT1 A 0 soundAlert(target);
       TNT1 A 0 A_StartSound("weapons/hulgyon/proc", lch_body);
       TNT1 A 1 Lith_A_Spawn(0);
       TNT1 A 1 Lith_A_Spawn(10);

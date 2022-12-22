@@ -19,7 +19,7 @@ class Lith_SwordHipcher : Actor
    states
    {
    Spawn:
-      SMOK A 15 A_FadeOut(0.1);
+      #ESM A 15 A_FadeOut(0.1);
       wait;
    }
 }

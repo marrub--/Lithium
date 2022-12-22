@@ -37,7 +37,7 @@ _UseKnife:
    #### # 1 offset(17, 87) lith_a_setInterpolation(false);
 _KnifeStart:
    TNT1 A 0 {invoker.m_KnifeReFire = true;}
-   TNT1 A 0 offset(1, 32) A_AlertMonsters;
+   TNT1 A 0 offset(1, 32) soundAlert(invoker.owner);
    TNT1 A 0 A_JumpIf(countInv("Lith_Knif"), "_Knife1");
    KNIF A 1 A_StartSound("weapons/knife/swing1", lch_weapon);
    KNIF B 1 lith_a_setInterpolation(true);

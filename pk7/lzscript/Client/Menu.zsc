@@ -178,10 +178,10 @@ class Lith_SkillEpMenu : ListMenu {
       super.init(parent, desc);
       double maxWidth = 0;
       double minX     = 32767;
-      for(int i = 0, s = mDesc.mItems.size(); i < s; ++i) {
-         int width = mDesc.mItems[i].getWidth();
+      foreach(item : mDesc.mItems) {
+         int width = item.getWidth();
          int x     = 160 - width / 2;
-         mDesc.mItems[i].setX(x);
+         item.setX(x);
          maxWidth = max(maxWidth, width);
          minX     = min(minX,     x);
       }
@@ -231,12 +231,12 @@ ui void tickMenu() {
    m_screenWasDim = m_screenDim;
    m_screenDim = menuActive && !Menu.getCurrentMenu().dontDim;
    if(m_screenDim != m_screenWasDim) {
-      m_screenDimNext = msTimeF() + 430;
+      m_screenDimNext = gameTic + 15;
    }
 }
 
 ui void drawMenu(RenderEvent evt) {
-   double dim = clamp((m_screenDimNext - msTimeF()) / 430, 0, 1);
+   double dim = clamp((m_screenDimNext - gameTic + evt.fracTic) / 15.0, 0, 1);
    if(m_screenDim) {
       dim = 1 - dim;
    }
@@ -303,12 +303,6 @@ ui static void drawBack(double x, double y, double w, double h, vector2 vsz, uin
       drawLn(cp.x, cp.y, np.x, np.y, 0xFF00FF00, vsz, vfl);
       cp = np;
    }
-   /*
-   drawLn(x, y, x+w, y, 0xFFFFFF00, vsz, vfl);
-   drawLn(x+w, y, x+w, y+h, 0xFFFFFF00, vsz, vfl);
-   drawLn(x+w, y+h, x, y+h, 0xFFFFFF00, vsz, vfl);
-   drawLn(x, y+h, x, y, 0xFFFFFF00, vsz, vfl);
-   */
 }
 
 /* EOF */

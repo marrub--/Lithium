@@ -63,7 +63,7 @@ default
 
 action(Weapon) void Lith_A_LaserFire()
 {
-   A_AlertMonsters();
+   SoundAlert(Invoker.Owner);
    class<Actor> trail = "Lith_LazShotgunTrail";
    if(lith_weapons_fastlazshot) {
       trail = "";
@@ -94,14 +94,27 @@ Fire:
    LSHT I 2 bright Lith_A_LaserFire;
    LSHT H 1 bright;
    LSHT A 4;
-   LSHT BB 1 Lith_A_RecoilDn(0.375);
+   LSHT B 1 Lith_A_RecoilDn(0.375);
+   #### # 0 lith_a_setInterpolation(true);
+   LSHT B 1 Lith_A_RecoilDn(0.375);
    LSHT C 2 A_StartSound("weapons/lshotgun/open", lch_reload);
+   #### # 0 lith_a_setInterpolation(false);
    LSHT D 2;
+   #### # 0 lith_a_setInterpolation(true);
    LSHT E 3;
+   #### # 0 lith_a_setInterpolation(false);
    LSHT F 5;
+   #### # 0 lith_a_setInterpolation(true);
    LSHT G 2 A_StartSound("weapons/lshotgun/close", lch_reload2);
-   LSHT ED 2;
-   LSHT CA 3;
+   #### # 0 lith_a_setInterpolation(false);
+   LSHT E 2;
+   #### # 0 lith_a_setInterpolation(true);
+   LSHT D 2;
+   #### # 0 lith_a_setInterpolation(false);
+   LSHT C 3;
+   #### # 0 lith_a_setInterpolation(true);
+   LSHT B 2;
+   #### # 0 lith_a_setInterpolation(false);
    LSHT A 2;
    LSHT AAAAAAA 1 A_ReFire;
    goto ReadySelector;

@@ -151,7 +151,6 @@ class Lith_Le_ProjScreen {
 	// This will be your screen no matter the resolution:
 
 	/*
-
 	(-1, -1) --	---	---	(0, -1) ---	---	---	---	(1, -1)
 	|												|
 	|												|
@@ -161,7 +160,6 @@ class Lith_Le_ProjScreen {
 	|												|
 	|												|
 	(-1, 1)	---	---	---	(0, 1)	---	---	---	---	(1, 1)
-
 	*/
 
 	// So this scales such a position back into your drawing resolution.

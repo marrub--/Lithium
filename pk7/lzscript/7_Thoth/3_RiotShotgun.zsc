@@ -22,7 +22,7 @@ bool m_duplex;
 action(Weapon) void Lith_A_FireRiotShotgun() {
    lith_takeAmmo(10);
    lith_gunFlash();
-   a_alertMonsters();
+   soundAlert(invoker.owner);
    Lith_FireBullets(7, 7, 17, 7, FBF_NORANDOM);
    Lith_A_GunSmoke();
    Lith_A_RecoilUp(4);

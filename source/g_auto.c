@@ -14,56 +14,60 @@
 #include "p_player.h"
 #include "w_world.h"
 
-alloc_aut(0) stkcall static
-void G_cutBox(struct gui_clip const *other, i32 *x, i32 *y, i32 *w, i32 *h) {
-   *x = clampi(*x, other->x, other->x + other->w);
-   *y = clampi(*y, other->y, other->y + other->h);
+noinit static struct gui_clip r;
 
-   *w = mini(*x + *w, other->x + other->w) - *x;
-   *h = mini(*y + *h, other->y + other->h) - *y;
+alloc_aut(0) stkcall static void G_cutBox(struct gui_clip const *other, struct gui_clip *r) {
+   r->x  = clampi(r->x, other->x, other->x + other->w);
+   r->y  = clampi(r->y, other->y, other->y + other->h);
+   r->w  = mini(r->x + r->w,  other->x + other->w)  - r->x;
+   r->h  = mini(r->y + r->h,  other->y + other->h)  - r->y;
+   r->ww = mini(r->x + r->ww, other->x + other->ww) - r->x;
 }
 
-static
-void G_setClip(struct gui_state *g) {
+alloc_aut(0) stkcall static void G_setClip(struct gui_state *g) {
    if(g->clip >= 0) {
       struct gui_clip *clip = &g->clips[g->clip];
+      #ifndef NDEBUG
+      if(dbgflags(dbgf_gui)) {
+         i32 x = clip->x, y = clip->y, w = clip->w, h = clip->h;
+         PrintLine(x,     y,     x + w, y + h, 0xFF00FFFF);
+         PrintLine(x,     y,     x + w, y,     0xFF00FFFF);
+         PrintLine(x,     y + h, x + w, y + h, 0xFF00FFFF);
+         PrintLine(x + w, y,     x + w, y + h, 0xFF00FFFF);
+         PrintLine(x,     y,     x,     y + h, 0xFF00FFFF);
+         PrintLine(x, y + h / 2, x + clip->ww, y + h / 2, 0xFFFF00FF);
+      }
+      #endif
       SetClipW(clip->x, clip->y, clip->w, clip->h, clip->ww);
    } else {
       ClearClip();
    }
 }
 
-void G_Auto(struct gui_state *g, gid_t id, i32 x, i32 y, i32 w, i32 h,
-            bool slide) {
-   x += g->ox;
-   y += g->oy;
-
+void G_Auto(struct gui_state *g, gid_t id, i32 x_, i32 y_, i32 w_, i32 h_, bool slide) {
+   r.x = x_ + g->ox; r.y = y_ + g->oy; r.w = w_; r.h = h_; r.ww = w_;
    if(g->clip >= 0) {
-      G_cutBox(&g->clips[g->clip], &x, &y, &w, &h);
+      G_cutBox(&g->clips[g->clip], &r);
    }
-
-   if(aabb_point(x, y, w - 1, h - 1, g->cx, g->cy)) {
+   if(aabb_point(r.x, r.y, r.w - 1, r.h - 1, g->cx, g->cy)) {
       g->hot = id;
-
       if(g->active == 0 && g->clicklft) {
          g->active = id;
       }
    }
-
    /* check slide state */
    if(slide && g->slide != id && g->active == id) {
       g->slide      = id;
       g->slidetime  = 1;
       g->slidecount = 0;
    }
-
    #ifndef NDEBUG
    if(dbgflags(dbgf_gui)) {
-      PrintLine(x, y, x + w, y + h, 0xFFFF0000);
-      PrintLine(x, y, x + w, y, 0xFFFF0000);
-      PrintLine(x, y, x, y + h, 0xFFFF0000);
-      PrintLine(x, y + h, x + w, y + h, 0xFFFF0000);
-      PrintLine(x + w, y, x + w, y + h, 0xFFFF0000);
+      PrintLine(r.x,       r.y,       r.x + r.w, r.y + r.h, 0xFFFF0000);
+      PrintLine(r.x,       r.y,       r.x + r.w, r.y,       0xFFFF0000);
+      PrintLine(r.x,       r.y,       r.x,       r.y + r.h, 0xFFFF0000);
+      PrintLine(r.x,       r.y + r.h, r.x + r.w, r.y + r.h, 0xFFFF0000);
+      PrintLine(r.x + r.w, r.y,       r.x + r.w, r.y + r.h, 0xFFFF0000);
    }
    #endif
 }
@@ -144,40 +148,18 @@ void G_End(struct gui_state *g, i32 curs) {
 
 void G_Clip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, i32 ww) {
    struct gui_clip *clip, *other;
-
    if(g->clip >= 0) {
       other = &g->clips[g->clip];
    } else {
       other = nil;
    }
-
    clip = &g->clips[++g->clip];
-
-   clip->x = x;
-   clip->y = y;
-   clip->w = w;
-   clip->h = h;
-
-   if(other) {
-      G_cutBox(other, &clip->x, &clip->y, &clip->w, &clip->h);
-   }
-
+   clip->x = x + g->ox; clip->y = y + g->oy; clip->w = w; clip->h = h;
    clip->ww = ww ? mini(ww, clip->w) : clip->w;
-
-   G_setClip(g);
-
-   #ifndef NDEBUG
-   if(dbgflags(dbgf_gui)) {
-      x = clip->x, y = clip->y, w = clip->w, h = clip->h;
-      PrintLine(x,     y,     x + w, y + h, 0xFF00FFFF);
-      PrintLine(x,     y,     x + w, y,     0xFF00FFFF);
-      PrintLine(x,     y + h, x + w, y + h, 0xFF00FFFF);
-      PrintLine(x + w, y,     x + w, y + h, 0xFF00FFFF);
-      PrintLine(x,     y,     x,     y + h, 0xFF00FFFF);
-
-      PrintLine(x, y + h / 2, x + clip->ww, y + h / 2, 0xFFFF00FF);
+   if(other) {
+      G_cutBox(other, clip);
    }
-   #endif
+   G_setClip(g);
 }
 
 void G_ClipRelease(struct gui_state *g) {
@@ -191,44 +173,35 @@ bool G_Filler(i32 x, i32 y, struct gui_fil *fil, bool held) {
       fil->cur = 0;
       return true;
    }
-
    if(held) {
       ++fil->cur;
    } else if(fil->cur && ACS_Timer() & 3 == 0) {
       --fil->cur;
    }
-
    PrintSprite(sa_filler[(fil->cur * 8) / fil->tic], x,1, y,0);
-
    return false;
 }
 
-stkcall
-void G_Tooltip(struct gui_state *g, i32 x, i32 y, i32 w, i32 h, cstr id) {
-   x += g->ox;
-   y += g->oy;
-
+stkcall void G_Tooltip(struct gui_state *g, i32 x_, i32 y_, i32 w_, i32 h_, cstr id) {
+   r.x = x_ + g->ox; r.y = y_ + g->oy; r.w = w_; r.h = h_; r.ww = w_;
    if(g->clip >= 0) {
-      G_cutBox(&g->clips[g->clip], &x, &y, &w, &h);
+      G_cutBox(&g->clips[g->clip], &r);
    }
-
-   if(aabb_point(x, y, w - 1, h - 1, g->cx, g->cy)) {
-      str tt = lang(strp(PrintChrLi(LANG "TOOLTIP_"), PrintChrSt(id)));
+   if(aabb_point(r.x, r.y, r.w - 1, r.h - 1, g->cx, g->cy)) {
+      str tt = lang(strp(_l(LANG "TOOLTIP_"), _p(id)));
       if(tt) {
          g->tooltip = tt;
       }
    }
 }
 
-i32 G_Tabs(struct gui_state *g, mem_size_t *st, gtab_t const *names, mem_size_t num, i32 x, i32 y, i32 yp) {
+i32 G_Tabs(struct gui_state *g, mem_size_t *st, gtab_t const *tn, mem_size_t num, i32 yp) {
    i32 xp = 0;
-
    for(mem_size_t i = 0; i < num; i++) {
-      if(G_Button_HId(g, xp + yp * 6, names[i], gui_p.btntab.w * xp + x,
-                      gui_p.btntab.h * yp + y, i == *st, Pre(btntab))) {
+      if(G_Button_HId(g, xp + yp * 6, tn[i], gui_p.btntab.w * xp,
+                      gui_p.btntab.h * yp, i == *st, Pre(btntab))) {
          *st = i;
       }
-
       if(i != num - 1) {
          if(xp == 5) {
             xp = 0;
@@ -238,9 +211,7 @@ i32 G_Tabs(struct gui_state *g, mem_size_t *st, gtab_t const *names, mem_size_t 
          }
       }
    }
-
    return yp;
 }
-
 
 /* EOF */

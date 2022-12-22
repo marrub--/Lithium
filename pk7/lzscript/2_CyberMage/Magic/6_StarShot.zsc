@@ -115,7 +115,7 @@ Fire:
    TNT1 A 0 Lith_A_JumpIfMagEmpty(false);
    TNT1 A 2 bright {
       Lith_A_MagIncr(RandomPick(2, 4));
-      A_AlertMonsters();
+      SoundAlert(Invoker.Owner);
       A_StartSound("weapons/sshot/firero", lch_dryweapon, volume: CallACS("Lith_AmmoRunOut", true, 0.5*FIX)/FIX);
       A_FireProjectile("Lith_Star", FRandom(-5,5), false, -20, 10, FPF_NOAUTOAIM, -FRandom(-2,3));
       A_FireProjectile("Lith_Star", FRandom(-5,5), false,  20, 10, FPF_NOAUTOAIM, -FRandom(-2,3));

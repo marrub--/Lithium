@@ -77,7 +77,7 @@ class Lith_SubDart : Actor {
          if(th) {
             vector2 p = th.pos.xy - pos.xy;
             tracer = th;
-            m_dartAngle = Lith_UTIL.constDeg(atan2(p.y, p.x) - 180.0);
+            m_dartAngle = Lith_UTIL.constDeg(p.angle() - 180.0);
             m_dartZ     = pos.z - th.pos.z;
             a_startSound("body/flesh", lch_auto);
          }
@@ -94,7 +94,7 @@ class Lith_SubDart : Actor {
       super.tick();
       if(tracer) {
          a_warp(AAPTR_TRACER, 0, 0, m_dartZ, m_dartAngle, WARPF_COPYINTERPOLATION|WARPF_NOCHECKPOSITION, radiusOffset: 1);
-         angle = atan2(tracer.pos.y - pos.y, tracer.pos.x - pos.x);
+         angle = (tracer.pos - pos).angle();
       }
    }
 
@@ -135,20 +135,20 @@ action(Weapon) void lith_subGunPreFire() {
 action(Weapon) void lith_subGunFire() {
    player.getPSprite(_psp_d_subweapon).frame = randomPick(0, 2);
    a_startSound("weapons/subweapon/armgun", lch_altweapon);
-   a_alertMonsters();
+   soundAlert(invoker.owner);
    lith_fireBullets(1, 2, -1, 15 * random(2, 4), flags: FBF_NORANDOM, tracerX: -6);
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
 }
 
 action(Weapon) void lith_subGrnFire() {
    a_startSound("weapons/subweapon/grenade", lch_altweapon);
-   a_alertMonsters();
+   soundAlert(invoker.owner);
    a_fireProjectile("Lith_SubGrn", 0, false, -7, 6);
 }
 
 action(Weapon) void lith_subAxeFire() {
    a_startSound("weapons/subweapon/axe", lch_altweapon);
-   a_alertMonsters();
+   soundAlert(invoker.owner);
    a_fireProjectile("Lith_SubAxe", 0, false, -7, 6);
 }
 

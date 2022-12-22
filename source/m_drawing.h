@@ -105,7 +105,7 @@ GlobalCrH(wselm1) GlobalCrH(wselm2) GlobalCrH(wselm3) GlobalCrH(wselms)
 #define SetClipW(x, y, w, h, ww) \
    DrawCallV(sm_LC, (i32)(x), (i32)(y), (i32)(w), (i32)(h), (i32)(ww))
 #define ClearClip() \
-   DrawCallV(sm_LC)
+   DrawCallV(sm_LU)
 
 #define SetSize(w, h) \
    DrawCallV(sm_LZ, (i32)(w), (i32)(h))

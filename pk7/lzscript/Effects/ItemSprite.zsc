@@ -38,8 +38,8 @@ override void tick() {
    }
    Lith_UTIL.stateTick(self);
    if(master && (master.bSpecial || master.special)) {
-      let fAng  = (msTimeF() + m_fAng)  * 0.06666;
-      let fzAng = (msTimeF() + m_fzAng) * 0.1;
+      let fAng  = level.time/35.0*66.66 + m_fAng;
+      let fzAng = level.time/35.0*100.0 + m_fzAng;
       setOrigin(master.pos + (cos(fAng) * 4.0, sin(fAng) * 4.0, 16.0 + sin(fzAng) * 12.0), true);
    } else if(!inStateSequence(curState, m_doneState)) {
       setState(m_doneState);

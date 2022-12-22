@@ -27,7 +27,7 @@ class Lith_RevenantTracer : RevenantTracer replaces RevenantTracer
       FATB AB 2 bright {
          if(level.time & 3 == 0) {
             if(level.time % 20 == 0) A_StartSound("enemies/revenant/home", lch_body);
-            spawn("Lith_RifleGrenadeSmoke", pos + (0, 0, 8));
+            spawn("Lith_RifleGrenadeSmoke", pos.plusZ(8));
             A_SeekerMissile(1, 45, 0);
          }
       }
@@ -152,12 +152,12 @@ Crash:
    SKEL Q -1;
    stop;
 Death.Extreme:
-   LI08 Q -1;
+   #MRE A -1;
 Crash.Extreme:
-   LI08 Q 3 Lith_A_XDie;
-   LI08 R 4;
-   LI08 STU 5;
-   LI08 V -1;
+   #MRE A 3 Lith_A_XDie;
+   #MRE B 4;
+   #MRE CDE 5;
+   #MRE F -1;
    stop;
 
 Raise:

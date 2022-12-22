@@ -426,11 +426,11 @@ class Lith_Backpack : Lith_ScoreItem replaces Backpack {
          "Lith_PlasmaAmmo",
          "Lith_CannonAmmo"
       };
-      for(int i = 0; i < AMMOS.size(); ++i) {
-         readonly<Inventory> def = getDefaultByType(AMMOS[i]);
-         Inventory inv = mo.findInventory(AMMOS[i]);
+      foreach(am : AMMOS) {
+         readonly<Inventory> def = getDefaultByType(am);
+         Inventory inv = mo.findInventory(am);
          inv.maxAmount = def.maxAmount * 2;
-         mo.giveInventory(AMMOS[i], def.maxAmount / 4);
+         mo.giveInventory(am, def.maxAmount / 4);
       }
       super.lith_onPickup(mo);
    }
@@ -454,7 +454,7 @@ class Lith_Shobon : Actor {
       if(master) {
          let v = master.vel;
          if(!(v.x ~== 0) || !(v.y ~== 0)) {
-            double a  = atan2(v.y, v.x) - 180;
+            double a  = v.angle() - 180;
             double m  = v.xy.length();
             double x_ = Lith_UTIL.lerp(m_doruPos.x, cos(a) * 32, m / 32.);
             double y_ = Lith_UTIL.lerp(m_doruPos.y, sin(a) * 32, m / 32.);

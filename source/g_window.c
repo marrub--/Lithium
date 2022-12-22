@@ -77,7 +77,7 @@ void G_WinBeg_Imp(struct gui_state *g, gid_t id, struct gui_arg_win *a) {
    g->ox += (win->ox = ox - g->ox);
    g->oy += (win->oy = oy - g->oy);
 
-   G_Clip(g, g->ox, g->oy, w, h, w);
+   G_Clip(g, 0, 0, w, h, w);
 }
 
 void G_WinEnd(struct gui_state *g, struct gui_win *win) {

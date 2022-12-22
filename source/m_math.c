@@ -408,7 +408,7 @@ struct polar ctopol(k32 x, k32 y) {
    noinit static
    struct polar pol;
 
-   pol.ang = ACS_VectorAngle(x, y);
+   pol.ang = atan2k(y, x);
    pol.dst = mag2i(x, y);
 
    return pol;

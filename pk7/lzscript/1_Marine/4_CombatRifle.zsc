@@ -99,7 +99,7 @@ action(Weapon) void Lith_A_FireRifle()
    lith_takeAmmo();
    Lith_A_MagIncr();
    lith_gunFlash();
-   a_alertMonsters();
+   soundAlert(invoker.owner);
    Lith_A_RecoilUp(0.4);
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
    if(!Lith_UTIL.pData(_pdt_upgrade, UPGR_Rifle_B))
@@ -138,7 +138,7 @@ action(Weapon) void Lith_A_FireRifleBurst()
    lith_takeAmmo();
    Lith_A_MagIncr();
    lith_gunFlash();
-   a_alertMonsters();
+   soundAlert(invoker.owner);
    for(int i = 0; i < 2; i++)
    {
       if(!Lith_UTIL.pData(_pdt_upgrade, UPGR_Rifle_B))
@@ -161,7 +161,7 @@ action(Weapon) void Lith_A_FireRifleGrenade()
       A_StartSound("marathon/rifle/grenade", lch_weapon);
    else
       A_StartSound("weapons/rifle/grenade", lch_weapon);
-   A_AlertMonsters();
+   SoundAlert(Invoker.Owner);
    A_FireProjectile("Lith_RifleGrenade");
 }
 

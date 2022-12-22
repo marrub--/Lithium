@@ -29,12 +29,12 @@ override void markPrecacheSounds() {
 }
 
 action(Weapon) void Lith_A_Fire4Bore() {
-   A_AlertMonsters();
+   SoundAlert(Invoker.Owner);
    lith_takeAmmo(4);
    A_SetBlend("White", 0.2, 6);
    lith_gunFlash();
-   a_alertMonsters();
-   Lith_A_GunSmoke(2, 8);
+   soundAlert(invoker.owner);
+   Lith_A_GunSmoke(1, 6);
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
    Lith_FireBullets(4, 2, 8, random[lith_dlweapon](125, 150), FBF_NORANDOM, tracerX: 2, tracer: _tr_big);
    Lith_A_RecoilUp(10);

@@ -74,7 +74,7 @@ void P_CBI_TabShop(struct gui_state *g) {
 
    struct shopitem *item = &shopitems[pl.cbi.st.shopsel];
 
-   G_Clip(g, g->ox+98, g->oy+17, 190, 170, 184);
+   G_Clip(g, 98, 17, 190, 170, 184);
 
    ACS_BeginPrint();
    PrintChrSt(scoresep(item->shopdef.cost));

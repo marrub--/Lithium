@@ -123,11 +123,11 @@ Crash:
    BOS2 O -1;
    stop;
 Death.Extreme:
-   LI08 H -1;
+   #MHK A -1;
 Crash.Extreme:
-   LI08 H 5 Lith_A_XDie;
-   LI08 IJKLMNO 5;
-   LI08 P -1;
+   #MHK A 5 Lith_A_XDie;
+   #MHK BCDEFGH 5;
+   #MHK I -1;
    stop;
 
 Raise:

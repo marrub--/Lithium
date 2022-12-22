@@ -117,7 +117,7 @@ void DrawPage(struct gui_state *g, struct page *page) {
       G_ScrBeg(g, &pl.cbi.st.bipinfoscr, 97 - gui_p.scrdef.scrlw,
                27, gw, gh, height * 8 + 20, 184);
    } else {
-      G_Clip(g, g->ox+97, g->oy+27, gw, gh, 184);
+      G_Clip(g, 97, 27, gw, gh, 184);
       g->ox += 97;
       g->oy += 27;
    }

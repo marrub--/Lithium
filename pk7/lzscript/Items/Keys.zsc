@@ -19,8 +19,8 @@ class Lith_RedCard : Lith_BasicPickup replaces RedCard {
    }
    states {
    Spawn:
-      LI06 A 10;
-      LI06 B 10 bright;
+      #IKY A 10;
+      #IKY B 10 bright;
       loop;
    }
 }
@@ -37,8 +37,8 @@ class Lith_BlueCard : Lith_BasicPickup replaces BlueCard {
    }
    states {
    Spawn:
-      LI06 E 10;
-      LI06 F 10 bright;
+      #IKY E 10;
+      #IKY F 10 bright;
       loop;
    }
 }
@@ -55,8 +55,8 @@ class Lith_YellowCard : Lith_BasicPickup replaces YellowCard {
    }
    states {
    Spawn:
-      LI06 C 10;
-      LI06 D 10 bright;
+      #IKY C 10;
+      #IKY D 10 bright;
       loop;
    }
 }
@@ -73,8 +73,8 @@ class Lith_RedSkull : Lith_BasicPickup replaces RedSkull {
    }
    states {
    Spawn:
-      LI06 G 10;
-      LI06 H 10 bright;
+      #IKY G 10;
+      #IKY H 10 bright;
       loop;
    }
 }
@@ -91,8 +91,8 @@ class Lith_BlueSkull : Lith_BasicPickup replaces BlueSkull {
    }
    states {
    Spawn:
-      LI06 K 10;
-      LI06 L 10 bright;
+      #IKY K 10;
+      #IKY L 10 bright;
       loop;
    }
 }
@@ -109,8 +109,8 @@ class Lith_YellowSkull : Lith_BasicPickup replaces YellowSkull {
    }
    states {
    Spawn:
-      LI06 I 10;
-      LI06 J 10 bright;
+      #IKY I 10;
+      #IKY J 10 bright;
       loop;
    }
 }

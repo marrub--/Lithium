@@ -21,6 +21,7 @@ $playersound    lith_darklord * *step-normal Step       # Resident Evil 4
 $playeralias    lith_darklord * *step-sprint player.ari.step-sprint
 
 player.ari {
+   item-spawn   ItemSpawn   # SI Series 6000, Doom 3
    step-sprint1 StepSprint1 # SI Series 6000
    step-sprint2 StepSprint2 # ^
    step-sprint3 StepSprint3 # ^

@@ -86,8 +86,7 @@ void setUpEnvironment() {
       clamp(int(abs(temperature * 0.0375)), 0, 255),
       clamp(int(temperature * -0.8375), 0, 255)
    );
-   for(int i = 0, j = level.sectors.size(); i < j; i++) {
-      Sector sec = level.sectors[i];
+   foreach(sec : level.sectors) {
       if(menv == _menv_evil) {
          setUpEvilSector(sec);
       }
@@ -107,12 +106,10 @@ void setUpEvilSector(Sector sec) {
    sec.flags |= Sector.SECF_ENDGODMODE;
    sec.setAngle(Sector.floor,   frandom(0, 360));
    sec.setAngle(Sector.ceiling, frandom(0, 360));
-   for(int i = 0, j = sec.lines.size(); i < j; i++) {
-      Line ln = sec.lines[i];
+   foreach(ln : sec.lines) {
       ln.flags |= Line.ML_DONTDRAW;
       ln.alpha = frandom(0.5, 1);
-      for(int m = 0; m < 2; m++) {
-         Side sd = ln.sidedef[m];
+      foreach(sd : ln.sidedef) {
          if(sd) {
             sd.addTextureXOffset(Side.top,    frandom(-7,7));
             sd.addTextureXOffset(Side.mid,    frandom(-7,7));
@@ -213,9 +210,9 @@ override void worldThingSpawned(WorldEvent ev) {
 
 override void worldTick() {
    if(m_bossLevel != boss_none) {
-      for(int i = 0, m = level.lines.size(); i < m; i++) {
+      foreach(ln : level.lines) {
          for(int j = 0; j < 3; j++) {
-            level.lines[i].sidedef[0].setTextureYOffset(j, sin(level.totalTime)*4);
+            ln.sidedef[0].setTextureYOffset(j, sin(level.totalTime)*4);
          }
       }
       if(m_bossDeathInit == 0) {
@@ -224,7 +221,7 @@ override void worldTick() {
             boss_baby_is_dead = false;
          } else {
             boss_baby_is_dead = true;
-            for(int i = 0; i < m_bossBabies.size(); i++) {
+            foreach(bb : m_bossBabies) {
                if(m_bossLevel == boss_barons) {
                   if(playeringame[consoleplayer] && players[consoleplayer].mo) {
                      SecSpecial spec;
@@ -232,7 +229,7 @@ override void worldTick() {
                      if(!(spec.flags & Sector.SECF_ENDLEVEL))
                         boss_baby_is_dead = false;
                   }
-               } else if(m_bossBabies[i] && m_bossBabies[i].health > 0) {
+               } else if(bb && bb.health > 0) {
                   boss_baby_is_dead = false;
                }
             }
@@ -260,7 +257,7 @@ override void worldThingDamaged(WorldEvent ev) {
    if(!dst) {
       return;
    }
-   let pos = dst.pos + (0, 0, dst.height / 2);
+   let pos = dst.pos.plusZ(dst.height / 2);
    Lith_URANUS.instance().addDamageNum(pos, dst.radius/2, ev.damage, ev.thing);
    if(ev.damageType == 'Bullet' && ev.damage >= 4 && !dst.bNoBlood) {
       double vol = min(ev.damage / 16.0, 1);

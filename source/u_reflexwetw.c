@@ -48,7 +48,7 @@ void Upgr_ReflexWetw_Update(void) {
       if(pl.onground) udata.leaped = 0;
 
       if(pl.buttons & BT_SPEED) {
-         k32 angle = pl.yaw - ACS_VectorAngle(pl.forwardv, pl.sidev);
+         k32 angle = pl.yaw - atan2k(pl.sidev, pl.forwardv);
 
          AmbientSound(ss_player_slide, 1.0);
          P_SetVel(pl.velx + (ACS_Cos(angle) * 32.0), pl.vely + (ACS_Sin(angle) * 32.0), 0);
@@ -63,7 +63,7 @@ void Upgr_ReflexWetw_Update(void) {
       !has_status(so_StatJetBooster) && !udata.leaped &&
       (!pl.onground || udata.charge < CHARGE_MAX))
    {
-      k32 angle = pl.yaw - ACS_VectorAngle(pl.forwardv, pl.sidev);
+      k32 angle = pl.yaw - atan2k(pl.sidev, pl.forwardv);
 
       AmbientSound(ss_player_doublejump, 1.0);
       P_SetVel(pl.velx + (ACS_Cos(angle) * 4.0), pl.vely + (ACS_Sin(angle) * 4.0), 12.0);

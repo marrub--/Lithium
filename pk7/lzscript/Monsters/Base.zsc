@@ -17,12 +17,12 @@ class Lith_MonsterLevelUp : Actor {
    }
    states {
    Spawn:
-      LI04 T 0;
-      LI04 S 4;
-      LI04 T 32 A_StartSound("enemies/levelup", lch_body, volume: 0.5);
-      LI04 UV 4;
-      LI04 WX 3;
-      LI04 YZ 1;
+      #EAB B 2;
+      #EAB C 2;
+      #EAB D 32 A_StartSound("enemies/levelup", lch_body, volume: 0.5);
+      #EAB EF 4;
+      #EAB GH 3;
+      #EAB IJ 2;
       stop;
    }
 }

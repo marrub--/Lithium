@@ -20,7 +20,7 @@ class Lith_RocketTrail : Actor {
 
    states {
    Spawn:
-      SMOK A -1;
+      #ESM A -1;
       stop;
    }
 }
@@ -46,7 +46,7 @@ default {
 vector3 m_PVel;
 
 action void Lith_A_SpawnRocketTrail() {
-   let mo = spawn("Lith_RocketTrail", pos + (0, 0, 4));
+   let mo = spawn("Lith_RocketTrail", pos.plusZ(4));
    mo.vel = (frandom(-0.5,0.5), frandom(-0.5,0.5), 0);
 }
 

@@ -26,9 +26,7 @@
 #ifndef cvar_tic
 #define cvar_tic(ty, na)
 #endif
-/*
-  if a setting should only update on map or game start, place it here.
-*/
+/* if a setting should only update on map or game start, place it here. */
 cvar_x(gbl, sv_autosave, i32)
 cvar_x(gbl, sv_failtime, i32)
 cvar_x(gbl, sv_nobossdrop, bool)
@@ -38,11 +36,10 @@ cvar_x(map, sv_difficulty, i32)
 cvar_x(map, sv_extrahard, bool)
 cvar_x(map, sv_minhealth, i32)
 
-/*
-  if a cvar is checked variably more than once every tic under normal
-  circumstances, place it here. if it can change in-between tics, do
-  not place it here.
-*/
+/* if a cvar is checked variably more than once every tic under normal
+ * circumstances, place it here. if it can change in-between tics, do
+ * not place it here.
+ */
 cvar_x(tic, debug_flags, i32)
 cvar_x(tic, debug_level, i32)
 cvar_x(tic, player_scoredisp, i32)
@@ -105,7 +102,7 @@ cvar_x(tic, player_scoresound, bool)
 
 #define GetHealth(tid)  GetMembI(tid, sm_Health)
 #define GetHeight(tid)  GetMembK(tid, sm_Height)
-#define GetNameTag(tid) GetPropS(tid, APROP_NameTag)
+#define GetNameTag(tid) GetPropS(tid, APROP_Nametag)
 #define GetRadius(tid)  GetMembK(tid, sm_Radius)
 #define GetSpecies(tid) GetPropS(tid, APROP_Species)
 #define GetMass(tid)    GetPropI(tid, APROP_Mass)
@@ -116,7 +113,7 @@ cvar_x(tic, player_scoresound, bool)
 #define SetFriction(tid, x)         SetPropK(tid, APROP_Friction,         x)
 #define SetGravity(tid, x)          SetPropK(tid, APROP_Gravity,          x)
 #define SetHealth(tid, x)           SetPropI(tid, APROP_Health,           x)
-#define SetNameTag(tid, x)          SetPropS(tid, APROP_NameTag,          x)
+#define SetNameTag(tid, x)          SetPropS(tid, APROP_Nametag,          x)
 #define SetSpawnHealth(tid, x)      SetPropI(tid, APROP_SpawnHealth,      x)
 #define SetSpecies(tid, x)          SetPropS(tid, APROP_Species,          x)
 #define SetViewHeight(tid, x)       SetPropK(tid, APROP_ViewHeight,       x)

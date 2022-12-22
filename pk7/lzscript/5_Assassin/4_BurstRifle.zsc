@@ -23,7 +23,7 @@ action(Weapon) void Lith_A_FireBurstRifle() {
    double p = clamp(3 / invoker.m_lessen, 0.5, 1.0);
    Lith_A_MagIncr();
    lith_gunFlash();
-   a_alertMonsters();
+   soundAlert(invoker.owner);
    a_overlay(_psp_flash, "Flash");
    a_overlayFlags(_psp_flash, pspf_renderstyle, true);
    a_overlayRenderStyle(_psp_flash, style_add);
@@ -56,7 +56,7 @@ Select:
    loop;
 
 Flash:
-   KM64 C 2 bright A_AlertMonsters;
+   KM64 C 2 bright soundAlert(invoker.owner);
    KM64 B 2 bright;
    stop;
 Fire:

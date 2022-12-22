@@ -107,7 +107,7 @@ action(Weapon) State Lith_A_FireMateba()
 {
    Lith_A_MagIncr();
    lith_gunFlash();
-   a_alertMonsters();
+   soundAlert(invoker.owner);
    if(invoker.m_Fired & 1)
       Lith_A_Casing("Lith_CasSmallHot", 14, 2, 32, frandom(1,2), frandom(3,5), frandom(2,3));
    if(Lith_UTIL.pData(_pdt_upgrade, UPGR_Mateba_A) && invoker.Lith_MagEmpty())

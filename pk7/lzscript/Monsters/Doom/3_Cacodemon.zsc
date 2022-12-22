@@ -82,15 +82,15 @@ Crash:
    HEAD L -1;
    stop;
 Death.Extreme:
-   LI07 Q -1;
+   #MCA A -1;
 Crash.Extreme:
-   LI07 Q 5 Lith_A_XDie;
-   LI07 RS 5;
-   LI07 T 4;
-   LI07 U 3;
-   LI07 V 4;
-   LI07 W 5;
-   LI07 X -1;
+   #MCA A 5 Lith_A_XDie;
+   #MCA BC 5;
+   #MCA D 4;
+   #MCA E 3;
+   #MCA F 4;
+   #MCA G 5;
+   #MCA H -1;
    stop;
 
 Raise:

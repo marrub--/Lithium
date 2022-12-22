@@ -136,7 +136,7 @@ Select:
 Fire:
    #### # 0 Lith_A_JumpIfMagEmpty;
    #### # 0 Lith_A_MagIncr;
-   #### # 0 A_AlertMonsters;
+   #### # 0 soundAlert(invoker.owner);
    #### # 0 Lith_A_FirePistol;
    #### # 0 A_JumpIf(invoker.m_ads, "FireFinish_Scoped");
 FireFinish_Unscoped:
@@ -174,7 +174,7 @@ FireEmpty:
    goto ReadySelector;
 AltFire:
    #### B 1;
-   #### B 0 Lith_A_AdsToggle(_ads_scope);
+   #### # 0 Lith_A_AdsToggle(_ads_scope);
    goto ReadySelector;
 Reload:
    #### # 0 Lith_A_JumpIfMagFull;

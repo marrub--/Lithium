@@ -123,9 +123,6 @@ script static
 void dbg_font_test(str font) {
    static
    struct {cstr lhs, rhs;} const strings[] = {
-      /*
-      "WidTest", u8"0123456789ABCDEFGHIJKLMNOPQ",
-      */
       "L1SPnc1", u8"¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼",
       "L1SPnc2", u8"½¾¿×÷µ",
       "L1SLet1", u8"ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛ",

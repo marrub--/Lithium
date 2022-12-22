@@ -20,7 +20,7 @@ class Lith_TargetMarker : Actor
    states
    {
    Spawn:
-      LI09 Y 1 bright A_FadeOut(0.1);
+      #ETA A 1 bright A_FadeOut(0.1);
       wait;
    }
 }

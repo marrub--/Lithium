@@ -33,8 +33,8 @@ static void DieMonster(Actor mo) {
    if(mo.health < 1000) mo.A_Die();
 }
 
-static void AlertMonsters(Actor mo) {
-   mo.A_AlertMonsters();
+static void SoundAlert(Actor mo) {
+   mo.soundAlert(mo);
 }
 
 static void PhantomOut(Actor mo) {

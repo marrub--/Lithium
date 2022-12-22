@@ -139,7 +139,7 @@ action(Weapon) void Lith_A_FireShock() {
    Lith_A_RecoilUp(0.5);
    A_Recoil(0.1);
    lith_gunFlash();
-   a_alertMonsters();
+   soundAlert(invoker.owner);
    A_StartSound("weapons/erifle/fire", lch_weapon);
    Lith_FireBullets(1, 0, -1, int(37*FRandom(1,1.5)), FBF_NORANDOM, "Lith_ShockPuff");
    A_FireProjectile("Lith_LightProjectileRedShort", 0);

@@ -14,10 +14,11 @@ class Lith_TorchSmall : Lith_TorchDecor {
       ProjectilePassHeight -37;
       Lith_TorchDecor.Height 35;
    }
+
    states {
-   Spawn:
-      LI03 GGGGHHHHJJJJKKKK 1 bright Lith_A_SpawnFlame;
-      loop;
+   Spawn:    #DTS AAAABBBBCCCCDDDD 1 bright Lith_A_SpawnFlame; loop;
+   Inactive: #DTS E -1; stop;
+   Death:    #DTS F 0; goto Death1;
    }
 }
 

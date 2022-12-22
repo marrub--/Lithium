@@ -47,7 +47,7 @@ class Lith_ShrapnelProjectile : Actor {
    Spawn2:
       #### # 1 {
          if(m_smoke) {
-            let mo = spawn('Lith_CasingSmoke', pos + (0, 0, 3));
+            let mo = spawn('Lith_CasingSmoke', pos.plusZ(3));
             mo.vel = (frandom(-0.2,0),frandom(-0.2,0),0);
          }
       }
@@ -95,9 +95,9 @@ int m_chargeLevel;
 action(Weapon) void Lith_A_FireShrapnel() {
    Lith_A_GunSmokeSmall(1, 6);
    A_StartSound("weapons/shrapnel/fire", lch_weapon);
-   A_AlertMonsters();
+   SoundAlert(Invoker.Owner);
    lith_gunFlash();
-   a_alertMonsters();
+   soundAlert(invoker.owner);
    a_overlay(_psp_flash, "Flash");
    a_overlayFlags(_psp_flash, pspf_renderstyle, true);
    a_overlayRenderStyle(_psp_flash, style_add);

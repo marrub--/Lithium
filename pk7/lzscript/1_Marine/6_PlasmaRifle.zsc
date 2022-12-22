@@ -76,7 +76,7 @@ action(Weapon) void Lith_A_FirePlasma()
 {
    lith_takeAmmo(35);
    lith_gunFlash();
-   a_alertMonsters();
+   soundAlert(invoker.owner);
    A_StartSound("weapons/plasma/fire", lch_weapon);
    for(int i = 0; i < 4; i++) {
       float y, p; [y, p] = Lith_UTIL.circleSpread(7, 3);
@@ -88,7 +88,7 @@ action(Weapon) void Lith_A_FirePlasma()
 action(Weapon) void Lith_A_FireLaser()
 {
    lith_takeAmmo(10);
-   A_AlertMonsters();
+   SoundAlert(Invoker.Owner);
    A_FireBullets(0, 0, 1, 0, "Lith_PlasmaHit", FBF_NORANDOMPUFFZ);
    A_RailAttack(Lith_UTIL.pData(_pdt_upgrade, UPGR_TorgueMode) ? 1 : 12, 0, false, "", "Red", RGF_SILENT|RGF_FULLBRIGHT|RGF_NOPIERCING, 0, "Lith_BasicPuff", 0, 0, 0, 1, 3, 0, "Lith_PlasmaLaze");
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
@@ -97,7 +97,7 @@ action(Weapon) void Lith_A_FireLaser()
 action(Weapon) void Lith_A_FireRail()
 {
    Lith_A_MagIncr();
-   A_AlertMonsters();
+   SoundAlert(Invoker.Owner);
    lith_takeAmmo(200);
    A_StartSound("weapons/plasma/part/fire", lch_weapon);
    A_RailAttack(400, 0, false, "", "Blue", RGF_SILENT|RGF_FULLBRIGHT, 0, "Lith_ParticleBeamPuff", 0, 0, 0, 0, 16, 0, "Lith_ParticleBeam", -8);
@@ -108,7 +108,7 @@ action(Weapon) void Lith_A_FireAltPlasma()
 {
    lith_takeAmmo(90);
    lith_gunFlash();
-   a_alertMonsters();
+   soundAlert(invoker.owner);
    A_FireProjectile("Lith_PenetratingPlasmaBolt", 0, false, 0, -9);
    A_FireProjectile("Lith_PenetratingPlasmaBolt", frandom(-2.7, -1.9), false, 0, -9);
    A_FireProjectile("Lith_PenetratingPlasmaBolt", frandom(2.7, 1.9), false, 0, -9);
@@ -226,6 +226,7 @@ AltFire:
 
 Reload:
    #### # 1 Lith_A_JumpIfMagFull;
+   #### # 0 lith_a_setInterpolation(true);
    PLSG A 1 offset(-2, 34);
    PLSG A 1 offset(-4, 37);
    PLSG A 1 offset(-9, 43) {
@@ -244,6 +245,7 @@ Reload:
       Lith_A_ReloadBobUp(0.5);
    }
    PLSG A 2 offset(-11, 49);
+   #### # 0 lith_a_setInterpolation(false);
    PLSG A 2 offset(-11, 47) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
    PLSG A 7 offset(-11, 45) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
    PLSG A 1 offset(-12, 49) A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);

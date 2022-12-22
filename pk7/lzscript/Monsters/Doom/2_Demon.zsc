@@ -79,13 +79,13 @@ Crash:
    SARG N -1;
    stop;
 Death.Extreme:
-   LI08 A -1;
+   #MDE A -1;
 Crash.Extreme:
-   LI08 A 5 Lith_A_XDie;
-   LI08 B 5;
-   LI08 C 5;
-   LI08 DEF 5;
-   LI08 G -1;
+   #MDE A 5 Lith_A_XDie;
+   #MDE B 5;
+   #MDE C 5;
+   #MDE DEF 5;
+   #MDE G -1;
    stop;
 
 Raise:

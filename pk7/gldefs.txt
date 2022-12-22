@@ -36,7 +36,7 @@ brightMap sprite SHTGK0 {map "lmisc/brightmaps/SHTGK0.png"}
 brightMap sprite SHTGN0 {map "lmisc/brightmaps/SHTGN0.png"}
 brightMap sprite SHTGO0 {map "lmisc/brightmaps/SHTGO0.png"}
 
-hardwareShader sprite LI09W0 {
+hardwareShader sprite #EDEA0 {
    shader "lmisc/death.fp.glsl"
    speed 1.0
 }
@@ -451,7 +451,6 @@ object Lith_TorchSmallBFlare                {frame BLGL {light Lith_TorchSmallB}
 object Lith_TorchTallRFlare                 {frame RDGL {light Lith_TorchTallR}}
 object Lith_TorchTallGFlare                 {frame GRGL {light Lith_TorchTallG}}
 object Lith_TorchTallBFlare                 {frame BLGL {light Lith_TorchTallB}}
-object Lith_HotEmber                        {frame EPUF {light Lith_BulletPuff1}}
 object Lith_BulletPuff                      {frame XPUF {light Lith_BulletPuff1}}
 object Lith_LightProjectileRedShort         {frame TNT1 {light Lith_GunshotOrange}}
 object Lith_LightProjectileRedLong          {frame TNT1 {light Lith_GunshotOrange}}

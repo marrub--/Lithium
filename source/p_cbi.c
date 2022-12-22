@@ -16,15 +16,14 @@
 #include "m_list.h"
 #include "w_world.h"
 
-noinit static
-gtab_t tn[5];
+noinit static gtab_t tn[5];
 
 static
 void P_CBI_TabArsenal(struct gui_state *g) {
    if(get_bit(pcl_outcasts, pl.pclass)) {
       faststrcpy_str(tn[0], ns(lang(sl_tab_upgrades)));
       faststrcpy_str(tn[1], ns(lang(sl_tab_shop)));
-      G_Tabs(g, &pl.cbi.st.arsetab, tn, 2, 0, 0, 1);
+      G_Tabs(g, &pl.cbi.st.arsetab, tn, 2, 1);
    }
    switch(pl.cbi.st.arsetab) {
    case cbi_tab_arsenal_upgrades: P_CBI_TabUpgrades(g); break;
@@ -38,7 +37,7 @@ void P_CBI_TabStat(struct gui_state *g) {
    faststrcpy_str(tn[1], ns(lang(sl_tab_cbi)));
    faststrcpy_str(tn[2], ns(lang(sl_tab_statistics)));
 
-   G_Tabs(g, &pl.cbi.st.stattab, tn, 3, 0, 0, 1);
+   G_Tabs(g, &pl.cbi.st.stattab, tn, 3, 1);
 
    switch(pl.cbi.st.stattab) {
    case cbi_tab_stat_attr:       P_CBI_TabStatus    (g); break;
@@ -54,7 +53,7 @@ void P_CBI_TabInfo(struct gui_state *g) {
    faststrcpy_str(tn[2], ns(lang(sl_tab_log)));
    faststrcpy_str(tn[3], ns(lang(sl_tab_notes)));
 
-   G_Tabs(g, &pl.cbi.st.infotab, tn, 4, 0, 0, 1);
+   G_Tabs(g, &pl.cbi.st.infotab, tn, 4, 1);
 
    switch(pl.cbi.st.infotab) {
    case cbi_tab_info_bip:   P_CBI_TabBIP  (g); break;
@@ -100,7 +99,7 @@ script void P_CBI_PTick(void) {
    faststrcpy_str(tn[3], ns(lang(sl_tab_info)));
    faststrcpy_str(tn[4], ns(lang(sl_tab_settings)));
 
-   G_Tabs(g, &pl.cbi.st.maintab, tn, 5, 0, 0, 0);
+   G_Tabs(g, &pl.cbi.st.maintab, tn, 5, 0);
 
    switch(pl.cbi.st.maintab) {
    case cbi_tab_arsenal:  P_CBI_TabArsenal (g); break;

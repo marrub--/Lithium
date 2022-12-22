@@ -6,6 +6,214 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
+## Settings ══════════════════════════════════════════════════════════════════╕
+== \#BLUE_INTENSITY  | Blue intensity
+== \#GREEN_INTENSITY | Green intensity
+== \#RED_INTENSITY   | Red intensity
+
+== \#gui_buyfiller | Click protection for buying items
+@@ \#TOOLTIP_gui_buyfiller
+Time (in 35ths of seconds) needed to hold a click to buy upgrades and
+items.
+
+== \#gui_cursor | Cursor
+@@ \#TOOLTIP_gui_cursor
+Which cursor graphic to use for in-game GUIs.
+
+== \#gui_defcr | Default text color
+@@ \#TOOLTIP_gui_defcr
+The color for most of the text in in-game GUIs.
+
+== \#gui_jpfont | Japanese font
+@@ \#TOOLTIP_gui_jpfont
+The font to use when Japanese is set as the language.
+
+== \#gui_curspeed | Cursor speed
+== \#gui_theme | Interface theme
+== \#hud_type | Type
+== \#hud_expbar | Show experience bar
+== \#hud_logfromtop | Display log at top of screen
+== \#hud_logsize | Log scale
+== \#hud_logcolor | Log text color
+== \#hud_showarmorind | Show reactive armor indicator
+== \#hud_showdamage | Display damage dealt
+== \#hud_showlog | Show log
+== \#hud_showlvl | Show level
+== \#hud_showscore | Show score
+== \#hud_showweapons | Show weapons
+== \#hud_damagealpha | Damage alpha
+== \#hud_showitems | Show near-by items
+== \#hud_showinteract | Show near-by interactables
+== \#hud_showammo | Show ammo totals
+== \#hud_itemcolor | Near-by item text color
+== \#light_b | $\#BLUE_INTENSITY
+== \#light_battery | Battery
+== \#light_g | $\#GREEN_INTENSITY
+== \#light_r | $\#RED_INTENSITY
+== \#light_radius | Radius
+== \#light_regen | Battery regeneration
+== \#player_altinvuln | Alternate invulnerability palette
+@@ \#TOOLTIP_player_altinvuln
+Changes the inverted palette to an orange one. My eyes, they're saved!
+
+== \#player_ammodisp | Display picked up ammo
+== \#player_brightweps | Bright weapon pickups
+== \#player_damagebob | Bob view when damaged
+== \#player_damagebobmul | Damage bob multiplier
+== \#player_footstepvol | Footstep volume
+== \#player_itemdisp | Display picked up items
+== \#player_itemdispalpha | Score/item/ammo alpha
+== \#player_lvsys | Level-up system
+== \#player_noitemfx | No item effects
+@@ \#TOOLTIP_player_noitemfx
+Disables the effects around items such as weapons and Phantom rewards,
+leaving only the item itself.
+
+== \#player_pronouns | Pronouns
+@@ \#TOOLTIP_player_pronouns
+If this box is empty, then the default pronouns for your player gender
+will be used. Otherwise, provide them in this format:
+
+subject/object/possessive determiner/possessive/action
+
+For example: they/them/their/theirs/they're
+
+== \#player_rainshader | Enable rain shader
+@@ \#TOOLTIP_player_rainshader
+TECHNOLOGY! Puts rain from the air on your screen. Shouldn't cause any
+issues.
+
+== \#player_resultssound | Play sounds on results/depth meter
+== \#player_scoredisp | Display score gained
+== \#player_scoresound | Play a sound when score is gained
+== \#player_sillypickups | Silly pickup messages
+@@ \#TOOLTIP_player_sillypickups
+Highly recommended!
+
+== \#player_teleshop | Teleport in bought items and upgrades
+@@ \#TOOLTIP_player_teleshop
+Creates an item in the world when you buy something.
+
+== \#player_viewtilt | View tilt when strafing
+@@ \#TOOLTIP_player_viewtilt
+Motion sickness warning. Changes how much the view tilts when moving
+laterally.
+
+== \#scanner_font | Font
+== \#scanner_bar | Health bar
+== \#scanner_color | Text color
+== \#scanner_slide | Positioning
+== \#scanner_xoffs | Horizontal offset
+== \#scanner_yoffs | Vertical offset
+== \#st_autobuy_1 | Auto-buy \caSet 1
+@@ \#TOOLTIP_autobuy_1
+Automatically buys this autogroup when you have the Score available.
+
+== \#st_autobuy_2 | Auto-buy \cdSet 2
+== \#st_autobuy_3 | Auto-buy \cnSet 3
+== \#st_autobuy_4 | Auto-buy \cfSet 4
+== \#TOOLTIP_autobuy_2 | $\#TOOLTIP_autobuy_1
+== \#TOOLTIP_autobuy_3 | $\#TOOLTIP_autobuy_1
+== \#TOOLTIP_autobuy_4 | $\#TOOLTIP_autobuy_1
+
+== \#st_done_intro | Don't play intro on next game start
+== \#sv_autosave | Autosave interval
+@@ \#TOOLTIP_sv_autosave
+\cg(Applies on next game start)
+
+== \#sv_difficulty | Difficulty base
+@@ \#TOOLTIP_sv_difficulty
+The base scale for enemy levels; 100% means enemies can spawn at
+maximum level and rank on even the first map.
+
+\ck(Applies on next map start)
+
+== \#sv_extrahard | Extra Hard
+@@ \#TOOLTIP_sv_extrahard
+Enables more difficult enemy patterns.
+
+\ck(Applies on next map start)
+
+== \#sv_lessparticles | Less particles
+== \#sv_minhealth | Minimum health on map start
+== \#sv_nobossdrop | Start with phantom rewards
+@@ \#TOOLTIP_sv_nobossdrop
+Gives you all rewards from mid-mission bosses added by Lithium. Only
+enable if you know what this is.
+
+\cg(Applies on next game start)
+
+== \#sv_nobosses | No phantoms
+@@ \#TOOLTIP_sv_nobosses
+Disables mid-mission bosses added by Lithium. Only enable if you know
+what this is.
+
+\cg(Applies on next game start)
+
+== \#sv_postgame | Enable
+@@ \#TOOLTIP_sv_postgame
+\cgWarning:\c- Post-game content can \cicause saves to be effectively
+deleted\c-, and will have \cipermanent repercussions\c-. Only enable
+if you really want more.
+
+== \#sv_rain | Enable raining
+@@ \#TOOLTIP_sv_rain
+\ck(Applies on next map start)
+
+== \#sv_rainphysics | Rain physics
+%% \#TOOLTIP_sv_rainphysics
+Advanced: Rain has heavy motions, dynamically pitches and rolls. (Default.)
+Static: Rain only lightly reacts to wind, always pouring straight down. (Similar to old versions.)
+Simple: Rain reacts strongly to wind, always pouring straight down. (Initial wind velocity concept.)
+
+== \#sv_revenge | Explode on death
+== \#sv_sky | Replace skies
+%% \#TOOLTIP_sv_sky
+No change: No changes will be made to skies. (Most compatible.)
+Vanilla-like: Allows vanilla skies to have additional visual effects. (May be incompatible with some edge cases. Default.)
+Replace skies: A palette of replacement skies based on the environment.
+Shader: A dynamic, soft, full sky replacement for a more chill atmosphere.
+
+\ck(Applies on next map start)
+
+== \#sv_skydarkening | Outside sector darkening
+== \#sv_wepdrop | Drop weapons from zombies
+@@ \#TOOLTIP_sv_wepdrop
+Mainly exists for map compatibility. Drops weapons from zombie enemies
+like vanilla. May cause issues in normal gameplay.
+
+\ck(Applies on next map start)
+
+== \#weapons_casingfadeout | Casings fade out
+== \#weapons_casings | Emit casings from weapons which use them
+== \#weapons_fastlazshot | Better laser shotgun performance
+== \#weapons_magdrops | Drop magazines from weapons
+== \#weapons_magfadeout | Magazines fade out
+== \#weapons_magicselanims | Magic selection animations
+== \#weapons_nofirebob | No mid-fire bobbing
+== \#weapons_rainbowlaser | Rainbow lasers
+== \#weapons_recoil | Visual recoil amount
+== \#weapons_reducedsg | Reduced shotgun sound
+== \#weapons_reloadbob | Reload bobbing amount
+== \#weapons_reloadempty | Reload the weapon upon magazine emptying
+== \#weapons_ricochetvol | Ricochet volume
+== \#weapons_riflemodeclear | Clear rifle mode on switch
+== \#weapons_riflescope | Modal Rifle scope
+== \#weapons_scopealpha | Scope opacity
+== \#weapons_zoomfactor | Scope zoom factor
+== \#xhair_a | Alpha
+== \#xhair_b | $\#BLUE_INTENSITY
+== \#xhair_enable | Enable
+== \#xhair_enablejuicer | Juicer
+@@ \#TOOLTIP_xhair_enablejuicer
+Seriously, why do they call them that? The little thingies around the
+crosshair that follow the recoil. They're... juicy. Guess that's why.
+
+== \#xhair_g | $\#GREEN_INTENSITY
+== \#xhair_r | $\#RED_INTENSITY
+== \#xhair_style | Style
+
+## Suffixes ══════════════════════════════════════════════════════════════════╕
 == \#st_suff_perc | %
 == \#st_suff_mult | x
 == \#st_suff_minu | min
@@ -15,6 +223,7 @@
 == \#st_suff_unit | mu
 == \#st_suff_tick | /35th s
 
+## Names ═════════════════════════════════════════════════════════════════════╕
 == \#st_name_unknown | Unknown
 
 == \#st_name_lvsys_0 | Auto
@@ -156,245 +365,32 @@
 == \#st_name_sky_2 | Replace skies
 == \#st_name_sky_3 | Shader
 
-== \#st_labl_gui | GUI
-== \#st_labl_hud | HUD
-== \#st_labl_itm | $\#BIP_NAME_ITEMS
-== \#st_labl_ply | Player
-== \#st_labl_wep | $\#BIP_NAME_WEAPONS
-== \#st_labl_wld | World
+## Tab Labels ════════════════════════════════════════════════════════════════╕
+== \#st_tab_gui | Interface
+== \#st_tab_itm | $\#BIP_NAME_ITEMS
+== \#st_tab_wep | $\#BIP_NAME_WEAPONS
+== \#st_tab_gam | Game
 
-== \#st_labl_gui_cbi      | \cnCBI
-== \#st_labl_gui_language | \cnLanguage
-== \#st_labl_gui_results  | \cnResults Screen
-
-== \#st_labl_hud_hud      | \cnHeads-Up Display
-== \#st_labl_hud_log      | \cnLog
-== \#st_labl_hud_nearby   | \cnNear-by Items
-== \#st_labl_hud_personal | \cnPersonal Info (Top-Right Corner)
-== \#st_labl_hud_pops     | \cnPop-ups and Logging
-== \#st_labl_hud_scanner  | \cnVital Scanner
-== \#st_labl_hud_xhair    | \cnDynamic Crosshair
-
-== \#st_labl_itm_autogroups | \cnAuto-groups
-== \#st_labl_itm_balance    | \cnBalance
-== \#st_labl_itm_pickups    | \cnItem Pickups
-== \#st_labl_itm_flashlight | \cnFlashlight
-== \#st_labl_itm_misc       | \cnMiscellaneous
-
-== \#st_labl_ply_balance  | \cnBalance
-== \#st_labl_ply_damage   | \cnDamage Effects
-== \#st_labl_ply_visuals  | \cnVisuals & Display
-== \#st_labl_ply_postgame | \cnPost-game Content
-
-== \#st_labl_wep_effects   | \cnEffects
-== \#st_labl_wep_behaviour | \cnBehaviour
-
-== \#st_labl_wld_balance | \cnBalance
-== \#st_labl_wld_fx      | \cnEffects
-== \#st_labl_wld_env     | \cnEnvironment
-
-== \#BLUE_INTENSITY  | Blue intensity
-== \#GREEN_INTENSITY | Green intensity
-== \#RED_INTENSITY   | Red intensity
-
-== \#gui_buyfiller | Click protection for buying items
-@@ \#TOOLTIP_gui_buyfiller
-Time (in 35ths of seconds) needed to hold a click to buy upgrades and
-items.
-
-== \#gui_cursor | Cursor
-@@ \#TOOLTIP_gui_cursor
-Which cursor graphic to use for in-game GUIs.
-
-== \#gui_defcr | Default text color
-@@ \#TOOLTIP_gui_defcr
-The color for most of the text in in-game GUIs.
-
-== \#gui_jpfont | Japanese font
-@@ \#TOOLTIP_gui_jpfont
-The font to use when Japanese is set as the language.
-
-== \#gui_curspeed | Cursor speed
-== \#gui_theme | Interface theme
-== \#hud_type | Type
-== \#hud_expbar | Show experience bar
-== \#hud_logfromtop | Display at the top of the screen
-== \#hud_logsize | Size
-== \#hud_logcolor | Color
-== \#hud_showarmorind | Show reactive armor indicator
-== \#hud_showdamage | Display damage dealt
-== \#hud_showlog | Show
-== \#hud_showlvl | Show level
-== \#hud_showscore | Show score
-== \#hud_showweapons | Show weapons
-== \#hud_damagealpha | Damage alpha
-== \#hud_showitems | Show
-== \#hud_itemcolor | Color
-== \#light_b | $\#BLUE_INTENSITY
-== \#light_battery | Battery
-== \#light_g | $\#GREEN_INTENSITY
-== \#light_r | $\#RED_INTENSITY
-== \#light_radius | Radius
-== \#light_regen | Battery regeneration
-== \#player_altinvuln | Alternate invulnerability palette
-@@ \#TOOLTIP_player_altinvuln
-Changes the inverted palette to an orange one. My eyes, they're saved!
-
-== \#player_ammodisp | Display picked up ammo
-== \#player_brightweps | Bright weapon pickups
-== \#player_damagebob | Bob view when damaged
-== \#player_damagebobmul | Damage bob multiplier
-== \#player_footstepvol | Footstep volume
-== \#player_itemdisp | Display picked up items
-== \#player_itemdispalpha | Score/item/ammo alpha
-== \#player_lvsys | Level-up system
-== \#player_noitemfx | No item effects
-@@ \#TOOLTIP_player_noitemfx
-Disables the effects around items such as weapons and Phantom rewards,
-leaving only the item itself.
-
-== \#player_pronouns | Pronouns
-@@ \#TOOLTIP_player_pronouns
-If this box is empty, then the default pronouns for your player gender
-will be used. Otherwise, provide them in this format:
-
-subject/object/possessive determiner/possessive/action
-
-For example: they/them/their/theirs/they're
-
-== \#player_rainshader | Enable rain shader
-@@ \#TOOLTIP_player_rainshader
-TECHNOLOGY! Puts rain from the air on your screen. Shouldn't cause any
-issues.
-
-== \#player_resultssound | Play sounds
-== \#player_scoredisp | Display score gained
-== \#player_scoresound | Play a sound when score is gained
-== \#player_sillypickups | Silly pickup messages
-@@ \#TOOLTIP_player_sillypickups
-Highly recommended!
-
-== \#player_teleshop | Teleport in bought items and upgrades
-@@ \#TOOLTIP_player_teleshop
-Creates an item in the world when you buy something.
-
-== \#player_viewtilt | View tilt when strafing
-@@ \#TOOLTIP_player_viewtilt
-Motion sickness warning. Changes how much the view tilts when moving
-laterally.
-
-== \#scanner_font | Font
-== \#scanner_bar | Health bar
-== \#scanner_color | Color
-== \#scanner_slide | Slide to target
-== \#scanner_xoffs | Horizontal offset
-== \#scanner_yoffs | Vertical offset
-== \#st_autobuy_1 | Auto-buy \caSet 1
-@@ \#TOOLTIP_autobuy_1
-Automatically buys this autogroup when you have the Score available.
-
-== \#st_autobuy_2 | Auto-buy \cdSet 2
-== \#st_autobuy_3 | Auto-buy \cnSet 3
-== \#st_autobuy_4 | Auto-buy \cfSet 4
-== \#TOOLTIP_autobuy_2 | $\#TOOLTIP_autobuy_1
-== \#TOOLTIP_autobuy_3 | $\#TOOLTIP_autobuy_1
-== \#TOOLTIP_autobuy_4 | $\#TOOLTIP_autobuy_1
-
-== \#st_done_intro | Don't play intro on next game start
-== \#sv_autosave | Autosave interval
-@@ \#TOOLTIP_sv_autosave
-\cg(Applies on next game start)
-
-== \#sv_difficulty | Difficulty base
-@@ \#TOOLTIP_sv_difficulty
-The base scale for enemy levels; 100% means enemies can spawn at
-maximum level and rank on even the first map.
-
-\ck(Applies on next map start)
-
-== \#sv_extrahard | Extra Hard
-@@ \#TOOLTIP_sv_extrahard
-Enables more difficult enemy patterns.
-
-\ck(Applies on next map start)
-
-== \#sv_lessparticles | Less particles
-== \#sv_minhealth | Minimum health on map start
-== \#sv_nobossdrop | Start with phantom rewards
-@@ \#TOOLTIP_sv_nobossdrop
-Gives you all rewards from mid-mission bosses added by Lithium. Only
-enable if you know what this is.
-
-\cg(Applies on next game start)
-
-== \#sv_nobosses | No phantoms
-@@ \#TOOLTIP_sv_nobosses
-Disables mid-mission bosses added by Lithium. Only enable if you know
-what this is.
-
-\cg(Applies on next game start)
-
-== \#sv_postgame | Enable
-@@ \#TOOLTIP_sv_postgame
-\cgWarning:\c- Post-game content can \cicause saves to be effectively
-deleted\c-, and will have \cipermanent repercussions\c-. Only enable
-if you really want more.
-
-== \#sv_rain | Enable raining
-@@ \#TOOLTIP_sv_rain
-\ck(Applies on next map start)
-
-== \#sv_rainphysics | Rain physics
-%% \#TOOLTIP_sv_rainphysics
-Advanced: Rain has heavy motions, dynamically pitches and rolls. (Default.)
-Static: Rain only lightly reacts to wind, always pouring straight down. (Similar to old versions.)
-Simple: Rain reacts strongly to wind, always pouring straight down. (Initial wind velocity concept.)
-
-== \#sv_revenge | Explode on death
-== \#sv_sky | Replace skies
-%% \#TOOLTIP_sv_sky
-No change: No changes will be made to skies. (Most compatible.)
-Vanilla-like: Allows vanilla skies to have additional visual effects. (May be incompatible with some edge cases. Default.)
-Replace skies: A palette of replacement skies based on the environment.
-Shader: A dynamic, soft, full sky replacement for a more chill atmosphere.
-
-\ck(Applies on next map start)
-
-== \#sv_skydarkening | Outside sector darkening
-== \#sv_wepdrop | Drop weapons from zombies
-@@ \#TOOLTIP_sv_wepdrop
-Mainly exists for map compatibility. Drops weapons from zombie enemies
-like vanilla. May cause issues in normal gameplay.
-
-\ck(Applies on next map start)
-
-== \#weapons_casingfadeout | Casings fade out
-== \#weapons_casings | Emit casings from weapons which use them
-== \#weapons_fastlazshot | Better laser shotgun performance
-== \#weapons_magdrops | Drop magazines from weapons
-== \#weapons_magfadeout | Magazines fade out
-== \#weapons_magicselanims | Magic selection animations
-== \#weapons_nofirebob | No mid-fire bobbing
-== \#weapons_rainbowlaser | Rainbow lasers
-== \#weapons_recoil | Visual recoil amount
-== \#weapons_reducedsg | Reduced shotgun sound
-== \#weapons_reloadbob | Reload bobbing amount
-== \#weapons_reloadempty | Reload the weapon upon magazine emptying
-== \#weapons_ricochetvol | Ricochet volume
-== \#weapons_riflemodeclear | Clear rifle mode on switch
-== \#weapons_riflescope | Modal Rifle scope
-== \#weapons_scopealpha | Scope opacity
-== \#weapons_zoomfactor | Scope zoom factor
-== \#xhair_a | Alpha
-== \#xhair_b | $\#BLUE_INTENSITY
-== \#xhair_enable | Enable
-== \#xhair_enablejuicer | Juicer
-@@ \#TOOLTIP_xhair_enablejuicer
-Seriously, why do they call them that? The little thingies around the
-crosshair that follow the recoil. They're... juicy. Guess that's why.
-
-== \#xhair_g | $\#GREEN_INTENSITY
-== \#xhair_r | $\#RED_INTENSITY
-== \#xhair_style | Style
+## Section Labels ════════════════════════════════════════════════════════════╕
+== \#st_labl_autogroups | \cnAuto-groups
+== \#st_labl_balance    | \cnBalance
+== \#st_labl_behaviour  | \cnBehaviour
+== \#st_labl_damage     | \cnDamage Effects
+== \#st_labl_effects    | \cnEffects
+== \#st_labl_env        | \cnEnvironment
+== \#st_labl_flashlight | \cnFlashlight
+== \#st_labl_fx         | \cnEffects
+== \#st_labl_gui        | \cnGUI
+== \#st_labl_hud        | \cnHeads-Up Display
+== \#st_labl_language   | \cnLanguage
+== \#st_labl_log        | \cnLogging
+== \#st_labl_misc       | \cnMiscellaneous
+== \#st_labl_personal   | \cnPersonal Info (Top-Right Corner)
+== \#st_labl_pickups    | \cnItem Pickups
+== \#st_labl_player     | \cnPlayer
+== \#st_labl_postgame   | \cnPost-game Content
+== \#st_labl_projected  | \cnIn-world UI
+== \#st_labl_scanner    | \cnVital Scanner
+== \#st_labl_xhair      | \cnDynamic Crosshair
 
 ## EOF

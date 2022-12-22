@@ -8,14 +8,12 @@
 
 class Lith_Cyberspace : Thinker;
 
-/* pixel buffer – do not read unless in UI context */
 const RW = 64;
 const RH = 48;
 
 color  m_dBuf[RW * RH];
 double m_camX[RW];
 
-/* map (TODO: make dynamic) */
 const MW = 8;
 const MH = 8;
 

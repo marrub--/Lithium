@@ -17,7 +17,7 @@ default {
 
 states {
 Spawn:
-   LI02 A -1;
+   #DCH A -1;
    stop;
 }
 

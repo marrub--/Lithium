@@ -22,12 +22,13 @@ override void markPrecacheSounds() {
    super.markPrecacheSounds();
    markSound("amb/metalx");
 }
+
 states {
-Spawn:    LI03 QRS 4 bright; loop;
-Inactive: LI01 Y -1; stop;
+Spawn:    #DBB ABC 4 bright; loop;
+Inactive: #DBB D -1; stop;
 Death:
-   LI01 X 0 A_StartSound("amb/metalx", lch_body3);
-   LI01 X -1;
+   #DBB E 0 A_StartSound("amb/metalx", lch_body3);
+   #DBB E -1;
    stop;
 }
 

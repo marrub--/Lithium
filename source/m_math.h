@@ -37,6 +37,7 @@
 #define byte(n) ((n) & 0xFF)
 
 #define fourcc(a, b, c, d) ((d << 24) | (c << 16) | (b << 8) | (a << 0))
+#define atan2k(y, x) ACS_VectorAngle(x, y)
 
 extern union ik32 ik32;
 extern union ik64 ik64;

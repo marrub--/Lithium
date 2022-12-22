@@ -17,18 +17,16 @@
 
 alloc_aut(0) script_str ext("ACS") addr(OBJ "DOGS")
 void Z_DOGS(void) {
+   pl.setActivator();
    i32 tid = ACS_UniqueTID();
-
    ACS_SetMusic(sp_lmusic_DOGS);
-
    for(i32 i = 0; i < (35 * 30) / 10; i++) {
       k32 ang = ACS_RandomFixed(0, 1);
       k32 dst = ACS_RandomFixed(0, 64);
       ACS_SpawnForced(so_Steggles, pl.x + ACS_Cos(ang) * dst, pl.y + ACS_Sin(ang) * dst, pl.z + 8, tid);
-      ServCallV(sm_AlertMonsters);
+      ServCallV(sm_SoundAlert);
       ACS_Delay(10);
    }
-
    ACS_Delay(35);
    ACS_SetMusic(sp_DSEMPTY);
    ACS_SetActorState(tid, sm_PureSteggleEnergy);
@@ -37,8 +35,8 @@ void Z_DOGS(void) {
 script_str ext("ACS") addr(OBJ "BarrierBullets")
 void Z_BarrierBullets(void) {
    if(PtrPlayerNumber(0, AAPTR_TARGET) >= 0) {
-      k32 ang   = ACS_VectorAngle(GetX(0) - pl.x, GetY(0) - pl.y);
-      k32 xang  = ACS_VectorAngle(pl.x - GetX(0), pl.y - GetY(0));
+      k32 ang   = atan2k(GetY(0) - pl.y, GetX(0) - pl.x);
+      k32 xang  = atan2k(pl.y - GetY(0), pl.x - GetX(0));
       k32 zdiff = pl.z - GetZ(0);
       k32 s     = ACS_Sin(ang) * 48.0;
       k32 c     = ACS_Cos(ang) * 48.0;

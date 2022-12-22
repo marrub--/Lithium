@@ -28,14 +28,15 @@ enum DrawType {
    _type_fill,
 }
 
+/* 32 bytes */
 struct DrawData {
-   uint8     type;
-   int16     x, y, z, w;
-   uint16    tsz, tpt;
-   uint      c;
-   float     a;
-   Font      fnt;
-   textureId tex;
+   uint8     type, tsz; /* 2 bytes */
+   uint16    tpt; /* 2 bytes */
+   int16     x, y, z, w; /* 8 bytes */
+   uint      c; /* 4 bytes */
+   float     a; /* 4 bytes */
+   Font      fnt; /* 8 bytes */
+   textureId tex; /* 4 bytes */
 }
 
 struct FadeMsg {
@@ -64,9 +65,13 @@ Font                m_lBigFont;
 Font                m_lJTrmFont;
 Font                m_newConsoleFont;
 
+static clearScope DrawData getDt(DrawData dt) {
+   return dt;
+}
+
 ui void drawAllData(RenderEvent evt) {
    vector2 sc = (320, 240);
-   for(int i = 0; i < m_DPtr; i++) {
+   for(int i = 0; i < m_dPtr; i++) {
       let d = getDt(m_d[i]);
       switch(d.Type) {
       case _type_clipSet:
@@ -157,7 +162,7 @@ static int LB(string t) {
 
 static void LZ(int w, int h) {
    let r = instance();
-   let d = getDt(r.m_d[r.m_DPtr++]);
+   let d = getDt(r.m_d[r.m_dPtr++]);
    d.Type = _type_setSize;
    d.X = w;
    d.Y = h;
@@ -186,7 +191,7 @@ static int LY(int num) {
 static void LL(int x, int y, int z, int w, color c = 0) {
    let r = instance();
    if(r.m_noDraw) return;
-   let d = getDt(r.m_d[r.m_DPtr++]);
+   let d = getDt(r.m_d[r.m_dPtr++]);
    d.Type = _type_line;
    d.X = x;
    d.Y = y;
@@ -202,18 +207,20 @@ static void LS(string tex, int xx, int yy, float anum, int flags, color cr = 0) 
    int  y = yy & _ymask;
    int xa = xx & _xflag;
    int ya = yy & _yflag;
-   let d = getDt(r.m_d[r.m_DPtr]);
+   let d = getDt(r.m_d[r.m_dPtr]);
    if(flags & _u_fade) {
-      d.A  = r.m_fadeMsg[int(anum)].Fade / 255.0;
-      d.A *= r.m_fadeMsg[int(anum)].Alph / 255.0;
+      d.A  = r.m_fadeMsg[int(anum)].fade / 255.0;
+      d.A *= r.m_fadeMsg[int(anum)].alph / 255.0;
    } else if(flags & _u_alpha) {
-      d.A = anum;
+      d.A = clamp(anum, 0.0, 1.0);
    } else {
       d.A = 1.0;
    }
-   if(d.A < 0.001) return;
+   if(d.A < 0.001) {
+      return;
+   }
    ++r.m_dPtr;
-   d.Type = d.A != 1.0 ? _type_spriteAlpha : _type_sprite;
+   d.Type = d.A < 1.0 ? _type_spriteAlpha : _type_sprite;
    if(flags & _u_add)
       d.Z = STYLE_Add;
    else if(d.Type == _type_spriteAlpha)
@@ -250,18 +257,20 @@ static void LT(string txt, string fnt, int xx, int yy, float anum, int cr, int f
    int  y = yy & _ymask;
    int xa = xx & _xflag;
    int ya = yy & _yflag;
-   let d = getDt(r.m_d[r.m_DPtr]);
+   let d = getDt(r.m_d[r.m_dPtr]);
    if(flags & _u_fade) {
-      d.A  = r.m_fadeMsg[int(anum)].Fade / 255.0;
-      d.A *= r.m_fadeMsg[int(anum)].Alph / 255.0;
+      d.A  = r.m_fadeMsg[int(anum)].fade / 255.0;
+      d.A *= r.m_fadeMsg[int(anum)].alph / 255.0;
    } else if(flags & _u_alpha) {
-      d.A = anum;
+      d.A = clamp(anum, 0.0, 1.0);
    } else {
       d.A = 1.0;
    }
-   if(d.A < 0.001) return;
+   if(d.A < 0.001) {
+      return;
+   }
    ++r.m_dPtr;
-   d.Type = d.A != 1.0 ? _type_textAlpha : _type_text;
+   d.Type = d.A < 1.0 ? _type_textAlpha : _type_text;
    if(flags & _u_add)
       d.Z = STYLE_Add;
    else if(d.Type == _type_textAlpha)
@@ -270,7 +279,7 @@ static void LT(string txt, string fnt, int xx, int yy, float anum, int cr, int f
       d.Z = STYLE_Normal;
    d.C = cr;
    int lnx = 0;
-   int wrapWidth = r.m_wrapX && xa == _xl ? r.m_wrapX - x : 0x7FFF;
+   int wrapWidth = r.m_wrapX >= 0 && xa == _xl ? r.m_wrapX - x : int.max;
    d.Fnt = r.fntAny(fnt, flags & _u_no_unicode);
    d.W   = d.Fnt.GetHeight();
    let brl = d.Fnt.BreakLines(txt, wrapWidth);
@@ -305,32 +314,36 @@ static void LT(string txt, string fnt, int xx, int yy, float anum, int cr, int f
 
 static void LC(int x = 0, int y = 0, int w = 0, int h = 0, int ww = 0) {
    let r = instance();
-   let d = getDt(r.m_d[r.m_DPtr]);
-   if(x || y || w || h) {
-      if((r.m_noDraw = w <= 0 || h <= 0)) {
-         return;
-      }
-      d.Type = _type_clipSet;
-      d.X = x;
-      d.Y = y;
-      d.Z = w;
-      d.W = h;
-   } else {
-      r.m_noDraw = false;
-      d.Type = _type_clipClear;
+   let d = getDt(r.m_d[r.m_dPtr]);
+   if(w <= 0 || h <= 0 || x + w <= 0 || y + h <= 0) {
+      r.m_noDraw = true;
+      return;
    }
    ++r.m_dPtr;
+   d.Type = _type_clipSet;
+   d.X = x;
+   d.Y = y;
+   d.Z = w;
+   d.W = h;
    if(ww) {
       r.m_wrapX = x + ww;
    } else {
-      r.m_wrapX = 0;
+      r.m_wrapX = -1;
    }
+}
+
+static void LU() {
+   let r = instance();
+   let d = getDt(r.m_d[r.m_dPtr++]);
+   r.m_noDraw = false;
+   r.m_wrapX = -1;
+   d.Type = _type_clipClear;
 }
 
 static void LR(int x = 0, int y = 0, int w = 0, int h = 0, color cr = 0) {
    let r = instance();
    if(r.m_noDraw) return;
-   let d = getDt(r.m_d[r.m_DPtr++]);
+   let d = getDt(r.m_d[r.m_dPtr++]);
    d.Type = _type_rect;
    d.X = x;
    d.Y = y;
@@ -342,7 +355,7 @@ static void LR(int x = 0, int y = 0, int w = 0, int h = 0, color cr = 0) {
 static void LW(color cr = 0) {
    let r = instance();
    if(r.m_noDraw) return;
-   let d = getDt(r.m_d[r.m_DPtr++]);
+   let d = getDt(r.m_d[r.m_dPtr++]);
    d.Type = _type_fill;
    d.C = cr;
 }
@@ -380,7 +393,7 @@ ui static void drawLn(double x1, double y1, double x2, double y2, color cr, vect
       p1 = anyPos((x1, y1), vsz, vfl);
       p2 = anyPos((x2, y2), vsz, vfl);
       ln2 = (p2 - p1).length();
-      Screen.drawThickLine(int(p1.x), int(p1.y), int(p2.x), int(p2.y), ln2/ln1, cr, cr.a);
+      Screen.drawThickLine(p1.x, p1.y, p2.x, p2.y, ln2/ln1, cr, cr.a);
    }
 }
 
@@ -390,10 +403,6 @@ static clearScope textureId getTex(string tex) {
       tex = "lgfx" .. tex .. ".png";
    }
    return TexMan.checkForTexture(tex, TexMan.Type_Any);
-}
-
-clearScope static DrawData getDt(DrawData d) {
-   return d;
 }
 
 clearScope static vector2 cleanPos(vector2 p) {

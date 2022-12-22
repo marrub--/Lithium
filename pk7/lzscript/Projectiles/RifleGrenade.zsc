@@ -23,7 +23,7 @@ class Lith_RifleGrenadeSmoke : Actor {
    states {
    Spawn:
       TNT1 A 2;
-      SMOK ACDGHJKMPQ 1 bright;
+      #ESM ACDGHJKMPQ 1 bright;
       stop;
    }
 }

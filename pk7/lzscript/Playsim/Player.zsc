@@ -41,7 +41,7 @@ static void Nuke(Actor mo) {
    for(let it = BlockThingsIterator.Create(mo, 6144); it.next();)
       if(it.thing.bSHOOTABLE && it.thing.checkSight(mo) && !it.thing.player)
          DieMonster(it.thing);
-   mo.A_AlertMonsters();
+   mo.soundAlert(mo);
 }
 
 static void PlayerDeath(Actor mo) {

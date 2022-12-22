@@ -23,10 +23,10 @@ class Lith_ArchoPlasmTrail : Actor
    states
    {
    Spawn:
-      LI04 J 0;
-      LI04 JJ 1 bright A_SpawnItemEx("Lith_ArchoPlasmParticles", -1, frandom(-1, 1), frandom(-1, 1), frandom(-1, 0), frandom(-0.5, 0.5), frandom(-0.5, 0.5));
-      LI04 JJ 0 A_SpawnParticle("37732B", SPF_FULLBRIGHT | SPF_RELATIVE, 10, 5, 0, frandom(-8,8), frandom(-8,8), frandom(-2,2), frandom(0, 10), frandom(-0.1, 0.1), frandom(-1.0, 1.0), 0, 0, 0.02, 1.0, -1);
-      LI04 KLMNOP 2;
+      #EAP J 0;
+      #EAP JJ 1 bright A_SpawnItemEx("Lith_ArchoPlasmParticles", -1, frandom(-1, 1), frandom(-1, 1), frandom(-1, 0), frandom(-0.5, 0.5), frandom(-0.5, 0.5));
+      #EAP JJ 0 A_SpawnParticle("37732B", SPF_FULLBRIGHT | SPF_RELATIVE, 10, 5, 0, frandom(-8,8), frandom(-8,8), frandom(-2,2), frandom(0, 10), frandom(-0.1, 0.1), frandom(-1.0, 1.0), 0, 0, 0.02, 1.0, -1);
+      #EAP KLMNOP 2;
       stop;
    }
 }
@@ -47,9 +47,9 @@ class Lith_ArchoPlasmParticles : Actor
    states
    {
    Spawn:
-      LI04 E 2 bright;
-      LI04 FG 3;
-      LI04 HHII 2 A_FadeOut(0.15);
+      #EAP E 2 bright;
+      #EAP FG 3;
+      #EAP HHII 2 A_FadeOut(0.15);
       stop;
    }
 }
@@ -72,7 +72,7 @@ class Lith_ArachnotronPlasma : ArachnotronPlasma replaces ArachnotronPlasma
    states
    {
    Spawn:
-      LI04 ABCDABCD 1 bright A_SpawnItemEx("Lith_ArchoPlasmTrail", -1, frandom(-1, 1), frandom(-1, 1), frandom(-1, 0), frandom(-0.5, 0.5), frandom(-0.5, 0.5));
+      #EAP ABCDABCD 1 bright A_SpawnItemEx("Lith_ArchoPlasmTrail", -1, frandom(-1, 1), frandom(-1, 1), frandom(-1, 0), frandom(-0.5, 0.5), frandom(-0.5, 0.5));
       loop;
    Death:
       APLS A 2 bright;
