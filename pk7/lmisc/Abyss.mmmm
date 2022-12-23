@@ -50,28 +50,29 @@ toki lane {
       m_seen,
       c_meet,
       other_meet,
+      other_past,
    }
 
    lipu begin {
       name   DOLL;
-      remote UNKNOWN;
+      remote LANE;
       icon   Doll;
       text _0;
       seme kon %lane_met {
-         /*             */ option _o2  brk;
+         option _o1 brk;
       } ante {
          option _o0 {
             /**/ seme poki pM lipu m_meet;
             ante seme poki pC lipu c_meet;
             ante              lipu other_meet;
          }
-         option _o1 brk;
+         seme poki pM option _o1m brk;
+         ante         option _o1  brk;
       }
    }
 
    /* Lane */
    lipu m_meet {
-      inc %lane_met;
       text _0;
       option _o0 lipu m_nothing;
       option _o1 brk;
@@ -79,9 +80,12 @@ toki lane {
    }
 
    lipu m_nothing {
-      seme !kon %lane_rpg   option _o0 { inc %lane_rpg;   lipu m_nothing; }
-      seme !kon %lane_where option _o1 { inc %lane_where; lipu m_nothing; }
-      option _o2 lipu m_seen;
+      seme !kon %lane_rpg   option _o0 {inc %lane_rpg;   lipu m_nothing;}
+      seme !kon %lane_where option _o1 {inc %lane_where; lipu m_nothing;}
+      option _o2 {
+         inc %lane_met;
+         lipu m_seen;
+      }
       option _o3 brk;
       seme kon %lane_rpg {
          text _1;
@@ -115,7 +119,17 @@ toki lane {
    }
 
    lipu other_meet {
-      lipu begin;
+      inc %lane_met;
+      text _0;
+      option _o0 brk;
+      option _o1 lipu other_past;
+      option _o2 brk;
+   }
+
+   lipu other_past {
+      script "Lith_SetLane";
+      text _0;
+      option _o0 brk;
    }
 }
 
@@ -131,7 +145,7 @@ toki kiri {
 
    lipu begin {
       name   DOLL;
-      remote UNKNOWN;
+      remote KIRI;
       icon   Doll;
       option _o0 brk;
       seme poki pT {

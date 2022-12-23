@@ -72,8 +72,9 @@ lipu_ilo endings {
       } ante seme poki pD {
          image   ":End:Ari";
          fade_in 50;
-         crawl   IconOfSin_1_Ari 500;
-         crawl   IconOfSin_2_Ari 500;
+         crawl   IconOfSin_1_Ari 250;
+         crawl   IconOfSin_2_Ari 250;
+         crawl   IconOfSin_3_Ari 500;
       }
       lipu common;
    }
@@ -98,7 +99,7 @@ lipu_ilo endings {
       image    "TITLEPIC";
       music    "lmusic/crucifying.opus";
       fade_in  70;
-      crawl    Credits 400;
+      crawl    Credits 250;
       fade_out 70;
       image    "";
       wait     50;

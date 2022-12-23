@@ -11,13 +11,18 @@
 !!include Dialogue/LITHTEST.txt
 !!include Dialogue/TITLEMAP.txt
 
-== \#REMOTE_UNKNOWN | <unknown>@raddr.4E19
 == \#REMOTE_HIDDEN  | <hidden>
-== \#REMOTE_OCS     | OCS@localhost
-== \#REMOTE_DATA    | data@localhost
-== \#REMOTE_MAXIE   | maxie@ai.<hidden>
+== \#REMOTE_UNKNOWN | <unknown>@raddr.4E19
+
 == \#REMOTE_JACQUES | jacques.p42710@corp.AOF
 == \#REMOTE_TEST    | test@org.example
+
+== \#REMOTE_DATA  | data@localhost
+== \#REMOTE_MAXIE | maxie@ai.judgment.51e
+== \#REMOTE_OCS   | OCS@localhost
+
+== \#REMOTE_KIRI | kirihitok@raddr.4E19
+== \#REMOTE_LANE | laneb@mil.<hidden>
 
 == \#PNAME_UNKNOWN | ???
 == \#PNAME_MAXIE   | Maxie

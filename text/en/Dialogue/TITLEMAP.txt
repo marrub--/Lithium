@@ -18,31 +18,31 @@
 
 %% TITLEMAP_start_begin_o1m
 Huh?
-\cq[I'm leaving.]
+\cr[I'm leaving.]
 
 %% TITLEMAP_start_begin_o1c
 What?
-\cq[I'm leaving.]
+\cr[I'm leaving.]
 
 %% TITLEMAP_start_begin_o1i
 Delete message.
-\cq[Not meant to be here.]
+\cr[Not meant to be here.]
 
 %% TITLEMAP_start_begin_o1w
 Where..?
-\cq[Forwards...]
+\cr[Forwards...]
 
 %% TITLEMAP_start_begin_o1a
 Future..?
-\cq[I don't like this. I'm out of here.]
+\cr[I don't like this. I'm out of here.]
 
 %% TITLEMAP_start_begin_o1d
 Alright.
-\cq[I don't like this. I'm out of here.]
+\cr[I don't like this. I'm out of here.]
 
 %% TITLEMAP_start_begin_o1t
 Rid me of this illusion.
-\cq[None of this.]
+\cr[None of this.]
 
 ## Marine ════════════════════════════════════════════════════════════════════╕
 @@ TITLEMAP_lane_begin_0
@@ -62,13 +62,13 @@ Ah, hey there.
 Ah, hey there. You look familiar.
 \cq[Who is she?]
 
-%% TITLEMAP_lane_begin_o2
-Oh, sorry, didn't mean to bother you.
-\cq[Back out while you can.]
-
 %% TITLEMAP_lane_begin_o1
 Oh, sorry, didn't mean to bother you.
-\cq[Back out.]
+\cr[Back out.]
+
+%% TITLEMAP_lane_begin_o1m
+Oh, sorry, didn't mean to bother you.
+\cr[Back out while you can.]
 
 @@ TITLEMAP_lane_m_meet_0
 Oh, do I? How so, might I ask? I don't believe I've met you before.
@@ -77,7 +77,7 @@ Oh, do I? How so, might I ask? I don't believe I've met you before.
 
 %% TITLEMAP_lane_m_meet_o0
 No, it must be nothing.
-\ct[I'm sure it's nothing.]
+\cq[I'm sure it's nothing.]
 
 %% TITLEMAP_lane_m_meet_o1
 No, just forget about it, sorry.
@@ -136,7 +136,7 @@ No.
 
 %% TITLEMAP_lane_m_seen_o1
 ...Yes. Burn marks. Self-inflicted.
-\cr[*Fuck.*]
+\cq[*Fuck.*]
 
 @@ TITLEMAP_lane_m_seen_1
 ...Ah.
@@ -150,6 +150,32 @@ I'm leaving.
 %% TITLEMAP_lane_m_seen_o3
 I see.
 \cr[We're the same person. \cmGod damn it.\cr]
+
+@@ TITLEMAP_lane_other_meet_0
+Don't think I've seen you around. Say, do you come from the past? Am I
+in Heaven?
+
+\cn[I feel mildly odd about this doll.]
+
+%% TITLEMAP_lane_other_meet_o0
+I don't think Heaven exists.
+\cr[What's up with that?]
+
+%% TITLEMAP_lane_other_meet_o1
+I'm not sure where I am in the first place, sorry.
+\cq[Let alone what time...]
+
+%% TITLEMAP_lane_other_meet_o2
+I think I'm just going to leave.
+\cr[I think that's enough.]
+
+@@ TITLEMAP_lane_other_past_0
+Neither am I... All I know about my past was that I was named Stan.
+The rest seems foggy!
+
+%% TITLEMAP_lane_other_past_o0
+Alright, sorry to bother you.
+\cr[I think that's enough.]
 
 ## Thoth ═════════════════════════════════════════════════════════════════════╕
 %% TITLEMAP_kiri_begin_0
@@ -175,7 +201,7 @@ I see.
 Hello, me.
 
 %% TITLEMAP_kiri_begin_o0
-\cq[Proceed.]
+\cr[Proceed.]
 
 %% TITLEMAP_kiri_begin_o1
 \cq[Don't go.]

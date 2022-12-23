@@ -804,25 +804,25 @@
    "\c[Lith_Grey]Iterate.";
 "TITLEMAP_start_begin_o1m" =
    "Huh?\n"
-   "\cq[I'm leaving.]";
+   "\cr[I'm leaving.]";
 "TITLEMAP_start_begin_o1c" =
    "What?\n"
-   "\cq[I'm leaving.]";
+   "\cr[I'm leaving.]";
 "TITLEMAP_start_begin_o1i" =
    "Delete message.\n"
-   "\cq[Not meant to be here.]";
+   "\cr[Not meant to be here.]";
 "TITLEMAP_start_begin_o1w" =
    "Where..?\n"
-   "\cq[Forwards...]";
+   "\cr[Forwards...]";
 "TITLEMAP_start_begin_o1a" =
    "Future..?\n"
-   "\cq[I don't like this. I'm out of here.]";
+   "\cr[I don't like this. I'm out of here.]";
 "TITLEMAP_start_begin_o1d" =
    "Alright.\n"
-   "\cq[I don't like this. I'm out of here.]";
+   "\cr[I don't like this. I'm out of here.]";
 "TITLEMAP_start_begin_o1t" =
    "Rid me of this illusion.\n"
-   "\cq[None of this.]";
+   "\cr[None of this.]";
 "TITLEMAP_lane_begin_0" =
    "I will walk, with my shadow flag...\n"
    "\n"
@@ -836,19 +836,19 @@
 "TITLEMAP_lane_begin_o0m" =
    "Ah, hey there. You look familiar.\n"
    "\cq[Who is she?]";
-"TITLEMAP_lane_begin_o2" =
-   "Oh, sorry, didn't mean to bother you.\n"
-   "\cq[Back out while you can.]";
 "TITLEMAP_lane_begin_o1" =
    "Oh, sorry, didn't mean to bother you.\n"
-   "\cq[Back out.]";
+   "\cr[Back out.]";
+"TITLEMAP_lane_begin_o1m" =
+   "Oh, sorry, didn't mean to bother you.\n"
+   "\cr[Back out while you can.]";
 "TITLEMAP_lane_m_meet_0" =
    "Oh, do I? How so, might I ask? I don't believe I've met you before.\n"
    "\n"
    "\cn[I feel intimidated by this doll.]";
 "TITLEMAP_lane_m_meet_o0" =
    "No, it must be nothing.\n"
-   "\ct[I'm sure it's nothing.]";
+   "\cq[I'm sure it's nothing.]";
 "TITLEMAP_lane_m_meet_o1" =
    "No, just forget about it, sorry.\n"
    "\cr[God damn it.]";
@@ -890,7 +890,7 @@
    "\cr[Fuck.]";
 "TITLEMAP_lane_m_seen_o1" =
    "...Yes. Burn marks. Self-inflicted.\n"
-   "\cr[*Fuck.*]";
+   "\cq[*Fuck.*]";
 "TITLEMAP_lane_m_seen_1" =
    "...Ah.\n"
    "\n"
@@ -901,6 +901,24 @@
 "TITLEMAP_lane_m_seen_o3" =
    "I see.\n"
    "\cr[We're the same person. \cmGod damn it.\cr]";
+"TITLEMAP_lane_other_meet_0" =
+   "Don't think I've seen you around. Say, do you come from the past? Am I in Heaven?\n"
+   "\n"
+   "\cn[I feel mildly odd about this doll.]";
+"TITLEMAP_lane_other_meet_o0" =
+   "I don't think Heaven exists.\n"
+   "\cr[What's up with that?]";
+"TITLEMAP_lane_other_meet_o1" =
+   "I'm not sure where I am in the first place, sorry.\n"
+   "\cq[Let alone what time...]";
+"TITLEMAP_lane_other_meet_o2" =
+   "I think I'm just going to leave.\n"
+   "\cr[I think that's enough.]";
+"TITLEMAP_lane_other_past_0" =
+   "Neither am I... All I know about my past was that I was named Stan. The rest seems foggy!";
+"TITLEMAP_lane_other_past_o0" =
+   "Alright, sorry to bother you.\n"
+   "\cr[I think that's enough.]";
 "TITLEMAP_kiri_begin_0" =
    "\cn[The doll is completely unresponsive. You poke it, but it's just lifeless. Like everything else.]";
 "TITLEMAP_kiri_begin_0t" =
@@ -921,7 +939,7 @@
 "TITLEMAP_kiri_begin_1t" =
    "Hello, me.";
 "TITLEMAP_kiri_begin_o0" =
-   "\cq[Proceed.]";
+   "\cr[Proceed.]";
 "TITLEMAP_kiri_begin_o1" =
    "\cq[Don't go.]";
 "TITLEMAP_kiri_t_breaking_0" =
@@ -993,20 +1011,24 @@
    "\cq[Pleasant thing. Shall we ignore it?]";
 "TITLEMAP_kiri_t_entity_o0" =
    "\c[Lith_Evil]...Gladly.";
-"LITH_REMOTE_UNKNOWN" =
-   "<unknown>@raddr.4E19";
 "LITH_REMOTE_HIDDEN" =
    "<hidden>";
-"LITH_REMOTE_OCS" =
-   "OCS@localhost";
-"LITH_REMOTE_DATA" =
-   "data@localhost";
-"LITH_REMOTE_MAXIE" =
-   "maxie@ai.<hidden>";
+"LITH_REMOTE_UNKNOWN" =
+   "<unknown>@raddr.4E19";
 "LITH_REMOTE_JACQUES" =
    "jacques.p42710@corp.AOF";
 "LITH_REMOTE_TEST" =
    "test@org.example";
+"LITH_REMOTE_DATA" =
+   "data@localhost";
+"LITH_REMOTE_MAXIE" =
+   "maxie@ai.judgment.51e";
+"LITH_REMOTE_OCS" =
+   "OCS@localhost";
+"LITH_REMOTE_KIRI" =
+   "kirihitok@raddr.4E19";
+"LITH_REMOTE_LANE" =
+   "laneb@mil.<hidden>";
 "LITH_PNAME_UNKNOWN" =
    "???";
 "LITH_PNAME_MAXIE" =
@@ -1512,7 +1534,76 @@
    "\n"
    "\cvIt's time to go back.";
 "LITHEND_IconOfSin_1_Ari" =
-   "\cg - This story is a work in progress -";
+   "\cgSeen through 8 eyes,\n"
+   "\n"
+   "      \cfAll light,\n"
+   "\n"
+   "    \cfTwice of twice,\n"
+   "\n"
+   " \ccThrough death through life\n"
+   "\n"
+   "\n"
+   "\n"
+   "\cbIntern flow in next chapter -\n"
+   "\n"
+   "\n"
+   "        \cdSelf unseen\n"
+   "\n"
+   "\cdrings throughout\n"
+   "\n"
+   "\n"
+   "        \ckSelf of selves\n"
+   "\n"
+   "\ckrightward doubt\n"
+   "\n"
+   "         \c-...\n"
+   "\n"
+   "      ...\n"
+   "\n"
+   "   ...\n"
+   "\n"
+   "...";
+"LITHEND_IconOfSin_2_Ari" =
+   "\ctFollow gaze through all ways,\n"
+   "\n"
+   "  \cylines converge every plane,\n"
+   "\n"
+   "            \czConnection lost -\n"
+   "\n"
+   "          \cdConnections gained,\n"
+   "\n"
+   "\n"
+   "           \cchalf reality,\n"
+   "\n"
+   "           \cjbe on your way\n"
+   "\n"
+   "\n"
+   "           \cchalf reality,\n"
+   "\n"
+   "           \cjbe on your way\n"
+   "\n"
+   "\n"
+   "             \c-...\n"
+   "\n"
+   "          ...\n"
+   "\n"
+   "       ...\n"
+   "\n"
+   "   ...\n"
+   "\n"
+   "...";
+"LITHEND_IconOfSin_3_Ari" =
+   "Thus did the giant crush and bludgeon the barrier of the irreal, destroying all the wicked in his path. They lay in a bed of flowers, sight drenched in light. A blink of an eye brings them upon a throne. The giant and the wretch within seal their blade within its backrest. No monarchs by them would be made.\n"
+   "\n"
+   "The swath of darkness no longer was able to make its way outside its self. Soon, everything would collapse. The giant felt horrible, like he had broken a promise.\n"
+   "\n"
+   "But the wretch within said to them, \"\c[Lith_Pink]My certain demise comforts me, brother. With me will you die, by my misstep. Power I sought, but look at us now. Your care for me brought me here. Yet so I will die alone with you, and my thoughts, for comfort.\c-\"\n"
+   "\n"
+   "The giant was with pause, and replied: \"\c[Lith_Blue]Power you sought, but power absolute you gained. This plane is still yet without mercy. Its ingress is stopped, but inside we lay as its yolk. If I may, sister, dare ask this: Will you only give in and bear its burden?\c-\"\n"
+   "\n"
+   "So did they fight on through eternity, stretched infinitely inward to the point of the next and last relay. Every last piece of matter within the plane they dwelt in was destroyed. Every last throne was defaced, and every living being killed. There was absolutely nothing left but the twins, who were untied at birth.\n"
+   "\n"
+   "They became like the light of the universe, eventually becoming nothingness and evaporating. Left alone the yolk became something new.";
 "LITH_INFO_SHORT_AllPoint" =
    "AllPoint";
 "LITH_INFO_TITLE_AllPoint" =
