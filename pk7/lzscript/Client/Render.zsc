@@ -222,15 +222,9 @@ clearScope int, int ammoAmt(Actor mo, class<Lith_Ammo> ty) const {
 }
 
 clearScope vector3 traceFromPos(Sector sec, vector3 pos, double yaw, double pitch, double dist, Actor ignore, bool floor, ETraceFlags flags) {
-   yaw   = Lith_UTIL.constDeg(yaw);
-   pitch = Lith_UTIL.constDeg(pitch);
-
-   let len = cos(pitch);
-   let dir = (len * cos(yaw), len * sin(yaw), -sin(pitch));
-
+   let dir = Lith_UTIL.anglesToVec((yaw, pitch));
    m_tracer.m_ignore = ignore;
    m_tracer.trace(pos, sec, dir, dist, flags);
-
    return m_tracer.results.hitPos;
 }
 

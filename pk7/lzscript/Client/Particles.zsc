@@ -1,0 +1,142 @@
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
+
+extend class Lith_URANUS;
+
+transient FSpawnParticleParams pp_kampilan_swing;
+transient FSpawnParticleParams pp_700e_laser;
+transient FSpawnParticleParams pp_rocket_fire;
+transient FSpawnParticleParams pp_rocket_smoke;
+transient FSpawnParticleParams pp_rems_spark;
+transient FSpawnParticleParams pp_rems_bullet;
+
+void particleRegister() {
+   pp_rems_spark.color1     = "purple";
+   pp_rems_spark.texture    = getTex("PLSEE0");
+   pp_rems_spark.style      = style_add;
+   pp_rems_spark.flags      = spf_fullbright;
+   pp_rems_spark.accel      = (0.0,0.0,-0.05);
+   pp_rems_spark.startAlpha = 0.98;
+   pp_rems_spark.fadeStep   = -1;
+   pp_rems_bullet.color1     = "white";
+   pp_rems_bullet.texture    = getTex("BLLTY0");
+   pp_rems_bullet.style      = style_add;
+   pp_rems_bullet.lifetime   = 5;
+   pp_rems_bullet.size       = 6;
+   pp_rems_bullet.startAlpha = 0.5;
+   pp_rems_bullet.fadeStep   = -1;
+   pp_rocket_fire.color1     = "white";
+   pp_rocket_fire.texture    = getTex("MA7GH0");
+   pp_rocket_fire.style      = style_add;
+   pp_rocket_fire.lifetime   = 5;
+   pp_rocket_fire.flags      = spf_fullbright;
+   pp_rocket_fire.size       = 10;
+   pp_rocket_fire.sizeStep   = -3;
+   pp_rocket_fire.startAlpha = 1.0;
+   pp_rocket_fire.fadeStep   = 0.1;
+   pp_rocket_smoke.color1     = "white";
+   pp_rocket_smoke.texture    = getTex("#ESMA0");
+   pp_rocket_smoke.style      = style_add;
+   pp_rocket_smoke.lifetime   = 20;
+   pp_rocket_smoke.size       = 10;
+   pp_rocket_smoke.sizeStep   = 0.015;
+   pp_rocket_smoke.startAlpha = 1.0;
+   pp_rocket_smoke.fadeStep   = -1;
+   pp_700e_laser.color1     = "white";
+   pp_700e_laser.texture    = getTex("#ELAA0");
+   pp_700e_laser.style      = style_add;
+   pp_700e_laser.lifetime   = 21;
+   pp_700e_laser.size       = 3;
+   pp_700e_laser.sizeStep   = -0.14;
+   pp_700e_laser.fadeStep   = -1;
+   pp_kampilan_swing.style      = style_add;
+   pp_kampilan_swing.lifetime   = 35;
+   pp_kampilan_swing.size       = 12;
+   pp_kampilan_swing.startAlpha = 1.0;
+   pp_kampilan_swing.fadeStep   = -1;
+}
+
+void particleRemsSpark(PlayerPawn mo) {
+   let vp = mo.pos.plusZ(mo.viewHeight);
+   for(int i = 0, j = random(11,13); i < j; i++) {
+      pp_rems_spark.lifetime = random(8, 24);
+      pp_rems_spark.size = fRandom(0.5, 1.1);
+      Lith_UTIL.particlePosVel(
+         pp_rems_spark,
+         vp+(fRandom(-1,1),fRandom(-1,1),fRandom(-1,1)),
+         (mo.angle+fRandom(-10,20), mo.pitch+fRandom(-15,15)),
+         distance: fRandom(8,24),
+         vel: (fRandom(-4,4),fRandom(-0.1,0.1),mo.vel.z*1.5+fRandom(-1,1)),
+         vel_angles: (mo.angle-fRandom(-2,2), mo.pitch-fRandom(-2,2)));
+      level.spawnParticle(pp_rems_spark);
+   }
+}
+
+void particleRemsBullet(vector3 pos) {
+   Lith_UTIL.particlePosVel(pp_rems_bullet, pos);
+   level.spawnParticle(pp_rems_bullet);
+}
+
+void particleRocketTrail(Actor mo) {
+   let pos = mo.pos.plusZ(4);
+   let mv  = Lith_UTIL.vecToAngles(mo.vel / mo.vel.length());
+   let ma  = Lith_UTIL.invertDeg(mo.angle);
+   let mp  = Lith_UTIL.invertDeg(mv.y);
+   let va  = ma+fRandom(-2,2);
+   let vp  = mp+fRandom(-2,2);
+   Lith_UTIL.particlePosVel(
+      pp_rocket_smoke,
+      pos, (va, vp), distance: fRandom(16,32),
+      vel: (fRandom(-0.5,0.5),fRandom(0.1,0.7),0.0),
+      vel_angles: (va, vp));
+   level.spawnParticle(pp_rocket_smoke);
+   Lith_UTIL.particlePosVel(
+      pp_rocket_fire,
+      pos, (ma, mp), distance: 32,
+      vel: (fRandom(-0.5,0.5),fRandom(0.1,0.7),0.0),
+      vel_angles: (va, vp));
+   level.spawnParticle(pp_rocket_fire);
+}
+
+void particle700eLaserTrace(vector3 pos, double alpha) {
+   pp_700e_laser.startAlpha = alpha;
+   Lith_UTIL.particlePosVel(pp_700e_laser, pos);
+   level.spawnParticle(pp_700e_laser);
+}
+
+void particle700eLaser(Actor mo, double p, double vz) {
+   let vp = mo.pos.plusZ(vz);
+   let mp = mo.pitch - p;
+   let ma = (mo.angle - 18, mp-4);
+   let va = (mo.angle + 18, mp-8);
+   pp_700e_laser.startAlpha = 0.75;
+   for(int i = 0; i < 5; ++i) {
+      Lith_UTIL.particlePosVel(
+         pp_700e_laser,
+         vp, ma, distance: 16,
+         vel: (0.14,0.14,0.14)*i,
+         vel_angles: va);
+      level.spawnParticle(pp_700e_laser);
+   }
+}
+
+void particleKampilanSwing(Actor mo, color cr, bool left) {
+   for(int i = 0; i < 28; ++i) {
+      let ii = ((left ? 0 : -28) + i - 14) * 6.0;
+      pp_kampilan_swing.color1 = i & 7 == 0 ? color("blue") : cr;
+      Lith_UTIL.particlePosVel(
+         pp_kampilan_swing,
+         mo.pos, (mo.angle + ii, ii), distance: 8,
+         vel: (0.07,0.07,0.07),
+         vel_angles: (fRandom(0, 360), fRandom(0, 360)));
+      pp_kampilan_swing.accel = pp_kampilan_swing.vel * 0.5;
+      level.spawnParticle(pp_kampilan_swing);
+   }
+}
+
+/* EOF */

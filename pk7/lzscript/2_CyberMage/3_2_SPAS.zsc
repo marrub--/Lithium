@@ -124,7 +124,11 @@ action(Weapon) State Lith_A_FireSPAS()
    A_Light(1);
    if(Lith_UTIL.pData(_pdt_upgrade, UPGR_SPAS_A))
       return ResolveState("FireVoid");
-   Lith_FireBullets(10.5, 3.5, 12, 6);
+   if(invoker.m_fired & 1) {
+      Lith_FireBullets(10.5, 3.5, 11, 6, puffType: "Lith_BulletPuffPainless");
+   } else {
+      Lith_FireBullets(10.5, 3.5, 11, 7);
+   }
    Lith_A_GunSmoke();
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
    if(Lith_UTIL.pData(_pdt_upgrade, UPGR_SPAS_B))

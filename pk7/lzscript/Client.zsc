@@ -13,6 +13,7 @@
 #include "lzscript/Client/Draw.zsc"
 #include "lzscript/Client/Menu.zsc"
 #include "lzscript/Client/MessageBox.zsc"
+#include "lzscript/Client/Particles.zsc"
 #include "lzscript/Client/PlayerClassMenu.zsc"
 #include "lzscript/Client/Projection.zsc"
 #include "lzscript/Client/Sky.zsc"
@@ -35,6 +36,7 @@ static clearScope Lith_URANUS instance() {
 
 override void onRegister() {
    renRegister();
+   particleRegister();
 }
 
 override void worldLoaded(WorldEvent evt) {

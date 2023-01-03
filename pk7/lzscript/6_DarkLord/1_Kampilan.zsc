@@ -18,32 +18,40 @@ class Lith_KampilanPuff : Actor {
       -AllowParticles
    }
 
-   states {
-   Spawn:
-   XDeath:
-      TNT1 A 0;
-      TNT1 A 0 a_jumpif(tracer ? tracer.bNoBlood : true, "Crash");
-      TNT1 A 0 {
+   virtual void lith_doFx(color cr) {
+      Lith_URANUS.instance().particleKampilanSwing(self, cr, false);
+   }
+
+   override void postBeginPlay() {
+      super.postBeginPlay();
+      if(tracer ? tracer.bNoBlood : true) {
+         if(target) {
+            target.a_startSound("weapons/kampilan/hit", lch_weapon2);
+         }
+         lith_doFx("white");
+      } else {
          for(int i = 0; i < 10; ++i) {
             a_startSound("body/flesh", lch_auto);
          }
+         lith_doFx("red");
          if(target) {
             target.a_startSound("weapons/kampilan/hitflesh", lch_weapon2);
          }
       }
-      stop;
-   Melee:
-   Crash:
-      TNT1 A 0 {
-         if(target) {
-            target.a_startSound("weapons/kampilan/hit", lch_weapon2);
-         }
-      }
+   }
+
+   states {
+   Spawn:
+      TNT1 A 0;
       stop;
    }
 }
 
-class Lith_KampilanPuff2 : Lith_KampilanPuff {}
+class Lith_KampilanPuff2 : Lith_KampilanPuff {
+   override void lith_doFx(color cr) {
+      Lith_URANUS.instance().particleKampilanSwing(self, cr, true);
+   }
+}
 
 class Lith_KampilanBonkPuff : Actor {
    default {
@@ -58,6 +66,20 @@ class Lith_KampilanBonkPuff : Actor {
       -AllowParticles
    }
 
+   override void postBeginPlay() {
+      super.postBeginPlay();
+      if(target) {
+         target.a_startSound("weapons/kampilan/bonk", lch_weapon2);
+      }
+      if(tracer && !tracer.bNoBlood) {
+         for(int i = 0; i < 5; ++i) {
+            a_startSound("body/flesh", lch_auto);
+         }
+      } else {
+         destroy();
+      }
+   }
+
    action void lith_a_setPain() {
       if(tracer && !tracer.bBoss && tracer.health > 0) {
          let st = tracer.resolveState("Pain");
@@ -69,30 +91,16 @@ class Lith_KampilanBonkPuff : Actor {
 
    states {
    Spawn:
-   XDeath:
       TNT1 A 0;
-      TNT1 A 0 a_jumpif(tracer ? tracer.bNoBlood : true, "Crash");
-      TNT1 A 0 {
-         for(int i = 0; i < 5; ++i) {
-            a_startSound("body/flesh", lch_auto);
-         }
-         if(target) {
-            target.a_startSound("weapons/kampilan/bonk", lch_weapon2);
-         }
-         return resolveState("DoPain");
-      }
-   DoPain:
       TNT1 AAAAAA 3 lith_a_setPain;
-      stop;
-   Melee:
-   Crash:
       stop;
    }
 }
 
 class Lith_KampilanBonkPuff2 : Lith_KampilanBonkPuff {
    states {
-   DoPain:
+   Spawn:
+      TNT1 A 0;
       TNT1 AAAAAAAAAAAA 3 lith_a_setPain;
       stop;
    }

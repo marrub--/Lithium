@@ -77,7 +77,7 @@ class Lith_SubDart : Actor {
          if(th) {
             vector2 p = th.pos.xy - pos.xy;
             tracer = th;
-            m_dartAngle = Lith_UTIL.constDeg(p.angle() - 180.0);
+            m_dartAngle = Lith_UTIL.invertDeg(p.angle());
             m_dartZ     = pos.z - th.pos.z;
             a_startSound("body/flesh", lch_auto);
          }

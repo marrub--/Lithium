@@ -6,72 +6,31 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_RemsSparkSpawner : Actor {
-   default {
-      Radius 4;
-      Height 4;
-      Speed 7;
-      Damage 0;
-
-      Projectile;
-      +THRUACTORS
-      +NOCLIP
-   }
-
-   states
-   {
-   Spawn:
-      TNT1 A 1;
-   Death:
-      TNT1 A 0 {
-         for(int i = 0, j = Random(11, 13); i < j; i++)
-            A_SpawnParticle("Purple", SPF_FULLBRIGHT|SPF_RELATIVE, Random(3, 8), Random(1, 2), fRandom(-15, 15), fRandom(-1,1),fRandom(-1,1),fRandom(-1,1), fRandom(1, 16),fRandom(-0.1, 0.1),(Vel.Z*1.5)+fRandom(-1,1), 0.0, 0.0, -0.05, 0.98, -1);
-      }
-      stop;
-   }
-}
-
-class Lith_RemsBulletTrail : Actor {
-   default {
-      RenderStyle "Add";
-      Scale 0.1;
-      Alpha 0.5;
-      +NoInteraction
-   }
-   states {
-   Spawn:
-      BLLT Y 5;
-      stop;
-   }
-}
-
 class Lith_RemsBullet : FastProjectile {
    default {
       RenderStyle "Add";
       Radius 5;
       Height 5;
+      Scale 0.5;
+      Alpha 0.7;
       DamageFunction 34;
       DamageType "Electric";
       Speed 100;
-      MissileType "Lith_RemsBulletTrail";
-      MissileHeight 8;
       +ForcePain
-      +FlatSprite
       +Bright
+   }
+
+   override void effect() {
+      Lith_URANUS.instance().particleRemsBullet(pos);
    }
 
    states {
    Spawn:
-      REMS X 0;
-   SpawnLoop:
-      #### # 1 light("Lith_RemsLight1") bright {
-         a_spawnParticle("Purple", SPF_FULLBRIGHT, 15, 4, 0, fRandom(-5, 5),fRandom(-5, 5),fRandom(-5, 5), fRandom(-5, 5),fRandom(-5, 5),fRandom(-5, 5));
-      }
-      loop;
+      BLLT Y -1 light("Lith_RemsLight1") bright;
+      stop;
    Death:
       BLLT Y 0 {
          a_startSound("weapons/shotgun/gauss/puff", lch_body, volume: 0.2);
-         a_setScale(0.5);
          bFlatSprite = false;
       }
       BLLT YYYY 2 light("Lith_RemsLight2") bright a_fadeOut;
@@ -109,6 +68,20 @@ action(weapon) void lith_a_decreaseParticles() {
    for(int i = 0; i < invoker.m_particleLoop; ++i) {
       a_overlayAlpha(_psp_rems_particle_first + i, invoker.m_particleAlpha);
    }
+}
+
+action(weapon) state lith_a_fireRems() {
+   a_overlayOffset(_psp_weapon, fRandom(-9, 47), fRandom(44, 64), WOF_INTERPOLATE);
+   for(int i = 0; i < 4; ++i) {
+      a_fireProjectile("Lith_RemsBullet", angle: fRandom(-20, 20), spawnofs_xy: fRandom(2, 8), spawnheight: fRandom(8, 10), flags: FPF_NOAUTOAIM, pitch: fRandom(-4, 4));
+   }
+   Lith_URANUS.instance().particleRemsSpark(player.mo);
+   A_Recoil(0.4);
+   lith_gunFlash();
+   soundAlert(invoker.owner);
+   A_Quake(2, 15, 0, 128);
+   Lith_A_RecoilUp(fRandom(-0.2, 0.8));
+   return invoker.m_fireLoop++ == 170 ? resolveState("FireDone") : state(null);
 }
 
 int m_steamy, m_fireLoop, m_particleLoop;
@@ -162,19 +135,7 @@ Fire:
    }
    REMS A 0 a_startSound("weapons/rems/fire", lch_weapon);
 FireLoop:
-   REMS BC 1 bright {
-      a_overlayOffset(_psp_weapon, fRandom(-9, 47), fRandom(44, 64), WOF_INTERPOLATE);
-      for(int i = 0; i < 4; ++i) {
-         a_fireProjectile("Lith_RemsBullet", angle: fRandom(-20, 20), spawnofs_xy: fRandom(2, 8), spawnheight: fRandom(8, 10), flags: FPF_NOAUTOAIM, pitch: fRandom(-4, 4));
-      }
-      Lith_GunSmoke("Lith_RemsSparkSpawner", 2, 8);
-      A_Recoil(0.4);
-      lith_gunFlash();
-      soundAlert(invoker.owner);
-      A_Quake(2, 15, 0, 128);
-      Lith_A_RecoilUp(fRandom(-0.2, 0.8));
-      return invoker.m_fireLoop++ == 170 ? resolveState("FireDone") : state(null);
-   }
+   REMS BC 1 bright lith_a_fireRems;
    loop;
 FireDone:
    REMS D 1 bright offset(14, 44) a_startSound("weapons/rems/firefinish", lch_weapon2);

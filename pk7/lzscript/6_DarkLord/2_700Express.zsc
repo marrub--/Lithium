@@ -6,40 +6,6 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_700Laser : Actor {
-   default {
-      Scale 0.25;
-      Alpha 0.5;
-      RenderStyle "Translucent";
-      ClearFlags;
-      +NoInteraction
-      +Bright
-      +ForceXyBillboard
-      +NoTimeFreeze
-   }
-
-   states {
-   Spawn:
-      #ELA A 2;
-      #ELA A 1 A_FadeOut;
-      wait;
-   }
-}
-
-class Lith_700Laser2 : Lith_700Laser {
-   default {
-      Alpha 0.2;
-   }
-}
-
-class Lith_700Laser3 : Lith_700Laser {
-   states {
-   Spawn:
-      #ELA A -1;
-      stop;
-   }
-}
-
 class Lith_700Express : Lith_DWeapon;
 
 default {
@@ -50,29 +16,6 @@ default {
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/700e/draw";
    +Weapon.NoAutoFire
-}
-
-Actor[10] m_laser;
-bool m_doLaser;
-
-override void tick() {
-   super.tick();
-   vector3 beg, end; [beg, end] = lith_getLaserPos(0.0);
-   for(int i = 0; i < m_laser.size(); i++) {
-      if(!owner || owner.player.readyWeapon != self) {
-         if(m_laser[i]) {
-            m_laser[i].destroy();
-         }
-      } else if(m_doLaser) {
-         if(!m_laser[i]) {
-            m_laser[i] = Spawn("Lith_700Laser3", lith_lerpLaserPos(beg, end, i));
-         }
-         m_laser[i].alpha = 0.2 / (i + 1);
-      } else if(m_laser[i]) {
-         m_laser[i].alpha = 0.0;
-      }
-   }
-   m_doLaser = false;
 }
 
 action(Weapon) void lith_fire700e() {
@@ -89,57 +32,17 @@ action(Weapon) void lith_fire700e() {
    A_StartSound("weapons/700e/fire", lch_weapon, pitch: FRandom(0.9, 1.0));
 }
 
-vector3, vector3 lith_getLaserPos(double pit) {
-   let ply = Lith_Player(owner);
-   let sz  = ply.player.viewz - ply.pos.z - 3;
-   let ps = sin(ply.pitch - pit - 90);
-   let cz = cos(ply.pitch - pit - 90);
-   let ys = sin(ply.angle - 15);
-   let yc = cos(ply.angle - 15);
-   let cx = ps * yc;
-   let cy = ps * ys;
-   let beg = (ply.pos.x      + cx * -16,
-              ply.pos.y      + cy * -16,
-              ply.pos.z + sz + cz * -16);
-   ys = sin(ply.angle);
-   yc = cos(ply.angle);
-   cx = ps * yc;
-   cy = ps * ys;
-   let end = (beg.X + cx * -32,
-              beg.Y + cy * -32,
-              beg.Z + cz * -32);
-   return beg, end;
-}
-
-vector3 lith_lerpLaserPos(vector3 beg, vector3 end, int i) {
-   return Lith_UTIL.Vec3Lerp(beg, end, i / 10.0);
-}
-
-void lith_moveLaser(double pit) {
-   if(!owner) return;
-   m_doLaser = true;
-   vector3 beg, end; [beg, end] = lith_getLaserPos(pit);
-   for(int i = 0; i < m_laser.size(); i++) {
-      if(m_laser[i]) {
-         m_laser[i].setOrigin(lith_lerpLaserPos(beg, end, i), true);
-      }
-   }
-}
-
-void lith_spawnLaserTrace(double pit) {
-   let ply = Lith_Player(owner);
+action(Weapon) void lith_laser(double p) {
+   let ply = Lith_Player(self);
    if(!ply) return;
-   let sz  = ply.player.viewz - ply.pos.z;
-   let loc = Lith_UTIL.TraceFrom(ply, ply.m_iyaw, ply.m_ipitch - pit, 2048, sz);
-   Spawn("Lith_700Laser", loc);
-   loc = Lith_UTIL.TraceFrom(ply, ply.angle, ply.pitch - pit, 2048, sz);
-   Spawn("Lith_700Laser2", loc);
-
-}
-
-action(Weapon) void lith_laser(double pit) {
-   invoker.lith_spawnLaserTrace(pit);
-   invoker.lith_moveLaser(pit);
+   let vz  = ply.player.viewz - ply.pos.z;
+   let loc = Lith_UTIL.traceFrom(ply, ply.m_iyaw, ply.m_ipitch - p, 2048, vz);
+   Lith_URANUS.instance().particle700eLaserTrace(loc, 0.5);
+   loc = Lith_UTIL.traceFrom(ply, ply.angle, ply.pitch - p, 2048, vz);
+   Lith_URANUS.instance().particle700eLaserTrace(loc, 0.2);
+   if(getAge() & 1) {
+      Lith_URANUS.instance().particle700eLaser(self, p, vz - 7);
+   }
 }
 
 states(Weapon) {
