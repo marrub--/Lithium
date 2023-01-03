@@ -408,6 +408,7 @@ sp_:
    - UI_CPU1:              UI:CPU1
    - UI_CPU2:              UI:CPU2
    - UI_CPU3:              UI:CPU3
+   - UI_CPU3Blue:          UI:CPU3Blue
    - UI_Cursor:            UI:Cursor
    - UI_CursorBlue:        UI:CursorBlue
    - UI_CursorOrange:      UI:CursorOrange
@@ -428,6 +429,12 @@ sp_:
    - UI_New:               UI:New
    - UI_RDistInter:        UI:RDistInter
    - UI_ResultFrame:       UI:ResultFrame
+   - UI_RuneEmpty:         UI:RuneEmpty
+   - UI_RuneRkw:           UI:RuneRkw
+   - UI_RuneZkr:           UI:RuneZkr
+   - UI_RuneZkw:           UI:RuneZkw
+   - UI_RuneZrk:           UI:RuneZrk
+   - UI_RuneZzkr:          UI:RuneZzkr
    - UI_Slot1Spell:        UI:Slot1Spell
    - UI_Slot2Spell:        UI:Slot2Spell
    - UI_Slot3Spell:        UI:Slot3Spell
@@ -486,11 +493,18 @@ sl_:
    - cbi_cpu2:            CBI_CPU2
    - cbi_cpu3:            CBI_CPU3
    - cbi_cpu4:            CBI_CPU4
+   - cbi_dl_status:       CBI_DL_STATUS
    - cbi_interfaces:      CBI_INTERFACES
    - cbi_perf:            CBI_PERF
    - cbi_puse:            CBI_PUSE
    - cbi_rdistinter:      CBI_RDistInter
    - cbi_reactarmor:      CBI_ReactArmor
+   - cbi_rune_rkw:        CBI_RUNE_RKW
+   - cbi_rune_rkz:        CBI_RUNE_RKZ
+   - cbi_rune_zkr:        CBI_RUNE_ZKR
+   - cbi_rune_zkw:        CBI_RUNE_ZKW
+   - cbi_rune_zrk:        CBI_RUNE_ZRK
+   - cbi_rune_zzkr:       CBI_RUNE_ZZKR
    - cbi_slot1spell:      CBI_Slot1Spell
    - cbi_slot2spell:      CBI_Slot2Spell
    - cbi_slot3spell:      CBI_Slot3Spell

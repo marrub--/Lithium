@@ -42,7 +42,7 @@ compatible.
 
 \c[Lith_Dark]Phantoms\c- will show up occasionally based on your
 progression. They are very dangerous mid-bosses that give <unique
-rewards>.
+rewards>. You must kill them to attain class-specific upgrades.
 
 - BOSSES
 

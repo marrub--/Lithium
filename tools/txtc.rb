@@ -18,7 +18,10 @@ Language      = Struct.new :name, :data
 TxtParseState = Struct.new :cwd, :out, :langs
 
 def escape text
-   text.gsub(/((?<m>\\)(?!c))|(?<m>")/, "\\\\\\k<m>").gsub("\n", "\\n")
+   text
+      .gsub(/((?<m>\\)(?!c))|(?<m>")/, "\\\\\\k<m>")
+      .gsub("\n", "\\n")
+      .gsub(/\\\\u\{([0-9a-fA-F]+)\}/) do |m| $1.hex.chr Encoding::UTF_8 end
 end
 
 def split_name name
@@ -138,7 +141,10 @@ common_main do
    for _, lang in sorted
       out.puts "[" + lang.name + "]"
       for data in lang.data
-         txt = data.text.strip.split("\n").map do |s| escape(s) end.join("\\n\"\n   \"")
+         txt = data.text.strip
+            .split("\n")
+            .map do |s| escape s end
+            .join("\\n\"\n   \"")
          out.puts %("#{escape data.name}" =\n   "#{txt}";)
       end
    end

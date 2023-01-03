@@ -27,7 +27,7 @@
    )
 
 #define Slot(name, x, y) PrintSprite(name, g->ox+287-x*48,2, g->oy+48*y-33,1)
-#define CPU(num)         PrintSprite(sp_UI_CPU##num, g->ox-13,1, g->oy-13,1)
+#define CPU(num)         PrintSpriteA(sp_UI_CPU##num, g->ox-13,1, g->oy-13,1, 0.8)
 
 static
 void CBITab_Marine(struct gui_state *g) {
@@ -93,10 +93,28 @@ void CBITab_CyberMage(struct gui_state *g) {
    Upgr(cupg_rdistinter)   Slot(sp_UI_RDistInter, 1, 4);
 }
 
+static
+void CBITab_DarkLord(struct gui_state *g) {
+   CPU(3Blue);
+   #define Rune(_gfx, _l, _x, _y) \
+      ( \
+         PrintSprite(sp_UI_Rune##_gfx, g->ox+_x*96+50,0, g->oy+_y*47+38,1), \
+         PrintText_str(lang(sl_cbi_rune_##_l), sf_lmidfont, CR_WHITE, g->ox+_x*96+50,4, g->oy+_y*47+38,2) \
+      )
+   Rune(Empty, rkz, 1, 0);
+   Upgr(cupg_d_zaruk)     Rune(Zrk,  zrk,  1, 1);
+   Upgr(cupg_d_zakwu)     Rune(Zkw,  zkw,  0, 2);
+   Upgr(cupg_d_dimdriver) Rune(Zzkr, zzkr, 1, 2);
+   Upgr(cupg_d_zikr)      Rune(Zkr,  zkr,  2, 2);
+   Upgr(cupg_d_shield)    Rune(Rkw,  rkw,  1, 3);
+   PrintText_str(lang(sl_cbi_dl_status), sf_lmidfont, CR_WHITE, g->ox+4,1, g->oy+24,1);
+}
+
 void P_CBI_TabCBI(struct gui_state *g) {
    switch(pl.pclass) {
    case pcl_marine:    CBITab_Marine   (g); break;
    case pcl_cybermage: CBITab_CyberMage(g); break;
+   case pcl_darklord:  CBITab_DarkLord (g); break;
    default:
       PrintTextChL("not implemented");
       PrintText(sf_smallfnt, rainbowcr(), g->ox+7,1, g->oy+47,1);

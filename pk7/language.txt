@@ -2760,7 +2760,7 @@
    "\n"
    "- PHANTOMS\n"
    "\n"
-   "\c[Lith_Dark]Phantoms\c- will show up occasionally based on your progression. They are very dangerous mid-bosses that give <unique rewards>.\n"
+   "\c[Lith_Dark]Phantoms\c- will show up occasionally based on your progression. They are very dangerous mid-bosses that give <unique rewards>. You must kill them to attain class-specific upgrades.\n"
    "\n"
    "- BOSSES\n"
    "\n"
@@ -6027,7 +6027,7 @@
 "LITH_TAB_BIP" =
    "BIP";
 "LITH_TAB_TUTS" =
-   "How-To";
+   "Read Me";
 "LITH_TAB_LOG" =
    "Log";
 "LITH_TAB_STATISTICS" =
@@ -6165,6 +6165,30 @@
    "KSKK Spec. BC-0265 Super High-Grade CPU";
 "LITH_CBI_CPU4" =
    "AOF 5900001 Rev7 CPU";
+"LITH_CBI_DL_STATUS" =
+   "CPU \cnOK\c-\n"
+   "RAM \cnOK\c-\n"
+   "ROM \cnOK\c-\n"
+   "KILL \c[Lith_Dark]PHANTOMS\c-\n"
+   "TO \cgATTAIN POWER";
+"LITH_CBI_RUNE_RKW" =
+   "ROKUW \cn\n"
+   "\cdSHIELD";
+"LITH_CBI_RUNE_RKZ" =
+   "RAKZ \cn\n"
+   "\cdMNT.GUN";
+"LITH_CBI_RUNE_ZKR" =
+   "ZIKR \cn\n"
+   "\cdP.DART";
+"LITH_CBI_RUNE_ZKW" =
+   "ZAKWU \cn\n"
+   "\cdS.AXE";
+"LITH_CBI_RUNE_ZRK" =
+   "ZARUK \cn\n"
+   "\cdMNT.GRN";
+"LITH_CBI_RUNE_ZZKR" =
+   "ZOZOKR \cn\n"
+   "\cdDIM-DRI";
 "LITH_BIP_NAME_CORPORATIONS" =
    "Companies";
 "LITH_BIP_NAME_ENEMIES" =
