@@ -18,8 +18,30 @@ override void init(Menu parent, string message, int messageMode, bool playSound,
       num = random[lith_quitmsg](1, num);
       message = Lith_HERMES.localize(string.Format("QUITMSG%i", num)) .. "\n\n" .. Lith_HERMES.localize("QUITMSGEND");
    }
-   super.init(parent, message, messageMode, playSound, cmd, nativeHandler);
+   mAction          = cmd;
+   messageSelection = 0;
+   mMouseLeft       = 140;
+   mMouseY          = 0x80000000;
+   textFont         = menuDelegate.pickFont("smallfont");
+   arrowFont        = conFont;
+   destWidth        = cleanWidth;
+   destHeight       = cleanHeight;
+   selector         = "\xd";
+   handler          = nativeHandler;
+   mMessageMode     = messageMode;
+   mParentMenu      = parent;
+   animated            =
+   animatedTransition  =
+   dontBlur            =
+   dontDim             =
+   mBackbuttonSelected =
+   mMouseCapture       = false;
+   mMessage         = textFont.breakLines(StringTable.localize(message), 300 / notifyFontScale);
+   double tsYes      = textFont.stringWidth(Lith_HERMES.localize("TXT_YES"));
+   double tsNo       = textFont.stringWidth(Lith_HERMES.localize("TXT_NO"));
+   double mr         = destWidth / 2 + 10;
    double fontHeight = textFont.getHeight();
+   mMouseRight = max(mr + tsYes, mr + tsNo);
    m_bkSize = (0, 0);
    for(int i = 0, n = mMessage.count(); i < n; ++i) {
       double w = mMessage.stringWidth(i);
@@ -28,11 +50,14 @@ override void init(Menu parent, string message, int messageMode, bool playSound,
    }
    if(mMessageMode == 0) {
       m_bkSize.y += fontHeight * 3;
-      m_bkSize.x  = max(m_bkSize.x, textFont.stringWidth(Lith_HERMES.localize("TXT_YES")) * 2);
-      m_bkSize.x  = max(m_bkSize.x, textFont.stringWidth(Lith_HERMES.localize("TXT_NO")) * 2);
+      m_bkSize.x  = max(m_bkSize.x, tsYes * 2);
+      m_bkSize.x  = max(m_bkSize.x, tsNo  * 2);
    }
    m_bk.x = 320 / 2 - m_bkSize.x / 2;
    m_bk.y = 240 / 2 - m_bkSize.y / 2;
+   if(playSound) {
+      menuSound("menu/prompt");
+   }
 }
 
 override void drawer() {

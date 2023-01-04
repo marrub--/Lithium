@@ -28,15 +28,25 @@ addmenukey "$LITH_CTRL_TOGGRP2" "lith_k_toggrp 1"
 addmenukey "$LITH_CTRL_TOGGRP3" "lith_k_toggrp 2"
 addmenukey "$LITH_CTRL_TOGGRP4" "lith_k_toggrp 3"
 
+addkeysection "$LITH_CTRL_WEAPONS" Lith_Weapons
+
+addmenukey "$LITH_INFO_SHORT_Blade"    "use Lith_Blade"
+addmenukey "$LITH_INFO_SHORT_Delear"   "use Lith_Delear"
+addmenukey "$LITH_INFO_SHORT_Feuer"    "use Lith_Feuer"
+addmenukey "$LITH_INFO_SHORT_Rend"     "use Lith_Rend"
+addmenukey "$LITH_INFO_SHORT_Hulgyon"  "use Lith_Hulgyon"
+addmenukey "$LITH_INFO_SHORT_StarShot" "use Lith_StarShot"
+addmenukey "$LITH_INFO_SHORT_Cercle"   "use Lith_Cercle"
+
 // Aliases ═══════════════════════════════════════════════════════════════════╕
 alias lith_k_opencbi "pukename Lith_KeyOpenCBI"
-alias lith_k_light "pukename Lith_KeyLight"
-alias lith_k_zoom "pukename Lith_KeyZoom %1"
-alias lith_k_glare "pukename Lith_KeyGlare"
-alias lith_k_buygrp "pukename Lith_KeyBuyAutoGroup %1"
-alias lith_k_toggrp "pukename Lith_KeyToggleAutoGroup %1"
-alias +lith_k_qact "+user4"
-alias -lith_k_qact "-user4"
+alias lith_k_light   "pukename Lith_KeyLight"
+alias lith_k_zoom    "pukename Lith_KeyZoom %1"
+alias lith_k_glare   "pukename Lith_KeyGlare"
+alias lith_k_buygrp  "pukename Lith_KeyBuyAutoGroup %1"
+alias lith_k_toggrp  "pukename Lith_KeyToggleAutoGroup %1"
+alias +lith_k_qact   "+user4"
+alias -lith_k_qact   "-user4"
 
 // Binds ═════════════════════════════════════════════════════════════════════╕
 defaultbind i lith_k_opencbi

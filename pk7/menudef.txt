@@ -31,7 +31,7 @@ listMenu "MainMenuTextOnly" {
    }
    textItem "$MENU_CREDIT", "c", "CreditsMenu"
    textItem "$MENU_QUITG",  "q", "QuitMenu"
-   font "smallfont", "White", "White"
+   font "lmidfont", "White", "White"
    lith_versionName 0, 0
 }
 

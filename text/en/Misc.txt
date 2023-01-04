@@ -238,6 +238,8 @@ Use at the expense of your world.
 == TXT_YES | [Yes]
 == TXT_NO  | [No]
 
+== \#CTRL_WEAPONS | Lithium Weapons
+
 == \#CTRL_ACTIONS | Lithium Actions
 == \#CTRL_GLARE   | Glare
 == \#CTRL_LIGHT   | Toggle Flashlight

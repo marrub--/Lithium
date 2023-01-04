@@ -203,7 +203,7 @@
 @ Hanataka Shinya   - jiskan16
 @ Hiroshi Tachibana - ljtrmfont
 @ IBM               - bigupper
-@ Jimmy             - lmidfont and smallfont
+@ Jimmy             - lmidfont and lsmlfont
 @ The Author        - areaname
 @ Toshiyuki Imamura - jiskan16, ljtrmfont
 @ littlelimit       - Misaki

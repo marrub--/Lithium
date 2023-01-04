@@ -213,7 +213,7 @@
    "@ Hanataka Shinya   - jiskan16\n"
    "@ Hiroshi Tachibana - ljtrmfont\n"
    "@ IBM               - bigupper\n"
-   "@ Jimmy             - lmidfont and smallfont\n"
+   "@ Jimmy             - lmidfont and lsmlfont\n"
    "@ The Author        - areaname\n"
    "@ Toshiyuki Imamura - jiskan16, ljtrmfont\n"
    "@ littlelimit       - Misaki\n"
@@ -6626,6 +6626,8 @@
    "[Yes]";
 "TXT_NO" =
    "[No]";
+"LITH_CTRL_WEAPONS" =
+   "Lithium Weapons";
 "LITH_CTRL_ACTIONS" =
    "Lithium Actions";
 "LITH_CTRL_GLARE" =

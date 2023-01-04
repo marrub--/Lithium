@@ -35,6 +35,7 @@ void renRegister() {
    case font_jiskan16:      m_uFntSml = 'jiskan16'; break;
    }
 
+   m_lSmlFont       = 'lsmlfont';
    m_lMidFont       = 'lmidfont';
    m_lTrmFont       = 'ltrmfont';
    m_lBigFont       = 'lbigfont';
@@ -185,7 +186,7 @@ ui void drawInventory(RenderEvent evt) {
       y += 8;
       inv_text = inv_text .. "\n";
    }
-   Screen.drawText(smallFont, Font.CR_WHITE, 0, 0, inv_text,
+   Screen.drawText(fntSml(), Font.CR_WHITE, 0, 0, inv_text,
                    DTA_VirtualWidth,320, DTA_VirtualHeight,240);
    y = drawStatFx(evt, y);
    if(m_lightMaxBattery > 0 && m_lightCurBattery < m_lightMaxBattery) {
