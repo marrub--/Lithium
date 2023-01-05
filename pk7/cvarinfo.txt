@@ -72,13 +72,14 @@ server float lith_hud_logsize      = 1.0;
 server int   lith_hud_logcolor     = 108; /* 'l' */
 server int   lith_hud_expbar       = 0;
 
-server int  lith_xhair_r = 255;
-server int  lith_xhair_g = 255;
-server int  lith_xhair_b = 255;
-server int  lith_xhair_a = 200;
-server int  lith_xhair_style = 1;
-server bool lith_xhair_enable = true;
-server bool lith_xhair_enablejuicer = true;
+server int   lith_xhair_r = 255;
+server int   lith_xhair_g = 255;
+server int   lith_xhair_b = 255;
+server int   lith_xhair_a = 200;
+server int   lith_xhair_style = 1;
+server float lith_xhair_scale = 1;
+server bool  lith_xhair_enable = true;
+server bool  lith_xhair_enablejuicer = true;
 
 server int  lith_scanner_slide   = 1;
 server bool lith_scanner_bar     = true;

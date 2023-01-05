@@ -90,6 +90,8 @@ stkcall i32 rainbowcr(void);
 stkcall i32 const_deg(i32 n);
 stkcall i32 fastabs(i32 n);
 stkcall k32 fastabsk(k32 n);
+stkcall k32 fastfrack(k32 k);
+stkcall k64 fastfraclk(k64 k);
 stkcall i32 fastroundk(k32 k);
 stkcall k32 fastround1k(k32 k);
 stkcall i32 fastroundlk(k64 lk);

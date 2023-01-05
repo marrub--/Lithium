@@ -227,6 +227,16 @@ alloc_aut(0) stkcall k64 clamplk(k64 x, k64 y, k64 z) {
    #include "m_math.c"
 }
 
+alloc_aut(0) stkcall k32 fastfrack(k32 k) {
+   ik32.k = k; ik32.i &= K32_LO;
+   return ik32.k;
+}
+
+alloc_aut(0) stkcall k64 fastfraclk(k64 k) {
+   ik64.k = k; ik64.i &= K64_LO;
+   return ik64.k;
+}
+
 alloc_aut(0) stkcall
 i32 fastroundk(k32 k) {
    ik32.k = k; ik32.i &= K32_LO;

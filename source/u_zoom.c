@@ -51,7 +51,7 @@ void Upgr_Zoom_Render(void) {
       char const points[] = "E SES SWW NWN NE";
 
       for(i32 i = 0; i < 8; i++) {
-         k32 yaw = (pl.yaw + i * 0.125 + 0.125) % 1.0;
+         k32 yaw = fastfrack(pl.yaw + i * 0.125 + 0.125);
          i32 x = yaw * 320 * 4;
          if(x < 0 || x > 320) continue;
 

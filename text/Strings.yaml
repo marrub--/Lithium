@@ -42,8 +42,8 @@ sf_:
    NO_PREFIX:
    - areaname
    - bigupper
-   - italic
    - jiskan16
+   - litalics
    - ljtrmfont
    - lmidfont
    - lsmlhfnt

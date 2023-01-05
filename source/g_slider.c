@@ -15,64 +15,55 @@
 
 struct slide_ret G_Slider_Imp(struct gui_state *g, gid_t id, struct gui_arg_sld *a) {
    struct gui_pre_sld const *pre = a->preset |? &gui_p.slddef;
-
-   k32 w = pre->w - (pre->pad * 2);
-
+   i32 w = pre->w - (pre->pad * 2);
    i32 x = a->x + pre->pad;
    i32 y = a->y;
-
    G_Auto(g, id, x, y, w, pre->h);
-
    x += g->ox;
    y += g->oy;
-
-   k32  ret;
-   k32  notchpos;
-   bool big = a->maxima - a->minima > 2.0k;
-
+   bool intstep = fastfraclk(a->step) == 0;
+   i32 val = intstep ? a->val    : (i32)(a->val   /a->step);
+   i32 min = intstep ? a->minima : (i32)(a->minima/a->step);
+   i32 max = intstep ? a->maxima : (i32)(a->maxima/a->step);
+   i32 intval;
+   k64 notchpos;
    /* get scroll notch and handle inputs */
    if(g->active == id) {
-      notchpos = g->cx - x;
-      notchpos = clampk(notchpos, 0, w) / w;
-      ret      = lerpk(a->minima, a->maxima, notchpos);
-      if(big) ret = fastround1k(ret);
-      else    ret = fastround1k(ret * 10.0k) / 10.0k;
-
+      notchpos = clamplk(g->cx - x, 0, w) / w;
+      intval   = lerplk(min, max, notchpos);
+      if(intstep) intval = intval - intval % (i32)a->step;
       /* play sound */
       if(pre->snd && g->cx != g->old.cx && g->cx >= x && g->cx < x + w) {
          AmbientSound(pre->snd, 0.47);
       }
    } else {
-      notchpos = (a->val - a->minima) / a->maxima;
-      ret      = a->val;
+      notchpos = (val - min) / (k64)max;
+      intval   = val;
    }
-
    /* draw graphic */
    __with(char gfx[64];) {
       G_Prefix(g, gfx, pre, gfx);
       if(gfx[0]) PrintSprite(fast_strdup(gfx), x - pre->pad,1, y + pre->h / 2,0);
    }
-
    /* draw notch */
    __with(char gfx[64];) {
       if(g->hot == id || g->active == id) G_Prefix(g, gfx, pre, notchhot);
       else                                G_Prefix(g, gfx, pre, notch);
-
-      if(gfx[0]) PrintSprite(fast_strdup(gfx), x + notchpos * w - 1,1, y,1);
+      if(gfx[0]) PrintSprite(fast_strdup(gfx), x + (i32)(notchpos * w) - 1,1, y,1);
    }
-
+   k64 value;
+   if(intstep) value = intval;
+   else        value = a->step * intval;
    /* draw value */
    if(pre->font) {
       cstr suf = a->suf |? "";
-      if(a->integ) {ACS_BeginPrint(); ACS_PrintInt(ret); PrintChrSt(suf);}
-      else         PrintTextFmt("%.*k%s", big ? 1 : 2, (k32)ret, suf);
-
+      if(intstep) {ACS_BeginPrint(); ACS_PrintInt(value); PrintChrSt(suf);}
+      else        {PrintTextFmt("%.2k", (k32)(value * 1.001lk)); PrintChrSt(suf);}
       PrintText(pre->font, g->defcr, x + pre->w/2,4, y + pre->h/2,0);
    }
-
    struct slide_ret sret = {
-      .different = g->active == id && !g->clicklft && ret != a->val,
-      .value     = ret,
+      .different = g->active == id && !g->clicklft && value != a->val,
+      .value     = value,
    };
    return sret;
 }

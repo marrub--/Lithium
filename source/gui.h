@@ -208,8 +208,8 @@ struct gui_arg_sld {
    i32  y;
    k64  minima;
    k64  maxima;
+   k64  step;
    k64  val;
-   bool integ;
    cstr suf;
    struct gui_pre_sld const *preset;
 };
@@ -260,7 +260,7 @@ struct gui_presets {
 
 struct slide_ret {
    bool different;
-   k32  value;
+   k64  value;
 };
 
 enum cursor {

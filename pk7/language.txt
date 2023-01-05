@@ -5488,6 +5488,8 @@
    "$LITH_GREEN_INTENSITY";
 "LITH_xhair_r" =
    "$LITH_RED_INTENSITY";
+"LITH_xhair_scale" =
+   "Scale";
 "LITH_xhair_style" =
    "Style";
 "LITH_st_suff_perc" =

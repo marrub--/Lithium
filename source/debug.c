@@ -180,7 +180,7 @@ bool chtf_dbg_font_test(cheat_params_t const params) {
    switch(fourcc(params[0], params[1], 0, 0)) {
    case fourcc('a', 'n', 0, 0): font = sf_areaname;  break;
    case fourcc('b', 'u', 0, 0): font = sf_bigupper;  break;
-   case fourcc('i', 't', 0, 0): font = sf_italic;    break;
+   case fourcc('i', 't', 0, 0): font = sf_litalics;  break;
    case fourcc('j', 'k', 0, 0): font = sf_jiskan16;  break;
    case fourcc('l', 'j', 0, 0): font = sf_ljtrmfont; break;
    case fourcc('l', 'm', 0, 0): font = sf_lmidfont;  break;

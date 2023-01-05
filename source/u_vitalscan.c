@@ -173,7 +173,7 @@ void Upgr_VitalScan_Render(void) {
    switch(CVarGetI(sc_scanner_font)) {
    case _sfont_small:  font = sf_smallfnt; break;
    case _sfont_mid:    font = sf_lmidfont; break;
-   case _sfont_italic: font = sf_italic;   break;
+   case _sfont_italic: font = sf_litalics; break;
    }
 
    i32 cr = Draw_GetCr(CVarGetI(sc_scanner_color));

@@ -211,6 +211,7 @@ crosshair that follow the recoil. They're... juicy. Guess that's why.
 
 == \#xhair_g | $\#GREEN_INTENSITY
 == \#xhair_r | $\#RED_INTENSITY
+== \#xhair_scale | Scale
 == \#xhair_style | Style
 
 ## Suffixes ══════════════════════════════════════════════════════════════════╕

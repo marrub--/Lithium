@@ -14,6 +14,7 @@ extend class Lith_URANUS;
 
 uint8 m_xhairR, m_xhairG, m_xhairB, m_xhairA, m_xhairStyle;
 bool m_xhairEnable, m_xhairEnableJuicer;
+double m_xhairScale;
 
 void tickCrosshair() {
    PlayerInfo  p = players[consolePlayer];
@@ -23,6 +24,7 @@ void tickCrosshair() {
    m_xhairB            = clamp(lith_xhair_b, 0, 255);
    m_xhairA            = clamp(lith_xhair_a, 0, 255);
    m_xhairStyle        = clamp(lith_xhair_style, 0, 9);
+   m_xhairScale        = clamp(lith_xhair_scale, 0.25, 4.0);
    m_xhairEnable       = lith_xhair_enable && (!w || !w.m_ads);
    m_xhairEnableJuicer = lith_xhair_enablejuicer;
 }
@@ -53,73 +55,64 @@ clearScope textureId xhairW() const {
 
 ui void drawCrosshair(RenderEvent evt) {
    let pl = evt.camera;
-
    vector3 viewPos = (evt.viewPos.xy, evt.viewPos.z - pl.player.viewHeight + lith_hermes.getAttackHeight(pl));
-
    double yaw   = evt.viewAngle + Lith_UTIL.pData(_pdt_addy)/FIX;
    double pitch = evt.viewPitch + Lith_UTIL.pData(_pdt_addp)/FIX;
-
    let loc = Lith_UTIL.traceFromPos(pl.curSector, viewPos, yaw, pitch, 2048.0, ignore: pl);
-
    vector2 xh;
    bool seen;
    [xh, seen] = projectF(loc);
+   xh /= m_xhairScale;
+   let hudSize = (320, 240) / m_xhairScale;
    if(!seen) {
       return;
    }
-
    /* draw a tracer for the targeting system */
    let tr = pl.tracer;
    if(tr && tr.health > 0 && Lith_UTIL.pData(_pdt_weapon) == weapon_m_rocket) {
       int tr1x, tr1y, tr2x, tr2y;
       [tr1x, tr1y, seen] = project((tr.pos.xy, tr.pos.z + tr.height / 2.0));
-
       if(seen) {
-         drawLn(tr1x, tr1y, int(xh.x), int(xh.y), 0xFFFF0000, (320, 240));
+         drawLn(tr1x / m_xhairScale, tr1y / m_xhairScale, xh.x, xh.y, 0xFFFF0000, hudSize);
       }
    }
-
    /* draw the crosshair */
    if(m_xhairEnable && m_xhairA) {
       textureId xhb = xhairB();
       textureId xhw = xhairW();
       color     c   = xhairColor();
-
       int bsx, bsy; [bsx, bsy] = TexMan.getSize(xhb);
       int wsx, wsy; [wsx, wsy] = TexMan.getSize(xhw);
-
       double xhx = xh.x - bsx/2.0;
       double xhy = xh.y - bsy/2.0;
-
       Screen.DrawTexture(xhb, false, xhx, xhy,
-                         DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                         DTA_VirtualWidthF,hudSize.x,
+                         DTA_VirtualHeightF,hudSize.y,
                          DTA_TopOffset,0, DTA_LeftOffset,0,
                          DTA_Alpha,m_xhairA/255.0);
-
       xhx = xh.x - wsx/2.0;
       xhy = xh.y - wsy/2.0;
-
       Screen.DrawTexture(xhw, false, xhx, xhy,
-                         DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                         DTA_VirtualWidthF,hudSize.x,
+                         DTA_VirtualHeightF,hudSize.y,
                          DTA_TopOffset,0, DTA_LeftOffset,0,
                          DTA_Alpha,m_xhairA/255.0,DTA_FillColor,c);
-
       if(m_xhairEnableJuicer) {
          textureId xhl = getTex(":XHairs:L");
          textureId xhr = getTex(":XHairs:R");
-
          int esx, esy; [esx, esy] = TexMan.GetSize(xhl);
          xhx = xh.x - esx/2.0;
          xhy = xh.y - esy/2.0;
-
          double xp = Lith_UTIL.pData(_pdt_recoilp)/FIX * 500.0 + 10.0;
-
+         xp /= m_xhairScale;
          Screen.DrawTexture(xhl, false, xhx-xp, xhy,
-                            DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                            DTA_VirtualWidthF,hudSize.x,
+                            DTA_VirtualHeightF,hudSize.y,
                             DTA_TopOffset,0, DTA_LeftOffset,0,
                             DTA_Alpha,m_xhairA/255.0,DTA_FillColor,c);
          Screen.DrawTexture(xhr, false, xhx+xp, xhy,
-                            DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                            DTA_VirtualWidthF,hudSize.x,
+                            DTA_VirtualHeightF,hudSize.y,
                             DTA_TopOffset,0, DTA_LeftOffset,0,
                             DTA_Alpha,m_xhairA/255.0,DTA_FillColor,c);
       }

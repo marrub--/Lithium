@@ -36,12 +36,12 @@ override void init(Menu parent, string message, int messageMode, bool playSound,
    dontDim             =
    mBackbuttonSelected =
    mMouseCapture       = false;
-   mMessage         = textFont.breakLines(StringTable.localize(message), 300 / notifyFontScale);
+   mMessage          = textFont.breakLines(StringTable.localize(message), int(300 / notifyFontScale));
    double tsYes      = textFont.stringWidth(Lith_HERMES.localize("TXT_YES"));
    double tsNo       = textFont.stringWidth(Lith_HERMES.localize("TXT_NO"));
    double mr         = destWidth / 2 + 10;
    double fontHeight = textFont.getHeight();
-   mMouseRight = max(mr + tsYes, mr + tsNo);
+   mMouseRight = int(max(mr + tsYes, mr + tsNo));
    m_bkSize = (0, 0);
    for(int i = 0, n = mMessage.count(); i < n; ++i) {
       double w = mMessage.stringWidth(i);

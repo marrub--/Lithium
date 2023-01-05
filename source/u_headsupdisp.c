@@ -58,7 +58,7 @@ void HUD_TopRight(void) {
       break;
    case _hud_cybermage:
       end = " \CnScr";
-      fnt = sf_italic;
+      fnt = sf_litalics;
       break;
    case _hud_informant:
       end = " \CnScore";
