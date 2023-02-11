@@ -17,9 +17,7 @@ class Lith_KhandaPuff : Lith_BulletPuff {
       super.postBeginPlay();
       if(tracer) {
          if(!tracer.bNoBlood && !tracer.bDormant) {
-            for(int i = 0; i < 5; ++i) {
-               a_startSound("body/flesh", lch_auto);
-            }
+            a_startSound("body/flesh", lch_auto);
          }
          if(target) {
             target.a_startSound("weapons/sword/hit", lch_weapon3);

@@ -12,7 +12,9 @@
 #include "p_hudid.h"
 
 void P_Ren_Debug(void) {
-   if(!dbglevel(log_devh)) return;
+   if(!dbglevel(log_devh)) {
+      return;
+   }
    SetSize(640, 480);
    str sky1 = EDataS(_edt_sky1), sky2 = EDataS(_edt_sky2);
    ACS_BeginPrint();

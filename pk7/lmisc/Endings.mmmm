@@ -74,7 +74,8 @@ lipu_ilo endings {
          fade_in 50;
          crawl   IconOfSin_1_Ari 250;
          crawl   IconOfSin_2_Ari 250;
-         crawl   IconOfSin_3_Ari 500;
+         crawl   IconOfSin_3_Ari 400;
+         crawl   IconOfSin_4_Ari 200;
       }
       lipu common;
    }

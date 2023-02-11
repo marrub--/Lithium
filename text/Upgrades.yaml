@@ -18,6 +18,9 @@ _uc_body:
       VitalScan:   {pg: VitalScanner, f: --UR-, pr: 2}
    gO:
       ReflexWetw: {f: A-U--, pr: 5, mul: -5}
+   gM:
+      Minimap:    {scr: 9999999}
+      SecretScan: {scr: 9999999}
    pM:
       JetBooster:  {                       f: --U--, mul: -5}
       CyberLegs:   {         scr: 1220000, f: --U--, pr:  4}
@@ -31,6 +34,7 @@ _uc_body:
       StealthSys:  {scr: 1800450, f: -DU--}
    pD:
       Subweapons: {f: --URE}
+      HeavyArmor: {scr: 9999999}
 _uc_weap:
    pM:
       Pistol_A:  {pg: N/A, scr:  140940}
@@ -61,14 +65,32 @@ _uc_weap:
       ShipGun_A:  {scr: 6988800, grp: 5}
       ShipGun_B:  {scr: 7767700, grp: 5}
    pD:
-      700E_A:     {scr:  800000}
-      Shrapnel_A: {scr: 1000000}
+      SubGun_A:     {scr: 9999999}
+      SubAxe_A:     {scr: 9999999}
+      Kampilan_A:   {scr: 9999999}
+      700E_A:       {scr:  800000}
+      700E_B:       {scr: 9999999}
+      Shrapnel_A:   {scr: 1000000}
+      Shrapnel_B:   {scr: 9999999}
+      Minigun_A:    {scr: 9999999}
+      Minigun_B:    {scr: 9999999}
+      Franca_A:     {scr: 9999999}
+      Franca_B:     {scr: 9999999}
+      Sophia_A:     {scr: 9999999}
+      Sophia_B:     {scr: 9999999}
+      FortuneGun_A: {scr: 9999999}
+      FortuneGun_B: {scr: 9999999}
+      Rems_A:       {scr: 9999999}
+      Rems_B:       {scr: 9999999}
 _uc_extr:
    gO:
       TorgueMode: {pg: N/A, scr: 8000000,                    pr: 8, req: rdi}
       Seven7s:    {pg: N/A, scr: 8235430, f: ADU--, mul: 10, pr: 7, req: rdi}
       lolsords:   {pg: N/A, scr: 1000000, f: ADU--, mul: 20,        req: rdi}
       Goldeneye:  {pg: N/A, scr:   70000, f: --U--, mul:  7,        req: rdi}
+   pD:
+      ATATATATA: {scr: 9999999}
+      Dekampila: {scr: 9999999}
 _uc_down:
    gA:
       UNCEUNCE:   {pg: N/A, f: ADU--, mul: 30}

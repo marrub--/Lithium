@@ -27,7 +27,14 @@ common_main do
          else
             name = name.to_s
             ammo = hwep[2].split
-            ammo[0].prepend "AT_"
+            if ammo[0] != 'None'
+               ammo[0] = ammo[0]
+                  .split('|', -1)
+                  .map do |s| s.strip.prepend 'AT_' end
+                  .join('|')
+            else
+               ammo[0] = 0
+            end
             if ammo[1]
                ammo[1] = 's"" OBJ "' + ammo[1] + 'Ammo"'
             else

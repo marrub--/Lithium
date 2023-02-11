@@ -38,9 +38,7 @@ class Lith_SubAxe : Actor {
                target.acs_scriptCall("Lith_GiveHealth", dmg / 2);
             }
             th.damageMobj(self, target, dmg, 'Magic');
-            for(int i = 0; i < 10; ++i) {
-               a_startSound("body/flesh", lch_auto);
-            }
+            a_startSound("body/flesh", lch_auto);
             a_startSound("weapons/kampilan/hitflesh", lch_weapon2);
          }
          return 0;

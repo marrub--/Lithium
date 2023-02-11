@@ -518,6 +518,7 @@ sl_:
    - charge_fmt:          CHARGE_FMT
    - clear:               CLEAR
    - close:               CLOSE
+   - continue_finale:     CONTINUE_FINALE
    - credits:             CREDITS
    - deactivate:          DEACTIVATE
    - discard:             DISCARD

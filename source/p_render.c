@@ -30,7 +30,7 @@ void P_Ren_LevelUp(void) {
 
 alloc_aut(0) stkcall static
 void P_Ren_Mission(void) {
-   if(ACS_Timer() == 0) {
+   if(ACS_Timer() == 0 || !pl.hudenabled) {
       return;
    }
    i32 delta = pl.missionstatshow - ACS_Timer();

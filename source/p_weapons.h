@@ -18,12 +18,15 @@
 #define SLOT_MAX 8
 
 enum {
-   AT_None = 0,
-   AT_NMag = dst_bit(0),
+   AT_Mgzn = dst_bit(0),
    AT_Ammo = dst_bit(1),
-   AT_Mana = dst_bit(2),
-   AT_AMag = AT_NMag | AT_Ammo,
-   AT_MMag = AT_NMag | AT_Mana,
+   AT_MDis = dst_bit(2),
+   AT_ADis = dst_bit(3),
+   AT_Type = AT_Mgzn | AT_Ammo,
+   AT_Disp = AT_ADis | AT_MDis,
+   AT_AmIn = AT_Ammo | AT_ADis,
+   AT_InMa = AT_Mgzn | AT_MDis,
+   AT_AmMa = AT_AmIn | AT_InMa,
 };
 
 struct weaponinfo {

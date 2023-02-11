@@ -27,15 +27,16 @@ weapons {
 
    kampilan {
       == lsnd/WeaponsD/Kampilan
-      pickup   Pickup   # Metal Gear Solid 2
-      draw     Draw     # ^
-      bonk     Bonk     # ^
-      hit      Hit      # ^
-      hitflesh HitFlesh # ^
-      ready1   Ready    # ^
-      ready2   Ready2   # ^
-      swing1   Swing    # ^
-      swing2   Swing2   # ^
+      pickup   Pickup     # Metal Gear Solid 2
+      draw     Draw       # ^
+      bonk     Bonk       # ^
+      hit      Hit        # ^
+      hitflesh HitFlesh   # ^
+      hitxpl   HitExplode # Self-made
+      ready1   Ready      # Metal Gear Solid 2
+      ready2   Ready2     # ^
+      swing1   Swing      # ^
+      swing2   Swing2     # ^
       $random ready {ready1, ready2,}
       $random swing {swing1, swing2,}
    }

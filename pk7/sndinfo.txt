@@ -897,6 +897,7 @@ weapons/kampilan/draw = lsnd/WeaponsD/Kampilan/Draw
 weapons/kampilan/bonk = lsnd/WeaponsD/Kampilan/Bonk
 weapons/kampilan/hit = lsnd/WeaponsD/Kampilan/Hit
 weapons/kampilan/hitflesh = lsnd/WeaponsD/Kampilan/HitFlesh
+weapons/kampilan/hitxpl = lsnd/WeaponsD/Kampilan/HitExplode
 weapons/kampilan/ready1 = lsnd/WeaponsD/Kampilan/Ready
 weapons/kampilan/ready2 = lsnd/WeaponsD/Kampilan/Ready2
 weapons/kampilan/swing1 = lsnd/WeaponsD/Kampilan/Swing

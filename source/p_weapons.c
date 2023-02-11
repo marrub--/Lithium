@@ -96,21 +96,26 @@ void P_Wep_PTickPre(void) {
       switch(i) {
       case weapon_m_shotgun:
          if(get_bit(pl.upgrades[UPGR_Shotgun_A].flags, _ug_active)) {
-            w->cur.ammotype = AT_NMag;
-         }
-         break;
-      case weapon_c_spas:
-         if(get_bit(pl.upgrades[UPGR_SPAS_B].flags, _ug_active)) {
-            w->cur.ammotype = AT_Ammo;
+            w->cur.ammotype = AT_InMa;
          }
          break;
       case weapon_m_plasma:
          if(get_bit(pl.upgrades[UPGR_Plasma_B].flags, _ug_active)) {
-            w->cur.ammotype = AT_AMag;
+            w->cur.ammotype = AT_AmMa;
+         }
+         break;
+      case weapon_c_spas:
+         if(get_bit(pl.upgrades[UPGR_SPAS_B].flags, _ug_active)) {
+            w->cur.ammotype = AT_AmIn;
+         }
+         break;
+      case weapon_d_kampilan:
+         if(get_bit(pl.upgrades[UPGR_Kampilan_A].flags, _ug_active)) {
+            w->cur.ammotype = AT_Mgzn|AT_ADis;
          }
          break;
       }
-      if(w->cur.ammotype & AT_NMag) {
+      if(w->cur.ammotype & AT_Mgzn) {
          w->cur.magmax = ServCallI(sm_GetMaxMag, info->classname);
          w->cur.magcur = ServCallI(sm_GetCurMag, info->classname);
       }

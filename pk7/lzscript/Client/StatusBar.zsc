@@ -32,7 +32,7 @@ override bool drawPaused(int player) {
       m_pauseTextWidth  = m_pauseFont.stringWidth(m_pauseText);
       m_pauseTextHeight = m_pauseFont.getHeight();
    }
-   Screen.drawText(m_pauseFont, Font.CR_WHITE, 320 + cos(gameTic * 2.2) * 10 - m_pauseTextWidth / 2, 240 + sin(gameTic * 2.5) * 16 - m_pauseTextHeight / 2, m_pauseText, DTA_VIRTUALWIDTH, 640, DTA_VIRTUALHEIGHT, 480);
+   Screen.drawText(m_pauseFont, Font.CR_WHITE, 320 + cos(gameTic * 2.2) * 10 - m_pauseTextWidth / 2, m_pauseTextHeight + sin(gameTic * 2.5) * (m_pauseTextHeight / 2) - m_pauseTextHeight / 2, m_pauseText, DTA_VIRTUALWIDTH, 640, DTA_VIRTUALHEIGHT, 480);
    return true;
 }
 

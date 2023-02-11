@@ -630,6 +630,13 @@ alloc_aut(0) sync static void ActFIN_WAIT(void) {
          }
          F_drawText(h, ACS_StrMid(text, 0, p));
          if(tics > 100) {
+            ACS_BeginPrint();
+            ACS_PrintBind(sc_use);
+            _l(", ");
+            ACS_PrintBind(sc_attack);
+            _c(' ');
+            _p(ns(lang(sl_continue_finale)));
+            PrintText(sf_smallfnt, CR_WHITE, _fill_x,6, _fill_y,0);
             if(i == 1) {
                if(!G_Filler(_fill_x, _fill_y, &fil_fill,
                             buttons & (BT_USE | BT_ATTACK))) {

@@ -463,10 +463,12 @@ alloc_aut(0) stkcall script static void P_doIntro(void) {
 
       ACS_BeginPrint();
       ACS_PrintBind(sc_use);
-      ACS_PrintString(ns(lang(sl_skip_intro_1)));
-      ACS_PrintChar('\n');
+      _c(' ');
+      _p(ns(lang(sl_skip_intro_1)));
+      _c('\n');
       ACS_PrintBind(sc_attack);
-      ACS_PrintString(ns(lang(sl_skip_intro_2)));
+      _c(' ');
+      _p(ns(lang(sl_skip_intro_2)));
       PrintText(sf_smallfnt, CR_WHITE, 275,6, 220,0);
 
       if(G_Filler(280, 220, &fil, pl.buttons & (BT_USE | BT_ATTACK))) {

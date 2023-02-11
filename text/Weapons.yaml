@@ -15,20 +15,20 @@ gA:
    wings:   [0, WingsOfDeath,  None]
 gO:
    o_cfist:      [1, ChargeFist,      None       ]
-   o_missile:    [5, MissileLauncher, AMag Rocket]
-   o_plasmadiff: [6, PlasmaDiffuser,  Ammo Plasma]
+   o_missile:    [5, MissileLauncher, AmMa Rocket]
+   o_plasmadiff: [6, PlasmaDiffuser,  AmIn Plasma]
 pM:
    m_fist:     [1, Fist,            None       ]
-   m_pistol:   [2, Pistol,          NMag       ]
-   m_revolver: [2, Revolver,        AMag Bullet]
-   m_shotgun:  [3, Shotgun,         Ammo Shell ]
+   m_pistol:   [2, Pistol,          InMa       ]
+   m_revolver: [2, Revolver,        AmMa Bullet]
+   m_shotgun:  [3, Shotgun,         AmIn  Shell]
    m_lshotgun: [3, LazShotgun,      None       ]
-   m_ssg:      [3, SuperShotgun,    Ammo Shell ]
-   m_rifle:    [4, CombatRifle,     AMag Bullet]
-   m_sniper:   [4, SniperRifle,     AMag Bullet]
-   m_rocket:   [5, GrenadeLauncher, Ammo Rocket]
-   m_plasma:   [6, PlasmaRifle,     Ammo Plasma]
-   m_cannon:   [7, BFG9000,         Ammo Cannon]
+   m_ssg:      [3, SuperShotgun,    AmIn  Shell]
+   m_rifle:    [4, CombatRifle,     AmMa Bullet]
+   m_sniper:   [4, SniperRifle,     AmMa Bullet]
+   m_rocket:   [5, GrenadeLauncher, AmIn Rocket]
+   m_plasma:   [6, PlasmaRifle,     AmIn Plasma]
+   m_cannon:   [7, BFG9000,         AmIn Cannon]
    pickups:
       fist:           m_fist
       chainsaw:       o_cfist
@@ -40,21 +40,21 @@ pM:
       plasmarifle:    m_plasma
       bfg9000:        m_cannon
 pC:
-   c_fist:     [1, CFist,         None       ]
-   c_mateba:   [2, Mateba,        NMag       ]
-   c_erifle:   [3, ShockRifle,    AMag Bullet]
-   c_spas:     [3, SPAS,          AMag Shell ]
-   c_smg:      [4, SMG,           NMag       ]
-   c_ionrifle: [5, IonRifle,      AMag Rocket]
-   c_plasma:   [6, CPlasmaRifle,  Ammo Plasma]
-   c_shipgun:  [7, StarDestroyer, Ammo Cannon]
-   c_blade:    [0, Blade,    Mana Mana]
-   c_delear:   [0, Delear,   MMag Mana]
-   c_fire:     [0, Feuer,    Mana Mana]
-   c_rend:     [0, Rend,     Mana Mana]
-   c_hulgyon:  [0, Hulgyon,  Mana Mana]
-   c_starshot: [0, StarShot, MMag Mana]
-   c_cercle:   [0, Cercle,   Mana Mana]
+   c_fist:     [1, CFist,         None          ]
+   c_mateba:   [2, Mateba,        InMa          ]
+   c_erifle:   [3, ShockRifle,    AmMa    Bullet]
+   c_spas:     [3, SPAS,          AmMa     Shell]
+   c_smg:      [4, SMG,           InMa          ]
+   c_ionrifle: [5, IonRifle,      AmMa    Rocket]
+   c_plasma:   [6, CPlasmaRifle,  AmIn    Plasma]
+   c_shipgun:  [7, StarDestroyer, AmIn    Cannon]
+   c_blade:    [0, Blade,         Ammo      Mana]
+   c_delear:   [0, Delear,        Ammo|InMa Mana]
+   c_fire:     [0, Feuer,         Ammo      Mana]
+   c_rend:     [0, Rend,          Ammo      Mana]
+   c_hulgyon:  [0, Hulgyon,       Ammo      Mana]
+   c_starshot: [0, StarShot,      Ammo|InMa Mana]
+   c_cercle:   [0, Cercle,        Ammo      Mana]
    pickups:
       fist:           c_fist
       chainsaw:       o_cfist
@@ -68,14 +68,14 @@ pC:
 pD:
    d_khanda:   [1, Khanda,      None       ]
    d_kampilan: [1, Kampilan,    None       ]
-   d_700e:     [2, 700Express,  NMag       ]
-   d_shrapnel: [3, ShrapnelGun, Ammo Shell ]
-   d_4bore:    [3, 4Bore,       Ammo Shell ]
-   d_minigun:  [4, Minigun,     Ammo Bullet]
-   d_motra:    [4, Motra,       NMag       ]
-   d_drocket:  [5, DualRocket,  Ammo Rocket]
-   d_fortune:  [6, FortuneGun,  Ammo Plasma]
-   d_rems:     [7, Rems,        Ammo Cannon]
+   d_700e:     [2, 700Express,  InMa       ]
+   d_shrapnel: [3, ShrapnelGun, AmIn Shell ]
+   d_4bore:    [3, 4Bore,       AmIn Shell ]
+   d_minigun:  [4, Minigun,     AmIn Bullet]
+   d_motra:    [4, Motra,       InMa       ]
+   d_drocket:  [5, DualRocket,  AmIn Rocket]
+   d_fortune:  [6, FortuneGun,  AmIn Plasma]
+   d_rems:     [7, Rems,        AmIn Cannon]
    pickups:
       fist:           d_khanda
       chainsaw:       d_kampilan
@@ -87,7 +87,7 @@ pD:
       plasmarifle:    d_fortune
       bfg9000:        d_rems
 pI:
-   i_flintlock: [2, Flintlock, AMag Shell]
+   i_flintlock: [2, Flintlock, AmMa Shell]
    pickups:
       fist:           m_fist
       chainsaw:       m_fist
@@ -99,7 +99,7 @@ pI:
       plasmarifle:    m_fist
       bfg9000:        m_fist
 pW:
-   w_magnum: [2, Magnum, NMag]
+   w_magnum: [2, Magnum, InMa]
    pickups:
       fist:           m_fist
       chainsaw:       m_fist
@@ -111,8 +111,8 @@ pW:
       plasmarifle:    m_fist
       bfg9000:        m_fist
 pA:
-   a_dualpist: [2, DualPistols, NMag]
-   a_burstrif: [4, BurstRifle,  NMag]
+   a_dualpist: [2, DualPistols, InMa]
+   a_burstrif: [4, BurstRifle,  InMa]
    pickups:
       fist:           m_fist
       chainsaw:       m_fist
@@ -124,8 +124,8 @@ pA:
       plasmarifle:    m_fist
       bfg9000:        m_fist
 pT:
-   t_riotshot: [3, RiotShotgun, Ammo Mana]
-   t_redrifle: [5, RedRifle,    Ammo Mana]
+   t_riotshot: [3, RiotShotgun, AmIn Mana]
+   t_redrifle: [5, RedRifle,    AmIn Mana]
    pickups:
       fist:           m_fist
       chainsaw:       m_fist

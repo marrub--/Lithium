@@ -1604,6 +1604,37 @@
    "So did they fight on through eternity, stretched infinitely inward to the point of the next and last relay. Every last piece of matter within the plane they dwelt in was destroyed. Every last throne was defaced, and every living being killed. There was absolutely nothing left but the twins, who were untied at birth.\n"
    "\n"
    "They became like the light of the universe, eventually becoming nothingness and evaporating. Left alone the yolk became something new.";
+"LITHEND_IconOfSin_4_Ari" =
+   "\cwblades bring death —\n"
+   "\coyour life like a blade —\n"
+   "\cgalive and yet,\n"
+   "\n"
+   "\n"
+   "\cnto inform your self, see clearer,\n"
+   "\cnin morning dawn, three more.\n"
+   "\n"
+   "\n"
+   "\ctLiving in hell is like every day,\n"
+   "\cvthen yet you stay by my side like a dog,\n"
+   "like a dog, whimpering,\n"
+   "whimpering, and yet,\n"
+   "\cmmay i have a break?\n"
+   "\cmchild i may be.\n"
+   "\n"
+   "\n"
+   "\cxThe cycle goes on, so far uninterrupted.\n"
+   "\ciBlades seek me out,\n"
+   "        \ciI cherish\n"
+   "      \citheir brevity.\n"
+   "\n"
+   "\n"
+   "\cdOn instinct, I dwell,\n"
+   "   \cdso undenied, I stay.\n"
+   "\n"
+   "\n"
+   "  \caRepeat, repeat, repeat again —\n"
+   "   \cgblades speak truths we\n"
+   "    \cofail to say ourselves.";
 "LITH_INFO_SHORT_AllPoint" =
    "AllPoint";
 "LITH_INFO_TITLE_AllPoint" =
@@ -6063,6 +6094,9 @@
    "It will not show up again.";
 "LITH_SKIP_INTRO_2" =
    "Hold: Continue to next page";
+"LITH_CONTINUE_FINALE" =
+   "Hold:\n"
+   "Continue to next page";
 "LITH_BAD_TIMELINE" =
    "This timeline is\n"
    "\n"

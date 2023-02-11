@@ -441,16 +441,13 @@ action(Weapon) void Lith_FireBullets(double spreadHorz, double spreadVert, int n
    A_FireBullets(spreadHorz, spreadVert, numBullets, damage, puffType, flags | FBF_PUFFTRACER, range, tracerType, 7 + FRandom(-1, 0), tracerX + FRandom(-0.7, 0.7));
 }
 
-action(Weapon) void lith_a_fireMelee(int damage, double range, int flags = 0, class<Actor> puffType = "Lith_BulletPuff") {
+action(Weapon) Actor lith_a_fireMelee(int damage, double range, int flags = 0, class<Actor> puffType = "Lith_BulletPuff") {
    if(!player) {
-      return;
+      return null;
    }
-
    FTranslatedLineTarget lt;
-
    double y = angle + random2() * (5.625 / 256.0);
    double p = aimLineAttack(y, range, lt, 0, ALF_CHECK3D);
-
    if(lt.lineTarget) {
       if(flags & _mlf_damage_stepup) {
          double rad  = radius - lt.lineTarget.radius;
@@ -463,11 +460,7 @@ action(Weapon) void lith_a_fireMelee(int damage, double range, int flags = 0, cl
          }
       }
    }
-
-   Actor puff;
-   int doneDamage;
-   [puff, doneDamage] = lineAttack(y, range, p, damage, 'Melee', puffType, LAF_ISMELEEATTACK, lt);
-
+   let [puff, doneDamage] = lineAttack(y, range, p, damage, 'Melee', puffType, LAF_ISMELEEATTACK, lt);
    if(lt.lineTarget) {
       if(!(flags & _mlf_no_turn)) {
          angle = lt.angleFromSource;
@@ -476,6 +469,7 @@ action(Weapon) void lith_a_fireMelee(int damage, double range, int flags = 0, cl
          bJustAttacked = true;
       }
    }
+   return lt.lineTarget;
 }
 
 action(Weapon) State lith_jumpNoAmmo(int minAmount = 1, stateLabel label = "FireEmpty") {

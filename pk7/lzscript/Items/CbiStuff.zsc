@@ -12,7 +12,7 @@ class Lith_BossReward1 : Lith_CbiItem {
       Lith_CbiItem.UpgrNum bossreward_easy_1;
       Lith_CbiItem.SpriteM "WUPGA";
       Lith_CbiItem.SpriteC "SPELA";
-      Lith_CbiItem.SpriteD "CUPGZ";
+      Lith_CbiItem.SpriteD "MOTRZ";
    }
 }
 
