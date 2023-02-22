@@ -884,6 +884,7 @@ weapons/cercle/begin = lsnd/WeaponsC/Cercle/Begin
 weapons/cercle/attack = lsnd/WeaponsC/Cercle/Attack
 weapons/subweapon/charge = lsnd/WeaponsD/Subweapons/Charge
 weapons/subweapon/armgun = lsnd/WeaponsD/Subweapons/ArmGun
+weapons/subweapon/armgun2 = lsnd/WeaponsD/Subweapons/ArmGun2
 weapons/subweapon/needle = lsnd/WeaponsD/Subweapons/Needle
 $alias weapons/subweapon/axe weapons/rend/slash
 $alias weapons/subweapon/grenade weapons/rifle/grenade
@@ -939,6 +940,7 @@ weapons/motra/draw = lsnd/WeaponsD/Motra/Draw
 $random weapons/motra/fire { weapons/motra/fire1 weapons/motra/fire2 weapons/motra/fire3 }
 weapons/minigun/fire = lsnd/WeaponsD/Minigun/Fire
 weapons/minigun/rotate = lsnd/WeaponsD/Minigun/Rotate
+weapons/minigun/rotatefast = lsnd/WeaponsD/Minigun/RotateFast
 weapons/minigun/click11 = lsnd/WeaponsD/Minigun/Click11
 weapons/minigun/click12 = lsnd/WeaponsD/Minigun/Click12
 weapons/minigun/click13 = lsnd/WeaponsD/Minigun/Click13

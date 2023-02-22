@@ -9,9 +9,10 @@
 weapons {
    subweapon {
       == lsnd/WeaponsD/Subweapons
-      charge Charge # Rozenkreuzstilette
-      armgun ArmGun # Phantasy Star: Nova
-      needle Needle # Psychic
+      charge  Charge  # Rozenkreuzstilette
+      armgun  ArmGun  # Phantasy Star: Nova
+      armgun2 ArmGun2 # ^
+      needle  Needle  # Psychic
       $alias axe     = .weapons.rend.slash
       $alias grenade = .weapons.rifle.grenade
    }
@@ -96,23 +97,24 @@ weapons {
 
    minigun {
       == lsnd/WeaponsD/Minigun
-      fire    Fire    # Serious Sam: The First Encounter HD
-      rotate  Rotate  # SI Series 6000
-      click11 Click11 # ^
-      click12 Click12 # ^
-      click13 Click13 # ^
-      click14 Click14 # ^
-      click21 Click21 # ^
-      click22 Click22 # ^
-      click23 Click23 # ^
-      click24 Click24 # ^
-      place   Place   # ^
-      down1   Down1   # Killing Floor
-      down2   Down2   # ^
-      down3   Down3   # ^
-      empty   Empty   # Halo 3
-      pickup  Pickup  # Doom 3
-      draw    Draw    # ^
+      fire       Fire       # Serious Sam: The First Encounter HD
+      rotate     Rotate     # SI Series 6000
+      rotatefast RotateFast # ^
+      click11    Click11    # ^
+      click12    Click12    # ^
+      click13    Click13    # ^
+      click14    Click14    # ^
+      click21    Click21    # ^
+      click22    Click22    # ^
+      click23    Click23    # ^
+      click24    Click24    # ^
+      place      Place      # ^
+      down1      Down1      # Killing Floor
+      down2      Down2      # ^
+      down3      Down3      # ^
+      empty      Empty      # Halo 3
+      pickup     Pickup     # Doom 3
+      draw       Draw       # ^
       $random down {down1, down2, down3,}
       $random click1 {click11, click12, click13, click14,}
       $random click2 {click21, click22, click23, click24,}

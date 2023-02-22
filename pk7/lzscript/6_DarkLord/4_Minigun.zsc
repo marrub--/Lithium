@@ -40,12 +40,14 @@ override void tick() {
       }
 
       if(lith_isMinigunFiring()) {
-         if(m_windUp > 1) m_windUp = 1;
-
          soundAlert(owner, maxDist: 256);
 
          if(!m_sndState) {
-            owner.A_StartSound("weapons/minigun/rotate", lch_weapon2, CHANF_LOOP);
+            if(Lith_UTIL.pData(_pdt_upgrade, UPGR_Minigun_A)) {
+               owner.A_StartSound("weapons/minigun/rotatefast", lch_weapon2, CHANF_LOOP);
+            } else {
+               owner.A_StartSound("weapons/minigun/rotate", lch_weapon2, CHANF_LOOP);
+            }
             m_sndState = true;
          }
       } else {
@@ -91,7 +93,12 @@ action(Weapon) state Lith_A_MinigunReady(statelabel lb, statelabel l) {
 
    A_SetTics(invoker.Lith_WindupTime());
    if(invoker.lith_isMinigunFiring()) {
-      invoker.m_windUp += 0.097;
+      if(Lith_UTIL.pData(_pdt_upgrade, UPGR_Minigun_A)) {
+         invoker.m_windUp += 0.21;
+      } else {
+         invoker.m_windUp += 0.097;
+      }
+      if(invoker.m_windUp > 1) invoker.m_windUp = 1;
       invoker.m_click = false;
    }
 
@@ -116,7 +123,12 @@ action(Weapon) state Lith_A_MinigunPostReady(statelabel l) {
 }
 
 action(Weapon) void Lith_A_MinigunFire() {
-   if(invoker.m_ammoState++ == 1) {
+   bool fast = Lith_UTIL.pData(_pdt_upgrade, UPGR_Minigun_A);
+   if(fast && invoker.m_windUp != 1) {
+      A_SetTics(0);
+      return;
+   }
+   if(fast || invoker.m_ammoState++ == 1) {
       lith_takeAmmo(1);
       invoker.m_ammoState = 0;
    }
@@ -127,8 +139,12 @@ action(Weapon) void Lith_A_MinigunFire() {
    soundAlert(invoker.owner);
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
    Lith_A_GunSmokeSmall(1.9);
-   for(int i = 0; i < 2; ++i) {
+   int firemax = fast ? 4           : 2;
+   int casemax = fast ? random(0,1) : 2;
+   for(int i = 0; i < firemax; ++i) {
       Lith_FireBullets(8, 4, -1, 7, fbf_norandom, tracerX: 1);
+   }
+   for(int i = 0; i < casemax; ++i) {
       Lith_A_Casing("Lith_CasBigHot", 9, 7, 20, frandom(3,5), frandom(1,5), frandom(10,12));
    }
    Lith_A_RecoilUp(0.15);
@@ -137,7 +153,11 @@ action(Weapon) void Lith_A_MinigunFire() {
 
 action(Weapon) void Lith_A_MinigunPostFire() {
    Lith_A_RecoilDn(0.35);
-   A_SetTics(invoker.Lith_WindupTime());
+   if(Lith_UTIL.pData(_pdt_upgrade, UPGR_Minigun_A) && invoker.m_windUp == 1) {
+      A_SetTics(0);
+   } else {
+      A_SetTics(invoker.Lith_WindupTime());
+   }
 }
 
 states(Weapon) {

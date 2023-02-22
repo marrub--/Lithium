@@ -18,7 +18,7 @@ _uc_body:
       VitalScan:   {pg: VitalScanner, f: --UR-, pr: 2}
    gO:
       ReflexWetw: {f: A-U--, pr: 5, mul: -5}
-   gM:
+   gI:
       Minimap:    {scr: 9999999}
       SecretScan: {scr: 9999999}
    pM:
@@ -33,8 +33,12 @@ _uc_body:
       SoulCleaver: {scr: 1100000}
       StealthSys:  {scr: 1800450, f: -DU--}
    pD:
-      Subweapons: {f: --URE}
-      HeavyArmor: {scr: 9999999}
+      Subweapons:  {f: --URE}
+      HeavyArmor:  {scr: 9999999}
+      ShieldOC:    {scr: 9999999}
+      HoverBoots:  {scr: 9999999}
+      HoverBoots2: {scr: 9999999}
+      SkillSword:  {scr: 9999999}
 _uc_weap:
    pM:
       Pistol_A:  {pg: N/A, scr:  140940}
@@ -49,7 +53,6 @@ _uc_weap:
       Plasma_B:  {         scr: 2500000,           pr: 1, grp: 3, req: wmd wrd}
       Cannon_A:  {         scr: 5100700, f: -D---,        grp: 4, req: wmd    }
       Cannon_B:  {         scr: 5800100,           pr: 5, grp: 4, req: wmd wrd}
-      Cannon_C:  {pg: N/A, scr: 1500000,                  grp: 4, req: wmd wrd rdi}
    pC:
       Mateba_A:   {scr:  614100, grp: 1}
       ShockRif_A: {scr: 1519590, grp: 2}
@@ -66,12 +69,16 @@ _uc_weap:
       ShipGun_B:  {scr: 7767700, grp: 5}
    pD:
       SubGun_A:     {scr: 9999999}
+      SubGrn_A:     {scr: 9999999}
       SubAxe_A:     {scr: 9999999}
-      Kampilan_A:   {scr: 9999999}
+      SubDrt_A:     {scr: 9999999}
+      Kampilan_A:   {scr: 1720999}
       700E_A:       {scr:  800000}
       700E_B:       {scr: 9999999}
       Shrapnel_A:   {scr: 1000000}
       Shrapnel_B:   {scr: 9999999}
+      4Bore_A:      {scr: 9999999}
+      4Bore_B:      {scr: 9999999}
       Minigun_A:    {scr: 9999999}
       Minigun_B:    {scr: 9999999}
       Franca_A:     {scr: 9999999}
@@ -86,8 +93,10 @@ _uc_extr:
    gO:
       TorgueMode: {pg: N/A, scr: 8000000,                    pr: 8, req: rdi}
       Seven7s:    {pg: N/A, scr: 8235430, f: ADU--, mul: 10, pr: 7, req: rdi}
-      lolsords:   {pg: N/A, scr: 1000000, f: ADU--, mul: 20,        req: rdi}
       Goldeneye:  {pg: N/A, scr:   70000, f: --U--, mul:  7,        req: rdi}
+   pM:
+      lolsords: {pg: N/A, scr: 1000000, f: ADU--, mul: 20, req: rdi}
+      Cannon_C: {pg: N/A, scr: 1500000, grp: 4,            req: wmd wrd rdi}
    pD:
       ATATATATA: {scr: 9999999}
       Dekampila: {scr: 9999999}

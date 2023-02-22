@@ -6,6 +6,43 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
+class Lith_4BoreDamageBuff : Inventory {
+   default {
+      Inventory.MaxAmount 8;
+   }
+   override void postBeginPlay() {
+      destroy();
+   }
+}
+
+class Lith_4BorePuff : Lith_BulletPuff {
+   default {
+      +PuffOnActors
+      Scale 2;
+   }
+   static const color[] CRS = {
+      "#43f476",
+      "#68f443",
+      "#c1f443",
+      "#f4cf43",
+      "#f47643",
+      "#f45943",
+      "#f4434b",
+      "#f44368"
+   };
+   override void postBeginPlay() {
+      super.postBeginPlay();
+      if(tracer && target && Lith_UTIL.pData(_pdt_upgrade, UPGR_4Bore_A)) {
+         int bonus = tracer.countInv('Lith_4BoreDamageBuff');
+         tracer.giveInventory('Lith_4BoreDamageBuff', 1);
+         if(bonus) {
+            tracer.damageMobj(target, self, 15 * bonus, 'None', DMG_USEANGLE|DMG_PLAYERATTACK);
+            Lith_URANUS.instance().particle4BoreDamageBuff(pos, CRS[bonus]);
+         }
+      }
+   }
+}
+
 class Lith_4Bore : Lith_DWeapon;
 
 default {
@@ -36,7 +73,7 @@ action(Weapon) void Lith_A_Fire4Bore() {
    soundAlert(invoker.owner);
    Lith_A_GunSmoke(1, 6);
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
-   Lith_FireBullets(4, 2, 8, random[lith_dlweapon](125, 150), FBF_NORANDOM, tracerX: 2, tracer: _tr_big);
+   Lith_FireBullets(4, 2, 8, random[lith_dlweapon](125, 150), FBF_NORANDOM, puffType: 'Lith_4BorePuff', tracerX: 2, tracer: _tr_big);
    Lith_A_RecoilUp(10);
    a_recoil(4);
 }
@@ -59,10 +96,14 @@ Fire:
    4BOR G 1 offset(140, 121) Lith_A_Fire4Bore;
    4BOR H 1 bright offset(89, 71);
    4BOR B 2 bright offset(97, 77);
-   4BOR G 2 offset(156, 135);
+   4BOR G 2 offset(176, 155);
+   4BOR A 1 offset(45, 80);
    #### # 0 lith_a_setInterpolation(true);
-   4BOR A 3 offset(15, 48);
-   4BOR A 3 offset(11, 44);
+   4BOR A 1 offset(30, 60);
+   4BOR A 1 offset(25, 50);
+   4BOR A 1 offset(20, 48);
+   4BOR A 1 offset(15, 45);
+   4BOR A 1 offset(11, 44);
    4BOR A 1 offset(8, 41);
    4BOR A 1 offset(5, 39);
    4BOR A 1 offset(3, 36);

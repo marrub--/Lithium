@@ -105,7 +105,7 @@ class Lith_KampilanBonkPuff2 : Lith_KampilanBonkPuff {
 class Lith_KampilanBonkPuff3 : Lith_KampilanBonkPuff {
    override void postBeginPlay() {
       if(tracer) {
-         a_explode(70, 100, 0);
+         a_explode(70, 200, 0);
          a_startSound("weapons/kampilan/hitxpl", lch_auto);
          Lith_URANUS.instance().particleKampilanSwing(self, "blue", false);
       }

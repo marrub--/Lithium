@@ -10,6 +10,7 @@ extend class Lith_URANUS;
 
 transient FSpawnParticleParams pp_kampilan_swing;
 transient FSpawnParticleParams pp_700e_laser;
+transient FSpawnParticleParams pp_4bore_dmg_buff;
 transient FSpawnParticleParams pp_rocket_fire;
 transient FSpawnParticleParams pp_rocket_smoke;
 transient FSpawnParticleParams pp_rems_spark;
@@ -47,6 +48,13 @@ void particleRegister() {
    pp_rocket_smoke.sizeStep   = 0.015;
    pp_rocket_smoke.startAlpha = 1.0;
    pp_rocket_smoke.fadeStep   = -1;
+   pp_4bore_dmg_buff.texture    = getTex("BLLTK0");
+   pp_4bore_dmg_buff.style      = style_add;
+   pp_4bore_dmg_buff.flags      = spf_fullbright;
+   pp_4bore_dmg_buff.lifetime   = 24;
+   pp_4bore_dmg_buff.size       = 0.5;
+   pp_4bore_dmg_buff.startAlpha = 0.75;
+   pp_4bore_dmg_buff.fadeStep   = -1;
    pp_700e_laser.color1     = "white";
    pp_700e_laser.texture    = getTex("#ELAA0");
    pp_700e_laser.style      = style_add;
@@ -101,6 +109,13 @@ void particleRocketTrail(Actor mo) {
       vel: (fRandom(-0.5,0.5),fRandom(0.1,0.7),0.0),
       vel_angles: (va, vp));
    level.spawnParticle(pp_rocket_fire);
+}
+
+void particle4BoreDamageBuff(vector3 pos, color cr) {
+   pp_4bore_dmg_buff.color1 = cr;
+   pp_4bore_dmg_buff.sizeStep = fRandom(3, 9);
+   Lith_UTIL.particlePosVel(pp_4bore_dmg_buff, pos);
+   level.spawnParticle(pp_4bore_dmg_buff);
 }
 
 void particle700eLaserTrace(vector3 pos, double alpha) {
