@@ -6,41 +6,41 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-== \#SHOP_TITLE_ChargeFist | $\#INFO_SHORT_ChargeFist
+== \#SHOP_TITLE_ChargeFist | $$\#INFO_SHORT_ChargeFist
 @@ \#SHOP_DESCR_ChargeFist
 A melee weapon that you can charge.
 
-== \#SHOP_TITLE_Revolver | $\#INFO_SHORT_Revolver
+== \#SHOP_TITLE_Revolver | $$\#INFO_SHORT_Revolver
 @@ \#SHOP_DESCR_Revolver
 A powerful handgun. Holds 6 bullets.
 
 Doesn't take upgrades.
 
-== \#SHOP_TITLE_LazShotgun | $\#INFO_SHORT_LazShotgun
+== \#SHOP_TITLE_LazShotgun | $$\#INFO_SHORT_LazShotgun
 @@ \#SHOP_DESCR_LazShotgun
 Piercing laser shotgun.
 
 Doesn't take upgrades.
 
-== \#SHOP_TITLE_SniperRifle | $\#INFO_SHORT_SniperRifle
+== \#SHOP_TITLE_SniperRifle | $$\#INFO_SHORT_SniperRifle
 @@ \#SHOP_DESCR_SniperRifle
 Scoped bolt-action rifle.
 
 Doesn't take upgrades.
 
-== \#SHOP_TITLE_MissileLauncher | $\#INFO_SHORT_MissileLauncher
+== \#SHOP_TITLE_MissileLauncher | $$\#INFO_SHORT_MissileLauncher
 @@ \#SHOP_DESCR_MissileLauncher
 Mini-missile launcher.
 
 Doesn't take upgrades.
 
-== \#SHOP_TITLE_PlasmaDiffuser | $\#INFO_SHORT_PlasmaDiffuser
+== \#SHOP_TITLE_PlasmaDiffuser | $$\#INFO_SHORT_PlasmaDiffuser
 @@ \#SHOP_DESCR_PlasmaDiffuser
 Classic plasma rifle.
 
 Doesn't take upgrades.
 
-== \#SHOP_TITLE_Gameboy | $\#INFO_SHORT_Gameboy
+== \#SHOP_TITLE_Gameboy | $$\#INFO_SHORT_Gameboy
 @@ \#SHOP_DESCR_Gameboy
 A game playing system, containing several old titles.
 

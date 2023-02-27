@@ -37,9 +37,9 @@ governments, they finally made it back onto the market in 1370.
 A.O.F mainly produce weapon modifications, plasma ammunition, and robotics.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_SHORT_AOFJem | $\#INFO_SHORT_AOF
+== \#INFO_SHORT_AOFJem | $$\#INFO_SHORT_AOF
 == \#INFO_TITLE_AOFJem | A.O.F Inc. [Bishop-Class Clearance]
-== \#INFO_IMAGE_AOFJem | $\#INFO_IMAGE_AOF
+== \#INFO_IMAGE_AOFJem | $$\#INFO_IMAGE_AOF
 @@ \#INFO_DESCR_AOFJem
 A.O.F Inc. is a company founded in 761 NE by \cm----- -------\cj and
 \cm--------\cj for the purposes of exposing the universal secret of magic and
@@ -54,8 +54,8 @@ modifications for existing weapons.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_AOFAri | AOF
-== \#INFO_TITLE_AOFAri | $\#INFO_SHORT_AOF
-== \#INFO_IMAGE_AOFAri | $\#INFO_IMAGE_AOF
+== \#INFO_TITLE_AOFAri | $$\#INFO_SHORT_AOF
+== \#INFO_IMAGE_AOFAri | $$\#INFO_IMAGE_AOF
 @@ \#INFO_DESCR_AOFAri
 AOF is a company founded during the dark ages. Famously, they supplied
 both sides of the war, however neither side did win. On the inside,
@@ -67,7 +67,7 @@ reality as well. I'm not sure what they're like here.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Cid | Cid
-== \#INFO_TITLE_Cid | $\#INFO_SHORT_Cid
+== \#INFO_TITLE_Cid | $$\#INFO_SHORT_Cid
 == \#INFO_IMAGE_Cid | :BIP:Cid
 @@ \#INFO_DESCR_Cid
 Cid is a black market trading group, presumed to be led by four men. They sell
@@ -79,7 +79,7 @@ of the strongest, longest standing black market groups ever.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Facer | Facer
-== \#INFO_TITLE_Facer | $\#INFO_SHORT_Facer
+== \#INFO_TITLE_Facer | $$\#INFO_SHORT_Facer
 @@ \#INFO_DESCR_Facer
 Facer (pronounced "phaser") was a company that produced precision firearms
 around 2403 CE. Based in Paris, France, the company started out as a two-man
@@ -94,7 +94,7 @@ The company was resigned in 2480 after the death of its remaining founder.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_JAQTen | JAQTen
-== \#INFO_TITLE_JAQTen | $\#INFO_SHORT_JAQTen
+== \#INFO_TITLE_JAQTen | $$\#INFO_SHORT_JAQTen
 @@ \#INFO_DESCR_JAQTen
 JAQTen are the producers of many heavy armaments, performance improving drugs,
 and soup products. Some of the deadliest weapons in the galaxy are currently
@@ -137,9 +137,9 @@ circumstances of this operation,) KSKK has agreed to re-enter production of
 their more useful creations.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_SHORT_KSKKJem | $\#INFO_SHORT_KSKK
-== \#INFO_TITLE_KSKKJem | $\#INFO_TITLE_KSKK
-== \#INFO_IMAGE_KSKKJem | $\#INFO_IMAGE_KSKK
+== \#INFO_SHORT_KSKKJem | $$\#INFO_SHORT_KSKK
+== \#INFO_TITLE_KSKKJem | $$\#INFO_TITLE_KSKK
+== \#INFO_IMAGE_KSKKJem | $$\#INFO_IMAGE_KSKK
 @@ \#INFO_DESCR_KSKKJem
 Kazami Sensou Kenkyuu Kaihatsu (Kazami Military R&D) is a godo kaisha
 business organization based in the Great Empire of Kazami, on Earth. They
@@ -180,9 +180,9 @@ For now, OFMD are your employers, and supply you with Score, weaponry and
 cyber-tech.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_SHORT_OFMDJem | $\#INFO_SHORT_OFMD
-== \#INFO_TITLE_OFMDJem | $\#INFO_TITLE_OFMD
-== \#INFO_IMAGE_OFMDJem | $\#INFO_IMAGE_OFMD
+== \#INFO_SHORT_OFMDJem | $$\#INFO_SHORT_OFMD
+== \#INFO_TITLE_OFMDJem | $$\#INFO_TITLE_OFMD
+== \#INFO_IMAGE_OFMDJem | $$\#INFO_IMAGE_OFMD
 @@ \#INFO_DESCR_OFMDJem
 Optic Fiber Maxim-Danil is a company which mainly produces electronics, and is
 one of the top-selling brands on the market for cables, computer parts, and
@@ -250,7 +250,7 @@ battles, having existed for over 700 years now.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_UnrealArms | Unreal Arms
-== \#INFO_TITLE_UnrealArms | $\#INFO_SHORT_UnrealArms
+== \#INFO_TITLE_UnrealArms | $$\#INFO_SHORT_UnrealArms
 @@ \#INFO_DESCR_UnrealArms
 A company currently residing in the Aetos Vi system. They manufacture
 high-grade exotic weaponry both on commission and for mass production.
@@ -261,7 +261,7 @@ nice price thanks to good shipping architecture in the Aetos Vi system.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Yigan | Yigan
-== \#INFO_TITLE_Yigan | $\#INFO_SHORT_Yigan
+== \#INFO_TITLE_Yigan | $$\#INFO_SHORT_Yigan
 @@ \#INFO_DESCR_Yigan
 One of the larger producers of personal armor in the galaxy, Yigan were formed
 around 20 years ago and are the only company currently capable of holding a

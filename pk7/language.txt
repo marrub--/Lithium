@@ -223,41 +223,41 @@
    "- Barrel explosion sprites";
 [en enu default]
 "LITH_SHOP_TITLE_ChargeFist" =
-   "$LITH_INFO_SHORT_ChargeFist";
+   "$$LITH_INFO_SHORT_ChargeFist";
 "LITH_SHOP_DESCR_ChargeFist" =
    "A melee weapon that you can charge.";
 "LITH_SHOP_TITLE_Revolver" =
-   "$LITH_INFO_SHORT_Revolver";
+   "$$LITH_INFO_SHORT_Revolver";
 "LITH_SHOP_DESCR_Revolver" =
    "A powerful handgun. Holds 6 bullets.\n"
    "\n"
    "Doesn't take upgrades.";
 "LITH_SHOP_TITLE_LazShotgun" =
-   "$LITH_INFO_SHORT_LazShotgun";
+   "$$LITH_INFO_SHORT_LazShotgun";
 "LITH_SHOP_DESCR_LazShotgun" =
    "Piercing laser shotgun.\n"
    "\n"
    "Doesn't take upgrades.";
 "LITH_SHOP_TITLE_SniperRifle" =
-   "$LITH_INFO_SHORT_SniperRifle";
+   "$$LITH_INFO_SHORT_SniperRifle";
 "LITH_SHOP_DESCR_SniperRifle" =
    "Scoped bolt-action rifle.\n"
    "\n"
    "Doesn't take upgrades.";
 "LITH_SHOP_TITLE_MissileLauncher" =
-   "$LITH_INFO_SHORT_MissileLauncher";
+   "$$LITH_INFO_SHORT_MissileLauncher";
 "LITH_SHOP_DESCR_MissileLauncher" =
    "Mini-missile launcher.\n"
    "\n"
    "Doesn't take upgrades.";
 "LITH_SHOP_TITLE_PlasmaDiffuser" =
-   "$LITH_INFO_SHORT_PlasmaDiffuser";
+   "$$LITH_INFO_SHORT_PlasmaDiffuser";
 "LITH_SHOP_DESCR_PlasmaDiffuser" =
    "Classic plasma rifle.\n"
    "\n"
    "Doesn't take upgrades.";
 "LITH_SHOP_TITLE_Gameboy" =
-   "$LITH_INFO_SHORT_Gameboy";
+   "$$LITH_INFO_SHORT_Gameboy";
 "LITH_SHOP_DESCR_Gameboy" =
    "A game playing system, containing several old titles.";
 "LITH_SHOP_TITLE_DivSigil" =
@@ -271,7 +271,7 @@
    "\n"
    "A Heads Up Display program built into your Computer/Brain Interface.";
 "LITH_UPGRADE_TITLE_HeadsUpDispJem" =
-   "$LITH_UPGRADE_TITLE_HeadsUpDisp";
+   "$$LITH_UPGRADE_TITLE_HeadsUpDisp";
 "LITH_UPGRADE_EFFEC_HeadsUpDispJem" =
    "Shows vital information.\n"
    "\n"
@@ -697,7 +697,7 @@
 "LITH_OPT_M1A2_01_04_01" =
    "Goodbye.";
 "LITHTEST_test_term_l" =
-   "$LITH_LOGON_TEST";
+   "$$LITH_LOGON_TEST";
 "LITHTEST_test_term_0" =
    "test text, information block";
 "LITHTEST_test_term_1" =
@@ -1660,11 +1660,11 @@
    "\n"
    "A.O.F mainly produce weapon modifications, plasma ammunition, and robotics.";
 "LITH_INFO_SHORT_AOFJem" =
-   "$LITH_INFO_SHORT_AOF";
+   "$$LITH_INFO_SHORT_AOF";
 "LITH_INFO_TITLE_AOFJem" =
    "A.O.F Inc. [Bishop-Class Clearance]";
 "LITH_INFO_IMAGE_AOFJem" =
-   "$LITH_INFO_IMAGE_AOF";
+   "$$LITH_INFO_IMAGE_AOF";
 "LITH_INFO_DESCR_AOFJem" =
    "A.O.F Inc. is a company founded in 761 NE by \cm----- -------\cj and \cm--------\cj for the purposes of exposing the universal secret of magic and restoring the world to what it once was pre-calamity.\n"
    "\n"
@@ -1674,9 +1674,9 @@
 "LITH_INFO_SHORT_AOFAri" =
    "AOF";
 "LITH_INFO_TITLE_AOFAri" =
-   "$LITH_INFO_SHORT_AOF";
+   "$$LITH_INFO_SHORT_AOF";
 "LITH_INFO_IMAGE_AOFAri" =
-   "$LITH_INFO_IMAGE_AOF";
+   "$$LITH_INFO_IMAGE_AOF";
 "LITH_INFO_DESCR_AOFAri" =
    "AOF is a company founded during the dark ages. Famously, they supplied both sides of the war, however neither side did win. On the inside, AOF were doing science experiments on humans, trying to create new life. We were created this way.\n"
    "\n"
@@ -1684,7 +1684,7 @@
 "LITH_INFO_SHORT_Cid" =
    "Cid";
 "LITH_INFO_TITLE_Cid" =
-   "$LITH_INFO_SHORT_Cid";
+   "$$LITH_INFO_SHORT_Cid";
 "LITH_INFO_IMAGE_Cid" =
    ":BIP:Cid";
 "LITH_INFO_DESCR_Cid" =
@@ -1694,7 +1694,7 @@
 "LITH_INFO_SHORT_Facer" =
    "Facer";
 "LITH_INFO_TITLE_Facer" =
-   "$LITH_INFO_SHORT_Facer";
+   "$$LITH_INFO_SHORT_Facer";
 "LITH_INFO_DESCR_Facer" =
    "Facer (pronounced \"phaser\") was a company that produced precision firearms around 2403 CE. Based in Paris, France, the company started out as a two-man production, designing simple but powerful sniper rifles for attracting military or revolutionary forces.\n"
    "\n"
@@ -1704,7 +1704,7 @@
 "LITH_INFO_SHORT_JAQTen" =
    "JAQTen";
 "LITH_INFO_TITLE_JAQTen" =
-   "$LITH_INFO_SHORT_JAQTen";
+   "$$LITH_INFO_SHORT_JAQTen";
 "LITH_INFO_DESCR_JAQTen" =
    "JAQTen are the producers of many heavy armaments, performance improving drugs, and soup products. Some of the deadliest weapons in the galaxy are currently designed and manufactured by them, along with some of the most potentially dangerous drugs. They are mainly known for their canned soup products, which they began producing long before military gear.\n"
    "\n"
@@ -1728,11 +1728,11 @@
    "\n"
    "Thanks to connections between OFMD and the Kazami government (from the circumstances of this operation,) KSKK has agreed to re-enter production of their more useful creations.";
 "LITH_INFO_SHORT_KSKKJem" =
-   "$LITH_INFO_SHORT_KSKK";
+   "$$LITH_INFO_SHORT_KSKK";
 "LITH_INFO_TITLE_KSKKJem" =
-   "$LITH_INFO_TITLE_KSKK";
+   "$$LITH_INFO_TITLE_KSKK";
 "LITH_INFO_IMAGE_KSKKJem" =
-   "$LITH_INFO_IMAGE_KSKK";
+   "$$LITH_INFO_IMAGE_KSKK";
 "LITH_INFO_DESCR_KSKKJem" =
    "Kazami Sensou Kenkyuu Kaihatsu (Kazami Military R&D) is a godo kaisha business organization based in the Great Empire of Kazami, on Earth. They research, develop and produce a large variety of products for the Kazami army.";
 "LITH_INFO_SHORT_MDDO" =
@@ -1762,11 +1762,11 @@
    "\n"
    "For now, OFMD are your employers, and supply you with Score, weaponry and cyber-tech.";
 "LITH_INFO_SHORT_OFMDJem" =
-   "$LITH_INFO_SHORT_OFMD";
+   "$$LITH_INFO_SHORT_OFMD";
 "LITH_INFO_TITLE_OFMDJem" =
-   "$LITH_INFO_TITLE_OFMD";
+   "$$LITH_INFO_TITLE_OFMD";
 "LITH_INFO_IMAGE_OFMDJem" =
-   "$LITH_INFO_IMAGE_OFMD";
+   "$$LITH_INFO_IMAGE_OFMD";
 "LITH_INFO_DESCR_OFMDJem" =
    "Optic Fiber Maxim-Danil is a company which mainly produces electronics, and is one of the top-selling brands on the market for cables, computer parts, and other such common technology.\n"
    "\n"
@@ -1816,7 +1816,7 @@
 "LITH_INFO_SHORT_UnrealArms" =
    "Unreal Arms";
 "LITH_INFO_TITLE_UnrealArms" =
-   "$LITH_INFO_SHORT_UnrealArms";
+   "$$LITH_INFO_SHORT_UnrealArms";
 "LITH_INFO_DESCR_UnrealArms" =
    "A company currently residing in the Aetos Vi system. They manufacture high-grade exotic weaponry both on commission and for mass production.\n"
    "\n"
@@ -1824,7 +1824,7 @@
 "LITH_INFO_SHORT_Yigan" =
    "Yigan";
 "LITH_INFO_TITLE_Yigan" =
-   "$LITH_INFO_SHORT_Yigan";
+   "$$LITH_INFO_SHORT_Yigan";
 "LITH_INFO_DESCR_Yigan" =
    "One of the larger producers of personal armor in the galaxy, Yigan were formed around 20 years ago and are the only company currently capable of holding a candle to Sheka Kaff. While their factories are placed on Mars, it is unknown where their actual headquarters is, which has made it very difficult to gather information about them.\n"
    "\n"
@@ -1898,7 +1898,7 @@
 "LITH_INFO_SHORT_LostSoul" =
    "Lost Soul";
 "LITH_INFO_TITLE_LostSoul" =
-   "$LITH_INFO_SHORT_LostSoul";
+   "$$LITH_INFO_SHORT_LostSoul";
 "LITH_INFO_DESCR_LostSoul" =
    "Class: \cjResident\c-\n"
    "Threat: \csD++\c-\n"
@@ -1911,7 +1911,7 @@
 "LITH_INFO_SHORT_Mancubus" =
    "Mancubus";
 "LITH_INFO_TITLE_Mancubus" =
-   "$LITH_INFO_SHORT_Mancubus";
+   "$$LITH_INFO_SHORT_Mancubus";
 "LITH_INFO_DESCR_Mancubus" =
    "Class: \cjResident\c-\n"
    "Threat: \ckB\c-\n"
@@ -1922,7 +1922,7 @@
 "LITH_INFO_SHORT_Arachnotron" =
    "Arachnotron";
 "LITH_INFO_TITLE_Arachnotron" =
-   "$LITH_INFO_SHORT_Arachnotron";
+   "$$LITH_INFO_SHORT_Arachnotron";
 "LITH_INFO_DESCR_Arachnotron" =
    "Class: \cjResident\c-\n"
    "Threat: \ckB\c-\n"
@@ -1933,7 +1933,7 @@
 "LITH_INFO_SHORT_Cacodemon" =
    "Cacodemon";
 "LITH_INFO_TITLE_Cacodemon" =
-   "$LITH_INFO_SHORT_Cacodemon";
+   "$$LITH_INFO_SHORT_Cacodemon";
 "LITH_INFO_DESCR_Cacodemon" =
    "Class: \cjResident\c-\n"
    "Threat: \ckB-\c-\n"
@@ -1942,7 +1942,7 @@
 "LITH_INFO_SHORT_HellKnight" =
    "Hell Knight";
 "LITH_INFO_TITLE_HellKnight" =
-   "$LITH_INFO_SHORT_HellKnight";
+   "$$LITH_INFO_SHORT_HellKnight";
 "LITH_INFO_DESCR_HellKnight" =
    "Class: \cfNoble\c-\n"
    "Threat: \ckB\c-\n"
@@ -1953,7 +1953,7 @@
 "LITH_INFO_SHORT_BaronOfHell" =
    "Hell Noble";
 "LITH_INFO_TITLE_BaronOfHell" =
-   "$LITH_INFO_SHORT_BaronOfHell";
+   "$$LITH_INFO_SHORT_BaronOfHell";
 "LITH_INFO_DESCR_BaronOfHell" =
    "Class: \cfNoble\c-\n"
    "Threat: \ckB++\c-\n"
@@ -1964,7 +1964,7 @@
 "LITH_INFO_SHORT_Revenant" =
    "Revenant";
 "LITH_INFO_TITLE_Revenant" =
-   "$LITH_INFO_SHORT_Revenant";
+   "$$LITH_INFO_SHORT_Revenant";
 "LITH_INFO_DESCR_Revenant" =
    "Class: \cfNoble\c-\n"
    "Threat: \ckB+\c-\n"
@@ -2019,7 +2019,7 @@
 "LITH_INFO_SHORT_Phantom" =
    "Phantom";
 "LITH_INFO_TITLE_Phantom" =
-   "$LITH_INFO_SHORT_Phantom";
+   "$$LITH_INFO_SHORT_Phantom";
 "LITH_INFO_DESCR_Phantom" =
    "Class: \cm???\c-\n"
    "Threat: \crE\c-\n"
@@ -2133,7 +2133,7 @@
 "LITH_INFO_SHORT_AllMap" =
    "Area Map";
 "LITH_INFO_TITLE_AllMap" =
-   "$LITH_INFO_SHORT_AllMap";
+   "$$LITH_INFO_SHORT_AllMap";
 "LITH_INFO_DESCR_AllMap" =
    "A monitor containing a map of the entire current area of operation. Has an out port on the frame that hooks into your Computer/Brain Interface and outputs Auto-Map information.\n"
    "\n"
@@ -2165,25 +2165,25 @@
 "LITH_INFO_SHORT_Backpack" =
    "Backpack";
 "LITH_INFO_TITLE_Backpack" =
-   "$LITH_INFO_SHORT_Backpack";
+   "$$LITH_INFO_SHORT_Backpack";
 "LITH_INFO_DESCR_Backpack" =
    "A backpack left behind by someone. All that's left inside it is a bit of ammunition they had.";
 "LITH_INFO_SHORT_BackpackJem" =
-   "$LITH_INFO_SHORT_Backpack";
+   "$$LITH_INFO_SHORT_Backpack";
 "LITH_INFO_TITLE_BackpackJem" =
-   "$LITH_INFO_TITLE_Backpack";
+   "$$LITH_INFO_TITLE_Backpack";
 "LITH_INFO_DESCR_BackpackJem" =
-   "$LITH_INFO_DESCR_Backpack";
+   "$$LITH_INFO_DESCR_Backpack";
 "LITH_INFO_SHORT_BackpackAri" =
-   "$LITH_INFO_SHORT_Backpack";
+   "$$LITH_INFO_SHORT_Backpack";
 "LITH_INFO_TITLE_BackpackAri" =
-   "$LITH_INFO_TITLE_Backpack";
+   "$$LITH_INFO_TITLE_Backpack";
 "LITH_INFO_DESCR_BackpackAri" =
-   "$LITH_INFO_DESCR_Backpack";
+   "$$LITH_INFO_DESCR_Backpack";
 "LITH_INFO_SHORT_BackpackLane" =
-   "$LITH_INFO_SHORT_Backpack";
+   "$$LITH_INFO_SHORT_Backpack";
 "LITH_INFO_TITLE_BackpackLane" =
-   "$LITH_INFO_SHORT_Backpack";
+   "$$LITH_INFO_SHORT_Backpack";
 "LITH_INFO_DESCR_BackpackLane" =
    "A backpack left behind by one of the agents sent in before you. All that's left inside it is a bit of ammunition they had.";
 "LITH_INFO_SHORT_Stimpack" =
@@ -2211,7 +2211,7 @@
 "LITH_INFO_SHORT_KeySkull" =
    "Skull Key";
 "LITH_INFO_TITLE_KeySkull" =
-   "$LITH_INFO_SHORT_KeySkull";
+   "$$LITH_INFO_SHORT_KeySkull";
 "LITH_INFO_DESCR_KeySkull" =
    "Some kind of strange key used throughout Hell. Appears to have the same hardware as a KeyDisk, but reconfigured into the shape of a skull. May be necessary to progress your mission.";
 "LITH_INFO_SHORT_Fragma" =
@@ -2247,13 +2247,13 @@
    "\n"
    "Gives 200 health and defends against attack temporarily.";
 "LITH_INFO_SHORT_ArmStandard" =
-   "$LITH_ITEM_TAG_ArmStandardUp";
+   "$$LITH_ITEM_TAG_ArmStandardUp";
 "LITH_INFO_TITLE_ArmStandard" =
    "Standard Military Armor";
 "LITH_INFO_DESCR_ArmStandard" =
    "A standard plated ballistic vest able to absorb a bit of damage from bullets. Attribution to the current design has been lost to time from the hundreds of revisions it has gone through, with parts of it dating back as far as 2082 CE.";
 "LITH_INFO_SHORT_ArmImproved" =
-   "$LITH_ITEM_TAG_ArmImprovedUp";
+   "$$LITH_ITEM_TAG_ArmImprovedUp";
 "LITH_INFO_TITLE_ArmImproved" =
    "Improved Military Armor";
 "LITH_INFO_DESCR_ArmImproved" =
@@ -2261,19 +2261,19 @@
 "LITH_INFO_SHORT_ArmTeflon" =
    "Teflon Armor";
 "LITH_INFO_TITLE_ArmTeflon" =
-   "$LITH_ITEM_TAG_ArmTeflonUp";
+   "$$LITH_ITEM_TAG_ArmTeflonUp";
 "LITH_INFO_DESCR_ArmTeflon" =
    "An armor with a vest made of a synthetic material composed of Polytetrafluoroethylene (PTFE or brand name Teflon,) Kevlar, and others, made to resist electric shock by deflection. The material is interleaved with, as well, a material similar to the Improved Military Armor's. Produced by Sheka Kaff, Inc.";
 "LITH_INFO_SHORT_ArmDendrite" =
-   "$LITH_ITEM_TAG_ArmDendriteUp";
+   "$$LITH_ITEM_TAG_ArmDendriteUp";
 "LITH_INFO_TITLE_ArmDendrite" =
-   "$LITH_INFO_SHORT_ArmDendrite";
+   "$$LITH_INFO_SHORT_ArmDendrite";
 "LITH_INFO_DESCR_ArmDendrite" =
    "An armor with a nickel dendritic micro-structure woven with tungsten and other materials for extreme heat resistance. Produced by Sheka Kaff, Inc.";
 "LITH_INFO_SHORT_ArmAerodynamic" =
    "Aero. Armor";
 "LITH_INFO_TITLE_ArmAerodynamic" =
-   "$LITH_ITEM_TAG_ArmAerodynamicUp";
+   "$$LITH_ITEM_TAG_ArmAerodynamicUp";
 "LITH_INFO_DESCR_ArmAerodynamic" =
    "Light wind-gliding armor with a blue finish that allows the wearer increased speed by wind resistance. Produced by Yigan.";
 "LITH_INFO_SHORT_ArmHazMat" =
@@ -2285,13 +2285,13 @@
 "LITH_INFO_SHORT_ArmPinkSilver" =
    "Pink Silver";
 "LITH_INFO_TITLE_ArmPinkSilver" =
-   "$LITH_INFO_SHORT_ArmPinkSilver";
+   "$$LITH_INFO_SHORT_ArmPinkSilver";
 "LITH_INFO_DESCR_ArmPinkSilver" =
    "An artifact from an unknown dimension. On the back, the number \"72\" is written in purple. Using a currently unknown magic layer, this armor has metaphysical resistance as well as physical resistance. Upon closer inspection, you notice a peculiar drawing on the inside that resembles a cute fox with a heart tail. Next to the drawing is a message written in blue paint reading \"I miss you.\"";
 "LITH_INFO_SHORT_ArmMidori" =
    "Midori";
 "LITH_INFO_TITLE_ArmMidori" =
-   "$LITH_INFO_SHORT_ArmMidori";
+   "$$LITH_INFO_SHORT_ArmMidori";
 "LITH_INFO_DESCR_ArmMidori" =
    "An artifact from the Reverse Ace dimension. A dark, matte green suit with various religious and spiritual symbols hanging from it. Despite being placed on the armor mainly with beaded strings, the objects don't seem to come off no matter how hard you pull on them. This armor, through an unknown magic layer, is the only known object capable of resisting fire magic. For some reason, as you put it on, unpleasant memories you never had come rushing in. Despite this, they feel pleasant, and make you want to cry.";
 "LITH_INFO_SHORT_WeapnInter" =
@@ -2307,7 +2307,7 @@
 "LITH_INFO_SHORT_WeapnInte2" =
    "W.R.D.";
 "LITH_INFO_TITLE_WeapnInte2" =
-   "$LITH_CBI_WeapnInte2";
+   "$$LITH_CBI_WeapnInte2";
 "LITH_INFO_DESCR_WeapnInte2" =
    "Despite the idea being similar to the Weapon Interfacing Device Package, the Weapon Refactoring Device was conceptualized and prototyped over 40 years before the Weapon Interface was created.\n"
    "\n"
@@ -2315,7 +2315,7 @@
    "\n"
    "This device is capable of completely assembling any weapon given parts and any amount of schematics, using computational learning algorithms and a large database of possible configurations.";
 "LITH_INFO_SHORT_ArmorInter" =
-   "$LITH_CBI_ArmorInter";
+   "$$LITH_CBI_ArmorInter";
 "LITH_INFO_TITLE_ArmorInter" =
    "Armor Interfacing Device";
 "LITH_INFO_DESCR_ArmorInter" =
@@ -2327,7 +2327,7 @@
 "LITH_INFO_SHORT_CPU1" =
    "High-Grade CPU";
 "LITH_INFO_TITLE_CPU1" =
-   "$LITH_CBI_CPU2";
+   "$$LITH_CBI_CPU2";
 "LITH_INFO_DESCR_CPU1" =
    "A huge upgrade from your dinky Nodea 541 CPU, the Z6808 is capable of up to 30Pr (when overclocked) and has 100TiB of RAM. In most cases, it's completely overly sufficient for any mathematician or cybernetics junkie.\n"
    "\n"
@@ -2337,7 +2337,7 @@
 "LITH_INFO_SHORT_CPU2" =
    "S. High-Grade CPU";
 "LITH_INFO_TITLE_CPU2" =
-   "$LITH_CBI_CPU3";
+   "$$LITH_CBI_CPU3";
 "LITH_INFO_DESCR_CPU2" =
    "The BC-0265 is a marvel of modular C/B Interface technology, not bigger than any standard CPU and capable of so, so much more. It comes equipped with 150TiB of RAM, 70Pr without any dangerous overclocking, and 4906 physical cores.\n"
    "\n"
@@ -2365,9 +2365,9 @@
 "LITH_REMOTE_OMI" =
    "omif@corp.AOF?UNVERIFIED";
 "LITH_INFO_TITLE_MIntroAri" =
-   "$LITH_SAVED_MESSAGE";
+   "$$LITH_SAVED_MESSAGE";
 "LITH_INFO_REMOT_MIntroAri" =
-   "$LITH_REMOTE_OMI";
+   "$$LITH_REMOTE_OMI";
 "LITH_INFO_DESCR_MIntroAri" =
    "Aricil! I can feel your presence. We're in the same plane now, you and I. Good.\n"
    "\n"
@@ -2375,9 +2375,9 @@
    "\n"
    "I hope you a safe journey. This place gives me horrid vibes.";
 "LITH_INFO_TITLE_MPhantomAri" =
-   "$LITH_SAVED_MESSAGE";
+   "$$LITH_SAVED_MESSAGE";
 "LITH_INFO_REMOT_MPhantomAri" =
-   "$LITH_REMOTE_OMI";
+   "$$LITH_REMOTE_OMI";
 "LITH_INFO_DESCR_MPhantomAri" =
    "Aricil! What the hell is going on? There are strange... \cmdark\c- things attacking me. If you can, we need to re-group. My Computer/Brain Interface is saying weird things to me... I'm loathe to say it, but, I'm scared.\n"
    "\n"
@@ -2385,7 +2385,7 @@
    "\n"
    "Good hunting.";
 "LITH_INFO_TITLE_MIntroJem" =
-   "$LITH_SAVED_MESSAGE";
+   "$$LITH_SAVED_MESSAGE";
 "LITH_INFO_REMOT_MIntroJem" =
    "<hidden>@corp.AOF";
 "LITH_INFO_SSIZE_MIntroJem" =
@@ -2421,9 +2421,9 @@
    "\cd>>>>>[[[[auto-saving buffer]]]]\n"
    "\cd>>>>>[[[[reloading mail daemon]]]]";
 "LITH_INFO_TITLE_MCluster1Jem" =
-   "$LITH_SAVED_BUFFER";
+   "$$LITH_SAVED_BUFFER";
 "LITH_INFO_REMOT_MCluster1Jem" =
-   "$LITH_MAIL_INTERNAL";
+   "$$LITH_MAIL_INTERNAL";
 "LITH_INFO_SSIZE_MCluster1Jem" =
    "30";
 "LITH_INFO_DESCR_MCluster1Jem" =
@@ -2444,9 +2444,9 @@
    "\n"
    "Next goal while this continues decompiling is to find all active AOF hostnames and block them, the main servers are already deactivated but there might be more. Rerouting to other active companies' addresses has helped clear my mind.";
 "LITH_INFO_TITLE_MCluster2Jem" =
-   "$LITH_SAVED_BUFFER";
+   "$$LITH_SAVED_BUFFER";
 "LITH_INFO_REMOT_MCluster2Jem" =
-   "$LITH_MAIL_INTERNAL";
+   "$$LITH_MAIL_INTERNAL";
 "LITH_INFO_SSIZE_MCluster2Jem" =
    "36";
 "LITH_INFO_DESCR_MCluster2Jem" =
@@ -2466,9 +2466,9 @@
    "\n"
    "Proc. analysis has been done on all of the dumped code, revealing many unoptimized code paths, ASIC crap, and a few red herrings. Not careful enough for technology that could easily exist two years after this was developed.";
 "LITH_INFO_TITLE_MCluster3Jem" =
-   "$LITH_SAVED_BUFFER";
+   "$$LITH_SAVED_BUFFER";
 "LITH_INFO_REMOT_MCluster3Jem" =
-   "$LITH_MAIL_INTERNAL";
+   "$$LITH_MAIL_INTERNAL";
 "LITH_INFO_SSIZE_MCluster3Jem" =
    "28";
 "LITH_INFO_DESCR_MCluster3Jem" =
@@ -2482,7 +2482,7 @@
    "\n"
    "It doesn't matter. I will see this through.";
 "LITH_INFO_TITLE_MPhantomJem" =
-   "$LITH_MAIL_NOTITLE";
+   "$$LITH_MAIL_NOTITLE";
 "LITH_INFO_REMOT_MPhantomJem" =
    "order@corp.AOF";
 "LITH_INFO_DESCR_MPhantomJem" =
@@ -2498,9 +2498,9 @@
 "LITH_REMOTE_LAMBERT" =
    "ALambert@corp.OFMD";
 "LITH_INFO_TITLE_MIntroLane" =
-   "$LITH_SAVED_MESSAGE";
+   "$$LITH_SAVED_MESSAGE";
 "LITH_INFO_REMOT_MIntroLane" =
-   "$LITH_REMOTE_LAMBERT";
+   "$$LITH_REMOTE_LAMBERT";
 "LITH_INFO_SSIZE_MIntroLane" =
    "77";
 "LITH_INFO_DESCR_MIntroLane" =
@@ -2545,9 +2545,9 @@
    "\n"
    "Lambert out.  Good luck, Blazkowicz.";
 "LITH_INFO_TITLE_MCluster1Lane" =
-   "$LITH_MAIL_NOTITLE";
+   "$$LITH_MAIL_NOTITLE";
 "LITH_INFO_REMOT_MCluster1Lane" =
-   "$LITH_REMOTE_LAMBERT";
+   "$$LITH_REMOTE_LAMBERT";
 "LITH_INFO_DESCR_MCluster1Lane" =
    "An explosion of some sort just happened nearby, it seems that the demons are reconstructing the world around you. You would best be careful not to trigger any other, er, events.\n"
    "\n"
@@ -2557,9 +2557,9 @@
    "\n"
    "Lambert out.";
 "LITH_INFO_TITLE_MCluster2Lane" =
-   "$LITH_MAIL_NOTITLE";
+   "$$LITH_MAIL_NOTITLE";
 "LITH_INFO_REMOT_MCluster2Lane" =
-   "$LITH_REMOTE_LAMBERT";
+   "$$LITH_REMOTE_LAMBERT";
 "LITH_INFO_DESCR_MCluster2Lane" =
    "There has been a change of plans going down the whole chain of command.\n"
    "\n"
@@ -2569,9 +2569,9 @@
    "\n"
    "Lambert out.";
 "LITH_INFO_TITLE_MCluster3Lane" =
-   "$LITH_SAVED_BUFFER";
+   "$$LITH_SAVED_BUFFER";
 "LITH_INFO_REMOT_MCluster3Lane" =
-   "$LITH_MAIL_INTERNAL";
+   "$$LITH_MAIL_INTERNAL";
 "LITH_INFO_DESCR_MCluster3Lane" =
    "Now that you have entered the city, you m\\\\r-3434[[\n"
    "\cgSYSTEM ERROR 0x4E4943456A6F6244554D42415353\n"
@@ -2580,7 +2580,7 @@
    "\cd>>>>>[[[[error handler malfunction error]]]]\n"
    "\cd>>>>>[[[[failure to proceed]]]]";
 "LITH_INFO_TITLE_MPhantomLane" =
-   "$LITH_MAIL_NOTITLE";
+   "$$LITH_MAIL_NOTITLE";
 "LITH_INFO_REMOT_MPhantomLane" =
    "htic0@gov.<hidden>.mailserv";
 "LITH_INFO_SSIZE_MPhantomLane" =
@@ -2657,7 +2657,7 @@
 "LITH_INFO_SHORT_AetosVi" =
    "Aetos Vi";
 "LITH_INFO_TITLE_AetosVi" =
-   "$LITH_INFO_SHORT_AetosVi";
+   "$$LITH_INFO_SHORT_AetosVi";
 "LITH_INFO_DESCR_AetosVi" =
    "A planetary system 17 lightyears away from Earth that houses several planets with sentient life on them. Found approximately 700 years ago now, this is the second system reached by humans, and the first with sentient life.\n"
    "\n"
@@ -2667,7 +2667,7 @@
 "LITH_INFO_SHORT_Algidistari" =
    "Algidistari";
 "LITH_INFO_TITLE_Algidistari" =
-   "$LITH_INFO_SHORT_Algidistari";
+   "$$LITH_INFO_SHORT_Algidistari";
 "LITH_INFO_DESCR_Algidistari" =
    "Algidistari is a planetary system 45 lightyears in distance from Earth. While it has many planets in its main sequence, and many rocks, it is for the most part not suitable for human life due to its cold atmosphere caused by a small central star.\n"
    "\n"
@@ -2675,7 +2675,7 @@
 "LITH_INFO_SHORT_ChAri" =
    "Ch'ari";
 "LITH_INFO_TITLE_ChAri" =
-   "$LITH_INFO_SHORT_ChAri";
+   "$$LITH_INFO_SHORT_ChAri";
 "LITH_INFO_DESCR_ChAri" =
    "A planet in the Aetos-Vi planetary system composed of four land masses and a large amount of water, populated by a highly intelligent light-manipulating race known as the Kiri.\n"
    "\n"
@@ -2687,7 +2687,7 @@
 "LITH_INFO_SHORT_DurlaPrime" =
    "Durla Prime";
 "LITH_INFO_TITLE_DurlaPrime" =
-   "$LITH_INFO_SHORT_DurlaPrime";
+   "$$LITH_INFO_SHORT_DurlaPrime";
 "LITH_INFO_DESCR_DurlaPrime" =
    "A planet in the Aetos-Vi planetary system whose dominant species is a humanoid avian creature, the \"Peristera\" or, colloquially, \"Perist\".\n"
    "\n"
@@ -2697,7 +2697,7 @@
 "LITH_INFO_SHORT_Earth" =
    "Earth";
 "LITH_INFO_TITLE_Earth" =
-   "$LITH_INFO_SHORT_Earth";
+   "$$LITH_INFO_SHORT_Earth";
 "LITH_INFO_DESCR_Earth" =
    "The year is 1649 New Era. After an event that almost led to an apocalypse in 3031 CE, humanity collectively decided to mark a new era dedicated to progressing travel and communications across the galaxy.\n"
    "\n"
@@ -2707,7 +2707,7 @@
 "LITH_INFO_SHORT_Hell" =
    "Hell";
 "LITH_INFO_TITLE_Hell" =
-   "$LITH_INFO_SHORT_Hell";
+   "$$LITH_INFO_SHORT_Hell";
 "LITH_INFO_DESCR_Hell" =
    "Whether the Hell found ripping into our dimension is actually from any known religion is not known. What is known, however, is that its inhabitants seek to destroy and enslave everything they can get their hands on.\n"
    "\n"
@@ -2715,7 +2715,7 @@
 "LITH_INFO_SHORT_Mars" =
    "Mars";
 "LITH_INFO_TITLE_Mars" =
-   "$LITH_INFO_SHORT_Mars";
+   "$$LITH_INFO_SHORT_Mars";
 "LITH_INFO_DESCR_Mars" =
    "In 2714 CE, a huge interplanetary workload boom began, spawning numerous factories and artificial workplaces on Mars manned by robots.\n"
    "\n"
@@ -2725,7 +2725,7 @@
 "LITH_INFO_SHORT_OmicronXevv" =
    "Omicron Xevv";
 "LITH_INFO_TITLE_OmicronXevv" =
-   "$LITH_INFO_SHORT_OmicronXevv";
+   "$$LITH_INFO_SHORT_OmicronXevv";
 "LITH_INFO_DESCR_OmicronXevv" =
    "A binary star system near Sirius about 8 lightyears away from Earth. The asteroid belt surrounding the star system has many large, well-lit and fairly temperate asteroids suitable for humans to live on.\n"
    "\n"
@@ -2733,7 +2733,7 @@
 "LITH_INFO_SHORT_SuperDimension" =
    "Super Dimension";
 "LITH_INFO_TITLE_SuperDimension" =
-   "$LITH_INFO_SHORT_SuperDimension";
+   "$$LITH_INFO_SHORT_SuperDimension";
 "LITH_INFO_DESCR_SuperDimension" =
    "The first hyperdimension found through observation of cuts in the universe, which themselves were similarly observed to be created by beings there.\n"
    "\n"
@@ -2741,7 +2741,7 @@
 "LITH_INFO_SHORT_Heaven" =
    "The God Cage";
 "LITH_INFO_TITLE_Heaven" =
-   "$LITH_INFO_SHORT_Heaven";
+   "$$LITH_INFO_SHORT_Heaven";
 "LITH_INFO_DESCR_Heaven" =
    "A strange dimension. The beings of the God Cage are the most powerful beings in all of existence, capable of destroying reality itself if they thought it best.\n"
    "\n"
@@ -2751,7 +2751,7 @@
 "LITH_INFO_SHORT_ReverseAce" =
    "Reverse Ace";
 "LITH_INFO_TITLE_ReverseAce" =
-   "$LITH_INFO_SHORT_ReverseAce";
+   "$$LITH_INFO_SHORT_ReverseAce";
 "LITH_INFO_DESCR_ReverseAce" =
    "Most things about this hyperdimension are unknown as of yet. When the God Thoth descended to the mortal realm in 1344 NE, the body she chose told stories of living in this dimension before becoming an immortal holy vessel.\n"
    "\n"
@@ -2761,7 +2761,7 @@
 "LITH_INFO_SHORT_Tsukama" =
    "Tsukama";
 "LITH_INFO_TITLE_Tsukama" =
-   "$LITH_INFO_SHORT_Tsukama";
+   "$$LITH_INFO_SHORT_Tsukama";
 "LITH_INFO_DESCR_Tsukama" =
    "A system about 45 lightyears from Earth, not far from Algidistari. The system is composed of 14 planets and one star, which emits slightly more heat than the Sun, making the planets here extremely temperate during solar cycles.\n"
    "\n"
@@ -2937,7 +2937,7 @@
    "* A regenerating <shield> that will protect you from taking damage.\n"
    "* A device needed to buy certain upgrades.";
 "LITH_INFO_SHORT_HeadsUpDisp" =
-   "$LITH_UPGRADE_TITLE_HeadsUpDisp";
+   "$$LITH_UPGRADE_TITLE_HeadsUpDisp";
 "LITH_INFO_TITLE_HeadsUpDisp" =
    "Heads Up Display";
 "LITH_INFO_DESCR_HeadsUpDisp" =
@@ -2945,7 +2945,7 @@
    "\n"
    "Originally designed by a former video game designer, a great amount of effort had to be put into fine-tuning this program to tell you exactly when you're about to die, your armor is about to break and get you killed, or you're about to run out of ammunition, and then die.";
 "LITH_INFO_SHORT_JetBooster" =
-   "$LITH_UPGRADE_TITLE_JetBooster";
+   "$$LITH_UPGRADE_TITLE_JetBooster";
 "LITH_INFO_TITLE_JetBooster" =
    "Pe'i tha E. Jet Boots";
 "LITH_INFO_DESCR_JetBooster" =
@@ -2955,7 +2955,7 @@
    "\n"
    "Press \"jump\" after a double-jump to activate.";
 "LITH_INFO_SHORT_ReflexWetw" =
-   "$LITH_UPGRADE_TITLE_ReflexWetw";
+   "$$LITH_UPGRADE_TITLE_ReflexWetw";
 "LITH_INFO_TITLE_ReflexWetw" =
    "Klaje Mosegon Reflex Enhancing Wetware";
 "LITH_INFO_DESCR_ReflexWetw" =
@@ -2967,7 +2967,7 @@
    "\n"
    "You can also now slide in any direction with ease by pressing \"run\".";
 "LITH_INFO_SHORT_ReflexWetwJem" =
-   "$LITH_UPGRADE_TITLE_ReflexWetw";
+   "$$LITH_UPGRADE_TITLE_ReflexWetw";
 "LITH_INFO_TITLE_ReflexWetwJem" =
    "Reflex Enhancing Wetware";
 "LITH_INFO_DESCR_ReflexWetwJem" =
@@ -2979,7 +2979,7 @@
    "\n"
    "You can also slide in any direction with ease by pressing \"run\", even while mid-air.";
 "LITH_INFO_SHORT_CyberLegs" =
-   "$LITH_UPGRADE_TITLE_CyberLegs";
+   "$$LITH_UPGRADE_TITLE_CyberLegs";
 "LITH_INFO_TITLE_CyberLegs" =
    "Prexje Mosegon Speed Enhancing Wetware";
 "LITH_INFO_DESCR_CyberLegs" =
@@ -2989,7 +2989,7 @@
    "\n"
    "Couldn't be deployed initially to you due to complications in shipping to a combat zone.";
 "LITH_INFO_SHORT_Yh0" =
-   "$LITH_UPGRADE_TITLE_ReactArmor";
+   "$$LITH_UPGRADE_TITLE_ReactArmor";
 "LITH_INFO_TITLE_Yh0" =
    "Yh-0 Reactive Plating System";
 "LITH_INFO_DESCR_Yh0" =
@@ -2999,7 +2999,7 @@
    "\n"
    "Works over your currently equipped armor, so damage from even rockets may be lowered into what feels like a small tickle.";
 "LITH_INFO_SHORT_DefenseNuke" =
-   "$LITH_UPGRADE_TITLE_DefenseNuke";
+   "$$LITH_UPGRADE_TITLE_DefenseNuke";
 "LITH_INFO_TITLE_DefenseNuke" =
    "Defensive Atomic Bomb";
 "LITH_INFO_DESCR_DefenseNuke" =
@@ -3007,7 +3007,7 @@
    "\n"
    "Unfortunately, due to this weapon being extravagantly loud, anything in the area will also be alerted to your presence. Be careful with this thing!";
 "LITH_INFO_SHORT_Adrenaline" =
-   "$LITH_UPGRADE_TITLE_Adrenaline";
+   "$$LITH_UPGRADE_TITLE_Adrenaline";
 "LITH_INFO_TITLE_Adrenaline" =
    "Senxans Automatic Adrenaline Injector";
 "LITH_INFO_DESCR_Adrenaline" =
@@ -3017,7 +3017,7 @@
    "\n"
    "Using this without losing your mind or otherwise passing out requires intense training given only to military forces.";
 "LITH_INFO_SHORT_VitalScanner" =
-   "$LITH_UPGRADE_TITLE_VitalScan";
+   "$$LITH_UPGRADE_TITLE_VitalScan";
 "LITH_INFO_TITLE_VitalScanner" =
    "Mit'keru Vital Scanner";
 "LITH_INFO_DESCR_VitalScanner" =
@@ -3025,7 +3025,7 @@
    "\n"
    "Unfortunately, the range of this emitter is not as great as it could be, and is for the most part only usable in close-quarters.";
 "LITH_INFO_SHORT_SoulCleaver" =
-   "$LITH_UPGRADE_TITLE_SoulCleaver";
+   "$$LITH_UPGRADE_TITLE_SoulCleaver";
 "LITH_INFO_TITLE_SoulCleaver" =
    "\cdSi Ritagliassero\c-, \chCaeruleorum\c- 44";
 "LITH_INFO_DESCR_SoulCleaver" =
@@ -3033,21 +3033,21 @@
    "\n"
    "The exact origin of this method is debated, and it is not in common use due to its strange circumstances and the general requirement of strong, plentiful opponents to be useful in combat.";
 "LITH_INFO_SHORT_StealthSys" =
-   "$LITH_UPGRADE_TITLE_StealthSys";
+   "$$LITH_UPGRADE_TITLE_StealthSys";
 "LITH_INFO_TITLE_StealthSys" =
    "Unnamed Stealth System";
 "LITH_INFO_DESCR_StealthSys" =
    "An active light reflection system, using advanced camouflage developed years ago in \cm[redacted]\c- by the inhabitants of the planet. While the original version required a link with \cm[redacted]\c- in order to function (as the natives could easily do so,) this version, which was developed by Deceiver Solomon, requires only an energy source.";
 "LITH_INFO_SHORT_HeadsUpDispJem" =
-   "$LITH_UPGRADE_TITLE_HeadsUpDisp";
+   "$$LITH_UPGRADE_TITLE_HeadsUpDisp";
 "LITH_INFO_TITLE_HeadsUpDispJem" =
-   "$LITH_INFO_TITLE_HeadsUpDisp";
+   "$$LITH_INFO_TITLE_HeadsUpDisp";
 "LITH_INFO_DESCR_HeadsUpDispJem" =
    "This program is the 37th version of the standard issue heads-up display for AOF employees. The binary remains uncredited, and the decompiled code has no authors listed in any of the files, though is well-commented.";
 "LITH_INFO_SHORT_Magic" =
-   "$LITH_UPGRADE_TITLE_Magic";
+   "$$LITH_UPGRADE_TITLE_Magic";
 "LITH_INFO_TITLE_Magic" =
-   "$LITH_INFO_SHORT_Magic";
+   "$$LITH_INFO_SHORT_Magic";
 "LITH_INFO_DESCR_Magic" =
    "A small device reminiscent of a landmine which attaches to a chestplate, pauldron or shoulder pad, which uses an unknown \ckFlavum\c- mode spell that captures energy from the dead and dying.\n"
    "\n"
@@ -3097,7 +3097,7 @@
    "\n"
    "Due to the original design being lost in time, this revolver sports several accuracy deficiencies, but nonetheless has the classic look and feel of the original gun. Produced by A.O.F Inc. for knight-class units.";
 "LITH_INFO_SHORT_Mateba_A" =
-   "$LITH_UPGRADE_TITLE_Mateba_A";
+   "$$LITH_UPGRADE_TITLE_Mateba_A";
 "LITH_INFO_TITLE_Mateba_A" =
    "\cdFinirentur\c-, \cgRussorum\c- 19";
 "LITH_INFO_DESCR_Mateba_A" =
@@ -3115,21 +3115,21 @@
    "\n"
    "While the weapon only has a 7-round magazine, it fires extremely deadly 7.62x54mmR cartridges with almost pinpoint accuracy, thanks to being extremely well-manufactured, likely under the care of a very skilled Kiri craftsman.";
 "LITH_INFO_SHORT_ShockRif_A" =
-   "$LITH_UPGRADE_TITLE_ShockRif_A";
+   "$$LITH_UPGRADE_TITLE_ShockRif_A";
 "LITH_INFO_TITLE_ShockRif_A" =
-   "$LITH_INFO_SHORT_ShockRif_A";
+   "$$LITH_INFO_SHORT_ShockRif_A";
 "LITH_INFO_DESCR_ShockRif_A" =
    "A simple modification to the barrel that wraps an explosive sigil around the bullet as it leaves the gun, causing it to explode into electricity upon impact.";
 "LITH_INFO_SHORT_ShockRif_B" =
-   "$LITH_UPGRADE_TITLE_ShockRif_B";
+   "$$LITH_UPGRADE_TITLE_ShockRif_B";
 "LITH_INFO_TITLE_ShockRif_B" =
-   "$LITH_INFO_SHORT_ShockRif_B";
+   "$$LITH_INFO_SHORT_ShockRif_B";
 "LITH_INFO_DESCR_ShockRif_B" =
    "A modification for your Shock Rifle, crafted as an experiment: a bit of extremely heated liquid crystal is extruded onto the bullet upon receiving, and then super-charged.\n"
    "\n"
    "The liquid crystal is heated with a Heat sigil, however due to unknown reasons when the projectiles get stuck in groups with this compound, the combined energy still remaining in them explodes violently.";
 "LITH_INFO_SHORT_SPAS" =
-   "$LITH_INFO_SHORT_Shotgun";
+   "$$LITH_INFO_SHORT_Shotgun";
 "LITH_INFO_TITLE_SPAS" =
    "NV48 12-Gauge Shotgun";
 "LITH_INFO_DESCR_SPAS" =
@@ -3137,7 +3137,7 @@
    "\n"
    "It fires any standard high-potency 12-gauge shell, and loads 8 shots. The design is extremely simple, but it does not overheat or jam often, is cheap to produce, and is very, very powerful.";
 "LITH_INFO_SHORT_SPAS_A" =
-   "$LITH_UPGRADE_TITLE_SPAS_A";
+   "$$LITH_UPGRADE_TITLE_SPAS_A";
 "LITH_INFO_TITLE_SPAS_A" =
    "\cdInvalidassero\c-, \cgRussorum\c- 14";
 "LITH_INFO_DESCR_SPAS_A" =
@@ -3145,7 +3145,7 @@
    "\n"
    "This substance will, upon sudden velocity increase, vibrate rapidly and cause projectiles to both go off-target and do loads of damage, as well as explode on impact. The origin of this method is unknown.";
 "LITH_INFO_SHORT_SPAS_B" =
-   "$LITH_UPGRADE_TITLE_SPAS_B";
+   "$$LITH_UPGRADE_TITLE_SPAS_B";
 "LITH_INFO_TITLE_SPAS_B" =
    "NV48-1 Shell Auto-loader";
 "LITH_INFO_DESCR_SPAS_B" =
@@ -3163,7 +3163,7 @@
    "\n"
    "The weapon fires modified high velocity, armor piercing, vacuum enabled 5.7x28mm bullets, manufactured by various nameless companies, and loads bullpup. It has since been re-branded by SYM4.3, who now produce it for Omakeda with royalties.";
 "LITH_INFO_SHORT_SMG_A" =
-   "$LITH_UPGRADE_TITLE_SMG_A";
+   "$$LITH_UPGRADE_TITLE_SMG_A";
 "LITH_INFO_TITLE_SMG_A" =
    "Arms Annex F474";
 "LITH_INFO_DESCR_SMG_A" =
@@ -3171,7 +3171,7 @@
    "\n"
    "This magic buffer is unfortunately unstable, as it has to be recreated every load, and so care must be taken while reloading the gun to not move too suddenly and cause the buffer to rip. If this did occur, the weapon would displode, and bullets would fly out constantly.";
 "LITH_INFO_SHORT_SMG_B" =
-   "$LITH_UPGRADE_TITLE_SMG_B";
+   "$$LITH_UPGRADE_TITLE_SMG_B";
 "LITH_INFO_TITLE_SMG_B" =
    "Arms Annex 138D5";
 "LITH_INFO_DESCR_SMG_B" =
@@ -3179,7 +3179,7 @@
    "\n"
    "This magic extruder gives all bullets leaving the barrel automatic target homing capabilities. The bullets may not only lean toward enemies you aim at, but also enemies nearby given a good enough range.";
 "LITH_INFO_SHORT_SMG_C" =
-   "$LITH_UPGRADE_TITLE_SMG_C";
+   "$$LITH_UPGRADE_TITLE_SMG_C";
 "LITH_INFO_TITLE_SMG_C" =
    "SYM4.3 D.24 MODEL M SAFE TRIGGER";
 "LITH_INFO_DESCR_SMG_C" =
@@ -3199,7 +3199,7 @@
    "\n"
    "This is in part required due to the immense heat that would be caused by opening the weapon prematurely after firing, and the complexity that would be needed to have a fully automatic round cycling system.";
 "LITH_INFO_SHORT_IonRifle_A" =
-   "$LITH_UPGRADE_TITLE_IonRifle_A";
+   "$$LITH_UPGRADE_TITLE_IonRifle_A";
 "LITH_INFO_TITLE_IonRifle_A" =
    "KDA-[Radiator] M11 Radioactive Ionizer";
 "LITH_INFO_DESCR_IonRifle_A" =
@@ -3209,7 +3209,7 @@
    "\n"
    "Don't you just want to buy 5 of 'em?";
 "LITH_INFO_SHORT_IonRifle_B" =
-   "$LITH_UPGRADE_TITLE_IonRifle_B";
+   "$$LITH_UPGRADE_TITLE_IonRifle_B";
 "LITH_INFO_TITLE_IonRifle_B" =
    "KDA-[Overloader] M11 Overload Charger";
 "LITH_INFO_DESCR_IonRifle_B" =
@@ -3217,13 +3217,13 @@
    "\n"
    "Due to the immense amount of heat in the chamber, the weapon must be cooled off by air exposure for a few moments after firing.";
 "LITH_INFO_SHORT_CPlasmaRifle" =
-   "$LITH_INFO_SHORT_PlasmaRifle";
+   "$$LITH_INFO_SHORT_PlasmaRifle";
 "LITH_INFO_TITLE_CPlasmaRifle" =
-   "$LITH_INFO_TITLE_PlasmaRifle";
+   "$$LITH_INFO_TITLE_PlasmaRifle";
 "LITH_INFO_DESCR_CPlasmaRifle" =
-   "$LITH_INFO_DESCR_PlasmaRifle";
+   "$$LITH_INFO_DESCR_PlasmaRifle";
 "LITH_INFO_SHORT_CPlasma_A" =
-   "$LITH_UPGRADE_TITLE_CPlasma_A";
+   "$$LITH_UPGRADE_TITLE_CPlasma_A";
 "LITH_INFO_TITLE_CPlasma_A" =
    "MD 47.65.69.73.74 Pulse Charger";
 "LITH_INFO_DESCR_CPlasma_A" =
@@ -3247,7 +3247,7 @@
    "\n"
    "This bolt appears to think on its own, though this is possibly just local distortion caused by the high amount of condensed demonic energy.";
 "LITH_INFO_SHORT_ShipGun_B" =
-   "$LITH_UPGRADE_TITLE_ShipGun_B";
+   "$$LITH_UPGRADE_TITLE_ShipGun_B";
 "LITH_INFO_TITLE_ShipGun_B" =
    "The Galliant Surge of Destiny";
 "LITH_INFO_DESCR_ShipGun_B" =
@@ -3345,7 +3345,7 @@
 "LITH_INFO_SHORT_Revolver" =
    "Revolver";
 "LITH_INFO_TITLE_Revolver" =
-   "$LITH_INFO_SHORT_Revolver";
+   "$$LITH_INFO_SHORT_Revolver";
 "LITH_INFO_DESCR_Revolver" =
    "Other than this weapon being made on Earth, all you need to know about it is that it fires six Teflon-plated .50 Action Express rounds and loads with a break on the top. Crack some skulls with it.";
 "LITH_INFO_SHORT_Shotgun" =
@@ -3359,7 +3359,7 @@
    "\n"
    "Most military models come with a CB-Scope.";
 "LITH_INFO_SHORT_Shotgun_A" =
-   "$LITH_UPGRADE_TITLE_Shotgun_A";
+   "$$LITH_UPGRADE_TITLE_Shotgun_A";
 "LITH_INFO_TITLE_Shotgun_A" =
    "Hiku Mk.2 Shotgun Gauss Mod";
 "LITH_INFO_DESCR_Shotgun_A" =
@@ -3367,7 +3367,7 @@
    "\n"
    "This both removes the need to chamber rounds and gives a nice boost in fire rate. The gun is, essentially, completely different in use.";
 "LITH_INFO_SHORT_Shotgun_B" =
-   "$LITH_UPGRADE_TITLE_Shotgun_B";
+   "$$LITH_UPGRADE_TITLE_Shotgun_B";
 "LITH_INFO_TITLE_Shotgun_B" =
    "Hiku Mk.2 Shotgun Poison Mod";
 "LITH_INFO_DESCR_Shotgun_B" =
@@ -3387,7 +3387,7 @@
 "LITH_INFO_SHORT_SuperShotgun" =
    "Super Shotgun";
 "LITH_INFO_TITLE_SuperShotgun" =
-   "$LITH_INFO_SHORT_SuperShotgun";
+   "$$LITH_INFO_SHORT_SuperShotgun";
 "LITH_INFO_DESCR_SuperShotgun" =
    "Puts out 2x2 4ga shells made to hunt the gigantic beasts of the planet Ch'ari.\n"
    "\n"
@@ -3407,7 +3407,7 @@
    "\n"
    "Comes with an inbuilt undermount-like grenade launcher. Holds only one grenade at a time, but packs a great punch.";
 "LITH_INFO_SHORT_Rifle_A" =
-   "$LITH_UPGRADE_TITLE_Rifle_A";
+   "$$LITH_UPGRADE_TITLE_Rifle_A";
 "LITH_INFO_TITLE_Rifle_A" =
    "AllPoint 75-c Modal Trigger";
 "LITH_INFO_DESCR_Rifle_A" =
@@ -3415,7 +3415,7 @@
    "\n"
    "The 75-c Modal Trigger enables a third firing mode in which four two-round bursts are fired sequentially. Using this mode also enables a partial CB-Scope, which unfortunately does little more than obstruct your view.";
 "LITH_INFO_SHORT_Rifle_B" =
-   "$LITH_UPGRADE_TITLE_Rifle_B";
+   "$$LITH_UPGRADE_TITLE_Rifle_B";
 "LITH_INFO_TITLE_Rifle_B" =
    "SF-209 Laser Rifle";
 "LITH_INFO_DESCR_Rifle_B" =
@@ -3439,7 +3439,7 @@
    "\n"
    "This seems to use nanomachines or some similar technology to propel rockets after they've been ignited and left the barrel; thus causing a small lag before the rocket takes off fully.";
 "LITH_INFO_SHORT_RPG_A" =
-   "$LITH_UPGRADE_TITLE_RPG_A";
+   "$$LITH_UPGRADE_TITLE_RPG_A";
 "LITH_INFO_TITLE_RPG_A" =
    "UE-1 \"Eight-Ball\" Revolving Launcher";
 "LITH_INFO_DESCR_RPG_A" =
@@ -3447,7 +3447,7 @@
    "\n"
    "The secondary trigger can be held to select the mode of fire -- the default mode shoots all eight in a horizontal line forward. The second mode shoots the rockets in a spiral pattern for maximum damage on one area, and the third and final mode hurls all of the grenades out of their rocket casings.";
 "LITH_INFO_SHORT_RPG_B" =
-   "$LITH_UPGRADE_TITLE_RPG_B";
+   "$$LITH_UPGRADE_TITLE_RPG_B";
 "LITH_INFO_TITLE_RPG_B" =
    "SYM4.3 D.788 HOMING ROCKET SYSTEM";
 "LITH_INFO_DESCR_RPG_B" =
@@ -3465,7 +3465,7 @@
    "\n"
    "The primary fire mode emits 7.52tW per bolt at approximately 2,800 bolts per minute, and the secondary emits 1,260 30.96tW penetrating bolts per minute. This thing will make Swiss cheese out of anything in its path.";
 "LITH_INFO_SHORT_Plasma_A" =
-   "$LITH_UPGRADE_TITLE_Plasma_A";
+   "$$LITH_UPGRADE_TITLE_Plasma_A";
 "LITH_INFO_TITLE_Plasma_A" =
    "AllPoint 68-o Plasmatic Laser";
 "LITH_INFO_DESCR_Plasma_A" =
@@ -3475,7 +3475,7 @@
    "\n"
    "The upgrade was, unfortunately, woefully expensive. It has been sold only to private investors for quite some time now, but thankfully, your employer is one of them.";
 "LITH_INFO_SHORT_Plasma_B" =
-   "$LITH_UPGRADE_TITLE_Plasma_B";
+   "$$LITH_UPGRADE_TITLE_Plasma_B";
 "LITH_INFO_TITLE_Plasma_B" =
    "SF-2012 Ion Acceleration Cannon";
 "LITH_INFO_DESCR_Plasma_B" =
@@ -3485,7 +3485,7 @@
 "LITH_INFO_SHORT_BFG9000" =
    "Omega Cannon";
 "LITH_INFO_TITLE_BFG9000" =
-   "$LITH_INFO_SHORT_BFG9000";
+   "$$LITH_INFO_SHORT_BFG9000";
 "LITH_INFO_DESCR_BFG9000" =
    "This weapon was developed in another dimensional plane, where magic is still usable. Employs an extremely complex magical pattern buffer that takes in condensed demonic energy and spits out whatever it pleases.\n"
    "\n"
@@ -3493,7 +3493,7 @@
    "\n"
    "This weapon was acquired by your employers via the black market group \"Cid\" for a hefty price. Take care of it.";
 "LITH_INFO_SHORT_Cannon_A" =
-   "$LITH_UPGRADE_TITLE_Cannon_A";
+   "$$LITH_UPGRADE_TITLE_Cannon_A";
 "LITH_INFO_TITLE_Cannon_A" =
    "Omega Cannon: Punctuator Buffer";
 "LITH_INFO_DESCR_Cannon_A" =
@@ -3505,7 +3505,7 @@
    "\n"
    "Also, the CB-Scope works again, somehow.";
 "LITH_INFO_SHORT_Cannon_B" =
-   "$LITH_UPGRADE_TITLE_Cannon_B";
+   "$$LITH_UPGRADE_TITLE_Cannon_B";
 "LITH_INFO_TITLE_Cannon_B" =
    "Omega Cannon: Railgun";
 "LITH_INFO_DESCR_Cannon_B" =
@@ -3515,7 +3515,7 @@
 "LITH_INFO_SHORT_P114" =
    "Project 114";
 "LITH_INFO_TITLE_P114" =
-   "$LITH_INFO_SHORT_P114";
+   "$$LITH_INFO_SHORT_P114";
 "LITH_INFO_DESCR_P114" =
    "Project 114 is the current military operation you are enacting. Started by a pact between OFMD, KSKK and your country's military, Project 114 aims to destroy the dimension known as Hell, which is currently invading our own.\n"
    "\n"
@@ -3537,7 +3537,7 @@
 "LITH_INFO_SHORT_Info400" =
    "Information 400";
 "LITH_INFO_TITLE_Info400" =
-   "$LITH_INFO_SHORT_Info400";
+   "$$LITH_INFO_SHORT_Info400";
 "LITH_INFO_DESCR_Info400" =
    "\ciTHIS DOCUMENT IS CONFIDENTIAL, DELETE AFTER READING\n"
    "\n"
@@ -3560,7 +3560,7 @@
 "LITH_INFO_SHORT_Info402" =
    "Information 402";
 "LITH_INFO_TITLE_Info402" =
-   "$LITH_INFO_SHORT_Info402";
+   "$$LITH_INFO_SHORT_Info402";
 "LITH_INFO_DESCR_Info402" =
    "\cd>>>>>[[[[warning: translation service unavailable, sending verbatim]]]]\n"
    "\ciTHIS DOCUMENT IS CONFIDENTIAL, DELETE AFTER READING\n"
@@ -3605,17 +3605,17 @@
    "\n"
    "Computer/Brain Interfaces are not classified as prosthetics, only enhancements, as they do not replace any part of the body and only add onto it. The C/B I currently installed is a self-servicing military model.";
 "LITH_INFO_SHORT_CBIJem" =
-   "$LITH_INFO_SHORT_CBILane";
+   "$$LITH_INFO_SHORT_CBILane";
 "LITH_INFO_TITLE_CBIJem" =
-   "$LITH_INFO_TITLE_CBILane";
+   "$$LITH_INFO_TITLE_CBILane";
 "LITH_INFO_DESCR_CBIJem" =
    "One of the biggest advancements in technology over the past thousand years, a Computer/Brain Interface, or C/B I (sometimes \"CBI,\") is an interface between a human brain and a computer. Usually installed within the skull and the brain, as well as in other areas of the central nervous system, a C/B I is a machine with almost infinite uses.\n"
    "\n"
    "While Computer/Brain Interfaces are not usually classified as prosthetics, the one currently installed is due to extensive bodily restructuring done to the user.";
 "LITH_INFO_SHORT_CBIAri" =
-   "$LITH_INFO_SHORT_CBILane";
+   "$$LITH_INFO_SHORT_CBILane";
 "LITH_INFO_TITLE_CBIAri" =
-   "$LITH_INFO_TITLE_CBILane";
+   "$$LITH_INFO_TITLE_CBILane";
 "LITH_INFO_DESCR_CBIAri" =
    "One of the biggest advancements in technology over the past thousand years, a Computer/Brain Interface, or C/B I (sometimes \"CBI,\") is an interface between a human brain and a computer. Usually installed within the skull and the brain, as well as in other areas of the central nervous system, a C/B I is a machine with almost infinite uses.\n"
    "\n"
@@ -3645,17 +3645,17 @@
    "\n"
    "Leveling up in strength will increase your health capacity.";
 "LITH_INFO_SHORT_AttrSTRRobot" =
-   "$LITH_INFO_SHORT_AttrSTRHuman";
+   "$$LITH_INFO_SHORT_AttrSTRHuman";
 "LITH_INFO_TITLE_AttrSTRRobot" =
-   "$LITH_INFO_TITLE_AttrSTRHuman";
+   "$$LITH_INFO_TITLE_AttrSTRHuman";
 "LITH_INFO_DESCR_AttrSTRRobot" =
    "Strength is your toughness and vigor, the thickness of your casing and the plasma beating from your heart. One with plentiful strength not only has a long service time, but is also said to have a short maintenance time.\n"
    "\n"
    "Leveling up in strength will increase your health capacity.";
 "LITH_INFO_SHORT_AttrSTRNonHuman" =
-   "$LITH_INFO_SHORT_AttrSTRHuman";
+   "$$LITH_INFO_SHORT_AttrSTRHuman";
 "LITH_INFO_TITLE_AttrSTRNonHuman" =
-   "$LITH_INFO_TITLE_AttrSTRHuman";
+   "$$LITH_INFO_TITLE_AttrSTRHuman";
 "LITH_INFO_DESCR_AttrSTRNonHuman" =
    "Strength is your toughness and vigor, the thickness of your epidermis and the oils beating from your heart. One with plentiful strength not only has a long life, but is also said to have a long afterlife.\n"
    "\n"
@@ -3677,9 +3677,9 @@
    "\n"
    "Leveling up in potency will increase health pickup gains.";
 "LITH_INFO_SHORT_AttrPOTRobot" =
-   "$LITH_INFO_SHORT_AttrPOTNonHuman";
+   "$$LITH_INFO_SHORT_AttrPOTNonHuman";
 "LITH_INFO_TITLE_AttrPOTRobot" =
-   "$LITH_INFO_TITLE_AttrPOTNonHuman";
+   "$$LITH_INFO_TITLE_AttrPOTNonHuman";
 "LITH_INFO_DESCR_AttrPOTRobot" =
    "Potency is your ability to absorb medicine through your machinery, the strength of your vessels and nodes, and the ability to stay alive. Your internals are not only stronger, but can be repaired more quickly and are more likely to stay working.\n"
    "\n"
@@ -4351,15 +4351,15 @@
 "LITH_PK_d_minigun_005" =
    "Many Barreled Rifle";
 "LITH_LOG_HealthBonus" =
-   "$LITH_INFO_SHORT_HealthBonus";
+   "$$LITH_INFO_SHORT_HealthBonus";
 "LITH_LOG_Medikit" =
-   "$LITH_INFO_SHORT_Medikit";
+   "$$LITH_INFO_SHORT_Medikit";
 "LITH_LOG_MegaSphere" =
    "Mega Charge!";
 "LITH_LOG_SoulSphere" =
    "Super Charge!";
 "LITH_LOG_StimPack" =
-   "$LITH_INFO_SHORT_Stimpack";
+   "$$LITH_INFO_SHORT_Stimpack";
 "LITH_LOG_RedCard" =
    "\cgRed KeyDisk";
 "LITH_LOG_BlueCard" =
@@ -4375,17 +4375,17 @@
 "LITH_LOG_RadSuit" =
    "Radiation Shielding Suit";
 "LITH_LOG_InfraRed" =
-   "$LITH_INFO_SHORT_Infrared";
+   "$$LITH_INFO_SHORT_Infrared";
 "LITH_LOG_Invuln" =
    "\cjInvulnerability!";
 "LITH_LOG_BlurSphere" =
-   "$LITH_INFO_SHORT_Fragma";
+   "$$LITH_INFO_SHORT_Fragma";
 "LITH_LOG_Backpack" =
-   "$LITH_INFO_SHORT_Backpack";
+   "$$LITH_INFO_SHORT_Backpack";
 "LITH_LOG_Berserk" =
-   "$LITH_INFO_SHORT_Berserk";
+   "$$LITH_INFO_SHORT_Berserk";
 "LITH_LOG_AllMap" =
-   "$LITH_INFO_SHORT_AllMap";
+   "$$LITH_INFO_SHORT_AllMap";
 "LITH_LOG_DoggoSphere" =
    "\cgwan \ciwan \ckwan \cdwan \chwan \ctwan";
 "LITH_LOG_Dogs" =
@@ -4397,11 +4397,11 @@
 "LITH_LOG_ArtiTeleport" =
    "Chaos Device";
 "LITH_LOG_Clip" =
-   "$LITH_TAG_BulletAmmo";
+   "$$LITH_TAG_BulletAmmo";
 "LITH_LOG_ClipBox" =
    "Box of Bullets";
 "LITH_LOG_Shell" =
-   "$LITH_TAG_ShellAmmo";
+   "$$LITH_TAG_ShellAmmo";
 "LITH_LOG_ShellBox" =
    "Box of Shells";
 "LITH_LOG_Rocket" =
@@ -4415,7 +4415,7 @@
 "LITH_LOG_Coin" =
    "Coin";
 "LITH_LOG_ScoreChip" =
-   "$LITH_INFO_SHORT_ScoreChip";
+   "$$LITH_INFO_SHORT_ScoreChip";
 "LITH_LOG_Ruby" =
    "Flawed Ruby";
 "LITH_LOG_Sapphire" =
@@ -4437,41 +4437,41 @@
 "LITH_LOG_Tourmaline" =
    "Tourmaline";
 "LITH_LOG_CBI_MUpgr1" =
-   "$LITH_CBI_CPU2";
+   "$$LITH_CBI_CPU2";
 "LITH_LOG_CBI_MUpgr2" =
-   "$LITH_CBI_CPU3";
+   "$$LITH_CBI_CPU3";
 "LITH_LOG_CBI_MArmorInter" =
-   "$LITH_CBI_ArmorInter";
+   "$$LITH_CBI_ArmorInter";
 "LITH_LOG_CBI_MWeapnInter" =
-   "$LITH_CBI_WeapnInter";
+   "$$LITH_CBI_WeapnInter";
 "LITH_LOG_CBI_MWeapnInte2" =
-   "$LITH_CBI_WeapnInte2";
+   "$$LITH_CBI_WeapnInte2";
 "LITH_LOG_CBI_MRDistInter" =
-   "$LITH_CBI_RDistInter";
+   "$$LITH_CBI_RDistInter";
 "LITH_LOG_CBI_CSlot3Spell" =
-   "$LITH_CBI_Slot3Spell";
+   "$$LITH_CBI_Slot3Spell";
 "LITH_LOG_CBI_CSlot4Spell" =
-   "$LITH_CBI_Slot4Spell";
+   "$$LITH_CBI_Slot4Spell";
 "LITH_LOG_CBI_CSlot5Spell" =
-   "$LITH_CBI_Slot5Spell";
+   "$$LITH_CBI_Slot5Spell";
 "LITH_LOG_CBI_CSlot6Spell" =
-   "$LITH_CBI_Slot6Spell";
+   "$$LITH_CBI_Slot6Spell";
 "LITH_LOG_CBI_CSlot7Spell" =
-   "$LITH_CBI_Slot7Spell";
+   "$$LITH_CBI_Slot7Spell";
 "LITH_LOG_CBI_CRDistInter" =
-   "$LITH_CBI_RDistInter";
+   "$$LITH_CBI_RDistInter";
 "LITH_LOG_CBI_DMotra" =
-   "$LITH_INFO_SHORT_Motra";
+   "$$LITH_INFO_SHORT_Motra";
 "LITH_LOG_CBI_DZaruk" =
-   "$LITH_INFO_SHORT_Zaruk";
+   "$$LITH_INFO_SHORT_Zaruk";
 "LITH_LOG_CBI_DZakwu" =
-   "$LITH_INFO_SHORT_Zakwu";
+   "$$LITH_INFO_SHORT_Zakwu";
 "LITH_LOG_CBI_DZikr" =
-   "$LITH_INFO_SHORT_Zikr";
+   "$$LITH_INFO_SHORT_Zikr";
 "LITH_LOG_CBI_DShield" =
-   "$LITH_INFO_SHORT_Shield";
+   "$$LITH_INFO_SHORT_Shield";
 "LITH_LOG_CBI_DDimDriver" =
-   "$LITH_INFO_SHORT_DimDriver";
+   "$$LITH_INFO_SHORT_DimDriver";
 "LITH_LOG_LevelUpLane" =
    "You feel stronger, somehow.";
 "LITH_LOG_LevelUpJem" =
@@ -4481,7 +4481,7 @@
 "LITH_LOG_LevelUpOmi" =
    "You're having fun with this.";
 "LITH_LOG_LevelUpAri" =
-   "$LITH_LOG_LevelUpOmi";
+   "$$LITH_LOG_LevelUpOmi";
 "LITH_LOG_LevelUpLuke" =
    "Your senses grow sharper.";
 "LITH_LOG_LevelUpKiri" =
@@ -4495,7 +4495,7 @@
 "LITH_LOG_BossWarnOmi" =
    "\cgDetected high amounts of demonic energy in area.";
 "LITH_LOG_BossWarnAri" =
-   "$LITH_LOG_BossWarnOmi";
+   "$$LITH_LOG_BossWarnOmi";
 "LITH_LOG_BossWarnLuke" =
    "\cmThe area's aura suppresses you...";
 "LITH_LOG_BossWarnKiri" =
@@ -4804,7 +4804,7 @@
 "LITH_INV_HINTS" =
    "You can right click to quickly move items. To equip armor place it on your \cdbody\c- or press \cnEquip\c-.";
 "LITH_CONTAINER_Backpack" =
-   "$LITH_INFO_SHORT_Backpack";
+   "$$LITH_INFO_SHORT_Backpack";
 "LITH_CONTAINER_ArmUpL" =
    "L Shoulder";
 "LITH_CONTAINER_ArmUpR" =
@@ -4905,7 +4905,7 @@
    "\ca2 DT to bullets.\n"
    "1 DT to other types.";
 "LITH_ITEM_SHORT_ArmImprovedLo" =
-   "$LITH_ITEM_SHORT_ArmStandardUp";
+   "$$LITH_ITEM_SHORT_ArmStandardUp";
 "LITH_ITEM_SHORT_ArmTeflonLo" =
    "\ca2 DT to electricity.\n"
    "1 DT to other types.";
@@ -5311,13 +5311,13 @@
 "LITH_hud_itemcolor" =
    "Near-by item text color";
 "LITH_light_b" =
-   "$LITH_BLUE_INTENSITY";
+   "$$LITH_BLUE_INTENSITY";
 "LITH_light_battery" =
    "Battery";
 "LITH_light_g" =
-   "$LITH_GREEN_INTENSITY";
+   "$$LITH_GREEN_INTENSITY";
 "LITH_light_r" =
-   "$LITH_RED_INTENSITY";
+   "$$LITH_RED_INTENSITY";
 "LITH_light_radius" =
    "Radius";
 "LITH_light_regen" =
@@ -5399,11 +5399,11 @@
 "LITH_st_autobuy_4" =
    "Auto-buy \cfSet 4";
 "LITH_TOOLTIP_autobuy_2" =
-   "$LITH_TOOLTIP_autobuy_1";
+   "$$LITH_TOOLTIP_autobuy_1";
 "LITH_TOOLTIP_autobuy_3" =
-   "$LITH_TOOLTIP_autobuy_1";
+   "$$LITH_TOOLTIP_autobuy_1";
 "LITH_TOOLTIP_autobuy_4" =
-   "$LITH_TOOLTIP_autobuy_1";
+   "$$LITH_TOOLTIP_autobuy_1";
 "LITH_st_done_intro" =
    "Don't play intro on next game start";
 "LITH_sv_autosave" =
@@ -5508,7 +5508,7 @@
 "LITH_xhair_a" =
    "Alpha";
 "LITH_xhair_b" =
-   "$LITH_BLUE_INTENSITY";
+   "$$LITH_BLUE_INTENSITY";
 "LITH_xhair_enable" =
    "Enable";
 "LITH_xhair_enablejuicer" =
@@ -5516,9 +5516,9 @@
 "LITH_TOOLTIP_xhair_enablejuicer" =
    "Seriously, why do they call them that? The little thingies around the crosshair that follow the recoil. They're... juicy. Guess that's why.";
 "LITH_xhair_g" =
-   "$LITH_GREEN_INTENSITY";
+   "$$LITH_GREEN_INTENSITY";
 "LITH_xhair_r" =
-   "$LITH_RED_INTENSITY";
+   "$$LITH_RED_INTENSITY";
 "LITH_xhair_scale" =
    "Scale";
 "LITH_xhair_style" =
@@ -5628,19 +5628,19 @@
 "LITH_st_name_color_123" =
    "Class' Color";
 "LITH_st_name_color_124" =
-   "$LITH_CLASS_DARKLORD";
+   "$$LITH_CLASS_DARKLORD";
 "LITH_st_name_color_125" =
-   "$LITH_CLASS_MARINE";
+   "$$LITH_CLASS_MARINE";
 "LITH_st_name_color_126" =
-   "$LITH_CLASS_THOTH";
+   "$$LITH_CLASS_THOTH";
 "LITH_st_name_color_127" =
-   "$LITH_CLASS_ASSASSIN";
+   "$$LITH_CLASS_ASSASSIN";
 "LITH_st_name_color_128" =
-   "$LITH_CLASS_INFORMANT";
+   "$$LITH_CLASS_INFORMANT";
 "LITH_st_name_color_129" =
-   "$LITH_CLASS_CYBERMAGE";
+   "$$LITH_CLASS_CYBERMAGE";
 "LITH_st_name_color_130" =
-   "$LITH_CLASS_WANDERER";
+   "$$LITH_CLASS_WANDERER";
 "LITH_st_name_color_131" =
    "Lane Red";
 "LITH_st_name_color_132" =
@@ -5670,19 +5670,19 @@
 "LITH_st_name_hudtype_0" =
    "Default for class";
 "LITH_st_name_hudtype_1" =
-   "$LITH_CLASS_MARINE";
+   "$$LITH_CLASS_MARINE";
 "LITH_st_name_hudtype_2" =
-   "$LITH_CLASS_CYBERMAGE";
+   "$$LITH_CLASS_CYBERMAGE";
 "LITH_st_name_hudtype_3" =
-   "$LITH_CLASS_INFORMANT";
+   "$$LITH_CLASS_INFORMANT";
 "LITH_st_name_hudtype_4" =
-   "$LITH_CLASS_WANDERER";
+   "$$LITH_CLASS_WANDERER";
 "LITH_st_name_hudtype_5" =
-   "$LITH_CLASS_ASSASSIN";
+   "$$LITH_CLASS_ASSASSIN";
 "LITH_st_name_hudtype_6" =
-   "$LITH_CLASS_DARKLORD";
+   "$$LITH_CLASS_DARKLORD";
 "LITH_st_name_hudtype_7" =
-   "$LITH_CLASS_THOTH";
+   "$$LITH_CLASS_THOTH";
 "LITH_st_name_hudtype_8" =
    "1.0";
 "LITH_st_name_cursor_0" =
@@ -5766,7 +5766,7 @@
 "LITH_st_name_itmdisp_0" =
    "None";
 "LITH_st_name_itmdisp_1" =
-   "$LITH_TAB_LOG";
+   "$$LITH_TAB_LOG";
 "LITH_st_name_itmdisp_2" =
    "Projected";
 "LITH_st_name_itmdisp_3" =
@@ -5794,9 +5794,9 @@
 "LITH_st_tab_gui" =
    "Interface";
 "LITH_st_tab_itm" =
-   "$LITH_BIP_NAME_ITEMS";
+   "$$LITH_BIP_NAME_ITEMS";
 "LITH_st_tab_wep" =
-   "$LITH_BIP_NAME_WEAPONS";
+   "$$LITH_BIP_NAME_WEAPONS";
 "LITH_st_tab_gam" =
    "Game";
 "LITH_st_labl_autogroups" =
@@ -6040,7 +6040,7 @@
 "LITH_TAB_ARSENAL_Omi" =
    "Gear";
 "LITH_TAB_ARSENAL_Ari" =
-   "$LITH_TAB_ARSENAL_Omi";
+   "$$LITH_TAB_ARSENAL_Omi";
 "LITH_TAB_ARSENAL_Luke" =
    "Presages";
 "LITH_TAB_ARSENAL_Kiri" =
@@ -6068,7 +6068,7 @@
 "LITH_TAB_NOTES" =
    "Notes";
 "LITH_TAB_UPGRADES" =
-   "$LITH_BIP_NAME_UPGRADES";
+   "$$LITH_BIP_NAME_UPGRADES";
 "LITH_TAB_SHOP" =
    "Shop";
 "LITH_STATUS_XP" =
@@ -6078,7 +6078,7 @@
 "LITH_STATUS_LV" =
    "Level";
 "LITH_STATUS_MP" =
-   "$LITH_TAG_ManaAmmo";
+   "$$LITH_TAG_ManaAmmo";
 "LITH_STATUS_NX" =
    "Next";
 "LITH_STATUS_CL" =
@@ -6178,7 +6178,7 @@
 "LITH_CBI_RDistInter" =
    "Reality Distortion Interface";
 "LITH_CBI_ReactArmor" =
-   "$LITH_UPGRADE_TITLE_ReactArmor";
+   "$$LITH_UPGRADE_TITLE_ReactArmor";
 "LITH_CBI_Slot1Spell" =
    "\ciBlade Spell Driver";
 "LITH_CBI_Slot2Spell" =
@@ -6300,13 +6300,13 @@
 "LITH_ATTR_HELP_VIT" =
    "Health item efficiency";
 "LITH_ATTR_HELP_POT" =
-   "$LITH_ATTR_HELP_VIT";
+   "$$LITH_ATTR_HELP_VIT";
 "LITH_ATTR_HELP_STM" =
    "Health regeneration maximum";
 "LITH_ATTR_HELP_REP" =
-   "$LITH_ATTR_HELP_STM";
+   "$$LITH_ATTR_HELP_STM";
 "LITH_ATTR_HELP_REG" =
-   "$LITH_ATTR_HELP_STM";
+   "$$LITH_ATTR_HELP_STM";
 "LITH_ATTR_HELP_LUK" =
    "Score gained";
 "LITH_ATTR_HELP_RGE" =
@@ -7640,7 +7640,7 @@
    "\n"
    "火魔法に耐える。上部 6 DT、下部 4 DT。";
 "LITH_INFO_SHORT_WeapnInter" =
-   "$LITH_CBI_WeapnInter";
+   "$$LITH_CBI_WeapnInter";
 "LITH_INFO_DESCR_WeapnInter" =
    "Weapon Interfacing Device Package(または単に武器接合機器)は中に幾つか部品が入った小型の銀ブリーフケース。あらゆる種類の兵器を極めて簡単に改造可能とする; 実際には兵器を20秒以内で完全に分解しアップグレードして組み立て直すことができるように作られている。\n"
    "\n"
@@ -7648,7 +7648,7 @@
    "\n"
    "このデバイスの成功は、価格とは「見積もりを依頼してください」ということにも変わらず。";
 "LITH_INFO_SHORT_WeapnInte2" =
-   "$LITH_CBI_WeapnInte2";
+   "$$LITH_CBI_WeapnInte2";
 "LITH_INFO_DESCR_WeapnInte2" =
    "Weapon Interface Device Packageと似たアイデアにもかかわらず、Weapon Refactoring Deviceは武器接合機器が作られる40年以上前に概念化及びプロトタイプ化された。\n"
    "\n"
@@ -8304,7 +8304,7 @@
 "LITH_INFO_SHORT_StarDestroyer" =
    "ｽﾀｰﾃﾞｽﾄﾛｲﾔｰ";
 "LITH_INFO_TITLE_StarDestroyer" =
-   "$LITH_INFO_SHORT_StarDestroyer";
+   "$$LITH_INFO_SHORT_StarDestroyer";
 "LITH_INFO_DESCR_StarDestroyer" =
    "恐らく地獄の第七魔術師のライフリサーチから作られたとされる凶悪な武器スターデストロイヤーは、可能性を絶やすことを唯一の目的として作られた。\n"
    "\n"
@@ -8630,7 +8630,7 @@
 "LITH_LOG_ShellBox" =
    "シェル箱";
 "LITH_LOG_Rocket" =
-   "$LITH_TAG_RocketAmmo";
+   "$$LITH_TAG_RocketAmmo";
 "LITH_LOG_RocketBox" =
    "ロケット箱";
 "LITH_LOG_Cell" =
@@ -8747,7 +8747,7 @@
 "LITH_CONTAINER_Legs" =
    "足";
 "LITH_CONTAINER_Item" =
-   "$LITH_BIP_NAME_ITEMS";
+   "$$LITH_BIP_NAME_ITEMS";
 "LITH_ITEM_TAG_ClawOfImp" =
    "インプの爪";
 "LITH_ITEM_TAG_DivisionSigil" =

@@ -19,7 +19,7 @@
 == \#CONTAINER_LegR     | 右腿
 == \#CONTAINER_Torso    | 胴体
 == \#CONTAINER_Legs     | 足
-== \#CONTAINER_Item     | $\#BIP_NAME_ITEMS
+== \#CONTAINER_Item     | $$\#BIP_NAME_ITEMS
 
 ## Tags ══════════════════════════════════════════════════════════════════════╕
 

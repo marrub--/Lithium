@@ -8,7 +8,7 @@
 
 ## Backstory (Marine) ════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_P114 | Project 114
-== \#INFO_TITLE_P114 | $\#INFO_SHORT_P114
+== \#INFO_TITLE_P114 | $$\#INFO_SHORT_P114
 @@ \#INFO_DESCR_P114
 Project 114 is the current military operation you are enacting. Started by a
 pact between OFMD, KSKK and your country's military, Project 114 aims to
@@ -40,7 +40,7 @@ we're in Hell itself.
 I'll need a Theophylline supplement after this is over.
 
 == \#INFO_SHORT_Info400 | Information 400
-== \#INFO_TITLE_Info400 | $\#INFO_SHORT_Info400
+== \#INFO_TITLE_Info400 | $$\#INFO_SHORT_Info400
 %% \#INFO_DESCR_Info400
 \ciTHIS DOCUMENT IS CONFIDENTIAL, DELETE AFTER READING
 
@@ -65,7 +65,7 @@ available there. Th[[[ // kerne __ -
 \cd>>>>>[[[[connection failed after 3 retries]]]]
 
 == \#INFO_SHORT_Info402 | Information 402
-== \#INFO_TITLE_Info402 | $\#INFO_SHORT_Info402
+== \#INFO_TITLE_Info402 | $$\#INFO_SHORT_Info402
 %% \#INFO_DESCR_Info402
 \cd>>>>>[[[[warning: translation service unavailable, sending verbatim]]]]
 \ciTHIS DOCUMENT IS CONFIDENTIAL, DELETE AFTER READING
@@ -145,8 +145,8 @@ Computer/Brain Interfaces are not classified as prosthetics, only enhancements,
 as they do not replace any part of the body and only add onto it. The C/B I
 currently installed is a self-servicing military model.
 
-== \#INFO_SHORT_CBIJem | $\#INFO_SHORT_CBILane
-== \#INFO_TITLE_CBIJem | $\#INFO_TITLE_CBILane
+== \#INFO_SHORT_CBIJem | $$\#INFO_SHORT_CBILane
+== \#INFO_TITLE_CBIJem | $$\#INFO_TITLE_CBILane
 @@ \#INFO_DESCR_CBIJem
 One of the biggest advancements in technology over the past thousand years, a
 Computer/Brain Interface, or C/B I (sometimes "CBI,") is an interface between
@@ -158,8 +158,8 @@ While Computer/Brain Interfaces are not usually classified as prosthetics, the
 one currently installed is due to extensive bodily restructuring done to the
 user.
 
-== \#INFO_SHORT_CBIAri | $\#INFO_SHORT_CBILane
-== \#INFO_TITLE_CBIAri | $\#INFO_TITLE_CBILane
+== \#INFO_SHORT_CBIAri | $$\#INFO_SHORT_CBILane
+== \#INFO_TITLE_CBIAri | $$\#INFO_TITLE_CBILane
 @@ \#INFO_DESCR_CBIAri
 One of the biggest advancements in technology over the past thousand years, a
 Computer/Brain Interface, or C/B I (sometimes "CBI,") is an interface between
@@ -200,8 +200,8 @@ but is also said to have a long afterlife.
 
 Leveling up in strength will increase your health capacity.
 
-== \#INFO_SHORT_AttrSTRRobot | $\#INFO_SHORT_AttrSTRHuman
-== \#INFO_TITLE_AttrSTRRobot | $\#INFO_TITLE_AttrSTRHuman
+== \#INFO_SHORT_AttrSTRRobot | $$\#INFO_SHORT_AttrSTRHuman
+== \#INFO_TITLE_AttrSTRRobot | $$\#INFO_TITLE_AttrSTRHuman
 @@ \#INFO_DESCR_AttrSTRRobot
 Strength is your toughness and vigor, the thickness of your casing and the
 plasma beating from your heart. One with plentiful strength not only has a long
@@ -209,8 +209,8 @@ service time, but is also said to have a short maintenance time.
 
 Leveling up in strength will increase your health capacity.
 
-== \#INFO_SHORT_AttrSTRNonHuman | $\#INFO_SHORT_AttrSTRHuman
-== \#INFO_TITLE_AttrSTRNonHuman | $\#INFO_TITLE_AttrSTRHuman
+== \#INFO_SHORT_AttrSTRNonHuman | $$\#INFO_SHORT_AttrSTRHuman
+== \#INFO_TITLE_AttrSTRNonHuman | $$\#INFO_TITLE_AttrSTRHuman
 @@ \#INFO_DESCR_AttrSTRNonHuman
 Strength is your toughness and vigor, the thickness of your epidermis and the
 oils beating from your heart. One with plentiful strength not only has a long
@@ -237,8 +237,8 @@ are more likely to stay working.
 
 Leveling up in potency will increase health pickup gains.
 
-== \#INFO_SHORT_AttrPOTRobot | $\#INFO_SHORT_AttrPOTNonHuman
-== \#INFO_TITLE_AttrPOTRobot | $\#INFO_TITLE_AttrPOTNonHuman
+== \#INFO_SHORT_AttrPOTRobot | $$\#INFO_SHORT_AttrPOTNonHuman
+== \#INFO_TITLE_AttrPOTRobot | $$\#INFO_TITLE_AttrPOTNonHuman
 @@ \#INFO_DESCR_AttrPOTRobot
 Potency is your ability to absorb medicine through your machinery, the
 strength of your vessels and nodes, and the ability to stay alive.

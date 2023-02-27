@@ -303,7 +303,7 @@ MiCoが特許を取得した安全で耐久性のある
 火魔法に耐える。上部 6 DT、下部 4 DT。
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_SHORT_WeapnInter | $\#CBI_WeapnInter
+== \#INFO_SHORT_WeapnInter | $$\#CBI_WeapnInter
 @@ \#INFO_DESCR_WeapnInter
 Weapon Interfacing Device Package
 (または単に武器接合機器)は中に幾つか
@@ -323,7 +323,7 @@ Weapon Interfacing Device Package
 このデバイスの成功は、価格とは「見積もりを依頼してください」ということにも変わらず。
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_SHORT_WeapnInte2 | $\#CBI_WeapnInte2
+== \#INFO_SHORT_WeapnInte2 | $$\#CBI_WeapnInte2
 @@ \#INFO_DESCR_WeapnInte2
 Weapon Interface Device Packageと
 似たアイデアにもかかわらず、

@@ -9,8 +9,8 @@
 == \#REMOTE_LAMBERT | ALambert@corp.OFMD
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_TITLE_MIntroLane | $\#SAVED_MESSAGE
-== \#INFO_REMOT_MIntroLane | $\#REMOTE_LAMBERT
+== \#INFO_TITLE_MIntroLane | $$\#SAVED_MESSAGE
+== \#INFO_REMOT_MIntroLane | $$\#REMOTE_LAMBERT
 == \#INFO_SSIZE_MIntroLane | 77
 %% \#INFO_DESCR_MIntroLane
 @@
@@ -66,8 +66,8 @@ sure that the arms we sent you were top-notch.
 Lambert out.  Good luck, Blazkowicz.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_TITLE_MCluster1Lane | $\#MAIL_NOTITLE
-== \#INFO_REMOT_MCluster1Lane | $\#REMOTE_LAMBERT
+== \#INFO_TITLE_MCluster1Lane | $$\#MAIL_NOTITLE
+== \#INFO_REMOT_MCluster1Lane | $$\#REMOTE_LAMBERT
 @@ \#INFO_DESCR_MCluster1Lane
 An explosion of some sort just happened nearby, it seems that the
 demons are reconstructing the world around you. You would best be
@@ -81,8 +81,8 @@ to be considering giving you a promotion, even.
 Lambert out.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_TITLE_MCluster2Lane | $\#MAIL_NOTITLE
-== \#INFO_REMOT_MCluster2Lane | $\#REMOTE_LAMBERT
+== \#INFO_TITLE_MCluster2Lane | $$\#MAIL_NOTITLE
+== \#INFO_REMOT_MCluster2Lane | $$\#REMOTE_LAMBERT
 @@ \#INFO_DESCR_MCluster2Lane
 There has been a change of plans going down the whole chain of
 command.
@@ -97,8 +97,8 @@ city somewhere in Hell. Command will await afterwards.
 Lambert out.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_TITLE_MCluster3Lane | $\#SAVED_BUFFER
-== \#INFO_REMOT_MCluster3Lane | $\#MAIL_INTERNAL
+== \#INFO_TITLE_MCluster3Lane | $$\#SAVED_BUFFER
+== \#INFO_REMOT_MCluster3Lane | $$\#MAIL_INTERNAL
 %% \#INFO_DESCR_MCluster3Lane
 Now that you have entered the city, you m\\r-3434[[
 \cgSYSTEM ERROR 0x4E4943456A6F6244554D42415353
@@ -108,7 +108,7 @@ Now that you have entered the city, you m\\r-3434[[
 \cd>>>>>[[[[failure to proceed]]]]
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_TITLE_MPhantomLane | $\#MAIL_NOTITLE
+== \#INFO_TITLE_MPhantomLane | $$\#MAIL_NOTITLE
 == \#INFO_REMOT_MPhantomLane | htic0@gov.<hidden>.mailserv
 == \#INFO_SSIZE_MPhantomLane | 77
 @@ \#INFO_DESCR_MPhantomLane

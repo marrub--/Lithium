@@ -9,8 +9,8 @@
 == \#REMOTE_OMI | omif@corp.AOF?UNVERIFIED
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_TITLE_MIntroAri | $\#SAVED_MESSAGE
-== \#INFO_REMOT_MIntroAri | $\#REMOTE_OMI
+== \#INFO_TITLE_MIntroAri | $$\#SAVED_MESSAGE
+== \#INFO_REMOT_MIntroAri | $$\#REMOTE_OMI
 @@ \#INFO_DESCR_MIntroAri
 Aricil! I can feel your presence. We're in the same plane now, you and
 I. Good.
@@ -22,8 +22,8 @@ who will make it to the top first.
 I hope you a safe journey. This place gives me horrid vibes.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_TITLE_MPhantomAri | $\#SAVED_MESSAGE
-== \#INFO_REMOT_MPhantomAri | $\#REMOTE_OMI
+== \#INFO_TITLE_MPhantomAri | $$\#SAVED_MESSAGE
+== \#INFO_REMOT_MPhantomAri | $$\#REMOTE_OMI
 @@ \#INFO_DESCR_MPhantomAri
 Aricil! What the hell is going on? There are strange... \cmdark\c-
 things attacking me. If you can, we need to re-group. My

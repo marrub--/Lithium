@@ -24,7 +24,7 @@ a small CB-Scope similar to that of most other Omakeda weapons.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Revolver | Revolver
-== \#INFO_TITLE_Revolver | $\#INFO_SHORT_Revolver
+== \#INFO_TITLE_Revolver | $$\#INFO_SHORT_Revolver
 @@ \#INFO_DESCR_Revolver
 Other than this weapon being made on Earth, all you need to know about it is
 that it fires six Teflon-plated .50 Action Express rounds and loads with a
@@ -44,7 +44,7 @@ the firing mechanism.
 Most military models come with a CB-Scope.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_SHORT_Shotgun_A | $\#UPGRADE_TITLE_Shotgun_A
+== \#INFO_SHORT_Shotgun_A | $$\#UPGRADE_TITLE_Shotgun_A
 == \#INFO_TITLE_Shotgun_A | Hiku Mk.2 Shotgun Gauss Mod
 @@ \#INFO_DESCR_Shotgun_A
 During the short Avian-Sapiens war of
@@ -55,7 +55,7 @@ This both removes the need to chamber rounds and gives a nice boost in fire
 rate. The gun is, essentially, completely different in use.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_SHORT_Shotgun_B | $\#UPGRADE_TITLE_Shotgun_B
+== \#INFO_SHORT_Shotgun_B | $$\#UPGRADE_TITLE_Shotgun_B
 == \#INFO_TITLE_Shotgun_B | Hiku Mk.2 Shotgun Poison Mod
 @@ \#INFO_DESCR_Shotgun_B
 A modification for the Hiku Mk.1 shotgun made by A.O.F Inc. for research
@@ -81,7 +81,7 @@ Great for cooking chicken.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_SuperShotgun | Super Shotgun
-== \#INFO_TITLE_SuperShotgun | $\#INFO_SHORT_SuperShotgun
+== \#INFO_TITLE_SuperShotgun | $$\#INFO_SHORT_SuperShotgun
 @@ \#INFO_DESCR_SuperShotgun
 Puts out 2x2 4ga shells made to hunt the gigantic beasts of the planet Ch'ari.
 
@@ -111,7 +111,7 @@ Comes with an inbuilt undermount-like grenade launcher. Holds only one grenade
 at a time, but packs a great punch.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_SHORT_Rifle_A | $\#UPGRADE_TITLE_Rifle_A
+== \#INFO_SHORT_Rifle_A | $$\#UPGRADE_TITLE_Rifle_A
 == \#INFO_TITLE_Rifle_A | AllPoint 75-c Modal Trigger
 @@ \#INFO_DESCR_Rifle_A
 Looking at the design failures in the 75-b, AllPoint sought to make an
@@ -123,7 +123,7 @@ bursts are fired sequentially. Using this mode also enables a partial
 CB-Scope, which unfortunately does little more than obstruct your view.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_SHORT_Rifle_B | $\#UPGRADE_TITLE_Rifle_B
+== \#INFO_SHORT_Rifle_B | $$\#UPGRADE_TITLE_Rifle_B
 == \#INFO_TITLE_Rifle_B | SF-209 Laser Rifle
 @@ \#INFO_DESCR_Rifle_B
 This modification does little more than replace the firing system with one
@@ -158,7 +158,7 @@ after they've been ignited and left the barrel; thus causing a small lag
 before the rocket takes off fully.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_SHORT_RPG_A | $\#UPGRADE_TITLE_RPG_A
+== \#INFO_SHORT_RPG_A | $$\#UPGRADE_TITLE_RPG_A
 == \#INFO_TITLE_RPG_A | UE-1 "Eight-Ball" Revolving Launcher
 @@ \#INFO_DESCR_RPG_A
 Explosives are fun, as we all know, and Unreal Arms agreed with the sentiment.
@@ -171,7 +171,7 @@ rockets in a spiral pattern for maximum damage on one area, and the third and
 final mode hurls all of the grenades out of their rocket casings.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_SHORT_RPG_B | $\#UPGRADE_TITLE_RPG_B
+== \#INFO_SHORT_RPG_B | $$\#UPGRADE_TITLE_RPG_B
 == \#INFO_TITLE_RPG_B | SYM4.3 D.788 HOMING ROCKET SYSTEM
 @@ \#INFO_DESCR_RPG_B
 This is a modification that adds an extra nanomachine dispenser to the gun's
@@ -198,7 +198,7 @@ minute, and the secondary emits 1,260 30.96tW penetrating bolts per minute.
 This thing will make Swiss cheese out of anything in its path.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_SHORT_Plasma_A | $\#UPGRADE_TITLE_Plasma_A
+== \#INFO_SHORT_Plasma_A | $$\#UPGRADE_TITLE_Plasma_A
 == \#INFO_TITLE_Plasma_A | AllPoint 68-o Plasmatic Laser
 @@ \#INFO_DESCR_Plasma_A
 Having their second best-seller also be complete trash at aiming pissed
@@ -214,7 +214,7 @@ private investors for quite some time now, but thankfully, your employer is
 one of them.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_SHORT_Plasma_B | $\#UPGRADE_TITLE_Plasma_B
+== \#INFO_SHORT_Plasma_B | $$\#UPGRADE_TITLE_Plasma_B
 == \#INFO_TITLE_Plasma_B | SF-2012 Ion Acceleration Cannon
 @@ \#INFO_DESCR_Plasma_B
 The SF-2012 IAC is quite ubiquitous among Semaphore's arsenal, being one of
@@ -228,7 +228,7 @@ ship from the inside, as it ends up melting holes in the hull.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_BFG9000 | Omega Cannon
-== \#INFO_TITLE_BFG9000 | $\#INFO_SHORT_BFG9000
+== \#INFO_TITLE_BFG9000 | $$\#INFO_SHORT_BFG9000
 @@ \#INFO_DESCR_BFG9000
 This weapon was developed in another dimensional plane, where magic is still
 usable. Employs an extremely complex magical pattern buffer that takes in
@@ -242,7 +242,7 @@ This weapon was acquired by your employers via the black market group "Cid"
 for a hefty price. Take care of it.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_SHORT_Cannon_A | $\#UPGRADE_TITLE_Cannon_A
+== \#INFO_SHORT_Cannon_A | $$\#UPGRADE_TITLE_Cannon_A
 == \#INFO_TITLE_Cannon_A | Omega Cannon: Punctuator Buffer
 @@ \#INFO_DESCR_Cannon_A
 A pattern buffer for the Omega Cannon which emits an explosive bolt that does
@@ -258,7 +258,7 @@ and wanted whoever attained it to be all-powerful.
 Also, the CB-Scope works again, somehow.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_SHORT_Cannon_B | $\#UPGRADE_TITLE_Cannon_B
+== \#INFO_SHORT_Cannon_B | $$\#UPGRADE_TITLE_Cannon_B
 == \#INFO_TITLE_Cannon_B | Omega Cannon: Railgun
 @@ \#INFO_DESCR_Cannon_B
 With years of reverse engineering research put into the Omega Cannon by

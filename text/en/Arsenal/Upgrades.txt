@@ -14,7 +14,7 @@ Shows vital information.
 A Heads Up Display program built into your Computer/Brain Interface.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#UPGRADE_TITLE_HeadsUpDispJem | $\#UPGRADE_TITLE_HeadsUpDisp
+== \#UPGRADE_TITLE_HeadsUpDispJem | $$\#UPGRADE_TITLE_HeadsUpDisp
 @@ \#UPGRADE_EFFEC_HeadsUpDispJem
 Shows vital information.
 

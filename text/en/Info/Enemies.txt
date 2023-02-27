@@ -117,7 +117,7 @@ keep an eye out for cracks in the air around you.
 
 ## Residents ═════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_LostSoul | Lost Soul
-== \#INFO_TITLE_LostSoul | $\#INFO_SHORT_LostSoul
+== \#INFO_TITLE_LostSoul | $$\#INFO_SHORT_LostSoul
 %% \#INFO_DESCR_LostSoul
 Class: \cjResident\c-
 Threat: \csD++\c-
@@ -135,7 +135,7 @@ attacking.
 @@
 
 == \#INFO_SHORT_Mancubus | Mancubus
-== \#INFO_TITLE_Mancubus | $\#INFO_SHORT_Mancubus
+== \#INFO_TITLE_Mancubus | $$\#INFO_SHORT_Mancubus
 %% \#INFO_DESCR_Mancubus
 Class: \cjResident\c-
 Threat: \ckB\c-
@@ -151,7 +151,7 @@ fine.
 @@
 
 == \#INFO_SHORT_Arachnotron | Arachnotron
-== \#INFO_TITLE_Arachnotron | $\#INFO_SHORT_Arachnotron
+== \#INFO_TITLE_Arachnotron | $$\#INFO_SHORT_Arachnotron
 %% \#INFO_DESCR_Arachnotron
 Class: \cjResident\c-
 Threat: \ckB\c-
@@ -166,7 +166,7 @@ greatly prone to bullet and shrapnel damage.
 @@
 
 == \#INFO_SHORT_Cacodemon | Cacodemon
-== \#INFO_TITLE_Cacodemon | $\#INFO_SHORT_Cacodemon
+== \#INFO_TITLE_Cacodemon | $$\#INFO_SHORT_Cacodemon
 %% \#INFO_DESCR_Cacodemon
 Class: \cjResident\c-
 Threat: \ckB-\c-
@@ -179,7 +179,7 @@ deadly, but generally the Cacodemon is not a monster to fear.
 
 ## Nobles ════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_HellKnight | Hell Knight
-== \#INFO_TITLE_HellKnight | $\#INFO_SHORT_HellKnight
+== \#INFO_TITLE_HellKnight | $$\#INFO_SHORT_HellKnight
 %% \#INFO_DESCR_HellKnight
 Class: \cfNoble\c-
 Threat: \ckB\c-
@@ -194,7 +194,7 @@ groups.
 @@
 
 == \#INFO_SHORT_BaronOfHell | Hell Noble
-== \#INFO_TITLE_BaronOfHell | $\#INFO_SHORT_BaronOfHell
+== \#INFO_TITLE_BaronOfHell | $$\#INFO_SHORT_BaronOfHell
 %% \#INFO_DESCR_BaronOfHell
 Class: \cfNoble\c-
 Threat: \ckB++\c-
@@ -210,7 +210,7 @@ strong magic energy everywhere.
 @@
 
 == \#INFO_SHORT_Revenant | Revenant
-== \#INFO_TITLE_Revenant | $\#INFO_SHORT_Revenant
+== \#INFO_TITLE_Revenant | $$\#INFO_SHORT_Revenant
 %% \#INFO_DESCR_Revenant
 Class: \cfNoble\c-
 Threat: \ckB+\c-
@@ -290,7 +290,7 @@ will destroy any target without prejudice for the glory of Hell.
 
 ## ??? ═══════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Phantom | Phantom
-== \#INFO_TITLE_Phantom | $\#INFO_SHORT_Phantom
+== \#INFO_TITLE_Phantom | $$\#INFO_SHORT_Phantom
 %% \#INFO_DESCR_Phantom
 Class: \cm???\c-
 Threat: \crE\c-

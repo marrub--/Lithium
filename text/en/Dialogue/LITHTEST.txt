@@ -6,7 +6,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-== LITHTEST_test_term_l | $\#LOGON_TEST
+== LITHTEST_test_term_l | $$\#LOGON_TEST
 
 %% LITHTEST_test_term_0
 test text, information block

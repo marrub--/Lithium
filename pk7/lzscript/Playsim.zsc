@@ -439,16 +439,7 @@ static clearScope Lith_HERMES Instance() {
 
 static clearScope string localize(string name) {
    string ret = StringTable.localize(name, false);
-   while(ret.byteAt(0) == CH_DOLLAR) {
-      string next = StringTable.localize(ret);
-      if(next != ret) ret = next;
-      else            break;
-   }
-   if(ret == name) {
-      return "";
-   } else {
-      return ret;
-   }
+   return ret != name ? ret : "";
 }
 
 static int EDataI(Actor mo, int info) {

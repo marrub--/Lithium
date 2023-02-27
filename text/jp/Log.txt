@@ -30,7 +30,7 @@
 ## Ammo ══════════════════════════════════════════════════════════════════════╕
 == \#LOG_ClipBox   | 弾箱
 == \#LOG_ShellBox  | シェル箱
-== \#LOG_Rocket    | $\#TAG_RocketAmmo
+== \#LOG_Rocket    | $$\#TAG_RocketAmmo
 == \#LOG_RocketBox | ロケット箱
 == \#LOG_Cell      | エナジーチャージ
 == \#LOG_CellBox   | 染まったエナジーパック

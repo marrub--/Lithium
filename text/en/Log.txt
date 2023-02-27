@@ -9,11 +9,11 @@
 !!include Log/Random.txt
 
 ## Health ════════════════════════════════════════════════════════════════════╕
-== \#LOG_HealthBonus | $\#INFO_SHORT_HealthBonus
-== \#LOG_Medikit     | $\#INFO_SHORT_Medikit
+== \#LOG_HealthBonus | $$\#INFO_SHORT_HealthBonus
+== \#LOG_Medikit     | $$\#INFO_SHORT_Medikit
 == \#LOG_MegaSphere  | Mega Charge!
 == \#LOG_SoulSphere  | Super Charge!
-== \#LOG_StimPack    | $\#INFO_SHORT_Stimpack
+== \#LOG_StimPack    | $$\#INFO_SHORT_Stimpack
 
 ## Keys ══════════════════════════════════════════════════════════════════════╕
 == \#LOG_RedCard     | \cgRed KeyDisk
@@ -25,12 +25,12 @@
 
 ## Powerups ══════════════════════════════════════════════════════════════════╕
 == \#LOG_RadSuit      | Radiation Shielding Suit
-== \#LOG_InfraRed     | $\#INFO_SHORT_Infrared
+== \#LOG_InfraRed     | $$\#INFO_SHORT_Infrared
 == \#LOG_Invuln       | \cjInvulnerability!
-== \#LOG_BlurSphere   | $\#INFO_SHORT_Fragma
-== \#LOG_Backpack     | $\#INFO_SHORT_Backpack
-== \#LOG_Berserk      | $\#INFO_SHORT_Berserk
-== \#LOG_AllMap       | $\#INFO_SHORT_AllMap
+== \#LOG_BlurSphere   | $$\#INFO_SHORT_Fragma
+== \#LOG_Backpack     | $$\#INFO_SHORT_Backpack
+== \#LOG_Berserk      | $$\#INFO_SHORT_Berserk
+== \#LOG_AllMap       | $$\#INFO_SHORT_AllMap
 == \#LOG_DoggoSphere  | \cgwan \ciwan \ckwan \cdwan \chwan \ctwan
 == \#LOG_Dogs         | Picked up dogs.
 == \#LOG_ShobonSphere | ( -w-)
@@ -38,9 +38,9 @@
 == \#LOG_ArtiTeleport | Chaos Device
 
 ## Ammo ══════════════════════════════════════════════════════════════════════╕
-== \#LOG_Clip      | $\#TAG_BulletAmmo
+== \#LOG_Clip      | $$\#TAG_BulletAmmo
 == \#LOG_ClipBox   | Box of Bullets
-== \#LOG_Shell     | $\#TAG_ShellAmmo
+== \#LOG_Shell     | $$\#TAG_ShellAmmo
 == \#LOG_ShellBox  | Box of Shells
 == \#LOG_Rocket    | Rocket
 == \#LOG_RocketBox | Box of Rockets
@@ -49,7 +49,7 @@
 
 ## Bonuses ═══════════════════════════════════════════════════════════════════╕
 == \#LOG_Coin       | Coin
-== \#LOG_ScoreChip  | $\#INFO_SHORT_ScoreChip
+== \#LOG_ScoreChip  | $$\#INFO_SHORT_ScoreChip
 == \#LOG_Ruby       | Flawed Ruby
 == \#LOG_Sapphire   | Flawed Sapphire
 == \#LOG_Amethyst   | Flawed Amethyst
@@ -62,35 +62,35 @@
 == \#LOG_Tourmaline | Tourmaline
 
 ## CBI Upgrades (Marine) ═════════════════════════════════════════════════════╕
-== \#LOG_CBI_MUpgr1      | $\#CBI_CPU2
-== \#LOG_CBI_MUpgr2      | $\#CBI_CPU3
-== \#LOG_CBI_MArmorInter | $\#CBI_ArmorInter
-== \#LOG_CBI_MWeapnInter | $\#CBI_WeapnInter
-== \#LOG_CBI_MWeapnInte2 | $\#CBI_WeapnInte2
-== \#LOG_CBI_MRDistInter | $\#CBI_RDistInter
+== \#LOG_CBI_MUpgr1      | $$\#CBI_CPU2
+== \#LOG_CBI_MUpgr2      | $$\#CBI_CPU3
+== \#LOG_CBI_MArmorInter | $$\#CBI_ArmorInter
+== \#LOG_CBI_MWeapnInter | $$\#CBI_WeapnInter
+== \#LOG_CBI_MWeapnInte2 | $$\#CBI_WeapnInte2
+== \#LOG_CBI_MRDistInter | $$\#CBI_RDistInter
 
 ## CBI Upgrades (Cyber-Mage) ═════════════════════════════════════════════════╕
-== \#LOG_CBI_CSlot3Spell | $\#CBI_Slot3Spell
-== \#LOG_CBI_CSlot4Spell | $\#CBI_Slot4Spell
-== \#LOG_CBI_CSlot5Spell | $\#CBI_Slot5Spell
-== \#LOG_CBI_CSlot6Spell | $\#CBI_Slot6Spell
-== \#LOG_CBI_CSlot7Spell | $\#CBI_Slot7Spell
-== \#LOG_CBI_CRDistInter | $\#CBI_RDistInter
+== \#LOG_CBI_CSlot3Spell | $$\#CBI_Slot3Spell
+== \#LOG_CBI_CSlot4Spell | $$\#CBI_Slot4Spell
+== \#LOG_CBI_CSlot5Spell | $$\#CBI_Slot5Spell
+== \#LOG_CBI_CSlot6Spell | $$\#CBI_Slot6Spell
+== \#LOG_CBI_CSlot7Spell | $$\#CBI_Slot7Spell
+== \#LOG_CBI_CRDistInter | $$\#CBI_RDistInter
 
 ## CBI Upgrades (Dark Lord) ══════════════════════════════════════════════════╕
-== \#LOG_CBI_DMotra     | $\#INFO_SHORT_Motra
-== \#LOG_CBI_DZaruk     | $\#INFO_SHORT_Zaruk
-== \#LOG_CBI_DZakwu     | $\#INFO_SHORT_Zakwu
-== \#LOG_CBI_DZikr      | $\#INFO_SHORT_Zikr
-== \#LOG_CBI_DShield    | $\#INFO_SHORT_Shield
-== \#LOG_CBI_DDimDriver | $\#INFO_SHORT_DimDriver
+== \#LOG_CBI_DMotra     | $$\#INFO_SHORT_Motra
+== \#LOG_CBI_DZaruk     | $$\#INFO_SHORT_Zaruk
+== \#LOG_CBI_DZakwu     | $$\#INFO_SHORT_Zakwu
+== \#LOG_CBI_DZikr      | $$\#INFO_SHORT_Zikr
+== \#LOG_CBI_DShield    | $$\#INFO_SHORT_Shield
+== \#LOG_CBI_DDimDriver | $$\#INFO_SHORT_DimDriver
 
 ## Level Up ══════════════════════════════════════════════════════════════════╕
 == \#LOG_LevelUpLane | You feel stronger, somehow.
 == \#LOG_LevelUpJem  | [INFO] Memory restored: %iKiB
 == \#LOG_LevelUpFulk | \cj<\cdVital\cj>\c- :: %i inodes reclaimed.
 == \#LOG_LevelUpOmi  | You're having fun with this.
-== \#LOG_LevelUpAri  | $\#LOG_LevelUpOmi
+== \#LOG_LevelUpAri  | $$\#LOG_LevelUpOmi
 == \#LOG_LevelUpLuke | Your senses grow sharper.
 == \#LOG_LevelUpKiri | You feel some of your power return to you.
 
@@ -107,7 +107,7 @@
 %% \#LOG_BossWarnOmi
 \cgDetected high amounts of demonic energy in area.
 
-== \#LOG_BossWarnAri  | $\#LOG_BossWarnOmi
+== \#LOG_BossWarnAri  | $$\#LOG_BossWarnOmi
 == \#LOG_BossWarnLuke | \cmThe area's aura suppresses you...
 == \#LOG_BossWarnKiri | \cjNeed to get rid of the entrapped soul here.
 

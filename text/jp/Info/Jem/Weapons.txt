@@ -263,7 +263,7 @@ MDDOがプラズマライフルを設計していたとき
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_StarDestroyer | ｽﾀｰﾃﾞｽﾄﾛｲﾔｰ
-== \#INFO_TITLE_StarDestroyer | $\#INFO_SHORT_StarDestroyer
+== \#INFO_TITLE_StarDestroyer | $$\#INFO_SHORT_StarDestroyer
 @@ \#INFO_DESCR_StarDestroyer
 恐らく地獄の第七魔術師の
 ライフリサーチから作られたとされる

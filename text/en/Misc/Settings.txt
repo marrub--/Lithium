@@ -46,10 +46,10 @@ The font to use when Japanese is set as the language.
 == \#hud_showinteract | Show near-by interactables
 == \#hud_showammo | Show ammo totals
 == \#hud_itemcolor | Near-by item text color
-== \#light_b | $\#BLUE_INTENSITY
+== \#light_b | $$\#BLUE_INTENSITY
 == \#light_battery | Battery
-== \#light_g | $\#GREEN_INTENSITY
-== \#light_r | $\#RED_INTENSITY
+== \#light_g | $$\#GREEN_INTENSITY
+== \#light_r | $$\#RED_INTENSITY
 == \#light_radius | Radius
 == \#light_regen | Battery regeneration
 == \#player_altinvuln | Alternate invulnerability palette
@@ -112,9 +112,9 @@ Automatically buys this autogroup when you have the Score available.
 == \#st_autobuy_2 | Auto-buy \cdSet 2
 == \#st_autobuy_3 | Auto-buy \cnSet 3
 == \#st_autobuy_4 | Auto-buy \cfSet 4
-== \#TOOLTIP_autobuy_2 | $\#TOOLTIP_autobuy_1
-== \#TOOLTIP_autobuy_3 | $\#TOOLTIP_autobuy_1
-== \#TOOLTIP_autobuy_4 | $\#TOOLTIP_autobuy_1
+== \#TOOLTIP_autobuy_2 | $$\#TOOLTIP_autobuy_1
+== \#TOOLTIP_autobuy_3 | $$\#TOOLTIP_autobuy_1
+== \#TOOLTIP_autobuy_4 | $$\#TOOLTIP_autobuy_1
 
 == \#st_done_intro | Don't play intro on next game start
 == \#sv_autosave | Autosave interval
@@ -202,15 +202,15 @@ like vanilla. May cause issues in normal gameplay.
 == \#weapons_scopealpha | Scope opacity
 == \#weapons_zoomfactor | Scope zoom factor
 == \#xhair_a | Alpha
-== \#xhair_b | $\#BLUE_INTENSITY
+== \#xhair_b | $$\#BLUE_INTENSITY
 == \#xhair_enable | Enable
 == \#xhair_enablejuicer | Juicer
 @@ \#TOOLTIP_xhair_enablejuicer
 Seriously, why do they call them that? The little thingies around the
 crosshair that follow the recoil. They're... juicy. Guess that's why.
 
-== \#xhair_g | $\#GREEN_INTENSITY
-== \#xhair_r | $\#RED_INTENSITY
+== \#xhair_g | $$\#GREEN_INTENSITY
+== \#xhair_r | $$\#RED_INTENSITY
 == \#xhair_scale | Scale
 == \#xhair_style | Style
 
@@ -272,13 +272,13 @@ crosshair that follow the recoil. They're... juicy. Guess that's why.
 == \#st_name_color_121 | Sapphire
 == \#st_name_color_122 | Teal
 == \#st_name_color_123 | Class' Color
-== \#st_name_color_124 | $\#CLASS_DARKLORD
-== \#st_name_color_125 | $\#CLASS_MARINE
-== \#st_name_color_126 | $\#CLASS_THOTH
-== \#st_name_color_127 | $\#CLASS_ASSASSIN
-== \#st_name_color_128 | $\#CLASS_INFORMANT
-== \#st_name_color_129 | $\#CLASS_CYBERMAGE
-== \#st_name_color_130 | $\#CLASS_WANDERER
+== \#st_name_color_124 | $$\#CLASS_DARKLORD
+== \#st_name_color_125 | $$\#CLASS_MARINE
+== \#st_name_color_126 | $$\#CLASS_THOTH
+== \#st_name_color_127 | $$\#CLASS_ASSASSIN
+== \#st_name_color_128 | $$\#CLASS_INFORMANT
+== \#st_name_color_129 | $$\#CLASS_CYBERMAGE
+== \#st_name_color_130 | $$\#CLASS_WANDERER
 == \#st_name_color_131 | Lane Red
 == \#st_name_color_132 | Lane D. Orange
 == \#st_name_color_133 | Lane Orange
@@ -294,13 +294,13 @@ crosshair that follow the recoil. They're... juicy. Guess that's why.
 == \#st_name_color_143 | Lane Hot Pink
 
 == \#st_name_hudtype_0 | Default for class
-== \#st_name_hudtype_1 | $\#CLASS_MARINE
-== \#st_name_hudtype_2 | $\#CLASS_CYBERMAGE
-== \#st_name_hudtype_3 | $\#CLASS_INFORMANT
-== \#st_name_hudtype_4 | $\#CLASS_WANDERER
-== \#st_name_hudtype_5 | $\#CLASS_ASSASSIN
-== \#st_name_hudtype_6 | $\#CLASS_DARKLORD
-== \#st_name_hudtype_7 | $\#CLASS_THOTH
+== \#st_name_hudtype_1 | $$\#CLASS_MARINE
+== \#st_name_hudtype_2 | $$\#CLASS_CYBERMAGE
+== \#st_name_hudtype_3 | $$\#CLASS_INFORMANT
+== \#st_name_hudtype_4 | $$\#CLASS_WANDERER
+== \#st_name_hudtype_5 | $$\#CLASS_ASSASSIN
+== \#st_name_hudtype_6 | $$\#CLASS_DARKLORD
+== \#st_name_hudtype_7 | $$\#CLASS_THOTH
 == \#st_name_hudtype_8 | 1.0
 
 == \#st_name_cursor_0 | Green
@@ -349,7 +349,7 @@ crosshair that follow the recoil. They're... juicy. Guess that's why.
 == \#st_name_sfont_2 | Italic
 
 == \#st_name_itmdisp_0 | None
-== \#st_name_itmdisp_1 | $\#TAB_LOG
+== \#st_name_itmdisp_1 | $$\#TAB_LOG
 == \#st_name_itmdisp_2 | Projected
 == \#st_name_itmdisp_3 | Log + Projected
 
@@ -368,8 +368,8 @@ crosshair that follow the recoil. They're... juicy. Guess that's why.
 
 ## Tab Labels ════════════════════════════════════════════════════════════════╕
 == \#st_tab_gui | Interface
-== \#st_tab_itm | $\#BIP_NAME_ITEMS
-== \#st_tab_wep | $\#BIP_NAME_WEAPONS
+== \#st_tab_itm | $$\#BIP_NAME_ITEMS
+== \#st_tab_wep | $$\#BIP_NAME_WEAPONS
 == \#st_tab_gam | Game
 
 ## Section Labels ════════════════════════════════════════════════════════════╕

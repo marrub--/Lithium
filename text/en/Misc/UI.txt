@@ -52,7 +52,7 @@
 == \#TAB_ARSENAL_Jem  | Directives
 == \#TAB_ARSENAL_Fulk | Rig
 == \#TAB_ARSENAL_Omi  | Gear
-== \#TAB_ARSENAL_Ari  | $\#TAB_ARSENAL_Omi
+== \#TAB_ARSENAL_Ari  | $$\#TAB_ARSENAL_Omi
 == \#TAB_ARSENAL_Luke | Presages
 == \#TAB_ARSENAL_Kiri | Requests
 
@@ -70,13 +70,13 @@
 == \#TAB_STATISTICS | Statistics
 == \#TAB_NOTES      | Notes
 
-== \#TAB_UPGRADES | $\#BIP_NAME_UPGRADES
+== \#TAB_UPGRADES | $$\#BIP_NAME_UPGRADES
 == \#TAB_SHOP     | Shop
 
 == \#STATUS_XP | Experience
 == \#STATUS_HP | Health
 == \#STATUS_LV | Level
-== \#STATUS_MP | $\#TAG_ManaAmmo
+== \#STATUS_MP | $$\#TAG_ManaAmmo
 == \#STATUS_NX | Next
 == \#STATUS_CL | Class
 
@@ -155,7 +155,7 @@ CLOSED
 == \#CBI_WeapnInte2 | Weapon Refactoring Device
 == \#CBI_ArmorInter | Armor Interface
 == \#CBI_RDistInter | Reality Distortion Interface
-== \#CBI_ReactArmor | $\#UPGRADE_TITLE_ReactArmor
+== \#CBI_ReactArmor | $$\#UPGRADE_TITLE_ReactArmor
 
 == \#CBI_Slot1Spell | \ciBlade Spell Driver
 == \#CBI_Slot2Spell | \ciDelear Spell Driver
@@ -239,10 +239,10 @@ ZOZOKR \cn\u{E100}\u{E103}\u{E101}\u{E101}
 == \#ATTR_HELP_DEF | Damage resistance
 == \#ATTR_HELP_STR | Health capacity
 == \#ATTR_HELP_VIT | Health item efficiency
-== \#ATTR_HELP_POT | $\#ATTR_HELP_VIT
+== \#ATTR_HELP_POT | $$\#ATTR_HELP_VIT
 == \#ATTR_HELP_STM | Health regeneration maximum
-== \#ATTR_HELP_REP | $\#ATTR_HELP_STM
-== \#ATTR_HELP_REG | $\#ATTR_HELP_STM
+== \#ATTR_HELP_REP | $$\#ATTR_HELP_STM
+== \#ATTR_HELP_REG | $$\#ATTR_HELP_STM
 == \#ATTR_HELP_LUK | Score gained
 == \#ATTR_HELP_RGE | Damage buff when hit
 == \#ATTR_HELP_CON | Damage buff when gaining mana

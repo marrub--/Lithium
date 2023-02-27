@@ -8,7 +8,7 @@
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_AetosVi | Aetos Vi
-== \#INFO_TITLE_AetosVi | $\#INFO_SHORT_AetosVi
+== \#INFO_TITLE_AetosVi | $$\#INFO_SHORT_AetosVi
 @@ \#INFO_DESCR_AetosVi
 A planetary system 17 lightyears away from Earth that houses several planets
 with sentient life on them. Found approximately 700 years ago now, this is the
@@ -22,7 +22,7 @@ But that's fine details.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Algidistari | Algidistari
-== \#INFO_TITLE_Algidistari | $\#INFO_SHORT_Algidistari
+== \#INFO_TITLE_Algidistari | $$\#INFO_SHORT_Algidistari
 @@ \#INFO_DESCR_Algidistari
 Algidistari is a planetary system 45 lightyears in distance from Earth. While
 it has many planets in its main sequence, and many rocks, it is for the most
@@ -35,7 +35,7 @@ are semi-habitable, thus becoming quite suitable for magi of the
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ChAri | Ch'ari
-== \#INFO_TITLE_ChAri | $\#INFO_SHORT_ChAri
+== \#INFO_TITLE_ChAri | $$\#INFO_SHORT_ChAri
 @@ \#INFO_DESCR_ChAri
 A planet in the Aetos-Vi planetary system composed of four land masses and a
 large amount of water, populated by a highly intelligent light-manipulating
@@ -52,7 +52,7 @@ such as giant mammoth-like creatures and the two-legged Falx.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_DurlaPrime | Durla Prime
-== \#INFO_TITLE_DurlaPrime | $\#INFO_SHORT_DurlaPrime
+== \#INFO_TITLE_DurlaPrime | $$\#INFO_SHORT_DurlaPrime
 @@ \#INFO_DESCR_DurlaPrime
 A planet in the Aetos-Vi planetary system whose dominant species is a humanoid
 avian creature, the "Peristera" or, colloquially, "Perist".
@@ -67,7 +67,7 @@ mostly resemble their earthly counterparts.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Earth | Earth
-== \#INFO_TITLE_Earth | $\#INFO_SHORT_Earth
+== \#INFO_TITLE_Earth | $$\#INFO_SHORT_Earth
 @@ \#INFO_DESCR_Earth
 The year is 1649 New Era. After an event that almost led to an apocalypse in
 3031 CE, humanity collectively decided to mark a new era dedicated to
@@ -81,7 +81,7 @@ planets, but still a large population remains on the blue planet.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Hell | Hell
-== \#INFO_TITLE_Hell | $\#INFO_SHORT_Hell
+== \#INFO_TITLE_Hell | $$\#INFO_SHORT_Hell
 @@ \#INFO_DESCR_Hell
 Whether the Hell found ripping into our dimension is actually from any known
 religion is not known. What is known, however, is that its inhabitants seek to
@@ -94,7 +94,7 @@ previously found on Earth, thousands of years ago.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Mars | Mars
-== \#INFO_TITLE_Mars | $\#INFO_SHORT_Mars
+== \#INFO_TITLE_Mars | $$\#INFO_SHORT_Mars
 @@ \#INFO_DESCR_Mars
 In 2714 CE, a huge interplanetary workload boom began, spawning numerous
 factories and artificial workplaces on Mars manned by robots.
@@ -108,7 +108,7 @@ corporations like OFMD -- use Mars as a place to house autonomous work.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_OmicronXevv | Omicron Xevv
-== \#INFO_TITLE_OmicronXevv | $\#INFO_SHORT_OmicronXevv
+== \#INFO_TITLE_OmicronXevv | $$\#INFO_SHORT_OmicronXevv
 @@ \#INFO_DESCR_OmicronXevv
 A binary star system near Sirius about 8 lightyears away from Earth. The
 asteroid belt surrounding the star system has many large, well-lit and fairly
@@ -119,7 +119,7 @@ have a secluded, free place to do research, surveillance and development.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_SuperDimension | Super Dimension
-== \#INFO_TITLE_SuperDimension | $\#INFO_SHORT_SuperDimension
+== \#INFO_TITLE_SuperDimension | $$\#INFO_SHORT_SuperDimension
 @@ \#INFO_DESCR_SuperDimension
 The first hyperdimension found through observation of cuts in the
 universe, which themselves were similarly observed to be created by
@@ -130,7 +130,7 @@ have been lost to time.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Heaven | The God Cage
-== \#INFO_TITLE_Heaven | $\#INFO_SHORT_Heaven
+== \#INFO_TITLE_Heaven | $$\#INFO_SHORT_Heaven
 @@ \#INFO_DESCR_Heaven
 A strange dimension. The beings of the God Cage are the most powerful beings in
 all of existence, capable of destroying reality itself if they thought it best.
@@ -148,7 +148,7 @@ cylinder box.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ReverseAce | Reverse Ace
-== \#INFO_TITLE_ReverseAce | $\#INFO_SHORT_ReverseAce
+== \#INFO_TITLE_ReverseAce | $$\#INFO_SHORT_ReverseAce
 @@ \#INFO_DESCR_ReverseAce
 Most things about this hyperdimension are unknown as of yet. When the God Thoth
 descended to the mortal realm in 1344 NE, the body she chose told stories of
@@ -165,7 +165,7 @@ description.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Tsukama | Tsukama
-== \#INFO_TITLE_Tsukama | $\#INFO_SHORT_Tsukama
+== \#INFO_TITLE_Tsukama | $$\#INFO_SHORT_Tsukama
 @@ \#INFO_DESCR_Tsukama
 A system about 45 lightyears from Earth, not far from Algidistari. The system
 is composed of 14 planets and one star, which emits slightly more heat than
