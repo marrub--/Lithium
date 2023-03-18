@@ -6,6 +6,15 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
+name:        "TITLEMAP"
+seed:        0
+flags:       "nophantom"
+environment: "abyss"
+humidity:    0
+temperature: -270
+windspeed:   0
+sky:         "nochange";
+
 name:        "LITHTEST"
 seed:        777
 flags:       "nophantom"
@@ -25,14 +34,14 @@ temperature: 30
 windspeed:   1
 sky:         "nochange";
 
-name:        "TITLEMAP"
+name:        "LITHABYS"
 seed:        0
 flags:       "nophantom"
 environment: "abyss"
 humidity:    0
 temperature: -270
 windspeed:   0
-sky:         "vanilla"
+sky:         "nochange"
 script:      "lmisc/Abyss.mmmm";
 
 name:        "LITHEND"

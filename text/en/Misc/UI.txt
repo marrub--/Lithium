@@ -9,6 +9,7 @@
 ## UI ════════════════════════════════════════════════════════════════════════╕
 == \#ACTIVATE   | Activate
 == \#AUTOGROUPS | Active Auto-groups
+== \#BACK       | Back
 == \#BUY        | Buy
 == \#CATEGORY   | Category
 == \#CLEAR      | Clear
@@ -20,6 +21,7 @@
 == \#EFFECT     | Effect:
 == \#EMPTY      | <empty>
 == \#EQUIP      | Equip
+== \#FORWARD    | Forward
 == \#FREE       | Free
 == \#LEFT       | Left
 == \#MOVE       | Move

@@ -109,7 +109,7 @@ skill nightmare {
    noInfighting
 }
 
-episode TITLEMAP {
+episode LITHABYS {
    name = "Lithium - Abyss"
    key  = "a"
 }
@@ -128,7 +128,12 @@ gameDefaults {
    enableSkyBoxAo
 }
 
-map TITLEMAP "Abyss" {
+map TITLEMAP "Abyss (Title Ver.)" {
+   sky1  = "LITHBLAK"
+   music = "lmusic/Shredder.opus"
+}
+
+map LITHABYS "Abyss" {
    sky1  = "LITHBLAK"
    music = "lmusic/into_abyss.opus"
 }
@@ -145,7 +150,7 @@ map LITHBOX "Box Map" {
    next  = 1
 }
 
-map LITHEND "" {
+map LITHEND "The End" {
    endOfGame
    noAutoSaveHint
    noClusterText

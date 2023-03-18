@@ -13,6 +13,7 @@ ui static void ActuallyEndTheGame() {
     * THE WORST HACK IN THE MOD BABEY */
    Menu.SetMenu('EndGameMenu');
    MessageBoxMenu(Menu.GetCurrentMenu()).HandleResult(true);
+   Menu.SetMenu('LithCreditsMenu');
 }
 
 static int FindFontColor(name cr) {

@@ -102,7 +102,7 @@
                                * Code *
 
 @ Gutawer         - Lots of help with ZScript
-@ KeksDose        - (De)projection code
+@ KeksDose        - Projection math
 @ Jimmy           - Made the original MENUDEF code
 @ Kate Fox        \ Integer interpolation function
                   | Cannon and plasma rifle code are based on Error: Doom
@@ -132,7 +132,7 @@
 @ Xaser Acheron      - Help with code stuff
 @ Yholl              \ eviel gost
                      | Ideas for a lot of stuff
-                     | Re-texturing the TITLEMAP for me
+                     | Re-texturing the TITLEMAP for me (F)
                      | Marathon resources
                      | Descriptions for some of the extra upgrades
                      | Help with a bunch of stuff

@@ -32,7 +32,6 @@ lipu_ilo endings {
       } ante seme poki pD {
          music "lmusic/natural.opus";
       } ante seme poki pT {
-         music "lmusic/fribby.opus";
       }
       rts;
    }

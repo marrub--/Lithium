@@ -7,7 +7,7 @@
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
 ## Tutorial ══════════════════════════════════════════════════════════════════╕
-%% TITLEMAP_start_begin_0
+%% LITHABYS_start_begin_0
 \c[Lith_Green]Into the pit!
 \c[Lith_Red]Into Abyss -
 \c[Lith_Purple]Into a silent void,
@@ -16,85 +16,85 @@
 \c[Lith_Blue]you destroy your present.
 \c[Lith_Grey]Iterate.
 
-%% TITLEMAP_start_begin_o1m
+%% LITHABYS_start_begin_o1m
 Huh?
 \cr[I'm leaving.]
 
-%% TITLEMAP_start_begin_o1c
+%% LITHABYS_start_begin_o1c
 What?
 \cr[I'm leaving.]
 
-%% TITLEMAP_start_begin_o1i
+%% LITHABYS_start_begin_o1i
 Delete message.
 \cr[Not meant to be here.]
 
-%% TITLEMAP_start_begin_o1w
+%% LITHABYS_start_begin_o1w
 Where..?
 \cr[Forwards...]
 
-%% TITLEMAP_start_begin_o1a
+%% LITHABYS_start_begin_o1a
 Future..?
 \cr[I don't like this. I'm out of here.]
 
-%% TITLEMAP_start_begin_o1d
+%% LITHABYS_start_begin_o1d
 Alright.
 \cr[I don't like this. I'm out of here.]
 
-%% TITLEMAP_start_begin_o1t
+%% LITHABYS_start_begin_o1t
 Rid me of this illusion.
 \cr[None of this.]
 
 ## Marine ════════════════════════════════════════════════════════════════════╕
-@@ TITLEMAP_lane_begin_0
+@@ LITHABYS_lane_begin_0
 I will walk, with my shadow flag...
 
 Oh, hello there. Apologies!
 
-%% TITLEMAP_lane_begin_o0
+%% LITHABYS_lane_begin_o0
 Hello.
 \cq[Who is this..?]
 
-%% TITLEMAP_lane_begin_o0c
+%% LITHABYS_lane_begin_o0c
 Ah, hey there.
 \cq[She looks cute. She reminds me of Daniel.]
 
-%% TITLEMAP_lane_begin_o0m
+%% LITHABYS_lane_begin_o0m
 Ah, hey there. You look familiar.
 \cq[Who is she?]
 
-%% TITLEMAP_lane_begin_o1
+%% LITHABYS_lane_begin_o1
 Oh, sorry, didn't mean to bother you.
 \cr[Back out.]
 
-%% TITLEMAP_lane_begin_o1m
+%% LITHABYS_lane_begin_o1m
 Oh, sorry, didn't mean to bother you.
 \cr[Back out while you can.]
 
-@@ TITLEMAP_lane_m_meet_0
+@@ LITHABYS_lane_m_meet_0
 Oh, do I? How so, might I ask? I don't believe I've met you before.
 
 \cn[I feel intimidated by this doll.]
 
-%% TITLEMAP_lane_m_meet_o0
+%% LITHABYS_lane_m_meet_o0
 No, it must be nothing.
 \cq[I'm sure it's nothing.]
 
-%% TITLEMAP_lane_m_meet_o1
+%% LITHABYS_lane_m_meet_o1
 No, just forget about it, sorry.
 \cr[God damn it.]
 
-%% TITLEMAP_lane_m_meet_o2
+%% LITHABYS_lane_m_meet_o2
 No, I've definitely seen you.
 \cq[What is it?]
 
-@@ TITLEMAP_lane_m_nothing_0
+@@ LITHABYS_lane_m_nothing_0
 Hmm... Well, whatever. Say, do you like RPG games? Also, where exactly
 are we? I feel like I know *you*...
 
 \cn[These subject hops are a bit hard to follow. I wonder if people find
 me this hard to follow.]
 
-@@ TITLEMAP_lane_m_nothing_1
+@@ LITHABYS_lane_m_nothing_1
 Don't you hate it when they make you grind to get a 100% run? It's
 just kind of mean to do that. Why not just make hidden areas?
 
@@ -103,85 +103,85 @@ recently, and I did end up thinking that. Weird.]
 
 \c-Anyways!
 
-@@ TITLEMAP_lane_m_nothing_2
+@@ LITHABYS_lane_m_nothing_2
 Strange! Were you passing into Hell, by chance? I think we might be in
 some kind of precipice - a dream, perhaps!
 
 \cn[She's surprisingly happy about this revelation.]
 
-%% TITLEMAP_lane_m_nothing_o0
+%% LITHABYS_lane_m_nothing_o0
 I do like RPG games. Why?
 \ct[Probably best to ignore the rest for now.]
 
-%% TITLEMAP_lane_m_nothing_o1
+%% LITHABYS_lane_m_nothing_o1
 I'm not sure where we are. I just... woke up here.
 \ct[I'm probably in Hell.]
 
-%% TITLEMAP_lane_m_nothing_o2
+%% LITHABYS_lane_m_nothing_o2
 Why *do* we think we look alike, anyhow?
 \cq[Maybe this was worth questioning.]
 
-%% TITLEMAP_lane_m_nothing_o3
+%% LITHABYS_lane_m_nothing_o3
 Nevermind, you talk a mile a minute.
 \cr[Not that I'm one to talk.]
 
-@@ TITLEMAP_lane_m_seen_0
+@@ LITHABYS_lane_m_seen_0
 Hmm... Do you happen to have scars on your upper arms?
 
 \cn[...What? How?]
 
-%% TITLEMAP_lane_m_seen_o0
+%% LITHABYS_lane_m_seen_o0
 No.
 \cr[Fuck.]
 
-%% TITLEMAP_lane_m_seen_o1
+%% LITHABYS_lane_m_seen_o1
 ...Yes. Burn marks. Self-inflicted.
 \cq[*Fuck.*]
 
-@@ TITLEMAP_lane_m_seen_1
+@@ LITHABYS_lane_m_seen_1
 ...Ah.
 
 \cn[Ah...]
 
-%% TITLEMAP_lane_m_seen_o2
+%% LITHABYS_lane_m_seen_o2
 I'm leaving.
 \cr[I want to die. \cgI want to die. \cmI want to die.\cr]
 
-%% TITLEMAP_lane_m_seen_o3
+%% LITHABYS_lane_m_seen_o3
 I see.
 \cr[We're the same person. \cmGod damn it.\cr]
 
-@@ TITLEMAP_lane_other_meet_0
+@@ LITHABYS_lane_other_meet_0
 Don't think I've seen you around. Say, do you come from the past? Am I
 in Heaven?
 
 \cn[I feel mildly odd about this doll.]
 
-%% TITLEMAP_lane_other_meet_o0
+%% LITHABYS_lane_other_meet_o0
 I don't think Heaven exists.
 \cr[What's up with that?]
 
-%% TITLEMAP_lane_other_meet_o1
+%% LITHABYS_lane_other_meet_o1
 I'm not sure where I am in the first place, sorry.
 \cq[Let alone what time...]
 
-%% TITLEMAP_lane_other_meet_o2
+%% LITHABYS_lane_other_meet_o2
 I think I'm just going to leave.
 \cr[I think that's enough.]
 
-@@ TITLEMAP_lane_other_past_0
+@@ LITHABYS_lane_other_past_0
 Neither am I... All I know about my past was that I was named Stan.
 The rest seems foggy!
 
-%% TITLEMAP_lane_other_past_o0
+%% LITHABYS_lane_other_past_o0
 Alright, sorry to bother you.
 \cr[I think that's enough.]
 
 ## Thoth ═════════════════════════════════════════════════════════════════════╕
-%% TITLEMAP_kiri_begin_0
+%% LITHABYS_kiri_begin_0
 \cn[The doll is completely unresponsive. You poke it, but it's just lifeless. Like everything else.]
 
-%% TITLEMAP_kiri_begin_0t
+%% LITHABYS_kiri_begin_0t
 \c[Lith_Angelic]It's weird seeing myself like this.
 \c[Lith_Evil]It's weird seeing myself like this.
 \c[Lith_Angelic]It's weird seeing myself like this.
@@ -197,16 +197,16 @@ Alright, sorry to bother you.
        \c[Lith_Angelic]It's weird seeing myself like this.
        \c[Lith_Evil]It's weird seeing myself like this.
 
-%% TITLEMAP_kiri_begin_1t
+%% LITHABYS_kiri_begin_1t
 Hello, me.
 
-%% TITLEMAP_kiri_begin_o0
+%% LITHABYS_kiri_begin_o0
 \cr[Proceed.]
 
-%% TITLEMAP_kiri_begin_o1
+%% LITHABYS_kiri_begin_o1
 \cq[Don't go.]
 
-%% TITLEMAP_kiri_t_breaking_0
+%% LITHABYS_kiri_t_breaking_0
 \cq[Don't go.]
 \cq[Please.]
 \cq[I want someone to talk to.]
@@ -225,10 +225,10 @@ Hello, me.
        \c[Lith_Angelic]It's weird seeing myself like this.
        \c[Lith_Evil]It's weird seeing myself like this.
 
-%% TITLEMAP_kiri_t_breaking_o0
+%% LITHABYS_kiri_t_breaking_o0
 \cq[Okay.]
 
-%% TITLEMAP_kiri_t_down_0
+%% LITHABYS_kiri_t_down_0
 \cr[Thank you...]
 \cq[Thank you so much...]
 
@@ -241,13 +241,13 @@ Hello, me.
 \cn[Where is it?]
 \cq[That's a good question...]
 
-%% TITLEMAP_kiri_t_down_o0
+%% LITHABYS_kiri_t_down_o0
 \cq[Where *is* it?]
 
-%% TITLEMAP_kiri_t_down_o1
+%% LITHABYS_kiri_t_down_o1
 \cr[No, it doesn't matter now.]
 
-%% TITLEMAP_kiri_t_broken_0
+%% LITHABYS_kiri_t_broken_0
 \cr[I think we're broken...]
 \cq[We need to find it...]
 
@@ -262,10 +262,10 @@ Hello, me.
 
 You hear a voice from inside your head. You realize it's yours.
 
-%% TITLEMAP_kiri_t_broken_o0
+%% LITHABYS_kiri_t_broken_o0
 You weren't fully awake.
 
-%% TITLEMAP_kiri_t_entity_0
+%% LITHABYS_kiri_t_entity_0
 \c[Lith_Angelic]The \c[Lith_Evil]entity behind you, \c[Lith_Angelic]what is that?
 
 \c-I don't know.
@@ -281,7 +281,7 @@ smallllllllllllllllllllll============>>>>>??????????????
 \c-              >>>>> DON'T SEE THE LIGHT <<<<<
 \cq[Pleasant thing. Shall we ignore it?]
 
-%% TITLEMAP_kiri_t_entity_o0
+%% LITHABYS_kiri_t_entity_o0
 \c[Lith_Evil]...Gladly.
 
 ## EOF

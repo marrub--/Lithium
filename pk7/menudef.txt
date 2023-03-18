@@ -19,7 +19,7 @@ defaultOptionMenu {
 listMenu "MainMenuTextOnly" {
    staticPatch 190, 10, "lgfx/Menu/Title.png"
    position    30, 90
-   textItem "$MENU_NGAME", "n", "PlayerclassMenu"
+   textItem "$MENU_NGAME", "n", "PlayerClassMenu"
    ifOption(swapMenu) {
       textItem "$MENU_LOADG",  "l", "LoadGameMenu"
       textItem "$MENU_SAVEG",  "s", "SaveGameMenu"
@@ -29,7 +29,7 @@ listMenu "MainMenuTextOnly" {
       textItem "$MENU_LOADG",  "l", "LoadGameMenu"
       textItem "$MENU_SAVEG",  "s", "SaveGameMenu"
    }
-   textItem "$MENU_CREDIT", "c", "CreditsMenu"
+   textItem "$MENU_CREDIT", "c", "LithCreditsMenu"
    textItem "$MENU_QUITG",  "q", "QuitMenu"
    font "lmidfont", "White", "White"
    lith_versionName 0, 0
@@ -56,13 +56,13 @@ listMenu "SkillMenu" {
    lineSpacing 16
 }
 
-listMenu "CreditsMenu" {
+listMenu "LithCreditsMenu" {
    class    "Lith_CreditsMenu"
    size     640, 480
    position 48,  48
    font     "ltrmfont", "Lith_Green", "White"
-   lith_creditsMenuScroll "$LITH_LEFT",  "l", 0
-   lith_creditsMenuScroll "$LITH_RIGHT", "r", 1
+   lith_creditsMenuScroll "$LITH_BACK",  "b", 0
+   lith_creditsMenuScroll "$LITH_FORWARD", "f", 1
 }
 
 /* EOF */

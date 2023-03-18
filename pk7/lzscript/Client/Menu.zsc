@@ -222,17 +222,28 @@ ui bool             m_screenDim, m_screenWasDim;
 ui double           m_screenDimNext;
 ui Shape2DTransform m_menuRectXf;
 ui Shape2D          m_menuRect;
+ui bool             m_menuWasCredits;
 
 ui void tickMenu() {
+   let cm = Menu.getCurrentMenu();
    if(!m_menuRectXf) {
       m_menuRectXf = new("Shape2DTransform");
       m_menuRect   = new("Shape2D");
    }
    m_screenWasDim = m_screenDim;
-   m_screenDim = menuActive && !Menu.getCurrentMenu().dontDim;
+   m_screenDim = menuActive && !cm.dontDim;
    if(m_screenDim != m_screenWasDim) {
       m_screenDimNext = gameTic + 15;
    }
+   bool is_credits = cm is 'Lith_CreditsMenu';
+   if(is_credits && !m_menuWasCredits) {
+      S_ChangeMusic("lmusic/fribby.opus", 0, true, true);
+      setMusicVolume(0.8);
+   } else if(!is_credits && m_menuWasCredits) {
+      S_ChangeMusic(level.music, level.musicOrder, true, true);
+      setMusicVolume(level.musicVolume);
+   }
+   m_menuWasCredits = is_credits;
 }
 
 ui void drawMenu(RenderEvent evt) {
