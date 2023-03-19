@@ -30,10 +30,10 @@ enum DrawType {
 
 /* 48 bytes */
 struct DrawData {
-   uint8     type;       /* 8 bytes (7 pad) */
-   uint16    tpt, tsz;   /* 4 bytes */
+   int       type;       /* 4 bytes */
+   uint      tpt, tsz;   /* 8 bytes */
    int16     x, y, z, w; /* 8 bytes */
-   uint16    u, v, s, t; /* 8 bytes */
+   int16     u, v, s, t; /* 8 bytes */
    uint      c;          /* 4 bytes */
    float     a;          /* 4 bytes */
    textureId tex;        /* 4 bytes */
@@ -47,7 +47,7 @@ struct FadeMsg {
    uint8 alph;
 }
 
-const _dptr_max = 9000;
+const _dptr_max = 10000;
 const _tptr_max = 65535;
 const _fmsg_max = 255;
 
@@ -128,8 +128,8 @@ ui void drawAllData(RenderEvent evt) {
       case _type_text:
          for(uint ln = 0; ln < d.tsz; ln++) {
             Screen.drawText(d.Fnt, d.C,
-                            d.X-m_lnx[(uint(d.tpt) & 0xFFFF) + ln], d.Y+d.W*ln,
-                            m_txt[(uint(d.tpt) & 0xFFFF) + ln],
+                            d.X-m_lnx[d.tpt + ln], d.Y+d.W*ln,
+                            m_txt[d.tpt + ln],
                             DTA_VirtualWidthF,sc.x, DTA_VirtualHeightF,sc.y,
                             DTA_LegacyRenderStyle,d.Z);
          }
@@ -137,8 +137,8 @@ ui void drawAllData(RenderEvent evt) {
       case _type_textAlpha:
          for(uint ln = 0; ln < d.tsz; ln++) {
             Screen.drawText(d.Fnt, d.C,
-                            d.X-m_lnx[(uint(d.tpt) & 0xFFFF) + ln], d.Y+d.W*ln,
-                            m_txt[(uint(d.tpt) & 0xFFFF) + ln],
+                            d.X-m_lnx[d.tpt + ln], d.Y+d.W*ln,
+                            m_txt[d.tpt + ln],
                             DTA_VirtualWidthF,sc.x, DTA_VirtualHeightF,sc.y,
                             DTA_Alpha,d.A,
                             DTA_LegacyRenderStyle,d.Z);
@@ -279,31 +279,31 @@ static void LS(string tex, int xx, int yy, int flags = 0, float anum = 0.0, colo
 
 static void LT(string txt, string fnt, int xx, int yy, int cr, int flags = 0, float anum = 0.0, int ww = 0) {
    let r = instance();
-   if(r.m_noDraw) return;
+   if(r.m_noDraw || !txt.length()) return;
+   double a = 1.0;
+   if(flags & _u_fade) {
+      a  = r.m_fadeMsg[int(anum)].fade / 255.0;
+      a *= r.m_fadeMsg[int(anum)].alph / 255.0;
+   } else if(flags & _u_alpha) {
+      a = clamp(anum, 0.0, 1.0);
+   }
+   if(a < 0.001) {
+      return;
+   }
    int  x = xx & _xmask;
    int  y = yy & _ymask;
    int xa = xx & _xflag;
    int ya = yy & _yflag;
-   let d = getDt(r.m_d[r.m_dPtr]);
-   if(flags & _u_fade) {
-      d.A  = r.m_fadeMsg[int(anum)].fade / 255.0;
-      d.A *= r.m_fadeMsg[int(anum)].alph / 255.0;
-   } else if(flags & _u_alpha) {
-      d.A = clamp(anum, 0.0, 1.0);
-   } else {
-      d.A = 1.0;
-   }
-   if(d.A < 0.001) {
-      return;
-   }
-   ++r.m_dPtr;
+   let d = getDt(r.m_d[r.m_dPtr++]);
+   d.A    = a;
    d.Type = d.A < 1.0 ? _type_textAlpha : _type_text;
-   if(flags & _u_add)
+   if(flags & _u_add) {
       d.Z = STYLE_Add;
-   else if(d.Type == _type_textAlpha)
+   } else if(d.Type == _type_textAlpha) {
       d.Z = STYLE_Translucent;
-   else
+   } else {
       d.Z = STYLE_Normal;
+   }
    d.C = cr;
    int lnx = 0;
    int wrapWidth = int.max;
@@ -320,7 +320,7 @@ static void LT(string txt, string fnt, int xx, int yy, int cr, int flags = 0, fl
    d.tsz = brl.Count();
    d.tpt = r.m_tPtr;
    r.m_tPtr += d.tsz;
-   for(int i = 0; i < d.tsz; i++) {
+   for(uint i = 0; i < d.tsz; i++) {
       r.m_txt[d.tpt + i] = brl.StringAt(i);
       int lnw = brl.stringWidth(i);
       if(lnx < lnw) lnx = lnw;
