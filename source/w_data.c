@@ -42,6 +42,8 @@ i32 Z_LPData(i32 info, i32 permutation) {
    case _pdt_temperature:  return ml.temperature;
    case _pdt_humidity:     return ml.humidity;
    case _pdt_windspeed:    return ml.windspeed;
+   case _pdt_hudlpos:      return pl.hudlpos;
+   case _pdt_hudrpos:      return pl.hudrpos;
    }
    return 0;
 }

@@ -16,7 +16,7 @@
 #define Dbg_Log(level, ...) \
    (dbglevel(level) ? \
     (ACS_BeginPrint(), \
-     PrintChrLi(#level), \
+     PrintStrL(#level), \
      ACS_PrintChar(':'), \
      ACS_PrintChar(' '), \
      (__VA_ARGS__), \

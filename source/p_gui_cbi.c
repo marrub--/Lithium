@@ -21,13 +21,13 @@
 
 #define Info(...) \
    ( \
-      PrintTextFmt(__VA_ARGS__), \
+      BeginPrintFmt(__VA_ARGS__), \
       PrintText(sf_smallfnt, g->defcr, g->ox+10,1, g->oy+y,1), \
       y += 10 \
    )
 
 #define Slot(name, x, y) PrintSprite(name, g->ox+287-x*48,2, g->oy+48*y-33,1)
-#define CPU(num)         PrintSpriteA(sp_UI_CPU##num, g->ox-13,1, g->oy-13,1, 0.8)
+#define CPU(num)         PrintSprite(sp_UI_CPU##num, g->ox-13,1, g->oy-13,1, _u_alpha, 0.8)
 
 static
 void CBITab_Marine(struct gui_state *g) {
@@ -116,7 +116,7 @@ void P_CBI_TabCBI(struct gui_state *g) {
    case pcl_cybermage: CBITab_CyberMage(g); break;
    case pcl_darklord:  CBITab_DarkLord (g); break;
    default:
-      PrintTextChL("not implemented");
+      BeginPrintStrL("not implemented");
       PrintText(sf_smallfnt, rainbowcr(), g->ox+7,1, g->oy+47,1);
       break;
    }

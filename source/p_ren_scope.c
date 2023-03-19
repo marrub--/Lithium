@@ -31,7 +31,7 @@ void StringStack(void) {
    SetSize(320, 200);
 
    for(mem_size_t i = 0; i < hudstrnum; ++i) {
-      PrintTextA_str(hudstrs[i], sf_ltrmfont, CR_RED, 300,2, 20+i*9,1, 0.5);
+      PrintText_str(hudstrs[i], sf_ltrmfont, CR_RED, 300,2, 20+i*9,1, _u_alpha, 0.5);
    }
 }
 
@@ -46,7 +46,7 @@ void Waves(void) {
    /* Sine (health) */
    for(i32 i = 0; i < 70; i++) {
       i32 pos = (10 + timer + i) % 160;
-      PrintSpriteA(sa_fgfx[frame - 1], 300 + ACS_Sin(pos / 32.0) * 7,1, 25 + pos,1, i / 70.0k);
+      PrintSprite(sa_fgfx[frame - 1], 300 + ACS_Sin(pos / 32.0) * 7,1, 25 + pos,1, _u_alpha, i / 70.0k);
    }
 
    /* Square */
@@ -58,16 +58,16 @@ void Waves(void) {
          2.0k * (2.0k * floork(FRQ * pos) - floork(2.0k * FRQ * pos)) + 1.0k;
 
       if(pos % 20) {
-         PrintSpriteA(sp_HUD_H_D16, 300 + (a > 0) * 7,1, 25 + pos,1, i / 70.0k);
+         PrintSprite(sp_HUD_H_D16, 300 + (a > 0) * 7,1, 25 + pos,1, _u_alpha, i / 70.0k);
       } else {
-         PrintSpriteA(sp_HUD_H_D46, 307,1, 25 + pos,1, i / 70.0k);
+         PrintSprite(sp_HUD_H_D46, 307,1, 25 + pos,1, _u_alpha, i / 70.0k);
       }
    }
 
    /* Triangle */
    for(i32 i = 0; i < 70; i++) {
       i32 pos = (5 + timer + i) % 160;
-      PrintSpriteA(sp_HUD_H_D14, 300 + fastabs((pos & 15) - 8),1, 25 + pos,1, i / 70.0k);
+      PrintSprite(sp_HUD_H_D14, 300 + fastabs((pos & 15) - 8),1, 25 + pos,1, _u_alpha, i / 70.0k);
    }
 }
 
@@ -88,12 +88,12 @@ void ScopeC(void) {
 
    for(i32 i = 0; i < 4; i++) {
       i32 fid = fid_scopecoS + i;
-      if(CheckFade(fid)) PrintSpriteFP(sa_scopes[i], 0,1, 0,1, fid);
+      if(CheckFade(fid)) PrintSprite(sa_scopes[i], 0,1, 0,1, _u_add|_u_fade, fid);
    }
 
    for(i32 i = 0; i < 200; i++) {
       i32 fid = fid_scopecgS + i;
-      if(CheckFade(fid)) PrintSpriteFP(sp_HUD_H_D41, 32,0, i,1, fid);
+      if(CheckFade(fid)) PrintSprite(sp_HUD_H_D41, 32,0, i,1, _u_add|_u_fade, fid);
    }
 }
 
@@ -104,7 +104,7 @@ void ScopeI(void) {
    }
    k32 a = (1 + ACS_Sin(ACS_Timer() / 70.0)) * 0.25 + 0.5;
    SetSize(320, 200);
-   PrintSpriteAP(sp_HUD_I_ScopeOverlay, 160,0, 100,0, a);
+   PrintSprite(sp_HUD_I_ScopeOverlay, 160,0, 100,0, _u_add|_u_alpha, a);
 }
 
 static

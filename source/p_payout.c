@@ -24,10 +24,10 @@ void P_Scr_Payout(void) {
    };
 
 #define Msg(x, xa, font, ...) \
-   (PrintTextFmt(__VA_ARGS__), \
-    PrintTextF(font, CR_WHITE, x,xa, y,1, fid_result))
+   (BeginPrintFmt(__VA_ARGS__), \
+    PrintText(font, CR_WHITE, x,xa, y,1, _u_fade, fid_result))
 
-#define Fram()    PrintSpriteF(sp_UI_ResultFrame, 14,1, y-1,1, fid_result)
+#define Fram()    PrintSprite(sp_UI_ResultFrame, 14,1, y-1,1, _u_fade, fid_result)
 #define Left(...) Msg(16,  1, sf_smallfnt, __VA_ARGS__)
 #define Rght(...) Msg(144, 6, sf_smallfnt, __VA_ARGS__)
 #define Head(...) Msg(8,   1, sf_bigupper, __VA_ARGS__)
@@ -55,8 +55,8 @@ void P_Scr_Payout(void) {
       Head(res);
 
       if(CheckFade(fid_result2)) {
-         PrintTextChS(res);
-         PrintTextFX(sf_bigupper, CR_WHITE, 8,1, y,1, fid_result2, _u_add);
+         BeginPrintStr(res);
+         PrintText(sf_bigupper, CR_WHITE, 8,1, y,1, _u_add|_u_fade, fid_result2);
       }
 
       y += 16;

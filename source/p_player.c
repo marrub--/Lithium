@@ -42,6 +42,7 @@ dynam_aut script void P_Player(void) {
 
 reinit:
    P_Init();
+   P_Dat_PTickPre();
    P_Log_Entry();
    P_Upg_Enter();
    P_Data_Load();
@@ -126,36 +127,25 @@ alloc_aut(0) script static void revenge(void) {
 
 dynam_aut script type("death") static void Z_PlayerDeath(void) {
    pl.dead = true;
-
    P_Upg_PDeinit();
    pl.scoreaccum = pl.scoreaccumtime = 0;
    revenge();
-
    str deathmsg = snil;
    for(i32 time = 0; pl.dead; ++time) {
       if(time != 0 && time % (35 * 30) == 0) {
          deathmsg = ns(lang_fmt(LANG "DEATHMSG_%.2i", ACS_Random(1, 20)));
          SetFade(fid_deathmsg, 35 * 4, 24);
       }
-
       SetSize(320, 240);
-      SetClipW(0, 0, 320, 240, 320);
-
       if(CheckFade(fid_deathmsg)) {
-         PrintTextF_str(deathmsg, sf_smallfnt, CR_WHITE, 0,1, 240-8,2,
-                        fid_deathmsg);
+         PrintText_str(deathmsg, sf_smallfnt, CR_WHITE, 0,1, 240-8,2, _u_fade, fid_deathmsg, 320);
       }
-
       if(pl.obit) {
-         PrintTextChS(pl.obit);
-         PrintText(sf_smallfnt, CR_WHITE, 0,1, 240,2);
+         BeginPrintStr(pl.obit);
+         PrintText(sf_smallfnt, CR_WHITE, 0,1, 240,2, 0, 0, 320);
       }
-
-      ClearClip();
-
       ACS_Delay(1);
    }
-
    pl.obit = nil;
 }
 
@@ -357,7 +347,6 @@ alloc_aut(0) stkcall script static void P_doDepthMeter(void) {
       notch_sx   = 12      * scale,
       notch_sy   = 1       * scale,
       notch_dist = 4       * scale,
-      scr_w      = 320     * scale,
       scr_h      = 240     * scale,
       t_initial  = 15,
       t_move     = 70,
@@ -368,6 +357,7 @@ alloc_aut(0) stkcall script static void P_doDepthMeter(void) {
       s_wait,        e_wait    = s_wait    + t_wait,
       s_out,         e_out     = s_out     + t_out,
    };
+   i32 scr_w      = pl.hudrpos * scale;
    i32 prev_level = (wl.hubscleared     & 31) * notch_dist;
    i32 next_level = (wl.hubscleared + 1 & 31) * notch_dist;
    i32 player_clr = P_playerColor() & 0xFFFFFF;
@@ -382,7 +372,7 @@ alloc_aut(0) stkcall script static void P_doDepthMeter(void) {
       i32 alpha_m = alpha_i << 24;
       i32 cr = 0xFFFF0000 | (alpha_i << 8) | alpha_i;
       SetSize(320, 240);
-      PrintTextAX_str(st_depth, sf_smallfnt, CR_WHITE, 320,2, y,2, alpha_k, _u_no_unicode);
+      PrintText_str(st_depth, sf_smallfnt, CR_WHITE, pl.hudrpos,2, y,2, _u_no_unicode|_u_alpha, alpha_k);
       SetSize(320*scale, 240*scale);
       for(i32 j = 0; j < 16; ++j) {
          i32 notch_w = j % 3 == 0 ? notch_sx : notch_sx / 3;
@@ -428,8 +418,8 @@ alloc_aut(0) stkcall script static void P_doIntro(void) {
          last = which;
 
          ACS_BeginPrint();
-         PrintChrLi(LANG "BEGINNING_");
-         PrintChrSt(pl.discrim);
+         PrintStrL(LANG "BEGINNING_");
+         PrintStr(pl.discrim);
          ACS_PrintChar('_');
          ACS_PrintInt(which);
          str next_text = lang(ACS_EndStrParam());
@@ -488,7 +478,7 @@ alloc_aut(0) stkcall script static void P_doIntro(void) {
          }
 
          if(lines[i][0] != '~') {
-            PrintTextChr(lines[i], linen[i]);
+            BeginPrintStrN(lines[i], linen[i]);
             PrintText(sf_smallfnt, pl.color, 0,1, 8 * i,1);
          }
       }
@@ -510,8 +500,8 @@ alloc_aut(0) stkcall script static void P_doIntro(void) {
          if(!lines[i]) continue;
 
          if(lines[i][0] != '~') {
-            PrintTextChr(lines[i], linen[i]);
-            PrintTextA(sf_smallfnt, pl.color, 0,1, 8 * i,1, alpha);
+            BeginPrintStrN(lines[i], linen[i]);
+            PrintText(sf_smallfnt, pl.color, 0,1, 8 * i,1, _u_alpha, alpha);
          }
 
          for(i32 k = 0; k < linen[i]; k++) {
@@ -696,7 +686,7 @@ alloc_aut(0) script_str ext("ACS") addr(OBJ "Markiplier") void Z_MapMarker(void)
       else                     alpha = 1.0;
       i32 x = 40 - (s.x - ease_in_out_sine(mink(i / (k32)t_pos, 1.0k)) * s.x);
       SetSize(640, 480);
-      PrintTextAX_str(text, sf_areaname, CR_WHITE, x,1, 80,0, alpha, _u_no_unicode);
+      PrintText_str(text, sf_areaname, CR_WHITE, x,1, 80,0, _u_no_unicode|_u_alpha, alpha);
       ACS_Delay(1);
    }
 }

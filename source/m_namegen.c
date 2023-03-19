@@ -156,7 +156,7 @@ void copy_name_str(char **p, cstr src) {
 void RandomName(i32 id) {
    srand(id ? ml.seed + id : ACS_Random(0, INT32_MAX));
 
-   PrintChrLi("\Cg");
+   PrintStrL("\Cg");
 
    if(id && rand() % 1000 != 0) {
       noinit static
@@ -196,14 +196,14 @@ void RandomName(i32 id) {
          }
       }
       *p = '\0';
-      PrintChrSt(s);
+      PrintStr(s);
    } else {
-      PrintChrSt(amusing_name[rand() % countof(amusing_name)]);
+      PrintStr(amusing_name[rand() % countof(amusing_name)]);
    }
 
    if(id) {
-      PrintChrLi(", the ");
-      PrintChrSt(titles[rand() % countof(titles)]);
+      PrintStrL(", the ");
+      PrintStr(titles[rand() % countof(titles)]);
    }
 }
 

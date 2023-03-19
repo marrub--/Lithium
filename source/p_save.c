@@ -58,14 +58,14 @@ void num_out(i32 n) {
       *--p = div.rem + '!';
       n = div.quot;
    }
-   PrintChrSt(p);
+   PrintStr(p);
 }
 
 alloc_aut(0) stkcall static
 void chunk_out(cstr name, i32 version) {
    ACS_PrintChar(_eoc_1);
    ACS_PrintChar(_eoc_2);
-   PrintChrSt(name);
+   PrintStr(name);
    num_out(version);
    ACS_PrintChar(' ');
 }
@@ -118,7 +118,7 @@ void P_Data_Save(void) {
    for(i32 i = 0; i < UPGR_MAX; ++i) {
       i32 groups = pl.upgrades[i].agroups;
       if(groups) {
-         PrintChrSt(Upgr_EnumToStr(i));
+         PrintStr(Upgr_EnumToStr(i));
          ACS_PrintChar(' ');
          num_out(groups);
          ACS_PrintChar(' ');
@@ -130,7 +130,7 @@ void P_Data_Save(void) {
       mem_size_t len = pl.notes[i] ? faststrlen(pl.notes[i]) : 0;
       num_out(len);
       ACS_PrintChar(' ');
-      PrintChars(pl.notes[i], len);
+      PrintStrN(pl.notes[i], len);
    }
 
    chunk_out("bipu", 1);
@@ -141,7 +141,7 @@ void P_Data_Save(void) {
          i32 flg = 0;
          if(get_bit(page->flags, _page_new)) set_bit(flg, _bipu_new);
 
-         PrintChrSt(page->name);
+         PrintStr(page->name);
          ACS_PrintChar(' ');
          num_out(flg);
          ACS_PrintChar(' ');

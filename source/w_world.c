@@ -221,8 +221,7 @@ alloc_aut(0) script static void W_WrongConfig() {
    Dbg_Log(log_dev, _l(_f));
    for(;;) {
       SetSize(320, 240);
-      SetClipW(0, 0, 320, 240, 320);
-      PrintTextChL(
+      BeginPrintStrL(
          "The configuration for this mod has been wiped, or you accidentally "
          "set '" CVAR "sv_failtime' to 0 manually. If you did the latter, "
          "please set it to something else. Otherwise, please follow these "
@@ -237,8 +236,7 @@ alloc_aut(0) script static void W_WrongConfig() {
          "lines starting with '" CVAR "' or '" DCVAR "' under it.\n"
          "5. Save the file and start GZDoom again. If the issue persists "
          "try these steps again or delete your GZDoom configuration.");
-      PrintText(sf_ltrmfont, CR_WHITE, 0,1, 16,1);
-      ClearClip();
+      PrintText(sf_ltrmfont, CR_WHITE, 0,1, 16,1, 0, 0, 320);
       ACS_Delay(1);
    }
 }

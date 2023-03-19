@@ -23,8 +23,8 @@ void P_Ren_LevelUp(void) {
 
    if(pl.attr.lvupstr[0]) {
       SetSize(320, 240);
-      PrintTextChr(pl.attr.lvupstr, pl.attr.lvupstrn);
-      PrintText(sf_smallfnt, CR_WHITE, 220,1, 75,1);
+      BeginPrintStrN(pl.attr.lvupstr, pl.attr.lvupstrn);
+      PrintText(sf_smallfnt, CR_WHITE, pl.hudrpos-100,1, 75,1);
    }
 }
 
@@ -44,14 +44,8 @@ void P_Ren_Mission(void) {
          _l("\CiVACUUM\n");
       } else {
          static const cstr angles[] = {
-            u8"↑",
-            u8"↖",
-            u8"←",
-            u8"↙",
-            u8"↓",
-            u8"↘",
-            u8"→",
-            u8"↗",
+            u8"↑", u8"↖", u8"←", u8"↙",
+            u8"↓", u8"↘", u8"→", u8"↗",
          };
          _l("\Cv");  _p(ml.temperature); _l(u8"°C\n");
          _l("\Cy");  _p(ml.humidity);    _l("%RH\n");
@@ -80,7 +74,7 @@ void P_Ren_Mission(void) {
       case _mstat_finished:   _l("\CjMISSION \CdFINISHED");   break;
       case _mstat_failure:    _l("\CjMISSION \CgFAILED");     break;
       }
-      PrintTextAX(sf_smallfnt, pl.color, 320,3, 28,1, alpha, _u_no_unicode);
+      PrintText(sf_smallfnt, pl.color, pl.hudrpos,3, 28,1, _u_no_unicode|_u_alpha, alpha);
    }
 }
 
@@ -90,14 +84,12 @@ static void P_Ren_Magic(void) {
    for(i32 i = 0; i < 4; i++) {
       i32 fid = fid_rendS + i;
       if(CheckFade(fid)) {
-         PrintSpriteFP(pl.rendhit ? sa_rend_ht[i] : sa_rend_nh[i],
-                       400,0, 300,0, fid);
+         PrintSprite(pl.rendhit ? sa_rend_ht[i] : sa_rend_nh[i], 400,0, 300,0, _u_add|_u_fade, fid);
       }
    }
 
    if(CheckFade(fid_blade)) {
-      PrintSpriteFP(pl.bladehit ? sp_Weapon_BladeHit : sp_Weapon_Blade,
-                    400,0, 300,0, fid_blade);
+      PrintSprite(pl.bladehit ? sp_Weapon_BladeHit : sp_Weapon_Blade, 400,0, 300,0, _u_add|_u_fade, fid_blade);
    }
 }
 

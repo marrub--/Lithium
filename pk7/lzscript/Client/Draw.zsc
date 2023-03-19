@@ -28,15 +28,16 @@ enum DrawType {
    _type_fill,
 }
 
-/* 32 bytes */
+/* 48 bytes */
 struct DrawData {
-   uint8     type, tsz; /* 2 bytes */
-   uint16    tpt; /* 2 bytes */
+   uint8     type;       /* 8 bytes (7 pad) */
+   uint16    tpt, tsz;   /* 4 bytes */
    int16     x, y, z, w; /* 8 bytes */
-   uint      c; /* 4 bytes */
-   float     a; /* 4 bytes */
-   Font      fnt; /* 8 bytes */
-   textureId tex; /* 4 bytes */
+   uint16    u, v, s, t; /* 8 bytes */
+   uint      c;          /* 4 bytes */
+   float     a;          /* 4 bytes */
+   textureId tex;        /* 4 bytes */
+   Font      fnt;        /* 8 bytes */
 }
 
 struct FadeMsg {
@@ -91,26 +92,38 @@ ui void drawAllData(RenderEvent evt) {
          Screen.drawTexture(d.Tex, false, d.X, d.Y,
                             DTA_VirtualWidthF,sc.x, DTA_VirtualHeightF,sc.y,
                             DTA_TopOffset,0, DTA_LeftOffset,0,
-                            DTA_LegacyRenderStyle,d.Z);
+                            DTA_LegacyRenderStyle,d.Z,
+                            DTA_SrcX,d.u, DTA_SrcY,d.v,
+                            DTA_SrcWidth,d.s, DTA_SrcHeight,d.t,
+                            DTA_DestWidth,d.s, DTA_DestHeight,d.t);
          break;
       case _type_spriteAlpha:
          Screen.drawTexture(d.Tex, false, d.X, d.Y,
                             DTA_VirtualWidthF,sc.x, DTA_VirtualHeightF,sc.y,
                             DTA_TopOffset,0, DTA_LeftOffset,0,
                             DTA_LegacyRenderStyle,d.Z,
-                            DTA_Alpha,d.A);
+                            DTA_Alpha,d.A,
+                            DTA_SrcX,d.u, DTA_SrcY,d.v,
+                            DTA_SrcWidth,d.s, DTA_SrcHeight,d.t,
+                            DTA_DestWidth,d.s, DTA_DestHeight,d.t);
          break;
       case _type_spriteStencil:
          Screen.drawTexture(d.Tex, false, d.X, d.Y,
                             DTA_VirtualWidthF,sc.x, DTA_VirtualHeightF,sc.y,
                             DTA_TopOffset,0, DTA_LeftOffset,0,
-                            DTA_FillColor,d.C);
+                            DTA_FillColor,d.C,
+                            DTA_SrcX,d.u, DTA_SrcY,d.v,
+                            DTA_SrcWidth,d.s, DTA_SrcHeight,d.t,
+                            DTA_DestWidth,d.s, DTA_DestHeight,d.t);
          break;
       case _type_spriteStencilAlpha:
          Screen.drawTexture(d.Tex, false, d.X, d.Y,
                             DTA_VirtualWidthF,sc.x, DTA_VirtualHeightF,sc.y,
                             DTA_TopOffset,0, DTA_LeftOffset,0,
-                            DTA_Alpha,d.A, DTA_FillColor,d.C);
+                            DTA_Alpha,d.A, DTA_FillColor,d.C,
+                            DTA_SrcX,d.u, DTA_SrcY,d.v,
+                            DTA_SrcWidth,d.s, DTA_SrcHeight,d.t,
+                            DTA_DestWidth,d.s, DTA_DestHeight,d.t);
          break;
       case _type_text:
          for(uint ln = 0; ln < d.tsz; ln++) {
@@ -201,7 +214,7 @@ static void LL(int x, int y, int z, int w, color c = 0) {
    d.C = c;
 }
 
-static void LS(string tex, int xx, int yy, float anum, int flags, color cr = 0) {
+static void LS(string tex, int xx, int yy, int flags = 0, float anum = 0.0, color cr = 0, int srcpos = 0, int srcsize = 0) {
    let r = instance();
    if(r.m_noDraw) return;
    int  x = xx & _xmask;
@@ -222,36 +235,49 @@ static void LS(string tex, int xx, int yy, float anum, int flags, color cr = 0) 
    }
    ++r.m_dPtr;
    d.Type = d.A < 1.0 ? _type_spriteAlpha : _type_sprite;
-   if(flags & _u_add)
+   if(flags & _u_add) {
       d.Z = STYLE_Add;
-   else if(d.Type == _type_spriteAlpha)
+   } else if(d.Type == _type_spriteAlpha) {
       d.Z = STYLE_Translucent;
-   else
+   } else {
       d.Z = STYLE_Normal;
+   }
    if(flags & _u_color) {
-      if(d.Type == _type_spriteAlpha)
+      if(d.Type == _type_spriteAlpha) {
          d.Type = _type_spriteStencilAlpha;
-      else
+      } else {
          d.Type = _type_spriteStencil;
+      }
       d.C = cr;
    }
    d.Tex = getTex(tex);
-   int sx, sy; [sx, sy] = TexMan.GetSize(d.Tex);
+   int sx, sy; [sx, sy] = TexMan.getSize(d.Tex);
+   if(flags & _u_clip) {
+      d.u = (srcpos  & 0xFFFF0000) >> 16;
+      d.v =  srcpos  & 0x0000FFFF;
+      d.s = (srcsize & 0xFFFF0000) >> 16;
+      d.t =  srcsize & 0x0000FFFF;
+   } else {
+      d.u = 0;
+      d.v = 0;
+      d.s = sx;
+      d.t = sy;
+   }
    switch(xa) {
-      default:
-      case _xl: d.X = x;          break;
-      case _xc: d.X = x - sx / 2; break;
-      case _xr: d.X = x - sx;     break;
+   default:
+   case _xl: d.X = x;          break;
+   case _xc: d.X = x - sx / 2; break;
+   case _xr: d.X = x - sx;     break;
    }
    switch(ya) {
-      default:
-      case _yt: d.Y = y;          break;
-      case _yc: d.Y = y - sy / 2; break;
-      case _yb: d.Y = y - sy;     break;
+   default:
+   case _yt: d.Y = y;          break;
+   case _yc: d.Y = y - sy / 2; break;
+   case _yb: d.Y = y - sy;     break;
    }
 }
 
-static void LT(string txt, string fnt, int xx, int yy, float anum, int cr, int flags) {
+static void LT(string txt, string fnt, int xx, int yy, int cr, int flags = 0, float anum = 0.0, int ww = 0) {
    let r = instance();
    if(r.m_noDraw) return;
    int  x = xx & _xmask;
@@ -280,7 +306,14 @@ static void LT(string txt, string fnt, int xx, int yy, float anum, int cr, int f
       d.Z = STYLE_Normal;
    d.C = cr;
    int lnx = 0;
-   int wrapWidth = r.m_wrapX >= 0 && xa == _xl ? r.m_wrapX - x : int.max;
+   int wrapWidth = int.max;
+   if(xa == _xl) {
+      if(ww > 0) {
+         wrapWidth = ww;
+      } else if(r.m_wrapX >= 0) {
+         wrapWidth = r.m_wrapX - x;
+      }
+   }
    d.Fnt = r.fntAny(fnt, flags & _u_no_unicode);
    d.W   = d.Fnt.GetHeight();
    let brl = d.Fnt.BreakLines(txt, wrapWidth);
@@ -316,7 +349,7 @@ static void LT(string txt, string fnt, int xx, int yy, float anum, int cr, int f
 static void LC(int x = 0, int y = 0, int w = 0, int h = 0, int ww = 0) {
    let r = instance();
    let d = getDt(r.m_d[r.m_dPtr]);
-   if(w <= 0 || h <= 0 || x + w <= 0 || y + h <= 0) {
+   if(w <= 0 || h <= 0 || y + h <= 0) {
       r.m_noDraw = true;
       return;
    }
@@ -335,10 +368,13 @@ static void LC(int x = 0, int y = 0, int w = 0, int h = 0, int ww = 0) {
 
 static void LU() {
    let r = instance();
-   let d = getDt(r.m_d[r.m_dPtr++]);
+   bool wasNoDraw = r.m_noDraw;
    r.m_noDraw = false;
    r.m_wrapX = -1;
-   d.Type = _type_clipClear;
+   if(!wasNoDraw) {
+      let d = getDt(r.m_d[r.m_dPtr++]);
+      d.Type = _type_clipClear;
+   }
 }
 
 static void LR(int x = 0, int y = 0, int w = 0, int h = 0, color cr = 0) {

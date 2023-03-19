@@ -24,9 +24,9 @@ script static bool chtf_dbg_dlg(cheat_params_t const params) {
    struct dlg_def *def = &dlgdefs[n];
    ACS_BeginPrint();
    if(def->codeV) {
-      PrintChrLi("--- Script ");
+      PrintStrL("--- Script ");
       ACS_PrintHex(n);
-      PrintChrLi(" ---\n");
+      PrintStrL(" ---\n");
       __nprintf("Disassembling(%p,%u,%u)...\n", def->codeV, def->codeC,
                 def->codeP);
       for(mem_size_t i = 0; i < def->codeP;) {
@@ -35,7 +35,7 @@ script static bool chtf_dbg_dlg(cheat_params_t const params) {
          i = Dlg_WriteCode(def, c, i);
          ACS_PrintChar('\n');
       }
-      PrintChrLi("Dumping code...\n");
+      PrintStrL("Dumping code...\n");
       Dbg_PrintMemC(def->codeV, def->codeC);
       __nprintf("Dumping string table(%p,%u,%u)...\n", def->stabV, def->stabC, def->stabP);
       Dbg_PrintMemC(def->stabV, def->stabC);
@@ -128,7 +128,7 @@ mem_size_t Dlg_WriteCode(struct dlg_def const *def, mem_size_t c, mem_size_t i) 
    struct dcd_info const *inf = &dcdinfo[byte(c)];
    __nprintf("%02X ", c);
    if(c > 0xFF || !inf->name[0]) {
-      PrintChrLi("      ???.??        ");
+      PrintStrL("      ???.??        ");
       return i;
    }
    mem_size_t c2, c3;

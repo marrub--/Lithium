@@ -65,7 +65,7 @@ void G_WinBeg_Imp(struct gui_state *g, gid_t id, struct gui_arg_win *a) {
 
    __with(char bg[64];) {
       G_Prefix(g, bg, pre, bg);
-      PrintSpriteA(fast_strdup(bg), ox,1, oy,1, pre->a);
+      PrintSprite(fast_strdup(bg), ox,1, oy,1, _u_alpha, pre->a);
    }
 
    ox += pre->bx;

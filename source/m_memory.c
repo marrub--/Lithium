@@ -243,18 +243,18 @@ alloc_aut(0) stkcall static
 void PrintDplBlks(struct dpl_blk *cur) {
    mem_size_t i = 0;
    do {
-      PrintChrLi("cur:");
+      PrintStrL("cur:");
       ACS_PrintHex((intptr_t)cur);
-      PrintChrLi(" prv:");
+      PrintStrL(" prv:");
       ACS_PrintHex((intptr_t)cur->prv);
-      PrintChrLi(" nxt:");
+      PrintStrL(" nxt:");
       ACS_PrintHex((intptr_t)cur->nxt);
       ACS_PrintChar('\n');
       i++;
    } while(cur = cur->nxt);
    ACS_PrintChar('(');
    ACS_PrintInt(i);
-   PrintChrLi(" in list)");
+   PrintStrL(" in list)");
 }
 
 alloc_aut(0) stkcall
@@ -270,20 +270,20 @@ void __GDCC__alloc_dump(void) {
 
    do {
       ACS_BeginPrint();
-      PrintChrLi("blk:");
+      PrintStrL("blk:");
       ACS_PrintHex((intptr_t)blk);
-      PrintChrLi(" prv:");
+      PrintStrL(" prv:");
       ACS_PrintHex((intptr_t)blk->prv);
-      PrintChrLi(" nxt:");
+      PrintStrL(" nxt:");
       ACS_PrintHex((intptr_t)blk->nxt);
-      PrintChrLi(" siz:");
+      PrintStrL(" siz:");
       ACS_PrintHex(blk->siz);
-      PrintChrLi(" tag:");
-      PrintChrSt(TagName(blk->tag));
+      PrintStrL(" tag:");
+      PrintStr(TagName(blk->tag));
       ACS_PrintChar('(');
       ACS_PrintInt(blk->tag);
       ACS_PrintChar(')');
-      PrintChrLi(" idn:");
+      PrintStrL(" idn:");
       ACS_PrintHex(blk->idn);
       EndLogEx(_pri_bold|_pri_nonotify);
 
@@ -292,42 +292,42 @@ void __GDCC__alloc_dump(void) {
    } while(blk != mem_top->cur);
 
    ACS_BeginPrint();
-   PrintChrLi("total sizes");
+   PrintStrL("total sizes");
    for(mem_tag_t i = 0; i < _tag_max; i++) {
       ACS_PrintChar('\n');
-      PrintChrSt(TagName(i));
-      PrintChrLi(":\t\t");
+      PrintStr(TagName(i));
+      PrintStrL(":\t\t");
       ACS_PrintInt(tagsizes[i]);
    }
    EndLogEx(_pri_bold|_pri_nonotify);
 
    ACS_BeginPrint();
    if(dpl_act) {
-      PrintChrLi("active freelist\n");
+      PrintStrL("active freelist\n");
       PrintDplBlks(dpl_act);
    }
    EndLogEx(_pri_bold|_pri_nonotify);
    ACS_BeginPrint();
    if(dpl_ina) {
-      PrintChrLi("inactive freelist\n");
+      PrintStrL("inactive freelist\n");
       PrintDplBlks(dpl_ina);
    }
    EndLogEx(_pri_bold|_pri_nonotify);
 
    ACS_BeginPrint();
-   PrintChrLi("mem_dat=");
+   PrintStrL("mem_dat=");
    ACS_PrintHex((intptr_t)mem_dat);
-   PrintChrLi("\nmem_top=");
+   PrintStrL("\nmem_top=");
    ACS_PrintHex((intptr_t)mem_top);
-   PrintChrLi("\npls_stk=");
+   PrintStrL("\npls_stk=");
    ACS_PrintHex((intptr_t)pls_stk);
-   PrintChrLi("\npls_cur=");
+   PrintStrL("\npls_cur=");
    ACS_PrintHex((intptr_t)pls_cur);
-   PrintChrLi("\ndpl_dat=");
+   PrintStrL("\ndpl_dat=");
    ACS_PrintHex((intptr_t)dpl_dat);
-   PrintChrLi("\ndpl_ina=");
+   PrintStrL("\ndpl_ina=");
    ACS_PrintHex((intptr_t)dpl_ina);
-   PrintChrLi("\ndpl_act=");
+   PrintStrL("\ndpl_act=");
    ACS_PrintHex((intptr_t)dpl_act);
    EndLogEx(_pri_bold|_pri_nonotify);
 }

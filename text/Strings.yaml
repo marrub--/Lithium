@@ -67,6 +67,7 @@ sc_:
    - gui_defcr
    - gui_theme
 
+   - hud_43aspect
    - hud_expbar
    - hud_logcolor
    - hud_logfromtop

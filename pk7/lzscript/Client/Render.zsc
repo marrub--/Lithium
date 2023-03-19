@@ -150,6 +150,7 @@ ui void drawInventory(RenderEvent evt) {
       "\cn", "\ca", "\cf",
       "\cn", "\cd", "\cf"
    };
+   int hudlpos = Lith_UTIL.pData(_pdt_hudlpos);
    if(m_texBatteryOutline.isNull()) {
       m_texBatteryOutline = getTex(":HUD:BatteryOutline");
    }
@@ -186,17 +187,15 @@ ui void drawInventory(RenderEvent evt) {
       y += 8;
       inv_text = inv_text .. "\n";
    }
-   Screen.drawText(fntSml(), Font.CR_WHITE, 0, 0, inv_text,
+   Screen.drawText(fntSml(), Font.CR_WHITE, hudlpos, 0, inv_text,
                    DTA_VirtualWidth,320, DTA_VirtualHeight,240);
    y = drawStatFx(evt, y);
    if(m_lightMaxBattery > 0 && m_lightCurBattery < m_lightMaxBattery) {
       float s = m_lightCurBattery / float(m_lightMaxBattery) * 8.0f;
-      Screen.drawTexture(m_texBatteryOutline, false, 0, y,
+      Screen.drawTexture(m_texBatteryOutline, false, hudlpos, y,
                          DTA_VirtualWidth,320, DTA_VirtualHeight,240);
       y += 2;
-      setClip(2, y, 2, s, (320, 240));
-      Screen.drawTexture(m_texBattery, false, 2, y, DTA_VirtualWidth,320, DTA_VirtualHeight,240);
-      Screen.clearClipRect();
+      Screen.drawTexture(m_texBattery, false, hudlpos+2, y, DTA_VirtualWidth,320, DTA_VirtualHeight,240, DTA_SrcHeight,s, DTA_DestHeightF,s);
       y += 10;
    }
 }

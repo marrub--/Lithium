@@ -53,10 +53,9 @@ void Upgr_ReactArmor_Deactivate(void) {
 
 void Upgr_ReactArmor_Render(void) {
    if(udata.activearmor && CVarGetI(sc_hud_showarmorind)) {
-      PrintSprite(sp_HUD_M_SplitLeft, 12,1, 226,2);
-
-      PrintTextChr(ArmorNames[udata.activearmor - 1].abbr, 3);
-      PrintTextX(sf_bigupper, CR_LIGHTBLUE, 32,1, 217,0, _u_no_unicode);
+      PrintSprite(sp_HUD_M_SplitLeft, pl.hudlpos+12,1, 226,2);
+      BeginPrintStrN(ArmorNames[udata.activearmor - 1].abbr, 3);
+      PrintText(sf_bigupper, CR_LIGHTBLUE, pl.hudlpos+32,1, 217,0, _u_no_unicode);
    }
 }
 

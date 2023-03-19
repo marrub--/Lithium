@@ -30,7 +30,7 @@ void P_CBI_TabNotes(struct gui_state *g) {
          continue;
       }
 
-      PrintTextFmt(tmpstr(lang(sl_note_fmt)), i + 1);
+      BeginPrintFmt(tmpstr(lang(sl_note_fmt)), i + 1);
       PrintText(sf_lmidfont, g->defcr, g->ox+2,1, i * 30 + g->oy,1);
 
       if(G_Button_HId(g, i, pl.notes[i] |? tmpstr(lang(sl_empty)),

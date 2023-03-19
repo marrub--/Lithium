@@ -34,17 +34,17 @@
 #define lang_fmt(...) (StrParamBegin(__VA_ARGS__), lang(ACS_EndStrParam()))
 #define lang_fmt_discrim(...) (lang_fmt(__VA_ARGS__, pl.discrim) |? lang_fmt(__VA_ARGS__, ""))
 
-#define lang_discrim(name) (lang(strp(ACS_PrintString(name), PrintChrSt(pl.discrim))) |? lang(name))
+#define lang_discrim(name) (lang(strp(ACS_PrintString(name), PrintStr(pl.discrim))) |? lang(name))
 
 #define StrParamBegin(...) (ACS_BeginPrint(), __nprintf(__VA_ARGS__))
 #define StrParam(...) (StrParamBegin(__VA_ARGS__), ACS_EndStrParam())
 
-#define PrintChrLi(s) ACS_PrintGlobalCharRange((i32)(s), __GDCC__Sta, 0, sizeof(s))
+#define PrintStrL(s) ACS_PrintGlobalCharRange((i32)(s), __GDCC__Sta, 0, sizeof(s))
 
-#define fast_strndup(s, n)       strp(PrintChars(s, n))
-#define fast_strdup(s)           strp(PrintChrSt(s))
-#define fast_strdup2(s1, s2)     strp(PrintChrSt(s1), PrintChrSt(s2))
-#define fast_strdup3(s1, s2, s3) strp(PrintChrSt(s1), PrintChrSt(s2), PrintChrSt(s3))
+#define fast_strndup(s, n)       strp(PrintStrN(s, n))
+#define fast_strdup(s)           strp(PrintStr(s))
+#define fast_strdup2(s1, s2)     strp(PrintStr(s1), PrintStr(s2))
+#define fast_strdup3(s1, s2, s3) strp(PrintStr(s1), PrintStr(s2), PrintStr(s3))
 
 #define strp(...) (ACS_BeginPrint(), (__VA_ARGS__), ACS_EndStrParam())
 
@@ -171,16 +171,16 @@
       i32:     ACS_PrintInt, \
       score_t: printscr, \
       u32:     ACS_PrintInt, \
-      cstr:    PrintChrSt, \
+      cstr:    PrintStr, \
       str:     ACS_PrintString)((v)))
-#define _l(s) PrintChrLi(s)
+#define _l(s) PrintStrL(s)
 #define _c(c) ACS_PrintChar(c)
 #define _v(x, y, z) (_c('('), _p(x), _c(','), _p(y), _c(','), _p(z), _c(')'))
 
 #define PrintErr(...) \
    (ACS_BeginPrint(), \
-    PrintChrLi(_f), \
-    PrintChrLi(" \CgERROR\C-: "), \
+    PrintStrL(_f), \
+    PrintStrL(" \CgERROR\C-: "), \
     (__VA_ARGS__), \
     EndLogEx(PrintErrLevel))
 
@@ -197,8 +197,8 @@ enum {
 };
 
 script void StrInit(void);
-stkcall void PrintChars(cstr s, mem_size_t n);
-stkcall void PrintChrSt(cstr s);
+stkcall void PrintStrN(cstr s, mem_size_t n);
+stkcall void PrintStr(cstr s);
 stkcall i32 radix(char c);
 stkcall i32 faststrtoi32_str(astr p);
 stkcall i32 faststrtoi32(cstr p);

@@ -148,20 +148,12 @@ void Upgr_Magic_Update(void) {
 
 void Upgr_Magic_Render(void) {
    if(!pl.hudenabled) return;
-
    i32 hprc = ceilk(mink(udata.manaperc,        0.5k) * 2 * 62);
    i32 fprc = ceilk(maxk(udata.manaperc - 0.5k, 0.0k) * 2 * 62);
-
-   PrintSprite(sp_HUD_C_MagicIcon, 1,1, 213,2);
-   PrintSprite(sp_HUD_C_BarSmall2, 1,1, 220,2);
-
-   SetClip(2, 219-5, hprc, 5);
-   PrintSprite(sp_HUD_C_ManaBar1, 2,1, 219,2);
-   ClearClip();
-
-   SetClip(2, 219-5, fprc, 5);
-   PrintSprite(sp_HUD_C_ManaBar2, 2,1, 219,2);
-   ClearClip();
+   PrintSprite(sp_HUD_C_MagicIcon, pl.hudlpos+1,1, 213,2);
+   PrintSprite(sp_HUD_C_BarSmall2, pl.hudlpos+1,1, 220,2);
+   PrintSpriteClip(sp_HUD_C_ManaBar1, pl.hudlpos+2,1, 219,2, 0,0,hprc,5);
+   PrintSpriteClip(sp_HUD_C_ManaBar2, pl.hudlpos+2,1, 219,2, 0,0,fprc,5);
 }
 
 script_str ext("ACS") addr(OBJ "SetMagicUI")

@@ -165,15 +165,15 @@ void P_CBI_TabLog(struct gui_state *g) {
    G_ScrEnd(g, &logscr);
 }
 
-script void P_Log(i32 cr, i32 x, i32 yy) {
+script void P_Log(i32 cr, i32 yy) {
    if(CVarGetI(sc_hud_showlog)) {
       bool log_from_top = CVarGetI(sc_hud_logfromtop);
       k32 scale = CVarGetK(sc_hud_logsize);
-      i32 yo = 200 / scale;
-      i32 xs = 320 / scale;
-      i32 ys = 240 / scale;
+      i32 xo = pl.hudlpos / scale;
+      i32 yo = 200        / scale;
+      i32 xs = pl.hudrpos / scale;
+      i32 ys = 240        / scale;
       SetSize(xs, ys);
-      SetClipW(0, 0, xs, ys, xs);
       i32 i = 0;
       for(i32 i = 0; i < log.hudC; i++) {
          struct logdat const *const ld = &log.hudV[i];
@@ -187,11 +187,11 @@ script void P_Log(i32 cr, i32 x, i32 yy) {
          } else if(ld->ftim < -129) {
             a = (ld->ftim + 129) / 10.0 + 1.0;
          }
-         PrintTextA_str(ld->fdta, sf_lmidfont, cr, x,1, y,ya, a);
+         PrintText_str(ld->fdta, sf_lmidfont, cr, xo,1, y,ya, _u_alpha, a, xs);
          if(CheckFade(fid_logadS + i)) {
             cstr s = RemoveTextColors_str(ld->fdta, ACS_StrLen(ld->fdta));
-            PrintTextChS(s);
-            PrintTextFX(sf_lmidfont, CR_WHITE, x,1, y,ya, fid_logadS + i, _u_add);
+            BeginPrintStr(s);
+            PrintText(sf_lmidfont, CR_WHITE, xo,1, y,ya, _u_add|_u_fade, fid_logadS + i, xs);
          }
       }
       SetSize(320, 240);
@@ -203,7 +203,7 @@ void Z_Log(i32 levl, i32 type) {
    str name = EDataS(_edt_logname);
    if(name[0] == '_') {
       ACS_BeginPrint();
-      PrintChrLi(LANG "LOG");
+      PrintStrL(LANG "LOG");
       ACS_PrintString(name);
       name = lang(ACS_EndStrParam());
    }

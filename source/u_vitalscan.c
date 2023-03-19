@@ -58,11 +58,11 @@ void Upgr_VitalScan_Update(void) {
 
       ACS_BeginPrint();
       if(udata.rank == 6) {
-         PrintChrLi("\C[Lith_Dark]");
+         PrintStrL("\C[Lith_Dark]");
       } else if(udata.rank == 7) {
-         PrintChrLi("\C[Lith_Angelic]");
+         PrintStrL("\C[Lith_Angelic]");
       } else if(udata.rank == 8) {
-         PrintChrLi("\C[Lith_Evil]");
+         PrintStrL("\C[Lith_Evil]");
       }
 
       if(udata.rank < 6 && (udata.freak || ACS_CheckFlag(0, sm_boss))) {
@@ -76,7 +76,7 @@ void Upgr_VitalScan_Update(void) {
       ACS_PrintChar('-');
 
       if(get_bit(wl.compat, _comp_legendoom) && InvNum(so_LDLegendaryMonsterTransformed)) {
-         PrintChrLi(" (\CgLegendary\C-)");
+         PrintStrL(" (\CgLegendary\C-)");
       }
 
       udata.oldhealth = udata.health;
@@ -88,7 +88,7 @@ void Upgr_VitalScan_Update(void) {
             ACS_CheckFlag(0, sm_shadow) ?
             m->level - ACS_Random(-5, 5) :
             m->level;
-         PrintChrLi(" lv.");
+         PrintStrL(" lv.");
          ACS_PrintInt(level);
       }
 
@@ -165,7 +165,7 @@ void Upgr_VitalScan_Render(void) {
       ACS_BeginPrint();
       ACS_PrintChar('-');
       ACS_PrintInt(udata.hdelta);
-      PrintTextFX(sf_smallfnt, CR_RED, x+40,4, y+30,2, fid_vscan, _u_no_unicode);
+      PrintText(sf_smallfnt, CR_RED, x+40,4, y+30,2, _u_no_unicode|_u_fade, fid_vscan);
    }
 
    /* Tag and health */
@@ -183,9 +183,9 @@ void Upgr_VitalScan_Render(void) {
    ACS_BeginPrint();
    if(udata.maxhealth) {
       if(udata.freak) {
-         PrintChrSt(alientext(udata.health));
+         PrintStr(alientext(udata.health));
          ACS_PrintChar('/');
-         PrintChrSt(alientext(udata.maxhealth));
+         PrintStr(alientext(udata.maxhealth));
       } else {
          ACS_PrintInt(udata.health);
          ACS_PrintChar('/');
@@ -196,25 +196,16 @@ void Upgr_VitalScan_Render(void) {
       ACS_PrintChar('h');
       ACS_PrintChar('p');
    }
-   PrintTextX(font, CR_WHITE, x+40,4, y+20,2, _u_no_unicode);
+   PrintText(font, CR_WHITE, x+40,4, y+20,2, _u_no_unicode);
 
    /* Health bar */
    if(CVarGetI(sc_scanner_bar)) {
-      SetClip(x, y+2, 80 * udata.damagfrac, 2);
-      PrintSprite(sp_Bars_DamageBar, x,1, y+2,1);
-      ClearClip();
-
+      PrintSpriteClip(sp_Bars_DamageBar, x,1, y+2,1, 0,0,80*udata.damagfrac,2);
       if(udata.split > 0) {
          PrintSprite(sa_healthbars[(udata.split - 1) % countof(sa_healthbars)], x,1, y,1);
       }
-
-      SetClip(x, y, 80 * udata.splitfrac, 3);
-      PrintSprite(sa_healthbars[udata.split % countof(sa_healthbars)], x,1, y,1);
-      ClearClip();
-
-      SetClip(x, y+3, 24 * udata.exp, 3);
-      PrintSprite(sp_Bars_ExpBar1, x,1, y+3,1);
-      ClearClip();
+      PrintSpriteClip(sa_healthbars[udata.split % countof(sa_healthbars)], x,1, y,1, 0,0,80*udata.splitfrac,2);
+      PrintSpriteClip(sp_Bars_ExpBar1, x,1, y+3,1, 0,0,24*udata.exp,2);
    }
 }
 

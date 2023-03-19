@@ -44,61 +44,11 @@ GlobalCrH(wselm1) GlobalCrH(wselm2) GlobalCrH(wselm3) GlobalCrH(wselms)
 #define PrintLine(x, y, z, w, c) \
    DrawCallV(sm_LL, (i32)(x), (i32)(y), (i32)(z), (i32)(w), (i32)(c))
 
-#define PrintSprite(name, x, xa, y, ya) \
-   DrawCallV(sm_LS, name, XArg(x, xa), YArg(y, ya), 0.0k, 0)
-
-#define PrintSpriteA(name, x, xa, y, ya, alpha) \
-   DrawCallV(sm_LS, name, XArg(x, xa), YArg(y, ya), (k32)(alpha), _u_alpha)
-
-#define PrintSpriteF(name, x, xa, y, ya, num) \
-   DrawCallV(sm_LS, name, XArg(x, xa), YArg(y, ya), (k32)(num), _u_fade)
-
-#define PrintSpriteP(name, x, xa, y, ya) \
-   DrawCallV(sm_LS, name, XArg(x, xa), YArg(y, ya), 0.0k, _u_add)
-
-#define PrintSpriteAP(name, x, xa, y, ya, alpha) \
-   DrawCallV(sm_LS, name, XArg(x, xa), YArg(y, ya), (k32)(alpha), _u_add | _u_alpha)
-
-#define PrintSpriteFP(name, x, xa, y, ya, num) \
-   DrawCallV(sm_LS, name, XArg(x, xa), YArg(y, ya), (k32)(num), _u_add | _u_fade)
-
-#define PrintSpriteC(name, x, xa, y, ya, c) \
-   DrawCallV(sm_LS, name, XArg(x, xa), YArg(y, ya), 0.0k, _u_color, (i32)(c))
-
-#define PrintSpriteAC(name, x, xa, y, ya, alpha, c) \
-   DrawCallV(sm_LS, name, XArg(x, xa), YArg(y, ya), (k32)(alpha), \
-             _u_color|_u_alpha, (i32)(c))
-
-#define PrintTextFmt(...)  StrParamBegin(__VA_ARGS__)
-#define PrintTextChr(s, n) (ACS_BeginPrint(), PrintChars(s, n))
-#define PrintTextChS(s)    (ACS_BeginPrint(), PrintChrSt(s))
-#define PrintTextChL(s)    (ACS_BeginPrint(), PrintChrLi(s))
-#define PrintTextEnd()     ACS_EndStrParam()
-
-#define PrintText_str(s, font, cr, x, xa, y, ya) \
-   DrawCallV(sm_LT, s, font, XArg(x, xa), YArg(y, ya), 0.0k, cr, 0)
-
-#define PrintTextX_str(s, font, cr, x, xa, y, ya, flg) \
-   DrawCallV(sm_LT, s, font, XArg(x, xa), YArg(y, ya), 0.0k, cr, flg)
-
-#define PrintTextA_str(s, font, cr, x, xa, y, ya, alpha) \
-   DrawCallV(sm_LT, s, font, XArg(x, xa), YArg(y, ya), (k32)(alpha), cr, _u_alpha)
-
-#define PrintTextAX_str(s, font, cr, x, xa, y, ya, alpha, flg) \
-   DrawCallV(sm_LT, s, font, XArg(x, xa), YArg(y, ya), (k32)(alpha), cr, _u_alpha|(i32)(flg))
-
-#define PrintTextF_str(s, font, cr, x, xa, y, ya, num) \
-   DrawCallV(sm_LT, s, font, XArg(x, xa), YArg(y, ya), (k32)(num), cr, _u_fade)
-
-#define PrintTextFX_str(s, font, cr, x, xa, y, ya, num, flg) \
-   DrawCallV(sm_LT, s, font, XArg(x, xa), YArg(y, ya), (k32)(num), cr, _u_fade|(i32)(flg))
-
-#define PrintText(...)   PrintText_str  (PrintTextEnd(), __VA_ARGS__)
-#define PrintTextX(...)  PrintTextX_str (PrintTextEnd(), __VA_ARGS__)
-#define PrintTextA(...)  PrintTextA_str (PrintTextEnd(), __VA_ARGS__)
-#define PrintTextAX(...) PrintTextAX_str(PrintTextEnd(), __VA_ARGS__)
-#define PrintTextF(...)  PrintTextF_str (PrintTextEnd(), __VA_ARGS__)
-#define PrintTextFX(...) PrintTextFX_str(PrintTextEnd(), __VA_ARGS__)
+#define BeginPrintFmt(...)   StrParamBegin(__VA_ARGS__)
+#define BeginPrintStrN(s, n) (ACS_BeginPrint(), PrintStrN(s, n))
+#define BeginPrintStr(s)     (ACS_BeginPrint(), PrintStr(s))
+#define BeginPrintStrL(s)    (ACS_BeginPrint(), PrintStrL(s))
+#define PrintText(...)       PrintText_str(ACS_EndStrParam(), __VA_ARGS__)
 
 #define SetClip(x, y, w, h) \
    DrawCallV(sm_LC, (i32)(x), (i32)(y), (i32)(w), (i32)(h))
@@ -176,6 +126,9 @@ stkcall void DrawInit(void);
 stkcall i32 Draw_GetCr(i32 n);
 stkcall void TextSize(struct i32v2 *draw_text_size, str s, str font, i32 wrap);
 stkcall struct i32v2 const *TextureSize(str tx);
+stkcall optargs(3) void PrintText_str(str s, str font, i32 cr, i32 x, i32 xa, i32 y, i32 ya, i32 flg, k32 anum, i32 ww);
+stkcall optargs(3) void PrintSprite(str name, i32 x, i32 xa, i32 y, i32 ya, i32 flg, k32 anum, i32 c);
+stkcall optargs(3) void PrintSpriteClip(str name, i32 x, i32 xa, i32 y, i32 ya, i32 cx, i32 cy, i32 cw, i32 ch, i32 flg, k32 anum, i32 c);
 #endif
 
 enum ZscName(FontNum) {
@@ -226,6 +179,7 @@ enum ZscName(DrawFlags) {
    _u_alpha      = 0x04,
    _u_no_unicode = 0x08,
    _u_color      = 0x10,
+   _u_clip       = 0x20,
 };
 
 enum ZscName(XAlign) {

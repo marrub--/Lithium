@@ -46,8 +46,8 @@ bool G_Button_Imp(struct gui_state *g, gid_t id, struct gui_arg_btn *a) {
 
       ACS_BeginPrint();
       ACS_PrintChar('\C');
-      PrintChrSt(color);
-      PrintChrSt(a->label);
+      PrintStr(color);
+      PrintStr(a->label);
       PrintText(pre->font, g->defcr, x,pre->ax, y,pre->ay);
    }
 

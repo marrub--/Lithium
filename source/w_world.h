@@ -85,6 +85,8 @@ enum ZscName(PData) {
    _pdt_temperature,
    _pdt_humidity,
    _pdt_windspeed,
+   _pdt_hudlpos,
+   _pdt_hudrpos,
 };
 
 /* External Data */

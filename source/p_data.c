@@ -131,6 +131,10 @@ void P_Dat_PTickPre(void) {
    case pcl_assassin:  pl.speedmul = 100; pl.jumpboost = 150; break;
    case pcl_darklord:  pl.speedmul = 50;  pl.jumpboost = 100; break;
    }
+
+   i32 hudaspect = !CVarGetI(sc_hud_43aspect) ? ((i32)(((k32)ACS_GetScreenWidth() / (k32)ACS_GetScreenHeight()) * 240) - 320) / 2 : 0;
+   pl.hudlpos = -hudaspect;
+   pl.hudrpos = 320 + hudaspect;
 }
 
 alloc_aut(0) script static

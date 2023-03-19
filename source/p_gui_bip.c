@@ -122,9 +122,9 @@ void DrawPage(struct gui_state *g, struct page *page) {
       g->oy += 27;
    }
 
-   if(image) PrintSpriteA(image, g->ox+186,2, g->oy+140,2, 0.4);
+   if(image) PrintSprite(image, g->ox+186,2, g->oy+140,2, _u_alpha, 0.4);
 
-   PrintTextChS(GetFullName(page));
+   BeginPrintStr(GetFullName(page));
    PrintText(sf_lmidfont, CR_ORANGE, g->ox+1,1, g->oy+5,1);
 
    /* render an outline if the page has an image */
@@ -136,12 +136,12 @@ void DrawPage(struct gui_state *g, struct page *page) {
       cstr txt = RemoveTextColors(bip.pagebody, bip.pagebodypos);
 
       for(mem_size_t i = 0; i < 8; ++i) {
-         gosub(drawText, PrintTextChS(txt),
+         gosub(drawText, BeginPrintStr(txt),
                cr = CR_BLACK, x = xs[i], y = ys[i]);
       }
    }
 
-   gosub(drawText, PrintTextChr(bip.pagebody, bip.pagebodypos),
+   gosub(drawText, BeginPrintStrN(bip.pagebody, bip.pagebodypos),
          cr = g->defcr, x = 1, y = 20);
 
    if(height) {
@@ -186,12 +186,8 @@ void MainUI(struct gui_state *g) {
    return;
 
 doCateg:
-   PrintTextA_str(ns(lang(fast_strdup2(LANG "BIP_HELP_", P_BIP_CategoryToName(cat)))),
-                  sf_smallfnt, g->defcr, g->ox+92,1, g->oy+72+n,1, 0.7);
-   if(G_Button_HId(g, cat, tmpstr(ns(lang(fast_strdup2(LANG "BIP_NAME_",
-                                                       P_BIP_CategoryToName(cat))))),
-                   32, 72 + n, Pre(btnbipmain)))
-   {
+   PrintText_str(ns(lang(fast_strdup2(LANG "BIP_HELP_", P_BIP_CategoryToName(cat)))), sf_smallfnt, g->defcr, g->ox+92,1, g->oy+72+n,1, _u_alpha, 0.7);
+   if(G_Button_HId(g, cat, tmpstr(ns(lang(fast_strdup2(LANG "BIP_NAME_", P_BIP_CategoryToName(cat))))), 32, 72 + n, Pre(btnbipmain))) {
       bip.curcategory = cat;
       bip.curpage     = nil;
    }
@@ -232,7 +228,7 @@ void CategoryUI(struct gui_state *g) {
       }
 
       if(get_bit(page->flags, _page_new)) {
-         PrintSpriteAP(sp_UI_New, g->ox+gui_p.btnlist.w,2, g->oy+y+gui_p.btnlist.h,2, 0.4);
+         PrintSprite(sp_UI_New, g->ox+gui_p.btnlist.w,2, g->oy+y+gui_p.btnlist.h,2, _u_add|_u_alpha, 0.4);
       }
    }
 
@@ -354,13 +350,13 @@ void P_CBI_TabBIP(struct gui_state *g) {
          bip.curcategory = bip.lastcategory;
       }
    } else {
-      PrintSpriteA(sp_UI_bip, g->ox+7,1, g->oy+27,1, 0.1);
+      PrintSprite(sp_UI_bip, g->ox+7,1, g->oy+27,1, _u_alpha, 0.1);
       PrintText_str(ns(lang(sl_bip_header)), sf_lmidfont, g->defcr,
                     g->ox+22,1, g->oy+27,1);
    }
 
    if(max) {
-      PrintTextFmt(tmpstr(lang(sl_bip_available)), avail, max);
+      BeginPrintFmt(tmpstr(lang(sl_bip_available)), avail, max);
       PrintText(sf_smallfnt, g->defcr, g->ox+287,2, g->oy+17,1);
    }
 }

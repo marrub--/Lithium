@@ -107,12 +107,12 @@ void StrInit(void) {
 }
 
 alloc_aut(0) stkcall
-void PrintChars(cstr s, mem_size_t n) {
+void PrintStrN(cstr s, mem_size_t n) {
    ACS_PrintGlobalCharRange((i32)(s), __GDCC__Sta, 0, n);
 }
 
 alloc_aut(0) stkcall
-void PrintChrSt(cstr s) {
+void PrintStr(cstr s) {
    ACS_PrintGlobalCharArray((i32)(s), __GDCC__Sta);
 }
 
@@ -331,7 +331,7 @@ cstr scoresep(score_t num) {
 
 alloc_aut(0) stkcall
 void printscr(score_t num) {
-   PrintChrSt(scoresep(num));
+   PrintStr(scoresep(num));
 }
 
 alloc_aut(0) stkcall

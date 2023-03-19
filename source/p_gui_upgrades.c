@@ -50,7 +50,7 @@ void GUIUpgradesList(struct gui_state *g) {
       numbtns += _uc_max;
    }
 
-   PrintTextFmt(tmpstr(lang(sl_cat_filter)), filter_name);
+   BeginPrintFmt(tmpstr(lang(sl_cat_filter)), filter_name);
    PrintText(sf_smallfnt, g->defcr, g->ox+2,1, g->oy+202,1);
 
    G_ScrBeg(g, &pl.cbi.st.upgrscr, 2, 23, gui_p.btnlist.w, 178, gui_p.btnlist.h * numbtns);
@@ -143,7 +143,7 @@ void GUIUpgradeRequirements(struct gui_state *g, struct upgrade *upgr) {
          fmt = tmpstr(lang(sl_shop_activate_uses));
       }
 
-      PrintTextFmt(fmt, upgr->perf);
+      BeginPrintFmt(fmt, upgr->perf);
       PrintText(sf_smallfnt, g->defcr, g->ox+98,1, g->oy+187 + y,2);
       y -= 10;
    }
@@ -166,7 +166,7 @@ void GUIUpgradeRequirements(struct gui_state *g, struct upgrade *upgr) {
       if(chk) {cr = 'a'; perc = 100 - perc;}
       else    {cr = 'n'; perc = 100 + perc;}
 
-      PrintTextFmt(op, cr, perc);
+      BeginPrintFmt(op, cr, perc);
       PrintText(sf_smallfnt, g->defcr, g->ox+98,1, g->oy+187 + y,2);
       y -= 10;
    }

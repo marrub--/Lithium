@@ -30,7 +30,7 @@ static void Container(struct gui_state *g, struct container *cont, i32 sx, i32 s
                  sf_smallfnt, g->defcr, sx,1, sy,2);
    for(i32 y = 0; y < h; y += 8) {
       for(i32 x = 0; x < w; x += 8) {
-         PrintSpriteA(bg, sx+x,1, sy+y,1, 0.8);
+         PrintSprite(bg, sx+x,1, sy+y,1, _u_alpha, 0.8);
       }
    }
    if(pl.movitem && g->clicklft &&
@@ -338,8 +338,8 @@ void P_CBI_TabItems(struct gui_state *g) {
       [_inv_torso]       = 64+8* 0,
       [_inv_legs]        = 64+8*10,
    };
-   PrintSpriteA(sp_UI_Body, g->ox+294-122,1, g->oy+24,1, 0.6);
-   PrintSpriteA(sp_UI_Bag,  g->ox+     16,1, g->oy+16,1, 0.6);
+   PrintSprite(sp_UI_Body, g->ox+294-122,1, g->oy+24,1, _u_alpha, 0.6);
+   PrintSprite(sp_UI_Bag,  g->ox+     16,1, g->oy+16,1, _u_alpha, 0.6);
    PrintText_str(ns(lang(sl_inv_hints)),
                  sf_smallfnt, g->defcr, g->ox+2,1, g->oy+212,2);
    for(i32 i = 0; i < _inv_num; i++) {
@@ -396,8 +396,8 @@ void P_CBI_TabItems(struct gui_state *g) {
       if(sel->scr > 0) {
          ACS_BeginPrint();
          ACS_PrintChar('(');
-         PrintChrSt(scoresep(sel->scr));
-         PrintChrLi("\Cnscr\C-)");
+         PrintStr(scoresep(sel->scr));
+         PrintStrL("\Cnscr\C-)");
          PrintText(sf_smallfnt, g->defcr, g->ox+x+18,1, g->oy+y,1);
       }
       if(sel->scr >= 0 &&

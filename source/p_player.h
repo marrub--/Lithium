@@ -111,7 +111,7 @@ void P_LogB(i32 levl, cstr fmt, ...); /* log to HUD and full log */
 void P_LogH(i32 levl, cstr fmt, ...); /* log to HUD only */
 void P_LogF(          cstr fmt, ...); /* log to full log only */
 void P_Log_Entry(void);
-script void P_Log(i32 cr, i32 x, i32 yy);
+script void P_Log(i32 cr, i32 yy);
 
 script void P_Wep_PTickPre(void);
        void P_Dat_PTickPre(void);
@@ -266,6 +266,7 @@ struct player {
 
    /* HUD */
    bool hudenabled;
+   i32  hudlpos, hudrpos;
 
    /* Score */
    score_t scoreaccum;

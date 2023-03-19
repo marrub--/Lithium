@@ -30,6 +30,7 @@ The font to use when Japanese is set as the language.
 
 == \#gui_curspeed | Cursor speed
 == \#gui_theme | Interface theme
+== \#hud_43aspect | Clamp to 4:3 aspect ratio
 == \#hud_type | Type
 == \#hud_expbar | Show experience bar
 == \#hud_logfromtop | Display log at top of screen

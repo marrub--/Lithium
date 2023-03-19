@@ -15,11 +15,7 @@
 #include "w_world.h"
 
 static void AttrBar(struct gui_state *g, i32 x, i32 y, i32 w, str gfx) {
-   /* FIXME: somehow this is broken?
-   G_Clip(g, x, y, w * 4, 8);
-   PrintSprite(gfx, g->ox+x,1, g->oy+y,1);
-   G_ClipRelease(g);
-   */
+   PrintSpriteClip(gfx, g->ox+x,1, g->oy+y,1, 0,0,mini(w*4, 200),7);
 }
 
 static void DrawAttr(struct gui_state *g, i32 x, i32 y, i32 at) {
@@ -35,7 +31,7 @@ static void DrawAttr(struct gui_state *g, i32 x, i32 y, i32 at) {
       pl.attr.attrs[at]++;
    }
 
-   PrintTextChr(name, 3);
+   BeginPrintStrN(name, 3);
    PrintText(sf_lmidfont, g->defcr, g->ox+x-24,1, g->oy+y,1);
 
    PrintSprite(sp_UI_AttrBar1, g->ox+x,1, g->oy+y,1);
@@ -48,7 +44,7 @@ static void DrawAttr(struct gui_state *g, i32 x, i32 y, i32 at) {
       helptrns += 0.3;
    }
 
-   PrintTextA_str(ns(lang(fast_strdup2(LANG "ATTR_HELP_", name))), sf_smallfnt, g->defcr, g->ox+x+1,1, g->oy+y,1, helptrns);
+   PrintText_str(ns(lang(fast_strdup2(LANG "ATTR_HELP_", name))), sf_smallfnt, g->defcr, g->ox+x+1,1, g->oy+y,1, _u_alpha, helptrns);
 
    ACS_BeginPrint();
    ACS_PrintInt(attr);
@@ -89,7 +85,7 @@ void P_CBI_TabStatus(struct gui_state *g) {
    y += get_bit(pcl_magicuser, pl.pclass) ? 20 : 30;
 
    if(pl.attr.points) {
-      PrintTextFmt(tmpstr(lang(sl_status_levelup)), pl.attr.points);
+      BeginPrintFmt(tmpstr(lang(sl_status_levelup)), pl.attr.points);
       PrintText(sf_smallfnt, g->defcr, g->ox+7,1, g->oy+y,1);
    }
 

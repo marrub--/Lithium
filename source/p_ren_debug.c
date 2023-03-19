@@ -43,7 +43,7 @@ void P_Ren_Debug(void) {
       _l("regenmax: ");   _p(pl.regenwaitmax); _c('\n');
    }
    _l("scorethreshold: "); _p(wl.scorethreshold); _c('\n');
-   PrintTextA(sf_smallfnt, CR_WHITE, 0,1, 240,0, 0.2);
+   PrintText(sf_smallfnt, CR_WHITE, pl.hudlpos*2,1, 240,0, _u_alpha, 0.2);
 }
 #endif
 

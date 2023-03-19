@@ -61,6 +61,7 @@ enum Lith_DrawFlags {
    _u_alpha      = 0x04,
    _u_no_unicode = 0x08,
    _u_color      = 0x10,
+   _u_clip       = 0x20,
 };
 
 enum Lith_XAlign {

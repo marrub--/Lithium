@@ -141,7 +141,7 @@ void P_Wep_PTick(void) {
 
    switch(P_Wep_CurType()) {
    case weapon_c_fist:
-      PrintTextA_str(ns(lang(sl_mana_charge)), sf_smallfnt, CR_BRICK, 160,0, 100,0, 0.5);
+      PrintText_str(ns(lang(sl_mana_charge)), sf_smallfnt, CR_BRICK, 160,0, 100,0, _u_alpha, 0.5);
       break;
    case weapon_c_delear:
       ServCallV(sm_DelearSprite);
@@ -149,7 +149,7 @@ void P_Wep_PTick(void) {
    case weapon_o_cfist: {
       i32 fcharg = InvNum(so_FistCharge);
       k64 charge = 5 + fcharg / 10.0lk;
-      PrintTextFmt(tmpstr(lang(sl_charge_fmt)), charge, fcharg, fcharg * 3);
+      BeginPrintFmt(tmpstr(lang(sl_charge_fmt)), charge, fcharg, fcharg * 3);
       PrintText(sf_smallfnt, CR_LIGHTBLUE, 270,3, 200,2);
       break;
    }

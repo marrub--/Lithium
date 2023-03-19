@@ -364,17 +364,17 @@ void DialogueGUI(void) {
    G_Begin(&gst, 320, 240);
    G_UpdateState(&gst);
 
-   PrintSpriteA(sp_Dialogue_Back,  0,1, 0,1, 0.9);
-   PrintSpriteA(fast_strdup(icon), 0,1, 0,1, 0.9);
+   PrintSprite(sp_Dialogue_Back,  0,1, 0,1, _u_alpha, 0.9);
+   PrintSprite(fast_strdup(icon), 0,1, 0,1, _u_alpha, 0.9);
 
    PrintText_str(snam, sf_bigupper, CR_GREEN, 30,1, 35,1);
 
    G_Clip(&gst, left, top, 257, 150);
    ACS_BeginPrint();
-   PrintChrLi("\Cd> Remote: ");
+   PrintStrL("\Cd> Remote: ");
    ACS_PrintString(srem);
-   PrintChrLi("\n\Cd> Date: ");
-   PrintChrSt(CanonTime(ct_full, ACS_Timer()));
+   PrintStrL("\n\Cd> Date: ");
+   PrintStr(CanonTime(ct_full, ACS_Timer()));
    PrintText(sf_lmidfont, CR_WHITE, left,1, top,1);
 
    if(text) {

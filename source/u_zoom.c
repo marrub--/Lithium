@@ -40,12 +40,12 @@ void Upgr_Zoom_Update(void) {
 
 void Upgr_Zoom_Render(void) {
    if(udata.vzoom) {
-      PrintSpriteA(sp_HUD_Vignette, 160,0, 120,0, 0.3);
+      PrintSprite(sp_HUD_Vignette, 160,0, 120,0, _u_alpha, 0.3);
 
       ACS_SetCameraToTexture(0, sp_LITHCAM2, 90 - udata.vzoom);
       PrintSprite(sp_LITHCAM2, 160,0, 120,0);
 
-      PrintSpriteA(sp_HUD_ZoomOverlay, 160,0, 120,0, 0.5);
+      PrintSprite(sp_HUD_ZoomOverlay, 160,0, 120,0, _u_alpha, 0.5);
 
       static
       char const points[] = "E SES SWW NWN NE";
@@ -55,7 +55,7 @@ void Upgr_Zoom_Render(void) {
          i32 x = yaw * 320 * 4;
          if(x < 0 || x > 320) continue;
 
-         PrintTextChr(&points[i * 2], 2);
+         BeginPrintStrN(&points[i * 2], 2);
          PrintText(sf_smallfnt, CR_WHITE, x,1, 120,0);
       }
    }

@@ -57,8 +57,8 @@ struct slide_ret G_Slider_Imp(struct gui_state *g, gid_t id, struct gui_arg_sld 
    /* draw value */
    if(pre->font) {
       cstr suf = a->suf |? "";
-      if(intstep) {ACS_BeginPrint(); ACS_PrintInt(value); PrintChrSt(suf);}
-      else        {PrintTextFmt("%.2k", (k32)(value * 1.001lk)); PrintChrSt(suf);}
+      if(intstep) {ACS_BeginPrint(); ACS_PrintInt(value); PrintStr(suf);}
+      else        {BeginPrintFmt("%.2k", (k32)(value * 1.001lk)); PrintStr(suf);}
       PrintText(pre->font, g->defcr, x + pre->w/2,4, y + pre->h/2,0);
    }
    struct slide_ret sret = {

@@ -221,6 +221,7 @@ static struct setting const st_gui[] = {
    s_enume("hud_expbar", 0, lxb_max, "expbar"),
    s_boole("hud_showlog"),
    s_boole("hud_showammo"),
+   s_boole("hud_43aspect"),
    s_fixed("hud_logsize", 0.2, 1.0, 0.05, "mult"),
    s_boole("hud_logfromtop"),
    s_color("hud_logcolor"),

@@ -143,13 +143,13 @@ void P_CBI_TabTuts(struct gui_state *g) {
          break;
       case '*':
          pal = _pal_list;
-         PrintChrLi(u8" ×");
+         PrintStrL(u8" ×");
          break;
       case '-':
          if(get_bit(cb, _cb_sol)) {
             pal = _pal_head;
             ++eol;
-            PrintChrSt(alientext(which++));
+            PrintStr(alientext(which++));
             ACS_PrintChar(' ');
             break;
          }

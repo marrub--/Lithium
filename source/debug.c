@@ -44,7 +44,7 @@ void Dbg_PrintMemC(cps_t const *d, mem_size_t size) {
       pos += 3;
    }
 
-   PrintChrLi("\nEOF\n");
+   PrintStrL("\nEOF\n");
 }
 
 void Dbg_PrintMem(void const *data, mem_size_t size) {
@@ -72,7 +72,7 @@ void Dbg_PrintMem(void const *data, mem_size_t size) {
       pos += 3;
    }
 
-   PrintChrLi("\nEOF\n");
+   PrintStrL("\nEOF\n");
 }
 
 dynam_aut script_str ext("ACS") addr(OBJ "Thingomamob")
@@ -121,8 +121,7 @@ void Z_Thimgomabjhdf(void) {
 
 script static
 void dbg_font_test(str font) {
-   static
-   struct {cstr lhs, rhs;} const strings[] = {
+   static struct {cstr lhs, rhs;} const strings[] = {
       "L1SPnc1", u8"¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼",
       "L1SPnc2", u8"½¾¿×÷µ",
       "L1SLet1", u8"ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛ",
@@ -141,16 +140,13 @@ void dbg_font_test(str font) {
       "AlphaL",  u8"abcdefghijklmnopqrstuvwxyz",
       "Extra",   u8"",
    };
-
-   static
-   cstr const pangrams[] = {
+   static cstr const pangrams[] = {
       u8"Falsches Üben von Xylophonmusik quält jeden größeren Zwerg",
       u8"The quick brown fox jumps over the lazy dog",
       u8"Jovencillo emponzoñado de whisky: ¡qué figurota exhibe!",
       u8"Voix ambiguë d'un cœur qui au zéphyr préfère les jattes de kiwis",
       u8"Широкая электрификация южных подъёму сельского хозяйства",
    };
-
    for(;;) {
       enum {_h = 12};
       SetSize(320, 240);
@@ -160,16 +156,14 @@ void dbg_font_test(str font) {
          PrintLine(0, y, 0, y + _h, 0xFFFF00FF);
          PrintLine(70, y, 320, y, 0xFF00FFFF);
          PrintLine(70, y, 70, y + _h, 0xFF00FFFF);
-         PrintTextChS(strings[i].lhs);
-         PrintTextX(font, CR_WHITE, 0,1, y,1, _u_no_unicode);
-         PrintTextChS(strings[i].rhs);
-         PrintTextX(font, CR_WHITE, 70,1, y,1, _u_no_unicode);
+         BeginPrintStr(strings[i].lhs);
+         PrintText(font, CR_WHITE, 0,1, y,1, _u_no_unicode);
+         BeginPrintStr(strings[i].rhs);
+         PrintText(font, CR_WHITE, 70,1, y,1, _u_no_unicode);
          y += _h;
       }
-      SetClipW(0, 0, 320, 240, 320);
-      PrintTextChS(pangrams[ACS_Timer() / 35 % countof(pangrams)]);
-      PrintTextX(font, CR_WHITE, 0,1, y,1, _u_no_unicode);
-      ClearClip();
+      BeginPrintStr(pangrams[ACS_Timer() / 35 % countof(pangrams)]);
+      PrintText(font, CR_WHITE, 0,1, y,1, _u_no_unicode, 0, 320);
       ACS_Delay(1);
    }
 }
