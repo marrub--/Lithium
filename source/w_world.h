@@ -222,8 +222,8 @@ enum ZscName(MapFlag) {
 };
 
 enum ZscName(MapPhantom) {
-   _mphantom_nospawn,
    _mphantom_none,
+   _mphantom_nospawn,
    _mphantom_spawned,
 };
 

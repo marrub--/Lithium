@@ -52,7 +52,7 @@ void Z_GetSigil(void) {
    P_GUI_Close();
    P_LogF("*** WARNING - CAUSAL SHIFT DETECTED IN WETWARE ***");
    pl.sgacquired = true;
-   StartSound(ss_player_getsigil, lch_body3, 0, 1.0, ATTN_NONE);
+   AmbientSound(ss_player_getsigil, 1.0k);
    FreezeTime();
    P_DrawCenterNotification(ns(lang(sl_div_sigil_get)), 157);
    ACS_Delay(157);

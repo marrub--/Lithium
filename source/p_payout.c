@@ -40,6 +40,7 @@ void P_Scr_Payout(void) {
 
    pl.setActivator();
    ACS_Delay(25);
+   WaitPause();
 
    SetFade(fid_result,  35 * 3, 8);
    SetFade(fid_result2, 16,     16);

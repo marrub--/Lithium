@@ -78,10 +78,15 @@ or die by my hand.
 
 %% \#VERSE_CORRUPTED
 [the archdemon thrashes / i prepare the ritual]
+
 "You never get a break from life. Not until you die."
+
 "Have you ever died? Really, and truly?"
+
 "Are you ready to find out what it feels like?"
+
 [the archdemon protests]
+
 "It won't hurt. But you will feel every part of it."
 
 ## EOF

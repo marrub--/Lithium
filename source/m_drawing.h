@@ -63,8 +63,6 @@ GlobalCrH(wselm1) GlobalCrH(wselm2) GlobalCrH(wselm3) GlobalCrH(wselms)
 
 #define StartSound(...) \
    DrawCallV(sm_StartSound, __VA_ARGS__)
-#define AmbientSound(snd, vol) \
-   StartSound(snd, lch_ambient, CHANF_LOCAL|CHANF_UI, vol, ATTN_STATIC)
 
 enum {
    CHANF_LISTENERZ   = 8,
@@ -118,6 +116,7 @@ stkcall optargs(3) void PrintText_str(str s, str font, i32 cr, i32 x, i32 xa, i3
 stkcall optargs(3) void PrintSprite(str name, i32 x, i32 xa, i32 y, i32 ya, i32 flg, k32 anum, i32 c);
 stkcall optargs(3) void PrintSpriteClip(str name, i32 x, i32 xa, i32 y, i32 ya, i32 cx, i32 cy, i32 cw, i32 ch, i32 flg, k32 anum, i32 c);
 stkcall optargs(1) void PrintRect(i32 x, i32 y, i32 w, i32 h, i32 c, i32 flg);
+stkcall optargs(1) void AmbientSound(str snd, k32 vol, i32 chan);
 #endif
 
 enum ZscName(FontNum) {
@@ -159,7 +158,7 @@ enum ZscName(Channel) {
    lch_weather1,
    lch_weather2,
 
-   lch_ambient,
+   lch_ambient, /* FAKE */
 };
 
 enum ZscName(DrawFlags) {

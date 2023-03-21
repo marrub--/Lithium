@@ -41,10 +41,9 @@ void GiveWeaponItem(i32 parm, i32 slot) {
 
 static
 void WeaponGrab(struct weaponinfo const *info) {
-   AmbientSound(!get_bit(pl.upgrades[UPGR_Seven7s].flags, _ug_active) ?
-                info->pickupsound :
-                ss_marathon_pickup,
-                1.0);
+   StartSound(!get_bit(pl.upgrades[UPGR_Seven7s].flags, _ug_active) ?
+              info->pickupsound :
+              ss_marathon_pickup, lch_item, CHANF_NOPAUSE, 1.0, ATTN_NONE);
 
    switch(info->slot) {
    default: FadeFlash(255, 255, 255, 0.5, 0.4); break;

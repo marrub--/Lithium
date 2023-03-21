@@ -94,4 +94,8 @@ stkcall alloc_aut(0) void PrintRect(i32 x, i32 y, i32 w, i32 h, i32 c, i32 flg) 
    DrawCallV(sm_LR, x, y, w, h, c, flg);
 }
 
+stkcall alloc_aut(0) void AmbientSound(str snd, k32 vol, i32 chan) {
+   StartSound(snd, chan |? lch_ambient, CHANF_NOPAUSE|CHANF_NOSTOP, vol, ATTN_NONE);
+}
+
 /* EOF */

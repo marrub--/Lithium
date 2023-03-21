@@ -348,4 +348,40 @@ god Thoth to reassert
 causality. Armed to the
 teeth with guns and magic.
 
+## Boss Warnings ═════════════════════════════════════════════════════════════╕
+%% \#BossWarnLane
+WARNING:
+High concentration of demonic energy in area.
+Life source detected at central point.
+Caution is advised.
+
+%% \#BossWarnJem
+[WARNING]
+DEMONIC ENERGY LEVELS IN AREA RISING ERRATICALLY
+IMPLEMENT DIRECTIVE 90 ON TARGET
+
+%% \#BossWarnFulk
+<Warning> :: High demonic energy level in area.
+Seek and remove source [LIFEFORM 96a.]
+
+%% \#BossWarnOmi
+Detected high amounts of demonic energy near by.
+Find and slaughter interloper.
+
+== \#BossWarnAri | $$\#BossWarnOmi
+
+%% \#BossWarnLuke
+The area's aura suppresses you...
+Destroy the source of the darkness.
+
+%% \#BossWarnKiri
+A shadow lurks in this place.
+Heed not its call, but kill the basilisk.
+
+== \#BossHear1 | You feel ringing in your ears...
+%% \#BossHear2
+An evil voice calls out to you,
+but you do not heed its words...
+== \#BossHear3 | You feel intense pain throughout your whole body...
+
 ## EOF

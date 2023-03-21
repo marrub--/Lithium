@@ -15,7 +15,7 @@
 dynam_aut script static
 void DoAdrenaline(void) {
    P_LogH(4, tmpstr(lang(sl_log_adrenalineused)));
-   StartSound(ss_player_lane_adren_inj, lch_body2, CHANF_NOPAUSE|CHANF_MAYBE_LOCAL|CHANF_UI, 1.0, ATTN_STATIC);
+   AmbientSound(ss_player_lane_adren_inj, 1.0);
    FadeFlash(255, 255, 255, 0.4, 0.6);
    FreezeTime(true);
 

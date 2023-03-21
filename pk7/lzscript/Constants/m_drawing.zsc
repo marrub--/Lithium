@@ -52,7 +52,7 @@ enum Lith_Channel {
    lch_weather1,
    lch_weather2,
 
-   lch_ambient,
+   lch_ambient, 
 };
 
 enum Lith_DrawFlags {

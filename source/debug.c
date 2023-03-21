@@ -226,7 +226,7 @@ bool chtf_give_exp_to(cheat_params_t const params) {
 script static
 bool chtf_give_score(cheat_params_t const params) {
    pl.setActivator();
-   P_Scr_GivePos(0, 0, SCR_MAX, true);
+   P_Scr_GivePos(0, 0, SCR_MAX / (score_t)(params[0] - '0'), true);
    return true;
 }
 
@@ -246,7 +246,7 @@ bool chtf_end_game(cheat_params_t const params) {
 }
 
 struct cheat cht_give_exp_to = cheat_s("pgdonation", 2, chtf_give_exp_to, "Tuition donated to monster");
-struct cheat cht_give_score  = cheat_s("pgbezos",    0, chtf_give_score, "Player transmuted into Jeff Bezos");
+struct cheat cht_give_score  = cheat_s("pgbezos",    1, chtf_give_score, "Player transmuted into Jeff Bezos");
 struct cheat cht_end_game    = cheat_s("pgbedone",   1, chtf_end_game, "...Be Done");
 
 /* EOF */

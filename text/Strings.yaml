@@ -486,6 +486,10 @@ sl_:
    - bip_categs:          BIP_CATEGS
    - bip_header:          BIP_HEADER
    - bip_no_results:      BIP_NO_RESULTS
+   - bosshear1:           BossHear1
+   - bosshear2:           BossHear2
+   - bosshear3:           BossHear3
+   - bosswarn:            BossWarn
    - buy:                 BUY
    - cat_all:             CAT_ALL
    - cat_filter:          CAT_FILTER
@@ -536,10 +540,6 @@ sl_:
    - log_activearmor:     LOG_ActiveArmor
    - log_adrenalineready: LOG_AdrenalineReady
    - log_adrenalineused:  LOG_AdrenalineUsed
-   - log_bosshear1:       LOG_BossHear1
-   - log_bosshear2:       LOG_BossHear2
-   - log_bosshear3:       LOG_BossHear3
-   - log_bosswarn:        LOG_BossWarn
    - log_bought:          LOG_Bought
    - log_cbi:             LOG_CBI
    - log_delivered:       LOG_Delivered
@@ -653,6 +653,7 @@ ss_:
    - player_cbi_auto_buy:      player/cbi/auto/buy
    - player_cbi_auto_invalid:  player/cbi/auto/invalid
    - player_cbi_auto_toggle:   player/cbi/auto/toggle
+   - player_cbi_centernotif:   player/cbi/centernotif
    - player_cbi_close:         player/cbi/close
    - player_cbi_dlgopen:       player/cbi/dlgopen
    - player_cbi_find:          player/cbi/find

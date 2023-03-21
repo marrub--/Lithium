@@ -1134,10 +1134,15 @@
    "or die by my hand.";
 "LITH_VERSE_CORRUPTED" =
    "[the archdemon thrashes / i prepare the ritual]\n"
+   "\n"
    "\"You never get a break from life. Not until you die.\"\n"
+   "\n"
    "\"Have you ever died? Really, and truly?\"\n"
+   "\n"
    "\"Are you ready to find out what it feels like?\"\n"
+   "\n"
    "[the archdemon protests]\n"
+   "\n"
    "\"It won't hurt. But you will feel every part of it.\"";
 "LITHEND_Normal" =
    "You exit this plane of Hell and prepare for the next.\n"
@@ -4486,26 +4491,6 @@
    "Your senses grow sharper.";
 "LITH_LOG_LevelUpKiri" =
    "You feel some of your power return to you.";
-"LITH_LOG_BossWarnLane" =
-   "\cgWarning: High demonic energy levels detected in area.";
-"LITH_LOG_BossWarnJem" =
-   "\cr[WARNING] Demonic energy levels in area rising erratically.";
-"LITH_LOG_BossWarnFulk" =
-   "\cj<\ciWarning\cj>\c- :: High demonic energy levels. Seek and remove source.";
-"LITH_LOG_BossWarnOmi" =
-   "\cgDetected high amounts of demonic energy in area.";
-"LITH_LOG_BossWarnAri" =
-   "$$LITH_LOG_BossWarnOmi";
-"LITH_LOG_BossWarnLuke" =
-   "\cmThe area's aura suppresses you...";
-"LITH_LOG_BossWarnKiri" =
-   "\cjNeed to get rid of the entrapped soul here.";
-"LITH_LOG_BossHear1" =
-   "\cgYou feel ringing in your ears...";
-"LITH_LOG_BossHear2" =
-   "\cgSomething is calling out to you.";
-"LITH_LOG_BossHear3" =
-   "\cgYou feel intense pain throughout your whole body...";
 "LITH_LOG_AutoBuy1" =
    "Auto-bought \cj%i\c- upgrade%s in \caSet 1\c-.";
 "LITH_LOG_AutoBuy2" =
@@ -6803,6 +6788,36 @@
    "god Thoth to reassert\n"
    "causality. Armed to the\n"
    "teeth with guns and magic.";
+"LITH_BossWarnLane" =
+   "WARNING:\n"
+   "High concentration of demonic energy in area.\n"
+   "Life source detected at central point.\n"
+   "Caution is advised.";
+"LITH_BossWarnJem" =
+   "[WARNING]\n"
+   "DEMONIC ENERGY LEVELS IN AREA RISING ERRATICALLY\n"
+   "IMPLEMENT DIRECTIVE 90 ON TARGET";
+"LITH_BossWarnFulk" =
+   "<Warning> :: High demonic energy level in area.\n"
+   "Seek and remove source [LIFEFORM 96a.]";
+"LITH_BossWarnOmi" =
+   "Detected high amounts of demonic energy near by.\n"
+   "Find and slaughter interloper.";
+"LITH_BossWarnAri" =
+   "$$LITH_BossWarnOmi";
+"LITH_BossWarnLuke" =
+   "The area's aura suppresses you...\n"
+   "Destroy the source of the darkness.";
+"LITH_BossWarnKiri" =
+   "A shadow lurks in this place.\n"
+   "Heed not its call, but kill the basilisk.";
+"LITH_BossHear1" =
+   "You feel ringing in your ears...";
+"LITH_BossHear2" =
+   "An evil voice calls out to you,\n"
+   "but you do not heed its words...";
+"LITH_BossHear3" =
+   "You feel intense pain throughout your whole body...";
 [es]
 "LITH_INFO_DESCR_Plasma_A" =
    "El que su segundo best-seller también fuese una bazofia total apuntando cabreó tanto al personal de AllPoint que rediseñaron las partes internas del arma, equipándola de un condensador de iones de alta velocidad de 37.96tW que dispara muerte total más caliente que el propio sol.\n"

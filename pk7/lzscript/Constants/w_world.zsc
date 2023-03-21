@@ -197,8 +197,8 @@ enum Lith_MapFlag {
 };
 
 enum Lith_MapPhantom {
-   _mphantom_nospawn,
    _mphantom_none,
+   _mphantom_nospawn,
    _mphantom_spawned,
 };
 

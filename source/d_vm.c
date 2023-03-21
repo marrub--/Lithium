@@ -619,7 +619,7 @@ alloc_aut(0) sync static void ActFIN_WAIT(void) {
          i32 p, h;
          if(i > 1) {
             if(ACS_Timer() % 3 == 0 && text[p] != ' ') {
-               StartSound(ss_player_cbi_keypress, lch_body2, CHANF_NOPAUSE|CHANF_MAYBE_LOCAL|CHANF_UI, 1.0, ATTN_STATIC);
+               AmbientSound(ss_player_cbi_keypress, 1.0);
             }
             k32 mul = 1.0 - i / (k32)tics;
             p = leng * mul;

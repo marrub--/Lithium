@@ -21,8 +21,7 @@
 
 noinit struct player pl;
 
-script static void P_bossWarning(void);
-script static void P_bossText(void);
+script static void P_bossWarnings(void);
 script static void P_doIntro(void);
 static void P_Scr_PTickPre(void);
 static void P_Spe_pTick(void);
@@ -47,8 +46,7 @@ reinit:
    P_Upg_Enter();
    P_Data_Load();
    P_doIntro();
-   P_bossWarning();
-   P_bossText();
+   P_bossWarnings();
    if(pl.teleportedout) P_TeleportIn();
    P_initCbi();
 
@@ -116,7 +114,7 @@ reinit:
 
 alloc_aut(0) script static void revenge(void) {
    if(CVarGetI(sc_sv_revenge)) {
-      AmbientSound(ss_player_death1, 1.0);
+      StartSound(ss_player_death1, lch_body3, 0, 1.0, ATTN_NONE);
       ACS_Delay(35);
       ServCallV(sm_PlayerDeath);
       ACS_Delay(25);
@@ -251,7 +249,7 @@ score_t P_Scr_GivePos(i32 x, i32 y, score_t score, bool nomul) {
    if(cv.player_scoresound) {
       k32 vol = 0.7k * mul;
       if(vol > 0.001k) {
-         StartSound(ss_player_score, lch_item2, 0, vol, ATTN_STATIC);
+         AmbientSound(ss_player_score, vol);
       }
    }
 
@@ -296,33 +294,39 @@ void P_Scr_Take(score_t score) {
    pl.scoreaccumtime = 0;
 }
 
-script static void P_bossWarningDone(void) {
+alloc_aut(0) script static void P_bossWarnings(void) {
    if(get_msk(ml.flag, _mflg_boss) == _mphantom_spawned) {
-      P_LogB(1, tmpstr(lang_discrim(sl_log_bosswarn)));
+      FreezeTime();
+      ACS_Delay(4);
+      P_DrawCenterNotification(ns(lang_discrim(sl_bosswarn)), 105, CR_ORANGE, 0xFC8A2E);
+      ACS_Delay(105);
+      UnfreezeTime();
    }
-}
-
-alloc_aut(0) script static void P_bossWarning(void) {
-   ACS_Delay(35 * 5);
-   P_bossWarningDone();
-}
-
-dynam_aut script static
-void P_bossText(void) {
-   if(ml.boss == boss_iconofsin && EDataI(_edt_rampancy)) {
+   switch(ml.boss) {
+   case boss_iconofsin:
+      if(EDataI(_edt_rampancy)) {
+         return;
+      }
+      break;
+   default:
       return;
    }
-
    bool division = get_bit(ml.flag, _mflg_corrupted);
-
    if(division) {
-      for(i32 i = 0; i < 35*2; i++) {
-         SetSize(320, 240);
-         PrintFill(0xFF070707);
-         PrintText_str(ns(lang(sl_verse_corrupted)), sf_lmidfont, CR_WHITE, 160,4, 120,0);
+      for(i32 i = 0; i < 105; i++) {
+         k32 a = 1 - maxi(i - 70, 0) / 35.0k;
+         SetSize(640, 480);
+         PrintFill(0x070707 | (i32)(a * 255) << 24);
+         PrintText_str(ns(lang(sl_verse_corrupted)), sf_bigupper, CR_WHITE, 320,4, 240,0, _u_alpha, a);
          ACS_Delay(1);
       }
-      P_LogB(1, tmpstr(lang(sl_log_bosshear3)));
+   }
+   P_DrawCenterNotification(ns(lang(sl_bosshear1)), 100, CR_RED, 0xFF0000);
+   ACS_Delay(135);
+   P_DrawCenterNotification(ns(lang(sl_bosshear2)), 100, CR_RED, 0xFF0000);
+   if(division) {
+      ACS_Delay(135);
+      P_DrawCenterNotification(ns(lang(sl_bosshear3)), 100, CR_DARKRED, 0x7F0000);
    }
 }
 
@@ -503,7 +507,7 @@ alloc_aut(0) script static void P_doIntro(void) {
    P_DrawCenterNotification(tut_txt, _tut_tics);
 }
 
-alloc_aut(0) script void P_DrawCenterNotification(str txt, i32 tics) {
+alloc_aut(0) script void P_DrawCenterNotification(str txt, i32 tics, i32 cr, i32 linecr) {
    static struct i32v4 src_rect, dst_rect;
    TextSize((void *)&src_rect, txt, sf_bigupper);
    src_rect.z = src_rect.x + 8;
@@ -512,11 +516,13 @@ alloc_aut(0) script void P_DrawCenterNotification(str txt, i32 tics) {
    src_rect.y = 180 - src_rect.y / 2 - 4;
    ACS_FadeTo(0, 0, 0, 0.2, 0.2);
    ACS_Delay(3);
-   i32 player_clr = P_playerColor();
+   AmbientSound(ss_player_cbi_centernotif, 0.6k);
+   linecr = linecr |? P_playerColor();
+   cr     = cr     |? pl.color;
    for(i32 j = 0; j < tics; j++) {
       k32 a = 1 - maxi(j - (tics - 35), 0) / 35.0k;
       k32 t = 1 - mini(j, 24) / 24.0k;
-      i32 line_cr = player_clr + ((i32)(a * 255) << 24);
+      i32 line_cr = linecr + ((i32)(a * 255) << 24);
       SetSize(480, 360);
       dst_rect.x = src_rect.x - 16 * t;
       dst_rect.y = src_rect.y - 24 * t;
@@ -535,7 +541,7 @@ alloc_aut(0) script void P_DrawCenterNotification(str txt, i32 tics) {
          PrintLine(x1, y2, x1, y1, line_cr);
       }
       PrintRect(dst_rect.x, dst_rect.y, dst_rect.z, dst_rect.w, (i32)(a * 207) << 24);
-      PrintText_str(txt, sf_bigupper, pl.color, 240,4, 180,0, _u_alpha, a);
+      PrintText_str(txt, sf_bigupper, cr, 240,4, 180,0, _u_alpha, a);
       ACS_Delay(1);
    }
    ACS_FadeTo(0, 0, 0, 0.0, 0.2);
@@ -586,7 +592,7 @@ static void P_Spe_pTick(void) {
    }
 
    if(pl.shield == 0 && pl.old.shield != 0) {
-      StartSound(ss_player_ari_shield_break, lch_shield, CHANF_MAYBE_LOCAL|CHANF_UI, 1.0, ATTN_STATIC);
+      AmbientSound(ss_player_ari_shield_break, 1.0k, lch_shield);
       pl.regenwaitmax = 665;
       pl.regenwait    = 700;
       ACS_FadeTo(184, 205, 255, 0.3k, 0.0k);
@@ -604,17 +610,17 @@ static void P_Spe_pTick(void) {
    } else if(pl.regenwait) {
       --pl.regenwait;
       if(pl.regenwait == pl.regenwaitmax) {
-         StartSound(ss_player_ari_shield_regenw, lch_auto, CHANF_MAYBE_LOCAL|CHANF_UI, 0.9, ATTN_STATIC);
+         AmbientSound(ss_player_ari_shield_regenw, 0.9k);
       }
    } else if(pl.shield < pl.shieldmax) {
       if(pl.shield == pl.old.shield) {
-         StartSound(ss_player_ari_shield_regenl, lch_shield, CHANF_MAYBE_LOCAL|CHANF_UI|CHANF_LOOP, 1.0, ATTN_STATIC);
+         AmbientSound(ss_player_ari_shield_regenl, 1.0k, lch_shield);
       }
       if(ACS_Timer() % 3 == 0) {
          pl.setShield(pl.shield + 1);
       }
       if(pl.shield == pl.shieldmax) {
-         StartSound(ss_player_ari_shield_regend, lch_shield, CHANF_MAYBE_LOCAL|CHANF_UI, 0.8, ATTN_STATIC);
+         AmbientSound(ss_player_ari_shield_regend, 0.8k, lch_shield);
          SetFade(fid_shielddone, 3, 8);
       }
    }

@@ -10,6 +10,8 @@ player.cbi {
    == lsnd/GUI
    win95 Startup # Windows 95 / Brian Eno
 
+   centernotif CenterNotification # Phantasy Star Online
+
    open  Open  # Halo 3
    close Close # ^
 

@@ -62,6 +62,7 @@ $pitchshift menu/dismiss 0
 $pitchshift menu/prompt 0
 $pitchshift menu/clear 0
 player/cbi/win95 = lsnd/GUI/Startup
+player/cbi/centernotif = lsnd/GUI/CenterNotification
 player/cbi/open = lsnd/GUI/Open
 player/cbi/close = lsnd/GUI/Close
 player/cbi/buttoncurs = lsnd/GUI/ButtonCursor

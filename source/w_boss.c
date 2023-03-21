@@ -76,9 +76,8 @@ static void SpawnBossReward(void) {
    }
 }
 
-static void TriggerBoss(void) {
-   static
-   bool firstboss = true;
+static alloc_aut(0) stkcall void TriggerBoss(void) {
+   static bool firstboss = true;
 
    if(!boss) return;
 
@@ -110,7 +109,7 @@ static void TriggerBoss(void) {
    }
 }
 
-static bool CheckDead(struct boss *b, i32 num) {
+static alloc_aut(0) stkcall bool CheckDead(struct boss *b, i32 num) {
    for(i32 i = 0; i < num; i++) {
       if(!b[i].dead) {
          return false;
@@ -119,7 +118,7 @@ static bool CheckDead(struct boss *b, i32 num) {
    return true;
 }
 
-script void SpawnBosses(score_t sum, bool force) {
+alloc_aut(0) script void SpawnBosses(score_t sum, bool force) {
    if(get_msk(ml.flag, _mflg_boss) == _mphantom_nospawn || (!force && sum < wl.scorethreshold)) {
       return;
    }
@@ -174,7 +173,7 @@ void Z_PhantomDeath(void) {
 
    if(boss->phase == boss->phasenum) {
       /* Death */
-      AmbientSound(ss_player_death1, 0.5k);
+      StartSound(ss_player_death1, lch_auto, CHANF_NOPAUSE|CHANF_LISTENERZ|CHANF_NOSTOP, 0.5k, ATTN_NONE);
       ACS_Delay(35);
       ServCallV(sm_PlayerDeath);
       ACS_Delay(25);
@@ -189,7 +188,7 @@ void Z_PhantomDeath(void) {
       if(difficulty != _diff_any) difficulty++;
    } else {
       /* Escape */
-      AmbientSound(ss_enemies_phantom_escape, 0.5k);
+      StartSound(ss_enemies_phantom_escape, lch_auto, CHANF_NOPAUSE|CHANF_LISTENERZ|CHANF_NOSTOP, 0.5k, ATTN_NONE);
       ACS_SetActorState(0, sm_GetOutOfDodge);
       ACS_Delay(5);
       ServCallV(sm_PhantomOut);

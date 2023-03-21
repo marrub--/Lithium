@@ -94,27 +94,6 @@
 == \#LOG_LevelUpLuke | Your senses grow sharper.
 == \#LOG_LevelUpKiri | You feel some of your power return to you.
 
-## Boss Warnings ═════════════════════════════════════════════════════════════╕
-%% \#LOG_BossWarnLane
-\cgWarning: High demonic energy levels detected in area.
-
-%% \#LOG_BossWarnJem
-\cr[WARNING] Demonic energy levels in area rising erratically.
-
-%% \#LOG_BossWarnFulk
-\cj<\ciWarning\cj>\c- :: High demonic energy levels. Seek and remove source.
-
-%% \#LOG_BossWarnOmi
-\cgDetected high amounts of demonic energy in area.
-
-== \#LOG_BossWarnAri  | $$\#LOG_BossWarnOmi
-== \#LOG_BossWarnLuke | \cmThe area's aura suppresses you...
-== \#LOG_BossWarnKiri | \cjNeed to get rid of the entrapped soul here.
-
-== \#LOG_BossHear1 | \cgYou feel ringing in your ears...
-== \#LOG_BossHear2 | \cgSomething is calling out to you.
-== \#LOG_BossHear3 | \cgYou feel intense pain throughout your whole body...
-
 ## Auto-groups ═══════════════════════════════════════════════════════════════╕
 == \#LOG_AutoBuy1 | Auto-bought \cj%i\c- upgrade%s in \caSet 1\c-.
 == \#LOG_AutoBuy2 | Auto-bought \cj%i\c- upgrade%s in \cdSet 2\c-.

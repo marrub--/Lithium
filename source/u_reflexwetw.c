@@ -50,7 +50,7 @@ void Upgr_ReflexWetw_Update(void) {
       if(pl.buttons & BT_SPEED) {
          k32 angle = pl.yaw - atan2k(pl.sidev, pl.forwardv);
 
-         AmbientSound(ss_player_slide, 1.0);
+         StartSound(ss_player_slide, lch_auto, 0, 1.0);
          P_SetVel(pl.velx + (ACS_Cos(angle) * 32.0), pl.vely + (ACS_Sin(angle) * 32.0), 0);
 
          Z_DodgeView();
@@ -65,7 +65,7 @@ void Upgr_ReflexWetw_Update(void) {
    {
       k32 angle = pl.yaw - atan2k(pl.sidev, pl.forwardv);
 
-      AmbientSound(ss_player_doublejump, 1.0);
+      StartSound(ss_player_doublejump, lch_auto, 0, 1.0);
       P_SetVel(pl.velx + (ACS_Cos(angle) * 4.0), pl.vely + (ACS_Sin(angle) * 4.0), 12.0);
 
       udata.leaped = 1;
