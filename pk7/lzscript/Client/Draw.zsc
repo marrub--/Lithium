@@ -163,7 +163,7 @@ ui void drawAllData(RenderEvent evt) {
          }
          break;
       case _type_rect:
-         drawRect(d.X, d.Y, d.Z, d.W, d.C, sc);
+         drawRect(d.X, d.Y, d.Z, d.W, d.C, sc, d.U);
          break;
       case _type_fill:
          Screen.dim(d.C, (d.C>>24)/255.0, 0,0, Screen.getWidth(),Screen.getHeight());
@@ -398,7 +398,7 @@ static void LU() {
    }
 }
 
-static void LR(int x = 0, int y = 0, int w = 0, int h = 0, color cr = 0) {
+static void LR(int x, int y, int w, int h, color cr, int flg) {
    let r = instance();
    if(r.m_noDraw) return;
    let d = getDt(r.m_d[r.m_dPtr++]);
@@ -407,10 +407,11 @@ static void LR(int x = 0, int y = 0, int w = 0, int h = 0, color cr = 0) {
    d.Y = y;
    d.Z = w;
    d.W = h;
+   d.U = flg & _u_add ? STYLE_ADD : STYLE_TRANSLUCENT;
    d.C = cr;
 }
 
-static void LW(color cr = 0) {
+static void LW(color cr) {
    let r = instance();
    if(r.m_noDraw) return;
    let d = getDt(r.m_d[r.m_dPtr++]);
@@ -438,9 +439,9 @@ ui static void setClip(double px, double py, double sx, double sy, vector2 vsz, 
    Screen.setClipRect(int(p.x), int(p.y), int(s.x), int(s.y));
 }
 
-ui static void drawRect(double px, double py, double sx, double sy, color cr, vector2 vsz, uint vfl = 0) {
+ui static void drawRect(double px, double py, double sx, double sy, color cr, vector2 vsz, uint vfl = 0, int style = STYLE_TRANSLUCENT) {
    vector2 p, s; [p, s] = anyPosScale((px, py), (sx, sy), vsz, vfl);
-   Screen.dim(cr, cr.a/255.0, int(p.x), int(p.y), int(s.x), int(s.y));
+   Screen.dim(cr, cr.a/255.0, int(p.x), int(p.y), int(s.x), int(s.y), style);
 }
 
 ui static void drawLn(double x1, double y1, double x2, double y2, color cr, vector2 vsz, uint vfl = 0) {

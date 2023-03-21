@@ -523,8 +523,7 @@ sl_:
    - credits:             CREDITS
    - deactivate:          DEACTIVATE
    - discard:             DISCARD
-   - div_get:             DIV_SIGIL_GET
-   - div_warning:         DIV_SIGIL_WARNING
+   - div_sigil_get:       DIV_SIGIL_GET
    - edit:                EDIT
    - effect:              EFFECT
    - empty:               EMPTY

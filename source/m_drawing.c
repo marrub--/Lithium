@@ -24,8 +24,7 @@ alloc_aut(0) stkcall void TextSize(struct i32v2 *draw_text_size, str s, str font
    draw_text_size->x = word(draw_text_size->x);
 }
 
-alloc_aut(0) stkcall
-struct i32v2 const *TextureSize(str t) {
+alloc_aut(0) stkcall struct i32v2 const *TextureSize(str t) {
    static struct i32v2 draw_texture_size;
    draw_texture_size.x = DrawCallI(sm_LB, t);
    draw_texture_size.y = draw_texture_size.x >> 16;
@@ -33,15 +32,13 @@ struct i32v2 const *TextureSize(str t) {
    return &draw_texture_size;
 }
 
-alloc_aut(0) stkcall
-void DrawInit(void) {
+alloc_aut(0) stkcall void DrawInit(void) {
    #define GlobalCr(name) \
       globalcolors.name = ServCallI(sm_FindFontColor, so_##name);
    #include "m_drawing.h"
 }
 
-alloc_aut(0) stkcall
-i32 Draw_GetCr(i32 n) {
+alloc_aut(0) stkcall i32 Draw_GetCr(i32 n) {
    switch(n) {
    case 'a': return CR_BRICK;
    case 'b': return CR_TAN;
@@ -77,8 +74,7 @@ i32 Draw_GetCr(i32 n) {
    return CR_UNTRANSLATED;
 }
 
-alloc_aut(0) script ext("ACS") addr(lsc_drawcr)
-i32 Z_DrawCr(i32 cr) {
+alloc_aut(0) script ext("ACS") addr(lsc_drawcr) i32 Z_DrawCr(i32 cr) {
    return Draw_GetCr(cr);
 }
 
@@ -92,6 +88,10 @@ stkcall alloc_aut(0) void PrintSpriteClip(str name, i32 x, i32 xa, i32 y, i32 ya
 
 stkcall alloc_aut(0) void PrintText_str(str s, str font, i32 cr, i32 x, i32 xa, i32 y, i32 ya, i32 flg, k32 anum, i32 ww) {
    DrawCallV(sm_LT, s, font, Pos(x, xa), Pos(y, ya), cr, flg, anum, ww);
+}
+
+stkcall alloc_aut(0) void PrintRect(i32 x, i32 y, i32 w, i32 h, i32 c, i32 flg) {
+   DrawCallV(sm_LR, x, y, w, h, c, flg);
 }
 
 /* EOF */

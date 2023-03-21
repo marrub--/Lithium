@@ -6,7 +6,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-== \#INV_HINTS | You can right click to quickly move items. To equip armor place it on your \cdbody\c- or press \cnEquip\c-.
+== \#INV_HINTS | You can right click to quickly move items, or just drag and drop. To equip armor place it on your \cdbody\c- or press \cnEquip\c-.
 
 ## Containers ════════════════════════════════════════════════════════════════╕
 == \#CONTAINER_Backpack | $$\#INFO_SHORT_Backpack

@@ -50,35 +50,12 @@ void Z_BarrierBullets(void) {
 dynam_aut script_str ext("ACS") addr(OBJ "GetSigil")
 void Z_GetSigil(void) {
    P_GUI_Close();
-
    P_LogF("*** WARNING - CAUSAL SHIFT DETECTED IN WETWARE ***");
    pl.sgacquired = true;
-
-#ifndef NDEBUG
-   if(dbglevel_any()) return;
-#endif
-
    StartSound(ss_player_getsigil, lch_body3, 0, 1.0, ATTN_NONE);
-
    FreezeTime();
-
-   ACS_FadeTo(0, 0, 0, 0.4, 0.087);
-
-   ACS_Delay(3);
-
-   SetFade(fid_divsigil, 44, 8);
-   for(i32 i = 0;; i++) {
-      if(!CheckFade(fid_divsigil)) break;
-
-      SetSize(640, 480);
-      PrintText_str(ns(lang(sl_div_get)), sf_bigupper, CR_ORANGE, 320,4, 240,2, _u_fade, fid_divsigil);
-      PrintText_str(ns(lang(sl_div_warning)), sf_bigupper, CR_RED, 320,4, 240,1, _u_fade, fid_divsigil);
-
-      ACS_Delay(1);
-   }
-
-   ACS_FadeTo(0, 0, 0, 0.0, 0.145);
-
+   P_DrawCenterNotification(ns(lang(sl_div_sigil_get)), 157);
+   ACS_Delay(157);
    UnfreezeTime();
 }
 

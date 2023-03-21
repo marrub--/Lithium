@@ -4800,7 +4800,7 @@
    "would become. Being more than grey would be worse than staying between\n"
    "the folds.";
 "LITH_INV_HINTS" =
-   "You can right click to quickly move items. To equip armor place it on your \cdbody\c- or press \cnEquip\c-.";
+   "You can right click to quickly move items, or just drag and drop. To equip armor place it on your \cdbody\c- or press \cnEquip\c-.";
 "LITH_CONTAINER_Backpack" =
    "$$LITH_INFO_SHORT_Backpack";
 "LITH_CONTAINER_ArmUpL" =
@@ -6364,11 +6364,11 @@
 "LITH_MANA_CHARGE" =
    "[Siphoning Mana]";
 "LITH_DIV_SIGIL_GET" =
-   "D I V I S I O N  S I G I L";
-"LITH_DIV_SIGIL_WARNING" =
-   "=== Warning ===\n"
-   "This item is unfathomably dangerous.\n"
-   "Use at the expense of your world.";
+   "D I V I S I O N  S I G I L\n"
+   "\n"
+   "\ci=== Warning ===\n"
+   "\ciThis item is unfathomably dangerous.\n"
+   "\ciUse at the expense of your world.";
 "SECRETMESSAGE" =
    "\cnA secret is revealed!";
 "BGFLAT06" =

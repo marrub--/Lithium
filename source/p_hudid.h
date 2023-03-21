@@ -30,7 +30,6 @@ enum
    fid_scopecgS,
    fid_scopecgE = fid_scopecgS + 200 - 1,
    fid_jet,
-   fid_divsigil,
    fid_blade,
    fid_rendS,
    fid_rendE = fid_rendS + 4 - 1,

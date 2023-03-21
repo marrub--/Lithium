@@ -328,18 +328,18 @@ void P_bossText(void) {
 
 alloc_aut(0) stkcall static i32 P_playerColor(void) {
    switch(pl.pclass) {
-   case pcl_marine:    return 0xFF00FF00;
-   case pcl_cybermage: return 0xFFBF0F4A;
-   case pcl_informant: return 0xFF8C3BF8;
-   case pcl_wanderer:  return 0xFFFFD023;
-   case pcl_assassin:  return 0xFFE873AF;
-   case pcl_darklord:  return 0xFF3B47F8;
-   case pcl_thoth:     return 0xFFBFBFBF;
+   case pcl_marine:    return 0x00FF00;
+   case pcl_cybermage: return 0xBF0F4A;
+   case pcl_informant: return 0x8C3BF8;
+   case pcl_wanderer:  return 0xFFD023;
+   case pcl_assassin:  return 0xE873AF;
+   case pcl_darklord:  return 0x3B47F8;
+   case pcl_thoth:     return 0xBFBFBF;
    }
    return 0xFF000000;
 }
 
-alloc_aut(0) stkcall script static void P_doDepthMeter(void) {
+alloc_aut(0) script static void P_doDepthMeter(void) {
    enum {
       scale      = 8,
       y          = 110,
@@ -360,7 +360,7 @@ alloc_aut(0) stkcall script static void P_doDepthMeter(void) {
    i32 scr_w      = pl.hudrpos * scale;
    i32 prev_level = (wl.hubscleared     & 31) * notch_dist;
    i32 next_level = (wl.hubscleared + 1 & 31) * notch_dist;
-   i32 player_clr = P_playerColor() & 0xFFFFFF;
+   i32 player_clr = P_playerColor();
    ACS_Delay(8);
    for(i32 i = 0; i < e_out; ++i) {
       if(i == s_out && cv.player_resultssound) {
@@ -383,7 +383,7 @@ alloc_aut(0) stkcall script static void P_doDepthMeter(void) {
    }
 }
 
-alloc_aut(0) stkcall script static void P_doIntro(void) {
+alloc_aut(0) script static void P_doIntro(void) {
    pl.missionstatshow = ACS_Timer() + 70;
    if(wl.hubscleared != 0 || get_bit(pl.done_intro, pl.pclass)) {
       P_doDepthMeter();
@@ -393,8 +393,6 @@ alloc_aut(0) stkcall script static void P_doIntro(void) {
       _nlines   = 26,
       _out_tics = 35 * 2,
       _tut_tics = 297,
-      _tut_fade = _tut_tics / 8,
-      _tut_goin = _tut_tics / 12,
    };
    noinit static char text[8192], *lines[_nlines];
    noinit static i32 linec[_nlines], linen[_nlines];
@@ -502,22 +500,29 @@ alloc_aut(0) stkcall script static void P_doIntro(void) {
    static struct fmt_arg fmt_args[] = {{_fmt_key}};
    fmt_args[0].val.s = sc_k_opencbi;
    str tut_txt = strp(printfmt(tmpstr(lang(sl_open_menu)), 1, fmt_args));
+   P_DrawCenterNotification(tut_txt, _tut_tics);
+}
+
+alloc_aut(0) script void P_DrawCenterNotification(str txt, i32 tics) {
    static struct i32v4 src_rect, dst_rect;
-   TextSize((void *)&src_rect, tut_txt, sf_bigupper);
+   TextSize((void *)&src_rect, txt, sf_bigupper);
    src_rect.z = src_rect.x + 8;
    src_rect.w = src_rect.y + 8;
-   src_rect.x = 320 - src_rect.x / 2 - 4;
-   src_rect.y = 240 - src_rect.y / 2 - 4;
-   for(i32 j = 0; j < _tut_tics; j++) {
-      k32 a = 1 - maxi(j - (_tut_tics - _tut_fade), 0) / (k32)_tut_fade;
-      k32 t = 1 - mini(j, _tut_goin) / (k32)_tut_goin;
-      i32 line_cr = 0x0000FF00 + ((i32)(a * 255) << 24);
-      SetSize(640, 480);
+   src_rect.x = 240 - src_rect.x / 2 - 4;
+   src_rect.y = 180 - src_rect.y / 2 - 4;
+   ACS_FadeTo(0, 0, 0, 0.2, 0.2);
+   ACS_Delay(3);
+   i32 player_clr = P_playerColor();
+   for(i32 j = 0; j < tics; j++) {
+      k32 a = 1 - maxi(j - (tics - 35), 0) / 35.0k;
+      k32 t = 1 - mini(j, 24) / 24.0k;
+      i32 line_cr = player_clr + ((i32)(a * 255) << 24);
+      SetSize(480, 360);
       dst_rect.x = src_rect.x - 16 * t;
       dst_rect.y = src_rect.y - 24 * t;
       dst_rect.z = src_rect.z + 32 * t;
       dst_rect.w = src_rect.w + 48 * t;
-      for(i32 i = 0; i < 4; ++i) {
+      for(i32 i = 0; i < 4 - (t == 0 ? 3 : 0); ++i) {
          i32 xn = i * 24 * t / 2;
          i32 yn = i * 16 * t / 2;
          i32 x1 = dst_rect.x - xn;
@@ -530,9 +535,10 @@ alloc_aut(0) stkcall script static void P_doIntro(void) {
          PrintLine(x1, y2, x1, y1, line_cr);
       }
       PrintRect(dst_rect.x, dst_rect.y, dst_rect.z, dst_rect.w, (i32)(a * 207) << 24);
-      PrintText_str(tut_txt, sf_bigupper, pl.color, 320,4, 240,0, _u_alpha, a);
+      PrintText_str(txt, sf_bigupper, pl.color, 240,4, 180,0, _u_alpha, a);
       ACS_Delay(1);
    }
+   ACS_FadeTo(0, 0, 0, 0.0, 0.2);
 }
 
 static k32 damage_mul;

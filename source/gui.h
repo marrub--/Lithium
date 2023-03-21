@@ -87,7 +87,6 @@ struct gui_win {
 
 struct gui_delta {
    k64 cx, cy;
-
    bool clicklft;
    bool clickrgt;
    bool clickany;
@@ -101,20 +100,14 @@ struct gui_state {
    anonymous
    struct gui_delta cur;
    struct gui_delta old;
-
    i32 defcr;
-
    i32 ox, oy;
    i32 w, h;
-
    gid_t active, hot;
-
    gid_t slide;
    i32 slidecount, slidetime;
-
    i32 clip;
    struct gui_clip clips[16];
-
    cstr gfxprefix;
    str  tooltip;
 };

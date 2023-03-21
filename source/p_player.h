@@ -125,6 +125,8 @@ script void P_Wep_PTick   (void);
 script void P_TeleportIn (void);
 sync   void P_TeleportOut(i32 tag);
 
+script void P_DrawCenterNotification(str txt, i32 tics);
+
 #ifndef NDEBUG
 void P_Ren_Debug(void);
 #endif
@@ -255,14 +257,6 @@ struct player {
    struct upgrade   upgrades[UPGR_MAX];
 
    i32 autobuy;
-
-   /* Inventory */
-   struct container inv[_inv_num];
-
-   struct item *useitem;
-   struct item *selitem;
-   struct item *opnitem;
-   bool         movitem;
 
    /* HUD */
    bool hudenabled;

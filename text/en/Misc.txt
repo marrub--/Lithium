@@ -53,11 +53,12 @@ forever rain from the skies.
 (%i~%i damage)
 == \#MANA_CHARGE | [Siphoning Mana]
 
-== \#DIV_SIGIL_GET | D I V I S I O N  S I G I L
-%% \#DIV_SIGIL_WARNING
-=== Warning ===
-This item is unfathomably dangerous.
-Use at the expense of your world.
+%% \#DIV_SIGIL_GET
+D I V I S I O N  S I G I L
+
+\ci=== Warning ===
+\ciThis item is unfathomably dangerous.
+\ciUse at the expense of your world.
 
 == SECRETMESSAGE | \cnA secret is revealed!
 

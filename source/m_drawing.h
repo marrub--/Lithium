@@ -31,9 +31,6 @@ GlobalCrH(wselm1) GlobalCrH(wselm2) GlobalCrH(wselm3) GlobalCrH(wselms)
 #undef GlobalCrH
 #else
 #if !ZscOn
-#define PrintRect(x, y, w, h, c) \
-   DrawCallV(sm_LR, (i32)(x), (i32)(y), (i32)(w), (i32)(h), \
-             (i32)(c))
 #define PrintFill(c) \
    DrawCallV(sm_LW, (i32)(c))
 #define PrintLine(x, y, z, w, c) \
@@ -120,6 +117,7 @@ stkcall struct i32v2 const *TextureSize(str tx);
 stkcall optargs(3) void PrintText_str(str s, str font, i32 cr, i32 x, i32 xa, i32 y, i32 ya, i32 flg, k32 anum, i32 ww);
 stkcall optargs(3) void PrintSprite(str name, i32 x, i32 xa, i32 y, i32 ya, i32 flg, k32 anum, i32 c);
 stkcall optargs(3) void PrintSpriteClip(str name, i32 x, i32 xa, i32 y, i32 ya, i32 cx, i32 cy, i32 cw, i32 ch, i32 flg, k32 anum, i32 c);
+stkcall optargs(1) void PrintRect(i32 x, i32 y, i32 w, i32 h, i32 c, i32 flg);
 #endif
 
 enum ZscName(FontNum) {
