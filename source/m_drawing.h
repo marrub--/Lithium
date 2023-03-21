@@ -31,16 +31,11 @@ GlobalCrH(wselm1) GlobalCrH(wselm2) GlobalCrH(wselm3) GlobalCrH(wselms)
 #undef GlobalCrH
 #else
 #if !ZscOn
-#define XArg(x, xa) (((i32)(x) & _xmask) | ((i32)(xa) << 28))
-#define YArg(y, ya) (((i32)(y) & _ymask) | ((i32)(ya) << 29))
-
 #define PrintRect(x, y, w, h, c) \
    DrawCallV(sm_LR, (i32)(x), (i32)(y), (i32)(w), (i32)(h), \
              (i32)(c))
-
 #define PrintFill(c) \
    DrawCallV(sm_LW, (i32)(c))
-
 #define PrintLine(x, y, z, w, c) \
    DrawCallV(sm_LL, (i32)(x), (i32)(y), (i32)(z), (i32)(w), (i32)(c))
 
@@ -62,19 +57,15 @@ GlobalCrH(wselm1) GlobalCrH(wselm2) GlobalCrH(wselm3) GlobalCrH(wselms)
 
 #define SetFade(n, time, speed) \
    DrawCallV(sm_LF, (i32)(n), (i32)(time), (i32)(speed), 1.0k)
-
 #define SetFadeA(n, time, speed, alpha) \
    DrawCallV(sm_LF, (i32)(n), (i32)(time), (i32)(speed), (k32)(alpha))
-
 #define CheckFade(n) \
    DrawCallI(sm_LX, (i32)(n))
-
 #define GetFade(n) \
    DrawCallI(sm_LY, (i32)(n))
 
 #define StartSound(...) \
    DrawCallV(sm_StartSound, __VA_ARGS__)
-
 #define AmbientSound(snd, vol) \
    StartSound(snd, lch_ambient, CHANF_LOCAL|CHANF_UI, vol, ATTN_STATIC)
 
@@ -124,7 +115,7 @@ enum {
 
 stkcall void DrawInit(void);
 stkcall i32 Draw_GetCr(i32 n);
-stkcall void TextSize(struct i32v2 *draw_text_size, str s, str font, i32 wrap);
+optargs(1) stkcall void TextSize(struct i32v2 *draw_text_size, str s, str font, i32 wrap);
 stkcall struct i32v2 const *TextureSize(str tx);
 stkcall optargs(3) void PrintText_str(str s, str font, i32 cr, i32 x, i32 xa, i32 y, i32 ya, i32 flg, k32 anum, i32 ww);
 stkcall optargs(3) void PrintSprite(str name, i32 x, i32 xa, i32 y, i32 ya, i32 flg, k32 anum, i32 c);
@@ -180,26 +171,6 @@ enum ZscName(DrawFlags) {
    _u_no_unicode = 0x08,
    _u_color      = 0x10,
    _u_clip       = 0x20,
-};
-
-enum ZscName(XAlign) {
-   _xc    = 0x00000000,
-   _xl    = 0x10000000,
-   _xr    = 0x20000000,
-   _x3    = 0x30000000,
-   _x4    = 0x40000000,
-   _x5    = 0x50000000,
-   _x6    = 0x60000000,
-   _xmask = 0x8FFFFFFF,
-   _xflag = 0x70000000,
-};
-
-enum ZscName(YAlign) {
-   _yc    = 0x00000000,
-   _yt    = 0x20000000,
-   _yb    = 0x40000000,
-   _ymask = 0x9FFFFFFF,
-   _yflag = 0x60000000,
 };
 
 #endif

@@ -64,26 +64,6 @@ enum Lith_DrawFlags {
    _u_clip       = 0x20,
 };
 
-enum Lith_XAlign {
-   _xc    = 0x00000000,
-   _xl    = 0x10000000,
-   _xr    = 0x20000000,
-   _x3    = 0x30000000,
-   _x4    = 0x40000000,
-   _x5    = 0x50000000,
-   _x6    = 0x60000000,
-   _xmask = 0x8FFFFFFF,
-   _xflag = 0x70000000,
-};
-
-enum Lith_YAlign {
-   _yc    = 0x00000000,
-   _yt    = 0x20000000,
-   _yb    = 0x40000000,
-   _ymask = 0x9FFFFFFF,
-   _yflag = 0x60000000,
-};
-
 
 
 

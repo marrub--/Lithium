@@ -196,9 +196,30 @@ enum {
    _pri_nolog = dst_bit(11),
 };
 
+enum {
+   _fmt_cstr,
+   _fmt_i32,
+   _fmt_k32,
+   _fmt_key,
+   _fmt_str,
+};
+
+union fmt_val {
+   cstr cs;
+   i32 i;
+   k32 k;
+   str s;
+};
+
+struct fmt_arg {
+   i32           tag;
+   union fmt_val val;
+};
+
 script void StrInit(void);
 stkcall void PrintStrN(cstr s, mem_size_t n);
 stkcall void PrintStr(cstr s);
+stkcall void printfmt(cstr s, mem_size_t n, struct fmt_arg *args);
 stkcall i32 radix(char c);
 stkcall i32 faststrtoi32_str(astr p);
 stkcall i32 faststrtoi32(cstr p);

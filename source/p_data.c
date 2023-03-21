@@ -285,10 +285,6 @@ void P_Init(void) {
          P_LogH(1, "player is %u bytes long!", sizeof pl * 4);
          P_LogH(1, "snil is \"%S\"", snil);
          PrintDmonAllocSize();
-      } else {
-      #endif
-         P_LogH(1, tmpstr(lang(sl_log_startgame)), sc_k_opencbi);
-      #ifndef NDEBUG
       }
       #endif
       pl.wasinit = true;

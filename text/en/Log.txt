@@ -142,9 +142,8 @@
 == \#LOG_GroupToggle8 | No items to toggle in \cfSet 4\c-.
 
 ## Misc ══════════════════════════════════════════════════════════════════════╕
-== \#LOG_Version   | Lithium %s :: Compiled %s
-== \#LOG_StartGame | Press "%jS" to open the menu.
-== \#LOG_MailRecv  | Mail received from <\cj%s\c->.
+== \#LOG_Version  | Lithium %s :: Compiled %s
+== \#LOG_MailRecv | Mail received from <\cj%s\c->.
 
 == \#LOG_CBI | Installed %S.
 

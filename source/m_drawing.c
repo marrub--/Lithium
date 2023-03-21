@@ -14,6 +14,8 @@
 #include "p_player.h"
 #include "w_world.h"
 
+#define Pos(p, a) ((p & 0x00FFFFFF) | (a << 24))
+
 noinit struct globalcolors globalcolors;
 
 alloc_aut(0) stkcall void TextSize(struct i32v2 *draw_text_size, str s, str font, i32 wrap) {
@@ -81,15 +83,15 @@ i32 Z_DrawCr(i32 cr) {
 }
 
 stkcall alloc_aut(0) void PrintSprite(str name, i32 x, i32 xa, i32 y, i32 ya, i32 flg, k32 anum, i32 c) {
-   DrawCallV(sm_LS, name, XArg(x, xa), YArg(y, ya), flg, anum, c);
+   DrawCallV(sm_LS, name, Pos(x, xa), Pos(y, ya), flg, anum, c);
 }
 
 stkcall alloc_aut(0) void PrintSpriteClip(str name, i32 x, i32 xa, i32 y, i32 ya, i32 cx, i32 cy, i32 cw, i32 ch, i32 flg, k32 anum, i32 c) {
-   DrawCallV(sm_LS, name, XArg(x, xa), YArg(y, ya), flg|_u_clip, anum, c, (cx << 16) | cy, (cw << 16) | ch);
+   DrawCallV(sm_LS, name, Pos(x, xa), Pos(y, ya), flg|_u_clip, anum, c, (cx << 16) | cy, (cw << 16) | ch);
 }
 
 stkcall alloc_aut(0) void PrintText_str(str s, str font, i32 cr, i32 x, i32 xa, i32 y, i32 ya, i32 flg, k32 anum, i32 ww) {
-   DrawCallV(sm_LT, s, font, XArg(x, xa), YArg(y, ya), cr, flg, anum, ww);
+   DrawCallV(sm_LT, s, font, Pos(x, xa), Pos(y, ya), cr, flg, anum, ww);
 }
 
 /* EOF */

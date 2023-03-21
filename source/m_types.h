@@ -89,6 +89,9 @@ struct k64v2 {k64 x, y;};
 struct i32v3 {i32 x, y, z;};
 struct k32v3 {k32 x, y, z;};
 struct k64v3 {k64 x, y, z;};
+struct i32v4 {i32 x, y, z, w;};
+struct k32v4 {k32 x, y, z, w;};
+struct k64v4 {k64 x, y, z, w;};
 struct ptr2  {mem_size_t l, h;};
 
 union ik32 {i32 i; k32 k;};

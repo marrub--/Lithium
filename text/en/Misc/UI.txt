@@ -33,6 +33,10 @@
 == \#UP         | Up
 == \#USE        | Use
 
+%% \#OPEN_MENU
+Press {} to open the in-game menu!
+Upgrades, tutorials, settings, and more, await...
+
 == \#CAT_BODY | \cnBody
 == \#CAT_WEAP | \caWeapon
 == \#CAT_EXTR | \cfExtra

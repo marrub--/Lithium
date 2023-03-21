@@ -134,14 +134,14 @@ struct token *tb_expc(struct tokbuf *tb, struct err *res, struct token *tok, ...
    noinit static i32  tt[8];
    noinit static char ttstr[128];
    mem_size_t ttnum;
-   va_list    args;
-   va_start(args, tok);
-   for(ttnum = 0; (tt[ttnum] = va_arg(args, i32)); ++ttnum) {
+   va_list    vl;
+   va_start(vl, tok);
+   for(ttnum = 0; (tt[ttnum] = va_arg(vl, i32)); ++ttnum) {
       if(tok->type == tt[ttnum]) {
          return tok;
       }
    }
-   va_end(args);
+   va_end(vl);
    mem_size_t i = 0;
    ttstr[0] = '\0';
    faststrcat(ttstr, TokType(tt[i++]));

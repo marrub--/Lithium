@@ -13,6 +13,24 @@ enum Lith_VirtualCoordFlags {
 
 extend class Lith_URANUS;
 
+enum XAlign {
+   _xcl = 0 << 24,
+   _xll = 1 << 24,
+   _xrl = 2 << 24,
+   _xrr = 3 << 24,
+   _xcc = 4 << 24,
+   _xlc = 5 << 24,
+   _xrc = 6 << 24,
+   _xlr = 7 << 24,
+   _xcr = 8 << 24,
+}
+
+enum YAlign {
+   _yc = 0 << 24,
+   _yt = 1 << 24,
+   _yb = 2 << 24,
+}
+
 enum DrawType {
    _type_clipSet,
    _type_clipClear,
@@ -158,7 +176,7 @@ ui void drawAllData(RenderEvent evt) {
 static int LA(int wrapWidth, string s, string fnt) {
    let r = instance();
    let fon = r.fntAny(fnt);
-   let brl = fon.breakLines(s, wrapWidth);
+   let brl = fon.breakLines(s, wrapWidth ? wrapWidth : int.max);
    int lny = fon.getHeight() * brl.count();
    int lnx = 0;
    for(int i = 0; i < brl.count(); i++) {
@@ -217,10 +235,10 @@ static void LL(int x, int y, int z, int w, color c = 0) {
 static void LS(string tex, int xx, int yy, int flags = 0, float anum = 0.0, color cr = 0, int srcpos = 0, int srcsize = 0) {
    let r = instance();
    if(r.m_noDraw) return;
-   int  x = xx & _xmask;
-   int  y = yy & _ymask;
-   int xa = xx & _xflag;
-   int ya = yy & _yflag;
+   int  x = xx & 0x00FFFFFF;
+   int  y = yy & 0x00FFFFFF;
+   int xa = xx & 0x7F000000;
+   int ya = yy & 0x7F000000;
    let d = getDt(r.m_d[r.m_dPtr]);
    if(flags & _u_fade) {
       d.A  = r.m_fadeMsg[int(anum)].fade / 255.0;
@@ -265,9 +283,9 @@ static void LS(string tex, int xx, int yy, int flags = 0, float anum = 0.0, colo
    }
    switch(xa) {
    default:
-   case _xl: d.X = x;          break;
-   case _xc: d.X = x - sx / 2; break;
-   case _xr: d.X = x - sx;     break;
+   case _xll: d.X = x;          break;
+   case _xcl: d.X = x - sx / 2; break;
+   case _xrl: d.X = x - sx;     break;
    }
    switch(ya) {
    default:
@@ -290,10 +308,10 @@ static void LT(string txt, string fnt, int xx, int yy, int cr, int flags = 0, fl
    if(a < 0.001) {
       return;
    }
-   int  x = xx & _xmask;
-   int  y = yy & _ymask;
-   int xa = xx & _xflag;
-   int ya = yy & _yflag;
+   int  x = xx & 0x00FFFFFF;
+   int  y = yy & 0x00FFFFFF;
+   int xa = xx & 0x7F000000;
+   int ya = yy & 0x7F000000;
    let d = getDt(r.m_d[r.m_dPtr++]);
    d.A    = a;
    d.Type = d.A < 1.0 ? _type_textAlpha : _type_text;
@@ -307,10 +325,10 @@ static void LT(string txt, string fnt, int xx, int yy, int cr, int flags = 0, fl
    d.C = cr;
    int lnx = 0;
    int wrapWidth = int.max;
-   if(xa == _xl) {
+   if(xa == _xll || xa == _xcl || xa == _xrl) {
       if(ww > 0) {
          wrapWidth = ww;
-      } else if(r.m_wrapX >= 0) {
+      } else if(xa == _xll && r.m_wrapX >= 0) {
          wrapWidth = r.m_wrapX - x;
       }
    }
@@ -321,22 +339,25 @@ static void LT(string txt, string fnt, int xx, int yy, int cr, int flags = 0, fl
    d.tpt = r.m_tPtr;
    r.m_tPtr += d.tsz;
    for(uint i = 0; i < d.tsz; i++) {
-      r.m_txt[d.tpt + i] = brl.StringAt(i);
+      r.m_txt[d.tpt + i] = brl.stringAt(i);
       int lnw = brl.stringWidth(i);
-      if(lnx < lnw) lnx = lnw;
-           if(xa == _x3) r.m_lnx[d.tpt + i] = lnw;
-      else if(xa <  _x4) r.m_lnx[d.tpt + i] = 0;
-      else               r.m_lnx[d.tpt + i] = lnw / 2;
+      if(lnx < lnw) {
+         lnx = lnw;
+      }
+      switch(xa) {
+      default:
+      case _xcl: case _xll: case _xrl: r.m_lnx[d.tpt + i] = 0;       break;
+      case _xcr: case _xlr: case _xrr: r.m_lnx[d.tpt + i] = lnw;     break;
+      case _xcc: case _xlc: case _xrc: r.m_lnx[d.tpt + i] = lnw / 2; break;
+      }
    }
    switch(xa) {
    default:
-   case _x3:
-   case _x4:
-   case _xl: d.X = x;           break;
-   case _x5: d.X = x + lnx / 2; break;
-   case _x6:
-   case _xc: d.X = x - lnx / 2; break;
-   case _xr: d.X = x - lnx;     break;
+   case _xcc: case _xll: case _xrr: d.x = x;           break;
+   case _xcl: case _xlc:            d.x = x + lnx / 2; break;
+   case _xcr: case _xrc:            d.x = x - lnx / 2; break;
+   case _xlr:                       d.x = x + lnx;     break;
+   case _xrl:                       d.x = x - lnx;     break;
    }
    switch(ya) {
    default:

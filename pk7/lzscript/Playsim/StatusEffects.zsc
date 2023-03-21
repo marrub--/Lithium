@@ -23,6 +23,7 @@ extend class Lith_HERMES {
 extend class Lith_URANUS {
    ui int drawStatFx(RenderEvent evt, int y) {
       Lith_StatFx stat;
+      int hudlpos = Lith_UTIL.pData(_pdt_hudlpos);
       let fnt = fntSml();
       int i = 0;
       for(let it = ThinkerIterator.create("Lith_StatFx", _stat_statfx);
@@ -30,9 +31,9 @@ extend class Lith_URANUS {
       {
          let s = Lith_HERMES.localize(stat.fnam);
          let a = (sin((gameTic + evt.fracTic + i++ * 10) * 7.0) + 1.5) / 3.0;
-         int x = 0;
+         int x = hudlpos;
 
-         Screen.drawTexture(stat.icon, false, 0, y,
+         Screen.drawTexture(stat.icon, false, x, y,
                             DTA_VirtualWidth,320, DTA_VirtualHeight,240);
          x += 12;
          y += 2;

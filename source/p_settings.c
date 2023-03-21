@@ -107,9 +107,7 @@ static void S_boole(struct set_parm const *sp) {
 
    S_label(sp, true);
 
-   if(G_Button_HId(sp->g, sp->y, tmpstr(v ?
-                                        lang(sl_on) :
-                                        lang(sl_off)),
+   if(G_Button_HId(sp->g, sp->y, tmpstr(v ? lang(sl_on) : lang(sl_off)),
                    _rght - gui_p.btnlist.w, sp->y, Pre(btnlist),
                    .fill = sp->st->fill ? &pl.cbi.st.settingsfill : nil))
    {

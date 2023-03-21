@@ -547,13 +547,13 @@ sl_:
    - log_levelup:         LOG_LevelUp
    - log_mailrecv:        LOG_MailRecv
    - log_nodeliver:       LOG_NoDeliver
-   - log_startgame:       LOG_StartGame
    - log_version:         LOG_Version
    - mail_template:       MAIL_TEMPLATE
    - mana_charge:         MANA_CHARGE
    - move:                MOVE
    - note_fmt:            NOTE_FMT
    - open:                OPEN
+   - open_menu:           OPEN_MENU
    - opener:              OPENER
    - pk_get_000:          PK_GET_000
    - pk_get_num:          PK_GET_NUM
@@ -615,7 +615,6 @@ sl_:
    - tab_arsenal:         TAB_ARSENAL_
    - tab_attributes:      TAB_ATTRIBUTES
    - tab_bip:             TAB_BIP
-   - tab_tuts:            TAB_TUTS
    - tab_cbi:             TAB_CBI
    - tab_info:            TAB_INFO
    - tab_inventory:       TAB_INVENTORY
@@ -625,6 +624,7 @@ sl_:
    - tab_shop:            TAB_SHOP
    - tab_statistics:      TAB_STATISTICS
    - tab_status:          TAB_STATUS
+   - tab_tuts:            TAB_TUTS
    - tab_upgrades:        TAB_UPGRADES
    - term_disconnecting:  TERM_DISCONNECTING
    - term_ip:             TERM_IP

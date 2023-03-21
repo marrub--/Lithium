@@ -385,38 +385,32 @@ alloc_aut(0) stkcall script static void P_doDepthMeter(void) {
 
 alloc_aut(0) stkcall script static void P_doIntro(void) {
    pl.missionstatshow = ACS_Timer() + 70;
-
    if(wl.hubscleared != 0 || get_bit(pl.done_intro, pl.pclass)) {
       P_doDepthMeter();
       return;
    }
-
    enum {
       _nlines   = 26,
       _out_tics = 35 * 2,
+      _tut_tics = 297,
+      _tut_fade = _tut_tics / 8,
+      _tut_goin = _tut_tics / 12,
    };
-
    noinit static char text[8192], *lines[_nlines];
    noinit static i32 linec[_nlines], linen[_nlines];
-
    pl.modal = _gui_intro;
    ACS_SetMusic(sp_DSEMPTY);
    FreezeTime(false);
    ACS_FadeTo(0, 0, 0, 1.0, 0.0);
-
    register i32 which = 1;
    register i32 last  = 0;
-
    noinit static struct gui_fil fil;
    fil.tic = 70;
-
    text[0] = '\0';
-
    for(;;) {
       SetSize(320, 240);
       if(which != last) {
          last = which;
-
          ACS_BeginPrint();
          PrintStrL(LANG "BEGINNING_");
          PrintStr(pl.discrim);
@@ -426,11 +420,8 @@ alloc_aut(0) stkcall script static void P_doIntro(void) {
          if(!next_text) {
             break;
          }
-
          faststrcpy_str(text, next_text);
-
          AmbientSound(ss_player_showtext, 1.0);
-
          noinit static
          char *next, *line;
          next = nil;
@@ -439,18 +430,15 @@ alloc_aut(0) stkcall script static void P_doIntro(void) {
             lines[i] = nil;
             linec[i] = 0;
             linen[i] = 0;
-
             if(text) {
                if(*text) {
                   lines[i] = line;
                   linec[i] = faststrlen(line);
                }
-
                line = faststrtok(nil, &next, '\n');
             }
          }
       }
-
       ACS_BeginPrint();
       ACS_PrintBind(sc_use);
       _c(' ');
@@ -460,7 +448,6 @@ alloc_aut(0) stkcall script static void P_doIntro(void) {
       _c(' ');
       _p(ns(lang(sl_skip_intro_2)));
       PrintText(sf_smallfnt, CR_WHITE, 275,6, 220,0);
-
       if(G_Filler(280, 220, &fil, pl.buttons & (BT_USE | BT_ATTACK))) {
          if(pl.buttons & BT_ATTACK) {
             which++;
@@ -469,61 +456,83 @@ alloc_aut(0) stkcall script static void P_doIntro(void) {
             break;
          }
       }
-
       for(i32 i = 0; i < _nlines; i++) {
-         if(!lines[i]) continue;
-
+         if(!lines[i]) {
+            continue;
+         }
          if(linen[i] < linec[i]) {
             linen[i]++;
          }
-
          if(lines[i][0] != '~') {
             BeginPrintStrN(lines[i], linen[i]);
             PrintText(sf_smallfnt, pl.color, 0,1, 8 * i,1);
          }
       }
-
       ACS_Delay(1);
    }
-
    UnfreezeTime(false);
-
    AmbientSound(ss_player_startgame, 1.0);
    ACS_FadeTo(0, 0, 0, 0.0, 2.0);
-
    for(i32 j = 0; j < _out_tics; j++) {
       k32 alpha = (_out_tics - j) / (k32)_out_tics;
-
       SetSize(320, 240);
-
       for(i32 i = 0; i < _nlines; i++) {
-         if(!lines[i]) continue;
-
+         if(!lines[i]) {
+            continue;
+         }
          if(lines[i][0] != '~') {
             BeginPrintStrN(lines[i], linen[i]);
             PrintText(sf_smallfnt, pl.color, 0,1, 8 * i,1, _u_alpha, alpha);
          }
-
          for(i32 k = 0; k < linen[i]; k++) {
             if(ACS_Random(0, 100) < 1) {
                lines[i][k] = ACS_Random('!', '}');
             }
          }
-
          if(linen[i]) {
             linen[i]--;
          }
       }
-
       ACS_Delay(1);
    }
-
    ACS_SetMusic(sp_star);
-
    set_bit(pl.done_intro, pl.pclass);
    P_Data_Save();
-
    pl.modal = _gui_none;
+   static struct fmt_arg fmt_args[] = {{_fmt_key}};
+   fmt_args[0].val.s = sc_k_opencbi;
+   str tut_txt = strp(printfmt(tmpstr(lang(sl_open_menu)), 1, fmt_args));
+   static struct i32v4 src_rect, dst_rect;
+   TextSize((void *)&src_rect, tut_txt, sf_bigupper);
+   src_rect.z = src_rect.x + 8;
+   src_rect.w = src_rect.y + 8;
+   src_rect.x = 320 - src_rect.x / 2 - 4;
+   src_rect.y = 240 - src_rect.y / 2 - 4;
+   for(i32 j = 0; j < _tut_tics; j++) {
+      k32 a = 1 - maxi(j - (_tut_tics - _tut_fade), 0) / (k32)_tut_fade;
+      k32 t = 1 - mini(j, _tut_goin) / (k32)_tut_goin;
+      i32 line_cr = 0x0000FF00 + ((i32)(a * 255) << 24);
+      SetSize(640, 480);
+      dst_rect.x = src_rect.x - 16 * t;
+      dst_rect.y = src_rect.y - 24 * t;
+      dst_rect.z = src_rect.z + 32 * t;
+      dst_rect.w = src_rect.w + 48 * t;
+      for(i32 i = 0; i < 4; ++i) {
+         i32 xn = i * 24 * t / 2;
+         i32 yn = i * 16 * t / 2;
+         i32 x1 = dst_rect.x - xn;
+         i32 y1 = dst_rect.y - yn;
+         i32 x2 = dst_rect.x + dst_rect.z + xn;
+         i32 y2 = dst_rect.y + dst_rect.w + yn;
+         PrintLine(x1, y1, x2, y1, line_cr);
+         PrintLine(x2, y1, x2, y2, line_cr);
+         PrintLine(x2, y2, x1, y2, line_cr);
+         PrintLine(x1, y2, x1, y1, line_cr);
+      }
+      PrintRect(dst_rect.x, dst_rect.y, dst_rect.z, dst_rect.w, (i32)(a * 207) << 24);
+      PrintText_str(tut_txt, sf_bigupper, pl.color, 320,4, 240,0, _u_alpha, a);
+      ACS_Delay(1);
+   }
 }
 
 static k32 damage_mul;
@@ -677,7 +686,7 @@ alloc_aut(0) script_str ext("ACS") addr(OBJ "Markiplier") void Z_MapMarker(void)
    };
    static struct i32v2 s;
    str text = GetMembS(0, sm_CurMarkStr);
-   TextSize(&s, text, sf_areaname, INT_MAX);
+   TextSize(&s, text, sf_areaname);
    ACS_Delay(5);
    for(i32 i = 0; i < t; i++) {
       k32 alpha;

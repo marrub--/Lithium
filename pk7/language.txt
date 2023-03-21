@@ -4548,8 +4548,6 @@
    "No items to toggle in \cfSet 4\c-.";
 "LITH_LOG_Version" =
    "Lithium %s :: Compiled %s";
-"LITH_LOG_StartGame" =
-   "Press \"%jS\" to open the menu.";
 "LITH_LOG_MailRecv" =
    "Mail received from <\cj%s\c->.";
 "LITH_LOG_CBI" =
@@ -6011,6 +6009,9 @@
    "Up";
 "LITH_USE" =
    "Use";
+"LITH_OPEN_MENU" =
+   "Press {} to open the in-game menu!\n"
+   "Upgrades, tutorials, settings, and more, await...";
 "LITH_CAT_BODY" =
    "\cnBody";
 "LITH_CAT_WEAP" =
@@ -8681,8 +8682,6 @@
    "\cj＜\ciケイコク\cj＞\c- LL スゴクタカイ デーモンエナジーレベル。イソギ デモト ハカイセヨ。";
 "LITH_LOG_BossWarnAri" =
    "\cg付近に大量のデーモンエナジーを検出。";
-"LITH_LOG_StartGame" =
-   "”%jS”でメニューを開く。";
 "LITH_LOG_MailRecv" =
    "＜\cj%s\c-＞からメールを受信した。";
 "LITH_LOG_CBI" =
