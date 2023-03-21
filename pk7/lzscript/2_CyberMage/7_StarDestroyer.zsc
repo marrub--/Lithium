@@ -255,10 +255,10 @@ class Lith_StarBarrier : Actor {
 
    states {
    Spawn:
-      LBAR A 0;
-      LBAR A 1 A_ScaleVelocity(FRandom(0.5,1));
+      #EBA A 0;
+      #EBA A 1 A_ScaleVelocity(FRandom(0.5,1));
    SpawnLoop:
-      LBAR A 1 A_FadeOut(FRandom(0.04, 0.09));
+      #EBA A 1 A_FadeOut(FRandom(0.04, 0.09));
       loop;
    }
 }

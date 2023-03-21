@@ -17,8 +17,8 @@ class Lith_BarrierFX : Actor {
    states {
    Spawn:
       TNT1 A 0;
-      LBAR A 10 A_StartSound("player/barrier", lch_body, CHANF_NOPAUSE|CHANF_LISTENERZ);
-      LBAR A 1 {Scale *= 0.86; Alpha -= 0.25; if(Alpha <= 0) Destroy();}
+      #EBA A 10 A_StartSound("player/barrier", lch_body, CHANF_NOPAUSE|CHANF_LISTENERZ);
+      #EBA A 1 {Scale *= 0.86; Alpha -= 0.25; if(Alpha <= 0) Destroy();}
       wait;
    }
 }
