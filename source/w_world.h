@@ -300,7 +300,6 @@ enum mission_status {
 
 enum finale_num {
    _finale_normal,
-   _finale_icon_of_sin,
    _finale_time_out,
    _finale_division,
 };

@@ -234,10 +234,9 @@ script static
 bool chtf_end_game(cheat_params_t const params) {
    i32 which;
    switch(params[0]) {
-   case 'n': which = _finale_normal;      break;
-   case 'i': which = _finale_icon_of_sin; break;
-   case 't': which = _finale_time_out;    break;
-   case 'd': which = _finale_division;    break;
+   case 'n': which = _finale_normal;   break;
+   case 't': which = _finale_time_out; break;
+   case 'd': which = _finale_division; break;
    default:
       return false;
    }

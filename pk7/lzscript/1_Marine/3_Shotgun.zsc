@@ -116,13 +116,10 @@ ReadyGauss:
    goto ReadySelector;
 
 Deselect:
-   SHTG A 0 Lith_A_AdsOut;
-DeselectLoop:
    SHTG A 1 Lith_A_Lower(_raise_fast);
    loop;
 
 Select:
-   SHTG A 0 Lith_A_AdsOut;
    SHTG A 0 {invoker.m_Just = 3;}
    SHTG A 1 Lith_A_Raise(_raise_fast);
    wait;

@@ -57,6 +57,8 @@ override void worldLoaded(WorldEvent ev) {
          let it = ThinkerIterator.create("BossBrain");
          if(it.next()) {
             m_bossLevel = boss_iconofsin;
+         } else {
+            m_bossLevel = boss_other;
          }
       }
    }

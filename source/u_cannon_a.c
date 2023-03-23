@@ -14,10 +14,6 @@
 
 #include <math.h>
 
-void Upgr_Cannon_A_Deactivate(void) {
-   InvGive(so_GTFO, 1);
-}
-
 script_str ext("ACS") addr(OBJ "PunctuatorFire")
 void Z_PunctuatorFire(void) {
    struct k32v3 v = trace_from(pl.yaw, pl.pitch, 2048, pl.attackheight);

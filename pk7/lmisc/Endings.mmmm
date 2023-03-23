@@ -13,7 +13,6 @@ lipu_ilo_nimi {
 lipu_ilo endings {
    lipu_nimi {
       normal,
-      ios,
       time_out,
       division,
       common,
@@ -37,14 +36,6 @@ lipu_ilo endings {
    }
 
    lipu normal {
-      jsr     lipu music_subr;
-      image   ":End:Normal";
-      fade_in 50;
-      crawl   Normal 400;
-      lipu    common;
-   }
-
-   lipu ios {
       jsr lipu music_subr;
       seme poki pM {
          image   ":End:Lane";

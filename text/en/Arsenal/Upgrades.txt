@@ -38,6 +38,13 @@ Allows you to double jump by pressing jump mid-air and slide by pressing run.
 Cybernetic wetware that improves your reflexes and implicit agility.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
+== \#UPGRADE_TITLE_AutoReload | Auto Reload
+@@ \#UPGRADE_EFFEC_AutoReload
+Weapons in your inventory automatically reload after 5 seconds.
+
+Automated reloading system for your backpack.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Zoom | Zoom Wetware
 @@ \#UPGRADE_EFFEC_Zoom
 Allows you to press the zoom keys to zoom in and out.

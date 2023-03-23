@@ -107,12 +107,17 @@ virtual bool           lith_checkSprint()    {return false;}
 
 virtual state lith_ready(int flags) {
    Lith_Player(owner).m_sprinting = false;
-   if(lith_checkSprint()) {
+   if(m_ads && !lith_adsShouldHappen()) {
+      lith_adsCancel();
+      return lith_gotoReady();
+   } else if(lith_checkSprint()) {
       return resolveState("_Sprint");
    } else {
       return null;
    }
 }
+
+virtual bool lith_adsShouldHappen() {return true;}
 
 virtual void lith_reloadFinish(bool isAuto) {
    m_fired = 0;
@@ -196,6 +201,8 @@ action(Weapon) void Lith_A_Lower(Lith_RaiseSpeed speed) {
       return;
    }
 
+   lith_a_adsCancel();
+
    if(!player.readyWeapon) {
       lith_a_setInterpolation(false);
       player.mo.bringUpWeapon();
@@ -235,6 +242,8 @@ action(Weapon) void Lith_A_Raise(Lith_RaiseSpeed speed) {
    if(!player) {
       return;
    }
+
+   lith_a_adsCancel();
 
    if(player.pendingWeapon != WP_NOCHANGE) {
       player.mo.dropWeapon();
@@ -292,17 +301,28 @@ action(Weapon) void Lith_A_DoubleOffset(bool left, int x, int y, int flags = 0) 
    A_OverlayOffset(snd, x, y, flags);
 }
 
+virtual int lith_readyFlags(int flags) {
+   let lp = Lith_Player(owner);
+   if(Lith_UTIL.pData(_pdt_semifrozen)) {
+      flags |= WRF_NOFIRE;
+   }
+   if(lp && lp.m_pclass & (pcl_marine | pcl_darklord)) {
+      flags |= WRF_ALLOWUSER4;
+   }
+   return flags;
+}
+
 action(Weapon) state Lith_A_Ready(int flags = 0) {
    let psp = player.getPSprite(_psp_overlay_hax);
    if(!psp || !psp.curState) {
       A_Overlay(_psp_overlay_hax, "_OverlayHax");
    }
-
+   flags = invoker.lith_readyFlags(flags);
    let st = invoker.lith_ready(flags);
    if(st) {
       return st;
    } else {
-      a_weaponReady(flags | callACS("Lith_GetWRF"));
+      a_weaponReady(flags);
       return null;
    }
 }
@@ -367,14 +387,24 @@ action(Weapon) void lith_a_adsZoomFactor(double amount = 1.0) {
    a_zoomFactor((1+lith_weapons_zoomfactor) * amount * invoker.m_adsZoom);
 }
 
-action(Weapon) void lith_a_adsZoomOut() {
-   a_zoomFactor(1.0, ZOOM_INSTANT);
+void lith_adsZoomOut() {
+   fovScale = 1;
+   if(owner && owner.player) {
+      let p = owner.player;
+      p.fov = p.desiredFov;
+      p.cheats |= CF_NOFOVINTERP;
+   }
 }
 
-action(Weapon) void lith_a_adsCancel() {
-   invoker.m_ads = _ads_none;
-   lith_a_adsZoomOut();
+void lith_adsCancel() {
+   if(m_ads) {
+      m_ads = _ads_none;
+      lith_adsZoomOut();
+   }
 }
+
+action(Weapon) void lith_a_adsZoomOut() {invoker.lith_adsZoomOut();}
+action(Weapon) void lith_a_adsCancel()  {invoker.lith_adsCancel();}
 
 action(Weapon) void lith_a_adsIn(int ads = _ads_sights) {
    if(!invoker.m_ads) {
@@ -524,6 +554,10 @@ action void lith_gunFlash() {
    player.mo.playAttacking2();
 }
 
+state lith_gotoReady() {
+   return m_ads ? resolveState("AltReady") : resolveState("Ready");
+}
+
 states(Actor) {
 Spawn:
    TNT1 A 0;
@@ -540,7 +574,7 @@ FireEmpty:
 ReadySelector:
    #### # 0 {
       lith_a_setInterpolation(false);
-      return invoker.m_ads ? ResolveState("AltReady") : ResolveState("Ready");
+      return invoker.lith_gotoReady();
    }
    stop;
 }

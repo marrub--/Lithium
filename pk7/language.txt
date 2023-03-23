@@ -290,6 +290,12 @@
    "Allows you to double jump by pressing jump mid-air and slide by pressing run.\n"
    "\n"
    "Cybernetic wetware that improves your reflexes and implicit agility.";
+"LITH_UPGRADE_TITLE_AutoReload" =
+   "Auto Reload";
+"LITH_UPGRADE_EFFEC_AutoReload" =
+   "Weapons in your inventory automatically reload after 5 seconds.\n"
+   "\n"
+   "Automated reloading system for your backpack.";
 "LITH_UPGRADE_TITLE_Zoom" =
    "Zoom Wetware";
 "LITH_UPGRADE_EFFEC_Zoom" =
@@ -3029,6 +3035,14 @@
    "A small nanomachine emitter is strapped to your belt, which fires out nanos programmed to grab vital signs of enemies under your crosshair, and display them in a numeric value on your heads up display.\n"
    "\n"
    "Unfortunately, the range of this emitter is not as great as it could be, and is for the most part only usable in close-quarters.";
+"LITH_INFO_SHORT_AutoReload" =
+   "$$LITH_UPGRADE_TITLE_AutoReload";
+"LITH_INFO_TITLE_AutoReload" =
+   "K'meru Automatic Loading System";
+"LITH_INFO_DESCR_AutoReload" =
+   "A rather small robot that can fit in your backpack, which uses a learning algorithm to figure out how to load your guns.\n"
+   "\n"
+   "Originally created by HLCorp for their highly advanced hazard suits, it was retooled to work separately from them so it could be mass produced for military needs.";
 "LITH_INFO_SHORT_SoulCleaver" =
    "$$LITH_UPGRADE_TITLE_SoulCleaver";
 "LITH_INFO_TITLE_SoulCleaver" =
@@ -6938,6 +6952,12 @@
    "ステルスシステム";
 "LITH_UPGRADE_EFFEC_StealthSys" =
    "静止しているときに徐々にフェードアウトし部分的な不可視性を与え敵から狙われるのを難しくします。";
+"LITH_UPGRADE_TITLE_AutoReload" =
+   "自動リロード";
+"LITH_UPGRADE_EFFEC_AutoReload" =
+   "所持中の武器が射撃5秒後に自動的にリロード。\n"
+   "\n"
+   "バックパックの自動リロードシステム。";
 "LITH_UPGRADE_TITLE_Pistol_A" =
    "ﾌﾙｵｰﾄ ﾋﾟｽﾄﾙ";
 "LITH_UPGRADE_EFFEC_Pistol_A" =
@@ -8073,6 +8093,12 @@
    "ベルトには小さなナノマシンエミッターが装着されており、クロスヘアの下にある敵のバイタルサインを捉えるようプログラムされたナノ粒子を発射し、ヘッドアップディスプレイに数値で表示する\n"
    "\n"
    "残念ながら、このエミッタの範囲はそれほど長くはなく近距離でしか使用できない。";
+"LITH_INFO_TITLE_AutoReload" =
+   "K'meru 自動化リローディングシステム";
+"LITH_INFO_DESCR_AutoReload" =
+   "リュックサックに収まる小型のロボットで、学習アルゴリズムを使って銃の装填方法を学習する。\n"
+   "\n"
+   "元々はHLCorp社が遥かに高度なハザードスーツのために開発したものだが、軍のニーズに合わせて大量生産できるようにHLCorp社とは別の形に改造された。";
 "LITH_INFO_TITLE_SoulCleaver" =
    "\cdシ'リタギラッセロ\c-, \chカエルレウム\c-44";
 "LITH_INFO_DESCR_SoulCleaver" =

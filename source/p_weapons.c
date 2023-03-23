@@ -231,32 +231,6 @@ void Z_SurgeOfDestiny(void) {
    }
 }
 
-script_str ext("ACS") addr(OBJ "GetWRF")
-i32 Z_GetWRF(void) {
-   enum {
-      WRF_NOBOB         = 1,
-      WRF_NOSWITCH      = 2,
-      WRF_NOPRIMARY     = 4,
-      WRF_NOSECONDARY   = 8,
-      WRF_NOFIRE        = WRF_NOPRIMARY | WRF_NOSECONDARY,
-      WRF_ALLOWRELOAD   = 16,
-      WRF_ALLOWZOOM     = 32,
-      WRF_DISABLESWITCH = 64,
-      WRF_ALLOWUSER1    = 128,
-      WRF_ALLOWUSER2    = 256,
-      WRF_ALLOWUSER3    = 512,
-      WRF_ALLOWUSER4    = 1024
-   };
-   i32 flags = 0;
-   if(pl.semifrozen) {
-      flags |= WRF_NOFIRE;
-   }
-   if(get_bit(pM | pD, pl.pclass)) {
-      flags |= WRF_ALLOWUSER4;
-   }
-   return flags;
-}
-
 script_str ext("ACS") addr(OBJ "RecoilUp")
 void Z_RecoilUp(k32 amount) {
    pl.extrpitch += amount / 180.0lk;

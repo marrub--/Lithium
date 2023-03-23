@@ -214,13 +214,10 @@ Ready:
    loop;
 
 Deselect:
-   IONG A 0 Lith_A_AdsOut;
-DeselectLoop:
    IONG A 1 Lith_A_Lower(_raise_fast);
-   loop;
+   wait;
 
 Select:
-   IONG A 0 Lith_A_AdsOut;
    IONG A 1 Lith_A_Raise(_raise_fast);
    wait;
 

@@ -354,8 +354,8 @@ static void LT(string txt, string fnt, int xx, int yy, int cr, int flags = 0, fl
    switch(xa) {
    default:
    case _xcc: case _xll: case _xrr: d.x = x;           break;
-   case _xcl: case _xlc:            d.x = x + lnx / 2; break;
-   case _xcr: case _xrc:            d.x = x - lnx / 2; break;
+   case _xcr: case _xlc:            d.x = x + lnx / 2; break;
+   case _xcl: case _xrc:            d.x = x - lnx / 2; break;
    case _xlr:                       d.x = x + lnx;     break;
    case _xrl:                       d.x = x - lnx;     break;
    }

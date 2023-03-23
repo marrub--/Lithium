@@ -47,15 +47,12 @@ Ready:
    loop;
 
 Deselect:
-   SNPG A 0 Lith_A_AdsOut;
    SNPG A 1 Lith_A_Lower(_raise_fast);
    wait;
 
 Select:
-   SNPG A 0 Lith_A_AdsOut;
-SelectLoop:
    SNPG A 1 Lith_A_Raise(_raise_fast);
-   loop;
+   wait;
 
 Fire:
    #### # 0 lith_jumpNoAmmo(5);

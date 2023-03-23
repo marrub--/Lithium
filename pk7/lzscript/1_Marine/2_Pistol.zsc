@@ -125,12 +125,9 @@ Ready:
    MARP A 1 Lith_A_Ready(WRF_ALLOWRELOAD);
    loop;
 Deselect:
-   MARP A 0 Lith_A_AdsOut;
-DeselectLoop:
    MARP A 1 Lith_A_Lower(_raise_fast);
    loop;
 Select:
-   MARP A 0 Lith_A_AdsOut;
    MARP A 1 Lith_A_Raise(_raise_fast);
    wait;
 Fire:

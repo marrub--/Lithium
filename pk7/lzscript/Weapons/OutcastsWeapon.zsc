@@ -11,7 +11,8 @@ class Lith_OutcastsWeapon : Lith_Weapon;
 default {
    Inventory.RestrictedTo "Lith_MarinePlayer", "Lith_CyberMagePlayer";
 }
-bool m_KnifeReFire;
+bool m_knifeReFire;
+int m_autoReloadTics;
 action(Weapon) void Lith_A_HitKnife(class<Actor> puff) {
    lith_a_fireMelee((CountInv("PowerStrength") ? 20 : 5) * random(1, 10), 100, _mlf_no_turn, puff);
 }
@@ -20,8 +21,20 @@ override void markPrecacheSounds() {
    markSound("weapons/knife/swing1");
    markSound("weapons/knife/swing2");
 }
-states(Weapon)
-{
+override void tick() {
+   super.tick();
+   if(owner && owner.player && owner.player.readyWeapon != self && m_fired &&
+      Lith_UTIL.pData(_pdt_upgrade, UPGR_AutoReload)) {
+      ++m_autoReloadTics;
+      if(m_autoReloadTics > 35*5) {
+         m_autoReloadTics = 0;
+         lith_reloadFinish(true);
+      }
+   } else {
+      m_autoReloadTics = 0;
+   }
+}
+states(Weapon) {
 User4:
    #### # 0 {
       return Lith_Player(self).m_pclass == pcl_marine ?

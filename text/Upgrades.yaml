@@ -17,7 +17,8 @@ _uc_body:
       Zoom:        {pg: N/A,          f: -DUR-}
       VitalScan:   {pg: VitalScanner, f: --UR-, pr: 2}
    gO:
-      ReflexWetw: {f: A-U--, pr: 5, mul: -5}
+      ReflexWetw: {f: A-U--,    pr: 5, mul: -5}
+      AutoReload: {scr: 950050, pr: 2}
    gI:
       Minimap:    {scr: 9999999}
       SecretScan: {scr: 9999999}
@@ -51,7 +52,7 @@ _uc_weap:
       RPG_B:     {         scr: 2505010, f: --U--, pr: 1, grp: 2, req: wmd    }
       Plasma_A:  {         scr: 2250000,                  grp: 3, req: wmd    }
       Plasma_B:  {         scr: 2500000,           pr: 1, grp: 3, req: wmd wrd}
-      Cannon_A:  {         scr: 5100700, f: -D---,        grp: 4, req: wmd    }
+      Cannon_A:  {         scr: 5100700,                  grp: 4, req: wmd    }
       Cannon_B:  {         scr: 5800100,           pr: 5, grp: 4, req: wmd wrd}
    pC:
       Mateba_A:   {scr:  614100, grp: 1}

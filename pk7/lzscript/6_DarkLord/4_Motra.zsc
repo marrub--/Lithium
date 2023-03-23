@@ -40,11 +40,9 @@ Ready:
    loop;
 
 Deselect:
-   MOTR A 0 lith_a_adsOut;
    MOTR A 1 Lith_A_Lower(_raise_fast);
    wait;
 Select:
-   MOTR A 0 lith_a_adsOut;
    MOTR A 1 Lith_A_Raise(_raise_fast);
    wait;
 

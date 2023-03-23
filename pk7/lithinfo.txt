@@ -125,6 +125,7 @@
    cl: pC tag: StealthSys;
 
    cl: gO tag: VitalScanner unl: "KSKK";
+   cl: gO tag: AutoReload;
 }
 
 "places" {
