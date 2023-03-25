@@ -61,8 +61,28 @@ listMenu "LithCreditsMenu" {
    size     640, 480
    position 48,  48
    font     "ltrmfont", "Lith_Green", "White"
-   lith_creditsMenuScroll "$LITH_BACK",  "b", 0
+   lith_creditsMenuScroll "$LITH_BACK", "b", 0
    lith_creditsMenuScroll "$LITH_FORWARD", "f", 1
+   position 48, 470
+   textItem "MUSIC TEST", "m", "LithMusicMenu"
+}
+
+listMenu "LithMusicMenu" {
+   size     640, 480
+   position 48,  48
+   font     "ltrmfont", "Lith_Green", "White"
+   lith_creditsMenuMusicButton "The Alchemist", "lmusic/alchemis.it"
+   lith_creditsMenuMusicButton "asdfn2", "lmusic/asdfn2.ogg"
+   lith_creditsMenuMusicButton "braun", "lmusic/braun.opus"
+   lith_creditsMenuMusicButton "crucifying the piss christ", "lmusic/crucifying.opus"
+   lith_creditsMenuMusicButton "dandalins story", "lmusic/dandalins story.it"
+   lith_creditsMenuMusicButton "fribby [freakybeat]", "lmusic/fribby.opus"
+   lith_creditsMenuMusicButton "INTO ABYSS", "lmusic/into_abyss.opus"
+   lith_creditsMenuMusicButton "you're a natural", "lmusic/natural.opus"
+   lith_creditsMenuMusicButton "larutan a er'uoy", "lmusic/naturalrev.opus"
+   lith_creditsMenuMusicButton "Shredder", "lmusic/Shredder.opus"
+   lith_creditsMenuMusicButton "siarani", "lmusic/siarani.opus"
+   lith_creditsMenuMusicButton "velar approximated", "lmusic/velar.opus"
 }
 
 /* EOF */

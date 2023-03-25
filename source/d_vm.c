@@ -564,6 +564,7 @@ alloc_aut(0) sync static void ActFIN_WAIT(void) {
    MemB1_S(VAR_FACT, FACT_NONE);
    mem_size_t musi = MemB2_G(VAR_MUSICL);
    if(musi) {
+      ACS_SetMusicVolume(1.0k);
       ACS_SetMusic(MemSA_G(musi));
       ResetMusic();
    }

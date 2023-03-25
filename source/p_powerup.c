@@ -28,7 +28,7 @@ void Z_DOGS(void) {
       ACS_Delay(10);
    }
    ACS_Delay(35);
-   ACS_SetMusic(sp_DSEMPTY);
+   ACS_SetMusic(sp_NoMusic);
    ACS_SetActorState(tid, sm_PureSteggleEnergy);
 }
 

@@ -40,32 +40,35 @@ lipu_ilo endings {
       seme poki pM {
          image   ":End:Lane";
          fade_in 50;
-         crawl   IconOfSin_1_Lane 500;
-         crawl   IconOfSin_2_Lane 500;
-         crawl   IconOfSin_3_Lane 500;
-         crawl   IconOfSin_4_Lane 500;
-         crawl   IconOfSin_5_Lane 500;
-         crawl   IconOfSin_6_Lane 500;
-         crawl   IconOfSin_7_Lane 400;
+         crawl   Normal_1_Lane 500;
+         crawl   Normal_2_Lane 500;
+         crawl   Normal_3_Lane 500;
+         crawl   Normal_4_Lane 500;
+         crawl   Normal_5_Lane 500;
+         crawl   Normal_6_Lane 500;
+         crawl   Normal_7_Lane 400;
       } ante seme poki pC {
          image   ":End:Jem";
          fade_in 50;
-         crawl   IconOfSin_1_Jem 500;
-         crawl   IconOfSin_2_Jem 500;
-         crawl   IconOfSin_3_Jem 500;
-         crawl   IconOfSin_4_Jem 500;
-         crawl   IconOfSin_5_Jem 500;
-         crawl   IconOfSin_6_Jem 500;
-         crawl   IconOfSin_7_Jem 500;
-         crawl   IconOfSin_8_Jem 500;
-         crawl   IconOfSin_9_Jem 400;
+         crawl   Normal_1_Jem 500;
+         crawl   Normal_2_Jem 500;
+         crawl   Normal_3_Jem 500;
+         crawl   Normal_4_Jem 500;
+         crawl   Normal_5_Jem 500;
+         crawl   Normal_6_Jem 500;
+         crawl   Normal_7_Jem 500;
+         crawl   Normal_8_Jem 500;
+         crawl   Normal_9_Jem 400;
       } ante seme poki pD {
          image   ":End:Ari";
          fade_in 50;
-         crawl   IconOfSin_1_Ari 250;
-         crawl   IconOfSin_2_Ari 250;
-         crawl   IconOfSin_3_Ari 400;
-         crawl   IconOfSin_4_Ari 200;
+         crawl   Normal_1_Ari 250;
+         crawl   Normal_2_Ari 250;
+         crawl   Normal_3_Ari 500;
+         crawl   Normal_4_Ari 250;
+         crawl   Normal_5_Ari 500;
+         crawl   Normal_6_Ari 500;
+         crawl   Normal_7_Ari 400;
       }
       lipu common;
    }
@@ -87,6 +90,9 @@ lipu_ilo endings {
 
    lipu common {
       fade_out 100;
+      image    "";
+      mus_fade 100;
+      wait     50;
       image    "TITLEPIC";
       music    "lmusic/crucifying.opus";
       fade_in  70;

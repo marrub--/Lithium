@@ -401,7 +401,7 @@ alloc_aut(0) script static void P_doIntro(void) {
    noinit static char text[8192], *lines[_nlines];
    noinit static i32 linec[_nlines], linen[_nlines];
    pl.modal = _gui_intro;
-   ACS_SetMusic(sp_DSEMPTY);
+   ACS_SetMusic(sp_NoMusic);
    FreezeTime(false);
    ACS_FadeTo(0, 0, 0, 1.0, 0.0);
    register i32 which = 1;

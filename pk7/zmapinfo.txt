@@ -146,7 +146,7 @@ map LITHTEST "Test Map" {
 }
 
 map LITHBOX "Box Map" {
-   music = "DSEMPTY"
+   music = "lmusic/literally_nothing.wav"
    next  = 1
 }
 

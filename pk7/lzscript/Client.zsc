@@ -8,6 +8,7 @@
 
 #include "lzscript/Client/Render.zsc"
 
+#include "lzscript/Client/CreditsMenu.zsc"
 #include "lzscript/Client/Crosshair.zsc"
 #include "lzscript/Client/DamageNum.zsc"
 #include "lzscript/Client/Draw.zsc"

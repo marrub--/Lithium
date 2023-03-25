@@ -6,7 +6,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-%% LITHEND_IconOfSin_1_Lane
+%% LITHEND_Normal_1_Lane
 It feels like nothing's changed.
 
 
@@ -37,7 +37,7 @@ All you can bring yourself to answer,
 
                          "I don't know."
 
-%% LITHEND_IconOfSin_2_Lane
+%% LITHEND_Normal_2_Lane
 With an ocean of depressive thoughts, you considered all paths forward.
 
 
@@ -66,7 +66,7 @@ With an ocean of depressive thoughts, you considered all paths forward.
               No,
                         they didn't.
 
-%% LITHEND_IconOfSin_3_Lane
+%% LITHEND_Normal_3_Lane
 
 
                       "Please, just let this end for me."
@@ -93,7 +93,7 @@ With an ocean of depressive thoughts, you considered all paths forward.
 
                                   the dream is fading away.
 
-@@ LITHEND_IconOfSin_4_Lane
+@@ LITHEND_Normal_4_Lane
 It's all you can think about. The \cgneed to get away from this life.\c-
 From this accursed world. Nothing is worth it. No matter how hard you
 try in life,
@@ -120,7 +120,7 @@ End it,
 
          this cycle.
 
-%% LITHEND_IconOfSin_5_Lane
+%% LITHEND_Normal_5_Lane
 
 
 
@@ -145,7 +145,7 @@ End it,
 
                     «Don't let them pave your way.»
 
-%% LITHEND_IconOfSin_6_Lane
+%% LITHEND_Normal_6_Lane
 
 
                     «Bring yourself to hope.»
@@ -177,7 +177,7 @@ End it,
 
  "I'll live."
 
-%% LITHEND_IconOfSin_7_Lane
+%% LITHEND_Normal_7_Lane
 \cdYou awaken in a hospital bed, cybernetics turned off,
 \cdbody aching all over. It's over. The fight against
 \cdHell has been won.

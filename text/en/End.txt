@@ -10,11 +10,10 @@
 !!include End/Dedication.txt
 
 !!include End/Division.txt
-!!include End/Normal.txt
 !!include End/TimeOut.txt
 
-!!include End/Lane/IconOfSin.txt
-!!include End/Jem/IconOfSin.txt
-!!include End/Ari/IconOfSin.txt
+!!include End/Lane.txt
+!!include End/Jem.txt
+!!include End/Ari.txt
 
 ## EOF

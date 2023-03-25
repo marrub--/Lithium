@@ -1,0 +1,81 @@
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
+
+class ListMenuItemLith_CreditsMenuScroll : ListMenuItemTextItem {
+   bool m_right;
+   void init(ListMenuDescriptor desc, string text, string hotKey, bool right) {
+      super.init(desc, text, hotkey, 'None');
+      m_right = right;
+   }
+   override bool activate() {
+      let mn = Lith_CreditsMenu(Menu.getCurrentMenu());
+      if(mn) mn.changeSection(m_right);
+      return true;
+   }
+}
+
+class ListMenuItemLith_CreditsMenuMusicButton : ListMenuItemTextItem {
+   string m_musicName;
+   void init(ListMenuDescriptor desc, string text, string musicName) {
+      super.init(desc, text, "", 'None');
+      m_musicName = musicName;
+   }
+   override bool activate() {
+      S_ChangeMusic(m_musicName, 0, true, true);
+      return true;
+   }
+}
+
+class Lith_CreditsMenu : ListMenu;
+
+array<BrokenLines> m_sections;
+int                m_sectionTic;
+int                m_curSection;
+Font               m_font;
+static void addSection(string txt) {
+   let mn = Lith_CreditsMenu(Menu.getCurrentMenu());
+   if(mn) {
+      mn.m_sections.push(mn.m_font.breakLines(txt, 640));
+   }
+}
+void changeSection(bool right) {
+   if(right) ++m_curSection;
+   else      --m_curSection;
+   if(m_curSection < 0) {
+      m_curSection = m_sections.size() - 1;
+   } else if(m_curSection >= m_sections.size()) {
+      m_curSection = 0;
+   }
+   m_sectionTic = gameTic;
+}
+override void drawer() {
+   super.drawer();
+   if(!m_sections.size()) {
+      m_font = "ltrmfont";
+      callAcs("Lith_OpenCreditsMenu");
+      m_sectionTic = gameTic;
+      m_curSection = 0;
+   }
+   int tic = gameTic - m_sectionTic;
+   float xx =
+      640.0 *
+      (1.0 - Lith_UTIL.easeInOutQuad(clamp(tic / 35.0, 0.0, 1.0)));
+   int lny = m_font.getHeight();
+   let sec = m_sections[m_curSection];
+   for(uint lnN = 0, lnC = sec.count(); lnN < lnC; ++lnN) {
+      let   ln = sec.stringAt(lnN);
+      float x  = 320.0 - m_font.stringWidth(ln) / 2.0 + xx;
+      float y  = 240.0 - lny * lnC / 2.0 + lny * lnN;
+      x += cos(y + msTime() * 0.07) * 8.0;
+      y += sin(y + msTime() * 0.07) * 8.0 * 1.33333;
+      Screen.drawText(m_font, Font.CR_UNTRANSLATED, x, y, ln,
+                      DTA_VIRTUALWIDTH, 640, DTA_VIRTUALHEIGHT, 480);
+   }
+}
+
+/* EOF */

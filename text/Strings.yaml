@@ -454,7 +454,6 @@ sp_:
    - lmusic_Shredder:  lmusic/Shredder.opus
    - lmusic_Unce:      lmusic/Unce.ogg
 
-   - DSEMPTY
    - F_SKY1
    - SKY2
    - SKY3
@@ -469,7 +468,8 @@ sp_:
    - LITHMAP
    - LITHMONS
 
-   - star: "*"
+   - NoMusic: lmusic/literally_nothing.wav
+   - star:    "*"
 
 ## Language Strings
 sl_:

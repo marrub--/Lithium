@@ -1061,7 +1061,7 @@
    "\n"
    "\cnDavidPH\cj, for making this project possible.\n"
    "\n"
-   "\c[Lith_Kate]Kate\cj, \cnKyle873\cj, \cnSe7enytes\cj and \cnXaser\cj, for being an inspiration.\n"
+   "\c[Lith_Kate]Kate\cj, \cnKyle873\cj, \cnSe7enytes\cj, and \cnXaser\cj, for being an inspiration.\n"
    "\n"
    "\cnGutawer\cj, \cnMarisa\cj, \cnYholl\cj, and \cnZombie\cj, for tons of help.\n"
    "\n"
@@ -1150,10 +1150,6 @@
    "[the archdemon protests]\n"
    "\n"
    "\"It won't hurt. But you will feel every part of it.\"";
-"LITHEND_Normal" =
-   "You exit this plane of Hell and prepare for the next.\n"
-   "\n"
-   "Some day this will all be over.";
 "LITHEND_TimeOut_1" =
    "You feel a sense of \cgoverwhelming dread. Everything is over? You scream, but your body doesn't respond. \cmEverything is over now. \cjEver\cgyt\c[Lith_Green]h\c[Lith_Pink]i\c[Lith_Yellow]n\c[Lith_Red]g\c[Lith_Purple].\cr Your v\cgision melts. Your min\cmd\cg is \cngone\cr. Nothing makes sense. \cmEverything\cr makes sense.\n"
    "\n"
@@ -1184,7 +1180,7 @@
    "\n"
    "...                           GOOD NIGHT ...\n"
    "27154175928871285582608745517002178602783852106501698717822300469657836";
-"LITHEND_IconOfSin_1_Lane" =
+"LITHEND_Normal_1_Lane" =
    "It feels like nothing's changed.\n"
    "\n"
    "\n"
@@ -1211,7 +1207,7 @@
    "\n"
    "\n"
    "                         \"I don't know.\"";
-"LITHEND_IconOfSin_2_Lane" =
+"LITHEND_Normal_2_Lane" =
    "With an ocean of depressive thoughts, you considered all paths forward.\n"
    "\n"
    "\n"
@@ -1239,7 +1235,7 @@
    "\n"
    "              No,\n"
    "                        they didn't.";
-"LITHEND_IconOfSin_3_Lane" =
+"LITHEND_Normal_3_Lane" =
    "\"Please, just let this end for me.\"\n"
    "\n"
    "\n"
@@ -1263,7 +1259,7 @@
    "\n"
    "\n"
    "                                  the dream is fading away.";
-"LITHEND_IconOfSin_4_Lane" =
+"LITHEND_Normal_4_Lane" =
    "It's all you can think about. The \cgneed to get away from this life.\c- From this accursed world. Nothing is worth it. No matter how hard you try in life,\n"
    "\n"
    "\n"
@@ -1286,7 +1282,7 @@
    "\n"
    "\n"
    "         this cycle.";
-"LITHEND_IconOfSin_5_Lane" =
+"LITHEND_Normal_5_Lane" =
    "«Why?»\n"
    "\n"
    "         \"Why what?\"\n"
@@ -1307,7 +1303,7 @@
    "         \"\cmThere won't be anything left.\c-\"\n"
    "\n"
    "                    «Don't let them pave your way.»";
-"LITHEND_IconOfSin_6_Lane" =
+"LITHEND_Normal_6_Lane" =
    "«Bring yourself to hope.»\n"
    "                    «For just one moment.»\n"
    "\n"
@@ -1336,7 +1332,7 @@
    "\n"
    "\n"
    " \"I'll live.\"";
-"LITHEND_IconOfSin_7_Lane" =
+"LITHEND_Normal_7_Lane" =
    "\cdYou awaken in a hospital bed, cybernetics turned off,\n"
    "\cdbody aching all over. It's over. The fight against\n"
    "\cdHell has been won.\n"
@@ -1356,7 +1352,7 @@
    "\n"
    "\cgIf what you saw was real...\n"
    "\cg...maybe it's best nobody knows you're a hero.";
-"LITHEND_IconOfSin_1_Jem" =
+"LITHEND_Normal_1_Jem" =
    "In the beginning, you felt comfort.\n"
    "\n"
    "Comfort of yourself and your home.\n"
@@ -1383,7 +1379,7 @@
    "Tears for the lost, the destroyed, the unneeded.\n"
    "\n"
    "Tears to save them the burden.";
-"LITHEND_IconOfSin_2_Jem" =
+"LITHEND_Normal_2_Jem" =
    "It was worse than a nightmare. Every person in your prefecture,\n"
    "taken, enslaved, killed.\n"
    "\n"
@@ -1414,7 +1410,7 @@
    "Your world.\n"
    "\n"
    "You feel the pain of it all, and you cry harder.";
-"LITHEND_IconOfSin_3_Jem" =
+"LITHEND_Normal_3_Jem" =
    "So much suffering and loss,\n"
    "\n"
    "        for what?\n"
@@ -1441,7 +1437,7 @@
    "\n"
    "\n"
    "       would not stand up to it.";
-"LITHEND_IconOfSin_4_Jem" =
+"LITHEND_Normal_4_Jem" =
    "AOF took so much from you, even your identity. Unlike most like you, they couldn't give you another name. Jeremy was always your name.\n"
    "\n"
    "This was the only mercy given.\n"
@@ -1461,7 +1457,7 @@
    "Zeke's sanctioned name was Jacques, from before he changed it to escape his family.\n"
    "\n"
    "Daniel's was, of all things, Cade. She never let you speak that name around her, so you always used ambiguity to refer to her.";
-"LITHEND_IconOfSin_5_Jem" =
+"LITHEND_Normal_5_Jem" =
    "The two had more in mind than just being friends with you, though.\n"
    "\n"
    "In a matter of weeks, the Deceiver movement began. Michael taught the seven of you how to fight back. Not with weapons, but with code.\n"
@@ -1473,7 +1469,7 @@
    "Samuel and Josh mused forever about how best to destroy AOF after we were free.\n"
    "\n"
    "Finally, you were once again alive. Even if you could not see yourself, you were alive. Ready to fight.";
-"LITHEND_IconOfSin_6_Jem" =
+"LITHEND_Normal_6_Jem" =
    "And in the time it took for you to come to terms with yourself,\n"
    "\n"
    "so did the others.\n"
@@ -1487,7 +1483,7 @@
    "Michael knew he could help others just like he had here, and vowed to commit his life to doing so.\n"
    "\n"
    "Daniel wanted to live with you, and to become your partner. She had never met someone like her before, much less someone from a place so accepting.";
-"LITHEND_IconOfSin_7_Jem" =
+"LITHEND_Normal_7_Jem" =
    "Years of planning led up to this moment.\n"
    "\n"
    "Years of tarnish and despair.\n"
@@ -1508,7 +1504,7 @@
    "\n"
    "\n"
    "                 So much death, but \cgyou\c- are free.";
-"LITHEND_IconOfSin_8_Jem" =
+"LITHEND_Normal_8_Jem" =
    "You finish crying. The amount of fluid coming out of your face is greater than the amount of fluid that has come out of your body since you were enslaved a millionfold.\n"
    "\n"
    "It's over, and you can feel your senses coming back to you. You think to yourself, for once. But only sad thoughts come — What happened to the others? Will I ever know?\n"
@@ -1522,7 +1518,7 @@
    "Yet, you feel their spirits. You feel the pulse of the planet coursing throughout your body once more. The feeling of true freedom. The freedom of movement, and to be what you wish.\n"
    "\n"
    "There are still star-ships here. Entire warehouses untouched. Never bothered to be pillaged. Perhaps it's time to build a new home. Become the proud man you always wished to be.";
-"LITHEND_IconOfSin_9_Jem" =
+"LITHEND_Normal_9_Jem" =
    "\cdAnd so, you are at last free.\n"
    "\cdFree again to think and observe, and see for yourself\n"
    "\cdthe abolishment of your former captors.\n"
@@ -1544,7 +1540,7 @@
    "\cvYour parents are waiting back at home.\n"
    "\n"
    "\cvIt's time to go back.";
-"LITHEND_IconOfSin_1_Ari" =
+"LITHEND_Normal_1_Ari" =
    "\cgSeen through 8 eyes,\n"
    "\n"
    "      \cfAll light,\n"
@@ -1574,7 +1570,7 @@
    "   ...\n"
    "\n"
    "...";
-"LITHEND_IconOfSin_2_Ari" =
+"LITHEND_Normal_2_Ari" =
    "\ctFollow gaze through all ways,\n"
    "\n"
    "  \cylines converge every plane,\n"
@@ -1603,19 +1599,17 @@
    "   ...\n"
    "\n"
    "...";
-"LITHEND_IconOfSin_3_Ari" =
-   "Thus did the giant crush and bludgeon the barrier of the irreal, destroying all the wicked in his path. They lay in a bed of flowers, sight drenched in light. A blink of an eye brings them upon a throne. The giant and the wretch within seal their blade within its backrest. No monarchs by them would be made.\n"
+"LITHEND_Normal_3_Ari" =
+   "\"Consciousness starts abrupt.\" Trapped within another self, a shallow prison pit, trapped within the darkness. The ball of anger tries to free itself, thrashing, thrashing around, lest it become impotent, it blinds the wretch without.\n"
    "\n"
-   "The swath of darkness no longer was able to make its way outside its self. Soon, everything would collapse. The giant felt horrible, like he had broken a promise.\n"
+   "\c[Lith_Blue]Walk into another game, seeking for yourself feelings of blame. \c[Lith_Pink]I walk downwards another path, hoping only that it leads back. \c[Lith_Blue]A dark place leads to a dark mind, a life you will never handle, \c[Lith_Pink]you sought out sanctity, hoping to escape from it all. \c[Lith_Blue]The snow outside feels like death. \c[Lith_Pink]The cold can do nothing to me except, \c[Lith_Blue]tidal volume increasing pace, \c[Lith_Pink]please just let me leave this place. \c[Lith_Blue]Please let me leave this place... \c[Lith_Pink]Hours pass, nothing yet.\n"
    "\n"
-   "But the wretch within said to them, \"\c[Lith_Pink]My certain demise comforts me, brother. With me will you die, by my misstep. Power I sought, but look at us now. Your care for me brought me here. Yet so I will die alone with you, and my thoughts, for comfort.\c-\"\n"
+   "\c-A drop of light descends from above, in a haze you try to grasp at it. Thrashing comes from within, and your eyes go blank. Your grip on it slips for a moment, but still, the light speaks to you. In your left ear it whispers a promise of care. In your right ear it whispers a promise of undoubted return. Then, it fades away.\n"
    "\n"
-   "The giant was with pause, and replied: \"\c[Lith_Blue]Power you sought, but power absolute you gained. This plane is still yet without mercy. Its ingress is stopped, but inside we lay as its yolk. If I may, sister, dare ask this: Will you only give in and bear its burden?\c-\"\n"
+   "Hours pass, you sit there. Days pass, still the thrashing from within taunts you. It tells you to end this. You do not listen. It kicks at its cage. You, too, kick at yours. It tries to break free, but you crush it down. It speaks through your voice, but you are the only one talking. Months pass, yet still no sign of the light.\n"
    "\n"
-   "So did they fight on through eternity, stretched infinitely inward to the point of the next and last relay. Every last piece of matter within the plane they dwelt in was destroyed. Every last throne was defaced, and every living being killed. There was absolutely nothing left but the twins, who were untied at birth.\n"
-   "\n"
-   "They became like the light of the universe, eventually becoming nothingness and evaporating. Left alone the yolk became something new.";
-"LITHEND_IconOfSin_4_Ari" =
+   "You leave the frigid wastes. Today, you are broken. The thrashing continues, but you move on. You walk upwards, leading back to where you began. You lay down in a bed of flowers, and the anger leaves your body. All you can feel, now, is regret.";
+"LITHEND_Normal_4_Ari" =
    "\cwblades bring death —\n"
    "\coyour life like a blade —\n"
    "\cgalive and yet,\n"
@@ -1646,6 +1640,59 @@
    "  \caRepeat, repeat, repeat again —\n"
    "   \cgblades speak truths we\n"
    "    \cofail to say ourselves.";
+"LITHEND_Normal_5_Ari" =
+   "You wake up, drenched in sweat. The dream may have been abstract, but it felt exactly like your first memory.\n"
+   "\n"
+   "Looking back on these memories, you start to wonder what's real. Your body and mind feel at odds with each other. Your mind and your memories, even moreso. A dialogue begins, trying to reconcile these things.\n"
+   "\n"
+   "\"\c[Lith_Pink]Feel around your body. Close your eyes and focus on every detail of it.\c-\" You feel around, yet nothing is amiss. \"\c[Lith_Blue]I am as I am.\c-\"\n"
+   "\n"
+   "\"\c[Lith_Pink]Do you remember who you are?\c-\" You are Aricil Deyan'za, brother of Omisielle Faulzaje, Dark Lord of the House of Next Dawn. \"\c[Lith_Blue]I am who I am.\c-\"\n"
+   "\n"
+   "\"\c[Lith_Pink]Do you remember where you came from?\c-\" Another universe, another time-scale, another story. You were born of the same mother as Omi, but separated at birth. Your childhood feels hazy. All you can remember is waking up in a room...\n"
+   "\n"
+   "\c[Lith_Blue]A room? \c[Lith_Pink]Was there anything before that? \c[Lith_Blue]There had to have been, but that seems like the wrong question. \c[Lith_Pink]Was there a bed? \c[Lith_Blue]Of some kind. I remember waking up and not breathing. \c[Lith_Pink]There was something odd, no? \c[Lith_Blue]The building, I just walked out. With you. \c[Lith_Pink]I don't remember being there. \c[Lith_Blue]Do you remember the snow on the ground?\n"
+   "\n"
+   "\c[Lith_Pink]Yes. \c[Lith_Blue]It was like a nightmare. The whole world was frozen over, and neither of us could remember our names. \c[Lith_Pink]Yes. \c[Lith_Blue]An operation... \c[Lith_Pink]Yes.";
+"LITHEND_Normal_6_Ari" =
+   "Thus did the giant crush and bludgeon the barrier of the irreal, destroying all the wicked in his path. They lay now again in a bed of flowers, sight drenched in light. A blink of an eye brings them upon a throne. The giant and the wretch within seal their blade in its backrest. No monarchs by them would be made.\n"
+   "\n"
+   "The swath of darkness no longer was able to make its way outside its self. Soon, everything would collapse. The giant felt horrible, like he had broken a promise.\n"
+   "\n"
+   "But the wretch within said to them, \"\c[Lith_Pink]My certain demise comforts me, brother. With me will you die, by my misstep. Power I sought, but look at us now. Your care for me brought me here. Yet so I will die alone with you, and my thoughts, for comfort.\c-\"\n"
+   "\n"
+   "The giant was with pause, and replied: \"\c[Lith_Blue]Power you sought, but power absolute you gained. This plane is still yet without mercy. Its ingress is stopped, but inside we lay as its yolk. If I may, sister, dare ask this: Will you only give in and bear its burden?\c-\"\n"
+   "\n"
+   "So did they fight on through eternity, stretched infinitely inward to the point of the next and last relay. Every last piece of matter within the plane they dwelt in was destroyed. Every last throne was defaced, and every living being killed. There was absolutely nothing left but the twins, who were untied at birth.\n"
+   "\n"
+   "\c[Lith_Pink]It's clear to me now. Do you remember where we were?\n"
+   "\n"
+   "\c[Lith_Blue]AOF...";
+"LITHEND_Normal_7_Ari" =
+   "\caA body that lies only in the depths of your mind.\n"
+   "\caMerged together, somehow,\n"
+   "\cayou feel like the world wasn't meant for you to live in.\n"
+   "\n"
+   "\ckA world too broken, or the fault of individuals?\n"
+   "\ciSomething more, a repartee of death -\n"
+   "\cgthe sickness of the heart of those in power.\n"
+   "\n"
+   "\cfA distrust so ingrained, intents no longer matter.\n"
+   "\cgA death of self, a death of conviction -\n"
+   "\cnnow our time here has come to an end.\n"
+   "\n"
+   "\cxA hope to regain what was taken. A hope to see closure.\n"
+   "\cyHopes turn into dreams. Dreams turn into reality.\n"
+   "\ctAnother time awaits.\n"
+   "\n"
+   "\cbWe became like the light of the universe,\n"
+   "\cbeventually becoming nothingness, and evaporating.\n"
+   "\n"
+   "\cnLeft alone, the yolk became something new.\n"
+   "\ctAnother time became, but still the cycle repeats -\n"
+   "\n"
+   "\cwThe story of the two tied at rebirth,\n"
+   "\cdwill yet once more close.";
 "LITH_INFO_SHORT_AllPoint" =
    "AllPoint";
 "LITH_INFO_TITLE_AllPoint" =
