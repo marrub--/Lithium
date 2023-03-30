@@ -981,11 +981,17 @@ $limit weapons/fortune/hit 0
 $limit weapons/fortune/spark 0
 weapons/rems/fire = lsnd/WeaponsD/Rems/Fire
 weapons/rems/charge = lsnd/WeaponsD/Rems/Charge
+weapons/rems/fireshield = lsnd/WeaponsD/Rems/FireShield
+weapons/rems/shieldfire = lsnd/WeaponsD/Rems/ShieldFire
+weapons/rems/shieldshot = lsnd/WeaponsD/Rems/ShieldShot
+weapons/rems/shieldhit = lsnd/WeaponsD/Rems/ShieldHit
 weapons/rems/empty = lsnd/WeaponsD/Rems/FireEmpty
 weapons/rems/draw = lsnd/WeaponsD/Rems/Draw
 weapons/rems/wail = lsnd/WeaponsD/Rems/Wail
 weapons/rems/firefinish = lsnd/WeaponsD/Rems/FireFinish
 weapons/rems/pickup = lsnd/WeaponsD/Rems/Pickup
+$limit weapons/rems/shieldshot 0
+$limit weapons/rems/shieldfire 0
 $alias weapons/unknown/pickup YOUSONOFABITCH
 $alias weapons/fist/pickup MMMMHMHMMMHMMM
 weapons/knife/swing1 = lsnd/WeaponsM/Knife/Fire1

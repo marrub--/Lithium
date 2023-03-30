@@ -15,8 +15,18 @@ transient FSpawnParticleParams pp_rocket_fire;
 transient FSpawnParticleParams pp_rocket_smoke;
 transient FSpawnParticleParams pp_rems_spark;
 transient FSpawnParticleParams pp_rems_bullet;
+transient FSpawnParticleParams pp_rems_spray;
 
 void particleRegister() {
+   pp_rems_spray.color1     = "purple";
+   pp_rems_spray.style      = style_add;
+   pp_rems_spray.flags      = spf_fullbright;
+   pp_rems_spray.accel      = (0.0,0.0,-0.02);
+   pp_rems_spray.lifetime   = 40;
+   pp_rems_spray.size       = 24;
+   pp_rems_spray.sizeStep   = -0.01;
+   pp_rems_spray.startAlpha = 1.0;
+   pp_rems_spray.fadeStep   = -1;
    pp_rems_spark.color1     = "purple";
    pp_rems_spark.texture    = getTex("PLSEE0");
    pp_rems_spark.style      = style_add;
@@ -69,18 +79,31 @@ void particleRegister() {
    pp_kampilan_swing.fadeStep   = -1;
 }
 
+void particleRemsSpray(Actor orig, Actor targ) {
+   let op   = orig.pos.plusZ(orig.height / 2);
+   let tp   = targ.pos.plusZ(targ.height / 2);
+   let vec  = tp - op;
+   let dist = vec.length();
+   vec = vec / dist;
+   for(int i = 0; i < dist / 4; ++i) {
+      vector3 pos = op + vec * (dist / 4 * i);
+      Lith_UTIL.particlePosVel(pp_rems_spray, pos);
+      level.spawnParticle(pp_rems_spray);
+   }
+}
+
 void particleRemsSpark(PlayerPawn mo) {
    let vp = mo.pos.plusZ(mo.viewHeight);
-   for(int i = 0, j = random(11,13); i < j; i++) {
-      pp_rems_spark.lifetime = random(8, 24);
-      pp_rems_spark.size = fRandom(0.5, 1.1);
+   for(int i = 0, j = int(uiRandom(11,13)); i < j; i++) {
+      pp_rems_spark.lifetime = int(uiRandom(8, 24));
+      pp_rems_spark.size = uiRandom(0.5, 1.1);
       Lith_UTIL.particlePosVel(
          pp_rems_spark,
-         vp+(fRandom(-1,1),fRandom(-1,1),fRandom(-1,1)),
-         (mo.angle+fRandom(-10,20), mo.pitch+fRandom(-15,15)),
-         distance: fRandom(8,24),
-         vel: (fRandom(-4,4),fRandom(-0.1,0.1),mo.vel.z*1.5+fRandom(-1,1)),
-         vel_angles: (mo.angle-fRandom(-2,2), mo.pitch-fRandom(-2,2)));
+         vp+(uiRandom(-1,1),uiRandom(-1,1),uiRandom(-1,1)),
+         (mo.angle+uiRandom(-10,20), mo.pitch+uiRandom(-15,15)),
+         distance: uiRandom(8,24),
+         vel: (uiRandom(-4,4),uiRandom(-0.1,0.1),mo.vel.z*1.5+uiRandom(-1,1)),
+         vel_angles: (mo.angle-uiRandom(-2,2), mo.pitch-uiRandom(-2,2)));
       level.spawnParticle(pp_rems_spark);
    }
 }
@@ -95,25 +118,25 @@ void particleRocketTrail(Actor mo) {
    let mv  = Lith_UTIL.vecToAngles(mo.vel / mo.vel.length());
    let ma  = Lith_UTIL.invertDeg(mo.angle);
    let mp  = Lith_UTIL.invertDeg(mv.y);
-   let va  = ma+fRandom(-2,2);
-   let vp  = mp+fRandom(-2,2);
+   let va  = ma+uiRandom(-2,2);
+   let vp  = mp+uiRandom(-2,2);
    Lith_UTIL.particlePosVel(
       pp_rocket_smoke,
-      pos, (va, vp), distance: fRandom(16,32),
-      vel: (fRandom(-0.5,0.5),fRandom(0.1,0.7),0.0),
+      pos, (va, vp), distance: uiRandom(16,32),
+      vel: (uiRandom(-0.5,0.5),uiRandom(0.1,0.7),0.0),
       vel_angles: (va, vp));
    level.spawnParticle(pp_rocket_smoke);
    Lith_UTIL.particlePosVel(
       pp_rocket_fire,
       pos, (ma, mp), distance: 32,
-      vel: (fRandom(-0.5,0.5),fRandom(0.1,0.7),0.0),
+      vel: (uiRandom(-0.5,0.5),uiRandom(0.1,0.7),0.0),
       vel_angles: (va, vp));
    level.spawnParticle(pp_rocket_fire);
 }
 
 void particle4BoreDamageBuff(vector3 pos, color cr) {
    pp_4bore_dmg_buff.color1 = cr;
-   pp_4bore_dmg_buff.sizeStep = fRandom(3, 9);
+   pp_4bore_dmg_buff.sizeStep = uiRandom(3, 9);
    Lith_UTIL.particlePosVel(pp_4bore_dmg_buff, pos);
    level.spawnParticle(pp_4bore_dmg_buff);
 }
@@ -148,7 +171,7 @@ void particleKampilanSwing(Actor mo, color cr, bool left) {
          pp_kampilan_swing,
          mo.pos, (mo.angle + ii, ii), distance: 8,
          vel: (0.07,0.07,0.07),
-         vel_angles: (fRandom(0, 360), fRandom(0, 360)));
+         vel_angles: (uiRandom(0, 360), uiRandom(0, 360)));
       pp_kampilan_swing.accel = pp_kampilan_swing.vel * 0.5;
       level.spawnParticle(pp_kampilan_swing);
    }

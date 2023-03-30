@@ -328,6 +328,7 @@ generator Lith_IsaacThompsonBullet   BulletChip
 generator Lith_JamesRevolverBullet   BulletChip
 generator Lith_MakarovShotgunBullet  BulletChip
 generator Lith_700Bullet             BulletChip
+generator Lith_4BorePuff             BulletChip
 generator Lith_SMGTracer3            BulletChip
 generator Lith_BaronBallSilent       None
 generator Lith_BaronBall             BaronScorch

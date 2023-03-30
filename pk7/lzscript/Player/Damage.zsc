@@ -12,7 +12,9 @@ override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int
    if(Lith_StatFx.getInPool("Lith_StatShadowWalker") || m_iFrames) {
       return 0;
    } else if(m_shield) {
-      if(!bInvulnerable) m_shield = max(m_shield - damage, 0);
+      if(!bInvulnerable && !(player.cheats & CF_GODMODE)) {
+         m_shield = max(m_shield - damage, 0);
+      }
       return 0;
    }
 

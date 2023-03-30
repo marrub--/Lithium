@@ -60,15 +60,20 @@ lipu_ilo endings {
          crawl   Normal_8_Jem 500;
          crawl   Normal_9_Jem 400;
       } ante seme poki pD {
-         image   ":End:Ari";
-         fade_in 50;
-         crawl   Normal_1_Ari 250;
-         crawl   Normal_2_Ari 250;
-         crawl   Normal_3_Ari 500;
-         crawl   Normal_4_Ari 250;
-         crawl   Normal_5_Ari 500;
-         crawl   Normal_6_Ari 500;
-         crawl   Normal_7_Ari 400;
+         image    ":End:Omi";
+         fade_in  50;
+         crawl    Normal_1_Ari 250;
+         crawl    Normal_2_Ari 250;
+         crawl    Normal_3_Ari 500;
+         crawl    Normal_4_Ari 250;
+         fade_out 100;
+         image    "";
+         wait     50;
+         image    ":End:Ari";
+         fade_in  75;
+         crawl    Normal_5_Ari 500;
+         crawl    Normal_6_Ari 500;
+         crawl    Normal_7_Ari 400;
       }
       lipu common;
    }

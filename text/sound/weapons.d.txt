@@ -151,11 +151,17 @@ weapons {
       == lsnd/WeaponsD/Rems
       fire       Fire       # Self-made
       charge     Charge     # ^
+      fireshield FireShield # EYE: Divine Cybermancy
+      shieldfire ShieldFire # Devil May Cry 4
+      shieldshot ShieldShot # ^
+      shieldhit  ShieldHit  # ^
       empty      FireEmpty  # SI Series 6000
       draw       Draw       # ^
       wail       Wail       # Half-Life 2
       firefinish FireFinish # Sigh - Introiutus/Kyrie
       pickup     Pickup     # SI Series 6000
+      $limit shieldshot 0
+      $limit shieldfire 0
    }
 }
 

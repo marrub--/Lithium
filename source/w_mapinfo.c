@@ -85,6 +85,7 @@ script struct map_info *GetMapInfo(void) {
       mi_init = true;
    }
    str hash = EDataS(_edt_maphash);
+   Dbg_Log(log_dev, _l("map hash: "), _p(hash));
    for(i32 i = 0; i < mi_num; ++i) {
       struct map_info *mi = &mi_all[i];
       mi_setup(mi);

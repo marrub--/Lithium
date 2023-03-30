@@ -91,7 +91,7 @@ void addDamageNum(vector3 origin, float w, int damage, Actor receiver) {
 
       let dnum = new("Lith_DamageNum");
 
-      dnum.m_origin     = origin + (frandom(-w,w), frandom(-w,w), frandom(-9,9));
+      dnum.m_origin     = origin + (uiRandom(-w,w), uiRandom(-w,w), uiRandom(-9,9));
       dnum.m_lastOrigin = dnum.m_origin;
       dnum.m_damage     = damage >= 1000000 ? "∞" : string.format("%i", damage);
       dnum.m_ticks      = 35 + min(damage, 120) / 3;

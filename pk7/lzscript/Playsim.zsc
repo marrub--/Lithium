@@ -21,6 +21,10 @@
 /* HERMES: Horribly Explicit and Rudimentary Methods for Extended Scripting */
 class Lith_HERMES : EventHandler;
 
+enum GameFlags {
+   _gamef_extrahard = 1 << 0,
+}
+
 string m_obituary;
 name m_dmgType;
 bool m_dmgWorld;
@@ -28,13 +32,13 @@ int m_bossLevel;
 color m_fogColor;
 array<Actor> m_bossBabies;
 int m_bossDeathInit;
-bool m_extraHard;
 Lith_LightningThinker m_lightning;
 Lith_RainThinker m_rain;
 Lith_WindThinker m_wind;
+int m_gameFlags;
 
 override void onRegister() {
-   m_extraHard = lith_sv_extrahard;
+   m_gameFlags |= lith_sv_extrahard ? _gamef_extrahard : 0;
 }
 
 override void worldLoaded(WorldEvent ev) {
@@ -323,7 +327,7 @@ override void worldThingRevived(WorldEvent ev) {
 override void checkReplacement(ReplaceEvent ev) {
    bool wasFinal = ev.isFinal;
    ev.isFinal = true;
-   switch(ev.replacee.GetClassName()) {
+   switch(ev.replacee.getClassName()) {
    case 'BossBrain': ev.replacement = 'Lith_BossBrain'; return;
    case 'BossEye':   ev.replacement = 'Lith_BossEye';   return;
    case 'SpawnFire': ev.replacement = 'Lith_SpawnFire'; return;
@@ -331,8 +335,8 @@ override void checkReplacement(ReplaceEvent ev) {
    case 'BossTarget': return;
    }
    ev.isFinal = false;
-   if(m_extraHard) {
-      switch(ev.replacee.GetClassName()) {
+   if(m_gameFlags & _gamef_extrahard) {
+      switch(ev.replacee.getClassName()) {
       case 'ZombieMan':     ev.replacement = 'Lith_XH_ZombieMan';     return;
       case 'ShotgunGuy':    ev.replacement = 'Lith_XH_ShotgunGuy';    return;
       case 'ChaingunGuy':   ev.replacement = 'Lith_XH_ChaingunGuy';   return;
@@ -353,7 +357,7 @@ override void checkReplacement(ReplaceEvent ev) {
          ev.replacement = 'Lith_XH_SpiderMastermind'; return;
       }
    }
-   switch(ev.replacee.GetClassName()) {
+   switch(ev.replacee.getClassName()) {
    case 'MiniZorchRecharge':
    case 'BlasterAmmo':
    case 'GoldWandAmmo':

@@ -514,7 +514,9 @@ action(Weapon) State lith_jumpNoAmmo(int minAmount = 1, stateLabel label = "Fire
 }
 
 action(Weapon) void lith_takeAmmo(int amount = 1) {
-   self.takeInventory(invoker.m_ammoType, amount, noTakeInfinite: true);
+   if(!sv_infiniteammo && !findInventory('PowerInfiniteAmmo', true)) {
+      self.takeInventory(invoker.m_ammoType, amount);
+   }
 }
 
 action(Weapon) State lith_jumpAmmo(int maxAmount, stateLabel label) {

@@ -276,8 +276,8 @@ void setSkyFlash(int skyFlash, int skyFlashLen) {
    if(m_skyMode != _msky_nochange) {
       m_skyFlash      = skyFlash;
       m_skyFlashLen   = skyFlashLen / 2;
-      m_skyFlashPos   = random(0, canvas_w-TexMan.getSize(m_skyLightning));
-      m_skyFlashColor = color(179 + random(0, 76), 220 + random(0, 35), 255, 255);
+      m_skyFlashPos   = random[lith_skyflash](0, canvas_w-TexMan.getSize(m_skyLightning));
+      m_skyFlashColor = color(179 + random[lith_skyflash](0, 76), 220 + random[lith_skyflash](0, 35), 255, 255);
    }
 }
 

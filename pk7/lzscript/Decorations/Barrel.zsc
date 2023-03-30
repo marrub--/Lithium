@@ -22,8 +22,7 @@ default {
    +CastSpriteShadow
 }
 
-states
-{
+states {
 Spawn:
    #DBA ABCDEFGHIJKLM 2;
    loop;

@@ -16,7 +16,6 @@ class Lith_ShrapnelProjectile : Actor {
       Gravity 0.5;
       Height 8;
       Radius 8;
-      Species "Lith_Player";
       Speed 10;
       Projectile;
       +ExplodeOnWater

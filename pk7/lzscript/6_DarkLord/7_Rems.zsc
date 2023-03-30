@@ -38,6 +38,144 @@ class Lith_RemsBullet : FastProjectile {
    }
 }
 
+class Lith_RemsSprayFx : Actor {
+   default {
+      Alpha 0.5;
+      XScale 0.5;
+      YScale 0.4;
+      RenderStyle "Add";
+      Translation "Lith_RemsSpray";
+      +NoInteraction
+   }
+   states {
+   Spawn:
+      BFE1 AAABBBCCC 1 bright {
+         scale *= 1.016;
+      }
+      BFE1 C 1 bright {
+         scale.y *= 0.875;
+         a_fadeOut(0.025);
+      }
+      wait;
+   }
+}
+
+class Lith_RemsSprayShotFx : Lith_RemsSprayFx {
+   default {
+      Scale 1;
+   }
+   states {
+   Spawn:
+      BFE2 AAABBBCCC 1 bright {
+         scale *= 1.025;
+      }
+      BFE2 D 1 bright {
+         scale *= 0.95;
+         a_fadeOut(0.01);
+      }
+      wait;
+   }
+}
+
+class Lith_RemsShieldScreenFx : Actor {
+   default {
+      RenderStyle "Add";
+      +NoInteraction
+      +Bright
+      +WallSprite
+   }
+   override void tick() {
+      a_fadeOut();
+      if(target) {
+         setOrigin(target.pos, true);
+      }
+   }
+   states {
+   Spawn:
+      #HXS A -1;
+      stop;
+   }
+}
+
+class Lith_RemsShieldScreen : Actor {
+   default {
+      Health int.max;
+      RenderStyle "Add";
+      Height 56;
+      Radius 16;
+      Alpha 0.2;
+      +Bright
+      +Invulnerable
+      +MThruSpecies
+      +Missile
+      +NoClip
+      +NoGravity
+      +NoTeleport
+      +NotAutoAimed
+      +Shootable
+      +WallSprite
+   }
+   vector3 m_tgtvec;
+   double m_dist;
+   override void postBeginPlay() {
+      super.postBeginPlay();
+      m_tgtvec = target.vec3To(self);
+      m_dist = 48;
+   }
+   override void tick() {
+      super.tick();
+      if(target) {
+         warp(target, m_dist, 0, 0, angle, WARPF_NOCHECKPOSITION | WARPF_INTERPOLATE | WARPF_ABSOLUTEANGLE);
+      }
+   }
+   override int damageMobj(Actor inflictor, Actor source, int damage, name mod, int flags, double angle) {
+      return 0;
+   }
+   void lith_a_shieldSpray(double maxAngle = 45, int rays = 20) {
+      if(!target) {
+         return;
+      }
+      bool anyHit = false;
+      for(int i = 0; i < rays; ++i) {
+         FTranslatedLineTarget lt;
+         target.aimLineAttack(angle - maxAngle / 2 + maxAngle / rays * i, MISSILERANGE, lt, 90, ALF_CHECK3D|ALF_NOWEAPONCHECK);
+         let mo = lt.lineTarget;
+         if(mo && mo != self && mo != target) {
+            anyHit = true;
+            a_startSound("weapons/rems/shieldfire", lch_weapon2, CHAN_OVERLAP, 0.5, pitch: fRandom(0.8, 1.2));
+            Lith_URANUS.instance().particleRemsSpray(self, mo);
+            spawn('Lith_RemsSprayShotFx', pos + (cos(lt.angleFromSource) * 8, sin(lt.angleFromSource) * 8, height / 2));
+            int dmg = mo.damageMobj(target, target, 120, 'Electric', DMG_USEANGLE, lt.angleFromSource);
+            if(dmg > 0) {
+               spawn('Lith_RemsSprayFx', mo.pos.plusZ(mo.height / 2));
+               mo.a_startSound("weapons/rems/shieldhit", lch_auto, pitch: fRandom(0.8, 1.2));
+               lt.traceBleed(dmg, self);
+            }
+         }
+      }
+      if(anyHit) {
+         a_startSound("weapons/rems/shieldshot", lch_weapon);
+         let fx = spawn('Lith_RemsShieldScreenFx', pos);
+         fx.angle  = angle;
+         fx.target = self;
+      }
+   }
+   states {
+   Spawn:
+      #HXS A 0;
+      #HXS AAAAA 1 a_fadeIn;
+      #HXS A 35;
+      #HXS AA 4 lith_a_shieldSpray;
+      #HXS A 10;
+      #HXS A 1 {
+         a_noBlocking();
+         m_dist += m_dist / 12;
+         a_fadeOut();
+      }
+      wait;
+   }
+}
+
 class Lith_Rems : Lith_DWeapon;
 
 default {
@@ -50,7 +188,8 @@ default {
    Inventory.AltHudIcon "REMSZ0";
    +Weapon.NoAutoFire
 }
-
+int m_steamy, m_fireLoop, m_particleLoop;
+double m_particleAlpha;
 override void tick() {
    super.tick();
    if(owner) {
@@ -59,7 +198,6 @@ override void tick() {
       }
    }
 }
-
 action(weapon) void lith_a_decreaseParticles() {
    invoker.m_particleAlpha -= 0.2;
    if(invoker.m_particleAlpha < 0) {
@@ -69,7 +207,6 @@ action(weapon) void lith_a_decreaseParticles() {
       a_overlayAlpha(_psp_rems_particle_first + i, invoker.m_particleAlpha);
    }
 }
-
 action(weapon) state lith_a_fireRems() {
    a_overlayOffset(_psp_weapon, fRandom(-9, 47), fRandom(44, 64), WOF_INTERPOLATE);
    for(int i = 0; i < 4; ++i) {
@@ -83,10 +220,16 @@ action(weapon) state lith_a_fireRems() {
    Lith_A_RecoilUp(fRandom(-0.2, 0.8));
    return invoker.m_fireLoop++ == 170 ? resolveState("FireDone") : state(null);
 }
-
-int m_steamy, m_fireLoop, m_particleLoop;
-double m_particleAlpha;
-
+action(weapon) void lith_a_fireRemsShield() {
+   let mo = spawn("Lith_RemsShieldScreen", self.pos);
+   mo.angle = self.angle;
+   mo.target = self;
+   A_Recoil(2);
+   lith_gunFlash();
+   soundAlert(invoker.owner);
+   A_Quake(2, 15, 0, 128);
+   Lith_A_RecoilUp(0.8);
+}
 states(Weapon) {
 Ready:
    REMS A 0 {
@@ -99,20 +242,34 @@ Ready:
    }
    REMS A 1 Lith_A_Ready;
    loop;
-
 Deselect:
    REMS A 1 Lith_A_Lower(_raise_slow);
    wait;
-
 Select:
    REMS A 0 { invoker.m_steamy = 0; }
    REMS A 1 Lith_A_Raise(_raise_slow);
    wait;
-
 RemsParticle:
    BLLT Y -1 bright;
    stop;
+FireScreen:
+   #### # 0 lith_jumpNoAmmo(1);
+   REMS A 1 {
+      lith_takeAmmo(1);
+      a_startSound("weapons/rems/fireshield", lch_weapon);
+      lith_a_setInterpolation(false);
+   }
+   REMS B 1 bright offset(60, 82) lith_a_fireRemsShield;
+   REMS C 1 bright offset(45, 72);
+   REMS D 1 bright offset(30, 62);
+   REMS A 1 offset(20, 50);
+   REMS A 2 offset(15, 44) lith_a_setInterpolation(true);
+   REMS A 2 offset(7, 37);
+   REMS A 3 offset(2, 33) a_reFire;
+   REMS A 3 offset(1, 32);
+   goto FireCock;
 Fire:
+   #### # 0 a_jumpIf(Lith_UTIL.pData(_pdt_upgrade, UPGR_Rems_B), "FireScreen");
    #### # 0 lith_jumpNoAmmo(4);
    REMS A 1 offset(0, 32) {
       lith_takeAmmo(4);
@@ -150,6 +307,7 @@ FireDone:
       a_clearOverlays(_psp_rems_particle_first, _psp_rems_particle_last);
       invoker.m_particleLoop = 0;
    }
+FireCock:
    #### # 2 offset(1, 32) Lith_A_RecoilDn(0.25);
    #### # 2 offset(3, 32) Lith_A_RecoilDn(0.25);
    #### # 2 offset(4, 32) Lith_A_RecoilDn(0.25);
