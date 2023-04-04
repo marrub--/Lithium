@@ -14,8 +14,7 @@
 #include "p_player.h"
 #include "p_hudid.h"
 
-static
-void P_Ren_LevelUp(void) {
+static void P_Ren_LevelUp(void) {
    if(pl.old.attr.level && pl.old.attr.level < pl.attr.level) {
       AmbientSound(ss_player_levelup, 1.0);
       P_LogH(1, tmpstr(lang_discrim(sl_log_levelup)), ACS_Random(1000, 9000));
@@ -28,8 +27,7 @@ void P_Ren_LevelUp(void) {
    }
 }
 
-alloc_aut(0) stkcall static
-void P_Ren_Mission(void) {
+stkoff static void P_Ren_Mission(void) {
    if(ACS_Timer() == 0 || !pl.hudenabled) {
       return;
    }
@@ -105,8 +103,7 @@ void P_Ren_PTick(void) {
    P_Ren_Mission();
 }
 
-alloc_aut(0) script
-void P_TeleportIn(void) {
+alloc_aut(0) script void P_TeleportIn(void) {
    pl.teleportedout = false;
 
    AmbientSound(ss_misc_telein, 0.5k);
@@ -124,8 +121,7 @@ void P_TeleportIn(void) {
    }
 }
 
-alloc_aut(0) sync
-void P_TeleportOut(i32 tag) {
+alloc_aut(0) sync void P_TeleportOut(i32 tag) {
    AmbientSound(ss_misc_teleout, 0.5k);
    ACS_SetCameraToTexture(pl.tid, sp_LITHCAM3, 90);
 

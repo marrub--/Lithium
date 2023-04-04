@@ -69,6 +69,8 @@ D I V I S I O N  S I G I L
 == BGFLAT15 | ZZLITHBG
 == BGFLAT31 | ZZLITHBG
 
+== \#GO_KILL | !! GO FORTH AND KILL !!
+
 ## Obituaries ════════════════════════════════════════════════════════════════╕
 == OB_DEFAULT |
 

@@ -48,10 +48,6 @@ struct upgr_data_Seven7s {
    bool in_air;
 };
 
-struct upgr_data_lolsords {
-   str origweapon;
-};
-
 struct upgr_data_ReactArmor {
    i32 activearmor;
 };
@@ -107,16 +103,14 @@ struct upgr_data_StealthSys {
 
 struct upgr_data_Subweapons {
    i32 charge;
+   i32 uptics;
    i32 shots;
    i32 which;
    i32 have;
 };
 
 struct upgr_data_HeadsUpDisp {
-   /* marine */
    i32 cr;
-
-   /* informant */
    struct interp_data_scr score;
    struct interp_data_scr health;
    struct interp_data_scr overdrive;
@@ -134,21 +128,17 @@ struct upgr_data {
    struct upgr_data_Subweapons  subweapons;
    struct upgr_data_VitalScan   vitalscan;
    struct upgr_data_Zoom        zoom;
-   struct upgr_data_lolsords    lolsords;
 };
 
 struct upgrade {
    anonymous struct shopdef shopdef;
-
    i32 pclass;
    i32 category;
    i32 perf;
    i32 group;
    i32 requires;
    i32 scoreadd;
-
    i32 key;
-
    i32 agroups;
    i32 flags;
 };

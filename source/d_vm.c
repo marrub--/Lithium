@@ -73,13 +73,13 @@ cstr const action_names[] = {
 };
 
 /* utilities */
-#define local alloc_aut(0) stkcall static
+#define stk_sta stkoff static
 
 #define SignB1(v) get_bit(v,  7)
 #define SignB2(v) get_bit(v, 15)
 
-local i32 SignExtendB1(u32 v) {return SignB1(v) ? (v) | 0xFFFFFF00 : (v);}
-local i32 SignExtendB2(u32 v) {return SignB2(v) ? (v) | 0xFFFF0000 : (v);}
+stk_sta i32 SignExtendB1(u32 v) {return SignB1(v) ? (v) | 0xFFFFFF00 : (v);}
+stk_sta i32 SignExtendB2(u32 v) {return SignB2(v) ? (v) | 0xFFFF0000 : (v);}
 
 /* registers */
 #define GetPC() ((r1 & R1_M_PC) >> R1_S_PC)
@@ -95,17 +95,17 @@ local i32 SignExtendB2(u32 v) {return SignB2(v) ? (v) | 0xFFFF0000 : (v);}
       reg |= v << bit & msk; \
       return (reg & msk) >> bit; \
    })
-local u32 SetPC(u32 v) {Set(r1, R1_M_PC, R1_S_PC);}
-local u32 SetSP(u32 v) {Set(r1, R1_M_SP, R1_S_SP);}
-local u32 SetVA(u32 v) {Set(r1, R1_M_VA, R1_S_VA);}
-local u32 SetAC(u32 v) {Set(r2, R2_M_AC, R2_S_AC);}
-local u32 SetRX(u32 v) {Set(r2, R2_M_RX, R2_S_RX);}
-local u32 SetRY(u32 v) {Set(r2, R2_M_RY, R2_S_RY);}
-local u32 SetSR(u32 v) {Set(r2, R2_M_SR, R2_S_SR);}
+stk_sta u32 SetPC(u32 v) {Set(r1, R1_M_PC, R1_S_PC);}
+stk_sta u32 SetSP(u32 v) {Set(r1, R1_M_SP, R1_S_SP);}
+stk_sta u32 SetVA(u32 v) {Set(r1, R1_M_VA, R1_S_VA);}
+stk_sta u32 SetAC(u32 v) {Set(r2, R2_M_AC, R2_S_AC);}
+stk_sta u32 SetRX(u32 v) {Set(r2, R2_M_RX, R2_S_RX);}
+stk_sta u32 SetRY(u32 v) {Set(r2, R2_M_RY, R2_S_RY);}
+stk_sta u32 SetSR(u32 v) {Set(r2, R2_M_SR, R2_S_SR);}
 #undef Set
-local u32 DecSP(u32 n) {u32 x = GetSP(); SetSP(x - n); return x;}
-local u32 IncPC(u32 n) {u32 x = GetPC(); SetPC(x + n); return x;}
-local u32 IncSP(u32 n) {u32 x = GetSP(); SetSP(x + n); return x;}
+stk_sta u32 DecSP(u32 n) {u32 x = GetSP(); SetSP(x - n); return x;}
+stk_sta u32 IncPC(u32 n) {u32 x = GetPC(); SetPC(x + n); return x;}
+stk_sta u32 IncSP(u32 n) {u32 x = GetSP(); SetSP(x + n); return x;}
 
 /* processor flags */
 #define GetSR_C() get_bit(r2, SR_C)
@@ -116,20 +116,20 @@ local u32 IncSP(u32 n) {u32 x = GetSP(); SetSP(x + n); return x;}
 #define GetSR_V() get_bit(r2, SR_V)
 #define GetSR_N() get_bit(r2, SR_N)
 
-local void SetSR_C(bool v) {if(v) set_bit(r2, SR_C); else dis_bit(r2, SR_C);}
-local void SetSR_Z(bool v) {if(v) set_bit(r2, SR_Z); else dis_bit(r2, SR_Z);}
-local void SetSR_I(bool v) {if(v) set_bit(r2, SR_I); else dis_bit(r2, SR_I);}
-local void SetSR_D(bool v) {if(v) set_bit(r2, SR_D); else dis_bit(r2, SR_D);}
-local void SetSR_B(bool v) {if(v) set_bit(r2, SR_B); else dis_bit(r2, SR_B);}
-local void SetSR_V(bool v) {if(v) set_bit(r2, SR_V); else dis_bit(r2, SR_V);}
-local void SetSR_N(bool v) {if(v) set_bit(r2, SR_N); else dis_bit(r2, SR_N);}
+stk_sta void SetSR_C(bool v) {if(v) set_bit(r2, SR_C); else dis_bit(r2, SR_C);}
+stk_sta void SetSR_Z(bool v) {if(v) set_bit(r2, SR_Z); else dis_bit(r2, SR_Z);}
+stk_sta void SetSR_I(bool v) {if(v) set_bit(r2, SR_I); else dis_bit(r2, SR_I);}
+stk_sta void SetSR_D(bool v) {if(v) set_bit(r2, SR_D); else dis_bit(r2, SR_D);}
+stk_sta void SetSR_B(bool v) {if(v) set_bit(r2, SR_B); else dis_bit(r2, SR_B);}
+stk_sta void SetSR_V(bool v) {if(v) set_bit(r2, SR_V); else dis_bit(r2, SR_V);}
+stk_sta void SetSR_N(bool v) {if(v) set_bit(r2, SR_N); else dis_bit(r2, SR_N);}
 
-local void ModSR_Z(u32 v) {SetSR_Z((v) == 0);}
-local void ModSR_N(u32 v) {SetSR_N(SignB1(v));}
-local void ModSR_V(u32 ua, u32 ub, u32 ur)
+stk_sta void ModSR_Z(u32 v) {SetSR_Z((v) == 0);}
+stk_sta void ModSR_N(u32 v) {SetSR_N(SignB1(v));}
+stk_sta void ModSR_V(u32 ua, u32 ub, u32 ur)
    {SetSR_V(!SignB1(ua ^ ub) && SignB1(ub) != SignB1(ur));}
 
-local void ModSR_ZN(u32 v) {ModSR_Z(v); ModSR_N(v);}
+stk_sta void ModSR_ZN(u32 v) {ModSR_Z(v); ModSR_N(v);}
 
 /* direct memory access */
 static cstr MemSC_G(u32 p) {return Cps_ExpandNT(memory, p);}
@@ -427,7 +427,7 @@ void GuiAct(void) {
    }
 }
 
-alloc_aut(0) stkcall static void F_drawBack(str bgnd) {
+stk_sta void F_drawBack(str bgnd) {
    SetSize(320, 200);
    PrintFill(0xFF000000);
    if(bgnd[0]) {
@@ -436,11 +436,11 @@ alloc_aut(0) stkcall static void F_drawBack(str bgnd) {
    SetSize(320, 240);
 }
 
-alloc_aut(0) stkcall static void F_drawFade(k32 amount) {
+stk_sta void F_drawFade(k32 amount) {
    PrintFill(0x000000 | ((i32)(255.0k * amount) << 24));
 }
 
-alloc_aut(0) stkcall static void F_drawText(i32 h, str text) {
+stk_sta void F_drawText(i32 h, str text) {
    if(text && text[0]) {
       SetClipW(10, 10, 300, h, 300);
       PrintFill(0x7F000000);
@@ -450,7 +450,7 @@ alloc_aut(0) stkcall static void F_drawText(i32 h, str text) {
 }
 
 /* VM actions */
-alloc_aut(0) stkcall static void ActEND_GAME(void) {
+stk_sta void ActEND_GAME(void) {
    SetVA(ACT_NONE);
    ServCallV(sm_ActuallyEndTheGame);
 }
@@ -462,65 +462,51 @@ stkcall static void ActLD_ITEM(void) {
 
 stkcall static void ActLD_OPT(void) {
    SetVA(ACT_NONE);
-
    i32 cnt = MemB1_G(VAR_OPT_CNT);
    MemB1_S(VAR_OPT_CNT, cnt + 1);
-
    MemB2_S(StructOfs(OPT, NAML, cnt), MemB2_G(VAR_ADRL));
    MemB2_S(StructOfs(OPT, PTRL, cnt), MemB2_G(VAR_RADRL));
 }
 
 stkcall static void ActSCRIPT_I(void) {
    SetVA(ACT_NONE);
-
    i32 s0 = MemB1_G(VAR_SCP0), s1 = MemB1_G(VAR_SCP1),
        s2 = MemB1_G(VAR_SCP2), s3 = MemB1_G(VAR_SCP3),
        s4 = MemB1_G(VAR_SCP4);
-
    ModSR_ZN(SetAC(ACS_ExecuteWithResult(s0, s1, s2, s3, s4)));
 }
 
 stkcall static void ActSCRIPT_S(void) {
    SetVA(ACT_NONE);
-
    str s0 = MemSA_G(MemB2_G(VAR_ADRL));
    i32 s1 = MemB1_G(VAR_SCP1), s2 = MemB1_G(VAR_SCP2),
        s3 = MemB1_G(VAR_SCP3), s4 = MemB1_G(VAR_SCP4);
-
    ModSR_ZN(SetAC(ACS_NamedExecuteWithResult(s0, s1, s2, s3, s4)));
 }
 
 alloc_aut(0) sync static void ActTELEPORT_INTERLEVEL(void) {
    i32 tag = MemB2_G(VAR_ADRL);
-
    ACS_Delay(5);
    P_TeleportOut(tag);
-
    SetVA(ACT_HALT);
 }
 
 alloc_aut(0) sync static void ActTELEPORT_INTRALEVEL(void) {
    i32 tag = MemB2_G(VAR_ADRL);
-
    ACS_Delay(5);
    ACS_Teleport(0, tag, false);
-
    SetVA(ACT_HALT);
 }
 
 alloc_aut(0) sync static void ActDLG_WAIT(void) {
    SetVA(ACT_NONE);
-
    AmbientSound(ss_player_cbi_dlgopen, 1.0);
-
    FreezeTime();
    P_SetVel(0, 0, 0);
-
    do {
       DialogueGUI();
       ACS_Delay(1);
    } while(MemB1_G(VAR_UACT) == UACT_NONE);
-
    UnfreezeTime();
    GuiAct();
 }

@@ -27,6 +27,7 @@ player.ari {
    step-sprint3 StepSprint3 # ^
    doll   Doll   # Made of the strands of the universe
    sprint Sprint # SI Series 6000
+   float  Float  # Terraria
    shield {
       break  ShieldBreak     # SI Series 6000
       regenw ShieldRegenWait # Self-made

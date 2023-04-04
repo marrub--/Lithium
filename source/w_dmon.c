@@ -39,7 +39,7 @@ dmon_t *Dmon(i32 id) {
    else                     return nil;
 }
 
-alloc_aut(0) stkcall dmon_t *AllocDmon(void) {
+stkoff dmon_t *AllocDmon(void) {
    dmon_t *m = &dmonalloc[dmonid];
    fastmemset(m, 0, sizeof *m);
    m->active = true;

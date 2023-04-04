@@ -35,11 +35,11 @@ _uc_body:
       StealthSys:  {scr: 1800450, f: -DU--}
    pD:
       Subweapons:  {f: --URE}
-      HeavyArmor:  {scr: 9999999}
-      ShieldOC:    {scr: 9999999}
-      HoverBoots:  {scr: 9999999}
-      HoverBoots2: {scr: 9999999}
-      SkillSword:  {scr: 9999999}
+      HeavyArmor:  {f: ADU--, scr: 9999999}
+      ShieldOC:    {          scr: 9999999}
+      HoverBoots:  {f: --U--, scr: 9999999}
+      HoverBoots2: {          scr: 9999999}
+      SkillSword:  {f: ----E, scr: 9999999}
 _uc_weap:
    pM:
       Pistol_A:  {pg: N/A, scr:  140940}

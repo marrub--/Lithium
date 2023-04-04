@@ -138,14 +138,15 @@ class Lith_RemsShieldScreen : Actor {
       bool anyHit = false;
       for(int i = 0; i < rays; ++i) {
          FTranslatedLineTarget lt;
-         target.aimLineAttack(angle - maxAngle / 2 + maxAngle / rays * i, MISSILERANGE, lt, 90, ALF_CHECK3D|ALF_NOWEAPONCHECK);
+         target.aimLineAttack(angle - maxAngle / 2 + maxAngle / rays * i, MISSILERANGE, lt, 90, ALF_CHECK3D|ALF_NOFRIENDS|ALF_NOWEAPONCHECK);
          let mo = lt.lineTarget;
          if(mo && mo != self && mo != target) {
+            let a = lt.angleFromSource;
             anyHit = true;
             a_startSound("weapons/rems/shieldfire", lch_weapon2, CHAN_OVERLAP, 0.5, pitch: fRandom(0.8, 1.2));
             Lith_URANUS.instance().particleRemsSpray(self, mo);
-            spawn('Lith_RemsSprayShotFx', pos + (cos(lt.angleFromSource) * 8, sin(lt.angleFromSource) * 8, height / 2));
-            int dmg = mo.damageMobj(target, target, 120, 'Electric', DMG_USEANGLE, lt.angleFromSource);
+            spawn('Lith_RemsSprayShotFx', pos + (cos(a) * 8, sin(a) * 8, height / 2));
+            int dmg = mo.damageMobj(target, target, 120, 'Electric', DMG_USEANGLE, a);
             if(dmg > 0) {
                spawn('Lith_RemsSprayFx', mo.pos.plusZ(mo.height / 2));
                mo.a_startSound("weapons/rems/shieldhit", lch_auto, pitch: fRandom(0.8, 1.2));
@@ -194,7 +195,7 @@ override void tick() {
    super.tick();
    if(owner) {
       for(int i = 0; i < m_particleLoop; ++i) {
-         owner.a_overlayOffset(_psp_rems_particle_first + i, fRandom(-16, 16), fRandom(-16, 16), WOF_INTERPOLATE|WOF_ADD);
+         owner.a_overlayOffset(_psp_d_rems_particle_first + i, fRandom(-16, 16), fRandom(-16, 16), WOF_INTERPOLATE|WOF_ADD);
       }
    }
 }
@@ -204,7 +205,7 @@ action(weapon) void lith_a_decreaseParticles() {
       return;
    }
    for(int i = 0; i < invoker.m_particleLoop; ++i) {
-      a_overlayAlpha(_psp_rems_particle_first + i, invoker.m_particleAlpha);
+      a_overlayAlpha(_psp_d_rems_particle_first + i, invoker.m_particleAlpha);
    }
 }
 action(weapon) state lith_a_fireRems() {
@@ -282,12 +283,12 @@ Fire:
    }
    REMS AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 {
       a_overlayOffset(_psp_weapon, fRandom(-0.4, 0.6), fRandom(-0.4, 0.6), WOF_INTERPOLATE|WOF_ADD);
-      a_overlay(_psp_rems_particle_first + invoker.m_particleLoop, "RemsParticle");
-      a_overlayFlags(_psp_rems_particle_first + invoker.m_particleLoop, PSPF_ALPHA|PSPF_RENDERSTYLE|PSPF_FORCESTYLE, true);
-      a_overlayFlags(_psp_rems_particle_first + invoker.m_particleLoop, PSPF_ADDWEAPON|PSPF_ADDBOB, false);
-      a_overlayRenderStyle(_psp_rems_particle_first + invoker.m_particleLoop, STYLE_Add);
-      a_overlayScale(_psp_rems_particle_first + invoker.m_particleLoop, fRandom(0.1, 0.5));
-      a_overlayOffset(_psp_rems_particle_first + invoker.m_particleLoop, fRandom(0, 320), fRandom(120, 240));
+      a_overlay(_psp_d_rems_particle_first + invoker.m_particleLoop, "RemsParticle");
+      a_overlayFlags(_psp_d_rems_particle_first + invoker.m_particleLoop, PSPF_ALPHA|PSPF_RENDERSTYLE|PSPF_FORCESTYLE, true);
+      a_overlayFlags(_psp_d_rems_particle_first + invoker.m_particleLoop, PSPF_ADDWEAPON|PSPF_ADDBOB, false);
+      a_overlayRenderStyle(_psp_d_rems_particle_first + invoker.m_particleLoop, STYLE_Add);
+      a_overlayScale(_psp_d_rems_particle_first + invoker.m_particleLoop, fRandom(0.1, 0.5));
+      a_overlayOffset(_psp_d_rems_particle_first + invoker.m_particleLoop, fRandom(0, 320), fRandom(120, 240));
       ++invoker.m_particleLoop;
    }
    REMS A 0 a_startSound("weapons/rems/fire", lch_weapon);
@@ -304,7 +305,7 @@ FireDone:
    REMS A 1 offset(4, 39) lith_a_decreaseParticles;
    REMS AA 1 offset(2, 35) lith_a_decreaseParticles;
    REMS A 1 offset(1, 33) {
-      a_clearOverlays(_psp_rems_particle_first, _psp_rems_particle_last);
+      a_clearOverlays(_psp_d_rems_particle_first, _psp_d_rems_particle_last);
       invoker.m_particleLoop = 0;
    }
 FireCock:

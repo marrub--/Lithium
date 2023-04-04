@@ -14,23 +14,31 @@
 
 #define udata pl.upgrdata.subweapons
 
+enum {
+   _uptic_time = 2,
+   _uptic_count_1 = countof(sa_subwep_up_1),
+   _uptic_count_2 = countof(sa_subwep_up_2),
+};
+
 void Upgr_Subweapons_Update(void) {
+   if(udata.uptics) {
+      --udata.uptics;
+   }
    if(udata.shots < 2) {
       if(udata.charge >= 100) {
-         AmbientSound(ss_weapons_subweapon_charge, 1.0);
          udata.shots++;
          udata.charge = 0;
+         StartSound(ss_weapons_subweapon_charge, lch_ambient, CHANF_NOPAUSE|CHANF_NOSTOP, 1.0k, ATTN_NONE, 0.75k + 0.25k * udata.shots);
+         udata.uptics = _uptic_time * (udata.shots == 1 ? _uptic_count_1 : _uptic_count_2);
       } else {
          udata.charge++;
       }
    }
-
    if(pl.buttons & BT_USER4 && !(pl.old.buttons & BT_USER4)) {
       for(i32 next = udata.which + 1;; next++) {
          if(next >= _subw_max) {
             next = 0;
          }
-
          if(get_bit(udata.have, next)) {
             udata.which = next;
             break;
@@ -41,23 +49,29 @@ void Upgr_Subweapons_Update(void) {
 
 void Upgr_Subweapons_Render(void) {
    if(!pl.hudenabled) return;
-
-   PrintSprite(sp_SubWepBack, pl.hudlpos+66,1, 239,2);
-
+   if(!get_bit(udata.have, _subw_fist)) {
+      PrintSprite(sp_SubWepBack, pl.hudlpos+66,1, 239,2);
+   } else {
+      PrintSprite(sp_SubWepBack2, pl.hudlpos+66,1, 239,2);
+      PrintSprite(sp_SubWepFist, pl.hudlpos+104,1, 238,2);
+   }
+   PrintSprite(sp_SubWepFront, pl.hudlpos+68,1, 238,2);
    i32 prc = 29 * udata.charge / (k32)100.0;
    i32 srw;
    if(udata.shots == 0) {srw = prc;} else {srw = 29;}
    /*                */ PrintSpriteClip(sp_SubWepBar1, pl.hudlpos+72,1, 224,2, 0,0,srw,1);
    if(udata.shots == 1) {srw = prc;} else {srw = 29;}
    if(udata.shots >  0) PrintSpriteClip(sp_SubWepBar2, pl.hudlpos+72,1, 224,2, 0,0,srw,1);
-
    for(i32 i = 0; i < _subw_max; i++) {
       i32 x   = pl.hudlpos + 68 + i * 9;
       i32 fid = fid_subwepS + i;
-
       if(get_bit(udata.have, i)) PrintSprite(sa_subwep_act[i], x,1, 238,2);
       if(udata.which == i)       SetFade(fid, 1, 6);
       if(CheckFade(fid))         PrintSprite(sp_SubWepUse, x,1, 238,2, _u_fade, fid);
+   }
+   if(udata.uptics) {
+      str *sp = udata.shots == 1 ? sa_subwep_up_1 : sa_subwep_up_2;
+      PrintSprite(sp[udata.uptics / _uptic_time], pl.hudlpos+101,0, 223,0);
    }
 }
 
@@ -65,7 +79,7 @@ void Upgr_Subweapons_Enter(struct ugprade *upgr) {
    udata.shots = 2;
    #ifndef NDEBUG
    if(dbgflags(dbgf_items)) {
-      udata.have = UINT32_MAX;
+      udata.have |= UINT32_MAX & ~dst_bit(_subw_fist);
    } else {
    #endif
       set_bit(udata.have, _subw_gun);

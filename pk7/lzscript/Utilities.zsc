@@ -137,6 +137,36 @@ struct Lith_UTIL {
          pp.vel.x = pp.vel.y = pp.vel.z = 0;
       }
    }
+
+   play static void copyPSpriteVisualData(PSprite new, PSprite old) {
+      new.sprite = old.sprite;
+      new.frame = old.frame;
+      new.x = old.x;
+      new.y = old.y;
+      new.oldx = old.oldx;
+      new.oldy = old.oldy;
+      new.baseScale = old.baseScale;
+      new.pivot = old.pivot;
+      new.scale = old.scale;
+      new.rotation = old.rotation;
+      new.halign = old.halign;
+      new.valign = old.valign;
+      new.coord0 = old.coord0;
+      new.coord1 = old.coord1;
+      new.coord2 = old.coord2;
+      new.coord3 = old.coord3;
+      new.alpha = old.alpha;
+      new.firstTic = old.firstTic;
+      new.interpolateTic = old.interpolateTic;
+      new.translation = old.translation;
+      new.bAddWeapon = old.bAddWeapon;
+      new.bAddBob = old.bAddBob;
+      new.bFlip = old.bFlip;
+      new.bMirror = old.bMirror;
+      new.bPlayerTranslated = old.bPlayerTranslated;
+      new.bPivotPercent = old.bPivotPercent;
+      new.bInterpolate = old.bInterpolate;
+   }
 }
 
 class Lith_LineTracer : LineTracer {

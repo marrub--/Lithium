@@ -29,7 +29,7 @@ static str tutorials[] = {
 
 static i32 cur_page;
 
-static stkcall alloc_aut(0) str tut_name(i32 which, cstr suf) {
+stkoff static str tut_name(i32 which, cstr suf) {
    return strp(_l(LANG "TUT_"), _p(tutorials[which]), _p(suf));
 }
 

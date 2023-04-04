@@ -14,13 +14,11 @@
 #include "w_world.h"
 #include "p_player.h"
 
-script static
-void print_cheat_msg(cstr msg) {
+script static void print_cheat_msg(cstr msg) {
    P_LogH(1, "%s", msg);
 }
 
-stkcall alloc_aut(0) static
-i32 check_cheat(struct cheat *cht, i32 ch) {
+stkoff static i32 check_cheat(struct cheat *cht, i32 ch) {
    if(cht->state.chrnum < cht->len) {
       if(cht->seq[cht->state.chrnum] == ch) cht->state.chrnum++;
       else                                  cht->state.chrnum = 0;
@@ -29,7 +27,6 @@ i32 check_cheat(struct cheat *cht, i32 ch) {
       cht->state.params[cht->state.parnum] = ch;
       cht->state.parnum++;
    }
-
    if(cht->state.chrnum == cht->len && cht->state.parnum == cht->par) {
       cht->state.chrnum = 0;
       cht->state.parnum = 0;
@@ -46,8 +43,7 @@ i32 check_cheat(struct cheat *cht, i32 ch) {
    }
 }
 
-alloc_aut(0) script ext("ACS") addr(lsc_cheatinput)
-bool Z_CheatInput(i32 ch) {
+alloc_aut(0) script ext("ACS") addr(lsc_cheatinput) bool Z_CheatInput(i32 ch) {
    if(!wl.init) {
       return false;
    }

@@ -165,7 +165,7 @@ static void P_initCbi(void) {
    CBI_InstallSpawned();
 }
 
-alloc_aut(0) stkcall i32 P_Color(i32 pclass) {
+stkoff i32 P_Color(i32 pclass) {
    switch(pclass) {
    case pcl_marine:    return Cr(green);
    case pcl_cybermage: return Cr(red);
@@ -178,7 +178,7 @@ alloc_aut(0) stkcall i32 P_Color(i32 pclass) {
    return CR_WHITE;
 }
 
-alloc_aut(0) stkcall i32 P_Char(i32 pclass) {
+stkoff i32 P_Char(i32 pclass) {
    switch(pclass) {
    case pcl_marine:    return 'm';
    case pcl_cybermage: return 'c';
@@ -298,7 +298,7 @@ alloc_aut(0) script static void P_bossWarnings(void) {
    if(get_msk(ml.flag, _mflg_boss) == _mphantom_spawned) {
       FreezeTime();
       ACS_Delay(4);
-      P_DrawCenterNotification(ns(lang_discrim(sl_bosswarn)), 105, CR_ORANGE, 0xFC8A2E);
+      P_CenterNotification(ns(lang_discrim(sl_bosswarn)), 105, CR_ORANGE, 0xFC8A2E);
       ACS_Delay(105);
       UnfreezeTime();
    }
@@ -321,16 +321,16 @@ alloc_aut(0) script static void P_bossWarnings(void) {
          ACS_Delay(1);
       }
    }
-   P_DrawCenterNotification(ns(lang(sl_bosshear1)), 100, CR_RED, 0xFF0000);
+   P_CenterNotification(ns(lang(sl_bosshear1)), 100, CR_RED, 0xFF0000);
    ACS_Delay(135);
-   P_DrawCenterNotification(ns(lang(sl_bosshear2)), 100, CR_RED, 0xFF0000);
+   P_CenterNotification(ns(lang(sl_bosshear2)), 100, CR_RED, 0xFF0000);
    if(division) {
       ACS_Delay(135);
-      P_DrawCenterNotification(ns(lang(sl_bosshear3)), 100, CR_DARKRED, 0x7F0000);
+      P_CenterNotification(ns(lang(sl_bosshear3)), 100, CR_DARKRED, 0x7F0000);
    }
 }
 
-alloc_aut(0) stkcall static i32 P_playerColor(void) {
+stkoff static i32 P_playerColor(void) {
    switch(pl.pclass) {
    case pcl_marine:    return 0x00FF00;
    case pcl_cybermage: return 0xBF0F4A;
@@ -504,17 +504,19 @@ alloc_aut(0) script static void P_doIntro(void) {
    static struct fmt_arg fmt_args[] = {{_fmt_key}};
    fmt_args[0].val.s = sc_k_opencbi;
    str tut_txt = strp(printfmt(tmpstr(lang(sl_open_menu)), 1, fmt_args));
-   P_DrawCenterNotification(tut_txt, _tut_tics);
+   P_CenterNotification(tut_txt, _tut_tics);
 }
 
-alloc_aut(0) script void P_DrawCenterNotification(str txt, i32 tics, i32 cr, i32 linecr) {
+alloc_aut(0) script void P_CenterNotification(str txt, i32 tics, i32 cr, i32 linecr, k32 bgfade, k32 fgfade) {
    static struct i32v4 src_rect, dst_rect;
    TextSize((void *)&src_rect, txt, sf_bigupper);
    src_rect.z = src_rect.x + 8;
    src_rect.w = src_rect.y + 8;
    src_rect.x = 240 - src_rect.x / 2 - 4;
    src_rect.y = 180 - src_rect.y / 2 - 4;
-   ACS_FadeTo(0, 0, 0, 0.2, 0.2);
+   if(bgfade < 1) {
+      ACS_FadeTo(0, 0, 0, 0.2 * (1 - bgfade), 0.2);
+   }
    ACS_Delay(3);
    AmbientSound(ss_player_cbi_centernotif, 0.6k);
    linecr = linecr |? P_playerColor();
@@ -528,6 +530,9 @@ alloc_aut(0) script void P_DrawCenterNotification(str txt, i32 tics, i32 cr, i32
       dst_rect.y = src_rect.y - 24 * t;
       dst_rect.z = src_rect.z + 32 * t;
       dst_rect.w = src_rect.w + 48 * t;
+      if(fgfade < 1) {
+         PrintRect(dst_rect.x, dst_rect.y, dst_rect.z, dst_rect.w, (i32)(a * (1 - fgfade) * 207) << 24);
+      }
       for(i32 i = 0; i < 4 - (t == 0 ? 3 : 0); ++i) {
          i32 xn = i * 24 * t / 2;
          i32 yn = i * 16 * t / 2;
@@ -540,7 +545,6 @@ alloc_aut(0) script void P_DrawCenterNotification(str txt, i32 tics, i32 cr, i32
          PrintLine(x2, y2, x1, y2, line_cr);
          PrintLine(x1, y2, x1, y1, line_cr);
       }
-      PrintRect(dst_rect.x, dst_rect.y, dst_rect.z, dst_rect.w, (i32)(a * 207) << 24);
       PrintText_str(txt, sf_bigupper, cr, 240,4, 180,0, _u_alpha, a);
       ACS_Delay(1);
    }

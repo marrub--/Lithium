@@ -55,8 +55,16 @@ void SetPClass(void) {
    faststrcpy_str(pl.discrim, GetMembS(0, sm_Discrim));
 }
 
-bool P_ButtonPressed(i32 bt) {
+stkoff bool P_ButtonPressed(i32 bt) {
    return pl.buttons & bt && !(pl.old.buttons & bt);
+}
+
+stkoff bool P_ButtonHeld(i32 bt) {
+   return pl.buttons & bt;
+}
+
+stkoff bool P_ButtonReleased(i32 bt) {
+   return !(pl.buttons & bt) && pl.old.buttons & bt;
 }
 
 bool P_SetVel(k32 velx, k32 vely, k32 velz, bool add) {

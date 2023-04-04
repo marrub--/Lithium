@@ -135,12 +135,10 @@ void Z_MagicSelect(i32 num) {
    if(!CVarGetI(sc_weapons_magicselanims)) return;
 
    switch(num) {
-   case 1: case 4: ACS_FadeTo(255, 255, 0, 0.3, 0.0); break;
-   case 2: case 3: ACS_FadeTo(255, 155, 0, 0.3, 0.0); break;
-   case 6: case 7: ACS_FadeTo(255, 0,   0, 0.3, 0.0); break;
+   case 1: case 4: FadeFlash(255, 255, 0, 0.3, 0.3); break;
+   case 2: case 3: FadeFlash(255, 155, 0, 0.3, 0.3); break;
+   case 6: case 7: FadeFlash(255, 0,   0, 0.3, 0.3); break;
    }
-
-   ACS_FadeTo(0, 0, 0, 0.0, 0.3);
 
    for(i32 i = 0; i < 4; i++) {
       for(i32 j = 0; j < 3; j++) {

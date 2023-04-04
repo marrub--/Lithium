@@ -23,6 +23,7 @@ weapons {
       swing1 Swing  # Metal Gear Solid 2
       swing2 Swing2 # ^
       swing3 Swing3 # ^
+      pwup   PowerUp # Call of Duty: Modern Warfare 2
       $random swing {swing1, swing2, swing3,}
    }
 

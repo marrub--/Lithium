@@ -29,8 +29,7 @@ void Blinker(str bgn) {
 }
 
 dynam_aut script void W_Title(void) {
-   ACS_FadeTo(0, 0, 0, 1.0k, 0);
-   ACS_FadeTo(0, 0, 0, 0, 5.0k);
+   FadeFlash(0, 0, 0, 1.0k, 5.0k);
    ACS_SetMusic(sp_lmusic_Shredder);
    ACS_Delay(35*5);
    SetSize(320, 240);

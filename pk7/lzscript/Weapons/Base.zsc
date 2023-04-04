@@ -26,18 +26,18 @@ enum Lith_PSprite {
    _psp_weapon = psp_weapon,
    _psp_double_lg,
    _psp_double_rg,
-   _psp_wep_max,
+   _psp_weapon_user,
+   _psp_weapon_max = _psp_weapon_user + 100,
 
    _psp_flash = psp_flash,
    _psp_double_lf,
    _psp_double_rf,
-   _psp_d_subweapon,
-   _psp_flash_max,
+   _psp_flash_user,
+   _psp_flash_max = _psp_flash_user + 100,
 
-   _psp_rems_particle_first,
-   _psp_rems_particle_last = _psp_rems_particle_first + 70,
-
-   _psp_overlay_hax = 69420,
+   _psp_misc = 69420,
+   _psp_misc_user,
+   _psp_misc_max = _psp_misc_user + 100,
 }
 
 enum Lith_Hand {
@@ -168,7 +168,7 @@ bool lith_noAmmo(int minAmount = 1) const {
 }
 
 action(Weapon) void lith_a_setInterpolation(bool on) {
-   for(int psp = _psp_weapon; psp < _psp_wep_max; ++psp) {
+   for(int psp = _psp_weapon; psp < _psp_weapon_max; ++psp) {
       a_overlayFlags(psp, pspf_interpolate, on);
    }
 }
@@ -184,7 +184,7 @@ action(Weapon) void lith_a_overlayTick() {
    }
    a *= Lith_UTIL.pData(_pdt_alpha) / FIX;
 
-   for(int psp = _psp_weapon; psp < _psp_wep_max; ++psp) {
+   for(int psp = _psp_weapon; psp < _psp_weapon_max; ++psp) {
       a_overlayFlags(psp, pspf_alpha|pspf_renderstyle, true);
       a_overlayRenderStyle(psp, style);
       a_overlayAlpha(psp, a);
@@ -210,7 +210,7 @@ action(Weapon) void Lith_A_Lower(Lith_RaiseSpeed speed) {
    }
 
    int lowerSpeed = invoker.lith_getRaiseSpeed(speed);
-   let psp = player.getPSprite(_psp_weapon);
+   let psp = player.findPSprite(_psp_weapon);
    if(psp) {
       lith_a_setInterpolation(true);
 
@@ -255,7 +255,7 @@ action(Weapon) void Lith_A_Raise(Lith_RaiseSpeed speed) {
    }
 
    int raiseSpeed = invoker.lith_getRaiseSpeed(speed);
-   let psp = player.getPSprite(_psp_weapon);
+   let psp = player.findPSprite(_psp_weapon);
    if(psp) {
       if(psp.y <= weaponBottom) {
          resetPSprite(psp);
@@ -313,9 +313,9 @@ virtual int lith_readyFlags(int flags) {
 }
 
 action(Weapon) state Lith_A_Ready(int flags = 0) {
-   let psp = player.getPSprite(_psp_overlay_hax);
+   let psp = player.findPSprite(_psp_misc);
    if(!psp || !psp.curState) {
-      A_Overlay(_psp_overlay_hax, "_OverlayHax");
+      A_Overlay(_psp_misc, "_OverlayHax");
    }
    flags = invoker.lith_readyFlags(flags);
    let st = invoker.lith_ready(flags);
@@ -541,8 +541,8 @@ action(Weapon) void lith_sprint() {
 }
 
 action(Weapon) state lith_jumpIfSprint() {
-   if(vel.xy.length() < 8) {
-      player.getPSprite(_psp_weapon).frame = 99;
+   if(vel.xy.length() < 8 || !Lith_Player(invoker.owner).m_onGround) {
+      player.findPSprite(_psp_weapon).frame = 99;
    }
    if(getPlayerInput(INPUT_BUTTONS) & BT_SPEED == 0) {
       Lith_Player(invoker.owner).m_sprinting = false;

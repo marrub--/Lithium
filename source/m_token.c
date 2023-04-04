@@ -203,13 +203,11 @@ cstr TokPrint(struct token *tok) {
    return pbuf;
 }
 
-alloc_aut(0) stkcall
-bool TokIsKw(struct token *tok, cstr kw) {
+stkoff bool TokIsKw(struct token *tok, cstr kw) {
    return tok->type == tok_identi && faststrchk(tok->textV, kw);
 }
 
-alloc_aut(0) stkcall
-cstr TokType(i32 type) {
+stkoff cstr TokType(i32 type) {
    switch(type) {
    case tok_null:   return "null-token";
    case tok_chrseq: return "character-sequence";

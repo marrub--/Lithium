@@ -225,7 +225,7 @@ script void P_BIP_Unlock(struct page *page, bool from_load) {
    }
 }
 
-alloc_aut(0) stkcall cstr P_BIP_CategoryToName(i32 category) {
+stkoff cstr P_BIP_CategoryToName(i32 category) {
    switch(category) {
       #define bip_category_x(c) case _bipc_##c: return #c;
       bip_category_x(search);
@@ -234,7 +234,7 @@ alloc_aut(0) stkcall cstr P_BIP_CategoryToName(i32 category) {
    return nil;
 }
 
-alloc_aut(0) stkcall struct page *P_BIP_NameToPage(cstr name) {
+stkoff struct page *P_BIP_NameToPage(cstr name) {
    noinit static
    char discrim[32];
    faststrcpy2(discrim, name, pl.discrim);

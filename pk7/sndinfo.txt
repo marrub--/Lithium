@@ -10,43 +10,43 @@
 // ╰──────────────────────────────────────────────────────────────────────────╯
 $rolloff * custom 0 2025
 $pitchshiftrange 2
-explosion1 = lsnd/Explosion
-explosion2 = lsnd/Explosion2
-explosion3 = lsnd/Explosion3
+explosion1 = lsnd/Explosion.flac
+explosion2 = lsnd/Explosion2.flac
+explosion3 = lsnd/Explosion3.flac
 $random explosion { explosion1 explosion2 explosion3 }
 $limit explosion 0
 $attenuation explosion 0.5
-MMMMHMHMMMHMMM = lsnd/MMMMHMHMMMHMMM
-YOUSONOFABITCH = lsnd/YOUSONOFABITCH
-AAAAAAAAAAAAAA = lsnd/AAAAAAAAAAAAAA
-misc/pop = lsnd/pop
-misc/secret = lsnd/Secret
-misc/booom = lsnd/World/boom
-misc/teleport = lsnd/World/Teleport/Teleport
-misc/teleport5 = lsnd/World/Teleport/Teleport5
-misc/teleport6 = lsnd/World/Teleport/Teleport6
-misc/teleport7 = lsnd/World/Teleport/Teleport7
-misc/teleout = lsnd/World/Teleport/TeleportOut
-misc/telein = lsnd/World/Teleport/TeleportIn
-ghost/hit = lsnd/Weapons/GhostHit
+MMMMHMHMMMHMMM = lsnd/MMMMHMHMMMHMMM.ogg
+YOUSONOFABITCH = lsnd/YOUSONOFABITCH.ogg
+AAAAAAAAAAAAAA = lsnd/AAAAAAAAAAAAAA.ogg
+misc/pop = lsnd/pop.flac
+misc/secret = lsnd/Secret.flac
+misc/booom = lsnd/World/boom.flac
+misc/teleport = lsnd/World/Teleport/Teleport.flac
+misc/teleport5 = lsnd/World/Teleport/Teleport5.flac
+misc/teleport6 = lsnd/World/Teleport/Teleport6.flac
+misc/teleport7 = lsnd/World/Teleport/Teleport7.flac
+misc/teleout = lsnd/World/Teleport/TeleportOut.flac
+misc/telein = lsnd/World/Teleport/TeleportIn.flac
+ghost/hit = lsnd/Weapons/GhostHit.flac
 $alias ghost/spawn player/pickup/barrier
-intermission/tick = lsnd/GUI/Menu/InterTick
-intermission/nextstage = lsnd/GUI/Menu/InterNext
-intermission/paststats = lsnd/GUI/Menu/InterPass
-intermission/mid = lsnd/GUI/Menu/InterMid
+intermission/tick = lsnd/GUI/Menu/InterTick.flac
+intermission/nextstage = lsnd/GUI/Menu/InterNext.flac
+intermission/paststats = lsnd/GUI/Menu/InterPass.wav
+intermission/mid = lsnd/GUI/Menu/InterMid.flac
 $pitchshift intermission/nextstage 0
 $pitchshift intermission/paststats 0
 $pitchshift intermission/mid 0
-misc/chat = lsnd/GUI/Chat
+misc/chat = lsnd/GUI/Chat.flac
 $alias misc/chat2 misc/chat
 $random misc/quitsound { enemies/zombie/ready enemies/shotguy/ready enemies/chainguy/bolt enemies/hellknight/throw enemies/cyberdemon/ready misc/teleport misc/chat player/barrier marathon/hitsolid weapons/revolver/pickup weapons/shotgun/pickup weapons/sniper/draw weapons/sword/hit }
 $pitchshift misc/chat 0
 $pitchshift misc/chat2 0
 $pitchshift misc/quitsound 0
-menu/backup = lsnd/GUI/Menu/Back
-menu/cursor = lsnd/GUI/Menu/Move
-menu/activate = lsnd/GUI/Menu/Activate
-menu/choose = lsnd/GUI/Menu/Choose
+menu/backup = lsnd/GUI/Menu/Back.flac
+menu/cursor = lsnd/GUI/Menu/Move.flac
+menu/activate = lsnd/GUI/Menu/Activate.flac
+menu/choose = lsnd/GUI/Menu/Choose.flac
 $alias menu/invalid player/cbi/clickinvalid
 $alias menu/change player/cbi/slidertick
 $alias menu/dismiss menu/backup
@@ -61,123 +61,123 @@ $pitchshift menu/change 0
 $pitchshift menu/dismiss 0
 $pitchshift menu/prompt 0
 $pitchshift menu/clear 0
-player/cbi/win95 = lsnd/GUI/Startup
-player/cbi/centernotif = lsnd/GUI/CenterNotification
-player/cbi/open = lsnd/GUI/Open
-player/cbi/close = lsnd/GUI/Close
-player/cbi/buttoncurs = lsnd/GUI/ButtonCursor
-player/cbi/buttonpress = lsnd/GUI/ButtonPress
-player/cbi/slidertick = lsnd/GUI/SliderTick
-player/cbi/find = lsnd/GUI/Find
-player/cbi/finddone = lsnd/GUI/FindDone
-player/cbi/findfail = lsnd/GUI/FindFail
-player/cbi/invcur = lsnd/GUI/InvCur
-player/cbi/invmov = lsnd/GUI/InvMov
-player/cbi/key1 = lsnd/GUI/Key1
-player/cbi/key2 = lsnd/GUI/Key2
-player/cbi/key3 = lsnd/GUI/Key3
-player/cbi/clickon = lsnd/GUI/ClickOn
-player/cbi/clickoff = lsnd/GUI/ClickOff
-player/cbi/clicklst = lsnd/GUI/ClickList
-player/cbi/auto/toggle = lsnd/GUI/AutoGroupToggle
-player/cbi/auto/buy = lsnd/GUI/AutoGroupBuy
-player/cbi/auto/invalid = lsnd/GUI/AutoGroupInvalid
-player/cbi/dlgopen = lsnd/GUI/DialogueOpen
-player/cbi/dlgclick = lsnd/GUI/DialogueClick
-player/cbi/clickinvalid = lsnd/GUI/ClickInvalid
-player/cbi/mail = lsnd/GUI/MailReceive
-player/cbi/tabswitch = lsnd/GUI/TabSwitch
-player/cbi/scroll = lsnd/GUI/Scroll
-player/cbi/scrollend = lsnd/GUI/ScrollRelease
-player/cbi/left = lsnd/GUI/Left
-player/cbi/right = lsnd/GUI/Right
+player/cbi/win95 = lsnd/GUI/Startup.flac
+player/cbi/centernotif = lsnd/GUI/CenterNotification.wav
+player/cbi/open = lsnd/GUI/Open.flac
+player/cbi/close = lsnd/GUI/Close.flac
+player/cbi/buttoncurs = lsnd/GUI/ButtonCursor.flac
+player/cbi/buttonpress = lsnd/GUI/ButtonPress.flac
+player/cbi/slidertick = lsnd/GUI/SliderTick.flac
+player/cbi/find = lsnd/GUI/Find.flac
+player/cbi/finddone = lsnd/GUI/FindDone.flac
+player/cbi/findfail = lsnd/GUI/FindFail.flac
+player/cbi/invcur = lsnd/GUI/InvCur.flac
+player/cbi/invmov = lsnd/GUI/InvMov.flac
+player/cbi/key1 = lsnd/GUI/Key1.flac
+player/cbi/key2 = lsnd/GUI/Key2.flac
+player/cbi/key3 = lsnd/GUI/Key3.flac
+player/cbi/clickon = lsnd/GUI/ClickOn.flac
+player/cbi/clickoff = lsnd/GUI/ClickOff.flac
+player/cbi/clicklst = lsnd/GUI/ClickList.wav
+player/cbi/auto/toggle = lsnd/GUI/AutoGroupToggle.flac
+player/cbi/auto/buy = lsnd/GUI/AutoGroupBuy.flac
+player/cbi/auto/invalid = lsnd/GUI/AutoGroupInvalid.flac
+player/cbi/dlgopen = lsnd/GUI/DialogueOpen.flac
+player/cbi/dlgclick = lsnd/GUI/DialogueClick.flac
+player/cbi/clickinvalid = lsnd/GUI/ClickInvalid.flac
+player/cbi/mail = lsnd/GUI/MailReceive.flac
+player/cbi/tabswitch = lsnd/GUI/TabSwitch.flac
+player/cbi/scroll = lsnd/GUI/Scroll.flac
+player/cbi/scrollend = lsnd/GUI/ScrollRelease.wav
+player/cbi/left = lsnd/GUI/Left.wav
+player/cbi/right = lsnd/GUI/Right.wav
 $alias player/cbi/invrem player/cbi/findfail
 $random player/cbi/keypress { player/cbi/key1 player/cbi/key2 player/cbi/key3 }
-body/bullethit1 = lsnd/Monsters/Body/Bullet1
-body/bullethit2 = lsnd/Monsters/Body/Bullet2
-body/flesh1 = lsnd/Monsters/Body/Flesh1
-body/flesh2 = lsnd/Monsters/Body/Flesh2
-body/flesh3 = lsnd/Monsters/Body/Flesh3
-body/flesh4 = lsnd/Monsters/Body/Flesh4
-body/flesh5 = lsnd/Monsters/Body/Flesh5
+body/bullethit1 = lsnd/Monsters/Body/Bullet1.wav
+body/bullethit2 = lsnd/Monsters/Body/Bullet2.wav
+body/flesh1 = lsnd/Monsters/Body/Flesh1.flac
+body/flesh2 = lsnd/Monsters/Body/Flesh2.flac
+body/flesh3 = lsnd/Monsters/Body/Flesh3.flac
+body/flesh4 = lsnd/Monsters/Body/Flesh4.flac
+body/flesh5 = lsnd/Monsters/Body/Flesh5.flac
 $random body/bullethit { body/bullethit1 body/bullethit2 }
 $random body/flesh { body/flesh1 body/flesh2 body/flesh3 body/flesh4 body/flesh5 }
-enemies/levelup1 = lsnd/Monsters/LevelUp1
-enemies/levelup2 = lsnd/Monsters/LevelUp2
+enemies/levelup1 = lsnd/Monsters/LevelUp1.ogg
+enemies/levelup2 = lsnd/Monsters/LevelUp2.ogg
 $random enemies/levelup { enemies/levelup1 enemies/levelup2 }
-enemies/ios/crash = lsnd/Monsters/IoS/Crash
-enemies/ios/crack1 = lsnd/Monsters/IoS/Crack1
-enemies/ios/crack2 = lsnd/Monsters/IoS/Crack2
-enemies/ios/crack3 = lsnd/Monsters/IoS/Crack3
-enemies/ios/crack4 = lsnd/Monsters/IoS/Crack4
-enemies/ios/crack5 = lsnd/Monsters/IoS/Crack5
+enemies/ios/crash = lsnd/Monsters/IoS/Crash.flac
+enemies/ios/crack1 = lsnd/Monsters/IoS/Crack1.flac
+enemies/ios/crack2 = lsnd/Monsters/IoS/Crack2.flac
+enemies/ios/crack3 = lsnd/Monsters/IoS/Crack3.flac
+enemies/ios/crack4 = lsnd/Monsters/IoS/Crack4.flac
+enemies/ios/crack5 = lsnd/Monsters/IoS/Crack5.flac
 $random enemies/ios/crack { enemies/ios/crack1 enemies/ios/crack2 enemies/ios/crack3 enemies/ios/crack4 enemies/ios/crack5 }
-enemies/zombie/ready = lsnd/Monsters/ZombieMan/Ready
-enemies/zombie/fire = lsnd/Monsters/ZombieMan/Fire
+enemies/zombie/ready = lsnd/Monsters/ZombieMan/Ready.flac
+enemies/zombie/fire = lsnd/Monsters/ZombieMan/Fire.flac
 $attenuation enemies/zombie/fire 0.5
 $limit enemies/zombie/fire 0
-enemies/shotguy/ready = lsnd/Monsters/ShotGuy/Ready
-enemies/shotguy/fire = lsnd/Monsters/ShotGuy/Fire
+enemies/shotguy/ready = lsnd/Monsters/ShotGuy/Ready.flac
+enemies/shotguy/fire = lsnd/Monsters/ShotGuy/Fire.flac
 $attenuation enemies/shotguy/fire 0.5
 $limit enemies/shotguy/fire 0
-enemies/chainguy/fire = lsnd/Monsters/ChaingunGuy/Fire
-enemies/chainguy/bolt = lsnd/Monsters/ChaingunGuy/Bolt
-enemies/chainguy/boltb = lsnd/Monsters/ChaingunGuy/BoltBack
-enemies/chainguy/boltf = lsnd/Monsters/ChaingunGuy/BoltForward
+enemies/chainguy/fire = lsnd/Monsters/ChaingunGuy/Fire.flac
+enemies/chainguy/bolt = lsnd/Monsters/ChaingunGuy/Bolt.flac
+enemies/chainguy/boltb = lsnd/Monsters/ChaingunGuy/BoltBack.flac
+enemies/chainguy/boltf = lsnd/Monsters/ChaingunGuy/BoltForward.flac
 $attenuation enemies/chainguy/fire 0.5
 $limit enemies/chainguy/fire 0
-enemies/mancubus/fire = lsnd/Monsters/Mancubus/Fire
+enemies/mancubus/fire = lsnd/Monsters/Mancubus/Fire.flac
 $attenuation enemies/mancubus/fire 0.5
-enemies/hellknight/throw = lsnd/Monsters/HellKnight/Throw
+enemies/hellknight/throw = lsnd/Monsters/HellKnight/Throw.flac
 $alias enemies/revenant/home weapons/rifle/firemode
-enemies/spiderdemon/ready = lsnd/Monsters/SpiderMastermind/Arm
-enemies/spiderdemon/fire = lsnd/Monsters/SpiderMastermind/Fire
-enemies/spiderdemon/firestop = lsnd/Monsters/SpiderMastermind/FireStop
-enemies/cyberdemon/ready = lsnd/Monsters/Cyberdemon/Ready
-enemies/cyberdemon/fire = lsnd/Monsters/Cyberdemon/Fire
-enemies/cyberdemon/firedone = lsnd/Monsters/Cyberdemon/FireDone
+enemies/spiderdemon/ready = lsnd/Monsters/SpiderMastermind/Arm.flac
+enemies/spiderdemon/fire = lsnd/Monsters/SpiderMastermind/Fire.flac
+enemies/spiderdemon/firestop = lsnd/Monsters/SpiderMastermind/FireStop.flac
+enemies/cyberdemon/ready = lsnd/Monsters/Cyberdemon/Ready.flac
+enemies/cyberdemon/fire = lsnd/Monsters/Cyberdemon/Fire.flac
+enemies/cyberdemon/firedone = lsnd/Monsters/Cyberdemon/FireDone.flac
 $attenuation enemies/cyberdemon/ready 0.3
 $attenuation enemies/cyberdemon/fire 0.25
 $attenuation enemies/cyberdemon/firedone 0.25
-enemies/ophidian/ice = lsnd/Monsters/Ophidian/IceAttack
-enemies/ophidian/fire = lsnd/Monsters/Mancubus/Fire
+enemies/ophidian/ice = lsnd/Monsters/Ophidian/IceAttack.flac
+enemies/ophidian/fire = lsnd/Monsters/Mancubus/Fire.flac
 $limit enemies/ophidian/ice 0
 $limit enemies/ophidian/fire 0
 $attenuation enemies/ophidian/ice 0.6
 $attenuation enemies/ophidian/fire 0.6
-enemies/phantom/spawn1 = lsnd/Monsters/Phantoms/Spawn
-enemies/phantom/spawn2 = lsnd/Monsters/Phantoms/Spawn2
-enemies/phantom/lunge1 = lsnd/Monsters/Phantoms/Lunge
-enemies/phantom/lunge2 = lsnd/Monsters/Phantoms/Lunge2
-enemies/phantom/lunge3 = lsnd/Monsters/Phantoms/Lunge3
-enemies/phantom/aura = lsnd/Monsters/Phantoms/Aura
-enemies/phantom/escape = lsnd/Monsters/Phantoms/Escape
+enemies/phantom/spawn1 = lsnd/Monsters/Phantoms/Spawn.ogg
+enemies/phantom/spawn2 = lsnd/Monsters/Phantoms/Spawn2.ogg
+enemies/phantom/lunge1 = lsnd/Monsters/Phantoms/Lunge.flac
+enemies/phantom/lunge2 = lsnd/Monsters/Phantoms/Lunge2.flac
+enemies/phantom/lunge3 = lsnd/Monsters/Phantoms/Lunge3.flac
+enemies/phantom/aura = lsnd/Monsters/Phantoms/Aura.flac
+enemies/phantom/escape = lsnd/Monsters/Phantoms/Escape.flac
 $random enemies/phantom/lunge { enemies/phantom/lunge1 enemies/phantom/lunge2 enemies/phantom/lunge3 }
 $random enemies/phantom/spawned { enemies/phantom/spawn1 enemies/phantom/spawn2 }
-enemies/james/fire1 = lsnd/Monsters/Phantoms/James/Fire
-enemies/james/fire2 = lsnd/Monsters/Phantoms/James/Fire2
-enemies/james/fire3 = lsnd/Monsters/Phantoms/James/Fire3
-enemies/james/knife1 = lsnd/Monsters/Phantoms/James/Knife
-enemies/james/knife2 = lsnd/Monsters/Phantoms/James/Knife2
-enemies/james/knife3 = lsnd/Monsters/Phantoms/James/Knife3
+enemies/james/fire1 = lsnd/Monsters/Phantoms/James/Fire.flac
+enemies/james/fire2 = lsnd/Monsters/Phantoms/James/Fire2.flac
+enemies/james/fire3 = lsnd/Monsters/Phantoms/James/Fire3.flac
+enemies/james/knife1 = lsnd/Monsters/Phantoms/James/Knife.flac
+enemies/james/knife2 = lsnd/Monsters/Phantoms/James/Knife2.flac
+enemies/james/knife3 = lsnd/Monsters/Phantoms/James/Knife3.flac
 $alias enemies/james/knifehit weapons/knife/hitflesh
 $random enemies/james/knife { enemies/james/knife1 enemies/james/knife2 enemies/james/knife3 }
 $random enemies/james/fire { enemies/james/fire1 enemies/james/fire2 enemies/james/fire3 }
 $limit enemies/james/fire 0
 $attenuation enemies/james/fire 0.5
-enemies/makarov/fire1 = lsnd/Monsters/Phantoms/Makarov/Fire
-enemies/makarov/fire2 = lsnd/Monsters/Phantoms/Makarov/Fire2
-enemies/makarov/pump1 = lsnd/Monsters/Phantoms/Makarov/Pump
-enemies/makarov/pump2 = lsnd/Monsters/Phantoms/Makarov/Pump2
-enemies/makarov/chainthrow = lsnd/Monsters/Phantoms/Makarov/ChainThrow
-enemies/makarov/chainhit = lsnd/Monsters/Phantoms/Makarov/ChainHit
-enemies/makarov/throw1 = lsnd/Monsters/Phantoms/Makarov/Throw
-enemies/makarov/throw2 = lsnd/Monsters/Phantoms/Makarov/Throw2
-enemies/makarov/throw3 = lsnd/Monsters/Phantoms/Makarov/Throw3
-enemies/makarov/scythe1 = lsnd/Monsters/Phantoms/Makarov/ScytheSwing
-enemies/makarov/scythe2 = lsnd/Monsters/Phantoms/Makarov/ScytheSwing2
-enemies/makarov/scythehit1 = lsnd/Monsters/Phantoms/Makarov/ScytheHit
-enemies/makarov/scythehit2 = lsnd/Monsters/Phantoms/Makarov/ScytheHit2
+enemies/makarov/fire1 = lsnd/Monsters/Phantoms/Makarov/Fire.ogg
+enemies/makarov/fire2 = lsnd/Monsters/Phantoms/Makarov/Fire2.ogg
+enemies/makarov/pump1 = lsnd/Monsters/Phantoms/Makarov/Pump.flac
+enemies/makarov/pump2 = lsnd/Monsters/Phantoms/Makarov/Pump2.flac
+enemies/makarov/chainthrow = lsnd/Monsters/Phantoms/Makarov/ChainThrow.flac
+enemies/makarov/chainhit = lsnd/Monsters/Phantoms/Makarov/ChainHit.flac
+enemies/makarov/throw1 = lsnd/Monsters/Phantoms/Makarov/Throw.flac
+enemies/makarov/throw2 = lsnd/Monsters/Phantoms/Makarov/Throw2.flac
+enemies/makarov/throw3 = lsnd/Monsters/Phantoms/Makarov/Throw3.flac
+enemies/makarov/scythe1 = lsnd/Monsters/Phantoms/Makarov/ScytheSwing.flac
+enemies/makarov/scythe2 = lsnd/Monsters/Phantoms/Makarov/ScytheSwing2.flac
+enemies/makarov/scythehit1 = lsnd/Monsters/Phantoms/Makarov/ScytheHit.flac
+enemies/makarov/scythehit2 = lsnd/Monsters/Phantoms/Makarov/ScytheHit2.flac
 $random enemies/makarov/scythe { enemies/makarov/scythe1 enemies/makarov/scythe2 }
 $random enemies/makarov/scythehit { enemies/makarov/scythehit1 enemies/makarov/scythehit2 }
 $random enemies/makarov/fire { enemies/makarov/fire1 enemies/makarov/fire2 }
@@ -186,159 +186,159 @@ $random enemies/makarov/throw { enemies/makarov/throw1 enemies/makarov/throw2 en
 $limit enemies/makarov/fire 0
 $attenuation enemies/makarov/fire 0.5
 $limit enemies/makarov/pump 0
-enemies/isaac/fire1 = lsnd/Monsters/Phantoms/Isaac/Fire
-enemies/isaac/fire2 = lsnd/Monsters/Phantoms/Isaac/Fire2
+enemies/isaac/fire1 = lsnd/Monsters/Phantoms/Isaac/Fire.flac
+enemies/isaac/fire2 = lsnd/Monsters/Phantoms/Isaac/Fire2.flac
 $random enemies/isaac/fire { enemies/isaac/fire1 enemies/isaac/fire2 }
 $limit enemies/isaac/fire 0
 $attenuation enemies/isaac/fire 0.5
-enemies/michael/swing1 = lsnd/Monsters/Phantoms/Michael/Swing
-enemies/michael/swing2 = lsnd/Monsters/Phantoms/Michael/Swing2
-enemies/michael/swing3 = lsnd/Monsters/Phantoms/Michael/Swing3
-enemies/michael/hit1 = lsnd/Monsters/Phantoms/Michael/Hit
-enemies/michael/hit2 = lsnd/Monsters/Phantoms/Michael/Hit2
-enemies/michael/hit3 = lsnd/Monsters/Phantoms/Michael/Hit3
+enemies/michael/swing1 = lsnd/Monsters/Phantoms/Michael/Swing.ogg
+enemies/michael/swing2 = lsnd/Monsters/Phantoms/Michael/Swing2.ogg
+enemies/michael/swing3 = lsnd/Monsters/Phantoms/Michael/Swing3.ogg
+enemies/michael/hit1 = lsnd/Monsters/Phantoms/Michael/Hit.flac
+enemies/michael/hit2 = lsnd/Monsters/Phantoms/Michael/Hit2.flac
+enemies/michael/hit3 = lsnd/Monsters/Phantoms/Michael/Hit3.flac
 $random enemies/michael/swing { enemies/michael/swing1 enemies/michael/swing2 enemies/michael/swing3 }
 $random enemies/michael/hit { enemies/michael/hit1 enemies/michael/hit2 enemies/michael/hit3 }
-player/pickup/upgrbody = lsnd/Items/UpgrBody
-player/pickup/upgrextr = lsnd/Items/UpgrExtr
-player/pickup/upgrweap = lsnd/Items/UpgrWeap
-player/pickup/upgrcbio = lsnd/Items/CBIUpgradeO
-player/pickup/upgrcbii = lsnd/Items/CBIUpgradeI
-player/pickup/item = lsnd/Items/Item
-player/pickup/barrier = lsnd/Items/Barrier
-player/pickup/infrared = lsnd/Items/Goggles
-player/pickup/redkey = lsnd/Items/RedKey
-player/pickup/yellowkey = lsnd/Items/YellowKey
-player/pickup/bluekey = lsnd/Items/BlueKey
-player/pickup/redskull2 = lsnd/Items/SKULL
-player/pickup/redskull1 = lsnd/Items/RedSkull
-player/pickup/yellowskull = lsnd/Items/YellowSkull
-player/pickup/blueskull = lsnd/Items/BlueSkull
-player/pickup/evil = lsnd/Items/EvilItem
-player/pickup/clips = lsnd/Items/BulletSmall
-player/pickup/clipb = lsnd/Items/BulletPack
-player/pickup/cells = lsnd/Items/CellSmall
-player/pickup/cellb = lsnd/Items/CellPack
-player/pickup/shells = lsnd/Items/ShellSmall
-player/pickup/shellb = lsnd/Items/ShellPack
-player/pickup/rockets = lsnd/Items/RocketSmall
-player/pickup/rocketb = lsnd/Items/RocketBig
-player/pickup/mana = lsnd/Items/Mana
-player/pickup/scoresmall = lsnd/Items/ScoreSmall
-player/pickup/stimpack = lsnd/Items/Stimpack
-player/pickup/medikit = lsnd/Items/Medikit
-player/pickup/invuln = lsnd/Items/Invuln
-player/pickup/mega = lsnd/Items/Mega
-player/pickup/super = lsnd/Items/Super
-player/pickup/allmap = lsnd/Items/AllMap
-player/pickup/radsuit = lsnd/Items/Radsuit
-player/pickup/berserk = lsnd/Items/Berserk
-player/pickup/armor = lsnd/Items/Armor
-player/pickup/boots = lsnd/Items/Boots
-player/pickup/ring = lsnd/Items/Ring
-player/pickup/armor/pink = lsnd/Items/ArmorPink
-player/pickup/armor/midori = lsnd/Items/ArmorMidori
-player/pickup/scorechip = lsnd/Items/ScoreChip
-player/pickup/coin1 = lsnd/Items/Coin1
-player/pickup/coin2 = lsnd/Items/Coin2
-player/pickup/coin3 = lsnd/Items/Coin3
-player/pickup/gem = lsnd/Items/Gem
-player/pickup/material1 = lsnd/Items/Material1
-player/pickup/material2 = lsnd/Items/Material2
-player/pickup/material3 = lsnd/Items/Material3
-player/pickup/material4 = lsnd/Items/Material4
+player/pickup/upgrbody = lsnd/Items/UpgrBody.ogg
+player/pickup/upgrextr = lsnd/Items/UpgrExtr.flac
+player/pickup/upgrweap = lsnd/Items/UpgrWeap.ogg
+player/pickup/upgrcbio = lsnd/Items/CBIUpgradeO.flac
+player/pickup/upgrcbii = lsnd/Items/CBIUpgradeI.flac
+player/pickup/item = lsnd/Items/Item.ogg
+player/pickup/barrier = lsnd/Items/Barrier.flac
+player/pickup/infrared = lsnd/Items/Goggles.ogg
+player/pickup/redkey = lsnd/Items/RedKey.flac
+player/pickup/yellowkey = lsnd/Items/YellowKey.flac
+player/pickup/bluekey = lsnd/Items/BlueKey.flac
+player/pickup/redskull2 = lsnd/Items/SKULL.ogg
+player/pickup/redskull1 = lsnd/Items/RedSkull.flac
+player/pickup/yellowskull = lsnd/Items/YellowSkull.flac
+player/pickup/blueskull = lsnd/Items/BlueSkull.flac
+player/pickup/evil = lsnd/Items/EvilItem.flac
+player/pickup/clips = lsnd/Items/BulletSmall.flac
+player/pickup/clipb = lsnd/Items/BulletPack.flac
+player/pickup/cells = lsnd/Items/CellSmall.flac
+player/pickup/cellb = lsnd/Items/CellPack.flac
+player/pickup/shells = lsnd/Items/ShellSmall.ogg
+player/pickup/shellb = lsnd/Items/ShellPack.ogg
+player/pickup/rockets = lsnd/Items/RocketSmall.flac
+player/pickup/rocketb = lsnd/Items/RocketBig.flac
+player/pickup/mana = lsnd/Items/Mana.flac
+player/pickup/scoresmall = lsnd/Items/ScoreSmall.flac
+player/pickup/stimpack = lsnd/Items/Stimpack.flac
+player/pickup/medikit = lsnd/Items/Medikit.flac
+player/pickup/invuln = lsnd/Items/Invuln.flac
+player/pickup/mega = lsnd/Items/Mega.flac
+player/pickup/super = lsnd/Items/Super.flac
+player/pickup/allmap = lsnd/Items/AllMap.flac
+player/pickup/radsuit = lsnd/Items/Radsuit.flac
+player/pickup/berserk = lsnd/Items/Berserk.flac
+player/pickup/armor = lsnd/Items/Armor.flac
+player/pickup/boots = lsnd/Items/Boots.flac
+player/pickup/ring = lsnd/Items/Ring.flac
+player/pickup/armor/pink = lsnd/Items/ArmorPink.flac
+player/pickup/armor/midori = lsnd/Items/ArmorMidori.flac
+player/pickup/scorechip = lsnd/Items/ScoreChip.flac
+player/pickup/coin1 = lsnd/Items/Coin1.flac
+player/pickup/coin2 = lsnd/Items/Coin2.flac
+player/pickup/coin3 = lsnd/Items/Coin3.flac
+player/pickup/gem = lsnd/Items/Gem.flac
+player/pickup/material1 = lsnd/Items/Material1.ogg
+player/pickup/material2 = lsnd/Items/Material2.ogg
+player/pickup/material3 = lsnd/Items/Material3.ogg
+player/pickup/material4 = lsnd/Items/Material4.ogg
 $random player/pickup/coin { player/pickup/coin1 player/pickup/coin2 player/pickup/coin3 }
 $random player/pickup/material { player/pickup/material1 player/pickup/material2 player/pickup/material3 player/pickup/material4 }
 $random player/pickup/redskull { player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull1 player/pickup/redskull2 }
-items/healthbonus1 = lsnd/Items/bdup/DSHBON1
-items/healthbonus2 = lsnd/Items/bdup/DSHBON2
-items/healthbonus3 = lsnd/Items/bdup/DSHBON3
-items/healthbonus4 = lsnd/Items/bdup/DSHBON4
-items/healthbonus5 = lsnd/Items/bdup/DSHBON5
-items/healthbonus6 = lsnd/Items/bdup/DSHBON6
-items/healthbonus7 = lsnd/Items/bdup/DSHBON7
-items/healthbonus8 = lsnd/Items/bdup/DSHBON8
-items/healthbonus9 = lsnd/Items/bdup/DSHBON9
-items/healthbonus10 = lsnd/Items/bdup/DSHBON10
-items/healthbonus11 = lsnd/Items/bdup/DSHBON11
-items/healthbonus12 = lsnd/Items/bdup/DSHBON12
-items/healthbonus13 = lsnd/Items/bdup/DSHBON13
-items/healthbonus14 = lsnd/Items/bdup/DSHBON14
+items/healthbonus1 = lsnd/Items/bdup/DSHBON1.wav
+items/healthbonus2 = lsnd/Items/bdup/DSHBON2.wav
+items/healthbonus3 = lsnd/Items/bdup/DSHBON3.wav
+items/healthbonus4 = lsnd/Items/bdup/DSHBON4.wav
+items/healthbonus5 = lsnd/Items/bdup/DSHBON5.wav
+items/healthbonus6 = lsnd/Items/bdup/DSHBON6.wav
+items/healthbonus7 = lsnd/Items/bdup/DSHBON7.wav
+items/healthbonus8 = lsnd/Items/bdup/DSHBON8.wav
+items/healthbonus9 = lsnd/Items/bdup/DSHBON9.ogg
+items/healthbonus10 = lsnd/Items/bdup/DSHBON10.ogg
+items/healthbonus11 = lsnd/Items/bdup/DSHBON11.ogg
+items/healthbonus12 = lsnd/Items/bdup/DSHBON12.ogg
+items/healthbonus13 = lsnd/Items/bdup/DSHBON13.ogg
+items/healthbonus14 = lsnd/Items/bdup/DSHBON14.ogg
 $random items/healthbonusrandom { items/healthbonus1 items/healthbonus2 items/healthbonus3 items/healthbonus4 items/healthbonus5 items/healthbonus6 items/healthbonus7 items/healthbonus8 items/healthbonus9 items/healthbonus10 items/healthbonus11 items/healthbonus12 items/healthbonus13 items/healthbonus14 }
-items/vial = lsnd/Items/HealthBonus
+items/vial = lsnd/Items/HealthBonus.wav
 $random items/healthbonus { items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/vial items/healthbonusrandom }
-$playersound player neutral *jump lsnd/Player/Jump
-$playersound player other *jump lsnd/Player/Jump
-$playersound player female *jump lsnd/Player/Jump
-$playersound player male *jump lsnd/Player/Jump
-$playersound fighter neutral *jump lsnd/Player/Jump
-$playersound fighter other *jump lsnd/Player/Jump
-$playersound fighter female *jump lsnd/Player/Jump
-$playersound fighter male *jump lsnd/Player/Jump
-$playersound player neutral *usefail lsnd/Player/UseFail
-$playersound player other *usefail lsnd/Player/UseFail
-$playersound player female *usefail lsnd/Player/UseFail
-$playersound player male *usefail lsnd/Player/UseFail
-$playersound fighter neutral *usefail lsnd/Player/UseFail
-$playersound fighter other *usefail lsnd/Player/UseFail
-$playersound fighter female *usefail lsnd/Player/UseFail
-$playersound fighter male *usefail lsnd/Player/UseFail
-$playersound player neutral *puzzfail lsnd/Player/PuzzFail
-$playersound player other *puzzfail lsnd/Player/PuzzFail
-$playersound player female *puzzfail lsnd/Player/PuzzFail
-$playersound player male *puzzfail lsnd/Player/PuzzFail
-$playersound fighter neutral *puzzfail lsnd/Player/PuzzFail
-$playersound fighter other *puzzfail lsnd/Player/PuzzFail
-$playersound fighter female *puzzfail lsnd/Player/PuzzFail
-$playersound fighter male *puzzfail lsnd/Player/PuzzFail
-$playersound player neutral *keytry lsnd/Player/KeyTry
-$playersound player other *keytry lsnd/Player/KeyTry
-$playersound player female *keytry lsnd/Player/KeyTry
-$playersound player male *keytry lsnd/Player/KeyTry
-$playersound fighter neutral *keytry lsnd/Player/KeyTry
-$playersound fighter other *keytry lsnd/Player/KeyTry
-$playersound fighter female *keytry lsnd/Player/KeyTry
-$playersound fighter male *keytry lsnd/Player/KeyTry
-$playersound player neutral *land lsnd/Player/Land
-$playersound player other *land lsnd/Player/Land
-$playersound player female *land lsnd/Player/Land
-$playersound player male *land lsnd/Player/Land
-$playersound fighter neutral *land lsnd/Player/Land
-$playersound fighter other *land lsnd/Player/Land
-$playersound fighter female *land lsnd/Player/Land
-$playersound fighter male *land lsnd/Player/Land
-$playersound player neutral *xdeath lsnd/Player/Gibbed
-$playersound player other *xdeath lsnd/Player/Gibbed
-$playersound player female *xdeath lsnd/Player/Gibbed
-$playersound player male *xdeath lsnd/Player/Gibbed
-$playersound fighter neutral *xdeath lsnd/Player/Gibbed
-$playersound fighter other *xdeath lsnd/Player/Gibbed
-$playersound fighter female *xdeath lsnd/Player/Gibbed
-$playersound fighter male *xdeath lsnd/Player/Gibbed
-$playersound player neutral *splat lsnd/Player/Splat
-$playersound player other *splat lsnd/Player/Splat
-$playersound player female *splat lsnd/Player/Splat
-$playersound player male *splat lsnd/Player/Splat
-$playersound fighter neutral *splat lsnd/Player/Splat
-$playersound fighter other *splat lsnd/Player/Splat
-$playersound fighter female *splat lsnd/Player/Splat
-$playersound fighter male *splat lsnd/Player/Splat
-$playersound player neutral *dive lsnd/Player/SplashIn
-$playersound player other *dive lsnd/Player/SplashIn
-$playersound player female *dive lsnd/Player/SplashIn
-$playersound player male *dive lsnd/Player/SplashIn
-$playersound fighter neutral *dive lsnd/Player/SplashIn
-$playersound fighter other *dive lsnd/Player/SplashIn
-$playersound fighter female *dive lsnd/Player/SplashIn
-$playersound fighter male *dive lsnd/Player/SplashIn
-$playersound player neutral *surface lsnd/Player/Splash
-$playersound player other *surface lsnd/Player/Splash
-$playersound player female *surface lsnd/Player/Splash
-$playersound player male *surface lsnd/Player/Splash
-$playersound fighter neutral *surface lsnd/Player/Splash
-$playersound fighter other *surface lsnd/Player/Splash
-$playersound fighter female *surface lsnd/Player/Splash
-$playersound fighter male *surface lsnd/Player/Splash
+$playersound player neutral *jump lsnd/Player/Jump.flac
+$playersound player other *jump lsnd/Player/Jump.flac
+$playersound player female *jump lsnd/Player/Jump.flac
+$playersound player male *jump lsnd/Player/Jump.flac
+$playersound fighter neutral *jump lsnd/Player/Jump.flac
+$playersound fighter other *jump lsnd/Player/Jump.flac
+$playersound fighter female *jump lsnd/Player/Jump.flac
+$playersound fighter male *jump lsnd/Player/Jump.flac
+$playersound player neutral *usefail lsnd/Player/UseFail.flac
+$playersound player other *usefail lsnd/Player/UseFail.flac
+$playersound player female *usefail lsnd/Player/UseFail.flac
+$playersound player male *usefail lsnd/Player/UseFail.flac
+$playersound fighter neutral *usefail lsnd/Player/UseFail.flac
+$playersound fighter other *usefail lsnd/Player/UseFail.flac
+$playersound fighter female *usefail lsnd/Player/UseFail.flac
+$playersound fighter male *usefail lsnd/Player/UseFail.flac
+$playersound player neutral *puzzfail lsnd/Player/PuzzFail.flac
+$playersound player other *puzzfail lsnd/Player/PuzzFail.flac
+$playersound player female *puzzfail lsnd/Player/PuzzFail.flac
+$playersound player male *puzzfail lsnd/Player/PuzzFail.flac
+$playersound fighter neutral *puzzfail lsnd/Player/PuzzFail.flac
+$playersound fighter other *puzzfail lsnd/Player/PuzzFail.flac
+$playersound fighter female *puzzfail lsnd/Player/PuzzFail.flac
+$playersound fighter male *puzzfail lsnd/Player/PuzzFail.flac
+$playersound player neutral *keytry lsnd/Player/KeyTry.flac
+$playersound player other *keytry lsnd/Player/KeyTry.flac
+$playersound player female *keytry lsnd/Player/KeyTry.flac
+$playersound player male *keytry lsnd/Player/KeyTry.flac
+$playersound fighter neutral *keytry lsnd/Player/KeyTry.flac
+$playersound fighter other *keytry lsnd/Player/KeyTry.flac
+$playersound fighter female *keytry lsnd/Player/KeyTry.flac
+$playersound fighter male *keytry lsnd/Player/KeyTry.flac
+$playersound player neutral *land lsnd/Player/Land.wav
+$playersound player other *land lsnd/Player/Land.wav
+$playersound player female *land lsnd/Player/Land.wav
+$playersound player male *land lsnd/Player/Land.wav
+$playersound fighter neutral *land lsnd/Player/Land.wav
+$playersound fighter other *land lsnd/Player/Land.wav
+$playersound fighter female *land lsnd/Player/Land.wav
+$playersound fighter male *land lsnd/Player/Land.wav
+$playersound player neutral *xdeath lsnd/Player/Gibbed.ogg
+$playersound player other *xdeath lsnd/Player/Gibbed.ogg
+$playersound player female *xdeath lsnd/Player/Gibbed.ogg
+$playersound player male *xdeath lsnd/Player/Gibbed.ogg
+$playersound fighter neutral *xdeath lsnd/Player/Gibbed.ogg
+$playersound fighter other *xdeath lsnd/Player/Gibbed.ogg
+$playersound fighter female *xdeath lsnd/Player/Gibbed.ogg
+$playersound fighter male *xdeath lsnd/Player/Gibbed.ogg
+$playersound player neutral *splat lsnd/Player/Splat.flac
+$playersound player other *splat lsnd/Player/Splat.flac
+$playersound player female *splat lsnd/Player/Splat.flac
+$playersound player male *splat lsnd/Player/Splat.flac
+$playersound fighter neutral *splat lsnd/Player/Splat.flac
+$playersound fighter other *splat lsnd/Player/Splat.flac
+$playersound fighter female *splat lsnd/Player/Splat.flac
+$playersound fighter male *splat lsnd/Player/Splat.flac
+$playersound player neutral *dive lsnd/Player/SplashIn.flac
+$playersound player other *dive lsnd/Player/SplashIn.flac
+$playersound player female *dive lsnd/Player/SplashIn.flac
+$playersound player male *dive lsnd/Player/SplashIn.flac
+$playersound fighter neutral *dive lsnd/Player/SplashIn.flac
+$playersound fighter other *dive lsnd/Player/SplashIn.flac
+$playersound fighter female *dive lsnd/Player/SplashIn.flac
+$playersound fighter male *dive lsnd/Player/SplashIn.flac
+$playersound player neutral *surface lsnd/Player/Splash.flac
+$playersound player other *surface lsnd/Player/Splash.flac
+$playersound player female *surface lsnd/Player/Splash.flac
+$playersound player male *surface lsnd/Player/Splash.flac
+$playersound fighter neutral *surface lsnd/Player/Splash.flac
+$playersound fighter other *surface lsnd/Player/Splash.flac
+$playersound fighter female *surface lsnd/Player/Splash.flac
+$playersound fighter male *surface lsnd/Player/Splash.flac
 $playersounddup player neutral *drainhealth *pain50
 $playersounddup player other *drainhealth *pain50
 $playersounddup player female *drainhealth *pain50
@@ -387,222 +387,223 @@ $playeralias fighter neutral *step-water player/step/water
 $playeralias fighter other *step-water player/step/water
 $playeralias fighter female *step-water player/step/water
 $playeralias fighter male *step-water player/step/water
-player/depthdown = lsnd/Player/DepthDown
-player/score1 = lsnd/Player/Score1
-player/score2 = lsnd/Player/Score2
-player/score3 = lsnd/Player/Score3
-player/doublejump = lsnd/Player/DoubleJump
-player/slide = lsnd/Player/Slide
-player/getsigil = lsnd/Player/DivisionSigilPickup
-player/nuke = lsnd/Player/Nuke
-player/barrier = lsnd/Player/Barrier
-player/death1 = lsnd/Player/DeathCharge
-player/death2 = lsnd/Player/Death
-player/zoomin = lsnd/Player/ZoomIn
-player/zoomout = lsnd/Player/ZoomOut
-player/hitground = lsnd/Player/HitGround
-player/infraredoff = lsnd/Player/InfraredOff
-player/levelup = lsnd/Player/LevelUp
-player/glare = lsnd/Player/Glare
-player/lighton = lsnd/Player/LightOn
-player/lightoff = lsnd/Player/LightOff
-player/startgame = lsnd/Player/StartGame
-player/showtext = lsnd/Player/ShowText
+player/depthdown = lsnd/Player/DepthDown.flac
+player/score1 = lsnd/Player/Score1.flac
+player/score2 = lsnd/Player/Score2.flac
+player/score3 = lsnd/Player/Score3.flac
+player/doublejump = lsnd/Player/DoubleJump.flac
+player/slide = lsnd/Player/Slide.flac
+player/getsigil = lsnd/Player/DivisionSigilPickup.ogg
+player/nuke = lsnd/Player/Nuke.ogg
+player/barrier = lsnd/Player/Barrier.flac
+player/death1 = lsnd/Player/DeathCharge.ogg
+player/death2 = lsnd/Player/Death.ogg
+player/zoomin = lsnd/Player/ZoomIn.flac
+player/zoomout = lsnd/Player/ZoomOut.flac
+player/hitground = lsnd/Player/HitGround.flac
+player/infraredoff = lsnd/Player/InfraredOff.flac
+player/levelup = lsnd/Player/LevelUp.flac
+player/glare = lsnd/Player/Glare.ogg
+player/lighton = lsnd/Player/LightOn.flac
+player/lightoff = lsnd/Player/LightOff.flac
+player/startgame = lsnd/Player/StartGame.flac
+player/showtext = lsnd/Player/ShowText.flac
 $volume player/death2 0.7
 $volume player/nuke 0.7
 $volume player/doublejump 0.7
 $limit player/barrier 0
 $random player/score { player/score1 player/score2 player/score3 }
-player/step/lava1 = lsnd/Player/Footsteps/Lava1
-player/step/lava2 = lsnd/Player/Footsteps/Lava2
-player/step/lava3 = lsnd/Player/Footsteps/Lava3
-player/step/lava4 = lsnd/Player/Footsteps/Lava4
-player/step/normal1 = lsnd/Player/Footsteps/Step1
-player/step/normal2 = lsnd/Player/Footsteps/Step2
-player/step/normal3 = lsnd/Player/Footsteps/Step3
-player/step/normal4 = lsnd/Player/Footsteps/Step4
-player/step/slime1 = lsnd/Player/Footsteps/Slime1
-player/step/slime2 = lsnd/Player/Footsteps/Slime2
-player/step/slime3 = lsnd/Player/Footsteps/Slime3
-player/step/slime4 = lsnd/Player/Footsteps/Slime4
-player/step/water1 = lsnd/Player/Footsteps/Water1
-player/step/water2 = lsnd/Player/Footsteps/Water2
-player/step/water3 = lsnd/Player/Footsteps/Water3
-player/step/water4 = lsnd/Player/Footsteps/Water4
+player/step/lava1 = lsnd/Player/Footsteps/Lava1.flac
+player/step/lava2 = lsnd/Player/Footsteps/Lava2.flac
+player/step/lava3 = lsnd/Player/Footsteps/Lava3.flac
+player/step/lava4 = lsnd/Player/Footsteps/Lava4.flac
+player/step/normal1 = lsnd/Player/Footsteps/Step1.flac
+player/step/normal2 = lsnd/Player/Footsteps/Step2.flac
+player/step/normal3 = lsnd/Player/Footsteps/Step3.flac
+player/step/normal4 = lsnd/Player/Footsteps/Step4.flac
+player/step/slime1 = lsnd/Player/Footsteps/Slime1.flac
+player/step/slime2 = lsnd/Player/Footsteps/Slime2.flac
+player/step/slime3 = lsnd/Player/Footsteps/Slime3.flac
+player/step/slime4 = lsnd/Player/Footsteps/Slime4.flac
+player/step/water1 = lsnd/Player/Footsteps/Water1.flac
+player/step/water2 = lsnd/Player/Footsteps/Water2.flac
+player/step/water3 = lsnd/Player/Footsteps/Water3.flac
+player/step/water4 = lsnd/Player/Footsteps/Water4.flac
 $random player/step/lava { player/step/lava1 player/step/lava2 player/step/lava3 player/step/lava4 }
 $random player/step/normal { player/step/normal1 player/step/normal2 player/step/normal3 player/step/normal4 }
 $random player/step/slime { player/step/slime1 player/step/slime2 player/step/slime3 player/step/slime4 }
 $random player/step/water { player/step/water1 player/step/water2 player/step/water3 player/step/water4 }
-player/counter = lsnd/GUI/Payout/Counter
-player/counterdone = lsnd/GUI/Payout/CounterDone
-player/YOUVEGOTMAIL = lsnd/GUI/Mail
-player/trmopen = lsnd/GUI/Terminal/Open
-player/trmswitch = lsnd/GUI/Terminal/Switch
-player/wings = lsnd/Weapons/Wings
-$playersound lith_assassin neutral *death lsnd/PlayerA/Death
-$playersound lith_assassin other *death lsnd/PlayerA/Death
-$playersound lith_assassin female *death lsnd/PlayerA/Death
-$playersound lith_assassin male *death lsnd/PlayerA/Death
-$playersound lith_assassin neutral *wimpydeath lsnd/PlayerA/DeathSmall
-$playersound lith_assassin other *wimpydeath lsnd/PlayerA/DeathSmall
-$playersound lith_assassin female *wimpydeath lsnd/PlayerA/DeathSmall
-$playersound lith_assassin male *wimpydeath lsnd/PlayerA/DeathSmall
-$playersound lith_assassin neutral *crazydeath lsnd/PlayerA/DeathBig
-$playersound lith_assassin other *crazydeath lsnd/PlayerA/DeathBig
-$playersound lith_assassin female *crazydeath lsnd/PlayerA/DeathBig
-$playersound lith_assassin male *crazydeath lsnd/PlayerA/DeathBig
-$playersound lith_assassin neutral *pain100 lsnd/PlayerA/PainSmall
-$playersound lith_assassin other *pain100 lsnd/PlayerA/PainSmall
-$playersound lith_assassin female *pain100 lsnd/PlayerA/PainSmall
-$playersound lith_assassin male *pain100 lsnd/PlayerA/PainSmall
+player/counter = lsnd/GUI/Payout/Counter.flac
+player/counterdone = lsnd/GUI/Payout/CounterDone.flac
+player/YOUVEGOTMAIL = lsnd/GUI/Mail.ogg
+player/trmopen = lsnd/GUI/Terminal/Open.flac
+player/trmswitch = lsnd/GUI/Terminal/Switch.flac
+player/wings = lsnd/Weapons/Wings.wav
+$playersound lith_assassin neutral *death lsnd/PlayerA/Death.flac
+$playersound lith_assassin other *death lsnd/PlayerA/Death.flac
+$playersound lith_assassin female *death lsnd/PlayerA/Death.flac
+$playersound lith_assassin male *death lsnd/PlayerA/Death.flac
+$playersound lith_assassin neutral *wimpydeath lsnd/PlayerA/DeathSmall.flac
+$playersound lith_assassin other *wimpydeath lsnd/PlayerA/DeathSmall.flac
+$playersound lith_assassin female *wimpydeath lsnd/PlayerA/DeathSmall.flac
+$playersound lith_assassin male *wimpydeath lsnd/PlayerA/DeathSmall.flac
+$playersound lith_assassin neutral *crazydeath lsnd/PlayerA/DeathBig.flac
+$playersound lith_assassin other *crazydeath lsnd/PlayerA/DeathBig.flac
+$playersound lith_assassin female *crazydeath lsnd/PlayerA/DeathBig.flac
+$playersound lith_assassin male *crazydeath lsnd/PlayerA/DeathBig.flac
+$playersound lith_assassin neutral *pain100 lsnd/PlayerA/PainSmall.flac
+$playersound lith_assassin other *pain100 lsnd/PlayerA/PainSmall.flac
+$playersound lith_assassin female *pain100 lsnd/PlayerA/PainSmall.flac
+$playersound lith_assassin male *pain100 lsnd/PlayerA/PainSmall.flac
 $playersounddup lith_assassin neutral *pain75 *pain100
 $playersounddup lith_assassin other *pain75 *pain100
 $playersounddup lith_assassin female *pain75 *pain100
 $playersounddup lith_assassin male *pain75 *pain100
-$playersound lith_assassin neutral *pain50 lsnd/PlayerA/Pain
-$playersound lith_assassin other *pain50 lsnd/PlayerA/Pain
-$playersound lith_assassin female *pain50 lsnd/PlayerA/Pain
-$playersound lith_assassin male *pain50 lsnd/PlayerA/Pain
+$playersound lith_assassin neutral *pain50 lsnd/PlayerA/Pain.flac
+$playersound lith_assassin other *pain50 lsnd/PlayerA/Pain.flac
+$playersound lith_assassin female *pain50 lsnd/PlayerA/Pain.flac
+$playersound lith_assassin male *pain50 lsnd/PlayerA/Pain.flac
 $playersounddup lith_assassin neutral *pain25 *pain50
 $playersounddup lith_assassin other *pain25 *pain50
 $playersounddup lith_assassin female *pain25 *pain50
 $playersounddup lith_assassin male *pain25 *pain50
-$playersound lith_assassin neutral *grunt lsnd/PlayerA/Grunt
-$playersound lith_assassin other *grunt lsnd/PlayerA/Grunt
-$playersound lith_assassin female *grunt lsnd/PlayerA/Grunt
-$playersound lith_assassin male *grunt lsnd/PlayerA/Grunt
-player/omi/doll = lsnd/PlayerA/Doll
-player/omi/roll = lsnd/PlayerA/Roll
-player/omi/djump = lsnd/PlayerA/DoubleJump
-$playersound lith_cybermage neutral *death lsnd/PlayerC/Death
-$playersound lith_cybermage other *death lsnd/PlayerC/Death
-$playersound lith_cybermage female *death lsnd/PlayerC/Death
-$playersound lith_cybermage male *death lsnd/PlayerC/Death
-$playersound lith_cybermage neutral *wimpydeath lsnd/PlayerC/DeathSmall
-$playersound lith_cybermage other *wimpydeath lsnd/PlayerC/DeathSmall
-$playersound lith_cybermage female *wimpydeath lsnd/PlayerC/DeathSmall
-$playersound lith_cybermage male *wimpydeath lsnd/PlayerC/DeathSmall
-$playersound lith_cybermage neutral *crazydeath lsnd/PlayerC/DeathBig
-$playersound lith_cybermage other *crazydeath lsnd/PlayerC/DeathBig
-$playersound lith_cybermage female *crazydeath lsnd/PlayerC/DeathBig
-$playersound lith_cybermage male *crazydeath lsnd/PlayerC/DeathBig
-$playersound lith_cybermage neutral *pain100 lsnd/PlayerC/PainSmall
-$playersound lith_cybermage other *pain100 lsnd/PlayerC/PainSmall
-$playersound lith_cybermage female *pain100 lsnd/PlayerC/PainSmall
-$playersound lith_cybermage male *pain100 lsnd/PlayerC/PainSmall
+$playersound lith_assassin neutral *grunt lsnd/PlayerA/Grunt.flac
+$playersound lith_assassin other *grunt lsnd/PlayerA/Grunt.flac
+$playersound lith_assassin female *grunt lsnd/PlayerA/Grunt.flac
+$playersound lith_assassin male *grunt lsnd/PlayerA/Grunt.flac
+player/omi/doll = lsnd/PlayerA/Doll.flac
+player/omi/roll = lsnd/PlayerA/Roll.flac
+player/omi/djump = lsnd/PlayerA/DoubleJump.flac
+$playersound lith_cybermage neutral *death lsnd/PlayerC/Death.flac
+$playersound lith_cybermage other *death lsnd/PlayerC/Death.flac
+$playersound lith_cybermage female *death lsnd/PlayerC/Death.flac
+$playersound lith_cybermage male *death lsnd/PlayerC/Death.flac
+$playersound lith_cybermage neutral *wimpydeath lsnd/PlayerC/DeathSmall.flac
+$playersound lith_cybermage other *wimpydeath lsnd/PlayerC/DeathSmall.flac
+$playersound lith_cybermage female *wimpydeath lsnd/PlayerC/DeathSmall.flac
+$playersound lith_cybermage male *wimpydeath lsnd/PlayerC/DeathSmall.flac
+$playersound lith_cybermage neutral *crazydeath lsnd/PlayerC/DeathBig.flac
+$playersound lith_cybermage other *crazydeath lsnd/PlayerC/DeathBig.flac
+$playersound lith_cybermage female *crazydeath lsnd/PlayerC/DeathBig.flac
+$playersound lith_cybermage male *crazydeath lsnd/PlayerC/DeathBig.flac
+$playersound lith_cybermage neutral *pain100 lsnd/PlayerC/PainSmall.flac
+$playersound lith_cybermage other *pain100 lsnd/PlayerC/PainSmall.flac
+$playersound lith_cybermage female *pain100 lsnd/PlayerC/PainSmall.flac
+$playersound lith_cybermage male *pain100 lsnd/PlayerC/PainSmall.flac
 $playersounddup lith_cybermage neutral *pain75 *pain100
 $playersounddup lith_cybermage other *pain75 *pain100
 $playersounddup lith_cybermage female *pain75 *pain100
 $playersounddup lith_cybermage male *pain75 *pain100
-$playersound lith_cybermage neutral *pain50 lsnd/PlayerC/Pain
-$playersound lith_cybermage other *pain50 lsnd/PlayerC/Pain
-$playersound lith_cybermage female *pain50 lsnd/PlayerC/Pain
-$playersound lith_cybermage male *pain50 lsnd/PlayerC/Pain
+$playersound lith_cybermage neutral *pain50 lsnd/PlayerC/Pain.flac
+$playersound lith_cybermage other *pain50 lsnd/PlayerC/Pain.flac
+$playersound lith_cybermage female *pain50 lsnd/PlayerC/Pain.flac
+$playersound lith_cybermage male *pain50 lsnd/PlayerC/Pain.flac
 $playersounddup lith_cybermage neutral *pain25 *pain50
 $playersounddup lith_cybermage other *pain25 *pain50
 $playersounddup lith_cybermage female *pain25 *pain50
 $playersounddup lith_cybermage male *pain25 *pain50
-$playersound lith_cybermage neutral *grunt lsnd/PlayerC/Grunt
-$playersound lith_cybermage other *grunt lsnd/PlayerC/Grunt
-$playersound lith_cybermage female *grunt lsnd/PlayerC/Grunt
-$playersound lith_cybermage male *grunt lsnd/PlayerC/Grunt
-player/jem/doll = lsnd/PlayerC/Doll
-player/jem/manafull = lsnd/PlayerC/FullCharge
-$playersound lith_darklord neutral *death lsnd/PlayerD/Death
-$playersound lith_darklord other *death lsnd/PlayerD/Death
-$playersound lith_darklord female *death lsnd/PlayerD/Death
-$playersound lith_darklord male *death lsnd/PlayerD/Death
-$playersound lith_darklord neutral *wimpydeath lsnd/PlayerD/DeathSmall
-$playersound lith_darklord other *wimpydeath lsnd/PlayerD/DeathSmall
-$playersound lith_darklord female *wimpydeath lsnd/PlayerD/DeathSmall
-$playersound lith_darklord male *wimpydeath lsnd/PlayerD/DeathSmall
-$playersound lith_darklord neutral *crazydeath lsnd/PlayerD/DeathBig
-$playersound lith_darklord other *crazydeath lsnd/PlayerD/DeathBig
-$playersound lith_darklord female *crazydeath lsnd/PlayerD/DeathBig
-$playersound lith_darklord male *crazydeath lsnd/PlayerD/DeathBig
-$playersound lith_darklord neutral *pain100 lsnd/PlayerD/PainSmall
-$playersound lith_darklord other *pain100 lsnd/PlayerD/PainSmall
-$playersound lith_darklord female *pain100 lsnd/PlayerD/PainSmall
-$playersound lith_darklord male *pain100 lsnd/PlayerD/PainSmall
+$playersound lith_cybermage neutral *grunt lsnd/PlayerC/Grunt.flac
+$playersound lith_cybermage other *grunt lsnd/PlayerC/Grunt.flac
+$playersound lith_cybermage female *grunt lsnd/PlayerC/Grunt.flac
+$playersound lith_cybermage male *grunt lsnd/PlayerC/Grunt.flac
+player/jem/doll = lsnd/PlayerC/Doll.flac
+player/jem/manafull = lsnd/PlayerC/FullCharge.flac
+$playersound lith_darklord neutral *death lsnd/PlayerD/Death.flac
+$playersound lith_darklord other *death lsnd/PlayerD/Death.flac
+$playersound lith_darklord female *death lsnd/PlayerD/Death.flac
+$playersound lith_darklord male *death lsnd/PlayerD/Death.flac
+$playersound lith_darklord neutral *wimpydeath lsnd/PlayerD/DeathSmall.flac
+$playersound lith_darklord other *wimpydeath lsnd/PlayerD/DeathSmall.flac
+$playersound lith_darklord female *wimpydeath lsnd/PlayerD/DeathSmall.flac
+$playersound lith_darklord male *wimpydeath lsnd/PlayerD/DeathSmall.flac
+$playersound lith_darklord neutral *crazydeath lsnd/PlayerD/DeathBig.flac
+$playersound lith_darklord other *crazydeath lsnd/PlayerD/DeathBig.flac
+$playersound lith_darklord female *crazydeath lsnd/PlayerD/DeathBig.flac
+$playersound lith_darklord male *crazydeath lsnd/PlayerD/DeathBig.flac
+$playersound lith_darklord neutral *pain100 lsnd/PlayerD/PainSmall.flac
+$playersound lith_darklord other *pain100 lsnd/PlayerD/PainSmall.flac
+$playersound lith_darklord female *pain100 lsnd/PlayerD/PainSmall.flac
+$playersound lith_darklord male *pain100 lsnd/PlayerD/PainSmall.flac
 $playersounddup lith_darklord neutral *pain75 *pain100
 $playersounddup lith_darklord other *pain75 *pain100
 $playersounddup lith_darklord female *pain75 *pain100
 $playersounddup lith_darklord male *pain75 *pain100
-$playersound lith_darklord neutral *pain50 lsnd/PlayerD/Pain
-$playersound lith_darklord other *pain50 lsnd/PlayerD/Pain
-$playersound lith_darklord female *pain50 lsnd/PlayerD/Pain
-$playersound lith_darklord male *pain50 lsnd/PlayerD/Pain
+$playersound lith_darklord neutral *pain50 lsnd/PlayerD/Pain.flac
+$playersound lith_darklord other *pain50 lsnd/PlayerD/Pain.flac
+$playersound lith_darklord female *pain50 lsnd/PlayerD/Pain.flac
+$playersound lith_darklord male *pain50 lsnd/PlayerD/Pain.flac
 $playersounddup lith_darklord neutral *pain25 *pain50
 $playersounddup lith_darklord other *pain25 *pain50
 $playersounddup lith_darklord female *pain25 *pain50
 $playersounddup lith_darklord male *pain25 *pain50
-$playersound lith_darklord neutral *grunt lsnd/PlayerD/Grunt
-$playersound lith_darklord other *grunt lsnd/PlayerD/Grunt
-$playersound lith_darklord female *grunt lsnd/PlayerD/Grunt
-$playersound lith_darklord male *grunt lsnd/PlayerD/Grunt
-$playersound lith_darklord neutral *land lsnd/PlayerD/Land
-$playersound lith_darklord other *land lsnd/PlayerD/Land
-$playersound lith_darklord female *land lsnd/PlayerD/Land
-$playersound lith_darklord male *land lsnd/PlayerD/Land
-$playersound lith_darklord neutral *step-normal lsnd/PlayerD/Step
-$playersound lith_darklord other *step-normal lsnd/PlayerD/Step
-$playersound lith_darklord female *step-normal lsnd/PlayerD/Step
-$playersound lith_darklord male *step-normal lsnd/PlayerD/Step
+$playersound lith_darklord neutral *grunt lsnd/PlayerD/Grunt.flac
+$playersound lith_darklord other *grunt lsnd/PlayerD/Grunt.flac
+$playersound lith_darklord female *grunt lsnd/PlayerD/Grunt.flac
+$playersound lith_darklord male *grunt lsnd/PlayerD/Grunt.flac
+$playersound lith_darklord neutral *land lsnd/PlayerD/Land.ogg
+$playersound lith_darklord other *land lsnd/PlayerD/Land.ogg
+$playersound lith_darklord female *land lsnd/PlayerD/Land.ogg
+$playersound lith_darklord male *land lsnd/PlayerD/Land.ogg
+$playersound lith_darklord neutral *step-normal lsnd/PlayerD/Step.flac
+$playersound lith_darklord other *step-normal lsnd/PlayerD/Step.flac
+$playersound lith_darklord female *step-normal lsnd/PlayerD/Step.flac
+$playersound lith_darklord male *step-normal lsnd/PlayerD/Step.flac
 $playeralias lith_darklord neutral *step-sprint player/ari/step-sprint
 $playeralias lith_darklord other *step-sprint player/ari/step-sprint
 $playeralias lith_darklord female *step-sprint player/ari/step-sprint
 $playeralias lith_darklord male *step-sprint player/ari/step-sprint
-player/ari/item-spawn = lsnd/PlayerD/ItemSpawn
-player/ari/step-sprint1 = lsnd/PlayerD/StepSprint1
-player/ari/step-sprint2 = lsnd/PlayerD/StepSprint2
-player/ari/step-sprint3 = lsnd/PlayerD/StepSprint3
-player/ari/doll = lsnd/PlayerD/Doll
-player/ari/sprint = lsnd/PlayerD/Sprint
-player/ari/shield/break = lsnd/PlayerD/ShieldBreak
-player/ari/shield/regenw = lsnd/PlayerD/ShieldRegenWait
-player/ari/shield/regenl = lsnd/PlayerD/ShieldRegen
-player/ari/shield/regend = lsnd/PlayerD/ShieldRegenDone
+player/ari/item-spawn = lsnd/PlayerD/ItemSpawn.flac
+player/ari/step-sprint1 = lsnd/PlayerD/StepSprint1.flac
+player/ari/step-sprint2 = lsnd/PlayerD/StepSprint2.flac
+player/ari/step-sprint3 = lsnd/PlayerD/StepSprint3.flac
+player/ari/doll = lsnd/PlayerD/Doll.flac
+player/ari/sprint = lsnd/PlayerD/Sprint.flac
+player/ari/float = lsnd/PlayerD/Float.flac
+player/ari/shield/break = lsnd/PlayerD/ShieldBreak.flac
+player/ari/shield/regenw = lsnd/PlayerD/ShieldRegenWait.flac
+player/ari/shield/regenl = lsnd/PlayerD/ShieldRegen.flac
+player/ari/shield/regend = lsnd/PlayerD/ShieldRegenDone.flac
 $random player/ari/step-sprint { player/ari/step-sprint1 player/ari/step-sprint2 player/ari/step-sprint3 }
-$playersound lith_informant neutral *splat lsnd/PlayerI/Splat
-$playersound lith_informant other *splat lsnd/PlayerI/Splat
-$playersound lith_informant female *splat lsnd/PlayerI/Splat
-$playersound lith_informant male *splat lsnd/PlayerI/Splat
-$playersound lith_informant neutral *xdeath lsnd/PlayerI/Gibbed
-$playersound lith_informant other *xdeath lsnd/PlayerI/Gibbed
-$playersound lith_informant female *xdeath lsnd/PlayerI/Gibbed
-$playersound lith_informant male *xdeath lsnd/PlayerI/Gibbed
-$playersound lith_informant neutral *death lsnd/PlayerI/Death
-$playersound lith_informant other *death lsnd/PlayerI/Death
-$playersound lith_informant female *death lsnd/PlayerI/Death
-$playersound lith_informant male *death lsnd/PlayerI/Death
-$playersound lith_informant neutral *wimpydeath lsnd/PlayerI/DeathSmall
-$playersound lith_informant other *wimpydeath lsnd/PlayerI/DeathSmall
-$playersound lith_informant female *wimpydeath lsnd/PlayerI/DeathSmall
-$playersound lith_informant male *wimpydeath lsnd/PlayerI/DeathSmall
-$playersound lith_informant neutral *crazydeath lsnd/PlayerI/DeathBig
-$playersound lith_informant other *crazydeath lsnd/PlayerI/DeathBig
-$playersound lith_informant female *crazydeath lsnd/PlayerI/DeathBig
-$playersound lith_informant male *crazydeath lsnd/PlayerI/DeathBig
-$playersound lith_informant neutral *pain100 lsnd/PlayerI/PainSmall
-$playersound lith_informant other *pain100 lsnd/PlayerI/PainSmall
-$playersound lith_informant female *pain100 lsnd/PlayerI/PainSmall
-$playersound lith_informant male *pain100 lsnd/PlayerI/PainSmall
+$playersound lith_informant neutral *splat lsnd/PlayerI/Splat.flac
+$playersound lith_informant other *splat lsnd/PlayerI/Splat.flac
+$playersound lith_informant female *splat lsnd/PlayerI/Splat.flac
+$playersound lith_informant male *splat lsnd/PlayerI/Splat.flac
+$playersound lith_informant neutral *xdeath lsnd/PlayerI/Gibbed.ogg
+$playersound lith_informant other *xdeath lsnd/PlayerI/Gibbed.ogg
+$playersound lith_informant female *xdeath lsnd/PlayerI/Gibbed.ogg
+$playersound lith_informant male *xdeath lsnd/PlayerI/Gibbed.ogg
+$playersound lith_informant neutral *death lsnd/PlayerI/Death.flac
+$playersound lith_informant other *death lsnd/PlayerI/Death.flac
+$playersound lith_informant female *death lsnd/PlayerI/Death.flac
+$playersound lith_informant male *death lsnd/PlayerI/Death.flac
+$playersound lith_informant neutral *wimpydeath lsnd/PlayerI/DeathSmall.flac
+$playersound lith_informant other *wimpydeath lsnd/PlayerI/DeathSmall.flac
+$playersound lith_informant female *wimpydeath lsnd/PlayerI/DeathSmall.flac
+$playersound lith_informant male *wimpydeath lsnd/PlayerI/DeathSmall.flac
+$playersound lith_informant neutral *crazydeath lsnd/PlayerI/DeathBig.flac
+$playersound lith_informant other *crazydeath lsnd/PlayerI/DeathBig.flac
+$playersound lith_informant female *crazydeath lsnd/PlayerI/DeathBig.flac
+$playersound lith_informant male *crazydeath lsnd/PlayerI/DeathBig.flac
+$playersound lith_informant neutral *pain100 lsnd/PlayerI/PainSmall.flac
+$playersound lith_informant other *pain100 lsnd/PlayerI/PainSmall.flac
+$playersound lith_informant female *pain100 lsnd/PlayerI/PainSmall.flac
+$playersound lith_informant male *pain100 lsnd/PlayerI/PainSmall.flac
 $playersounddup lith_informant neutral *pain75 *pain100
 $playersounddup lith_informant other *pain75 *pain100
 $playersounddup lith_informant female *pain75 *pain100
 $playersounddup lith_informant male *pain75 *pain100
-$playersound lith_informant neutral *pain50 lsnd/PlayerI/Pain
-$playersound lith_informant other *pain50 lsnd/PlayerI/Pain
-$playersound lith_informant female *pain50 lsnd/PlayerI/Pain
-$playersound lith_informant male *pain50 lsnd/PlayerI/Pain
+$playersound lith_informant neutral *pain50 lsnd/PlayerI/Pain.flac
+$playersound lith_informant other *pain50 lsnd/PlayerI/Pain.flac
+$playersound lith_informant female *pain50 lsnd/PlayerI/Pain.flac
+$playersound lith_informant male *pain50 lsnd/PlayerI/Pain.flac
 $playersounddup lith_informant neutral *pain25 *pain50
 $playersounddup lith_informant other *pain25 *pain50
 $playersounddup lith_informant female *pain25 *pain50
 $playersounddup lith_informant male *pain25 *pain50
-$playersound lith_informant neutral *jump lsnd/PlayerI/Jump
-$playersound lith_informant other *jump lsnd/PlayerI/Jump
-$playersound lith_informant female *jump lsnd/PlayerI/Jump
-$playersound lith_informant male *jump lsnd/PlayerI/Jump
+$playersound lith_informant neutral *jump lsnd/PlayerI/Jump.flac
+$playersound lith_informant other *jump lsnd/PlayerI/Jump.flac
+$playersound lith_informant female *jump lsnd/PlayerI/Jump.flac
+$playersound lith_informant male *jump lsnd/PlayerI/Jump.flac
 $playeralias lith_informant neutral *grunt dsempty
 $playeralias lith_informant other *grunt dsempty
 $playeralias lith_informant female *grunt dsempty
@@ -615,614 +616,615 @@ $playeralias lith_informant neutral *step-normal player/fulk/step
 $playeralias lith_informant other *step-normal player/fulk/step
 $playeralias lith_informant female *step-normal player/fulk/step
 $playeralias lith_informant male *step-normal player/fulk/step
-player/fulk/doll = lsnd/PlayerI/Doll
-player/fulk/land1 = lsnd/PlayerI/Land1
-player/fulk/land2 = lsnd/PlayerI/Land2
-player/fulk/land3 = lsnd/PlayerI/Land3
-player/fulk/step1 = lsnd/PlayerI/Footsteps/Step1
-player/fulk/step2 = lsnd/PlayerI/Footsteps/Step2
-player/fulk/step3 = lsnd/PlayerI/Footsteps/Step3
-player/fulk/step4 = lsnd/PlayerI/Footsteps/Step4
-player/fulk/dodge = lsnd/PlayerI/Dodge
+player/fulk/doll = lsnd/PlayerI/Doll.flac
+player/fulk/land1 = lsnd/PlayerI/Land1.flac
+player/fulk/land2 = lsnd/PlayerI/Land2.flac
+player/fulk/land3 = lsnd/PlayerI/Land3.flac
+player/fulk/step1 = lsnd/PlayerI/Footsteps/Step1.flac
+player/fulk/step2 = lsnd/PlayerI/Footsteps/Step2.flac
+player/fulk/step3 = lsnd/PlayerI/Footsteps/Step3.flac
+player/fulk/step4 = lsnd/PlayerI/Footsteps/Step4.flac
+player/fulk/dodge = lsnd/PlayerI/Dodge.flac
 $random player/fulk/land { player/fulk/land1 player/fulk/land2 player/fulk/land3 }
 $random player/fulk/step { player/fulk/step1 player/fulk/step2 player/fulk/step3 player/fulk/step4 }
-$playersound lith_marine neutral *death lsnd/PlayerM/Death
-$playersound lith_marine other *death lsnd/PlayerM/Death
-$playersound lith_marine female *death lsnd/PlayerM/Death
-$playersound lith_marine male *death lsnd/PlayerM/Death
-$playersound lith_marine neutral *wimpydeath lsnd/PlayerM/DeathSmall
-$playersound lith_marine other *wimpydeath lsnd/PlayerM/DeathSmall
-$playersound lith_marine female *wimpydeath lsnd/PlayerM/DeathSmall
-$playersound lith_marine male *wimpydeath lsnd/PlayerM/DeathSmall
-$playersound lith_marine neutral *crazydeath lsnd/PlayerM/DeathBig
-$playersound lith_marine other *crazydeath lsnd/PlayerM/DeathBig
-$playersound lith_marine female *crazydeath lsnd/PlayerM/DeathBig
-$playersound lith_marine male *crazydeath lsnd/PlayerM/DeathBig
-$playersound lith_marine neutral *pain100 lsnd/PlayerM/PainSmall
-$playersound lith_marine other *pain100 lsnd/PlayerM/PainSmall
-$playersound lith_marine female *pain100 lsnd/PlayerM/PainSmall
-$playersound lith_marine male *pain100 lsnd/PlayerM/PainSmall
+$playersound lith_marine neutral *death lsnd/PlayerM/Death.lmp
+$playersound lith_marine other *death lsnd/PlayerM/Death.lmp
+$playersound lith_marine female *death lsnd/PlayerM/Death.lmp
+$playersound lith_marine male *death lsnd/PlayerM/Death.lmp
+$playersound lith_marine neutral *wimpydeath lsnd/PlayerM/DeathSmall.flac
+$playersound lith_marine other *wimpydeath lsnd/PlayerM/DeathSmall.flac
+$playersound lith_marine female *wimpydeath lsnd/PlayerM/DeathSmall.flac
+$playersound lith_marine male *wimpydeath lsnd/PlayerM/DeathSmall.flac
+$playersound lith_marine neutral *crazydeath lsnd/PlayerM/DeathBig.lmp
+$playersound lith_marine other *crazydeath lsnd/PlayerM/DeathBig.lmp
+$playersound lith_marine female *crazydeath lsnd/PlayerM/DeathBig.lmp
+$playersound lith_marine male *crazydeath lsnd/PlayerM/DeathBig.lmp
+$playersound lith_marine neutral *pain100 lsnd/PlayerM/PainSmall.flac
+$playersound lith_marine other *pain100 lsnd/PlayerM/PainSmall.flac
+$playersound lith_marine female *pain100 lsnd/PlayerM/PainSmall.flac
+$playersound lith_marine male *pain100 lsnd/PlayerM/PainSmall.flac
 $playersounddup lith_marine neutral *pain75 *pain100
 $playersounddup lith_marine other *pain75 *pain100
 $playersounddup lith_marine female *pain75 *pain100
 $playersounddup lith_marine male *pain75 *pain100
-$playersound lith_marine neutral *pain50 lsnd/PlayerM/Pain
-$playersound lith_marine other *pain50 lsnd/PlayerM/Pain
-$playersound lith_marine female *pain50 lsnd/PlayerM/Pain
-$playersound lith_marine male *pain50 lsnd/PlayerM/Pain
+$playersound lith_marine neutral *pain50 lsnd/PlayerM/Pain.lmp
+$playersound lith_marine other *pain50 lsnd/PlayerM/Pain.lmp
+$playersound lith_marine female *pain50 lsnd/PlayerM/Pain.lmp
+$playersound lith_marine male *pain50 lsnd/PlayerM/Pain.lmp
 $playersounddup lith_marine neutral *pain25 *pain50
 $playersounddup lith_marine other *pain25 *pain50
 $playersounddup lith_marine female *pain25 *pain50
 $playersounddup lith_marine male *pain25 *pain50
-player/lane/doll = lsnd/PlayerM/Doll
-player/lane/rarmor/mode = lsnd/PlayerM/RArmor/ChangeMode
-player/lane/rarmor/damage = lsnd/PlayerM/RArmor/Damage
-player/lane/rocketboost = lsnd/PlayerM/RocketBoost
-player/lane/adren/inj = lsnd/PlayerM/Adrenaline/Inject
-player/lane/adren/ready = lsnd/PlayerM/Adrenaline/Ready
-player/kiri/doll = lsnd/PlayerT/Doll
-player/luke/doll = lsnd/PlayerW/Doll
-player/luke/shadowwalk = lsnd/PlayerW/ShadowWalk
-marathon/pickup = lsnd/Marathon/Pickup
-marathon/explode = lsnd/Marathon/Explode
-marathon/hitsolid = lsnd/Marathon/HitSolid
-marathon/rifle/fire = lsnd/Marathon/RifleFire
-marathon/rifle/grenade = lsnd/Marathon/GrenadeLaunch
-marathon/rifle/reload = lsnd/Marathon/RifleReload
-marathon/hitwall1 = lsnd/Marathon/HitWall1
-marathon/hitwall2 = lsnd/Marathon/HitWall2
-marathon/hit1 = lsnd/Marathon/Hit1
-marathon/hit2 = lsnd/Marathon/Hit2
-marathon/hit3 = lsnd/Marathon/Hit3
+player/lane/doll = lsnd/PlayerM/Doll.flac
+player/lane/rarmor/mode = lsnd/PlayerM/RArmor/ChangeMode.flac
+player/lane/rarmor/damage = lsnd/PlayerM/RArmor/Damage.flac
+player/lane/rocketboost = lsnd/PlayerM/RocketBoost.flac
+player/lane/adren/inj = lsnd/PlayerM/Adrenaline/Inject.flac
+player/lane/adren/ready = lsnd/PlayerM/Adrenaline/Ready.flac
+player/kiri/doll = lsnd/PlayerT/Doll.flac
+player/luke/doll = lsnd/PlayerW/Doll.flac
+player/luke/shadowwalk = lsnd/PlayerW/ShadowWalk.flac
+marathon/pickup = lsnd/Marathon/Pickup.flac
+marathon/explode = lsnd/Marathon/Explode.flac
+marathon/hitsolid = lsnd/Marathon/HitSolid.flac
+marathon/rifle/fire = lsnd/Marathon/RifleFire.flac
+marathon/rifle/grenade = lsnd/Marathon/GrenadeLaunch.flac
+marathon/rifle/reload = lsnd/Marathon/RifleReload.flac
+marathon/hitwall1 = lsnd/Marathon/HitWall1.flac
+marathon/hitwall2 = lsnd/Marathon/HitWall2.flac
+marathon/hit1 = lsnd/Marathon/Hit1.flac
+marathon/hit2 = lsnd/Marathon/Hit2.flac
+marathon/hit3 = lsnd/Marathon/Hit3.flac
 $random marathon/hitwall { marathon/hitwall1 marathon/hitwall2 }
 $random marathon/hit { marathon/hit1 marathon/hit2 marathon/hit3 }
-casings/bullet/bounce1 = lsnd/Weapons/Effects/Casings/CaseBounce1
-casings/bullet/bounce2 = lsnd/Weapons/Effects/Casings/CaseBounce2
-casings/bullet/bounce3 = lsnd/Weapons/Effects/Casings/CaseBounce3
-casings/bullet/bounce4 = lsnd/Weapons/Effects/Casings/CaseBounce4
-casings/bullet/bounce5 = lsnd/Weapons/Effects/Casings/CaseBounce5
-casings/bullet/bounce6 = lsnd/Weapons/Effects/Casings/CaseBounce6
-casings/bullet/bounce7 = lsnd/Weapons/Effects/Casings/CaseBounce7
-casings/bullet/bounce8 = lsnd/Weapons/Effects/Casings/CaseBounce8
-casings/bullet/bounce9 = lsnd/Weapons/Effects/Casings/CaseBounce9
-casings/bullet/bounce10 = lsnd/Weapons/Effects/Casings/CaseBounce10
-casings/bullet/die1 = lsnd/Weapons/Effects/Casings/CaseStop1
-casings/bullet/die2 = lsnd/Weapons/Effects/Casings/CaseStop2
-casings/bullet/die3 = lsnd/Weapons/Effects/Casings/CaseStop3
-casings/bullet/die4 = lsnd/Weapons/Effects/Casings/CaseStop4
-casings/bullet/die5 = lsnd/Weapons/Effects/Casings/CaseStop5
-casings/bullet/die6 = lsnd/Weapons/Effects/Casings/CaseStop6
-casings/bullet/die7 = lsnd/Weapons/Effects/Casings/CaseStop7
-casings/bullet/die8 = lsnd/Weapons/Effects/Casings/CaseStop8
-casings/bullet/die9 = lsnd/Weapons/Effects/Casings/CaseStop9
-casings/bullet/die10 = lsnd/Weapons/Effects/Casings/CaseStop10
+casings/bullet/bounce1 = lsnd/Weapons/Effects/Casings/CaseBounce1.wav
+casings/bullet/bounce2 = lsnd/Weapons/Effects/Casings/CaseBounce2.wav
+casings/bullet/bounce3 = lsnd/Weapons/Effects/Casings/CaseBounce3.wav
+casings/bullet/bounce4 = lsnd/Weapons/Effects/Casings/CaseBounce4.wav
+casings/bullet/bounce5 = lsnd/Weapons/Effects/Casings/CaseBounce5.wav
+casings/bullet/bounce6 = lsnd/Weapons/Effects/Casings/CaseBounce6.wav
+casings/bullet/bounce7 = lsnd/Weapons/Effects/Casings/CaseBounce7.wav
+casings/bullet/bounce8 = lsnd/Weapons/Effects/Casings/CaseBounce8.wav
+casings/bullet/bounce9 = lsnd/Weapons/Effects/Casings/CaseBounce9.wav
+casings/bullet/bounce10 = lsnd/Weapons/Effects/Casings/CaseBounce10.wav
+casings/bullet/die1 = lsnd/Weapons/Effects/Casings/CaseStop1.wav
+casings/bullet/die2 = lsnd/Weapons/Effects/Casings/CaseStop2.wav
+casings/bullet/die3 = lsnd/Weapons/Effects/Casings/CaseStop3.wav
+casings/bullet/die4 = lsnd/Weapons/Effects/Casings/CaseStop4.wav
+casings/bullet/die5 = lsnd/Weapons/Effects/Casings/CaseStop5.wav
+casings/bullet/die6 = lsnd/Weapons/Effects/Casings/CaseStop6.wav
+casings/bullet/die7 = lsnd/Weapons/Effects/Casings/CaseStop7.wav
+casings/bullet/die8 = lsnd/Weapons/Effects/Casings/CaseStop8.wav
+casings/bullet/die9 = lsnd/Weapons/Effects/Casings/CaseStop9.wav
+casings/bullet/die10 = lsnd/Weapons/Effects/Casings/CaseStop10.wav
 $random casings/bullet/bounce { casings/bullet/bounce1 casings/bullet/bounce2 casings/bullet/bounce3 casings/bullet/bounce4 casings/bullet/bounce5 casings/bullet/bounce6 casings/bullet/bounce7 casings/bullet/bounce8 casings/bullet/bounce9 casings/bullet/bounce10 }
 $volume casings/bullet/bounce 0.4
 $random casings/bullet/die { casings/bullet/die1 casings/bullet/die2 casings/bullet/die3 casings/bullet/die4 casings/bullet/die5 casings/bullet/die6 casings/bullet/die7 casings/bullet/die8 casings/bullet/die9 casings/bullet/die10 }
 $volume casings/bullet/die 0.4
-casings/shell/bounce1 = lsnd/Weapons/Effects/Casings/ShellBounce1
-casings/shell/bounce2 = lsnd/Weapons/Effects/Casings/ShellBounce2
-casings/shell/bounce3 = lsnd/Weapons/Effects/Casings/ShellBounce3
-casings/shell/bounce4 = lsnd/Weapons/Effects/Casings/ShellBounce4
-casings/shell/bounce5 = lsnd/Weapons/Effects/Casings/ShellBounce5
-casings/shell/die1 = lsnd/Weapons/Effects/Casings/ShellBounce1
-casings/shell/die2 = lsnd/Weapons/Effects/Casings/ShellBounce2
-casings/shell/die3 = lsnd/Weapons/Effects/Casings/ShellBounce3
-casings/shell/die4 = lsnd/Weapons/Effects/Casings/ShellBounce4
-casings/shell/die5 = lsnd/Weapons/Effects/Casings/ShellBounce5
+casings/shell/bounce1 = lsnd/Weapons/Effects/Casings/ShellBounce1.wav
+casings/shell/bounce2 = lsnd/Weapons/Effects/Casings/ShellBounce2.wav
+casings/shell/bounce3 = lsnd/Weapons/Effects/Casings/ShellBounce3.wav
+casings/shell/bounce4 = lsnd/Weapons/Effects/Casings/ShellBounce4.wav
+casings/shell/bounce5 = lsnd/Weapons/Effects/Casings/ShellBounce5.wav
+casings/shell/die1 = lsnd/Weapons/Effects/Casings/ShellBounce1.wav
+casings/shell/die2 = lsnd/Weapons/Effects/Casings/ShellBounce2.wav
+casings/shell/die3 = lsnd/Weapons/Effects/Casings/ShellBounce3.wav
+casings/shell/die4 = lsnd/Weapons/Effects/Casings/ShellBounce4.wav
+casings/shell/die5 = lsnd/Weapons/Effects/Casings/ShellBounce5.wav
 $random casings/shell/bounce { casings/shell/bounce1 casings/shell/bounce2 casings/shell/bounce3 casings/shell/bounce4 casings/shell/bounce5 }
 $volume casings/shell/bounce 0.5
 $random casings/shell/die { casings/shell/die1 casings/shell/die2 casings/shell/die3 casings/shell/die4 casings/shell/die5 }
 $volume casings/shell/die 0.5
-weapons/magbounce1 = lsnd/Weapons/Effects/Magazine/Drop1
-weapons/magbounce2 = lsnd/Weapons/Effects/Magazine/Drop2
-weapons/magbounce3 = lsnd/Weapons/Effects/Magazine/Drop3
-weapons/magbouncef1 = lsnd/Weapons/Effects/Magazine/DropFull1
-weapons/magbouncef2 = lsnd/Weapons/Effects/Magazine/DropFull2
-weapons/magbouncef3 = lsnd/Weapons/Effects/Magazine/DropFull3
+weapons/magbounce1 = lsnd/Weapons/Effects/Magazine/Drop1.flac
+weapons/magbounce2 = lsnd/Weapons/Effects/Magazine/Drop2.flac
+weapons/magbounce3 = lsnd/Weapons/Effects/Magazine/Drop3.flac
+weapons/magbouncef1 = lsnd/Weapons/Effects/Magazine/DropFull1.flac
+weapons/magbouncef2 = lsnd/Weapons/Effects/Magazine/DropFull2.flac
+weapons/magbouncef3 = lsnd/Weapons/Effects/Magazine/DropFull3.flac
 $random weapons/magbounce { weapons/magbounce1 weapons/magbounce2 weapons/magbounce3 }
 $random weapons/magbouncef { weapons/magbouncef1 weapons/magbouncef2 weapons/magbouncef3 }
-weapons/empty = lsnd/Weapons/Empty
-weapons/runout = lsnd/Weapons/RunOut
-weapons/adsin = lsnd/Weapons/AdsIn
-weapons/adsout = lsnd/Weapons/AdsOut
-weapons/sword/chargeup = lsnd/Weapons/Sword/Charge
-weapons/sword/attack = lsnd/Weapons/Sword/Charge1
-weapons/sword/swing = lsnd/Weapons/Sword/Swing
-weapons/sword/swing1 = lsnd/Weapons/Sword/Swing1
-weapons/sword/charge = lsnd/Weapons/Sword/Charge2
-weapons/sword/normal1 = lsnd/Weapons/Sword/Swing2
-weapons/sword/normal2 = lsnd/Weapons/Sword/Swing3
-weapons/sword/normal3 = lsnd/Weapons/Sword/Swing4
-weapons/sword/normal4 = lsnd/Weapons/Sword/Swing5
-weapons/sword/normal5 = lsnd/Weapons/Sword/Swing6
+weapons/empty = lsnd/Weapons/Empty.flac
+weapons/runout = lsnd/Weapons/RunOut.flac
+weapons/adsin = lsnd/Weapons/AdsIn.flac
+weapons/adsout = lsnd/Weapons/AdsOut.flac
+weapons/sword/chargeup = lsnd/Weapons/Sword/Charge.flac
+weapons/sword/attack = lsnd/Weapons/Sword/Charge1.flac
+weapons/sword/swing = lsnd/Weapons/Sword/Swing.flac
+weapons/sword/swing1 = lsnd/Weapons/Sword/Swing1.flac
+weapons/sword/charge = lsnd/Weapons/Sword/Charge2.flac
+weapons/sword/normal1 = lsnd/Weapons/Sword/Swing2.flac
+weapons/sword/normal2 = lsnd/Weapons/Sword/Swing3.flac
+weapons/sword/normal3 = lsnd/Weapons/Sword/Swing4.flac
+weapons/sword/normal4 = lsnd/Weapons/Sword/Swing5.flac
+weapons/sword/normal5 = lsnd/Weapons/Sword/Swing6.flac
 $random weapons/sword/normal { weapons/sword/normal1 weapons/sword/normal2 weapons/sword/normal3 weapons/sword/normal4 weapons/sword/normal5 }
-weapons/sword/hit1 = lsnd/Weapons/Sword/Hit1
-weapons/sword/hit2 = lsnd/Weapons/Sword/Hit2
-weapons/sword/hit3 = lsnd/Weapons/Sword/Hit3
-weapons/sword/hit4 = lsnd/Weapons/Sword/Hit4
-weapons/sword/hit5 = lsnd/Weapons/Sword/Hit5
+weapons/sword/hit1 = lsnd/Weapons/Sword/Hit1.flac
+weapons/sword/hit2 = lsnd/Weapons/Sword/Hit2.flac
+weapons/sword/hit3 = lsnd/Weapons/Sword/Hit3.flac
+weapons/sword/hit4 = lsnd/Weapons/Sword/Hit4.flac
+weapons/sword/hit5 = lsnd/Weapons/Sword/Hit5.flac
 $random weapons/sword/hit { weapons/sword/hit1 weapons/sword/hit2 weapons/sword/hit3 weapons/sword/hit4 weapons/sword/hit5 }
-effects/rocket/fly = lsnd/WeaponsM/GrenadeLauncher/RocketFly
-effects/puff/ricochet1 = lsnd/Weapons/Effects/Ricochet/Ric1
-effects/puff/ricochet2 = lsnd/Weapons/Effects/Ricochet/Ric2
-effects/puff/ricochet3 = lsnd/Weapons/Effects/Ricochet/Ric3
-effects/puff/ricochet4 = lsnd/Weapons/Effects/Ricochet/Ric4
-effects/puff/ricochet5 = lsnd/Weapons/Effects/Ricochet/Ric5
-effects/puff/ricochet6 = lsnd/Weapons/Effects/Ricochet/Ric6
-effects/puff/ricochet7 = lsnd/Weapons/Effects/Ricochet/Ric7
-effects/puff/ricochet8 = lsnd/Weapons/Effects/Ricochet/Ric8
-effects/puff/ricochet9 = lsnd/Weapons/Effects/Ricochet/Ric9
-effects/puff/ricochet10 = lsnd/Weapons/Effects/Ricochet/Ric10
-effects/puff/ricochet11 = lsnd/Weapons/Effects/Ricochet/Ric11
-effects/puff/ricochet12 = lsnd/Weapons/Effects/Ricochet/Ric12
-effects/puff/ricochet13 = lsnd/Weapons/Effects/Ricochet/Ric13
-effects/puff/ricochet14 = lsnd/Weapons/Effects/Ricochet/Ric14
+effects/rocket/fly = lsnd/WeaponsM/GrenadeLauncher/RocketFly.ogg
+effects/puff/ricochet1 = lsnd/Weapons/Effects/Ricochet/Ric1.flac
+effects/puff/ricochet2 = lsnd/Weapons/Effects/Ricochet/Ric2.flac
+effects/puff/ricochet3 = lsnd/Weapons/Effects/Ricochet/Ric3.flac
+effects/puff/ricochet4 = lsnd/Weapons/Effects/Ricochet/Ric4.flac
+effects/puff/ricochet5 = lsnd/Weapons/Effects/Ricochet/Ric5.flac
+effects/puff/ricochet6 = lsnd/Weapons/Effects/Ricochet/Ric6.flac
+effects/puff/ricochet7 = lsnd/Weapons/Effects/Ricochet/Ric7.flac
+effects/puff/ricochet8 = lsnd/Weapons/Effects/Ricochet/Ric8.flac
+effects/puff/ricochet9 = lsnd/Weapons/Effects/Ricochet/Ric9.flac
+effects/puff/ricochet10 = lsnd/Weapons/Effects/Ricochet/Ric10.flac
+effects/puff/ricochet11 = lsnd/Weapons/Effects/Ricochet/Ric11.flac
+effects/puff/ricochet12 = lsnd/Weapons/Effects/Ricochet/Ric12.flac
+effects/puff/ricochet13 = lsnd/Weapons/Effects/Ricochet/Ric13.flac
+effects/puff/ricochet14 = lsnd/Weapons/Effects/Ricochet/Ric14.flac
 $random effects/puff/ricochet { effects/puff/ricochet1 effects/puff/ricochet2 effects/puff/ricochet3 effects/puff/ricochet4 effects/puff/ricochet5 effects/puff/ricochet6 effects/puff/ricochet7 effects/puff/ricochet8 effects/puff/ricochet9 effects/puff/ricochet10 effects/puff/ricochet11 effects/puff/ricochet12 effects/puff/ricochet13 effects/puff/ricochet14 }
 $limit effects/puff/ricochet 0
-effects/geexplosion1 = lsnd/Weapons/Effects/GEExplosion/expl1
-effects/geexplosion2 = lsnd/Weapons/Effects/GEExplosion/expl2
-effects/geexplosion3 = lsnd/Weapons/Effects/GEExplosion/expl3
-effects/geexplosion4 = lsnd/Weapons/Effects/GEExplosion/expl4
-effects/geexplosion5 = lsnd/Weapons/Effects/GEExplosion/expl5
-effects/geexplosion6 = lsnd/Weapons/Effects/GEExplosion/expl6
-effects/geexplosion7 = lsnd/Weapons/Effects/GEExplosion/expl7
-effects/geexplosion8 = lsnd/Weapons/Effects/GEExplosion/expl8
-effects/geexplosion9 = lsnd/Weapons/Effects/GEExplosion/expl9
-effects/geexplosion10 = lsnd/Weapons/Effects/GEExplosion/expl10
-effects/geexplosion11 = lsnd/Weapons/Effects/GEExplosion/expl11
+effects/geexplosion1 = lsnd/Weapons/Effects/GEExplosion/expl1.wav
+effects/geexplosion2 = lsnd/Weapons/Effects/GEExplosion/expl2.wav
+effects/geexplosion3 = lsnd/Weapons/Effects/GEExplosion/expl3.wav
+effects/geexplosion4 = lsnd/Weapons/Effects/GEExplosion/expl4.wav
+effects/geexplosion5 = lsnd/Weapons/Effects/GEExplosion/expl5.wav
+effects/geexplosion6 = lsnd/Weapons/Effects/GEExplosion/expl6.wav
+effects/geexplosion7 = lsnd/Weapons/Effects/GEExplosion/expl7.wav
+effects/geexplosion8 = lsnd/Weapons/Effects/GEExplosion/expl8.wav
+effects/geexplosion9 = lsnd/Weapons/Effects/GEExplosion/expl9.wav
+effects/geexplosion10 = lsnd/Weapons/Effects/GEExplosion/expl10.wav
+effects/geexplosion11 = lsnd/Weapons/Effects/GEExplosion/expl11.wav
 $limit effects/geexplosion 0
 $attenuation effects/geexplosion 0.5
 $random effects/geexplosion { effects/geexplosion1 effects/geexplosion2 effects/geexplosion3 effects/geexplosion4 effects/geexplosion5 effects/geexplosion6 effects/geexplosion7 effects/geexplosion8 effects/geexplosion9 effects/geexplosion10 effects/geexplosion11 }
-weapons/burstrif/fire1 = lsnd/WeaponsA/BurstRifle/Fire
-weapons/burstrif/fire2 = lsnd/WeaponsA/BurstRifle/Fire2
-weapons/burstrif/fire3 = lsnd/WeaponsA/BurstRifle/Fire3
-weapons/burstrif/firefirst = lsnd/WeaponsA/BurstRifle/FireFirst
-weapons/burstrif/bolt = lsnd/WeaponsA/BurstRifle/Bolt
-weapons/burstrif/draw = lsnd/WeaponsA/BurstRifle/Draw
+weapons/burstrif/fire1 = lsnd/WeaponsA/BurstRifle/Fire.flac
+weapons/burstrif/fire2 = lsnd/WeaponsA/BurstRifle/Fire2.flac
+weapons/burstrif/fire3 = lsnd/WeaponsA/BurstRifle/Fire3.flac
+weapons/burstrif/firefirst = lsnd/WeaponsA/BurstRifle/FireFirst.flac
+weapons/burstrif/bolt = lsnd/WeaponsA/BurstRifle/Bolt.flac
+weapons/burstrif/draw = lsnd/WeaponsA/BurstRifle/Draw.flac
 $random weapons/burstrif/fire { weapons/burstrif/fire1 weapons/burstrif/fire2 weapons/burstrif/fire3 }
-weapons/dualpistols/firel = lsnd/WeaponsA/DualPistols/FireL
-weapons/dualpistols/firer = lsnd/WeaponsA/DualPistols/FireR
-weapons/dualpistols/in = lsnd/WeaponsA/DualPistols/ReloadIn
-weapons/dualpistols/out = lsnd/WeaponsA/DualPistols/ReloadOut
-weapons/dualpistols/slide = lsnd/WeaponsA/DualPistols/ReloadSlide
-weapons/dualpistols/draw = lsnd/WeaponsA/DualPistols/Draw
-weapons/mateba/fire = lsnd/WeaponsC/Mateba/Fire
-weapons/mateba/open = lsnd/WeaponsC/Mateba/Open
-weapons/mateba/eject = lsnd/WeaponsC/Mateba/Eject
-weapons/mateba/load = lsnd/WeaponsC/Mateba/Load
-weapons/mateba/close = lsnd/WeaponsC/Mateba/Close
-weapons/mateba/draw = lsnd/WeaponsC/Mateba/Draw
-weapons/mateba/finalize = lsnd/WeaponsC/Mateba/Finalize
+weapons/dualpistols/firel = lsnd/WeaponsA/DualPistols/FireL.flac
+weapons/dualpistols/firer = lsnd/WeaponsA/DualPistols/FireR.flac
+weapons/dualpistols/in = lsnd/WeaponsA/DualPistols/ReloadIn.flac
+weapons/dualpistols/out = lsnd/WeaponsA/DualPistols/ReloadOut.flac
+weapons/dualpistols/slide = lsnd/WeaponsA/DualPistols/ReloadSlide.flac
+weapons/dualpistols/draw = lsnd/WeaponsA/DualPistols/Draw.flac
+weapons/mateba/fire = lsnd/WeaponsC/Mateba/Fire.flac
+weapons/mateba/open = lsnd/WeaponsC/Mateba/Open.flac
+weapons/mateba/eject = lsnd/WeaponsC/Mateba/Eject.flac
+weapons/mateba/load = lsnd/WeaponsC/Mateba/Load.flac
+weapons/mateba/close = lsnd/WeaponsC/Mateba/Close.flac
+weapons/mateba/draw = lsnd/WeaponsC/Mateba/Draw.flac
+weapons/mateba/finalize = lsnd/WeaponsC/Mateba/Finalize.ogg
 $alias weapons/mateba/pickup weapons/mateba/draw
-weapons/erifle/pickup = lsnd/WeaponsC/ShockRifle/Pickup
-weapons/erifle/draw = lsnd/WeaponsC/ShockRifle/Draw
-weapons/erifle/fire = lsnd/WeaponsC/ShockRifle/Fire
-weapons/erifle/zap1 = lsnd/WeaponsC/ShockRifle/Zap1
-weapons/erifle/zap2 = lsnd/WeaponsC/ShockRifle/Zap2
-weapons/erifle/zap3 = lsnd/WeaponsC/ShockRifle/Zap3
-weapons/erifle/reloadout = lsnd/WeaponsC/ShockRifle/ReloadOut
-weapons/erifle/reloadin = lsnd/WeaponsC/ShockRifle/ReloadIn
-weapons/erifle/shock1 = lsnd/WeaponsC/ShockRifle/Shock1
-weapons/erifle/shock2 = lsnd/WeaponsC/ShockRifle/Shock2
+weapons/erifle/pickup = lsnd/WeaponsC/ShockRifle/Pickup.flac
+weapons/erifle/draw = lsnd/WeaponsC/ShockRifle/Draw.flac
+weapons/erifle/fire = lsnd/WeaponsC/ShockRifle/Fire.flac
+weapons/erifle/zap1 = lsnd/WeaponsC/ShockRifle/Zap1.wav
+weapons/erifle/zap2 = lsnd/WeaponsC/ShockRifle/Zap2.wav
+weapons/erifle/zap3 = lsnd/WeaponsC/ShockRifle/Zap3.wav
+weapons/erifle/reloadout = lsnd/WeaponsC/ShockRifle/ReloadOut.flac
+weapons/erifle/reloadin = lsnd/WeaponsC/ShockRifle/ReloadIn.flac
+weapons/erifle/shock1 = lsnd/WeaponsC/ShockRifle/Shock1.wav
+weapons/erifle/shock2 = lsnd/WeaponsC/ShockRifle/Shock2.wav
 $random weapons/erifle/shock { weapons/erifle/shock1 weapons/erifle/shock2 }
 $random weapons/erifle/zap { weapons/erifle/zap1 weapons/erifle/zap2 weapons/erifle/zap3 }
 $volume weapons/erifle/zap 0.15
-weapons/spas/fire = lsnd/WeaponsC/SPAS/Fire
-weapons/spas/fire2 = lsnd/WeaponsC/SPAS/Fire2
-weapons/spas/load = lsnd/WeaponsC/SPAS/Load
-weapons/spas/pump = lsnd/WeaponsC/SPAS/Pump
-weapons/spas/empty = lsnd/WeaponsC/SPAS/FireEmpty
-weapons/spas/pickup = lsnd/WeaponsC/SPAS/Pickup
-weapons/spas/draw = lsnd/WeaponsC/SPAS/Draw
-weapons/smg/fire = lsnd/WeaponsC/SMG/Fire
-weapons/smg/firedone = lsnd/WeaponsC/SMG/FireDone
-weapons/smg/firehit = lsnd/WeaponsC/SMG/FireHit
-weapons/smg/eject = lsnd/WeaponsC/SMG/EjectRod
-weapons/smg/insert = lsnd/WeaponsC/SMG/InsertRod
-weapons/smg/heat = lsnd/WeaponsC/SMG/HeatDisperse
-weapons/smg/lift = lsnd/WeaponsC/SMG/Lift
-weapons/smg/open = lsnd/WeaponsC/SMG/TopOpen
-weapons/smg/close = lsnd/WeaponsC/SMG/TopClose
-weapons/smg/magin2 = lsnd/WeaponsC/SMG/MagInLong
-weapons/smg/magout = lsnd/WeaponsC/SMG/MagOut
-weapons/smg/magin = lsnd/WeaponsC/SMG/MagIn
-weapons/smg/draw = lsnd/WeaponsC/SMG/Draw
-weapons/smg/pickup = lsnd/WeaponsC/SMG/Pickup
-weapons/ionrifle/fire = lsnd/WeaponsC/IonRifle/Fire
-weapons/ionrifle/fire2 = lsnd/WeaponsC/IonRifle/Fire2
-weapons/ionrifle/eject = lsnd/WeaponsC/IonRifle/Eject
-weapons/ionrifle/load = lsnd/WeaponsC/IonRifle/Load
-weapons/ionrifle/magout = lsnd/WeaponsC/IonRifle/MagOut
-weapons/ionrifle/magin = lsnd/WeaponsC/IonRifle/MagIn
-weapons/ionrifle/zoomout = lsnd/WeaponsC/IonRifle/ZoomOut
-weapons/ionrifle/zoomin = lsnd/WeaponsC/IonRifle/ZoomIn
-weapons/ionrifle/empty = lsnd/WeaponsC/IonRifle/FireEmpty
-weapons/ionrifle/draw = lsnd/WeaponsC/IonRifle/Draw
-weapons/ionrifle/pickup = lsnd/WeaponsC/IonRifle/Pickup
-weapons/ionrifle/cfire1 = lsnd/WeaponsC/IonRifle/Charged1
-weapons/ionrifle/cfire2 = lsnd/WeaponsC/IonRifle/Charged2
-weapons/ionrifle/charge = lsnd/WeaponsC/IonRifle/Charge
+weapons/spas/fire = lsnd/WeaponsC/SPAS/Fire.flac
+weapons/spas/fire2 = lsnd/WeaponsC/SPAS/Fire2.flac
+weapons/spas/load = lsnd/WeaponsC/SPAS/Load.flac
+weapons/spas/pump = lsnd/WeaponsC/SPAS/Pump.flac
+weapons/spas/empty = lsnd/WeaponsC/SPAS/FireEmpty.flac
+weapons/spas/pickup = lsnd/WeaponsC/SPAS/Pickup.flac
+weapons/spas/draw = lsnd/WeaponsC/SPAS/Draw.flac
+weapons/smg/fire = lsnd/WeaponsC/SMG/Fire.flac
+weapons/smg/firedone = lsnd/WeaponsC/SMG/FireDone.flac
+weapons/smg/firehit = lsnd/WeaponsC/SMG/FireHit.flac
+weapons/smg/eject = lsnd/WeaponsC/SMG/EjectRod.flac
+weapons/smg/insert = lsnd/WeaponsC/SMG/InsertRod.flac
+weapons/smg/heat = lsnd/WeaponsC/SMG/HeatDisperse.flac
+weapons/smg/lift = lsnd/WeaponsC/SMG/Lift.flac
+weapons/smg/open = lsnd/WeaponsC/SMG/TopOpen.flac
+weapons/smg/close = lsnd/WeaponsC/SMG/TopClose.flac
+weapons/smg/magin2 = lsnd/WeaponsC/SMG/MagInLong.flac
+weapons/smg/magout = lsnd/WeaponsC/SMG/MagOut.flac
+weapons/smg/magin = lsnd/WeaponsC/SMG/MagIn.flac
+weapons/smg/draw = lsnd/WeaponsC/SMG/Draw.flac
+weapons/smg/pickup = lsnd/WeaponsC/SMG/Pickup.flac
+weapons/ionrifle/fire = lsnd/WeaponsC/IonRifle/Fire.flac
+weapons/ionrifle/fire2 = lsnd/WeaponsC/IonRifle/Fire2.flac
+weapons/ionrifle/eject = lsnd/WeaponsC/IonRifle/Eject.flac
+weapons/ionrifle/load = lsnd/WeaponsC/IonRifle/Load.flac
+weapons/ionrifle/magout = lsnd/WeaponsC/IonRifle/MagOut.flac
+weapons/ionrifle/magin = lsnd/WeaponsC/IonRifle/MagIn.flac
+weapons/ionrifle/zoomout = lsnd/WeaponsC/IonRifle/ZoomOut.flac
+weapons/ionrifle/zoomin = lsnd/WeaponsC/IonRifle/ZoomIn.flac
+weapons/ionrifle/empty = lsnd/WeaponsC/IonRifle/FireEmpty.flac
+weapons/ionrifle/draw = lsnd/WeaponsC/IonRifle/Draw.flac
+weapons/ionrifle/pickup = lsnd/WeaponsC/IonRifle/Pickup.flac
+weapons/ionrifle/cfire1 = lsnd/WeaponsC/IonRifle/Charged1.flac
+weapons/ionrifle/cfire2 = lsnd/WeaponsC/IonRifle/Charged2.flac
+weapons/ionrifle/charge = lsnd/WeaponsC/IonRifle/Charge.flac
 $random weapons/ionrifle/cfire { weapons/ionrifle/cfire1 weapons/ionrifle/cfire2 }
 $alias weapons/ionrifle/heat weapons/smg/heat
-weapons/shipgun/explode = lsnd/WeaponsC/StarDestroyer/Explode
-weapons/shipgun/fire = lsnd/WeaponsC/StarDestroyer/Fire
-weapons/shipgun/firesol = lsnd/WeaponsC/StarDestroyer/FireSolspear
-weapons/shipgun/prepare = lsnd/WeaponsC/StarDestroyer/Charge
-weapons/shipgun/empty = lsnd/WeaponsC/StarDestroyer/FireEmpty
-weapons/shipgun/draw = lsnd/WeaponsC/StarDestroyer/Draw
-weapons/shipgun/pickup = lsnd/WeaponsC/StarDestroyer/Pickup
-weapons/shipgun/firesurge = lsnd/WeaponsC/StarDestroyer/FireSurge
-weapons/shipgun/idle = lsnd/WeaponsC/StarDestroyer/Idle
+weapons/shipgun/explode = lsnd/WeaponsC/StarDestroyer/Explode.flac
+weapons/shipgun/fire = lsnd/WeaponsC/StarDestroyer/Fire.flac
+weapons/shipgun/firesol = lsnd/WeaponsC/StarDestroyer/FireSolspear.flac
+weapons/shipgun/prepare = lsnd/WeaponsC/StarDestroyer/Charge.flac
+weapons/shipgun/empty = lsnd/WeaponsC/StarDestroyer/FireEmpty.flac
+weapons/shipgun/draw = lsnd/WeaponsC/StarDestroyer/Draw.flac
+weapons/shipgun/pickup = lsnd/WeaponsC/StarDestroyer/Pickup.flac
+weapons/shipgun/firesurge = lsnd/WeaponsC/StarDestroyer/FireSurge.flac
+weapons/shipgun/idle = lsnd/WeaponsC/StarDestroyer/Idle.flac
 $limit weapons/shipgun/explode 0
 $attenuation weapons/shipgun/explode 0.6
-weapons/blade/slash = lsnd/WeaponsC/Blade/Slash
-weapons/blade/hit = lsnd/WeaponsC/Blade/Hit
-weapons/delear/fire = lsnd/WeaponsC/Delear/Fire
-weapons/delear/open = lsnd/WeaponsC/Delear/Open
-weapons/delear/charge = lsnd/WeaponsC/Delear/Charge
-weapons/delear/close = lsnd/WeaponsC/Delear/Close
-weapons/feuer/explode = lsnd/WeaponsC/Feuer/Explode
-weapons/feuer/fire = lsnd/WeaponsC/Feuer/Fire
-weapons/feuer/final = lsnd/WeaponsC/Feuer/Final
+weapons/blade/slash = lsnd/WeaponsC/Blade/Slash.ogg
+weapons/blade/hit = lsnd/WeaponsC/Blade/Hit.ogg
+weapons/delear/fire = lsnd/WeaponsC/Delear/Fire.flac
+weapons/delear/open = lsnd/WeaponsC/Delear/Open.flac
+weapons/delear/charge = lsnd/WeaponsC/Delear/Charge.flac
+weapons/delear/close = lsnd/WeaponsC/Delear/Close.flac
+weapons/feuer/explode = lsnd/WeaponsC/Feuer/Explode.ogg
+weapons/feuer/fire = lsnd/WeaponsC/Feuer/Fire.wav
+weapons/feuer/final = lsnd/WeaponsC/Feuer/Final.flac
 $limit weapons/feuer/explode 0
 $volume weapons/feuer/fire 0.9
-weapons/rend/slash1 = lsnd/WeaponsC/Rend/Fire1
-weapons/rend/slash2 = lsnd/WeaponsC/Rend/Fire2
-weapons/rend/slash3 = lsnd/WeaponsC/Rend/Fire3
-weapons/rend/end = lsnd/WeaponsC/Rend/End
-weapons/rend/reflect = lsnd/WeaponsC/Rend/Reflect
+weapons/rend/slash1 = lsnd/WeaponsC/Rend/Fire1.flac
+weapons/rend/slash2 = lsnd/WeaponsC/Rend/Fire2.flac
+weapons/rend/slash3 = lsnd/WeaponsC/Rend/Fire3.flac
+weapons/rend/end = lsnd/WeaponsC/Rend/End.flac
+weapons/rend/reflect = lsnd/WeaponsC/Rend/Reflect.flac
 $random weapons/rend/slash { weapons/rend/slash1 weapons/rend/slash2 weapons/rend/slash3 }
 $alias weapons/rend/hit weapons/blade/hit
-weapons/hulgyon/proc = lsnd/WeaponsC/Hulgyon/Proc
+weapons/hulgyon/proc = lsnd/WeaponsC/Hulgyon/Proc.flac
 $limit weapons/hulgyon/proc 0
-weapons/sshot/fire = lsnd/WeaponsC/StarShot/Fire
-weapons/sshot/firero = lsnd/WeaponsC/StarShot/RunOut
+weapons/sshot/fire = lsnd/WeaponsC/StarShot/Fire.flac
+weapons/sshot/firero = lsnd/WeaponsC/StarShot/RunOut.flac
 $alias weapons/sshot/hit weapons/shotgun/gauss/puff
 $limit weapons/sshot/hit 0
 $limit weapons/sshot/fire 0
-weapons/cercle/begin = lsnd/WeaponsC/Cercle/Begin
-weapons/cercle/attack = lsnd/WeaponsC/Cercle/Attack
-weapons/subweapon/charge = lsnd/WeaponsD/Subweapons/Charge
-weapons/subweapon/armgun = lsnd/WeaponsD/Subweapons/ArmGun
-weapons/subweapon/armgun2 = lsnd/WeaponsD/Subweapons/ArmGun2
-weapons/subweapon/needle = lsnd/WeaponsD/Subweapons/Needle
+weapons/cercle/begin = lsnd/WeaponsC/Cercle/Begin.flac
+weapons/cercle/attack = lsnd/WeaponsC/Cercle/Attack.flac
+weapons/subweapon/charge = lsnd/WeaponsD/Subweapons/Charge.wav
+weapons/subweapon/armgun = lsnd/WeaponsD/Subweapons/ArmGun.wav
+weapons/subweapon/armgun2 = lsnd/WeaponsD/Subweapons/ArmGun2.flac
+weapons/subweapon/needle = lsnd/WeaponsD/Subweapons/Needle.ogg
 $alias weapons/subweapon/axe weapons/rend/slash
 $alias weapons/subweapon/grenade weapons/rifle/grenade
-weapons/khanda/draw = lsnd/WeaponsD/Khanda/Draw
-weapons/khanda/swing1 = lsnd/WeaponsD/Khanda/Swing
-weapons/khanda/swing2 = lsnd/WeaponsD/Khanda/Swing2
-weapons/khanda/swing3 = lsnd/WeaponsD/Khanda/Swing3
+weapons/khanda/draw = lsnd/WeaponsD/Khanda/Draw.flac
+weapons/khanda/swing1 = lsnd/WeaponsD/Khanda/Swing.flac
+weapons/khanda/swing2 = lsnd/WeaponsD/Khanda/Swing2.flac
+weapons/khanda/swing3 = lsnd/WeaponsD/Khanda/Swing3.flac
+weapons/khanda/pwup = lsnd/WeaponsD/Khanda/PowerUp.flac
 $random weapons/khanda/swing { weapons/khanda/swing1 weapons/khanda/swing2 weapons/khanda/swing3 }
-weapons/kampilan/pickup = lsnd/WeaponsD/Kampilan/Pickup
-weapons/kampilan/draw = lsnd/WeaponsD/Kampilan/Draw
-weapons/kampilan/bonk = lsnd/WeaponsD/Kampilan/Bonk
-weapons/kampilan/hit = lsnd/WeaponsD/Kampilan/Hit
-weapons/kampilan/hitflesh = lsnd/WeaponsD/Kampilan/HitFlesh
-weapons/kampilan/hitxpl = lsnd/WeaponsD/Kampilan/HitExplode
-weapons/kampilan/ready1 = lsnd/WeaponsD/Kampilan/Ready
-weapons/kampilan/ready2 = lsnd/WeaponsD/Kampilan/Ready2
-weapons/kampilan/swing1 = lsnd/WeaponsD/Kampilan/Swing
-weapons/kampilan/swing2 = lsnd/WeaponsD/Kampilan/Swing2
+weapons/kampilan/pickup = lsnd/WeaponsD/Kampilan/Pickup.flac
+weapons/kampilan/draw = lsnd/WeaponsD/Kampilan/Draw.flac
+weapons/kampilan/bonk = lsnd/WeaponsD/Kampilan/Bonk.flac
+weapons/kampilan/hit = lsnd/WeaponsD/Kampilan/Hit.flac
+weapons/kampilan/hitflesh = lsnd/WeaponsD/Kampilan/HitFlesh.flac
+weapons/kampilan/hitxpl = lsnd/WeaponsD/Kampilan/HitExplode.flac
+weapons/kampilan/ready1 = lsnd/WeaponsD/Kampilan/Ready.flac
+weapons/kampilan/ready2 = lsnd/WeaponsD/Kampilan/Ready2.flac
+weapons/kampilan/swing1 = lsnd/WeaponsD/Kampilan/Swing.flac
+weapons/kampilan/swing2 = lsnd/WeaponsD/Kampilan/Swing2.flac
 $random weapons/kampilan/ready { weapons/kampilan/ready1 weapons/kampilan/ready2 }
 $random weapons/kampilan/swing { weapons/kampilan/swing1 weapons/kampilan/swing2 }
-weapons/700e/fire1 = lsnd/WeaponsD/700Express/Fire1
-weapons/700e/fire2 = lsnd/WeaponsD/700Express/Fire2
-weapons/700e/fire3 = lsnd/WeaponsD/700Express/Fire3
-weapons/700e/out = lsnd/WeaponsD/700Express/ReloadOut
-weapons/700e/in = lsnd/WeaponsD/700Express/ReloadIn
-weapons/700e/move = lsnd/WeaponsD/700Express/Move
-weapons/700e/draw = lsnd/WeaponsD/700Express/Draw
-weapons/700e/bin = lsnd/WeaponsD/700Express/BulletIn
-weapons/700e/cout = lsnd/WeaponsD/700Express/CasingsOut
-weapons/700e/explode = lsnd/WeaponsD/700Express/Explode
+weapons/700e/fire1 = lsnd/WeaponsD/700Express/Fire1.flac
+weapons/700e/fire2 = lsnd/WeaponsD/700Express/Fire2.flac
+weapons/700e/fire3 = lsnd/WeaponsD/700Express/Fire3.flac
+weapons/700e/out = lsnd/WeaponsD/700Express/ReloadOut.flac
+weapons/700e/in = lsnd/WeaponsD/700Express/ReloadIn.flac
+weapons/700e/move = lsnd/WeaponsD/700Express/Move.flac
+weapons/700e/draw = lsnd/WeaponsD/700Express/Draw.flac
+weapons/700e/bin = lsnd/WeaponsD/700Express/BulletIn.flac
+weapons/700e/cout = lsnd/WeaponsD/700Express/CasingsOut.flac
+weapons/700e/explode = lsnd/WeaponsD/700Express/Explode.flac
 $limit weapons/700e/explode 0
 $attenuation weapons/700e/explode 0.6
 $random weapons/700e/fire { weapons/700e/fire1 weapons/700e/fire2 weapons/700e/fire3 }
-weapons/4bore/fire = lsnd/WeaponsD/4Bore/Fire
-weapons/4bore/draw = lsnd/WeaponsD/4Bore/Draw
-weapons/4bore/close = lsnd/WeaponsD/4Bore/Close
-weapons/4bore/open = lsnd/WeaponsD/4Bore/Open
-weapons/4bore/load = lsnd/WeaponsD/4Bore/Load
-weapons/4bore/empty = lsnd/WeaponsD/4Bore/Empty
-weapons/4bore/pickup = lsnd/WeaponsD/4Bore/Pickup
-weapons/shrapnel/fire = lsnd/WeaponsD/ShrapnelGun/Fire
-weapons/shrapnel/draw = lsnd/WeaponsD/ShrapnelGun/Draw
-weapons/shrapnel/bounce = lsnd/WeaponsD/ShrapnelGun/Bounce
-weapons/shrapnel/hit = lsnd/WeaponsD/ShrapnelGun/Hit
-weapons/shrapnel/pickup = lsnd/WeaponsD/ShrapnelGun/Pickup
+weapons/4bore/fire = lsnd/WeaponsD/4Bore/Fire.flac
+weapons/4bore/draw = lsnd/WeaponsD/4Bore/Draw.flac
+weapons/4bore/close = lsnd/WeaponsD/4Bore/Close.flac
+weapons/4bore/open = lsnd/WeaponsD/4Bore/Open.flac
+weapons/4bore/load = lsnd/WeaponsD/4Bore/Load.flac
+weapons/4bore/empty = lsnd/WeaponsD/4Bore/Empty.flac
+weapons/4bore/pickup = lsnd/WeaponsD/4Bore/Pickup.flac
+weapons/shrapnel/fire = lsnd/WeaponsD/ShrapnelGun/Fire.flac
+weapons/shrapnel/draw = lsnd/WeaponsD/ShrapnelGun/Draw.flac
+weapons/shrapnel/bounce = lsnd/WeaponsD/ShrapnelGun/Bounce.flac
+weapons/shrapnel/hit = lsnd/WeaponsD/ShrapnelGun/Hit.flac
+weapons/shrapnel/pickup = lsnd/WeaponsD/ShrapnelGun/Pickup.flac
 $volume weapons/shrapnel/bounce 0.2
-weapons/motra/fire1 = lsnd/WeaponsD/Motra/Fire1
-weapons/motra/fire2 = lsnd/WeaponsD/Motra/Fire2
-weapons/motra/fire3 = lsnd/WeaponsD/Motra/Fire3
-weapons/motra/out = lsnd/WeaponsD/Motra/ReloadOut
-weapons/motra/in = lsnd/WeaponsD/Motra/ReloadIn
-weapons/motra/draw = lsnd/WeaponsD/Motra/Draw
+weapons/motra/fire1 = lsnd/WeaponsD/Motra/Fire1.flac
+weapons/motra/fire2 = lsnd/WeaponsD/Motra/Fire2.flac
+weapons/motra/fire3 = lsnd/WeaponsD/Motra/Fire3.flac
+weapons/motra/out = lsnd/WeaponsD/Motra/ReloadOut.flac
+weapons/motra/in = lsnd/WeaponsD/Motra/ReloadIn.flac
+weapons/motra/draw = lsnd/WeaponsD/Motra/Draw.flac
 $random weapons/motra/fire { weapons/motra/fire1 weapons/motra/fire2 weapons/motra/fire3 }
-weapons/minigun/fire = lsnd/WeaponsD/Minigun/Fire
-weapons/minigun/rotate = lsnd/WeaponsD/Minigun/Rotate
-weapons/minigun/rotatefast = lsnd/WeaponsD/Minigun/RotateFast
-weapons/minigun/click11 = lsnd/WeaponsD/Minigun/Click11
-weapons/minigun/click12 = lsnd/WeaponsD/Minigun/Click12
-weapons/minigun/click13 = lsnd/WeaponsD/Minigun/Click13
-weapons/minigun/click14 = lsnd/WeaponsD/Minigun/Click14
-weapons/minigun/click21 = lsnd/WeaponsD/Minigun/Click21
-weapons/minigun/click22 = lsnd/WeaponsD/Minigun/Click22
-weapons/minigun/click23 = lsnd/WeaponsD/Minigun/Click23
-weapons/minigun/click24 = lsnd/WeaponsD/Minigun/Click24
-weapons/minigun/place = lsnd/WeaponsD/Minigun/Place
-weapons/minigun/down1 = lsnd/WeaponsD/Minigun/Down1
-weapons/minigun/down2 = lsnd/WeaponsD/Minigun/Down2
-weapons/minigun/down3 = lsnd/WeaponsD/Minigun/Down3
-weapons/minigun/empty = lsnd/WeaponsD/Minigun/Empty
-weapons/minigun/pickup = lsnd/WeaponsD/Minigun/Pickup
-weapons/minigun/draw = lsnd/WeaponsD/Minigun/Draw
+weapons/minigun/fire = lsnd/WeaponsD/Minigun/Fire.flac
+weapons/minigun/rotate = lsnd/WeaponsD/Minigun/Rotate.flac
+weapons/minigun/rotatefast = lsnd/WeaponsD/Minigun/RotateFast.flac
+weapons/minigun/click11 = lsnd/WeaponsD/Minigun/Click11.flac
+weapons/minigun/click12 = lsnd/WeaponsD/Minigun/Click12.flac
+weapons/minigun/click13 = lsnd/WeaponsD/Minigun/Click13.flac
+weapons/minigun/click14 = lsnd/WeaponsD/Minigun/Click14.flac
+weapons/minigun/click21 = lsnd/WeaponsD/Minigun/Click21.flac
+weapons/minigun/click22 = lsnd/WeaponsD/Minigun/Click22.flac
+weapons/minigun/click23 = lsnd/WeaponsD/Minigun/Click23.flac
+weapons/minigun/click24 = lsnd/WeaponsD/Minigun/Click24.flac
+weapons/minigun/place = lsnd/WeaponsD/Minigun/Place.flac
+weapons/minigun/down1 = lsnd/WeaponsD/Minigun/Down1.flac
+weapons/minigun/down2 = lsnd/WeaponsD/Minigun/Down2.flac
+weapons/minigun/down3 = lsnd/WeaponsD/Minigun/Down3.flac
+weapons/minigun/empty = lsnd/WeaponsD/Minigun/Empty.flac
+weapons/minigun/pickup = lsnd/WeaponsD/Minigun/Pickup.flac
+weapons/minigun/draw = lsnd/WeaponsD/Minigun/Draw.flac
 $random weapons/minigun/down { weapons/minigun/down1 weapons/minigun/down2 weapons/minigun/down3 }
 $random weapons/minigun/click1 { weapons/minigun/click11 weapons/minigun/click12 weapons/minigun/click13 weapons/minigun/click14 }
 $random weapons/minigun/click2 { weapons/minigun/click21 weapons/minigun/click22 weapons/minigun/click23 weapons/minigun/click24 }
-weapons/drocket/firel1 = lsnd/WeaponsD/DualRocket/FireLeft
-weapons/drocket/firel2 = lsnd/WeaponsD/DualRocket/FireLeft2
-weapons/drocket/firel3 = lsnd/WeaponsD/DualRocket/FireLeft3
-weapons/drocket/firer1 = lsnd/WeaponsD/DualRocket/FireRight
-weapons/drocket/firer2 = lsnd/WeaponsD/DualRocket/FireRight2
-weapons/drocket/firer3 = lsnd/WeaponsD/DualRocket/FireRight3
-weapons/drocket/draw = lsnd/WeaponsD/DualRocket/Draw
-weapons/drocket/pickup = lsnd/WeaponsD/DualRocket/Pickup
+weapons/drocket/firel1 = lsnd/WeaponsD/DualRocket/FireLeft.flac
+weapons/drocket/firel2 = lsnd/WeaponsD/DualRocket/FireLeft2.flac
+weapons/drocket/firel3 = lsnd/WeaponsD/DualRocket/FireLeft3.flac
+weapons/drocket/firer1 = lsnd/WeaponsD/DualRocket/FireRight.flac
+weapons/drocket/firer2 = lsnd/WeaponsD/DualRocket/FireRight2.flac
+weapons/drocket/firer3 = lsnd/WeaponsD/DualRocket/FireRight3.flac
+weapons/drocket/draw = lsnd/WeaponsD/DualRocket/Draw.flac
+weapons/drocket/pickup = lsnd/WeaponsD/DualRocket/Pickup.flac
 $random weapons/drocket/firel { weapons/drocket/firel1 weapons/drocket/firel2 weapons/drocket/firel3 }
 $random weapons/drocket/firer { weapons/drocket/firer1 weapons/drocket/firer2 weapons/drocket/firer3 }
-weapons/fortune/fire = lsnd/WeaponsD/FortuneGun/Fire
-weapons/fortune/hit = lsnd/WeaponsD/FortuneGun/Hit
-weapons/fortune/spark = lsnd/WeaponsD/FortuneGun/Spark
-weapons/fortune/charge = lsnd/WeaponsD/FortuneGun/Charge
-weapons/fortune/draw = lsnd/WeaponsD/FortuneGun/Draw
-weapons/fortune/load = lsnd/WeaponsD/FortuneGun/Load
-weapons/fortune/pickup = lsnd/WeaponsD/FortuneGun/Pickup
+weapons/fortune/fire = lsnd/WeaponsD/FortuneGun/Fire.flac
+weapons/fortune/hit = lsnd/WeaponsD/FortuneGun/Hit.flac
+weapons/fortune/spark = lsnd/WeaponsD/FortuneGun/Spark.flac
+weapons/fortune/charge = lsnd/WeaponsD/FortuneGun/Charge.flac
+weapons/fortune/draw = lsnd/WeaponsD/FortuneGun/Draw.flac
+weapons/fortune/load = lsnd/WeaponsD/FortuneGun/Load.flac
+weapons/fortune/pickup = lsnd/WeaponsD/FortuneGun/Pickup.flac
 $limit weapons/fortune/hit 0
 $limit weapons/fortune/spark 0
-weapons/rems/fire = lsnd/WeaponsD/Rems/Fire
-weapons/rems/charge = lsnd/WeaponsD/Rems/Charge
-weapons/rems/fireshield = lsnd/WeaponsD/Rems/FireShield
-weapons/rems/shieldfire = lsnd/WeaponsD/Rems/ShieldFire
-weapons/rems/shieldshot = lsnd/WeaponsD/Rems/ShieldShot
-weapons/rems/shieldhit = lsnd/WeaponsD/Rems/ShieldHit
-weapons/rems/empty = lsnd/WeaponsD/Rems/FireEmpty
-weapons/rems/draw = lsnd/WeaponsD/Rems/Draw
-weapons/rems/wail = lsnd/WeaponsD/Rems/Wail
-weapons/rems/firefinish = lsnd/WeaponsD/Rems/FireFinish
-weapons/rems/pickup = lsnd/WeaponsD/Rems/Pickup
+weapons/rems/fire = lsnd/WeaponsD/Rems/Fire.flac
+weapons/rems/charge = lsnd/WeaponsD/Rems/Charge.flac
+weapons/rems/fireshield = lsnd/WeaponsD/Rems/FireShield.flac
+weapons/rems/shieldfire = lsnd/WeaponsD/Rems/ShieldFire.wav
+weapons/rems/shieldshot = lsnd/WeaponsD/Rems/ShieldShot.wav
+weapons/rems/shieldhit = lsnd/WeaponsD/Rems/ShieldHit.wav
+weapons/rems/empty = lsnd/WeaponsD/Rems/FireEmpty.flac
+weapons/rems/draw = lsnd/WeaponsD/Rems/Draw.flac
+weapons/rems/wail = lsnd/WeaponsD/Rems/Wail.flac
+weapons/rems/firefinish = lsnd/WeaponsD/Rems/FireFinish.flac
+weapons/rems/pickup = lsnd/WeaponsD/Rems/Pickup.flac
 $limit weapons/rems/shieldshot 0
 $limit weapons/rems/shieldfire 0
 $alias weapons/unknown/pickup YOUSONOFABITCH
 $alias weapons/fist/pickup MMMMHMHMMMHMMM
-weapons/knife/swing1 = lsnd/WeaponsM/Knife/Fire1
-weapons/knife/swing2 = lsnd/WeaponsM/Knife/Fire2
-weapons/knife/hitflesh = lsnd/WeaponsM/Knife/Hit
-weapons/knife/hitwall = lsnd/WeaponsM/Knife/HitWall
+weapons/knife/swing1 = lsnd/WeaponsM/Knife/Fire1.flac
+weapons/knife/swing2 = lsnd/WeaponsM/Knife/Fire2.flac
+weapons/knife/hitflesh = lsnd/WeaponsM/Knife/Hit.flac
+weapons/knife/hitwall = lsnd/WeaponsM/Knife/HitWall.flac
 $limit weapons/knife/hitflesh 0
 $limit weapons/knife/hitwall 0
-weapons/pistol/fire = lsnd/WeaponsM/Pistol/Fire
-weapons/pistol/fireauto = lsnd/WeaponsM/Pistol/FireAuto
-weapons/pistol/reload = lsnd/WeaponsM/Pistol/Reload
-weapons/pistol/zoomin = lsnd/WeaponsM/Pistol/ScopeIn
-weapons/pistol/zoomout = lsnd/WeaponsM/Pistol/ScopeOut
-weapons/pistol/pickup = lsnd/WeaponsM/Pistol/Pickup
+weapons/pistol/fire = lsnd/WeaponsM/Pistol/Fire.flac
+weapons/pistol/fireauto = lsnd/WeaponsM/Pistol/FireAuto.flac
+weapons/pistol/reload = lsnd/WeaponsM/Pistol/Reload.flac
+weapons/pistol/zoomin = lsnd/WeaponsM/Pistol/ScopeIn.flac
+weapons/pistol/zoomout = lsnd/WeaponsM/Pistol/ScopeOut.flac
+weapons/pistol/pickup = lsnd/WeaponsM/Pistol/Pickup.flac
 $alias weapons/pistol/draw weapons/pistol/pickup
-weapons/pistol/plasma/fire = lsnd/WeaponsM/Pistol/FirePlasma
+weapons/pistol/plasma/fire = lsnd/WeaponsM/Pistol/FirePlasma.flac
 $alias weapons/pistol/plasma/explode weapons/plasdiff/explode
 $limit weapons/pistol/plasma/explode 0
 $volume weapons/pistol/plasma/explode 0.15
-weapons/revolver/fire = lsnd/WeaponsM/Revolver/Fire
-weapons/revolver/draw = lsnd/WeaponsM/Revolver/Draw
-weapons/revolver/pickup = lsnd/WeaponsM/Revolver/Pickup
-weapons/revolver/reload = lsnd/WeaponsM/Revolver/Reload
-weapons/shotgun/fire = lsnd/WeaponsM/Shotgun/FireFull
-weapons/shotgun/fire2 = lsnd/WeaponsM/Shotgun/FireFull2
-weapons/shotgun/open = lsnd/WeaponsM/Shotgun/PumpOpen
-weapons/shotgun/close = lsnd/WeaponsM/Shotgun/PumpClose
-weapons/shotgun/zoomin = lsnd/WeaponsM/Shotgun/ScopeIn
-weapons/shotgun/zoomout = lsnd/WeaponsM/Shotgun/ScopeOut
-weapons/shotgun/pickup = lsnd/WeaponsM/Shotgun/Pickup
-weapons/shotgun/just1 = lsnd/WeaponsM/Shotgun/Just1
-weapons/shotgun/just2 = lsnd/WeaponsM/Shotgun/Just2
-weapons/shotgun/just3 = lsnd/WeaponsM/Shotgun/Just3
+weapons/revolver/fire = lsnd/WeaponsM/Revolver/Fire.ogg
+weapons/revolver/draw = lsnd/WeaponsM/Revolver/Draw.flac
+weapons/revolver/pickup = lsnd/WeaponsM/Revolver/Pickup.flac
+weapons/revolver/reload = lsnd/WeaponsM/Revolver/Reload.flac
+weapons/shotgun/fire = lsnd/WeaponsM/Shotgun/FireFull.flac
+weapons/shotgun/fire2 = lsnd/WeaponsM/Shotgun/FireFull2.flac
+weapons/shotgun/open = lsnd/WeaponsM/Shotgun/PumpOpen.flac
+weapons/shotgun/close = lsnd/WeaponsM/Shotgun/PumpClose.flac
+weapons/shotgun/zoomin = lsnd/WeaponsM/Shotgun/ScopeIn.flac
+weapons/shotgun/zoomout = lsnd/WeaponsM/Shotgun/ScopeOut.flac
+weapons/shotgun/pickup = lsnd/WeaponsM/Shotgun/Pickup.flac
+weapons/shotgun/just1 = lsnd/WeaponsM/Shotgun/Just1.flac
+weapons/shotgun/just2 = lsnd/WeaponsM/Shotgun/Just2.flac
+weapons/shotgun/just3 = lsnd/WeaponsM/Shotgun/Just3.flac
 $alias weapons/shotgun/draw weapons/shotgun/open
 $random weapons/shotgun/just { weapons/shotgun/just1 weapons/shotgun/just2 weapons/shotgun/just3 }
-weapons/shotgun/gauss/fire = lsnd/WeaponsM/Shotgun/Gauss/ShootGunBang
-weapons/shotgun/gauss/puff = lsnd/WeaponsM/Shotgun/Gauss/Fire
-weapons/shotgun/gauss/spark1 = lsnd/WeaponsM/Shotgun/Gauss/Spark1
-weapons/shotgun/gauss/spark2 = lsnd/WeaponsM/Shotgun/Gauss/Spark2
-weapons/shotgun/gauss/spark3 = lsnd/WeaponsM/Shotgun/Gauss/Spark3
-weapons/shotgun/gauss/reloadout = lsnd/WeaponsM/Shotgun/Gauss/ReloadOut
-weapons/shotgun/gauss/reloadin = lsnd/WeaponsM/Shotgun/Gauss/ReloadIn
+weapons/shotgun/gauss/fire = lsnd/WeaponsM/Shotgun/Gauss/ShootGunBang.flac
+weapons/shotgun/gauss/puff = lsnd/WeaponsM/Shotgun/Gauss/Fire.flac
+weapons/shotgun/gauss/spark1 = lsnd/WeaponsM/Shotgun/Gauss/Spark1.flac
+weapons/shotgun/gauss/spark2 = lsnd/WeaponsM/Shotgun/Gauss/Spark2.flac
+weapons/shotgun/gauss/spark3 = lsnd/WeaponsM/Shotgun/Gauss/Spark3.flac
+weapons/shotgun/gauss/reloadout = lsnd/WeaponsM/Shotgun/Gauss/ReloadOut.flac
+weapons/shotgun/gauss/reloadin = lsnd/WeaponsM/Shotgun/Gauss/ReloadIn.flac
 $random weapons/shotgun/gauss/spark { weapons/shotgun/gauss/spark1 weapons/shotgun/gauss/spark2 weapons/shotgun/gauss/spark3 }
 $limit weapons/shotgun/gauss/puff 0
 $limit weapons/shotgun/gauss/spark 0
-weapons/shotgun/poison/fire = lsnd/WeaponsM/Shotgun/Poison/FireFull
+weapons/shotgun/poison/fire = lsnd/WeaponsM/Shotgun/Poison/FireFull.ogg
 $alias weapons/shotgun/poison/acid weapons/shotgun/gauss/spark
-weapons/ssg/fire = lsnd/WeaponsM/SuperShotgun/Fire
-weapons/ssg/pickup = lsnd/WeaponsM/SuperShotgun/Pickup
-weapons/ssg/close = lsnd/WeaponsM/SuperShotgun/Close
-weapons/ssg/open = lsnd/WeaponsM/SuperShotgun/Open
-weapons/ssg/load = lsnd/WeaponsM/SuperShotgun/Load
-weapons/ssg/empty = lsnd/WeaponsM/SuperShotgun/Empty
-weapons/ssg/draw = lsnd/WeaponsM/SuperShotgun/Draw
-weapons/lshotgun/fire = lsnd/WeaponsM/LazShotgun/Fire
-weapons/lshotgun/open = lsnd/WeaponsM/LazShotgun/Open
-weapons/lshotgun/close = lsnd/WeaponsM/LazShotgun/Close
-weapons/lshotgun/draw = lsnd/WeaponsM/LazShotgun/Draw
+weapons/ssg/fire = lsnd/WeaponsM/SuperShotgun/Fire.flac
+weapons/ssg/pickup = lsnd/WeaponsM/SuperShotgun/Pickup.flac
+weapons/ssg/close = lsnd/WeaponsM/SuperShotgun/Close.flac
+weapons/ssg/open = lsnd/WeaponsM/SuperShotgun/Open.flac
+weapons/ssg/load = lsnd/WeaponsM/SuperShotgun/Load.flac
+weapons/ssg/empty = lsnd/WeaponsM/SuperShotgun/Empty.flac
+weapons/ssg/draw = lsnd/WeaponsM/SuperShotgun/Draw.flac
+weapons/lshotgun/fire = lsnd/WeaponsM/LazShotgun/Fire.flac
+weapons/lshotgun/open = lsnd/WeaponsM/LazShotgun/Open.flac
+weapons/lshotgun/close = lsnd/WeaponsM/LazShotgun/Close.flac
+weapons/lshotgun/draw = lsnd/WeaponsM/LazShotgun/Draw.flac
 $alias weapons/lshotgun/pickup weapons/lshotgun/open
-weapons/rifle/fire1 = lsnd/WeaponsM/CombatRifle/Fire1
-weapons/rifle/fire2 = lsnd/WeaponsM/CombatRifle/Fire2
-weapons/rifle/fire3 = lsnd/WeaponsM/CombatRifle/Fire3
-weapons/rifle/firesnipe1 = lsnd/WeaponsM/CombatRifle/FireSnipe1
-weapons/rifle/firesnipe2 = lsnd/WeaponsM/CombatRifle/FireSnipe2
-weapons/rifle/firesnipe3 = lsnd/WeaponsM/CombatRifle/FireSnipe3
-weapons/rifle/rldmount = lsnd/WeaponsM/CombatRifle/ReloadMount
-weapons/rifle/pickup = lsnd/WeaponsM/CombatRifle/Pickup
-weapons/rifle/draw = lsnd/WeaponsM/CombatRifle/Draw
-weapons/rifle/firemode = lsnd/WeaponsM/CombatRifle/SetFiremode
-weapons/rifle/grenade = lsnd/WeaponsM/CombatRifle/FireGrenade
-weapons/rifle/reloadout = lsnd/WeaponsM/CombatRifle/ReloadOut
-weapons/rifle/reloadin = lsnd/WeaponsM/CombatRifle/ReloadIn
-weapons/rifle/grenadebounce1 = lsnd/WeaponsM/CombatRifle/GrenadeBounce1
-weapons/rifle/grenadebounce2 = lsnd/WeaponsM/CombatRifle/GrenadeBounce2
-weapons/rifle/grenadebounce3 = lsnd/WeaponsM/CombatRifle/GrenadeBounce3
+weapons/rifle/fire1 = lsnd/WeaponsM/CombatRifle/Fire1.flac
+weapons/rifle/fire2 = lsnd/WeaponsM/CombatRifle/Fire2.flac
+weapons/rifle/fire3 = lsnd/WeaponsM/CombatRifle/Fire3.flac
+weapons/rifle/firesnipe1 = lsnd/WeaponsM/CombatRifle/FireSnipe1.flac
+weapons/rifle/firesnipe2 = lsnd/WeaponsM/CombatRifle/FireSnipe2.flac
+weapons/rifle/firesnipe3 = lsnd/WeaponsM/CombatRifle/FireSnipe3.flac
+weapons/rifle/rldmount = lsnd/WeaponsM/CombatRifle/ReloadMount.flac
+weapons/rifle/pickup = lsnd/WeaponsM/CombatRifle/Pickup.flac
+weapons/rifle/draw = lsnd/WeaponsM/CombatRifle/Draw.flac
+weapons/rifle/firemode = lsnd/WeaponsM/CombatRifle/SetFiremode.flac
+weapons/rifle/grenade = lsnd/WeaponsM/CombatRifle/FireGrenade.flac
+weapons/rifle/reloadout = lsnd/WeaponsM/CombatRifle/ReloadOut.flac
+weapons/rifle/reloadin = lsnd/WeaponsM/CombatRifle/ReloadIn.flac
+weapons/rifle/grenadebounce1 = lsnd/WeaponsM/CombatRifle/GrenadeBounce1.flac
+weapons/rifle/grenadebounce2 = lsnd/WeaponsM/CombatRifle/GrenadeBounce2.flac
+weapons/rifle/grenadebounce3 = lsnd/WeaponsM/CombatRifle/GrenadeBounce3.flac
 $alias weapons/rifle/firero weapons/runout
 $random weapons/rifle/grenadebounce { weapons/rifle/grenadebounce1 weapons/rifle/grenadebounce2 weapons/rifle/grenadebounce3 }
 $random weapons/rifle/fire { weapons/rifle/fire1 weapons/rifle/fire2 weapons/rifle/fire3 }
 $random weapons/rifle/firesnipe { weapons/rifle/firesnipe1 weapons/rifle/firesnipe2 weapons/rifle/firesnipe3 }
-weapons/rcw/fire = lsnd/WeaponsM/CombatRifle/FireLaz
-weapons/rcw/firesnipe = lsnd/WeaponsM/CombatRifle/FireLazSnipe
+weapons/rcw/fire = lsnd/WeaponsM/CombatRifle/FireLaz.ogg
+weapons/rcw/firesnipe = lsnd/WeaponsM/CombatRifle/FireLazSnipe.ogg
 $volume weapons/rcw/fire 0.7
 $volume weapons/rcw/firesnipe 0.7
-weapons/sniper/fire = lsnd/WeaponsM/SniperRifle/Fire
-weapons/sniper/boltback = lsnd/WeaponsM/SniperRifle/BoltBack
-weapons/sniper/boltforward = lsnd/WeaponsM/SniperRifle/BoltForward
-weapons/sniper/magout = lsnd/WeaponsM/SniperRifle/MagOut
-weapons/sniper/magin = lsnd/WeaponsM/SniperRifle/MagIn
-weapons/sniper/draw = lsnd/WeaponsM/SniperRifle/Draw
+weapons/sniper/fire = lsnd/WeaponsM/SniperRifle/Fire.ogg
+weapons/sniper/boltback = lsnd/WeaponsM/SniperRifle/BoltBack.flac
+weapons/sniper/boltforward = lsnd/WeaponsM/SniperRifle/BoltForward.flac
+weapons/sniper/magout = lsnd/WeaponsM/SniperRifle/MagOut.flac
+weapons/sniper/magin = lsnd/WeaponsM/SniperRifle/MagIn.flac
+weapons/sniper/draw = lsnd/WeaponsM/SniperRifle/Draw.flac
 $alias weapons/sniper/zoomin weapons/shotgun/zoomin
 $alias weapons/sniper/zoomout weapons/shotgun/zoomout
-weapons/rocket/fire1 = lsnd/WeaponsM/GrenadeLauncher/Fire
-weapons/rocket/fire2 = lsnd/WeaponsM/GrenadeLauncher/Fire1
-weapons/rocket/fire3 = lsnd/WeaponsM/GrenadeLauncher/Fire2
-weapons/rocket/empty = lsnd/WeaponsM/GrenadeLauncher/FireEmpty
-weapons/rocket/pickup = lsnd/WeaponsM/GrenadeLauncher/Pickup
-weapons/rocket/draw = lsnd/WeaponsM/GrenadeLauncher/Draw
-weapons/rocket/load = lsnd/WeaponsM/GrenadeLauncher/Load
-weapons/rocket/lock = lsnd/WeaponsM/GrenadeLauncher/Lock
-weapons/rocket/launch = lsnd/WeaponsM/GrenadeLauncher/Launch
-weapons/rocket/setalt = lsnd/WeaponsM/GrenadeLauncher/SetAlt
-weapons/rocket/grenade = lsnd/WeaponsM/GrenadeLauncher/FireGrenade
-weapons/rocket/mark = lsnd/WeaponsM/GrenadeLauncher/Mark
+weapons/rocket/fire1 = lsnd/WeaponsM/GrenadeLauncher/Fire.ogg
+weapons/rocket/fire2 = lsnd/WeaponsM/GrenadeLauncher/Fire1.ogg
+weapons/rocket/fire3 = lsnd/WeaponsM/GrenadeLauncher/Fire2.ogg
+weapons/rocket/empty = lsnd/WeaponsM/GrenadeLauncher/FireEmpty.flac
+weapons/rocket/pickup = lsnd/WeaponsM/GrenadeLauncher/Pickup.flac
+weapons/rocket/draw = lsnd/WeaponsM/GrenadeLauncher/Draw.flac
+weapons/rocket/load = lsnd/WeaponsM/GrenadeLauncher/Load.flac
+weapons/rocket/lock = lsnd/WeaponsM/GrenadeLauncher/Lock.flac
+weapons/rocket/launch = lsnd/WeaponsM/GrenadeLauncher/Launch.flac
+weapons/rocket/setalt = lsnd/WeaponsM/GrenadeLauncher/SetAlt.flac
+weapons/rocket/grenade = lsnd/WeaponsM/GrenadeLauncher/FireGrenade.ogg
+weapons/rocket/mark = lsnd/WeaponsM/GrenadeLauncher/Mark.flac
 $random weapons/rocket/fire { weapons/rocket/fire1 weapons/rocket/fire2 weapons/rocket/fire3 }
-weapons/cannon/fire = lsnd/WeaponsM/OmegaCannon/Fire
-weapons/cannon/firebig = lsnd/WeaponsM/OmegaCannon/FireBig
-weapons/cannon/fired = lsnd/WeaponsM/OmegaCannon/FireDark
-weapons/cannon/prepare = lsnd/WeaponsM/OmegaCannon/Prepare
-weapons/cannon/explode = lsnd/WeaponsM/OmegaCannon/Explode
-weapons/cannon/empty = lsnd/WeaponsM/OmegaCannon/FireEmpty
-weapons/cannon/pickup = lsnd/WeaponsM/OmegaCannon/Pickup
-weapons/cannon/draw = lsnd/WeaponsM/OmegaCannon/Draw
-weapons/cannon/impactfloor = lsnd/WeaponsM/OmegaCannon/ImpactFloor
-weapons/cannon/impactwall = lsnd/WeaponsM/OmegaCannon/ImpactWall
+weapons/cannon/fire = lsnd/WeaponsM/OmegaCannon/Fire.flac
+weapons/cannon/firebig = lsnd/WeaponsM/OmegaCannon/FireBig.flac
+weapons/cannon/fired = lsnd/WeaponsM/OmegaCannon/FireDark.flac
+weapons/cannon/prepare = lsnd/WeaponsM/OmegaCannon/Prepare.flac
+weapons/cannon/explode = lsnd/WeaponsM/OmegaCannon/Explode.flac
+weapons/cannon/empty = lsnd/WeaponsM/OmegaCannon/FireEmpty.flac
+weapons/cannon/pickup = lsnd/WeaponsM/OmegaCannon/Pickup.flac
+weapons/cannon/draw = lsnd/WeaponsM/OmegaCannon/Draw.flac
+weapons/cannon/impactfloor = lsnd/WeaponsM/OmegaCannon/ImpactFloor.flac
+weapons/cannon/impactwall = lsnd/WeaponsM/OmegaCannon/ImpactWall.flac
 $limit weapons/cannon/explode 0
 $limit weapons/cannon/impactfloor 0
 $limit weapons/cannon/impactwall 0
 $attenuation weapons/cannon/explode 0.5
 $attenuation weapons/cannon/impactfloor 0.8
 $attenuation weapons/cannon/impactwall 0.8
-weapons/punct/fire = lsnd/WeaponsM/OmegaCannon/Punctuator/Fire
-weapons/punct/load = lsnd/WeaponsM/OmegaCannon/Punctuator/Load
-weapons/rail/fire = lsnd/WeaponsM/OmegaCannon/Railgun/Fire
-weapons/rail/impact = lsnd/WeaponsM/OmegaCannon/Railgun/Impact
-weapons/rail/charge = lsnd/WeaponsM/OmegaCannon/Railgun/Charge
+weapons/punct/fire = lsnd/WeaponsM/OmegaCannon/Punctuator/Fire.ogg
+weapons/punct/load = lsnd/WeaponsM/OmegaCannon/Punctuator/Load.flac
+weapons/rail/fire = lsnd/WeaponsM/OmegaCannon/Railgun/Fire.flac
+weapons/rail/impact = lsnd/WeaponsM/OmegaCannon/Railgun/Impact.ogg
+weapons/rail/charge = lsnd/WeaponsM/OmegaCannon/Railgun/Charge.ogg
 $limit weapons/rail/impact 0
 $attenuation weapons/rail/impact 0.8
-weapons/dark/wind = lsnd/WeaponsM/DarkCannon/Wind
-weapons/dark/water1 = lsnd/WeaponsM/DarkCannon/Water
-weapons/dark/water2 = lsnd/WeaponsM/DarkCannon/Water2
-weapons/dark/water3 = lsnd/WeaponsM/DarkCannon/Water3
-weapons/dark/fire1 = lsnd/WeaponsM/DarkCannon/Fire
-weapons/dark/fire2 = lsnd/WeaponsM/DarkCannon/Fire2
-weapons/dark/fire3 = lsnd/WeaponsM/DarkCannon/Fire3
-weapons/dark/impact1 = lsnd/WeaponsM/DarkCannon/Impact
-weapons/dark/impact2 = lsnd/WeaponsM/DarkCannon/Impact2
-weapons/dark/impact3 = lsnd/WeaponsM/DarkCannon/Impact3
+weapons/dark/wind = lsnd/WeaponsM/DarkCannon/Wind.ogg
+weapons/dark/water1 = lsnd/WeaponsM/DarkCannon/Water.ogg
+weapons/dark/water2 = lsnd/WeaponsM/DarkCannon/Water2.ogg
+weapons/dark/water3 = lsnd/WeaponsM/DarkCannon/Water3.flac
+weapons/dark/fire1 = lsnd/WeaponsM/DarkCannon/Fire.ogg
+weapons/dark/fire2 = lsnd/WeaponsM/DarkCannon/Fire2.ogg
+weapons/dark/fire3 = lsnd/WeaponsM/DarkCannon/Fire3.ogg
+weapons/dark/impact1 = lsnd/WeaponsM/DarkCannon/Impact.ogg
+weapons/dark/impact2 = lsnd/WeaponsM/DarkCannon/Impact2.ogg
+weapons/dark/impact3 = lsnd/WeaponsM/DarkCannon/Impact3.ogg
 $random weapons/dark/water { weapons/dark/water1 weapons/dark/water2 weapons/dark/water3 }
 $random weapons/dark/fire { weapons/dark/fire1 weapons/dark/fire2 weapons/dark/fire3 }
 $random weapons/dark/impact { weapons/dark/impact1 weapons/dark/impact2 weapons/dark/impact3 }
 $limit weapons/dark/impact 0
-weapons/redrifle/fire = lsnd/WeaponsT/RedRifle/Fire
-weapons/redrifle/bolt = lsnd/WeaponsT/RedRifle/Bolt
-weapons/magnum/fire1 = lsnd/WeaponsW/Magnum/Fire
-weapons/magnum/fire2 = lsnd/WeaponsW/Magnum/Fire2
-weapons/magnum/fireback = lsnd/WeaponsW/Magnum/FireBacking
-weapons/magnum/reload = lsnd/WeaponsW/Magnum/Reload
-weapons/magnum/pickup = lsnd/WeaponsW/Magnum/Pickup
+weapons/redrifle/fire = lsnd/WeaponsT/RedRifle/Fire.flac
+weapons/redrifle/bolt = lsnd/WeaponsT/RedRifle/Bolt.flac
+weapons/magnum/fire1 = lsnd/WeaponsW/Magnum/Fire.flac
+weapons/magnum/fire2 = lsnd/WeaponsW/Magnum/Fire2.flac
+weapons/magnum/fireback = lsnd/WeaponsW/Magnum/FireBacking.flac
+weapons/magnum/reload = lsnd/WeaponsW/Magnum/Reload.flac
+weapons/magnum/pickup = lsnd/WeaponsW/Magnum/Pickup.flac
 $random weapons/magnum/fire { weapons/magnum/fire1 weapons/magnum/fire2 }
 $alias weapons/magnum/draw weapons/magnum/pickup
-weapons/cfist/pickup = lsnd/Weapons/ChargeFist/Pickup
-weapons/cfist/fire1 = lsnd/Weapons/ChargeFist/Fire1
-weapons/cfist/fire2 = lsnd/Weapons/ChargeFist/Fire2
-weapons/cfist/fire3 = lsnd/Weapons/ChargeFist/Fire3
-weapons/cfist/ready = lsnd/Weapons/ChargeFist/Ready
-weapons/cfist/charge = lsnd/Weapons/ChargeFist/Charge
-weapons/cfist/chargeend = lsnd/Weapons/ChargeFist/ChargeEnd
-weapons/cfist/hit1 = lsnd/Weapons/ChargeFist/HitFlesh1
-weapons/cfist/hit2 = lsnd/Weapons/ChargeFist/HitFlesh2
-weapons/cfist/hit3 = lsnd/Weapons/ChargeFist/HitFlesh3
-weapons/cfist/hitwall1 = lsnd/Weapons/ChargeFist/HitWall1
-weapons/cfist/hitwall2 = lsnd/Weapons/ChargeFist/HitWall2
-weapons/cfist/hitwall3 = lsnd/Weapons/ChargeFist/HitWall3
-weapons/cfist/hitwall4 = lsnd/Weapons/ChargeFist/HitWall4
+weapons/cfist/pickup = lsnd/Weapons/ChargeFist/Pickup.flac
+weapons/cfist/fire1 = lsnd/Weapons/ChargeFist/Fire1.flac
+weapons/cfist/fire2 = lsnd/Weapons/ChargeFist/Fire2.flac
+weapons/cfist/fire3 = lsnd/Weapons/ChargeFist/Fire3.flac
+weapons/cfist/ready = lsnd/Weapons/ChargeFist/Ready.flac
+weapons/cfist/charge = lsnd/Weapons/ChargeFist/Charge.ogg
+weapons/cfist/chargeend = lsnd/Weapons/ChargeFist/ChargeEnd.flac
+weapons/cfist/hit1 = lsnd/Weapons/ChargeFist/HitFlesh1.ogg
+weapons/cfist/hit2 = lsnd/Weapons/ChargeFist/HitFlesh2.ogg
+weapons/cfist/hit3 = lsnd/Weapons/ChargeFist/HitFlesh3.ogg
+weapons/cfist/hitwall1 = lsnd/Weapons/ChargeFist/HitWall1.ogg
+weapons/cfist/hitwall2 = lsnd/Weapons/ChargeFist/HitWall2.ogg
+weapons/cfist/hitwall3 = lsnd/Weapons/ChargeFist/HitWall3.ogg
+weapons/cfist/hitwall4 = lsnd/Weapons/ChargeFist/HitWall4.ogg
 $random weapons/cfist/hit { weapons/cfist/hit1 weapons/cfist/hit2 weapons/cfist/hit3 }
 $random weapons/cfist/hitwall { weapons/cfist/hitwall1 weapons/cfist/hitwall2 weapons/cfist/hitwall3 weapons/cfist/hitwall4 }
 $random weapons/cfist/fire { weapons/cfist/fire1 weapons/cfist/fire2 weapons/cfist/fire3 }
 $limit weapons/cfist/fire 0
 $limit weapons/cfist/hit 0
 $limit weapons/cfist/hitwall 0
-weapons/missile/fire = lsnd/Weapons/MissileLauncher/Fire
-weapons/missile/empty = lsnd/Weapons/MissileLauncher/FireEmpty
-weapons/missile/reloadout = lsnd/Weapons/MissileLauncher/ReloadOut
-weapons/missile/reloadin = lsnd/Weapons/MissileLauncher/ReloadIn
-weapons/missile/draw = lsnd/Weapons/MissileLauncher/Draw
-weapons/missile/explode = lsnd/Weapons/MissileLauncher/Explode
+weapons/missile/fire = lsnd/Weapons/MissileLauncher/Fire.flac
+weapons/missile/empty = lsnd/Weapons/MissileLauncher/FireEmpty.flac
+weapons/missile/reloadout = lsnd/Weapons/MissileLauncher/ReloadOut.flac
+weapons/missile/reloadin = lsnd/Weapons/MissileLauncher/ReloadIn.flac
+weapons/missile/draw = lsnd/Weapons/MissileLauncher/Draw.flac
+weapons/missile/explode = lsnd/Weapons/MissileLauncher/Explode.flac
 $limit weapons/missile/explode 0
 $attenuation weapons/missile/explode 0.8
-weapons/plasma/fire = lsnd/WeaponsM/PlasmaRifle/Fire
-weapons/plasma/altfire = lsnd/WeaponsM/PlasmaRifle/AltFire
-weapons/plasma/pickup = lsnd/WeaponsM/PlasmaRifle/Pickup
-weapons/plasma/empty = lsnd/WeaponsM/PlasmaRifle/FireEmpty
-weapons/plasma/draw = lsnd/WeaponsM/PlasmaRifle/Draw
-weapons/plasma/explode1 = lsnd/WeaponsM/PlasmaRifle/Explode1
-weapons/plasma/explode2 = lsnd/WeaponsM/PlasmaRifle/Explode2
-weapons/plasma/explode3 = lsnd/WeaponsM/PlasmaRifle/Explode3
+weapons/plasma/fire = lsnd/WeaponsM/PlasmaRifle/Fire.flac
+weapons/plasma/altfire = lsnd/WeaponsM/PlasmaRifle/AltFire.flac
+weapons/plasma/pickup = lsnd/WeaponsM/PlasmaRifle/Pickup.flac
+weapons/plasma/empty = lsnd/WeaponsM/PlasmaRifle/FireEmpty.flac
+weapons/plasma/draw = lsnd/WeaponsM/PlasmaRifle/Draw.flac
+weapons/plasma/explode1 = lsnd/WeaponsM/PlasmaRifle/Explode1.flac
+weapons/plasma/explode2 = lsnd/WeaponsM/PlasmaRifle/Explode2.flac
+weapons/plasma/explode3 = lsnd/WeaponsM/PlasmaRifle/Explode3.flac
 $random weapons/plasma/explode { weapons/plasma/explode1 weapons/plasma/explode2 weapons/plasma/explode3 }
 $limit weapons/plasma/explode 0
 $volume weapons/plasma/explode 0.5
-weapons/plasma/laser/fire_start = lsnd/WeaponsM/PlasmaRifle/Laser/FireStart
-weapons/plasma/laser/fire_hum = lsnd/WeaponsM/PlasmaRifle/Laser/FireHum
-weapons/plasma/laser/fire_loop = lsnd/WeaponsM/PlasmaRifle/Laser/FireLoop
-weapons/plasma/laser/fire_end = lsnd/WeaponsM/PlasmaRifle/Laser/FireEnd
-weapons/plasma/laser/spark = lsnd/WeaponsM/PlasmaRifle/Laser/Spark
+weapons/plasma/laser/fire_start = lsnd/WeaponsM/PlasmaRifle/Laser/FireStart.flac
+weapons/plasma/laser/fire_hum = lsnd/WeaponsM/PlasmaRifle/Laser/FireHum.flac
+weapons/plasma/laser/fire_loop = lsnd/WeaponsM/PlasmaRifle/Laser/FireLoop.flac
+weapons/plasma/laser/fire_end = lsnd/WeaponsM/PlasmaRifle/Laser/FireEnd.flac
+weapons/plasma/laser/spark = lsnd/WeaponsM/PlasmaRifle/Laser/Spark.flac
 $limit weapons/plasma/laser/spark 0
-weapons/plasma/part/charge = lsnd/WeaponsM/PlasmaRifle/PartBeam/Charge
-weapons/plasma/part/fire = lsnd/WeaponsM/PlasmaRifle/PartBeam/Fire
-weapons/plasma/part/reloadout = lsnd/WeaponsM/PlasmaRifle/PartBeam/ReloadOut
-weapons/plasma/part/reloadin = lsnd/WeaponsM/PlasmaRifle/PartBeam/ReloadIn
+weapons/plasma/part/charge = lsnd/WeaponsM/PlasmaRifle/PartBeam/Charge.flac
+weapons/plasma/part/fire = lsnd/WeaponsM/PlasmaRifle/PartBeam/Fire.ogg
+weapons/plasma/part/reloadout = lsnd/WeaponsM/PlasmaRifle/PartBeam/ReloadOut.flac
+weapons/plasma/part/reloadin = lsnd/WeaponsM/PlasmaRifle/PartBeam/ReloadIn.flac
 $volume weapons/plasma/part/fire 0.7
-weapons/plasdiff/fire1 = lsnd/Weapons/PlasmaDiffuser/Fire
-weapons/plasdiff/fire2 = lsnd/Weapons/PlasmaDiffuser/Fire2
-weapons/plasdiff/fire3 = lsnd/Weapons/PlasmaDiffuser/Fire3
-weapons/plasdiff/draw = lsnd/Weapons/PlasmaDiffuser/Draw
-weapons/plasdiff/empty = lsnd/Weapons/PlasmaDiffuser/FireEmpty
-weapons/plasdiff/explode = lsnd/Weapons/PlasmaDiffuser/Explode
+weapons/plasdiff/fire1 = lsnd/Weapons/PlasmaDiffuser/Fire.flac
+weapons/plasdiff/fire2 = lsnd/Weapons/PlasmaDiffuser/Fire2.flac
+weapons/plasdiff/fire3 = lsnd/Weapons/PlasmaDiffuser/Fire3.flac
+weapons/plasdiff/draw = lsnd/Weapons/PlasmaDiffuser/Draw.flac
+weapons/plasdiff/empty = lsnd/Weapons/PlasmaDiffuser/FireEmpty.flac
+weapons/plasdiff/explode = lsnd/Weapons/PlasmaDiffuser/Explode.wav
 $limit weapons/plasdiff/explode 0
 $random weapons/plasdiff/fire { weapons/plasdiff/fire1 weapons/plasdiff/fire2 weapons/plasdiff/fire3 }
-doors/dr1_open = lsnd/World/Ambiance/DoorOpen
-doors/dr1_clos = lsnd/World/Ambiance/DoorClose
-doors/dr2_open = lsnd/World/Ambiance/DoorOpenFast
-doors/dr2_clos = lsnd/World/Ambiance/DoorCloseFast
-plats/pt1_strt = lsnd/World/Ambiance/PlatformStart
-plats/pt1_stop = lsnd/World/Ambiance/PlatformStop
-switches/normbutn = lsnd/World/Ambiance/SwitchNormal
-switches/exitbutn = lsnd/World/Ambiance/SwitchExit
-amb/rain = lsnd/World/Ambiance/Rain
-amb/wind = lsnd/World/Ambiance/Wind
-amb/rainout = lsnd/World/Ambiance/RainOut
-amb/windout = lsnd/World/Ambiance/WindOut
-amb/bigcomp = lsnd/World/Ambiance/BigComputer
-amb/alarmdist1 = lsnd/World/Ambiance/AlarmDistant
-amb/alarmdist2 = lsnd/World/Ambiance/AlarmDistant2
-amb/alarmdist3 = lsnd/World/Ambiance/AlarmDistant3
-amb/alarmdist4 = lsnd/World/Ambiance/AlarmDistant4
-amb/ship = lsnd/World/Ambiance/Ship
-amb/field = lsnd/World/Ambiance/NoEntry
-amb/vent = lsnd/World/Ambiance/VentPump
-amb/lightson = lsnd/World/Ambiance/LightsOn
-amb/computer = lsnd/World/Ambiance/Computer
-amb/fire = lsnd/World/Ambiance/Fire
+doors/dr1_open = lsnd/World/Ambiance/DoorOpen.flac
+doors/dr1_clos = lsnd/World/Ambiance/DoorClose.flac
+doors/dr2_open = lsnd/World/Ambiance/DoorOpenFast.flac
+doors/dr2_clos = lsnd/World/Ambiance/DoorCloseFast.flac
+plats/pt1_strt = lsnd/World/Ambiance/PlatformStart.flac
+plats/pt1_stop = lsnd/World/Ambiance/PlatformStop.flac
+switches/normbutn = lsnd/World/Ambiance/SwitchNormal.flac
+switches/exitbutn = lsnd/World/Ambiance/SwitchExit.flac
+amb/rain = lsnd/World/Ambiance/Rain.ogg
+amb/wind = lsnd/World/Ambiance/Wind.ogg
+amb/rainout = lsnd/World/Ambiance/RainOut.ogg
+amb/windout = lsnd/World/Ambiance/WindOut.ogg
+amb/bigcomp = lsnd/World/Ambiance/BigComputer.ogg
+amb/alarmdist1 = lsnd/World/Ambiance/AlarmDistant.flac
+amb/alarmdist2 = lsnd/World/Ambiance/AlarmDistant2.flac
+amb/alarmdist3 = lsnd/World/Ambiance/AlarmDistant3.flac
+amb/alarmdist4 = lsnd/World/Ambiance/AlarmDistant4.flac
+amb/ship = lsnd/World/Ambiance/Ship.flac
+amb/field = lsnd/World/Ambiance/NoEntry.flac
+amb/vent = lsnd/World/Ambiance/VentPump.wav
+amb/lightson = lsnd/World/Ambiance/LightsOn.flac
+amb/computer = lsnd/World/Ambiance/Computer.wav
+amb/fire = lsnd/World/Ambiance/Fire.wav
 $limit amb/fire 0
 $alias amb/spark weapons/erifle/zap
 $volume amb/spark 0.01
@@ -1238,36 +1240,36 @@ $ambient 42424 amb/field point 2.0 continuous 1.0
 $ambient 42425 amb/field point 4.0 continuous 1.0
 $ambient 42426 amb/vent point 5.0 continuous 0.5
 $ambient 42427 amb/computer point 2.0 continuous 1.0
-amb/lamp1 = lsnd/World/Ambiance/LampTall
-amb/lamp2 = lsnd/World/Ambiance/LampSmall
-amb/shatter1 = lsnd/World/Ambiance/GlassBreak1
-amb/shatter2 = lsnd/World/Ambiance/GlassBreak2
-amb/metalx = lsnd/World/Ambiance/MetalExplode
-amb/woodx = lsnd/World/Ambiance/WoodExplode
+amb/lamp1 = lsnd/World/Ambiance/LampTall.flac
+amb/lamp2 = lsnd/World/Ambiance/LampSmall.flac
+amb/shatter1 = lsnd/World/Ambiance/GlassBreak1.flac
+amb/shatter2 = lsnd/World/Ambiance/GlassBreak2.flac
+amb/metalx = lsnd/World/Ambiance/MetalExplode.flac
+amb/woodx = lsnd/World/Ambiance/WoodExplode.flac
 $random amb/shatter { amb/shatter1 amb/shatter2 }
 $volume amb/lamp1 0.3
 $volume amb/lamp2 0.3
 $volume amb/shatter 0.4
-misc/barrel/hit1 = lsnd/World/Barrel/Hit
-misc/barrel/hit2 = lsnd/World/Barrel/Hit2
+misc/barrel/hit1 = lsnd/World/Barrel/Hit.flac
+misc/barrel/hit2 = lsnd/World/Barrel/Hit2.flac
 $random misc/barrel/hit { misc/barrel/hit1 misc/barrel/hit2 }
-world/thunder1 = lsnd/World/Lightning
-world/thunder2 = lsnd/World/Lightning2
+world/thunder1 = lsnd/World/Lightning.flac
+world/thunder2 = lsnd/World/Lightning2.flac
 $random world/thunder { world/thunder1 world/thunder2 }
-world/splash/nukage = lsnd/World/Splashes/Nukage
-world/splash/water1 = lsnd/World/Splashes/Water1
-world/splash/water2 = lsnd/World/Splashes/Water2
-world/splash/water3 = lsnd/World/Splashes/Water3
-world/splash/water4 = lsnd/World/Splashes/Water4
-world/splash/water5 = lsnd/World/Splashes/Water5
-world/splash/sludge1 = lsnd/World/Splashes/Sludge1
-world/splash/sludge2 = lsnd/World/Splashes/Sludge2
-world/splash/sludge3 = lsnd/World/Splashes/Sludge3
-world/splash/sludge4 = lsnd/World/Splashes/Sludge4
-world/splash/lava1 = lsnd/World/Splashes/Lava1
-world/splash/lava2 = lsnd/World/Splashes/Lava2
-world/splash/lava3 = lsnd/World/Splashes/Lava3
-world/splash/lava4 = lsnd/World/Splashes/Lava4
+world/splash/nukage = lsnd/World/Splashes/Nukage.flac
+world/splash/water1 = lsnd/World/Splashes/Water1.flac
+world/splash/water2 = lsnd/World/Splashes/Water2.flac
+world/splash/water3 = lsnd/World/Splashes/Water3.flac
+world/splash/water4 = lsnd/World/Splashes/Water4.flac
+world/splash/water5 = lsnd/World/Splashes/Water5.flac
+world/splash/sludge1 = lsnd/World/Splashes/Sludge1.flac
+world/splash/sludge2 = lsnd/World/Splashes/Sludge2.flac
+world/splash/sludge3 = lsnd/World/Splashes/Sludge3.flac
+world/splash/sludge4 = lsnd/World/Splashes/Sludge4.flac
+world/splash/lava1 = lsnd/World/Splashes/Lava1.flac
+world/splash/lava2 = lsnd/World/Splashes/Lava2.flac
+world/splash/lava3 = lsnd/World/Splashes/Lava3.flac
+world/splash/lava4 = lsnd/World/Splashes/Lava4.flac
 $random world/splash/water { world/splash/water1 world/splash/water2 world/splash/water3 world/splash/water4 world/splash/water5 }
 $random world/splash/sludge { world/splash/sludge1 world/splash/sludge2 world/splash/sludge3 world/splash/sludge4 }
 $random world/splash/lava { world/splash/lava1 world/splash/lava2 world/splash/lava3 world/splash/lava4 }

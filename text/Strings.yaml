@@ -172,7 +172,6 @@ sm_:
    - AddSection
    - AddStatFx
    - AdrenalineCheck
-   - SoundAlert
    - CheckLump
    - DelearSprite
    - DeleteItem
@@ -191,6 +190,7 @@ sm_:
    - Height
    - IonizeFX
    - JumpZ
+   - KhandaPower
    - LA
    - LB
    - LC
@@ -224,6 +224,7 @@ sm_:
    - Set
    - SetFrozen
    - SetTeleFogTo
+   - SoundAlert
    - SpawnBoss
    - StartSound
    - SurgeOfDestiny
@@ -272,6 +273,7 @@ so_:
    - GEExplosion
    - Hulgyon
    - Ionized
+   - Khanda
    - ManaAmmo
    - ManaLeak
    - ManaPickup
@@ -395,8 +397,11 @@ sp_:
    - HUD_ZoomOverlay:      HUD:ZoomOverlay
    - MagicSel_BG:          MagicSel:BG
    - SubWepBack:           HUD_D:SubWepBack
+   - SubWepBack2:          HUD_D:SubWepBack2
    - SubWepBar1:           HUD_D:SubWepBar1
    - SubWepBar2:           HUD_D:SubWepBar2
+   - SubWepFist:           HUD_D:SubWepFist
+   - SubWepFront:          HUD_D:SubWepFront
    - SubWepUse:            HUD_D:SubWepUse
    - Terminal_Teleport:    Terminal:Teleport
    - UI_ArmorInter:        UI:ArmorInter
@@ -533,6 +538,7 @@ sl_:
    - enter_fmt:           ENTER_FMT
    - equip:               EQUIP
    - free:                FREE
+   - go_kill:             GO_KILL
    - gui_textbox:         GUI_TEXTBOX
    - inv_hints:           INV_HINTS
    - jet:                 JET
@@ -645,6 +651,7 @@ ss_:
    - misc_telein:              misc/telein
    - misc_teleout:             misc/teleout
    - player_YOUVEGOTMAIL:      player/YOUVEGOTMAIL
+   - player_ari_float:         player/ari/float
    - player_ari_shield_break:  player/ari/shield/break
    - player_ari_shield_regend: player/ari/shield/regend
    - player_ari_shield_regenl: player/ari/shield/regenl
@@ -696,6 +703,7 @@ ss_:
    - player_zoomout:           player/zoomout
    - weapons_cercle_attack:    weapons/cercle/attack
    - weapons_cercle_begin:     weapons/cercle/begin
+   - weapons_khanda_pwup:      weapons/khanda/pwup
    - weapons_rifle_firemode:   weapons/rifle/firemode
    - weapons_rocket_mark:      weapons/rocket/mark
    - weapons_subweapon_charge: weapons/subweapon/charge
@@ -801,12 +809,26 @@ ARRAYS:
    - Shrapnel
 
    subwep_act:
-   - ":HUD_D:SubWep0"
-   - ":HUD_D:SubWep1"
-   - ":HUD_D:SubWep2"
-   - ":HUD_D:SubWep3"
-   - ":HUD_D:SubWep4"
-   - ":HUD_D:SubWep5"
+   - ":HUD_D:SubWepA0"
+   - ":HUD_D:SubWepA1"
+   - ":HUD_D:SubWepA2"
+   - ":HUD_D:SubWepA3"
+   - ":HUD_D:SubWepA4"
+
+   subwep_up_1:
+   - ":HUD_D:SubWepUp4"
+   - ":HUD_D:SubWepUp3"
+   - ":HUD_D:SubWepUp2"
+   - ":HUD_D:SubWepUp1"
+   - ":HUD_D:SubWepUp0"
+
+   subwep_up_2:
+   - ":HUD_D:SubWepUp9"
+   - ":HUD_D:SubWepUp8"
+   - ":HUD_D:SubWepUp7"
+   - ":HUD_D:SubWepUp6"
+   - ":HUD_D:SubWepUp5"
+   - ":HUD_D:SubWepUp0"
 
    upgr_categ: [
 #define upgr_category_x(name) LANG "CAT_" #name,

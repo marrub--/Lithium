@@ -7,14 +7,14 @@
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
 # World
-explosion1 lsnd/Explosion
-explosion2 lsnd/Explosion2
-explosion3 lsnd/Explosion3
+== lsnd
+explosion1 Explosion
+explosion2 Explosion2
+explosion3 Explosion3
 $random explosion {explosion1, explosion2, explosion3,}
 $limit explosion 0
 $attenuation explosion 0.5
 
-== lsnd
 MMMMHMHMMMHMMM MMMMHMHMMMHMMM # ?????
 YOUSONOFABITCH YOUSONOFABITCH # ???????????
 AAAAAAAAAAAAAA AAAAAAAAAAAAAA # ?????????????

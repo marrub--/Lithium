@@ -107,64 +107,64 @@ alloc_aut(0) script void StrInit(void) {
    #include "m_stab.h"
 }
 
-alloc_aut(0) stkcall void PrintStrN(cstr s, mem_size_t n) {
+stkoff void PrintStrN(cstr s, mem_size_t n) {
    ACS_PrintGlobalCharRange((i32)(s), __GDCC__Sta, 0, n);
 }
 
-alloc_aut(0) stkcall void PrintStr(cstr s) {
+stkoff void PrintStr(cstr s) {
    ACS_PrintGlobalCharArray((i32)(s), __GDCC__Sta);
 }
 
-alloc_aut(0) stkcall i32 radix(char c) {
+stkoff i32 radix(char c) {
    /**/ if(c >= 'a' && c <= 'z') return c - 'a';
    else if(c >= 'A' && c <= 'Z') return c - 'A';
    else if(c >= '0' && c <= '9') return c - '0';
    else                          return INT_MAX;
 }
 
-alloc_aut(0) stkcall i32 faststrtoi32_str(astr p) {
+stkoff i32 faststrtoi32_str(astr p) {
    #define strto_impl_sign 1
    #define strto_impl_type i32
    #include "m_str.c"
 }
 
-alloc_aut(0) stkcall i32 faststrtoi32(cstr p) {
+stkoff i32 faststrtoi32(cstr p) {
    #define strto_impl_sign 1
    #define strto_impl_type i32
    #include "m_str.c"
 }
 
-alloc_aut(0) stkcall i64 faststrtoi64(cstr p) {
+stkoff i64 faststrtoi64(cstr p) {
    #define strto_impl_sign 1
    #define strto_impl_type i64
    #include "m_str.c"
 }
 
-alloc_aut(0) stkcall i96 faststrtoi96(cstr p) {
+stkoff i96 faststrtoi96(cstr p) {
    #define strto_impl_sign 1
    #define strto_impl_type i96
    #include "m_str.c"
 }
 
-alloc_aut(0) stkcall u32 faststrtou32(cstr p) {
+stkoff u32 faststrtou32(cstr p) {
    #define strto_impl_sign 0
    #define strto_impl_type u32
    #include "m_str.c"
 }
 
-alloc_aut(0) stkcall u64 faststrtou64(cstr p) {
+stkoff u64 faststrtou64(cstr p) {
    #define strto_impl_sign 0
    #define strto_impl_type u64
    #include "m_str.c"
 }
 
-alloc_aut(0) stkcall u96 faststrtou96(cstr p) {
+stkoff u96 faststrtou96(cstr p) {
    #define strto_impl_sign 0
    #define strto_impl_type u96
    #include "m_str.c"
 }
 
-alloc_aut(0) stkcall bool faststrstr(cstr lhs, cstr rhs) {
+stkoff bool faststrstr(cstr lhs, cstr rhs) {
    mem_size_t llen = faststrlen(lhs);
    mem_size_t rlen = faststrlen(rhs);
    mem_size_t i, j, k;
@@ -185,7 +185,7 @@ alloc_aut(0) stkcall bool faststrstr(cstr lhs, cstr rhs) {
    return false;
 }
 
-alloc_aut(0) stkcall bool faststrcasestr(cstr lhs, cstr rhs) {
+stkoff bool faststrcasestr(cstr lhs, cstr rhs) {
    mem_size_t llen = faststrlen(lhs);
    mem_size_t rlen = faststrlen(rhs);
    mem_size_t i, j, k;
@@ -206,66 +206,66 @@ alloc_aut(0) stkcall bool faststrcasestr(cstr lhs, cstr rhs) {
    return false;
 }
 
-alloc_aut(0) stkcall mem_size_t faststrlen(cstr in) {
+stkoff mem_size_t faststrlen(cstr in) {
    mem_size_t len;
    for(len = 0; *in; ++len, ++in);
    return len;
 }
 
-alloc_aut(0) stkcall str fast_strupper(str in) {
+stkoff str fast_strupper(str in) {
    ACS_BeginPrint();
    for(astr c = in; *c; c++) ACS_PrintChar(ToUpper(*c));
    return ACS_EndStrParam();
 }
 
-alloc_aut(0) stkcall u32 fast_strhash(astr s) {
+stkoff u32 fast_strhash(astr s) {
    #define str_hash_impl
    #include "m_str.c"
 }
 
-alloc_aut(0) stkcall u32 faststrhash(cstr s) {
+stkoff u32 faststrhash(cstr s) {
    #define str_hash_impl
    #include "m_str.c"
 }
 
-alloc_aut(0) stkcall i32 faststrcmp_str(cstr s1, astr s2) {
+stkoff i32 faststrcmp_str(cstr s1, astr s2) {
    register i32 res;
    while((res = *s1 - *s2++) == 0 && *s1++ != '\0');
    return res;
 }
 
-alloc_aut(0) stkcall i32 faststrcmp(cstr s1, cstr s2) {
+stkoff i32 faststrcmp(cstr s1, cstr s2) {
    if(s1 == s2) return 0;
    register i32 res;
    while((res = *s1 - *s2++) == 0 && *s1++ != '\0');
    return res;
 }
 
-alloc_aut(0) stkcall i32 faststrcasecmp(cstr s1, cstr s2) {
+stkoff i32 faststrcasecmp(cstr s1, cstr s2) {
    if(s1 == s2) return 0;
    i32 res;
    while((res = ToUpper(*s1) - ToUpper(*s2++)) == 0 && *s1++ != '\0');
    return res;
 }
 
-alloc_aut(0) stkcall bool faststrchk(cstr s1, cstr s2) {
+stkoff bool faststrchk(cstr s1, cstr s2) {
    if(s1 == s2) return 0;
    while(*s1 && *s1 == *s2) ++s1, ++s2;
    return *s1 == *s2;
 }
 
-alloc_aut(0) stkcall bool faststrcasechk(cstr s1, cstr s2) {
+stkoff bool faststrcasechk(cstr s1, cstr s2) {
    if(s1 == s2) return 0;
    while(*s1 && ToUpper(*s1) == ToUpper(*s2)) ++s1, ++s2;
    return ToUpper(*s1) == ToUpper(*s2);
 }
 
-alloc_aut(0) stkcall char *faststrchr(cstr s, char c) {
+stkoff char *faststrchr(cstr s, char c) {
    do if(*s == c) return (char *)s; while(*s++);
    return nil;
 }
 
-alloc_aut(0) stkcall char *faststrtok(char *s, char **next, char c) {
+stkoff char *faststrtok(char *s, char **next, char c) {
    if(s) *next = s;
    if(!*next) return nil;
    while(**next == c) ++(*next);
@@ -277,7 +277,7 @@ alloc_aut(0) stkcall char *faststrtok(char *s, char **next, char c) {
    return curr;
 }
 
-alloc_aut(0) stkcall cstr scoresep(score_t num) {
+stkoff cstr scoresep(score_t num) {
    noinit static char out[48];
 
    if(!num) {
@@ -305,15 +305,15 @@ alloc_aut(0) stkcall cstr scoresep(score_t num) {
    return outp;
 }
 
-alloc_aut(0) stkcall void printscr(score_t num) {
+stkoff void printscr(score_t num) {
    PrintStr(scoresep(num));
 }
 
-alloc_aut(0) stkcall void printk64(k64 num) {
+stkoff void printk64(k64 num) {
    ACS_PrintFixed((k32)num);
 }
 
-alloc_aut(0) stkcall cstr alientext(i32 num) {
+stkoff cstr alientext(i32 num) {
    noinit static char out[80];
 
    if(!num) {
@@ -344,12 +344,12 @@ alloc_aut(0) stkcall cstr alientext(i32 num) {
    return outp;
 }
 
-alloc_aut(0) stkcall str lang(str name) {
+stkoff str lang(str name) {
    str ret = ServCallS(sm_Localize, name);
    return ret != st_empty ? ret : snil;
 }
 
-alloc_aut(0) stkcall cstr tmpstr(str s) {
+stkoff cstr tmpstr(str s) {
    if(s == snil) {
       return "(null)";
    } else {
@@ -358,17 +358,17 @@ alloc_aut(0) stkcall cstr tmpstr(str s) {
    }
 }
 
-alloc_aut(0) stkcall cstr RemoveTextColors_str(astr s, i32 size) {
+stkoff cstr RemoveTextColors_str(astr s, i32 size) {
    #define remove_text_color_impl
    #include "m_str.c"
 }
 
-alloc_aut(0) stkcall cstr RemoveTextColors(cstr s, i32 size) {
+stkoff cstr RemoveTextColors(cstr s, i32 size) {
    #define remove_text_color_impl
    #include "m_str.c"
 }
 
-alloc_aut(0) stkcall void printfmt(cstr s, mem_size_t n, struct fmt_arg *args) {
+stkoff void printfmt(cstr s, mem_size_t n, struct fmt_arg *args) {
    mem_size_t i = 0;
    char c;
    while((c = *s++)) {

@@ -172,6 +172,13 @@ class Lith_SubDart2 : Lith_SubDart {
 
 class Lith_DWeapon : Lith_Weapon;
 
+enum Lith_PSpriteD {
+   _psp_d_subweapon = _psp_flash_user,
+   _psp_d_rems_particle_first = _psp_misc_user,
+   _psp_d_rems_particle_last  = _psp_d_rems_particle_first + 70,
+   _psp_d_khanda_power,
+}
+
 default {
    Lith_Weapon.SprintSpeed 2.1;
    Inventory.RestrictedTo "Lith_DarkLordPlayer";
@@ -185,7 +192,7 @@ override bool lith_checkSprint() {
 }
 
 action(Weapon) void lith_subGunPreFire() {
-   player.getPSprite(_psp_d_subweapon).frame = randomPick(1, 3);
+   player.findPSprite(_psp_d_subweapon).frame = randomPick(1, 3);
 }
 
 override double, double lith_getFirePattern() {
@@ -206,7 +213,7 @@ override double, double lith_getFirePattern() {
    return 0, 0;
 }
 action(Weapon) void lith_subGunFire() {
-   player.getPSprite(_psp_d_subweapon).frame = randomPick(0, 2);
+   player.findPSprite(_psp_d_subweapon).frame = randomPick(0, 2);
    soundAlert(invoker.owner);
    if(Lith_UTIL.pData(_pdt_upgrade, UPGR_SubGun_A)) {
       a_startSound("weapons/subweapon/armgun2", lch_altweapon);
@@ -258,7 +265,7 @@ override void tick() {
       case _subw_dart:    which = resolveState("_SubDrt"); break;
       }
       owner.player.setPSprite(_psp_d_subweapon, which);
-      let psp = owner.player.getPSprite(_psp_d_subweapon);
+      let psp = owner.player.findPSprite(_psp_d_subweapon);
       psp.bAddWeapon = false;
       psp.bAddBob    = false;
       psp.bPowDouble = true;

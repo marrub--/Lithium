@@ -23,7 +23,7 @@ noinit static struct monster_preset monsterpreset[1024];
 noinit static struct monster_info monsterinfo[1024];
 noinit static mem_size_t monsterpresetnum, monsterinfonum;
 
-alloc_aut(0) stkcall static void GetInfo(dmon_t *m) {
+stkoff static void GetInfo(dmon_t *m) {
    m->x = GetX(0);
    m->y = GetY(0);
    m->z = GetZ(0);

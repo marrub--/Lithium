@@ -48,7 +48,7 @@ enum {
    _bipu_new,
 };
 
-alloc_aut(0) stkcall static
+stkoff static
 void num_out(i32 n) {
    noinit static
    char buf[64], *p;
@@ -61,7 +61,7 @@ void num_out(i32 n) {
    PrintStr(p);
 }
 
-alloc_aut(0) stkcall static
+stkoff static
 void chunk_out(cstr name, i32 version) {
    ACS_PrintChar(_eoc_1);
    ACS_PrintChar(_eoc_2);
@@ -70,7 +70,7 @@ void chunk_out(cstr name, i32 version) {
    ACS_PrintChar(' ');
 }
 
-alloc_aut(0) stkcall static
+stkoff static
 i32 num_inp(astr *p) {
    register i32 ret = 0, digit;
    for(; **p && (digit = **p - '!') < 93 && digit > 0; ++*p) {
@@ -79,7 +79,7 @@ i32 num_inp(astr *p) {
    return ret;
 }
 
-alloc_aut(0) stkcall static
+stkoff static
 void str_inp(astr *p, char *out, mem_size_t max_len, char delim) {
    register i32 i;
    --max_len;

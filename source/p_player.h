@@ -50,6 +50,7 @@ enum ZscName(SubweaponType) {
    _subw_grenade,
    _subw_axe,
    _subw_dart,
+   _subw_fist,
    _subw_max,
 };
 
@@ -92,7 +93,9 @@ script void P_Player(void);
 script void P_Init(void);
 script void P_Data_Load(void);
 script void P_Data_Save(void);
-bool P_ButtonPressed(i32 bt);
+stkcall bool P_ButtonHeld(i32 bt);
+stkcall bool P_ButtonPressed(i32 bt);
+stkcall bool P_ButtonReleased(i32 bt);
 optargs(1) bool P_SetVel(k32 velx, k32 vely, k32 velz, bool add);
 void P_ValidateTID(void);
 void P_GUI_Close(void);
@@ -125,7 +128,7 @@ script void P_Wep_PTick   (void);
 script void P_TeleportIn (void);
 sync   void P_TeleportOut(i32 tag);
 
-script optargs(2) void P_DrawCenterNotification(str txt, i32 tics, i32 cr, i32 linecr);
+script optargs(4) void P_CenterNotification(str txt, i32 tics, i32 cr, i32 linecr, k32 bgfade, k32 fgfade);
 
 #ifndef NDEBUG
 void P_Ren_Debug(void);

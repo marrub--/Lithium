@@ -138,7 +138,7 @@ u64 crc64_str(void  __str_ars const *data, mem_size_t len, u64 result) {
    #include "m_math.c"
 }
 
-alloc_aut(0) stkcall i32 rainbowcr(void) {
+stkoff i32 rainbowcr(void) {
    static i32 crs[7];
    if(!crs[0]) {
       crs[0] = Cr(rred);
@@ -152,92 +152,92 @@ alloc_aut(0) stkcall i32 rainbowcr(void) {
    return crs[ACS_Timer() / 4 % countof(crs)];
 }
 
-alloc_aut(0) stkcall i32 const_deg(i32 n) {
+stkoff i32 const_deg(i32 n) {
    n %= 360;
    if(n < 0) n += 360;
    return n;
 }
 
-alloc_aut(0) stkcall i32 fastabs(i32 n) {
+stkoff i32 fastabs(i32 n) {
    #define abs_impl
    #include "m_math.c"
 }
-alloc_aut(0) stkcall k32 fastabsk(k32 n) {
+stkoff k32 fastabsk(k32 n) {
    #define abs_impl
    #include "m_math.c"
 }
-alloc_aut(0) stkcall i32 mini(i32 x, i32 y) {
+stkoff i32 mini(i32 x, i32 y) {
    #define min_max_impl 0
    #include "m_math.c"
 }
-alloc_aut(0) stkcall i64 minli(i64 x, i64 y) {
+stkoff i64 minli(i64 x, i64 y) {
    #define min_max_impl 0
    #include "m_math.c"
 }
-alloc_aut(0) stkcall u32 minu(u32 x, u32 y) {
+stkoff u32 minu(u32 x, u32 y) {
    #define min_max_impl 0
    #include "m_math.c"
 }
-alloc_aut(0) stkcall k32 mink(k32 x, k32 y) {
+stkoff k32 mink(k32 x, k32 y) {
    #define min_max_impl 0
    #include "m_math.c"
 }
-alloc_aut(0) stkcall k64 minlk(k64 x, k64 y) {
+stkoff k64 minlk(k64 x, k64 y) {
    #define min_max_impl 0
    #include "m_math.c"
 }
-alloc_aut(0) stkcall i32 maxi(i32 x, i32 y) {
+stkoff i32 maxi(i32 x, i32 y) {
    #define min_max_impl 1
    #include "m_math.c"
 }
-alloc_aut(0) stkcall i64 maxli(i64 x, i64 y) {
+stkoff i64 maxli(i64 x, i64 y) {
    #define min_max_impl 1
    #include "m_math.c"
 }
-alloc_aut(0) stkcall u32 maxu(u32 x, u32 y) {
+stkoff u32 maxu(u32 x, u32 y) {
    #define min_max_impl 1
    #include "m_math.c"
 }
-alloc_aut(0) stkcall k32 maxk(k32 x, k32 y) {
+stkoff k32 maxk(k32 x, k32 y) {
    #define min_max_impl 1
    #include "m_math.c"
 }
-alloc_aut(0) stkcall k64 maxlk(k64 x, k64 y) {
+stkoff k64 maxlk(k64 x, k64 y) {
    #define min_max_impl 1
    #include "m_math.c"
 }
-alloc_aut(0) stkcall i32 clampi(i32 x, i32 y, i32 z) {
+stkoff i32 clampi(i32 x, i32 y, i32 z) {
    #define min_max_impl 2
    #include "m_math.c"
 }
-alloc_aut(0) stkcall i64 clampli(i64 x, i64 y, i64 z) {
+stkoff i64 clampli(i64 x, i64 y, i64 z) {
    #define min_max_impl 2
    #include "m_math.c"
 }
-alloc_aut(0) stkcall u32 clampu(u32 x, u32 y, u32 z) {
+stkoff u32 clampu(u32 x, u32 y, u32 z) {
    #define min_max_impl 2
    #include "m_math.c"
 }
-alloc_aut(0) stkcall k32 clampk(k32 x, k32 y, k32 z) {
+stkoff k32 clampk(k32 x, k32 y, k32 z) {
    #define min_max_impl 2
    #include "m_math.c"
 }
-alloc_aut(0) stkcall k64 clamplk(k64 x, k64 y, k64 z) {
+stkoff k64 clamplk(k64 x, k64 y, k64 z) {
    #define min_max_impl 2
    #include "m_math.c"
 }
 
-alloc_aut(0) stkcall k32 fastfrack(k32 k) {
+stkoff k32 fastfrack(k32 k) {
    ik32.k = k; ik32.i &= K32_LO;
    return ik32.k;
 }
 
-alloc_aut(0) stkcall k64 fastfraclk(k64 k) {
+stkoff k64 fastfraclk(k64 k) {
    ik64.k = k; ik64.i &= K64_LO;
    return ik64.k;
 }
 
-alloc_aut(0) stkcall
+stkoff
 i32 fastroundk(k32 k) {
    ik32.k = k; ik32.i &= K32_LO;
    k64 fr = ik32.k;
@@ -246,7 +246,7 @@ i32 fastroundk(k32 k) {
    else          return ik32.k;
 }
 
-alloc_aut(0) stkcall
+stkoff
 k32 fastround1k(k32 k) {
    ik32.k = k; ik32.i &= K32_LO;
    k32 fr = ik32.k;
@@ -264,7 +264,7 @@ k32 fastround1k(k32 k) {
    else               return ik32.k;
 }
 
-alloc_aut(0) stkcall
+stkoff
 i32 fastroundlk(k64 k) {
    ik64.k = k; ik64.i &= K64_LO;
    k64 fr = ik64.k;
@@ -273,7 +273,7 @@ i32 fastroundlk(k64 k) {
    else           return ik64.k;
 }
 
-alloc_aut(0) stkcall
+stkoff
 k64 fastround1lk(k64 k) {
    ik64.k = k; ik64.i &= K64_LO;
    k64 fr = ik64.k;
@@ -291,31 +291,31 @@ k64 fastround1lk(k64 k) {
    else                return ik64.k;
 }
 
-alloc_aut(0) stkcall
+stkoff
 i32 ceilk(k32 n) {
    ik32.k = n;
    if(ik32.i & K32_LO) return ik32.i &= K32_HI, ik32.k + 1.0k;
    else                return ik32.k;
 }
 
-alloc_aut(0) stkcall
+stkoff
 k64 powlk(k64 x, i32 y) {
    k64 z = 1;
    while(y-- > 0) {z *= x;}
    return z;
 }
 
-alloc_aut(0) stkcall
+stkoff
 k32 mag2k(k32 x, k32 y) {
    return ACS_FixedSqrt(x * x + y * y);
 }
 
-alloc_aut(0) stkcall
+stkoff
 i32 mag2i(i32 x, i32 y) {
    return ACS_Sqrt(x * x + y * y);
 }
 
-alloc_aut(0) stkcall k32 ease_in_out_back(k32 x) {
+stkoff k32 ease_in_out_back(k32 x) {
    #define C1 1.70158k
    #define C2 2.5949095k
    return x < 0.5k
@@ -325,20 +325,20 @@ alloc_aut(0) stkcall k32 ease_in_out_back(k32 x) {
    #undef C2
 }
 
-alloc_aut(0) stkcall k32 ease_out_cubic(k32 x) {
+stkoff k32 ease_out_cubic(k32 x) {
    x = 1 - x;
    return 1 - x * x * x;
 }
 
-alloc_aut(0) stkcall k32 ease_in_out_sine(k32 x) {
+stkoff k32 ease_in_out_sine(k32 x) {
    return -(ACS_Cos(x / 2) - 1) / 2;
 }
 
-alloc_aut(0) stkcall k32 lerpk(k32 a, k32 b, k32 t) {
+stkoff k32 lerpk(k32 a, k32 b, k32 t) {
    return (1.0k - t) * a + t * b;
 }
 
-alloc_aut(0) stkcall k64 lerplk(k64 a, k64 b, k64 t) {
+stkoff k64 lerplk(k64 a, k64 b, k64 t) {
    return (1.0lk - t) * a + t * b;
 }
 
@@ -372,8 +372,7 @@ void lerplli_init(struct interp_data_lli *data, i96 value, i96 timer) {
    #include "m_math.c"
 }
 
-alloc_aut(0) stkcall
-bool aabb_aabb(i32 x1, i32 y1, i32 w1, i32 h1, i32 x2, i32 y2, i32 w2, i32 h2) {
+stkoff bool aabb_aabb(i32 x1, i32 y1, i32 w1, i32 h1, i32 x2, i32 y2, i32 w2, i32 h2) {
    return
       x1 < x2 + h2 &&
       x1 + w1 > x2 &&
@@ -381,8 +380,7 @@ bool aabb_aabb(i32 x1, i32 y1, i32 w1, i32 h1, i32 x2, i32 y2, i32 w2, i32 h2) {
       y1 + h1 > y2;
 }
 
-alloc_aut(0) stkcall
-bool aabb_point(i32 x1, i32 y1, i32 w1, i32 h1, i32 x2, i32 y2) {
+stkoff bool aabb_point(i32 x1, i32 y1, i32 w1, i32 h1, i32 x2, i32 y2) {
    return
       x2 >= x1 &&
       y2 >= y1 &&
@@ -390,13 +388,11 @@ bool aabb_point(i32 x1, i32 y1, i32 w1, i32 h1, i32 x2, i32 y2) {
       y2 <= y1 + h1;
 }
 
-alloc_aut(0) stkcall
-k64 bzpolylk(k64 a, k64 b, k64 t) {
+stkoff k64 bzpolylk(k64 a, k64 b, k64 t) {
    return a + (b - a) * t;
 }
 
-alloc_aut(0) stkcall
-i32 bzpolyi(i32 a, i32 b, k64 t) {
+stkoff i32 bzpolyi(i32 a, i32 b, k64 t) {
    return a + (b - a) * t;
 }
 

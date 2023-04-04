@@ -6,13 +6,23 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
+extend class Lith_HERMES {
+   static bool KhandaPower(Actor mo) {
+      let wep = Lith_Khanda(mo.findInventory('Lith_Khanda'));
+      if(wep) {
+         wep.m_power = TICRATE*5;
+         return true;
+      }
+      return false;
+   }
+}
+
 class Lith_KhandaPuff : Lith_BulletPuff {
    default {
       Mass 5;
       +PuffOnActors
       +ThruGhost
    }
-
    override void postBeginPlay() {
       super.postBeginPlay();
       if(tracer) {
@@ -26,7 +36,6 @@ class Lith_KhandaPuff : Lith_BulletPuff {
          target.a_startSound("weapons/sword/swing1", lch_weapon3);
       }
    }
-
    override void markPrecacheSounds() {
       super.markPrecacheSounds();
       markSound("weapons/sword/swing1");
@@ -48,15 +57,53 @@ default {
    Inventory.AltHudIcon "KAMLZ0";
    +Weapon.NoAutoFire
 }
-
+int m_power;
 override void markPrecacheSounds() {
    super.markPrecacheSounds();
    markSound("weapons/khanda/swing");
+   markSound("weapons/khanda/pwup");
 }
-
+override void tick() {
+   super.tick();
+   if(m_power && !isFrozen()) {
+      --m_power;
+   }
+}
 states(Weapon) {
+PowerOverlay:
+   TNT1 A 1 {
+      let wep = player.findPSprite(_psp_weapon);
+      let psp = player.findPSprite(_psp_d_khanda_power);
+      if(wep && psp) {
+         Lith_UTIL.copyPSpriteVisualData(psp, wep);
+         /* FIXME: these two should just be normal set ops,
+                   but you can only use these functions to set these
+         */
+         a_overlayFlags(_psp_d_khanda_power, pspf_renderstyle|pspf_alpha, true);
+         a_overlayRenderStyle(_psp_d_khanda_power, STYLE_Add);
+         psp.alpha = (sin(gameTic / 17.5 * 360) + 1.0) / 2.5;
+         psp.x = psp.y = psp.oldx = psp.oldy = 0;
+         psp.bAddWeapon = true;
+         psp.translation = Translate.getId('Lith_KhandaPower');
+      }
+      if(!invoker.m_power) {
+         if(psp && psp.alpha > 0) {
+            psp.alpha -= 0.1;
+         }
+         if(!psp || psp.alpha <= 0) {
+            return resolveState("Null");
+         }
+      }
+      return state(null);
+   }
+   wait;
 Ready:
-   KHAN A 1 lith_a_ready(WRF_ALLOWRELOAD);
+   KHAN A 1 {
+      if(invoker.m_power) {
+         a_overlay(_psp_d_khanda_power, "PowerOverlay", true);
+      }
+      return lith_a_ready(WRF_ALLOWRELOAD);
+   }
    wait;
 Deselect:
    KHAN A 1 lith_a_lower(_raise_fast);
@@ -74,14 +121,14 @@ Fire:
 Hold:
    KHAN D 1 offset(-103, 143) a_startSound("weapons/khanda/swing", lch_weapon);
    #### # 0 lith_a_setInterpolation(true);
-   KHAN E 1 offset(163, 120) lith_a_fireMelee(countInv("PowerStrength") ? 40 : 20, 128, _mlf_pull_in|_mlf_no_turn, "Lith_KhandaPuff");
+   KHAN E 1 offset(163, 120) lith_a_fireMelee((invoker.m_power ? 50 : 1) * (countInv("PowerStrength") ? 40 : 20), 128, _mlf_pull_in|_mlf_no_turn, "Lith_KhandaPuff");
    #### # 0 lith_a_setInterpolation(false);
    KHAN E 1 offset(259, 175);
    TNT1 A 3 a_weaponOffset(0, 32);
    KHAN F 1 offset(148, 170);
    #### # 0 lith_a_setInterpolation(true);
    KHAN G 1 offset(80, 98) a_startSound("weapons/khanda/swing", lch_weapon2);
-   KHAN H 1 offset(-25, 40) lith_a_fireMelee(countInv("PowerStrength") ? 60 : 30, 128, _mlf_pull_in|_mlf_no_turn|_mlf_damage_stepup, "Lith_KhandaPuff");
+   KHAN H 1 offset(-25, 40) lith_a_fireMelee((invoker.m_power ? 50 : 1) * (countInv("PowerStrength") ? 60 : 30), 128, _mlf_pull_in|_mlf_no_turn|_mlf_damage_stepup, "Lith_KhandaPuff");
    KHAN H 1 offset(-130, 12);
    #### # 0 lith_a_setInterpolation(false);
    KHAN I 1 offset(-124, -21);

@@ -6429,6 +6429,8 @@
    "ZZLITHBG";
 "BGFLAT31" =
    "ZZLITHBG";
+"LITH_GO_KILL" =
+   "!! GO FORTH AND KILL !!";
 "OB_DEFAULT" =
    "";
 "OB_BABY" =

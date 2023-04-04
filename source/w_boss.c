@@ -53,15 +53,13 @@ static i32 rewardnum, difficulty;
 
 static struct boss *lastboss;
 
-stkcall
-static void set_next_score_threshold() {
+stkoff static void set_next_score_threshold() {
    static score_t mul = 17;
    wl.scorethreshold = _scorethreshold_default * mul / 10;
    mul += 10;
 }
 
-stkcall
-static void SpawnBossReward(void) {
+stkoff static void SpawnBossReward(void) {
    k32 x = GetX(0);
    k32 y = GetY(0);
    k32 z = GetZ(0);
@@ -76,7 +74,7 @@ static void SpawnBossReward(void) {
    }
 }
 
-static alloc_aut(0) stkcall void TriggerBoss(void) {
+static stkoff void TriggerBoss(void) {
    static bool firstboss = true;
 
    if(!boss) return;
@@ -109,7 +107,7 @@ static alloc_aut(0) stkcall void TriggerBoss(void) {
    }
 }
 
-static alloc_aut(0) stkcall bool CheckDead(struct boss *b, i32 num) {
+static stkoff bool CheckDead(struct boss *b, i32 num) {
    for(i32 i = 0; i < num; i++) {
       if(!b[i].dead) {
          return false;

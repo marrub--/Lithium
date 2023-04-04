@@ -56,7 +56,7 @@ class Lith_AssassinPlayer : Lith_Player {
                m_dodgeDbc = 40;
                m_wasHorizontalDodge = true;
             } else if(!(player.oldButtons & BT_JUMP) &&
-                      player.buttons & BT_JUMP && !player.onGround) {
+                      player.buttons & BT_JUMP && !m_onGround) {
                vel.z = 16.0;
                a_startSound("player/omi/djump", lch_body);
                m_dodgeDbc = 40;

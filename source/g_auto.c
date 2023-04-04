@@ -16,7 +16,7 @@
 
 noinit static struct gui_clip r;
 
-alloc_aut(0) stkcall static void G_cutBox(struct gui_clip const *other, struct gui_clip *r) {
+stkoff static void G_cutBox(struct gui_clip const *other, struct gui_clip *r) {
    r->x  = clampi(r->x, other->x, other->x + other->w);
    r->y  = clampi(r->y, other->y, other->y + other->h);
    r->w  = mini(r->x + r->w,  other->x + other->w)  - r->x;
@@ -24,7 +24,7 @@ alloc_aut(0) stkcall static void G_cutBox(struct gui_clip const *other, struct g
    r->ww = mini(r->x + r->ww, other->x + other->ww) - r->x;
 }
 
-alloc_aut(0) stkcall static void G_setClip(struct gui_state *g) {
+stkoff static void G_setClip(struct gui_state *g) {
    if(g->clip >= 0) {
       struct gui_clip *clip = &g->clips[g->clip];
       #ifndef NDEBUG
@@ -167,7 +167,7 @@ void G_ClipRelease(struct gui_state *g) {
    G_setClip(g);
 }
 
-alloc_aut(0) stkcall
+stkoff
 bool G_Filler(i32 x, i32 y, struct gui_fil *fil, bool held) {
    if(fil->cur > fil->tic) {
       fil->cur = 0;

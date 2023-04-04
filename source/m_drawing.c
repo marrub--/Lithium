@@ -18,13 +18,13 @@
 
 noinit struct globalcolors globalcolors;
 
-alloc_aut(0) stkcall void TextSize(struct i32v2 *draw_text_size, str s, str font, i32 wrap) {
+stkoff void TextSize(struct i32v2 *draw_text_size, str s, str font, i32 wrap) {
    draw_text_size->x = DrawCallI(sm_LA, wrap, s, font);
    draw_text_size->y = draw_text_size->x >> 16;
    draw_text_size->x = word(draw_text_size->x);
 }
 
-alloc_aut(0) stkcall struct i32v2 const *TextureSize(str t) {
+stkoff struct i32v2 const *TextureSize(str t) {
    static struct i32v2 draw_texture_size;
    draw_texture_size.x = DrawCallI(sm_LB, t);
    draw_texture_size.y = draw_texture_size.x >> 16;
@@ -32,13 +32,13 @@ alloc_aut(0) stkcall struct i32v2 const *TextureSize(str t) {
    return &draw_texture_size;
 }
 
-alloc_aut(0) stkcall void DrawInit(void) {
+stkoff void DrawInit(void) {
    #define GlobalCr(name) \
       globalcolors.name = ServCallI(sm_FindFontColor, so_##name);
    #include "m_drawing.h"
 }
 
-alloc_aut(0) stkcall i32 Draw_GetCr(i32 n) {
+stkoff i32 Draw_GetCr(i32 n) {
    switch(n) {
    case 'a': return CR_BRICK;
    case 'b': return CR_TAN;
@@ -78,23 +78,23 @@ alloc_aut(0) script ext("ACS") addr(lsc_drawcr) i32 Z_DrawCr(i32 cr) {
    return Draw_GetCr(cr);
 }
 
-stkcall alloc_aut(0) void PrintSprite(str name, i32 x, i32 xa, i32 y, i32 ya, i32 flg, k32 anum, i32 c) {
+stkoff void PrintSprite(str name, i32 x, i32 xa, i32 y, i32 ya, i32 flg, k32 anum, i32 c) {
    DrawCallV(sm_LS, name, Pos(x, xa), Pos(y, ya), flg, anum, c);
 }
 
-stkcall alloc_aut(0) void PrintSpriteClip(str name, i32 x, i32 xa, i32 y, i32 ya, i32 cx, i32 cy, i32 cw, i32 ch, i32 flg, k32 anum, i32 c) {
+stkoff void PrintSpriteClip(str name, i32 x, i32 xa, i32 y, i32 ya, i32 cx, i32 cy, i32 cw, i32 ch, i32 flg, k32 anum, i32 c) {
    DrawCallV(sm_LS, name, Pos(x, xa), Pos(y, ya), flg|_u_clip, anum, c, (cx << 16) | cy, (cw << 16) | ch);
 }
 
-stkcall alloc_aut(0) void PrintText_str(str s, str font, i32 cr, i32 x, i32 xa, i32 y, i32 ya, i32 flg, k32 anum, i32 ww) {
+stkoff void PrintText_str(str s, str font, i32 cr, i32 x, i32 xa, i32 y, i32 ya, i32 flg, k32 anum, i32 ww) {
    DrawCallV(sm_LT, s, font, Pos(x, xa), Pos(y, ya), cr, flg, anum, ww);
 }
 
-stkcall alloc_aut(0) void PrintRect(i32 x, i32 y, i32 w, i32 h, i32 c, i32 flg) {
+stkoff void PrintRect(i32 x, i32 y, i32 w, i32 h, i32 c, i32 flg) {
    DrawCallV(sm_LR, x, y, w, h, c, flg);
 }
 
-stkcall alloc_aut(0) void AmbientSound(str snd, k32 vol, i32 chan) {
+stkoff void AmbientSound(str snd, k32 vol, i32 chan) {
    StartSound(snd, chan |? lch_ambient, CHANF_NOPAUSE|CHANF_NOSTOP, vol, ATTN_NONE);
 }
 

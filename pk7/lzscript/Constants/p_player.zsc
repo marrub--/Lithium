@@ -29,6 +29,7 @@ enum Lith_SubweaponType {
    _subw_grenade,
    _subw_axe,
    _subw_dart,
+   _subw_fist,
    _subw_max,
 };
 

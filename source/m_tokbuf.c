@@ -20,7 +20,7 @@ enum {
    _bend = 28,
 };
 
-stkcall alloc_aut(0) i32 tb_proc(struct token *tok) {
+stkoff i32 tb_proc(struct token *tok) {
    switch(tok->type) {
    case tok_eof:    return tokproc_done;
    case tok_lnend:
@@ -29,7 +29,7 @@ stkcall alloc_aut(0) i32 tb_proc(struct token *tok) {
    return tokproc_next;
 }
 
-stkcall alloc_aut(0) i32 tb_procl(struct token *tok) {
+stkoff i32 tb_procl(struct token *tok) {
    switch(tok->type) {
    case tok_eof:    return tokproc_done;
    case tok_cmment: return tokproc_skip;
@@ -82,15 +82,15 @@ done:
    return &tb->toks[tb->tpos];
 }
 
-stkcall alloc_aut(0) struct token *tb_unget(struct tokbuf *tb) {
+stkoff struct token *tb_unget(struct tokbuf *tb) {
    return &tb->toks[tb->tpos--];
 }
 
-stkcall alloc_aut(0) struct token *tb_reget(struct tokbuf *tb) {
+stkoff struct token *tb_reget(struct tokbuf *tb) {
    return &tb->toks[tb->tpos];
 }
 
-stkcall alloc_aut(0) struct token *tb_back(struct tokbuf *tb, i32 n) {
+stkoff struct token *tb_back(struct tokbuf *tb, i32 n) {
    return &tb->toks[tb->tpos - n];
 }
 
