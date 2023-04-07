@@ -47,7 +47,7 @@ void Upgr_ReflexWetw_Update(void) {
    if(udata.charge >= CHARGE_MAX) {
       if(pl.onground) udata.leaped = 0;
 
-      if(pl.buttons & BT_SPEED) {
+      if(P_ButtonHeld(BT_SPEED)) {
          k32 angle = pl.yaw - atan2k(pl.sidev, pl.forwardv);
 
          StartSound(ss_player_slide, lch_auto, 0, 1.0);

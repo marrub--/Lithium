@@ -170,6 +170,13 @@ class Lith_SubDart2 : Lith_SubDart {
    }
 }
 
+class Lith_SubFistPuff : Lith_ChargeFistPuff {
+   override void beginPlay() {
+      super.beginPlay();
+      bSound = false;
+   }
+}
+
 class Lith_DWeapon : Lith_Weapon;
 
 enum Lith_PSpriteD {
@@ -252,30 +259,51 @@ action(Weapon) void lith_subDrtFire() {
 
 override void tick() {
    super.tick();
-   if(owner && owner.player && owner.health > 0 && !isFrozen() &&
+   if(owner && owner.player && owner.player.readyWeapon == self &&
+      owner.health > 0 && !isFrozen() &&
       owner.player.buttons & BT_ALTATTACK &&
       owner.player.getPSprite(_psp_d_subweapon).tics <= 0 &&
       owner.acs_scriptCall("Lith_GetSubShots") > 0) {
-      owner.acs_scriptCall("Lith_TakeSubShot");
+      int subtype = owner.acs_scriptCall("Lith_GetSubType");
       state which;
-      switch(owner.acs_scriptCall("Lith_GetSubType")) {
+      switch(subtype) {
       case _subw_gun:     which = resolveState("_SubGun"); break;
       case _subw_grenade: which = resolveState("_SubGrn"); break;
       case _subw_axe:     which = resolveState("_SubAxe"); break;
       case _subw_dart:    which = resolveState("_SubDrt"); break;
+      case _subw_fist:    which = resolveState("_SubFst"); break;
+      default: return;
       }
-      owner.player.setPSprite(_psp_d_subweapon, which);
-      let psp = owner.player.findPSprite(_psp_d_subweapon);
-      psp.bAddWeapon = false;
-      psp.bAddBob    = false;
-      psp.bPowDouble = true;
-      psp.bCVarFast  = true;
+      if(subtype != _subw_fist) {
+         owner.player.setPSprite(_psp_d_subweapon, which);
+         let psp = owner.player.findPSprite(_psp_d_subweapon);
+         psp.bAddWeapon = false;
+         psp.bAddBob    = false;
+         psp.bPowDouble = true;
+         psp.bCVarFast  = true;
+      } else if(owner.player.weaponState & WF_WEAPONREADY) {
+         owner.player.setPSprite(_psp_weapon, which);
+         owner.acs_scriptCall("Lith_TakeSubShot");
+      }
    }
 }
 
 action(Weapon) void lith_sprintOfs(double x, double y, int flags = 0) {
    lith_sprint();
    a_weaponOffset(x, y, flags);
+}
+
+action(Weapon) void lith_a_fistCharge() {
+   a_recoil(-4);
+   soundAlert(invoker.owner);
+   let mo = lith_a_fireMelee(countInv("PowerStrength") ? 140 : 70, 255, _mlf_no_turn|_mlf_damage_stepup|_mlf_pull_in, "Lith_SubFistPuff");
+   if(mo) {
+      let a = angleTo(mo);
+      mo.vel.xy += (cos(a), sin(a)) * 10;
+      if(!mo.bMissile) {
+         mo.vel.z += 700.0 / mo.mass;
+      }
+   }
 }
 
 states(Weapon) {
@@ -294,28 +322,28 @@ _Sprint:
       a_overlay(_psp_double_rg, "Null");
    }
 _SprintLoop:
-   DSPG A 0 lith_jumpIfSprint;
-   DSPG # 1 lith_sprintOfs(-18+fRandom[lith_weapon](-4, 0), 45);
-   DSPG # 1 lith_sprintOfs(9, -10, wof_interpolate|wof_add);
-   DSPG # 1 lith_sprintOfs(7, -1,  wof_interpolate|wof_add);
-   DSPG # 1 lith_sprintOfs(1, -1,  wof_interpolate|wof_add);
-   DSPG # 1 lith_sprintOfs(0, -1,  wof_interpolate|wof_add);
-   DSPG # 1 lith_sprintOfs(2,  0,  wof_interpolate|wof_add);
-   DSPG # 1 lith_sprintOfs(2,  3,  wof_interpolate|wof_add);
-   DSPG # 1 lith_sprintOfs(4,  4,  wof_interpolate|wof_add);
-   DSPG # 1 lith_sprintOfs(7,  5,  wof_interpolate|wof_add);
-   DSPG # 1 lith_sprintOfs(6,  1,  wof_interpolate|wof_add);
-   DSPG B 0 lith_jumpIfSprint;
-   DSPG # 1 lith_sprintOfs(18+fRandom[lith_weapon](0, 4), 45);
-   DSPG # 1 lith_sprintOfs(-9, -10, wof_interpolate|wof_add);
-   DSPG # 1 lith_sprintOfs(-7, -1,  wof_interpolate|wof_add);
-   DSPG # 1 lith_sprintOfs(-1, -1,  wof_interpolate|wof_add);
-   DSPG # 1 lith_sprintOfs( 0, -1,  wof_interpolate|wof_add);
-   DSPG # 1 lith_sprintOfs(-2,  0,  wof_interpolate|wof_add);
-   DSPG # 1 lith_sprintOfs(-2,  3,  wof_interpolate|wof_add);
-   DSPG # 1 lith_sprintOfs(-4,  4,  wof_interpolate|wof_add);
-   DSPG # 1 lith_sprintOfs(-7,  5,  wof_interpolate|wof_add);
-   DSPG # 1 lith_sprintOfs(-6,  1,  wof_interpolate|wof_add);
+   #DLH A 0 lith_jumpIfSprint;
+   #DLH # 1 lith_sprintOfs(-18+fRandom[lith_weapon](-4, 0), 45);
+   #DLH # 1 lith_sprintOfs(9, -10, wof_interpolate|wof_add);
+   #DLH # 1 lith_sprintOfs(7, -1,  wof_interpolate|wof_add);
+   #DLH # 1 lith_sprintOfs(1, -1,  wof_interpolate|wof_add);
+   #DLH # 1 lith_sprintOfs(0, -1,  wof_interpolate|wof_add);
+   #DLH # 1 lith_sprintOfs(2,  0,  wof_interpolate|wof_add);
+   #DLH # 1 lith_sprintOfs(2,  3,  wof_interpolate|wof_add);
+   #DLH # 1 lith_sprintOfs(4,  4,  wof_interpolate|wof_add);
+   #DLH # 1 lith_sprintOfs(7,  5,  wof_interpolate|wof_add);
+   #DLH # 1 lith_sprintOfs(6,  1,  wof_interpolate|wof_add);
+   #DLH B 0 lith_jumpIfSprint;
+   #DLH # 1 lith_sprintOfs(18+fRandom[lith_weapon](0, 4), 45);
+   #DLH # 1 lith_sprintOfs(-9, -10, wof_interpolate|wof_add);
+   #DLH # 1 lith_sprintOfs(-7, -1,  wof_interpolate|wof_add);
+   #DLH # 1 lith_sprintOfs(-1, -1,  wof_interpolate|wof_add);
+   #DLH # 1 lith_sprintOfs( 0, -1,  wof_interpolate|wof_add);
+   #DLH # 1 lith_sprintOfs(-2,  0,  wof_interpolate|wof_add);
+   #DLH # 1 lith_sprintOfs(-2,  3,  wof_interpolate|wof_add);
+   #DLH # 1 lith_sprintOfs(-4,  4,  wof_interpolate|wof_add);
+   #DLH # 1 lith_sprintOfs(-7,  5,  wof_interpolate|wof_add);
+   #DLH # 1 lith_sprintOfs(-6,  1,  wof_interpolate|wof_add);
    loop;
 _SprintDone:
    TNT1 A 1 offset(1, 32) a_lower(60);
@@ -367,6 +395,34 @@ _SubAxe:
    stop;
 _SubDrt:
    TNT1 A 18 lith_subDrtFire;
+   stop;
+_SubFst:
+   #### # 1 offset(1, 34) lith_a_adsCancel;
+   #### # 1 offset(10, 55);
+   #### # 1 offset(21, 90);
+   #### # 1 offset(25, 160);
+   TNT1 A 1 {
+      lith_a_fistCharge();
+      a_weaponOffset(0, 32);
+      a_overlay(_psp_double_lg, "Null");
+      a_overlay(_psp_double_rg, "Null");
+   }
+   #### # 0 lith_a_fistCharge;
+   #DLH D 1 offset(-35, 160) a_startSound("weapons/subweapon/smash", lch_auto);
+   #### # 0 lith_a_fistCharge;
+   #DLH D 1 offset(-25, 130) lith_a_setInterpolation(true);
+   #DLH D 1 offset(-18, 80) lith_a_fistCharge;
+   #DLH D 1 offset(-10, 55) lith_a_fistCharge;
+   #DLH D 1 offset(-4, 40) lith_a_fistCharge;
+   #DLH D 1 offset(-1, 34) lith_a_fistCharge;
+   #DLH D 1 offset(1, 32) lith_a_fistCharge;
+   #DLH DDDDDDDDDDD 1 lith_a_fistCharge;
+   #DLH D 1 offset(1, 40);
+   #DLH D 1 offset(1, 50);
+   #DLH D 1 offset(1, 70);
+   #DLH D 1 offset(1, 90);
+   TNT1 A 3 lith_a_setInterpolation(false);
+   TNT1 A 0 resolveState("Select");
    stop;
 }
 

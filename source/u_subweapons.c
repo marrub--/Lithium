@@ -34,7 +34,7 @@ void Upgr_Subweapons_Update(void) {
          udata.charge++;
       }
    }
-   if(pl.buttons & BT_USER4 && !(pl.old.buttons & BT_USER4)) {
+   if(P_ButtonPressed(BT_USER4)) {
       for(i32 next = udata.which + 1;; next++) {
          if(next >= _subw_max) {
             next = 0;

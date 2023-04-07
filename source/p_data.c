@@ -116,8 +116,6 @@ void P_Dat_PTickPre(void) {
    pl.sidev    = ACS_GetPlayerInputFixed(-1, INPUT_SIDEMOVE);
    pl.upv      = ACS_GetPlayerInputFixed(-1, INPUT_UPMOVE);
 
-   pl.buttons = ACS_GetPlayerInput(-1, INPUT_BUTTONS);
-
    pl.name = strp(ACS_PrintName(0));
 
    pl.scopetoken = ServCallI(sm_WeaponScoped);

@@ -204,6 +204,7 @@ struct old_player_delta {
    i32 health;
    i32 mana;
    i32 shield;
+   i32 buttons;
 };
 
 /*      07-04-2016: That's a lot of data!
@@ -234,6 +235,8 @@ struct player {
    __prop waterlevel   {default:    GetMembI(->tid, sm_WaterLevel)}
    __prop classname    {default:    GetNameTag(->tid)}
    __prop overdrive    {default:    GetMembI(->tid, sm_Overdrive)}
+   __prop buttons      {default:    ACS_GetPlayerInput(-1, INPUT_BUTTONS)}
+
 
    /* Initialization */
    bool wasinit;

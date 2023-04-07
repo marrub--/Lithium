@@ -345,7 +345,7 @@ void TerminalGUI(i32 tact) {
 
    G_End(&gst, gui_curs_outlineinv);
 
-   if(pl.buttons & BT_USE && !(pl.old.buttons & BT_USE) &&
+   if(P_ButtonPressed(BT_USE) &&
       pl.old.modal == _gui_dlg) {
       AmbientSound(ss_player_trmswitch, 1.0);
       MemB1_S(VAR_UACT, UACT_ACKNOWLEDGE);
@@ -602,7 +602,6 @@ alloc_aut(0) sync static void ActFIN_WAIT(void) {
       fil_skipfill.tic = 35;
       for(i32 i = tics; i >= 0; i--) {
          F_drawBack(bgnd);
-         i32 buttons = ACS_GetPlayerInput(-1, INPUT_BUTTONS);
          i32 p, h;
          if(i > 1) {
             if(ACS_Timer() % 3 == 0 && text[p] != ' ') {
@@ -626,11 +625,11 @@ alloc_aut(0) sync static void ActFIN_WAIT(void) {
             PrintText(sf_smallfnt, CR_WHITE, _fill_x,6, _fill_y,0);
             if(i == 1) {
                if(!G_Filler(_fill_x, _fill_y, &fil_fill,
-                            buttons & (BT_USE | BT_ATTACK))) {
+                            P_ButtonHeld(BT_USE | BT_ATTACK))) {
                   i++;
                }
             } else if(G_Filler(_fill_x, _fill_y, &fil_skipfill,
-                               buttons & (BT_USE | BT_ATTACK))) {
+                               P_ButtonHeld(BT_USE | BT_ATTACK))) {
                i = 2;
             }
          }

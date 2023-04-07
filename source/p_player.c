@@ -66,10 +66,11 @@ reinit:
       /* Update data */
       P_Dat_PTickPre();
 
-      olddelta.del    = pl.cur;
-      olddelta.health = pl.health;
-      olddelta.mana   = pl.mana;
-      olddelta.shield = pl.shield;
+      olddelta.del     = pl.cur;
+      olddelta.health  = pl.health;
+      olddelta.mana    = pl.mana;
+      olddelta.shield  = pl.shield;
+      olddelta.buttons = pl.buttons;
 
       /* Tick all systems */
       if(!pl.dead) {
@@ -450,8 +451,8 @@ alloc_aut(0) script static void P_doIntro(void) {
       _c(' ');
       _p(ns(lang(sl_skip_intro_2)));
       PrintText(sf_smallfnt, CR_WHITE, 275,6, 220,0);
-      if(G_Filler(280, 220, &fil, pl.buttons & (BT_USE | BT_ATTACK))) {
-         if(pl.buttons & BT_ATTACK) {
+      if(G_Filler(280, 220, &fil, P_ButtonHeld(BT_USE | BT_ATTACK))) {
+         if(P_ButtonHeld(BT_ATTACK)) {
             which++;
             continue;
          } else {

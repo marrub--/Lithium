@@ -477,7 +477,7 @@ action(Weapon) Actor lith_a_fireMelee(int damage, double range, int flags = 0, c
    }
    FTranslatedLineTarget lt;
    double y = angle + random2() * (5.625 / 256.0);
-   double p = aimLineAttack(y, range, lt, 0, ALF_CHECK3D);
+   double p = aimLineAttack(y, range, lt, 8, ALF_CHECK3D|ALF_CHECKNONSHOOTABLE);
    if(lt.lineTarget) {
       if(flags & _mlf_damage_stepup) {
          double rad  = radius - lt.lineTarget.radius;

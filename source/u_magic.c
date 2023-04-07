@@ -118,9 +118,9 @@ void Upgr_Magic_Update(void) {
 
    udata.manaperc = manaperc;
 
-   if(pl.buttons & BT_USER4 && !(pl.old.buttons & BT_USER4)) {
+   if(P_ButtonPressed(BT_USER4)) {
       SetMagicUI(true);
-   } else if(!(pl.buttons & BT_USER4) && pl.old.buttons & BT_USER4) {
+   } else if(P_ButtonReleased(BT_USER4)) {
       SetMagicUI(false);
    }
 

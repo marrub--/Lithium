@@ -81,8 +81,8 @@ void G_UpdateState(struct gui_state *g) {
    else         g->cy -= pl.pitchv * curspeed;
    g->cx = clamplk(g->cx, 0, g->w);
    g->cy = clamplk(g->cy, 0, g->h);
-   g->clicklft = pl.buttons & BT_ATTACK;
-   g->clickrgt = pl.buttons & BT_ALTATTACK;
+   g->clicklft = P_ButtonHeld(BT_ATTACK);
+   g->clickrgt = P_ButtonHeld(BT_ALTATTACK);
    g->clickany = g->clicklft || g->clickrgt;
    g->defcr = Draw_GetCr(CVarGetI(sc_gui_defcr));
    if(!g->clickany) {

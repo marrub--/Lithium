@@ -16,12 +16,13 @@ default {
    Weapon.SlotNumber 4;
    Weapon.SlotPriority 1;
    Inventory.AltHudIcon "MNGGZ0";
+   -Weapon.NoAutoFire
 }
 
-double     m_windUp;
-statelabel m_lastState;
-bool       m_sndState, m_click;
-int        m_ammoState;
+double m_windUp;
+state  m_fireState;
+bool   m_sndState, m_click;
+int    m_ammoState;
 
 override void markPrecacheSounds() {
    super.markPrecacheSounds();
@@ -84,14 +85,12 @@ bool lith_isMinigunHeld() {
    return !owner.player.isTotallyFrozen() && owner.player.buttons & BT_ATTACK;
 }
 
-action(Weapon) state Lith_A_MinigunReady(statelabel lb, statelabel l) {
-   int flags = WRF_NOPRIMARY;
+override state getAtkState(bool hold) {
+   return m_fireState;
+}
 
-   if(!(invoker.m_windUp ~== 0)) flags |= WRF_NOSECONDARY;
-
-   invoker.m_lastState = lb;
-
-   A_SetTics(invoker.Lith_WindupTime());
+action(Weapon) state Lith_A_MinigunReady(statelabel firelbl) {
+   A_SetTics(invoker.lith_windupTime());
    if(invoker.lith_isMinigunFiring()) {
       if(Lith_UTIL.pData(_pdt_upgrade, UPGR_Minigun_A)) {
          invoker.m_windUp += 0.21;
@@ -101,21 +100,8 @@ action(Weapon) state Lith_A_MinigunReady(statelabel lb, statelabel l) {
       if(invoker.m_windUp > 1) invoker.m_windUp = 1;
       invoker.m_click = false;
    }
-
-   state st = Lith_A_Ready(flags);
-   if(st) return st;
-
-   if(invoker.lith_isMinigunHeld()) {
-      if(!invoker.lith_noAmmo()) {
-         return ResolveState(l);
-      } else {
-         A_StartSound("weapons/minigun/empty", lch_dryweapon);
-         A_OverlayOffset(_psp_weapon, FRandom(2, 3), FRandom(32, 34), WOF_INTERPOLATE);
-         return null;
-      }
-   } else {
-      return null;
-   }
+   invoker.m_fireState = resolveState(firelbl);
+   return lith_a_ready();
 }
 
 action(Weapon) state Lith_A_MinigunPostReady(statelabel l) {
@@ -160,9 +146,14 @@ action(Weapon) void Lith_A_MinigunPostFire() {
    }
 }
 
+action(weapon) void lith_a_minigunFireEmpty() {
+   a_startSound("weapons/minigun/empty", lch_dryweapon);
+   a_overlayOffset(_psp_weapon, fRandom(2, 3), fRandom(32, 34), WOF_INTERPOLATE);
+}
+
 states(Weapon) {
 Ready:
-   MNGG A 1 Lith_A_MinigunReady("Ready", "Fire");
+   MNGG A 1 Lith_A_MinigunReady("Fire");
    MNGG A 0 Lith_A_MinigunPostReady("Ready2");
    loop;
 Ready2:
@@ -174,11 +165,11 @@ Ready2:
       }
    }
 Ready2Loop:
-   MNGG B 1 Lith_A_MinigunReady("Ready2Loop", "Fire2");
+   MNGG B 1 Lith_A_MinigunReady("Fire2");
    MNGG B 0 Lith_A_MinigunPostReady("Ready3");
    loop;
 Ready3:
-   MNGG C 1 Lith_A_MinigunReady("Ready3", "Fire3");
+   MNGG C 1 Lith_A_MinigunReady("Fire3");
    MNGG C 0 Lith_A_MinigunPostReady("Ready");
    loop;
 
@@ -192,17 +183,23 @@ Select:
    loop;
 
 Fire:
+   MNGG D 0 lith_jumpNoAmmo;
    MNGG D 1 bright Lith_A_MinigunFire;
    MNGG A 1 Lith_A_MinigunPostFire;
    goto Ready2;
 Fire2:
+   MNGG E 0 lith_jumpNoAmmo(1, "FireEmpty2");
    MNGG E 1 bright Lith_A_MinigunFire;
    MNGG B 1 Lith_A_MinigunPostFire;
    goto Ready3;
 Fire3:
+   MNGG F 0 lith_jumpNoAmmo(1, "FireEmpty3");
    MNGG F 1 bright Lith_A_MinigunFire;
    MNGG C 1 Lith_A_MinigunPostFire;
    goto ReadySelector;
+FireEmpty:  MNGG A 2 lith_a_minigunFireEmpty; goto Ready2;
+FireEmpty2: MNGG B 2 lith_a_minigunFireEmpty; goto Ready3;
+FireEmpty3: MNGG C 2 lith_a_minigunFireEmpty; goto ReadySelector;
 }
 
 /* EOF */

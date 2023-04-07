@@ -26,7 +26,7 @@ i32 CheckTarget(void) {
 
 void Upgr_RPG_B_Update(void) {
    if(P_Wep_CurType() == weapon_m_rocket) {
-      if(pl.buttons & BT_ALTATTACK) {
+      if(P_ButtonHeld(BT_ALTATTACK)) {
          i32 id;
          if((id = CheckTarget()) && id != udata.id) {
             AmbientSound(ss_weapons_rocket_mark, 1.0);

@@ -36,6 +36,11 @@ class Lith_ChargeFistPuff : Actor {
       +PUFFGETSOWNER
       +PUFFONACTORS
    }
+   bool bSound;
+   override void beginPlay() {
+      super.beginPlay();
+      bSound = true;
+   }
    override void markPrecacheSounds() {
       super.markPrecacheSounds();
       markSound("weapons/cfist/hit");
@@ -54,12 +59,16 @@ class Lith_ChargeFistPuff : Actor {
             self.target.GiveInventory("Lith_FistHit", 1);
          }
          A_StartSound("weapons/cfist/hit", lch_body, attenuation: 1.3); /* much squish loud yes */
-         A_StartSound("weapons/cfist/hit", lch_body2, attenuation: 1.3);
+         if(bSound) {
+            A_StartSound("weapons/cfist/hit", lch_body2, attenuation: 1.3);
+         }
       }
    Animation:
       FHFX S 3 {
          A_SpawnItemEx("Lith_ChargeFistQuakerOats", 0,0,0, 0,0,0, 0, SXF_NOCHECKPOSITION);
-         A_StartSound("weapons/cfist/hitwall", lch_body, attenuation: 0.9);
+         if(bSound) {
+            A_StartSound("weapons/cfist/hitwall", lch_body, attenuation: 0.9);
+         }
       }
       FHFX TUVW 3;
       stop;
