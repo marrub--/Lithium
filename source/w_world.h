@@ -378,6 +378,7 @@ struct map_locals {
 
 extern struct world            wl;
 extern struct map_locals lmvar ml;
+extern struct map_locals       oldml;
 
 void Scr_MInit(void);
 script cstr CanonTime(i32 type, i32 time);

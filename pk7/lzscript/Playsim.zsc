@@ -50,7 +50,7 @@ override void worldLoaded(WorldEvent ev) {
    if(!lith_sv_postgame) {
       CVar.findCVar('__lith_fun').setInt(__lith_fun & ~lfun_postgame);
    }
-   if(level.nextMap.left(6) == "enDSeQ") {
+   if(!level.nextMap || level.nextMap.left(6) == "enDSeQ") {
       if(level.info.flags & LEVEL_BRUISERSPECIAL || level.info.flags3 & LEVEL3_E1M8SPECIAL) {
          m_bossLevel = boss_barons;
       } else if(level.info.flags3 & LEVEL3_E2M8SPECIAL) {
@@ -65,6 +65,7 @@ override void worldLoaded(WorldEvent ev) {
             m_bossLevel = boss_other;
          }
       }
+      level.nextMap = "LITHEND";
    }
    acs_executeWithResult(lsc_worldopen);
    setUpEnvironment();

@@ -14,30 +14,29 @@
 #include "p_player.h"
 #include "w_world.h"
 
-noinit static i32 finale;
+noinit static i32 finale_override;
 
 void F_Start(i32 which) {
-   Dbg_Log(log_dev, _l("running finale "), _p(which));
-   finale = which;
+   Dbg_Log(log_dev, _l("forcing finale "), _p(which));
+   finale_override = which + 1;
    ACS_ChangeLevel(sp_LITHEND, 0, CHANGELEVEL_NOINTERMISSION |
                    CHANGELEVEL_PRERAISEWEAPON, -1);
 }
 
 dynam_aut script void F_Run(void) {
    Dbg_Log(log_dev, _l("beginning finale dialogue"));
+   i32 which;
+   if(finale_override) {
+      which = finale_override - 1;
+   } else if(oldml.boss == boss_iconofsin && GetFun() & lfun_division) {
+      which = _finale_division;
+   } else {
+      which = _finale_normal;
+   }
    pl.setActivator();
-   pl.dlg.page = finale;
+   pl.dlg.page = which;
    pl.modal    = _gui_dlg;
    Dlg_Run(DNUM_PRG_BEG);
-}
-
-script_str ext("ACS") addr(OBJ "Finale")
-void Z_Finale(void) {
-   i32 which = _finale_normal;
-   if(ml.boss == boss_iconofsin && GetFun() & lfun_division) {
-      which = _finale_division;
-   }
-   F_Start(which);
 }
 
 /* EOF */

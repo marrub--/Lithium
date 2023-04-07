@@ -188,25 +188,4 @@ doomednums {
    22444 = Lith_TargetPractice
 }
 
-intermission Inter_Bunny       {}
-intermission Inter_BuyStrife   {}
-intermission Inter_Cast        {}
-intermission Inter_Chess       {}
-intermission Inter_Demonscroll {}
-intermission Inter_Pic1        {}
-intermission Inter_Pic2        {}
-intermission Inter_Pic3        {}
-intermission Inter_Underwater  {}
-
-cluster  1 {}
-cluster  2 {}
-cluster  3 {}
-cluster  4 {}
-cluster  5 {}
-cluster  6 {}
-cluster  7 {}
-cluster  8 {}
-cluster  9 {}
-cluster 10 {}
-
 /* EOF */

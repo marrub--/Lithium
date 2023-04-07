@@ -65,9 +65,6 @@ override void uiTick() {
       m_del = Lith_MenuDelegate.create();
       menuDelegate = m_del;
    }
-   if(gameState == GS_FINALE && (!level.nextMap || level.nextMap.left(6) == "enDSeQ")) {
-      callACS("Lith_Finale");
-   }
    tickMenu();
 }
 

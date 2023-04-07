@@ -21,6 +21,7 @@ __addrdef __mod_arr lmvar;
 
 noinit struct world            wl;
 noinit struct map_locals lmvar ml;
+noinit struct map_locals       oldml;
 noinit struct cvars            cv;
 
 script void SpawnBosses(score_t sum, bool force);
@@ -281,6 +282,7 @@ alloc_aut(0) script ext("ACS") addr(lsc_worldopen) void Z_World(void) {
 
 script type("unloading") static void Z_WorldUnload(void) {
    Dbg_Log(log_dev, _l(_f));
+   oldml = ml;
    pl.setActivator();
    P_GUI_Close();
    P_Dat_PTick();
