@@ -615,7 +615,7 @@ static void P_Spe_pTick(void) {
    } else if(pl.regenwait) {
       --pl.regenwait;
       if(pl.regenwait == pl.regenwaitmax) {
-         AmbientSound(ss_player_ari_shield_regenw, 0.9k);
+         AmbientSound(ss_player_ari_shield_regenw, 0.4k);
       }
    } else if(pl.shield < pl.shieldmax) {
       if(pl.shield == pl.old.shield) {

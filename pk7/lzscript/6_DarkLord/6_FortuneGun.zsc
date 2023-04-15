@@ -176,14 +176,18 @@ action(Weapon) void Lith_A_FireFortune() {
    A_FireProjectile("Lith_LightProjectileSkyLong", 0);
 }
 
+action(Weapon) void lith_a_emitFortuneSpark() {
+   A_SpawnItemEx("Lith_FortuneSpark", flags: SXF_SETTARGET|SXF_NOCHECKPOSITION);
+   A_FireProjectile("Lith_LightProjectileSkyShort", 0);
+}
+
 states(Weapon) {
 Ready:
    FORT A 1 Lith_A_Ready;
    FORT A 0 {
       if(random[Lith_Fortune](0, 77) == 0 || level.time % 50 == 0) {
          A_StartSound("weapons/fortune/spark", lch_weapon3, pitch: frandom[Lith_Fortune](0.9, 1.2));
-         A_SpawnItemEx("Lith_FortuneSpark", flags: SXF_SETTARGET|SXF_NOCHECKPOSITION);
-         A_FireProjectile("Lith_LightProjectileSkyShort", 0);
+         lith_a_emitFortuneSpark();
       }
    }
    loop;
@@ -203,19 +207,18 @@ Fire:
       invoker.m_chargeTime = 4;
    }
 FireCharge:
-   FORT A 0 {
-      A_SpawnItemEx("Lith_FortuneSpark", flags: SXF_SETTARGET|SXF_NOCHECKPOSITION);
-      A_FireProjectile("Lith_LightProjectileSkyShort", 0);
-   }
+   FORT A 0 lith_a_emitFortuneSpark;
    FORT AAAAAA 1 a_overlayOffset(_psp_weapon, fRandom[Lith_Fortune](0, 4), fRandom[Lith_Fortune](32, 34), wof_interpolate);
    FORT A 0 a_jumpIf(--invoker.m_chargeTime, "FireCharge");
 Fire2:
    #### # 0 lith_jumpNoAmmo(350);
    FORT A 1 offset(2, 33);
    FORT A 1 offset(2, 34);
+   FORT A 0 lith_a_emitFortuneSpark;
    FORT A 1 offset(5, 37);
    FORT B 2 bright offset(1, 32) Lith_A_FireFortune;
    FORT C 2 offset(2, 34);
+   FORT A 0 lith_a_emitFortuneSpark;
    FORT C 1 offset(-1, 32);
    FORT A 3 offset(22, 64);
    FORT A 3 offset(19, 60);

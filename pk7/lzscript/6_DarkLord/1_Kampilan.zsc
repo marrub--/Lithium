@@ -222,9 +222,11 @@ SwingRight:
    KAML H 1 offset(-2, 197);
    #### # 0 lith_a_setInterpolation(true);
    KAML H 1 offset(-20, 193);
+   #### # 0 lith_a_setInterpolation(false);
    KAML I 1 offset(-37, 182);
    KAML I 1 offset(-68, 172);
    KAML J 1 offset(-86, 133) a_startSound("weapons/kampilan/ready", lch_weapon3);
+   #### # 0 lith_a_setInterpolation(true);
    KAML K 1 offset(-86, 103);
    KAML L 1 offset(-94, 80);
    KAML M 1 offset(-99, 67);

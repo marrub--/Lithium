@@ -274,9 +274,8 @@ override void worldThingDamaged(WorldEvent ev) {
    if(!src || src == dst) {
       return;
    }
-   let player = Lith_Player(src);
-   if(player) {
-      let magnum = Lith_Magnum(player.player.readyWeapon);
+   if(Lith_Player(src)) {
+      let magnum = Lith_Magnum(src.player.readyWeapon);
       if(magnum) {
          if(dst.health <= 0) {
             magnum.lith_addMarksman();
@@ -284,8 +283,17 @@ override void worldThingDamaged(WorldEvent ev) {
             magnum.lith_addAccurate();
          }
       }
-   } else if(src.CountInv("Lith_MonsterID") && (dst.bCountKill || dst.Player)) {
-      src.ACS_ScriptCall("Lith_GiveMonsterEXP", ev.damage);
+      if(ev.damage > 0) {
+         let it = ThinkerIterator.create('Lith_SubAxe');
+         for(Lith_SubAxe axe; axe = Lith_SubAxe(it.next());) {
+            if(axe.tracer == dst) {
+               src.acs_scriptCall("Lith_GiveHealth", int(ceil(ev.damage / 30.0)));
+               break;
+            }
+         }
+      }
+   } else if(src.countInv("Lith_MonsterID") && (dst.bCountKill || dst.player)) {
+      src.acs_scriptCall("Lith_GiveMonsterEXP", ev.damage);
    }
 }
 

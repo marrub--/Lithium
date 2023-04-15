@@ -5992,7 +5992,7 @@
 "LITH_STAT_INR" =
    "Light Amplifier";
 "LITH_STAT_INV" =
-   "Invulnerability";
+   "Invulnerability!";
 "LITH_STAT_JET" =
    "Jetboost";
 "LITH_STAT_LAG" =
@@ -6005,6 +6005,8 @@
    "Silence of Shadows";
 "LITH_STAT_SWR" =
    "Shadow-walker";
+"LITH_STAT_SKP" =
+   "Absolute Focus!";
 "LITH_ACTIVATE" =
    "Activate";
 "LITH_AUTOGROUPS" =

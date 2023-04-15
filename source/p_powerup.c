@@ -61,17 +61,21 @@ void Z_GetSigil(void) {
 
 script_str ext("ACS") addr(OBJ "GiveHealthBonus")
 void Z_GiveHealthBonus(i32 amount) {
-   amount += pl.health;
-   if(amount > pl.maxhealth + 100) amount = pl.maxhealth + 100;
-   pl.setHealth(amount);
+   if(amount) {
+      amount += pl.health;
+      if(amount > pl.maxhealth + 100) amount = pl.maxhealth + 100;
+      pl.setHealth(amount);
+   }
 }
 
 script_str ext("ACS") addr(OBJ "GiveHealth")
 void Z_GiveHealth(i32 amount) {
-   amount += pl.health;
-   amount *= 1 + pl.attr.attrs[at_vit] / 80.0;
-   if(amount > pl.maxhealth) amount = pl.maxhealth;
-   pl.setHealth(amount);
+   if(amount) {
+      amount *= 1 + pl.attr.attrs[at_vit] / 80.0;
+      amount += pl.health;
+      if(amount > pl.maxhealth) amount = pl.maxhealth;
+      pl.setHealth(amount);
+   }
 }
 
 script_str ext("ACS") addr(OBJ "CheckHealth")

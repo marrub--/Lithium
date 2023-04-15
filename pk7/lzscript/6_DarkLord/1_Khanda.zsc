@@ -6,13 +6,13 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
+class Lith_StatSkillPower : Lith_StatFx {
+   override void initCb() {basic("SKP", 35 * 5);}
+}
+
 extend class Lith_HERMES {
    static bool KhandaPower(Actor mo) {
-      let wep = Lith_Khanda(mo.findInventory('Lith_Khanda'));
-      if(wep) {
-         wep.m_power = TICRATE*5;
-         return true;
-      }
+      Lith_StatFx.addToPool('Lith_StatSkillPower');
       return false;
    }
 }
@@ -57,7 +57,7 @@ default {
    Inventory.AltHudIcon "KAMLZ0";
    +Weapon.NoAutoFire
 }
-int m_power;
+bool m_power;
 override void markPrecacheSounds() {
    super.markPrecacheSounds();
    markSound("weapons/khanda/swing");
@@ -65,9 +65,7 @@ override void markPrecacheSounds() {
 }
 override void tick() {
    super.tick();
-   if(m_power && !isFrozen()) {
-      --m_power;
-   }
+   m_power = Lith_StatFx.getInPool('Lith_StatSkillPower');
 }
 states(Weapon) {
 PowerOverlay:

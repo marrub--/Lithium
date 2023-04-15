@@ -67,12 +67,13 @@
 == \#STAT_BER | Berserk
 == \#STAT_FLY | Flight
 == \#STAT_INR | Light Amplifier
-== \#STAT_INV | Invulnerability
+== \#STAT_INV | Invulnerability!
 == \#STAT_JET | Jetboost
 == \#STAT_LAG | Jetlagged
 == \#STAT_MKM | Marksman
 == \#STAT_RAD | Hazard Protection
 == \#STAT_SWD | Silence of Shadows
 == \#STAT_SWR | Shadow-walker
+== \#STAT_SKP | Absolute Focus!
 
 ## EOF

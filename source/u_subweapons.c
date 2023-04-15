@@ -88,17 +88,17 @@ void Upgr_Subweapons_Enter(struct ugprade *upgr) {
    #endif
 }
 
-script_str ext("ACS") addr(OBJ "GetSubShots")
+script_str alloc_aut(0) ext("ACS") addr(OBJ "GetSubShots")
 i32 Z_GetSubShots(void) {
    return udata.shots;
 }
 
-script_str ext("ACS") addr(OBJ "TakeSubShot")
+script_str alloc_aut(0) ext("ACS") addr(OBJ "TakeSubShot")
 void Z_TakeSubShot(void) {
    udata.shots--;
 }
 
-script_str ext("ACS") addr(OBJ "GetSubType")
+script_str alloc_aut(0) ext("ACS") addr(OBJ "GetSubType")
 i32 Z_GetSubType(void) {
    return udata.which;
 }
