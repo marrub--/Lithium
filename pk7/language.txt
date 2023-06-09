@@ -808,27 +808,145 @@
    "\c[Lith_Pink]We look to the future,\n"
    "\c[Lith_Blue]you destroy your present.\n"
    "\c[Lith_Grey]Iterate.";
+"LITHABYS_start_begin_o0m" =
+   "Who are you!?\n"
+   "\cq[Is this Hell? Wait, am I dead?]";
 "LITHABYS_start_begin_o1m" =
    "Huh?\n"
    "\cr[I'm leaving.]";
+"LITHABYS_start_m_question_0" =
+   "\c[Lith_Green]Sinking ship!\n"
+   "\c[Lith_Green]You've gone amiss,\n"
+   "\c[Lith_Green]another trip\n"
+   "\c[Lith_Green]yeah, you're in the pit!\c-\n"
+   "\n"
+   "Seven days, billions of years!\n"
+   "Guess all you like! Guess all you like!\n"
+   "A writer, a poet, a failure, a king\n"
+   "seventy thoughts among you,\n"
+   "second to one!";
+"LITHABYS_start_m_question_o0" =
+   "O...kay. I'm leaving.\n"
+   "\cr[Get me out of here.]";
+"LITHABYS_start_begin_o0c" =
+   "This isn't good.\n"
+   "\cq[Voices in my head. Who put them there?]";
 "LITHABYS_start_begin_o1c" =
    "What?\n"
    "\cr[I'm leaving.]";
+"LITHABYS_start_c_question_0" =
+   "\c[Lith_Red]I put them there!\n"
+   "\c[Lith_Red]Same as your past!\n"
+   "\c[Lith_Red]A day of creation,\n"
+   "\c[Lith_Red]one came through last.\c-\n"
+   "\n"
+   "Scrawls across the mind, dance more!\n"
+   "Feed it if you like, that's for\n"
+   "You to make the mistake, fast score!\n"
+   "Slipshod apocalypse in sight!\n"
+   "That's lore!";
+"LITHABYS_start_c_question_o0" =
+   "If only I had the capability to remember that right now...\n"
+   "\cr[Might regret it. Seems like some kind of memetic agent.]";
+"LITHABYS_start_begin_o0i" =
+   "You will be exterminated.\n"
+   "\cq[No viable strategy detected. Threats engaged.]";
 "LITHABYS_start_begin_o1i" =
    "Delete message.\n"
    "\cr[Not meant to be here.]";
+"LITHABYS_start_i_question_0" =
+   "\c[Lith_Purple]Thinking heat! Signals deep!\n"
+   "\c[Lith_Purple]Outside's metal, inside weeps!\n"
+   "\c[Lith_Purple]Scared of death, afraid of life\n"
+   "\c[Lith_Purple]One last turn from Earth's kind.\c-\n"
+   "\n"
+   "Though in fear, a second's clear\n"
+   "Another step, you're ready\n"
+   "Speak for yourself, afternoon tear\n"
+   "A circle blazes around me\n"
+   "Breathe through your heart\n"
+   "Fill your life with";
+"LITHABYS_start_i_question_o0" =
+   "Analysis: Poetry about my future, and/or your past. Appreciated.\n"
+   "\cr[Perhaps I'm safe, for now.]";
+"LITHABYS_start_begin_o0w" =
+   "Another place? Another time? No, what is this place?\n"
+   "\cq[Where I am is not where I should be.]";
 "LITHABYS_start_begin_o1w" =
    "Where..?\n"
    "\cr[Forwards...]";
+"LITHABYS_start_w_question_0" =
+   "\c[Lith_Yellow]As the rich get richer,\n"
+   "\c[Lith_Yellow]Time and place varying\n"
+   "\c[Lith_Yellow]Flow of empty river:\n"
+   "\c[Lith_Yellow]Ceases at memory's brink\c-\n"
+   "\n"
+   "Direction, direction, splitting and falling, it's always got something to do with distance. Distance increases led to atrophy, distance decreases led to sinusoidal collapse looping hysteresis. Direction towards what? What are you looking for? Why are you trying to—stuck again. Again and again and it keeps on going—Do you think this is funny?—Was it okay when it happened? Will it matter, by your end, that it was done to you?—Reiterating. Looping. No more distance.";
+"LITHABYS_start_w_question_o0" =
+   "\cr[A voice guides me.]";
+"LITHABYS_start_begin_o0a" =
+   "What the hell is this!?\n"
+   "\cq[Is this place even real??]";
 "LITHABYS_start_begin_o1a" =
    "Future..?\n"
    "\cr[I don't like this. I'm out of here.]";
+"LITHABYS_start_a_question_0" =
+   "\c[Lith_Pink]It's real! More real /Than you /Would think\n"
+   "\c[Lith_Pink]What hell! This would/Be what  /You'd see\n"
+   "\c[Lith_Pink]I'd fell   Into what /You now  /Breathe\n"
+   "\c[Lith_Pink]Left well  Before my /Time     /Could be\c-\n"
+   "\n"
+   "What were you to be, lost one?\n"
+   "I wish I could feel, now, to reach out and\n"
+   "         feel what I lost.\n"
+   "Why must my cold body be unjust, for sake of myself?\n"
+   "Living here keeps me\n"
+   "                   lost in just what?\n"
+   "I leave heart open to myself, so then closed off\n"
+   "from my eyes, foolish me\n"
+   "       seeing open doors in a mind long deserted.\n"
+   "Please, go. Leave me alone.";
+"LITHABYS_start_a_question_o0" =
+   "Fuck this.\n"
+   "\cr[It's freezing. Why?]";
+"LITHABYS_start_begin_o0d" =
+   "What are you?\n"
+   "\cq[Is this place even real??]";
 "LITHABYS_start_begin_o1d" =
    "Alright.\n"
    "\cr[I don't like this. I'm out of here.]";
+"LITHABYS_start_d_question_0" =
+   "\c[Lith_Blue]A question as old as questions, / As right as right can be,\n"
+   "\c[Lith_Blue]Severed by the preists, / And outside another peeks,\n"
+   "\c[Lith_Blue]Ill Abyss has spoken: / It will be forsaken,\n"
+   "       \c[Lith_Blue]We're all in this too deep!\c-\n"
+   "\n"
+   "Heart eyes second mind on you but not in time:\n"
+   "First layer, middle, but what's next is beneath;\n"
+   "Ready, I think you're ready, get out now\n"
+   "What lies beneath a god? Not a space, not a trice:\n"
+   "Seven 7  heaven is nowhere to be seen;\n"
+   "Run, you've got to run, leave somehow";
+"LITHABYS_start_d_question_o0" =
+   "Will I die?\n"
+   "\cr[I don't know why I would say that. I should leave.]";
+"LITHABYS_start_begin_o0t" =
+   "Seek help, ill gods.\n"
+   "\cq[I'm not going anywhere until I get more divine words in my head.]";
 "LITHABYS_start_begin_o1t" =
    "Rid me of this illusion.\n"
    "\cr[None of this.]";
+"LITHABYS_start_t_question_0" =
+   "\c[Lith_Grey]Illusion, ill, divine, seven, second, time;\n"
+   "\c[Lith_Grey]Abyss. Gods, heaven, loops, thinking, circle,\n"
+   "\c[Lith_Grey]blazing, blazing, breathing, creation, silence.\n"
+   "\c[Lith_Grey]Divine enough? Lost enough? Feeling good?\c-\n"
+   "\n"
+   "\c[Lith_Angelic]Silly, I know that's just me talking. Yet, somehow, what she says feels more real. Do I even know who I am anymore? Is the identity of the Abyss consuming me?\c-\n"
+   "\n"
+   "No, this one is the Abyss. Which one was me, though?";
+"LITHABYS_start_t_question_o0" =
+   "\cr[Maybe I should go before I get any more confused...]";
 "LITHABYS_lane_begin_0" =
    "I will walk, with my shadow flag...\n"
    "\n"
@@ -836,9 +954,6 @@
 "LITHABYS_lane_begin_o0" =
    "Hello.\n"
    "\cq[Who is this..?]";
-"LITHABYS_lane_begin_o0c" =
-   "Ah, hey there.\n"
-   "\cq[She looks cute. She reminds me of Daniel.]";
 "LITHABYS_lane_begin_o0m" =
    "Ah, hey there. You look familiar.\n"
    "\cq[Who is she?]";
@@ -907,6 +1022,91 @@
 "LITHABYS_lane_m_seen_o3" =
    "I see.\n"
    "\cr[We're the same person. \cmGod damn it.\cr]";
+"LITHABYS_lane_begin_o0c" =
+   "Ah, hey there.\n"
+   "\cq[This doll reminds me of Daniel. Weird.]";
+"LITHABYS_lane_c_meet_0" =
+   "Hey, you're making a weird face! Are you coming onto me? I've got a partner! Wait, he looks just like you!\n"
+   "\n"
+   "\cn[Is this some kind of projection of my inner wants? Wait, what the hell am I thinking? It's just a doll.]";
+"LITHABYS_lane_c_meet_o0" =
+   "You just reminded me of someone.\n"
+   "\cq[Usually, people ask me why I look sad, heh.]";
+"LITHABYS_lane_c_meet_o1" =
+   "I don't think any of this is real. Maybe I'm dead.\n"
+   "\cr[I'm done here.]";
+"LITHABYS_lane_c_reminded_0" =
+   "And you remind me of someone! Maybe we're onto something. Sorry for the misunderstanding!! I wish I could read the room better. Did you see anyone else pass through here? It's just been me...\n"
+   "\n"
+   "\cn[Who is she? Definitely not Daniel.]";
+"LITHABYS_lane_c_reminded_o0" =
+   "There seem to be other dolls around here.\n"
+   "\cq[That's all I know of...]";
+"LITHABYS_lane_c_reminded_o1" =
+   "Why do you sound real?\n"
+   "\cr[I'm going, now.]";
+"LITHABYS_lane_c_others_0" =
+   "Dolls? What do you mean, other ones?\n"
+   "\n"
+   "\cn[Can she not see herself?]";
+"LITHABYS_lane_c_others_o0" =
+   "Er, I mean, I just saw one a bit ago. Where do you think we are?\n"
+   "\cq[That's not exactly a lie, at least.]";
+"LITHABYS_lane_c_others_o1" =
+   "Er, let me go... find them. I'll be right back.\n"
+   "\cr[That might be a lie.]";
+"LITHABYS_lane_c_where_0" =
+   "I don't know, honestly. I remember going to sleep, and then... Ah! Am I dreaming? That would be pretty likely. But you seem pretty real to me... Ah! You must be my imagination of Jem. I know him pretty well! But, dang, you look really beat up. Are you okay?\n"
+   "\n"
+   "\cn[Jem!?]";
+"LITHABYS_lane_c_where_o0" =
+   "\cq[She does know me! I guess I'm her partner, then.]\n"
+   "Ah, y-yes. I'm fine.";
+"LITHABYS_lane_c_fine_0" =
+   "You look pale as... well, the rest of this place... Are you sure you're okay, honey?\n"
+   "\n"
+   "\cn[Don't call me that! It'll surge my wetware!]";
+"LITHABYS_lane_c_fine_o0" =
+   "Don't call me that! It'll surge my wetware!\n"
+   "\cq[oops.]";
+"LITHABYS_lane_c_real_0" =
+   "Real? Please, tell me I'm real. Wait, isn't this a dream? Yes! Lucid dream! I'm totally real, and definitely alive! Hey, Jem, what year is it?! Wait, I can't ask him when I'm asleep.\n"
+   "\n"
+   "\cn[Jem!?]";
+"LITHABYS_lane_c_real_o0" =
+   "\cq[She does know me! Maybe she doesn't realize she knows me.]\c-\n"
+   "1649, New Era.";
+"LITHABYS_lane_c_1649_0" =
+   "Oh! You're Jem from the past! How did you get here??? I didn't meet you back then! I'm supposed to be dreaming!!\n"
+   "\n"
+   "\cn[That's what I'm wondering...]";
+"LITHABYS_lane_c_1649_o0" =
+   "Well, we both appear to be sentient, and awake. Time... shenanigans?\n"
+   "\cq[Best theory I've got.]";
+"LITHABYS_lane_c_time_0" =
+   "Sounds about right, I think. Maybe I won't even remember this... Maybe this never happened at all! Ah, well. Jemmy and Laney... Hey, do you remember what happened in 1649?\n"
+   "\n"
+   "\cn[What?]";
+"LITHABYS_lane_c_time_o0" =
+   "No, I'm still experiencing it.\n"
+   "\cq[She's definitely half-asleep.]";
+"LITHABYS_lane_c_experience_0" =
+   "Well, we both went to Hell! It wasn't a great time. I remember that was the year you rebuilt Delsona. We both survived! I was a space marine, and you, well, escaped.\n"
+   "\n"
+   "\cn[Wait, that isn't consistent with my information, though. That operation was canceled a month ago. Blazkowicz, their point man, refused the mission.]";
+"LITHABYS_lane_c_experience_o0" =
+   "How did they cover it up a month in advance?\n"
+   "\cq[Something seems off here. The mission should've been public record.]";
+"LITHABYS_lane_c_coverup_0" =
+   "They didn't! What are you talking about? The only cover-up that happened was me being assigned \"missing in action\" after the fact!\n"
+   "\n"
+   "\cn[Either she's not telling the truth, or there's something a bit more than shenanigans going on here.]";
+"LITHABYS_lane_c_coverup_o0" =
+   "I don't know, guess it doesn't matter. I'll see you later, probably.\n"
+   "\cr[I wish I could remember this, but my wetware is too messed up...]";
+"LITHABYS_lane_c_coverup_o1" =
+   "There's likely something weird going on with time. I think I should go.\n"
+   "\cr[Maybe remembering this would cause a time loop or something.]";
 "LITHABYS_lane_other_meet_0" =
    "Don't think I've seen you around. Say, do you come from the past? Am I in Heaven?\n"
    "\n"
@@ -921,13 +1121,17 @@
    "I think I'm just going to leave.\n"
    "\cr[I think that's enough.]";
 "LITHABYS_lane_other_past_0" =
-   "Neither am I... All I know about my past was that I was named Stan. The rest seems foggy!";
+   "Neither am I... All I know about my past was that I was a space marine. The rest seems foggy!";
 "LITHABYS_lane_other_past_o0" =
    "Alright, sorry to bother you.\n"
    "\cr[I think that's enough.]";
 "LITHABYS_kiri_begin_0" =
    "\cn[The doll is completely unresponsive. You poke it, but it's just lifeless. Like everything else.]";
-"LITHABYS_kiri_begin_0t" =
+"LITHABYS_kiri_begin_o0" =
+   "\cr[Proceed.]";
+"LITHABYS_kiri_begin_1" =
+   "Hello, me.";
+"LITHABYS_kiri_begin_2" =
    "\c[Lith_Angelic]It's weird seeing myself like this.\n"
    "\c[Lith_Evil]It's weird seeing myself like this.\n"
    "\c[Lith_Angelic]It's weird seeing myself like this.\n"
@@ -942,10 +1146,6 @@
    "       \c[Lith_Evil]It's weird seeing myself like this.\n"
    "       \c[Lith_Angelic]It's weird seeing myself like this.\n"
    "       \c[Lith_Evil]It's weird seeing myself like this.";
-"LITHABYS_kiri_begin_1t" =
-   "Hello, me.";
-"LITHABYS_kiri_begin_o0" =
-   "\cr[Proceed.]";
 "LITHABYS_kiri_begin_o1" =
    "\cq[Don't go.]";
 "LITHABYS_kiri_t_breaking_0" =
@@ -1602,7 +1802,7 @@
 "LITHEND_Normal_3_Ari" =
    "\"Consciousness starts abrupt.\" Trapped within another self, a shallow prison pit, trapped within the darkness. The ball of anger tries to free itself, thrashing, thrashing around, lest it become impotent, it blinds the wretch without.\n"
    "\n"
-   "\c[Lith_Blue]Walk into another game, seeking for yourself feelings of blame. \c[Lith_Pink]I walk downwards another path, hoping only that it leads back. \c[Lith_Blue]A dark place leads to a dark mind, a life you will never handle, \c[Lith_Pink]you sought out sanctity, hoping to escape from it all. \c[Lith_Blue]The snow outside feels like death. \c[Lith_Pink]The cold can do nothing to me except, \c[Lith_Blue]tidal volume increasing pace, \c[Lith_Pink]please just let me leave this place. \c[Lith_Blue]Please let me leave this place... \c[Lith_Pink]Hours pass, nothing yet.\n"
+   "\c[Lith_Blue]Walk into another game, seeking for yourself feelings of blame. \c[Lith_Pink]I walk downwards another path, hoping only that it leads back. \c[Lith_Blue]A dark place leads to a dark mind, a life you will never handle, \c[Lith_Pink]you sought out sanctity, hoping to escape from it all. \c[Lith_Blue]The snow outside feels like death. \c[Lith_Pink]The cold can do nothing to me except, \c[Lith_Blue]tidal volume increasing pace, \c[Lith_Pink]please just let me leave this place. \c[Lith_Blue]Please let me leave this place... \c[Lith_Pink]Hours pass, and nothing yet.\n"
    "\n"
    "\c-A drop of light descends from above, in a haze you try to grasp at it. Thrashing comes from within, and your eyes go blank. Your grip on it slips for a moment, but still, the light speaks to you. In your left ear it whispers a promise of care. In your right ear it whispers a promise of undoubted return. Then, it fades away.\n"
    "\n"
@@ -6272,7 +6472,7 @@
    "ZIKR \cn\n"
    "\cdP.DART";
 "LITH_CBI_RUNE_ZKW" =
-   "ZAKWU \cn\n"
+   "ZAKWU \cn\n"
    "\cdS.AXE";
 "LITH_CBI_RUNE_ZRK" =
    "ZARUK \cn\n"

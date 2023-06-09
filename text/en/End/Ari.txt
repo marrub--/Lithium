@@ -82,7 +82,7 @@ blinds the wretch without.
 \c[Lith_Blue]tidal volume increasing pace,
 \c[Lith_Pink]please just let me leave this place.
 \c[Lith_Blue]Please let me leave this place...
-\c[Lith_Pink]Hours pass, nothing yet.
+\c[Lith_Pink]Hours pass, and nothing yet.
 
 \c-A drop of light descends from above, in a haze you try to grasp at
 it. Thrashing comes from within, and your eyes go blank. Your grip on

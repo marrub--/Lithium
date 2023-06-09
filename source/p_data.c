@@ -232,8 +232,7 @@ script ext("ACS") addr(lsc_giveammo) bool chtf_give_ammo(cheat_params_t const pa
 struct cheat cht_give_ammo = cheat_s("pgfa", 0, chtf_give_ammo, "Fully ammunized");
 
 /* Reset some things on the player when they spawn. */
-script
-void P_Init(void) {
+script void P_Init(void) {
    if(!pl.wasinit) {
       fastmemset(&pl, 0, sizeof pl);
       SetPClass();

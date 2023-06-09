@@ -199,17 +199,17 @@ static void HUD_BottomRight(void) {
       }
       break;
    case _hud_darklord:
-      xmg = pl.hudrpos-88;
+      xmg = pl.hudrpos-105;
       ymg = 228;
       xam = 62;
       if(wep->ammotype & AT_Disp) {
          PrintSprite(sp_HUD_D_AmmoBack, pl.hudrpos,2, 239,2);
          switch(wep->ammotype & AT_Disp) {
-         case AT_ADis|AT_MDis: PrintSprite(sp_HUD_D_Ammo2Back, pl.hudrpos-90,2, 239,2);
-         case AT_ADis:         BeginPrintStrL(u8"\n"); break;
-         case AT_MDis:         BeginPrintStrL(u8"\n"); break;
+         case AT_ADis|AT_MDis: PrintSprite(sp_HUD_D_Ammo2Back, pl.hudrpos-107,2, 239,2);
+         case AT_ADis:         BeginPrintStrL(u8"-\uE103\uE102\uE104\uE106\n\uE106\uE108\uE104\uE108\uE100"); break;
+         case AT_MDis:         BeginPrintStrL(u8"-\uE103\uE100 \uE104\uE108\n\uE103\uE108\uE101\uE104"); break;
          }
-         PrintText(sf_lmidfont, hudcolor, pl.hudrpos-11,4, 230,0, _u_no_unicode);
+         PrintText(sf_lmidfont, hudcolor, pl.hudrpos-3,3, 230,0, _u_no_unicode);
       }
       break;
    case _hud_old:
@@ -427,7 +427,7 @@ static void HUD_BottomLeft(void) {
       if(CheckFade(fid_shielddone)) {
          PrintSprite(sp_HUD_D_ShieldDone, pl.hudlpos+16,1, 239,2, _u_add|_u_fade, fid_shielddone);
       }
-      BeginPrintStrL(u8"");
+      BeginPrintStrL(u8"\uE103\uE108");
       PrintText(sf_lmidfont, hudcolor, pl.hudlpos+8,4, 229,0, _u_no_unicode);
       for(i32 i = 0, x_ = (8 + pl.ticks) % 41; i < 20; i++) {
          i32 xx = x_ - i;

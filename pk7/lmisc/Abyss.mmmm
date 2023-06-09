@@ -17,19 +17,17 @@ toki_nimi {
    kiri,
 }
 
-kon {
-   lane_met,
-   lane_rpg,
-   lane_where,
-   lane_scars,
-   kiri_met,
-   kiri_self,
-}
-
 // Tutorial ══════════════════════════════════════════════════════════════════╕
 toki start {
    lipu_nimi {
       begin,
+      m_question,
+      c_question,
+      i_question,
+      w_question,
+      a_question,
+      d_question,
+      t_question,
    }
 
    lipu begin {
@@ -37,20 +35,40 @@ toki start {
       remote DATA;
       icon   Data;
       text   _0;
+      option _o0 {
+         /**/ seme poki pM lipu m_question;
+         ante seme poki pC lipu c_question;
+         ante seme poki pI lipu i_question;
+         ante seme poki pW lipu w_question;
+         ante seme poki pA lipu a_question;
+         ante seme poki pD lipu d_question;
+         ante seme poki pT lipu t_question;
+      }
       option _o1 brk;
    }
+
+   lipu m_question {text _0; option _o0 brk;}
+   lipu c_question {text _0; option _o0 brk;}
+   lipu i_question {text _0; option _o0 brk;}
+   lipu w_question {text _0; option _o0 brk;}
+   lipu a_question {text _0; option _o0 brk;}
+   lipu d_question {text _0; option _o0 brk;}
+   lipu t_question {text _0; option _o0 brk;}
 }
 
 // Marine ════════════════════════════════════════════════════════════════════╕
+kon {
+   lane_met,
+   lane_rpg,
+   lane_where,
+   lane_scars,
+}
 toki lane {
    lipu_nimi {
       begin,
       m_meet,
-      m_nothing,
-      m_seen,
       c_meet,
       other_meet,
-      other_past,
    }
 
    lipu begin {
@@ -58,20 +76,22 @@ toki lane {
       remote LANE;
       icon   Doll;
       text _0;
-      seme kon %lane_met {
-         option _o1 brk;
-      } ante {
+      seme !kon %lane_met {
          option _o0 {
             /**/ seme poki pM lipu m_meet;
             ante seme poki pC lipu c_meet;
             ante              lipu other_meet;
          }
-         seme poki pM option _o1m brk;
-         ante         option _o1  brk;
       }
+      option _o1 brk;
    }
 
    /* Lane */
+   lipu_nimi {
+      m_nothing,
+      m_seen,
+   }
+
    lipu m_meet {
       text _0;
       option _o0 lipu m_nothing;
@@ -114,8 +134,62 @@ toki lane {
       }
    }
 
+   /* Jem */
+   lipu_nimi {
+      c_reminded,
+      c_real,
+      c_others,
+      c_where,
+      c_fine,
+      c_1649,
+      c_time,
+      c_experience,
+      c_coverup,
+   }
+
    lipu c_meet {
-      lipu begin;
+      text _0;
+      option _o0 lipu c_reminded;
+      option _o1 lipu c_real;
+   }
+
+   lipu c_reminded {
+      text _0;
+      option _o0 lipu c_others;
+      option _o1 lipu c_real;
+   }
+
+   lipu c_real {text _0; option _o0 lipu c_1649;}
+
+   lipu c_others {
+      text _0;
+      option _o0 lipu c_where;
+      option _o1 brk;
+   }
+
+   lipu c_where {text _0; option _o0 lipu c_fine;}
+   lipu c_fine  {text _0; option _o0 lipu c_1649;}
+   lipu c_1649 {
+      inc %lane_met;
+      text _0;
+      option _o0 lipu c_time;
+   }
+   lipu c_time {text _0; option _o0 lipu c_experience;}
+   lipu c_experience {
+       script "Lith_SetLane";
+       text _0;
+       option _o0 lipu c_coverup;
+    }
+
+   lipu c_coverup {
+      text _0;
+      option _o0 brk;
+      option _o1 brk;
+   }
+
+   /* Other */
+   lipu_nimi {
+      other_past,
    }
 
    lipu other_meet {
@@ -134,6 +208,10 @@ toki lane {
 }
 
 // Thoth ═════════════════════════════════════════════════════════════════════╕
+kon {
+   kiri_met,
+   kiri_self,
+}
 toki kiri {
    lipu_nimi {
       begin,
@@ -150,11 +228,11 @@ toki kiri {
       option _o0 brk;
       seme poki pT {
          seme !kon %kiri_met {
-            text _0t;
+            text _2;
             option _o1 lipu t_breaking;
          } ante {
             seme kon %kiri_self {
-               text _1t;
+               text _1;
             } ante {
                text _0;
             }

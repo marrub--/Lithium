@@ -18,19 +18,15 @@ void Upgr_Rifle_A_Deactivate(void) {
 
 void Upgr_Rifle_A_Render(void) {
    if(P_Wep_CurType() != weapon_m_rifle) return;
-
-   if(CVarGetI(sc_weapons_riflescope) &&
-      pl.riflefiremode == rifle_firemode_burst)
-   {
+   if(CVarGetI(sc_weapons_riflescope) && pl.riflefiremode == rifle_firemode_burst) {
       ACS_SetCameraToTexture(0, sp_LITHCAM1, 34);
       SetClip(40, 100, 240, 40);
       PrintSprite(sp_LITHCAM1, 160,0, 120,0);
       ClearClip();
       PrintSprite(sp_HUD_RifleScope, 160,0, 120,0);
    }
-
-   PrintSprite(sp_HUD_H_W3, pl.hudrpos-105,2, 240,2);
-   PrintSprite(sa_rifle_modes[rifle_firemode_max - pl.riflefiremode - 1], pl.hudrpos-105,2, 208 + (pl.riflefiremode * 16),2);
+   PrintSprite(sp_HUD_H_W3, pl.hudrpos-1,2, 200,2);
+   PrintSprite(sa_rifle_modes[rifle_firemode_max - pl.riflefiremode - 1], pl.hudrpos-1,2, 168 + (pl.riflefiremode * 16),2);
 }
 
 script_str ext("ACS") addr(OBJ "SwitchRifleFiremode")

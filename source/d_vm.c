@@ -354,7 +354,7 @@ void TerminalGUI(i32 tact) {
 
 static
 void DialogueGUI(void) {
-   enum {left = 37, top = 75, texttop = top + 24};
+   enum {left = 16, right = 320 - 16 - left, top = 75, texttop = top + 24};
 
    str snam = GetName();
    str srem = GetRemote();
@@ -369,7 +369,7 @@ void DialogueGUI(void) {
 
    PrintText_str(snam, sf_bigupper, CR_GREEN, 30,1, 35,1);
 
-   G_Clip(&gst, left, top, 257, 150);
+   G_Clip(&gst, left, top, right-left, 150);
    ACS_BeginPrint();
    PrintStrL("\Cd> Remote: ");
    ACS_PrintString(srem);

@@ -31,14 +31,11 @@ static void P_initCbi(void);
 
 dynam_aut script void P_Player(void) {
    Dbg_Log(log_dev, _l(_f));
-
    pl.setActivator();
-
    if(get_msk(ml.flag, _mflg_func) != _mfunc_normal) {
       ACS_SetPlayerProperty(true, true, PROP_TOTALLYFROZEN);
       return;
    }
-
 reinit:
    P_Init();
    P_Dat_PTickPre();
@@ -49,29 +46,23 @@ reinit:
    P_bossWarnings();
    if(pl.teleportedout) P_TeleportIn();
    P_initCbi();
-
    struct old_player_delta olddelta;
-
    i32 idletics = 0;
    for(;;) {
       if(pl.reinit) {
          goto reinit;
       }
-
       /* Check for resurrect */
       if(pl.health > 0 && pl.dead) {
          pl.reinit = true;
       }
-
       /* Update data */
       P_Dat_PTickPre();
-
       olddelta.del     = pl.cur;
       olddelta.health  = pl.health;
       olddelta.mana    = pl.mana;
       olddelta.shield  = pl.shield;
       olddelta.buttons = pl.buttons;
-
       /* Tick all systems */
       if(!pl.dead) {
          if(!Paused) {
@@ -80,9 +71,9 @@ reinit:
             } else {
                idletics = 0;
             }
-         }
-         if(idletics > 38) {
-            pl.missionstatshow = ACS_Timer() + 35;
+            if(idletics > 38 && pl.missionstatshow < 35) {
+               pl.missionstatshow = 45;
+            }
          }
          P_Wep_PTickPre();
          P_Scr_PTickPre();
@@ -97,15 +88,12 @@ reinit:
          P_Log_PTick();
          P_Dat_PTick();
       }
-
       /* Tic passes */
       ACS_Delay(1);
-
       if(pl.dlg.num) {
          Dlg_Run(pl.dlg.num);
          pl.dlg.num = 0;
       }
-
       /* Update post-tic values */
       pl.old = olddelta;
       P_ValidateTID();
@@ -389,7 +377,7 @@ alloc_aut(0) script static void P_doDepthMeter(void) {
 }
 
 alloc_aut(0) script static void P_doIntro(void) {
-   pl.missionstatshow = ACS_Timer() + 70;
+   pl.missionstatshow = 35*3;
    if(wl.hubscleared != 0 || get_bit(pl.done_intro, pl.pclass)) {
       P_doDepthMeter();
       return;

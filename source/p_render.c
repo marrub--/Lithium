@@ -31,9 +31,10 @@ stkoff static void P_Ren_Mission(void) {
    if(ACS_Timer() == 0 || !pl.hudenabled) {
       return;
    }
-   i32 delta = pl.missionstatshow - ACS_Timer();
-   if(delta >= 0) {
-      k32 alpha = delta <= 35 ? ease_out_cubic(delta / 35.0k) : 1.0k;
+   if(pl.missionstatshow >= 0) {
+      k32 alpha = pl.missionstatshow <= 35 ?
+         ease_out_sine(pl.missionstatshow / 35.0k) :
+         1.0k;
       SetSize(320, 240);
       ACS_BeginPrint();
       _p(fast_strupper(ml.name)); _c('\n');
@@ -73,6 +74,9 @@ stkoff static void P_Ren_Mission(void) {
       case _mstat_failure:    _l("\CjMISSION \CgFAILED");     break;
       }
       PrintText(sf_smallfnt, pl.color, pl.hudrpos,3, 28,1, _u_no_unicode|_u_alpha, alpha);
+      if(!Paused) {
+         --pl.missionstatshow;
+      }
    }
 }
 

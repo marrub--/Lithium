@@ -200,39 +200,29 @@ action(Weapon) void Lith_A_Lower(Lith_RaiseSpeed speed) {
    if(!player) {
       return;
    }
-
+   lith_a_setInterpolation(false);
    lith_a_adsCancel();
-
    if(!player.readyWeapon) {
-      lith_a_setInterpolation(false);
       player.mo.bringUpWeapon();
       return;
    }
-
    int lowerSpeed = invoker.lith_getRaiseSpeed(speed);
    let psp = player.findPSprite(_psp_weapon);
    if(psp) {
-      lith_a_setInterpolation(true);
-
       if(player.morphTics || player.cheats & cf_instantweapswitch) {
          psp.y = weaponBottom;
       } else {
          psp.y += lowerSpeed;
       }
-
       if(psp.y < weaponBottom) {
          return;
       }
-
       resetPSprite(psp);
       if(player.playerState == pst_dead) {
-         lith_a_setInterpolation(false);
          player.setPSprite(_psp_flash, null);
          psp.setState(findState('DeadLowered'));
          return;
       }
-
-      lith_a_setInterpolation(false);
       player.setPSprite(_psp_flash, null);
       player.mo.bringUpWeapon();
    }
@@ -242,31 +232,26 @@ action(Weapon) void Lith_A_Raise(Lith_RaiseSpeed speed) {
    if(!player) {
       return;
    }
-
+   lith_a_setInterpolation(false);
    lith_a_adsCancel();
-
    if(player.pendingWeapon != WP_NOCHANGE) {
       player.mo.dropWeapon();
       return;
    }
-
    if(!player.readyWeapon) {
       return;
    }
-
    int raiseSpeed = invoker.lith_getRaiseSpeed(speed);
    let psp = player.findPSprite(_psp_weapon);
    if(psp) {
       if(psp.y <= weaponBottom) {
          resetPSprite(psp);
       }
-
       psp.y -= raiseSpeed;
       if(psp.y > weaponTop) {
          return;
       }
       psp.y = weaponTop;
-
       psp.setState(invoker.getReadyState());
    }
 }
