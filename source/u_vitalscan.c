@@ -133,7 +133,8 @@ void Upgr_VitalScan_Render(void) {
    switch(CVarGetI(sc_scanner_slide)) {
    case _ssld_slide: {
       k32 cangle = atan2k(pl.y - udata.y, pl.x - udata.x) * tau;
-      k64 diff = pl.yawf - (k64)cangle;
+      k64 yawf   = pl.yaw * tau - pi;
+      k64 diff = yawf - (k64)cangle;
       k32 ds = ACS_Sin(diff / tau) * tau;
       k32 dc = ACS_Cos(diff / tau) * tau;
       udata.oangle = lerplk(udata.oangle, atan2f(ds, dc), 0.1);

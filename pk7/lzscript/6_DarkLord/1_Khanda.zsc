@@ -49,7 +49,7 @@ class Lith_Khanda : Lith_DWeapon;
 default {
    Lith_Weapon.SpawnType "Lith_FistPickup";
    Lith_Weapon.DefaultSpeed 1.9;
-   Lith_Weapon.SprintSpeed 2.4;
+   Lith_Weapon.SprintSpeed 2.1;
    Tag "$LITH_INFO_SHORT_Khanda";
    Weapon.SlotNumber 1;
    Weapon.SlotPriority 0.9;

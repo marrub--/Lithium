@@ -77,11 +77,11 @@ struct Lith_UTIL {
       return int(n * 1000) % 1000 < 500 ? int(n) : int(n+0.5);
    }
 
-   static vector3 traceFrom(Actor mo, double yaw, double pitch, double dist, double offsetz, bool floor = false, ETraceFlags flags = 0) {
+   static TraceResults traceFrom(Actor mo, double yaw, double pitch, double dist, double offsetz, bool floor = false, ETraceFlags flags = 0) {
       return Lith_URANUS.instance().traceFromActor(mo, yaw, pitch, dist, offsetZ, floor, flags);
    }
 
-   static vector3 traceFromPos(Sector sec, vector3 pos, double yaw, double pitch, double dist, Actor ignore = null, bool floor = false, ETraceFlags flags = 0) {
+   static TraceResults traceFromPos(Sector sec, vector3 pos, double yaw, double pitch, double dist, Actor ignore = null, bool floor = false, ETraceFlags flags = 0) {
       return Lith_URANUS.instance().traceFromPos(sec, pos, yaw, pitch, dist, ignore, floor, flags);
    }
 
@@ -114,27 +114,24 @@ struct Lith_UTIL {
       return sin(a) * dy, cos(a) * dp;
    }
 
-   static vector3 anglesToVec(vector2 a) {
+   static vector3 anglesToVec(vector2 a, double r) {
       let cp = cos(-a.y);
-      return (cos(a.x)*cp, sin(a.x)*cp, sin(-a.y));
+      return (cos(a.x)*cp*r, sin(a.x)*cp*r, sin(-a.y)*r);
    }
 
    static vector2 vecToAngles(vector3 v) {
       return (atan2(v.x, v.y), invertDeg(asin(v.z)));
    }
 
-   static void particlePosVel(FSpawnParticleParams pp, vector3 pos, vector2 angles = (0, 0), double distance = 0.0, vector3 vel = (0,0,0), vector2 vel_angles = (0, 0)) {
+   static void particlePosVel(FSpawnParticleParams pp, vector3 pos, vector2 angles = (0, 0), double distance = 0.0, vector3 vel = (0,0,0), vector2 vel_angles = (0, 0), double vel_distance = 0.0) {
+      pp.pos = pos;
       if(distance != 0) {
-         let mp = Lith_UTIL.anglesToVec(angles);
-         pp.pos = pos + mp * distance;
-      } else {
-         pp.pos = pos;
+         pp.pos += Lith_UTIL.anglesToVec(angles, distance);
       }
-      if(vel.sum() != 0) {
-         let mv = Lith_UTIL.anglesToVec(vel_angles);
-         pp.vel = (mv.x * vel.x, mv.y * vel.y, mv.z * vel.z);
-      } else {
-         pp.vel.x = pp.vel.y = pp.vel.z = 0;
+      pp.vel = vel;
+      if(vel_distance != 0) {
+         let p = Lith_UTIL.anglesToVec(vel_angles, vel_distance);
+         pp.vel = (pp.vel.x * p.x, pp.vel.y * p.y, pp.vel.z * p.z);
       }
    }
 

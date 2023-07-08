@@ -89,6 +89,13 @@ gU =  pC | pW | pT,
    pcl_magicuser = gU,
 };
 
+enum Lith_FlashlightState {
+   _light_off,
+   _light_on,
+   _light_follow,
+   _light_max,
+};
+
 
 
 

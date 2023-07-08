@@ -14,33 +14,18 @@
 
 #define udata pl.upgrdata.headsupdisp
 
-static i32 hudtype, hudcolor;
-
-static void HUD_Log(void) {
-   i32 logcolor = CVarGetI(sc_hud_logcolor);
-   if(logcolor == 'l') logcolor = hudtype != _hud_old ? hudcolor : CR_GREEN;
-   else                logcolor = Draw_GetCr(logcolor);
-   i32 logy = 0;
-   switch(hudtype) {
-   case _hud_cybermage: logy = -5;  break;
-   case _hud_assassin:  logy =  5;  break;
-   case _hud_old:       logy =  30; break;
-   }
-   P_Log(logcolor, logy);
-}
-
 static void HUD_TopRight(void) {
    cstr beg, end;
    str  fnt;
-   i32  clr = hudcolor;
-   if(hudtype != _hud_informant) {
+   i32  clr = pl.hudcolor;
+   if(pl.hudtype != _hud_informant) {
       udata.score.value_display = pl.score;
    } else {
       udata.score.value = pl.score;
       lerpscr(&udata.score);
    }
    beg = scoresep(udata.score.value_display);
-   switch(hudtype) {
+   switch(pl.hudtype) {
    default:
    case _hud_marine:
       end = "\Cnscr";
@@ -67,7 +52,7 @@ static void HUD_TopRight(void) {
       BeginPrintStr(beg);
       PrintStr(end);
       PrintText(fnt, clr, pl.hudrpos,2, y,1, _u_no_unicode);
-      if(hudtype != _hud_cybermage && hudtype != _hud_old) {
+      if(pl.hudtype != _hud_cybermage && pl.hudtype != _hud_old) {
          if(pl.score > pl.old.score) {
             SetFade(fid_schit1, 4, 12);
          } else if(pl.score < pl.old.score) {
@@ -106,7 +91,7 @@ static void HUD_TopRight(void) {
       if(pl.attr.points) {
          PrintStrL(" (\Cn");
          ACS_PrintInt(pl.attr.points);
-         switch(hudtype) {
+         switch(pl.hudtype) {
          default:
          case _hud_marine:    PrintStrL("\C- pts)"); break;
          case _hud_cybermage: PrintStrL("\C- Pts)"); break;
@@ -139,7 +124,7 @@ static void HUD_BottomRight(void) {
    i32 xam = 0;
    i32 yam = 0;
    i32 xal = 1;
-   switch(hudtype) {
+   switch(pl.hudtype) {
    default:
    case _hud_marine:
       xmg = pl.hudrpos-103;
@@ -158,7 +143,7 @@ static void HUD_BottomRight(void) {
          case AT_ADis: BeginPrintStrL("AMMO"); break;
          case AT_MDis: BeginPrintStrL("MAG");  break;
          }
-         PrintText(fnt, hudcolor, pl.hudrpos-39,1, 238,2, _u_no_unicode);
+         PrintText(fnt, pl.hudcolor, pl.hudrpos-39,1, 238,2, _u_no_unicode);
       }
       break;
    case _hud_cybermage:
@@ -209,7 +194,7 @@ static void HUD_BottomRight(void) {
          case AT_ADis:         BeginPrintStrL(u8"-\uE103\uE102\uE104\uE106\n\uE106\uE108\uE104\uE108\uE100"); break;
          case AT_MDis:         BeginPrintStrL(u8"-\uE103\uE100 \uE104\uE108\n\uE103\uE108\uE101\uE104"); break;
          }
-         PrintText(sf_lmidfont, hudcolor, pl.hudrpos-3,3, 230,0, _u_no_unicode);
+         PrintText(sf_lmidfont, pl.hudcolor, pl.hudrpos-3,3, 230,0, _u_no_unicode);
       }
       break;
    case _hud_old:
@@ -266,7 +251,7 @@ static void HUD_BottomRight(void) {
             ACS_PrintInt(magmax);
          }
       }
-      PrintText(fnt, hudcolor, xmg,xal, ymg,0, _u_no_unicode);
+      PrintText(fnt, pl.hudcolor, xmg,xal, ymg,0, _u_no_unicode);
    }
    if(wep->ammotype & AT_ADis) {
       i32 x = xmg - (wep->ammotype & AT_MDis ? xam : 0);
@@ -284,12 +269,12 @@ static void HUD_BottomRight(void) {
       } else {
          PrintStrL(u8"∞");
       }
-      PrintText(fnt, hudcolor, x,xal, y,0, _u_no_unicode);
+      PrintText(fnt, pl.hudcolor, x,xal, y,0, _u_no_unicode);
    }
    if(showweps) {
       i32 cr1, cr2, cr3, crc;
       i32 _x, _y;
-      switch(hudtype) {
+      switch(pl.hudtype) {
       default:
       case _hud_marine:
          PrintSprite(sp_HUD_M_Bar, pl.hudrpos-42,2, 239,2);
@@ -366,17 +351,16 @@ static void HUD_BottomRight(void) {
 
 static void HUD_BottomLeft(void) {
    i32 health = pl.health;
-   i32 x;
-   i32 y;
+   i32 x, y;
    i32 cr_g = 0;
    i32 cr_t;
    str wgfx = sa_wgfx[pl.weapon.cur.info->slot];
-   switch(hudtype) {
+   switch(pl.hudtype) {
    default:
    case _hud_marine:
       PrintSprite(InvNum(so_PowerStrength) ? sp_HUD_M_SplitBackRed : sp_HUD_M_SplitBack, pl.hudlpos,1, 240,2);
       BeginPrintStrL("VIT");
-      PrintText(sf_bigupper, hudcolor, pl.hudlpos+2,1, 238,2, _u_no_unicode);
+      PrintText(sf_bigupper, pl.hudcolor, pl.hudlpos+2,1, 238,2, _u_no_unicode);
       for(i32 i = 0, x_ = (8 + pl.ticks) % 57; i < 20; i++) {
          i32 xx = x_ - i;
          if(xx < 0) xx += 57;
@@ -428,7 +412,7 @@ static void HUD_BottomLeft(void) {
          PrintSprite(sp_HUD_D_ShieldDone, pl.hudlpos+16,1, 239,2, _u_add|_u_fade, fid_shielddone);
       }
       BeginPrintStrL(u8"\uE103\uE108");
-      PrintText(sf_lmidfont, hudcolor, pl.hudlpos+8,4, 229,0, _u_no_unicode);
+      PrintText(sf_lmidfont, pl.hudcolor, pl.hudlpos+8,4, 229,0, _u_no_unicode);
       for(i32 i = 0, x_ = (8 + pl.ticks) % 41; i < 20; i++) {
          i32 xx = x_ - i;
          if(xx < 0) xx += 41;
@@ -471,7 +455,7 @@ static void HUD_BottomLeft(void) {
    i32 protect = pl.megaProtect;
    ACS_BeginPrint();
    ACS_PrintInt(health);
-   PrintText(sf_bigupper, hudcolor, x,1, y,0, _u_no_unicode);
+   PrintText(sf_bigupper, pl.hudcolor, x,1, y,0, _u_no_unicode);
    if(protect) {
       k32 amt = protect / 200.0;
       ACS_BeginPrint();
@@ -495,14 +479,7 @@ void Upgr_HeadsUpDisp_Render(void) {
    if(!pl.hudenabled) {
       return;
    }
-   hudtype = CVarGetI(sc_hud_type);
-   if(hudtype <= 0 || hudtype > _hud_max) {
-      hudtype = pl.pclass;
-   } else {
-      --hudtype;
-   }
-   hudcolor = hudtype != _hud_old ? P_Color(hudtype) : CR_RED;
-   HUD_Log();
+   P_DrawLog();
    HUD_TopRight();
    HUD_BottomRight();
    HUD_BottomLeft();

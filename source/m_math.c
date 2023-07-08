@@ -330,6 +330,10 @@ stkoff k32 ease_out_cubic(k32 x) {
    return 1 - x * x * x;
 }
 
+stkoff k32 ease_out_sine(k32 x) {
+   return ACS_Sin(x / 4);
+}
+
 stkoff k32 ease_in_out_sine(k32 x) {
    return -(ACS_Cos(x / 2) - 1) / 2;
 }

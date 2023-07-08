@@ -123,7 +123,7 @@ class Lith_Kampilan : Lith_DWeapon;
 
 default {
    Lith_Weapon.SpawnType "Lith_FistPickup";
-   Lith_Weapon.DefaultSpeed 1.4;
+   Lith_Weapon.DefaultSpeed 1.6;
    Lith_Weapon.MagSize 5;
    Tag "$LITH_INFO_SHORT_Kampilan";
    Weapon.SlotNumber 1;

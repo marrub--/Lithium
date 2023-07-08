@@ -81,12 +81,6 @@ struct upgr_data_Zoom {
    k64 vzoom;
 };
 
-struct upgr_data_Flashlight {
-   bool on, was_on;
-   i32 battery;
-   k64 intensity, target, speed;
-};
-
 struct upgr_data_RPG_B {
    i32 id;
 };
@@ -118,7 +112,6 @@ struct upgr_data_HeadsUpDisp {
 
 struct upgr_data {
    struct upgr_data_Seven7s     seven7s;
-   struct upgr_data_Flashlight  flashlight;
    struct upgr_data_HeadsUpDisp headsupdisp;
    struct upgr_data_RPG_B       rpg_b;
    struct upgr_data_Magic       magic;

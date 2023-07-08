@@ -70,7 +70,6 @@ stkoff bool P_ButtonReleased(i32 bt) {
 bool P_SetVel(k32 velx, k32 vely, k32 velz, bool add) {
    if(add) pl.velx += velx, pl.vely += vely, pl.velz += velz;
    else    pl.velx  = velx, pl.vely  = vely, pl.velz  = velz;
-
    return ACS_SetActorVelocity(pl.tid, velx, vely, velz, add, true);
 }
 
@@ -106,9 +105,6 @@ void P_Dat_PTickPre(void) {
    pl.yaw   = ACS_GetActorAngle(0);
    pl.roll  = ACS_GetActorRoll (0);
 
-   pl.pitchf = (-pl.pitch + 0.25) * 2 * pi;
-   pl.yawf   = pl.yaw * tau - pi;
-
    pl.pitchv = ACS_GetPlayerInputFixed(-1, INPUT_PITCH);
    pl.yawv   = ACS_GetPlayerInputFixed(-1, INPUT_YAW);
 
@@ -135,12 +131,35 @@ void P_Dat_PTickPre(void) {
    case pcl_cybermage: pl.speedmul = 70;  pl.jumpboost = 125; break;
    case pcl_informant: pl.speedmul = 100; pl.jumpboost = 175; break;
    case pcl_assassin:  pl.speedmul = 100; pl.jumpboost = 150; break;
-   case pcl_darklord:  pl.speedmul = 50;  pl.jumpboost = 100; break;
+   case pcl_darklord:  pl.speedmul = 45;  pl.jumpboost = 100; break;
    }
 
    i32 hudaspect = !CVarGetI(sc_hud_43aspect) ? ((i32)(((k32)ACS_GetScreenWidth() / (k32)ACS_GetScreenHeight()) * 240) - 320) / 2 : 0;
    pl.hudlpos = -hudaspect;
    pl.hudrpos = 320 + hudaspect;
+   pl.hudtype = CVarGetI(sc_hud_type);
+   if(pl.hudtype <= 0 || pl.hudtype > _hud_max) {
+      pl.hudtype = pl.pclass;
+   } else {
+      --pl.hudtype;
+   }
+   pl.hudcolor = pl.hudtype != _hud_old ? P_Color(pl.hudtype) : CR_RED;
+   pl.hudhppos = -hudaspect;
+   switch(pl.hudtype) {
+   default:
+   case _hud_marine:    pl.hudhppos += 89;  break;
+   case _hud_cybermage: pl.hudhppos += 65;  break;
+   case _hud_informant: pl.hudhppos += 65;  break;
+   case _hud_assassin:  pl.hudhppos += 85;  break;
+   case _hud_darklord:  pl.hudhppos += 65;  break;
+   case _hud_old:       pl.hudhppos += 155; break;
+   }
+   pl.hudtop = 200;
+   switch(pl.hudtype) {
+   case _hud_cybermage: pl.hudtop -= 5;  break;
+   case _hud_assassin:  pl.hudtop += 5;  break;
+   case _hud_old:       pl.hudtop += 30; break;
+   }
 }
 
 alloc_aut(0) script static
@@ -256,35 +275,24 @@ script void P_Init(void) {
    P_Upg_PMInit();
    pl.frozen     = 0;
    pl.semifrozen = 0;
-
    pl.addpitch = 0;
    pl.addyaw   = 0;
    pl.addroll  = 0;
-
    pl.bobpitch = 0;
    pl.bobyaw   = 0;
    pl.bobroll  = 0;
-
    pl.extrpitch = 0;
    pl.extryaw   = 0;
-
    pl.scoreaccum     = 0;
    pl.scoreaccumtime = 0;
    pl.scoremul       = 110;
-
-   ServCallV(sm_PlayerInit);
-
    pl.alpha = 1;
-
    pl.attr.lvupstr[0] = '\0';
-
    if(!pl.wasinit) {
       P_BIP_PInit();
       P_Upg_PInit();
       P_Inv_PInit();
-
       P_LogH(1, tmpstr(lang(sl_log_version)), vernam, __DATE__);
-
       #ifndef NDEBUG
       if(dbglevel_any()) {
          P_LogH(1, "player is %u bytes long!", sizeof pl * 4);
@@ -294,16 +302,13 @@ script void P_Init(void) {
       #endif
       pl.wasinit = true;
    }
-
    if(pl.health < cv.sv_minhealth) {
       pl.setHealth(cv.sv_minhealth);
    }
-
    #ifndef NDEBUG
    if(dbgflags(dbgf_ammo)) {
       chtf_give_ammo(nil);
    }
-
    if(dbgflags(dbgf_items)) {
       for(i32 i = weapon_min; i < weapon_max; ++i) {
          struct weaponinfo const *info = &weaponinfo[i];

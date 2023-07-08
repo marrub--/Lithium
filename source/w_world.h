@@ -73,7 +73,10 @@ enum ZscName(PData) {
    _pdt_alpha,
    _pdt_oldhealth,
    _pdt_hudenabled,
-   _pdt_flashbattery,
+   _pdt_lighton,
+   _pdt_lightwason,
+   _pdt_lightbattery,
+   _pdt_lightintensity,
    _pdt_soulsfreed,
    _pdt_ptid,
    _pdt_mflg,
@@ -87,6 +90,8 @@ enum ZscName(PData) {
    _pdt_windspeed,
    _pdt_hudlpos,
    _pdt_hudrpos,
+   _pdt_hudhppos,
+   _pdt_hudtop,
 };
 
 /* External Data */

@@ -8,6 +8,7 @@
 
 extend class Lith_URANUS;
 
+transient FSpawnParticleParams pp_lightspark_center;
 transient FSpawnParticleParams pp_kampilan_swing;
 transient FSpawnParticleParams pp_700e_laser;
 transient FSpawnParticleParams pp_4bore_dmg_buff;
@@ -58,7 +59,7 @@ void particleRegister() {
    pp_rocket_smoke.sizeStep   = 0.015;
    pp_rocket_smoke.startAlpha = 1.0;
    pp_rocket_smoke.fadeStep   = -1;
-   pp_4bore_dmg_buff.texture    = getTex("BLLTK0");
+   pp_4bore_dmg_buff.texture    = getTex("ZAP1D0");
    pp_4bore_dmg_buff.style      = style_add;
    pp_4bore_dmg_buff.flags      = spf_fullbright;
    pp_4bore_dmg_buff.lifetime   = 24;
@@ -77,6 +78,11 @@ void particleRegister() {
    pp_kampilan_swing.size       = 12;
    pp_kampilan_swing.startAlpha = 1.0;
    pp_kampilan_swing.fadeStep   = -1;
+   pp_lightspark_center.style      = style_add;
+   pp_lightspark_center.texture    = getTex("#LSPE0");
+   pp_lightspark_center.lifetime   = 10;
+   pp_lightspark_center.startAlpha = 0.25;
+   pp_lightspark_center.fadeStep   = 0.001;
 }
 
 void particleRemsSpray(Actor orig, Actor targ) {
@@ -102,8 +108,9 @@ void particleRemsSpark(PlayerPawn mo) {
          vp+(uiRandom(-1,1),uiRandom(-1,1),uiRandom(-1,1)),
          (mo.angle+uiRandom(-10,20), mo.pitch+uiRandom(-15,15)),
          distance: uiRandom(8,24),
-         vel: (uiRandom(-4,4),uiRandom(-0.1,0.1),mo.vel.z*1.5+uiRandom(-1,1)),
-         vel_angles: (mo.angle-uiRandom(-2,2), mo.pitch-uiRandom(-2,2)));
+         vel: (1,1,mo.vel.z*1.5+uiRandom(-1,1)),
+         vel_angles: (mo.angle-uiRandom(-2,2), mo.pitch-uiRandom(-2,2)),
+         vel_distance: uiRandom(-4, 4));
       level.spawnParticle(pp_rems_spark);
    }
 }
@@ -123,14 +130,16 @@ void particleRocketTrail(Actor mo) {
    Lith_UTIL.particlePosVel(
       pp_rocket_smoke,
       pos, (va, vp), distance: uiRandom(16,32),
-      vel: (uiRandom(-0.5,0.5),uiRandom(0.1,0.7),0.0),
-      vel_angles: (va, vp));
+      vel: (1,1,1),
+      vel_angles: (va, vp),
+      vel_distance: uiRandom(0.1, 0.7));
    level.spawnParticle(pp_rocket_smoke);
    Lith_UTIL.particlePosVel(
       pp_rocket_fire,
       pos, (ma, mp), distance: 32,
-      vel: (uiRandom(-0.5,0.5),uiRandom(0.1,0.7),0.0),
-      vel_angles: (va, vp));
+      vel: (1,1,1),
+      vel_angles: (va, vp),
+      vel_distance: uiRandom(0.1, 0.7));
    level.spawnParticle(pp_rocket_fire);
 }
 
@@ -147,8 +156,8 @@ void particle700eLaserTrace(vector3 pos, double alpha) {
    level.spawnParticle(pp_700e_laser);
 }
 
-void particle700eLaser(Actor mo, double p, double vz) {
-   let vp = mo.pos.plusZ(vz);
+void particle700eLaser(PlayerPawn mo, double p) {
+   let vp = mo.pos.plusZ(mo.viewHeight - 7);
    let mp = mo.pitch - p;
    let ma = (mo.angle - 18, mp-4);
    let va = (mo.angle + 18, mp-8);
@@ -157,8 +166,9 @@ void particle700eLaser(Actor mo, double p, double vz) {
       Lith_UTIL.particlePosVel(
          pp_700e_laser,
          vp, ma, distance: 16,
-         vel: (0.14,0.14,0.14)*i,
-         vel_angles: va);
+         vel: (i,i,i),
+         vel_angles: va,
+         vel_distance: 0.14);
       level.spawnParticle(pp_700e_laser);
    }
 }
@@ -170,11 +180,20 @@ void particleKampilanSwing(Actor mo, color cr, bool left) {
       Lith_UTIL.particlePosVel(
          pp_kampilan_swing,
          mo.pos, (mo.angle + ii, ii), distance: 8,
-         vel: (0.07,0.07,0.07),
-         vel_angles: (uiRandom(0, 360), uiRandom(0, 360)));
+         vel: (1,1,1),
+         vel_angles: (uiRandom(0, 360), uiRandom(0, 360)),
+         vel_distance: 0.07);
       pp_kampilan_swing.accel = pp_kampilan_swing.vel * 0.5;
       level.spawnParticle(pp_kampilan_swing);
    }
+}
+
+void particleLightsparkCenter(vector3 pos, color cr, double rad) {
+   pp_lightspark_center.color1 = cr;
+   pp_lightspark_center.pos = pos;
+   pp_lightspark_center.vel = (uiRandom(-0.07, 0.07),uiRandom(-0.07, 0.07),uiRandom(-0.07, 0.07));
+   pp_lightspark_center.size = rad;
+   level.spawnParticle(pp_lightspark_center);
 }
 
 /* EOF */

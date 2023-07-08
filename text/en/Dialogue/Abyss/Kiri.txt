@@ -1,0 +1,116 @@
+## ╭-*-Agw-LithTxt-*-─────────────────────────────────────────────────────────╮
+## │                                                                          │
+## │             Distributed under the CC0 public domain license.             │
+## │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+## │                See licenses/cc0.txt for more information.                │
+## │                                                                          │
+## ╰──────────────────────────────────────────────────────────────────────────╯
+
+%% LITHABYS_kiri_begin_0
+\cn[The doll is completely unresponsive. You poke it, but it's just lifeless. Like everything else.]
+
+%% LITHABYS_kiri_begin_o0
+\cr[Proceed.]
+
+## Thoth (Self)
+%% LITHABYS_kiri_begin_1
+Hello, me.
+
+%% LITHABYS_kiri_begin_2
+\c[Lith_Angelic]It's weird seeing myself like this.
+\c[Lith_Evil]It's weird seeing myself like this.
+\c[Lith_Angelic]It's weird seeing myself like this.
+\c[Lith_Evil]It's weird seeing myself like this.
+\c[Lith_Angelic]It's weird seeing myself like this.
+\c[Lith_Evil]It's weird seeing myself like this.
+\c[Lith_Angelic]It's weird seeing myself like this.
+       \c[Lith_Evil]It's weird seeing myself like this.
+       \c[Lith_Angelic]It's weird seeing myself like this.
+       \c[Lith_Evil]It's weird seeing myself like this.
+       \c[Lith_Angelic]It's weird seeing myself like this.
+       \c[Lith_Evil]It's weird seeing myself like this.
+       \c[Lith_Angelic]It's weird seeing myself like this.
+       \c[Lith_Evil]It's weird seeing myself like this.
+
+%% LITHABYS_kiri_begin_o1
+\cq[Don't go.]
+
+%% LITHABYS_kiri_t_breaking_0
+\cq[Don't go.]
+\cq[Please.]
+\cq[I want someone to talk to.]
+\c[Lith_Angelic]It's weird seeing myself like this.
+\c[Lith_Evil]It's weird seeing myself like this.
+\c[Lith_Angelic]It's weird seeing myself like this.
+\c[Lith_Evil]It's weird seeing myself like this.
+\c[Lith_Angelic]It's weird seeing myself like this.
+\c[Lith_Evil]It's weird seeing myself like this.
+\c[Lith_Angelic]It's weird seeing myself like this.
+       \c[Lith_Evil]It's weird seeing myself like this.
+       \c[Lith_Angelic]It's weird seeing myself like this.
+       \c[Lith_Evil]It's weird seeing myself like this.
+       \c[Lith_Angelic]It's weird seeing myself like this.
+       \c[Lith_Evil]It's weird seeing myself like this.
+       \c[Lith_Angelic]It's weird seeing myself like this.
+       \c[Lith_Evil]It's weird seeing myself like this.
+
+%% LITHABYS_kiri_t_breaking_o0
+\cq[Okay.]
+
+%% LITHABYS_kiri_t_down_0
+\cr[Thank you...]
+\cq[Thank you so much...]
+
+\cn[I think I'm understanding a bit more now.]
+
+\c[Lith_Angelic]It's weird seeing myself like this.
+\c[Lith_Evil]Do you think we're closer?
+
+\cq[We are missing a vital part.]
+\cn[Where is it?]
+\cq[That's a good question...]
+
+%% LITHABYS_kiri_t_down_o0
+\cq[Where *is* it?]
+
+%% LITHABYS_kiri_t_down_o1
+\cr[No, it doesn't matter now.]
+
+%% LITHABYS_kiri_t_broken_0
+\cr[I think we're broken...]
+\cq[We need to find it...]
+
+\cn[I know where it is.]
+
+\c[Lith_Angelic]There's still time to get past the precepice.
+\c[Lith_Evil]We're no closer now.
+
+\cq[It's...]
+\cn[Here.]
+\c-"Right here."
+
+You hear a voice from inside your head. You realize it's yours.
+
+%% LITHABYS_kiri_t_broken_o0
+You weren't fully awake.
+
+%% LITHABYS_kiri_t_entity_0
+\c[Lith_Angelic]The \c[Lith_Evil]entity behind you, \c[Lith_Angelic]what is that?
+
+\c-I don't know.
+
+                  \c[Lith_Angelic]It worries us.
+
+\cn[It's like a light. I've never seen something like it before.]
+\cq[There's something beyond the light, infinitely
+smallllllllllllllllllllll============>>>>>??????????????
+
+\cr>>>>>[[[[computational cluster array failure]]]]
+\cr>>>>>[[[[maintenance access mode initiated]]]]
+\c-              >>>>> DON'T SEE THE LIGHT <<<<<
+\cq[Pleasant thing. Shall we ignore it?]
+
+%% LITHABYS_kiri_t_entity_o0
+\c[Lith_Evil]...Gladly.
+
+## EOF

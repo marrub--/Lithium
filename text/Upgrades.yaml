@@ -12,23 +12,24 @@
 
 _uc_body:
    gA:
-      HeadsUpDisp: {                  f: A--R-, pr: 1, mul: -5, grp: 10}
-      Flashlight:  {pg: N/A,          f: -DU-E}
-      Zoom:        {pg: N/A,          f: -DUR-}
-      VitalScan:   {pg: VitalScanner, f: --UR-, pr: 2}
+      HeadsUpDisp: {f: A--R-, pr: 1, mul: -5, grp: 10}
+      Zoom:        {f: -DUR-}
+      VitalScan:   {f: --UR-, pr: 2, pg: VitalScanner}
    gO:
+      Flashlight: {f: A-U--}
       ReflexWetw: {f: A-U--,    pr: 5, mul: -5}
       AutoReload: {scr: 950050, pr: 2}
    gI:
+      Lightspark: {f: A-U--}
       Minimap:    {scr: 9999999}
       SecretScan: {scr: 9999999}
    pM:
-      JetBooster:  {                       f: --U--, mul: -5}
-      CyberLegs:   {         scr: 1220000, f: --U--, pr:  4}
-      ReactArmor:  {pg: N/A, scr: 3500200, f: -D-R-, pr: 20, req: ai   }
-      ReactArmor2: {pg: N/A, scr: 2990200,           pr: 10, req: ai ra}
-      DefenseNuke: {         scr:  580030, f: ----E,         req: ai   }
-      Adrenaline:  {         scr: 1801000, f: -DU--, pr: 10}
+      JetBooster:  {              f: --U--, mul: -5}
+      CyberLegs:   {scr: 1220000, f: --U--, pr:  4}
+      ReactArmor:  {scr: 3500200, f: -D-R-, pr: 20, req: ai   }
+      ReactArmor2: {scr: 2990200, pg: N/A,  pr: 10, req: ai ra}
+      DefenseNuke: {scr:  580030, f: ----E,         req: ai   }
+      Adrenaline:  {scr: 1801000, f: -DU--, pr: 10}
    pC:
       Magic:       {              f: --UR-}
       SoulCleaver: {scr: 1100000}
@@ -38,22 +39,22 @@ _uc_body:
       HeavyArmor:  {f: ADU--, scr: 9999999}
       ShieldOC:    {          scr: 9999999}
       HoverBoots:  {f: --U--, scr: 9999999}
-      HoverBoots2: {          scr: 9999999}
+      HoverBoots2: {pg: N/A,  scr: 9999999}
       SkillSword:  {f: ----E, scr: 9999999}
 _uc_weap:
    pM:
-      Pistol_A:  {pg: N/A, scr:  140940}
-      Pistol_B:  {pg: N/A, scr:  340000,                          req: wmd}
-      Shotgun_A: {         scr: 1079430,           pr: 1, grp: 1, req: wmd}
-      Shotgun_B: {         scr: 1010420,                  grp: 1, req: wmd}
-      Rifle_A:   {         scr:  340100, f: -D-R-}
-      Rifle_B:   {         scr: 1008080,           pr: 1,         req: wmd    }
-      RPG_A:     {         scr: 1550000,                  grp: 2, req: wmd wrd}
-      RPG_B:     {         scr: 2505010, f: --U--, pr: 1, grp: 2, req: wmd    }
-      Plasma_A:  {         scr: 2250000,                  grp: 3, req: wmd    }
-      Plasma_B:  {         scr: 2500000,           pr: 1, grp: 3, req: wmd wrd}
-      Cannon_A:  {         scr: 5100700,                  grp: 4, req: wmd    }
-      Cannon_B:  {         scr: 5800100,           pr: 5, grp: 4, req: wmd wrd}
+      Pistol_A:  {scr:  140940}
+      Pistol_B:  {scr:  340000,                          req: wmd}
+      Shotgun_A: {scr: 1079430,           pr: 1, grp: 1, req: wmd}
+      Shotgun_B: {scr: 1010420,                  grp: 1, req: wmd}
+      Rifle_A:   {scr:  340100, f: -D-R-}
+      Rifle_B:   {scr: 1008080,           pr: 1,         req: wmd    }
+      RPG_A:     {scr: 1550000,                  grp: 2, req: wmd wrd}
+      RPG_B:     {scr: 2505010, f: --U--, pr: 1, grp: 2, req: wmd    }
+      Plasma_A:  {scr: 2250000,                  grp: 3, req: wmd    }
+      Plasma_B:  {scr: 2500000,           pr: 1, grp: 3, req: wmd wrd}
+      Cannon_A:  {scr: 5100700,                  grp: 4, req: wmd    }
+      Cannon_B:  {scr: 5800100,           pr: 5, grp: 4, req: wmd wrd}
    pC:
       Mateba_A:   {scr:  614100, grp: 1}
       ShockRif_A: {scr: 1519590, grp: 2}
@@ -99,8 +100,8 @@ _uc_extr:
       lolsords: {pg: N/A, scr: 1000000, f: ADU--, mul: 20, req: rdi}
       Cannon_C: {pg: N/A, scr: 1500000, grp: 4,            req: wmd wrd rdi}
    pD:
-      ATATATATA: {scr: 9999999}
-      Dekampila: {scr: 9999999}
+      ATATATATA: {pg: N/A, scr: 9999999}
+      Dekampila: {pg: N/A, scr: 9999999}
 _uc_down:
    gA:
       UNCEUNCE:   {pg: N/A, f: ADU--, mul: 30}

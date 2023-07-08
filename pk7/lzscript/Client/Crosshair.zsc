@@ -58,7 +58,7 @@ ui void drawCrosshair(RenderEvent evt) {
    vector3 viewPos = (evt.viewPos.xy, evt.viewPos.z - pl.player.viewHeight + lith_hermes.getAttackHeight(pl));
    double yaw   = evt.viewAngle + Lith_UTIL.pData(_pdt_addy)/FIX;
    double pitch = evt.viewPitch + Lith_UTIL.pData(_pdt_addp)/FIX;
-   let loc = Lith_UTIL.traceFromPos(pl.curSector, viewPos, yaw, pitch, 2048.0, ignore: pl);
+   let loc = Lith_UTIL.traceFromPos(pl.curSector, viewPos, yaw, pitch, 2048.0, ignore: pl).hitPos;
    vector2 xh;
    bool seen;
    [xh, seen] = projectF(loc);

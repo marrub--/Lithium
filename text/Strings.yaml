@@ -214,7 +214,6 @@ sm_:
    - PhantomTeleport
    - PlayerDeath
    - PlayerDeathNuke
-   - PlayerInit
    - Print
    - Project
    - PureSteggleEnergy

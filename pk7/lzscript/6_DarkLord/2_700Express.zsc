@@ -11,6 +11,7 @@ class Lith_700Express : Lith_DWeapon;
 default {
    Lith_Weapon.SpawnType "Lith_PistolPickup";
    Lith_Weapon.MagSize 4;
+   Lith_Weapon.DefaultSpeed 1.3;
    Tag "$LITH_INFO_SHORT_700Express";
    Weapon.SlotNumber 2;
    Weapon.SlotPriority 1;
@@ -36,12 +37,12 @@ action(Weapon) void lith_laser(double p) {
    let ply = Lith_Player(self);
    if(!ply) return;
    let vz  = ply.player.viewz - ply.pos.z;
-   let loc = Lith_UTIL.traceFrom(ply, ply.m_iyaw, ply.m_ipitch - p, 2048, vz);
+   let loc = Lith_UTIL.traceFrom(ply, ply.m_iyaw, ply.m_ipitch - p, 2048, vz).hitPos;
    Lith_URANUS.instance().particle700eLaserTrace(loc, 0.5);
-   loc = Lith_UTIL.traceFrom(ply, ply.angle, ply.pitch - p, 2048, vz);
+   loc = Lith_UTIL.traceFrom(ply, ply.angle, ply.pitch - p, 2048, vz).hitPos;
    Lith_URANUS.instance().particle700eLaserTrace(loc, 0.2);
    if(getAge() & 1) {
-      Lith_URANUS.instance().particle700eLaser(self, p, vz - 7);
+      Lith_URANUS.instance().particle700eLaser(ply, p);
    }
 }
 

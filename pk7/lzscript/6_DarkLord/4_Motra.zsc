@@ -12,6 +12,7 @@ default {
    Lith_Weapon.SpawnType "Lith_PistolPickup";
    Lith_Weapon.MagSize 43;
    Lith_Weapon.AdsZoom 0.4;
+   Lith_Weapon.DefaultSpeed 1.3;
    Tag "$LITH_INFO_SHORT_Motra";
    Weapon.SlotNumber 4;
    Weapon.SlotPriority 0.9;

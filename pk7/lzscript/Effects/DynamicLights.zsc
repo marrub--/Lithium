@@ -7,6 +7,19 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
+class Lith_DynLight : DynamicLight {
+   default {
+      DynamicLight.Type "Point";
+      +DynamicLight.Attenuate
+   }
+}
+
+class Lith_SpotLight : Lith_DynLight {
+   default {
+      +DynamicLight.Spot
+   }
+}
+
 class Lith_LightProjectile : Actor abstract
 {
    default

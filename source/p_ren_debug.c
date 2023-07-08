@@ -32,10 +32,10 @@ void P_Ren_Debug(void) {
    _l("speedmul: ");   _p(pl.speedmul);                        _c('\n');
    _l("jumpboost: ");  _p(pl.jumpboost);                       _c('\n');
    _l("sky: ");        _p(sky1); _c(','); _p(sky2);            _c('\n');
-   _l("*target: ");    _p(pl.upgrdata.flashlight.target);      _c('\n');
-   _l("*intensity: "); _p(pl.upgrdata.flashlight.intensity);   _c('\n');
-   _l("*speed: ");     _p(pl.upgrdata.flashlight.speed);       _c('\n');
-   _l("*battery: ");   _p(pl.upgrdata.flashlight.battery);     _c('\n');
+   _l("*target: ");    _p(pl.light.target);                    _c('\n');
+   _l("*intensity: "); _p(pl.light.intensity);                 _c('\n');
+   _l("*speed: ");     _p(pl.light.speed);                     _c('\n');
+   _l("*battery: ");   _p(pl.light.battery);                   _c('\n');
    if(get_bit(wl.cbiupgr, cupg_d_shield)) {
       _l("shield: ");     _p((i32)pl.shield);  _c('\n');
       _l("shieldmax: ");  _p(pl.shieldmax);    _c('\n');

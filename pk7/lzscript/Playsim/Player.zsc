@@ -23,17 +23,10 @@ static ui void Project(Actor mo, double x_, double y_, double z_, int px, int py
 }
 
 static void TraceFrom(Actor mo, double yaw, double pitch, double dist, double offsetz, bool floor, int px, int py, int pz) {
-   vector3 v = Lith_UTIL.TraceFrom(mo, yaw * 360, pitch * 360, dist, offsetz, floor);
+   vector3 v = Lith_UTIL.TraceFrom(mo, yaw * 360, pitch * 360, dist, offsetz, floor).hitPos;
    if(px) ACS_ExecuteWithResult(lsc_setptrk32, px, int(v.x * FIX));
    if(py) ACS_ExecuteWithResult(lsc_setptrk32, py, int(v.y * FIX));
    if(pz) ACS_ExecuteWithResult(lsc_setptrk32, pz, int(v.z * FIX));
-}
-
-static void PlayerInit(Actor mo_) {
-   let mo = Lith_Player(mo_);
-   /* mo.m_cs = Lith_Cyberspace.create(); */
-   mo.m_light[0] = Lith_SpotLight(Actor.spawn("Lith_SpotLight", mo.pos));
-   mo.m_light[1] = Lith_SpotLight(Actor.spawn("Lith_SpotLight", mo.pos));
 }
 
 static void Nuke(Actor mo) {
@@ -89,7 +82,7 @@ static bool AdrenalineCheck(Actor mo)
    Actor th;
    for(let it = ThinkerIterator.Create("Actor"); (th = Actor(it.Next()));)
       if(th.bMISSILE && th.Target && th.Target.bCOUNTKILL && !th.IsZeroDamage() &&
-         th.Vec3To(mo).Length() <= 100)
+         th.distance3D(mo) <= 100)
          return true;
    return false;
 }

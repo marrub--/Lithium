@@ -108,7 +108,7 @@ void tickSettings() {
       (lith_hud_showitems    ? SHOWF_ITEMS    : 0);
    m_itemColor = acs_executeWithResult(lsc_drawcr, lith_hud_itemcolor);
    m_lightMaxBattery = lith_light_battery * 35;
-   m_lightCurBattery = Lith_UTIL.pData(_pdt_flashbattery);
+   m_lightCurBattery = Lith_UTIL.pData(_pdt_lightbattery);
 }
 
 ui void drawNearByStuff(RenderEvent evt) {
@@ -221,14 +221,14 @@ clearScope int, int ammoAmt(Actor mo, class<Lith_Ammo> ty) const {
    return amt, clr;
 }
 
-clearScope vector3 traceFromPos(Sector sec, vector3 pos, double yaw, double pitch, double dist, Actor ignore, bool floor, ETraceFlags flags) {
-   let dir = Lith_UTIL.anglesToVec((yaw, pitch));
+clearScope TraceResults traceFromPos(Sector sec, vector3 pos, double yaw, double pitch, double dist, Actor ignore, bool floor, ETraceFlags flags) {
+   let dir = Lith_UTIL.anglesToVec((yaw, pitch), 1);
    m_tracer.m_ignore = ignore;
    m_tracer.trace(pos, sec, dir, dist, flags);
-   return m_tracer.results.hitPos;
+   return m_tracer.results;
 }
 
-clearScope vector3 traceFromActor(Actor mo, double yaw, double pitch, double dist, double offsetZ, bool floor, ETraceFlags flags) {
+clearScope TraceResults traceFromActor(Actor mo, double yaw, double pitch, double dist, double offsetZ, bool floor, ETraceFlags flags) {
    return traceFromPos(mo.curSector, mo.pos.plusZ(offsetZ), yaw, pitch, dist, mo, floor, flags);
 }
 

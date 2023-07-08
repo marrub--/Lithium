@@ -30,11 +30,12 @@ enum Lith_UpgradeName {
 
 
 UPGR_HeadsUpDisp,
-UPGR_Flashlight,
 UPGR_Zoom,
 UPGR_VitalScan,
+UPGR_Flashlight,
 UPGR_ReflexWetw,
 UPGR_AutoReload,
+UPGR_Lightspark,
 UPGR_Minimap,
 UPGR_SecretScan,
 UPGR_JetBooster,

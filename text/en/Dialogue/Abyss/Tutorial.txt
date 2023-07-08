@@ -1,0 +1,204 @@
+## ╭-*-Agw-LithTxt-*-─────────────────────────────────────────────────────────╮
+## │                                                                          │
+## │             Distributed under the CC0 public domain license.             │
+## │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+## │                See licenses/cc0.txt for more information.                │
+## │                                                                          │
+## ╰──────────────────────────────────────────────────────────────────────────╯
+
+%% LITHABYS_start_begin_0
+\c[Lith_Green]Into the pit!
+\c[Lith_Red]Into Abyss -
+\c[Lith_Purple]Into a silent void,
+\c[Lith_Yellow]you wander.
+\c[Lith_Pink]We look to the future,
+\c[Lith_Blue]you destroy your present.
+\c[Lith_Grey]Iterate.
+
+## Marine
+%% LITHABYS_start_begin_o0m
+Who are you!?
+\cq[Is this Hell? Wait, am I dead?]
+
+%% LITHABYS_start_begin_o1m
+Huh?
+\cr[I'm leaving.]
+
+%% LITHABYS_start_m_question_0
+\c[Lith_Green]Sinking ship!
+\c[Lith_Green]You've gone amiss,
+\c[Lith_Green]another trip
+\c[Lith_Green]yeah, you're in the pit!\c-
+
+Seven days, billions of years!
+Guess all you like! Guess all you like!
+A writer, a poet, a failure, a king
+seventy thoughts among you,
+second to one!
+
+%% LITHABYS_start_m_question_o0
+O...kay. I'm leaving.
+\cr[Get me out of here.]
+
+## Cyber-Mage
+%% LITHABYS_start_begin_o0c
+This isn't good.
+\cq[Voices in my head. Who put them there?]
+
+%% LITHABYS_start_begin_o1c
+What?
+\cr[I'm leaving.]
+
+%% LITHABYS_start_c_question_0
+\c[Lith_Red]I put them there!
+\c[Lith_Red]Same as your past!
+\c[Lith_Red]A day of creation,
+\c[Lith_Red]one came through last.\c-
+
+Scrawls across the mind, dance more!
+Feed it if you like, that's for
+You to make the mistake, fast score!
+Slipshod apocalypse in sight!
+That's lore!
+
+%% LITHABYS_start_c_question_o0
+If only I had the capability to remember that right now...
+\cr[Might regret it. Seems like some kind of memetic agent.]
+
+## Informant
+%% LITHABYS_start_begin_o0i
+You will be exterminated.
+\cq[No viable strategy detected. Threats engaged.]
+
+%% LITHABYS_start_begin_o1i
+Delete message.
+\cr[Not meant to be here.]
+
+%% LITHABYS_start_i_question_0
+\c[Lith_Purple]Thinking heat! Signals deep!
+\c[Lith_Purple]Outside's metal, inside weeps!
+\c[Lith_Purple]Scared of death, afraid of life
+\c[Lith_Purple]One last turn from Earth's kind.\c-
+
+Though in fear, a second's clear
+Another step, you're ready
+Speak for yourself, afternoon tear
+A circle blazes around me
+Breathe through your heart
+Fill your life with
+
+%% LITHABYS_start_i_question_o0
+Analysis: Poetry about my future, and/or your past. Appreciated.
+\cr[Perhaps I'm safe, for now.]
+
+## Wanderer
+%% LITHABYS_start_begin_o0w
+Another place? Another time? No, what is this place?
+\cq[Where I am is not where I should be.]
+
+%% LITHABYS_start_begin_o1w
+Where..?
+\cr[Forwards...]
+
+%% LITHABYS_start_w_question_0
+\c[Lith_Yellow]As the rich get richer,
+\c[Lith_Yellow]Time and place varying
+\c[Lith_Yellow]Flow of empty river:
+\c[Lith_Yellow]Ceases at memory's brink\c-
+
+@@
+Direction, direction, splitting and falling, it's always got something
+to do with distance. Distance increases led to atrophy, distance
+decreases led to sinusoidal collapse looping hysteresis. Direction
+towards what? What are you looking for? Why are you trying to—stuck
+again. Again and again and it keeps on going—Do you think this is
+funny?—Was it okay when it happened? Will it matter, by your end, that
+it was done to you?—Reiterating. Looping. No more distance.
+@@
+
+%% LITHABYS_start_w_question_o0
+\cr[A voice guides me.]
+
+## Assassin
+%% LITHABYS_start_begin_o0a
+What the hell is this!?
+\cq[Is this place even real??]
+
+%% LITHABYS_start_begin_o1a
+Future..?
+\cr[I don't like this. I'm out of here.]
+
+%% LITHABYS_start_a_question_0
+\c[Lith_Pink]It's real! More real /Than you /Would think
+\c[Lith_Pink]What hell! This would/Be what  /You'd see
+\c[Lith_Pink]I'd fell   Into what /You now  /Breathe
+\c[Lith_Pink]Left well  Before my /Time     /Could be\c-
+
+What were you to be, lost one?
+I wish I could feel, now, to reach out and
+         feel what I lost.
+Why must my cold body be unjust, for sake of myself?
+Living here keeps me
+                   lost in just what?
+I leave heart open to myself, so then closed off
+from my eyes, foolish me
+       seeing open doors in a mind long deserted.
+Please, go. Leave me alone.
+
+%% LITHABYS_start_a_question_o0
+Fuck this.
+\cr[It's freezing. Why?]
+
+## Dark Lord
+%% LITHABYS_start_begin_o0d
+What are you?
+\cq[Is this place even real??]
+
+%% LITHABYS_start_begin_o1d
+Alright.
+\cr[I don't like this. I'm out of here.]
+
+%% LITHABYS_start_d_question_0
+\c[Lith_Blue]A question as old as questions, / As right as right can be,
+\c[Lith_Blue]Severed by the preists, / And outside another peeks,
+\c[Lith_Blue]Ill Abyss has spoken: / It will be forsaken,
+       \c[Lith_Blue]We're all in this too deep!\c-
+
+Heart eyes second mind on you but not in time:
+First layer, middle, but what's next is beneath;
+Ready, I think you're ready, get out now
+What lies beneath a god? Not a space, not a trice:
+Seven 7 \u{E007} heaven is nowhere to be seen;
+Run, you've got to run, leave somehow
+
+%% LITHABYS_start_d_question_o0
+Will I die?
+\cr[I don't know why I would say that. I should leave.]
+
+## Thoth
+%% LITHABYS_start_begin_o0t
+Seek help, ill gods.
+\cq[I'm not going anywhere until I get more divine words in my head.]
+
+%% LITHABYS_start_begin_o1t
+Rid me of this illusion.
+\cr[None of this.]
+
+%% LITHABYS_start_t_question_0
+\c[Lith_Grey]Illusion, ill, divine, seven, second, time;
+\c[Lith_Grey]Abyss. Gods, heaven, loops, thinking, circle,
+\c[Lith_Grey]blazing, blazing, breathing, creation, silence.
+\c[Lith_Grey]Divine enough? Lost enough? Feeling good?\c-
+
+@@
+\c[Lith_Angelic]Silly, I know that's just me talking. Yet, somehow,
+what she says feels more real. Do I even know who I am anymore? Is the
+identity of the Abyss consuming me?\c-
+
+No, this one is the Abyss. Which one was me, though?
+@@
+
+%% LITHABYS_start_t_question_o0
+\cr[Maybe I should go before I get any more confused...]
+
+## EOF

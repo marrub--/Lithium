@@ -21,14 +21,14 @@ class Lith_4BorePuff : Lith_BulletPuff {
       Scale 2;
    }
    static const color[] CRS = {
-      "#43f476",
-      "#68f443",
-      "#c1f443",
-      "#f4cf43",
-      "#f47643",
-      "#f45943",
-      "#f4434b",
-      "#f44368"
+      "#f4bf5f",
+      "#f48f55",
+      "#f4594c",
+      "#f44368",
+      "#c93347",
+      "#9f242c",
+      "#741918",
+      "#4a130e"
    };
    override void postBeginPlay() {
       super.postBeginPlay();

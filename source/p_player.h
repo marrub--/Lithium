@@ -76,6 +76,13 @@ enum ZscName(PClass) {
    pcl_magicuser = gU,
 };
 
+enum ZscName(FlashlightState) {
+   _light_off,
+   _light_on,
+   _light_follow,
+   _light_max,
+};
+
 #if !ZscOn
 #include "m_engine.h"
 #include "p_cbi.h"
@@ -114,7 +121,7 @@ void P_LogB(i32 levl, cstr fmt, ...); /* log to HUD and full log */
 void P_LogH(i32 levl, cstr fmt, ...); /* log to HUD only */
 void P_LogF(          cstr fmt, ...); /* log to full log only */
 void P_Log_Entry(void);
-script void P_Log(i32 cr, i32 yy);
+script void P_DrawLog(void);
 
 script void P_Wep_PTickPre(void);
        void P_Dat_PTickPre(void);
@@ -167,6 +174,12 @@ enum {
    _hud_max
 };
 
+struct flashlight {
+   i32 on, was_on;
+   i32 battery;
+   k64 intensity, target, speed;
+};
+
 /* Data that needs to be kept track of between frames. */
 struct player_delta {
    /* Status */
@@ -200,7 +213,6 @@ struct player_delta {
 
 struct old_player_delta {
    anonymous struct player_delta del;
-
    i32 health;
    i32 mana;
    i32 shield;
@@ -219,9 +231,9 @@ struct old_player_delta {
  * edit 14-07-2017: lol nevermind it's only 2kb now
  * edit 31-08-2017: m e r g e
  * edit 04-04-2020: WHY DID YOU MAKE IT THAT COMPLEX YOU BUNGUS
+ * edit 17-04-2023: spring cleaning?
  */
 struct player {
-   /* data */
    __prop megaProtect  {default:    PtrInvNum(->tid, so_MegaProtection)}
    __prop mana         {default:    PtrInvNum(->tid, so_ManaAmmo)}
    __prop manamax      {default:    ACS_GetMaxInventory(->tid, so_ManaAmmo)}
@@ -236,14 +248,10 @@ struct player {
    __prop classname    {default:    GetNameTag(->tid)}
    __prop overdrive    {default:    GetMembI(->tid, sm_Overdrive)}
    __prop buttons      {default:    ACS_GetPlayerInput(-1, INPUT_BUTTONS)}
-
-
-   /* Initialization */
+   /* Info */
    bool wasinit;
    bool dead;
    bool reinit;
-
-   /* Info */
    i32  tid;
    i32  num;
    i32  ticks;
@@ -252,98 +260,62 @@ struct player {
    char discrim[5];
    i32  color;
    cstr obit;
-
-   /* Deltas */
    anonymous
    struct     player_delta cur;
    struct old_player_delta old;
-
    /* Upgrades */
    struct upgr_data upgrdata;
    struct upgrade   upgrades[UPGR_MAX];
-
-   i32 autobuy;
-
+   i32              autobuy;
    /* HUD */
    bool hudenabled;
+   i32  hudtype, hudcolor;
    i32  hudlpos, hudrpos;
-
+   i32  hudhppos;
+   i32  hudtop;
    /* Score */
    score_t scoreaccum;
    i32     scoreaccumtime;
    i32     scoremul;
-
    /* Misc */
-   k32 rage;
-   i32 speedmul;
-   i32 jumpboost;
-
+   k32   rage;
+   i32   speedmul;
+   i32   jumpboost;
    char *notes[16];
-
-   i32 nextstep;
-
-   bool teleportedout;
-   i32  done_intro;
-
-   i32 shieldmax;
-   i32 regenwaitmax;
-   i32 regenwait;
-
-   i32 missionstatshow;
-
-   /* Input */
-   struct gui_txt tb;
-
+   i32   nextstep;
+   bool  teleportedout;
+   i32   done_intro;
+   i32   shieldmax;
+   i32   regenwaitmax;
+   i32   regenwait;
+   i32   missionstatshow;
+   struct flashlight light;
    /* Static data */
    i32 spawnhealth;
    k32 jumpheight;
    k32 viewheight;
    k32 attackheight;
-
-   /* pitch/yaw in precalculated sane radian format */
-   k64 pitchf;
-   k64 yawf;
-
-   /* Additive angles */
-   k64 addpitch;
-   k64 addyaw;
-   k64 addroll;
-
-   /* Damage bob angles */
-   k64 bobpitch;
-   k64 bobyaw;
-   k64 bobroll;
-
-   /* Extra angles */
-   k64 extrpitch;
-   k64 extryaw;
-   k64 extrroll; /* throw em to the dogs -suwy */
-
+   k64 addpitch,  addyaw,  addroll;
+   k64 bobpitch,  bobyaw,  bobroll;
+   k64 extrpitch, extryaw, extrroll; /* throw em to the dogs !! */
    /* GUI */
-   struct cbi cbi;
-
+   struct cbi     cbi;
+   struct gui_txt tb;
    /* Statistics */
-   i32 healthsum;
-   i32 healthused;
-
+   i32     healthsum;
+   i32     healthused;
    score_t scoresum;
    score_t scoreused;
-
-   i32 unitstravelled;
-
-   i32 spuriousexplosions;
-   i32 brouzouf;
-
-   i32 itemsbought;
-   i32 upgradesowned;
-
+   i32     unitstravelled;
+   i32     spuriousexplosions;
+   i32     brouzouf;
+   i32     itemsbought;
+   i32     upgradesowned;
    /* Weapons */
    struct weapondata weapon;
-   i32 weaponsheld;
-
-   i32  riflefiremode;
-   bool bladehit, rendhit;
-
+   i32               weaponsheld;
+   i32               riflefiremode;
+   bool              bladehit, rendhit;
    /* 🌌 「÷」 0 */
    bool sgacquired;
 };

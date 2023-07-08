@@ -36,7 +36,7 @@ class Lith_HasBarrier : Powerup {
          for(let it = ThinkerIterator.Create("Actor"); (th = Actor(it.Next()));)
             if(th.bMISSILE && th.Target && th.Target.bCOUNTKILL && !th.IsZeroDamage() &&
                th.GetMissileDamage(7, 1) < 80 && Random(0, 256) < 80 &&
-               th.Vec3To(Owner).Length() <= 64)
+               th.distance3D(Owner) <= 64)
          {
             Spawn("Lith_BarrierFX", th.Pos);
             th.Destroy();

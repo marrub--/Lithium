@@ -6,41 +6,200 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_SpotLight : DynamicLight {
+class Lith_LightsparkEffect : Actor {
    default {
-      DynamicLight.Type "Point";
-      +DynamicLight.Attenuate
-      +DynamicLight.Spot
+      Alpha 0.77;
+      Scale 0.75;
+      RenderStyle "Add";
+      +NoInteraction
+      +ForceXyBillboard
+      +Bright
+   }
+
+   const LSPK_MAX_VEL = 0.33;
+
+   override void postBeginPlay() {
+      super.postBeginPlay();
+      a_setScale(scale.x * Lith_URANUS.uiRandom(0.8, 1.0));
+      vel = (Lith_URANUS.uiRandom(-LSPK_MAX_VEL, LSPK_MAX_VEL), Lith_URANUS.uiRandom(-LSPK_MAX_VEL, LSPK_MAX_VEL), Lith_URANUS.uiRandom(-LSPK_MAX_VEL, LSPK_MAX_VEL));
+   }
+
+   override void tick() {
+      if(!isFrozen()) {
+         Lith_UTIL.stateTick(self);
+         setOrigin(pos + vel, true);
+         a_fadeOut(0.05);
+      }
+   }
+
+   states {
+   Spawn:
+      #LSP AAABCBCD 3;
+      stop;
    }
 }
 
 extend class Lith_Player;
 
-Lith_SpotLight[2] m_light;
+const FL_IDX_INNER = 0;
+const FL_IDX_OUTER = 1;
+const FL_IDX_MAX   = 2;
+
+Lith_DynLight[FL_IDX_MAX] m_light;
 
 void tickFlashlight() {
-   double intn = acs_scriptCall("Lith_GetFlashlightIntensity") / FIX;
-   int r = clamp(lith_light_r, 0, 255);
-   int g = clamp(lith_light_g, 0, 255);
-   int b = clamp(lith_light_b, 0, 255);
-   int ri = int(lith_light_radius * intn);
-   int ro = ri / 2;
-   m_light[0].args[DynamicLight.LIGHT_RED]       = r;
-   m_light[0].args[DynamicLight.LIGHT_GREEN]     = g;
-   m_light[0].args[DynamicLight.LIGHT_BLUE]      = b;
-   m_light[0].args[DynamicLight.LIGHT_INTENSITY] = ri;
-   m_light[0].spotInnerAngle = 0;
-   m_light[0].spotOuterAngle = 20;
-   m_light[1].args[DynamicLight.LIGHT_RED]       = int(r * 0.77);
-   m_light[1].args[DynamicLight.LIGHT_GREEN]     = int(g * 0.77);
-   m_light[1].args[DynamicLight.LIGHT_BLUE]      = int(b * 0.77);
-   m_light[1].args[DynamicLight.LIGHT_INTENSITY] = ro;
-   m_light[1].spotInnerAngle = 15;
-   m_light[1].spotOuterAngle = 45;
+   let intn = Lith_UTIL.pData(_pdt_lightintensity) / FIX;
+   if(intn <= 0) {
+      deactivateFlashlight();
+      return;
+   }
+   let r   = clamp(lith_light_r, 0, 255);
+   let g   = clamp(lith_light_g, 0, 255);
+   let b   = clamp(lith_light_b, 0, 255);
+   let rd  = int(lith_light_radius * intn);
+   let pcl = 1 << m_pclass;
+   if(pcl & pcl_outcasts) {
+      tickFlashlightOutcasts(r, g, b, rd, intn);
+   } else if(pcl & pcl_intruders) {
+      tickFlashlightIntruders(r, g, b, rd, intn);
+   }
+}
+
+const FL_OUTER_MIN = 15;
+const FL_OUTER_MAX = 45;
+const FL_INNER_MIN = 0;
+const FL_INNER_MAX = FL_OUTER_MAX / 2;
+const FL_COLOR_DIMINISH_FAC = 43;
+const FL_COLOR_DIMINISH_DIV = 56;
+const FL_INTENSITY_DIMINISH_FAC = 1;
+const FL_INTENSITY_DIMINISH_DIV = 2;
+
+void tickFlashlightOutcasts(int r, int g, int b, int rd, double intn) {
+   if(!m_light[FL_IDX_INNER]) {
+      m_light[FL_IDX_INNER] = Lith_DynLight(spawn('Lith_SpotLight', pos));
+      m_light[FL_IDX_OUTER] = Lith_DynLight(spawn('Lith_SpotLight', pos));
+   }
+   m_light[FL_IDX_INNER].args[DynamicLight.LIGHT_RED]       = r;
+   m_light[FL_IDX_INNER].args[DynamicLight.LIGHT_GREEN]     = g;
+   m_light[FL_IDX_INNER].args[DynamicLight.LIGHT_BLUE]      = b;
+   m_light[FL_IDX_INNER].args[DynamicLight.LIGHT_INTENSITY] = rd;
+   m_light[FL_IDX_INNER].spotInnerAngle = FL_INNER_MIN;
+   m_light[FL_IDX_INNER].spotOuterAngle = FL_INNER_MAX;
+   //
+   m_light[FL_IDX_OUTER].args[DynamicLight.LIGHT_RED]       =
+      r * FL_COLOR_DIMINISH_FAC / FL_COLOR_DIMINISH_DIV;
+   m_light[FL_IDX_OUTER].args[DynamicLight.LIGHT_GREEN]     =
+      g * FL_COLOR_DIMINISH_FAC / FL_COLOR_DIMINISH_DIV;
+   m_light[FL_IDX_OUTER].args[DynamicLight.LIGHT_BLUE]      =
+      b * FL_COLOR_DIMINISH_FAC / FL_COLOR_DIMINISH_DIV;
+   m_light[FL_IDX_OUTER].args[DynamicLight.LIGHT_INTENSITY] =
+      rd * FL_INTENSITY_DIMINISH_FAC / FL_INTENSITY_DIMINISH_DIV;
+   //
+   m_light[FL_IDX_OUTER].spotInnerAngle = FL_OUTER_MIN;
+   m_light[FL_IDX_OUTER].spotOuterAngle = FL_OUTER_MAX;
+   activateFlashlight(angle, pitch, (pos.xy, player.viewz));
+}
+
+const LSPK_THROW_DISTANCE_MAX = 256; // MAY BE REAL VALUE
+const LSPK_THROW_DISTANCE_FAC = 3;
+const LSPK_THROW_DISTANCE_DIV = 4;
+const LSPK_FOLLOW_HEIGHT   = 6; // MAY BE REAL VALUE
+const LSPK_FOLLOW_DISTANCE = 8; // MAY BE REAL VALUE
+const LSPK_MOVE_SPEED = 0.1; // MAY BE REAL VALUE
+const LSPK_INNER_INTENSITY_FAC = 1;
+const LSPK_INNER_INTENSITY_DIV = 4;
+const LSPK_COLOR_DIMINISH_FAC = 87;
+const LSPK_COLOR_DIMINISH_DIV = 112;
+const LSPK_INTENSITY_DIMINISH_FAC = 1;
+const LSPK_INTENSITY_DIMINISH_DIV = 2;
+const LSPK_GLOW_FAC = 32.0; // MAY BE REAL VALUE
+const LSPK_GLOW_CYCLES_FAC = 3;
+const LSPK_GLOW_CYCLES_DIV = 4;
+
+vector3 m_lspkPos, m_lspkDest;
+
+void tickFlashlightIntruders(int r, int g, int b, int rd, double intn) {
+   if(!m_light[0]) {
+      m_light[0] = Lith_DynLight(spawn('Lith_DynLight',  pos));
+      m_light[1] = Lith_DynLight(spawn('Lith_SpotLight', pos));
+   }
+   let vp = (pos.xy, player.viewz);
+   switch(Lith_UTIL.pData(_pdt_lighton)) {
+   case _light_on:
+      if(Lith_UTIL.pData(_pdt_lightwason) == _light_off) {
+         let hit = Lith_UTIL.traceFromPos(curSector, vp, angle, pitch,
+                                          LSPK_THROW_DISTANCE_MAX,
+                                          ignore: self);
+         let dist = hit.distance;
+         if(hit.hitType != TRACE_HitNone) {
+            dist = dist * LSPK_THROW_DISTANCE_FAC / LSPK_THROW_DISTANCE_DIV;
+         }
+         m_lspkPos  = vp;
+         m_lspkDest = m_lspkPos + Lith_UTIL.anglesToVec((angle, pitch), dist);
+      }
+      break;
+   case _light_follow:
+      m_lspkDest = vp + (
+         cos(Lith_UTIL.invertDeg(angle)) * LSPK_FOLLOW_DISTANCE,
+         sin(Lith_UTIL.invertDeg(angle)) * LSPK_FOLLOW_DISTANCE,
+         LSPK_FOLLOW_HEIGHT
+      );
+      break;
+   }
+   let glow = int(sin(360.0 * gameTic / TICRATE *
+                      LSPK_GLOW_CYCLES_FAC / LSPK_GLOW_CYCLES_DIV) *
+                  LSPK_GLOW_FAC);
+   let gr = min(r + glow, 255);
+   let gg = min(g + glow, 255);
+   let gb = min(b + glow, 255);
+   m_light[FL_IDX_INNER].args[DynamicLight.LIGHT_RED]   = gr;
+   m_light[FL_IDX_INNER].args[DynamicLight.LIGHT_GREEN] = gg;
+   m_light[FL_IDX_INNER].args[DynamicLight.LIGHT_BLUE]  = gb;
+   m_light[FL_IDX_INNER].args[DynamicLight.LIGHT_INTENSITY] =
+      rd * LSPK_INNER_INTENSITY_FAC / LSPK_INNER_INTENSITY_DIV + glow;
+   //
+   m_light[FL_IDX_OUTER].args[DynamicLight.LIGHT_RED] =
+      r * LSPK_COLOR_DIMINISH_FAC / LSPK_COLOR_DIMINISH_DIV;
+   m_light[FL_IDX_OUTER].args[DynamicLight.LIGHT_GREEN] =
+      g * LSPK_COLOR_DIMINISH_FAC / LSPK_COLOR_DIMINISH_DIV;
+   m_light[FL_IDX_OUTER].args[DynamicLight.LIGHT_BLUE] =
+      b * LSPK_COLOR_DIMINISH_FAC / LSPK_COLOR_DIMINISH_DIV;
+   m_light[FL_IDX_OUTER].args[DynamicLight.LIGHT_INTENSITY] =
+      rd * LSPK_INTENSITY_DIMINISH_FAC / LSPK_INTENSITY_DIMINISH_DIV;
+   //
+   m_light[FL_IDX_OUTER].spotInnerAngle = 0;
+   m_light[FL_IDX_OUTER].spotOuterAngle = 20;
+   activateFlashlight(angle, pitch, m_lspkPos);
+   let cen_cr = color(gr, gg, gb);
+   let cen_rd = rd * min((distance3D(m_light[FL_IDX_INNER]) - 128) / 128, 1) / 33;
+   if(cen_rd > 0) {
+      Lith_URANUS.instance().particleLightsparkCenter(m_lspkPos, cen_cr, cen_rd);
+   }
+   if(gameTic % 5 == 0) {
+      let ofs = Lith_UTIL.anglesToVec((Lith_URANUS.uiRandom(0, 360), Lith_URANUS.uiRandom(0, 360)), cen_rd + Lith_URANUS.uiRandom(0, 1));
+      spawn("Lith_LightsparkEffect", m_lspkPos + ofs);
+   }
+   m_lspkPos = Lith_UTIL.vec3Lerp(m_lspkPos, m_lspkDest, LSPK_MOVE_SPEED);
+}
+
+void deactivateFlashlight() {
    foreach(li : m_light) {
-      li.a_setAngle(angle, true);
-      li.a_setPitch(pitch, true);
-      li.setOrigin((pos.xy, player.viewz), true);
+      if(li && !li.bDormant) {
+         li.deactivate(self);
+      }
+   }
+}
+
+void activateFlashlight(double a, double p, vector3 v) {
+   foreach(li : m_light) {
+      bool moving = true;
+      if(li.bDormant) {
+         li.activate(self);
+         moving = false;
+      }
+      li.a_setAngle(a, moving);
+      li.a_setPitch(p, moving);
+      li.setOrigin(v, moving);
    }
 }
 

@@ -50,20 +50,20 @@ void Upgr_Subweapons_Update(void) {
 void Upgr_Subweapons_Render(void) {
    if(!pl.hudenabled) return;
    if(!get_bit(udata.have, _subw_fist)) {
-      PrintSprite(sp_SubWepBack, pl.hudlpos+66,1, 239,2);
+      PrintSprite(sp_SubWepBack, pl.hudhppos+1,1, 239,2);
    } else {
-      PrintSprite(sp_SubWepBack2, pl.hudlpos+66,1, 239,2);
-      PrintSprite(sp_SubWepFist, pl.hudlpos+104,1, 238,2);
+      PrintSprite(sp_SubWepBack2, pl.hudhppos+1,1, 239,2);
+      PrintSprite(sp_SubWepFist, pl.hudhppos+39,1, 238,2);
    }
-   PrintSprite(sp_SubWepFront, pl.hudlpos+68,1, 238,2);
+   PrintSprite(sp_SubWepFront, pl.hudhppos+3,1, 238,2);
    i32 prc = 29 * udata.charge / (k32)100.0;
    i32 srw;
    if(udata.shots == 0) {srw = prc;} else {srw = 29;}
-   /*                */ PrintSpriteClip(sp_SubWepBar1, pl.hudlpos+72,1, 224,2, 0,0,srw,1);
+   /*                */ PrintSpriteClip(sp_SubWepBar1, pl.hudhppos+7,1, 224,2, 0,0,srw,1);
    if(udata.shots == 1) {srw = prc;} else {srw = 29;}
-   if(udata.shots >  0) PrintSpriteClip(sp_SubWepBar2, pl.hudlpos+72,1, 224,2, 0,0,srw,1);
+   if(udata.shots >  0) PrintSpriteClip(sp_SubWepBar2, pl.hudhppos+7,1, 224,2, 0,0,srw,1);
    for(i32 i = 0; i < _subw_max; i++) {
-      i32 x   = pl.hudlpos + 68 + i * 9;
+      i32 x   = pl.hudhppos + 3 + i * 9;
       i32 fid = fid_subwepS + i;
       if(get_bit(udata.have, i)) PrintSprite(sa_subwep_act[i], x,1, 238,2);
       if(udata.which == i)       SetFade(fid, 1, 6);
@@ -71,7 +71,7 @@ void Upgr_Subweapons_Render(void) {
    }
    if(udata.uptics) {
       str *sp = udata.shots == 1 ? sa_subwep_up_1 : sa_subwep_up_2;
-      PrintSprite(sp[udata.uptics / _uptic_time], pl.hudlpos+101,0, 223,0);
+      PrintSprite(sp[udata.uptics / _uptic_time], pl.hudhppos+36,0, 223,0);
    }
 }
 

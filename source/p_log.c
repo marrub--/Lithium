@@ -120,6 +120,9 @@ void P_Log_Entry(void) {
 }
 
 script void P_Log_PTick(void) {
+   if(Paused) {
+      return;
+   }
    if(log.curtime == 0) {
       if(log.hudC) {
          LogPop();
@@ -165,13 +168,16 @@ void P_CBI_TabLog(struct gui_state *g) {
    G_ScrEnd(g, &logscr);
 }
 
-script void P_Log(i32 cr, i32 yy) {
+script void P_DrawLog(void) {
    if(CVarGetI(sc_hud_showlog)) {
+      i32 cr = CVarGetI(sc_hud_logcolor);
+      if(cr == 'l') cr = pl.hudtype != _hud_old ? pl.hudcolor : CR_GREEN;
+      else          cr = Draw_GetCr(cr);
       bool log_from_top = CVarGetI(sc_hud_logfromtop);
       k32 scale = CVarGetK(sc_hud_logsize);
       i32 xo = pl.hudlpos / scale;
-      i32 yo = 200        / scale;
-      i32 xs = pl.hudrpos / scale;
+      i32 yo = pl.hudtop  / scale;
+      i32 xs = 320        / scale;
       i32 ys = 240        / scale;
       SetSize(xs, ys);
       i32 i = 0;
@@ -180,7 +186,7 @@ script void P_Log(i32 cr, i32 yy) {
          i32 y = 10 * i;
          i32 ya;
          if(log_from_top) {ya = 1; y = 64 + y;}
-         else             {ya = 2; y = (yo - y) + yy;}
+         else             {ya = 2; y = yo - y;}
          k32 a = 1.0;
          if(ld->ftim > 0) {
             SetFade(fid_logadS + i, 1, 8);
