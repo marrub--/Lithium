@@ -3,10 +3,10 @@
 # Running
 
 If you wish to run an in-development version of the mod, you can click
-the "Clone or download" button and then "Download ZIP".
+the "Code" button at the top of the page and then "Download ZIP".
 
-Once you've done that you can then load the `pk7` folder into ZDoom as
-you would any other mod.
+Once you've done that, and extracted the ZIP file, you can then load
+the `pk7` folder into ZDoom as you would any other mod.
 
 # Code
 
