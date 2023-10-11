@@ -13,17 +13,6 @@
 
 
 
-enum Lith_Attrib {
-   at_acc,
-   at_def,
-   at_str,
-   at_vit,
-   at_stm,
-   at_luk,
-   at_spc,
-   at_max
-};
-
 enum Lith_SubweaponType {
    _subw_gun,
    _subw_grenade,
@@ -95,6 +84,36 @@ enum Lith_FlashlightState {
    _light_follow,
    _light_max,
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+enum Lith_Attrib {
+   at_acc,
+   at_def,
+   at_str,
+   at_vit,
+   at_stm,
+   at_luk,
+   at_spc,
+   at_max
+};
+
+
+
 
 
 

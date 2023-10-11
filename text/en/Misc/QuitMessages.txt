@@ -11,123 +11,92 @@
 == QUITMSG2 | I got nothing.
 == QUITMSG3 | Leave before I make you leave!
 == QUITMSG4 | Super, now I can get back to emitting bees at your house!
-== QUITMSG5 | Look at this wuss!
+== QUITMSG5 | Look at this utter milksop!
 == QUITMSG6 | I'm rooting for you whichever way you go!
 == QUITMSG7 | You sure about this?
-== QUITMSG8 | Wait, there's a youkai waiting for you at the exit!
+== QUITMSG8 | Wait, there's a yōkai waiting for you at the exit!
 == QUITMSG9 | Get outta here, and get me some money too.
-
 %% QUITMSG10
 Wait, don't go!
 I still have to sell you the expansion pack!
-
 %% QUITMSG11
 There are still explosions to be had,
 are you really sure?
-
 %% QUITMSG12
 Get out! Get out!
 Go and do your job!
-
 %% QUITMSG13
 If you leave, I'll personally
 send pizzas to your doorstep.
-
 %% QUITMSG14
 C'mon,
 just 5 more minutes?
-
 %% QUITMSG15
 HEY
 HEY
 DIE
-
 == QUITMSG16 | Villain!! What color is your blood!!
-
 %% QUITMSG17
 The Omega Cannon was created in a swamp dimension by
 a strange lizard-man who lusted for murder.
 How it got here is a mystery.
-
 %% QUITMSG18
 Jeremy Stilko, Cyber-Mage, is blind, but can see
 thanks to cybernetics. The profile image he has
 is unusual in that he doesn't have a blindfold on.
-
 %% QUITMSG19
 Cyber-Mage's weapon pickups look retro due to
 limitations in his bootleg space reformation wetware.
-
 == QUITMSG20 | Marine's Sniper Rifle was formerly their service weapon.
-
 %% QUITMSG21
 The English language diversified in the past
 thousand years, splitting into dozens of dialects.
 The most common are Eastern and Northwest English.
-
 == QUITMSG22 | The Ensurer watches over all.
-
 %% QUITMSG23
 The Star Destroyer's hum is a product of the
 energy buffer on its top channeling sound
 through the main hull of the gun, which may
-prove the existence of a fifth dimension.
-
+prove the existence of yet another dimension.
 %% QUITMSG24
 The amount of wetware jammed into Cyber-Mage's
 brain is not healthy for anyone.
-
 %% QUITMSG25
 Marine was previously a gun collector,
 but became disinterested after service.
-
 %% QUITMSG26
 The Shock Rifle was previously used for hunting,
 famed for its great power and ease of use.
 Before it was stripped down and modified, anyway.
-
 %% QUITMSG27
 Rumors have spread of similarities between the
 phantoms haunting Hell and tales of past heroes.
-
 %% QUITMSG28
 Within the week there will be OLD MEN,
 RUNNING THE WORLD, if you quit.
-
 %% QUITMSG29
 On the planet Durla Prime, one such being exists whose
 only true name is "King Crimera Haxfucker."
-
 == QUITMSG30 | AAAGH
 == QUITMSG31 | wan
-
 @@ QUITMSG32
 hellote i been looking at the sources what dont tell me how do i made
 a BSP grenades
 
 like it is regular grenades but when you make explode it deform bsp
 tree into shrub
-
 == QUITMSG33 | ~text interface terminal malfunction error ~2992dud
 == QUITMSG34 | Internet pornography.
-
 @@ QUITMSG35
 if god is everywhere, then that means he's in this quit message and he
 needs to get the fuck OUT
-
 == QUITMSG36 | Now if you'll excuse me, I need to go die to the Soviet Union.
-
-%% QUITMSG37
-The Charge Fist uses pneumatics to launch
-your fist forward, via advanced cybernetics.
-
+== QUITMSG37 | dork lid
 == QUITMSG38 | Can you at least offer weak opposition to exiting?
-
 %% QUITMSG39
 BORN TO CRASH
 ZDoom is a fuck
 410,757,864,530 SCRIPT ERRORS
-
 == QUITMSG40 | GET OUT
 == QUITMSG41 | DO IT BITCH YOU WON'T
 == QUITMSG42 | You'll do whatever it takes to get the JooJ done right, right?
@@ -135,22 +104,18 @@ ZDoom is a fuck
 == QUITMSG44 | You dare defy ME?
 == QUITMSG45 | At this journey's end, where does one go but to a DOS prompt?
 == QUITMSG46 | I bet you'll come back for more. I know it.
-
 %% QUITMSG47
 AFTER 3000 YEARS I AM FREE!
 DO YOU DARE QUIT AND LEAVE
 THE FATE OF THE WORLD IN MY HANDS?
-
 == QUITMSG48 | Quitting? What are you, a NERD?
 == QUITMSG49 | Master, your orders?
 == QUITMSG50 | Off to go play [insert game here], I see.
 == QUITMSG51 | Did you select the wrong menu option?
 == QUITMSG52 | This is all just a dream.
-
 %% QUITMSG53
 This mod is just riddled with unsupported bytecode,
 you better get out of here before it blows.
-
 == QUITMSG54 | See you, space cowboy.
 == QUITMSG55 | FUCKING NINJAS STABBING LESBIAN NUNS
 == QUITMSG56 | Will you give your Door of Truth to me?
@@ -162,29 +127,22 @@ you better get out of here before it blows.
 == QUITMSG62 | :thinking:
 == QUITMSG63 | nyu~
 == QUITMSG64 | Hey, Ron! Can we say 'fuck' in the game?
-
 %% QUITMSG65
 I'd leave - this is just more monsters and Score.
 What a load.
-
-== QUITMSG66 | Trust us now, it's time to let go.
-
+== QUITMSG66 | Begone, foul beast!
 %% QUITMSG67
 Enter the maze through your reflection,
 we have to follow through a new connection.
-
 == QUITMSG68 | YOU MEAN THIS GUY JUST QUITS WHEN HE WANTS??????
 == QUITMSG69 | [smooth saxophone plays]
-
 %% QUITMSG70
 hetlo it is me of the durdandle i hav
 come to tell u that if u quit i will
 exit the universe and punch you through
 deep non-existence thank for cooperate
-
 == QUITMSG71 | Press Y to BECOME THE BEAST YOU WORSHIP.
-== QUITMSG72 | Fuck, fucking cock.
-
+== QUITMSG72 | Fuck this! I'm out of here.
 %% QUITMSG73
 hello hacker fucker
 this is marble
@@ -194,31 +152,24 @@ i will find you
 where ever you are
 and break your legs
 and thats a promise
-
 == QUITMSG74 | Detonating in 5... 4... 3... 2...
 == QUITMSG75 | Look, bub. It's my way, or the highway.
-
 %% QUITMSG76
 |  ||
 || |_
-
 == QUITMSG77 | AOHA PZ TVZA LEJLSSLUA
-== QUITMSG78 | In modern times, Japanese pornography is hard to come by.
+@@ QUITMSG78
+Do you think I get paid enough to just sit here and dispense messages ALL DAY?
 == QUITMSG79 | Hey! Who's in charge here?
-
 %% QUITMSG80
 If you leave, The Third Impact will become inevitable.
 Are you sure?
-
 == QUITMSG81 | Wait! The Wood Cube is going to drop!
-
 %% QUITMSG82
 The Norwegians are leaving! The Norwegians are leaving!
 The Norwegians are leaving! The Norwegians are leaving!
-
 == QUITMSG83 | Saotome. Sukida.
 == QUITMSG84 | Throw yourself into the pit of Crest Worms?
-
 %% QUITMSG85
 the way grows
                dim
@@ -236,32 +187,26 @@ the deeping sky
 
 another time
 another time
-
 == QUITMSG86 | Return to the wheat?
 == QUITMSG87 | Gotta keep it together y'all, 'cus it's about time.
 == QUITMSG88 | You leave, you give me your Yanagi card.
-
 %% QUITMSG89
 Water, 35 liters; carbon, 20 kilograms;
 ammonia, 4 liters; lime, 1.5 kilograms;
 phosphorus, 800 grams; salt, 250 grams;
 saltpeter, 100 grams, and various other stuff.
-
 == QUITMSG90 | I've seen 'em come, I've seen 'em go.
 == QUITMSG91 | WINNERS DON'T PRESS Y
 == QUITMSG92 | Hand over the Platinum Chip?
 == QUITMSG93 | Destroy Liberty Prime?
 == QUITMSG94 | Press the Red Button?
 == QUITMSG95 | The Zone awaits...
-
 %% QUITMSG96
 The suspense is killing me!
 Just do it already!
-
 == QUITMSG97 | If you quit, you will never become THE COPPER MAN.
 == QUITMSG98 | >stops in mid flow to sip his tea
 == QUITMSG99 | bepis
-
 @@ QUITMSG100
 Crungy Spimmy: Back 2 Tha Source: Wrong Number: Remastered Edition:
 Featuring Jungo from Chummy Tuungle 3: Lord of the Flies: Special
@@ -279,42 +224,34 @@ Humbusdoob: Ultra Edition: Bumbicop Statue With Real Chimmbus Action:
 Fire Red Version: Dream Drop Distance: Subsistence: See Inside: Crungy
 Spimmy and the Gringle Spingle Limited Edition Comic Series Cereal
 Box: The Movie: The Game
-
 == QUITMSG101 | die
-
 @@ QUITMSG102
 Aw, dude. There's still so many demons to kill. Don't leave me here
 with them.
-
 == QUITMSG103 | Chase down the Willow?
 == QUITMSG104 | Kill kill kill kill! Kill!
-
 %% QUITMSG105
 Been here before, couldn't say I liked it.
 But should you start writing all this down?
-
 == QUITMSG106 | Summon Majima?
-
-%% QUITMSG107
-What, were you expecting something funny?
-Get the hell outta here.
-
+== QUITMSG107 | Traviiiis! It's a bad day!
 == QUITMSG108 | Astolfo wouldn't press Y.
 == QUITMSG109 | Look inside, to see what's coming?
 == QUITMSG110 | Return to the Nexus?
 == QUITMSG111 | Return to the Hunter's Dream?
 == QUITMSG112 | o weka pona?
 == QUITMSG113 | .i lu do cliva li'u preti?
-
 %% QUITMSG114
 LAKE OF FIRE!
 LAKE OF FIRE!!
 LAKE!
 OF!!
 FIRE!!!
-
-== QUITMSGNUM | 114
-
-== QUITMSGEND | (Quit?)
+== QUITMSG115 | With this, my powers will finally reach their true potential.
+== QUITMSG116 | Oh, shit! Too late!
+@@ QUITMSG117
+Did you hear about the new QUITTER STORE downtown? I heard you opened it!
+== QUITMSGNUM | 117
+== QUITMSGEND | (Really quit?)
 
 ## EOF

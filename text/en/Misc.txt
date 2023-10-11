@@ -17,28 +17,39 @@
 @@ \#OPENER
 1626, New Era.
 
-A revelation in multiverse theory: Proof of other universes existing
-within the same dimension of time as our own universe.
+A revelation in multiverse theory: Proof of other, unseen universes
+existing within the same dimension of time as our own.
 
 Finally explaining the odd artifacts which had been found throughout
-the new era, the researchers involved were to be awarded for their
-immense discovery, but soon after disappeared all at once.
+the New Era, the researchers involved were to be awarded for their
+incredible discovery, but soon after, their entire institute
+disappeared.
 
-Twenty years later, 1649 N.E.
+Twenty years later: 1649 N.E.
 
-Communications with these scientists have been re-established, and
-after investigation by the computer mega-corp Optic Fiber Maxim-Danil,
-they have been found to be no more than a red mist floating in space.
+After an arduous investigative scan, hardware mega-corporation Optic
+Fiber Maxim-Danil discovers the missing research facility in uncharted
+space and opens a communications link.
 
-The planetary system's central star had become a hole of darkness,
-emitting massive amounts of unknown magical energy.
+On the other end of the line, the only thing visible was a bloody red
+pulp floating in open space. The system's star soon collapsed into a
+black hole, sucking all matter into it and emitting a new, dark
+energy.
+@@
 
-A hole which has begun spitting out demons.
+The singularity beckons all to come to it,
+and the investigative souls flock;
 
-A portal to Hell itself.
+@@
+The outcasts, to live again. The missioners, their tasks at hand. A
+lonesome end, perhaps, awaits all of them. The dark energy sought to
+be siphoned leads through a dimension of hate--built of demons.
+@@
 
-May those who attempt to stop it have Godspeed, or Lithium shall
-forever rain from the skies.
+
+Live on, Unity, cast away your zeal,
+see the path through peace towards death,
+or Lithium will forever rain in you.
 
 ## Misc ══════════════════════════════════════════════════════════════════════╕
 == \#CHECK | Eng
@@ -74,25 +85,25 @@ D I V I S I O N  S I G I L
 ## Obituaries ════════════════════════════════════════════════════════════════╕
 == OB_DEFAULT |
 
-== OB_BABY      | %o got a face full of plasma. Toasty!
-== OB_BARON     | Don't come back here Baron, %g'll be long gone.
-== OB_BARONHIT  | Incredible, it seems like %g got in a fist-fight with a projectile spammer!
-== OB_CACO      | %o likes caco.
-== OB_CACOHIT   | %o tried to pet the caco. Sorry it didn't work out for you, bud.
-== OB_CHAINGUY  | %o danced the chaingun cha-cha. And %r pretty good at it!
-== OB_CYBORG    | Ouch, that rocket really didn't agree with %h at all.
-== OB_DEMONHIT  | %o didn't dodge, like, 5 inches to the back. Sucks for %h!
-== OB_FATSO     | %o isn't the best at dodging those slow projectiles.
-== OB_IMP       | Target priority isn't %p specialty, really.
-== OB_IMPHIT    | To be honest, there's not much recovery from those claws, %o.
-== OB_KNIGHT    | %o is great at dodging, walking %hself right into that projectile spear.
-== OB_KNIGHTHIT | Oooh! Wait, do you ever think about how the knights in Destiny are the exact same as the ones in Doom? Weird.
+== OB_BABY      | %o got a face full of plasma.
+== OB_BARON     | %o got scorched by a baryon. Baron.
+== OB_BARONHIT  | Incredible, %g dodged all those projectiles!
+== OB_CACO      | %o saw the flashing lights and walked towards them.
+== OB_CACOHIT   | %o LIKES CACO.
+== OB_CHAINGUY  | %o danced the chaingun cha-cha.
+== OB_CYBORG    | The cyber-demon's rocket didn't agree with %o.
+== OB_DEMONHIT  | %o didn't dodge. Sucks for %h!
+== OB_FATSO     | %o got immolated by extremely slow fire.
+== OB_IMP       | Imp fire in aisle %o!
+== OB_IMPHIT    | %o couldn't get away from the imp claws.
+== OB_KNIGHT    | %o was decimated by knightly fervor.
+== OB_KNIGHTHIT | %o got into a fist fight with a knight.
 == OB_SHOTGUY   | %o got %p face filled with delicious lead.
 == OB_SKULL     | %o hates lost souls.
 == OB_SPIDER    | %g didn't like the spider's minigun after all. Too many bullets.
 == OB_UNDEAD    | %o loves the taste of homing rockets.
-== OB_UNDEADHIT | It seems like %r really enjoying that punch sound.
-== OB_VILE      | %o had %p ass burned up. Oh, %r crispy!
+== OB_UNDEADHIT | %o's dead. It seems like %h really enjoyed that punch sound.
+== OB_VILE      | %o got burned.
 == OB_ZOMBIE    | %o got plinked to death.
 
 == \#OB_S_Explosion | %o made %hself go boom.
@@ -360,7 +371,7 @@ Caution is advised.
 %% \#BossWarnJem
 [WARNING]
 DEMONIC ENERGY LEVELS IN AREA RISING ERRATICALLY
-IMPLEMENT DIRECTIVE 90 ON TARGET
+IMPLEMENT DIRECTIVE 90 ON TARGET ENEMY
 
 %% \#BossWarnFulk
 <Warning> :: High demonic energy level in area.

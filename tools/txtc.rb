@@ -41,10 +41,9 @@ def parse_file state, filename, language
    lns = read_lines unsplit_name state, [readname]
    lan = state.langs[language]
 
-   buf        = nil
-   name       = nil
-   in_concat  = false
-   last_empty = true
+   buf       = nil
+   name      = nil
+   in_concat = false
 
    do_close_buf = lambda do
       lan.data.push Alias.new name, buf if buf
@@ -58,7 +57,7 @@ def parse_file state, filename, language
          do_close_buf.call
       when /^@@$/
          in_concat = !in_concat
-         buf.concat "\n" if buf and !last_empty
+         buf.concat "\n" if buf and buf[-1] != "\n"
       when /^== (.+)\|(.*)$/
          m = $~
          do_close_buf.call
@@ -97,23 +96,19 @@ def parse_file state, filename, language
          m = $~
          do_close_buf.call
          name = split_name m[1]
-         parse_file(state, name, language || "default")
+         parse_file state, name, language
       else
          if buf
             if in_concat
                if ln.empty?
                   buf.concat "\n\n"
-                  last_empty = true
-               elsif last_empty || language == "jp"
+               elsif buf[-1] == "\n" || language == "jp"
                   buf.concat ln.strip
-                  last_empty = false
                else
                   buf.concat " " + ln.strip
-                  last_empty = false
                end
             else
                buf.concat ln + "\n"
-               last_empty = true
             end
          elsif ln.empty?
             next
@@ -131,9 +126,11 @@ end
 common_main do
    filename = split_name ARGV.shift
    out      = open ARGV.shift, "w"
-   state    = TxtParseState.new [], nil, {}
+   state    = TxtParseState.new [], nil, {
+      "default" => Language.new("default", [])
+   }
 
-   parse_file state, filename, nil
+   parse_file state, filename, "default"
 
    out.puts generated_header "txtc"
 

@@ -58,9 +58,9 @@ class Lith_FortuneExplosion : Lith_Explosive {
          a_quake(3, 20, 0, 640);
          for(int i = 0; i < 2; i++)
             spawn("Lith_FortuneExplosionParticle", pos);
+         lith_a_explodeSound();
+         return lith_a_doExplosion();
       }
-      TNT1 A 0 lith_a_explodeSound;
-      TNT1 A 0 lith_a_doExplosion;
       stop;
    }
 }

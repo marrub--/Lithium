@@ -47,8 +47,8 @@ struct setting {
    } bnd;
    cstr suff;
    /* used in special cases */
-   bool fill;
-   i32  pclass;
+   struct gui_fil *fill;
+   i32 pclass;
    union {
       script bool (*cb)(struct set_parm const *sp, bool *v);
       script i32  (*ci)(struct set_parm const *sp, i32  *v);
@@ -108,7 +108,7 @@ static void S_boole(struct set_parm const *sp) {
 
    if(G_Button_HId(sp->g, sp->y, tmpstr(v ? lang(sl_on) : lang(sl_off)),
                    _rght - gui_p.btnlist.w, sp->y, Pre(btnlist),
-                   .fill = sp->st->fill ? &pl.cbi.st.settingsfill : nil))
+                   .fill = sp->st->fill))
    {
       v = !v;
       sp->st->f.cb ? sp->st->f.cb(sp, &v) : SG_cvBoole(sp, &v);
@@ -251,12 +251,14 @@ static struct setting const st_gui[] = {
    s_color("scanner_color"),
 };
 
+static struct gui_fil fil_bosses = {35};
+static struct gui_fil fil_postgame = {70};
 static struct setting const st_gam[] = {
    s_label("st_labl_balance"),
    s_integ("sv_difficulty", 1, 100, 1, "perc"),
    s_enume("player_lvsys", 0, atsys_max, "lvsys"),
    s_boole("sv_extrahard"),
-   s_boole("sv_nobosses", .fill = true),
+   s_boole("sv_nobosses", .fill = &fil_bosses),
    s_integ("sv_minhealth", 0, 200, 1, "perc"),
    s_integ("sv_autosave",  0, 30, 1, "minu"),
    s_label("st_labl_fx"),
@@ -280,10 +282,11 @@ static struct setting const st_gam[] = {
    s_fixed("sv_skydarkening", 0.0, 1.0, 0.05, "mult"),
    #ifndef NDEBUG
    s_label("st_labl_postgame"),
-   s_boole("sv_postgame", .fill = true),
+   s_boole("sv_postgame", .fill = &fil_postgame),
    #endif
 };
 
+static struct gui_fil fil_bossdrop = {35};
 static struct setting const st_itm[] = {
    s_label("st_labl_autogroups"),
    s_boole("st_autobuy_1", .f = {.cb = SG_autoBuy}),
@@ -295,15 +298,15 @@ static struct setting const st_itm[] = {
    s_boole("player_noitemfx"),
    s_boole("player_teleshop"),
    s_label("st_labl_balance"),
-   s_boole("sv_nobossdrop", .fill = true),
+   s_boole("sv_nobossdrop", .fill = &fil_bossdrop),
    s_boole("sv_wepdrop"),
    s_label("st_labl_flashlight"),
-   s_integ("light_battery", 0,   60,   1, "secs"),
-   s_integ("light_regen",   1,   10,   1, "mult"),
-   s_integ("light_r",       0,   255,  1, "byte"),
-   s_integ("light_g",       0,   255,  1, "byte"),
-   s_integ("light_b",       0,   255,  1, "byte"),
-   s_integ("light_radius",  100, 1000, 1, "unit"),
+   s_integ("light_battery", 0, 60, 1, "secs"),
+   s_integ("light_regen",   1, 10, 1, "mult"),
+   s_integ("light_r", 0, 255, 1, "byte"),
+   s_integ("light_g", 0, 255, 1, "byte"),
+   s_integ("light_b", 0, 255, 1, "byte"),
+   s_integ("light_radius", 100, 5000, 100, "unit"),
 };
 
 static struct setting const st_wep[] = {
@@ -339,7 +342,6 @@ static struct settings_tab const settings[] = {
 
 void P_CBI_TabSettings(struct gui_state *g) {
    noinit static gtab_t tn[countof(settings)];
-   pl.cbi.st.settingsfill.tic = 70;
    i32 set_num = 0;
    for(i32 i = 0; i < countof(settings); i++) {
       faststrcpy_str(tn[i], ns(lang_fmt(LANG "st_tab_%s", settings[i].nam)));

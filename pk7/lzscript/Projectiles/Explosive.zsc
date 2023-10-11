@@ -14,9 +14,21 @@ class Lith_ExplosionAfterSmoke : Lith_BulletAfterSmoke {
 
 class Lith_Explosive : Actor;
 
+default {
+   ExplosionDamage 128;
+   ExplosionRadius -1;
+   Lith_Explosive.FxAmount 1.0;
+   Lith_Explosive.ExplosionSound "explosion";
+}
+
+meta double m_fxAmount;
+meta sound m_explosionSound;
+property FxAmount: m_fxAmount;
+property ExplosionSound: m_explosionSound;
+
 override void markPrecacheSounds() {
    super.markPrecacheSounds();
-   markSound("explosion");
+   markSound(m_explosionSound);
    markSound("marathon/explode");
 }
 
@@ -27,7 +39,7 @@ bool checkMarathon() {
 void lith_a_explodeSound(int chan = lch_body2) {
    double p = fRandom(0.9, 1.1);
    if(checkMarathon()) a_startSound("marathon/explode", chan, pitch: p);
-   else                a_startSound("explosion",        chan, pitch: p);
+   else                a_startSound(m_explosionSound,   chan, pitch: p);
 }
 
 state lith_a_jumpExplosion() {
@@ -35,61 +47,60 @@ state lith_a_jumpExplosion() {
    else                return resolveState("Explode");
 }
 
-state lith_a_doExplosion(float fxAmount = 1.0) {
-   int numEmbers    = int(fRandom(10.0, 20.0) * fxAmount);
-   int numParticles = int(50.0 * fxAmount);
-
-   if(fxAmount < 1.0) {
-      fxAmount *= 2.0;
+state lith_a_doExplosion() {
+   int numEmbers    = int(fRandom(10.0, 20.0) * m_fxAmount);
+   int numParticles = int(50.0 * m_fxAmount);
+   double emberRadius = m_fxAmount;
+   if(m_fxAmount < 1.0) {
+      emberRadius *= 2.0;
    }
-
    for(int i = 0; i < numEmbers; i++) {
       a_spawnItemEx("Lith_HotEmber",
-                    fRandom(-4, 4) * fxAmount,
-                    fRandom(-4, 4) * fxAmount,
-                    fRandom(-4, 4) * fxAmount,
+                    fRandom(-4, 4) * emberRadius,
+                    fRandom(-4, 4) * emberRadius,
+                    fRandom(-4, 4) * emberRadius,
 
-                    fRandom(-8, 8)  * fxAmount,
-                    fRandom(-8, 8)  * fxAmount,
-                    fRandom(-4, 14) * fxAmount,
+                    fRandom(-8, 8)  * emberRadius,
+                    fRandom(-8, 8)  * emberRadius,
+                    fRandom(-4, 14) * emberRadius,
 
                     0, SXF_NOCHECKPOSITION);
    }
 
    for(int i = 0; i < numParticles; i++) {
       a_spawnParticle("FFFF00", SPF_FULLBRIGHT | SPF_RELATIVE, 25, 4, 0,
-                      fRandom(-8,8) * fxAmount,
-                      fRandom(-8,8) * fxAmount,
-                      fRandom(-2,2) * fxAmount,
+                      fRandom(-8,8) * emberRadius,
+                      fRandom(-8,8) * emberRadius,
+                      fRandom(-2,2) * emberRadius,
 
-                      fRandom( 0,1)  * fxAmount,
-                      fRandom(-5,5)  * fxAmount,
-                      fRandom( 5,10) * fxAmount,
+                      fRandom( 0,1)  * emberRadius,
+                      fRandom(-5,5)  * emberRadius,
+                      fRandom( 5,10) * emberRadius,
 
                       0, 0, fRandom(-0.5, -3),
                       1.0, -1);
 
       a_spawnParticle("444444", SPF_FULLBRIGHT | SPF_RELATIVE, 25, 4, 0,
-                      fRandom(-8,8) * fxAmount,
-                      fRandom(-8,8) * fxAmount,
-                      fRandom(-2,2) * fxAmount,
+                      fRandom(-8,8) * emberRadius,
+                      fRandom(-8,8) * emberRadius,
+                      fRandom(-2,2) * emberRadius,
 
-                      fRandom( 0,1)  * fxAmount,
-                      fRandom(-5,5)  * fxAmount,
-                      fRandom( 5,10) * fxAmount,
+                      fRandom( 0,1)  * emberRadius,
+                      fRandom(-5,5)  * emberRadius,
+                      fRandom( 5,10) * emberRadius,
 
                       0, 0, fRandom(-0.5, -3),
                       1.0, -1);
    }
 
    a_spawnItemEx("Lith_ExplosionAfterSmoke",
-                 fRandom(-1,1) * fxAmount,
-                 fRandom(-1,1) * fxAmount,
-                 fRandom(-2,2) * fxAmount,
+                 fRandom(-1,1) * emberRadius,
+                 fRandom(-1,1) * emberRadius,
+                 fRandom(-2,2) * emberRadius,
 
-                 fRandom(-0.5,0.5) * fxAmount,
-                 fRandom(-0.5,0.5) * fxAmount,
-                 fRandom(-0.2,0.2) * fxAmount);
+                 fRandom(-0.5,0.5) * emberRadius,
+                 fRandom(-0.5,0.5) * emberRadius,
+                 fRandom(-0.2,0.2) * emberRadius);
 
    bNoGravity = true;
    return lith_a_jumpExplosion();
@@ -100,6 +111,16 @@ void lith_a_scaleExplosion() {
 }
 
 states {
+Spawn:
+   TNT1 A 0;
+Death:
+GenericExplosion:
+   TNT1 A 0 {
+      A_Explode();
+      Lith_A_ExplodeSound();
+      return Lith_A_DoExplosion();
+   }
+   stop;
 Explode:
    MEXP AB 1 bright light("Lith_Explode1") lith_a_scaleExplosion;
    MEXP CCDD 1 bright light("Lith_Explode2") lith_a_scaleExplosion;

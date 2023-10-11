@@ -394,8 +394,8 @@ void P_CBI_TabItems(struct gui_state *g) {
       incY(16);
       setPos();
       if(G_Button(g, tmpstr(lang(sl_move)), x, y,
-                  .disabled = movitem == _imove_dragndrop, .color = "n",
-                  Pre(btnclear))) {
+                  .disabled = movitem == _imove_dragndrop,
+                  .color = CR_LIGHTBLUE, Pre(btnclear))) {
          movitem = movitem ? _imove_none : _imove_click;
          dragndrop = false;
       }
@@ -403,8 +403,8 @@ void P_CBI_TabItems(struct gui_state *g) {
       if(get_bit(selitem->flags, _if_equippable)) {
          setPos();
          if(G_Button(g, tmpstr(lang(sl_equip)), x, y,
-                     .disabled = movitem == _imove_dragndrop, .color = "n",
-                     Pre(btnclear))) {
+                     .disabled = movitem == _imove_dragndrop,
+                     .color = CR_LIGHTBLUE, Pre(btnclear))) {
             bool ok = false;
             for(i32 i = 0; i < _inv_num; i++) {
                struct container *cont = &inv[i];
@@ -425,7 +425,7 @@ void P_CBI_TabItems(struct gui_state *g) {
                                lang(sl_close) :
                                lang(sl_open)),
                      x, y, .disabled = movitem == _imove_dragndrop,
-                     .color = "n", Pre(btnclear))) {
+                     .color = CR_LIGHTBLUE, Pre(btnclear))) {
             opnitem = opnitem != selitem ? selitem : nil;
          }
          incPos();
@@ -433,8 +433,8 @@ void P_CBI_TabItems(struct gui_state *g) {
       if(selitem->Use) {
          setPos();
          if(G_Button(g, tmpstr(lang(sl_use)), x, y,
-                     .disabled = movitem == _imove_dragndrop, .color = "g",
-                     Pre(btnclear))) {
+                     .disabled = movitem == _imove_dragndrop,
+                     .color = CR_RED, Pre(btnclear))) {
             useitem = selitem;
          }
          incPos();
@@ -447,12 +447,13 @@ void P_CBI_TabItems(struct gui_state *g) {
          PrintStrL("\Cnscr\C-)");
          PrintText(sf_smallfnt, g->defcr, g->ox+x+18,1, g->oy+y,1);
       }
+      static struct gui_fil itemfill = {26};
       if(selitem->scr >= 0 &&
          G_Button(g, tmpstr(selitem->scr > 0 ?
                             lang(sl_sell) :
                             lang(sl_discard)),
-                  x, y, .disabled = movitem == _imove_dragndrop, .color = "g",
-                  .fill = &pl.cbi.st.itemfill,
+                  x, y, .disabled = movitem == _imove_dragndrop,
+                  .color = CR_RED, .fill = &itemfill,
                   Pre(btnclear))) {
          if(selitem->scr) {
             P_Scr_GivePos(x, y, selitem->scr, true);

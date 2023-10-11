@@ -261,7 +261,6 @@ void TerminalGUI(i32 tact) {
    };
 
    G_Begin(&gst, twidth, theigh);
-   G_UpdateState(&gst);
 
    /* Background */
    PrintRect(0, 0,          twidth, tbottom, 0xFF000000);
@@ -362,7 +361,6 @@ void DialogueGUI(void) {
    char icon[32] = ":Dialogue:Icon"; faststrcat(icon, MemSC_G(MemB2_G(VAR_ICONL)));
 
    G_Begin(&gst, 320, 240);
-   G_UpdateState(&gst);
 
    PrintSprite(sp_Dialogue_Back,  0,1, 0,1, _u_alpha, 0.9);
    PrintSprite(fast_strdup(icon), 0,1, 0,1, _u_alpha, 0.9);
@@ -594,18 +592,16 @@ alloc_aut(0) sync static void ActFIN_WAIT(void) {
    case FACT_CRAWL: {
       str text = GetText();
       i32 leng = ACS_StrLen(text);
-      static struct gui_fil fil_fill;
-      static struct gui_fil fil_skipfill;
+      static struct gui_fil fil_fill     = {75};
+      static struct gui_fil fil_skipfill = {35};
       fil_fill.cur     = 0;
-      fil_fill.tic     = 75;
       fil_skipfill.cur = 0;
-      fil_skipfill.tic = 35;
       for(i32 i = tics; i >= 0; i--) {
          F_drawBack(bgnd);
          i32 p, h;
          if(i > 1) {
-            if(ACS_Timer() % 3 == 0 && text[p] != ' ') {
-               AmbientSound(ss_player_cbi_keypress, 1.0);
+            if(ACS_Timer() % 3 == 0 && ACS_Random(0, 1)) {
+               play_key_snd(text[p]);
             }
             k32 mul = 1.0 - i / (k32)tics;
             p = leng * mul;

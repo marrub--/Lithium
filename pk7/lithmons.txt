@@ -28,37 +28,37 @@
 
 presets {
    /* Tier 1 */
-   name: ZombieMan   scr: 1000 exp: 5;
-   name: ShotgunGuy  scr: 1200 exp: 10;
-   name: ChaingunGuy scr: 1400 exp: 15;
-   name: Imp         scr: 1200 exp: 5;
+   name: ZombieMan   scr: 1000 exp: 10;
+   name: ShotgunGuy  scr: 1200 exp: 20;
+   name: ChaingunGuy scr: 1400 exp: 25;
+   name: Imp         scr: 1200 exp: 15;
 
    /* Tier 2 */
-   name: Demon      scr: 2000 exp: 10;
-   name: Spectre    scr: 2100 exp: 10;
-   name: LostSoul   scr: 500  exp: 5;
-   name: Nitrogolem scr: 2200 exp: 15;
+   name: Demon      scr: 2000 exp: 20;
+   name: Spectre    scr: 2100 exp: 25;
+   name: LostSoul   scr: 500  exp: 10;
+   name: Nitrogolem scr: 2200 exp: 25;
 
    /* Tier 3 */
-   name: HellKnight  scr: 4100 exp: 40;
-   name: Revenant    scr: 4000 exp: 40;
-   name: Cacodemon   scr: 4000 exp: 40;
-   name: Arachnotron scr: 4300 exp: 40;
-   name: Mancubus    scr: 4400 exp: 40;
-   name: BaronOfHell scr: 7000 exp: 80;
-   name: Ophidian    scr: 7000 exp: 40;
+   name: HellKnight  scr: 4100 exp: 290;
+   name: Revenant    scr: 4000 exp: 240;
+   name: Cacodemon   scr: 4000 exp: 280;
+   name: Arachnotron scr: 4300 exp: 300;
+   name: Mancubus    scr: 4400 exp: 300;
+   name: BaronOfHell scr: 7000 exp: 400;
+   name: Ophidian    scr: 7000 exp: 300;
 
    /* Tier 4 */
-   name: PainElemental scr: 7000 exp: 140;
-   name: Archvile      scr: 9000 exp: 170;
+   name: PainElemental scr: 7000 exp: 400;
+   name: Archvile      scr: 9000 exp: 500;
 
    /* Tier 5 */
-   name: SpiderDemon scr: 28000 exp: 560;
-   name: CyberDemon  scr: 30000 exp: 570;
-   name: Maulotaur   scr: 40000 exp: 580;
+   name: SpiderDemon scr: 28000 exp: 980;
+   name: CyberDemon  scr: 30000 exp: 1000;
+   name: Maulotaur   scr: 40000 exp: 1100;
 
    /* Tier 6 */
-   name: FinalBoss scr: 10000000 exp: 9000;
+   name: FinalBoss scr: 100000 exp: 1000;
 }
 
 // ╭Monster Definitions───────────────────────────────────────────────────────╮

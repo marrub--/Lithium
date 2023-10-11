@@ -30,6 +30,15 @@ class Lith_DarkLordPlayer : Lith_Player {
       lith_giveDefWeapon("Lith_Khanda");
       lith_giveDefWeapon("Lith_700Express");
    }
+
+   override void tick() {
+      if(!isFrozen() && vel.z < 0 && vel.z > -128 &&
+         player.cmd.buttons & BT_CROUCH)
+      {
+         vel.z -= Lith_UTIL.pData(_pdt_upgrade, UPGR_HeavyArmor) ? 3 : 2;
+      }
+      super.tick();
+   }
 }
 
 #include "lzscript/6_DarkLord/0_Weapon.zsc"

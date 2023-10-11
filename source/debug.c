@@ -105,8 +105,6 @@ void Z_Thimgomabjhdf(void) {
 
       G_Begin(&g, 320, 240);
 
-      G_UpdateState(&g);
-
       G_WinBeg(&g, &win, .preset = &pre);
 
       G_WinEnd(&g, &win);

@@ -64,39 +64,27 @@ enum {
 
 struct cbi {
    struct gui_state guistate;
-
    struct cbi_state {
-      mem_size_t maintab;
-      mem_size_t stattab;
-      mem_size_t arsetab;
-      mem_size_t infotab;
-      mem_size_t settingstab;
-
+      mem_size_t     maintab;
+      mem_size_t     stattab;
+      mem_size_t     arsetab;
+      mem_size_t     infotab;
+      mem_size_t     settingstab;
       struct gui_win mainwin;
-
       struct gui_scr bipscr;
       struct gui_scr bipinfoscr;
       struct gui_txt bipsearch;
-
       struct gui_scr tutscr;
-
       struct gui_scr settingscr;
-
       i32            shopsel;
       struct gui_scr shopscr;
-
       i32            upgrsel;
       i32            upgrfilter;
       struct gui_scr upgrscr;
-
       struct gui_scr notescr;
       struct gui_txt notebox;
-
       struct gui_fil buyfill;
-      struct gui_fil itemfill;
-      struct gui_fil settingsfill;
    } st;
-
    i32 theme;
    i32 oldtheme;
    i32 pruse;

@@ -16,7 +16,6 @@ default {
    Weapon.SlotNumber 2;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/700e/draw";
-   +Weapon.NoAutoFire
 }
 
 action(Weapon) void lith_fire700e() {
@@ -25,7 +24,7 @@ action(Weapon) void lith_fire700e() {
    soundAlert(invoker.owner);
    A_Recoil(1.5);
    A_Quake(2, 3, 0, 128);
-   Lith_FireBullets(0, 0, -1, random[lith_dlweapon](60, 102), FBF_NORANDOM, "Lith_700Bullet", 4, tracer: _tr_slow);
+   Lith_FireBullets(0, 0, -1, random[lith_dlweapon](60, 107), FBF_NORANDOM, "Lith_700Bullet", 4, tracer: _tr_slow);
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
    for(int i = 1; i <= 3; i++) {
       Lith_A_GunSmoke(7, 3 * i);
@@ -83,6 +82,7 @@ Fire:
       lith_laser(0.0);
       lith_a_setInterpolation(false);
    }
+   700E A 0 a_reFire;
    goto ReadySelector;
 FireEmpty:
    700E A 1 lith_laser(0.0);

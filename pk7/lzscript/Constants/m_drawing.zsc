@@ -34,6 +34,7 @@ enum Lith_Channel {
    lch_altweapon,
    lch_body2,
    lch_body3,
+   lch_body4,
    lch_shield,
    lch_dryweapon,
    lch_idleweapon,

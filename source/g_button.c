@@ -29,7 +29,7 @@ bool G_Button_Imp(struct gui_state *g, gid_t id, struct gui_arg_btn *a) {
 
    if(a->label && pre->font) {
       i32 x, y;
-      cstr color;
+      i32 color;
 
       if(pre->ax == 4 || !pre->ax) x = (pre->w / 2) + a->x + g->ox;
       else                         x = a->x + g->ox;
@@ -42,13 +42,12 @@ bool G_Button_Imp(struct gui_state *g, gid_t id, struct gui_arg_btn *a) {
       else if(g->hot    == id) color = pre->chot;
       else if(a->color)        color = a->color;
       else                     color = pre->cdef;
-      if(!color) color = "-";
+      /* unfortunately, due to a series of bad API decisions, this
+         must accept both 0 and -1, even though 0 = CR_BRICK. don't
+         pass anything but -1 or not CR_BRICK i guess */
+      if(color <= 0) color = g->defcr;
 
-      ACS_BeginPrint();
-      ACS_PrintChar('\C');
-      PrintStr(color);
-      PrintStr(a->label);
-      PrintText(pre->font, g->defcr, x,pre->ax, y,pre->ay);
+      PrintText_str(fast_strdup(a->label), pre->font, color, x,pre->ax, y,pre->ay);
    }
 
    if(!a->disabled) {
@@ -56,11 +55,11 @@ bool G_Button_Imp(struct gui_state *g, gid_t id, struct gui_arg_btn *a) {
 
       if(a->fill && a->fill->tic) {
          if(g->hot == id && g->active == id) {
-            click = G_Filler(g->cx - 19, g->cy + 4, a->fill, click);
-         } else {
-            if(g->active != id) {
+            if(g->old.hot != id || g->old.active != id) {
                a->fill->cur = 0;
             }
+            click = G_Filler(g->cx - 19, g->cy + 4, a->fill, click);
+         } else {
             click = false;
          }
       } else if(g->slide == id) {

@@ -13,6 +13,7 @@ class Lith_PunctuatorExplosion : Lith_Explosive {
       Scale 0.9;
       Species "Lith_Player";
       DamageType "Shrapnel";
+      Lith_Explosive.FxAmount 0.5;
 
       +DONTHARMSPECIES
       +BLOODLESSIMPACT
@@ -29,9 +30,9 @@ class Lith_PunctuatorExplosion : Lith_Explosive {
    states {
    Spawn:
       TNT1 A 0;
-      TNT1 AA 0 A_Explode(128, 128, xf_nosplash);
+      TNT1 AA 0 A_Explode(flags: xf_nosplash);
       TNT1 A random(1, 5);
-      TNT1 A 0 Lith_A_DoExplosion(0.5);
+      TNT1 A 0 Lith_A_DoExplosion;
       stop;
    }
 }
@@ -40,6 +41,7 @@ class Lith_PunctuatorPuff : Lith_Explosive {
    default {
       Species "Lith_Player";
       DamageType "Shrapnel";
+      Lith_Explosive.FxAmount 2.0;
 
       +DONTHARMSPECIES
       +NOINTERACTION
@@ -58,9 +60,12 @@ class Lith_PunctuatorPuff : Lith_Explosive {
    states {
    Spawn:
       TNT1 A 0;
-      TNT1 AA 0 A_Explode(128, 128, 0);
-      TNT1 A 0 Lith_A_ExplodeSound;
-      TNT1 A 0 Lith_A_DoExplosion(2.0);
+      TNT1 A 0 {
+         A_Explode(flags: 0);
+         A_Explode(flags: 0);
+         Lith_A_ExplodeSound();
+         return Lith_A_DoExplosion();
+      }
       stop;
    }
 }

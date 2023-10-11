@@ -14,9 +14,12 @@ default {
    Height 2;
    Speed 20;
    Damage 5;
-   DeathSound "weapons/missile/explode";
    Species "Lith_Player";
    DamageType "Shrapnel";
+   ExplosionDamage 32;
+   ExplosionRadius 42;
+   Lith_Explosive.ExplosionSound "weapons/missile/explode";
+   Lith_Explosive.FxAmount 0.2;
    Projectile;
    +DONTHARMSPECIES
    +ROCKETTRAIL
@@ -36,10 +39,6 @@ Spawn:
 SpawnLoop:
    MISL A 1 bright;
    wait;
-Death:
-   TNT1 A 0 A_Explode(32, 42);
-   TNT1 A 0 Lith_A_DoExplosion(0.2);
-   stop;
 }
 
 /* EOF */

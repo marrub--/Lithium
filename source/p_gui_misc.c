@@ -14,20 +14,42 @@
 #include "p_player.h"
 
 static str tutorials[] = {
-   s"Movement",
-   s"Enemies",
-   s"EnemyMechanics",
-   s"Items",
-   s"Story",
-   s"MarineMove",
+   s"ModdedEnemies",
+   s"EnemyBehaviour",
    s"MarineItem",
-   s"CyberMageMove",
+   s"MarineMove",
+   s"CyberMageWeapon",
    s"CyberMageItem",
-   s"DarkLordMove",
+   s"CyberMageMove",
+   s"DarkLordWeapon",
    s"DarkLordItem",
+   s"DarkLordMove",
+   s"Story",
 };
 
 static i32 cur_page;
+
+static void stat_text(struct gui_state *g, i32 x, i32 y, str left, str right) {
+   PrintText_str(left,  sf_lmidfont, g->defcr, g->ox+x,1,     g->oy+y,1);
+   PrintText_str(right, sf_smallfnt, g->defcr, g->ox+x+120,2, g->oy+y,1);
+}
+
+void P_CBI_TabStatus(struct gui_state *g) {
+   PrintText_str(pl.name, sf_lmidfont, g->defcr, g->ox+7,1, g->oy+27,1);
+   stat_text(g, 7, 37, ns(lang(sl_status_cl)), pl.classname);
+   stat_text(g, 7, 47, ns(lang(sl_status_hp)), strp(_p((i32)pl.health), _c('/'), _p(pl.maxhealth)));
+   if(get_bit(pcl_magicuser, pl.pclass)) {
+      stat_text(g, 7, 57, ns(lang(sl_status_mp)), strp(_p((i32)pl.mana), _c('/'), _p((i32)pl.manamax)));
+   }
+   stat_text(g, 147, 37, ns(lang(sl_status_lv)), strp(_p(pl.attr.level)));
+   stat_text(g, 147, 47, ns(lang(sl_status_xp)), strp(_p(pl.attr.exp)));
+   stat_text(g, 147, 57, ns(lang(sl_status_nx)), strp(_p(pl.attr.expnext)));
+   if(pl.attr.points) {
+      BeginPrintFmt(tmpstr(lang(sl_status_levelup)), pl.attr.points);
+      PrintText(sf_smallfnt, g->defcr, g->ox+7,1, g->oy+67,1);
+   }
+   attr_gui(g, 77);
+}
 
 stkoff static str tut_name(i32 which, cstr suf) {
    return strp(_l(LANG "TUT_"), _p(tutorials[which]), _p(suf));
@@ -43,7 +65,7 @@ void P_CBI_TabTuts(struct gui_state *g) {
          continue;
       }
 
-      if(G_Button_HId(g, i, tmpstr(lang(tut_name(i, "_NAM"))), 0, y, .color = i == cur_page ? "i" : nil, Pre(btnlist))) {
+      if(G_Button_HId(g, i, tmpstr(lang(tut_name(i, "_NAM"))), 0, y, .color = i == cur_page ? CR_ORANGE : -1, Pre(btnlist))) {
          cur_page = i;
       }
    }

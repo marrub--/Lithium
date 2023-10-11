@@ -117,7 +117,7 @@ void Z_EmitScore(i32 amount) {
 
 script_str ext("ACS") addr(OBJ "EmitEXP")
 void Z_EmitEXP(i32 amount) {
-   P_Lv_GiveEXP(amount);
+   attr_giveexp(amount);
 }
 
 script static
@@ -125,9 +125,9 @@ bool chtf_give_exp(cheat_params_t const params) {
    if(!IsDigit(params[0]) || !IsDigit(params[1]) || !IsDigit(params[2])) {
       return false;
    }
-   P_Lv_GiveEXP((params[0] - '0') * 10000 +
-                (params[1] - '0') * 1000 +
-                (params[2] - '0') * 100);
+   attr_giveexp((params[0] - '0') * 100000 +
+                (params[1] - '0') * 10000 +
+                (params[2] - '0') * 1000);
    return true;
 }
 

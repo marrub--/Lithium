@@ -46,12 +46,9 @@ void Upgr_lolsords_Update(void) {
    ACS_SetWeapon(so_Sword);
 }
 
-static void player_fall_damage(k32 factor) {
-   k32 absvel = fastabsk(pl.old.velz) * factor;
-   if(pl.velz == 0 && absvel > 160) {
-      for(k32 i = absvel; i >= 100; i -= 100) {
-         ACS_SpawnForced(so_ExplodoBoots, pl.x, pl.y, pl.z);
-      }
+static void player_fall_damage(k32 damagefac, k32 speedfac) {
+   if(pl.velz == 0 && pl.old.velz < -16 * speedfac) {
+      ServCallV(sm_FallDamage, fastabsk(pl.old.velz) * damagefac);
    }
 }
 
@@ -59,7 +56,7 @@ void Upgr_CyberLegs_Update(void) {
    pl.speedmul  += 20;
    pl.jumpboost += 50;
    if(!pl.frozen) {
-      player_fall_damage(10.0k);
+      player_fall_damage(1.0k, 1.0k);
    }
 }
 
@@ -86,7 +83,7 @@ void Upgr_HeavyArmor_Deactivate(void) {
 
 void Upgr_HeavyArmor_Update(void) {
    if(!pl.frozen) {
-      player_fall_damage(15.0k);
+      player_fall_damage(1.5k, 0.8k);
    }
 }
 

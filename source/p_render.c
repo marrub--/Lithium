@@ -14,19 +14,6 @@
 #include "p_player.h"
 #include "p_hudid.h"
 
-static void P_Ren_LevelUp(void) {
-   if(pl.old.attr.level && pl.old.attr.level < pl.attr.level) {
-      AmbientSound(ss_player_levelup, 1.0);
-      P_LogH(1, tmpstr(lang_discrim(sl_log_levelup)), ACS_Random(1000, 9000));
-   }
-
-   if(pl.attr.lvupstr[0]) {
-      SetSize(320, 240);
-      BeginPrintStrN(pl.attr.lvupstr, pl.attr.lvupstrn);
-      PrintText(sf_smallfnt, CR_WHITE, pl.hudrpos-100,1, 75,1);
-   }
-}
-
 stkoff static void P_Ren_Mission(void) {
    if(ACS_Timer() == 0 || !pl.hudenabled) {
       return;
@@ -100,7 +87,7 @@ void P_Ren_PTick(void) {
    P_Ren_Step();
    P_Ren_View();
    P_Ren_Scope();
-   P_Ren_LevelUp();
+   attr_draw();
    #ifndef NDEBUG
    P_Ren_Debug();
    #endif

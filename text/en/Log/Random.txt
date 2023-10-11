@@ -71,7 +71,7 @@ you.
 == \#PK_GET_031 | ?? ??? ???? ?? ????????? ???? ??
 == \#PK_GET_032_FLAGS | 1
 == \#PK_GET_032 | My %S lies over the ocean, my %S lies over the sea.
-== \#PK_GET_033 | Liberated the %S from gypsies.
+== \#PK_GET_033 | Yo-Yo Ma... Do you still not understand? It doesn't matter if you destroy parts of my body, there's no way you can destroy or stop me. You can't destroy my target radar, or prevent me from attacking %S... The only way you two could have survived is if you had run away.
 == \#PK_GET_034 | Granted the %S true independence.
 == \#PK_GET_035_FLAGS | 1
 == \#PK_GET_035 | The %S, for maximum %S-ing.
@@ -79,7 +79,7 @@ you.
 == \#PK_GET_036 | Brutal %S, featuring 5x more explosions! .. %S
 == \#PK_GET_037_FLAGS | 2
 == \#PK_GET_037 | aeiou
-== \#PK_GET_038 | What is a man? A miserable pile of %Ss!
+== \#PK_GET_038 | What is a man? A miserable little pile of %S!
 == \#PK_GET_039 | The %S was delicious.
 == \#PK_GET_040_FLAGS | 1
 @@ \#PK_GET_040
@@ -90,15 +90,16 @@ There's plenty of %Ss in the sea, but you're the only %S for me.
 == \#PK_GET_044 | You have attained true %S.
 == \#PK_GET_045_FLAGS | 2
 == \#PK_GET_045 | DRUGS
-== \#PK_GET_046 | >%S >2012
+== \#PK_GET_046 | %S? In CURRENT YEAR?
 == \#PK_GET_047 | TNT1 A 0 A_TakeInventory("%S", 1)
 == \#PK_GET_048 | Super rare %S acquired!
 == \#PK_GET_049 | Sacked the %S!
-== \#PK_GET_050 | The %S is your new waifu.
+== \#PK_GET_050_FLAGS | 4
+== \#PK_GET_050 | Do you take %S for your lawful weapon, to have and to hold, from this day forward, for better, for worse, for richer, for poorer, in sickness and in health, until death do you part? %S
 == \#PK_GET_051 | The %S is grateful for your presence.
 == \#PK_GET_052 | The %S appears to be emitting hatred.
 == \#PK_GET_053 | [%S intensifies]
-== \#PK_GET_054 | Ah, yes, the %S.
+== \#PK_GET_054 | Ah, yes. The %S.
 == \#PK_GET_055 | Wait, the %S is resonating!
 == \#PK_GET_056 | Oh, I guess it's an %S.
 == \#PK_GET_057 | THIS IS SOME KIND OF %S
@@ -136,15 +137,16 @@ your little "clever" comment was about to bring down upon you, maybe
 you would have held your fucking tongue. But you couldn't, you didn't,
 and now you're paying the price, you goddamn idiot. I will shit fury
 all over you and you will drown in it. You're fucking dead, kiddo.
-== \#PK_GET_069 | A weapon to surpass Metal Gear, The %S.
-== \#PK_GET_070 | Appropriated the %S.
-== \#PK_GET_071 | Ooh, the %S.
+== \#PK_GET_069 | A weapon to surpass Metal Gear! The %S!
+== \#PK_GET_070 | Appropriated the %S for nefarious purposes.
+== \#PK_GET_071 | Ooh la la, the %S.
 == \#PK_GET_072 | THAT %S BETTER NOT BOUNCE OR YOU'RE A DEAD MOTHERFUCKER
-== \#PK_GET_073 | Gluten-free %S for all your daily needs.
+== \#PK_GET_073 | Gluten-free %S, for all your daily needs.
 == \#PK_GET_074 | You forcefully draw in the %S.
-== \#PK_GET_075 | They don't think it be %S but it do.
+@@ \#PK_GET_075
+Yes, you heard us right! YOU can get a NEW %S for the low, LOW price of
 @@ \#PK_GET_076
-The %S wrestled with your other items and won. It is now one of us.
+The %S wrestled with your other items and won. We are now one.
 == \#PK_GET_077_FLAGS | 2
 @@ \#PK_GET_077
 hellote it is i durnadle and this is the 77th pickup messag you have
@@ -156,18 +158,18 @@ rid of it
 == \#PK_GET_081 | GET EQUIPPED WITH %S
 == \#PK_GET_082 | This is my %S. There are many like it, but this one is mine.
 @@ \#PK_GET_083
-Whan that %S with his boulette shoten, the droghte of blood hath
-perced to the rooten.
+Whan that %S with his boulette shotte, the droghte of blod hath
+perced to the roote.
 == \#PK_GET_084 | ERROR: %S IS DEAD.
 == \#PK_GET_085 | %S... It's time.
 == \#PK_GET_086 | Hey what's up gamers, log here with another %S
 == \#PK_GET_087 | big %S energy
 == \#PK_GET_088 | *%S solo*
 == \#PK_GET_089 | This %S... It was made for me.
-== \#PK_GET_090 | This %S isn't special, I'll pick up anything!
+== \#PK_GET_090 | This %S isn't special, I'll just pick up anything!
 == \#PK_GET_091 | Dr. %S, I'm UAC.
 == \#PK_GET_092 | Honk if you're an underpaid %S
-== \#PK_GET_093 | YOU AM NO REAL %S
+== \#PK_GET_093 | Unfortunately, %S.
 
 ## Random Weapon Names ═══════════════════════════════════════════════════════╕
 == \#PK_unknown_NUM | 2
@@ -179,12 +181,12 @@ perced to the rooten.
 == \#PK_c_plasma_ALI | m_plasma
 
 == \#PK_o_cfist_NUM | 5
-== \#PK_o_cfist_000 | Chaaji Fisuto
+== \#PK_o_cfist_000 | Charm Piss
 == \#PK_o_cfist_001 | Charred Fist
 == \#PK_o_cfist_002 | Charged Mr. Fisto
 == \#PK_o_cfist_003 | Chargle Fargle
-== \#PK_o_cfist_004 | Yūgi no Ken
-== \#PK_o_cfist_005 | Baron Smasher
+== \#PK_o_cfist_004 | Car Dick
+== \#PK_o_cfist_005 | Splargh Flick
 
 == \#PK_m_pistol_NUM | 11
 == \#PK_m_pistol_000 | Postil
@@ -218,7 +220,7 @@ perced to the rooten.
 == \#PK_m_ssg_000 | Sbepru Shtetgun
 == \#PK_m_ssg_001 | Suber Shodgub
 == \#PK_m_ssg_002 | Soer Shotgan
-== \#PK_m_ssg_003 | Suupaa Shottogan
+== \#PK_m_ssg_003 | Spapper Spepbool
 == \#PK_m_ssg_004 | Susser Sarsaparilla
 == \#PK_m_ssg_005 | Shovel Subbutt
 == \#PK_m_ssg_006 | Suggle Kruggle
@@ -326,7 +328,7 @@ perced to the rooten.
 == \#PK_d_kampilan_003 | Sprumpilun
 
 == \#PK_d_khanda_NUM | 4
-== \#PK_d_khanda_000 | Kanda
+== \#PK_d_khanda_000 | Khandle
 == \#PK_d_khanda_001 | Cornda
 == \#PK_d_khanda_002 | Kramduh
 == \#PK_d_khanda_003 | Cranda
@@ -353,7 +355,7 @@ perced to the rooten.
 == \#PK_d_4bore_000 | Hunting Shunting
 == \#PK_d_4bore_001 | Hotgun Shotgun
 == \#PK_d_4bore_002 | Huntimg Shortgun
-== \#PK_d_4bore_003 | Honter Gun
+== \#PK_d_4bore_003 | Honter Shonter
 
 == \#PK_d_drocket_NUM | 3
 == \#PK_d_drocket_000 | Frank & Soph

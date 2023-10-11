@@ -228,7 +228,7 @@ score_t P_Scr_GivePos(i32 x, i32 y, score_t score, bool nomul) {
 
    if(!nomul) {
       score *= pl.scoremul / 100.0lk;
-      score *= 1 + (k64)ACS_RandomFixed(0, pl.attr.attrs[at_luk] / 77.7);
+      score *= (k64)ACS_RandomFixed(1, attr_lukbuff());
    }
 
    /* Get a multiplier for the score accumulator */
@@ -395,8 +395,7 @@ alloc_aut(0) script static void P_doIntro(void) {
    ACS_FadeTo(0, 0, 0, 1.0, 0.0);
    register i32 which = 1;
    register i32 last  = 0;
-   noinit static struct gui_fil fil;
-   fil.tic = 70;
+   static struct gui_fil fil = {70};
    text[0] = '\0';
    for(;;) {
       SetSize(320, 240);
@@ -493,7 +492,7 @@ alloc_aut(0) script static void P_doIntro(void) {
    static struct fmt_arg fmt_args[] = {{_fmt_key}};
    fmt_args[0].val.s = sc_k_opencbi;
    str tut_txt = strp(printfmt(tmpstr(lang(sl_open_menu)), 1, fmt_args));
-   P_CenterNotification(tut_txt, _tut_tics);
+   P_CenterNotification(tut_txt, _tut_tics, -1, -1);
 }
 
 alloc_aut(0) script void P_CenterNotification(str txt, i32 tics, i32 cr, i32 linecr, k32 bgfade, k32 fgfade) {
@@ -508,8 +507,8 @@ alloc_aut(0) script void P_CenterNotification(str txt, i32 tics, i32 cr, i32 lin
    }
    ACS_Delay(3);
    AmbientSound(ss_player_cbi_centernotif, 0.6k);
-   linecr = linecr |? P_playerColor();
-   cr     = cr     |? pl.color;
+   linecr = linecr == -1 ? P_playerColor() : linecr;
+   cr     = cr     == -1 ? pl.color        : cr;
    for(i32 j = 0; j < tics; j++) {
       k32 a = 1 - maxi(j - (tics - 35), 0) / 35.0k;
       k32 t = 1 - mini(j, 24) / 24.0k;
@@ -544,38 +543,26 @@ static k32 damage_mul;
 static i32 max_health;
 
 static void P_attrRGE(void) {
-   i32 rge = pl.attr.attrs[at_spc];
-
    if(pl.health < pl.old.health) {
-      pl.rage += rge * (pl.old.health - pl.health) / 1000.0;
+      pl.rage += attr_rgebuff() * (pl.old.health - pl.health);
    }
-
-   pl.rage = lerpk(pl.rage, 0, 0.02);
-
+   pl.rage *= 0.98k;
    damage_mul += pl.rage;
 }
 
 static void P_attrCON(void) {
-   i32 con = pl.attr.attrs[at_spc];
-
    if(pl.mana > pl.old.mana) {
-      pl.rage += con * (pl.mana - pl.old.mana) / 1100.0;
+      pl.rage += attr_conbuff() * (pl.mana - pl.old.mana);
    }
-
-   pl.rage = lerpk(pl.rage, 0, 0.03);
-
+   pl.rage *= 0.97k;
    damage_mul += pl.rage;
 }
 
 static void P_attrREF(void) {
-   i32 ref = pl.attr.attrs[at_spc];
-
    if(pl.health < pl.old.health) {
-      pl.rage += ref * (pl.old.health - pl.health) / 150.0;
+      pl.rage += attr_refbuff() * (pl.old.health - pl.health);
    }
-
-   pl.rage = lerpk(pl.rage, 0, 0.01);
-
+   pl.rage *= 0.99k;
    pl.speedmul += (i32)pl.rage;
 }
 
@@ -622,14 +609,8 @@ static void P_Spe_pTick(void) {
 static void P_Atr_pTick(void) {
    if(Paused) return;
 
-   k32  acc = pl.attr.attrs[at_acc] / 150.0;
-   k32  def = pl.attr.attrs[at_def] / 170.0;
-   i32 strn = pl.attr.attrs[at_str];
-   i32  stm = pl.attr.attrs[at_stm];
-   i32 stmt = 75 - stm;
-
-   max_health = pl.spawnhealth + strn;
-   damage_mul = 1.0 + acc;
+   max_health = pl.spawnhealth + attr_strbuff();
+   damage_mul = attr_accbuff();
 
    switch(pl.pclass) {
    case pcl_marine:    P_attrRGE(); break;
@@ -638,12 +619,12 @@ static void P_Atr_pTick(void) {
    }
 
    SetDamageMultiplier(0, damage_mul);
-   SetMembI(0, sm_DmgFac, clampi(100 * def, 0, 100));
+   SetMembI(0, sm_DmgFac, attr_defbuff());
 
    pl.maxhealth = max_health;
    SetSpawnHealth(0, pl.maxhealth);
 
-   if(pl.health < stm + 10 && (stmt < 2 || pl.ticks % stmt == 0)) {
+   if(pl.health < attr_stmbuff() + 10 && pl.ticks % attr_stmtime() == 0) {
       pl.setHealth(pl.health + 1);
    }
 }

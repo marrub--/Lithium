@@ -36,11 +36,11 @@ _uc_body:
       StealthSys:  {scr: 1800450, f: -DU--}
    pD:
       Subweapons:  {f: --URE}
-      HeavyArmor:  {f: ADU--, scr: 9999999}
+      HeavyArmor:  {f: ADU--, scr: 1231234}
       ShieldOC:    {          scr: 9999999}
-      HoverBoots:  {f: --U--, scr: 9999999}
-      HoverBoots2: {pg: N/A,  scr: 9999999}
-      SkillSword:  {f: ----E, scr: 9999999}
+      HoverBoots:  {f: --U--, scr: 3999999}
+      HoverBoots2: {pg: N/A,  scr: 2999999}
+      SkillSword:  {f: ----E, scr: 1868666}
 _uc_weap:
    pM:
       Pistol_A:  {scr:  140940}
@@ -70,17 +70,17 @@ _uc_weap:
       ShipGun_A:  {scr: 6988800, grp: 5}
       ShipGun_B:  {scr: 7767700, grp: 5}
    pD:
-      SubGun_A:     {scr: 9999999}
+      SubGun_A:     {scr:  810603}
       SubGrn_A:     {scr: 9999999}
       SubAxe_A:     {scr: 9999999}
       SubDrt_A:     {scr: 9999999}
       Kampilan_A:   {scr: 1720999}
-      700E_A:       {scr:  800000}
+      700E_A:       {scr:  900000}
       700E_B:       {scr: 9999999}
       Shrapnel_A:   {scr: 1000000}
       Shrapnel_B:   {scr: 9999999}
-      4Bore_A:      {scr: 9999999}
-      4Bore_B:      {scr: 9999999}
+      4Bore_A:      {scr: 4444444}
+      4Bore_B:      {scr:  911111}
       Minigun_A:    {scr: 9999999}
       Minigun_B:    {scr: 9999999}
       Franca_A:     {scr: 9999999}

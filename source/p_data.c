@@ -17,38 +17,6 @@
 #include "w_monster.h"
 
 static
-void SetupAttributes(void) {
-   fastmemcpy(pl.attr.names[at_acc], "ACC", 3);
-   fastmemcpy(pl.attr.names[at_def], "DEF", 3);
-   fastmemcpy(pl.attr.names[at_str], "STR", 3);
-   fastmemcpy(pl.attr.names[at_vit], "VIT", 3);
-   fastmemcpy(pl.attr.names[at_stm], "STM", 3);
-   fastmemcpy(pl.attr.names[at_luk], "LUK", 3);
-
-   switch(pl.pclass) {
-   case pcl_marine:    fastmemcpy(pl.attr.names[at_spc], "RGE", 3); break;
-   case pcl_cybermage: fastmemcpy(pl.attr.names[at_spc], "CON", 3); break;
-   case pcl_informant: fastmemcpy(pl.attr.names[at_spc], "ADR", 3); break;
-   case pcl_wanderer:  fastmemcpy(pl.attr.names[at_spc], "AGI", 3); break;
-   case pcl_assassin:  fastmemcpy(pl.attr.names[at_spc], "RSH", 3); break;
-   case pcl_darklord:  fastmemcpy(pl.attr.names[at_spc], "REF", 3); break;
-   case pcl_thoth:     fastmemcpy(pl.attr.names[at_spc], "MNA", 3); break;
-   }
-
-   if(get_bit(pcl_robot, pl.pclass)) {
-      fastmemcpy(pl.attr.names[at_vit], "POT", 3);
-      fastmemcpy(pl.attr.names[at_stm], "REP", 3);
-   } else if(get_bit(pcl_nonhuman, pl.pclass)) {
-      fastmemcpy(pl.attr.names[at_vit], "POT", 3);
-      fastmemcpy(pl.attr.names[at_stm], "REG", 3);
-   }
-
-   pl.attr.expprev = 0;
-   pl.attr.expnext = 500;
-   pl.attr.level = 1;
-}
-
-static
 void SetPClass(void) {
    pl.pclass = GetMembI(0, sm_PClass);
    pl.color  = P_Color(pl.pclass);
@@ -162,85 +130,6 @@ void P_Dat_PTickPre(void) {
    }
 }
 
-alloc_aut(0) script static
-void LevelUp(i32 *attr, char **attrptrs) {
-   i32 level = pl.attr.level;
-
-   for(i32 i = 0; i < 35 * 5; ++i) {
-      if(level != pl.attr.level) {
-         /* a new levelup started, so exit */
-         return;
-      }
-
-      char **ptr = &attrptrs[i / (35 * 5 / at_max)];
-      while(!*ptr) ptr++;
-      pl.attr.lvupstrn = *ptr - pl.attr.lvupstr;
-
-      ACS_Delay(1);
-   }
-
-   pl.attr.lvupstr[0] = '\0';
-}
-
-void P_Lv_GiveEXP(i32 amt) {
-   struct player_attributes *a = &pl.attr;
-
-   noinit static
-   i32 attr[at_max];
-   fastmemset(attr, 0, sizeof attr);
-
-   i32 levelup = 0;
-
-   while(a->exp + amt >= a->expnext) {
-      a->level++;
-      a->expprev = a->expnext;
-      a->expnext = 500 + a->level * powlk(1.385, a->level * 0.2) * 340;
-
-      i32 pts = 7;
-      switch(CVarGetI(sc_player_lvsys)) {
-      case atsys_manual:
-         a->points += 7;
-         break;
-      case atsys_hybrid:
-         a->points += 2;
-         pts       -= 2;
-      case atsys_auto:
-         for(i32 i = 0; i < pts; ++i) attr[ACS_Random(0, 100) % at_max]++;
-         levelup++;
-         break;
-      }
-   }
-
-   if(levelup) {
-      char *sp = a->lvupstr;
-
-      noinit static
-      char *attrptrs[at_max];
-      fastmemset(attrptrs, 0, sizeof attrptrs);
-
-      sp += sprintf(sp, "LEVEL %u", a->level);
-
-      if(a->points) {
-         sp += sprintf(sp, " (%u points)", a->points);
-      }
-
-      *sp++ = '\n';
-
-      for(i32 i = 0; i < at_max; ++i) {
-         a->attrs[i] += attr[i];
-         if(attr[i]) {
-            sp += sprintf(sp, "%.3s +%u (%u)\n",
-                          a->names[i], attr[i], a->attrs[i]);
-            attrptrs[i] = sp;
-         }
-      }
-
-      LevelUp(attr, attrptrs);
-   }
-
-   a->exp += amt;
-}
-
 script ext("ACS") addr(lsc_giveammo) bool chtf_give_ammo(cheat_params_t const params) {
    for(i32 i = 0; i < countof(sa_ammo_types); ++i) {
       InvGive(sa_ammo_types[i], INT_MAX);
@@ -250,12 +139,13 @@ script ext("ACS") addr(lsc_giveammo) bool chtf_give_ammo(cheat_params_t const pa
 
 struct cheat cht_give_ammo = cheat_s("pgfa", 0, chtf_give_ammo, "Fully ammunized");
 
-/* Reset some things on the player when they spawn. */
 script void P_Init(void) {
    if(!pl.wasinit) {
       fastmemset(&pl, 0, sizeof pl);
       SetPClass();
-      SetupAttributes();
+      pl.attr.expprev = 0;
+      pl.attr.expnext = _base_exp;
+      pl.attr.level = 1;
       pl.viewheight   = EDataI(_edt_viewheight);
       pl.attackheight = EDataI(_edt_attackheight);
       pl.jumpheight   = GetMembK(0, sm_JumpZ);
@@ -287,7 +177,6 @@ script void P_Init(void) {
    pl.scoreaccumtime = 0;
    pl.scoremul       = 110;
    pl.alpha = 1;
-   pl.attr.lvupstr[0] = '\0';
    if(!pl.wasinit) {
       P_BIP_PInit();
       P_Upg_PInit();

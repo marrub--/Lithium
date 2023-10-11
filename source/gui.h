@@ -58,8 +58,8 @@ typedef i32  gid_t;
 typedef char gtab_t[32];
 
 struct gui_fil {
-   i32 cur;
    i32 tic;
+   i32 cur;
 };
 
 struct gui_scr {
@@ -87,6 +87,7 @@ struct gui_win {
 
 struct gui_delta {
    k64 cx, cy;
+   gid_t active, hot;
    bool clicklft;
    bool clickrgt;
    bool clickany;
@@ -103,7 +104,6 @@ struct gui_state {
    i32 defcr;
    i32 ox, oy;
    i32 w, h;
-   gid_t active, hot;
    gid_t slide;
    i32 slidecount, slidetime;
    i32 clip;
@@ -115,10 +115,10 @@ struct gui_state {
 struct gui_pre_btn {
    cstr gfx;
    cstr hot;
-   cstr cdef;
-   cstr cact;
-   cstr chot;
-   cstr cdis;
+   i32  cdef;
+   i32  cact;
+   i32  chot;
+   i32  cdis;
    str  font;
    str  snd;
    i32  ax;
@@ -132,7 +132,7 @@ struct gui_arg_btn {
    cstr label;
    i32  x, y;
    bool disabled;
-   cstr color;
+   i32  color;
    bool slide;
    struct gui_fil *fill;
    struct gui_pre_btn const *preset;
@@ -243,7 +243,6 @@ struct gui_presets {
    struct gui_pre_btn btnbipback;
    struct gui_pre_btn btndlgsel;
    struct gui_pre_btn btnclear;
-   struct gui_pre_btn btnnote;
    struct gui_pre_cbx cbxdef;
    struct gui_pre_cbx cbxsmall;
    struct gui_pre_scr scrdef;
@@ -274,8 +273,6 @@ extern struct gui_presets const gui_p;
 
 optargs(1)
 void G_Auto(struct gui_state *g, gid_t id, i32 x, i32 y, i32 w, i32 h, bool slide);
-
-void G_UpdateState(struct gui_state *g);
 
 optargs(2)
 void G_Begin(struct gui_state *g, i32 w, i32 h);

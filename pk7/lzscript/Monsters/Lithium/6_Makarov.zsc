@@ -43,16 +43,10 @@ class Lith_MakarovGrenade : Lith_RifleGrenade {
       DamageFunction 5 * random(1, 8);
       Species "Lith_Phantom";
       Speed   30;
+      ExplosionDamage 32;
+      ExplosionRadius 64;
 
       +DONTHARMSPECIES
-   }
-
-   states {
-   Death:
-      TNT1 A 0 A_Explode(32, 64);
-      TNT1 A 0 Lith_A_ExplodeSound;
-      TNT1 A 0 Lith_A_DoExplosion;
-      stop;
    }
 }
 

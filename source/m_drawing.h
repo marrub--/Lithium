@@ -117,6 +117,7 @@ stkcall optargs(3) void PrintSprite(str name, i32 x, i32 xa, i32 y, i32 ya, i32 
 stkcall optargs(3) void PrintSpriteClip(str name, i32 x, i32 xa, i32 y, i32 ya, i32 cx, i32 cy, i32 cw, i32 ch, i32 flg, k32 anum, i32 c);
 stkcall optargs(1) void PrintRect(i32 x, i32 y, i32 w, i32 h, i32 c, i32 flg);
 stkcall optargs(1) void AmbientSound(str snd, k32 vol, i32 chan);
+stkcall void play_key_snd(i32 c);
 #endif
 
 enum ZscName(FontNum) {
@@ -140,6 +141,7 @@ enum ZscName(Channel) {
    lch_altweapon,
    lch_body2,
    lch_body3,
+   lch_body4,
    lch_shield,
    lch_dryweapon,
    lch_idleweapon,

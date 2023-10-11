@@ -76,6 +76,7 @@ player/cbi/invmov = lsnd/GUI/InvMov.flac
 player/cbi/key1 = lsnd/GUI/Key1.flac
 player/cbi/key2 = lsnd/GUI/Key2.flac
 player/cbi/key3 = lsnd/GUI/Key3.flac
+player/cbi/keyenter = lsnd/GUI/KeyEnter.flac
 player/cbi/clickon = lsnd/GUI/ClickOn.flac
 player/cbi/clickoff = lsnd/GUI/ClickOff.flac
 player/cbi/clicklst = lsnd/GUI/ClickList.wav

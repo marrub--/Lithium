@@ -71,7 +71,7 @@ override void postBeginPlay() {
       if(tracer) {
          a_explode(35, 200, xf_nosplash);
       } else {
-         a_explode(10, 32, xf_nosplash);
+         a_explode(18, 100, xf_nosplash);
       }
    }
 }

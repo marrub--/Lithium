@@ -68,8 +68,7 @@ script void P_CBI_PTick(void) {
 
    struct gui_state *g = &pl.cbi.guistate;
 
-   pl.cbi.st.buyfill.tic  = CVarGetI(sc_gui_buyfiller);
-   pl.cbi.st.itemfill.tic = 26;
+   pl.cbi.st.buyfill.tic = CVarGetI(sc_gui_buyfiller);
 
    pl.cbi.theme = CVarGetI(sc_gui_theme);
 
@@ -86,8 +85,6 @@ script void P_CBI_PTick(void) {
    }
 
    G_Begin(g, 320, 240);
-
-   G_UpdateState(g);
 
    G_WinBeg(g, &pl.cbi.st.mainwin);
 

@@ -54,7 +54,7 @@ void Z_GetSigil(void) {
    pl.sgacquired = true;
    AmbientSound(ss_player_getsigil, 1.0k);
    FreezeTime();
-   P_CenterNotification(ns(lang(sl_div_sigil_get)), 157);
+   P_CenterNotification(ns(lang(sl_div_sigil_get)), 157, -1, -1);
    ACS_Delay(157);
    UnfreezeTime();
 }
@@ -71,7 +71,7 @@ void Z_GiveHealthBonus(i32 amount) {
 script_str ext("ACS") addr(OBJ "GiveHealth")
 void Z_GiveHealth(i32 amount) {
    if(amount) {
-      amount *= 1 + pl.attr.attrs[at_vit] / 80.0;
+      amount *= attr_vitbuff();
       amount += pl.health;
       if(amount > pl.maxhealth) amount = pl.maxhealth;
       pl.setHealth(amount);

@@ -83,7 +83,7 @@ void addDamageNum(vector3 origin, float w, int damage, Actor receiver) {
 
       if(level.vec3Diff(players[consolePlayer].mo.pos, origin).length() > 1024) {
          start = m_dmgNumHeads[_dnum_smol];
-      } else if(damage >= 120) {
+      } else if(damage >= 120 || receiver.player) {
          start = m_dmgNumHeads[_dnum_crit];
       } else {
          start = m_dmgNumHeads[_dnum_norm];

@@ -25,7 +25,7 @@ void Upgr_Subweapons_Update(void) {
       --udata.uptics;
    }
    if(udata.shots < 2) {
-      if(udata.charge >= 100) {
+      if(udata.charge >= udata.charge_max) {
          udata.shots++;
          udata.charge = 0;
          StartSound(ss_weapons_subweapon_charge, lch_ambient, CHANF_NOPAUSE|CHANF_NOSTOP, 1.0k, ATTN_NONE, 0.75k + 0.25k * udata.shots);
@@ -56,7 +56,7 @@ void Upgr_Subweapons_Render(void) {
       PrintSprite(sp_SubWepFist, pl.hudhppos+39,1, 238,2);
    }
    PrintSprite(sp_SubWepFront, pl.hudhppos+3,1, 238,2);
-   i32 prc = 29 * udata.charge / (k32)100.0;
+   i32 prc = 29 * udata.charge / (k32)udata.charge_max;
    i32 srw;
    if(udata.shots == 0) {srw = prc;} else {srw = 29;}
    /*                */ PrintSpriteClip(sp_SubWepBar1, pl.hudhppos+7,1, 224,2, 0,0,srw,1);
@@ -77,6 +77,7 @@ void Upgr_Subweapons_Render(void) {
 
 void Upgr_Subweapons_Enter(struct ugprade *upgr) {
    udata.shots = 2;
+   udata.charge_max = 120 - clampi(pl.attr.attrs[at_spc] >> 1, 0, 100);
    #ifndef NDEBUG
    if(dbgflags(dbgf_items)) {
       udata.have |= UINT32_MAX & ~dst_bit(_subw_fist);

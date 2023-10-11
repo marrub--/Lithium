@@ -42,7 +42,6 @@ void UpdateMagicUI(void) {
    struct gui_state *g = &udata.gst;
 
    G_Begin(g, 320, 240);
-   G_UpdateState(g);
 
    PrintSprite(sp_UI_MagicSelectBack, 0,1, 0,1);
 
@@ -59,10 +58,10 @@ void UpdateMagicUI(void) {
       struct gui_pre_btn pre = {
          .gfx      = gfx,
          .hot      = hot,
-         .cdef     = "d",
-         .cact     = "r",
-         .chot     = "k",
-         .cdis     = "m",
+         .cdef     = CR_GREEN,
+         .cact     = CR_DARKRED,
+         .chot     = CR_YELLOW,
+         .cdis     = CR_BLACK,
          .font     = s"smallfnt",
          .snd      = s"player/cbi/buttonpress",
          .external = true,

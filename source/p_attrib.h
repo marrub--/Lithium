@@ -13,9 +13,19 @@
 #ifndef p_attrib_h
 #define p_attrib_h
 
-#define ATTR_BAS_MAX 60
-#define ATTR_VIS_MAX 50
-#define ATTR_VIS_DIFF (ATTR_BAS_MAX - ATTR_VIS_MAX)
+enum ZscName(Attrib) {
+   at_acc,
+   at_def,
+   at_str,
+   at_vit,
+   at_stm,
+   at_luk,
+   at_spc,
+   at_max
+};
+
+#if !ZscOn
+#include "m_types.h"
 
 enum {
    atsys_auto,
@@ -24,15 +34,29 @@ enum {
    atsys_max,
 };
 
+enum {_base_exp = 10000};
+
 struct player_attributes {
    i32 expprev, exp, expnext;
    i32 level;
    i32 points;
    i32 attrs[at_max];
-
-   char names[at_max][4];
-   char lvupstr[130];
-   i32  lvupstrn;
 };
+
+void attr_giveexp(i32 amt);
+cstr attr_name(i32 which);
+void attr_draw(void);
+void attr_gui(struct gui_state *g, i32 yofs);
+stkcall k32 attr_accbuff(void);
+stkcall i32 attr_defbuff(void);
+stkcall i32 attr_strbuff(void);
+stkcall k32 attr_vitbuff(void);
+stkcall i32 attr_stmbuff(void);
+stkcall i32 attr_stmtime(void);
+stkcall k32 attr_lukbuff(void);
+stkcall k32 attr_rgebuff(void);
+stkcall k32 attr_conbuff(void);
+stkcall k32 attr_refbuff(void);
+#endif
 
 #endif

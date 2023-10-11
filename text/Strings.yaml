@@ -179,6 +179,7 @@ sm_:
    - DieNow
    - EDataI
    - EDataS
+   - FallDamage
    - FindFontColor
    - FindLump
    - GetCurMag
@@ -263,7 +264,6 @@ so_:
    - ClawOfImp
    - CreditsMenu
    - EXPLOOOSION
-   - ExplodoBoots
    - Feuer
    - FeuerExplosion
    - FeuerFinal
@@ -667,6 +667,7 @@ ss_:
    - player_cbi_invcur:        player/cbi/invcur
    - player_cbi_invmov:        player/cbi/invmov
    - player_cbi_invrem:        player/cbi/invrem
+   - player_cbi_keyenter:      player/cbi/keyenter
    - player_cbi_keypress:      player/cbi/keypress
    - player_cbi_mail:          player/cbi/mail
    - player_cbi_open:          player/cbi/open

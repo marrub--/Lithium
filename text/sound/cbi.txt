@@ -27,9 +27,10 @@ player.cbi {
    invcur InvCur # Phantasy Star Nova
    invmov InvMov # ^
 
-   key1 Key1 # ???
-   key2 Key2 # ^
-   key3 Key3 # ^
+   key1     Key1     # StrikeWhistler (freesound)
+   key2     Key2     # ^
+   key3     Key3     # ^
+   keyenter KeyEnter # ^
 
    clickon  ClickOn   # 3maze - Buttons and Switches
    clickoff ClickOff  # ^

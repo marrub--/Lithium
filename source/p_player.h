@@ -34,17 +34,6 @@ pclass_x(gU, pC | pW | pT)
 #elif !defined(p_player_h)
 #define p_player_h
 
-enum ZscName(Attrib) {
-   at_acc,
-   at_def,
-   at_str,
-   at_vit,
-   at_stm,
-   at_luk,
-   at_spc,
-   at_max
-};
-
 enum ZscName(SubweaponType) {
    _subw_gun,
    _subw_grenade,
@@ -83,6 +72,7 @@ enum ZscName(FlashlightState) {
    _light_max,
 };
 
+#include "p_attrib.h"
 #if !ZscOn
 #include "m_engine.h"
 #include "p_cbi.h"
@@ -91,7 +81,6 @@ enum ZscName(FlashlightState) {
 #include "m_list.h"
 #include "p_weapons.h"
 #include "p_shopdef.h"
-#include "p_attrib.h"
 #include "items.h"
 #include "d_vm.h"
 
@@ -110,7 +99,6 @@ void P_GUI_Use(void);
 score_t P_Scr_Give(k32 x, k32 y, k32 z, score_t score, bool nomul);
 score_t P_Scr_GivePos(i32 x, i32 y, score_t score, bool nomul);
 void P_Scr_Take(score_t score);
-void P_Lv_GiveEXP(i32 amt);
 stkcall i32 P_Color(i32 pclass);
 stkcall i32 P_Char(i32 pclass);
 void P_Dat_PTick(void);
@@ -135,7 +123,7 @@ script void P_Wep_PTick   (void);
 script void P_TeleportIn (void);
 sync   void P_TeleportOut(i32 tag);
 
-script optargs(4) void P_CenterNotification(str txt, i32 tics, i32 cr, i32 linecr, k32 bgfade, k32 fgfade);
+script optargs(2) void P_CenterNotification(str txt, i32 tics, i32 cr, i32 linecr, k32 bgfade, k32 fgfade);
 
 #ifndef NDEBUG
 void P_Ren_Debug(void);

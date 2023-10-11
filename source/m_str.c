@@ -368,7 +368,7 @@ stkoff cstr RemoveTextColors(cstr s, i32 size) {
    #include "m_str.c"
 }
 
-stkoff void printfmt(cstr s, mem_size_t n, struct fmt_arg *args) {
+stkoff void printfmt(cstr s, mem_size_t n, struct fmt_arg const *args) {
    mem_size_t i = 0;
    char c;
    while((c = *s++)) {

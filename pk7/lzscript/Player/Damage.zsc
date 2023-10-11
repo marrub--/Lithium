@@ -11,7 +11,7 @@ extend class Lith_Player;
 override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int flags, double angle) {
    if(Lith_StatFx.getInPool("Lith_StatShadowWalker") || m_iFrames) {
       return 0;
-   } else if(m_shield) {
+   } else if(m_shield && m_shield + health - damage > -spawnHealth() * 2) {
       if(!bInvulnerable && !(player.cheats & CF_GODMODE)) {
          m_shield = max(m_shield - damage, 0);
       }

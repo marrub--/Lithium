@@ -76,6 +76,7 @@ default {
    BounceType "Hexen";
    Species "Lith_Player";
    DamageType "Shrapnel";
+   Lith_Explosive.FxAmount 2.0;
    Projectile;
    +DontHarmSpecies
    +Ripper
@@ -139,7 +140,7 @@ Death:
       A_Quake(4, 20, 0, 640);
       Scale *= 0.7;
       A_SetTranslucent(1, 1);
-      return Lith_A_DoExplosion(2.0);
+      return Lith_A_DoExplosion();
    }
    stop;
 }

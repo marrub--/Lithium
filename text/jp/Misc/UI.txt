@@ -23,7 +23,7 @@
 == \#FREE       | 無料
 == \#LEFT       | 左へ
 == \#MOVE       | 動く
-== \#NOTE_FMT   | \cm%iつのノート
+== \#NOTE_FMT   | {}つのノート
 == \#OPEN       | 開ける
 == \#REQUIRED   | 必要
 == \#RIGHT      | 右へ
@@ -188,14 +188,5 @@
 == \#STAT_Boom       | 疑似爆発の量
 == \#STAT_Brouzouf   | 得たｂｒｏｕｚｏｕｆ
 == \#STAT_TrueMail   | 実際受信したメール
-
-## Attributes ════════════════════════════════════════════════════════════════╕
-== \#ATTR_HELP_ACC | 攻撃力
-== \#ATTR_HELP_DEF | 防御力
-== \#ATTR_HELP_STR | 最大ＨＰ
-== \#ATTR_HELP_VIT | 回復効率
-== \#ATTR_HELP_STM | 最大再生ＨＰ
-== \#ATTR_HELP_LUK | スコア増加運
-== \#ATTR_HELP_RGE | 反撃攻撃力
 
 ## EOF

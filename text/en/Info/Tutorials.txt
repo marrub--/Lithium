@@ -10,91 +10,42 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-== \#TUT_Movement_NAM | Movement
-@@ \#TUT_Movement_DSC
-- HORIZONTAL MOVEMENT
-
-Each class has a <unique horizontal movement mechanic> bound to
-{+speed} (Dodge / Run.) Some can <sprint>, <dodge>, or even <slide>.
-
-- JUMPING
-
-Press {+jump} to <jump> in supported maps. Some classes can
-<double-jump> or <fly> by jumping.
-
-- CROUCHING
-
-Hold {+crouch} to <crouch> in supported maps. Some classes can quickly
-<fall> by crouching.
-
-== \#TUT_Enemies_NAM | Enemies 1
-@@ \#TUT_Enemies_DSC
+== \#TUT_ModdedEnemies_NAM | Modded Enemies
+@@ \#TUT_ModdedEnemies_DSC
 - MONSTERS
 
-Lithium comes with <a set of new behaviours for monsters>, with the
-option of <more difficult behaviour>. Several <monster mods also work>
-with Lithium; however, if enemies don't have levels, they aren't
-compatible.
+Lithium comes with a set of new behaviours for monsters, with the
+option of more difficult behaviour. Several monster mods also work
+with Lithium; however, if enemies don't show on the vital scanner as
+having a level, they aren't compatible.
 
 ! Please report broken monster mods.
 
 - PHANTOMS
 
 \c[Lith_Dark]Phantoms\c- will show up occasionally based on your
-progression. They are very dangerous mid-bosses that give <unique
-rewards>. You must kill them to attain class-specific upgrades.
+progression. They are very dangerous mid-bosses that give
+class-specific <permanent upgrades>.
 
 - BOSSES
 
-<Boss arenas> will usually have unique behaviour, making them much
-more difficult. The <Icon of Sin> has fully redone behaviour.
+<Boss levels> are given unique behaviour. The <Icon of Sin> has
+entirely new behaviour.
 
-== \#TUT_EnemyMechanics_NAM | Enemies 2
-@@ \#TUT_EnemyMechanics_DSC
+== \#TUT_EnemyBehaviour_NAM | Enemy Behaviour
+@@ \#TUT_EnemyBehaviour_DSC
 - LEVELS
 
 All enemies have a <level> and <rank>. Enemies with higher <levels>
-will have <more health>, <deal more damage>, and <resist damage
-better>. Enemies with higher <ranks> will have <higher level scaling>,
-<more resistances>, and <gain experience faster>.
+will have more health, deal more damage, and resist damage better.
+Enemies with higher <ranks> will have higher level scaling, more
+resistances, and gain experience faster.
 
 - DAMAGE TYPES
 
-There are 8 damage types enemies can inflict:
-
-@@
-* Bullet Damage
-* Electric Damage
-* Fire Damage
-* Fire Magic Damage
-* Ice Damage
-* Magic Damage
-* Melee Damage
-* Shrapnel Damage
-@@
-
-== \#TUT_Items_NAM | Items
-@@ \#TUT_Items_DSC
-- SHOPPING
-
-Upgrades can be acquired by buying them with \cnScore\c-. Some classes
-also have a separate shop where weapons can be bought.
-
-! Some classes do not have upgrades yet.
-
-- PERMANENT UPGRADES
-
-\c[Lith_Dark]Phantoms\c- will drop a set of six or more <permanent
-upgrades> upon defeat depending on the class you chose. These
-<permanent upgrades> may be necessary to buy certain <upgrades> or
-unlock new mechanics.
-
-- POWERUPS
-
-@@
-* The <Barrier> power-up grants partial invulnerability by deflecting many attacks.
-* The <Mega-charge> will give you <magic armor> that protects you from damage.
-@@
+There are 8 damage types enemies can inflict: \cwBullet\c-,
+\ckElectric\c-, \cxFire\c-, \crFire Magic\c-, \czIce\c-, \ctMagic\c-,
+\csMelee\c-, and \cbShrapnel\c-.
 
 == \#TUT_Story_NAM | Story
 @@ \#TUT_Story_DSC
@@ -102,115 +53,161 @@ unlock new mechanics.
 
 - TERMINALS
 
-Walk up to a terminal and press {+use} to <read it>.
+Walk up to a <terminal> and press Use ({+use}) to read it.
 
-Some terminals may be <necessary to progress>.
+Some terminals may be \cgnecessary to progress\c-.
 
 - DIALOGUE
 
 Some people and things are not enemies, at least not right now.
 
-Walk up to friendlies and press {+use} to <talk> with them.
+Walk up to <friendly people> and press Use to talk with them.
 
-Dialogues are <not necessary to progress>.
+Dialogues are \cinot necessary to progress\c-.
 
-== \#TUT_MarineMove_NAM | Marine 1
+== \#TUT_MarineMove_NAM | \c[Lith_Green]M\c- Agility
 @@ \#TUT_MarineMove_DSC
 - SLIDING
 
-Press or hold {+speed} (Dodge / Run) while on the ground or in the air
+Press or hold Dodge / Run ({+speed}) while on the ground or in the air
 to <slide horizontally>. You will be moved in whatever direction
 you're actively moving in.
 
 - JUMPING
 
-Press {+jump} (jump):
+Press Jump ({+jump}):
 
-@@
-* On the ground to <jump> normally.
-* While in the air to <double-jump>.
-* While sliding to <super-jump>.
-* After <double-jumping> or <super-jumping> to activate <flight>.
-@@
+* On the ground, to <jump> normally.
 
-== \#TUT_MarineItem_NAM | Marine 2
-%% \#TUT_MarineItem_DSC
+* While in the air, to <double-jump>.
+
+* While sliding, to <super-jump>.
+
+* After <double-jumping> or <super-jumping>, to activate <flight>.
+
+== \#TUT_MarineItem_NAM | \c[Lith_Green]M\c- Items
+@@ \#TUT_MarineItem_DSC
 - WEAPONS
 
-* Most of \c[Lith_Green]Marine\c-'s weapons \cddo have\c- <alt-fires> ({+altattack}.)
+* Most of \c[Lith_Green]Marine\c-'s weapons \cdhave alt-fires\c-
+({+altattack}.)
+
 * No weapons use the <Weapon Action> ({+user1}) button.
-* The <Special Action> ({+lith_k_qact}) button will quickly attack with a knife.
+
+* The <Special Action> ({+lith_k_qact}) button will quickly attack
+with a knife.
 
 - ITEMS
 
-\c[Lith_Green]Marine\c-'s \c[Lith_Dark]Phantoms\c- will drop:
+\c[Lith_Green]Marine\c-'s \c[Lith_Dark]Phantoms\c- will drop devices
+needed to buy more kinds of upgrade.
 
-* Devices needed to buy more kinds of upgrade.
+\c[Lith_Green]Marine\c- has a shop with which to buy extra weapons.
 
-== \#TUT_CyberMageMove_NAM | Cyber-Mage 1
+== \#TUT_CyberMageMove_NAM | \c[Lith_Red]C\c- Agility
 @@ \#TUT_CyberMageMove_DSC
 - SLIDING
 
-Press or hold {+speed} (Dodge / Run) while on the ground or in the air
+Press or hold Dodge / Run ({+speed}) while on the ground or in the air
 to <slide horizontally>. You will be moved in whatever direction
 you're actively moving in.
 
 - JUMPING
 
-Press {+jump} (jump):
+Press Jump ({+jump}):
 
-@@
-* On the ground to <jump> normally.
-* While in the air to <double-jump>.
-* While sliding to <super-jump>.
-@@
+* On the ground, to <jump> normally.
 
-== \#TUT_CyberMageItem_NAM | Cyber-Mage 2
-%% \#TUT_CyberMageItem_DSC
+* While in the air, to <double-jump>.
+
+* While sliding, to <super-jump>.
+
+== \#TUT_CyberMageWeapon_NAM | \c[Lith_Red]C\c- Weapons
+@@ \#TUT_CyberMageWeapon_DSC
 - WEAPONS
 
-* Most of \c[Lith_Red]Cyber-Mage\c-'s weapons \ckdo not\c- have <alt-fires> ({+altattack}.)
-* The Sub-Machine Gun uses the <Weapon Action> ({+user1}) button to manually reload the chamber.
-* The <Special Action> ({+lith_k_qact}) button will open a menu for switching magic.
+* Most of \c[Lith_Red]Cyber-Mage\c-'s weapons \ckdo not have
+alt-fires\c- ({+altattack}.)
 
+* The Sub-Machine Gun uses the <Weapon Action> ({+user1}) button to
+manually reload the chamber.
+
+* The <Special Action> ({+lith_k_qact}) button will open a menu for
+switching magic.
+
+== \#TUT_CyberMageItem_NAM | \c[Lith_Red]C\c- Items
+@@ \#TUT_CyberMageItem_DSC
 - ITEMS
 
-\c[Lith_Red]Cyber-Mage\c-'s \c[Lith_Dark]Phantoms\c- will drop:
+\c[Lith_Red]Cyber-Mage\c-'s \c[Lith_Dark]Phantoms\c- will drop the
+following spells:
 
-* Spells you can cast with <mana>.
+* <Feuer> - Lines of fire.
 
-== \#TUT_DarkLordMove_NAM | Dark Lord 1
+* <Romyetya> - Fast melee.
+
+* <Hulgyon> - Floor-hugging explosives.
+
+* <Hosh'danma> - Star bullet shower.
+
+* <Cercle de la Mort> - Wall-busting super-explosion.
+
+\c[Lith_Red]Cyber-Mage\c- has a shop with which to buy extra weapons.
+
+== \#TUT_DarkLordMove_NAM | \c[Lith_Blue]D\c- Agility
 @@ \#TUT_DarkLordMove_DSC
 - SPRINTING
 
-Hold {+speed} (Dodge / Run) while on the ground to <sprint>. Your
+Hold Dodge / Run ({+speed}) while on the ground to <sprint>. Your
 movement speed will be greatly increased, but you won't be able to use
-<weapons> except for your <sub-weapons>.
+any <weapons> except <sub-weapons>.
 
 - MOBILITY
 
-\c[Lith_Blue]Dark Lord\c- has limited mobility, but can still move
-around maps better than vanilla. Besides sprinting, some weapons have
-enormous enough recoil to push you backwards, and the <Khanda> allows
-you to walk and sprint at increased speed.
+* \c[Lith_Blue]Dark Lord\c- has limited base speed, but can still move
+around maps better than vanilla.
 
-== \#TUT_DarkLordItem_NAM | Dark Lord 2
-%% \#TUT_DarkLordItem_DSC
+* Some weapons have enormous enough recoil to push you backwards.
+
+* Small weapons (<Khanda>, <Kampilan>, <.700 Express>) allow you to
+walk and sprint at increased speed.
+
+* Holding Crouch ({+crouch}) will make you fall faster.
+
+== \#TUT_DarkLordWeapon_NAM | \c[Lith_Blue]D\c- Weapons
+@@ \#TUT_DarkLordWeapon_DSC
 - WEAPONS
 
-* \c[Lith_Blue]Dark Lord\c-'s <alt-fire> button ({+altattack}) is bound to activating <sub-weapons>.
-* <Sub-weapons> are infinite use, charge quickly, and can be <used at any time>.
-* The <Special Action> ({+lith_k_qact}) button will switch the equipped <sub-weapon>.
-* The <Minigun> uses the <reload> button ({+reload}) to wind up without firing.
-* <Ruzuk> uses the <Weapon Action> ({+user1}) button to aim down sights.
+* \c[Lith_Blue]Dark Lord\c-'s <alt-fire> button ({+altattack})
+activates <sub-weapons>.
 
+* <Sub-weapons> are infinite use, charge quickly, and can be <used at
+any time>.
+
+* The <Special Action> ({+lith_k_qact}) button will switch the
+equipped <sub-weapon>.
+
+* The <Minigun> uses the <reload> button ({+reload}) to wind up
+without firing.
+
+* Only the <.700 Express> and <Ruzuk> need to be reloaded.
+
+* <Ruzuk> and the upgraded <Hunting Shotgun> use the <Weapon Action>
+({+user1}) button to aim down sights.
+
+== \#TUT_DarkLordItem_NAM | \c[Lith_Blue]D\c- Items
+@@ \#TUT_DarkLordItem_DSC
 - ITEMS
 
 \c[Lith_Blue]Dark Lord\c-'s \c[Lith_Dark]Phantoms\c- will drop:
 
-* Three additional <sub-weapons>.
-* One additional <weapon>.
-* A regenerating <shield> that will protect you from taking damage.
+* Three additional <sub-weapons>: A <Grenade> launcher, a
+health-siphoning <Axe>, and poison <Darts>.
+
+* One additional <weapon>, <Ruzuk>.
+
+* A regenerating <shield> that blocks all damage.
+
 * A device needed to buy certain upgrades.
 
 ## EOF

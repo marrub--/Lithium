@@ -47,7 +47,6 @@ void particleRegister() {
    pp_rocket_fire.style      = style_add;
    pp_rocket_fire.lifetime   = 5;
    pp_rocket_fire.flags      = spf_fullbright;
-   pp_rocket_fire.size       = 10;
    pp_rocket_fire.sizeStep   = -3;
    pp_rocket_fire.startAlpha = 1.0;
    pp_rocket_fire.fadeStep   = 0.1;
@@ -55,7 +54,6 @@ void particleRegister() {
    pp_rocket_smoke.texture    = getTex("#ESMA0");
    pp_rocket_smoke.style      = style_add;
    pp_rocket_smoke.lifetime   = 20;
-   pp_rocket_smoke.size       = 10;
    pp_rocket_smoke.sizeStep   = 0.015;
    pp_rocket_smoke.startAlpha = 1.0;
    pp_rocket_smoke.fadeStep   = -1;
@@ -127,6 +125,8 @@ void particleRocketTrail(Actor mo) {
    let mp  = Lith_UTIL.invertDeg(mv.y);
    let va  = ma+uiRandom(-2,2);
    let vp  = mp+uiRandom(-2,2);
+   pp_rocket_fire.size  =
+   pp_rocket_smoke.size = 10 * (mo.scale.x / 0.7);
    Lith_UTIL.particlePosVel(
       pp_rocket_smoke,
       pos, (va, vp), distance: uiRandom(16,32),

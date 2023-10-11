@@ -3,10 +3,13 @@
 # Running
 
 If you wish to run an in-development version of the mod, you can click
-the "Code" button at the top of the page and then "Download ZIP".
+the "Code" button at the top of the page and then "Download ZIP". Once
+you've done that, and extracted the ZIP file, you can then load the
+`pk7` folder into GZDoom as you would any other mod.
 
-Once you've done that, and extracted the ZIP file, you can then load
-the `pk7` folder into ZDoom as you would any other mod.
+If you want to load a single file instead of a folder, zip the
+contents of the `pk7` folder and [change the extension to create a
+`pk3` file](https://zdoom.org/wiki/Using_ZIPs_as_WAD_replacement).
 
 # Code
 

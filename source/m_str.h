@@ -162,7 +162,8 @@
 #define EndLogEx(level) \
    ServCallV(sm_Print, (level), ACS_EndStrParam())
 
-#define ns(s) (s |? st_null)
+#define ns(s) ((s) |? st_null)
+#define cns(s) ((s) |? "(null)")
 
 #define _p(v) \
    (_Generic(v, \
@@ -219,7 +220,7 @@ struct fmt_arg {
 script void StrInit(void);
 stkcall void PrintStrN(cstr s, mem_size_t n);
 stkcall void PrintStr(cstr s);
-stkcall void printfmt(cstr s, mem_size_t n, struct fmt_arg *args);
+stkcall void printfmt(cstr s, mem_size_t n, struct fmt_arg const *args);
 stkcall i32 radix(char c);
 stkcall i32 faststrtoi32_str(astr p);
 stkcall i32 faststrtoi32(cstr p);

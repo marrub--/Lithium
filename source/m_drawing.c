@@ -98,4 +98,13 @@ stkoff void AmbientSound(str snd, k32 vol, i32 chan) {
    StartSound(snd, chan |? lch_ambient, CHANF_NOPAUSE|CHANF_NOSTOP, vol, ATTN_NONE);
 }
 
+stkoff void play_key_snd(i32 c) {
+   if(c == '\n') {
+      StartSound(ss_player_cbi_keyenter, lch_ambient, CHANF_NOPAUSE|CHANF_NOSTOP, 1.0, ATTN_NONE, ACS_RandomFixed(0.7, 1.0));
+   } else {
+      k32 pitchseed = ((c ^ 0x55) - ' ') / (k32)('~' - ' ');
+      StartSound(ss_player_cbi_keypress, lch_ambient, CHANF_NOPAUSE|CHANF_NOSTOP, 0.7, ATTN_NONE, 1.1 - pitchseed * 0.3);
+   }
+}
+
 /* EOF */

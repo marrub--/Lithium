@@ -73,14 +73,14 @@ void GUIUpgradesList(struct gui_state *g) {
          continue;
       }
 
-      cstr color;
+      i32 color;
       if(!get_bit(upgr->flags, _ug_owned) && !P_Shop_CanBuy(&upgr->shopdef)) {
-         color = "u";
+         color = CR_DARKGRAY;
       } else {
          switch(upgr->key) {
-            case UPGR_TorgueMode: color = "g"; break;
-            case UPGR_Cannon_C:   color = "m"; break;
-            default:              color = nil; break;
+            case UPGR_TorgueMode: color = CR_RED;   break;
+            case UPGR_Cannon_C:   color = CR_BLACK; break;
+            default:              color = -1;       break;
          }
       }
 

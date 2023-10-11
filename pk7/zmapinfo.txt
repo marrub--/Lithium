@@ -142,7 +142,6 @@ map LITHTEST "Test Map" {
    music = "lmusic/dandalins story.it"
    next  = 1
    sky1  = "LITHSKDE"
-   fallingDamage
 }
 
 map LITHBOX "Box Map" {

@@ -206,10 +206,18 @@ static void OnFinalize(dmon_t *m) {
             SoulCleave(m);
          }
       }
-      /**/ if(pl.health <  5) {P_Lv_GiveEXP(50);}
-      else if(pl.health < 15) {P_Lv_GiveEXP(25);}
-      else if(pl.health < 25) {P_Lv_GiveEXP(10);}
-      P_Lv_GiveEXP(m->mi->exp + m->level + (m->rank - 1) * 10);
+      enum {
+         _max_level_top4th = _max_level - _max_level / 4,
+         _max_level_tophlf = _max_level / 2,
+      };
+      i32 expadd = 0;
+      /**/ if(pl.health <  5) expadd += 50;
+      else if(pl.health < 15) expadd += 25;
+      else if(pl.health < 25) expadd += 10;
+      /**/ if(m->level > _max_level_top4th) expadd += m->mi->exp / 10;
+      else if(m->level > _max_level_tophlf) expadd += m->mi->exp / 60;
+      if(m->rank >= 5) expadd += m->mi->exp / 60;
+      attr_giveexp(expadd + m->mi->exp);
    }
    m->finalized = true;
 }
@@ -404,7 +412,6 @@ static i32 MonInfo_Flags(struct tokbuf *tb, struct err *res) {
     * however the previous syntax will still be supported since there
     * are a few mods that likely won't change with this, and maybe
     * someone just likes how it looks (it's trivial to maintain, w/e)
-    * -Ten+Alison
     */
    if(tok->type == tok_string) {
       for(c    = '"',

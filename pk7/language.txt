@@ -367,7 +367,17 @@
 "LITH_UPGRADE_TITLE_StealthSys" =
    "Stealth System";
 "LITH_UPGRADE_EFFEC_StealthSys" =
-   "Makes you gradually fade out when still, giving you partial invisibility from enemies, and generally harder to aim at.";
+   "Makes you gradually fade out when still. Gives you partial invisibility from enemies, making you harder to aim at.";
+"LITH_UPGRADE_TITLE_Lightspark" =
+   "Light-spark";
+"LITH_UPGRADE_EFFEC_Lightspark" =
+   "Allows you to press the flashlight key to throw a light-spark.\n"
+   "\n"
+   "A throwable, sentient light. Aims where you aim. Follows you when you recall it, and shuts off on a third activation.";
+"LITH_UPGRADE_TITLE_Subweapons" =
+   "Sub-wep Driver";
+"LITH_UPGRADE_EFFEC_Subweapons" =
+   "Allows you to use sub-weapons. These can be activated by pressing the alternate fire button.";
 "LITH_UPGRADE_TITLE_Pistol_A" =
    "Auto Pistol";
 "LITH_UPGRADE_EFFEC_Pistol_A" =
@@ -3024,72 +3034,32 @@
    "A system about 45 lightyears from Earth, not far from Algidistari. The system is composed of 14 planets and one star, which emits slightly more heat than the Sun, making the planets here extremely temperate during solar cycles.\n"
    "\n"
    "Three of the planets, Eta, Ni and Keta, are desert planets capable of inhabiting human life, although have few native inhabitants, none sentient. Seven of the planets are completely barren, although house valuable minerals which make the system a large trading place. The other three planets are gas giants and have not been surface inspected yet.";
-"LITH_TUT_Movement_NAM" =
-   "Movement";
-"LITH_TUT_Movement_DSC" =
-   "- HORIZONTAL MOVEMENT\n"
-   "\n"
-   "Each class has a <unique horizontal movement mechanic> bound to {+speed} (Dodge / Run.) Some can <sprint>, <dodge>, or even <slide>.\n"
-   "\n"
-   "- JUMPING\n"
-   "\n"
-   "Press {+jump} to <jump> in supported maps. Some classes can <double-jump> or <fly> by jumping.\n"
-   "\n"
-   "- CROUCHING\n"
-   "\n"
-   "Hold {+crouch} to <crouch> in supported maps. Some classes can quickly <fall> by crouching.";
-"LITH_TUT_Enemies_NAM" =
-   "Enemies 1";
-"LITH_TUT_Enemies_DSC" =
+"LITH_TUT_ModdedEnemies_NAM" =
+   "Modded Enemies";
+"LITH_TUT_ModdedEnemies_DSC" =
    "- MONSTERS\n"
    "\n"
-   "Lithium comes with <a set of new behaviours for monsters>, with the option of <more difficult behaviour>. Several <monster mods also work> with Lithium; however, if enemies don't have levels, they aren't compatible.\n"
+   "Lithium comes with a set of new behaviours for monsters, with the option of more difficult behaviour. Several monster mods also work with Lithium; however, if enemies don't show on the vital scanner as having a level, they aren't compatible.\n"
    "\n"
    "! Please report broken monster mods.\n"
    "\n"
    "- PHANTOMS\n"
    "\n"
-   "\c[Lith_Dark]Phantoms\c- will show up occasionally based on your progression. They are very dangerous mid-bosses that give <unique rewards>. You must kill them to attain class-specific upgrades.\n"
+   "\c[Lith_Dark]Phantoms\c- will show up occasionally based on your progression. They are very dangerous mid-bosses that give class-specific <permanent upgrades>.\n"
    "\n"
    "- BOSSES\n"
    "\n"
-   "<Boss arenas> will usually have unique behaviour, making them much more difficult. The <Icon of Sin> has fully redone behaviour.";
-"LITH_TUT_EnemyMechanics_NAM" =
-   "Enemies 2";
-"LITH_TUT_EnemyMechanics_DSC" =
+   "<Boss levels> are given unique behaviour. The <Icon of Sin> has entirely new behaviour.";
+"LITH_TUT_EnemyBehaviour_NAM" =
+   "Enemy Behaviour";
+"LITH_TUT_EnemyBehaviour_DSC" =
    "- LEVELS\n"
    "\n"
-   "All enemies have a <level> and <rank>. Enemies with higher <levels> will have <more health>, <deal more damage>, and <resist damage better>. Enemies with higher <ranks> will have <higher level scaling>, <more resistances>, and <gain experience faster>.\n"
+   "All enemies have a <level> and <rank>. Enemies with higher <levels> will have more health, deal more damage, and resist damage better. Enemies with higher <ranks> will have higher level scaling, more resistances, and gain experience faster.\n"
    "\n"
    "- DAMAGE TYPES\n"
    "\n"
-   "There are 8 damage types enemies can inflict:\n"
-   "\n"
-   "* Bullet Damage\n"
-   "* Electric Damage\n"
-   "* Fire Damage\n"
-   "* Fire Magic Damage\n"
-   "* Ice Damage\n"
-   "* Magic Damage\n"
-   "* Melee Damage\n"
-   "* Shrapnel Damage";
-"LITH_TUT_Items_NAM" =
-   "Items";
-"LITH_TUT_Items_DSC" =
-   "- SHOPPING\n"
-   "\n"
-   "Upgrades can be acquired by buying them with \cnScore\c-. Some classes also have a separate shop where weapons can be bought.\n"
-   "\n"
-   "! Some classes do not have upgrades yet.\n"
-   "\n"
-   "- PERMANENT UPGRADES\n"
-   "\n"
-   "\c[Lith_Dark]Phantoms\c- will drop a set of six or more <permanent upgrades> upon defeat depending on the class you chose. These <permanent upgrades> may be necessary to buy certain <upgrades> or unlock new mechanics.\n"
-   "\n"
-   "- POWERUPS\n"
-   "\n"
-   "* The <Barrier> power-up grants partial invulnerability by deflecting many attacks.\n"
-   "* The <Mega-charge> will give you <magic armor> that protects you from damage.";
+   "There are 8 damage types enemies can inflict: \cwBullet\c-, \ckElectric\c-, \cxFire\c-, \crFire Magic\c-, \czIce\c-, \ctMagic\c-, \csMelee\c-, and \cbShrapnel\c-.";
 "LITH_TUT_Story_NAM" =
    "Story";
 "LITH_TUT_Story_DSC" =
@@ -3097,102 +3067,140 @@
    "\n"
    "- TERMINALS\n"
    "\n"
-   "Walk up to a terminal and press {+use} to <read it>.\n"
+   "Walk up to a <terminal> and press Use ({+use}) to read it.\n"
    "\n"
-   "Some terminals may be <necessary to progress>.\n"
+   "Some terminals may be \cgnecessary to progress\c-.\n"
    "\n"
    "- DIALOGUE\n"
    "\n"
    "Some people and things are not enemies, at least not right now.\n"
    "\n"
-   "Walk up to friendlies and press {+use} to <talk> with them.\n"
+   "Walk up to <friendly people> and press Use to talk with them.\n"
    "\n"
-   "Dialogues are <not necessary to progress>.";
+   "Dialogues are \cinot necessary to progress\c-.";
 "LITH_TUT_MarineMove_NAM" =
-   "Marine 1";
+   "\c[Lith_Green]M\c- Agility";
 "LITH_TUT_MarineMove_DSC" =
    "- SLIDING\n"
    "\n"
-   "Press or hold {+speed} (Dodge / Run) while on the ground or in the air to <slide horizontally>. You will be moved in whatever direction you're actively moving in.\n"
+   "Press or hold Dodge / Run ({+speed}) while on the ground or in the air to <slide horizontally>. You will be moved in whatever direction you're actively moving in.\n"
    "\n"
    "- JUMPING\n"
    "\n"
-   "Press {+jump} (jump):\n"
+   "Press Jump ({+jump}):\n"
    "\n"
-   "* On the ground to <jump> normally.\n"
-   "* While in the air to <double-jump>.\n"
-   "* While sliding to <super-jump>.\n"
-   "* After <double-jumping> or <super-jumping> to activate <flight>.";
+   "* On the ground, to <jump> normally.\n"
+   "\n"
+   "* While in the air, to <double-jump>.\n"
+   "\n"
+   "* While sliding, to <super-jump>.\n"
+   "\n"
+   "* After <double-jumping> or <super-jumping>, to activate <flight>.";
 "LITH_TUT_MarineItem_NAM" =
-   "Marine 2";
+   "\c[Lith_Green]M\c- Items";
 "LITH_TUT_MarineItem_DSC" =
    "- WEAPONS\n"
    "\n"
-   "* Most of \c[Lith_Green]Marine\c-'s weapons \cddo have\c- <alt-fires> ({+altattack}.)\n"
+   "* Most of \c[Lith_Green]Marine\c-'s weapons \cdhave alt-fires\c- ({+altattack}.)\n"
+   "\n"
    "* No weapons use the <Weapon Action> ({+user1}) button.\n"
+   "\n"
    "* The <Special Action> ({+lith_k_qact}) button will quickly attack with a knife.\n"
    "\n"
    "- ITEMS\n"
    "\n"
-   "\c[Lith_Green]Marine\c-'s \c[Lith_Dark]Phantoms\c- will drop:\n"
+   "\c[Lith_Green]Marine\c-'s \c[Lith_Dark]Phantoms\c- will drop devices needed to buy more kinds of upgrade.\n"
    "\n"
-   "* Devices needed to buy more kinds of upgrade.";
+   "\c[Lith_Green]Marine\c- has a shop with which to buy extra weapons.";
 "LITH_TUT_CyberMageMove_NAM" =
-   "Cyber-Mage 1";
+   "\c[Lith_Red]C\c- Agility";
 "LITH_TUT_CyberMageMove_DSC" =
    "- SLIDING\n"
    "\n"
-   "Press or hold {+speed} (Dodge / Run) while on the ground or in the air to <slide horizontally>. You will be moved in whatever direction you're actively moving in.\n"
+   "Press or hold Dodge / Run ({+speed}) while on the ground or in the air to <slide horizontally>. You will be moved in whatever direction you're actively moving in.\n"
    "\n"
    "- JUMPING\n"
    "\n"
-   "Press {+jump} (jump):\n"
+   "Press Jump ({+jump}):\n"
    "\n"
-   "* On the ground to <jump> normally.\n"
-   "* While in the air to <double-jump>.\n"
-   "* While sliding to <super-jump>.";
-"LITH_TUT_CyberMageItem_NAM" =
-   "Cyber-Mage 2";
-"LITH_TUT_CyberMageItem_DSC" =
+   "* On the ground, to <jump> normally.\n"
+   "\n"
+   "* While in the air, to <double-jump>.\n"
+   "\n"
+   "* While sliding, to <super-jump>.";
+"LITH_TUT_CyberMageWeapon_NAM" =
+   "\c[Lith_Red]C\c- Weapons";
+"LITH_TUT_CyberMageWeapon_DSC" =
    "- WEAPONS\n"
    "\n"
-   "* Most of \c[Lith_Red]Cyber-Mage\c-'s weapons \ckdo not\c- have <alt-fires> ({+altattack}.)\n"
-   "* The Sub-Machine Gun uses the <Weapon Action> ({+user1}) button to manually reload the chamber.\n"
-   "* The <Special Action> ({+lith_k_qact}) button will open a menu for switching magic.\n"
+   "* Most of \c[Lith_Red]Cyber-Mage\c-'s weapons \ckdo not have alt-fires\c- ({+altattack}.)\n"
    "\n"
+   "* The Sub-Machine Gun uses the <Weapon Action> ({+user1}) button to manually reload the chamber.\n"
+   "\n"
+   "* The <Special Action> ({+lith_k_qact}) button will open a menu for switching magic.";
+"LITH_TUT_CyberMageItem_NAM" =
+   "\c[Lith_Red]C\c- Items";
+"LITH_TUT_CyberMageItem_DSC" =
    "- ITEMS\n"
    "\n"
-   "\c[Lith_Red]Cyber-Mage\c-'s \c[Lith_Dark]Phantoms\c- will drop:\n"
+   "\c[Lith_Red]Cyber-Mage\c-'s \c[Lith_Dark]Phantoms\c- will drop the following spells:\n"
    "\n"
-   "* Spells you can cast with <mana>.";
+   "* <Feuer> - Lines of fire.\n"
+   "\n"
+   "* <Romyetya> - Fast melee.\n"
+   "\n"
+   "* <Hulgyon> - Floor-hugging explosives.\n"
+   "\n"
+   "* <Hosh'danma> - Star bullet shower.\n"
+   "\n"
+   "* <Cercle de la Mort> - Wall-busting super-explosion.\n"
+   "\n"
+   "\c[Lith_Red]Cyber-Mage\c- has a shop with which to buy extra weapons.";
 "LITH_TUT_DarkLordMove_NAM" =
-   "Dark Lord 1";
+   "\c[Lith_Blue]D\c- Agility";
 "LITH_TUT_DarkLordMove_DSC" =
    "- SPRINTING\n"
    "\n"
-   "Hold {+speed} (Dodge / Run) while on the ground to <sprint>. Your movement speed will be greatly increased, but you won't be able to use <weapons> except for your <sub-weapons>.\n"
+   "Hold Dodge / Run ({+speed}) while on the ground to <sprint>. Your movement speed will be greatly increased, but you won't be able to use any <weapons> except <sub-weapons>.\n"
    "\n"
    "- MOBILITY\n"
    "\n"
-   "\c[Lith_Blue]Dark Lord\c- has limited mobility, but can still move around maps better than vanilla. Besides sprinting, some weapons have enormous enough recoil to push you backwards, and the <Khanda> allows you to walk and sprint at increased speed.";
-"LITH_TUT_DarkLordItem_NAM" =
-   "Dark Lord 2";
-"LITH_TUT_DarkLordItem_DSC" =
+   "* \c[Lith_Blue]Dark Lord\c- has limited base speed, but can still move around maps better than vanilla.\n"
+   "\n"
+   "* Some weapons have enormous enough recoil to push you backwards.\n"
+   "\n"
+   "* Small weapons (<Khanda>, <Kampilan>, <.700 Express>) allow you to walk and sprint at increased speed.\n"
+   "\n"
+   "* Holding Crouch ({+crouch}) will make you fall faster.";
+"LITH_TUT_DarkLordWeapon_NAM" =
+   "\c[Lith_Blue]D\c- Weapons";
+"LITH_TUT_DarkLordWeapon_DSC" =
    "- WEAPONS\n"
    "\n"
-   "* \c[Lith_Blue]Dark Lord\c-'s <alt-fire> button ({+altattack}) is bound to activating <sub-weapons>.\n"
-   "* <Sub-weapons> are infinite use, charge quickly, and can be <used at any time>.\n"
-   "* The <Special Action> ({+lith_k_qact}) button will switch the equipped <sub-weapon>.\n"
-   "* The <Minigun> uses the <reload> button ({+reload}) to wind up without firing.\n"
-   "* <Ruzuk> uses the <Weapon Action> ({+user1}) button to aim down sights.\n"
+   "* \c[Lith_Blue]Dark Lord\c-'s <alt-fire> button ({+altattack}) activates <sub-weapons>.\n"
    "\n"
+   "* <Sub-weapons> are infinite use, charge quickly, and can be <used at any time>.\n"
+   "\n"
+   "* The <Special Action> ({+lith_k_qact}) button will switch the equipped <sub-weapon>.\n"
+   "\n"
+   "* The <Minigun> uses the <reload> button ({+reload}) to wind up without firing.\n"
+   "\n"
+   "* Only the <.700 Express> and <Ruzuk> need to be reloaded.\n"
+   "\n"
+   "* <Ruzuk> and the upgraded <Hunting Shotgun> use the <Weapon Action> ({+user1}) button to aim down sights.";
+"LITH_TUT_DarkLordItem_NAM" =
+   "\c[Lith_Blue]D\c- Items";
+"LITH_TUT_DarkLordItem_DSC" =
    "- ITEMS\n"
    "\n"
    "\c[Lith_Blue]Dark Lord\c-'s \c[Lith_Dark]Phantoms\c- will drop:\n"
    "\n"
-   "* Three additional <sub-weapons>.\n"
-   "* One additional <weapon>.\n"
-   "* A regenerating <shield> that will protect you from taking damage.\n"
+   "* Three additional <sub-weapons>: A <Grenade> launcher, a health-siphoning <Axe>, and poison <Darts>.\n"
+   "\n"
+   "* One additional <weapon>, <Ruzuk>.\n"
+   "\n"
+   "* A regenerating <shield> that blocks all damage.\n"
+   "\n"
    "* A device needed to buy certain upgrades.";
 "LITH_INFO_SHORT_HeadsUpDisp" =
    "$$LITH_UPGRADE_TITLE_HeadsUpDisp";
@@ -4109,7 +4117,7 @@
 "LITH_PK_GET_032" =
    "My %S lies over the ocean, my %S lies over the sea.";
 "LITH_PK_GET_033" =
-   "Liberated the %S from gypsies.";
+   "Yo-Yo Ma... Do you still not understand? It doesn't matter if you destroy parts of my body, there's no way you can destroy or stop me. You can't destroy my target radar, or prevent me from attacking %S... The only way you two could have survived is if you had run away.";
 "LITH_PK_GET_034" =
    "Granted the %S true independence.";
 "LITH_PK_GET_035_FLAGS" =
@@ -4125,7 +4133,7 @@
 "LITH_PK_GET_037" =
    "aeiou";
 "LITH_PK_GET_038" =
-   "What is a man? A miserable pile of %Ss!";
+   "What is a man? A miserable little pile of %S!";
 "LITH_PK_GET_039" =
    "The %S was delicious.";
 "LITH_PK_GET_040_FLAGS" =
@@ -4145,15 +4153,17 @@
 "LITH_PK_GET_045" =
    "DRUGS";
 "LITH_PK_GET_046" =
-   ">%S >2012";
+   "%S? In CURRENT YEAR?";
 "LITH_PK_GET_047" =
    "TNT1 A 0 A_TakeInventory(\"%S\", 1)";
 "LITH_PK_GET_048" =
    "Super rare %S acquired!";
 "LITH_PK_GET_049" =
    "Sacked the %S!";
+"LITH_PK_GET_050_FLAGS" =
+   "4";
 "LITH_PK_GET_050" =
-   "The %S is your new waifu.";
+   "Do you take %S for your lawful weapon, to have and to hold, from this day forward, for better, for worse, for richer, for poorer, in sickness and in health, until death do you part? %S";
 "LITH_PK_GET_051" =
    "The %S is grateful for your presence.";
 "LITH_PK_GET_052" =
@@ -4161,7 +4171,7 @@
 "LITH_PK_GET_053" =
    "[%S intensifies]";
 "LITH_PK_GET_054" =
-   "Ah, yes, the %S.";
+   "Ah, yes. The %S.";
 "LITH_PK_GET_055" =
    "Wait, the %S is resonating!";
 "LITH_PK_GET_056" =
@@ -4193,21 +4203,21 @@
 "LITH_PK_GET_068" =
    "What the fuck did you just fucking say about %S, you little bitch? I'll have you know I graduated top of my class in the Navy Seals, and I've been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills. I am trained in gorilla warfare and I'm the top sniper in the entire US armed forces. You are nothing to me but just another target. I will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words. You think you can get away with saying that shit to me over the Internet? Think again, fucker. As we speak I am contacting my secret network of spies across the USA and your IP is being traced right now so you better prepare for the storm, maggot. The storm that wipes out the pathetic little thing you call your life. You're fucking dead, kid. I can be anywhere, anytime, and I can kill you in over seven hundred ways, and that's just with my bare hands. Not only am I extensively trained in unarmed combat, but I have access to the entire arsenal of the United States Marine Corps and I will use it to its full extent to wipe your miserable ass off the face of the continent, you little shit. If only you could have known what unholy retribution your little \"clever\" comment was about to bring down upon you, maybe you would have held your fucking tongue. But you couldn't, you didn't, and now you're paying the price, you goddamn idiot. I will shit fury all over you and you will drown in it. You're fucking dead, kiddo.";
 "LITH_PK_GET_069" =
-   "A weapon to surpass Metal Gear, The %S.";
+   "A weapon to surpass Metal Gear! The %S!";
 "LITH_PK_GET_070" =
-   "Appropriated the %S.";
+   "Appropriated the %S for nefarious purposes.";
 "LITH_PK_GET_071" =
-   "Ooh, the %S.";
+   "Ooh la la, the %S.";
 "LITH_PK_GET_072" =
    "THAT %S BETTER NOT BOUNCE OR YOU'RE A DEAD MOTHERFUCKER";
 "LITH_PK_GET_073" =
-   "Gluten-free %S for all your daily needs.";
+   "Gluten-free %S, for all your daily needs.";
 "LITH_PK_GET_074" =
    "You forcefully draw in the %S.";
 "LITH_PK_GET_075" =
-   "They don't think it be %S but it do.";
+   "Yes, you heard us right! YOU can get a NEW %S for the low, LOW price of";
 "LITH_PK_GET_076" =
-   "The %S wrestled with your other items and won. It is now one of us.";
+   "The %S wrestled with your other items and won. We are now one.";
 "LITH_PK_GET_077_FLAGS" =
    "2";
 "LITH_PK_GET_077" =
@@ -4223,7 +4233,7 @@
 "LITH_PK_GET_082" =
    "This is my %S. There are many like it, but this one is mine.";
 "LITH_PK_GET_083" =
-   "Whan that %S with his boulette shoten, the droghte of blood hath perced to the rooten.";
+   "Whan that %S with his boulette shotte, the droghte of blod hath perced to the roote.";
 "LITH_PK_GET_084" =
    "ERROR: %S IS DEAD.";
 "LITH_PK_GET_085" =
@@ -4237,13 +4247,13 @@
 "LITH_PK_GET_089" =
    "This %S... It was made for me.";
 "LITH_PK_GET_090" =
-   "This %S isn't special, I'll pick up anything!";
+   "This %S isn't special, I'll just pick up anything!";
 "LITH_PK_GET_091" =
    "Dr. %S, I'm UAC.";
 "LITH_PK_GET_092" =
    "Honk if you're an underpaid %S";
 "LITH_PK_GET_093" =
-   "YOU AM NO REAL %S";
+   "Unfortunately, %S.";
 "LITH_PK_unknown_NUM" =
    "2";
 "LITH_PK_unknown_000" =
@@ -4259,7 +4269,7 @@
 "LITH_PK_o_cfist_NUM" =
    "5";
 "LITH_PK_o_cfist_000" =
-   "Chaaji Fisuto";
+   "Charm Piss";
 "LITH_PK_o_cfist_001" =
    "Charred Fist";
 "LITH_PK_o_cfist_002" =
@@ -4267,9 +4277,9 @@
 "LITH_PK_o_cfist_003" =
    "Chargle Fargle";
 "LITH_PK_o_cfist_004" =
-   "Yūgi no Ken";
+   "Car Dick";
 "LITH_PK_o_cfist_005" =
-   "Baron Smasher";
+   "Splargh Flick";
 "LITH_PK_m_pistol_NUM" =
    "11";
 "LITH_PK_m_pistol_000" =
@@ -4329,7 +4339,7 @@
 "LITH_PK_m_ssg_002" =
    "Soer Shotgan";
 "LITH_PK_m_ssg_003" =
-   "Suupaa Shottogan";
+   "Spapper Spepbool";
 "LITH_PK_m_ssg_004" =
    "Susser Sarsaparilla";
 "LITH_PK_m_ssg_005" =
@@ -4523,7 +4533,7 @@
 "LITH_PK_d_khanda_NUM" =
    "4";
 "LITH_PK_d_khanda_000" =
-   "Kanda";
+   "Khandle";
 "LITH_PK_d_khanda_001" =
    "Cornda";
 "LITH_PK_d_khanda_002" =
@@ -4571,7 +4581,7 @@
 "LITH_PK_d_4bore_002" =
    "Huntimg Shortgun";
 "LITH_PK_d_4bore_003" =
-   "Honter Gun";
+   "Honter Shonter";
 "LITH_PK_d_drocket_NUM" =
    "3";
 "LITH_PK_d_drocket_000" =
@@ -5201,13 +5211,13 @@
 "QUITMSG4" =
    "Super, now I can get back to emitting bees at your house!";
 "QUITMSG5" =
-   "Look at this wuss!";
+   "Look at this utter milksop!";
 "QUITMSG6" =
    "I'm rooting for you whichever way you go!";
 "QUITMSG7" =
    "You sure about this?";
 "QUITMSG8" =
-   "Wait, there's a youkai waiting for you at the exit!";
+   "Wait, there's a yōkai waiting for you at the exit!";
 "QUITMSG9" =
    "Get outta here, and get me some money too.";
 "QUITMSG10" =
@@ -5254,7 +5264,7 @@
    "The Star Destroyer's hum is a product of the\n"
    "energy buffer on its top channeling sound\n"
    "through the main hull of the gun, which may\n"
-   "prove the existence of a fifth dimension.";
+   "prove the existence of yet another dimension.";
 "QUITMSG24" =
    "The amount of wetware jammed into Cyber-Mage's\n"
    "brain is not healthy for anyone.";
@@ -5291,8 +5301,7 @@
 "QUITMSG36" =
    "Now if you'll excuse me, I need to go die to the Soviet Union.";
 "QUITMSG37" =
-   "The Charge Fist uses pneumatics to launch\n"
-   "your fist forward, via advanced cybernetics.";
+   "dork lid";
 "QUITMSG38" =
    "Can you at least offer weak opposition to exiting?";
 "QUITMSG39" =
@@ -5356,7 +5365,7 @@
    "I'd leave - this is just more monsters and Score.\n"
    "What a load.";
 "QUITMSG66" =
-   "Trust us now, it's time to let go.";
+   "Begone, foul beast!";
 "QUITMSG67" =
    "Enter the maze through your reflection,\n"
    "we have to follow through a new connection.";
@@ -5372,7 +5381,7 @@
 "QUITMSG71" =
    "Press Y to BECOME THE BEAST YOU WORSHIP.";
 "QUITMSG72" =
-   "Fuck, fucking cock.";
+   "Fuck this! I'm out of here.";
 "QUITMSG73" =
    "hello hacker fucker\n"
    "this is marble\n"
@@ -5392,7 +5401,7 @@
 "QUITMSG77" =
    "AOHA PZ TVZA LEJLSSLUA";
 "QUITMSG78" =
-   "In modern times, Japanese pornography is hard to come by.";
+   "Do you think I get paid enough to just sit here and dispense messages ALL DAY?";
 "QUITMSG79" =
    "Hey! Who's in charge here?";
 "QUITMSG80" =
@@ -5472,8 +5481,7 @@
 "QUITMSG106" =
    "Summon Majima?";
 "QUITMSG107" =
-   "What, were you expecting something funny?\n"
-   "Get the hell outta here.";
+   "Traviiiis! It's a bad day!";
 "QUITMSG108" =
    "Astolfo wouldn't press Y.";
 "QUITMSG109" =
@@ -5492,10 +5500,16 @@
    "LAKE!\n"
    "OF!!\n"
    "FIRE!!!";
+"QUITMSG115" =
+   "With this, my powers will finally reach their true potential.";
+"QUITMSG116" =
+   "Oh, shit! Too late!";
+"QUITMSG117" =
+   "Did you hear about the new QUITTER STORE downtown? I heard you opened it!";
 "QUITMSGNUM" =
-   "114";
+   "117";
 "QUITMSGEND" =
-   "(Quit?)";
+   "(Really quit?)";
 "LITH_BLUE_INTENSITY" =
    "Blue intensity";
 "LITH_GREEN_INTENSITY" =
@@ -6244,7 +6258,7 @@
 "LITH_MOVE" =
    "Move";
 "LITH_NOTE_FMT" =
-   "\cmNote %i";
+   "Note {}";
 "LITH_OPEN" =
    "Open";
 "LITH_REQUIRED" =
@@ -6547,55 +6561,73 @@
 "LITH_STAT_TrueMail" =
    "Mail truly received";
 "LITH_ATTR_HELP_ACC" =
-   "Weapon damage";
+   "\cyBuffs most damage dealt\c-\n"
+   "Damage multiplier: \ci{}\c-x";
 "LITH_ATTR_HELP_DEF" =
-   "Damage resistance";
+   "\cyResists damage taken\c-\n"
+   "Damage resistance: \cn{}\c-%";
 "LITH_ATTR_HELP_STR" =
-   "Health capacity";
+   "\cyIncreases health capacity\c-\n"
+   "Health capacity: +\cg{}\c-";
 "LITH_ATTR_HELP_VIT" =
-   "Health item efficiency";
+   "\cyIncreases health item efficiency\c-\n"
+   "Health multiplier: \cd{}\c-x";
 "LITH_ATTR_HELP_POT" =
    "$$LITH_ATTR_HELP_VIT";
 "LITH_ATTR_HELP_STM" =
-   "Health regeneration maximum";
+   "\cyIncresases maximum health regeneration\c-\n"
+   "Regenerates: up to \cg{}\c- health every \cd{}\c- s";
 "LITH_ATTR_HELP_REP" =
    "$$LITH_ATTR_HELP_STM";
 "LITH_ATTR_HELP_REG" =
    "$$LITH_ATTR_HELP_STM";
 "LITH_ATTR_HELP_LUK" =
-   "Score gained";
+   "\cyIncreases score gained\c-\n"
+   "Chance of up to \ck{}\c-x score when gained";
 "LITH_ATTR_HELP_RGE" =
-   "Damage buff when hit";
+   "\cyAdds damage buff when hit\c-\n"
+   "Damage multiplier: \ci{}\c-x per 1 HP lost\n"
+   "Decays 2% every 35th second";
 "LITH_ATTR_HELP_CON" =
-   "Damage buff when gaining mana";
+   "\cyAdds damage buff when gaining mana\c-\n"
+   "Damage multiplier: \ci{}\c-x per 1 MP gained\n"
+   "Decays 3% every 35th second";
 "LITH_ATTR_HELP_ADR" =
-   "Damage resistance when gaining meter";
+   "\cyAdds damage resistance when gaining meter\c-";
 "LITH_ATTR_HELP_AGI" =
-   "Speed and damage resistance when dodging";
+   "\cyAdds movement speed and damage resistance when dodging\c-";
 "LITH_ATTR_HELP_RSH" =
-   "Damage buff when gaining health";
+   "\cyAdds damage buff when gaining health\c-";
 "LITH_ATTR_HELP_REF" =
-   "Movement speed when hit";
+   "\cyIncreases speed of sub-weapon charge,\n"
+   "and also adds movement speed when hit\c-\n"
+   "Sub-charge: \ch{}\c- s (changes at map start)\n"
+   "Speed multiplier: \ci{}\c-% per 1 HP lost\n"
+   "Decays 1% every 35th second";
 "LITH_ATTR_HELP_MNA" =
-   "Chance to not get damaged";
+   "\cyAdds chance to not get damaged\c-";
 "LITH_OPENER" =
    "1626, New Era.\n"
    "\n"
-   "A revelation in multiverse theory: Proof of other universes existing within the same dimension of time as our own universe.\n"
+   "A revelation in multiverse theory: Proof of other, unseen universes existing within the same dimension of time as our own.\n"
    "\n"
-   "Finally explaining the odd artifacts which had been found throughout the new era, the researchers involved were to be awarded for their immense discovery, but soon after disappeared all at once.\n"
+   "Finally explaining the odd artifacts which had been found throughout the New Era, the researchers involved were to be awarded for their incredible discovery, but soon after, their entire institute disappeared.\n"
    "\n"
-   "Twenty years later, 1649 N.E.\n"
+   "Twenty years later: 1649 N.E.\n"
    "\n"
-   "Communications with these scientists have been re-established, and after investigation by the computer mega-corp Optic Fiber Maxim-Danil, they have been found to be no more than a red mist floating in space.\n"
+   "After an arduous investigative scan, hardware mega-corporation Optic Fiber Maxim-Danil discovers the missing research facility in uncharted space and opens a communications link.\n"
    "\n"
-   "The planetary system's central star had become a hole of darkness, emitting massive amounts of unknown magical energy.\n"
+   "On the other end of the line, the only thing visible was a bloody red pulp floating in open space. The system's star soon collapsed into a black hole, sucking all matter into it and emitting a new, dark energy.\n"
    "\n"
-   "A hole which has begun spitting out demons.\n"
+   "The singularity beckons all to come to it,\n"
+   "and the investigative souls flock;\n"
    "\n"
-   "A portal to Hell itself.\n"
+   "The outcasts, to live again. The missioners, their tasks at hand. A lonesome end, perhaps, awaits all of them. The dark energy sought to be siphoned leads through a dimension of hate--built of demons.\n"
    "\n"
-   "May those who attempt to stop it have Godspeed, or Lithium shall forever rain from the skies.";
+   "\n"
+   "Live on, Unity, cast away your zeal,\n"
+   "see the path through peace towards death,\n"
+   "or Lithium will forever rain in you.";
 "LITH_CHECK" =
    "Eng";
 "LITH_TIME_FMT_LONG" =
@@ -6636,31 +6668,31 @@
 "OB_DEFAULT" =
    "";
 "OB_BABY" =
-   "%o got a face full of plasma. Toasty!";
+   "%o got a face full of plasma.";
 "OB_BARON" =
-   "Don't come back here Baron, %g'll be long gone.";
+   "%o got scorched by a baryon. Baron.";
 "OB_BARONHIT" =
-   "Incredible, it seems like %g got in a fist-fight with a projectile spammer!";
+   "Incredible, %g dodged all those projectiles!";
 "OB_CACO" =
-   "%o likes caco.";
+   "%o saw the flashing lights and walked towards them.";
 "OB_CACOHIT" =
-   "%o tried to pet the caco. Sorry it didn't work out for you, bud.";
+   "%o LIKES CACO.";
 "OB_CHAINGUY" =
-   "%o danced the chaingun cha-cha. And %r pretty good at it!";
+   "%o danced the chaingun cha-cha.";
 "OB_CYBORG" =
-   "Ouch, that rocket really didn't agree with %h at all.";
+   "The cyber-demon's rocket didn't agree with %o.";
 "OB_DEMONHIT" =
-   "%o didn't dodge, like, 5 inches to the back. Sucks for %h!";
+   "%o didn't dodge. Sucks for %h!";
 "OB_FATSO" =
-   "%o isn't the best at dodging those slow projectiles.";
+   "%o got immolated by extremely slow fire.";
 "OB_IMP" =
-   "Target priority isn't %p specialty, really.";
+   "Imp fire in aisle %o!";
 "OB_IMPHIT" =
-   "To be honest, there's not much recovery from those claws, %o.";
+   "%o couldn't get away from the imp claws.";
 "OB_KNIGHT" =
-   "%o is great at dodging, walking %hself right into that projectile spear.";
+   "%o was decimated by knightly fervor.";
 "OB_KNIGHTHIT" =
-   "Oooh! Wait, do you ever think about how the knights in Destiny are the exact same as the ones in Doom? Weird.";
+   "%o got into a fist fight with a knight.";
 "OB_SHOTGUY" =
    "%o got %p face filled with delicious lead.";
 "OB_SKULL" =
@@ -6670,9 +6702,9 @@
 "OB_UNDEAD" =
    "%o loves the taste of homing rockets.";
 "OB_UNDEADHIT" =
-   "It seems like %r really enjoying that punch sound.";
+   "%o's dead. It seems like %h really enjoyed that punch sound.";
 "OB_VILE" =
-   "%o had %p ass burned up. Oh, %r crispy!";
+   "%o got burned.";
 "OB_ZOMBIE" =
    "%o got plinked to death.";
 "LITH_OB_S_Explosion" =
@@ -7061,7 +7093,7 @@
 "LITH_BossWarnJem" =
    "[WARNING]\n"
    "DEMONIC ENERGY LEVELS IN AREA RISING ERRATICALLY\n"
-   "IMPLEMENT DIRECTIVE 90 ON TARGET";
+   "IMPLEMENT DIRECTIVE 90 ON TARGET ENEMY";
 "LITH_BossWarnFulk" =
    "<Warning> :: High demonic energy level in area.\n"
    "Seek and remove source [LIFEFORM 96a.]";
@@ -9535,7 +9567,7 @@
 "LITH_MOVE" =
    "動く";
 "LITH_NOTE_FMT" =
-   "\cm%iつのノート";
+   "{}つのノート";
 "LITH_OPEN" =
    "開ける";
 "LITH_REQUIRED" =
@@ -9780,20 +9812,6 @@
    "得たｂｒｏｕｚｏｕｆ";
 "LITH_STAT_TrueMail" =
    "実際受信したメール";
-"LITH_ATTR_HELP_ACC" =
-   "攻撃力";
-"LITH_ATTR_HELP_DEF" =
-   "防御力";
-"LITH_ATTR_HELP_STR" =
-   "最大ＨＰ";
-"LITH_ATTR_HELP_VIT" =
-   "回復効率";
-"LITH_ATTR_HELP_STM" =
-   "最大再生ＨＰ";
-"LITH_ATTR_HELP_LUK" =
-   "スコア増加運";
-"LITH_ATTR_HELP_RGE" =
-   "反撃攻撃力";
 "LITH_OPENER" =
    "１６２６, ニューエラ\n"
    "\n"

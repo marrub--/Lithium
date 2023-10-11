@@ -25,7 +25,7 @@
 == \#FREE       | Free
 == \#LEFT       | Left
 == \#MOVE       | Move
-== \#NOTE_FMT   | \cmNote %i
+== \#NOTE_FMT   | Note {}
 == \#OPEN       | Open
 == \#REQUIRED   | Required
 == \#RIGHT      | Right
@@ -241,21 +241,48 @@ ZOZOKR \cn\u{E100}\u{E103}\u{E101}\u{E101}
 == \#STAT_TrueMail   | Mail truly received
 
 ## Attributes ════════════════════════════════════════════════════════════════╕
-== \#ATTR_HELP_ACC | Weapon damage
-== \#ATTR_HELP_DEF | Damage resistance
-== \#ATTR_HELP_STR | Health capacity
-== \#ATTR_HELP_VIT | Health item efficiency
+%% \#ATTR_HELP_ACC
+\cyBuffs most damage dealt\c-
+Damage multiplier: \ci{}\c-x
+%% \#ATTR_HELP_DEF
+\cyResists damage taken\c-
+Damage resistance: \cn{}\c-%
+%% \#ATTR_HELP_STR
+\cyIncreases health capacity\c-
+Health capacity: +\cg{}\c-
+%% \#ATTR_HELP_VIT
+\cyIncreases health item efficiency\c-
+Health multiplier: \cd{}\c-x
 == \#ATTR_HELP_POT | $$\#ATTR_HELP_VIT
-== \#ATTR_HELP_STM | Health regeneration maximum
+%% \#ATTR_HELP_STM
+\cyIncresases maximum health regeneration\c-
+Regenerates: up to \cg{}\c- health every \cd{}\c- s
 == \#ATTR_HELP_REP | $$\#ATTR_HELP_STM
 == \#ATTR_HELP_REG | $$\#ATTR_HELP_STM
-== \#ATTR_HELP_LUK | Score gained
-== \#ATTR_HELP_RGE | Damage buff when hit
-== \#ATTR_HELP_CON | Damage buff when gaining mana
-== \#ATTR_HELP_ADR | Damage resistance when gaining meter
-== \#ATTR_HELP_AGI | Speed and damage resistance when dodging
-== \#ATTR_HELP_RSH | Damage buff when gaining health
-== \#ATTR_HELP_REF | Movement speed when hit
-== \#ATTR_HELP_MNA | Chance to not get damaged
+%% \#ATTR_HELP_LUK
+\cyIncreases score gained\c-
+Chance of up to \ck{}\c-x score when gained
+%% \#ATTR_HELP_RGE
+\cyAdds damage buff when hit\c-
+Damage multiplier: \ci{}\c-x per 1 HP lost
+Decays 2% every 35th second
+%% \#ATTR_HELP_CON
+\cyAdds damage buff when gaining mana\c-
+Damage multiplier: \ci{}\c-x per 1 MP gained
+Decays 3% every 35th second
+%% \#ATTR_HELP_ADR
+\cyAdds damage resistance when gaining meter\c-
+%% \#ATTR_HELP_AGI
+\cyAdds movement speed and damage resistance when dodging\c-
+%% \#ATTR_HELP_RSH
+\cyAdds damage buff when gaining health\c-
+%% \#ATTR_HELP_REF
+\cyIncreases speed of sub-weapon charge,
+and also adds movement speed when hit\c-
+Sub-charge: \ch{}\c- s (changes at map start)
+Speed multiplier: \ci{}\c-% per 1 HP lost
+Decays 1% every 35th second
+%% \#ATTR_HELP_MNA
+\cyAdds chance to not get damaged\c-
 
 ## EOF

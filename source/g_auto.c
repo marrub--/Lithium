@@ -72,10 +72,16 @@ void G_Auto(struct gui_state *g, gid_t id, i32 x_, i32 y_, i32 w_, i32 h_, bool 
    #endif
 }
 
-void G_UpdateState(struct gui_state *g) {
+void G_Begin(struct gui_state *g, i32 w, i32 h) {
+   fastmemcpy(&g->old, &g->cur, sizeof(g->old));
+   if(!w) w = 320;
+   if(!h) h = 200;
+   g->hot     = 0;
+   g->clip    = -1;
+   g->tooltip = snil;
+   SetSize(g->w = w, g->h = h);
    bool inverted = CVarGetI(sc_invertmouse);
    k32  curspeed = CVarGetK(sc_gui_curspeed) * 800.0k;
-   g->old = g->cur;
                 g->cx -= pl.yawv   * curspeed * (g->w / (k32)g->h);
    if(inverted) g->cy += pl.pitchv * curspeed;
    else         g->cy -= pl.pitchv * curspeed;
@@ -90,17 +96,6 @@ void G_UpdateState(struct gui_state *g) {
    } else if(g->slidecount) {
       g->slidetime++;
    }
-}
-
-void G_Begin(struct gui_state *g, i32 w, i32 h) {
-   if(!w) w = 320;
-   if(!h) h = 200;
-
-   g->hot     = 0;
-   g->clip    = -1;
-   g->tooltip = snil;
-
-   SetSize(g->w = w, g->h = h);
 }
 
 void G_End(struct gui_state *g, i32 curs) {

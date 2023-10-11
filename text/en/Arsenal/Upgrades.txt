@@ -135,8 +135,22 @@ neighbors.
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_StealthSys | Stealth System
 @@ \#UPGRADE_EFFEC_StealthSys
-Makes you gradually fade out when still, giving you partial invisibility from
-enemies, and generally harder to aim at.
+Makes you gradually fade out when still. Gives you partial invisibility from
+enemies, making you harder to aim at.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
+== \#UPGRADE_TITLE_Lightspark | Light-spark
+@@ \#UPGRADE_EFFEC_Lightspark
+Allows you to press the flashlight key to throw a light-spark.
+
+A throwable, sentient light. Aims where you aim. Follows you when you
+recall it, and shuts off on a third activation.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
+== \#UPGRADE_TITLE_Subweapons | Sub-wep Driver
+@@ \#UPGRADE_EFFEC_Subweapons
+Allows you to use sub-weapons. These can be activated by pressing the
+alternate fire button.
 
 ## Weapons ═══════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Pistol_A | Auto Pistol

@@ -97,6 +97,7 @@ struct upgr_data_StealthSys {
 
 struct upgr_data_Subweapons {
    i32 charge;
+   i32 charge_max;
    i32 uptics;
    i32 shots;
    i32 which;

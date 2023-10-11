@@ -8,14 +8,18 @@
 
 class Lith_SubGrn : Lith_RifleGrenade {
    default {
+      ExplosionDamage 100;
+      ExplosionRadius 200;
       BounceType "None";
       Damage 25;
    }
    states {
    Death:
-      TNT1 A 0 A_Explode(100, 200, 0);
-      TNT1 A 0 Lith_A_ExplodeSound;
-      TNT1 A 0 Lith_A_DoExplosion;
+      TNT1 A 0 {
+         A_Explode(flags: 0);
+         Lith_A_ExplodeSound();
+         return Lith_A_DoExplosion();
+      }
       stop;
    }
 }
@@ -61,9 +65,11 @@ class Lith_SubGrnPuff : Actor {
 class Lith_SubGrn2 : Lith_SubGrn {
    states {
    Death:
-      TNT1 A 0 A_Explode(100, 200, 0, nails: 30, nailDamage: 5, puffType: 'Lith_SubGrnPuff');
-      TNT1 A 0 Lith_A_ExplodeSound;
-      TNT1 A 0 Lith_A_DoExplosion;
+      TNT1 A 0 {
+         A_Explode(flags: 0, nails: 30, nailDamage: 5, puffType: 'Lith_SubGrnPuff');
+         Lith_A_ExplodeSound();
+         return Lith_A_DoExplosion();
+      }
       stop;
    }
 }
@@ -266,21 +272,8 @@ override bool lith_checkSprint() {
    return owner.getPlayerInput(INPUT_BUTTONS) & BT_SPEED != 0;
 }
 override double, double lith_getFirePattern() {
-   let fp = m_firePattern;
-   m_firePattern = (m_firePattern + 1) % 10;
-   switch(fp) {
-   case 0: return   -45, 0;
-   case 1: return   -36, 0;
-   case 2: return   -27, 0;
-   case 3: return   -18, 0;
-   case 4: return    -9, 0;
-   case 5: return     0, 0;
-   case 6: return 11.25, 0;
-   case 7: return  22.5, 0;
-   case 8: return 33.75, 0;
-   case 9: return    45, 0;
-   }
-   return 0, 0;
+   m_firePattern %= 20;
+   return 90.0 / 19.0 * m_firePattern++ - 45.0, 0;
 }
 override void tick() {
    super.tick();
@@ -357,38 +350,22 @@ _SprintDone:
    TNT1 A 0 resolveState("Select");
    stop;
 _SubGun:
+   TNT1 A 0 a_jumpIf(Lith_UTIL.pData(_pdt_upgrade, UPGR_SubGun_A), "_SubGun2");
+   ARGN B 1 bright lith_subGunPreFire;
+   ARGN A 1 bright lith_subGunFire;
    ARGN B 1 bright lith_subGunPreFire;
    ARGN A 1 bright lith_subGunFire;
    TNT1 A 1;
    ARGN B 1 bright lith_subGunPreFire;
    ARGN A 1 bright lith_subGunFire;
-   TNT1 A 1;
    ARGN B 1 bright lith_subGunPreFire;
    ARGN A 1 bright lith_subGunFire;
    TNT1 A 1;
    ARGN B 1 bright lith_subGunPreFire;
-   ARGN A 1 bright lith_subGunFire;
-   TNT1 A 1;
-   ARGN B 1 bright lith_subGunPreFire;
-   ARGN A 1 bright lith_subGunFire;
-   TNT1 A 0 a_jumpIf(!Lith_UTIL.pData(_pdt_upgrade, UPGR_SubGun_A), "_SubGun2");
-   TNT1 A 1;
-   ARGN B 1 bright lith_subGunPreFire;
-   ARGN A 1 bright lith_subGunFire;
-   TNT1 A 1;
-   ARGN B 1 bright lith_subGunPreFire;
-   ARGN A 1 bright lith_subGunFire;
-   TNT1 A 1;
-   ARGN B 1 bright lith_subGunPreFire;
-   ARGN A 1 bright lith_subGunFire;
-   TNT1 A 1;
-   ARGN B 1 bright lith_subGunPreFire;
-   ARGN A 1 bright lith_subGunFire;
-   TNT1 A 1;
-   ARGN B 1 bright lith_subGunPreFire;
-   ARGN A 1 bright lith_subGunFire;
+   TNT1 A 7;
+   stop;
 _SubGun2:
-   TNT1 A 4;
+   ARGN AAAAAAAAAAAAAAAAAAAA 1 bright lith_subGunFire;
    stop;
 _SubGrn:
    AGRN A 1 bright lith_subGrnFire;
