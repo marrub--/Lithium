@@ -440,7 +440,7 @@ action(Weapon) void Lith_A_Casing(class<Lith_CasingBase> cas, double px, double 
 
 action(Weapon) void Lith_FixedBullets(int numBullets, int damage, int flags = 0, class<Actor> puffType = "Lith_BulletPuff", double tracerX = 0, double range = 8192) {
    for(int i = 0; i < numBullets; i++) {
-      double p, y; [p, y] = invoker.Lith_GetFirePattern();
+      let [p, y] = invoker.Lith_GetFirePattern();
       Lith_FireBullets(p, y, -1, damage, FBF_EXPLICITANGLE | FBF_NORANDOM | flags, puffType, tracerX, range);
    }
 }

@@ -103,7 +103,7 @@ Reload:
    700E C 1 offset(1, 32) Lith_A_ReloadBobUp(0.5);
    700E C 1 offset(3, 32) Lith_A_ReloadBobUp(0.5);
    700E C 2 offset(4, 33) Lith_A_ReloadBobUp(0.5);
-   700E C 5 offset(5, 34) Lith_A_ReloadBobUp(0.5);
+   700E C 4 offset(5, 34) Lith_A_ReloadBobUp(0.5);
    700E C 2 offset(2, 38);
    700E D 1 offset(3, 32) A_StartSound("weapons/700e/out", lch_reload2);
    700E D 1 offset(1, 32);
@@ -117,7 +117,7 @@ Reload:
          Lith_A_Casing("Lith_Cas700e", 10, frandom(1,2), 32, frandom(1,2), frandom(1,3), 0);
    }
    700E F 1 offset(-9, 68) lith_a_setInterpolation(false);
-   TNT1 AAAA 6 {
+   TNT1 AAAA 4 {
       if(!invoker.m_Fired) {
          return ResolveState("ReloadDone");
       } else {

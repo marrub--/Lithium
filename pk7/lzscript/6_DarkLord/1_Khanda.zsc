@@ -55,7 +55,6 @@ default {
    Weapon.SlotPriority 0.9;
    Weapon.UpSound "weapons/khanda/draw";
    Inventory.AltHudIcon "KAMLZ0";
-   +Weapon.NoAutoFire
 }
 bool m_power;
 override void markPrecacheSounds() {
@@ -66,6 +65,9 @@ override void markPrecacheSounds() {
 override void tick() {
    super.tick();
    m_power = Lith_StatFx.getInPool('Lith_StatSkillPower');
+}
+int lith_damageMul() {
+   return (m_power ? 50 : 1) * (countInv("PowerStrength") ? 3 : 1);
 }
 states(Weapon) {
 PowerOverlay:
@@ -119,18 +121,18 @@ Fire:
 Hold:
    KHAN D 1 offset(-103, 143) a_startSound("weapons/khanda/swing", lch_weapon);
    #### # 0 lith_a_setInterpolation(true);
-   KHAN E 1 offset(163, 120) lith_a_fireMelee((invoker.m_power ? 50 : 1) * (countInv("PowerStrength") ? 40 : 20), 128, _mlf_pull_in|_mlf_no_turn, "Lith_KhandaPuff");
+   KHAN E 1 offset(163, 120) lith_a_fireMelee(invoker.lith_damageMul() * 40, 128, _mlf_pull_in|_mlf_no_turn, "Lith_KhandaPuff");
    #### # 0 lith_a_setInterpolation(false);
    KHAN E 1 offset(259, 175);
-   TNT1 A 3 a_weaponOffset(0, 32);
+   TNT1 A 5 a_weaponOffset(0, 32);
    KHAN F 1 offset(148, 170);
    #### # 0 lith_a_setInterpolation(true);
    KHAN G 1 offset(80, 98) a_startSound("weapons/khanda/swing", lch_weapon2);
-   KHAN H 1 offset(-25, 40) lith_a_fireMelee((invoker.m_power ? 50 : 1) * (countInv("PowerStrength") ? 60 : 30), 128, _mlf_pull_in|_mlf_no_turn|_mlf_damage_stepup, "Lith_KhandaPuff");
+   KHAN H 1 offset(-25, 40) lith_a_fireMelee(invoker.lith_damageMul() * 50, 128, _mlf_pull_in|_mlf_no_turn|_mlf_damage_stepup, "Lith_KhandaPuff");
    KHAN H 1 offset(-130, 12);
    #### # 0 lith_a_setInterpolation(false);
    KHAN I 1 offset(-124, -21);
-   TNT1 A 3 a_weaponOffset(0, 32);
+   TNT1 A 5 a_weaponOffset(0, 32);
    TNT1 A 0 a_reFire;
    KHAN A 3 offset(-126, 71);
    #### # 0 lith_a_setInterpolation(true);

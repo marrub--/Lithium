@@ -173,6 +173,10 @@ stkoff k32 attr_refbuff(void) {
    return pl.attr.attrs[at_spc] / 150.0k;
 }
 
+stkoff i32 attr_refchargebuff(void) {
+   return clampi(pl.attr.attrs[at_spc] >> 1, 0, 100);
+}
+
 static struct {
    mem_size_t     n;
    struct fmt_arg fmt[4];
@@ -246,7 +250,7 @@ void attr_gui(struct gui_state *g, i32 yofs) {
    case pcl_darklord:
       args[at_spc].n            = 2;
       args[at_spc].fmt[0].tag   = _fmt_k32;
-      args[at_spc].fmt[0].val.k = pl.upgrdata.subweapons.charge_max / 35.0k;
+      args[at_spc].fmt[0].val.k = attr_refchargebuff() / 35.0k;
       args[at_spc].fmt[1].tag   = _fmt_k32;
       args[at_spc].fmt[1].val.k = attr_refbuff();
       break;

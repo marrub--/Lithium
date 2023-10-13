@@ -188,7 +188,7 @@ static int LA(int wrapWidth, string s, string fnt) {
 
 static int LB(string t) {
    let tx = getTex(t);
-   int sx, sy; [sx, sy] = TexMan.GetSize(tx);
+   let [sx, sy] = TexMan.GetSize(tx);
    return (sx & 0xFFFF) | ((sy & 0xFFFF) << 16);
 }
 
@@ -269,7 +269,7 @@ static void LS(string tex, int xx, int yy, int flags = 0, float anum = 0.0, colo
       d.C = cr;
    }
    d.Tex = getTex(tex);
-   int sx, sy; [sx, sy] = TexMan.getSize(d.Tex);
+   let [sx, sy] = TexMan.getSize(d.Tex);
    if(flags & _u_clip) {
       d.u = (srcpos  & 0xFFFF0000) >> 16;
       d.v =  srcpos  & 0x0000FFFF;
@@ -435,12 +435,13 @@ void tickDraw() {
 }
 
 ui static void setClip(double px, double py, double sx, double sy, vector2 vsz, uint vfl = 0) {
-   vector2 p, s; [p, s] = anyPosScale((px, py), (sx, sy), vsz, vfl);
+   let [p, s] = anyPosScale((px, py), (sx, sy), vsz, vfl);
    Screen.setClipRect(int(p.x), int(p.y), int(s.x), int(s.y));
 }
 
 ui static void drawRect(double px, double py, double sx, double sy, color cr, vector2 vsz, uint vfl = 0, int style = STYLE_TRANSLUCENT) {
    vector2 p, s; [p, s] = anyPosScale((px, py), (sx, sy), vsz, vfl);
+   let [p, s] = anyPosScale((px, py), (sx, sy), vsz, vfl);
    Screen.dim(cr, cr.a/255.0, int(p.x), int(p.y), int(s.x), int(s.y), style);
 }
 
@@ -487,8 +488,7 @@ clearScope static vector2 virtScale(vector2 s, vector2 vsz, uint vfl = 0) {
 }
 
 clearScope static vector2, vector2 virtPosScale(vector2 p, vector2 s, vector2 vsz, uint vfl = 0) {
-   vector2 rp, rs;
-   [rp, rs] = Screen.virtualToRealCoords(p, s, vsz, vBottom: vfl & _vfl_vBottom, handleAspect: !(vfl & _vfl_keepRatio));
+   let [rp, rs] = Screen.virtualToRealCoords(p, s, vsz, vBottom: vfl & _vfl_vBottom, handleAspect: !(vfl & _vfl_keepRatio));
    return rp, rs;
 }
 

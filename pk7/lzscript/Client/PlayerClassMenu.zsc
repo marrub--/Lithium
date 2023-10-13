@@ -15,7 +15,7 @@ class ListMenuItemLith_PlayerDisplay : ListMenuItemPlayerDisplay {
       if(mMode == 0 && updatePlayerClass()) {
          let pcl = getDefaultByType((class<PlayerPawn>)(mPlayerClass.type));
          let por = Lith_URANUS.getTex(pcl.portrait);
-         int porx, pory; [porx, pory] = TexMan.getSize(por);
+         let [porx, pory] = TexMan.getSize(por);
          int scrw  = Screen.getWidth();
          int scrh  = Screen.getHeight();
          let scale = double(scrh) / pory;

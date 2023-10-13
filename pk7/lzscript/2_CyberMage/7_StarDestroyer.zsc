@@ -126,7 +126,7 @@ class Lith_StarProjectile : Actor {
          double x_45 = Scale.X * 45;
          A_Explode(40, int(8 + 45 * Scale.X), xf_nosplash);
          for(int i = 0; i < 5; i++) {
-            float y, p; [y, p] = Lith_UTIL.circleSpread(x_45, x_45);
+            let [y, p] = Lith_UTIL.circleSpread(x_45, x_45);
             A_SpawnProjectile("Lith_StarShrapnel", y, p, 0, CMF_TRACKOWNER|CMF_AIMDIRECTION|CMF_BADPITCH);
          }
       }
@@ -136,7 +136,7 @@ class Lith_StarProjectile : Actor {
          double x_45 = Scale.X * 45;
          m_HomingShrapnelTimer = 0;
          for(int i = 0; i < 2; i++) {
-            float y, p; [y, p] = Lith_UTIL.circleSpread(x_45, x_45);
+            let [y, p] = Lith_UTIL.circleSpread(x_45, x_45);
             A_SpawnProjectile("Lith_StarShrapnelHoming", y, p, 0, CMF_TRACKOWNER|CMF_AIMDIRECTION|CMF_BADPITCH);
          }
       }

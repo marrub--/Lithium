@@ -21,6 +21,7 @@ enum {
 };
 
 void Upgr_Subweapons_Update(void) {
+   udata.charge_max = 120 - attr_refchargebuff();
    if(udata.uptics) {
       --udata.uptics;
    }
@@ -77,7 +78,6 @@ void Upgr_Subweapons_Render(void) {
 
 void Upgr_Subweapons_Enter(struct ugprade *upgr) {
    udata.shots = 2;
-   udata.charge_max = 120 - clampi(pl.attr.attrs[at_spc] >> 1, 0, 100);
    #ifndef NDEBUG
    if(dbgflags(dbgf_items)) {
       udata.have |= UINT32_MAX & ~dst_bit(_subw_fist);

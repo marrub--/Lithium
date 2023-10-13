@@ -264,7 +264,7 @@ void setSkyClouds(textureId tex, int style = STYLE_Normal, color cr = 0xFFFFFFFF
    m_skyClouds      = tex;
    m_skyCloudsColor = cr;
    m_skyCloudsStyle = style;
-   int w, h; [w, h] = TexMan.getSize(m_skyClouds);
+   let [w, h] = TexMan.getSize(m_skyClouds);
    int scale = canvas_h / h;
    w *= scale;
    h *= scale;

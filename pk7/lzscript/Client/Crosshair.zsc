@@ -59,9 +59,7 @@ ui void drawCrosshair(RenderEvent evt) {
    double yaw   = evt.viewAngle + Lith_UTIL.pData(_pdt_addy)/FIX;
    double pitch = evt.viewPitch + Lith_UTIL.pData(_pdt_addp)/FIX;
    let loc = Lith_UTIL.traceFromPos(pl.curSector, viewPos, yaw, pitch, 2048.0, ignore: pl).hitPos;
-   vector2 xh;
-   bool seen;
-   [xh, seen] = projectF(loc);
+   let [xh, seen] = projectF(loc);
    xh /= m_xhairScale;
    let hudSize = (320, 240) / m_xhairScale;
    if(!seen) {
@@ -81,8 +79,8 @@ ui void drawCrosshair(RenderEvent evt) {
       textureId xhb = xhairB();
       textureId xhw = xhairW();
       color     c   = xhairColor();
-      int bsx, bsy; [bsx, bsy] = TexMan.getSize(xhb);
-      int wsx, wsy; [wsx, wsy] = TexMan.getSize(xhw);
+      let [bsx, bsy] = TexMan.getSize(xhb);
+      let [wsx, wsy] = TexMan.getSize(xhw);
       double xhx = xh.x - bsx/2.0;
       double xhy = xh.y - bsy/2.0;
       Screen.DrawTexture(xhb, false, xhx, xhy,
@@ -100,7 +98,7 @@ ui void drawCrosshair(RenderEvent evt) {
       if(m_xhairEnableJuicer) {
          textureId xhl = getTex(":XHairs:L");
          textureId xhr = getTex(":XHairs:R");
-         int esx, esy; [esx, esy] = TexMan.GetSize(xhl);
+         let [esx, esy] = TexMan.GetSize(xhl);
          xhx = xh.x - esx/2.0;
          xhy = xh.y - esy/2.0;
          double xp = Lith_UTIL.pData(_pdt_recoilp)/FIX * 500.0 + 10.0;

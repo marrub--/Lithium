@@ -6601,7 +6601,7 @@
 "LITH_ATTR_HELP_REF" =
    "\cyIncreases speed of sub-weapon charge,\n"
    "and also adds movement speed when hit\c-\n"
-   "Sub-charge: \ch{}\c- s (changes at map start)\n"
+   "Sub-charge: -\ch{}\c- s\n"
    "Speed multiplier: \ci{}\c-% per 1 HP lost\n"
    "Decays 1% every 35th second";
 "LITH_ATTR_HELP_MNA" =

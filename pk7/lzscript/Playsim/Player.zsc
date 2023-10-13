@@ -16,7 +16,7 @@ static clearScope double GetAttackHeight(Actor mo) {
 }
 
 static ui void Project(Actor mo, double x_, double y_, double z_, int px, int py, int pv) {
-   int x, y; bool v; [x, y, v] = Lith_URANUS.instance().project((x_, y_, z_));
+   let [x, y, v] = Lith_URANUS.instance().project((x_, y_, z_));
    if(px) ACS_ExecuteWithResult(lsc_setptri32,  px, x);
    if(py) ACS_ExecuteWithResult(lsc_setptri32,  py, y);
    if(pv) ACS_ExecuteWithResult(lsc_setptrbool, pv, v);

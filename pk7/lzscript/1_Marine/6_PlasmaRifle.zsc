@@ -79,7 +79,7 @@ action(Weapon) void Lith_A_FirePlasma()
    soundAlert(invoker.owner);
    A_StartSound("weapons/plasma/fire", lch_weapon);
    for(int i = 0; i < 4; i++) {
-      float y, p; [y, p] = Lith_UTIL.circleSpread(7, 3);
+      let [y, p] = Lith_UTIL.circleSpread(7, 3);
       A_FireProjectile("Lith_PlasmaBolt", y, false, 0, -9, 0, -p);
    }
    A_FireProjectile("Lith_LightProjectileGreenShort", 0);

@@ -129,8 +129,6 @@ default {
    Weapon.SlotNumber 1;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/kampilan/draw";
-
-   +Weapon.NoAutoFire
 }
 
 int m_cooldownTics;

@@ -78,8 +78,7 @@ override void drawer() {
 
 override bool mouseEvent(int type, int x, int y) {
    if(mMessageMode != 1) {
-      vector2 sp, ss;
-      [sp, ss] = Lith_URANUS.cleanPosScale((0, mMouseY), (0, textFont.getHeight()));
+      let [sp, ss] = Lith_URANUS.cleanPosScale((0, mMouseY), (0, textFont.getHeight()));
       if(y >= sp.y && y < sp.y + ss.y * 2) {
          messageSelection = y >= sp.y + ss.y;
       } else {

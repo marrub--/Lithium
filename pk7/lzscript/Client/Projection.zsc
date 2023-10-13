@@ -54,9 +54,7 @@ clearScope vector2, bool projectF(vector3 v) {
 }
 
 clearScope int, int, bool project(vector3 v) {
-   vector2 scrn;
-   bool vis;
-   [scrn, vis] = projectF(v);
+   let [scrn, vis] = projectF(v);
    return int(scrn.x), int(scrn.y), vis;
 }
 

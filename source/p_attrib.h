@@ -34,7 +34,7 @@ enum {
    atsys_max,
 };
 
-enum {_base_exp = 10000};
+enum {_base_exp = 4000};
 
 struct player_attributes {
    i32 expprev, exp, expnext;
@@ -57,6 +57,7 @@ stkcall k32 attr_lukbuff(void);
 stkcall k32 attr_rgebuff(void);
 stkcall k32 attr_conbuff(void);
 stkcall k32 attr_refbuff(void);
+stkcall i32 attr_refchargebuff(void);
 #endif
 
 #endif

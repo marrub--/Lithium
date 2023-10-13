@@ -122,8 +122,7 @@ ui void drawNearByStuff(RenderEvent evt) {
          ((m_showFlags & SHOWF_ITEMS)    && Inventory(mo) && mo.bSpecial ||
           (m_showFlags & SHOWF_INTERACT) && mo.bUseSpecial))
       {
-         int px, py; bool seen;
-         [px, py, seen] = project(mo.pos);
+         let [px, py, seen] = project(mo.pos);
          if(seen) {
             string tag   = mo.getTag();
             float  dist  = mo.distance3D(evt.camera);
@@ -139,7 +138,7 @@ ui void drawNearByStuff(RenderEvent evt) {
 
 ui void drawInventory(RenderEvent evt) {
    static const string keyClasses[] = {
-      "BlueCard",  "RedCard",  "YellowCard",
+      "BlueCard", "RedCard", "YellowCard",
       "BlueSkull", "RedSkull", "YellowSkull",
       "ChexBlueCard", "ChexRedCard", "ChexYellowCard",
       "KeyBlue", "KeyGreen", "KeyYellow"
@@ -161,11 +160,11 @@ ui void drawInventory(RenderEvent evt) {
    string inv_text = "";
    int y = 0;
    if(m_showFlags & SHOWF_AMMO) {
-      int blt, cblt; [blt, cblt] = ammoAmt(mo, 'Lith_BulletAmmo');
-      int shl, cshl; [shl, cshl] = ammoAmt(mo, 'Lith_ShellAmmo');
-      int rkt, crkt; [rkt, crkt] = ammoAmt(mo, 'Lith_RocketAmmo');
-      int nrg, cnrg; [nrg, cnrg] = ammoAmt(mo, 'Lith_PlasmaAmmo');
-      int drk, cdrk; [drk, cdrk] = ammoAmt(mo, 'Lith_CannonAmmo');
+      let [blt, cblt] = ammoAmt(mo, 'Lith_BulletAmmo');
+      let [shl, cshl] = ammoAmt(mo, 'Lith_ShellAmmo');
+      let [rkt, crkt] = ammoAmt(mo, 'Lith_RocketAmmo');
+      let [nrg, cnrg] = ammoAmt(mo, 'Lith_PlasmaAmmo');
+      let [drk, cdrk] = ammoAmt(mo, 'Lith_CannonAmmo');
       inv_text.appendFormat(
          " \c%c%i\c-\n \c%c%i\c-\n \c%c%i\c-\n \c%c%i\c-\n \c%c%i\c-\n",
          cblt, blt,

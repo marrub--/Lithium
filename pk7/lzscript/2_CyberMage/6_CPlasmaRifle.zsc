@@ -82,7 +82,7 @@ action(Weapon) void Lith_A_FireCPlasma()
    lith_takeAmmo(30);
    A_StartSound("weapons/plasma/fire", lch_weapon);
    for(int i = 0; i < 5; i++) {
-      float y, p; [y, p] = Lith_UTIL.circleSpread(5, 3);
+      let [y, p] = Lith_UTIL.circleSpread(5, 3);
       A_FireProjectile("Lith_PlasmaBolt", y, false, 0, -9, 0, -p);
    }
 }

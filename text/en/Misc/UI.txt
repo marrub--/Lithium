@@ -279,7 +279,7 @@ Decays 3% every 35th second
 %% \#ATTR_HELP_REF
 \cyIncreases speed of sub-weapon charge,
 and also adds movement speed when hit\c-
-Sub-charge: \ch{}\c- s (changes at map start)
+Sub-charge: -\ch{}\c- s
 Speed multiplier: \ci{}\c-% per 1 HP lost
 Decays 1% every 35th second
 %% \#ATTR_HELP_MNA

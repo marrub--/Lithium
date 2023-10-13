@@ -85,10 +85,12 @@ class Lith_RemsShieldScreenFx : Actor {
       +WallSprite
    }
    override void tick() {
-      a_fadeOut();
-      if(target) {
+      if(vel.x || vel.y || vel.z) {
+         setOrigin(pos + vel, true);
+      } else if(target) {
          setOrigin(target.pos, true);
       }
+      a_fadeOut();
    }
    states {
    Spawn:
@@ -121,12 +123,16 @@ class Lith_RemsShieldScreen : Actor {
       super.postBeginPlay();
       m_tgtvec = target.vec3To(self);
       m_dist = 48;
+      scale.x *= randomPick(-1, 1);
    }
    override void tick() {
       super.tick();
       if(target) {
          warp(target, m_dist, 0, 0, angle, WARPF_NOCHECKPOSITION | WARPF_INTERPOLATE | WARPF_ABSOLUTEANGLE);
       }
+      let fx = lith_spawnFx();
+      fx.vel = (Lith_URANUS.uiRandom(-0.3,0.3),Lith_URANUS.uiRandom(-0.3,0.3),Lith_URANUS.uiRandom(-0.3,0.3));
+      fx.alpha = 0.3;
    }
    override int damageMobj(Actor inflictor, Actor source, int damage, name mod, int flags, double angle) {
       return 0;
@@ -156,10 +162,15 @@ class Lith_RemsShieldScreen : Actor {
       }
       if(anyHit) {
          a_startSound("weapons/rems/shieldshot", lch_weapon);
-         let fx = spawn('Lith_RemsShieldScreenFx', pos);
-         fx.angle  = angle;
-         fx.target = self;
+         lith_spawnFx();
       }
+   }
+   Actor lith_spawnFx() {
+      let fx = spawn('Lith_RemsShieldScreenFx', pos);
+      fx.angle  = angle;
+      fx.target = self;
+      fx.scale.x = scale.x;
+      return fx;
    }
    states {
    Spawn:

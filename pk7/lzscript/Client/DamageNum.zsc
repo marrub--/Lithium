@@ -175,7 +175,7 @@ ui void drawDmgNums(RenderEvent evt) {
 
       for(Lith_DamageNum dnum = start.m_next; dnum;) {
          vector3 origin = Lith_UTIL.vec3Lerp(dnum.m_lastOrigin, dnum.m_origin, evt.fracTic);
-         int x, y; bool seen; [x, y, seen] = project(origin);
+         let [x, y, seen] = project(origin);
 
          if(seen) {
             Font fnt;
