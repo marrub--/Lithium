@@ -6,7 +6,6 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-#include "lzscript/Playsim/Cyberspace.zsc"
 #include "lzscript/Playsim/Files.zsc"
 #include "lzscript/Playsim/Input.zsc"
 #include "lzscript/Playsim/Lightning.zsc"

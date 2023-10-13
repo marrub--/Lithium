@@ -74,10 +74,14 @@ void Upgr_JetBooster_Update(void) {
 }
 
 void Upgr_HeavyArmor_Activate(void) {
+   SetMass(0, 120);
+   SetGravity(0, 1.1k);
    set_bit(pl.upgrdata.subweapons.have, _subw_fist);
 }
 
 void Upgr_HeavyArmor_Deactivate(void) {
+   SetMass(0, 110);
+   SetGravity(0, 1.05k);
    dis_bit(pl.upgrdata.subweapons.have, _subw_fist);
 }
 

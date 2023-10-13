@@ -30,6 +30,28 @@ Lith_Evil {
    #1d0202 #655e5e 128 255
 }
 
+Lith_Bullet {
+   #203038 #4f6a77 0   63
+   #8ca7b5 #d5e8f3 64  191
+   #d5e8f3 #d5e8f3 192 255
+}
+Lith_Shell {
+   #2c061b #4c0721 0   127
+   #6d061b #8d2b33 128 255
+}
+Lith_Rocket {
+   #29051f #650e63 0   127
+   #7e17a1 #c661e8 128 255
+}
+Lith_Energy {
+   #074028 #15864d 0   127
+   #2acc6d #76ff84 128 255
+}
+Lith_DarkEnergy {
+   #040b0e #04040e 0   127
+   #0b040e #58355f 128 255
+}
+
 Lith_RRed {#000000 #f54f4c}
 Lith_RDOr {#000000 #f2754b}
 Lith_ROra {#000000 #f7a54d}

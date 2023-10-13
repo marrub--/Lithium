@@ -117,6 +117,7 @@ cvar_x(tic, player_scoresound, bool)
 #define SetSpawnHealth(tid, x)      SetPropI(tid, APROP_SpawnHealth,      x)
 #define SetSpecies(tid, x)          SetPropS(tid, APROP_Species,          x)
 #define SetViewHeight(tid, x)       SetPropK(tid, APROP_ViewHeight,       x)
+#define SetMass(tid, x)             SetPropI(tid, APROP_Mass,             x)
 
 #define Paused EDataI(_edt_paused)
 #define PausableTick() do ACS_Delay(1); while(Paused)

@@ -88,7 +88,9 @@ class Lith_FortuneProjectile : Actor {
    default {
       Height 1;
       Radius 1;
+      Species "Lith_Player";
       Projectile;
+      +DontHarmSpecies
       +NoClip
       -ActivateImpact
       -ActivatePCross
@@ -119,6 +121,8 @@ class Lith_FortuneProjectile : Actor {
 class Lith_FortuneSpark : Lith_ShockEffect {
    default {
       Projectile;
+      Species "Lith_Player";
+      +DontHarmSpecies
       +ForceXyBillboard
    }
 
@@ -177,7 +181,8 @@ action(Weapon) void Lith_A_FireFortune() {
 }
 
 action(Weapon) void lith_a_emitFortuneSpark() {
-   A_SpawnItemEx("Lith_FortuneSpark", flags: SXF_SETTARGET|SXF_NOCHECKPOSITION);
+   let mo = spawn("Lith_FortuneSpark", pos);
+   mo.target = self;
    A_FireProjectile("Lith_LightProjectileSkyShort", 0);
 }
 

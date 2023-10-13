@@ -32,8 +32,6 @@ double m_rainLerp;
 int m_iFrames;
 int m_shield;
 
-Lith_Cyberspace m_cs;
-
 bool m_onGround;
 bool m_wasFrozen;
 
@@ -137,9 +135,6 @@ void lith_preTick() {
    }
 
    tickFlashlight();
-
-   /* draw stuff if we're the camera */
-   if(m_cs) m_cs.lith_drawFrame();
 }
 
 void lith_postTick() {

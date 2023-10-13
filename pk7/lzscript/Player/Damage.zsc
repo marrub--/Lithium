@@ -8,64 +8,53 @@
 
 extend class Lith_Player;
 
-override int DamageMobj(Actor inflictor, Actor source, int damage, name mod, int flags, double angle) {
+override int damageMobj(Actor inflictor, Actor source, int damage, name mod, int flags, double angle) {
+   let sv = Lith_HERMES.instance();
+   sv.m_dmgWorld = !(inflictor || source);
+   sv.m_dmgType  = mod;
+   /* due to the fact that railguns and stuff won't get affected by
+    * this flag... */
+   if(source && source.bDontHarmSpecies &&
+      source.getSpecies() == 'Lith_Player')
+   {
+      damage = 0;
+   }
+   if(damage > 1) {
+      if(countInv("Lith_MegaProtection")) {
+         takeInventory("Lith_MegaProtection", damage / 2);
+         damage /= 2;
+      }
+      if(m_DmgFac > 0) damage = max(1, damage * (100 - m_DmgFac) / 100);
+   }
    if(Lith_StatFx.getInPool("Lith_StatShadowWalker") || m_iFrames) {
-      return 0;
+      damage = 0;
    } else if(m_shield && m_shield + health - damage > -spawnHealth() * 2) {
       if(!bInvulnerable && !(player.cheats & CF_GODMODE)) {
          m_shield = max(m_shield - damage, 0);
       }
-      return 0;
+      damage = 0;
    }
-
-   /* ÜBER KLUDGE (override behaviour for DONTHARMSPECIES) */
-   if(inflictor && inflictor.species == species && inflictor.bDONTHARMSPECIES && (!source || !source.bISMONSTER))
-      return 0;
-
-   /* set global damage info (ouch) */
-   let sv = Lith_HERMES.Instance();
-
-   sv.m_DmgWorld = !(inflictor || source);
-   sv.m_DmgType  = mod;
-
-   /* hack: remove the damage type for world stuff so obituaries are
-    *       easier to override
-    */
-   if(sv.m_DmgWorld || source == self) mod = 'None';
-
-   /* special protection */
-   CallACS("Lith_RA_Give", Lith_HERMES.nameToDT(mod));
-
-   if(damage > 1)
-   {
-      if(CountInv("Lith_MegaProtection"))
-      {
-         TakeInventory("Lith_MegaProtection", damage / 2);
-         damage /= 2;
-      }
-
-      if(m_DmgFac > 0) damage = max(1, damage * (100 - m_DmgFac) / 100);
-   }
-
-   return Super.DamageMobj(inflictor, source, damage, mod, flags, angle);
+   /* remove the damage type for world stuff so obituaries are easier
+    * to override */
+   if(sv.m_dmgWorld || source == self) mod = 'None';
+   if(damage > 1) callAcs("Lith_RA_Give", Lith_HERMES.nameToDT(mod));
+   return super.damageMobj(inflictor, source, damage, mod, flags, angle);
 }
 
-override void Die(Actor source, Actor inflictor, int dmgflags) {
+override void die(Actor source, Actor inflictor, int dmgflags) {
    target = source;
-   Super.Die(null, inflictor, dmgflags);
-
+   super.die(null, inflictor, dmgflags);
    let sv = Lith_HERMES.Instance();
    string ob;
-
    if(source == self) {
-      switch(sv.m_DmgType) {
+      switch(sv.m_dmgType) {
          case 'Shrapnel': ob = "LITH_OB_S_Explosion"; break;
          default:         ob = "(suicide)";           break;
       }
    } else if(source) {
-      ob = sv.m_DmgType == 'Melee' ? source.hitObituary : source.obituary;
+      ob = sv.m_dmgType == 'Melee' ? source.hitObituary : source.obituary;
    } else {
-      switch(sv.m_DmgType) {
+      switch(sv.m_dmgType) {
          case 'Falling':  ob = "(falling)";  break;
          case 'Crush':    ob = "(crush)";    break;
          case 'Exit':     ob = "(exit)";     break;
@@ -75,10 +64,8 @@ override void Die(Actor source, Actor inflictor, int dmgflags) {
          default:         ob = "(default)";  break;
       }
    }
-
-   sv.m_Obituary = Lith_HERMES.localize(ob);
-
-   CallACS("Lith_Obituary");
+   sv.m_obituary = Lith_HERMES.localize(ob);
+   callAcs("Lith_Obituary");
 }
 
 /* EOF */

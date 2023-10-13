@@ -43,9 +43,10 @@ resistances, and gain experience faster.
 
 - DAMAGE TYPES
 
-There are 8 damage types enemies can inflict: \cwBullet\c-,
-\ckElectric\c-, \cxFire\c-, \crFire Magic\c-, \czIce\c-, \ctMagic\c-,
-\csMelee\c-, and \cbShrapnel\c-.
+There are 8 damage types enemies can inflict:
+\c[Lith_Bullet]Bullet\c-, \c[Lith_Energy]Electric\c-, \cxFire\c-,
+\crFire Magic\c-, \czIce\c-, \ctMagic\c-, \csMelee\c-, and
+\c[Lith_Rocket]Shrapnel\c-.
 
 == \#TUT_Story_NAM | Story
 @@ \#TUT_Story_DSC

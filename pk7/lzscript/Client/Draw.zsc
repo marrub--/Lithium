@@ -85,6 +85,9 @@ Font                m_lBigFont;
 Font                m_lJTrmFont;
 Font                m_newConsoleFont;
 
+transient Shape2D          m_rectShape;
+transient Shape2DTransform m_rectTransform;
+
 static clearScope DrawData getDt(DrawData dt) {
    return dt;
 }
@@ -166,7 +169,7 @@ ui void drawAllData(RenderEvent evt) {
          drawRect(d.X, d.Y, d.Z, d.W, d.C, sc, d.U);
          break;
       case _type_fill:
-         Screen.dim(d.C, (d.C>>24)/255.0, 0,0, Screen.getWidth(),Screen.getHeight());
+         drawRect(0, 0, Screen.getWidth(), Screen.getHeight(), d.C, (Screen.getWidth(), Screen.getHeight()));
          break;
       }
    }
@@ -439,10 +442,11 @@ ui static void setClip(double px, double py, double sx, double sy, vector2 vsz, 
    Screen.setClipRect(int(p.x), int(p.y), int(s.x), int(s.y));
 }
 
-ui static void drawRect(double px, double py, double sx, double sy, color cr, vector2 vsz, uint vfl = 0, int style = STYLE_TRANSLUCENT) {
-   vector2 p, s; [p, s] = anyPosScale((px, py), (sx, sy), vsz, vfl);
+ui void drawRect(double px, double py, double sx, double sy, color cr, vector2 vsz, uint vfl = 0, int style = STYLE_TRANSLUCENT) {
    let [p, s] = anyPosScale((px, py), (sx, sy), vsz, vfl);
-   Screen.dim(cr, cr.a/255.0, int(p.x), int(p.y), int(s.x), int(s.y), style);
+   m_rectTransform.from2D(s.x, 0, 0, s.y, p.x, p.y);
+   m_rectShape.setTransform(m_rectTransform);
+   Screen.drawShapeFill(color(0xFF, cr.b, cr.g, cr.r), cr.a/255.0, m_rectShape);
 }
 
 ui static void drawLn(double x1, double y1, double x2, double y2, color cr, vector2 vsz, uint vfl = 0) {

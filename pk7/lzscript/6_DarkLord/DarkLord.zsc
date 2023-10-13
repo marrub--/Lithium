@@ -9,6 +9,8 @@
 class Lith_DarkLordPlayer : Lith_Player {
    default {
       Health 150;
+      Mass 110;
+      Gravity 1.05;
       Lith_Player.ViewBob 0.4;
       Player.AttackZOffset 17;
       Player.DisplayName "$LITH_CLASS_DARKLORD";
