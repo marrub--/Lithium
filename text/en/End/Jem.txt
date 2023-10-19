@@ -6,106 +6,27 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-%% LITHEND_Normal_1_Jem
-In the beginning, you felt comfort.
+@@ LITHEND_Normal_1_Jem
+In the beginning, you felt comfort. Comfort of yourself and your home.
+The allowances of personal will; But so soon was it ripped away, your
+life in twain.
 
-Comfort of yourself and your home.
+At age 12, A.O.F attacked Delsona. Killed, destroyed, and enslaved all
+of the inhabitants. You. Your parents. Everyone.
+@@
 
-The allowances of personal will, of sanctity -
-
-But so soon was it ripped away, your life in twain.
-
-Who you needed to be and who you wanted to be.
-
-The sanctity you felt so long ago was just a facade,
+That sanctity you felt so long ago must have just been a facade,
 so incredibly thin,
-the world so incredibly harsh.
+the world unable to hold you.
 
-So incredibly harsh, and so incapable of holding you.
-
-When Delsona was taken by AOF, you cried. In this moment,
-you feel those same tears coming back to you.
-
-Tears you wished for for decades.
-
-Tears you prayed for.
-
-Tears for the lost, the destroyed, the unneeded.
-
-Tears to save them the burden.
-
-%% LITHEND_Normal_2_Jem
-It was worse than a nightmare. Every person in your prefecture,
-taken, enslaved, killed.
-
-One by one.
-
-
-You feel their pain,
-
-
-all of it,
-
-
-
-and you cry.
-
-AOF took your humanity. Your sanity. Everything, from you.
-
-Your friends.
-
-Your parents.
-
-Your town.
-
-Your prefecture.
-
-Delsona.
-
-Your world.
-
-You feel the pain of it all, and you cry harder.
-
-%% LITHEND_Normal_3_Jem
-So much suffering and loss,
-
-        for what?
-
-
-Power. So much of it.
-
-
-Overwhelming control over the lives of thousands,
-
-and seeking only more.
-
-
-Just like the demons.
-
-
-But... Somehow, worse.
-
-
-Somehow, an evil so pure,
-
-
-                even the incarnation of evil
-
-
-       would not stand up to it.
-
-@@ LITHEND_Normal_4_Jem
-AOF took so much from you, even your identity. Unlike most like you,
-they couldn't give you another name. Jeremy was always your name.
+@@
+A.O.F took so much from you, even your identity. Unlike other trans
+people, they couldn't give you another name. Jeremy was always your
+name.
 
 This was the only mercy given.
 
-Despite your name, body, appearance, everything; you still were
-treated as if you had never decided to be a man. Why?
-
-Compliance is their only goal. What you want and work for do not
-matter here. Only that you will fight to the death for them.
-
+@@ LITHEND_Normal_2_Jem
 But along the way, as you suffered your entombment, you learned that
 you were not alone.
 
@@ -113,47 +34,34 @@ Zeke was the first to approach you. Ready to die, he pleaded to you
 for the mercy of death. He knew quite well you couldn't. Your
 compassion for him knew no bounds, with no way to express it.
 
-Eventually, Zeke introduced you to another friend. Daniel. The most
-wonderful person you ever met. Radiant with love, just like you. A
-woman the AOF would not accept.
+He introduced you to another friend, Daniel. She was radiant with
+love, like you. Even though they were both able to tell you names they
+prefered, they weren't allowed to use them. Nor were you.
 
-Even though they were able to tell you names they prefered, they
-weren't allowed to use them. Nor were you.
-
-Zeke's sanctioned name was Jacques, from before he changed it to
-escape his family.
-
-Daniel's was, of all things, Cade. She never let you speak that name
-around her, so you always used ambiguity to refer to her.
-
-@@ LITHEND_Normal_5_Jem
 The two had more in mind than just being friends with you, though.
 
-In a matter of weeks, the Deceiver movement began. Michael taught the
-seven of you how to fight back. Not with weapons, but with code.
+In a matter of weeks, the Deceiver movement began.
 
-Zeke spearheaded the firmware hacks.
+@@ LITHEND_Normal_3_Jem
+Michael taught the seven of you how to fight back. Not with weapons,
+but with code. Zeke spearheaded the firmware hacks.
+@@
 
-Solomon, a higher-up realizing his potential to escape, masterminded
-the operation.
+Even if you could not see yourself,
+you were alive, together.
 
-Samuel and Josh mused forever about how best to destroy AOF after we
-were free.
-
-Finally, you were once again alive. Even if you could not see
-yourself, you were alive. Ready to fight.
-
-@@ LITHEND_Normal_6_Jem
+@@
 And in the time it took for you to come to terms with yourself,
 
 so did the others.
 
-Samuel and Josh vowed not only to destroy AOF, but to be together for
+Samuel and Josh vowed not only to destroy A.O.F, but to be together for
 the rest of their days after this was over.
 
 Solomon wanted nothing but repentance. It took a lot to get here, and
 a lot of sacrifice of others.
 
+@@ LITHEND_Normal_4_Jem
 Zeke wanted nothing more but to live. Finally, he had accepted life
 over death.
 
@@ -161,39 +69,17 @@ Michael knew he could help others just like he had here, and vowed to
 commit his life to doing so.
 
 Daniel wanted to live with you, and to become your partner. She had
-never met someone like her before, much less someone from a place so
-accepting.
+never met someone like her before, much less someone from a place as
+accepting as Delsona.
 
-%% LITHEND_Normal_7_Jem
-Years of planning led up to this moment.
+The amount of fluid coming out of your face is greater than the amount
+of fluid that has come out of your body since you were enslaved a
+millionfold. You finish crying.
 
-Years of tarnish and despair.
-
-
-But there were times of happiness, however small.
-
-
-Your award for this effort is but more despair.
-
-
-
-    So much sacrifice, but your sanity has returned.
-
-
-          So much suffering, but you are free.
-
-
-
-                 So much death, but \cgyou\c- are free.
-
-@@ LITHEND_Normal_8_Jem
-You finish crying. The amount of fluid coming out of your face is
-greater than the amount of fluid that has come out of your body since
-you were enslaved a millionfold.
-
+@@ LITHEND_Normal_5_Jem
 It's over, and you can feel your senses coming back to you. You think
-to yourself, for once. But only sad thoughts come — What happened to
-the others? Will I ever know?
+to yourself, for once. But only sad thoughts come—What happened to the
+others? Will I ever know?
 
 Perhaps some truths are better left unknown.
 
@@ -207,31 +93,27 @@ Yet, you feel their spirits. You feel the pulse of the planet coursing
 throughout your body once more. The feeling of true freedom. The
 freedom of movement, and to be what you wish.
 
-There are still star-ships here. Entire warehouses untouched. Never
-bothered to be pillaged. Perhaps it's time to build a new home. Become
-the proud man you always wished to be.
+@@ LITHEND_Normal_6_Jem
+\cdAnd so, you are at last free. Free again to think and observe, and
+see for yourself the abolishment of your captors.
 
-%% LITHEND_Normal_9_Jem
-\cdAnd so, you are at last free.
-\cdFree again to think and observe, and see for yourself
-\cdthe abolishment of your former captors.
+\cnNo more distrust of your will. For this sake, this is only the
+beginning.
+@@
 
-\cnNo more distrust of your will.
-
-\cnFor this sake, this is only the beginning.
-
-
-\ctBut for the ones you replaced, and the ones you mourn,
-\ct        for yourself,
+\ctBut for the ones you replaced,
+\ct  the ones you mourn,  and for yourself,
 
 \crthis is merely an end.
 
-\czPerhaps one day you will forgive yourself for
-\czwhat you have sacrificed, but today that is no matter.
+@@
+\czPerhaps one day you will forgive yourself for what you have
+sacrificed, but today that is no matter.
+@@
 
 \cvToday is the beginning. The beginning of life once again.
 \cvYour parents are waiting back at home.
 
-\cvIt's time to go back.
+\cxIt's time to go back.
 
 ## EOF

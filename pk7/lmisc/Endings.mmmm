@@ -40,25 +40,22 @@ lipu_ilo endings {
       seme poki pM {
          image   ":End:Lane";
          fade_in 50;
-         crawl   Normal_1_Lane 500;
-         crawl   Normal_2_Lane 500;
-         crawl   Normal_3_Lane 500;
-         crawl   Normal_4_Lane 500;
-         crawl   Normal_5_Lane 500;
-         crawl   Normal_6_Lane 500;
+         crawl   Normal_1_Lane 400;
+         crawl   Normal_2_Lane 400;
+         crawl   Normal_3_Lane 400;
+         crawl   Normal_4_Lane 400;
+         crawl   Normal_5_Lane 400;
+         crawl   Normal_6_Lane 400;
          crawl   Normal_7_Lane 400;
       } ante seme poki pC {
          image   ":End:Jem";
          fade_in 50;
-         crawl   Normal_1_Jem 500;
-         crawl   Normal_2_Jem 500;
-         crawl   Normal_3_Jem 500;
-         crawl   Normal_4_Jem 500;
-         crawl   Normal_5_Jem 500;
-         crawl   Normal_6_Jem 500;
-         crawl   Normal_7_Jem 500;
-         crawl   Normal_8_Jem 500;
-         crawl   Normal_9_Jem 400;
+         crawl   Normal_1_Jem 400;
+         crawl   Normal_2_Jem 400;
+         crawl   Normal_3_Jem 400;
+         crawl   Normal_4_Jem 400;
+         crawl   Normal_5_Jem 400;
+         crawl   Normal_6_Jem 400;
       } ante seme poki pD {
          image    ":End:Ari";
          fade_in  50;
