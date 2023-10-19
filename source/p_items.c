@@ -355,8 +355,7 @@ script void P_Inv_PTick(void) {
 void P_CBI_TabItems(struct gui_state *g) {
    PrintSprite(sp_UI_Body, g->ox+294-122,1, g->oy+24,1, _u_alpha, 0.6);
    PrintSprite(sp_UI_Bag,  g->ox+     16,1, g->oy+16,1, _u_alpha, 0.6);
-   PrintText_str(ns(lang(sl_inv_hints)),
-                 sf_smallfnt, g->defcr, g->ox+2,1, g->oy+212,2);
+   PrintText_str(sl_inv_hints, sf_smallfnt, g->defcr, g->ox+2,1, g->oy+212,2);
    for(i32 i = 0; i < _inv_num; i++) {
       ContainerInvTick(g, &inv[i]);
    }
@@ -385,15 +384,15 @@ void P_CBI_TabItems(struct gui_state *g) {
          dragndrop = false;
       }
       setPos();
-      PrintText_str(ns(lang_fmt(LANG "ITEM_TAG_%S", selitem->name)),
+      PrintText_str(ns(lang(strp(_l(LANG "ITEM_TAG_"), _p(selitem->name)))),
                     sf_smallfnt, g->defcr, g->ox+x,1, g->oy+y,1);
       incY(8);
       setPos();
-      PrintText_str(ns(lang_fmt(LANG "ITEM_SHORT_%S", selitem->name)),
+      PrintText_str(ns(lang(strp(_l(LANG "ITEM_SHORT_"), _p(selitem->name)))),
                     sf_smallfnt, g->defcr, g->ox+x,1, g->oy+y,1);
       incY(16);
       setPos();
-      if(G_Button(g, tmpstr(lang(sl_move)), x, y,
+      if(G_Button(g, tmpstr(sl_move), x, y,
                   .disabled = movitem == _imove_dragndrop,
                   .color = CR_LIGHTBLUE, Pre(btnclear))) {
          movitem = movitem ? _imove_none : _imove_click;
@@ -402,7 +401,7 @@ void P_CBI_TabItems(struct gui_state *g) {
       incPos();
       if(get_bit(selitem->flags, _if_equippable)) {
          setPos();
-         if(G_Button(g, tmpstr(lang(sl_equip)), x, y,
+         if(G_Button(g, tmpstr(sl_equip), x, y,
                      .disabled = movitem == _imove_dragndrop,
                      .color = CR_LIGHTBLUE, Pre(btnclear))) {
             bool ok = false;
@@ -421,9 +420,7 @@ void P_CBI_TabItems(struct gui_state *g) {
       }
       if(get_bit(selitem->flags, _if_openable)) {
          setPos();
-         if(G_Button(g, tmpstr(opnitem == selitem ?
-                               lang(sl_close) :
-                               lang(sl_open)),
+         if(G_Button(g, tmpstr(opnitem == selitem ? sl_close : sl_open),
                      x, y, .disabled = movitem == _imove_dragndrop,
                      .color = CR_LIGHTBLUE, Pre(btnclear))) {
             opnitem = opnitem != selitem ? selitem : nil;
@@ -432,7 +429,7 @@ void P_CBI_TabItems(struct gui_state *g) {
       }
       if(selitem->Use) {
          setPos();
-         if(G_Button(g, tmpstr(lang(sl_use)), x, y,
+         if(G_Button(g, tmpstr(sl_use), x, y,
                      .disabled = movitem == _imove_dragndrop,
                      .color = CR_RED, Pre(btnclear))) {
             useitem = selitem;
@@ -449,9 +446,7 @@ void P_CBI_TabItems(struct gui_state *g) {
       }
       static struct gui_fil itemfill = {26};
       if(selitem->scr >= 0 &&
-         G_Button(g, tmpstr(selitem->scr > 0 ?
-                            lang(sl_sell) :
-                            lang(sl_discard)),
+         G_Button(g, tmpstr(selitem->scr > 0 ? sl_sell : sl_discard),
                   x, y, .disabled = movitem == _imove_dragndrop,
                   .color = CR_RED, .fill = &itemfill,
                   Pre(btnclear))) {

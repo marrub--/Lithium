@@ -54,26 +54,29 @@ void Z_Obituary(void) {
       }
    }
 
-   str obit = EDataS(_edt_obituary);
-   if(!obit[0]) return;
+   str ob = EDataS(_edt_obituary);
+   if(!ob[0]) return;
 
    i32 rn = ACS_Random(1, 5);
 
-   /**/ if(obit == st_ob_crush)    obit = lang_fmt(LANG "OB_Crush_%i",    rn);
-   else if(obit == st_ob_default)  obit = lang_fmt(LANG "OB_Default_%i",  rn);
-   else if(obit == st_ob_drowning) obit = lang_fmt(LANG "OB_Drowning_%i", rn);
-   else if(obit == st_ob_exit)     obit = lang_fmt(LANG "OB_Exit_%i",     rn);
-   else if(obit == st_ob_falling)  obit = lang_fmt(LANG "OB_Falling_%i",  rn);
-   else if(obit == st_ob_fire)     obit = lang_fmt(LANG "OB_Fire_%i",     rn);
-   else if(obit == st_ob_slime)    obit = lang_fmt(LANG "OB_Slime_%i",    rn);
-   else if(obit == st_ob_suicide)  obit = lang_fmt(LANG "OB_Suicide_%i",  rn);
+   #define OB LANG "OB_"
+   /**/ if(ob == st_ob_crush)    ob = lang(strp(_l(OB "Crush_"),    _p(rn)));
+   else if(ob == st_ob_default)  ob = lang(strp(_l(OB "Default_"),  _p(rn)));
+   else if(ob == st_ob_drowning) ob = lang(strp(_l(OB "Drowning_"), _p(rn)));
+   else if(ob == st_ob_exit)     ob = lang(strp(_l(OB "Exit_"),     _p(rn)));
+   else if(ob == st_ob_falling)  ob = lang(strp(_l(OB "Falling_"),  _p(rn)));
+   else if(ob == st_ob_fire)     ob = lang(strp(_l(OB "Fire_"),     _p(rn)));
+   else if(ob == st_ob_slime)    ob = lang(strp(_l(OB "Slime_"),    _p(rn)));
+   else if(ob == st_ob_suicide)  ob = lang(strp(_l(OB "Suicide_"),  _p(rn)));
+   ob = ns(ob);
+   #undef OB
 
    noinit static
    char out[1024];
 
    char *pt = out;
 
-   for(astr s = ns(obit); *s;) {
+   for(astr s = ns(ob); *s;) {
       cstr cs;
       str st;
       i32 ln;

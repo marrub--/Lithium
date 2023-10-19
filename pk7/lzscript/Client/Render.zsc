@@ -181,7 +181,7 @@ ui void drawInventory(RenderEvent evt) {
          "\c[Lith_Shell] \c%c%i\c-\n"
          "\c[Lith_Rocket] \c%c%i\c-\n"
          "\c[Lith_Energy] \c%c%i\c-\n"
-         "\c[Lith_DarkEnergy] \c%c%i\c-\n",
+         "\c[Lith_DemonicEnergy] \c%c%i\c-\n",
          cblt, blt,
          cshl, shl,
          crkt, rkt,

@@ -16,20 +16,15 @@
 
 #define section_beg() ACS_BeginPrint()
 #define section_end() SCallV(so_CreditsMenu, sm_AddSection, ACS_EndStrParam())
-#define ch(c) (ACS_PrintChar(c))
-#define cr(c) (ch('\C'), ch(c))
 #define skip_ws() while(*inp && *inp == ' ') ++inp
-#define rest() while(*inp && *inp != '\n') ch(*inp++)
+#define rest() while(*inp && *inp != '\n') _c(*inp++)
 
 alloc_aut(0) script_str ext("ACS") addr(OBJ "OpenCreditsMenu")
 void Z_OpenCreditsMenu(void) {
-   astr inp = ns(lang(sl_credits));
-
+   astr inp = sl_credits;
    section_beg();
-
    while(*inp) {
       skip_ws();
-
       switch(*inp++) {
       case '~':
          section_end();
@@ -37,36 +32,36 @@ void Z_OpenCreditsMenu(void) {
          break;
       case '-':
          skip_ws();
-         cr('k');
+         _l("\Ck");
          rest();
-         cr('-');
+         _l("\C-");
          break;
       case '*':
          skip_ws();
-         cr('n');
-         while(*inp && !(inp[0] == ' ' && inp[1] == '*')) ch(*inp++);
-         cr('-');
+         _l("\Cn");
+         while(*inp && !(inp[0] == ' ' && inp[1] == '*')) _c(*inp++);
+         _l("\C-");
          break;
       case '@':
          skip_ws();
-         cr('g');
+         _l("\Cg");
          while(*inp && !(inp[0] == ' ' && (inp[1] == ' ' || inp[1] == '-'))) {
-            ch(*inp++);
+            _c(*inp++);
          }
          skip_ws();
-         cr('-'); ch(' '); ch(':'); ch(':');
-         if(*inp++ == '\\') ch('\n');
-         else               ch(' ');
+         _l("\C- ::");
+         if(*inp++ == '\\') _c('\n');
+         else               _c(' ');
          skip_ws();
-         cr('i');
+         _l("\Ci");
          rest();
-         cr('-');
+         _l("\C-");
          break;
       case '|':
          skip_ws();
-         cr('i');
+         _l("\Ci");
          rest();
-         cr('-');
+         _l("\C-");
          break;
       default:
          --inp;
@@ -75,10 +70,8 @@ void Z_OpenCreditsMenu(void) {
       }
       while(*inp && *inp != '\n') ++inp;
       ++inp;
-
-      ch('\n');
+      _c('\n');
    }
-
    section_end();
 }
 

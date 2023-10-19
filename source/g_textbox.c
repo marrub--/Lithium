@@ -44,7 +44,7 @@ bool G_TxtBox_Imp(struct gui_state *g, gid_t id, struct gui_arg_txt *a) {
    } else {
       ACS_PrintChar('\C');
       ACS_PrintChar(hot ? 'c' : 'm');
-      ACS_PrintString(ns(lang(sl_gui_textbox)));
+      ACS_PrintString(sl_gui_textbox);
    }
    PrintText(sf_smallfnt, g->defcr, a->x + g->ox,1, a->y + g->oy,1);
    G_ClipRelease(g);

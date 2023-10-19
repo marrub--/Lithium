@@ -47,7 +47,7 @@ Lith_Energy {
    #074028 #15864d 0   127
    #2acc6d #76ff84 128 255
 }
-Lith_DarkEnergy {
+Lith_DemonicEnergy {
    #040b0e #04040e 0   127
    #0b040e #58355f 128 255
 }

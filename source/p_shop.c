@@ -85,7 +85,7 @@ void P_CBI_TabShop(struct gui_state *g) {
 
    G_ClipRelease(g);
 
-   if(G_Button(g, tmpstr(lang(sl_buy)), 98, 192, !P_Shop_CanBuy(&item->shopdef), .fill = &pl.cbi.st.buyfill)) {
+   if(G_Button(g, tmpstr(sl_buy), 98, 192, !P_Shop_CanBuy(&item->shopdef), .fill = &pl.cbi.st.buyfill)) {
       P_Shop_Buy(&item->shopdef, LANG "SHOP_TITLE_", false);
    }
 }

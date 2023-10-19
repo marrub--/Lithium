@@ -58,31 +58,31 @@ def parse_file state, filename, language
       when /^@@$/
          in_concat = !in_concat
          buf.concat "\n" if buf and buf[-1] != "\n"
-      when /^== (.+)\|(.*)$/
+      when /^== *([^ ]+) *\|(?: (.*))?$/
          m = $~
          do_close_buf.call
-         name = m[1].strip
-         text = m[2].strip
+         name = m[1]
+         text = m[2] || ""
          lan.data.push Alias.new name, text
-      when /^%% (.+)$/
+      when /^%% *([^ ]+)$/
          m = $~
          do_close_buf.call
-         name      = m[1].strip
+         name      = m[1]
          buf       = String.new
          in_concat = false
-      when /^@@ (.+)$/
+      when /^@@ *([^ ]+)$/
          m = $~
          do_close_buf.call
-         name      = m[1].strip
+         name      = m[1]
          buf       = String.new
          in_concat = true
-      when /^!!lang (.+)\|(.+)$/
+      when /^!!lang *([^ ]+) *\| *(.+)$/
          m = $~
          do_close_buf.call
-         lnam = m[1].strip
-         name = m[2].strip
+         lnam = m[1]
+         name = m[2]
          state.langs[lnam] = Language.new name, []
-      when /^!!inclang (.+)$/
+      when /^!!inclang *([^ ]+)$/
          m = $~
          do_close_buf.call
          name = split_name m[1]
@@ -92,7 +92,7 @@ def parse_file state, filename, language
                parse_file state, lname, lnam
             end
          end
-      when /^!!include (.+)$/
+      when /^!!include *([^ ]+)$/
          m = $~
          do_close_buf.call
          name = split_name m[1]
@@ -102,10 +102,10 @@ def parse_file state, filename, language
             if in_concat
                if ln.empty?
                   buf.concat "\n\n"
-               elsif buf[-1] == "\n" || language == "jp"
-                  buf.concat ln.strip
+               elsif buf.empty? || buf[-1] == "\n" || language == "jp"
+                  buf.concat ln
                else
-                  buf.concat " " + ln.strip
+                  buf.concat " " + ln
                end
             else
                buf.concat ln + "\n"
@@ -113,7 +113,7 @@ def parse_file state, filename, language
          elsif ln.empty?
             next
          else
-            raise "#{filename}@#{linenum}: invalid text"
+            raise "#{filename}@#{linenum + 1}: invalid text '#{ln}'"
          end
       end
    end
@@ -138,7 +138,7 @@ common_main do
    for _, lang in sorted
       out.puts "[" + lang.name + "]"
       for data in lang.data
-         txt = data.text.strip
+         txt = data.text
             .split("\n")
             .map do |s| escape s end
             .join("\\n\"\n   \"")

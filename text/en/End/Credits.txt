@@ -8,11 +8,7 @@
 
 %% LITHEND_Credits
 \cd>>>>> [[[[ Lithium ]]]]
-\cd>>>>> [[[[ Project Golan, Xevv 2 ]]]]
-
-@@
-\cjby Alison Gray Watson.
-@@
+  Project Golan, Xevv 2
 
 \cd>>>>> [[[[ Thanks To ]]]]
 

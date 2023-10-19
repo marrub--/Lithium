@@ -39,7 +39,7 @@ bool P_Shop_Buy(struct shopdef *def, cstr name, bool nodelivery, bool nolog) {
    }
 
    if(!nolog) {
-      P_LogF(tmpstr(lang(sl_log_bought)),
+      P_LogF(tmpstr(sl_log_bought),
               ns(lang_discrim(fast_strdup2(name, def->name))));
    }
 
@@ -61,14 +61,14 @@ bool P_Shop_Buy(struct shopdef *def, cstr name, bool nodelivery, bool nolog) {
 
       if(ACS_Spawn(so_BoughtItem, v.x, v.y, v.z, tid = ACS_UniqueTID())) {
          if(P_Shop_Give(def, tid)) {
-            P_LogH(1, tmpstr(lang(sl_log_delivered)));
+            P_LogH(1, tmpstr(sl_log_delivered));
          } else {
             ACS_Thing_Remove(tid);
          }
 
          delivered = true;
       } else {
-         P_LogH(1, tmpstr(lang(sl_log_nodeliver)));
+         P_LogH(1, tmpstr(sl_log_nodeliver));
       }
    }
 

@@ -55,7 +55,7 @@ cstr attr_name(i32 which) {
 void attr_draw(void) {
    if(pl.old.attr.level && pl.old.attr.level < pl.attr.level) {
       AmbientSound(ss_player_levelup, 1.0);
-      P_LogH(1, tmpstr(lang_discrim(sl_log_levelup)), ACS_Random(1000, 9000));
+      P_LogH(1, tmpstr(sl_log_levelup), ACS_Random(1000, 9000));
    }
    if(lvupstr[0]) {
       SetSize(320, 240);
@@ -217,8 +217,7 @@ static void attr_guiattr(struct gui_state *g, i32 at, i32 yofs) {
    if(attr > _attr_skill_max) {
       _c('/');
       _p(_attr_skill_max);
-      _c('\C'); _c('d');
-      _c(' '); _c('+');
+      _l("\Cd +");
       _p(attr - _attr_skill_max);
       if(attr == _attr_abs_max) {
          _c('/');

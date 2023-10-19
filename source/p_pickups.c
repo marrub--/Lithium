@@ -19,18 +19,18 @@ str get_name(i32 w) {
    char name[16];
 
    faststrcpy(name, weaponinfo[w].typename);
-   ifauto(str, alias, lang_fmt(LANG "PK_%s_ALI", name)) {
+   ifauto(str, alias, lang(strp(_l(LANG "PK_"), name, _l("_ALI")))) {
       faststrcpy_str(name, alias);
    }
 
-   i32 num = faststrtoi32_str(ns(lang_fmt(LANG "PK_%s_NUM", name)));
+   i32 num = faststrtoi32_str(ns(lang(strp(_l(LANG "PK_"), _p((cstr)name), _l("_NUM")))));
    return lang_fmt(LANG "PK_%s_%.3i", name, ACS_Random(0, num));
 }
 
 static
 void silly_pickup(i32 weapon) {
-   i32 fmtnum = faststrtoi32_str(ns(lang(sl_pk_get_num)));
-   i32 uncnum = faststrtoi32_str(ns(lang(sl_pk_uncertain_num)));
+   i32 fmtnum = faststrtoi32_str(sl_pk_get_num);
+   i32 uncnum = faststrtoi32_str(sl_pk_uncertain_num);
 
    i32 iunc  = ACS_Random(0, uncnum);
    i32 ifmt  = ACS_Random(0, fmtnum);
@@ -72,7 +72,7 @@ void P_Log_Weapon(i32 which) {
          P_ItemPopup(nam, GetX(0), GetY(0), GetZ(0));
       }
       if(itemdisp & _itm_disp_log) {
-         P_LogB(1, tmpstr(lang(sl_pk_get_000)), nam);
+         P_LogB(1, tmpstr(sl_pk_get_000), nam);
       }
    } else {
       P_LogB(1, "Acquired impossible object");

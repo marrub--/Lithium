@@ -11,6 +11,7 @@
 == \#INFO_SHORT_700Express  | .700 Express
 == \#INFO_SHORT_ShrapnelGun | Shrapnel Gun
 == \#INFO_SHORT_4Bore       | Hunting Shotgun
+== \#INFO_SHORT_Minigun     | Minigun
 == \#INFO_SHORT_Motra       | Ruzuk
 == \#INFO_SHORT_DualRocket  | Franca & Sophia
 == \#INFO_SHORT_FortuneGun  | Fortiuty
@@ -22,13 +23,64 @@
 == \#INFO_SHORT_Zikr  | Sub-darts
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_SHORT_Minigun | Minigun
-== \#INFO_TITLE_Minigun | HBTR-33 Minigun
-@@ \#INFO_DESCR_Minigun
-An ancient weapon developed during the dark ages, immensely powerful,
-but quite simple. Uses revolving barrels to create a better fire-rate.
-However, it only uses .50 rounds, and can only create minimal amounts
-of damage. \c[Lith_Pink]I stole this from a long-abandoned AOF supply
-depot.
+== \#UPGRADE_TITLE_SubGun_A | Sub-gunspray
+@@ \#UPGRADE_EFFEC_SubGun_A
+Upgrade for sub-gun. Fires out a 90 degree spray of bullets.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
+== \#UPGRADE_TITLE_SubGrn_A | Sub-grenails
+@@ \#UPGRADE_EFFEC_SubGrn_A
+Upgrade for sub-grenade. Fires a spray of nails on explosion.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
+== \#UPGRADE_TITLE_SubAxe_A | Sub-axestick0
+@@ \#UPGRADE_EFFEC_SubAxe_A
+Upgrade for sub-axe. Sticks into enemies and provides minor life
+leeching on any damage you deal to the stuck enemy.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
+== \#UPGRADE_TITLE_Kampilan_A | Branch Accum.
+@@ \#UPGRADE_EFFEC_Kampilan_A
+Accumulates branching paths of destiny within your Kampilan when
+hitting enemies with its hilt, eventually exploding into a small
+singularity. Accumulated branches increase damage dealt by sword
+attacks and decay over time.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
+== \#UPGRADE_TITLE_700E_A | Exploding Bullets
+@@ \#UPGRADE_EFFEC_700E_A
+As straight-forwards as it sounds, this upgrade makes the .700 Express
+fire bullets that explode after a short delay.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
+== \#UPGRADE_TITLE_Shrapnel_A | Shrapnel Calamity
+@@ \#UPGRADE_EFFEC_Shrapnel_A
+End the world with infinite shrapnel. At the very least, with this
+upgrade, you can fire all of your ammunition at once.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
+== \#UPGRADE_TITLE_4Bore_A | Magnetic Shot
+@@ \#UPGRADE_EFFEC_4Bore_A
+Makes the Hunting Shotgun fire pellets that magnetically stack within
+a wound, causing each one that consecutively hits a target to increase
+the damage of the last few.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
+== \#UPGRADE_TITLE_4Bore_B | Precision Stock
+@@ \#UPGRADE_EFFEC_4Bore_B
+Replaces the stock of the Hunting Shotgun with one that allows you to
+aim down sights and fire without wrenching your arms out of their
+sockets. Press the Weapon Action button to activate.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
+== \#UPGRADE_TITLE_Minigun_A | Bullet Hose
+@@ \#UPGRADE_EFFEC_Minigun_A
+Significantly increases the Minigun's fire rate, but removes the
+ability to wind it up.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
+== \#UPGRADE_TITLE_Sophia_A | Rocket Rocket
+@@ \#UPGRADE_EFFEC_Sophia_A
+Makes Sophia fire two smaller rockets in quick succession.
 
 ## EOF

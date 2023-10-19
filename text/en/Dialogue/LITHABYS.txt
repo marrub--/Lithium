@@ -8,6 +8,6 @@
 
 !!include Abyss/Tutorial.txt
 !!include Abyss/Lane.txt
-!!include Abyss/Kiri.txt
+## !!include Abyss/Kiri.txt
 
 ## EOF

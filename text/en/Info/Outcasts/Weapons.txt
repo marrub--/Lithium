@@ -8,34 +8,58 @@
 
 ## Outcast Weapons ═══════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ChargeFist | Charge Fist
-== \#INFO_TITLE_ChargeFist | Utsu Denkasou Assault Bracelet
+== \#INFO_TITLE_ChargeFist | KSKK "KARI" Assault Bracelet
 @@ \#INFO_DESCR_ChargeFist
-A powerful melee weapon which attaches to the left wrist. Uses energy from a
-cybernetic power source to condense weight and force into super-destructive
-punches.
+A powerful melee weapon which attaches to the left wrist. Uses energy
+from a cybernetic power source to condense weight and force into
+super-destructive punches.
+
+== \#SHOP_TITLE_ChargeFist | $$\#INFO_SHORT_ChargeFist
+@@ \#SHOP_DESCR_ChargeFist
+A melee weapon that you can charge.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_MissileLauncher | Missile Launcher
 == \#INFO_TITLE_MissileLauncher | X-400 Lance-missiles
 @@ \#INFO_DESCR_MissileLauncher
-Have you ever wanted a weapon that fires 2,100 missiles a minute? Don't lie to
-me, I know you have. This weapon delivers.
+Have you ever wanted a weapon that fires over 2,000 missiles a minute?
+Don't lie to me, I know you have. This weapon delivers.
 
-The miniature missiles the X-400 launches are medium-yield, they won't hit as
-hard as regular fare, but they will pack quite a punch with the rate you can
-put them out.
+The miniature missiles the X-400 launches are medium-yield, they won't
+hit as hard as regular fare, but they will pack quite a punch with the
+rate you can put them out.
 
-Has an internal revolving chamber that holds 30 rockets, fired in trios as the
-cylinder revolves. New ammunition can be loaded by shoving it carefully into
-the underside of the gun, similar to a shotgun, thanks to a convenient
-automatic rotation as it detects newly loaded missiles.
+Has an internal revolving chamber that holds 30 rockets, fired in
+trios as the cylinder revolves. New ammunition can be loaded by
+shoving it carefully into the underside of the gun, similar to a
+shotgun, thanks to a convenient automatic rotation as it detects newly
+loaded missiles.
+
+== \#SHOP_TITLE_MissileLauncher | $$\#INFO_SHORT_MissileLauncher
+@@ \#SHOP_DESCR_MissileLauncher
+Mini-missile launcher.
+
+Doesn't take upgrades.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_PlasmaDiffuser | Plasma Diffuser
 == \#INFO_TITLE_PlasmaDiffuser | SYM4.3 D.640 PLASMA DIFFUSER
 @@ \#INFO_DESCR_PlasmaDiffuser
-A weapon which works similarly to the 68-n Plasma Rifle, however preferring
-damage over rate of fire. The D.640's design comes from several older models
-designed by MDDO, as well as newer components patented by Semaphore Inc.
+A weapon which works similarly to the 68-n Plasma Rifle, however
+preferring damage over rate of fire. The D.640's design comes from
+several older models designed by MDDO, as well as newer components
+patented by Semaphore Inc.
+
+== \#SHOP_TITLE_PlasmaDiffuser | $$\#INFO_SHORT_PlasmaDiffuser
+@@ \#SHOP_DESCR_PlasmaDiffuser
+Classic plasma rifle.
+
+Doesn't take upgrades.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
+== \#INFO_SHORT_Gameboy | Game Nánhái
+== \#SHOP_TITLE_Gameboy | $$\#INFO_SHORT_Gameboy
+@@ \#SHOP_DESCR_Gameboy
+A game playing system, containing several old titles.
 
 ## EOF

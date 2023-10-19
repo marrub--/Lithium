@@ -34,25 +34,25 @@ void CBITab_Marine(struct gui_state *g) {
    i32 ram;
    str name;
 
-        Upgr(cupg_m_cpu2) {CPU(1); ram = 150; name = ns(lang(sl_cbi_cpu3));}
-   else Upgr(cupg_m_cpu1) {CPU(2); ram = 100; name = ns(lang(sl_cbi_cpu2));}
-   else                   {CPU(3); ram =  50; name = ns(lang(sl_cbi_cpu1));}
+        Upgr(cupg_m_cpu2) {CPU(1); ram = 150; name = sl_cbi_cpu3;}
+   else Upgr(cupg_m_cpu1) {CPU(2); ram = 100; name = sl_cbi_cpu2;}
+   else                   {CPU(3); ram =  50; name = sl_cbi_cpu1;}
 
    PrintText_str(name, sf_smallfnt, g->defcr, g->ox+7,1, g->oy+47,1);
 
    InfoStart;
 
-   Info(tmpstr(lang(sl_cbi_perf)), wl.cbiperf);
-   Info(tmpstr(lang(sl_cbi_puse)), pl.cbi.pruse);
-   Info(tmpstr(lang(sl_cbi_wram)), ram);
+   Info(tmpstr(sl_cbi_perf), wl.cbiperf);
+   Info(tmpstr(sl_cbi_puse), pl.cbi.pruse);
+   Info(tmpstr(sl_cbi_wram), ram);
 
    InfoSep;
 
-   Info(tmpstr(lang(sl_cbi_interfaces)));
-   Upgr(cupg_m_armorinter) Info("> %S", ns(lang(sl_cbi_armorinter)));
-   Upgr(cupg_m_weapninter) Info("> %S", ns(lang(sl_cbi_weapninter)));
-   Upgr(cupg_m_weapninte2) Info("> %S", ns(lang(sl_cbi_weapninte2)));
-   Upgr(cupg_rdistinter)   Info("> %S", ns(lang(sl_cbi_rdistinter)));
+   Info(tmpstr(sl_cbi_interfaces));
+   Upgr(cupg_m_armorinter) Info("> %S", sl_cbi_armorinter);
+   Upgr(cupg_m_weapninter) Info("> %S", sl_cbi_weapninter);
+   Upgr(cupg_m_weapninte2) Info("> %S", sl_cbi_weapninte2);
+   Upgr(cupg_rdistinter)   Info("> %S", sl_cbi_rdistinter);
 
    Upgr(cupg_m_armorinter) Slot(sp_UI_ArmorInter, 0, 1);
    Upgr(cupg_m_weapninter) Slot(sp_UI_WeapnInter, 0, 2);
@@ -63,25 +63,25 @@ void CBITab_Marine(struct gui_state *g) {
 static
 void CBITab_CyberMage(struct gui_state *g) {
    CPU(2);
-   PrintText_str(ns(lang(sl_cbi_cpu4)), sf_smallfnt, g->defcr, g->ox+7,1, g->oy+47,1);
+   PrintText_str(sl_cbi_cpu4, sf_smallfnt, g->defcr, g->ox+7,1, g->oy+47,1);
 
    InfoStart;
 
-   Info(tmpstr(lang(sl_cbi_perf)), 34);
-   Info(tmpstr(lang(sl_cbi_puse)), pl.cbi.pruse);
-   Info(tmpstr(lang(sl_cbi_wram)), 19);
+   Info(tmpstr(sl_cbi_perf), 34);
+   Info(tmpstr(sl_cbi_puse), pl.cbi.pruse);
+   Info(tmpstr(sl_cbi_wram), 19);
 
    InfoSep;
 
-   Info(tmpstr(lang(sl_cbi_interfaces)));
-                           Info("> %S", ns(lang(sl_cbi_slot1spell)));
-                           Info("> %S", ns(lang(sl_cbi_slot2spell)));
-   Upgr(cupg_c_slot3spell) Info("> %S", ns(lang(sl_cbi_slot3spell)));
-   Upgr(cupg_c_slot4spell) Info("> %S", ns(lang(sl_cbi_slot4spell)));
-   Upgr(cupg_c_slot5spell) Info("> %S", ns(lang(sl_cbi_slot5spell)));
-   Upgr(cupg_c_slot6spell) Info("> %S", ns(lang(sl_cbi_slot6spell)));
-   Upgr(cupg_c_slot7spell) Info("> %S", ns(lang(sl_cbi_slot7spell)));
-   Upgr(cupg_rdistinter)   Info("> %S", ns(lang(sl_cbi_rdistinter)));
+   Info(tmpstr(sl_cbi_interfaces));
+                           Info("> %S", sl_cbi_slot1spell);
+                           Info("> %S", sl_cbi_slot2spell);
+   Upgr(cupg_c_slot3spell) Info("> %S", sl_cbi_slot3spell);
+   Upgr(cupg_c_slot4spell) Info("> %S", sl_cbi_slot4spell);
+   Upgr(cupg_c_slot5spell) Info("> %S", sl_cbi_slot5spell);
+   Upgr(cupg_c_slot6spell) Info("> %S", sl_cbi_slot6spell);
+   Upgr(cupg_c_slot7spell) Info("> %S", sl_cbi_slot7spell);
+   Upgr(cupg_rdistinter)   Info("> %S", sl_cbi_rdistinter);
 
                            Slot(sp_UI_Slot1Spell, 0, 1);
                            Slot(sp_UI_Slot2Spell, 0, 2);
@@ -99,7 +99,7 @@ void CBITab_DarkLord(struct gui_state *g) {
    #define Rune(_gfx, _l, _x, _y) \
       ( \
          PrintSprite(sp_UI_Rune##_gfx, g->ox+_x*96+50,0, g->oy+_y*47+38,1), \
-         PrintText_str(lang(sl_cbi_rune_##_l), sf_lmidfont, CR_WHITE, g->ox+_x*96+50,4, g->oy+_y*47+38,2) \
+         PrintText_str(sl_cbi_rune_##_l, sf_lmidfont, CR_WHITE, g->ox+_x*96+50,4, g->oy+_y*47+38,2) \
       )
    Rune(Empty, rkz, 1, 0);
    Upgr(cupg_d_zaruk)     Rune(Zrk,  zrk,  1, 1);
@@ -107,7 +107,7 @@ void CBITab_DarkLord(struct gui_state *g) {
    Upgr(cupg_d_dimdriver) Rune(Zzkr, zzkr, 1, 2);
    Upgr(cupg_d_zikr)      Rune(Zkr,  zkr,  2, 2);
    Upgr(cupg_d_shield)    Rune(Rkw,  rkw,  1, 3);
-   PrintText_str(lang(sl_cbi_dl_status), sf_lmidfont, CR_WHITE, g->ox+4,1, g->oy+24,1);
+   PrintText_str(sl_cbi_dl_status, sf_lmidfont, CR_WHITE, g->ox+4,1, g->oy+24,1);
 }
 
 void P_CBI_TabCBI(struct gui_state *g) {

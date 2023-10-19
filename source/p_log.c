@@ -116,7 +116,7 @@ void P_Log_Entry(void) {
       lm->lnum = lnum;
    }
    log.curmap = lm;
-   P_LogF(tmpstr(lang(sl_enter_fmt)), lm->name, CanonTime(ct_full, ACS_Timer()));
+   P_LogF(tmpstr(sl_enter_fmt), lm->name, CanonTime(ct_full, ACS_Timer()));
 }
 
 script void P_Log_PTick(void) {
@@ -208,10 +208,7 @@ script_str ext("ACS") addr(OBJ "LogS")
 void Z_Log(i32 levl, i32 type) {
    str name = EDataS(_edt_logname);
    if(name[0] == '_') {
-      ACS_BeginPrint();
-      PrintStrL(LANG "LOG");
-      ACS_PrintString(name);
-      name = lang(ACS_EndStrParam());
+      name = lang(strp(_l(LANG "LOG"), _p(name)));
    }
    switch(type) {
    case msg_scri:

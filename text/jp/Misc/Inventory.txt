@@ -34,7 +34,6 @@
 == \#ITEM_TAG_ArmHazMatUp      | 防護服アーマー
 ## ありがとうよ
 == \#ITEM_TAG_ArmPinkSilverUp  | ピンクシルバーのアーマー
-== \#ITEM_TAG_ArmMidoriUp      | ミドリのアーマー
 
 == \#ITEM_TAG_ArmStandardLo    | 通常のレギンス
 == \#ITEM_TAG_ArmImprovedLo    | 改良されたレギンス
@@ -43,7 +42,6 @@
 == \#ITEM_TAG_ArmAerodynamicLo | 空気抵抗を抑えたレギンス
 == \#ITEM_TAG_ArmHazMatLo      | 防護服のレギンス
 == \#ITEM_TAG_ArmPinkSilverLo  | ピンクシルバーのレギンス
-== \#ITEM_TAG_ArmMidoriLo      | ミドリのレギンス
 
 ## Descriptions ══════════════════════════════════════════════════════════════╕
 
@@ -81,10 +79,6 @@
 \ca12の魔法耐性を持ち、
 それ以外の属性には6の耐性を持つ。
 
-%% \#ITEM_SHORT_ArmMidoriUp
-\ca12の業火の魔法耐性を持ち、
-それ以外の属性には6の耐性を持つ。
-
 %% \#ITEM_SHORT_ArmStandardLo
 \ca2の銃撃耐性を持ち、
 それ以外の属性には1の耐性を持つ。
@@ -107,10 +101,6 @@
 
 %% \#ITEM_SHORT_ArmPinkSilverLo
 \ca8の魔法耐性を持ち、
-それ以外の属性には4の耐性を持つ。
-
-%% \#ITEM_SHORT_ArmMidoriLo
-\ca8の業火の魔法耐性を持ち、
 それ以外の属性には4の耐性を持つ。
 
 ## EOF

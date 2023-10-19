@@ -11,7 +11,7 @@
 == \#INFO_REMOT_MIntroJem | <hidden>@corp.AOF
 == \#INFO_SSIZE_MIntroJem | 36
 %% \#INFO_DESCR_MIntroJem
-l[]];;\cg444444\cj41414191918 --------\cm// Copyright (C) 905 A.O.F I---[[119-`
+l[]];;\cg444444\cj41414191918 --------\cm// Copyright © 905 A.O.F I---[[119-`
 \cm// sio.c basic screen inp-1[3\4[`pk;
 \cm#include <kernel_display.h>
 
@@ -67,7 +67,6 @@ Next goal while this continues decompiling is to find all active AOF
 hostnames and block them, the main servers are already deactivated but
 there might be more. Rerouting to other active companies' addresses
 has helped clear my mind.
-@@
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_TITLE_MCluster2Jem | $$\#SAVED_BUFFER
@@ -83,9 +82,8 @@ l[]];;\cg444444\cj41414191918 --------
 \cd>>>>>[[[[reloading mail daemon]]]]
 
 @@
-It's all gone now. I'm glad I was smarter than to assume I was going
-insane, though now I wonder what the other deceivers must have gone
-through.
+It's all gone now. My mind is at ease. Though now I wonder what the
+other deceivers must have gone through.
 
 The core of hell is still far yonder, but yet my body trembles in its
 sheer horror... Maybe I'll make it out alive if I'm lucky, but I
@@ -99,7 +97,6 @@ Proc. analysis has been done on all of the dumped code, revealing many
 unoptimized code paths, ASIC crap, and a few red herrings. Not careful
 enough for technology that could easily exist two years after this was
 developed.
-@@
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_TITLE_MCluster3Jem | $$\#SAVED_BUFFER
@@ -111,15 +108,16 @@ must really be Hell itself; no mistaking it now.
 
 The air is so humid and hot that I've begun sweating. That can't
 happen. I can't sweat. There isn't anything to sweat. I'm scared. This
-has to be an illusion... or does reality not matter in this place?
+has to be an illusion... or does truth really not matter in this
+place?
 
 In any case, now that I'm here, there's no turning back. I have to
 destroy whatever corrupted them, I'm sure they're here... I saw it in
 their eyes, they were yelling at me visions of their true selves that
 could not be described with human eyes. That only I could know.
 
-Though my mind had just been regained, now sanity may lie out of my
-hands.
+Though I had just regained my grasp of it, now reality itself may lie
+out of my hands.
 
 It doesn't matter. I will see this through.
 
@@ -138,6 +136,6 @@ until the remaining two are confirmed dead or incapacitated.
 
 \cgYou will not get away with this intrepid game.
 
-\cg  - \cnOrder
+\cgOrder.
 
 ## EOF

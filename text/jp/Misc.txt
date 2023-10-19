@@ -23,7 +23,7 @@
 ニューエラにの奇妙な遺物の計り知れない発見について、解読に関与した研究
 者達へ表彰が授与される予定だったが、間もなく全員姿を消した。
 
-２０年後, １６４９ N.E.
+２０年後, １６４９ NE
 
 これら科学者との対話が再確立され、巨大コンピューター企業 Optic Fiber
 Maxim-Danil社の調査により、それは宇宙に浮かぶ赤い霧に過ぎない事が判明
@@ -48,8 +48,8 @@ Lithiumの雨が宇宙から降り注ぐか。
 
 == \#ENTER_FMT  | %S に入った... 日付:%s
 %% \#CHARGE_FMT
-%.1lkkV\cjチャージ
-(%i~%iダメージ)
+{}kV\cjチャージ
+({}~{}ダメージ)
 == \#MANA_CHARGE | [マナ補給中]
 
 %% \#DIV_SIGIL_WARNING
@@ -123,10 +123,10 @@ Lithiumの雨が宇宙から降り注ぐか。
 == PLYRMNU_SEEFRONT   | で前面を表示。
 == PLYRMNU_SEEBACK    | で背面を表示。
 
-== OPTVAL_MALE    | おとこ
-== OPTVAL_FEMALE  | おんな
-== OPTVAL_NEUTRAL | X
-== OPTVAL_OTHER   | その他
+== OPTVAL_MALE    | おとこらしい
+== OPTVAL_FEMALE  | おんならしい
+== OPTVAL_NEUTRAL | その他
+== OPTVAL_OTHER   | ロボット
 
 == OPTVAL_OFF  | [オフ]
 == OPTVAL_ON   | [オン]
@@ -134,31 +134,14 @@ Lithiumの雨が宇宙から降り注ぐか。
 
 == SAFEMESSAGE | >>> [[[よろしいですか?]]] <<<
 
-== CNTRLMNU_ALTATTACK    | セカンダリ・ズーム
-== CNTRLMNU_RELOAD       | リロード
-== CNTRLMNU_RUN          | 走る・回避
-== CNTRLMNU_USER1        | ウェポンアクション
-== CNTRLMNU_USER4        | スペシャルアクション
-== CNTRLMNU_SAY          | チャット
-== CNTRLMNU_TEAMSAY      | チームチャット
-== CNTRLMNU_AUTOMAP      | オートマップ
-== CNTRLMNU_CHASECAM     | 三人称視点
-== CNTRLMNU_COOPSPY      | 他者視点
-== CNTRLMNU_CONSOLE      | コンソールを開く
-== CNTRLMNU_ZOOM         | \cm[不用]ズーム
-== CNTRLMNU_TOGGLERUN    | \cm[不用]走るトグル
-== CNTRLMNU_USER2        | \cm[不用]アクション２
-== CNTRLMNU_USER3        | \cm[不用]アクション３
-== CNTRLMNU_USEITEM      | \cm[不用]アイテムを使用
-== CNTRLMNU_USEALLITEMS  | \cm[不用]すべてのアイテム使用
-== CNTRLMNU_NEXTITEM     | \cm[不用]次のアイテム
-== CNTRLMNU_PREVIOUSITEM | \cm[不用]前のアイテム
-== CNTRLMNU_DROPITEM     | \cm[不用]アイテムを捨てる
-== CNTRLMNU_QUERYITEM    | \cm[不用]アイテムを表示
 == CNTRLMNU_DROPWEAPON   | \cm[不用]武器を捨てる
-== CNTRLMNU_MISSION      | \cm[不用]クエスト
-== CNTRLMNU_KEYS         | \cm[不用]キーリスト
-== CNTRLMNU_STATS        | \cm[不用]状態
+== CNTRLMNU_RUN          | 走る・回避
+== CNTRLMNU_TOGGLERUN    | \cm[不用]走るトグル
+== CNTRLMNU_USER1        | \cm[ウェポンアクションと同じ]アクション1
+== CNTRLMNU_USER2        | \cm[不用]アクション2
+== CNTRLMNU_USER3        | \cm[不用]アクション3
+== CNTRLMNU_USER4        | \cm[スペシャルアクションと同じ]アクション4
+== CNTRLMNU_ZOOM         | \cm[不用]ズーム
 
 %% \#SKILL_TOURIST
 やる気か?このスキルは
@@ -179,6 +162,8 @@ Lithiumの雨が宇宙から降り注ぐか。
 == \#CTRL_GLARE   | 睨み
 == \#CTRL_LIGHT   | フラッシュをトグル
 == \#CTRL_OPENCBI | CBIを開ける
+== \#CTRL_QACT    | スペシャルアクション
+== \#CTRL_WACT    | ウェポンアクション
 == \#CTRL_ZOOMIN  | ズームイン
 == \#CTRL_ZOOMOUT | ズームアウト
 
@@ -192,12 +177,12 @@ Lithiumの雨が宇宙から降り注ぐか。
 == \#CTRL_TOGGRP3    | \cnセット3\c-全をトグル
 == \#CTRL_TOGGRP4    | \cfセット4\c-全をトグル
 
-== \#CLASS_MARINE    | マリーン
-== \#CLASS_CYBERMAGE | サイバメージ
-== \#CLASS_INFORMANT | インフォーマント
-== \#CLASS_ASSASSIN  | アサシン
-== \#CLASS_DARKLORD  | ダークロード
-== \#CLASS_WANDERER  | ワンダラー
-== \#CLASS_THOTH     | トート
+== \#MarinePlayer    | マリーン
+== \#CybermagePlayer | サイバメージ
+== \#InformantPlayer | インフォーマント
+== \#AssassinPlayer  | アサシン
+== \#DarkLordPlayer  | ダークロード
+== \#WandererPlayer  | ワンダラー
+== \#ThothPlayer     | トート
 
 ## EOF

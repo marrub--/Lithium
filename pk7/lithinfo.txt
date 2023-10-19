@@ -41,7 +41,7 @@
    cl: pM tag: BackpackLane;
    cl: pC tag: BackpackJem;
    cl: pD tag: BackpackAri;
-   cl: gA tag: Berserk  unl: "JAQTen";
+   cl: gA tag: Berserk  unl: "Faible";
    cl: gA tag: Infrared unl: "SYM43";
    cl: gA tag: RadSuit  unl: "SYM43";
 
@@ -63,7 +63,6 @@
    cl: gA tag: ArmAerodynamic unl: "Yigan";
    cl: gA tag: ArmHazMat      unl: "Yigan";
    cl: gA tag: ArmPinkSilver;
-   cl: gA tag: ArmMidori      unl: "ReverseAce";
 
    cl: pM tag: WeapnInter unl: "OFMD AllPoint";
    cl: pM tag: WeapnInte2;
@@ -114,8 +113,7 @@
    cl: pM tag: JetBooster  unl: "OFMD";
    cl: pM tag: ReflexWetw  unl: "OFMD";
    cl: pM tag: CyberLegs   unl: "OFMD";
-   cl: pM tag: Yh0         unl: "DurlaPrime";
-   cl: pM tag: DefenseNuke unl: "OFMD";
+   cl: pM tag: Yh0         unl: "DurlaPrime ChAri";
    cl: pM tag: Adrenaline  unl: "KSKK";
 
    cl: pC tag: HeadsUpDispJem unl: "AOF";
@@ -141,7 +139,7 @@
    cl: gO tag: OmicronXevv;
    cl: gA tag: ReverseAce;
    cl: pM tag: SuperDimension unl: "BFG9000";
-   cl: gA tag: Tsukama;
+   cl: gA tag: Calestari;
 }
 
 "corporations" {
@@ -149,26 +147,25 @@
    cl: pM tag: AOF;
    cl: pC tag: AOFJem;
    cl: pD tag: AOFAri;
-   cl: pM tag: Cid        unl: "SuperDimension Earth";
+   cl: pM tag: Cid unl: "SuperDimension Earth";
    cl: pM tag: Facer;
-   cl: gA tag: JAQTen     unl: "Tsukama";
+   cl: gA tag: Faible unl: "Calestari";
    cl: gA tag: JJJ;
-   cl: pM tag: KSKK       unl: "Earth";
-   cl: pC tag: KSKKJem    unl: "Earth";
-   cl: gO tag: MDDO       unl: "Mars OFMD";
-   cl: pC tag: Newvec     unl: "Earth";
+   cl: pM tag: KSKK    unl: "Earth";
+   cl: pC tag: KSKKJem unl: "Earth";
+   cl: gO tag: MDDO    unl: "Mars OFMD";
+   cl: pC tag: Newvec  unl: "Earth";
    cl: pM tag: OFMD;
    cl: pC tag: OFMDJem;
-   cl: gO tag: Omakeda    unl: "Earth";
-   cl: gO tag: Semaphore  unl: "OmicronXevv";
-   cl: gA tag: ShekaKaff  unl: "Tsukama";
-   cl: gA tag: SYM43      unl: "AetosVi";
-   cl: pM tag: UnrealArms unl: "AetosVi";
+   cl: gO tag: Throes    unl: "Earth";
+   cl: gO tag: Semaphore unl: "OmicronXevv";
+   cl: gA tag: ShekaKaff unl: "Calestari";
+   cl: gA tag: SYM43     unl: "AetosVi";
    cl: gA tag: Yigan;
 }
 
 "weapons auto" {
-   cl: pM tag: Pistol unl: "Omakeda";
+   cl: pM tag: Pistol unl: "Throes";
    cl: pC tag: Mateba unl: "AOF";
    cl: pD tag: Khanda;
    cl: pD tag: "700Express";
@@ -180,7 +177,7 @@
    cl: gO tag: ChargeFist unl: "KSKK";
 
    cl: pM tag: Revolver        unl: "Earth";
-   cl: pM tag: Shotgun         unl: "Omakeda";
+   cl: pM tag: Shotgun         unl: "Throes";
    cl: pM tag: Shotgun_A       unl: "Shotgun AOF DurlaPrime";
    cl: pM tag: Shotgun_B       unl: "Shotgun";
    cl: pM tag: LazShotgun      unl: "Earth";
@@ -190,7 +187,6 @@
    cl: pM tag: Rifle_B         unl: "CombatRifle Semaphore";
    cl: pM tag: SniperRifle     unl: "Facer";
    cl: pM tag: GrenadeLauncher unl: "SYM43";
-   cl: pM tag: RPG_A           unl: "GrenadeLauncher UnrealArms";
    cl: pM tag: RPG_B           unl: "GrenadeLauncher SYM43";
    cl: pM tag: PlasmaRifle     unl: "AllPoint MDDO";
    cl: pM tag: Plasma_A        unl: "PlasmaRifle";
@@ -201,12 +197,11 @@
 
    cl: pC tag: Mateba_A      unl: "Mateba AOF Algidistari";
    cl: pC tag: ShockRifle    unl: "ChAri";
-   cl: pC tag: ShockRif_A    unl: "ShockRifle";
    cl: pC tag: ShockRif_B    unl: "ShockRifle";
    cl: pC tag: SPAS          unl: "AOF Newvec";
    cl: pC tag: SPAS_A        unl: "SPAS";
    cl: pC tag: SPAS_B        unl: "SPAS Newvec";
-   cl: pC tag: SMG           unl: "Omakeda SYM43";
+   cl: pC tag: SMG           unl: "Throes SYM43";
    cl: pC tag: SMG_A         unl: "SMG AOF SYM43";
    cl: pC tag: SMG_B         unl: "SMG AOF";
    cl: pC tag: SMG_C         unl: "SMG SYM43";
@@ -259,6 +254,8 @@
    cl: gA tag: Extra3;
    cl: gA tag: Extra4;
    cl: gA tag: Extra5;
+   cl: gA tag: Extra6;
+   cl: gA tag: Extra7;
 }
 
 "mail auto" {

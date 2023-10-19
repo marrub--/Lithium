@@ -12,13 +12,12 @@ class Lith_InformantPlayer : Lith_Player
    {
       Health 50;
       Lith_Player.ViewBob 0.1;
-      Player.DisplayName "$LITH_CLASS_INFORMANT";
+      Player.DisplayName "$Lith_InformantPlayer";
       Player.SoundClass "lith_informant";
       Player.Portrait ":Portraits:Informant";
       Player.ViewHeight 44;
       Player.AttackZOffset 11;
-      Tag "$LITH_CLASS_INFORMANT";
-
+      Tag "$Lith_InformantPlayer";
       +NoBlood
    }
 

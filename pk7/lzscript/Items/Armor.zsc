@@ -206,32 +206,4 @@ class Lith_Armor_PinkSilver_Lower : Lith_ArmorResistant {
    states {Spawn: ARM7 C -1; stop;}
 }
 
-class Lith_Armor_Midori_Upper : Lith_ArmorResistant {
-   default {
-      Inventory.PickupSound "player/pickup/armor/midori";
-      Lith_InventoryItem.InvName "ArmMidoriUp";
-      Lith_InventoryItem.InfoPage "ArmMidori";
-      Lith_InventoryItem.Size 4, 2;
-      Lith_InventoryItem.InvSell 777700;
-      Lith_ArmorBase.Save 6, 7;
-      Lith_ArmorResistant.Resist ldt_firemagic;
-   }
-
-   states {Spawn: ARM8 A -1; stop;}
-}
-
-class Lith_Armor_Midori_Lower : Lith_ArmorResistant {
-   default {
-      Inventory.PickupSound "player/pickup/armor/midori";
-      Lith_InventoryItem.InvName "ArmMidoriLo";
-      Lith_InventoryItem.InfoPage "ArmMidori";
-      Lith_InventoryItem.Size 2, 3;
-      Lith_InventoryItem.InvSell 777700;
-      Lith_ArmorBase.Save 4, 5;
-      Lith_ArmorResistant.Resist ldt_firemagic;
-   }
-
-   states {Spawn: ARM8 C -1; stop;}
-}
-
 /* EOF */

@@ -106,7 +106,7 @@ static void S_boole(struct set_parm const *sp) {
 
    S_label(sp, true);
 
-   if(G_Button_HId(sp->g, sp->y, tmpstr(v ? lang(sl_on) : lang(sl_off)),
+   if(G_Button_HId(sp->g, sp->y, tmpstr(v ? sl_on : sl_off),
                    _rght - gui_p.btnlist.w, sp->y, Pre(btnlist),
                    .fill = sp->st->fill))
    {
@@ -166,8 +166,8 @@ static void S_enume(struct set_parm const *sp) {
    i32 cr = faststrchk(sp->st->suff, "color") ? Draw_GetCr(v) : sp->g->defcr;
 
    PrintText_str(ns(v < min || v > max ?
-                    lang(sl_st_name_unknown) :
-                    lang_fmt(LANG "st_name_%s_%i", sp->st->suff, v)),
+                    sl_st_name_unknown :
+                    lang(strp(_l(LANG "st_name_"), _p(sp->st->suff), _c('_'), _p(v)))),
                  sf_smallfnt, cr,
                  sp->g->ox + _rght - btw * 2 - 1,2,
                  sp->g->oy + sp->y,1);
@@ -344,7 +344,7 @@ void P_CBI_TabSettings(struct gui_state *g) {
    noinit static gtab_t tn[countof(settings)];
    i32 set_num = 0;
    for(i32 i = 0; i < countof(settings); i++) {
-      faststrcpy_str(tn[i], ns(lang_fmt(LANG "st_tab_%s", settings[i].nam)));
+      faststrcpy_str(tn[i], ns(lang(strp(_l(LANG "st_tab_"), _p((cstr)settings[i].nam)))));
    }
    i32 yp = G_Tabs(g, &pl.cbi.st.settingstab, tn, countof(settings), 1);
    yp *= gui_p.btntab.h;

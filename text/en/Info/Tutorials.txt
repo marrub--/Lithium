@@ -93,7 +93,7 @@ Press Jump ({+jump}):
 * Most of \c[Lith_Green]Marine\c-'s weapons \cdhave alt-fires\c-
 ({+altattack}.)
 
-* No weapons use the <Weapon Action> ({+user1}) button.
+* No weapons use the <Weapon Action> ({+lith_k_wact}) button.
 
 * The <Special Action> ({+lith_k_qact}) button will quickly attack
 with a knife.
@@ -130,8 +130,8 @@ Press Jump ({+jump}):
 * Most of \c[Lith_Red]Cyber-Mage\c-'s weapons \ckdo not have
 alt-fires\c- ({+altattack}.)
 
-* The Sub-Machine Gun uses the <Weapon Action> ({+user1}) button to
-manually reload the chamber.
+* The Sub-Machine Gun uses the <Weapon Action> ({+lith_k_wact}) button
+to manually reload the chamber.
 
 * The <Special Action> ({+lith_k_qact}) button will open a menu for
 switching magic.
@@ -194,7 +194,7 @@ without firing.
 * Only the <.700 Express> and <Ruzuk> need to be reloaded.
 
 * <Ruzuk> and the upgraded <Hunting Shotgun> use the <Weapon Action>
-({+user1}) button to aim down sights.
+({+lith_k_wact}) button to aim down sights.
 
 == \#TUT_DarkLordItem_NAM | \c[Lith_Blue]D\c- Items
 @@ \#TUT_DarkLordItem_DSC

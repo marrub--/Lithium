@@ -18,7 +18,6 @@
 == \#DISCARD    | Discard
 == \#DOWN       | Down
 == \#EDIT       | Edit
-== \#EFFECT     | Effect:
 == \#EMPTY      | <empty>
 == \#EQUIP      | Equip
 == \#FORWARD    | Forward
@@ -43,7 +42,7 @@ Upgrades, tutorials, settings, and more, await...
 == \#CAT_DOWN | \ctDowngrade
 == \#CAT_ALL  | All
 
-== \#CAT_FILTER | Filter: %S
+== \#CAT_FILTER | Filter:
 
 == \#TERM_DISCONNECTING | Disconnecting...
 == \#TERM_IP            | <55.883.115.7>
@@ -57,8 +56,8 @@ Upgrades, tutorials, settings, and more, await...
 == \#TAB_ARSENAL_Lane | Arsenal
 == \#TAB_ARSENAL_Jem  | Directives
 == \#TAB_ARSENAL_Fulk | Rig
-== \#TAB_ARSENAL_Omi  | Gear
-== \#TAB_ARSENAL_Ari  | $$\#TAB_ARSENAL_Omi
+== \#TAB_ARSENAL_Omi  | Prizes
+== \#TAB_ARSENAL_Ari  | Relics
 == \#TAB_ARSENAL_Luke | Presages
 == \#TAB_ARSENAL_Kiri | Requests
 
@@ -117,7 +116,7 @@ You must start
 == \#BEGIN | [Press any key to begin]
 
 ## BIP ═══════════════════════════════════════════════════════════════════════╕
-== \#BIP_AVAILABLE  | %i/%i AVAILABLE
+== \#BIP_AVAILABLE  | AVAILABLE
 == \#BIP_BACK       | <BACK
 == \#BIP_CATEGS     | INFO CATEGORIES
 == \#BIP_HEADER     | BIOTIC INFORMATION PANEL ver2.5

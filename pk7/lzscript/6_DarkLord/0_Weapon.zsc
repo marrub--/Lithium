@@ -347,7 +347,7 @@ _SprintLoop:
    loop;
 _SprintDone:
    TNT1 A 1 offset(1, 32) a_lower(60);
-   TNT1 A 0 resolveState("Select");
+   TNT1 A 0 {return invoker.m_sprintReturn;}
    stop;
 _SubGun:
    TNT1 A 0 a_jumpIf(Lith_UTIL.pData(_pdt_upgrade, UPGR_SubGun_A), "_SubGun2");

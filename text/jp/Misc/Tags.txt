@@ -9,7 +9,7 @@
 ## Tags ══════════════════════════════════════════════════════════════════════╕
 == \#TAG_BlurSphere    | フラグマ
 == \#TAG_GreyHam       | ぐれー　はむ
-== \#TAG_Megasphere    | タオッチアン
+== \#TAG_Megasphere    | ハイラズ
 == \#TAG_SoulSphere    | ハート
 == \#TAG_SteggleSphere | steggleスフィア
 == \#TAG_ShobonSphere  | しょぼんスフィア

@@ -219,7 +219,6 @@ ninja
 # things that generate files to be built or linked
 req_file "build/libr.rb"
 req_file "build/trie.rb"
-req_file "build/stab.rb"
 req_file "build/upgc.rb"
 req_file "build/wepc.rb"
 req_file "build/verc.rb"

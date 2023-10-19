@@ -41,7 +41,7 @@ void GUIUpgradesList(struct gui_state *g) {
          }
       }
    } else {
-      filter_name = ns(lang(sl_cat_all));
+      filter_name = sl_cat_all;
 
       for_upgrade(upgr) {
          numbtns++;
@@ -50,7 +50,10 @@ void GUIUpgradesList(struct gui_state *g) {
       numbtns += _uc_max;
    }
 
-   BeginPrintFmt(tmpstr(lang(sl_cat_filter)), filter_name);
+   ACS_BeginPrint();
+   _p(sl_cat_filter);
+   _c(' ');
+   _p(filter_name);
    PrintText(sf_smallfnt, g->defcr, g->ox+2,1, g->oy+202,1);
 
    G_ScrBeg(g, &pl.cbi.st.upgrscr, 2, 23, gui_p.btnlist.w, 178, gui_p.btnlist.h * numbtns);
@@ -93,6 +96,7 @@ void GUIUpgradesList(struct gui_state *g) {
       str  upgrnam = lang(fast_strdup2(LANG "UPGRADE_TITLE_", upgr->name));
       if(!upgrnam) {
          upgrnam = fast_strdup(upgr->name);
+         color = CR_BLACK;
       }
       if(G_Button_HId(g, _i, tmpstr(upgrnam), 0, y, _i == *upgrsel, .color = color, .preset = pre)) {
          *upgrsel = _i;
@@ -114,9 +118,9 @@ void GUIUpgradeRequirements(struct gui_state *g, struct upgrade *upgr) {
 
    #define Req(name) statement({ \
       ACS_BeginPrint(); \
-      ACS_PrintString(ns(lang(name))); \
+      ACS_PrintString(name); \
       ACS_PrintChar(' '); \
-      ACS_PrintString(ns(lang(sl_required))); \
+      ACS_PrintString(sl_required); \
       PrintText(sf_smallfnt, CR_RED, g->ox+98,1, g->oy+187 + y,2); \
       y -= 10; \
    })
@@ -136,11 +140,11 @@ void GUIUpgradeRequirements(struct gui_state *g, struct upgrade *upgr) {
       cstr fmt;
 
       if(get_bit(upgr->flags, _ug_active)) {
-         fmt = tmpstr(lang(sl_shop_disable_saves));
+         fmt = tmpstr(sl_shop_disable_saves);
       } else if(over) {
-         fmt = tmpstr(lang(sl_shop_cant_activate));
+         fmt = tmpstr(sl_shop_cant_activate);
       } else {
-         fmt = tmpstr(lang(sl_shop_activate_uses));
+         fmt = tmpstr(sl_shop_activate_uses);
       }
 
       BeginPrintFmt(fmt, upgr->perf);
@@ -156,10 +160,10 @@ void GUIUpgradeRequirements(struct gui_state *g, struct upgrade *upgr) {
 
       if(get_bit(upgr->flags, _ug_active)) {
          chk = upgr->scoreadd > 0;
-         op  = tmpstr(lang(sl_shop_mul_disable));
+         op  = tmpstr(sl_shop_mul_disable);
       } else {
          chk = upgr->scoreadd < 0;
-         op  = tmpstr(lang(sl_shop_mul_enable));
+         op  = tmpstr(sl_shop_mul_enable);
       }
 
       i32 perc = fastabs(upgr->scoreadd);
@@ -187,48 +191,39 @@ void GUIUpgradeDescription(struct gui_state *g, struct upgrade *upgr) {
 
    PrintText_str(upgr->cost
       ? fast_strdup2(scoresep(upgr->shopdef.cost), mark)
-      : ns(lang(sl_free)), sf_smallfnt, g->defcr, g->ox+98,1, g->oy+17,1);
+      : sl_free, sf_smallfnt, g->defcr, g->ox+98,1, g->oy+17,1);
 
    /* Category */
    PrintText_str(ns(lang(sa_upgr_categ[upgr->category])), sf_smallfnt, g->defcr, g->ox+98,1, g->oy+27,1);
 
    /* Effect */
+   ACS_BeginPrint();
    ifauto(str, effect, lang_discrim(fast_strdup2(LANG "UPGRADE_EFFEC_", upgr->name))) {
-      ACS_BeginPrint();
-      ACS_PrintString(ns(lang(sl_effect)));
-      ACS_PrintChar(' ');
       ACS_PrintString(effect);
    }
-
-   i32 cr = g->defcr;
-
-   if(upgr->key == UPGR_UNCEUNCE) {
-      cr = rainbowcr();
-   }
-
+   i32 cr = upgr->key != UPGR_UNCEUNCE ? g->defcr : rainbowcr();
    PrintText(sf_smallfnt, cr, g->ox+98,1, g->oy+37,1);
-
    G_ClipRelease(g);
 }
 
 static
 void GUIUpgradeButtons(struct gui_state *g, struct upgrade *upgr) {
    /* Buy */
-   if(G_Button(g, tmpstr(lang(sl_buy)), 98, 192, !P_Shop_CanBuy(&upgr->shopdef), .fill = &pl.cbi.st.buyfill)) {
+   if(G_Button(g, tmpstr(sl_buy), 98, 192, !P_Shop_CanBuy(&upgr->shopdef), .fill = &pl.cbi.st.buyfill)) {
       P_Upg_Buy(upgr, false);
    }
 
    /* Activate */
    if(G_Button(g, tmpstr(get_bit(upgr->flags, _ug_active) ?
-                         lang(sl_deactivate) :
-                         lang(sl_activate)),
+                         sl_deactivate :
+                         sl_activate),
                98 + gui_p.btndef.w + 2, 192, !P_Upg_CanActivate(upgr)))
    {
       P_Upg_Toggle(upgr);
    }
 
    /* Groups */
-   PrintText_str(ns(lang(sl_autogroups)), sf_smallfnt, g->defcr, g->ox+242,0, g->oy+192,0);
+   PrintText_str(sl_autogroups, sf_smallfnt, g->defcr, g->ox+242,0, g->oy+192,0);
 
    for(i32 i = 0; i < 4; i++) {
       static

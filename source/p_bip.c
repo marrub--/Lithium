@@ -28,7 +28,7 @@ mem_size_t         bippagenum;
 script static void MailNotifyFinish(cstr name) {
    char remote[128];
    faststrcpy_str(remote, ns(lang(fast_strdup2(LANG "INFO_REMOT_", name))));
-   P_LogB(1, tmpstr(lang(sl_log_mailrecv)), remote);
+   P_LogB(1, tmpstr(sl_log_mailrecv), remote);
    if(ACS_Random(1, 10000) == 1) {
       bip.mailtrulyreceived++;
       AmbientSound(ss_player_YOUVEGOTMAIL, 1.0);

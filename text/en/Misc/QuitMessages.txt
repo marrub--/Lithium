@@ -68,9 +68,7 @@ but became disinterested after service.
 The Shock Rifle was previously used for hunting,
 famed for its great power and ease of use.
 Before it was stripped down and modified, anyway.
-%% QUITMSG27
-Rumors have spread of similarities between the
-phantoms haunting Hell and tales of past heroes.
+== QUITMSG27 | Give your soul to Hatsune Miku?
 %% QUITMSG28
 Within the week there will be OLD MEN,
 RUNNING THE WORLD, if you quit.

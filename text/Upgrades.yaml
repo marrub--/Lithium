@@ -26,9 +26,9 @@ _uc_body:
    pM:
       JetBooster:  {              f: --U--, mul: -5}
       CyberLegs:   {scr: 1220000, f: --U--, pr:  4}
-      ReactArmor:  {scr: 3500200, f: -D-R-, pr: 20, req: ai   }
-      ReactArmor2: {scr: 2990200, pg: N/A,  pr: 10, req: ai ra}
-      DefenseNuke: {scr:  580030, f: ----E,         req: ai   }
+      ReactArmor:  {scr: 3500200, f: -D-R-, pr: 20,  req: ai   }
+      ReactArmor2: {scr: 2990200, pg: N/A,  pr: 10,  req: ai ra}
+      DefenseNuke: {scr:  580030, f: ----E, pg: N/A, req: ai   }
       Adrenaline:  {scr: 1801000, f: -DU--, pr: 10}
    pC:
       Magic:       {              f: --UR-}
@@ -57,7 +57,7 @@ _uc_weap:
       Cannon_B:  {scr: 5800100,           pr: 5, grp: 4, req: wmd wrd}
    pC:
       Mateba_A:   {scr:  614100, grp: 1}
-      ShockRif_A: {scr: 1519590, grp: 2}
+      ShockRif_A: {scr: 1519590, grp: 2, pg: N/A}
       ShockRif_B: {scr: 1911590, grp: 2}
       SPAS_A:     {scr: 2140400, grp: 3}
       SPAS_B:     {scr: 1511100, grp: 3}
@@ -71,9 +71,9 @@ _uc_weap:
       ShipGun_B:  {scr: 7767700, grp: 5}
    pD:
       SubGun_A:     {scr:  810603}
-      SubGrn_A:     {scr: 9999999}
-      SubAxe_A:     {scr: 9999999}
-      SubDrt_A:     {scr: 9999999}
+      SubGrn_A:     {scr:  777757}
+      SubAxe_A:     {scr: 1001001}
+      SubDrt_A:     {scr:  939393}
       Kampilan_A:   {scr: 1720999}
       700E_A:       {scr:  900000}
       700E_B:       {scr: 9999999}
@@ -81,11 +81,11 @@ _uc_weap:
       Shrapnel_B:   {scr: 9999999}
       4Bore_A:      {scr: 4444444}
       4Bore_B:      {scr:  911111}
-      Minigun_A:    {scr: 9999999}
+      Minigun_A:    {scr: 2932134}
       Minigun_B:    {scr: 9999999}
       Franca_A:     {scr: 9999999}
       Franca_B:     {scr: 9999999}
-      Sophia_A:     {scr: 9999999}
+      Sophia_A:     {scr: 5123432}
       Sophia_B:     {scr: 9999999}
       FortuneGun_A: {scr: 9999999}
       FortuneGun_B: {scr: 9999999}

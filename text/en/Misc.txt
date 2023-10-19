@@ -25,7 +25,7 @@ the New Era, the researchers involved were to be awarded for their
 incredible discovery, but soon after, their entire institute
 disappeared.
 
-Twenty years later: 1649 N.E.
+Twenty years later: 1649 NE
 
 After an arduous investigative scan, hardware mega-corporation Optic
 Fiber Maxim-Danil discovers the missing research facility in uncharted
@@ -46,10 +46,11 @@ lonesome end, perhaps, awaits all of them. The dark energy sought to
 be siphoned leads through a dimension of hate--built of demons.
 @@
 
-
-Live on, Unity, cast away your zeal,
-see the path through peace towards death,
-or Lithium will forever rain in you.
+\cm
+              Go as one        \cjgo at once,
+              seek your peace  \cmthrough violence,
+              cast away doubt  \cjand strike, thyself,\c-
+             or Lithium will forever rain from the skies!
 
 ## Misc ══════════════════════════════════════════════════════════════════════╕
 == \#CHECK | Eng
@@ -60,8 +61,8 @@ or Lithium will forever rain in you.
 
 == \#ENTER_FMT   | Entered %S at %s NE
 %% \#CHARGE_FMT
-%.1lkkV \cjcharge
-(%i~%i damage)
+{}kV \cjcharge
+({}~{} damage)
 == \#MANA_CHARGE | [Siphoning Mana]
 
 %% \#DIV_SIGIL_GET
@@ -90,7 +91,7 @@ D I V I S I O N  S I G I L
 == OB_BARONHIT  | Incredible, %g dodged all those projectiles!
 == OB_CACO      | %o saw the flashing lights and walked towards them.
 == OB_CACOHIT   | %o LIKES CACO.
-== OB_CHAINGUY  | %o danced the chaingun cha-cha.
+== OB_CHAINGUY  | %o danced the chain-gun cha-cha.
 == OB_CYBORG    | The cyber-demon's rocket didn't agree with %o.
 == OB_DEMONHIT  | %o didn't dodge. Sucks for %h!
 == OB_FATSO     | %o got immolated by extremely slow fire.
@@ -143,11 +144,11 @@ D I V I S I O N  S I G I L
 == \#OB_Fire_4 | %o went up in flames.
 == \#OB_Fire_5 | Smells like... %o.
 
-== \#OB_Suicide_1 | %o took the hard way out.
-== \#OB_Suicide_2 | %o won a Darwin award.
-== \#OB_Suicide_3 | %o took a permanent solution to a temporary problem.
-== \#OB_Suicide_4 | %o imploded.
-== \#OB_Suicide_5 | %o couldn't take it anymore.
+== \#OB_Suicide_1 | %o threw in the towel.
+== \#OB_Suicide_2 | %o defenestrated %hself into a vacuum.
+== \#OB_Suicide_3 | %o decided enough was enough.
+== \#OB_Suicide_4 | %o inverted %p body instantaneously.
+== \#OB_Suicide_5 | %o thought they were almonds.
 
 == \#OB_Default_1 | %o is ded
 == \#OB_Default_2 | %o was perforated by a chaingunner hiding in the sky.
@@ -158,14 +159,14 @@ D I V I S I O N  S I G I L
 ## Death Messages ════════════════════════════════════════════════════════════╕
 == \#DEATHMSG_01 | YOU ARE DEAD, DEAD, DEAD
 == \#DEATHMSG_02 | GAME OVER YEAAAAAAHHHHHHHHHHH
-== \#DEATHMSG_03 | MAYBE YOU SHOULD TRY AN EASIER MAP, LIKE OKU.
-== \#DEATHMSG_04 | PROTIP: DO NOT PUT YOUR HEALTH IN /TMP.
-== \#DEATHMSG_05 | YHOLL WILL BE PLEASED WITH THIS TURN OF EVENTS.
-== \#DEATHMSG_06 | THE SKELETONS KNOW.
-== \#DEATHMSG_07 | SOMEWHERE IN THE HEAVENS, THEY ARE LAUGHING. AT YOU.
-== \#DEATHMSG_08 | JESUS CHRIST AMAZING
-== \#DEATHMSG_09 | CONTRACT TERMINATED. REASON: DIED, LOL.
-== \#DEATHMSG_10 | PLS, EVEN I COULD HAVE SURVIVED THAT.
+== \#DEATHMSG_03 | MAYBE YOU SHOULD TRY AN EASIER MAP
+== \#DEATHMSG_04 | PRO TIP: DO NOT PUT YOUR HEALTH IN /TMP
+== \#DEATHMSG_05 | YHOLL WILL BE PLEASED WITH THIS TURN OF EVENTS
+== \#DEATHMSG_06 | THE SKELETONS KNOW
+== \#DEATHMSG_07 | SOMEWHERE IN THE HEAVENS, THEY ARE LAUGHING
+== \#DEATHMSG_08 | NICE JOB
+== \#DEATHMSG_09 | CONTRACT TERMINATED
+== \#DEATHMSG_10 | EVEN I COULD HAVE SURVIVED THAT
 == \#DEATHMSG_11 | HAHAHAHA!
 == \#DEATHMSG_12 | YOU SHOULDN'T HAVE DONE THAT.
 == \#DEATHMSG_13 | WOW! LOOK AT THOSE DEMON FEET.
@@ -210,8 +211,8 @@ D I V I S I O N  S I G I L
 
 == OPTVAL_MALE    | Masculine
 == OPTVAL_FEMALE  | Feminine
-== OPTVAL_NEUTRAL | Non-binary
-== OPTVAL_OTHER   | Other
+== OPTVAL_NEUTRAL | Something Else
+== OPTVAL_OTHER   | Robot
 
 == OPTVAL_OFF  | [Off]
 == OPTVAL_ON   | [On]
@@ -219,31 +220,14 @@ D I V I S I O N  S I G I L
 
 == SAFEMESSAGE | >>> [[[Are you sure?]]] <<<
 
-== CNTRLMNU_ALTATTACK    | Secondary Fire/Zoom
-== CNTRLMNU_RELOAD       | Reload
+== CNTRLMNU_DROPWEAPON   | \cm[Unusable] Drop Weapon
 == CNTRLMNU_RUN          | Dodge / Run
-== CNTRLMNU_USER1        | Weapon Action
-== CNTRLMNU_USER4        | Special Action
-== CNTRLMNU_SAY          | Speak
-== CNTRLMNU_TEAMSAY      | Speak to Team
-== CNTRLMNU_AUTOMAP      | Toggle Automap
-== CNTRLMNU_CHASECAM     | Third Person
-== CNTRLMNU_COOPSPY      | Co-op Spy
-== CNTRLMNU_CONSOLE      | Open Console
-== CNTRLMNU_ZOOM         | \cm[Unused] Zoom
-== CNTRLMNU_TOGGLERUN    | \cm[Unused] Toggle Run
+== CNTRLMNU_TOGGLERUN    | \cm[Unusable] Toggle Run
+== CNTRLMNU_USER1        | \cm[Same as Weapon Action] Action 1
 == CNTRLMNU_USER2        | \cm[Unused] Action 2
 == CNTRLMNU_USER3        | \cm[Unused] Action 3
-== CNTRLMNU_USEITEM      | \cm[Unused] Use Item
-== CNTRLMNU_USEALLITEMS  | \cm[Unused] Use All Items
-== CNTRLMNU_NEXTITEM     | \cm[Unused] Next Item
-== CNTRLMNU_PREVIOUSITEM | \cm[Unused] Prev. Item
-== CNTRLMNU_DROPITEM     | \cm[Unused] Drop Item
-== CNTRLMNU_QUERYITEM    | \cm[Unused] Query Item
-== CNTRLMNU_DROPWEAPON   | \cm[Unused] Drop Weapon
-== CNTRLMNU_MISSION      | \cm[Unused] Objectives
-== CNTRLMNU_KEYS         | \cm[Unused] Keys List
-== CNTRLMNU_STATS        | \cm[Unused] Stats
+== CNTRLMNU_USER4        | \cm[Same as Quick Action] Action 4
+== CNTRLMNU_ZOOM         | \cm[Unused] Zoom
 
 == DOSY     | (Press Y to quit.)
 == PRESSYN  | Press Y or N.
@@ -258,6 +242,8 @@ D I V I S I O N  S I G I L
 == \#CTRL_GLARE   | Glare
 == \#CTRL_LIGHT   | Toggle Flashlight
 == \#CTRL_OPENCBI | Open CBI
+== \#CTRL_QACT    | Special Action
+== \#CTRL_WACT    | Weapon Action
 == \#CTRL_ZOOMIN  | Zoom In
 == \#CTRL_ZOOMOUT | Zoom Out
 
@@ -278,83 +264,83 @@ D I V I S I O N  S I G I L
 ## 012345678901234567890123456
 ## 01234567890123456789012345
 
-== \#CLASS_MARINE     | Marine
-== \#CLASS_MARINE_DeN | Stanley J. Blazkowicz
-== \#CLASS_MARINE_DPr | he/him
-== \#CLASS_MARINE_Nam | Lane Blazkowicz
-== \#CLASS_MARINE_Pro | she/her
-== \#CLASS_MARINE_Col | Lith_Green
-%% \#CLASS_MARINE_Dsc
+== \#MarinePlayer     | Marine
+== \#MarinePlayer_DeN | Stanley J. Blazkowicz
+== \#MarinePlayer_DPr | he/him
+== \#MarinePlayer_Nam | Lane Blazkowicz
+== \#MarinePlayer_Pro | she/her
+== \#MarinePlayer_Col | Lith_Green
+%% \#MarinePlayer_Dsc
 An exceptional soldier,
 augmented with tech and some
 of the most advanced weaponry
 there is. Agile, simple,
 an advanced baseline.
 
-== \#CLASS_CYBERMAGE     | Cyber-Mage
-== \#CLASS_CYBERMAGE_Nam | Jeremy Stilko
-== \#CLASS_CYBERMAGE_Pro | he/him
-== \#CLASS_CYBERMAGE_Col | Lith_Red
-%% \#CLASS_CYBERMAGE_Dsc
+== \#CybermagePlayer     | Cyber-Mage
+== \#CybermagePlayer_Nam | Jeremy Stilko
+== \#CybermagePlayer_Pro | he/him
+== \#CybermagePlayer_Col | Lith_Red
+%% \#CybermagePlayer_Dsc
 Possesses great knowledge of
 magic and cybernetics, capable
 of using both firearms and
 spells to his advantage.
 Relies on weapon quirks.
 
-== \#CLASS_INFORMANT     | Informant
-== \#CLASS_INFORMANT_Nam | Folques of Red and Black
-== \#CLASS_INFORMANT_Pro | they/them
-## == \#CLASS_INFORMANT_Col | Lith_Purple
-== \#CLASS_INFORMANT_Col | Black
-%% \#CLASS_INFORMANT_Dsc
+== \#InformantPlayer     | Informant
+== \#InformantPlayer_Nam | Folques of Red and Black
+== \#InformantPlayer_Pro | they/them
+## == \#InformantPlayer_Col | Lith_Purple
+== \#InformantPlayer_Col | Black
+%% \#InformantPlayer_Dsc
 An advanced combat robot,
 built to seal Hell before it
 gets any worse. They rely on
 countering enemies and
 their obtuse arsenal.
 
-== \#CLASS_ASSASSIN     | Assassin
-== \#CLASS_ASSASSIN_Nam | Omisielle Faulzaje
-== \#CLASS_ASSASSIN_Pro | they/she
-## == \#CLASS_ASSASSIN_Col | Lith_Pink
-== \#CLASS_ASSASSIN_Col | Black
-%% \#CLASS_ASSASSIN_Dsc
+== \#AssassinPlayer     | Assassin
+== \#AssassinPlayer_Nam | Omisielle Faulzaje
+== \#AssassinPlayer_Pro | they/she
+## == \#AssassinPlayer_Col | Lith_Pink
+== \#AssassinPlayer_Col | Black
+%% \#AssassinPlayer_Dsc
 An intruder from another
 dimension, a fast and violent
 human constructed in a lab.
 They use combos and tricks
 to kill through the horde.
 
-== \#CLASS_DARKLORD     | Dark Lord
-== \#CLASS_DARKLORD_Nam | Aricil Deyan'za
-== \#CLASS_DARKLORD_Pro | he/they
-== \#CLASS_DARKLORD_Col | Lith_Blue
-%% \#CLASS_DARKLORD_Dsc
+== \#DarkLordPlayer     | Dark Lord
+== \#DarkLordPlayer_Nam | Aricil Deyan'za
+== \#DarkLordPlayer_Pro | he/they
+== \#DarkLordPlayer_Col | Lith_Blue
+%% \#DarkLordPlayer_Dsc
 A walking tank, lord of all
 destruction. Much like a tank,
 moves slow, but hits hard.
 Bring the slaughter, but be
 prepared to think deftly.
 
-== \#CLASS_WANDERER     | Wanderer
-== \#CLASS_WANDERER_Nam | Lucas Sánchez
-== \#CLASS_WANDERER_Pro | it/its
-## == \#CLASS_WANDERER_Col | Lith_Yellow
-== \#CLASS_WANDERER_Col | Black
-%% \#CLASS_WANDERER_Dsc
+== \#WandererPlayer     | Wanderer
+== \#WandererPlayer_Nam | Lucas Sánchez
+== \#WandererPlayer_Pro | it/its
+## == \#WandererPlayer_Col | Lith_Yellow
+== \#WandererPlayer_Col | Black
+%% \#WandererPlayer_Dsc
 An alien with no home,
 wandering throughout the stars
 searching for purpose. Has an
 advanced arsenal and alien
 magic with odd effects.
 
-== \#CLASS_THOTH     | Thoth
-== \#CLASS_THOTH_Nam | Kirihito Kosatohara
-== \#CLASS_THOTH_Pro | she/her
-## == \#CLASS_THOTH_Col | Lith_Grey
-== \#CLASS_THOTH_Col | Black
-%% \#CLASS_THOTH_Dsc
+== \#ThothPlayer     | Thoth
+== \#ThothPlayer_Nam | Kirihito Kosatohara
+== \#ThothPlayer_Pro | she/her
+## == \#ThothPlayer_Col | Lith_Grey
+== \#ThothPlayer_Col | Black
+%% \#ThothPlayer_Dsc
 The third incarnation of the
 immortal Kirika, sent by the
 god Thoth to reassert
@@ -379,9 +365,11 @@ Seek and remove source [LIFEFORM 96a.]
 
 %% \#BossWarnOmi
 Detected high amounts of demonic energy near by.
-Find and slaughter interloper.
+Find and eradicate target!
 
-== \#BossWarnAri | $$\#BossWarnOmi
+%% \#BossWarnAri
+Detected high amounts of demonic energy near by.
+Find and eradicate interloper.
 
 %% \#BossWarnLuke
 The area's aura suppresses you...

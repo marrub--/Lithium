@@ -134,7 +134,7 @@ void Upgr_HoverBoots_Update(void) {
 void Upgr_SkillSword_Enter(void) {
    ServCallV(sm_KhandaPower);
    AmbientSound(ss_weapons_khanda_pwup, 0.25k);
-   P_CenterNotification(ns(lang(sl_go_kill)), 35*3, CR_RED, 0xFF0000, 1, 1);
+   P_CenterNotification(sl_go_kill, 35*3, CR_RED, 0xFF0000, 1, 1);
    ACS_SetWeapon(so_Khanda);
 }
 

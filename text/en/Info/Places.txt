@@ -7,115 +7,124 @@
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_SHORT_AetosVi | Aetos Vi
+== \#INFO_SHORT_AetosVi | Aëtos Vi
 == \#INFO_TITLE_AetosVi | $$\#INFO_SHORT_AetosVi
 @@ \#INFO_DESCR_AetosVi
-A planetary system 17 lightyears away from Earth that houses several planets
-with sentient life on them. Found approximately 700 years ago now, this is the
-second system reached by humans, and the first with sentient life.
+A planetary system ~5.2 parsecs away from Earth that houses several
+planets with sentient life on them. Found approximately 700 years ago
+now, this is the second system reached by humans, and the first with
+sentient life.
 
-When the system was found, rejoice was had throughout all mankind, finally
-knowing that they weren't alone in the universe.
+When the system was found, rejoice was had throughout all mankind,
+finally knowing that they weren't alone in the universe.
 
-Then, of course, the expeditioners were attacked by natives.
-But that's fine details.
+Then, of course, the expeditioners began to attack. But, those are
+fine details.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Algidistari | Algidistari
 == \#INFO_TITLE_Algidistari | $$\#INFO_SHORT_Algidistari
 @@ \#INFO_DESCR_Algidistari
-Algidistari is a planetary system 45 lightyears in distance from Earth. While
-it has many planets in its main sequence, and many rocks, it is for the most
-part not suitable for human life due to its cold atmosphere caused by a small
-central star.
+Algidistari is a planetary system ~13.8 parsecs in distance from
+Earth. While it has many planets in its main sequence, and many rocks,
+it is for the most part not suitable for human life due to its cold
+atmosphere caused by a small central star.
 
-Several of the planets in this system such as Neptune 11 are quite large and
-are semi-habitable, thus becoming quite suitable for magi of the
-\chCaeruleum\c- mode to test magic on.
+Several of the planets in this system such as Neptune 1135872 are
+quite large and are semi-habitable, thus becoming quite suitable for
+magi of the \chCaeruleum\c- mode to test magic on.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ChAri | Ch'ari
 == \#INFO_TITLE_ChAri | $$\#INFO_SHORT_ChAri
 @@ \#INFO_DESCR_ChAri
-A planet in the Aetos-Vi planetary system composed of four land masses and a
-large amount of water, populated by a highly intelligent light-manipulating
-race known as the Kiri.
+A planet in the Aëtos-Vi planetary system composed of four land masses
+and a large amount of water, populated by a highly intelligent
+light-manipulating species known as the Kiryy.
 
-Previously, humans also lived on this planet, but were driven out by a large
-scale terrorist enactment.
+Previously, humans also lived on this planet, but were driven out by a
+large-scale terrorist attack.
 
-Ch'ari is generally dull and dark-grey looking save for the water, but the
-communications of the Kiri light up the darkness in a beautiful fashion.
+Ch'ari is generally dull and dark-grey looking save for the water, but
+the communications of the Kiryy light up the darkness in a beautiful
+fashion.
 
-Its inhabitants include fish and plant life, as well as land-dwelling beasts
-such as giant mammoth-like creatures and the two-legged Falx.
+Its inhabitants include fish and plant life, as well as land-dwelling
+beasts such as giant mammoth-like creatures and the two-legged Falx.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_DurlaPrime | Durla Prime
 == \#INFO_TITLE_DurlaPrime | $$\#INFO_SHORT_DurlaPrime
 @@ \#INFO_DESCR_DurlaPrime
-A planet in the Aetos-Vi planetary system whose dominant species is a humanoid
-avian creature, the "Peristera" or, colloquially, "Perist".
+A planet in the Aëtos-Vi planetary system whose dominant species is a
+humanoid avian creature, the "Peristera" (pl. "Peristeres") or,
+colloquially, "Perist".
 
-When humans arrived on Durla Prime, the Peristeras were highly frightened by
-the presence of an alien, sentient being, and war broke loose. Refusing to
-attack, the humans ended the war a mere month later, after learning to
-communicate with the avian species.
+When humans arrived on Durla Prime, the Peristeres were highly
+frightened by the presence of an alien, sentient being, and war broke
+loose as soon as they began to fly away. Refusing to attack, the
+Peristeres ended the war a mere month later, after learning to
+communicate with the primate species.
 
-The planet is extremely similar to Earth, even having grass and trees that
-mostly resemble their earthly counterparts.
+The planet is extremely similar to Earth, even having grass and trees
+that mostly resemble their earthly counterparts.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Earth | Earth
 == \#INFO_TITLE_Earth | $$\#INFO_SHORT_Earth
 @@ \#INFO_DESCR_Earth
-The year is 1649 New Era. After an event that almost led to an apocalypse in
-3031 CE, humanity collectively decided to mark a new era dedicated to
-progressing travel and communications across the galaxy.
+The year is 1649 New Era. After an event that almost led to an
+apocalypse in 3031 CE, humanity collectively decided to mark a new era
+dedicated to progressing travel and communications across the galaxy.
 
-Earth has stayed largely the same as it was in the Common Era, thanks to
-advances in science.
+By 1000 NE, most of the population on Earth had moved to other
+inhabitable planets, but still a large population remains on the blue
+planet.
 
-By 1000 NE, most of the population on Earth had moved to other inhabitable
-planets, but still a large population remains on the blue planet.
+Earth, and moreover humanity, has remained largely the same as it was
+in the middle of the Common Era, although around 300 years of history
+were lost in the calamity.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Hell | Hell
 == \#INFO_TITLE_Hell | $$\#INFO_SHORT_Hell
 @@ \#INFO_DESCR_Hell
-Whether the Hell found ripping into our dimension is actually from any known
-religion is not known. What is known, however, is that its inhabitants seek to
-destroy and enslave everything they can get their hands on.
+Whether the Hell found ripping into our dimension is actually from any
+known religion is not known. What is known, however, is that its
+inhabitants seek to destroy and enslave everything they can get their
+hands on.
 
-Composed of several ranks, Hell is a dictatorship led by one called the Icon
-of Sin, or Satan by some. The inhabitants of Hell seem to gain some kind of
-energy from suffering and death, possibly an abstract power like that
-previously found on Earth, thousands of years ago.
+Composed of several ranks, Hell is a dictatorship led by one called
+the Icon of Sin, or Satan by some. The inhabitants of Hell seem to
+gain some kind of dark energy from suffering and death, possibly an
+abstract power like that previously found on Earth, thousands of years
+ago.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Mars | Mars
 == \#INFO_TITLE_Mars | $$\#INFO_SHORT_Mars
 @@ \#INFO_DESCR_Mars
-In 2714 CE, a huge interplanetary workload boom began, spawning numerous
-factories and artificial workplaces on Mars manned by robots.
+In 2714 CE, a huge interplanetary workload boom began, spawning
+numerous factories and artificial workplaces on Mars manned by robots.
 
-Thanks to advances in terrestrial travel, the ability to transfer goods
-between Mars and Earth became cheap enough to be profitable during the periods
-where Mars is closer to Earth.
+Thanks to advances in terrestrial travel, the ability to transfer
+goods between Mars and Earth became cheap enough to be profitable
+during the periods where Mars is closer to Earth.
 
-Still to this day many companies on Earth -- and even some intra-galactic
-corporations like OFMD -- use Mars as a place to house autonomous work.
+Still to this day many companies on Earth—and even some intra-galactic
+corporations like OFMD—use Mars as a place to house autonomous work.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_OmicronXevv | Omicron Xevv
 == \#INFO_TITLE_OmicronXevv | $$\#INFO_SHORT_OmicronXevv
 @@ \#INFO_DESCR_OmicronXevv
-A binary star system near Sirius about 8 lightyears away from Earth. The
-asteroid belt surrounding the star system has many large, well-lit and fairly
-temperate asteroids suitable for humans to live on.
+A binary star system near Sirius ~2.5 parsecs away from Earth. The
+asteroid belt surrounding the star system has many large, well-lit and
+fairly temperate asteroids suitable for humans to live on.
 
-Omicron Xevv has been used by many small companies throughout the years to
-have a secluded, free place to do research, surveillance and development.
+Omicron Xevv has been used by many small companies throughout the
+years to have a secluded, free place to do research, surveillance and
+development.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_SuperDimension | Super Dimension
@@ -128,53 +137,63 @@ beings there.
 Several Artifacts have come from this dimension, although many of them
 have been lost to time.
 
+Nobody knows what this dimension looks like exactly, but illustrations
+of a marsh have come through the gap, leading many to speculate
+wildly.
+
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Heaven | The God Cage
 == \#INFO_TITLE_Heaven | $$\#INFO_SHORT_Heaven
 @@ \#INFO_DESCR_Heaven
-A strange dimension. The beings of the God Cage are the most powerful beings in
-all of existence, capable of destroying reality itself if they thought it best.
+A strange dimension. The beings of the God Cage are the most powerful
+beings in all of existence, capable of destroying reality itself if
+they thought it best.
 
-The God Cage itself is a finite dimension, possibly the first of any. While it
-cannot be visually described, it is known that all particles in this dimension
-are made of pure, primordial magic of which is untouchable by any outside
-source; hence the name, a caged dimension for only the Gods to roam.
+The God Cage itself is a finite dimension, possibly the first of any.
+While it cannot be visually described, it is known that all particles
+in this dimension are made of pure, primordial magic of which is
+untouchable by almost any outside source; hence the name, a caged
+dimension for only the Gods to roam.
 
-Hermes is the only known God capable of holding a physical form outside of the
-God Cage, and moreover the only one capable of outside communication.
-His demise during the events of the calamity have halted all further knowledge
-about the dimension, leaving it merely the mental shape of a huge chrome
-cylinder box.
+Hermes is the only known God capable of manifesting their physical
+form outside of the God Cage, and moreover the only one capable of
+outside communication. His demise during the events of the calamity
+have halted all further knowledge about the dimension, leaving it
+merely the mental shape of a huge chrome cylinder box.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ReverseAce | Reverse Ace
 == \#INFO_TITLE_ReverseAce | $$\#INFO_SHORT_ReverseAce
 @@ \#INFO_DESCR_ReverseAce
-Most things about this hyperdimension are unknown as of yet. When the God Thoth
-descended to the mortal realm in 1344 NE, the body she chose told stories of
-living in this dimension before becoming an immortal holy vessel.
+Most things about this hyperdimension are unknown as of yet. When the
+God Thoth descended to the mortal realm in 1344 NE, the body she chose
+told stories of living in this dimension before becoming an immortal
+holy vessel.
 
-Before this event, the dimension was unheard of, with no leaps occurring
-between it and this realm. Since Thoth left this place, nothing more has been
-found, leading to lots of speculation and questioning of whether this place
-truly exists. Nevertheless, many years later, artifacts began to surface.
+Before this event, the dimension was unheard of, with no leaps
+occurring between it and this realm. Since Thoth left this plane,
+nothing more has been found, leading to lots of speculation and
+questioning of whether this place truly exists. Nevertheless, many
+years later, artifacts began to surface.
 
-The origin of its name is unknown, and many details of its appearance were
-left vague by the legendary vessel, making consensus difficult on its
-description.
+The origin of its name is unknown, and many details of its appearance
+were left vague by the legendary vessel, making consensus difficult on
+its description. The only consistent line through all of her stories
+is a sense of emptiness.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_SHORT_Tsukama | Tsukama
-== \#INFO_TITLE_Tsukama | $$\#INFO_SHORT_Tsukama
-@@ \#INFO_DESCR_Tsukama
-A system about 45 lightyears from Earth, not far from Algidistari. The system
-is composed of 14 planets and one star, which emits slightly more heat than
-the Sun, making the planets here extremely temperate during solar cycles.
+== \#INFO_SHORT_Calestari | Calestari
+== \#INFO_TITLE_Calestari | $$\#INFO_SHORT_Calestari
+@@ \#INFO_DESCR_Calestari
+A system ~13.8 parsecs from Earth, not far from Algidistari. The
+system is composed of 14 planets and one star, which emits slightly
+more heat than the Sun, making the planets here extremely temperate
+during solar cycles.
 
 Three of the planets, Eta, Ni and Keta, are desert planets capable of
-inhabiting human life, although have few native inhabitants, none sentient.
-Seven of the planets are completely barren, although house valuable minerals
-which make the system a large trading place. The other three planets are gas
-giants and have not been surface inspected yet.
+inhabiting human life, and have few native inhabitants—none sentient.
+Seven of the planets are completely barren, although house valuable
+minerals which make the system a large trading hub. The remaining
+four planets are gas giants and have not been surface inspected yet.
 
 ## EOF

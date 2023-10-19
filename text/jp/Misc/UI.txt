@@ -17,7 +17,6 @@
 == \#DISCARD    | 捨てる
 == \#DOWN       | 下へ
 == \#EDIT       | 編集
-== \#EFFECT     | 効果
 == \#EMPTY      | 空
 == \#EQUIP      | 装備
 == \#FREE       | 無料
@@ -37,7 +36,7 @@
 == \#CAT_DOWN | \ct格下げ
 == \#CAT_ALL  | 全て
 
-== \#CAT_FILTER | ﾌｨﾙﾀｰ: %S
+== \#CAT_FILTER | ﾌｨﾙﾀｰ:
 
 == \#TERM_DISCONNECTING | 切断中...
 == \#TERM_USE_TO_ACK    | 使うで確認します
@@ -98,7 +97,7 @@
 == \#BEGIN | [どれかのキーを押して始める]
 
 ## BIP ═══════════════════════════════════════════════════════════════════════╕
-== \#BIP_AVAILABLE  | %i/%i 使用可能
+== \#BIP_AVAILABLE  | 使用可能
 == \#BIP_BACK       | <戻る
 == \#BIP_NO_RESULTS | 該当なし
 

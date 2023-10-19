@@ -245,6 +245,7 @@ alloc_aut(0) script static void W_WrongConfig() {
 script ext("ACS") addr(lsc_gsinit) void GsInit(void);
 
 alloc_aut(0) script ext("ACS") addr(lsc_worldopen) void Z_World(void) {
+   P_EarlyInit();
    if(!wl.init) {
       GsInit();
       StrInit();

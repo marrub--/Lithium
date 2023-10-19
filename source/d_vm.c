@@ -268,7 +268,7 @@ void TerminalGUI(i32 tact) {
    PrintRect(0, tbottom-12, twidth, 12,      0xFF44000C);
 
    /* Top-left text */
-   PrintText_str(ns(lang(sl_term_sgxline)), sf_ltrmfont, CR_RED, 0,1, 0,1);
+   PrintText_str(sl_term_sgxline, sf_ltrmfont, CR_RED, 0,1, 0,1);
 
    /* Top-right text */
    str lng;
@@ -277,23 +277,23 @@ void TerminalGUI(i32 tact) {
    default:         lng = sl_term_remote; goto trmtxt;
    case TACT_LOGON: lng = sl_term_open_connect;
    trmtxt:
-      tr = strp(_p(lang(lng)), _p(tr));
+      tr = strp(_p(lng), _p(tr));
       break;
    case TACT_LOGOFF:
-      tr = ns(lang(sl_term_disconnecting));
+      tr = sl_term_disconnecting;
       break;
    }
    PrintText_str(tr, sf_ltrmfont, CR_RED, tright,2, 0,1);
 
    /* Bottom-left text */
-   PrintText_str(ns(lang(sl_term_ip)), sf_ltrmfont, CR_RED, 0,1, tbottom,2);
+   PrintText_str(sl_term_ip, sf_ltrmfont, CR_RED, 0,1, tbottom,2);
 
    /* Bottom-right text */
    str br;
    switch(tact) {
    case TACT_LOGON:
    case TACT_LOGOFF: br = fast_strdup(CanonTime(ct_date, ACS_Timer())); break;
-   default:          br = ns(lang(sl_term_use_to_ack));                 break;
+   default:          br = sl_term_use_to_ack;                           break;
    }
    PrintText_str(br, sf_ltrmfont, CR_RED, tright,2, tbottom,2);
 
@@ -442,7 +442,7 @@ stk_sta void F_drawText(i32 h, str text) {
    if(text && text[0]) {
       SetClipW(10, 10, 300, h, 300);
       PrintFill(0x7F000000);
-      PrintText_str(text, sf_smallfnt, CR_WHITE, 10,1, 10,1);
+      PrintText_str(text, sf_ltrmfont, CR_WHITE, 10,1, 10,1);
       ClearClip();
    }
 }
@@ -617,7 +617,7 @@ alloc_aut(0) sync static void ActFIN_WAIT(void) {
             _l(", ");
             ACS_PrintBind(sc_attack);
             _c(' ');
-            _p(ns(lang(sl_continue_finale)));
+            _p(sl_continue_finale);
             PrintText(sf_smallfnt, CR_WHITE, _fill_x,6, _fill_y,0);
             if(i == 1) {
                if(!G_Filler(_fill_x, _fill_y, &fil_fill,

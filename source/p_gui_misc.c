@@ -36,16 +36,16 @@ static void stat_text(struct gui_state *g, i32 x, i32 y, str left, str right) {
 
 void P_CBI_TabStatus(struct gui_state *g) {
    PrintText_str(pl.name, sf_lmidfont, g->defcr, g->ox+7,1, g->oy+27,1);
-   stat_text(g, 7, 37, ns(lang(sl_status_cl)), pl.classname);
-   stat_text(g, 7, 47, ns(lang(sl_status_hp)), strp(_p((i32)pl.health), _c('/'), _p(pl.maxhealth)));
+   stat_text(g, 7, 37, sl_status_cl, pl.classname);
+   stat_text(g, 7, 47, sl_status_hp, strp(_p((i32)pl.health), _c('/'), _p(pl.maxhealth)));
    if(get_bit(pcl_magicuser, pl.pclass)) {
-      stat_text(g, 7, 57, ns(lang(sl_status_mp)), strp(_p((i32)pl.mana), _c('/'), _p((i32)pl.manamax)));
+      stat_text(g, 7, 57, sl_status_mp, strp(_p((i32)pl.mana), _c('/'), _p((i32)pl.manamax)));
    }
-   stat_text(g, 147, 37, ns(lang(sl_status_lv)), strp(_p(pl.attr.level)));
-   stat_text(g, 147, 47, ns(lang(sl_status_xp)), strp(_p(pl.attr.exp)));
-   stat_text(g, 147, 57, ns(lang(sl_status_nx)), strp(_p(pl.attr.expnext)));
+   stat_text(g, 147, 37, sl_status_lv, strp(_p(pl.attr.level)));
+   stat_text(g, 147, 47, sl_status_xp, strp(_p(pl.attr.exp)));
+   stat_text(g, 147, 57, sl_status_nx, strp(_p(pl.attr.expnext)));
    if(pl.attr.points) {
-      BeginPrintFmt(tmpstr(lang(sl_status_levelup)), pl.attr.points);
+      BeginPrintFmt(tmpstr(sl_status_levelup), pl.attr.points);
       PrintText(sf_smallfnt, g->defcr, g->ox+7,1, g->oy+67,1);
    }
    attr_gui(g, 77);

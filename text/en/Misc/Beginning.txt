@@ -10,8 +10,8 @@
 %% \#BEGINNING_Lane_1
 During the 17th century of the New Era, our country began drafting the
 youth into the military again. Most people couldn't understand why,
-even though it was pretty obvious if you looked at our current
-relations with other nations.
+even though it was pretty obvious if you looked at our relations with
+other nations.
 ~
 I wasn't particularly young, but they decided to draft me anyway -
 apparently they were short on people to steal away for their
@@ -73,11 +73,12 @@ transport. I can't, though. The software patcher will halt on any
 change in my OS state. Not only will I never be free, but I will
 likely die a painful and unforgivable death as my cybernetics fail to
 load the proper executables and force me into a state of permanent
-insanity. I must keep going.
+entrapment. I must keep going.
 ~
 The information streams through my mind, all the cerebral intake
 forcing itself through my consciousness in a raging torrent.
-Throughout it I catch the necessary pieces - my orders, and my mind.
+Throughout it I catch the necessary pieces - my orders, and my
+thoughts.
 
 %% \#BEGINNING_Jem_2
 My mind, though corrupted and unfeeling, still it holds many
@@ -91,7 +92,7 @@ way out. So into the midst of Hell I go.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 %% \#BEGINNING_Fulk_1
-The laboratory is quiet, as always, despite the current circumstances.
+The laboratory is quiet, as always, despite the circumstances.
 The silence is only disturbed by the low voices of the staff and the
 whirring of computer fans.
 ~
@@ -127,8 +128,8 @@ arose from the question of whether or not the mission would be
 completed.
 ~
 Corruption by outside forces would prove disastrous. While an issue,
-there are no other options; the KSKK must fight to keep their world
-from destruction.
+there are no other options; KSKK must fight to keep their world from
+destruction.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 %% \#BEGINNING_Luke_1
@@ -137,7 +138,7 @@ years ago. Unlike that time, it could pinpoint it - the definite
 location of the invasion. It was certain that this time, not going
 would be a fatal mistake.
 ~
-The lone Kiri quickly gathered its things. A circle of light absorbed
+The lone Kiryy quickly gathered its things. A circle of light absorbed
 its belongings, and its revolver, and it quickly left its small desert
 hut, searching for transportation.
 ~
@@ -194,7 +195,7 @@ The rain is not water, but metal – and the sky is far darker than it
 should be.
 ~
 Without a soul in sight, she looks up. The world is being devoured by
-a gigantic, black mass.
+a black hole.
 ~
 The Assassin prays for safety.
 
@@ -217,19 +218,22 @@ Aricil retrieves his swords and pistol. Two blades, one fused with a
 fantastic Indicolite. A pistol of .700 caliber. Omisielle thinks she
 can handle herself, but he could survive twelve kilo-megaton nuclear
 detonations and still fight.
-~
-The armor-bound warrior battles through the capitol and enters the
-chamber, and within moments, a titanic flash casts him into another
-dimension.
 
 %% \#BEGINNING_Ari_2
+The armor-bound warrior battles through the capitol of his home town.
+The occupational government was instituted 5 years ago now, a relic of
+the war with the moon civilization 20 years ago.
+~
+He enters the chamber, and within moments, a titanic flash casts him
+into another dimension.
+~
 In another world, the Dark Lord awakens. His head hurts. Everything
-around him moves in slow motion. Not just for a moment, but forever.
+around them moves in slow motion. Not just for a moment, but forever.
 Time flows differently here, he supposes. At least it's here at all.
 ~
 Inspecting his surroundings, he has awoken in a dark place, almost
 suiting him. Yet, a darker energy emanates throughout the atmosphere
-of this place, darker and more sinister than should be possible.
+of this place, more sinister than should be possible.
 ~
 The Dark Lord prays for safety.
 

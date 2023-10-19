@@ -9,10 +9,9 @@
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_REMOT_MIntroJem | (不明)@corp.AOF
 == \#INFO_SSIZE_MIntroJem | 45
-%% \#INFO_DESCR_MIntroJem
-@@
+@@ \#INFO_DESCR_MIntroJem
 ?ﾘ耜ｿ縲獗?搾ｼ幢ｼ幢ｼ費ｹ?ｼ費ｹ?ｼ費ｹ?ｼ費ｼ托ｼ費ｼ托ｼ費ｼ托ｼ呻ｼ托ｼ呻ｼ托ｼ 繝ｼ繝
-ｼ繝ｼ繝ｼ繝ｼ繝ｼ繝ｼ繝ｼ\cm// Copyright (C) 905 A.O.F I---[[119-`
+ｼ繝ｼ繝ｼ繝ｼ繝ｼ繝ｼ繝ｼ\cm// Copyright © 905 A.O.F I---[[119-`
 @@
 \cm// sio.c basic screen inpzﾊ鉱ﾊ代?頚ﾊ惇ｼｦﾏｼ斐娯ﾊｬ菴;
 \cm#include <kernel_display.h>

@@ -8,10 +8,10 @@
 
 class Lith_ThothPlayer : Lith_Player {
    default {
-      Player.DisplayName "$LITH_CLASS_THOTH";
+      Player.DisplayName "$Lith_ThothPlayer";
       Player.SoundClass "lith_thoth";
       Player.Portrait ":Portraits:Thoth";
-      Tag "$LITH_CLASS_THOTH";
+      Tag "$Lith_ThothPlayer";
    }
 
    override void beginPlay() {

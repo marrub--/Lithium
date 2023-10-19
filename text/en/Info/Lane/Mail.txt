@@ -12,8 +12,7 @@
 == \#INFO_TITLE_MIntroLane | $$\#SAVED_MESSAGE
 == \#INFO_REMOT_MIntroLane | $$\#REMOTE_LAMBERT
 == \#INFO_SSIZE_MIntroLane | 77
-%% \#INFO_DESCR_MIntroLane
-@@
+@@ \#INFO_DESCR_MIntroLane
 Your weapons have been deployed to various locations we were able to
 send other people to. Do take care of them, acquiring the correct
 armaments for your job was quite expensive and now we've probably lost
@@ -21,9 +20,9 @@ a few people.
 
 Besides being deployed with your pistol and combat knife (as you
 requested), you have been sent these five weapons:
-@@
 
-1. A combat-modified military model Hiku Mk.2 Shotgun, manufactured by Omakeda.
+@@
+1. A modified military model Hiku Mk.2 Shotgun, manufactured by Throes.
 >  This weapon was chosen because it has a powerful plasma shot that can
 >  penetrate the demons' armour.  Besides this, it has low recoil and an easy
 >  to handle pump-action loading system.  It has hopefully been deployed to
@@ -46,22 +45,21 @@ requested), you have been sent these five weapons:
 >  because it can shred through demons with high rank.
 
 5. The Omega Cannon.
->  I myself am not sure why high order would bother giving you such an
->  expensive and dangerous piece of equipment, but you must have been sent
->  this artifact for the purpose of destroying *something*.
+>  I myself am not sure why those I call my superiors would bother giving
+>  you such an expensive and dangerous piece of equipment, but you must have
+>  been sent this artifact for the purpose of destroying *something*.
 
-6. A KSKK Utsu-denka-sou assault bracelet.
+6. A KSKK Kari assault bracelet.
 >  A weapon that may prove useful against weak and strong enemies alike, it's
 >  been sent to an unknown location, unfortunately. Don't be tricked by the
 >  appearance of it. Even if it just looks like a fancy bracelet, it is capable
 >  of outputting several tons of weight out your fist.
-
 @@
+
 You will also be able to purchase the weapons you designated, in your
 words, as "must-have" in the Shop. I warn you that these weapons may
 not be as effective as you think; we spent quite a lot of time making
 sure that the arms we sent you were top-notch.
-@@
 
 Lambert out.  Good luck, Blazkowicz.
 
@@ -75,8 +73,8 @@ careful not to trigger any other, er, events.
 
 Enough of those and the whole world around you might collapse!
 
-You've been making good progress so far. Your military superiors seem
-to be considering giving you a promotion, even.
+You've been making good progress so far. Your superiors seem to be
+considering giving you a promotion, even.
 
 Lambert out.
 

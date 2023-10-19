@@ -33,8 +33,7 @@ void MailBody(struct page *page, char *bodytext) {
    faststrcpy_str(remote, ns(lang(fast_strdup2(LANG "INFO_REMOT_", page->name))));
    sent = CanonTime(ct_full, page->time);
 
-   mem_size_t end =
-      sprintf(bodytext, tmpstr(lang(sl_mail_template)), remote, sent);
+   mem_size_t end = sprintf(bodytext, tmpstr(sl_mail_template), remote, sent);
    bodytext[end++] = '\n';
    bodytext[end++] = '\n';
    faststrcpy_str(&bodytext[end],
@@ -156,11 +155,10 @@ void DrawPage(struct gui_state *g, struct page *page) {
 drawText:
    if(bip.pagebodypos == bip.pagebodylen) {
       if(ACS_Timer() % 35 < 17) {
-         ACS_PrintChar('\n');
-         ACS_PrintChar('|');
+         _l("\n\Cj|");
       }
    } else {
-      ACS_PrintChar('|');
+      _l("\Cj|");
    }
    PrintText(sf_smallfnt, cr, g->ox+x,1, g->oy+y,1);
    gosub_ret();
@@ -173,7 +171,7 @@ void MainUI(struct gui_state *g) {
    i32 n = 0;
    i32 cat;
 
-   PrintText_str(ns(lang(sl_bip_categs)), sf_smallfnt, CR_PURPLE, g->ox+27,1, g->oy+57,1);
+   PrintText_str(sl_bip_categs, sf_smallfnt, CR_PURPLE, g->ox+27,1, g->oy+57,1);
 
    bip.lastcategory = _bipc_main;
 
@@ -265,19 +263,15 @@ void SearchUI(struct gui_state *g) {
    bip.lastcategory = _bipc_main;
 
    if(G_TxtBox(g, &pl.cbi.st.bipsearch, 10, 52)) {
-      struct extraname {
-         u64  crc;
-         cstr which;
-      };
-
-      static
-      struct extraname const extranames[] = {
+      static struct {u64 crc; cstr which;} const extranames[] = {
          /* That's a lot of numbers... */
          {0x5F38B6C56F0A6D84L, "Extra1"},
          {0x90215131A36573D7L, "Extra2"},
          {0xC54EC0A7C6836A5BL, "Extra3"},
          {0xB315B81438717BA6L, "Extra4"},
          {0x9FD558A2C8C8D163L, "Extra5"},
+         {0xD84CE9973077FD8DL, "Extra6"},
+         {0x53FDEB6F120C71EBL, "Extra7"},
       };
 
       noinit static
@@ -324,7 +318,7 @@ void SearchUI(struct gui_state *g) {
                       1.0);
       }
    } else {
-      PrintText_str(ns(lang(sl_bip_no_results)), sf_smallfnt, CR_DARKGREY, g->ox+57,0, g->oy+82,0);
+      PrintText_str(sl_bip_no_results, sf_smallfnt, CR_DARKGREY, g->ox+57,0, g->oy+82,0);
    }
 }
 
@@ -344,19 +338,24 @@ void P_CBI_TabBIP(struct gui_state *g) {
    }
 
    if(bip.curcategory != _bipc_main) {
-      if(G_Button(g, tmpstr(lang(sl_bip_back)), 7, 25, false,
+      if(G_Button(g, tmpstr(sl_bip_back), 7, 25, false,
                   Pre(btnbipback)))
       {
          bip.curcategory = bip.lastcategory;
       }
    } else {
       PrintSprite(sp_UI_bip, g->ox+7,1, g->oy+27,1, _u_alpha, 0.1);
-      PrintText_str(ns(lang(sl_bip_header)), sf_lmidfont, g->defcr,
+      PrintText_str(sl_bip_header, sf_lmidfont, g->defcr,
                     g->ox+22,1, g->oy+27,1);
    }
 
    if(max) {
-      BeginPrintFmt(tmpstr(lang(sl_bip_available)), avail, max);
+      ACS_BeginPrint();
+      _p(avail);
+      _l(" / ");
+      _p(max);
+      _c(' ');
+      _p(sl_bip_available);
       PrintText(sf_smallfnt, g->defcr, g->ox+287,2, g->oy+17,1);
    }
 }

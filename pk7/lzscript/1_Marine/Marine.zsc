@@ -9,11 +9,11 @@
 class Lith_MarinePlayer : Lith_Player {
    default {
       Player.AttackZOffset 15;
-      Player.DisplayName "$LITH_CLASS_MARINE";
+      Player.DisplayName "$Lith_MarinePlayer";
       Player.SoundClass "lith_marine";
       Player.Portrait ":Portraits:Marine";
       Player.ViewHeight 48;
-      Tag "$LITH_CLASS_MARINE";
+      Tag "$Lith_MarinePlayer";
    }
 
    override void beginPlay() {

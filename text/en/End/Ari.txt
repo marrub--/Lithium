@@ -7,221 +7,64 @@
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
 %% LITHEND_Normal_1_Ari
-\cgSeen through 8 eyes,
+Waves of light scatter and permeate,
+during these last few moments
+before death sweeps and parts us,
+at least hold my hand.
 
-      \cfAll light,
+Yet, at the same time,
+something nags at the back of your mind.
+Like a truck, the wave crashes into you.
 
-    \cfTwice of twice,
+One last silent hit,
+and you've left this place.
 
- \ccThrough death through life
+The only thing left is yourself.
 
 
+No more.
 
-\cbIntern flow in next chapter -
 
+You can't hold on to pretty pictures.
 
-        \cdSelf unseen
+@@ LITHEND_Normal_2_Ari
+\cn+ You wake up in a field of green grass. The sky is blue. You sit
+there, wondering what you might have just seen. You look into the
+distance. You see your home city.\c-
 
-\cdrings throughout
+\cn+ It's burning.\c-
 
+@@
+   \cmWas this the result of your stunt?
+  \cmDid you cause this?
+ \cmIs it your fault?
+\cmDid you?
+@@
 
-        \ckSelf of selves
+\ca- No. Above are space ships, bearing the mark of the moon. This is
+simply the end.\c-
 
-\ckrightward doubt
+The war has started.
 
-         \c-...
+%% LITHEND_Normal_3_Ari
+\caA body in the depths of your mind.
+\caYou feel like the world wasn't meant
+\cafor you both to live in.
 
-      ...
+\cnSecondarily, a fabrication of self,
+\cnsheared through exosymbol
 
-   ...
-
-...
-
-%% LITHEND_Normal_2_Ari
-\ctFollow gaze through all ways,
-
-  \cylines converge every plane,
-
-            \czConnection lost -
-
-          \cdConnections gained,
-
-
-           \cchalf reality,
-
-           \cjbe on your way
-
-
-           \cchalf reality,
-
-           \cjbe on your way
-
-
-             \c-...
-
-          ...
-
-       ...
-
-   ...
-
-...
-
-@@ LITHEND_Normal_3_Ari
-"Consciousness starts abrupt." Trapped within another self, a shallow
-prison pit, trapped within the darkness. The ball of anger tries to
-free itself, thrashing, thrashing around, lest it become impotent, it
-blinds the wretch without.
-
-\c[Lith_Blue]Walk into another game, seeking for yourself feelings of blame.
-\c[Lith_Pink]I walk downwards another path, hoping only that it leads back.
-\c[Lith_Blue]A dark place leads to a dark mind, a life you will never handle,
-\c[Lith_Pink]you sought out sanctity, hoping to escape from it all.
-\c[Lith_Blue]The snow outside feels like death.
-\c[Lith_Pink]The cold can do nothing to me except,
-\c[Lith_Blue]tidal volume increasing pace,
-\c[Lith_Pink]please just let me leave this place.
-\c[Lith_Blue]Please let me leave this place...
-\c[Lith_Pink]Hours pass, and nothing yet.
-
-\c-A drop of light descends from above, in a haze you try to grasp at
-it. Thrashing comes from within, and your eyes go blank. Your grip on
-it slips for a moment, but still, the light speaks to you. In your
-left ear it whispers a promise of care. In your right ear it whispers
-a promise of undoubted return. Then, it fades away.
-
-Hours pass, you sit there. Days pass, still the thrashing from within
-taunts you. It tells you to end this. You do not listen. It kicks at
-its cage. You, too, kick at yours. It tries to break free, but you
-crush it down. It speaks through your voice, but you are the only one
-talking. Months pass, yet still no sign of the light.
-
-You leave the frigid wastes. Today, you are broken. The thrashing
-continues, but you move on. You walk upwards, leading back to where
-you began. You lay down in a bed of flowers, and the anger leaves your
-body. All you can feel, now, is regret.
-
-%% LITHEND_Normal_4_Ari
-\cwblades bring death —
-\coyour life like a blade —
-\cgalive and yet,
-
-
-\cnto inform your self, see clearer,
-\cnin morning dawn, three more.
-
-
-\ctLiving in hell is like every day,
-\cvthen yet you stay by my side like a dog,
-like a dog, whimpering,
-whimpering, and yet,
-\cmmay i have a break?
-\cmchild i may be.
-
-
-\cxThe cycle goes on, so far uninterrupted.
-\ciBlades seek me out,
-        \ciI cherish
-      \citheir brevity.
-
-
-\cdOn instinct, I dwell,
-   \cdso undenied, I stay.
-
-
-  \caRepeat, repeat, repeat again —
-   \cgblades speak truths we
-    \cofail to say ourselves.
-
-@@ LITHEND_Normal_5_Ari
-You wake up, drenched in sweat. The dream may have been abstract, but
-it felt exactly like your first memory.
-
-Looking back on these memories, you start to wonder what's real. Your
-body and mind feel at odds with each other. Your mind and your
-memories, even moreso. A dialogue begins, trying to reconcile these
-things.
-
-"\c[Lith_Pink]Feel around your body. Close your eyes and focus on
-every detail of it.\c-" You feel around, yet nothing is amiss.
-"\c[Lith_Blue]I am as I am.\c-"
-
-"\c[Lith_Pink]Do you remember who you are?\c-" You are Aricil
-Deyan'za, brother of Omisielle Faulzaje, Dark Lord of the House of
-Next Dawn. "\c[Lith_Blue]I am who I am.\c-"
-
-"\c[Lith_Pink]Do you remember where you came from?\c-" Another
-universe, another time-scale, another story. You were born of the same
-mother as Omi, but separated at birth. Your childhood feels hazy. All
-you can remember is waking up in a room...
-
-\c[Lith_Blue]A room? \c[Lith_Pink]Was there anything before that?
-\c[Lith_Blue]There had to have been, but that seems like the wrong
-question. \c[Lith_Pink]Was there a bed? \c[Lith_Blue]Of some kind. I
-remember waking up and not breathing. \c[Lith_Pink]There was something
-odd, no? \c[Lith_Blue]The building, I just walked out. With you.
-\c[Lith_Pink]I don't remember being there. \c[Lith_Blue]Do you
-remember the snow on the ground?
-
-\c[Lith_Pink]Yes. \c[Lith_Blue]It was like a nightmare. The whole
-world was frozen over, and neither of us could remember our names.
-\c[Lith_Pink]Yes. \c[Lith_Blue]An operation... \c[Lith_Pink]Yes.
-
-@@ LITHEND_Normal_6_Ari
-Thus did the giant crush and bludgeon the barrier of the irreal,
-destroying all the wicked in his path. They lay now again in a bed of
-flowers, sight drenched in light. A blink of an eye brings them upon a
-throne. The giant and the wretch within seal their blade in its
-backrest. No monarchs by them would be made.
-
-The swath of darkness no longer was able to make its way outside its
-self. Soon, everything would collapse. The giant felt horrible, like
-he had broken a promise.
-
-But the wretch within said to them, "\c[Lith_Pink]My certain demise
-comforts me, brother. With me will you die, by my misstep. Power I
-sought, but look at us now. Your care for me brought me here. Yet so I
-will die alone with you, and my thoughts, for comfort.\c-"
-
-The giant was with pause, and replied: "\c[Lith_Blue]Power you sought,
-but power absolute you gained. This plane is still yet without mercy.
-Its ingress is stopped, but inside we lay as its yolk. If I may,
-sister, dare ask this: Will you only give in and bear its burden?\c-"
-
-So did they fight on through eternity, stretched infinitely inward to
-the point of the next and last relay. Every last piece of matter
-within the plane they dwelt in was destroyed. Every last throne was
-defaced, and every living being killed. There was absolutely nothing
-left but the twins, who were untied at birth.
-
-\c[Lith_Pink]It's clear to me now. Do you remember where we were?
-
-\c[Lith_Blue]AOF...
-
-%% LITHEND_Normal_7_Ari
-\caA body that lies only in the depths of your mind.
-\caMerged together, somehow,
-\cayou feel like the world wasn't meant for you to live in.
-
-\ckA world too broken, or the fault of individuals?
+\ckA broken world, or faulty individuals?
 \ciSomething more, a repartee of death -
-\cgthe sickness of the heart of those in power.
+\cga sickness of the heart, everywhere.
 
-\cfA distrust so ingrained, intents no longer matter.
-\cgA death of self, a death of conviction -
-\cnnow our time here has come to an end.
-
-\cxA hope to regain what was taken. A hope to see closure.
-\cyHopes turn into dreams. Dreams turn into reality.
+\cxA hope to regain what was taken.
+\cxA hope to see closure.
+\cyHopes turn into dreams.
+\cyDreams turn into reality.
 \ctAnother time awaits.
 
-\cbWe became like the light of the universe,
-\cbeventually becoming nothingness, and evaporating.
-
-\cnLeft alone, the yolk became something new.
-\ctAnother time became, but still the cycle repeats -
-
 \cwThe story of the two tied at rebirth,
-\cdwill yet once more close.
+\cdhas yet once more closed.
 
 ## EOF

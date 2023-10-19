@@ -9,7 +9,7 @@
 ## Tags ══════════════════════════════════════════════════════════════════════╕
 == \#TAG_BlurSphere    | Fragma
 == \#TAG_GreyHam       | Grey Ham
-== \#TAG_Megasphere    | Tao'chyan
+== \#TAG_Megasphere    | Hailaz
 == \#TAG_SoulSphere    | Heart
 == \#TAG_SteggleSphere | Steggle Sphere
 == \#TAG_ShobonSphere  | Shobon Sphere

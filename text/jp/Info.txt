@@ -6,6 +6,9 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
+!!include Arsenal/Shop.txt
+!!include Arsenal/Upgrades.txt
+
 !!include Info/Corporations.txt
 !!include Info/Enemies.txt
 !!include Info/Extra.txt

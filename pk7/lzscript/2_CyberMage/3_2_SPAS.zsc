@@ -168,12 +168,12 @@ Select:
 Fire:
    CSHG A 0 lith_jumpNoAmmo;
    CSHG A 0 Lith_A_JumpIfMagEmpty;
-   CSHG B 1 bright offset(0, 35) Lith_A_FireSPAS;
-   CSHG B 1 bright offset(0, 35);
-   CSHG C 1 bright offset(0, 34) {A_Light(2); Lith_A_RecoilDn(0.2);}
-   CSHG C 1 bright offset(0, 33);
-   CSHG D 1 offset(0, 33) {A_Light(0); Lith_A_RecoilDn(0.2);}
-   CSHG D 1 offset(0, 32);
+   CSHG B 1 bright offset(0, 42) Lith_A_FireSPAS;
+   CSHG B 1 bright offset(0, 47);
+   CSHG C 1 bright offset(0, 48) {A_Light(2); Lith_A_RecoilDn(0.2);}
+   CSHG C 1 bright offset(0, 46);
+   CSHG D 1 offset(0, 38) {A_Light(0); Lith_A_RecoilDn(0.2);}
+   CSHG D 1 offset(0, 35);
    goto ReadySelector;
 FireVoid:
    CSHG B 1 bright offset(0, 38) Lith_A_FireVoid;

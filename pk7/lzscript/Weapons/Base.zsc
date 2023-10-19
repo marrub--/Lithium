@@ -89,6 +89,7 @@ int m_ads;
 int m_firePattern;
 int m_fired;
 int m_max;
+state m_sprintReturn;
 
 property AmmoType:     m_ammoType;
 property MagSize:      m_max;
@@ -104,18 +105,6 @@ const _psp_flags =
 
 virtual double, double lith_getFirePattern() {return 0, 0;}
 virtual bool           lith_checkSprint()    {return false;}
-
-virtual state lith_ready(int flags) {
-   Lith_Player(owner).m_sprinting = false;
-   if(m_ads && !lith_adsShouldHappen()) {
-      lith_adsCancel();
-      return lith_gotoReady();
-   } else if(lith_checkSprint()) {
-      return resolveState("_Sprint");
-   } else {
-      return null;
-   }
-}
 
 virtual bool lith_adsShouldHappen() {return true;}
 
@@ -286,26 +275,28 @@ action(Weapon) void Lith_A_DoubleOffset(bool left, int x, int y, int flags = 0) 
    A_OverlayOffset(snd, x, y, flags);
 }
 
-virtual int lith_readyFlags(int flags) {
-   let lp = Lith_Player(owner);
-   if(Lith_UTIL.pData(_pdt_semifrozen)) {
-      flags |= WRF_NOFIRE;
-   }
-   if(lp && lp.m_pclass & (pcl_marine | pcl_darklord)) {
-      flags |= WRF_ALLOWUSER4;
-   }
-   return flags;
-}
-
-action(Weapon) state Lith_A_Ready(int flags = 0) {
+action(Weapon) state Lith_A_Ready(int flags = 0, stateLabel sprintReturn = "Select") {
    let psp = player.findPSprite(_psp_misc);
    if(!psp || !psp.curState) {
       A_Overlay(_psp_misc, "_OverlayHax");
    }
-   flags = invoker.lith_readyFlags(flags);
-   let st = invoker.lith_ready(flags);
-   if(st) {
-      return st;
+   let lp = Lith_Player(player.mo);
+   if(Lith_UTIL.pData(_pdt_semifrozen)) {
+      flags |= WRF_NOFIRE;
+   } else if(lp) {
+      lp.m_sprinting = false;
+      if(lp.m_pclass == pcl_marine) {
+         flags |= WRF_ALLOWUSER4;
+      }
+   }
+   if(invoker.m_ads && !invoker.lith_adsShouldHappen()) {
+      invoker.lith_adsCancel();
+      return invoker.lith_gotoReady();
+   } else if(invoker.lith_checkSprint()) {
+      invoker.m_sprintReturn = resolveState(sprintReturn);
+      return resolveState("_Sprint");
+   } else if(Lith_StatFx.getInPool("Lith_StatShadowWalker")) {
+      return resolveState("_ShadowWalk");
    } else {
       a_weaponReady(flags);
       return null;

@@ -49,8 +49,7 @@ player.pickup {
    ring        Ring        # ^
 
    armor {
-      pink   ArmorPink   # ...
-      midori ArmorMidori # ...
+      pink ArmorPink # ???
    }
 
    scorechip ScoreChip # Half-Life 2

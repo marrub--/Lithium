@@ -49,10 +49,8 @@
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
 !!lang en | en enu default
-!!lang es | es
 !!lang jp | jp
 
-!!inclang Arsenal.txt
 !!inclang Dialogue.txt
 !!inclang End.txt
 !!inclang Info.txt

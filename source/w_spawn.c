@@ -41,8 +41,6 @@ struct witem const barmor[] = {
    {12000, OBJ "Armor_HazMat_Lower"},
    {12100, OBJ "Armor_PinkSilver_Upper"},
    {12200, OBJ "Armor_PinkSilver_Lower"},
-   {12300, OBJ "Armor_Midori_Upper"},
-   {12400, OBJ "Armor_Midori_Lower"},
 };
 
 #define BonusItemsBig(base) \

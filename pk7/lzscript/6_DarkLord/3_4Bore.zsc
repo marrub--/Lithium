@@ -85,24 +85,16 @@ action(Weapon) void Lith_A_4BoreOut() {
    Lith_A_Casing("Lith_Cas4Bore", 15, -4, 40, FRandom(3,4), FRandom(7,8), FRandom(2,9));
 }
 
-override int lith_readyFlags(int flags) {
-   flags = super.lith_readyFlags(flags);
-   if(lith_adsShouldHappen()) {
-      flags |= WRF_ALLOWUSER1;
-   }
-   return flags;
-}
-
 override bool lith_adsShouldHappen() {
    return Lith_UTIL.pData(_pdt_upgrade, UPGR_4Bore_B);
 }
 
 states(Weapon) {
 AltReady:
-   4BOR P 1 Lith_A_Ready;
+   4BOR P 1 Lith_A_Ready(WRF_ALLOWUSER1);
    loop;
 Ready:
-   4BOR A 1 Lith_A_Ready;
+   4BOR A 1 Lith_A_Ready(invoker.lith_adsShouldHappen() ? WRF_ALLOWUSER1 : 0);
    loop;
 
 Deselect:
@@ -143,9 +135,7 @@ Fire:
    #### # 0 lith_jumpNoAmmo(4);
    #### # 0 A_StartSound("weapons/4bore/fire", lch_weapon);
    #### # 0 A_JumpIf(invoker.m_ads, "Fire_Ads");
-   4BOR A 5;
-   4BOR G 1 offset(20, 48);
-   4BOR G 1 offset(23, 50);
+   4BOR A 7;
    4BOR B 1 bright offset(1, 32) Lith_A_Fire4Bore;
    4BOR H 1 bright;
    4BOR H 1 bright offset(20, 48);
@@ -179,7 +169,7 @@ Fire:
    4BOR D 1 offset(-71, 201);
 FireFinish:
    #### # 0 lith_a_setInterpolation(false);
-   TNT1 A 12;
+   TNT1 AAAAAAAAAAAA 1 lith_a_ready(WRF_NOFIRE|WRF_NOSWITCH, "FireFinish");
    TNT1 A 6 A_StartSound("weapons/4bore/load", lch_reload2);
    4BOR F 1 offset(-43, 182) Lith_A_ReloadBobUp(1);
    #### # 0 lith_a_setInterpolation(true);

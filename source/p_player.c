@@ -287,7 +287,7 @@ alloc_aut(0) script static void P_bossWarnings(void) {
    if(get_msk(ml.flag, _mflg_boss) == _mphantom_spawned) {
       FreezeTime();
       ACS_Delay(4);
-      P_CenterNotification(ns(lang_discrim(sl_bosswarn)), 105, CR_ORANGE, 0xFC8A2E);
+      P_CenterNotification(sl_bosswarn, 105, CR_ORANGE, 0xFC8A2E);
       ACS_Delay(105);
       UnfreezeTime();
    }
@@ -306,16 +306,16 @@ alloc_aut(0) script static void P_bossWarnings(void) {
          k32 a = 1 - maxi(i - 70, 0) / 35.0k;
          SetSize(640, 480);
          PrintFill(0x070707 | (i32)(a * 255) << 24);
-         PrintText_str(ns(lang(sl_verse_corrupted)), sf_bigupper, CR_WHITE, 320,4, 240,0, _u_alpha, a);
+         PrintText_str(sl_verse_corrupted, sf_bigupper, CR_WHITE, 320,4, 240,0, _u_alpha, a);
          ACS_Delay(1);
       }
    }
-   P_CenterNotification(ns(lang(sl_bosshear1)), 100, CR_RED, 0xFF0000);
+   P_CenterNotification(sl_bosshear1, 100, CR_RED, 0xFF0000);
    ACS_Delay(135);
-   P_CenterNotification(ns(lang(sl_bosshear2)), 100, CR_RED, 0xFF0000);
+   P_CenterNotification(sl_bosshear2, 100, CR_RED, 0xFF0000);
    if(division) {
       ACS_Delay(135);
-      P_CenterNotification(ns(lang(sl_bosshear3)), 100, CR_DARKRED, 0x7F0000);
+      P_CenterNotification(sl_bosshear3, 100, CR_DARKRED, 0x7F0000);
    }
 }
 
@@ -401,12 +401,7 @@ alloc_aut(0) script static void P_doIntro(void) {
       SetSize(320, 240);
       if(which != last) {
          last = which;
-         ACS_BeginPrint();
-         PrintStrL(LANG "BEGINNING_");
-         PrintStr(pl.discrim);
-         ACS_PrintChar('_');
-         ACS_PrintInt(which);
-         str next_text = lang(ACS_EndStrParam());
+         str next_text = lang(strp(_l(LANG "BEGINNING_"), _p((cstr)pl.discrim), _c('_'), _p(which)));
          if(!next_text) {
             break;
          }
@@ -432,11 +427,11 @@ alloc_aut(0) script static void P_doIntro(void) {
       ACS_BeginPrint();
       ACS_PrintBind(sc_use);
       _c(' ');
-      _p(ns(lang(sl_skip_intro_1)));
+      _p(sl_skip_intro_1);
       _c('\n');
       ACS_PrintBind(sc_attack);
       _c(' ');
-      _p(ns(lang(sl_skip_intro_2)));
+      _p(sl_skip_intro_2);
       PrintText(sf_smallfnt, CR_WHITE, 275,6, 220,0);
       if(G_Filler(280, 220, &fil, P_ButtonHeld(BT_USE | BT_ATTACK))) {
          if(P_ButtonHeld(BT_ATTACK)) {
@@ -491,7 +486,7 @@ alloc_aut(0) script static void P_doIntro(void) {
    pl.modal = _gui_none;
    static struct fmt_arg fmt_args[] = {{_fmt_key}};
    fmt_args[0].val.s = sc_k_opencbi;
-   str tut_txt = strp(printfmt(tmpstr(lang(sl_open_menu)), 1, fmt_args));
+   str tut_txt = strp(printfmt(tmpstr(sl_open_menu), 1, fmt_args));
    P_CenterNotification(tut_txt, _tut_tics, -1, -1);
 }
 
@@ -654,7 +649,7 @@ static void P_Aug_pTick(void) {
 
       if(total) {
          AmbientSound(ss_player_cbi_auto_buy, 1.0);
-         P_LogH(1, tmpstr(lang_fmt(LANG "LOG_AutoBuy%i", i + 1)), total, total != 1 ? "s" : "");
+         P_LogH(1, tmpstr(lang(strp(_l(LANG "LOG_AutoBuy"), _p(i + 1)))), total, total != 1 ? "s" : "");
       }
    }
 }
@@ -715,7 +710,7 @@ script_str type("net") ext("ACS") addr(OBJ "KeyBuyAutoGroup") void Z_KeyBuyAutoG
 
    i32 fmt = total ? grp + 1 : grp + 5;
 
-   P_LogH(1, tmpstr(lang_fmt(LANG "LOG_GroupBuy%i", fmt)), cr, success, total, success != 1 ? "s" : "");
+   P_LogH(1, tmpstr(lang(strp(_l(LANG "LOG_GroupBuy"), _p(fmt)))), cr, success, total, success != 1 ? "s" : "");
 }
 
 script_str type("net") ext("ACS") addr(OBJ "KeyToggleAutoGroup") void Z_KeyToggleAutoGroup(i32 grp) {
@@ -736,7 +731,7 @@ script_str type("net") ext("ACS") addr(OBJ "KeyToggleAutoGroup") void Z_KeyToggl
    else      AmbientSound(ss_player_cbi_auto_invalid, 1.0);
 
    i32 fmt = total ? grp + 1 : grp + 5;
-   P_LogH(1, tmpstr(lang_fmt(LANG "LOG_GroupToggle%i", fmt)));
+   P_LogH(1, tmpstr(lang(strp(_l(LANG "LOG_GroupToggle"), _p(fmt)))));
 }
 
 alloc_aut(0) script_str type("net") ext("ACS") addr(OBJ "KeyGlare") void Z_KeyGlare(void) {
@@ -758,7 +753,7 @@ _Noreturn dynam_aut script_str ext("ACS") addr(OBJ "TimelineInconsistent") void 
    for(;;) {
       ACS_FadeTo(0, 0, 0, 1.0, 0.0);
       SetSize(320, 240);
-      PrintText_str(ns(lang(sl_bad_timeline)), sf_bigupper, CR_WHITE, 160,4, 120,0);
+      PrintText_str(sl_bad_timeline, sf_bigupper, CR_WHITE, 160,4, 120,0);
       pl.setHealth(-1);
       ACS_Delay(1);
    }

@@ -94,6 +94,7 @@ const LITH_VERSION = vernam
 #elif !defined(VER_DEFINES_ONLY)
 i32 version_name_to_num(cstr s);
 #endif
+#undef VER_DEFINES_ONLY
 #endif
 
 /* EOF */

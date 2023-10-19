@@ -31,13 +31,12 @@ Class: \cuNon-resident\c-
 Threat: \csD\c-
 
 @@
-Humans which have been abducted and possessed by Hell's forces. Some
+Zombies that appear to be sentient and capable of holding a gun. Some
 seem to he artificially created by Hell, while others appear to
 actually be humans that were defeated by its forces.
 
-The rifleman is slow and shambling, but still their rifle packs a
-punch, and they're capable of burst-firing somewhat accurate shots.
-@@
+A rifleman is slow and shambling, but in groups, they're a horde. They
+all possess rifles and fire single shots in bursts.
 
 == \#INFO_SHORT_ShotgunGuy | Former Sergeant
 == \#INFO_TITLE_ShotgunGuy | Possessed Human Sergeant
@@ -46,14 +45,13 @@ Class: \cuNon-resident\c-
 Threat: \csD\c-
 
 @@
-Humans which have been abducted and possessed by Hell's forces. Some
+Zombies that appear to be sentient and capable of holding a gun. Some
 seem to he artificially created by Hell, while others appear to
 actually be humans that were defeated by its forces.
 
-The sergeant is rather quick with his gun, but not very accurate.
+The sergeant is rather quick to draw his gun, but not very accurate.
 Watch out for them at close-range, you may notice that a face full of
 buckshot hurts.
-@@
 
 == \#INFO_SHORT_ChaingunGuy | Former Corporal
 == \#INFO_TITLE_ChaingunGuy | Possessed Human Corporal
@@ -62,14 +60,14 @@ Class: \cuNon-resident\c-
 Threat: \ciC-\c-
 
 @@
-Humans which have been abducted and possessed by Hell's forces. Some
+Zombies that appear to be sentient and capable of holding a gun. Some
 seem to he artificially created by Hell, while others appear to
 actually be humans that were defeated by its forces.
 
-Corporals are generally terrible at aiming, but put out so much lead
-that you're bound to get hit. A lot. ... By the way, why don't these
-guys drop their chainguns?
-@@
+Corporals are generally just the worst at aiming, but put out so much lead
+that you're bound to get hit. A lot.
+
+... By the way, why don't these guys drop their guns when they die?
 
 ## Subordinates ══════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Imp | Hell Trooper
@@ -84,7 +82,6 @@ bigger threats come to play. They throw fire-balls out of their hands,
 which while not very strong, can be deadly in large amounts.
 
 Their claws and spikes hurt like hell, so try not to get too close.
-@@
 
 == \#INFO_SHORT_Demon | Hell Sergeant
 == \#INFO_TITLE_Demon | Hell Sergeant "Demon"
@@ -99,7 +96,6 @@ past that as they have no projectile attacks.
 
 Their bodies are rather strong-built, and can resist several
 point-blank shotgun blasts without dying.
-@@
 
 == \#INFO_SHORT_Spectre | Spectre
 == \#INFO_TITLE_Spectre | Hell Sergeant "Spectre"
@@ -113,7 +109,6 @@ bodies.
 
 They tend to not make a sound until they lunge at you, so be sure to
 keep an eye out for cracks in the air around you.
-@@
 
 ## Residents ═════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_LostSoul | Lost Soul
@@ -132,7 +127,6 @@ annoying, and potentially deadly.
 
 They have a tendency to turn semi-invisible and stalk around before
 attacking.
-@@
 
 == \#INFO_SHORT_Mancubus | Mancubus
 == \#INFO_TITLE_Mancubus | $$\#INFO_SHORT_Mancubus
@@ -148,7 +142,6 @@ to overwhelm you with fire by shooting in many directions.
 Although they may be quite beefy, they're quite slow and generally
 their attacks are as well. Dispatch them quickly and you should be
 fine.
-@@
 
 == \#INFO_SHORT_Arachnotron | Arachnotron
 == \#INFO_TITLE_Arachnotron | $$\#INFO_SHORT_Arachnotron
@@ -163,7 +156,6 @@ and cybernetic legs.
 Their attack is straightforward; fire plasma at you until you die, and
 then some. While their attack is quite strong, they're very weak and
 greatly prone to bullet and shrapnel damage.
-@@
 
 == \#INFO_SHORT_Cacodemon | Cacodemon
 == \#INFO_TITLE_Cacodemon | $$\#INFO_SHORT_Cacodemon
@@ -172,10 +164,9 @@ Class: \cjResident\c-
 Threat: \ckB-\c-
 
 @@
-A one-eyed, red, fuzzy(?) demon, which has the ability to fly for an
-unknown reason. They're quite hearty, and their attacks are fairly
-deadly, but generally the Cacodemon is not a monster to fear.
-@@
+A one-eyed, red, fuzzy(? as yet unconfirmed) demon, which has the
+ability to magically fly. They're quite hearty, and their attacks are
+fairly deadly, but generally the Cacodemon is not a monster to fear.
 
 ## Nobles ════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_HellKnight | Hell Knight
@@ -191,7 +182,6 @@ head assaults on weak targets and seek-and-destroy missions.
 They throw long, thin magic attacks that corrode skin and bone. With
 skin only just more durable than iron, these demons are deadly in
 groups.
-@@
 
 == \#INFO_SHORT_BaronOfHell | Hell Noble
 == \#INFO_TITLE_BaronOfHell | $$\#INFO_SHORT_BaronOfHell
@@ -207,7 +197,6 @@ strategy.
 Barons prefer to lead missions, plan overall tactics of an attack, and
 destroy their foes in glory. They attack in 45 degree angles, throwing
 strong magic energy everywhere.
-@@
 
 == \#INFO_SHORT_Revenant | Revenant
 == \#INFO_TITLE_Revenant | $$\#INFO_SHORT_Revenant
@@ -222,7 +211,6 @@ and are *very* painful to boot.
 
 The Revenant is revered among demons for its honor serving after
 death.
-@@
 
 ## Tyrants ═══════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_PainElemental | Pain Elemental
@@ -239,7 +227,6 @@ it itself is too weak to fight.
 This enemy is both annoying and hazardous at the same time, especially
 if left unchecked for an elongated period of time. Prioritize their
 destruction.
-@@
 
 == \#INFO_SHORT_Archvile | Arch-vile
 == \#INFO_TITLE_Archvile | Sin of Janus, "Arch-vile"
@@ -253,7 +240,6 @@ Brutal and vicious, caster of evil magic and healer of the sinful.
 The Arch-vile is a malicious, extremely dangerous being capable of
 destroying anything at any range with its powerful fire magic, and
 resurrecting dead enemies it comes by.
-@@
 
 == \#INFO_SHORT_SpiderMastermind | Spider Demon
 == \#INFO_TITLE_SpiderMastermind | Sin of Venus, "Spider Mastermind"
@@ -269,7 +255,6 @@ Cybernetic arachnid offspring.
 
 The Spider Mastermind also appears to be responsible for planning
 distant wars of Hell, manipulating the chain of command to their will.
-@@
 
 == \#INFO_SHORT_Cyberdemon | Cyber-Demon
 == \#INFO_TITLE_Cyberdemon | Sin of Mars, "Cyber-Demon"
@@ -286,11 +271,11 @@ Equipped with a self-cooling rocket propelled grenade launcher on
 their left arm, a cybernetic hoof, and height twice that of a normal
 man. The Cyber-Demon is an extremely cruel, warmongering beast that
 will destroy any target without prejudice for the glory of Hell.
-@@
 
 ## ??? ═══════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Phantom | Phantom
 == \#INFO_TITLE_Phantom | $$\#INFO_SHORT_Phantom
+== \#INFO_SSIZE_Phantom | 77
 %% \#INFO_DESCR_Phantom
 Class: \cm???\c-
 Threat: \crE\c-
@@ -301,9 +286,47 @@ leave no one alive -- not even demons. They are a dark,
 silhouette-like being that takes on various forms and does nothing but
 destroy.
 
-Extreme caution is advised against these enemies, if you can run from
-them they will only continue to chase you down.
-@@
+Extreme caution is advised against these enemies, and if you can run
+from them, they will only ever continue to chase you down.
+
+Rumors have spread that these beings speak to those who come near
+them. Setting aside the obviously dangerous nature of this rumor,
+there have been an increasing amount of people reporting things said.
+Collating their stories, the common pattern seems to be that they talk
+about stories of the past. Similarities between the phantoms and
+particular heroes of old appear in a vast majority of these reports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Have you tried the search functionality in the BIP yet?
+
+Try searching the word "deceiver".
 
 == \#INFO_SHORT_James | James
 == \#INFO_TITLE_James | James, Vana-gloriam Est
@@ -330,14 +353,13 @@ Class: \crOverlord\c-
 Threat: \crE\c-
 
 @@
-The catalyst of destruction, whom spawned all of Hell's monstrosities
-and dictates over all; the Icon of Sin, said by some to be Satan
-himself, feeds purely off of hatred and chaos and will stop at nothing
-to attain everything in the world.
+The catalyst of destruction, he who spawned all of Hell's
+monstrosities and dictates over all; the Icon of Sin, said by some to
+be Satan himself, feeds purely off of hatred and chaos and will stop
+at nothing to attain everything in the world.
 
-Currently, he lay sleeping ill under repair, as his head was torn in
-twain by a force unknown. The ultimate goal of your mission is to find
-him, and destroy him before Hell takes over our realm.
-@@
+He lays dormant, ill and under repair, as his head was torn in twain
+by a force unknown. The ultimate goal of your mission is to find him,
+and destroy him before Hell takes over our realm.
 
 ## EOF

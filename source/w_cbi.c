@@ -123,7 +123,7 @@ void Z_PickupCbiItem(i32 num) {
          P_ItemPopup(nam, GetX(0), GetY(0), GetZ(0));
       }
       if(itemdisp & _itm_disp_log) {
-         P_LogB(1, tmpstr(lang(sl_log_cbi)), nam);
+         P_LogB(1, tmpstr(sl_log_cbi), nam);
       }
    }
 

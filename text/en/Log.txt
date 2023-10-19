@@ -90,7 +90,7 @@
 == \#LOG_LevelUpJem  | [INFO] Memory restored: %iKiB
 == \#LOG_LevelUpFulk | \cj<\cdVital\cj>\c- :: %i inodes reclaimed.
 == \#LOG_LevelUpOmi  | You're having fun with this.
-== \#LOG_LevelUpAri  | $$\#LOG_LevelUpOmi
+== \#LOG_LevelUpAri  | You're starting to get somewhere.
 == \#LOG_LevelUpLuke | Your senses grow sharper.
 == \#LOG_LevelUpKiri | You feel some of your power return to you.
 

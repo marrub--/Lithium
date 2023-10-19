@@ -9,7 +9,6 @@ tools/.build-cfg.rb
 *.wad.b*
 *.swp
 *.ninja*
-source/m_stab.h
 source/m_trie.c
 source/m_trie.h
 source/m_version.h

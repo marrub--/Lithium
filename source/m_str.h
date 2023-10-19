@@ -32,7 +32,6 @@
 #define _f __func__
 
 #define lang_fmt(...) (StrParamBegin(__VA_ARGS__), lang(ACS_EndStrParam()))
-#define lang_fmt_discrim(...) (lang_fmt(__VA_ARGS__, pl.discrim) |? lang_fmt(__VA_ARGS__, ""))
 
 #define lang_discrim(name) (lang(strp(ACS_PrintString(name), PrintStr(pl.discrim))) |? lang(name))
 
@@ -214,8 +213,16 @@ union fmt_val {
 
 struct fmt_arg {
    i32           tag;
+   i32           precision;
    union fmt_val val;
 };
+
+#define stab_ary_bgn_x(name) extern str name[0
+#define stab_ary_ent_x(strn) + 1
+#define stab_ary_end_x()     ];
+#define stab_x(n, s) extern str n;
+#define stab_language_x(n, s, f) stab_x(n, s)
+#include "m_stab.h"
 
 script void StrInit(void);
 stkcall void PrintStrN(cstr s, mem_size_t n);

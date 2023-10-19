@@ -21,8 +21,8 @@ noinit static gtab_t tn[5];
 static
 void P_CBI_TabArsenal(struct gui_state *g) {
    if(get_bit(pcl_outcasts, pl.pclass)) {
-      faststrcpy_str(tn[0], ns(lang(sl_tab_upgrades)));
-      faststrcpy_str(tn[1], ns(lang(sl_tab_shop)));
+      faststrcpy_str(tn[0], sl_tab_upgrades);
+      faststrcpy_str(tn[1], sl_tab_shop);
       G_Tabs(g, &pl.cbi.st.arsetab, tn, 2, 1);
    }
    switch(pl.cbi.st.arsetab) {
@@ -33,9 +33,9 @@ void P_CBI_TabArsenal(struct gui_state *g) {
 
 static
 void P_CBI_TabStat(struct gui_state *g) {
-   faststrcpy_str(tn[0], ns(lang(sl_tab_attributes)));
-   faststrcpy_str(tn[1], ns(lang(sl_tab_cbi)));
-   faststrcpy_str(tn[2], ns(lang(sl_tab_statistics)));
+   faststrcpy_str(tn[0], sl_tab_attributes);
+   faststrcpy_str(tn[1], sl_tab_cbi);
+   faststrcpy_str(tn[2], sl_tab_statistics);
 
    G_Tabs(g, &pl.cbi.st.stattab, tn, 3, 1);
 
@@ -48,10 +48,10 @@ void P_CBI_TabStat(struct gui_state *g) {
 
 static
 void P_CBI_TabInfo(struct gui_state *g) {
-   faststrcpy_str(tn[0], ns(lang(sl_tab_bip)));
-   faststrcpy_str(tn[1], ns(lang(sl_tab_tuts)));
-   faststrcpy_str(tn[2], ns(lang(sl_tab_log)));
-   faststrcpy_str(tn[3], ns(lang(sl_tab_notes)));
+   faststrcpy_str(tn[0], sl_tab_bip);
+   faststrcpy_str(tn[1], sl_tab_tuts);
+   faststrcpy_str(tn[2], sl_tab_log);
+   faststrcpy_str(tn[3], sl_tab_notes);
 
    G_Tabs(g, &pl.cbi.st.infotab, tn, 4, 1);
 
@@ -90,11 +90,11 @@ script void P_CBI_PTick(void) {
 
    if(G_Button(g, .x = 283, 0, Pre(btnexit))) P_GUI_Use();
 
-   faststrcpy_str(tn[0], ns(lang_discrim(sl_tab_arsenal)));
-   faststrcpy_str(tn[1], ns(lang(sl_tab_status)));
-   faststrcpy_str(tn[2], ns(lang(sl_tab_inventory)));
-   faststrcpy_str(tn[3], ns(lang(sl_tab_info)));
-   faststrcpy_str(tn[4], ns(lang(sl_tab_settings)));
+   faststrcpy_str(tn[0], sl_tab_arsenal);
+   faststrcpy_str(tn[1], sl_tab_status);
+   faststrcpy_str(tn[2], sl_tab_inventory);
+   faststrcpy_str(tn[3], sl_tab_info);
+   faststrcpy_str(tn[4], sl_tab_settings);
 
    G_Tabs(g, &pl.cbi.st.maintab, tn, 5, 0);
 

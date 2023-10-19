@@ -8,7 +8,7 @@
 
 ## Outcast Weapons ═══════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ChargeFist | チャージ拳
-== \#INFO_TITLE_ChargeFist | Utsu Denkasou アサルトブレスレット
+== \#INFO_TITLE_ChargeFist | KSKK "KARI"アサルトブレスレット
 @@ \#INFO_DESCR_ChargeFist
 左手首に装着する強力な近接武器。
 サイバネティックパワーのエネルギーを

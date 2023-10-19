@@ -86,6 +86,7 @@
 #else
 #include "m_engine.h"
 #include "w_world.h"
+#include "p_player.h"
 
 #include <stdio.h>
 
@@ -93,18 +94,35 @@
 #define stab_ary_ent_x(strn) + 1
 #define stab_ary_end_x() ];
 #define stab_x(n, s) noinit str n;
+#define stab_language_x(n, s, f) \
+   stab_x(n, s) \
+   static noinit str _##n;
 #include "m_stab.h"
 
 noinit static char tcbuf[4096];
 
 alloc_aut(0) script void StrInit(void) {
-   str *ary;
-   i32 i;
+   register str *ary;
+   register i32 i;
    #define stab_ary_bgn_x(name) i = 0, ary = name;
    #define stab_ary_ent_x(strn) ary[i++] = s"" strn;
    #define stab_ary_end_x()
    #define stab_x(n, s) n = s"" s;
+   #define stab_language_x(n, s, f) _##n = s"" s;
    #include "m_stab.h"
+   for(register str last_language = snil;;) {
+      register str cur_language = CVarGetS(sc_language);
+      if(last_language != cur_language) {
+         #define stab_ary_bgn_x(name) i = 0, ary = name;
+         #define stab_ary_ent_x(strn) ary[i++] = s"" strn;
+         #define stab_ary_end_x()
+         #define stab_x(n, s)
+         #define stab_language_x(n, s, f) n = ns(f(_##n));
+         #include "m_stab.h"
+         last_language = cur_language;
+      }
+      ACS_Delay(35);
+   }
 }
 
 stkoff void PrintStrN(cstr s, mem_size_t n) {
@@ -369,23 +387,39 @@ stkoff cstr RemoveTextColors(cstr s, i32 size) {
 }
 
 stkoff void printfmt(cstr s, mem_size_t n, struct fmt_arg const *args) {
-   mem_size_t i = 0;
-   char c;
-   while((c = *s++)) {
+   for(char c; (c = *s++);) {
       if(c == '{' && n) {
          if(*s == '{') {
             ACS_PrintChar('{');
             ++s;
          } else if(*s == '}') {
             ++s;
-            switch(args[i].tag) {
-            case _fmt_cstr: _p(args[i].val.cs);           break;
-            case _fmt_i32:  _p(args[i].val.i);            break;
-            case _fmt_k32:  _p(args[i].val.k);            break;
-            case _fmt_key:  ACS_PrintBind(args[i].val.s); break;
-            case _fmt_str:  _p(args[i].val.s);            break;
+            switch(args->tag) {
+            case _fmt_cstr:
+               if(!args->precision) _p(args->val.cs);
+               else                 PrintStrN(args->val.cs, args->precision);
+               break;
+            case _fmt_i32: _p(args->val.i); break;
+            case _fmt_k32:
+               if(!args->precision) {
+                  _p(args->val.k);
+               } else {
+                  register i32 scale;
+                  switch(args->precision) {
+                  case 1: scale = 10;                break;
+                  case 2: scale = 10 * 10;           break;
+                  case 3: scale = 10 * 10 * 10;      break;
+                  case 4: scale = 10 * 10 * 10 * 10; break;
+                  }
+                  _p((args->val.i & 0xFFFF0000) >> 16);
+                  _c('.');
+                  _p(((args->val.i & 0xFFFF) * scale + 0x7FFF) / 0xFFFF);
+               }
+               break;
+            case _fmt_key: ACS_PrintBind(args->val.s); break;
+            case _fmt_str: _p(args->val.s);            break;
             }
-            --n; ++i;
+            --n; ++args;
             continue;
          }
       }

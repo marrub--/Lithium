@@ -7,12 +7,26 @@
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
 %% LITHEND_Dedication
-Dedicated to the loving memory of Kaitlyn Anne Fox.
-         You were my biggest inspiration.
-
-                   Goodnight.
+    Dedicated to the loving memory
+        of Kaitlyn Anne Fox.
+You'll always be my biggest inspiration.
+             Goodnight.
 
 %% LITHEND_Finished
 The end.
+
+
+
+
+
+
+
+
+
+
+
+
+                              fin
+
 
 ## EOF

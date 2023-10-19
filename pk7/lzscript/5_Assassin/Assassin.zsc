@@ -8,10 +8,10 @@
 
 class Lith_AssassinPlayer : Lith_Player {
    default {
-      Player.DisplayName "$LITH_CLASS_ASSASSIN";
+      Player.DisplayName "$Lith_AssassinPlayer";
       Player.SoundClass "lith_assassin";
       Player.Portrait ":Portraits:Assassin";
-      Tag "$LITH_CLASS_ASSASSIN";
+      Tag "$Lith_AssassinPlayer";
    }
 
    int  m_dodgeDbc;

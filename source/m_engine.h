@@ -63,7 +63,6 @@ cvar_x(tic, player_scoresound, bool)
 #include "m_drawing.h"
 #include "m_math.h"
 #include "m_str.h"
-#include "m_stab.h"
 #include "m_cheat.h"
 #include "m_char.h"
 #include "m_flow.h"

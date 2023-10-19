@@ -10,11 +10,23 @@ class ListMenuItemLith_PlayerDisplay : ListMenuItemPlayerDisplay {
    void init(ListMenuDescriptor menu) {
       super.init(menu, 0, 0, "black", "green");
    }
-
+   private static bool showAsStan(class<PlayerPawn> pct) {
+      return pct is "Lith_MarinePlayer" && !(__lith_fun & lfun_lane);
+   }
    override void draw(bool selected, ListMenuDescriptor desc) {
       if(mMode == 0 && updatePlayerClass()) {
-         let pcl = getDefaultByType((class<PlayerPawn>)(mPlayerClass.type));
+         let pct = (class<PlayerPawn>)(mPlayerClass.type);
+         let pcn = pct.getClassName();
+         let pcl = getDefaultByType(pct);
          let por = Lith_URANUS.getTex(pcl.portrait);
+         let col = Lith_HERMES.localize(pcn .. "_Col");
+         let nsf = showAsStan(pct) ? "_DeN" : "_Nam";
+         let psf = showAsStan(pct) ? "_DPr" : "_Pro";
+         let nam = Lith_HERMES.localize(pcn .. nsf);
+         let pro = Lith_HERMES.localize(pcn .. psf);
+         let dsc = Lith_HERMES.localize(pcn .. "_Dsc");
+         let txt = Lith_HERMES.localize(pcn);
+         let cr  = Font.findFontColor(col);
          let [porx, pory] = TexMan.getSize(por);
          int scrw  = Screen.getWidth();
          int scrh  = Screen.getHeight();
@@ -24,10 +36,35 @@ class ListMenuItemLith_PlayerDisplay : ListMenuItemPlayerDisplay {
          int x     = int(xy.x);
          int dw    = int(porx*scale);
          int dh    = int(pory*scale);
-         Screen.drawTexture(por, true, x, 0,
-                            DTA_KEEPRATIO,true,
-                            DTA_DESTWIDTH,dw,
-                            DTA_DESTHEIGHT,dh);
+         Font bigf = menuDelegate.pickFont("bigupper");
+         Font midf = menuDelegate.pickFont("lmidfont");
+         Font smlf = menuDelegate.pickFont("smallfont");
+         Font trmf = menuDelegate.pickFont("ltrmfont");
+         if(cr == Font.CR_BLACK) {
+            nam = "???";
+            pro = "???";
+            dsc = "NOT IMPLEMENTED";
+            Screen.drawTexture(
+               por, true, x, 0,
+               DTA_KeepRatio,true,
+               DTA_DestWidth,dw,
+               DTA_DestHeight,dh,
+               DTA_FillColor,color("black")
+            );
+         } else {
+            Screen.drawTexture(
+               por, true, x, 0,
+               DTA_KeepRatio,true,
+               DTA_DestWidth,dw,
+               DTA_DestHeight,dh
+            );
+         }
+         Lith_URANUS.drawBack(168-2, 75+59-2,  150+2, 32+2, (0, 0), _bk_tl1);
+         Lith_URANUS.drawBack(104-2, 75+108-2, 206+2, 58+2, (0, 0), _bk_br3);
+         Screen.drawText(bigf, cr, 168, 75+59, txt, DTA_Clean, true);
+         Screen.drawText(midf, cr, 168, 75+73, nam, DTA_Clean, true);
+         Screen.drawText(smlf, cr, 317-smlf.stringWidth(pro), 75+81, pro, DTA_Clean, true);
+         Screen.drawText(trmf, cr, 104, 75+108, dsc, DTA_Clean, true);
       }
       Lith_URANUS.drawBack(14-2, 55-2, 74+2, 108+2, (0, 0), _bk_tl1br2);
    }
@@ -42,39 +79,6 @@ override void init(Menu parent, ListMenuDescriptor desc) {
       if(sel) {
          sel.mColor = Font.findFontColor(Lith_HERMES.localize(sel.mText .. "_Col"));
       }
-   }
-}
-
-override void drawer() {
-   super.drawer();
-   if(mDesc.mSelectedItem < 0) return;
-   let sel = ListMenuItemTextItem(mDesc.mItems[mDesc.mSelectedItem]);
-   if(sel) {
-      let nsf = "_Nam";
-      let psf = "_Pro";
-      if(sel.mText == "$LITH_CLASS_MARINE" && !(__lith_fun & lfun_lane)) {
-         nsf = "_DeN";
-         psf = "_DPr";
-      }
-      let col = Lith_HERMES.localize(sel.mText .. "_Col");
-      let nam = Lith_HERMES.localize(sel.mText .. nsf);
-      let pro = Lith_HERMES.localize(sel.mText .. psf);
-      let dsc = Lith_HERMES.localize(sel.mText .. "_Dsc");
-      let txt = Lith_HERMES.localize(sel.mText);
-      let cr  = Font.findFontColor(col);
-      Font bigf = menuDelegate.pickFont("bigupper");
-      Font midf = menuDelegate.pickFont("lmidfont");
-      Font smlf = menuDelegate.pickFont("smallfont");
-      Font trmf = menuDelegate.pickFont("ltrmfont");
-      Lith_URANUS.drawBack(168-2, 75+59-2,  150+2, 32+2, (0, 0), _bk_tl1);
-      Lith_URANUS.drawBack(104-2, 75+108-2, 206+2, 58+2, (0, 0), _bk_br3);
-      Screen.drawText(bigf, cr, 168, 75+59, txt, DTA_Clean, true);
-      Screen.drawText(midf, cr, 168, 75+73, nam, DTA_Clean, true);
-      Screen.drawText(smlf, cr, 317-smlf.stringWidth(pro), 75+81, pro, DTA_Clean, true);
-      if(cr == Font.CR_BLACK) {
-         Screen.drawText(smlf, cr, 168, 75+81, "NOT IMPLEMENTED", DTA_Clean, true);
-      }
-      Screen.drawText(trmf, cr, 104, 75+108, dsc, DTA_Clean, true);
    }
 }
 

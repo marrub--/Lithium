@@ -54,7 +54,7 @@ void Z_GetSigil(void) {
    pl.sgacquired = true;
    AmbientSound(ss_player_getsigil, 1.0k);
    FreezeTime();
-   P_CenterNotification(ns(lang(sl_div_sigil_get)), 157, -1, -1);
+   P_CenterNotification(sl_div_sigil_get, 157, -1, -1);
    ACS_Delay(157);
    UnfreezeTime();
 }

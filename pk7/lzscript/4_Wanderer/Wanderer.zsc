@@ -30,11 +30,11 @@ class Lith_StatShadowWalked : Lith_StatFx {
 
 class Lith_WandererPlayer : Lith_Player {
    default {
-      Player.DisplayName "$LITH_CLASS_WANDERER";
+      Player.DisplayName "$Lith_WandererPlayer";
       Player.SoundClass "lith_wanderer";
       Player.Portrait ":Portraits:Wanderer";
-      Tag "$LITH_CLASS_WANDERER";
       Health 50;
+      Tag "$Lith_WandererPlayer";
    }
 
    override void beginPlay() {
@@ -67,13 +67,6 @@ class Lith_WandererPlayer : Lith_Player {
 class Lith_WWeapon : Lith_Weapon {
    default {
       Inventory.RestrictedTo "Lith_WandererPlayer";
-   }
-
-   override state lith_ready(int flags) {
-      if(Lith_StatFx.getInPool("Lith_StatShadowWalker"))
-         return resolveState("_ShadowWalk");
-      else
-         return null;
    }
 
    states(Weapon) {

@@ -238,7 +238,6 @@ player/pickup/armor = lsnd/Items/Armor.flac
 player/pickup/boots = lsnd/Items/Boots.flac
 player/pickup/ring = lsnd/Items/Ring.flac
 player/pickup/armor/pink = lsnd/Items/ArmorPink.flac
-player/pickup/armor/midori = lsnd/Items/ArmorMidori.flac
 player/pickup/scorechip = lsnd/Items/ScoreChip.flac
 player/pickup/coin1 = lsnd/Items/Coin1.flac
 player/pickup/coin2 = lsnd/Items/Coin2.flac

@@ -16,13 +16,6 @@
 #include "w_world.h"
 #include "w_monster.h"
 
-static
-void SetPClass(void) {
-   pl.pclass = GetMembI(0, sm_PClass);
-   pl.color  = P_Color(pl.pclass);
-   faststrcpy_str(pl.discrim, GetMembS(0, sm_Discrim));
-}
-
 stkoff bool P_ButtonPressed(i32 bt) {
    return pl.buttons & bt && !(pl.old.buttons & bt);
 }
@@ -139,13 +132,21 @@ script ext("ACS") addr(lsc_giveammo) bool chtf_give_ammo(cheat_params_t const pa
 
 struct cheat cht_give_ammo = cheat_s("pgfa", 0, chtf_give_ammo, "Fully ammunized");
 
-script void P_Init(void) {
+script void P_EarlyInit(void) {
+   pl.setActivator();
    if(!pl.wasinit) {
       fastmemset(&pl, 0, sizeof pl);
-      SetPClass();
+      pl.pclass = GetMembI(0, s"m_PClass");
+      faststrcpy_str(pl.discrim, GetMembS(0, s"m_Discrim"));
+   }
+}
+
+script void P_Init(void) {
+   if(!pl.wasinit) {
+      pl.color        = P_Color(pl.pclass);
       pl.attr.expprev = 0;
       pl.attr.expnext = _base_exp;
-      pl.attr.level = 1;
+      pl.attr.level   = 1;
       pl.viewheight   = EDataI(_edt_viewheight);
       pl.attackheight = EDataI(_edt_attackheight);
       pl.jumpheight   = GetMembK(0, sm_JumpZ);
@@ -181,7 +182,7 @@ script void P_Init(void) {
       P_BIP_PInit();
       P_Upg_PInit();
       P_Inv_PInit();
-      P_LogH(1, tmpstr(lang(sl_log_version)), vernam, __DATE__);
+      P_LogH(1, tmpstr(sl_log_version), vernam, __DATE__);
       #ifndef NDEBUG
       if(dbglevel_any()) {
          P_LogH(1, "player is %u bytes long!", sizeof pl * 4);

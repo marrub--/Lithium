@@ -159,11 +159,14 @@ Select:
 Fire:
    CSRG A 0 lith_jumpNoAmmo(2);
    CSRG A 0 Lith_A_JumpIfMagEmpty;
-   CSRG A 1;
-   CSRG B 1 bright offset(0, 40) Lith_A_FireShock;
-   CSRG C 1 bright offset(0, 35) {A_Light(0); Lith_A_RecoilDn(0.25);}
-   CSRG A 1 offset(0, 34) Lith_A_RecoilDn(0.25);
-   CSRG A 2 offset(0, 33);
+   CSRG A 1 offset(0, 33);
+   CSRG B 1 bright offset(0, 45) Lith_A_FireShock;
+   CSRG C 1 bright offset(0, 43) {
+      A_Light(0);
+      Lith_A_RecoilDn(0.25);
+   }
+   CSRG A 1 offset(0, 37) Lith_A_RecoilDn(0.25);
+   CSRG A 2 offset(0, 35);
    goto ReadySelector;
 Reload:
    CSRG A 0 Lith_A_JumpIfMagFull;
