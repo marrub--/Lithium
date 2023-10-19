@@ -14,8 +14,10 @@ override int damageMobj(Actor inflictor, Actor source, int damage, name mod, int
    sv.m_dmgType  = mod;
    /* due to the fact that railguns and stuff won't get affected by
     * this flag... */
-   if(source && source.bDontHarmSpecies &&
-      source.getSpecies() == 'Lith_Player')
+   if((source && source.bDontHarmSpecies &&
+       source.getSpecies() == 'Lith_Player') ||
+      (inflictor && inflictor.bDontHarmSpecies &&
+       inflictor.getSpecies() == 'Lith_Player'))
    {
       damage = 0;
    }

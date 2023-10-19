@@ -6,20 +6,15 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_CannonExplosionParticle : Actor
-{
-   default
-   {
+class Lith_CannonExplosionParticle : Actor {
+   default {
       Mass 5;
       Scale 0.5;
       Gravity 0.8;
-
       -NoGravity
       +NoClip
    }
-
-   states
-   {
+   states {
    Spawn:
       MEXP AB 2 bright A_SpawnItemEx("Lith_CannonSmokeParticle", 0,0,0, FRandom(-2,2),FRandom(-2,2),FRandom(-2,2), 0, SXF_NOCHECKPOSITION);
       MEXP CD 3 bright A_SpawnItemEx("Lith_CannonSmokeParticle", 0,0,0, FRandom(-2,2),FRandom(-2,2),FRandom(-2,2), 0, SXF_NOCHECKPOSITION);
@@ -28,36 +23,27 @@ class Lith_CannonExplosionParticle : Actor
    }
 }
 
-class Lith_CannonSmokeParticle : Lith_CannonExplosionParticle
-{
-   default
-   {
+class Lith_CannonSmokeParticle : Lith_CannonExplosionParticle {
+   default {
       Mass 3;
       Gravity 0.4;
       RenderStyle "Add";
-
       +NoClip
    }
-
-   states
-   {
+   states {
    Spawn:
       #ESM ABCDEFGHIJKLM 1 A_FadeOut(0.06);
       stop;
    }
 }
 
-class Lith_SmallCannonBall : Lith_CannonBall
-{
-   default
-   {
+class Lith_SmallCannonBall : Lith_CannonBall {
+   default {
       Radius 8;
       Scale 2;
       DamageFunction 100;
    }
-
-   override void Lith_CannonBallExplode()
-   {
+   override void Lith_CannonBallExplode() {
       A_Explode(128*3, 512, 0);
       for(int i = 0; i < 9; i++)
          A_SpawnItemEx("Lith_CannonExplosionParticle", 0,0,8, FRandom(-8,8),FRandom(-8,8),FRandom(6,12), 0);
