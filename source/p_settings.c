@@ -307,6 +307,7 @@ static struct setting const st_itm[] = {
    s_integ("light_g", 0, 255, 1, "byte"),
    s_integ("light_b", 0, 255, 1, "byte"),
    s_integ("light_radius", 100, 5000, 100, "unit"),
+   s_enume("light_sparksnd", 0, _lspk_snd_max, "lspksnd", .pclass = gI),
 };
 
 static struct setting const st_wep[] = {

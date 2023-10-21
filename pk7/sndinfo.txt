@@ -419,7 +419,16 @@ player/lightspark/spark1 = lsnd/Player/LightsparkSpark1.flac
 player/lightspark/spark2 = lsnd/Player/LightsparkSpark2.flac
 player/lightspark/spark3 = lsnd/Player/LightsparkSpark3.flac
 player/lightspark/spark4 = lsnd/Player/LightsparkSpark4.flac
+player/lightspark/outta = lsnd/Player/LightsparkOut2.wav
+player/lightspark/inta = lsnd/Player/LightsparkIn2.wav
+player/lightspark/outte = lsnd/Player/LightsparkOut3.wav
+player/lightspark/inte = lsnd/Player/LightsparkIn3.wav
+player/lightspark/sparkta = lsnd/Player/LightsparkSpark5.wav
+player/lightspark/sparkte = lsnd/Player/LightsparkSpark6.wav
 $random player/lightspark/spark { player/lightspark/spark1 player/lightspark/spark2 player/lightspark/spark3 }
+$volume player/lightspark/spark 0.6
+$volume player/lightspark/sparkta 0.5
+$volume player/lightspark/sparkte 0.2
 player/step/lava1 = lsnd/Player/Footsteps/Lava1.flac
 player/step/lava2 = lsnd/Player/Footsteps/Lava2.flac
 player/step/lava3 = lsnd/Player/Footsteps/Lava3.flac

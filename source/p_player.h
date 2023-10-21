@@ -72,6 +72,13 @@ enum ZscName(FlashlightState) {
    _light_max,
 };
 
+enum ZscName(LightsparkSoundType) {
+   _lspk_navi,
+   _lspk_tatl,
+   _lspk_tael,
+   _lspk_snd_max,
+};
+
 #include "p_attrib.h"
 #if !ZscOn
 #include "m_engine.h"

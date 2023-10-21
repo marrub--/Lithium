@@ -89,12 +89,13 @@ server int  lith_scanner_yoffs   = 0;
 server int  lith_scanner_color   = 106; /* 'j' */
 server int  lith_scanner_font    = 0;
 
-server int lith_light_battery = 7;
-server int lith_light_regen   = 2;
-server int lith_light_r       = 255;
-server int lith_light_g       = 217;
-server int lith_light_b       = 186;
-server int lith_light_radius  = 400;
+server int lith_light_battery  = 7;
+server int lith_light_regen    = 2;
+server int lith_light_r        = 255;
+server int lith_light_g        = 217;
+server int lith_light_b        = 186;
+server int lith_light_radius   = 400;
+server int lith_light_sparksnd = 0;
 
 server bool   lith_player_altinvuln     = false;
 server int    lith_player_ammodisp      = 2;

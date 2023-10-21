@@ -48,9 +48,21 @@ static void P_lightUpdate(void) {
       AmbientSound(pl.light.on ? ss_player_lighton : ss_player_lightoff, 1.0);
       if(get_bit(pcl_intruders, pl.pclass)) {
          if(!pl.light.was_on) {
-            AmbientSound(ss_player_lightspark_out, 1.0);
+            str snd;
+            switch(CVarGetI(sc_light_sparksnd)) {
+            case _lspk_navi: snd = ss_player_lightspark_out;   break;
+            case _lspk_tatl: snd = ss_player_lightspark_outta; break;
+            case _lspk_tael: snd = ss_player_lightspark_outte; break;
+            }
+            AmbientSound(snd, 1.0);
          } else if(pl.light.on == _light_follow) {
-            AmbientSound(ss_player_lightspark_in, 1.0);
+            str snd;
+            switch(CVarGetI(sc_light_sparksnd)) {
+            case _lspk_navi: snd = ss_player_lightspark_in;   break;
+            case _lspk_tatl: snd = ss_player_lightspark_inta; break;
+            case _lspk_tael: snd = ss_player_lightspark_inte; break;
+            }
+            AmbientSound(snd, 1.0);
          }
       }
       if(!pl.light.on && pl.light.was_on) {

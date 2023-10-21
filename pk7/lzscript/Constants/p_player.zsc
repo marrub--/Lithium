@@ -85,6 +85,13 @@ enum Lith_FlashlightState {
    _light_max,
 };
 
+enum Lith_LightsparkSoundType {
+   _lspk_navi,
+   _lspk_tatl,
+   _lspk_tael,
+   _lspk_snd_max,
+};
+
 
 
 

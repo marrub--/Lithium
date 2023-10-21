@@ -53,6 +53,7 @@ The font to use when Japanese is set as the language.
 == \#light_r | $$\#RED_INTENSITY
 == \#light_radius | Radius
 == \#light_regen | Battery regeneration
+== \#light_sparksnd | Lightspark Sound
 == \#player_altinvuln | Alternate invulnerability palette
 @@ \#TOOLTIP_player_altinvuln
 Changes the inverted palette to an orange one. My eyes, they're saved!
@@ -366,6 +367,10 @@ crosshair that follow the recoil. They're... juicy. Guess that's why.
 == \#st_name_sky_1 | Vanilla-like
 == \#st_name_sky_2 | Replace skies
 == \#st_name_sky_3 | Shader
+
+== \#st_name_lspksnd_0 | Navigator
+== \#st_name_lspksnd_1 | Chatter
+== \#st_name_lspksnd_2 | Discourse
 
 ## Tab Labels ════════════════════════════════════════════════════════════════╕
 == \#st_tab_gui | Interface

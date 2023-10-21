@@ -11,33 +11,43 @@ class Lith_LightsparkEffect : Actor {
       Alpha 0.77;
       Scale 0.75;
       RenderStyle "Add";
+      Lith_LightsparkEffect.SparkNoise "player/lightspark/spark";
       +NoInteraction
       +ForceXyBillboard
       +Bright
    }
-
    const LSPK_MAX_VEL = 0.33;
-
+   meta sound m_sparkNoise;
+   property SparkNoise: m_sparkNoise;
    override void postBeginPlay() {
       super.postBeginPlay();
       a_setScale(scale.x * Lith_URANUS.uiRandom(0.8, 1.0));
       vel = (Lith_URANUS.uiRandom(-LSPK_MAX_VEL, LSPK_MAX_VEL), Lith_URANUS.uiRandom(-LSPK_MAX_VEL, LSPK_MAX_VEL), Lith_URANUS.uiRandom(-LSPK_MAX_VEL, LSPK_MAX_VEL));
-      a_startSound("player/lightspark/spark", lch_body, chanf_loop);
+      a_startSound(m_sparkNoise, lch_body, chanf_loop);
    }
-
    override void tick() {
-      if(!isFrozen()) {
-         Lith_UTIL.stateTick(self);
-         setOrigin(pos + vel, true);
-         a_soundVolume(lch_body, alpha);
-         a_fadeOut(0.05);
-      }
+      Lith_UTIL.stateTick(self);
+      setOrigin(pos + vel, true);
+      a_soundVolume(lch_body, alpha);
+      a_fadeOut(0.05);
    }
 
    states {
    Spawn:
       #LSP AAABCBCD 3;
       stop;
+   }
+}
+
+class Lith_LightsparkEffectTatl : Lith_LightsparkEffect {
+   default {
+      Lith_LightsparkEffect.SparkNoise "player/lightspark/sparkta";
+   }
+}
+
+class Lith_LightsparkEffectTael : Lith_LightsparkEffect {
+   default {
+      Lith_LightsparkEffect.SparkNoise "player/lightspark/sparkte";
    }
 }
 
@@ -183,7 +193,13 @@ void tickFlashlightIntruders(int r, int g, int b, int rd, double intn) {
    }
    if(gameTic % 5 == 0 && !is_off) {
       let ofs = Lith_UTIL.anglesToVec((Lith_URANUS.uiRandom(0, 360), Lith_URANUS.uiRandom(0, 360)), cen_rd + Lith_URANUS.uiRandom(0, 1));
-      spawn("Lith_LightsparkEffect", m_lspkPos + ofs);
+      class<Lith_LightsparkEffect> fxty;
+      switch(lith_light_sparksnd) {
+      case _lspk_navi: fxty = 'Lith_LightsparkEffect';     break;
+      case _lspk_tatl: fxty = 'Lith_LightsparkEffectTatl'; break;
+      case _lspk_tael: fxty = 'Lith_LightsparkEffectTael'; break;
+      }
+      spawn(fxty, m_lspkPos + ofs);
    }
    m_lspkPos = Lith_UTIL.vec3Lerp(m_lspkPos, m_lspkDest, LSPK_MOVE_SPEED);
 }

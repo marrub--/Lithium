@@ -55,13 +55,22 @@ player {
    $random score {score1, score2, score3,}
 
    lightspark {
-      out    LightsparkOut    # The Legend of Zelda: Ocarina of Time
-      in     LightsparkIn     # ^
-      spark1 LightsparkSpark1 # ^
-      spark2 LightsparkSpark2 # ^
-      spark3 LightsparkSpark3 # ^
-      spark4 LightsparkSpark4 # ^
+      out     LightsparkOut    # The Legend of Zelda: Ocarina of Time
+      in      LightsparkIn     # ^
+      spark1  LightsparkSpark1 # ^
+      spark2  LightsparkSpark2 # ^
+      spark3  LightsparkSpark3 # ^
+      spark4  LightsparkSpark4 # ^
+      outta   LightsparkOut2   # The Legend of Zelda: Majora's Mask
+      inta    LightsparkIn2    # ^
+      outte   LightsparkOut3   # ^
+      inte    LightsparkIn3    # ^
+      sparkta LightsparkSpark5 # ^
+      sparkte LightsparkSpark6 # ^
       $random spark {spark1, spark2, spark3,}
+      $volume spark   0.6
+      $volume sparkta 0.5
+      $volume sparkte 0.2
    }
 
    step {
