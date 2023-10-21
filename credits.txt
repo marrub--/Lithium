@@ -39,16 +39,17 @@
 ~
                               * Audio *
 
-@ 505           - Title music (hYmns - Shredder)
-@ BouncyTEM     - Nanto Naku music (Perdition)
-@ Green Den     - Test map music (Dandalins Story)
-@ Kyle873       \ Fallout 4 sound rip
-                | Phantasy Star Nova sound rip
-@ Shadowlink226 - Halo 3 sound rip
-@ Skaven        - Intermission music (The Alchemist)
-@ TerminusEst13 - A whole bunch of sound sources
-@ WildWeasel    - Sound rip from Mac OS 9
-@ a1337spy      - Various sounds
+@ 505             - Title music (hYmns - Shredder)
+@ BouncyTEM       - Nanto Naku music (Perdition)
+@ Green Den       - Test map music (Dandalins Story)
+@ Kyle873         \ Fallout 4 sound rip
+                  | Phantasy Star Nova sound rip
+@ Shadowlink226   - Halo 3 sound rip
+@ Skaven          - Intermission music (The Alchemist)
+@ TerminusEst13   - A whole bunch of sound sources
+@ WildWeasel      - Sound rip from Mac OS 9
+@ a1337spy        - Various sounds
+@ HelpTheWretched - Various Zelda sound rips
 ~
                              * Weapons *
 
