@@ -22,12 +22,14 @@ class Lith_LightsparkEffect : Actor {
       super.postBeginPlay();
       a_setScale(scale.x * Lith_URANUS.uiRandom(0.8, 1.0));
       vel = (Lith_URANUS.uiRandom(-LSPK_MAX_VEL, LSPK_MAX_VEL), Lith_URANUS.uiRandom(-LSPK_MAX_VEL, LSPK_MAX_VEL), Lith_URANUS.uiRandom(-LSPK_MAX_VEL, LSPK_MAX_VEL));
+      a_startSound("player/lightspark/spark", lch_body, chanf_loop);
    }
 
    override void tick() {
       if(!isFrozen()) {
          Lith_UTIL.stateTick(self);
          setOrigin(pos + vel, true);
+         a_soundVolume(lch_body, alpha);
          a_fadeOut(0.05);
       }
    }
@@ -124,7 +126,11 @@ void tickFlashlightIntruders(int r, int g, int b, int rd, double intn) {
       m_light[1] = Lith_DynLight(spawn('Lith_SpotLight', pos));
    }
    let vp = (pos.xy, player.viewz);
+   bool is_off = false;
    switch(Lith_UTIL.pData(_pdt_lighton)) {
+   case _light_off:
+      is_off = true;
+      break;
    case _light_on:
       if(Lith_UTIL.pData(_pdt_lightwason) == _light_off) {
          let hit = Lith_UTIL.traceFromPos(curSector, vp, angle, pitch,
@@ -175,7 +181,7 @@ void tickFlashlightIntruders(int r, int g, int b, int rd, double intn) {
    if(cen_rd > 0) {
       Lith_URANUS.instance().particleLightsparkCenter(m_lspkPos, cen_cr, cen_rd);
    }
-   if(gameTic % 5 == 0) {
+   if(gameTic % 5 == 0 && !is_off) {
       let ofs = Lith_UTIL.anglesToVec((Lith_URANUS.uiRandom(0, 360), Lith_URANUS.uiRandom(0, 360)), cen_rd + Lith_URANUS.uiRandom(0, 1));
       spawn("Lith_LightsparkEffect", m_lspkPos + ofs);
    }

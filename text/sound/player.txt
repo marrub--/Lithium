@@ -52,10 +52,16 @@ player {
 
    $limit barrier 0
 
-   $random score {
-      score1,
-      score2,
-      score3,
+   $random score {score1, score2, score3,}
+
+   lightspark {
+      out    LightsparkOut    # The Legend of Zelda: Ocarina of Time
+      in     LightsparkIn     # ^
+      spark1 LightsparkSpark1 # ^
+      spark2 LightsparkSpark2 # ^
+      spark3 LightsparkSpark3 # ^
+      spark4 LightsparkSpark4 # ^
+      $random spark {spark1, spark2, spark3,}
    }
 
    step {

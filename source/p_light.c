@@ -46,6 +46,13 @@ static void P_lightUpdate(void) {
    }
    if(pl.light.was_on != pl.light.on) {
       AmbientSound(pl.light.on ? ss_player_lighton : ss_player_lightoff, 1.0);
+      if(get_bit(pcl_intruders, pl.pclass)) {
+         if(!pl.light.was_on) {
+            AmbientSound(ss_player_lightspark_out, 1.0);
+         } else if(pl.light.on == _light_follow) {
+            AmbientSound(ss_player_lightspark_in, 1.0);
+         }
+      }
       if(!pl.light.on && pl.light.was_on) {
          pl.light.target = 0.0;
          pl.light.speed  = 0.05;

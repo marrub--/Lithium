@@ -413,6 +413,13 @@ $volume player/nuke 0.7
 $volume player/doublejump 0.7
 $limit player/barrier 0
 $random player/score { player/score1 player/score2 player/score3 }
+player/lightspark/out = lsnd/Player/LightsparkOut.flac
+player/lightspark/in = lsnd/Player/LightsparkIn.wav
+player/lightspark/spark1 = lsnd/Player/LightsparkSpark1.flac
+player/lightspark/spark2 = lsnd/Player/LightsparkSpark2.flac
+player/lightspark/spark3 = lsnd/Player/LightsparkSpark3.flac
+player/lightspark/spark4 = lsnd/Player/LightsparkSpark4.flac
+$random player/lightspark/spark { player/lightspark/spark1 player/lightspark/spark2 player/lightspark/spark3 }
 player/step/lava1 = lsnd/Player/Footsteps/Lava1.flac
 player/step/lava2 = lsnd/Player/Footsteps/Lava2.flac
 player/step/lava3 = lsnd/Player/Footsteps/Lava3.flac
