@@ -12,6 +12,7 @@
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
 require_relative "corinth.rb"
+require "set"
 
 Alias         = Struct.new :name, :text
 Language      = Struct.new :name, :data
@@ -129,20 +130,21 @@ common_main do
    state    = TxtParseState.new [], nil, {
       "default" => Language.new("default", [])
    }
-
    parse_file state, filename, "default"
-
    out.puts generated_header "txtc"
-
    sorted = state.langs.sort_by do |k, v| k end
    for _, lang in sorted
       out.puts "[" + lang.name + "]"
+      defined = Set[]
       for data in lang.data
          txt = data.text
             .split("\n")
             .map do |s| escape s end
             .join("\\n\"\n   \"")
          out.puts %("#{escape data.name}" =\n   "#{txt}";)
+         unless defined.add?(data.name.upcase)
+            raise "#{data.name} redefined in #{lang.name}"
+         end
       end
    end
 end
