@@ -54,6 +54,7 @@ default {
    Scale 1.5;
    DamageType "Bullet";
    Species "Lith_Player";
+   +DontHarmSpecies
    +PuffOnActors
    +NoExtremeDeath
 }

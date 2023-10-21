@@ -41,6 +41,7 @@ class Lith_PoisonBullet : Lith_BulletPuff {
       DamageType "Bullet";
       RenderStyle "Add";
       Species "Lith_Player";
+      +DontHarmSpecies
       +NoExtremeDeath
       +PuffOnActors
    }

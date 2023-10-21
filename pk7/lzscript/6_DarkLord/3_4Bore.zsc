@@ -17,8 +17,10 @@ class Lith_4BoreDamageBuff : Inventory {
 
 class Lith_4BorePuff : Lith_BulletPuff {
    default {
-      +PuffOnActors
       Scale 2;
+      Species "Lith_Player";
+      +DontHarmSpecies
+      +PuffOnActors
    }
    static const color[] CRS = {
       "#f4bf5f",

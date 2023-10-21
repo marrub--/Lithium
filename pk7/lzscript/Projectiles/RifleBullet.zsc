@@ -14,6 +14,7 @@ default {
    Mass 9999;
    DamageType "Bullet";
    Species "Lith_Player";
+   +DontHarmSpecies
    +PuffOnActors
 }
 
