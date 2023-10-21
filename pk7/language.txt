@@ -5284,6 +5284,8 @@
    "Radius";
 "LITH_light_regen" =
    "Battery regeneration";
+"LITH_light_sparksnd" =
+   "Lightspark Sound";
 "LITH_player_altinvuln" =
    "Alternate invulnerability palette";
 "LITH_TOOLTIP_player_altinvuln" =
@@ -5753,6 +5755,12 @@
    "Replace skies";
 "LITH_st_name_sky_3" =
    "Shader";
+"LITH_st_name_lspksnd_0" =
+   "Navigator";
+"LITH_st_name_lspksnd_1" =
+   "Chatter";
+"LITH_st_name_lspksnd_2" =
+   "Discourse";
 "LITH_st_tab_gui" =
    "Interface";
 "LITH_st_tab_itm" =
@@ -6322,7 +6330,7 @@
    "The singularity beckons all to come to it,\n"
    "and the investigative souls flock;\n"
    "\n"
-   "The outcasts, to live again. The missioners, their tasks at hand. A lonesome end, perhaps, awaits all of them. The dark energy sought to be siphoned leads through a dimension of hate--built of demons.\n"
+   "The outcasts, to live again. The missioners, their tasks at hand. The intruders, a break in the chain. A lonesome end, perhaps, awaits all of them. The dark energy sought to be siphoned leads through a dimension of hate--built of demons.\n"
    "\n"
    "\cm\n"
    "              Go as one        \cjgo at once,\n"
