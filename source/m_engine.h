@@ -119,8 +119,8 @@ cvar_x(tic, player_scoresound, bool)
 #define SetMass(tid, x)             SetPropI(tid, APROP_Mass,             x)
 
 #define Paused EDataI(_edt_paused)
-#define PausableTick() do ACS_Delay(1); while(Paused)
-#define WaitPause() while(Paused) ACS_Delay(1)
+#define PausableTick() sync_delay(!Paused)
+#define WaitPause() sync(!Paused)
 
 #define has_status(fx) ServCallI(sm_HasStatFx, fx)
 #define add_status(fx) ServCallV(sm_AddStatFx, fx)
@@ -140,6 +140,9 @@ cvar_x(tic, player_scoresound, bool)
 #define InvMax(arg) ACS_GetMaxInventory(0, arg)
 #define InvNum      ACS_CheckInventory
 #define InvTake     ACS_TakeInventory
+
+#define sync(s) while(!(s)) ACS_Delay(1)
+#define delay_sync(s) do ACS_Delay(1); while(!(s))
 
 void FadeFlash(i32 r, i32 g, i32 b, k32 amount, k32 seconds);
 script optargs(1) i32 PtrTID(i32 tid, i32 ptr);
