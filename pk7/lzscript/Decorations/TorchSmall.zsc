@@ -17,8 +17,8 @@ class Lith_TorchSmall : Lith_TorchDecor {
 
    states {
    Spawn:    #DTS AAAABBBBCCCCDDDD 1 bright Lith_A_SpawnFlame; loop;
-   Inactive: #DTS E -1; stop;
-   Death:    #DTS F 0; goto Death1;
+   Inactive: #DTS D -1; stop;
+   Death:    #DTS E 0; goto Death1;
    }
 }
 
