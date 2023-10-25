@@ -5372,7 +5372,9 @@
 "LITH_st_done_intro" =
    "Don't play intro on next game start";
 "LITH_sv_autosave" =
-   "Autosave interval";
+   "Auto-save interval";
+"LITH_sv_autosavef" =
+   "Auto-save on map starts (after intros)";
 "LITH_sv_difficulty" =
    "Difficulty base";
 "LITH_TOOLTIP_sv_difficulty" =

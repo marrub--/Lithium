@@ -374,6 +374,10 @@ alloc_aut(0) script static void P_doDepthMeter(void) {
       PrintRect(scr_w - notch_sx, y_scaled + curr_level, notch_sx, notch_sy, player_clr | alpha_m);
       ACS_Delay(1);
    }
+   if(wl.hubscleared) {
+      ACS_Delay(2);
+      P_DoAutoSave();
+   }
 }
 
 alloc_aut(0) script static void P_doIntro(void) {
@@ -484,10 +488,16 @@ alloc_aut(0) script static void P_doIntro(void) {
    set_bit(pl.done_intro, pl.pclass);
    P_Data_Save();
    pl.modal = _gui_none;
+   /* alert the player to open the menu */
    static struct fmt_arg fmt_args[] = {{_fmt_key}};
    fmt_args[0].val.s = sc_k_opencbi;
    str tut_txt = strp(printfmt(tmpstr(sl_open_menu), 1, fmt_args));
-   P_CenterNotification(tut_txt, _tut_tics, -1, -1);
+   static bool sync;
+   sync = false;
+   P_CenterNotification(tut_txt, _tut_tics, -1, -1, 0, 0, &sync);
+   sync(sync);
+   ACS_Delay(2);
+   P_DoAutoSave();
 }
 
 alloc_aut(0) script void P_CenterNotification(str txt, i32 tics, i32 cr, i32 linecr, k32 bgfade, k32 fgfade, bool *sync) {

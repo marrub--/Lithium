@@ -263,6 +263,7 @@ static struct setting const st_gam[] = {
    s_boole("sv_wepdrop"),
    s_integ("sv_minhealth", 0, 200, 1, "perc"),
    s_integ("sv_autosave",  0, 30, 1, "minu"),
+   s_boole("sv_autosavef"),
    s_label("st_labl_fx"),
    s_boole("sv_revenge"),
    s_boole("sv_lessparticles"),

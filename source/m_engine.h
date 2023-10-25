@@ -40,6 +40,7 @@ cvar_x(map, sv_minhealth, i32)
  * not place it here.
  */
 cvar_x(tic, sv_autosave, i32)
+cvar_x(tic, sv_autosavef, bool)
 cvar_x(tic, debug_flags, i32)
 cvar_x(tic, debug_level, i32)
 cvar_x(tic, player_scoredisp, i32)

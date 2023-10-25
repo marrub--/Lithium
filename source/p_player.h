@@ -133,6 +133,8 @@ script_sync void P_TeleportOut(i32 tag);
 
 script optargs(3) void P_CenterNotification(str txt, i32 tics, i32 cr, i32 linecr, k32 bgfade, k32 fgfade, bool *sync);
 
+#define P_DoAutoSave() if(cv.sv_autosavef) ACS_Autosave(); else (void)(0)
+
 #ifndef NDEBUG
 void P_Ren_Debug(void);
 #endif

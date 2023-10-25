@@ -119,10 +119,8 @@ Automatically buys this autogroup when you have the Score available.
 == \#TOOLTIP_autobuy_4 | $$\#TOOLTIP_autobuy_1
 
 == \#st_done_intro | Don't play intro on next game start
-== \#sv_autosave | Autosave interval
-@@ \#TOOLTIP_sv_autosave
-\cg(Applies on next game start)
-
+== \#sv_autosave | Auto-save interval
+== \#sv_autosavef | Auto-save on map starts (after intros)
 == \#sv_difficulty | Difficulty base
 @@ \#TOOLTIP_sv_difficulty
 The base scale for enemy levels; 100% means enemies can spawn at

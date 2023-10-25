@@ -21,6 +21,7 @@ server int   lith_sv_sky           = 0;
 server float lith_sv_skydarkening  = 1.0;
 server bool  lith_sv_revenge       = true;
 server int   lith_sv_autosave      = 0;
+server bool  lith_sv_autosavef     = false;
 server bool  lith_sv_nobossdrop    = false;
 server bool  lith_sv_nobosses      = false;
 server int   lith_sv_failtime      = 67;
