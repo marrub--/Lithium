@@ -12,6 +12,8 @@ class Lith_SubGrn : Lith_RifleGrenade {
       ExplosionRadius 200;
       BounceType "None";
       Damage 25;
+      Species "Lith_Player";
+      +DontHarmSpecies
    }
    states {
    Death:
