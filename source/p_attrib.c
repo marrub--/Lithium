@@ -130,11 +130,11 @@ static void AttrBar(struct gui_state *g, i32 x, i32 y, i32 w, str gfx) {
 }
 
 stkoff k32 attr_accbuff(void) {
-   return 1.0k + pl.attr.attrs[at_acc] / 150.0k;
+   return 1.0k + pl.attr.attrs[at_acc] / 100.0k;
 }
 
 stkoff i32 attr_defbuff(void) {
-   k32 def = pl.attr.attrs[at_def] / 170.0k;
+   k32 def = pl.attr.attrs[at_def] / (_attr_abs_max / 0.88k);
    if(pl.pclass == pcl_darklord && pl.buttons & BT_CROUCH) {
       def += 0.11k;
    }
@@ -142,7 +142,7 @@ stkoff i32 attr_defbuff(void) {
 }
 
 stkoff i32 attr_strbuff(void) {
-   return pl.attr.attrs[at_str];
+   return pl.attr.attrs[at_str] << 1;
 }
 
 stkoff k32 attr_vitbuff(void) {
@@ -150,11 +150,11 @@ stkoff k32 attr_vitbuff(void) {
 }
 
 stkoff i32 attr_stmbuff(void) {
-   return pl.attr.attrs[at_stm];
+   return pl.attr.attrs[at_stm] << 2;
 }
 
 stkoff i32 attr_stmtime(void) {
-   return maxi(75 - pl.attr.attrs[at_stm], 15);
+   return maxi(75 - pl.attr.attrs[at_stm], 10);
 }
 
 stkoff k32 attr_lukbuff(void) {
