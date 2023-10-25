@@ -251,14 +251,16 @@ static struct setting const st_gui[] = {
    s_color("scanner_color"),
 };
 
-static struct gui_fil fil_bosses = {35};
+static struct gui_fil fil_boss = {35};
 static struct gui_fil fil_postgame = {70};
 static struct setting const st_gam[] = {
    s_label("st_labl_balance"),
    s_integ("sv_difficulty", 1, 100, 1, "perc"),
    s_enume("player_lvsys", 0, atsys_max, "lvsys"),
    s_boole("sv_extrahard"),
-   s_boole("sv_nobosses", .fill = &fil_bosses),
+   s_boole("sv_nobosses", .fill = &fil_boss),
+   s_boole("sv_nobossdrop", .fill = &fil_boss),
+   s_boole("sv_wepdrop"),
    s_integ("sv_minhealth", 0, 200, 1, "perc"),
    s_integ("sv_autosave",  0, 30, 1, "minu"),
    s_label("st_labl_fx"),
@@ -286,7 +288,6 @@ static struct setting const st_gam[] = {
    #endif
 };
 
-static struct gui_fil fil_bossdrop = {35};
 static struct setting const st_itm[] = {
    s_label("st_labl_autogroups"),
    s_boole("st_autobuy_1", .f = {.cb = SG_autoBuy}),
@@ -297,9 +298,6 @@ static struct setting const st_itm[] = {
    s_boole("player_brightweps"),
    s_boole("player_noitemfx"),
    s_boole("player_teleshop"),
-   s_label("st_labl_balance"),
-   s_boole("sv_nobossdrop", .fill = &fil_bossdrop),
-   s_boole("sv_wepdrop"),
    s_label("st_labl_flashlight"),
    s_integ("light_battery", 0, 60, 1, "secs"),
    s_integ("light_regen",   1, 10, 1, "mult"),
