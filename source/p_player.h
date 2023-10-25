@@ -128,10 +128,10 @@ script void P_Upg_PTick   (void);
 script void P_Wep_PTick   (void);
        void P_Ren_PTick   (void);
 
-script void P_TeleportIn (void);
+script void P_TeleportIn(void);
 script_sync void P_TeleportOut(i32 tag);
 
-script optargs(2) void P_CenterNotification(str txt, i32 tics, i32 cr, i32 linecr, k32 bgfade, k32 fgfade);
+script optargs(3) void P_CenterNotification(str txt, i32 tics, i32 cr, i32 linecr, k32 bgfade, k32 fgfade, bool *sync);
 
 #ifndef NDEBUG
 void P_Ren_Debug(void);

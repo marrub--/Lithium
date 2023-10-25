@@ -490,7 +490,7 @@ alloc_aut(0) script static void P_doIntro(void) {
    P_CenterNotification(tut_txt, _tut_tics, -1, -1);
 }
 
-alloc_aut(0) script void P_CenterNotification(str txt, i32 tics, i32 cr, i32 linecr, k32 bgfade, k32 fgfade) {
+alloc_aut(0) script void P_CenterNotification(str txt, i32 tics, i32 cr, i32 linecr, k32 bgfade, k32 fgfade, bool *sync) {
    static struct i32v4 src_rect, dst_rect;
    TextSize((void *)&src_rect, txt, sf_bigupper);
    src_rect.z = src_rect.x + 8;
@@ -532,6 +532,8 @@ alloc_aut(0) script void P_CenterNotification(str txt, i32 tics, i32 cr, i32 lin
       ACS_Delay(1);
    }
    ACS_FadeTo(0, 0, 0, 0.0, 0.2);
+   ACS_Delay(7);
+   if(sync) *sync = true;
 }
 
 static k32 damage_mul;
