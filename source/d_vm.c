@@ -482,21 +482,21 @@ stkcall static void ActSCRIPT_S(void) {
    ModSR_ZN(SetAC(ACS_NamedExecuteWithResult(s0, s1, s2, s3, s4)));
 }
 
-alloc_aut(0) sync static void ActTELEPORT_INTERLEVEL(void) {
+alloc_aut(0) script_sync static void ActTELEPORT_INTERLEVEL(void) {
    i32 tag = MemB2_G(VAR_ADRL);
    ACS_Delay(5);
    P_TeleportOut(tag);
    SetVA(ACT_HALT);
 }
 
-alloc_aut(0) sync static void ActTELEPORT_INTRALEVEL(void) {
+alloc_aut(0) script_sync static void ActTELEPORT_INTRALEVEL(void) {
    i32 tag = MemB2_G(VAR_ADRL);
    ACS_Delay(5);
    ACS_Teleport(0, tag, false);
    SetVA(ACT_HALT);
 }
 
-alloc_aut(0) sync static void ActDLG_WAIT(void) {
+alloc_aut(0) script_sync static void ActDLG_WAIT(void) {
    SetVA(ACT_NONE);
    AmbientSound(ss_player_cbi_dlgopen, 1.0);
    FreezeTime();
@@ -509,7 +509,7 @@ alloc_aut(0) sync static void ActDLG_WAIT(void) {
    GuiAct();
 }
 
-alloc_aut(0) sync static void ActTRM_WAIT(void) {
+alloc_aut(0) script_sync static void ActTRM_WAIT(void) {
    SetVA(ACT_NONE);
 
    i32 tact = MemB1_G(VAR_TACT);
@@ -538,7 +538,7 @@ alloc_aut(0) sync static void ActTRM_WAIT(void) {
    }
 }
 
-alloc_aut(0) sync static void ActFIN_WAIT(void) {
+alloc_aut(0) script_sync static void ActFIN_WAIT(void) {
    enum {
       _fill_x = 280,
       _fill_y = 220,

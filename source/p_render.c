@@ -112,7 +112,7 @@ alloc_aut(0) script void P_TeleportIn(void) {
    }
 }
 
-alloc_aut(0) sync void P_TeleportOut(i32 tag) {
+alloc_aut(0) script_sync void P_TeleportOut(i32 tag) {
    AmbientSound(ss_misc_teleout, 0.5k);
    ACS_SetCameraToTexture(pl.tid, sp_LITHCAM3, 90);
 

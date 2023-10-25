@@ -28,12 +28,12 @@
 #define snil ((__str_ent *)0)
 #define lnil ((__label *)0)
 
-#define script       [[__call("ScriptI")]]
-#define script_str   [[__call("ScriptS")]]
+#define script          [[__call("ScriptI")]]
+#define script_str      [[__call("ScriptS")]]
+#define script_sync     [[__call("SScriptI")]]
+#define script_sync_str [[__call("SScriptS")]]
 #define stkcall      [[__call("StkCall")]]
 #define stkoff       alloc_aut(0) stkcall
-#define sync         [[__call("SScriptI")]]
-#define sync_str     [[__call("SScriptS")]]
 #define optargs(x)   [[__optional_args(x)]]
 #define noinit       [[__no_init]]
 #define anonymous    [[__anonymous]]
