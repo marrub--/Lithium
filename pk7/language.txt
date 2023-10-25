@@ -5373,8 +5373,6 @@
    "Don't play intro on next game start";
 "LITH_sv_autosave" =
    "Autosave interval";
-"LITH_TOOLTIP_sv_autosave" =
-   "\cg(Applies on next game start)";
 "LITH_sv_difficulty" =
    "Difficulty base";
 "LITH_TOOLTIP_sv_difficulty" =

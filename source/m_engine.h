@@ -27,7 +27,6 @@
 #define cvar_tic(ty, na)
 #endif
 /* if a setting should only update on map or game start, place it here. */
-cvar_x(gbl, sv_autosave, i32)
 cvar_x(gbl, sv_failtime, i32)
 cvar_x(gbl, sv_nobossdrop, bool)
 cvar_x(gbl, sv_nobosses, bool)
@@ -40,6 +39,7 @@ cvar_x(map, sv_minhealth, i32)
  * circumstances, place it here. if it can change in-between tics, do
  * not place it here.
  */
+cvar_x(tic, sv_autosave, i32)
 cvar_x(tic, debug_flags, i32)
 cvar_x(tic, debug_level, i32)
 cvar_x(tic, player_scoredisp, i32)
