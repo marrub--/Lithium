@@ -34,6 +34,11 @@ temperature: 30
 windspeed:   1
 sky:         "nochange";
 
+name:  "LITHSKY"
+seed:  7
+flags: "nophantom"
+sky:   "tintonly";
+
 name:        "LITHABYS"
 seed:        0
 flags:       "nophantom"
