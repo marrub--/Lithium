@@ -27,6 +27,8 @@ w_mapsky_x(nochange)
 w_mapsky_x(vanilla)
 w_mapsky_x(replace)
 w_mapsky_x(shader)
+w_mapsky_x(none)
+w_mapsky_x(tintonly)
 #undef w_mapsky_x
 #elif defined(w_mapkey_x)
 w_mapkey_x(environment)
@@ -223,7 +225,7 @@ enum ZscName(MapFlag) {
    _mflg_func_beg,
    _mflg_func_end = _mflg_func_beg + 2,
    _mflg_sky_beg,
-   _mflg_sky_end = _mflg_sky_beg + 2,
+   _mflg_sky_end = _mflg_sky_beg + 4,
 };
 
 enum ZscName(MapPhantom) {

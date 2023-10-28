@@ -42,7 +42,7 @@ int       m_skyFlash, m_skyFlashLen, m_skyFlashPos;
 color     m_skyFlashColor;
 
 /* firestorms */
-Canvas                               m_skyFireCanvas;
+Canvas                  m_skyFireCanvas;
 uint8[fire_canvas_size] m_skyFire;
 
 /* clouds */
@@ -69,21 +69,29 @@ ui void drawSky(RenderEvent evt) {
    if(m_skyMode == _msky_nochange) {
       return;
    }
-   let  delta = level.time - m_skyFlash;
-   let bDelta = delta >= 0 && delta < m_skyFlashLen;
-   let vDelta = bDelta ? 1.0f - (delta + evt.fracTic) / float(m_skyFlashLen) : 0.0f;
+   /* calculate flash time */
+   let flash_delta = level.time - m_skyFlash;
+   let do_flash    = flash_delta >= 0 && flash_delta < m_skyFlashLen;
+   let flash_norm  = do_flash ? 1.0f - (flash_delta + evt.fracTic) / float(m_skyFlashLen) : 0.0f;
+   /* clear, then check mode */
    m_skyCanvas.dim("black", 1.0, 0, 0, canvas_w, canvas_h);
-   if(m_skyMode == _msky_shader) {
-      let cr = m_skyColor;
-      if(bDelta) {
-         cr = color(
+   switch(m_skyMode) {
+   case _msky_shader:
+   case _msky_tintonly:
+      /* for shader sky and tint-only, we only need to dim with the
+       * sky shade */
+      let dim_cr = m_skyColor;
+      if(do_flash) {
+         dim_cr = color(
             255,
-            min(int(cr.r * 5.0f * vDelta), 255),
-            min(int(cr.g * 5.0f * vDelta), 255),
-            min(int(cr.b * 5.0f * vDelta), 255));
+            min(int(dim_cr.r * 5.0f * flash_norm), 255),
+            min(int(dim_cr.g * 5.0f * flash_norm), 255),
+            min(int(dim_cr.b * 5.0f * flash_norm), 255));
       }
-      m_skyCanvas.dim(cr, 1.0, 0, 0, canvas_w, canvas_h);
-   } else {
+      m_skyCanvas.dim(dim_cr, 1.0, 0, 0, canvas_w, canvas_h);
+      break;
+   default:
+      /* with other skies, we need to draw a sky texture */
       int dw = m_skyBaseDw, dh = m_skyBaseDh;
       int sw = m_skyBaseSw, sh = m_skyBaseSh;
       int xofs = int(((gameTic + evt.fracTic) * 28.5714 * m_skySpeed) % dw);
@@ -93,8 +101,8 @@ ui void drawSky(RenderEvent evt) {
       for(int x = xofs; x < canvas_w-sw; x += sw) {
          m_skyCanvas.drawTexture(m_skyBase, true, x, 0, DTA_SrcWidth,sw, DTA_SrcHeight,sh, DTA_DestWidth,sw, DTA_DestHeight,sh, DTA_SrcY,yofs, DTA_FlipY,true);
       }
-      if(bDelta) {
-         m_skyCanvas.drawTexture(m_skyLightning, true, m_skyFlashPos, 0, DTA_Alpha,1.0 - vDelta, DTA_LegacyRenderStyle,STYLE_Add, DTA_Color,m_skyFlashColor, DTA_FlipY,true, DTA_FlipX,m_skyFlashPos & 1 == 0);
+      if(do_flash) {
+         m_skyCanvas.drawTexture(m_skyLightning, true, m_skyFlashPos, 0, DTA_Alpha,1.0 - flash_norm, DTA_LegacyRenderStyle,STYLE_Add, DTA_Color,m_skyFlashColor, DTA_FlipY,true, DTA_FlipX,m_skyFlashPos & 1 == 0);
       }
       if(m_skyClouds.isValid()) {
          int cszx = m_skyCloudsW, cszy = m_skyCloudsH;
@@ -104,8 +112,8 @@ ui void drawSky(RenderEvent evt) {
       }
       m_skyCanvas.dim(m_skyColor, m_skyColor.a / 400.0, 0, 0, canvas_w, canvas_h, STYLE_Add);
       m_skyCanvas.drawTexture(m_skyGradient, true, 0, 0, DTA_DestHeight,dh,DTA_DestWidth,canvas_w, DTA_FlipY,true);
-      if(bDelta) {
-         m_skyCanvas.dim("white", vDelta * 0.2f, 0, 0, canvas_w, dh, STYLE_Add);
+      if(do_flash) {
+         m_skyCanvas.dim("white", flash_norm * 0.2f, 0, 0, canvas_w, dh, STYLE_Add);
       }
    }
 }
@@ -171,7 +179,12 @@ void replaceSky() {
       m_skyColor = Lith_HERMES.instance().m_fogColor;
       break;
    }
-   if(m_skyMode != _msky_shader) {
+   switch(m_skyMode) {
+   case _msky_shader:
+   case _msky_none:
+   case _msky_tintonly:
+      break;
+   default:
       switch(m_skyRain) {
       case _rain_fire:
          setSkyClouds(getTex("LITHFIRE"), STYLE_Add);
