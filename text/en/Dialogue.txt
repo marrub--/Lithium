@@ -6,32 +6,42 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-!!include Dialogue/M1A1.txt
-!!include Dialogue/M1A2.txt
-!!include Dialogue/LITHTEST.txt
-!!include Dialogue/LITHABYS.txt
-
+## general purpose
 == \#REMOTE_HIDDEN  | <hidden>
 == \#REMOTE_UNKNOWN | <unknown>@raddr.4E19
+== \#REMOTE_DATA    | data@localhost
 
+== \#PNAME_UNKNOWN | ???
+
+## testing
 == \#REMOTE_JACQUES | jacques.p42710@corp.AOF
 == \#REMOTE_TEST    | test@org.example
 
-== \#REMOTE_DATA  | data@localhost
+== \#PNAME_JACQUES | Jacques
+
+== \#LOGON_TEST | \cgehhg.431.4122/-/<PFGR ZNE6 \cr&49c2\cg>
+
+!!include Dialogue/LITHTEST.txt
+
+## story mode
 == \#REMOTE_MAXIE | maxie@ai.judgment.51e
 == \#REMOTE_OCS   | OCS@localhost
 
-== \#REMOTE_KIRI | kirihitok@raddr.4E19
-== \#REMOTE_LANE | laneb@mil.<hidden>
-
-== \#PNAME_UNKNOWN | ???
-== \#PNAME_MAXIE   | Maxie
-== \#PNAME_JACQUES | Jacques
-== \#PNAME_DOLL    | Doll
+== \#PNAME_MAXIE | Maxie
 
 == \#LOGON_AOF  | \ch2929ff\cm..\cr4-\cg<<<LCMD INP \cn188D 1F4C\cg>>>
 == \#LOGON_UAC  | \cd*** ON-BOARD COMMAND SYSTEM ACCESS TERMINAL ***
 == \#LOGON_DATA | \cu[Ship Data Terminal]
-== \#LOGON_TEST | \cgehhg.431.4122/-/<PFGR ZNE6 \cr&49c2\cg>
+
+!!include Dialogue/M1A1.txt
+!!include Dialogue/M1A2.txt
+
+## abyss
+== \#REMOTE_KIRI | kirihitok@raddr.4E19
+== \#REMOTE_LANE | laneb@mil.<hidden>
+
+== \#PNAME_DOLL | Doll
+
+!!include Dialogue/LITHABYS.txt
 
 ## EOF
