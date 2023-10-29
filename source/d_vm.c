@@ -240,10 +240,11 @@ static str GetName(void) {
    return ns(lang(fast_strdup2(LANG "PNAME_", nam)));
 }
 
-#define ResetName()   MemB2_S(VAR_NAMEL,   0)
-#define ResetRemote() MemB2_S(VAR_REMOTEL, 0)
-#define ResetText()   MemB2_S(VAR_TEXTL,   0)
-#define ResetMusic()  MemB2_S(VAR_MUSICL,  0)
+#define ResetName()    MemB2_S(VAR_NAMEL,   0)
+#define ResetRemote()  MemB2_S(VAR_REMOTEL, 0)
+#define ResetText()    MemB2_S(VAR_TEXTL,   0)
+#define ResetMusic()   MemB2_S(VAR_MUSICL,  0)
+#define ResetOptions() (MemB1_S(VAR_OPT_SEL, 0), MemB1_S(VAR_OPT_CNT, 0))
 
 static
 void TerminalGUI(i32 tact) {
@@ -354,19 +355,14 @@ void TerminalGUI(i32 tact) {
 static
 void DialogueGUI(void) {
    enum {left = 16, right = 320 - 16 - left, top = 75, texttop = top + 24};
-
    str snam = GetName();
    str srem = GetRemote();
    str text = GetText();
    char icon[32] = ":Dialogue:Icon"; faststrcat(icon, MemSC_G(MemB2_G(VAR_ICONL)));
-
    G_Begin(&gst, 320, 240);
-
    PrintSprite(sp_Dialogue_Back,  0,1, 0,1, _u_alpha, 0.9);
    PrintSprite(fast_strdup(icon), 0,1, 0,1, _u_alpha, 0.9);
-
    PrintText_str(snam, sf_bigupper, CR_GREEN, 30,1, 35,1);
-
    G_Clip(&gst, left, top, right-left, 150);
    ACS_BeginPrint();
    PrintStrL("\Cd> Remote: ");
@@ -374,18 +370,13 @@ void DialogueGUI(void) {
    PrintStrL("\n\Cd> Date: ");
    PrintStr(CanonTime(ct_full, ACS_Timer()));
    PrintText(sf_lmidfont, CR_WHITE, left,1, top,1);
-
    if(text) {
       PrintText_str(text, sf_smallfnt, CR_WHITE, left,1, texttop,1);
    }
-
    G_ClipRelease(&gst);
-
    mem_size_t oc = MemB1_G(VAR_OPT_CNT);
-
    if(oc) {
       i32 y = 220 - 14 * oc;
-
       for(mem_size_t i = 0; i < oc; i++, y += 14) {
          mem_size_t adr = MemB2_G(StructOfs(OPT, NAML, i));
          str        txt = lang(strp(_p(ml.lump), _c('_'), _p(MemSC_G(adr)), _c(P_Char(pl.pclass))));
@@ -396,7 +387,6 @@ void DialogueGUI(void) {
          }
       }
    }
-
    G_End(&gst, gui_curs_outlineinv);
 }
 
@@ -415,8 +405,6 @@ void GuiAct(void) {
       mem_size_t adr = MemB2_G(StructOfs(OPT, PTRL, sel));
       SetVA(ACT_JUMP);
       SetPC(adr);
-      MemB1_S(VAR_OPT_SEL, 0);
-      MemB1_S(VAR_OPT_CNT, 0);
       break;
    }
    case UACT_EXIT:
@@ -660,6 +648,7 @@ dynam_aut script void Dlg_Run(mem_size_t num) {
    ResetName();
    ResetRemote();
    ResetText();
+   ResetOptions();
    /* copy program data into memory */
    fastmemcpy(&memory[PRG_BEG_C], def->codeV, def->codeC);
    fastmemcpy(&memory[STR_BEG_C], def->stabV, def->stabC);
@@ -717,6 +706,7 @@ JMP_II:
    SetPC(AdrII_V());
    JmpVI();
 JPG_VI:
+   ResetOptions();
    SetPC(PRG_BEG + def->pages[AdrVI_V()]);
    JmpVI();
 RTI_NP:
