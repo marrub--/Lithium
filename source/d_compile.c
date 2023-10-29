@@ -56,20 +56,20 @@ static void FinishDef(struct compiler *d) {
    fastmemset(&d->def, 0, sizeof d->def);
 }
 
-static void Dlg_GetItem_Page(struct compiler *d, mem_size_t num, i32 act) {
+static void Dlg_GetItem_Page(struct compiler *d, mem_size_t num) {
    d->page = num;
    d->def.pages[num] = d->def.codeP;
    Dbg_Log(log_gsinfo,
            _l("--- page "), _p(num),
            _c(' '), _c('('), _p(d->def.codeP), _c(')'));
    Dlg_GetStmt(d); unwrap(&d->res);
-   if(act != ACT_NONE) {
-      Dlg_PushLdVA(d, act); unwrap(&d->res);
+   if(d->wait_act != ACT_NONE) {
+      Dlg_PushLdVA(d, d->wait_act); unwrap(&d->res);
    }
    Dlg_PushB1(d, DCD_BRK_NP); unwrap(&d->res);
 }
 
-static bool Dlg_GetItem(struct compiler *d, i32 act) {
+static bool Dlg_GetItem(struct compiler *d) {
    switch(Dlg_ItemName(tb_get(&d->tb)->textV)) {
    case _dlg_item_page: {
       struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, 0);
@@ -79,21 +79,13 @@ static bool Dlg_GetItem(struct compiler *d, i32 act) {
          tb_err(&d->tb, &d->res, "bad page name", tok, _f);
          unwrap(&d->res);
       }
-      Dlg_GetItem_Page(d, num, act);
+      Dlg_GetItem_Page(d, num);
       break;
    }
-   case _dlg_item_failure:
-      Dlg_GetItem_Page(d, DPAGE_FAILURE, act);
-      break;
-   case _dlg_item_finished:
-      Dlg_GetItem_Page(d, DPAGE_FINISHED, act);
-      break;
-   case _dlg_item_unfinished:
-      Dlg_GetItem_Page(d, DPAGE_UNFINISHED, act);
-      break;
-   case _dlg_item_page_names:
-      Dlg_GetNamePool(d, _name_pool_pages);
-      break;
+   case _dlg_item_failure:    Dlg_GetItem_Page(d, DPAGE_FAILURE);    break;
+   case _dlg_item_finished:   Dlg_GetItem_Page(d, DPAGE_FINISHED);   break;
+   case _dlg_item_unfinished: Dlg_GetItem_Page(d, DPAGE_UNFINISHED); break;
+   case _dlg_item_page_names: Dlg_GetNamePool(d, _name_pool_pages);  break;
    default:
       tb_unget(&d->tb);
       return false;
@@ -102,10 +94,10 @@ static bool Dlg_GetItem(struct compiler *d, i32 act) {
    return true;
 }
 
-static void Dlg_GetTop_Prog(struct compiler *d, i32 pool, i32 act, i32 beg, i32 end) {
+static void Dlg_GetTop_Prog(struct compiler *d, i32 beg, i32 end) {
    struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, 0);
    unwrap(&d->res);
-   i32 name = Dlg_CheckNamePool(d, pool, tok->textV);
+   i32 name = Dlg_CheckNamePool(d, d->pool, tok->textV);
    i32 num  = beg + name;
    if(num > end || num < beg) {
       tb_err(&d->tb, &d->res, "invalid dialogue name", tok, _f);
@@ -116,11 +108,10 @@ static void Dlg_GetTop_Prog(struct compiler *d, i32 pool, i32 act, i32 beg, i32 
    FinishDef(d);
    Dbg_Log(log_gsinfo, _l("\n---\nheading "), _p(num), _l("\n---"));
    d->num  = num;
-   d->pool = pool;
    d->name = name;
    Dlg_ClearNamePool(d, _name_pool_pages);
    while(!tb_drop(&d->tb, tok_bracec)) {
-      Dlg_GetItem(d, act); unwrap(&d->res);
+      Dlg_GetItem(d); unwrap(&d->res);
    }
 }
 
@@ -208,13 +199,19 @@ void Dlg_MInit(void) {
       }
       switch(Dlg_TopLevelName(tok->textV)) {
       case _dlg_toplevel_program:
-         Dlg_GetTop_Prog(&d, _name_pool_program, ACT_NONE, DNUM_PRG_BEG, DNUM_PRG_END);
+         d.pool = _name_pool_program;
+         d.wait_act = ACT_NONE;
+         Dlg_GetTop_Prog(&d, DNUM_PRG_BEG, DNUM_PRG_END);
          break;
       case _dlg_toplevel_dialogue:
-         Dlg_GetTop_Prog(&d, _name_pool_dialogue, ACT_DLG_WAIT, DNUM_DLG_BEG, DNUM_DLG_END);
+         d.pool = _name_pool_dialogue;
+         d.wait_act = ACT_DLG_WAIT;
+         Dlg_GetTop_Prog(&d, DNUM_DLG_BEG, DNUM_DLG_END);
          break;
       case _dlg_toplevel_terminal:
-         Dlg_GetTop_Prog(&d, _name_pool_terminal, ACT_TRM_WAIT, DNUM_TRM_BEG, DNUM_TRM_END);
+         d.pool = _name_pool_terminal;
+         d.wait_act = ACT_TRM_WAIT;
+         Dlg_GetTop_Prog(&d, DNUM_TRM_BEG, DNUM_TRM_END);
          break;
       case _dlg_toplevel_program_names:
          Dlg_GetNamePool(&d, _name_pool_program);

@@ -1,15 +1,4 @@
-// ╭──────────────────────────────────────────────────────────────────────────╮
-// │                                                                          │
-// │             Distributed under the CC0 public domain license.             │
-// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
-// │                See licenses/cc0.txt for more information.                │
-// │                                                                          │
-// ├──────────────────────────────────────────────────────────────────────────┤
-// │                                                                          │
-// │ Dialogue compiler data.                                                  │
-// │                                                                          │
-// ╰──────────────────────────────────────────────────────────────────────────╯
-
+/* Dialogue compiler data. */
 #ifndef d_compile_h
 #define d_compile_h
 
@@ -44,6 +33,7 @@ struct compiler {
    i32              num;
    i32              page;
    i32              name;
+   i32              wait_act;
 };
 
 mem_size_t Dlg_WriteCode(struct dlg_def const *def, mem_size_t c, mem_size_t i);
