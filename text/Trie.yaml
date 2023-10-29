@@ -65,6 +65,7 @@ Dlg_StmtName:
       - crawl
       - fade_in
       - fade_out
+      - hold
       - icon
       - if
       - image

@@ -85,16 +85,16 @@ lipu_ilo endings {
       fade_out 100;
       image    "";
       mus_fade 100;
-      wait     50;
+      hold     50;
       image    "TITLEPIC";
       music    "lmusic/crucifying.opus";
       fade_in  70;
       crawl    Credits 250;
       fade_out 70;
       image    "";
-      wait     50;
-      crawl    Dedication 100; wait 100; fade_out 150; wait 15;
-      crawl    Finished   20;  wait 70;  fade_out 20;
+      hold     50;
+      crawl    Dedication 100; hold 100; fade_out 150; hold 15;
+      crawl    Finished   20;  hold 70;  fade_out 20;
       mus_fade 300;
       ldv      #0;
    }

@@ -318,7 +318,7 @@ script void Dlg_GetStmt(struct compiler *d) {
       /* finales */
       case _dlg_stmt_fade_in:  stmt_finale(d, FACT_FADE_IN);  break;
       case _dlg_stmt_fade_out: stmt_finale(d, FACT_FADE_OUT); break;
-      case _dlg_stmt_wait:     stmt_finale(d, FACT_WAIT);     break;
+      case _dlg_stmt_hold:     stmt_finale(d, FACT_WAIT);     break;
       case _dlg_stmt_mus_fade: stmt_finale(d, FACT_MUS_FADE); break;
       case _dlg_stmt_crawl:    stmt_finale(d, FACT_CRAWL);    break;
 
