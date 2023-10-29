@@ -152,7 +152,7 @@ map LITHBOX "Box Map" {
 map LITHSKY "The Sky, It's" {
    music = "lmusic/pokemonrb.gbs:11"
    next  = 1
-   sky1  = "HELP"
+   sky1  = "LITHSKST"
 }
 
 map LITHEND "The End" {
@@ -191,6 +191,7 @@ doomednums {
    22442 = Lith_Person_KiriDoll
    22443 = Lith_AbyssTeleporter
    22444 = Lith_TargetPractice
+   22445 = Lith_LostNote
 }
 
 /* EOF */

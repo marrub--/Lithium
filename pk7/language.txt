@@ -223,6 +223,188 @@
    "\n"
    "- Barrel explosion sprites";
 [en enu default]
+"LITH_REMOTE_HIDDEN" =
+   "<hidden>";
+"LITH_REMOTE_UNKNOWN" =
+   "<unknown>@raddr.4E19";
+"LITH_REMOTE_DATA" =
+   "data@localhost";
+"LITH_PNAME_UNKNOWN" =
+   "???";
+"LITH_REMOTE_JACQUES" =
+   "jacques.p42710@corp.AOF";
+"LITH_REMOTE_TEST" =
+   "test@org.example";
+"LITH_PNAME_JACQUES" =
+   "Jacques";
+"LITH_PNAME_NOTE" =
+   "Lost Note";
+"LITH_LOGON_TEST" =
+   "\cgehhg.431.4122/-/<PFGR ZNE6 \cr&49c2\cg>";
+"LITHTEST_test_term_l" =
+   "$$LITH_LOGON_TEST";
+"LITHTEST_test_term_0" =
+   "test text, information block";
+"LITHTEST_test_term_1" =
+   "test with picture\n"
+   "and multiple lines of text";
+"LITHTEST_jacques_begin_0" =
+   "...";
+"LITHTEST_jacques_begin_1" =
+   "Hello.";
+"LITHTEST_jacques_begin_2" =
+   "Farewell.";
+"LITHTEST_jacques_hey_0" =
+   "Hi.";
+"LITHTEST_jacques_hey_0c" =
+   "Hey.";
+"LITHTEST_jacques_hey_1" =
+   "emit skeltal";
+"LITHTEST_jacques_hey_2" =
+   "Talk to me.";
+"LITHTEST_jacques_hey_3" =
+   "Thanks, bye!";
+"LITHTEST_jacques_start_talking_0" =
+   "Too bad.";
+"LITHTEST_jacques_start_talking_0c" =
+   "What did you need, Stilko?";
+"LITHTEST_jacques_start_talking_1c" =
+   "The nightmares are back.";
+"LITHTEST_jacques_start_talking_2c" =
+   "I just needed someone to talk to.";
+"LITHTEST_jacques_start_talking_1" =
+   "That's rude.";
+"LITHTEST_jacques_lifes_unfair_0" =
+   "Life is rude.\n"
+   "\n"
+   "Now go away.";
+"LITHTEST_jacques_lifes_unfair_1" =
+   "Right.";
+"LITHTEST_jacques_division_0" =
+   "thousands are sailing\n"
+   "the same self    the only self\n"
+   "\n"
+   "self willed the peril of a thousand fates\n"
+   "\n"
+   "a line of infinite ends    finite finishing\n"
+   "the one remains oblique and pure\n"
+   "\n"
+   "arching to the single point of consciousness\n"
+   "\n"
+   "find yourself\n"
+   "starting back";
+"LITHTEST_jacques_division_1" =
+   "Oh. Okay.";
+"LITHTEST_jacques_c_what_asic_0" =
+   " Already? Are you sure it isn't just ASIC bugs? I have trouble believing that they'd be back so soon, after your doctor gave you that prescription and even turned down your AS-voltage.\n"
+   "\n"
+   " You know, ASIC hardware reacts to changes. It might just be that it's settling to the new voltage and giving you a hard time.";
+"LITHTEST_jacques_c_what_asic_1" =
+   "It's not that, I'm certain.. They're \cmworse\c-.";
+"LITHTEST_jacques_c_what_asic_2" =
+   "Right... Thank you, Zeke.";
+"LITHTEST_jacques_c_zj_0" =
+   " I know how that is. You know, Order doesn't pass through this part of the ship. You could say \"Zeke\" again if you want. I know they don't like the names we give ourselves, but we're not infront of them. We at least have that freedom.\n"
+   "\n"
+   " If you want, I can call you \"Jem,\" too. Though I'd rather you of all people not get in trouble for being called by your true name.";
+"LITHTEST_jacques_c_zj_1" =
+   "Thanks, 'Z.'";
+"LITHTEST_jacques_c_troubled_0" =
+   " Heh.. \"Z.\" You're quite creative.\n"
+   "\n"
+   " There's trouble in your voice, though. I know you usually tremble, but right now it seems even worse than usual. What's wrong, \"J?\"";
+"LITHTEST_jacques_c_troubled_1" =
+   "... The nightmares are back.";
+"LITHTEST_jacques_c_worse_0" =
+   " Worse?\n"
+   "\n"
+   " ...\n"
+   "\n"
+   " You can feel in them now, right? That's why you're trembling.";
+"LITHTEST_jacques_c_worse_1" =
+   "Yeah. And I don't want to go to the doctor.";
+"LITHTEST_jacques_c_malnutrition_0" =
+   " ...\n"
+   "\n"
+   " Is there anything I can do to help? It's not a lack of food or something, right?";
+"LITHTEST_jacques_c_malnutrition_1" =
+   "You'd have told me if you could hear it, right?";
+"LITHTEST_jacques_c_thebeat_0" =
+   " Are you hearing a beat? It could be your home calling for you. I'd imagine AOF didn't put much use to that planet after they went and captured you, it's probably just aching for its mana to be used.";
+"LITHTEST_jacques_c_thebeat_1" =
+   "That's not it, I always hear that. What I hear now is.. darker.";
+"LITHTEST_jacques_c_darker_0" =
+   " Darker...\n"
+   "\n"
+   " Then, do you think that it's come? Doesn't ever come excluding incantation, vile, enroaching reality, Hell?";
+"LITHTEST_jacques_c_darker_1" =
+   "It's coming. Just thought I'd let you know.";
+"LITHSKY_lost_begin_0" =
+   "\"\cdSorry this is all there is.\c-\"";
+"LITHSKY_lost_begin_o_return" =
+   "[Return.]";
+"LITHSKY_lost_begin_o_flow" =
+   "Intern flow";
+"LITHSKY_lost_begin_o_repeat" =
+   "''Deal Done - Sent Back''";
+"LITHSKY_lost_flow_o_return" =
+   "$$LITHSKY_lost_begin_o_return";
+"LITHSKY_lost_flow_0" =
+   "Seen through 8 eyes,      made of light,    twice on twice\n"
+   " through death, through life;\n"
+   "Intern flow into next chapter -\n"
+   "        Self unseen      rings throughout\n"
+   "        Self of selves   rightward doubt\n"
+   "\n"
+   "Follow gaze through all ways,\n"
+   "  then lines converge on every plane,\n"
+   "          Connection lost -        Connections gained,\n"
+   "\n"
+   "           in half reality,           be on your way\n"
+   "\n"
+   "           in half reality,           be on your way.";
+"LITHSKY_lost_repeat_o_return" =
+   "$$LITHSKY_lost_begin_o_return";
+"LITHSKY_lost_repeat_o0" =
+   "[First page.]";
+"LITHSKY_lost_repeat_o1" =
+   "[Second page.]";
+"LITHSKY_lost_repeat_0" =
+   "A blade brings death—\n"
+   "Your life, like a blade—\n"
+   "Alive, and yet.\n"
+   "\n"
+   "\n"
+   "Inform your self to see clearer,\n"
+   "in morning dawn, three more.\n"
+   "\n"
+   "\n"
+   "Living in hell starts to seem OK.\n"
+   "Then I see you bring nothing.";
+"LITHSKY_lost_repeat_1" =
+   "The cycle goes on, uninterrupted.\n"
+   "   Blades seek me out,\n"
+   "           I cherish\n"
+   "         their brevity.\n"
+   "\n"
+   "On instinct I dwell,\n"
+   "   I stay undenied.\n"
+   "\n"
+   "  Repeat, repeat, repeat again —\n"
+   "   blades speak truths we\n"
+   "    can not say ourselves.";
+"LITH_REMOTE_MAXIE" =
+   "maxie@ai.judgment.51e";
+"LITH_REMOTE_OCS" =
+   "OCS@localhost";
+"LITH_PNAME_MAXIE" =
+   "Maxie";
+"LITH_LOGON_AOF" =
+   "\ch2929ff\cm..\cr4-\cg<<<LCMD INP \cn188D 1F4C\cg>>>";
+"LITH_LOGON_UAC" =
+   "\cd*** ON-BOARD COMMAND SYSTEM ACCESS TERMINAL ***";
+"LITH_LOGON_DATA" =
+   "\cu[Ship Data Terminal]";
 "LITH_PAGE_M1A1_01_C_01" =
    "\cdApologies for the abrupt stop, this ship hasn't run the faster than light engine enough times. We didn't collide with the planet, so I'm not very worried about its future performance, now.\n"
    "\n"
@@ -365,104 +547,12 @@
    "Maybe if I put wheels on this bowl I'd go faster...";
 "LITH_OPT_M1A2_01_04_01" =
    "Goodbye.";
-"LITHTEST_test_term_l" =
-   "$$LITH_LOGON_TEST";
-"LITHTEST_test_term_0" =
-   "test text, information block";
-"LITHTEST_test_term_1" =
-   "test with picture\n"
-   "and multiple lines of text";
-"LITHTEST_jacques_begin_0" =
-   "...";
-"LITHTEST_jacques_begin_1" =
-   "Hello.";
-"LITHTEST_jacques_begin_2" =
-   "Farewell.";
-"LITHTEST_jacques_hey_0" =
-   "Hi.";
-"LITHTEST_jacques_hey_0c" =
-   "Hey.";
-"LITHTEST_jacques_hey_1" =
-   "emit skeltal";
-"LITHTEST_jacques_hey_2" =
-   "Talk to me.";
-"LITHTEST_jacques_hey_3" =
-   "Thanks, bye!";
-"LITHTEST_jacques_start_talking_0" =
-   "Too bad.";
-"LITHTEST_jacques_start_talking_0c" =
-   "What did you need, Stilko?";
-"LITHTEST_jacques_start_talking_1c" =
-   "The nightmares are back.";
-"LITHTEST_jacques_start_talking_2c" =
-   "I just needed someone to talk to.";
-"LITHTEST_jacques_start_talking_1" =
-   "That's rude.";
-"LITHTEST_jacques_lifes_unfair_0" =
-   "Life is rude.\n"
-   "\n"
-   "Now go away.";
-"LITHTEST_jacques_lifes_unfair_1" =
-   "Right.";
-"LITHTEST_jacques_division_0" =
-   "thousands are sailing\n"
-   "the same self    the only self\n"
-   "\n"
-   "self willed the peril of a thousand fates\n"
-   "\n"
-   "a line of infinite ends    finite finishing\n"
-   "the one remains oblique and pure\n"
-   "\n"
-   "arching to the single point of consciousness\n"
-   "\n"
-   "find yourself\n"
-   "starting back";
-"LITHTEST_jacques_division_1" =
-   "Oh. Okay.";
-"LITHTEST_jacques_c_what_asic_0" =
-   " Already? Are you sure it isn't just ASIC bugs? I have trouble believing that they'd be back so soon, after your doctor gave you that prescription and even turned down your AS-voltage.\n"
-   "\n"
-   " You know, ASIC hardware reacts to changes. It might just be that it's settling to the new voltage and giving you a hard time.";
-"LITHTEST_jacques_c_what_asic_1" =
-   "It's not that, I'm certain.. They're \cmworse\c-.";
-"LITHTEST_jacques_c_what_asic_2" =
-   "Right... Thank you, Zeke.";
-"LITHTEST_jacques_c_zj_0" =
-   " I know how that is. You know, Order doesn't pass through this part of the ship. You could say \"Zeke\" again if you want. I know they don't like the names we give ourselves, but we're not infront of them. We at least have that freedom.\n"
-   "\n"
-   " If you want, I can call you \"Jem,\" too. Though I'd rather you of all people not get in trouble for being called by your true name.";
-"LITHTEST_jacques_c_zj_1" =
-   "Thanks, 'Z.'";
-"LITHTEST_jacques_c_troubled_0" =
-   " Heh.. \"Z.\" You're quite creative.\n"
-   "\n"
-   " There's trouble in your voice, though. I know you usually tremble, but right now it seems even worse than usual. What's wrong, \"J?\"";
-"LITHTEST_jacques_c_troubled_1" =
-   "... The nightmares are back.";
-"LITHTEST_jacques_c_worse_0" =
-   " Worse?\n"
-   "\n"
-   " ...\n"
-   "\n"
-   " You can feel in them now, right? That's why you're trembling.";
-"LITHTEST_jacques_c_worse_1" =
-   "Yeah. And I don't want to go to the doctor.";
-"LITHTEST_jacques_c_malnutrition_0" =
-   " ...\n"
-   "\n"
-   " Is there anything I can do to help? It's not a lack of food or something, right?";
-"LITHTEST_jacques_c_malnutrition_1" =
-   "You'd have told me if you could hear it, right?";
-"LITHTEST_jacques_c_thebeat_0" =
-   " Are you hearing a beat? It could be your home calling for you. I'd imagine AOF didn't put much use to that planet after they went and captured you, it's probably just aching for its mana to be used.";
-"LITHTEST_jacques_c_thebeat_1" =
-   "That's not it, I always hear that. What I hear now is.. darker.";
-"LITHTEST_jacques_c_darker_0" =
-   " Darker...\n"
-   "\n"
-   " Then, do you think that it's come? Doesn't ever come excluding incantation, vile, enroaching reality, Hell?";
-"LITHTEST_jacques_c_darker_1" =
-   "It's coming. Just thought I'd let you know.";
+"LITH_REMOTE_KIRI" =
+   "kirihitok@raddr.4E19";
+"LITH_REMOTE_LANE" =
+   "laneb@mil.<hidden>";
+"LITH_PNAME_DOLL" =
+   "Doll";
 "LITHABYS_start_begin_0" =
    "\c[Lith_Green]Into the pit!\n"
    "\c[Lith_Red]Into Abyss -\n"
@@ -788,40 +878,6 @@
 "LITHABYS_lane_other_past_o0" =
    "Alright, sorry to bother you.\n"
    "\cr[I think that's enough.]";
-"LITH_REMOTE_HIDDEN" =
-   "<hidden>";
-"LITH_REMOTE_UNKNOWN" =
-   "<unknown>@raddr.4E19";
-"LITH_REMOTE_JACQUES" =
-   "jacques.p42710@corp.AOF";
-"LITH_REMOTE_TEST" =
-   "test@org.example";
-"LITH_REMOTE_DATA" =
-   "data@localhost";
-"LITH_REMOTE_MAXIE" =
-   "maxie@ai.judgment.51e";
-"LITH_REMOTE_OCS" =
-   "OCS@localhost";
-"LITH_REMOTE_KIRI" =
-   "kirihitok@raddr.4E19";
-"LITH_REMOTE_LANE" =
-   "laneb@mil.<hidden>";
-"LITH_PNAME_UNKNOWN" =
-   "???";
-"LITH_PNAME_MAXIE" =
-   "Maxie";
-"LITH_PNAME_JACQUES" =
-   "Jacques";
-"LITH_PNAME_DOLL" =
-   "Doll";
-"LITH_LOGON_AOF" =
-   "\ch2929ff\cm..\cr4-\cg<<<LCMD INP \cn188D 1F4C\cg>>>";
-"LITH_LOGON_UAC" =
-   "\cd*** ON-BOARD COMMAND SYSTEM ACCESS TERMINAL ***";
-"LITH_LOGON_DATA" =
-   "\cu[Ship Data Terminal]";
-"LITH_LOGON_TEST" =
-   "\cgehhg.431.4122/-/<PFGR ZNE6 \cr&49c2\cg>";
 "LITHEND_Credits" =
    "\cd>>>>> [[[[ Lithium ]]]]\n"
    "  Project Golan, Xevv 2\n"

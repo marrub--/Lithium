@@ -1,0 +1,60 @@
+## ╭-*-Agw-LithTxt-*-─────────────────────────────────────────────────────────╮
+## │                                                                          │
+## │             Distributed under the CC0 public domain license.             │
+## │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+## │                See licenses/cc0.txt for more information.                │
+## │                                                                          │
+## ╰──────────────────────────────────────────────────────────────────────────╯
+
+== LITHSKY_lost_begin_0        | "\cdSorry this is all there is.\c-"
+== LITHSKY_lost_begin_o_return | [Return.]
+== LITHSKY_lost_begin_o_flow   | Intern flow
+== LITHSKY_lost_begin_o_repeat | ''Deal Done - Sent Back''
+
+== LITHSKY_lost_flow_o_return | $$LITHSKY_lost_begin_o_return
+%% LITHSKY_lost_flow_0
+Seen through 8 eyes,      made of light,    twice on twice
+ through death, through life;
+Intern flow into next chapter -
+        Self unseen      rings throughout
+        Self of selves   rightward doubt
+
+Follow gaze through all ways,
+  then lines converge on every plane,
+          Connection lost -        Connections gained,
+
+           in half reality,           be on your way
+
+           in half reality,           be on your way.
+
+== LITHSKY_lost_repeat_o_return | $$LITHSKY_lost_begin_o_return
+== LITHSKY_lost_repeat_o0 | [First page.]
+== LITHSKY_lost_repeat_o1 | [Second page.]
+
+%% LITHSKY_lost_repeat_0
+A blade brings death—
+Your life, like a blade—
+Alive, and yet.
+
+
+Inform your self to see clearer,
+in morning dawn, three more.
+
+
+Living in hell starts to seem OK.
+Then I see you bring nothing.
+
+%% LITHSKY_lost_repeat_1
+The cycle goes on, uninterrupted.
+   Blades seek me out,
+           I cherish
+         their brevity.
+
+On instinct I dwell,
+   I stay undenied.
+
+  Repeat, repeat, repeat again —
+   blades speak truths we
+    can not say ourselves.
+
+## EOF

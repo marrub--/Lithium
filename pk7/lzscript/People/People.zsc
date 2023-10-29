@@ -153,4 +153,24 @@ class Lith_Person_KiriDoll : Lith_DollPerson
    {default {Lith_DollPerson.DollNoise "player/kiri/doll";}
     states(actor) {Spawn: LDOL H 0; goto Spawn1;}}
 
+class Lith_LostNote : Lith_BasePerson {
+   default {
+      Tag "$LITH_PNAME_NOTE";
+      Radius 16;
+      Height 16;
+   }
+
+   states {
+   Spawn:
+      #LNO A 0 nodelay {
+         tracer = spawn("Lith_ItemSprite", pos);
+         tracer.master = self;
+         tracer.sprite = sprite;
+         tracer.frame  = frame;
+      }
+      TNT1 A -1;
+      stop;
+   }
+}
+
 /* EOF */

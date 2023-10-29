@@ -1,0 +1,34 @@
+/*-*-agw-lithdlg-*-*/
+
+toki_nimi {
+   lost,
+}
+
+toki lost {
+   lipu_nimi {
+      begin,
+      flow,
+      repeat,
+   }
+   lipu begin {
+      name   NOTE;
+      remote DATA;
+      icon   Data;
+      text   _0;
+      option _o_return brk;
+      option _o_flow   page flow;
+      option _o_repeat page repeat;
+   }
+   lipu flow {
+      text _0;
+      option _o_return page begin;
+   }
+   lipu repeat {
+      text _0;
+      option _o_return page begin;
+      option _o0 {text _0; wait;}
+      option _o1 {text _1; wait;}
+   }
+}
+
+/* EOF */

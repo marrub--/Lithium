@@ -18,10 +18,12 @@
 == \#REMOTE_TEST    | test@org.example
 
 == \#PNAME_JACQUES | Jacques
+== \#PNAME_NOTE    | Lost Note
 
 == \#LOGON_TEST | \cgehhg.431.4122/-/<PFGR ZNE6 \cr&49c2\cg>
 
 !!include Dialogue/LITHTEST.txt
+!!include Dialogue/LITHSKY.txt
 
 ## story mode
 == \#REMOTE_MAXIE | maxie@ai.judgment.51e
