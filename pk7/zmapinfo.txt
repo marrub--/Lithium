@@ -152,7 +152,7 @@ map LITHBOX "Box Map" {
 map LITHSKY "The Sky, It's" {
    music = "lmusic/pokemonrb.gbs:11"
    next  = 1
-   sky1  = "LITHSKST"
+   sky1  = "SKY1"
 }
 
 map LITHEND "The End" {
