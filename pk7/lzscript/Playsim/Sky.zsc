@@ -47,6 +47,7 @@ static Lith_SkyThinker create() {
    th.m_origSky1 = level.skyTexture1;
    th.m_origSky2 = level.skyTexture2;
    th.m_mode = _msky_nochange;
+   th.m_rain = -1;
    return th;
 }
 
@@ -64,6 +65,11 @@ override void tick() {
          m_origSky2 = level.skyTexture2;
       }
       level.changeSky(m_setSky1, m_setSky2);
+   }
+   int rain = Lith_UTIL.pData(_pdt_rain);
+   if(rain != m_rain) {
+      m_rain = rain;
+      resetClouds();
    }
    if(m_rain == _rain_fire) {
       tickSkyFire();
@@ -133,13 +139,11 @@ void replaceSky() {
    m_flashLen = 0;
    m_setSky1.setInvalid();
    m_setSky2.setInvalid();
-   m_clouds.setInvalid();
    let skyB    = Lith_URANUS.getTex("LITHBSKY");
    let skyC    = Lith_URANUS.getTex("LITHCSKY");
    m_gradient  = Lith_URANUS.getTex("LITHSKGR");
    m_lightning = Lith_URANUS.getTex("LITHSKLI");
    m_mode      = Lith_UTIL.pData(_pdt_msky);
-   m_rain      = Lith_UTIL.pData(_pdt_rain);
    switch(m_mode) {
    default:
       /* you'll need to add new skies to this switch */
@@ -196,30 +200,10 @@ void replaceSky() {
       setSkyToCanvas(skyC);
       break;
    }
-   switch(m_mode) {
-   case _msky_nochange:
-      return;
-   case _msky_shader:
-   case _msky_none:
-   case _msky_tintonly:
-      break;
-   default:
-      switch(m_rain) {
-      case _rain_fire:
-         setClouds(Lith_URANUS.getTex("LITHFIRE"), STYLE_Add);
-         initSkyFire();
-         break;
-      case _rain_blood:
-         setClouds(Lith_URANUS.getTex("LITHSKCL"), cr: 0xFFCF0000);
-         break;
-      case _rain_snow:
-      case _rain_rain:
-         setClouds(Lith_URANUS.getTex("LITHSKCL"));
-         break;
-      }
+   if(m_mode != _msky_nochange) {
+      m_fireCanvas = TexMan.getCanvas("LITHFIRE");
+      m_canvas     = TexMan.getCanvas("LITHCSKY");
    }
-   m_fireCanvas = TexMan.getCanvas("LITHFIRE");
-   m_canvas     = TexMan.getCanvas("LITHCSKY");
 }
 
 /* firestorms */
@@ -294,18 +278,6 @@ void setBase(textureId tex, double skySpeed) {
    }
 }
 
-void setClouds(textureId tex, int style = STYLE_Normal, color cr = 0xFFFFFFFF) {
-   m_clouds      = tex;
-   m_cloudsColor = cr;
-   m_cloudsStyle = style;
-   let [w, h] = TexMan.getSize(m_clouds);
-   int scale = canvas_h / h;
-   w *= scale;
-   h *= scale;
-   m_cloudsW = w;
-   m_cloudsH = h;
-}
-
 void setSkyFlash(int skyFlash, int skyFlashLen) {
    if(m_mode != _msky_nochange) {
       m_flash      = skyFlash;
@@ -330,5 +302,46 @@ clearScope static bool checkDoubleSky(textureId st1, textureId st2) {
    }
 }
 
+/* clouds */
+void resetClouds() {
+   switch(m_mode) {
+   case _msky_shader:
+   case _msky_none:
+   case _msky_tintonly:
+      m_clouds.setInvalid();
+      break;
+   default:
+      switch(m_rain) {
+      default:
+         m_clouds.setInvalid();
+         break;
+      case _rain_fire:
+         setClouds(Lith_URANUS.getTex("LITHFIRE"), STYLE_Add);
+         initSkyFire();
+         break;
+      case _rain_blood:
+         setClouds(Lith_URANUS.getTex("LITHSKCL"), cr: 0xFFCF0000);
+         break;
+      case _rain_snow:
+         setClouds(Lith_URANUS.getTex("LITHSKCL"), cr: 0xFFCFCFCF);
+         break;
+      case _rain_rain:
+         setClouds(Lith_URANUS.getTex("LITHSKCL"));
+         break;
+      }
+   }
+}
+
+void setClouds(textureId tex, int style = STYLE_Normal, color cr = 0xFFFFFFFF) {
+   m_clouds      = tex;
+   m_cloudsColor = cr;
+   m_cloudsStyle = style;
+   let [w, h] = TexMan.getSize(m_clouds);
+   int scale = canvas_h / h;
+   w *= scale;
+   h *= scale;
+   m_cloudsW = w;
+   m_cloudsH = h;
+}
 
 /* EOF */

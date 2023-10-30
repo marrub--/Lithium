@@ -83,6 +83,7 @@ void setNextWindChange() {
    }
 }
 
+/* FIXME: replace this function */
 void shadeSectors() {
    let sky_darkening = lith_sv_skydarkening;
    if(sky_darkening >= 0 && sky_darkening < 1) {
