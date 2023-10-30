@@ -23,24 +23,19 @@ int             m_lastSet;
 
 static Lith_RainThinker create(Lith_AirThinker air) {
    let th = new('Lith_RainThinker');
-   if(th.setup(Lith_UTIL.pData(_pdt_rain))) {
-      return null;
-   }
-   th.m_air      = air;
-   th.m_player   = players[consolePlayer].mo;
-   th.m_visDist  = 1.0;
-   if(th.m_player && th.m_sound) {
-      th.m_player.A_StartSound("amb/rain", lch_weather2, CHANF_LOOP, 0.001, ATTN_NONE);
-   }
+   th.m_air     = air;
+   th.m_player  = players[consolePlayer].mo;
+   th.m_visDist = 1.0;
+   th.setup(Lith_UTIL.pData(_pdt_rain));
    return th;
 }
 
 override void tick() {
-   if(level.isFrozen() || level.time & 1) {
-      return;
-   }
    int which = Lith_UTIL.pData(_pdt_rain);
-   if(which != m_lastSet && setup(which)) {
+   if(which != m_lastSet) {
+      setup(which);
+   }
+   if(level.isFrozen() || level.time & 1 || !m_drop) {
       return;
    }
    float tgtDist;
@@ -59,19 +54,23 @@ override void tick() {
    }
 }
 
-bool setup(int which) {
+void setup(int which) {
    switch(which) {
-   default:
-      destroy();
-      return true;
+   default:          m_sound = false; m_drop = null;                 break;
    case _rain_rain:  m_sound = true;  m_drop = 'Lith_RainDrop';      break;
    case _rain_blood: m_sound = true;  m_drop = 'Lith_BloodRainDrop'; break;
    case _rain_abyss: m_sound = true;  m_drop = 'Lith_AbyssRainDrop'; break;
    case _rain_fire:  m_sound = false; m_drop = 'Lith_Ash';           break;
    case _rain_snow:  m_sound = false; m_drop = 'Lith_SnowDrop';      break;
    }
+   if(m_player) {
+      if(m_sound) {
+         m_player.a_startSound("amb/rain", lch_weather2, CHANF_LOOP, 0.001, ATTN_NONE);
+      } else {
+         m_player.a_stopSound(lch_weather2);
+      }
+   }
    m_lastSet = which;
-   return false;
 }
 
 double spawnRain() const {
