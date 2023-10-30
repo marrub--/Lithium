@@ -153,6 +153,7 @@ script static void MInit(void) {
    DefaultAirControl();
    ml.soulsfreed = 0;
    MInitGetStaticInfo();
+   DrawCallV(sm_UpdateSky);
    Dlg_MInit();
    SpawnBosses(pl.scoresum, false);
 }

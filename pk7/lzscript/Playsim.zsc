@@ -68,7 +68,6 @@ override void worldLoaded(WorldEvent ev) {
    }
    acs_executeWithResult(lsc_worldopen);
    setUpEnvironment();
-   Lith_URANUS.instance().replaceSky();
 }
 
 void setUpEnvironment() {

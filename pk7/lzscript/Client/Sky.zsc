@@ -121,6 +121,10 @@ ui void drawSky(RenderEvent evt) {
    }
 }
 
+static void UpdateSky() {
+   instance().replaceSky();
+}
+
 void replaceSky() {
    m_skyFlash    = 0;
    m_skyFlashLen = 0;
