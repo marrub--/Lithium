@@ -31,8 +31,9 @@ static Lith_RainThinker create() {
    case _rain_fire:  rainSnd = false; rainDrop = 'Lith_Ash';           break;
    case _rain_snow:  rainSnd = false; rainDrop = 'Lith_SnowDrop';      break;
    }
+static Lith_RainThinker create(Lith_AirThinker air) {
    let th = new('Lith_RainThinker');
-   th.m_air      = Lith_HERMES.instance().m_air;
+   th.m_air      = air;
    th.m_player   = players[consolePlayer].mo;
    th.m_rainSnd  = rainSnd;
    th.m_rainDrop = rainDrop;

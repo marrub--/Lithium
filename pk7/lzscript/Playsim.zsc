@@ -84,7 +84,7 @@ void setUpEnvironment() {
    }
    m_air       = Lith_AirThinker.create();
    m_lightning = Lith_LightningThinker.create();
-   m_rain      = Lith_RainThinker.create();
+   m_rain      = Lith_RainThinker.create(m_air);
    m_fogColor  = color(
       int(humidity * 2.55),
       clamp(int(temperature * 0.1375), 0, 255),
