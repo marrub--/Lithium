@@ -194,42 +194,6 @@ class Lith_LineTracer : LineTracer {
    }
 }
 
-class Lith_FnBool abstract {
-   virtual bool run() {return false;}
-}
-
-class Lith_FnBoolFuse : Lith_FnBool {
-   bool        m_result;
-   Lith_FnBool m_fInner;
-   static Lith_FnBoolFuse create(class<Lith_FnBoolFuse> ty, Lith_FnBool fInner) {
-      let f = Lith_FnBoolFuse(new(ty));
-      f.m_fInner = fInner;
-      return f;
-   }
-   override bool run() {
-      if(!m_result) {
-         m_result = m_fInner.run();
-      }
-      return m_result;
-   }
-}
-
-class Lith_FnSector : Lith_FnBool abstract {
-   static Lith_FnSector init(class<Lith_FnSector> ty) {
-      let f = Lith_FnSector(new(ty));
-      return f;
-   }
-   virtual bool call(Sector sec) {return false;}
-   override bool run() {
-      foreach(sec : level.sectors) {
-         if(call(sec)) {
-            return true;
-         }
-      }
-      return false;
-   }
-}
-
 class Lith_VecLerp {
    vector2 lst, nex;
    double  ds, tm;
