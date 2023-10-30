@@ -14,11 +14,11 @@ enum physicsnum {
    _physnum_simple,
 };
 
-Lith_WindThinker m_wind;
-Actor            m_player;
-class<Actor>     m_rainDrop;
-float            m_visDist;
-bool             m_rainSnd;
+Lith_AirThinker m_air;
+Actor           m_player;
+class<Actor>    m_rainDrop;
+float           m_visDist;
+bool            m_rainSnd;
 
 static Lith_RainThinker create() {
    bool         rainSnd;
@@ -32,7 +32,7 @@ static Lith_RainThinker create() {
    case _rain_snow:  rainSnd = false; rainDrop = 'Lith_SnowDrop';      break;
    }
    let th = new('Lith_RainThinker');
-   th.m_wind     = Lith_HERMES.instance().m_wind;
+   th.m_air      = Lith_HERMES.instance().m_air;
    th.m_player   = players[consolePlayer].mo;
    th.m_rainSnd  = rainSnd;
    th.m_rainDrop = rainDrop;
@@ -98,9 +98,9 @@ double spawnRain() const {
             lastSec = sec;
          }
          let rain      = Actor.spawn(m_rainDrop, (pos, zpos - fRandom[lith_rain](0.0, 16.0)));
-         rain.angle    = m_wind.m_angle     + fRandom[lith_rain](-1, 1);
-         rain.pitch    = m_wind.m_windPitch + fRandom[lith_rain](-1, 1);
-         rain.vel      = (m_wind.m_windVec.x * fRandom[lith_rain](0.95, 1.05) * mul.x, m_wind.m_windVec.y * fRandom[lith_rain](0.95, 1.05) * mul.y, m_wind.m_windVec.z * fRandom[lith_rain](0.95, 1.05) * mul.z);
+         rain.angle    = m_air.m_angle     + fRandom[lith_rain](-1, 1);
+         rain.pitch    = m_air.m_windPitch + fRandom[lith_rain](-1, 1);
+         rain.vel      = (m_air.m_windVec.x * fRandom[lith_rain](0.95, 1.05) * mul.x, m_air.m_windVec.y * fRandom[lith_rain](0.95, 1.05) * mul.y, m_air.m_windVec.z * fRandom[lith_rain](0.95, 1.05) * mul.z);
          rain.bFlatSprite = rain.bRollSprite = advanced || !m_rainSnd;
          rain.scale.y *= rain.vel.z / 3.0;
          if(m_rainSnd) {

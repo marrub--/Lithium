@@ -1,20 +1,12 @@
-// ╭──────────────────────────────────────────────────────────────────────────╮
-// │                                                                          │
-// │             Distributed under the CC0 public domain license.             │
-// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
-// │                See licenses/cc0.txt for more information.                │
-// │                                                                          │
-// ╰──────────────────────────────────────────────────────────────────────────╯
-
-class Lith_WindThinker : Thinker;
+class Lith_AirThinker : Thinker;
 
 Actor   m_player;
 vector3 m_windVec;
 double  m_angle, m_speed, m_speedUnits, m_angleDest, m_speedDest, m_maxSpeed, m_speedSpeed, m_angleSpeed, m_windPitch;
 int     m_timerRnd;
 
-static Lith_WindThinker create() {
-   let th = new('Lith_WindThinker');
+static Lith_AirThinker create() {
+   let th = new('Lith_AirThinker');
    th.m_maxSpeed  = Lith_UTIL.pData(_pdt_windspeed);
    th.m_player    = players[consolePlayer].mo;
    th.m_angle     =

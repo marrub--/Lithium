@@ -14,7 +14,7 @@
 #include "lzscript/Playsim/Rain.zsc"
 #include "lzscript/Playsim/StatusEffects.zsc"
 #include "lzscript/Playsim/Weapons.zsc"
-#include "lzscript/Playsim/Wind.zsc"
+#include "lzscript/Playsim/Air.zsc"
 #include "lzscript/Playsim/World.zsc"
 
 /* HERMES: Horribly Explicit and Rudimentary Methods for Extended Scripting */
@@ -33,7 +33,7 @@ array<Actor> m_bossBabies;
 int m_bossDeathInit;
 Lith_LightningThinker m_lightning;
 Lith_RainThinker m_rain;
-Lith_WindThinker m_wind;
+Lith_AirThinker m_air;
 int m_gameFlags;
 
 override void onRegister() {
@@ -83,7 +83,7 @@ void setUpEnvironment() {
    if(vacuum) {
       level.gravity *= 0.2;
    }
-   m_wind      = Lith_WindThinker.create();
+   m_air       = Lith_AirThinker.create();
    m_lightning = Lith_LightningThinker.create();
    m_rain      = Lith_RainThinker.create();
    m_fogColor  = color(
@@ -467,8 +467,8 @@ static int EDataI(Actor mo, int info) {
    case _edt_viewheight:   return int(Lith_Player(mo).viewHeight);
    case _edt_attackheight: return int(getAttackHeight(mo));
    case _edt_lightning:    return level.info.flags & LEVEL_STARTLIGHTNING;
-   case _edt_windspeed:    return int(instance().m_wind.m_speed);
-   case _edt_windangle:    return int(Lith_UTIL.constDeg(instance().m_wind.m_angle));
+   case _edt_windspeed:    return int(instance().m_air.m_speed);
+   case _edt_windangle:    return int(Lith_UTIL.constDeg(instance().m_air.m_angle));
 
    case _edt_chex:    return gameinfo.gametype & GAME_Chex    != 0;
    case _edt_heretic: return gameinfo.gametype & GAME_Heretic != 0;
