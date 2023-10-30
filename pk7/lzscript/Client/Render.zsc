@@ -62,7 +62,6 @@ void renUnload() {
    m_dPtr = 0;
    m_tPtr = 0;
    m_dmgNumInit = false;
-   m_skyMode = _msky_nochange;
 }
 
 void renTick() {
@@ -72,12 +71,9 @@ void renTick() {
    tickScrNums();
    tickCrosshair();
    tickDraw();
-   tickSky();
 }
 
 ui void renRender(RenderEvent evt) {
-   drawSky(evt);
-
    projectSetUp(evt);
 
    if(evt.camera && !automapActive) {

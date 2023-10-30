@@ -15,6 +15,7 @@
 #include "lzscript/Playsim/StatusEffects.zsc"
 #include "lzscript/Playsim/Weapons.zsc"
 #include "lzscript/Playsim/Air.zsc"
+#include "lzscript/Playsim/Sky.zsc"
 #include "lzscript/Playsim/World.zsc"
 
 /* HERMES: Horribly Explicit and Rudimentary Methods for Extended Scripting */
@@ -34,6 +35,7 @@ int m_bossDeathInit;
 Lith_LightningThinker m_lightning;
 Lith_RainThinker m_rain;
 Lith_AirThinker m_air;
+Lith_SkyThinker m_sky;
 int m_gameFlags;
 
 override void onRegister() {
@@ -66,8 +68,13 @@ override void worldLoaded(WorldEvent ev) {
       }
       level.nextMap = "LITHEND";
    }
+   m_sky = Lith_SkyThinker.create();
    acs_executeWithResult(lsc_worldopen);
    setUpEnvironment();
+}
+
+static void UpdateSky() {
+   instance().m_sky.replaceSky();
 }
 
 void setUpEnvironment() {
@@ -83,8 +90,8 @@ void setUpEnvironment() {
       level.gravity *= 0.2;
    }
    m_air       = Lith_AirThinker.create();
-   m_lightning = Lith_LightningThinker.create();
    m_rain      = Lith_RainThinker.create(m_air);
+   m_lightning = Lith_LightningThinker.create(m_sky);
    m_fogColor  = color(
       int(humidity * 2.55),
       clamp(int(temperature * 0.1375), 0, 255),

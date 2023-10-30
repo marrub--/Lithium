@@ -11,13 +11,16 @@ class Lith_LightningThinker : Thinker;
 int          m_time, m_next, m_len, m_speed, m_nextSnd;
 array<int16> m_lights;
 
-static Lith_LightningThinker create() {
+Lith_SkyThinker m_sky;
+
+static Lith_LightningThinker create(Lith_SkyThinker sky) {
    if(!Lith_UTIL.pData(_pdt_mflg, _mflg_lightning) ||
       level.info.flags2 & LEVEL2_HEXENHACK || /* no-no! */
       level.info.flags & LEVEL_STARTLIGHTNING) {
       return null;
    }
    let th = new("Lith_LightningThinker");
+   th.m_sky = sky;
    for(int i = 0, j = level.sectors.size(); i < j; ++i) {
       th.m_lights.push(int16.max);
    }
@@ -42,7 +45,7 @@ void setFlash() {
    m_len   = random( 8, 40);
    m_speed = random(-2, -8);
    m_next += m_time;
-   Lith_URANUS.instance().setSkyFlash(m_next, m_len);
+   m_sky.setSkyFlash(m_next, m_len);
 }
 
 override void tick() {

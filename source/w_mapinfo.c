@@ -110,7 +110,7 @@ script_str alloc_aut(0) ext("ACS") addr(OBJ "SetMapInfo") bool Z_SetMapInfo(
       val = MapInfoSkyName(tmpstr((str)v));
       if(val != -1) {
          set_msk(ml.flag, _mflg_sky, val);
-         DrawCallV(sm_UpdateSky);
+         ServCallV(sm_UpdateSky);
          return true;
       } else {
          PrintErr(_l("sky '"), _p((str)v), _l("' not known"));
