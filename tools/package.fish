@@ -11,15 +11,14 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-if test $RELEASE
-   set -xa CC_ARG "-DRELEASE"
-end
-
-if test ! $DEBUG
-   set -xa CC_ARG "-DNDEBUG"
-end
-
 function build
+   if test $RELEASE
+      set -xa CC_ARG "-DRELEASE"
+   end
+   if test ! $DEBUG
+      set -xa CC_ARG "-DNDEBUG"
+   end
+
    rm -rf master Lithium.pk3
 
    tools/genbuild.rb
@@ -38,8 +37,11 @@ function build
    zip -r ../Lithium.pk3 ./* \
        -x '*.gitignore' '*.bat' '*.dbs' '*.wad.b*' '*.swp'
    popd
+
+   ninja -t clean
 end
 
 build 2>&1 > /tmp/lbuild
 
+set -xa CC_ARG
 tools/genbuild.rb
