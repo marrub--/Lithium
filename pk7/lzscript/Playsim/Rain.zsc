@@ -16,29 +16,20 @@ enum physicsnum {
 
 Lith_AirThinker m_air;
 Actor           m_player;
-class<Actor>    m_rainDrop;
+class<Actor>    m_drop;
 float           m_visDist;
-bool            m_rainSnd;
+bool            m_sound;
+int             m_lastSet;
 
-static Lith_RainThinker create() {
-   bool         rainSnd;
-   class<Actor> rainDrop;
-   switch(Lith_UTIL.pData(_pdt_rain)) {
-   default:          return null;
-   case _rain_rain:  rainSnd = true;  rainDrop = 'Lith_RainDrop';      break;
-   case _rain_blood: rainSnd = true;  rainDrop = 'Lith_BloodRainDrop'; break;
-   case _rain_abyss: rainSnd = true;  rainDrop = 'Lith_AbyssRainDrop'; break;
-   case _rain_fire:  rainSnd = false; rainDrop = 'Lith_Ash';           break;
-   case _rain_snow:  rainSnd = false; rainDrop = 'Lith_SnowDrop';      break;
-   }
 static Lith_RainThinker create(Lith_AirThinker air) {
    let th = new('Lith_RainThinker');
+   if(th.setup(Lith_UTIL.pData(_pdt_rain))) {
+      return null;
+   }
    th.m_air      = air;
    th.m_player   = players[consolePlayer].mo;
-   th.m_rainSnd  = rainSnd;
-   th.m_rainDrop = rainDrop;
    th.m_visDist  = 1.0;
-   if(th.m_player && th.m_rainSnd) {
+   if(th.m_player && th.m_sound) {
       th.m_player.A_StartSound("amb/rain", lch_weather2, CHANF_LOOP, 0.001, ATTN_NONE);
    }
    return th;
@@ -46,6 +37,10 @@ static Lith_RainThinker create(Lith_AirThinker air) {
 
 override void tick() {
    if(level.isFrozen() || level.time & 1) {
+      return;
+   }
+   int which = Lith_UTIL.pData(_pdt_rain);
+   if(which != m_lastSet && setup(which)) {
       return;
    }
    float tgtDist;
@@ -59,17 +54,32 @@ override void tick() {
       tgtDist = clamp(curDist / 1024.0, 0.0, 1.0);
    }
    m_visDist = Lith_UTIL.lerp(m_visDist, tgtDist, 0.035);
-   if(m_player && m_rainSnd) {
+   if(m_player && m_sound) {
       m_player.A_SoundVolume(lch_weather2, 1 - m_visDist);
    }
 }
 
+bool setup(int which) {
+   switch(which) {
+   default:
+      destroy();
+      return true;
+   case _rain_rain:  m_sound = true;  m_drop = 'Lith_RainDrop';      break;
+   case _rain_blood: m_sound = true;  m_drop = 'Lith_BloodRainDrop'; break;
+   case _rain_abyss: m_sound = true;  m_drop = 'Lith_AbyssRainDrop'; break;
+   case _rain_fire:  m_sound = false; m_drop = 'Lith_Ash';           break;
+   case _rain_snow:  m_sound = false; m_drop = 'Lith_SnowDrop';      break;
+   }
+   m_lastSet = which;
+   return false;
+}
+
 double spawnRain() const {
-   let maxDist = m_rainSnd ? 2048 : 512;
+   let maxDist = m_sound ? 2048 : 512;
    let mo      = m_player;
    if(!mo) {
       mo      = players[consoleplayer].camera;
-      maxDist = m_rainSnd ? 8192 : 2048;
+      maxDist = m_sound ? 8192 : 2048;
    }
    if(!mo || !mo.curSector) {
       return maxDist;
@@ -98,13 +108,13 @@ double spawnRain() const {
             zpos    = min(maxh, sec.findLowestCeilingPoint());
             lastSec = sec;
          }
-         let rain      = Actor.spawn(m_rainDrop, (pos, zpos - fRandom[lith_rain](0.0, 16.0)));
+         let rain      = Actor.spawn(m_drop, (pos, zpos - fRandom[lith_rain](0.0, 16.0)));
          rain.angle    = m_air.m_angle     + fRandom[lith_rain](-1, 1);
          rain.pitch    = m_air.m_windPitch + fRandom[lith_rain](-1, 1);
          rain.vel      = (m_air.m_windVec.x * fRandom[lith_rain](0.95, 1.05) * mul.x, m_air.m_windVec.y * fRandom[lith_rain](0.95, 1.05) * mul.y, m_air.m_windVec.z * fRandom[lith_rain](0.95, 1.05) * mul.z);
-         rain.bFlatSprite = rain.bRollSprite = advanced || !m_rainSnd;
+         rain.bFlatSprite = rain.bRollSprite = advanced || !m_sound;
          rain.scale.y *= rain.vel.z / 3.0;
-         if(m_rainSnd) {
+         if(m_sound) {
             let dist = mo.distance2d(rain);
             if(dist < raindist) {
                raindist = dist;
