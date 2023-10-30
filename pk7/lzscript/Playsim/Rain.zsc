@@ -19,7 +19,7 @@ Actor           m_player;
 class<Actor>    m_drop;
 float           m_visDist;
 bool            m_sound;
-int             m_lastSet;
+int             m_type;
 
 static Lith_RainThinker create(Lith_AirThinker air) {
    let th = new('Lith_RainThinker');
@@ -32,7 +32,7 @@ static Lith_RainThinker create(Lith_AirThinker air) {
 
 override void tick() {
    int which = Lith_UTIL.pData(_pdt_rain);
-   if(which != m_lastSet) {
+   if(which != m_type) {
       setup(which);
    }
    if(level.isFrozen() || level.time & 1 || !m_drop) {
@@ -70,7 +70,7 @@ void setup(int which) {
          m_player.a_stopSound(lch_weather2);
       }
    }
-   m_lastSet = which;
+   m_type = which;
 }
 
 double spawnRain() const {

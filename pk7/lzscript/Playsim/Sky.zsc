@@ -55,7 +55,7 @@ override void tick() {
    if(m_mode == _msky_nochange) {
       return;
    }
-   m_fogColor = Lith_HERMES.instance().m_fogColor;
+   m_fogColor = Lith_HERMES.instance().m_air.m_fogColor;
    if(level.skyTexture1 != m_setSky1 || level.skyTexture2 != m_setSky2) {
       if(level.skyTexture1 != m_setSky1) {
          m_origSky1 = level.skyTexture1;

@@ -4,6 +4,8 @@ Actor   m_player;
 vector3 m_windVec;
 double  m_angle, m_speed, m_speedUnits, m_angleDest, m_speedDest, m_maxSpeed, m_speedSpeed, m_angleSpeed, m_windPitch;
 int     m_timerRnd;
+int     m_humidity, m_temperature;
+color   m_fogColor;
 
 static Lith_AirThinker create() {
    let th = new('Lith_AirThinker');
@@ -21,6 +23,27 @@ override void tick() {
    if(level.isFrozen()) {
       return;
    }
+   updateEnvironment();
+   updateWind();
+}
+
+void updateEnvironment() {
+   let humidity    = Lith_UTIL.pData(_pdt_humidity);
+   let temperature = Lith_UTIL.pData(_pdt_temperature);
+   if(humidity != m_humidity || temperature != m_temperature) {
+      m_fogColor = color(
+         int(humidity * 2.55),
+         clamp(int(temperature * 0.1375), 0, 255),
+         clamp(int(abs(temperature * 0.0375)), 0, 255),
+         clamp(int(temperature * -0.8375), 0, 255)
+      );
+      m_humidity    = humidity;
+      m_temperature = temperature;
+      shadeSectors();
+   }
+}
+
+void updateWind() {
    m_speed      = Lith_UTIL.lerp(m_speed, m_speedDest, m_speedSpeed);
    m_angle      = Lith_UTIL.lerp(m_angle, m_angleDest, m_angleSpeed);
    m_speedUnits = (m_speed * 32.0) / 35.0;
@@ -43,9 +66,12 @@ override void tick() {
    } else {
       m_windPitch = 90;
    }
-   if(level.time & m_timerRnd) {
-      return;
+   if(level.time & m_timerRnd == 0) {
+      setNextWindChange();
    }
+}
+
+void setNextWindChange() {
    let r        = fRandomPick[lith_wind](3.0, 6.0, 10.0, 20.0, 30.0, 45.0, 90.0, 180.0);
    m_speedDest  = fRandom[lith_wind](0.0, m_maxSpeed);
    m_angleDest += fRandom[lith_wind](-r, r);
@@ -54,6 +80,35 @@ override void tick() {
    m_timerRnd   = randomPick[lith_wind](7, 15, 63, 255, 511);
    if(m_player) {
       m_player.a_soundVolume(lch_weather1, m_speed / 50.0);
+   }
+}
+
+void shadeSectors() {
+   let sky_darkening = lith_sv_skydarkening;
+   if(sky_darkening >= 0 && sky_darkening < 1) {
+      int fog_density = 0;
+      if(m_humidity > 70) {
+         fog_density = int(m_fogColor.a * 0.3921568627450980);
+      }
+      foreach(sec : level.sectors) {
+         if(fog_density) {
+            sec.setFogDensity(fog_density);
+            sec.setFade(m_fogColor);
+         }
+         if(sec.getTexture(Sector.Ceiling) == skyflatnum) {
+            int ll = clamp(int(sec.lightLevel * sky_darkening), 64, 255);
+            switch(Lith_UTIL.pData(_pdt_menv)) {
+            case _menv_hell:
+               sec.setColor("#ff7777");
+               break;
+            case _menv_evil:
+               sec.setColor("#ff2222");
+               ll = 107;
+               break;
+            }
+            sec.setLightLevel(ll);
+         }
+      }
    }
 }
 

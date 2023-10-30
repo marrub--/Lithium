@@ -8,7 +8,7 @@
 
 #include "lzscript/Playsim/Files.zsc"
 #include "lzscript/Playsim/Input.zsc"
-#include "lzscript/Playsim/Lightning.zsc"
+#include "lzscript/Playsim/Light.zsc"
 #include "lzscript/Playsim/Monsters.zsc"
 #include "lzscript/Playsim/Player.zsc"
 #include "lzscript/Playsim/Rain.zsc"
@@ -29,10 +29,9 @@ string m_obituary;
 name m_dmgType;
 bool m_dmgWorld;
 int m_bossLevel;
-color m_fogColor;
 array<Actor> m_bossBabies;
 int m_bossDeathInit;
-Lith_LightningThinker m_lightning;
+Lith_LightThinker m_light;
 Lith_RainThinker m_rain;
 Lith_AirThinker m_air;
 Lith_SkyThinker m_sky;
@@ -78,40 +77,18 @@ static void UpdateSky() {
 }
 
 void setUpEnvironment() {
-   let menv         = Lith_UTIL.pData(_pdt_menv);
-   let vacuum       = Lith_UTIL.pData(_pdt_mflg, _mflg_vacuum) != 0;
-   let humidity     = Lith_UTIL.pData(_pdt_humidity);
-   let temperature  = Lith_UTIL.pData(_pdt_temperature);
-   let skyDarkening = lith_sv_skydarkening;
-   if(menv == _menv_evil) {
+   if(Lith_UTIL.pData(_pdt_menv) == _menv_evil) {
       S_ChangeMusic("lmusic/Ragnarok.ogg", 0, true, true);
-   }
-   if(vacuum) {
-      level.gravity *= 0.2;
-   }
-   m_air       = Lith_AirThinker.create();
-   m_rain      = Lith_RainThinker.create(m_air);
-   m_lightning = Lith_LightningThinker.create(m_sky);
-   m_fogColor  = color(
-      int(humidity * 2.55),
-      clamp(int(temperature * 0.1375), 0, 255),
-      clamp(int(abs(temperature * 0.0375)), 0, 255),
-      clamp(int(temperature * -0.8375), 0, 255)
-   );
-   foreach(sec : level.sectors) {
-      if(menv == _menv_evil) {
+      foreach(sec : level.sectors) {
          setUpEvilSector(sec);
       }
-      if(skyDarkening >= 0 && skyDarkening < 1) {
-         if(humidity > 70) {
-            sec.setFogDensity(int(m_fogColor.a * 0.3921568627450980));
-            sec.setFade(m_fogColor);
-         }
-         if(sec.getTexture(Sector.Ceiling) == skyflatnum) {
-            darkenSkySector(sec, skyDarkening);
-         }
-      }
    }
+   if(Lith_UTIL.pData(_pdt_mflg, _mflg_vacuum) != 0) {
+      level.gravity *= 0.2;
+   }
+   m_air   = Lith_AirThinker.create();
+   m_rain  = Lith_RainThinker.create(m_air);
+   m_lightning = Lith_LightningThinker.create(m_sky);
 }
 
 void setUpEvilSector(Sector sec) {
@@ -133,20 +110,6 @@ void setUpEvilSector(Sector sec) {
          }
       }
    }
-}
-
-private void darkenSkySector(Sector sec, double skyDarkening) {
-   int ll = clamp(int(sec.lightLevel * skyDarkening), 64, 255);
-   switch(Lith_UTIL.pData(_pdt_menv)) {
-   case _menv_hell:
-      sec.setColor("#ff7777");
-      break;
-   case _menv_evil:
-      sec.setColor("#ff2222");
-      ll = 107;
-      break;
-   }
-   sec.setLightLevel(ll);
 }
 
 override void worldThingDestroyed(WorldEvent ev) {
