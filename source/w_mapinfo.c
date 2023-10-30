@@ -98,3 +98,26 @@ script struct map_info *GetMapInfo(void) {
    }
    return &mi_all[mi_num];
 }
+
+script_str alloc_aut(0) ext("ACS") addr(OBJ "SetMapInfo") bool Z_SetMapInfo(
+   str k,
+   i32 v
+) {
+   i32 key = MapInfoKeyName(tmpstr(k));
+   i32 val;
+   switch(key) {
+   case _mi_key_sky:
+      val = MapInfoSkyName(tmpstr((str)v));
+      if(val != -1) {
+         set_msk(ml.flag, _mflg_sky, val);
+         DrawCallV(sm_UpdateSky);
+         return true;
+      } else {
+         PrintErr(_l("sky '"), _p((str)v), _l("' not known"));
+         return false;
+      }
+   default:
+      PrintErr(_l("key '"), _p(k), _l("' not known"));
+   }
+   return false;
+}
