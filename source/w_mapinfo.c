@@ -103,17 +103,26 @@ script_str alloc_aut(0) ext("ACS") addr(OBJ "SetMapInfo") bool Z_SetMapInfo(
    str k,
    i32 v
 ) {
-   i32 key = MapInfoKeyName(tmpstr(k));
+   i32 key = MapInfoSetName(tmpstr(k));
    i32 val;
    switch(key) {
-   case _mi_key_sky:
+   case _mi_set_sky:
       val = MapInfoSkyName(tmpstr((str)v));
       if(val != -1) {
          set_msk(ml.flag, _mflg_sky, val);
          ServCallV(sm_UpdateSky);
          return true;
       } else {
-         PrintErr(_l("sky '"), _p((str)v), _l("' not known"));
+         PrintErr(_l("sky type '"), _p((str)v), _l("' not known"));
+         return false;
+      }
+   case _mi_set_rain:
+      val = MapInfoRainName(tmpstr((str)v));
+      if(val != -1) {
+         set_msk(ml.flag, _mflg_rain, val);
+         return true;
+      } else {
+         PrintErr(_l("rain type '"), _p((str)v), _l("' not known"));
          return false;
       }
    default:

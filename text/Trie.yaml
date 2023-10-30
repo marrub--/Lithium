@@ -168,9 +168,20 @@ MapInfoEnvName:
       #define w_mapenv_x(x) x,
       #include "w_world.h"
    ]
+MapInfoRainName:
+   enum: _rain_
+   words: [
+      #define w_maprain_x(x) x,
+      #include "w_world.h"
+   ]
 MapInfoFlagName:
    prefix: _mi_flag_
    words:
       - nolightning
       - nophantom
       - norain
+MapInfoSetName:
+   prefix: _mi_set_
+   words:
+      - rain
+      - sky

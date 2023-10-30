@@ -31,6 +31,14 @@ w_mapkey_x(sky)
 w_mapkey_x(temperature)
 w_mapkey_x(windspeed)
 #undef w_mapkey_x
+#elif defined(w_maprain_x)
+w_maprain_x(none)
+w_maprain_x(rain)
+w_maprain_x(blood)
+w_maprain_x(abyss)
+w_maprain_x(snow)
+w_maprain_x(fire)
+#undef w_maprain_x
 #elif !defined(w_world_h)
 #define w_world_h
 
@@ -224,12 +232,8 @@ enum ZscName(MapPhantom) {
 };
 
 enum ZscName(MapRain) {
-   _rain_none,
-   _rain_rain,
-   _rain_blood,
-   _rain_abyss,
-   _rain_snow,
-   _rain_fire,
+   #define w_maprain_x(x) _rain_##x,
+   #include "w_world.h"
 };
 
 enum ZscName(MapEnvironment) {

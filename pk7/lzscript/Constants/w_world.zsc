@@ -186,12 +186,18 @@ enum Lith_MapPhantom {
 };
 
 enum Lith_MapRain {
-   _rain_none,
-   _rain_rain,
-   _rain_blood,
-   _rain_abyss,
-   _rain_snow,
-   _rain_fire,
+   
+   
+
+
+_rain_none,
+_rain_rain,
+_rain_blood,
+_rain_abyss,
+_rain_snow,
+_rain_fire,
+
+
 };
 
 enum Lith_MapEnvironment {
