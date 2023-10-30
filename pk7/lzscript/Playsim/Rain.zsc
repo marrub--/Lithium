@@ -17,9 +17,10 @@ enum physicsnum {
 Lith_AirThinker m_air;
 Actor           m_player;
 class<Actor>    m_drop;
-float           m_visDist;
+double          m_visDist;
 bool            m_sound;
 int             m_type;
+double          m_maxHeight;
 
 static Lith_RainThinker create(Lith_AirThinker air) {
    let th = new('Lith_RainThinker');
@@ -38,8 +39,8 @@ override void tick() {
    if(level.isFrozen() || level.time & 1 || !m_drop) {
       return;
    }
-   float tgtDist;
-   float curDist = spawnRain();
+   double tgtDist;
+   double curDist = spawnRain();
    if(curDist == 0.0) {
       tgtDist = 0.0;
       if(m_player) {
@@ -56,12 +57,18 @@ override void tick() {
 
 void setup(int which) {
    switch(which) {
-   default:          m_sound = false; m_drop = null;                 break;
-   case _rain_rain:  m_sound = true;  m_drop = 'Lith_RainDrop';      break;
-   case _rain_blood: m_sound = true;  m_drop = 'Lith_BloodRainDrop'; break;
-   case _rain_abyss: m_sound = true;  m_drop = 'Lith_AbyssRainDrop'; break;
-   case _rain_fire:  m_sound = false; m_drop = 'Lith_Ash';           break;
-   case _rain_snow:  m_sound = false; m_drop = 'Lith_SnowDrop';      break;
+   default:
+      m_sound = false; m_drop = null; break;
+   case _rain_rain:
+      m_sound = true;  m_drop = 'Lith_RainDrop';      m_maxHeight = 800; break;
+   case _rain_blood:
+      m_sound = true;  m_drop = 'Lith_BloodRainDrop'; m_maxHeight = 800; break;
+   case _rain_abyss:
+      m_sound = true;  m_drop = 'Lith_AbyssRainDrop'; m_maxHeight = 999; break;
+   case _rain_fire:
+      m_sound = false; m_drop = 'Lith_Ash';           m_maxHeight = 300; break;
+   case _rain_snow:
+      m_sound = false; m_drop = 'Lith_SnowDrop';      m_maxHeight = 600; break;
    }
    if(m_player) {
       if(m_sound) {
@@ -78,14 +85,14 @@ double spawnRain() const {
    let mo      = m_player;
    if(!mo) {
       mo      = players[consoleplayer].camera;
-      maxDist = m_sound ? 8192 : 2048;
+      maxDist = m_sound ? 8192 : 4096;
    }
    if(!mo || !mo.curSector) {
       return maxDist;
    }
    double  raindist = 1024;
    vector2 mpos     = mo.pos.xy;
-   double  maxh     = mo.pos.z + 768;
+   double  maxh     = mo.pos.z + m_maxHeight;
    if(mo.curSector.getTexture(Sector.ceiling) == skyFlatNum) {
       raindist = 0;
    }
