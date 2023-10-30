@@ -76,6 +76,9 @@ ui void drawSky(RenderEvent evt) {
    /* clear, then check mode */
    m_skyCanvas.dim("black", 1.0, 0, 0, canvas_w, canvas_h);
    switch(m_skyMode) {
+   case _msky_none:
+      /* null sky just does nothing */
+      break;
    case _msky_shader:
    case _msky_tintonly:
       /* for shader sky and tint-only, we only need to dim with the
@@ -132,11 +135,13 @@ void replaceSky() {
    m_skyRain        = Lith_UTIL.pData(_pdt_rain);
    switch(m_skyMode) {
    default:
+      /* you'll need to add new skies to this switch */
       m_skyMode = _msky_nochange;
       return;
    case _msky_shader:
+   case _msky_tintonly:
       color cr;
-      /* no atmosphere...? */
+      /* no atmosphere? */
       if(Lith_UTIL.pData(_pdt_mflg, _mflg_vacuum)) {
          cr = 0xFF000000;
       } else {
@@ -163,8 +168,12 @@ void replaceSky() {
          min(cr.b + int(fog.b * (fog.a / 255.0)), 255)
       );
       m_skyColor = cr;
-      setSky(skyB);
-      setSkyBase(skyC, 0.0);
+      if(m_skyMode == _msky_tintonly) {
+         setSky(skyC);
+      } else {
+         setSky(skyB);
+         setSkyBase(skyC, 0.0);
+      }
       break;
    case _msky_replace:
       switch(Lith_UTIL.pData(_pdt_menv)) {
@@ -175,8 +184,9 @@ void replaceSky() {
       default:               setSkyBase(getTex("LITHSKST"), 0.0);   break;
       }
    case _msky_vanilla:
-      setSky(skyC);
       m_skyColor = Lith_HERMES.instance().m_fogColor;
+   case _msky_none:
+      setSky(skyC);
       break;
    }
    switch(m_skyMode) {

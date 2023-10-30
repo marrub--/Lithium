@@ -5,17 +5,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 enum Lith_PData {
    _pdt_weapon,
    _pdt_upgrade,
@@ -138,17 +127,6 @@ enum Lith_ScriptNum {
    
 
 
-
-
-
-
-
-
-
-
-
-
-
 lsc_setptri32,
 lsc_setptrk32,
 lsc_setptrbool,
@@ -221,17 +199,6 @@ enum Lith_MapEnvironment {
    
 
 
-
-
-
-
-
-
-
-
-
-
-
 _menv_none,
 _menv_interstice,
 _menv_hell,
@@ -250,17 +217,6 @@ enum Lith_MapKind {
 enum Lith_MapSky {
    
    
-
-
-
-
-
-
-
-
-
-
-
 
 
 _msky_nochange,

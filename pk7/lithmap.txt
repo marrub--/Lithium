@@ -13,7 +13,7 @@ environment: "abyss"
 humidity:    0
 temperature: -270
 windspeed:   0
-sky:         "nochange";
+sky:         "none";
 
 name:        "LITHTEST"
 seed:        777
@@ -32,7 +32,7 @@ environment: "none"
 humidity:    0
 temperature: 30
 windspeed:   1
-sky:         "nochange";
+sky:         "none";
 
 name:   "LITHSKY"
 seed:   7
@@ -47,7 +47,7 @@ environment: "abyss"
 humidity:    0
 temperature: -270
 windspeed:   0
-sky:         "nochange"
+sky:         "none"
 script:      "lmisc/Abyss.mmmm";
 
 name:        "LITHEND"
