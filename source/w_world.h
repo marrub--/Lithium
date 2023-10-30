@@ -1,15 +1,4 @@
-// ╭──────────────────────────────────────────────────────────────────────────╮
-// │                                                                          │
-// │             Distributed under the CC0 public domain license.             │
-// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
-// │                See licenses/cc0.txt for more information.                │
-// │                                                                          │
-// ├──────────────────────────────────────────────────────────────────────────┤
-// │                                                                          │
-// │ World data.                                                              │
-// │                                                                          │
-// ╰──────────────────────────────────────────────────────────────────────────╯
-
+/* World data. */
 #if defined(w_setptr_x)
 w_setptr_x(i32)
 w_setptr_x(k32)

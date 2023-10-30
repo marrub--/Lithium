@@ -74,16 +74,11 @@ script static void GInit(void) {
    wl.init = true;
 }
 
-script static void MInit(void) {
-   Dbg_Log(log_dev, _l(_f));
-   ml.lump = strp(ACS_PrintName(PRINTNAME_LEVEL));
-   ml.name = strp(ACS_PrintName(PRINTNAME_LEVELNAME));
+static void MInitGetStaticInfo(void) {
    struct map_info *mi = ml.mi = GetMapInfo();
-   mi_setup(mi);
+   mi_setup(ml.mi);
    i32 fun = GetFun();
-   DefaultAirControl();
-   ml.soulsfreed = 0;
-   ml.seed = mi_opt(mi, _mi_key_seed, _v.i, ACS_Random(0, INT32_MAX));
+   ml.seed = mi_opt(ml.mi, _mi_key_seed, _v.i, ACS_Random(0, INT32_MAX));
    srand(ml.seed);
    ml.boss = EDataI(_edt_bosslevel);
    i32 func = _mfunc_normal;
@@ -92,7 +87,7 @@ script static void MInit(void) {
    } else if(ml.lump == sp_LITHEND) {
       func = _mfunc_end;
    }
-   if(mi_flg(mi, _mi_flag_nophantom) || cv.sv_nobosses) {
+   if(mi_flg(ml.mi, _mi_flag_nophantom) || cv.sv_nobosses) {
       set_msk(ml.flag, _mflg_boss, _mphantom_nospawn);
    }
    if(ml.boss == boss_iconofsin && fun & lfun_tainted) {
@@ -100,8 +95,8 @@ script static void MInit(void) {
    }
    i32 env = _menv_none;
    str sky = fast_strupper(EDataS(_edt_origsky1));
-   if(get_bit(mi->use, _mi_key_environment)) {
-      env = mi->keys[_mi_key_environment].i;
+   if(get_bit(ml.mi->use, _mi_key_environment)) {
+      env = ml.mi->keys[_mi_key_environment].i;
    } else if(fun & lfun_ragnarok) {
       env = _menv_evil;
    } else if(sky == sp_SKY2 || sky == sp_RSKY2) {
@@ -109,13 +104,13 @@ script static void MInit(void) {
    } else if(sky == sp_SKY3 || sky == sp_SKY4 || sky == sp_RSKY3) {
       env = _menv_hell;
    }
-   ml.humidity    = mi_opt(mi, _mi_key_humidity,    _v.i, rand() % 101);
-   ml.temperature = mi_opt(mi, _mi_key_temperature, _v.i, rand() % 301 - 100);
-   ml.windspeed   = mi_opt(mi, _mi_key_windspeed,   _v.i, rand() % 100);
+   ml.humidity    = mi_opt(ml.mi, _mi_key_humidity,    _v.i, rand() % 101);
+   ml.temperature = mi_opt(ml.mi, _mi_key_temperature, _v.i, rand() % 301 - 100);
+   ml.windspeed   = mi_opt(ml.mi, _mi_key_windspeed,   _v.i, rand() % 100);
    i32  lrnd      = ml.temperature * 12 / 55;
    i32  hrnd      = fastabs(ml.temperature / 2) * (ml.humidity / 40);
-   bool lightning = rand() % 99 < lrnd && !mi_flg(mi, _mi_flag_nolightning);
-   bool any_rain  = rand() % 99 < hrnd && !mi_flg(mi, _mi_flag_norain);
+   bool lightning = rand() % 99 < lrnd && !mi_flg(ml.mi, _mi_flag_nolightning);
+   bool any_rain  = rand() % 99 < hrnd && !mi_flg(ml.mi, _mi_flag_norain);
    i32  rain      = _rain_none;
    if(ml.temperature > -90) {
       switch(CVarGetI(sc_sv_rain)) {
@@ -149,6 +144,15 @@ script static void MInit(void) {
    set_msk(ml.flag, _mflg_func, func);
    set_msk(ml.flag, _mflg_env,  env);
    set_msk(ml.flag, _mflg_sky,  mi_opt(mi, _mi_key_sky, _v.i, CVarGetI(sc_sv_sky)));
+}
+
+script static void MInit(void) {
+   Dbg_Log(log_dev, _l(_f));
+   ml.lump = strp(ACS_PrintName(PRINTNAME_LEVEL));
+   ml.name = strp(ACS_PrintName(PRINTNAME_LEVELNAME));
+   DefaultAirControl();
+   ml.soulsfreed = 0;
+   MInitGetStaticInfo();
    Dlg_MInit();
    SpawnBosses(pl.scoresum, false);
 }
