@@ -1,0 +1,114 @@
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
+
+class Lith_LightThinker : Thinker;
+
+int          m_time, m_next, m_len, m_speed, m_nextSnd;
+array<int16> m_flashes;
+
+Lith_SkyThinker m_sky;
+Lith_AirThinker m_air;
+
+static Lith_LightThinker create(Lith_SkyThinker sky, Lith_AirThinker air) {
+   if(!Lith_UTIL.pData(_pdt_mflg, _mflg_lightning) ||
+      level.info.flags2 & LEVEL2_HEXENHACK || /* no-no! */
+      level.info.flags & LEVEL_STARTLIGHTNING) {
+      return null;
+   }
+   let th = new("Lith_LightThinker");
+   th.m_sky = sky;
+   th.m_air = air;
+   for(int i = 0, j = level.sectors.size(); i < j; ++i) {
+      th.m_flashes.push(int16.max);
+   }
+   th.setNextFlash();
+   return th;
+}
+
+override void tick() {
+   if(level.isFrozen()) {
+      return;
+   }
+   updateThunder();
+   updateLightning();
+}
+
+void updateThunder() {
+   if(m_time == m_nextSnd) {
+      S_StartSound("world/thunder", lch_weather1, 0, 1.0, ATTN_NONE, fRandom[lith_light](0.9, 1.8));
+   }
+}
+
+void updateLightning() {
+   let delta = m_time++ - m_next;
+   int flash;
+   if(delta < 0) {
+      return;
+   }
+   if(delta == 0) {
+      flash = random[lith_light](200, 231);
+   }
+   for(int i = 0, j = level.sectors.size(); i < j; ++i) {
+      Sector sec = level.sectors[i];
+      if(delta == 0) {
+         /* on first tick only, save the level, then flash */
+         if(sec.getTexture(Sector.ceiling) == skyFlatNum ||
+            (sec.special >= 197 && sec.special <= 199)) {
+            int light, orig = sec.lightLevel;
+            switch(sec.special) {
+            case 197: light = flash;                 break;
+            case 198: light = min(orig + 64, flash); break;
+            case 199: light = min(orig + 32, flash); break;
+            }
+            /* don't effect sectors that are too bright */
+            if(light > orig) {
+               m_flashes[i] = int16.max;
+            } else {
+               sec.setLightLevel(light);
+               m_flashes[i] = orig;
+            }
+         }
+      } else if(delta < m_len) {
+         /* change the value on every other tick */
+         if(m_flashes[i] < sec.lightLevel + m_speed) {
+            sec.changeLightLevel(m_speed);
+         }
+      } else if(delta == m_len) {
+         /* when done, set the light level to its original */
+         if(m_flashes[i] != int16.max) {
+            sec.setLightLevel(m_flashes[i]);
+         }
+         m_flashes[i] = int16.max;
+      }
+   }
+   if(delta == m_len) {
+      setNextFlash();
+   }
+}
+
+void setNextFlash() {
+   int oldNext = m_next;
+   if(random[lith_light](0, 255) < 50) {
+      m_next = random[lith_light](16, 31);
+   } else if(random[lith_light](0, 255) < 128 && m_time & 32 == 0) {
+      m_next = random[lith_light](2, 9) * ticrate;
+   } else {
+      m_next = random[lith_light](5, 20) * ticrate;
+   }
+   if(oldNext) {
+      m_nextSnd = oldNext + random[lith_light](2, min(m_next / 4, 3 * ticrate));
+   } else {
+      m_nextSnd = -1;
+   }
+   m_len   = random[lith_light]( 8, 40);
+   m_speed = random[lith_light](-2, -8);
+   m_next += m_time;
+   m_sky.setSkyFlash(m_next, m_len);
+}
+
+/* EOF */

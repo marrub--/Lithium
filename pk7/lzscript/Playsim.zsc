@@ -88,7 +88,7 @@ void setUpEnvironment() {
    }
    m_air   = Lith_AirThinker.create();
    m_rain  = Lith_RainThinker.create(m_air);
-   m_lightning = Lith_LightningThinker.create(m_sky);
+   m_light = Lith_LightThinker.create(m_sky, m_air);
 }
 
 void setUpEvilSector(Sector sec) {
