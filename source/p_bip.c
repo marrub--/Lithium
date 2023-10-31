@@ -220,8 +220,6 @@ script void P_BIP_Unlock(struct page *page, bool from_load) {
             P_BIP_Unlock(P_BIP_NameToPage(page->unlocks[i]), from_load);
          }
       }
-   } else {
-      Dbg_Log(log_bip, _l("already unlocked page '"), _p(page->name), _c('\''));
    }
 }
 

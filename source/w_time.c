@@ -19,9 +19,7 @@ i32 lmvar frozen;
 
 script
 cstr CanonTime(i32 type, i32 time) {
-   noinit static
-   char ft[64], st[64], dt[64], fmt[64];
-
+   noinit static char ft[64], st[64], dt[64], fmt[64];
    i32 t = time;
    i32 s = 53 + t / 35;
    i32 m = 30 + s / 60;
@@ -29,15 +27,12 @@ cstr CanonTime(i32 type, i32 time) {
    i32 d = 25 + h / 24;
    i32 M =  6 + d / 30;
    i32 Y = 48 + M / 11;
-
    s %= 60;
    m %= 60;
    h %= 24;
-
    d = d % 31 + 1;
    M = M % 12 + 1;
    Y = Y      + 1;
-
    switch(type) {
    case ct_full:
       faststrcpy_str(fmt, sl_time_fmt_long);
@@ -52,7 +47,6 @@ cstr CanonTime(i32 type, i32 time) {
       sprintf(dt, fmt, d, M, Y);
       return dt;
    }
-
    return nil;
 }
 
