@@ -13,7 +13,7 @@
 _uc_body:
    gA:
       HeadsUpDisp: {f: A--R-, pr: 1, mul: -5, grp: 10}
-      Zoom:        {f: -DUR-}
+      Zoom:        {f: -DUR-,        pg: N/A}
       VitalScan:   {f: --UR-, pr: 2, pg: VitalScanner}
    gO:
       Flashlight: {f: A-U--}
