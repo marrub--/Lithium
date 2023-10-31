@@ -1,10 +1,4 @@
-// ╭-*-C-*-───────────────────────────────────────────────────────────────────╮
-// │                                                                          │
-// │             Distributed under the CC0 public domain license.             │
-// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
-// │                See licenses/cc0.txt for more information.                │
-// │                                                                          │
-// ╰──────────────────────────────────────────────────────────────────────────╯
+/*-*-C-*-*/
 
 "enemies auto" {
    cl: gA tag: ZombieMan;
@@ -67,8 +61,8 @@
    cl: pM tag: WeapnInter unl: "OFMD AllPoint";
    cl: pM tag: WeapnInte2;
    cl: pM tag: ArmorInter;
-   cl: pM tag: CPU1       unl: "KSKK";
-   cl: pM tag: CPU2       unl: "KSKK";
+   cl: pM tag: CPU1 unl: "KSKK";
+   cl: pM tag: CPU2 unl: "KSKK";
 
    cl: pD tag: Shield;
    cl: gI tag: DimDriver;
@@ -110,20 +104,29 @@
 
 "upgrades" {
    cl: pM tag: HeadsUpDisp unl: "OFMD";
-   cl: pM tag: JetBooster  unl: "OFMD";
-   cl: pM tag: ReflexWetw  unl: "OFMD";
-   cl: pM tag: CyberLegs   unl: "OFMD";
-   cl: pM tag: Yh0         unl: "DurlaPrime ChAri";
-   cl: pM tag: Adrenaline  unl: "KSKK";
-
    cl: pC tag: HeadsUpDispJem unl: "AOF";
-   cl: pC tag: ReflexWetwJem  unl: "AOF";
+   cl: pD tag: HeadsUpDispAri;
+   cl: gA tag: VitalScanner unl: "OFMD";
+   cl: gI tag: Lightspark;
+   cl: gI tag: Minimap;
+
+   cl: pM tag: JetBooster unl: "OFMD";
+   cl: pM tag: ReflexWetw unl: "OFMD";
+   cl: pM tag: CyberLegs  unl: "OFMD";
+   cl: pM tag: Yh0        unl: "DurlaPrime ChAri";
+   cl: pM tag: Adrenaline unl: "KSKK";
+
+   cl: pC tag: ReflexWetwJem unl: "AOF";
    cl: pC tag: Magic;
    cl: pC tag: SoulCleaver;
    cl: pC tag: StealthSys;
 
-   cl: gO tag: VitalScanner unl: "KSKK";
    cl: gO tag: AutoReload;
+
+   cl: pD tag: HeavyArmor;
+   cl: pD tag: ShieldOC;
+   cl: pD tag: HoverBoots;
+   cl: pD tag: SkillSword;
 }
 
 "places" {
@@ -157,6 +160,7 @@
    cl: pC tag: Newvec  unl: "Earth";
    cl: pM tag: OFMD;
    cl: pC tag: OFMDJem;
+   cl: pD tag: OFMDAri;
    cl: gO tag: Throes    unl: "Earth";
    cl: gO tag: Semaphore unl: "OmicronXevv";
    cl: gA tag: ShekaKaff unl: "Calestari";
@@ -164,16 +168,13 @@
    cl: gA tag: Yigan;
 }
 
+/* outcasts weapons */
 "weapons auto" {
    cl: pM tag: Pistol unl: "Throes";
    cl: pC tag: Mateba unl: "AOF";
-   cl: pD tag: Khanda;
-   cl: pD tag: "700Express";
 }
 
 "weapons" {
-   cl: pD tag: Subweapons;
-
    cl: gO tag: ChargeFist unl: "KSKK";
 
    cl: pM tag: Revolver        unl: "Earth";
@@ -216,17 +217,40 @@
 
    cl: gO tag: MissileLauncher;
    cl: gO tag: PlasmaDiffuser unl: "SYM43 MDDO Semaphore";
+}
 
-   cl: pD tag: Kampilan;
+/* intruders weapons */
+"weapons auto" {cl: pD tag: Khanda;}
+"weapons"      {cl: pD tag: Kampilan;
+                cl: pD tag: Kampilan_A;}
+"weapons auto" {cl: pD tag: "700Express";}
+"weapons" {
    cl: pD tag: "700E_A";
    cl: pD tag: ShrapnelGun;
    cl: pD tag: Shrapnel_A;
+   cl: pD tag: Shrapnel_B;
    cl: pD tag: "4Bore";
-   cl: pD tag: Minigun unl: "AOF";
+   cl: pD tag: "4Bore_A";
+   cl: pD tag: "4Bore_B";
+   cl: pD tag: Minigun;
+   cl: pD tag: Minigun_A;
    cl: pD tag: Motra;
    cl: pD tag: DualRocket;
+   cl: pD tag: Franca_A;
+   cl: pD tag: Franca_B;
+   cl: pD tag: Sophia_A;
+   cl: pD tag: Sophia_B;
    cl: pD tag: FortuneGun;
+   cl: pD tag: FortuneGun_A;
+   cl: pD tag: FortuneGun_B;
    cl: pD tag: Rems;
+   cl: pD tag: Rems_A;
+   cl: pD tag: Rems_B;
+   cl: pD tag: Subweapons;
+   cl: pD tag: SubGun_A;
+   cl: pD tag: SubGrn_A;
+   cl: pD tag: SubAxe_A;
+   cl: pD tag: SubDrt_A;
 }
 
 "weapons auto" {
