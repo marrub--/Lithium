@@ -22,6 +22,7 @@ _uc_body:
    gI:
       Lightspark: {f: A-U--}
       Minimap:    {scr: 9999999}
+   gM:
       SecretScan: {scr: 9999999}
    pM:
       JetBooster:  {              f: --U--, mul: -5}
