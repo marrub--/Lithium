@@ -27,6 +27,9 @@ bip_category_x(mail)
 #include "m_math.h"
 #include "m_list.h"
 
+#define P_BIP_GetDescr(page) \
+   lang(fast_strdup2(LANG "INFO_DESCR_", (page)->name))
+
 #define for_category() \
    for(i32 categ = 0; categ < _bipc_max; categ++)
 

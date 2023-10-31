@@ -17,8 +17,7 @@
 
 static
 void EncryptedBody(struct page *page, char *bodytext) {
-   faststrcpy_str(bodytext,
-                  ns(lang(fast_strdup2(LANG "INFO_DESCR_", page->name))));
+   faststrcpy_str(bodytext, ns(P_BIP_GetDescr(page)));
    for(char *p = bodytext; *p; p++) {
       *p = !IsPrint(*p) ? *p : *p ^ 7;
    }
@@ -26,8 +25,7 @@ void EncryptedBody(struct page *page, char *bodytext) {
 
 static
 void MailBody(struct page *page, char *bodytext) {
-   noinit static
-   char remote[128];
+   noinit static char remote[128];
    cstr sent;
 
    faststrcpy_str(remote, ns(lang(fast_strdup2(LANG "INFO_REMOT_", page->name))));
@@ -36,8 +34,7 @@ void MailBody(struct page *page, char *bodytext) {
    mem_size_t end = sprintf(bodytext, tmpstr(sl_mail_template), remote, sent);
    bodytext[end++] = '\n';
    bodytext[end++] = '\n';
-   faststrcpy_str(&bodytext[end],
-                  ns(lang(fast_strdup2(LANG "INFO_DESCR_", page->name))));
+   faststrcpy_str(&bodytext[end], ns(P_BIP_GetDescr(page)));
 }
 
 static
@@ -61,8 +58,7 @@ cstr GetFullName(struct page *page) {
 
 static
 cstr GetBody(struct page *page) {
-   noinit static
-   char bodytext[8192];
+   noinit static char bodytext[8192];
    switch(page->category) {
    case _bipc_extra:
       EncryptedBody(page, bodytext);
@@ -71,8 +67,7 @@ cstr GetBody(struct page *page) {
       MailBody(page, bodytext);
       break;
    default:
-      faststrcpy_str(bodytext,
-                     ns(lang(fast_strdup2(LANG "INFO_DESCR_", page->name))));
+      faststrcpy_str(bodytext, ns(P_BIP_GetDescr(page)));
       break;
    }
    return bodytext;

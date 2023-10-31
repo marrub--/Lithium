@@ -95,7 +95,13 @@ script static void BipInfo_Page(struct tokbuf *tb, struct err *res, struct page 
       }
    }
    unwrap(res);
-   Dbg_Log(log_gsinfo, _l("added bip page '"), _p(page->name), _c('\''));
+   Dbg_Log(log_gsinfo,
+           _l("added bip page '"), _p(page->name), _c('\''));
+   #ifndef NDEBUG
+   if(!P_BIP_GetDescr(page)) {
+      Dbg_Log(log_bip, _l("page "), _p(page->name), _l(" has no text"));
+   }
+   #endif
    return;
 }
 
