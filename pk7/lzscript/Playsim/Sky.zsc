@@ -200,6 +200,7 @@ void replaceSky() {
       setSkyToCanvas(skyC);
       break;
    }
+   resetClouds();
    if(m_mode != _msky_nochange) {
       m_fireCanvas = TexMan.getCanvas("LITHFIRE");
       m_canvas     = TexMan.getCanvas("LITHCSKY");
