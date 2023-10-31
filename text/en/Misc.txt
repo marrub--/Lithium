@@ -319,10 +319,10 @@ to kill through the horde.
 == \#DarkLordPlayer_Col | Lith_Blue
 %% \#DarkLordPlayer_Dsc
 A walking tank, lord of all
-destruction. Much like a tank,
-moves slow, but hits hard.
-Bring the slaughter, but be
-prepared to think deftly.
+destruction. Moves slow, hits
+hard. Bring the slaughter,
+but be prepared to think
+deftly to survive.
 
 == \#WandererPlayer     | Wanderer
 == \#WandererPlayer_Nam | Lucas Sánchez

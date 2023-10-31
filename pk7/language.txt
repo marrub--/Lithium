@@ -6797,10 +6797,10 @@
    "Lith_Blue";
 "LITH_DarkLordPlayer_Dsc" =
    "A walking tank, lord of all\n"
-   "destruction. Much like a tank,\n"
-   "moves slow, but hits hard.\n"
-   "Bring the slaughter, but be\n"
-   "prepared to think deftly.";
+   "destruction. Moves slow, hits\n"
+   "hard. Bring the slaughter,\n"
+   "but be prepared to think\n"
+   "deftly to survive.";
 "LITH_WandererPlayer" =
    "Wanderer";
 "LITH_WandererPlayer_Nam" =
