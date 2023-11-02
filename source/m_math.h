@@ -27,6 +27,10 @@
 
 #define k32_to_i32(n) (ik32.k = (n), ik32.i)
 #define i32_to_k32(n) (ik32.i = (n), ik32.k)
+#define k64_to_i64(n) (ik64.k = (n), ik64.i)
+#define i64_to_k64(n) (ik64.i = (n), ik64.k)
+#define k32fract(n) (ik32.k = (n), ik32.i & 0xFFFF)
+#define k64fract(n) (ik64.k = (n), ik64.i & 0xFFFFFFFF)
 
 #define k32_to_byte(n) (byte(k32_to_i32((k32)(n) * 255.0) >> 16))
 
