@@ -56,9 +56,21 @@ dimension of hate--built of demons.
 ## Misc ══════════════════════════════════════════════════════════════════════╕
 == \#CHECK | Eng
 
-== \#TIME_FMT_LONG  | %0.2i:%0.2i:%0.2i %i-%i-16%0.2i
-== \#TIME_FMT_SHORT | %0.2i:%0.2i %i-%i-%.02i
-== \#TIME_FMT_DATE  | %i-%i-16%0.2i
+== \#TIME_FMT_LONG  | {}:{}:{} {7} {}.{}.{}{}
+== \#TIME_FMT_SHORT | {}:{} {}.{}.{}
+== \#TIME_FMT_DATE  | {}.{}.{}
+
+== \#TIME_ERA_BC | BC
+== \#TIME_ERA_CE | CE
+== \#TIME_ERA_NE | NE
+
+== \#TIME_WEEK_DAY_MON | Mon
+== \#TIME_WEEK_DAY_TUE | Tue
+== \#TIME_WEEK_DAY_WED | Wed
+== \#TIME_WEEK_DAY_THU | Thu
+== \#TIME_WEEK_DAY_FRI | Fri
+== \#TIME_WEEK_DAY_SAT | Sat
+== \#TIME_WEEK_DAY_SUN | Sun
 
 == \#ENTER_FMT   | Entered %S at %s NE
 %% \#CHARGE_FMT

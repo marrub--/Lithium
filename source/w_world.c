@@ -70,6 +70,7 @@ script static void GInit(void) {
    UpdateGame();
    wl.scorethreshold = _scorethreshold_default;
    wl.cbiperf = 10;
+   wl.realtime = 51310938653; /* 14:30:53 26-7-1649 */
    Mon_Init();
    wl.init = true;
 }
@@ -189,24 +190,19 @@ dynam_aut script void W_World(void) {
          F_Start(_finale_time_out);
          return;
       }
-
       #define cvar_tic(ty, na) cv.na = cvar_get(na);
       #define cvar_x(ev, na, ty) cvar_##ev(ty, na)
       #include "m_engine.h"
-
       i32 scrts = ACS_GetLevelInfo(LEVELINFO_FOUND_SECRETS);
       i32 kills = ACS_GetLevelInfo(LEVELINFO_KILLED_MONSTERS);
       i32 items = ACS_GetLevelInfo(LEVELINFO_FOUND_ITEMS);
-
       if(kills > ml.prevkills)  wl.pay.killnum  += kills - ml.prevkills;
       if(items > ml.previtems)  wl.pay.itemnum  += items - ml.previtems;
       if(scrts > ml.prevscrts) {wl.pay.scrtnum  += scrts - ml.prevscrts;
                                 wl.secretsfound += scrts - ml.prevscrts;}
-
       ml.prevscrts = scrts;
       ml.prevkills = kills;
       ml.previtems = items;
-
       if(ACS_Timer() % 5 == 0 && ml.missionkill < kills) {
          if(++ml.missionprc >= 150) {
             SpawnBosses(0, true);
@@ -214,12 +210,11 @@ dynam_aut script void W_World(void) {
          }
          ml.missionkill = kills;
       }
-
       ACS_Delay(1);
-
       if(cv.sv_autosave && ACS_Timer() && ACS_Timer() % (35 * 60 * cv.sv_autosave) == 0) {
          ACS_Autosave();
       }
+      W_TickTime();
    }
 }
 

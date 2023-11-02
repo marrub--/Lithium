@@ -5471,6 +5471,8 @@
    "Enable";
 "LITH_TOOLTIP_sv_postgame" =
    "\cgWarning:\c- Post-game content can \cicause saves to be effectively deleted\c-, and will have \cipermanent repercussions\c-. Only enable if you really want more.";
+"LITH_sv_timescale" =
+   "Time scale";
 "LITH_sv_rain" =
    "Enable raining";
 "LITH_TOOLTIP_sv_rain" =
@@ -6405,11 +6407,31 @@
 "LITH_CHECK" =
    "Eng";
 "LITH_TIME_FMT_LONG" =
-   "%0.2i:%0.2i:%0.2i %i-%i-16%0.2i";
+   "{}:{}:{} {7} {}.{}.{}{}";
 "LITH_TIME_FMT_SHORT" =
-   "%0.2i:%0.2i %i-%i-%.02i";
+   "{}:{} {}.{}.{}";
 "LITH_TIME_FMT_DATE" =
-   "%i-%i-16%0.2i";
+   "{}.{}.{}";
+"LITH_TIME_ERA_BC" =
+   "BC";
+"LITH_TIME_ERA_CE" =
+   "CE";
+"LITH_TIME_ERA_NE" =
+   "NE";
+"LITH_TIME_WEEK_DAY_MON" =
+   "Mon";
+"LITH_TIME_WEEK_DAY_TUE" =
+   "Tue";
+"LITH_TIME_WEEK_DAY_WED" =
+   "Wed";
+"LITH_TIME_WEEK_DAY_THU" =
+   "Thu";
+"LITH_TIME_WEEK_DAY_FRI" =
+   "Fri";
+"LITH_TIME_WEEK_DAY_SAT" =
+   "Sat";
+"LITH_TIME_WEEK_DAY_SUN" =
+   "Sun";
 "LITH_ENTER_FMT" =
    "Entered %S at %s NE";
 "LITH_CHARGE_FMT" =
@@ -9534,11 +9556,25 @@
 "LITH_CHECK" =
    "Jp";
 "LITH_TIME_FMT_LONG" =
-   "%0.2i:%0.2i:%0.2i %i日%i月新部%i年";
+   "{}:{}:{} {6}{5}年{4}月{3}日 ({7})";
 "LITH_TIME_FMT_SHORT" =
-   "%0.2i:%0.2i %i日%i月部%i年";
+   "{}:{} {5}.{4}.{3}";
 "LITH_TIME_FMT_DATE" =
-   "%i日%i月新部%i年";
+   "{5}.{4}.{3}";
+"LITH_TIME_WEEK_DAY_MON" =
+   "月";
+"LITH_TIME_WEEK_DAY_TUE" =
+   "火";
+"LITH_TIME_WEEK_DAY_WED" =
+   "水";
+"LITH_TIME_WEEK_DAY_THU" =
+   "木";
+"LITH_TIME_WEEK_DAY_FRI" =
+   "金";
+"LITH_TIME_WEEK_DAY_SAT" =
+   "土";
+"LITH_TIME_WEEK_DAY_SUN" =
+   "日";
 "LITH_ENTER_FMT" =
    "%S に入った... 日付:%s";
 "LITH_CHARGE_FMT" =

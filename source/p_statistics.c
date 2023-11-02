@@ -38,7 +38,7 @@ void P_CBI_TabStatistics(struct gui_state *g) {
    Stat(sl_stat_upgrades,   _p(pl.upgradesowned));
    Stat(sl_stat_items,      _p(pl.itemsbought));
    Stat(sl_stat_mail,       _p(bip.mailreceived));
-   Stat(sl_stat_time,       _p(ACS_Timer() / 35.0k));
+   Stat(sl_stat_time,       _p(wl.realtime / 35.0k));
    if(get_bit(pcl_outcasts, pl.pclass)) {
       Stat(sl_stat_boom, _p(pl.spuriousexplosions));
    }

@@ -66,6 +66,7 @@ typedef uint96_t u96;
 #define clampscr        clampli
 
 typedef i64 score_t;
+typedef i96 time_t;
 
 typedef i32 mem_tag_t;
 typedef i32 mem_size_t;
@@ -87,6 +88,7 @@ typedef div_t   i32div;
 typedef ldiv_t  i64div;
 typedef lldiv_t i96div;
 typedef ldiv_t  scorediv;
+typedef lldiv_t timediv;
 
 struct polar {k32 ang, dst;};
 struct i32v2 {i32 x, y;};

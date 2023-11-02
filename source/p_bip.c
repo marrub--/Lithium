@@ -214,7 +214,7 @@ script void P_BIP_Unlock(struct page *page, bool from_load) {
       if(page->category == _bipc_mail && !get_bit(page->flags, _page_auto)) {
          MailNotify(page->name);
       }
-      page->time = ACS_Timer();
+      page->time = wl.realtime;
       if(!from_load && page->category <= _bipc_last_normal) {
          set_bit(page->flags, _page_new);
          if(!get_bit(page->flags, _page_auto) && ACS_Timer() > 3) {

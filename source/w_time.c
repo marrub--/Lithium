@@ -14,40 +14,83 @@
 #include "p_player.h"
 #include "w_world.h"
 
-static
-i32 lmvar frozen;
+static i32 lmvar frozen;
 
-script
-cstr CanonTime(i32 type, i32 time) {
-   noinit static char ft[64], st[64], dt[64], fmt[64];
-   i32 t = time;
-   i32 s = 53 + t / 35;
-   i32 m = 30 + s / 60;
-   i32 h = 14 + m / 60;
-   i32 d = 25 + h / 24;
-   i32 M =  6 + d / 30;
-   i32 Y = 48 + M / 11;
-   s %= 60;
-   m %= 60;
-   h %= 24;
-   d = d % 31 + 1;
-   M = M % 12 + 1;
-   Y = Y      + 1;
-   switch(type) {
-   case ct_full:
-      faststrcpy_str(fmt, sl_time_fmt_long);
-      sprintf(ft, fmt, h, m, s, d, M, Y);
-      return ft;
-   case ct_short:
-      faststrcpy_str(fmt, sl_time_fmt_short);
-      sprintf(st, fmt, h, m, d, M, Y);
-      return st;
-   case ct_date:
-      faststrcpy_str(fmt, sl_time_fmt_date);
-      sprintf(dt, fmt, d, M, Y);
-      return dt;
+enum era {
+   _era_bc,
+   _era_ce,
+   _era_ne,
+};
+
+enum weekday {
+   _weekday_monday,
+   _weekday_tuesday,
+   _weekday_wednesday,
+   _weekday_thursday,
+   _weekday_friday,
+   _weekday_saturday,
+   _weekday_sunday,
+   _weekday_max,
+};
+
+struct realtime {
+   i32 s, m, h, d, M;
+   time_t Y;
+   enum era E;
+   enum weekday D;
+};
+
+script cstr CanonTime(i32 type, time_t time) {
+   static struct fmt_arg args[] = {
+      {_fmt_i32, .precision = 2},
+      {_fmt_i32, .precision = 2},
+      {_fmt_i32, .precision = 2},
+      {_fmt_i32}, {_fmt_i32}, {_fmt_i32},
+      {_fmt_str}, {_fmt_str},
+   };
+   register i96div div;
+   /* FIXME: negative time does not work */
+   /* FIXME: make this use struct realtime */
+   time_t s = time;     div = __div(s, (time_t)60); s = div.rem;
+   time_t m = div.quot; div = __div(m, (time_t)60); m = div.rem;
+   time_t h = div.quot; div = __div(h, (time_t)24); h = div.rem;
+   time_t d = div.quot; div = __div(d, (time_t)30); d = div.rem;
+   time_t M = div.quot; div = __div(M, (time_t)12); M = div.rem;
+   time_t Y = div.quot;
+   args[0].val.i = fastabs(h);
+   args[1].val.i = fastabs(m);
+   args[2].val.i = fastabs(s);
+   args[3].val.i = fastabs(d);
+   args[4].val.i = fastabs(M);
+   if(Y < -3031) {
+      args[5].val.i = fastabs(Y + 3031);
+      args[6].val.s = sl_time_era_bc;
+   } else if(Y < 0) {
+      args[5].val.i = fastabs(3031 - Y);
+      args[6].val.s = sl_time_era_ce;
+   } else {
+      args[5].val.i = Y;
+      args[6].val.s = sl_time_era_ne;
    }
-   return nil;
+   switch(fastabs(_weekday_friday + d) % _weekday_max) {
+   case _weekday_monday:     args[7].val.s = sl_time_week_day_mon; break;
+   case _weekday_tuesday:    args[7].val.s = sl_time_week_day_tue; break;
+   case _weekday_wednesday:  args[7].val.s = sl_time_week_day_wed; break;
+   case _weekday_thursday:   args[7].val.s = sl_time_week_day_thu; break;
+   case _weekday_friday:     args[7].val.s = sl_time_week_day_fri; break;
+   case _weekday_saturday:   args[7].val.s = sl_time_week_day_sat; break;
+   case _weekday_sunday:     args[7].val.s = sl_time_week_day_sun; break;
+   }
+   ACS_BeginPrint();
+   str fmt;
+   switch(type) {
+   case ct_full:  fmt = sl_time_fmt_long;  break;
+   case ct_short: fmt = sl_time_fmt_short; break;
+   case ct_date:  fmt = sl_time_fmt_date;  break;
+   default: return nil;
+   }
+   printfmt(tmpstr(fmt), countof(args), args);
+   return tmpstr(ACS_EndStrParam());
 }
 
 stkoff void FreezeTime(bool players_ok) {
@@ -61,6 +104,16 @@ stkoff void UnfreezeTime(bool players_ok) {
    frozen--;
    if(!players_ok) pl.frozen--;
    if(frozen < 1) ServCallV(sm_SetFrozen, false, 0);
+}
+
+void W_TickTime(void) {
+   if(!Paused) {
+      static time_t tick_sec;
+      tick_sec += cv.sv_timescale;
+      timediv d = __div(tick_sec, (time_t)35);
+      wl.realtime += d.quot;
+      tick_sec = d.rem;
+   }
 }
 
 /* EOF */

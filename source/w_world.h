@@ -345,6 +345,7 @@ struct map_info {
 struct world {
    struct payoutinfo pay;
    score_t scorethreshold;
+   time_t  realtime;
    i32  hubscleared;
    i32  secretsfound;
    i32  cbiperf;
@@ -381,7 +382,7 @@ extern struct map_locals lmvar ml;
 extern struct map_locals       oldml;
 
 void Scr_MInit(void);
-script cstr CanonTime(i32 type, i32 time);
+script cstr CanonTime(i32 type, time_t time);
 optargs(1) i32 UniqueID(i32 tid);
 void BeginAngles(i32 x, i32 y);
 k32 AddAngle(i32 x, i32 y);
@@ -390,6 +391,7 @@ optargs(1) stkcall void UnfreezeTime(bool players_ok);
 script void CBI_Install(i32 num);
 script void W_Title(void);
 script void F_Run(void);
+void W_TickTime(void);
 void F_Load(void);
 void F_Start(i32 which);
 script struct map_info *GetMapInfo(void);

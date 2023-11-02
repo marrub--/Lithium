@@ -25,7 +25,7 @@ stkoff static void P_Ren_Mission(void) {
       SetSize(320, 240);
       ACS_BeginPrint();
       _p(fast_strupper(ml.name)); _c('\n');
-      _l("\Cj"); _p(CanonTime(ct_full, ACS_Timer())); _c('\n');
+      _l("\Cj"); _p(CanonTime(ct_full, wl.realtime)); _c('\n');
       if(get_bit(ml.flag, _mflg_vacuum)) {
          _l("\CiVACUUM\n");
       } else {
@@ -60,7 +60,7 @@ stkoff static void P_Ren_Mission(void) {
       case _mstat_finished:   _l("\CjMISSION \CdFINISHED");   break;
       case _mstat_failure:    _l("\CjMISSION \CgFAILED");     break;
       }
-      PrintText(sf_smallfnt, pl.color, pl.hudrpos,3, 28,1, _u_no_unicode|_u_alpha, alpha);
+      PrintText(sf_smallfnt, pl.color, pl.hudrpos,3, 28,1, _u_alpha, alpha);
       if(!Paused) {
          --pl.missionstatshow;
       }

@@ -42,9 +42,17 @@ Lithiumの雨が宇宙から降り注ぐか。
 ## Misc ══════════════════════════════════════════════════════════════════════╕
 == \#CHECK | Jp
 
-== \#TIME_FMT_LONG  | %0.2i:%0.2i:%0.2i %i日%i月新部%i年
-== \#TIME_FMT_SHORT | %0.2i:%0.2i %i日%i月部%i年
-== \#TIME_FMT_DATE  | %i日%i月新部%i年
+== \#TIME_FMT_LONG  | {}:{}:{} {6}{5}年{4}月{3}日 ({7})
+== \#TIME_FMT_SHORT | {}:{} {5}.{4}.{3}
+== \#TIME_FMT_DATE  | {5}.{4}.{3}
+
+== \#TIME_WEEK_DAY_MON | 月
+== \#TIME_WEEK_DAY_TUE | 火
+== \#TIME_WEEK_DAY_WED | 水
+== \#TIME_WEEK_DAY_THU | 木
+== \#TIME_WEEK_DAY_FRI | 金
+== \#TIME_WEEK_DAY_SAT | 土
+== \#TIME_WEEK_DAY_SUN | 日
 
 == \#ENTER_FMT  | %S に入った... 日付:%s
 %% \#CHARGE_FMT
