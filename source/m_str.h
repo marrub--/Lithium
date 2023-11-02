@@ -166,13 +166,14 @@
 
 #define _p(v) \
    (_Generic(v, \
-      k32:     ACS_PrintFixed, \
-      k64:     printk64, \
-      i32:     ACS_PrintInt, \
-      score_t: printscr, \
-      u32:     ACS_PrintInt, \
-      cstr:    PrintStr, \
-      str:     ACS_PrintString)((v)))
+      k32:  ACS_PrintFixed, \
+      k64:  printk64, \
+      i32:  ACS_PrintInt, \
+      i64:  printi64, \
+      i96:  printi96, \
+      u32:  ACS_PrintInt, \
+      cstr: PrintStr, \
+      str:  ACS_PrintString)((v)))
 #define _l(s) PrintStrL(s)
 #define _c(c) ACS_PrintChar(c)
 #define _v(x, y, z) (_c('('), _p(x), _c(','), _p(y), _c(','), _p(z), _c(')'))
@@ -249,7 +250,8 @@ stkcall bool faststrchk(cstr s1, cstr s2);
 stkcall bool faststrcasechk(cstr s1, cstr s2);
 stkcall char *faststrchr(cstr s, char c);
 stkcall char *faststrtok(char *s, char **next, char c);
-stkcall void printscr(score_t num);
+stkcall void printi64(i64 num);
+stkcall void printi96(i96 num);
 stkcall void printk64(k64 num);
 stkcall cstr scoresep(score_t num);
 stkcall cstr alientext(i32 num);

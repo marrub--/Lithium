@@ -14,13 +14,10 @@
    u32 ret = 0;
    for(; *s; s++) ret = *s + 101 * ret;
    return ret;
-
 #undef str_hash_impl
 #elif defined(remove_text_color_impl)
    i32 j = 0;
-
    if(size > sizeof tcbuf) return nil;
-
    for(i32 i = 0; i < size; i++) {
       if(s[i] == '\C') {
          ++i;
@@ -31,22 +28,16 @@
             ++i;
          }
       }
-
       if(i >= size || j >= size || !s[i]) {
          break;
       }
-
       tcbuf[j++] = s[i];
    }
-
    tcbuf[j++] = '\0';
-
    return tcbuf;
-
 #undef remove_text_color_impl
 #elif defined(strto_impl_type)
    while(IsSpace(*p)) ++p;
-
    #if strto_impl_sign
    bool sign;
    switch(*p) {
@@ -57,7 +48,6 @@
    #else
    if(*p == '+') ++p;
    #endif
-
    strto_impl_type base;
    if(*p == '0') {
       ++p;
@@ -70,7 +60,6 @@
    } else {
       base = 10;
    }
-
    strto_impl_type ret = 0;
    for(i32 digit; (digit = radix(*p)) < base; ++p) {
       ret = ret * base + digit;
@@ -80,9 +69,65 @@
    #else
    return ret;
    #endif
-
 #undef strto_impl_sign
 #undef strto_impl_type
+#elif defined(fmt_int_impl)
+   #ifndef fmt_int_zero
+   #define fmt_int_zero() (out[0] = '0', out[1] = '\0')
+   #endif
+   #ifndef fmt_int_div_t
+   #define fmt_int_div_t i32div
+   #endif
+   #ifndef fmt_int_base
+   #define fmt_int_base 10
+   #endif
+   #ifndef fmt_int_c
+   #define fmt_int_c(n) *--outp = '0' + n
+   #endif
+   #ifdef fmt_int_sep
+      #ifndef fmt_int_sep_c
+      #define fmt_int_sep_c() *--outp = ','
+      #endif
+      #ifndef fmt_int_sep_place
+      #define fmt_int_sep_place 3
+      #endif
+      #ifndef fmt_int_sep_nc
+      #define fmt_int_sep_nc 1
+      #endif
+   #endif
+   noinit static char out[80];
+   if(num == 0) {
+      fmt_int_zero();
+      return out;
+   }
+   register char *outp = out + sizeof(out) - 1;
+   #ifdef fmt_int_sep
+   i32 cnum = 0;
+   #endif
+   while(num) {
+      register fmt_int_div_t div = __div(num, fmt_int_base);
+      fmt_int_c(div.rem);
+      num = div.quot;
+      #ifdef fmt_int_sep
+      if(++cnum == fmt_int_sep_place) {
+         fmt_int_sep_c();
+         cnum = 0;
+      }
+      #endif
+   }
+   #ifdef fmt_int_sep
+   if(!cnum) outp += fmt_int_sep_nc;
+   #endif
+   return outp;
+#undef fmt_int_impl
+#undef fmt_int_zero
+#undef fmt_int_div_t
+#undef fmt_int_base
+#undef fmt_int_c
+#undef fmt_int_sep
+#undef fmt_int_sep_c
+#undef fmt_int_sep_nc
+#undef fmt_int_sep_place
 #else
 #include "m_engine.h"
 #include "w_world.h"
@@ -296,35 +341,33 @@ stkoff char *faststrtok(char *s, char **next, char c) {
 }
 
 stkoff cstr scoresep(score_t num) {
-   noinit static char out[48];
-
-   if(!num) {
-      out[0] = '0';
-      out[1] = '\0';
-      return out;
-   }
-
-   char *outp = out + countof(out) - 1;
-   i32 cnum = 0;
-
-   while(num) {
-      scorediv_t div = __div(num, (score_t)10);
-      *--outp = div.rem + '0';
-      num = div.quot;
-
-      if(++cnum == 3) {
-         *--outp = ',';
-         cnum = 0;
-      }
-   }
-
-   if(!cnum) outp++;
-
-   return outp;
+   #define fmt_int_impl
+   #define fmt_int_div_t scorediv
+   #define fmt_int_base  (score_t)10
+   #define fmt_int_sep
+   #include "m_str.c"
 }
 
-stkoff void printscr(score_t num) {
-   PrintStr(scoresep(num));
+stkoff cstr fmti64(i64 num) {
+   #define fmt_int_impl
+   #define fmt_int_div_t i64div
+   #define fmt_int_base  10L
+   #include "m_str.c"
+}
+
+stkoff cstr fmti96(i96 num) {
+   #define fmt_int_impl
+   #define fmt_int_div_t i96div
+   #define fmt_int_base  10LL
+   #include "m_str.c"
+}
+
+stkoff void printi64(i64 num) {
+   PrintStr(fmti64(num));
+}
+
+stkoff void printi96(i96 num) {
+   PrintStr(fmti96(num));
 }
 
 stkoff void printk64(k64 num) {
@@ -332,34 +375,19 @@ stkoff void printk64(k64 num) {
 }
 
 stkoff cstr alientext(i32 num) {
-   noinit static char out[80];
-
-   if(!num) {
-      fastmemcpy(out, u8"", sizeof u8"");
-      return out;
-   }
-
-   char *outp = out + countof(out) - 1;
-   i32 cnum = 0;
-
-   while(num) {
-      div_t div = __div(num, 10);
-      *--outp = 0x80 + div.rem;
-      *--outp = 0x80;
-      *--outp = 0xee;
-      num = div.quot;
-
-      if(++cnum == 4) {
-         *--outp = 0x8a;
-         *--outp = 0x80;
-         *--outp = 0xee;
-         cnum = 0;
-      }
-   }
-
-   if(!cnum) outp += 3;
-
-   return outp;
+   #define fmt_int_impl
+   #define fmt_int_zero() fastmemcpy(out, u8"", sizeof u8"")
+   #define fmt_int_c(n) \
+      *--outp = 0x80 + n; \
+      *--outp = 0x80; \
+      *--outp = 0xee
+   #define fmt_int_sep_c() \
+      *--outp = 0x8a; \
+      *--outp = 0x80; \
+      *--outp = 0xee
+   #define fmt_int_sep_place 4
+   #define fmt_int_sep_nc 3
+   #include "m_str.c"
 }
 
 stkoff str lang(str name) {
