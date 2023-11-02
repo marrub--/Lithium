@@ -73,7 +73,12 @@
 #undef strto_impl_type
 #elif defined(fmt_int_impl)
    #ifndef fmt_int_zero
-   #define fmt_int_zero() (out[0] = '0', out[1] = '\0')
+   #define fmt_int_zero() *--outp = '0'
+   #endif
+   #ifdef fmt_int_sign
+      #ifndef fmt_int_sign_c
+      #define fmt_int_sign_c() *--outp = '-'
+      #endif
    #endif
    #ifndef fmt_int_div_t
    #define fmt_int_div_t i32div
@@ -96,11 +101,20 @@
       #endif
    #endif
    noinit static char out[80];
-   if(num == 0) {
-      fmt_int_zero();
-      return out;
-   }
    register char *outp = out + sizeof(out) - 1;
+   #ifdef fmt_int_sign
+   bool sgn = num < 0;
+   if(sgn) num = -num;
+   #endif
+   if(num == 0) {
+      #ifdef fmt_int_sign
+      if(sgn) {
+         fmt_int_sign_c();
+      }
+      #endif
+      fmt_int_zero();
+      return outp;
+   }
    #ifdef fmt_int_sep
    i32 cnum = 0;
    #endif
@@ -117,6 +131,11 @@
    }
    #ifdef fmt_int_sep
    if(!cnum) outp += fmt_int_sep_nc;
+   #endif
+   #ifdef fmt_int_sign
+   if(sgn) {
+      fmt_int_sign_c();
+   }
    #endif
    return outp;
 #undef fmt_int_impl
@@ -342,6 +361,7 @@ stkoff char *faststrtok(char *s, char **next, char c) {
 
 stkoff cstr scoresep(score_t num) {
    #define fmt_int_impl
+   #define fmt_int_sign
    #define fmt_int_div_t scorediv
    #define fmt_int_base  (score_t)10
    #define fmt_int_sep
@@ -350,6 +370,7 @@ stkoff cstr scoresep(score_t num) {
 
 stkoff cstr fmti64(i64 num) {
    #define fmt_int_impl
+   #define fmt_int_sign
    #define fmt_int_div_t i64div
    #define fmt_int_base  10L
    #include "m_str.c"
@@ -357,8 +378,30 @@ stkoff cstr fmti64(i64 num) {
 
 stkoff cstr fmti96(i96 num) {
    #define fmt_int_impl
+   #define fmt_int_sign
    #define fmt_int_div_t i96div
    #define fmt_int_base  10LL
+   #include "m_str.c"
+}
+
+stkoff cstr fmtu32(u32 num) {
+   #define fmt_int_impl
+   #define fmt_int_div_t u32div
+   #define fmt_int_base  10U
+   #include "m_str.c"
+}
+
+stkoff cstr fmtu64(u64 num) {
+   #define fmt_int_impl
+   #define fmt_int_div_t u64div
+   #define fmt_int_base  10UL
+   #include "m_str.c"
+}
+
+stkoff cstr fmtu96(u96 num) {
+   #define fmt_int_impl
+   #define fmt_int_div_t u96div
+   #define fmt_int_base  10ULL
    #include "m_str.c"
 }
 
@@ -370,6 +413,18 @@ stkoff void printi96(i96 num) {
    PrintStr(fmti96(num));
 }
 
+stkoff void printu32(u64 num) {
+   PrintStr(fmtu32(num));
+}
+
+stkoff void printu64(u64 num) {
+   PrintStr(fmtu64(num));
+}
+
+stkoff void printu96(u96 num) {
+   PrintStr(fmtu96(num));
+}
+
 stkoff void printk64(k64 num) {
    _p((i32)num);
    _c('.');
@@ -377,8 +432,11 @@ stkoff void printk64(k64 num) {
 }
 
 stkoff cstr alientext(i32 num) {
+   #define AN0 u8""
    #define fmt_int_impl
-   #define fmt_int_zero() fastmemcpy(out, u8"", sizeof u8"")
+   #define fmt_int_sign
+   #define fmt_int_zero() \
+      outp -= sizeof AN0; fastmemcpy(outp, AN0, sizeof AN0)
    #define fmt_int_c(n) \
       *--outp = 0x80 + n; \
       *--outp = 0x80; \

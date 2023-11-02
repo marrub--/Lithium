@@ -171,6 +171,9 @@
       i32:  ACS_PrintInt, \
       i64:  printi64, \
       i96:  printi96, \
+      u32:  printu32, \
+      u64:  printu64, \
+      u96:  printu96, \
       u32:  ACS_PrintInt, \
       cstr: PrintStr, \
       str:  ACS_PrintString)((v)))
@@ -250,8 +253,16 @@ stkcall bool faststrchk(cstr s1, cstr s2);
 stkcall bool faststrcasechk(cstr s1, cstr s2);
 stkcall char *faststrchr(cstr s, char c);
 stkcall char *faststrtok(char *s, char **next, char c);
+stkcall cstr fmti64(i64 num);
+stkcall cstr fmti96(i96 num);
+stkcall cstr fmtu32(u32 num);
+stkcall cstr fmtu64(u64 num);
+stkcall cstr fmtu96(u96 num);
 stkcall void printi64(i64 num);
 stkcall void printi96(i96 num);
+stkcall void printu32(u32 num);
+stkcall void printu64(u64 num);
+stkcall void printu96(u96 num);
 stkcall void printk64(k64 num);
 stkcall cstr scoresep(score_t num);
 stkcall cstr alientext(i32 num);

@@ -20,7 +20,6 @@
 #include <stddef.h>
 #include <stdfix.h>
 #include <stdint.h>
-#include <stdlib.h>
 
 #define countof(a) (sizeof(a) / sizeof(*(a)))
 #define swap(t, a, b) statement({ t _tmp = a; a = b; b = _tmp; })
@@ -66,7 +65,7 @@ typedef uint96_t u96;
 #define clampscr        clampli
 
 typedef i64 score_t;
-typedef i96 time_t;
+typedef u96 time_t;
 
 typedef i32 mem_tag_t;
 typedef i32 mem_size_t;
@@ -84,11 +83,14 @@ typedef long _Accum k64;
 typedef float  f32;
 typedef double f64;
 
-typedef div_t   i32div;
-typedef ldiv_t  i64div;
-typedef lldiv_t i96div;
-typedef ldiv_t  scorediv;
-typedef lldiv_t timediv;
+typedef                    __div_t i32div;
+typedef               long __div_t i64div;
+typedef          long long __div_t i96div;
+typedef unsigned           __div_t u32div;
+typedef unsigned      long __div_t u64div;
+typedef unsigned long long __div_t u96div;
+typedef               long __div_t scorediv;
+typedef unsigned long long __div_t timediv;
 
 struct polar {k32 ang, dst;};
 struct i32v2 {i32 x, y;};
