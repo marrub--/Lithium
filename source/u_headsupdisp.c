@@ -361,7 +361,7 @@ static void HUD_BottomLeft(void) {
       PrintSprite(InvNum(so_PowerStrength) ? sp_HUD_M_SplitBackRed : sp_HUD_M_SplitBack, pl.hudlpos,1, 240,2);
       BeginPrintStrL("VIT");
       PrintText(sf_bigupper, pl.hudcolor, pl.hudlpos+2,1, 238,2, _u_no_unicode);
-      for(i32 i = 0, x_ = (8 + pl.ticks) % 57; i < 20; i++) {
+      for(i32 i = 0, x_ = (8 + ACS_Timer()) % 57; i < 20; i++) {
          i32 xx = x_ - i;
          if(xx < 0) xx += 57;
          i32 y_ = 9;
@@ -405,7 +405,7 @@ static void HUD_BottomLeft(void) {
       }
       if(pl.regenwaitmax && pl.shield != pl.shieldmax) {
          ifw(i32 fr = (pl.regenwaitmax - pl.regenwait) / (k32)pl.regenwaitmax * 49, fr > 0) {
-            PrintSpriteClip(sp_HUD_D_ShieldCharge, pl.hudlpos+16,1, 239,2, 0,0,fr,21, _u_alpha, (ACS_Sin(pl.ticks / 30.0k) + 1.0k) / 2.0k);
+            PrintSpriteClip(sp_HUD_D_ShieldCharge, pl.hudlpos+16,1, 239,2, 0,0,fr,21, _u_alpha, (ACS_Sin(ACS_Timer() / 30.0k) + 1.0k) / 2.0k);
          }
       }
       if(CheckFade(fid_shielddone)) {
@@ -413,7 +413,7 @@ static void HUD_BottomLeft(void) {
       }
       BeginPrintStrL(u8"\uE103\uE108");
       PrintText(sf_lmidfont, pl.hudcolor, pl.hudlpos+8,4, 229,0, _u_no_unicode);
-      for(i32 i = 0, x_ = (8 + pl.ticks) % 41; i < 20; i++) {
+      for(i32 i = 0, x_ = (8 + ACS_Timer()) % 41; i < 20; i++) {
          i32 xx = x_ - i;
          if(xx < 0) xx += 41;
          PrintSprite(wgfx, pl.hudlpos+20+xx,1, 220,1, _u_alpha, (20 - i) / 20.0);
@@ -425,7 +425,7 @@ static void HUD_BottomLeft(void) {
       break;
    case _hud_old:
       PrintSprite(InvNum(so_PowerStrength) ? sp_HUD_H_B4 : sp_HUD_H_B1, pl.hudlpos,1, 240,2);
-      for(i32 i = 0, x_ = (8 + pl.ticks) % 77; i < 20; i++) {
+      for(i32 i = 0, x_ = (8 + ACS_Timer()) % 77; i < 20; i++) {
          i32 xx = x_ - i;
          if(xx < 0) xx += 77;
          i32 y_ = 9;

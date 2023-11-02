@@ -252,7 +252,6 @@ struct player {
    bool reinit;
    i32  tid;
    i32  num;
-   i32  ticks;
    str  name;
    i32  pclass;
    char discrim[5];

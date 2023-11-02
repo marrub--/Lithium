@@ -22,9 +22,9 @@ void Upgr_UNCEUNCE_Deactivate(void) {
 }
 
 void Upgr_UNCEUNCE_Update(void) {
-   k32 reeeed = ACS_Sin(pl.ticks / 35.0) + 1.0 / 2.0;
-   k32 greeen = ACS_Cos(pl.ticks / 24.0) + 1.0 / 2.0;
-   k32 bluuue = ACS_Sin(pl.ticks / 13.0) + 1.0 / 2.0;
+   k32 reeeed = ACS_Sin(ACS_Timer() / 35.0) + 1.0 / 2.0;
+   k32 greeen = ACS_Cos(ACS_Timer() / 24.0) + 1.0 / 2.0;
+   k32 bluuue = ACS_Sin(ACS_Timer() / 13.0) + 1.0 / 2.0;
 
    ACS_FadeTo(reeeed * 255, greeen * 255, bluuue * 255, 0.6, 0.029);
    pl.extrpitch += bluuue * 0.015;
