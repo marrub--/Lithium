@@ -371,7 +371,9 @@ stkoff void printi96(i96 num) {
 }
 
 stkoff void printk64(k64 num) {
-   ACS_PrintFixed((k32)num);
+   _p((i32)num);
+   _c('.');
+   _p((k64fract(num) * 10000 + 0x7FFFFFFF) / 0xFFFFFFFF);
 }
 
 stkoff cstr alientext(i32 num) {
