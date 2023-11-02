@@ -108,7 +108,6 @@ end
       SrcsEnt.from("p_pickups.c"),
       SrcsEnt.from("p_player.c"),
       SrcsEnt.from("p_powerup.c"),
-      SrcsEnt.from("p_ren_debug.c"),
       SrcsEnt.from("p_ren_scope.c"),
       SrcsEnt.from("p_ren_step.c"),
       SrcsEnt.from("p_ren_view.c"),
