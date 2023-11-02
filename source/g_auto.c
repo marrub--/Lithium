@@ -49,9 +49,9 @@ void G_Auto(struct gui_state *g, gid_t id, i32 x_, i32 y_, i32 w_, i32 h_, bool 
    if(g->clip >= 0) {
       G_cutBox(&g->clips[g->clip], &r);
    }
-   if(aabb_point(r.x, r.y, r.w - 1, r.h - 1, g->cx, g->cy)) {
+   if(!g->hot && aabb_point(r.x, r.y, r.w - 1, r.h - 1, g->cx, g->cy)) {
       g->hot = id;
-      if(g->active == 0 && g->clicklft) {
+      if(!g->active && g->clicklft) {
          g->active = id;
       }
    }
