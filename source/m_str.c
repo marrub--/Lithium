@@ -417,39 +417,61 @@ stkoff cstr RemoveTextColors(cstr s, i32 size) {
 }
 
 stkoff void printfmt(cstr s, mem_size_t n, struct fmt_arg const *args) {
+   i32 which = 0;
    for(char c; (c = *s++);) {
-      if(c == '{' && n) {
+      if(c == '{' && which < n) {
+         struct fmt_arg const *arg;
+         if(IsDigit(*s)) {
+            i32 explicit = *s - '0';
+            if(explicit < n) {
+               arg = &args[explicit];
+               ++s;
+            } else {
+               continue;
+            }
+         } else {
+            arg = &args[which++];
+         }
          if(*s == '{') {
             ACS_PrintChar('{');
             ++s;
          } else if(*s == '}') {
             ++s;
-            switch(args->tag) {
+            switch(arg->tag) {
             case _fmt_cstr:
-               if(!args->precision) _p(args->val.cs);
-               else                 PrintStrN(args->val.cs, args->precision);
+               if(!arg->precision) _p(arg->val.cs);
+               else                PrintStrN(arg->val.cs, arg->precision);
                break;
-            case _fmt_i32: _p(args->val.i); break;
+            case _fmt_i32:
+               if(arg->precision) {
+                  register i32 digits = arg->val.i ? 0 : 1;
+                  for(register i32 num = arg->val.i;
+                      num && digits != arg->precision; num /= 10) {
+                     ++digits;
+                  }
+                  for(; digits < arg->precision; ++digits) {
+                     _c('0');
+                  }
+               }
+               _p(arg->val.i);
+               break;
             case _fmt_k32:
-               if(!args->precision) {
-                  _p(args->val.k);
+               if(!arg->precision) {
+                  _p(arg->val.k);
                } else {
                   register i32 scale;
-                  switch(args->precision) {
-                  case 1: scale = 10;                break;
-                  case 2: scale = 10 * 10;           break;
-                  case 3: scale = 10 * 10 * 10;      break;
-                  case 4: scale = 10 * 10 * 10 * 10; break;
+                  scale = 1;
+                  for(register i32 prec = arg->precision; prec; --prec) {
+                     scale *= 10;
                   }
-                  _p((args->val.i & 0xFFFF0000) >> 16);
+                  _p((i32)arg->val.k);
                   _c('.');
-                  _p(((args->val.i & 0xFFFF) * scale + 0x7FFF) / 0xFFFF);
+                  _p((k32fract(arg->val.k) * scale + 0x7FFF) / 0xFFFF);
                }
                break;
-            case _fmt_key: ACS_PrintBind(args->val.s); break;
-            case _fmt_str: _p(args->val.s);            break;
+            case _fmt_key: ACS_PrintBind(arg->val.s); break;
+            case _fmt_str: _p(arg->val.s);            break;
             }
-            --n; ++args;
             continue;
          }
       }
