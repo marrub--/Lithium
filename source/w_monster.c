@@ -251,7 +251,7 @@ _Noreturn alloc_aut(0) script static void MonsterMain(dmon_t *m) {
       }
       if(m->exp > _monster_level_exp) {
          i32 prev = m->level;
-         div_t d = __div(m->exp, _monster_level_exp);
+         i32div d = __div(m->exp, _monster_level_exp);
          m->level += d.quot;
          m->exp    = d.rem;
          ACS_SpawnForced(so_MonsterLevelUp, m->x, m->y, m->z);

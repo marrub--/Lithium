@@ -20,6 +20,7 @@
 #include <stddef.h>
 #include <stdfix.h>
 #include <stdint.h>
+#include <stdlib.h>
 
 #define countof(a) (sizeof(a) / sizeof(*(a)))
 #define swap(t, a, b) statement({ t _tmp = a; a = b; b = _tmp; })
@@ -60,7 +61,6 @@ typedef uint96_t u96;
 #define lerpscr         lerpli
 #define lerpscr_init    lerpli_init
 #define interp_data_scr interp_data_li
-#define scorediv_t      ldiv_t
 #define minscr          minli
 #define maxscr          maxli
 #define clampscr        clampli
@@ -82,6 +82,11 @@ typedef long _Accum k64;
 
 typedef float  f32;
 typedef double f64;
+
+typedef div_t   i32div;
+typedef ldiv_t  i64div;
+typedef lldiv_t i96div;
+typedef ldiv_t  scorediv;
 
 struct polar {k32 ang, dst;};
 struct i32v2 {i32 x, y;};

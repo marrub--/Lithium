@@ -54,7 +54,7 @@ void num_out(i32 n) {
    char buf[64], *p;
    p = buf + sizeof(buf) - 1;
    while(n) {
-      register div_t div = __div(n, 93);
+      register i32div div = __div(n, 93);
       *--p = div.rem + '!';
       n = div.quot;
    }
