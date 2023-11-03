@@ -14,7 +14,7 @@ server noarchive int __lith_debug_level = 0;
 server noarchive int __lith_debug_flags = 0;
 
 server int   lith_sv_difficulty    = 10;
-server int   lith_sv_timescale     = 4;
+server int   lith_sv_timescale     = 1;
 server bool  lith_sv_extrahard     = false;
 server int   lith_sv_rain          = 1;
 server int   lith_sv_rainphysics   = 0;
