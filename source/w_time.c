@@ -17,6 +17,8 @@
 static i32 lmvar frozen;
 
 void rtime(time_t time, struct realtime *rt) {
+   #define BEGINNING_OF_UNIVERSE 13800000000 /* approx. 13.8bya */
+   #define CALAMITY_EPOCH        (BEGINNING_OF_UNIVERSE + 3031)
    if(!rt) {
       return;
    }
@@ -27,8 +29,16 @@ void rtime(time_t time, struct realtime *rt) {
    tdiv = __div(tdiv.quot,     30); rt->d = tdiv.rem; rt->M = tdiv.quot;
    tdiv = __div(tdiv.quot,     12); rt->M = tdiv.rem; rt->Y = tdiv.quot;
    rt->D = rt->d % _weekday_max;
-   rt->E = _era_ne;
-   /* FIXME: change epoch to 13,800,000,000 BCE */
+   if(rt->Y < BEGINNING_OF_UNIVERSE) {
+      rt->Y = BEGINNING_OF_UNIVERSE - rt->Y;
+      rt->E = _era_bce;
+   } else if(rt->Y < CALAMITY_EPOCH) {
+      rt->Y = rt->Y - BEGINNING_OF_UNIVERSE;
+      rt->E = _era_ce;
+   } else {
+      rt->Y = rt->Y - CALAMITY_EPOCH;
+      rt->E = _era_ne;
+   }
 }
 
 script cstr CanonTime(i32 type, time_t time) {
@@ -60,7 +70,6 @@ script cstr CanonTime(i32 type, time_t time) {
    case _weekday_saturday:   args[7].val.s = sl_time_week_day_sat; break;
    case _weekday_sunday:     args[7].val.s = sl_time_week_day_sun; break;
    }
-   ACS_BeginPrint();
    str fmt;
    switch(type) {
    case ct_full:  fmt = sl_time_fmt_long;  break;
@@ -68,6 +77,7 @@ script cstr CanonTime(i32 type, time_t time) {
    case ct_date:  fmt = sl_time_fmt_date;  break;
    default: return nil;
    }
+   ACS_BeginPrint();
    printfmt(tmpstr(fmt), countof(args), args);
    return tmpstr(ACS_EndStrParam());
 }
