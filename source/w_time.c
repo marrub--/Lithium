@@ -97,17 +97,17 @@ stkoff void UnfreezeTime(bool players_ok) {
 
 void W_TickTime(void) {
    if(!Paused) {
-      static time_t tick_sec;
+      static i64 tick_sec;
       #ifndef NDEBUG
       if(dbgflags(dbgf_xtime)) {
-         tick_sec += (time_t)cv.sv_timescale * fastabs(cv.sv_timescale);
+         tick_sec += (i64)cv.sv_timescale * fastabsl(cv.sv_timescale);
       } else {
       #endif
          tick_sec += cv.sv_timescale;
       #ifndef NDEBUG
       }
       #endif
-      timediv d = __div(tick_sec, 35);
+      i64div d = __div(tick_sec, 35);
       wl.realtime += d.quot;
       tick_sec = d.rem;
    }
