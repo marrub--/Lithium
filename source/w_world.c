@@ -70,7 +70,7 @@ script static void GInit(void) {
    UpdateGame();
    wl.scorethreshold = _scorethreshold_default;
    wl.cbiperf = 10;
-   wl.realtime = 429235345584484253; /* 14:30:53 26-7-1649 */
+   wl.realtime = 429235345615588253; /* 14:30:53 26-7-1649 */
    Mon_Init();
    wl.init = true;
 }

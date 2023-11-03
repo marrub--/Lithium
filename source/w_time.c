@@ -18,7 +18,7 @@ static i32 lmvar frozen;
 
 void rtime(time_t time, struct realtime *rt) {
    #define BEGINNING_OF_UNIVERSE 13800000000 /* approx. 13.8bya */
-   #define CALAMITY_EPOCH        (BEGINNING_OF_UNIVERSE + 3031)
+   #define CALAMITY_EPOCH        (BEGINNING_OF_UNIVERSE + 3032)
    if(!rt) {
       return;
    }
