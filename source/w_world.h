@@ -29,6 +29,7 @@ w_mapkey_x(script)
 w_mapkey_x(seed)
 w_mapkey_x(sky)
 w_mapkey_x(temperature)
+w_mapkey_x(timescale)
 w_mapkey_x(windspeed)
 #undef w_mapkey_x
 #elif defined(w_maprain_x)
@@ -398,6 +399,7 @@ struct map_locals {
    i32 previtems;
    i32 missionkill;
    i32 missionprc;
+   i64 timescale;
    struct map_info *mi;
 };
 

@@ -34,11 +34,12 @@ temperature: 30
 windspeed:   1
 sky:         "none";
 
-name:   "LITHSKY"
-seed:   7
-flags:  "nophantom"
-sky:    "tintonly"
-script: "lmisc/Sky.mmmm";
+name:      "LITHSKY"
+seed:      7
+flags:     "nophantom"
+timescale: 1
+sky:       "tintonly"
+script:    "lmisc/Sky.mmmm";
 
 name:        "LITHABYS"
 seed:        0
@@ -47,6 +48,7 @@ environment: "abyss"
 humidity:    0
 temperature: -270
 windspeed:   0
+timescale:   0
 sky:         "none"
 script:      "lmisc/Abyss.mmmm";
 
@@ -57,6 +59,7 @@ environment: "none"
 humidity:    0
 temperature: 20
 windspeed:   0
+timescale:   0
 sky:         "nochange"
 script:      "lmisc/Endings.mmmm";
 
