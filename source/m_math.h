@@ -93,6 +93,8 @@ optargs(1) u64 crc64_str(void __str_ars const *data, mem_size_t len, u64 result)
 stkcall i32 rainbowcr(void);
 stkcall i32 const_deg(i32 n);
 stkcall i32 fastabs(i32 n);
+stkcall i64 fastabsl(i64 n);
+stkcall i96 fastabsll(i96 n);
 stkcall k32 fastabsk(k32 n);
 stkcall k32 fastfrack(k32 k);
 stkcall k64 fastfraclk(k64 k);

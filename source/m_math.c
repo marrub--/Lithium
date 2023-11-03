@@ -162,6 +162,14 @@ stkoff i32 fastabs(i32 n) {
    #define abs_impl
    #include "m_math.c"
 }
+stkoff i64 fastabsl(i64 n) {
+   #define abs_impl
+   #include "m_math.c"
+}
+stkoff i96 fastabsll(i96 n) {
+   #define abs_impl
+   #include "m_math.c"
+}
 stkoff k32 fastabsk(k32 n) {
    #define abs_impl
    #include "m_math.c"
