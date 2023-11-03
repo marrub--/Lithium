@@ -357,6 +357,30 @@ struct world {
    i32          a_cur;
 };
 
+enum era {
+   _era_bce,
+   _era_ce,
+   _era_ne,
+};
+
+enum weekday {
+   _weekday_monday,
+   _weekday_tuesday,
+   _weekday_wednesday,
+   _weekday_thursday,
+   _weekday_friday,
+   _weekday_saturday,
+   _weekday_sunday,
+   _weekday_max,
+};
+
+struct realtime {
+   i32 s, m, h, d, M;
+   time_t Y;
+   enum era E;
+   enum weekday D;
+};
+
 struct map_locals {
    i32 mission;
    i32 temperature;
@@ -382,6 +406,7 @@ extern struct map_locals lmvar ml;
 extern struct map_locals       oldml;
 
 void Scr_MInit(void);
+void rtime(time_t time, struct realtime *rt);
 script cstr CanonTime(i32 type, time_t time);
 optargs(1) i32 UniqueID(i32 tid);
 void BeginAngles(i32 x, i32 y);

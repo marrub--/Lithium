@@ -16,54 +16,42 @@
 
 static i32 lmvar frozen;
 
-enum era {
-   _era_bc,
-   _era_ce,
-   _era_ne,
-};
-
-enum weekday {
-   _weekday_monday,
-   _weekday_tuesday,
-   _weekday_wednesday,
-   _weekday_thursday,
-   _weekday_friday,
-   _weekday_saturday,
-   _weekday_sunday,
-   _weekday_max,
-};
-
-struct realtime {
-   i32 s, m, h, d, M;
-   time_t Y;
-   enum era E;
-   enum weekday D;
-};
+void rtime(time_t time, struct realtime *rt) {
+   if(!rt) {
+      return;
+   }
+   timediv tdiv = __div(time, 60 * 60 * 24);
+   i32div idiv;
+   idiv = __div((i32)tdiv.rem, 60); rt->s = idiv.rem; rt->m = idiv.quot;
+   idiv = __div(idiv.quot,     60); rt->m = idiv.rem; rt->h = idiv.quot;
+   tdiv = __div(tdiv.quot,     30); rt->d = tdiv.rem; rt->M = tdiv.quot;
+   tdiv = __div(tdiv.quot,     12); rt->M = tdiv.rem; rt->Y = tdiv.quot;
+   rt->D = rt->d % _weekday_max;
+   rt->E = _era_ne;
+   /* FIXME: change epoch to 13,800,000,000 BCE */
+}
 
 script cstr CanonTime(i32 type, time_t time) {
    static struct fmt_arg args[] = {
       {_fmt_i32, .precision = 2},
       {_fmt_i32, .precision = 2},
       {_fmt_i32, .precision = 2},
-      {_fmt_i32}, {_fmt_i32}, {_fmt_i32},
+      {_fmt_i32}, {_fmt_i32}, {_fmt_time},
       {_fmt_str}, {_fmt_str},
    };
-   register timediv div;
-   /* FIXME: make this use struct realtime */
-   time_t s = time;     div = __div(s, 60); s = div.rem;
-   time_t m = div.quot; div = __div(m, 60); m = div.rem;
-   time_t h = div.quot; div = __div(h, 24); h = div.rem;
-   time_t d = div.quot; div = __div(d, 30); d = div.rem;
-   time_t M = div.quot; div = __div(M, 12); M = div.rem;
-   time_t Y = div.quot;
-   args[0].val.i = fastabs(h);
-   args[1].val.i = fastabs(m);
-   args[2].val.i = fastabs(s);
-   args[3].val.i = fastabs(d);
-   args[4].val.i = fastabs(M);
-   args[5].val.i = Y;
-   args[6].val.s = sl_time_era_ne;
-   switch(fastabs(_weekday_friday + d) % _weekday_max) {
+   struct realtime rt; rtime(time, &rt);
+   args[0].val.i = rt.h;
+   args[1].val.i = rt.m;
+   args[2].val.i = rt.s;
+   args[3].val.i = rt.d + 1;
+   args[4].val.i = rt.M + 1;
+   args[5].val.fmt_time_val = rt.Y;
+   switch(rt.E) {
+   case _era_bce: args[6].val.s = sl_time_era_bce; break;
+   case _era_ce:  args[6].val.s = sl_time_era_ce;  break;
+   case _era_ne:  args[6].val.s = sl_time_era_ne;  break;
+   }
+   switch(rt.D) {
    case _weekday_monday:     args[7].val.s = sl_time_week_day_mon; break;
    case _weekday_tuesday:    args[7].val.s = sl_time_week_day_tue; break;
    case _weekday_wednesday:  args[7].val.s = sl_time_week_day_wed; break;
