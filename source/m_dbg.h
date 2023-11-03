@@ -50,6 +50,7 @@ enum {
    dbgf_items,
    dbgf_score,
    dbgf_upgr,
+   dbgf_xtime,
 };
 #endif
 
