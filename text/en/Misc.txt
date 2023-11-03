@@ -60,7 +60,7 @@ dimension of hate--built of demons.
 == \#TIME_FMT_SHORT | {}:{} {}.{}.{}
 == \#TIME_FMT_DATE  | {}.{}.{}
 
-== \#TIME_ERA_BC | BC
+== \#TIME_ERA_BCE | BCE
 == \#TIME_ERA_CE | CE
 == \#TIME_ERA_NE | NE
 

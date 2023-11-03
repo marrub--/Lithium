@@ -6412,8 +6412,8 @@
    "{}:{} {}.{}.{}";
 "LITH_TIME_FMT_DATE" =
    "{}.{}.{}";
-"LITH_TIME_ERA_BC" =
-   "BC";
+"LITH_TIME_ERA_BCE" =
+   "BCE";
 "LITH_TIME_ERA_CE" =
    "CE";
 "LITH_TIME_ERA_NE" =
