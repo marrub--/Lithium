@@ -203,6 +203,8 @@ enum {
 enum {
    _fmt_cstr,
    _fmt_i32,
+   _fmt_i64,
+   _fmt_u96,
    _fmt_k32,
    _fmt_key,
    _fmt_str,
@@ -211,6 +213,8 @@ enum {
 union fmt_val {
    cstr cs;
    i32 i;
+   i64 li;
+   u96 ulli;
    k32 k;
    str s;
 };
