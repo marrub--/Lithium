@@ -64,16 +64,16 @@ typedef uint96_t u96;
 #define maxscr          maxli
 #define clampscr        clampli
 
-#define faststrtotime faststrtou96
+#define faststrtotime faststrtou64
 
 #define _fmt_scr  _fmt_i64
-#define _fmt_time _fmt_u96
+#define _fmt_time _fmt_u64
 
 #define fmt_scr_val  li
 #define fmt_time_val ulli
 
 typedef i64 score_t;
-typedef u96 time_t;
+typedef u64 time_t;
 
 typedef i32 mem_tag_t;
 typedef i32 mem_size_t;
@@ -98,7 +98,7 @@ typedef unsigned           __div_t u32div;
 typedef unsigned      long __div_t u64div;
 typedef unsigned long long __div_t u96div;
 typedef               long __div_t scorediv;
-typedef unsigned long long __div_t timediv;
+typedef unsigned      long __div_t timediv;
 
 struct polar {k32 ang, dst;};
 struct i32v2 {i32 x, y;};
