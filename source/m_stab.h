@@ -18,6 +18,7 @@ stab_x(st_ob_slime, "(slime)")
 stab_x(st_ob_suicide, "(suicide)")
 stab_x(st_six_tag, "\Cg6")
 stab_x(st_ver, verstr)
+stab_x(st_heaven, "Heaven has come...")
 
 stab_x(sf_areaname, "areaname")
 stab_x(sf_bigupper, "bigupper")

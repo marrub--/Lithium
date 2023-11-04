@@ -113,4 +113,34 @@ void W_TickTime(void) {
    }
 }
 
+script_str ext("ACS") addr("Made in Heaven")
+void Z_Certainty(void) {
+   time_t origin = wl.realtime;
+   time_t lasttime;
+   bool rampdown = false;
+   for(;;) {
+      i64 newscale = ml.timescale + 60 + ml.timescale / 60;
+      if(ml.timescale < 30 * 35 * 3) {
+         ml.timescale += 3;
+      } else if(newscale > ml.timescale) {
+         ml.timescale = minli(newscale, YEARS(BEGINNING_OF_UNIVERSE) * 10);
+      }
+      ACS_Delay(1);
+      if(lasttime > wl.realtime) {
+         FadeFlash(0, 0, 0, 1.0k, 10.0k);
+         ACS_BeginPrint();
+         _p(st_heaven);
+         ACS_EndPrint();
+         wl.realtime = origin - 1000000;
+         ml.timescale = 10000;
+         break;
+      }
+      lasttime = wl.realtime;
+   }
+   for(i32 i = 0; i < 100; ++i) {
+      ml.timescale -= 100;
+      ACS_Delay(1);
+   }
+}
+
 /* EOF */
