@@ -41,7 +41,7 @@ static void ReadKeys(struct tokbuf *tb, struct err *res) {
          mi->keys[key].i = faststrtoi32(v);
          break;
       case _mi_key_timescale:
-         mi->keys[key].i = faststrtoi64(v);
+         mi->keys[key].li = faststrtoi64(v);
          break;
       case _mi_key_environment:
          mi->keys[key].i = MapInfoEnvName(v);

@@ -82,6 +82,7 @@ static void MInitGetStaticInfo(void) {
    ml.seed = mi_opt(ml.mi, _mi_key_seed, _v.i, ACS_Random(0, INT32_MAX));
    srand(ml.seed);
    ml.boss = EDataI(_edt_bosslevel);
+   ml.timescale = mi_opt(ml.mi, _mi_key_timescale, _v.li, 4);
    i32 func = _mfunc_normal;
    if(ACS_GameType() == GAME_TITLE_MAP) {
       func = _mfunc_title;
@@ -108,7 +109,6 @@ static void MInitGetStaticInfo(void) {
    ml.humidity    = mi_opt(ml.mi, _mi_key_humidity,    _v.i, rand() % 101);
    ml.temperature = mi_opt(ml.mi, _mi_key_temperature, _v.i, rand() % 301 - 100);
    ml.windspeed   = mi_opt(ml.mi, _mi_key_windspeed,   _v.i, rand() % 100);
-   ml.timescale   = mi_opt(ml.mi, _mi_key_timescale,   _v.i, 4);
    i32  lrnd      = ml.temperature * 12 / 55;
    i32  hrnd      = fastabs(ml.temperature / 2) * (ml.humidity / 40);
    bool lightning = rand() % 99 < lrnd && !mi_flg(ml.mi, _mi_flag_nolightning);

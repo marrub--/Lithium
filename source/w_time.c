@@ -108,8 +108,8 @@ void W_TickTime(void) {
       #ifndef NDEBUG
       }
       #endif
-      tick_sec += timescale;
-      i64div d = __div(tick_sec, 35);
+      tick_sec    += timescale;
+      i64div d     = __div(tick_sec, 35);
       wl.realtime += d.quot;
       tick_sec     = d.rem;
    }

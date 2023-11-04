@@ -334,8 +334,10 @@ struct payoutinfo {
 };
 
 union map_key {
-   i32 i;
-   str s;
+   i32    i;
+   i64    li;
+   time_t tm;
+   str    s;
 };
 
 struct map_info {
