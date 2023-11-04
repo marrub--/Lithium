@@ -147,6 +147,21 @@ ui void drawAllData(RenderEvent evt) {
                             DTA_DestWidth,d.s, DTA_DestHeight,d.t);
          break;
       case _type_text:
+         if(d.U == 1) {
+            /* outline */
+            for(uint ln = 0; ln < d.tsz; ln++) {
+               for(int j = 0; j < 4; ++j) {
+                  Screen.drawText(d.Fnt, d.C,
+                                  d.X-m_lnx[d.tpt + ln]+(j<2?-1:1),
+                                  d.Y+d.W*ln+(j&1?-1:1),
+                                  m_txt[d.tpt + ln],
+                                  DTA_VirtualWidthF,sc.x,
+                                  DTA_VirtualHeightF,sc.y,
+                                  DTA_LegacyRenderStyle,STYLE_Stencil,
+                                  DTA_Color,0xFF000000);
+               }
+            }
+         }
          for(uint ln = 0; ln < d.tsz; ln++) {
             Screen.drawText(d.Fnt, d.C,
                             d.X-m_lnx[d.tpt + ln], d.Y+d.W*ln,
@@ -367,6 +382,9 @@ static void LT(string txt, string fnt, int xx, int yy, int cr, int flags = 0, fl
    case _yt: d.Y = y;                   break;
    case _yc: d.Y = y - d.W * d.tsz / 2; break;
    case _yb: d.Y = y - d.W * d.tsz;     break;
+   }
+   if(flags & _u_outline) {
+      d.U = 1;
    }
 }
 

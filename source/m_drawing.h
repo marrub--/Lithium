@@ -170,6 +170,7 @@ enum ZscName(DrawFlags) {
    _u_no_unicode = 0x08,
    _u_color      = 0x10,
    _u_clip       = 0x20,
+   _u_outline    = 0x40,
 };
 
 #endif
