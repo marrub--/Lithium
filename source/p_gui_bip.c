@@ -91,13 +91,9 @@ void SetCurPage(struct gui_state *g, struct page *page) {
 
 static
 void DrawPage(struct gui_state *g, struct page *page) {
-   gosub_enable();
-
    str image  = lang(fast_strdup2(LANG "INFO_IMAGE_", page->name));
    i32 height =
       faststrtoi32_str(ns(lang(fast_strdup2(LANG "INFO_SSIZE_", page->name))));
-
-   i32 cr, x, y;
 
    bip.pagebodypos += 14;
    if(bip.pagebodypos > bip.pagebodylen) {
@@ -121,22 +117,15 @@ void DrawPage(struct gui_state *g, struct page *page) {
    BeginPrintStr(GetFullName(page));
    PrintText(sf_lmidfont, CR_ORANGE, g->ox+1,1, g->oy+5,1);
 
-   /* render an outline if the page has an image */
-   if(image) {
-      static
-      i32 xs[8] = { 2,  0,  2,  0,  1,  1,  2,  0},
-          ys[8] = {21, 21, 19, 19, 19, 21, 20, 20};
-
-      cstr txt = RemoveTextColors(bip.pagebody, bip.pagebodypos);
-
-      for(mem_size_t i = 0; i < 8; ++i) {
-         gosub(drawText, BeginPrintStr(txt),
-               cr = CR_BLACK, x = xs[i], y = ys[i]);
+   BeginPrintStrN(bip.pagebody, bip.pagebodypos);
+   if(bip.pagebodypos == bip.pagebodylen) {
+      if(ACS_Timer() % 35 < 17) {
+         _l("\n\Cj|");
       }
+   } else {
+      _l("\Cj|");
    }
-
-   gosub(drawText, BeginPrintStrN(bip.pagebody, bip.pagebodypos),
-         cr = g->defcr, x = 1, y = 20);
+   PrintText(sf_smallfnt, g->defcr, g->ox+1,1, g->oy+20,1, image ? _u_outline : 0);
 
    if(height) {
       G_ScrEnd(g, &pl.cbi.st.bipinfoscr);
@@ -145,18 +134,6 @@ void DrawPage(struct gui_state *g, struct page *page) {
       g->ox -= 97;
       G_ClipRelease(g);
    }
-   return;
-
-drawText:
-   if(bip.pagebodypos == bip.pagebodylen) {
-      if(ACS_Timer() % 35 < 17) {
-         _l("\n\Cj|");
-      }
-   } else {
-      _l("\Cj|");
-   }
-   PrintText(sf_smallfnt, cr, g->ox+x,1, g->oy+y,1);
-   gosub_ret();
 }
 
 static
