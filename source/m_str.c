@@ -474,7 +474,7 @@ stkoff cstr RemoveTextColors(cstr s, i32 size) {
    #include "m_str.c"
 }
 
-#define int_precision_impl(ty, v) \
+#define int_precision(ty, v) \
    if(arg->precision) { \
       register ty digits = arg->val.v ? 0 : 1; \
       for(register ty num = arg->val.v; \
@@ -512,18 +512,12 @@ stkoff void printfmt(cstr s, mem_size_t n, struct fmt_arg const *args) {
                if(!arg->precision) _p(arg->val.cs);
                else                PrintStrN(arg->val.cs, arg->precision);
                break;
-            case _fmt_i32:
-               int_precision_impl(i32, i);
-               _p(arg->val.i);
-               break;
-            case _fmt_i64:
-               int_precision_impl(i64, li);
-               _p(arg->val.li);
-               break;
-            case _fmt_u96:
-               int_precision_impl(u96, ulli);
-               _p(arg->val.ulli);
-               break;
+            case _fmt_i32: int_precision(i32, i);    _p(arg->val.i);    break;
+            case _fmt_u32: int_precision(u32, u);    _p(arg->val.u);    break;
+            case _fmt_i64: int_precision(i64, li);   _p(arg->val.li);   break;
+            case _fmt_u64: int_precision(u64, uli);  _p(arg->val.uli);  break;
+            case _fmt_i96: int_precision(i96, lli);  _p(arg->val.lli);  break;
+            case _fmt_u96: int_precision(u96, ulli); _p(arg->val.ulli); break;
             case _fmt_k32:
                if(!arg->precision) {
                   _p(arg->val.k);
