@@ -43,6 +43,9 @@ static void ReadKeys(struct tokbuf *tb, struct err *res) {
       case _mi_key_timescale:
          mi->keys[key].li = faststrtoi64(v);
          break;
+      case _mi_key_timestamp:
+         mi->keys[key].tm = faststrtotime(v);
+         break;
       case _mi_key_environment:
          mi->keys[key].i = MapInfoEnvName(v);
          break;

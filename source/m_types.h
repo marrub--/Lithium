@@ -64,6 +64,8 @@ typedef uint96_t u96;
 #define maxscr          maxli
 #define clampscr        clampli
 
+#define faststrtotime faststrtou96
+
 #define _fmt_scr  _fmt_i64
 #define _fmt_time _fmt_u96
 

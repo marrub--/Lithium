@@ -83,6 +83,9 @@ static void MInitGetStaticInfo(void) {
    srand(ml.seed);
    ml.boss = EDataI(_edt_bosslevel);
    ml.timescale = mi_opt(ml.mi, _mi_key_timescale, _v.li, 4);
+   if(get_bit(ml.mi->use, _mi_key_timestamp)) {
+      wl.realtime = ml.mi->keys[_mi_key_timestamp].tm;
+   }
    i32 func = _mfunc_normal;
    if(ACS_GameType() == GAME_TITLE_MAP) {
       func = _mfunc_title;

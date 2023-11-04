@@ -30,6 +30,7 @@ w_mapkey_x(seed)
 w_mapkey_x(sky)
 w_mapkey_x(temperature)
 w_mapkey_x(timescale)
+w_mapkey_x(timestamp)
 w_mapkey_x(windspeed)
 #undef w_mapkey_x
 #elif defined(w_maprain_x)

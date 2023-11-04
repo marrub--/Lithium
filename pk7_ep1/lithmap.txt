@@ -12,6 +12,7 @@ environment: "none"
 humidity:    10
 temperature: 20
 windspeed:   2
+timestamp:   429235457525692200
 sky:         "vanilla"
 script:      "lmisc/M1A1.mmmm";
 
