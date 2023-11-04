@@ -77,7 +77,9 @@ script cstr CanonTime(i32 type, time_t time) {
    }
    ACS_BeginPrint();
    printfmt(tmpstr(fmt), countof(args), args);
-   return tmpstr(ACS_EndStrParam());
+   noinit static char buf[256];
+   faststrcpy_str(buf, ACS_EndStrParam());
+   return buf;
 }
 
 stkoff void FreezeTime(bool players_ok) {
