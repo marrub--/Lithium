@@ -10,6 +10,7 @@ class Lith_AbyssTeleporter : Actor {
    default {
       Radius 32;
       Height 32;
+      Tag "$LITH_TAG_AbyssTeleporter";
       +NoTimeFreeze
       +DontThrust
       +UseSpecial

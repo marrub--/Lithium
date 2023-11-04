@@ -7,12 +7,13 @@
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
 ## Tags ══════════════════════════════════════════════════════════════════════╕
-== \#TAG_BlurSphere    | Fragma
-== \#TAG_GreyHam       | Grey Ham
-== \#TAG_Megasphere    | Hailaz
-== \#TAG_SoulSphere    | Heart
-== \#TAG_SteggleSphere | Steggle Sphere
-== \#TAG_ShobonSphere  | Shobon Sphere
+== \#TAG_BlurSphere      | Fragma
+== \#TAG_GreyHam         | Grey Ham
+== \#TAG_Megasphere      | Hailaz
+== \#TAG_SoulSphere      | Heart
+== \#TAG_SteggleSphere   | Steggle Sphere
+== \#TAG_ShobonSphere    | Shobon Sphere
+== \#TAG_AbyssTeleporter | Teleporter
 
 == \#TAG_ManaAmmo   | Mana
 == \#TAG_BulletAmmo | Bullets

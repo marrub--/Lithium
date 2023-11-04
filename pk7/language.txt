@@ -5888,6 +5888,8 @@
    "Steggle Sphere";
 "LITH_TAG_ShobonSphere" =
    "Shobon Sphere";
+"LITH_TAG_AbyssTeleporter" =
+   "Teleporter";
 "LITH_TAG_ManaAmmo" =
    "Mana";
 "LITH_TAG_BulletAmmo" =
