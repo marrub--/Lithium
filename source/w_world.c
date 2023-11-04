@@ -70,7 +70,10 @@ script static void GInit(void) {
    UpdateGame();
    wl.scorethreshold = _scorethreshold_default;
    wl.cbiperf = 10;
-   wl.realtime = 429235345615588253; /* 14:30:53 26-7-1649 */
+   /* This is the beginning. */
+   wl.realtime =
+      YEARS(1649 + CALAMITY_EPOCH) + MONTHS(7) + DAYS(26) +
+      HOURS(14) + MINUTES(30) + 53;
    Mon_Init();
    wl.init = true;
 }

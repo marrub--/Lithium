@@ -57,6 +57,13 @@ w_maprain_x(fire)
 #define mi_setup(mi) union map_key _v;
 #define mi_opt(mi, key, l, r) (get_bit((mi)->use, key) ? (_v = (mi)->keys[key], l) : (r))
 #define mi_flg(mi, flg) (get_bit((mi)->use, _mi_key_flags) && get_bit((mi)->keys[_mi_key_flags].i, flg))
+#define MINS(n)   ((n) * 60)
+#define HOURS(n)  ((n) * MINS(60))
+#define DAYS(n)   ((n) * HOURS(24))
+#define MONTHS(n) ((n) * DAYS(30))
+#define YEARS(n)  ((n) * MONTHS(12))
+#define BEGINNING_OF_UNIVERSE 13800000000 /* approx. 13.8bya */
+#define CALAMITY_EPOCH        (BEGINNING_OF_UNIVERSE + 3032)
 #endif
 
 /* Program Data */

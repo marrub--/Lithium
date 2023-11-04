@@ -17,12 +17,10 @@
 static i32 lmvar frozen;
 
 void rtime(time_t time, struct realtime *rt) {
-   #define BEGINNING_OF_UNIVERSE 13800000000 /* approx. 13.8bya */
-   #define CALAMITY_EPOCH        (BEGINNING_OF_UNIVERSE + 3032)
    if(!rt) {
       return;
    }
-   timediv tdiv = __div(time, 60 * 60 * 24);
+   timediv tdiv = __div(time, DAYS(1));
    i32div idiv;
    idiv = __div((i32)tdiv.rem, 60); rt->s = idiv.rem; rt->m = idiv.quot;
    idiv = __div(idiv.quot,     60); rt->m = idiv.rem; rt->h = idiv.quot;
