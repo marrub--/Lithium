@@ -73,7 +73,7 @@ script static void GInit(void) {
    /* This is the beginning. */
    wl.realtime =
       YEARS(1649 + CALAMITY_EPOCH) + MONTHS(7) + DAYS(26) +
-      HOURS(14) + MINUTES(30) + 53;
+      HOURS(14) + MINS(30) + 53;
    Mon_Init();
    wl.init = true;
 }
