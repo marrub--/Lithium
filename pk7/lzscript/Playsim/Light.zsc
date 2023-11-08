@@ -61,7 +61,7 @@ void updateLightning() {
             (sec.special >= 197 && sec.special <= 199)) {
             int light, orig = sec.lightLevel;
             switch(sec.special) {
-            case 197: light = flash;                 break;
+            default:  light = flash;                 break;
             case 198: light = min(orig + 64, flash); break;
             case 199: light = min(orig + 32, flash); break;
             }
