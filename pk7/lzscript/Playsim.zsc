@@ -470,4 +470,8 @@ static clearScope void print(int level, string s) {
    Console.printfEx(level, s);
 }
 
+static double getAirControl() {
+   return level.airControl;
+}
+
 /* EOF */

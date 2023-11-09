@@ -47,13 +47,14 @@ w_maprain_x(fire)
 #if !ZscOn
 #include <stdbool.h>
 
-#define DefaultAirControl() ACS_SetAirControl(0.77k)
 #define MapNum  ACS_GetLevelInfo(LEVELINFO_LEVELNUM)
 #define Cluster ACS_GetLevelInfo(LEVELINFO_CLUSTERNUM)
 #define GetFun()  CVarGetI(sc_fun)
 #define SetFun(x) CVarSetI(sc_fun, x)
 #define EDataI(...) ServCallI(sm_EDataI, __VA_ARGS__)
 #define EDataS(...) ServCallS(sm_EDataS, __VA_ARGS__)
+#define SetAirControl(amount) ACS_SetAirControl(ServCallK(sm_GetAirControl) + amount)
+#define ResetAirControl() ACS_SetAirControl(0)
 #define mi_setup(mi) union map_key _v;
 #define mi_opt(mi, key, l, r) (get_bit((mi)->use, key) ? (_v = (mi)->keys[key], l) : (r))
 #define mi_flg(mi, flg) (get_bit((mi)->use, _mi_key_flags) && get_bit((mi)->keys[_mi_key_flags].i, flg))

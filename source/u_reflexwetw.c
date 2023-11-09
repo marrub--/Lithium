@@ -14,6 +14,7 @@
 
 #define udata pl.upgrdata.reflexwetw
 #define CHARGE_MAX (35 * 0.8)
+#define AIR_CONTROL 0.077k
 
 alloc_aut(0) script_str ext("ACS") addr(OBJ "DodgeView")
 void Z_DodgeView(void) {
@@ -29,6 +30,11 @@ void Z_DodgeView(void) {
 void Upgr_ReflexWetw_Activate(void) {
    udata.charge = CHARGE_MAX;
    udata.leaped = 0;
+   SetAirControl(AIR_CONTROL);
+}
+
+void Upgr_ReflexWetw_Deactivate(void) {
+   SetAirControl(-AIR_CONTROL);
 }
 
 void Upgr_ReflexWetw_Update(void) {

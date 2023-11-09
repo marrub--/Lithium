@@ -158,8 +158,8 @@ script static void MInit(void) {
    Dbg_Log(log_dev, _l(_f));
    ml.lump = strp(ACS_PrintName(PRINTNAME_LEVEL));
    ml.name = strp(ACS_PrintName(PRINTNAME_LEVELNAME));
-   DefaultAirControl();
    ml.soulsfreed = 0;
+   ResetAirControl();
    MInitGetStaticInfo();
    ServCallV(sm_UpdateSky);
    Dlg_MInit();

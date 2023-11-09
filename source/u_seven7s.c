@@ -15,13 +15,11 @@
 #define udata pl.upgrdata.seven7s
 
 void Upgr_Seven7s_Activate(void) {
-   SetGravity(0, 0.0);
-   ACS_SetAirControl(0.0);
+   SetGravity(0, 0.01);
 }
 
 void Upgr_Seven7s_Deactivate(void) {
    SetGravity(0, 1.0);
-   DefaultAirControl();
 }
 
 void Upgr_Seven7s_Update(void) {

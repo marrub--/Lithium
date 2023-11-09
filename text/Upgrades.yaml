@@ -17,7 +17,7 @@ _uc_body:
       VitalScan:   {f: --UR-, pr: 2, pg: VitalScanner}
    gO:
       Flashlight: {f: A-U--}
-      ReflexWetw: {f: A-U--,    pr: 5, mul: -5}
+      ReflexWetw: {f: ADU--,    pr: 5, mul: -5}
       AutoReload: {scr: 950050, pr: 2}
    gI:
       Lightspark: {f: A-U--}
