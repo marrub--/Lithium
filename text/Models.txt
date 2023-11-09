@@ -1,24 +1,15 @@
-## ╭-*-Prog-*-────────────────────────────────────────────────────────────────╮
-## │                                                                          │
-## │             Distributed under the CC0 public domain license.             │
-## │   By Zoe Elsie Watson. Attribution is encouraged, though not required.   │
-## │                See licenses/cc0.txt for more information.                │
-## │                                                                          │
-## ╰──────────────────────────────────────────────────────────────────────────╯
+##-*-Prog-*-
 
 All {
    Path "lmisc/models";
-
-   DontCullBackFaces;
-   UseActorRoll;
 }
 
 Tracer {
+   DontCullBackFaces;
+   UseActorRoll;
    PitchFromMomentum;
-
    Model 0 "square.obj";
    Skin  0 "tracer.png";
-
    FrameIndex "____" "A" 0 0;
 }
 
@@ -33,5 +24,3 @@ TracerSizeBig {
 \#BulletTracer     : All TracerSizeNrm Tracer {}
 \#BulletTracerSlow : All TracerSizeNrm Tracer {}
 \#BulletTracerBig  : All TracerSizeBig Tracer {}
-
-## EOF

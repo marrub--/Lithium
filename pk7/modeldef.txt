@@ -10,9 +10,9 @@
 // ╰──────────────────────────────────────────────────────────────────────────╯
 model "Lith_BulletTracer" {
    Path "lmisc/models"
+   Scale 16.0 1.0 32.0
    DontCullBackFaces 
    UseActorRoll 
-   Scale 16.0 1.0 32.0
    PitchFromMomentum 
    Model 0 "square.obj"
    Skin 0 "tracer.png"
@@ -20,9 +20,9 @@ model "Lith_BulletTracer" {
 }
 model "Lith_BulletTracerSlow" {
    Path "lmisc/models"
+   Scale 16.0 1.0 32.0
    DontCullBackFaces 
    UseActorRoll 
-   Scale 16.0 1.0 32.0
    PitchFromMomentum 
    Model 0 "square.obj"
    Skin 0 "tracer.png"
@@ -30,9 +30,9 @@ model "Lith_BulletTracerSlow" {
 }
 model "Lith_BulletTracerBig" {
    Path "lmisc/models"
+   Scale 24.0 1.0 40.0
    DontCullBackFaces 
    UseActorRoll 
-   Scale 24.0 1.0 40.0
    PitchFromMomentum 
    Model 0 "square.obj"
    Skin 0 "tracer.png"
