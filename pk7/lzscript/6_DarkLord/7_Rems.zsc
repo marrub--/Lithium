@@ -239,6 +239,7 @@ default {
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/rems/draw";
    Lith_Weapon.AmmoType "Lith_CannonAmmo";
+   Lith_Weapon.AdsZoom 0.1;
    Inventory.AltHudIcon ",D7IA0";
    +Weapon.NoAutoFire
 }
@@ -268,7 +269,7 @@ action(weapon) state lith_a_fireRems() {
       a_fireProjectile("Lith_RemsBullet", angle: fRandom(-20, 20), spawnofs_xy: fRandom(2, 8), spawnheight: fRandom(8, 10), flags: FPF_NOAUTOAIM, pitch: fRandom(-4, 4));
    }
    Lith_URANUS.instance().particleRemsSpark(player.mo);
-   A_Recoil(0.4);
+   if(!invoker.m_ads) A_Recoil(0.4);
    lith_gunFlash();
    soundAlert(invoker.owner);
    A_Quake(2, 15, 0, 128);
@@ -279,7 +280,7 @@ action(weapon) void lith_a_fireRemsShield() {
    let mo = spawn("Lith_RemsShieldScreen", self.pos);
    mo.angle = self.angle;
    mo.target = self;
-   A_Recoil(2);
+   if(!invoker.m_ads) A_Recoil(2);
    lith_gunFlash();
    soundAlert(invoker.owner);
    A_Quake(2, 15, 0, 128);
@@ -293,10 +294,21 @@ action(weapon) void lith_a_emitSteam() {
       invoker.m_steamy--;
    }
 }
+override double getSpeedFactor() {
+   return super.getSpeedFactor() * (m_ads ? 1/3.0 : 1);
+}
 states(Weapon) {
 Ready:
    ,D7G A 0 lith_a_emitSteam;
+   ,D7G A 0 a_jumpIf(!Lith_UTIL.pData(_pdt_upgrade, UPGR_Rems_A), "Ready1");
+   ,D7G B 1 lith_a_ready(WRF_ALLOWUSER1);
+   loop;
+Ready1:
    ,D7G A 1 Lith_A_Ready;
+   goto Ready;
+AltReady:
+   ,D7G G 0 lith_a_emitSteam;
+   ,D7G G 1 Lith_A_Ready(WRF_ALLOWUSER1);
    loop;
 Deselect:
    ,D7G A 1 Lith_A_Lower(_raise_slow);
@@ -305,12 +317,28 @@ Select:
    ,D7G A 0 {invoker.m_steamy = 0;}
    ,D7G A 1 Lith_A_Raise(_raise_slow);
    wait;
+User1:
+   #### # 1;
+   #### # 0 lith_a_adsToggle;
+   goto ReadySelector;
+AdsIn:
+   ,D7G BC 2;
+   ,D7G DE 1;
+   ,D7G FG 3;
+   goto ReadySelector;
+AdsOut:
+   ,D7G GF 3;
+   ,D7G ED 1;
+   ,D7G CB 2;
+   goto ReadySelector;
 RemsParticle:
    BLLT Y -1 bright;
    stop;
 Fire:
    #### # 0 {
-      if(!Lith_UTIL.pData(_pdt_upgrade, UPGR_Rems_B)) {
+      if(Lith_UTIL.pData(_pdt_upgrade, UPGR_Rems_A) && !invoker.m_ads) {
+         return resolveState("ReadySelector");
+      } else if(!Lith_UTIL.pData(_pdt_upgrade, UPGR_Rems_B)) {
          return lith_jumpNoAmmo(4);
       } else {
          return resolveState(2);
@@ -325,6 +353,7 @@ Fire:
       invoker.m_fireLoop = 0;
       invoker.m_steamy = 175;
    }
+   ,D7G # 0 a_jumpIf(invoker.m_ads, 10);
    ,D7G ################################################################# 1 {
       a_overlayOffset(_psp_weapon, fRandom(-0.4, 0.6), fRandom(-0.4, 0.6), WOF_INTERPOLATE|WOF_ADD);
       a_overlay(_psp_d_rems_particle_first + invoker.m_particleLoop, "RemsParticle");
@@ -335,69 +364,79 @@ Fire:
       a_overlayOffset(_psp_d_rems_particle_first + invoker.m_particleLoop, fRandom(0, 320), fRandom(120, 240));
       ++invoker.m_particleLoop;
    }
-   #### # 0 a_jumpIf(Lith_UTIL.pData(_pdt_upgrade, UPGR_Rems_B), "FireScreen");
+   ,D7G # 0 a_jumpIf(Lith_UTIL.pData(_pdt_upgrade, UPGR_Rems_B), "FireScreen");
    ,D7G # 0 a_startSound("weapons/rems/fire", lch_weapon);
+   ,D7F A 0 {if(invoker.m_ads) player.getPSprite(_psp_weapon).frame += 3;}
 FireLoop:
-   ,D7F AB 1 bright lith_a_fireRems;
+   ,D7F # 1 bright lith_a_fireRems;
+   ,D7F # 0 {++player.getPSprite(_psp_weapon).frame;}
+   ,D7F # 1 bright lith_a_fireRems;
+   ,D7F # 0 {--player.getPSprite(_psp_weapon).frame;}
    loop;
 FireScreen:
-   #### # 0 lith_jumpNoAmmo(1);
-   ,D7G A 1 {
+   ,D7G # 0 lith_jumpNoAmmo(1);
+   ,D7G # 1 {
       lith_takeAmmo(1);
       a_startSound("weapons/rems/fireshield", lch_weapon);
       lith_a_setInterpolation(false);
    }
-   ,D7F A 1 bright offset(60, 82) lith_a_fireRemsShield;
-   ,D7F B 1 bright offset(45, 72);
-   ,D7F C 1 bright offset(30, 62);
-   ,D7G A 2 offset(20, 50);
-   ,D7G A 1 offset(18, 49) lith_a_setInterpolation(true);
-   ,D7G A 2 offset(17, 47);
-   ,D7G A 2 offset(15, 44) a_reFire("FireScreen");
-   goto FireDone+1;
+   ,D7F A 0 {if(invoker.m_ads) player.getPSprite(_psp_weapon).frame += 3;}
+   ,D7F # 1 bright offset(60, 82) lith_a_fireRemsShield;
+   ,D7F # 0 {++player.getPSprite(_psp_weapon).frame;}
+   ,D7F # 1 bright offset(45, 72);
+   ,D7F # 0 {++player.getPSprite(_psp_weapon).frame;}
+   ,D7F # 1 bright offset(30, 62);
+   ,D7G A 0 {if(invoker.m_ads) player.getPSprite(_psp_weapon).frame += 6;}
+   ,D7G # 2 offset(20, 50);
+   ,D7G # 1 offset(18, 49) lith_a_setInterpolation(true);
+   ,D7G # 2 offset(17, 47);
+   ,D7G # 2 offset(15, 44) a_reFire("FireScreen");
+   goto FireDone+2;
 FireDone:
-   ,D7F C 1 bright offset(14, 44) a_startSound("weapons/rems/firefinish", lch_weapon2);
-   ,D7G A 1 bright offset(12, 40) lith_a_decreaseParticles;
-   ,D7G A 1 bright offset(8, 38) {
+   ,D7F C 0 {if(invoker.m_ads) player.getPSprite(_psp_weapon).frame += 3;}
+   ,D7F # 1 bright offset(14, 44) a_startSound("weapons/rems/firefinish", lch_weapon2);
+   ,D7G A 0 {if(invoker.m_ads) player.getPSprite(_psp_weapon).frame += 6;}
+   ,D7G # 1 bright offset(12, 40) lith_a_decreaseParticles;
+   ,D7G # 1 bright offset(8, 38) {
       lith_a_decreaseParticles();
       lith_a_setInterpolation(true);
    }
-   ,D7G A 1 offset(4, 39) lith_a_decreaseParticles;
-   ,D7G AA 1 offset(2, 35) lith_a_decreaseParticles;
-   ,D7G A 1 offset(1, 33) {
+   ,D7G # 1 offset(4, 39) lith_a_decreaseParticles;
+   ,D7G ## 1 offset(2, 35) lith_a_decreaseParticles;
+   ,D7G # 1 offset(1, 33) {
       a_clearOverlays(_psp_d_rems_particle_first, _psp_d_rems_particle_last);
       invoker.m_particleLoop = 0;
    }
 FireCock:
-   #### # 2 offset(1, 32) Lith_A_RecoilDn(0.25);
-   #### # 2 offset(3, 32) Lith_A_RecoilDn(0.25);
-   #### # 2 offset(4, 32) Lith_A_RecoilDn(0.25);
-   #### # 2 offset(8, 38) Lith_A_RecoilDn(0.25);
-   #### # 2 offset(12, 45);
-   #### # 2 offset(16, 53);
-   #### # 1 offset(19, 60);
-   #### # 1 offset(21, 64);
-   #### # 1 offset(23, 67);
-   #### # 0 Lith_A_ReloadBobDn(0.5);
-   #### # 1 offset(22, 74) A_StartSound("weapons/sniper/boltback", lch_weapon2);
-   #### # 1 offset(19, 78) Lith_A_ReloadBobDn(0.5);
-   #### # 5 offset(18, 80);
-   #### # 1 offset(17, 74) A_StartSound("weapons/sniper/boltforward", lch_weapon3);
-   #### # 1 offset(19, 67) lith_a_emitSteam;
-   #### # 1 offset(20, 66) lith_a_emitSteam;
-   #### # 1 offset(21, 62) lith_a_emitSteam;
-   #### # 1 offset(21, 63) lith_a_emitSteam;
-   #### # 1 offset(23, 66) lith_a_emitSteam;
-   #### ## 1 offset(24, 68) lith_a_emitSteam;
-   #### ## 1 offset(25, 63) lith_a_emitSteam;
-   #### ## 1 offset(24, 59) lith_a_emitSteam;
-   #### ## 1 offset(20, 54) lith_a_emitSteam;
-   #### ## 1 offset(16, 49) lith_a_emitSteam;
-   #### ## 1 offset(12, 44) lith_a_emitSteam;
-   #### ## 1 offset(8, 40) lith_a_emitSteam;
-   #### ## 1 offset(2, 35) lith_a_emitSteam;
-   #### # 0 lith_a_setInterpolation(false);
-   #### ### 1 offset(0, 32) lith_a_emitSteam;
+   ,D7G # 2 offset(1, 32) Lith_A_RecoilDn(0.25);
+   ,D7G # 2 offset(3, 32) Lith_A_RecoilDn(0.25);
+   ,D7G # 2 offset(4, 32) Lith_A_RecoilDn(0.25);
+   ,D7G # 2 offset(8, 38) Lith_A_RecoilDn(0.25);
+   ,D7G # 2 offset(12, 45);
+   ,D7G # 2 offset(16, 53);
+   ,D7G # 1 offset(19, 60);
+   ,D7G # 1 offset(21, 64);
+   ,D7G # 1 offset(23, 67);
+   ,D7G # 0 Lith_A_ReloadBobDn(0.5);
+   ,D7G # 1 offset(22, 74) A_StartSound("weapons/sniper/boltback", lch_weapon2);
+   ,D7G # 1 offset(19, 78) Lith_A_ReloadBobDn(0.5);
+   ,D7G # 5 offset(18, 80);
+   ,D7G # 1 offset(17, 74) A_StartSound("weapons/sniper/boltforward", lch_weapon3);
+   ,D7G # 1 offset(19, 67) lith_a_emitSteam;
+   ,D7G # 1 offset(20, 66) lith_a_emitSteam;
+   ,D7G # 1 offset(21, 62) lith_a_emitSteam;
+   ,D7G # 1 offset(21, 63) lith_a_emitSteam;
+   ,D7G # 1 offset(23, 66) lith_a_emitSteam;
+   ,D7G ## 1 offset(24, 68) lith_a_emitSteam;
+   ,D7G ## 1 offset(25, 63) lith_a_emitSteam;
+   ,D7G ## 1 offset(24, 59) lith_a_emitSteam;
+   ,D7G ## 1 offset(20, 54) lith_a_emitSteam;
+   ,D7G ## 1 offset(16, 49) lith_a_emitSteam;
+   ,D7G ## 1 offset(12, 44) lith_a_emitSteam;
+   ,D7G ## 1 offset(8, 40) lith_a_emitSteam;
+   ,D7G ## 1 offset(2, 35) lith_a_emitSteam;
+   ,D7G # 0 lith_a_setInterpolation(false);
+   ,D7G ### 1 offset(0, 32) lith_a_emitSteam;
    goto ReadySelector;
 FireEmpty:
    ,D7G # 2 offset(3, 38);
