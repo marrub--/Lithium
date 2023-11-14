@@ -154,9 +154,13 @@ weapons {
       fire       Fire       # Self-made
       charge     Charge     # ^
       fireshield FireShield # EYE: Divine Cybermancy
-      shieldfire ShieldFire # Devil May Cry 4
-      shieldshot ShieldShot # ^
-      shieldhit  ShieldHit  # ^
+
+      shieldfire      ShieldFire       # Devil May Cry 4
+      shieldshot      ShieldShot       # ^
+      shieldhit       ShieldHit        # ^
+      shielddisappate ShieldDisappate  # ^
+      shieldrebuke    ShieldRebuke     # ^
+
       empty      FireEmpty  # SI Series 6000
       draw       Draw       # ^
       wail       Wail       # Half-Life 2

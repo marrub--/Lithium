@@ -89,7 +89,7 @@ _uc_weap:
       FortuneGun_A: {scr: 9999999}
       FortuneGun_B: {scr: 9999999}
       Rems_A:       {scr: 9999999}
-      Rems_B:       {scr: 9999999}
+      Rems_B:       {scr: 8984838}
 _uc_extr:
    gO:
       TorgueMode: {pg: N/A, scr: 8000000,                    pr: 8, req: rdi}

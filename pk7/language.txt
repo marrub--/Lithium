@@ -2939,7 +2939,7 @@
 "LITH_INFO_SHORT_FortuneGun" =
    "Fortiuty";
 "LITH_INFO_SHORT_Rems" =
-   "Qasl 339-7 Rems";
+   "Qasl 339-7 REMS";
 "LITH_INFO_SHORT_Rakz" =
    "Sub-bullets";
 "LITH_INFO_SHORT_Zaruk" =
@@ -2988,6 +2988,10 @@
    "Rocket Rocket";
 "LITH_UPGRADE_EFFEC_Sophia_A" =
    "Makes Sophia fire two smaller rockets in quick succession.";
+"LITH_UPGRADE_TITLE_Rems_B" =
+   "REMS HexShield";
+"LITH_UPGRADE_EFFEC_Rems_B" =
+   "Makes the Qasl REMS fire shields that protect and deal massive damage.";
 "LITH_INFO_SHORT_CFist" =
    "Mana Siphon";
 "LITH_INFO_SHORT_Mateba" =

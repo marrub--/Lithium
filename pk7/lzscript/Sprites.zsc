@@ -23,6 +23,7 @@ class Lith_SpriteLoader : Actor abstract {
       SPEL A 0;
       WRDP A 0;
       WUPG A 0;
+      ,D7I A 0;
    }
 }
 

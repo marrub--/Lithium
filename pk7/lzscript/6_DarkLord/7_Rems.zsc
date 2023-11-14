@@ -38,6 +38,24 @@ class Lith_RemsBullet : FastProjectile {
    }
 }
 
+class Lith_RemsRebuke : Lith_RemsBullet {
+   default {
+      Scale 2;
+      DamageFunction 2000;
+      Species "Lith_Player";
+      +MThruSpecies
+      +SeekerMissile
+   }
+   override void effect() {
+      spawn("Lith_RemsSprayShotFx", pos);
+   }
+   states {
+   Spawn:
+      BLLT Y 1 light("Lith_RemsLight1") bright a_seekerMissile(90, 90, SMF_PRECISE);
+      wait;
+   }
+}
+
 class Lith_RemsSprayFx : Actor {
    default {
       Alpha 0.5;
@@ -101,15 +119,17 @@ class Lith_RemsShieldScreenFx : Actor {
 
 class Lith_RemsShieldScreen : Actor {
    default {
-      Health int.max;
+      Health 400;
       RenderStyle "Add";
-      Height 56;
-      Radius 16;
-      Alpha 0.2;
+      Species "Lith_Player";
+      Height 70;
+      Radius 24;
+      Alpha 1.0;
       +Bright
-      +Invulnerable
+      +ThruSpecies
       +MThruSpecies
       +Missile
+      +NoBlood
       +NoClip
       +NoGravity
       +NoTeleport
@@ -132,14 +152,25 @@ class Lith_RemsShieldScreen : Actor {
       }
       let fx = lith_spawnFx();
       fx.vel = (Lith_URANUS.uiRandom(-0.3,0.3),Lith_URANUS.uiRandom(-0.3,0.3),Lith_URANUS.uiRandom(-0.3,0.3));
-      fx.alpha = 0.3;
+      fx.alpha = 0.3 * alpha;
    }
-   override int damageMobj(Actor inflictor, Actor source, int damage, name mod, int flags, double angle) {
-      return 0;
+   override bool okayToSwitchTarget(Actor other) {
+      return false;
    }
-   void lith_a_shieldSpray(double maxAngle = 45, int rays = 20) {
+   override void die(Actor source, Actor inflictor, int dmgflags, name mod) {
+      super.die(source, inflictor, dmgflags, mod);
+      for(int i = 0; i < 4; ++i) {
+         let fx = lith_spawnFx();
+         fx.vel = (Lith_URANUS.uiRandom(-2,2),Lith_URANUS.uiRandom(-2,2),Lith_URANUS.uiRandom(-2,2));
+      }
+      if(source != target) {
+         tracer = source;
+         a_spawnProjectile("Lith_RemsRebuke", spawnheight: 0, flags: CMF_TRACKOWNER, ptr: AAPTR_TRACER);
+      }
+   }
+   action(actor) state lith_a_shieldSpray(stateLabel nx, double maxAngle = 45, int rays = 20) {
       if(!target) {
-         return;
+         return resolveState(nx);
       }
       bool anyHit = false;
       for(int i = 0; i < rays; ++i) {
@@ -149,21 +180,23 @@ class Lith_RemsShieldScreen : Actor {
          if(mo && mo != self && mo != target) {
             let a = lt.angleFromSource;
             anyHit = true;
-            a_startSound("weapons/rems/shieldfire", lch_weapon2, CHAN_OVERLAP, 0.5, pitch: fRandom(0.8, 1.2));
+            a_startSound("weapons/rems/shieldfire", lch_weapon2, CHANF_OVERLAP, 0.05, pitch: fRandom(0.8, 1.2));
             Lith_URANUS.instance().particleRemsSpray(self, mo);
             spawn('Lith_RemsSprayShotFx', pos + (cos(a) * 8, sin(a) * 8, height / 2));
             int dmg = mo.damageMobj(target, target, 120, 'Electric', DMG_USEANGLE, a);
             if(dmg > 0) {
                spawn('Lith_RemsSprayFx', mo.pos.plusZ(mo.height / 2));
-               mo.a_startSound("weapons/rems/shieldhit", lch_auto, pitch: fRandom(0.8, 1.2));
+               mo.a_startSound("weapons/rems/shieldhit", lch_auto, 0.1, pitch: fRandom(0.8, 1.2));
                lt.traceBleed(dmg, self);
             }
          }
       }
       if(anyHit) {
-         a_startSound("weapons/rems/shieldshot", lch_weapon);
+         target.a_startSound("weapons/rems/shieldshot", lch_weapon, CHANF_OVERLAP);
          lith_spawnFx();
+         return resolveState(nx);
       }
+      return null;
    }
    Actor lith_spawnFx() {
       let fx = spawn('Lith_RemsShieldScreenFx', pos);
@@ -172,18 +205,27 @@ class Lith_RemsShieldScreen : Actor {
       fx.scale.x = scale.x;
       return fx;
    }
-   states {
+   states(actor) {
    Spawn:
       #HXS A 0;
       #HXS AAAAA 1 a_fadeIn;
-      #HXS A 35;
-      #HXS AA 4 lith_a_shieldSpray;
+      #HXS A 150;
+   Spawn1:
+      #HXS AAAAAAA 1 lith_a_shieldSpray("Spawn2");
+   Spawn2:
       #HXS A 10;
+      #HXS AAAAAAA 1 lith_a_shieldSpray("Spawn3");
+   Spawn3:
+      #HXS A 10 a_startSound("weapons/rems/shielddisappate", lch_body);
       #HXS A 1 {
          a_noBlocking();
          m_dist += m_dist / 12;
          a_fadeOut();
       }
+      wait;
+   Death:
+      #HXS A 1 a_startSound("weapons/rems/shieldhit", lch_body);
+      #HXS A 1 a_fadeOut(0.05);
       wait;
    }
 }
@@ -197,11 +239,12 @@ default {
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/rems/draw";
    Lith_Weapon.AmmoType "Lith_CannonAmmo";
-   Inventory.AltHudIcon "REMSZ0";
+   Inventory.AltHudIcon ",D7IA0";
    +Weapon.NoAutoFire
 }
 int m_steamy, m_fireLoop, m_particleLoop;
 double m_particleAlpha;
+uint8 m_lastframe;
 override void tick() {
    super.tick();
    if(owner) {
@@ -242,49 +285,39 @@ action(weapon) void lith_a_fireRemsShield() {
    A_Quake(2, 15, 0, 128);
    Lith_A_RecoilUp(0.8);
 }
+action(weapon) void lith_a_emitSteam() {
+   if(invoker.m_steamy) {
+      if(level.time % 3 == 0) {
+         a_fireProjectile("Lith_GunSmokeEmitter", frandom(-10, 10), 0, 1.5, 9, pitch: frandom(-10, 10));
+      }
+      invoker.m_steamy--;
+   }
+}
 states(Weapon) {
 Ready:
-   REMS A 0 {
-      if(invoker.m_steamy) {
-         if(level.time % 3 == 0) {
-            a_fireProjectile("Lith_GunSmokeEmitter", frandom(-10, 10), 0, 1.5, 9, pitch: frandom(-10, 10));
-         }
-         invoker.m_steamy--;
-      }
-   }
-   REMS A 1 Lith_A_Ready;
+   ,D7G A 0 lith_a_emitSteam;
+   ,D7G A 1 Lith_A_Ready;
    loop;
 Deselect:
-   REMS A 1 Lith_A_Lower(_raise_slow);
+   ,D7G A 1 Lith_A_Lower(_raise_slow);
    wait;
 Select:
-   REMS A 0 { invoker.m_steamy = 0; }
-   REMS A 1 Lith_A_Raise(_raise_slow);
+   ,D7G A 0 {invoker.m_steamy = 0;}
+   ,D7G A 1 Lith_A_Raise(_raise_slow);
    wait;
 RemsParticle:
    BLLT Y -1 bright;
    stop;
-FireScreen:
-   #### # 0 lith_jumpNoAmmo(1);
-   REMS A 1 {
-      lith_takeAmmo(1);
-      a_startSound("weapons/rems/fireshield", lch_weapon);
-      lith_a_setInterpolation(false);
-   }
-   REMS B 1 bright offset(60, 82) lith_a_fireRemsShield;
-   REMS C 1 bright offset(45, 72);
-   REMS D 1 bright offset(30, 62);
-   REMS A 1 offset(20, 50);
-   REMS A 2 offset(15, 44) lith_a_setInterpolation(true);
-   REMS A 2 offset(7, 37);
-   REMS A 3 offset(2, 33) a_reFire;
-   REMS A 3 offset(1, 32);
-   goto FireCock;
 Fire:
-   #### # 0 a_jumpIf(Lith_UTIL.pData(_pdt_upgrade, UPGR_Rems_B), "FireScreen");
-   #### # 0 lith_jumpNoAmmo(4);
-   REMS A 1 offset(0, 32) {
-      lith_takeAmmo(4);
+   #### # 0 {
+      if(!Lith_UTIL.pData(_pdt_upgrade, UPGR_Rems_B)) {
+         return lith_jumpNoAmmo(4);
+      } else {
+         return resolveState(2);
+      }
+   }
+   ,D7G # 0 lith_takeAmmo(4);
+   ,D7G # 1 offset(0, 32) {
       a_startSound("weapons/rems/charge", lch_weapon2);
       a_startSound("weapons/rems/wail", lch_weapon3);
       invoker.m_particleLoop = 0;
@@ -292,7 +325,7 @@ Fire:
       invoker.m_fireLoop = 0;
       invoker.m_steamy = 175;
    }
-   REMS AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 {
+   ,D7G ################################################################# 1 {
       a_overlayOffset(_psp_weapon, fRandom(-0.4, 0.6), fRandom(-0.4, 0.6), WOF_INTERPOLATE|WOF_ADD);
       a_overlay(_psp_d_rems_particle_first + invoker.m_particleLoop, "RemsParticle");
       a_overlayFlags(_psp_d_rems_particle_first + invoker.m_particleLoop, PSPF_ALPHA|PSPF_RENDERSTYLE|PSPF_FORCESTYLE, true);
@@ -302,20 +335,36 @@ Fire:
       a_overlayOffset(_psp_d_rems_particle_first + invoker.m_particleLoop, fRandom(0, 320), fRandom(120, 240));
       ++invoker.m_particleLoop;
    }
-   REMS A 0 a_startSound("weapons/rems/fire", lch_weapon);
+   #### # 0 a_jumpIf(Lith_UTIL.pData(_pdt_upgrade, UPGR_Rems_B), "FireScreen");
+   ,D7G # 0 a_startSound("weapons/rems/fire", lch_weapon);
 FireLoop:
-   REMS BC 1 bright lith_a_fireRems;
+   ,D7F AB 1 bright lith_a_fireRems;
    loop;
+FireScreen:
+   #### # 0 lith_jumpNoAmmo(1);
+   ,D7G A 1 {
+      lith_takeAmmo(1);
+      a_startSound("weapons/rems/fireshield", lch_weapon);
+      lith_a_setInterpolation(false);
+   }
+   ,D7F A 1 bright offset(60, 82) lith_a_fireRemsShield;
+   ,D7F B 1 bright offset(45, 72);
+   ,D7F C 1 bright offset(30, 62);
+   ,D7G A 2 offset(20, 50);
+   ,D7G A 1 offset(18, 49) lith_a_setInterpolation(true);
+   ,D7G A 2 offset(17, 47);
+   ,D7G A 2 offset(15, 44) a_reFire("FireScreen");
+   goto FireDone+1;
 FireDone:
-   REMS D 1 bright offset(14, 44) a_startSound("weapons/rems/firefinish", lch_weapon2);
-   REMS A 1 bright offset(12, 40) lith_a_decreaseParticles;
-   REMS A 1 bright offset(8, 38) {
+   ,D7F C 1 bright offset(14, 44) a_startSound("weapons/rems/firefinish", lch_weapon2);
+   ,D7G A 1 bright offset(12, 40) lith_a_decreaseParticles;
+   ,D7G A 1 bright offset(8, 38) {
       lith_a_decreaseParticles();
       lith_a_setInterpolation(true);
    }
-   REMS A 1 offset(4, 39) lith_a_decreaseParticles;
-   REMS AA 1 offset(2, 35) lith_a_decreaseParticles;
-   REMS A 1 offset(1, 33) {
+   ,D7G A 1 offset(4, 39) lith_a_decreaseParticles;
+   ,D7G AA 1 offset(2, 35) lith_a_decreaseParticles;
+   ,D7G A 1 offset(1, 33) {
       a_clearOverlays(_psp_d_rems_particle_first, _psp_d_rems_particle_last);
       invoker.m_particleLoop = 0;
    }
@@ -334,32 +383,29 @@ FireCock:
    #### # 1 offset(19, 78) Lith_A_ReloadBobDn(0.5);
    #### # 5 offset(18, 80);
    #### # 1 offset(17, 74) A_StartSound("weapons/sniper/boltforward", lch_weapon3);
-   #### # 1 offset(19, 67);
-   #### # 1 offset(20, 66);
-   #### # 1 offset(21, 62);
-   #### # 1 offset(20, 60);
-   #### # 1 offset(21, 63);
-   #### # 1 offset(23, 66);
-   #### # 2 offset(24, 68);
-   #### # 2 offset(25, 63);
-   #### # 2 offset(24, 59);
-   #### # 2 offset(22, 57);
-   #### # 2 offset(20, 54);
-   #### # 2 offset(16, 49);
-   #### # 2 offset(12, 44);
-   #### # 2 offset(10, 42);
-   #### # 2 offset(8, 40);
-   #### # 2 offset(5, 38);
-   #### # 2 offset(2, 35);
-   #### # 6 offset(0, 32) lith_a_setInterpolation(false);
+   #### # 1 offset(19, 67) lith_a_emitSteam;
+   #### # 1 offset(20, 66) lith_a_emitSteam;
+   #### # 1 offset(21, 62) lith_a_emitSteam;
+   #### # 1 offset(21, 63) lith_a_emitSteam;
+   #### # 1 offset(23, 66) lith_a_emitSteam;
+   #### ## 1 offset(24, 68) lith_a_emitSteam;
+   #### ## 1 offset(25, 63) lith_a_emitSteam;
+   #### ## 1 offset(24, 59) lith_a_emitSteam;
+   #### ## 1 offset(20, 54) lith_a_emitSteam;
+   #### ## 1 offset(16, 49) lith_a_emitSteam;
+   #### ## 1 offset(12, 44) lith_a_emitSteam;
+   #### ## 1 offset(8, 40) lith_a_emitSteam;
+   #### ## 1 offset(2, 35) lith_a_emitSteam;
+   #### # 0 lith_a_setInterpolation(false);
+   #### ### 1 offset(0, 32) lith_a_emitSteam;
    goto ReadySelector;
 FireEmpty:
-   REMS A 2 offset(3, 38);
-   REMS A 1 offset(7, 40);
-   REMS A 1 offset(5, 37) A_StartSound("weapons/rems/empty", lch_dryweapon);
-   REMS A 1 offset(4, 34);
-   REMS A 1 offset(2, 33);
-   REMS A 5 offset(1, 32);
+   ,D7G # 2 offset(3, 38);
+   ,D7G # 1 offset(7, 40);
+   ,D7G # 1 offset(5, 37) A_StartSound("weapons/rems/empty", lch_dryweapon);
+   ,D7G # 1 offset(4, 34);
+   ,D7G # 1 offset(2, 33);
+   ,D7G # 5 offset(1, 32);
    goto ReadySelector;
 }
 

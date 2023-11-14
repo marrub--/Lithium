@@ -15,7 +15,7 @@
 == \#INFO_SHORT_Motra       | Ruzuk
 == \#INFO_SHORT_DualRocket  | Franca & Sophia
 == \#INFO_SHORT_FortuneGun  | Fortiuty
-== \#INFO_SHORT_Rems        | Qasl 339-7 Rems
+== \#INFO_SHORT_Rems        | Qasl 339-7 REMS
 
 == \#INFO_SHORT_Rakz  | Sub-bullets
 == \#INFO_SHORT_Zaruk | Sub-grenades
@@ -82,5 +82,10 @@ ability to wind it up.
 == \#UPGRADE_TITLE_Sophia_A | Rocket Rocket
 @@ \#UPGRADE_EFFEC_Sophia_A
 Makes Sophia fire two smaller rockets in quick succession.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
+== \#UPGRADE_TITLE_Rems_B | REMS HexShield
+@@ \#UPGRADE_EFFEC_Rems_B
+Makes the Qasl REMS fire shields that protect and deal massive damage.
 
 ## EOF
