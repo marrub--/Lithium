@@ -2629,7 +2629,7 @@
    "\n"
    "* Some weapons have enormous enough recoil to push you backwards.\n"
    "\n"
-   "* Small weapons (<Khanda>, <Kampilan>, <.700 Express>) allow you to walk and sprint at increased speed.\n"
+   "* Some weapons allow you to walk and sprint at increased speed.\n"
    "\n"
    "* Holding Crouch ({+crouch}) will make you fall faster.";
 "LITH_TUT_DarkLordWeapon_NAM" =

@@ -170,8 +170,7 @@ around maps better than vanilla.
 
 * Some weapons have enormous enough recoil to push you backwards.
 
-* Small weapons (<Khanda>, <Kampilan>, <.700 Express>) allow you to
-walk and sprint at increased speed.
+* Some weapons allow you to walk and sprint at increased speed.
 
 * Holding Crouch ({+crouch}) will make you fall faster.
 
