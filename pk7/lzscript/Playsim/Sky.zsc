@@ -18,7 +18,7 @@ const fire_canvas_h = 128;
 const fire_canvas_size = fire_canvas_w * fire_canvas_h;
 
 /* all modes */
-Canvas    m_canvas;
+transient Canvas m_canvas;
 textureId m_origSky1, m_origSky2, m_setSky1, m_setSky2;
 int       m_mode, m_rain;
 color     m_color, m_fogColor;
@@ -34,7 +34,7 @@ int       m_flash, m_flashLen, m_flashPos;
 color     m_flashColor;
 
 /* firestorms */
-Canvas                  m_fireCanvas;
+transient Canvas        m_fireCanvas;
 uint8[fire_canvas_size] m_fire;
 
 /* clouds */
@@ -134,6 +134,13 @@ ui void drawSky(RenderEvent evt) {
    }
 }
 
+void resetCanvas() {
+   if(m_mode != _msky_nochange) {
+      m_fireCanvas = TexMan.getCanvas("LITHFIRE");
+      m_canvas     = TexMan.getCanvas("LITHCSKY");
+   }
+}
+
 void replaceSky() {
    m_flash    = 0;
    m_flashLen = 0;
@@ -201,10 +208,7 @@ void replaceSky() {
       break;
    }
    resetClouds();
-   if(m_mode != _msky_nochange) {
-      m_fireCanvas = TexMan.getCanvas("LITHFIRE");
-      m_canvas     = TexMan.getCanvas("LITHCSKY");
-   }
+   resetCanvas();
 }
 
 /* firestorms */

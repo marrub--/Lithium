@@ -40,6 +40,8 @@ override void onRegister() {
 }
 
 override void worldLoaded(WorldEvent evt) {
+   let sv = Lith_HERMES.instance();
+   if(sv && sv.m_sky) sv.m_sky.resetCanvas();
    if(evt.isSaveGame && Lith_UTIL.pData(_pdt_mflg, _mflg_corrupted)) {
       CallACS("Lith_TimelineInconsistent");
    }
