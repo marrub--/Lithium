@@ -360,7 +360,7 @@ action(Weapon) void Lith_A_ReloadBobDn(double amt) {
 }
 
 action(Weapon) void lith_a_adsZoomFactor(double amount = 1.0) {
-   a_zoomFactor((1+lith_weapons_zoomfactor) * amount * invoker.m_adsZoom);
+   a_zoomFactor(1 + amount * lith_weapons_zoomfactor * invoker.m_adsZoom);
 }
 
 void lith_adsZoomOut() {
