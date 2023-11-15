@@ -186,7 +186,7 @@ class Lith_RemsShieldScreen : Actor {
             int dmg = mo.damageMobj(target, target, 120, 'Electric', DMG_USEANGLE, a);
             if(dmg > 0) {
                spawn('Lith_RemsSprayFx', mo.pos.plusZ(mo.height / 2));
-               mo.a_startSound("weapons/rems/shieldhit", lch_auto, 0.1, pitch: fRandom(0.8, 1.2));
+               mo.a_startSound("weapons/rems/shieldhit", lch_auto, 0, 0.5, pitch: fRandom(0.8, 1.2));
                lt.traceBleed(dmg, self);
             }
          }
