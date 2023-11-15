@@ -409,7 +409,6 @@ stab_x(sp_Weapon_BladeHit, ":Weapon:BladeHit")
 
 stab_x(sp_lmisc_Cyberspace, "lmisc/Cyberspace.txt")
 stab_x(sp_lmusic_DOGS, "lmusic/DOGS.ogg")
-stab_x(sp_lmusic_Shredder, "lmusic/Shredder.opus")
 stab_x(sp_lmusic_Unce, "lmusic/Unce.ogg")
 
 stab_x(sp_F_SKY1, "F_SKY1")

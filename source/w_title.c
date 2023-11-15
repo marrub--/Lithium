@@ -37,7 +37,6 @@ static void Blinker() {
 
 dynam_aut script void W_Title(void) {
    FadeFlash(0, 0, 0, 1.0k, 5.0k);
-   ACS_SetMusic(sp_lmusic_Shredder);
    ACS_Delay(35*5);
    i32 len = ACS_StrLen(sl_opener);
    for(i32 t = 0, pos = 0;;) {
