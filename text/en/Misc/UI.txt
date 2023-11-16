@@ -70,7 +70,7 @@ Upgrades, tutorials, settings, and more, await...
 == \#TAB_CBI        | CBI
 
 == \#TAB_BIP        | BIP
-== \#TAB_TUTS       | Read Me
+== \#TAB_TUTS       | Read Me!
 == \#TAB_LOG        | Log
 == \#TAB_STATISTICS | Statistics
 == \#TAB_NOTES      | Notes
