@@ -269,11 +269,13 @@ action(weapon) state lith_a_fireRems() {
       a_fireProjectile("Lith_RemsBullet", angle: fRandom(-20, 20), spawnofs_xy: fRandom(2, 8), spawnheight: fRandom(8, 10), flags: FPF_NOAUTOAIM, pitch: fRandom(-4, 4));
    }
    Lith_URANUS.instance().particleRemsSpark(player.mo);
-   if(!invoker.m_ads) A_Recoil(0.4);
+   if(!invoker.m_ads) {
+      A_Recoil(0.4);
+      Lith_A_RecoilUp(fRandom(-0.2, 0.8));
+   }
    lith_gunFlash();
    soundAlert(invoker.owner);
    A_Quake(2, 15, 0, 128);
-   Lith_A_RecoilUp(fRandom(-0.2, 0.8));
    return invoker.m_fireLoop++ == 170 ? resolveState("FireDone") : state(null);
 }
 action(weapon) void lith_a_fireRemsShield() {

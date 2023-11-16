@@ -91,6 +91,13 @@ ability to wind it up.
 Makes Sophia fire two smaller rockets in quick succession.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
+== \#UPGRADE_TITLE_Rems_A | REMS Bipod
+@@ \#UPGRADE_EFFEC_Rems_A
+Gives the Qasl REMS a bipod that completely mitigates recoil, charges
+faster, and increases damage dealt. Unless deployed, this upgrade
+blocks firing.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Rems_B | REMS HexShield
 @@ \#UPGRADE_EFFEC_Rems_B
 Makes the Qasl REMS fire shields that protect and deal massive damage.

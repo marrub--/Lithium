@@ -2992,6 +2992,10 @@
    "Rocket Rocket";
 "LITH_UPGRADE_EFFEC_Sophia_A" =
    "Makes Sophia fire two smaller rockets in quick succession.";
+"LITH_UPGRADE_TITLE_Rems_A" =
+   "REMS Bipod";
+"LITH_UPGRADE_EFFEC_Rems_A" =
+   "Gives the Qasl REMS a bipod that completely mitigates recoil, charges faster, and increases damage dealt. Unless deployed, this upgrade blocks firing.";
 "LITH_UPGRADE_TITLE_Rems_B" =
    "REMS HexShield";
 "LITH_UPGRADE_EFFEC_Rems_B" =

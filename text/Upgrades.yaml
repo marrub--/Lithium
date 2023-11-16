@@ -88,7 +88,7 @@ _uc_weap:
       Sophia_B:     {scr: 9999999}
       FortuneGun_A: {scr: 9999999}
       FortuneGun_B: {scr: 9999999}
-      Rems_A:       {scr: 9999999}
+      Rems_A:       {scr: 6321234}
       Rems_B:       {scr: 8984838}
 _uc_extr:
    gO:
