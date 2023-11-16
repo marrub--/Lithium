@@ -10,7 +10,7 @@ class Lith_ShrapnelProjectile : Actor {
    default {
       BounceType "Doom";
       BounceSound "weapons/shrapnel/bounce";
-      BounceCount 30;
+      BounceCount 10;
       RipSound "weapons/shrapnel/hit";
       DamageFunction (3);
       DamageType "Shrapnel";
@@ -73,7 +73,7 @@ class Lith_ShrapnelProjectileBouncy : Lith_ShrapnelProjectile {
    default {
       BounceFactor 0.9;
       WallBounceFactor 0.95;
-      DamageFunction (3 + (30 - bounceCount) / 2);
+      DamageFunction (3 + (10 - bounceCount) / 2);
    }
 }
 
