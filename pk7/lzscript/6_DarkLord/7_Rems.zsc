@@ -13,7 +13,7 @@ class Lith_RemsBullet : FastProjectile {
       Height 5;
       Scale 0.5;
       Alpha 0.7;
-      DamageFunction 34;
+      DamageFunction (35 + 10 * Lith_UTIL.pData(_pdt_upgrade, UPGR_Rems_A));
       DamageType "Electric";
       Speed 100;
       +ForcePain
@@ -41,7 +41,7 @@ class Lith_RemsBullet : FastProjectile {
 class Lith_RemsRebuke : Lith_RemsBullet {
    default {
       Scale 2;
-      DamageFunction 2000;
+      DamageFunction (2000 + 166 * Lith_UTIL.pData(_pdt_upgrade, UPGR_Rems_A));
       Species "Lith_Player";
       +MThruSpecies
       +SeekerMissile
@@ -183,7 +183,7 @@ class Lith_RemsShieldScreen : Actor {
             a_startSound("weapons/rems/shieldfire", lch_weapon2, CHANF_OVERLAP, 0.05, pitch: fRandom(0.8, 1.2));
             Lith_URANUS.instance().particleRemsSpray(self, mo);
             spawn('Lith_RemsSprayShotFx', pos + (cos(a) * 8, sin(a) * 8, height / 2));
-            int dmg = mo.damageMobj(target, target, 120, 'Electric', DMG_USEANGLE, a);
+            int dmg = mo.damageMobj(target, target, 120 + 10 * Lith_UTIL.pData(_pdt_upgrade, UPGR_Rems_A), 'Electric', DMG_USEANGLE, a);
             if(dmg > 0) {
                spawn('Lith_RemsSprayFx', mo.pos.plusZ(mo.height / 2));
                mo.a_startSound("weapons/rems/shieldhit", lch_auto, 0, 0.5, pitch: fRandom(0.8, 1.2));
