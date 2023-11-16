@@ -263,6 +263,10 @@ action(weapon) void lith_a_decreaseParticles() {
       a_overlayAlpha(_psp_d_rems_particle_first + i, invoker.m_particleAlpha);
    }
 }
+action(weapon) void lith_a_resetParticles() {
+   a_clearOverlays(_psp_d_rems_particle_first, _psp_d_rems_particle_last);
+   invoker.m_particleLoop = 0;
+}
 action(weapon) state lith_a_fireRems() {
    a_overlayOffset(_psp_weapon, fRandom(-9, 47), fRandom(44, 64), WOF_INTERPOLATE);
    for(int i = 0; i < 4; ++i) {
@@ -343,10 +347,12 @@ Fire:
       } else if(!Lith_UTIL.pData(_pdt_upgrade, UPGR_Rems_B)) {
          return lith_jumpNoAmmo(4);
       } else {
-         return resolveState(2);
+         let st = lith_jumpNoAmmo(1);
+         return st ? st : state(null);
       }
    }
    ,D7G # 0 lith_takeAmmo(4);
+Fire1:
    ,D7G # 1 offset(0, 32) {
       a_startSound("weapons/rems/charge", lch_weapon2);
       a_startSound("weapons/rems/wail", lch_weapon3);
@@ -393,10 +399,11 @@ FireScreen:
    ,D7G # 1 offset(18, 49) lith_a_setInterpolation(true);
    ,D7G # 2 offset(17, 47);
    ,D7G # 2 offset(15, 44) a_reFire("FireScreen");
-   goto FireDone+2;
+   goto FireDone1;
 FireDone:
    ,D7F C 0 {if(invoker.m_ads) player.getPSprite(_psp_weapon).frame += 3;}
    ,D7F # 1 bright offset(14, 44) a_startSound("weapons/rems/firefinish", lch_weapon2);
+FireDone1:
    ,D7G A 0 {if(invoker.m_ads) player.getPSprite(_psp_weapon).frame += 6;}
    ,D7G # 1 bright offset(12, 40) lith_a_decreaseParticles;
    ,D7G # 1 bright offset(8, 38) {
@@ -405,10 +412,7 @@ FireDone:
    }
    ,D7G # 1 offset(4, 39) lith_a_decreaseParticles;
    ,D7G ## 1 offset(2, 35) lith_a_decreaseParticles;
-   ,D7G # 1 offset(1, 33) {
-      a_clearOverlays(_psp_d_rems_particle_first, _psp_d_rems_particle_last);
-      invoker.m_particleLoop = 0;
-   }
+   ,D7G # 1 offset(1, 33) lith_a_resetParticles;
 FireCock:
    ,D7G # 2 offset(1, 32) Lith_A_RecoilDn(0.25);
    ,D7G # 2 offset(3, 32) Lith_A_RecoilDn(0.25);
@@ -441,7 +445,7 @@ FireCock:
    ,D7G ### 1 offset(0, 32) lith_a_emitSteam;
    goto ReadySelector;
 FireEmpty:
-   ,D7G # 2 offset(3, 38);
+   ,D7G # 2 offset(3, 38) lith_a_resetParticles;
    ,D7G # 1 offset(7, 40);
    ,D7G # 1 offset(5, 37) A_StartSound("weapons/rems/empty", lch_dryweapon);
    ,D7G # 1 offset(4, 34);
