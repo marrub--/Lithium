@@ -2875,7 +2875,7 @@
 "LITH_UPGRADE_TITLE_HeavyArmor" =
    "Heavy Armor";
 "LITH_UPGRADE_EFFEC_HeavyArmor" =
-   "Increases the weight of your armor, thus increasing the effect gravity has on you.";
+   "Increases the weight of your armor, thus increasing the effect gravity has on you. Also allows you to charge using a new sub-weapon.";
 "LITH_UPGRADE_TITLE_HoverBoots" =
    "Hover Stilts";
 "LITH_UPGRADE_EFFEC_HoverBoots" =

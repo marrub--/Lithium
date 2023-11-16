@@ -300,7 +300,7 @@ alternate fire button.
 == \#UPGRADE_TITLE_HeavyArmor | Heavy Armor
 @@ \#UPGRADE_EFFEC_HeavyArmor
 Increases the weight of your armor, thus increasing the effect gravity
-has on you.
+has on you. Also allows you to charge using a new sub-weapon.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_HoverBoots | Hover Stilts
