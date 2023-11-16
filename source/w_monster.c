@@ -34,6 +34,9 @@ stkoff static void GetInfo(dmon_t *m) {
 
 script static void ApplyLevels(dmon_t *m, i32 prev) {
    GetInfo(m);
+   Dbg_Log(log_dmon,
+           _l("monster "), _p(m->id), _l(" leveled up ("), _p(prev),
+           _l(" -> "), _p(m->level), _c(')'));
    for(i32 i = prev + 1; i <= m->level; i++) {
       if(i % 10 == 0) {
          /* if we have resistances, randomly pick a resistance we
@@ -48,18 +51,17 @@ script static void ApplyLevels(dmon_t *m, i32 prev) {
       }
    }
    if(m->level >= 5) {
-      k32 rn   = m->rank / 10.0;
-      i32 delt = m->level - prev;
-      i32 hp10 = m->spawnhealth / 10;
-      i32 newh = delt * hp10 * (i32)(ACS_RandomFixed(rn - 0.1, rn + 0.1) * 0xfff) / 0xfff;
-      SetHealth(0, m->health + newh);
-      m->maxhealth += newh;
-      k32 newd = delt / ACS_RandomFixed(100.0, 200.0);
-      m->damagemul += newd;
+      i32 level_delta = m->level - prev;
+      k64 health_mul  = m->spawnhealth / 100.0lk;
+      i32 new_health  = level_delta * health_mul * m->rank / 5.0lk;
+      SetHealth(0, m->health + new_health);
+      m->maxhealth += new_health;
+      k32 new_damage = level_delta / ACS_RandomFixed(100.0, 200.0);
+      m->damagemul += new_damage;
       SetDamageMultiplier(0, m->damagemul);
       Dbg_Log(log_dmon,
-              _l("monster "), _p(m->id), _l(": newh "), _p(newh),
-              _l(" newd "), _p(newd));
+              _l("monster "), _p(m->id), _l(" HP+"), _p(new_health ),
+              _l(" DMG+"), _p(new_damage));
    }
    for(i32 i = 0; i < dmgtype_max; i++) {
       ifauto(i32, resist, m->resist[i] / 15.0) {
@@ -67,11 +69,11 @@ script static void ApplyLevels(dmon_t *m, i32 prev) {
                       _p(sa_dmgtype_names[i]),
                       _p(mini(resist, _max_rank))),
                  1);
+         Dbg_Log(log_dmon,
+                 _l("monster "), _p(m->id), _c(' '), _p(sa_dmgtype_names[i]),
+                 _l(" = "), _p(resist));
       }
    }
-   Dbg_Log(log_dmon,
-           _l("monster "), _p(m->id), _l(" leveled up ("), _p(prev),
-           _l(" -> "), _p(m->level), _c(')'));
 }
 
 script static void ShowBarrier(dmon_t const *m, k32 alpha) {

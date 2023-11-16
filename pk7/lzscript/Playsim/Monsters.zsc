@@ -78,16 +78,13 @@ static void SpawnBoss(Actor a, string name, int phase) {
    b.spawnFlags   = a.spawnFlags & ~MTF_SECRET;
    b.handleSpawnFlags();
    b.spawnFlags = a.spawnFlags;
-   if(a.health < 10000) {
-      b.health += a.health / 2;
-   }
    a.clearCounters();
    a.destroy();
    b.m_phase = phase;
    if(phase == 2) {
       b.damageMultiply = 1.5;
       b.reactionTime   = 4;
-      b.health         = b.health * 3 / 2;
+      b.health        += b.health / 2;
       b.bMissileMore   = true;
    } else if(phase == 3) {
       b.damageMultiply   = 2;
