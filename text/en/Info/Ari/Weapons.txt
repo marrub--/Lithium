@@ -25,18 +25,24 @@
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_SubGun_A | Sub-gunspray
 @@ \#UPGRADE_EFFEC_SubGun_A
-Upgrade for sub-gun. Fires out a 90 degree spray of bullets.
+Upgrade for sub-bullets. Fires out a 90 degree spray of bullets.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_SubGrn_A | Sub-grenails
 @@ \#UPGRADE_EFFEC_SubGrn_A
-Upgrade for sub-grenade. Fires a spray of nails on explosion.
+Upgrade for sub-grenades. Fires a spray of nails on explosion.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_SubAxe_A | Sub-axestick0
 @@ \#UPGRADE_EFFEC_SubAxe_A
-Upgrade for sub-axe. Sticks into enemies and provides minor life
+Upgrade for sub-stealers. Sticks into enemies and provides minor life
 leeching on any damage you deal to the stuck enemy.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
+== \#UPGRADE_TITLE_SubDrt_A | Sub-slimdart
+@@ \#UPGRADE_EFFEC_SubDrt_A
+Upgrade for sub-darts. Fires faster, slimmer darts that can hit
+targets easier.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Kampilan_A | Branch Accum.

@@ -2539,7 +2539,7 @@
    "\n"
    "Dialogues are \cinot necessary to progress\c-.";
 "LITH_TUT_MarineMove_NAM" =
-   "\c[Lith_Green]M\c- Agility";
+   "\c[Lith_Green]Ma\c-. Agility";
 "LITH_TUT_MarineMove_DSC" =
    "- SLIDING\n"
    "\n"
@@ -2557,7 +2557,7 @@
    "\n"
    "* After <double-jumping> or <super-jumping>, to activate <flight>.";
 "LITH_TUT_MarineItem_NAM" =
-   "\c[Lith_Green]M\c- Items";
+   "\c[Lith_Green]Ma\c-. Weap./Items";
 "LITH_TUT_MarineItem_DSC" =
    "- WEAPONS\n"
    "\n"
@@ -2573,7 +2573,7 @@
    "\n"
    "\c[Lith_Green]Marine\c- has a shop with which to buy extra weapons.";
 "LITH_TUT_CyberMageMove_NAM" =
-   "\c[Lith_Red]C\c- Agility";
+   "\c[Lith_Red]Cy\c-. Agility";
 "LITH_TUT_CyberMageMove_DSC" =
    "- SLIDING\n"
    "\n"
@@ -2589,17 +2589,19 @@
    "\n"
    "* While sliding, to <super-jump>.";
 "LITH_TUT_CyberMageWeapon_NAM" =
-   "\c[Lith_Red]C\c- Weapons";
+   "\c[Lith_Red]Cy\c-. Weapons";
 "LITH_TUT_CyberMageWeapon_DSC" =
    "- WEAPONS\n"
    "\n"
    "* Most of \c[Lith_Red]Cyber-Mage\c-'s weapons \ckdo not have alt-fires\c- ({+altattack}.)\n"
    "\n"
+   "* The Ion Rifle uses the <alt-fire> button to zoom in.\n"
+   "\n"
    "* The Sub-Machine Gun uses the <Weapon Action> ({+lith_k_wact}) button to manually reload the chamber.\n"
    "\n"
    "* The <Special Action> ({+lith_k_qact}) button will open a menu for switching magic.";
 "LITH_TUT_CyberMageItem_NAM" =
-   "\c[Lith_Red]C\c- Items";
+   "\c[Lith_Red]Cy\c-. Items";
 "LITH_TUT_CyberMageItem_DSC" =
    "- ITEMS\n"
    "\n"
@@ -2617,7 +2619,7 @@
    "\n"
    "\c[Lith_Red]Cyber-Mage\c- has a shop with which to buy extra weapons.";
 "LITH_TUT_DarkLordMove_NAM" =
-   "\c[Lith_Blue]D\c- Agility";
+   "\c[Lith_Blue]Dl\c-. Agility";
 "LITH_TUT_DarkLordMove_DSC" =
    "- SPRINTING\n"
    "\n"
@@ -2633,23 +2635,21 @@
    "\n"
    "* Holding Crouch ({+crouch}) will make you fall faster.";
 "LITH_TUT_DarkLordWeapon_NAM" =
-   "\c[Lith_Blue]D\c- Weapons";
+   "\c[Lith_Blue]Dl\c-. Weapons";
 "LITH_TUT_DarkLordWeapon_DSC" =
    "- WEAPONS\n"
    "\n"
-   "* \c[Lith_Blue]Dark Lord\c-'s <alt-fire> button ({+altattack}) activates <sub-weapons>.\n"
-   "\n"
-   "* <Sub-weapons> are infinite use, charge quickly, and can be <used at any time>.\n"
+   "* \c[Lith_Blue]Dark Lord\c-'s <alt-fire> button ({+altattack}) activates <sub-weapons>. They are infinite use, charge quickly, and can be <used at any time>.\n"
    "\n"
    "* The <Special Action> ({+lith_k_qact}) button will switch the equipped <sub-weapon>.\n"
    "\n"
-   "* The <Minigun> uses the <reload> button ({+reload}) to wind up without firing.\n"
+   "* The <Minigun> uses the <reload> button ({+reload}) to wind up without firing. The <Kampilan> uses the <reload> button for a hilt attack.\n"
    "\n"
    "* Only the <.700 Express> and <Ruzuk> need to be reloaded.\n"
    "\n"
    "* <Ruzuk> and the upgraded <Hunting Shotgun> use the <Weapon Action> ({+lith_k_wact}) button to aim down sights.";
 "LITH_TUT_DarkLordItem_NAM" =
-   "\c[Lith_Blue]D\c- Items";
+   "\c[Lith_Blue]Dl\c-. Items";
 "LITH_TUT_DarkLordItem_DSC" =
    "- ITEMS\n"
    "\n"
@@ -2951,15 +2951,19 @@
 "LITH_UPGRADE_TITLE_SubGun_A" =
    "Sub-gunspray";
 "LITH_UPGRADE_EFFEC_SubGun_A" =
-   "Upgrade for sub-gun. Fires out a 90 degree spray of bullets.";
+   "Upgrade for sub-bullets. Fires out a 90 degree spray of bullets.";
 "LITH_UPGRADE_TITLE_SubGrn_A" =
    "Sub-grenails";
 "LITH_UPGRADE_EFFEC_SubGrn_A" =
-   "Upgrade for sub-grenade. Fires a spray of nails on explosion.";
+   "Upgrade for sub-grenades. Fires a spray of nails on explosion.";
 "LITH_UPGRADE_TITLE_SubAxe_A" =
    "Sub-axestick0";
 "LITH_UPGRADE_EFFEC_SubAxe_A" =
-   "Upgrade for sub-axe. Sticks into enemies and provides minor life leeching on any damage you deal to the stuck enemy.";
+   "Upgrade for sub-stealers. Sticks into enemies and provides minor life leeching on any damage you deal to the stuck enemy.";
+"LITH_UPGRADE_TITLE_SubDrt_A" =
+   "Sub-slimdart";
+"LITH_UPGRADE_EFFEC_SubDrt_A" =
+   "Upgrade for sub-darts. Fires faster, slimmer darts that can hit targets easier.";
 "LITH_UPGRADE_TITLE_Kampilan_A" =
    "Branch Accum.";
 "LITH_UPGRADE_EFFEC_Kampilan_A" =
@@ -6118,7 +6122,7 @@
 "LITH_TAB_BIP" =
    "BIP";
 "LITH_TAB_TUTS" =
-   "Read Me";
+   "Read Me!";
 "LITH_TAB_LOG" =
    "Log";
 "LITH_TAB_STATISTICS" =
