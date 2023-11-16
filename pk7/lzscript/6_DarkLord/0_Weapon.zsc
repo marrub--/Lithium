@@ -134,12 +134,12 @@ class Lith_SubAxe : Actor {
    }
 }
 
-class Lith_SubDart : Actor {
+class Lith_SubDrt : Actor {
    default {
       Damage 0;
       DamageType "Poison";
       Speed 16;
-      Radius 2;
+      Radius 4;
       Projectile;
       +Bright
    }
@@ -180,12 +180,12 @@ class Lith_SubDart : Actor {
    }
 }
 
-class Lith_SubDart2 : Lith_SubDart {
+class Lith_SubDrt2 : Lith_SubDrt {
    default {
       Speed 24;
-      Radius 4;
+      Radius 8;
       Scale 0.75;
-      Translation "Lith_SubDart2";
+      Translation "Lith_SubDrt2";
    }
 }
 
@@ -232,11 +232,8 @@ action(Weapon) void lith_subGunFire() {
 action(Weapon) void lith_subGrnFire() {
    soundAlert(invoker.owner);
    a_startSound("weapons/subweapon/grenade", lch_altweapon);
-   if(Lith_UTIL.pData(_pdt_upgrade, UPGR_SubGrn_A)) {
-      a_fireProjectile('Lith_SubGrn2', 0, false, -7, 6);
-   } else {
-      a_fireProjectile('Lith_SubGrn', 0, false, -7, 6);
-   }
+   class<Actor> prj = Lith_UTIL.pData(_pdt_upgrade, UPGR_SubGrn_A) ? 'Lith_SubGrn2' : 'Lith_SubGrn';
+   a_fireProjectile(prj, 0, false, -7, 6);
 }
 action(Weapon) void lith_subAxeFire() {
    soundAlert(invoker.owner);
@@ -245,11 +242,8 @@ action(Weapon) void lith_subAxeFire() {
 }
 action(Weapon) void lith_subDrtFire() {
    a_startSound("weapons/subweapon/needle", lch_altweapon);
-   if(Lith_UTIL.pData(_pdt_upgrade, UPGR_SubDrt_A)) {
-      a_fireProjectile('Lith_SubDart2', 0, false, -7, 6);
-   } else {
-      a_fireProjectile('Lith_SubDart', 0, false, -7, 6);
-   }
+   class<Actor> prj = Lith_UTIL.pData(_pdt_upgrade, UPGR_SubDrt_A) ? 'Lith_SubDrt2' : 'Lith_SubDrt';
+   a_fireProjectile(prj, 0, false, -7, 6);
 }
 action(Weapon) void lith_sprintOfs(double x, double y, int flags = 0) {
    lith_sprint();
