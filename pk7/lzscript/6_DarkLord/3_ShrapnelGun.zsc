@@ -10,14 +10,17 @@ class Lith_ShrapnelProjectile : Actor {
    default {
       BounceType "Doom";
       BounceSound "weapons/shrapnel/bounce";
+      BounceCount 30;
       RipSound "weapons/shrapnel/hit";
-      DamageFunction (12);
+      DamageFunction (3);
       DamageType "Shrapnel";
       Gravity 0.5;
-      Height 8;
-      Radius 8;
+      Height 16;
+      Radius 12;
       Speed 10;
       Projectile;
+      +AllowBounceOnActors
+      +BounceOnActors
       +ExplodeOnWater
       +MThruSpecies
       +NoClip
@@ -29,6 +32,13 @@ class Lith_ShrapnelProjectile : Actor {
    override void postBeginPlay() {
       super.postBeginPlay();
       m_smoke = !lith_sv_lessparticles && random[Lith_ShrapnelGun](0, 1);
+   }
+
+   override int specialBounceHit(Actor mo, Line ln, SecPlane pln) {
+      if(mo) {
+         doMissileDamage(mo);
+      }
+      return -1;
    }
 
    state lith_a_jumpScale(double scale) {
@@ -67,7 +77,7 @@ class Lith_ShrapnelPuff : Lith_BulletPuff {
    override void postBeginPlay() {
       angle = angleTo(target);
       let prj = a_spawnProjectile('Lith_ShrapnelProjectile', 0, 0, fRandom(-20, 20), CMF_OFFSETPITCH, fRandom(-20, 20));
-      prj.target = target;
+      prj.target = target; /* do not replace with CMF_TRACKOWNER */
       if(random[Lith_ShrapnelGun](0, 5) == 0) {
          super.postBeginPlay();
       } else {
