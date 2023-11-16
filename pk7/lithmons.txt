@@ -215,6 +215,8 @@ presets {
    scr: 1000 exp: 0 type: phantom filter: "Lith_Boss_James";
    scr: 2000 exp: 0 type: phantom filter: "Lith_Boss_Makarov";
    scr: 3000 exp: 0 type: phantom filter: "Lith_Boss_Isaac";
+   scr: 0 exp: 0 type: phantom filter: "Lith_Boss_Michael";
+   scr: 0 exp: 0 type: phantom filter: "Lith_Boss_Johnson";
 }
 
 "full angelic" {
