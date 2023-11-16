@@ -77,8 +77,8 @@ _uc_weap:
       SubDrt_A:     {scr:  939393}
       Kampilan_A:   {scr: 1720999}
       700E_A:       {scr:  900000}
-      Shrapnel_A:   {scr: 1000000}
-      Shrapnel_B:   {scr: 9999999}
+      Shrapnel_A:   {scr: 2222222}
+      Shrapnel_B:   {scr: 1444444}
       4Bore_A:      {scr: 4444444}
       4Bore_B:      {scr:  911111}
       Minigun_A:    {scr: 2932134}

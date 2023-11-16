@@ -2971,7 +2971,11 @@
 "LITH_UPGRADE_TITLE_Shrapnel_A" =
    "Shrapnel Calamity";
 "LITH_UPGRADE_EFFEC_Shrapnel_A" =
-   "End the world with infinite shrapnel. At the very least, with this upgrade, you can fire all of your ammunition at once.";
+   "End the world with infinite shrapnel. At the very least, with this upgrade, you can crunch more of your ammunition into one shot by holding down Fire.";
+"LITH_UPGRADE_TITLE_Shrapnel_B" =
+   "Rubberizer";
+"LITH_UPGRADE_EFFEC_Shrapnel_B" =
+   "Makes shrapnel fired bouncier and deal more damage with each successive bounce.";
 "LITH_UPGRADE_TITLE_4Bore_A" =
    "Magnetic Shot";
 "LITH_UPGRADE_EFFEC_4Bore_A" =

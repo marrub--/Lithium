@@ -56,7 +56,14 @@ fire bullets that explode after a short delay.
 == \#UPGRADE_TITLE_Shrapnel_A | Shrapnel Calamity
 @@ \#UPGRADE_EFFEC_Shrapnel_A
 End the world with infinite shrapnel. At the very least, with this
-upgrade, you can fire all of your ammunition at once.
+upgrade, you can crunch more of your ammunition into one shot by
+holding down Fire.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
+== \#UPGRADE_TITLE_Shrapnel_B | Rubberizer
+@@ \#UPGRADE_EFFEC_Shrapnel_B
+Makes shrapnel fired bouncier and deal more damage with each
+successive bounce.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_4Bore_A | Magnetic Shot
