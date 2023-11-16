@@ -88,9 +88,7 @@ class Lith_FortuneProjectile : Actor {
    default {
       Height 1;
       Radius 1;
-      Species "Lith_Player";
       Projectile;
-      +DontHarmSpecies
       +NoClip
       -ActivateImpact
       -ActivatePCross
@@ -98,7 +96,8 @@ class Lith_FortuneProjectile : Actor {
 
    override void postBeginPlay() {
       super.postBeginPlay();
-      a_spawnProjectile("Lith_FortuneShot", flags: CMF_TRACKOWNER|CMF_AIMDIRECTION|CMF_SAVEPITCH|CMF_ABSOLUTEPITCH, pitch: pitch);
+      let prj = a_spawnProjectile("Lith_FortuneShot", flags: CMF_AIMDIRECTION|CMF_SAVEPITCH|CMF_ABSOLUTEPITCH, pitch: pitch);
+      prj.target = target;
    }
 
    override void tick() {
@@ -121,8 +120,6 @@ class Lith_FortuneProjectile : Actor {
 class Lith_FortuneSpark : Lith_ShockEffect {
    default {
       Projectile;
-      Species "Lith_Player";
-      +DontHarmSpecies
       +ForceXyBillboard
    }
 
