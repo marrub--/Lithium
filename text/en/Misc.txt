@@ -54,7 +54,7 @@ dimension of hate--built of demons.
              or Lithium will forever rain from the skies!
 
 ## Misc ══════════════════════════════════════════════════════════════════════╕
-== \#CHECK | Eng
+== \#WHICHFONT | Latin
 
 == \#TIME_FMT_LONG  | {}:{}:{} {7} {}.{}.{}{}
 == \#TIME_FMT_SHORT | {}:{} {}.{}.{}

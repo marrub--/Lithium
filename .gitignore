@@ -4,7 +4,6 @@ master/*
 tools/.build-cfg.rb
 *.bat
 ?.sh
-*.kdev4
 *.dbs
 *.wad.b*
 *.swp

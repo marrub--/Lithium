@@ -76,7 +76,7 @@ FadeMsg [_fmsg_max] m_fadeMsg;
 int                 m_tPtr, m_dPtr;
 int                 m_wrapX;
 bool                m_noDraw;
-bool                m_english;
+bool                m_latinFont;
 Font                m_uFntSml;
 Font                m_lSmlFont;
 Font                m_lMidFont;
@@ -535,19 +535,19 @@ clearScope static vector2, vector2 anyPosScale(vector2 p, vector2 s, vector2 vsz
 }
 
 Font fntSml(bool noUnicode = false) const {
-   return noUnicode || m_english ? m_lSmlFont : m_uFntSml;
+   return noUnicode || m_latinFont ? m_lSmlFont : m_uFntSml;
 }
 
 Font fntMid(bool noUnicode = false) const {
-   return noUnicode || m_english ? m_lMidFont : m_uFntSml;
+   return noUnicode || m_latinFont ? m_lMidFont : m_uFntSml;
 }
 
 Font fntBig(bool noUnicode = false) const {
-   return noUnicode || m_english ? m_lBigFont : m_newConsoleFont;
+   return noUnicode || m_latinFont ? m_lBigFont : m_newConsoleFont;
 }
 
 Font fntTrm(bool noUnicode = false) const {
-   return noUnicode || m_english ? m_lTrmFont : m_lJTrmFont;
+   return noUnicode || m_latinFont ? m_lTrmFont : m_lJTrmFont;
 }
 
 Font fntAny(name name, bool noUnicode = false) const {

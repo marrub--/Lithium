@@ -6412,8 +6412,8 @@
    "              seek your peace  \cmthrough violence,\n"
    "              cast away doubt  \cjand strike, thyself,\c-\n"
    "             or Lithium will forever rain from the skies!";
-"LITH_CHECK" =
-   "Eng";
+"LITH_WHICHFONT" =
+   "Latin";
 "LITH_TIME_FMT_LONG" =
    "{}:{}:{} {7} {}.{}.{}{}";
 "LITH_TIME_FMT_SHORT" =
@@ -9559,8 +9559,8 @@
    "地獄へと繋がるポータル。\n"
    "\n"
    "それを封鎖できる程の幸運に恵まれた者が現れるか、あるいは永遠なるLithiumの雨が宇宙から降り注ぐか。";
-"LITH_CHECK" =
-   "Jp";
+"LITH_WHICHFONT" =
+   "CJK";
 "LITH_TIME_FMT_LONG" =
    "{}:{}:{} {6}{5}年{4}月{3}日 ({7})";
 "LITH_TIME_FMT_SHORT" =
