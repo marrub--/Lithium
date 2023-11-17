@@ -5311,10 +5311,6 @@
    "Default text color";
 "LITH_TOOLTIP_gui_defcr" =
    "The color for most of the text in in-game GUIs.";
-"LITH_gui_jpfont" =
-   "Japanese font";
-"LITH_TOOLTIP_gui_jpfont" =
-   "The font to use when Japanese is set as the language.";
 "LITH_gui_curspeed" =
    "Cursor speed";
 "LITH_gui_theme" =
@@ -5772,12 +5768,6 @@
    "Dot";
 "LITH_st_name_xhair_9" =
    "X+";
-"LITH_st_name_jpfont_0" =
-   "Misaki Gothic";
-"LITH_st_name_jpfont_1" =
-   "Misaki Mincho";
-"LITH_st_name_jpfont_2" =
-   "jiskan16";
 "LITH_st_name_theme_0" =
    "Green";
 "LITH_st_name_theme_1" =
@@ -9075,8 +9065,6 @@
    "カーソル感度";
 "LITH_gui_defcr" =
    "テキストの色";
-"LITH_gui_jpfont" =
-   "フォント";
 "LITH_gui_theme" =
    "インターフェースのテーマ変更";
 "LITH_hud_expbar" =

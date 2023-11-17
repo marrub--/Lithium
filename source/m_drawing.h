@@ -120,13 +120,6 @@ stkcall optargs(1) void AmbientSound(str snd, k32 vol, i32 chan);
 stkcall void play_key_snd(i32 c);
 #endif
 
-enum ZscName(FontNum) {
-   font_misaki_gothic,
-   font_misaki_mincho,
-   font_jiskan16,
-   font_num,
-};
-
 enum ZscName(Channel) {
    lch_auto,
 

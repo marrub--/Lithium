@@ -678,7 +678,7 @@ alloc_aut(0) script_str ext("ACS") addr(OBJ "Markiplier") void Z_MapMarker(void)
    };
    static struct i32v2 s;
    str text = GetMembS(0, sm_CurMarkStr);
-   TextSize(&s, text, sf_areaname);
+   TextSize(&s, text, sf_lareanam);
    ACS_Delay(5);
    for(i32 i = 0; i < t; i++) {
       k32 alpha;
@@ -687,7 +687,7 @@ alloc_aut(0) script_str ext("ACS") addr(OBJ "Markiplier") void Z_MapMarker(void)
       else                     alpha = 1.0;
       i32 x = 40 - (s.x - ease_in_out_sine(mink(i / (k32)t_pos, 1.0k)) * s.x);
       SetSize(640, 480);
-      PrintText_str(text, sf_areaname, CR_WHITE, x,1, 80,0, _u_no_unicode|_u_alpha, alpha);
+      PrintText_str(text, sf_lareanam, CR_WHITE, x,1, 80,0, _u_no_unicode|_u_alpha, alpha);
       ACS_Delay(1);
    }
 }

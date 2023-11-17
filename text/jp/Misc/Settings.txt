@@ -101,7 +101,6 @@
 == \#gui_cursor             | カーソル
 == \#gui_curspeed           | カーソル感度
 == \#gui_defcr              | テキストの色
-== \#gui_jpfont             | フォント
 == \#gui_theme              | インターフェースのテーマ変更
 == \#hud_expbar             | 経験値バーの表示
 == \#hud_logfromtop         | スクリーン上部に表示

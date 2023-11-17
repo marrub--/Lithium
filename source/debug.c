@@ -170,17 +170,15 @@ script static
 bool chtf_dbg_font_test(cheat_params_t const params) {
    str font;
    switch(fourcc(params[0], params[1], 0, 0)) {
-   case fourcc('a', 'n', 0, 0): font = sf_areaname;  break;
-   case fourcc('b', 'u', 0, 0): font = sf_bigupper;  break;
-   case fourcc('i', 't', 0, 0): font = sf_litalics;  break;
-   case fourcc('j', 'k', 0, 0): font = sf_jiskan16;  break;
-   case fourcc('l', 'j', 0, 0): font = sf_ljtrmfont; break;
-   case fourcc('l', 'm', 0, 0): font = sf_lmidfont;  break;
-   case fourcc('l', 's', 0, 0): font = sf_lsmlhfnt;  break;
-   case fourcc('l', 't', 0, 0): font = sf_ltrmfont;  break;
-   case fourcc('m', 'g', 0, 0): font = sf_misakig;   break;
-   case fourcc('m', 'm', 0, 0): font = sf_misakim;   break;
-   case fourcc('s', 'f', 0, 0): font = sf_smallfnt;  break;
+   case fourcc('a', 'n', 0, 0): font = sf_lareanam; break;
+   case fourcc('b', 'u', 0, 0): font = sf_bigupper; break;
+   case fourcc('i', 't', 0, 0): font = sf_litalics; break;
+   case fourcc('j', 'k', 0, 0): font = sf_ljiskan;  break;
+   case fourcc('l', 'j', 0, 0): font = sf_ljtrmfnt; break;
+   case fourcc('l', 'm', 0, 0): font = sf_lmidfont; break;
+   case fourcc('l', 's', 0, 0): font = sf_lsmlhfnt; break;
+   case fourcc('l', 't', 0, 0): font = sf_ltrmfont; break;
+   case fourcc('s', 'f', 0, 0): font = sf_smallfnt; break;
    default:
       return false;
    }

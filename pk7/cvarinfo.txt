@@ -55,7 +55,6 @@ server int   lith_gui_buyfiller = 0;
 server int   lith_gui_theme     = 0;
 server int   lith_gui_cursor    = 0;
 server int   lith_gui_defcr     = 106; /* 'j' */
-server int   lith_gui_jpfont    = 0;
 
 server int   lith_hud_type         = 0;
 server bool  lith_hud_43aspect     = false;

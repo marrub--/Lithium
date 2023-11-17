@@ -24,10 +24,6 @@ Which cursor graphic to use for in-game GUIs.
 @@ \#TOOLTIP_gui_defcr
 The color for most of the text in in-game GUIs.
 
-== \#gui_jpfont | Japanese font
-@@ \#TOOLTIP_gui_jpfont
-The font to use when Japanese is set as the language.
-
 == \#gui_curspeed | Cursor speed
 == \#gui_theme | Interface theme
 == \#hud_43aspect | Clamp to 4:3 aspect ratio
@@ -325,10 +321,6 @@ crosshair that follow the recoil. They're... juicy. Guess that's why.
 == \#st_name_xhair_7 | Angle
 == \#st_name_xhair_8 | Dot
 == \#st_name_xhair_9 | X+
-
-== \#st_name_jpfont_0 | Misaki Gothic
-== \#st_name_jpfont_1 | Misaki Mincho
-== \#st_name_jpfont_2 | jiskan16
 
 == \#st_name_theme_0 | Green
 == \#st_name_theme_1 | Rose Pink
