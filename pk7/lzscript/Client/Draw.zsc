@@ -74,16 +74,12 @@ string  [_tptr_max] m_txt;
 int     [_tptr_max] m_lnx;
 FadeMsg [_fmsg_max] m_fadeMsg;
 int                 m_tPtr, m_dPtr;
-int                 m_wrapX;
 bool                m_noDraw;
-bool                m_latinFont;
-Font                m_uFntSml;
-Font                m_lSmlFont;
-Font                m_lMidFont;
-Font                m_lTrmFont;
-Font                m_lBigFont;
-Font                m_lJTrmFont;
-Font                m_newConsoleFont;
+int                 m_wrapX;
+
+bool m_latinFont;
+Font m_jSmlFont, m_jMidFont, m_jTrmFont, m_jBigFont;
+Font m_lSmlFont, m_lMidFont, m_lTrmFont, m_lBigFont;
 
 transient Shape2D          m_rectShape;
 transient Shape2DTransform m_rectTransform;
@@ -534,28 +530,28 @@ clearScope static vector2, vector2 anyPosScale(vector2 p, vector2 s, vector2 vsz
    return rp, rs;
 }
 
-Font fntSml(bool noUnicode = false) const {
-   return noUnicode || m_latinFont ? m_lSmlFont : m_uFntSml;
+Font fntSml(bool forceLatinFont = false) const {
+   return forceLatinFont || m_latinFont ? m_lSmlFont : m_jSmlFont;
 }
 
-Font fntMid(bool noUnicode = false) const {
-   return noUnicode || m_latinFont ? m_lMidFont : m_uFntSml;
+Font fntMid(bool forceLatinFont = false) const {
+   return forceLatinFont || m_latinFont ? m_lMidFont : m_jMidFont;
 }
 
-Font fntBig(bool noUnicode = false) const {
-   return noUnicode || m_latinFont ? m_lBigFont : m_newConsoleFont;
+Font fntBig(bool forceLatinFont = false) const {
+   return forceLatinFont || m_latinFont ? m_lBigFont : m_jBigFont;
 }
 
-Font fntTrm(bool noUnicode = false) const {
-   return noUnicode || m_latinFont ? m_lTrmFont : m_lJTrmFont;
+Font fntTrm(bool forceLatinFont = false) const {
+   return forceLatinFont || m_latinFont ? m_lTrmFont : m_jTrmFont;
 }
 
-Font fntAny(name name, bool noUnicode = false) const {
+Font fntAny(name name, bool forceLatinFont = false) const {
    switch(name) {
-   case 'smallfnt': return fntSml(noUnicode);
-   case 'lmidfont': return fntMid(noUnicode);
-   case 'ltrmfont': return fntTrm(noUnicode);
-   case 'bigupper': return fntBig(noUnicode);
+   case 'smallfnt': return fntSml(forceLatinFont);
+   case 'lmidfont': return fntMid(forceLatinFont);
+   case 'ltrmfont': return fntTrm(forceLatinFont);
+   case 'bigupper': return fntBig(forceLatinFont);
    default:         return Font.getFont(name);
    }
 }

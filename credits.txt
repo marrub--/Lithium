@@ -201,13 +201,11 @@
 ~
                               * Fonts *
 
-@ Hanataka Shinya   - jiskan16
-@ Hiroshi Tachibana - ljtrmfont
-@ IBM               - bigupper
-@ Jimmy             - lmidfont and lsmlfont
-@ The Author        - areaname
-@ Toshiyuki Imamura - jiskan16, ljtrmfont
-@ littlelimit       - Misaki
+@ Jimmy           - lmidfont and lsmlfont
+@ IBM             - lbigfont
+@ The Author      - lareanam (SMODGUI)
+@ hicc 患者長ひっく - ljsmlfnt (x12y16pxMaruMonica)
+@ IPA             - ltrmfnt (>U+2122 are IPAex)
 ~
                        * LOOKING FOR CREDITS *
 

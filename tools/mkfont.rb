@@ -1,141 +1,173 @@
 #!/usr/bin/env -S ruby --enable=frozen-string-literal -w
-## ╭──────────────────────────────────────────────────────────────────────────╮
-## │                                                                          │
-## │             Distributed under the CC0 public domain license.             │
-## │   By Alison G. Watson. Attribution is encouraged, though not required.   │
-## │                See licenses/cc0.txt for more information.                │
-## │                                                                          │
-## ├──────────────────────────────────────────────────────────────────────────┤
-## │                                                                          │
-## │ Creates fonts and downloads necessary TTFs if needed.                    │
-## │                                                                          │
-## ╰──────────────────────────────────────────────────────────────────────────╯
 
 require_relative "corinth.rb"
 require "set"
+require "rmagick"
 
-def gen_map areas
-   areas.flat_map do |area|
-      if area.kind_of? Range then area.entries else area end
+chrmap = Set[]
+open("pk7/language.txt").each_char do |c| chrmap.add c end
+chrmap -= ("\uE000".."\uEFFF").entries
+chrmap.delete " "
+chrmap.delete "\n"
+chrmap.delete "\r"
+
+def new_font name, &p
+   fnt = {name: name, dir: "pk7/fonts/#{name}"}
+   fnt.instance_exec(&p)
+   fnt
+end
+
+def escape_text_character ch
+   case ch
+   when "\\" then "\\\\"
+   when " " then "\\ "
+   else ch
    end
 end
 
-def label ch
-   ch = "\\" + ch if %w"\\ ( ) -".include? ch
-   "label:" + ch
+def make_character_image ptsize, font, ch, &blk
+   dr = Magick::Draw.new
+   dr.pointsize = ptsize
+   dr.font = font
+   dr.fill = "white"
+   dr.gravity = Magick::SouthWestGravity
+   txt_chr = escape_text_character ch
+   metr = dr.get_type_metrics txt_chr
+   return nil if metr.bounds.x1.truncate == metr.bounds.x2.truncate
+   im = Magick::Image.new metr.max_advance, metr.ascent - metr.descent do |ii|
+      ii.background_color = "none"
+      ii.image_type = Magick::GrayscaleAlphaType
+      ii.depth = 8
+   end
+   if blk
+      blk.call dr, im, txt_chr
+   else
+      dr.text 0, 0, txt_chr
+      dr.draw im
+   end
+   im
 end
 
-Font = Struct.new :pt, :name, :cmap, :body, :outdir, :ttf
+def push_image il, im, fl, ch
+   il.push im
+   fl.push sprintf "%08X", ch.ord
+end
 
-cmap_asc = gen_map [("!".."#"), "%", ("'".."?"), ("A".."}")]
-cmap_pnc = gen_map [("¡".."£"), ("¥".."¬"), ("®".."´"), ("¶".."¿"),
-                    "×", "÷", ("‒".."‧"), ("‰".."‽"), ("⁂".."⁏"),
-                    ("⁑".."⁓"), ("⁕".."⁞")]
-cmap_let = gen_map [("À".."ÿ"), "Ё", ("А".."я"), "ё"]
-cmap_ext = gen_map [("!".."~"), *cmap_pnc, *cmap_let]
-
-cmap_all = Set[]
-
-Dir.glob("text/**/*.txt").each do |f|
-   open(f).each_char do |c|
-      cmap_all.add c
+def write_files il, fl
+   il.write "#{self[:dir]}/%d.png"
+   for f, i in fl.each_with_index
+      File.rename "#{self[:dir]}/#{i}.png", "#{self[:dir]}/#{f}.png"
    end
 end
 
-cmap_all.delete " "
-cmap_all.delete "\n"
-cmap_all.delete "\r"
-cmap_all.delete_if do |c| cmap_let.include? c end
-
-cmap_all = cmap_all.to_a.sort
-
-fonts = []
-fonts.push Font.new 8,  "MisakiG",   cmap_all
-fonts.push Font.new 8,  "MisakiM",   cmap_all
-fonts.push Font.new 16, "jiskan16",  cmap_all
-fonts.push Font.new(8,  "ljtrmfont", cmap_all, lambda do |words, ch|
-                       words.push "-stroke",      "black",
-                                  "-strokewidth", "1",    label(ch),
-                                  "-stroke",      "none", label(ch),
-                                  "-composite"
-                    end)
-fonts.push Font.new(30, "AreaName", cmap_asc, lambda do |words, ch|
-                       words.push "-stroke",      "black",
-                                  "-strokewidth", "5",    label(ch),
-                                  "-stroke",      "none", label(ch),
-                                  "-composite"
-                    end)
-fonts.push Font.new(11, "ltrmfont", cmap_ext, lambda do |words, ch|
-                       words.push "-stroke",      "black",
-                                  "-strokewidth", "1",    label(ch),
-                                  "-stroke",      "none", label(ch),
-                                  "-composite",
-                                  "-extent", "7x13"
-                    end)
-
-optipng_in  = []
-pngquant_in = []
-advpng_in   = []
-
-fonts.each do |fnt|
-   fnt.outdir = "pk7/fonts/#{fnt.name.downcase}"
-   fnt.ttf    = "bin/#{fnt.name}.ttf"
+def do_stroke dr, im, txt_chr
+   dr.text 0, 0, txt_chr
+   dr.draw im
+   dr.stroke = "none"
+   dr.stroke_width = 0
+   dr.text 0, 0, txt_chr
+   dr.draw im
 end
 
-fonts.each do |fnt|
-   system "rm", "-f", *Dir.glob("#{fnt.outdir}/*.png")
+def all_files_glob
+   "#{self[:dir]}/*.png"
 end
 
-fonts.each do |fnt|
-   unless FileTest.exist? fnt.ttf
-      system "wget",
-             "https://mab.greyserv.net/f/#{fnt.name}.ttf",
-             "-O", fnt.ttf
-   end
+def delete_all_files
+   File.delete(*Dir.glob(all_files_glob))
+end
 
-   words = ["convert",
-            "-depth",      "1",
-            "-font",       fnt.ttf,
-            "-pointsize",  fnt.pt.to_s,
-            "-background", "none",
-            "-fill",       "white"]
+def call_optipng
+   system "optipng",
+   "-strip", "all",
+   "-preserve", "-clobber",
+   "-o", "2", *Dir.glob(all_files_glob)
+end
 
-   for ch in fnt.cmap
-      num = sprintf "%08X", ch.ord
-      f = "#{fnt.outdir}/#{num}.png"
-      if fnt.body
-         optipng_in.push f
-      else
-         pngquant_in.push f
+jsmlfont = new_font "ljsmlfnt" do
+   il = Magick::ImageList.new
+   fl = []
+   grad = Magick::GradientFill.new 0, 0, 16, 0, "white", "#696969"
+   grad = Magick::Image.new 32, 16, grad
+   self[:start_fn] = proc do delete_all_files end
+   self[:char_fn] = proc do |ch|
+      im = make_character_image 16, "working/x12y16pxMaruMonica.ttf", ch do |dr, im, txt_chr|
+         dr.text 0, 0, txt_chr
+         dr.draw im
+         im.define "trim:edges", "east"
+         im.trim!
       end
-      advpng_in.push f
-      words.push "("
-      if fnt.body
-         fnt.body.call words, ch
-      else
-         words.push label(ch)
+      if im
+         out = im.composite grad, 0, 0, Magick::InCompositeOp
+         out = im
+            .negate_channel(true, Magick::DefaultChannels)
+            .extent(im.columns + 1, im.rows + 1)
+            .roll(1, 1)
+            .composite(out, 0, 0, Magick::SrcOverCompositeOp)
+         push_image il, out, fl, ch
       end
-      words.push "-write", f, ")"
    end
-
-   words.push "null:"
-
-   system(*words)
+   self[:end_fn] = proc do
+      write_files il, fl
+      call_optipng
+   end
 end
-
-system "optipng",
-       "-strip", "all",
-       "-preserve",
-       "-clobber",
-       "-o", "2",
-       *optipng_in
-system "pngquant",
-       "--ext", ".png",
-       "-f", "8",
-       "-s", "1",
-       *pngquant_in
-system "advpng",
-       "-z4",
-       *advpng_in
+jtrmfont = new_font "ltrmfont" do
+   il = Magick::ImageList.new
+   fl = []
+   self[:start_fn] = proc do delete_all_files end
+   self[:char_fn] = proc do |ch|
+      im = make_character_image 11, "working/ipaexg.ttf", ch do |dr, im, txt_chr|
+         dr.stroke = "black"
+         dr.stroke_width = 1
+         do_stroke dr, im, txt_chr
+      end
+      push_image il, im, fl, ch if im
+   end
+   self[:end_fn] = proc do
+      write_files il, fl
+   end
+end
+ltrmfont = new_font "ltrmfont" do
+   il = Magick::ImageList.new
+   fl = []
+   self[:start_fn] = proc do end
+   self[:char_fn] = proc do |ch|
+      im = make_character_image 11, "working/courierprime.ttf", ch do |dr, im, txt_chr|
+         dr.stroke = "black"
+         dr.stroke_width = 1
+         do_stroke dr, im, txt_chr
+      end
+      push_image il, im, fl, ch if im
+   end
+   self[:end_fn] = proc do
+      write_files il, fl
+      call_optipng
+   end
+end
+areaname = new_font "lareanam" do
+   il = Magick::ImageList.new
+   fl = []
+   self[:start_fn] = proc do delete_all_files end
+   self[:char_fn] = proc do |ch|
+      im = make_character_image 30, "working/smodgui.ttf", ch do |dr, im, txt_chr|
+         dr.stroke = "black"
+         dr.stroke_width = 5
+         do_stroke dr, im, txt_chr
+         im.define "trim:edges", "east"
+         im.trim!
+      end
+      push_image il, im, fl, ch if im
+   end
+   self[:end_fn] = proc do
+      write_files il, fl
+      call_optipng
+   end
+end
+[jsmlfont, jtrmfont, ltrmfont, areaname].each do |fnt|
+   fnt[:start_fn].call
+   chrmap.each do |ch| fnt[:char_fn].call(ch) end
+   fnt[:end_fn].call
+end
 
 ## EOF

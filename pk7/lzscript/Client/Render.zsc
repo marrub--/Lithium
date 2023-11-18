@@ -26,13 +26,14 @@ ui textureId m_texBattery;
 int m_lightCurBattery, m_lightMaxBattery;
 
 void renRegister() {
-   m_uFntSml        = 'ljiskan';
-   m_lSmlFont       = 'lsmlfont';
-   m_lMidFont       = 'lmidfont';
-   m_lTrmFont       = 'ltrmfont';
-   m_lBigFont       = 'lbigfont';
-   m_lJTrmFont      = 'ljtrmfnt';
-   m_newConsoleFont = 'newconsolefont';
+   m_jSmlFont = 'ljsmlfnt';
+   m_jMidFont = 'ljsmlfnt';
+   m_jTrmFont = 'ltrmfont';
+   m_jBigFont = 'newconsolefont';
+   m_lSmlFont = 'lsmlfont';
+   m_lMidFont = 'lmidfont';
+   m_lTrmFont = 'ltrmfont';
+   m_lBigFont = 'lbigfont';
    projectRegister();
    m_tracer = new("Lith_LineTracer");
    m_rectShape = new("Shape2D");
