@@ -144,6 +144,10 @@ void dbg_font_test(str font) {
       u8"Jovencillo emponzoñado de whisky: ¡qué figurota exhibe!",
       u8"Voix ambiguë d'un cœur qui au zéphyr préfère les jattes de kiwis",
       u8"Широкая электрификация южных подъёму сельского хозяйства",
+      u8"いろはにほへと　ちりぬるを / 色は匂へど　散りぬるを",
+      u8"わかよたれそ　つねならむ / 我が世誰ぞ　常ならむ",
+      u8"うゐのおくやま　けふこえて / 有為の奥山　今日越えて",
+      u8"あさきゆめみし　ゑひもせす / 浅き夢見じ　酔ひもせず",
    };
    for(;;) {
       enum {_h = 12};
