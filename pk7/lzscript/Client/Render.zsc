@@ -29,7 +29,7 @@ void renRegister() {
    m_jSmlFont = 'ljsmlfnt';
    m_jMidFont = 'ljsmlfnt';
    m_jTrmFont = 'ltrmfont';
-   m_jBigFont = 'newconsolefont';
+   m_jBigFont = 'lbigfont';
    m_lSmlFont = 'lsmlfont';
    m_lMidFont = 'lmidfont';
    m_lTrmFont = 'ltrmfont';
