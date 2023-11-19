@@ -215,7 +215,7 @@ end
    fl = []
    self[:start_fn] = proc do delete_files all_files_glob end
    self[:char_fn] = proc do |ch|
-      im = make_character_image 30, "working/smodgui.ttf", ch, 6 do |dr, im, tch|
+      im = make_character_image 30, "working/smodgui.ttf", ch, 3 do |dr, im, tch|
          dr.stroke = "black"
          dr.stroke_width = 5
          dr_stroke dr, im, tch
