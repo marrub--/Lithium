@@ -33,7 +33,8 @@
 %                                                                             %
 %  Sources for GDCC libc can be found at <https://github.com/DavidPH/GDCC>.   %
 %                                                                             %
-%  Lithium's source can be found at <https://github.com/marrub--/Lithium>.    %
+%  Lithium's source can be found in the <lsource> and <ltext> folders, as     %
+%  well as online at <https://github.com/marrub--/Lithium>.                   %
 %\                                                                           /%
 \\\%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%///
 ~
@@ -51,7 +52,7 @@
 @ a1337spy        - Various sounds
 @ HelpTheWretched - Various Zelda sound rips
 ~
-                             * Weapons *
+                         * Weapon Graphics *
 
 @ ChronoTeeth     - SPAS reload frames
 @ DT7             - Khanda model (CC-BY-4.0; https://skfb.ly/66BHu)
@@ -68,6 +69,46 @@
 @ Zombie          - Image used as a base for the SPAS sprite
 @ vikingbro       - Image used as a base for the Shock Rifle sprite
 @ zrrion          - Sprites for the Grenade Launcher, Pistol and Plasma Rifle
+~
+                           * Omega Cannon *
+
+@ Minigunner                   - Centered DNF enforcer gun
+@ Solo Spaghetti, Bloax & Slax - Skull SSG
+@ Marrub                       - Redraw
+
+                           * Combat Rifle *
+
+@ Sgt. Shivers  - Model rip
+@ TheRailgunner - Edit of model rip
+@ Marrub        - Small edits
+
+                            * Ion Rifle *
+
+@ monkeybtm6    - Weapon rip from Disruptor
+@ torridGristle - Assault rifle sprite
+@ Marrub        - Redraw
+
+                          * Laser Shotgun *
+
+@ Mike12                           - Vented shotgun
+@ Dr Cosmobyte, Cage & Scuba Steve - Auto shotgun
+@ Marrub                           - Redraw of sights and design
+
+                           * Sniper Rifle *
+
+@ MrEnchanter  - Sniper rifle sprite
+@ Marrub       - Redrawing and detailing, re-handing
+@ Sgt. Shivers - Firing animation
+
+                          * Super Shotgun *
+
+@ Captain J & Turbo - Whole sprite
+@ Sgt. Shivers      - Animation
+
+                          * 4-Bore Shotgun *
+
+@ JoeyTD  - Center frame base
+@ Batandy - Reload animation base
 ~
                              * Graphics *
 
@@ -99,6 +140,15 @@
 @ monkeybtm6     - BLLTR0 sprite
 @ vikingbro      - Image used as a base for the Shock Rifle sprite
 @ zrrion         - Skull key, health, cell pack, and health bonus pickups
+~
+                              * Fonts *
+
+@ Jimmy           - lmidfont and lsmlfont
+@ IBM             - lbigfont (<U+80)
+@ The Author      - lareanam (SMODGUI)
+@ hicc 患者長ひっく \ ljsmlfnt (x12y16pxMaruMonica)
+                  | lbigfont (>U+2E7F are x12y12MaruMinya)
+@ IPA             - ltrmfnt (>U+2122 are IPAex)
 ~
                                * Code *
 
@@ -158,54 +208,6 @@
 - wildweasel
 
                     Thanks so much to all of you!
-~
-                           * Omega Cannon *
-
-@ Minigunner                   - Centered DNF enforcer gun
-@ Solo Spaghetti, Bloax & Slax - Skull SSG
-@ Marrub                       - Redraw
-
-                           * Combat Rifle *
-
-@ Sgt. Shivers  - Model rip
-@ TheRailgunner - Edit of model rip
-@ Marrub        - Small edits
-
-                            * Ion Rifle *
-
-@ monkeybtm6    - Weapon rip from Disruptor
-@ torridGristle - Assault rifle sprite
-@ Marrub        - Redraw
-
-                          * Laser Shotgun *
-
-@ Mike12                           - Vented shotgun
-@ Dr Cosmobyte, Cage & Scuba Steve - Auto shotgun
-@ Marrub                           - Redraw of sights and design
-
-                           * Sniper Rifle *
-
-@ MrEnchanter  - Sniper rifle sprite
-@ Marrub       - Redrawing and detailing, re-handing
-@ Sgt. Shivers - Firing animation
-
-                          * Super Shotgun *
-
-@ Captain J & Turbo - Whole sprite
-@ Sgt. Shivers      - Animation
-
-                          * 4-Bore Shotgun *
-
-@ JoeyTD  - Center frame base
-@ Batandy - Reload animation base
-~
-                              * Fonts *
-
-@ Jimmy           - lmidfont and lsmlfont
-@ IBM             - lbigfont (<U+80)
-@ The Author      - lareanam (SMODGUI)
-@ hicc 患者長ひっく - ljsmlfnt (x12y16pxMaruMonica), lbigfont (>U+2E7F are x12y12MaruMinya)
-@ IPA             - ltrmfnt (>U+2122 are IPAex)
 ~
                        * LOOKING FOR CREDITS *
 

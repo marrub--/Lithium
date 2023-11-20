@@ -45,7 +45,9 @@ void Z_OpenCreditsMenu(void) {
       case '@':
          skip_ws();
          _l("\Cg");
-         while(*inp && !(inp[0] == ' ' && (inp[1] == ' ' || inp[1] == '-'))) {
+         while(*inp && !(inp[0] == ' ' &&
+                         (inp[1] == ' ' || inp[1] == '-' || inp[1] == '\\')))
+         {
             _c(*inp++);
          }
          skip_ws();
