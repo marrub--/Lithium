@@ -73,7 +73,16 @@ override void drawer() {
       float y  = 240.0 - lny * lnC / 2.0 + lny * lnN;
       x += cos(y + msTime() * 0.07) * 8.0;
       y += sin(y + msTime() * 0.07) * 8.0 * 1.33333;
-      Screen.drawText(m_font, Font.CR_UNTRANSLATED, x, y, ln,
+      int cr = Font.CR_UNTRANSLATED;
+      if(m_curSection == 0) {
+         static const name COLORNAMES[] = {
+            'Lith_RRed', 'Lith_RDOr', 'Lith_ROra', 'Lith_RYel', 'Lith_RYlg',
+            'Lith_RGrn', 'Lith_RCya', 'Lith_RBlu', 'Lith_RInd', 'Lith_RPur',
+            'Lith_RLav', 'Lith_RPnk', 'Lith_RHPn'
+         };
+         cr = Font.findFontColor(COLORNAMES[(lnN + tic / 4) % COLORNAMES.size()]);
+      }
+      Screen.drawText(m_font, cr, x, y, ln,
                       DTA_VIRTUALWIDTH, 640, DTA_VIRTUALHEIGHT, 480);
    }
 }
