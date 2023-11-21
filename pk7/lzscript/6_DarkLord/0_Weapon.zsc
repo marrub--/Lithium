@@ -347,30 +347,30 @@ _SprintDone:
    stop;
 _SubGun:
    TNT1 A 0 a_jumpIf(Lith_UTIL.pData(_pdt_upgrade, UPGR_SubGun_A), "_SubGun2");
-   ARGN B 1 bright lith_subGunPreFire;
-   ARGN A 1 bright lith_subGunFire;
-   ARGN B 1 bright lith_subGunPreFire;
-   ARGN A 1 bright lith_subGunFire;
+   ,DSB B 1 bright lith_subGunPreFire;
+   ,DSB A 1 bright lith_subGunFire;
+   ,DSB B 1 bright lith_subGunPreFire;
+   ,DSB A 1 bright lith_subGunFire;
    TNT1 A 1;
-   ARGN B 1 bright lith_subGunPreFire;
-   ARGN A 1 bright lith_subGunFire;
-   ARGN B 1 bright lith_subGunPreFire;
-   ARGN A 1 bright lith_subGunFire;
+   ,DSB B 1 bright lith_subGunPreFire;
+   ,DSB A 1 bright lith_subGunFire;
+   ,DSB B 1 bright lith_subGunPreFire;
+   ,DSB A 1 bright lith_subGunFire;
    TNT1 A 1;
-   ARGN B 1 bright lith_subGunPreFire;
+   ,DSB B 1 bright lith_subGunPreFire;
    TNT1 A 7;
    stop;
 _SubGun2:
-   ARGN AAAAAAAAAAAAAAAAAAAA 1 bright lith_subGunFire;
+   ,DSB AAAAAAAAAAAAAAAAAAAA 1 bright lith_subGunFire;
    stop;
 _SubGrn:
-   AGRN A 1 bright lith_subGrnFire;
-   AGRN BCDEFG 1 bright;
+   ,DSG A 1 bright lith_subGrnFire;
+   ,DSG BCDEFG 1 bright;
    TNT1 A 11;
    stop;
 _SubAxe:
-   AAXE A 2 bright lith_subAxeFire;
-   AAXE BCD 2 bright;
+   ,DSA A 2 bright lith_subAxeFire;
+   ,DSA BCD 2 bright;
    TNT1 A 10;
    stop;
 _SubDrt:
