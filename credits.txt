@@ -54,21 +54,23 @@
 ~
                          * Weapon Graphics *
 
-@ ChronoTeeth     - SPAS reload frames
-@ DT7             - Khanda model (CC-BY-4.0; https://skfb.ly/66BHu)
-@ Dr Cosmobyte    - Plasma Diffuser sprite, Gauss Shotgun idle sprite
-@ Dynamo          - Minigun rip from Target
-@ JetPlane        - Image used as a base for the SMG sprite
-@ Minigunner      - Missile Launcher sprite
-@ Pablomarcellana - Kampilan model (CC-BY-4.0; https://skfb.ly/6RnBM)
-@ Sgt. Shivers    \ Shotgun, knife, and revolver sprites
-                  | Mateba & SPAS reload animations
-@ VriskaSerket    - Image used as a base for the Star Destroyer sprite
-@ WildWeasel      - Sleeves for Cyber-Mage
-@ Yholl           - Made the Charge Fist not suck
-@ Zombie          - Image used as a base for the SPAS sprite
-@ vikingbro       - Image used as a base for the Shock Rifle sprite
-@ zrrion          - Sprites for the Grenade Launcher, Pistol and Plasma Rifle
+@ ChronoTeeth        - SPAS reload frames
+@ DT7                - Khanda model (CC-BY-4.0; https://skfb.ly/66BHu)
+@ Dr Cosmobyte       - Plasma Diffuser sprite, Gauss Shotgun idle sprite
+@ Dynamo             - Minigun rip from Target
+@ JetPlane           - Image used as a base for the SMG sprite
+@ Minigunner         - Missile Launcher sprite
+@ Pablomarcellana    - Kampilan model (CC-BY-4.0; https://skfb.ly/6RnBM)
+@ Ribonucleic Asshat \ Environment texture used in Dark Lord weapons
+                     | Help with using Blender
+@ Sgt. Shivers       \ Shotgun, knife, and revolver sprites
+                     | Mateba & SPAS reload animations
+@ VriskaSerket       - Image used as a base for the Star Destroyer sprite
+@ WildWeasel         - Sleeves for Cyber-Mage
+@ Yholl              - Made the Charge Fist not suck
+@ Zombie             - Image used as a base for the SPAS sprite
+@ vikingbro          - Image used as a base for the Shock Rifle sprite
+@ zrrion             - Sprites for the Grenade Launcher, Pistol and Plasma Rifle
 ~
                            * Omega Cannon *
 
@@ -121,7 +123,6 @@
 @ Kurashiki      - Basilissa art
 @ Marlboro Mike  \ Score item sprites
                  | Rocket Box pickup
-@ Marphy Black   - Doom 2 Minor Sprite Fixes sprites are included in the mod
 @ Minigunner     - Smooth explosion sprites
 @ Ryan Cordell   \ Green/blue armor pickups
                  | XDeaths for the Cacodemon, Demon, Archvile, and Revenant
