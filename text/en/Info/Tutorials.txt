@@ -193,8 +193,9 @@ attack.
 
 * Only the <.700 Express> and <Ruzuk> need to be reloaded.
 
-* <Ruzuk> and the upgraded <Hunting Shotgun> use the <Weapon Action>
-({+lith_k_wact}) button to aim down sights.
+* <Ruzuk>, the upgraded <Hunting Shotgun>, and the upgraded <Qasl
+REMS> use the <Weapon Action> ({+lith_k_wact}) button to aim down
+sights.
 
 == \#TUT_DarkLordItem_NAM | \c[Lith_Blue]Dl\c-. Items
 @@ \#TUT_DarkLordItem_DSC

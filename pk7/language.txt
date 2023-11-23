@@ -2648,7 +2648,7 @@
    "\n"
    "* Only the <.700 Express> and <Ruzuk> need to be reloaded.\n"
    "\n"
-   "* <Ruzuk> and the upgraded <Hunting Shotgun> use the <Weapon Action> ({+lith_k_wact}) button to aim down sights.";
+   "* <Ruzuk>, the upgraded <Hunting Shotgun>, and the upgraded <Qasl REMS> use the <Weapon Action> ({+lith_k_wact}) button to aim down sights.";
 "LITH_TUT_DarkLordItem_NAM" =
    "\c[Lith_Blue]Dl\c-. Items";
 "LITH_TUT_DarkLordItem_DSC" =
