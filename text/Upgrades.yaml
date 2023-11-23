@@ -79,12 +79,12 @@ _uc_weap:
       700E_A:       {scr:  900000}
       Shrapnel_A:   {scr: 2222222}
       Shrapnel_B:   {scr: 1444444}
-      4Bore_A:      {scr: 4444444}
-      4Bore_B:      {scr:  911111}
+      4Bore_A:      {scr: 3444444}
+      4Bore_B:      {scr: 1911111}
       Minigun_A:    {scr: 2932134}
       Franca_A:     {scr: 9999999}
       Franca_B:     {scr: 9999999}
-      Sophia_A:     {scr: 5123432}
+      Sophia_A:     {scr: 4123432}
       Sophia_B:     {scr: 9999999}
       FortuneGun_A: {scr: 9999999}
       FortuneGun_B: {scr: 9999999}
@@ -92,15 +92,17 @@ _uc_weap:
       Rems_B:       {scr: 8984838}
 _uc_extr:
    gO:
-      TorgueMode: {pg: N/A, scr: 8000000,                    pr: 8, req: rdi}
-      Seven7s:    {pg: N/A, scr: 8235430, f: ADU--, mul: 10, pr: 7, req: rdi}
-      Goldeneye:  {pg: N/A, scr:   70000, f: --U--, mul:  7,        req: rdi}
+      TorgueMode: {pg: N/A, scr: 8000000,                    req: rdi, pr: 8}
+      Seven7s:    {pg: N/A, scr: 8235430, f: ADU--, mul: 10, req: rdi, pr: 7}
+      Goldeneye:  {pg: N/A, scr:   70000, f: --U--, mul:  7, req: rdi}
+      lolsords:   {pg: N/A, scr: 1000000, f: ADU--, mul: 20, req: rdi}
    pM:
-      lolsords: {pg: N/A, scr: 1000000, f: ADU--, mul: 20, req: rdi}
-      Cannon_C: {pg: N/A, scr: 1500000, grp: 4,            req: wmd wrd rdi}
+      Cannon_C: {pg: N/A, scr: 16666666, grp: 4, req: wmd wrd rdi}
+   gI:
+      SMT:       {pg: N/A, scr: 5696969, mul: 20}
+      ATATATATA: {pg: N/A, scr: 1983333, mul: 2}
    pD:
-      ATATATATA: {pg: N/A, scr: 9999999}
-      Dekampila: {pg: N/A, scr: 9999999}
+      Kampilan_B: {pg: N/A, scr: 9999999}
 _uc_down:
    gA:
       UNCEUNCE:   {pg: N/A, f: ADU--, mul: 30}
