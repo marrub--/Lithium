@@ -271,6 +271,7 @@ enum {
 
 enum {
    cupg_rdistinter,
+   cupg_dimdriver,
    cupg_m_weapninter,
    cupg_m_cpu1,
    cupg_m_armorinter,
@@ -286,7 +287,6 @@ enum {
    cupg_d_zakwu,
    cupg_d_zikr,
    cupg_d_shield,
-   cupg_d_dimdriver,
 };
 
 enum {

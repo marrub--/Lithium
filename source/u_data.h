@@ -32,6 +32,7 @@ enum {
    _ur_wmd,
    _ur_wrd,
    _ur_rdi,
+   _ur_dim,
    _ur_ra,
    _ur_max,
 };

@@ -130,6 +130,7 @@ void GUIUpgradeRequirements(struct gui_state *g, struct upgrade *upgr) {
    if(get_bit(req, _ur_wmd)) Req(sl_cbi_weapninter);
    if(get_bit(req, _ur_wrd)) Req(sl_cbi_weapninte2);
    if(get_bit(req, _ur_rdi)) Req(sl_cbi_rdistinter);
+   if(get_bit(req, _ur_dim)) Req(sl_cbi_dimdriver);
    if(get_bit(req, _ur_ra))  Req(sl_cbi_reactarmor);
 
    #undef Req

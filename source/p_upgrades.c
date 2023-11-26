@@ -178,6 +178,7 @@ i32 P_Upg_CheckReqs(struct upgrade *upgr) {
          Req(_ur_wmd, get_bit(wl.cbiupgr, cupg_m_weapninter));
          Req(_ur_wrd, get_bit(wl.cbiupgr, cupg_m_weapninte2));
          Req(_ur_rdi, get_bit(wl.cbiupgr, cupg_rdistinter));
+         Req(_ur_dim, get_bit(wl.cbiupgr, cupg_dimdriver));
          Req(_ur_ra,  get_bit(pl.upgrades[UPGR_ReactArmor].flags, _ug_owned));
          #undef Req
          }

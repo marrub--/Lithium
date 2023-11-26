@@ -102,11 +102,11 @@ void CBITab_DarkLord(struct gui_state *g) {
          PrintText_str(sl_cbi_rune_##_l, sf_lmidfont, CR_WHITE, g->ox+_x*96+50,4, g->oy+_y*47+38,2) \
       )
    Rune(Empty, rkz, 1, 0);
-   Upgr(cupg_d_zaruk)     Rune(Zrk,  zrk,  1, 1);
-   Upgr(cupg_d_zakwu)     Rune(Zkw,  zkw,  0, 2);
-   Upgr(cupg_d_dimdriver) Rune(Zzkr, zzkr, 1, 2);
-   Upgr(cupg_d_zikr)      Rune(Zkr,  zkr,  2, 2);
-   Upgr(cupg_d_shield)    Rune(Rkw,  rkw,  1, 3);
+   Upgr(cupg_d_zaruk)   Rune(Zrk,  zrk,  1, 1);
+   Upgr(cupg_d_zakwu)   Rune(Zkw,  zkw,  0, 2);
+   Upgr(cupg_dimdriver) Rune(Zzkr, zzkr, 1, 2);
+   Upgr(cupg_d_zikr)    Rune(Zkr,  zkr,  2, 2);
+   Upgr(cupg_d_shield)  Rune(Rkw,  rkw,  1, 3);
    PrintText_str(sl_cbi_dl_status, sf_lmidfont, CR_WHITE, g->ox+4,1, g->oy+24,1);
 }
 
