@@ -29,18 +29,22 @@ class Lith_KampilanPuff : Actor {
             target.a_startSound("weapons/kampilan/hit", lch_weapon2);
          }
          lith_doFx("white");
+         a_quakeEx(0.1, 0.1, 0, 5, 0, 128);
       } else {
          a_startSound("body/flesh", lch_auto);
          lith_doFx("red");
          if(target) {
             target.a_startSound("weapons/kampilan/hitflesh", lch_weapon2);
          }
+         a_quakeEx(0.7, 0.7, 0, 15, 0, 256);
       }
    }
 
    states {
+   XDeath:
+   Melee:
    Spawn:
-      TNT1 A 0;
+      TNT1 A 8;
       stop;
    }
 }
@@ -53,6 +57,8 @@ class Lith_KampilanPuff2 : Lith_KampilanPuff {
 
 class Lith_KampilanBonkPuff : Actor {
    default {
+      Alpha 0.6;
+      RenderStyle "Translucent";
       Mass 5;
       +ForcePain
       +HitTracer
@@ -69,10 +75,13 @@ class Lith_KampilanBonkPuff : Actor {
       if(target) {
          target.a_startSound("weapons/kampilan/bonk", lch_weapon2);
       }
-      if(tracer && !tracer.bNoBlood) {
-         a_startSound("body/flesh", lch_auto);
+      if(tracer) {
+         if(!tracer.bNoBlood) {
+            a_startSound("body/flesh", lch_auto);
+         }
+         a_quakeEx(1.1, 1.1, 0, 10, 0, 256);
       } else {
-         destroy();
+         a_quakeEx(0.5, 0.5, 0, 7, 0, 256);
       }
    }
 
@@ -88,7 +97,8 @@ class Lith_KampilanBonkPuff : Actor {
    states {
    Spawn:
       TNT1 A 0;
-      TNT1 AAAAAA 3 lith_a_setPain;
+      FHFX STUVW 3 lith_a_setPain;
+      TNT1 A 3 lith_a_setPain;
       stop;
    }
 }
@@ -97,7 +107,8 @@ class Lith_KampilanBonkPuff2 : Lith_KampilanBonkPuff {
    states {
    Spawn:
       TNT1 A 0;
-      TNT1 AAAAAAAAAAAA 3 lith_a_setPain;
+      FHFX STUVW 3 lith_a_setPain;
+      TNT1 AAAAAAA 3 lith_a_setPain;
       stop;
    }
 }
