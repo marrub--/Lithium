@@ -10,6 +10,7 @@
 Waves of light scatter and permeate,
 during these last few moments
 before death sweeps and parts us,
+
 at least hold my hand.
 
 Yet, at the same time,
@@ -28,34 +29,35 @@ No more.
 You can't hold on to pretty pictures.
 
 @@ LITHEND_Normal_2_Ari
-\cn+ You wake up in a field of green grass. The sky is blue. You sit
-there, wondering what you might have just seen. You look into the
-distance. You see your home city.\c-
-
-\cn+ It's burning.\c-
-
-@@
-   \cmWas this the result of your stunt?
-  \cmDid you cause this?
- \cmIs it your fault?
-\cmDid you?
+\cnYou come to. All you can see are rolling plains. Golden grass. The
+sight of it makes you feel something strange. And in the distance, you
+see your home city.
 @@
 
-\ca- No. Above are space ships, bearing the mark of the moon. This is
-simply the end.\c-
+\caIt's burning.
+\caWas this the result of your stunt?
+\caDid you... cause this?
 
-The war has started.
+@@
+\cnYou look up to the sky. Cruisers bearing the mark of the moon.
+
+\caNo, the war had already begun long ago. It only looked like it was
+over. This is the end.
+
+\cnThis is the end. You hold your gun.
+
+\caIn your mind, your sister sighs.
 
 %% LITHEND_Normal_3_Ari
-\caA body in the depths of your mind.
+\caA body in the depths of your memory.
 \caYou feel like the world wasn't meant
 \cafor you both to live in.
 
 \cnSecondarily, a fabrication of self,
-\cnsheared through exosymbol
+\cnsheared through exosymbol.
 
 \ckA broken world, or faulty individuals?
-\ciSomething more, a repartee of death -
+\ciSomething more, a repartée of death—
 \cga sickness of the heart, everywhere.
 
 \cxA hope to regain what was taken.
