@@ -76,6 +76,12 @@ class Lith_DivisionItem : Lith_InventoryItem;
 
 mixin Lith_Pickup;
 
+default {
+   Lith_DivisionItem.Glow "Lith_ItemGlow";
+   Inventory.PickupSound "player/pickup/evil";
+   +DontGib
+}
+
 override void postBeginPlay() {
    super.postBeginPlay();
    pkPostBeginPlay();
@@ -84,11 +90,6 @@ override void postBeginPlay() {
 override void tick() {
    super.tick();
    pkTick();
-}
-
-default {
-   Lith_DivisionItem.Glow "Lith_ItemGlow";
-   Inventory.PickupSound "player/pickup/evil";
 }
 
 /* EOF */

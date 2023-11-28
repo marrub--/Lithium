@@ -74,8 +74,8 @@ default {
    Inventory.PickupMessage "";
    Inventory.PickupSound "player/pickup/upgrcbi";
    Lith_CbiItem.Glow "Lith_UpgrGlow";
-
    +Inventory.AlwaysPickup
+   +DontGib
 }
 
 meta int m_upgNum;

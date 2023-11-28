@@ -29,8 +29,7 @@ class Lith_ManaPickupTrail : Actor
 
 class Lith_ManaPickup : Lith_BasicPickup;
 
-default
-{
+default {
    RenderStyle "Add";
    Radius 4;
    Height 64;
@@ -38,19 +37,18 @@ default
    Inventory.PickupSound "player/pickup/mana";
    Inventory.PickupMessage "";
    Tag "$LITH_STATUS_MP";
-
    -Lith_BasicPickup.DrawPopup
-   +INVENTORY.ALWAYSPICKUP
-   +INVENTORY.TRANSFER
-   +INVENTORY.NOSCREENFLASH
-   +NOGRAVITY
-   +NOCLIP
-   +SEEKERMISSILE
-   +BRIGHT
+   +Inventory.AlwaysPickup
+   +Inventory.Transfer
+   +Inventory.NoScreenFlash
+   +DontGib
+   +NoGravity
+   +NoClip
+   +SeekerMissile
+   +Bright
 }
 
-override void PostBeginPlay()
-{
+override void PostBeginPlay() {
    Super.PostBeginPlay();
    A_SetTranslation("Lith_Mana" .. Random(1, 8));
    Scale *= FRandom(0.5, 1);
@@ -60,8 +58,7 @@ override void PostBeginPlay()
 
 int m_DeathWait;
 
-states(Actor)
-{
+states(Actor) {
 Spawn:
    BLLT Q 0;
    BLLT Q 0 A_JumpIf(m_DeathWait++ >= 35 * 15, "Death");

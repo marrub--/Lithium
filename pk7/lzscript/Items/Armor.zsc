@@ -187,6 +187,7 @@ class Lith_Armor_PinkSilver_Upper : Lith_ArmorResistant {
       Lith_InventoryItem.InvSell 777700;
       Lith_ArmorBase.Save 6, 7;
       Lith_ArmorResistant.Resist ldt_magic;
+      +DontGib
    }
 
    states {Spawn: ARM7 A -1; stop;}
@@ -201,6 +202,7 @@ class Lith_Armor_PinkSilver_Lower : Lith_ArmorResistant {
       Lith_InventoryItem.InvSell 777700;
       Lith_ArmorBase.Save 4, 5;
       Lith_ArmorResistant.Resist ldt_magic;
+      +DontGib
    }
 
    states {Spawn: ARM7 C -1; stop;}
