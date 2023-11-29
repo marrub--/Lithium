@@ -257,8 +257,10 @@ void P_Ren_Debug(void) {
    ACS_BeginPrint();
    _l("mission%: "); _p(ml.missionprc); _c('\n');
    _l("exp: lv.");
-   _p(pl.attr.level); _c(' '); _p(pl.attr.expprev); _c('/');
-   _p(pl.attr.exp);   _c('/'); _p(pl.attr.expnext); _c('\n');
+   _p(pl.attr.level);   _c(' ');
+   _p(pl.attr.expprev); _c('/');
+   _p(pl.attr.exp);     _c('/');
+   _p(pl.attr.expnext); _c('\n');
    _l("pos: ");        _v(pl.x, pl.y, pl.z);                   _c('\n');
    _l("vel: ");        _v(pl.velx, pl.vely, pl.velz);          _c('\n');
    _l("v: ");          _p(pl.getVel());                        _c('\n');
@@ -269,15 +271,17 @@ void P_Ren_Debug(void) {
    _l("speedmul: ");   _p(pl.speedmul);                        _c('\n');
    _l("jumpboost: ");  _p(pl.jumpboost);                       _c('\n');
    _l("sky: ");        _p(sky1); _c(','); _p(sky2);            _c('\n');
-   _l("*target: ");    _p(pl.light.target);                    _c('\n');
-   _l("*intensity: "); _p(pl.light.intensity);                 _c('\n');
-   _l("*speed: ");     _p(pl.light.speed);                     _c('\n');
-   _l("*battery: ");   _p(pl.light.battery);                   _c('\n');
+   _l("light: ");
+   _p(pl.light.intensity); _c('/');
+   _p(pl.light.target);    _l(" spd: ");
+   _p(pl.light.speed);     _l(" bat: ");
+   _p(pl.light.battery);   _c('\n');
    if(get_bit(wl.cbiupgr, cupg_d_shield)) {
-      _l("shield: ");     _p((i32)pl.shield);  _c('\n');
-      _l("shieldmax: ");  _p(pl.shieldmax);    _c('\n');
-      _l("regen: ");      _p(pl.regenwait);    _c('\n');
-      _l("regenmax: ");   _p(pl.regenwaitmax); _c('\n');
+      _l("shield: ");
+      _p((i32)pl.shield);  _c('/');
+      _p(pl.shieldmax);    _l(" regen: ");
+      _p(pl.regenwait);    _c('/');
+      _p(pl.regenwaitmax); _c('\n');
    }
    _l("scorethreshold: "); _p(wl.scorethreshold); _c('\n');
    _l("realtime: "); _p(wl.realtime); _c('\n');
