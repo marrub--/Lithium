@@ -11,11 +11,41 @@ class Lith_Franca : Lith_Rocket {
       Speed 30;
       DamageFunction (random[lith_dlweapon](80, 170));
       Translation "Lith_Franca";
+      RenderStyle "Translucent";
+   }
+   override void postBeginPlay() {
+      super.postBeginPlay();
+      if(Lith_UTIL.pData(_pdt_upgrade, UPGR_Franca_A)) {
+         alpha = 0.4;
+      }
+   }
+   override int specialMissileHit(Actor th) {
+      if(alpha < 1 && th && th != target) {
+         int dmg = getMissileDamage(0, 1);
+         dmg = th.damageMobj(self, target, dmg, 'Magic');
+         a_startSound("body/flesh", lch_auto);
+         bThruActors = true;
+         alpha = 1;
+         return 1;
+      } else {
+         return -1;
+      }
+   }
+   states {
+   Death:
+      TNT1 A 0 {
+         A_Explode(bThruActors ? explosionDamage * 4 / 3 : explosionDamage);
+         Lith_A_ExplodeSound();
+         return Lith_A_DoExplosion();
+      }
+      stop;
    }
 }
 
-class Lith_Sophia : Lith_Franca {
+class Lith_Sophia : Lith_Rocket {
    default {
+      Speed 30;
+      DamageFunction (random[lith_dlweapon](80, 170));
       Translation "Lith_Sophia";
       +SeekerMissile
    }

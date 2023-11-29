@@ -2994,8 +2994,12 @@
    "Bullet Hose";
 "LITH_UPGRADE_EFFEC_Minigun_A" =
    "Significantly increases the Minigun's fire rate, but removes the ability to wind it up.";
+"LITH_UPGRADE_TITLE_Franca_A" =
+   "Slice RocketF";
+"LITH_UPGRADE_EFFEC_Franca_A" =
+   "Makes Franca's rockets slice through subspace, appearing translucent and going straight through an enemy, dealing direct damage. Piercing an enemy increases explosive yield and brings the rocket back to reality.";
 "LITH_UPGRADE_TITLE_Sophia_A" =
-   "Rocket Rocket";
+   "Rocket RocketS";
 "LITH_UPGRADE_EFFEC_Sophia_A" =
    "Makes Sophia fire two smaller rockets in quick succession.";
 "LITH_UPGRADE_TITLE_Rems_A" =
