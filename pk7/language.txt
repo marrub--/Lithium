@@ -2985,7 +2985,7 @@
 "LITH_UPGRADE_TITLE_4Bore_A" =
    "Magnetic Shot";
 "LITH_UPGRADE_EFFEC_4Bore_A" =
-   "Makes the Hunting Shotgun fire pellets that magnetically stack within a wound, causing each one that consecutively hits a target to increase the damage of the last few.";
+   "Makes the Hunting Shotgun fire pellets that magnetically stack within a wound, causing each pellet that hits a target in a single shot to increase the damage of the last few ones.";
 "LITH_UPGRADE_TITLE_4Bore_B" =
    "Precision Stock";
 "LITH_UPGRADE_EFFEC_4Bore_B" =

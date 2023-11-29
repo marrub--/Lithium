@@ -75,8 +75,8 @@ successive bounce.
 == \#UPGRADE_TITLE_4Bore_A | Magnetic Shot
 @@ \#UPGRADE_EFFEC_4Bore_A
 Makes the Hunting Shotgun fire pellets that magnetically stack within
-a wound, causing each one that consecutively hits a target to increase
-the damage of the last few.
+a wound, causing each pellet that hits a target in a single shot to
+increase the damage of the last few ones.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_4Bore_B | Precision Stock
