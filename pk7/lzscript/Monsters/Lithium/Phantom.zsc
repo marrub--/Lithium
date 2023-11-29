@@ -49,14 +49,15 @@ default {
    Speed        3;
    StencilColor "Black";
 
-   +BOSS
-   +DONTHARMSPECIES
-   +DONTMORPH
-   +MISSILEMORE
-   +NEVERTARGET
-   +NOPAIN
-   +NOTARGET
-   +THRUSPECIES
+   +Boss
+   +DontHarmSpecies
+   +DontMorph
+   +MissileMore
+   +NeverTarget
+   +NoPain
+   +NoTarget
+   +NoFear
+   +ThruSpecies
 }
 
 int m_Phase;
