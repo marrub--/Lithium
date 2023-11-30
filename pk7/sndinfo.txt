@@ -92,6 +92,7 @@ player/cbi/scroll = lsnd/GUI/Scroll.flac
 player/cbi/scrollend = lsnd/GUI/ScrollRelease.wav
 player/cbi/left = lsnd/GUI/Left.wav
 player/cbi/right = lsnd/GUI/Right.wav
+player/cbi/cheatammo = lsnd/GUI/CheatAmmo.flac
 $alias player/cbi/invrem player/cbi/findfail
 $random player/cbi/keypress { player/cbi/key1 player/cbi/key2 player/cbi/key3 }
 body/bullethit1 = lsnd/Monsters/Body/Bullet1.wav

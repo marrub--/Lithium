@@ -55,6 +55,8 @@ player.cbi {
    left  Left  # Mac OS 9
    right Right # ^
 
+   cheatammo CheatAmmo # Half-Life 2
+
    $alias invrem = findfail
 
    $random keypress {

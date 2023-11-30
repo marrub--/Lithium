@@ -273,6 +273,7 @@ override void cheatGive(string name_, int amount) {
       }
       break;
    case 'ammo':
+      S_StartSound("player/cbi/cheatammo", lch_body);
       acs_executeWithResult(lsc_giveammo);
       break;
    case 'armor':
