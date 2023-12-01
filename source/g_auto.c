@@ -117,9 +117,7 @@ void G_End(struct gui_state *g, i32 curs) {
       PrintText_str(g->tooltip, sf_smallfnt, CR_WHITE, p.x,1, p.y,1);
       ClearClip();
    }
-
    str cgfx;
-
    switch(curs) {
    default:
    case gui_curs_green:       cgfx = sp_UI_Cursor;            break;
@@ -133,9 +131,7 @@ void G_End(struct gui_state *g, i32 curs) {
    case gui_curs_outlineinv:  cgfx = sp_UI_CursorOutlineInv;  break;
    case gui_curs_outline2inv: cgfx = sp_UI_CursorOutline2Inv; break;
    }
-
    PrintSprite(cgfx, g->cx,1, g->cy,1);
-
    if(!g->clickany) {
       g->active = 0;
    }

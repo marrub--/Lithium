@@ -25,6 +25,7 @@
 #define G_Slider_FId(g, id, ...) G_Slider_Imp(g, id, G_Args(sld, __VA_ARGS__))
 #define G_TxtBox_FId(g, id, ...) G_TxtBox_Imp(g, id, G_Args(txt, __VA_ARGS__))
 #define G_WinBeg_FId(g, id, ...) G_WinBeg_Imp(g, id, G_Args(win, __VA_ARGS__))
+#define G_WinEnd_FId(g, id, ...) G_WinEnd_Imp(g, id, G_Args(win, __VA_ARGS__))
 
 /* Hashed ID */
 #define G_HId(id) (id) + LineHash
@@ -34,6 +35,7 @@
 #define G_Slider_HId(g, id, ...) G_Slider_FId(g, G_HId(id), __VA_ARGS__)
 #define G_TxtBox_HId(g, id, ...) G_TxtBox_FId(g, G_HId(id), __VA_ARGS__)
 #define G_WinBeg_HId(g, id, ...) G_WinBeg_FId(g, G_HId(id), __VA_ARGS__)
+#define G_WinEnd_HId(g, id, ...) G_WinEnd_FId(g, G_HId(id), __VA_ARGS__)
 
 /* Automatic ID */
 #define G_Button(g, ...) G_Button_HId(g, 0, __VA_ARGS__)
@@ -42,6 +44,7 @@
 #define G_Slider(g, ...) G_Slider_HId(g, 0, __VA_ARGS__)
 #define G_TxtBox(g, ...) G_TxtBox_HId(g, 0, __VA_ARGS__)
 #define G_WinBeg(g, ...) G_WinBeg_HId(g, 0, __VA_ARGS__)
+#define G_WinEnd(g, ...) G_WinEnd_HId(g, 0, __VA_ARGS__)
 
 #define G_Prefix(g, gfx, pre, mem) \
    statement({ \
@@ -294,8 +297,6 @@ void G_ScrEnd(struct gui_state *g, struct gui_scr *scr);
 optargs(1)
 bool G_ScrOcc(struct gui_state *g, struct gui_scr const *scr, i32 y, i32 h);
 
-void G_WinEnd(struct gui_state *g, struct gui_win *win);
-
 #define G_ImpArgs(ty) struct gui_state *g, gid_t id, struct gui_arg_##ty *a
 bool             G_Button_Imp(G_ImpArgs(btn));
 bool             G_ChkBox_Imp(G_ImpArgs(cbx));
@@ -303,5 +304,6 @@ void             G_ScrBeg_Imp(G_ImpArgs(scr));
 struct slide_ret G_Slider_Imp(G_ImpArgs(sld));
 bool             G_TxtBox_Imp(G_ImpArgs(txt));
 void             G_WinBeg_Imp(G_ImpArgs(win));
+void             G_WinEnd_Imp(G_ImpArgs(win));
 
 #endif

@@ -375,6 +375,7 @@ void P_CBI_TabItems(struct gui_state *g) {
          selcx = g->cx;
          selcy = g->cy;
          dragndrop = true;
+         g->hot = g->active = -1;
       }
       if(dragndrop && (fastabsk(selcx - g->cx) > 6 || fastabsk(selcy - g->cy) > 6)) {
          movitem = _imove_dragndrop;
