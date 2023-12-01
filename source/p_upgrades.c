@@ -189,11 +189,11 @@ i32 P_Upg_CheckReqs(struct upgrade *upgr) {
 
 bool P_Upg_CanActivate(struct upgrade *upgr) {
    return
-      !P_Upg_CheckReqs(upgr) &&
-      (get_bit(upgr->flags, _ug_owned) ||
-       get_bit(upgr->flags, _ug_active)) &&
-      (pl.pclass != pcl_marine ||
-       pl.cbi.pruse + upgr->perf <= wl.cbiperf);
+      get_bit(upgr->flags, _ug_active) ||
+      (!P_Upg_CheckReqs(upgr) &&
+       get_bit(upgr->flags, _ug_owned) &&
+       (pl.pclass != pcl_marine ||
+        pl.cbi.pruse + upgr->perf <= wl.cbiperf));
 }
 
 bool P_Upg_Toggle(struct upgrade *upgr) {
