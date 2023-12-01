@@ -80,7 +80,7 @@ struct gui_txt {
 
 struct gui_win {
    bool init, grabbed;
-   i32 x, y;
+   k64 x, y;
    i32 ox, oy;
    i32 nextsnd;
 };
