@@ -13,31 +13,36 @@
 #include "m_engine.h"
 #include "p_player.h"
 #include "m_trie.h"
+#include <setjmp.h>
 
-#define unwrap_eof(label) \
+#define unwrap_eof(inp, label) \
    statement( \
-      if(*inp == '\0') goto label; \
+      if(**inp == '\0') longjmp(data_env, label); \
    )
 
-#define unwrap_end(chr, label) \
+#define unwrap_end(inp, chr, label) \
    statement( \
-      if(*inp != '\0' && *inp != chr) goto label; \
-      else                            ++inp; \
+      if(**inp != '\0' && **inp != chr) longjmp(data_env, label); \
+      else                              ++*inp; \
    )
 
-#define unwrap_delim(chr, label) \
+#define unwrap_delim(inp, chr, label) \
    statement( \
-      if(*inp != chr) goto label; \
-      else            ++inp; \
+      if(**inp != chr) longjmp(data_env, label); \
+      else             ++*inp; \
    )
 
 #define chunk_ver(ver, label) \
-   statement(if(!check_version(chunk_name, version, ver)) goto label;)
+   statement( \
+      if(!check_version(chunk_name, version, ver)) longjmp(data_env, label); \
+   )
 
-#define while_not_eoc() while(*inp && byte(*inp) != _eoc_1)
+#define while_not_eoc(inp) \
+   while(**inp && byte(**inp) != _eoc_1 && byte((*inp)[1]) != _eoc_2)
 
-#define for_until_eoc(init, cond, itr) \
-   for(init; *inp && byte(*inp) != _eoc_1 && cond; itr)
+#define for_until_eoc(inp, init, cond, itr) \
+   for(init; **inp && byte(**inp) != _eoc_1 && byte((*inp)[1]) != _eoc_2 && \
+       cond; itr)
 
 enum {
    _eoc_1 = 0xC2,
@@ -47,6 +52,15 @@ enum {
 enum {
    _bipu_new,
 };
+
+enum {
+   _datajmp_unknown = 1,
+   _datajmp_error_skip,
+   _datajmp_skip,
+   _datajmp_fatal,
+};
+
+noinit static jmp_buf data_env;
 
 stkoff static
 void num_out(i32 n) {
@@ -105,15 +119,12 @@ bool check_version(cstr name, i32 version, i32 expected) {
 script
 void P_Data_Save(void) {
    Dbg_Log(log_dev, _l("Saving data..."));
-
    ACS_BeginPrint();
    chunk_out("Lith", 7);
-
    if(pl.done_intro) {
       chunk_out("intr", 1);
       num_out(pl.done_intro);
    }
-
    chunk_out("agrp", 1);
    for(i32 i = 0; i < UPGR_MAX; ++i) {
       i32 groups = pl.upgrades[i].agroups;
@@ -124,7 +135,6 @@ void P_Data_Save(void) {
          ACS_PrintChar(' ');
       }
    }
-
    chunk_out("note", 1);
    for(i32 i = 0; i < countof(pl.notes); ++i) {
       mem_size_t len = pl.notes[i] ? faststrlen(pl.notes[i]) : 0;
@@ -132,7 +142,6 @@ void P_Data_Save(void) {
       ACS_PrintChar(' ');
       PrintStrN(pl.notes[i], len);
    }
-
    chunk_out("bipu", 1);
    for_page() {
       if(get_bit(page->flags, _page_unlocked) &&
@@ -140,117 +149,112 @@ void P_Data_Save(void) {
       {
          i32 flg = 0;
          if(get_bit(page->flags, _page_new)) set_bit(flg, _bipu_new);
-
          PrintStr(page->name);
          ACS_PrintChar(' ');
          num_out(flg);
          ACS_PrintChar(' ');
       }
    }
-
    CVarSetS(sc_psave, ACS_EndStrParam());
 }
 
-script
-void P_Data_Load(void) {
-   noinit static
-   char chunk_name[5];
+script void load_agrp(astr *inp) {
+   while_not_eoc(inp) {
+      noinit static char name[12];
+      str_inp(inp, name, sizeof name, ' ');
+      unwrap_delim(inp, ' ', _datajmp_error_skip);
+      i32 agroups = num_inp(inp);
+      unwrap_end(inp, ' ', _datajmp_error_skip);
+      i32 upgr = Upgr_StrToEnum(name);
+      if(upgr != -1) pl.upgrades[upgr].agroups = agroups;
+   }
+}
 
+script void load_note(astr *inp) {
+   for_until_eoc(inp, i32 i = 0, i < countof(pl.notes), ++i) {
+      mem_size_t len = num_inp(inp);
+      unwrap_delim(inp, ' ', _datajmp_error_skip);
+      Dalloc(pl.notes[i]);
+      pl.notes[i] = nil;
+      if(len) {
+         pl.notes[i] = Malloc(len + 1, _tag_plyr);
+         str_inp(inp, pl.notes[i], len + 1, '\0');
+         unwrap_eof(inp, _datajmp_error_skip);
+      }
+   }
+}
+
+script void load_bipu(astr *inp) {
+   while_not_eoc(inp) {
+      noinit static char name[32];
+      str_inp(inp, name, sizeof name, ' ');
+      unwrap_delim(inp, ' ', _datajmp_error_skip);
+      i32 flg = num_inp(inp);
+      unwrap_end(inp, ' ', _datajmp_error_skip);
+      struct page *page = P_BIP_NameToPage(name);
+      if(page) {
+         P_BIP_Unlock(page, true);
+         if(get_bit(flg, _bipu_new)) set_bit(page->flags, _page_new);
+         else                        dis_bit(page->flags, _page_new);
+      }
+   }
+}
+
+script void P_Data_Load(void) {
+   noinit static char chunk_name[5];
    Dbg_Log(log_dev, _l("Loading data..."));
-
    astr inp = CVarGetS(sc_psave);
-   while(byte(*inp) == _eoc_1 && byte(inp[1]) == _eoc_2) {
+   while(*inp && byte(*inp) == _eoc_1 && byte(inp[1]) == _eoc_2) {
+      switch(setjmp(data_env)) {
+      case 0:
+         break;
+      case _datajmp_unknown:
+         Dbg_Log(log_dev, _l("unknown chunk "), _l(chunk_name));
+      case _datajmp_error_skip:
+         Dbg_Log(log_dev,
+                 _l("chunk "), _l(chunk_name), _l(" has errors -- skipping"));
+      case _datajmp_skip:
+         while(*inp && !(*inp == _eoc_1 && inp[1] == _eoc_2)) ++inp;
+         continue;
+      case _datajmp_fatal:
+         Dbg_Log(log_dev, _l("fatal error -- terminated early"));
+         return;
+      }
       inp += 2;
-
       str_inp(&inp, chunk_name, 5, '\0');
-      unwrap_eof(error);
-
+      unwrap_eof(&inp, _datajmp_fatal);
       i32 version = num_inp(&inp);
-      unwrap_end(' ', error);
-
+      unwrap_end(&inp, ' ', _datajmp_fatal);
       Dbg_Log(log_dev,
               _l("loading chunk "), _l(chunk_name),
               _l(" version "), _p(version));
-
       switch(P_SaveChunkName(chunk_name)) {
       case _save_chunk_Lith:
-         chunk_ver(7, error);
+         chunk_ver(7, _datajmp_fatal);
          break;
       case _save_chunk_intr:
-         chunk_ver(1, skip);
+         chunk_ver(1, _datajmp_skip);
          pl.done_intro = num_inp(&inp);
          break;
       case _save_chunk_agrp:
-         chunk_ver(1, skip);
-         while_not_eoc() {
-            noinit static
-            char name[12];
-
-            str_inp(&inp, name, sizeof name, ' ');
-            unwrap_delim(' ', skip_err);
-
-            i32 agroups = num_inp(&inp);
-            unwrap_end(' ', skip_err);
-
-            i32 upgr = Upgr_StrToEnum(name);
-            if(upgr != -1) pl.upgrades[upgr].agroups = agroups;
-         }
+         chunk_ver(1, _datajmp_skip);
+         load_agrp(&inp);
          break;
       case _save_chunk_note:
-         chunk_ver(1, skip);
-         for_until_eoc(i32 i = 0, i < countof(pl.notes), ++i) {
-            mem_size_t len = num_inp(&inp);
-            unwrap_delim(' ', skip_err);
-
-            Dalloc(pl.notes[i]);
-            pl.notes[i] = nil;
-
-            if(len) {
-               pl.notes[i] = Malloc(len + 1, _tag_plyr);
-               str_inp(&inp, pl.notes[i], len + 1, '\0');
-               unwrap_eof(skip_err);
-            }
-         }
+         chunk_ver(1, _datajmp_skip);
+         load_note(&inp);
          break;
       case _save_chunk_bipu:
-         chunk_ver(1, skip);
-         while_not_eoc() {
-            noinit static
-            char name[32];
-
-            str_inp(&inp, name, sizeof name, ' ');
-            unwrap_delim(' ', skip_err);
-
-            i32 flg = num_inp(&inp);
-            unwrap_end(' ', skip_err);
-
-            struct page *page = P_BIP_NameToPage(name);
-            if(page) {
-               P_BIP_Unlock(page, true);
-               if(get_bit(flg, _bipu_new)) set_bit(page->flags, _page_new);
-               else                        dis_bit(page->flags, _page_new);
-            }
-         }
+         chunk_ver(1, _datajmp_skip);
+         load_bipu(&inp);
          break;
-      skip_err:
-         Dbg_Log(log_dev,
-                 _l("chunk "), _l(chunk_name), _l(" has errors -- skipping"));
-         goto skip;
       default:
-         Dbg_Log(log_dev,
-                 _l("unknown chunk "), _l(chunk_name), _l(" -- skipping"));
-      skip:
-         while(*inp && !(*inp == _eoc_1 && inp[1] == _eoc_2)) ++inp;
-         break;
+         longjmp(data_env, _datajmp_unknown);
       }
    }
-
-   if(!*inp) {
-      return;
+   if(*inp) {
+      longjmp(data_env, _datajmp_fatal);
    }
-
-error:
-   Dbg_Log(log_dev, _l("terminated early"));
 }
 
 /* EOF */
