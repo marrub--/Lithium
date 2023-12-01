@@ -175,8 +175,10 @@ script void P_BIP_PInit(void) {
       bool avail = get_bit(page->pclass, pl.pclass);
       if(avail) {
          set_bit(page->flags, _page_available);
-         bip.pagemax++;
          bip.categorymax[page->category]++;
+         if(page->category != _bipc_extra) {
+            bip.pagemax++;
+         }
       }
    }
    for_page() {
@@ -209,7 +211,9 @@ script void P_BIP_Unlock(struct page *page, bool from_load) {
    }
    if(!was_unlocked) {
       Dbg_Log(log_bip, _l("unlocking page '"), _p(page->name), _c('\''));
-      bip.pageavail++;
+      if(page->category != _bipc_extra) {
+         bip.pageavail++;
+      }
       bip.categoryavail[page->category]++;
       if(page->category == _bipc_mail && !get_bit(page->flags, _page_auto)) {
          MailNotify(page->name);
