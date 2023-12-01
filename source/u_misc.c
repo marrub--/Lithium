@@ -83,6 +83,9 @@ void Upgr_HeavyArmor_Deactivate(void) {
    SetMass(0, 110);
    SetGravity(0, 1.05k);
    dis_bit(pl.upgrdata.subweapons.have, _subw_fist);
+   if(pl.upgrdata.subweapons.which == _subw_fist) {
+      pl.upgrdata.subweapons.which = 0;
+   }
 }
 
 void Upgr_HeavyArmor_Update(void) {
