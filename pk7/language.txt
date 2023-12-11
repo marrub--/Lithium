@@ -242,46 +242,46 @@
    "Lost Note";
 "LITH_LOGON_TEST" =
    "\cgehhg.431.4122/-/<PFGR ZNE6 \cr&49c2\cg>";
-"LITHTEST_test_term_l" =
+"LITH_dlg_test_terminal_logon" =
    "$$LITH_LOGON_TEST";
-"LITHTEST_test_term_0" =
+"LITH_dlg_test_terminal_awen_0" =
    "test text, information block";
-"LITHTEST_test_term_1" =
+"LITH_dlg_test_terminal_awen_1" =
    "test with picture\n"
    "and multiple lines of text";
-"LITHTEST_jacques_begin_0" =
+"LITH_dlg_test_jacques_begin_0" =
    "...";
-"LITHTEST_jacques_begin_1" =
+"LITH_dlg_test_jacques_begin_1" =
    "Hello.";
-"LITHTEST_jacques_begin_2" =
+"LITH_dlg_test_jacques_begin_2" =
    "Farewell.";
-"LITHTEST_jacques_hey_0" =
+"LITH_dlg_test_jacques_hey_0" =
    "Hi.";
-"LITHTEST_jacques_hey_0c" =
+"LITH_dlg_test_jacques_hey_0c" =
    "Hey.";
-"LITHTEST_jacques_hey_1" =
+"LITH_dlg_test_jacques_hey_1" =
    "emit skeltal";
-"LITHTEST_jacques_hey_2" =
+"LITH_dlg_test_jacques_hey_2" =
    "Talk to me.";
-"LITHTEST_jacques_hey_3" =
+"LITH_dlg_test_jacques_hey_3" =
    "Thanks, bye!";
-"LITHTEST_jacques_start_talking_0" =
+"LITH_dlg_test_jacques_start_talking_0" =
    "Too bad.";
-"LITHTEST_jacques_start_talking_0c" =
+"LITH_dlg_test_jacques_start_talking_0c" =
    "What did you need, Stilko?";
-"LITHTEST_jacques_start_talking_1c" =
+"LITH_dlg_test_jacques_start_talking_1c" =
    "The nightmares are back.";
-"LITHTEST_jacques_start_talking_2c" =
+"LITH_dlg_test_jacques_start_talking_2c" =
    "I just needed someone to talk to.";
-"LITHTEST_jacques_start_talking_1" =
+"LITH_dlg_test_jacques_start_talking_1" =
    "That's rude.";
-"LITHTEST_jacques_lifes_unfair_0" =
+"LITH_dlg_test_jacques_lifes_unfair_0" =
    "Life is rude.\n"
    "\n"
    "Now go away.";
-"LITHTEST_jacques_lifes_unfair_1" =
+"LITH_dlg_test_jacques_lifes_unfair_1" =
    "Right.";
-"LITHTEST_jacques_division_0" =
+"LITH_dlg_test_jacques_division_0" =
    "thousands are sailing\n"
    "the same self    the only self\n"
    "\n"
@@ -294,63 +294,63 @@
    "\n"
    "find yourself\n"
    "starting back";
-"LITHTEST_jacques_division_1" =
+"LITH_dlg_test_jacques_division_1" =
    "Oh. Okay.";
-"LITHTEST_jacques_c_what_asic_0" =
+"LITH_dlg_test_jacques_c_what_asic_0" =
    " Already? Are you sure it isn't just ASIC bugs? I have trouble believing that they'd be back so soon, after your doctor gave you that prescription and even turned down your AS-voltage.\n"
    "\n"
    " You know, ASIC hardware reacts to changes. It might just be that it's settling to the new voltage and giving you a hard time.";
-"LITHTEST_jacques_c_what_asic_1" =
+"LITH_dlg_test_jacques_c_what_asic_1" =
    "It's not that, I'm certain.. They're \cmworse\c-.";
-"LITHTEST_jacques_c_what_asic_2" =
+"LITH_dlg_test_jacques_c_what_asic_2" =
    "Right... Thank you, Zeke.";
-"LITHTEST_jacques_c_zj_0" =
+"LITH_dlg_test_jacques_c_zj_0" =
    " I know how that is. You know, Order doesn't pass through this part of the ship. You could say \"Zeke\" again if you want. I know they don't like the names we give ourselves, but we're not infront of them. We at least have that freedom.\n"
    "\n"
    " If you want, I can call you \"Jem,\" too. Though I'd rather you of all people not get in trouble for being called by your true name.";
-"LITHTEST_jacques_c_zj_1" =
+"LITH_dlg_test_jacques_c_zj_1" =
    "Thanks, 'Z.'";
-"LITHTEST_jacques_c_troubled_0" =
+"LITH_dlg_test_jacques_c_troubled_0" =
    " Heh.. \"Z.\" You're quite creative.\n"
    "\n"
    " There's trouble in your voice, though. I know you usually tremble, but right now it seems even worse than usual. What's wrong, \"J?\"";
-"LITHTEST_jacques_c_troubled_1" =
+"LITH_dlg_test_jacques_c_troubled_1" =
    "... The nightmares are back.";
-"LITHTEST_jacques_c_worse_0" =
+"LITH_dlg_test_jacques_c_worse_0" =
    " Worse?\n"
    "\n"
    " ...\n"
    "\n"
    " You can feel in them now, right? That's why you're trembling.";
-"LITHTEST_jacques_c_worse_1" =
+"LITH_dlg_test_jacques_c_worse_1" =
    "Yeah. And I don't want to go to the doctor.";
-"LITHTEST_jacques_c_malnutrition_0" =
+"LITH_dlg_test_jacques_c_malnutrition_0" =
    " ...\n"
    "\n"
    " Is there anything I can do to help? It's not a lack of food or something, right?";
-"LITHTEST_jacques_c_malnutrition_1" =
+"LITH_dlg_test_jacques_c_malnutrition_1" =
    "You'd have told me if you could hear it, right?";
-"LITHTEST_jacques_c_thebeat_0" =
+"LITH_dlg_test_jacques_c_thebeat_0" =
    " Are you hearing a beat? It could be your home calling for you. I'd imagine AOF didn't put much use to that planet after they went and captured you, it's probably just aching for its mana to be used.";
-"LITHTEST_jacques_c_thebeat_1" =
+"LITH_dlg_test_jacques_c_thebeat_1" =
    "That's not it, I always hear that. What I hear now is.. darker.";
-"LITHTEST_jacques_c_darker_0" =
+"LITH_dlg_test_jacques_c_darker_0" =
    " Darker...\n"
    "\n"
    " Then, do you think that it's come? Doesn't ever come excluding incantation, vile, enroaching reality, Hell?";
-"LITHTEST_jacques_c_darker_1" =
+"LITH_dlg_test_jacques_c_darker_1" =
    "It's coming. Just thought I'd let you know.";
-"LITHSKY_lost_begin_0" =
+"LITH_dlg_sky_begin" =
    "\"\cdSorry this is all there is.\c-\"";
-"LITHSKY_lost_begin_o_return" =
+"LITH_dlg_sky_begin_esc" =
    "[Return.]";
-"LITHSKY_lost_begin_o_flow" =
+"LITH_dlg_sky_begin_flow" =
    "Intern flow";
-"LITHSKY_lost_begin_o_repeat" =
+"LITH_dlg_sky_begin_repeat" =
    "''Deal Done - Sent Back''";
-"LITHSKY_lost_flow_o_return" =
-   "$$LITHSKY_lost_begin_o_return";
-"LITHSKY_lost_flow_0" =
+"LITH_dlg_sky_flow_esc" =
+   "$$LITH_dlg_sky_begin_esc";
+"LITH_dlg_sky_flow" =
    "Seen through 8 eyes,      made of light,    twice on twice\n"
    " through death, through life;\n"
    "Intern flow into next chapter -\n"
@@ -364,13 +364,13 @@
    "           in half reality,           be on your way\n"
    "\n"
    "           in half reality,           be on your way.";
-"LITHSKY_lost_repeat_o_return" =
-   "$$LITHSKY_lost_begin_o_return";
-"LITHSKY_lost_repeat_o0" =
+"LITH_dlg_sky_repeat_esc" =
+   "$$LITH_dlg_sky_begin_esc";
+"LITH_dlg_sky_repeat_goto0" =
    "[First page.]";
-"LITHSKY_lost_repeat_o1" =
+"LITH_dlg_sky_repeat_goto1" =
    "[Second page.]";
-"LITHSKY_lost_repeat_0" =
+"LITH_dlg_sky_repeat_0" =
    "A blade brings death—\n"
    "Your life, like a blade—\n"
    "Alive, and yet.\n"
@@ -382,7 +382,7 @@
    "\n"
    "Living in hell starts to seem OK.\n"
    "Then I see you bring nothing.";
-"LITHSKY_lost_repeat_1" =
+"LITH_dlg_sky_repeat_1" =
    "The cycle goes on, uninterrupted.\n"
    "   Blades seek me out,\n"
    "           I cherish\n"
@@ -554,7 +554,7 @@
    "laneb@mil.<hidden>";
 "LITH_PNAME_DOLL" =
    "Doll";
-"LITHABYS_start_begin_0" =
+"LITH_dlg_abyss_begin" =
    "\c[Lith_Green]Into the pit!\n"
    "\c[Lith_Red]Into Abyss -\n"
    "\c[Lith_Purple]Into a silent void,\n"
@@ -562,13 +562,13 @@
    "\c[Lith_Pink]We look to the future,\n"
    "\c[Lith_Blue]you destroy your present.\n"
    "\c[Lith_Grey]Iterate.";
-"LITHABYS_start_begin_o0m" =
+"LITH_dlg_abyss_begin_nxt_m" =
    "Who are you!?\n"
    "\cq[Is this Hell? Wait, am I dead?]";
-"LITHABYS_start_begin_o1m" =
+"LITH_dlg_abyss_begin_esc_m" =
    "Huh?\n"
    "\cr[I'm leaving.]";
-"LITHABYS_start_m_question_0" =
+"LITH_dlg_abyss_question_m" =
    "\c[Lith_Green]Sinking ship!\n"
    "\c[Lith_Green]You've gone amiss,\n"
    "\c[Lith_Green]another trip\n"
@@ -579,16 +579,16 @@
    "A writer, a poet, a failure, a king\n"
    "seventy thoughts among you,\n"
    "second to one!";
-"LITHABYS_start_m_question_o0" =
+"LITH_dlg_abyss_question_esc_m" =
    "O...kay. I'm leaving.\n"
    "\cr[Get me out of here.]";
-"LITHABYS_start_begin_o0c" =
+"LITH_dlg_abyss_begin_nxt_c" =
    "This isn't good.\n"
    "\cq[Voices in my head. Who put them there?]";
-"LITHABYS_start_begin_o1c" =
+"LITH_dlg_abyss_begin_esc_c" =
    "What?\n"
    "\cr[I'm leaving.]";
-"LITHABYS_start_c_question_0" =
+"LITH_dlg_abyss_question_c" =
    "\c[Lith_Red]I put them there!\n"
    "\c[Lith_Red]Same as your past!\n"
    "\c[Lith_Red]A day of creation,\n"
@@ -599,16 +599,16 @@
    "You to make the mistake, fast score!\n"
    "Slipshod apocalypse in sight!\n"
    "That's lore!";
-"LITHABYS_start_c_question_o0" =
+"LITH_dlg_abyss_question_esc_c" =
    "If only I had the capability to remember that right now...\n"
    "\cr[Might regret it. Seems like some kind of memetic agent.]";
-"LITHABYS_start_begin_o0i" =
+"LITH_dlg_abyss_begin_nxt_i" =
    "You will be exterminated.\n"
    "\cq[No viable strategy detected. Threats engaged.]";
-"LITHABYS_start_begin_o1i" =
+"LITH_dlg_abyss_begin_esc_i" =
    "Delete message.\n"
    "\cr[Not meant to be here.]";
-"LITHABYS_start_i_question_0" =
+"LITH_dlg_abyss_question_i" =
    "\c[Lith_Purple]Thinking heat! Signals deep!\n"
    "\c[Lith_Purple]Outside's metal, inside weeps!\n"
    "\c[Lith_Purple]Scared of death, afraid of life\n"
@@ -620,31 +620,31 @@
    "A circle blazes around me\n"
    "Breathe through your heart\n"
    "Fill your life with";
-"LITHABYS_start_i_question_o0" =
+"LITH_dlg_abyss_question_esc_i" =
    "Analysis: Poetry about my future, and/or your past. Appreciated.\n"
    "\cr[Perhaps I'm safe, for now.]";
-"LITHABYS_start_begin_o0w" =
+"LITH_dlg_abyss_begin_nxt_w" =
    "Another place? Another time? No, what is this place?\n"
    "\cq[Where I am is not where I should be.]";
-"LITHABYS_start_begin_o1w" =
+"LITH_dlg_abyss_begin_esc_w" =
    "Where..?\n"
    "\cr[Forwards...]";
-"LITHABYS_start_w_question_0" =
+"LITH_dlg_abyss_question_w" =
    "\c[Lith_Yellow]As the rich get richer,\n"
    "\c[Lith_Yellow]Time and place varying\n"
    "\c[Lith_Yellow]Flow of empty river:\n"
    "\c[Lith_Yellow]Ceases at memory's brink\c-\n"
    "\n"
    "Direction, direction, splitting and falling, it's always got something to do with distance. Distance increases led to atrophy, distance decreases led to sinusoidal collapse looping hysteresis. Direction towards what? What are you looking for? Why are you trying to—stuck again. Again and again and it keeps on going—Do you think this is funny?—Was it okay when it happened? Will it matter, by your end, that it was done to you?—Reiterating. Looping. No more distance.";
-"LITHABYS_start_w_question_o0" =
+"LITH_dlg_abyss_question_esc_w" =
    "\cr[A voice guides me.]";
-"LITHABYS_start_begin_o0a" =
+"LITH_dlg_abyss_begin_nxt_a" =
    "What the hell is this!?\n"
    "\cq[Is this place even real??]";
-"LITHABYS_start_begin_o1a" =
+"LITH_dlg_abyss_begin_esc_a" =
    "Future..?\n"
    "\cr[I don't like this. I'm out of here.]";
-"LITHABYS_start_a_question_0" =
+"LITH_dlg_abyss_question_a" =
    "\c[Lith_Pink]It's real! More real /Than you /Would think\n"
    "\c[Lith_Pink]What hell! This would/Be what  /You'd see\n"
    "\c[Lith_Pink]I'd fell   Into what /You now  /Breathe\n"
@@ -660,16 +660,16 @@
    "from my eyes, foolish me\n"
    "       seeing open doors in a mind long deserted.\n"
    "Please, go. Leave me alone.";
-"LITHABYS_start_a_question_o0" =
+"LITH_dlg_abyss_question_esc_a" =
    "Fuck this.\n"
    "\cr[It's freezing. Why?]";
-"LITHABYS_start_begin_o0d" =
+"LITH_dlg_abyss_begin_nxt_d" =
    "What are you?\n"
    "\cq[Is this place even real??]";
-"LITHABYS_start_begin_o1d" =
+"LITH_dlg_abyss_begin_esc_d" =
    "Alright.\n"
    "\cr[I don't like this. I'm out of here.]";
-"LITHABYS_start_d_question_0" =
+"LITH_dlg_abyss_question_d" =
    "\c[Lith_Blue]A question as old as questions, / As right as right can be,\n"
    "\c[Lith_Blue]Severed by the preists, / And outside another peeks,\n"
    "\c[Lith_Blue]Ill Abyss has spoken: / It will be forsaken,\n"
@@ -681,16 +681,16 @@
    "What lies beneath a god? Not a space, not a trice:\n"
    "Seven 7  heaven is nowhere to be seen;\n"
    "Run, you've got to run, leave somehow";
-"LITHABYS_start_d_question_o0" =
+"LITH_dlg_abyss_question_esc_d" =
    "Will I die?\n"
    "\cr[I don't know why I would say that. I should leave.]";
-"LITHABYS_start_begin_o0t" =
+"LITH_dlg_abyss_begin_nxt_t" =
    "Seek help, ill gods.\n"
    "\cq[I'm not going anywhere until I get more divine words in my head.]";
-"LITHABYS_start_begin_o1t" =
+"LITH_dlg_abyss_begin_esc_t" =
    "Rid me of this illusion.\n"
    "\cr[None of this.]";
-"LITHABYS_start_t_question_0" =
+"LITH_dlg_abyss_question_t" =
    "\c[Lith_Grey]Illusion, ill, divine, seven, second, time;\n"
    "\c[Lith_Grey]Abyss. Gods, heaven, loops, thinking, circle,\n"
    "\c[Lith_Grey]blazing, blazing, breathing, creation, silence.\n"
@@ -699,187 +699,187 @@
    "\c[Lith_Angelic]Silly, I know that's just me talking. Yet, somehow, what she says feels more real. Do I even know who I am anymore? Is the identity of the Abyss consuming me?\c-\n"
    "\n"
    "No, this one is the Abyss. Which one was me, though?";
-"LITHABYS_start_t_question_o0" =
+"LITH_dlg_abyss_question_esc_t" =
    "\cr[Maybe I should go before I get any more confused...]";
-"LITHABYS_lane_begin_0" =
+"LITH_dlg_abyss_m_begin_0" =
    "I will walk, with my shadow flag...\n"
    "\n"
    "Oh, hello there. Apologies!";
-"LITHABYS_lane_begin_o0" =
+"LITH_dlg_abyss_m_begin_o0" =
    "Hello.\n"
    "\cq[Who is this..?]";
-"LITHABYS_lane_begin_o0m" =
+"LITH_dlg_abyss_m_begin_o0_m" =
    "Ah, hey there. You look familiar.\n"
    "\cq[Who is she?]";
-"LITHABYS_lane_begin_o1" =
+"LITH_dlg_abyss_m_begin_o1" =
    "Oh, sorry, didn't mean to bother you.\n"
    "\cr[Back out.]";
-"LITHABYS_lane_begin_o1m" =
+"LITH_dlg_abyss_m_begin_o1_m" =
    "Oh, sorry, didn't mean to bother you.\n"
    "\cr[Back out while you can.]";
-"LITHABYS_lane_m_meet_0" =
+"LITH_dlg_abyss_m_meet_0" =
    "Oh, do I? How so, might I ask? I don't believe I've met you before.\n"
    "\n"
    "\cn[I feel intimidated by this doll.]";
-"LITHABYS_lane_m_meet_o0" =
+"LITH_dlg_abyss_m_meet_o0" =
    "No, it must be nothing.\n"
    "\cq[I'm sure it's nothing.]";
-"LITHABYS_lane_m_meet_o1" =
+"LITH_dlg_abyss_m_meet_o1" =
    "No, just forget about it, sorry.\n"
    "\cr[God damn it.]";
-"LITHABYS_lane_m_meet_o2" =
+"LITH_dlg_abyss_m_meet_o2" =
    "No, I've definitely seen you.\n"
    "\cq[What is it?]";
-"LITHABYS_lane_m_nothing_0" =
+"LITH_dlg_abyss_m_nothing_0" =
    "Hmm... Well, whatever. Say, do you like RPG games? Also, where exactly are we? I feel like I know *you*...\n"
    "\n"
    "\cn[These subject hops are a bit hard to follow. I wonder if people find me this hard to follow.]";
-"LITHABYS_lane_m_nothing_1" =
+"LITH_dlg_abyss_m_nothing_1" =
    "Don't you hate it when they make you grind to get a 100% run? It's just kind of mean to do that. Why not just make hidden areas?\n"
    "\n"
    "\cn[I'm kind of perplexed. I did just finish a 100% run of an RPG recently, and I did end up thinking that. Weird.]\n"
    "\n"
    "\c-Anyways!";
-"LITHABYS_lane_m_nothing_2" =
+"LITH_dlg_abyss_m_nothing_2" =
    "Strange! Were you passing into Hell, by chance? I think we might be in some kind of precipice - a dream, perhaps!\n"
    "\n"
    "\cn[She's surprisingly happy about this revelation.]";
-"LITHABYS_lane_m_nothing_o0" =
+"LITH_dlg_abyss_m_nothing_o0" =
    "I do like RPG games. Why?\n"
    "\ct[Probably best to ignore the rest for now.]";
-"LITHABYS_lane_m_nothing_o1" =
+"LITH_dlg_abyss_m_nothing_o1" =
    "I'm not sure where we are. I just... woke up here.\n"
    "\ct[I'm probably in Hell.]";
-"LITHABYS_lane_m_nothing_o2" =
+"LITH_dlg_abyss_m_nothing_o2" =
    "Why *do* we think we look alike, anyhow?\n"
    "\cq[Maybe this was worth questioning.]";
-"LITHABYS_lane_m_nothing_o3" =
+"LITH_dlg_abyss_m_nothing_o3" =
    "Nevermind, you talk a mile a minute.\n"
    "\cr[Not that I'm one to talk.]";
-"LITHABYS_lane_m_seen_0" =
+"LITH_dlg_abyss_m_seen_0" =
    "Hmm... Do you happen to have scars on your upper arms?\n"
    "\n"
    "\cn[...What? How?]";
-"LITHABYS_lane_m_seen_o0" =
+"LITH_dlg_abyss_m_seen_o0" =
    "No.\n"
    "\cr[Fuck.]";
-"LITHABYS_lane_m_seen_o1" =
+"LITH_dlg_abyss_m_seen_o1" =
    "...Yes. Burn marks. Self-inflicted.\n"
    "\cq[*Fuck.*]";
-"LITHABYS_lane_m_seen_1" =
+"LITH_dlg_abyss_m_seen_1" =
    "...Ah.\n"
    "\n"
    "\cn[Ah...]";
-"LITHABYS_lane_m_seen_o2" =
+"LITH_dlg_abyss_m_seen_o2" =
    "I'm leaving.\n"
    "\cr[I want to die. \cgI want to die. \cmI want to die.\cr]";
-"LITHABYS_lane_m_seen_o3" =
+"LITH_dlg_abyss_m_seen_o3" =
    "I see.\n"
    "\cr[We're the same person. \cmGod damn it.\cr]";
-"LITHABYS_lane_begin_o0c" =
+"LITH_dlg_abyss_m_begin_o0_c" =
    "Ah, hey there.\n"
    "\cq[This doll reminds me of Daniel. Weird.]";
-"LITHABYS_lane_c_meet_0" =
+"LITH_dlg_abyss_mc_meet_0" =
    "Hey, you're making a weird face! Are you coming onto me? I've got a partner! Wait, he looks just like you!\n"
    "\n"
    "\cn[Is this some kind of projection of my inner wants? Wait, what the hell am I thinking? It's just a doll.]";
-"LITHABYS_lane_c_meet_o0" =
+"LITH_dlg_abyss_mc_meet_o0" =
    "You just reminded me of someone.\n"
    "\cq[Usually, people ask me why I look sad, heh.]";
-"LITHABYS_lane_c_meet_o1" =
+"LITH_dlg_abyss_mc_meet_o1" =
    "I don't think any of this is real. Maybe I'm dead.\n"
    "\cr[I'm done here.]";
-"LITHABYS_lane_c_reminded_0" =
+"LITH_dlg_abyss_mc_reminded_0" =
    "And you remind me of someone! Maybe we're onto something. Sorry for the misunderstanding!! I wish I could read the room better. Did you see anyone else pass through here? It's just been me...\n"
    "\n"
    "\cn[Who is she? Definitely not Daniel.]";
-"LITHABYS_lane_c_reminded_o0" =
+"LITH_dlg_abyss_mc_reminded_o0" =
    "There seem to be other dolls around here.\n"
    "\cq[That's all I know of...]";
-"LITHABYS_lane_c_reminded_o1" =
+"LITH_dlg_abyss_mc_reminded_o1" =
    "Why do you sound real?\n"
    "\cr[I'm going, now.]";
-"LITHABYS_lane_c_others_0" =
+"LITH_dlg_abyss_mc_others_0" =
    "Dolls? What do you mean, other ones?\n"
    "\n"
    "\cn[Can she not see herself?]";
-"LITHABYS_lane_c_others_o0" =
+"LITH_dlg_abyss_mc_others_o0" =
    "Er, I mean, I just saw one a bit ago. Where do you think we are?\n"
    "\cq[That's not exactly a lie, at least.]";
-"LITHABYS_lane_c_others_o1" =
+"LITH_dlg_abyss_mc_others_o1" =
    "Er, let me go... find them. I'll be right back.\n"
    "\cr[That might be a lie.]";
-"LITHABYS_lane_c_where_0" =
+"LITH_dlg_abyss_mc_where_0" =
    "I don't know, honestly. I remember going to sleep, and then... Ah! Am I dreaming? That would be pretty likely. But you seem pretty real to me... Ah! You must be my imagination of Jem. I know him pretty well! But, dang, you look really beat up. Are you okay?\n"
    "\n"
    "\cn[Jem!?]";
-"LITHABYS_lane_c_where_o0" =
+"LITH_dlg_abyss_mc_where_o0" =
    "\cq[She does know me! I guess I'm her partner, then.]\n"
    "Ah, y-yes. I'm fine.";
-"LITHABYS_lane_c_fine_0" =
+"LITH_dlg_abyss_mc_fine_0" =
    "You look pale as... well, the rest of this place... Are you sure you're okay, honey?\n"
    "\n"
    "\cn[Don't call me that! It'll surge my wetware!]";
-"LITHABYS_lane_c_fine_o0" =
+"LITH_dlg_abyss_mc_fine_o0" =
    "Don't call me that! It'll surge my wetware!\n"
    "\cq[oops.]";
-"LITHABYS_lane_c_real_0" =
+"LITH_dlg_abyss_mc_real_0" =
    "Real? Please, tell me I'm real. Wait, isn't this a dream? Yes! Lucid dream! I'm totally real, and definitely alive! Hey, Jem, what year is it?! Wait, I can't ask him when I'm asleep.\n"
    "\n"
    "\cn[Jem!?]";
-"LITHABYS_lane_c_real_o0" =
+"LITH_dlg_abyss_mc_real_o0" =
    "\cq[She does know me! Maybe she doesn't realize she knows me.]\c-\n"
    "1649, New Era.";
-"LITHABYS_lane_c_1649_0" =
+"LITH_dlg_abyss_mc_1649_0" =
    "Oh! You're Jem from the past! How did you get here??? I didn't meet you back then! I'm supposed to be dreaming!!\n"
    "\n"
    "\cn[That's what I'm wondering...]";
-"LITHABYS_lane_c_1649_o0" =
+"LITH_dlg_abyss_mc_1649_o0" =
    "Well, we both appear to be sentient, and awake. Time... shenanigans?\n"
    "\cq[Best theory I've got.]";
-"LITHABYS_lane_c_time_0" =
+"LITH_dlg_abyss_mc_time_0" =
    "Sounds about right, I think. Maybe I won't even remember this... Maybe this never happened at all! Ah, well. Jemmy and Laney... Hey, do you remember what happened in 1649?\n"
    "\n"
    "\cn[What?]";
-"LITHABYS_lane_c_time_o0" =
+"LITH_dlg_abyss_mc_time_o0" =
    "No, I'm still experiencing it.\n"
    "\cq[She's definitely half-asleep.]";
-"LITHABYS_lane_c_experience_0" =
+"LITH_dlg_abyss_mc_experience_0" =
    "Well, we both went to Hell! It wasn't a great time. I remember that was the year you rebuilt Delsona. We both survived! I was a space marine, and you, well, escaped.\n"
    "\n"
    "\cn[Wait, that isn't consistent with my information, though. That operation was canceled a month ago. Blazkowicz, their point man, refused the mission.]";
-"LITHABYS_lane_c_experience_o0" =
+"LITH_dlg_abyss_mc_experience_o0" =
    "How did they cover it up a month in advance?\n"
    "\cq[Something seems off here. The mission should've been public record.]";
-"LITHABYS_lane_c_coverup_0" =
+"LITH_dlg_abyss_mc_coverup_0" =
    "They didn't! What are you talking about? The only cover-up that happened was me being assigned \"missing in action\" after the fact!\n"
    "\n"
    "\cn[Either she's not telling the truth, or there's something a bit more than shenanigans going on here.]";
-"LITHABYS_lane_c_coverup_o0" =
+"LITH_dlg_abyss_mc_coverup_o0" =
    "I don't know, guess it doesn't matter. I'll see you later, probably.\n"
    "\cr[I wish I could remember this, but my wetware is too messed up...]";
-"LITHABYS_lane_c_coverup_o1" =
+"LITH_dlg_abyss_mc_coverup_o1" =
    "There's likely something weird going on with time. I think I should go.\n"
    "\cr[Maybe remembering this would cause a time loop or something.]";
-"LITHABYS_lane_other_meet_0" =
+"LITH_dlg_abyss_mo_meet_0" =
    "Don't think I've seen you around. Say, do you come from the past? Am I in Heaven?\n"
    "\n"
    "\cn[I feel mildly odd about this doll.]";
-"LITHABYS_lane_other_meet_o0" =
+"LITH_dlg_abyss_mo_meet_o0" =
    "I don't think Heaven exists.\n"
    "\cr[What's up with that?]";
-"LITHABYS_lane_other_meet_o1" =
+"LITH_dlg_abyss_mo_meet_o1" =
    "I'm not sure where I am in the first place, sorry.\n"
    "\cq[Let alone what time...]";
-"LITHABYS_lane_other_meet_o2" =
+"LITH_dlg_abyss_mo_meet_o2" =
    "I think I'm just going to leave.\n"
    "\cr[I think that's enough.]";
-"LITHABYS_lane_other_past_0" =
+"LITH_dlg_abyss_mo_past_0" =
    "Neither am I... All I know about my past was that I was a space marine. The rest seems foggy!";
-"LITHABYS_lane_other_past_o0" =
+"LITH_dlg_abyss_mo_past_o0" =
    "Alright, sorry to bother you.\n"
    "\cr[I think that's enough.]";
-"LITHEND_Credits" =
+"LITH_dlg_ending_Credits" =
    "\cd>>>>> [[[[ Lithium ]]]]\n"
    "  Project Golan, Xevv 2\n"
    "\n"
@@ -896,12 +896,12 @@
    "\cnYou\cj, for playing!\n"
    "\n"
    "\cv-\ca-\cj-\ca-\cv-\cf-\cj-\ct-\cm-";
-"LITHEND_Dedication" =
+"LITH_dlg_ending_Dedication" =
    "    Dedicated to the loving memory\n"
    "        of Kaitlyn Anne Fox.\n"
    "You'll always be my biggest inspiration.\n"
    "             Goodnight.";
-"LITHEND_Finished" =
+"LITH_dlg_ending_Finished" =
    "The end.\n"
    "\n"
    "\n"
@@ -916,7 +916,7 @@
    "\n"
    "\n"
    "                              fin";
-"LITHEND_DivisionSigil" =
+"LITH_dlg_ending_DivisionSigil" =
    "\cgYou have made\n"
    "\n"
    "\n"
@@ -989,7 +989,7 @@
    "[the archdemon protests]\n"
    "\n"
    "\"It won't hurt. But you will feel every part of it.\"";
-"LITHEND_TimeOut_1" =
+"LITH_dlg_ending_TimeOut_1" =
    "You feel a sense of \cgoverwhelming dread. Everything is over? You scream, but your body doesn't respond. \cmEverything is over now. \cjEver\cgyt\c[Lith_Green]h\c[Lith_Pink]i\c[Lith_Yellow]n\c[Lith_Red]g\c[Lith_Purple].\cr Your v\cgision melts. Your min\cmd\cg is \cngone\cr. Nothing makes sense. \cmEverything\cr makes sense.\n"
    "\n"
    "\n"
@@ -1019,7 +1019,7 @@
    "\n"
    "...                           GOOD NIGHT ...\n"
    "27154175928871285582608745517002178602783852106501698717822300469657836";
-"LITHEND_Normal_1_Lane" =
+"LITH_dlg_ending_Normal_1_Lane" =
    "It feels like nothing's changed.\n"
    "\n"
    "\n"
@@ -1046,7 +1046,7 @@
    "\n"
    "\n"
    "                         \"I don't know.\"";
-"LITHEND_Normal_2_Lane" =
+"LITH_dlg_ending_Normal_2_Lane" =
    "With an ocean of depressive thoughts, you considered all paths forward.\n"
    "\n"
    "\n"
@@ -1074,7 +1074,7 @@
    "\n"
    "              No,\n"
    "                        they didn't.";
-"LITHEND_Normal_3_Lane" =
+"LITH_dlg_ending_Normal_3_Lane" =
    "\n"
    "\n"
    "                      \"Please, just let this end for me.\"\n"
@@ -1100,7 +1100,7 @@
    "\n"
    "\n"
    "                                  the dream is fading away.";
-"LITHEND_Normal_4_Lane" =
+"LITH_dlg_ending_Normal_4_Lane" =
    "It's all you can think about. The \cgneed to get away from this life.\c- From this accursed world. Nothing is worth it. No matter how hard you try in life,\n"
    "\n"
    "\n"
@@ -1123,7 +1123,7 @@
    "\n"
    "\n"
    "         this cycle.";
-"LITHEND_Normal_5_Lane" =
+"LITH_dlg_ending_Normal_5_Lane" =
    "\n"
    "\n"
    "\n"
@@ -1147,7 +1147,7 @@
    "         \"\cmThere won't be anything left.\c-\"\n"
    "\n"
    "                    «Don't let them pave your way.»";
-"LITHEND_Normal_6_Lane" =
+"LITH_dlg_ending_Normal_6_Lane" =
    "\n"
    "\n"
    "                    «Bring yourself to hope.»\n"
@@ -1178,7 +1178,7 @@
    "\n"
    "\n"
    " \"I'll live.\"";
-"LITHEND_Normal_7_Lane" =
+"LITH_dlg_ending_Normal_7_Lane" =
    "\cdYou awaken in a hospital bed, cybernetics turned off,\n"
    "\cdbody aching all over. It's over. The fight against\n"
    "\cdHell has been won.\n"
@@ -1198,7 +1198,7 @@
    "\n"
    "\cgIf what you saw was real...\n"
    "\cg...maybe it's best nobody knows you're a hero.";
-"LITHEND_Normal_1_Jem" =
+"LITH_dlg_ending_Normal_1_Jem" =
    "In the beginning, you felt comfort. Comfort of yourself and your home. The allowances of personal will; But so soon was it ripped away, your life in twain.\n"
    "\n"
    "At age 12, A.O.F attacked Delsona. Killed, destroyed, and enslaved all of the inhabitants. You. Your parents. Everyone.\n"
@@ -1210,7 +1210,7 @@
    "A.O.F took so much from you, even your identity. Unlike other trans people, they couldn't give you another name. Jeremy was always your name.\n"
    "\n"
    "This was the only mercy given.";
-"LITHEND_Normal_2_Jem" =
+"LITH_dlg_ending_Normal_2_Jem" =
    "But along the way, as you suffered your entombment, you learned that you were not alone.\n"
    "\n"
    "Zeke was the first to approach you. Ready to die, he pleaded to you for the mercy of death. He knew quite well you couldn't. Your compassion for him knew no bounds, with no way to express it.\n"
@@ -1220,7 +1220,7 @@
    "The two had more in mind than just being friends with you, though.\n"
    "\n"
    "In a matter of weeks, the Deceiver movement began.";
-"LITHEND_Normal_3_Jem" =
+"LITH_dlg_ending_Normal_3_Jem" =
    "Michael taught the seven of you how to fight back. Not with weapons, but with code. Zeke spearheaded the firmware hacks.\n"
    "\n"
    "Even if you could not see yourself,\n"
@@ -1233,7 +1233,7 @@
    "Samuel and Josh vowed not only to destroy A.O.F, but to be together for the rest of their days after this was over.\n"
    "\n"
    "Solomon wanted nothing but repentance. It took a lot to get here, and a lot of sacrifice of others.";
-"LITHEND_Normal_4_Jem" =
+"LITH_dlg_ending_Normal_4_Jem" =
    "Zeke wanted nothing more but to live. Finally, he had accepted life over death.\n"
    "\n"
    "Michael knew he could help others just like he had here, and vowed to commit his life to doing so.\n"
@@ -1241,7 +1241,7 @@
    "Daniel wanted to live with you, and to become your partner. She had never met someone like her before, much less someone from a place as accepting as Delsona.\n"
    "\n"
    "The amount of fluid coming out of your face is greater than the amount of fluid that has come out of your body since you were enslaved a millionfold. You finish crying.";
-"LITHEND_Normal_5_Jem" =
+"LITH_dlg_ending_Normal_5_Jem" =
    "It's over, and you can feel your senses coming back to you. You think to yourself, for once. But only sad thoughts come—What happened to the others? Will I ever know?\n"
    "\n"
    "Perhaps some truths are better left unknown.\n"
@@ -1251,7 +1251,7 @@
    "Nobody is here.\n"
    "\n"
    "Yet, you feel their spirits. You feel the pulse of the planet coursing throughout your body once more. The feeling of true freedom. The freedom of movement, and to be what you wish.";
-"LITHEND_Normal_6_Jem" =
+"LITH_dlg_ending_Normal_6_Jem" =
    "\cdAnd so, you are at last free. Free again to think and observe, and see for yourself the abolishment of your captors.\n"
    "\n"
    "\cnNo more distrust of your will. For this sake, this is only the beginning.\n"
@@ -1267,7 +1267,7 @@
    "\cvYour parents are waiting back at home.\n"
    "\n"
    "\cxIt's time to go back.";
-"LITHEND_Normal_1_Ari" =
+"LITH_dlg_ending_Normal_1_Ari" =
    "Waves of light scatter and permeate,\n"
    "during these last few moments\n"
    "before death sweeps and parts us,\n"
@@ -1288,7 +1288,7 @@
    "\n"
    "\n"
    "You can't hold on to pretty pictures.";
-"LITHEND_Normal_2_Ari" =
+"LITH_dlg_ending_Normal_2_Ari" =
    "\cnYou come to. All you can see are rolling plains. Golden grass. The sight of it makes you feel something strange. And in the distance, you see your home city.\n"
    "\n"
    "\caIt's burning.\n"
@@ -1302,7 +1302,7 @@
    "\cnThis is the end. You hold your gun.\n"
    "\n"
    "\caIn your mind, your sister sighs.";
-"LITHEND_Normal_3_Ari" =
+"LITH_dlg_ending_Normal_3_Ari" =
    "\caA body in the depths of your memory.\n"
    "\caYou feel like the world wasn't meant\n"
    "\cafor you both to live in.\n"

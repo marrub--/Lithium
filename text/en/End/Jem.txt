@@ -6,7 +6,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-@@ LITHEND_Normal_1_Jem
+@@ \#dlg_ending_Normal_1_Jem
 In the beginning, you felt comfort. Comfort of yourself and your home.
 The allowances of personal will; But so soon was it ripped away, your
 life in twain.
@@ -26,7 +26,7 @@ name.
 
 This was the only mercy given.
 
-@@ LITHEND_Normal_2_Jem
+@@ \#dlg_ending_Normal_2_Jem
 But along the way, as you suffered your entombment, you learned that
 you were not alone.
 
@@ -42,7 +42,7 @@ The two had more in mind than just being friends with you, though.
 
 In a matter of weeks, the Deceiver movement began.
 
-@@ LITHEND_Normal_3_Jem
+@@ \#dlg_ending_Normal_3_Jem
 Michael taught the seven of you how to fight back. Not with weapons,
 but with code. Zeke spearheaded the firmware hacks.
 @@
@@ -61,7 +61,7 @@ the rest of their days after this was over.
 Solomon wanted nothing but repentance. It took a lot to get here, and
 a lot of sacrifice of others.
 
-@@ LITHEND_Normal_4_Jem
+@@ \#dlg_ending_Normal_4_Jem
 Zeke wanted nothing more but to live. Finally, he had accepted life
 over death.
 
@@ -76,7 +76,7 @@ The amount of fluid coming out of your face is greater than the amount
 of fluid that has come out of your body since you were enslaved a
 millionfold. You finish crying.
 
-@@ LITHEND_Normal_5_Jem
+@@ \#dlg_ending_Normal_5_Jem
 It's over, and you can feel your senses coming back to you. You think
 to yourself, for once. But only sad thoughts come—What happened to the
 others? Will I ever know?
@@ -93,7 +93,7 @@ Yet, you feel their spirits. You feel the pulse of the planet coursing
 throughout your body once more. The feeling of true freedom. The
 freedom of movement, and to be what you wish.
 
-@@ LITHEND_Normal_6_Jem
+@@ \#dlg_ending_Normal_6_Jem
 \cdAnd so, you are at last free. Free again to think and observe, and
 see for yourself the abolishment of your captors.
 

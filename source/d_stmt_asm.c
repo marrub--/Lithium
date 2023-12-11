@@ -36,10 +36,10 @@ i32 CodeABS(struct compiler *d, cstr reg) {
       switch(Dlg_ItemName(tok->textV)) {
       case _dlg_item_page:
          tok = tb_get(&d->tb);
-         if(tok->type == tok_identi) {
-            n = Dlg_CheckNamePool(d, _name_pool_pages, tok->textV);
+         if(tok->type == tok_number) {
+            n = faststrtoi32(tok->textV);
             if(n >= DPAGE_MAX || n < 0) {
-               tb_err(&d->tb, &d->res, "bad page name", tok, _f);
+               tb_err(&d->tb, &d->res, "bad page number", tok, _f);
                unwrap(&d->res);
             }
          } else {
@@ -57,7 +57,6 @@ i32 CodeABS(struct compiler *d, cstr reg) {
    case tok_mod:
       tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, 0);
       unwrap(&d->res);
-
       n = Dlg_CheckNamePool(d, _name_pool_variables, tok->textV);
       if(n >= 0) {
          return VAR_END - n;

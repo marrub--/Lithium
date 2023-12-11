@@ -6,13 +6,13 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-%% LITHEND_Dedication
+%% \#dlg_ending_Dedication
     Dedicated to the loving memory
         of Kaitlyn Anne Fox.
 You'll always be my biggest inspiration.
              Goodnight.
 
-%% LITHEND_Finished
+%% \#dlg_ending_Finished
 The end.
 
 

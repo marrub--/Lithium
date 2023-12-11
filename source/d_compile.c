@@ -71,21 +71,19 @@ static void Dlg_GetItem_Page(struct compiler *d, mem_size_t num) {
 
 static bool Dlg_GetItem(struct compiler *d) {
    switch(Dlg_ItemName(tb_get(&d->tb)->textV)) {
-   case _dlg_item_page: {
-      struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, 0);
+   case _dlg_item_page:
+      struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_number, 0);
       unwrap(&d->res);
-      i32 num = Dlg_CheckNamePool(d, _name_pool_pages, tok->textV);
+      i32 num = faststrtoi32(tok->textV);
       if(num >= DPAGE_NORMAL_MAX || num < 0) {
-         tb_err(&d->tb, &d->res, "bad page name", tok, _f);
+         tb_err(&d->tb, &d->res, "bad page number", tok, _f);
          unwrap(&d->res);
       }
       Dlg_GetItem_Page(d, num);
       break;
-   }
    case _dlg_item_failure:    Dlg_GetItem_Page(d, DPAGE_FAILURE);    break;
    case _dlg_item_finished:   Dlg_GetItem_Page(d, DPAGE_FINISHED);   break;
    case _dlg_item_unfinished: Dlg_GetItem_Page(d, DPAGE_UNFINISHED); break;
-   case _dlg_item_page_names: Dlg_GetNamePool(d, _name_pool_pages);  break;
    default:
       tb_unget(&d->tb);
       return false;
@@ -95,10 +93,9 @@ static bool Dlg_GetItem(struct compiler *d) {
 }
 
 static void Dlg_GetTop_Prog(struct compiler *d, i32 beg, i32 end) {
-   struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, 0);
+   struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_number, 0);
    unwrap(&d->res);
-   i32 name = Dlg_CheckNamePool(d, d->pool, tok->textV);
-   i32 num  = beg + name;
+   i32 num = beg + faststrtoi32(tok->textV);
    if(num > end || num < beg) {
       tb_err(&d->tb, &d->res, "invalid dialogue name", tok, _f);
       unwrap(&d->res);
@@ -107,9 +104,7 @@ static void Dlg_GetTop_Prog(struct compiler *d, i32 beg, i32 end) {
    unwrap(&d->res);
    FinishDef(d);
    Dbg_Log(log_gsinfo, _l("\n---\nheading "), _p(num), _l("\n---"));
-   d->num  = num;
-   d->name = name;
-   Dlg_ClearNamePool(d, _name_pool_pages);
+   d->num = num;
    while(!tb_drop(&d->tb, tok_bracec)) {
       Dlg_GetItem(d); unwrap(&d->res);
    }
@@ -199,31 +194,26 @@ void Dlg_MInit(void) {
       }
       switch(Dlg_TopLevelName(tok->textV)) {
       case _dlg_toplevel_program:
-         d.pool = _name_pool_program;
          d.wait_act = ACT_NONE;
          Dlg_GetTop_Prog(&d, DNUM_PRG_BEG, DNUM_PRG_END);
          break;
       case _dlg_toplevel_dialogue:
-         d.pool = _name_pool_dialogue;
          d.wait_act = ACT_DLG_WAIT;
          Dlg_GetTop_Prog(&d, DNUM_DLG_BEG, DNUM_DLG_END);
          break;
       case _dlg_toplevel_terminal:
-         d.pool = _name_pool_terminal;
          d.wait_act = ACT_TRM_WAIT;
          Dlg_GetTop_Prog(&d, DNUM_TRM_BEG, DNUM_TRM_END);
          break;
-      case _dlg_toplevel_program_names:
-         Dlg_GetNamePool(&d, _name_pool_program);
-         break;
-      case _dlg_toplevel_dialogue_names:
-         Dlg_GetNamePool(&d, _name_pool_dialogue);
-         break;
-      case _dlg_toplevel_terminal_names:
-         Dlg_GetNamePool(&d, _name_pool_terminal);
-         break;
       case _dlg_toplevel_var:
          Dlg_GetNamePool(&d, _name_pool_variables);
+         break;
+      case _dlg_toplevel_name:
+         struct token *tok = tb_expc(&d.tb, &d.res, tb_get(&d.tb), tok_identi, 0);
+         unwrap(&d.res);
+         faststrcpy(d.name, tok->textV);
+         tok = tb_expc(&d.tb, &d.res, tb_get(&d.tb), tok_semico, 0);
+         unwrap(&d.res);
          break;
       default:
          tb_err(&d.tb, &d.res, "invalid toplevel", tok, _f);

@@ -1,218 +1,141 @@
-// ╭-*-Agw-LithDlg-*-─────────────────────────────────────────────────────────╮
-// │                                                                          │
-// │             Distributed under the CC0 public domain license.             │
-// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
-// │                See licenses/cc0.txt for more information.                │
-// │                                                                          │
-// ╰──────────────────────────────────────────────────────────────────────────╯
+/*-*-Agw-LithDlg-*-*/
+nimi abyss;
 
-toki_nimi {
-   start,
-   lane,
-   jem,
-   fulk,
-   luke,
-   omi,
-   ari,
-   kiri,
+/* Tutorial */
+toki 0 {
+   lipu 0 {
+      name   unknown;
+      remote data;
+      icon   data;
+      text   begin;
+      option begin_nxt lipu 1;
+      option begin_esc brk;
+   }
+   lipu 1 {
+      text question;
+      option question_esc brk;
+   }
 }
 
-// Tutorial ══════════════════════════════════════════════════════════════════╕
-toki start {
-   lipu_nimi {
-      begin,
-      m_question,
-      c_question,
-      i_question,
-      w_question,
-      a_question,
-      d_question,
-      t_question,
-   }
-
-   lipu begin {
-      name   UNKNOWN;
-      remote DATA;
-      icon   Data;
-      text   _0;
-      option _o0 {
-         /**/ seme poki pM lipu m_question;
-         ante seme poki pC lipu c_question;
-         ante seme poki pI lipu i_question;
-         ante seme poki pW lipu w_question;
-         ante seme poki pA lipu a_question;
-         ante seme poki pD lipu d_question;
-         ante seme poki pT lipu t_question;
-      }
-      option _o1 brk;
-   }
-
-   lipu m_question {text _0; option _o0 brk;}
-   lipu c_question {text _0; option _o0 brk;}
-   lipu i_question {text _0; option _o0 brk;}
-   lipu w_question {text _0; option _o0 brk;}
-   lipu a_question {text _0; option _o0 brk;}
-   lipu d_question {text _0; option _o0 brk;}
-   lipu t_question {text _0; option _o0 brk;}
-}
-
-// Marine ════════════════════════════════════════════════════════════════════╕
+/* Marine */
 kon {
    lane_met,
    lane_rpg,
    lane_where,
    lane_scars,
 }
-toki lane {
-   lipu_nimi {
-      begin,
-      m_meet,
-      c_meet,
-      other_meet,
-   }
-
-   lipu begin {
-      name   DOLL;
-      remote LANE;
-      icon   Doll;
-      text _0;
+toki 1 {
+   lipu 0 {
+      name   doll;
+      remote lane;
+      icon   doll;
+      text   m_begin_0;
       seme !kon %lane_met {
-         option _o0 {
-            /**/ seme poki pM lipu m_meet;
-            ante seme poki pC lipu c_meet;
-            ante              lipu other_meet;
+         option m_begin_o0 {
+            /**/ seme poki pM lipu 100;
+            ante seme poki pC lipu 200;
+            ante              lipu 1;
          }
       }
-      option _o1 brk;
+      option m_begin_o1 brk;
    }
-
    /* Lane */
-   lipu_nimi {
-      m_nothing,
-      m_seen,
+   lipu 100 {
+      text m_meet_0;
+      option m_meet_o0 lipu 101;
+      option m_meet_o1 brk;
+      option m_meet_o2 lipu 102;
    }
-
-   lipu m_meet {
-      text _0;
-      option _o0 lipu m_nothing;
-      option _o1 brk;
-      option _o2 lipu m_seen;
-   }
-
-   lipu m_nothing {
-      seme !kon %lane_rpg   option _o0 {inc %lane_rpg;   lipu m_nothing;}
-      seme !kon %lane_where option _o1 {inc %lane_where; lipu m_nothing;}
-      option _o2 {
+   lipu 101 {
+      seme !kon %lane_rpg   option m_nothing_o0 {inc %lane_rpg;   lipu 101;}
+      seme !kon %lane_where option m_nothing_o1 {inc %lane_where; lipu 101;}
+      option m_nothing_o2 {
          inc %lane_met;
-         lipu m_seen;
+         lipu 102;
       }
-      option _o3 brk;
+      option m_nothing_o3 brk;
       seme kon %lane_rpg {
-         text _1;
+         text m_nothing_1;
          dec %lane_rpg;
       } ante seme kon %lane_where {
-         text _2;
+         text m_nothing_2;
          dec %lane_where;
       } ante {
-         text _0;
+         text m_nothing_0;
       }
    }
-
-   lipu m_seen {
+   lipu 102 {
       seme kon %lane_scars {
-         text _1;
+         text m_seen_1;
          script "Lith_SetLane";
-         option _o2 brk;
-         option _o3 brk;
+         option m_seen_o2 brk;
+         option m_seen_o3 brk;
       } ante {
-         text _0;
-         option _o0 brk;
-         option _o1 {
+         text m_seen_0;
+         option m_seen_o0 brk;
+         option m_seen_o1 {
             inc %lane_scars;
-            lipu m_seen;
+            lipu 102;
          }
       }
    }
-
    /* Jem */
-   lipu_nimi {
-      c_reminded,
-      c_real,
-      c_others,
-      c_where,
-      c_fine,
-      c_1649,
-      c_time,
-      c_experience,
-      c_coverup,
+   lipu 200 {
+      text mc_meet_0;
+      option mc_meet_o0 lipu 201;
+      option mc_meet_o1 lipu 202;
    }
-
-   lipu c_meet {
-      text _0;
-      option _o0 lipu c_reminded;
-      option _o1 lipu c_real;
+   lipu 201 {
+      text mc_reminded_0;
+      option mc_reminded_o0 lipu 203;
+      option mc_reminded_o1 lipu 202;
    }
-
-   lipu c_reminded {
-      text _0;
-      option _o0 lipu c_others;
-      option _o1 lipu c_real;
+   lipu 202 {text mc_real_0; option mc_real_o0 lipu 206;}
+   lipu 203 {
+      text mc_others_0;
+      option mc_others_o0 lipu 204;
+      option mc_others_o1 brk;
    }
-
-   lipu c_real {text _0; option _o0 lipu c_1649;}
-
-   lipu c_others {
-      text _0;
-      option _o0 lipu c_where;
-      option _o1 brk;
-   }
-
-   lipu c_where {text _0; option _o0 lipu c_fine;}
-   lipu c_fine  {text _0; option _o0 lipu c_1649;}
-   lipu c_1649 {
+   lipu 204 {text mc_where_0; option mc_where_o0 lipu 205;}
+   lipu 205 {text mc_fine_0;  option mc_fine_o0  lipu 206;}
+   lipu 206 {
       inc %lane_met;
-      text _0;
-      option _o0 lipu c_time;
+      text mc_1649_0;
+      option mc_1649_o0 lipu 207;
    }
-   lipu c_time {text _0; option _o0 lipu c_experience;}
-   lipu c_experience {
+   lipu 207 {text mc_time_0; option mc_time_o0 lipu 208;}
+   lipu 208 {
        script "Lith_SetLane";
-       text _0;
-       option _o0 lipu c_coverup;
+       text mc_experience_0;
+       option mc_experience_o0 lipu 209;
     }
-
-   lipu c_coverup {
-      text _0;
-      option _o0 brk;
-      option _o1 brk;
+   lipu 209 {
+      text mc_coverup_0;
+      option mc_coverup_o0 brk;
+      option mc_coverup_o1 brk;
    }
-
    /* Other */
-   lipu_nimi {
-      other_past,
-   }
-
-   lipu other_meet {
+   lipu 1 {
       inc %lane_met;
-      text _0;
-      option _o0 brk;
-      option _o1 lipu other_past;
-      option _o2 brk;
+      text mo_meet_0;
+      option mo_meet_o0 brk;
+      option mo_meet_o1 lipu 2;
+      option mo_meet_o2 brk;
    }
-
-   lipu other_past {
+   lipu 2 {
       script "Lith_SetLane";
-      text _0;
-      option _o0 brk;
+      text mo_past_0;
+      option mo_past_o0 brk;
    }
 }
 
-// Thoth ═════════════════════════════════════════════════════════════════════╕
+/* Thoth */
+/*
 kon {
    kiri_met,
    kiri_self,
 }
-toki kiri {
+toki 7 kiri {
    lipu_nimi {
       begin,
       t_breaking,
@@ -220,8 +143,7 @@ toki kiri {
       t_broken,
       t_entity,
    }
-
-   lipu begin {
+   lipu 0 begin {
       name   DOLL;
       remote KIRI;
       icon   Doll;
@@ -241,30 +163,27 @@ toki kiri {
          text _0;
       }
    }
-
    /* Kiri */
-   lipu t_breaking {
+   lipu 100 t_breaking {
       inc %kiri_met;
       text _0;
       option _o0 lipu t_down;
    }
-
-   lipu t_down {
+   lipu 101 t_down {
       text _0;
       option _o0 lipu t_broken;
       option _o1 brk;
    }
-
-   lipu t_broken {
+   lipu 102 t_broken {
       inc %kiri_self;
       text _0;
       option _o0 lipu t_entity;
    }
-
-   lipu t_entity {
+   lipu 103 t_entity {
       text _0;
       option _o0 brk;
    }
 }
+*/
 
 /* EOF */

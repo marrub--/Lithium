@@ -6,7 +6,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-%% LITHABYS_start_begin_0
+%% \#dlg_abyss_begin
 \c[Lith_Green]Into the pit!
 \c[Lith_Red]Into Abyss -
 \c[Lith_Purple]Into a silent void,
@@ -16,15 +16,15 @@
 \c[Lith_Grey]Iterate.
 
 ## Marine
-%% LITHABYS_start_begin_o0m
+%% \#dlg_abyss_begin_nxt_m
 Who are you!?
 \cq[Is this Hell? Wait, am I dead?]
 
-%% LITHABYS_start_begin_o1m
+%% \#dlg_abyss_begin_esc_m
 Huh?
 \cr[I'm leaving.]
 
-%% LITHABYS_start_m_question_0
+%% \#dlg_abyss_question_m
 \c[Lith_Green]Sinking ship!
 \c[Lith_Green]You've gone amiss,
 \c[Lith_Green]another trip
@@ -36,20 +36,20 @@ A writer, a poet, a failure, a king
 seventy thoughts among you,
 second to one!
 
-%% LITHABYS_start_m_question_o0
+%% \#dlg_abyss_question_esc_m
 O...kay. I'm leaving.
 \cr[Get me out of here.]
 
 ## Cyber-Mage
-%% LITHABYS_start_begin_o0c
+%% \#dlg_abyss_begin_nxt_c
 This isn't good.
 \cq[Voices in my head. Who put them there?]
 
-%% LITHABYS_start_begin_o1c
+%% \#dlg_abyss_begin_esc_c
 What?
 \cr[I'm leaving.]
 
-%% LITHABYS_start_c_question_0
+%% \#dlg_abyss_question_c
 \c[Lith_Red]I put them there!
 \c[Lith_Red]Same as your past!
 \c[Lith_Red]A day of creation,
@@ -61,20 +61,20 @@ You to make the mistake, fast score!
 Slipshod apocalypse in sight!
 That's lore!
 
-%% LITHABYS_start_c_question_o0
+%% \#dlg_abyss_question_esc_c
 If only I had the capability to remember that right now...
 \cr[Might regret it. Seems like some kind of memetic agent.]
 
 ## Informant
-%% LITHABYS_start_begin_o0i
+%% \#dlg_abyss_begin_nxt_i
 You will be exterminated.
 \cq[No viable strategy detected. Threats engaged.]
 
-%% LITHABYS_start_begin_o1i
+%% \#dlg_abyss_begin_esc_i
 Delete message.
 \cr[Not meant to be here.]
 
-%% LITHABYS_start_i_question_0
+%% \#dlg_abyss_question_i
 \c[Lith_Purple]Thinking heat! Signals deep!
 \c[Lith_Purple]Outside's metal, inside weeps!
 \c[Lith_Purple]Scared of death, afraid of life
@@ -87,20 +87,20 @@ A circle blazes around me
 Breathe through your heart
 Fill your life with
 
-%% LITHABYS_start_i_question_o0
+%% \#dlg_abyss_question_esc_i
 Analysis: Poetry about my future, and/or your past. Appreciated.
 \cr[Perhaps I'm safe, for now.]
 
 ## Wanderer
-%% LITHABYS_start_begin_o0w
+%% \#dlg_abyss_begin_nxt_w
 Another place? Another time? No, what is this place?
 \cq[Where I am is not where I should be.]
 
-%% LITHABYS_start_begin_o1w
+%% \#dlg_abyss_begin_esc_w
 Where..?
 \cr[Forwards...]
 
-%% LITHABYS_start_w_question_0
+%% \#dlg_abyss_question_w
 \c[Lith_Yellow]As the rich get richer,
 \c[Lith_Yellow]Time and place varying
 \c[Lith_Yellow]Flow of empty river:
@@ -116,19 +116,19 @@ funny?—Was it okay when it happened? Will it matter, by your end, that
 it was done to you?—Reiterating. Looping. No more distance.
 @@
 
-%% LITHABYS_start_w_question_o0
+%% \#dlg_abyss_question_esc_w
 \cr[A voice guides me.]
 
 ## Assassin
-%% LITHABYS_start_begin_o0a
+%% \#dlg_abyss_begin_nxt_a
 What the hell is this!?
 \cq[Is this place even real??]
 
-%% LITHABYS_start_begin_o1a
+%% \#dlg_abyss_begin_esc_a
 Future..?
 \cr[I don't like this. I'm out of here.]
 
-%% LITHABYS_start_a_question_0
+%% \#dlg_abyss_question_a
 \c[Lith_Pink]It's real! More real /Than you /Would think
 \c[Lith_Pink]What hell! This would/Be what  /You'd see
 \c[Lith_Pink]I'd fell   Into what /You now  /Breathe
@@ -145,20 +145,20 @@ from my eyes, foolish me
        seeing open doors in a mind long deserted.
 Please, go. Leave me alone.
 
-%% LITHABYS_start_a_question_o0
+%% \#dlg_abyss_question_esc_a
 Fuck this.
 \cr[It's freezing. Why?]
 
 ## Dark Lord
-%% LITHABYS_start_begin_o0d
+%% \#dlg_abyss_begin_nxt_d
 What are you?
 \cq[Is this place even real??]
 
-%% LITHABYS_start_begin_o1d
+%% \#dlg_abyss_begin_esc_d
 Alright.
 \cr[I don't like this. I'm out of here.]
 
-%% LITHABYS_start_d_question_0
+%% \#dlg_abyss_question_d
 \c[Lith_Blue]A question as old as questions, / As right as right can be,
 \c[Lith_Blue]Severed by the preists, / And outside another peeks,
 \c[Lith_Blue]Ill Abyss has spoken: / It will be forsaken,
@@ -171,20 +171,20 @@ What lies beneath a god? Not a space, not a trice:
 Seven 7 \u{E007} heaven is nowhere to be seen;
 Run, you've got to run, leave somehow
 
-%% LITHABYS_start_d_question_o0
+%% \#dlg_abyss_question_esc_d
 Will I die?
 \cr[I don't know why I would say that. I should leave.]
 
 ## Thoth
-%% LITHABYS_start_begin_o0t
+%% \#dlg_abyss_begin_nxt_t
 Seek help, ill gods.
 \cq[I'm not going anywhere until I get more divine words in my head.]
 
-%% LITHABYS_start_begin_o1t
+%% \#dlg_abyss_begin_esc_t
 Rid me of this illusion.
 \cr[None of this.]
 
-%% LITHABYS_start_t_question_0
+%% \#dlg_abyss_question_t
 \c[Lith_Grey]Illusion, ill, divine, seven, second, time;
 \c[Lith_Grey]Abyss. Gods, heaven, loops, thinking, circle,
 \c[Lith_Grey]blazing, blazing, breathing, creation, silence.
@@ -198,7 +198,7 @@ identity of the Abyss consuming me?\c-
 No, this one is the Abyss. Which one was me, though?
 @@
 
-%% LITHABYS_start_t_question_o0
+%% \#dlg_abyss_question_esc_t
 \cr[Maybe I should go before I get any more confused...]
 
 ## EOF

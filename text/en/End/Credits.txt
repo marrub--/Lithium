@@ -6,7 +6,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-%% LITHEND_Credits
+%% \#dlg_ending_Credits
 \cd>>>>> [[[[ Lithium ]]]]
   Project Golan, Xevv 2
 

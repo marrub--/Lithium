@@ -22,8 +22,8 @@
 
 == \#LOGON_TEST | \cgehhg.431.4122/-/<PFGR ZNE6 \cr&49c2\cg>
 
-!!include Dialogue/LITHTEST.txt
-!!include Dialogue/LITHSKY.txt
+!!include Dialogue/TestMap.txt
+!!include Dialogue/Sky.txt
 
 ## story mode
 == \#REMOTE_MAXIE | maxie@ai.judgment.51e
@@ -44,6 +44,6 @@
 
 == \#PNAME_DOLL | Doll
 
-!!include Dialogue/LITHABYS.txt
+!!include Dialogue/Abyss.txt
 
 ## EOF

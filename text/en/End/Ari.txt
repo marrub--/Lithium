@@ -6,7 +6,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-%% LITHEND_Normal_1_Ari
+%% \#dlg_ending_Normal_1_Ari
 Waves of light scatter and permeate,
 during these last few moments
 before death sweeps and parts us,
@@ -28,7 +28,7 @@ No more.
 
 You can't hold on to pretty pictures.
 
-@@ LITHEND_Normal_2_Ari
+@@ \#dlg_ending_Normal_2_Ari
 \cnYou come to. All you can see are rolling plains. Golden grass. The
 sight of it makes you feel something strange. And in the distance, you
 see your home city.
@@ -48,7 +48,7 @@ over. This is the end.
 
 \caIn your mind, your sister sighs.
 
-%% LITHEND_Normal_3_Ari
+%% \#dlg_ending_Normal_3_Ari
 \caA body in the depths of your memory.
 \caYou feel like the world wasn't meant
 \cafor you both to live in.

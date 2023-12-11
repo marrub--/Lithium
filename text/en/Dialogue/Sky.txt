@@ -6,13 +6,13 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-== LITHSKY_lost_begin_0        | "\cdSorry this is all there is.\c-"
-== LITHSKY_lost_begin_o_return | [Return.]
-== LITHSKY_lost_begin_o_flow   | Intern flow
-== LITHSKY_lost_begin_o_repeat | ''Deal Done - Sent Back''
+== \#dlg_sky_begin        | "\cdSorry this is all there is.\c-"
+== \#dlg_sky_begin_esc    | [Return.]
+== \#dlg_sky_begin_flow   | Intern flow
+== \#dlg_sky_begin_repeat | ''Deal Done - Sent Back''
 
-== LITHSKY_lost_flow_o_return | $$LITHSKY_lost_begin_o_return
-%% LITHSKY_lost_flow_0
+== \#dlg_sky_flow_esc | $$\#dlg_sky_begin_esc
+%% \#dlg_sky_flow
 Seen through 8 eyes,      made of light,    twice on twice
  through death, through life;
 Intern flow into next chapter -
@@ -27,11 +27,11 @@ Follow gaze through all ways,
 
            in half reality,           be on your way.
 
-== LITHSKY_lost_repeat_o_return | $$LITHSKY_lost_begin_o_return
-== LITHSKY_lost_repeat_o0 | [First page.]
-== LITHSKY_lost_repeat_o1 | [Second page.]
+== \#dlg_sky_repeat_esc | $$\#dlg_sky_begin_esc
+== \#dlg_sky_repeat_goto0 | [First page.]
+== \#dlg_sky_repeat_goto1 | [Second page.]
 
-%% LITHSKY_lost_repeat_0
+%% \#dlg_sky_repeat_0
 A blade brings death—
 Your life, like a blade—
 Alive, and yet.
@@ -44,7 +44,7 @@ in morning dawn, three more.
 Living in hell starts to seem OK.
 Then I see you bring nothing.
 
-%% LITHSKY_lost_repeat_1
+%% \#dlg_sky_repeat_1
 The cycle goes on, uninterrupted.
    Blades seek me out,
            I cherish

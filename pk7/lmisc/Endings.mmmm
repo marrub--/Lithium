@@ -1,25 +1,8 @@
-// ╭-*-Agw-LithDlg-*-─────────────────────────────────────────────────────────╮
-// │                                                                          │
-// │             Distributed under the CC0 public domain license.             │
-// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
-// │                See licenses/cc0.txt for more information.                │
-// │                                                                          │
-// ╰──────────────────────────────────────────────────────────────────────────╯
+/*-*-Agw-LithDlg-*-*/
+nimi ending;
 
-lipu_ilo_nimi {
-   endings,
-}
-
-lipu_ilo endings {
-   lipu_nimi {
-      normal,
-      time_out,
-      division,
-      common,
-      music_subr,
-   }
-
-   lipu music_subr {
+lipu_ilo 0 {
+   lipu 101 {
       seme poki pM {
          music "lmusic/braun.opus";
       } ante seme poki pC {
@@ -34,9 +17,8 @@ lipu_ilo endings {
       }
       rts;
    }
-
-   lipu normal {
-      jsr lipu music_subr;
+   lipu 0 {
+      jsr lipu 101;
       seme poki pM {
          image   ":End:Lane";
          fade_in 50;
@@ -63,25 +45,22 @@ lipu_ilo endings {
          crawl    Normal_2_Ari 400;
          crawl    Normal_3_Ari 400;
       }
-      lipu common;
+      lipu 100;
    }
-
-   lipu time_out {
+   lipu 1 {
       music   "lmusic/asdfn2.ogg";
       image   "HELP";
       fade_in 10;
       crawl   TimeOut_1 900;
-      lipu    common;
+      lipu    100;
    }
-
-   lipu division {
+   lipu 2 {
       music   "lmusic/siarani.opus";
       fade_in 10;
       crawl   DivisionSigil 900;
-      lipu    common;
+      lipu    100;
    }
-
-   lipu common {
+   lipu 100 {
       fade_out 100;
       image    "";
       mus_fade 100;

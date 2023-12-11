@@ -1,33 +1,25 @@
 /*-*-agw-lithdlg-*-*/
+nimi sky;
 
-toki_nimi {
-   lost,
-}
-
-toki lost {
-   lipu_nimi {
-      begin,
-      flow,
-      repeat,
-   }
-   lipu begin {
+toki 0 {
+   lipu 0 {
       name   NOTE;
       remote DATA;
       icon   Data;
-      text   _0;
-      option _o_return brk;
-      option _o_flow   page flow;
-      option _o_repeat page repeat;
+      text   begin;
+      option begin_esc    brk;
+      option begin_flow   lipu 1;
+      option begin_repeat lipu 2;
    }
-   lipu flow {
-      text _0;
-      option _o_return page begin;
+   lipu 1 {
+      text flow;
+      option flow_esc lipu 0;
    }
-   lipu repeat {
-      text _0;
-      option _o_return page begin;
-      option _o0 {text _0; wait;}
-      option _o1 {text _1; wait;}
+   lipu 2 {
+      text repeat;
+      option repeat_esc lipu 0;
+      option repeat_goto0 {text repeat_0; wait;}
+      option repeat_goto1 {text repeat_1; wait;}
    }
 }
 

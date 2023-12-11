@@ -6,7 +6,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-%% LITHEND_TimeOut_1
+%% \#dlg_ending_TimeOut_1
 You feel a sense of \cgoverwhelming dread. Everything is over? You scream, but your body doesn't respond. \cmEverything is over now. \cjEver\cgyt\c[Lith_Green]h\c[Lith_Pink]i\c[Lith_Yellow]n\c[Lith_Red]g\c[Lith_Purple].\cr Your v\cgision melts. Your min\cmd\cg is \cngone\cr. Nothing makes sense. \cmEverything\cr makes sense.
 
 

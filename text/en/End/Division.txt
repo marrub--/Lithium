@@ -6,7 +6,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-%% LITHEND_DivisionSigil
+%% \#dlg_ending_DivisionSigil
 \cgYou have made
 
 

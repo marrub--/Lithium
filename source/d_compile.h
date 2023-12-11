@@ -11,11 +11,7 @@
 #include "m_trie.h"
 
 enum {
-   _name_pool_program,
-   _name_pool_dialogue,
-   _name_pool_terminal,
    _name_pool_variables,
-   _name_pool_pages,
    _name_pool_max,
 };
 
@@ -29,10 +25,10 @@ struct compiler {
    struct err       res;
    struct dlg_def   def;
    struct name_pool nam[_name_pool_max];
+   char             name[32];
    i32              pool;
    i32              num;
    i32              page;
-   i32              name;
    i32              wait_act;
 };
 

@@ -1,133 +1,83 @@
-// ╭-*-Agw-LithDlg-*-─────────────────────────────────────────────────────────╮
-// │                                                                          │
-// │             Distributed under the CC0 public domain license.             │
-// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
-// │                See licenses/cc0.txt for more information.                │
-// │                                                                          │
-// ╰──────────────────────────────────────────────────────────────────────────╯
+/*-*-Agw-LithDlg-*-*/
+nimi test_jacques;
 
-ilo_nimi {
-   unused,
-   test_term,
-}
-
-toki_nimi {
-   unused,
-   jacques,
-}
-
-toki jacques {
-   lipu_nimi {
-      begin,
-      hey,
-      lifes_unfair,
-      division,
-      start_talking,
-      c_what_asic,
-      c_zj,
-      c_troubled,
-      c_worse,
-      c_malnutrition,
-      c_thebeat,
-      c_darker,
-   }
-
-   lipu begin {
+toki 1 {
+   lipu 0 {
       name JACQUES;
       icon AOF;
       remote JACQUES;
-
-      seme ijo "Lith_DivisionSigil" lipu division;
-
-      text _0;
-
-      option _1 lipu hey;
-      option _2 brk;
+      seme ijo "Lith_DivisionSigil" lipu 4;
+      text begin_0;
+      option begin_1 lipu 1;
+      option begin_2 brk;
    }
-
-   lipu hey {
-      seme poki pC text _0c;
-      ante         text _0;
-
-      option _1 {
+   lipu 1 {
+      seme poki pC text hey_0c;
+      ante         text hey_0;
+      option hey_1 {
          script 2;
-         lipu hey;
+         lipu 1;
       }
-
-      option _2 lipu start_talking;
-      option _3 brk;
+      option hey_2 lipu 2;
+      option hey_3 brk;
    }
-
-   lipu start_talking {
+   lipu 2 {
       seme poki pC {
-         text _0c;
-         option _1c lipu c_what_asic;
-         option _2c lipu c_zj;
+         text start_talking_0c;
+         option start_talking_1c lipu 100;
+         option start_talking_2c lipu 101;
       } ante {
-         text _0;
-         option _1 lipu lifes_unfair;
+         text start_talking_0;
+         option start_talking_1 lipu 3;
       }
    }
-
-   lipu c_what_asic {
-      text _0;
-      option _1 lipu c_worse;
-      option _2 brk;
+   lipu 100 {
+      text c_what_asic_0;
+      option c_what_asic_1 lipu 103;
+      option c_what_asic_2 brk;
    }
-
-   lipu c_zj {
-      text _0;
-      option _1 lipu c_troubled;
+   lipu 101 {
+      text c_zj_0;
+      option c_zj_1 lipu 102;
    }
-
-   lipu c_troubled {
-      text _0;
-      option _1 lipu c_what_asic;
+   lipu 102 {
+      text c_troubled_0;
+      option c_troubled_1 lipu 100;
    }
-
-   lipu c_worse {
-      text _0;
-      option _1 lipu c_malnutrition;
+   lipu 103 {
+      text c_worse_0;
+      option c_worse_1 lipu 104;
    }
-
-   lipu c_malnutrition {
-      text _0;
-      option _1 lipu c_thebeat;
+   lipu 104 {
+      text c_malnutrition_0;
+      option c_malnutrition_1 lipu 105;
    }
-
-   lipu c_thebeat {
-      text _0;
-      option _1 lipu c_darker;
+   lipu 105 {
+      text c_thebeat_0;
+      option c_thebeat_1 lipu 106;
    }
-
-   lipu c_darker {
-      text _0;
-      option _1 brk;
+   lipu 106 {
+      text c_darker_0;
+      option c_darker_1 brk;
    }
-
-   lipu lifes_unfair {
-      text _0;
-      option _1 brk;
+   lipu 3 {
+      text lifes_unfair_0;
+      option lifes_unfair_1 brk;
    }
-
-   lipu division {
-      text _0;
-      option _1 brk;
+   lipu 4 {
+      text division_0;
+      option division_1 brk;
    }
 }
 
-ilo test_term {
+nimi test_terminal;
+ilo 1 {
    awen {
       remote TEST;
-
-      logon "01602" text _l;
-
-      info text _0;
-
-      pict "AOF" text _1;
-
+      logon "01602" text "logon";
+      info text awen_0;
+      pict "AOF" text awen_1;
       logoff "01602";
-
       script 2;
    }
 }

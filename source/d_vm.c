@@ -221,11 +221,15 @@ static void TraceReg(void) {
       goto *cases[next]; \
    })
 
+static str straffix(cstr s) {
+   return lang(strp(_l(LANG "dlg_"), _p(s), _c('_'), _c(P_Char(pl.pclass)))) |?
+          lang(strp(_l(LANG "dlg_"), _p(s)));
+}
+
 /* VM action auxiliary */
 static str GetText(void) {
    mem_size_t adr = MemB2_G(VAR_TEXTL);
-   cstr       sc  = MemSC_G(adr);
-   return adr ? lang(strp(_p(ml.lump), _c('_'), _p(sc))) : snil;
+   return adr ? straffix(MemSC_G(adr)) : snil;
 }
 
 static str GetRemote(void) {
@@ -345,8 +349,9 @@ void TerminalGUI(i32 tact) {
 
    G_End(&gst, gui_curs_outlineinv);
 
-   if(P_ButtonPressed(BT_USE) &&
-      pl.old.modal == _gui_dlg) {
+   static i32 debounce;
+   if(P_ButtonPressed(BT_USE) && pl.old.modal == _gui_dlg && ACS_Timer() > debounce + 15) {
+      debounce = ACS_Timer();
       AmbientSound(ss_player_trmswitch, 1.0);
       MemB1_S(VAR_UACT, UACT_ACKNOWLEDGE);
    }
@@ -379,8 +384,7 @@ void DialogueGUI(void) {
       i32 y = 220 - 14 * oc;
       for(mem_size_t i = 0; i < oc; i++, y += 14) {
          mem_size_t adr = MemB2_G(StructOfs(OPT, NAML, i));
-         str        txt = lang(strp(_p(ml.lump), _c('_'), _p(MemSC_G(adr)), _c(P_Char(pl.pclass))));
-         if(!txt)  {txt = lang(strp(_p(ml.lump), _c('_'), _p(MemSC_G(adr))));}
+         str        txt = adr ? straffix(MemSC_G(adr)) : snil;
          if(G_Button_HId(&gst, i, tmpstr(txt), 45, y, Pre(btndlgsel))) {
             MemB1_S(VAR_UACT, UACT_SELOPTION);
             MemB1_S(VAR_OPT_SEL, i);

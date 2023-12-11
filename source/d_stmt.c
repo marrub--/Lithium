@@ -16,10 +16,9 @@ noinit static char txtbuf[64];
 
 static mem_size_t prefixed_text(struct compiler *d, cstr text) {
    char *p = txtbuf;
-   faststrpcpy(&p, d->nam[d->pool].names[d->name]);
-   if(d->page < DPAGE_NORMAL_MAX) {
+   if(d->name[0]) {
+      faststrpcpy(&p, d->name);
       *p++ = '_';
-      faststrpcpy(&p, d->nam[_name_pool_pages].names[d->page]);
    }
    faststrpcpy(&p, text);
    ++p;
@@ -140,11 +139,11 @@ static void stmt_option(struct compiler *d) {
 }
 
 static void stmt_page(struct compiler *d) {
-   struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, 0);
+   struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_number, 0);
    unwrap(&d->res);
-   i32 n = Dlg_CheckNamePool(d, _name_pool_pages, tok->textV);
+   i32 n = faststrtoi32(tok->textV);
    if(n >= DPAGE_MAX || n < 0) {
-      tb_err(&d->tb, &d->res, "bad page name", tok, _f);
+      tb_err(&d->tb, &d->res, "bad page number", tok, _f);
       unwrap(&d->res);
    }
    Dlg_PushB1(d, DCD_JPG_VI); unwrap(&d->res);
@@ -186,7 +185,7 @@ static void stmt_finale(struct compiler *d, i32 act) {
    if(act == FACT_CRAWL) {
       tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, tok_string, 0);
       unwrap(&d->res);
-      mem_size_t s = Dlg_PushStr(d, tok->textV, tok->textC);
+      mem_size_t s = Dlg_PushStr(d, txtbuf, prefixed_text(d, tok->textV));
       unwrap(&d->res);
       Dlg_PushLdAdr(d, VAR_TEXTL, s); unwrap(&d->res);
    }
