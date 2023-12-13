@@ -9,26 +9,25 @@
 #include "m_file.h"
 #include "m_tokbuf.h"
 #include "m_trie.h"
+#include <GDCC/HashMap.h>
 
-enum {
-   _name_pool_variables,
-   _name_pool_max,
+struct compiler_var {
+   cstr name;
+   i32  value;
+   struct compiler_var *next, **prev;
 };
 
-struct name_pool {
-   char     **names;
-   mem_size_t num_names;
-};
+GDCC_HashMap_Decl(varmap_t, cstr, struct compiler_var)
 
 struct compiler {
-   struct tokbuf    tb;
-   struct err       res;
-   struct dlg_def   def;
-   struct name_pool nam[_name_pool_max];
-   char             name[32];
-   i32              pool;
-   i32              num;
-   i32              page;
+   struct tokbuf  tb;
+   struct err     res;
+   struct dlg_def def;
+   varmap_t      *vars;
+   char           name[32];
+   i32            pool;
+   i32            num;
+   i32            page;
 };
 
 mem_size_t Dlg_WriteCode(struct dlg_def const *def, mem_size_t c, mem_size_t i);
@@ -41,8 +40,7 @@ struct ptr2 Dlg_PushLdAdr(struct compiler *d, mem_size_t at, i32 set);
 void Dlg_SetB1(struct compiler *d, mem_size_t ptr, i32 b);
 void Dlg_SetB2(struct compiler *d, mem_size_t ptr, i32 word);
 mem_size_t Dlg_PushStr(struct compiler *d, cstr s, mem_size_t l);
-void Dlg_GetNamePool(struct compiler *d, mem_size_t which);
-i32 Dlg_CheckNamePool(struct compiler *d, mem_size_t which, cstr check);
-void Dlg_ClearNamePool(struct compiler *d, mem_size_t which);
+struct compiler_var *Dlg_GetVar(struct compiler *d, cstr check);
+void Dlg_SetVar(struct compiler *d, struct compiler_var *var);
 
 #endif

@@ -18,12 +18,10 @@ toki 0 {
 }
 
 /* Marine */
-kon {
-   lane_met,
-   lane_rpg,
-   lane_where,
-   lane_scars,
-}
+jo %lane_met = var_beg;
+jo %lane_rpg = lane_met++;
+jo %lane_where = lane_rpg++;
+jo %lane_scars = lane_where++;
 toki 1 {
    lipu 0 {
       name   doll;

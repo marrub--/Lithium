@@ -89,43 +89,20 @@ mem_size_t Dlg_PushStr(struct compiler *d, cstr s, mem_size_t l) {
    return STR_BEG + p;
 }
 
-void Dlg_GetNamePool(struct compiler *d, mem_size_t which) {
-   struct name_pool *pool = &d->nam[which];
+#define varmap_t_GetKey(o)    ((o)->name)
+#define varmap_t_GetNext(o)   (&(o)->next)
+#define varmap_t_GetPrev(o)   (&(o)->prev)
+#define varmap_t_HashKey(k)   (faststrhash(k))
+#define varmap_t_HashObj(o)   (varmap_t_HashKey((o)->name))
+#define varmap_t_KeyCmp(l, r) (faststrcmp(l, r))
+GDCC_HashMap_Defn(varmap_t, cstr, struct compiler_var)
 
-   tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_braceo, 0); unwrap(&d->res);
-
-   while(!tb_drop(&d->tb, tok_bracec)) {
-      struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, 0);
-      unwrap(&d->res);
-
-      char *s = Malloc(tok->textC + 1, _tag_dlgc);
-      faststrcpy(s, tok->textV);
-
-      pool->names = Talloc(pool->names, pool->num_names + 1, _tag_dlgc);
-      pool->names[pool->num_names++] = s;
-
-      tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_comma, 0); unwrap(&d->res);
-   }
+struct compiler_var *Dlg_GetVar(struct compiler *d, cstr check) {
+   return d->vars->find(check);
 }
 
-i32 Dlg_CheckNamePool(struct compiler *d, mem_size_t which, cstr check) {
-   struct name_pool *pool = &d->nam[which];
-   for(mem_size_t i = 0; i < pool->num_names; ++i) {
-      if(faststrchk(pool->names[i], check)) {
-         return i;
-      }
-   }
-   return -1;
-}
-
-void Dlg_ClearNamePool(struct compiler *d, mem_size_t which) {
-   struct name_pool *pool = &d->nam[which];
-   for(i32 i = 0; i < pool->num_names; ++i) {
-      Dalloc(pool->names[i]);
-   }
-   Dalloc(pool->names);
-   pool->names     = nil;
-   pool->num_names = 0;
+void Dlg_SetVar(struct compiler *d, struct compiler_var *var) {
+   d->vars->insert(var);
 }
 
 /* EOF */

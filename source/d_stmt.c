@@ -63,13 +63,13 @@ static void stmt_cond(struct compiler *d) {
       unwrap(&d->res);
       tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, 0);
       unwrap(&d->res);
-      i32 n = Dlg_CheckNamePool(d, _name_pool_variables, tok->textV);
-      if(n < 0) {
+      struct compiler_var *v = Dlg_GetVar(d, tok->textV);
+      if(!v) {
          tb_err(&d->tb, &d->res, "bad variable name", tok, _f);
          unwrap(&d->res);
       }
-      Dlg_PushB1(d, DCD_LDA_AI);  unwrap(&d->res);
-      Dlg_PushB2(d, VAR_BEG + n); unwrap(&d->res);
+      Dlg_PushB1(d, DCD_LDA_AI); unwrap(&d->res);
+      Dlg_PushB2(d, v->value);   unwrap(&d->res);
       Dlg_PushB1(d, DCD_CMP_VI); unwrap(&d->res);
       Dlg_PushB1(d, 1);          unwrap(&d->res);
       break;

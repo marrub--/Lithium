@@ -107,6 +107,79 @@ static void Dlg_GetTop_Prog(struct compiler *d, i32 beg, i32 end) {
    }
 }
 
+static void Dlg_GetTop_Var(struct compiler *d) {
+   struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_mod, 0);
+   unwrap(&d->res);
+   tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, 0);
+   unwrap(&d->res);
+   char *id = Malloc(tok->textC + 1, _tag_dlgc);
+   faststrcpy(id, tok->textV);
+   tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_eq, 0);
+   unwrap(&d->res);
+   noinit static struct compiler_var vars[64];
+   static i32 varn;
+   struct compiler_var *var = &vars[varn++];
+   enum {_stack_top = 8};
+   static i32 stack[_stack_top], top;
+   top = _stack_top;
+   for(bool not_first = false; tok->type != tok_semico; not_first = true) {
+      tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb),
+                    tok_number, tok_identi,
+                    tok_add, tok_sub, tok_add2, tok_sub2,
+                    tok_div, tok_mod, tok_mul,
+                    not_first ? tok_semico : 0, 0);
+      unwrap(&d->res);
+      switch(tok->type) {
+      underflow:
+         tb_err(&d->tb, &d->res, "stack underflow", tok, _f);
+         unwrap(&d->res);
+      overflow:
+         tb_err(&d->tb, &d->res, "stack overflow", tok, _f);
+         unwrap(&d->res);
+      case tok_number:
+         if(top == 0) goto overflow;
+         stack[--top] = faststrtoi32(tok->textV);
+         break;
+      case tok_identi:
+         if(top == 0) goto overflow;
+         struct compiler_var *var = Dlg_GetVar(d, tok->textV);
+         if(var) {
+            stack[--top] = var->value;
+         } else {
+            tb_err(&d->tb, &d->res, "unknown variable", tok, _f);
+            unwrap(&d->res);
+         }
+         break;
+      #define binary_op(op) \
+         if(top > _stack_top - 2) goto underflow; \
+         stack[top + 1] = stack[top + 1] op stack[top]; \
+         ++top; \
+         break;
+      case tok_add: binary_op(+)
+      case tok_sub: binary_op(-)
+      case tok_div: binary_op(/)
+      case tok_mod: binary_op(%)
+      case tok_mul: binary_op(*)
+      case tok_add2:
+         if(top > _stack_top - 1) goto underflow;
+         ++stack[top];
+         break;
+      case tok_sub2:
+         if(top > _stack_top - 1) goto underflow;
+         --stack[top];
+         break;
+      }
+   }
+   if(top >= _stack_top || top < 0) {
+      tb_err(&d->tb, &d->res, "stack error", tok, _f);
+      unwrap(&d->res);
+   }
+   var->name  = id;
+   var->value = stack[top];
+   Dlg_SetVar(d, var);
+   Dbg_Log(log_gsinfo, _l("set variable "), _p(var->name), _l(" to "), _p(var->value));
+}
+
 mem_size_t Dlg_WriteCode(struct dlg_def const *def, mem_size_t c, mem_size_t i) {
    struct dcd_info const *inf = &dcdinfo[byte(c)];
    __nprintf("%02X ", c);
@@ -168,7 +241,7 @@ mem_size_t Dlg_WriteCode(struct dlg_def const *def, mem_size_t c, mem_size_t i) 
    return i;
 }
 
-static void Dlg_Compile(cstr fname) {
+static void Dlg_Compile(cstr fname, varmap_t *vars) {
    noinit static struct compiler d;
    Dbg_Log(log_gsinfo, _l("begin compiling file "), _p(fname));
    FILE *fp = W_Open(fast_strdup(fname), 't');
@@ -178,6 +251,7 @@ static void Dlg_Compile(cstr fname) {
    }
    fastmemset(&d, 0, sizeof d);
    tb_ctor(&d.tb, fp, fname);
+   d.vars = vars;
    for(;;) {
       struct token *tok = tb_expc(&d.tb, &d.res, tb_get(&d.tb), tok_identi, tok_eof, 0);
       unwrap_goto(&d.res, done);
@@ -195,7 +269,7 @@ static void Dlg_Compile(cstr fname) {
          Dlg_GetTop_Prog(&d, DNUM_TRM_BEG, DNUM_TRM_END);
          break;
       case _dlg_toplevel_var:
-         Dlg_GetNamePool(&d, _name_pool_variables);
+         Dlg_GetTop_Var(&d);
          break;
       case _dlg_toplevel_name:
          struct token *tok = tb_expc(&d.tb, &d.res, tb_get(&d.tb), tok_identi, 0);
@@ -214,19 +288,24 @@ done:
    unwrap_print(&d.res);
    tb_dtor(&d.tb);
    fclose(d.tb.fp);
-   Xalloc(_tag_dlgc);
 }
 
 void Dlg_MInit(void) {
+   /* clear VM data */
    Xalloc(_tag_dlgv);
    fastmemset(dlgdefs, 0, sizeof dlgdefs);
+   /* if scripts are used, start compiling */
    if(!get_bit(ml.mi->use, _mi_key_script)) {
       return;
    }
    static char tmp[64];
-   Dlg_Compile("lmisc/Common.mmmm");
+   varmap_t vars;
+   varmap_t_ctor(&vars, 16, 16);
+   Dlg_Compile("lmisc/Common.mmmm", &vars);
    faststrcpy_str(tmp, ml.mi->keys[_mi_key_script].s);
-   Dlg_Compile(tmp);
+   Dlg_Compile(tmp, &vars);
+   varmap_t_dtor(&vars);
+   Xalloc(_tag_dlgc);
 }
 
 /* EOF */

@@ -1,1 +1,3 @@
 /*-*-Agw-LithDlg-*-*/
+jo %var_beg = $0200;
+jo %var_end = $7FFF;

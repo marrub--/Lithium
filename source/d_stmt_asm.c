@@ -57,9 +57,9 @@ i32 CodeABS(struct compiler *d, cstr reg) {
    case tok_mod:
       tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, 0);
       unwrap(&d->res);
-      n = Dlg_CheckNamePool(d, _name_pool_variables, tok->textV);
-      if(n >= 0) {
-         return VAR_BEG + n;
+      struct compiler_var *v = Dlg_GetVar(d, tok->textV);
+      if(v) {
+         return v->value;
       } else {
          tb_err(&d->tb, &d->res, "unknown variable", tok, _f);
          unwrap(&d->res);
