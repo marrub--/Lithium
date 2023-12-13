@@ -168,21 +168,16 @@ mem_size_t Dlg_WriteCode(struct dlg_def const *def, mem_size_t c, mem_size_t i) 
    return i;
 }
 
-void Dlg_MInit(void) {
+static void Dlg_Compile(cstr fname) {
    noinit static struct compiler d;
-   Xalloc(_tag_dlgv);
-   fastmemset(dlgdefs, 0, sizeof dlgdefs);
-   fastmemset(&d,      0, sizeof d);
-   if(!get_bit(ml.mi->use, _mi_key_script)) {
-      return;
-   }
-   str   f  = ml.mi->keys[_mi_key_script].s;
-   FILE *fp = W_Open(f, 't');
+   Dbg_Log(log_gsinfo, _l("begin compiling file "), _p(fname));
+   FILE *fp = W_Open(fast_strdup(fname), 't');
    if(!fp) {
-      PrintErr(_l("couldn't open file "), _p(f));
+      PrintErr(_l("couldn't open file "), _p(fname));
       return;
    }
-   tb_ctor(&d.tb, fp, "Dialogue file");
+   fastmemset(&d, 0, sizeof d);
+   tb_ctor(&d.tb, fp, fname);
    for(;;) {
       struct token *tok = tb_expc(&d.tb, &d.res, tb_get(&d.tb), tok_identi, tok_eof, 0);
       unwrap_goto(&d.res, done);
@@ -220,6 +215,18 @@ done:
    tb_dtor(&d.tb);
    fclose(d.tb.fp);
    Xalloc(_tag_dlgc);
+}
+
+void Dlg_MInit(void) {
+   Xalloc(_tag_dlgv);
+   fastmemset(dlgdefs, 0, sizeof dlgdefs);
+   if(!get_bit(ml.mi->use, _mi_key_script)) {
+      return;
+   }
+   static char tmp[64];
+   Dlg_Compile("lmisc/Common.mmmm");
+   faststrcpy_str(tmp, ml.mi->keys[_mi_key_script].s);
+   Dlg_Compile(tmp);
 }
 
 /* EOF */

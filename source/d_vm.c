@@ -19,19 +19,17 @@
 #include "w_world.h"
 
 enum {
+   /* register masks */
    R1_S_PC = 0,
    R1_S_SP = 16,
    R1_S_VA = 24,
-
    R1_M_PC = 0x0000FFFF,
    R1_M_SP = 0x00FF0000,
    R1_M_VA = 0xFF000000,
-
    R2_S_AC = 0,
    R2_S_RX = 8,
    R2_S_RY = 16,
    R2_S_SR = 24,
-
    R2_M_AC = 0x000000FF,
    R2_M_RX = 0x0000FF00,
    R2_M_RY = 0x00FF0000,
@@ -39,6 +37,7 @@ enum {
 };
 
 enum {
+   /* status register bits */
    SR_C = R2_S_SR,
    SR_Z,
    SR_I,
@@ -49,28 +48,21 @@ enum {
    SR_N,
 };
 
+/* static program data */
 noinit struct dlg_def dlgdefs[DNUM_MAX];
-
 struct dcd_info const dcdinfo[0xFF] = {
    #define DCD(n, op, ty) [n] = {#op "." #ty, ADRM_##ty},
    #include "d_vm.h"
 };
-
-noinit static
-cps_t memory[Cps_Size(0xFFFF)];
-
-/* VM state */
-noinit static
-struct gui_state gst;
-
-noinit static
-u32 r1, r2;
-
-static
-cstr const action_names[] = {
+static cstr const action_names[] = {
    #define ACT(name) #name,
    #include "d_vm.h"
 };
+
+/* VM state */
+noinit static cps_t memory[Cps_Size(0xFFFF)];
+noinit static struct gui_state gst;
+noinit static u32 r1, r2;
 
 /* utilities */
 #define stk_sta stkoff static
@@ -629,6 +621,7 @@ dynam_aut script void Dlg_Run(void) {
    /* VM state */
    register u32 ua, ub, ur;
    register i32 sa, sb, sr;
+   register mem_size_t adr;
    r1 = 0;
    r2 = 0;
    ResetName();
@@ -658,12 +651,11 @@ NOP_NP:
    JmpVI();
 BRK_NP:
    goto halt;
-JSR_AI: {
-   mem_size_t adr = AdrAI_V();
+JSR_AI:
+   adr = AdrAI_V();
    StaB2_S(GetPC() - 1);
    SetPC(adr);
    JmpVI();
-}
 JMP_AI:
    SetPC(AdrAI_V());
    JmpVI();
