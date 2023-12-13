@@ -59,7 +59,7 @@ i32 CodeABS(struct compiler *d, cstr reg) {
       unwrap(&d->res);
       n = Dlg_CheckNamePool(d, _name_pool_variables, tok->textV);
       if(n >= 0) {
-         return VAR_END - n;
+         return VAR_BEG + n;
       } else {
          tb_err(&d->tb, &d->res, "unknown variable", tok, _f);
          unwrap(&d->res);

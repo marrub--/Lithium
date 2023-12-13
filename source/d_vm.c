@@ -250,8 +250,7 @@ static str GetName(void) {
 #define ResetMusic()   MemB2_S(VAR_MUSICL,  0)
 #define ResetOptions() (MemB1_S(VAR_OPT_SEL, 0), MemB1_S(VAR_OPT_CNT, 0))
 
-static
-void TerminalGUI(i32 tact) {
+static void TerminalGUI(i32 tact) {
    enum {
       /* text */
       twidth  = 640, theigh = 480,
@@ -264,17 +263,13 @@ void TerminalGUI(i32 tact) {
 
       tmidx = tright/2, tmidy = tbottom/2,
    };
-
    G_Begin(&gst, twidth, theigh);
-
    /* Background */
    PrintRect(0, 0,          twidth, tbottom, 0xFF000000);
    PrintRect(0, 0,          twidth, 12,      0xFF44000C);
    PrintRect(0, tbottom-12, twidth, 12,      0xFF44000C);
-
    /* Top-left text */
    PrintText_str(sl_term_sgxline, sf_ltrmfont, CR_RED, 0,1, 0,1);
-
    /* Top-right text */
    str lng;
    str tr = GetRemote();
@@ -289,10 +284,8 @@ void TerminalGUI(i32 tact) {
       break;
    }
    PrintText_str(tr, sf_ltrmfont, CR_RED, tright,2, 0,1);
-
    /* Bottom-left text */
    PrintText_str(sl_term_ip, sf_ltrmfont, CR_RED, 0,1, tbottom,2);
-
    /* Bottom-right text */
    str br;
    switch(tact) {
@@ -301,64 +294,50 @@ void TerminalGUI(i32 tact) {
    default:          br = sl_term_use_to_ack;                           break;
    }
    PrintText_str(br, sf_ltrmfont, CR_RED, tright,2, tbottom,2);
-
    /* Contents */
    char pict[64] = ":Terminal:"; faststrcat(pict, MemSC_G(MemB2_G(VAR_PICTL)));
-
    switch(tact) {
    case TACT_LOGON:
    case TACT_LOGOFF: {
       i32 y = tmidy;
       str text = GetText();
-
       if(text) {
          PrintText_str(text, sf_ltrmfont, CR_WHITE, tmidx,0, tmidy + 35,0);
          y -= 10;
       }
-
       PrintSprite(fast_strdup(pict), tmidx,0, y,0);
       break;
    }
    case TACT_PICT: {
       str text = GetText();
-
       PrintSprite(fast_strdup(pict), tmidx/2,0, tmidy,0);
-
       G_Clip(&gst, tleft, ttop, tmidx, ttheigh);
-
       if(text) {
          PrintText_str(text, sf_ltrmfont, CR_WHITE, tleft,1, ttop,1);
       }
-
       G_ClipRelease(&gst);
       break;
    }
    case TACT_INFO: {
       str text = GetText();
-
       G_Clip(&gst, 0, ttop, ttwidth, ttheigh);
-
       if(text) {
          PrintText_str(text, sf_ltrmfont, CR_WHITE, 2,1, ttop+2,1);
       }
-
       G_ClipRelease(&gst);
       break;
    }
    }
-
    G_End(&gst, gui_curs_outlineinv);
-
    static i32 debounce;
    if(P_ButtonPressed(BT_USE) && pl.old.modal == _gui_dlg && ACS_Timer() > debounce + 15) {
       debounce = ACS_Timer();
       AmbientSound(ss_player_trmswitch, 1.0);
-      MemB1_S(VAR_UACT, UACT_ACKNOWLEDGE);
+      MemB1_S(VAR_FRMAC, UACT_ACKNOWLEDGE);
    }
 }
 
-static
-void DialogueGUI(void) {
+static void DialogueGUI(void) {
    enum {left = 16, right = 320 - 16 - left, top = 75, texttop = top + 24};
    str snam = GetName();
    str srem = GetRemote();
@@ -386,7 +365,7 @@ void DialogueGUI(void) {
          mem_size_t adr = MemB2_G(StructOfs(OPT, NAML, i));
          str        txt = adr ? straffix(MemSC_G(adr)) : snil;
          if(G_Button_HId(&gst, i, tmpstr(txt), 45, y, Pre(btndlgsel))) {
-            MemB1_S(VAR_UACT, UACT_SELOPTION);
+            MemB1_S(VAR_FRMAC, UACT_SELOPTION);
             MemB1_S(VAR_OPT_SEL, i);
          }
       }
@@ -394,13 +373,10 @@ void DialogueGUI(void) {
    G_End(&gst, gui_curs_outlineinv);
 }
 
-static
-void GuiAct(void) {
-   i32 action = MemB1_G(VAR_UACT);
-   MemB1_S(VAR_UACT, UACT_NONE);
-
+static void GuiAct(void) {
+   i32 action = MemB1_G(VAR_FRMAC);
+   MemB1_S(VAR_FRMAC, UACT_NONE);
    ResetText();
-
    switch(action) {
    case UACT_ACKNOWLEDGE:
       break;
@@ -439,56 +415,7 @@ stk_sta void F_drawText(i32 h, str text) {
    }
 }
 
-/* VM actions */
-stk_sta void ActEND_GAME(void) {
-   SetVA(ACT_NONE);
-   ServCallV(sm_ActuallyEndTheGame);
-}
-
-stkcall static void ActLD_ITEM(void) {
-   SetVA(ACT_NONE);
-   ModSR_ZN(SetAC(InvNum(MemSA_G(MemB2_G(VAR_ADRL)))));
-}
-
-stkcall static void ActLD_OPT(void) {
-   SetVA(ACT_NONE);
-   i32 cnt = MemB1_G(VAR_OPT_CNT);
-   MemB1_S(VAR_OPT_CNT, cnt + 1);
-   MemB2_S(StructOfs(OPT, NAML, cnt), MemB2_G(VAR_ADRL));
-   MemB2_S(StructOfs(OPT, PTRL, cnt), MemB2_G(VAR_RADRL));
-}
-
-stkcall static void ActSCRIPT_I(void) {
-   SetVA(ACT_NONE);
-   i32 s0 = MemB1_G(VAR_SCP0), s1 = MemB1_G(VAR_SCP1),
-       s2 = MemB1_G(VAR_SCP2), s3 = MemB1_G(VAR_SCP3),
-       s4 = MemB1_G(VAR_SCP4);
-   ModSR_ZN(SetAC(ACS_ExecuteWithResult(s0, s1, s2, s3, s4)));
-}
-
-stkcall static void ActSCRIPT_S(void) {
-   SetVA(ACT_NONE);
-   str s0 = MemSA_G(MemB2_G(VAR_ADRL));
-   i32 s1 = MemB1_G(VAR_SCP1), s2 = MemB1_G(VAR_SCP2),
-       s3 = MemB1_G(VAR_SCP3), s4 = MemB1_G(VAR_SCP4);
-   ModSR_ZN(SetAC(ACS_NamedExecuteWithResult(s0, s1, s2, s3, s4)));
-}
-
-alloc_aut(0) script_sync static void ActTELEPORT_INTERLEVEL(void) {
-   i32 tag = MemB2_G(VAR_ADRL);
-   ACS_Delay(5);
-   P_TeleportOut(tag);
-   SetVA(ACT_HALT);
-}
-
-alloc_aut(0) script_sync static void ActTELEPORT_INTRALEVEL(void) {
-   i32 tag = MemB2_G(VAR_ADRL);
-   ACS_Delay(5);
-   ACS_Teleport(0, tag, false);
-   SetVA(ACT_HALT);
-}
-
-alloc_aut(0) script_sync static void ActDLG_WAIT(void) {
+alloc_aut(0) script_sync static void WaitDialogue(void) {
    SetVA(ACT_NONE);
    AmbientSound(ss_player_cbi_dlgopen, 1.0);
    FreezeTime();
@@ -496,48 +423,42 @@ alloc_aut(0) script_sync static void ActDLG_WAIT(void) {
    do {
       DialogueGUI();
       ACS_Delay(1);
-   } while(MemB1_G(VAR_UACT) == UACT_NONE);
+   } while(MemB1_G(VAR_FRMAC) == UACT_NONE);
    UnfreezeTime();
    GuiAct();
 }
 
-alloc_aut(0) script_sync static void ActTRM_WAIT(void) {
+alloc_aut(0) script_sync static void WaitTerminal(void) {
    SetVA(ACT_NONE);
-
-   i32 tact = MemB1_G(VAR_TACT);
-   MemB1_S(VAR_TACT, TACT_NONE);
-
+   i32 tact = MemB1_G(VAR_FRMAC);
+   MemB1_S(VAR_FRMAC, TACT_NONE);
    if(tact != TACT_NONE) {
       i32 timer;
-
       if(tact == TACT_LOGON || tact == TACT_LOGOFF) {
          AmbientSound(ss_player_trmopen, 1.0);
          timer = 45;
       } else {
          timer = INT32_MAX;
       }
-
       FreezeTime();
       P_SetVel(0, 0, 0);
-
       do {
          TerminalGUI(tact);
          ACS_Delay(1);
-      } while(MemB1_G(VAR_UACT) == UACT_NONE && --timer >= 0);
-
+      } while(MemB1_G(VAR_FRMAC) == UACT_NONE && --timer >= 0);
       UnfreezeTime();
       GuiAct();
    }
 }
 
-alloc_aut(0) script_sync static void ActFIN_WAIT(void) {
+alloc_aut(0) script_sync static void WaitFinale(void) {
    enum {
       _fill_x = 280,
       _fill_y = 220,
    };
    SetVA(ACT_NONE);
-   i32 fact = MemB1_G(VAR_FACT);
-   MemB1_S(VAR_FACT, FACT_NONE);
+   i32 fact = MemB1_G(VAR_FRMAC);
+   MemB1_S(VAR_FRMAC, FACT_NONE);
    mem_size_t musi = MemB2_G(VAR_MUSICL);
    if(musi) {
       ACS_SetMusicVolume(1.0k);
@@ -628,18 +549,79 @@ alloc_aut(0) script_sync static void ActFIN_WAIT(void) {
    }
 }
 
+/* VM actions */
+stk_sta void ActEND_GAME(void) {
+   SetVA(ACT_NONE);
+   ServCallV(sm_ActuallyEndTheGame);
+}
+
+stkcall static void ActLD_ITEM(void) {
+   SetVA(ACT_NONE);
+   ModSR_ZN(SetAC(InvNum(MemSA_G(MemB2_G(VAR_ADRL)))));
+}
+
+stkcall static void ActLD_OPT(void) {
+   SetVA(ACT_NONE);
+   i32 cnt = MemB1_G(VAR_OPT_CNT);
+   MemB1_S(VAR_OPT_CNT, cnt + 1);
+   MemB2_S(StructOfs(OPT, NAML, cnt), MemB2_G(VAR_ADRL));
+   MemB2_S(StructOfs(OPT, PTRL, cnt), MemB2_G(VAR_RADRL));
+}
+
+stkcall static void ActSCRIPT_I(void) {
+   SetVA(ACT_NONE);
+   i32 s0 = MemB1_G(VAR_SCP0), s1 = MemB1_G(VAR_SCP1),
+       s2 = MemB1_G(VAR_SCP2), s3 = MemB1_G(VAR_SCP3),
+       s4 = MemB1_G(VAR_SCP4);
+   ModSR_ZN(SetAC(ACS_ExecuteWithResult(s0, s1, s2, s3, s4)));
+}
+
+stkcall static void ActSCRIPT_S(void) {
+   SetVA(ACT_NONE);
+   str s0 = MemSA_G(MemB2_G(VAR_ADRL));
+   i32 s1 = MemB1_G(VAR_SCP1), s2 = MemB1_G(VAR_SCP2),
+       s3 = MemB1_G(VAR_SCP3), s4 = MemB1_G(VAR_SCP4);
+   ModSR_ZN(SetAC(ACS_NamedExecuteWithResult(s0, s1, s2, s3, s4)));
+}
+
+alloc_aut(0) script_sync static void ActTELEPORT_INTERLEVEL(void) {
+   i32 tag = MemB2_G(VAR_ADRL);
+   ACS_Delay(5);
+   P_TeleportOut(tag);
+   SetVA(ACT_HALT);
+}
+
+alloc_aut(0) script_sync static void ActTELEPORT_INTRALEVEL(void) {
+   i32 tag = MemB2_G(VAR_ADRL);
+   ACS_Delay(5);
+   ACS_Teleport(0, tag, false);
+   SetVA(ACT_HALT);
+}
+
+alloc_aut(0) script_sync static void ActWAIT(void) {
+   switch(MemB1_G(VAR_FRMMD)) {
+   case FIRM_NONE:     SetVA(ACT_HALT); break;
+   case FIRM_DIALOGUE: WaitDialogue();  break;
+   case FIRM_TERMINAL: WaitTerminal();  break;
+   case FIRM_FINALE:   WaitFinale();    break;
+   }
+}
+
 /* Main dialogue VM. */
-dynam_aut script void Dlg_Run(mem_size_t num) {
-   if(pl.dead || pl.modal != _gui_dlg) {
+dynam_aut script void Dlg_Run(void) {
+   Dbg_Log(log_dlg,
+      _l("--- begin dialogue "), ACS_PrintHex(pl.dlg.num), _l(" ---"));
+   if(pl.dead || pl.modal != _gui_none) {
       return;
    }
    /* get the dialogue by number */
-   register struct dlg_def *def = &dlgdefs[num];
+   register struct dlg_def *def = &dlgdefs[pl.dlg.num];
    if(!def->codeV) {
-      PrintErr(_l("dialogue "), _p(num), _l(" has no code"));
+      PrintErr(_l("dialogue "), _p(pl.dlg.num), _l(" has no code"));
       goto halt;
    }
    /* GUI state */
+   pl.modal = _gui_dlg;
    fastmemset(&gst, 0, sizeof gst);
    gst.cx = 320 / 2;
    gst.cy = 200 / 2;
@@ -657,43 +639,22 @@ dynam_aut script void Dlg_Run(mem_size_t num) {
    fastmemcpy(&memory[PRG_BEG_C], def->codeV, def->codeC);
    fastmemcpy(&memory[STR_BEG_C], def->stabV, def->stabC);
    Dbg_Log(log_gsinfo,
-      _l("--- begin dialogue "),
-      ACS_PrintHex(num),
-      _l(" ---\nDumping segment PRG...\n"),
+      _l("Dumping segment PRG ("), _p(def->codeC * 4), _l(" bytes)\n"),
       Dbg_PrintMemC(&memory[PRG_BEG_C], def->codeC),
-      _l("Dumping segment STR...\n"),
+      _l("Dumping segment STR ("), _p(def->stabC * 4), _l(" bytes)\n"),
       Dbg_PrintMemC(&memory[STR_BEG_C], def->stabC));
    /* copy some constants into memory */
    MemB1_S(VAR_PCLASS, dst_bit(pl.pclass));
-   static
-   __label *const cases[0xFF] = {
+   MemB1_S(VAR_FRMMD,  pl.dlg.firm_mode);
+   /* all right, start the damn VM already! */
+   static __label *const cases[0xFF] = {
       #define DCD(n, op, ty) [n] = &&op##_##ty,
       #include "d_vm.h"
    };
-   /* all right, start the damn VM already! */
    SetSP(0xFF);
    SetPC(PRG_BEG + def->pages[pl.dlg.page]);
-   JmpVI();
-vmaction:
-   while(ua = GetVA(), (ua != ACT_NONE && ua < ACT_MAX)) {
-      Dbg_Log(log_dlg, _l("action "), _p(ua), _c(' '), _p(action_names[ua]));
-      switch(ua) {
-      #define ACT(name) case ACT_##name: Act##name(); break;
-      #include "d_vm.h"
-      case ACT_HALT: goto halt;
-      case ACT_JUMP: JmpVI();
-      }
-   }
-   JmpVI();
-/* No-op */
+   /* fall through to first instruction */
 NOP_NP:
-   JmpVI();
-/* Jumps */
-branch:
-   if(ub) {
-      SetPC(GetPC() + sa);
-      JmpVI();
-   }
    JmpVI();
 BRK_NP:
    goto halt;
@@ -728,20 +689,20 @@ BVS_RI: sa = AdrRI_V(), ub = GetSR_V() != 0; goto branch;
 BVC_RI: sa = AdrRI_V(), ub = GetSR_V() == 0; goto branch;
 BEQ_RI: sa = AdrRI_V(), ub = GetSR_Z() != 0; goto branch;
 BNE_RI: sa = AdrRI_V(), ub = GetSR_Z() == 0; goto branch;
-/* Comparison */
-compare:
-   ur = ua - ub;
-   SetSR_C(ur & 0x100);
-   ModSR_ZN(ur);
+branch:
+   if(ub) {
+      SetPC(GetPC() + sa);
+      JmpVI();
+   }
    JmpVI();
+BIT_AI: ub = AdrAI_G(); goto bit;
+BIT_ZI: ub = AdrZI_G(); goto bit;
 bit:
    ua = GetAC();
    ModSR_Z(ua & ub);
    SetSR_V(ub & 0x40);
    SetSR_N(ub & 0x80);
    JmpVI();
-BIT_AI: ub = AdrAI_G(); goto bit;
-BIT_ZI: ub = AdrZI_G(); goto bit;
 CMP_AI: ua = GetAC(), ub = AdrAI_G(); goto compare;
 CMP_AX: ua = GetAC(), ub = AdrAX_G(); goto compare;
 CMP_AY: ua = GetAC(), ub = AdrAY_G(); goto compare;
@@ -756,12 +717,15 @@ CPX_ZI: ua = GetRX(), ub = AdrZI_G(); goto compare;
 CPY_AI: ua = GetRY(), ub = AdrAI_G(); goto compare;
 CPY_VI: ua = GetRY(), ub = AdrVI_V(); goto compare;
 CPY_ZI: ua = GetRY(), ub = AdrZI_G(); goto compare;
-/* Stack */
+compare:
+   ur = ua - ub;
+   SetSR_C(ur & 0x100);
+   ModSR_ZN(ur);
+   JmpVI();
 PHA_NP: StaB1_S(GetAC());           JmpVI();
 PHP_NP: StaB1_S(GetSR());           JmpVI();
 PLA_NP: ModSR_ZN(SetAC(StaB1_G())); JmpVI();
 PLP_NP: SetSR(StaB1_G());           JmpVI();
-/* Flags */
 CLC_NP: SetSR_C(0); JmpVI();
 CLD_NP: SetSR_D(0); JmpVI();
 CLI_NP: SetSR_I(0); JmpVI();
@@ -769,7 +733,6 @@ CLV_NP: SetSR_V(0); JmpVI();
 SEC_NP: SetSR_C(1); JmpVI();
 SED_NP: SetSR_D(1); JmpVI();
 SEI_NP: SetSR_I(1); JmpVI();
-/* Load */
 LDA_AI: ModSR_ZN(SetAC(AdrAI_G())); JmpVI();
 LDA_AX: ModSR_ZN(SetRY(AdrAX_G())); JmpVI();
 LDA_AY: ModSR_ZN(SetRY(AdrAY_G())); JmpVI();
@@ -788,19 +751,28 @@ LDY_AX: ModSR_ZN(SetRY(AdrAX_G())); JmpVI();
 LDY_VI: ModSR_ZN(SetRY(AdrVI_V())); JmpVI();
 LDY_ZI: ModSR_ZN(SetRY(AdrZI_G())); JmpVI();
 LDY_ZX: ModSR_ZN(SetRY(AdrZX_G())); JmpVI();
-LDV_AI: SetVA(AdrAI_G()); goto vmaction;
-LDV_AX: SetVA(AdrAX_G()); goto vmaction;
-LDV_VI: SetVA(AdrVI_V()); goto vmaction;
-LDV_ZI: SetVA(AdrZI_G()); goto vmaction;
-LDV_ZX: SetVA(AdrZX_G()); goto vmaction;
-/* Transfer */
+LDV_AI: SetVA(AdrAI_G()); goto vm_action;
+LDV_AX: SetVA(AdrAX_G()); goto vm_action;
+LDV_VI: SetVA(AdrVI_V()); goto vm_action;
+LDV_ZI: SetVA(AdrZI_G()); goto vm_action;
+LDV_ZX: SetVA(AdrZX_G()); goto vm_action;
+vm_action:
+   while(ua = GetVA(), (ua != ACT_NONE && ua < ACT_MAX)) {
+      Dbg_Log(log_dlg, _l("action "), _p(ua), _c(' '), _p(action_names[ua]));
+      switch(ua) {
+      #define ACT(name) case ACT_##name: Act##name(); break;
+      #include "d_vm.h"
+      case ACT_HALT: goto halt;
+      case ACT_JUMP: JmpVI();
+      }
+   }
+   JmpVI();
 TAX_NP: ModSR_ZN(SetRX(GetAC())); JmpVI();
 TAY_NP: ModSR_ZN(SetRY(GetAC())); JmpVI();
 TSX_NP: ModSR_ZN(SetRX(GetSP())); JmpVI();
 TXA_NP: ModSR_ZN(SetAC(GetRX())); JmpVI();
 TXS_NP:          SetSP(GetRX());  JmpVI();
 TYA_NP: ModSR_ZN(SetAC(GetRY())); JmpVI();
-/* Store */
 STA_AI: AdrAI_S(GetAC()); JmpVI();
 STA_AX: AdrAX_S(GetAC()); JmpVI();
 STA_AY: AdrAY_S(GetAC()); JmpVI();
@@ -814,66 +786,6 @@ STX_ZY: AdrZY_S(GetRX()); JmpVI();
 STY_AI: AdrAI_S(GetRY()); JmpVI();
 STY_ZI: AdrZI_S(GetRY()); JmpVI();
 STY_ZX: AdrZX_S(GetRY()); JmpVI();
-/* Arithmetic */
-adc:
-   ua = GetAC();
-   ur = ua + ub + GetSR_C();
-   SetSR_C(ur & 0x100);
-   ModSR_V(ua, ub, ur);
-   ModSR_ZN(SetAC(ur));
-   JmpVI();
-sbc:
-   ua = GetAC();
-   ur = ua - ub - GetSR_C();
-   SetSR_C(!(ub & 0x100));
-   ModSR_V(ua, ub, ur);
-   ModSR_ZN(SetAC(ur));
-   JmpVI();
-and: ModSR_ZN(SetAC(GetAC() & ub)); JmpVI();
-eor: ModSR_ZN(SetAC(GetAC() ^ ub)); JmpVI();
-ora: ModSR_ZN(SetAC(GetAC() | ub)); JmpVI();
-asl:
-   ur = AdrAC_G(ua, ub);
-   SetSR_C(ur & 0x80);
-   ur <<= 1;
-   AdrAC_S(ua, ub, ur);
-   ModSR_ZN(ur);
-   JmpVI();
-lsr:
-   ur = AdrAC_G(ua, ub);
-   SetSR_C(ur & 1);
-   ur >>= 1;
-   AdrAC_S(ua, ub, ur);
-   ModSR_ZN(ur);
-   JmpVI();
-rol:
-   ur = AdrAC_G(ua, ub);
-   ub |= GetSR_C();
-   SetSR_C(ur & 0x80);
-   ur <<= 1;
-   ur |= ub & 1;
-   AdrAC_S(ua, ub, ur);
-   ModSR_ZN(ur);
-   JmpVI();
-ror:
-   ur = AdrAC_G(ua, ub);
-   ub |= GetSR_C() << 7;
-   SetSR_C(ur & 1);
-   ur >>= 1;
-   ur |= ub & 0x80;
-   AdrAC_S(ua, ub, ur);
-   ModSR_ZN(ur);
-   JmpVI();
-dec:
-   ub = MemB1_G(ua) - 1;
-   MemB1_S(ua, ub);
-   ModSR_ZN(ub);
-   JmpVI();
-inc:
-   ub = MemB1_G(ua) + 1;
-   MemB1_S(ua, ub);
-   ModSR_ZN(ub);
-   JmpVI();
 ADC_AI: ub = AdrAI_G(); goto adc;
 ADC_AX: ub = AdrAX_G(); goto adc;
 ADC_AY: ub = AdrAY_G(); goto adc;
@@ -942,11 +854,69 @@ INC_AI: ua = AdrAI_V(); goto inc;
 INC_AX: ua = AdrAX_V(); goto inc;
 INC_ZI: ua = AdrZI_V(); goto inc;
 INC_ZX: ua = AdrZX_V(); goto inc;
+adc:
+   ua = GetAC();
+   ur = ua + ub + GetSR_C();
+   SetSR_C(ur & 0x100);
+   ModSR_V(ua, ub, ur);
+   ModSR_ZN(SetAC(ur));
+   JmpVI();
+sbc:
+   ua = GetAC();
+   ur = ua - ub - GetSR_C();
+   SetSR_C(!(ub & 0x100));
+   ModSR_V(ua, ub, ur);
+   ModSR_ZN(SetAC(ur));
+   JmpVI();
+and: ModSR_ZN(SetAC(GetAC() & ub)); JmpVI();
+eor: ModSR_ZN(SetAC(GetAC() ^ ub)); JmpVI();
+ora: ModSR_ZN(SetAC(GetAC() | ub)); JmpVI();
+asl:
+   ur = AdrAC_G(ua, ub);
+   SetSR_C(ur & 0x80);
+   ur <<= 1;
+   AdrAC_S(ua, ub, ur);
+   ModSR_ZN(ur);
+   JmpVI();
+lsr:
+   ur = AdrAC_G(ua, ub);
+   SetSR_C(ur & 1);
+   ur >>= 1;
+   AdrAC_S(ua, ub, ur);
+   ModSR_ZN(ur);
+   JmpVI();
+rol:
+   ur = AdrAC_G(ua, ub);
+   ub |= GetSR_C();
+   SetSR_C(ur & 0x80);
+   ur <<= 1;
+   ur |= ub & 1;
+   AdrAC_S(ua, ub, ur);
+   ModSR_ZN(ur);
+   JmpVI();
+ror:
+   ur = AdrAC_G(ua, ub);
+   ub |= GetSR_C() << 7;
+   SetSR_C(ur & 1);
+   ur >>= 1;
+   ur |= ub & 0x80;
+   AdrAC_S(ua, ub, ur);
+   ModSR_ZN(ur);
+   JmpVI();
+dec:
+   ub = MemB1_G(ua) - 1;
+   MemB1_S(ua, ub);
+   ModSR_ZN(ub);
+   JmpVI();
+inc:
+   ub = MemB1_G(ua) + 1;
+   MemB1_S(ua, ub);
+   ModSR_ZN(ub);
+   JmpVI();
 DEX_NP: ModSR_ZN(SetRX(GetRX() - 1)); JmpVI();
 DEY_NP: ModSR_ZN(SetRY(GetRY() - 1)); JmpVI();
 INX_NP: ModSR_ZN(SetRX(GetRX() + 1)); JmpVI();
 INY_NP: ModSR_ZN(SetRY(GetRY() + 1)); JmpVI();
-/* Trace */
 TRR_NP:
    #ifndef NDEBUG
    ACS_BeginPrint();
@@ -967,7 +937,7 @@ TRV_NP:
    #ifndef NDEBUG
    ACS_BeginPrint();
    for(i32 i = 0; i <= 0xFF; i++) {
-      __nprintf("%02X: %02X", i, MemB1_G(VAR_BEG + i));
+      __nprintf("%02X: %02X", i, MemB1_G(SYS_BEG + i));
    }
    EndLogEx(_pri_critical|_pri_nonotify);
    #endif
@@ -977,24 +947,25 @@ halt:
    pl.modal = _gui_none;
 }
 
-script_str ext("ACS") addr(OBJ "RunProgram")
+alloc_aut(0) script_str ext("ACS") addr(OBJ "RunProgram")
 void Z_RunProgram(i32 num) {
    if(pl.modal == _gui_none) {
-      pl.dlg.num = DNUM_PRG_BEG + num;
-      pl.modal = _gui_dlg;
+      pl.dlg.num       = DNUM_PRG_BEG + num;
+      pl.dlg.page      = 0;
+      pl.dlg.firm_mode = FIRM_NONE;
    }
 }
 
-script_str ext("ACS") addr(OBJ "RunDialogue")
+alloc_aut(0) script_str ext("ACS") addr(OBJ "RunDialogue")
 void Z_RunDialogue(i32 num) {
    if(pl.modal == _gui_none) {
-      pl.dlg.num = DNUM_DLG_BEG + num;
-      pl.dlg.page = 0;
-      pl.modal = _gui_dlg;
+      pl.dlg.num       = DNUM_DLG_BEG + num;
+      pl.dlg.page      = 0;
+      pl.dlg.firm_mode = FIRM_DIALOGUE;
    }
 }
 
-script_str ext("ACS") addr(OBJ "RunTerminal")
+alloc_aut(0) script_str ext("ACS") addr(OBJ "RunTerminal")
 void Z_RunTerminal(i32 num) {
    if(pl.modal == _gui_none) {
       switch(ml.mission) {
@@ -1002,8 +973,8 @@ void Z_RunTerminal(i32 num) {
       case _mstat_finished:   pl.dlg.page = DPAGE_FINISHED;   break;
       case _mstat_failure:    pl.dlg.page = DPAGE_FAILURE;    break;
       }
-      pl.dlg.num = DNUM_TRM_BEG + num;
-      pl.modal = _gui_dlg;
+      pl.dlg.num       = DNUM_TRM_BEG + num;
+      pl.dlg.firm_mode = FIRM_TERMINAL;
    }
 }
 

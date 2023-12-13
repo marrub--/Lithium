@@ -90,9 +90,9 @@ reinit:
       }
       /* Tic passes */
       ACS_Delay(1);
-      if(pl.dlg.num) {
-         Dlg_Run(pl.dlg.num);
-         pl.dlg.num = 0;
+      if(pl.dlg.num != -1) {
+         Dlg_Run();
+         pl.dlg.num = -1;
       }
       /* Update post-tic values */
       pl.old = olddelta;

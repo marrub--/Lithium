@@ -29,7 +29,6 @@ struct compiler {
    i32              pool;
    i32              num;
    i32              page;
-   i32              wait_act;
 };
 
 mem_size_t Dlg_WriteCode(struct dlg_def const *def, mem_size_t c, mem_size_t i);

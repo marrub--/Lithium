@@ -63,10 +63,7 @@ static void Dlg_GetItem_Page(struct compiler *d, mem_size_t num) {
            _l("--- page "), _p(num),
            _c(' '), _c('('), _p(d->def.codeP), _c(')'));
    Dlg_GetStmt(d); unwrap(&d->res);
-   if(d->wait_act != ACT_NONE) {
-      Dlg_PushLdVA(d, d->wait_act); unwrap(&d->res);
-   }
-   Dlg_PushB1(d, DCD_BRK_NP); unwrap(&d->res);
+   Dlg_PushLdVA(d, ACT_WAIT); unwrap(&d->res);
 }
 
 static bool Dlg_GetItem(struct compiler *d) {
@@ -194,15 +191,12 @@ void Dlg_MInit(void) {
       }
       switch(Dlg_TopLevelName(tok->textV)) {
       case _dlg_toplevel_program:
-         d.wait_act = ACT_NONE;
          Dlg_GetTop_Prog(&d, DNUM_PRG_BEG, DNUM_PRG_END);
          break;
       case _dlg_toplevel_dialogue:
-         d.wait_act = ACT_DLG_WAIT;
          Dlg_GetTop_Prog(&d, DNUM_DLG_BEG, DNUM_DLG_END);
          break;
       case _dlg_toplevel_terminal:
-         d.wait_act = ACT_TRM_WAIT;
          Dlg_GetTop_Prog(&d, DNUM_TRM_BEG, DNUM_TRM_END);
          break;
       case _dlg_toplevel_var:

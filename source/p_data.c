@@ -178,6 +178,7 @@ script void P_Init(void) {
    pl.scoreaccumtime = 0;
    pl.scoremul       = 110;
    pl.alpha = 1;
+   pl.dlg.num = -1;
    if(!pl.wasinit) {
       P_BIP_PInit();
       P_Upg_PInit();

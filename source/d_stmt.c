@@ -69,7 +69,7 @@ static void stmt_cond(struct compiler *d) {
          unwrap(&d->res);
       }
       Dlg_PushB1(d, DCD_LDA_AI);  unwrap(&d->res);
-      Dlg_PushB2(d, VAR_END - n); unwrap(&d->res);
+      Dlg_PushB2(d, VAR_BEG + n); unwrap(&d->res);
       Dlg_PushB1(d, DCD_CMP_VI); unwrap(&d->res);
       Dlg_PushB1(d, 1);          unwrap(&d->res);
       break;
@@ -173,11 +173,11 @@ static void stmt_terminal(struct compiler *d, i32 act) {
       Dlg_PushLdAdr(d, VAR_PICTL, s); unwrap(&d->res);
    }
    Dlg_GetStmt(d); unwrap(&d->res);
-   Dlg_PushB1(d, DCD_LDA_VI);     unwrap(&d->res);
-   Dlg_PushB1(d, byte(act));      unwrap(&d->res);
-   Dlg_PushB1(d, DCD_STA_AI);     unwrap(&d->res);
-   Dlg_PushB2(d, VAR_TACT);       unwrap(&d->res);
-   Dlg_PushLdVA(d, ACT_TRM_WAIT); unwrap(&d->res);
+   Dlg_PushB1(d, DCD_LDA_VI); unwrap(&d->res);
+   Dlg_PushB1(d, byte(act));  unwrap(&d->res);
+   Dlg_PushB1(d, DCD_STA_AI); unwrap(&d->res);
+   Dlg_PushB2(d, VAR_FRMAC);  unwrap(&d->res);
+   Dlg_PushLdVA(d, ACT_WAIT); unwrap(&d->res);
 }
 
 static void stmt_finale(struct compiler *d, i32 act) {
@@ -192,11 +192,11 @@ static void stmt_finale(struct compiler *d, i32 act) {
    tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_number, 0);
    unwrap(&d->res);
    Dlg_PushLdAdr(d, VAR_ADRL, word(faststrtoi32(tok->textV))); unwrap(&d->res);
-   Dlg_PushB1(d, DCD_LDA_VI);     unwrap(&d->res);
-   Dlg_PushB1(d, byte(act));      unwrap(&d->res);
-   Dlg_PushB1(d, DCD_STA_AI);     unwrap(&d->res);
-   Dlg_PushB2(d, VAR_FACT);       unwrap(&d->res);
-   Dlg_PushLdVA(d, ACT_FIN_WAIT); unwrap(&d->res);
+   Dlg_PushB1(d, DCD_LDA_VI); unwrap(&d->res);
+   Dlg_PushB1(d, byte(act));  unwrap(&d->res);
+   Dlg_PushB1(d, DCD_STA_AI); unwrap(&d->res);
+   Dlg_PushB2(d, VAR_FRMAC);  unwrap(&d->res);
+   Dlg_PushLdVA(d, ACT_WAIT); unwrap(&d->res);
 }
 
 static void stmt_num(struct compiler *d, i32 act) {
@@ -279,12 +279,7 @@ script void Dlg_GetStmt(struct compiler *d) {
          stmt_num(d, ACT_TELEPORT_INTRALEVEL);
          break;
       case _dlg_stmt_wait:
-         if(d->wait_act != ACT_NONE) {
-            Dlg_PushLdVA(d, d->wait_act); unwrap(&d->res);
-         } else {
-            tb_err(&d->tb, &d->res, "no wait action specified", tok, _f);
-            unwrap(&d->res);
-         }
+         Dlg_PushLdVA(d, ACT_WAIT); unwrap(&d->res);
          break;
       /* strings */
       case _dlg_stmt_icon:   stmt_str(d, VAR_ICONL);       break;
