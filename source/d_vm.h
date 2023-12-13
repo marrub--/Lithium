@@ -253,17 +253,13 @@ enum {
 
 enum {
    /* memory regions */
-   STA_BEG = 0x0100,
-   STA_END = 0x01FF,
-   SYS_BEG = 0x0200,
-   SYS_END = 0x02FF,
-   VAR_BEG = 0x0300,
-   VAR_END = 0x9FFF,
-   PRG_BEG = 0xA000,
-   PRG_END = 0xBFFF,
-   STR_BEG = 0xC000,
-   STR_END = 0xFEFF,
-   IRQ_BEG = 0xFF00,
+   ZPG_BEG = 0x0000, ZPG_END = 0x00FF, /* zero-page */
+   STA_BEG = 0x0100, STA_END = 0x01FF, /* stack */
+   VAR_BEG = 0x0200, VAR_END = 0x7FFF, /* read-write program memory */
+   PRG_BEG = 0x8000, PRG_END = 0xBEFF, /* program segment */
+   SYS_BEG = 0xBF00, SYS_END = 0xBFFF, /* system variables */
+   STR_BEG = 0xC000, STR_END = 0xFEFF, /* string segment */
+   IRQ_BEG = 0xFF00, IRQ_END = 0xFFFF, /* interrupt request jump table */
    STA_BEG_C = STA_BEG / 4,
    PRG_BEG_C = PRG_BEG / 4,
    STR_BEG_C = STR_BEG / 4,
