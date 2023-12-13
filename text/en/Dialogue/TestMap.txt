@@ -8,10 +8,10 @@
 
 == \#dlg_test_terminal_logon | $$\#LOGON_TEST
 
-%% \#dlg_test_terminal_awen_0
+%% \#dlg_test_terminal_inf
 test text, information block
 
-%% \#dlg_test_terminal_awen_1
+%% \#dlg_test_terminal_pic
 test with picture
 and multiple lines of text
 

@@ -58,7 +58,7 @@ static void stmt_cond(struct compiler *d) {
          unwrap(&d->res);
       }
       break;
-   case _dlg_cond_var:
+   case _dlg_cond_deref:
       tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_mod, 0);
       unwrap(&d->res);
       tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, 0);
@@ -87,7 +87,7 @@ static void stmt_cond(struct compiler *d) {
    bool       use_else = false;
    mem_size_t else_ptr;
    tok = tb_get(&d->tb);
-   if(TokIsKw(tok, "else") || TokIsKw(tok, "ante")) {
+   if(TokIsKw(tok, "else") || TokIsKw(tok, "anu")) {
       Dlg_PushB1(d, DCD_JMP_AI); unwrap(&d->res);
       Dlg_PushB2(d, 0); unwrap(&d->res);
       else_ptr = d->def.codeP;

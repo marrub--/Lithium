@@ -244,9 +244,9 @@
    "\cgehhg.431.4122/-/<PFGR ZNE6 \cr&49c2\cg>";
 "LITH_dlg_test_terminal_logon" =
    "$$LITH_LOGON_TEST";
-"LITH_dlg_test_terminal_awen_0" =
+"LITH_dlg_test_terminal_inf" =
    "test text, information block";
-"LITH_dlg_test_terminal_awen_1" =
+"LITH_dlg_test_terminal_pic" =
    "test with picture\n"
    "and multiple lines of text";
 "LITH_dlg_test_jacques_begin_0" =

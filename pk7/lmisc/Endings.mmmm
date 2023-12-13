@@ -1,25 +1,25 @@
 /*-*-Agw-LithDlg-*-*/
 nimi ending;
 
-lipu_ilo 0 {
+ilo_ko 0 {
    lipu 101 {
-      seme poki pM {
+      seme poki_jan pM {
          music "lmusic/braun.opus";
-      } ante seme poki pC {
+      } anu seme poki_jan pC {
          music "lmusic/velar.opus";
-      } ante seme poki pI {
-      } ante seme poki pW {
-      } ante seme poki pA {
+      } anu seme poki_jan pI {
+      } anu seme poki_jan pW {
+      } anu seme poki_jan pA {
          music "lmusic/naturalrev.opus";
-      } ante seme poki pD {
+      } anu seme poki_jan pD {
          music "lmusic/natural.opus";
-      } ante seme poki pT {
+      } anu seme poki_jan pT {
       }
       rts;
    }
    lipu 0 {
       jsr lipu 101;
-      seme poki pM {
+      seme poki_jan pM {
          image   ":End:Lane";
          fade_in 50;
          crawl   Normal_1_Lane 400;
@@ -29,7 +29,7 @@ lipu_ilo 0 {
          crawl   Normal_5_Lane 400;
          crawl   Normal_6_Lane 400;
          crawl   Normal_7_Lane 400;
-      } ante seme poki pC {
+      } anu seme poki_jan pC {
          image   ":End:Jem";
          fade_in 50;
          crawl   Normal_1_Jem 400;
@@ -38,7 +38,7 @@ lipu_ilo 0 {
          crawl   Normal_4_Jem 400;
          crawl   Normal_5_Jem 400;
          crawl   Normal_6_Jem 400;
-      } ante seme poki pD {
+      } anu seme poki_jan pD {
          image    ":End:Ari";
          fade_in  50;
          crawl    Normal_1_Ari 400;

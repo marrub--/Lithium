@@ -5,14 +5,14 @@ toki 1 {
       name JACQUES;
       icon AOF;
       remote JACQUES;
-      seme ijo "Lith_DivisionSigil" lipu 4;
+      seme ijo_jo "Lith_DivisionSigil" lipu 4;
       text begin_0;
       option begin_1 lipu 1;
       option begin_2 brk;
    }
    lipu 1 {
-      seme poki pC text hey_0c;
-      ante         text hey_0;
+      seme poki_jan pC text hey_0c;
+      anu              text hey_0;
       option hey_1 {
          script 2;
          lipu 1;
@@ -21,11 +21,11 @@ toki 1 {
       option hey_3 brk;
    }
    lipu 2 {
-      seme poki pC {
+      seme poki_jan pC {
          text start_talking_0c;
          option start_talking_1c lipu 100;
          option start_talking_2c lipu 101;
-      } ante {
+      } anu {
          text start_talking_0;
          option start_talking_1 lipu 3;
       }
@@ -70,12 +70,12 @@ toki 1 {
 }
 
 nimi test_terminal;
-ilo 1 {
-   awen {
+ilo_sona 1 {
+   pini_ala {
       remote TEST;
       logon "01602" text "logon";
-      info text awen_0;
-      pict "AOF" text awen_1;
+      info text inf;
+      pict "AOF" text pic;
       logoff "01602";
       script 2;
    }

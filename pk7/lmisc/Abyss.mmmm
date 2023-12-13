@@ -30,11 +30,11 @@ toki 1 {
       remote lane;
       icon   doll;
       text   m_begin_0;
-      seme !kon %lane_met {
+      seme !insa %lane_met {
          option m_begin_o0 {
-            /**/ seme poki pM lipu 100;
-            ante seme poki pC lipu 200;
-            ante              lipu 1;
+            seme     poki_jan pM lipu 100;
+            anu seme poki_jan pC lipu 200;
+            anu                  lipu 1;
          }
       }
       option m_begin_o1 brk;
@@ -47,30 +47,30 @@ toki 1 {
       option m_meet_o2 lipu 102;
    }
    lipu 101 {
-      seme !kon %lane_rpg   option m_nothing_o0 {inc %lane_rpg;   lipu 101;}
-      seme !kon %lane_where option m_nothing_o1 {inc %lane_where; lipu 101;}
+      seme !insa %lane_rpg   option m_nothing_o0 {inc %lane_rpg;   lipu 101;}
+      seme !insa %lane_where option m_nothing_o1 {inc %lane_where; lipu 101;}
       option m_nothing_o2 {
          inc %lane_met;
          lipu 102;
       }
       option m_nothing_o3 brk;
-      seme kon %lane_rpg {
+      seme insa %lane_rpg {
          text m_nothing_1;
          dec %lane_rpg;
-      } ante seme kon %lane_where {
+      } anu seme insa %lane_where {
          text m_nothing_2;
          dec %lane_where;
-      } ante {
+      } anu {
          text m_nothing_0;
       }
    }
    lipu 102 {
-      seme kon %lane_scars {
+      seme insa %lane_scars {
          text m_seen_1;
          script "Lith_SetLane";
          option m_seen_o2 brk;
          option m_seen_o3 brk;
-      } ante {
+      } anu {
          text m_seen_0;
          option m_seen_o0 brk;
          option m_seen_o1 {
@@ -148,18 +148,18 @@ toki 7 kiri {
       remote KIRI;
       icon   Doll;
       option _o0 brk;
-      seme poki pT {
-         seme !kon %kiri_met {
+      seme poki_jan pT {
+         seme !insa %kiri_met {
             text _2;
             option _o1 lipu t_breaking;
-         } ante {
-            seme kon %kiri_self {
+         } anu {
+            seme insa %kiri_self {
                text _1;
-            } ante {
+            } anu {
                text _0;
             }
          }
-      } ante {
+      } anu {
          text _0;
       }
    }

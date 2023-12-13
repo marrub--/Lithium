@@ -40,9 +40,9 @@ Dlg_TopLevelName:
       - terminal
       - var
    aliases:
-      ilo:      terminal
-      kon:      var
-      lipu_ilo: program
+      ilo_sona: terminal
+      jo:       var
+      ilo_ko:   program
       nimi:     name
       toki:     dialogue
 Dlg_CondName:
@@ -50,11 +50,11 @@ Dlg_CondName:
    words:
       - class
       - item
-      - var
+      - deref
    aliases:
-      ijo:  item
-      kon:  var
-      poki: class
+      ijo_jo:   item
+      insa:     deref
+      poki_jan: class
 Dlg_StmtName:
    prefix: _dlg_stmt_
    words:
@@ -91,10 +91,10 @@ Dlg_ItemName:
       - page
       - unfinished
    aliases:
-      awen:   unfinished
-      lipu:   page
-      pakala: failure
-      pini:   finished
+      pini_ala: unfinished
+      lipu:     page
+      pakala:   failure
+      pini:     finished
 P_ClassToInt:
    words: [
       #define pclass_x(shr, eq) shr,
