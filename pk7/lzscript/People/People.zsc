@@ -101,7 +101,7 @@ class Lith_DollPerson : Lith_BasePerson abstract {
                target = player;
             }
             observed = true;
-            player.a_soundVolume(lch_doll, (300 - distance2D(player) + 150) / 450.0);
+            player.a_soundVolume(lch_doll, (300 - distance2D(player) + 150) / 450.0 * (snd_sfxvolume && system.musicEnabled() ? snd_musicvolume / snd_sfxvolume : 0));
          }
       }
       if(!observed && target) {
