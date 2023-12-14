@@ -12,6 +12,67 @@
 
 #include "d_compile.h"
 
+mem_size_t Dlg_WriteCode(struct dlg_def const *def, mem_size_t c, mem_size_t i) {
+   struct dcd_info const *inf = &dcdinfo[byte(c)];
+   __nprintf("%02X ", c);
+   if(c > 0xFF || !inf->name[0]) {
+      PrintStrL("      ???.??        ");
+      return i;
+   }
+   mem_size_t c2, c3;
+   switch(inf->adrm) {
+   case ADRM_AI:
+      c2 = Cps_GetC(def->codeV, i++);
+      c3 = Cps_GetC(def->codeV, i++);
+      __nprintf("%02X %02X %s $%02X%02X  ", c2, c3, inf->name, c3, c2);
+      break;
+   case ADRM_AX:
+      c2 = Cps_GetC(def->codeV, i++);
+      c3 = Cps_GetC(def->codeV, i++);
+      __nprintf("%02X %02X %s $%02X%02X,X", c2, c3, inf->name, c3, c2);
+      break;
+   case ADRM_AY:
+      c2 = Cps_GetC(def->codeV, i++);
+      c3 = Cps_GetC(def->codeV, i++);
+      __nprintf("%02X %02X %s $%02X%02X,Y", c2, c3, inf->name, c3, c2);
+      break;
+   case ADRM_II:
+      c2 = Cps_GetC(def->codeV, i++);
+      c3 = Cps_GetC(def->codeV, i++);
+      __nprintf("%02X %02X %s ($%02X%02X)", c2, c3, inf->name, c3, c2);
+      break;
+   case ADRM_IX:
+      c2 = Cps_GetC(def->codeV, i++);
+      __nprintf("%02X    %s ($%02X,X) ", c2, inf->name, c2);
+      break;
+   case ADRM_IY:
+      c2 = Cps_GetC(def->codeV, i++);
+      __nprintf("%02X    %s ($%02X),Y", c2, inf->name, c2);
+      break;
+   case ADRM_NP:
+      __nprintf("      %s        ", inf->name);
+      break;
+   case ADRM_ZI:
+   case ADRM_RI:
+      c2 = Cps_GetC(def->codeV, i++);
+      __nprintf("%02X    %s $%02X    ", c2, inf->name, c2);
+      break;
+   case ADRM_VI:
+      c2 = Cps_GetC(def->codeV, i++);
+      __nprintf("%02X    %s #$%02X   ", c2, inf->name, c2);
+      break;
+   case ADRM_ZX:
+      c2 = Cps_GetC(def->codeV, i++);
+      __nprintf("%02X    %s $%02X,X  ", c2, inf->name, c2);
+      break;
+   case ADRM_ZY:
+      c2 = Cps_GetC(def->codeV, i++);
+      __nprintf("%02X    %s $%02X,Y  ", c2, inf->name, c2);
+      break;
+   }
+   return i;
+}
+
 void Dlg_PushB1(struct compiler *d, i32 b) {
    mem_size_t pc = d->def.codeP++;
    if(pc + 1 > PRG_END - PRG_BEG) {
@@ -103,6 +164,70 @@ struct compiler_var *Dlg_GetVar(struct compiler *d, cstr check) {
 
 void Dlg_SetVar(struct compiler *d, struct compiler_var *var) {
    d->vars->insert(var);
+}
+
+i32 Dlg_Evaluate(struct compiler *d, i32 end_token, i32 continue_token, bool *do_continue) {
+   enum {_stack_top = 8};
+   static i32 stack[_stack_top], top;
+   top = _stack_top;
+   struct token *tok = nil;
+   for(bool not_first = false;
+       !tok || (tok->type != end_token && tok->type != continue_token);
+       not_first = true)
+   {
+      tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb),
+                    tok_number, tok_identi,
+                    tok_add, tok_sub, tok_add2, tok_sub2,
+                    tok_div, tok_mod, tok_mul,
+                    not_first ? end_token      : 0,
+                    not_first ? continue_token : 0,
+                    0);
+      unwrap(&d->res);
+      switch(tok->type) {
+      underflow:
+         tb_err(&d->tb, &d->res, "stack underflow", tok, _f);
+         unwrap(&d->res);
+      overflow:
+         tb_err(&d->tb, &d->res, "stack overflow", tok, _f);
+         unwrap(&d->res);
+      case tok_number:
+         if(top == 0) goto overflow;
+         stack[--top] = faststrtoi32(tok->textV);
+         break;
+      case tok_identi:
+         if(top == 0) goto overflow;
+         struct compiler_var *var = Dlg_GetVar(d, tok->textV);
+         if(var) {
+            stack[--top] = var->value;
+         } else {
+            tb_err(&d->tb, &d->res, "unknown variable", tok, _f);
+            unwrap(&d->res);
+         }
+         break;
+      #define binary_op(op) \
+         if(top > _stack_top - 2) goto underflow; \
+         stack[top + 1] = stack[top + 1] op stack[top]; \
+         ++top
+      case tok_add: binary_op(+); break;
+      case tok_sub: binary_op(-); break;
+      case tok_div: binary_op(/); break;
+      case tok_mod: binary_op(%); break;
+      case tok_mul: binary_op(*); break;
+      #define unary_op(op) \
+         if(top > _stack_top - 1) goto underflow; \
+         op stack[top]
+      case tok_add2: unary_op(++); break;
+      case tok_sub2: unary_op(--); break;
+      }
+   }
+   if(top >= _stack_top || top < 0) {
+      tb_err(&d->tb, &d->res, "stack error", tok, _f);
+      unwrap(&d->res);
+   }
+   if(tok && continue_token && tok->type != continue_token) {
+      *do_continue = false;
+   }
+   return stack[top];
 }
 
 /* EOF */

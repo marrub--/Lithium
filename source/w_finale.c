@@ -34,7 +34,7 @@ dynam_aut script void F_Run(void) {
       which = _finale_normal;
    }
    pl.setActivator();
-   pl.dlg.num       = DNUM_PRG_BEG;
+   pl.dlg.num       = 0;
    pl.dlg.page      = which;
    pl.dlg.firm_mode = FIRM_FINALE;
    Dlg_Run();

@@ -1,8 +1,13 @@
 /*-*-Agw-LithDlg-*-*/
 nimi ending;
 
-ilo_ko 0 {
-   lipu 101 {
+ilo_kon(0) {
+   jo music_subr = 101;
+   jo common_end = 100;
+   jo ending_normal   = page_start;
+   jo ending_timeout  = ending_normal ++;
+   jo ending_division = ending_timeout++;
+   lipu(music_subr) {
       seme poki_jan pM {
          music "lmusic/braun.opus";
       } anu seme poki_jan pC {
@@ -17,8 +22,8 @@ ilo_ko 0 {
       }
       rts;
    }
-   lipu 0 {
-      jsr lipu 101;
+   lipu(page_start) {
+      jsr page_address(music_subr);
       seme poki_jan pM {
          image   ":End:Lane";
          fade_in 50;
@@ -45,22 +50,22 @@ ilo_ko 0 {
          crawl    Normal_2_Ari 400;
          crawl    Normal_3_Ari 400;
       }
-      lipu 100;
+      jump_page common_end;
    }
-   lipu 1 {
+   lipu(1) {
       music   "lmusic/asdfn2.ogg";
       image   "HELP";
       fade_in 10;
       crawl   TimeOut_1 900;
-      lipu    100;
+      jump_page common_end;
    }
-   lipu 2 {
+   lipu(2) {
       music   "lmusic/siarani.opus";
       fade_in 10;
       crawl   DivisionSigil 900;
-      lipu    100;
+      jump_page common_end;
    }
-   lipu 100 {
+   lipu(common_end) {
       fade_out 100;
       image    "";
       mus_fade 100;

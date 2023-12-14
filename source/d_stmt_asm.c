@@ -33,25 +33,21 @@ i32 CodeABS(struct compiler *d, cstr reg) {
       break;
    case tok_identi:
       n = -1;
-      switch(Dlg_ItemName(tok->textV)) {
-      case _dlg_item_page:
-         tok = tb_get(&d->tb);
-         if(tok->type == tok_number) {
-            n = faststrtoi32(tok->textV);
-            if(n >= DPAGE_MAX || n < 0) {
-               tb_err(&d->tb, &d->res, "bad page number", tok, _f);
-               unwrap(&d->res);
-            }
-         } else {
-            tb_unget(&d->tb);
+      if(!faststrcmp(tok->textV, "page_address")) {
+         tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_pareno, 0);
+         n = Dlg_Evaluate(d, tok_parenc);
+         if(n >= DPAGE_MAX || n < 0 || !d->def.pages[n]) {
+            cstr fmt = d->def.pages[n] ?
+               "bad page number %i" : "page %i undefined";
+            tb_err(&d->tb, &d->res, fmt, tok, _f, n);
+            unwrap(&d->res);
          }
-         break;
-      case _dlg_item_failure:    n = DPAGE_FAILURE;    break;
-      case _dlg_item_finished:   n = DPAGE_FINISHED;   break;
-      case _dlg_item_unfinished: n = DPAGE_UNFINISHED; break;
+      } else {
+         tb_err(&d->tb, &d->res, "expected 'page(...)'", tok, _f);
+         unwrap(&d->res);
       }
       if(n >= 0) {
-         return PRG_BEG + d->def.pages[n];
+         return d->def.pages[n];
       }
       break;
    case tok_mod:
@@ -233,7 +229,7 @@ bool CodeZY(struct compiler *d, i32 code) {
    return false;
 }
 
-void Dlg_GetStmt_Asm(struct compiler *d) {
+void Dlg_Stmt_Asm(struct compiler *d) {
    struct token *tok;
    #define DCD(n, op, ty) \
       tok = tb_reget(&d->tb); \

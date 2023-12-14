@@ -49,7 +49,7 @@ enum {
 };
 
 /* static program data */
-noinit struct dlg_def dlgdefs[DNUM_MAX];
+noinit struct dlg_def dlgdefs[PNUM_MAX];
 struct dcd_info const dcdinfo[0xFF] = {
    #define DCD(n, op, ty) [n] = {#op "." #ty, ADRM_##ty},
    #include "d_vm.h"
@@ -603,7 +603,8 @@ alloc_aut(0) script_sync static void ActWAIT(void) {
 dynam_aut script void Dlg_Run(void) {
    Dbg_Log(log_dlg,
       _l("--- begin dialogue "), ACS_PrintHex(pl.dlg.num), _l(" ---"));
-   if(pl.dead || pl.modal != _gui_none) {
+   if(pl.dead) {
+      Dbg_Log(log_dlg, _l("exited early, player is dead"));
       return;
    }
    /* get the dialogue by number */
@@ -645,7 +646,7 @@ dynam_aut script void Dlg_Run(void) {
       #include "d_vm.h"
    };
    SetSP(0xFF);
-   SetPC(PRG_BEG + def->pages[pl.dlg.page]);
+   SetPC(def->pages[pl.dlg.page]);
    /* fall through to first instruction */
 NOP_NP:
    JmpVI();
@@ -664,7 +665,7 @@ JMP_II:
    JmpVI();
 JPG_VI:
    ResetOptions();
-   SetPC(PRG_BEG + def->pages[AdrVI_V()]);
+   SetPC(def->pages[AdrVI_V()]);
    JmpVI();
 RTI_NP:
    SetSR(StaB1_G());
@@ -942,7 +943,7 @@ halt:
 alloc_aut(0) script_str ext("ACS") addr(OBJ "RunProgram")
 void Z_RunProgram(i32 num) {
    if(pl.modal == _gui_none) {
-      pl.dlg.num       = DNUM_PRG_BEG + num;
+      pl.dlg.num       = num;
       pl.dlg.page      = 0;
       pl.dlg.firm_mode = FIRM_NONE;
    }
@@ -951,7 +952,7 @@ void Z_RunProgram(i32 num) {
 alloc_aut(0) script_str ext("ACS") addr(OBJ "RunDialogue")
 void Z_RunDialogue(i32 num) {
    if(pl.modal == _gui_none) {
-      pl.dlg.num       = DNUM_DLG_BEG + num;
+      pl.dlg.num       = PNUM_DIALOGUE + num;
       pl.dlg.page      = 0;
       pl.dlg.firm_mode = FIRM_DIALOGUE;
    }
@@ -965,8 +966,11 @@ void Z_RunTerminal(i32 num) {
       case _mstat_finished:   pl.dlg.page = DPAGE_FINISHED;   break;
       case _mstat_failure:    pl.dlg.page = DPAGE_FAILURE;    break;
       }
-      pl.dlg.num       = DNUM_TRM_BEG + num;
+      pl.dlg.num       = PNUM_TERMINAL + num;
       pl.dlg.firm_mode = FIRM_TERMINAL;
+      if(!dlgdefs[pl.dlg.num].pages[pl.dlg.page]) {
+         pl.dlg.page = DPAGE_UNFINISHED;
+      }
    }
 }
 

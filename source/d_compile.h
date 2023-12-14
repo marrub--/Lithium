@@ -31,7 +31,7 @@ struct compiler {
 };
 
 mem_size_t Dlg_WriteCode(struct dlg_def const *def, mem_size_t c, mem_size_t i);
-void Dlg_GetStmt_Asm(struct compiler *d);
+void Dlg_Stmt_Asm(struct compiler *d);
 script void Dlg_GetStmt(struct compiler *d);
 void Dlg_PushB1(struct compiler *d, i32 b);
 void Dlg_PushB2(struct compiler *d, i32 word);
@@ -42,5 +42,6 @@ void Dlg_SetB2(struct compiler *d, mem_size_t ptr, i32 word);
 mem_size_t Dlg_PushStr(struct compiler *d, cstr s, mem_size_t l);
 struct compiler_var *Dlg_GetVar(struct compiler *d, cstr check);
 void Dlg_SetVar(struct compiler *d, struct compiler_var *var);
+optargs(2) i32 Dlg_Evaluate(struct compiler *d, i32 end_token, i32 continue_token, bool *do_continue);
 
 #endif

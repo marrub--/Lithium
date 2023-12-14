@@ -1,69 +1,95 @@
 /*-*-Agw-LithDlg-*-*/
 nimi abyss;
 
+jo prog_tutorial = prog_dialogue;
+jo prog_m = prog_tutorial++;
+jo prog_c = prog_m++;
+jo prog_i = prog_c++;
+jo prog_w = prog_i++;
+jo prog_a = prog_w++;
+jo prog_d = prog_a++;
+jo prog_t = prog_d++;
+
 /* Tutorial */
-toki 0 {
-   lipu 0 {
+ilo_kon(prog_tutorial) {
+   lipu(page_start) {
       name   unknown;
       remote data;
       icon   data;
       text   begin;
-      option begin_nxt lipu 1;
+      option begin_nxt jump_page 1;
       option begin_esc brk;
    }
-   lipu 1 {
+   lipu(1) {
       text question;
       option question_esc brk;
    }
 }
 
 /* Marine */
-jo %lane_met = var_beg;
-jo %lane_rpg = lane_met++;
-jo %lane_where = lane_rpg++;
-jo %lane_scars = lane_where++;
-toki 1 {
-   lipu 0 {
+ilo_kon(prog_m) {
+   jo lane_met   = var_beg;
+   jo lane_rpg   = lane_met++;
+   jo lane_where = lane_rpg++;
+   jo lane_scars = lane_where++;
+   jo m_meet    = 100;
+   jo m_nothing = 101;
+   jo m_seen    = 102;
+   jo mc_meet       = 200;
+   jo mc_reminded   = 201;
+   jo mc_real       = 202;
+   jo mc_others     = 203;
+   jo mc_where      = 204;
+   jo mc_fine       = 205;
+   jo mc_1649       = 206;
+   jo mc_time       = 207;
+   jo mc_experience = 208;
+   jo mc_coverup    = 209;
+   jo mo_meet = 1;
+   jo mo_past = 2;
+   lipu(page_start) {
       name   doll;
       remote lane;
       icon   doll;
       text   m_begin_0;
-      seme !insa %lane_met {
+      seme !insa lane_met {
          option m_begin_o0 {
-            seme     poki_jan pM lipu 100;
-            anu seme poki_jan pC lipu 200;
-            anu                  lipu 1;
+            seme     poki_jan pM jump_page m_meet;
+            anu seme poki_jan pC jump_page mc_meet;
+            anu                  jump_page mo_meet;
          }
       }
       option m_begin_o1 brk;
    }
    /* Lane */
-   lipu 100 {
+   lipu(m_meet) {
       text m_meet_0;
-      option m_meet_o0 lipu 101;
+      option m_meet_o0 jump_page m_nothing;
       option m_meet_o1 brk;
-      option m_meet_o2 lipu 102;
+      option m_meet_o2 jump_page m_seen;
    }
-   lipu 101 {
-      seme !insa %lane_rpg   option m_nothing_o0 {inc %lane_rpg;   lipu 101;}
-      seme !insa %lane_where option m_nothing_o1 {inc %lane_where; lipu 101;}
+   lipu(m_nothing) {
+      seme !insa lane_rpg
+         option m_nothing_o0 {inc %lane_rpg;   jump_page m_nothing;}
+      seme !insa lane_where
+         option m_nothing_o1 {inc %lane_where; jump_page m_nothing;}
       option m_nothing_o2 {
          inc %lane_met;
-         lipu 102;
+         jump_page m_seen;
       }
       option m_nothing_o3 brk;
-      seme insa %lane_rpg {
+      seme insa lane_rpg {
          text m_nothing_1;
          dec %lane_rpg;
-      } anu seme insa %lane_where {
+      } anu seme insa lane_where {
          text m_nothing_2;
          dec %lane_where;
       } anu {
          text m_nothing_0;
       }
    }
-   lipu 102 {
-      seme insa %lane_scars {
+   lipu(m_seen) {
+      seme insa lane_scars {
          text m_seen_1;
          script "Lith_SetLane";
          option m_seen_o2 brk;
@@ -73,54 +99,54 @@ toki 1 {
          option m_seen_o0 brk;
          option m_seen_o1 {
             inc %lane_scars;
-            lipu 102;
+            jump_page m_seen;
          }
       }
    }
    /* Jem */
-   lipu 200 {
+   lipu(mc_meet) {
       text mc_meet_0;
-      option mc_meet_o0 lipu 201;
-      option mc_meet_o1 lipu 202;
+      option mc_meet_o0 jump_page mc_reminded;
+      option mc_meet_o1 jump_page mc_real;
    }
-   lipu 201 {
+   lipu(mc_reminded) {
       text mc_reminded_0;
-      option mc_reminded_o0 lipu 203;
-      option mc_reminded_o1 lipu 202;
+      option mc_reminded_o0 jump_page mc_others;
+      option mc_reminded_o1 jump_page mc_real;
    }
-   lipu 202 {text mc_real_0; option mc_real_o0 lipu 206;}
-   lipu 203 {
+   lipu(mc_real) {text mc_real_0; option mc_real_o0 jump_page mc_1649;}
+   lipu(mc_others) {
       text mc_others_0;
-      option mc_others_o0 lipu 204;
+      option mc_others_o0 jump_page mc_where;
       option mc_others_o1 brk;
    }
-   lipu 204 {text mc_where_0; option mc_where_o0 lipu 205;}
-   lipu 205 {text mc_fine_0;  option mc_fine_o0  lipu 206;}
-   lipu 206 {
+   lipu(mc_where) {text mc_where_0; option mc_where_o0 jump_page mc_fine;}
+   lipu(mc_fine)  {text mc_fine_0;  option mc_fine_o0  jump_page mc_1649;}
+   lipu(mc_1649) {
       inc %lane_met;
       text mc_1649_0;
-      option mc_1649_o0 lipu 207;
+      option mc_1649_o0 jump_page mc_time;
    }
-   lipu 207 {text mc_time_0; option mc_time_o0 lipu 208;}
-   lipu 208 {
-       script "Lith_SetLane";
-       text mc_experience_0;
-       option mc_experience_o0 lipu 209;
-    }
-   lipu 209 {
+   lipu(mc_time) {text mc_time_0; option mc_time_o0 jump_page mc_experience;}
+   lipu(mc_experience) {
+      script "Lith_SetLane";
+      text mc_experience_0;
+      option mc_experience_o0 jump_page mc_coverup;
+   }
+   lipu(mc_coverup) {
       text mc_coverup_0;
       option mc_coverup_o0 brk;
       option mc_coverup_o1 brk;
    }
    /* Other */
-   lipu 1 {
+   lipu(mo_meet) {
       inc %lane_met;
       text mo_meet_0;
       option mo_meet_o0 brk;
-      option mo_meet_o1 lipu 2;
+      option mo_meet_o1 jump_page mo_past;
       option mo_meet_o2 brk;
    }
-   lipu 2 {
+   lipu(mo_past) {
       script "Lith_SetLane";
       text mo_past_0;
       option mo_past_o0 brk;
@@ -129,29 +155,20 @@ toki 1 {
 
 /* Thoth */
 /*
-kon {
-   kiri_met,
-   kiri_self,
-}
-toki 7 kiri {
-   lipu_nimi {
-      begin,
-      t_breaking,
-      t_down,
-      t_broken,
-      t_entity,
-   }
-   lipu 0 begin {
+ilo_kon(prog_t) {
+   jo kiri_met  = var_beg $20 +;
+   jo kiri_self = kiri_met++;
+   lipu(page_start) {
       name   DOLL;
       remote KIRI;
       icon   Doll;
       option _o0 brk;
       seme poki_jan pT {
-         seme !insa %kiri_met {
+         seme !insa kiri_met {
             text _2;
-            option _o1 lipu t_breaking;
+            option _o1 jump_page t_breaking;
          } anu {
-            seme insa %kiri_self {
+            seme insa kiri_self {
                text _1;
             } anu {
                text _0;
@@ -162,22 +179,22 @@ toki 7 kiri {
       }
    }
    /* Kiri */
-   lipu 100 t_breaking {
+   lipu(t_breaking) {
       inc %kiri_met;
       text _0;
-      option _o0 lipu t_down;
+      option _o0 jump_page t_down;
    }
-   lipu 101 t_down {
+   lipu(t_down) {
       text _0;
-      option _o0 lipu t_broken;
+      option _o0 jump_page t_broken;
       option _o1 brk;
    }
-   lipu 102 t_broken {
+   lipu(t_broken) {
       inc %kiri_self;
       text _0;
-      option _o0 lipu t_entity;
+      option _o0 jump_page t_entity;
    }
-   lipu 103 t_entity {
+   lipu(t_entity) {
       text _0;
       option _o0 brk;
    }

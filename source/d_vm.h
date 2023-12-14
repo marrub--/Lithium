@@ -233,22 +233,17 @@ enum {
 
 enum {
    /* program numbers */
-   DNUM_PRG_BEG,
-   DNUM_PRG_END = DNUM_PRG_BEG + 15,
-   DNUM_DLG_BEG,
-   DNUM_DLG_END = DNUM_DLG_BEG + 15,
-   DNUM_TRM_BEG,
-   DNUM_TRM_END = DNUM_TRM_BEG + 15,
-   DNUM_MAX,
+   PNUM_MAX = 64,
+   PNUM_DIALOGUE = PNUM_MAX      - 16,
+   PNUM_TERMINAL = PNUM_DIALOGUE - 16,
 };
 
 enum {
    /* page numbers */
-   DPAGE_NORMAL_MAX = 250,
-   DPAGE_UNFINISHED,
-   DPAGE_FINISHED,
-   DPAGE_FAILURE,
-   DPAGE_MAX,
+   DPAGE_MAX = 256,
+   DPAGE_UNFINISHED = DPAGE_MAX - 1,
+   DPAGE_FINISHED = DPAGE_MAX - 2,
+   DPAGE_FAILURE = DPAGE_MAX - 3,
 };
 
 enum {
@@ -351,9 +346,9 @@ enum {
 };
 
 struct dlg_def {
-   mem_size_t pages[DPAGE_MAX];
    u32 *codeV; mem_size_t codeC, codeP;
    u32 *stabV; mem_size_t stabC, stabP;
+   mem_size_t pages[DPAGE_MAX];
 };
 
 struct dlg_start_info {
@@ -371,7 +366,7 @@ struct dcd_info {
 void Dlg_MInit(void);
 script void Dlg_Run(void);
 
-extern struct dlg_def        dlgdefs[DNUM_MAX];
+extern struct dlg_def        dlgdefs[PNUM_MAX];
 extern struct dcd_info const dcdinfo[0xFF];
 
 #endif

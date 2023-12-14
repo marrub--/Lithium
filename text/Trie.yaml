@@ -34,17 +34,13 @@ BipInfo_Template_Name:
 Dlg_TopLevelName:
    prefix: _dlg_toplevel_
    words:
-      - dialogue
       - name
       - program
-      - terminal
       - var
    aliases:
-      ilo_sona: terminal
-      jo:       var
-      ilo_ko:   program
-      nimi:     name
-      toki:     dialogue
+      ilo_kon: program
+      jo:      var
+      nimi:    name
 Dlg_CondName:
    prefix: _dlg_cond_
    words:
@@ -66,13 +62,13 @@ Dlg_StmtName:
       - if
       - image
       - info
+      - jump_page
       - logoff
       - logon
       - mus_fade
       - music
       - name
       - option
-      - page
       - pict
       - remote
       - script
@@ -81,20 +77,15 @@ Dlg_StmtName:
       - text
       - wait
    aliases:
-      lipu: page
       seme: if
 Dlg_ItemName:
    prefix: _dlg_item_
    words:
-      - failure
-      - finished
       - page
-      - unfinished
+      - var
    aliases:
-      pini_ala: unfinished
-      lipu:     page
-      pakala:   failure
-      pini:     finished
+      lipu: page
+      jo:   var
 P_ClassToInt:
    words: [
       #define pclass_x(shr, eq) shr,

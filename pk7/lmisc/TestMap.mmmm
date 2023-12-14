@@ -1,77 +1,77 @@
 /*-*-Agw-LithDlg-*-*/
 nimi test_jacques;
-toki 1 {
-   lipu 0 {
+ilo_kon(prog_dialogue 1 +) {
+   lipu(0) {
       name JACQUES;
       icon AOF;
       remote JACQUES;
-      seme ijo_jo "Lith_DivisionSigil" lipu 4;
+      seme ijo_jo "Lith_DivisionSigil" jump_page 4;
       text begin_0;
-      option begin_1 lipu 1;
+      option begin_1 jump_page 1;
       option begin_2 brk;
    }
-   lipu 1 {
+   lipu(1) {
       seme poki_jan pC text hey_0c;
       anu              text hey_0;
       option hey_1 {
          script 2;
-         lipu 1;
+         jump_page 1;
       }
-      option hey_2 lipu 2;
+      option hey_2 jump_page 2;
       option hey_3 brk;
    }
-   lipu 2 {
+   lipu(2) {
       seme poki_jan pC {
          text start_talking_0c;
-         option start_talking_1c lipu 100;
-         option start_talking_2c lipu 101;
+         option start_talking_1c jump_page 100;
+         option start_talking_2c jump_page 101;
       } anu {
          text start_talking_0;
-         option start_talking_1 lipu 3;
+         option start_talking_1 jump_page 3;
       }
    }
-   lipu 100 {
+   lipu(100) {
       text c_what_asic_0;
-      option c_what_asic_1 lipu 103;
+      option c_what_asic_1 jump_page 103;
       option c_what_asic_2 brk;
    }
-   lipu 101 {
+   lipu(101) {
       text c_zj_0;
-      option c_zj_1 lipu 102;
+      option c_zj_1 jump_page 102;
    }
-   lipu 102 {
+   lipu(102) {
       text c_troubled_0;
-      option c_troubled_1 lipu 100;
+      option c_troubled_1 jump_page 100;
    }
-   lipu 103 {
+   lipu(103) {
       text c_worse_0;
-      option c_worse_1 lipu 104;
+      option c_worse_1 jump_page 104;
    }
-   lipu 104 {
+   lipu(104) {
       text c_malnutrition_0;
-      option c_malnutrition_1 lipu 105;
+      option c_malnutrition_1 jump_page 105;
    }
-   lipu 105 {
+   lipu(105) {
       text c_thebeat_0;
-      option c_thebeat_1 lipu 106;
+      option c_thebeat_1 jump_page 106;
    }
-   lipu 106 {
+   lipu(106) {
       text c_darker_0;
       option c_darker_1 brk;
    }
-   lipu 3 {
+   lipu(3) {
       text lifes_unfair_0;
       option lifes_unfair_1 brk;
    }
-   lipu 4 {
+   lipu(4) {
       text division_0;
       option division_1 brk;
    }
 }
 
 nimi test_terminal;
-ilo_sona 1 {
-   pini_ala {
+ilo_kon(prog_terminal 1 +) {
+   lipu(page_unfinished) {
       remote TEST;
       logon "01602" text "logon";
       info text inf;

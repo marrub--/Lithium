@@ -131,7 +131,7 @@ void tb_err(struct tokbuf *tb, struct err *res, cstr fmt, struct token *tok, cst
 }
 
 struct token *tb_expc(struct tokbuf *tb, struct err *res, struct token *tok, ...) {
-   noinit static i32  tt[8];
+   noinit static i32  tt[16];
    noinit static char ttstr[128];
    mem_size_t ttnum;
    va_list    vl;

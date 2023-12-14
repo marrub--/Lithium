@@ -58,7 +58,7 @@ static void FinishDef(struct compiler *d) {
 
 static void Dlg_GetItem_Page(struct compiler *d, mem_size_t num) {
    d->page = num;
-   d->def.pages[num] = d->def.codeP;
+   d->def.pages[num] = PRG_BEG + d->def.codeP;
    Dbg_Log(log_gsinfo,
            _l("--- page "), _p(num),
            _c(' '), _c('('), _p(d->def.codeP), _c(')'));
@@ -66,21 +66,51 @@ static void Dlg_GetItem_Page(struct compiler *d, mem_size_t num) {
    Dlg_PushLdVA(d, ACT_WAIT); unwrap(&d->res);
 }
 
+static void Dlg_GetItem_Var(struct compiler *d) {
+   struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, 0);
+   unwrap(&d->res);
+   struct compiler_var *var = Dlg_GetVar(d, tok->textV);
+   char *id;
+   if(!var) {
+      id = Malloc(tok->textC + 1, _tag_dlgc);
+      faststrcpy(id, tok->textV);
+   }
+   tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_eq, 0);
+   unwrap(&d->res);
+   i32 val = Dlg_Evaluate(d, tok_semico);
+   unwrap(&d->res);
+   if(!var) {
+      noinit static struct compiler_var vars[64];
+      static i32 varn;
+      var = &vars[varn++];
+      var->name  = id;
+      var->value = val;
+      Dlg_SetVar(d, var);
+   } else {
+      var->value = val;
+   }
+   Dbg_Log(log_gsinfo, _l("set variable "), _p(var->name), _l(" to "), _p(var->value));
+}
+
 static bool Dlg_GetItem(struct compiler *d) {
-   switch(Dlg_ItemName(tb_get(&d->tb)->textV)) {
+   struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, tok_bracec, 0);
+   unwrap(&d->res);
+   if(tok->type == tok_bracec) return false;
+   switch(Dlg_ItemName(tok->textV)) {
    case _dlg_item_page:
-      struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_number, 0);
+      struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_pareno, 0);
       unwrap(&d->res);
-      i32 num = faststrtoi32(tok->textV);
-      if(num >= DPAGE_NORMAL_MAX || num < 0) {
-         tb_err(&d->tb, &d->res, "bad page number", tok, _f);
+      i32 num = Dlg_Evaluate(d, tok_parenc);
+      unwrap(&d->res);
+      if(num >= DPAGE_MAX || num < 0) {
+         tb_err(&d->tb, &d->res, "bad page number %i", tok, _f, num);
          unwrap(&d->res);
       }
       Dlg_GetItem_Page(d, num);
       break;
-   case _dlg_item_failure:    Dlg_GetItem_Page(d, DPAGE_FAILURE);    break;
-   case _dlg_item_finished:   Dlg_GetItem_Page(d, DPAGE_FINISHED);   break;
-   case _dlg_item_unfinished: Dlg_GetItem_Page(d, DPAGE_UNFINISHED); break;
+   case _dlg_item_var:
+      Dlg_GetItem_Var(d);
+      break;
    default:
       tb_unget(&d->tb);
       return false;
@@ -89,12 +119,13 @@ static bool Dlg_GetItem(struct compiler *d) {
    return true;
 }
 
-static void Dlg_GetTop_Prog(struct compiler *d, i32 beg, i32 end) {
-   struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_number, 0);
+static void Dlg_GetTop_Prog(struct compiler *d) {
+   struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_pareno, 0);
    unwrap(&d->res);
-   i32 num = beg + faststrtoi32(tok->textV);
-   if(num > end || num < beg) {
-      tb_err(&d->tb, &d->res, "invalid dialogue name", tok, _f);
+   i32 num = Dlg_Evaluate(d, tok_parenc);
+   unwrap(&d->res);
+   if(num > PNUM_MAX || num < 0) {
+      tb_err(&d->tb, &d->res, "invalid dialogue number", tok, _f);
       unwrap(&d->res);
    }
    tb_expdr(&d->tb, &d->res, tok_braceo);
@@ -102,146 +133,20 @@ static void Dlg_GetTop_Prog(struct compiler *d, i32 beg, i32 end) {
    FinishDef(d);
    Dbg_Log(log_gsinfo, _l("\n---\nheading "), _p(num), _l("\n---"));
    d->num = num;
-   while(!tb_drop(&d->tb, tok_bracec)) {
-      Dlg_GetItem(d); unwrap(&d->res);
-   }
-}
-
-static void Dlg_GetTop_Var(struct compiler *d) {
-   struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_mod, 0);
-   unwrap(&d->res);
-   tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, 0);
-   unwrap(&d->res);
-   char *id = Malloc(tok->textC + 1, _tag_dlgc);
-   faststrcpy(id, tok->textV);
-   tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_eq, 0);
-   unwrap(&d->res);
-   noinit static struct compiler_var vars[64];
-   static i32 varn;
-   struct compiler_var *var = &vars[varn++];
-   enum {_stack_top = 8};
-   static i32 stack[_stack_top], top;
-   top = _stack_top;
-   for(bool not_first = false; tok->type != tok_semico; not_first = true) {
-      tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb),
-                    tok_number, tok_identi,
-                    tok_add, tok_sub, tok_add2, tok_sub2,
-                    tok_div, tok_mod, tok_mul,
-                    not_first ? tok_semico : 0, 0);
-      unwrap(&d->res);
-      switch(tok->type) {
-      underflow:
-         tb_err(&d->tb, &d->res, "stack underflow", tok, _f);
-         unwrap(&d->res);
-      overflow:
-         tb_err(&d->tb, &d->res, "stack overflow", tok, _f);
-         unwrap(&d->res);
-      case tok_number:
-         if(top == 0) goto overflow;
-         stack[--top] = faststrtoi32(tok->textV);
-         break;
-      case tok_identi:
-         if(top == 0) goto overflow;
-         struct compiler_var *var = Dlg_GetVar(d, tok->textV);
-         if(var) {
-            stack[--top] = var->value;
-         } else {
-            tb_err(&d->tb, &d->res, "unknown variable", tok, _f);
-            unwrap(&d->res);
-         }
-         break;
-      #define binary_op(op) \
-         if(top > _stack_top - 2) goto underflow; \
-         stack[top + 1] = stack[top + 1] op stack[top]; \
-         ++top; \
-         break;
-      case tok_add: binary_op(+)
-      case tok_sub: binary_op(-)
-      case tok_div: binary_op(/)
-      case tok_mod: binary_op(%)
-      case tok_mul: binary_op(*)
-      case tok_add2:
-         if(top > _stack_top - 1) goto underflow;
-         ++stack[top];
-         break;
-      case tok_sub2:
-         if(top > _stack_top - 1) goto underflow;
-         --stack[top];
-         break;
-      }
-   }
-   if(top >= _stack_top || top < 0) {
-      tb_err(&d->tb, &d->res, "stack error", tok, _f);
+   while(Dlg_GetItem(d)) {
       unwrap(&d->res);
    }
-   var->name  = id;
-   var->value = stack[top];
-   Dlg_SetVar(d, var);
-   Dbg_Log(log_gsinfo, _l("set variable "), _p(var->name), _l(" to "), _p(var->value));
 }
 
-mem_size_t Dlg_WriteCode(struct dlg_def const *def, mem_size_t c, mem_size_t i) {
-   struct dcd_info const *inf = &dcdinfo[byte(c)];
-   __nprintf("%02X ", c);
-   if(c > 0xFF || !inf->name[0]) {
-      PrintStrL("      ???.??        ");
-      return i;
-   }
-   mem_size_t c2, c3;
-   switch(inf->adrm) {
-   case ADRM_AI:
-      c2 = Cps_GetC(def->codeV, i++);
-      c3 = Cps_GetC(def->codeV, i++);
-      __nprintf("%02X %02X %s $%02X%02X  ", c2, c3, inf->name, c3, c2);
-      break;
-   case ADRM_AX:
-      c2 = Cps_GetC(def->codeV, i++);
-      c3 = Cps_GetC(def->codeV, i++);
-      __nprintf("%02X %02X %s $%02X%02X,X", c2, c3, inf->name, c3, c2);
-      break;
-   case ADRM_AY:
-      c2 = Cps_GetC(def->codeV, i++);
-      c3 = Cps_GetC(def->codeV, i++);
-      __nprintf("%02X %02X %s $%02X%02X,Y", c2, c3, inf->name, c3, c2);
-      break;
-   case ADRM_II:
-      c2 = Cps_GetC(def->codeV, i++);
-      c3 = Cps_GetC(def->codeV, i++);
-      __nprintf("%02X %02X %s ($%02X%02X)", c2, c3, inf->name, c3, c2);
-      break;
-   case ADRM_IX:
-      c2 = Cps_GetC(def->codeV, i++);
-      __nprintf("%02X    %s ($%02X,X) ", c2, inf->name, c2);
-      break;
-   case ADRM_IY:
-      c2 = Cps_GetC(def->codeV, i++);
-      __nprintf("%02X    %s ($%02X),Y", c2, inf->name, c2);
-      break;
-   case ADRM_NP:
-      __nprintf("      %s        ", inf->name);
-      break;
-   case ADRM_ZI:
-   case ADRM_RI:
-      c2 = Cps_GetC(def->codeV, i++);
-      __nprintf("%02X    %s $%02X    ", c2, inf->name, c2);
-      break;
-   case ADRM_VI:
-      c2 = Cps_GetC(def->codeV, i++);
-      __nprintf("%02X    %s #$%02X   ", c2, inf->name, c2);
-      break;
-   case ADRM_ZX:
-      c2 = Cps_GetC(def->codeV, i++);
-      __nprintf("%02X    %s $%02X,X  ", c2, inf->name, c2);
-      break;
-   case ADRM_ZY:
-      c2 = Cps_GetC(def->codeV, i++);
-      __nprintf("%02X    %s $%02X,Y  ", c2, inf->name, c2);
-      break;
-   }
-   return i;
+static void Dlg_GetTop_Name(struct compiler *d) {
+   struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, 0);
+   unwrap(&d->res);
+   faststrcpy(d->name, tok->textV);
+   tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_semico, 0);
+   unwrap(&d->res);
 }
 
-static void Dlg_Compile(cstr fname, varmap_t *vars) {
+script static void Dlg_Compile(cstr fname, varmap_t *vars) {
    noinit static struct compiler d;
    Dbg_Log(log_gsinfo, _l("begin compiling file "), _p(fname));
    FILE *fp = W_Open(fast_strdup(fname), 't');
@@ -260,23 +165,13 @@ static void Dlg_Compile(cstr fname, varmap_t *vars) {
       }
       switch(Dlg_TopLevelName(tok->textV)) {
       case _dlg_toplevel_program:
-         Dlg_GetTop_Prog(&d, DNUM_PRG_BEG, DNUM_PRG_END);
-         break;
-      case _dlg_toplevel_dialogue:
-         Dlg_GetTop_Prog(&d, DNUM_DLG_BEG, DNUM_DLG_END);
-         break;
-      case _dlg_toplevel_terminal:
-         Dlg_GetTop_Prog(&d, DNUM_TRM_BEG, DNUM_TRM_END);
+         Dlg_GetTop_Prog(&d);
          break;
       case _dlg_toplevel_var:
-         Dlg_GetTop_Var(&d);
+         Dlg_GetItem_Var(&d);
          break;
       case _dlg_toplevel_name:
-         struct token *tok = tb_expc(&d.tb, &d.res, tb_get(&d.tb), tok_identi, 0);
-         unwrap(&d.res);
-         faststrcpy(d.name, tok->textV);
-         tok = tb_expc(&d.tb, &d.res, tb_get(&d.tb), tok_semico, 0);
-         unwrap(&d.res);
+         Dlg_GetTop_Name(&d);
          break;
       default:
          tb_err(&d.tb, &d.res, "invalid toplevel", tok, _f);
