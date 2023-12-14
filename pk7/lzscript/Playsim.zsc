@@ -185,11 +185,6 @@ override void worldThingSpawned(WorldEvent ev) {
 
 override void worldTick() {
    if(m_bossLevel != boss_none) {
-      foreach(ln : level.lines) {
-         for(int j = 0; j < 3; j++) {
-            ln.sidedef[0].setTextureYOffset(j, sin(level.totalTime)*4);
-         }
-      }
       if(m_bossDeathInit == 0) {
          bool boss_baby_is_dead;
          if(m_bossBabies.size() == 0) {
