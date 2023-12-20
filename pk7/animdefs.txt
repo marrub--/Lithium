@@ -1,15 +1,9 @@
-// ╭──────────────────────────────────────────────────────────────────────────╮
-// │                                                                          │
-// │             Distributed under the CC0 public domain license.             │
-// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
-// │                See licenses/cc0.txt for more information.                │
-// │                                                                          │
-// ╰──────────────────────────────────────────────────────────────────────────╯
-
 cameraTexture LITHCAM1 320 240
 cameraTexture LITHCAM2 480 240
 cameraTexture LITHCAM3 640 480
 canvasTexture LITHCSKY 1024 128
 canvasTexture LITHFIRE 64 128
 
-/* EOF */
+texture LITHWTR1 range LITHWTR4 tics 8
+texture LITHNUK1 range LITHNUK3 tics 8
+texture LITHBLD1 range LITHBLD3 tics 8

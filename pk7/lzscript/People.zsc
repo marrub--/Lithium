@@ -8,5 +8,6 @@
 
 #include "lzscript/People/Base.zsc"
 #include "lzscript/People/People.zsc"
+#include "lzscript/People/AdvMarine.zsc"
 
 /* EOF */

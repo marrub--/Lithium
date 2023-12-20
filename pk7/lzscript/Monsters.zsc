@@ -34,6 +34,7 @@
 #include "lzscript/Monsters/Doom/5_Cyberdemon.zsc"
 #include "lzscript/Monsters/Doom/5_SpiderMastermind.zsc"
 
+#include "lzscript/Monsters/Lithium/TitleMap.zsc"
 #include "lzscript/Monsters/Lithium/Phantom.zsc"
 
 #include "lzscript/Monsters/Lithium/6_Archangel.zsc"

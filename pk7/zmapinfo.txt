@@ -121,7 +121,7 @@ gameDefaults {
    enableSkyBoxAo
 }
 
-map TITLEMAP "Abyss (Title Ver.)" {
+map TITLEMAP "Venus' Hair (Title Ver.)" {
    sky1  = "LITHBLAK"
    music = "lmusic/Shredder.opus"
 }
@@ -185,6 +185,7 @@ doomednums {
    22443 = Lith_AbyssTeleporter
    22444 = Lith_TargetPractice
    22445 = Lith_LostNote
+   22446 = Lith_AdvMarine
 }
 
 /* EOF */

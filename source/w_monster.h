@@ -36,6 +36,7 @@ monster_type_x(cyberdemon)
 monster_type_x(phantom)
 monster_type_x(angel)
 monster_type_x(darkone)
+monster_type_x(person)
 #undef monster_type_x
 #elif !defined(w_monster_h)
 #define w_monster_h

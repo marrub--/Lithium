@@ -225,6 +225,8 @@ presets {
 
 "full" {
    scr: 0 exp: 0 type: cyberdemon filter: "Lith_Steggles";
+   scr: 100000 exp: 10000 type: person filter: "Lith_AdvMarine";
+   scr: 100000 exp: 10000 type: person filter: "Lith_TitleMarine";
 }
 
 // Map Compatibility ═════════════════════════════════════════════════════════╕

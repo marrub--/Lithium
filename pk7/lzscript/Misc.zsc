@@ -10,7 +10,6 @@ class Lith_GoAway : Actor {
    default {
       +NoInteraction
    }
-
    override void beginPlay() {}
    override void postBeginPlay() {}
    override void tick() {destroy();}

@@ -1,0 +1,151 @@
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
+
+class Lith_TitleImpBall : Lith_XH_ImpBall {
+   default {
+      Speed 20;
+      DeathSound "";
+      SeeSound   "";
+   }
+}
+
+class Lith_TitleBaronBall : BaronBall {
+   default {
+      DeathSound "";
+      SeeSound   "";
+   }
+}
+
+class Lith_TitleRocket : Rocket {
+   default {
+      DeathSound "";
+      SeeSound   "";
+   }
+}
+
+class Lith_TitleImp : DoomImp {
+   default {
+      Species "Lith_TitleEnemy";
+      ActiveSound "";
+      DeathSound  "";
+      PainSound   "";
+      SeeSound    "";
+      +DontHarmClass
+      +DontHarmSpecies
+      +NoInfighting
+   }
+   states {
+   Melee:
+   Missile:
+      TROO EF 6 a_faceTarget;
+      TROO G 5 a_customComboAttack("Lith_TitleImpBall", 32, 3 * random(1, 8), "imp/melee");
+      TROO G 2;
+      goto See;
+   Death:
+      TROO I 8;
+      TROO J 8;
+      TROO K 6;
+      TROO L 6 a_noBlocking;
+      TROO M 1050;
+      stop;
+   }
+}
+
+class Lith_TitleHellKnight : HellKnight {
+   default {
+      Species "Lith_TitleEnemy";
+      ActiveSound "";
+      DeathSound  "";
+      PainSound   "";
+      SeeSound    "";
+      +DontHarmClass
+      +DontHarmSpecies
+      +NoInfighting
+   }
+   states {
+   Melee:
+   Missile:
+      BOS2 EF 8 a_faceTarget;
+      BOS2 G 8 a_customComboAttack("Lith_TitleBaronBall", 32, 10 * random(1, 8), "baron/melee");
+      goto See;
+   Death:
+      BOS2 I 8;
+      BOS2 J 8;
+      BOS2 K 8;
+      BOS2 L 8 a_noBlocking;
+      BOS2 MN 8;
+      BOS2 O 1050;
+      stop;
+   }
+}
+
+class Lith_TitleBaron : BaronOfHell {
+   default {
+      Species "Lith_TitleEnemy";
+      ActiveSound "";
+      DeathSound  "";
+      PainSound   "";
+      SeeSound    "";
+      +DontHarmClass
+      +DontHarmSpecies
+      +NoInfighting
+   }
+   states {
+   Melee:
+   Missile:
+      BOSS EF 8 a_faceTarget;
+      BOSS G 8 a_customComboAttack("Lith_TitleBaronBall", 32, 10 * random(1, 8), "baron/melee");
+      goto See;
+   Death:
+      BOSS I 8;
+      BOSS J 8;
+      BOSS K 8;
+      BOSS L 8 a_noBlocking;
+      BOSS MN 8;
+      BOSS O 1050;
+      stop;
+   }
+}
+
+class Lith_TitleCyberdemon : Cyberdemon {
+   default {
+      Species "Lith_TitleEnemy";
+      ActiveSound "";
+      DeathSound  "";
+      PainSound   "";
+      SeeSound    "";
+      +DontHarmClass
+      +DontHarmSpecies
+      +NoInfighting
+   }
+   void lith_a_cyberAttack() {
+      a_faceTarget();
+      a_spawnProjectile("Lith_TitleRocket");
+   }
+   states {
+   Missile:
+      CYBR E 6 a_faceTarget;
+      CYBR F 12 lith_a_cyberAttack;
+      CYBR E 12 a_faceTarget;
+      CYBR F 12 lith_a_cyberAttack;
+      CYBR E 12 a_faceTarget;
+      CYBR F 12 lith_a_cyberAttack;
+      goto See;
+   Death:
+      CYBR H 10;
+      CYBR IJKL 10;
+      CYBR M 10 a_noBlocking;
+      CYBR NO 10;
+      CYBR P 1050 a_bossDeath;
+      stop;
+   }
+}
+
+class Lith_TitleMarine : Lith_AdvMarine {}
+
+/* EOF */

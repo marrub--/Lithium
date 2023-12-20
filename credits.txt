@@ -137,10 +137,12 @@
 @ Xaser Acheron  - Bullet puffs, probably other things I took from Psychic
 @ Yholl          - Cardinal gem sprites
 @ a1337spy       - Score chip sprite
-@ abbuw          - Vent texture
 @ monkeybtm6     - BLLTR0 sprite
-@ vikingbro      - Image used as a base for the Shock Rifle sprite
 @ zrrion         - Skull key, health, cell pack, and health bonus pickups
+~
+                             * Textures *
+@ FreeDoom Contributors - TITLEMAP textures, LITHWTR*/LITHNUK*/LITHBLD*
+@ abbuw                 - Vent texture
 ~
                               * Fonts *
 
@@ -184,7 +186,7 @@
 @ Xaser Acheron      - Help with code stuff
 @ Yholl              \ eviel gost
                      | Ideas for a lot of stuff
-                     | Re-texturing the TITLEMAP for me (F)
+                     | Re-texturing the TITLEMAP for me
                      | Marathon resources
                      | Descriptions for some of the extra upgrades
                      | Help with a bunch of stuff

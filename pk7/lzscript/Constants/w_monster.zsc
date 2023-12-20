@@ -49,6 +49,7 @@ mtype_cyberdemon,
 mtype_phantom,
 mtype_angel,
 mtype_darkone,
+mtype_person,
 
 
    mtype_max

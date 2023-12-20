@@ -18,6 +18,62 @@
 #include "lzscript/Playsim/Sky.zsc"
 #include "lzscript/Playsim/World.zsc"
 
+class Lith_LevelPostProcessor : LevelPostProcessor {
+   protected void apply(name checksum, string mapname) {
+      if(checksum == '4859dfa9957f951b2e99b5fc335d2099') {
+         for(uint i = 0; i < getThingCount(); ++i) {
+            switch(getThingEdNum(i)) {
+            case 2028: // column
+               if(gameinfo.gametype & GAME_CHEX) {
+                  setThingEdNum(i, 55); // spinny globe
+               } else if(gameinfo.gametype & GAME_HERETIC) {
+                  setThingEdNum(i, 27); // serpent torch
+               }
+               break;
+            case 43: // burnt tree
+               if(gameinfo.gametype & GAME_CHEX) {
+                  setThingEdNum(i, 81); // small bush
+               } else if(gameinfo.gametype & GAME_HERETIC) {
+                  setThingEdNum(i, 37); // small stalagmite
+               }
+               break;
+            case 54: // big tree
+               if(gameinfo.gametype & GAME_CHEX) {
+                  setThingEdNum(i, 47); // pine tree
+               } else if(gameinfo.gametype & GAME_HERETIC) {
+                  setThingEdNum(i, 38); // big stalagmite
+               }
+               break;
+            case 44: // blue torch
+            case 46: // red torch
+               if(gameinfo.gametype & GAME_CHEX) {
+                  setThingEdNum(i, 35); // lamppost
+               } else if(gameinfo.gametype & GAME_HERETIC) {
+                  setThingEdNum(i, 50); // wall torch
+               }
+               break;
+            case 55: // short blue torch
+               if(gameinfo.gametype & GAME_CHEX) {
+                  setThingEdNum(i, 34); // small lamppost
+               } else if(gameinfo.gametype & GAME_HERETIC) {
+                  setThingEdNum(i, 76); // brazier
+               }
+               break;
+            case 70: // burning barrel
+               if(gameinfo.gametype & GAME_CHEX) {
+                  setThingEdNum(i, 32); // barrel
+               } else if(gameinfo.gametype & GAME_HERETIC) {
+                  setThingEdNum(i, 44); // barrel
+               } else if(!TexMan.checkForTexture("FCANA0", TexMan.Type_Sprite).isValid()) {
+                  setThingEdNum(i, 2035); // explosive barrel
+               }
+               break;
+            }
+         }
+      }
+   }
+}
+
 /* HERMES: Horribly Explicit and Rudimentary Methods for Extended Scripting */
 class Lith_HERMES : EventHandler;
 
@@ -83,7 +139,7 @@ void setUpEnvironment() {
          setUpEvilSector(sec);
       }
    }
-   if(Lith_UTIL.pData(_pdt_mflg, _mflg_vacuum) != 0) {
+   if(Lith_UTIL.pData(_pdt_mflg, _mflg_vacuum)) {
       level.gravity *= 0.2;
    }
    m_air   = Lith_AirThinker.create();
@@ -300,13 +356,44 @@ override void checkReplacement(ReplaceEvent ev) {
    bool wasFinal = ev.isFinal;
    ev.isFinal = true;
    switch(ev.replacee.getClassName()) {
+   // always replace icon of sin objects
    case 'BossBrain': ev.replacement = 'Lith_BossBrain'; return;
    case 'BossEye':   ev.replacement = 'Lith_BossEye';   return;
    case 'SpawnFire': ev.replacement = 'Lith_SpawnFire'; return;
    case 'SpawnShot': ev.replacement = 'Lith_SpawnShot'; return;
    case 'BossTarget': return;
+   // special handling for titlemap actors
+   case 'Lith_TitleMarine':
+      if(Actor.getReplacement('Lith_TitleImp') is 'Lith_GoAway') {
+         ev.replacement = 'Lith_GoAway';
+      }
+      return;
+   case 'Lith_TitleImp':
+      if(TexMan.checkForTexture("TROOI0", TexMan.Type_Sprite).isValid()) {
+         ev.isFinal = wasFinal;
+      } else {
+         ev.replacement = 'Lith_GoAway';
+      }
+      return;
+   case 'Lith_TitleHellKnight':
+      if(TexMan.checkForTexture("BOS2I0", TexMan.Type_Sprite).isValid()) {
+         ev.isFinal = wasFinal;
+      } else if(TexMan.checkForTexture("BOSSI0", TexMan.Type_Sprite).isValid()) {
+         ev.replacement = 'Lith_TitleBaron';
+      } else {
+         ev.replacement = 'Lith_GoAway';
+      }
+      return;
+   case 'Lith_TitleCyberdemon':
+      if(TexMan.checkForTexture("CYBRH0", TexMan.Type_Sprite).isValid()) {
+         ev.isFinal = wasFinal;
+      } else {
+         ev.replacement = 'Lith_GoAway';
+      }
+      return;
    }
    ev.isFinal = false;
+   // game difficulty
    if(m_gameFlags & _gamef_extrahard) {
       switch(ev.replacee.getClassName()) {
       case 'ZombieMan':     ev.replacement = 'Lith_XH_ZombieMan';     return;
@@ -329,11 +416,12 @@ override void checkReplacement(ReplaceEvent ev) {
          ev.replacement = 'Lith_XH_SpiderMastermind'; return;
       }
    }
+   // iwad compatibility
    switch(ev.replacee.getClassName()) {
    case 'MiniZorchRecharge':
    case 'BlasterAmmo':
    case 'GoldWandAmmo':
-   case 'MaceAmmo':          ev.replacement = 'Clip';           break;
+   case 'MaceAmmo': ev.replacement = 'Clip'; break;
    case 'MiniZorchPack':
    case 'BlasterHefty':
    case 'GoldWandHefty':
@@ -391,7 +479,8 @@ override void checkReplacement(ReplaceEvent ev) {
    case 'GlassOfWater':    ev.replacement = 'HealthBonus'; break;
    case 'SlimeRepellent':  ev.replacement = 'ArmorBonus';  break;
    case 'SlimeProofSuit':  ev.replacement = 'RadSuit';     break;
-   default:                ev.isFinal     = wasFinal;      break;
+   // restore state on default
+   default: ev.isFinal = wasFinal; break;
    }
 }
 
