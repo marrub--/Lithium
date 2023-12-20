@@ -37,6 +37,9 @@ static void Blinker() {
 
 dynam_aut script void W_Title(void) {
    FadeFlash(0, 0, 0, 1.0k, 5.0k);
+   if(cv.sv_notitleintro) {
+      return;
+   }
    ACS_Delay(35*5);
    i32 len = ACS_StrLen(sl_opener);
    for(i32 t = 0, pos = 0;;) {

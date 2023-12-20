@@ -5519,6 +5519,8 @@
    "Mainly exists for map compatibility. Drops weapons from zombie enemies like vanilla. May cause issues in normal gameplay.\n"
    "\n"
    "\ck(Applies on next map start)";
+"LITH_sv_notitleintro" =
+   "No text crawl on title screen";
 "LITH_weapons_casingfadeout" =
    "Casings fade out";
 "LITH_weapons_casings" =

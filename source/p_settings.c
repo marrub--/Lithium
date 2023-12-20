@@ -208,6 +208,7 @@ static struct setting const st_gui[] = {
    s_enume("gui_theme",     0, cbi_theme_max, "theme"),
    s_fixed("gui_curspeed",  0.1, 2.0, 0.1, "mult"),
    s_integ("gui_buyfiller", 0, 70, 1, "tick"),
+   s_boole("sv_notitleintro"),
    s_label("st_labl_hud"),
    s_enume("hud_type", 0, _hud_max + 1, "hudtype"),
    s_boole("hud_showarmorind", .pclass = pM),

@@ -30,6 +30,7 @@
 cvar_x(gbl, sv_failtime, i32)
 cvar_x(gbl, sv_nobossdrop, bool)
 cvar_x(gbl, sv_nobosses, bool)
+cvar_x(gbl, sv_notitleintro, bool)
 cvar_x(map, player_resultssound, bool)
 cvar_x(map, sv_difficulty, i32)
 cvar_x(map, sv_extrahard, bool)
