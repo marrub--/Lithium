@@ -709,29 +709,29 @@
    "Oh, hello there. Apologies!";
 "LITH_dlg_abyss_m_begin_o0" =
    "Hello.\n"
-   "\cq[Who is this..?]";
-"LITH_dlg_abyss_m_begin_o0_m" =
-   "Ah, hey there. You look familiar.\n"
-   "\cq[Who is she?]";
+   "\cn[Who is this..?]";
 "LITH_dlg_abyss_m_begin_o1" =
    "Oh, sorry, didn't mean to bother you.\n"
-   "\cr[Back out.]";
+   "\cn[Back out.]";
+"LITH_dlg_abyss_m_begin_o0_m" =
+   "Ah, hey there. You look familiar.\n"
+   "\cn[Who is she?]";
 "LITH_dlg_abyss_m_begin_o1_m" =
    "Oh, sorry, didn't mean to bother you.\n"
-   "\cr[Back out while you can.]";
+   "\cn[Back out while you can.]";
 "LITH_dlg_abyss_m_meet_0" =
    "Oh, do I? How so, might I ask? I don't believe I've met you before.\n"
    "\n"
    "\cn[I feel intimidated by this doll.]";
 "LITH_dlg_abyss_m_meet_o0" =
    "No, it must be nothing.\n"
-   "\cq[I'm sure it's nothing.]";
+   "\cn[I'm sure it's nothing.]";
 "LITH_dlg_abyss_m_meet_o1" =
    "No, just forget about it, sorry.\n"
-   "\cr[God damn it.]";
+   "\cn[God damn it.]";
 "LITH_dlg_abyss_m_meet_o2" =
    "No, I've definitely seen you.\n"
-   "\cq[What is it?]";
+   "\cn[What is it?]";
 "LITH_dlg_abyss_m_nothing_0" =
    "Hmm... Well, whatever. Say, do you like RPG games? Also, where exactly are we? I feel like I know *you*...\n"
    "\n"
@@ -748,139 +748,136 @@
    "\cn[She's surprisingly happy about this revelation.]";
 "LITH_dlg_abyss_m_nothing_o0" =
    "I do like RPG games. Why?\n"
-   "\ct[Probably best to ignore the rest for now.]";
+   "\cn[Probably best to ignore the rest for now.]";
 "LITH_dlg_abyss_m_nothing_o1" =
    "I'm not sure where we are. I just... woke up here.\n"
-   "\ct[I'm probably in Hell.]";
+   "\cn[I'm probably in Hell.]";
 "LITH_dlg_abyss_m_nothing_o2" =
    "Why *do* we think we look alike, anyhow?\n"
-   "\cq[Maybe this was worth questioning.]";
+   "\cn[Maybe this was worth questioning.]";
 "LITH_dlg_abyss_m_nothing_o3" =
    "Nevermind, you talk a mile a minute.\n"
-   "\cr[Not that I'm one to talk.]";
+   "\cn[Not that I'm one to talk.]";
 "LITH_dlg_abyss_m_seen_0" =
    "Hmm... Do you happen to have scars on your upper arms?\n"
    "\n"
    "\cn[...What? How?]";
 "LITH_dlg_abyss_m_seen_o0" =
    "No.\n"
-   "\cr[Fuck.]";
+   "\cn[Fuck.]";
 "LITH_dlg_abyss_m_seen_o1" =
    "...Yes. Burn marks. Self-inflicted.\n"
-   "\cq[*Fuck.*]";
+   "\cn[*Fuck.*]";
 "LITH_dlg_abyss_m_seen_1" =
    "...Ah.\n"
    "\n"
    "\cn[Ah...]";
 "LITH_dlg_abyss_m_seen_o2" =
    "I'm leaving.\n"
-   "\cr[I want to die. \cgI want to die. \cmI want to die.\cr]";
+   "\cn[I want to die. \cgI want to die. \cmI want to die.\cr]";
 "LITH_dlg_abyss_m_seen_o3" =
    "I see.\n"
-   "\cr[We're the same person. \cmGod damn it.\cr]";
+   "\cn[We're the same person. \cmGod damn it.\cr]";
 "LITH_dlg_abyss_m_begin_o0_c" =
    "Ah, hey there.\n"
-   "\cq[This doll reminds me of Daniel. Weird.]";
+   "\cn[This doll reminds me of Daniel. Weird.]";
 "LITH_dlg_abyss_mc_meet_0" =
-   "Hey, you're making a weird face! Are you coming onto me? I've got a partner! Wait, he looks just like you!\n"
+   "Hey, you're making a weird face! Are you coming onto me? I've got a partner! He looks just like you!\n"
    "\n"
-   "\cn[Is this some kind of projection of my inner wants? Wait, what the hell am I thinking? It's just a doll.]";
+   "\cn[Is this some kind of projection of my inner desire? Wait, what the hell am I thinking? It's just a doll. But, the symbology... It almost seems too on-the-nose.]";
 "LITH_dlg_abyss_mc_meet_o0" =
    "You just reminded me of someone.\n"
-   "\cq[Usually, people ask me why I look sad, heh.]";
+   "\cn[Usually, people are asking me why I look sad.]";
 "LITH_dlg_abyss_mc_meet_o1" =
-   "I don't think any of this is real. Maybe I'm dead.\n"
-   "\cr[I'm done here.]";
+   "I don't think any of this is real.\n"
+   "\cn[Maybe I'm dead. I'm done here.]";
 "LITH_dlg_abyss_mc_reminded_0" =
-   "And you remind me of someone! Maybe we're onto something. Sorry for the misunderstanding!! I wish I could read the room better. Did you see anyone else pass through here? It's just been me...\n"
+   "And you remind me of someone! Maybe we're onto something. Sorry for the misunderstanding! I wish I could read the room better. Did you see anyone else pass through here? It's just been me...\n"
    "\n"
    "\cn[Who is she? Definitely not Daniel.]";
 "LITH_dlg_abyss_mc_reminded_o0" =
-   "There seem to be other dolls around here.\n"
-   "\cq[That's all I know of...]";
+   "There appear to be other dolls around here as well.\n"
+   "\cn[That's all I know of.]";
 "LITH_dlg_abyss_mc_reminded_o1" =
-   "Why do you sound real?\n"
-   "\cr[I'm going, now.]";
+   "Why do you sound... like a real person?\n"
+   "\cn[I'm leaving. Now.]";
 "LITH_dlg_abyss_mc_others_0" =
    "Dolls? What do you mean, other ones?\n"
    "\n"
    "\cn[Can she not see herself?]";
 "LITH_dlg_abyss_mc_others_o0" =
-   "Er, I mean, I just saw one a bit ago. Where do you think we are?\n"
-   "\cq[That's not exactly a lie, at least.]";
+   "Er, I mean, I saw one just a bit ago. ...Where do you think we are?\n"
+   "\cn[That's not exactly a lie, at least.]";
 "LITH_dlg_abyss_mc_others_o1" =
    "Er, let me go... find them. I'll be right back.\n"
-   "\cr[That might be a lie.]";
+   "\cn[This is creeping me out.]";
 "LITH_dlg_abyss_mc_where_0" =
    "I don't know, honestly. I remember going to sleep, and then... Ah! Am I dreaming? That would be pretty likely. But you seem pretty real to me... Ah! You must be my imagination of Jem. I know him pretty well! But, dang, you look really beat up. Are you okay?\n"
    "\n"
-   "\cn[Jem!?]";
+   "\cn[Jem!? She does know me! I guess I'm her partner, then.]";
 "LITH_dlg_abyss_mc_where_o0" =
-   "\cq[She does know me! I guess I'm her partner, then.]\n"
-   "Ah, y-yes. I'm fine.";
+   "Ah, yes. I'm fine.";
 "LITH_dlg_abyss_mc_fine_0" =
    "You look pale as... well, the rest of this place... Are you sure you're okay, honey?\n"
    "\n"
    "\cn[Don't call me that! It'll surge my wetware!]";
 "LITH_dlg_abyss_mc_fine_o0" =
-   "Don't call me that! It'll surge my wetware!\n"
-   "\cq[oops.]";
+   "Don't call me that! It'll surge my wetware!";
 "LITH_dlg_abyss_mc_real_0" =
    "Real? Please, tell me I'm real. Wait, isn't this a dream? Yes! Lucid dream! I'm totally real, and definitely alive! Hey, Jem, what year is it?! Wait, I can't ask him when I'm asleep.\n"
    "\n"
-   "\cn[Jem!?]";
+   "\cn[Jem!? She does know me! Maybe she doesn't realize she knows me.]";
 "LITH_dlg_abyss_mc_real_o0" =
-   "\cq[She does know me! Maybe she doesn't realize she knows me.]\c-\n"
    "1649, New Era.";
 "LITH_dlg_abyss_mc_1649_0" =
-   "Oh! You're Jem from the past! How did you get here??? I didn't meet you back then! I'm supposed to be dreaming!!\n"
+   "Oh! You're Jem from the past! How did you get here? I didn't meet you back then! I'm supposed to be dreaming!\n"
    "\n"
-   "\cn[That's what I'm wondering...]";
+   "\cn[I'm wondering the same thing. Why am I here?]";
 "LITH_dlg_abyss_mc_1649_o0" =
-   "Well, we both appear to be sentient, and awake. Time... shenanigans?\n"
-   "\cq[Best theory I've got.]";
+   "We both appear sentient, and awake. Time... broke, perhaps?\n"
+   "\cn[Best theory I've got.]";
 "LITH_dlg_abyss_mc_time_0" =
-   "Sounds about right, I think. Maybe I won't even remember this... Maybe this never happened at all! Ah, well. Jemmy and Laney... Hey, do you remember what happened in 1649?\n"
+   "Sounds about right, I think. Maybe I won't even remember this... Maybe this never happened at all! Ah, well. Hey, do you remember what happened in 1649?\n"
    "\n"
    "\cn[What?]";
 "LITH_dlg_abyss_mc_time_o0" =
    "No, I'm still experiencing it.\n"
-   "\cq[She's definitely half-asleep.]";
+   "\cn[She's definitely half-asleep.]";
 "LITH_dlg_abyss_mc_experience_0" =
    "Well, we both went to Hell! It wasn't a great time. I remember that was the year you rebuilt Delsona. We both survived! I was a space marine, and you, well, escaped.\n"
    "\n"
    "\cn[Wait, that isn't consistent with my information, though. That operation was canceled a month ago. Blazkowicz, their point man, refused the mission.]";
 "LITH_dlg_abyss_mc_experience_o0" =
    "How did they cover it up a month in advance?\n"
-   "\cq[Something seems off here. The mission should've been public record.]";
+   "\cn[Something seems off here. The mission should've been public record.]";
 "LITH_dlg_abyss_mc_coverup_0" =
    "They didn't! What are you talking about? The only cover-up that happened was me being assigned \"missing in action\" after the fact!\n"
    "\n"
-   "\cn[Either she's not telling the truth, or there's something a bit more than shenanigans going on here.]";
+   "\cn[I doubt she's lying. I guess time really did break.]";
 "LITH_dlg_abyss_mc_coverup_o0" =
    "I don't know, guess it doesn't matter. I'll see you later, probably.\n"
-   "\cr[I wish I could remember this, but my wetware is too messed up...]";
+   "\cn[I wish I could remember this, but my wetware is too messed up...]";
 "LITH_dlg_abyss_mc_coverup_o1" =
-   "There's likely something weird going on with time. I think I should go.\n"
-   "\cr[Maybe remembering this would cause a time loop or something.]";
+   "Something weird is going on. I think I should go.\n"
+   "\cn[Maybe remembering this would cause a time loop.]";
 "LITH_dlg_abyss_mo_meet_0" =
    "Don't think I've seen you around. Say, do you come from the past? Am I in Heaven?\n"
    "\n"
    "\cn[I feel mildly odd about this doll.]";
 "LITH_dlg_abyss_mo_meet_o0" =
    "I don't think Heaven exists.\n"
-   "\cr[What's up with that?]";
+   "\cn[What's up with that?]";
 "LITH_dlg_abyss_mo_meet_o1" =
    "I'm not sure where I am in the first place, sorry.\n"
-   "\cq[Let alone what time...]";
+   "\cn[Let alone what time...]";
 "LITH_dlg_abyss_mo_meet_o2" =
    "I think I'm just going to leave.\n"
-   "\cr[I think that's enough.]";
+   "\cn[I think that's enough.]";
 "LITH_dlg_abyss_mo_past_0" =
    "Neither am I... All I know about my past was that I was a space marine. The rest seems foggy!";
 "LITH_dlg_abyss_mo_past_o0" =
    "Alright, sorry to bother you.\n"
-   "\cr[I think that's enough.]";
+   "\cn[I think that's enough.]";
 "LITH_dlg_ending_Credits" =
    "\cd>>>>> [[[[ Lithium ]]]]\n"
    "  Project Golan, Xevv 2\n"
