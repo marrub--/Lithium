@@ -11,6 +11,7 @@ addkeysection "$LITH_CTRL_ACTIONS" Lith_Actions
 
 addmenukey "$LITH_CTRL_OPENCBI" lith_k_opencbi
 addmenukey "$LITH_CTRL_QACT"    +lith_k_qact
+addmenukey "$LITH_CTRL_WACT"    +lith_k_wact
 addmenukey "$LITH_CTRL_LIGHT"   lith_k_light
 addmenukey "$LITH_CTRL_ZOOMIN"  "lith_k_zoom 30"
 addmenukey "$LITH_CTRL_ZOOMOUT" "lith_k_zoom -60"
@@ -30,7 +31,6 @@ addmenukey "$LITH_CTRL_TOGGRP4" "lith_k_toggrp 3"
 
 addkeysection "$LITH_CTRL_WEAPONS" Lith_Weapons
 
-addmenukey "$LITH_CTRL_WACT"           +lith_k_wact
 addmenukey "$LITH_INFO_SHORT_Blade"    "use Lith_Blade"
 addmenukey "$LITH_INFO_SHORT_Delear"   "use Lith_Delear"
 addmenukey "$LITH_INFO_SHORT_Feuer"    "use Lith_Feuer"

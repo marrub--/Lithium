@@ -204,6 +204,7 @@ presets {
    pre: Ophidian    type: arachnotron filter: "Ophidian";
    pre: HellKnight  type: hellknight  filter: "UndeadWarrior";
    pre: HellKnight  type: hellknight  filter: "SpectralWarrior";
+   pre: HellKnight  type: baron       filter: "Weredragon";
    pre: BaronOfHell type: cacodemon   filter: "IronLich";
    pre: Maulotaur   type: mastermind  filter: "Maulotaur";
    pre: FinalBoss   type: cyberdemon  filter: "DSparil";

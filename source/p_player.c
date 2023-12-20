@@ -32,6 +32,9 @@ static void P_initCbi(void);
 dynam_aut script void P_Player(void) {
    Dbg_Log(log_dev, _l(_f));
    pl.setActivator();
+   if(ACS_PlayerNumber() == -1) {
+      return;
+   }
    if(get_msk(ml.flag, _mflg_func) != _mfunc_normal) {
       ACS_SetPlayerProperty(true, true, PROP_TOTALLYFROZEN);
       return;

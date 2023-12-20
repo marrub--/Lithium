@@ -1,7 +1,7 @@
 /*-*-Agw-LithDlg-*-*/
 nimi test_jacques;
 ilo_kon(prog_dialogue 1 +) {
-   lipu(0) {
+   lipu(page_start) {
       name JACQUES;
       icon AOF;
       remote JACQUES;
