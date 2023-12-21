@@ -34,10 +34,29 @@ class Lith_DarkLordPlayer : Lith_Player {
    }
 
    override void tick() {
-      if(!isFrozen() && vel.z < 0 && vel.z > -128 &&
-         player.cmd.buttons & BT_CROUCH)
-      {
-         vel.z -= Lith_UTIL.pData(_pdt_upgrade, UPGR_HeavyArmor) ? 3 : 2;
+      if(!isFrozen()) {
+         if(vel.z < 0 && vel.z > -128 && player.cmd.buttons & BT_CROUCH) {
+            vel.z -= Lith_UTIL.pData(_pdt_upgrade, UPGR_HeavyArmor) ? 3 : 2;
+         }
+         if(Lith_UTIL.pData(_pdt_upgrade, UPGR_SMT)) {
+            int monstercount = 0;
+            Actor nearest = null;
+            double lastdist = double.infinity;
+            for(let it = BlockThingsIterator.create(self, 256); it.next();) {
+               if(it.thing.bIsMonster || it.thing.bMissile) {
+                  if(it.thing.bIsMonster && it.thing.health &&
+                     it.thing.health < it.thing.spawnHealth() / 10 &&
+                     (!nearest || lastdist > self.distance2d(it.thing)))
+                  {
+                     nearest = it.thing;
+                  }
+                  ++monstercount;
+               }
+            }
+            if(monstercount < 4 && nearest) {
+               console.printf("TRIGGER SMT MODE %p %s", nearest, nearest.getclassname());
+            }
+         }
       }
       super.tick();
    }
