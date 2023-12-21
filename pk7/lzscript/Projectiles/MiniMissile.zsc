@@ -22,7 +22,6 @@ default {
    Lith_Explosive.FxAmount 0.2;
    Projectile;
    +DONTHARMSPECIES
-   +ROCKETTRAIL
    +MTHRUSPECIES
    +EXPLODEONWATER
 }
