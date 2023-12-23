@@ -92,9 +92,9 @@ class Lith_Sophia3 : Lith_Sophia {
       RenderStyle "Translucent";
       Alpha 0.5;
       Scale 0.29;
-      DamageFunction (random[lith_dlweapon](10, 20));
+      DamageFunction (random[lith_dlweapon](30, 60));
       Speed 48;
-      ExplosionDamage 40;
+      ExplosionDamage 45;
       Lith_Explosive.FxAmount 0.5;
    }
 }
@@ -206,9 +206,9 @@ FireRH:
    }
    goto FireOffsetsRH;
 FireRH2:
-   SOPH A 1 {
+   SOPH A 2 {
       Lith_A_FireSophia();
-      Lith_A_DoubleOffset(_rhs, 48, 48, WOF_INTERPOLATE);
+      Lith_A_DoubleOffset(_rhs, 58, 58, WOF_INTERPOLATE);
    }
    #### # 1 Lith_A_DoubleOffset(_rhs, 36, 36, WOF_INTERPOLATE);
    #### # 1 Lith_A_DoubleOffset(_rhs, 24, 24, WOF_INTERPOLATE);

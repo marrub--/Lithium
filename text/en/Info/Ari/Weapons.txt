@@ -105,6 +105,11 @@ reality.
 Makes Sophia fire two smaller rockets in quick succession.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
+== \#UPGRADE_TITLE_Sophia_B | RktRktRktS
+@@ \#UPGRADE_EFFEC_Sophia_B
+Makes Sophia fire three even smaller rockets in even quicker succession.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Rems_A | REMS Bipod
 @@ \#UPGRADE_EFFEC_Rems_A
 Gives the Qasl REMS a bipod that completely mitigates recoil, charges

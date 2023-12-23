@@ -3001,6 +3001,10 @@
    "Rocket RocketS";
 "LITH_UPGRADE_EFFEC_Sophia_A" =
    "Makes Sophia fire two smaller rockets in quick succession.";
+"LITH_UPGRADE_TITLE_Sophia_B" =
+   "RktRktRktS";
+"LITH_UPGRADE_EFFEC_Sophia_B" =
+   "Makes Sophia fire three even smaller rockets in even quicker succession.";
 "LITH_UPGRADE_TITLE_Rems_A" =
    "REMS Bipod";
 "LITH_UPGRADE_EFFEC_Rems_A" =
