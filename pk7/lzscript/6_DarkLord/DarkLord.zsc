@@ -44,7 +44,7 @@ class Lith_DarkLordPlayer : Lith_Player {
             double lastdist = double.infinity;
             for(let it = BlockThingsIterator.create(self, 256); it.next();) {
                if(it.thing.bIsMonster || it.thing.bMissile) {
-                  if(it.thing.bIsMonster && it.thing.health &&
+                  if(it.thing.bIsMonster && it.thing.health > 0 &&
                      it.thing.health < it.thing.spawnHealth() / 10 &&
                      (!nearest || lastdist > self.distance2d(it.thing)))
                   {
