@@ -82,12 +82,12 @@ _uc_weap:
       4Bore_A:      {scr: 3444444}
       4Bore_B:      {scr: 1911111}
       Minigun_A:    {scr: 2932134}
-      Franca_A:     {scr: 3973793}
-      Franca_B:     {scr: 9999999}
-      Sophia_A:     {scr: 4123432}
-      Sophia_B:     {scr: 9999999}
-      FortuneGun_A: {scr: 9999999}
-      FortuneGun_B: {scr: 9999999}
+      Franca_A:     {scr: 3973793, grp: 1}
+      Franca_B:     {scr: 9999999, grp: 1}
+      Sophia_A:     {scr: 4123432, grp: 2}
+      Sophia_B:     {scr: 4234321, grp: 2}
+      FortuneGun_A: {scr: 9999999, grp: 3}
+      FortuneGun_B: {scr: 9999999, grp: 3}
       Rems_A:       {scr: 6321234}
       Rems_B:       {scr: 8984838}
 _uc_extr:
