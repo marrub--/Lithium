@@ -257,15 +257,21 @@ action(Weapon) void Lith_A_DoubleRaise() {
    A_OverlayFlags(_psp_double_rg, _psp_flags, true);
 }
 
-action(Weapon) void Lith_A_DoubleState(bool oscillate, statelabel lh, statelabel rh) {
+action(Weapon) state Lith_A_DoubleState(bool oscillate, statelabel lh, statelabel rh, statelabel returnlh = null, statelabel returnrh = null) {
    if(oscillate) {
       invoker.m_side = !invoker.m_side;
-      if(invoker.m_side) A_Overlay(_psp_double_lg, lh);
-      else               A_Overlay(_psp_double_rg, rh);
+      if(invoker.m_side) {
+         A_Overlay(_psp_double_lg, lh);
+         if(returnlh) return resolveState(returnlh);
+      } else {
+         A_Overlay(_psp_double_rg, rh);
+         if(returnrh) return resolveState(returnrh);
+      }
    } else {
       A_Overlay(_psp_double_lg, lh);
       A_Overlay(_psp_double_rg, rh);
    }
+   return null;
 }
 
 action(Weapon) void Lith_A_DoubleOffset(bool left, int x, int y, int flags = 0) {
