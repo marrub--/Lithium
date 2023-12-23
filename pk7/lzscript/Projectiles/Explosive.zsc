@@ -93,14 +93,16 @@ state lith_a_doExplosion() {
                       1.0, -1);
    }
 
-   a_spawnItemEx("Lith_ExplosionAfterSmoke",
-                 fRandom(-1,1) * emberRadius,
-                 fRandom(-1,1) * emberRadius,
-                 fRandom(-2,2) * emberRadius,
-
-                 fRandom(-0.5,0.5) * emberRadius,
-                 fRandom(-0.5,0.5) * emberRadius,
-                 fRandom(-0.2,0.2) * emberRadius);
+   if(frandom[lith_explosionsmoke](0, 1.0) < m_fxAmount) {
+      let [_, smoke] = a_spawnItemEx("Lith_ExplosionAfterSmoke",
+                                     fRandom(-1,1) * emberRadius,
+                                     fRandom(-1,1) * emberRadius,
+                                     fRandom(-2,2) * emberRadius,
+                                     fRandom(-0.5,0.5) * emberRadius,
+                                     fRandom(-0.5,0.5) * emberRadius,
+                                     fRandom(-0.2,0.2) * emberRadius);
+      smoke.scale *= m_fxAmount;
+   }
 
    bNoGravity = true;
    return lith_a_jumpExplosion();
