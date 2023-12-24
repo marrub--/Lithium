@@ -23,7 +23,7 @@ static ui void Project(Actor mo, double x_, double y_, double z_, int px, int py
 }
 
 static void TraceFrom(Actor mo, double yaw, double pitch, double dist, double offsetz, bool floor, int px, int py, int pz) {
-   vector3 v = Lith_UTIL.TraceFrom(mo, yaw * 360, pitch * 360, dist, offsetz, floor).hitPos;
+   vector3 v = Lith_URANUS.instance().traceFromActor(mo, yaw * 360, pitch * 360, dist, offsetz, floor).hitPos;
    if(px) ACS_ExecuteWithResult(lsc_setptrk32, px, int(v.x * FIX));
    if(py) ACS_ExecuteWithResult(lsc_setptrk32, py, int(v.y * FIX));
    if(pz) ACS_ExecuteWithResult(lsc_setptrk32, pz, int(v.z * FIX));

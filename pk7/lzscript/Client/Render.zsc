@@ -224,15 +224,18 @@ clearScope int, int ammoAmt(Actor mo, class<Lith_Ammo> ty) const {
    return amt, clr;
 }
 
-clearScope TraceResults traceFromPos(Sector sec, vector3 pos, double yaw, double pitch, double dist, Actor ignore, bool floor, ETraceFlags flags) {
+const LINEFLAGS = Line.ML_BLOCKEVERYTHING | Line.ML_BLOCKHITSCAN | Line.ML_BLOCKING | Line.ML_BLOCKPROJECTILE | Line.ML_BLOCK_PLAYERS;
+
+clearScope TraceResults traceFromPos(Sector sec, vector3 pos, double yaw, double pitch, double dist, Actor ignore = null, bool floor = false, ETraceFlags flags = 0, int lnflags = LINEFLAGS) {
    let dir = Lith_UTIL.anglesToVec((yaw, pitch), 1);
    m_tracer.m_ignore = ignore;
+   m_tracer.m_lnflags = lnflags;
    m_tracer.trace(pos, sec, dir, dist, flags);
    return m_tracer.results;
 }
 
-clearScope TraceResults traceFromActor(Actor mo, double yaw, double pitch, double dist, double offsetZ, bool floor, ETraceFlags flags) {
-   return traceFromPos(mo.curSector, mo.pos.plusZ(offsetZ), yaw, pitch, dist, mo, floor, flags);
+clearScope TraceResults traceFromActor(Actor mo, double yaw, double pitch, double dist, double offsetZ, bool floor = false, ETraceFlags flags = 0, int lnflags = LINEFLAGS) {
+   return traceFromPos(mo.curSector, mo.pos.plusZ(offsetZ), yaw, pitch, dist, mo, floor, flags, lnflags);
 }
 
 /* EOF */

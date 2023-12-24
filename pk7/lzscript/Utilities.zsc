@@ -77,14 +77,6 @@ struct Lith_UTIL {
       return int(n * 1000) % 1000 < 500 ? int(n) : int(n+0.5);
    }
 
-   static TraceResults traceFrom(Actor mo, double yaw, double pitch, double dist, double offsetz, bool floor = false, ETraceFlags flags = 0) {
-      return Lith_URANUS.instance().traceFromActor(mo, yaw, pitch, dist, offsetZ, floor, flags);
-   }
-
-   static TraceResults traceFromPos(Sector sec, vector3 pos, double yaw, double pitch, double dist, Actor ignore = null, bool floor = false, ETraceFlags flags = 0) {
-      return Lith_URANUS.instance().traceFromPos(sec, pos, yaw, pitch, dist, ignore, floor, flags);
-   }
-
    static play int exec(Actor mo, int scr, int arg0 = 0, int arg1 = 0, int arg2 = 0, int arg3 = 0) {
       return Level.ExecuteSpecial(84, mo, null, false, scr, arg0, arg1, arg2, arg3);
    }
@@ -168,6 +160,7 @@ struct Lith_UTIL {
 
 class Lith_LineTracer : LineTracer {
    Actor m_ignore;
+   int m_lnflags;
    override ETraceStatus traceCallback() {
       let mo = results.hitActor;
       let ln = results.hitLine;
@@ -177,16 +170,9 @@ class Lith_LineTracer : LineTracer {
          tomare = mo != m_ignore && mo.bShootable && mo.bSolid;
          break;
       case TRACE_HITWALL:
-         tomare =
-            ln.flags & (Line.ML_BLOCKEVERYTHING |
-                        Line.ML_BLOCKHITSCAN |
-                        Line.ML_BLOCKING |
-                        Line.ML_BLOCKPROJECTILE |
-                        Line.ML_BLOCK_PLAYERS) ||
-            results.tier != TIER_MIDDLE;
+         tomare = ln.flags & m_lnflags || results.tier != TIER_MIDDLE;
          break;
       default:
-         /* get hit, bitch */
          tomare = true;
          break;
       }

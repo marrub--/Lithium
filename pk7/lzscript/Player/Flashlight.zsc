@@ -143,9 +143,10 @@ void tickFlashlightIntruders(int r, int g, int b, int rd, double intn) {
       break;
    case _light_on:
       if(Lith_UTIL.pData(_pdt_lightwason) == _light_off) {
-         let hit = Lith_UTIL.traceFromPos(curSector, vp, angle, pitch,
-                                          LSPK_THROW_DISTANCE_MAX,
-                                          ignore: self);
+         let hit = Lith_URANUS.instance().traceFromPos(
+            curSector, vp, angle, pitch,
+            LSPK_THROW_DISTANCE_MAX,
+            ignore: self);
          let dist = hit.distance;
          if(hit.hitType != TRACE_HitNone) {
             dist = dist * LSPK_THROW_DISTANCE_FAC / LSPK_THROW_DISTANCE_DIV;

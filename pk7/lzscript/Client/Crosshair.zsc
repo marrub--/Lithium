@@ -53,32 +53,20 @@ clearScope textureId xhairW() const {
    return getTex(XW_GFX[m_xhairStyle]);
 }
 
-ui void drawCrosshair(RenderEvent evt) {
-   let pl = evt.camera;
-   vector3 viewPos = (evt.viewPos.xy, evt.viewPos.z - pl.player.viewHeight + lith_hermes.getAttackHeight(pl));
-   double yaw   = evt.viewAngle + Lith_UTIL.pData(_pdt_addy)/FIX;
-   double pitch = evt.viewPitch + Lith_UTIL.pData(_pdt_addp)/FIX;
-   let loc = Lith_UTIL.traceFromPos(pl.curSector, viewPos, yaw, pitch, 2048.0, ignore: pl).hitPos;
-   let [xh, seen] = projectF(loc);
-   xh /= m_xhairScale;
-   let hudSize = (320, 240) / m_xhairScale;
-   if(!seen) {
-      return;
-   }
-   /* draw a tracer for the targeting system */
-   let tr = pl.tracer;
+ui void drawCrosshairTracer(Actor tr, vector2 xh, vector2 hudSize) {
    if(tr && tr.health > 0 && Lith_UTIL.pData(_pdt_weapon) == weapon_m_rocket) {
-      int tr1x, tr1y, tr2x, tr2y;
-      [tr1x, tr1y, seen] = project((tr.pos.xy, tr.pos.z + tr.height / 2.0));
+      let [tr1x, tr1y, seen] = project((tr.pos.xy, tr.pos.z + tr.height / 2.0));
       if(seen) {
          drawLn(tr1x / m_xhairScale, tr1y / m_xhairScale, xh.x, xh.y, 0xFFFF0000, hudSize);
       }
    }
-   /* draw the crosshair */
+}
+
+ui void drawCrosshairMain(vector2 xh, vector2 hudSize, bool juice = true, color cr = color(0, 0, 0, 0)) {
    if(m_xhairEnable && m_xhairA) {
       textureId xhb = xhairB();
       textureId xhw = xhairW();
-      color     c   = xhairColor();
+      color     c   = cr.a ? cr : xhairColor();
       let [bsx, bsy] = TexMan.getSize(xhb);
       let [wsx, wsy] = TexMan.getSize(xhw);
       double xhx = xh.x - bsx/2.0;
@@ -95,10 +83,10 @@ ui void drawCrosshair(RenderEvent evt) {
                          DTA_VirtualHeightF,hudSize.y,
                          DTA_TopOffset,0, DTA_LeftOffset,0,
                          DTA_Alpha,m_xhairA/255.0,DTA_FillColor,c);
-      if(m_xhairEnableJuicer) {
+      if(juice && m_xhairEnableJuicer) {
          textureId xhl = getTex(":XHairs:L");
          textureId xhr = getTex(":XHairs:R");
-         let [esx, esy] = TexMan.GetSize(xhl);
+         let [esx, esy] = TexMan.getSize(xhl);
          xhx = xh.x - esx/2.0;
          xhy = xh.y - esy/2.0;
          double xp = Lith_UTIL.pData(_pdt_recoilp)/FIX * 500.0 + 10.0;
@@ -115,6 +103,20 @@ ui void drawCrosshair(RenderEvent evt) {
                             DTA_Alpha,m_xhairA/255.0,DTA_FillColor,c);
       }
    }
+}
+
+const XH_RANGE = 2048.0;
+ui void drawCrosshair(RenderEvent evt) {
+   let pl = evt.camera;
+   vector3 viewPos = (evt.viewPos.xy, evt.viewPos.z - pl.player.viewHeight + lith_hermes.getAttackHeight(pl));
+   double yaw   = evt.viewAngle + Lith_UTIL.pData(_pdt_addy)/FIX;
+   double pitch = evt.viewPitch + Lith_UTIL.pData(_pdt_addp)/FIX;
+   let hudSize = (320, 240) / m_xhairScale;
+   let trace_non_pass = traceFromPos(pl.curSector, viewPos, yaw, pitch, XH_RANGE, ignore: pl, lnflags: LINEFLAGS & ~(Line.ML_BLOCK_PLAYERS));
+   let [xh, seen] = projectF(trace_non_pass.hitPos);
+   xh /= m_xhairScale;
+   drawCrosshairTracer(pl.tracer, xh, hudSize);
+   drawCrosshairMain(xh, hudSize);
 }
 
 /* EOF */
