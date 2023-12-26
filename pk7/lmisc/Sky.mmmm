@@ -1,23 +1,23 @@
 /*-*-agw-lithdlg-*-*/
 nimi sky;
 
-toki 0 {
-   lipu 0 {
+ilo_kon(prog_dialogue) {
+   lipu(0) {
       name   NOTE;
       remote DATA;
       icon   Data;
       text   begin;
       option begin_esc    brk;
-      option begin_flow   lipu 1;
-      option begin_repeat lipu 2;
+      option begin_flow   jump_page 1;
+      option begin_repeat jump_page 2;
    }
-   lipu 1 {
+   lipu(1) {
       text flow;
-      option flow_esc lipu 0;
+      option flow_esc jump_page 0;
    }
-   lipu 2 {
+   lipu(2) {
       text repeat;
-      option repeat_esc lipu 0;
+      option repeat_esc jump_page 0;
       option repeat_goto0 {text repeat_0; wait;}
       option repeat_goto1 {text repeat_1; wait;}
    }
