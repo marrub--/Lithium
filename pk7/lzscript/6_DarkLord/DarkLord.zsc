@@ -39,29 +39,14 @@ class Lith_DarkLordPlayer : Lith_Player {
             vel.z -= Lith_UTIL.pData(_pdt_upgrade, UPGR_HeavyArmor) ? 3 : 2;
          }
          if(Lith_UTIL.pData(_pdt_upgrade, UPGR_SMT)) {
-            int monstercount = 0;
-            Actor nearest = null;
-            double lastdist = double.infinity;
-            for(let it = BlockThingsIterator.create(self, 256); it.next();) {
-               if(it.thing.bIsMonster || it.thing.bMissile) {
-                  if(it.thing.bIsMonster && it.thing.health > 0 &&
-                     it.thing.health < it.thing.spawnHealth() / 10 &&
-                     (!nearest || lastdist > self.distance2d(it.thing)))
-                  {
-                     nearest = it.thing;
-                  }
-                  ++monstercount;
-               }
-            }
-            if(monstercount < 4 && nearest) {
-               console.printf("TRIGGER SMT MODE %p %s", nearest, nearest.getclassname());
-            }
+            tickNegotiation();
          }
       }
       super.tick();
    }
 }
 
+#include "lzscript/6_DarkLord/Negotiation.zsc"
 #include "lzscript/6_DarkLord/0_Weapon.zsc"
 #include "lzscript/6_DarkLord/1_Kampilan.zsc"
 #include "lzscript/6_DarkLord/1_Khanda.zsc"

@@ -129,6 +129,7 @@ end
       SrcsEnt.from("u_rifle_a.c"),
       SrcsEnt.from("u_rpg_b.c"),
       SrcsEnt.from("u_seven7s.c"),
+      SrcsEnt.from("u_smt.c"),
       SrcsEnt.from("u_stealthsys.c"),
       SrcsEnt.from("u_subweapons.c"),
       SrcsEnt.from("u_unceunce.c"),

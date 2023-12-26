@@ -32,3 +32,15 @@ jo lipu_pini     = page_finished;
 jo lipu_pakala   = page_failure;
 jo lipu_pini_ala = page_unfinished;
 jo lipu_open     = page_start;
+
+/* negotiation */
+ilo_kon(ikon_awen) {
+   jo {
+      negotiation_boss,
+      negotiation_kid,
+   }
+   lipu(negotiation_boss) {
+   }
+   lipu(negotiation_kid) {
+   }
+}
