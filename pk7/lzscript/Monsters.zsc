@@ -49,20 +49,11 @@ class Lith_UniqueID : Inventory {
       Inventory.MaxAmount int.max;
       +Inventory.Undroppable
    }
-
    override void tick() {
    }
 }
 
-class Lith_MonsterID : Inventory {
-   default {
-      Inventory.MaxAmount int.max;
-      +Inventory.Undroppable
-   }
-
-   override void tick() {
-   }
-}
+class Lith_MonsterID : Lith_UniqueID {}
 
 class Lith_MResist : PowerProtection {default {Powerup.Duration 0x7FFFFFFD;}}
 class Lith_M_Bullets1 :Lith_MResist{default{DamageFactor "Bullet",   0.8;}}
