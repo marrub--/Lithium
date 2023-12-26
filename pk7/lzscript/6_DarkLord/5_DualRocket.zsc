@@ -104,7 +104,7 @@ class Lith_Sophia3 : Lith_Sophia {
    SpawnLoop:
       #### # 1 bright {
          Lith_A_SpawnRocketTrail();
-         A_SeekerMissile(5, 10, SMF_LOOK);
+         A_SeekerMissile(5, 10, SMF_LOOK|SMF_PRECISE);
       }
       loop;
    }
