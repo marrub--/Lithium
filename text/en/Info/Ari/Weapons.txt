@@ -102,12 +102,12 @@ reality.
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Sophia_A | Rocket RocketS
 @@ \#UPGRADE_EFFEC_Sophia_A
-Makes Sophia fire two smaller rockets in quick succession.
+Makes Sophia fire two smaller, more accurate rockets in quick succession.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Sophia_B | RktRktRktS
 @@ \#UPGRADE_EFFEC_Sophia_B
-Makes Sophia fire three even smaller rockets in even quicker succession.
+Makes Sophia fire tiny rockets with heavy homing constantly.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Rems_A | REMS Bipod

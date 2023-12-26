@@ -64,7 +64,7 @@ class Lith_Sophia2 : Lith_Sophia {
       RenderStyle "Translucent";
       Alpha 0.7;
       Scale 0.49;
-      DamageFunction (random[lith_dlweapon](50, 90));
+      DamageFunction (90);
       Speed 32;
       ExplosionDamage 70;
       Lith_Explosive.FxAmount 0.7;
@@ -81,7 +81,7 @@ class Lith_Sophia2 : Lith_Sophia {
                tracer = null;
             }
          }
-         A_SeekerMissile(0, 2, SMF_LOOK);
+         A_SeekerMissile(1, 3, SMF_LOOK);
          if(dont_seek_me) {
             dont_seek_me.bCantSeek = orig_flag;
          }
@@ -99,6 +99,14 @@ class Lith_Sophia3 : Lith_Sophia {
       Speed 48;
       ExplosionDamage 45;
       Lith_Explosive.FxAmount 0.5;
+   }
+   states {
+   SpawnLoop:
+      #### # 1 bright {
+         Lith_A_SpawnRocketTrail();
+         A_SeekerMissile(5, 10, SMF_LOOK);
+      }
+      loop;
    }
 }
 
