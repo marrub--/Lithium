@@ -9,7 +9,8 @@ jo mut_pini = var_end;
 
 /* program numbers */
 jo prog_max      = 64;
-jo prog_dialogue = prog_max      16 -;
+jo prog_reserved = prog_max      16 -;
+jo prog_dialogue = prog_reserved 16 -;
 jo prog_terminal = prog_dialogue 16 -;
 
 /* nanpa ilo kon */

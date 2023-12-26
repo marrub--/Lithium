@@ -234,7 +234,8 @@ enum {
 enum {
    /* program numbers */
    PNUM_MAX = 64,
-   PNUM_DIALOGUE = PNUM_MAX      - 16,
+   PNUM_RESERVED = PNUM_MAX      - 16,
+   PNUM_DIALOGUE = PNUM_RESERVED - 16,
    PNUM_TERMINAL = PNUM_DIALOGUE - 16,
 };
 
