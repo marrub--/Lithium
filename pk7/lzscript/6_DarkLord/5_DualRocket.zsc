@@ -51,7 +51,10 @@ class Lith_Sophia : Lith_Rocket {
    }
    states {
    SpawnLoop:
-      #### # 1 bright Lith_A_SpawnRocketTrail;
+      #### # 1 bright {
+         Lith_A_SpawnRocketTrail();
+         A_SeekerMissile(0, 2, SMF_LOOK);
+      }
       loop;
    }
 }
