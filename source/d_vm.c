@@ -602,7 +602,7 @@ alloc_aut(0) script_sync static void ActWAIT(void) {
 /* Main dialogue VM. */
 dynam_aut script void Dlg_Run(void) {
    Dbg_Log(log_dlg,
-      _l("--- begin dialogue "), ACS_PrintHex(pl.dlg.num), _l(" ---"));
+      _l("--- begin dialogue $"), ACS_PrintHex(pl.dlg.num), _l(" ---"));
    if(pl.dead) {
       Dbg_Log(log_dlg, _l("exited early, player is dead"));
       return;

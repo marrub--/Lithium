@@ -2,11 +2,13 @@
 nimi ending;
 
 ilo_kon(0) {
-   jo music_subr = 101;
-   jo common_end = 100;
-   jo ending_normal   = page_start;
-   jo ending_timeout  = ending_normal ++;
-   jo ending_division = ending_timeout++;
+   jo {
+      common_end = 100,
+      music_subr,
+      ending_normal = page_start,
+      ending_timeout,
+      ending_division,
+   }
    lipu(music_subr) {
       seme poki_jan pM {
          music "lmusic/braun.opus";

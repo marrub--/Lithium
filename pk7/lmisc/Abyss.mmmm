@@ -1,14 +1,16 @@
 /*-*-Agw-LithDlg-*-*/
 nimi abyss;
 
-jo prog_tutorial = prog_dialogue;
-jo prog_m = prog_tutorial++;
-jo prog_c = prog_m++;
-jo prog_i = prog_c++;
-jo prog_w = prog_i++;
-jo prog_a = prog_w++;
-jo prog_d = prog_a++;
-jo prog_t = prog_d++;
+jo {
+   prog_tutorial = prog_dialogue,
+   prog_m,
+   prog_c,
+   prog_i,
+   prog_w,
+   prog_a,
+   prog_d,
+   prog_t,
+}
 
 /* Tutorial */
 ilo_kon(prog_tutorial) {
@@ -28,25 +30,27 @@ ilo_kon(prog_tutorial) {
 
 /* Marine */
 ilo_kon(prog_m) {
-   jo lane_met   = var_beg;
-   jo lane_rpg   = lane_met++;
-   jo lane_where = lane_rpg++;
-   jo lane_scars = lane_where++;
-   jo m_meet    = 100;
-   jo m_nothing = 101;
-   jo m_seen    = 102;
-   jo mc_meet       = 200;
-   jo mc_reminded   = 201;
-   jo mc_real       = 202;
-   jo mc_others     = 203;
-   jo mc_where      = 204;
-   jo mc_fine       = 205;
-   jo mc_1649       = 206;
-   jo mc_time       = 207;
-   jo mc_experience = 208;
-   jo mc_coverup    = 209;
-   jo mo_meet = 1;
-   jo mo_past = 2;
+   jo {
+      lane_met = var_beg,
+      lane_rpg,
+      lane_where,
+      lane_scars,
+      m_meet = 100,
+      m_nothing,
+      m_seen,
+      mc_meet,
+      mc_reminded,
+      mc_real,
+      mc_others,
+      mc_where,
+      mc_fine,
+      mc_1649,
+      mc_time,
+      mc_experience,
+      mc_coverup,
+      mo_meet,
+      mo_past,
+   }
    lipu(page_start) {
       name   doll;
       remote lane;

@@ -3,7 +3,7 @@
 jo var_beg = $0200;
 jo var_end = $7FFF;
 
-/* ma li sona ko */
+/* ma pi sona ko */
 jo mut_open = var_beg;
 jo mut_pini = var_end;
 
@@ -12,10 +12,11 @@ jo prog_max      = 64;
 jo prog_dialogue = prog_max      16 -;
 jo prog_terminal = prog_dialogue 16 -;
 
-/* nanpa li ilo kon */
-jo niko_sewi = prog_max;
-jo niko_toki = prog_dialogue;
-jo niko_ilo  = prog_terminal;
+/* nanpa ilo kon */
+jo ikon_sewi = prog_max;
+jo ikon_awen = prog_reserved;
+jo ikon_toki = prog_dialogue;
+jo ikon_ilo  = prog_terminal;
 
 /* page numbers */
 jo page_max        = 256;
@@ -24,7 +25,7 @@ jo page_finished   = page_unfinished--;
 jo page_failure    = page_finished  --;
 jo page_start      = 0;
 
-/* nanpa li lipu */
+/* nanpa lipu */
 jo lipu_sewi     = page_max;
 jo lipu_pini     = page_finished;
 jo lipu_pakala   = page_failure;

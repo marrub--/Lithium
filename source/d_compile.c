@@ -67,29 +67,48 @@ static void Dlg_GetItem_Page(struct compiler *d, mem_size_t num) {
 }
 
 static void Dlg_GetItem_Var(struct compiler *d) {
-   struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, 0);
-   unwrap(&d->res);
-   struct compiler_var *var = Dlg_GetVar(d, tok->textV);
-   char *id;
-   if(!var) {
-      id = Malloc(tok->textC + 1, _tag_dlgc);
-      faststrcpy(id, tok->textV);
-   }
-   tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_eq, 0);
-   unwrap(&d->res);
-   i32 val = Dlg_Evaluate(d, tok_semico);
-   unwrap(&d->res);
-   if(!var) {
-      noinit static struct compiler_var vars[64];
-      static i32 varn;
-      var = &vars[varn++];
-      var->name  = id;
-      var->value = val;
-      Dlg_SetVar(d, var);
-   } else {
-      var->value = val;
-   }
-   Dbg_Log(log_gsinfo, _l("set variable "), _p(var->name), _l(" to "), _p(var->value));
+   i32 last_val = -1;
+   bool loop = tb_drop(&d->tb, tok_braceo);
+   do {
+      struct token *tok =
+         tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, 0);
+      unwrap(&d->res);
+      struct compiler_var *var = Dlg_GetVar(d, tok->textV);
+      char *id;
+      if(!var) {
+         id = Malloc(tok->textC + 1, _tag_dlgc);
+         faststrcpy(id, tok->textV);
+      }
+      i32 val;
+      if(loop) {
+         if(tb_drop(&d->tb, tok_eq)) {
+            val = Dlg_Evaluate(d, tok_comma);
+            unwrap(&d->res);
+         } else {
+            val = last_val + 1;
+            tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_comma, 0);
+            unwrap(&d->res);
+         }
+      } else {
+         tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_eq, 0);
+         unwrap(&d->res);
+         val = Dlg_Evaluate(d, tok_semico);
+         unwrap(&d->res);
+      }
+      last_val = val;
+      if(!var) {
+         noinit static struct compiler_var vars[256];
+         static i32 varn;
+         var = &vars[varn++];
+         var->name  = id;
+         var->value = val;
+         Dlg_SetVar(d, var);
+      } else {
+         var->value = val;
+      }
+      Dbg_Log(log_gsinfo, _l("set variable "), _p(var->name),
+              _l(" to "), _p(var->value));
+   } while(loop && !tb_drop(&d->tb, tok_bracec));
 }
 
 static bool Dlg_GetItem(struct compiler *d) {
