@@ -38,9 +38,36 @@ ilo_kon(ikon_awen) {
    jo {
       negotiation_boss,
       negotiation_kid,
+      negotiation_blackguard,
+      negotiation_prince,
+      negotiation_dude,
+      negotiation_setup,
+   }
+   lipu(negotiation_setup) {
+      name   negotiation;
+      remote enemy;
+      icon   demon;
+      option negotiation_esc brk;
+      rts;
    }
    lipu(negotiation_boss) {
+      jsr page_address(negotiation_setup);
+      text negotiation_test;
    }
    lipu(negotiation_kid) {
+      jsr page_address(negotiation_setup);
+      text negotiation_test;
+   }
+   lipu(negotiation_blackguard) {
+      jsr page_address(negotiation_setup);
+      text negotiation_test;
+   }
+   lipu(negotiation_prince) {
+      jsr page_address(negotiation_setup);
+      text negotiation_test;
+   }
+   lipu(negotiation_dude) {
+      jsr page_address(negotiation_setup);
+      text negotiation_test;
    }
 }

@@ -1,0 +1,8 @@
+== \#REMOTE_ENEMY | demon@hell
+== \#PNAME_NEGOTIATION | NEGOTIATION MODE
+
+@@ \#dlg_negotiation_esc
+\cn[Go back to battle.]
+
+@@ \#dlg_negotiation_test
+test

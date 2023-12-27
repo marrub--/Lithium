@@ -46,4 +46,7 @@
 
 !!include Dialogue/Abyss.txt
 
+## negotiation
+!!include Dialogue/Negotiation.txt
+
 ## EOF

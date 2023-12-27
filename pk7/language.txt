@@ -878,6 +878,14 @@
 "LITH_dlg_abyss_mo_past_o0" =
    "Alright, sorry to bother you.\n"
    "\cn[I think that's enough.]";
+"LITH_REMOTE_ENEMY" =
+   "demon@hell";
+"LITH_PNAME_NEGOTIATION" =
+   "NEGOTIATION MODE";
+"LITH_dlg_negotiation_esc" =
+   "\cn[Go back to battle.]";
+"LITH_dlg_negotiation_test" =
+   "test";
 "LITH_dlg_ending_Credits" =
    "\cd>>>>> [[[[ Lithium ]]]]\n"
    "  Project Golan, Xevv 2\n"
