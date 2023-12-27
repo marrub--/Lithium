@@ -2915,6 +2915,10 @@
    "007 Mode";
 "LITH_UPGRADE_EFFEC_Goldeneye" =
    "Get the true Goldeneye 007™ experience!";
+"LITH_UPGRADE_TITLE_SMT" =
+   "Devil Negotiator";
+"LITH_UPGRADE_EFFEC_SMT" =
+   "Lets you talk with weakened enemies when there are few dangers near-by. Negotiate with them, and thou shalt awaken to the ultimate secret of the demons, granting thee infinite power...";
 "LITH_UPGRADE_TITLE_UNCEUNCE" =
    "UNCE UNCE";
 "LITH_UPGRADE_EFFEC_UNCEUNCE" =
