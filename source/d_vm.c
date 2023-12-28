@@ -336,8 +336,8 @@ static void DialogueGUI(void) {
    str text = GetText();
    char icon[32] = ":Dialogue:Icon"; faststrcat(icon, MemSC_G(MemB2_G(VAR_ICONL)));
    G_Begin(&gst, 320, 240);
-   PrintSprite(sp_Dialogue_Back,  0,1, 0,1, _u_alpha, 0.9);
-   PrintSprite(fast_strdup(icon), 0,1, 0,1, _u_alpha, 0.9);
+   PrintSprite(sp_Dialogue_Back,  0,1,   0,1,  _u_alpha, 0.9);
+   PrintSprite(fast_strdup(icon), 228,1, 11,1, _u_alpha, 0.9);
    PrintText_str(snam, sf_bigupper, CR_GREEN, 30,1, 35,1);
    G_Clip(&gst, left, top, right-left, 150);
    ACS_BeginPrint();
