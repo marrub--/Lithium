@@ -208,16 +208,17 @@ void Dlg_MInit(void) {
    /* clear VM data */
    Xalloc(_tag_dlgv);
    fastmemset(dlgdefs, 0, sizeof dlgdefs);
-   /* if scripts are used, start compiling */
-   if(!get_bit(ml.mi->use, _mi_key_script)) {
-      return;
-   }
-   static char tmp[64];
+   /* always compile common file */
    varmap_t vars;
    varmap_t_ctor(&vars, 16, 16);
    Dlg_Compile("lmisc/Common.mmmm", &vars);
-   faststrcpy_str(tmp, ml.mi->keys[_mi_key_script].s);
-   Dlg_Compile(tmp, &vars);
+   /* if scripts are used, compile them */
+   if(!get_bit(ml.mi->use, _mi_key_script)) {
+      static char tmp[64];
+      faststrcpy_str(tmp, ml.mi->keys[_mi_key_script].s);
+      Dlg_Compile(tmp, &vars);
+   }
+   /* clean up compiler data */
    varmap_t_dtor(&vars);
    Xalloc(_tag_dlgc);
 }
