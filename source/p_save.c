@@ -184,19 +184,23 @@ script void load_note(astr *inp) {
    }
 }
 
+script void load_bipu_page(astr *inp) {
+   noinit static char name[32];
+   str_inp(inp, name, sizeof name, ' ');
+   unwrap_delim(inp, ' ', _datajmp_error_skip);
+   i32 flg = num_inp(inp);
+   unwrap_end(inp, ' ', _datajmp_error_skip);
+   struct page *page = P_BIP_NameToPage(name);
+   if(page) {
+      P_BIP_Unlock(page, true);
+      if(get_bit(flg, _bipu_new)) set_bit(page->flags, _page_new);
+      else                        dis_bit(page->flags, _page_new);
+   }
+}
+
 script void load_bipu(astr *inp) {
    while_not_eoc(inp) {
-      noinit static char name[32];
-      str_inp(inp, name, sizeof name, ' ');
-      unwrap_delim(inp, ' ', _datajmp_error_skip);
-      i32 flg = num_inp(inp);
-      unwrap_end(inp, ' ', _datajmp_error_skip);
-      struct page *page = P_BIP_NameToPage(name);
-      if(page) {
-         P_BIP_Unlock(page, true);
-         if(get_bit(flg, _bipu_new)) set_bit(page->flags, _page_new);
-         else                        dis_bit(page->flags, _page_new);
-      }
+      load_bipu_page(inp);
    }
 }
 
