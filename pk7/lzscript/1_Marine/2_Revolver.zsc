@@ -37,7 +37,7 @@ action(Weapon) void Lith_A_FireRevolver()
    lith_gunFlash();
    soundAlert(invoker.owner);
    Lith_FireBullets(0, 0, -1, 45);
-   Lith_A_GunSmokeSmall();
+   Lith_A_GunSmokeAndSparksSmall();
    Lith_A_RecoilUp(0.75);
    A_StartSound("weapons/revolver/fire", lch_weapon);
    A_FireProjectile("Lith_LightProjectileRedShort", 0);

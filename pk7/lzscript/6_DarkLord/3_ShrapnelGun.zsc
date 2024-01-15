@@ -120,7 +120,7 @@ default {
 int m_chargeLevel;
 
 action(Weapon) void Lith_A_FireShrapnel() {
-   Lith_A_GunSmokeSmall(1, 6);
+   Lith_A_GunSmokeAndSparksSmall(1, 6);
    A_StartSound("weapons/shrapnel/fire", lch_weapon);
    SoundAlert(Invoker.Owner);
    lith_gunFlash();

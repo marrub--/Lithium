@@ -280,13 +280,13 @@ ChillCheck:
       A_StartSound("weapons/ionrifle/heat", lch_reload);
       Lith_A_AdsOut();
    }
-   IONG A 2 offset(-4, 34) A_FireProjectile("Lith_GunSmokeEmitter", 0, 0, 2, 5);
-   IONG A 2 offset(-9, 37) A_FireProjectile("Lith_GunSmokeEmitter", 0, 0, 2, 5);
-   IONG A 3 offset(-11, 39) A_FireProjectile("Lith_GunSmokeEmitter", 0, 0, 2, 5);
-   IONG A 4 offset(-12, 40) A_FireProjectile("Lith_GunSmokeEmitter", 0, 0, 2, 5);
-   IONG A 5 offset(-13, 41) A_FireProjectile("Lith_GunSmokeEmitter", 0, 0, 2, 5);
+   IONG A 2 offset(-4,  34) Lith_GunSmoke("Lith_GunSmokeEmitter", 2, 5);
+   IONG A 2 offset(-9,  37) Lith_GunSmoke("Lith_GunSmokeEmitter", 2, 5);
+   IONG A 3 offset(-11, 39) Lith_GunSmoke("Lith_GunSmokeEmitter", 2, 5);
+   IONG A 4 offset(-12, 40) Lith_GunSmoke("Lith_GunSmokeEmitter", 2, 5);
+   IONG A 5 offset(-13, 41) Lith_GunSmoke("Lith_GunSmokeEmitter", 2, 5);
 ChillOut2:
-   IONG A 0 A_FireProjectile("Lith_GunSmokeEmitter", 0, 0, 2, 5);
+   IONG A 0 Lith_GunSmoke("Lith_GunSmokeEmitter", 2, 5);
    IONG A 2 A_JumpIf((invoker.m_Charge -= 0.06) < 1, "ChilledOut");
    loop;
 ChilledOut:

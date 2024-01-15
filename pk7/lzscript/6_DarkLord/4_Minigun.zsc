@@ -124,7 +124,7 @@ action(Weapon) void Lith_A_MinigunFire() {
    lith_gunFlash();
    soundAlert(invoker.owner);
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
-   Lith_A_GunSmokeSmall(1.9);
+   Lith_A_GunSmokeAndSparksSmall(1.9);
    int firemax = fast ? 4           : 2;
    int casemax = fast ? random(0,1) : 2;
    for(int i = 0; i < firemax; ++i) {

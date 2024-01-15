@@ -123,7 +123,7 @@ default {
 }
 
 action(Weapon) Actor Lith_A_FireRocket(class<Actor> cl, double side, double xofs = 0.0, double height = 0.0, double angle = 0.0, double recoil = 0.5) {
-   Lith_A_GunSmokeSmall(side * 0.6, 4);
+   Lith_A_GunSmokeAndSparksSmall(side * 2.5);
    lith_gunFlash();
    soundAlert(invoker.owner);
    actor prj = A_FireProjectile(cl, angle, true, side * 7 + xofs, -2+height);

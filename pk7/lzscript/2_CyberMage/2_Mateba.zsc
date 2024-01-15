@@ -115,14 +115,14 @@ action(Weapon) State Lith_A_FireMateba()
    Lith_A_RecoilDn(0.2);
    Lith_FireBullets(2, 2, -1, 30, FBF_NORANDOM);
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
-   Lith_A_GunSmokeSmall();
+   Lith_A_GunSmokeAndSparksSmall();
    A_StartSound("weapons/mateba/fire", lch_weapon);
    return null;
 }
 
 action(Weapon) void Lith_A_FireFinalizer()
 {
-   Lith_A_GunSmokeSmall();
+   Lith_A_GunSmokeAndSparksSmall();
    A_SpawnItemEx("Lith_FinalizerEffect", cos(pitch)*24, 0, ((height-19)+2) - sin(pitch)*24);
    A_FireProjectile("Lith_FinalizerShot", 0, false, 0, 10);
    A_StartSound("weapons/mateba/fire", lch_weapon);

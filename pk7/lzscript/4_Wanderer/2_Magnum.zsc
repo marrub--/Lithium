@@ -46,7 +46,7 @@ action(Weapon) void lith_fireMagnum() {
    lith_fireBullets(0, 0, -1, dmg, FBF_NORANDOM, tracer: _tr_slow);
    a_startSound("weapons/magnum/fire", lch_weapon);
    a_startSound("weapons/magnum/fireback", lch_weapon2);
-   lith_a_gunSmokeSmall();
+   Lith_A_GunSmokeAndSparksSmall();
    a_fireProjectile("Lith_LightProjectileRedShort", 0);
 }
 

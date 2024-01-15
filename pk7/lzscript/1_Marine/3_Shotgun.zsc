@@ -69,7 +69,7 @@ action(Weapon) void Lith_A_FireShotgun()
    Lith_A_JustAttack();
    SoundAlert(Invoker.Owner);
    A_Recoil(0.4);
-   Lith_A_GunSmoke();
+   Lith_A_GunSmokeAndSparks();
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
 
    if(Lith_UTIL.pData(_pdt_upgrade, UPGR_Shotgun_B))

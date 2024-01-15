@@ -22,7 +22,7 @@ action(Weapon) void Lith_A_FireDualPistols(int xofs) {
    lith_gunFlash();
    soundAlert(invoker.owner);
    Lith_FireBullets(2, 1, -1, 10, tracerX: xofs);
-   Lith_A_GunSmokeSmall(xofs * 0.4);
+   Lith_A_GunSmokeAndSparksSmall(xofs * 0.4);
    Lith_A_RecoilUp(0.4);
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
 }

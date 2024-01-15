@@ -129,7 +129,7 @@ action(Weapon) State Lith_A_FireSPAS()
    } else {
       Lith_FireBullets(10.5, 3.5, 11, 7);
    }
-   Lith_A_GunSmoke();
+   Lith_A_GunSmokeAndSparks();
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
    if(Lith_UTIL.pData(_pdt_upgrade, UPGR_SPAS_B))
       return ResolveState("FireAuto");
@@ -147,7 +147,7 @@ action(Weapon) void Lith_A_FireVoid()
 action(Weapon) void Lith_A_FireSPASAuto()
 {
    Lith_FireBullets(11, 5, 2, 2);
-   Lith_A_GunSmoke();
+   Lith_A_GunSmokeAndSparks();
    A_StartSound("weapons/spas/fire2", lch_weapon);
 }
 

@@ -24,7 +24,7 @@ action(Weapon) void Lith_A_FireRiotShotgun() {
    lith_gunFlash();
    soundAlert(invoker.owner);
    Lith_FireBullets(7, 7, 17, 7, FBF_NORANDOM);
-   Lith_A_GunSmoke();
+   Lith_A_GunSmokeAndSparks();
    Lith_A_RecoilUp(4);
    A_StartSound("weapons/riotshot/fire", lch_weapon);
    A_FireProjectile("Lith_LightProjectileRedLong", 0);

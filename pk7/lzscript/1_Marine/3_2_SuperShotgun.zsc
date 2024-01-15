@@ -50,7 +50,7 @@ action(Weapon) void Lith_A_FireSSG()
    lith_takeAmmo(2);
    SoundAlert(Invoker.Owner);
    Lith_FixedBullets(16, 22);
-   Lith_A_GunSmoke();
+   Lith_A_GunSmokeAndSparks();
    A_StartSound("weapons/ssg/fire", lch_weapon);
    A_Recoil(1.2);
    Lith_A_RecoilUp(1.5);

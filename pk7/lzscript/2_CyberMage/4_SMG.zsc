@@ -211,16 +211,16 @@ ReloadHeat:
       A_StartSound("weapons/smg/heat", lch_reload2);
       self.TakeInventory("Lith_SMGHeat", 999);
    }
-   CSMG A 2 A_FireProjectile("Lith_GunSmokeEmitter", 0, 0, -2, 5);
-   CSMG A 2 A_FireProjectile("Lith_GunSmokeEmitter", 0, 0, -1, 4);
-   CSMG A 2 A_FireProjectile("Lith_GunSmokeEmitter", 0, 0, -1, 3);
-   CSMG A 2 A_FireProjectile("Lith_GunSmokeEmitter", 0, 0,  0, 2);
-   CSMG A 2 A_FireProjectile("Lith_GunSmokeEmitter", 0, 0,  0, 2);
-   CSMG A 2 A_FireProjectile("Lith_GunSmokeEmitter", 0, 0,  0, 2);
-   CSMG A 2 A_FireProjectile("Lith_GunSmokeEmitter", 0, 0,  0, 2);
-   CSMG A 2 A_FireProjectile("Lith_GunSmokeEmitter", 0, 0,  0, 2);
-   CSMG A 2 A_FireProjectile("Lith_GunSmokeEmitter", 0, 0,  0, 2);
-   CSMG A 2 A_FireProjectile("Lith_GunSmokeEmitter", 0, 0,  0, 2);
+   CSMG A 2 Lith_GunSmoke("Lith_GunSmokeEmitter", -2, 5);
+   CSMG A 2 Lith_GunSmoke("Lith_GunSmokeEmitter", -1, 4);
+   CSMG A 2 Lith_GunSmoke("Lith_GunSmokeEmitter", -1, 3);
+   CSMG A 2 Lith_GunSmoke("Lith_GunSmokeEmitter",  0, 2);
+   CSMG A 2 Lith_GunSmoke("Lith_GunSmokeEmitter",  0, 2);
+   CSMG A 2 Lith_GunSmoke("Lith_GunSmokeEmitter",  0, 2);
+   CSMG A 2 Lith_GunSmoke("Lith_GunSmokeEmitter",  0, 2);
+   CSMG A 2 Lith_GunSmoke("Lith_GunSmokeEmitter",  0, 2);
+   CSMG A 2 Lith_GunSmoke("Lith_GunSmokeEmitter",  0, 2);
+   CSMG A 2 Lith_GunSmoke("Lith_GunSmokeEmitter",  0, 2);
    CSMG A 3 offset(17, 69);
    CSMG A 3 offset(19, 67);
    CSMG A 8 offset(20, 66) A_StartSound("weapons/smg/insert", lch_reload);

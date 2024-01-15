@@ -413,12 +413,12 @@ action(Weapon) void Lith_GunSmoke(class<Actor> type, double x = 0, double y = 6,
    A_FireProjectile(type, 0, 0, x, y, FPF_NOAUTOAIM);
 }
 
-action(Weapon) void Lith_A_GunSmoke(double x = 0, double y = 6, bool ignoreCrouch = false) {
-   Lith_GunSmoke("Lith_GunSmokeSpawner", x, y, ignoreCrouch);
+action(Weapon) void Lith_A_GunSmokeAndSparks(double x = 0, double y = 6, bool ignoreCrouch = false) {
+   Lith_GunSmoke("Lith_GunSmokeAndSparks", x, y, ignoreCrouch);
 }
 
-action(Weapon) void Lith_A_GunSmokeSmall(double x = 0, double y = 6, bool ignoreCrouch = false) {
-   Lith_GunSmoke("Lith_GunSmokeSpawnerSmall", x, y, ignoreCrouch);
+action(Weapon) void Lith_A_GunSmokeAndSparksSmall(double x = 0, double y = 6, bool ignoreCrouch = false) {
+   Lith_GunSmoke("Lith_GunSmokeAndSparksSmall", x, y, ignoreCrouch);
 }
 
 action(Weapon) void Lith_A_DropMag(class<Lith_DroppedMagazine> mag1, class<Lith_DroppedMagazine> mag2, double px, double py, double pz, double vx, double vy, double vz) {

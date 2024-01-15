@@ -27,7 +27,7 @@ action(Weapon) void lith_fire700e() {
    Lith_FireBullets(0, 0, -1, random[lith_dlweapon](60, 107), FBF_NORANDOM, "Lith_700Bullet", 4, tracer: _tr_slow);
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
    for(int i = 1; i <= 3; i++) {
-      Lith_A_GunSmoke(7, 3 * i);
+      Lith_A_GunSmokeAndSparks(7, 3 * i);
    }
    A_StartSound("weapons/700e/fire", lch_weapon, pitch: FRandom(0.9, 1.0));
 }
