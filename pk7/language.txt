@@ -3017,6 +3017,10 @@
    "RktRktRktS";
 "LITH_UPGRADE_EFFEC_Sophia_B" =
    "Makes Sophia fire tiny rockets with heavy homing constantly.";
+"LITH_UPGRADE_TITLE_Fortune_A" =
+   "Lucky Refrain";
+"LITH_UPGRADE_EFFEC_Fortune_A" =
+   "Makes Fortuity fire small bursts of bolts.";
 "LITH_UPGRADE_TITLE_Rems_A" =
    "REMS Bipod";
 "LITH_UPGRADE_EFFEC_Rems_A" =

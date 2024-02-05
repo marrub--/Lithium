@@ -19,14 +19,12 @@ class Lith_FortuneExplosionParticle : Actor {
       +RollSprite
       +FlatSprite
    }
-
    override void postBeginPlay() {
       super.postBeginPlay();
-      angle = fRandom[Lith_Fortune](-360, 360);
-      pitch = fRandom[Lith_Fortune](-360, 360);
-      roll  = fRandom[Lith_Fortune](-360, 360);
+      angle = fRandom[Lith_Fortune](-180, 180);
+      pitch = fRandom[Lith_Fortune](-90, 90);
+      roll  = fRandom[Lith_Fortune](-180, 180);
    }
-
    override void tick() {
       if(!isFrozen()) {
          a_fadeOut(0.05);
@@ -34,7 +32,6 @@ class Lith_FortuneExplosionParticle : Actor {
          scale.y += 0.05;
       }
    }
-
    states {
    Spawn:
       BLLT X -1;
@@ -42,26 +39,48 @@ class Lith_FortuneExplosionParticle : Actor {
    }
 }
 
+class Lith_FortuneExplosionParticle2 : Lith_FortuneExplosionParticle {
+   default {
+      Scale 0.25;
+   }
+}
+
 class Lith_FortuneExplosion : Lith_Explosive {
    default {
       DamageType "Shrapnel";
-
+      ExplosionDamage 100;
+      ExplosionRadius 100;
+      Lith_FortuneExplosion.Part "Lith_FortuneExplosionParticle";
+      Lith_FortuneExplosion.NPart 2;
       +NoGravity
       +ForceRadiusDmg
    }
-
+   meta class<Actor> m_particle;
+   meta int m_numParticle;
+   property Part: m_particle;
+   property NPart: m_numParticle;
    states {
    Spawn:
       TNT1 A 0;
       TNT1 A 0 {
-         a_explode(100, 100, xf_nosplash, false, 100);
+         a_explode(flags: xf_nosplash, alert: false, fulldamagedistance: explosionRadius);
          a_quake(3, 20, 0, 640);
-         for(int i = 0; i < 2; i++)
-            spawn("Lith_FortuneExplosionParticle", pos);
+         for(int i = 0; i < m_numParticle; i++)
+            spawn(m_particle, pos);
          lith_a_explodeSound();
          return lith_a_doExplosion();
       }
       stop;
+   }
+}
+
+class Lith_FortuneExplosion2 : Lith_FortuneExplosion {
+   default {
+      ExplosionDamage 15;
+      ExplosionRadius 80;
+      Scale 0.5;
+      Lith_FortuneExplosion.Part "Lith_FortuneExplosionParticle2";
+      Lith_FortuneExplosion.NPart 1;
    }
 }
 
@@ -72,7 +91,6 @@ class Lith_FortuneShot : FastProjectile {
       DamageFunction 100;
       Speed 170;
    }
-
    states {
    Spawn:
       TNT1 A -1;
@@ -84,28 +102,40 @@ class Lith_FortuneShot : FastProjectile {
    }
 }
 
+class Lith_FortuneShot2 : Lith_FortuneShot {
+   default {
+      DamageFunction 15;
+   }
+   states {
+   Death:
+      TNT1 A 1 A_StartSound("weapons/fortune/hit", lch_body, attenuation: 0.2, pitch: frandom[Lith_Fortune](0.5, 1.0));
+      TNT1 A 0 A_SpawnItemEx("Lith_FortuneExplosion2", flags: SXF_NOCHECKPOSITION|SXF_TRANSFERPOINTERS);
+      stop;
+   }
+}
+
 class Lith_FortuneProjectile : Actor {
    default {
       Height 1;
       Radius 1;
       Projectile;
+      Lith_FortuneProjectile.Proj "Lith_FortuneShot";
       +NoClip
       -ActivateImpact
       -ActivatePCross
    }
-
+   meta class<Actor> m_projectile;
+   property Proj: m_projectile;
    override void postBeginPlay() {
       super.postBeginPlay();
-      let prj = a_spawnProjectile("Lith_FortuneShot", flags: CMF_AIMDIRECTION|CMF_SAVEPITCH|CMF_ABSOLUTEPITCH, pitch: pitch);
+      let prj = a_spawnProjectile(m_projectile, flags: CMF_AIMDIRECTION|CMF_SAVEPITCH|CMF_ABSOLUTEPITCH, pitch: pitch);
       prj.target = target;
    }
-
    override void tick() {
       if(!isFrozen()) {
          Lith_UTIL.stateTick(self);
       }
    }
-
    states {
    Spawn:
       TNT1 A 0;
@@ -117,12 +147,26 @@ class Lith_FortuneProjectile : Actor {
    }
 }
 
+class Lith_FortuneProjectile2 : Lith_FortuneProjectile {
+   default {
+      Lith_FortuneProjectile.Proj "Lith_FortuneShot2";
+   }
+   states {
+   Spawn:
+      TNT1 A 0;
+      TNT1 AAA 1 {
+         A_StartSound("weapons/fortune/spark", lch_body, 0, frandom[Lith_Fortune](0.1, 0.3), 2.0, frandom[Lith_Fortune](0.5, 1.5));
+         A_CustomRailgun(20, 0, "", "#ffffff", RGF_SILENT|RGF_EXPLICITANGLE|RGF_FULLBRIGHT|RGF_CENTERZ, 0, 5, "Lith_FortuneProjectilePuff", 0, 0, 16000, 10, 0.2, 0, spawnofs_z: 32);
+      }
+      stop;
+   }
+}
+
 class Lith_FortuneSpark : Lith_ShockEffect {
    default {
       Projectile;
       +ForceXyBillboard
    }
-
    states {
    Spawn:
       ZAP1 FFEEFFEEFFEEDDCCBBCCBBAABBAA 1 {
@@ -177,6 +221,18 @@ action(Weapon) void Lith_A_FireFortune() {
    A_FireProjectile("Lith_LightProjectileSkyLong", 0);
 }
 
+action(Weapon) void Lith_A_FireFortune2() {
+   lith_takeAmmo(50);
+   A_StartSound("weapons/fortune/fire", lch_weapon, attenuation: 0.5, pitch: frandom[Lith_Fortune](1.3, 1.5));
+   lith_gunFlash();
+   soundAlert(invoker.owner);
+   A_Recoil(4);
+   let pr = A_FireProjectile("Lith_FortuneProjectile2", spawnheight: -32);
+   pr.pitch = self.pitch;
+   Lith_A_RecoilUp(2);
+   A_FireProjectile("Lith_LightProjectileSkyLong", 0);
+}
+
 action(Weapon) void lith_a_emitFortuneSpark() {
    let mo = spawn("Lith_FortuneSpark", pos);
    mo.target = self;
@@ -193,16 +249,40 @@ Ready:
       }
    }
    loop;
-
 Deselect:
    FORT A 1 Lith_A_Lower(_raise_slow);
    loop;
-
 Select:
    FORT A 1 Lith_A_Raise(_raise_slow);
    loop;
-
+FireBlaster:
+   #### # 0 lith_a_setInterpolation(false);
+   #### # 0 lith_jumpNoAmmo(50);
+   FORT B 2 bright offset(1, 32) lith_a_fireFortune2;
+   FORT C 2 offset(2, 34);
+   FORT C 1 offset(-1, 32);
+   FORT A 1 offset(14, 50);
+   #### # 0 lith_jumpNoAmmo(50);
+   FORT B 2 bright offset(1, 32) lith_a_fireFortune2;
+   FORT C 2 offset(2, 34);
+   FORT C 1 offset(-1, 32);
+   FORT A 1 offset(14, 50);
+   #### # 0 lith_jumpNoAmmo(50);
+   FORT B 2 bright offset(1, 32) lith_a_fireFortune2;
+   FORT C 2 offset(2, 34);
+   FORT C 1 offset(-1, 32);
+   FORT A 1 offset(14, 50);
+   #### # 0 lith_a_setInterpolation(true);
+   FORT A 2 offset(12, 44) a_reFire("FireBlaster");
+   FORT A 2 offset(8, 41);
+   FORT A 3 offset(6, 38);
+   FORT A 4 offset(5, 37);
+   FORT AAAAAAAAAAA 1 offset(3, 35) a_reFire("FireBlaster");
+   FORT AAAAAAAAAAA 1 offset(1, 32) a_reFire("FireBlaster");
+   #### # 0 lith_a_setInterpolation(false);
+   goto ReadySelector;
 Fire:
+   #### # 0 a_jumpIf(Lith_UTIL.pData(_pdt_upgrade, UPGR_Fortune_A), "FireBlaster");
    #### # 0 lith_jumpNoAmmo(350);
    #### # 0 {
       A_StartSound("weapons/fortune/charge", lch_weapon2);

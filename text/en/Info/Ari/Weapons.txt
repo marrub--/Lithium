@@ -110,6 +110,11 @@ Makes Sophia fire two smaller, more accurate rockets in quick succession.
 Makes Sophia fire tiny rockets with heavy homing constantly.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
+== \#UPGRADE_TITLE_Fortune_A | Lucky Refrain
+@@ \#UPGRADE_EFFEC_Fortune_A
+Makes Fortuity fire small bursts of bolts.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Rems_A | REMS Bipod
 @@ \#UPGRADE_EFFEC_Rems_A
 Gives the Qasl REMS a bipod that completely mitigates recoil, charges
