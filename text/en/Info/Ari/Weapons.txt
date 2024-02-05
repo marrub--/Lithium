@@ -115,6 +115,13 @@ Makes Sophia fire tiny rockets with heavy homing constantly.
 Makes Fortuity fire small bursts of bolts.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
+== \#UPGRADE_TITLE_Fortune_B | Entropic Collator
+@@ \#UPGRADE_EFFEC_Fortune_B
+Makes Fortuity's explosions sort particles by spin, causing a buildup
+of near-critical rotating mass that explodes into electricity when
+disturbed enough.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Rems_A | REMS Bipod
 @@ \#UPGRADE_EFFEC_Rems_A
 Gives the Qasl REMS a bipod that completely mitigates recoil, charges

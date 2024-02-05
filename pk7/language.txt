@@ -3021,6 +3021,10 @@
    "Lucky Refrain";
 "LITH_UPGRADE_EFFEC_Fortune_A" =
    "Makes Fortuity fire small bursts of bolts.";
+"LITH_UPGRADE_TITLE_Fortune_B" =
+   "Entropic Collator";
+"LITH_UPGRADE_EFFEC_Fortune_B" =
+   "Makes Fortuity's explosions sort particles by spin, causing a buildup of near-critical rotating mass that explodes into electricity when disturbed enough.";
 "LITH_UPGRADE_TITLE_Rems_A" =
    "REMS Bipod";
 "LITH_UPGRADE_EFFEC_Rems_A" =

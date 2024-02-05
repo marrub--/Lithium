@@ -45,6 +45,33 @@ class Lith_FortuneExplosionParticle2 : Lith_FortuneExplosionParticle {
    }
 }
 
+class Lith_FortuneBuildup : Actor {
+   default {
+      RenderStyle "Add";
+      Scale 0.5;
+      Height 1;
+      Radius 1;
+      +NoClip
+      +NoGravity
+      +Bright
+   }
+   int m_buildup;
+   override void tick() {
+      super.tick();
+      m_buildup -= 2;
+      if(m_buildup > 0) {
+         a_setScale(m_buildup / 600.0);
+      } else {
+         destroy();
+      }
+   }
+   states {
+   Spawn:
+      BLLT L -1;
+      stop;
+   }
+}
+
 class Lith_FortuneExplosion : Lith_Explosive {
    default {
       DamageType "Shrapnel";
@@ -63,6 +90,28 @@ class Lith_FortuneExplosion : Lith_Explosive {
    Spawn:
       TNT1 A 0;
       TNT1 A 0 {
+         if(Lith_UTIL.pData(_pdt_upgrade, UPGR_Fortune_B)) {
+            array<Lith_FortuneBuildup> buildup;
+            for(let it = BlockThingsIterator.Create(self, 32); it.next();) {
+               let pr = Lith_FortuneBuildup(it.thing);
+               if(pr &&
+                  self.pos.z >= pr.pos.z - 125 * pr.scale.y &&
+                  self.pos.z < pr.pos.z + 125 * pr.scale.y)
+               {
+                  buildup.push(pr);
+               }
+            }
+            int initial_buildup = Lith_UTIL.pData(_pdt_upgrade, UPGR_Fortune_A) ? 100 : 300;
+            if(buildup.size()) {
+               int total_buildup = initial_buildup / buildup.size();
+               foreach(pr : buildup) {
+                  pr.m_buildup += total_buildup;
+               }
+            } else {
+               let pr = Lith_FortuneBuildup(spawn("Lith_FortuneBuildup", pos));
+               pr.m_buildup = initial_buildup;
+            }
+         }
          a_explode(flags: xf_nosplash, alert: false, fulldamagedistance: explosionRadius);
          a_quake(3, 20, 0, 640);
          for(int i = 0; i < m_numParticle; i++)
