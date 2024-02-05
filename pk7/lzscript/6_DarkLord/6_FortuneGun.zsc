@@ -233,10 +233,15 @@ action(Weapon) void Lith_A_FireFortune2() {
    A_FireProjectile("Lith_LightProjectileSkyLong", 0);
 }
 
-action(Weapon) void lith_a_emitFortuneSpark() {
-   let mo = spawn("Lith_FortuneSpark", pos);
-   mo.target = self;
-   A_FireProjectile("Lith_LightProjectileSkyShort", 0);
+action(Weapon) bool lith_a_emitFortuneSpark() {
+   if(!invoker.lith_noAmmo()) {
+      let mo = spawn("Lith_FortuneSpark", pos);
+      mo.target = self;
+      A_FireProjectile("Lith_LightProjectileSkyShort", 0);
+      return true;
+   } else {
+      return false;
+   }
 }
 
 states(Weapon) {
@@ -244,8 +249,9 @@ Ready:
    FORT A 1 Lith_A_Ready;
    FORT A 0 {
       if(random[Lith_Fortune](0, 77) == 0 || level.time % 50 == 0) {
-         A_StartSound("weapons/fortune/spark", lch_weapon3, pitch: frandom[Lith_Fortune](0.9, 1.2));
-         lith_a_emitFortuneSpark();
+         if(lith_a_emitFortuneSpark()) {
+            A_StartSound("weapons/fortune/spark", lch_weapon3, pitch: frandom[Lith_Fortune](0.9, 1.2));
+         }
       }
    }
    loop;
