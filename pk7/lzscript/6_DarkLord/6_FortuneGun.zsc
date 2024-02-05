@@ -213,7 +213,7 @@ action(Weapon) void Lith_A_FireFortune() {
    A_StartSound("weapons/fortune/fire", lch_weapon, attenuation: 0.5, pitch: frandom[Lith_Fortune](0.9, 1.05));
    lith_gunFlash();
    soundAlert(invoker.owner);
-   A_Recoil(6);
+   A_Recoil(12);
    A_Quake(2, 15, 0, 128);
    let pr = A_FireProjectile("Lith_FortuneProjectile", spawnheight: -32);
    pr.pitch = self.pitch;
