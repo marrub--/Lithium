@@ -30,11 +30,10 @@ Build requirements:
 
 Requirements for `tools/mkfont.rb`:
 
-- wget
+- Ruby
 - ImageMagick
+- [RMagick](https://rmagick.github.io/)
 - OptiPNG
-- PNGQuant
-- AdvPNG
 
 # Licensing
 
