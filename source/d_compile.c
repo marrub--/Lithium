@@ -213,7 +213,7 @@ void Dlg_MInit(void) {
    varmap_t_ctor(&vars, 16, 16);
    Dlg_Compile("lmisc/Common.mmmm", &vars);
    /* if scripts are used, compile them */
-   if(!get_bit(ml.mi->use, _mi_key_script)) {
+   if(get_bit(ml.mi->use, _mi_key_script)) {
       static char tmp[64];
       faststrcpy_str(tmp, ml.mi->keys[_mi_key_script].s);
       Dlg_Compile(tmp, &vars);
