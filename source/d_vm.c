@@ -961,15 +961,20 @@ void Z_RunDialogue(i32 num) {
 alloc_aut(0) script_str ext("ACS") addr(OBJ "RunTerminal")
 void Z_RunTerminal(i32 num) {
    if(pl.modal == _gui_none) {
+      enum {
+         _unfinished = DPAGE_MAX - 1,
+         _finished = DPAGE_MAX - 2,
+         _failure = DPAGE_MAX - 3,
+      };
       switch(ml.mission) {
-      case _mstat_unfinished: pl.dlg.page = DPAGE_UNFINISHED; break;
-      case _mstat_finished:   pl.dlg.page = DPAGE_FINISHED;   break;
-      case _mstat_failure:    pl.dlg.page = DPAGE_FAILURE;    break;
+      case _mstat_unfinished: pl.dlg.page = _unfinished; break;
+      case _mstat_finished:   pl.dlg.page = _finished;   break;
+      case _mstat_failure:    pl.dlg.page = _failure;    break;
       }
       pl.dlg.num       = PNUM_TERMINAL + num;
       pl.dlg.firm_mode = FIRM_TERMINAL;
       if(!dlgdefs[pl.dlg.num].pages[pl.dlg.page]) {
-         pl.dlg.page = DPAGE_UNFINISHED;
+         pl.dlg.page = _unfinished;
       }
    }
 }

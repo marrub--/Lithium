@@ -242,9 +242,6 @@ enum {
 enum {
    /* page numbers */
    DPAGE_MAX = 256,
-   DPAGE_UNFINISHED = DPAGE_MAX - 1,
-   DPAGE_FINISHED = DPAGE_MAX - 2,
-   DPAGE_FAILURE = DPAGE_MAX - 3,
 };
 
 enum {
