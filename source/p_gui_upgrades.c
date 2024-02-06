@@ -104,7 +104,7 @@ void GUIUpgradesList(struct gui_state *g) {
 
       for(i32 i = 0; i < 4; i++) {
          if(get_bit(upgr->agroups, i)) {
-            PrintSprite(sa_groups[i], g->ox + pre->w - 9,1, g->oy + y + 1,1);
+            PrintSprite(sa_groups[i], g->ox + pre->w - 9,1, g->oy + y + 1,1, _u_alpha, 0.5k);
          }
       }
    }
