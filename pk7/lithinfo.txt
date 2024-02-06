@@ -241,8 +241,8 @@
    cl: pD tag: Sophia_A;
    cl: pD tag: Sophia_B;
    cl: pD tag: FortuneGun;
-   cl: pD tag: FortuneGun_A;
-   cl: pD tag: FortuneGun_B;
+   cl: pD tag: Fortune_A;
+   cl: pD tag: Fortune_B;
    cl: pD tag: Rems;
    cl: pD tag: Rems_A;
    cl: pD tag: Rems_B;
