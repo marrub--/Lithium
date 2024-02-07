@@ -10,6 +10,13 @@ jo {
    prog_a,
    prog_d,
    prog_t,
+   var_lane = var_beg,
+   var_jem  = var_lane $10 +,
+   var_fulk = var_jem  $10 +,
+   var_luke = var_fulk $10 +,
+   var_omi  = var_luke $10 +,
+   var_ari  = var_omi  $10 +,
+   var_kiri = var_ari  $10 +,
 }
 
 /* Tutorial */
@@ -31,7 +38,7 @@ ilo_kon(prog_tutorial) {
 /* Marine */
 ilo_kon(prog_m) {
    jo {
-      lane_met = var_beg,
+      lane_met = var_lane,
       lane_rpg,
       lane_where,
       lane_scars,
@@ -160,7 +167,7 @@ ilo_kon(prog_m) {
 /* Dark Lord */
 ilo_kon(prog_d) {
    jo {
-      ari_met = var_beg $10 +,
+      ari_met = var_ari,
       ari_doesitmatter,
       ari_death,
       ari_right,
@@ -269,51 +276,56 @@ ilo_kon(prog_d) {
 
 
 /* Thoth */
-/*
 ilo_kon(prog_t) {
-   jo kiri_met  = var_beg $20 +;
-   jo kiri_self = kiri_met++;
+   jo {
+      kiri_met = var_kiri,
+      kiri_self,
+      t_breaking = 100,
+      t_down,
+      t_broken,
+      t_entity,
+   }
    lipu(page_start) {
       name   DOLL;
       remote KIRI;
       icon   Doll;
-      option _o0 brk;
+      option t_begin_o0 brk;
       seme poki_jan pT {
          seme !insa kiri_met {
-            text _2;
-            option _o1 jump_page t_breaking;
+            text t_begin_2;
+            option t_begin_o1 jump_page t_breaking;
          } anu {
             seme insa kiri_self {
-               text _1;
+               text t_begin_1;
             } anu {
-               text _0;
+               text t_begin_0;
             }
          }
       } anu {
-         text _0;
+         text t_begin_0;
       }
    }
    /* Kiri */
    lipu(t_breaking) {
       inc %kiri_met;
-      text _0;
-      option _o0 jump_page t_down;
+      text t_breaking_0;
+      text2 t_begin_2;
+      option t_breaking_o0 jump_page t_down;
    }
    lipu(t_down) {
-      text _0;
-      option _o0 jump_page t_broken;
-      option _o1 brk;
+      text t_down_0;
+      option t_down_o0 jump_page t_broken;
+      option t_down_o1 brk;
    }
    lipu(t_broken) {
       inc %kiri_self;
-      text _0;
-      option _o0 jump_page t_entity;
+      text t_broken_0;
+      option t_broken_o0 jump_page t_entity;
    }
    lipu(t_entity) {
-      text _0;
-      option _o0 brk;
+      text t_entity_0;
+      option t_entity_o0 brk;
    }
 }
-*/
 
 /* EOF */

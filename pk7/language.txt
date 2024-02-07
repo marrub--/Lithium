@@ -991,6 +991,83 @@
    "Try to find your sister and talk to them. It might make you feel better.";
 "LITH_dlg_abyss_d_hallow_o0" =
    "\cn[I think that's enough.]";
+"LITH_dlg_abyss_t_begin_0" =
+   "\cn[The doll is completely unresponsive. You poke it, but it's just lifeless. Like everything else.]";
+"LITH_dlg_abyss_t_begin_o0" =
+   "\cn[Proceed.]";
+"LITH_dlg_abyss_t_begin_1" =
+   "Hello, me.";
+"LITH_dlg_abyss_t_begin_2" =
+   "\c[Lith_Angelic]It's weird seeing myself like this.\n"
+   "\c[Lith_Evil]It's weird seeing myself like this.\n"
+   "\c[Lith_Angelic]It's weird seeing myself like this.\n"
+   "\c[Lith_Evil]It's weird seeing myself like this.\n"
+   "\c[Lith_Angelic]It's weird seeing myself like this.\n"
+   "\c[Lith_Evil]It's weird seeing myself like this.\n"
+   "\c[Lith_Angelic]It's weird seeing myself like this.\n"
+   "       \c[Lith_Evil]It's weird seeing myself like this.\n"
+   "       \c[Lith_Angelic]It's weird seeing myself like this.\n"
+   "       \c[Lith_Evil]It's weird seeing myself like this.\n"
+   "       \c[Lith_Angelic]It's weird seeing myself like this.\n"
+   "       \c[Lith_Evil]It's weird seeing myself like this.\n"
+   "       \c[Lith_Angelic]It's weird seeing myself like this.\n"
+   "       \c[Lith_Evil]It's weird seeing myself like this.";
+"LITH_dlg_abyss_t_begin_o1" =
+   "\cn[Don't go.]";
+"LITH_dlg_abyss_t_breaking_0" =
+   "\cq[Don't go.]\n"
+   "\cq[Please.]\n"
+   "\cq[I want someone to talk to.]";
+"LITH_dlg_abyss_t_breaking_o0" =
+   "\cn[Okay.]";
+"LITH_dlg_abyss_t_down_0" =
+   "\cr[Thank you...]\n"
+   "\cq[Thank you so much...]\n"
+   "\n"
+   "\cn[I think I'm understanding a bit more now.]\n"
+   "\n"
+   "\c[Lith_Angelic]It's weird seeing myself like this.\n"
+   "\c[Lith_Evil]Do you think we're closer?\n"
+   "\n"
+   "\cq[We are missing a vital part.]\n"
+   "\cn[Where is it?]\n"
+   "\cq[That's a good question...]";
+"LITH_dlg_abyss_t_down_o0" =
+   "\cn[Where *is* it?]";
+"LITH_dlg_abyss_t_down_o1" =
+   "\cn[No, it doesn't matter now.]";
+"LITH_dlg_abyss_t_broken_0" =
+   "\cr[I think we're broken...]\n"
+   "\cq[We need to find it...]\n"
+   "\n"
+   "\cn[I know where it is.]\n"
+   "\n"
+   "\c[Lith_Angelic]There's still time to get past the precepice.\n"
+   "\c[Lith_Evil]We're no closer now.\n"
+   "\n"
+   "\cq[It's...]\n"
+   "\cn[Here.]\n"
+   "\c-\"Right here.\"\n"
+   "\n"
+   "You hear a voice from inside your head. You realize it's yours.";
+"LITH_dlg_abyss_t_broken_o0" =
+   "You weren't fully awake.";
+"LITH_dlg_abyss_t_entity_0" =
+   "\c[Lith_Angelic]The \c[Lith_Evil]entity behind you, \c[Lith_Angelic]what is that?\n"
+   "\n"
+   "\c-I don't know.\n"
+   "\n"
+   "                  \c[Lith_Angelic]It worries us.\n"
+   "\n"
+   "\cn[It's like a light. I've never seen something like it before.]\n"
+   "\cq[There's something beyond the light, infinitel|||\\\\\\\\\\\\\n"
+   "============>>>>>??????????????\n"
+   "\n"
+   "\cr>>>>>[[[[computational cluster array failure]]]]\n"
+   "\cr>>>>>[[[[maintenance access mode initiated]]]]\n"
+   "\cq[Shall we ignore it?]";
+"LITH_dlg_abyss_t_entity_o0" =
+   "...?";
 "LITH_REMOTE_ENEMY" =
    "demon@hell";
 "LITH_PNAME_NEGOTIATION" =

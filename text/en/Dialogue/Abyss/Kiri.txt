@@ -6,17 +6,18 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-%% LITHABYS_kiri_begin_0
-\cn[The doll is completely unresponsive. You poke it, but it's just lifeless. Like everything else.]
+@@ \#dlg_abyss_t_begin_0
+\cn[The doll is completely unresponsive. You poke it, but it's just
+lifeless. Like everything else.]
 
-%% LITHABYS_kiri_begin_o0
-\cr[Proceed.]
+%% \#dlg_abyss_t_begin_o0
+\cn[Proceed.]
 
 ## Thoth (Self)
-%% LITHABYS_kiri_begin_1
+%% \#dlg_abyss_t_begin_1
 Hello, me.
 
-%% LITHABYS_kiri_begin_2
+%% \#dlg_abyss_t_begin_2
 \c[Lith_Angelic]It's weird seeing myself like this.
 \c[Lith_Evil]It's weird seeing myself like this.
 \c[Lith_Angelic]It's weird seeing myself like this.
@@ -32,32 +33,18 @@ Hello, me.
        \c[Lith_Angelic]It's weird seeing myself like this.
        \c[Lith_Evil]It's weird seeing myself like this.
 
-%% LITHABYS_kiri_begin_o1
-\cq[Don't go.]
+%% \#dlg_abyss_t_begin_o1
+\cn[Don't go.]
 
-%% LITHABYS_kiri_t_breaking_0
+%% \#dlg_abyss_t_breaking_0
 \cq[Don't go.]
 \cq[Please.]
 \cq[I want someone to talk to.]
-\c[Lith_Angelic]It's weird seeing myself like this.
-\c[Lith_Evil]It's weird seeing myself like this.
-\c[Lith_Angelic]It's weird seeing myself like this.
-\c[Lith_Evil]It's weird seeing myself like this.
-\c[Lith_Angelic]It's weird seeing myself like this.
-\c[Lith_Evil]It's weird seeing myself like this.
-\c[Lith_Angelic]It's weird seeing myself like this.
-       \c[Lith_Evil]It's weird seeing myself like this.
-       \c[Lith_Angelic]It's weird seeing myself like this.
-       \c[Lith_Evil]It's weird seeing myself like this.
-       \c[Lith_Angelic]It's weird seeing myself like this.
-       \c[Lith_Evil]It's weird seeing myself like this.
-       \c[Lith_Angelic]It's weird seeing myself like this.
-       \c[Lith_Evil]It's weird seeing myself like this.
 
-%% LITHABYS_kiri_t_breaking_o0
-\cq[Okay.]
+%% \#dlg_abyss_t_breaking_o0
+\cn[Okay.]
 
-%% LITHABYS_kiri_t_down_0
+%% \#dlg_abyss_t_down_0
 \cr[Thank you...]
 \cq[Thank you so much...]
 
@@ -70,13 +57,13 @@ Hello, me.
 \cn[Where is it?]
 \cq[That's a good question...]
 
-%% LITHABYS_kiri_t_down_o0
-\cq[Where *is* it?]
+%% \#dlg_abyss_t_down_o0
+\cn[Where *is* it?]
 
-%% LITHABYS_kiri_t_down_o1
-\cr[No, it doesn't matter now.]
+%% \#dlg_abyss_t_down_o1
+\cn[No, it doesn't matter now.]
 
-%% LITHABYS_kiri_t_broken_0
+%% \#dlg_abyss_t_broken_0
 \cr[I think we're broken...]
 \cq[We need to find it...]
 
@@ -91,10 +78,10 @@ Hello, me.
 
 You hear a voice from inside your head. You realize it's yours.
 
-%% LITHABYS_kiri_t_broken_o0
+%% \#dlg_abyss_t_broken_o0
 You weren't fully awake.
 
-%% LITHABYS_kiri_t_entity_0
+%% \#dlg_abyss_t_entity_0
 \c[Lith_Angelic]The \c[Lith_Evil]entity behind you, \c[Lith_Angelic]what is that?
 
 \c-I don't know.
@@ -102,15 +89,14 @@ You weren't fully awake.
                   \c[Lith_Angelic]It worries us.
 
 \cn[It's like a light. I've never seen something like it before.]
-\cq[There's something beyond the light, infinitely
-smallllllllllllllllllllll============>>>>>??????????????
+\cq[There's something beyond the light, infinitel|||\\\\\\
+============>>>>>??????????????
 
 \cr>>>>>[[[[computational cluster array failure]]]]
 \cr>>>>>[[[[maintenance access mode initiated]]]]
-\c-              >>>>> DON'T SEE THE LIGHT <<<<<
-\cq[Pleasant thing. Shall we ignore it?]
+\cq[Shall we ignore it?]
 
-%% LITHABYS_kiri_t_entity_o0
-\c[Lith_Evil]...Gladly.
+%% \#dlg_abyss_t_entity_o0
+...?
 
 ## EOF
