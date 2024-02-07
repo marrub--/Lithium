@@ -138,7 +138,7 @@ static bool Dlg_GetItem(struct compiler *d) {
    return true;
 }
 
-static void Dlg_GetTop_Prog(struct compiler *d) {
+script static void Dlg_GetTop_Prog(struct compiler *d) {
    struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_pareno, 0);
    unwrap(&d->res);
    i32 num = Dlg_Evaluate(d, tok_parenc);
@@ -157,7 +157,7 @@ static void Dlg_GetTop_Prog(struct compiler *d) {
    }
 }
 
-static void Dlg_GetTop_Name(struct compiler *d) {
+script static void Dlg_GetTop_Name(struct compiler *d) {
    struct token *tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_identi, 0);
    unwrap(&d->res);
    faststrcpy(d->name, tok->textV);
