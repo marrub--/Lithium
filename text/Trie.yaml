@@ -75,6 +75,7 @@ Dlg_StmtName:
       - teleport_interlevel
       - teleport_intralevel
       - text
+      - text2
       - wait
    aliases:
       seme: if

@@ -300,7 +300,8 @@ enum {
    VAR_ICONL,   VAR_ICONH,   /* icon string */
    VAR_REMOTEL, VAR_REMOTEH, /* remote string */
    VAR_PICTL,   VAR_PICTH,   /* picture string */
-   VAR_TEXTL,   VAR_TEXTH,   /* text string */
+   VAR_TXT1L,   VAR_TXT1H,   /* text string */
+   VAR_TXT2L,   VAR_TXT2H,
    VAR_MUSICL,  VAR_MUSICH,  /* music string */
    VAR_OPT_CNT, /* option count */
    VAR_OPT_SEL, /* option selection */

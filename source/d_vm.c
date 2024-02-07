@@ -220,8 +220,11 @@ static str straffix(cstr s) {
 
 /* VM action auxiliary */
 static str GetText(void) {
-   mem_size_t adr = MemB2_G(VAR_TEXTL);
-   return adr ? straffix(MemSC_G(adr)) : snil;
+   mem_size_t adr1 = MemB2_G(VAR_TXT1L);
+   mem_size_t adr2 = MemB2_G(VAR_TXT2L);
+   str s1 = adr1 ? straffix(MemSC_G(adr1)) : snil;
+   str s2 = adr2 ? straffix(MemSC_G(adr2)) : snil;
+   return s1 &? (s2 ? strp(_p(s1), _l("\n\n"), _p(s2)) : s1);
 }
 
 static str GetRemote(void) {
@@ -236,10 +239,11 @@ static str GetName(void) {
    return ns(lang(fast_strdup2(LANG "PNAME_", nam)));
 }
 
-#define ResetName()    MemB2_S(VAR_NAMEL,   0)
-#define ResetRemote()  MemB2_S(VAR_REMOTEL, 0)
-#define ResetText()    MemB2_S(VAR_TEXTL,   0)
-#define ResetMusic()   MemB2_S(VAR_MUSICL,  0)
+#define ResetName()     MemB2_S(VAR_NAMEL,   0)
+#define ResetRemote()   MemB2_S(VAR_REMOTEL, 0)
+#define ResetText()    (MemB2_S(VAR_TXT1L,   0), \
+                        MemB2_S(VAR_TXT2L,   0))
+#define ResetMusic()    MemB2_S(VAR_MUSICL,  0)
 #define ResetOptions() (MemB1_S(VAR_OPT_SEL, 0), MemB1_S(VAR_OPT_CNT, 0))
 
 static void TerminalGUI(i32 tact) {

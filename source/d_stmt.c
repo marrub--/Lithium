@@ -185,7 +185,7 @@ static void Dlg_Stmt_Finale(struct compiler *d, i32 act) {
       unwrap(&d->res);
       mem_size_t s = Dlg_PushStr(d, txtbuf, PrefixedText(d, tok->textV));
       unwrap(&d->res);
-      Dlg_PushLdAdr(d, VAR_TEXTL, s); unwrap(&d->res);
+      Dlg_PushLdAdr(d, VAR_TXT1L, s); unwrap(&d->res);
    }
    tok = tb_expc(&d->tb, &d->res, tb_get(&d->tb), tok_number, 0);
    unwrap(&d->res);
@@ -275,7 +275,8 @@ script void Dlg_GetStmt(struct compiler *d) {
       case _dlg_stmt_music:  Dlg_Stmt_StoreStr(d, VAR_MUSICL);      break;
       case _dlg_stmt_name:   Dlg_Stmt_StoreStr(d, VAR_NAMEL);       break;
       case _dlg_stmt_remote: Dlg_Stmt_StoreStr(d, VAR_REMOTEL);     break;
-      case _dlg_stmt_text:   Dlg_Stmt_StoreStr(d, VAR_TEXTL, true); break;
+      case _dlg_stmt_text:   Dlg_Stmt_StoreStr(d, VAR_TXT1L, true); break;
+      case _dlg_stmt_text2:  Dlg_Stmt_StoreStr(d, VAR_TXT2L, true); break;
       /* lastly, try an assembly statement */
       default: Dlg_Stmt_Asm(d); break;
       }
