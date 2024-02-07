@@ -42,7 +42,7 @@ ilo_kon(prog_m) {
       lane_rpg,
       lane_where,
       lane_scars,
-      m_meet = 100,
+      m_meet = 1,
       m_nothing,
       m_seen,
       mc_meet,
@@ -164,6 +164,50 @@ ilo_kon(prog_m) {
    }
 }
 
+/* Cyber-Mage */
+ilo_kon(prog_c) {
+   lipu(page_start) {
+      name   doll;
+      remote jem;
+      icon   doll;
+      text   t_begin_0;
+      option t_begin_o0 brk;
+   }
+}
+
+/* Informant */
+ilo_kon(prog_i) {
+   lipu(page_start) {
+      name   doll;
+      remote fulk;
+      icon   doll;
+      text   t_begin_0;
+      option t_begin_o0 brk;
+   }
+}
+
+/* Wanderer */
+ilo_kon(prog_w) {
+   lipu(page_start) {
+      name   doll;
+      remote luke;
+      icon   doll;
+      text   t_begin_0;
+      option t_begin_o0 brk;
+   }
+}
+
+/* Assassin */
+ilo_kon(prog_a) {
+   lipu(page_start) {
+      name   doll;
+      remote omi;
+      icon   doll;
+      text   t_begin_0;
+      option t_begin_o0 brk;
+   }
+}
+
 /* Dark Lord */
 ilo_kon(prog_d) {
    jo {
@@ -172,7 +216,7 @@ ilo_kon(prog_d) {
       ari_death,
       ari_right,
       ari_sister,
-      d_meet = 100,
+      d_meet = 1,
       d_mirror,
       d_whym,
       d_selse,
@@ -274,21 +318,20 @@ ilo_kon(prog_d) {
    }
 }
 
-
 /* Thoth */
 ilo_kon(prog_t) {
    jo {
       kiri_met = var_kiri,
       kiri_self,
-      t_breaking = 100,
+      t_breaking = 1,
       t_down,
       t_broken,
       t_entity,
    }
    lipu(page_start) {
-      name   DOLL;
-      remote KIRI;
-      icon   Doll;
+      name   doll;
+      remote kiri;
+      icon   doll;
       option t_begin_o0 brk;
       seme poki_jan pT {
          seme !insa kiri_met {

@@ -40,8 +40,12 @@
 
 ## abyss
 == \#REMOTE_ARI  | aricild@org.drifting
+== \#REMOTE_FULK | fulkv@mil.<hidden>
+== \#REMOTE_JEM  | jeremys.p41632@corp.AOF
 == \#REMOTE_KIRI | kirihitok@raddr.4E19
 == \#REMOTE_LANE | laneb@mil.<hidden>
+== \#REMOTE_LUKE | lucass@com.fholsmail
+== \#REMOTE_OMI  | omisiellef@org.drifting
 
 == \#PNAME_DOLL | Doll
 

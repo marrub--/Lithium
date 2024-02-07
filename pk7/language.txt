@@ -552,10 +552,18 @@
    "Goodbye.";
 "LITH_REMOTE_ARI" =
    "aricild@org.drifting";
+"LITH_REMOTE_FULK" =
+   "fulkv@mil.<hidden>";
+"LITH_REMOTE_JEM" =
+   "jeremys.p41632@corp.AOF";
 "LITH_REMOTE_KIRI" =
    "kirihitok@raddr.4E19";
 "LITH_REMOTE_LANE" =
    "laneb@mil.<hidden>";
+"LITH_REMOTE_LUKE" =
+   "lucass@com.fholsmail";
+"LITH_REMOTE_OMI" =
+   "omisiellef@org.drifting";
 "LITH_PNAME_DOLL" =
    "Doll";
 "LITH_dlg_abyss_begin" =
