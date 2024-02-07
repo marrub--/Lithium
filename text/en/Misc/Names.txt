@@ -6,6 +6,42 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
+## Remote Addresses ══════════════════════════════════════════════════════════╕
+== \#REMOTE_HIDDEN  | <hidden>
+== \#REMOTE_UNKNOWN | <unknown>@raddr.4E19
+== \#REMOTE_DATA    | data@localhost
+
+== \#REMOTE_JACQUES | jacques.p42710@corp.AOF
+== \#REMOTE_TEST    | test@org.example
+
+== \#REMOTE_LAMBERT | ALambert@corp.OFMD
+== \#REMOTE_MAXIE   | maxie@ai.judgment.51e
+== \#REMOTE_OCS     | OCS@localhost
+
+== \#REMOTE_ARI  | aricild@org.drifting?UNVERIFIED
+== \#REMOTE_FULK | fulkv@mil.<hidden>
+== \#REMOTE_JEM  | jeremys.p41632@corp.AOF
+== \#REMOTE_KIRI | kirihitok@raddr.4E19
+== \#REMOTE_LANE | laneb@mil.<hidden>
+== \#REMOTE_LUKE | lucass@com.fholsmail
+== \#REMOTE_OMI  | omisiellef@org.drifting?UNVERIFIED
+
+## Names ═════════════════════════════════════════════════════════════════════╕
+== \#PNAME_UNKNOWN | ???
+
+== \#PNAME_JACQUES | Jacques
+== \#PNAME_NOTE    | Lost Note
+
+== \#PNAME_DOLL | Doll
+== \#PNAME_MAXIE | Maxie
+
+## Log-on Messages ═══════════════════════════════════════════════════════════╕
+== \#LOGON_TEST | \cgehhg.431.4122/-/<PFGR ZNE6 \cr&49c2\cg>
+
+== \#LOGON_AOF  | \ch2929ff\cm..\cr4-\cg<<<LCMD INP \cn188D 1F4C\cg>>>
+== \#LOGON_DATA | \cu[Ship Data Terminal]
+== \#LOGON_UAC  | \cd*** ON-BOARD COMMAND SYSTEM ACCESS TERMINAL ***
+
 ## Tags ══════════════════════════════════════════════════════════════════════╕
 == \#TAG_BlurSphere      | Fragma
 == \#TAG_GreyHam         | Grey Ham

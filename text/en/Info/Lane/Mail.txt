@@ -6,8 +6,6 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-== \#REMOTE_LAMBERT | ALambert@corp.OFMD
-
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_TITLE_MIntroLane | $$\#SAVED_MESSAGE
 == \#INFO_REMOT_MIntroLane | $$\#REMOTE_LAMBERT

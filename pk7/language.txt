@@ -226,24 +226,6 @@
    "\n"
    "- Barrel explosion sprites";
 [en enu default]
-"LITH_REMOTE_HIDDEN" =
-   "<hidden>";
-"LITH_REMOTE_UNKNOWN" =
-   "<unknown>@raddr.4E19";
-"LITH_REMOTE_DATA" =
-   "data@localhost";
-"LITH_PNAME_UNKNOWN" =
-   "???";
-"LITH_REMOTE_JACQUES" =
-   "jacques.p42710@corp.AOF";
-"LITH_REMOTE_TEST" =
-   "test@org.example";
-"LITH_PNAME_JACQUES" =
-   "Jacques";
-"LITH_PNAME_NOTE" =
-   "Lost Note";
-"LITH_LOGON_TEST" =
-   "\cgehhg.431.4122/-/<PFGR ZNE6 \cr&49c2\cg>";
 "LITH_dlg_test_terminal_logon" =
    "$$LITH_LOGON_TEST";
 "LITH_dlg_test_terminal_inf" =
@@ -396,18 +378,6 @@
    "  Repeat, repeat, repeat again —\n"
    "   blades speak truths we\n"
    "    can not say ourselves.";
-"LITH_REMOTE_MAXIE" =
-   "maxie@ai.judgment.51e";
-"LITH_REMOTE_OCS" =
-   "OCS@localhost";
-"LITH_PNAME_MAXIE" =
-   "Maxie";
-"LITH_LOGON_AOF" =
-   "\ch2929ff\cm..\cr4-\cg<<<LCMD INP \cn188D 1F4C\cg>>>";
-"LITH_LOGON_UAC" =
-   "\cd*** ON-BOARD COMMAND SYSTEM ACCESS TERMINAL ***";
-"LITH_LOGON_DATA" =
-   "\cu[Ship Data Terminal]";
 "LITH_PAGE_M1A1_01_C_01" =
    "\cdApologies for the abrupt stop, this ship hasn't run the faster than light engine enough times. We didn't collide with the planet, so I'm not very worried about its future performance, now.\n"
    "\n"
@@ -550,22 +520,6 @@
    "Maybe if I put wheels on this bowl I'd go faster...";
 "LITH_OPT_M1A2_01_04_01" =
    "Goodbye.";
-"LITH_REMOTE_ARI" =
-   "aricild@org.drifting";
-"LITH_REMOTE_FULK" =
-   "fulkv@mil.<hidden>";
-"LITH_REMOTE_JEM" =
-   "jeremys.p41632@corp.AOF";
-"LITH_REMOTE_KIRI" =
-   "kirihitok@raddr.4E19";
-"LITH_REMOTE_LANE" =
-   "laneb@mil.<hidden>";
-"LITH_REMOTE_LUKE" =
-   "lucass@com.fholsmail";
-"LITH_REMOTE_OMI" =
-   "omisiellef@org.drifting";
-"LITH_PNAME_DOLL" =
-   "Doll";
 "LITH_dlg_abyss_begin" =
    "\c[Lith_Green]Into the pit!\n"
    "\c[Lith_Red]Into Abyss -\n"
@@ -2427,8 +2381,6 @@
    "\cgYou will not get away with this intrepid game.\n"
    "\n"
    "\cgOrder.";
-"LITH_REMOTE_LAMBERT" =
-   "ALambert@corp.OFMD";
 "LITH_INFO_TITLE_MIntroLane" =
    "$$LITH_SAVED_MESSAGE";
 "LITH_INFO_REMOT_MIntroLane" =
@@ -5213,6 +5165,178 @@
    "Sludge Factory";
 "LITH_MARKER_LITHABYS_WhatWas" =
    "Ruins of What Was";
+"LITH_REMOTE_HIDDEN" =
+   "<hidden>";
+"LITH_REMOTE_UNKNOWN" =
+   "<unknown>@raddr.4E19";
+"LITH_REMOTE_DATA" =
+   "data@localhost";
+"LITH_REMOTE_JACQUES" =
+   "jacques.p42710@corp.AOF";
+"LITH_REMOTE_TEST" =
+   "test@org.example";
+"LITH_REMOTE_LAMBERT" =
+   "ALambert@corp.OFMD";
+"LITH_REMOTE_MAXIE" =
+   "maxie@ai.judgment.51e";
+"LITH_REMOTE_OCS" =
+   "OCS@localhost";
+"LITH_REMOTE_ARI" =
+   "aricild@org.drifting?UNVERIFIED";
+"LITH_REMOTE_FULK" =
+   "fulkv@mil.<hidden>";
+"LITH_REMOTE_JEM" =
+   "jeremys.p41632@corp.AOF";
+"LITH_REMOTE_KIRI" =
+   "kirihitok@raddr.4E19";
+"LITH_REMOTE_LANE" =
+   "laneb@mil.<hidden>";
+"LITH_REMOTE_LUKE" =
+   "lucass@com.fholsmail";
+"LITH_REMOTE_OMI" =
+   "omisiellef@org.drifting?UNVERIFIED";
+"LITH_PNAME_UNKNOWN" =
+   "???";
+"LITH_PNAME_JACQUES" =
+   "Jacques";
+"LITH_PNAME_NOTE" =
+   "Lost Note";
+"LITH_PNAME_DOLL" =
+   "Doll";
+"LITH_PNAME_MAXIE" =
+   "Maxie";
+"LITH_LOGON_TEST" =
+   "\cgehhg.431.4122/-/<PFGR ZNE6 \cr&49c2\cg>";
+"LITH_LOGON_AOF" =
+   "\ch2929ff\cm..\cr4-\cg<<<LCMD INP \cn188D 1F4C\cg>>>";
+"LITH_LOGON_DATA" =
+   "\cu[Ship Data Terminal]";
+"LITH_LOGON_UAC" =
+   "\cd*** ON-BOARD COMMAND SYSTEM ACCESS TERMINAL ***";
+"LITH_TAG_BlurSphere" =
+   "Fragma";
+"LITH_TAG_GreyHam" =
+   "Grey Ham";
+"LITH_TAG_Megasphere" =
+   "Hailaz";
+"LITH_TAG_SoulSphere" =
+   "Heart";
+"LITH_TAG_SteggleSphere" =
+   "Steggle Sphere";
+"LITH_TAG_ShobonSphere" =
+   "Shobon Sphere";
+"LITH_TAG_AbyssTeleporter" =
+   "Teleporter";
+"LITH_TAG_ManaAmmo" =
+   "Mana";
+"LITH_TAG_BulletAmmo" =
+   "Bullets";
+"LITH_TAG_ShellAmmo" =
+   "Shells";
+"LITH_TAG_RocketAmmo" =
+   "Rockets";
+"LITH_TAG_PlasmaAmmo" =
+   "Energy";
+"LITH_TAG_CannonAmmo" =
+   "Dark Energy";
+"LITH_TAG_Weapon0" =
+   "Slot 1 Weapon (Basic)";
+"LITH_TAG_Weapon1" =
+   "Slot 1 Weapon (Adv.)";
+"LITH_TAG_Weapon2" =
+   "Slot 2 Weapon";
+"LITH_TAG_Weapon3" =
+   "Slot 3 Weapon (Basic)";
+"LITH_TAG_Weapon4" =
+   "Slot 3 Weapon (Adv.)";
+"LITH_TAG_Weapon5" =
+   "Slot 4 Weapon";
+"LITH_TAG_Weapon6" =
+   "Slot 5 Weapon";
+"LITH_TAG_Weapon7" =
+   "Slot 6 Weapon";
+"LITH_TAG_Weapon8" =
+   "Slot 7 Weapon";
+"LITH_TAG_Upgrade1" =
+   "CBI Upgrade #1";
+"LITH_TAG_Upgrade2" =
+   "CBI Upgrade #2";
+"LITH_TAG_Upgrade3" =
+   "CBI Upgrade #3";
+"LITH_TAG_Upgrade4" =
+   "CBI Upgrade #4";
+"LITH_TAG_Upgrade5" =
+   "CBI Upgrade #5";
+"LITH_TAG_Upgrade6" =
+   "CBI Upgrade #6";
+"LITH_TAG_Sword" =
+   "sord";
+"LITH_TAG_WingsOfDeath" =
+   "Wings of Death";
+"LITH_TAG_DSparil" =
+   "D'Sparil";
+"LITH_TAG_Disciple" =
+   "Disciple of D'Sparil";
+"LITH_TAG_Gargoyle" =
+   "Gargoyle";
+"LITH_TAG_GargoyleFire" =
+   "Fire Gargoyle";
+"LITH_TAG_Golem" =
+   "Golem";
+"LITH_TAG_GolemGhost" =
+   "Ethereal Golem";
+"LITH_TAG_IronLich" =
+   "Iron Lich";
+"LITH_TAG_Maulotaur" =
+   "Maulotaur";
+"LITH_TAG_Nitrogolem" =
+   "Nitrogolem";
+"LITH_TAG_NitrogolemGhost" =
+   "Ethereal Nitrogolem";
+"LITH_TAG_Ophidian" =
+   "Ophidian";
+"LITH_TAG_Sabreclaw" =
+   "Sabreclaw";
+"LITH_TAG_SpectralWarrior" =
+   "Spectral Warrior";
+"LITH_TAG_Steggles" =
+   "steggles";
+"LITH_TAG_UndeadWarrior" =
+   "Undead Warrior";
+"LITH_TAG_Weredragon" =
+   "Weredragon";
+"LITH_STAT_ACC" =
+   "Accurate";
+"LITH_STAT_ACD" =
+   "Adrenaline Ready";
+"LITH_STAT_ACH" =
+   "Adrenaline Charging";
+"LITH_STAT_ADR" =
+   "Adrenaline Active";
+"LITH_STAT_BAR" =
+   "Barrier";
+"LITH_STAT_BER" =
+   "Berserk";
+"LITH_STAT_FLY" =
+   "Flight";
+"LITH_STAT_INR" =
+   "Light Amplifier";
+"LITH_STAT_INV" =
+   "Invulnerability!";
+"LITH_STAT_JET" =
+   "Jetboost";
+"LITH_STAT_LAG" =
+   "Jetlagged";
+"LITH_STAT_MKM" =
+   "Marksman";
+"LITH_STAT_RAD" =
+   "Hazard Protection";
+"LITH_STAT_SWD" =
+   "Silence of Shadows";
+"LITH_STAT_SWR" =
+   "Shadow-walker";
+"LITH_STAT_SKP" =
+   "Absolute Focus!";
 "QUITMSG1" =
    "Hold it, your contract isn't complete yet!";
 "QUITMSG2" =
@@ -6111,130 +6235,6 @@
    "\cnVital Scanner";
 "LITH_st_labl_xhair" =
    "\cnDynamic Crosshair";
-"LITH_TAG_BlurSphere" =
-   "Fragma";
-"LITH_TAG_GreyHam" =
-   "Grey Ham";
-"LITH_TAG_Megasphere" =
-   "Hailaz";
-"LITH_TAG_SoulSphere" =
-   "Heart";
-"LITH_TAG_SteggleSphere" =
-   "Steggle Sphere";
-"LITH_TAG_ShobonSphere" =
-   "Shobon Sphere";
-"LITH_TAG_AbyssTeleporter" =
-   "Teleporter";
-"LITH_TAG_ManaAmmo" =
-   "Mana";
-"LITH_TAG_BulletAmmo" =
-   "Bullets";
-"LITH_TAG_ShellAmmo" =
-   "Shells";
-"LITH_TAG_RocketAmmo" =
-   "Rockets";
-"LITH_TAG_PlasmaAmmo" =
-   "Energy";
-"LITH_TAG_CannonAmmo" =
-   "Dark Energy";
-"LITH_TAG_Weapon0" =
-   "Slot 1 Weapon (Basic)";
-"LITH_TAG_Weapon1" =
-   "Slot 1 Weapon (Adv.)";
-"LITH_TAG_Weapon2" =
-   "Slot 2 Weapon";
-"LITH_TAG_Weapon3" =
-   "Slot 3 Weapon (Basic)";
-"LITH_TAG_Weapon4" =
-   "Slot 3 Weapon (Adv.)";
-"LITH_TAG_Weapon5" =
-   "Slot 4 Weapon";
-"LITH_TAG_Weapon6" =
-   "Slot 5 Weapon";
-"LITH_TAG_Weapon7" =
-   "Slot 6 Weapon";
-"LITH_TAG_Weapon8" =
-   "Slot 7 Weapon";
-"LITH_TAG_Upgrade1" =
-   "CBI Upgrade #1";
-"LITH_TAG_Upgrade2" =
-   "CBI Upgrade #2";
-"LITH_TAG_Upgrade3" =
-   "CBI Upgrade #3";
-"LITH_TAG_Upgrade4" =
-   "CBI Upgrade #4";
-"LITH_TAG_Upgrade5" =
-   "CBI Upgrade #5";
-"LITH_TAG_Upgrade6" =
-   "CBI Upgrade #6";
-"LITH_TAG_Sword" =
-   "sord";
-"LITH_TAG_WingsOfDeath" =
-   "Wings of Death";
-"LITH_TAG_DSparil" =
-   "D'Sparil";
-"LITH_TAG_Disciple" =
-   "Disciple of D'Sparil";
-"LITH_TAG_Gargoyle" =
-   "Gargoyle";
-"LITH_TAG_GargoyleFire" =
-   "Fire Gargoyle";
-"LITH_TAG_Golem" =
-   "Golem";
-"LITH_TAG_GolemGhost" =
-   "Ethereal Golem";
-"LITH_TAG_IronLich" =
-   "Iron Lich";
-"LITH_TAG_Maulotaur" =
-   "Maulotaur";
-"LITH_TAG_Nitrogolem" =
-   "Nitrogolem";
-"LITH_TAG_NitrogolemGhost" =
-   "Ethereal Nitrogolem";
-"LITH_TAG_Ophidian" =
-   "Ophidian";
-"LITH_TAG_Sabreclaw" =
-   "Sabreclaw";
-"LITH_TAG_SpectralWarrior" =
-   "Spectral Warrior";
-"LITH_TAG_Steggles" =
-   "steggles";
-"LITH_TAG_UndeadWarrior" =
-   "Undead Warrior";
-"LITH_TAG_Weredragon" =
-   "Weredragon";
-"LITH_STAT_ACC" =
-   "Accurate";
-"LITH_STAT_ACD" =
-   "Adrenaline Ready";
-"LITH_STAT_ACH" =
-   "Adrenaline Charging";
-"LITH_STAT_ADR" =
-   "Adrenaline Active";
-"LITH_STAT_BAR" =
-   "Barrier";
-"LITH_STAT_BER" =
-   "Berserk";
-"LITH_STAT_FLY" =
-   "Flight";
-"LITH_STAT_INR" =
-   "Light Amplifier";
-"LITH_STAT_INV" =
-   "Invulnerability!";
-"LITH_STAT_JET" =
-   "Jetboost";
-"LITH_STAT_LAG" =
-   "Jetlagged";
-"LITH_STAT_MKM" =
-   "Marksman";
-"LITH_STAT_RAD" =
-   "Hazard Protection";
-"LITH_STAT_SWD" =
-   "Silence of Shadows";
-"LITH_STAT_SWR" =
-   "Shadow-walker";
-"LITH_STAT_SKP" =
-   "Absolute Focus!";
 "LITH_ACTIVATE" =
    "Activate";
 "LITH_AUTOGROUPS" =

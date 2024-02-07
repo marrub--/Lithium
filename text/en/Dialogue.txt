@@ -6,52 +6,13 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-## general purpose
-== \#REMOTE_HIDDEN  | <hidden>
-== \#REMOTE_UNKNOWN | <unknown>@raddr.4E19
-== \#REMOTE_DATA    | data@localhost
-
-== \#PNAME_UNKNOWN | ???
-
-## testing
-== \#REMOTE_JACQUES | jacques.p42710@corp.AOF
-== \#REMOTE_TEST    | test@org.example
-
-== \#PNAME_JACQUES | Jacques
-== \#PNAME_NOTE    | Lost Note
-
-== \#LOGON_TEST | \cgehhg.431.4122/-/<PFGR ZNE6 \cr&49c2\cg>
-
 !!include Dialogue/TestMap.txt
 !!include Dialogue/Sky.txt
-
-## story mode
-== \#REMOTE_MAXIE | maxie@ai.judgment.51e
-== \#REMOTE_OCS   | OCS@localhost
-
-== \#PNAME_MAXIE | Maxie
-
-== \#LOGON_AOF  | \ch2929ff\cm..\cr4-\cg<<<LCMD INP \cn188D 1F4C\cg>>>
-== \#LOGON_UAC  | \cd*** ON-BOARD COMMAND SYSTEM ACCESS TERMINAL ***
-== \#LOGON_DATA | \cu[Ship Data Terminal]
 
 !!include Dialogue/M1A1.txt
 !!include Dialogue/M1A2.txt
 
-## abyss
-== \#REMOTE_ARI  | aricild@org.drifting
-== \#REMOTE_FULK | fulkv@mil.<hidden>
-== \#REMOTE_JEM  | jeremys.p41632@corp.AOF
-== \#REMOTE_KIRI | kirihitok@raddr.4E19
-== \#REMOTE_LANE | laneb@mil.<hidden>
-== \#REMOTE_LUKE | lucass@com.fholsmail
-== \#REMOTE_OMI  | omisiellef@org.drifting
-
-== \#PNAME_DOLL | Doll
-
 !!include Dialogue/Abyss.txt
-
-## negotiation
 !!include Dialogue/Negotiation.txt
 
 ## EOF

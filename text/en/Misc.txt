@@ -9,9 +9,9 @@
 !!include Misc/Beginning.txt
 !!include Misc/Inventory.txt
 !!include Misc/Markers.txt
+!!include Misc/Names.txt
 !!include Misc/QuitMessages.txt
 !!include Misc/Settings.txt
-!!include Misc/Tags.txt
 !!include Misc/UI.txt
 
 @@ \#OPENER
