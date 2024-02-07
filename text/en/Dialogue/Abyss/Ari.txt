@@ -1,0 +1,207 @@
+## ╭-*-Agw-LithTxt-*-─────────────────────────────────────────────────────────╮
+## │                                                                          │
+## │             Distributed under the CC0 public domain license.             │
+## │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+## │                See licenses/cc0.txt for more information.                │
+## │                                                                          │
+## ╰──────────────────────────────────────────────────────────────────────────╯
+
+@@ \#dlg_abyss_d_begin_0
+Do you aspire to be just one? One thing, one person? Is, in the
+multiplicious soup, the melange of life, your stated goal to avoid
+it? Do you aspire to be another person? To live their life, see
+through their eyes, see into what they are? Was that what you always
+were?
+
+%% \#dlg_abyss_d_begin_o0
+Well, I'm going now.
+\cn[This guy's having a... time... I've been there.]
+
+%% \#dlg_abyss_d_begin_o0_d
+Well, I'm going now.
+\cn[This doll looks like me... it's creeping me out.]
+
+%% \#dlg_abyss_d_begin_o1
+Are you okay?
+
+%% \#dlg_abyss_d_begin_o1_d
+I've no particular aspirations of personhood.
+\cn[I'm not really sure what this guy is even saying.]
+
+@@ \#dlg_abyss_do_meet_0
+Yes, I'm just fine. Thaaaanks.
+
+%% \#dlg_abyss_do_meet_o0
+Okay...
+
+@@ \#dlg_abyss_d_meet_0
+PERSONHOOD: Defined by a clinging of one's self—rather, one's
+consciousness—to this mortal world. Well, okay, we might not be in a
+mortal world at the moment. But let's keep going.
+
+If I am you, and you are me, then, well, who am I? We look the same,
+we talk similarly. But, you don't know what I'm going to say. Are we
+really the same person, then? If we had no hidden variables—say, if a
+divine being were to look at us—what would we see?
+
+%% \#dlg_abyss_d_meet_o0
+A mirror?
+
+%% \#dlg_abyss_d_meet_o1
+Someone completely different on each end?
+
+%% \#dlg_abyss_d_meet_o2
+This is only getting more confusing.
+\cn[Fuck this.]
+
+@@ \#dlg_abyss_d_mirror_0
+Very good!
+
+\cn[I feel mildly condescended to.]
+
+Now, why do I look like a doll to you?
+
+%% \#dlg_abyss_d_mirror_o0
+Why am I looking at a mirror?
+
+%% \#dlg_abyss_d_mirror_o1
+I think of myself that way?
+
+%% \#dlg_abyss_d_mirror_o2
+I don't know.
+
+@@ \#dlg_abyss_d_whym_0
+I don't know. Maybe you knocked your head on the way into Hell? Does
+it matter?
+
+%% \#dlg_abyss_d_whym_o0
+Yes.
+
+%% \#dlg_abyss_d_whym_o1
+No.
+
+%% \#dlg_abyss_d_whym_o2
+OK, I guess.
+\cq[I'm pretty sure they just bullshitted that.]
+
+@@ \#dlg_abyss_d_whym_1
+It was a dark and stormy night. You were on your way into Hell,
+following your sister. If we remember how black holes work, they're a
+compact mass deforming spacetime. In this case, it was a maliciously,
+intentionally placed piece of exotic matter. You got sucked out of
+your normal place in the abelian group—er, sorry, rather, you're past
+and simultaneously in the event horizon, and right now, you're
+experiencing a state of consciousness that's not normally possible,
+because it's a weird and fucked up kind of spacetime here. Okay?
+
+@@ \#dlg_abyss_d_selse_0
+Interesting choice, what with the other one seeming more correct; but,
+you're actually still not far off. If your consciousness was like a
+large collection of photons, it's not just reflecting like a mirror
+now, but bouncing off a wall, and on the opposite side of the wall,
+where no light is shining, is you.
+
+Next, let's get into a deeper, more philosophical question: Why do I
+look like a doll to you?
+
+%% \#dlg_abyss_d_selse_o0
+Well, by that description, I suppose it's what my mind's eye sees?
+
+%% \#dlg_abyss_d_selse_o1
+Do I really see myself that way?
+
+%% \#dlg_abyss_d_selse_o2
+I don't know.
+
+@@ \#dlg_abyss_d_mindseye_0
+Yes. I suppose. I guess. Yes! Obviously! Jackass! Why does your mind's
+eye see \cna doll\c-?
+
+%% \#dlg_abyss_d_mindseye_o0
+I... think of myself as being like one?
+
+%% \#dlg_abyss_d_mindseye_o1
+Is this a question I should really be asking myself?
+\cn[I'll back off slowly.]
+
+@@ \#dlg_abyss_d_right_0
+Yes.
+
+@@ \#dlg_abyss_d_right_o0
+Right...
+
+@@ \#dlg_abyss_d_unintuit_0
+Is the question somehow unintuitive? No, I see. You're deep into
+denial. You can't keep hurting yourself like this. You're worth more
+than...
+
+No, now I'm messing up the script.
+
+Scream into me until you realize: You see yourself this way, no?
+
+%% \#dlg_abyss_d_unintuit_o0
+I feel incredibly intimidated. Can I go?
+
+%% \#dlg_abyss_d_unintuit_o1
+I want to die. Can I leave?
+
+%% \#dlg_abyss_d_unintuit_o2
+Right...
+
+@@ \#dlg_abyss_d_holdys_0
+Try to hold yourself together. If you're feeling intimidated,
+perhaps this part of me is just scary. You see a mirror of hurt, it
+hurts you.
+
+@@ \#dlg_abyss_d_holdys_1
+No, try to hold yourself together. Death isn't even an option in this
+interstice. You'll get out alive. You can think about dying after
+that.
+
+@@ \#dlg_abyss_d_holdys_2
+Now: You are a doll. I am a doll. We both are seeing the same thing.
+We are the same person, but both of us see something wrong. You need
+to calm down. You need to stop feeling the need to throw yourself
+away. You need to calm down. You need to see yourself as human.
+
+%% \#dlg_abyss_d_holdys_o0
+How?
+
+@@ \#dlg_abyss_d_doll_0
+Right. And when I look at you, I see you as a doll, too.
+
+But, is this the right metaphor? Now that we've deduced this, it all
+seems kind of straight-forward. Dolls represent something kept and
+maintained, but less than human, able to be thrown away by the less
+sentimental. If you see yourself as a doll, you're seeing yourself as
+something less than human. If you're afraid of being thrown
+away—obviously, I know you are—please stop willingly throwing yourself
+away.
+
+%% \#dlg_abyss_d_doll_o0
+You don't have the right to tell me this.
+
+%% \#dlg_abyss_d_doll_o1
+Alright. Why am I telling myself this?
+
+%% \#dlg_abyss_d_doll_o2
+\cmYou don't have the right to tell me this.
+\cn[Yes I do, I'm you.]
+
+@@ \#dlg_abyss_d_hallow_0
+This hallowed place splits thought and matter like nothing else. This
+mirror of you—and the wall that separates us—makes it hard to answer
+that question. We could talk for hours, or you could just leave.
+
+@@ \#dlg_abyss_d_hallow_1
+I'm sorry that I've strung you along like this. Just try to relax, and
+leave when you feel comfortable.
+
+@@ \#dlg_abyss_d_hallow_2
+Try to find your sister and talk to them. It might make you feel
+better.
+
+%% \#dlg_abyss_d_hallow_o0
+\cn[I think that's enough.]
+
+## EOF

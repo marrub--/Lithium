@@ -39,6 +39,7 @@
 !!include Dialogue/M1A2.txt
 
 ## abyss
+== \#REMOTE_ARI  | aricild@org.drifting
 == \#REMOTE_KIRI | kirihitok@raddr.4E19
 == \#REMOTE_LANE | laneb@mil.<hidden>
 

@@ -157,6 +157,117 @@ ilo_kon(prog_m) {
    }
 }
 
+/* Dark Lord */
+ilo_kon(prog_d) {
+   jo {
+      ari_met = var_beg $10 +,
+      ari_doesitmatter,
+      ari_death,
+      ari_right,
+      ari_sister,
+      d_meet = 100,
+      d_mirror,
+      d_whym,
+      d_selse,
+      d_mindseye,
+      d_right,
+      d_unintuit,
+      d_holdys,
+      d_doll,
+      d_hallow,
+      do_meet,
+   }
+   lipu(page_start) {
+      name   doll;
+      remote ari;
+      icon   doll;
+      text   d_begin_0;
+      option d_begin_o0 brk;
+      seme !insa ari_met {
+         option d_begin_o1 {
+            seme poki_jan pD jump_page d_meet;
+            anu              jump_page do_meet;
+         }
+      }
+   }
+   /* Ari */
+   lipu(d_meet) {
+      inc %ari_met;
+      text d_meet_0;
+      option d_meet_o0 jump_page d_mirror;
+      option d_meet_o1 jump_page d_selse;
+      option d_meet_o2 brk;
+   }
+   lipu(d_mirror) {
+      text d_mirror_0;
+      seme !insa ari_doesitmatter {
+         option d_mirror_o0 jump_page d_whym;
+      }
+      option d_mirror_o1 jump_page d_doll;
+      option d_mirror_o2 jump_page d_unintuit;
+   }
+   lipu(d_whym) {
+      seme !insa ari_doesitmatter {
+         text d_whym_0;
+         option d_whym_o0 {
+            inc %ari_doesitmatter;
+            jump_page d_whym;
+         }
+         option d_whym_o1 jump_page d_mirror;
+      } anu {
+         text d_whym_1;
+         option d_whym_o2 jump_page d_unintuit;
+      }
+   }
+   lipu(d_selse) {
+      text d_selse_0;
+      option d_selse_o0 jump_page d_mindseye;
+      option d_selse_o1 jump_page d_right;
+      option d_selse_o2 jump_page d_unintuit;
+   }
+   lipu(d_mindseye) {
+      text d_mindseye_0;
+      option d_mindseye_o0 jump_page d_doll;
+      option d_mindseye_o1 brk;
+   }
+   lipu(d_right) {
+      text d_right_0;
+      option d_right_o0 jump_page d_doll;
+   }
+   lipu(d_unintuit) {
+      text d_unintuit_0;
+      option d_unintuit_o0 jump_page d_holdys;
+      option d_unintuit_o1 {inc %ari_death; jump_page d_holdys;}
+      option d_unintuit_o2 jump_page d_doll;
+   }
+   lipu(d_holdys) {
+      seme !insa ari_death {text d_holdys_0;} anu {text d_holdys_1;}
+      text2 d_holdys_2;
+      option d_holdys_o0 jump_page d_hallow;
+   }
+   lipu(d_doll) {
+      text d_doll_0;
+      seme !insa ari_right {
+         option d_doll_o0 {inc %ari_right; jump_page d_doll;}
+      } anu {
+         option d_doll_o2 jump_page d_doll;
+      }
+      option d_doll_o1 {inc %ari_sister; jump_page d_hallow;}
+   }
+   lipu(d_hallow) {
+      text d_hallow_0;
+      seme insa ari_sister {text2 d_hallow_2;} anu {text2 d_hallow_1;}
+      option d_hallow_o0 brk;
+   }
+   /* Other */
+   lipu(do_meet) {
+      inc %ari_met;
+      text do_meet_0;
+      option do_meet_o0 brk;
+   }
+}
+
+
 /* Thoth */
 /*
 ilo_kon(prog_t) {
