@@ -1016,8 +1016,8 @@ bool chtf_run_trm(cheat_params_t const params) {
    return true;
 }
 
-struct cheat cht_run_prg = cheat_s("pgrprg", 2, chtf_run_prg, "Program unleashed");
-struct cheat cht_run_dlg = cheat_s("pgrdlg", 2, chtf_run_dlg, "Dialogue unleashed");
-struct cheat cht_run_trm = cheat_s("pgrtrm", 2, chtf_run_trm, "Terminal unleashed");
+struct cheat cht_run_prg = cheat_s("pgexe", 2, chtf_run_prg, "Program unleashed");
+struct cheat cht_run_dlg = cheat_s("pgexd", 2, chtf_run_dlg, "Dialogue unleashed");
+struct cheat cht_run_trm = cheat_s("pgext", 2, chtf_run_trm, "Terminal unleashed");
 
 /* EOF */
