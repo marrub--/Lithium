@@ -23,7 +23,7 @@
 \cy\u{E100}\u{E103}\u{E107}\u{E100}\u{E106}\u{E101}\u{E103}\u{E100}
 \u{E104}\u{E108}\u{E100}\u{E100}
 \u{E103}\u{E106}\u{E101}\u{E104}\u{E108} \u{E10A}\u{E10F}
-\u{E101}\u{E104}\u{E10C}\u{E10F}\u{E10B}\u{E111}\u{E10C}\u{E10F}
+\u{E101}\u{E104}\u{E10C}\u{E10F}\u{E10B}\u{E110}\u{E10C}\u{E10F}
 \u{E106}\u{E103}\c-
 
 The 339-7 REMS is a heavy machinegun for spacecraft that was developed
