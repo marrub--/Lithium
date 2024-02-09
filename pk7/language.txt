@@ -3100,7 +3100,7 @@
 "LITH_INFO_SHORT_DualRocket" =
    "Franca & Sophia";
 "LITH_INFO_SHORT_FortuneGun" =
-   "Fortiuty";
+   "Fortuity";
 "LITH_INFO_SHORT_Rems" =
    "Qasl 339-7 REMS";
 "LITH_INFO_TITLE_Rems" =

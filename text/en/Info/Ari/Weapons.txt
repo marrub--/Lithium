@@ -14,7 +14,7 @@
 == \#INFO_SHORT_Minigun     | Minigun
 == \#INFO_SHORT_Motra       | Ruzuk
 == \#INFO_SHORT_DualRocket  | Franca & Sophia
-== \#INFO_SHORT_FortuneGun  | Fortiuty
+== \#INFO_SHORT_FortuneGun  | Fortuity
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Rems | Qasl 339-7 REMS
