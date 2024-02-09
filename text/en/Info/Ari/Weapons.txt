@@ -15,8 +15,32 @@
 == \#INFO_SHORT_Motra       | Ruzuk
 == \#INFO_SHORT_DualRocket  | Franca & Sophia
 == \#INFO_SHORT_FortuneGun  | Fortiuty
-== \#INFO_SHORT_Rems        | Qasl 339-7 REMS
 
+## ═══════════════════════════════════════════════════════════════════════════╕
+== \#INFO_SHORT_Rems | Qasl 339-7 REMS
+== \#INFO_TITLE_Rems | Qasl 339-7 Revised Explosive-Microcule System
+@@ \#INFO_DESCR_Rems
+\cy\u{E100}\u{E103}\u{E107}\u{E100}\u{E106}\u{E101}\u{E103}\u{E100}
+\u{E104}\u{E108}\u{E100}\u{E100}
+\u{E103}\u{E106}\u{E101}\u{E104}\u{E108} \u{E10A}\u{E10F}
+\u{E101}\u{E104}\u{E10C}\u{E10F}\u{E10B}\u{E111}\u{E10C}\u{E10F}
+\u{E106}\u{E103}\c-
+
+The 339-7 REMS is a heavy machinegun for spacecraft that was developed
+during the last few years of the Dewar period by Qasl. Utilizing small
+chains of volatile lithium microcules, the gun has incredible
+ammunition efficiency, being able to essentially fire forever. When
+not attached to a ship, the reserves are far lower and it can only be
+used for short amounts of time, but it still generates thousands of
+projectiles with only 150ml of total ammunition.
+
+---------------------------------------------
+
+\cnNOTES:\c- This was mounted on the Moon-Free until a year or two
+ago. When it was decommissioned, I could only think it would still
+come in handy. It's starting to seem like my intuitions were right.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Rakz  | Sub-bullets
 == \#INFO_SHORT_Zaruk | Sub-grenades
 == \#INFO_SHORT_Zakwu | Sub-stealers

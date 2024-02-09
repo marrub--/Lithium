@@ -3103,6 +3103,16 @@
    "Fortiuty";
 "LITH_INFO_SHORT_Rems" =
    "Qasl 339-7 REMS";
+"LITH_INFO_TITLE_Rems" =
+   "Qasl 339-7 Revised Explosive-Microcule System";
+"LITH_INFO_DESCR_Rems" =
+   "\cy     \c-\n"
+   "\n"
+   "The 339-7 REMS is a heavy machinegun for spacecraft that was developed during the last few years of the Dewar period by Qasl. Utilizing small chains of volatile lithium microcules, the gun has incredible ammunition efficiency, being able to essentially fire forever. When not attached to a ship, the reserves are far lower and it can only be used for short amounts of time, but it still generates thousands of projectiles with only 150ml of total ammunition.\n"
+   "\n"
+   "---------------------------------------------\n"
+   "\n"
+   "\cnNOTES:\c- This was mounted on the Moon-Free until a year or two ago. When it was decommissioned, I could only think it would still come in handy. It's starting to seem like my intuitions were right.";
 "LITH_INFO_SHORT_Rakz" =
    "Sub-bullets";
 "LITH_INFO_SHORT_Zaruk" =
