@@ -5414,12 +5414,12 @@
    "The amount of wetware jammed into Cyber-Mage's\n"
    "brain is not healthy for anyone.";
 "QUITMSG25" =
-   "Marine was previously a gun collector,\n"
-   "but became disinterested after service.";
+   "Have some Herb Tea?";
 "QUITMSG26" =
-   "The Shock Rifle was previously used for hunting,\n"
-   "famed for its great power and ease of use.\n"
-   "Before it was stripped down and modified, anyway.";
+   "My family possesses this traditional technique!\n"
+   "It is my final strategy!\n"
+   "That is...\n"
+   "Run away!";
 "QUITMSG27" =
    "Give your soul to Hatsune Miku?";
 "QUITMSG28" =

@@ -61,13 +61,12 @@ prove the existence of yet another dimension.
 %% QUITMSG24
 The amount of wetware jammed into Cyber-Mage's
 brain is not healthy for anyone.
-%% QUITMSG25
-Marine was previously a gun collector,
-but became disinterested after service.
+== QUITMSG25 | Have some Herb Tea?
 %% QUITMSG26
-The Shock Rifle was previously used for hunting,
-famed for its great power and ease of use.
-Before it was stripped down and modified, anyway.
+My family possesses this traditional technique!
+It is my final strategy!
+That is...
+Run away!
 == QUITMSG27 | Give your soul to Hatsune Miku?
 %% QUITMSG28
 Within the week there will be OLD MEN,
