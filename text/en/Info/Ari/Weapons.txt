@@ -11,10 +11,29 @@
 == \#INFO_SHORT_700Express  | .700 Express
 == \#INFO_SHORT_ShrapnelGun | Shrapnel Gun
 == \#INFO_SHORT_4Bore       | Hunting Shotgun
-== \#INFO_SHORT_Minigun     | Minigun
-== \#INFO_SHORT_Motra       | Ruzuk
-== \#INFO_SHORT_DualRocket  | Franca & Sophia
-== \#INFO_SHORT_FortuneGun  | Fortuity
+
+## ═══════════════════════════════════════════════════════════════════════════╕
+== \#INFO_SHORT_Minigun | Minigun
+== \#INFO_TITLE_Minigun | 121 Minigun
+@@ \#INFO_DESCR_Minigun
+\cy\u{E106}\u{E108}\u{E104}\u{E108}\u{E100}\u{E103}\u{E102}\u{E104}\u{E106}\u{E104}\u{E108}\u{E100}
+\u{E10B}!\u{E10E}\u{E10F}\c-
+
+Directly translates to "11 squared." Of uncertain manufacture and
+origin. It may be a replica of the first gun ever made: It clearly
+exhibits late Spacewar/early Great Death design philosophy and
+manufacturing principles, but carbon dating and replicator errata
+place this particular gun in a much later period.
+
+---------------------------------------------
+
+\cnNOTES:\c- I found this in an abandoned warehouse, around the time
+we were born. Do you remember?
+
+## ═══════════════════════════════════════════════════════════════════════════╕
+== \#INFO_SHORT_Motra      | Ruzuk
+== \#INFO_SHORT_DualRocket | Franca & Sophia
+== \#INFO_SHORT_FortuneGun | Fortuity
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Rems | R.E.M.S.

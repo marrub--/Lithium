@@ -3095,6 +3095,16 @@
    "Hunting Shotgun";
 "LITH_INFO_SHORT_Minigun" =
    "Minigun";
+"LITH_INFO_TITLE_Minigun" =
+   "121 Minigun";
+"LITH_INFO_DESCR_Minigun" =
+   "\cy !\c-\n"
+   "\n"
+   "Directly translates to \"11 squared.\" Of uncertain manufacture and origin. It may be a replica of the first gun ever made: It clearly exhibits late Spacewar/early Great Death design philosophy and manufacturing principles, but carbon dating and replicator errata place this particular gun in a much later period.\n"
+   "\n"
+   "---------------------------------------------\n"
+   "\n"
+   "\cnNOTES:\c- I found this in an abandoned warehouse, around the time we were born. Do you remember?";
 "LITH_INFO_SHORT_Motra" =
    "Ruzuk";
 "LITH_INFO_SHORT_DualRocket" =
