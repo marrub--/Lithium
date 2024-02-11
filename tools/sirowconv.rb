@@ -2,7 +2,7 @@
 
 s = ARGV.pop.chars.map do |c|
    case c
-   when "0", "." then "\\u{E109}"
+   when "0" then "\\u{E109}"
    when "1" then "\\u{E10A}"
    when "2" then "\\u{E10B}"
    when "3" then "\\u{E10C}"
@@ -12,6 +12,7 @@ s = ARGV.pop.chars.map do |c|
    when "Y" then "\\u{E110}"
    when "Z" then "\\u{E111}"
    when "%" then "\\u{E112}"
+   when "." then "\\u{E113}"
    when "r" then "\\u{E100}"
    when "z" then "\\u{E101}"
    when "n" then "\\u{E102}"
