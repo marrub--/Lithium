@@ -34,8 +34,6 @@ ilo_kon(0) {
          crawl   Normal_3_Lane 400;
          crawl   Normal_4_Lane 400;
          crawl   Normal_5_Lane 400;
-         crawl   Normal_6_Lane 400;
-         crawl   Normal_7_Lane 400;
       } anu seme poki_jan pC {
          image   ":End:Jem";
          fade_in 50;

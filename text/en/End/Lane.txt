@@ -7,193 +7,90 @@
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
 %% \#dlg_ending_Normal_1_Lane
+I feel trapped in this place,
+this corner, this room,
+I have no one, that's okay.
+
+
+It always seems like the end.
+It's just seeing the ocean.
+Tears flow, clouds part.
+
+
+The fundament gets laid bare,
+eroded by salt and ash,
+the clouds part.
+
+
 It feels like nothing's changed.
+Those moods still take you,
+all the time.
 
+@@ \#dlg_ending_Normal_2_Lane
+Space always contained you, people always caged you. A little more
+time staying in the cage and it would've been the end. Would it? Why
+do you even think of these things?
 
-Those moods still take you.
+You remember the past, but you can't keep letting it hurt you. Still,
+yet, it feels impossible to let go of memories. Let go? Try to forget?
+Just try to live with it? What's the matter? What was the right way
+out? Your head is spinning as you run through this labyrinth.
 
+Cigarette smoke fills the room. The smell of alcohol invades your mind
+as a clear liquid rolls in from below the door.
 
-All the time.
-
-
-@@
-You hoped one day you would be happy. That day never came. It's just a
-fantasy at this point. A fantasy in the sea of a dream.
-@@
-
-
-                       "Why am I like this?"
-
-
-I don't know.
-
-
-                     "Will I ever be normal?"
-
-
-All you can bring yourself to answer,
-
-
-
-                         "I don't know."
-
-%% \#dlg_ending_Normal_2_Lane
-With an ocean of depressive thoughts, you considered all paths forward.
-
-
-
-
-                       "Why don't I ju t k*l[ m**,l/?"
-
-
-
-
-                           "Would anyone care?"
-
-
-
-
-      No, they wouldn't.
-
-
-
-
-                  "...Did anyone care in the first place?"
-
-
-
-
-              No,
-                        they didn't.
+War.
 
 %% \#dlg_ending_Normal_3_Lane
-
-
-                      "Please, just let this end for me."
-
-
-
-
-                        "Give me some kind of reason,"
-
-
-
-
-
-"please..."
-
-
-
-
-             Drowning in the middle of a miserable dream,
-
-
-
-
-
-                                  the dream is fading away.
+A voice in your head gets louder.
+You're sitting in the corner of a room meant for bad people.
+\cw  I can't keep getting up in the morning.
+\cu       No problem.
+\cw  I can't keep taxing myself like this, like everyone needs of me.
+\cu       No problem.
+\cw  I don't understand why I keep going.
+\cu       No problem.
+\c-With an ocean of depressive thoughts, you considered all paths forward.
+\cu       Suicide would be a lot easier.
+\cw  Animals are the same. Like this, they choose the same path.
+\cu       End it.
+\cw  Would anyone care?
+\cu       No.
+\cw  Then that's the right way out.
+\cw  Suicide would be a lot easier.
 
 @@ \#dlg_ending_Normal_4_Lane
-It's all you can think about. The \cgneed to get away from this life.\c-
-From this accursed world. Nothing is worth it. No matter how hard you
-try in life,
+You awaken in a hospital bed, cybernetics turned off, body aching
+all over. You won.
+
+Moonlight seeps into your retinas. You can't see the scars on your
+arms like this. Everything is quiet. For once, you slept well.
+
+For a moment, you thought you needed a voice in your head to tell
+yourself it'll be alright. The delusion fades away. The voice telling
+you to kill yourself is quiet. You don't say it to yourself.
+
+You wait a minute. You just lie there.
+
+Nothing else happens.
+
+Your muscles relax.
+
+For now, you've won.
+
+@@ \#dlg_ending_Normal_5_Lane
+\cdYou awaken in a hospital bed. It's day.
+
+\cnA man is sitting next to you, and he gives you a total for your
+payment. It's too much for you to fathom. You end up settling down in
+a nice house in a big city, living the high life.
+
+\cyThe effort you went through almost seems worth it now, but still in
+your mind lingers memories of horrors no one should know.
+
+\ckIn the end, the corporation you worked with merged with a new
+company, the UAC, and you never heard from them again.
 @@
-
-
-
-
-
-
-            you are simply ignored.
-
-
-
-
-^[^[^[^[
-
-
-End it,
-
-
-
-
-
-         this cycle.
-
-%% \#dlg_ending_Normal_5_Lane
-
-
-
-                    «Why?»
-
-         "Why what?"
-
-                    «You can't give up yet.»
-
-         "Why bother?"
-
-                    «You said it yourself.»
-                    «You need to consider every path, logically.»
-
-         "\cgI have.\c-"
-
-                    «You considered some.»
-                    «Those which give you no hope.»
-
-         "\cgWhat point is there in having hope?\c-"
-         "\cmThere won't be anything left.\c-"
-
-                    «Don't let them pave your way.»
-
-%% \#dlg_ending_Normal_6_Lane
-
-
-                    «Bring yourself to hope.»
-                    «For just one moment.»
-
-
-
-
-
-
-        --
-
-
-
-
- *
-
-
-
-     ..
-
-
-                    «It doesn't have to end like this.»
-
-
-
-      ...
-
-
- "I'll live."
-
-%% \#dlg_ending_Normal_7_Lane
-\cdYou awaken in a hospital bed, cybernetics turned off,
-\cdbody aching all over. It's over. The fight against
-\cdHell has been won.
-
-\cnA man is sitting next to you, and he gives you a total
-\cnfor your payment. It's too much for you to fathom. You
-\cnend up settling down in a nice house in a big city,
-\cnliving the high life.
-
-\cyThe effort you went through almost seems worth it now,
-\cybut still in your mind lingers memories of
-\cyhorrors no man should know.
-
-\ckIn the end, the corporation you worked with
-\ckmerged with a new company, the UAC, and
-\ckyou never heard from them again.
 
 \cgIf what you saw was real...
 \cg...maybe it's best nobody knows you're a hero.
