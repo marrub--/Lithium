@@ -8,7 +8,7 @@
 
 == \#INFO_SHORT_Khanda      | Khanda
 == \#INFO_SHORT_Kampilan    | Kampilan
-== \#INFO_SHORT_700Express  | .700 Express
+== \#INFO_SHORT_700Express | $$\#INFO_SHORT_Revolver
 == \#INFO_SHORT_ShrapnelGun | Shrapnel Gun
 == \#INFO_SHORT_4Bore       | Hunting Shotgun
 
@@ -99,7 +99,7 @@ attacks and decay over time.
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_700E_A | Exploding Bullets
 @@ \#UPGRADE_EFFEC_700E_A
-As straight-forwards as it sounds, this upgrade makes the .700 Express
+As straight-forwards as it sounds, this upgrade makes the Revolver
 fire bullets that explode after a short delay.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕

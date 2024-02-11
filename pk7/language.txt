@@ -2804,7 +2804,7 @@
    "\n"
    "* The <Minigun> uses the <reload> button ({+reload}) to wind up without firing. The <Kampilan> uses the <reload> button for a hilt attack.\n"
    "\n"
-   "* Only the <.700 Express> and <Ruzuk> need to be reloaded.\n"
+   "* Only the <Revolver> and <Ruzuk> need to be reloaded.\n"
    "\n"
    "* <Ruzuk>, the upgraded <Hunting Shotgun>, and the upgraded <R.E.M.S.> use the <Weapon Action> ({+lith_k_wact}) button to aim down sights.";
 "LITH_TUT_DarkLordItem_NAM" =
@@ -3088,7 +3088,7 @@
 "LITH_INFO_SHORT_Kampilan" =
    "Kampilan";
 "LITH_INFO_SHORT_700Express" =
-   ".700 Express";
+   "$$LITH_INFO_SHORT_Revolver";
 "LITH_INFO_SHORT_ShrapnelGun" =
    "Shrapnel Gun";
 "LITH_INFO_SHORT_4Bore" =
@@ -3154,7 +3154,7 @@
 "LITH_UPGRADE_TITLE_700E_A" =
    "Exploding Bullets";
 "LITH_UPGRADE_EFFEC_700E_A" =
-   "As straight-forwards as it sounds, this upgrade makes the .700 Express fire bullets that explode after a short delay.";
+   "As straight-forwards as it sounds, this upgrade makes the Revolver fire bullets that explode after a short delay.";
 "LITH_UPGRADE_TITLE_Shrapnel_A" =
    "Shrapnel Calamity";
 "LITH_UPGRADE_EFFEC_Shrapnel_A" =
