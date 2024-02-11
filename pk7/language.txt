@@ -3089,6 +3089,18 @@
    "Kampilan";
 "LITH_INFO_SHORT_700Express" =
    "$$LITH_INFO_SHORT_Revolver";
+"LITH_INFO_TITLE_700Express" =
+   ".750 Personal";
+"LITH_INFO_DESCR_700Express" =
+   "\cy \c-\n"
+   "\n"
+   "A revolver designed and manufactured by yourself. Uses .75zkr (~0.7in) diameter nanomachine-built centerfire bullets for long-range accuracy. Your arms have gotten used to the recoil by now. Upon its handle is inscribed a rizinak poem:\n"
+   "\n"
+   "\cy        \c-\n"
+   "\n"
+   "\crrokuw, zakwu, nukow, ken, taort hir sirowkr, wurik, is\c-\n"
+   "\n"
+   "\cnShield, axe, brain, earth, far away's words, nothing, myself.\c-";
 "LITH_INFO_SHORT_ShrapnelGun" =
    "Shrapnel Gun";
 "LITH_INFO_SHORT_4Bore" =
@@ -5003,7 +5015,7 @@
    "possibly unconnected to even the concept of time.\n"
    "~\n"
    "Aricil retrieves his swords and pistol. Two blades, one fused with a\n"
-   "fantastic Indicolite. A pistol of .700 caliber. Omisielle thinks she\n"
+   "fantastic Indicolite. A pistol of .750 caliber. Omisielle thinks she\n"
    "can handle herself, but he could survive twelve kilo-megaton nuclear\n"
    "detonations and still fight.";
 "LITH_BEGINNING_Ari_2" =

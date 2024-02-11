@@ -1,14 +1,31 @@
-## ╭-*-Agw-LithTxt-*-─────────────────────────────────────────────────────────╮
-## │                                                                          │
-## │             Distributed under the CC0 public domain license.             │
-## │   By Alison G. Watson. Attribution is encouraged, though not required.   │
-## │                See licenses/cc0.txt for more information.                │
-## │                                                                          │
-## ╰──────────────────────────────────────────────────────────────────────────╯
+## -*-Agw-LithTxt-*-
 
-== \#INFO_SHORT_Khanda      | Khanda
-== \#INFO_SHORT_Kampilan    | Kampilan
+== \#INFO_SHORT_Khanda   | Khanda
+== \#INFO_SHORT_Kampilan | Kampilan
+
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_700Express | $$\#INFO_SHORT_Revolver
+== \#INFO_TITLE_700Express | .750 Personal
+@@ \#INFO_DESCR_700Express
+\cy\u{E101}\u{E103}\u{E100}\u{E108}
+\u{E10C}\u{E10F}\u{E10D}\u{E113}\c-
+
+A revolver designed and manufactured by yourself. Uses .75zkr (~0.7in)
+diameter nanomachine-built centerfire bullets for long-range accuracy.
+Your arms have gotten used to the recoil by now. Upon its handle is
+inscribed a rizinak poem:
+
+\cy\u{E106}\u{E108} \u{E103}\u{E100}\u{E107}
+\u{E100}\u{E103}\u{E107}\u{E100}\u{E106} \u{E100}\u{E105}
+\u{E104}\u{E100}\u{E108}\u{E104} \u{E102}\u{E103}
+\u{E107}\u{E103}\u{E102} \u{E108}\u{E107}\u{E103}\u{E101}
+\u{E107}\u{E103}\u{E100}\c-
+
+\crrokuw, zakwu, nukow, ken, taort hir sirowkr, wurik, is\c-
+
+\cnShield, axe, brain, earth, far away's words, nothing, myself.\c-
+
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ShrapnelGun | Shrapnel Gun
 == \#INFO_SHORT_4Bore       | Hunting Shotgun
 
