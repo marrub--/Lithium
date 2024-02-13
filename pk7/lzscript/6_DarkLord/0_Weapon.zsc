@@ -8,21 +8,10 @@
 
 class Lith_SubGrn : Lith_RifleGrenade {
    default {
-      ExplosionDamage 100;
-      ExplosionRadius 200;
+      ExplosionDamage 200;
+      ExplosionRadius 128;
       BounceType "None";
       Damage 25;
-      Species "Lith_Player";
-      +DontHarmSpecies
-   }
-   states {
-   Death:
-      TNT1 A 0 {
-         A_Explode(flags: 0);
-         Lith_A_ExplodeSound();
-         return Lith_A_DoExplosion();
-      }
-      stop;
    }
 }
 

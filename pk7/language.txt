@@ -1237,7 +1237,7 @@
    "\n"
    "For now, you've won.";
 "LITH_dlg_ending_Normal_5_Lane" =
-   "\cdYou awaken in the same hospital bed. It's day.\n"
+   "\cdYou awaken in a hospital bed. It's day.\n"
    "\n"
    "\cnA man is sitting next to you, and he gives you a total for your payment. It's too much for you to fathom. You end up settling down in a nice house in a big city, living the high life.\n"
    "\n"
