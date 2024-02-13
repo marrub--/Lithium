@@ -49,19 +49,29 @@ class Lith_FortuneBuildup : Actor {
    default {
       RenderStyle "Add";
       Scale 0.5;
-      Height 1;
-      Radius 1;
+      Height 8;
+      Radius 8;
       +NoClip
       +NoGravity
       +Bright
    }
    int m_buildup;
+   const BUILDUP_EXPLODED = -1337;
+   const BUILDUP_MAX = 500;
+   void lith_triggerExplosion() {
+      m_buildup = BUILDUP_EXPLODED;
+      setState(resolveState("Explodo"));
+   }
    override void tick() {
       super.tick();
-      m_buildup -= 2;
       if(m_buildup > 0) {
-         a_setScale(m_buildup / 600.0);
-      } else {
+         a_setScale(m_buildup / double(BUILDUP_MAX));
+         if(m_buildup > BUILDUP_MAX) {
+            lith_triggerExplosion();
+         } else {
+            --m_buildup;
+         }
+      } else if(m_buildup != BUILDUP_EXPLODED) {
          destroy();
       }
    }
@@ -69,6 +79,30 @@ class Lith_FortuneBuildup : Actor {
    Spawn:
       BLLT L -1;
       stop;
+   Explodo:
+      SDXP A 1 {
+         A_Explode(32*m_buildup/(BUILDUP_MAX/2), 256, 0);
+         A_StartSound("weapons/shipgun/explode", lch_body);
+         let original_target = target;
+         for(let it = BlockThingsIterator.create(self, 512); it.next();) {
+            let th = it.thing;
+            if(th.player) {
+               th.A_SetBlend("White", 0.1, int(35*2*(2048-distance2d(th))/1536.0));
+            } else {
+               let majin_bu = Lith_FortuneBuildup(th);
+               if(majin_bu && majin_bu.m_buildup != BUILDUP_EXPLODED) {
+                  let majin_buildup = majin_bu.m_buildup;
+                  majin_bu.lith_triggerExplosion();
+                  target = majin_bu;
+                  A_CustomRailgun(100*majin_buildup/(BUILDUP_MAX/2), 0, "", "#ffffff", RGF_SILENT|RGF_EXPLICITANGLE|RGF_FULLBRIGHT|RGF_CENTERZ, 1, 9, "Lith_FortuneProjectilePuff", 0, 0, distance2d(majin_bu), 35*5*(1+majin_buildup/BUILDUP_MAX), 0.1, 0.1);
+               }
+            }
+         }
+         target = original_target;
+      }
+      SDXP BCDEFGHIJKLMNOPQRS 1;
+      SDXP T 1 A_FadeOut;
+      wait;
    }
 }
 
