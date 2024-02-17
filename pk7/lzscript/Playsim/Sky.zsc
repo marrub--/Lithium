@@ -84,8 +84,8 @@ ui void drawSky(RenderEvent evt) {
    let flash_delta = level.time - m_flash;
    let do_flash    = flash_delta >= 0 && flash_delta < m_flashLen;
    let flash_norm  = do_flash ?
-      1.0f - (flash_delta + evt.fracTic) / float(m_flashLen) :
-      0.0f;
+      1.0 - (flash_delta + evt.fracTic) / double(m_flashLen) :
+      0.0;
    /* clear, then check mode */
    m_canvas.dim("black", 1.0, 0, 0, canvas_w, canvas_h);
    switch(m_mode) {
@@ -270,7 +270,7 @@ void setBase(textureId tex, double skySpeed) {
       m_baseDh = m_baseSh;
       m_baseDw = m_baseSw;
    } else if(m_baseSh < 200) {
-      let ratio = canvas_h / float(m_baseSh);
+      let ratio = canvas_h / double(m_baseSh);
       m_baseDh = canvas_h;
       m_baseDw = int(m_baseSw * ratio);
    } else if(m_baseSh <= 240) {

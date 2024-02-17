@@ -125,8 +125,8 @@ ui void drawNearByStuff(RenderEvent evt) {
          let [px, py, seen] = project(mo.pos);
          if(seen) {
             string tag   = mo.getTag();
-            float  dist  = mo.distance3D(evt.camera);
-            float  alpha = 1.0 - clamp(dist / 256.0, 0.0, 1.0);
+            double dist  = mo.distance3D(evt.camera);
+            double alpha = 1.0 - clamp(dist / 256.0, 0.0, 1.0);
             int    sw    = fnt.stringWidth(tag);
             int    cr    = m_itemColor;
             Screen.drawText(fnt, cr, px - sw / 2, py, tag, DTA_Alpha,alpha,
@@ -194,7 +194,7 @@ ui void drawInventory(RenderEvent evt) {
                    DTA_VirtualWidth,320, DTA_VirtualHeight,240);
    y = drawStatFx(evt, y);
    if(m_lightMaxBattery > 0 && m_lightCurBattery < m_lightMaxBattery) {
-      float s = m_lightCurBattery / float(m_lightMaxBattery) * 8.0f;
+      double s = m_lightCurBattery / double(m_lightMaxBattery) * 8.0;
       Screen.drawTexture(m_texBatteryOutline, false, hudlpos, y,
                          DTA_VirtualWidth,320, DTA_VirtualHeight,240);
       y += 2;

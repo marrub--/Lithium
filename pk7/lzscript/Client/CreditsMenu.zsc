@@ -62,15 +62,15 @@ override void drawer() {
       m_curSection = 0;
    }
    int tic = gameTic - m_sectionTic;
-   float xx =
+   double xx =
       640.0 *
       (1.0 - Lith_UTIL.easeInOutQuad(clamp(tic / 35.0, 0.0, 1.0)));
    int lny = m_font.getHeight();
    let sec = m_sections[m_curSection];
    for(uint lnN = 0, lnC = sec.count(); lnN < lnC; ++lnN) {
-      let   ln = sec.stringAt(lnN);
-      float x  = 320.0 - m_font.stringWidth(ln) / 2.0 + xx;
-      float y  = 240.0 - lny * lnC / 2.0 + lny * lnN;
+      let    ln = sec.stringAt(lnN);
+      double x  = 320.0 - m_font.stringWidth(ln) / 2.0 + xx;
+      double y  = 240.0 - lny * lnC / 2.0 + lny * lnN;
       x += cos(y + msTime() * 0.07) * 8.0;
       y += sin(y + msTime() * 0.07) * 8.0 * 1.33333;
       int cr = Font.CR_UNTRANSLATED;

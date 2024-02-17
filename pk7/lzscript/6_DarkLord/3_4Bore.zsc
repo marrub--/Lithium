@@ -68,7 +68,7 @@ override void markPrecacheSounds() {
    markSound("weapons/4bore/empty");
 }
 
-action(Weapon) void Lith_A_Fire4Bore(float recoil = 1) {
+action(Weapon) void Lith_A_Fire4Bore(double recoil = 1) {
    SoundAlert(Invoker.Owner);
    lith_takeAmmo(4);
    A_SetBlend("White", 0.2, 6);

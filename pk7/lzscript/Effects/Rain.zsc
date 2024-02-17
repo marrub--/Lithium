@@ -22,7 +22,7 @@ class Lith_RainDrop : Actor {
       +RollSprite
    }
    bool m_done;
-   float m_rollSpeed;
+   double m_rollSpeed;
    void lith_giveUp() {
       bRollSprite = false;
       bFlatSprite = false;

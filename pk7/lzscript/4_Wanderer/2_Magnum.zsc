@@ -39,8 +39,8 @@ action(Weapon) void lith_fireMagnum() {
    uint accurate = accurate_stat ? accurate_stat.cnt0 : 0;
 
    int dmg;
-   /**/ if(marksman) dmg = int(21.39 * (float(marksman) * 1.2 + 4.0));
-   else if(accurate) dmg = int(21.39 * (float(accurate) * 1.0 + 0.0));
+   /**/ if(marksman) dmg = int(21.39 * (double(marksman) * 1.2 + 4.0));
+   else if(accurate) dmg = int(21.39 * (double(accurate) * 1.0 + 0.0));
    else              dmg = 21;
 
    lith_fireBullets(0, 0, -1, dmg, FBF_NORANDOM, tracer: _tr_slow);

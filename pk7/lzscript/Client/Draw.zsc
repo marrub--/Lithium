@@ -53,7 +53,7 @@ struct DrawData {
    int16     x, y, z, w; /* 8 bytes */
    int16     u, v, s, t; /* 8 bytes */
    uint      c;          /* 4 bytes */
-   float     a;          /* 4 bytes */
+   float     a;          /* 4 bytes (DON'T CHANGE THIS ONE!) */
    textureId tex;        /* 4 bytes */
    Font      fnt;        /* 8 bytes */
 }
@@ -214,7 +214,7 @@ static void LZ(int w, int h) {
    d.Y = h;
 }
 
-static void LF(int fnum, int time, int speed, float alpha) {
+static void LF(int fnum, int time, int speed, double alpha) {
    let r = instance();
    r.m_fadeMsg[fnum].Time = time;
    r.m_fadeMsg[fnum].FSub = speed;
@@ -246,7 +246,7 @@ static void LL(int x, int y, int z, int w, color c = 0) {
    d.C = c;
 }
 
-static void LS(string tex, int xx, int yy, int flags = 0, float anum = 0.0, color cr = 0, int srcpos = 0, int srcsize = 0) {
+static void LS(string tex, int xx, int yy, int flags = 0, double anum = 0.0, color cr = 0, int srcpos = 0, int srcsize = 0) {
    let r = instance();
    if(r.m_noDraw) return;
    int  x = xx & 0x00FFFFFF;
@@ -309,7 +309,7 @@ static void LS(string tex, int xx, int yy, int flags = 0, float anum = 0.0, colo
    }
 }
 
-static void LT(string txt, string fnt, int xx, int yy, int cr, int flags = 0, float anum = 0.0, int ww = 0) {
+static void LT(string txt, string fnt, int xx, int yy, int cr, int flags = 0, double anum = 0.0, int ww = 0) {
    let r = instance();
    if(r.m_noDraw || !txt.length()) return;
    double a = 1.0;

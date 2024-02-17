@@ -163,7 +163,7 @@ action(Weapon) void lith_a_setInterpolation(bool on) {
 }
 
 action(Weapon) void lith_a_overlayTick() {
-   float a = 1.0;
+   double a = 1.0;
    int style = style_normal;
    if(invoker.m_ads == _ads_scope) {
       a = lith_weapons_scopealpha;
