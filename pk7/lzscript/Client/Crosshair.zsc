@@ -15,6 +15,7 @@ extend class Lith_URANUS;
 uint8 m_xhairR, m_xhairG, m_xhairB, m_xhairA, m_xhairStyle;
 bool m_xhairEnable, m_xhairEnableJuicer;
 double m_xhairScale;
+uint m_xhairFlags;
 
 void tickCrosshair() {
    PlayerInfo  p = players[consolePlayer];
@@ -27,6 +28,11 @@ void tickCrosshair() {
    m_xhairScale        = clamp(lith_xhair_scale, 0.25, 4.0);
    m_xhairEnable       = lith_xhair_enable && (!w || !w.m_ads);
    m_xhairEnableJuicer = lith_xhair_enablejuicer;
+   m_xhairFlags =
+      Line.ML_BLOCKING |
+      Line.ML_BLOCKEVERYTHING |
+      (!w || w.bHitScan ? Line.ML_BLOCKHITSCAN : 0) |
+      (!w || !w.bHitScan ? Line.ML_BLOCKPROJECTILE : 0);
 }
 
 clearScope color xhairColor() const {
@@ -112,7 +118,7 @@ ui void drawCrosshair(RenderEvent evt) {
    double yaw   = evt.viewAngle + Lith_UTIL.pData(_pdt_addy)/FIX;
    double pitch = evt.viewPitch + Lith_UTIL.pData(_pdt_addp)/FIX;
    let hudSize = (320, 240) / m_xhairScale;
-   let trace_non_pass = traceFromPos(pl.curSector, viewPos, yaw, pitch, XH_RANGE, ignore: pl, lnflags: LINEFLAGS & ~(Line.ML_BLOCK_PLAYERS));
+   let trace_non_pass = traceFromPos(pl.curSector, viewPos, yaw, pitch, XH_RANGE, ignore: pl, lnflags: m_xhairFlags);
    let [xh, seen] = projectF(trace_non_pass.hitPos);
    xh /= m_xhairScale;
    drawCrosshairTracer(pl.tracer, xh, hudSize);
