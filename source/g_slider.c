@@ -37,7 +37,7 @@ struct slide_ret G_Slider_Imp(struct gui_state *g, gid_t id, struct gui_arg_sld 
          AmbientSound(pre->snd, 0.47);
       }
    } else {
-      notchpos = (val - min) / (k64)max;
+      notchpos = (val - min) / (k64)(max - min);
       intval   = val;
    }
    /* draw graphic */
