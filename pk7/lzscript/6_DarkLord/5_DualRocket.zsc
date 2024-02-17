@@ -169,9 +169,9 @@ Actor m_sophia;
 int m_times;
 
 states(Weapon) {
-Ready:   TNT1 A 1 Lith_A_Ready;       wait;
-ReadyLH: FRAN A 1 Lith_A_DoubleReady; wait;
-ReadyRH: SOPH A 1 Lith_A_DoubleReady; wait;
+Ready:   TNT1 A 1 Lith_A_Ready; wait;
+ReadyLH: FRAN A 1; wait;
+ReadyRH: SOPH A 1; wait;
 Deselect:
    TNT1 A 1 Lith_A_Lower(_raise_normal);
    loop;

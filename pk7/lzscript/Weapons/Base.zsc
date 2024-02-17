@@ -203,17 +203,14 @@ action(Weapon) void Lith_A_Lower(Lith_RaiseSpeed speed) {
       } else {
          psp.y += lowerSpeed;
       }
-      if(psp.y < weaponBottom) {
-         return;
-      }
       resetPSprite(psp);
-      if(player.playerState == pst_dead) {
-         player.setPSprite(_psp_flash, null);
-         psp.setState(findState('DeadLowered'));
-         return;
+      for(int i = _psp_flash; i < _psp_flash_max; ++i) {
+         player.setPSprite(i, null);
       }
-      player.setPSprite(_psp_flash, null);
-      player.mo.bringUpWeapon();
+      Lith_A_DoubleRaise();
+      if(psp.y >= weaponBottom && player.playerState != pst_dead) {
+         player.mo.bringUpWeapon();
+      }
    }
 }
 
@@ -243,11 +240,6 @@ action(Weapon) void Lith_A_Raise(Lith_RaiseSpeed speed) {
       psp.y = weaponTop;
       psp.setState(invoker.getReadyState());
    }
-}
-
-action(Weapon) state Lith_A_DoubleReady() {
-   if(health < 1) return resolveState("Null");
-   else           return null;
 }
 
 action(Weapon) void Lith_A_DoubleRaise() {

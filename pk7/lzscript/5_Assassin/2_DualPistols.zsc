@@ -29,8 +29,8 @@ action(Weapon) void Lith_A_FireDualPistols(int xofs) {
 
 states(Weapon) {
 Ready:   TNT1 A 1 Lith_A_Ready(WRF_ALLOWRELOAD); wait;
-ReadyLH: DPIS B 1 Lith_A_DoubleReady;            wait;
-ReadyRH: DPIS A 1 Lith_A_DoubleReady;            wait;
+ReadyLH: DPIS B 1; wait;
+ReadyRH: DPIS A 1; wait;
 
 Deselect:
    TNT1 A 1 Lith_A_Lower(_raise_fast);
