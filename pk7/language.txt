@@ -6592,7 +6592,7 @@
 "LITH_TIME_WEEK_DAY_SUN" =
    "Sun";
 "LITH_ENTER_FMT" =
-   "Entered %S at %s NE";
+   "Entered %S at %s";
 "LITH_CHARGE_FMT" =
    "{}kV \cjcharge\n"
    "({}~{} damage)";

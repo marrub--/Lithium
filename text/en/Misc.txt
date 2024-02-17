@@ -72,7 +72,7 @@ dimension of hate--built of demons.
 == \#TIME_WEEK_DAY_SAT | Sat
 == \#TIME_WEEK_DAY_SUN | Sun
 
-== \#ENTER_FMT   | Entered %S at %s NE
+== \#ENTER_FMT   | Entered %S at %s
 %% \#CHARGE_FMT
 {}kV \cjcharge
 ({}~{} damage)
