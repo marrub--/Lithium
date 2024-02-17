@@ -90,6 +90,7 @@ int m_firePattern;
 int m_fired;
 int m_max;
 state m_sprintReturn;
+uint m_flags;
 
 property AmmoType:     m_ammoType;
 property MagSize:      m_max;
@@ -99,6 +100,8 @@ property AdsZoom:      m_adsZoom;
 property SpawnType:    m_spawnType;
 property DefaultSpeed: m_defaultSpeed;
 property SprintSpeed:  m_sprintSpeed;
+
+flagdef HitScan: m_flags, 0;
 
 const _psp_flags =
    PSPF_ADDWEAPON | PSPF_ADDBOB | PSPF_ALPHA | PSPF_RENDERSTYLE;

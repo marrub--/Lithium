@@ -72,6 +72,7 @@ default
    Weapon.UpSound "weapons/pistol/draw";
    Inventory.AltHudIcon "PISTA0";
    +Weapon.NoAutoFire
+   +Lith_Weapon.HitScan
 }
 
 override void markPrecacheSounds() {
@@ -97,10 +98,12 @@ action(Weapon) void Lith_A_FirePistol()
 {
    if(Lith_UTIL.pData(_pdt_upgrade, UPGR_Pistol_B))
    {
+      invoker.bHitScan = false;
       A_StartSound("weapons/pistol/plasma/fire", lch_weapon);
       A_FireProjectile("Lith_PlasmaPistolShot");
       return;
    }
+   invoker.bHitScan = true;
 
    if(Lith_UTIL.pData(_pdt_upgrade, UPGR_Pistol_A))
       Lith_FixedBullets(1, 24);

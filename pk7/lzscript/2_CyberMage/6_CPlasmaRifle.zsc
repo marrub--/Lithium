@@ -72,6 +72,7 @@ default
    Weapon.UpSound "weapons/plasma/draw";
    Lith_Weapon.AmmoType "Lith_PlasmaAmmo";
    Inventory.AltHudIcon "PLASA0";
+   -Lith_Weapon.HitScan
 }
 
 action(Weapon) void Lith_A_FireCPlasma()

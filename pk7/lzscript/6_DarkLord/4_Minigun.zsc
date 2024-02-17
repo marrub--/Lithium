@@ -17,6 +17,7 @@ default {
    Weapon.SlotPriority 1;
    Inventory.AltHudIcon "MNGGZ0";
    -Weapon.NoAutoFire
+   +Lith_Weapon.HitScan
 }
 
 double m_windUp;

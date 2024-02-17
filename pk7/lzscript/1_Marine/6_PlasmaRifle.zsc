@@ -56,6 +56,7 @@ default
    Weapon.UpSound "weapons/plasma/draw";
    Lith_Weapon.AmmoType "Lith_PlasmaAmmo";
    Inventory.AltHudIcon "PLASA0";
+   -Lith_Weapon.HitScan
 }
 
 override void markPrecacheSounds() {
@@ -74,6 +75,7 @@ override void markPrecacheSounds() {
 }
 action(Weapon) void Lith_A_FirePlasma()
 {
+   invoker.bHitScan = false;
    lith_takeAmmo(35);
    lith_gunFlash();
    soundAlert(invoker.owner);
@@ -87,6 +89,7 @@ action(Weapon) void Lith_A_FirePlasma()
 
 action(Weapon) void Lith_A_FireLaser()
 {
+   invoker.bHitScan = true;
    lith_takeAmmo(10);
    SoundAlert(Invoker.Owner);
    A_FireBullets(0, 0, 1, 0, "Lith_PlasmaHit", FBF_NORANDOMPUFFZ);
@@ -96,6 +99,7 @@ action(Weapon) void Lith_A_FireLaser()
 
 action(Weapon) void Lith_A_FireRail()
 {
+   invoker.bHitScan = true;
    Lith_A_MagIncr();
    SoundAlert(Invoker.Owner);
    lith_takeAmmo(200);

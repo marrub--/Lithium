@@ -59,6 +59,7 @@ default {
    Weapon.SlotPriority 0.9;
    Weapon.UpSound "weapons/khanda/draw";
    Inventory.AltHudIcon "KAMLZ0";
+   +Lith_Weapon.HitScan
 }
 bool m_power;
 override void markPrecacheSounds() {

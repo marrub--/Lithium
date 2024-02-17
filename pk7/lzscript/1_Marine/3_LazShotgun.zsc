@@ -58,7 +58,8 @@ default
    Weapon.UpSound "weapons/lshotgun/draw";
    Inventory.AltHudIcon "LSHTZ0";
 
-   +WEAPON.NOAUTOFIRE
+   +Weapon.NoAutoFire
+   +Lith_Weapon.HitScan
 }
 
 action(Weapon) void Lith_A_LaserFire()

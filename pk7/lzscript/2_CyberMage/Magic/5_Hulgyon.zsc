@@ -82,6 +82,7 @@ default
    +Inventory.Unclearable
    +Weapon.DontBob
    -Weapon.NoAutoFire
+   -Lith_Weapon.HitScan
 }
 
 states(Weapon)

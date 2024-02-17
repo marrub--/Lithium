@@ -17,6 +17,7 @@ default
    Weapon.UpSound "weapons/ssg/draw";
    Lith_Weapon.AmmoType "Lith_ShellAmmo";
    Inventory.AltHudIcon "SSGGX0";
+   +Lith_Weapon.HitScan
 }
 
 int m_Iter;

@@ -242,6 +242,7 @@ default {
    Lith_Weapon.AdsZoom 0.1;
    Inventory.AltHudIcon ",D7IA0";
    +Weapon.NoAutoFire
+   -Lith_Weapon.HitScan
 }
 int m_steamy, m_fireLoop, m_particleLoop;
 double m_particleAlpha;

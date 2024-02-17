@@ -45,8 +45,8 @@ default
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/blade/draw";
    Inventory.AltHudIcon "SPELF0";
-
    +WEAPON.NOAUTOFIRE
+   -Lith_Weapon.HitScan
 }
 
 states(Weapon)

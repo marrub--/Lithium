@@ -175,8 +175,8 @@ default
    Weapon.UpSound "weapons/ionrifle/draw";
    Lith_Weapon.AmmoType "Lith_RocketAmmo";
    Inventory.AltHudIcon "IONGY0";
-
-   +WEAPON.NOAUTOFIRE
+   +Weapon.NoAutoFire
+   +Lith_Weapon.HitScan
 }
 
 double m_Charge;
@@ -339,7 +339,7 @@ AltFire:
    goto ReadySelector;
 
 Reload:
-   IONG A 0 A_JumpIf(invoker.m_Fired != invoker.m_Max, "ReadySelector");
+   IONG A 0 A_JumpIf(!invoker.lith_magEmpty(), "ReadySelector");
    IONG A 0 Lith_A_AdsOut;
    IONG A 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE);
    IONG A 0 Lith_A_ReloadBobDn(0.2);

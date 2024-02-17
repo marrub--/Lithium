@@ -102,6 +102,7 @@ default
 
    +Weapon.DontBob
    -Weapon.NoAutoFire
+   -Lith_Weapon.HitScan
 }
 
 states(Weapon)

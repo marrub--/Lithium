@@ -120,6 +120,7 @@ default {
    Weapon.UpSound "weapons/drocket/draw";
    Lith_Weapon.AmmoType "Lith_RocketAmmo";
    Inventory.AltHudIcon "FRANZ0";
+   -Lith_Weapon.HitScan
 }
 
 action(Weapon) Actor Lith_A_FireRocket(class<Actor> cl, double side, double xofs = 0.0, double height = 0.0, double angle = 0.0, double recoil = 0.5) {

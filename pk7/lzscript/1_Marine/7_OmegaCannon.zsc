@@ -23,12 +23,13 @@ default
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/cannon/draw";
    Inventory.AltHudIcon "BFUGA0";
-
-   +WEAPON.NOAUTOFIRE
+   +Weapon.NoAutoFire
+   -Lith_Weapon.HitScan
 }
 
 action(Weapon) void Lith_A_FirePunct()
 {
+   invoker.bHitScan = true;
    SoundAlert(Invoker.Owner);
    lith_takeAmmo(2);
    lith_gunFlash();
@@ -38,6 +39,7 @@ action(Weapon) void Lith_A_FirePunct()
 
 action(Weapon) void Lith_A_FireCannonBig()
 {
+   invoker.bHitScan = false;
    lith_gunFlash();
    soundAlert(invoker.owner);
    lith_takeAmmo(2);
@@ -50,6 +52,7 @@ action(Weapon) void Lith_A_FireCannonBig()
 
 action(Weapon) void Lith_A_FireCannonSmall()
 {
+   invoker.bHitScan = false;
    lith_gunFlash();
    soundAlert(invoker.owner);
    lith_takeAmmo(1);
@@ -62,6 +65,7 @@ action(Weapon) void Lith_A_FireCannonSmall()
 
 action(Weapon) void Lith_A_FireDarkMatter()
 {
+   invoker.bHitScan = false;
    A_FireProjectile("Lith_DarkMatter", 0, false, 0, 0, FPF_NOAUTOAIM);
    lith_gunFlash();
    soundAlert(invoker.owner);
@@ -70,6 +74,7 @@ action(Weapon) void Lith_A_FireDarkMatter()
 
 action(Weapon) void Lith_A_FireOmegaRail()
 {
+   invoker.bHitScan = true;
    lith_takeAmmo(2);
    lith_gunFlash();
    soundAlert(invoker.owner);

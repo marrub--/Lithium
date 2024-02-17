@@ -142,6 +142,7 @@ default {
 
    -Weapon.NoAutofire
    +Inventory.Unclearable
+   +Lith_Weapon.HitScan
 }
 
 action(Weapon) void Lith_A_FireFeuer(bool left) {

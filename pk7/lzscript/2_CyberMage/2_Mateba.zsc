@@ -99,8 +99,8 @@ default
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/mateba/draw";
    Inventory.AltHudIcon "REVLA0";
-
-   +WEAPON.NOAUTOFIRE
+   +Weapon.NoAutoFire
+   +Lith_Weapon.HitScan
 }
 
 action(Weapon) State Lith_A_FireMateba()
@@ -112,6 +112,7 @@ action(Weapon) State Lith_A_FireMateba()
       Lith_A_Casing("Lith_CasSmallHot", 14, 2, 32, frandom(1,2), frandom(3,5), frandom(2,3));
    if(Lith_UTIL.pData(_pdt_upgrade, UPGR_Mateba_A) && invoker.Lith_MagEmpty())
       return ResolveState("Finalize");
+   invoker.bHitScan = true;
    Lith_A_RecoilDn(0.2);
    Lith_FireBullets(2, 2, -1, 30, FBF_NORANDOM);
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
@@ -122,6 +123,7 @@ action(Weapon) State Lith_A_FireMateba()
 
 action(Weapon) void Lith_A_FireFinalizer()
 {
+   invoker.bHitScan = false;
    Lith_A_GunSmokeAndSparksSmall();
    A_SpawnItemEx("Lith_FinalizerEffect", cos(pitch)*24, 0, ((height-19)+2) - sin(pitch)*24);
    A_FireProjectile("Lith_FinalizerShot", 0, false, 0, 10);

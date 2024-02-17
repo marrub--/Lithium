@@ -15,9 +15,10 @@ default
    Weapon.SlotNumber 1;
    Weapon.SlotPriority 0.9;
 
-   +WEAPON.MELEEWEAPON
-   +WEAPON.NOAUTOFIRE
-   +WEAPON.WIMPY_WEAPON
+   +Weapon.MeleeWeapon
+   +Weapon.NoAutoFire
+   +Weapon.Wimpy_Weapon
+   +Lith_Weapon.HitScan
 }
 
 states(Weapon)

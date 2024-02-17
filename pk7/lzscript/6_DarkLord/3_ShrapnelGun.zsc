@@ -115,6 +115,7 @@ default {
    Lith_Weapon.AmmoType "Lith_ShellAmmo";
    Inventory.AltHudIcon "SHCAZ0";
    -Weapon.NoAutoFire
+   -Lith_Weapon.HitScan
 }
 
 int m_chargeLevel;

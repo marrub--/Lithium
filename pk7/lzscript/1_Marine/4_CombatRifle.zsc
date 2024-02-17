@@ -63,7 +63,8 @@ default
    Inventory.AltHudIcon "RIFLA0";
    Lith_Weapon.AmmoType "Lith_BulletAmmo";
 
-   +WEAPON.NOAUTOAIM
+   +Weapon.NoAutoAim
+   +Lith_Weapon.HitScan
 }
 
 int  m_Burst;

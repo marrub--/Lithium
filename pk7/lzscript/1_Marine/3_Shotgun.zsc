@@ -33,6 +33,7 @@ default
    Lith_Weapon.AmmoType "Lith_ShellAmmo";
 
    +Weapon.NoAutoFire
+   +Lith_Weapon.HitScan
 }
 
 int m_Just;

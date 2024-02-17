@@ -19,6 +19,7 @@ default {
    Weapon.UpSound "weapons/motra/draw";
    +Weapon.NoAutoFire
    +Inventory.Unclearable
+   +Lith_Weapon.HitScan
 }
 
 action(Weapon) void lith_fireMotra() {

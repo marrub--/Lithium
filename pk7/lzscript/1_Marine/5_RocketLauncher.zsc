@@ -95,7 +95,8 @@ default
    Lith_Weapon.AmmoType "Lith_RocketAmmo";
    Inventory.AltHudIcon "LAUNA0";
 
-   +WEAPON.NOAUTOFIRE
+   +Weapon.NoAutoFire
+   -Lith_Weapon.HitScan
 }
 
 int m_Loaded;

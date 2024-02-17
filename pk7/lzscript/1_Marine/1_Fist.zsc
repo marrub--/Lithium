@@ -61,6 +61,7 @@ default
    +Weapon.MeleeWeapon
    +Weapon.NoAutoFire
    +Weapon.Wimpy_Weapon
+   +Lith_Weapon.HitScan
 }
 
 states(Weapon)

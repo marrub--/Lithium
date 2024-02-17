@@ -130,6 +130,7 @@ default {
    Inventory.AltHudIcon "CSRGY0";
    Lith_Weapon.AmmoType "Lith_BulletAmmo";
    +Weapon.NoAutoFire
+   +Lith_Weapon.HitScan
 }
 
 action(Weapon) void Lith_A_FireShock() {

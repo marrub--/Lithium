@@ -103,12 +103,13 @@ default
    Weapon.UpSound "weapons/spas/draw";
    Lith_Weapon.AmmoType "Lith_ShellAmmo";
    Inventory.AltHudIcon "CSHGZ0";
-
-   +WEAPON.NOAUTOFIRE
+   +Weapon.NoAutoFire
+   +Lith_Weapon.HitScan
 }
 
 action(Weapon) State Lith_A_FireSPAS()
 {
+   invoker.bHitScan = true;
    lith_takeAmmo();
    Lith_A_Casing("Lith_CasShellHot", 30, 6, 20, FRandom(3,4), FRandom(7,8), FRandom(7,9));
    if(!Lith_UTIL.pData(_pdt_upgrade, UPGR_SPAS_B))
@@ -139,6 +140,7 @@ action(Weapon) State Lith_A_FireSPAS()
 
 action(Weapon) void Lith_A_FireVoid()
 {
+   invoker.bHitScan = false;
    for(int i = 0; i < 6; i++)
       A_FireProjectile("Lith_VoidShot", FRandom(-5,5), false, 0, 0, FPF_NOAUTOAIM, -FRandom(-2,2));
    A_StartSound("weapons/spas/fire", lch_weapon);
@@ -146,6 +148,7 @@ action(Weapon) void Lith_A_FireVoid()
 
 action(Weapon) void Lith_A_FireSPASAuto()
 {
+   invoker.bHitScan = true;
    Lith_FireBullets(11, 5, 2, 2);
    Lith_A_GunSmokeAndSparks();
    A_StartSound("weapons/spas/fire2", lch_weapon);

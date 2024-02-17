@@ -16,6 +16,7 @@ default {
    Weapon.SlotNumber 2;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/700e/draw";
+   +Lith_Weapon.HitScan
 }
 
 action(Weapon) void lith_fire700e() {
@@ -72,7 +73,7 @@ Fire:
    }
    700E Z 1 bright offset(10, 28) lith_laser(16.0);
    700E CCC 1 lith_laser(9.0);
-   700E C 0 a_jumpIf(invoker.m_fired != invoker.m_max, "FireEnd0");
+   700E C 0 a_jumpIf(!invoker.lith_magEmpty(), "FireEnd0");
    700E CCCCCC 1 lith_laser(9.0);
 FireEnd0:
    700E CC 1 offset(9, 28) {
@@ -81,7 +82,7 @@ FireEnd0:
       invoker.m_fromFire = true;
    }
    700E C 1 offset(7, 30) lith_laser(7.0);
-   700E C 0 a_jumpIf(invoker.m_fired != invoker.m_max, "FireEnd1");
+   700E C 0 a_jumpIf(!invoker.lith_magEmpty(), "FireEnd1");
    700E C 1 offset(6, 30) lith_a_laserAndReady(6.9);
    700E C 1 offset(6, 31) lith_a_laserAndReady(6.8);
    700E C 1 offset(5, 31) lith_a_laserAndReady(6.7);
