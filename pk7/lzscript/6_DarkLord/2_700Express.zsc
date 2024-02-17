@@ -45,6 +45,13 @@ action(Weapon) void lith_laser(double p) {
    }
 }
 
+bool m_fromFire;
+
+action(Weapon) void lith_a_laserAndReady(double p) {
+   lith_laser(p);
+   a_weaponReady(WRF_NOBOB|WRF_ALLOWRELOAD|WRF_NOPRIMARY|WRF_NOSWITCH);
+}
+
 states(Weapon) {
 Ready:
    700E A 0 lith_laser(0.0);
@@ -64,16 +71,30 @@ Fire:
       lith_laser(22.0);
    }
    700E Z 1 bright offset(10, 28) lith_laser(16.0);
-   700E CCC 1 bright lith_laser(9.0);
+   700E CCC 1 lith_laser(9.0);
+   700E C 0 a_jumpIf(invoker.m_fired != invoker.m_max, "FireEnd0");
+   700E CCCCCC 1 lith_laser(9.0);
+FireEnd0:
    700E CC 1 offset(9, 28) {
       lith_a_setInterpolation(true);
       lith_laser(8.0);
+      invoker.m_fromFire = true;
    }
    700E C 1 offset(7, 30) lith_laser(7.0);
-   700E C 1 offset(5, 31) lith_laser(6.0);
-   700E C 1 offset(4, 31) lith_laser(6.0);
+   700E C 0 a_jumpIf(invoker.m_fired != invoker.m_max, "FireEnd1");
+   700E C 1 offset(6, 30) lith_a_laserAndReady(6.9);
+   700E C 1 offset(6, 31) lith_a_laserAndReady(6.8);
+   700E C 1 offset(5, 31) lith_a_laserAndReady(6.7);
+   700E C 1 offset(4, 31) lith_a_laserAndReady(6.6);
+   700E C 1 offset(3, 32) lith_a_laserAndReady(6.5);
+   700E C 0 {invoker.m_fromFire = false;}
+   goto FireEnd2;
+FireEnd1:
+   700E C 1 offset(5, 31) lith_laser(6.7);
+   700E C 1 offset(4, 31) lith_laser(6.6);
    700E C 1 offset(3, 32) lith_laser(6.5);
-   700E BBB 1 offset(2, 32) lith_laser(5.0);
+FireEnd2:
+   700E BBB 1 offset(2, 32) lith_laser(5.5);
    700E BBB 1 offset(1, 32) lith_laser(5.0);
    700E A 1 lith_laser(0.0);
    700E A 1 lith_laser(0.0);
@@ -98,8 +119,15 @@ FireEmpty:
    goto ReadySelector;
 Reload:
    #### # 0 Lith_A_JumpIfMagFull;
-   700E B 1 lith_a_setInterpolation(true);
+   #### # 0 {
+      bool fromFire = invoker.m_fromFire;
+      invoker.m_fromFire = false;
+      lith_a_setInterpolation(true);
+      return a_jumpIf(fromFire, "Reload1");
+   }
+   700E B 1;
    700E B 1 offset(2, 31) A_StartSound("weapons/700e/move", lch_reload);
+Reload1:
    700E C 1 offset(1, 32) Lith_A_ReloadBobUp(0.5);
    700E C 1 offset(3, 32) Lith_A_ReloadBobUp(0.5);
    700E C 2 offset(4, 33) Lith_A_ReloadBobUp(0.5);
