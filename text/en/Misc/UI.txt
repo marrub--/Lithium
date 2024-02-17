@@ -251,7 +251,7 @@ Damage resistance: \cn{}\c-%
 Health capacity: +\cg{}\c-
 %% \#ATTR_HELP_VIT
 \cyIncreases health item efficiency\c-
-Health multiplier: \cd{}\c-x
+Health item multiplier: \cd{}\c-x
 == \#ATTR_HELP_POT | $$\#ATTR_HELP_VIT
 %% \#ATTR_HELP_STM
 \cyIncresases maximum health regeneration\c-

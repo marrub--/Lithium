@@ -6505,7 +6505,7 @@
    "Health capacity: +\cg{}\c-";
 "LITH_ATTR_HELP_VIT" =
    "\cyIncreases health item efficiency\c-\n"
-   "Health multiplier: \cd{}\c-x";
+   "Health item multiplier: \cd{}\c-x";
 "LITH_ATTR_HELP_POT" =
    "$$LITH_ATTR_HELP_VIT";
 "LITH_ATTR_HELP_STM" =
