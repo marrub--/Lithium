@@ -76,8 +76,9 @@ script cstr CanonTime(i32 type, time_t time) {
    default: return nil;
    }
    ACS_BeginPrint();
-   printfmt(tmpstr(fmt), countof(args), args);
    noinit static char buf[256];
+   faststrcpy_str(buf, fmt);
+   printfmt(buf, countof(args), args);
    faststrcpy_str(buf, ACS_EndStrParam());
    return buf;
 }
