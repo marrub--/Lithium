@@ -7,11 +7,11 @@
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
 server noarchive string __lith_end;
-server nosave    int    __lith_fun;
-server nosave    string __lith_version;
+nosave           int    __lith_fun;
+nosave           string __lith_version;
 
-server noarchive int __lith_debug_level = 0;
-server noarchive int __lith_debug_flags = 0;
+nosave noarchive int __lith_debug_level = 0;
+nosave noarchive int __lith_debug_flags = 0;
 
 server int   lith_sv_difficulty    = 10;
 server int   lith_sv_timescale     = 1;
