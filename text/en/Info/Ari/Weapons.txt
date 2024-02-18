@@ -72,7 +72,7 @@ we were born. Do you remember?
 == \#INFO_SHORT_FortuneGun | Fortuity
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_SHORT_Rems | R.E.M.S.
+== \#INFO_SHORT_Rems | R.E.M.S
 == \#INFO_TITLE_Rems | Qasl 339-7 Revised Explosive-Microcule System
 @@ \#INFO_DESCR_Rems
 \cy\u{E100}\u{E103}\u{E107}\u{E100}\u{E106}\u{E101}\u{E103}\u{E100}
@@ -202,15 +202,16 @@ of near-critical rotating mass that explodes into electricity when
 disturbed enough.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#UPGRADE_TITLE_Rems_A | REMS Bipod
+== \#UPGRADE_TITLE_Rems_A | R.E.M.S Bipod
 @@ \#UPGRADE_EFFEC_Rems_A
-Gives the Qasl REMS a bipod that completely mitigates recoil, charges
-faster, and increases damage dealt. Unless deployed, this upgrade
-blocks firing.
+Gives the Qasl R.E.M.S a bipod that completely mitigates recoil,
+charges faster, and increases damage dealt. Unless deployed, this
+upgrade blocks firing.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#UPGRADE_TITLE_Rems_B | REMS HexShield
+== \#UPGRADE_TITLE_Rems_B | R.E.M.S HexShield
 @@ \#UPGRADE_EFFEC_Rems_B
-Makes the Qasl REMS fire shields that protect and deal massive damage.
+Makes the Qasl R.E.M.S fire shields that protect and deal massive
+damage.
 
 ## EOF

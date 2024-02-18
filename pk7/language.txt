@@ -2694,7 +2694,7 @@
    "\n"
    "* Only the <Revolver> and <Ruzuk> need to be reloaded.\n"
    "\n"
-   "* <Ruzuk>, the upgraded <Hunting Shotgun>, and the upgraded <R.E.M.S.> use the <Weapon Action> ({+lith_k_wact}) button to aim down sights.";
+   "* <Ruzuk>, the upgraded <Hunting Shotgun>, and the upgraded <R.E.M.S> use the <Weapon Action> ({+lith_k_wact}) button to aim down sights.";
 "LITH_TUT_DarkLordItem_NAM" =
    "\c[Lith_Blue]Dl\c-. Items";
 "LITH_TUT_DarkLordItem_DSC" =
@@ -3020,7 +3020,7 @@
 "LITH_INFO_SHORT_FortuneGun" =
    "Fortuity";
 "LITH_INFO_SHORT_Rems" =
-   "R.E.M.S.";
+   "R.E.M.S";
 "LITH_INFO_TITLE_Rems" =
    "Qasl 339-7 Revised Explosive-Microcule System";
 "LITH_INFO_DESCR_Rems" =
@@ -3104,13 +3104,13 @@
 "LITH_UPGRADE_EFFEC_Fortune_B" =
    "Makes Fortuity's explosions sort particles by spin, causing a buildup of near-critical rotating mass that explodes into electricity when disturbed enough.";
 "LITH_UPGRADE_TITLE_Rems_A" =
-   "REMS Bipod";
+   "R.E.M.S Bipod";
 "LITH_UPGRADE_EFFEC_Rems_A" =
-   "Gives the Qasl REMS a bipod that completely mitigates recoil, charges faster, and increases damage dealt. Unless deployed, this upgrade blocks firing.";
+   "Gives the Qasl R.E.M.S a bipod that completely mitigates recoil, charges faster, and increases damage dealt. Unless deployed, this upgrade blocks firing.";
 "LITH_UPGRADE_TITLE_Rems_B" =
-   "REMS HexShield";
+   "R.E.M.S HexShield";
 "LITH_UPGRADE_EFFEC_Rems_B" =
-   "Makes the Qasl REMS fire shields that protect and deal massive damage.";
+   "Makes the Qasl R.E.M.S fire shields that protect and deal massive damage.";
 "LITH_INFO_SHORT_CFist" =
    "Mana Siphon";
 "LITH_INFO_SHORT_Mateba" =
