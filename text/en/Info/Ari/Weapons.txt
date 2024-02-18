@@ -27,7 +27,17 @@ inscribed a rizinak poem:
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ShrapnelGun | Shrapnel Gun
-== \#INFO_SHORT_4Bore       | Hunting Shotgun
+
+## ═══════════════════════════════════════════════════════════════════════════╕
+== \#INFO_SHORT_4Bore | Hunting Shotgun
+== \#INFO_TITLE_4Bore | Double-Barreled Hunting Shotgun
+## TODO: add translation
+@@ \#INFO_DESCR_4Bore
+A double-barreled shotgun utilizing heavy black powder cartridges.
+Shells are loaded with four bismuth balls of buckshot. The only
+notable thing about this weapon is its overwhelming power. It's been
+used to kill dozens of dangerous animals, maybe, cruelly, some other
+humans, and now demons. Use it to defend yourself.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Minigun | Minigun
