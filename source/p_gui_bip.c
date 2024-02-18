@@ -189,11 +189,8 @@ void CategoryUI(struct gui_state *g) {
       }
 
       bool lock = !get_bit(page->flags, _page_unlocked) || bip.curpage == page;
-
-      char name[128] = "\Ci";
-      faststrcpy(bip.curpage == page ? &name[2] : name, GetShortName(page));
-
-      if(G_Button_HId(g, i, name, 0, y, lock, Pre(btnlist))) {
+      cstr name = GetShortName(page);
+      if(G_Button_HId(g, i, name, 0, y, lock, .color = bip.curpage == page ? CR_ORANGE : -1, Pre(btnlist))) {
          SetCurPage(g, page);
       }
 
