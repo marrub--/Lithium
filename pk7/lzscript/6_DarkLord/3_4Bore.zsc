@@ -77,7 +77,7 @@ action(Weapon) void Lith_A_Fire4Bore(double recoil = 1) {
    soundAlert(invoker.owner);
    Lith_GunSmoke("Lith_GunSmokeAndSparksBig", 1, 6);
    A_FireProjectile("Lith_LightProjectileRedLong", 0);
-   Lith_FireBullets(4, 2, 8, random[lith_dlweapon](125, 150), FBF_NORANDOM, puffType: 'Lith_4BorePuff', tracerX: 2, tracer: _tr_big);
+   Lith_FireBullets(4, 2, 8, random[lith_dlweapon](77, 94), FBF_NORANDOM, puffType: 'Lith_4BorePuff', tracerX: 2, tracer: _tr_big);
    Lith_A_RecoilUp(10 * recoil);
    a_recoil(4 * recoil);
 }
