@@ -70,16 +70,12 @@ and robotics.
 Not much is known about this shady corporation from the outside, and
 reports from insiders never painted a pretty picture.
 
-@@
+---------------------------------------------
 
-\c[Lith_Blue]COMMENTS\c-
-@@
-On the inside, AOF were doing science experiments on humans, trying to
-create new life. My sister and I were created this way. We destroyed
-them in the Siege of 1115.
-
-By some strange coincidence, AOF appears to exist in this reality as
-well. I'm not sure what they're like here. The name seems to be
+\cnNOTES:\c- On the inside, AOF were doing science experiments on
+humans, trying to create new life. My sister and I were created this
+way. By some strange coincidence, AOF appears to exist in this reality
+as well. I'm not sure what they're like here. The name seems to be
 written differently.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕

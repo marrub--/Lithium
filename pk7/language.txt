@@ -1420,11 +1420,9 @@
    "\n"
    "Not much is known about this shady corporation from the outside, and reports from insiders never painted a pretty picture.\n"
    "\n"
+   "---------------------------------------------\n"
    "\n"
-   "\c[Lith_Blue]COMMENTS\c-\n"
-   "On the inside, AOF were doing science experiments on humans, trying to create new life. My sister and I were created this way. We destroyed them in the Siege of 1115.\n"
-   "\n"
-   "By some strange coincidence, AOF appears to exist in this reality as well. I'm not sure what they're like here. The name seems to be written differently.";
+   "\cnNOTES:\c- On the inside, AOF were doing science experiments on humans, trying to create new life. My sister and I were created this way. By some strange coincidence, AOF appears to exist in this reality as well. I'm not sure what they're like here. The name seems to be written differently.";
 "LITH_INFO_SHORT_Cid" =
    "Cid";
 "LITH_INFO_TITLE_Cid" =
@@ -3002,7 +3000,7 @@
 "LITH_INFO_DESCR_Minigun" =
    "\cy !\c-\n"
    "\n"
-   "Directly translates to \"11 squared.\" Of uncertain manufacture and origin. It may be a replica of the first gun ever made: It clearly exhibits late Spacewar/early Great Death design philosophy and manufacturing principles, but carbon dating and replicator errata place this particular gun in a much later period.\n"
+   "Directly translates to \"11 squared.\" Of unclear manufacture and origin. It may be a replica of the first gun ever made: It clearly exhibits late Spacewar/early Great Death design philosophy and manufacturing principles, but carbon dating and replicator errata place this particular gun in a much later period.\n"
    "\n"
    "---------------------------------------------\n"
    "\n"

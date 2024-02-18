@@ -36,7 +36,7 @@ inscribed a rizinak poem:
 \cy\u{E106}\u{E108}\u{E104}\u{E108}\u{E100}\u{E103}\u{E102}\u{E104}\u{E106}\u{E104}\u{E108}\u{E100}
 \u{E10B}!\u{E10E}\u{E10F}\c-
 
-Directly translates to "11 squared." Of uncertain manufacture and
+Directly translates to "11 squared." Of unclear manufacture and
 origin. It may be a replica of the first gun ever made: It clearly
 exhibits late Spacewar/early Great Death design philosophy and
 manufacturing principles, but carbon dating and replicator errata
