@@ -2991,6 +2991,10 @@
    "\cnShield, axe, brain, earth, far away's words, nothing, myself.\c-";
 "LITH_INFO_SHORT_ShrapnelGun" =
    "Shrapnel Gun";
+"LITH_INFO_TITLE_ShrapnelGun" =
+   "Vacuum Displacement Cannon";
+"LITH_INFO_DESCR_ShrapnelGun" =
+   "A reverse-flow vacuum used to displace heavy metals in the zero-gravity production of spacecraft. Seemingly effective as a gun when overloaded. Normally, this weapon wouldn't work well without an atmosphere, but the exceptional space of Hell appears to allow some pressure differential to still exist. This model was designed by Sewek Heavy Industries for Qasl.";
 "LITH_INFO_SHORT_4Bore" =
    "Hunting Shotgun";
 "LITH_INFO_TITLE_4Bore" =
