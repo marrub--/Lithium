@@ -133,7 +133,8 @@ action(Weapon) void Lith_A_FireShrapnel() {
    a_recoil(0.7);
    lith_a_setInterpolation(true);
    class<Lith_ShrapnelPuff> puff = Lith_UTIL.pData(_pdt_upgrade, UPGR_Shrapnel_B) ? 'Lith_ShrapnelPuffBouncy' : 'Lith_ShrapnelPuff';
-   Lith_FireBullets(3.5, 2.5, 14 + invoker.m_chargeLevel * 3 / 2, 2, FBF_NORANDOM, puff, 2);
+   Lith_FireBullets(3.5, 2.5, 7 + invoker.m_chargeLevel * 3 / 4, 2, FBF_NORANDOM, puff, 2);
+   Lith_FireBullets(3.5, 2.5, 7 + invoker.m_chargeLevel * 3 / 4, 3, FBF_NORANDOM, puff, 2);
    a_setTics(1 + (invoker.m_chargeLevel / 4));
 }
 
