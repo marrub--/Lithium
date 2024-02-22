@@ -66,24 +66,10 @@ class Lith_LightProjectileGreenShort : Lith_LightProjectile
 class Lith_LightProjectileGreenLong : Lith_LightProjectile
    {default {Lith_LightProjectile.Counter 4;}}
 
-class Lith_StarDestroyerRainbowProjectile1 : Lith_LightProjectile
-{
-   override void PostBeginPlay()
-   {
-      Super.PostBeginPlay();
-      Target = Target.Master;
-   }
-
-   states
-   {
-   Derp:
-      TNT1 A 1;
-   Spawn:
-      TNT1 A 1 {
-         if(!Target) {Destroy(); return;}
-         Warp(Target, flags: WARPF_INTERPOLATE);
-      }
-      goto Derp;
+class Lith_StarDestroyerRainbowProjectile1 : Lith_LightProjectile {
+   default {
+      Lith_LightProjectile.Counter 0;
+      Lith_LightProjectile.ZOffset 0;
    }
 }
 
