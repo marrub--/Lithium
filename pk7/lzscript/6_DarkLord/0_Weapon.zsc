@@ -133,13 +133,16 @@ class Lith_SubDrt : Actor {
       +Bright
    }
    double m_warpAngle, m_warpZ;
+   virtual void lith_hit(Actor th) {
+      tracer      = th;
+      m_warpAngle = th.angleTo(self) - th.angle;
+      m_warpZ     = pos.z - th.pos.z;
+      a_startSound("body/flesh", lch_auto);
+   }
    override int specialMissileHit(Actor th) {
       if(th != target) {
          if(th) {
-            tracer      = th;
-            m_warpAngle = th.angleTo(self) - th.angle;
-            m_warpZ     = pos.z - th.pos.z;
-            a_startSound("body/flesh", lch_auto);
+            lith_hit(th);
          }
          return 0;
       } else {
