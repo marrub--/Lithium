@@ -198,7 +198,7 @@ action(Weapon) void Lith_A_Lower(Lith_RaiseSpeed speed) {
       player.mo.bringUpWeapon();
       return;
    }
-   int lowerSpeed = invoker.lith_getRaiseSpeed(speed);
+   int lowerSpeed = player.playerState != pst_dead ? invoker.lith_getRaiseSpeed(speed) : 8;
    let psp = player.findPSprite(_psp_weapon);
    if(psp) {
       if(player.morphTics || player.cheats & cf_instantweapswitch) {
