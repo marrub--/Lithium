@@ -174,8 +174,9 @@ Ready:   TNT1 A 1 Lith_A_Ready; wait;
 ReadyLH: FRAN A 1; wait;
 ReadyRH: SOPH A 1; wait;
 Deselect:
+   TNT1 A 0 Lith_A_DoubleLower;
    TNT1 A 1 Lith_A_Lower(_raise_normal);
-   loop;
+   wait;
 Select:
    TNT1 A 0 Lith_A_DoubleRaise;
    TNT1 A 1 Lith_A_Raise(_raise_normal);

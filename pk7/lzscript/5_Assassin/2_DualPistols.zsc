@@ -33,8 +33,9 @@ ReadyLH: DPIS B 1; wait;
 ReadyRH: DPIS A 1; wait;
 
 Deselect:
+   TNT1 A 0 Lith_A_DoubleLower;
    TNT1 A 1 Lith_A_Lower(_raise_fast);
-   loop;
+   wait;
 
 Select:
    TNT1 A 0 Lith_A_DoubleRaise;
