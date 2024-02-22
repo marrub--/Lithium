@@ -123,24 +123,26 @@ SelectLoop:
 Fire:
    TNT1 A 0 Lith_A_JumpIfMagEmpty(false);
    TNT1 A 4 {
+      int xx, yy;
       switch(invoker.m_Fired) {
-      case  0: A_FireProjectile("Lith_DelearDot", 0, false, -8,  18); break;
-      case  1: A_FireProjectile("Lith_DelearDot", 0, false, -12, 16); break;
-      case  2: A_FireProjectile("Lith_DelearDot", 0, false, -16, 14); break;
-      case  3: A_FireProjectile("Lith_DelearDot", 0, false, -20, 12); break;
-      case  4: A_FireProjectile("Lith_DelearDot", 0, false, -8,  8 ); break;
-      case  5: A_FireProjectile("Lith_DelearDot", 0, false, -12, 6 ); break;
-      case  6: A_FireProjectile("Lith_DelearDot", 0, false, -16, 4 ); break;
-      case  7: A_FireProjectile("Lith_DelearDot", 0, false, -20, 2 ); break;
-      case  8: A_FireProjectile("Lith_DelearDot", 0, false,  8,  18); break;
-      case  9: A_FireProjectile("Lith_DelearDot", 0, false,  12, 16); break;
-      case 10: A_FireProjectile("Lith_DelearDot", 0, false,  16, 14); break;
-      case 11: A_FireProjectile("Lith_DelearDot", 0, false,  20, 12); break;
-      case 12: A_FireProjectile("Lith_DelearDot", 0, false,  8,  8 ); break;
-      case 13: A_FireProjectile("Lith_DelearDot", 0, false,  12, 6 ); break;
-      case 14: A_FireProjectile("Lith_DelearDot", 0, false,  16, 4 ); break;
-      case 15: A_FireProjectile("Lith_DelearDot", 0, false,  20, 2 ); break;
+      case  0: xx = -8;  yy = 18; break;
+      case  1: xx = -12; yy = 16; break;
+      case  2: xx = -16; yy = 14; break;
+      case  3: xx = -20; yy = 12; break;
+      case  4: xx = -8;  yy = 8 ; break;
+      case  5: xx = -12; yy = 6 ; break;
+      case  6: xx = -16; yy = 4 ; break;
+      case  7: xx = -20; yy = 2 ; break;
+      case  8: xx =  8;  yy = 18; break;
+      case  9: xx =  12; yy = 16; break;
+      case 10: xx =  16; yy = 14; break;
+      case 11: xx =  20; yy = 12; break;
+      case 12: xx =  8;  yy = 8 ; break;
+      case 13: xx =  12; yy = 6 ; break;
+      case 14: xx =  16; yy = 4 ; break;
+      case 15: xx =  20; yy = 2 ; break;
       }
+      A_FireProjectile("Lith_DelearDot", 0, false, xx, yy);
       Lith_A_MagIncr();
       lith_gunFlash();
       soundAlert(invoker.owner);
@@ -150,13 +152,13 @@ Fire:
 
 Reload:
    TNT1 A 0 lith_jumpNoAmmo(25);
-   TNT1 A 22 {
+   TNT1 A 18 {
       lith_takeAmmo(25);
       A_StartSound("weapons/delear/open", lch_reload);
    }
-   TNT1 A 10 A_StartSound("weapons/delear/charge", lch_reload2);
+   TNT1 A 9 A_StartSound("weapons/delear/charge", lch_reload2);
    TNT1 A 4 Lith_A_ReloadFinish;
-   TNT1 A 4 A_StartSound("weapons/delear/close", lch_reload);
+   TNT1 A 1 A_StartSound("weapons/delear/close", lch_reload);
    goto ReadySelector;
 }
 
