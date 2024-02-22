@@ -188,9 +188,12 @@ void CategoryUI(struct gui_state *g) {
          continue;
       }
 
-      bool lock = !get_bit(page->flags, _page_unlocked) || bip.curpage == page;
+      bool thispage = bip.curpage == page;
+      struct gui_pre_btn const *pre;
+      /**/ if(thispage) pre = &gui_p.btnlistsel;
+      else              pre = &gui_p.btnlist;
       cstr name = GetShortName(page);
-      if(G_Button_HId(g, i, name, 0, y, lock, .color = bip.curpage == page ? CR_ORANGE : (name == page->name ? CR_DARKGREY : -1), Pre(btnlist))) {
+      if(G_Button_HId(g, i, name, 0, y, !get_bit(page->flags, _page_unlocked) || thispage, .color = name == page->name ? CR_BLACK : -1, .preset = pre)) {
          SetCurPage(g, page);
       }
 
