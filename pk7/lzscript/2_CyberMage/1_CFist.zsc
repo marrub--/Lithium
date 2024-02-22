@@ -25,7 +25,7 @@ states(Weapon)
 {
 Ready:
    TNT1 A 1 Lith_A_Ready(WRF_NOFIRE);
-   TNT1 A 0 {if(level.time % 7 == 0) GiveInventory("Lith_ManaAmmo", 1);}
+   TNT1 A 0 {if(level.time % 7 == 0) GiveInventory("Lith_ManaAmmo", 4);}
    loop;
 
 Deselect:
