@@ -20,15 +20,13 @@ class Lith_SpotLight : Lith_DynLight {
    }
 }
 
-class Lith_LightProjectile : Actor abstract
-{
-   default
-   {
+class Lith_LightProjectile : Actor abstract {
+   default {
+      Lith_LightProjectile.ZOffset 40;
       Damage 0;
       Radius 0;
       Speed  0;
       Height 0;
-
       Projectile;
       +DONTSPLASH
       +DROPOFF
@@ -37,19 +35,19 @@ class Lith_LightProjectile : Actor abstract
       +NOTIMEFREEZE
       +THRUACTORS
    }
-
-   int m_Counter;
-
-   property Counter: m_Counter;
-
-   states
-   {
+   int m_counter;
+   int m_zOfs;
+   property Counter: m_counter;
+   property ZOffset: m_zOfs;
+   override void tick() {
+      super.tick();
+      if(!Target || --m_Counter == 0) {Destroy(); return;}
+      Warp(Target, 0, 0, m_zOfs, 0, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE);
+   }
+   states {
    Spawn:
-      TNT1 A 1 {
-         if(!Target || --m_Counter == 0) {Destroy(); return;}
-         Warp(Target, 0, 0, 40, 0, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE);
-      }
-      loop;
+      TNT1 A -1;
+      stop;
    }
 }
 
