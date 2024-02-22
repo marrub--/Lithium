@@ -91,7 +91,7 @@ server int  lith_scanner_yoffs   = 0;
 server int  lith_scanner_color   = 106; /* 'j' */
 server int  lith_scanner_font    = 0;
 
-server int lith_light_battery  = 7;
+server int lith_light_battery  = 30;
 server int lith_light_regen    = 2;
 server int lith_light_r        = 255;
 server int lith_light_g        = 217;
