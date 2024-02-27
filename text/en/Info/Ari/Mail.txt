@@ -23,13 +23,13 @@ I hope you a safe journey. This place gives me horrid vibes.
 == \#INFO_TITLE_MPhantomAri | $$\#SAVED_MESSAGE
 == \#INFO_REMOT_MPhantomAri | $$\#REMOTE_OMI
 @@ \#INFO_DESCR_MPhantomAri
-Aricil! What the hell is going on? There are strange... \cmdark\c-
-things attacking me. If you can, we need to re-group. My
-Computer/Brain Interface is saying weird things to me... I'm loathe to
-say it, but, I'm scared.
+Aricil! What the hell is going on? There are strange \cmdark\c- things
+attacking me. If you can, we need to re-group. My Computer/Brain
+Interface is saying weird things to me... I'm loathe to say it, but
+I'm scared.
 
-I think we should go home, but... The world keeps changing behind me.
-I'm pretty sure the Dimension Driver wouldn't even work here.
+I think we should go home, but the world keeps changing behind me. I'm
+certain the Dimension Driver wouldn't work here.
 
 Good hunting.
 
