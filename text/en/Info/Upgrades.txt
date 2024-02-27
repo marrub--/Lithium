@@ -42,6 +42,7 @@ A modified Heads Up Display program.
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_HeadsUpDispAri | $$\#UPGRADE_TITLE_HeadsUpDisp
 == \#INFO_TITLE_HeadsUpDispAri | $$\#INFO_TITLE_HeadsUpDisp
+## TODO: add translation
 @@ \#INFO_DESCR_HeadsUpDispAri
 This program is the 73rd version of the standard issue heads-up
 display for AOF contractors. The binary remains uncredited, and the

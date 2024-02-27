@@ -67,9 +67,45 @@ place this particular gun in a much later period.
 we were born. Do you remember?
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_SHORT_Motra      | Ruzuk
+== \#INFO_SHORT_Motra | Ruzuk
+
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_DualRocket | Franca & Sophia
+== \#INFO_TITLE_DualRocket | Franca and Sophia Rocket Launchers
+## TODO: add translation
+@@ \#INFO_DESCR_DualRocket
+Weapons made for you by Omisielle. Two ground-to-ground rocket
+launchers designed to be used in tandem. Sophia fires homing shots,
+while Franca fires normal rockets. One known design flaw is that the
+scopes are non-functional, as they only have tinted glass inserted as
+a placeholder. These weapons were only used for one battle during the
+start of the Second Death period, being discontinued as soon as the
+fight moved from the Moon to Earth.
+
+---------------------------------------------
+
+\cnNOTES:\c- While the Moon's countries were mostly built underground,
+people on the Earth prefer above-ground structures. These weapons
+would have been a hazard to civilians if they were used there.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_FortuneGun | Fortuity
+== \#INFO_TITLE_FortuneGun | "Fortuity" Luck-Runs-Out Annihilation System
+## TODO: add translation
+@@ \#INFO_DESCR_FortuneGun
+A weapon made for you by Sealis. Produced some time in the latter half
+of the Second Death period, during your time fighting on Earth.
+Ground-to-space heavy railgun for destroying enemy spacecraft. As long
+as the power is on, this weapon continues to emit deadly sparks out
+the front. See manual for safety instructions.
+
+---------------------------------------------
+
+\cnNOTES:\c- Sealis died 5 years ago, near the end of the war. I feel
+like when I fire this weapon now, I can hear them screaming, feel
+their rage. Without the ability to destroy cruisers in a single
+shot—without this weapon—the arms race would have been lost. Still,
+the destruction it's caused disturbs me.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Rems | R.E.M.S
