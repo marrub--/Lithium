@@ -6,7 +6,7 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
-## !!include Ari/Mail.txt
+!!include Ari/Mail.txt
 !!include Jem/Mail.txt
 !!include Lane/Mail.txt
 

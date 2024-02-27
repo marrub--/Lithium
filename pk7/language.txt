@@ -2158,6 +2158,26 @@
    "\n"
    "\n"
    "Presumably, this sigil was created by accident and should remain unused. Its effects may be erratic at best.";
+"LITH_INFO_TITLE_MIntroAri" =
+   "$$LITH_SAVED_MESSAGE";
+"LITH_INFO_REMOT_MIntroAri" =
+   "$$LITH_REMOTE_OMI";
+"LITH_INFO_DESCR_MIntroAri" =
+   "Aricil! I can feel your presence. We're in the same plane now, you and I. Good.\n"
+   "\n"
+   "I'm going to propose a challenge to you, my dear brother; Whoever can make the most Score and get out of here the quickest wins. Let's see who will make it to the top first.\n"
+   "\n"
+   "I hope you a safe journey. This place gives me horrid vibes.";
+"LITH_INFO_TITLE_MPhantomAri" =
+   "$$LITH_SAVED_MESSAGE";
+"LITH_INFO_REMOT_MPhantomAri" =
+   "$$LITH_REMOTE_OMI";
+"LITH_INFO_DESCR_MPhantomAri" =
+   "Aricil! What the hell is going on? There are strange \cmdark\c- things attacking me. If you can, we need to re-group. My Computer/Brain Interface is saying weird things to me... I'm loathe to say it, but I'm scared.\n"
+   "\n"
+   "I think we should go home, but the world keeps changing behind me. I'm certain the Dimension Driver wouldn't work here.\n"
+   "\n"
+   "Good hunting.";
 "LITH_INFO_TITLE_MIntroJem" =
    "$$LITH_SAVED_MESSAGE";
 "LITH_INFO_REMOT_MIntroJem" =
