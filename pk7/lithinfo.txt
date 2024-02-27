@@ -168,7 +168,6 @@
    cl: gA tag: Yigan;
 }
 
-/* outcasts weapons */
 "weapons auto" {
    cl: pM tag: Pistol unl: "Throes";
    cl: pC tag: Mateba unl: "AOF";
@@ -219,7 +218,6 @@
    cl: gO tag: PlasmaDiffuser unl: "SYM43 MDDO Semaphore";
 }
 
-/* intruders weapons */
 "weapons auto" {cl: pD tag: Khanda;}
 "weapons"      {cl: pD tag: Kampilan;}
 "weapons auto" {cl: pD tag: "700Express";}
@@ -235,6 +233,8 @@
 }
 
 "weapons auto" {
+   cl: pD tag: Rakz;
+
    cl: pC tag: Blade;
    cl: pC tag: Delear unl: "Earth";
 }

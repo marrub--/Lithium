@@ -195,8 +195,10 @@ script void P_BIP_PInit(void) {
 
 stkoff void P_BIP_UnlockName(cstr name, bool required, bool from_load) {
    struct page *page = P_BIP_NameToPage(name);
-   if(required && !page) {
-      PrintErr(_l("couldn't find page "), _p(name));
+   if(!page) {
+      if(required) {
+         PrintErr(_l("couldn't find page "), _p(name));
+      }
       return;
    }
    P_BIP_UnlockPage(page, from_load);
