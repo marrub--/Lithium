@@ -130,7 +130,7 @@
 }
 
 "places" {
-   cl: gO tag: AetosVi;
+   cl: gA tag: AetosVi;
    cl: pC tag: Algidistari;
    cl: gO tag: ChAri          unl: "AetosVi";
    cl: pM tag: DurlaPrime     unl: "Earth AetosVi";
