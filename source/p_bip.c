@@ -214,7 +214,7 @@ script void P_BIP_UnlockPage(struct page *page, bool from_load) {
     */
    if(!get_bit(page->flags, _page_available)) {
       if(!from_load) {
-         Dbg_Log(log_dev, _l("page '"), _p(page->name), _l("' not available"));
+         PrintErr(_l("page '"), _p(page->name), _l("' not available"));
       }
       return;
    }
