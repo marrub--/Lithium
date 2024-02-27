@@ -92,7 +92,7 @@ void CBI_Install(i32 num) {
       }
 
       if(c->nam) {
-         P_BIP_Unlock(P_BIP_NameToPage(c->nam), false);
+         P_BIP_UnlockName(c->nam, true);
       }
    } else {
       PrintErr(_l("no upgrade "), _p(num), _l(" for "), _p(pl.pclass));

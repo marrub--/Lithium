@@ -95,8 +95,9 @@ extern mem_size_t  bippagenum;
 
 script void P_BIP_PInit(void);
 
-script void P_BIP_Unlock(struct page *page, bool from_load);
-stkcall struct page *P_BIP_NameToPage(cstr name);
+script optargs(1) void P_BIP_UnlockPage(struct page *page, bool from_load);
+stkcall optargs(1) void P_BIP_UnlockName(cstr page, bool error, bool from_load);
+stkcall optargs(1) struct page *P_BIP_NameToPage(cstr name);
 stkcall cstr P_BIP_CategoryToName(i32 category);
 
 #endif

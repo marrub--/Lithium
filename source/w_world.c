@@ -174,9 +174,9 @@ static void MInitPst(void) {
    }
 
    if(get_bit(pcl_outcasts, pl.pclass)) {
-      if(wl.hubscleared == 10) P_BIP_Unlock(P_BIP_NameToPage("MCluster1"), false);
-      if(wl.hubscleared == 20) P_BIP_Unlock(P_BIP_NameToPage("MCluster2"), false);
-      if(wl.hubscleared == 25) P_BIP_Unlock(P_BIP_NameToPage("MCluster3"), false);
+      if(wl.hubscleared == 10) P_BIP_UnlockName("MCluster1", true);
+      if(wl.hubscleared == 20) P_BIP_UnlockName("MCluster2", true);
+      if(wl.hubscleared == 25) P_BIP_UnlockName("MCluster3", true);
    }
 
    /* TODO: figure out what to do with these in a hub setup */

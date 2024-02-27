@@ -188,12 +188,21 @@ script void P_BIP_PInit(void) {
          #endif
          get_bit(page->flags, _page_auto)))
       {
-         P_BIP_Unlock(page, false);
+         P_BIP_UnlockPage(page);
       }
    }
 }
 
-script void P_BIP_Unlock(struct page *page, bool from_load) {
+stkoff void P_BIP_UnlockName(cstr name, bool required, bool from_load) {
+   struct page *page = P_BIP_NameToPage(name);
+   if(required && !page) {
+      PrintErr(_l("couldn't find page "), _p(name));
+      return;
+   }
+   P_BIP_UnlockPage(page, from_load);
+}
+
+script void P_BIP_UnlockPage(struct page *page, bool from_load) {
    if(!page) {
       PrintErr(_l("page was null"));
       return;
@@ -227,7 +236,7 @@ script void P_BIP_Unlock(struct page *page, bool from_load) {
       }
       for(i32 i = 0; i < countof(page->unlocks) && page->unlocks[i]; i++) {
          if(page->unlocks[i]) {
-            P_BIP_Unlock(P_BIP_NameToPage(page->unlocks[i]), from_load);
+            P_BIP_UnlockName(page->unlocks[i], true, from_load);
          }
       }
    }
@@ -243,23 +252,20 @@ stkoff cstr P_BIP_CategoryToName(i32 category) {
 }
 
 stkoff struct page *P_BIP_NameToPage(cstr name) {
-   noinit static
-   char discrim[32];
+   noinit static char discrim[32];
    faststrcpy2(discrim, name, pl.discrim);
    for_page() {
       if(faststrchk(page->name, discrim) || faststrchk(page->name, name)) {
          return page;
       }
    }
-   PrintErr(_l("couldn't find page "), _p(name), _l(" or "),
-            _p((cstr)discrim));
    return nil;
 }
 
 script_str ext("ACS") addr(OBJ "BIPUnlock") void Z_UnlockPage(void) {
    noinit static char tag[32];
    faststrcpy_str(tag, EDataS(_edt_bipname));
-   P_BIP_Unlock(P_BIP_NameToPage(tag), false);
+   P_BIP_UnlockName(tag, true);
 }
 
 /* EOF */

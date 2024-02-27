@@ -44,10 +44,7 @@ bool P_Shop_Buy(struct shopdef *def, cstr name, bool nodelivery, bool nolog) {
    }
 
    if(def->bipunlock) {
-      struct page *page = P_BIP_NameToPage(def->bipunlock);
-      if(page) {
-         P_BIP_Unlock(page, false);
-      }
+      P_BIP_UnlockName(def->bipunlock, true);
    }
 
    P_Scr_Take(def->cost);

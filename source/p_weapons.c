@@ -186,7 +186,7 @@ bool Z_WeaponPickup(i32 name) {
       WeaponGrab(info);
 
       pl.weaponsheld++;
-      P_BIP_Unlock(P_BIP_NameToPage(info->name), false);
+      P_BIP_UnlockName(info->name, false);
 
       GiveWeaponItem(parm, info->slot);
       P_Log_Weapon(parm);

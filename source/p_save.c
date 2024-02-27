@@ -192,7 +192,7 @@ script void load_bipu_page(astr *inp) {
    unwrap_end(inp, ' ', _datajmp_error_skip);
    struct page *page = P_BIP_NameToPage(name);
    if(page) {
-      P_BIP_Unlock(page, true);
+      P_BIP_UnlockPage(page, true);
       if(get_bit(flg, _bipu_new)) set_bit(page->flags, _page_new);
       else                        dis_bit(page->flags, _page_new);
    }
