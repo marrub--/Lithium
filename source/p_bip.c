@@ -257,7 +257,12 @@ stkoff struct page *P_BIP_NameToPage(cstr name) {
    noinit static char discrim[32];
    faststrcpy2(discrim, name, pl.discrim);
    for_page() {
-      if(faststrchk(page->name, discrim) || faststrchk(page->name, name)) {
+      if(faststrchk(page->name, discrim)) {
+         return page;
+      }
+   }
+   for_page() {
+      if(faststrchk(page->name, name)) {
          return page;
       }
    }
