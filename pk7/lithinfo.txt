@@ -221,43 +221,22 @@
 
 /* intruders weapons */
 "weapons auto" {cl: pD tag: Khanda;}
-"weapons"      {cl: pD tag: Kampilan;
-                cl: pD tag: Kampilan_A;}
+"weapons"      {cl: pD tag: Kampilan;}
 "weapons auto" {cl: pD tag: "700Express";}
 "weapons" {
-   cl: pD tag: "700E_A";
    cl: pD tag: ShrapnelGun;
-   cl: pD tag: Shrapnel_A;
-   cl: pD tag: Shrapnel_B;
    cl: pD tag: "4Bore";
-   cl: pD tag: "4Bore_A";
-   cl: pD tag: "4Bore_B";
    cl: pD tag: Minigun;
-   cl: pD tag: Minigun_A;
    cl: pD tag: Motra;
    cl: pD tag: DualRocket;
-   cl: pD tag: Franca_A;
-   cl: pD tag: Franca_B;
-   cl: pD tag: Sophia_A;
-   cl: pD tag: Sophia_B;
    cl: pD tag: FortuneGun;
-   cl: pD tag: Fortune_A;
-   cl: pD tag: Fortune_B;
    cl: pD tag: Rems;
-   cl: pD tag: Rems_A;
-   cl: pD tag: Rems_B;
    cl: pD tag: Subweapons;
-   cl: pD tag: SubGun_A;
-   cl: pD tag: SubGrn_A;
-   cl: pD tag: SubAxe_A;
-   cl: pD tag: SubDrt_A;
 }
 
 "weapons auto" {
    cl: pC tag: Blade;
    cl: pC tag: Delear unl: "Earth";
-
-   cl: pD tag: Rakz;
 }
 
 "weapons" {

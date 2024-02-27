@@ -71,24 +71,24 @@ _uc_weap:
       ShipGun_A:  {scr: 6988800, grp: 5}
       ShipGun_B:  {scr: 7767700, grp: 5}
    pD:
-      SubGun_A:   {scr:  810603}
-      SubGrn_A:   {scr:  777757}
-      SubAxe_A:   {scr: 1001001}
-      SubDrt_A:   {scr:  939393}
-      Kampilan_A: {scr: 1720999}
-      700E_A:     {scr:  900000}
-      Shrapnel_A: {scr: 2222222}
-      Shrapnel_B: {scr: 1444444}
-      4Bore_A:    {scr: 3444444}
-      4Bore_B:    {scr: 1911111}
-      Minigun_A:  {scr: 2932134}
-      Franca_A:   {scr: 3973793}
-      Sophia_A:   {scr: 4123432, grp: 2}
-      Sophia_B:   {scr: 4234321, grp: 2}
-      Fortune_A:  {scr: 5645646}
-      Fortune_B:  {scr: 6060000}
-      Rems_A:     {scr: 6321234}
-      Rems_B:     {scr: 8984838}
+      SubGun_A:   {pg: N/A, scr:  810603}
+      SubGrn_A:   {pg: N/A, scr:  777757}
+      SubAxe_A:   {pg: N/A, scr: 1001001}
+      SubDrt_A:   {pg: N/A, scr:  939393}
+      Kampilan_A: {pg: N/A, scr: 1720999}
+      700E_A:     {pg: N/A, scr:  900000}
+      Shrapnel_A: {pg: N/A, scr: 2222222}
+      Shrapnel_B: {pg: N/A, scr: 1444444}
+      4Bore_A:    {pg: N/A, scr: 3444444}
+      4Bore_B:    {pg: N/A, scr: 1911111}
+      Minigun_A:  {pg: N/A, scr: 2932134}
+      Franca_A:   {pg: N/A, scr: 3973793}
+      Sophia_A:   {pg: N/A, scr: 4123432, grp: 2}
+      Sophia_B:   {pg: N/A, scr: 4234321, grp: 2}
+      Fortune_A:  {pg: N/A, scr: 5645646}
+      Fortune_B:  {pg: N/A, scr: 6060000}
+      Rems_A:     {pg: N/A, scr: 6321234}
+      Rems_B:     {pg: N/A, scr: 8984838}
 _uc_extr:
    gO:
       TorgueMode: {pg: N/A, scr: 8000000,                    req: rdi, pr: 8}
