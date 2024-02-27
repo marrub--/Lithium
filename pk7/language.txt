@@ -2753,6 +2753,18 @@
    "Shows vital information.\n"
    "\n"
    "A modified Heads Up Display program.";
+"LITH_INFO_SHORT_HeadsUpDispAri" =
+   "$$LITH_UPGRADE_TITLE_HeadsUpDisp";
+"LITH_INFO_TITLE_HeadsUpDispAri" =
+   "$$LITH_INFO_TITLE_HeadsUpDisp";
+"LITH_INFO_DESCR_HeadsUpDispAri" =
+   "This program is the 73rd version of the standard issue heads-up display for AOF contractors. The binary remains uncredited, and the decompiled code has no authors listed in any of the files, though is well-commented.\n"
+   "\n"
+   "---------------------------------------------\n"
+   "\n"
+   "\cnNOTES:\c- Much of this display used to be red, but Omisielle and I ended up creating our own graphics a few years ago.";
+"LITH_UPGRADE_EFFEC_HeadsUpDispAri" =
+   "$$LITH_UPGRADE_EFFEC_HeadsUpDispJem";
 "LITH_UPGRADE_TITLE_JetBooster" =
    "Jet Booster";
 "LITH_INFO_SHORT_JetBooster" =

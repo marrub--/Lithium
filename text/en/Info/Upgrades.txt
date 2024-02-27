@@ -40,6 +40,22 @@ Shows vital information.
 A modified Heads Up Display program.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
+== \#INFO_SHORT_HeadsUpDispAri | $$\#UPGRADE_TITLE_HeadsUpDisp
+== \#INFO_TITLE_HeadsUpDispAri | $$\#INFO_TITLE_HeadsUpDisp
+@@ \#INFO_DESCR_HeadsUpDispAri
+This program is the 73rd version of the standard issue heads-up
+display for AOF contractors. The binary remains uncredited, and the
+decompiled code has no authors listed in any of the files, though is
+well-commented.
+
+---------------------------------------------
+
+\cnNOTES:\c- Much of this display used to be red, but Omisielle and I
+ended up creating our own graphics a few years ago.
+
+== \#UPGRADE_EFFEC_HeadsUpDispAri | $$\#UPGRADE_EFFEC_HeadsUpDispJem
+
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_JetBooster | Jet Booster
 == \#INFO_SHORT_JetBooster | $$\#UPGRADE_TITLE_JetBooster
 == \#INFO_TITLE_JetBooster | Pe'i tha E. Jet Boots
