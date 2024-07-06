@@ -285,6 +285,11 @@ action(Weapon) void Lith_A_DoubleOffset(bool left, int x, int y, int flags = 0) 
 }
 
 action(Weapon) state Lith_A_Ready(int flags = 0, stateLabel sprintReturn = "Select") {
+   if(lith_xhair_enable) {
+      a_setCrosshair(-1);
+   } else {
+      a_setCrosshair(0);
+   }
    let psp = player.findPSprite(_psp_misc);
    if(!psp || !psp.curState) {
       A_Overlay(_psp_misc, "_OverlayHax");
