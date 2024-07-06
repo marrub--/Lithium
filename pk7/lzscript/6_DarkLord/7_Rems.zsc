@@ -323,13 +323,14 @@ AltReady:
    ,D7G G 0 lith_a_emitSteam;
    ,D7G G 1 Lith_A_Ready(WRF_ALLOWUSER1);
    loop;
-Deselect:
-   ,D7G A 1 Lith_A_Lower(_raise_slow);
-   wait;
+Deselect: TNT1 A 0 a_jumpIf(Lith_UTIL.pData(_pdt_upgrade, UPGR_Rems_A), "DeselectBipod");
+DeselectNormal: ,D7G A 1 lith_a_lower(_raise_slow); wait;
+DeselectBipod:  ,D7G B 1 lith_a_lower(_raise_slow); wait;
 Select:
-   ,D7G A 0 {invoker.m_steamy = 0;}
-   ,D7G A 1 Lith_A_Raise(_raise_slow);
-   wait;
+   TNT1 A 0 {invoker.m_steamy = 0;}
+   TNT1 A 0 a_jumpIf(Lith_UTIL.pData(_pdt_upgrade, UPGR_Rems_A), "SelectBipod");
+SelectNormal: ,D7G A 1 lith_a_raise(_raise_slow); wait;
+SelectBipod:  ,D7G B 1 lith_a_raise(_raise_slow); wait;
 User1:
    #### # 1;
    #### # 0 lith_a_adsToggle;
