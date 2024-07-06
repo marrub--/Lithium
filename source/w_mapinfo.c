@@ -112,6 +112,16 @@ script_str alloc_aut(0) ext("ACS") addr(OBJ "SetMapInfo") bool Z_SetMapInfo(
    i32 key = MapInfoSetName(tmpstr(k));
    i32 val;
    switch(key) {
+   case _mi_set_environment:
+      val = MapInfoEnvName(tmpstr((str)v));
+      if(val != -1) {
+         set_msk(ml.flag, _mflg_env, val);
+         ServCallV(sm_UpdateSky);
+         return true;
+      } else {
+         PrintErr(_l("environment type '"), _p((str)v), _l("' not known"));
+         return false;
+      }
    case _mi_set_sky:
       val = MapInfoSkyName(tmpstr((str)v));
       if(val != -1) {

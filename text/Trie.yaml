@@ -169,5 +169,6 @@ MapInfoFlagName:
 MapInfoSetName:
    prefix: _mi_set_
    words:
+      - environment
       - rain
       - sky
