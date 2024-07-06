@@ -174,6 +174,7 @@ override void worldThingDestroyed(WorldEvent ev) {
 }
 
 override void worldUnloaded(WorldEvent ev) {
+   PpShader.SetEnabled("Lith_End", false);
    if(!(level.clusterFlags & LevelLocals.CLUSTER_HUB || level.info.flags2 & LEVEL2_HEXENHACK) || LevelInfo.findLevelInfo(ev.nextMap).cluster != level.cluster) {
       acs_executeWithResult(lsc_hubclear);
    }
