@@ -34,7 +34,7 @@ class Lith_ShrapnelProjectile : Actor {
       m_smoke = !lith_sv_lessparticles && random[Lith_ShrapnelGun](0, 1);
    }
 
-   override int specialBounceHit(Actor mo, Line ln, SecPlane pln) {
+   override int specialBounceHit(Actor mo, Line ln, readOnly<SecPlane> pln) {
       if(mo) {
          doMissileDamage(mo);
       }
