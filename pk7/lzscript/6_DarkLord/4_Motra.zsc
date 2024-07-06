@@ -17,6 +17,8 @@ default {
    Weapon.SlotNumber 4;
    Weapon.SlotPriority 0.9;
    Weapon.UpSound "weapons/motra/draw";
+   Lith_Weapon.AdsInSound "weapons/motra/adsin";
+   Lith_Weapon.AdsOutSound "weapons/motra/adsout";
    +Weapon.NoAutoFire
    +Inventory.Unclearable
    +Lith_Weapon.HitScan

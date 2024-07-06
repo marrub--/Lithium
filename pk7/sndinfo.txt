@@ -958,6 +958,8 @@ weapons/motra/fire3 = lsnd/WeaponsD/Motra/Fire3.flac
 weapons/motra/out = lsnd/WeaponsD/Motra/ReloadOut.flac
 weapons/motra/in = lsnd/WeaponsD/Motra/ReloadIn.flac
 weapons/motra/draw = lsnd/WeaponsD/Motra/Draw.flac
+weapons/motra/adsout = lsnd/WeaponsD/Motra/AdsOut.flac
+weapons/motra/adsin = lsnd/WeaponsD/Motra/AdsIn.flac
 $random weapons/motra/fire { weapons/motra/fire1 weapons/motra/fire2 weapons/motra/fire3 }
 weapons/minigun/fire = lsnd/WeaponsD/Minigun/Fire.flac
 weapons/minigun/rotate = lsnd/WeaponsD/Minigun/Rotate.flac
