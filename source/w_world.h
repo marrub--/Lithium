@@ -101,6 +101,8 @@ enum ZscName(PData) {
    _pdt_hudrpos,
    _pdt_hudhppos,
    _pdt_hudtop,
+   _pdt_rt_hrs,
+   _pdt_rt_min,
 };
 
 /* External Data */
@@ -419,7 +421,7 @@ extern struct map_locals lmvar ml;
 extern struct map_locals       oldml;
 
 void Scr_MInit(void);
-void rtime(time_t time, struct realtime *rt);
+stkcall void rtime(time_t time, struct realtime *rt);
 script cstr CanonTime(i32 type, time_t time);
 optargs(1) i32 UniqueID(i32 tid);
 void BeginAngles(i32 x, i32 y);

@@ -5831,6 +5831,8 @@
    "\ck(Applies on next map start)";
 "LITH_sv_skydarkening" =
    "Outside sector light";
+"LITH_sv_dynlight" =
+   "Dynamic outside lighting";
 "LITH_sv_wepdrop" =
    "Drop weapons from zombies";
 "LITH_TOOLTIP_sv_wepdrop" =

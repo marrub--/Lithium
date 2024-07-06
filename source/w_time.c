@@ -16,7 +16,7 @@
 
 static i32 lmvar frozen;
 
-void rtime(time_t time, struct realtime *rt) {
+stkcall void rtime(time_t time, struct realtime *rt) {
    if(!rt) {
       return;
    }

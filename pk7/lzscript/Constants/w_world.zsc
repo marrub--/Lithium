@@ -38,6 +38,8 @@ enum Lith_PData {
    _pdt_hudrpos,
    _pdt_hudhppos,
    _pdt_hudtop,
+   _pdt_rt_hrs,
+   _pdt_rt_min,
 };
 
 
