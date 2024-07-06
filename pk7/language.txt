@@ -3144,12 +3144,8 @@
 "LITH_UPGRADE_EFFEC_Sophia_B" =
    "Makes Sophia fire tiny rockets with heavy homing constantly.";
 "LITH_UPGRADE_TITLE_Fortune_A" =
-   "Lucky Refrain";
-"LITH_UPGRADE_EFFEC_Fortune_A" =
-   "Makes Fortuity fire small bursts of bolts.";
-"LITH_UPGRADE_TITLE_Fortune_B" =
    "Entropic Collator";
-"LITH_UPGRADE_EFFEC_Fortune_B" =
+"LITH_UPGRADE_EFFEC_Fortune_A" =
    "Makes Fortuity's explosions sort particles by spin, causing a buildup of near-critical rotating mass that explodes into electricity when disturbed enough.";
 "LITH_UPGRADE_TITLE_Rems_A" =
    "R.E.M.S Bipod";

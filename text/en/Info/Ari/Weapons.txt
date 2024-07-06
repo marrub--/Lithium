@@ -226,13 +226,8 @@ Makes Sophia fire two smaller, more accurate rockets in quick succession.
 Makes Sophia fire tiny rockets with heavy homing constantly.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#UPGRADE_TITLE_Fortune_A | Lucky Refrain
+== \#UPGRADE_TITLE_Fortune_A | Entropic Collator
 @@ \#UPGRADE_EFFEC_Fortune_A
-Makes Fortuity fire small bursts of bolts.
-
-## ═══════════════════════════════════════════════════════════════════════════╕
-== \#UPGRADE_TITLE_Fortune_B | Entropic Collator
-@@ \#UPGRADE_EFFEC_Fortune_B
 Makes Fortuity's explosions sort particles by spin, causing a buildup
 of near-critical rotating mass that explodes into electricity when
 disturbed enough.

@@ -85,8 +85,7 @@ _uc_weap:
       Franca_A:   {pg: N/A, scr: 3973793}
       Sophia_A:   {pg: N/A, scr: 4123432, grp: 2}
       Sophia_B:   {pg: N/A, scr: 4234321, grp: 2}
-      Fortune_A:  {pg: N/A, scr: 5645646}
-      Fortune_B:  {pg: N/A, scr: 6060000}
+      Fortune_A:  {pg: N/A, scr: 6060000}
       Rems_A:     {pg: N/A, scr: 6321234}
       Rems_B:     {pg: N/A, scr: 8984838}
 _uc_extr:
