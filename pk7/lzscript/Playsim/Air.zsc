@@ -85,29 +85,24 @@ void setNextWindChange() {
 
 /* FIXME: replace this function */
 void shadeSectors() {
-   let sky_darkening = lith_sv_skydarkening;
-   if(sky_darkening >= 0 && sky_darkening < 1) {
-      int fog_density = 0;
-      if(m_humidity > 70) {
-         fog_density = int(m_fogColor.a * 0.3921568627450980);
+   int fog_density = 0;
+   if(m_humidity > 70) {
+      fog_density = int(m_fogColor.a * 0.3921568627450980);
+   }
+   for(int i = 0, j = level.sectors.size(); i < j; ++i) {
+      Sector sec = level.sectors[i];
+      if(fog_density) {
+         sec.setFogDensity(fog_density);
+         sec.setFade(m_fogColor);
       }
-      foreach(sec : level.sectors) {
-         if(fog_density) {
-            sec.setFogDensity(fog_density);
-            sec.setFade(m_fogColor);
-         }
-         if(sec.getTexture(Sector.Ceiling) == skyflatnum) {
-            int ll = clamp(int(sec.lightLevel * sky_darkening), 64, 255);
-            switch(Lith_UTIL.pData(_pdt_menv)) {
-            case _menv_hell:
-               sec.setColor("#ff7777");
-               break;
-            case _menv_evil:
-               sec.setColor("#ff2222");
-               ll = 107;
-               break;
-            }
-            sec.setLightLevel(ll);
+      if(sec.getTexture(Sector.Ceiling) == skyflatnum) {
+         switch(Lith_UTIL.pData(_pdt_menv)) {
+         case _menv_hell:
+            sec.setColor("#ff7777");
+            break;
+         case _menv_evil:
+            sec.setColor("#ff2222");
+            break;
          }
       }
    }

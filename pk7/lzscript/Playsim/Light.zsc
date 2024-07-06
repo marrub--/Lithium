@@ -10,23 +10,28 @@ class Lith_LightThinker : Thinker;
 
 int          m_time, m_next, m_len, m_speed, m_nextSnd;
 array<int16> m_flashes;
+array<int16> m_original;
+array<int16> m_current;
 
 Lith_SkyThinker m_sky;
 Lith_AirThinker m_air;
 
 static Lith_LightThinker create(Lith_SkyThinker sky, Lith_AirThinker air) {
-   if(!Lith_UTIL.pData(_pdt_mflg, _mflg_lightning) ||
-      level.info.flags2 & LEVEL2_HEXENHACK || /* no-no! */
-      level.info.flags & LEVEL_STARTLIGHTNING) {
-      return null;
-   }
    let th = new("Lith_LightThinker");
    th.m_sky = sky;
    th.m_air = air;
    for(int i = 0, j = level.sectors.size(); i < j; ++i) {
       th.m_flashes.push(int16.max);
+      th.m_original.push(level.sectors[i].lightLevel);
+      th.m_current.push(int16.max);
    }
-   th.setNextFlash();
+   if(Lith_UTIL.pData(_pdt_mflg, _mflg_lightning) &&
+      !(level.info.flags2 & LEVEL2_HEXENHACK || /* no-no! */
+        level.info.flags & LEVEL_STARTLIGHTNING)) {
+      th.setNextFlash();
+   } else {
+      th.m_next = int.min;
+   }
    return th;
 }
 
@@ -45,45 +50,67 @@ void updateThunder() {
 }
 
 void updateLightning() {
-   let delta = m_time++ - m_next;
-   int flash;
-   if(delta < 0) {
-      return;
+   let delta = -1;
+   if(m_next != int.min) {
+      delta = m_time++ - m_next;
    }
+   int flash;
+   let sky_darkening = 100 - int((lith_sv_skydarkening + 0.001) * 100);
    if(delta == 0) {
       flash = random[lith_light](200, 231);
    }
    for(int i = 0, j = level.sectors.size(); i < j; ++i) {
       Sector sec = level.sectors[i];
+      let ceilTex = sec.getTexture(Sector.ceiling);
+      let modified = 0;
+      /* deal with darkening */
+      if(ceilTex == skyFlatNum) {
+         if(sky_darkening < 100) {
+            modified = clamp((m_original[i] * sky_darkening) / 100, 64, 255);
+            if(Lith_UTIL.pData(_pdt_menv) == _menv_evil) {
+               modified = 107;
+            }
+         } else {
+            modified = m_original[i];
+         }
+      }
+      /* deal with flashing */
       if(delta == 0) {
-         /* on first tick only, save the level, then flash */
-         if(sec.getTexture(Sector.ceiling) == skyFlatNum ||
+         /* affect sectors with sky flat or lightning specials */
+         if(ceilTex == skyFlatNum ||
             (sec.special >= 197 && sec.special <= 199)) {
-            int light, orig = sec.lightLevel;
+            /* on first tick only, save the level and modify the light */
+            int light, orig = m_current[i];
             switch(sec.special) {
             default:  light = flash;                 break;
             case 198: light = min(orig + 64, flash); break;
             case 199: light = min(orig + 32, flash); break;
             }
             /* don't effect sectors that are too bright */
-            if(light > orig) {
+            if(orig > light) {
                m_flashes[i] = int16.max;
             } else {
-               sec.setLightLevel(light);
+               modified = light;
                m_flashes[i] = orig;
             }
          }
       } else if(delta < m_len) {
-         /* change the value on every other tick */
-         if(m_flashes[i] < sec.lightLevel + m_speed) {
-            sec.changeLightLevel(m_speed);
+         /* modify the light value as long as it's higher than the
+          * original light */
+         if(m_flashes[i] < m_current[i] + m_speed) {
+            modified = m_current[i] + m_speed;
          }
       } else if(delta == m_len) {
-         /* when done, set the light level to its original */
-         if(m_flashes[i] != int16.max) {
-            sec.setLightLevel(m_flashes[i]);
-         }
+         /* when done reset the flash info */
          m_flashes[i] = int16.max;
+      }
+      /* set light */
+      if(ceilTex == skyFlatNum) {
+         if(sec.lightLevel != m_current[i]) {
+            m_original[i] = sec.lightLevel;
+         }
+         m_current[i] = modified;
+         sec.setLightLevel(m_current[i]);
       }
    }
    if(delta == m_len) {
