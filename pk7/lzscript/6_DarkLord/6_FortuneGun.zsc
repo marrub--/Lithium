@@ -253,8 +253,8 @@ class Lith_FortuneSpark : Lith_ShockEffect {
    states {
    Spawn:
       ZAP1 FFEEFFEEFFEEDDCCBBCCBBAABBAA 1 {
-         if(target) {
-            A_Warp(AAPTR_PLAYER1, cos(target.pitch)*16, 4, 44-sin(target.pitch)*16, 0, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE);
+         if(target && target.player) {
+            A_Warp(AAPTR_TARGET, cos(target.pitch)*16, 4, target.player.viewZ-target.player.mo.viewheight-target.pos.z+lith_hermes.getAttackHeight(target)-sin(target.pitch)*16, 0, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE);
             angle = target.angle;
             pitch = target.pitch;
          }

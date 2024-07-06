@@ -156,8 +156,8 @@ void particle700eLaserTrace(vector3 pos, double alpha) {
    level.spawnParticle(pp_700e_laser);
 }
 
-void particle700eLaser(PlayerPawn mo, double p) {
-   let vp = mo.pos.plusZ(mo.viewHeight - 7);
+void particle700eLaser(PlayerPawn mo, double p, double vp) {
+   let vp = mo.pos.plusZ(vp);
    let mp = mo.pitch - p;
    let ma = (mo.angle - 18, mp-4);
    let va = (mo.angle + 18, mp-8);

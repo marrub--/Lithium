@@ -35,14 +35,14 @@ action(Weapon) void lith_fire700e() {
 
 action(Weapon) void lith_laser(double p) {
    let ply = Lith_Player(self);
-   if(!ply) return;
-   let vz  = ply.player.viewz - ply.pos.z;
+   if(!ply || !ply.player) return;
+   let vz  = ply.player.viewz - ply.viewheight - ply.pos.z + lith_hermes.getattackheight(ply);
    let loc = Lith_URANUS.instance().traceFromActor(ply, ply.m_iyaw, ply.m_ipitch - p, 2048, vz).hitPos;
    Lith_URANUS.instance().particle700eLaserTrace(loc, 0.5);
    loc = Lith_URANUS.instance().traceFromActor(ply, ply.angle, ply.pitch - p, 2048, vz).hitPos;
    Lith_URANUS.instance().particle700eLaserTrace(loc, 0.2);
    if(getAge() & 1) {
-      Lith_URANUS.instance().particle700eLaser(ply, p);
+      Lith_URANUS.instance().particle700eLaser(ply, p, vz-1);
    }
 }
 
