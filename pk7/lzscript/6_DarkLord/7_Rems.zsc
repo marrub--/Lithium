@@ -238,6 +238,7 @@ default {
    Weapon.SlotNumber 7;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/rems/draw";
+   Lith_Weapon.AdsInSound "weapons/rems/ads";
    Lith_Weapon.AmmoType "Lith_CannonAmmo";
    Lith_Weapon.AdsZoom 0.1;
    Inventory.AltHudIcon ",D7IA0";
@@ -252,6 +253,11 @@ override void tick() {
    if(owner) {
       for(int i = 0; i < m_particleLoop; ++i) {
          owner.a_overlayOffset(_psp_d_rems_particle_first + i, fRandom(-16, 16), fRandom(-16, 16), WOF_INTERPOLATE|WOF_ADD);
+      }
+      if(m_ads != _ads_none && owner.vel.xy.length() > 1) {
+         owner.a_startSound("weapons/rems/dragloop", lch_weapon4, CHANF_LOOPING, 0.3, startTime: fRandom(0, 1));
+      } else {
+         owner.a_stopSound(lch_weapon4);
       }
    }
 }

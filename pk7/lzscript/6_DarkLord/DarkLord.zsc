@@ -20,19 +20,16 @@ class Lith_DarkLordPlayer : Lith_Player {
       Player.ViewHeight 50;
       Tag "$Lith_DarkLordPlayer";
    }
-
    override void beginPlay() {
       super.beginPlay();
       m_discrim = "Ari";
       m_pclass = pcl_darklord;
    }
-
    override void giveDefaultInventory() {
       super.giveDefaultInventory();
       lith_giveDefWeapon("Lith_Khanda");
       lith_giveDefWeapon("Lith_700Express");
    }
-
    override void tick() {
       if(!isFrozen()) {
          if(vel.z < 0 && vel.z > -128 && player.cmd.buttons & BT_CROUCH) {
@@ -43,6 +40,15 @@ class Lith_DarkLordPlayer : Lith_Player {
          }
       }
       super.tick();
+   }
+   override void playerLandedMakeGruntSound(Actor landedOn) {
+      let wep = Lith_Weapon(player.readyWeapon);
+      if(wep && Lith_UTIL.pData(_pdt_upgrade, UPGR_Rems_A) &&
+         wep.m_ads != Lith_Weapon._ads_none)
+      {
+         a_startSound("weapons/rems/clonk", lch_body3, CHANF_OVERLAP);
+      }
+      super.playerLandedMakeGruntSound(landedOn);
    }
 }
 

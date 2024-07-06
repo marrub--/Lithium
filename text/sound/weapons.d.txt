@@ -160,14 +160,17 @@ weapons {
       shieldhit       ShieldHit        # ^
       shielddisappate ShieldDisappate  # ^
       shieldrebuke    ShieldRebuke     # ^
+      $limit shieldshot 0
+      $limit shieldfire 0
 
+      ads        Ads        # Marathon 2: Durandal
       empty      FireEmpty  # SI Series 6000
       draw       Draw       # ^
       wail       Wail       # Half-Life 2
+      dragloop   DragLoop   # ^
+      clonk      Clonk      # ^
       firefinish FireFinish # Sigh - Introiutus/Kyrie
       pickup     Pickup     # SI Series 6000
-      $limit shieldshot 0
-      $limit shieldfire 0
    }
 }
 

@@ -9,7 +9,7 @@
 weapons {
    magnum {
       == lsnd/WeaponsW/Magnum
-      fire1    Fire        # Marathon 2
+      fire1    Fire        # Marathon 2: Durandal
       fire2    Fire2       # ^
       fireback FireBacking # ^
       reload   Reload      # ^
