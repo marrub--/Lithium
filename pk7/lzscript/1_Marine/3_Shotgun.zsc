@@ -116,14 +116,14 @@ ReadyGauss:
    SHTG N 1 Lith_A_Ready(WRF_ALLOWRELOAD);
    goto ReadySelector;
 
-Deselect:
-   SHTG A 1 Lith_A_Lower(_raise_fast);
-   loop;
-
+Deselect: TNT1 A 0 a_jumpIf(Lith_UTIL.pData(_pdt_upgrade, UPGR_Shotgun_A), "DeselectGauss");
+DeselectNormal: SHTG A 1 lith_a_lower(_raise_fast); wait;
+DeselectGauss:  SHTG N 1 lith_a_lower(_raise_fast); wait;
 Select:
-   SHTG A 0 {invoker.m_Just = 3;}
-   SHTG A 1 Lith_A_Raise(_raise_fast);
-   wait;
+   TNT1 A 0 {invoker.m_Just = 3;}
+   TNT1 A 0 a_jumpIf(Lith_UTIL.pData(_pdt_upgrade, UPGR_Shotgun_A), "SelectGauss");
+SelectNormal: SHTG A 1 lith_a_raise(_raise_fast); wait;
+SelectGauss:  SHTG N 1 lith_a_raise(_raise_fast); wait;
 
 Fire:
    #### # 0 A_JumpIf(Lith_UTIL.pData(_pdt_upgrade, UPGR_Shotgun_A), "FireGauss");
