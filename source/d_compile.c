@@ -13,6 +13,9 @@
 #include "d_compile.h"
 #include "m_trie.h"
 
+noinit static struct compiler_var vars[256];
+static i32 varn;
+
 #ifndef NDEBUG
 script static bool chtf_dbg_dlg(cheat_params_t const params) {
    if(!IsDigit(params[0]) || !IsDigit(params[1])) {
@@ -97,8 +100,6 @@ static void Dlg_GetItem_Var(struct compiler *d) {
       }
       last_val = val;
       if(!var) {
-         noinit static struct compiler_var vars[256];
-         static i32 varn;
          var = &vars[varn++];
          var->name  = id;
          var->value = val;
@@ -165,7 +166,7 @@ script static void Dlg_GetTop_Name(struct compiler *d) {
    unwrap(&d->res);
 }
 
-script static void Dlg_Compile(cstr fname, varmap_t *vars) {
+script static void Dlg_Compile(cstr fname, varmap_t *varmap) {
    noinit static struct compiler d;
    Dbg_Log(log_gsinfo, _l("begin compiling file "), _p(fname));
    FILE *fp = W_Open(fast_strdup(fname), 't');
@@ -175,7 +176,7 @@ script static void Dlg_Compile(cstr fname, varmap_t *vars) {
    }
    fastmemset(&d, 0, sizeof d);
    tb_ctor(&d.tb, fp, fname);
-   d.vars = vars;
+   d.vars = varmap;
    for(;;) {
       struct token *tok = tb_expc(&d.tb, &d.res, tb_get(&d.tb), tok_identi, tok_eof, 0);
       unwrap_goto(&d.res, done);
@@ -208,18 +209,19 @@ void Dlg_MInit(void) {
    /* clear VM data */
    Xalloc(_tag_dlgv);
    fastmemset(dlgdefs, 0, sizeof dlgdefs);
+   varn = 0;
    /* always compile common file */
-   varmap_t vars;
-   varmap_t_ctor(&vars, 16, 16);
-   Dlg_Compile("lmisc/Common.mmmm", &vars);
+   varmap_t varmap;
+   varmap_t_ctor(&varmap, 16, 16);
+   Dlg_Compile("lmisc/Common.mmmm", &varmap);
    /* if scripts are used, compile them */
    if(get_bit(ml.mi->use, _mi_key_script)) {
       static char tmp[64];
       faststrcpy_str(tmp, ml.mi->keys[_mi_key_script].s);
-      Dlg_Compile(tmp, &vars);
+      Dlg_Compile(tmp, &varmap);
    }
    /* clean up compiler data */
-   varmap_t_dtor(&vars);
+   varmap_t_dtor(&varmap);
    Xalloc(_tag_dlgc);
 }
 
