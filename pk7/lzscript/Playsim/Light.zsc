@@ -55,7 +55,7 @@ void updateLightning() {
       delta = m_time++ - m_next;
    }
    int flash;
-   let sky_darkening = 100 - int((lith_sv_skydarkening + 0.001) * 100);
+   let sky_darkening = int((lith_sv_skydarkening + 0.001) * 100);
    if(delta == 0) {
       flash = random[lith_light](200, 231);
    }

@@ -173,7 +173,7 @@ Shader: A dynamic, soft, full sky replacement for a more chill atmosphere.
 
 \ck(Applies on next map start)
 
-== \#sv_skydarkening | Outside sector darkening
+== \#sv_skydarkening | Outside sector light
 == \#sv_wepdrop | Drop weapons from zombies
 @@ \#TOOLTIP_sv_wepdrop
 Mainly exists for map compatibility. Drops weapons from zombie enemies
