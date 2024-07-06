@@ -120,8 +120,8 @@ void Upgr_HoverBoots_Update(void) {
       if(P_ButtonHeld(BT_SPEED) &&
          get_bit(pl.upgrades[UPGR_HoverBoots2].flags, _ug_active)) {
          k32 angle = pl.yaw - atan2k(pl.sidev, pl.forwardv);
-         vx = ACS_Cos(angle) * 14;
-         vy = ACS_Sin(angle) * 14;
+         hoverboots_origspeed.x = vx = ACS_Cos(angle) * 14;
+         hoverboots_origspeed.y = vy = ACS_Sin(angle) * 14;
          vz = 0;
       } else {
          vx += pl.sidev;
