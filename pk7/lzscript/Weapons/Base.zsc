@@ -142,6 +142,14 @@ override void postBeginPlay() {
    destroy();
 }
 
+action(Weapon) void lith_resetCrosshair() {
+   if(lith_xhair_enable) {
+      a_setCrosshair(-1);
+   } else {
+      a_setCrosshair(0);
+   }
+}
+
 int lith_getRaiseSpeed(Lith_RaiseSpeed speed) {
    switch(speed) {
    case _raise_slow:    return 10;
@@ -166,6 +174,7 @@ action(Weapon) void lith_a_setInterpolation(bool on) {
 }
 
 action(Weapon) void lith_a_overlayTick() {
+   lith_resetCrosshair();
    double a = 1.0;
    int style = style_normal;
    if(invoker.m_ads == _ads_scope) {
@@ -226,6 +235,7 @@ action(Weapon) void Lith_A_Raise(Lith_RaiseSpeed speed) {
    if(!player) {
       return;
    }
+   lith_resetCrosshair();
    lith_a_setInterpolation(false);
    lith_a_adsCancel();
    if(player.pendingWeapon != WP_NOCHANGE) {
@@ -285,11 +295,6 @@ action(Weapon) void Lith_A_DoubleOffset(bool left, int x, int y, int flags = 0) 
 }
 
 action(Weapon) state Lith_A_Ready(int flags = 0, stateLabel sprintReturn = "Select") {
-   if(lith_xhair_enable) {
-      a_setCrosshair(-1);
-   } else {
-      a_setCrosshair(0);
-   }
    let psp = player.findPSprite(_psp_misc);
    if(!psp || !psp.curState) {
       A_Overlay(_psp_misc, "_OverlayHax");
