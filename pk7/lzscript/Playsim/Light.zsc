@@ -60,7 +60,10 @@ void updateLightning() {
    if(lith_sv_dynlight) {
       let rt_hrs = Lith_UTIL.pData(_pdt_rt_hrs);
       let rt_min = Lith_UTIL.pData(_pdt_rt_min);
-      let mul = lith_util.easeInOutQuad(sin((rt_hrs * 60 + rt_min) / 1500.0 * 180)) * 0.7 + 0.3;
+      let mul =
+         lith_util.easeInOutQuad(
+            sin((rt_hrs * 60 + rt_min) / 1440.0 * 180)
+         ) * 0.7 + 0.3;
       sky_darkening = sky_darkening * int(mul * 100.0) / 100;
    }
    if(delta == 0) {
