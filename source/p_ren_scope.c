@@ -75,7 +75,7 @@ static
 void ScopeC(void) {
    i32 which = (ACS_Timer() & 15) / 4;
 
-   if(pl.scopetoken) {
+   if(pl.scoped) {
       SetFadeA(fid_scopecoS + which, 1, 16, 0.5);
 
       for(i32 i = 0; i < 200; i++) {
@@ -99,7 +99,7 @@ void ScopeC(void) {
 
 static
 void ScopeI(void) {
-   if(!pl.scopetoken) {
+   if(!pl.scoped) {
       return;
    }
    k32 a = (1 + ACS_Sin(ACS_Timer() / 70.0)) * 0.25 + 0.5;
@@ -109,7 +109,7 @@ void ScopeI(void) {
 
 static
 void ScopeM(void) {
-   if(!pl.scopetoken) {
+   if(!pl.scoped) {
       return;
    }
    Waves();
@@ -117,7 +117,7 @@ void ScopeM(void) {
 }
 
 script void P_Ren_Scope(void) {
-   if(pl.old.scopetoken && !pl.scopetoken) {
+   if(pl.old.scoped && !pl.scoped) {
       hudstrnum = 0;
    }
    switch(pl.pclass) {

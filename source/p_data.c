@@ -75,7 +75,8 @@ void P_Dat_PTickPre(void) {
 
    pl.name = strp(ACS_PrintName(0));
 
-   pl.scopetoken = ServCallI(sm_WeaponScoped);
+   pl.aimed  = ServCallI(sm_WeaponAimed);
+   pl.scoped = ServCallI(sm_WeaponScoped);
 
    if(ACS_Timer() > 4) {
       /**/ if(pl.health < pl.old.health) pl.healthused += pl.old.health - pl.health;

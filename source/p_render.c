@@ -15,7 +15,7 @@
 #include "p_hudid.h"
 
 stkoff static void P_Ren_Mission(void) {
-   if(ACS_Timer() == 0 || !pl.hudenabled) {
+   if(ACS_Timer() == 0 || !pl.hudenabled || pl.aimed) {
       return;
    }
    if(pl.missionstatshow >= 0) {

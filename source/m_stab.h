@@ -199,6 +199,7 @@ stab_x(sm_UserY, "user_Y")
 stab_x(sm_UserZ, "user_Z")
 stab_x(sm_W, "m_W")
 stab_x(sm_WaterLevel, "WaterLevel")
+stab_x(sm_WeaponAimed, "WeaponAimed")
 stab_x(sm_WeaponScoped, "WeaponScoped")
 
 stab_x(sm_boss, "BOSS")

@@ -198,7 +198,7 @@ struct player_delta {
 
    /* Input */
    i32  buttons;
-   bool scopetoken;
+   bool aimed, scoped;
    i32  frozen;
    i32  semifrozen;
 

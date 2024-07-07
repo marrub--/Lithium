@@ -13,6 +13,11 @@ static bool weaponScoped() {
    return wep && wep.m_ads == Lith_Weapon._ads_scope;
 }
 
+static bool weaponAimed() {
+   let wep = Lith_Weapon(players[consolePlayer].readyWeapon);
+   return wep && wep.m_ads != Lith_Weapon._ads_none;
+}
+
 static int GetMaxMag(string cname) {
    let p   = players[consolePlayer].mo;
    let wep = p ? Lith_Weapon(p.findInventory(cname)) : null;
