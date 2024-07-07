@@ -175,6 +175,15 @@ Shader: A dynamic, soft, full sky replacement for a more chill atmosphere.
 
 == \#sv_skydarkening | Outside sector light
 == \#sv_dynlight | Dynamic outside lighting
+%% \#TOOLTIP_sv_dynlight
+Dynamically change the lighting in outdoor areas to account for the
+time of day.
+
+== \#sv_dynsky | Dynamic sky
+%% \#TOOLTIP_sv_dynsky
+When the sky is set to be replaced, in certain environments,
+dynamically blend it to the time of day.
+
 == \#sv_wepdrop | Drop weapons from zombies
 @@ \#TOOLTIP_sv_wepdrop
 Mainly exists for map compatibility. Drops weapons from zombie enemies

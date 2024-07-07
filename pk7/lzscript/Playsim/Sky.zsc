@@ -24,9 +24,9 @@ int       m_mode, m_rain;
 color     m_color, m_fogColor;
 
 /* canvas mode */
-textureId m_base, m_gradient;
+textureId m_base, m_blendTex, m_gradient;
 int       m_baseSw, m_baseSh, m_baseDw, m_baseDh, m_baseY;
-double    m_speed;
+double    m_speed, m_blendAmt;
 
 /* electric storms */
 textureId m_lightning;
@@ -48,6 +48,7 @@ static Lith_SkyThinker create() {
    th.m_origSky2 = level.skyTexture2;
    th.m_mode = _msky_nochange;
    th.m_rain = -1;
+   th.m_blendTex.setInvalid();
    return th;
 }
 
@@ -66,6 +67,9 @@ override void tick() {
       }
       level.changeSky(m_setSky1, m_setSky2);
    }
+   if(m_mode == _msky_replace) {
+      setReplacedSky();
+   }
    int rain = Lith_UTIL.pData(_pdt_rain);
    if(rain != m_rain) {
       m_rain = rain;
@@ -73,6 +77,33 @@ override void tick() {
    }
    if(m_rain == _rain_fire) {
       tickSkyFire();
+   }
+}
+
+ui void drawSkyTex(textureId tex, int dw, int dh, int sw, int sh, int xofs, int yofs, double blend = 1.0) {
+   let style = blend == 1.0 ? STYLE_Normal : STYLE_Translucent;
+   m_canvas.drawTexture(
+      tex, true, canvas_w-dw, 0,
+      DTA_SrcWidth,sw, DTA_SrcHeight,sh,
+      DTA_DestHeight,dh, DTA_DestWidth,dw,
+      DTA_SrcY,yofs, DTA_SrcX,-xofs,
+      DTA_FlipY,true,
+      DTA_Alpha,blend, DTA_LegacyRenderStyle,style);
+   m_canvas.drawTexture(
+      tex, true, 0, 0,
+      DTA_SrcWidth,xofs,
+      DTA_DestHeight,sh, DTA_DestWidth,xofs,
+      DTA_SrcY,yofs, DTA_SrcX,sw-xofs,
+      DTA_FlipY,true,
+      DTA_Alpha,blend, DTA_LegacyRenderStyle,style);
+   for(int x = xofs; x < canvas_w-sw; x += sw) {
+      m_canvas.drawTexture(
+         tex, true, x, 0,
+         DTA_SrcWidth,sw, DTA_SrcHeight,sh,
+         DTA_DestWidth,sw, DTA_DestHeight,sh,
+         DTA_SrcY,yofs,
+         DTA_FlipY,true,
+         DTA_Alpha,blend, DTA_LegacyRenderStyle,style);
    }
 }
 
@@ -112,10 +143,9 @@ ui void drawSky(RenderEvent evt) {
       int sw = m_baseSw, sh = m_baseSh;
       int xofs = int(((gameTic + evt.fracTic) * 28.5714 * m_speed) % dw);
       int yofs = m_baseY;
-      m_canvas.drawTexture(m_base, true, canvas_w-dw, 0, DTA_SrcWidth,sw, DTA_SrcHeight,sh, DTA_DestHeight,dh, DTA_DestWidth,dw, DTA_SrcY,yofs, DTA_SrcX,-xofs, DTA_FlipY,true);
-      m_canvas.drawTexture(m_base, true, 0, 0, DTA_SrcWidth,xofs, DTA_DestHeight,sh, DTA_DestWidth,xofs, DTA_SrcY,yofs, DTA_SrcX,sw-xofs, DTA_FlipY,true);
-      for(int x = xofs; x < canvas_w-sw; x += sw) {
-         m_canvas.drawTexture(m_base, true, x, 0, DTA_SrcWidth,sw, DTA_SrcHeight,sh, DTA_DestWidth,sw, DTA_DestHeight,sh, DTA_SrcY,yofs, DTA_FlipY,true);
+      drawSkyTex(m_base, dw, dh, sw, sh, xofs, yofs);
+      if(m_blendTex.isValid()) {
+         drawSkyTex(m_blendTex, dw, dh, sw, sh, xofs, yofs, m_blendAmt);
       }
       if(do_flash) {
          m_canvas.drawTexture(m_lightning, true, m_flashPos, 0, DTA_Alpha,1.0 - flash_norm, DTA_LegacyRenderStyle,STYLE_Add, DTA_Color,m_flashColor, DTA_FlipY,true, DTA_FlipX,m_flashPos & 1 == 0);
@@ -194,13 +224,7 @@ void replaceSky() {
       }
       break;
    case _msky_replace:
-      switch(Lith_UTIL.pData(_pdt_menv)) {
-      case _menv_evil:       setBase(Lith_URANUS.getTex("HELP"),     0.001); break;
-      case _menv_hell:       setBase(Lith_URANUS.getTex("LITHSKRD"), 0.01);  break;
-      case _menv_interstice: setBase(Lith_URANUS.getTex("LITHSKDE"), 0.0);   break;
-      case _menv_abyss:      setBase(Lith_URANUS.getTex("LITHWHIT"), 0.0);   break;
-      default:               setBase(Lith_URANUS.getTex("LITHSKST"), 0.0);   break;
-      }
+      setReplacedSky();
    case _msky_vanilla:
       m_color = m_fogColor;
    case _msky_none:
@@ -209,6 +233,64 @@ void replaceSky() {
    }
    resetClouds();
    resetCanvas();
+}
+
+void setReplacedSky() {
+   m_blendTex.setInvalid();
+   int which = -1;
+   double blend = 0.0;
+   if(lith_sv_dynsky) {
+      let rt_hrs = Lith_UTIL.pData(_pdt_rt_hrs);
+      let rt_min = Lith_UTIL.pData(_pdt_rt_min);
+      let amt =
+         min(sin((rt_hrs * 60 + rt_min) / 1440.0 * 180.0) * 3.0, 2.9999);
+      if(rt_hrs >= 12) {
+         blend = 1 - (amt % 1.0);
+         if(amt < 2 && amt >= 1) {
+            which = 3;
+         } else {
+            which = int(amt);
+            if(which == 0) {
+               blend = 0.0;
+            }
+         }
+      } else {
+         which = int(amt);
+         if(which == 2) {
+            blend = 0.0;
+         } else {
+            blend = amt % 1.0;
+         }
+      }
+   }
+   textureId tex;
+   tex.setInvalid();
+   double speed = 0.0;
+   switch(Lith_UTIL.pData(_pdt_menv)) {
+   case _menv_evil: tex = Lith_URANUS.getTex("HELP");     speed = 0.001; break;
+   case _menv_hell: tex = Lith_URANUS.getTex("LITHSKRD"); speed = 0.01;  break;
+   case _menv_interstice: tex = Lith_URANUS.getTex("LITHSKDE"); break;
+   case _menv_abyss:      tex = Lith_URANUS.getTex("LITHWHIT"); break;
+   }
+   if(tex.isValid()) {
+      if(m_base != tex) {
+         setBase(tex, speed);
+      }
+      return;
+   }
+   textureId blendTex;
+   blendTex.setInvalid();
+   if(which == -1) {
+      tex = Lith_URANUS.getTex("LITHSKST");
+   } else {
+      tex      = Lith_URANUS.getTex("LITHSKS" .. which);
+      blendTex = Lith_URANUS.getTex("LITHSKS" .. ((which + 1) % 4));
+   }
+   if(m_base != tex) {
+      setBase(tex, speed);
+   }
+   m_blendTex = blendTex;
+   m_blendAmt = Lith_UTIL.easeInCubic(blend);
 }
 
 /* firestorms */

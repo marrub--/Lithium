@@ -21,6 +21,7 @@ server int   lith_sv_rainphysics   = 0;
 server int   lith_sv_sky           = 0;
 server float lith_sv_skydarkening  = 1.0;
 server bool  lith_sv_dynlight      = true;
+server bool  lith_sv_dynsky        = true;
 server bool  lith_sv_revenge       = true;
 server int   lith_sv_autosave      = 0;
 server bool  lith_sv_autosavef     = false;

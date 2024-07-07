@@ -151,8 +151,9 @@
    "@ zrrion         - Skull key, health, cell pack, and health bonus pickups\n"
    "~\n"
    "                             * Textures *\n"
-   "@ FreeDoom Contributors - TITLEMAP textures, LITHWTR*/LITHNUK*/LITHBLD*\n"
-   "@ abbuw                 - Vent texture\n"
+   "@ FreeDoom Contributors   - TITLEMAP textures, LITHWTR*/LITHNUK*/LITHBLD*\n"
+   "@ abbuw                   - Vent texture\n"
+   "@ Screaming Brain Studios - Dynamic sky textures\n"
    "~\n"
    "                              * Fonts *\n"
    "\n"
@@ -5833,6 +5834,14 @@
    "Outside sector light";
 "LITH_sv_dynlight" =
    "Dynamic outside lighting";
+"LITH_TOOLTIP_sv_dynlight" =
+   "Dynamically change the lighting in outdoor areas to account for the\n"
+   "time of day.";
+"LITH_sv_dynsky" =
+   "Dynamic sky";
+"LITH_TOOLTIP_sv_dynsky" =
+   "When the sky is set to be replaced, in certain environments,\n"
+   "dynamically blend it to the time of day.";
 "LITH_sv_wepdrop" =
    "Drop weapons from zombies";
 "LITH_TOOLTIP_sv_wepdrop" =

@@ -44,6 +44,10 @@ struct Lith_UTIL {
       }
    }
 
+   static double easeInCubic(double t) {
+      return t * t * t;
+   }
+
    static double easeOutCubic(double t) {
       t = 1 - t;
       return 1 - t * t * t;

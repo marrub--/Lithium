@@ -285,6 +285,7 @@ static struct setting const st_gam[] = {
    s_enume("sv_sky",          0, 4,           "sky"),
    s_fixed("sv_skydarkening", 0.0, 1.0, 0.05, "mult"),
    s_boole("sv_dynlight"),
+   s_boole("sv_dynsky"),
    #ifndef NDEBUG
    s_label("st_labl_postgame"),
    s_boole("sv_postgame", .fill = &fil_postgame),
