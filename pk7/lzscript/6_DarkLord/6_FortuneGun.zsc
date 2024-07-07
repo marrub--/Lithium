@@ -274,6 +274,7 @@ default {
    Weapon.SlotNumber 6;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/fortune/draw";
+   Lith_Weapon.AdsZoom 1.4;
    Lith_Weapon.AmmoType "Lith_PlasmaAmmo";
    Inventory.AltHudIcon "FORTZ0";
    +Weapon.NoAutoFire
@@ -329,22 +330,30 @@ action(Weapon) bool lith_a_emitFortuneSpark() {
 }
 
 states(Weapon) {
+AltReady:
+   SCOP D 1 Lith_A_Ready(WRF_NOBOB|WRF_ALLOWUSER1);
+   goto Ready1;
 Ready:
-   FORT A 1 Lith_A_Ready;
-   FORT A 0 {
+   FORT A 1 Lith_A_Ready(WRF_ALLOWUSER1);
+Ready1:
+   #### # 0 {
       if(random[Lith_Fortune](0, 77) == 0 || level.time % 50 == 0) {
          if(lith_a_emitFortuneSpark()) {
             A_StartSound("weapons/fortune/spark", lch_weapon3, pitch: frandom[Lith_Fortune](0.9, 1.2));
          }
       }
    }
-   loop;
+   goto ReadySelector;
 Deselect:
    FORT A 1 Lith_A_Lower(_raise_slow);
    loop;
 Select:
    FORT A 1 Lith_A_Raise(_raise_slow);
    loop;
+User1:
+   #### # 7;
+   #### # 0 Lith_A_AdsToggle(_ads_scope);
+   goto ReadySelector;
 Fire:
    #### # 0 lith_jumpNoAmmo(350);
    #### # 0 {
@@ -352,46 +361,61 @@ Fire:
       invoker.m_chargeTime = 4;
    }
 FireCharge:
-   FORT A 0 lith_a_emitFortuneSpark;
-   FORT AAAAAA 1 a_overlayOffset(_psp_weapon, fRandom[Lith_Fortune](0, 4), fRandom[Lith_Fortune](32, 34), wof_interpolate);
-   FORT A 0 a_jumpIf(--invoker.m_chargeTime, "FireCharge");
+   #### # 0 lith_a_emitFortuneSpark;
+   #### ###### 1 a_overlayOffset(_psp_weapon, !invoker.m_ads ? fRandom[Lith_Fortune](0, 4) : 0, fRandom[Lith_Fortune](32, 34), wof_interpolate);
+   #### # 0 a_jumpIf(--invoker.m_chargeTime, "FireCharge");
 Fire2:
    #### # 0 lith_jumpNoAmmo(350);
+   #### # 0 a_jumpIf(invoker.m_ads, "FireScope");
+FireNoScope:
    FORT A 1 offset(2, 33);
    FORT A 1 offset(2, 34);
    FORT A 0 lith_a_emitFortuneSpark;
    FORT A 1 offset(5, 37);
    FORT B 2 bright offset(1, 32) Lith_A_FireFortune;
    FORT C 2 offset(2, 34);
-   FORT A 0 lith_a_emitFortuneSpark;
+   FORT C 0 lith_a_emitFortuneSpark;
    FORT C 1 offset(-1, 32);
-   FORT A 3 offset(22, 64);
-   FORT A 3 offset(19, 60);
-   FORT A 3 offset(16, 55);
-   FORT A 2 offset(15, 52);
-   FORT A 2 offset(14, 50);
-   FORT A 2 offset(13, 48);
-   FORT A 1 offset(12, 44);
-   FORT A 1 offset(11, 43);
-   FORT A 1 offset(10, 42);
-   FORT A 1 offset(8, 41);
-   FORT A 1 offset(7, 40);
-   FORT A 2 offset(6, 38);
-   FORT AAA 1 offset(5, 37) A_ReFire("Fire2");
-   FORT AAAA 1 offset(4, 36) a_weaponReady(WRF_NOBOB);
-   FORT AAAAA 1 offset(3, 35) a_weaponReady(WRF_NOBOB);
-   FORT AAAAAA 1 offset(2, 34) a_weaponReady(WRF_NOBOB);
-   FORT AAAAAAA 1 offset(1, 33) a_weaponReady(WRF_NOBOB);
-   FORT A 0 a_startSound("weapons/fortune/load", lch_dryweapon);
-   FORT AAAAAAAA 1 offset(1, 32) a_weaponReady(WRF_NOBOB);
+   FORT A 0;
+   goto Fire3;
+FireScope:
+   SCOP D 1 offset(0, 33);
+   SCOP D 1 offset(0, 34);
+   SCOP D 0 lith_a_emitFortuneSpark;
+   SCOP D 1 offset(0, 37);
+   SCOP D 2 bright offset(0, 32) Lith_A_FireFortune;
+   SCOP D 2 offset(0, 34);
+   SCOP D 0 lith_a_emitFortuneSpark;
+   SCOP D 1 offset(0, 32);
+   SCOP D 0;
+Fire3:
+   #### # 3 offset(22, 64);
+   #### # 3 offset(19, 60);
+   #### # 3 offset(16, 55);
+   #### # 2 offset(15, 52);
+   #### # 2 offset(14, 50);
+   #### # 2 offset(13, 48);
+   #### # 1 offset(12, 44);
+   #### # 1 offset(11, 43);
+   #### # 1 offset(10, 42);
+   #### # 1 offset(8, 41);
+   #### # 1 offset(7, 40);
+   #### # 2 offset(6, 38);
+   #### ### 1 offset(5, 37) A_ReFire("Fire2");
+   #### #### 1 offset(4, 36) a_weaponReady(WRF_NOBOB);
+   #### ##### 1 offset(3, 35) a_weaponReady(WRF_NOBOB);
+   #### ###### 1 offset(2, 34) a_weaponReady(WRF_NOBOB);
+   #### ####### 1 offset(1, 33) a_weaponReady(WRF_NOBOB);
+   #### # 0 a_startSound("weapons/fortune/load", lch_dryweapon);
+   #### ######## 1 offset(1, 32) a_weaponReady(WRF_NOBOB);
    goto ReadySelector;
 FireEmpty:
-   FORT A 2 offset(3, 38);
-   FORT A 1 offset(7, 40);
-   FORT A 1 offset(5, 37) A_StartSound("weapons/spas/empty", lch_dryweapon);
-   FORT A 1 offset(4, 34);
-   FORT A 1 offset(2, 33);
-   FORT A 5 offset(1, 32);
+   #### # 2 offset(3, 38);
+   #### # 1 offset(7, 40);
+   #### # 1 offset(5, 37) A_StartSound("weapons/spas/empty", lch_dryweapon);
+   #### # 1 offset(4, 34);
+   #### # 1 offset(2, 33);
+   #### # 5 offset(1, 32);
    goto ReadySelector;
 }
 

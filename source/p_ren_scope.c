@@ -10,14 +10,10 @@
 #include "p_player.h"
 #include "p_hudid.h"
 
-noinit static
-str hudstrs[20];
+noinit static str hudstrs[20];
+noinit static mem_size_t hudstrnum;
 
-noinit static
-mem_size_t hudstrnum;
-
-static
-void StringStack(void) {
+static void StringStack(i32 cr) {
    if(ACS_Timer() % 3 == 0) {
       str s = strp(ACS_PrintHex(ACS_Random(0x10000000, 0x7FFFFFFF)));
       if(hudstrnum == 20) {
@@ -31,12 +27,11 @@ void StringStack(void) {
    SetSize(320, 200);
 
    for(mem_size_t i = 0; i < hudstrnum; ++i) {
-      PrintText_str(hudstrs[i], sf_ltrmfont, CR_RED, 300,2, 20+i*9,1, _u_alpha, 0.5);
+      PrintText_str(hudstrs[i], sf_ltrmfont, cr, 300,2, 20+i*9,1, _u_alpha, 0.5);
    }
 }
 
-static
-void Waves(void) {
+static void Waves(void) {
    k32 health = pl.health / (k32)pl.maxhealth;
    i32 frame  = clampi(health * 4, 1, 5);
    i32 timer  = ACS_Timer();
@@ -71,8 +66,7 @@ void Waves(void) {
    }
 }
 
-static
-void ScopeC(void) {
+static void ScopeC(void) {
    i32 which = (ACS_Timer() & 15) / 4;
 
    if(pl.scoped) {
@@ -107,13 +101,22 @@ void ScopeI(void) {
    PrintSprite(sp_HUD_I_ScopeOverlay, 160,0, 100,0, _u_add|_u_alpha, a);
 }
 
-static
-void ScopeM(void) {
+static void ScopeM(void) {
    if(!pl.scoped) {
       return;
    }
    Waves();
-   StringStack();
+   StringStack(CR_RED);
+}
+
+static void ScopeD(void) {
+   if(!pl.scoped) {
+      return;
+   }
+   StringStack(CR_ORANGE);
+   k32 a = (1 + ACS_Sin(ACS_Timer() / 140.0));
+   SetSize(320, 200);
+   PrintSprite(sp_HUD_D_ScopeOverlay, 160+(i32)(a*10-5),0, 100,0, _u_add|_u_alpha, a * 0.15 + 0.25);
 }
 
 script void P_Ren_Scope(void) {
@@ -124,6 +127,7 @@ script void P_Ren_Scope(void) {
    case pcl_cybermage: ScopeC(); break;
    case pcl_informant: ScopeI(); break;
    case pcl_marine:    ScopeM(); break;
+   case pcl_darklord:  ScopeD(); break;
    }
 }
 
