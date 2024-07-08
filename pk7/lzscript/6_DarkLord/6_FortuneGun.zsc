@@ -275,6 +275,8 @@ default {
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/fortune/draw";
    Lith_Weapon.AdsZoom 1.4;
+   Lith_Weapon.AdsInSound "weapons/ionrifle/zoomin";
+   Lith_Weapon.AdsOutSound "weapons/ionrifle/zoomout";
    Lith_Weapon.AmmoType "Lith_PlasmaAmmo";
    Inventory.AltHudIcon "FORTZ0";
    +Weapon.NoAutoFire
