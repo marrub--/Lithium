@@ -72,7 +72,10 @@ void Upgr_Subweapons_Render(void) {
    }
    if(udata.uptics) {
       str *sp = udata.shots == 1 ? sa_subwep_up_1 : sa_subwep_up_2;
-      PrintSprite(sp[udata.uptics / _uptic_time], pl.hudhppos+36,0, 223,0);
+      i32 n = udata.uptics / _uptic_time;
+      if(udata.shots != 1 || n != 5) {
+         PrintSprite(sp[n], pl.hudhppos+36,0, 223,0);
+      }
    }
 }
 
