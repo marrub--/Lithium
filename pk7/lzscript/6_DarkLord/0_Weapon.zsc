@@ -71,7 +71,13 @@ class Lith_SubAxe : Actor {
       DamageType "Magic";
       Speed 16;
       Radius 8;
+      BounceCount 2;
+      Gravity 0.8;
+      WallBounceSound "weapons/subweapon/axebounce";
       Projectile;
+      +DontBounceOnSky
+      +UseBounceState
+      +BounceOnWalls
       +Bright
    }
    double m_warpAngle, m_warpZ;
@@ -111,8 +117,13 @@ class Lith_SubAxe : Actor {
    Spawn:
       DAXE ABC 3;
       loop;
+   Bounce.Wall:
+      DAXE A 0 a_gravity;
+   BounceWall:
+      DAXE CBA 2;
+      loop;
    Death:
-      DAXE A 1;
+      DAXE A 1 a_noGravity;
       DAXE A 0 a_jumpIf(tracer && tracer.health > 0, "Death2");
    Death1:
       DAXE DDEEFF 3 a_fadeOut;

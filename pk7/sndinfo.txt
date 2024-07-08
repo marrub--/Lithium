@@ -906,6 +906,7 @@ weapons/subweapon/armgun = lsnd/WeaponsD/Subweapons/ArmGun.wav
 weapons/subweapon/armgun2 = lsnd/WeaponsD/Subweapons/ArmGun2.flac
 weapons/subweapon/needle = lsnd/WeaponsD/Subweapons/Needle.ogg
 weapons/subweapon/smash = lsnd/WeaponsD/Subweapons/Smash.flac
+weapons/subweapon/axebounce = lsnd/WeaponsD/Subweapons/AxeBounce.wav
 $alias weapons/subweapon/axe weapons/rend/slash
 $alias weapons/subweapon/grenade weapons/rifle/grenade
 weapons/khanda/draw = lsnd/WeaponsD/Khanda/Draw.flac

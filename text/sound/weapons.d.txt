@@ -9,11 +9,12 @@
 weapons {
    subweapon {
       == lsnd/WeaponsD/Subweapons
-      charge  Charge  # Rozenkreuzstilette
-      armgun  ArmGun  # Phantasy Star: Nova
-      armgun2 ArmGun2 # ^
-      needle  Needle  # Psychic
-      smash   Smash   # The Legend of Zelda: The Wind Waker
+      charge    Charge    # Rozenkreuzstilette
+      armgun    ArmGun    # Phantasy Star: Nova
+      armgun2   ArmGun2   # ^
+      needle    Needle    # Psychic
+      smash     Smash     # The Legend of Zelda: The Wind Waker
+      axebounce AxeBounce # Quake
       $alias axe     = .weapons.rend.slash
       $alias grenade = .weapons.rifle.grenade
    }
