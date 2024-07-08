@@ -134,6 +134,34 @@ class Lith_SubAxe : Actor {
    }
 }
 
+class Lith_SubDrtSmoke : Actor {
+   default {
+      RenderStyle "Translucent";
+      Alpha 0.5;
+      Scale 0.25;
+      Translation "Lith_DartSmoke";
+      +NoInteraction
+      +ThruActors
+      +ForceXyBillboard
+   }
+   override void postBeginPlay() {
+      super.postBeginPlay();
+      vel = (fRandom(-0.05, 0.05), fRandom(-0.05, 0.05), fRandom(0.1, 0.5));
+      scale *= fRandom(0.9, 1.1);
+   }
+   override void tick() {
+      setOrigin(pos + vel, true);
+      a_fadeOut(0.001);
+      Lith_UTIL.stateTick(self);
+   }
+   states {
+   Spawn:
+      TNT1 A random(0, 30);
+      MICX CCDDDDDDEEEEEEFFFFFFFFGGGGGGGGG random(1, 3);
+      stop;
+   }
+}
+
 class Lith_SubDrt : Actor {
    default {
       Damage 0;
@@ -172,6 +200,13 @@ class Lith_SubDrt : Actor {
       DDAR A 3;
       loop;
    Death:
+      DDAR A 0 {
+         if(!tracer) {
+            return resolveState("Death2");
+         } else {
+            return state(null);
+         }
+      }
       DDAR AAAAAAAAAAAAAAA 30 {
          if(tracer && tracer.health > 0) {
             tracer.damageMobj(self, target, 30, 'Poison');
@@ -179,6 +214,35 @@ class Lith_SubDrt : Actor {
             destroy();
          }
       }
+      stop;
+   Death2:
+      DDAR A 15 a_startSound("weapons/subweapon/dartstick");
+      DDAR A 0 a_startSound("weapons/subweapon/dartxp", volume: 0.2);
+      DDAR AAAA 1 {spriteOffset = (fRandom(-1, 1), fRandom(-1, 1));}
+      DDAR AAA 1 {scale *= 1.1;}
+      TNT1 A 0 {
+         soundAlert(target);
+         a_explode(20, 48, 0);
+         for(int i = 0, j = random(8, 15); i < j; ++i) {
+            spawn('Lith_SubDrtSmoke', pos);
+         }
+         a_setTranslation(Lith_UTIL.pData(_pdt_upgrade, UPGR_SubDrt_A) ? 'Lith_DartExplosion2' : 'Lith_DartExplosion');
+         scale = (0.6, 0.6);
+         spriteOffset = (0, 2);
+         a_setRenderStyle(0.9, STYLE_Add);
+      }
+      APBX A 1 bright;
+      APBX AAA 1 bright a_setScale(scale.x * 0.8);
+      TNT1 A 0 {
+         a_setTranslation("");
+         scale = (0.3, 0.3);
+         spriteOffset.y = 3;
+         if(Lith_UTIL.pData(_pdt_upgrade, UPGR_SubDrt_A)) {
+            a_setTranslation('Lith_DartExplosion3');
+         }
+      }
+      IFOG ABB 3 bright;
+      IFOG C 2 bright {spriteOffset = (-1, 1);}
       stop;
    }
 }

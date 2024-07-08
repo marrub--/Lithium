@@ -905,6 +905,8 @@ weapons/subweapon/charge = lsnd/WeaponsD/Subweapons/Charge.wav
 weapons/subweapon/armgun = lsnd/WeaponsD/Subweapons/ArmGun.wav
 weapons/subweapon/armgun2 = lsnd/WeaponsD/Subweapons/ArmGun2.flac
 weapons/subweapon/needle = lsnd/WeaponsD/Subweapons/Needle.ogg
+weapons/subweapon/dartstick = lsnd/WeaponsD/Subweapons/DartStick.wav
+weapons/subweapon/dartxp = lsnd/WeaponsD/Subweapons/DartExplode.flac
 weapons/subweapon/smash = lsnd/WeaponsD/Subweapons/Smash.flac
 weapons/subweapon/axebounce = lsnd/WeaponsD/Subweapons/AxeBounce.wav
 $alias weapons/subweapon/axe weapons/rend/slash
