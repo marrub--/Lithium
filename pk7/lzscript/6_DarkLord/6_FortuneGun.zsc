@@ -341,7 +341,7 @@ Ready1:
    #### # 0 {
       if(random[Lith_Fortune](0, 77) == 0 || level.time % 50 == 0) {
          if(lith_a_emitFortuneSpark()) {
-            A_StartSound("weapons/fortune/spark", lch_weapon3, pitch: frandom[Lith_Fortune](0.9, 1.2));
+            A_StartSound("weapons/fortune/spark", lch_weapon3, volume: fRandom[Lith_Fortune](0.6, 0.8), pitch: frandom[Lith_Fortune](0.9, 1.2));
          }
       }
    }
