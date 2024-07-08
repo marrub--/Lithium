@@ -158,7 +158,8 @@ leeching on any damage you deal to the stuck enemy.
 == \#UPGRADE_TITLE_SubDrt_A | Sub-slimdart
 @@ \#UPGRADE_EFFEC_SubDrt_A
 Upgrade for sub-darts. Fires faster, slimmer darts that can hit
-targets easier.
+targets easier. These darts also emit damaging thorns all around them
+while active.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Kampilan_A | Branch Accum.
@@ -185,7 +186,7 @@ holding down Fire.
 == \#UPGRADE_TITLE_Shrapnel_B | Rubberizer
 @@ \#UPGRADE_EFFEC_Shrapnel_B
 Makes shrapnel fired bouncier and deal more damage with each
-successive bounce.
+successive bounce. Also effects Sub-slimdart's thorns.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_4Bore_A | Magnetic Shot

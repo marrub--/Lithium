@@ -162,6 +162,19 @@ class Lith_SubDrtSmoke : Actor {
    }
 }
 
+class Lith_SubDrtThorn : Lith_ShrapnelProjectile {
+   default {
+      Translation "Lith_DartThorn";
+      +Bright
+   }
+   states {
+   Spawn:
+      TNT1 A 0;
+      SHCA E 0 {scale = (0.2, 0.2);}
+      goto Spawn2;
+   }
+}
+
 class Lith_SubDrt : Actor {
    default {
       Damage 0;
@@ -195,6 +208,12 @@ class Lith_SubDrt : Actor {
          angle = angleTo(tracer);
       }
    }
+   action void lith_a_spawnThorns(int amt) {
+      for(int i = 0, j = random(1 * amt, 5 * amt); i < j; ++i) {
+         let prj = a_spawnProjectile('Lith_SubDrtThorn', 0, angle: fRandom(-180, 180), flags: CMF_ABSOLUTEANGLE);
+         prj.target = target;
+      }
+   }
    states {
    Spawn:
       DDAR A 3;
@@ -210,6 +229,9 @@ class Lith_SubDrt : Actor {
       DDAR AAAAAAAAAAAAAAA 30 {
          if(tracer && tracer.health > 0) {
             tracer.damageMobj(self, target, 30, 'Poison');
+            if(Lith_UTIL.pData(_pdt_upgrade, UPGR_SubDrt_A)) {
+               lith_a_spawnThorns(1);
+            }
          } else {
             destroy();
          }
@@ -223,6 +245,9 @@ class Lith_SubDrt : Actor {
       TNT1 A 0 {
          soundAlert(target);
          a_explode(20, 48, 0);
+         if(Lith_UTIL.pData(_pdt_upgrade, UPGR_SubDrt_A)) {
+            lith_a_spawnThorns(3);
+         }
          for(int i = 0, j = random(8, 15); i < j; ++i) {
             spawn('Lith_SubDrtSmoke', pos);
          }

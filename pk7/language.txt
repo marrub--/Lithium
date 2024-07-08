@@ -3103,7 +3103,7 @@
 "LITH_UPGRADE_TITLE_SubDrt_A" =
    "Sub-slimdart";
 "LITH_UPGRADE_EFFEC_SubDrt_A" =
-   "Upgrade for sub-darts. Fires faster, slimmer darts that can hit targets easier.";
+   "Upgrade for sub-darts. Fires faster, slimmer darts that can hit targets easier. These darts also emit damaging thorns all around them while active.";
 "LITH_UPGRADE_TITLE_Kampilan_A" =
    "Branch Accum.";
 "LITH_UPGRADE_EFFEC_Kampilan_A" =
@@ -3119,7 +3119,7 @@
 "LITH_UPGRADE_TITLE_Shrapnel_B" =
    "Rubberizer";
 "LITH_UPGRADE_EFFEC_Shrapnel_B" =
-   "Makes shrapnel fired bouncier and deal more damage with each successive bounce.";
+   "Makes shrapnel fired bouncier and deal more damage with each successive bounce. Also effects Sub-slimdart's thorns.";
 "LITH_UPGRADE_TITLE_4Bore_A" =
    "Magnetic Shot";
 "LITH_UPGRADE_EFFEC_4Bore_A" =
