@@ -121,7 +121,7 @@ action(Weapon) void Lith_A_MinigunFire() {
    }
    SoundAlert(Invoker.Owner);
    A_StartSound("weapons/minigun/fire", lch_weapon, pitch: max(invoker.m_windUp, 0.8));
-   A_OverlayOffset(_psp_weapon, FRandom(3, 8), FRandom(34, 39), WOF_INTERPOLATE);
+   A_OverlayOffset(_psp_weapon, FRandom(2, 12), FRandom(34, 44), WOF_INTERPOLATE);
    lith_gunFlash();
    soundAlert(invoker.owner);
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
