@@ -50,7 +50,7 @@ class Lith_PlasmaBoltTrail_Red : Lith_PlasmaBoltTrail {
 
 class Lith_PlasmaBoltTrail_Blue : Lith_PlasmaBoltTrail {
    default {
-      Translation "Lith_PlasmaBoltTrail_Blue";
+      Translation "Lith_AllToBlueBright";
       Alpha 0.5;
    }
    states {

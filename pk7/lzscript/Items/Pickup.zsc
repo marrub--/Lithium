@@ -36,13 +36,13 @@ class Lith_ItemGlow : Actor {
 
 class Lith_WeapGlow : Lith_ItemGlow {
    default {
-      Translation "Lith_WeapGlow";
+      Translation "Lith_AllToBlueMid";
    }
 
    override void postBeginPlay() {
       super.postBeginPlay();
       if(lith_player_brightweps) {
-         A_SetTranslation("Lith_WeapGlowBright");
+         A_SetTranslation("Lith_AllToBlueBright");
       }
    }
 }

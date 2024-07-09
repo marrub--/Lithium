@@ -26,7 +26,7 @@ class Lith_ParticleBeam : Lith_PlasmaLaze
       RenderStyle "Add";
       Scale 0.4;
       Species "Lith_Player";
-      Translation "Lith_ParticleBeam";
+      Translation "Lith_AllToBlueMid";
 
       +DontHarmSpecies
       +ForceRadiusDmg
