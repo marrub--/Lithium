@@ -322,9 +322,11 @@ action(Weapon) void Lith_A_FireFortune2() {
 
 action(Weapon) bool lith_a_emitFortuneSpark() {
    if(!invoker.lith_noAmmo()) {
-      let mo = spawn("Lith_FortuneSpark", pos);
-      mo.target = self;
-      A_FireProjectile("Lith_LightProjectileSkyShort", 0);
+      if(!invoker.m_ads) {
+         let mo = spawn("Lith_FortuneSpark", pos);
+         mo.target = self;
+         A_FireProjectile("Lith_LightProjectileSkyShort", 0);
+      }
       return true;
    } else {
       return false;
