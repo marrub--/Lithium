@@ -90,8 +90,7 @@ static void ScopeC(void) {
    }
 }
 
-static
-void ScopeI(void) {
+static void ScopeI(void) {
    if(!pl.scoped) {
       return;
    }
@@ -113,14 +112,17 @@ static void ScopeD(void) {
       return;
    }
    StringStack(CR_ORANGE);
-   k32 phase1 = (1 + ACS_Sin(ACS_Timer() / 140.0));
+   k32 phase1 = ACS_Sin(ACS_Timer() / 140.0k);
+   k32 phase2 = 1 + phase1 / 2;
    SetSize(320, 200);
-   i32 x = phase1 * 6 - 3;
-   PrintSprite(sp_HUD_D_ScopeOverlay, 160+x,0, 100,0, _u_add|_u_alpha, phase1 * 0.15 + 0.25);
-   k32 phase2 = ACS_Timer() % 131 / 130.0;
-   PrintSpriteClip(sp_HUD_D_ScopeOverlay2, 160+x,0, phase2*200,1, 0, phase2*200, 999, 2 + 15 * phase1, _u_add);
-   k32 phase3 = (30 + ACS_Timer()) % 191 / 190.0;
-   PrintSpriteClip(sp_HUD_D_ScopeOverlay2, 160+x,0, 200-phase3*200,1, 0, 200-phase3*200, 999, 1 + 5 * phase1, _u_add|_u_color, 0, 0xFFE15DD4);
+   i32 x = phase1 * 6;
+   PrintSprite(sp_HUD_D_ScopeOverlay, 160+x-x/3,0, 100,0, _u_add|_u_alpha, phase2 * 0.03 + 0.03);
+   PrintSprite(sp_HUD_D_ScopeOverlay, 160+x-x/2,0, 100,0, _u_add|_u_alpha, phase2 * 0.03 + 0.03);
+   PrintSprite(sp_HUD_D_ScopeOverlay, 160+x,0, 100,0, _u_add|_u_alpha, phase2 * 0.05 + 0.15);
+   k32 phase3 = ACS_Timer() % 131 / 130.0;
+   PrintSpriteClip(sp_HUD_D_ScopeOverlay2, 160+x,0, phase3*200,1, 0, phase3*200, 406, 2 + 15 * phase2, _u_add);
+   k32 phase4 = (30 + ACS_Timer()) % 191 / 190.0;
+   PrintSpriteClip(sp_HUD_D_ScopeOverlay3, 160+x,0, 200-phase4*200,1, 0, 200-phase4*200, 406, 1 + 5 * phase2, _u_add);
 }
 
 script void P_Ren_Scope(void) {
