@@ -158,6 +158,7 @@ weapons {
       == lsnd/WeaponsD/Rems
       fire       Fire       # Self-made
       charge     Charge     # ^
+      idle       Idle       # ^
       fireshield FireShield # EYE: Divine Cybermancy
 
       shieldfire      ShieldFire       # Devil May Cry 4

@@ -1006,6 +1006,7 @@ $limit weapons/fortune/hit 0
 $limit weapons/fortune/spark 0
 weapons/rems/fire = lsnd/WeaponsD/Rems/Fire.flac
 weapons/rems/charge = lsnd/WeaponsD/Rems/Charge.flac
+weapons/rems/idle = lsnd/WeaponsD/Rems/Idle.flac
 weapons/rems/fireshield = lsnd/WeaponsD/Rems/FireShield.flac
 weapons/rems/shieldfire = lsnd/WeaponsD/Rems/ShieldFire.wav
 weapons/rems/shieldshot = lsnd/WeaponsD/Rems/ShieldShot.wav
