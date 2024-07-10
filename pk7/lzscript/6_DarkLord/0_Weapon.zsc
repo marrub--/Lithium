@@ -303,6 +303,7 @@ default {
    +Weapon.NoAutoFire
 }
 enum Lith_PSpriteD {
+   _psp_d_fistflash = _psp_under_weapon,
    _psp_d_subweapon = _psp_flash_user,
    _psp_d_rems_particle_first = _psp_misc_user,
    _psp_d_rems_particle_last  = _psp_d_rems_particle_first + 70,
@@ -345,11 +346,15 @@ action(Weapon) void lith_sprintOfs(double x, double y, int flags = 0) {
    lith_sprint();
    a_weaponOffset(x, y, flags);
 }
-action(Weapon) void lith_a_fistCharge() {
+action(Weapon) state lith_a_fistCharge() {
    a_recoil(-4);
    soundAlert(invoker.owner);
+   FLineTraceData ltd;
+   if(lineTrace(angle, radius*3, 0, offsetZ: lith_hermes.getattackheight(self), data: ltd) && ltd.hitType == FLineTraceData.TRACE_HitWall) {
+      return resolveState("_SubFstHitWall");
+   }
    if(level.time & 3 != 0) {
-      return;
+      return null;
    }
    let mo = lith_a_fireMelee(countInv("PowerStrength") ? 140 : 70, 255, _mlf_no_turn|_mlf_damage_stepup|_mlf_pull_in, "Lith_SubFistPuff");
    if(mo) {
@@ -359,6 +364,7 @@ action(Weapon) void lith_a_fistCharge() {
          mo.vel.z += 700.0 / mo.mass;
       }
    }
+   return null;
 }
 override bool lith_checkSprint() {
    return owner.getPlayerInput(INPUT_BUTTONS) & BT_SPEED != 0;
@@ -490,13 +496,42 @@ _SubFst:
    ,DLH C 1 offset(18, 80) lith_a_fistCharge;
    ,DLH C 1 offset(10, 55) lith_a_fistCharge;
    ,DLH C 1 offset(4, 40) lith_a_fistCharge;
-   ,DLH C 1 offset(1, 34) lith_a_fistCharge;
-   ,DLH C 1 offset(-1, 32) lith_a_fistCharge;
+   ,DLH C 1 offset(1, 37) lith_a_fistCharge;
+   ,DLH C 1 offset(-1, 35) lith_a_fistCharge;
    ,DLH CCCCCCCCCCC 1 lith_a_fistCharge;
    ,DLH C 1 offset(-1, 40);
    ,DLH C 1 offset(-1, 50);
    ,DLH C 1 offset(-1, 70);
    ,DLH C 1 offset(-1, 90);
+   goto _SubFstDone;
+_SubFstHitWallFx:
+   ,DLH G 0 a_overlayAlpha(_psp_d_fistflash, 0.3);
+   ,DLH G 1 offset(0, 40) bright;
+   ,DLH GGG 1 bright a_overlayOffset(_psp_d_fistflash, fRandom(-5, 5), 32, WOF_INTERPOLATE);
+   ,DLH G 1 offset(1, 35) bright a_overlayAlpha(_psp_d_fistflash, 0.2);
+   ,DLH G 1 offset(0, 37) bright a_overlayAlpha(_psp_d_fistflash, 0.1);
+   ,DLH G 1 offset(0, 40) bright a_overlayAlpha(_psp_d_fistflash, 0.03);
+   stop;
+_SubFstHitWall:
+   ,DLH C 0 a_startSound("weapons/subweapon/smashhit", lch_auto);
+   ,DLH CC 1 a_weaponOffset(fRandom(-1, 1), 60);
+   ,DLH C 1 a_weaponOffset(fRandom(-1, 1), 50, WOF_INTERPOLATE);
+   ,DLH C 0 {
+      a_overlay(_psp_d_fistflash, "_SubFstHitWallFx");
+      a_overlayFlags(_psp_d_fistflash, PSPF_ALPHA|PSPF_RENDERSTYLE|PSPF_FORCESTYLE, true);
+      a_overlayFlags(_psp_d_fistflash, PSPF_ADDWEAPON|PSPF_ADDBOB, false);
+      a_overlayRenderStyle(_psp_d_fistflash, STYLE_Add);
+   }
+   ,DLH C 1 a_weaponOffset(fRandom(-1, 1), 38, WOF_INTERPOLATE);
+   ,DLH C 1 a_weaponOffset(fRandom(-1, 1), 32, WOF_INTERPOLATE);
+   ,DLH CCCCCCCC 1 a_weaponOffset(fRandom(-2, 2), 30, WOF_INTERPOLATE);
+   ,DLH CC 1 a_weaponOffset(fRandom(-10, 10), 35, WOF_INTERPOLATE);
+   ,DLH C 1 a_weaponOffset(fRandom(-8, 8), 36, WOF_INTERPOLATE);
+   ,DLH CC 1 a_weaponOffset(fRandom(-2, 2), 40, WOF_INTERPOLATE);
+   ,DLH CCC 1 a_weaponOffset(fRandom(-1, 1), 50, WOF_INTERPOLATE);
+   ,DLH CCCC 1 a_weaponOffset(fRandom(-0.5, 0.5), 70, WOF_INTERPOLATE);
+   ,DLH CCCCC 1 a_weaponOffset(0, 90, WOF_INTERPOLATE);
+_SubFstDone:
    TNT1 A 3 lith_a_setInterpolation(false);
    TNT1 A 0 resolveState("Select");
    stop;

@@ -16,6 +16,7 @@ weapons {
       dartstick DartStick   # Half-Life 2: Episode 2
       dartxp    DartExplode # ^
       smash     Smash       # The Legend of Zelda: The Wind Waker
+      smashhit  SmashHit    # Doom
       axebounce AxeBounce   # Quake
       axefwoosh AxeFwoosh   # Doom
       $alias axe     = .weapons.rend.slash

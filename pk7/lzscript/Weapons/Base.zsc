@@ -23,6 +23,8 @@ default {
 }
 
 enum Lith_PSprite {
+   _psp_under_weapon     = psp_weapon - 10,
+   _psp_under_weapon_max = psp_weapon - 1,
    _psp_weapon = psp_weapon,
    _psp_double_lg,
    _psp_double_rg,
