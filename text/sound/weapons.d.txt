@@ -17,6 +17,7 @@ weapons {
       dartxp    DartExplode # ^
       smash     Smash       # The Legend of Zelda: The Wind Waker
       axebounce AxeBounce   # Quake
+      axefwoosh AxeFwoosh   # Doom
       $alias axe     = .weapons.rend.slash
       $alias grenade = .weapons.rifle.grenade
    }

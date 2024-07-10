@@ -126,6 +126,8 @@ class Lith_SubAxe : Actor {
       DAXE A 1 a_noGravity;
       DAXE A 0 a_jumpIf(tracer && tracer.health > 0, "Death2");
    Death1:
+      DAXE A 0;
+      DAXE A 0 a_startSound("weapons/subweapon/axefwoosh");
       DAXE DDEEFF 3 a_fadeOut;
       stop;
    Death2:
