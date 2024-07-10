@@ -473,16 +473,14 @@ action(Weapon) Actor lith_a_fireMelee(int damage, double range, int flags = 0, c
    FTranslatedLineTarget lt;
    double y = angle + random2() * (5.625 / 256.0);
    double p = aimLineAttack(y, range, lt, 8, ALF_CHECK3D|ALF_CHECKNONSHOOTABLE);
-   if(lt.lineTarget) {
-      if(flags & _mlf_damage_stepup) {
-         double rad  = radius - lt.lineTarget.radius;
-         double dist = lt.lineTarget.distance2D(self) - rad;
-         double rnge = range - rad;
-         if(dist >= rnge) {
-            damage *= 2;
-         } else {
-            damage = int(double(damage) * (1.0 + dist / rnge));
-         }
+   if(flags & _mlf_damage_stepup && lt.lineTarget) {
+      double rad  = radius - lt.lineTarget.radius;
+      double dist = lt.lineTarget.distance2D(self) - rad;
+      double rnge = range - rad;
+      if(dist >= rnge) {
+         damage *= 2;
+      } else {
+         damage = int(double(damage) * (1.0 + dist / rnge));
       }
    }
    let [puff, doneDamage] = lineAttack(y, range, p, damage, 'Melee', puffType, LAF_ISMELEEATTACK, lt);
