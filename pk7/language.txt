@@ -151,6 +151,7 @@
    "@ zrrion         - Skull key, health, cell pack, and health bonus pickups\n"
    "~\n"
    "                             * Textures *\n"
+   "\n"
    "@ FreeDoom Contributors   - TITLEMAP textures, LITHWTR*/LITHNUK*/LITHBLD*\n"
    "@ abbuw                   - Vent texture\n"
    "@ Screaming Brain Studios - Dynamic sky textures\n"
