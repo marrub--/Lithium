@@ -28,16 +28,14 @@ enum Lith_PSprite {
    _psp_double_rg,
    _psp_weapon_user,
    _psp_weapon_max = _psp_weapon_user + 10,
-
    _psp_flash = psp_flash,
    _psp_double_lf,
    _psp_double_rf,
    _psp_flash_user,
    _psp_flash_max = _psp_flash_user + 10,
-
    _psp_misc = 69420,
    _psp_misc_user,
-   _psp_misc_max = _psp_misc_user + 100,
+   _psp_misc_max = _psp_misc_user + 200,
 }
 
 enum Lith_Hand {
@@ -551,7 +549,7 @@ action void lith_gunFlash() {
    player.mo.playAttacking2();
 }
 
-state lith_gotoReady() {
+virtual state lith_gotoReady() {
    return m_ads ? resolveState("AltReady") : resolveState("Ready");
 }
 

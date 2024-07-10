@@ -304,6 +304,8 @@ enum Lith_PSpriteD {
    _psp_d_subweapon = _psp_flash_user,
    _psp_d_rems_particle_first = _psp_misc_user,
    _psp_d_rems_particle_last  = _psp_d_rems_particle_first + 70,
+   _psp_d_rems_spark_first,
+   _psp_d_rems_spark_last = _psp_d_rems_spark_first + 15,
    _psp_d_khanda_power,
 }
 action(Weapon) void lith_subGunPreFire() {

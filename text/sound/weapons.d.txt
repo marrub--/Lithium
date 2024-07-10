@@ -177,6 +177,12 @@ weapons {
       clonk      Clonk      # ^
       firefinish FireFinish # Sigh - Introiutus/Kyrie
       pickup     Pickup     # SI Series 6000
+
+      spark1 Spark1 # Half-Life
+      spark2 Spark2 # ^
+      spark3 Spark3 # ^
+      spark4 Spark4 # ^
+      $random spark {spark1, spark2, spark3, spark4,}
    }
 }
 
