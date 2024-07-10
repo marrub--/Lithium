@@ -251,9 +251,6 @@ uint8 m_lastframe;
 override void tick() {
    super.tick();
    if(owner) {
-      for(int i = 0; i < m_particleLoop; ++i) {
-         owner.a_overlayOffset(_psp_d_rems_particle_first + i, fRandom(-16, 16), fRandom(-16, 16), WOF_INTERPOLATE|WOF_ADD);
-      }
       if(m_ads != _ads_none && owner.vel.xy.length() > 1) {
          owner.a_startSound("weapons/rems/dragloop", lch_weapon4, CHANF_LOOPING, 0.3, startTime: fRandom(0, 1));
       } else {
@@ -261,18 +258,30 @@ override void tick() {
       }
    }
 }
+action(weapon) void lith_a_increaseParticles() {
+   let id = _psp_d_rems_particle_first + invoker.m_particleLoop;
+   a_overlay(id, "RemsParticle");
+   a_overlayFlags(id, PSPF_ALPHA|PSPF_RENDERSTYLE|PSPF_FORCESTYLE, true);
+   a_overlayFlags(id, PSPF_ADDWEAPON|PSPF_ADDBOB, false);
+   a_overlayRenderStyle(id, STYLE_Add);
+   a_overlayScale(id, fRandom(0.1, 0.5));
+   a_overlayOffset(id, fRandom(0, 320), fRandom(120, 240));
+   ++invoker.m_particleLoop;
+}
 action(weapon) void lith_a_decreaseParticles() {
    invoker.m_particleAlpha -= 0.2;
-   if(invoker.m_particleAlpha < 0) {
-      return;
-   }
-   for(int i = 0; i < invoker.m_particleLoop; ++i) {
-      a_overlayAlpha(_psp_d_rems_particle_first + i, invoker.m_particleAlpha);
-   }
 }
 action(weapon) void lith_a_resetParticles() {
    a_clearOverlays(_psp_d_rems_particle_first, _psp_d_rems_particle_last);
    invoker.m_particleLoop = 0;
+}
+override void pspriteTick(PSprite psp) {
+   super.pspriteTick(psp);
+   if(psp.id >= _psp_d_rems_particle_first && psp.id <= _psp_d_rems_particle_last) {
+      psp.alpha = m_particleAlpha;
+      psp.x += fRandom(-16, 16);
+      psp.y += fRandom(-16, 16);
+   }
 }
 action(weapon) state lith_a_fireRems() {
    a_overlayOffset(_psp_weapon, fRandom(-9, 47), fRandom(44, 64), WOF_INTERPOLATE);
@@ -372,13 +381,7 @@ Fire1:
    ,D7G # 0 a_jumpIf(invoker.m_ads, 10);
    ,D7G ################################################################# 1 {
       a_overlayOffset(_psp_weapon, fRandom(-0.4, 0.6), fRandom(-0.4, 0.6), WOF_INTERPOLATE|WOF_ADD);
-      a_overlay(_psp_d_rems_particle_first + invoker.m_particleLoop, "RemsParticle");
-      a_overlayFlags(_psp_d_rems_particle_first + invoker.m_particleLoop, PSPF_ALPHA|PSPF_RENDERSTYLE|PSPF_FORCESTYLE, true);
-      a_overlayFlags(_psp_d_rems_particle_first + invoker.m_particleLoop, PSPF_ADDWEAPON|PSPF_ADDBOB, false);
-      a_overlayRenderStyle(_psp_d_rems_particle_first + invoker.m_particleLoop, STYLE_Add);
-      a_overlayScale(_psp_d_rems_particle_first + invoker.m_particleLoop, fRandom(0.1, 0.5));
-      a_overlayOffset(_psp_d_rems_particle_first + invoker.m_particleLoop, fRandom(0, 320), fRandom(120, 240));
-      ++invoker.m_particleLoop;
+      lith_a_increaseParticles();
    }
    ,D7G # 0 a_jumpIf(Lith_UTIL.pData(_pdt_upgrade, UPGR_Rems_B), "FireScreen");
    ,D7G # 0 a_startSound("weapons/rems/fire", lch_weapon);
