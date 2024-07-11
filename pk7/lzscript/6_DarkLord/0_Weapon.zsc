@@ -524,7 +524,7 @@ _SubFstHitWall:
    }
    ,DLH C 1 a_weaponOffset(fRandom(-1, 1), 38, WOF_INTERPOLATE);
    ,DLH C 1 a_weaponOffset(fRandom(-1, 1), 32, WOF_INTERPOLATE);
-   ,DLH CCCCCCCC 1 a_weaponOffset(fRandom(-2, 2), 30, WOF_INTERPOLATE);
+   ,DLH CCCCCCCC 1 a_weaponOffset(fRandom(-2, 2), 31, WOF_INTERPOLATE);
    ,DLH CC 1 a_weaponOffset(fRandom(-10, 10), 35, WOF_INTERPOLATE);
    ,DLH C 1 a_weaponOffset(fRandom(-8, 8), 36, WOF_INTERPOLATE);
    ,DLH CC 1 a_weaponOffset(fRandom(-2, 2), 40, WOF_INTERPOLATE);
