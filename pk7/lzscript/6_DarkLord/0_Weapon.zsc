@@ -83,7 +83,7 @@ class Lith_SubAxe : Actor {
    double m_warpAngle, m_warpZ;
    override int specialMissileHit(Actor th) {
       if(th != target) {
-         if(th) {
+         if(th && th.bShootable && th.health > 0) {
             int dmg = getMissileDamage(3, 1);
             dmg = th.damageMobj(self, target, dmg, 'Magic');
             if(target) {
