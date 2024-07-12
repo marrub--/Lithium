@@ -63,32 +63,27 @@ pointLight Lith_Candle {
    color 1.0 1.0 0.3
    size 24
    offset 0 -4 0
-   attenuate 1
 }
 
 pointLight Lith_Candelabra {
    color 1.0 1.0 0.3
    size 67
    offset 0 -24 0
-   attenuate 1
 }
 
 pointLight Lith_FinalizerLight {
    color 0.9 0.08 0.08
    size 46
-   attenuate 1
 }
 
 pointLight Lith_RailSpot {
    color 0.6 0.2 0.2
    size 46
-   attenuate 1
 }
 
 pointLight Lith_RailBeam {
    color 0.9 0.2 0.2
    size 64
-   attenuate 1
 }
 
 pulseLight Lith_BigLamp {
@@ -97,7 +92,6 @@ pulseLight Lith_BigLamp {
    secondarySize 99
    interval 0.4
    offset 0 -30 0
-   attenuate 1
 }
 
 pulseLight Lith_SmallLamp {
@@ -106,7 +100,6 @@ pulseLight Lith_SmallLamp {
    secondarySize 87
    interval 0.4
    offset 0 -20 0
-   attenuate 1
 }
 
 pulseLight Lith_Lamp {
@@ -115,7 +108,6 @@ pulseLight Lith_Lamp {
    secondarySize 87
    interval 1.14
    offset 0 -10 0
-   attenuate 1
 }
 
 pulseLight Lith_GunshotOrange {
@@ -123,7 +115,6 @@ pulseLight Lith_GunshotOrange {
    size 92
    secondarySize 70
    interval 0.2
-   attenuate 1
 }
 
 pulseLight Lith_VoidShotLight {
@@ -132,7 +123,6 @@ pulseLight Lith_VoidShotLight {
    secondarySize 32
    interval 0.8
    subtractive 1
-   attenuate 1
 }
 
 pulseLight Lith_IonRifleLight {
@@ -140,7 +130,6 @@ pulseLight Lith_IonRifleLight {
    size 128
    secondarySize 110
    interval 0.4
-   attenuate 1
 }
 
 pulseLight Lith_CPlasmaRifleLight {
@@ -148,7 +137,6 @@ pulseLight Lith_CPlasmaRifleLight {
    size 64
    secondarySize 45
    interval 0.3
-   attenuate 1
 }
 
 pulseLight Lith_IonExplosionLight {
@@ -156,7 +144,6 @@ pulseLight Lith_IonExplosionLight {
    size 192
    secondarySize 90
    interval 2.5
-   attenuate 1
 }
 
 flickerLight2 Lith_FortuneExplosionLight {
@@ -171,7 +158,6 @@ pulseLight Lith_StarRainbow1 {
    size 512
    secondarySize 160
    interval 4.0
-   attenuate 1
 }
 
 pulseLight Lith_StarRainbow2 {
@@ -179,7 +165,6 @@ pulseLight Lith_StarRainbow2 {
    size 512
    secondarySize 160
    interval 3.0
-   attenuate 1
 }
 
 pulseLight Lith_StarRainbow3 {
@@ -187,7 +172,6 @@ pulseLight Lith_StarRainbow3 {
    size 512
    secondarySize 160
    interval 2.0
-   attenuate 1
 }
 
 pulseLight Lith_StarExplosion {
@@ -195,7 +179,6 @@ pulseLight Lith_StarExplosion {
    size 512
    secondarySize 256
    interval 2.5
-   attenuate 1
 }
 
 pulseLight Lith_BladeLight {
@@ -203,7 +186,6 @@ pulseLight Lith_BladeLight {
    size 56
    secondarySize 22
    interval 1.5
-   attenuate 1
 }
 
 flickerLight Lith_BulletPuff1 {
@@ -211,7 +193,6 @@ flickerLight Lith_BulletPuff1 {
    size 18
    secondarySize 12
    chance 0.8
-   attenuate 1
 }
 
 flickerLight Lith_BulletPuff2 {
@@ -219,7 +200,6 @@ flickerLight Lith_BulletPuff2 {
    size 10
    secondarySize 6
    chance 0.8
-   attenuate 1
 }
 
 flickerLight Lith_BulletPuff3 {
@@ -227,7 +207,6 @@ flickerLight Lith_BulletPuff3 {
    size 6
    secondarySize 4
    chance 0.8
-   attenuate 1
 }
 
 flickerLight Lith_FeuerLight {
@@ -235,7 +214,6 @@ flickerLight Lith_FeuerLight {
    size 46
    secondarySize 40
    chance 0.8
-   attenuate 1
 }
 
 flickerLight Lith_HeavenlyImage {
@@ -243,7 +221,6 @@ flickerLight Lith_HeavenlyImage {
    size 48
    secondarySize 32
    chance 0.8
-   attenuate 1
 }
 
 flickerLight Lith_CircleLight {
@@ -252,7 +229,6 @@ flickerLight Lith_CircleLight {
    secondarySize 40
    chance 0.7
    offset 0 0 0
-   attenuate 1
 }
 
 flickerLight Lith_CircleLightSmall {
@@ -261,7 +237,6 @@ flickerLight Lith_CircleLightSmall {
    secondarySize 20
    chance 0.7
    offset 0 0 0
-   attenuate 1
 }
 
 flickerLight Lith_RailExplode {
@@ -270,7 +245,6 @@ flickerLight Lith_RailExplode {
    secondarySize 40
    chance 0.7
    offset 0 0 0
-   attenuate 1
 }
 
 flickerLight Lith_Explode1 {
@@ -278,7 +252,6 @@ flickerLight Lith_Explode1 {
    size 96
    secondarySize 108
    chance 0.3
-   attenuate 1
 }
 
 flickerLight Lith_Explode2 {
@@ -286,7 +259,6 @@ flickerLight Lith_Explode2 {
    size 120
    secondarySize 132
    chance 0.3
-   attenuate 1
 }
 
 flickerLight Lith_Explode3 {
@@ -294,7 +266,6 @@ flickerLight Lith_Explode3 {
    size 144
    secondarySize 156
    chance 0.3
-   attenuate 1
 }
 
 flickerLight2 Lith_TorchSmallR {
@@ -303,7 +274,6 @@ flickerLight2 Lith_TorchSmallR {
    secondarySize 81
    interval 0.1
    offset 0 -2 0
-   attenuate 1
 }
 
 flickerLight2 Lith_TorchSmallG {
@@ -312,7 +282,6 @@ flickerLight2 Lith_TorchSmallG {
    secondarySize 81
    interval 0.1
    offset 0 -2 0
-   attenuate 1
 }
 
 flickerLight2 Lith_TorchSmallB {
@@ -321,7 +290,6 @@ flickerLight2 Lith_TorchSmallB {
    secondarySize 81
    interval 0.1
    offset 0 -2 0
-   attenuate 1
 }
 
 flickerLight2 Lith_TorchTallR {
@@ -330,7 +298,6 @@ flickerLight2 Lith_TorchTallR {
    secondarySize 99
    interval 0.1
    offset 0 -5 0
-   attenuate 1
 }
 
 flickerLight2 Lith_TorchTallG {
@@ -339,7 +306,6 @@ flickerLight2 Lith_TorchTallG {
    secondarySize 99
    interval 0.1
    offset 0 -5 0
-   attenuate 1
 }
 
 flickerLight2 Lith_TorchTallB {
@@ -348,7 +314,6 @@ flickerLight2 Lith_TorchTallB {
    secondarySize 99
    interval 0.1
    offset 0 -5 0
-   attenuate 1
 }
 
 flickerLight2 Lith_ShockLight {
@@ -356,7 +321,6 @@ flickerLight2 Lith_ShockLight {
    size 45
    secondarySize 52
    interval 0.02
-   attenuate 1
 }
 
 flickerLight2 Lith_PoisonBlob {
@@ -364,7 +328,6 @@ flickerLight2 Lith_PoisonBlob {
    size 8
    secondarySize 16
    interval 0.02
-   attenuate 1
 }
 
 flickerLight2 Lith_StarLight1 {
@@ -372,7 +335,6 @@ flickerLight2 Lith_StarLight1 {
    size 45
    secondarySize 52
    interval 0.02
-   attenuate 1
 }
 
 flickerLight2 Lith_StarLight2 {
@@ -380,7 +342,6 @@ flickerLight2 Lith_StarLight2 {
    size 45
    secondarySize 52
    interval 0.02
-   attenuate 1
 }
 
 flickerLight2 Lith_SuperShockLight {
@@ -388,7 +349,6 @@ flickerLight2 Lith_SuperShockLight {
    size 115
    secondarySize 125
    interval 0.04
-   attenuate 1
 }
 
 flickerLight2 Lith_SMGTrailLight {
@@ -396,7 +356,6 @@ flickerLight2 Lith_SMGTrailLight {
    size 25
    secondarySize 30
    interval 0.02
-   attenuate 1
 }
 
 flickerLight2 Lith_PlasmaPistolLight {
@@ -404,7 +363,6 @@ flickerLight2 Lith_PlasmaPistolLight {
    size 40
    secondarySize 48
    interval 0.05
-   attenuate 1
 }
 
 flickerLight2 Lith_CPlasmaLight {
@@ -412,7 +370,6 @@ flickerLight2 Lith_CPlasmaLight {
    size 36
    secondarySize 40
    interval 0.05
-   attenuate 1
 }
 
 flickerLight2 Lith_ShotgunTrail1 {
@@ -420,7 +377,6 @@ flickerLight2 Lith_ShotgunTrail1 {
    size 16
    secondarySize 8
    interval 0.05
-   attenuate 1
 }
 
 flickerLight2 Lith_ShotgunTrail2 {
@@ -428,7 +384,6 @@ flickerLight2 Lith_ShotgunTrail2 {
    size 8
    secondarySize 4
    interval 0.05
-   attenuate 1
 }
 
 flickerLight2 Lith_RemsLight1 {
@@ -436,7 +391,6 @@ flickerLight2 Lith_RemsLight1 {
    size 80
    secondarySize 40
    interval 0.05
-   attenuate 1
 }
 
 flickerLight2 Lith_RemsLight2 {
@@ -444,7 +398,6 @@ flickerLight2 Lith_RemsLight2 {
    size 10
    secondarySize 20
    interval 0.05
-   attenuate 1
 }
 
 pulseLight Lith_RemsLight3 {
@@ -452,7 +405,6 @@ pulseLight Lith_RemsLight3 {
    size 40
    secondarySize 30
    interval 0.2
-   attenuate 1
 }
 
 object Lith_CandleFlare                     {frame YLGL {light Lith_Candle}}
