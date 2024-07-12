@@ -1,0 +1,17 @@
+// ╭-*-C-*-───────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │   By Alison G. Watson. Attribution is encouraged, though not required.   │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
+
+Lith_BloodSplashLarge = "185:208=145:168"
+Lith_DartExplosion = "111:136=0:35", "137:144=7:24", "209:224=186:208"
+Lith_DartExplosion2 = "111:136=0:35", "137:144=7:24"
+Lith_Franca = "66:94=[23,9,49]:[125,96,162]", "95:110=[23,9,49]:[125,96,162]", "209:224=[23,9,49]:[125,96,162]"
+Lith_OmegaRail = "209:224=145:168", "128:136=160:168"
+Lith_OmegaRailParticle = "185:208=145:168", "177:184=157:168"
+Lith_SludgeSplashLarge = "185:208=66:94"
+Lith_Sophia = "66:94=[17,33,57]:[96,116,162]", "95:110=[17,33,57]:[96,116,162]", "209:224=[17,33,57]:[96,116,162]"
+Lith_SubDrt2 = "185:208=209:224"
