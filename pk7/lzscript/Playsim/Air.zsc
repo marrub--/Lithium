@@ -83,27 +83,40 @@ void setNextWindChange() {
    }
 }
 
-/* FIXME: replace this function */
 void shadeSectors() {
-   int fog_density = 0;
-   if(m_humidity > 70) {
-      fog_density = int(m_fogColor.a * 0.3921568627450980);
+   int fog_density = m_fogColor.a * 50 / 255;
+   color outside_light_mul = "#FFFFFF";
+   switch(Lith_UTIL.pData(_pdt_menv)) {
+   case _menv_hell: outside_light_mul = "#FF7777"; break;
+   case _menv_evil: outside_light_mul = "#FF2222"; break;
+   }
+   if(fog_density <= 0 && outside_light_mul == "#FFFFFF") {
+      return;
    }
    for(int i = 0, j = level.sectors.size(); i < j; ++i) {
       Sector sec = level.sectors[i];
-      if(fog_density) {
-         sec.setFogDensity(fog_density);
-         sec.setFade(m_fogColor);
-      }
       if(sec.getTexture(Sector.Ceiling) == skyflatnum) {
-         switch(Lith_UTIL.pData(_pdt_menv)) {
-         case _menv_hell:
-            sec.setColor("#ff7777");
-            break;
-         case _menv_evil:
-            sec.setColor("#ff2222");
-            break;
+         let light = sec.colorMap.lightColor;
+         light = color(
+            light.a,
+            light.r * outside_light_mul.r / 255,
+            light.g * outside_light_mul.g / 255,
+            light.b * outside_light_mul.b / 255
+         );
+         if(light != sec.colorMap.lightColor) {
+            sec.setColor(light);
          }
+      }
+      if(fog_density > 0) {
+         let fade = sec.colorMap.fadeColor;
+         fade = color(
+            fade.a,
+            min(fade.r + m_fogColor.r, 255),
+            min(fade.g + m_fogColor.g, 255),
+            min(fade.b + m_fogColor.b, 255)
+         );
+         sec.setFogDensity(fog_density);
+         sec.setFade(fade);
       }
    }
 }
