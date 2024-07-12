@@ -296,7 +296,6 @@ override void markPrecacheSounds() {
 
 action(Weapon) void Lith_A_FireFortune() {
    lith_takeAmmo(350);
-   A_SetBlend("#80ffd5", 0.4, 20);
    A_StartSound("weapons/fortune/fire", lch_weapon, attenuation: 0.5, pitch: frandom[Lith_Fortune](0.9, 1.05));
    lith_gunFlash();
    soundAlert(invoker.owner);
@@ -365,7 +364,9 @@ Fire:
       invoker.m_chargeTime = 4;
    }
 FireCharge:
-   #### # 0 lith_a_emitFortuneSpark;
+   #### # 0 {
+      if(random(0,1)) lith_a_emitFortuneSpark();
+   }
    #### ###### 1 a_overlayOffset(_psp_weapon, !invoker.m_ads ? fRandom[Lith_Fortune](0, 4) : 0, fRandom[Lith_Fortune](32, 34), wof_interpolate);
    #### # 0 a_jumpIf(--invoker.m_chargeTime, "FireCharge");
 Fire2:
@@ -378,7 +379,6 @@ FireNoScope:
    FORT A 1 offset(5, 37);
    FORT B 2 bright offset(1, 32) Lith_A_FireFortune;
    FORT C 2 offset(2, 34);
-   FORT C 0 lith_a_emitFortuneSpark;
    FORT C 1 offset(-1, 32);
    FORT A 0;
    goto Fire3;
@@ -389,7 +389,6 @@ FireScope:
    SCOP D 1 offset(0, 37);
    SCOP D 2 bright offset(0, 32) Lith_A_FireFortune;
    SCOP D 2 offset(0, 34);
-   SCOP D 0 lith_a_emitFortuneSpark;
    SCOP D 1 offset(0, 32);
    SCOP D 0;
 Fire3:
