@@ -84,4 +84,9 @@ class Lith_SurgeRainbowProjectile3 : Lith_SurgeRainbowProjectile1 {}
 class Lith_BladeLightProjectile : Lith_LightProjectile
    {default {Lith_LightProjectile.Counter 8;}}
 
+class Lith_RemsChargeLightProjectile : Lith_LightProjectile
+   {default {Lith_LightProjectile.Counter 2;}}
+class Lith_RemsSparkLightProjectile : Lith_LightProjectile
+   {default {Lith_LightProjectile.Counter 8;}}
+
 /* EOF */

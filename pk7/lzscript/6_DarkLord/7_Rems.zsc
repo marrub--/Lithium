@@ -277,6 +277,7 @@ action(weapon) void lith_a_resetParticles() {
 }
 action(weapon) void lith_a_spark() {
    a_startSound("weapons/rems/spark", lch_weapon, chanf_overlap, 0.3, pitch: fRandom(0.9, 1.2));
+   A_FireProjectile("Lith_RemsSparkLightProjectile", 0);
    int id = _psp_d_rems_spark_first + invoker.m_sparkNum;
    double x = fRandom(200, 300), y = fRandom(120, 150);
    int xs = randomPick(-1,1), ys = randomPick(-1,1);
@@ -429,6 +430,7 @@ Fire1:
    }
    ,D7G # 0 a_jumpIf(invoker.m_ads, 10);
    ,D7G ################################################################# 1 {
+      A_FireProjectile("Lith_RemsChargeLightProjectile", 0);
       a_overlayOffset(_psp_weapon, fRandom(-0.4, 0.6), fRandom(-0.4, 0.6), WOF_INTERPOLATE|WOF_ADD);
       lith_a_increaseParticles();
    }

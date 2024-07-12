@@ -440,6 +440,14 @@ flickerLight2 Lith_RemsLight2 {
    attenuate 1
 }
 
+pulseLight Lith_RemsLight3 {
+   color 0.56 0.25 1.0
+   size 40
+   secondarySize 30
+   interval 0.2
+   attenuate 1
+}
+
 object Lith_CandleFlare                     {frame YLGL {light Lith_Candle}}
 object Lith_CandelabraFlare                 {frame YLGL {light Lith_Candelabra}}
 object Lith_TechLampFlare                   {frame BLGL {light Lith_BigLamp}}
@@ -490,6 +498,8 @@ object Lith_CircleSpear                     {frame BLLT {light Lith_CircleLight}
 object Lith_MonsterSoul                     {frame BLLT {light Lith_ShockLight}}
 object Lith_ParticleBeam                    {frame BLLT {light Lith_ShockLight}
                                              frame BFE1 {light Lith_ShockLight}}
+object Lith_RemsSparkLightProjectile        {frame TNT1 {light Lith_RemsLight3}}
+object Lith_RemsChargeLightProjectile       {frame TNT1 {light Lith_RemsLight1}}
 object Lith_GaussExplosionParticle          {frame BLLT {light Lith_PlasmaPistolLight}}
 object Lith_GaussPuff                       {frame BLLT {light Lith_PlasmaPistolLight}}
 object Lith_PoisonBlob                      {frame BLLT {light Lith_PoisonBlob}
