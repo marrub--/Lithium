@@ -86,9 +86,6 @@ PowerOverlay:
       let psp = player.findPSprite(_psp_d_khanda_power);
       if(wep && psp) {
          Lith_UTIL.copyPSpriteVisualData(psp, wep);
-         /* FIXME: these two should just be normal set ops,
-                   but you can only use these functions to set these
-         */
          a_overlayFlags(_psp_d_khanda_power, pspf_renderstyle|pspf_alpha, true);
          a_overlayRenderStyle(_psp_d_khanda_power, STYLE_Add);
          psp.alpha = (sin(gameTic / 17.5 * 360) + 1.0) / 2.5;
