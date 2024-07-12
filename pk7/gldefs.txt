@@ -159,6 +159,13 @@ pulseLight Lith_IonExplosionLight {
    attenuate 1
 }
 
+flickerLight2 Lith_FortuneExplosionLight {
+   color 0.9 0.9 1
+   size 255
+   secondarySize 128
+   interval 0.2
+}
+
 pulseLight Lith_StarRainbow1 {
    color 1.0 0.0 0.0
    size 512
@@ -471,6 +478,7 @@ object Lith_SMGTracer3                      {frame TNT1 {light Lith_SMGTrailLigh
 object Lith_LightProjectileSkyShort         {frame TNT1 {light Lith_IonRifleLight}}
 object Lith_LightProjectileSkyLong          {frame TNT1 {light Lith_IonRifleLight}}
 object Lith_IonRifleExplosion               {frame TNT1 {light Lith_IonExplosionLight}}
+object Lith_FortuneExplosion                {frame MEXP {light Lith_FortuneExplosionLight}}
 object Lith_LightProjectileGreenShort       {frame TNT1 {light Lith_CPlasmaRifleLight}}
 object Lith_LightProjectileGreenLong        {frame TNT1 {light Lith_CPlasmaRifleLight}}
 object Lith_PlasmaBolt                      {frame TNT1 {light Lith_CPlasmaLight}}
