@@ -485,5 +485,7 @@ object Lith_OmegaRailParticle2              {frame BFE1 {light Lith_RailSpot}}
 object Lith_SubAxe                          {frame DAXE {light Lith_CircleLightSmall}}
 object Lith_SubDrt                          {frame APBX {light Lith_DartExplosion1}}
 object Lith_SubDrt2                         {frame APBX {light Lith_DartExplosion2}}
+object Lith_FortuneBuildup                  {frame BLLT {light Lith_StarLight2}
+                                             frame SDXP {light Lith_StarExplosion}}
 
 /* EOF */

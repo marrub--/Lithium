@@ -28,7 +28,7 @@ class Lith_700Explosion : Actor {
 
    states {
    Spawn:
-      RDGL A 1 {
+      RDGL A 1 light("Lith_CircleLightSmall") {
          scale.x = scale.y = fRandom(0.2, 0.6);
          return a_jumpIf(++m_ticks > 25, "Death");
       }
