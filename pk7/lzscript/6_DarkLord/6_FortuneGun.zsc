@@ -51,6 +51,8 @@ class Lith_FortuneBuildup : Actor {
       Scale 0.5;
       Height 8;
       Radius 8;
+      Species "Lith_Player";
+      +DontHarmSpecies
       +NoClip
       +NoGravity
       +Bright
@@ -146,7 +148,7 @@ class Lith_FortuneExplosion : Lith_Explosive {
                pr.m_buildup = initial_buildup;
             }
          }
-         a_explode(flags: xf_nosplash, alert: false, fulldamagedistance: explosionRadius);
+         a_explode(explosionDamage, explosionRadius, xf_nosplash, fulldamagedistance: explosionRadius);
          a_quake(3, 20, 0, 640);
          for(int i = 0; i < m_numParticle; i++)
             spawn(m_particle, pos);
@@ -203,6 +205,8 @@ class Lith_FortuneProjectile : Actor {
       Radius 1;
       Projectile;
       Lith_FortuneProjectile.Proj "Lith_FortuneShot";
+      Species "Lith_Player";
+      +DontHarmSpecies
       +NoClip
       -ActivateImpact
       -ActivatePCross
@@ -315,6 +319,7 @@ action(Weapon) void Lith_A_FireFortune2() {
    A_Recoil(4);
    let pr = A_FireProjectile("Lith_FortuneProjectile2", spawnheight: -32);
    pr.pitch = self.pitch;
+   pr.target = self;
    Lith_A_RecoilUp(2);
    A_FireProjectile("Lith_LightProjectileSkyLong", 0);
 }

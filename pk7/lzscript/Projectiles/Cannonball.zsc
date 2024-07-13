@@ -60,15 +60,12 @@ default {
    Speed 42;
    Gravity 0.55;
    BounceType "Hexen";
-   Species "Lith_Player";
    DamageType "Shrapnel";
    Lith_Explosive.FxAmount 2.0;
    Projectile;
-   +DontHarmSpecies
    +Ripper
    +BounceOnActors
    +BounceAutoOffFloorOnly
-   +MThruSpecies
    +UseBounceState
    +ForceRadiusDmg
    +CanBounceWater
@@ -88,7 +85,7 @@ override void tick() {
 void Lith_A_Bounce(sound snd, int chan) {
    A_StartSound(snd, chan);
    A_Quake(1, 10, 0, 512);
-   A_Explode(flags: xf_nosplash);
+   A_Explode(explosionDamage, explosionRadius, xf_nosplash);
 }
 virtual void Lith_CannonBallExplode() {
    A_Quake(3, 20, 0, 640);

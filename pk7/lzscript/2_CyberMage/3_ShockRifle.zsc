@@ -17,6 +17,8 @@ class Lith_ShockEffect : Actor {
       Alpha 0.7;
       RenderStyle "Add";
       Scale 0.6;
+      Species "Lith_Player";
+      +DontHarmSpecies
       +Bright
       +NoBlockmap
       +NoGravity

@@ -13,8 +13,6 @@ class Lith_RifleBullet : Lith_BulletPuff;
 default {
    Mass 9999;
    DamageType "Bullet";
-   Species "Lith_Player";
-   +DontHarmSpecies
    +PuffOnActors
 }
 

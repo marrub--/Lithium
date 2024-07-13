@@ -14,15 +14,12 @@ default {
    Height 2;
    Speed 20;
    Damage 5;
-   Species "Lith_Player";
    DamageType "Shrapnel";
    ExplosionDamage 32;
    ExplosionRadius 42;
    Lith_Explosive.ExplosionSound "weapons/missile/explode";
    Lith_Explosive.FxAmount 0.2;
    Projectile;
-   +DONTHARMSPECIES
-   +MTHRUSPECIES
    +EXPLODEONWATER
 }
 
@@ -38,6 +35,13 @@ Spawn:
 SpawnLoop:
    MISL A 1 bright;
    wait;
+Death:
+   TNT1 A 0 {
+      A_Explode(explosionDamage, explosionRadius, 0);
+      Lith_A_ExplodeSound();
+      return Lith_A_DoExplosion();
+   }
+   stop;
 }
 
 /* EOF */

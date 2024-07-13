@@ -17,7 +17,11 @@
 script_str ext("ACS") addr(OBJ "PunctuatorFire")
 void Z_PunctuatorFire(void) {
    struct k32v3 v = trace_from(pl.yaw, pl.pitch, 2048, pl.attackheight);
-   ACS_SpawnForced(so_PunctuatorPuff, v.x, v.y, v.z);
+   i32 pufftid = ACS_UniqueTID();
+   ACS_SpawnForced(so_PunctuatorPuff, v.x, v.y, v.z, pufftid);
+   ACS_SetActivator(pufftid);
+   ACS_SetPointer(AAPTR_TARGET, pl.tid);
+   pl.setActivator();
    k64 pitchf = (-pl.pitch + 0.25) * 2 * pi;
    k64 yaw = atan2f(pl.y - v.y, pl.x - v.x);
    k64 ps = sinf(pitchf), cz = cosf(pitchf);

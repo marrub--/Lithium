@@ -42,8 +42,6 @@ class Lith_RemsRebuke : Lith_RemsBullet {
    default {
       Scale 2;
       DamageFunction (2000 + 166 * Lith_UTIL.pData(_pdt_upgrade, UPGR_Rems_A));
-      Species "Lith_Player";
-      +MThruSpecies
       +SeekerMissile
    }
    override void effect() {
@@ -121,13 +119,10 @@ class Lith_RemsShieldScreen : Actor {
    default {
       Health 400;
       RenderStyle "Add";
-      Species "Lith_Player";
       Height 70;
       Radius 24;
       Alpha 1.0;
       +Bright
-      +ThruSpecies
-      +MThruSpecies
       +Missile
       +NoBlood
       +NoClip

@@ -11,9 +11,7 @@ class Lith_PlasmaHit : Lith_PlasmaLaze {
       RenderStyle "Add";
       Alpha 0.25;
       Scale 0.65;
-      Species "Lith_Player";
       DamageType "Electric";
-      +DontHarmSpecies
       +Bright
       +NoInteraction
       +PuffOnActors
@@ -23,7 +21,6 @@ class Lith_PlasmaHit : Lith_PlasmaLaze {
       +FloorClip
       +ExtremeDeath
       +ForceXyBillboard
-      +MThruSpecies
       -AllowParticles
    }
    override void markPrecacheSounds() {

@@ -11,26 +11,18 @@ class Lith_PunctuatorExplosion : Lith_Explosive {
       RenderStyle "Add";
       Alpha 0.3;
       Scale 0.9;
-      Species "Lith_Player";
       DamageType "Shrapnel";
       Lith_Explosive.FxAmount 0.5;
 
-      +DONTHARMSPECIES
       +BLOODLESSIMPACT
       +NOINTERACTION
       +FORCERADIUSDMG
    }
 
-   override void beginPlay() {
-      super.beginPlay();
-      /* !!!HACK!!! */
-      target = players[consolePlayer].mo;
-   }
-
    states {
    Spawn:
       TNT1 A 0;
-      TNT1 AA 0 A_Explode(flags: xf_nosplash);
+      TNT1 AA 0 A_Explode(explosionDamage, explosionRadius, xf_nosplash);
       TNT1 A random(1, 5);
       TNT1 A 0 Lith_A_DoExplosion;
       stop;
@@ -39,30 +31,21 @@ class Lith_PunctuatorExplosion : Lith_Explosive {
 
 class Lith_PunctuatorPuff : Lith_Explosive {
    default {
-      Species "Lith_Player";
       DamageType "Shrapnel";
       Lith_Explosive.FxAmount 2.0;
 
-      +DONTHARMSPECIES
       +NOINTERACTION
       +PUFFONACTORS
       +BLOODLESSIMPACT
-      +MTHRUSPECIES
       +FORCERADIUSDMG
-   }
-
-   override void beginPlay() {
-      super.beginPlay();
-      /* !!!HACK!!! */
-      target = players[consolePlayer].mo;
    }
 
    states {
    Spawn:
       TNT1 A 0;
       TNT1 A 0 {
-         A_Explode(flags: 0);
-         A_Explode(flags: 0);
+         A_Explode(explosionDamage, explosionRadius, 0);
+         A_Explode(explosionDamage, explosionRadius, 0);
          Lith_A_ExplodeSound();
          return Lith_A_DoExplosion();
       }

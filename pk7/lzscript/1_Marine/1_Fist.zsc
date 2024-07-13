@@ -20,7 +20,6 @@ class Lith_KnifPuf1 : Actor
 
       +ForcePain
       +HitTracer
-      +MThruSpecies
       +NoExtremeDeath
       +NoInteraction
       +PuffOnActors

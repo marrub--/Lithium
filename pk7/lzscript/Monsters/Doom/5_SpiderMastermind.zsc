@@ -29,6 +29,7 @@ class Lith_SpiderMastermindBullet : FastProjectile
       Radius      1;
       RenderStyle "Translucent";
       Speed       256;
+      Species     "Lith_SpiderMastermind";
 
       +BLOODSPLATTER
       +MTHRUSPECIES

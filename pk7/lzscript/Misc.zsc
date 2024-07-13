@@ -17,10 +17,8 @@ class Lith_GoAway : Actor {
 
 class Lith_BasicPuff : Actor {
    default {
-      Species "Lith_Player";
       +AlwaysPuff
       +BloodlessImpact
-      +DontHarmSpecies
       +ForceDecal
       +HitTracer
       +NoBlockmap

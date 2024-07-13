@@ -53,8 +53,6 @@ default {
    Mass 10;
    Scale 1.5;
    DamageType "Bullet";
-   Species "Lith_Player";
-   +DontHarmSpecies
    +PuffOnActors
    +NoExtremeDeath
 }

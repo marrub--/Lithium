@@ -49,10 +49,8 @@ default {
    BounceCount 2;
    Gravity 0.5;
    BounceSound "weapons/rifle/grenadebounce";
-   Species "Lith_Player";
    DamageType "Shrapnel";
    Projectile;
-   +MThruSpecies
    +ExplodeOnWater
    -NoGravity
 }

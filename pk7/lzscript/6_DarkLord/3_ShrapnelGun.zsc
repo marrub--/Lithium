@@ -22,7 +22,6 @@ class Lith_ShrapnelProjectile : Actor {
       +AllowBounceOnActors
       +BounceOnActors
       +ExplodeOnWater
-      +MThruSpecies
       +NoClip
       -NoGravity
    }

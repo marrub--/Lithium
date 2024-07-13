@@ -30,9 +30,7 @@ class Lith_GaussPuff : Actor;
 
 default {
    RenderStyle "Translucent";
-   Species "Lith_Player";
    DamageType "Electric";
-   +DontHarmSpecies
    +Bright
    +PuffOnActors
    +PuffGetsOwner
@@ -40,7 +38,6 @@ default {
    +NoBlockmap
    +FloorClip
    +ForceXyBillboard
-   +MThruSpecies
    +NoTeleport
    +WallSprite
    -AllowParticles

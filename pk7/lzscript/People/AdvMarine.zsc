@@ -14,7 +14,6 @@ default {
    PainChance       0;
    Species          "Lith_Player";
    Speed            4;
-   +DONTHARMCLASS
    +DONTHARMSPECIES
    +FRIENDLY
    +INVULNERABLE

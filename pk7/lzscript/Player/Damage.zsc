@@ -12,14 +12,13 @@ override int damageMobj(Actor inflictor, Actor source, int damage, name mod, int
    let sv = Lith_HERMES.instance();
    sv.m_dmgWorld = !(inflictor || source);
    sv.m_dmgType  = mod;
-   /* due to the fact that railguns and stuff won't get affected by
-    * this flag... */
+   /* due to the fact that railguns can't not damage the player */
    if((source && source.bDontHarmSpecies &&
        source.getSpecies() == 'Lith_Player') ||
       (inflictor && inflictor.bDontHarmSpecies &&
        inflictor.getSpecies() == 'Lith_Player'))
    {
-      damage = 0;
+      return 0;
    }
    if(damage > 1) {
       if(countInv("Lith_MegaProtection")) {
@@ -29,12 +28,12 @@ override int damageMobj(Actor inflictor, Actor source, int damage, name mod, int
       if(m_DmgFac > 0) damage = max(1, damage * (100 - m_DmgFac) / 100);
    }
    if(Lith_StatFx.getInPool("Lith_StatShadowWalker") || m_iFrames) {
-      damage = 0;
+      return 0;
    } else if(m_shield && m_shield + health - damage > -spawnHealth() * 2) {
       if(!bInvulnerable && !(player.cheats & CF_GODMODE)) {
          m_shield = max(m_shield - damage, 0);
       }
-      damage = 0;
+      return 0;
    }
    /* remove the damage type for world stuff so obituaries are easier
     * to override */

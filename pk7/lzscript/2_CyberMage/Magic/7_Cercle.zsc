@@ -32,12 +32,8 @@ class Lith_CircleSpear : Actor
       DamageFunction 77;
       DamageType "Magic";
       RenderStyle "Add";
-      Species "Lith_Player";
-
       Projectile;
       +BRIGHT
-      +DONTHARMSPECIES
-      +MTHRUSPECIES
       +NOTIMEFREEZE
       +RIPPER
    }
@@ -63,19 +59,14 @@ class Lith_CircleSpear : Actor
    }
 }
 
-class Lith_CircleSpearThrower : Actor
-{
-   default
-   {
+class Lith_CircleSpearThrower : Actor {
+   default {
       RenderStyle "None";
-
       +NOCLIP
       +NOGRAVITY
       +NOTIMEFREEZE
    }
-
-   states
-   {
+   states {
    Spawn:
       TNT1 A 0;
       TNT1 AAAAAAAAAAAAAA 0 A_SpawnItemEx("Lith_CircleSpear", frandom(-8,8),frandom(-8,8),frandom(-16,16), 0,0,0, frandom(-60,60), SXF_TRANSFERPOINTERS, 0, tid);
@@ -83,27 +74,19 @@ class Lith_CircleSpearThrower : Actor
    }
 }
 
-class Lith_CircleElectricity : Actor
-{
-   default
-   {
+class Lith_CircleElectricity : Actor {
+   default {
       Damage 7;
       DamageType "Magic";
       RenderStyle "Add";
-      Species "Lith_Player";
       Translation "Lith_CircleElectricity";
-
       Projectile;
       +BRIGHT
-      +DONTHARMSPECIES
-      +MTHRUSPECIES
       +NOTIMEFREEZE
       +RANDOMIZE
       +RIPPER
    }
-
-   states
-   {
+   states {
    Spawn:
       ZAP1 FFEFEFDDEFDEEDEEDDDCCCBCBBBCBBBBAAABA 1 A_FadeOut(0.01);
       ZAP1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_FadeOut(0.02);
@@ -118,11 +101,8 @@ class Lith_CircleWallFx : Actor
       Alpha 0.7;
       DamageType "Magic";
       RenderStyle "Add";
-      Species "Lith_Player";
       XScale 0.7;
       YScale 5.1;
-
-      +DONTHARMSPECIES
       +NOTIMEFREEZE
       +NOCLIP
       +NOGRAVITY
@@ -174,11 +154,8 @@ class Lith_CircleWall : Lith_CircleWallFx
       DamageType "Magic";
       Height 32;
       Radius 8;
-      Species "Lith_Player";
       XScale 0.5;
       YScale 5;
-
-      +DONTHARMSPECIES
    }
 
    int m_Trigger;
@@ -266,7 +243,7 @@ class Lith_CircleSprite : Actor {
    Spawn:
       BLLT W 1;
       BLLT W 1 {
-         A_Warp(AAPTR_PLAYER1, 64,0,32, (level.time+m_ofs)*1.7%180.0-90.0, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE);
+         A_Warp(AAPTR_TARGET, 64,0,32, (level.time+m_ofs)*1.7%180.0-90.0, WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE);
          return Lith_UTIL.pData(_pdt_weapon) != weapon_c_cercle ? ResolveState("Null") : state(null);
       }
       wait;
@@ -303,7 +280,9 @@ Select:
    TNT1 A 0 ACS_ScriptCall("Lith_MagicSelect", 7);
    TNT1 A 0 {
       for(int i = 0; i < 5; ++i) {
-         Lith_CircleSprite(Spawn("Lith_CircleSprite", pos)).m_ofs = 45.0 * i;
+         let mo = Lith_CircleSprite(Spawn("Lith_CircleSprite", pos));
+         mo.target = self;
+         mo.m_ofs = 45.0 * i;
       }
    }
 SelectLoop:

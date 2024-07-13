@@ -205,7 +205,6 @@ default {
    +ForceRadiusDmg
    +ForceXyBillboard
    +HitTracer
-   +MThruSpecies
    +NoBlockmap
    +NoGravity
    +NoClip

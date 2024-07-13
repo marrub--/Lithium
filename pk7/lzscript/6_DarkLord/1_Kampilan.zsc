@@ -10,7 +10,6 @@ class Lith_KampilanPuff : Actor {
    default {
       Mass 5;
       +HitTracer
-      +MThruSpecies
       +NoInteraction
       +PuffOnActors
       +PuffGetsOwner
@@ -62,7 +61,6 @@ class Lith_KampilanBonkPuff : Actor {
       Mass 5;
       +ForcePain
       +HitTracer
-      +MThruSpecies
       +NoInteraction
       +PuffOnActors
       +PuffGetsOwner
