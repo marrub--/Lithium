@@ -10,7 +10,6 @@
 class Lith_DynLight : DynamicLight {
    default {
       DynamicLight.Type "Point";
-      +DynamicLight.Attenuate
    }
 }
 
