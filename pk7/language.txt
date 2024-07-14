@@ -3140,11 +3140,11 @@
 "LITH_UPGRADE_TITLE_Sophia_A" =
    "Rocket RocketS";
 "LITH_UPGRADE_EFFEC_Sophia_A" =
-   "Makes Sophia fire two smaller, more accurate rockets in quick succession.";
+   "Makes Sophia fire two smaller rockets in quick succession. These rockets will attempt to target different enemies, and have consistent, high damage output.";
 "LITH_UPGRADE_TITLE_Sophia_B" =
    "RktRktRktS";
 "LITH_UPGRADE_EFFEC_Sophia_B" =
-   "Makes Sophia fire tiny rockets with heavy homing constantly.";
+   "Makes Sophia fire tiny rockets with sharp homing constantly.";
 "LITH_UPGRADE_TITLE_Fortune_A" =
    "Entropic Collator";
 "LITH_UPGRADE_EFFEC_Fortune_A" =
