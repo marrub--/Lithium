@@ -186,6 +186,7 @@ class Lith_SubDrt : Actor {
       +Bright
    }
    double m_warpAngle, m_warpZ;
+   bool m_stuck;
    virtual void lith_hit(Actor th) {
       tracer      = th;
       m_warpAngle = th.angleTo(self) - th.angle;
@@ -203,6 +204,10 @@ class Lith_SubDrt : Actor {
       }
    }
    override void tick() {
+      if(m_stuck && (!tracer || tracer.health <= 0)) {
+         destroy();
+         return;
+      }
       super.tick();
       if(!isFrozen() && tracer) {
          warp(tracer, 0, 0, m_warpZ, m_warpAngle, WARPF_COPYINTERPOLATION|WARPF_NOCHECKPOSITION, radiusOffset: 1);
@@ -224,17 +229,14 @@ class Lith_SubDrt : Actor {
          if(!tracer) {
             return resolveState("Death2");
          } else {
+            m_stuck = true;
             return state(null);
          }
       }
       DDAR AAAAAAAAAAAAAAA 30 {
-         if(tracer && tracer.health > 0) {
-            tracer.damageMobj(self, target, 30, 'Poison');
-            if(Lith_UTIL.pData(_pdt_upgrade, UPGR_SubDrt_A)) {
-               lith_a_spawnThorns(1);
-            }
-         } else {
-            destroy();
+         tracer.damageMobj(self, target, 30, 'Poison');
+         if(Lith_UTIL.pData(_pdt_upgrade, UPGR_SubDrt_A)) {
+            lith_a_spawnThorns(1);
          }
       }
       stop;
