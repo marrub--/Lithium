@@ -24,6 +24,7 @@ ui textureId m_texBatteryOutline;
 ui textureId m_texBattery;
 
 int m_lightCurBattery, m_lightMaxBattery;
+color m_lightColor;
 
 void renRegister() {
    m_jSmlFont = 'ljsmlfnt';
@@ -109,6 +110,12 @@ void tickSettings() {
    m_itemColor = acs_executeWithResult(lsc_drawcr, lith_hud_itemcolor);
    m_lightMaxBattery = lith_light_battery * 35;
    m_lightCurBattery = Lith_UTIL.pData(_pdt_lightbattery);
+   switch(Lith_UTIL.pData(_pdt_lighton)) {
+   default:
+   case _light_off:    m_lightColor = "#7F7F7F"; break;
+   case _light_on:     m_lightColor = "white";   break;
+   case _light_follow: m_lightColor = "yellow";  break;
+   }
 }
 
 ui void drawNearByStuff(RenderEvent evt) {
@@ -196,7 +203,9 @@ ui void drawInventory(RenderEvent evt) {
    if(m_lightMaxBattery > 0 && m_lightCurBattery < m_lightMaxBattery) {
       double s = m_lightCurBattery / double(m_lightMaxBattery) * 8.0;
       Screen.drawTexture(m_texBatteryOutline, false, hudlpos, y,
-                         DTA_VirtualWidth,320, DTA_VirtualHeight,240);
+                         DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                         DTA_LegacyRenderStyle,STYLE_Stencil,
+                         DTA_FillColor,m_lightColor);
       y += 2;
       Screen.drawTexture(m_texBattery, false, hudlpos+2, y, DTA_VirtualWidth,320, DTA_VirtualHeight,240, DTA_SrcHeight,s, DTA_DestHeightF,s);
       y += 10;
