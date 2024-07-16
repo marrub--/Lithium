@@ -24,11 +24,12 @@ pclass_x(gM, pI | pW)
 pclass_x(gI, pA | pD)
 pclass_x(gF, pT)
 /* Lifeform Type */
-pclass_x(gH, pM | pC | pA)
-pclass_x(gN, pW | pD | pT)
-pclass_x(gR, pI)
+pclass_x(lH, pM | pC)
+pclass_x(lN, pW | pT)
+pclass_x(lM, pA | pD)
+pclass_x(lR, pI)
 /* Misc. Abilities */
-pclass_x(gA, gH | gN | gR)
+pclass_x(gA, gO | gM | gI | gF)
 pclass_x(gU, pC | pW | pT)
 #undef pclass_x
 #elif !defined(p_player_h)
@@ -58,9 +59,10 @@ enum ZscName(PClass) {
    pcl_missioners = gM,
    pcl_intruders  = gI,
    pcl_finalizer  = gF,
-   pcl_human    = gH,
-   pcl_nonhuman = gN,
-   pcl_robot    = gR,
+   pcl_human      = lH,
+   pcl_nonhuman   = lN,
+   pcl_homunculus = lM,
+   pcl_robot      = lR,
    pcl_any       = gA,
    pcl_magicuser = gU,
 };

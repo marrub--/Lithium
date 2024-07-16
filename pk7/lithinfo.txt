@@ -84,15 +84,15 @@
 
    cl: gA tag: AttrACC;
    cl: gA tag: AttrDEF;
-   cl: gH tag: AttrSTRHuman;
-   cl: gR tag: AttrSTRRobot;
-   cl: gN tag: AttrSTRNonHuman;
-   cl: gH tag: AttrVIT;
-   cl: gN tag: AttrPOTNonHuman;
-   cl: gR tag: AttrPOTRobot;
-   cl: gH tag: AttrSTM;
-   cl: gR tag: AttrREP;
-   cl: gN tag: AttrREG;
+   cl: lH tag: AttrSTRHuman;
+   cl: lR tag: AttrSTRRobot;
+   cl: lN tag: AttrSTRNonHuman;
+   cl: lH tag: AttrVIT;
+   cl: lN tag: AttrPOTNonHuman;
+   cl: lR tag: AttrPOTRobot;
+   cl: lH tag: AttrSTM;
+   cl: lR tag: AttrREP;
+   cl: lN tag: AttrREG;
    cl: gA tag: AttrLUK;
    cl: pM tag: AttrRGE;
    cl: pC tag: AttrCON;
