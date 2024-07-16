@@ -321,15 +321,15 @@ alloc_aut(0) script static void P_bossWarnings(void) {
    }
 }
 
-stkoff static i32 P_playerColor(void) {
-   switch(pl.pclass) {
-   case pcl_marine:    return 0x00FF00;
-   case pcl_cybermage: return 0xBF0F4A;
-   case pcl_informant: return 0x8C3BF8;
-   case pcl_wanderer:  return 0xFFD023;
-   case pcl_assassin:  return 0xE873AF;
-   case pcl_darklord:  return 0x3B47F8;
-   case pcl_thoth:     return 0xBFBFBF;
+stkoff i32 P_PlayerColor(i32 pclass) {
+   switch(pclass) {
+   case pcl_marine:    return 0xFF00FF00;
+   case pcl_cybermage: return 0xFFBF0F4A;
+   case pcl_informant: return 0xFF8C3BF8;
+   case pcl_wanderer:  return 0xFFFFD023;
+   case pcl_assassin:  return 0xFFE873AF;
+   case pcl_darklord:  return 0xFF3B47F8;
+   case pcl_thoth:     return 0xFFBFBFBF;
    }
    return 0xFF000000;
 }
@@ -355,7 +355,7 @@ alloc_aut(0) script static void P_doDepthMeter(void) {
    i32 scr_w      = pl.hudrpos * scale;
    i32 prev_level = (wl.hubscleared     & 31) * notch_dist;
    i32 next_level = (wl.hubscleared + 1 & 31) * notch_dist;
-   i32 player_clr = P_playerColor();
+   i32 player_clr = P_PlayerColor(pl.pclass) & 0xFFFFFF;
    ACS_Delay(8);
    for(i32 i = 0; i < e_out; ++i) {
       if(i == s_out && cv.player_resultssound) {
@@ -514,12 +514,12 @@ alloc_aut(0) script void P_CenterNotification(str txt, i32 tics, i32 cr, i32 lin
    }
    ACS_Delay(3);
    AmbientSound(ss_player_cbi_centernotif, 0.6k);
-   linecr = linecr == -1 ? P_playerColor() : linecr;
-   cr     = cr     == -1 ? pl.color        : cr;
+   linecr = linecr == -1 ? P_PlayerColor(pl.pclass) & 0xFFFFFF : linecr;
+   cr     = cr     == -1 ? pl.color : cr;
    for(i32 j = 0; j < tics; j++) {
       k32 a = 1 - maxi(j - (tics - 35), 0) / 35.0k;
       k32 t = 1 - mini(j, 24) / 24.0k;
-      i32 line_cr = linecr + ((i32)(a * 255) << 24);
+      i32 line_cr = linecr | ((i32)(a * 255) << 24);
       SetSize(480, 360);
       dst_rect.x = src_rect.x - 16 * t;
       dst_rect.y = src_rect.y - 24 * t;

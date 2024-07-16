@@ -65,28 +65,24 @@ void renTick() {
    tickScrNums();
    tickCrosshair();
    tickDraw();
+   tickMap();
 }
 
 ui void renRender(RenderEvent evt) {
    projectSetUp(evt);
-
    if(evt.camera && !automapActive) {
       bool hud_enabled = false;
       if(evt.camera.player) {
          hud_enabled = Lith_UTIL.pData(_pdt_hudenabled);
       }
-
       if(hud_enabled) {
          drawNearByStuff(evt);
          drawDmgNums(evt);
          drawCrosshair(evt);
          drawInventory(evt);
+         drawMap(evt);
       }
-
       drawAllData(evt);
-
-      let p = Lith_Player(evt.camera);
-
       if(hud_enabled) {
          drawScrNums(evt);
       }

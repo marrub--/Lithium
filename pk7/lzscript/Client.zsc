@@ -11,6 +11,7 @@
 #include "lzscript/Client/CreditsMenu.zsc"
 #include "lzscript/Client/Crosshair.zsc"
 #include "lzscript/Client/DamageNum.zsc"
+#include "lzscript/Client/Map.zsc"
 #include "lzscript/Client/Draw.zsc"
 #include "lzscript/Client/Menu.zsc"
 #include "lzscript/Client/MessageBox.zsc"

@@ -101,6 +101,8 @@ enum ZscName(PData) {
    _pdt_hudrpos,
    _pdt_hudhppos,
    _pdt_hudtop,
+   _pdt_hudtype,
+   _pdt_playercolor,
    _pdt_rt_hrs,
    _pdt_rt_min,
 };

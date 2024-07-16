@@ -79,6 +79,18 @@ enum ZscName(LightsparkSoundType) {
    _lspk_snd_max,
 };
 
+enum ZscName(HudType) {
+   _hud_marine,
+   _hud_cybermage,
+   _hud_informant,
+   _hud_wanderer,
+   _hud_assassin,
+   _hud_darklord,
+   _hud_thoth,
+   _hud_old,
+   _hud_max
+};
+
 #include "p_attrib.h"
 #if !ZscOn
 #include "m_engine.h"
@@ -109,6 +121,7 @@ score_t P_Scr_GivePos(i32 x, i32 y, score_t score, bool nomul);
 void P_Scr_Take(score_t score);
 stkcall i32 P_Color(i32 pclass);
 stkcall i32 P_Char(i32 pclass);
+stkcall i32 P_PlayerColor(i32 pclass);
 void P_Dat_PTick(void);
 script void P_Scr_Payout(void);
 void P_Log_SellWeapon(i32 which, score_t score);
@@ -158,18 +171,6 @@ enum {
    _itm_disp_pop,
    _itm_disp_both,
    _itm_disp_max
-};
-
-enum {
-   _hud_marine,
-   _hud_cybermage,
-   _hud_informant,
-   _hud_wanderer,
-   _hud_assassin,
-   _hud_darklord,
-   _hud_thoth,
-   _hud_old,
-   _hud_max
 };
 
 struct flashlight {

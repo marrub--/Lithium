@@ -308,6 +308,11 @@ A throwable, sentient light. Aims where you aim. Follows you when you
 recall it, and shuts off on a third activation.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
+== \#UPGRADE_TITLE_Minimap | Mini-map
+@@ \#UPGRADE_EFFEC_Minimap
+Enables a widget on your HUD that detects near-by enemies.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_Subweapons | Sub-wep Driver
 @@ \#UPGRADE_EFFEC_Subweapons
 Allows you to use sub-weapons. These can be activated by pressing the

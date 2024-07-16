@@ -92,6 +92,18 @@ enum Lith_LightsparkSoundType {
    _lspk_snd_max,
 };
 
+enum Lith_HudType {
+   _hud_marine,
+   _hud_cybermage,
+   _hud_informant,
+   _hud_wanderer,
+   _hud_assassin,
+   _hud_darklord,
+   _hud_thoth,
+   _hud_old,
+   _hud_max
+};
+
 
 
 

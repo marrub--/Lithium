@@ -2949,6 +2949,10 @@
    "Allows you to press the flashlight key to throw a friendly light-spark.\n"
    "\n"
    "A throwable, sentient light. Aims where you aim. Follows you when you recall it, and shuts off on a third activation.";
+"LITH_UPGRADE_TITLE_Minimap" =
+   "Mini-map";
+"LITH_UPGRADE_EFFEC_Minimap" =
+   "Enables a widget on your HUD that detects near-by enemies.";
 "LITH_UPGRADE_TITLE_Subweapons" =
    "Sub-wep Driver";
 "LITH_UPGRADE_EFFEC_Subweapons" =

@@ -1,0 +1,84 @@
+extend class Lith_URANUS;
+
+array<Line> m_mapDrawnLines;
+array<Line> m_mapDrawnErrorLines;
+vector2 m_mapCenter, m_mapTopLeft, m_mapBottomRight;
+color m_mapColor;
+bool m_mapEnabled;
+
+void tickMap() {
+   m_mapDrawnLines.clear();
+   m_mapDrawnErrorLines.clear();
+   m_mapEnabled = false;
+   if(!players[consolePlayer].mo ||
+      !Lith_UTIL.pData(_pdt_upgrade, UPGR_Minimap))
+   {
+      return;
+   }
+   m_mapEnabled = true;
+   int hudtype = Lith_UTIL.pData(_pdt_hudtype);
+   m_mapColor = hudtype != _hud_old ? color(Lith_UTIL.pData(_pdt_playercolor, hudtype)) : color("red");
+   let p = players[consolePlayer].mo;
+   m_mapCenter = p.pos.xy;
+   m_mapTopLeft     = m_mapCenter - (256, 256);
+   m_mapBottomRight = m_mapCenter + (256, 256);
+   let sec = p.curSector;
+   foreach(ln : sec.lines) {
+      if((am_cheat != 0 || ln.flags & Line.ML_MAPPED) &&
+         !(ln.flags & Line.ML_DONTDRAW) &&
+         ln.bbox[2] /*TL.x*/ < m_mapBottomRight.x &&
+         ln.bbox[3] /*BR.x*/ > m_mapTopLeft.x     &&
+         ln.bbox[0] /*TL.y*/ < m_mapBottomRight.y &&
+         ln.bbox[1] /*BR.y*/ > m_mapTopLeft.y)
+      {
+         m_mapDrawnLines.push(ln);
+      }
+      else
+      {
+         m_mapDrawnErrorLines.push(ln);
+         console.printf(
+            "---%i\n"
+            "\c%cL<R\c- %f %f\n"
+            "\c%cR>L\c- %f %f\n"
+            "\c%cT<B\c- %f %f\n"
+            "\c%cB>T\c- %f %f",
+            ln.index(),
+            ln.bbox[2] /*TL.x*/ < m_mapBottomRight.x ? CH_L_D : CH_L_G,
+            ln.bbox[2], m_mapBottomRight.x,
+            ln.bbox[3] /*BR.x*/ > m_mapTopLeft.x ? CH_L_D : CH_L_G,
+            ln.bbox[3], m_mapTopLeft.x,
+            ln.bbox[0] /*TL.y*/ < m_mapBottomRight.y ? CH_L_D : CH_L_G,
+            ln.bbox[0], m_mapBottomRight.y,
+            ln.bbox[1] /*BR.y*/ > m_mapTopLeft.y ? CH_L_D : CH_L_G,
+            ln.bbox[1], m_mapTopLeft.y
+         );
+      }
+   }
+}
+
+ui void drawMap(RenderEvent evt) {
+   if(!m_mapEnabled) {
+      return;
+   }
+   double sx = m_mapBottomRight.x - m_mapTopLeft.x;
+   double sy = m_mapBottomRight.y - m_mapTopLeft.y;
+   double osx = 100;
+   double osy = osx * sx / sy;
+   setClip(0, 0, osx, osy, (320, 240));
+   drawRect(0, 0, osx, osy, color(0xFF, m_mapColor.r / 2, m_mapColor.g / 2, m_mapColor.b / 2), (320, 240));
+   foreach(ln : m_mapDrawnLines) {
+      drawLn((ln.v1.p.x - m_mapTopLeft.x) / sx * osx,
+             (ln.v1.p.y - m_mapTopLeft.y) / sy * osy,
+             (ln.v2.p.x - m_mapTopLeft.x) / sx * osx,
+             (ln.v2.p.y - m_mapTopLeft.y) / sy * osy,
+             m_mapColor, (320, 240));
+   }
+   foreach(ln : m_mapDrawnErrorLines) {
+      drawLn((ln.v1.p.x - m_mapTopLeft.x) / sx * osx,
+             (ln.v1.p.y - m_mapTopLeft.y) / sy * osy,
+             (ln.v2.p.x - m_mapTopLeft.x) / sx * osx,
+             (ln.v2.p.y - m_mapTopLeft.y) / sy * osy,
+             color(0xff,0xff,0,0xff), (320, 240));
+   }
+   Screen.clearClipRect();
+}
