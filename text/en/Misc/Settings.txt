@@ -303,13 +303,13 @@ crosshair that follow the recoil. They're... juicy. Guess that's why.
 == \#st_name_color_143 | Lane Hot Pink
 
 == \#st_name_hudtype_0 | Default for class
-== \#st_name_hudtype_1 | $$\#CLASS_MARINE
-== \#st_name_hudtype_2 | $$\#CLASS_CYBERMAGE
-== \#st_name_hudtype_3 | $$\#CLASS_INFORMANT
-== \#st_name_hudtype_4 | $$\#CLASS_WANDERER
-== \#st_name_hudtype_5 | $$\#CLASS_ASSASSIN
-== \#st_name_hudtype_6 | $$\#CLASS_DARKLORD
-== \#st_name_hudtype_7 | $$\#CLASS_THOTH
+== \#st_name_hudtype_1 | $$\#MarinePlayer
+== \#st_name_hudtype_2 | $$\#CyberMagePlayer
+== \#st_name_hudtype_3 | $$\#InformantPlayer
+== \#st_name_hudtype_4 | $$\#WandererPlayer
+== \#st_name_hudtype_5 | $$\#AssassinPlayer
+== \#st_name_hudtype_6 | $$\#DarkLordPlayer
+== \#st_name_hudtype_7 | $$\#ThothPlayer
 == \#st_name_hudtype_8 | 1.0
 
 == \#st_name_cursor_0 | Green

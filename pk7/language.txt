@@ -6054,19 +6054,19 @@
 "LITH_st_name_hudtype_0" =
    "Default for class";
 "LITH_st_name_hudtype_1" =
-   "$$LITH_CLASS_MARINE";
+   "$$LITH_MarinePlayer";
 "LITH_st_name_hudtype_2" =
-   "$$LITH_CLASS_CYBERMAGE";
+   "$$LITH_CyberMagePlayer";
 "LITH_st_name_hudtype_3" =
-   "$$LITH_CLASS_INFORMANT";
+   "$$LITH_InformantPlayer";
 "LITH_st_name_hudtype_4" =
-   "$$LITH_CLASS_WANDERER";
+   "$$LITH_WandererPlayer";
 "LITH_st_name_hudtype_5" =
-   "$$LITH_CLASS_ASSASSIN";
+   "$$LITH_AssassinPlayer";
 "LITH_st_name_hudtype_6" =
-   "$$LITH_CLASS_DARKLORD";
+   "$$LITH_DarkLordPlayer";
 "LITH_st_name_hudtype_7" =
-   "$$LITH_CLASS_THOTH";
+   "$$LITH_ThothPlayer";
 "LITH_st_name_hudtype_8" =
    "1.0";
 "LITH_st_name_cursor_0" =
