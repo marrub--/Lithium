@@ -110,6 +110,7 @@ ui void drawMap(RenderEvent evt) {
    let osy = osx * sx / sy;
    drawRect(0, 0, osx, osy, color(0xFF, m_mapColor.r / 2, m_mapColor.g / 2, m_mapColor.b / 2), (320, 240));
    Font fnt = fntSml();
+   drawRect(osx/2-2, osy/2-2, 4, 4, color(0xFF, int(m_mapColor.r / 1.5), int(m_mapColor.g / 1.5), int(m_mapColor.b / 1.5)), (320, 240));
    for(int i = 0, n = m_mapDrawnPoints.size(); i < n; i += 4) {
       let v1 = ((m_mapDrawnPoints[i]     - m_mapTopLeft.x) / sx * osx,
                 osy - (m_mapDrawnPoints[i + 1] - m_mapTopLeft.y) / sy * osy);
