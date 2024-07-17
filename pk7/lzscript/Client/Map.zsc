@@ -5,7 +5,7 @@ vector2 m_mapCenter, m_mapTopLeft, m_mapBottomRight;
 color m_mapColor;
 bool m_mapEnabled;
 
-bool, double, vector2, vector2 collideLineAabb(vector2 p, vector2 dt, vector2 center, vector2 s2) {
+bool, vector2, vector2 collideLineAabb(vector2 p, vector2 dt, vector2 center, vector2 s2) {
    let s   = (1.0 / dt.x, 1.0 / dt.y);
    let sgn = (s.x < 0 ? -1 : 1, s.y < 0 ? -1 : 1);
    let near = ((center.x - sgn.x * s2.x - p.x) * s.x,
@@ -19,10 +19,10 @@ bool, double, vector2, vector2 collideLineAabb(vector2 p, vector2 dt, vector2 ce
          let ht = clamp(nt, 0, 1); // depth
          let hd = ((1 - ht) * -dt.x, (1 - ht) * -dt.y); // delta
          let hp = (p.x + dt.x * ht, p.y + dt.y * ht); // pos
-         return true, ht, hd, hp;
+         return true, hd, hp;
       }
    }
-   return false, 0, (0,0), (0,0);
+   return false, (0,0), (0,0);
 }
 
 void tickMap() {
@@ -55,6 +55,7 @@ void tickMap() {
          ln.bbox[0] /*TL.y*/ > m_mapTopLeft.y &&
          ln.bbox[1] /*BR.y*/ < m_mapBottomRight.y)
       {
+         // check both points' collision separately
          let v1coll =
             ln.v1.p.x < m_mapBottomRight.x && ln.v1.p.x > m_mapTopLeft.x &&
             ln.v1.p.y < m_mapBottomRight.y && ln.v1.p.y > m_mapTopLeft.y;
@@ -69,23 +70,27 @@ void tickMap() {
             m_mapDrawnPoints.push(ln.v2.p.y);
          } else {
             // narrow pass: check segment/aabb collision
-            bool hit = false; double ht; vector2 hd, hp, end;
+            bool hit = false; vector2 hd, hp;
             if(v1coll) {
-               [hit, ht, hd, hp] = collideLineAabb(ln.v2.p, -ln.delta, m_mapCenter, s2);
+               // when v1 is inside map, trace from v2
+               [hit, hd, hp] = collideLineAabb(ln.v2.p, -ln.delta, m_mapCenter, s2);
                if(!hit) continue;
             } else if(v2coll) {
-               [hit, ht, hd, hp] = collideLineAabb(ln.v1.p, ln.delta, m_mapCenter, s2);
+               // when v2 is inside map, trace from v1
+               [hit, hd, hp] = collideLineAabb(ln.v1.p, ln.delta, m_mapCenter, s2);
                if(!hit) continue;
             } else {
-               [hit, ht, hd, hp] = collideLineAabb(ln.v1.p, ln.delta, m_mapCenter, s2);
+               // if neither is within the map, make up a line segment
+               // by tracing both angles
+               [hit, hd, hp] = collideLineAabb(ln.v1.p, ln.delta, m_mapCenter, s2);
                let hp1 = hp;
                if(!hit) continue;
-               [hit, ht, hd, hp] = collideLineAabb(ln.v2.p, -ln.delta, m_mapCenter, s2);
+               [hit, hd, hp] = collideLineAabb(ln.v2.p, -ln.delta, m_mapCenter, s2);
                if(!hit) continue;
                hd = hp - hp1;
             }
             // draw collided portion
-            end = hp - hd;
+            let end = hp - hd;
             m_mapDrawnPoints.push(hp.x);
             m_mapDrawnPoints.push(hp.y);
             m_mapDrawnPoints.push(end.x);
@@ -107,9 +112,9 @@ ui void drawMap(RenderEvent evt) {
    Font fnt = fntSml();
    for(int i = 0, n = m_mapDrawnPoints.size(); i < n; i += 4) {
       let v1 = ((m_mapDrawnPoints[i]     - m_mapTopLeft.x) / sx * osx,
-                (m_mapDrawnPoints[i + 1] - m_mapTopLeft.y) / sy * osy);
+                osy - (m_mapDrawnPoints[i + 1] - m_mapTopLeft.y) / sy * osy);
       let v2 = ((m_mapDrawnPoints[i + 2] - m_mapTopLeft.x) / sx * osx,
-                (m_mapDrawnPoints[i + 3] - m_mapTopLeft.y) / sy * osy);
+                osy - (m_mapDrawnPoints[i + 3] - m_mapTopLeft.y) / sy * osy);
       drawLn(v1.x, v1.y, v2.x, v2.y, m_mapColor, (320, 240));
    }
 }
