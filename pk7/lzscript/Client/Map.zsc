@@ -25,28 +25,15 @@ bool, vector2, vector2 collideLineAabb(vector2 p, vector2 dt, vector2 center, ve
    return false, (0,0), (0,0);
 }
 
-void tickMap() {
-   m_mapDrawnPoints.clear();
-   m_mapEnabled = false;
-   if(!players[consolePlayer].mo ||
-      !Lith_UTIL.pData(_pdt_upgrade, UPGR_Minimap))
-   {
-      return;
-   }
-   m_mapEnabled = true;
-   int hudtype = Lith_UTIL.pData(_pdt_hudtype);
-   m_mapColor =
-      hudtype != _hud_old ?
-      color(Lith_UTIL.pData(_pdt_playercolor, hudtype)) :
-      color(255, 255, 0, 0);
-   let p = players[consolePlayer].mo;
-   m_mapCenter = p.pos.xy;
-   m_mapTopLeft     = m_mapCenter - (256, 256);
-   m_mapBottomRight = m_mapCenter + (256, 256);
-   let sec = p.curSector;
-   let s2 = ((m_mapBottomRight.x - m_mapTopLeft.x) / 2,
-             (m_mapBottomRight.y - m_mapTopLeft.y) / 2);
+void mapTraverseSector(Sector sec, vector2 s2) {
+   sec.validCount = validCount;
    foreach(ln : sec.lines) {
+      if(ln.frontSector && ln.frontSector.validCount != validCount) {
+         mapTraverseSector(ln.frontSector, s2);
+      }
+      if(ln.backSector && ln.backSector.validCount != validCount) {
+         mapTraverseSector(ln.backSector, s2);
+      }
       if((am_cheat != 0 || ln.flags & Line.ML_MAPPED) &&
          !(ln.flags & Line.ML_DONTDRAW) &&
          // wide pass: check line bbox collides with map bbox
@@ -73,19 +60,23 @@ void tickMap() {
             bool hit = false; vector2 hd, hp;
             if(v1coll) {
                // when v1 is inside map, trace from v2
-               [hit, hd, hp] = collideLineAabb(ln.v2.p, -ln.delta, m_mapCenter, s2);
+               [hit, hd, hp] =
+                  collideLineAabb(ln.v2.p, -ln.delta, m_mapCenter, s2);
                if(!hit) continue;
             } else if(v2coll) {
                // when v2 is inside map, trace from v1
-               [hit, hd, hp] = collideLineAabb(ln.v1.p, ln.delta, m_mapCenter, s2);
+               [hit, hd, hp] =
+                  collideLineAabb(ln.v1.p, ln.delta, m_mapCenter, s2);
                if(!hit) continue;
             } else {
                // if neither is within the map, make up a line segment
                // by tracing both angles
-               [hit, hd, hp] = collideLineAabb(ln.v1.p, ln.delta, m_mapCenter, s2);
+               [hit, hd, hp] =
+                  collideLineAabb(ln.v1.p, ln.delta, m_mapCenter, s2);
                let hp1 = hp;
                if(!hit) continue;
-               [hit, hd, hp] = collideLineAabb(ln.v2.p, -ln.delta, m_mapCenter, s2);
+               [hit, hd, hp] =
+                  collideLineAabb(ln.v2.p, -ln.delta, m_mapCenter, s2);
                if(!hit) continue;
                hd = hp - hp1;
             }
@@ -100,6 +91,31 @@ void tickMap() {
    }
 }
 
+void tickMap() {
+   m_mapDrawnPoints.clear();
+   m_mapEnabled = false;
+   if(!players[consolePlayer].mo ||
+      !Lith_UTIL.pData(_pdt_upgrade, UPGR_Minimap))
+   {
+      return;
+   }
+   m_mapEnabled = true;
+   int hudtype = Lith_UTIL.pData(_pdt_hudtype);
+   m_mapColor =
+      hudtype != _hud_old ?
+      color(Lith_UTIL.pData(_pdt_playercolor, hudtype)) :
+      color(255, 255, 0, 0);
+   let p = players[consolePlayer].mo;
+   m_mapCenter = p.pos.xy;
+   m_mapTopLeft     = m_mapCenter - (256, 256);
+   m_mapBottomRight = m_mapCenter + (256, 256);
+   let sec = p.curSector;
+   let s2 = ((m_mapBottomRight.x - m_mapTopLeft.x) / 2,
+             (m_mapBottomRight.y - m_mapTopLeft.y) / 2);
+   ++validCount;
+   mapTraverseSector(sec, s2);
+}
+
 ui void drawMap(RenderEvent evt) {
    if(!m_mapEnabled) {
       return;
@@ -108,13 +124,17 @@ ui void drawMap(RenderEvent evt) {
    let sy = m_mapBottomRight.y - m_mapTopLeft.y;
    let osx = 70.0;
    let osy = osx * sx / sy;
-   drawRect(0, 0, osx, osy, color(0xFF, m_mapColor.r / 2, m_mapColor.g / 2, m_mapColor.b / 2), (320, 240));
+   drawRect(0, 0, osx, osy,
+            color(0xFF, m_mapColor.r / 2, m_mapColor.g / 2, m_mapColor.b / 2),
+            (320, 240));
    Font fnt = fntSml();
-   drawRect(osx/2-2, osy/2-2, 4, 4, color(0xFF, int(m_mapColor.r / 1.5), int(m_mapColor.g / 1.5), int(m_mapColor.b / 1.5)), (320, 240));
+   drawRect(osx/2-2, osy/2-2, 4, 4,
+            color(0xFF, int(m_mapColor.r / 1.5), int(m_mapColor.g / 1.5), int(m_mapColor.b / 1.5)),
+            (320, 240));
    for(int i = 0, n = m_mapDrawnPoints.size(); i < n; i += 4) {
-      let v1 = ((m_mapDrawnPoints[i]     - m_mapTopLeft.x) / sx * osx,
+      let v1 = (      (m_mapDrawnPoints[i]     - m_mapTopLeft.x) / sx * osx,
                 osy - (m_mapDrawnPoints[i + 1] - m_mapTopLeft.y) / sy * osy);
-      let v2 = ((m_mapDrawnPoints[i + 2] - m_mapTopLeft.x) / sx * osx,
+      let v2 = (      (m_mapDrawnPoints[i + 2] - m_mapTopLeft.x) / sx * osx,
                 osy - (m_mapDrawnPoints[i + 3] - m_mapTopLeft.y) / sy * osy);
       drawLn(v1.x, v1.y, v2.x, v2.y, m_mapColor, (320, 240));
    }
