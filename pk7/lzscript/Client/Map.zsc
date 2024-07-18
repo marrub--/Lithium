@@ -9,16 +9,20 @@ bool m_mapEnabled;
 int m_mapPortalGroup;
 
 bool, vector2, vector2 collideLineAabb(vector2 p, vector2 dt, vector2 center, vector2 s2) {
+   // get intersection time with box's edges
    let s   = (1.0 / dt.x, 1.0 / dt.y);
    let sgn = (s.x < 0 ? -1 : 1, s.y < 0 ? -1 : 1);
    let near = ((center.x - sgn.x * s2.x - p.x) * s.x,
                (center.y - sgn.y * s2.y - p.y) * s.y);
    let far  = ((center.x + sgn.x * s2.x - p.x) * s.x,
                (center.y + sgn.y * s2.y - p.y) * s.y);
+   // check closest time of collision on both axes
    if(near.x <= far.y && near.y <= far.x) {
+      // check nearest and furthest time
       let nt = max(near.x, near.y);
       let ft = min(far.x, far.y);
       if(nt < 1 && ft > 0) {
+         // within box, calculate hit segment
          let ht = clamp(nt, 0, 1); // depth
          let hd = ((1 - ht) * -dt.x, (1 - ht) * -dt.y); // delta
          let hp = (p.x + dt.x * ht, p.y + dt.y * ht); // pos
@@ -29,9 +33,11 @@ bool, vector2, vector2 collideLineAabb(vector2 p, vector2 dt, vector2 center, ve
 }
 
 vector3, vector3, vector3 matrix3x3Multiply(vector3 m1, vector3 m2, vector3 m3, vector3 n1, vector3 n2, vector3 n3) {
+   // get columns
    let nx = (n1.x, n2.x, n3.x);
    let ny = (n1.y, n2.y, n3.y);
    let nz = (n1.z, n2.z, n3.z);
+   // dot every combination
    return
       (m1 dot nx, m1 dot ny, m1 dot nz),
       (m2 dot nx, m2 dot ny, m2 dot nz),
@@ -39,25 +45,29 @@ vector3, vector3, vector3 matrix3x3Multiply(vector3 m1, vector3 m2, vector3 m3, 
 }
 
 vector2 matrix3x3Vector2Multiply(vector3 m1, vector3 m2, vector3 m3, vector2 v) {
+   // treat v as a vector3 with z=1
    let vv = (v, 1);
+   // only calculate first two elements
    return (m1 dot vv, m2 dot vv);
 }
 
 void traverseLineSectors(Line ln, vector3 m1, vector3 m2, vector3 m3) {
+   // traverse front sector if necessary
    if(ln.frontSector && ln.frontSector.validCount != validCount) {
       mapTraverseSector(ln.frontSector, m1, m2, m3);
    }
+   // traverse back sector if necessary
    if(ln.backSector && ln.backSector.validCount != validCount) {
       mapTraverseSector(ln.backSector, m1, m2, m3);
    }
 }
 
 void mapTraverseSector(Sector sec, vector3 m1, vector3 m2, vector3 m3) {
-   if(sec.validCount == validCount) return;
+   // set sector's validCount to prevent infinite recursion
    sec.validCount = validCount;
-   vector2 lnTl, lnBr;
    bool isCurPortal = m_mapPortalGroup == sec.portalGroup;
    foreach(ln : sec.lines) {
+      // set line's validCount to prevent unnecessary draws
       if(ln.validCount == validCount) continue;
       ln.validCount = validCount;
       if(ln.isVisualPortal()) {
@@ -95,10 +105,8 @@ void mapTraverseSector(Sector sec, vector3 m1, vector3 m2, vector3 m3) {
          continue;
       }
       // store bbox positions so they can be mutated
-      lnTl.y = ln.bbox[0];
-      lnBr.y = ln.bbox[1];
-      lnTl.x = ln.bbox[2];
-      lnBr.x = ln.bbox[3];
+      let lnTl = (ln.bbox[2], ln.bbox[0]);
+      let lnBr = (ln.bbox[3], ln.bbox[1]);
       // store line points and delta so we can mutate them
       let v1 = ln.v1.p;
       let v2 = ln.v2.p;
@@ -142,7 +150,7 @@ void mapTraverseSector(Sector sec, vector3 m1, vector3 m2, vector3 m3) {
             m_mapDrawnPoints.push(v2.y);
          } else {
             // narrow pass: check segment/aabb collision
-            bool hit = false; vector2 hd, hp;
+            bool hit; vector2 hd, hp;
             if(v1coll) {
                // when v1 is inside map, trace from v2
                [hit, hd, hp] =
@@ -182,7 +190,7 @@ void mapTraverseSector(Sector sec, vector3 m1, vector3 m2, vector3 m3) {
          if(ln.flags & Line.ML_TWOSIDED) {
             cr = color(cr.a / 3, cr.r, cr.g, cr.b);
          }
-         // store color index if needed
+         // store color and index if needed
          if(cr != m_mapColor) {
             m_mapColorIndices.push(idx);
             m_mapColors.push(cr);
@@ -192,29 +200,35 @@ void mapTraverseSector(Sector sec, vector3 m1, vector3 m2, vector3 m3) {
 }
 
 void tickMap() {
+   // clear all draw data
    m_mapDrawnPoints.clear();
    m_mapColorIndices.clear();
    m_mapColors.clear();
    m_mapEnabled = false;
+   // exit if minimap won't be drawn
    if(!players[consolePlayer].mo ||
       !Lith_UTIL.pData(_pdt_upgrade, UPGR_Minimap))
    {
       return;
    }
    m_mapEnabled = true;
+   // get map color based on hud type
    int hudtype = Lith_UTIL.pData(_pdt_hudtype);
    m_mapColor =
       hudtype != _hud_old ?
       color(Lith_UTIL.pData(_pdt_playercolor, hudtype)) :
       color(255, 255, 0, 0);
+   // get map position and size
    let p = players[consolePlayer].mo;
    m_mapCenter = p.pos.xy;
    m_mapTopLeft     = m_mapCenter - (512, 512);
    m_mapBottomRight = m_mapCenter + (512, 512);
    m_mapSizeHalf = ((m_mapBottomRight.x - m_mapTopLeft.x) / 2,
                     (m_mapBottomRight.y - m_mapTopLeft.y) / 2);
+   // prepare sector traversal
    m_mapPortalGroup = p.curSector.portalGroup;
    ++validCount;
+   // traverse from player's current sector with identity matrix
    mapTraverseSector(p.curSector, (1, 0, 0), (0, 1, 0), (0, 0, 1));
 }
 
@@ -222,28 +236,39 @@ ui void drawMap(RenderEvent evt) {
    if(!m_mapEnabled) {
       return;
    }
+   // get size and on-screen size of map
    let sx = m_mapBottomRight.x - m_mapTopLeft.x;
    let sy = m_mapBottomRight.y - m_mapTopLeft.y;
    let osx = 70.0;
    let osy = osx * sx / sy;
+   // draw background
    drawRect(0, 0, osx, osy,
             color(0xFF, m_mapColor.r / 2, m_mapColor.g / 2, m_mapColor.b / 2),
             (320, 240));
-   Font fnt = fntSml();
+   // draw player box
    drawRect(osx/2-2, osy/2-2, 4, 4,
             color(0xFF, int(m_mapColor.r / 1.5), int(m_mapColor.g / 1.5), int(m_mapColor.b / 1.5)),
             (320, 240));
+   // if there are colored lines, initialize next color index
    let nextColor = m_mapColorIndices.size() ? m_mapColorIndices[0] : -1;
-   for(int i = 0, j = 0, n = m_mapDrawnPoints.size(), m = m_mapColorIndices.size(); i < n; i += 4) {
+   for(int i = 0, j = 0,
+           n = m_mapDrawnPoints.size(), m = m_mapColorIndices.size();
+       i < n;
+       i += 4)
+   {
+      // check for line color using current index
       let cr = m_mapColor;
       if(i == nextColor) {
+         // set color and swap to next color index
          cr = m_mapColors[j];
          nextColor = ++j < m ? m_mapColorIndices[j] : -1;
       }
+      // get point elements and transform them to screen positions
       let v1 = (      (m_mapDrawnPoints[i]     - m_mapTopLeft.x) / sx * osx,
                 osy - (m_mapDrawnPoints[i + 1] - m_mapTopLeft.y) / sy * osy);
       let v2 = (      (m_mapDrawnPoints[i + 2] - m_mapTopLeft.x) / sx * osx,
                 osy - (m_mapDrawnPoints[i + 3] - m_mapTopLeft.y) / sy * osy);
+      // draw line
       drawLn(v1.x, v1.y, v2.x, v2.y, cr, (320, 240));
    }
 }
