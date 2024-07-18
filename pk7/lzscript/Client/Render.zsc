@@ -79,8 +79,8 @@ ui void renRender(RenderEvent evt) {
          drawNearByStuff(evt);
          drawDmgNums(evt);
          drawCrosshair(evt);
-         drawInventory(evt);
          drawMap(evt);
+         drawInventory(evt);
       }
       drawAllData(evt);
       if(hud_enabled) {
