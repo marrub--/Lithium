@@ -77,6 +77,17 @@ server float lith_hud_logsize      = 1.0;
 server int   lith_hud_logcolor     = 108; /* 'l' */
 server int   lith_hud_expbar       = 0;
 
+server float lith_hud_mapscalex    = 1.5;
+server float lith_hud_mapscaley    = 1.0;
+server float lith_hud_mapzoom      = 1.0;
+server float lith_hud_mapthickness = 1.0;
+server float lith_hud_mapalpha     = 1.0;
+server float lith_hud_mapbgalpha   = 1.0;
+server bool  lith_hud_mapcolor     = false;
+server int   lith_hud_mapcolor_r   = 255;
+server int   lith_hud_mapcolor_g   = 255;
+server int   lith_hud_mapcolor_b   = 255;
+
 server int   lith_xhair_r = 255;
 server int   lith_xhair_g = 255;
 server int   lith_xhair_b = 255;

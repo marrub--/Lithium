@@ -43,6 +43,16 @@ The color for most of the text in in-game GUIs.
 == \#hud_showinteract | Show near-by interactables
 == \#hud_showammo | Show ammo totals
 == \#hud_itemcolor | Near-by item text color
+== \#hud_mapscalex | Horizontal scale
+== \#hud_mapscaley | Vertical scale
+== \#hud_mapzoom | Zoom level
+== \#hud_mapthickness | Line thickness
+== \#hud_mapalpha | Opacity
+== \#hud_mapbgalpha | Background opacity
+== \#hud_mapcolor | Custom color enabled
+== \#hud_mapcolor_r | Custom color red
+== \#hud_mapcolor_g | Custom color green
+== \#hud_mapcolor_b | Custom color blue
 == \#light_b | $$\#BLUE_INTENSITY
 == \#light_battery | Battery
 == \#light_g | $$\#GREEN_INTENSITY
@@ -394,6 +404,7 @@ crosshair that follow the recoil. They're... juicy. Guess that's why.
 == \#st_labl_hud        | \cnHeads-Up Display
 == \#st_labl_language   | \cnLanguage
 == \#st_labl_log        | \cnLogging
+== \#st_labl_minimap    | \cnMini-map
 == \#st_labl_misc       | \cnMiscellaneous
 == \#st_labl_personal   | \cnPersonal Info (Top-Right Corner)
 == \#st_labl_pickups    | \cnItem Pickups

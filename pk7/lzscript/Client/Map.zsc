@@ -4,6 +4,7 @@ array<double> m_mapDrawnPoints;
 array<int> m_mapColorIndices;
 array<color> m_mapColors;
 vector2 m_mapCenter, m_mapTopLeft, m_mapBottomRight, m_mapSizeHalf;
+vector2 m_mapOnScreenSize;
 color m_mapColor;
 bool m_mapEnabled;
 int m_mapPortalGroup;
@@ -215,16 +216,21 @@ void tickMap() {
    // get map color based on hud type
    int hudtype = Lith_UTIL.pData(_pdt_hudtype);
    m_mapColor =
-      hudtype != _hud_old ?
-      color(Lith_UTIL.pData(_pdt_playercolor, hudtype)) :
-      color(255, 255, 0, 0);
+      lith_hud_mapcolor ?
+      color(255, lith_hud_mapcolor_r, lith_hud_mapcolor_g, lith_hud_mapcolor_b) :
+      (hudtype != _hud_old ?
+       color(Lith_UTIL.pData(_pdt_playercolor, hudtype)) :
+       color(255, 255, 0, 0));
    // get map position and size
    let p = players[consolePlayer].mo;
+   let scale = (lith_hud_mapscalex, lith_hud_mapscaley);
+   let zoom  = 512 / max(lith_hud_mapzoom, 0.1);
    m_mapCenter = p.pos.xy;
-   m_mapTopLeft     = m_mapCenter - (512, 512);
-   m_mapBottomRight = m_mapCenter + (512, 512);
-   m_mapSizeHalf = ((m_mapBottomRight.x - m_mapTopLeft.x) / 2,
-                    (m_mapBottomRight.y - m_mapTopLeft.y) / 2);
+   m_mapSizeHalf = (zoom * scale.x, zoom);
+   m_mapTopLeft     = m_mapCenter - m_mapSizeHalf;
+   m_mapBottomRight = m_mapCenter + m_mapSizeHalf;
+   m_mapOnScreenSize.y = 64.0 * scale.y;
+   m_mapOnScreenSize.x = m_mapOnScreenSize.y * scale.x;
    // prepare sector traversal
    m_mapPortalGroup = p.curSector.portalGroup;
    ++validCount;
@@ -236,18 +242,22 @@ ui void drawMap(RenderEvent evt) {
    if(!m_mapEnabled) {
       return;
    }
-   // get size and on-screen size of map
-   let sx = m_mapBottomRight.x - m_mapTopLeft.x;
-   let sy = m_mapBottomRight.y - m_mapTopLeft.y;
-   let osx = 70.0;
-   let osy = osx * sx / sy;
+   // get properties of map for drawing
+   let tl = m_mapTopLeft;
+   let s  = m_mapSizeHalf * 2;
+   let os = m_mapOnScreenSize;
+   let thickness = lith_hud_mapthickness;
+   let alpha     = lith_hud_mapalpha;
+   let bgalpha   = lith_hud_mapbgalpha;
    // draw background
-   drawRect(0, 0, osx, osy,
-            color(0xFF, m_mapColor.r / 2, m_mapColor.g / 2, m_mapColor.b / 2),
-            (320, 240));
+   if(bgalpha > 0) {
+      drawRect(0, 0, os.x, os.y,
+               color(int(0xFF * alpha * bgalpha), m_mapColor.r / 2, m_mapColor.g / 2, m_mapColor.b / 2),
+               (320, 240));
+   }
    // draw player box
-   drawRect(osx/2-2, osy/2-2, 4, 4,
-            color(0xFF, int(m_mapColor.r / 1.5), int(m_mapColor.g / 1.5), int(m_mapColor.b / 1.5)),
+   drawRect(os.x/2-2, os.y/2-2, 4, 4,
+            color(int(0xFF * alpha), int(m_mapColor.r / 1.5), int(m_mapColor.g / 1.5), int(m_mapColor.b / 1.5)),
             (320, 240));
    // if there are colored lines, initialize next color index
    let nextColor = m_mapColorIndices.size() ? m_mapColorIndices[0] : -1;
@@ -263,12 +273,15 @@ ui void drawMap(RenderEvent evt) {
          cr = m_mapColors[j];
          nextColor = ++j < m ? m_mapColorIndices[j] : -1;
       }
+      if(alpha < 1) {
+         cr = color(int(cr.a * alpha), cr.r, cr.g, cr.b);
+      }
       // get point elements and transform them to screen positions
-      let v1 = (      (m_mapDrawnPoints[i]     - m_mapTopLeft.x) / sx * osx,
-                osy - (m_mapDrawnPoints[i + 1] - m_mapTopLeft.y) / sy * osy);
-      let v2 = (      (m_mapDrawnPoints[i + 2] - m_mapTopLeft.x) / sx * osx,
-                osy - (m_mapDrawnPoints[i + 3] - m_mapTopLeft.y) / sy * osy);
+      let v1 = (       (m_mapDrawnPoints[i]     - tl.x) / s.x * os.x,
+                os.y - (m_mapDrawnPoints[i + 1] - tl.y) / s.y * os.y);
+      let v2 = (       (m_mapDrawnPoints[i + 2] - tl.x) / s.x * os.x,
+                os.y - (m_mapDrawnPoints[i + 3] - tl.y) / s.y * os.y);
       // draw line
-      drawLn(v1.x, v1.y, v2.x, v2.y, cr, (320, 240));
+      drawLn(v1.x, v1.y, v2.x, v2.y, cr, (320, 240), size: thickness);
    }
 }

@@ -5678,6 +5678,26 @@
    "Show ammo totals";
 "LITH_hud_itemcolor" =
    "Near-by item text color";
+"LITH_hud_mapscalex" =
+   "Horizontal scale";
+"LITH_hud_mapscaley" =
+   "Vertical scale";
+"LITH_hud_mapzoom" =
+   "Zoom level";
+"LITH_hud_mapthickness" =
+   "Line thickness";
+"LITH_hud_mapalpha" =
+   "Opacity";
+"LITH_hud_mapbgalpha" =
+   "Background opacity";
+"LITH_hud_mapcolor" =
+   "Custom color enabled";
+"LITH_hud_mapcolor_r" =
+   "Custom color red";
+"LITH_hud_mapcolor_g" =
+   "Custom color green";
+"LITH_hud_mapcolor_b" =
+   "Custom color blue";
 "LITH_light_b" =
    "$$LITH_BLUE_INTENSITY";
 "LITH_light_battery" =
@@ -6207,6 +6227,8 @@
    "\cnLanguage";
 "LITH_st_labl_log" =
    "\cnLogging";
+"LITH_st_labl_minimap" =
+   "\cnMini-map";
 "LITH_st_labl_misc" =
    "\cnMiscellaneous";
 "LITH_st_labl_personal" =
