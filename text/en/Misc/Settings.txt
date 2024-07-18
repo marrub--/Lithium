@@ -281,13 +281,13 @@ crosshair that follow the recoil. They're... juicy. Guess that's why.
 == \#st_name_color_121 | Sapphire
 == \#st_name_color_122 | Teal
 == \#st_name_color_123 | Class' Color
-== \#st_name_color_124 | $$\#CLASS_DARKLORD
-== \#st_name_color_125 | $$\#CLASS_MARINE
-== \#st_name_color_126 | $$\#CLASS_THOTH
-== \#st_name_color_127 | $$\#CLASS_ASSASSIN
-== \#st_name_color_128 | $$\#CLASS_INFORMANT
-== \#st_name_color_129 | $$\#CLASS_CYBERMAGE
-== \#st_name_color_130 | $$\#CLASS_WANDERER
+== \#st_name_color_124 | $$\#DarkLordPlayer
+== \#st_name_color_125 | $$\#MarinePlayer
+== \#st_name_color_126 | $$\#ThothPlayer
+== \#st_name_color_127 | $$\#AssassinPlayer
+== \#st_name_color_128 | $$\#InformantPlayer
+== \#st_name_color_129 | $$\#CyberMagePlayer
+== \#st_name_color_130 | $$\#WandererPlayer
 == \#st_name_color_131 | Lane Red
 == \#st_name_color_132 | Lane D. Orange
 == \#st_name_color_133 | Lane Orange
