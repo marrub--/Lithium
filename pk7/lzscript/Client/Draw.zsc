@@ -463,7 +463,7 @@ ui void drawRect(double px, double py, double sx, double sy, color cr, vector2 v
    Screen.drawShapeFill(color(0xFF, cr.b, cr.g, cr.r), cr.a/255.0, m_rectShape);
 }
 
-ui static void drawLn(double x1, double y1, double x2, double y2, color cr, vector2 vsz, uint vfl = 0) {
+ui static void drawLn(double x1, double y1, double x2, double y2, color cr, vector2 vsz, uint vfl = 0, double size = 1.0) {
    double ln1, ln2;
    ln1 = (x2 - x1, y2 - y1).length();
    if(ln1) {
@@ -471,7 +471,12 @@ ui static void drawLn(double x1, double y1, double x2, double y2, color cr, vect
       p1 = anyPos((x1, y1), vsz, vfl);
       p2 = anyPos((x2, y2), vsz, vfl);
       ln2 = (p2 - p1).length();
-      Screen.drawThickLine(p1.x, p1.y, p2.x, p2.y, ln2/ln1, cr, cr.a);
+      let scale = ln2/ln1 * size;
+      if(scale <= 1.05) {
+         Screen.drawLine(p1.x, p1.y, p2.x, p2.y, cr, cr.a);
+      } else {
+         Screen.drawThickLine(p1.x, p1.y, p2.x, p2.y, scale, cr, cr.a);
+      }
    }
 }
 
