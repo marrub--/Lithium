@@ -217,14 +217,16 @@ void tickMap() {
    int hudtype = Lith_UTIL.pData(_pdt_hudtype);
    m_mapColor =
       lith_hud_mapcolor ?
-      color(255, lith_hud_mapcolor_r, lith_hud_mapcolor_g, lith_hud_mapcolor_b) :
+      color(255,
+            lith_hud_mapcolor_r, lith_hud_mapcolor_g, lith_hud_mapcolor_b) :
       (hudtype != _hud_old ?
        color(Lith_UTIL.pData(_pdt_playercolor, hudtype)) :
        color(255, 255, 0, 0));
    // get map position and size
    let p = players[consolePlayer].mo;
-   let scale = (lith_hud_mapscalex, lith_hud_mapscaley);
-   let zoom  = 512 / max(lith_hud_mapzoom, 0.1);
+   let scale = (ceil(lith_hud_mapscalex * 100) / 100,
+                ceil(lith_hud_mapscaley * 100) / 100);
+   let zoom  = 512 / max(ceil(lith_hud_mapzoom * 100) / 100, 0.1);
    m_mapCenter = p.pos.xy;
    m_mapSizeHalf = (zoom * scale.x, zoom);
    m_mapTopLeft     = m_mapCenter - m_mapSizeHalf;
