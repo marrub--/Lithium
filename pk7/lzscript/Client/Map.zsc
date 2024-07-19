@@ -248,17 +248,19 @@ ui void drawMap(RenderEvent evt) {
    let tl = m_mapTopLeft;
    let s  = m_mapSizeHalf * 2;
    let os = m_mapOnScreenSize;
+   let p  = (3 + ceil(lith_hud_mapposx * 3200) / 10,
+             3 + ceil(lith_hud_mapposy * 2400) / 10);
    let thickness = lith_hud_mapthickness;
    let alpha     = lith_hud_mapalpha;
    let bgalpha   = lith_hud_mapbgalpha;
    // draw background
    if(bgalpha > 0) {
-      drawRect(0, 0, os.x, os.y,
+      drawRect(p.x, p.y, os.x, os.y,
                color(int(0xFF * alpha * bgalpha), m_mapColor.r / 2, m_mapColor.g / 2, m_mapColor.b / 2),
                (320, 240));
    }
    // draw player box
-   drawRect(os.x/2-2, os.y/2-2, 4, 4,
+   drawRect(p.x+os.x/2-2, p.y+os.y/2-2, 4, 4,
             color(int(0xFF * alpha), int(m_mapColor.r / 1.5), int(m_mapColor.g / 1.5), int(m_mapColor.b / 1.5)),
             (320, 240));
    // if there are colored lines, initialize next color index
@@ -284,6 +286,7 @@ ui void drawMap(RenderEvent evt) {
       let v2 = (       (m_mapDrawnPoints[i + 2] - tl.x) / s.x * os.x,
                 os.y - (m_mapDrawnPoints[i + 3] - tl.y) / s.y * os.y);
       // draw line
-      drawLn(v1.x, v1.y, v2.x, v2.y, cr, (320, 240), size: thickness);
+      drawLn(p.x+v1.x, p.y+v1.y, p.x+v2.x, p.y+v2.y, cr, (320, 240),
+             size: thickness);
    }
 }

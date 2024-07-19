@@ -5698,6 +5698,10 @@
    "Custom color green";
 "LITH_hud_mapcolor_b" =
    "Custom color blue";
+"LITH_hud_mapposx" =
+   "Horizontal position";
+"LITH_hud_mapposy" =
+   "Vertical position";
 "LITH_light_b" =
    "$$LITH_BLUE_INTENSITY";
 "LITH_light_battery" =

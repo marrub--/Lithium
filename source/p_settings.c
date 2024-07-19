@@ -237,6 +237,8 @@ static struct setting const st_gui[] = {
    s_integ("hud_mapcolor_r", 0, 255, 1, "byte"),
    s_integ("hud_mapcolor_g", 0, 255, 1, "byte"),
    s_integ("hud_mapcolor_b", 0, 255, 1, "byte"),
+   s_fixed("hud_mapposx", 0.0, 1.0, 0.05, "mult", .pclass = gI),
+   s_fixed("hud_mapposy", 0.0, 1.0, 0.05, "mult", .pclass = gI),
    s_label("st_labl_projected"),
    s_boole("hud_showdamage"),
    s_fixed("player_itemdispalpha", 0.0, 1.0, 0.05, "mult"),

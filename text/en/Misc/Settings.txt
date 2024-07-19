@@ -53,6 +53,8 @@ The color for most of the text in in-game GUIs.
 == \#hud_mapcolor_r | Custom color red
 == \#hud_mapcolor_g | Custom color green
 == \#hud_mapcolor_b | Custom color blue
+== \#hud_mapposx | Horizontal position
+== \#hud_mapposy | Vertical position
 == \#light_b | $$\#BLUE_INTENSITY
 == \#light_battery | Battery
 == \#light_g | $$\#GREEN_INTENSITY
