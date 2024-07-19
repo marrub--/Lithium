@@ -8,6 +8,10 @@ vector2 m_mapOnScreenSize;
 color m_mapColor;
 bool m_mapEnabled;
 int m_mapPortalGroup;
+textureId m_mapBorderTl, m_mapBorderT, m_mapBorderTr,
+          m_mapBorderL,                m_mapBorderR,
+          m_mapBorderBl, m_mapBorderB, m_mapBorderBr;
+int m_mapBorder;
 
 bool, vector2, vector2 collideLineAabb(vector2 p, vector2 dt, vector2 center, vector2 s2) {
    // get intersection time with box's edges
@@ -213,6 +217,21 @@ void tickMap() {
       return;
    }
    m_mapEnabled = true;
+   // get map border textures if needed
+   if(!m_mapBorderTl.isValid()) {
+      m_mapBorder = -1;
+   }
+   if(m_mapBorder != lith_hud_mapborder) {
+      m_mapBorder = lith_hud_mapborder;
+      m_mapBorderTl = getTex(":MapBorder:" .. m_mapBorder .. "Tl");
+      m_mapBorderT  = getTex(":MapBorder:" .. m_mapBorder .. "T");
+      m_mapBorderTr = getTex(":MapBorder:" .. m_mapBorder .. "Tr");
+      m_mapBorderL  = getTex(":MapBorder:" .. m_mapBorder .. "L");
+      m_mapBorderR  = getTex(":MapBorder:" .. m_mapBorder .. "R");
+      m_mapBorderBl = getTex(":MapBorder:" .. m_mapBorder .. "Bl");
+      m_mapBorderB  = getTex(":MapBorder:" .. m_mapBorder .. "B");
+      m_mapBorderBr = getTex(":MapBorder:" .. m_mapBorder .. "Br");
+   }
    // get map color based on hud type
    int hudtype = Lith_UTIL.pData(_pdt_hudtype);
    m_mapColor =
@@ -289,4 +308,91 @@ ui void drawMap(RenderEvent evt) {
       drawLn(p.x+v1.x, p.y+v1.y, p.x+v2.x, p.y+v2.y, cr, (320, 240),
              size: thickness);
    }
+   // draw border
+   let bc = m_mapColor;
+   if(lith_hud_mapbcolor) {
+      bc = color(255,
+                 lith_hud_mapbcolor_r,
+                 lith_hud_mapbcolor_g,
+                 lith_hud_mapbcolor_b);
+   }
+   let clip = anyPos(p+os, (320, 240), 0);
+   let cx = int(clip.x);
+   let cy = int(clip.y);
+   for(int x = 0; x < os.x; x += 3) {
+      Screen.drawTexture(m_mapBorderT, false, p.x+x, p.y-3,
+                         DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                         DTA_LegacyRenderStyle,STYLE_Stencil,
+                         DTA_FillColor,color(255,0,0,0),
+                         DTA_ClipRight,cx);
+      Screen.drawTexture(m_mapBorderB, false, p.x+x, p.y+os.y,
+                         DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                         DTA_LegacyRenderStyle,STYLE_Stencil,
+                         DTA_FillColor,color(255,0,0,0),
+                         DTA_ClipRight,cx);
+      Screen.drawTexture(m_mapBorderT, false, p.x+x, p.y-3,
+                         DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                         DTA_LegacyRenderStyle,STYLE_Shaded,
+                         DTA_FillColor,bc,
+                         DTA_ClipRight,cx);
+      Screen.drawTexture(m_mapBorderB, false, p.x+x, p.y+os.y,
+                         DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                         DTA_LegacyRenderStyle,STYLE_Shaded,
+                         DTA_FillColor,bc,
+                         DTA_ClipRight,cx);
+   }
+   for(int y = 0; y < os.y; y += 3) {
+      Screen.drawTexture(m_mapBorderL, false, p.x-3, p.y+y,
+                         DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                         DTA_LegacyRenderStyle,STYLE_Stencil,
+                         DTA_FillColor,color(255,0,0,0),
+                         DTA_ClipBottom,cy);
+      Screen.drawTexture(m_mapBorderR, false, p.x+os.x, p.y+y,
+                         DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                         DTA_LegacyRenderStyle,STYLE_Stencil,
+                         DTA_FillColor,color(255,0,0,0),
+                         DTA_ClipBottom,cy);
+      Screen.drawTexture(m_mapBorderL, false, p.x-3, p.y+y,
+                         DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                         DTA_LegacyRenderStyle,STYLE_Shaded,
+                         DTA_FillColor,bc,
+                         DTA_ClipBottom,cy);
+      Screen.drawTexture(m_mapBorderR, false, p.x+os.x, p.y+y,
+                         DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                         DTA_LegacyRenderStyle,STYLE_Shaded,
+                         DTA_FillColor,bc,
+                         DTA_ClipBottom,cy);
+   }
+   Screen.drawTexture(m_mapBorderTl, false, p.x-3, p.y-3,
+                      DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                      DTA_LegacyRenderStyle,STYLE_Stencil,
+                      DTA_FillColor,color(255,0,0,0));
+   Screen.drawTexture(m_mapBorderTr, false, p.x+os.x, p.y-3,
+                      DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                      DTA_LegacyRenderStyle,STYLE_Stencil,
+                      DTA_FillColor,color(255,0,0,0));
+   Screen.drawTexture(m_mapBorderBl, false, p.x-3, p.y+os.y-1,
+                      DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                      DTA_LegacyRenderStyle,STYLE_Stencil,
+                      DTA_FillColor,color(255,0,0,0));
+   Screen.drawTexture(m_mapBorderBr, false, p.x+os.x, p.y+os.y-1,
+                      DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                      DTA_LegacyRenderStyle,STYLE_Stencil,
+                      DTA_FillColor,color(255,0,0,0));
+   Screen.drawTexture(m_mapBorderTl, false, p.x-3, p.y-3,
+                      DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                      DTA_LegacyRenderStyle,STYLE_Shaded,
+                      DTA_FillColor,bc);
+   Screen.drawTexture(m_mapBorderTr, false, p.x+os.x, p.y-3,
+                      DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                      DTA_LegacyRenderStyle,STYLE_Shaded,
+                      DTA_FillColor,bc);
+   Screen.drawTexture(m_mapBorderBl, false, p.x-3, p.y+os.y-1,
+                      DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                      DTA_LegacyRenderStyle,STYLE_Shaded,
+                      DTA_FillColor,bc);
+   Screen.drawTexture(m_mapBorderBr, false, p.x+os.x, p.y+os.y-1,
+                      DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                      DTA_LegacyRenderStyle,STYLE_Shaded,
+                      DTA_FillColor,bc);
 }

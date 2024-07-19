@@ -5698,6 +5698,16 @@
    "Custom color green";
 "LITH_hud_mapcolor_b" =
    "Custom color blue";
+"LITH_hud_mapborder" =
+   "Border style";
+"LITH_hud_mapbcolor" =
+   "Custom border color enabled";
+"LITH_hud_mapbcolor_r" =
+   "Custom border color red";
+"LITH_hud_mapbcolor_g" =
+   "Custom border color green";
+"LITH_hud_mapbcolor_b" =
+   "Custom border color blue";
 "LITH_hud_mapposx" =
    "Horizontal position";
 "LITH_hud_mapposy" =
@@ -6199,6 +6209,12 @@
    "Chatter";
 "LITH_st_name_lspksnd_2" =
    "Discourse";
+"LITH_st_name_mapborder_-1" =
+   "Disable";
+"LITH_st_name_mapborder_0" =
+   "Default";
+"LITH_st_name_mapborder_1" =
+   "Round";
 "LITH_st_tab_gui" =
    "Interface";
 "LITH_st_tab_itm" =

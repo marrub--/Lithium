@@ -53,6 +53,11 @@ The color for most of the text in in-game GUIs.
 == \#hud_mapcolor_r | Custom color red
 == \#hud_mapcolor_g | Custom color green
 == \#hud_mapcolor_b | Custom color blue
+== \#hud_mapborder | Border style
+== \#hud_mapbcolor | Custom border color enabled
+== \#hud_mapbcolor_r | Custom border color red
+== \#hud_mapbcolor_g | Custom border color green
+== \#hud_mapbcolor_b | Custom border color blue
 == \#hud_mapposx | Horizontal position
 == \#hud_mapposy | Vertical position
 == \#light_b | $$\#BLUE_INTENSITY
@@ -386,6 +391,10 @@ crosshair that follow the recoil. They're... juicy. Guess that's why.
 == \#st_name_lspksnd_0 | Navigator
 == \#st_name_lspksnd_1 | Chatter
 == \#st_name_lspksnd_2 | Discourse
+
+== \#st_name_mapborder_-1 | Disable
+== \#st_name_mapborder_0  | Default
+== \#st_name_mapborder_1  | Round
 
 ## Tab Labels ════════════════════════════════════════════════════════════════╕
 == \#st_tab_gui | Interface
