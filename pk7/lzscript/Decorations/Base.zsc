@@ -6,7 +6,7 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_SwitchableDecor : Actor {
+class Lith_SwitchableDecor : Actor abstract {
    default {
       Mass int.max;
       Activation AF_DEFAULT|AF_NODEATHSPECIAL|AF_SWITCH|AF_DEACTIVATE;
@@ -67,7 +67,7 @@ class Lith_SwitchableDecor : Actor {
    }
 }
 
-class Lith_DestructableSwitchDecor : Lith_SwitchableDecor {
+class Lith_DestructableSwitchDecor : Lith_SwitchableDecor abstract {
    default {
       +SHOOTABLE
       +NOBLOOD
@@ -75,7 +75,7 @@ class Lith_DestructableSwitchDecor : Lith_SwitchableDecor {
    }
 }
 
-class Lith_FlareDecor : Lith_DestructableSwitchDecor {
+class Lith_FlareDecor : Lith_DestructableSwitchDecor abstract {
    meta class<Actor> m_Type;
    Actor m_Flare;
 
@@ -93,7 +93,7 @@ class Lith_FlareDecor : Lith_DestructableSwitchDecor {
    }
 }
 
-class Lith_DecorFlare : Actor {
+class Lith_DecorFlare : Actor abstract {
    default {
       Radius 2;
       Renderstyle "Add";
