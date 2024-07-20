@@ -79,14 +79,8 @@ presets {
 // │              match the filter, not just partially. Useful for mod        │
 // │              compatibility.                                              │
 // │ - nocase  :: The filter will be case insensitive.                        │
-// │ - dark    :: Dark enemies are corrupted by Hell. Can you save them?      │
-// │              Either way, they'll have six stars, and higher level        │
-// │              scaling. Not recommended to be used by other mods, but it   │
-// │              will work.                                                  │
-// │ - angelic :: Angelic enemies are beyond saving and only serve their own  │
-// │              will, the will of ultimate consumption. They have seven     │
-// │              stars, and extreme level scaling. Not recommended to be     │
-// │              used by other mods, but it will work.                       │
+// │ - dark    :: Not to be used outside of Lithium.                          │
+// │ - angelic :: Not to be used outside of Lithium.                          │
 // │                                                                          │
 // │ The right-most value will always override anything to the left. For      │
 // │ instance, if you have a monster using a preset, and then set the         │
@@ -136,16 +130,9 @@ presets {
 // │                    Mastermind replacements.                              │
 // │ - cyberdemon    :: Huge rocket-flinging oaf. Might stomp you. (Oh my.)   │
 // │                    This is a boss. It must mark Cyberdemon replacements. │
-// │ - phantom       :: A phantom. Do not use this in other mods please! It   │
-// │                    will probably break something.                        │
-// │ - angel         :: An angelic enemy. Not actually related to Heaven,     │
-// │                    just milky dark energy boys. Be prepared for death if │
-// │                    you use this in another mod. (It probably won't       │
-// │                    break.)                                               │
-// │ - darkone       :: A being of pure dark energy. Harbingers of Ragnarok.  │
-// │                    Be prepared for your dreams to become corrupted if    │
-// │                    you use this in another mod. (It probably won't       │
-// │                    break.)                                               │
+// │ - phantom       :: Not to be used outside of Lithium.                    │
+// │ - angel         :: Not to be used outside of Lithium.                    │
+// │ - darkone       :: Not to be used outside of Lithium.                    │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
 // Base Games ════════════════════════════════════════════════════════════════╕
