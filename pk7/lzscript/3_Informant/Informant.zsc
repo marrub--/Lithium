@@ -38,8 +38,6 @@ class Lith_InformantPlayer : Lith_Player
 
    override void tick()
    {
-      if(m_iFrames) m_iFrames--;
-
       if(health > 0)
       {
          if(m_dodgeDbc)

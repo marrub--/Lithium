@@ -110,6 +110,7 @@ void Lith_ItemVacuum() {
 }
 
 void lith_preTick() {
+   if(m_iFrames) --m_iFrames;
    if(m_wasDamaged) {
       --m_wasDamaged;
    } else if((pW | pT) & (1 << m_pclass) &&
