@@ -81,16 +81,16 @@ enum GameFlags {
    _gamef_extrahard = 1 << 0,
 }
 
+enum StatNums {
+   _stat_environment = Thinker.STAT_USER + 7,
+}
+
 string m_obituary;
 name m_dmgType;
 bool m_dmgWorld;
 int m_bossLevel;
 array<Actor> m_bossBabies;
 int m_bossDeathInit;
-Lith_LightThinker m_light;
-Lith_RainThinker m_rain;
-Lith_AirThinker m_air;
-Lith_SkyThinker m_sky;
 int m_gameFlags;
 
 override void onRegister() {
@@ -122,13 +122,13 @@ override void worldLoaded(WorldEvent ev) {
          }
       }
    }
-   m_sky = Lith_SkyThinker.create();
+   Lith_SkyThinker.create();
    acs_executeWithResult(lsc_worldopen);
    setUpEnvironment();
 }
 
 static void UpdateSky() {
-   instance().m_sky.replaceSky();
+   Lith_SkyThinker.get().replaceSky();
 }
 
 void setUpEnvironment() {
@@ -141,9 +141,9 @@ void setUpEnvironment() {
    if(Lith_UTIL.pData(_pdt_mflg, _mflg_vacuum)) {
       level.gravity *= 0.2;
    }
-   m_air   = Lith_AirThinker.create();
-   m_rain  = Lith_RainThinker.create(m_air);
-   m_light = Lith_LightThinker.create(m_sky, m_air);
+   Lith_AirThinker.create();
+   Lith_RainThinker.create();
+   Lith_LightThinker.create();
 }
 
 void setUpEvilSector(Sector sec) {
@@ -520,8 +520,8 @@ static int EDataI(Actor mo, int info) {
    case _edt_viewheight:   return int(Lith_Player(mo).viewHeight);
    case _edt_attackheight: return int(getAttackHeight(mo));
    case _edt_lightning:    return level.info.flags & LEVEL_STARTLIGHTNING;
-   case _edt_windspeed:    return int(instance().m_air.m_speed);
-   case _edt_windangle:    return int(Lith_UTIL.constDeg(instance().m_air.m_angle));
+   case _edt_windspeed:    return int(Lith_AirThinker.get().m_speed);
+   case _edt_windangle:    return int(Lith_UTIL.constDeg(Lith_AirThinker.get().m_angle));
 
    case _edt_chex:    return gameinfo.gametype & GAME_Chex    != 0;
    case _edt_heretic: return gameinfo.gametype & GAME_Heretic != 0;

@@ -44,6 +44,7 @@ color     m_cloudsColor;
 
 static Lith_SkyThinker create() {
    let th = new('Lith_SkyThinker');
+   th.changeStatNum(Lith_HERMES._stat_environment);
    th.m_origSky1 = level.skyTexture1;
    th.m_origSky2 = level.skyTexture2;
    th.m_mode = _msky_nochange;
@@ -52,12 +53,19 @@ static Lith_SkyThinker create() {
    return th;
 }
 
+clearScope static Lith_SkyThinker get() {
+   foreach(th : ThinkerIterator.create('Lith_SkyThinker', Lith_HERMES._stat_environment)) {
+      return Lith_SkyThinker(th);
+   }
+   return null;
+}
+
 /* callbacks */
 override void tick() {
    if(m_mode == _msky_nochange) {
       return;
    }
-   m_fogColor = Lith_HERMES.instance().m_air.m_fogColor;
+   m_fogColor = Lith_AirThinker.get().m_fogColor;
    if(level.skyTexture1 != m_setSky1 || level.skyTexture2 != m_setSky2) {
       if(level.skyTexture1 != m_setSky1) {
          m_origSky1 = level.skyTexture1;

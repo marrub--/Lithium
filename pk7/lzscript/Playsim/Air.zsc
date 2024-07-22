@@ -9,6 +9,7 @@ color   m_fogColor;
 
 static Lith_AirThinker create() {
    let th = new('Lith_AirThinker');
+   th.changeStatNum(Lith_HERMES._stat_environment);
    th.m_maxSpeed  = Lith_UTIL.pData(_pdt_windspeed);
    th.m_player    = players[consolePlayer].mo;
    th.m_angle     =
@@ -17,6 +18,13 @@ static Lith_AirThinker create() {
       th.m_player.a_startSound("amb/wind", lch_weather1, CHANF_LOOP, 0.001, ATTN_NONE);
    }
    return th;
+}
+
+clearScope static Lith_AirThinker get() {
+   foreach(th : ThinkerIterator.create('Lith_AirThinker', Lith_HERMES._stat_environment)) {
+      return Lith_AirThinker(th);
+   }
+   return null;
 }
 
 override void tick() {

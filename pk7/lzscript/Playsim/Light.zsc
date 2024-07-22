@@ -13,13 +13,9 @@ array<int16> m_flashes;
 array<int16> m_original;
 array<int16> m_current;
 
-Lith_SkyThinker m_sky;
-Lith_AirThinker m_air;
-
-static Lith_LightThinker create(Lith_SkyThinker sky, Lith_AirThinker air) {
+static Lith_LightThinker create() {
    let th = new("Lith_LightThinker");
-   th.m_sky = sky;
-   th.m_air = air;
+   th.changeStatNum(Lith_HERMES._stat_environment);
    for(int i = 0, j = level.sectors.size(); i < j; ++i) {
       th.m_flashes.push(int16.max);
       th.m_original.push(level.sectors[i].lightLevel);
@@ -34,6 +30,13 @@ static Lith_LightThinker create(Lith_SkyThinker sky, Lith_AirThinker air) {
       th.m_nextSnd = -1;
    }
    return th;
+}
+
+clearScope static Lith_LightThinker get() {
+   foreach(th : ThinkerIterator.create('Lith_LightThinker', Lith_HERMES._stat_environment)) {
+      return Lith_LightThinker(th);
+   }
+   return null;
 }
 
 override void tick() {
@@ -145,7 +148,7 @@ void setNextFlash() {
    m_len   = random[lith_light]( 8, 40);
    m_speed = random[lith_light](-2, -8);
    m_next += m_time;
-   m_sky.setSkyFlash(m_next, m_len);
+   Lith_SkyThinker.get().setSkyFlash(m_next, m_len);
 }
 
 /* EOF */
