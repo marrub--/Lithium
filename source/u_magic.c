@@ -108,7 +108,7 @@ void SetMagicUI(bool on) {
    }
 }
 
-void Upgr_Magic_Update(void) {
+Decl_Update void Upgr_Magic_Update(void) {
    k32 manaperc = pl.mana / (k32)pl.manamax;
 
    if(udata.manaperc < 1 && manaperc == 1) {
@@ -145,7 +145,7 @@ void Upgr_Magic_Update(void) {
    }
 }
 
-void Upgr_Magic_Render(void) {
+Decl_Render void Upgr_Magic_Render(void) {
    if(!pl.hudenabled) return;
    i32 hprc = ceilk(mink(udata.manaperc,        0.5k) * 2 * 62);
    i32 fprc = ceilk(maxk(udata.manaperc - 0.5k, 0.0k) * 2 * 62);

@@ -44,14 +44,14 @@ void RA_Give(cstr name, i32 n) {
    InvGive(strp(_l(OBJ "RA_"), _p(name), _p(n)), 1);
 }
 
-void Upgr_ReactArmor_Deactivate(void) {
+Decl_Deactivate void Upgr_ReactArmor_Deactivate(void) {
    udata.activearmor = 0;
 
    RA_Take(1);
    RA_Take(2);
 }
 
-void Upgr_ReactArmor_Render(void) {
+Decl_Render void Upgr_ReactArmor_Render(void) {
    if(udata.activearmor && CVarGetI(sc_hud_showarmorind)) {
       PrintSprite(sp_HUD_M_SplitLeft, pl.hudlpos+12,1, 226,2);
       BeginPrintStrN(ArmorNames[udata.activearmor - 1].abbr, 3);

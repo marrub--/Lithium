@@ -12,16 +12,16 @@
 
 #include "u_all.h"
 
-void Upgr_UNCEUNCE_Activate(void) {
+Decl_Activate void Upgr_UNCEUNCE_Activate(void) {
    ACS_SetMusic(sp_lmusic_Unce);
 }
 
-void Upgr_UNCEUNCE_Deactivate(void) {
+Decl_Deactivate void Upgr_UNCEUNCE_Deactivate(void) {
    ACS_SetMusic(sp_star);
    ACS_FadeTo(0, 0, 0, 0, 0);
 }
 
-void Upgr_UNCEUNCE_Update(void) {
+Decl_Update void Upgr_UNCEUNCE_Update(void) {
    k32 reeeed = ACS_Sin(ACS_Timer() / 35.0) + 1.0 / 2.0;
    k32 greeen = ACS_Cos(ACS_Timer() / 24.0) + 1.0 / 2.0;
    k32 bluuue = ACS_Sin(ACS_Timer() / 13.0) + 1.0 / 2.0;

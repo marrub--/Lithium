@@ -20,7 +20,7 @@ enum {
    _uptic_count_2 = countof(sa_subwep_up_2),
 };
 
-void Upgr_Subweapons_Update(void) {
+Decl_Update void Upgr_Subweapons_Update(void) {
    udata.charge_max = 120 - attr_refchargebuff();
    if(udata.uptics) {
       --udata.uptics;
@@ -48,7 +48,7 @@ void Upgr_Subweapons_Update(void) {
    }
 }
 
-void Upgr_Subweapons_Render(void) {
+Decl_Render void Upgr_Subweapons_Render(void) {
    if(!pl.hudenabled) return;
    if(!get_bit(udata.have, _subw_fist)) {
       PrintSprite(sp_SubWepBack, pl.hudhppos+1,1, 239,2);
@@ -79,7 +79,7 @@ void Upgr_Subweapons_Render(void) {
    }
 }
 
-void Upgr_Subweapons_Enter(struct ugprade *upgr) {
+Decl_Enter void Upgr_Subweapons_Enter(struct ugprade *upgr) {
    udata.shots = 2;
    #ifndef NDEBUG
    if(dbgflags(dbgf_items)) {

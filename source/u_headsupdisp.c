@@ -469,13 +469,13 @@ static void HUD_BottomLeft(void) {
    }
 }
 
-void Upgr_HeadsUpDisp_Activate(void) {
+Decl_Activate void Upgr_HeadsUpDisp_Activate(void) {
    lerpscr_init(&udata.score,     pl.score,     4);
    lerpscr_init(&udata.health,    pl.health,    1);
    lerpscr_init(&udata.overdrive, pl.overdrive, 1);
 }
 
-void Upgr_HeadsUpDisp_Render(void) {
+Decl_Render void Upgr_HeadsUpDisp_Render(void) {
    if(!pl.hudenabled) {
       return;
    }

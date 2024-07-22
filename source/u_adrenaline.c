@@ -24,7 +24,7 @@ void DoAdrenaline(void) {
    UnfreezeTime(true);
 }
 
-void Upgr_Adrenaline_Update(void) {
+Decl_Update void Upgr_Adrenaline_Update(void) {
    if(!has_status(so_StatAdrenalineCharging) &&
       !has_status(so_StatAdrenalineCharged) &&
       !has_status(so_StatAdrenaline))
@@ -38,7 +38,7 @@ void Upgr_Adrenaline_Update(void) {
    }
 }
 
-void Upgr_Adrenaline_Deactivate(void) {
+Decl_Deactivate void Upgr_Adrenaline_Deactivate(void) {
    rem_status(so_StatAdrenaline);
    rem_status(so_StatAdrenalineCharging);
    rem_status(so_StatAdrenalineCharged);

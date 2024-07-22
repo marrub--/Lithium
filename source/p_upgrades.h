@@ -35,7 +35,12 @@ extern struct upgrade upgrinfo[UPGR_MAX];
 #define E
 #define R
 #define Case(n)
-#define Fn(n, cb) void Upgr_##n##_##cb(void);
+#define Fn(n, cb) Decl_##cb void Upgr_##n##_##cb(void);
+#define Decl_Activate
+#define Decl_Deactivate
+#define Decl_Update script
+#define Decl_Enter
+#define Decl_Render
 #include "u_func.h"
 #undef Fn
 #undef Case

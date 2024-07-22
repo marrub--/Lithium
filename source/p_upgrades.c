@@ -19,55 +19,27 @@ bool Upgr_CanBuy(struct upgrade const *upgr) {
 
 bool Upgr_Give(struct upgrade const *upgr, i32 tid) {
    SetMembI(tid, sm_UpgradeId, upgr->key);
-
    switch(upgr->category) {
    case _uc_body: SetMembI(tid, sm_UpgradeBody, true); break;
    case _uc_weap: SetMembI(tid, sm_UpgradeWeap, true); break;
    default:       SetMembI(tid, sm_UpgradeExtr, true); break;
    }
-
    return true;
 }
 
 #define Fn(n, cb) Upgr_##n##_##cb();
 #define Case(n) break; case UPGR_##n:;
 
-static
-void Upgr_Activate(i32 key) {
+static void Upgr_Activate(i32 key) {
    switch(key) {
    #define A
    #include "u_func.h"
    }
 }
 
-static
-void Upgr_Deactivate(i32 key) {
+static void Upgr_Deactivate(i32 key) {
    switch(key) {
    #define D
-   #include "u_func.h"
-   }
-}
-
-script static
-void Upgr_Update(i32 key) {
-   switch(key) {
-   #define U
-   #include "u_func.h"
-   }
-}
-
-static
-void Upgr_Enter(i32 key) {
-   switch(key) {
-   #define E
-   #include "u_func.h"
-   }
-}
-
-static
-void Upgr_Render(i32 key) {
-   switch(key) {
-   #define R
    #include "u_func.h"
    }
 }
@@ -85,10 +57,8 @@ cstr Upgr_EnumToStr(i32 n) {
 
 void P_Upg_SetOwned(struct upgrade *upgr) {
    if(get_bit(upgr->flags, _ug_owned)) return;
-
    set_bit(upgr->flags, _ug_owned);
    pl.upgradesowned++;
-
    if(upgr->category == _uc_body && upgr->cost == 0) {
       P_Upg_Toggle(upgr);
    }
@@ -96,7 +66,6 @@ void P_Upg_SetOwned(struct upgrade *upgr) {
 
 script void P_Upg_PInit(void) {
    fastmemcpy(pl.upgrades, upgrinfo, sizeof pl.upgrades);
-
    for(i32 i = 0; i < UPGR_MAX; ++i) {
       struct upgrade *upgr = &pl.upgrades[i];
       if(get_bit(upgr->pclass, pl.pclass)) {
@@ -126,14 +95,19 @@ void P_Upg_PMInit(void) {
    }
 }
 
+#define Fn(n, cb) \
+   if(get_bit(pl.upgrades[UPGR_##n].flags, _ug_available) && \
+      get_bit(pl.upgrades[UPGR_##n].flags, _ug_active)) \
+   { \
+      Upgr_##n##_##cb(); \
+   }
+#define Case(n)
+
 static script void P_Upg_pTickPst(void) {
    SetSize(320, 240);
    ClearClip();
-   for_upgrade(upgr) {
-      if(get_bit(upgr->flags, _ug_active)) {
-         Upgr_Render(upgr->key);
-      }
-   }
+   #define R
+   #include "u_func.h"
 }
 
 script void P_Upg_PTick(void) {
@@ -141,32 +115,26 @@ script void P_Upg_PTick(void) {
       pl.hudenabled = false;
    } else {
       pl.hudenabled = false;
-
       for_upgrade(upgr) {
          if(get_bit(upgr->flags, _ug_active) && upgr->group == 10) {
             pl.hudenabled = true;
          }
       }
    }
-
    if(!Paused) {
-      for_upgrade(upgr) {
-         if(get_bit(upgr->flags, _ug_active)) {
-            Upgr_Update(upgr->key);
-         }
-      }
+      #define U
+      #include "u_func.h"
    }
-
    P_Upg_pTickPst();
 }
 
 void P_Upg_Enter(void) {
-   for_upgrade(upgr) {
-      if(get_bit(upgr->flags, _ug_active)) {
-         Upgr_Enter(upgr->key);
-      }
-   }
+   #define E
+   #include "u_func.h"
 }
+
+#undef Fn
+#undef Case
 
 i32 P_Upg_CheckReqs(struct upgrade *upgr) {
    i32 ret = 0;

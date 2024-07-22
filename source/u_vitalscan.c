@@ -18,7 +18,7 @@
 
 #define udata pl.upgrdata.vitalscan
 
-void Upgr_VitalScan_Update(void) {
+Decl_Update void Upgr_VitalScan_Update(void) {
    ACS_SetActivator(0, AAPTR_PLAYER_GETTARGET);
 
    bool six = ACS_StrCmp(ACS_GetActorClass(0), so_RLDeVileSix, 11) == 0;
@@ -119,7 +119,7 @@ void Upgr_VitalScan_Update(void) {
    }
 }
 
-void Upgr_VitalScan_Render(void) {
+Decl_Render void Upgr_VitalScan_Render(void) {
    if(!pl.hudenabled || !udata.target) return;
 
    if(udata.hdtime == 30) SetFade(fid_vscan, 10, 12);

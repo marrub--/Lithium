@@ -16,11 +16,11 @@
 
 #define udata pl.upgrdata.zoom
 
-void Upgr_Zoom_Deactivate(void) {
+Decl_Deactivate void Upgr_Zoom_Deactivate(void) {
    udata.zoom = udata.vzoom = 0;
 }
 
-void Upgr_Zoom_Update(void) {
+Decl_Update void Upgr_Zoom_Update(void) {
    if(udata.zoom == 0 && udata.vzoom == 0) return;
 
    if(udata.vzoom < udata.zoom) {
@@ -38,7 +38,7 @@ void Upgr_Zoom_Update(void) {
       udata.vzoom = udata.zoom;
 }
 
-void Upgr_Zoom_Render(void) {
+Decl_Render void Upgr_Zoom_Render(void) {
    if(udata.vzoom) {
       PrintSprite(sp_HUD_Vignette, 160,0, 120,0, _u_alpha, 0.3);
 

@@ -86,10 +86,10 @@ static void P_lightUpdate(void) {
    }
 }
 
-void Upgr_Flashlight_Activate(void) {P_lightOff();}
-void Upgr_Flashlight_Update(void)   {P_lightUpdate();}
-void Upgr_Lightspark_Activate(void) {P_lightOff();}
-void Upgr_Lightspark_Update(void)   {P_lightUpdate();}
+Decl_Activate void Upgr_Flashlight_Activate(void) {P_lightOff();}
+Decl_Update   void Upgr_Flashlight_Update(void)   {P_lightUpdate();}
+Decl_Activate void Upgr_Lightspark_Activate(void) {P_lightOff();}
+Decl_Update   void Upgr_Lightspark_Update(void)   {P_lightUpdate();}
 
 script_str type("net") ext("ACS") addr(OBJ "KeyLight")
 void Z_KeyLight(void) {

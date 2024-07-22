@@ -14,15 +14,15 @@
 
 #define udata pl.upgrdata.seven7s
 
-void Upgr_Seven7s_Activate(void) {
+Decl_Activate void Upgr_Seven7s_Activate(void) {
    SetGravity(0, 0.01);
 }
 
-void Upgr_Seven7s_Deactivate(void) {
+Decl_Deactivate void Upgr_Seven7s_Deactivate(void) {
    SetGravity(0, 1.0);
 }
 
-void Upgr_Seven7s_Update(void) {
+Decl_Update void Upgr_Seven7s_Update(void) {
    k32 velx, vely, velz = pl.velz > 0 ? pl.velz : -2;
    if(pl.velz != 0) {
       if(!udata.in_air) {

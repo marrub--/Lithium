@@ -12,11 +12,11 @@
 
 #include "u_all.h"
 
-void Upgr_Rifle_A_Deactivate(void) {
+Decl_Deactivate void Upgr_Rifle_A_Deactivate(void) {
    pl.riflefiremode = 0;
 }
 
-void Upgr_Rifle_A_Render(void) {
+Decl_Render void Upgr_Rifle_A_Render(void) {
    if(P_Wep_CurType() != weapon_m_rifle) return;
    if(CVarGetI(sc_weapons_riflescope) && pl.riflefiremode == rifle_firemode_burst) {
       ACS_SetCameraToTexture(0, sp_LITHCAM1, 34);

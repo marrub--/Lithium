@@ -27,17 +27,17 @@ void Z_DodgeView(void) {
    SetViewHeight(0, vh);
 }
 
-void Upgr_ReflexWetw_Activate(void) {
+Decl_Activate void Upgr_ReflexWetw_Activate(void) {
    udata.charge = CHARGE_MAX;
    udata.leaped = 0;
    SetAirControl(AIR_CONTROL);
 }
 
-void Upgr_ReflexWetw_Deactivate(void) {
+Decl_Deactivate void Upgr_ReflexWetw_Deactivate(void) {
    SetAirControl(-AIR_CONTROL);
 }
 
-void Upgr_ReflexWetw_Update(void) {
+Decl_Update void Upgr_ReflexWetw_Update(void) {
    pl.speedmul += 30;
 
    if(udata.leaped == 1) {

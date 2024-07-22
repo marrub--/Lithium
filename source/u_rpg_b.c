@@ -24,7 +24,7 @@ i32 CheckTarget(void) {
    }
 }
 
-void Upgr_RPG_B_Update(void) {
+Decl_Update void Upgr_RPG_B_Update(void) {
    if(P_Wep_CurType() == weapon_m_rocket) {
       if(P_ButtonHeld(BT_ALTATTACK)) {
          i32 id;
