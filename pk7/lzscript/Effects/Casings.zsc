@@ -189,6 +189,7 @@ default {
 }
 
 bool m_lessparticles;
+int m_done;
 
 override void postBeginPlay() {
    super.postBeginPlay();
@@ -196,6 +197,16 @@ override void postBeginPlay() {
       destroy();
    } else {
       m_lessparticles = lith_sv_lessparticles;
+   }
+}
+
+override void tick() {
+   if(m_done) {
+      if(lith_weapons_casingfadeout && --m_done == 0) {
+         setState(resolveState("DoneFade"));
+      }
+   } else {
+      super.tick();
    }
 }
 
@@ -208,10 +219,9 @@ void lith_spawnSmoke(double x, double y, double z, double xv = 0, double yv = 0,
 
 states {
 Done:
-   #### # -1 A_JumpIf(lith_weapons_casingfadeout, "DoneFade");
+   #### # -1 {m_done = 300;}
    stop;
 DoneFade:
-   #### # 300;
    #### # 1 A_FadeOut;
    wait;
 }
