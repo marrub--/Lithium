@@ -121,7 +121,6 @@ override void worldLoaded(WorldEvent ev) {
             m_bossLevel = boss_other;
          }
       }
-      level.nextMap = "LITHEND";
    }
    m_sky = Lith_SkyThinker.create();
    acs_executeWithResult(lsc_worldopen);
