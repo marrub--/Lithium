@@ -6,28 +6,19 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_CasingSmoke : Actor {
-   default {
-      RenderStyle "Add";
-      Alpha 0.6;
-      Scale 0.02;
-      +NOINTERACTION
-      +NOTELEPORT
-      +THRUACTORS
-      +DROPOFF
-      +FLOORCLIP
-      +FORCEXYBILLBOARD
+class Lith_CasingSmoke : Lith_GunSmoke {
+   override void postBeginPlay() {
+      super.postBeginPlay();
+      alpha = 0.6;
+      scale = (0.02, 0.02);
+      texture = TexMan.checkForTexture("LITHSM03", TexMan.Type_Any);
    }
-
    override void tick() {
-      Lith_UTIL.stateTick(self);
-   }
-
-   states {
-   Spawn:
-      #ESM C random(2, 5);
-      #ESM DEFGH 4 A_FadeOut(FRandom(0.05, 0.15));
-      stop;
+      super.tick();
+      if(!isFrozen()) {
+         /**/ if(m_ticks == 21) destroy();
+         else if(m_ticks > 3)   alpha -= fRandom[Lith_GunSmoke](0.05, 0.15);
+      }
    }
 }
 
@@ -210,8 +201,9 @@ override void postBeginPlay() {
 
 void lith_spawnSmoke(double x, double y, double z, double xv = 0, double yv = 0, double zv = 0) {
    if(m_lessparticles) return;
-   let mo = spawn("Lith_CasingSmoke", pos + (x, y, z));
-   mo.vel = (xv, yv, zv);
+   let smoke = level.spawnVisualThinker('Lith_CasingSmoke');
+   smoke.pos = pos + (x, y, z);
+   smoke.vel = (xv, yv, zv);
 }
 
 states {

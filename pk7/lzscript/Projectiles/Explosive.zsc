@@ -7,8 +7,11 @@
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
 class Lith_ExplosionAfterSmoke : Lith_BulletAfterSmoke {
-   default {
-      Alpha 0.1;
+   double m_fxAmount;
+   override void postBeginPlay() {
+      super.postBeginPlay();
+      scale *= m_fxAmount;
+      alpha = 0.1;
    }
 }
 
@@ -94,14 +97,15 @@ state lith_a_doExplosion() {
    }
 
    if(frandom[lith_explosionsmoke](0, 1.0) < m_fxAmount) {
-      let [_, smoke] = a_spawnItemEx("Lith_ExplosionAfterSmoke",
-                                     fRandom(-1,1) * emberRadius,
-                                     fRandom(-1,1) * emberRadius,
-                                     fRandom(-2,2) * emberRadius,
-                                     fRandom(-0.5,0.5) * emberRadius,
-                                     fRandom(-0.5,0.5) * emberRadius,
-                                     fRandom(-0.2,0.2) * emberRadius);
-      smoke.scale *= m_fxAmount;
+      let smoke = Lith_ExplosionAfterSmoke(level.spawnVisualThinker('Lith_ExplosionAfterSmoke'));
+      smoke.pos = pos +
+         (fRandom(-1,1) * emberRadius,
+          fRandom(-1,1) * emberRadius,
+          fRandom(-2,2) * emberRadius);
+      smoke.vel = (fRandom(-0.5,0.5) * emberRadius,
+                   fRandom(-0.5,0.5) * emberRadius,
+                   fRandom(-0.2,0.2) * emberRadius);
+      smoke.m_fxAmount = m_fxAmount;
    }
 
    bNoGravity = true;

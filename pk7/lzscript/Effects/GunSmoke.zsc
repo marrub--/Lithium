@@ -7,41 +7,28 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_GunSmoke : Actor {
-   default {
-      RenderStyle "Add";
-      Alpha 0.5;
-      Speed 20;
-      Radius 3;
-      Height 3;
-      Scale 0.3;
-      Projectile;
-      +NoInteraction
-      +ThruActors
-      +ForceXyBillboard
-   }
+class Lith_GunSmoke : VisualThinker {
+   int m_ticks;
+   bool m_noTicker;
    override void postBeginPlay() {
       super.postBeginPlay();
+      setRenderStyle(STYLE_Add);
       alpha = fRandom[Lith_GunSmoke](.1, .4);
-      vel *= .01;
-      scale *= fRandom[Lith_GunSmoke](.07, .14);
-      if(random[Lith_GunSmoke](0, 255) < 128) scale.x = -scale.x;
+      scale = (0.3, 0.3) * fRandom[Lith_GunSmoke](.07, .14);
+      if(random[Lith_GunSmoke](0, 255) < 128) bXFlip = true;
+      flags |= SPF_LOCAL_ANIM;
+      texture = TexMan.checkForTexture("LITHSM01", TexMan.Type_Any);
    }
    override void tick() {
-      setOrigin(pos + vel, true);
-      a_fadeOut(0.01/5);
-      Lith_UTIL.stateTick(self);
-   }
-   states {
-   Spawn:
-      #ESM ABCDEFGHIJKLMNOPQ 5;
-      stop;
+      super.tick();
+      if(!m_noTicker && !isFrozen() && ++m_ticks == 84) destroy();
    }
 }
 
 class Lith_GunSmokeBig : Lith_GunSmoke {
-   default {
-      Scale 0.6;
+   override void postBeginPlay() {
+      super.postBeginPlay();
+      scale *= 2;
    }
 }
 
@@ -55,10 +42,17 @@ class Lith_GunSmokeEmitter : Actor {
       +ThruActors
       +NoClip
    }
-   const flags = SXF_NOCHECKPOSITION|SXF_ORIGINATOR|SXF_ABSOLUTEVELOCITY;
+   void lith_createSmoke(class<Lith_GunSmoke> cl, vector3 spread, vector3 vel) {
+      let smoke = level.spawnVisualThinker(cl);
+      smoke.pos = pos +
+         (fRandom[Lith_GunSmoke](-spread.x,spread.x),
+          fRandom[Lith_GunSmoke](-spread.y,spread.y),
+          fRandom[Lith_GunSmoke](-spread.z,spread.z));
+      smoke.vel = vel * 0.01;
+   }
    override void postBeginPlay() {
       for(int i = 0, n = random[Lith_GunSmoke](5, 7); i < n; i++) {
-         A_SpawnItemEx("Lith_GunSmoke", fRandom[Lith_GunSmoke](-1,1),fRandom[Lith_GunSmoke](-1,1),fRandom[Lith_GunSmoke](-1,1), zvel: vel.z, flags: flags);
+         lith_createSmoke("Lith_GunSmoke", (1, 1, 1), (0, 0, vel.z));
       }
       destroy();
    }
@@ -76,13 +70,13 @@ class Lith_GunSmokeAndSparks : Lith_GunSmokeEmitter {
       Lith_GunSmokeAndSparks.Spread 1;
    }
    meta int m_part;
-   meta class<Actor> m_class;
+   meta class<Lith_GunSmoke> m_class;
    meta double m_spread;
    property Particles: m_part;
    property SmokeClass: m_class;
    property Spread: m_spread;
    void lith_spawnSmoke(double vx, double vy) {
-      A_SpawnItemEx(m_class, fRandom[Lith_GunSmoke](-4,4)*m_spread,fRandom[Lith_GunSmoke](-1,1)*m_spread,fRandom[Lith_GunSmoke](-2,2)*m_spread, vel.x + vx,vel.y + vy,vel.z, 0, flags);
+      lith_createSmoke(m_class, (4, 1, 2), (vel.x + vx, vel.y + vy, vel.z));
    }
    void lith_spawnParticles(color c) {
       A_SpawnParticle(c, SPF_FULLBRIGHT|SPF_RELATIVE, random[Lith_GunSmoke](3, 8), random[Lith_GunSmoke](1, 2), fRandom[Lith_GunSmoke](-15, 15), fRandom[Lith_GunSmoke](-1,1)*m_spread,fRandom[Lith_GunSmoke](-1,1)*m_spread,fRandom[Lith_GunSmoke](-1,1)*m_spread, fRandom[Lith_GunSmoke](1, 16),fRandom[Lith_GunSmoke](-0.1, 0.1),(vel.z*1.5)+fRandom[Lith_GunSmoke](-1,1), 0.0, 0.0, -0.05, 0.98, -1);

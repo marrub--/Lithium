@@ -74,45 +74,64 @@ class Lith_HotEmberTrail : Actor {
    }
 }
 
-class Lith_BulletAfterSmoke : Actor {
-   default {
-      RenderStyle "Add";
-      Alpha 0.01;
-      Speed 20;
-      Radius 3;
-      Height 3;
-      Scale 0.3;
-      Projectile;
-      +ThruActors
-      +ForceXyBillboard
-      +DontSplash
-   }
-
+class Lith_BulletAfterSmoke : Lith_GunSmoke {
+   static const string textures[] = {
+      "#ESMA0", "#ESMB0", "#ESMC0", "#ESMD0", "#ESME0", "#ESMF0", "#ESMG0",
+      "#ESMH0", "#ESMI0", "#ESMJ0", "#ESMK0"
+   };
    double m_sx, m_sy;
-
+   int m_whichTex, m_nextSwitch;
+   void lith_setTex() {
+      texture = TexMan.checkForTexture(textures[m_whichTex], TexMan.Type_Any);
+   }
    override void postBeginPlay() {
       super.postBeginPlay();
-      scale.x *= fRandom[lith_bulletpuff](2, 6);
-      scale.y *= fRandom[lith_bulletpuff](0.4, 1.5);
+      alpha = 0.01;
+      scale.x = 0.3 * fRandom[lith_bulletpuff](2, 6);
+      scale.y = 0.3 * fRandom[lith_bulletpuff](0.4, 1.5);
       m_sx = fRandom[lith_bulletpuff](0.005, 0.01);
       m_sy = fRandom[lith_bulletpuff](0.001, 0.005);
+      m_noTicker = true;
+      lith_setTex();
+      m_nextSwitch = 10;
    }
-
    override void tick() {
+      super.tick();
       if(!isFrozen()) {
-         Lith_UTIL.stateTick(self);
+         if(m_ticks == m_nextSwitch) {
+            if(m_whichTex == 10) {
+               destroy();
+               return;
+            }
+            ++m_whichTex;
+            lith_setTex();
+            switch(m_whichTex) {
+            case 1: case 2:
+               m_nextSwitch += 10;
+               break;
+            case 3: case 4: case 5: case 6:
+               m_nextSwitch += random(14, 56);
+               break;
+            case 7: case 8: case 10:
+               m_nextSwitch += 9;
+               break;
+            case 9:
+               m_nextSwitch += 14;
+               break;
+            }
+         }
+         ++m_ticks;
          scale.x += m_sx;
          scale.y += m_sy;
+         switch(m_whichTex) {
+         case 0: case 1: case 2:
+            alpha += fRandom[lith_bulletpuff](0.002, 0.005);
+            break;
+         case 7: case 8: case 9: case 10:
+            alpha -= 0.0017071;
+            break;
+         }
       }
-   }
-
-   states {
-   Spawn:
-      TNT1 A 0;
-      #ESM AAAAAAAAAABBBBBBBBBBCCCCCCCCCC 1 a_fadeIn(fRandom[lith_bulletpuff](0.001, 0.005));
-      #ESM DEFG random(14, 56);
-      #ESM HHHHHHHHHIIIIIIIIIJJJJJJJJJJJJJJKKKKKKKKK 1 a_fadeOut(0.005);
-      stop;
    }
 }
 
@@ -214,8 +233,14 @@ default {
 
 void lith_a_smokeFX() {
    for(int i = 0, m = random[lith_bulletpuff](0, 2); i < m; i++) {
-      a_spawnItemEx("Lith_BulletAfterSmoke", fRandom[lith_bulletpuff](-1,1), fRandom[lith_bulletpuff](-1,1), fRandom[lith_bulletpuff](-2,2),
-         fRandom[lith_bulletpuff](-0.5,0.5), fRandom[lith_bulletpuff](-0.5,0.5), fRandom[lith_bulletpuff](-0.2,0.2));
+      let smoke = level.spawnVisualThinker('Lith_BulletAfterSmoke');
+      smoke.pos = pos +
+         (fRandom[lith_bulletpuff](-1,1),
+          fRandom[lith_bulletpuff](-1,1),
+          fRandom[lith_bulletpuff](-2,2));
+      smoke.vel = (fRandom[lith_bulletpuff](-0.5,0.5),
+                   fRandom[lith_bulletpuff](-0.5,0.5),
+                   fRandom[lith_bulletpuff](-0.2,0.2));
    }
 }
 

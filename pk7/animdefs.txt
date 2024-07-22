@@ -7,3 +7,12 @@ canvasTexture LITHFIRE 64 128
 texture LITHWTR1 range LITHWTR4 tics 8
 texture LITHNUK1 range LITHNUK3 tics 8
 texture LITHBLD1 range LITHBLD3 tics 8
+
+texture LITHSM01 range LITHSM17 tics 5
+texture LITHSM03
+   pic 1 rand 2 5
+   pic 2 tics 4
+   pic 3 tics 4
+   pic 4 tics 4
+   pic 5 tics 4
+   pic 6 tics 4

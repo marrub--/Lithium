@@ -55,8 +55,9 @@ class Lith_ShrapnelProjectile : Actor {
    Spawn2:
       #### # 1 {
          if(m_smoke) {
-            let mo = spawn('Lith_CasingSmoke', pos.plusZ(3));
-            mo.vel = (frandom(-0.2,0),frandom(-0.2,0),0);
+            let smoke = level.spawnVisualThinker('Lith_CasingSmoke');
+            smoke.pos = pos.plusZ(3);
+            smoke.vel = (frandom(-0.2,0),frandom(-0.2,0),0);
          }
       }
       #### # 1 {bNoClip = false;}
