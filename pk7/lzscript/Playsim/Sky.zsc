@@ -248,8 +248,9 @@ void setReplacedSky() {
    int which = -1;
    double blend = 0.0;
    if(lith_sv_dynsky) {
-      let rt_hrs = Lith_UTIL.pData(_pdt_rt_hrs);
-      let rt_min = Lith_UTIL.pData(_pdt_rt_min);
+      let light = Lith_LightThinker.get();
+      let rt_hrs = light.m_rtHrs;
+      let rt_min = light.m_rtMin;
       let amt =
          min(sin((rt_hrs * 60 + rt_min) / 1440.0 * 180.0) * 3.0, 2.9999);
       if(rt_hrs >= 12) {

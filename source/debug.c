@@ -249,9 +249,6 @@ struct cheat cht_give_score  = cheat_s("pgbezos",    1, chtf_give_score, "Player
 struct cheat cht_end_game    = cheat_s("pgbedone",   1, chtf_end_game, "...Be Done");
 
 void P_Ren_Debug(void) {
-   if(!dbglevel(log_devh)) {
-      return;
-   }
    SetSize(640, 480);
    str sky1 = EDataS(_edt_sky1), sky2 = EDataS(_edt_sky2);
    ACS_BeginPrint();

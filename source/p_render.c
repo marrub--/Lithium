@@ -83,13 +83,13 @@ static void P_Ren_Magic(void) {
 }
 
 void P_Ren_PTick(void) {
-   P_Ren_Magic();
+   if(pl.pclass == pcl_cybermage) P_Ren_Magic();
    P_Ren_Step();
    P_Ren_View();
    P_Ren_Scope();
    attr_draw();
    #ifndef NDEBUG
-   P_Ren_Debug();
+   if(dbglevel(log_devh)) P_Ren_Debug();
    #endif
    P_Ren_Mission();
 }

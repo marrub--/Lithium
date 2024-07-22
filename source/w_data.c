@@ -52,8 +52,12 @@ i32 Z_LPData(i32 info, i32 permutation) {
    case _pdt_hudtop:         return pl.hudtop;
    case _pdt_hudtype:        return pl.hudtype;
    case _pdt_playercolor:    return P_PlayerColor(permutation);
-   case _pdt_rt_hrs:         return rtime(wl.realtime, &rt), rt.h;
-   case _pdt_rt_min:         return rtime(wl.realtime, &rt), rt.m;
+   case _pdt_rt_hrs:
+   case _pdt_rt_min: {
+      i32 div = (i32)(wl.realtime % DAYS(1)) / 60;
+      if(info == _pdt_rt_min) return div % 60;
+      else                    return div / 60;
+   }
    }
    return 0;
 }
