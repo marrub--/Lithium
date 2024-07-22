@@ -64,7 +64,7 @@ void Z_GiveHealthBonus(i32 amount) {
    if(amount) {
       amount += pl.health;
       if(amount > pl.maxhealth + 100) amount = pl.maxhealth + 100;
-      pl.setHealth(amount);
+      if(amount > pl.health) pl.setHealth(amount);
    }
 }
 
@@ -74,7 +74,7 @@ void Z_GiveHealth(i32 amount) {
       amount *= attr_vitbuff();
       amount += pl.health;
       if(amount > pl.maxhealth) amount = pl.maxhealth;
-      pl.setHealth(amount);
+      if(amount > pl.health) pl.setHealth(amount);
    }
 }
 
