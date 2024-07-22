@@ -21,7 +21,7 @@ _uc_body:
       AutoReload: {scr: 950050, pr: 2}
    gI:
       Lightspark: {f: A-U--}
-      Minimap:    {scr: 9999999}
+      Minimap:    {scr: 999999}
    gM:
       SecretScan: {scr: 9999999}
    pM:
@@ -40,8 +40,8 @@ _uc_body:
       HeavyArmor:  {f: ADU--, scr: 1231234}
       ShieldOC:    {          scr: 9999999}
       HoverBoots:  {f: --U--, scr: 3999999}
-      HoverBoots2: {pg: N/A,  scr: 2999999}
-      SkillSword:  {f: ----E, scr: 1868666}
+      HoverBoots2: {pg: N/A,  scr: 1999999}
+      SkillSword:  {f: ----E, scr: 2868666}
 _uc_weap:
    pM:
       Pistol_A:  {scr:  140940}
@@ -54,8 +54,8 @@ _uc_weap:
       RPG_B:     {scr: 2505010, f: --U--, pr: 1, grp: 2, req: wmd    }
       Plasma_A:  {scr: 2250000,                  grp: 3, req: wmd    }
       Plasma_B:  {scr: 2500000,           pr: 1, grp: 3, req: wmd wrd}
-      Cannon_A:  {scr: 5100700,                  grp: 4, req: wmd    }
-      Cannon_B:  {scr: 5800100,           pr: 5, grp: 4, req: wmd wrd}
+      Cannon_A:  {scr: 4100700,                  grp: 4, req: wmd    }
+      Cannon_B:  {scr: 4800100,           pr: 5, grp: 4, req: wmd wrd}
    pC:
       Mateba_A:   {scr:  614100, grp: 1}
       ShockRif_A: {scr: 1519590, grp: 2, pg: N/A}
@@ -68,8 +68,8 @@ _uc_weap:
       IonRifle_A: {scr: 1977000}
       IonRifle_B: {scr: 2855050}
       CPlasma_A:  {scr: 2230500, grp: 4}
-      ShipGun_A:  {scr: 6988800, grp: 5}
-      ShipGun_B:  {scr: 7767700, grp: 5}
+      ShipGun_A:  {scr: 3988800, grp: 5}
+      ShipGun_B:  {scr: 4767700, grp: 5}
    pD:
       SubGun_A:   {pg: N/A, scr:  810603}
       SubGrn_A:   {pg: N/A, scr:  777757}
@@ -79,15 +79,15 @@ _uc_weap:
       700E_A:     {pg: N/A, scr:  900000}
       Shrapnel_A: {pg: N/A, scr: 2222222}
       Shrapnel_B: {pg: N/A, scr: 1444444}
-      4Bore_A:    {pg: N/A, scr: 3444444}
+      4Bore_A:    {pg: N/A, scr: 2444444}
       4Bore_B:    {pg: N/A, scr: 1911111}
-      Minigun_A:  {pg: N/A, scr: 2932134}
-      Franca_A:   {pg: N/A, scr: 3973793}
-      Sophia_A:   {pg: N/A, scr: 4123432, grp: 2}
-      Sophia_B:   {pg: N/A, scr: 4234321, grp: 2}
-      Fortune_A:  {pg: N/A, scr: 6060000}
-      Rems_A:     {pg: N/A, scr: 6321234}
-      Rems_B:     {pg: N/A, scr: 8984838}
+      Minigun_A:  {pg: N/A, scr: 1932134}
+      Franca_A:   {pg: N/A, scr: 2273793}
+      Sophia_A:   {pg: N/A, scr: 2223432, grp: 2}
+      Sophia_B:   {pg: N/A, scr: 2234321, grp: 2}
+      Fortune_A:  {pg: N/A, scr: 2620000}
+      Rems_A:     {pg: N/A, scr: 3321234}
+      Rems_B:     {pg: N/A, scr: 3684838}
 _uc_extr:
    gO:
       TorgueMode: {pg: N/A, scr: 8000000,                    req: rdi, pr: 8}
