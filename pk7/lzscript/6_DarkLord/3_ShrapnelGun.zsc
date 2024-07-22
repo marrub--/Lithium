@@ -12,7 +12,7 @@ class Lith_ShrapnelProjectile : Actor {
       BounceSound "weapons/shrapnel/bounce";
       BounceCount 10;
       RipSound "weapons/shrapnel/hit";
-      DamageFunction (3);
+      DamageFunction (random(6, 9));
       DamageType "Shrapnel";
       Gravity 0.5;
       Height 16;
@@ -87,7 +87,7 @@ class Lith_ShrapnelPuff : Lith_BulletPuff {
       if(target) {
          angle = angleTo(target);
       }
-      let prj = a_spawnProjectile(m_projectile, 0, 0, fRandom(-40, 20), CMF_OFFSETPITCH, fRandom(-40, 40));
+      let prj = a_spawnProjectile(m_projectile, 0, 0, fRandom(-40, 20), CMF_OFFSETPITCH, fRandom(-80, 80));
       prj.target = target; /* do not replace with CMF_TRACKOWNER */
       if(random[Lith_ShrapnelGun](0, 5) == 0) {
          super.postBeginPlay();
@@ -132,8 +132,8 @@ action(Weapon) void Lith_A_FireShrapnel() {
    a_recoil(0.7);
    lith_a_setInterpolation(true);
    class<Lith_ShrapnelPuff> puff = Lith_UTIL.pData(_pdt_upgrade, UPGR_Shrapnel_B) ? 'Lith_ShrapnelPuffBouncy' : 'Lith_ShrapnelPuff';
-   Lith_FireBullets(3.5, 2.5, 7 + invoker.m_chargeLevel * 3 / 4, 2, FBF_NORANDOM, puff, 2);
-   Lith_FireBullets(3.5, 2.5, 7 + invoker.m_chargeLevel * 3 / 4, 3, FBF_NORANDOM, puff, 2);
+   Lith_FireBullets(3.5, 2.5, 7 + invoker.m_chargeLevel * 3 / 4, 4, FBF_NORANDOM, puff, 2);
+   Lith_FireBullets(3.5, 2.5, 7 + invoker.m_chargeLevel * 3 / 4, 8, FBF_NORANDOM, puff, 2);
    A_FireProjectile("Lith_LightProjectileRedShort", 0);
    a_setTics(1 + (invoker.m_chargeLevel / 4));
 }
