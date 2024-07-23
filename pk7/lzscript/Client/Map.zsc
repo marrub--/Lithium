@@ -13,30 +13,6 @@ textureId m_mapBorderTl, m_mapBorderT, m_mapBorderTr,
           m_mapBorderBl, m_mapBorderB, m_mapBorderBr;
 int m_mapBorder;
 
-bool, vector2, vector2 collideLineAabb(vector2 p, vector2 dt, vector2 center, vector2 s2) {
-   // get intersection time with box's edges
-   let s   = (1.0 / dt.x, 1.0 / dt.y);
-   let sgn = (s.x < 0 ? -1 : 1, s.y < 0 ? -1 : 1);
-   let near = ((center.x - sgn.x * s2.x - p.x) * s.x,
-               (center.y - sgn.y * s2.y - p.y) * s.y);
-   let far  = ((center.x + sgn.x * s2.x - p.x) * s.x,
-               (center.y + sgn.y * s2.y - p.y) * s.y);
-   // check closest time of collision on both axes
-   if(near.x <= far.y && near.y <= far.x) {
-      // check nearest and furthest time
-      let nt = max(near.x, near.y);
-      let ft = min(far.x, far.y);
-      if(nt < 1 && ft > 0) {
-         // within box, calculate hit segment
-         let ht = clamp(nt, 0, 1); // depth
-         let hd = ((1 - ht) * -dt.x, (1 - ht) * -dt.y); // delta
-         let hp = (p.x + dt.x * ht, p.y + dt.y * ht); // pos
-         return true, hd, hp;
-      }
-   }
-   return false, (0,0), (0,0);
-}
-
 void traverseLineSectors(Line ln, vector3 m1, vector3 m2, vector3 m3) {
    // traverse front sector if necessary
    if(ln.frontSector && ln.frontSector.validCount != validCount) {
@@ -133,24 +109,20 @@ void mapTraverseSector(Sector sec, vector3 m1, vector3 m2, vector3 m3) {
             bool hit; vector2 hd, hp;
             if(v1coll) {
                // when v1 is inside map, trace from v2
-               [hit, hd, hp] =
-                  collideLineAabb(v2, -dt, m_mapCenter, m_mapSizeHalf);
+               [hit, hd, hp] = Lith_UTIL.collideLineAabb(v2, -dt, m_mapCenter, m_mapSizeHalf);
                // if it doesn't hit the map, don't even bother
                if(!hit) continue;
             } else if(v2coll) {
                // when v2 is inside map, trace from v1
-               [hit, hd, hp] =
-                  collideLineAabb(v1, dt, m_mapCenter, m_mapSizeHalf);
+               [hit, hd, hp] = Lith_UTIL.collideLineAabb(v1, dt, m_mapCenter, m_mapSizeHalf);
                if(!hit) continue;
             } else {
                // if neither is within the map, make up a line segment
                // by tracing both angles
-               [hit, hd, hp] =
-                  collideLineAabb(v1, dt, m_mapCenter, m_mapSizeHalf);
+               [hit, hd, hp] = Lith_UTIL.collideLineAabb(v1, dt, m_mapCenter, m_mapSizeHalf);
                let hp1 = hp;
                if(!hit) continue;
-               [hit, hd, hp] =
-                  collideLineAabb(v2, -dt, m_mapCenter, m_mapSizeHalf);
+               [hit, hd, hp] = Lith_UTIL.collideLineAabb(v2, -dt, m_mapCenter, m_mapSizeHalf);
                if(!hit) continue;
                hd = hp - hp1;
             }
