@@ -37,25 +37,6 @@ bool, vector2, vector2 collideLineAabb(vector2 p, vector2 dt, vector2 center, ve
    return false, (0,0), (0,0);
 }
 
-vector3, vector3, vector3 matrix3x3Multiply(vector3 m1, vector3 m2, vector3 m3, vector3 n1, vector3 n2, vector3 n3) {
-   // get columns
-   let nx = (n1.x, n2.x, n3.x);
-   let ny = (n1.y, n2.y, n3.y);
-   let nz = (n1.z, n2.z, n3.z);
-   // dot every combination
-   return
-      (m1 dot nx, m1 dot ny, m1 dot nz),
-      (m2 dot nx, m2 dot ny, m2 dot nz),
-      (m3 dot nx, m3 dot ny, m3 dot nz);
-}
-
-vector2 matrix3x3Vector2Multiply(vector3 m1, vector3 m2, vector3 m3, vector2 v) {
-   // treat v as a vector3 with z=1
-   let vv = (v, 1);
-   // only calculate first two elements
-   return (m1 dot vv, m2 dot vv);
-}
-
 void traverseLineSectors(Line ln, vector3 m1, vector3 m2, vector3 m3) {
    // traverse front sector if necessary
    if(ln.frontSector && ln.frontSector.validCount != validCount) {
@@ -83,19 +64,13 @@ void mapTraverseSector(Sector sec, vector3 m1, vector3 m2, vector3 m3) {
          let n1 = m1, n2 = m2, n3 = m3;
          // translate if necessary
          if(disp.x || disp.y) {
-            let t1 = (1, 0, -disp.x);
-            let t2 = (0, 1, -disp.y);
-            let t3 = (0, 0, 1);
-            [n1, n2, n3] = matrix3x3Multiply(n1, n2, n3, t1, t2, t3);
+            let [t1, t2, t3] = Lith_UTIL.mat3x3TranslateVec2(-disp);
+            [n1, n2, n3] = Lith_UTIL.mat3x3Multiply(n1, n2, n3, t1, t2, t3);
          }
          // rotate if necessary
          if(angl) {
-            let c = cos(angl);
-            let s = sin(angl);
-            let r1 = (c, -s, 0);
-            let r2 = (s,  c, 0);
-            let r3 = (0,  0, 1);
-            [n1, n2, n3] = matrix3x3Multiply(n1, n2, n3, r1, r2, r3);
+            let [r1, r2, r3] = Lith_UTIL.mat3x3Rotate(angl);
+            [n1, n2, n3] = Lith_UTIL.mat3x3Multiply(n1, n2, n3, r1, r2, r3);
          }
          // traverse destination line's sectors with new matrix
          traverseLineSectors(dest, n1, n2, n3);
@@ -122,8 +97,8 @@ void mapTraverseSector(Sector sec, vector3 m1, vector3 m2, vector3 m3) {
          m3.x != 0 || m3.y != 0 || m3.z != 1)
       {
          // recalculate vertices and delta
-         v1 = matrix3x3Vector2Multiply(m1, m2, m3, v1);
-         v2 = matrix3x3Vector2Multiply(m1, m2, m3, v2);
+         v1 = Lith_UTIL.mat3x3MultiplyVec2(m1, m2, m3, v1);
+         v2 = Lith_UTIL.mat3x3MultiplyVec2(m1, m2, m3, v2);
          dt = v2 - v1;
          // recalculate bbox
          if(v1.x < v2.x) {lnTl.x = v1.x; lnBr.x = v2.x;}
