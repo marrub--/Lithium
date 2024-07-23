@@ -9,6 +9,7 @@
 
 /* UTIL: Utilities and Tools Intersperse Languages */
 struct Lith_UTIL {
+   // angles
    static double constDeg(double x) {
       x %= 360;
       if(x < 0) x += 360;
@@ -35,6 +36,23 @@ struct Lith_UTIL {
       return 2 * d % 360 - d;
    }
 
+   static double, double circleSpread(double mdy, double mdp) {
+      double dy = fRandom(mdy, 0);
+      double dp = fRandom(mdp, 0);
+      double a  = fRandom(0, 360);
+      return sin(a) * dy, cos(a) * dp;
+   }
+
+   static vector3 anglesToVec(vector2 a, double r) {
+      let cp = cos(-a.y);
+      return (cos(a.x)*cp*r, sin(a.x)*cp*r, sin(-a.y)*r);
+   }
+
+   static vector2 vecToAngles(vector3 v) {
+      return (atan2(v.x, v.y), invertDeg(asin(v.z)));
+   }
+
+   // matrix math
    static vector3, vector3, vector3 mat3x3Multiply(vector3 m1, vector3 m2, vector3 m3, vector3 n1, vector3 n2, vector3 n3) {
       // get columns
       let nx = (n1.x, n2.x, n3.x);
@@ -70,6 +88,7 @@ struct Lith_UTIL {
       return (m1 dot vv, m2 dot vv);
    }
 
+   // easing
    static double easeInOutQuad(double t) {
       if(t < 0.5) {
          return 2.0 * t * t;
@@ -112,10 +131,12 @@ struct Lith_UTIL {
       return (al << 24) | (rd << 16) | (gr << 8) | bl;
    }
 
+   // misc. math
    static int round(double n) {
       return int(n * 1000) % 1000 < 500 ? int(n) : int(n+0.5);
    }
 
+   // ACS utilities
    static play int exec(Actor mo, int scr, int arg0 = 0, int arg1 = 0, int arg2 = 0, int arg3 = 0) {
       return Level.ExecuteSpecial(84, mo, null, false, scr, arg0, arg1, arg2, arg3);
    }
@@ -124,6 +145,7 @@ struct Lith_UTIL {
       return acs_executeWithResult(lsc_pdata, info, permutation);
    }
 
+   // actors
    static play bool stateTick(Actor mo) {
       if(mo.tics >= 0 && --mo.tics <= 0) {
          mo.setState(mo.curState.nextState);
@@ -133,27 +155,13 @@ struct Lith_UTIL {
       }
    }
 
-   static bool classExists(string cnam) {
+   // metaprogramming
+   static bool classExists(name cnam) {
       class<Object> cls = cnam;
       return cls != null;
    }
 
-   static double, double circleSpread(double mdy, double mdp) {
-      double dy = fRandom(mdy, 0);
-      double dp = fRandom(mdp, 0);
-      double a  = fRandom(0, 360);
-      return sin(a) * dy, cos(a) * dp;
-   }
-
-   static vector3 anglesToVec(vector2 a, double r) {
-      let cp = cos(-a.y);
-      return (cos(a.x)*cp*r, sin(a.x)*cp*r, sin(-a.y)*r);
-   }
-
-   static vector2 vecToAngles(vector3 v) {
-      return (atan2(v.x, v.y), invertDeg(asin(v.z)));
-   }
-
+   // visual effects
    static void particlePosVel(FSpawnParticleParams pp, vector3 pos, vector2 angles = (0, 0), double distance = 0.0, vector3 vel = (0,0,0), vector2 vel_angles = (0, 0), double vel_distance = 0.0) {
       pp.pos = pos;
       if(distance != 0) {

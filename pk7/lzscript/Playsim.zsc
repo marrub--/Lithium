@@ -526,9 +526,9 @@ static int EDataI(Actor mo, int info) {
    case _edt_chex:    return gameinfo.gametype & GAME_Chex    != 0;
    case _edt_heretic: return gameinfo.gametype & GAME_Heretic != 0;
 
-   case _edt_rampancy:     return Lith_UTIL.classExists("Robot_Thingo");
-   case _edt_legendoom:    return Lith_UTIL.classExists("LDLegendaryMonsterMarker");
-   case _edt_colorfulhell: return Lith_UTIL.classExists("CHBoner");
+   case _edt_rampancy:     return Lith_UTIL.classExists('Robot_Thingo') ? 1 : 0;
+   case _edt_legendoom:    return Lith_UTIL.classExists('LDLegendaryMonsterMarker') ? 1 : 0;
+   case _edt_colorfulhell: return Lith_UTIL.classExists('CHBoner') ? 1 : 0;
 
    case _edt_riflegrenade:
       return !Lith_CombatRifle(mo.findInventory("Lith_CombatRifle")).m_grenFire;
