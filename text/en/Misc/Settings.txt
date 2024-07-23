@@ -49,6 +49,7 @@ The color for most of the text in in-game GUIs.
 == \#hud_mapthickness | Line thickness
 == \#hud_mapalpha | Opacity
 == \#hud_mapbgalpha | Background opacity
+== \#hud_mapbralpha | Border opacity
 == \#hud_mapcolor | Custom color enabled
 == \#hud_mapcolor_r | Custom color red
 == \#hud_mapcolor_g | Custom color green

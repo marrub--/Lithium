@@ -320,6 +320,7 @@ ui void drawMap(RenderEvent evt) {
                          DTA_ClipRight,cr);
    }
    // get border color
+   let bralpha = lith_hud_mapbralpha;
    let bc = m_mapColor;
    if(lith_hud_mapbcolor) {
       bc = color(255,
@@ -332,23 +333,27 @@ ui void drawMap(RenderEvent evt) {
       // draw black stencil background for top/bottom
       Screen.drawTexture(m_mapBorderT, false, p.x+x, p.y-3,
                          DTA_VirtualWidth,320, DTA_VirtualHeight,240,
-                         DTA_LegacyRenderStyle,STYLE_Stencil,
+                         DTA_LegacyRenderStyle,STYLE_TranslucentStencil,
+                         DTA_Alpha,bralpha,
                          DTA_FillColor,color(255,0,0,0),
                          DTA_ClipRight,cr);
       Screen.drawTexture(m_mapBorderB, false, p.x+x, p.y+os.y,
                          DTA_VirtualWidth,320, DTA_VirtualHeight,240,
-                         DTA_LegacyRenderStyle,STYLE_Stencil,
+                         DTA_LegacyRenderStyle,STYLE_TranslucentStencil,
+                         DTA_Alpha,bralpha,
                          DTA_FillColor,color(255,0,0,0),
                          DTA_ClipRight,cr);
       // draw alpha shaded borders
       Screen.drawTexture(m_mapBorderT, false, p.x+x, p.y-3,
                          DTA_VirtualWidth,320, DTA_VirtualHeight,240,
                          DTA_LegacyRenderStyle,STYLE_Shaded,
+                         DTA_Alpha,bralpha,
                          DTA_FillColor,bc,
                          DTA_ClipRight,cr);
       Screen.drawTexture(m_mapBorderB, false, p.x+x, p.y+os.y,
                          DTA_VirtualWidth,320, DTA_VirtualHeight,240,
                          DTA_LegacyRenderStyle,STYLE_Shaded,
+                         DTA_Alpha,bralpha,
                          DTA_FillColor,bc,
                          DTA_ClipRight,cr);
    }
@@ -357,58 +362,70 @@ ui void drawMap(RenderEvent evt) {
       // stencil
       Screen.drawTexture(m_mapBorderL, false, p.x-3, p.y+y,
                          DTA_VirtualWidth,320, DTA_VirtualHeight,240,
-                         DTA_LegacyRenderStyle,STYLE_Stencil,
+                         DTA_LegacyRenderStyle,STYLE_TranslucentStencil,
+                         DTA_Alpha,bralpha,
                          DTA_FillColor,color(255,0,0,0),
                          DTA_ClipBottom,cb);
       Screen.drawTexture(m_mapBorderR, false, p.x+os.x, p.y+y,
                          DTA_VirtualWidth,320, DTA_VirtualHeight,240,
-                         DTA_LegacyRenderStyle,STYLE_Stencil,
+                         DTA_LegacyRenderStyle,STYLE_TranslucentStencil,
+                         DTA_Alpha,bralpha,
                          DTA_FillColor,color(255,0,0,0),
                          DTA_ClipBottom,cb);
       // shading
       Screen.drawTexture(m_mapBorderL, false, p.x-3, p.y+y,
                          DTA_VirtualWidth,320, DTA_VirtualHeight,240,
                          DTA_LegacyRenderStyle,STYLE_Shaded,
+                         DTA_Alpha,bralpha,
                          DTA_FillColor,bc,
                          DTA_ClipBottom,cb);
       Screen.drawTexture(m_mapBorderR, false, p.x+os.x, p.y+y,
                          DTA_VirtualWidth,320, DTA_VirtualHeight,240,
                          DTA_LegacyRenderStyle,STYLE_Shaded,
+                         DTA_Alpha,bralpha,
                          DTA_FillColor,bc,
                          DTA_ClipBottom,cb);
    }
    // draw the diagonal caps' stencils
    Screen.drawTexture(m_mapBorderTl, false, p.x-3, p.y-3,
                       DTA_VirtualWidth,320, DTA_VirtualHeight,240,
-                      DTA_LegacyRenderStyle,STYLE_Stencil,
+                      DTA_LegacyRenderStyle,STYLE_TranslucentStencil,
+                      DTA_Alpha,bralpha,
                       DTA_FillColor,color(255,0,0,0));
    Screen.drawTexture(m_mapBorderTr, false, p.x+os.x, p.y-3,
                       DTA_VirtualWidth,320, DTA_VirtualHeight,240,
-                      DTA_LegacyRenderStyle,STYLE_Stencil,
+                      DTA_LegacyRenderStyle,STYLE_TranslucentStencil,
+                      DTA_Alpha,bralpha,
                       DTA_FillColor,color(255,0,0,0));
    Screen.drawTexture(m_mapBorderBl, false, p.x-3, p.y+os.y-1,
                       DTA_VirtualWidth,320, DTA_VirtualHeight,240,
-                      DTA_LegacyRenderStyle,STYLE_Stencil,
+                      DTA_LegacyRenderStyle,STYLE_TranslucentStencil,
+                      DTA_Alpha,bralpha,
                       DTA_FillColor,color(255,0,0,0));
    Screen.drawTexture(m_mapBorderBr, false, p.x+os.x, p.y+os.y-1,
                       DTA_VirtualWidth,320, DTA_VirtualHeight,240,
-                      DTA_LegacyRenderStyle,STYLE_Stencil,
+                      DTA_LegacyRenderStyle,STYLE_TranslucentStencil,
+                      DTA_Alpha,bralpha,
                       DTA_FillColor,color(255,0,0,0));
    // draw diagonal caps' shading
    Screen.drawTexture(m_mapBorderTl, false, p.x-3, p.y-3,
                       DTA_VirtualWidth,320, DTA_VirtualHeight,240,
                       DTA_LegacyRenderStyle,STYLE_Shaded,
+                      DTA_Alpha,bralpha,
                       DTA_FillColor,bc);
    Screen.drawTexture(m_mapBorderTr, false, p.x+os.x, p.y-3,
                       DTA_VirtualWidth,320, DTA_VirtualHeight,240,
                       DTA_LegacyRenderStyle,STYLE_Shaded,
+                      DTA_Alpha,bralpha,
                       DTA_FillColor,bc);
    Screen.drawTexture(m_mapBorderBl, false, p.x-3, p.y+os.y-1,
                       DTA_VirtualWidth,320, DTA_VirtualHeight,240,
                       DTA_LegacyRenderStyle,STYLE_Shaded,
+                      DTA_Alpha,bralpha,
                       DTA_FillColor,bc);
    Screen.drawTexture(m_mapBorderBr, false, p.x+os.x, p.y+os.y-1,
                       DTA_VirtualWidth,320, DTA_VirtualHeight,240,
                       DTA_LegacyRenderStyle,STYLE_Shaded,
+                      DTA_Alpha,bralpha,
                       DTA_FillColor,bc);
 }

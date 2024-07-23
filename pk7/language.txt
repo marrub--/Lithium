@@ -5690,6 +5690,8 @@
    "Opacity";
 "LITH_hud_mapbgalpha" =
    "Background opacity";
+"LITH_hud_mapbralpha" =
+   "Border opacity";
 "LITH_hud_mapcolor" =
    "Custom color enabled";
 "LITH_hud_mapcolor_r" =

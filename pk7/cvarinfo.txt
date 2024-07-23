@@ -89,6 +89,7 @@ server int   lith_hud_mapcolor_g   = 255;
 server int   lith_hud_mapcolor_b   = 255;
 server int   lith_hud_mapborder    = 0;
 server bool  lith_hud_mapbcolor    = false;
+server float lith_hud_mapbralpha   = 1.0;
 server int   lith_hud_mapbcolor_r  = 255;
 server int   lith_hud_mapbcolor_g  = 255;
 server int   lith_hud_mapbcolor_b  = 255;

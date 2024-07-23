@@ -238,6 +238,7 @@ static struct setting const st_gui[] = {
    s_integ("hud_mapcolor_g", 0, 255, 1, "byte", .pclass = gI),
    s_integ("hud_mapcolor_b", 0, 255, 1, "byte", .pclass = gI),
    s_enume("hud_mapborder", -1, 2, "mapborder", .pclass = gI),
+   s_fixed("hud_mapbralpha", 0.05, 1.0, 0.05, "mult", .pclass = gI),
    s_boole("hud_mapbcolor", .pclass = gI),
    s_integ("hud_mapbcolor_r", 0, 255, 1, "byte", .pclass = gI),
    s_integ("hud_mapbcolor_g", 0, 255, 1, "byte", .pclass = gI),
