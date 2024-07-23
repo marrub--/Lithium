@@ -1,17 +1,26 @@
 extend class Lith_URANUS;
 
-array<double> m_mapDrawnPoints;
-array<int> m_mapColorIndices;
+bool m_mapEnabled;
+
+array<double> m_mapPoints;
+array<int16> m_mapColorIndices;
 array<color> m_mapColors;
+color m_mapColor;
+int m_mapPortalGroup;
+
 vector2 m_mapCenter, m_mapTopLeft, m_mapBottomRight, m_mapSizeHalf;
 vector2 m_mapOnScreenSize;
-color m_mapColor;
-bool m_mapEnabled;
-int m_mapPortalGroup;
+
 textureId m_mapBorderTl, m_mapBorderT, m_mapBorderTr,
           m_mapBorderL,                m_mapBorderR,
           m_mapBorderBl, m_mapBorderB, m_mapBorderBr;
 int m_mapBorder;
+
+textureId m_mapThingTex[3];
+color m_mapThingColor;
+array<double> m_mapThingsPos;
+array<uint8> m_mapThingsSize;
+array<color> m_mapThingsColor;
 
 void traverseLineSectors(Line ln, vector3 m1, vector3 m2, vector3 m3) {
    // traverse front sector if necessary
@@ -28,6 +37,21 @@ void mapTraverseSector(Sector sec, vector3 m1, vector3 m2, vector3 m3) {
    // set sector's validCount to prevent infinite recursion
    sec.validCount = validCount;
    bool isCurPortal = m_mapPortalGroup == sec.portalGroup;
+   // traverse things
+   for(Actor th = sec.thingList; th; th = th.sNext) {
+      if(th.bShootable && th.bIsMonster &&
+         th.pos.x - th.radius < m_mapBottomRight.x &&
+         th.pos.x + th.radius > m_mapTopLeft.x &&
+         th.pos.y - th.radius < m_mapBottomRight.y &&
+         th.pos.y + th.radius > m_mapTopLeft.y)
+      {
+         m_mapThingsPos.push(th.pos.x);
+         m_mapThingsPos.push(th.pos.y);
+         m_mapThingsSize.push(th.radius > 64 ? 2 : th.radius > 32 ? 1 : 0);
+         m_mapThingsColor.push(m_mapThingColor);
+      }
+   }
+   // traverse lines
    foreach(ln : sec.lines) {
       // set line's validCount to prevent unnecessary draws
       if(ln.validCount == validCount) continue;
@@ -97,13 +121,13 @@ void mapTraverseSector(Sector sec, vector3 m1, vector3 m2, vector3 m3) {
             v2.x < m_mapBottomRight.x && v2.x > m_mapTopLeft.x &&
             v2.y < m_mapBottomRight.y && v2.y > m_mapTopLeft.y;
          // store index for coloration
-         let idx = m_mapDrawnPoints.size();
+         let idx = m_mapPoints.size();
          if(v1coll && v2coll) {
             // slightly narrower pass: if line is entirely within map, draw it
-            m_mapDrawnPoints.push(v1.x);
-            m_mapDrawnPoints.push(v1.y);
-            m_mapDrawnPoints.push(v2.x);
-            m_mapDrawnPoints.push(v2.y);
+            m_mapPoints.push(v1.x);
+            m_mapPoints.push(v1.y);
+            m_mapPoints.push(v2.x);
+            m_mapPoints.push(v2.y);
          } else {
             // narrow pass: check segment/aabb collision
             bool hit; vector2 hd, hp;
@@ -128,10 +152,10 @@ void mapTraverseSector(Sector sec, vector3 m1, vector3 m2, vector3 m3) {
             }
             // draw collided portion
             let end = hp - hd;
-            m_mapDrawnPoints.push(hp.x);
-            m_mapDrawnPoints.push(hp.y);
-            m_mapDrawnPoints.push(end.x);
-            m_mapDrawnPoints.push(end.y);
+            m_mapPoints.push(hp.x);
+            m_mapPoints.push(hp.y);
+            m_mapPoints.push(end.x);
+            m_mapPoints.push(end.y);
          }
          let cr = m_mapColor;
          // draw other portal groups as translucent
@@ -153,9 +177,11 @@ void mapTraverseSector(Sector sec, vector3 m1, vector3 m2, vector3 m3) {
 
 void tickMap() {
    // clear all draw data
-   m_mapDrawnPoints.clear();
+   m_mapPoints.clear();
    m_mapColorIndices.clear();
    m_mapColors.clear();
+   m_mapThingsPos.clear();
+   m_mapThingsSize.clear();
    m_mapEnabled = false;
    // exit if minimap won't be drawn
    if(!players[consolePlayer].mo ||
@@ -167,6 +193,11 @@ void tickMap() {
    // get map border textures if needed
    if(!m_mapBorderTl.isValid()) {
       m_mapBorder = -1;
+   }
+   if(!m_mapThingTex[0].isValid()) {
+      m_mapThingTex[0] = getTex(":Map:Thing1");
+      m_mapThingTex[1] = getTex(":Map:Thing2");
+      m_mapThingTex[2] = getTex(":Map:Thing3");
    }
    if(m_mapBorder != lith_hud_mapborder) {
       m_mapBorder = lith_hud_mapborder;
@@ -188,6 +219,8 @@ void tickMap() {
       (hudtype != _hud_old ?
        color(Lith_UTIL.pData(_pdt_playercolor, hudtype)) :
        color(255, 255, 0, 0));
+   m_mapThingColor =
+      color(255, m_mapColor.r * 2, m_mapColor.g * 2, m_mapColor.b * 2);
    // get map position and size
    let p = players[consolePlayer].mo;
    let scale = (ceil(lith_hud_mapscalex * 100) / 100,
@@ -204,6 +237,16 @@ void tickMap() {
    ++validCount;
    // traverse from player's current sector with identity matrix
    mapTraverseSector(p.curSector, (1, 0, 0), (0, 1, 0), (0, 0, 1));
+}
+
+clearScope vector2 transformToMap(vector2 v, vector2 tl, vector2 s, vector2 os) {
+   v -= tl;
+   v.x /= s.x;
+   v.y /= s.y;
+   v.x *= os.x;
+   v.y *= os.y;
+   v.y = os.y - v.y;
+   return v;
 }
 
 ui void drawMap(RenderEvent evt) {
@@ -231,8 +274,9 @@ ui void drawMap(RenderEvent evt) {
             (320, 240));
    // if there are colored lines, initialize next color index
    let nextColor = m_mapColorIndices.size() ? m_mapColorIndices[0] : -1;
+   // loop through all lines
    for(int i = 0, j = 0,
-           n = m_mapDrawnPoints.size(), m = m_mapColorIndices.size();
+           n = m_mapPoints.size(), m = m_mapColorIndices.size();
        i < n;
        i += 4)
    {
@@ -247,15 +291,35 @@ ui void drawMap(RenderEvent evt) {
          cr = color(int(cr.a * alpha), cr.r, cr.g, cr.b);
       }
       // get point elements and transform them to screen positions
-      let v1 = (       (m_mapDrawnPoints[i]     - tl.x) / s.x * os.x,
-                os.y - (m_mapDrawnPoints[i + 1] - tl.y) / s.y * os.y);
-      let v2 = (       (m_mapDrawnPoints[i + 2] - tl.x) / s.x * os.x,
-                os.y - (m_mapDrawnPoints[i + 3] - tl.y) / s.y * os.y);
+      let v1 =
+         transformToMap((m_mapPoints[i],     m_mapPoints[i + 1]), tl, s, os);
+      let v2 =
+         transformToMap((m_mapPoints[i + 2], m_mapPoints[i + 3]), tl, s, os);
       // draw line
       drawLn(p.x+v1.x, p.y+v1.y, p.x+v2.x, p.y+v2.y, cr, (320, 240),
              size: thickness);
    }
-   // draw border
+   // get clipping positions to cut off at the borders
+   let clipTl = anyPos(p,    (320, 240), 0);
+   let clipBr = anyPos(p+os, (320, 240), 0);
+   let cl = int(clipTl.x), ct = int(clipTl.y);
+   let cr = int(clipBr.x), cb = int(clipBr.y);
+   // draw things
+   for(int i = 0, n = m_mapThingsPos.size(); i < n; i += 2) {
+      let v =
+         transformToMap((m_mapThingsPos[i], m_mapThingsPos[i + 1]), tl, s, os);
+      Screen.drawTexture(m_mapThingTex[m_mapThingsSize[i / 2]], false,
+                         p.x+v.x, p.y+v.y,
+                         DTA_VirtualWidth,320, DTA_VirtualHeight,240,
+                         DTA_LegacyRenderStyle,STYLE_AddShaded,
+                         DTA_CenterOffset,true,
+                         DTA_FillColor,m_mapThingsColor[i / 2],
+                         DTA_ClipTop,ct,
+                         DTA_ClipLeft,cl,
+                         DTA_ClipBottom,cb,
+                         DTA_ClipRight,cr);
+   }
+   // get border color
    let bc = m_mapColor;
    if(lith_hud_mapbcolor) {
       bc = color(255,
@@ -263,53 +327,57 @@ ui void drawMap(RenderEvent evt) {
                  lith_hud_mapbcolor_g,
                  lith_hud_mapbcolor_b);
    }
-   let clip = anyPos(p+os, (320, 240), 0);
-   let cx = int(clip.x);
-   let cy = int(clip.y);
+   // draw horizontal borders, clip to right
    for(int x = 0; x < os.x; x += 3) {
+      // draw black stencil background for top/bottom
       Screen.drawTexture(m_mapBorderT, false, p.x+x, p.y-3,
                          DTA_VirtualWidth,320, DTA_VirtualHeight,240,
                          DTA_LegacyRenderStyle,STYLE_Stencil,
                          DTA_FillColor,color(255,0,0,0),
-                         DTA_ClipRight,cx);
+                         DTA_ClipRight,cr);
       Screen.drawTexture(m_mapBorderB, false, p.x+x, p.y+os.y,
                          DTA_VirtualWidth,320, DTA_VirtualHeight,240,
                          DTA_LegacyRenderStyle,STYLE_Stencil,
                          DTA_FillColor,color(255,0,0,0),
-                         DTA_ClipRight,cx);
+                         DTA_ClipRight,cr);
+      // draw alpha shaded borders
       Screen.drawTexture(m_mapBorderT, false, p.x+x, p.y-3,
                          DTA_VirtualWidth,320, DTA_VirtualHeight,240,
                          DTA_LegacyRenderStyle,STYLE_Shaded,
                          DTA_FillColor,bc,
-                         DTA_ClipRight,cx);
+                         DTA_ClipRight,cr);
       Screen.drawTexture(m_mapBorderB, false, p.x+x, p.y+os.y,
                          DTA_VirtualWidth,320, DTA_VirtualHeight,240,
                          DTA_LegacyRenderStyle,STYLE_Shaded,
                          DTA_FillColor,bc,
-                         DTA_ClipRight,cx);
+                         DTA_ClipRight,cr);
    }
+   // ditto for vertical borders, clip to bottom
    for(int y = 0; y < os.y; y += 3) {
+      // stencil
       Screen.drawTexture(m_mapBorderL, false, p.x-3, p.y+y,
                          DTA_VirtualWidth,320, DTA_VirtualHeight,240,
                          DTA_LegacyRenderStyle,STYLE_Stencil,
                          DTA_FillColor,color(255,0,0,0),
-                         DTA_ClipBottom,cy);
+                         DTA_ClipBottom,cb);
       Screen.drawTexture(m_mapBorderR, false, p.x+os.x, p.y+y,
                          DTA_VirtualWidth,320, DTA_VirtualHeight,240,
                          DTA_LegacyRenderStyle,STYLE_Stencil,
                          DTA_FillColor,color(255,0,0,0),
-                         DTA_ClipBottom,cy);
+                         DTA_ClipBottom,cb);
+      // shading
       Screen.drawTexture(m_mapBorderL, false, p.x-3, p.y+y,
                          DTA_VirtualWidth,320, DTA_VirtualHeight,240,
                          DTA_LegacyRenderStyle,STYLE_Shaded,
                          DTA_FillColor,bc,
-                         DTA_ClipBottom,cy);
+                         DTA_ClipBottom,cb);
       Screen.drawTexture(m_mapBorderR, false, p.x+os.x, p.y+y,
                          DTA_VirtualWidth,320, DTA_VirtualHeight,240,
                          DTA_LegacyRenderStyle,STYLE_Shaded,
                          DTA_FillColor,bc,
-                         DTA_ClipBottom,cy);
+                         DTA_ClipBottom,cb);
    }
+   // draw the diagonal caps' stencils
    Screen.drawTexture(m_mapBorderTl, false, p.x-3, p.y-3,
                       DTA_VirtualWidth,320, DTA_VirtualHeight,240,
                       DTA_LegacyRenderStyle,STYLE_Stencil,
@@ -326,6 +394,7 @@ ui void drawMap(RenderEvent evt) {
                       DTA_VirtualWidth,320, DTA_VirtualHeight,240,
                       DTA_LegacyRenderStyle,STYLE_Stencil,
                       DTA_FillColor,color(255,0,0,0));
+   // draw diagonal caps' shading
    Screen.drawTexture(m_mapBorderTl, false, p.x-3, p.y-3,
                       DTA_VirtualWidth,320, DTA_VirtualHeight,240,
                       DTA_LegacyRenderStyle,STYLE_Shaded,
