@@ -198,14 +198,14 @@ void tickMap() {
    }
    if(m_mapBorder != lith_hud_mapborder) {
       m_mapBorder = lith_hud_mapborder;
-      m_mapBorderTl = getTex(":MapBorder:" .. m_mapBorder .. "Tl");
-      m_mapBorderT  = getTex(":MapBorder:" .. m_mapBorder .. "T");
-      m_mapBorderTr = getTex(":MapBorder:" .. m_mapBorder .. "Tr");
-      m_mapBorderL  = getTex(":MapBorder:" .. m_mapBorder .. "L");
-      m_mapBorderR  = getTex(":MapBorder:" .. m_mapBorder .. "R");
-      m_mapBorderBl = getTex(":MapBorder:" .. m_mapBorder .. "Bl");
-      m_mapBorderB  = getTex(":MapBorder:" .. m_mapBorder .. "B");
-      m_mapBorderBr = getTex(":MapBorder:" .. m_mapBorder .. "Br");
+      m_mapBorderTl = getTex(":Map:Border:" .. m_mapBorder .. "Tl");
+      m_mapBorderT  = getTex(":Map:Border:" .. m_mapBorder .. "T");
+      m_mapBorderTr = getTex(":Map:Border:" .. m_mapBorder .. "Tr");
+      m_mapBorderL  = getTex(":Map:Border:" .. m_mapBorder .. "L");
+      m_mapBorderR  = getTex(":Map:Border:" .. m_mapBorder .. "R");
+      m_mapBorderBl = getTex(":Map:Border:" .. m_mapBorder .. "Bl");
+      m_mapBorderB  = getTex(":Map:Border:" .. m_mapBorder .. "B");
+      m_mapBorderBr = getTex(":Map:Border:" .. m_mapBorder .. "Br");
    }
    // get map color based on hud type
    int hudtype = Lith_UTIL.pData(_pdt_hudtype);
