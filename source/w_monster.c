@@ -273,7 +273,7 @@ _Noreturn alloc_aut(0) script static void MonsterMain(dmon_t *m) {
 void PrintMonsterInfo(dmon_t *m) {
    ACS_BeginPrint();
    __nprintf(
-      "%p (%p) %s active=%u id=%.3u\n"
+      "m=%p mi=%p active=%u id=%.3u\n"
       "wasdead=%u finalized=%u resurrect=%u\n"
       "level=%.3i rank=%i exp=%i\n"
       "health=%i/%i\n"
@@ -283,7 +283,7 @@ void PrintMonsterInfo(dmon_t *m) {
       "mi->prename=`%s' mi->name=`%s'\n"
       "mi->exp=%u mi->score=%" FMT_SCR "\n"
       "mi->flags=%i mi->type=%i mi->mass=%i\n",
-      m, m->mi, m->mi->name, m->active, m->id,
+      m, m->mi, m->active, m->id,
       m->wasdead, m->finalized, m->resurrect,
       m->level, m->rank, m->exp,
       m->health, m->maxhealth,
