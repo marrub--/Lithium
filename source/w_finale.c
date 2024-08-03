@@ -34,6 +34,8 @@ dynam_aut script void F_Run(void) {
       which = _finale_normal;
    }
    pl.setActivator();
+   pl.hudenabled = false;
+   ACS_SetPlayerProperty(true, true, PROP_TOTALLYFROZEN);
    pl.dlg.num       = 0;
    pl.dlg.page      = which;
    pl.dlg.firm_mode = FIRM_FINALE;

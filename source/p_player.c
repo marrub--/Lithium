@@ -35,10 +35,6 @@ dynam_aut script void P_Player(void) {
    if(ACS_PlayerNumber() == -1) {
       return;
    }
-   if(get_msk(ml.flag, _mflg_func) != _mfunc_normal) {
-      ACS_SetPlayerProperty(true, true, PROP_TOTALLYFROZEN);
-      return;
-   }
 reinit:
    P_Init();
    P_Dat_PTickPre();
