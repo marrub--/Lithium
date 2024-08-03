@@ -273,24 +273,28 @@ _Noreturn alloc_aut(0) script static void MonsterMain(dmon_t *m) {
 void PrintMonsterInfo(dmon_t *m) {
    ACS_BeginPrint();
    __nprintf(
-      "%p (%p) %s active: %u id: %.3u\n"
-      "wasdead: %u finalized: %u painwait: %i\n"
-      "level: %.3i rank: %i exp: %i\n"
-      "health: %i/%i\n"
-      "x: %k y: %k z: %k\n"
-      "r: %k h: %k\n"
-      "mi->exp: %lu mi->score: %" FMT_SCR "\n"
-      "mi->flags: %i mi->type: %i",
+      "%p (%p) %s active=%u id=%.3u\n"
+      "wasdead=%u finalized=%u resurrect=%u\n"
+      "level=%.3i rank=%i exp=%i\n"
+      "health=%i/%i\n"
+      "x=%k y=%k z=%k\n"
+      "r=%k h=%k\n"
+      "damagemul=%k painwait=%i\n"
+      "mi->prename=`%s' mi->name=`%s'\n"
+      "mi->exp=%u mi->score=%" FMT_SCR "\n"
+      "mi->flags=%i mi->type=%i mi->mass=%i\n",
       m, m->mi, m->mi->name, m->active, m->id,
-      m->wasdead, m->finalized, m->painwait,
+      m->wasdead, m->finalized, m->resurrect,
       m->level, m->rank, m->exp,
       m->health, m->maxhealth,
       m->x, m->y, m->z,
       m->r, m->h,
+      m->damagemul, m->painwait,
+      m->mi->prename, m->mi->name,
       m->mi->exp, m->mi->score,
-      m->mi->flags, m->mi->type);
+      m->mi->flags, m->mi->type, m->mi->mass);
    for(i32 i = 0; i < countof(m->resist); i++) {
-      __nprintf("resist %S: %i", sa_dmgtype_names[i], m->resist[i]);
+      __nprintf("resist[%S]=%i ", sa_dmgtype_names[i], m->resist[i]);
    }
    EndLogEx(_pri_bold|_pri_nonotify);
 }
