@@ -3020,11 +3020,11 @@
 "LITH_INFO_DESCR_700Express" =
    "\cy \c-\n"
    "\n"
-   "A revolver designed and manufactured by yourself. Uses .75zkr (~0.7in) diameter nanomachine-built centerfire bullets for long-range accuracy. Your arms have gotten used to the recoil by now. Upon its handle is inscribed a rizinak poem:\n"
+   "A revolver designed and manufactured by yourself. Uses .75zkr (~0.7in) diameter nanomachine-built centerfire bullets for long-range accuracy. Your arms have gotten used to the recoil by now. Upon its handle is inscribed a rznak poem:\n"
    "\n"
-   "\cy        \c-\n"
+   "\cy        \c-\n"
    "\n"
-   "\crrokuw, zakwu, nukow, ken, taort hir sirowkr, wurik, is\c-\n"
+   "\crrokw, zkwu, nukw, ken, trt hir srowkr, wrik, is\c-\n"
    "\n"
    "\cnShield, axe, brain, earth, far away's words, nothing, myself.\c-";
 "LITH_INFO_SHORT_ShrapnelGun" =
@@ -3046,11 +3046,7 @@
 "LITH_INFO_DESCR_Minigun" =
    "\cy !\c-\n"
    "\n"
-   "Directly translates to \"11 squared.\" Of unclear manufacture and origin. It may be a replica of the first gun ever made: It clearly exhibits late Spacewar/early Great Death design philosophy and manufacturing principles, but carbon dating and replicator errata place this particular gun in a much later period.\n"
-   "\n"
-   "---------------------------------------------\n"
-   "\n"
-   "\cnNOTES:\c- I found this in an abandoned warehouse, around the time we were born. Do you remember?";
+   "Directly translates to \"11 squared.\" Of unclear manufacture and origin. It may be a replica of the first gun ever made: It clearly exhibits late Spacewar/early Great Death design philosophy and manufacturing principles, but carbon dating and replicator errata place this particular gun in a much later period.";
 "LITH_INFO_SHORT_Motra" =
    "Ruzuk";
 "LITH_INFO_SHORT_DualRocket" =
@@ -3058,21 +3054,17 @@
 "LITH_INFO_TITLE_DualRocket" =
    "Franca and Sophia Rocket Launchers";
 "LITH_INFO_DESCR_DualRocket" =
-   "Weapons made for you by Omisielle. Two ground-to-ground rocket launchers designed to be used in tandem. Sophia fires homing shots, while Franca fires normal rockets. One known design flaw is that the scopes are non-functional, as they only have tinted glass inserted as a placeholder. These weapons were only used for one battle during the start of the Second Death period, being discontinued as soon as the fight moved from the Moon to Earth.\n"
-   "\n"
-   "---------------------------------------------\n"
-   "\n"
-   "\cnNOTES:\c- While the Moon's countries were mostly built underground, people on the Earth prefer above-ground structures. These weapons would have been a hazard to civilians if they were used there.";
+   "Weapons made for you by Omisielle. Two ground-to-ground rocket launchers designed to be used in tandem. Sophia fires homing shots, while Franca fires normal rockets. One known design flaw is that the scopes are non-functional, as they only have tinted glass inserted as a placeholder. These weapons were only used for one battle during the start of the Second Death period, being discontinued as soon as the fight moved from the Moon to Earth.";
 "LITH_INFO_SHORT_FortuneGun" =
    "Fortuity";
 "LITH_INFO_TITLE_FortuneGun" =
    "\"Fortuity\" Luck-Runs-Out Annihilation System";
 "LITH_INFO_DESCR_FortuneGun" =
-   "A weapon made for you by Sealis. Produced some time in the latter half of the Second Death period, during your time fighting on Earth. Ground-to-space heavy railgun for destroying enemy spacecraft. As long as the power is on, this weapon continues to emit deadly sparks out the front. See manual for safety instructions.\n"
+   "\cy -- \c-\n"
    "\n"
-   "---------------------------------------------\n"
+   "A weapon made for you by Sealis. Ground-to-space heavy railgun. As long as the power is on, this weapon continues to emit deadly sparks out the front. The weapon must be installed into the user's shoulder and back muscles via cybernetics to interface with their aura. Once installed, it will cause no harm to its user.\n"
    "\n"
-   "\cnNOTES:\c- Sealis died 5 years ago, near the end of the war. I feel like when I fire this weapon now, I can hear them screaming, feel their rage. Without the ability to destroy cruisers in a single shot—without this weapon—the arms race would have been lost. Still, the destruction it's caused disturbs me.";
+   "Utilizes indigo-purple chromagic. Unknown inner workings.";
 "LITH_INFO_SHORT_Rems" =
    "R.E.M.S";
 "LITH_INFO_TITLE_Rems" =
@@ -3080,11 +3072,9 @@
 "LITH_INFO_DESCR_Rems" =
    "\cy     \c-\n"
    "\n"
-   "The 339-7 REMS is a heavy machinegun that was developed during the last few years of the Dewar period by Qasl for their 339-7 spacecraft. Utilizing small chains of volatile lithium microcules, the gun has incredible ammunition efficiency, being able to essentially fire forever. When not attached to a ship, the reserves are far lower and it can only be used for short amounts of time, but it still generates thousands of projectiles with only 150ml of total ammunition.\n"
+   "The 339-7 REMS is a heavy machinegun that was developed during the last few years of the Dewar period by Qasl for their 339-7 spacecraft. Utilizing small chains of volatile lithium microcules, the gun has incredible ammo efficiency, being able to essentially fire forever. When not attached to a ship, the reserves are far lower and it can only be used for short amounts of time, but it still generates thousands of projectiles with only 150ml of total ammunition.\n"
    "\n"
-   "---------------------------------------------\n"
-   "\n"
-   "\cnNOTES:\c- This was mounted on the Moon-Free until a year or two ago. When it was decommissioned, I could only think it would still come in handy. It's starting to seem like my intuition is always right.";
+   "Utilizes blue and purple-red chromagic for microcule compression and decompression.";
 "LITH_INFO_SHORT_Rakz" =
    "Sub-bullets";
 "LITH_INFO_SHORT_Zaruk" =
@@ -6521,22 +6511,22 @@
    "KILL \c[Lith_Dark]PHANTOMS\c-\n"
    "TO \cgATTAIN POWER";
 "LITH_CBI_RUNE_RKW" =
-   "ROKUW \cn\n"
+   "ROKW \cn\n"
    "\cdSHIELD";
 "LITH_CBI_RUNE_RKZ" =
-   "RAKZ \cn\n"
+   "RAKZ \cn\n"
    "\cdMNT.GUN";
 "LITH_CBI_RUNE_ZKR" =
-   "ZIKR \cn\n"
+   "ZKR \cn\n"
    "\cdP.DART";
 "LITH_CBI_RUNE_ZKW" =
-   "ZAKWU \cn\n"
+   "ZKWU \cn\n"
    "\cdS.AXE";
 "LITH_CBI_RUNE_ZRK" =
-   "ZARUK \cn\n"
+   "ZRUK \cn\n"
    "\cdMNT.GRN";
 "LITH_CBI_RUNE_ZZKR" =
-   "ZOZOKR \cn\n"
+   "ZOZOKR \cn\n"
    "\cdDIM-DRI";
 "LITH_BIP_NAME_CORPORATIONS" =
    "Companies";

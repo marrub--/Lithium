@@ -183,22 +183,22 @@ KILL \c[Lith_Dark]PHANTOMS\c-
 TO \cgATTAIN POWER
 
 %% \#CBI_RUNE_RKW
-ROKUW \cn\u{E107}\u{E103}\u{E100}
+ROKW \cn\u{E107}\u{E103}\u{E108}\u{E100}
 \cdSHIELD
 %% \#CBI_RUNE_RKZ
-RAKZ \cn\u{E101}\u{E103}\u{E100}
+RAKZ \cn\u{E101}\u{E103}\u{E108}\u{E100}
 \cdMNT.GUN
 %% \#CBI_RUNE_ZKR
-ZIKR \cn\u{E100}\u{E103}\u{E101}
+ZKR \cn\u{E100}\u{E103}\u{E101}
 \cdP.DART
 %% \#CBI_RUNE_ZKW
-ZAKWU \cn\u{E108}\u{E107}\u{E103}\u{E101}
+ZKWU \cn\u{E108}\u{E107}\u{E103}\u{E101}
 \cdS.AXE
 %% \#CBI_RUNE_ZRK
-ZARUK \cn\u{E103}\u{E100}\u{E101}
+ZRUK \cn\u{E103}\u{E108}\u{E100}\u{E101}
 \cdMNT.GRN
 %% \#CBI_RUNE_ZZKR
-ZOZOKR \cn\u{E100}\u{E103}\u{E101}\u{E101}
+ZOZOKR \cn\u{E100}\u{E103}\u{E108}\u{E101}\u{E108}\u{E101}
 \cdDIM-DRI
 
 ## BIP ═══════════════════════════════════════════════════════════════════════╕
