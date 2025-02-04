@@ -32,15 +32,10 @@ struct output_array {
    ((inp)->ptr + 1 >= MAX_STRARRAY ? \
     (inp)->strs[(inp)->strptr + 1][0] : \
     (inp)->strs[(inp)->strptr][(inp)->ptr + 1])
-
-/* TODO: macroify */
-stkoff static
-i32 nexti(struct input_array *inp) {
-   if(inp->ptr + 1 >= MAX_STRARRAY)
-      return (inp)->strs[++(inp)->strptr][(inp)->ptr = 0];
-   else
-      return (inp)->strs[(inp)->strptr][++(inp)->ptr];
-}
+#define nexti(inp) \
+   ((inp)->ptr + 1 >= MAX_STRARRAY ? \
+    (inp)->strs[++(inp)->strptr][(inp)->ptr = 0] : \
+    (inp)->strs[(inp)->strptr][++(inp)->ptr])
 
 #define check_next(inp, chr) \
    statement( \
@@ -113,7 +108,11 @@ stkoff static
 i32 readii(struct input_array *inp) {
    register i32 ret = 0, digit;
    for(; (digit = geti(inp) - '"') < 92 && digit > 0; nexti(inp)) {
+      register i32 oldret = ret;
       ret = ret * 92 + digit;
+      if(ret < oldret) {
+         return oldret;
+      }
    }
    return ret;
 }
@@ -122,7 +121,7 @@ stkoff static
 void readsi(struct input_array *inp, char *out, mem_size_t max_len, char delim) {
    register i32 i, c;
    for(i = 0; i < max_len && (c = byte(geti(inp))) != delim; ++i, nexti(inp)) {
-      out[i] = geti(inp);
+      out[i] = c;
    }
    out[i] = '\0';
 }
@@ -284,6 +283,9 @@ script void P_Data_Load(void) {
          return;
       }
       readsi(&inp, chunk_name, 4, '\0');
+      if(chunk_name[0] == '\0') {
+         return;
+      }
       i32 version = readii(&inp);
       check_next(&inp, PLACEHOLDER);
       Dbg_Log(log_save,
