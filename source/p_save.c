@@ -15,98 +15,122 @@
 #include "m_trie.h"
 #include <setjmp.h>
 
-#define unwrap_eof(inp, label) \
-   statement( \
-      if(**inp == '\0') longjmp(data_env, label); \
-   )
+#define MAX_STRARRAY 1000
+#define PLACEHOLDER '!'
 
-#define unwrap_end(inp, chr, label) \
-   statement( \
-      if(**inp != '\0' && **inp != chr) longjmp(data_env, label); \
-      else                              ++*inp; \
-   )
-
-#define unwrap_delim(inp, chr, label) \
-   statement( \
-      if(**inp != chr) longjmp(data_env, label); \
-      else             ++*inp; \
-   )
-
-#define chunk_ver(ver, label) \
-   statement( \
-      if(!check_version(chunk_name, version, ver)) longjmp(data_env, label); \
-   )
-
-#define while_not_eoc(inp) \
-   while(**inp && byte(**inp) != _eoc_1 && byte((*inp)[1]) != _eoc_2)
-
-#define for_until_eoc(inp, init, cond, itr) \
-   for(init; **inp && byte(**inp) != _eoc_1 && byte((*inp)[1]) != _eoc_2 && \
-       cond; itr)
-
-enum {
-   _eoc_1 = 0xC2,
-   _eoc_2 = 0x91,
+struct input_array {
+   astr strs[16];
+   i32 ptr, strptr;
 };
+
+struct output_array {
+   i32 ptr, strptr;
+};
+
+#define geti(inp) ((inp)->strs[(inp)->strptr][(inp)->ptr])
+#define peepi(inp) \
+   ((inp)->ptr + 1 >= MAX_STRARRAY ? \
+    (inp)->strs[(inp)->strptr + 1][0] : \
+    (inp)->strs[(inp)->strptr][(inp)->ptr + 1])
+
+/* TODO: macroify */
+stkoff static
+i32 nexti(struct input_array *inp) {
+   if(inp->ptr + 1 >= MAX_STRARRAY)
+      return (inp)->strs[++(inp)->strptr][(inp)->ptr = 0];
+   else
+      return (inp)->strs[(inp)->strptr][++(inp)->ptr];
+}
+
+#define check_next(inp, chr) \
+   statement( \
+      if(geti(inp) != chr) { \
+         Dbg_Log(log_save, _l("error at line "), _p(__LINE__)); \
+         longjmp(data_env, _datajmp_fatal); \
+      } \
+      else (void)nexti(inp); \
+   )
+
+#define chunk_ver(ver) \
+   statement( \
+      if(!check_version(chunk_name, version, ver)) \
+         longjmp(data_env, _datajmp_fatal); \
+   )
 
 enum {
    _bipu_new,
 };
 
 enum {
-   _datajmp_unknown = 1,
-   _datajmp_error_skip,
-   _datajmp_skip,
-   _datajmp_fatal,
+   _datajmp_fatal = 1,
 };
 
 noinit static jmp_buf data_env;
 
 stkoff static
-void num_out(i32 n) {
+void writeco(struct output_array *out, i32 ch) {
+   if(out->ptr + 1 >= MAX_STRARRAY) {
+      out->ptr = 0;
+      CVarSetS(sa_psave[out->strptr++], ACS_EndStrParam());
+      ACS_BeginPrint();
+   }
+   ACS_PrintChar(ch);
+   ++out->ptr;
+}
+
+stkoff static
+void writeso(struct output_array *out, cstr s) {
+   for(; *s; ++s) writeco(out, *s);
+}
+
+stkoff static
+void writesno(struct output_array *out, cstr s, i32 len) {
+   for(register i32 i = 0; i < len; ++i) writeco(out, s[i]);
+}
+
+stkoff static
+void writeio(struct output_array *out, i32 n) {
    noinit static
    char buf[64], *p;
    p = buf + sizeof(buf) - 1;
    while(n) {
-      register i32div div = __div(n, 93);
-      *--p = div.rem + '!';
+      register i32div div = __div(n, 92);
+      *--p = div.rem + '"';
       n = div.quot;
    }
-   PrintStr(p);
+   writeso(out, p);
 }
 
 stkoff static
-void chunk_out(cstr name, i32 version) {
-   ACS_PrintChar(_eoc_1);
-   ACS_PrintChar(_eoc_2);
-   PrintStr(name);
-   num_out(version);
-   ACS_PrintChar(' ');
+void chunk_out(struct output_array *out, cstr name, i32 version) {
+   Dbg_Log(log_save, _l("Write chunk "), _p(name));
+   writeso(out, name);
+   writeio(out, version);
+   writeco(out, PLACEHOLDER);
 }
 
 stkoff static
-i32 num_inp(astr *p) {
+i32 readii(struct input_array *inp) {
    register i32 ret = 0, digit;
-   for(; **p && (digit = **p - '!') < 93 && digit > 0; ++*p) {
-      ret = ret * 93 + digit;
+   for(; (digit = geti(inp) - '"') < 92 && digit > 0; nexti(inp)) {
+      ret = ret * 92 + digit;
    }
    return ret;
 }
 
 stkoff static
-void str_inp(astr *p, char *out, mem_size_t max_len, char delim) {
-   register i32 i;
-   --max_len;
-   for(i = 0; i < max_len && **p && byte(**p) != delim; ++i, ++*p) {
-      out[i] = **p;
-      out[i + 1] = '\0';
+void readsi(struct input_array *inp, char *out, mem_size_t max_len, char delim) {
+   register i32 i, c;
+   for(i = 0; i < max_len && (c = byte(geti(inp))) != delim; ++i, nexti(inp)) {
+      out[i] = geti(inp);
    }
+   out[i] = '\0';
 }
 
 static
 bool check_version(cstr name, i32 version, i32 expected) {
    if(version != expected) {
-      Dbg_Log(log_dev,
+      Dbg_Log(log_save,
               _l("version "), _p(expected),
               _l(" expected for chunk "), _p(name),
               _l(" but got "), _p(version));
@@ -118,78 +142,98 @@ bool check_version(cstr name, i32 version, i32 expected) {
 
 script
 void P_Data_Save(void) {
-   Dbg_Log(log_dev, _l("Saving data..."));
+   Dbg_Log(log_save, _l("Saving data..."));
    ACS_BeginPrint();
-   chunk_out("Lith", 7);
+   struct output_array out = {};
+   chunk_out(&out, "Lith", 8);
    if(pl.done_intro) {
-      chunk_out("intr", 1);
-      num_out(pl.done_intro);
+      chunk_out(&out, "intr", 2);
+      writeio(&out, pl.done_intro);
+      writeco(&out, PLACEHOLDER);
    }
-   chunk_out("agrp", 1);
+   chunk_out(&out, "agrp", 2);
+   i32 agrps = 0;
+   for(i32 i = 0; i < UPGR_MAX; ++i) {
+      if(pl.upgrades[i].agroups) ++agrps;
+   }
+   writeio(&out, agrps);
+   writeco(&out, PLACEHOLDER);
    for(i32 i = 0; i < UPGR_MAX; ++i) {
       i32 groups = pl.upgrades[i].agroups;
       if(groups) {
-         PrintStr(Upgr_EnumToStr(i));
-         ACS_PrintChar(' ');
-         num_out(groups);
-         ACS_PrintChar(' ');
+         writeso(&out, Upgr_EnumToStr(i));
+         writeco(&out, PLACEHOLDER);
+         writeio(&out, groups);
+         writeco(&out, PLACEHOLDER);
       }
    }
-   chunk_out("note", 1);
+   chunk_out(&out, "note", 1);
    for(i32 i = 0; i < countof(pl.notes); ++i) {
       mem_size_t len = pl.notes[i] ? faststrlen(pl.notes[i]) : 0;
-      num_out(len);
-      ACS_PrintChar(' ');
-      PrintStrN(pl.notes[i], len);
+      writeio(&out, len);
+      writeco(&out, PLACEHOLDER);
+      writesno(&out, pl.notes[i], len);
    }
-   chunk_out("bipu", 1);
+   chunk_out(&out, "bipu", 2);
+   i32 numpage = 0;
+   for_page() {
+      if(get_bit(page->flags, _page_unlocked) &&
+         page->category <= _bipc_last_normal)
+      {
+         ++numpage;
+      }
+   }
+   writeio(&out, numpage);
+   writeco(&out, PLACEHOLDER);
    for_page() {
       if(get_bit(page->flags, _page_unlocked) &&
          page->category <= _bipc_last_normal)
       {
          i32 flg = 0;
          if(get_bit(page->flags, _page_new)) set_bit(flg, _bipu_new);
-         PrintStr(page->name);
-         ACS_PrintChar(' ');
-         num_out(flg);
-         ACS_PrintChar(' ');
+         writeso(&out, page->name);
+         writeco(&out, PLACEHOLDER);
+         writeio(&out, flg);
+         writeco(&out, PLACEHOLDER);
       }
    }
-   CVarSetS(sc_psave, ACS_EndStrParam());
+   chunk_out(&out, "Lend", 7);
+   CVarSetS(sa_psave[out.strptr], ACS_EndStrParam());
 }
 
-script void load_agrp(astr *inp) {
-   while_not_eoc(inp) {
+script void load_agrp(struct input_array *inp) {
+   i32 agrps = readii(inp);
+   check_next(inp, PLACEHOLDER);
+   for(i32 i = 0; i < agrps; ++i) {
       noinit static char name[12];
-      str_inp(inp, name, sizeof name, ' ');
-      unwrap_delim(inp, ' ', _datajmp_error_skip);
-      i32 agroups = num_inp(inp);
-      unwrap_end(inp, ' ', _datajmp_error_skip);
+      readsi(inp, name, sizeof(name) - 1, PLACEHOLDER);
+      check_next(inp, PLACEHOLDER);
+      i32 agroups = readii(inp);
+      check_next(inp, PLACEHOLDER);
       i32 upgr = Upgr_StrToEnum(name);
       if(upgr != -1) pl.upgrades[upgr].agroups = agroups;
    }
 }
 
-script void load_note(astr *inp) {
-   for_until_eoc(inp, i32 i = 0, i < countof(pl.notes), ++i) {
-      mem_size_t len = num_inp(inp);
-      unwrap_delim(inp, ' ', _datajmp_error_skip);
+script void load_note(struct input_array *inp) {
+   for(i32 i = 0; i < countof(pl.notes); ++i) {
+      mem_size_t len = readii(inp);
+      check_next(inp, PLACEHOLDER);
       Dalloc(pl.notes[i]);
       pl.notes[i] = nil;
       if(len) {
          pl.notes[i] = Malloc(len + 1, _tag_plyr);
-         str_inp(inp, pl.notes[i], len + 1, '\0');
-         unwrap_eof(inp, _datajmp_error_skip);
+         readsi(inp, pl.notes[i], len, '\0');
       }
    }
 }
 
-script void load_bipu_page(astr *inp) {
+script void load_bipu_page(struct input_array *inp) {
    noinit static char name[32];
-   str_inp(inp, name, sizeof name, ' ');
-   unwrap_delim(inp, ' ', _datajmp_error_skip);
-   i32 flg = num_inp(inp);
-   unwrap_end(inp, ' ', _datajmp_error_skip);
+   readsi(inp, name, sizeof(name) - 1, PLACEHOLDER);
+   check_next(inp, PLACEHOLDER);
+   i32 flg = readii(inp);
+   check_next(inp, PLACEHOLDER);
    struct page *page = P_BIP_NameToPage(name);
    if(page) {
       P_BIP_UnlockPage(page, true);
@@ -198,66 +242,81 @@ script void load_bipu_page(astr *inp) {
    }
 }
 
-script void load_bipu(astr *inp) {
-   while_not_eoc(inp) {
+script void load_bipu(struct input_array *inp) {
+   i32 numpage = readii(inp);
+   check_next(inp, PLACEHOLDER);
+   for(i32 i = 0; i < numpage; ++i) {
       load_bipu_page(inp);
    }
 }
 
 script void P_Data_Load(void) {
    noinit static char chunk_name[5];
-   Dbg_Log(log_dev, _l("Loading data..."));
-   astr inp = CVarGetS(sc_psave);
-   while(*inp && byte(*inp) == _eoc_1 && byte(inp[1]) == _eoc_2) {
+   Dbg_Log(log_save, _l("Loading data..."));
+   struct input_array inp = {
+      .strs = {
+         CVarGetS(sa_psave[0]),
+         CVarGetS(sa_psave[1]),
+         CVarGetS(sa_psave[2]),
+         CVarGetS(sa_psave[3]),
+         CVarGetS(sa_psave[4]),
+         CVarGetS(sa_psave[5]),
+         CVarGetS(sa_psave[6]),
+         CVarGetS(sa_psave[7]),
+         CVarGetS(sa_psave[8]),
+         CVarGetS(sa_psave[9]),
+         CVarGetS(sa_psave[10]),
+         CVarGetS(sa_psave[11]),
+         CVarGetS(sa_psave[12]),
+         CVarGetS(sa_psave[13]),
+         CVarGetS(sa_psave[14]),
+         CVarGetS(sa_psave[15]),
+      },
+      .ptr = 0,
+      .strptr = 0,
+   };
+   for(;;) {
       switch(setjmp(data_env)) {
       case 0:
          break;
-      case _datajmp_unknown:
-         Dbg_Log(log_dev, _l("unknown chunk "), _l(chunk_name));
-      case _datajmp_error_skip:
-         Dbg_Log(log_dev,
-                 _l("chunk "), _l(chunk_name), _l(" has errors -- skipping"));
-      case _datajmp_skip:
-         while(*inp && !(*inp == _eoc_1 && inp[1] == _eoc_2)) ++inp;
-         continue;
       case _datajmp_fatal:
-         Dbg_Log(log_dev, _l("fatal error -- terminated early"));
+         Dbg_Log(log_save, _l("fatal error -- terminated early"));
          return;
       }
-      inp += 2;
-      str_inp(&inp, chunk_name, 5, '\0');
-      unwrap_eof(&inp, _datajmp_fatal);
-      i32 version = num_inp(&inp);
-      unwrap_end(&inp, ' ', _datajmp_fatal);
-      Dbg_Log(log_dev,
+      readsi(&inp, chunk_name, 4, '\0');
+      i32 version = readii(&inp);
+      check_next(&inp, PLACEHOLDER);
+      Dbg_Log(log_save,
               _l("loading chunk "), _l(chunk_name),
               _l(" version "), _p(version));
       switch(P_SaveChunkName(chunk_name)) {
       case _save_chunk_Lith:
-         chunk_ver(7, _datajmp_fatal);
+         chunk_ver(8);
          break;
+      case _save_chunk_Lend:
+         chunk_ver(7);
+         return;
       case _save_chunk_intr:
-         chunk_ver(1, _datajmp_skip);
-         pl.done_intro = num_inp(&inp);
+         chunk_ver(2);
+         pl.done_intro = readii(&inp);
+         check_next(&inp, PLACEHOLDER);
          break;
       case _save_chunk_agrp:
-         chunk_ver(1, _datajmp_skip);
+         chunk_ver(2);
          load_agrp(&inp);
          break;
       case _save_chunk_note:
-         chunk_ver(1, _datajmp_skip);
+         chunk_ver(1);
          load_note(&inp);
          break;
       case _save_chunk_bipu:
-         chunk_ver(1, _datajmp_skip);
+         chunk_ver(2);
          load_bipu(&inp);
          break;
       default:
-         longjmp(data_env, _datajmp_unknown);
+         Dbg_Log(log_save, _l("unknown chunk "), _l(chunk_name));
+         longjmp(data_env, _datajmp_fatal);
       }
-   }
-   if(*inp) {
-      longjmp(data_env, _datajmp_fatal);
    }
 }
 

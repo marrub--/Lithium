@@ -139,6 +139,21 @@ server int    lith_player_lvsys         = 1;
 server int    lith_player_scoredisp     = 2;
 server string lith_player_pronouns      = "";
 
-server string lith_psave = "";
+server string lith_psave_0 = "";
+server string lith_psave_1 = "";
+server string lith_psave_2 = "";
+server string lith_psave_3 = "";
+server string lith_psave_4 = "";
+server string lith_psave_5 = "";
+server string lith_psave_6 = "";
+server string lith_psave_7 = "";
+server string lith_psave_8 = "";
+server string lith_psave_9 = "";
+server string lith_psave_10 = "";
+server string lith_psave_11 = "";
+server string lith_psave_12 = "";
+server string lith_psave_13 = "";
+server string lith_psave_14 = "";
+server string lith_psave_15 = "";
 
 /* EOF */
