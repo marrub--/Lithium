@@ -582,6 +582,16 @@ static void P_Spe_pTick(void) {
       pl.regenwait    = 700;
       ACS_FadeTo(184, 205, 255, 0.3k, 0.0k);
       ACS_FadeTo(222, 5, 92, 0.0k, 3.0k);
+      if(get_bit(pl.upgrades[UPGR_ShieldOC].flags, _ug_active)) {
+         ACS_SpawnProjectile(0, so_ShieldBlast, 256, 32, 0, 0, 0);
+         ACS_SpawnProjectile(0, so_ShieldBlast, 224, 32, 0, 0, 0);
+         ACS_SpawnProjectile(0, so_ShieldBlast, 192, 32, 0, 0, 0);
+         ACS_SpawnProjectile(0, so_ShieldBlast, 160, 32, 0, 0, 0);
+         ACS_SpawnProjectile(0, so_ShieldBlast, 128, 32, 0, 0, 0);
+         ACS_SpawnProjectile(0, so_ShieldBlast, 96,  32, 0, 0, 0);
+         ACS_SpawnProjectile(0, so_ShieldBlast, 64,  32, 0, 0, 0);
+         ACS_SpawnProjectile(0, so_ShieldBlast, 32,  32, 0, 0, 0);
+      }
    } else if(pl.shield < pl.old.shield) {
       ACS_StopSound(pl.tid, lch_shield);
       i32 diff = pl.old.shield - pl.shield;

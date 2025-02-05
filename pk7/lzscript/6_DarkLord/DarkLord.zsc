@@ -6,6 +6,9 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
+class Lith_ShieldBlast : DoomImpBall {
+}
+
 class Lith_DarkLordPlayer : Lith_Player {
    default {
       Health 150;
