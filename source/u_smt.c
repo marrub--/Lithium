@@ -10,7 +10,7 @@ void Z_TriggerNegotiation(void) {
    enum {
       negotiation_boss,
       negotiation_kid,
-      negotiation_blackguard,
+      negotiation_tough,
       negotiation_prince,
       negotiation_dude,
    };
@@ -29,7 +29,7 @@ void Z_TriggerNegotiation(void) {
    case mtype_imp:
    case mtype_hellknight:
    case mtype_revenant:
-      pl.dlg.page = negotiation_blackguard;
+      pl.dlg.page = negotiation_tough;
       break;
    case mtype_baron:
    case mtype_painelemental:

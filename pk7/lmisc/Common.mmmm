@@ -38,7 +38,7 @@ ilo_kon(ikon_awen) {
    jo {
       negotiation_boss,
       negotiation_kid,
-      negotiation_blackguard,
+      negotiation_tough,
       negotiation_prince,
       negotiation_dude,
       negotiation_setup,
@@ -58,7 +58,7 @@ ilo_kon(ikon_awen) {
       jsr page_address(negotiation_setup);
       text negotiation_test;
    }
-   lipu(negotiation_blackguard) {
+   lipu(negotiation_tough) {
       jsr page_address(negotiation_setup);
       text negotiation_test;
    }

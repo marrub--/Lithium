@@ -1932,6 +1932,10 @@
    "Ch'~hr'sonil'sobub t'jhub8'N'ch)";
 "LITH_INFO_SHORT_Shield" =
    "Shield";
+"LITH_INFO_TITLE_Shield" =
+   "Aura Shield";
+"LITH_INFO_DESCR_Shield" =
+   "A small blade-like device which installs into the user's heart, piercing through the chest. Directly interfaces with and protects the user's aura, utilizing deep blue chromagic. Can not be removed after installation without risk of death.";
 "LITH_INFO_SHORT_DimDriver" =
    "Dimension Driver";
 "LITH_INFO_SHORT_ScoreChip" =
@@ -2995,10 +2999,18 @@
    "007 Mode";
 "LITH_UPGRADE_EFFEC_Goldeneye" =
    "Get the true Goldeneye 007™ experience!";
+"LITH_UPGRADE_TITLE_ATATATATA" =
+   "Big Dipper Mode";
+"LITH_UPGRADE_EFFEC_ATATATATA" =
+   "Turns you into Kenshiro. No joke description for this one, you really do literally just become Ken.";
 "LITH_UPGRADE_TITLE_SMT" =
    "Devil Negotiator";
 "LITH_UPGRADE_EFFEC_SMT" =
    "Lets you talk with weakened enemies when there are few dangers near-by. Negotiate with them, and thou shalt awaken to the ultimate secret of the demons, granting thee infinite power...";
+"LITH_UPGRADE_TITLE_Kampilan_B" =
+   "Dekampila";
+"LITH_UPGRADE_EFFEC_Kampilan_B" =
+   "Decompile your enemies!";
 "LITH_UPGRADE_TITLE_UNCEUNCE" =
    "UNCE UNCE";
 "LITH_UPGRADE_EFFEC_UNCEUNCE" =

@@ -6,6 +6,13 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Shield | Shield
+== \#INFO_TITLE_Shield | Aura Shield
+@@ \#INFO_DESCR_Shield
+A small blade-like device which installs into the user's heart,
+piercing through the chest. Directly interfaces with and protects the
+user's aura, utilizing deep blue chromagic. Can not be removed after
+installation without risk of death.
 
 ## EOF

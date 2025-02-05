@@ -382,11 +382,22 @@ You get a sword. It is literally your only weapon.
 Get the true Goldeneye 007™ experience!
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
+== \#UPGRADE_TITLE_ATATATATA | Big Dipper Mode
+@@ \#UPGRADE_EFFEC_ATATATATA
+Turns you into Kenshiro. No joke description for this one, you really
+do literally just become Ken.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_SMT | Devil Negotiator
 @@ \#UPGRADE_EFFEC_SMT
 Lets you talk with weakened enemies when there are few dangers
 near-by. Negotiate with them, and thou shalt awaken to the ultimate
 secret of the demons, granting thee infinite power...
+
+## ═══════════════════════════════════════════════════════════════════════════╕
+== \#UPGRADE_TITLE_Kampilan_B | Dekampila
+@@ \#UPGRADE_EFFEC_Kampilan_B
+Decompile your enemies!
 
 ## Downgrades ════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_UNCEUNCE | UNCE UNCE
