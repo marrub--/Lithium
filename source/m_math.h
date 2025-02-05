@@ -50,10 +50,10 @@ extern union ik64 ik64;
 #define PITCH_BASE (-0.5)
 
 /* π! */
-#define pi  (3.14159265358979323846lk)
-#define pi2 (pi / 2.0lk)
-#define pi4 (pi / 4.0lk)
-#define tau (pi * 2.0lk)
+#define pi  (3.14159265358979323846k)
+#define pi2 (pi / 2.0k)
+#define pi4 (pi / 4.0k)
+#define tau (pi * 2.0k)
 
 struct interp_data_i {
    i32 value;
