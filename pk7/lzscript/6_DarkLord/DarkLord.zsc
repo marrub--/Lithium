@@ -6,7 +6,28 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_ShieldBlast : DoomImpBall {
+class Lith_ShieldBlast : Actor {
+   default {
+      Radius 16;
+      Height 16;
+      Speed 32;
+      Damage 30;
+      RenderStyle "Add";
+      SeeSound "imp/attack";
+      DeathSound "imp/shotx";
+      XScale 0.5;
+      Projectile;
+      +FloorHugger
+   }
+   states {
+   Spawn:
+      BLLT N 35 bright;
+      BLLT N 1 bright a_fadeOut(0.01);
+      wait;
+   Death:
+      BLLT N 1 bright a_fadeOut(0.1);
+      wait;
+   }
 }
 
 class Lith_DarkLordPlayer : Lith_Player {

@@ -325,6 +325,12 @@ Increases the weight of your armor, thus increasing the effect gravity
 has on you. Also allows you to charge using a new sub-weapon.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
+== \#UPGRADE_TITLE_ShieldOC | Shield Overclock
+@@ \#UPGRADE_EFFEC_ShieldOC
+Lets out a wave of projectiles in all directions when your shield
+depletes.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_HoverBoots | Hover Stilts
 @@ \#UPGRADE_EFFEC_HoverBoots
 Like drywall stilts, these poles attach to your legs and allow you to

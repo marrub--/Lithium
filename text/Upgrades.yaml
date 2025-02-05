@@ -38,7 +38,7 @@ _uc_body:
    pD:
       Subweapons:  {f: --URE}
       HeavyArmor:  {f: ADU--, scr: 1231234}
-      ShieldOC:    {          scr: 9999999}
+      ShieldOC:    {          scr: 1100000}
       HoverBoots:  {f: --U--, scr: 3999999}
       HoverBoots2: {pg: N/A,  scr: 1999999}
       SkillSword:  {f: ----E, scr: 2868666}

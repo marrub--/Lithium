@@ -2961,6 +2961,10 @@
    "Heavy Armor";
 "LITH_UPGRADE_EFFEC_HeavyArmor" =
    "Increases the weight of your armor, thus increasing the effect gravity has on you. Also allows you to charge using a new sub-weapon.";
+"LITH_UPGRADE_TITLE_ShieldOC" =
+   "Shield Overclock";
+"LITH_UPGRADE_EFFEC_ShieldOC" =
+   "Lets out a wave of projectiles in all directions when your shield depletes.";
 "LITH_UPGRADE_TITLE_HoverBoots" =
    "Hover Stilts";
 "LITH_UPGRADE_EFFEC_HoverBoots" =
