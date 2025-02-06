@@ -1,7 +1,26 @@
 ## -*-Agw-LithTxt-*-
 
-== \#INFO_SHORT_Khanda   | Khanda
+## ═══════════════════════════════════════════════════════════════════════════╕
+== \#INFO_SHORT_Khanda | Khanda
+== \#INFO_TITLE_Khanda | $\#INFO_SHORT_Khanda
+@@ \#INFO_DESCR_Khanda
+\cy\u{E108}\u{E104}\u{E102}\u{E108}\u{E105}\u{E103}\c-
+
+A sword from ancient times, which has mostly fallen out of use except
+in religious contexts. The design is originally from the Indian
+subcontinent. This was your weapon of choice until guns were invented.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Kampilan | Kampilan
+== \#INFO_TITLE_Kampilan | $\#INFO_SHORT_Kampilan
+@@ \#INFO_DESCR_Kampilan
+\cy\u{E102}\u{E108}\u{E100}\u{E108}\u{E105}\u{E102}\u{E108}\u{E103}\c-
+
+A sword from ancient times made for war, which continues to be used in
+battles to this day. The design is originally from the Philippine
+archipelago. This particular one was crafted for your inauguration as
+Dark Lord. Indicolite is placed in the pommel, imbuing the sword with
+minor magical properties.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_700Express | $$\#INFO_SHORT_Revolver
@@ -13,7 +32,7 @@
 A revolver designed and manufactured by yourself. Uses .75zkr (~0.7in)
 diameter nanomachine-built centerfire bullets for long-range accuracy.
 Your arms have gotten used to the recoil by now. Upon its handle is
-inscribed a rznak poem:
+inscribed a rznk poem:
 
 \cy\u{E106}\u{E108} \u{E103}\u{E108}\u{E100}\u{E107} \u{E100}\u{E103}\u{E107}\u{E108}\u{E100}\u{E106} \u{E100}\u{E108}\u{E105} \u{E104}\u{E100}\u{E104} \u{E102}\u{E108}\u{E103} \u{E107}\u{E103}\u{E108}\u{E102} \u{E108}\u{E107}\u{E103}\u{E101} \u{E107}\u{E103}\u{E108}\u{E100}\c-
 
@@ -24,8 +43,9 @@ inscribed a rznak poem:
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_ShrapnelGun | Shrapnel Gun
 == \#INFO_TITLE_ShrapnelGun | Vacuum Displacement Cannon
-## TODO: add translation
 @@ \#INFO_DESCR_ShrapnelGun
+\cy\u{E102}\u{E108}\u{E103} \u{E103}\u{E108}\u{E106}\u{E107} \u{E108}\u{E105}\u{E108}\u{E106}\c-
+
 A reverse-flow vacuum used to displace heavy metals in the
 zero-gravity production of spacecraft. Seemingly effective as a gun
 when overloaded. Normally, this weapon wouldn't work well without an
@@ -36,8 +56,9 @@ Heavy Industries for Qasl.
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_4Bore | Hunting Shotgun
 == \#INFO_TITLE_4Bore | Double-Barreled Hunting Shotgun
-## TODO: add translation
 @@ \#INFO_DESCR_4Bore
+\cy\u{E102}\u{E108}\u{E103}\u{E102}\u{E108}\u{E105}\c-
+
 A double-barreled shotgun utilizing heavy black powder cartridges.
 Shells are loaded with four bismuth balls of buckshot. The only
 notable thing about this weapon is its overwhelming power. It's been
@@ -59,12 +80,20 @@ place this particular gun in a much later period.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Motra | Ruzuk
+== \#INFO_TITLE_Motra | $\#INFO_SHORT_Motra
+@@ \#INFO_DESCR_Motra
+\cy\u{E103}\u{E108}\u{E101}\u{E108}\u{E100}\c-
+
+An exceptionally quiet weapon. Mass-produced for Earth forces during
+the war by Qesel. While particularly useful in an atmosphere, this
+weapon was also used on the Moon.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_DualRocket | Franca & Sophia
 == \#INFO_TITLE_DualRocket | Franca and Sophia Rocket Launchers
-## TODO: add translation
 @@ \#INFO_DESCR_DualRocket
+\cy\u{E108}\u{E108}\u{E105}\u{E108}\u{E106} \u{E104} \u{E108}\u{E103}\u{E102}\u{E108}\u{E100}\u{E108}\u{E105}\c-
+
 Weapons made for you by Omisielle. Two ground-to-ground rocket
 launchers designed to be used in tandem. Sophia fires homing shots,
 while Franca fires normal rockets. One known design flaw is that the

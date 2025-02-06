@@ -6,6 +6,14 @@
 ## │                                                                          │
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_DimDriver | Dimension Driver
+== \#INFO_TITLE_DimDriver | $\#INFO_SHORT_DimDriver
+@@ \#INFO_DESCR_DimDriver
+An artifact from another universe with unfixed dimensions. Allows
+travel to other universes, and makes for a good hiding place. The
+history of this device has been obscured by time. It once held
+meaning, started wars, but now it simply lays dormant in a building,
+somewhere. You happened to have stolen it.
 
 ## EOF

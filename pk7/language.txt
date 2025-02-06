@@ -1938,6 +1938,10 @@
    "A small blade-like device which installs into the user's heart, piercing through the chest. Directly interfaces with and protects the user's aura, utilizing deep blue chromagic. Can not be removed after installation without risk of death.";
 "LITH_INFO_SHORT_DimDriver" =
    "Dimension Driver";
+"LITH_INFO_TITLE_DimDriver" =
+   "$LITH_INFO_SHORT_DimDriver";
+"LITH_INFO_DESCR_DimDriver" =
+   "An artifact from another universe with unfixed dimensions. Allows travel to other universes, and makes for a good hiding place. The history of this device has been obscured by time. It once held meaning, started wars, but now it simply lays dormant in a building, somewhere. You happened to have stolen it.";
 "LITH_INFO_SHORT_ScoreChip" =
    "Score Chip";
 "LITH_INFO_TITLE_ScoreChip" =
@@ -3027,8 +3031,20 @@
    "Firing any gun with a magazine will immediately unload it completely. Hope you like reload animations!";
 "LITH_INFO_SHORT_Khanda" =
    "Khanda";
+"LITH_INFO_TITLE_Khanda" =
+   "$LITH_INFO_SHORT_Khanda";
+"LITH_INFO_DESCR_Khanda" =
+   "\cy\c-\n"
+   "\n"
+   "A sword from ancient times, which has mostly fallen out of use except in religious contexts. The design is originally from the Indian subcontinent. This was your weapon of choice until guns were invented.";
 "LITH_INFO_SHORT_Kampilan" =
    "Kampilan";
+"LITH_INFO_TITLE_Kampilan" =
+   "$LITH_INFO_SHORT_Kampilan";
+"LITH_INFO_DESCR_Kampilan" =
+   "\cy\c-\n"
+   "\n"
+   "A sword from ancient times made for war, which continues to be used in battles to this day. The design is originally from the Philippine archipelago. This particular one was crafted for your inauguration as Dark Lord. Indicolite is placed in the pommel, imbuing the sword with minor magical properties.";
 "LITH_INFO_SHORT_700Express" =
    "$$LITH_INFO_SHORT_Revolver";
 "LITH_INFO_TITLE_700Express" =
@@ -3036,7 +3052,7 @@
 "LITH_INFO_DESCR_700Express" =
    "\cy \c-\n"
    "\n"
-   "A revolver designed and manufactured by yourself. Uses .75zkr (~0.7in) diameter nanomachine-built centerfire bullets for long-range accuracy. Your arms have gotten used to the recoil by now. Upon its handle is inscribed a rznak poem:\n"
+   "A revolver designed and manufactured by yourself. Uses .75zkr (~0.7in) diameter nanomachine-built centerfire bullets for long-range accuracy. Your arms have gotten used to the recoil by now. Upon its handle is inscribed a rznk poem:\n"
    "\n"
    "\cy        \c-\n"
    "\n"
@@ -3048,12 +3064,16 @@
 "LITH_INFO_TITLE_ShrapnelGun" =
    "Vacuum Displacement Cannon";
 "LITH_INFO_DESCR_ShrapnelGun" =
+   "\cy  \c-\n"
+   "\n"
    "A reverse-flow vacuum used to displace heavy metals in the zero-gravity production of spacecraft. Seemingly effective as a gun when overloaded. Normally, this weapon wouldn't work well without an atmosphere, but the exceptional space of Hell appears to allow some pressure differential to still exist. This model was designed by Sewek Heavy Industries for Qasl.";
 "LITH_INFO_SHORT_4Bore" =
    "Hunting Shotgun";
 "LITH_INFO_TITLE_4Bore" =
    "Double-Barreled Hunting Shotgun";
 "LITH_INFO_DESCR_4Bore" =
+   "\cy\c-\n"
+   "\n"
    "A double-barreled shotgun utilizing heavy black powder cartridges. Shells are loaded with four bismuth balls of buckshot. The only notable thing about this weapon is its overwhelming power. It's been used to kill dozens of dangerous animals, maybe, cruelly, some other humans, and now demons. Use it to defend yourself.";
 "LITH_INFO_SHORT_Minigun" =
    "Minigun";
@@ -3065,11 +3085,19 @@
    "Directly translates to \"11 squared.\" Of unclear manufacture and origin. It may be a replica of the first gun ever made: It clearly exhibits late Spacewar/early Great Death design philosophy and manufacturing principles, but carbon dating and replicator errata place this particular gun in a much later period.";
 "LITH_INFO_SHORT_Motra" =
    "Ruzuk";
+"LITH_INFO_TITLE_Motra" =
+   "$LITH_INFO_SHORT_Motra";
+"LITH_INFO_DESCR_Motra" =
+   "\cy\c-\n"
+   "\n"
+   "An exceptionally quiet weapon. Mass-produced for Earth forces during the war by Qesel. While particularly useful in an atmosphere, this weapon was also used on the Moon.";
 "LITH_INFO_SHORT_DualRocket" =
    "Franca & Sophia";
 "LITH_INFO_TITLE_DualRocket" =
    "Franca and Sophia Rocket Launchers";
 "LITH_INFO_DESCR_DualRocket" =
+   "\cy  \c-\n"
+   "\n"
    "Weapons made for you by Omisielle. Two ground-to-ground rocket launchers designed to be used in tandem. Sophia fires homing shots, while Franca fires normal rockets. One known design flaw is that the scopes are non-functional, as they only have tinted glass inserted as a placeholder. These weapons were only used for one battle during the start of the Second Death period, being discontinued as soon as the fight moved from the Moon to Earth.";
 "LITH_INFO_SHORT_FortuneGun" =
    "Fortuity";
