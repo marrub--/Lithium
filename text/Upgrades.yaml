@@ -37,11 +37,11 @@ _uc_body:
       StealthSys:  {scr: 1800450, f: -DU--}
    pD:
       Subweapons:  {f: --URE}
-      HeavyArmor:  {f: ADU--, scr: 1231234}
-      ShieldOC:    {          scr: 1100000}
-      HoverBoots:  {f: --U--, scr: 3999999}
-      HoverBoots2: {pg: N/A,  scr: 1999999}
-      SkillSword:  {f: ----E, scr: 2868666}
+      HeavyArmor:  {f: ADU--, scr:  321234}
+      ShieldOC:    {          scr:  410000}
+      HoverBoots:  {f: --U--, scr: 2999999}
+      HoverBoots2: {pg: N/A,  scr:  999999}
+      SkillSword:  {f: ----E, scr: 1868666}
 _uc_weap:
    pM:
       Pistol_A:  {scr:  140940}
@@ -71,23 +71,23 @@ _uc_weap:
       ShipGun_A:  {scr: 3988800, grp: 5}
       ShipGun_B:  {scr: 4767700, grp: 5}
    pD:
-      SubGun_A:   {pg: N/A, scr:  810603}
-      SubGrn_A:   {pg: N/A, scr:  777757}
-      SubAxe_A:   {pg: N/A, scr: 1001001}
+      SubGun_A:   {pg: N/A, scr:  610603}
+      SubGrn_A:   {pg: N/A, scr:  577757}
+      SubAxe_A:   {pg: N/A, scr:  900001}
       SubDrt_A:   {pg: N/A, scr:  939393}
       Kampilan_A: {pg: N/A, scr: 1720999}
       700E_A:     {pg: N/A, scr:  900000}
-      Shrapnel_A: {pg: N/A, scr: 2222222}
-      Shrapnel_B: {pg: N/A, scr: 1444444}
+      Shrapnel_A: {pg: N/A, scr: 1444444}
+      Shrapnel_B: {pg: N/A, scr: 1222222}
       4Bore_A:    {pg: N/A, scr: 2444444}
-      4Bore_B:    {pg: N/A, scr: 1911111}
+      4Bore_B:    {pg: N/A, scr:  911111}
       Minigun_A:  {pg: N/A, scr: 1932134}
       Franca_A:   {pg: N/A, scr: 2273793}
-      Sophia_A:   {pg: N/A, scr: 2223432, grp: 2}
+      Sophia_A:   {pg: N/A, scr: 1223432, grp: 2}
       Sophia_B:   {pg: N/A, scr: 2234321, grp: 2}
       Fortune_A:  {pg: N/A, scr: 2620000}
       Rems_A:     {pg: N/A, scr: 3321234}
-      Rems_B:     {pg: N/A, scr: 3684838}
+      Rems_B:     {pg: N/A, scr: 4684838}
 _uc_extr:
    gO:
       TorgueMode: {pg: N/A, scr: 8000000,                    req: rdi, pr: 8}
@@ -100,7 +100,7 @@ _uc_extr:
       SMT:       {pg: N/A, scr: 5696969, mul: 20, req: dim}
       ATATATATA: {pg: N/A, scr: 1983333, mul: 2,  req: dim}
    pD:
-      Kampilan_B: {pg: N/A, scr: 9999999, req: dim}
+      Kampilan_B: {pg: N/A, scr: 999999, req: dim}
 _uc_down:
    gA:
       UNCEUNCE:   {pg: N/A, f: ADU--, mul: 30}
