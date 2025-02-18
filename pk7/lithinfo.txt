@@ -107,8 +107,6 @@
    cl: pC tag: HeadsUpDispJem unl: "AOF";
    cl: pD tag: HeadsUpDispAri;
    cl: gA tag: VitalScanner unl: "OFMD";
-   cl: gI tag: Lightspark;
-   cl: gI tag: Minimap;
 
    cl: pM tag: JetBooster unl: "OFMD";
    cl: pM tag: ReflexWetw unl: "OFMD";
@@ -122,11 +120,6 @@
    cl: pC tag: StealthSys;
 
    cl: gO tag: AutoReload;
-
-   cl: pD tag: HeavyArmor;
-   cl: pD tag: ShieldOC;
-   cl: pD tag: HoverBoots;
-   cl: pD tag: SkillSword;
 }
 
 "places" {
@@ -229,12 +222,9 @@
    cl: pD tag: DualRocket;
    cl: pD tag: FortuneGun;
    cl: pD tag: Rems;
-   cl: pD tag: Subweapons;
 }
 
 "weapons auto" {
-   cl: pD tag: Rakz;
-
    cl: pC tag: Blade;
    cl: pC tag: Delear unl: "Earth";
 }
@@ -245,10 +235,6 @@
    cl: pC tag: Hulgyon  unl: "Heaven";
    cl: pC tag: StarShot unl: "AOF";
    cl: pC tag: Cercle   unl: "Earth";
-
-   cl: pD tag: Zaruk;
-   cl: pD tag: Zakwu;
-   cl: pD tag: Zikr;
 }
 
 "extra auto" {

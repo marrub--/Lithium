@@ -20,8 +20,8 @@ _uc_body:
       ReflexWetw: {f: ADU--,    pr: 5, mul: -5}
       AutoReload: {scr: 950050, pr: 2}
    gI:
-      Lightspark: {f: A-U--}
-      Minimap:    {scr: 999999}
+      Lightspark: {pg: N/A, f: A-U--}
+      Minimap:    {pg: N/A, scr: 999999}
    gM:
       SecretScan: {scr: 9999999}
    pM:
@@ -36,12 +36,12 @@ _uc_body:
       SoulCleaver: {scr: 1100000}
       StealthSys:  {scr: 1800450, f: -DU--}
    pD:
-      Subweapons:  {f: --URE}
-      HeavyArmor:  {f: ADU--, scr:  321234}
-      ShieldOC:    {          scr:  410000}
-      HoverBoots:  {f: --U--, scr: 2999999}
-      HoverBoots2: {pg: N/A,  scr:  999999}
-      SkillSword:  {f: ----E, scr: 1868666}
+      Subweapons:  {pg: N/A, f: --URE}
+      HeavyArmor:  {pg: N/A, f: ADU--, scr:  321234}
+      ShieldOC:    {pg: N/A,           scr:  410000}
+      HoverBoots:  {pg: N/A, f: --U--, scr: 2999999}
+      HoverBoots2: {pg: N/A, pg: N/A,  scr:  999999}
+      SkillSword:  {pg: N/A, f: ----E, scr: 1868666}
 _uc_weap:
    pM:
       Pistol_A:  {scr:  140940}
