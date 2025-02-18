@@ -131,10 +131,8 @@ ui void drawSky(RenderEvent evt) {
    case _msky_none:
       /* null sky just does nothing */
       break;
-   case _msky_shader:
    case _msky_tintonly:
-      /* for shader sky and tint-only, we only need to dim with the
-       * sky shade */
+      /* for tint-only, we only need to dim with the sky shade */
       let dim_cr = m_color;
       if(do_flash) {
          dim_cr = color(
@@ -184,7 +182,6 @@ void replaceSky() {
    m_flashLen = 0;
    m_setSky1.setInvalid();
    m_setSky2.setInvalid();
-   let skyB    = Lith_URANUS.getTex("LITHBSKY");
    let skyC    = Lith_URANUS.getTex("LITHCSKY");
    m_gradient  = Lith_URANUS.getTex("LITHSKGR");
    m_lightning = Lith_URANUS.getTex("LITHSKLI");
@@ -194,7 +191,6 @@ void replaceSky() {
       /* you'll need to add new skies to this switch */
       m_mode = _msky_nochange;
       break;
-   case _msky_shader:
    case _msky_tintonly:
       color cr;
       /* no atmosphere? */
@@ -224,12 +220,7 @@ void replaceSky() {
          min(cr.b + int(m_fogColor.b * (m_fogColor.a / 255.0)), 255)
       );
       m_color = cr;
-      if(m_mode == _msky_tintonly) {
-         setSkyToCanvas(skyC);
-      } else {
-         setSkyToCanvas(skyB);
-         setBase(skyC, 0.0);
-      }
+      setSkyToCanvas(skyC);
       break;
    case _msky_replace:
       setReplacedSky();
@@ -401,7 +392,6 @@ clearScope static bool checkDoubleSky(textureId st1, textureId st2) {
 /* clouds */
 void resetClouds() {
    switch(m_mode) {
-   case _msky_shader:
    case _msky_none:
    case _msky_tintonly:
       m_clouds.setInvalid();

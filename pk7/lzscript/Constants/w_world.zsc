@@ -232,7 +232,6 @@ enum Lith_MapSky {
 _msky_nochange,
 _msky_vanilla,
 _msky_replace,
-_msky_shader,
 _msky_none,
 _msky_tintonly,
 

@@ -15,7 +15,6 @@ w_mapenv_x(evil)
 w_mapsky_x(nochange)
 w_mapsky_x(vanilla)
 w_mapsky_x(replace)
-w_mapsky_x(shader)
 w_mapsky_x(none)
 w_mapsky_x(tintonly)
 #undef w_mapsky_x

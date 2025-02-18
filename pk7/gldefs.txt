@@ -41,11 +41,6 @@ hardwareShader sprite #EDEA0 {
    speed 1.0
 }
 
-hardwareShader texture LITHBSKY {
-   shader "lmisc/sky.fp.glsl"
-   texture lith_skyColorTex "LITHCSKY"
-}
-
 hardwareShader postProcess scene {
    shader "lmisc/rain.fp.glsl" 330
    name "Lith_Rain"
