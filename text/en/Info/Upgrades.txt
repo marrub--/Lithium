@@ -49,11 +49,6 @@ display for AOF contractors. The binary remains uncredited, and the
 decompiled code has no authors listed in any of the files, though is
 well-commented.
 
----------------------------------------------
-
-\cnNOTES:\c- Much of this display used to be red, but Omisielle and I
-ended up creating our own graphics a few years ago.
-
 == \#UPGRADE_EFFEC_HeadsUpDispAri | $$\#UPGRADE_EFFEC_HeadsUpDispJem
 
 ## ═══════════════════════════════════════════════════════════════════════════╕

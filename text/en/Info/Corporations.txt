@@ -59,24 +59,17 @@ and modifications for existing weapons.
 == \#INFO_SHORT_AOFAri | AOF
 == \#INFO_TITLE_AOFAri | $$\#INFO_SHORT_AOFAri
 == \#INFO_IMAGE_AOFAri | $$\#INFO_IMAGE_AOF
-== \#INFO_SSIZE_AOFAri | 24
 @@ \#INFO_DESCR_AOFAri
 AOF was a weapons company founded during the dark ages. They famously
 supplied all four sides of the Great War of Killing between 1111-1114,
-before disbanding and disappearing entirely in 1115 for unknown
-reasons. AOF mainly produced weapon modifications, plasma ammunition,
-and robotics.
+before disbanding and disappearing entirely in 1115. AOF mainly
+produced weapon modifications, plasma ammunition, and robotics.
 
-Not much is known about this shady corporation from the outside, and
-reports from insiders never painted a pretty picture.
-
----------------------------------------------
-
-\cnNOTES:\c- On the inside, AOF were doing science experiments on
-humans, trying to create new life. My sister and I were created this
-way. By some strange coincidence, AOF appears to exist in this reality
-as well. I'm not sure what they're like here. The name seems to be
-written differently.
+On the inside, AOF were doing science experiments on humans, trying to
+create new life. My sister and I were created this way. By some
+strange coincidence, AOF appears to exist in this reality as well. I'm
+not sure what they're like here. The name seems to be written
+differently.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Cid | Cid

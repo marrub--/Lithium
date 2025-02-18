@@ -1415,16 +1415,10 @@
    "$$LITH_INFO_SHORT_AOFAri";
 "LITH_INFO_IMAGE_AOFAri" =
    "$$LITH_INFO_IMAGE_AOF";
-"LITH_INFO_SSIZE_AOFAri" =
-   "24";
 "LITH_INFO_DESCR_AOFAri" =
-   "AOF was a weapons company founded during the dark ages. They famously supplied all four sides of the Great War of Killing between 1111-1114, before disbanding and disappearing entirely in 1115 for unknown reasons. AOF mainly produced weapon modifications, plasma ammunition, and robotics.\n"
+   "AOF was a weapons company founded during the dark ages. They famously supplied all four sides of the Great War of Killing between 1111-1114, before disbanding and disappearing entirely in 1115. AOF mainly produced weapon modifications, plasma ammunition, and robotics.\n"
    "\n"
-   "Not much is known about this shady corporation from the outside, and reports from insiders never painted a pretty picture.\n"
-   "\n"
-   "---------------------------------------------\n"
-   "\n"
-   "\cnNOTES:\c- On the inside, AOF were doing science experiments on humans, trying to create new life. My sister and I were created this way. By some strange coincidence, AOF appears to exist in this reality as well. I'm not sure what they're like here. The name seems to be written differently.";
+   "On the inside, AOF were doing science experiments on humans, trying to create new life. My sister and I were created this way. By some strange coincidence, AOF appears to exist in this reality as well. I'm not sure what they're like here. The name seems to be written differently.";
 "LITH_INFO_SHORT_Cid" =
    "Cid";
 "LITH_INFO_TITLE_Cid" =
@@ -2768,11 +2762,7 @@
 "LITH_INFO_TITLE_HeadsUpDispAri" =
    "$$LITH_INFO_TITLE_HeadsUpDisp";
 "LITH_INFO_DESCR_HeadsUpDispAri" =
-   "This program is the 73rd version of the standard issue heads-up display for AOF contractors. The binary remains uncredited, and the decompiled code has no authors listed in any of the files, though is well-commented.\n"
-   "\n"
-   "---------------------------------------------\n"
-   "\n"
-   "\cnNOTES:\c- Much of this display used to be red, but Omisielle and I ended up creating our own graphics a few years ago.";
+   "This program is the 73rd version of the standard issue heads-up display for AOF contractors. The binary remains uncredited, and the decompiled code has no authors listed in any of the files, though is well-commented.";
 "LITH_UPGRADE_EFFEC_HeadsUpDispAri" =
    "$$LITH_UPGRADE_EFFEC_HeadsUpDispJem";
 "LITH_UPGRADE_TITLE_JetBooster" =

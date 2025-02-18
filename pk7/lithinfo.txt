@@ -105,7 +105,7 @@
 "upgrades" {
    cl: pM tag: HeadsUpDisp unl: "OFMD";
    cl: pC tag: HeadsUpDispJem unl: "AOF";
-   cl: pD tag: HeadsUpDispAri;
+   cl: pD tag: HeadsUpDispAri unl: "AOF";
    cl: gA tag: VitalScanner unl: "OFMD";
 
    cl: pM tag: JetBooster unl: "OFMD";
