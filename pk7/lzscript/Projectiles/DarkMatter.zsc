@@ -99,7 +99,7 @@ class Lith_DarkMatter : Actor {
       BLLT F 1 {
          for(let it = BlockThingsIterator.create(self, 128); it.next();) {
             let mo = it.thing;
-            if(mo != target && mo.bSHOOTABLE && mo.checkSight(self)) {
+            if(mo && mo != target && mo.bSHOOTABLE && mo.checkSight(self)) {
                mo.A_SetRenderStyle(frandom(0.1, 0.9), STYLE_Subtract);
 
                for(int i = 0; i < 77; i++)

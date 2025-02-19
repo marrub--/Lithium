@@ -51,7 +51,7 @@ static void PhantomTeleport(Actor mo) {
 static void MonsterBarrierLook(Actor mo)
 {
    for(let it = BlockThingsIterator.Create(mo, 192*2); it.Next();)
-      if(it.Thing.Player) ACS_ExecuteWithResult(lsc_addangle, int(it.Thing.Pos.X), int(it.Thing.Pos.Y));
+      if(it.thing && it.Thing.Player) ACS_ExecuteWithResult(lsc_addangle, int(it.Thing.Pos.X), int(it.Thing.Pos.Y));
 }
 
 static void SpawnBoss(Actor a, string name, int phase) {

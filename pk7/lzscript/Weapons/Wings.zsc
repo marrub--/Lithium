@@ -32,7 +32,7 @@ Ready:
       SoundAlert(Invoker.Owner);
       for(let it = BlockThingsIterator.create(self, 1024); it.next();) {
          let mo = it.thing;
-         if(mo != self && mo.bSHOOTABLE && mo.checkSight(self)) {
+         if(mo && mo != self && mo.bSHOOTABLE && mo.checkSight(self)) {
             mo.target = self;
             mo.damageMobj(self, self, int.max, 'Massacre', DMG_THRUSTLESS|DMG_FORCED|DMG_PLAYERATTACK|DMG_FOILINVUL|DMG_FOILBUDDHA|DMG_NO_ARMOR|DMG_NO_FACTOR|DMG_NO_PROTECT|DMG_NO_ENHANCE);
          }

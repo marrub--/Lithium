@@ -88,6 +88,7 @@ class Lith_FortuneBuildup : Actor {
          let original_target = target;
          for(let it = BlockThingsIterator.create(self, 512); it.next();) {
             let th = it.thing;
+            if(!th) continue;
             if(th.player) {
                th.A_SetBlend("White", 0.1, int(35*2*(2048-distance2d(th))/1536.0));
             } else {

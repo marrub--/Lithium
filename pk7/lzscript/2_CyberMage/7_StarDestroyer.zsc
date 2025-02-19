@@ -163,11 +163,11 @@ class Lith_StarProjectile : Actor {
          A_Quake(3, 2, 0, 256);
          A_Quake(5, 2, 0, 64);
          for(let it = BlockThingsIterator.create(self, 256); it.next();)
-            if(it.thing.player) it.thing.A_SetBlend("White", 0.1, 35*2);
+            if(it.thing && it.thing.player) it.thing.A_SetBlend("White", 0.1, 35*2);
          for(let it = BlockThingsIterator.create(self, 128); it.next();)
-            if(it.thing.player) it.thing.A_SetBlend("White", 0.4, 35*2);
+            if(it.thing && it.thing.player) it.thing.A_SetBlend("White", 0.4, 35*2);
          for(let it = BlockThingsIterator.create(self, 64); it.next();)
-            if(it.thing.player) it.thing.A_SetBlend("White", 0.7, 35*2);
+            if(it.thing && it.thing.player) it.thing.A_SetBlend("White", 0.7, 35*2);
       }
       goto Spawn1;
    Death:
