@@ -242,26 +242,9 @@ void setReplacedSky() {
    if(lith_sv_dynsky && light) {
       let rt_hrs = light.m_rtHrs;
       let rt_min = light.m_rtMin;
-      let amt =
-         min(sin((rt_hrs * 60 + rt_min) / 1440.0 * 180.0) * 3.0, 2.9999);
-      if(rt_hrs >= 12) {
-         blend = 1 - (amt % 1.0);
-         if(amt < 2 && amt >= 1) {
-            which = 3;
-         } else {
-            which = int(amt);
-            if(which == 0) {
-               blend = 0.0;
-            }
-         }
-      } else {
-         which = int(amt);
-         if(which == 2) {
-            blend = 0.0;
-         } else {
-            blend = amt % 1.0;
-         }
-      }
+      let amt = (rt_hrs * 60 + rt_min - 240) % 1440 / 1440.0 * 4.0;
+      blend = amt % 1.0;
+      which = int(amt);
    }
    textureId tex;
    tex.setInvalid();
