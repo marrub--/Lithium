@@ -114,6 +114,10 @@ struct Lith_UTIL {
    }
 
    // easing
+   static double easeInQuad(double t) {
+      return t * t;
+   }
+
    static double easeInOutQuad(double t) {
       if(t < 0.5) {
          return 2.0 * t * t;

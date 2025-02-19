@@ -72,6 +72,7 @@
    "@ Minigunner         - Missile Launcher sprite\n"
    "@ Pablomarcellana    - Kampilan model (CC-BY-4.0; https://skfb.ly/6RnBM)\n"
    "@ Ribonucleic Asshat \\ Environment texture used in Dark Lord weapons\n"
+   "                     | Dynamic sky textures\n"
    "                     | Help with using Blender\n"
    "@ Sgt. Shivers       \\ Shotgun, knife, and revolver sprites\n"
    "                     | Mateba & SPAS reload animations\n"

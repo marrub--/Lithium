@@ -290,7 +290,7 @@ void setReplacedSky() {
       setBase(tex, speed);
    }
    m_blendTex = blendTex;
-   m_blendAmt = Lith_UTIL.easeInCubic(blend);
+   m_blendAmt = blend;
 }
 
 /* firestorms */
