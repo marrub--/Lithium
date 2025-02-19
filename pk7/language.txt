@@ -5875,6 +5875,8 @@
    "\cgWarning:\c- Post-game content can \cicause saves to be effectively deleted\c-, and will have \cipermanent repercussions\c-. Only enable if you really want more.";
 "LITH_sv_timescale" =
    "Time scale";
+"LITH_TOOLTIP_sv_timescale" =
+   "Changes the rate at which the in-game clock ticks, making days shorter.";
 "LITH_sv_rain" =
    "Enable raining";
 "LITH_TOOLTIP_sv_rain" =

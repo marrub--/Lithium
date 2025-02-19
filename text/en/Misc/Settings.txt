@@ -171,6 +171,9 @@ deleted\c-, and will have \cipermanent repercussions\c-. Only enable
 if you really want more.
 
 == \#sv_timescale | Time scale
+@@ \#TOOLTIP_sv_timescale
+Changes the rate at which the in-game clock ticks, making days shorter.
+
 == \#sv_rain | Enable raining
 @@ \#TOOLTIP_sv_rain
 \ck(Applies on next map start)

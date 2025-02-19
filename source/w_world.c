@@ -85,7 +85,7 @@ static void MInitGetStaticInfo(void) {
    ml.seed = mi_opt(ml.mi, _mi_key_seed, _v.i, ACS_Random(0, INT32_MAX));
    srand(ml.seed);
    ml.boss = EDataI(_edt_bosslevel);
-   ml.timescale = mi_opt(ml.mi, _mi_key_timescale, _v.li, 4);
+   ml.timescale = mi_opt(ml.mi, _mi_key_timescale, _v.li, 1);
    if(get_bit(ml.mi->use, _mi_key_timestamp)) {
       wl.realtime = ml.mi->keys[_mi_key_timestamp].tm;
    }

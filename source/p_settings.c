@@ -297,7 +297,7 @@ static struct setting const st_gam[] = {
    s_boole("player_scoresound"),
    s_strng("player_pronouns"),
    s_label("st_labl_env"),
-   s_integ("sv_timescale", -200, 200, 1, "mult"),
+   s_integ("sv_timescale", 1, 200, 1, "mult"),
    s_enume("sv_rain",        0, 3, "rain"),
    s_enume("sv_rainphysics", 0, 3, "rainphys"),
    s_boole("player_rainshader"),
