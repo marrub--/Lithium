@@ -154,10 +154,12 @@
    cl: pM tag: OFMD;
    cl: pC tag: OFMDJem;
    cl: pD tag: OFMDAri;
-   cl: gO tag: Throes    unl: "Earth";
+   cl: pD tag: Qasl;
+   cl: pD tag: Qesel;
    cl: gO tag: Semaphore unl: "OmicronXevv";
    cl: gA tag: ShekaKaff unl: "Calestari";
    cl: gA tag: SYM43     unl: "AetosVi";
+   cl: gO tag: Throes    unl: "Earth";
    cl: gA tag: Yigan;
 }
 
@@ -215,13 +217,13 @@
 "weapons"      {cl: pD tag: Kampilan;}
 "weapons auto" {cl: pD tag: "700Express";}
 "weapons" {
-   cl: pD tag: ShrapnelGun;
+   cl: pD tag: ShrapnelGun unl: "Qasl";
    cl: pD tag: "4Bore";
    cl: pD tag: Minigun;
-   cl: pD tag: Motra;
+   cl: pD tag: Motra unl: "Qesel";
    cl: pD tag: DualRocket;
    cl: pD tag: FortuneGun;
-   cl: pD tag: Rems;
+   cl: pD tag: Rems unl: "Qasl";
 }
 
 "weapons auto" {
