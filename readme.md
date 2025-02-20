@@ -7,9 +7,11 @@ the "Code" button at the top of the page and then "Download ZIP". Once
 you've done that, and extracted the ZIP file, you can then load the
 `pk7` folder into GZDoom as you would any other mod.
 
-If you want to load a single file instead of a folder, zip the
-contents of the `pk7` folder and [change the extension to create a
-`pk3` file](https://zdoom.org/wiki/Using_ZIPs_as_WAD_replacement).
+If you want to load a single file instead of a folder, for instance if
+you're using Delta Touch, zip the contents of the `pk7` folder and
+optionally [change the
+extension](https://zdoom.org/wiki/Using_ZIPs_as_WAD_replacement) to
+create a `pk3` file.
 
 # Code
 
