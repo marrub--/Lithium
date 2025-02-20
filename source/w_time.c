@@ -22,9 +22,9 @@ stkcall void rtime(time_t time, struct realtime *rt) {
    }
    timediv tdiv = __div(time, DAYS(1));
    i32div idiv;
-   idiv = __div((i32)tdiv.rem, 60); rt->s = idiv.rem; rt->m = idiv.quot;
+   idiv = __div((i32)tdiv.rem, 60); rt->s = idiv.rem;
    idiv = __div(idiv.quot,     60); rt->m = idiv.rem; rt->h = idiv.quot;
-   tdiv = __div(tdiv.quot,     30); rt->d = tdiv.rem; rt->M = tdiv.quot;
+   tdiv = __div(tdiv.quot,     30); rt->d = tdiv.rem;
    tdiv = __div(tdiv.quot,     12); rt->M = tdiv.rem; rt->Y = tdiv.quot;
    rt->D = rt->d % _weekday_max;
    if(rt->Y < BEGINNING_OF_UNIVERSE) {
