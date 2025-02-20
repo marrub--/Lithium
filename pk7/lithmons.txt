@@ -77,12 +77,13 @@ presets {
 // │ flags in them. You can put as many flags in there as you want, or none.  │
 // │                                                                          │
 // │ Flags:                                                                   │
-// │ - full    :: The class name (actor name in DECORATE) must *entirely*     │
-// │              match the filter, not just partially. Useful for mod        │
-// │              compatibility.                                              │
-// │ - nocase  :: The filter will be case insensitive.                        │
-// │ - dark    :: Not to be used outside of Lithium.                          │
-// │ - angelic :: Not to be used outside of Lithium.                          │
+// │ - full       :: The class name (actor name in DECORATE) must *entirely*  │
+// │                 match the filter, not just partially. Useful for mod     │
+// │                 compatibility.                                           │
+// │ - nocase     :: The filter will be case insensitive.                     │
+// │ - nonmonster :: The monsters will not start the monster script.          │
+// │ - dark       :: Not to be used outside of Lithium.                       │
+// │ - angelic    :: Not to be used outside of Lithium.                       │
 // │                                                                          │
 // │ The right-most value will always override anything to the left. For      │
 // │ instance, if you have a monster using a preset, and then set the         │
