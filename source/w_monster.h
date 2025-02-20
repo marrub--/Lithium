@@ -15,6 +15,7 @@ monster_flag_x(full)
 monster_flag_x(nocase)
 monster_flag_x(angelic)
 monster_flag_x(dark)
+monster_flag_x(nonmonster)
 #undef monster_flag_x
 #elif defined(monster_type_x)
 monster_type_x(zombie)

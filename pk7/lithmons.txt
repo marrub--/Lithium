@@ -27,6 +27,8 @@
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
 presets {
+   name: Nothing scr: 0 exp: 0;
+
    /* Tier 1 */
    name: ZombieMan   scr: 1000 exp: 10;
    name: ShotgunGuy  scr: 1200 exp: 20;
@@ -375,6 +377,10 @@ presets {
    pre: ChaingunGuy type: zombie   filter: "FormerCaptain";
    pre: ChaingunGuy type: zombie   filter: "FormerCyborg";
    pre: ChaingunGuy type: zombie   filter: "EliteHuman";
+}
+
+"nonmonster full" {
+   pre: Nothing type: zombie filter: "RLTheHungrySpawner";
 }
 
 /* Colorful Hell */

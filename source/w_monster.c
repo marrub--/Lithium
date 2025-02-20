@@ -564,9 +564,9 @@ alloc_aut(0) script ext("ACS") addr(lsc_monsterinfo) void Z_MonsterInfo(void) {
             init = faststrstr(cname, mi->name);
          }
       }
-      if(init && (!mi->mass || mass == mi->mass)) {
-         /* make sure it isn't already dead first */
-         if(GetHealth(0) > 0) {
+      init = init && (!mi->mass || mass == mi->mass);
+      if(init) {
+         if(!get_bit(mi->flags, _mif_nonmonster)) {
             dmon_t *m = AllocDmon();
             m->mi = mi;
             MonsterMain(m);

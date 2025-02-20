@@ -197,7 +197,9 @@ override void worldThingSpawned(WorldEvent ev) {
       m_bossBabies.push(th);
    }
    if(th.bIsMonster && !(th is "RandomSpawner")) {
-      Lith_UTIL.exec(th, lsc_monsterinfo);
+      if(th.health > 0) {
+         Lith_UTIL.exec(th, lsc_monsterinfo);
+      }
       if(Lith_UTIL.pData(_pdt_menv) == _menv_evil) {
          th.damageMultiply += 2;
          th.scale.X *= fRandom(0.9, 1.1);
