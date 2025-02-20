@@ -20,7 +20,7 @@
 #define HasResistances(m) ((m)->rank >= 2)
 
 noinit static struct monster_preset monsterpreset[1024];
-noinit static struct monster_info monsterinfo[1024];
+noinit static struct monster_info monsterinfo[2048];
 noinit static mem_size_t monsterpresetnum, monsterinfonum;
 
 stkoff static void GetInfo(dmon_t *m) {
