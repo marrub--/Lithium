@@ -89,7 +89,15 @@ class Lith_SnowDrop : Lith_RainDrop {
    default {
       Alpha 1.0;
       RenderStyle "Normal";
-      YScale 0.1;
+   }
+   override void postBeginPlay() {
+      super.postBeginPlay();
+      m_rollSpeed = fRandom[lith_rain](0.4, 0.9) * fRandomPick[lith_rain](-1, 1);
+      angle = fRandom[lith_rain](0, 360);
+      pitch = fRandom[lith_rain](0, 180);
+      roll  = fRandom[lith_rain](0, 360);
+      scale = (0.25, 0.25) * fRandom[lith_rain](1.0, 1.4);
+      vel  *= fRandom[lith_rain](0.03, 0.1);
    }
    states {
    Spawn:
@@ -97,6 +105,7 @@ class Lith_SnowDrop : Lith_RainDrop {
       RNDS A 0 lith_giveUp;
       stop;
    Death:
+      RNDS B 0 a_setScale(0.5);
       RNDS BCDE 12;
       stop;
    }
@@ -107,23 +116,15 @@ class Lith_Ash : Lith_SnowDrop {
       RenderStyle "Translucent";
       Alpha 0.9;
    }
-   override void postBeginPlay() {
-      super.postBeginPlay();
-      m_rollSpeed = fRandom[lith_rain](0.4, 0.9) * fRandomPick[lith_rain](-1, 1);
-      angle = fRandom[lith_rain](0, 360);
-      pitch = fRandom[lith_rain](0, 180);
-      roll  = fRandom[lith_rain](0, 360);
-      scale = (1, 1) * fRandom[lith_rain](1.0, 1.4);
-      vel  *= fRandom[lith_rain](0.03, 0.1);
-   }
    states {
    Spawn:
       RNDA A 300;
       RNDA A 0 lith_giveUp;
       stop;
    Death:
+      RNDA A 0 a_setScale(0.5);
       RNDA A 1 a_fadeOut(0.25 / 21.0);
-      loop;
+      wait;
    }
 }
 

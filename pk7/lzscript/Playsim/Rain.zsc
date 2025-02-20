@@ -20,6 +20,7 @@ double       m_visDist;
 bool         m_sound;
 int          m_type;
 double       m_maxHeight;
+double       m_maxDist;
 
 static Lith_RainThinker create() {
    let th = new('Lith_RainThinker');
@@ -63,18 +64,12 @@ override void tick() {
 
 void setup(int which) {
    switch(which) {
-   default:
-      m_sound = false; m_drop = null; break;
-   case _rain_rain:
-      m_sound = true;  m_drop = 'Lith_RainDrop';      m_maxHeight = 800; break;
-   case _rain_blood:
-      m_sound = true;  m_drop = 'Lith_BloodRainDrop'; m_maxHeight = 800; break;
-   case _rain_abyss:
-      m_sound = true;  m_drop = 'Lith_AbyssRainDrop'; m_maxHeight = 999; break;
-   case _rain_fire:
-      m_sound = false; m_drop = 'Lith_Ash';           m_maxHeight = 300; break;
-   case _rain_snow:
-      m_sound = false; m_drop = 'Lith_SnowDrop';      m_maxHeight = 600; break;
+   default:          m_sound = false; m_drop = null; break;
+   case _rain_rain:  m_sound = true;  m_drop = 'Lith_RainDrop';      m_maxHeight = 800; m_maxDist = 2048; break;
+   case _rain_blood: m_sound = true;  m_drop = 'Lith_BloodRainDrop'; m_maxHeight = 800; m_maxDist = 2048; break;
+   case _rain_abyss: m_sound = true;  m_drop = 'Lith_AbyssRainDrop'; m_maxHeight = 999; m_maxDist = 2048; break;
+   case _rain_fire:  m_sound = false; m_drop = 'Lith_Ash';           m_maxHeight = 300; m_maxDist = 512;  break;
+   case _rain_snow:  m_sound = false; m_drop = 'Lith_SnowDrop';      m_maxHeight = 300; m_maxDist = 512;  break;
    }
    if(m_player) {
       if(m_sound) {
@@ -87,7 +82,7 @@ void setup(int which) {
 }
 
 double spawnRain() const {
-   let maxDist = m_sound ? 2048.0 : 512.0;
+   let maxDist = m_maxDist;
    let mo      = players[consoleplayer].camera;
    if(mo != m_player) {
       maxDist *= 1.5;
