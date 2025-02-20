@@ -16,7 +16,7 @@ _uc_body:
       Zoom:        {f: -DUR-,        pg: N/A}
       VitalScan:   {f: --UR-, pr: 2, pg: VitalScanner}
    gO:
-      Flashlight: {f: A-U--}
+      Flashlight: {f: A-U--, pg: N/A}
       ReflexWetw: {f: ADU--,    pr: 5, mul: -5}
       AutoReload: {scr: 950050, pr: 2}
    gI:
