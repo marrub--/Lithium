@@ -1508,6 +1508,14 @@
    "$$LITH_INFO_IMAGE_OFMD";
 "LITH_INFO_DESCR_OFMDJem" =
    "Optic Fiber Maxim-Danil is a company which mainly produces electronics, and is one of the top-selling brands on the market for cables, computer parts, and other such consumer goods.";
+"LITH_INFO_SHORT_OFMDAri" =
+   "$$LITH_INFO_SHORT_OFMD";
+"LITH_INFO_TITLE_OFMDAri" =
+   "$$LITH_INFO_TITLE_OFMD";
+"LITH_INFO_IMAGE_OFMDAri" =
+   "$$LITH_INFO_IMAGE_OFMD";
+"LITH_INFO_DESCR_OFMDAri" =
+   "$$LITH_INFO_DESCR_OFMDJem";
 "LITH_INFO_SHORT_Throes" =
    "Throes";
 "LITH_INFO_TITLE_Throes" =
@@ -2502,6 +2510,14 @@
    "By 1000 NE, most of the population on Earth had moved to other inhabitable planets, but still a large population remains on the blue planet.\n"
    "\n"
    "Earth, and moreover humanity, has remained largely the same as it was in the middle of the Common Era, although around 300 years of history were lost in the calamity.";
+"LITH_INFO_SHORT_EarthAri" =
+   "$$LITH_INFO_SHORT_Earth";
+"LITH_INFO_TITLE_EarthAri" =
+   "$$LITH_INFO_SHORT_Earth";
+"LITH_INFO_DESCR_EarthAri" =
+   "The year is 1130 CE. After an event that almost led to an apocalypse in 1112 CE, humanity fails to thrive.\n"
+   "\n"
+   "While the Moon is populated, its inhabitants are exclusionist fascists. A great barrier is constructed around Earth to keep people from reaching other planets.";
 "LITH_INFO_SHORT_Hell" =
    "Hell";
 "LITH_INFO_TITLE_Hell" =

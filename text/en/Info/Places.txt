@@ -86,6 +86,17 @@ in the middle of the Common Era, although around 300 years of history
 were lost in the calamity.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
+== \#INFO_SHORT_EarthAri | $$\#INFO_SHORT_Earth
+== \#INFO_TITLE_EarthAri | $$\#INFO_SHORT_Earth
+@@ \#INFO_DESCR_EarthAri
+The year is 1130 CE. After an event that almost led to an apocalypse
+in 1112 CE, humanity fails to thrive.
+
+While the Moon is populated, its inhabitants are exclusionist
+fascists. A great barrier is constructed around Earth to keep people
+from reaching other planets.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Hell | Hell
 == \#INFO_TITLE_Hell | $$\#INFO_SHORT_Hell
 @@ \#INFO_DESCR_Hell

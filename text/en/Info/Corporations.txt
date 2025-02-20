@@ -206,6 +206,12 @@ electronics, and is one of the top-selling brands on the market for
 cables, computer parts, and other such consumer goods.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
+== \#INFO_SHORT_OFMDAri | $$\#INFO_SHORT_OFMD
+== \#INFO_TITLE_OFMDAri | $$\#INFO_TITLE_OFMD
+== \#INFO_IMAGE_OFMDAri | $$\#INFO_IMAGE_OFMD
+== \#INFO_DESCR_OFMDAri | $$\#INFO_DESCR_OFMDJem
+
+## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Throes | Throes
 == \#INFO_TITLE_Throes | Throes Defense Co.
 == \#INFO_IMAGE_Throes | :BIP:Throes
