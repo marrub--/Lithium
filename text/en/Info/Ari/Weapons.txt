@@ -8,7 +8,7 @@
 
 A sword from ancient times, which has mostly fallen out of use except
 in religious contexts. The design is originally from the Indian
-subcontinent. This was your weapon of choice until guns were invented.
+subcontinent.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Kampilan | Kampilan
@@ -16,11 +16,11 @@ subcontinent. This was your weapon of choice until guns were invented.
 @@ \#INFO_DESCR_Kampilan
 \cy\u{E102}\u{E108}\u{E100}\u{E108}\u{E105}\u{E102}\u{E108}\u{E103}\c-
 
-A sword from ancient times made for war, which continues to be used in
-battles to this day. The design is originally from the Philippine
-archipelago. This particular one was crafted for your inauguration as
-Dark Lord. Indicolite is placed in the pommel, imbuing the sword with
-minor magical properties.
+A sword made for war, which continues to be used in battles to this
+day. The design is originally from the Philippine archipelago. This
+particular one was crafted for your inauguration as Dark Lord.
+Indicolite is placed in the pommel, imbuing the sword with minor
+magical properties.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_700Express | $$\#INFO_SHORT_Revolver

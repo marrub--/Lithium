@@ -89,12 +89,12 @@ were lost in the calamity.
 == \#INFO_SHORT_EarthAri | $$\#INFO_SHORT_Earth
 == \#INFO_TITLE_EarthAri | $$\#INFO_SHORT_Earth
 @@ \#INFO_DESCR_EarthAri
-The year is 1130 CE. After an event that almost led to an apocalypse
-in 1112 CE, humanity fails to thrive.
+The year is 1130 CE. After a seemingly endless war that almost led to
+an apocalypse between 1050-1125 CE, humanity fails to thrive.
 
-While the Moon is populated, its inhabitants are exclusionist
-fascists. A great barrier is constructed around Earth to keep people
-from reaching other planets.
+While the Moon is populated, its inhabitants are under an
+exclusionist, fascist government. A great barrier is constructed
+around Earth to keep people from reaching other planets.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Hell | Hell

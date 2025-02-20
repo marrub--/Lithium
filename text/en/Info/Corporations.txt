@@ -212,17 +212,27 @@ cables, computer parts, and other such consumer goods.
 == \#INFO_DESCR_OFMDAri | $$\#INFO_DESCR_OFMDJem
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
-== \#INFO_SHORT_Throes | Throes
-== \#INFO_TITLE_Throes | Throes Defense Co.
-== \#INFO_IMAGE_Throes | :BIP:Throes
-@@ \#INFO_DESCR_Throes
-Based in Hawai'i, Throes Defense Co. produce self-defense and hunting
-weaponry for civilians. Thanks to their high quality and fair pricing,
-militaries and mercenaries around the world use their armaments as
-well.
+== \#INFO_SHORT_Qasl | Qasl
+== \#INFO_TITLE_Qasl | Qasl Incorporated
+@@ \#INFO_DESCR_Qasl
+A company from Earth which specializes in heavy armaments and
+spacecraft. Originally a part of the Clan of Next Dawn's armory, they
+eventually split off during the war to produce armaments for everyone
+on Earth.
 
-Known for their innovative firearm designs, Throes is one of the
-highest profiting, most popular firearms manufacturers on Earth.
+Technically, you are the rightful head of this company, but you left
+control over it to Sealis.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
+== \#INFO_SHORT_Qesel | Qesel
+== \#INFO_TITLE_Qesel | Qesel Incorporated
+@@ \#INFO_DESCR_Qesel
+Despite the name sounding similar, Qesel
+(\cy\u{E100}\u{E108}\u{E106}\u{E108}\u{E103}\c-) and Qasl
+(\cy\u{E100}\u{E106}\u{E108}\u{E103}\c-) have no relation. Qesel was
+founded during the early Spacewar period, in 1051. This company
+produced some of the earliest prototypes of Earth guns in the 1110s,
+ultimately leading to the war.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Semaphore | Semaphore, Inc.
@@ -270,6 +280,19 @@ government bodies.
 
 Weapons confirmed to be sold by them have appeared in countless
 historic battles, having existed for over 700 years now.
+
+## ═══════════════════════════════════════════════════════════════════════════╕
+== \#INFO_SHORT_Throes | Throes
+== \#INFO_TITLE_Throes | Throes Defense Co.
+== \#INFO_IMAGE_Throes | :BIP:Throes
+@@ \#INFO_DESCR_Throes
+Based in Hawai'i, Throes Defense Co. produce self-defense and hunting
+weaponry for civilians. Thanks to their high quality and fair pricing,
+militaries and mercenaries around the world use their armaments as
+well.
+
+Known for their innovative firearm designs, Throes is one of the
+highest profiting, most popular firearms manufacturers on Earth.
 
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#INFO_SHORT_Yigan | Yigan

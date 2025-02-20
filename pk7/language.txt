@@ -1516,16 +1516,20 @@
    "$$LITH_INFO_IMAGE_OFMD";
 "LITH_INFO_DESCR_OFMDAri" =
    "$$LITH_INFO_DESCR_OFMDJem";
-"LITH_INFO_SHORT_Throes" =
-   "Throes";
-"LITH_INFO_TITLE_Throes" =
-   "Throes Defense Co.";
-"LITH_INFO_IMAGE_Throes" =
-   ":BIP:Throes";
-"LITH_INFO_DESCR_Throes" =
-   "Based in Hawai'i, Throes Defense Co. produce self-defense and hunting weaponry for civilians. Thanks to their high quality and fair pricing, militaries and mercenaries around the world use their armaments as well.\n"
+"LITH_INFO_SHORT_Qasl" =
+   "Qasl";
+"LITH_INFO_TITLE_Qasl" =
+   "Qasl Incorporated";
+"LITH_INFO_DESCR_Qasl" =
+   "A company from Earth which specializes in heavy armaments and spacecraft. Originally a part of the Clan of Next Dawn's armory, they eventually split off during the war to produce armaments for everyone on Earth.\n"
    "\n"
-   "Known for their innovative firearm designs, Throes is one of the highest profiting, most popular firearms manufacturers on Earth.";
+   "Technically, you are the rightful head of this company, but you left control over it to Sealis.";
+"LITH_INFO_SHORT_Qesel" =
+   "Qesel";
+"LITH_INFO_TITLE_Qesel" =
+   "Qesel Incorporated";
+"LITH_INFO_DESCR_Qesel" =
+   "Despite the name sounding similar, Qesel (\cy\c-) and Qasl (\cy\c-) have no relation. Qesel was founded during the early Spacewar period, in 1051. This company produced some of the earliest prototypes of Earth guns in the 1110s, ultimately leading to the war.";
 "LITH_INFO_SHORT_Semaphore" =
    "Semaphore, Inc.";
 "LITH_INFO_TITLE_Semaphore" =
@@ -1558,6 +1562,16 @@
    "They have (according to their published sales reports) sold weaponry to over three quarters of all recorded mercenary, military and government bodies.\n"
    "\n"
    "Weapons confirmed to be sold by them have appeared in countless historic battles, having existed for over 700 years now.";
+"LITH_INFO_SHORT_Throes" =
+   "Throes";
+"LITH_INFO_TITLE_Throes" =
+   "Throes Defense Co.";
+"LITH_INFO_IMAGE_Throes" =
+   ":BIP:Throes";
+"LITH_INFO_DESCR_Throes" =
+   "Based in Hawai'i, Throes Defense Co. produce self-defense and hunting weaponry for civilians. Thanks to their high quality and fair pricing, militaries and mercenaries around the world use their armaments as well.\n"
+   "\n"
+   "Known for their innovative firearm designs, Throes is one of the highest profiting, most popular firearms manufacturers on Earth.";
 "LITH_INFO_SHORT_Yigan" =
    "Yigan";
 "LITH_INFO_TITLE_Yigan" =
@@ -2515,9 +2529,9 @@
 "LITH_INFO_TITLE_EarthAri" =
    "$$LITH_INFO_SHORT_Earth";
 "LITH_INFO_DESCR_EarthAri" =
-   "The year is 1130 CE. After an event that almost led to an apocalypse in 1112 CE, humanity fails to thrive.\n"
+   "The year is 1130 CE. After a seemingly endless war that almost led to an apocalypse between 1050-1125 CE, humanity fails to thrive.\n"
    "\n"
-   "While the Moon is populated, its inhabitants are exclusionist fascists. A great barrier is constructed around Earth to keep people from reaching other planets.";
+   "While the Moon is populated, its inhabitants are under an exclusionist, fascist government. A great barrier is constructed around Earth to keep people from reaching other planets.";
 "LITH_INFO_SHORT_Hell" =
    "Hell";
 "LITH_INFO_TITLE_Hell" =
@@ -3043,7 +3057,7 @@
 "LITH_INFO_DESCR_Khanda" =
    "\cy\c-\n"
    "\n"
-   "A sword from ancient times, which has mostly fallen out of use except in religious contexts. The design is originally from the Indian subcontinent. This was your weapon of choice until guns were invented.";
+   "A sword from ancient times, which has mostly fallen out of use except in religious contexts. The design is originally from the Indian subcontinent.";
 "LITH_INFO_SHORT_Kampilan" =
    "Kampilan";
 "LITH_INFO_TITLE_Kampilan" =
@@ -3051,7 +3065,7 @@
 "LITH_INFO_DESCR_Kampilan" =
    "\cy\c-\n"
    "\n"
-   "A sword from ancient times made for war, which continues to be used in battles to this day. The design is originally from the Philippine archipelago. This particular one was crafted for your inauguration as Dark Lord. Indicolite is placed in the pommel, imbuing the sword with minor magical properties.";
+   "A sword made for war, which continues to be used in battles to this day. The design is originally from the Philippine archipelago. This particular one was crafted for your inauguration as Dark Lord. Indicolite is placed in the pommel, imbuing the sword with minor magical properties.";
 "LITH_INFO_SHORT_700Express" =
    "$$LITH_INFO_SHORT_Revolver";
 "LITH_INFO_TITLE_700Express" =
