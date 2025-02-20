@@ -21,7 +21,7 @@ _uc_body:
       AutoReload: {scr: 950050, pr: 2}
    gI:
       Lightspark: {pg: N/A, f: A-U--}
-      Minimap:    {pg: N/A, scr: 999999}
+      Minimap:    {pg: N/A, scr: 499999}
    gM:
       SecretScan: {scr: 9999999}
    pM:
