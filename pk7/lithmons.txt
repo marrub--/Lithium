@@ -377,6 +377,7 @@ presets {
    pre: ChaingunGuy type: zombiecg filter: "FormerCommando";
    pre: ChaingunGuy type: zombie   filter: "FormerCaptain";
    pre: ChaingunGuy type: zombie   filter: "FormerCyborg";
+   pre: ChaingunGuy type: zombie   filter: "FormerAssaultTrooper";
    pre: ChaingunGuy type: zombie   filter: "EliteHuman";
 }
 
