@@ -298,7 +298,7 @@ presets {
    pre: LostSoul      type: lostsoul    filter: "UnbodiedFury";
    pre: ShotgunGuy    type: imp         filter: "Bloodfiend";
    pre: Demon         type: demon       filter: "Mortuus";
-   pre: Demon         type: demon       filter: "Phantasm";
+   pre: Demon         type: demon       filter: "phantasm";
    pre: ChaingunGuy   type: imp         filter: "Malum";
    pre: ShotgunGuy    type: imp         filter: "Phasma";
    pre: Spectre       type: demon       filter: "Licho";
@@ -589,7 +589,7 @@ presets {
    /* Add-on enemies */
    pre: ZombieMan     type: zombie        filter: "Epic2Alien";
    pre: ZombieMan     type: zombie        filter: "Scythe2Marine";
-   pre: BaronOfHell   type: baron    	   filter: "Scythe2Afrit";
+   pre: BaronOfHell   type: baron         filter: "Scythe2Afrit";
 }
 
 /* EOF */
