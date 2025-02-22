@@ -220,33 +220,6 @@ presets {
    scr: 100000 exp: 10000 type: person filter: "Lith_TitleMarine";
 }
 
-// Map Compatibility ═════════════════════════════════════════════════════════╕
-
-/* ed4_rfo1.wad */
-"full" {
-   pre: ChaingunGuy   type: zombie        filter: "BazookaZombie";
-   pre: Imp           type: imp           filter: "BatFamiliar";
-   pre: Imp           type: imp           filter: "DragonFamiliar";
-   pre: Arachnotron   type: arachnotron   filter: "Arachnophyte";
-   pre: Arachnotron   type: arachnotron   filter: "RailSpider";
-   pre: CyberDemon    type: cacodemon     filter: "RealAbstractPain";
-   pre: PainElemental type: painelemental filter: "EDPE";
-}
-
-/* dop.pk3 */
-"full" {
-   pre: LostSoul type: lostsoul filter: "LostGhoul";
-}
-
-/* Cheogsh.wad */
-"full" {
-   pre: Spectre     type: demon      filter: "KDiZDNightmare";
-   pre: Imp         type: imp        filter: "Howler";
-   pre: Imp         type: imp        filter: "SoulHarvester";
-   pre: BaronOfHell type: baron      filter: "HellWarrior";
-   pre: CyberDemon  type: cyberdemon filter: "Cheogsh";
-}
-
 // Mod Compatibility ═════════════════════════════════════════════════════════╕
 
 /* Rampancy */
@@ -590,6 +563,33 @@ presets {
    pre: ZombieMan     type: zombie        filter: "Epic2Alien";
    pre: ZombieMan     type: zombie        filter: "Scythe2Marine";
    pre: BaronOfHell   type: baron         filter: "Scythe2Afrit";
+}
+
+// Map Compatibility ═════════════════════════════════════════════════════════╕
+
+/* ed4_rfo1.wad */
+"full" {
+   pre: ChaingunGuy   type: zombie        filter: "BazookaZombie";
+   pre: Imp           type: imp           filter: "BatFamiliar";
+   pre: Imp           type: imp           filter: "DragonFamiliar";
+   pre: Arachnotron   type: arachnotron   filter: "Arachnophyte";
+   pre: Arachnotron   type: arachnotron   filter: "RailSpider";
+   pre: CyberDemon    type: cacodemon     filter: "RealAbstractPain";
+   pre: PainElemental type: painelemental filter: "EDPE";
+}
+
+/* dop.pk3 */
+"full" {
+   pre: LostSoul type: lostsoul filter: "LostGhoul";
+}
+
+/* Cheogsh.wad */
+"full" {
+   pre: Spectre     type: demon      filter: "KDiZDNightmare";
+   pre: Imp         type: imp        filter: "Howler";
+   pre: Imp         type: imp        filter: "SoulHarvester";
+   pre: BaronOfHell type: baron      filter: "HellWarrior";
+   pre: CyberDemon  type: cyberdemon filter: "Cheogsh";
 }
 
 /* EOF */
