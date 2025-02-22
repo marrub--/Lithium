@@ -19,6 +19,7 @@ default {
    Weapon.UpSound "weapons/motra/draw";
    Lith_Weapon.AdsInSound "weapons/motra/adsin";
    Lith_Weapon.AdsOutSound "weapons/motra/adsout";
+   Inventory.AltHudIcon "MOTRZ0";
    +Weapon.NoAutoFire
    +Inventory.Unclearable
    +Lith_Weapon.HitScan

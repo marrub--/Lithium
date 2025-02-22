@@ -16,6 +16,7 @@ default {
    Weapon.SlotNumber 2;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/700e/draw";
+   Inventory.AltHudIcon "REVLA0";
    +Lith_Weapon.HitScan
 }
 

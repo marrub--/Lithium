@@ -138,6 +138,7 @@ default {
    Weapon.SlotNumber 1;
    Weapon.SlotPriority 1;
    Weapon.UpSound "weapons/kampilan/draw";
+   Inventory.AltHudIcon "KAMLZ0";
    +Lith_Weapon.HitScan
 }
 
