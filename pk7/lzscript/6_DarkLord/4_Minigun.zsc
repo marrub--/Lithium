@@ -96,7 +96,7 @@ action(Weapon) state Lith_A_MinigunReady(statelabel firelbl) {
       if(Lith_UTIL.pData(_pdt_upgrade, UPGR_Minigun_A)) {
          invoker.m_windUp += 0.21;
       } else {
-         invoker.m_windUp += 0.097;
+         invoker.m_windUp += 0.11;
       }
       if(invoker.m_windUp > 1) invoker.m_windUp = 1;
       invoker.m_click = false;
