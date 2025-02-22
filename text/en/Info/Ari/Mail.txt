@@ -81,4 +81,38 @@ right now. What drove you? Love?
 
 Omi
 
+## ═══════════════════════════════════════════════════════════════════════════╕
+== \#INFO_TITLE_MCluster3Ari | $$\#SAVED_MESSAGE
+== \#INFO_REMOT_MCluster3Ari | $$\#REMOTE_OMI
+== \#INFO_SSIZE_MCluster3Ari | 36
+@@ \#INFO_DESCR_MCluster3Ari
+Aricil, can you still read me?
+
+\cn[Of course.]\c-
+
+Then, you can also respond?
+
+\cn[Of course.]\c-
+
+In an email I haven't sent?
+
+\cn[What?]\c-
+
+You responded in the last email. I was puzzled. It seems we're on the
+same C/BI. In fact, I believe we're in the same brain. I've been
+experiencing things through your body and a layer of delusion. The
+only reason I was able to realize it is because you snapped me out of
+it by replying.
+
+Somehow, you didn't notice either. The delusion must be two-sided.
+Which of us is the real body?
+
+\cnI don't know. I feel real.\c-
+
+Then I'll go with that. It's good enough for me.
+
+Say, want to split a drink when we get back home?
+
+\cnSure.\c-
+
 ## EOF

@@ -2241,6 +2241,36 @@
    "\cn[...Yes.]\c-\n"
    "\n"
    "Omi";
+"LITH_INFO_TITLE_MCluster3Ari" =
+   "$$LITH_SAVED_MESSAGE";
+"LITH_INFO_REMOT_MCluster3Ari" =
+   "$$LITH_REMOTE_OMI";
+"LITH_INFO_SSIZE_MCluster3Ari" =
+   "36";
+"LITH_INFO_DESCR_MCluster3Ari" =
+   "Aricil, can you still read me?\n"
+   "\n"
+   "\cn[Of course.]\c-\n"
+   "\n"
+   "Then, you can also respond?\n"
+   "\n"
+   "\cn[Of course.]\c-\n"
+   "\n"
+   "In an email I haven't sent?\n"
+   "\n"
+   "\cn[What?]\c-\n"
+   "\n"
+   "You responded in the last email. I was puzzled. It seems we're on the same C/BI. In fact, I believe we're in the same brain. I've been experiencing things through your body and a layer of delusion. The only reason I was able to realize it is because you snapped me out of it by replying.\n"
+   "\n"
+   "Somehow, you didn't notice either. The delusion must be two-sided. Which of us is the real body?\n"
+   "\n"
+   "\cnI don't know. I feel real.\c-\n"
+   "\n"
+   "Then I'll go with that. It's good enough for me.\n"
+   "\n"
+   "Say, want to split a drink when we get back home?\n"
+   "\n"
+   "\cnSure.\c-";
 "LITH_INFO_TITLE_MIntroJem" =
    "$$LITH_SAVED_MESSAGE";
 "LITH_INFO_REMOT_MIntroJem" =
