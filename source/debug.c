@@ -75,6 +75,43 @@ void Dbg_PrintMem(void const *data, mem_size_t size) {
    PrintStrL("\nEOF\n");
 }
 
+void P_Ren_Debug(void) {
+   SetSize(640, 480);
+   str sky1 = EDataS(_edt_sky1), sky2 = EDataS(_edt_sky2);
+   ACS_BeginPrint();
+   _l("mission%: "); _p(ml.missionprc); _c('\n');
+   _l("exp: lv.");
+   _p(pl.attr.level);   _c(' ');
+   _p(pl.attr.expprev); _c('/');
+   _p(pl.attr.exp);     _c('/');
+   _p(pl.attr.expnext); _c('\n');
+   _l("pos: ");        _v(pl.x, pl.y, pl.z);                   _c('\n');
+   _l("vel: ");        _v(pl.velx, pl.vely, pl.velz);          _c('\n');
+   _l("v: ");          _p(pl.getVel());                        _c('\n');
+   _l("ang: ");        _v(pl.yaw, pl.pitch, pl.roll);          _c('\n');
+   _l("addang: ");     _v(pl.addyaw, pl.addpitch, pl.addroll); _c('\n');
+   _l("rage: ");       _p(pl.rage);                            _c('\n');
+   _l("score: ");      _p(pl.score); _c('*'); _p(pl.scoremul); _c('\n');
+   _l("speedmul: ");   _p(pl.speedmul);                        _c('\n');
+   _l("jumpboost: ");  _p(pl.jumpboost);                       _c('\n');
+   _l("sky: ");        _p(sky1); _c(','); _p(sky2);            _c('\n');
+   _l("light: ");
+   _p(pl.light.intensity); _c('/');
+   _p(pl.light.target);    _l(" spd: ");
+   _p(pl.light.speed);     _l(" bat: ");
+   _p(pl.light.battery);   _c('\n');
+   if(get_bit(wl.cbiupgr, cupg_d_shield)) {
+      _l("shield: ");
+      _p((i32)pl.shield);  _c('/');
+      _p(pl.shieldmax);    _l(" regen: ");
+      _p(pl.regenwait);    _c('/');
+      _p(pl.regenwaitmax); _c('\n');
+   }
+   _l("scorethreshold: "); _p(wl.scorethreshold); _c('\n');
+   _l("realtime: "); _p(wl.realtime); _c('\n');
+   PrintText(sf_smallfnt, CR_WHITE, pl.hudlpos*2,1, 240,0, _u_alpha, 0.2);
+}
+
 dynam_aut script_str ext("ACS") addr(OBJ "Thingomamob")
 void Z_Thimgomabjhdf(void) {
    static
@@ -247,42 +284,5 @@ bool chtf_end_game(cheat_params_t const params) {
 struct cheat cht_give_exp_to = cheat_s("pgdonation", 2, chtf_give_exp_to, "Tuition donated to monster");
 struct cheat cht_give_score  = cheat_s("pgbezos",    1, chtf_give_score, "Player transmuted into Jeff Bezos");
 struct cheat cht_end_game    = cheat_s("pgbedone",   1, chtf_end_game, "...Be Done");
-
-void P_Ren_Debug(void) {
-   SetSize(640, 480);
-   str sky1 = EDataS(_edt_sky1), sky2 = EDataS(_edt_sky2);
-   ACS_BeginPrint();
-   _l("mission%: "); _p(ml.missionprc); _c('\n');
-   _l("exp: lv.");
-   _p(pl.attr.level);   _c(' ');
-   _p(pl.attr.expprev); _c('/');
-   _p(pl.attr.exp);     _c('/');
-   _p(pl.attr.expnext); _c('\n');
-   _l("pos: ");        _v(pl.x, pl.y, pl.z);                   _c('\n');
-   _l("vel: ");        _v(pl.velx, pl.vely, pl.velz);          _c('\n');
-   _l("v: ");          _p(pl.getVel());                        _c('\n');
-   _l("ang: ");        _v(pl.yaw, pl.pitch, pl.roll);          _c('\n');
-   _l("addang: ");     _v(pl.addyaw, pl.addpitch, pl.addroll); _c('\n');
-   _l("rage: ");       _p(pl.rage);                            _c('\n');
-   _l("score: ");      _p(pl.score); _c('*'); _p(pl.scoremul); _c('\n');
-   _l("speedmul: ");   _p(pl.speedmul);                        _c('\n');
-   _l("jumpboost: ");  _p(pl.jumpboost);                       _c('\n');
-   _l("sky: ");        _p(sky1); _c(','); _p(sky2);            _c('\n');
-   _l("light: ");
-   _p(pl.light.intensity); _c('/');
-   _p(pl.light.target);    _l(" spd: ");
-   _p(pl.light.speed);     _l(" bat: ");
-   _p(pl.light.battery);   _c('\n');
-   if(get_bit(wl.cbiupgr, cupg_d_shield)) {
-      _l("shield: ");
-      _p((i32)pl.shield);  _c('/');
-      _p(pl.shieldmax);    _l(" regen: ");
-      _p(pl.regenwait);    _c('/');
-      _p(pl.regenwaitmax); _c('\n');
-   }
-   _l("scorethreshold: "); _p(wl.scorethreshold); _c('\n');
-   _l("realtime: "); _p(wl.realtime); _c('\n');
-   PrintText(sf_smallfnt, CR_WHITE, pl.hudlpos*2,1, 240,0, _u_alpha, 0.2);
-}
 
 /* EOF */
