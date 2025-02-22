@@ -1523,7 +1523,7 @@
 "LITH_INFO_DESCR_Qasl" =
    "A company from Earth which specializes in heavy armaments and spacecraft. Originally a part of the Clan of Next Dawn's armory, they eventually split off during the war to produce armaments for everyone on Earth.\n"
    "\n"
-   "Technically, you are the rightful head of this company, but you left control over it to Sealis.";
+   "Technically, you are the rightful head of this company, but you left control over it to Kestren.";
 "LITH_INFO_SHORT_Qesel" =
    "Qesel";
 "LITH_INFO_TITLE_Qesel" =
@@ -2190,21 +2190,57 @@
 "LITH_INFO_REMOT_MIntroAri" =
    "$$LITH_REMOTE_OMI";
 "LITH_INFO_DESCR_MIntroAri" =
-   "Aricil! I can feel your presence. We're in the same plane now, you and I. Good.\n"
+   "Aricil!\n"
+   "\n"
+   "I can feel your presence. We're in the same plane now, you and I. Good.\n"
    "\n"
    "I'm going to propose a challenge to you, my dear brother; Whoever can make the most Score and get out of here the quickest wins. Let's see who will make it to the top first.\n"
    "\n"
-   "I hope you a safe journey. This place gives me horrid vibes.";
+   "I hope you a safe journey. This place gives me horrid vibes. Omi";
 "LITH_INFO_TITLE_MPhantomAri" =
    "$$LITH_SAVED_MESSAGE";
 "LITH_INFO_REMOT_MPhantomAri" =
    "$$LITH_REMOTE_OMI";
 "LITH_INFO_DESCR_MPhantomAri" =
-   "Aricil! What the hell is going on? There are strange \cmdark\c- things attacking me. If you can, we need to re-group. My Computer/Brain Interface is saying weird things to me... I'm loathe to say it, but I'm scared.\n"
+   "Aricil!\n"
+   "\n"
+   "What the hell is going on? There are strange \cmdark\c- things attacking me. If you can, we need to re-group. My Computer/Brain Interface is saying weird things to me.\n"
    "\n"
    "I think we should go home, but the world keeps changing behind me. I'm certain the Dimension Driver wouldn't work here.\n"
    "\n"
-   "Good hunting.";
+   "Good hunting. Omi";
+"LITH_INFO_TITLE_MCluster1Ari" =
+   "$$LITH_SAVED_MESSAGE";
+"LITH_INFO_REMOT_MCluster1Ari" =
+   "$$LITH_REMOTE_OMI";
+"LITH_INFO_SSIZE_MCluster1Ari" =
+   "30";
+"LITH_INFO_DESCR_MCluster1Ari" =
+   "Aricil,\n"
+   "\n"
+   "Something about this place makes me afraid. Every little bit we travel, something gets closer, and there's no turning back. There's nothing alive here, at least not truly. The ever-growing hostility only reminds me of the war. I suppose that's what we've entered into.\n"
+   "\n"
+   "Do you remember when we were created? Old body, new mind. Like starting over. There was no point of reference for things like strength or language. They didn't let us near sentient beings for months until we stopped breaking the walls accidentally.\n"
+   "\n"
+   "This place feels like starting over. Stronger, but untrained. I'm stuck in this body but I don't know how to use it. I don't know how to get out of this place. I'm stuck, and I need you to help me find my way out.\n"
+   "\n"
+   "Omi";
+"LITH_INFO_TITLE_MCluster2Ari" =
+   "$$LITH_SAVED_MESSAGE";
+"LITH_INFO_REMOT_MCluster2Ari" =
+   "$$LITH_REMOTE_OMI";
+"LITH_INFO_SSIZE_MCluster2Ari" =
+   "25";
+"LITH_INFO_DESCR_MCluster2Ari" =
+   "Aricil,\n"
+   "\n"
+   "We've made it this far. That \cmsomething\c- still keeps getting closer. It reminded me of another something. \cn[You don't want to hear this.]\c-\n"
+   "\n"
+   "Do you remember, during the war, when Sealis, our armorer died? It all seemed pretty hopeless. A hundred thousand guys with guns against us, the now-unarmed resistance. You and Kestren took up the mantle right away, through tears and broken hearts. I wish I could be that strong right now. What drove you? Love?\n"
+   "\n"
+   "\cn[...Yes.]\c-\n"
+   "\n"
+   "Omi";
 "LITH_INFO_TITLE_MIntroJem" =
    "$$LITH_SAVED_MESSAGE";
 "LITH_INFO_REMOT_MIntroJem" =
