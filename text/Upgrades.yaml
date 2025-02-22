@@ -39,7 +39,7 @@ _uc_body:
       Subweapons:  {pg: N/A, f: --URE}
       HeavyArmor:  {pg: N/A, f: ADU--, scr:  321234}
       ShieldOC:    {pg: N/A,           scr:  410000}
-      HoverBoots:  {pg: N/A, f: --U--, scr: 2999999}
+      HoverBoots:  {pg: N/A, f: --U--, scr: 2222222}
       HoverBoots2: {pg: N/A, pg: N/A,  scr:  999999}
       SkillSword:  {pg: N/A, f: ----E, scr: 1868666}
 _uc_weap:
@@ -100,7 +100,7 @@ _uc_extr:
       SMT:       {pg: N/A, scr: 5696969, mul: 20, req: dim}
       ATATATATA: {pg: N/A, scr: 1983333, mul: 2,  req: dim}
    pD:
-      Kampilan_B: {pg: N/A, scr: 999999, req: dim}
+      Kampilan_B: {pg: N/A, scr: 9999999, req: dim}
 _uc_down:
    gA:
       UNCEUNCE:   {pg: N/A, f: ADU--, mul: 30}
