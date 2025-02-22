@@ -11,6 +11,8 @@
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
 #if defined(cheat_x)
+cheat_x(cht_list_cheats)
+
 cheat_x(cht_end_game)
 cheat_x(cht_give_ammo)
 cheat_x(cht_give_exp)

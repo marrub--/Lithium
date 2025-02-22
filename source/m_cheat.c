@@ -57,4 +57,20 @@ alloc_aut(0) script ext("ACS") addr(lsc_cheatinput) bool Z_CheatInput(i32 ch) {
    return grab;
 }
 
+script static
+bool chtf_list_cheats(cheat_params_t const params) {
+   ACS_BeginPrint();
+   #define cheat_x(which) \
+      PrintStr(which.seq); \
+      for(i32 i = 0; i < which.par; ++i) ACS_PrintChar('*'); \
+      PrintStrL(" (" #which "): "); \
+      PrintStr(which.msg); \
+      PrintStrL("\C-\n");
+   #include "m_cheat.h"
+   EndLogEx(_pri_bold);
+   return true;
+}
+
+struct cheat cht_list_cheats = cheat_s("pgcheat", 0, chtf_list_cheats, "All secrets known");
+
 /* EOF */
