@@ -252,6 +252,7 @@
 "mail auto" {
    cl: pM tag: MIntroLane;
    cl: pC tag: MIntroJem;
+   cl: pD tag: MIntroAri;
 }
 
 "mail" {
@@ -269,10 +270,10 @@
    cl: pC tag: MCluster3Jem;
    cl: pC tag: MPhantomJem;
 
-   cl: pC tag: MCluster1Ari;
-   cl: pC tag: MCluster2Ari;
-   cl: pC tag: MCluster3Ari;
-   cl: pC tag: MPhantomAri;
+   cl: pD tag: MCluster1Ari;
+   cl: pD tag: MCluster2Ari;
+   cl: pD tag: MCluster3Ari;
+   cl: pD tag: MPhantomAri;
 }
 
 /* EOF */
