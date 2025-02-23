@@ -11,14 +11,7 @@
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
 #if defined(abs_impl)
-   [[return]] __asm(
-      "BAnd    (Stk() LocReg(Lit(:n)) Lit(0x80000000_s31.0))"
-      "Jcnd_Tru(Stk() Lit(:\"neg\"))"
-      "Retn    (LocReg(Lit(:n)))"
-   ":\"neg\""
-      "Neg:I(Stk() LocReg(Lit(:n)))"
-      "Retn (Stk())"
-   );
+   return n < 0 ? -n : n;
 #undef abs_impl
 #elif defined(min_max_impl) && min_max_impl == 0
    return x < y ? x : y;
