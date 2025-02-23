@@ -237,12 +237,39 @@ presets {
    pre: Arachnotron   type: arachnotron   filter: "Robot_SpiderBot";
    pre: PainElemental type: painelemental filter: "Robot_FabricationNode";
    pre: Revenant      type: revenant      filter: "Robot_RollerDroid";
-   pre: Mancubus      type: mancubus      filter: "Robot_MaintenanceBot";
+   pre: Mancubus      type: mancubus      filter: "Robot_ModuleBot";
+   pre: Mancubus      type: mancubus      filter: "Robot_ModuleBotMaintenance";
+   pre: Mancubus      type: mancubus      filter: "Robot_ModuleBotSecurity";
+   pre: Mancubus      type: mancubus      filter: "Robot_ModuleBotMilitary";
    pre: Archvile      type: archvile      filter: "Robot_RepairBot";
    pre: CyberDemon    type: cyberdemon    filter: "Robot_MilitaryBot";
    pre: SpiderDemon   type: mastermind    filter: "Robot_LoaderBot";
    pre: FinalBoss     type: mastermind    filter: "Robot_BossEye";
-   pre: ChaingunGuy   type: zombie        filter: "Robot_GunTurret";
+   pre: ZombieMan     type: zombie        filter: "Robot_GunTurret";
+   pre: ChaingunGuy   type: zombiecg      filter: "Robot_SecurityTurret";
+   pre: ShotgunGuy    type: zombiesg      filter: "Robot_MarauderDrone";
+   pre: ChaingunGuy   type: zombiecg      filter: "Robot_Battleroid";
+   pre: ChaingunGuy   type: zombiecg      filter: "Robot_BattleroidBlue";
+   pre: ChaingunGuy   type: zombiecg      filter: "Robot_BattleroidRed";
+   pre: ChaingunGuy   type: zombiecg      filter: "Robot_BattleroidBlack";
+   pre: ChaingunGuy   type: zombiecg      filter: "Robot_BattleroidBrown";
+   pre: ChaingunGuy   type: zombiecg      filter: "Robot_BattleroidSilver";
+   pre: Demon         type: demon         filter: "Robot_MaintenanceBot";
+   pre: BaronOfHell   type: baron         filter: "Robot_HeavySecBot";
+   pre: BaronOfHell   type: baron         filter: "Robot_HeavySecBotMilitary";
+   pre: Cacodemon     type: cacodemon     filter: "Robot_HunterKiller";
+   pre: Cacodemon     type: cacodemon     filter: "Robot_AssassinDrone";
+   pre: Cacodemon     type: cacodemon     filter: "Robot_HEATDrone";
+   pre: HellKnight    type: hellknight    filter: "Robot_HeavyWarBot";
+   pre: HellKnight    type: demon         filter: "Robot_AHRA";
+}
+
+"nonmonster full" {
+   pre: Nothing type: zombie filter: "Robot_MedicalBot";
+   pre: Nothing type: zombie filter: "Robot_CleanerBot";
+   pre: Nothing type: zombie filter: "Robot_ChargeDetectorCenter";
+   pre: Nothing type: zombie filter: "Robot_ChargeDetectorLeft";
+   pre: Nothing type: zombie filter: "Robot_ChargeDetectorRight";
 }
 
 /* Shut Up and Lithium */
