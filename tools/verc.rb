@@ -82,13 +82,7 @@ const LITH_VERNUM = vernum;
 const LITH_VERSTR = verstr;
 const LITH_VERSION = vernam
 #ifndef NDEBUG
-" ("
-#ifdef RELEASE
-"DEBUG"
-#else
-"DEV"
-#endif
-")"
+" (DEBUG)"
 #endif
 ;
 #elif !defined(VER_DEFINES_ONLY)

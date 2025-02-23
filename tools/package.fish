@@ -12,17 +12,14 @@
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
 function build
-   if test $RELEASE
-      set -xa CC_ARG "-DRELEASE"
-   end
    if test ! $DEBUG
       set -xa CC_ARG "-DNDEBUG"
    end
 
    rm -rf master Lithium.pk3
 
-   tools/genbuild.rb
    ninja -t clean
+   tools/genbuild.rb
    ninja
 
    mkdir master
