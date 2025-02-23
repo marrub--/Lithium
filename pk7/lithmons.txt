@@ -343,7 +343,7 @@ presets {
    pre: SpiderDemon   type: mastermind    filter: "Maephisto";
 }
 
-/* DoomRL Arsenal Monsters */
+/* DoomRL Monsters */
 "" {
    pre: ZombieMan   type: zombie   filter: "FormerHuman";
    pre: ShotgunGuy  type: zombiesg filter: "FormerSergeant";
@@ -351,7 +351,13 @@ presets {
    pre: ChaingunGuy type: zombie   filter: "FormerCaptain";
    pre: ChaingunGuy type: zombie   filter: "FormerCyborg";
    pre: ChaingunGuy type: zombie   filter: "FormerAssaultTrooper";
+   pre: ChaingunGuy type: zombie   filter: "FormerOverwatch";
+   pre: ChaingunGuy type: zombie   filter: "FormerShocktrooper";
    pre: ChaingunGuy type: zombie   filter: "EliteHuman";
+   pre: ChaingunGuy type: zombie   filter: "EliteSergeant";
+   pre: ChaingunGuy type: zombie   filter: "EliteCommando";
+   pre: ChaingunGuy type: zombie   filter: "EliteCaptain";
+   pre: LostSoul    type: lostsoul filter: "UACDefenceDrone";
 }
 
 "nonmonster full" {
