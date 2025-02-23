@@ -44,7 +44,7 @@ _uc_body:
       SkillSword:  {pg: N/A, f: ----E, scr: 1868666}
 _uc_weap:
    pM:
-      Pistol_A:  {scr:  140940}
+      Pistol_A:  {scr:  140940, pg: N/A}
       Pistol_B:  {scr:  340000,                          req: wmd}
       Shotgun_A: {scr: 1079430,           pr: 1, grp: 1, req: wmd}
       Shotgun_B: {scr: 1010420,                  grp: 1, req: wmd}
