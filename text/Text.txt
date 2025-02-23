@@ -49,7 +49,6 @@
 ## ╰──────────────────────────────────────────────────────────────────────────╯
 
 !!lang en | en enu default
-!!lang jp | jp
 
 !!inclang Dialogue.txt
 !!inclang End.txt
