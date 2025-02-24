@@ -150,7 +150,7 @@ stkoff k32 attr_vitbuff(void) {
 }
 
 stkoff i32 attr_stmbuff(void) {
-   return pl.attr.attrs[at_stm] << 2;
+   return (pl.attr.attrs[at_stm] << 2) + 10;
 }
 
 stkoff i32 attr_stmtime(void) {

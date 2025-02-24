@@ -647,7 +647,7 @@ static void P_Atr_pTick(void) {
    pl.maxhealth = max_health;
    SetSpawnHealth(0, pl.maxhealth);
 
-   if(pl.health < attr_stmbuff() + 10 && ACS_Timer() % attr_stmtime() == 0) {
+   if(pl.health < attr_stmbuff() && ACS_Timer() % attr_stmtime() == 0) {
       pl.setHealth(pl.health + 1);
    }
 }
