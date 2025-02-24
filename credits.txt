@@ -61,9 +61,7 @@
 @ JetPlane           - Image used as a base for the SMG sprite
 @ Minigunner         - Missile Launcher sprite
 @ Pablomarcellana    - Kampilan model (CC-BY-4.0; https://skfb.ly/6RnBM)
-@ Ribonucleic Asshat \ Environment texture used in Dark Lord weapons
-                     | Dynamic sky textures
-                     | Help with using Blender
+@ Ribonucleic Asshat - Environment texture used in Dark Lord weapons
 @ Sgt. Shivers       \ Shotgun, knife, and revolver sprites
                      | Mateba & SPAS reload animations
 @ VriskaSerket       - Image used as a base for the Star Destroyer sprite
@@ -143,9 +141,9 @@
 ~
                              * Textures *
 
-@ FreeDoom Contributors   - TITLEMAP textures, LITHWTR*/LITHNUK*/LITHBLD*
-@ abbuw                   - Vent texture
-@ Screaming Brain Studios - Dynamic sky textures
+@ FreeDoom Contributors - TITLEMAP textures, LITHWTR*/LITHNUK*/LITHBLD*
+@ abbuw                 - Vent texture
+@ Ribonucleic Asshat    - Dynamic sky textures
 ~
                               * Fonts *
 
@@ -181,8 +179,9 @@
 @ Kate Fox           - My biggest inspiration.
 @ Kyle873            - said a nice thing i think maybe. Also inspiration.
 @ Marty Kirra        - Cool person
-@ Ribonucleic Asshat - Emotional support twink (female)
-@ TerminusEst13      - Help with finding some sprites to work with
+@ Ribonucleic Asshat \ Emotional support twink (female)
+                     | Help with using Blender
+@ TerminusEst13      - Help with finding some sprites and sounds to work with
 @ Theshooter7        - Making Danimator, which I used for a lot of animations
 @ Wartorn            - Help with HUD design, emotional support
 @ WildWeasel         - Help with making fonts, suggestions for HUD
