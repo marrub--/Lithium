@@ -6609,6 +6609,8 @@
    "Armor Interface";
 "LITH_CBI_RDistInter" =
    "Reality Distortion Interface";
+"LITH_CBI_DimDriver" =
+   "$$LITH_INFO_SHORT_DimDriver";
 "LITH_CBI_ReactArmor" =
    "$$LITH_UPGRADE_TITLE_ReactArmor";
 "LITH_CBI_Slot1Spell" =

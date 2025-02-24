@@ -160,6 +160,7 @@ CLOSED
 == \#CBI_WeapnInte2 | Weapon Refactoring Device
 == \#CBI_ArmorInter | Armor Interface
 == \#CBI_RDistInter | Reality Distortion Interface
+== \#CBI_DimDriver  | $$\#INFO_SHORT_DimDriver
 == \#CBI_ReactArmor | $$\#UPGRADE_TITLE_ReactArmor
 
 == \#CBI_Slot1Spell | \ciBlade Spell Driver
