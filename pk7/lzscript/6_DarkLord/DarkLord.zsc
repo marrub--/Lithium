@@ -13,8 +13,8 @@ class Lith_ShieldBlast : Actor {
       Speed 32;
       Damage 30;
       RenderStyle "Add";
-      SeeSound "imp/attack";
-      DeathSound "imp/shotx";
+      SeeSound "weapons/plasdiff/fire";
+      DeathSound "weapons/plasdiff/explode";
       XScale 0.5;
       Projectile;
       +FloorHugger
