@@ -30,16 +30,16 @@ Decl_Update void Upgr_Goldeneye_Update(void) {
    }
 }
 
-noinit static str lolsords_origweapon;
+noinit static str origweapon;
 
 Decl_Activate void Upgr_lolsords_Activate(void) {
-   lolsords_origweapon = pl.weapon.cur.class;
+   origweapon = pl.weapon.cur.class;
    InvGive(so_Sword, 1);
 }
 
 Decl_Deactivate void Upgr_lolsords_Deactivate(void) {
    InvTake(so_Sword, 1);
-   ACS_SetWeapon(lolsords_origweapon);
+   ACS_SetWeapon(origweapon);
 }
 
 Decl_Update void Upgr_lolsords_Update(void) {
@@ -139,6 +139,22 @@ Decl_Enter void Upgr_SkillSword_Enter(void) {
    AmbientSound(ss_weapons_khanda_pwup, 0.25k);
    P_CenterNotification(sl_go_kill, 35*3, CR_RED, 0xFF0000, 1, 1);
    ACS_SetWeapon(so_Khanda);
+}
+
+Decl_Activate void Upgr_ATATATATA_Activate(void) {
+   origweapon = pl.weapon.cur.class;
+   InvGive(so_Kenshirou, 1);
+   pl.setHealth(pl.health * 50);
+}
+
+Decl_Deactivate void Upgr_ATATATATA_Deactivate(void) {
+   InvTake(so_Kenshirou, 1);
+   ACS_SetWeapon(origweapon);
+   pl.setHealth(pl.health / 50);
+}
+
+Decl_Update void Upgr_ATATATATA_Update(void) {
+   ACS_SetWeapon(so_Kenshirou);
 }
 
 /* EOF */

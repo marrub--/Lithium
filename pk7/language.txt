@@ -5370,6 +5370,8 @@
    "CBI Upgrade #6";
 "LITH_TAG_Sword" =
    "sord";
+"LITH_TAG_Kenshirou" =
+   "Kenshirou";
 "LITH_TAG_WingsOfDeath" =
    "Wings of Death";
 "LITH_TAG_DSparil" =

@@ -545,7 +545,6 @@ alloc_aut(0) script void P_CenterNotification(str txt, i32 tics, i32 cr, i32 lin
 }
 
 static k32 damage_mul;
-static i32 max_health;
 
 static void P_attrRGE(void) {
    if(pl.health < pl.old.health) {
@@ -631,22 +630,20 @@ static void P_Spe_pTick(void) {
 
 static void P_Atr_pTick(void) {
    if(Paused) return;
-
-   max_health = pl.spawnhealth + attr_strbuff();
+   i32 max_health = pl.spawnhealth + attr_strbuff();
    damage_mul = attr_accbuff();
-
    switch(pl.pclass) {
    case pcl_marine:    P_attrRGE(); break;
    case pcl_cybermage: P_attrCON(); break;
    case pcl_darklord:  P_attrREF(); break;
    }
-
+   if(get_bit(pl.upgrades[UPGR_ATATATATA].flags, _ug_active)) {
+      max_health *= 50;
+   }
    SetDamageMultiplier(0, damage_mul);
    SetMembI(0, sm_DmgFac, attr_defbuff());
-
    pl.maxhealth = max_health;
    SetSpawnHealth(0, pl.maxhealth);
-
    if(pl.health < attr_stmbuff() && ACS_Timer() % attr_stmtime() == 0) {
       pl.setHealth(pl.health + 1);
    }

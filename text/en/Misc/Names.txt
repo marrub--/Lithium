@@ -76,6 +76,7 @@
 == \#TAG_Upgrade6 | CBI Upgrade #6
 
 == \#TAG_Sword        | sord
+== \#TAG_Kenshirou    | Kenshirou
 == \#TAG_WingsOfDeath | Wings of Death
 
 == \#TAG_DSparil         | D'Sparil
