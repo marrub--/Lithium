@@ -74,6 +74,7 @@
    "@ Ribonucleic Asshat - Environment texture used in Dark Lord weapons\n"
    "@ Sgt. Shivers       \\ Shotgun, knife, and revolver sprites\n"
    "                     | Mateba & SPAS reload animations\n"
+   "@ Sinael             - EYE sprite rips\n"
    "@ VriskaSerket       - Image used as a base for the Star Destroyer sprite\n"
    "@ WildWeasel         - Sleeves for Cyber-Mage\n"
    "@ Yholl              - Made the Charge Fist not suck\n"
