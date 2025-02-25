@@ -189,7 +189,9 @@ weapons {
 
    kenshirou {
       == lsnd/WeaponsD/Kenshirou
-      shirtrip ShirtRip # Fist of the North Star #49
+      shirtrip ShirtRip          # Fist of the North Star #49
+      hrkloop  HyakuretsukenLoop # Fist of the North Star #8
+      hrkend   HyakuretsukenEnd  # ^
    }
 }
 

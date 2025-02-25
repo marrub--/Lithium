@@ -39,10 +39,11 @@ class Lith_Kenshirou : Lith_ExclusiveWeapon {
       +Weapon.NoAutoFire
    }
    bool m_seenShirtRip;
+   int m_loops;
    states(Weapon) {
    Ready:
       TNT1 A 0 a_jumpIf(invoker.m_seenShirtRip, "Ready1");
-      TNT1 A 0 a_startSound("weapons/kenshirou/shirtrip", lch_voice);
+      TNT1 A 0 a_startSound("weapons/kenshirou/shirtrip", lch_weapon);
       ,K10 ABCDEFGHIJKLMNOPQRSTUVWXYZ 1 bright;
       ,K11 ABCDEFGHIJKLMNOPQRSTUVWXYZ 2 bright;
       ,K12 ABCDEFGHIJKLMNOPQRSTUVWXYZ 1 bright;
@@ -55,17 +56,28 @@ class Lith_Kenshirou : Lith_ExclusiveWeapon {
       TNT1 A 1 lith_a_ready(WRF_NOBOB);
       wait;
    Fire:
+      TNT1 A 0 {
+         a_startSound("weapons/kenshirou/hrkloop", lch_weapon, CHANF_LOOP);
+         invoker.m_loops = 0;
+      }
       ,K04 P 0 bright a_jumpIf(random(0, 1), "FireLoop2");
       ,K04 ABCDEFGHIJKLMNOP 2 bright;
    FireLoop:
-      ,K03 ABCDEFGHIJKLMN 2 bright;
-      ,K03 O 2 bright a_reFire("FireLoop");
-      goto Ready;
+      ,K03 ABCDEFGHIJKLMNO 2 bright;
+      TNT1 A 0 a_jumpIf(invoker.m_loops++ < 1, "FireLoop");
+      TNT1 A 0 a_reFire("FireLoop");
+      goto FireEnd;
    FireLoop2:
       ,K01 ABCDEFGHIJKLMNOPQRSTUVWXYZ 2 bright;
-      ,K02 ABC 2 bright;
-      ,K02 D 2 bright a_reFire("FireLoop2");
-      goto Ready;
+      ,K02 ABCD 2 bright;
+      TNT1 A 0 a_jumpIf(invoker.m_loops++ < 1, "FireLoop2");
+      TNT1 A 0 a_reFire("FireLoop2");
+      goto FireEnd;
+   FireEnd:
+      TNT1 A 0 a_startSound("weapons/kenshirou/hrkend", lch_weapon);
+      TNT1 A 25;
+      TNT1 A 0 a_explode(256 * invoker.m_loops, 64 * invoker.m_loops, 0);
+      goto ReadySelector;
    }
 }
 
