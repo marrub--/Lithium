@@ -186,6 +186,11 @@ weapons {
       spark4 Spark4 # ^
       $random spark {spark1, spark2, spark3, spark4,}
    }
+
+   kenshirou {
+      == lsnd/WeaponsD/Kenshirou
+      shirtrip ShirtRip # Fist of the North Star #49
+   }
 }
 
 # EOF

@@ -38,12 +38,34 @@ class Lith_Kenshirou : Lith_ExclusiveWeapon {
       +Weapon.MeleeWeapon
       +Weapon.NoAutoFire
    }
+   bool m_seenShirtRip;
    states(Weapon) {
    Ready:
-      TNT1 A 1 Lith_A_Ready;
-      loop;
+      TNT1 A 0 a_jumpIf(invoker.m_seenShirtRip, "Ready1");
+      TNT1 A 0 a_startSound("weapons/kenshirou/shirtrip", lch_voice);
+      ,K10 ABCDEFGHIJKLMNOPQRSTUVWXYZ 1 bright;
+      ,K11 ABCDEFGHIJKLMNOPQRSTUVWXYZ 2 bright;
+      ,K12 ABCDEFGHIJKLMNOPQRSTUVWXYZ 1 bright;
+      ,K13 ABCDEFGHIJKLMNOPQRSTUVWXYZ 2 bright;
+      ,K14 ABCDEFGHIJKLMNOPQRSTUVWXYZ 1 bright;
+      ,K15 ABCDEFGHIJKLMNOPQRSTUVWXYZ 2 bright;
+      ,K16 ABCDEFGHIJK 1 bright;
+      TNT1 A 0 {invoker.m_seenShirtRip = true;}
+   Ready1:
+      TNT1 A 1 lith_a_ready(WRF_NOBOB);
+      wait;
    Fire:
-      goto ReadySelector;
+      ,K04 P 0 bright a_jumpIf(random(0, 1), "FireLoop2");
+      ,K04 ABCDEFGHIJKLMNOP 2 bright;
+   FireLoop:
+      ,K03 ABCDEFGHIJKLMN 2 bright;
+      ,K03 O 2 bright a_reFire("FireLoop");
+      goto Ready;
+   FireLoop2:
+      ,K01 ABCDEFGHIJKLMNOPQRSTUVWXYZ 2 bright;
+      ,K02 ABC 2 bright;
+      ,K02 D 2 bright a_reFire("FireLoop2");
+      goto Ready;
    }
 }
 
