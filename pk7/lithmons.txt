@@ -272,6 +272,7 @@ presets {
    pre: CyberDemon    type: cyberdemon    filter: "Robot_MilitaryBot";
    pre: SpiderDemon   type: mastermind    filter: "Robot_LoaderBot";
    pre: FinalBoss     type: mastermind    filter: "Robot_BossEye";
+   /* Variants */
    pre: ZombieMan     type: zombie        filter: "Robot_GunTurret";
    pre: ChaingunGuy   type: zombiecg      filter: "Robot_SecurityTurret";
    pre: ShotgunGuy    type: zombiesg      filter: "Robot_MarauderDrone";
@@ -289,14 +290,36 @@ presets {
    pre: Cacodemon     type: cacodemon     filter: "Robot_HEATDrone";
    pre: HellKnight    type: hellknight    filter: "Robot_HeavyWarBot";
    pre: HellKnight    type: demon         filter: "Robot_AHRA";
+   /* Boss variants */
+   pre: SpiderDemon   type: mastermind    filter: "Robot_SpiderTank";
+   pre: CyberDemon    type: cyberdemon    filter: "Robot_SiegeDroid";
+   pre: CyberDemon    type: cyberdemon    filter: "Robot_MilitaryBotBoss";
+   pre: SpiderDemon   type: mastermind    filter: "Robot_LoaderBotBoss";
 }
 
 "nonmonster full" {
-   pre: Nothing type: zombie filter: "Robot_MedicalBot";
-   pre: Nothing type: zombie filter: "Robot_CleanerBot";
-   pre: Nothing type: zombie filter: "Robot_ChargeDetectorCenter";
-   pre: Nothing type: zombie filter: "Robot_ChargeDetectorLeft";
-   pre: Nothing type: zombie filter: "Robot_ChargeDetectorRight";
+   filter: "Robot_MedicalBot";
+   filter: "Robot_CleanerBot";
+   filter: "Robot_ChargeDetectorCenter";
+   filter: "Robot_ChargeDetectorLeft";
+   filter: "Robot_ChargeDetectorRight";
+   filter: "Robot_ZombiemanSpawner";
+   filter: "Robot_ShotgunguySpawner";
+   filter: "Robot_ChaingunguySpawner";
+   filter: "Robot_ImpSpawner";
+   filter: "Robot_DemonSpawner";
+   filter: "Robot_SpectreSpawner";
+   filter: "Robot_LostSoulSpawner";
+   filter: "Robot_CacodemonSpawner";
+   filter: "Robot_HellKnightSpawner";
+   filter: "Robot_BaronofHellSpawner";
+   filter: "Robot_ArachnotronSpawner";
+   filter: "Robot_PainElementalSpawner";
+   filter: "Robot_RevenantSpawner";
+   filter: "Robot_MancubusSpawner";
+   filter: "Robot_ArchvileSpawner";
+   filter: "Robot_CyberdemonSpawner";
+   filter: "Robot_SpiderMastermindSpawner";
 }
 
 /* Shut Up and Lithium */
@@ -415,7 +438,7 @@ presets {
 }
 
 "nonmonster full" {
-   pre: Nothing type: zombie filter: "RLTheHungrySpawner";
+   filter: "RLTheHungrySpawner";
 }
 
 /* Colorful Hell */
