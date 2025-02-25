@@ -141,6 +141,10 @@ presets {
 // Base Games ════════════════════════════════════════════════════════════════╕
 
 /* Doom */
+"nonmonster full" {
+   filter: "ScriptedMarine";
+}
+
 "" {
    pre: ZombieMan     type: zombie        filter: "ZombieMan";
    pre: ZombieMan     type: zombie        filter: "Zombieman";
@@ -291,6 +295,7 @@ presets {
    pre: HellKnight    type: hellknight    filter: "Robot_HeavyWarBot";
    pre: HellKnight    type: demon         filter: "Robot_AHRA";
    /* Boss variants */
+   pre: Arachnotron   type: arachnotron   filter: "Robot_Deathwalker";
    pre: SpiderDemon   type: mastermind    filter: "Robot_SpiderTank";
    pre: CyberDemon    type: cyberdemon    filter: "Robot_SiegeDroid";
    pre: CyberDemon    type: cyberdemon    filter: "Robot_MilitaryBotBoss";
