@@ -32,6 +32,92 @@ class Lith_SwordPuff : Lith_BulletPuff {
 
 class Lith_SwordCharge : Inventory {default {Inventory.MaxAmount 25;}}
 
+class Lith_Sword : Lith_ExclusiveWeapon {
+   default {
+      Tag "$LITH_TAG_Sword";
+      Weapon.Kickback 100;
+      +Weapon.MeleeWeapon
+      +Weapon.NoAutoFire
+   }
+   override void markPrecacheSounds() {
+      super.markPrecacheSounds();
+      markSound("weapons/sword/hit");
+      markSound("weapons/sword/normal");
+      markSound("weapons/sword/charge");
+      markSound("weapons/sword/chargeup");
+      markSound("weapons/sword/swing");
+   }
+   states(Weapon) {
+   Ready:
+      SORD A 0 {self.TakeInventory("Lith_SwordCharge", int.max);}
+      SORD A 1 Lith_A_Ready;
+      loop;
+   Fire:
+      SORD A 0 A_Jump(256, "FireSL", "FireSR");
+   FireDone:
+      SORD A 1 offset(-17, 50) A_WeaponReady(WRF_NOBOB);
+      SORD A 1 offset(-13, 49) A_WeaponReady(WRF_NOBOB);
+      SORD A 1 offset(-10, 46) A_WeaponReady(WRF_NOBOB);
+      SORD A 1 offset(-8 , 43) A_WeaponReady(WRF_NOBOB);
+      SORD A 1 offset(-4 , 40) A_WeaponReady(WRF_NOBOB);
+      SORD A 1 offset(-2 , 38);
+      SORD A 1 offset(-1 , 35);
+      SORD A 1 offset(-1 , 33);
+      SORD A 1 offset(0  , 32);
+      goto ReadySelector;
+   FireSL:
+      SORD BCD 1;
+      TNT1 A 2;
+      SORD E 1;
+      SORD F 1 A_CustomPunch(35, false, 0, "Lith_SwordPuff", 128.0, 0, 0, null, "weapons/sword/hit", "weapons/sword/normal");
+      SORD GH 1 A_WeaponReady(WRF_NOBOB);
+      TNT1 A 7 A_WeaponReady(WRF_NOBOB);
+      goto FireDone;
+   FireSR:
+      SORD A 1 offset(-2 , 38);
+      SORD A 1 offset(-10, 46);
+      SORD A 1 offset(-17, 50);
+      TNT1 A 2;
+      SORD I 1;
+      SORD J 1 A_CustomPunch(35, false, 0, "Lith_SwordPuff", 128.0, 0, 0, null, "weapons/sword/hit", "weapons/sword/normal");
+      SORD KL 1 A_WeaponReady(WRF_NOBOB);
+      TNT1 A 7 A_WeaponReady(WRF_NOBOB);
+      goto FireDone;
+   AltFire:
+      SORD A 0 A_JumpIf(countInv("Lith_SwordCharge"), "AltFireSkipSound");
+      SORD A 0 A_StartSound("weapons/sword/charge", lch_weapon);
+   AltFireSkipSound:
+      SORD A 1;
+      SORD A 0 A_JumpIf(countInv("Lith_SwordCharge") == lith_maxInv("Lith_SwordCharge"), "AltFireForReal");
+      SORD A 0 {self.GiveInventory("Lith_SwordCharge", 1);}
+      SORD A 0 A_Refire;
+      goto ReadySelector;
+   AltFireForReal:
+      SORD A 15 A_StartSound("weapons/sword/chargeup", lch_weapon2);
+      SORD AB 2;
+      SORD CD 1;
+      TNT1 A 5;
+      SORD E 1 A_StartSound("weapons/sword/swing", lch_weapon3);
+      SORD F 1 A_SpawnItemEx("Lith_SwordBlitter", 0, 0, 24, 0, 0, 0, 0, SXF_SETTARGET | SXF_NOCHECKPOSITION);
+      SORD GH 1;
+      TNT1 A 4;
+      SORD A 1 offset(-30, 70);
+      SORD A 1 offset(-27, 65);
+      SORD A 1 offset(-23, 60);
+      SORD A 1 offset(-19, 55);
+      SORD A 1 offset(-17, 50);
+      SORD A 1 offset(-13, 49);
+      SORD A 1 offset(-10, 46);
+      SORD A 1 offset( -8, 43);
+      SORD A 1 offset( -4, 40);
+      SORD A 1 offset( -2, 38);
+      SORD A 1 offset( -1, 35);
+      SORD A 1 offset( -1, 33);
+      SORD A 1 offset(  0, 32);
+      goto ReadySelector;
+   }
+}
+
 class Lith_Kenshirou : Lith_ExclusiveWeapon {
    default {
       Tag "$LITH_TAG_Kenshirou";
