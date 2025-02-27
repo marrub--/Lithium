@@ -27,7 +27,7 @@ _uc_body:
    pM:
       JetBooster:  {              f: --U--, mul: -5}
       CyberLegs:   {scr: 1220000, f: --U--, pr:  4}
-      ReactArmor:  {scr: 3500200, f: -D-R-, pr: 20,  req: ai   }
+      ReactArmor:  {scr: 3500200, f: -D-R-, pr: 20,  req: ai, pg: N/A}
       ReactArmor2: {scr: 2990200, pg: N/A,  pr: 10,  req: ai ra}
       DefenseNuke: {scr:  580030, f: ----E, pg: N/A, req: ai   }
       Adrenaline:  {scr: 1801000, f: -DU--, pr: 10}
@@ -45,12 +45,12 @@ _uc_body:
 _uc_weap:
    pM:
       Pistol_A:  {scr:  140940, pg: N/A}
-      Pistol_B:  {scr:  340000,                          req: wmd}
+      Pistol_B:  {scr:  340000, pg: N/A,                 req: wmd}
       Shotgun_A: {scr: 1079430,           pr: 1, grp: 1, req: wmd}
       Shotgun_B: {scr: 1010420,                  grp: 1, req: wmd}
       Rifle_A:   {scr:  340100, f: -D-R-}
       Rifle_B:   {scr: 1008080,           pr: 1,         req: wmd    }
-      RPG_A:     {scr: 1550000,                  grp: 2, req: wmd wrd}
+      RPG_A:     {scr: 1550000, pg: N/A,         grp: 2, req: wmd wrd}
       RPG_B:     {scr: 2505010, f: --U--, pr: 1, grp: 2, req: wmd    }
       Plasma_A:  {scr: 2250000,                  grp: 3, req: wmd    }
       Plasma_B:  {scr: 2500000,           pr: 1, grp: 3, req: wmd wrd}
