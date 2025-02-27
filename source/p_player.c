@@ -393,7 +393,7 @@ alloc_aut(0) script static void P_doIntro(void) {
    noinit static i32 linec[_nlines], linen[_nlines];
    pl.modal = _gui_intro;
    ACS_SetMusic(sp_NoMusic);
-   FreezeTime(false);
+   FreezeTime();
    ACS_FadeTo(0, 0, 0, 1.0, 0.0);
    register i32 which = 1;
    register i32 last  = 0;
@@ -768,9 +768,9 @@ alloc_aut(0) script_str type("net") ext("ACS") addr(OBJ "KeyGlare") void Z_KeyGl
 
    ACS_Delay(14);
 
-   ACS_FadeTo(255, 255, 255, 0.0, 0.2);
+   ACS_FadeTo(255, 255, 255, 0.0, 1.0);
 
-   ACS_Delay(19);
+   ACS_Delay(35);
 }
 
 _Noreturn dynam_aut script_str ext("ACS") addr(OBJ "TimelineInconsistent") void Z_TimelineInconsistent(void) {

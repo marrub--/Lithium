@@ -7100,7 +7100,7 @@
 "LITH_CTRL_ACTIONS" =
    "Lithium Actions";
 "LITH_CTRL_GLARE" =
-   "Glare";
+   "Emit Murderous Intent";
 "LITH_CTRL_LIGHT" =
    "Toggle Flashlight";
 "LITH_CTRL_OPENCBI" =

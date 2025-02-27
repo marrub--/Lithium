@@ -235,7 +235,7 @@ D I V I S I O N  S I G I L
 == \#CTRL_WEAPONS | Lithium Weapons
 
 == \#CTRL_ACTIONS | Lithium Actions
-== \#CTRL_GLARE   | Glare
+== \#CTRL_GLARE   | Emit Murderous Intent
 == \#CTRL_LIGHT   | Toggle Flashlight
 == \#CTRL_OPENCBI | Open CBI
 == \#CTRL_QACT    | Special Action

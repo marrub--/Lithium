@@ -40,7 +40,7 @@ player {
    hitground    HitGround           # EYE: Divine Cybermancy
    infraredoff  InfraredOff         # Counter-Strike: Source
    levelup      LevelUp             # Phantasy Star Online
-   glare        Glare               # Monster Girl Quest
+   glare        Glare               # Fist of the North Star #76
    lighton      LightOn             # Phantasy Star Online
    lightoff     LightOff            # ^
    startgame    StartGame           # ^
