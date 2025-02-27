@@ -141,20 +141,28 @@ class Lith_Kenshirou : Lith_ExclusiveWeapon {
    Ready1:
       TNT1 A 1 lith_a_ready(WRF_NOBOB);
       wait;
+   Deselect:
+      TNT1 A 0 A_JumpIf(health >= 1, "ReadySelector");
+      TNT1 A 0 a_startSound("weapons/kenshirou/lin", lch_weapon2);
+      ,K05 ABABCDCDEFEF 2;
+      ,K05 GHI 15;
+      TNT1 A 0 Lith_A_Lower(_raise_instant);
+      wait;
    Fire:
       TNT1 A 0 {
          a_startSound("weapons/kenshirou/hrkloop", lch_weapon, CHANF_LOOP);
+         soundAlert(invoker.owner);
          invoker.m_loops = 0;
       }
       ,K04 P 0 bright a_jumpIf(random(0, 1), "FireLoop2");
       ,K04 ABCDEFGHIJKLMNOP 2 bright;
    FireLoop:
-      ,K03 ABCDEFGHIJKLMNO 2 bright;
+      ,K03 ABCDEFGHIJKLMNO 2 bright lith_a_fireMelee(15, 128, _mlf_pull_in);
       TNT1 A 0 a_jumpIf(invoker.m_loops++ < 1, "FireLoop");
       TNT1 A 0 a_reFire("FireLoop");
       goto FireEnd;
    FireLoop2:
-      ,K01 ABCDEFGHIJKLMNOPQRSTUVWXYZ 2 bright;
+      ,K01 ABCDEFGHIJKLMNOPQRSTUVWXYZ 2 bright lith_a_fireMelee(15, 128, _mlf_pull_in);
       ,K02 ABCD 2 bright;
       TNT1 A 0 a_jumpIf(invoker.m_loops++ < 1, "FireLoop2");
       TNT1 A 0 a_reFire("FireLoop2");

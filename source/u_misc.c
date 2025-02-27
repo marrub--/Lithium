@@ -148,9 +148,11 @@ Decl_Activate void Upgr_ATATATATA_Activate(void) {
 }
 
 Decl_Deactivate void Upgr_ATATATATA_Deactivate(void) {
-   InvTake(so_Kenshirou, 1);
-   ACS_SetWeapon(origweapon);
-   pl.setHealth(pl.health / 50);
+   if(pl.health > 0) {
+      InvTake(so_Kenshirou, 1);
+      ACS_SetWeapon(origweapon);
+      pl.setHealth(pl.health / 50);
+   }
 }
 
 Decl_Update void Upgr_ATATATATA_Update(void) {

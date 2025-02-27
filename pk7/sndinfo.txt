@@ -1033,6 +1033,7 @@ $random weapons/rems/spark { weapons/rems/spark1 weapons/rems/spark2 weapons/rem
 weapons/kenshirou/shirtrip = lsnd/WeaponsD/Kenshirou/ShirtRip.flac
 weapons/kenshirou/hrkloop = lsnd/WeaponsD/Kenshirou/HyakuretsukenLoop.flac
 weapons/kenshirou/hrkend = lsnd/WeaponsD/Kenshirou/HyakuretsukenEnd.flac
+weapons/kenshirou/lin = lsnd/WeaponsD/Kenshirou/Ken.flac
 $alias weapons/unknown/pickup YOUSONOFABITCH
 $alias weapons/fist/pickup MMMMHMHMMMHMMM
 weapons/knife/swing1 = lsnd/WeaponsM/Knife/Fire1.flac
