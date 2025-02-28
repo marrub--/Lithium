@@ -15,7 +15,7 @@ weapons {
       load     Load     # ^
       close    Close    # Half-Life 2, Fallout 4
       draw     Draw     # ???
-      finalize Finalize # Monster Girl Quest
+      finalize Finalize # Self-made
       $alias pickup = draw
    }
 
@@ -118,8 +118,8 @@ weapons {
 
    blade {
       == lsnd/WeaponsC/Blade
-      slash Slash # Monster Girl Quest
-      hit   Hit   # ^
+      slash Slash # Self-made
+      $alias hit = .weapons.kampilan.hitflesh
    }
 
    delear {
@@ -132,7 +132,7 @@ weapons {
 
    feuer {
       == lsnd/WeaponsC/Feuer
-      explode Explode # Monster Girl Quest
+      explode Explode # Self-made
       fire    Fire    # Touhou 13
       final   Final   # ^
 
@@ -165,9 +165,7 @@ weapons {
 
    sshot {
       == lsnd/WeaponsC/StarShot
-      fire   Fire   # Halo 3
-      firero RunOut # Monster Girl Quest
-
+      fire Fire # Halo 3
       $alias hit = .weapons.shotgun.gauss.puff
       $limit hit 0
       $limit fire 0

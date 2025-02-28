@@ -641,7 +641,7 @@ player/fulk/step1 = lsnd/PlayerI/Footsteps/Step1.flac
 player/fulk/step2 = lsnd/PlayerI/Footsteps/Step2.flac
 player/fulk/step3 = lsnd/PlayerI/Footsteps/Step3.flac
 player/fulk/step4 = lsnd/PlayerI/Footsteps/Step4.flac
-player/fulk/dodge = lsnd/PlayerI/Dodge.flac
+$alias player/fulk/dodge player/doublejump
 $random player/fulk/land { player/fulk/land1 player/fulk/land2 player/fulk/land3 }
 $random player/fulk/step { player/fulk/step1 player/fulk/step2 player/fulk/step3 player/fulk/step4 }
 $playersound lith_marine neutral *death lsnd/PlayerM/Death.lmp
@@ -811,7 +811,7 @@ weapons/mateba/eject = lsnd/WeaponsC/Mateba/Eject.flac
 weapons/mateba/load = lsnd/WeaponsC/Mateba/Load.flac
 weapons/mateba/close = lsnd/WeaponsC/Mateba/Close.flac
 weapons/mateba/draw = lsnd/WeaponsC/Mateba/Draw.flac
-weapons/mateba/finalize = lsnd/WeaponsC/Mateba/Finalize.ogg
+weapons/mateba/finalize = lsnd/WeaponsC/Mateba/Finalize.flac
 $alias weapons/mateba/pickup weapons/mateba/draw
 weapons/erifle/pickup = lsnd/WeaponsC/ShockRifle/Pickup.flac
 weapons/erifle/draw = lsnd/WeaponsC/ShockRifle/Draw.flac
@@ -874,13 +874,13 @@ weapons/shipgun/firesurge = lsnd/WeaponsC/StarDestroyer/FireSurge.flac
 weapons/shipgun/idle = lsnd/WeaponsC/StarDestroyer/Idle.flac
 $limit weapons/shipgun/explode 0
 $attenuation weapons/shipgun/explode 0.6
-weapons/blade/slash = lsnd/WeaponsC/Blade/Slash.ogg
-weapons/blade/hit = lsnd/WeaponsC/Blade/Hit.ogg
+weapons/blade/slash = lsnd/WeaponsC/Blade/Slash.flac
+$alias weapons/blade/hit weapons/kampilan/hitflesh
 weapons/delear/fire = lsnd/WeaponsC/Delear/Fire.flac
 weapons/delear/open = lsnd/WeaponsC/Delear/Open.flac
 weapons/delear/charge = lsnd/WeaponsC/Delear/Charge.flac
 weapons/delear/close = lsnd/WeaponsC/Delear/Close.flac
-weapons/feuer/explode = lsnd/WeaponsC/Feuer/Explode.ogg
+weapons/feuer/explode = lsnd/WeaponsC/Feuer/Explode.flac
 weapons/feuer/fire = lsnd/WeaponsC/Feuer/Fire.wav
 weapons/feuer/final = lsnd/WeaponsC/Feuer/Final.flac
 $limit weapons/feuer/explode 0
@@ -895,7 +895,6 @@ $alias weapons/rend/hit weapons/blade/hit
 weapons/hulgyon/proc = lsnd/WeaponsC/Hulgyon/Proc.flac
 $limit weapons/hulgyon/proc 0
 weapons/sshot/fire = lsnd/WeaponsC/StarShot/Fire.flac
-weapons/sshot/firero = lsnd/WeaponsC/StarShot/RunOut.flac
 $alias weapons/sshot/hit weapons/shotgun/gauss/puff
 $limit weapons/sshot/hit 0
 $limit weapons/sshot/fire 0

@@ -34,7 +34,7 @@ player.fulk {
    step3 Footsteps/Step3 # ^
    step4 Footsteps/Step4 # ^
 
-   dodge Dodge # Monster Girl Quest
+   $alias dodge = .player.doublejump
 
    $random land {
       land1,
