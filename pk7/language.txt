@@ -3214,6 +3214,8 @@
    "Sub-stealers";
 "LITH_INFO_SHORT_Zikr" =
    "Sub-darts";
+"LITH_INFO_SHORT_SubFist" =
+   "Sub-fist";
 "LITH_UPGRADE_TITLE_SubGun_A" =
    "Sub-gunspray";
 "LITH_UPGRADE_EFFEC_SubGun_A" =

@@ -137,6 +137,8 @@ decompression.
 == \#INFO_SHORT_Zakwu | Sub-stealers
 == \#INFO_SHORT_Zikr  | Sub-darts
 
+== \#INFO_SHORT_SubFist | Sub-fist
+
 ## ═══════════════════════════════════════════════════════════════════════════╕
 == \#UPGRADE_TITLE_SubGun_A | Sub-gunspray
 @@ \#UPGRADE_EFFEC_SubGun_A

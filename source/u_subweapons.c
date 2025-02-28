@@ -107,4 +107,11 @@ i32 Z_GetSubType(void) {
    return udata.which;
 }
 
+alloc_aut(0) script_str type("net") ext("ACS") addr(OBJ "KeySetSubweapon")
+void Z_KeySetSubweapon(i32 which) {
+   if(get_bit(udata.have, which)) {
+      udata.which = which;
+   }
+}
+
 /* EOF */
