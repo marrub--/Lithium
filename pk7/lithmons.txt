@@ -446,6 +446,11 @@ presets {
    filter: "RLTheHungrySpawner";
 }
 
+"nonmonster" {
+   filter: "RLAdaptive";
+   filter: "RLCyberdemonMkII";
+}
+
 /* Colorful Hell */
 "nocase" {
    pre: ZombieMan     type: zombie        filter: "Zombie" hacks: "ch";

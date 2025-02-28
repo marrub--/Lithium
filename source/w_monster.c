@@ -544,9 +544,6 @@ script_str ext("ACS") addr(OBJ "ResurrectMonster") void Z_ResurrectMonster(i32 a
 alloc_aut(0) script ext("ACS") addr(lsc_monsterinfo) void Z_MonsterInfo(void) {
    noinit static mon_name_t cname;
    faststrcpy_str(cname, ACS_GetActorClass(0));
-   if(get_bit(wl.compat, _comp_drla) && (faststrstr(cname, "RLAdaptive") || faststrstr(cname, "RLCyberdemonMkII"))) {
-      return;
-   }
    i32 mass = GetMass(0);
    for(i32 i = monsterinfonum - 1; i >= 0; --i) {
       struct monster_info const *mi = &monsterinfo[i];
@@ -574,7 +571,7 @@ alloc_aut(0) script ext("ACS") addr(lsc_monsterinfo) void Z_MonsterInfo(void) {
          return;
       }
    }
-   PrintErr(_l("no monster "), _p((cstr)cname));
+   PrintErr(_l("no monster filter for "), _p((cstr)cname));
 }
 
 script_str ext("ACS") addr(OBJ "MonsterFinalized") void Z_MonsterFinalized(void) {
