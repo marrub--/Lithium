@@ -75,6 +75,7 @@ enum {
 enum {
    #define monster_flag_x(flg) _mif_##flg,
    #include "w_monster.h"
+   _mif_replacement_heuristics,
 };
 
 enum dmgtype {

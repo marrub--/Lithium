@@ -380,6 +380,9 @@ script static void MonInfo_Monster(struct tokbuf *tb, struct err *res, i32 flags
       case _moninfo_monster_hacks: {
          i32 hacks = tb_rflag(tb, res, v, MonInfo_Monster_HackName);
          unwrap(res);
+         if(get_bit(hacks, _moninfo_hack_rh)) {
+            set_bit(mi->flags, _mif_replacement_heuristics);
+         }
          if(get_bit(hacks, _moninfo_hack_ch)) {
             if(get_bit(wl.compat, _comp_ch)) {
                MonInfo_ColorfulHellHack(mi);
@@ -562,6 +565,12 @@ alloc_aut(0) script ext("ACS") addr(lsc_monsterinfo) void Z_MonsterInfo(void) {
          }
       }
       init = init && (!mi->mass || mass == mi->mass);
+      i32 score;
+      if(!init && get_bit(mi->flags, _mif_replacement_heuristics) &&
+         (score = ServCallI(sm_CheckReplacementHeuristics, fast_strdup(mi->name))))
+      {
+         init = score > 3;
+      }
       if(init) {
          if(!get_bit(mi->flags, _mif_nonmonster)) {
             dmon_t *m = AllocDmon();

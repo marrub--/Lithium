@@ -146,28 +146,32 @@ presets {
 }
 
 "" {
-   pre: ZombieMan     type: zombie        filter: "ZombieMan";
+   pre: ZombieMan     type: zombie        filter: "ZombieMan" hacks: "rh";
    pre: ZombieMan     type: zombie        filter: "Zombieman";
-   pre: ShotgunGuy    type: zombiesg      filter: "ShotgunGuy";
+   pre: ShotgunGuy    type: zombiesg      filter: "ShotgunGuy" hacks: "rh";
    pre: ShotgunGuy    type: zombiesg      filter: "Shotgunguy";
-   pre: ChaingunGuy   type: zombiecg      filter: "ChaingunGuy";
+   pre: ChaingunGuy   type: zombiecg      filter: "ChaingunGuy" hacks: "rh";
    pre: ChaingunGuy   type: zombiecg      filter: "Chaingunguy";
    pre: Imp           type: imp           filter: "Imp";
-   pre: Demon         type: demon         filter: "Demon";
-   pre: Spectre       type: demon         filter: "Spectre";
-   pre: LostSoul      type: lostsoul      filter: "LostSoul";
-   pre: Mancubus      type: mancubus      filter: "Fatso";
+   pre: Imp           type: imp           filter: "DoomImp" hacks: "rh";
+   pre: Demon         type: demon         filter: "Demon" hacks: "rh";
+   pre: Spectre       type: demon         filter: "Spectre" hacks: "rh";
+   pre: LostSoul      type: lostsoul      filter: "LostSoul" hacks: "rh";
    pre: Mancubus      type: mancubus      filter: "Mancubus";
-   pre: Arachnotron   type: arachnotron   filter: "Arachnotron";
-   pre: Cacodemon     type: cacodemon     filter: "Cacodemon";
+   pre: Mancubus      type: mancubus      filter: "Fatso" hacks: "rh";
+   pre: Arachnotron   type: arachnotron   filter: "Arachnotron" hacks: "rh";
+   pre: Cacodemon     type: cacodemon     filter: "Cacodemon" hacks: "rh";
    pre: HellKnight    type: hellknight    filter: "Knight";
+   pre: HellKnight    type: hellknight    filter: "HellKnight" hacks: "rh";
    pre: BaronOfHell   type: baron         filter: "Baron";
-   pre: Revenant      type: revenant      filter: "Revenant";
+   pre: BaronOfHell   type: baron         filter: "BaronOfHell" hacks: "rh";
+   pre: Revenant      type: revenant      filter: "Revenant" hacks: "rh";
    pre: PainElemental type: painelemental filter: "Elemental";
-   pre: Archvile      type: archvile      filter: "Archvile";
-   pre: SpiderDemon   type: mastermind    filter: "SpiderMastermind";
-   pre: CyberDemon    type: cyberdemon    filter: "Cyberdemon";
+   pre: PainElemental type: painelemental filter: "PainElemental" hacks: "rh";
+   pre: Archvile      type: archvile      filter: "Archvile" hacks: "rh";
+   pre: SpiderDemon   type: mastermind    filter: "SpiderMastermind" hacks: "rh";
    pre: CyberDemon    type: cyberdemon    filter: "CyberDemon";
+   pre: CyberDemon    type: cyberdemon    filter: "Cyberdemon" hacks: "rh";
    pre: ZombieMan     type: zombie        filter: "WolfensteinSS";
 }
 

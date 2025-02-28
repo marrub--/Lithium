@@ -119,6 +119,7 @@ MonInfo_Monster_HackName:
    prefix: _moninfo_hack_
    words:
       - ch
+      - rh
 MonInfo_Flag_Name:
    enum: _mif_
    words: [

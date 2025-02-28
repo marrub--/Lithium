@@ -560,4 +560,23 @@ static double getAirControl() {
    return level.airControl;
 }
 
+static int checkReplacementHeuristics(Actor activator, name checkReplacee_) {
+   class<Actor> checkReplacer = activator.getClass();
+   class<Actor> checkReplacee = checkReplacee_;
+   class<Actor> replacee = Actor.getReplacee(checkReplacer);
+   readonly<Actor> replaceeBase = getDefaultByType(replacee);
+   if(replacee == checkReplacee || checkReplacer is checkReplacee) {
+      return 100;
+   } else {
+      // try scored heuristics
+      int score = 0;
+      if(activator.mass   == replaceeBase.mass)   ++score;
+      if(activator.radius == replaceeBase.radius) ++score;
+      if(activator.height == replaceeBase.height) ++score;
+      if(activator.health == replaceeBase.health) ++score;
+      if(activator.speed  == replaceeBase.speed)  ++score;
+      return score;
+   }
+}
+
 /* EOF */
