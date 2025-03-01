@@ -158,7 +158,8 @@ script static void BaseMonsterLevel(dmon_t *m) {
    ApplyLevels(m, 0);
    Dbg_Log(log_dmon,
            _l("monster "), _p(m->id), _l(" \Cdr"), _p(m->rank), _l(" \Cgl"),
-           _p(m->level), _l(" \C-running on "), _p(ACS_GetActorClass(0)));
+           _p(m->level), _l(" \C-running on "), _p(ACS_GetActorClass(0)),
+           _l(" filter "), _p((cstr)m->mi->name));
 }
 
 /* Spawn a Monster Soul and temporarily set the species of it until the
@@ -565,11 +566,10 @@ alloc_aut(0) script ext("ACS") addr(lsc_monsterinfo) void Z_MonsterInfo(void) {
          }
       }
       init = init && (!mi->mass || mass == mi->mass);
-      i32 score;
       if(!init && get_bit(mi->flags, _mif_replacement_heuristics) &&
-         (score = ServCallI(sm_CheckReplacementHeuristics, fast_strdup(mi->name))))
+         ServCallI(sm_CheckReplacementHeuristics, fast_strdup(mi->name)))
       {
-         init = score > 3;
+         init = true;
       }
       if(init) {
          if(!get_bit(mi->flags, _mif_nonmonster)) {
