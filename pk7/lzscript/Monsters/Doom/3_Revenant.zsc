@@ -60,7 +60,7 @@ class Lith_XH_Revenant : Lith_Revenant
    default
    {
       Health 200;
-
+      MissileChanceMult 0.5;
       +ALWAYSFAST
    }
 
@@ -110,7 +110,6 @@ default
    Tag         "$LITH_INFO_SHORT_Revenant";
 
    +FLOORCLIP
-   +MISSILEMORE
 }
 
 states

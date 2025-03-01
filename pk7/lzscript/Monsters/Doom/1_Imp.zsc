@@ -22,8 +22,7 @@ class Lith_XH_Imp : Lith_Imp
       Health 80;
       MinMissileChance 140;
       Speed 8;
-
-      +MISSILEMORE
+      MissileChanceMult 0.5;
    }
 
    states

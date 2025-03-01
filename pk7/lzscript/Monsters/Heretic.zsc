@@ -87,8 +87,7 @@ class Lith_Heretic_Ophidian : Snake replaces Snake {
       Tag "$LITH_TAG_Ophidian";
       Health 500;
       Speed 13;
-
-      +MISSILEMORE
+      MissileChanceMult 0.5;
    }
 
    states {
@@ -135,8 +134,7 @@ class Lith_Heretic_Nitrogolem : MummyLeader replaces MummyLeader
       Health 180;
       Speed 24;
       Tag "$LITH_TAG_Nitrogolem";
-
-      +MISSILEMORE
+      MissileChanceMult 0.5;
    }
 }
 
@@ -147,8 +145,7 @@ class Lith_Heretic_GhostNitrogolem : MummyLeaderGhost replaces MummyLeaderGhost
       Health 180;
       Speed 24;
       Tag "$LITH_TAG_NitrogolemGhost";
-
-      +MISSILEMORE
+      MissileChanceMult 0.5;
    }
 }
 
@@ -171,8 +168,7 @@ class Lith_Heretic_Maulotaur : Minotaur replaces Minotaur
       Damage 10;
       PainChance 0;
       Tag "$LITH_TAG_Maulotaur";
-
-      +MISSILEMORE
+      MissileChanceMult 0.5;
    }
 }
 
@@ -188,8 +184,7 @@ class Lith_Heretic_UndeadWarrior : Knight replaces Knight
    {
       Health 500;
       Tag "$LITH_TAG_UndeadWarrior";
-
-      +MISSILEMORE
+      MissileChanceMult 0.5;
    }
 }
 
@@ -199,8 +194,7 @@ class Lith_Heretic_SpectralWarrior : KnightGhost replaces KnightGhost
    {
       Health 500;
       Tag "$LITH_TAG_SpectralWarrior";
-
-      +MISSILEMORE
+      MissileChanceMult 0.5;
    }
 }
 
@@ -230,8 +224,7 @@ class Lith_Heretic_IronLich : IronLich replaces IronLich
       Mass 9000;
       PainChance 0;
       Tag "$LITH_TAG_IronLich";
-
-      +MISSILEMORE
+      MissileChanceMult 0.5;
    }
 }
 
@@ -378,9 +371,7 @@ class Lith_Heretic_DSparil : Sorcerer2 replaces Sorcerer2
       MinMissileChance 50;
       Species "ImAWizard";
       Tag "$LITH_TAG_DSparil";
-
-      +MISSILEMORE
-      +MISSILEEVENMORE
+      MissileChanceMult 0.0625;
    }
 }
 

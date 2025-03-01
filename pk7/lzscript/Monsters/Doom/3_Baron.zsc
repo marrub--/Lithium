@@ -76,8 +76,10 @@ class Lith_BaronBallSilent : Lith_BaronBall
    }
 }
 
-class Lith_XH_BaronOfHell : Lith_BaronOfHell
-{
+class Lith_XH_BaronOfHell : Lith_BaronOfHell {
+   default {
+      MissileChanceMult 0.5;
+   }
 }
 
 class Lith_BaronOfHell : Lith_Monster replaces BaronOfHell;
@@ -105,7 +107,6 @@ default
    +E1M8Boss
    +BossDeath
    +FloorClip
-   +MissileMore
 }
 override void markPrecacheSounds() {
    super.markPrecacheSounds();

@@ -52,7 +52,6 @@ default {
    +Boss
    +DontHarmSpecies
    +DontMorph
-   +MissileMore
    +NeverTarget
    +NoPain
    +NoTarget

@@ -24,6 +24,7 @@ default
    RenderStyle "Add";
    Speed       8;
    Species     "Lith_LostSoul";
+   MissileChanceMult 0.5;
 
    ActiveSound "skull/active";
    AttackSound "skull/melee";
@@ -35,7 +36,6 @@ default
 
    +DontFall
    +Float
-   +MissileMore
    +NoGravity
    +NoIceDeath
    +QuickToRetaliate

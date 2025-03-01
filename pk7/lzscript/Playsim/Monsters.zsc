@@ -82,16 +82,15 @@ static void SpawnBoss(Actor a, string name, int phase) {
    a.destroy();
    b.m_phase = phase;
    if(phase == 2) {
-      b.damageMultiply = 1.5;
-      b.reactionTime   = 4;
-      b.health        += b.health / 2;
-      b.bMissileMore   = true;
+      b.damageMultiply    = 1.5;
+      b.reactionTime      = 4;
+      b.health           += b.health / 2;
+      b.missileChanceMult = 0.5;
    } else if(phase == 3) {
-      b.damageMultiply   = 2;
-      b.reactionTime     = 2;
-      b.health          *= 2;
-      b.bMissileMore     = true;
-      b.bMissileEvenMore = true;
+      b.damageMultiply    = 2;
+      b.reactionTime      = 2;
+      b.health           *= 2;
+      b.missileChanceMult = 0.0625;
    }
 }
 
