@@ -7,6 +7,7 @@
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
 class ListMenuItemLith_PlayerDisplay : ListMenuItemPlayerDisplay {
+   const TOP = 40;
    void init(ListMenuDescriptor menu) {
       super.init(menu, 0, 0, "black", "green");
    }
@@ -57,14 +58,14 @@ class ListMenuItemLith_PlayerDisplay : ListMenuItemPlayerDisplay {
                DTA_FillColor,color("black"),
                DTA_Alpha,0.96);
          }
-         Lith_URANUS.drawBack(168-2, 75+59-2,  150+2, 32+2, (0, 0), _bk_tl1);
-         Lith_URANUS.drawBack(104-2, 75+108-2, 206+2, 58+2, (0, 0), _bk_br3);
-         Screen.drawText(bigf, cr, 168, 75+59, txt, DTA_Clean, true);
-         Screen.drawText(midf, cr, 168, 75+73, nam, DTA_Clean, true);
-         Screen.drawText(smlf, cr, 317-smlf.stringWidth(pro), 75+81, pro, DTA_Clean, true);
-         Screen.drawText(trmf, cr, 104, 75+108, dsc, DTA_Clean, true);
+         Lith_URANUS.drawBack(168-2, TOP+59-2,  150+2, 32+2, (0, 0), _bk_tl1);
+         Lith_URANUS.drawBack(104-2, TOP+108-2, 206+2, 58+2, (0, 0), _bk_br3);
+         Screen.drawText(bigf, cr, 168, TOP+59, txt, DTA_Clean, true);
+         Screen.drawText(midf, cr, 168, TOP+73, nam, DTA_Clean, true);
+         Screen.drawText(smlf, cr, 317-smlf.stringWidth(pro), TOP+81, pro, DTA_Clean, true);
+         Screen.drawText(trmf, cr, 104, TOP+108, dsc, DTA_Clean, true);
       }
-      Lith_URANUS.drawBack(14-2, 55-2, 74+2, 108+2, (0, 0), _bk_tl1br2);
+      Lith_URANUS.drawBack(12, 53, 76, 110, (0, 0), _bk_tl1br2);
    }
 }
 
