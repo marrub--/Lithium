@@ -65,7 +65,7 @@ SelectLoop:
    loop;
 
 Fire:
-   TNT1 A 20 {
+   TNT1 A 5 {
       ACS_NamedExecuteWithResult("Lith_Blade", false);
       A_StartSound("weapons/blade/slash", lch_weapon);
       A_FireProjectile("Lith_BladeLightProjectile", 0);
