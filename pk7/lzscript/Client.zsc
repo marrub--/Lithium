@@ -78,6 +78,10 @@ override void renderOverlay(RenderEvent evt) {
    drawMenu(evt);
 }
 
+static int uiIRandom(int min, int max) {
+   return random[Lith_GUI](min, max);
+}
+
 static double uiRandom(double min, double max) {
    return fRandom[Lith_GUI](min, max);
 }

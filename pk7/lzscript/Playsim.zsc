@@ -320,16 +320,27 @@ override void worldThingDamaged(WorldEvent ev) {
 
 override void worldThingDied(WorldEvent ev) {
    let mo = ev.thing;
+   let inflictor = ev.inflictor;
    if(mo.bCountKill && !mo.bNoBlood && mo.health < mo.getGibHealth()) {
+      bool decompiled =
+         inflictor && inflictor.damageSource &&
+         inflictor.damageSource.player &&
+         inflictor.damageSource.player.readyWeapon &&
+         inflictor.damageSource.player.readyWeapon is 'Lith_Kampilan' &&
+         Lith_UTIL.pData(_pdt_upgrade, UPGR_Kampilan_B);
       for(int i = 0; i < 20; i++) {
          let xo = fRandom(-mo.radius,mo.radius);
          let yo = fRandom(-mo.radius,mo.radius);
          let zo = fRandom(         0,mo.height);
          let p = mo.pos + (xo,yo,zo);
-         let bl = Actor.spawn("Lith_BloodHitCore", p, ALLOW_REPLACE);
-         bl.translation = mo.bloodTranslation;
-         if(ev.inflictor) {
-            bl.a_face(ev.inflictor);
+         if(!decompiled) {
+            let bl = Actor.spawn('Lith_BloodHitCore', p, ALLOW_REPLACE);
+            bl.translation = mo.bloodTranslation;
+            if(inflictor) {
+               bl.a_face(inflictor);
+            }
+         } else {
+            Lith_URANUS.instance().particleEquation(p);
          }
       }
    }

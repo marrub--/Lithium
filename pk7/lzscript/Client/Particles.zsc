@@ -8,6 +8,7 @@
 
 extend class Lith_URANUS;
 
+transient FSpawnParticleParams pp_equation;
 transient FSpawnParticleParams pp_lightspark_center;
 transient FSpawnParticleParams pp_kampilan_swing;
 transient FSpawnParticleParams pp_700e_laser;
@@ -81,6 +82,13 @@ void particleRegister() {
    pp_lightspark_center.lifetime   = 10;
    pp_lightspark_center.startAlpha = 0.25;
    pp_lightspark_center.fadeStep   = 0.001;
+   pp_equation.color1     = "white";
+   pp_equation.style      = style_normal;
+   pp_equation.lifetime   = 70;
+   pp_equation.startAlpha = 1.0;
+   pp_equation.fadeStep   = -1;
+   pp_equation.flags      = SPF_ROLL;
+   pp_equation.startRoll  = 180;
 }
 
 void particleRemsSpray(Actor orig, Actor targ) {
@@ -194,6 +202,14 @@ void particleLightsparkCenter(vector3 pos, color cr, double rad) {
    pp_lightspark_center.vel = (uiRandom(-0.07, 0.07),uiRandom(-0.07, 0.07),uiRandom(-0.07, 0.07));
    pp_lightspark_center.size = rad;
    level.spawnParticle(pp_lightspark_center);
+}
+
+void particleEquation(vector3 pos) {
+   pp_equation.pos = pos;
+   pp_equation.vel = (uiRandom(-0.07, 0.07),uiRandom(-0.07, 0.07),uiRandom(-0.07, 0.07));
+   pp_equation.size = uiIRandom(24, 48);
+   pp_equation.texture = getTex(":Equations:" .. uiIRandom(1, 18));
+   level.spawnParticle(pp_equation);
 }
 
 /* EOF */
