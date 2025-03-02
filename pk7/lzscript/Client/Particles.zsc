@@ -215,7 +215,7 @@ void particleLightsparkCenter(vector3 pos, color cr, double rad) {
 void particleEquation(vector3 pos) {
    pp_equation.pos = pos;
    pp_equation.vel = (uiRandom(-0.07, 0.07),uiRandom(-0.07, 0.07),uiRandom(-0.07, 0.07));
-   pp_equation.size = uiIRandom(24, 48);
+   pp_equation.size = uiIRandom(24, 64);
    pp_equation.texture = getTex(":Equations:" .. uiIRandom(1, 18));
    level.spawnParticle(pp_equation);
 }
@@ -223,7 +223,7 @@ void particleEquation(vector3 pos) {
 void particleBinary(vector3 pos) {
    pp_binary.pos = pos;
    pp_binary.vel = (uiRandom(-0.07, 0.07),uiRandom(-0.07, 0.07),uiRandom(-0.07, 0.07));
-   pp_binary.size = uiIRandom(12, 24);
+   pp_binary.size = uiIRandom(6, 24);
    pp_binary.texture = getTex("fonts/lbigfont/3" .. uiIRandom(0, 1) .. ".png");
    level.spawnParticle(pp_binary);
 }
