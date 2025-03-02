@@ -305,6 +305,19 @@ override void worldThingDamaged(WorldEvent ev) {
          }
       }
       if(ev.damage > 0) {
+         if(ev.inflictor &&
+            (ev.inflictor is 'Lith_KampilanPuff' ||
+             ev.inflictor is 'Lith_KampilanBonkPuff') &&
+            Lith_UTIL.pData(_pdt_upgrade, UPGR_Kampilan_B))
+         {
+            for(int i = 0; i < 20; i++) {
+               let xo = fRandom(-dst.radius,dst.radius);
+               let yo = fRandom(-dst.radius,dst.radius);
+               let zo = fRandom(          0,dst.height);
+               let p = dst.pos + (xo,yo,zo);
+               Lith_URANUS.instance().particleBinary(p);
+            }
+         }
          let it = ThinkerIterator.create('Lith_SubAxe');
          for(Lith_SubAxe axe; axe = Lith_SubAxe(it.next());) {
             if(axe.tracer == dst) {
@@ -323,10 +336,9 @@ override void worldThingDied(WorldEvent ev) {
    let inflictor = ev.inflictor;
    if(mo.bCountKill && !mo.bNoBlood && mo.health < mo.getGibHealth()) {
       bool decompiled =
-         inflictor && inflictor.damageSource &&
-         inflictor.damageSource.player &&
-         inflictor.damageSource.player.readyWeapon &&
-         inflictor.damageSource.player.readyWeapon is 'Lith_Kampilan' &&
+         inflictor &&
+         (inflictor is 'Lith_KampilanPuff' ||
+          inflictor is 'Lith_KampilanBonkPuff') &&
          Lith_UTIL.pData(_pdt_upgrade, UPGR_Kampilan_B);
       for(int i = 0; i < 20; i++) {
          let xo = fRandom(-mo.radius,mo.radius);

@@ -8,6 +8,7 @@
 
 extend class Lith_URANUS;
 
+transient FSpawnParticleParams pp_binary;
 transient FSpawnParticleParams pp_equation;
 transient FSpawnParticleParams pp_lightspark_center;
 transient FSpawnParticleParams pp_kampilan_swing;
@@ -89,6 +90,13 @@ void particleRegister() {
    pp_equation.fadeStep   = -1;
    pp_equation.flags      = SPF_ROLL;
    pp_equation.startRoll  = 180;
+   pp_binary.color1     = "white";
+   pp_binary.style      = style_normal;
+   pp_binary.lifetime   = 35;
+   pp_binary.startAlpha = 1.0;
+   pp_binary.fadeStep   = -1;
+   pp_binary.flags      = SPF_ROLL;
+   pp_binary.startRoll  = 180;
 }
 
 void particleRemsSpray(Actor orig, Actor targ) {
@@ -210,6 +218,14 @@ void particleEquation(vector3 pos) {
    pp_equation.size = uiIRandom(24, 48);
    pp_equation.texture = getTex(":Equations:" .. uiIRandom(1, 18));
    level.spawnParticle(pp_equation);
+}
+
+void particleBinary(vector3 pos) {
+   pp_binary.pos = pos;
+   pp_binary.vel = (uiRandom(-0.07, 0.07),uiRandom(-0.07, 0.07),uiRandom(-0.07, 0.07));
+   pp_binary.size = uiIRandom(12, 24);
+   pp_binary.texture = getTex("fonts/lbigfont/3" .. uiIRandom(0, 1) .. ".png");
+   level.spawnParticle(pp_binary);
 }
 
 /* EOF */
