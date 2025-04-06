@@ -130,6 +130,12 @@ static void MInitGetStaticInfo(void) {
                if(ml.temperature >= 100) {rain = _rain_fire;}
                else                      {rain = _rain_blood;}
                break;
+            case _menv_interstice:
+               /**/ if(ml.temperature >= 100)   {rain = _rain_fire;}
+               else if(ml.temperature <= 0)     {rain = _rain_snow;}
+               else if(ACS_Random(0, 100) < 50) {rain = _rain_blood;}
+               else                             {rain = _rain_rain;}
+               break;
             default:
                if(ml.temperature <= 0) {rain = _rain_snow;}
                else                    {rain = _rain_rain;}
