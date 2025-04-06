@@ -38,9 +38,9 @@ transient Canvas        m_fireCanvas;
 uint8[fire_canvas_size] m_fire;
 
 /* clouds */
-textureId m_clouds;
+textureId m_clouds, m_cloudsBase, m_cloudsBlendTex;
 int       m_cloudsStyle, m_cloudsW, m_cloudsH;
-color     m_cloudsColor;
+double    m_cloudsBlendAmt;
 
 static Lith_SkyThinker create() {
    let th = new('Lith_SkyThinker');
@@ -65,6 +65,10 @@ override void tick() {
    if(m_mode == _msky_nochange) {
       return;
    }
+   m_blendTex.setInvalid();
+   m_blendAmt = 0.0;
+   m_cloudsBlendTex.setInvalid();
+   m_cloudsBlendAmt = 0.0;
    m_fogColor = Lith_AirThinker.get().m_fogColor;
    if(level.skyTexture1 != m_setSky1 || level.skyTexture2 != m_setSky2) {
       if(level.skyTexture1 != m_setSky1) {
@@ -85,6 +89,8 @@ override void tick() {
    }
    if(m_rain == _rain_fire) {
       tickSkyFire();
+   } else {
+      tickClouds();
    }
 }
 
@@ -112,6 +118,13 @@ ui void drawSkyTex(textureId tex, int dw, int dh, int sw, int sh, int xofs, int 
          DTA_SrcY,yofs,
          DTA_FlipY,true,
          DTA_Alpha,blend, DTA_LegacyRenderStyle,style);
+   }
+}
+
+ui void drawCloudsTex(textureId tex, double blend = 1.0) {
+   int cszx = m_cloudsW, cszy = m_cloudsH;
+   for(int x = 0; x < canvas_w; x += cszx) {
+      m_canvas.drawTexture(tex, true, x, 0, DTA_DestHeight,canvas_h, DTA_DestWidth,cszx, DTA_FlipX,true,DTA_FlipY,true, DTA_LegacyRenderStyle,m_cloudsStyle, DTA_Alpha,blend);
    }
 }
 
@@ -149,17 +162,17 @@ ui void drawSky(RenderEvent evt) {
       int sw = m_baseSw, sh = m_baseSh;
       int xofs = int(((gameTic + evt.fracTic) * 28.5714 * m_speed) % dw);
       int yofs = m_baseY;
-      drawSkyTex(m_base, dw, dh, sw, sh, xofs, yofs);
+      drawSkyTex(m_base, dw, dh, sw, sh, xofs, yofs, (1 - m_blendAmt) * 2);
       if(m_blendTex.isValid()) {
-         drawSkyTex(m_blendTex, dw, dh, sw, sh, xofs, yofs, m_blendAmt);
+         drawSkyTex(m_blendTex, dw, dh, sw, sh, xofs, yofs, m_blendAmt * 2);
       }
       if(do_flash) {
          m_canvas.drawTexture(m_lightning, true, m_flashPos, 0, DTA_Alpha,1.0 - flash_norm, DTA_LegacyRenderStyle,STYLE_Add, DTA_Color,m_flashColor, DTA_FlipY,true, DTA_FlipX,m_flashPos & 1 == 0);
       }
-      if(m_clouds.isValid()) {
-         int cszx = m_cloudsW, cszy = m_cloudsH;
-         for(int x = 0; x < canvas_w; x += cszx) {
-            m_canvas.drawTexture(m_clouds, true, x, 0, DTA_DestHeight,canvas_h, DTA_DestWidth,cszx, DTA_FlipX,true,DTA_FlipY,true, DTA_LegacyRenderStyle,m_cloudsStyle, DTA_Color,m_cloudsColor);
+      if(m_clouds.isValid() || m_clouds.isNull()) {
+         drawCloudsTex(m_clouds.isNull() ? m_cloudsBase : m_clouds, (1 - m_cloudsBlendAmt) * 2);
+         if(m_cloudsBlendTex.isValid()) {
+            drawCloudsTex(m_cloudsBlendTex, m_cloudsBlendAmt * 2);
          }
       }
       m_canvas.dim(m_color, m_color.a / 400.0, 0, 0, canvas_w, canvas_h, STYLE_Add);
@@ -234,18 +247,21 @@ void replaceSky() {
    resetCanvas();
 }
 
-void setReplacedSky() {
-   m_blendTex.setInvalid();
-   int which = -1;
+double, int blendSky() {
    double blend = 0.0;
+   int which = -1;
    let light = Lith_LightThinker.get();
    if(lith_sv_dynsky && light) {
       let rt_hrs = light.m_rtHrs;
       let rt_min = light.m_rtMin;
-      let amt = (rt_hrs * 60 + rt_min - 240) % 1440 / 1440.0 * 4.0;
+      let amt = (rt_hrs * 60 + rt_min - (60*4)) % (24*60) / (24.0*60.0) * 4.0;
       blend = amt % 1.0;
       which = int(amt);
    }
+   return blend, which;
+}
+
+void setReplacedSky() {
    textureId tex;
    tex.setInvalid();
    double speed = 0.0;
@@ -261,6 +277,7 @@ void setReplacedSky() {
       }
       return;
    }
+   let [blend, which] = blendSky();
    textureId blendTex;
    blendTex.setInvalid();
    if(which == -1) {
@@ -374,6 +391,9 @@ clearScope static bool checkDoubleSky(textureId st1, textureId st2) {
 
 /* clouds */
 void resetClouds() {
+   textureId nullTex;
+   nullTex.setNull();
+   m_cloudsBase.setInvalid();
    switch(m_mode) {
    case _msky_none:
    case _msky_tintonly:
@@ -389,28 +409,53 @@ void resetClouds() {
          initSkyFire();
          break;
       case _rain_blood:
-         setClouds(Lith_URANUS.getTex("LITHSKCL"), cr: 0xFFCF0000);
-         break;
       case _rain_snow:
-         setClouds(Lith_URANUS.getTex("LITHSKCL"), cr: 0xFFCFCFCF);
-         break;
       case _rain_rain:
-         setClouds(Lith_URANUS.getTex("LITHSKCL"));
+         setClouds(nullTex);
          break;
       }
    }
 }
 
-void setClouds(textureId tex, int style = STYLE_Normal, color cr = 0xFFFFFFFF) {
+void tickClouds() {
+   if(m_clouds.isNull()) {
+      let [blend, which] = blendSky();
+      textureId tex, blendTex;
+      tex.setInvalid();
+      blendTex.setInvalid();
+      string prefix = "LITHSKC";
+      if(m_rain == _rain_blood) {
+         prefix = "LITHSKB";
+      }
+      if(which == -1) {
+         tex = Lith_URANUS.getTex(prefix .. "2");
+      } else {
+         tex      = Lith_URANUS.getTex(prefix .. which);
+         blendTex = Lith_URANUS.getTex(prefix .. ((which + 1) % 4));
+      }
+      if(m_cloudsBase != tex) {
+         m_cloudsBase = tex;
+      }
+      m_cloudsBlendTex = blendTex;
+      m_cloudsBlendAmt = blend;
+   }
+}
+
+void setClouds(textureId tex, int style = STYLE_Translucent) {
    m_clouds      = tex;
-   m_cloudsColor = cr;
    m_cloudsStyle = style;
-   let [w, h] = TexMan.getSize(m_clouds);
-   int scale = canvas_h / h;
-   w *= scale;
-   h *= scale;
-   m_cloudsW = w;
-   m_cloudsH = h;
+   m_cloudsBlendTex.setInvalid();
+   if(m_clouds.isValid()) {
+      let [w, h] = TexMan.getSize(m_clouds);
+      int scale = canvas_h / h;
+      w *= scale;
+      h *= scale;
+      m_cloudsW = w;
+      m_cloudsH = h;
+   } else {
+      m_cloudsW = 1024;
+      m_cloudsH = 128;
+   }
 }
 
 /* EOF */
