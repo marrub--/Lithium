@@ -134,9 +134,12 @@ void updateLightning() {
 
 void setNextFlash() {
    int oldNext = m_next;
-   if(random[lith_light](0, 255) < 50) {
+   int rand = random[lith_light](0, 255);
+   if(rand < 5) {
+      m_next = random[lith_light](2, 9);
+   } else if(rand < 50) {
       m_next = random[lith_light](16, 31);
-   } else if(random[lith_light](0, 255) < 128 && m_time & 32 == 0) {
+   } else if(rand < 128 && m_time & 32 == 0) {
       m_next = random[lith_light](2, 9) * ticrate;
    } else {
       m_next = random[lith_light](5, 20) * ticrate;
