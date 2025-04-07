@@ -38,7 +38,6 @@ name:      "LITHSKY"
 seed:      7
 flags:     "nophantom"
 timescale: 1
-sky:       "tintonly"
 script:    "lmisc/Sky.mmmm";
 
 name:        "LITHABYS"

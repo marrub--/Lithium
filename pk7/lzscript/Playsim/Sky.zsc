@@ -29,9 +29,8 @@ int       m_baseSw, m_baseSh, m_baseDw, m_baseDh, m_baseY;
 double    m_speed, m_blendAmt;
 
 /* electric storms */
-textureId m_lightning;
-int       m_flash, m_flashLen, m_flashPos;
-color     m_flashColor;
+textureId[8] m_lightning;
+int[8]       m_flashes, m_flashLens;
 
 /* firestorms */
 transient Canvas        m_fireCanvas;
@@ -132,12 +131,6 @@ ui void drawSky(RenderEvent evt) {
    if(m_mode == _msky_nochange) {
       return;
    }
-   /* calculate flash time */
-   let flash_delta = level.time - m_flash;
-   let do_flash    = flash_delta >= 0 && flash_delta < m_flashLen;
-   let flash_norm  = do_flash ?
-      1.0 - (flash_delta + evt.fracTic) / double(m_flashLen) :
-      0.0;
    /* clear, then check mode */
    m_canvas.dim("black", 1.0, 0, 0, canvas_w, canvas_h);
    switch(m_mode) {
@@ -147,12 +140,20 @@ ui void drawSky(RenderEvent evt) {
    case _msky_tintonly:
       /* for tint-only, we only need to dim with the sky shade */
       let dim_cr = m_color;
-      if(do_flash) {
-         dim_cr = color(
-            255,
-            min(int(dim_cr.r * 5.0f * flash_norm), 255),
-            min(int(dim_cr.g * 5.0f * flash_norm), 255),
-            min(int(dim_cr.b * 5.0f * flash_norm), 255));
+      /* calculate flash time */
+      for(int i = 0; i < 8; ++i) {
+         let flash_delta = level.time - m_flashes[i];
+         let do_flash    = flash_delta >= 0 && flash_delta < m_flashLens[i];
+         let flash_norm  = do_flash ?
+            1.0 - (flash_delta + evt.fracTic) / double(m_flashLens[i]) :
+            0.0;
+         if(do_flash) {
+            dim_cr = color(
+               255,
+               min(int(dim_cr.r * 5.0f * flash_norm), 255),
+               min(int(dim_cr.g * 5.0f * flash_norm), 255),
+               min(int(dim_cr.b * 5.0f * flash_norm), 255));
+         }
       }
       m_canvas.dim(dim_cr, 1.0, 0, 0, canvas_w, canvas_h);
       break;
@@ -166,20 +167,24 @@ ui void drawSky(RenderEvent evt) {
       if(m_blendTex.isValid()) {
          drawSkyTex(m_blendTex, dw, dh, sw, sh, xofs, yofs, m_blendAmt * 2);
       }
-      if(do_flash) {
-         m_canvas.drawTexture(m_lightning, true, m_flashPos, 0, DTA_Alpha,1.0 - flash_norm, DTA_LegacyRenderStyle,STYLE_Add, DTA_Color,m_flashColor, DTA_FlipY,true, DTA_FlipX,m_flashPos & 1 == 0);
-      }
       if(m_clouds.isValid() || m_clouds.isNull()) {
          drawCloudsTex(m_clouds.isNull() ? m_cloudsBase : m_clouds, (1 - m_cloudsBlendAmt) * 2);
          if(m_cloudsBlendTex.isValid()) {
             drawCloudsTex(m_cloudsBlendTex, m_cloudsBlendAmt * 2);
          }
       }
+      for(int i = 0; i < 8; ++i) {
+         let flash_delta = level.time - m_flashes[i];
+         let do_flash    = flash_delta >= 0 && flash_delta < m_flashLens[i];
+         let flash_norm  = do_flash ?
+            (flash_delta + evt.fracTic) / double(m_flashLens[i]) :
+            0.0;
+         if(do_flash) {
+            m_canvas.drawTexture(m_lightning[i], true, 0, 0, DTA_Alpha,1.0 - flash_norm, DTA_LegacyRenderStyle,STYLE_Add, DTA_FlipY,true);
+         }
+      }
       m_canvas.dim(m_color, m_color.a / 400.0, 0, 0, canvas_w, canvas_h, STYLE_Add);
       m_canvas.drawTexture(m_gradient, true, 0, 0, DTA_DestHeight,dh,DTA_DestWidth,canvas_w, DTA_FlipY,true);
-      if(do_flash) {
-         m_canvas.dim("white", flash_norm * 0.2f, 0, 0, canvas_w, dh, STYLE_Add);
-      }
    }
 }
 
@@ -191,13 +196,17 @@ void resetCanvas() {
 }
 
 void replaceSky() {
-   m_flash    = 0;
-   m_flashLen = 0;
+   for(int i = 0; i < 8; ++i) {
+      m_flashes[i]   = 0;
+      m_flashLens[i] = 0;
+   }
    m_setSky1.setInvalid();
    m_setSky2.setInvalid();
    let skyC    = Lith_URANUS.getTex("LITHCSKY");
    m_gradient  = Lith_URANUS.getTex("LITHSKGR");
-   m_lightning = Lith_URANUS.getTex("LITHSKLI");
+   for(int i = 0; i < 8; ++i) {
+      m_lightning[i] = Lith_URANUS.getTex("LITHSKL" .. i);
+   }
    m_mode      = Lith_UTIL.pData(_pdt_msky);
    switch(m_mode) {
    default:
@@ -367,10 +376,9 @@ void setBase(textureId tex, double skySpeed) {
 
 void setSkyFlash(int skyFlash, int skyFlashLen) {
    if(m_mode != _msky_nochange) {
-      m_flash      = skyFlash;
-      m_flashLen   = skyFlashLen / 2;
-      m_flashPos   = random[lith_skyflash](0, canvas_w-TexMan.getSize(m_lightning));
-      m_flashColor = color(179 + random[lith_skyflash](0, 76), 220 + random[lith_skyflash](0, 35), 255, 255);
+      int index = random[lith_lightning](0, 7);
+      m_flashes[index]   = skyFlash;
+      m_flashLens[index] = skyFlashLen;
    }
 }
 
@@ -402,7 +410,11 @@ void resetClouds() {
    default:
       switch(m_rain) {
       default:
-         m_clouds.setInvalid();
+         if(Lith_UTIL.pData(_pdt_mflg, _mflg_lightning)) {
+            setClouds(nullTex);
+         } else {
+            m_clouds.setInvalid();
+         }
          break;
       case _rain_fire:
          setClouds(Lith_URANUS.getTex("LITHFIRE"), STYLE_Add);
