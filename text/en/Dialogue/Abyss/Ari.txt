@@ -57,7 +57,7 @@ This is only getting more confusing.
 @@ \#dlg_abyss_d_mirror_0
 Very good!
 
-\cn[I feel mildly condescended to.]
+\cn[I feel mildly condescended to.]\c-
 
 Now, why do I look like a doll to you?
 
@@ -82,7 +82,7 @@ No.
 
 %% \#dlg_abyss_d_whym_o2
 OK, I guess.
-\cq[I'm pretty sure they just bullshitted that.]
+\cn[I'm pretty sure they just bullshitted that.]
 
 @@ \#dlg_abyss_d_whym_1
 It was a dark and stormy night. You were on your way into Hell,

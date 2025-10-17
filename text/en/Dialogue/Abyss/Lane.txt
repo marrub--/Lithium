@@ -103,11 +103,11 @@ No.
 
 %% \#dlg_abyss_m_seen_o2
 I'm leaving.
-\cn[I want to die. \cgI want to die. \cmI want to die.\cr]
+\cn[I want to die. \cgI want to die. \cmI want to die.\cn]
 
 %% \#dlg_abyss_m_seen_o3
 I see.
-\cn[We're the same person. \cmGod damn it.\cr]
+\cn[We're the same person. \cmGod damn it.\cn]
 
 ## Cyber-Mage
 %% \#dlg_abyss_m_begin_o0_c

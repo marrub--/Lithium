@@ -741,10 +741,10 @@
    "\cn[Ah...]";
 "LITH_dlg_abyss_m_seen_o2" =
    "I'm leaving.\n"
-   "\cn[I want to die. \cgI want to die. \cmI want to die.\cr]";
+   "\cn[I want to die. \cgI want to die. \cmI want to die.\cn]";
 "LITH_dlg_abyss_m_seen_o3" =
    "I see.\n"
-   "\cn[We're the same person. \cmGod damn it.\cr]";
+   "\cn[We're the same person. \cmGod damn it.\cn]";
 "LITH_dlg_abyss_m_begin_o0_c" =
    "Ah, hey there.\n"
    "\cn[This doll reminds me of Daniel. Weird.]";
@@ -876,7 +876,7 @@
 "LITH_dlg_abyss_d_mirror_0" =
    "Very good!\n"
    "\n"
-   "\cn[I feel mildly condescended to.]\n"
+   "\cn[I feel mildly condescended to.]\c-\n"
    "\n"
    "Now, why do I look like a doll to you?";
 "LITH_dlg_abyss_d_mirror_o0" =
@@ -893,7 +893,7 @@
    "No.";
 "LITH_dlg_abyss_d_whym_o2" =
    "OK, I guess.\n"
-   "\cq[I'm pretty sure they just bullshitted that.]";
+   "\cn[I'm pretty sure they just bullshitted that.]";
 "LITH_dlg_abyss_d_whym_1" =
    "It was a dark and stormy night. You were on your way into Hell, following your sister. If we remember how black holes work, they're a compact mass deforming spacetime. In this case, it was a maliciously, intentionally placed piece of exotic matter. You got sucked out of your normal place in the abelian group—er, sorry, rather, you're past and simultaneously in the event horizon, and right now, you're experiencing a state of consciousness that's not normally possible, because it's a weird and fucked up kind of spacetime here. Okay?";
 "LITH_dlg_abyss_d_selse_0" =
