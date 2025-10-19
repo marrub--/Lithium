@@ -27,7 +27,6 @@ override void init(Menu parent, string message, int messageMode, bool playSound,
    destWidth        = cleanWidth;
    destHeight       = cleanHeight;
    selector         = "\xd";
-   handler          = nativeHandler;
    mMessageMode     = messageMode;
    mParentMenu      = parent;
    animated            =
