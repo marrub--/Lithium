@@ -97,7 +97,7 @@ _uc_extr:
    pM:
       Cannon_C: {pg: N/A, scr: 16666666, grp: 4, req: wmd wrd rdi}
    gI:
-      SMT:       {pg: N/A, scr: 5696969,           mul: 20, req: dim}
+      #SMT:       {pg: N/A, scr: 5696969,           mul: 20, req: dim}
       ATATATATA: {pg: N/A, scr: 1983333, f: ADU--, mul: 2,  req: dim}
    pD:
       Kampilan_B: {pg: N/A, scr: 9999999, req: dim}

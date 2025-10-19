@@ -59,9 +59,9 @@ class Lith_DarkLordPlayer : Lith_Player {
          if(vel.z < 0 && vel.z > -128 && player.cmd.buttons & BT_CROUCH) {
             vel.z -= 2 * (level.gravity / 800) * gravity * curSector.gravity;
          }
-         if(Lith_UTIL.pData(_pdt_upgrade, UPGR_SMT)) {
-            tickNegotiation();
-         }
+         //if(Lith_UTIL.pData(_pdt_upgrade, UPGR_SMT)) {
+         //   tickNegotiation();
+         //}
       }
       super.tick();
    }
