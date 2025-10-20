@@ -31,18 +31,17 @@ class ListMenuItemLith_PlayerDisplay : ListMenuItemPlayerDisplay {
          let [porx, pory] = TexMan.getSize(por);
          int scrw  = Screen.getWidth();
          int scrh  = Screen.getHeight();
-         let scale = double(scrh) / pory;
-         let sc240 = 240.0 / pory;
-         let xy    = Screen.virtualToRealCoords((320-(porx*sc240),0), (scrw, scrh), (320, 240));
-         int x     = int(xy.x);
+         double scalf = double(scrh) / pory;
+         double scale = scalf < 1 ? scalf : int(scalf);
          int dw    = int(porx*scale);
          int dh    = int(pory*scale);
+         let xy    = (scrw-dw,scrh-dh);
          Font bigf = menuDelegate.pickFont("bigupper");
          Font midf = menuDelegate.pickFont("lmidfont");
          Font smlf = menuDelegate.pickFont("smallfont");
          Font trmf = menuDelegate.pickFont("ltrmfont");
          Screen.drawTexture(
-            por, true, x, 0,
+            por, true, xy.x, xy.y,
             DTA_KeepRatio,true,
             DTA_DestWidth,dw,
             DTA_DestHeight,dh);
@@ -51,7 +50,7 @@ class ListMenuItemLith_PlayerDisplay : ListMenuItemPlayerDisplay {
             pro = "???";
             dsc = "NOT IMPLEMENTED";
             Screen.drawTexture(
-               por, true, x, 0,
+               por, true, xy.x, xy.y,
                DTA_KeepRatio,true,
                DTA_DestWidth,dw,
                DTA_DestHeight,dh,
