@@ -95,6 +95,7 @@ override vector2 BobWeapon(double ticfrac) {
          bobtarget = 0;
       }
 
+      /*
       // if the weapon is snapping into place when firing,
       // smooth it out
       if(Abs(bobtarget - CurBob) <= 1) {
@@ -104,15 +105,16 @@ override vector2 BobWeapon(double ticfrac) {
          if(CurBob > bobtarget) CurBob -= zoom;
          else                   CurBob += zoom;
       }
+      */
 
       double bobx = 0, boby = 0;
 
-      if(CurBob != 0) {
+      if(/*CurBob*/ bobtarget != 0) {
          // set these to the multiplier for the x and y, which is the
          // current bob strength (CurBob), the weapon's bob range, and
          // the viewbob cvar all combined
-         bobx = CurBob * wep.BobRangeX * ViewBob;
-         boby = CurBob * wep.BobRangeY * ViewBob;
+         bobx = /*CurBob*/ bobtarget * wep.BobRangeX * ViewBob;
+         boby = /*CurBob*/ bobtarget * wep.BobRangeY * ViewBob;
 
          // do some simple trigonometry to swing the weapon about
          // based on the angle and strength
