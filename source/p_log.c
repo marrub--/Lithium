@@ -18,7 +18,7 @@
 
 struct logmap {
    str        name;
-   i32        lnum;
+   str        hash;
    str       *dataV;
    mem_size_t dataC;
 };
@@ -102,9 +102,9 @@ void P_LogF(cstr fmt, ...) {
 
 void P_Log_Entry(void) {
    struct logmap *lm = nil;
-   i32 lnum = MapNum;
+   str hash = EDataS(_edt_maphash);
    for(i32 i = 0; i < log.mapsC; i++) {
-      if(log.mapsV[i].lnum == lnum) {
+      if(log.mapsV[i].hash == hash) {
          lm = &log.mapsV[i];
          break;
       }
@@ -113,7 +113,7 @@ void P_Log_Entry(void) {
       log.mapsV = Talloc(log.mapsV, log.mapsC + 1, _tag_logs);
       lm = &log.mapsV[log.mapsC++];
       lm->name = ml.name;
-      lm->lnum = lnum;
+      lm->hash = hash;
    }
    log.curmap = lm;
    P_LogF(tmpstr(sl_enter_fmt), lm->name, CanonTime(ct_full, wl.realtime));
