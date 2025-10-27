@@ -326,7 +326,7 @@ override void worldThingDamaged(WorldEvent ev) {
             }
          }
       }
-   } else if(src.countInv("Lith_MonsterID") && (dst.bCountKill || dst.player)) {
+   } else if(src.countInv("Lith_MonsterID") && (dst.bCountKill || dst.player) && ev.damage < 10000) {
       src.acs_scriptCall("Lith_GiveMonsterEXP", ev.damage);
    }
 }
