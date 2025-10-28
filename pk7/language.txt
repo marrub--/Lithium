@@ -6984,7 +6984,7 @@
 "OB_UNDEAD" =
    "%o loves the taste of homing rockets.";
 "OB_UNDEADHIT" =
-   "%o's dead. It seems like %h really enjoyed that punch sound.";
+   "%o's dead. It seems like %g really enjoyed that punch sound.";
 "OB_VILE" =
    "%o got burned.";
 "OB_ZOMBIE" =

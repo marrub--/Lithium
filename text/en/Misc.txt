@@ -99,7 +99,7 @@ D I V I S I O N  S I G I L
 == OB_SKULL     | %o hates lost souls.
 == OB_SPIDER    | %g didn't like the spider's minigun after all. Too many bullets.
 == OB_UNDEAD    | %o loves the taste of homing rockets.
-== OB_UNDEADHIT | %o's dead. It seems like %h really enjoyed that punch sound.
+== OB_UNDEADHIT | %o's dead. It seems like %g really enjoyed that punch sound.
 == OB_VILE      | %o got burned.
 == OB_ZOMBIE    | %o got plinked to death.
 
