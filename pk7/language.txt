@@ -921,7 +921,7 @@
    "I'm not! I'm fine!\n"
    "\cn[This doll is pissing me off.]";
 "LITH_dlg_abyss_c_whycry_0" =
-   "Why are you crying, then? If I reminded you that your father is dead, and it upset you, you should cry. There's nothing wrong with it.";
+   "Why are you crying, then? If I reminded you that your fathers are dead, and it upset you, you should cry. There's nothing wrong with it.";
 "LITH_dlg_abyss_c_whycry_o0" =
    "Stop getting on my fucking case!\n"
    "\cn[Am I even coherent right now?]";

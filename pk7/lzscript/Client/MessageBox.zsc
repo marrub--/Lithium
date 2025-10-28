@@ -18,6 +18,7 @@ override void init(Menu parent, string message, int messageMode, bool playSound,
       num = random[lith_quitmsg](1, num);
       message = Lith_HERMES.localize(string.Format("QUITMSG%i", num)) .. "\n\n" .. Lith_HERMES.localize("QUITMSGEND");
    }
+   handler = nativeHandler;
    mAction          = cmd;
    messageSelection = 0;
    mMouseLeft       = 140;
