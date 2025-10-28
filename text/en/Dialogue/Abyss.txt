@@ -8,6 +8,7 @@
 
 !!include Abyss/Tutorial.txt
 !!include Abyss/Lane.txt
+!!include Abyss/Jem.txt
 !!include Abyss/Ari.txt
 !!include Abyss/Kiri.txt
 

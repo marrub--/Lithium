@@ -166,12 +166,104 @@ ilo_kon(prog_m) {
 
 /* Cyber-Mage */
 ilo_kon(prog_c) {
+   jo {
+      jem_met = var_jem,
+      c_meet = 1,
+         c_crying,
+            c_notokay,
+               c_dontstop,
+                  c_notreal,
+                     c_alive,
+                     c_howknow,
+                        c_newgame,
+                        c_startanew,
+            c_front,
+               c_whycry,
+                  c_mycase,
+                     c_dismantle,
+      co_meet,
+   }
    lipu(page_start) {
       name   doll;
       remote jem;
       icon   doll;
-      text   t_begin_0;
-      option t_begin_o0 brk;
+      text   c_begin_0;
+      option c_begin_o0 brk;
+      seme !insa jem_met {
+         option c_begin_o1 {
+            seme poki_jan pC jump_page c_meet;
+            anu              jump_page co_meet;
+         }
+      }
+   }
+   /* Jem */
+   lipu(c_meet) {
+      inc %jem_met;
+      text c_meet_0;
+      option c_meet_o0 jump_page c_crying;
+   }
+   lipu(c_crying) {
+      text c_crying_0;
+      option c_crying_o0 jump_page c_notokay;
+      option c_crying_o1 jump_page c_front;
+   }
+   lipu(c_notokay) {
+      text c_notokay_0;
+      option c_notokay_o0 brk;
+      option c_notokay_o1 jump_page c_dontstop;
+   }
+   lipu(c_dontstop) {
+      text c_dontstop_0;
+      option c_dontstop_o0 jump_page c_notreal;
+   }
+   lipu(c_notreal) {
+      text c_notreal_0;
+      option c_notreal_o0 jump_page c_alive;
+      option c_notreal_o1 jump_page c_howknow;
+      option c_notreal_o2 brk;
+   }
+   lipu(c_alive) {
+      text c_alive_0;
+      option c_alive_o0 brk;
+      option c_alive_o1 jump_page c_newgame;
+   }
+   lipu(c_howknow) {
+      text c_howknow_0;
+      option c_howknow_o0 jump_page c_newgame;
+      option c_howknow_o1 brk;
+   }
+   lipu(c_newgame) {
+      text c_newgame_0;
+      option c_newgame_o0 jump_page c_startanew;
+   }
+   lipu(c_startanew) {
+      text c_startanew_0;
+      option c_startanew_o0 brk;
+   }
+   lipu(c_front) {
+      text c_front_0;
+      option c_front_o0 jump_page c_whycry;
+   }
+   lipu(c_whycry) {
+      text c_whycry_0;
+      option c_whycry_o0 jump_page c_mycase;
+      option c_whycry_o1 brk;
+   }
+   lipu(c_mycase) {
+      text c_mycase_0;
+      option c_mycase_o0 brk;
+      option c_mycase_o1 jump_page c_dismantle;
+   }
+   lipu(c_dismantle) {
+      text c_dismantle_0;
+      option c_dismantle_o0 brk;
+   }
+   /* Other */
+   lipu(co_meet) {
+      inc %jem_met;
+      text co_meet_0;
+      option co_meet_o0 brk;
+      option co_meet_o1 brk;
    }
 }
 

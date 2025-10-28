@@ -845,6 +845,108 @@
 "LITH_dlg_abyss_mo_past_o0" =
    "Alright, sorry to bother you.\n"
    "\cn[I think that's enough.]";
+"LITH_dlg_abyss_c_begin_0" =
+   "Who are you?";
+"LITH_dlg_abyss_c_begin_0_c" =
+   "...Dad?";
+"LITH_dlg_abyss_c_begin_o0" =
+   "Nevermind.";
+"LITH_dlg_abyss_c_begin_o0_c" =
+   "Nope.\n"
+   "\cn[This doll looks like me. Not going there.]";
+"LITH_dlg_abyss_c_begin_o1" =
+   "Who are *you*?";
+"LITH_dlg_abyss_c_begin_o1_c" =
+   "I'm not your dad.\n"
+   "\cn[I'm you.]";
+"LITH_dlg_abyss_c_meet_0" =
+   "I know, but you really do look like him. Sorry. Bit of an impulse.";
+"LITH_dlg_abyss_c_meet_o0" =
+   "\cn[Don't cry.]";
+"LITH_dlg_abyss_c_crying_0" =
+   "Are you crying? You okay? Did I say something wrong?\n"
+   "\n"
+   "\cn[Shit.]";
+"LITH_dlg_abyss_c_crying_o0" =
+   "No, I'm not okay.";
+"LITH_dlg_abyss_c_crying_o1" =
+   "I'm fine. I swear.";
+"LITH_dlg_abyss_c_notokay_0" =
+   "It's okay. Everything will be alright, I swear. Jeremy, there's so much to do. You have to fight. It's too late to turn back now.";
+"LITH_dlg_abyss_c_notokay_o0" =
+   "Alright... I'll be okay.\n"
+   "\cn[I can leave now.]";
+"LITH_dlg_abyss_c_notokay_o1" =
+   "Will it be alright?\n"
+   "\cn[I don't believe him.]";
+"LITH_dlg_abyss_c_dontstop_0" =
+   "Yes. Don't stop crying. This might be your last chance. Don't waste it.";
+"LITH_dlg_abyss_c_dontstop_o0" =
+   "How am I crying? There's nothing to cry.\n"
+   "\cn[It's so arid...]";
+"LITH_dlg_abyss_c_notreal_0" =
+   "This place isn't real. Down from heaven, visiting hell. You'd best enjoy it while it lasts.";
+"LITH_dlg_abyss_c_notreal_o0" =
+   "Am I still alive?\n"
+   "\cn[What the hell am I trying to say?]";
+"LITH_dlg_abyss_c_notreal_o1" =
+   "How do you know that it isn't real?";
+"LITH_dlg_abyss_c_notreal_o2" =
+   "You're not real. I've got to get out of here.";
+"LITH_dlg_abyss_c_alive_0" =
+   "Probably. I wouldn't know, I'm not *alive* per se.";
+"LITH_dlg_abyss_c_alive_o0" =
+   "Great reassurance. I'm leaving.";
+"LITH_dlg_abyss_c_alive_o1" =
+   "Can I get out of here?\n"
+   "\cn[Where the hell am I, anyways?]";
+"LITH_dlg_abyss_c_howknow_0" =
+   "\cnHe explains it to you, but you don't seem to understand. Something feels wrong. You can't remember anything he just said.";
+"LITH_dlg_abyss_c_howknow_o0" =
+   "$$LITH_dlg_abyss_c_alive_o1";
+"LITH_dlg_abyss_c_howknow_o1" =
+   "$$LITH_dlg_abyss_c_notreal_o2";
+"LITH_dlg_abyss_c_newgame_0" =
+   "Yes. You'll have to start a new game.";
+"LITH_dlg_abyss_c_newgame_o0" =
+   "What?";
+"LITH_dlg_abyss_c_startanew_0" =
+   "I said, you have to start anew.";
+"LITH_dlg_abyss_c_startanew_o0" =
+   "I'm freaked out. I'm leaving.";
+"LITH_dlg_abyss_c_front_0" =
+   "Jem—I assume you are me—you don't need to put up a front.\n"
+   "Not for me.";
+"LITH_dlg_abyss_c_front_o0" =
+   "I'm not! I'm fine!\n"
+   "\cn[This doll is pissing me off.]";
+"LITH_dlg_abyss_c_whycry_0" =
+   "Why are you crying, then? If I reminded you that your father is dead, and it upset you, you should cry. There's nothing wrong with it.";
+"LITH_dlg_abyss_c_whycry_o0" =
+   "Stop getting on my fucking case!\n"
+   "\cn[Am I even coherent right now?]";
+"LITH_dlg_abyss_c_whycry_o1" =
+   "I'm leaving.";
+"LITH_dlg_abyss_c_mycase_0" =
+   "No, I won't. There's nothing wrong with you. Please just calm down.";
+"LITH_dlg_abyss_c_mycase_o0" =
+   "I'm gone.";
+"LITH_dlg_abyss_c_mycase_o1" =
+   "\cgI'm going to dismantle you, doll!";
+"LITH_dlg_abyss_c_dismantle_0" =
+   "Fine. I'll back off.";
+"LITH_dlg_abyss_c_dismantle_o0" =
+   "$$LITH_dlg_abyss_c_mycase_o0";
+"LITH_dlg_abyss_co_meet_0" =
+   "At home and, drawing pictures\n"
+   "Of mountain tops\n"
+   "With him on top\n"
+   "Lemon yellow sun.\n"
+   "You get it?";
+"LITH_dlg_abyss_co_meet_o0" =
+   "Yeah, I get it.";
+"LITH_dlg_abyss_co_meet_o1" =
+   "Not really.";
 "LITH_dlg_abyss_d_begin_0" =
    "Do you aspire to be just one? One thing, one person? Is, in the multiplicious soup, the melange of life, your stated goal to avoid it? Do you aspire to be another person? To live their life, see through their eyes, see into what they are? Was that what you always were?";
 "LITH_dlg_abyss_d_begin_o0" =

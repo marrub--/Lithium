@@ -1,0 +1,155 @@
+## ╭-*-Agw-LithTxt-*-─────────────────────────────────────────────────────────╮
+## │                                                                          │
+## │             Distributed under the CC0 public domain license.             │
+## │   By Marrub / Alison.  Attribution is encouraged, though not required.   │
+## │                See licenses/cc0.txt for more information.                │
+## │                                                                          │
+## ╰──────────────────────────────────────────────────────────────────────────╯
+
+@@ \#dlg_abyss_c_begin_0
+Who are you?
+
+@@ \#dlg_abyss_c_begin_0_c
+...Dad?
+
+%% \#dlg_abyss_c_begin_o0
+Nevermind.
+
+%% \#dlg_abyss_c_begin_o0_c
+Nope.
+\cn[This doll looks like me. Not going there.]
+
+%% \#dlg_abyss_c_begin_o1
+Who are *you*?
+
+%% \#dlg_abyss_c_begin_o1_c
+I'm not your dad.
+\cn[I'm you.]
+
+@@ \#dlg_abyss_c_meet_0
+I know, but you really do look like him. Sorry. Bit of an impulse.
+
+%% \#dlg_abyss_c_meet_o0
+\cn[Don't cry.]
+
+@@ \#dlg_abyss_c_crying_0
+Are you crying? You okay? Did I say something wrong?
+
+\cn[Shit.]
+
+%% \#dlg_abyss_c_crying_o0
+No, I'm not okay.
+
+%% \#dlg_abyss_c_crying_o1
+I'm fine. I swear.
+
+@@ \#dlg_abyss_c_notokay_0
+It's okay. Everything will be alright, I swear. Jeremy, there's so
+much to do. You have to fight. It's too late to turn back now.
+
+%% \#dlg_abyss_c_notokay_o0
+Alright... I'll be okay.
+\cn[I can leave now.]
+
+%% \#dlg_abyss_c_notokay_o1
+Will it be alright?
+\cn[I don't believe him.]
+
+@@ \#dlg_abyss_c_dontstop_0
+Yes. Don't stop crying. This might be your last chance. Don't
+waste it.
+
+%% \#dlg_abyss_c_dontstop_o0
+How am I crying? There's nothing to cry.
+\cn[It's so arid...]
+
+@@ \#dlg_abyss_c_notreal_0
+This place isn't real. Down from heaven, visiting hell. You'd best enjoy
+it while it lasts.
+
+%% \#dlg_abyss_c_notreal_o0
+Am I still alive?
+\cn[What the hell am I trying to say?]
+
+%% \#dlg_abyss_c_notreal_o1
+How do you know that it isn't real?
+
+%% \#dlg_abyss_c_notreal_o2
+You're not real. I've got to get out of here.
+
+@@ \#dlg_abyss_c_alive_0
+Probably. I wouldn't know, I'm not *alive* per se.
+
+%% \#dlg_abyss_c_alive_o0
+Great reassurance. I'm leaving.
+
+%% \#dlg_abyss_c_alive_o1
+Can I get out of here?
+\cn[Where the hell am I, anyways?]
+
+@@ \#dlg_abyss_c_howknow_0
+\cnHe explains it to you, but you don't seem to understand.
+Something feels wrong. You can't remember anything he just said.
+
+== \#dlg_abyss_c_howknow_o0 | $$\#dlg_abyss_c_alive_o1
+== \#dlg_abyss_c_howknow_o1 | $$\#dlg_abyss_c_notreal_o2
+
+@@ \#dlg_abyss_c_newgame_0
+Yes. You'll have to start a new game.
+
+%% \#dlg_abyss_c_newgame_o0
+What?
+
+@@ \#dlg_abyss_c_startanew_0
+I said, you have to start anew.
+
+%% \#dlg_abyss_c_startanew_o0
+I'm freaked out. I'm leaving.
+
+%% \#dlg_abyss_c_front_0
+Jem—I assume you are me—you don't need to put up a front.
+Not for me.
+
+%% \#dlg_abyss_c_front_o0
+I'm not! I'm fine!
+\cn[This doll is pissing me off.]
+
+@@ \#dlg_abyss_c_whycry_0
+Why are you crying, then? If I reminded you that your fathers are dead,
+and it upset you, you should cry. There's nothing wrong with it.
+
+%% \#dlg_abyss_c_whycry_o0
+Stop getting on my fucking case!
+\cn[Am I even coherent right now?]
+
+%% \#dlg_abyss_c_whycry_o1
+I'm leaving.
+
+@@ \#dlg_abyss_c_mycase_0
+No, I won't. There's nothing wrong with you. Please just calm down.
+
+%% \#dlg_abyss_c_mycase_o0
+I'm gone.
+
+%% \#dlg_abyss_c_mycase_o1
+\cgI'm going to dismantle you, doll!
+
+@@ \#dlg_abyss_c_dismantle_0
+Fine. I'll back off.
+
+== \#dlg_abyss_c_dismantle_o0 | $$\#dlg_abyss_c_mycase_o0
+
+%% \#dlg_abyss_co_meet_0
+At home and, drawing pictures
+Of mountain tops
+With him on top
+Lemon yellow sun.
+You get it?
+
+%% \#dlg_abyss_co_meet_o0
+Yeah, I get it.
+
+%% \#dlg_abyss_co_meet_o1
+Not really.
+
+## EOF
