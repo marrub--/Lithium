@@ -27,10 +27,6 @@ int m_lightCurBattery, m_lightMaxBattery;
 color m_lightColor;
 
 void renRegister() {
-   m_jSmlFont = 'ljsmlfnt';
-   m_jMidFont = 'ljsmlfnt';
-   m_jTrmFont = 'ltrmfont';
-   m_jBigFont = 'lbigfont';
    m_lSmlFont = 'lsmlfont';
    m_lMidFont = 'lmidfont';
    m_lTrmFont = 'ltrmfont';
@@ -58,7 +54,6 @@ void renUnload() {
 }
 
 void renTick() {
-   m_latinFont = StringTable.localize("LITH_WHICHFONT", false) == "Latin";
    projectSetRenderer();
    tickSettings();
    tickDmgNums();

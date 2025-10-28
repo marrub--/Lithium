@@ -77,8 +77,6 @@ int                 m_tPtr, m_dPtr;
 bool                m_noDraw;
 int                 m_wrapX;
 
-bool m_latinFont;
-Font m_jSmlFont, m_jMidFont, m_jTrmFont, m_jBigFont;
 Font m_lSmlFont, m_lMidFont, m_lTrmFont, m_lBigFont;
 
 transient Shape2D          m_rectShape;
@@ -536,19 +534,19 @@ clearScope static vector2, vector2 anyPosScale(vector2 p, vector2 s, vector2 vsz
 }
 
 Font fntSml(bool forceLatinFont = false) const {
-   return forceLatinFont || m_latinFont ? m_lSmlFont : m_jSmlFont;
+   return m_lSmlFont;
 }
 
 Font fntMid(bool forceLatinFont = false) const {
-   return forceLatinFont || m_latinFont ? m_lMidFont : m_jMidFont;
+   return m_lMidFont;
 }
 
 Font fntBig(bool forceLatinFont = false) const {
-   return forceLatinFont || m_latinFont ? m_lBigFont : m_jBigFont;
+   return m_lBigFont;
 }
 
 Font fntTrm(bool forceLatinFont = false) const {
-   return forceLatinFont || m_latinFont ? m_lTrmFont : m_jTrmFont;
+   return m_lTrmFont;
 }
 
 Font fntAny(name name, bool forceLatinFont = false) const {

@@ -114,7 +114,7 @@ def call_optipng glob
    "-o", "2", *Dir.glob(glob)
 end
 
-@jbigfont = new_font("lbigfont", CHRMAP - CHRMAP_EXTND) do
+@lbigfont = new_font("lbigfont", CHRMAP - CHRMAP_EXTND) do
    il = Magick::ImageList.new
    fl = []
    glob = "#{self[:dir]}/0000*.png"
@@ -229,7 +229,7 @@ end
 end
 fontlist = ARGV.map do |v| instance_variable_get :"@#{v}" end
 fontlist =
-   [@jbigfont, @jsmlfont, @jtrmfont, @ltrmfont, @areaname] if fontlist.empty?
+   [@lbigfont, @jsmlfont, @jtrmfont, @ltrmfont, @areaname] if fontlist.empty?
 fontlist.each do |fnt|
    fnt[:start_fn].call
    fnt[:chrmap].each do |ch| fnt[:char_fn].call(ch) end

@@ -37,8 +37,6 @@ black hole, sucking all matter into it and emitting a new, dark
 energy.
 
 ## Misc ══════════════════════════════════════════════════════════════════════╕
-== \#WHICHFONT | Latin
-
 == \#TIME_FMT_LONG  | {}:{}:{} {7} {}.{}.{}{}
 == \#TIME_FMT_SHORT | {}:{} {}.{}.{}
 == \#TIME_FMT_DATE  | {}.{}.{}

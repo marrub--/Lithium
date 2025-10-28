@@ -6890,8 +6890,6 @@
    "After an arduous investigative scan, hardware mega-corporation Optic Fiber Maxim-Danil discovers the missing research facility in uncharted space and opens a communications link.\n"
    "\n"
    "On the other end of the line, the only thing visible was a bloody red pulp floating in open space. The system's star soon collapsed into a black hole, sucking all matter into it and emitting a new, dark energy.";
-"LITH_WHICHFONT" =
-   "Latin";
 "LITH_TIME_FMT_LONG" =
    "{}:{}:{} {7} {}.{}.{}{}";
 "LITH_TIME_FMT_SHORT" =
