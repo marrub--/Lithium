@@ -497,7 +497,7 @@ presets {
    pre: ChaingunGuy   type: zombiecg      filter: "Snowball";
    pre: Imp           type: imp           filter: "Cherub";
    pre: Demon         type: demon         filter: "Cardinal";
-   pre: Spectre       type: demon         filter: "BlackBird";
+   pre: Spectre       type: demon         filter: "Blackbird";
    pre: LostSoul      type: lostsoul      filter: "Putto";
    pre: Mancubus      type: mancubus      filter: "Principality";
    pre: Arachnotron   type: arachnotron   filter: "Ophanim";
@@ -539,7 +539,7 @@ presets {
    pre: ChaingunGuy   type: zombiecg      filter: "QuietSnowball";
    pre: Imp           type: imp           filter: "QuietCherub";
    pre: Demon         type: demon         filter: "QuietCardinal";
-   pre: Spectre       type: demon         filter: "QuietBlackBird";
+   pre: Spectre       type: demon         filter: "QuietBlackbird";
    pre: LostSoul      type: lostsoul      filter: "QuietPutto";
    pre: Mancubus      type: mancubus      filter: "QuietPrincipality";
    pre: Arachnotron   type: arachnotron   filter: "QuietOphanim";
