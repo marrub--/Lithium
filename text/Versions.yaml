@@ -30,7 +30,8 @@ all:
    - [1,6,3,0, "",   "Trilithionite Red"]
    - [1,7,0,0, "b",  "Nevermind"]
    - [1,7,0,1, "b2", "Nevermind"]
-current: "1_7_0_1"
+   - [1,7,0,2, "",   "Nevermind"]
+current: "1_7_0_2"
 legacy:
    1000: "1_0_0_0"
    1100: "1_1_0_0"

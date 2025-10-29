@@ -13,13 +13,14 @@
 
 function build
    if test ! $DEBUG
-      set -xa CC_ARG "-DNDEBUG"
+      set -a CC_ARG "-DNDEBUG"
+      set -a CPP_ARG "-DNDEBUG"
    end
 
    rm -rf master Lithium.pk3
 
    ninja -t clean
-   tools/genbuild.rb
+   env CC_ARG="$CC_ARG" CPP_ARG="$CPP_ARG" tools/genbuild.rb
    ninja
 
    mkdir master
@@ -40,5 +41,4 @@ end
 
 build 2>&1 > /tmp/lbuild
 
-set -xa CC_ARG
 tools/genbuild.rb
