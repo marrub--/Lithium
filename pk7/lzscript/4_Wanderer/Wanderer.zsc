@@ -12,8 +12,9 @@ class Lith_StatShadowWalker : Lith_StatFx {
    override void tickCb() {
       let a = plyr.angle - atan2(plyr.player.cmd.sidemove,
                                  plyr.player.cmd.forwardmove);
-      let c = cos(a) * 0.7;
-      let s = sin(a) * 0.7;
+      double speed = 1.0 + Lith_UTIL.pData(_pdt_attr, at_spc) / 30.0;
+      let c = cos(a) * 0.7 * speed;
+      let s = sin(a) * 0.7 * speed;
       plyr.a_changeVelocity(c, s);
       for(int i = 0; i < 4; ++i) {
          Actor

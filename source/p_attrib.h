@@ -58,6 +58,8 @@ stkcall k32 attr_rgebuff(void);
 stkcall k32 attr_conbuff(void);
 stkcall k32 attr_refbuff(void);
 stkcall i32 attr_refchargebuff(void);
+stkcall k32 attr_agibuff(void);
+stkcall k32 attr_agispeedbuff(void);
 #endif
 
 #endif

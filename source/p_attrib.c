@@ -177,6 +177,14 @@ stkoff i32 attr_refchargebuff(void) {
    return clampi(pl.attr.attrs[at_spc] >> 1, 0, 100);
 }
 
+stkoff k32 attr_agibuff(void) {
+   return 2.0k + pl.attr.attrs[at_spc] / 10.0k;
+}
+
+stkoff k32 attr_agispeedbuff(void) {
+   return 1.0k + pl.attr.attrs[at_spc] / 30.0k;
+}
+
 static struct {
    mem_size_t     n;
    struct fmt_arg fmt[4];
@@ -252,6 +260,13 @@ void attr_gui(struct gui_state *g, i32 yofs) {
       args[at_spc].fmt[0].val.k = attr_refchargebuff() / 35.0k;
       args[at_spc].fmt[1].tag   = _fmt_k32;
       args[at_spc].fmt[1].val.k = attr_refbuff();
+      break;
+   case pcl_wanderer:
+      args[at_spc].n            = 2;
+      args[at_spc].fmt[0].tag   = _fmt_k32;
+      args[at_spc].fmt[0].val.k = attr_agispeedbuff();
+      args[at_spc].fmt[1].tag   = _fmt_k32;
+      args[at_spc].fmt[1].val.k = attr_agibuff();
       break;
    }
    for(i32 i = 0; i < at_max; i++) {

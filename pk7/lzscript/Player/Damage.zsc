@@ -27,7 +27,7 @@ override int damageMobj(Actor inflictor, Actor source, int damage, name mod, int
       }
       if(m_DmgFac > 0) damage = max(1, damage * (100 - m_DmgFac) / 100);
    }
-   if(Lith_StatFx.getInPool("Lith_StatShadowWalker") || m_iFrames) {
+   if(m_iFrames) {
       return 0;
    } else if(m_shield && m_shield + health - damage > -spawnHealth() * 2) {
       if(!bInvulnerable && !(player.cheats & CF_GODMODE)) {
@@ -37,8 +37,15 @@ override int damageMobj(Actor inflictor, Actor source, int damage, name mod, int
    }
    /* remove the damage type for world stuff so obituaries are easier
     * to override */
-   if(sv.m_dmgWorld || source == self) mod = 'None';
-   if(damage > 1) callAcs("Lith_RA_Give", Lith_HERMES.nameToDT(mod));
+   if(sv.m_dmgWorld || source == self) {
+      mod = 'None';
+   }
+   if(damage > 1) {
+      callAcs("Lith_RA_Give", Lith_HERMES.nameToDT(mod));
+   }
+   if(Lith_StatFx.getInPool("Lith_StatShadowWalker")) {
+      damage /= 2.0 + Lith_UTIL.pData(_pdt_attr, at_spc) / 10.0;
+   }
    return super.damageMobj(inflictor, source, damage, mod, flags, angle);
 }
 

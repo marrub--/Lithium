@@ -273,7 +273,9 @@ Decays 3% every 35th second
 %% \#ATTR_HELP_ADR
 \cyAdds damage resistance when gaining meter\c-
 %% \#ATTR_HELP_AGI
-\cyAdds movement speed and damage resistance when dodging\c-
+\cyIncreases dodge speed and damage resistance\c-
+Speed multiplier: \ci{}\c-x
+Damage resistance: \ci{}\c-x
 %% \#ATTR_HELP_RSH
 \cyAdds damage buff when gaining health\c-
 %% \#ATTR_HELP_REF
