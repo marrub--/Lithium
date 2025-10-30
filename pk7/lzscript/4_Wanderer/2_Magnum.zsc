@@ -25,6 +25,7 @@ default {
    Weapon.UpSound "weapons/magnum/draw";
 
    +Weapon.NoAutoFire
+   +Lith_Weapon.HitScan
 }
 
 action(Weapon) void lith_fireMagnum() {

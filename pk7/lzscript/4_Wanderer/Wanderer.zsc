@@ -46,6 +46,7 @@ class Lith_WandererPlayer : Lith_Player {
 
    override void giveDefaultInventory() {
       super.giveDefaultInventory();
+      lith_giveDefWeapon("Lith_Whip");
       lith_giveDefWeapon("Lith_Magnum");
    }
 
@@ -115,6 +116,7 @@ class Lith_ShadowWalkEffect : Actor
    }
 }
 
+#include "lzscript/4_Wanderer/1_Whip.zsc"
 #include "lzscript/4_Wanderer/2_Magnum.zsc"
 
 /* EOF */
