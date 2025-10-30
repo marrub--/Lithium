@@ -184,6 +184,9 @@ Advanced: Rain has heavy motions, dynamically pitches and rolls. (Default.)
 Static: Rain only lightly reacts to wind, always pouring straight down. (Similar to old versions.)
 Simple: Rain reacts strongly to wind, always pouring straight down. (Initial wind velocity concept.)
 
+== \#sv_raindistance | Rain distance
+== \#sv_raindensity | Rain density
+
 == \#sv_revenge | Explode on death
 == \#sv_sky | Replace skies
 %% \#TOOLTIP_sv_sky

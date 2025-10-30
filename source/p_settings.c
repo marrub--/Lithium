@@ -300,6 +300,8 @@ static struct setting const st_gam[] = {
    s_integ("sv_timescale", 1, 200, 1, "mult"),
    s_enume("sv_rain",        0, 3, "rain"),
    s_enume("sv_rainphysics", 0, 3, "rainphys"),
+   s_fixed("sv_raindistance", 0.05, 2.0, 0.05, "mult"),
+   s_fixed("sv_raindensity",  0.05, 10.0, 0.05, "mult"),
    s_boole("player_rainshader"),
    s_enume("sv_sky",          0, 3,           "sky"),
    s_fixed("sv_skydarkening", 0.0, 1.0, 0.05, "mult"),

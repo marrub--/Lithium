@@ -87,6 +87,7 @@ double spawnRain() const {
    if(mo != m_player) {
       maxDist *= 1.5;
    }
+   maxDist *= lith_sv_raindistance;
    if(!mo || !mo.curSector) {
       return maxDist;
    }
@@ -107,7 +108,7 @@ double spawnRain() const {
    case _physnum_static:   advanced = false; mul = (0.01, 0.01, 0.7); break;
    }
    let air = Lith_AirThinker.get();
-   for(double i = 0, j = maxDist/30; i < j; i++) {
+   for(double i = 0, j = maxDist/30*lith_sv_raindensity; i < j; i++) {
       let pos = mpos + (fRandom[lith_rain](-maxDist, maxDist), fRandom[lith_rain](-maxDist, maxDist));
       let sec = level.pointInSector(pos);
       if(sec && sec.getTexture(Sector.CEILING) == skyFlatNum) {

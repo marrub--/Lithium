@@ -6089,6 +6089,10 @@
    "Advanced: Rain has heavy motions, dynamically pitches and rolls. (Default.)\n"
    "Static: Rain only lightly reacts to wind, always pouring straight down. (Similar to old versions.)\n"
    "Simple: Rain reacts strongly to wind, always pouring straight down. (Initial wind velocity concept.)";
+"LITH_sv_raindistance" =
+   "Rain distance";
+"LITH_sv_raindensity" =
+   "Rain density";
 "LITH_sv_revenge" =
    "Explode on death";
 "LITH_sv_sky" =
