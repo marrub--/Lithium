@@ -7317,7 +7317,7 @@
 "LITH_WandererPlayer_Pro" =
    "it/its";
 "LITH_WandererPlayer_Col" =
-   "Black";
+   "Lith_Yellow";
 "LITH_WandererPlayer_Dsc" =
    "An alien with no home,\n"
    "wandering throughout the stars\n"

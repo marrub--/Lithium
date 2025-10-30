@@ -12,7 +12,7 @@ gameinfo {
 
    addEventHandlers  = "Lith_HERMES", "Lith_URANUS"
    playerClasses     = "Lith_MarinePlayer",    "Lith_CyberMagePlayer",
-                       "Lith_DarkLordPlayer"
+                       "Lith_WandererPlayer",  "Lith_DarkLordPlayer"
    statScreen_Single = "Lith_STATUS"
    statusBarClass    = "Lith_STATUSBAR"
    messageBoxClass   = "Lith_MESSAGEBOX"

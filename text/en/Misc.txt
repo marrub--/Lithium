@@ -320,8 +320,7 @@ deftly to survive.
 == \#WandererPlayer     | Wanderer
 == \#WandererPlayer_Nam | Lucas Sánchez
 == \#WandererPlayer_Pro | it/its
-## == \#WandererPlayer_Col | Lith_Yellow
-== \#WandererPlayer_Col | Black
+== \#WandererPlayer_Col | Lith_Yellow
 %% \#WandererPlayer_Dsc
 An alien with no home,
 wandering throughout the stars
