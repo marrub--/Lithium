@@ -314,8 +314,6 @@ action(Weapon) state Lith_A_Ready(int flags = 0, stateLabel sprintReturn = "Sele
    } else if(invoker.lith_checkSprint()) {
       invoker.m_sprintReturn = resolveState(sprintReturn);
       return resolveState("_Sprint");
-   } else if(Lith_StatFx.getInPool("Lith_StatShadowWalker")) {
-      return resolveState("_ShadowWalk");
    } else {
       a_weaponReady(flags);
       return null;
