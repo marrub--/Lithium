@@ -1,0 +1,84 @@
+// ╭──────────────────────────────────────────────────────────────────────────╮
+// │                                                                          │
+// │             Distributed under the CC0 public domain license.             │
+// │   By Marrub / Alison.  Attribution is encouraged, though not required.   │
+// │                See licenses/cc0.txt for more information.                │
+// │                                                                          │
+// ╰──────────────────────────────────────────────────────────────────────────╯
+
+class Lith_AlienRifleShot : Lith_PlasmaPistolShot {
+   default {
+      DamageFunction 60 * random(1, 2);
+      Speed 100;
+   }
+}
+
+class Lith_AlienRifle : Lith_WWeapon;
+
+default {
+   Lith_Weapon.SpawnType "Lith_ChainsawPickup";
+   Lith_Weapon.MagSize 5;
+   Tag "$LITH_INFO_SHORT_AlienRifle";
+   Weapon.SlotNumber 4;
+   Weapon.SlotPriority 0.9;
+
+   -Lith_Weapon.HitScan
+}
+
+action(Weapon) void lith_fireAlienRifle() {
+   lith_gunFlash();
+   soundAlert(invoker.owner);
+   a_recoil(1.5);
+   a_quake(2, 3, 0, 128);
+   A_StartSound("weapons/pistol/plasma/fire", lch_weapon);
+   A_FireProjectile("Lith_AlienRifleShot");
+}
+
+states(Weapon) {
+Ready:
+   MAGN A 1 lith_a_ready(WRF_ALLOWRELOAD);
+   loop;
+
+Deselect:
+   MAGN A 1 Lith_A_Lower(_raise_slow);
+   wait;
+Select:
+   MAGN A 1 Lith_A_Raise(_raise_slow);
+   wait;
+
+Fire:
+   #### # 0 lith_a_jumpIfMagEmpty;
+   #### # 0 lith_a_magIncr;
+   TNT1 A 1 lith_fireAlienRifle;
+   TNT1 A 20 lith_a_recoilUp(1.7);
+   TNT1 A 1 a_reFire;
+   goto ReadySelector;
+
+FireEmpty:
+   MAGN A 1;
+   MAGN AA 1 offset(3, 38);
+   MAGN A 1 offset(7, 40);
+   MAGN A 1 offset(5, 37) a_startSound("weapons/spas/empty", lch_dryweapon);
+   MAGN A 1 offset(4, 34);
+   MAGN A 1 offset(2, 33);
+   MAGN AAAAA 1 offset(1, 32);
+   goto ReadySelector;
+
+Reload:
+   MAGN A 1 lith_a_jumpIfMagFull;
+   MAGN F 3 {
+      a_startSound("weapons/magnum/reload", lch_reload);
+      lith_a_reloadBobDn(0.5);
+   }
+   MAGN F 4 offset(7, 32);
+   MAGN G 3 offset(1, 32);
+   MAGN G 4 offset(7, 32);
+   MAGN H 5 offset(1, 32) lith_a_reloadBobUp(0.3);
+   MAGN H 5 offset(7, 32);
+   MAGN F 3 offset(7, 32);
+   MAGN F 4 offset(1, 32);
+   MAGN A 5 lith_a_reloadFinish;
+   goto ReadySelector;
+}
+
+/* EOF */

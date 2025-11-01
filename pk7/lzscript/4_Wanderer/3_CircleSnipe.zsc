@@ -6,26 +6,15 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_Whip : Lith_WWeapon;
+class Lith_CircleSnipe : Lith_WWeapon;
 
 default {
-   Lith_Weapon.SpawnType "Lith_FistPickup";
-   Tag "$LITH_INFO_SHORT_Whip";
-   DamageType "Melee";
-   Weapon.Kickback 100;
-   Weapon.SlotNumber 1;
-   Weapon.SlotPriority 1;
+   Lith_Weapon.SpawnType "Lith_SuperShotgunPickup";
+   Tag "$LITH_INFO_SHORT_CircleSnipe";
+   Weapon.SlotNumber 3;
+   Weapon.SlotPriority 0.9;
 
-   +Weapon.MeleeWeapon
-   +Weapon.NoAutoFire
-   +Weapon.Wimpy_Weapon
    +Lith_Weapon.HitScan
-}
-
-action(Weapon) void lith_fireWhip() {
-   if(lith_a_fireMelee(40, 128, _mlf_pull_in|_mlf_no_turn, "Lith_KhandaPuff")) {
-      a_quake(1, 3, 0, 128);
-   }
 }
 
 states(Weapon) {
@@ -34,15 +23,14 @@ Ready:
    loop;
 
 Deselect:
-   TNT1 A 1 Lith_A_Lower(_raise_fast);
+   TNT1 A 1 Lith_A_Lower(_raise_instant);
    wait;
 Select:
-   TNT1 A 1 Lith_A_Raise(_raise_fast);
+   TNT1 A 1 Lith_A_Raise(_raise_instant);
    wait;
 
 Fire:
-   TNT1 A 10 lith_fireWhip;
-   TNT1 A 1 a_reFire;
+   TNT1 A 1;
    goto ReadySelector;
 }
 

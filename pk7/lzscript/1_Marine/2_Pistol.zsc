@@ -26,7 +26,7 @@ class Lith_PlasmaPistolShotTrail : Actor
    }
 }
 
-class Lith_PlasmaPistolShot : Actor
+class Lith_PlasmaPistolShot : FastProjectile
 {
    default
    {
