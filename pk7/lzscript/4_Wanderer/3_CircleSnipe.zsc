@@ -30,7 +30,7 @@ Select:
    wait;
 
 Fire:
-   TNT1 A 1;
+   TNT1 A 30 A_RailAttack(333, 0, false, "Red", "White", RGF_SILENT|RGF_FULLBRIGHT, 0.01, "Lith_BasicPuff", 0, 0, 0, 0, 1, 0);
    goto ReadySelector;
 }
 
