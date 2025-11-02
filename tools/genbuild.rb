@@ -123,6 +123,7 @@ end
       SrcsEnt.from("u_cannon_a.c"),
       SrcsEnt.from("u_headsupdisp.c"),
       SrcsEnt.from("u_magic.c"),
+      SrcsEnt.from("u_magicw.c"),
       SrcsEnt.from("u_misc.c"),
       SrcsEnt.from("u_reactarmor.c"),
       SrcsEnt.from("u_reflexwetw.c"),

@@ -35,6 +35,8 @@ _uc_body:
       Magic:       {              f: --UR-}
       SoulCleaver: {scr: 1100000}
       StealthSys:  {scr: 1800450, f: -DU--}
+   pW:
+      MagicW:      {              f: --UR-}
    pD:
       Subweapons:  {pg: N/A, f: --URE}
       HeavyArmor:  {pg: N/A, f: ADU--, scr:  321234}

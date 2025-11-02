@@ -159,4 +159,12 @@ Decl_Update void Upgr_ATATATATA_Update(void) {
    ACS_SetWeapon(so_Kenshirou);
 }
 
+alloc_aut(0) script
+void GivePlayerZ(i32 tid) {
+   while(ACS_ThingCount(T_NONE, tid)) {
+      SetMembI(tid, sm_UserZ, pl.z);
+      ACS_Delay(1);
+   }
+}
+
 /* EOF */
