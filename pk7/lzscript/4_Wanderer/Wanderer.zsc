@@ -109,6 +109,6 @@ class Lith_ShadowWalkEffect : Actor {
 #include "lzscript/4_Wanderer/4_MarathonRifle.zsc"
 #include "lzscript/4_Wanderer/5_TriLauncher.zsc"
 #include "lzscript/4_Wanderer/6_FusionRifle.zsc"
-#include "lzscript/4_Wanderer/7_Harvester.zsc"
+#include "lzscript/4_Wanderer/7_Funnel.zsc"
 
 /* EOF */

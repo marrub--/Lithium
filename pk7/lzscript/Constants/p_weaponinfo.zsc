@@ -63,7 +63,7 @@ enum Lith_WeaponNum {
    weapon_w_alienrif,
    weapon_w_trilaunch,
    weapon_w_fusionrif,
-   weapon_w_harvester,
+   weapon_w_funnel,
    weapon_w_reverse,
    weapon_w_zerstreut,
    weapon_w_twoshot,

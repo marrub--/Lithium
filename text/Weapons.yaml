@@ -106,7 +106,7 @@ pW:
    w_alienrif:  [4, AlienRifle,    InMa       ]
    w_trilaunch: [5, TriLauncher,   AmMa Rocket]
    w_fusionrif: [6, FusionRifle,   AmMa Plasma]
-   w_harvester: [7, Harvester,     AmIn Cannon]
+   w_funnel:    [7, Funnel,        AmIn Cannon]
    w_reverse:   [1, Reverse,       Ammo   Mana]
    w_zerstreut: [1, Zerstreut,     Ammo   Mana]
    w_twoshot:   [2, TwoShot,       Ammo   Mana]
@@ -120,7 +120,7 @@ pW:
       chaingun:       w_burstrif
       rocketlauncher: w_trilaunch
       plasmarifle:    w_fusionrif
-      bfg9000:        w_harvester
+      bfg9000:        w_funnel
 pA:
    a_dualpist: [2, DualPistols, InMa]
    a_burstrif: [4, BurstRifle,  InMa]

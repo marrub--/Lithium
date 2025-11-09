@@ -6,11 +6,11 @@
 // │                                                                          │
 // ╰──────────────────────────────────────────────────────────────────────────╯
 
-class Lith_Harvester : Lith_WWeapon;
+class Lith_Funnel : Lith_WWeapon;
 
 default {
    Lith_Weapon.SpawnType "Lith_BFG9000Pickup";
-   Tag "$LITH_INFO_SHORT_Harvester";
+   Tag "$LITH_INFO_SHORT_Funnel";
    Weapon.SlotNumber 7;
    Weapon.SlotPriority 1;
 
