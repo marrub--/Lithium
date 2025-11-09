@@ -137,7 +137,7 @@ default {
 
 action(Weapon) void Lith_A_FireShock() {
    Lith_A_MagIncr();
-   lith_takeAmmo(4);
+   lith_takeAmmo(2);
    A_Light(1);
    Lith_A_RecoilUp(0.5);
    A_Recoil(0.1);
@@ -160,7 +160,7 @@ Select:
    CSRG A 1 Lith_A_Raise(_raise_fast);
    loop;
 Fire:
-   CSRG A 0 lith_jumpNoAmmo(4);
+   CSRG A 0 lith_jumpNoAmmo(2);
    CSRG A 0 Lith_A_JumpIfMagEmpty;
    CSRG A 1 offset(0, 33);
    CSRG B 1 bright offset(0, 45) Lith_A_FireShock;
