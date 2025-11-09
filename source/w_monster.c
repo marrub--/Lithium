@@ -200,7 +200,8 @@ static void OnFinalize(dmon_t *m) {
          }
       }
       if(!m->finalized) {
-         if(get_bit(pl.upgrades[UPGR_Magic].flags, _ug_active) &&
+         if((get_bit(pl.upgrades[UPGR_Magic].flags, _ug_active) ||
+             get_bit(pl.upgrades[UPGR_MagicW].flags, _ug_active)) &&
             pl.mana != pl.manamax &&
             (m->mi->type != mtype_zombie || ACS_Random(0, 50) < 10)) {
             SpawnManaPickup(m);
