@@ -623,7 +623,7 @@ presets {
    pre: HellKnight    type: hellknight    filter: "HellViscount";
    pre: HellKnight    type: hellknight    filter: "HellWarden";
    pre: HellKnight    type: hellknight    filter: "Infernoble";
-   pre: HellKnight    type: hellknight    filter: "HellPrinceAsch";
+   pre: Archvile      type: hellknight    filter: "HellPrinceAsch";
    pre: BaronOfHell   type: baron         filter: "Afrit";
    pre: BaronOfHell   type: baron         filter: "ArchonOfHell";
    pre: BaronOfHell   type: baron         filter: "BruiserDemon";
@@ -661,6 +661,82 @@ presets {
    pre: ZombieMan     type: zombie        filter: "Epic2Alien";
    pre: ZombieMan     type: zombie        filter: "Scythe2Marine";
    pre: BaronOfHell   type: baron         filter: "Scythe2Afrit";
+}
+
+/* Pandemonia Monsters Only (unofficial) by Hexadoken */
+
+"full" {
+	pre: HellKnight    type: zombiesg      filter: "AbyssalCultLeader";
+	pre: Arachnotron   type: zombiesg      filter: "Oppressor";
+	pre: Demon         type: demon         filter: "PlagueFiend";
+	pre: Demon         type: demon         filter: "Despicable";
+	pre: Spectre       type: demon         filter: "Faceless";
+	pre: Spectre       type: demon         filter: "Trite";
+	pre: LostSoul      type: lostsoul      filter: "Cacophyte";
+	pre: Arachnotron   type: arachnotron   filter: "Defiler";
+	pre: Arachnotron   type: cacodemon     filter: "Nethersyst";
+	pre: BaronOfHell   type: cacodemon     filter: "AbyssalNecrodemon";
+	pre: SpiderDemon   type: cacodemon     filter: "HadesRavager";
+	pre: Archvile      type: hellknight    filter: "AbyssalIfrit";
+	pre: BaronOfHell   type: baron         filter: "HecticBoss";
+	pre: BaronOfHell   type: baron         filter: "FearBoss";
+	pre: SpiderDemon   type: baron         filter: "AbyssalDesecrator";
+	pre: PainElemental type: painelemental filter: "Genodemon";
+	pre: Archvile      type: archvile      filter: "Illusionist";
+	pre: Archvile      type: archvile      filter: "Machina";
+	pre: SpiderDemon   type: archvile      filter: "Pulsedemon";
+	pre: SpiderDemon   type: mastermind    filter: "Conflagrator";
+	pre: Maulotaur     type: mastermind    filter: "SacrosanctOverseer";
+	pre: CyberDemon    type: cyberdemon    filter: "HellfireAvatar";
+	pre: Maulotaur     type: cyberdemon    filter: "PandHeresiarch";
+	/* Add-on enemies */
+	pre: ChaingunGuy   type: zombiecg      filter: "NDCP2Guy";
+	/* Event enemies */
+	pre: ZombieMan     type: zombie        filter: "PistolBorg";
+	pre: ZombieMan     type: zombie        filter: "Pelter";
+	pre: ZombieMan     type: zombie        filter: "LaserBorg";
+	pre: ShotgunGuy    type: zombiesg      filter: "ShotgunBorg";
+	pre: ShotgunGuy    type: zombiesg      filter: "Assailant";
+	pre: ShotgunGuy    type: zombiesg      filter: "Blasterborg";
+	pre: ChaingunGuy   type: zombiecg      filter: "Nailborg";
+	pre: ChaingunGuy   type: zombiecg      filter: "Blazegunner";
+	pre: ChaingunGuy   type: zombiecg      filter: "Electroborg";
+	pre: Demon         type: zombiecg      filter: "NailborgAdmiral";
+	pre: Imp           type: imp           filter: "CyberDevil";
+	pre: Imp           type: imp           filter: "DarkDevil";
+	pre: Imp           type: imp           filter: "DarkScoundrel";
+	pre: Cacodemon     type: cacodemon     filter: "Slomnibus";
+}
+
+/* Pandemonia Anarchy-Monsters Monsters Only by A_D_M_E_R_A_L */
+
+"full" {
+	pre: ZombieMan     type: zombie        filter: "BeamZombie";
+	pre: ChaingunGuy   type: zombiecg      filter: "SpecOpsPlasmaGunner";
+	pre: ChaingunGuy   type: zombiecg      filter: "RepeaterZombie`";
+	pre: ChaingunGuy   type: zombiecg      filter: "AtomBlasterZombie";
+	pre: Imp           type: imp           filter: "Ghorul";
+	pre: Cacodemon     type: cacodemon     filter: "Glaucoma";
+	pre: BaronOfHell   type: baron         filter: "DarkCyberwarden";
+	pre: BaronOfHell   type: baron         filter: "Heliothrall";
+	pre: Archvile      type: baron         filter: "DarkCydestructor";
+	pre: Revenant      type: revenant      filter: "Blightghoul";
+	pre: PainElemental type: painelemental filter: "LightningElemental";
+	pre: SpiderDemon   type: mastermind    filter: "DarkDemolisher";
+	pre: CyberDemon    type: cyberdemon    filter: "DarkCardinal";
+	pre: CyberDemon    type: cyberdemon    filter: "Desolator";
+	/* Anarchic enemies */
+	pre: CyberDemon    type: hellknight    filter: "HellPrinceAsch_Anarchic";
+	pre: SpiderDemon   type: mastermind    filter: "NewSpiderMastermind_Anarchic";
+	pre: SpiderDemon   type: mastermind    filter: "Demolisher_Anarchic";
+	pre: CyberDemon    type: mastermind    filter: "SpiderMasterspark_Anarchic";
+	pre: Maulotaur     type: mastermind    filter: "Arachnophyte_Anarchic";
+	pre: CyberDemon    type: cyberdemon    filter: "NewCyberdemon_Anarchic";
+	pre: CyberDemon    type: cyberdemon    filter: "Annihilator_Anarchic";
+	pre: CyberDemon    type: cyberdemon    filter: "Eradicator_Anarchic";
+	pre: Maulotaur     type: cyberdemon    filter: "ChaosEcclesiarch_Anarchic";
+	/* Friendly */
+	pre: Nothing       type: baron         filter: "RoyalGuardRhys_AschFight";
 }
 
 /* EOF */
